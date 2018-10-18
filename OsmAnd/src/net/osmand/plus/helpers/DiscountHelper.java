@@ -20,6 +20,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -33,10 +34,7 @@ public class DiscountHelper {
 	//private static final String DISCOUNT_JSON = "discount.json";
 
 	private static long mLastCheckTime;
-	private static String mTitle;
-	private static String mDescription;
-	private static String mIcon;
-	private static String mUrl;
+	private static ControllerData mData;
 	private static boolean mBannerVisible;
 	private static final String URL = "https://osmand.net/api/motd";
 	private static final String INAPP_PREFIX = "osmand-in-app:";
@@ -49,7 +47,7 @@ public class DiscountHelper {
 			return;
 		}
 		if (mBannerVisible) {
-			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
+			showDiscountBanner(mapActivity, mData);
 		}
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
 				|| !settings.isInternetConnectionAvailable()) {
@@ -58,7 +56,7 @@ public class DiscountHelper {
 		mLastCheckTime = System.currentTimeMillis();
 		final Map<String, String> pms = new LinkedHashMap<>();
 		pms.put("version", Version.getFullVersion(app));
-		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() +"");
+		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() + "");
 		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
 		pms.put("lang", app.getLanguage() + "");
 		try {
@@ -71,9 +69,8 @@ public class DiscountHelper {
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					String res = AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
+					return AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
 							URL, pms, "Requesting discount info...", false, false);
-					return res;
 				} catch (Exception e) {
 					logError("Requesting discount info error: ", e);
 					return null;
@@ -95,10 +92,7 @@ public class DiscountHelper {
 			OsmandApplication app = mapActivity.getMyApplication();
 
 			JSONObject obj = new JSONObject(response);
-			String message = obj.getString("message");
-			String description = obj.getString("description");
-			String icon = obj.getString("icon");
-			String url = parseUrl(app, obj.getString("url"));
+			ControllerData data = ControllerData.parse(app, obj);
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			Date start = df.parse(obj.getString("start"));
 			Date end = df.parse(obj.getString("end"));
@@ -107,8 +101,8 @@ public class DiscountHelper {
 			int maxTotalShow = obj.getInt("max_total_show");
 			JSONObject application = obj.getJSONObject("application");
 
-			if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
-				String inAppSku = url.substring(INAPP_PREFIX.length());
+			if (data.url.startsWith(INAPP_PREFIX) && data.url.length() > INAPP_PREFIX.length()) {
+				String inAppSku = data.url.substring(INAPP_PREFIX.length());
 				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 				if (purchaseHelper != null
 						&& (purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app))) {
@@ -122,7 +116,7 @@ public class DiscountHelper {
 					&& date.after(start) && date.before(end)) {
 
 				OsmandSettings settings = app.getSettings();
-				int discountId = getDiscountId(message, description, start, end);
+				int discountId = getDiscountId(data.message, start);
 				boolean discountChanged = settings.DISCOUNT_ID.get() != discountId;
 				if (discountChanged) {
 					settings.DISCOUNT_TOTAL_SHOW.set(0);
@@ -130,13 +124,13 @@ public class DiscountHelper {
 				// show after every N (getNumberOfStarts()) starts or show after every N (double show_day_frequency) frequency
 				if (discountChanged
 						|| (app.getAppInitializer().getNumberOfStarts() - settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.get() >= showStartFrequency
-						|| System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency) ) {
-					if(settings.DISCOUNT_TOTAL_SHOW.get() < maxTotalShow){
+						|| System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency)) {
+					if (settings.DISCOUNT_TOTAL_SHOW.get() < maxTotalShow) {
 						settings.DISCOUNT_ID.set(discountId);
 						settings.DISCOUNT_TOTAL_SHOW.set(settings.DISCOUNT_TOTAL_SHOW.get() + 1);
 						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
 						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
-						showDiscountBanner(mapActivity, message, description, icon, url);	
+						showDiscountBanner(mapActivity, data);
 					}
 				}
 			}
@@ -156,34 +150,28 @@ public class DiscountHelper {
 		return url;
 	}
 
-	private static int getDiscountId(String message, String description, Date start, Date end) {
+	private static int getDiscountId(String message, Date start) {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		result = prime * result + ((start == null) ? 0 : start.hashCode());
-		// result = prime * result + ((description == null) ? 0 : description.hashCode());
-		// result = prime * result + ((end == null) ? 0 : end.hashCode());
 		return result;
 	}
 
-	private static void showDiscountBanner(final MapActivity mapActivity,
-										   final String title,
-										   final String description,
-										   final String icon,
-										   final String url) {
-		int iconId = mapActivity.getResources().getIdentifier(icon, "drawable", mapActivity.getMyApplication().getPackageName());
+	private static void showDiscountBanner(final MapActivity mapActivity, final ControllerData data) {
+		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
 		final DiscountBarController toolbarController = new DiscountBarController();
-		toolbarController.setTitle(title);
-		toolbarController.setDescription(description);
+		toolbarController.setTitle(data.message);
+		toolbarController.setDescription(data.description);
 		toolbarController.setBackBtnIconIds(iconId, iconId);
-		if (!Algorithms.isEmpty(url)) {
+		if (!Algorithms.isEmpty(data.url)) {
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
 					mBannerVisible = false;
 					mapActivity.hideTopToolbar(toolbarController);
-					openUrl(mapActivity, url);
+					openUrl(mapActivity, data.url);
 				}
 			};
 			toolbarController.setOnBackButtonClickListener(clickListener);
@@ -198,10 +186,7 @@ public class DiscountHelper {
 			}
 		});
 
-		mTitle = title;
-		mDescription = description;
-		mIcon = icon;
-		mUrl = url;
+		mData = data;
 		mBannerVisible = true;
 
 		mapActivity.showTopToolbar(toolbarController);
@@ -216,7 +201,7 @@ public class DiscountHelper {
 				if (purchaseHelper != null) {
 					purchaseHelper.purchaseFullVersion(mapActivity);
 				}
-			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)){
+			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)) {
 				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else {
@@ -226,9 +211,26 @@ public class DiscountHelper {
 		}
 	}
 
+	private static class ControllerData {
+
+		String message;
+		String description;
+		String iconId;
+		String url;
+
+		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
+			ControllerData res = new ControllerData();
+			res.message = obj.getString("message");
+			res.description = obj.getString("description");
+			res.iconId = obj.getString("icon");
+			res.url = parseUrl(app, obj.getString("url"));
+			return res;
+		}
+	}
+
 	private static class DiscountBarController extends TopToolbarController {
 
-		public DiscountBarController() {
+		DiscountBarController() {
 			super(TopToolbarControllerType.DISCOUNT);
 			setSingleLineTitle(false);
 			setBackBtnIconClrIds(0, 0);
@@ -238,10 +240,6 @@ public class DiscountHelper {
 			setBgIds(R.color.discount_bar_bg, R.color.discount_bar_bg,
 					R.drawable.discount_bar_bg_land, R.drawable.discount_bar_bg_land);
 		}
-	}
-
-	private static void logError(String msg) {
-		Log.e(TAG, msg);
 	}
 
 	private static void logError(String msg, Throwable e) {
