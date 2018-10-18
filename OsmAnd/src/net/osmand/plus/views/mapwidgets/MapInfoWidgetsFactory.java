@@ -1,6 +1,8 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.SwitchCompat;
@@ -214,25 +216,41 @@ public class MapInfoWidgetsFactory {
 	public static class TopToolbarController {
 		private TopToolbarControllerType type;
 
+		@ColorRes
 		int bgLightId = R.color.bg_color_light;
+		@ColorRes
 		int bgDarkId = R.color.bg_color_dark;
+		@DrawableRes
 		int bgLightLandId = R.drawable.btn_round;
+		@DrawableRes
 		int bgDarkLandId = R.drawable.btn_round_night;
 
+		@DrawableRes
 		int backBtnIconLightId = R.drawable.ic_arrow_back;
+		@DrawableRes
 		int backBtnIconDarkId = R.drawable.ic_arrow_back;
+		@ColorRes
 		int backBtnIconClrLightId = R.color.icon_color;
+		@ColorRes
 		int backBtnIconClrDarkId = 0;
 
+		@DrawableRes
 		int closeBtnIconLightId = R.drawable.ic_action_remove_dark;
+		@DrawableRes
 		int closeBtnIconDarkId = R.drawable.ic_action_remove_dark;
+		@ColorRes
 		int closeBtnIconClrLightId = R.color.icon_color;
+		@ColorRes
 		int closeBtnIconClrDarkId = 0;
 		boolean closeBtnVisible = true;
 
+		@DrawableRes
 		int refreshBtnIconLightId = R.drawable.ic_action_refresh_dark;
+		@DrawableRes
 		int refreshBtnIconDarkId = R.drawable.ic_action_refresh_dark;
+		@ColorRes
 		int refreshBtnIconClrLightId = R.color.icon_color;
+		@ColorRes
 		int refreshBtnIconClrDarkId = 0;
 
 		boolean refreshBtnVisible = false;
@@ -240,9 +258,13 @@ public class MapInfoWidgetsFactory {
 		protected boolean topBarSwitchVisible = false;
 		protected boolean topBarSwitchChecked = false;
 
+		@ColorRes
 		int titleTextClrLightId = R.color.primary_text_light;
+		@ColorRes
 		int titleTextClrDarkId = R.color.primary_text_dark;
+		@ColorRes
 		int descrTextClrLightId = R.color.primary_text_light;
+		@ColorRes
 		int descrTextClrDarkId = R.color.primary_text_dark;
 
 		boolean singleLineTitle = true;
