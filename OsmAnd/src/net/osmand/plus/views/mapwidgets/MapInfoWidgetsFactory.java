@@ -271,6 +271,14 @@ public class MapInfoWidgetsFactory {
 		int descrTextClrLightId = R.color.primary_text_light;
 		@ColorRes
 		int descrTextClrDarkId = R.color.primary_text_dark;
+		@ColorInt
+		int titleTextClrLight = -1;
+		@ColorInt
+		int titleTextClrDark = -1;
+		@ColorInt
+		int descrTextClrLight = -1;
+		@ColorInt
+		int descrTextClrDark = -1;
 
 		boolean singleLineTitle = true;
 
@@ -391,9 +399,19 @@ public class MapInfoWidgetsFactory {
 			this.titleTextClrDarkId = titleTextClrDarkId;
 		}
 
+		public void setTitleTextClrs(int titleTextClrLight, int titleTextClrDark) {
+			this.titleTextClrLight = titleTextClrLight;
+			this.titleTextClrDark = titleTextClrDark;
+		}
+
 		public void setDescrTextClrIds(int descrTextClrLightId, int descrTextClrDarkId) {
 			this.descrTextClrLightId = descrTextClrLightId;
 			this.descrTextClrDarkId = descrTextClrDarkId;
+		}
+
+		public void setDescrTextClrs(int descrTextClrLight, int descrTextClrDark) {
+			this.descrTextClrLight = descrTextClrLight;
+			this.descrTextClrDark = descrTextClrDark;
 		}
 
 		public void setOnBackButtonClickListener(OnClickListener onBackButtonClickListener) {
@@ -648,8 +666,10 @@ public class MapInfoWidgetsFactory {
 				} else {
 					refreshButton.setImageDrawable(app.getUIUtilities().getIcon(controller.refreshBtnIconDarkId, controller.refreshBtnIconClrDarkId));
 				}
-				int titleColor = map.getResources().getColor(controller.titleTextClrDarkId);
-				int descrColor = map.getResources().getColor(controller.descrTextClrDarkId);
+				int titleColor = controller.titleTextClrDark != -1 ? controller.titleTextClrDark
+						: map.getResources().getColor(controller.titleTextClrDarkId);
+				int descrColor = controller.descrTextClrDark != -1 ? controller.descrTextClrDark
+						: map.getResources().getColor(controller.descrTextClrDarkId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
 				saveView.setTextColor(titleColor);
@@ -674,8 +694,10 @@ public class MapInfoWidgetsFactory {
 				} else {
 					refreshButton.setImageDrawable(app.getUIUtilities().getIcon(controller.refreshBtnIconLightId, controller.refreshBtnIconClrLightId));
 				}
-				int titleColor = map.getResources().getColor(controller.titleTextClrLightId);
-				int descrColor = map.getResources().getColor(controller.descrTextClrLightId);
+				int titleColor = controller.titleTextClrLight != -1 ? controller.titleTextClrLight
+						: map.getResources().getColor(controller.titleTextClrLightId);
+				int descrColor = controller.descrTextClrLight != -1 ? controller.descrTextClrLight
+						: map.getResources().getColor(controller.descrTextClrLightId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
 				saveView.setTextColor(titleColor);
