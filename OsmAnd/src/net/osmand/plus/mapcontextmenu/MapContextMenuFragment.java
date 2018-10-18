@@ -688,6 +688,19 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return filteredRoutes;
 	}
 
+	private List<TransportStopRoute> filterNearbyTransportRoutes(List<TransportStopRoute> routes, List<TransportStopRoute> filterFromRoutes) {
+		if (filterFromRoutes == null) {
+			return routes;
+		}
+		List<TransportStopRoute> filteredRoutes = new ArrayList<>();
+		for (TransportStopRoute route : routes) {
+			if (!containsRef(filterFromRoutes, route.route)) {
+				filteredRoutes.add(route);
+			}
+		}
+		return filteredRoutes;
+	}
+
 	private boolean containsRef(List<TransportStopRoute> routes, TransportRoute transportRoute) {
 		for (TransportStopRoute route : routes) {
 			if (route.route.getRef().equals(transportRoute.getRef())) {
@@ -1297,7 +1310,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				updateLocalRoutesBadges(localFilteredTransportStopRoutes, localColumnsPerRow);
 			}
 			if (nearbyTransportStopRoutes != null) {
-				updateNearbyRoutesBadges(maxLocalRows, filterTransportRoutes(nearbyTransportStopRoutes));
+				updateNearbyRoutesBadges(maxLocalRows, filterNearbyTransportRoutes(nearbyTransportStopRoutes, localTransportStopRoutes));
 			}
 			transportBadgesCreated = true;
 		}
