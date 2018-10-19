@@ -13,6 +13,6 @@
 	<string name="no_internet_connection">Отсутствует интернет</string>
 	<string name="shared_string_disable">Отключить</string>
 	<string name="shared_string_save">Сохранить</string>
-	<string name="device_id">Устройство</string>
+	<string name="device_id">ID устройства</string>
 	<string name="add_device">Добавить устройство</string>
 	</resources>
