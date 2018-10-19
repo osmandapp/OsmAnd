@@ -920,7 +920,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			getMapActivity().changeZoom(2, System.currentTimeMillis());
 		} else {
 			if (!map.hasCustomMapRatio()) {
-				setCustomMapRatio();
+				//setCustomMapRatio();
 			}
 			getMapActivity().changeZoom(1, System.currentTimeMillis());
 		}
@@ -928,7 +928,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	public void doZoomOut() {
 		if (!map.hasCustomMapRatio()) {
-			setCustomMapRatio();
+			//setCustomMapRatio();
 		}
 		getMapActivity().changeZoom(-1, System.currentTimeMillis());
 	}
