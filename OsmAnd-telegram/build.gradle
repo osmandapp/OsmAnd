@@ -86,6 +86,7 @@ android {
 	lintOptions {
 		// use this line to check all rules except those listed
 		disable 'InvalidPackage'
+		disable 'MissingTranslation'
 	}
 }
 
