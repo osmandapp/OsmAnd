@@ -1172,13 +1172,7 @@ public class OpeningHoursParser {
 
 		@Override
 		public boolean isOpened24_7() {
-			boolean opened24_7 = true;
-			for (int i = 0; i < 7; i++) {
-				if (!days[i]) {
-					opened24_7 = false;
-					break;
-				}
-			}
+			boolean opened24_7 = isOpenedEveryDay();
 
 			if (opened24_7) {
 				if (startTimes != null && startTimes.size() > 0) {
@@ -1194,6 +1188,17 @@ public class OpeningHoursParser {
 				}
 			}
 			return false;
+		}
+
+		public boolean isOpenedEveryDay() {
+			boolean openedEveryDay = true;
+			for (int i = 0; i < 7; i++) {
+				if (!days[i]) {
+					openedEveryDay = false;
+					break;
+				}
+			}
+			return openedEveryDay;
 		}
 
 		@Override

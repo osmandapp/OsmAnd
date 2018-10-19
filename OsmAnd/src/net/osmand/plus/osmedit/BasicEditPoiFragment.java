@@ -148,6 +148,9 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 	}
 
 	public void setBasicOpeningHoursRule(BasicOpeningHourRule item, int position) {
+		if (item.getStartTime() == 0 && item.getEndTime() == 0 && item.isOpenedEveryDay()) {
+			item.setEndTime(24 * 60);
+		}
 		mOpeningHoursAdapter.setOpeningHoursRule(item, position);
 	}
 
