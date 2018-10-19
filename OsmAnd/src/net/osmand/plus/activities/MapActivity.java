@@ -82,7 +82,6 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
-import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
@@ -96,7 +95,6 @@ import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
@@ -808,13 +806,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
-		} else if (!isFirstScreenShowing()) {
-			if (XMasDialogFragment.shouldShowXmasDialog(app)) {
-				SecondSplashScreenFragment.SHOW = false;
-				new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
-			} else if (OsmLiveCancelledDialog.shouldShowDialog(app)) {
-				OsmLiveCancelledDialog.showInstance(getSupportFragmentManager());
-			}
+		} else if (!isFirstScreenShowing() && OsmLiveCancelledDialog.shouldShowDialog(app)) {
+			OsmLiveCancelledDialog.showInstance(getSupportFragmentManager());
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 

@@ -21,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -106,6 +107,7 @@ public class DiscountHelper {
 			double showDayFrequency = obj.getDouble("show_day_frequency");
 			int maxTotalShow = obj.getInt("max_total_show");
 			JSONObject application = obj.getJSONObject("application");
+			boolean showChristmasDialog = obj.optBoolean("show_christmas_dialog", false);
 
 			if (data.url.startsWith(INAPP_PREFIX) && data.url.length() > INAPP_PREFIX.length()) {
 				String inAppSku = data.url.substring(INAPP_PREFIX.length());
@@ -136,7 +138,11 @@ public class DiscountHelper {
 						settings.DISCOUNT_TOTAL_SHOW.set(settings.DISCOUNT_TOTAL_SHOW.get() + 1);
 						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
 						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
-						showDiscountBanner(mapActivity, data);
+						if (showChristmasDialog) {
+							new XMasDialogFragment().show(mapActivity.getSupportFragmentManager(), XMasDialogFragment.TAG);
+						} else {
+							showDiscountBanner(mapActivity, data);
+						}
 					}
 				}
 			}
