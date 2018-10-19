@@ -392,7 +392,7 @@
 		<string name="poi_public_transport">Transporte público</string>
 		<string name="poi_air_transport">Transporte aéreo</string>
 		<string name="poi_water_transport">Transporte acuático</string>
-		<string name="poi_bicycle_transport">Transporte en bicicleta</string>
+		<string name="poi_bicycle_transport">Transporte ciclista</string>
 		<string name="poi_aerialway_transport">Teleférico</string>
 		<string name="poi_node_networks">Nós da rede de sendeiros/bicicletas</string>
 		<string name="poi_hiking_routes">Roteiros de sendeirismo</string>
@@ -1067,9 +1067,9 @@
 	<string name="poi_payment_type">Tipo do pagamento</string>
 	<string name="poi_payment_fuel_type">Tarxetas de combustíbel</string>
 	<string name="poi_additional_type">Adicional</string>
-	<string name="poi_internet_access_type">Tipo de acceso á Internet</string>
+	<string name="poi_internet_access_type">Tipo da conexión á Internet</string>
 	<string name="poi_vending_type">Tipo da venda</string>
-	<string name="poi_bicycle_service">Reparación de bicicletas</string>
+	<string name="poi_bicycle_service">Servizo para bicicletas</string>
 	<string name="poi_clothes_type">Tipo da roupa</string>
 	<string name="poi_shoes_type">Tipo do calzado</string>
 	<string name="poi_fire_hydrant_type">Tipo do hidrante</string>
@@ -1087,7 +1087,7 @@
 	<string name="poi_subway_station_filter">Estación de metro</string>
 	<string name="poi_ferry_terminal_cargo">Carga</string>
 	<string name="poi_bicycle_parking_type">Tipo do aparcadoiro</string>
-	<string name="poi_aerialway_bicycle">Transporte de bicicletas</string>
+	<string name="poi_aerialway_bicycle">Transporte para bicicletas</string>
 	<string name="poi_aerialway_heating">Calefacción</string>
 	<string name="poi_pump">Bomba</string>
 	<string name="poi_observatory_designation">Designación</string>
@@ -1447,7 +1447,7 @@
 	<string name="poi_memorial_obelisk">Obelisco</string>
 	<string name="poi_bench_no">Sen asento</string>
 	<string name="poi_shelter_type_public_transport">Transporte público</string>
-	<string name="poi_internet_access_type_public">Tipo de acceso á Internet: público</string>
+	<string name="poi_internet_access_type_public">Tipo do acceso á Internet: público</string>
 	<string name="poi_route_share_taxi_ref">Taxi compartido</string>
 	<string name="poi_publisher">Oficina de editorial</string>
 
@@ -1553,7 +1553,7 @@
 	<string name="poi_shelter_type_abandoned">Tipo do refuxio: abandoado</string>
 
 	<string name="poi_internet_access_type_terminal">Por terminal</string>
-	<string name="poi_internet_access_type_service">Tipo de acceso á Internet: servizo</string>
+	<string name="poi_internet_access_type_service">Tipo do acceso á Internet: servizo</string>
 	<string name="poi_artwork_type_sculpture">Tipo de obra: escultura</string>
 	<string name="poi_artwork_type_statue">Tipo de obra: estatua</string>
 	<string name="poi_artwork_type_mural">Tipo de obra: mural</string>
@@ -1840,4 +1840,23 @@
 	<string name="poi_amusement_arcade">Centro recreativo</string>
 	<string name="poi_end_date">Data do remate</string>
 
+	<string name="poi_vending_bicycle_tube">Válvulas de bicicleta</string>
+	<string name="poi_bridge_bicycle">Ponte ciclista</string>
+	<string name="poi_service_bicycle_retail_no">Venda de bicicletas: non</string>
+	<string name="poi_service_bicycle_repair_no">Reparación de bicicletas: non</string>
+	<string name="poi_service_bicycle_rental_no">Aluguer de bicicletas: non</string>
+	<string name="poi_service_bicycle_pump_no">Inchado de bicicletas: non</string>
+	<string name="poi_service_bicycle_diy_no">Ferramentas para autoarranxado: non</string>
+	<string name="poi_service_bicycle_cleaning_no">Limpeza de bicicletas: non</string>
+	<string name="poi_service_bicycle_chaintool_no">Ferramentas para a cadea: non</string>
+	<string name="poi_service_bicycle_second_hand_yes">Venda de bicicletas de segunda man</string>
+	<string name="poi_service_bicycle_second_hand_no">Venda de bicicletas de segunda man: non</string>
+	<string name="poi_bicycle_repair_station">Estación de arranxado para bicicletas</string>
+
+	<string name="poi_ramp_bicycle_yes">Rampla para bicicletas: si</string>
+	<string name="poi_ramp_bicycle_no">Rampla para bicicletas: non</string>
+	<string name="poi_cargo_bicycle">Bicicletas</string>
+	<string name="poi_bicycle_parking_tree">Árbore en bicicletas</string>
+	<string name="poi_bicycle_yes">Bicicleta: si</string>
+	<string name="poi_bicycle_no">Bicicleta: non</string>
 	</resources>
