@@ -2,9 +2,15 @@ package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.Settings.Secure;
+import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -20,6 +26,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -33,10 +40,7 @@ public class DiscountHelper {
 	//private static final String DISCOUNT_JSON = "discount.json";
 
 	private static long mLastCheckTime;
-	private static String mTitle;
-	private static String mDescription;
-	private static String mIcon;
-	private static String mUrl;
+	private static ControllerData mData;
 	private static boolean mBannerVisible;
 	private static final String URL = "https://osmand.net/api/motd";
 	private static final String INAPP_PREFIX = "osmand-in-app:";
@@ -49,7 +53,7 @@ public class DiscountHelper {
 			return;
 		}
 		if (mBannerVisible) {
-			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
+			showDiscountBanner(mapActivity, mData);
 		}
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
 				|| !settings.isInternetConnectionAvailable()) {
@@ -58,7 +62,7 @@ public class DiscountHelper {
 		mLastCheckTime = System.currentTimeMillis();
 		final Map<String, String> pms = new LinkedHashMap<>();
 		pms.put("version", Version.getFullVersion(app));
-		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() +"");
+		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() + "");
 		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
 		pms.put("lang", app.getLanguage() + "");
 		try {
@@ -71,9 +75,8 @@ public class DiscountHelper {
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					String res = AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
+					return AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
 							URL, pms, "Requesting discount info...", false, false);
-					return res;
 				} catch (Exception e) {
 					logError("Requesting discount info error: ", e);
 					return null;
@@ -95,10 +98,7 @@ public class DiscountHelper {
 			OsmandApplication app = mapActivity.getMyApplication();
 
 			JSONObject obj = new JSONObject(response);
-			String message = obj.getString("message");
-			String description = obj.getString("description");
-			String icon = obj.getString("icon");
-			String url = parseUrl(app, obj.getString("url"));
+			ControllerData data = ControllerData.parse(app, obj);
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			Date start = df.parse(obj.getString("start"));
 			Date end = df.parse(obj.getString("end"));
@@ -107,8 +107,8 @@ public class DiscountHelper {
 			int maxTotalShow = obj.getInt("max_total_show");
 			JSONObject application = obj.getJSONObject("application");
 
-			if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
-				String inAppSku = url.substring(INAPP_PREFIX.length());
+			if (data.url.startsWith(INAPP_PREFIX) && data.url.length() > INAPP_PREFIX.length()) {
+				String inAppSku = data.url.substring(INAPP_PREFIX.length());
 				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 				if (purchaseHelper != null
 						&& (purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app))) {
@@ -122,7 +122,7 @@ public class DiscountHelper {
 					&& date.after(start) && date.before(end)) {
 
 				OsmandSettings settings = app.getSettings();
-				int discountId = getDiscountId(message, description, start, end);
+				int discountId = getDiscountId(data.message, start);
 				boolean discountChanged = settings.DISCOUNT_ID.get() != discountId;
 				if (discountChanged) {
 					settings.DISCOUNT_TOTAL_SHOW.set(0);
@@ -130,13 +130,13 @@ public class DiscountHelper {
 				// show after every N (getNumberOfStarts()) starts or show after every N (double show_day_frequency) frequency
 				if (discountChanged
 						|| (app.getAppInitializer().getNumberOfStarts() - settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.get() >= showStartFrequency
-						|| System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency) ) {
-					if(settings.DISCOUNT_TOTAL_SHOW.get() < maxTotalShow){
+						|| System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency)) {
+					if (settings.DISCOUNT_TOTAL_SHOW.get() < maxTotalShow) {
 						settings.DISCOUNT_ID.set(discountId);
 						settings.DISCOUNT_TOTAL_SHOW.set(settings.DISCOUNT_TOTAL_SHOW.get() + 1);
 						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
 						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
-						showDiscountBanner(mapActivity, message, description, icon, url);	
+						showDiscountBanner(mapActivity, data);
 					}
 				}
 			}
@@ -156,42 +156,43 @@ public class DiscountHelper {
 		return url;
 	}
 
-	private static int getDiscountId(String message, String description, Date start, Date end) {
+	private static int getDiscountId(String message, Date start) {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		result = prime * result + ((start == null) ? 0 : start.hashCode());
-		// result = prime * result + ((description == null) ? 0 : description.hashCode());
-		// result = prime * result + ((end == null) ? 0 : end.hashCode());
 		return result;
 	}
 
-	private static void showDiscountBanner(final MapActivity mapActivity, final String title,
-										   final String description, final String icon, final String url) {
+	private static void showDiscountBanner(final MapActivity mapActivity, final ControllerData data) {
+		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
 		final DiscountBarController toolbarController = new DiscountBarController();
-		toolbarController.setTitle(title);
-		toolbarController.setDescription(description);
-		int iconId = mapActivity.getResources().getIdentifier(icon, "drawable", mapActivity.getMyApplication().getPackageName());
+		if (data.bgColor != -1) {
+			LayerDrawable bgLand = (LayerDrawable) ContextCompat.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
+			if (bgLand != null) {
+				((GradientDrawable) bgLand.findDrawableByLayerId(R.id.color_bg)).setColor(data.bgColor);
+			}
+			ColorDrawable bg = new ColorDrawable(data.bgColor);
+			toolbarController.setBgs(bg, bg, bgLand, bgLand);
+		}
+		toolbarController.setTitle(data.message);
+		toolbarController.setTitleTextClrs(data.titleColor, data.titleColor);
+		toolbarController.setDescription(data.description);
+		toolbarController.setDescrTextClrs(data.descrColor, data.descrColor);
 		toolbarController.setBackBtnIconIds(iconId, iconId);
-		if (!Algorithms.isEmpty(url)) {
-			toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
+		toolbarController.setBackBtnIconClrs(data.iconColor, data.iconColor);
+		if (!Algorithms.isEmpty(data.url)) {
+			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
 					mBannerVisible = false;
 					mapActivity.hideTopToolbar(toolbarController);
-					openUrl(mapActivity, url);
+					openUrl(mapActivity, data.url);
 				}
-			});
-			toolbarController.setOnTitleClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
-					mBannerVisible = false;
-					mapActivity.hideTopToolbar(toolbarController);
-					openUrl(mapActivity, url);
-				}
-			});
+			};
+			toolbarController.setOnBackButtonClickListener(clickListener);
+			toolbarController.setOnTitleClickListener(clickListener);
 		}
 		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 			@Override
@@ -202,10 +203,7 @@ public class DiscountHelper {
 			}
 		});
 
-		mTitle = title;
-		mDescription = description;
-		mIcon = icon;
-		mUrl = url;
+		mData = data;
 		mBannerVisible = true;
 
 		mapActivity.showTopToolbar(toolbarController);
@@ -220,7 +218,7 @@ public class DiscountHelper {
 				if (purchaseHelper != null) {
 					purchaseHelper.purchaseFullVersion(mapActivity);
 				}
-			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)){
+			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)) {
 				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else {
@@ -230,9 +228,47 @@ public class DiscountHelper {
 		}
 	}
 
+	private static class ControllerData {
+
+		String message;
+		String description;
+		String iconId;
+		String url;
+
+		@ColorInt
+		int iconColor = -1;
+		@ColorInt
+		int bgColor = -1;
+		@ColorInt
+		int titleColor = -1;
+		@ColorInt
+		int descrColor = -1;
+
+		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
+			ControllerData res = new ControllerData();
+			res.message = obj.getString("message");
+			res.description = obj.getString("description");
+			res.iconId = obj.getString("icon");
+			res.url = parseUrl(app, obj.getString("url"));
+			res.iconColor = parseColor("icon_color", obj);
+			res.bgColor = parseColor("bg_color", obj);
+			res.titleColor = parseColor("title_color", obj);
+			res.descrColor = parseColor("description_color", obj);
+			return res;
+		}
+
+		private static int parseColor(String key, JSONObject obj) {
+			String color = obj.optString(key);
+			if (!color.isEmpty()) {
+				return Color.parseColor(color);
+			}
+			return -1;
+		}
+	}
+
 	private static class DiscountBarController extends TopToolbarController {
 
-		public DiscountBarController() {
+		DiscountBarController() {
 			super(TopToolbarControllerType.DISCOUNT);
 			setSingleLineTitle(false);
 			setBackBtnIconClrIds(0, 0);
@@ -242,10 +278,6 @@ public class DiscountHelper {
 			setBgIds(R.color.discount_bar_bg, R.color.discount_bar_bg,
 					R.drawable.discount_bar_bg_land, R.drawable.discount_bar_bg_land);
 		}
-	}
-
-	private static void logError(String msg) {
-		Log.e(TAG, msg);
 	}
 
 	private static void logError(String msg, Throwable e) {

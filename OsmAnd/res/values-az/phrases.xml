@@ -154,4 +154,6 @@
 	<string name="poi_operational_status_open">Açıq</string>
 	<string name="poi_operational_status_closed">Bağlı</string>
 	<string name="poi_water_place_access_family">Ailə</string>
+	<string name="poi_service_vehicle_batteries_yes">Batareyalar</string>
+	<string name="poi_checkpoint_type_code">Kod</string>
 	</resources>

@@ -2586,7 +2586,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="download_depth_countours">Navtični relief globine</string>
     <string name="route_is_too_long_v2">Preračunavanje poti je lahko zelo dolgotrajno. V kolikor izračun ne bo končan v 10 minutah, vstavite nekaj vmesnih točk.</string>
     <string name="open_mapillary">Odpri Mapillary</string>
-    <string name="hillshade_menu_download_descr">Za prikaz senčenja reliefa na zemljevidu, je treba namestiti prekrivno plast senčenja za to območje.</string>
+    <string name="hillshade_menu_download_descr">Za prikaz senčenja reliefa na zemljevidu je treba namestiti prekrivno plast senčenja za to območje.</string>
     <string name="hillshade_purchase_header">Za prikaz senčenja reliefa na zemljevidu, je treba kupiti in namestiti vstavek Izohipse.</string>
     <string name="hide_from_zoom_level">Skrij od ravni približanja</string>
     <string name="srtm_menu_download_descr">Za prikaz izohips reliefa na zemljevidu, je treba prejeti zemljevid reliefa za to območje.</string>
@@ -2873,7 +2873,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="map_import_error">Uvoz zemljevida je spodletel</string>
     <string name="map_imported_successfully">Zemljevid je uvožen.</string>
     <string name="distance_farthest">Razdalja: najdlje najprej</string>
-    <string name="distance_nearest">Razdalja: Najbližje najprej</string>
+    <string name="distance_nearest">Razdalja: najbližje najprej</string>
     <string name="enter_lon">Vpišite zemljepisno širino</string>
     <string name="enter_lat">Vpišite zemljepisno dolžino</string>
     <string name="enter_lat_and_lon">Vpišite zemljepisno širino in dolžino</string>
