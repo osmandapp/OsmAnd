@@ -200,8 +200,8 @@
 
 					<ImageView
 						android:id="@+id/user_icon"
-						android:layout_width="@dimen/list_item_icon_size"
-						android:layout_height="@dimen/list_item_icon_size"
+						android:layout_width="@dimen/list_item_icon_size_big"
+						android:layout_height="@dimen/list_item_icon_size_big"
 						android:layout_marginEnd="@dimen/content_padding_standard"
 						android:layout_marginLeft="@dimen/content_padding_half"
 						android:layout_marginRight="@dimen/content_padding_standard"

@@ -30,7 +30,8 @@
 	<dimen name="list_item_height_big">64dp</dimen>
 
 	<dimen name="list_item_icon_size_small">14dp</dimen>
-	<dimen name="list_item_icon_size">40dp</dimen>
+	<dimen name="list_item_icon_size">24dp</dimen>
+	<dimen name="list_item_icon_size_big">40dp</dimen>
 	<dimen name="list_item_icon_margin_left">12dp</dimen>
 	<dimen name="list_item_icon_margin_right">20dp</dimen>
 
