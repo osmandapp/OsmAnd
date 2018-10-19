@@ -1265,12 +1265,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (!menu.isActive()) {
-			if (mapCenter != null) {
-				AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-				thread.startMoving(mapCenter.getLatitude(), mapCenter.getLongitude(), map.getZoom(), true);
-			}
-		}
 		menu.setMapCenter(null);
 		menu.setMapZoom(0);
 	}

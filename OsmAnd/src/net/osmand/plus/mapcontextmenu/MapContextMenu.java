@@ -1128,6 +1128,18 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	public void openMenuHeaderOnly() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().openMenuHeaderOnly();
+	}
+
+	public void openMenuHalfScreen() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().openMenuHalfScreen();
+	}
+
 	public void openMenuFullScreen() {
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null)

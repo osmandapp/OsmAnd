@@ -55,6 +55,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -1028,14 +1030,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 
 		if (movementListener.onTouchEvent(event)) {
-			if (menu.isVisible()) {
-				if (!menu.isClosable()) {
-					menu.hide();
-				} else {
-					menu.updateMapCenter(null);
-					menu.close();
-				}
-			}
 			if (multiSelectionMenu.isVisible()) {
 				multiSelectionMenu.hide();
 			}

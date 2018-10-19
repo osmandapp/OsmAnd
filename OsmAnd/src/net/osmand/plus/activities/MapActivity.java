@@ -96,6 +96,8 @@ import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
@@ -589,7 +591,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
-			mapContextMenu.close();
+			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY) {
+				mapContextMenu.openMenuHeaderOnly();
+			} else {
+				mapContextMenu.close();
+			}
 			return;
 		}
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
