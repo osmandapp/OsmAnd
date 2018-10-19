@@ -1028,7 +1028,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 
 		if (movementListener.onTouchEvent(event)) {
-			menu.hide();
+			if (menu.isVisible()) {
+				if (!menu.isClosable()) {
+					menu.hide();
+				} else {
+					menu.updateMapCenter(null);
+					menu.close();
+				}
+			}
 			if (multiSelectionMenu.isVisible()) {
 				multiSelectionMenu.hide();
 			}

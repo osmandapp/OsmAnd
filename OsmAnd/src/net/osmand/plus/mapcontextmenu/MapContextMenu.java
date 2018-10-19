@@ -76,7 +76,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private PointDescription pointDescription;
 	private Object object;
 	private MenuController menuController;
-	private ContextToolbarController toolbarController;
 
 	private LatLon mapCenter;
 	private int mapPosition = 0;
@@ -126,25 +125,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public MapContextMenu() {
-		toolbarController = new ContextToolbarController();
-		toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				show();
-			}
-		});
-		toolbarController.setOnTitleClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				show();
-			}
-		});
-		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				close();
-			}
-		});
 	}
 
 	@Nullable
@@ -464,19 +444,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		init(latLon, pointDescription, object);
 	}
 
-	private void showToolbar() {
-		if (mapActivity != null) {
-			toolbarController.setTitle(getTitleStr());
-			mapActivity.showTopToolbar(toolbarController);
-		}
-	}
-
-	private void hideToolbar() {
-		if (mapActivity != null) {
-			mapActivity.hideTopToolbar(toolbarController);
-		}
-	}
-
 	public void onFragmentResume() {
 		if (active && displayDistanceDirection()) {
 			updateLocation(false, true, false);
@@ -511,7 +478,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				if (menuController != null) {
 					menuController.setActive(false);
 				}
-				hideToolbar();
 				mapActivity.refreshMap();
 			}
 		}
@@ -535,9 +501,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				}
 				fragmentRef.get().dismissMenu();
 				result = true;
-			}
-			if (active) {
-				showToolbar();
 			}
 		}
 		return result;
@@ -789,6 +752,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().refreshTitle();
 		}
+
 		if (searchDoneAction != null) {
 			if (searchDoneAction.dlg != null) {
 				try {
@@ -801,13 +765,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 			searchDoneAction.run();
 			searchDoneAction = null;
-		}
-		if (active) {
-			toolbarController.setTitle(getTitleStr());
-			if (mapActivity != null
-					&& mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT) != null) {
-				mapActivity.refreshMap();
-			}
 		}
 	}
 
@@ -1410,12 +1367,4 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private abstract class MenuAction implements Runnable {
 		protected ProgressDialog dlg;
 	}
-
-	public static class ContextToolbarController extends TopToolbarController {
-
-		public ContextToolbarController() {
-			super(TopToolbarControllerType.CONTEXT);
-		}
-	}
-
 }
