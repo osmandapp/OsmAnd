@@ -52,7 +52,7 @@ class BatteryOptimizationBottomSheet : DialogFragment() {
 		mainView.findViewById<TextView>(R.id.primary_btn).apply {
 			setText(R.string.go_to_settings)
 			setOnClickListener {
-				if (Build.VERSION.SDK_INT > 26) {
+				if (Build.VERSION.SDK_INT >= 26) {
 					val pkg = app.packageName
 					val pm = app.getSystemService(PowerManager::class.java)
 					if (pm != null) {
