@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -232,7 +231,7 @@ public class PoiFiltersHelper {
 			}
 			// default
 			MapPoiTypes poiTypes = application.getPoiTypes();
-			for (PoiFilter t : poiTypes.getTopVisibleFilters()) {
+			for (AbstractPoiType t : poiTypes.getTopVisibleFilters()) {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				top.add(f);
 			}

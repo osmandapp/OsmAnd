@@ -648,7 +648,7 @@ public class SearchCoreFactory {
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
 		private Map<String, PoiType> translatedNames = new LinkedHashMap<>();
-		private List<PoiFilter> topVisibleFilters;
+		private List<AbstractPoiType> topVisibleFilters;
 		private List<PoiCategory> categories;
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
@@ -697,7 +697,7 @@ public class SearchCoreFactory {
 			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
 			NameStringMatcher nm =
 					new NameStringMatcher(phrase.getUnknownSearchPhrase(), StringMatcherMode.CHECK_ONLY_STARTS_WITH_TRIM);
-			for (PoiFilter pf : topVisibleFilters) {
+			for (AbstractPoiType pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent()
 						|| nm.matches(pf.getTranslation())
 						|| nm.matches(pf.getEnTranslation())

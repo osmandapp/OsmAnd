@@ -106,8 +106,8 @@ public class MapPoiTypes {
 		return textPoiAdditionals;
 	}
 
-	public List<PoiFilter> getTopVisibleFilters() {
-		List<PoiFilter> lf = new ArrayList<PoiFilter>();
+	public List<AbstractPoiType> getTopVisibleFilters() {
+		List<AbstractPoiType> lf = new ArrayList<AbstractPoiType>();
 		for (PoiCategory pc : categories) {
 			if (pc.isTopVisible()) {
 				lf.add(pc);
@@ -117,17 +117,21 @@ public class MapPoiTypes {
 					lf.add(p);
 				}
 			}
+			for (PoiType p : pc.getPoiTypes()) {
+				if (p.isTopVisible()) {
+					lf.add(p);
+				}
+			}
 		}
 		sortList(lf);
 		return lf;
 	}
 
-
-	private void sortList(List<? extends PoiFilter> lf) {
+	private void sortList(List<? extends AbstractPoiType> lf) {
 		final Collator instance = Collator.getInstance();
-		Collections.sort(lf, new Comparator<PoiFilter>() {
+		Collections.sort(lf, new Comparator<AbstractPoiType>() {
 			@Override
-			public int compare(PoiFilter object1, PoiFilter object2) {
+			public int compare(AbstractPoiType object1, AbstractPoiType object2) {
 				return instance.compare(object1.getTranslation(), object2.getTranslation());
 			}
 		});
@@ -603,6 +607,7 @@ public class MapPoiTypes {
 		tp.setNameTag(parser.getAttributeValue("", "name_tag"));
 		tp.setRelation("true".equals(parser.getAttributeValue("", "relation")));
 		tp.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
+		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 		if (lastFilter != null) {
 			lastFilter.addPoiType(tp);
 		}
@@ -699,8 +704,8 @@ public class MapPoiTypes {
 		DEFAULT_INSTANCE.init();
 //		print(DEFAULT_INSTANCE)	;
 //		System.out.println("-----------------");
-		List<PoiFilter> lf = DEFAULT_INSTANCE.getTopVisibleFilters();
-		for (PoiFilter l : lf) {
+		List<AbstractPoiType> lf = DEFAULT_INSTANCE.getTopVisibleFilters();
+		for (AbstractPoiType l : lf) {
 			System.out.println("----------------- " + l.getKeyName());
 //			print("", l);
 			Map<PoiCategory, LinkedHashSet<String>> m =
