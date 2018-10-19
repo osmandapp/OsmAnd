@@ -245,6 +245,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				sharingMode = settings.hasAnyChatToShareLocation()
 				clearSelection()
 				updateContent()
+				if (sharingMode && !settings.batteryOptimisationAsked && Build.VERSION.SDK_INT >= 26) {
+					fragmentManager?.also { fm ->
+						BatteryOptimizationBottomSheet.showInstance(fm)
+						settings.batteryOptimisationAsked = true
+					}
+				}
 			}
 			DisableSharingBottomSheet.SHARING_DISABLED_REQUEST_CODE -> {
 				sharingMode = false

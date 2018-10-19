@@ -67,6 +67,8 @@ private const val LIVE_NOW_SORT_TYPE_KEY = "live_now_sort_type"
 
 private const val SHARE_CHATS_INFO_KEY = "share_chats_info"
 
+private const val BATTERY_OPTIMISATION_ASKED = "battery_optimisation_asked"
+
 class TelegramSettings(private val app: TelegramApplication) {
 
 	private var shareChatsInfo = ConcurrentHashMap<Long, ShareChatInfo>()
@@ -90,6 +92,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var liveNowSortType = LiveNowSortType.SORT_BY_GROUP
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
+
+	var batteryOptimisationAsked = false
 
 	init {
 		updatePrefs()
@@ -208,7 +212,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 				SharingStatusType.NO_GPS
 			} else {
 				var sendChatsErrors = false
-				shareChatsInfo.forEach { _, shareInfo ->
+				shareChatsInfo.forEach { (_, shareInfo) ->
 					if (shareInfo.hasSharingError || shareInfo.lastSuccessfulSendTimeMs == -1L) {
 						sendChatsErrors = true
 						locationTime = shareInfo.lastSuccessfulSendTimeMs
@@ -274,6 +278,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putString(LIVE_NOW_SORT_TYPE_KEY, liveNowSortType.name)
 
+		edit.putBoolean(BATTERY_OPTIMISATION_ASKED, batteryOptimisationAsked)
+
 		try {
 			val jArray = JSONArray()
 			shareChatsInfo.forEach { (chatId, chatInfo) ->
@@ -332,6 +338,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		liveNowSortType = LiveNowSortType.valueOf(
 			prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_GROUP.name)
 		)
+
+		batteryOptimisationAsked = prefs.getBoolean(BATTERY_OPTIMISATION_ASKED,false)
 	}
 
 	private fun parseShareChatsInfo(json: JSONArray) {

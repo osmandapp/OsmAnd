@@ -335,12 +335,10 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getUserGreyPhotoPath(user: TdApi.User): String? {
-		return if (hasGrayscaleUserPhoto(user.id)) {
-			"$appDir/$GRAYSCALE_PHOTOS_DIR${user.id}$GRAYSCALE_PHOTOS_EXT"
-		} else {
-			null
-		}
+	fun getUserGreyPhotoPath(user: TdApi.User?) = when {
+		user == null -> null
+		hasGrayscaleUserPhoto(user.id) -> "$appDir/$GRAYSCALE_PHOTOS_DIR${user.id}$GRAYSCALE_PHOTOS_EXT"
+		else -> null
 	}
 
 	fun getOsmAndBotDeviceName(message: TdApi.Message): String {

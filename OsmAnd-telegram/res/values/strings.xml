@@ -1,4 +1,10 @@
 <resources>
+	<string name="background_work_description">Change battery optimization settings, for stable location sharing</string>
+	<string name="background_work">Background work</string>
+	<string name="battery_optimization_description">For stable sharing of your position in the background, it is advisable to disable battery optimization for OsmAnd Telegram.\n\nIf optimization is enabled, the system may automatically turn off the application running in the background (when the screen is locked and/or the app is minimized). This happens without notification and causes the geo position broadcast to stop.</string>
+	<string name="sharing_in_background">Sharing in the background</string>
+	<string name="go_to_settings">Go to settings</string>
+	<string name="shared_string_later">Later</string>
 	<string name="not_sent_yet">Not sent yet</string>
 	<string name="not_found_yet">Not found yet</string>
 	<string name="re_send_location">Re-send location</string>

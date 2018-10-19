@@ -1,6 +1,7 @@
 package net.osmand.telegram.ui
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.ListPopupWindow
@@ -15,6 +16,7 @@ import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.DurationPref
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
+import org.drinkless.td.libcore.telegram.TdApi
 
 class SettingsDialogFragment : BaseDialogFragment() {
 
@@ -45,6 +47,19 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				valueView.text = pref.getCurrentValue()
 				setOnClickListener {
 					showPopupMenu(pref, valueView)
+				}
+				container.addView(this)
+			}
+		}
+
+		if (Build.VERSION.SDK_INT >= 26) {
+			inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
+				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_background_work))
+				findViewById<TextView>(R.id.title).text = getText(R.string.background_work)
+				findViewById<TextView>(R.id.description).text = getText(R.string.background_work_description)
+				findViewById<TextView>(R.id.value).visibility = View.GONE
+				setOnClickListener {
+					fragmentManager?.also { BatteryOptimizationBottomSheet.showInstance(it) }
 				}
 				container.addView(this)
 			}
@@ -141,11 +156,15 @@ class SettingsDialogFragment : BaseDialogFragment() {
 
 	private fun addItemToContainer(inflater: LayoutInflater, container: ViewGroup, tag: String, title: String) {
 		inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
+			val checked = tag == settings.currentSharingMode
+
+			setupSharingModeIcon(this, checked, telegramHelper.getCurrentUser(), tag)
+
 			findViewById<TextView>(R.id.title).text = title
 			findViewById<View>(R.id.primary_btn).visibility = View.GONE
 			findViewById<RadioButton>(R.id.radio_button).apply {
 				visibility = View.VISIBLE
-				isChecked = tag == settings.currentSharingMode
+				isChecked = checked
 			}
 			setOnClickListener {
 				settings.currentSharingMode = tag
@@ -186,12 +205,31 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 	}
 
+	private fun setupSharingModeIcon(view: View, checked: Boolean, user: TdApi.User?, tag: String) {
+		if (tag == user?.id.toString()) {
+			val path = if (checked) {
+				telegramHelper.getUserPhotoPath(user)
+			} else {
+				telegramHelper.getUserGreyPhotoPath(user)
+			}
+			TelegramUiHelper.setupPhoto(app, view.findViewById<ImageView>(R.id.icon), path, R.drawable.img_user_picture, false)
+		} else {
+			val icon = if (checked) {
+				uiUtils.getActiveIcon(R.drawable.ic_device_picture)
+			} else {
+				uiUtils.getThemedIcon(R.drawable.ic_device_picture)
+			}
+			view.findViewById<ImageView>(R.id.icon).setImageDrawable(icon)
+		}
+	}
+
 	private fun updateSelectedSharingMode() {
 		view?.findViewById<ViewGroup>(R.id.share_as_container)?.apply {
 			for (i in 0 until childCount) {
 				getChildAt(i).apply {
-					findViewById<RadioButton>(R.id.radio_button).isChecked =
-							tag == settings.currentSharingMode
+					val checked = tag == app.settings.currentSharingMode
+					setupSharingModeIcon(this, checked, telegramHelper.getCurrentUser(), tag.toString())
+					findViewById<RadioButton>(R.id.radio_button).isChecked = checked
 				}
 			}
 		}

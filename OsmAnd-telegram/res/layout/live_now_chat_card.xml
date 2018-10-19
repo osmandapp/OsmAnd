@@ -26,8 +26,8 @@
 
 			<ImageView
 				android:id="@+id/icon"
-				android:layout_width="@dimen/list_item_icon_size"
-				android:layout_height="@dimen/list_item_icon_size"
+				android:layout_width="@dimen/list_item_icon_size_big"
+				android:layout_height="@dimen/list_item_icon_size_big"
 				android:layout_marginEnd="@dimen/list_item_icon_margin_right"
 				android:layout_marginLeft="@dimen/list_item_icon_margin_left"
 				android:layout_marginRight="@dimen/list_item_icon_margin_right"
