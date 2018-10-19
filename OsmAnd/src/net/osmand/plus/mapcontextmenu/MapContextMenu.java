@@ -538,6 +538,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 			if (active) {
 				showToolbar();
+				mapActivity.refreshMap();
 			}
 		}
 		return result;
