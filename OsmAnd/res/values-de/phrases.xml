@@ -3442,7 +3442,7 @@
 	<string name="poi_direction_forward">Richtung: vorwärts</string>
 	<string name="poi_direction_backward">Richtung: rückwärts</string>
 	<string name="poi_direction_clockwise">Richtung: im Uhrzeigersinn</string>
-	<string name="poi_direction_anticlockwise">Richtung: Gegen Uhrzeigersinn</string>
+	<string name="poi_direction_anticlockwise">Richtung: gegen Uhrzeigersinn</string>
 	<string name="poi_direction_up">Richtung: aufwärts</string>
 	<string name="poi_direction_down">Richtung: abwärts</string>
 	<string name="poi_direction_all">Richtung: alle</string>
@@ -3869,7 +3869,7 @@
 <string name="poi_hazard_nuclear">Nukleare Gefahr</string>
 	<string name="poi_hazard_erosion">Erosionsgefahr</string>
 	<string name="poi_hazard_avalanche">Lawinengefahr</string>
-	<string name="poi_hazard_slippery_road">Rutschgefahr</string>
+	<string name="poi_hazard_slippery_road">Rutschige Straße</string>
 	<string name="poi_hazard_flood">Überschwemmungsgefahr</string>
 	<string name="poi_hazard_minefield">Minenfeld</string>
 
