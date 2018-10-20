@@ -2790,7 +2790,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="my_location">Aktualne położenie</string>
     <string name="shared_string_finish">Koniec trasy</string>
     <string name="plan_route">Planowanie trasy</string>
-    <string name="shared_string_sort">Uporządkuj</string>
+    <string name="shared_string_sort">Sortuj</string>
     <string name="marker_save_as_track_descr">Znaczniki zostaną wyeksportowane do poniższego pliku GPX:</string>
     <string name="marker_save_as_track">Zapisz jako plik GPX</string>
     <string name="move_to_history">Przenieś do historii</string>
