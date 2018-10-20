@@ -15,4 +15,5 @@
 	<string name="shared_string_save">Сохранить</string>
 	<string name="device_id">ID устройства</string>
 	<string name="add_device">Добавить устройство</string>
+	<string name="go_to_settings">Зайдите в настройки</string>
 	</resources>
