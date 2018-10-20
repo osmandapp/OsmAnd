@@ -1,2 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="background_work_description">Zmień ustawienia optymalizacji baterii, aby zapewnić stabilną lokalizację</string>
+	<string name="background_work">Praca w tle</string>
+	<string name="battery_optimization_description">Aby stabilnie udostępniać swoją pozycję w tle, zaleca się wyłączenie optymalizacji baterii dla Telegram OsmAnd.
+\n
+\nJeśli włączona jest optymalizacja, system może automatycznie wyłączyć aplikację działającą w tle (gdy ekran jest zablokowany i/lub aplikacja jest zminimalizowana). Dzieje się tak bez powiadomienia i powoduje zatrzymanie położenia geograficznego.</string>
+	<string name="sharing_in_background">Udostępnianie w tle</string>
+	<string name="go_to_settings">Przejdź do ustawień</string>
+	<string name="shared_string_later">Później</string>
+	<string name="not_sent_yet">Jeszcze nie wysłane</string>
+	<string name="not_found_yet">Jeszcze nie znaleziono</string>
+	<string name="re_send_location">Wyślij ponownie lokalizację</string>
+	<string name="last_sent_location">Ostatnia wysłana lokalizacja</string>
+	<string name="last_available_location">Ostatnia dostępna lokalizacja</string>
+	<string name="sharing_status">Status udostępniania</string>
+	<string name="sharing_enabled">Udostępnianie: Włączone</string>
+	<string name="shared_string_status">Status</string>
+	<string name="no_gps_connection">Brak połączenia GPS</string>
+	<string name="sharing_success">Pomyślnie wysłano i zaktualizowano</string>
+	<string name="not_possible_to_send_to_chats">Nie można wysłać na czat:</string>
+	<string name="no_internet_connection">Brak połączenia z internetem</string>
+	<string name="shared_string_disable">Wyłącz</string>
+	<string name="shared_string_save">Zapisz</string>
+	<string name="add_device_descr">Wprowadź swój identyfikator urządzenia, który można znaleźć w https://live.osmand.net/device/ID</string>
+	<string name="device_id">Identyfikator urządzenia</string>
+	<string name="add_device">Dodaj urządzenie</string>
+	<string name="share_location_as_descr">Ta opcja umożliwia udostępnianie lokalizacji urządzenia lub lokalizacji niestandardowych dodawanych przez urządzenia interfejsu API.</string>
+	<string name="share_location_as">Udostępnij lokalizację jako</string>
+	<string name="live_now_description">Kontakty i grupy, które udostępniają Ci swoją lokalizację.</string>
+	<string name="logout_from_osmand_telegram_descr">Czy na pewno chcesz się wylogować z OsmAnd Telegram\? Po tym czasie nie będziesz mógł wysłać swojej pozycji i zobaczyć lokalizacji swoich kontaktów na mapie w OsmAnd.</string>
+	<string name="logout_from_osmand_telegram">Wyloguj się z OsmAnd Telegram\?</string>
+	<string name="shared_string_name">Nazwa</string>
+	<string name="by_distance">Według odległości</string>
+	<string name="by_name">Według nazwy</string>
+	<string name="by_group">Według grupy</string>
+	<string name="shared_string_sort">Sortuj</string>
+	<string name="shared_string_sort_by">Sortuj według</string>
+	</resources>
