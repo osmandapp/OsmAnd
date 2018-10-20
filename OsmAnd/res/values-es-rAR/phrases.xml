@@ -3935,4 +3935,7 @@
 
 <string name="poi_hill">Colina</string>
 
+<string name="poi_atm">Cajero automático</string>
+	<string name="poi_shoe_repair">Reparación de calzado;Zapatero</string>
+
 </resources>
