@@ -376,7 +376,7 @@
 	<string name="poi_beach">Playa</string>
 	<string name="poi_farm">Agrotienda</string>
 	<string name="poi_greengrocer">Verdulería</string>
-	<string name="poi_dairy">Alimentos frescos</string>
+	<string name="poi_dairy">Alimentos lácteos</string>
 	<string name="poi_vending_machine">Máquina expendedora</string>
 	<string name="poi_bicycle">Tienda de bicicletas</string>
 	<string name="poi_chemist">Higiene personal y del hogar</string>
@@ -3916,5 +3916,8 @@
 	<string name="poi_license_classes">Clases de licencia</string>
 
 	<string name="poi_hill">Colina</string>
+
+<string name="poi_atm">Cajero automático</string>
+	<string name="poi_shoe_repair">Reparación de calzado;Zapatero</string>
 
 </resources>
