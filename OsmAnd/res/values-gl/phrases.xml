@@ -1859,4 +1859,8 @@
 	<string name="poi_bicycle_parking_tree">Árbore en bicicletas</string>
 	<string name="poi_bicycle_yes">Bicicleta: si</string>
 	<string name="poi_bicycle_no">Bicicleta: non</string>
+	<string name="poi_atm">Caixeiro automático</string>
+	<string name="poi_additional_atm_yes">Caixeiro automático: si</string>
+	<string name="poi_atm_no">Caixeiro automático: non</string>
+
 	</resources>
