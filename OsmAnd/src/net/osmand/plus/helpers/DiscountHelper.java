@@ -45,6 +45,7 @@ public class DiscountHelper {
 	private static boolean mBannerVisible;
 	private static final String URL = "https://osmand.net/api/motd";
 	private static final String INAPP_PREFIX = "osmand-in-app:";
+	private static final String SEARCH_QUERY_PREFIX = "osmand-search-query:";
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
@@ -226,6 +227,11 @@ public class DiscountHelper {
 				}
 			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)) {
 				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
+			}
+		} else if (url.startsWith(SEARCH_QUERY_PREFIX)) {
+			String query = url.substring(SEARCH_QUERY_PREFIX.length());
+			if (!query.isEmpty()) {
+				mapActivity.showQuickSearch(query);
 			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
