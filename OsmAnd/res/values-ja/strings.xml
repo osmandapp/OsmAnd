@@ -3184,11 +3184,19 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="osm_notes">OSMメモ</string>
     <string name="will_open_tomorrow_at">明日開く</string>
     <string name="shared_string_without_name">名無し</string>
-    <string name="release_3_2_pre">• 非ラテン文字を使用したマップを開いた場合にクラッシュしていた問題を修正
+    <string name="release_3_2_pre">• 一部の機種で起動時にクラッシュしていた問題を修正
 \n
-\n• Android 8.0デバイスでのレンダリング速度を改善
+\n• マーカーの新機能:通過済みマーカーの表示
 \n
-\n• ポリゴン(トイレや給水所など公共施設を除く)オブジェクトの編集をサポート
+\n• 検索履歴は以前選択したカテゴリが表示される仕様へ変更
+\n
+\n• 非ラテン文字を使用したマップを開いた場合にクラッシュしていた問題を修正 
+\n 
+\n• Android 8.0デバイスでのレンダリング速度を改善 
+\n 
+\n• ポリゴン(トイレや給水所など公共施設を除く)オブジェクトの編集をサポート 
+\n
+\n• 距離測定:コンテキストメニューに距離測定ボタンを追加
 \n</string>
     <string name="what_is_here">要項:</string>
     <string name="parked_at">駐車した場所</string>
@@ -3237,4 +3245,19 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="open_in_browser_wiki">記事をオンラインで開く</string>
     <string name="open_in_browser_wiki_description">ウェブブラウザで記事を閲覧します。</string>
     <string name="download_wiki_region_placeholder">当該地域</string>
-    </resources>
+    <string name="markers_remove_dialog_msg">マップマーカー「%s」を削除しますか？</string>
+    <string name="edit_map_marker">マップマーカーの編集</string>
+    <string name="third_party_application">サードパーティーアプリ</string>
+    <string name="search_street">道路を検索</string>
+    <string name="start_search_from_city">市街から検索を始める</string>
+    <string name="keep_passed_markers_descr">GPX経由地点のマーカーで通過済みのマーカーをグループとしてお気に入りに追加します。それらグループマーカーはアクティブにはならずマップ上から削除されます。</string>
+    <string name="keep_passed_markers">通過済みマーカーをマップ上に保持</string>
+    <string name="more_transport_on_stop_hint">この乗降場(停留所)では複数の交通機関へ乗り入れが可能です。</string>
+    <string name="ask_for_location_permission">現在地特定のためにOsmAndに『位置情報(現在地、GPS)』のアクセス許可を与えて下さい。</string>
+    <string name="route_stops_before">%1$s前に止まる</string>
+    <string name="rendering_value_black_name">黒</string>
+    <string name="wiki_article_search_text">対応するwiki記事から検索</string>
+    <string name="wiki_article_not_found">記事が見つかりませんでした</string>
+    <string name="how_to_open_wiki_title">どの方法でWikipedia記事を開きますか？</string>
+    <string name="test_voice_desrc">ボタンをタップし対応する音声案内を実際に聞いてみて、欠落しているか間違っている文字列や案内用語を特定します。</string>
+</resources>
