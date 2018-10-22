@@ -647,7 +647,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="unit_of_length">Længdeenheder</string>
     <string name="si_mi_feet">Mil/fod</string>
     <string name="si_mi_yard">Mil/yards</string>
-    <string name="si_km_m">Kilometer og meter</string>
+    <string name="si_km_m">Kilometer/meter</string>
     <string name="yard">yd</string>
     <string name="foot">fod</string>
     <string name="mile_per_hour">mph</string>
@@ -1987,16 +1987,16 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Kør i baggrunden</string>
     <string name="default_speed_system">Hastighed</string>
-    <string name="nm">nmi</string>
+    <string name="nm">sømil</string>
     <string name="si_nm">Sømil</string>
     <string name="si_kmh">Kilometer i timen</string>
     <string name="si_mph">Mil i timen</string>
-    <string name="si_m_s">Meter i sekundet</string>
+    <string name="si_m_s">Meter per sekund</string>
     <string name="si_min_km">Minutter pr. kilometer</string>
     <string name="si_min_m">Minutter pr. mil</string>
     <string name="si_nm_h">Sømil i timen (knob)</string>
     <string name="nm_h">kn</string>
-    <string name="min_mile">minutter/mil</string>
+    <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
 
@@ -2148,7 +2148,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 <string name="route_distance">Afstand:</string>
     <string name="route_duration">Varighed:</string>
     <string name="missing_write_external_storage_permission">OsmAnd mangler tilladelse til at bruge hukommelseskortet</string>
-<string name="no_location_permission">OsmAnd har ikke tilladelse til at bruge lokaliseringsdata.</string>
+<string name="no_location_permission">Har ikke tilladelse til at bruge placeringsdata.</string>
     <string name="no_camera_permission">OsmAnd har ikke tilladelse til at bruge kameraet.</string>
     <string name="no_microphone_permission">OsmAnd har ikke tilladelse til at bruge mikrofonen.</string>
     <string name="impassable_road_desc">Vælg veje, der skal undgås under navigation.</string>
