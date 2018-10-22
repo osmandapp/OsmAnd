@@ -484,6 +484,10 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getGeneratedName(int chars) {
 		if (!filterId.equals(CUSTOM_FILTER_ID) ||
 				areAllTypesAccepted() || acceptedTypes.isEmpty()) {

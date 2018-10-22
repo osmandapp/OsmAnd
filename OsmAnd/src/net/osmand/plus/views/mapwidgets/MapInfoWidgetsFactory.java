@@ -55,7 +55,8 @@ public class MapInfoWidgetsFactory {
 		CONTEXT_MENU,
 		TRACK_DETAILS,
 		DISCOUNT,
-		MEASUREMENT_TOOL
+		MEASUREMENT_TOOL,
+		POI_FILTER
 	}
 
 	public TextInfoWidget createAltitudeControl(final MapActivity map) {

@@ -15,6 +15,10 @@ import android.util.Log;
 import android.view.View;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -23,6 +27,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -33,6 +39,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 public class DiscountHelper {
@@ -43,10 +50,12 @@ public class DiscountHelper {
 	private static long mLastCheckTime;
 	private static ControllerData mData;
 	private static boolean mBannerVisible;
+	private static PoiUIFilter mFilter;
+	private static boolean mFilterVisible;
 	private static final String URL = "https://osmand.net/api/motd";
 	private static final String INAPP_PREFIX = "osmand-in-app:";
 	private static final String SEARCH_QUERY_PREFIX = "osmand-search-query:";
-
+	private static final String SHOW_POI_PREFIX = "osmand-show-poi:";
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -56,6 +65,8 @@ public class DiscountHelper {
 		}
 		if (mBannerVisible) {
 			showDiscountBanner(mapActivity, mData);
+		} else if (mFilterVisible) {
+			showPoiFilter(mapActivity, mFilter);
 		}
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
 				|| !settings.isInternetConnectionAvailable()) {
@@ -216,6 +227,42 @@ public class DiscountHelper {
 		mapActivity.showTopToolbar(toolbarController);
 	}
 
+	private static void showPoiFilter(final MapActivity mapActivity, final PoiUIFilter poiFilter) {
+		final TopToolbarController controller = new PoiFilterBarController();
+		View.OnClickListener listener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				hideToolbar(mapActivity, controller);
+				mapActivity.showQuickSearch(poiFilter);
+			}
+		};
+		controller.setOnBackButtonClickListener(listener);
+		controller.setOnTitleClickListener(listener);
+		controller.setOnCloseButtonClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				hideToolbar(mapActivity, controller);
+			}
+		});
+		controller.setTitle(poiFilter.getName());
+		PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
+		helper.clearSelectedPoiFilters();
+		helper.addSelectedPoiFilter(poiFilter);
+
+		mFilter = poiFilter;
+		mFilterVisible = true;
+
+		mapActivity.showTopToolbar(controller);
+		mapActivity.refreshMap();
+	}
+
+	private static void hideToolbar(MapActivity mapActivity, TopToolbarController controller) {
+		mFilterVisible = false;
+		mapActivity.hideTopToolbar(controller);
+		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
+		mapActivity.refreshMap();
+	}
+
 	private static void openUrl(final MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
 			if (url.contains(InAppPurchaseHelper.SKU_FULL_VERSION_PRICE)) {
@@ -232,6 +279,33 @@ public class DiscountHelper {
 			String query = url.substring(SEARCH_QUERY_PREFIX.length());
 			if (!query.isEmpty()) {
 				mapActivity.showQuickSearch(query);
+			}
+		} else if (url.startsWith(SHOW_POI_PREFIX)) {
+			String names = url.substring(SHOW_POI_PREFIX.length());
+			if (!names.isEmpty()) {
+				OsmandApplication app = mapActivity.getMyApplication();
+				MapPoiTypes poiTypes = app.getPoiTypes();
+				Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
+				for (String name : names.split(",")) {
+					AbstractPoiType abstractType = poiTypes.getAnyPoiTypeByKey(name);
+					if (abstractType instanceof PoiCategory) {
+						acceptedTypes.put((PoiCategory) abstractType, null);
+					} else if (abstractType instanceof PoiType) {
+						PoiType type = (PoiType) abstractType;
+						PoiCategory category = type.getCategory();
+						LinkedHashSet<String> set = acceptedTypes.get(category);
+						if (set == null) {
+							set = new LinkedHashSet<>();
+							acceptedTypes.put(category, set);
+						}
+						set.add(type.getKeyName());
+					}
+				}
+				if (!acceptedTypes.isEmpty()) {
+					PoiUIFilter filter = new PoiUIFilter("", null, acceptedTypes, app);
+					filter.setName(filter.getTypesName());
+					showPoiFilter(mapActivity, filter);
+				}
 			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -275,6 +349,13 @@ public class DiscountHelper {
 				return Color.parseColor(color);
 			}
 			return -1;
+		}
+	}
+
+	private static class PoiFilterBarController extends TopToolbarController {
+
+		public PoiFilterBarController() {
+			super(TopToolbarControllerType.POI_FILTER);
 		}
 	}
 
