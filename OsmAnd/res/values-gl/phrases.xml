@@ -63,9 +63,9 @@
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_border_control">Control fronteirizo</string>
 	<string name="poi_traffic_calming_bump">Lomba</string>
-	<string name="poi_service_tyres">Pneumáticos</string>
+	<string name="poi_service_tyres">Rodas</string>
 	<string name="poi_vehicle_inspection">Inspección técnica de vehículos</string>
-	<string name="poi_car_wash">Lavado de coches</string>
+	<string name="poi_car_wash">Lavadura de automóbiles</string>
 	<string name="poi_fuel">Gasolineira</string>
 	<string name="poi_compressed_air">Ar comprimido</string>
 	<string name="poi_parking">Aparcadoiro</string>
@@ -424,7 +424,7 @@
 	<string name="poi_fashion">Tenda de moda</string>
 	<string name="poi_music">Tenda de música</string>
 	<string name="poi_optician">Optometría</string>
-	<string name="poi_tyres">Tenda de pneumáticos</string>
+	<string name="poi_tyres">Tenda de rodas</string>
 	<string name="poi_watches">Reloxaría</string>
 	<string name="poi_games">Xogos</string>
 	<string name="poi_model">Modelismo</string>
@@ -483,7 +483,7 @@
 	<string name="poi_recycling_plastic_bags">Bolsas de plástico</string>
 	<string name="poi_recycling_mobile_phones">Teléfonos móbiles</string>
 	<string name="poi_recycling_computers">Computadores</string>
-	<string name="poi_recycling_tyres">Pneumáticos</string>
+	<string name="poi_recycling_tyres">Rodas</string>
 	<string name="poi_recycling_tv_monitor">TV, monitores</string>
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_cds">CD</string>
@@ -496,7 +496,7 @@
 	<string name="poi_recycling_furniture">Mobiliario</string>
 	<string name="poi_recycling_diapers">Cueiros</string>
 	<string name="poi_recycling_car_batteries">Baterías dos automóbiles</string>
-	<string name="poi_recycling_cars">Coches</string>
+	<string name="poi_recycling_cars">Automóbiles</string>
 	<string name="poi_recycling_bicycles">Bicicletas</string>
 
 	<string name="poi_landfill_waste_nuclear">Residuos nucleares</string>
