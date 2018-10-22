@@ -82,6 +82,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
+import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
@@ -888,6 +889,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public boolean isInAppPurchaseAllowed() {
 		return true;
+	}
+
+	public void showXMasDialog() {
+		dismissSecondSplashScreen();
+		new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
 	}
 
 	private void dismissSecondSplashScreen() {
