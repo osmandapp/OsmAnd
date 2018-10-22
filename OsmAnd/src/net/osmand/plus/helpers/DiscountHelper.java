@@ -25,7 +25,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
-import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -151,7 +150,7 @@ public class DiscountHelper {
 						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
 						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
 						if (showChristmasDialog) {
-							new XMasDialogFragment().show(mapActivity.getSupportFragmentManager(), XMasDialogFragment.TAG);
+							mapActivity.showXMasDialog();
 						} else {
 							showDiscountBanner(mapActivity, data);
 						}
