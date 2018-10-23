@@ -447,18 +447,18 @@ public class PoiFiltersHelper {
 
 		private SQLiteConnection openConnection(boolean readonly) {
 			conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, readonly);
-			if (conn.getVersion() == 0 || DATABASE_VERSION != conn.getVersion()) {
+			if (conn.getVersion() < DATABASE_VERSION) {
 				if (readonly) {
 					conn.close();
 					conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, false);
 				}
-				if (conn.getVersion() == 0) {
-					conn.setVersion(DATABASE_VERSION);
+				int version = conn.getVersion();
+				conn.setVersion(DATABASE_VERSION);
+				if (version == 0) {
 					onCreate(conn);
 				} else {
-					onUpgrade(conn, conn.getVersion(), DATABASE_VERSION);
+					onUpgrade(conn, version, DATABASE_VERSION);
 				}
-
 			}
 			return conn;
 		}
@@ -477,7 +477,6 @@ public class PoiFiltersHelper {
 				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_HISTORY + " int DEFAULT " + FALSE_INT);
 				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_DELETED + " int DEFAULT " + FALSE_INT);
 			}
-			conn.setVersion(newVersion);
 		}
 
 		private void deleteOldFilters(SQLiteConnection conn) {

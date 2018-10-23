@@ -232,13 +232,12 @@ public class TravelLocalDataHelper {
 
 		private SQLiteConnection openConnection(boolean readonly) {
 			SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
-			int version = conn.getVersion();
-			if (version == 0 || DB_VERSION != version) {
+			if (conn.getVersion() < DB_VERSION) {
 				if (readonly) {
 					conn.close();
 					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 				}
-				version = conn.getVersion();
+				int version = conn.getVersion();
 				conn.setVersion(DB_VERSION);
 				if (version == 0) {
 					onCreate(conn);

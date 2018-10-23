@@ -709,15 +709,16 @@ public class FavouritesDbHelper {
 
 	private SQLiteConnection openConnection(boolean readonly) {
 		conn = context.getSQLiteAPI().getOrCreateDatabase(FAVOURITE_DB_NAME, readonly);
-		if (conn.getVersion() == 0 || DATABASE_VERSION != conn.getVersion()) {
+		if (conn.getVersion() < DATABASE_VERSION) {
 			if (readonly) {
 				conn.close();
 				conn = context.getSQLiteAPI().getOrCreateDatabase(FAVOURITE_DB_NAME, false);
 			}
-			if (conn.getVersion() == 0) {
+			int version = conn.getVersion();
+			if (version == 0) {
 				onCreate(conn);
 			} else {
-				onUpgrade(conn, conn.getVersion(), DATABASE_VERSION);
+				onUpgrade(conn, version, DATABASE_VERSION);
 			}
 			conn.setVersion(DATABASE_VERSION);
 		}
