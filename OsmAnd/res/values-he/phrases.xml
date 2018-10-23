@@ -2263,4 +2263,11 @@
 
 	<string name="poi_hill">גבעה</string>
 
-</resources>
+<string name="poi_valley_balka">נחל אכזב</string>
+
+	<string name="poi_pump_style_historic">מצב המשאבה: היסטורית</string>
+	<string name="poi_pump_status_ok">מצב המשאבה: תקינה</string>
+	<string name="poi_pump_status_broken">מצב המשאבה: פגומה</string>
+	<string name="poi_pump_status_locked">מצב המשאבה: נעולה</string>
+
+	</resources>
