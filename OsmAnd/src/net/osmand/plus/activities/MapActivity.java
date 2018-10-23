@@ -892,6 +892,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showXMasDialog() {
+		SecondSplashScreenFragment.SHOW = false;
 		dismissSecondSplashScreen();
 		new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
 	}
