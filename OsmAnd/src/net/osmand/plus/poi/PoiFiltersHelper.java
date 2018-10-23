@@ -481,12 +481,18 @@ public class PoiFiltersHelper {
 			if (oldVersion < 6) {
 				try {
 					conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_HISTORY + " int DEFAULT " + FALSE_INT);
+				} catch (SQLiteException ex) {
+					LOG.warn("Altering " + FILTER_NAME + ": " + ex.getMessage());
+				}
+				try {
 					conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_DELETED + " int DEFAULT " + FALSE_INT);
 				} catch (SQLiteException ex) {
 					LOG.warn("Altering " + FILTER_NAME + ": " + ex.getMessage());
 				}
 			}
-			conn.setVersion(newVersion);
+			if (newVersion > oldVersion) {
+				conn.setVersion(newVersion);
+			}
 		}
 
 		private void deleteOldFilters(SQLiteConnection conn) {
