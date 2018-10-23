@@ -219,10 +219,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 					if (statusType == SharingStatusType.INITIALIZING
 						&& newSharingStatus.statusType == SharingStatusType.INITIALIZING
-						&& !lastSharingStatus.description.contains(newSharingStatus.description)
-					) {
-						lastSharingStatus.description =
-								"${lastSharingStatus.description}, ${newSharingStatus.description}"
+						&& !lastSharingStatus.description.contains(newSharingStatus.description)) {
+						lastSharingStatus.description = "${lastSharingStatus.description}, ${newSharingStatus.description}"
 					}
 				}
 			}
@@ -284,21 +282,17 @@ class TelegramSettings(private val app: TelegramApplication) {
 					}
 				}
 			} else {
-				when {
-					!gpsEnabled -> {
-						title = app.getString(R.string.initializing)
+				if (gpsEnabled && app.isInternetConnectionAvailable) {
+					title = app.getString(R.string.sending_location_messages)
+					description = app.getString(R.string.waiting_for_response_from_telegram)
+					statusType = SharingStatusType.SENDING
+				} else {
+					title = app.getString(R.string.initializing)
+					statusType = SharingStatusType.INITIALIZING
+					if (!gpsEnabled) {
 						description = app.getString(R.string.searching_for_gps)
-						statusType = SharingStatusType.INITIALIZING
-					}
-					!app.isInternetConnectionAvailable -> {
-						title = app.getString(R.string.initializing)
+					} else if (!app.isInternetConnectionAvailable) {
 						description = app.getString(R.string.connecting_to_the_internet)
-						statusType = SharingStatusType.INITIALIZING
-					}
-					else -> {
-						title = app.getString(R.string.sending_location_messages)
-						description = app.getString(R.string.waiting_for_response_from_telegram)
-						statusType = SharingStatusType.SENDING
 					}
 				}
 			}

@@ -4,7 +4,7 @@
 	<string name="not_possible_to_send_to_telegram_chats">Not possible to send to Telegram chats:</string>
 	<string name="waiting_for_response_from_telegram">Waiting for response from Telegram</string>
 	<string name="sending_location_messages">Sending location messages</string>
-	<string name="initializing">Initializing&#8230;</string>
+	<string name="initializing">Initializing</string>
 	<string name="searching_for_gps">Searching for GPS</string>
 	<string name="connecting_to_the_internet">Connecting to the internet</string>
 	<string name="background_work_description">Change battery optimization settings, for stable location sharing</string>
