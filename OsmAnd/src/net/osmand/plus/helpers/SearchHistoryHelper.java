@@ -316,15 +316,16 @@ public class SearchHistoryHelper {
 
 		private SQLiteConnection openConnection(boolean readonly) {
 			SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
-			if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
+			if (conn.getVersion() < DB_VERSION) {
 				if (readonly) {
 					conn.close();
 					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 				}
-				if (conn.getVersion() == 0) {
+				int version = conn.getVersion();
+				if (version == 0) {
 					onCreate(conn);
 				} else {
-					onUpgrade(conn, conn.getVersion(), DB_VERSION);
+					onUpgrade(conn, version, DB_VERSION);
 				}
 				conn.setVersion(DB_VERSION);
 			}
