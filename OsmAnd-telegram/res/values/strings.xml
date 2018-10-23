@@ -1,4 +1,12 @@
 <resources>
+	<string name="last_updated_location">Last updated location:</string>
+	<string name="successfully_sent_and_updated">Successfully sent and updated</string>
+	<string name="not_possible_to_send_to_telegram_chats">Not possible to send to Telegram chats:</string>
+	<string name="waiting_for_response_from_telegram">Waiting for response from Telegram</string>
+	<string name="sending_location_messages">Sending location messages</string>
+	<string name="initializing">Initializing&#8230;</string>
+	<string name="searching_for_gps">Searching for GPS</string>
+	<string name="connecting_to_the_internet">Connecting to the internet</string>
 	<string name="background_work_description">Change battery optimization settings, for stable location sharing</string>
 	<string name="background_work">Background work</string>
 	<string name="battery_optimization_description">For stable sharing of your position in the background, it is advisable to disable battery optimization for OsmAnd Telegram.\n\nIf optimization is enabled, the system may automatically turn off the application running in the background (when the screen is locked and/or the app is minimized). This happens without notification and causes the geo position broadcast to stop.</string>
