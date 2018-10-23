@@ -1,6 +1,7 @@
 package net.osmand.telegram
 
 import android.content.Context
+import android.location.LocationManager
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
@@ -68,6 +69,8 @@ private const val LIVE_NOW_SORT_TYPE_KEY = "live_now_sort_type"
 private const val SHARE_CHATS_INFO_KEY = "share_chats_info"
 
 private const val BATTERY_OPTIMISATION_ASKED = "battery_optimisation_asked"
+
+private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
 
 class TelegramSettings(private val app: TelegramApplication) {
 
@@ -202,34 +205,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun updateSharingStatusHistory() {
-		val newSharingStatus = SharingStatus().apply {
-			statusChangeTime = System.currentTimeMillis()
-			statusType = if (!app.isInternetConnectionAvailable) {
-				locationTime = getLastSuccessfulSendTime()
-				SharingStatusType.NO_INTERNET
-			} else if (app.shareLocationHelper.lastLocation == null) {
-				locationTime = app.shareLocationHelper.lastLocationMessageSentTime
-				SharingStatusType.NO_GPS
-			} else {
-				var sendChatsErrors = false
-				shareChatsInfo.forEach { (_, shareInfo) ->
-					if (shareInfo.hasSharingError || shareInfo.lastSuccessfulSendTimeMs == -1L) {
-						sendChatsErrors = true
-						locationTime = shareInfo.lastSuccessfulSendTimeMs
-						val title = app.telegramHelper.getChat(shareInfo.chatId)?.title
-						if (title != null) {
-							chatsTitles.add(title)
-						}
-					}
-				}
-				if (sendChatsErrors) {
-					SharingStatusType.NOT_POSSIBLE_TO_SENT_TO_CHATS
-				} else {
-					locationTime = getLastSuccessfulSendTime()
-					SharingStatusType.SUCCESSFULLY_SENT
-				}
-			}
-		}
+		val newSharingStatus = getNewSharingStatusHistoryItem()
 
 		if (sharingStatusChanges.isNotEmpty()) {
 			val lastSharingStatus = sharingStatusChanges.last()
@@ -240,10 +216,86 @@ class TelegramSettings(private val app: TelegramApplication) {
 					statusChangeTime = newSharingStatus.statusChangeTime
 					locationTime = newSharingStatus.locationTime
 					chatsTitles = newSharingStatus.chatsTitles
+
+					if (statusType == SharingStatusType.INITIALIZING
+						&& newSharingStatus.statusType == SharingStatusType.INITIALIZING
+						&& !lastSharingStatus.description.contains(newSharingStatus.description)) {
+						lastSharingStatus.description = "${lastSharingStatus.description}, ${newSharingStatus.description}"
+					}
 				}
 			}
 		} else {
 			sharingStatusChanges.add(newSharingStatus)
+		}
+	}
+
+	private fun getNewSharingStatusHistoryItem(): SharingStatus {
+		return SharingStatus().apply {
+			statusChangeTime = System.currentTimeMillis()
+			val lm = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+			val gpsEnabled = try {
+				lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+			} catch (ex: Exception) {
+				false
+			}
+
+			var initializing = false
+			var sendChatsErrors = false
+
+			shareChatsInfo.forEach { (_, shareInfo) ->
+				if (shareInfo.lastSuccessfulSendTimeMs == -1L && ((statusChangeTime / 1000 - shareInfo.start) < SHARING_INITIALIZATION_TIME)) {
+					initializing = true
+				}
+				if (shareInfo.hasSharingError) {
+					sendChatsErrors = true
+					locationTime = shareInfo.lastSuccessfulSendTimeMs
+					val title = app.telegramHelper.getChat(shareInfo.chatId)?.title
+					if (title != null) {
+						chatsTitles.add(title)
+					}
+				}
+			}
+
+			if (sendChatsErrors) {
+				title = app.getString(R.string.not_possible_to_send_to_telegram_chats)
+				description = app.getString(R.string.last_updated_location)
+				statusType = SharingStatusType.NOT_POSSIBLE_TO_SENT_TO_CHATS
+			} else if (!initializing) {
+				when {
+					!gpsEnabled -> {
+						locationTime = app.shareLocationHelper.lastLocationMessageSentTime
+						title = app.getString(R.string.no_gps_connection)
+						description = app.getString(R.string.last_updated_location)
+						statusType = SharingStatusType.NO_GPS
+					}
+					!app.isInternetConnectionAvailable -> {
+						locationTime = getLastSuccessfulSendTime()
+						title = app.getString(R.string.no_internet_connection)
+						description = app.getString(R.string.last_updated_location)
+						statusType = SharingStatusType.NO_INTERNET
+					}
+					else -> {
+						locationTime = getLastSuccessfulSendTime()
+						title = app.getString(R.string.successfully_sent_and_updated)
+						description = app.getString(R.string.last_updated_location)
+						statusType = SharingStatusType.SUCCESSFULLY_SENT
+					}
+				}
+			} else {
+				if (gpsEnabled && app.isInternetConnectionAvailable) {
+					title = app.getString(R.string.sending_location_messages)
+					description = app.getString(R.string.waiting_for_response_from_telegram)
+					statusType = SharingStatusType.SENDING
+				} else {
+					title = app.getString(R.string.initializing)
+					statusType = SharingStatusType.INITIALIZING
+					if (!gpsEnabled) {
+						description = app.getString(R.string.searching_for_gps)
+					} else if (!app.isInternetConnectionAvailable) {
+						description = app.getString(R.string.connecting_to_the_internet)
+					}
+				}
+			}
 		}
 	}
 
@@ -508,36 +560,36 @@ class TelegramSettings(private val app: TelegramApplication) {
 	enum class SharingStatusType(
 		@DrawableRes val iconId: Int,
 		@ColorRes val iconColorRes: Int,
-		@StringRes val titleId: Int,
-		@StringRes val descriptionId: Int,
 		val canResendLocation: Boolean
 	) {
 		NO_INTERNET(
 			R.drawable.ic_action_wifi_off,
 			R.color.sharing_status_icon_error,
-			R.string.no_internet_connection,
-			R.string.last_sent_location,
 			true
 		),
 		SUCCESSFULLY_SENT(
 			R.drawable.ic_action_share_location,
 			R.color.sharing_status_icon_success,
-			R.string.sharing_success,
-			R.string.last_sent_location,
+			false
+		),
+		SENDING(
+			R.drawable.ic_action_share_location,
+			R.color.sharing_status_icon_success,
 			false
 		),
 		NOT_POSSIBLE_TO_SENT_TO_CHATS(
 			R.drawable.ic_action_message_send_error,
 			R.color.sharing_status_icon_error,
-			R.string.not_possible_to_send_to_chats,
-			R.string.last_sent_location,
 			true
 		),
 		NO_GPS(
 			R.drawable.ic_action_location_off,
 			R.color.sharing_status_icon_error,
-			R.string.no_gps_connection,
-			R.string.last_available_location,
+			false
+		),
+		INITIALIZING(
+			R.drawable.ic_action_connect,
+			R.color.sharing_status_icon_error,
 			false
 		);
 	}
@@ -552,16 +604,20 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	class SharingStatus {
+
+		var title: String = ""
+		var description: String = ""
 		var locationTime: Long = -1
 		var statusChangeTime: Long = -1
 		var chatsTitles: MutableList<String> = mutableListOf()
+
 		lateinit var statusType: SharingStatusType
 
-		fun getDescription(app: TelegramApplication): CharSequence {
+		fun getTitle(app: TelegramApplication): CharSequence {
 			return if (statusType != SharingStatusType.NOT_POSSIBLE_TO_SENT_TO_CHATS || chatsTitles.isEmpty()) {
-				app.getString(statusType.titleId)
+				title
 			} else {
-				val spannableString = SpannableStringBuilder(app.getString(statusType.titleId))
+				val spannableString = SpannableStringBuilder(title)
 				val iterator = chatsTitles.iterator()
 				while (iterator.hasNext()) {
 					val chatTitle = iterator.next()

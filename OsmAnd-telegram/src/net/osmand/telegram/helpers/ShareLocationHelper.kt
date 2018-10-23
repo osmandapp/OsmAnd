@@ -64,7 +64,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	fun updateSendLiveMessages() {
 		log.info("updateSendLiveMessages")
 		if (app.settings.hasAnyChatToShareLocation()) {
-			app.settings.getChatsShareInfo().forEach { chatId, shareInfo ->
+			app.settings.getChatsShareInfo().forEach { (chatId, shareInfo) ->
 				val currentTime = System.currentTimeMillis() / 1000
 				when {
 					shareInfo.getChatLiveMessageExpireTime() <= 0 -> app.settings.shareLocationToChat(chatId, false)

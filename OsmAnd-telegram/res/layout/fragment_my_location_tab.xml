@@ -277,7 +277,7 @@
 							app:typeface="@string/font_roboto_regular" />
 
 						<net.osmand.telegram.ui.views.TextViewEx
-							android:id="@+id/sharing_status_description"
+							android:id="@+id/sharing_status_title"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:ellipsize="end"

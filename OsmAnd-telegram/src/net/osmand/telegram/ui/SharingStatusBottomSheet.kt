@@ -51,17 +51,23 @@ class SharingStatusBottomSheet : DialogFragment() {
 				val time = sharingStatus.locationTime
 
 				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getIcon(sharingStatusType.iconId, sharingStatusType.iconColorRes))
-				findViewById<TextView>(R.id.title).text = sharingStatus.getDescription(app)
+				findViewById<TextView>(R.id.title).text = sharingStatus.getTitle(app)
 				findViewById<TextView>(R.id.status_change_time).text = OsmandFormatter.getFormattedTime(sharingStatus.statusChangeTime, false)
-				findViewById<TextView>(R.id.last_location_line).text = getString(sharingStatusType.descriptionId)
+				findViewById<TextView>(R.id.last_location_line).text = sharingStatus.description
 
-				val descriptionTime = when {
-					time > 0 -> OsmandFormatter.getFormattedTime(time, false)
-					sharingStatusType == TelegramSettings.SharingStatusType.NO_GPS -> getString(R.string.not_found_yet)
-					else -> getString(R.string.not_sent_yet)
+				if (sharingStatusType != TelegramSettings.SharingStatusType.INITIALIZING
+					&& sharingStatusType != TelegramSettings.SharingStatusType.SENDING) {
+					val descriptionTime = when {
+						time > 0 -> OsmandFormatter.getFormattedTime(time, false)
+						sharingStatusType == TelegramSettings.SharingStatusType.NO_GPS -> getString(
+							R.string.not_found_yet
+						)
+						else -> getString(R.string.not_sent_yet)
+					}
+					findViewById<TextView>(R.id.last_location_line_time).text = descriptionTime
+				} else {
+					findViewById<TextView>(R.id.last_location_line_time).visibility = View.GONE
 				}
-
-				findViewById<TextView>(R.id.last_location_line_time).text = descriptionTime
 
 				findViewById<TextView>(R.id.re_send_location).apply {
 					if (sharingStatusType.canResendLocation) {

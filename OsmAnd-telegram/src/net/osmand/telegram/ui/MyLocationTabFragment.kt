@@ -59,7 +59,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private lateinit var description: TextView
 	private lateinit var searchBox: FrameLayout
 	private lateinit var stopSharingSwitcher: Switch
-	private lateinit var sharingStatusDescription: TextView
+	private lateinit var sharingStatusTitle: TextView
 	private lateinit var sharingStatusIcon: ImageView
 	private lateinit var startSharingBtn: View
 
@@ -205,7 +205,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		stopSharingSwitcher = mainView.findViewById(R.id.stop_all_sharing_switcher)
 
-		sharingStatusDescription = mainView.findViewById(R.id.sharing_status_description)
+		sharingStatusTitle = mainView.findViewById(R.id.sharing_status_title)
 
 		startSharingBtn = mainView.findViewById<View>(R.id.start_sharing_btn).apply {
 			visibility = if (sharingMode) View.VISIBLE else View.GONE
@@ -443,9 +443,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private fun updateSharingStatus() {
 		if (sharingMode) {
-			settings.updateSharingStatusHistory()
+			if (settings.sharingStatusChanges.isEmpty()) {
+				settings.updateSharingStatusHistory()
+			}
 			val sharingStatus = settings.sharingStatusChanges.last()
-			sharingStatusDescription.text = sharingStatus.getDescription(app)
+			sharingStatusTitle.text = sharingStatus.getTitle(app)
 			sharingStatusIcon.setImageDrawable(app.uiUtils.getIcon(sharingStatus.statusType.iconId, sharingStatus.statusType.iconColorRes))
 		}
 	}
