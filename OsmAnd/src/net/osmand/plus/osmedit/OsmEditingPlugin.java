@@ -198,7 +198,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				} else if (resId == R.string.context_menu_item_modify_note) {
 					modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					if (selectedObj instanceof TransportStop) {
+					if (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null) {
 						EditPoiDialogFragment.showEditInstance(((TransportStop) selectedObj).getAmenity(), mapActivity);
 					} else if (selectedObj instanceof MapObject) {
 						EditPoiDialogFragment.showEditInstance((MapObject) selectedObj, mapActivity);
