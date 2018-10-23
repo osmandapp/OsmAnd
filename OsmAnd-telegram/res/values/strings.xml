@@ -132,7 +132,7 @@
 	<string name="shared_string_stop">Stop</string>
 	<string name="process_service">OsmAnd Telegram service</string>
 	<string name="osmand_logo">OsmAnd logo</string>
-	<string name="install_osmand_dialog_message">You need to install the gratis or paid version of OsmAnd first</string>
+	<string name="install_osmand_dialog_message">You need to install the free or paid version of OsmAnd first</string>
 	<string name="install_osmand">Install OsmAnd</string>
 	<string name="show_users_on_map">Show users on the map</string>
 	<string name="active_chats">Active chats</string>
