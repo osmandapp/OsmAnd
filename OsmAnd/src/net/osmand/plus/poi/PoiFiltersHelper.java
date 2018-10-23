@@ -1,7 +1,9 @@
 package net.osmand.plus.poi;
 
+import android.database.sqlite.SQLiteException;
 import android.support.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -12,6 +14,8 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +53,8 @@ public class PoiFiltersHelper {
 	private static final String UDF_ACCOMMODATION = "accommodation";
 	private static final String UDF_RESTAURANTS = "restaurants";
 	private static final String UDF_PARKING = "parking";
+	
+	private static final Log LOG = PlatformUtil.getLog(PoiFiltersHelper.class);
 
 	private static final String[] DEL = new String[]{
 			UDF_CAR_AID, UDF_FOR_TOURISTS, UDF_FOOD_SHOP, UDF_FUEL, UDF_SIGHTSEEING, UDF_EMERGENCY,
@@ -473,8 +479,12 @@ public class PoiFiltersHelper {
 				deleteOldFilters(conn);
 			}
 			if (oldVersion < 6) {
-				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_HISTORY + " int DEFAULT " + FALSE_INT);
-				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_DELETED + " int DEFAULT " + FALSE_INT);
+				try {
+					conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_HISTORY + " int DEFAULT " + FALSE_INT);
+					conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_DELETED + " int DEFAULT " + FALSE_INT);
+				} catch (SQLiteException ex) {
+					LOG.warn("Altering " + FILTER_NAME + ": " + ex.getMessage());
+				}
 			}
 			conn.setVersion(newVersion);
 		}
