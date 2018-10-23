@@ -26,8 +26,8 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -227,39 +227,14 @@ public class DiscountHelper {
 	}
 
 	private static void showPoiFilter(final MapActivity mapActivity, final PoiUIFilter poiFilter) {
-		final TopToolbarController controller = new PoiFilterBarController();
-		View.OnClickListener listener = new View.OnClickListener() {
+		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, new Runnable() {
 			@Override
-			public void onClick(View v) {
-				hideToolbar(mapActivity, controller);
-				mapActivity.showQuickSearch(poiFilter);
-			}
-		};
-		controller.setOnBackButtonClickListener(listener);
-		controller.setOnTitleClickListener(listener);
-		controller.setOnCloseButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				hideToolbar(mapActivity, controller);
+			public void run() {
+				mFilterVisible = false;
 			}
 		});
-		controller.setTitle(poiFilter.getName());
-		PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
-		helper.clearSelectedPoiFilters();
-		helper.addSelectedPoiFilter(poiFilter);
-
 		mFilter = poiFilter;
 		mFilterVisible = true;
-
-		mapActivity.showTopToolbar(controller);
-		mapActivity.refreshMap();
-	}
-
-	private static void hideToolbar(MapActivity mapActivity, TopToolbarController controller) {
-		mFilterVisible = false;
-		mapActivity.hideTopToolbar(controller);
-		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
-		mapActivity.refreshMap();
 	}
 
 	private static void openUrl(final MapActivity mapActivity, String url) {
@@ -348,13 +323,6 @@ public class DiscountHelper {
 				return Color.parseColor(color);
 			}
 			return -1;
-		}
-	}
-
-	private static class PoiFilterBarController extends TopToolbarController {
-
-		public PoiFilterBarController() {
-			super(TopToolbarControllerType.POI_FILTER);
 		}
 	}
 

@@ -1,6 +1,8 @@
 package net.osmand.plus.search;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -19,12 +21,15 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
@@ -467,5 +472,50 @@ public class QuickSearchHelper implements ResourceListener {
 	@Override
 	public void onMapsIndexed() {
 		mapsIndexed = true;
+	}
+
+	public static void showPoiFilterOnMap(@NonNull final MapActivity mapActivity,
+										  @NonNull final PoiUIFilter filter,
+										  @Nullable final Runnable action) {
+		final TopToolbarController controller = new PoiFilterBarController();
+		View.OnClickListener listener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				hidePoiFilterOnMap(mapActivity, controller, action);
+				mapActivity.showQuickSearch(filter);
+			}
+		};
+		controller.setOnBackButtonClickListener(listener);
+		controller.setOnTitleClickListener(listener);
+		controller.setOnCloseButtonClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				hidePoiFilterOnMap(mapActivity, controller, action);
+			}
+		});
+		controller.setTitle(filter.getName());
+		PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
+		helper.clearSelectedPoiFilters();
+		helper.addSelectedPoiFilter(filter);
+		mapActivity.showTopToolbar(controller);
+		mapActivity.refreshMap();
+	}
+
+	private static void hidePoiFilterOnMap(@NonNull MapActivity mapActivity,
+										   @NonNull TopToolbarController controller,
+										   @Nullable Runnable action) {
+		mapActivity.hideTopToolbar(controller);
+		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
+		mapActivity.refreshMap();
+		if (action != null) {
+			action.run();
+		}
+	}
+
+	private static class PoiFilterBarController extends TopToolbarController {
+
+		PoiFilterBarController() {
+			super(TopToolbarControllerType.POI_FILTER);
+		}
 	}
 }
