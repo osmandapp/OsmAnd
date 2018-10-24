@@ -198,6 +198,7 @@ public class DiscountHelper {
 		toolbarController.setDescrTextClrs(data.descrColor, data.descrColor);
 		toolbarController.setBackBtnIconIds(iconId, iconId);
 		toolbarController.setBackBtnIconClrs(data.iconColor, data.iconColor);
+		toolbarController.setStatusBarColor(data.statusBarColor);
 		if (!Algorithms.isEmpty(data.url)) {
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
@@ -303,6 +304,8 @@ public class DiscountHelper {
 		int titleColor = -1;
 		@ColorInt
 		int descrColor = -1;
+		@ColorInt
+		int statusBarColor = -1;
 
 		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
 			ControllerData res = new ControllerData();
@@ -314,6 +317,7 @@ public class DiscountHelper {
 			res.bgColor = parseColor("bg_color", obj);
 			res.titleColor = parseColor("title_color", obj);
 			res.descrColor = parseColor("description_color", obj);
+			res.statusBarColor = parseColor("status_bar_color", obj);
 			return res;
 		}
 
@@ -326,7 +330,9 @@ public class DiscountHelper {
 		}
 	}
 
-	private static class DiscountBarController extends TopToolbarController {
+	public static class DiscountBarController extends TopToolbarController {
+
+		private int statusBarColor;
 
 		DiscountBarController() {
 			super(TopToolbarControllerType.DISCOUNT);
@@ -337,6 +343,14 @@ public class DiscountHelper {
 			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
 			setBgIds(R.color.discount_bar_bg, R.color.discount_bar_bg,
 					R.drawable.discount_bar_bg_land, R.drawable.discount_bar_bg_land);
+		}
+
+		public int getStatusBarColor() {
+			return statusBarColor;
+		}
+
+		public void setStatusBarColor(int statusBarColor) {
+			this.statusBarColor = statusBarColor;
 		}
 	}
 
