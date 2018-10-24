@@ -28,7 +28,7 @@
 	<string name="by_group">Nach Gruppe</string>
 	<string name="shared_string_sort">Sortieren</string>
 	<string name="shared_string_sort_by">Sortieren nach</string>
-	<string name="choose_osmand_desc">Wählen Sie die OsmAnd-Version, in der die Kontakte auf der Karte angezeigt werden.</string>
+	<string name="choose_osmand_desc">Wählen Sie die OsmAnd-Version, in der Kontakte auf der Karte angezeigt werden.</string>
 	<string name="choose_osmand">Zu verwendende OsmAnd-Version auswählen</string>
 	<string name="turn_off_all">Alle ausschalten</string>
 	<string name="shared_string_exit">Beenden</string>
@@ -78,7 +78,7 @@
 	<string name="authentication_code_descr">Telegram hat Ihnen einen Code für OsmAnd zur Anmeldung an Ihrem Konto gesendet.</string>
 	<string name="enter_password">Passwort eingeben</string>
 	<string name="shared_string_login">Anmelden</string>
-	<string name="shared_string_logout">Abmeldung</string>
+	<string name="shared_string_logout">Abmelden</string>
 	<string name="not_logged_in">Sie sind nicht angemeldet</string>
 	<string name="initialization">Initialisierung</string>
 	<string name="logging_out">Abmeldung</string>
