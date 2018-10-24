@@ -149,4 +149,29 @@
 	<string name="live_now">Sender nå</string>
 
 
-</resources>
+<string name="last_updated_location">Sist oppdaterte plassering:</string>
+	<string name="successfully_sent_and_updated">Sendt og oppdatert</string>
+	<string name="not_possible_to_send_to_telegram_chats">Kan ikke sende til Telegram-sludringer:</string>
+	<string name="waiting_for_response_from_telegram">Venter på svar fra Telegram</string>
+	<string name="sending_location_messages">Sender plasseringsmeldinger</string>
+	<string name="initializing">Starter</string>
+	<string name="searching_for_gps">Søker etter GPS</string>
+	<string name="connecting_to_the_internet">Kobler til Internett</string>
+	<string name="yard">yd</string>
+	<string name="foot">fot</string>
+	<string name="mile">mil</string>
+	<string name="nm">nmi</string>
+	<string name="min_mile">min/m</string>
+	<string name="min_km">min/km</string>
+	<string name="nm_h">nmi/t</string>
+	<string name="m_s">m/s</string>
+	<string name="km_h">km/t</string>
+	<string name="mile_per_hour">mph</string>
+	<string name="si_mph">Engelske mil i timen</string>
+	<string name="si_min_m">Minutter per engelske mil</string>
+	<string name="si_mi_feet">Engelske mil/fot</string>
+	<string name="si_mi_yard">Engelske mil/yard</string>
+	<string name="si_km_m">Kilometer/meter</string>
+	<string name="si_nm">Nautiske mil</string>
+	<string name="si_mi_meters">Engelske mil/meter</string>
+	</resources>

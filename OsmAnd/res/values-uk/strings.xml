@@ -1213,7 +1213,7 @@
     <string name="clear_intermediate_points">Очистити проміжні точки</string>
     <string name="new_directions_point_dialog">Ви вже задали проміжні точки.</string>
     <string name="context_menu_item_directions_to">Маршрут до</string>
-    <string name="context_menu_item_directions_from">Маршрут від</string>
+    <string name="context_menu_item_directions_from">Напрямки від</string>
     <string name="route_to">До:</string>
     
     <string name="speak_title">Оголошувати…</string>
@@ -1239,7 +1239,7 @@
 	
 	<string name="map_widget_fps_info">FPS-інфо</string>
 <string name="about_version">Версія:</string>
-    <string name="shared_string_about">Про</string>
+    <string name="shared_string_about">Про додаток</string>
     <string name="about_settings_descr">Версія, ліцензії, учасники проекту</string>
     
     
@@ -2299,7 +2299,7 @@
     <string name="upload_osm_note_description">Надішліть вашу OSM-нотатку анонімно, або скориставшись обліковим записом на OpenStreetMap.org.</string>
     <string name="upload_osm_note">Надіслати нотатку в OSM</string>
     <string name="file_name_containes_illegal_char">Назва файлу містить неприпустимі символи</string>
-<string name="follow_us">Слідуйте за нами</string>
+<string name="follow_us">Слідкуйте за нами</string>
     <string name="access_direction_audio_feedback">Звукова ідентифікація напрямку</string>
     <string name="access_direction_audio_feedback_descr">Ініціювати звуком напрям на цільову точку.</string>
     <string name="access_direction_haptic_feedback">Тактильна індикація напрямку</string>
@@ -2988,7 +2988,7 @@
     <string name="additional_actions">Додаткові дії</string>
     <string name="av_locations_selected_desc">Файл GPX з координатами та даними вибраних нотаток.</string>
     <string name="av_locations_all_desc">Файл GPX з координатами та даними всіх нотаток.</string>
-    <string name="shared_string_actions">Дія</string>
+    <string name="shared_string_actions">Дії</string>
     <string name="shared_string_marker">Маркер</string>
     <string name="osm_recipient_stat">Редагувань %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-одержувачі</string>
