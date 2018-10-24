@@ -1886,7 +1886,7 @@ Lon %2$s</string>
 	<string name="building_number">Hausnummer</string>
 	<string name="opening_at">geöffnet ab</string>
 	<string name="closing_at">geschlossen ab</string>
-<string name="si_nm">Nautische Meilen</string>
+<string name="si_nm">Seemeilen</string>
     <string name="si_kmh">Kilometer pro Stunde</string>
     <string name="si_mph">Meilen pro Stunde</string>
     <string name="si_m_s">Meter pro Sekunde</string>
@@ -1936,7 +1936,7 @@ Lon %2$s</string>
     <string name="favorite_category_select">Kategorie auswählen</string>
     <string name="default_speed_system_descr">Geschwindigkeitseinheit festlegen.</string>
     <string name="default_speed_system">Geschwindigkeitseinheit</string>
-    <string name="nm">sm</string>
+    <string name="nm">kn</string>
     <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
