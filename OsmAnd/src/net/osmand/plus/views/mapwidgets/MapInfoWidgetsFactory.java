@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -316,6 +317,11 @@ public class MapInfoWidgetsFactory {
 
 		public TopToolbarControllerType getType() {
 			return type;
+		}
+
+		@ColorInt
+		public int getStatusBarColor(Context context, boolean night) {
+			return ContextCompat.getColor(context, night ? R.color.status_bar_route_dark : R.color.status_bar_route_light);
 		}
 
 		public void setTitle(String title) {

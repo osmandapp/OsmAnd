@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.content.Context;
 import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -24,14 +25,14 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -629,6 +630,11 @@ public class TrackDetailsMenu {
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
 			view.getShadowView().setVisibility(View.GONE);
+		}
+
+		@Override
+		public int getStatusBarColor(Context context, boolean night) {
+			return -1;
 		}
 	}
 

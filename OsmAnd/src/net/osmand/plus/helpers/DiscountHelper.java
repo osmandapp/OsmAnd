@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -332,7 +333,7 @@ public class DiscountHelper {
 
 	public static class DiscountBarController extends TopToolbarController {
 
-		private int statusBarColor;
+		private int statusBarColor = -1;
 
 		DiscountBarController() {
 			super(TopToolbarControllerType.DISCOUNT);
@@ -345,11 +346,12 @@ public class DiscountHelper {
 					R.drawable.discount_bar_bg_land, R.drawable.discount_bar_bg_land);
 		}
 
-		public int getStatusBarColor() {
+		@Override
+		public int getStatusBarColor(Context context, boolean night) {
 			return statusBarColor;
 		}
 
-		public void setStatusBarColor(int statusBarColor) {
+		void setStatusBarColor(int statusBarColor) {
 			this.statusBarColor = statusBarColor;
 		}
 	}
