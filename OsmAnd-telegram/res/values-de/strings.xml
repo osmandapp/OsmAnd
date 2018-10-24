@@ -59,13 +59,13 @@
 	<string name="do_not_have_telegram">Ich habe keine Telegram-Konto</string>
 	<string name="enter_phone_number">Telefonnummer eingeben</string>
 	<string name="enter_authentication_code">Authentifizierungscode eingeben</string>
-	<string name="hours_and_minutes_format">%1$d S %2$d M</string>
-	<string name="minutes_format">%1$d M</string>
-	<string name="hours_format">%1$d S</string>
+	<string name="hours_and_minutes_format">%1$d h %2$d min</string>
+	<string name="minutes_format">%1$d min</string>
+	<string name="hours_format">%1$d h</string>
 	<string name="shared_string_install">Installieren</string>
 	<string name="shared_string_share">Teilen</string>
 	<string name="shared_string_back">Zurück</string>
-	<string name="visible_time_for_all">Sichtbare Zeit für alle</string>
+	<string name="visible_time_for_all">Für alle sichtbare Zeit</string>
 	<string name="set_time">Zeit einstellen</string>
 	<string name="my_location_search_hint">Suche: Gruppe oder Kontakt</string>
 	<string name="show_on_map">Auf Karte anzeigen</string>
@@ -163,8 +163,10 @@
 	<string name="sharing_time">Freigabezeit</string>
 	<string name="expire_at">Verfällt um</string>
 	<string name="stop_sharing_all">Freigabe ist aktiviert (deaktivieren)</string>
-	<string name="turn_off_location_sharing">Deaktivieren der Standortfreigabe</string>
+	<string name="turn_off_location_sharing">Standortfreigabe ausschalten</string>
 	<string name="shared_string_bot">Bot</string>
-	<string name="set_visible_time_for_all">Setzt die sichtbare Zeit für alle</string>
+	<string name="set_visible_time_for_all">Für alle sichtbare Zeit einstellen</string>
 	<string name="set_time_description">Zeit einstellen, die Ihren Kontakten und Gruppen als Echtzeit Ihres Standorts angezeigt wird.</string>
+	<string name="location_sharing_description">Kontakte und Gruppen wählen, für die Sie Ihren Standort freigeben möchten.</string>
+	<string name="start_location_sharing">Standortfreigabe starten</string>
 	</resources>
