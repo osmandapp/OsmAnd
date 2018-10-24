@@ -148,4 +148,23 @@
 	<string name="password_descr">Bitte Passwort für Ihr Telegram-Konto eingeben</string>
 	<string name="nm">kn</string>
 	<string name="nm_h">kn/h</string>
+	<string name="last_updated_location">Zuletzt aktualisierter Ort:</string>
+	<string name="not_possible_to_send_to_telegram_chats">Es ist nicht möglich, an Telegram-Chats zu senden:</string>
+	<string name="battery_optimization_description">Schalten Sie die Batterieoptimierung für OsmAnd Telegram aus, damit es nicht plötzlich im Hintergrund ausgeschaltet wird.</string>
+	<string name="share_location_as_descr">Die gemeinsame Nutzung Ihres Geräte-Standorts oder des Standorts benutzerdefinierter Geräte erlauben, die über die API hinzugefügt wurden.</string>
+	<string name="logout_from_osmand_telegram_descr">Sind Sie sicher, dass Sie sich von OsmAnd Telegram abmelden möchten, so dass Sie den Standort nicht teilen oder den Standort anderer sehen können\?</string>
+	<string name="disable_all_sharing_desc">Schaltet die Standortfreigabe für alle ausgewählten Chats aus (%1$d).</string>
+	<string name="disable_all_sharing">Alle Freigaben deaktivieren</string>
+	<string name="disconnect_from_telegram_desc">Um den Zugriff auf die Standortfreigabe zu widerrufen, öffnen Sie Telegram, gehen zu Einstellungen - Datenschutz und Sicherheit - Sitzungen und beenden die OsmAnd Telegram-Sitzung.</string>
+	<string name="disconnect_from_telegram">So deaktivieren Sie OsmAnd Standortfreigabe von Telegram aus</string>
+	<string name="logout_help_desc">So deaktivieren Sie OsmAnd Standortfreigabe von Telegram aus</string>
+	<string name="stale_location">Veralteter Standort</string>
+	<string name="send_my_location_desc">Legen Sie das Mindestintervall für die Standortfreigabe fest.</string>
+	<string name="sharing_time">Freigabezeit</string>
+	<string name="expire_at">Verfällt um</string>
+	<string name="stop_sharing_all">Freigabe ist aktiviert (deaktivieren)</string>
+	<string name="turn_off_location_sharing">Deaktivieren der Standortfreigabe</string>
+	<string name="shared_string_bot">Bot</string>
+	<string name="set_visible_time_for_all">Setzt die sichtbare Zeit für alle</string>
+	<string name="set_time_description">Zeit einstellen, die Ihren Kontakten und Gruppen als Echtzeit Ihres Standorts angezeigt wird.</string>
 	</resources>
