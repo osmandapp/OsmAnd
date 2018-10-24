@@ -10,18 +10,18 @@
 	<string name="shared_string_status">Status</string>
 	<string name="no_gps_connection">Kein GPS-Signal</string>
 	<string name="sharing_success">Gesendet und aktualisiert</string>
-	<string name="not_possible_to_send_to_chats">Nicht möglich, an Chats zu senden:</string>
+	<string name="not_possible_to_send_to_chats">Konnte nicht an Chats senden:</string>
 	<string name="no_internet_connection">Keine Internetverbindung</string>
 	<string name="shared_string_disable">Deaktivieren</string>
 	<string name="shared_string_save">Speichern</string>
-	<string name="add_device_descr">Geben Sie Ihre Geräte-ID ein, die Sie unter https://live.osmand.net/device/ID finden können</string>
+	<string name="add_device_descr">Finden Sie Ihre Geräte-ID unter https://live.osmand.net/device/ID</string>
 	<string name="device_id">Geräte-ID</string>
 	<string name="add_device">Gerät hinzufügen</string>
 	<string name="shared_string_later">Später</string>
 	<string name="last_available_location">Letzter verfügbarer Standort</string>
 	<string name="share_location_as">Standort teilen als</string>
 	<string name="live_now_description">Kontakte und Gruppen, die ihren Standort mit Ihnen teilen.</string>
-	<string name="logout_from_osmand_telegram">Abmeldung von OsmAnd Telegram\?</string>
+	<string name="logout_from_osmand_telegram">Aus OsmAnd Telegram abmelden\?</string>
 	<string name="shared_string_name">"Name "</string>
 	<string name="by_distance">Nach Entfernung</string>
 	<string name="by_name">Nach Namen</string>
@@ -35,7 +35,7 @@
 	<string name="time_ago">vor</string>
 	<string name="last_response">Letzte Antwort</string>
 	<string name="shared_string_group">Gruppe</string>
-	<string name="logout_no_internet_msg">Um sich ordnungsgemäß von Ihrem Telegram-Konto abzumelden, ist das Internet erforderlich.</string>
+	<string name="logout_no_internet_msg">Verbinden Sie sich mit dem Internet, um sich ordnungsgemäß von Telegram abzumelden.</string>
 	<string name="shared_string_close">Schließen</string>
 	<string name="connected_account">Verbundenes Konto</string>
 	<string name="shared_string_account">Konto</string>
@@ -44,19 +44,19 @@
 	<string name="osmand_connect">OsmAnd verbinden</string>
 	<string name="location_history_desc">Blenden Sie die Kontakte aus, die ihren Standort in einer vorgegebenen Zeitspanne nicht aktualisiert haben.</string>
 	<string name="location_history">Standortverlauf</string>
-	<string name="stale_location_desc">Das letzte Mal, wenn ein Kontakt ein Update an seinen Standort gesendet hat.</string>
+	<string name="stale_location_desc">Das letzte Mal, dass ein Kontakt seinen Standort gesendet hat.</string>
 	<string name="send_my_location">Meinen Standort senden</string>
 	<string name="gps_and_location">GPS &amp; Standort</string>
 	<string name="open_osmand">OsmAnd öffnen</string>
 	<string name="shared_string_live">"Live "</string>
 	<string name="get_telegram_title">Registrierung in Telegram</string>
-	<string name="get_telegram_account_first">Sie benötigen ein Konto in Telegram, um die Funktionen von OsmAnd Location Sharing nutzen zu können.</string>
-	<string name="get_telegram_description_continue">Wenn Sie fortfahren möchten, installieren Sie bitte Telegram von Google Play und registrieren Sie Ihr Konto.</string>
-	<string name="get_telegram_after_creating_account">Nachdem Sie ein Konto angelegt haben, können Sie diese Anwendung verwenden.</string>
+	<string name="get_telegram_account_first">Sie benötigen ein Telegram-Konto, um die OsmAnd Standortfreigabe nutzen zu können.</string>
+	<string name="get_telegram_description_continue">Bitte installieren Sie Telegram von Google Play und registrieren Sie dazu ein Konto.</string>
+	<string name="get_telegram_after_creating_account">Nach der Erstellung des Kontos können Sie diese App nutzen.</string>
 	<string name="shared_string_all">Alle</string>
 	<string name="shared_string_off">Aus</string>
-	<string name="already_registered_in_telegram">Sie benötigen ein bereits registriertes Konto und eine Telefonnummer in Telegram</string>
-	<string name="do_not_have_telegram">Ich habe keine Telegram-Konto</string>
+	<string name="already_registered_in_telegram">Sie benötigen ein registriertes Telegram-Konto und eine Telefonnummer</string>
+	<string name="do_not_have_telegram">Ich habe kein Telegram-Konto</string>
 	<string name="enter_phone_number">Telefonnummer eingeben</string>
 	<string name="enter_authentication_code">Authentifizierungscode eingeben</string>
 	<string name="hours_and_minutes_format">%1$d h %2$d min</string>
@@ -75,10 +75,10 @@
 	<string name="shared_string_password">Passwort</string>
 	<string name="enter_code">Code eingeben</string>
 	<string name="authentication_code">Authentifizierungscode</string>
-	<string name="authentication_code_descr">Sie haben einen Code von Telegram erhalten. Es wird von OsmAnd verwendet, um sich bei Ihrem Konto anzumelden.</string>
+	<string name="authentication_code_descr">Telegram hat Ihnen einen Code für OsmAnd zur Anmeldung an Ihrem Konto gesendet.</string>
 	<string name="enter_password">Passwort eingeben</string>
 	<string name="shared_string_login">Anmelden</string>
-	<string name="shared_string_logout">Abmelden</string>
+	<string name="shared_string_logout">Abmeldung</string>
 	<string name="not_logged_in">Sie sind nicht angemeldet</string>
 	<string name="initialization">Initialisierung</string>
 	<string name="logging_out">Abmeldung</string>
@@ -105,7 +105,7 @@
 	<string name="show_users_on_map">Benutzer auf der Karte anzeigen</string>
 	<string name="active_chats">Aktive Chats</string>
 	<string name="shared_string_authorization">Autorisation</string>
-	<string name="shared_string_authorization_descr">Bitte geben Sie die Telefonnummer Ihres Telegram-Kontos im internationalen Format ein</string>
+	<string name="shared_string_authorization_descr">Bitte geben Sie Ihre Telegram-Telefonnummer im internationalen Format ein</string>
 	<string name="shared_string_welcome">Willkommen</string>
 
 	<string name="yard">yd</string>
@@ -134,7 +134,7 @@
 	<string name="shared_string_second_short">s</string>
 	<string name="plus">+</string>
 	<string name="my_location">Mein Standort</string>
-	<string name="live_now">Jetzt live</string>
+	<string name="live_now">Sende gerade</string>
 
 
 <string name="background_work">Hintergrundbetrieb</string>
@@ -166,7 +166,10 @@
 	<string name="turn_off_location_sharing">Standortfreigabe ausschalten</string>
 	<string name="shared_string_bot">Bot</string>
 	<string name="set_visible_time_for_all">Für alle sichtbare Zeit einstellen</string>
-	<string name="set_time_description">Zeit einstellen, die Ihren Kontakten und Gruppen als Echtzeit Ihres Standorts angezeigt wird.</string>
+	<string name="set_time_description">Zeit einstellen, zu der Ihren Kontakten und Gruppen Ihr Standorts in Echtzeit angezeigt wird.</string>
 	<string name="location_sharing_description">Kontakte und Gruppen wählen, für die Sie Ihren Standort freigeben möchten.</string>
 	<string name="start_location_sharing">Standortfreigabe starten</string>
+	<string name="location_service_no_gps_available">Wählen Sie einen der Standortprovider aus, um Ihren Standort freizugeben.</string>
+	<string name="sharing_location">Standort teilen</string>
+	<string name="welcome_descr"><b>OsmAnd Standortfreigabe</b> ermöglicht es Ihnen, Ihren Standort zu teilen und den anderer in OsmAnd zu sehen.<br/><br/>Die App verwendet die API von Telegram und Sie benötigen ein Telegram-Konto.</string>
 	</resources>
