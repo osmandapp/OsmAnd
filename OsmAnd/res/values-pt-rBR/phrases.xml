@@ -260,7 +260,7 @@
 
 	<string name="poi_speed_camera">Radar</string>
 	<string name="poi_turning_circle">Balão de retorno</string>
-	<string name="poi_motorway_junction">Trevo de acesso</string>
+	<string name="poi_motorway_junction">Saída de rodovia</string>
 	<string name="poi_junction">Entroncamento</string>
 	<string name="poi_rest_area">Área de repouso</string>
 
