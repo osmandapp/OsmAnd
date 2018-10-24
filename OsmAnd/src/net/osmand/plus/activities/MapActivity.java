@@ -90,6 +90,7 @@ import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
+import net.osmand.plus.helpers.DiscountHelper.DiscountBarController;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
@@ -858,13 +859,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
 				return;
 			}
+			int color = -1;
 			boolean mapControlsVisible = findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
+			TopToolbarController discountController = getTopToolbarController(TopToolbarControllerType.DISCOUNT);
 			boolean quickSearchTopBar = getTopToolbarController(TopToolbarControllerType.QUICK_SEARCH) != null;
 			boolean contextMenuTopBar = getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU) != null;
 			boolean poiFilterTopBar = getTopToolbarController(TopToolbarControllerType.POI_FILTER) != null;
 			boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
 			boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
+			if (discountController != null) {
+				color = ((DiscountBarController) discountController).getStatusBarColor();
+			}
 			if (((quickSearchTopBar || poiFilterTopBar || mapTopBar) && mapControlsVisible) || contextMenuTopBar) {
 				colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
 			} else if (markerTopBar && mapControlsVisible) {
@@ -872,7 +878,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else {
 				colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
 			}
-			getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
+			if (color == -1) {
+				color = ContextCompat.getColor(this, colorId);
+			}
+			getWindow().setStatusBarColor(color);
 		}
 	}
 

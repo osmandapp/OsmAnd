@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,17 +17,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
-public class SecondSplashScreenFragment extends Fragment {
+public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	public static final String TAG = "SecondSplashScreenFragment";
 	public static boolean SHOW = true;
 	public static boolean VISIBLE = false;
-
-	public OsmandApplication getMyApplication() {
-		return ((OsmandApplication) getActivity().getApplication());
-	}
 
 	public MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
@@ -160,5 +156,10 @@ public class SecondSplashScreenFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		getMapActivity().enableDrawer();
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return R.color.status_bar_transparent_light;
 	}
 }
