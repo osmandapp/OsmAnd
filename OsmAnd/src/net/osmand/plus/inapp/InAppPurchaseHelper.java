@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.inapp.util.IabHelper.IABHELPER_USER_CANCELLED;
+
 public class InAppPurchaseHelper {
 	// Debug tag, for logging
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
@@ -588,7 +590,9 @@ public class InAppPurchaseHelper {
 			}
 
 			if (result.isFailure()) {
-				complain("Error purchasing: " + result);
+				if (result.getResponse() != IABHELPER_USER_CANCELLED) {
+					complain("Error purchasing: " + result);
+				}
 				notifyDismissProgress(activeTask);
 				notifyError(activeTask, "Error purchasing: " + result);
 				stop(true);
