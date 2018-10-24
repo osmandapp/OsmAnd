@@ -1,6 +1,7 @@
 package net.osmand.plus.measurementtool;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -1578,6 +1579,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			if (shadow != null) {
 				shadow.setVisibility(View.GONE);
 			}
+		}
+
+		@Override
+		public int getStatusBarColor(Context context, boolean night) {
+			return -1;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -964,6 +965,11 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			if (shadow != null) {
 				shadow.setVisibility(View.GONE);
 			}
+		}
+
+		@Override
+		public int getStatusBarColor(Context context, boolean night) {
+			return -1;
 		}
 	}
 }
