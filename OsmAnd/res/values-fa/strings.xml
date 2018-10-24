@@ -2299,7 +2299,7 @@
     <string name="whats_new">امکانات جدید در</string>
     <string name="shared_string_update">به‌روزرسانی</string>
     <string name="shared_string_upload">آپلود</string>
-    <string name="world_map_download_descr">نقشه کلی جهان (که سرتاسر جهان را با زوم کم پوشش می‌دهد) وجود ندارد یا منقضی شده است. لطفاً برای داشتن نمایی کلی از جهان آن را دانلود کنید.</string>
+    <string name="world_map_download_descr">نقشهٔ پایهٔ جهان (که سرتاسر جهان را با بزرگ‌نمایی کم پوشش می‌دهد) وجود ندارد یا قدیمی شده. لطفاً برای داشتن نمایی کلی از جهان آن را دانلود کنید.</string>
     <string name="shared_string_qr_code">کد QR</string>
     <string name="map_downloaded">نقشه دانلود شد</string>
     <string name="map_downloaded_descr">نقشهٔ %1$s آمادهٔ استفاده است.</string>

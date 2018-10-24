@@ -342,7 +342,7 @@
 	<string name="open_street_map_login_descr">Benötigt für openstreetmap.org-Beiträge.</string>
 	<string name="user_password">OSM-Kennwort</string>
 	
-	<string name="osmand_service">Hintergrunddienst</string>
+	<string name="osmand_service">Hintergrundmodus</string>
 	<string name="osmand_service_descr">OsmAnd läuft bei ausgeschaltetem Bildschirm im Hintergrund.</string>
 
 	<string name="download_files_not_enough_space">Speicherplatz (frei: %2$s MB) reicht nicht aus, um %1$s MB herunterzuladen.</string>
@@ -410,7 +410,7 @@
 	<string name="favorite_friends_category">Freunde</string>
 	<string name="favorite_places_category">Sehenswertes</string>
 	<string name="shared_string_others">Andere</string>
-	<string name="shared_string_name">Name</string>
+	<string name="shared_string_name">"Name "</string>
 	<string name="favourites_edit_dialog_category">Kategorie</string>
 	<string name="shared_string_no_thanks">Nicht verwendet</string>
 	<string name="basemap_missing">Laden Sie die Basis-Weltkarte herunter, um einen Überblick über die ganze Welt bei niedrigen Vergrößerungsstufen zu erhalten.</string>
@@ -1050,7 +1050,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="intermediate_point">Zwischenziel %1$s</string>
 	<string name="map_widget_show_destination_arrow">Richtung zum Ziel anzeigen</string>
 	<string name="non_optimal_route_calculation">Auch nicht optimale Routen über lange Distanzen berechnen</string>
-	<string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
+	<string name="gps_not_available">Bitte aktivieren Sie GPS in den Einstellungen</string>
 	<string name="enable_plugin_monitoring_services">Streckenaufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufzeichnung, Online-Aufzeichnung) zu verwenden</string>
 	<string name="zxing_barcode_scanner_not_found">Barcode-Scanner-App ZXing nicht installiert. Soll im Google Play-Store danach gesucht werden?</string>
 	<string name="close_changeset">Änderungssatz schließen</string>
@@ -2052,7 +2052,7 @@ Lon %2$s</string>
 <string name="route_distance">Entfernung:</string>
     <string name="route_duration">Dauer:</string>
     <string name="missing_write_external_storage_permission">OsmAnd hat keine Berechtigung zur Verwendung der Speicherkarte</string>
-<string name="no_location_permission">Die App hat keine Berechtigung, auf Standortdaten zuzugreifen.</string>
+<string name="no_location_permission">Die App hat keine Berechtigung zum Zugriff auf Standortdaten.</string>
     <string name="no_camera_permission">Die App hat keine Berechtigung, auf die Kamera zuzugreifen.</string>
     <string name="no_microphone_permission">Die App hat keine Berechtigung, auf das Mikrofon zuzugreifen.</string>
     <string name="impassable_road_desc">Straßen auswählen, die bei der Navigation vermieden werden sollen.</string>
@@ -2308,8 +2308,8 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="save_track_precision">Mindestgenauigkeit für Erfassung</string>
     <string name="save_track_precision_descr">Filter: Mindestgenauigkeit für die Aufzeichnung eines Punktes.</string>
     <string name="rendering_attr_contourColorScheme_description">Farbschema für Höhenlinien</string>
-    <string name="shared_string_continue">Fortsetzen</string>
-    <string name="shared_string_pause">Pause</string>
+    <string name="shared_string_continue">Fortfahren</string>
+    <string name="shared_string_pause">"Pause "</string>
     <string name="shared_string_recorded">Aufgezeichnet</string>
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Strecke</string>
@@ -2633,7 +2633,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="right_side_navigation">Rechtsverkehr</string>
     <string name="no_overlay">Kein Overlay</string>
     <string name="no_underlay">Kein Underlay</string>
-    <string name="shared_string_paused">Angehalten</string>
+    <string name="shared_string_paused">Pausiert</string>
     <string name="type_city_town">Ort oder Stadt eingeben</string>
     <string name="type_postcode">Postleitzahl eingeben</string>
     <string name="nearest_cities">Nächstgelegene Orte</string>
@@ -3090,7 +3090,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse?
 \nGeben Sie uns eine Rückmeldung</string>
-    <string name="commiting_way">Übermitteln via …</string>
+    <string name="commiting_way">Übermitteln via…</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachanweisung an, um fehlende oder fehlerhafte Anweisungen zu erkennen.</string>
 <string name="release_3_2_pre">• Absturz beim Start behoben, der bei manchen Geräten auftrat
 \n
