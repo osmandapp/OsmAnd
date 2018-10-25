@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.provider.Settings.Secure;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -200,6 +201,11 @@ public class DiscountHelper {
 		toolbarController.setBackBtnIconIds(iconId, iconId);
 		toolbarController.setBackBtnIconClrs(data.iconColor, data.iconColor);
 		toolbarController.setStatusBarColor(data.statusBarColor);
+		if (!TextUtils.isEmpty(data.textBtnTitle)) {
+			toolbarController.setTextBtnVisible(true);
+			toolbarController.setTextBtnTitle(data.textBtnTitle);
+			toolbarController.setTextBtnTitleClrs(data.textBtnTitleColor, data.textBtnTitleColor);
+		}
 		if (!Algorithms.isEmpty(data.url)) {
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
@@ -212,6 +218,7 @@ public class DiscountHelper {
 			};
 			toolbarController.setOnBackButtonClickListener(clickListener);
 			toolbarController.setOnTitleClickListener(clickListener);
+			toolbarController.setOnTextBtnClickListener(clickListener);
 		}
 		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 			@Override
@@ -296,6 +303,7 @@ public class DiscountHelper {
 		String description;
 		String iconId;
 		String url;
+		String textBtnTitle;
 
 		@ColorInt
 		int iconColor = -1;
@@ -307,6 +315,8 @@ public class DiscountHelper {
 		int descrColor = -1;
 		@ColorInt
 		int statusBarColor = -1;
+		@ColorInt
+		int textBtnTitleColor = -1;
 
 		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
 			ControllerData res = new ControllerData();
@@ -314,11 +324,13 @@ public class DiscountHelper {
 			res.description = obj.getString("description");
 			res.iconId = obj.getString("icon");
 			res.url = parseUrl(app, obj.getString("url"));
+			res.textBtnTitle = obj.optString("button_title");
 			res.iconColor = parseColor("icon_color", obj);
 			res.bgColor = parseColor("bg_color", obj);
 			res.titleColor = parseColor("title_color", obj);
 			res.descrColor = parseColor("description_color", obj);
 			res.statusBarColor = parseColor("status_bar_color", obj);
+			res.textBtnTitleColor = parseColor("button_title_color", obj);
 			return res;
 		}
 
