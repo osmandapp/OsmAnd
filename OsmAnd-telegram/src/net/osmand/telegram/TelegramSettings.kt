@@ -163,6 +163,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun getShareDevices() = shareDevices
 
+	fun containsShareDeviceWithName(name: String): Boolean {
+		shareDevices.forEach {
+			if (it.deviceName == name) {
+				return true
+			}
+		}
+		return false
+	}
+
 	fun getLastSuccessfulSendTime() = shareChatsInfo.values.maxBy { it.lastSuccessfulSendTimeMs }?.lastSuccessfulSendTimeMs ?: -1
 
 	fun stopSharingLocationToChats() {
@@ -338,41 +347,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putBoolean(BATTERY_OPTIMISATION_ASKED, batteryOptimisationAsked)
 
-		try {
-			val jArray = JSONArray()
-			shareChatsInfo.forEach { (chatId, chatInfo) ->
-				val obj = JSONObject()
-				obj.put(ShareChatInfo.CHAT_ID_KEY, chatId)
-				obj.put(ShareChatInfo.START_KEY, chatInfo.start)
-				obj.put(ShareChatInfo.LIVE_PERIOD_KEY, chatInfo.livePeriod)
-				obj.put(ShareChatInfo.LIMIT_KEY, chatInfo.currentMessageLimit)
-				obj.put(ShareChatInfo.CURRENT_MESSAGE_ID_KEY, chatInfo.currentMessageId)
-				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY, chatInfo.userSetLivePeriod)
-				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY, chatInfo.userSetLivePeriodStart)
-				jArray.put(obj)
-			}
+		val jArray = convertShareChatsInfoToJson()
+		if (jArray != null) {
 			edit.putString(SHARE_CHATS_INFO_KEY, jArray.toString())
-		} catch (e: JSONException) {
-			e.printStackTrace()
 		}
 
-		try {
-			val jsonObject = JSONObject()
-			val jArray = JSONArray()
-			shareDevices.forEach { device ->
-				val obj = JSONObject()
-				obj.put(DeviceBot.DEVICE_ID, device.id)
-				obj.put(DeviceBot.USER_ID, device.userId)
-				obj.put(DeviceBot.CHAT_ID, device.chatId)
-				obj.put(DeviceBot.DEVICE_NAME, device.deviceName)
-				obj.put(DeviceBot.EXTERNAL_ID, device.externalId)
-				obj.put(DeviceBot.DATA, JSONObject(device.data))
-				jArray.put(obj)
-			}
-			jsonObject.put(SHARE_DEVICES_KEY, jArray)
+		val jsonObject = convertShareDevicesToJson()
+		if (jsonObject != null) {
 			edit.putString(SHARE_DEVICES_KEY, jsonObject.toString())
-		} catch (e: JSONException) {
-			e.printStackTrace()
 		}
 
 		edit.apply()
@@ -419,6 +401,48 @@ class TelegramSettings(private val app: TelegramApplication) {
 		)
 
 		batteryOptimisationAsked = prefs.getBoolean(BATTERY_OPTIMISATION_ASKED,false)
+	}
+
+	private fun convertShareDevicesToJson():JSONObject?{
+		return try {
+			val jsonObject = JSONObject()
+			val jArray = JSONArray()
+			shareDevices.forEach { device ->
+				val obj = JSONObject()
+				obj.put(DeviceBot.DEVICE_ID, device.id)
+				obj.put(DeviceBot.USER_ID, device.userId)
+				obj.put(DeviceBot.CHAT_ID, device.chatId)
+				obj.put(DeviceBot.DEVICE_NAME, device.deviceName)
+				obj.put(DeviceBot.EXTERNAL_ID, device.externalId)
+				obj.put(DeviceBot.DATA, JSONObject(device.data))
+				jArray.put(obj)
+			}
+			jsonObject.put(SHARE_DEVICES_KEY, jArray)
+		} catch (e: JSONException) {
+			e.printStackTrace()
+			null
+		}
+	}
+
+	private fun convertShareChatsInfoToJson(): JSONArray? {
+		return try {
+			val jArray = JSONArray()
+			shareChatsInfo.forEach { (chatId, chatInfo) ->
+				val obj = JSONObject()
+				obj.put(ShareChatInfo.CHAT_ID_KEY, chatId)
+				obj.put(ShareChatInfo.START_KEY, chatInfo.start)
+				obj.put(ShareChatInfo.LIVE_PERIOD_KEY, chatInfo.livePeriod)
+				obj.put(ShareChatInfo.LIMIT_KEY, chatInfo.currentMessageLimit)
+				obj.put(ShareChatInfo.CURRENT_MESSAGE_ID_KEY, chatInfo.currentMessageId)
+				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY, chatInfo.userSetLivePeriod)
+				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY, chatInfo.userSetLivePeriodStart)
+				jArray.put(obj)
+			}
+			jArray
+		} catch (e: JSONException) {
+			e.printStackTrace()
+			null
+		}
 	}
 
 	private fun parseShareChatsInfo(json: JSONArray) {

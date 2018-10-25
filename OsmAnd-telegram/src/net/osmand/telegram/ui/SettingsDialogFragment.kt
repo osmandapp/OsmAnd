@@ -189,6 +189,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 					val inflater = activity?.layoutInflater
 					if (inflater != null && deviceName != null && deviceExternalId != null) {
 						addItemToContainer(inflater, shareAsContainer, deviceExternalId, deviceName)
+						Toast.makeText(app, getString(R.string.device_added_successfully, deviceName), Toast.LENGTH_SHORT).show()
 					}
 				}
 			}

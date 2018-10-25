@@ -103,11 +103,24 @@
 			android:layout_width="@dimen/content_padding_half"
 			android:layout_height="match_parent" />
 
-		<include
-			layout="@layout/primary_btn"
+		<FrameLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:layout_weight="1" />
+			android:layout_weight="1">
+
+			<include
+				layout="@layout/primary_btn"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<ProgressBar
+				android:id="@+id/progressBar"
+				android:layout_width="@dimen/progress_bar_size_small"
+				android:layout_height="@dimen/progress_bar_size_small"
+				android:layout_gravity="center"
+				android:visibility="gone"/>
+
+		</FrameLayout>
 
 	</LinearLayout>
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -13,12 +14,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.ui.views.BottomSheetDialog
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.OsmandApiUtils
+import org.drinkless.td.libcore.telegram.TdApi
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -26,6 +29,8 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 
 	private lateinit var editText: EditText
 	private lateinit var errorTextDescription: TextView
+	private lateinit var primaryBtn: TextView
+	private lateinit var progressBar: ProgressBar
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 		val dialog = BottomSheetDialog(context!!)
@@ -64,56 +69,89 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 				override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
 				override fun afterTextChanged(s: Editable) {
-					when {
-						text.isEmpty() -> {
-							errorTextDescription.visibility = View.VISIBLE
-							errorTextDescription.text = getString(R.string.device_name_cannot_be_empty)
-						}
-						text.length > 200 -> {
-							errorTextDescription.visibility = View.VISIBLE
-							errorTextDescription.text = getString(R.string.device_name_is_too_long)
-						}
-						else -> errorTextDescription.visibility = View.INVISIBLE
-					}
+					updateErrorTextDescription(s.toString())
 				}
 			})
 		}
 
 		errorTextDescription = mainView.findViewById<TextView>(R.id.error_text_descr)
 
+		progressBar = mainView.findViewById<ProgressBar>(R.id.progressBar).apply {
+			indeterminateDrawable.setColorFilter(ContextCompat.getColor(app, R.color.primary_btn_text_light), android.graphics.PorterDuff.Mode.MULTIPLY)
+		}
+
 		mainView.findViewById<TextView>(R.id.secondary_btn).apply {
 			setText(R.string.shared_string_cancel)
 			setOnClickListener { dismiss() }
 		}
 
-		mainView.findViewById<TextView>(R.id.primary_btn).apply {
-			setText(R.string.shared_string_save)
+		primaryBtn = mainView.findViewById<TextView>(R.id.primary_btn).apply {
+			setText(R.string.shared_string_add)
 			setOnClickListener {
 				val deviceName = editText.text.toString()
-				if (deviceName.isNotEmpty() && deviceName.length < 200) {
+				updateErrorTextDescription(deviceName)
+				if (deviceName.isNotEmpty() && deviceName.length < MAX_DEVICE_NAME_LENGTH
+					&& !app.settings.containsShareDeviceWithName(deviceName)) {
 					val user = app.telegramHelper.getCurrentUser()
 					if (user != null) {
-						OsmandApiUtils.createNewDevice(app, user, app.telegramHelper.isBot(user.id), deviceName, 0,
-							object : AndroidNetworkUtils.OnRequestResultListener {
-								override fun onResult(result: String?) {
-									val deviceBot = getDeviceFromJson(result)
-									if (deviceBot != null) {
-										targetFragment?.also { target ->
-											val intent = Intent().putExtra(DEVICE_NAME, deviceBot.deviceName).putExtra(DEVICE_EXTERNAL_ID, deviceBot.externalId)
-											target.onActivityResult(targetRequestCode, NEW_DEVICE_REQUEST_CODE, intent)
-										}
-										dismiss()
-									} else {
-										errorTextDescription.visibility = View.VISIBLE
-										errorTextDescription.text = getString(R.string.error_adding_new_device)
-									}
-								}
-							})
+						updatePrimaryBtnAndProgress(true)
+						createNewDeviceWithName(user, deviceName)
 					}
 				}
 			}
 		}
 		return mainView
+	}
+
+	private fun createNewDeviceWithName(user: TdApi.User, deviceName: String) {
+		OsmandApiUtils.createNewDevice(app, user, app.telegramHelper.isBot(user.id), deviceName, 0,
+			object : AndroidNetworkUtils.OnRequestResultListener {
+				override fun onResult(result: String?) {
+					updatePrimaryBtnAndProgress(false)
+					val deviceBot = getDeviceFromJson(result)
+					if (deviceBot != null) {
+						targetFragment?.also { target ->
+							val intent = Intent().putExtra(DEVICE_NAME, deviceBot.deviceName).putExtra(DEVICE_EXTERNAL_ID, deviceBot.externalId)
+							target.onActivityResult(targetRequestCode, NEW_DEVICE_REQUEST_CODE, intent)
+						}
+						dismiss()
+					} else {
+						updateErrorTextDescription(null)
+					}
+				}
+			})
+	}
+
+	private fun updateErrorTextDescription(text: String?) {
+		when {
+			text == null -> {
+				errorTextDescription.visibility = View.VISIBLE
+				errorTextDescription.text = getString(R.string.error_adding_new_device)
+			}
+			text.isEmpty() -> {
+				errorTextDescription.visibility = View.VISIBLE
+				errorTextDescription.text = getString(R.string.device_name_cannot_be_empty)
+			}
+			text.length > MAX_DEVICE_NAME_LENGTH -> {
+				errorTextDescription.visibility = View.VISIBLE
+				errorTextDescription.text = getString(R.string.device_name_is_too_long)
+			}
+			app.settings.containsShareDeviceWithName(text.toString()) -> {
+				errorTextDescription.visibility = View.VISIBLE
+				errorTextDescription.text = getString(R.string.enter_another_device_name)
+			}
+			else -> errorTextDescription.visibility = View.INVISIBLE
+		}
+	}
+
+	private fun updatePrimaryBtnAndProgress(showProgress: Boolean) {
+		if (showProgress) {
+			progressBar.visibility = View.VISIBLE
+			primaryBtn.text = ""
+		} else {
+			progressBar.visibility = View.GONE
+			primaryBtn.setText(R.string.shared_string_add)
+		}
 	}
 
 	private fun getDeviceFromJson(json: String?): TelegramSettings.DeviceBot? {
@@ -138,6 +176,7 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 		const val NEW_DEVICE_REQUEST_CODE = 5
 		const val DEVICE_NAME = "DEVICE_NAME"
 		const val DEVICE_EXTERNAL_ID = "DEVICE_EXTERNAL_ID"
+		const val MAX_DEVICE_NAME_LENGTH = 200
 
 		private const val TAG = "AddNewDeviceBottomSheet"
 		fun showInstance(fm: FragmentManager, target: Fragment): Boolean {

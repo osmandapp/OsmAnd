@@ -1,4 +1,7 @@
 <resources>
+	<string name="enter_another_device_name">Enter another name, you already have the device with the same name</string>
+	<string name="device_added_successfully">%1$s added successfully.</string>
+	<string name="shared_string_add">Add</string>
 	<string name="error_adding_new_device">Error adding new device</string>
 	<string name="enter_device_name_description">Enter a name for your new device. Max length 200 symbols.</string>
 	<string name="device_name_is_too_long">Device name is too long</string>
