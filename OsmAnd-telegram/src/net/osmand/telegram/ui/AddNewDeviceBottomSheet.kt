@@ -34,10 +34,7 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 		val dialog = BottomSheetDialog(context!!)
-		val window = dialog.window
-		if (window != null) {
-			dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-		}
+		dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 		return dialog
 	}
 
