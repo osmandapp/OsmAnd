@@ -163,7 +163,7 @@
 	<string name="poi_traffic_calming_cushion">緩衝墊</string>
 	<string name="poi_traffic_calming_chicane">減速彎道</string>
 	<string name="poi_traffic_calming_rumble_strip">車道屏</string>
-	<string name="poi_traffic_calming_table">路緣石</string>
+	<string name="poi_traffic_calming_table">減速平台</string>
 	<string name="poi_traffic_calming_choker">項鍊</string>
 	<string name="poi_traffic_signals">交通號誌</string>
 
@@ -3427,7 +3427,7 @@
 
 	<string name="poi_motorcycle_sales_yes">銷售</string>
 	<string name="poi_motorcycle_sales_no">銷售：無</string>
-	<string name="poi_motorcycle_sales_yes_used">銷售：有的;二手</string>
+	<string name="poi_motorcycle_sales_yes_used">銷售：有的，二手貨</string>
 	<string name="poi_motorcycle_sales_used">銷售：二手</string>
 	<string name="poi_lock_basin">塘形船閘</string>
 	<string name="poi_generator_output_electricity_no">輸出（電力）：無</string>
