@@ -95,11 +95,13 @@
 					app:typeface="@string/font_roboto_medium" />
 
 				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/share_as_description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackground"
 					android:paddingLeft="@dimen/content_padding_standard"
 					android:paddingRight="@dimen/content_padding_standard"
-					android:text="@string/share_location_as_descr"
+					android:text="@string/share_location_as_description"
 					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/list_item_description_text_size"
 					app:firstBaselineToTopHeight="20sp"
@@ -119,6 +121,38 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:orientation="vertical" />
+
+				<LinearLayout
+					android:id="@+id/add_new_device_btn"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/dialog_button_height"
+					android:layout_marginBottom="@dimen/content_padding_standard"
+					android:layout_marginLeft="@dimen/content_padding_half"
+					android:layout_marginRight="@dimen/content_padding_half"
+					android:background="@drawable/btn_round"
+					android:gravity="center_vertical"
+					android:paddingLeft="@dimen/content_padding_half"
+					android:paddingRight="@dimen/content_padding_half">
+
+					<ImageView
+						android:id="@+id/add_new_device_icon"
+						android:layout_width="@dimen/list_item_icon_size"
+						android:layout_height="@dimen/list_item_icon_size"
+						tools:src="@drawable/ic_action_add"
+						tools:tint="@color/icon_light" />
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/add_new_device_title"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/content_padding_big"
+						android:layout_marginRight="@dimen/content_padding_big"
+						android:text="@string/add_device"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/list_item_title_text_size"
+						app:typeface="@string/font_roboto_medium" />
+
+				</LinearLayout>
 
 			</LinearLayout>
 
