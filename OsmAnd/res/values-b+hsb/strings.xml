@@ -420,7 +420,7 @@
     <string name="rendering_attr_roadColors_description">Wubjerće barbowu šemu za dróhi:</string>
     <string name="rendering_attr_roadColors_name">Barbowa šema dróhow</string>
     <string name="map_widget_show_destination_arrow">Pokazaj směr do cila</string>
-    <string name="enable_plugin_monitoring_services">Zapińće nahrawanski modul, zo byšće móhł(a) wužiwać nahrawanske słužby (GPX-logging, online-tracking)</string>
+    <string name="enable_plugin_monitoring_services">Zapińće nahrawanski modul, zo byšće móhł(a) wužiwać nahrawanske słužby (GPX-nahrawanje, online-tracking)</string>
     <string name="non_optimal_route_calculation">Snadź njeoptimalne čary přez dołhe distancy wobličeć</string>
     <string name="gps_not_available">Prošu zapińće GPS w swojich nastajenjach</string>
     <string name="map_widget_monitoring_services">Słužby nahrawanja</string>
@@ -1517,4 +1517,7 @@
     <string name="route_info">Informacije wo čarje</string>
     <string name="routing_attr_prefer_motorway_name">Awtodróhi preferować</string>
     <string name="routing_attr_prefer_motorway_description">Awtodróhi preferować</string>
+    <string name="gpx_monitoring_start">GPX-nahrawanje započeć</string>
+    <string name="gpx_monitoring_stop">GPX-nahrawanje zastajić</string>
+    <string name="map_widget_monitoring">GPX-nahrawanje</string>
     </resources>
