@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="background_work_description">Endre batterioptimiseringsinnstillinger, for stabil plasseringsdeling</string>
 	<string name="background_work">Bakgrunnsarbeid</string>
-	<string name="battery_optimization_description">For stabil deling av din plassering i bakgrunnen, anbefales det å skru av batterioptimalisering for OsmAnd Telegram.
-\n
-\nHvis optimaliseringer er påskrudd, kan systemet skru av programmet som kjører i bakgrunnen automatisk (når skjermen er låst/eller programmet er minimert). Dette skjer uten merknad, og opphever kringkasting av plassering.</string>
+	<string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd Telegram slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
 	<string name="sharing_in_background">Deling i bakgrunnen</string>
 	<string name="go_to_settings">Gå til innstillinger</string>
 	<string name="shared_string_later">Senere</string>
@@ -17,14 +15,14 @@
 	<string name="shared_string_status">Status</string>
 	<string name="no_gps_connection">Ingen GPS-tilkobling</string>
 	<string name="sharing_success">Sendt og oppdatert</string>
-	<string name="not_possible_to_send_to_chats">Kunne ikke sende sludring:</string>
+	<string name="not_possible_to_send_to_chats">Kunne ikke sende sludringer:</string>
 	<string name="no_internet_connection">Ingen internettilknytning</string>
 	<string name="shared_string_disable">Skru av</string>
 	<string name="shared_string_save">Lagre</string>
 	<string name="add_device_descr">Skriv inn din enhets-ID fra https://live.osmand.net/device/ID</string>
 	<string name="device_id">Enhets-ID</string>
 	<string name="add_device">Legg til enhet</string>
-	<string name="share_location_as_descr">Dette valget lar deg dele enhetens plassering, eller plassering for egendefinert lagt til via API-enheter.</string>
+	<string name="share_location_as_descr">Tillat deling av din enhetsplassering, eller plassering for egendefinert lagt til via API-enheter.</string>
 	<string name="share_location_as">Del plassering som</string>
 	<string name="live_now_description">Kontakter og grupper som deler sin plassering med deg.</string>
 	<string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Telegram\? Etter det, vil du ikke kunne sende din plassering, og se dine kontakters plassering på kartet i OsmAnd.</string>
@@ -37,22 +35,22 @@
 	<string name="shared_string_sort_by">Sorter etter</string>
 	<string name="choose_osmand_desc">Velg OsmAnd-versjon der kontaktene skal vises på kartet.</string>
 	<string name="choose_osmand">Velg OsmAnd versjon å bruke</string>
-	<string name="disable_all_sharing_desc">Det vil skru av deling av din plassering til alle valgte sludringer (%1$d).</string>
+	<string name="disable_all_sharing_desc">Det vil skru av plasseringsdeling til alle valgte sludringer (%1$d).</string>
 	<string name="disable_all_sharing">Skru av all deling</string>
 	<string name="turn_off_all">Skru av alle</string>
 	<string name="shared_string_exit">Avslutt</string>
 	<string name="time_ago">siden</string>
 	<string name="last_response">Siste svar</string>
 	<string name="shared_string_group">Gruppe</string>
-	<string name="logout_no_internet_msg">For å logge ut av din Telegram-konto på rett vis, trenger du Internett.</string>
+	<string name="logout_no_internet_msg">Koble til Internett for å logge ut av Telegram ordentlig.</string>
 	<string name="shared_string_close">Lukk</string>
-	<string name="disconnect_from_telegram_desc">For å blokekre Telegram fra din OsmAnd-konto må du åpne innstillingene i Telegram. Under Personvern og sikkerhet - Økter, må du sluttføre OsmAnd Telegram-økta. Etter det, vil OsmAnd Plasseringsdeling ikke lenger ha tilgang til kontoen din, og du vil ikke kunne bruke dette programmet til du logger inn igjen.</string>
-	<string name="disconnect_from_telegram">Hvordan koble fra OsmAnd plasseringsdeling fra Telegram-kontoen</string>
+	<string name="disconnect_from_telegram_desc">For å tilbakekalle plasseringsdelingstilgang. Åpne Telegram, gå til Innstillinger - Personvern og sikkerhet - Økter, og sluttfør OsmAnd Telegram-økta.</string>
+	<string name="disconnect_from_telegram">Hvordan koble fra OsmAnd plasseringsdeling fra Telegram</string>
 	<string name="logout_help_desc">Hvordan koble fra OsmAnd plasseringsdeling fra Telegram</string>
 	<string name="connected_account">Tilkoblet konto</string>
 	<string name="shared_string_account">Konto</string>
 	<string name="in_time">i %1$s</string>
-	<string name="osmand_connect_desc">Velg OsmAnd-versjonen OsmAnd Telegram henvender seg til for å vise posisjonen på kartet.</string>
+	<string name="osmand_connect_desc">Velg OsmAnd-versjonen OsmAnd Telegram bruker for å vise posisjoner på kartet.</string>
 	<string name="osmand_connect">OsmAnd connect</string>
 	<string name="location_history_desc">Skjul kontaktene som ikke har oppdatert sin plassering etter et gitt tidsintervall.</string>
 	<string name="location_history">Plasseringshistorikk</string>
@@ -98,9 +96,9 @@
 	<string name="shared_string_password">Passord</string>
 	<string name="enter_code">Skriv inn kode</string>
 	<string name="authentication_code">Identitetsbekreftelseskode</string>
-	<string name="authentication_code_descr">Du har blitt tilsendt en kode av Telegram. Den vil bli brukt av OsmAnd for å logge inn på kontoen din.</string>
+	<string name="authentication_code_descr">Telegram har sendt deg en kode slik at OsmAnd kan logge inn på kontoen din.</string>
 	<string name="enter_password">Skriv inn passord</string>
-	<string name="password_descr">Skriv inn passordet for din Telegram-konto for å fullføre identitetsbekreftelse</string>
+	<string name="password_descr">Skriv inn passordet for din Telegram-konto</string>
 	<string name="shared_string_login">Logg inn</string>
 	<string name="shared_string_logout">Logg ut</string>
 	<string name="not_logged_in">Du er ikke innlogget</string>
@@ -131,7 +129,7 @@
 	<string name="show_users_on_map">Vis brukere på kartet</string>
 	<string name="active_chats">Aktive sludringer</string>
 	<string name="shared_string_authorization">Identitetsbekreftelse</string>
-	<string name="shared_string_authorization_descr">Skriv inn telefonnummeret for din Telegram-konto i internasjonalt format</string>
+	<string name="shared_string_authorization_descr">Skriv inn ditt Telegram-telefonnummer i internasjonalt format</string>
 	<string name="shared_string_welcome">Velkommen</string>
 
 	<string name="km">km</string>
@@ -174,4 +172,16 @@
 	<string name="si_km_m">Kilometer/meter</string>
 	<string name="si_nm">Nautiske mil</string>
 	<string name="si_mi_meters">Engelske mil/meter</string>
+	<string name="enter_another_device_name">Du har allerede en enhet med samme navn, velg noe annet</string>
+	<string name="device_added_successfully">%1$s lagt til</string>
+	<string name="shared_string_add">Legg til</string>
+	<string name="error_adding_new_device">Kunne ikke legge til ny enhet</string>
+	<string name="enter_device_name_description">Skriv inn et nytt navn for din nye enhet. Maksimal lengde 200 tegn.</string>
+	<string name="device_name_is_too_long">For lang enhetsnavn</string>
+	<string name="device_name_cannot_be_empty">Enhetsnavn må velges</string>
+	<string name="device_name">Enhetsnavn</string>
+	<string name="shared_string_hide">Skjul</string>
+	<string name="share_location_as_description_second_line">Du kan opprette og vise enhets-ID i Telegram-klienten ved bruk av %1$s-sludrebot-en. %2$s</string>
+	<string name="share_location_as_description">Hvis du vil koble flere enheter til én Telegram-konto, må du bruke en annen enhet til å dele din plassering.</string>
+	<string name="add_new_device_description">Sist oppdaterte plassering:</string>
 	</resources>
