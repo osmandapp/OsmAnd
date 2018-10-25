@@ -239,18 +239,18 @@
     
 	<string name="search_for">Pesquisar por</string>
 	<string name="coordinates">Coordenadas</string>
-	<string name="rendering_attr_publicTransportMode_name">Rotas de ônibus e trólebus</string>
-	<string name="rendering_attr_tramTrainRoutes_name">Rotas de bonde e trem</string>
-	<string name="rendering_attr_subwayMode_name">Rotas de metrô</string>
+	<string name="rendering_attr_publicTransportMode_name">Linhas de ônibus e trólebus</string>
+	<string name="rendering_attr_tramTrainRoutes_name">Linhas de bonde e trem</string>
+	<string name="rendering_attr_subwayMode_name">Linhas de metrô</string>
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
     <string name="wake_on_voice">Ligar tela</string>
     <string name="wake_on_voice_descr">Ligar tela do aparelho (se estiver desligada) quando se aproxima da manobra.</string>
     <string name="impassable_road">Evitar estradas…</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Rotas de trem</string>
-    <string name="rendering_attr_tramRoutes_name">Rotas de bonde</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Linhas de trem</string>
+    <string name="rendering_attr_tramRoutes_name">Linhas de bonde</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Compartilhar rota de táxi</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Rotas de trólebus</string>
-    <string name="rendering_attr_busRoutes_name">Rotas de ônibus</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Linhas de trólebus</string>
+    <string name="rendering_attr_busRoutes_name">Linhas de ônibus</string>
     <string name="rendering_category_hide">Ocultar</string>
     <string name="rendering_category_routes">Rotas</string>
     <string name="rendering_category_details">Detalhes</string>
@@ -347,7 +347,7 @@
 	<string name="routing_attr_avoid_unpaved_description">Evitar estradas não pavimentadas</string>
 	<string name="routing_attr_avoid_ferries_description">Evitar as balsas</string>
 	<string name="routing_attr_weight_name">Peso máximo</string>
-	<string name="routing_attr_weight_description">Especificar o peso do veículo permitido nas rotas</string>
+	<string name="routing_attr_weight_description">Especifique o limite de peso do veículo nas rotas.</string>
     <string name="copying_osmand_files_descr">Copiar arquivos de dados para o novo destino (%s)…</string>
     <string name="copying_osmand_files">Copiando arquivos de dados…</string>
     <string name="calculate_osmand_route_gpx">Calcular rota off-line</string>
@@ -756,7 +756,7 @@ Pôr do Sol: %2$s</string>
     <string name="download_hillshade_maps">Sombras de relevo</string>
     
     
-    <string name="precise_routing_mode_descr">Permitir calcular rotas precisas sem falhas. Está limitado pela distância e é lento.</string>
+    <string name="precise_routing_mode_descr">Calcular rotas precisas sem falhas. Está limitado pela distância e é lento.</string>
     <string name="precise_routing_mode">Roteamento preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
@@ -1079,7 +1079,7 @@ Pôr do Sol: %2$s</string>
     <string name="arrival_distance_descr">Em quanto tempo você quer o anúncio da chegada?</string>
     <string name="rendering_out_of_memory">Não há memória suficiente para exibir a área selecionada</string>
 	<string name="use_fluorescent_overlays">Sobreposições fluorescentes</string>
-	<string name="use_fluorescent_overlays_descr">Usar cores fluorescentes para exibir as trilhas e rotas</string>
+	<string name="use_fluorescent_overlays_descr">Usar cores fluorescentes para exibir as trilhas e rotas.</string>
 	<string name="offline_edition">Edição off-line</string>
 	<string name="offline_edition_descr">Sempre usar edição off-line</string>
 	<string name="update_poi_does_not_change_indexes">As alterações de POIs dentro do aplicativo não tem efeito imediato nos mapas baixados, pois são salvas em arquivo local.</string>
@@ -1196,7 +1196,7 @@ Pôr do Sol: %2$s</string>
 	<string name="map_screen_orientation_descr">Vertical, horizontal ou a mesma do aparelho</string>
 	<string name="opening_hours_not_supported">O formato do horário de funcionamento não é suportado para edição</string>
 	<string name="add_new_rule">Adicionar nova regra</string>
-	<string name="transport_Routes">Rotas</string>
+	<string name="transport_Routes">Linhas</string>
 	<string name="transport_Stop">Parada</string>
 	<string name="transport_stops">paradas</string>
 	<string name="transport_search_after">Itinerário seguinte</string>
@@ -1676,7 +1676,7 @@ Pôr do Sol: %2$s</string>
     
 	<string name="routing_attr_avoid_borders_description">Evitar cruzar fronteiras nacionais</string>
 	<string name="routing_attr_height_name">Limite de altura</string>
-	<string name="routing_attr_height_description">Especificar a altura do veículo para ser permitida nas rotas</string>
+	<string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
 	<string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas</string>
 <string name="rendering_value_disabled_name">Desativado</string>
@@ -1950,7 +1950,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_near">Perto de</string>
     <string name="no_address_found">Sem endereço determinado</string>
 	<string name="looking_up_address">Procurando endereço</string>
-    <string name="rendering_attr_horseRoutes_name">Rotas a cavalo</string>
+    <string name="rendering_attr_horseRoutes_name">Rotas para cavalos</string>
     <string name="update">Atualizar</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
@@ -2752,7 +2752,7 @@ Pôr do Sol: %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nome do ponto opcional</string>
-    <string name="transport_nearby_routes_within">Rotas próximas a</string>
+    <string name="transport_nearby_routes_within">Linhas próximas a</string>
     <string name="transport_nearby_routes">Cerca de</string>
     <string name="enter_the_file_name">Digite o nome do arquivo.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
@@ -2951,4 +2951,5 @@ Pôr do Sol: %2$s</string>
     <string name="start_search_from_city">Iniciar pesquisa a partir da cidade</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="rendering_value_black_name">Preto</string>
+    <string name="more_transport_on_stop_hint">Esta parada tem outros meios de transporte.</string>
     </resources>

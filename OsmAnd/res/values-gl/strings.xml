@@ -458,7 +458,7 @@
     <string name="wait_current_task_finished">Agarde até que remate a tarefa actual</string>
     <string name="use_kalman_filter_compass_descr">Diminúe o ruído nas lecturas do compás mais engade inercia.</string>
     <string name="use_kalman_filter_compass">Empregar o filtro Kalman</string>
-    <string name="use_magnetic_sensor_descr">Para a lectura do compás, emprega o sensor magnético en lugar do sensor da orientación.</string>
+    <string name="use_magnetic_sensor_descr">Para a lectura do compás, emprega o sensor magnético no canto do sensor da orientación.</string>
     <string name="use_magnetic_sensor">Empregar o sensor magnético</string>
     <string name="other_location">Outra</string>
     <string name="files_limit">Fican %1$d ficheiros</string>
@@ -1004,7 +1004,7 @@
 	<string name="pref_vector_map">Axustes dos mapas vectoriais</string>
 	<string name="delete_confirmation_msg">Eliminar %1$s?</string>
 	<string name="city_type_suburb">Zona residencial</string>
-	<string name="city_type_hamlet">Lugar</string>
+	<string name="city_type_hamlet">Aldea</string>
 	<string name="city_type_village">Vila pequena</string>
 	<string name="city_type_town">Vila grande</string>
 	<string name="city_type_city">Cidade</string>
@@ -1873,7 +1873,7 @@ Lon %2$s</string>
 	<string name="rendering_attr_pisteGrooming_name">Coidado de pistas</string>
     <string name="nautical_maps_missing">Para poder amosar mapas náuticos hai que descarga-lo mapa especial sen conexión</string>
 	<string name="edit_group">Editar o grupo</string>
-    <string name="parking_place">Lugar de aparcamento</string>
+    <string name="parking_place">Lugar do aparcamento</string>
     <string name="version_settings_descr">Descarregar versións para noite.</string>
     <string name="version_settings">Construcións (versións)</string>
     <string name="voices">Indicacións con voz</string>

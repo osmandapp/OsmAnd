@@ -2895,7 +2895,7 @@
     <string name="in_app_purchase_desc_ex">После покупки этот план станет доступен для вас навсегда.</string>
     <string name="wikivoyage_travel_guide">Путеводитель</string>
     <string name="wikivoyage_travel_guide_descr">Просматривайте путеводители Викигида по самым интересным местам на планете внутри OsmAnd без подключения к интернету.</string>
-    <string name="travel_card_update_descr">Мы подготовили обновления и исправления в данных Викигида, обновите файл, чтобы увидеть их.</string>
+    <string name="travel_card_update_descr">Доступны новые данные Викигида, обновите файл, чтобы увидеть их.</string>
 	<string name="travel_card_download_descr">Скачайте путеводители Викигида для просмотра статей о местах по всему миру без подключения к Интернету.</string>
 	<string name="update_is_available">Доступно обновление</string>
 	<string name="download_file">Скачать файл</string>
