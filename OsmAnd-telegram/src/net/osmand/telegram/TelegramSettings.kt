@@ -291,9 +291,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 					}
 					else -> {
 						locationTime = getLastSuccessfulSendTime()
-						title = app.getString(R.string.successfully_sent_and_updated)
-						description = app.getString(R.string.last_updated_location)
-						statusType = SharingStatusType.SENDING
+						if (locationTime == -1L) {
+							title = app.getString(R.string.sending_location_messages)
+							description = app.getString(R.string.waiting_for_response_from_telegram)
+						} else {
+							title = app.getString(R.string.successfully_sent_and_updated)
+							description = app.getString(R.string.last_updated_location)
+						}
 					}
 				}
 			} else {
