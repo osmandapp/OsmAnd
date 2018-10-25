@@ -1,4 +1,16 @@
 <resources>
+	<string name="enter_another_device_name">Enter another name, you already have the device with the same name</string>
+	<string name="device_added_successfully">%1$s added successfully.</string>
+	<string name="shared_string_add">Add</string>
+	<string name="error_adding_new_device">Error adding new device</string>
+	<string name="enter_device_name_description">Enter a name for your new device. Max length 200 symbols.</string>
+	<string name="device_name_is_too_long">Device name is too long</string>
+	<string name="device_name_cannot_be_empty">Device name cannot be empty</string>
+	<string name="device_name">Device name</string>
+	<string name="shared_string_hide">Hide</string>
+	<string name="share_location_as_description_second_line">You can create and view the Device ID in the telegram client using the %1$s chat bot. %2$s</string>
+	<string name="share_location_as_description">If you want to connect multiple devices to one telegram account, you need to use different Device to share your location.</string>
+	<string name="add_new_device_description">Last updated location:</string>
 	<string name="last_updated_location">Last updated location:</string>
 	<string name="successfully_sent_and_updated">Successfully sent and updated</string>
 	<string name="not_possible_to_send_to_telegram_chats">Not possible to send to Telegram chats:</string>

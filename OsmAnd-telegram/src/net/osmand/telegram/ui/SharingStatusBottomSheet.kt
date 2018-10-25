@@ -56,7 +56,7 @@ class SharingStatusBottomSheet : DialogFragment() {
 				findViewById<TextView>(R.id.last_location_line).text = sharingStatus.description
 
 				if (sharingStatusType != TelegramSettings.SharingStatusType.INITIALIZING
-					&& sharingStatusType != TelegramSettings.SharingStatusType.SENDING) {
+					&& (sharingStatusType == TelegramSettings.SharingStatusType.SENDING && time != -1L)) {
 					val descriptionTime = when {
 						time > 0 -> OsmandFormatter.getFormattedTime(time, false)
 						sharingStatusType == TelegramSettings.SharingStatusType.NO_GPS -> getString(

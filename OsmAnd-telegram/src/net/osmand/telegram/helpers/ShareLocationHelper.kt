@@ -5,6 +5,7 @@ import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
+import net.osmand.telegram.utils.BASE_URL
 
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
@@ -51,8 +52,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				if (user != null && sharingMode == user.id.toString()) {
 					app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, location.latitude, location.longitude)
 				} else if (sharingMode.isNotEmpty()) {
-					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
-					AndroidNetworkUtils.sendRequestAsync(url, null)
+					val url = "$BASE_URL/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
+					AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false, null)
 				}
 			}
 			lastLocationMessageSentTime = System.currentTimeMillis()

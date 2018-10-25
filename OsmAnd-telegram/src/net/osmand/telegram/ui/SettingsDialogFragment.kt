@@ -1,11 +1,14 @@
 package net.osmand.telegram.ui
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.Toolbar
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +17,7 @@ import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.DurationPref
+import net.osmand.telegram.helpers.TelegramHelper.Companion.OSMAND_BOT_USERNAME
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
@@ -21,6 +25,10 @@ import org.drinkless.td.libcore.telegram.TdApi
 class SettingsDialogFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
+	private lateinit var shareAsContainer: ViewGroup
+	private lateinit var shareAsDescription: TextView
+
+	private var shareAsDescriptionHidden = true
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -65,6 +73,36 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			}
 		}
 
+		shareAsDescription = mainView.findViewById<TextView>(R.id.share_as_description).apply {
+			text = getText(R.string.share_location_as_description)
+			setOnClickListener {
+				updateShareAsDescription()
+			}
+		}
+
+		shareAsContainer = mainView.findViewById(R.id.share_as_container)
+		val user = telegramHelper.getCurrentUser()
+		if (user != null) {
+			addItemToContainer(inflater, shareAsContainer, user.id.toString(),  TelegramUiHelper.getUserName(user))
+		}
+		settings.getShareDevices().forEach {
+			addItemToContainer(inflater, shareAsContainer, it.externalId, it.deviceName)
+		}
+
+		mainView.findViewById<TextView>(R.id.add_new_device_title)
+			.setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
+
+		mainView.findViewById<ImageView>(R.id.add_new_device_icon)
+			.setImageDrawable(getAddNewDeviceIcon())
+
+		mainView.findViewById<LinearLayout>(R.id.add_new_device_btn).apply {
+			setOnClickListener {
+				fragmentManager?.also { fm ->
+					AddNewDeviceBottomSheet.showInstance(fm, this@SettingsDialogFragment)
+				}
+			}
+		}
+
 		container = mainView.findViewById(R.id.osmand_connect_container)
 		for (appConn in TelegramSettings.AppConnect.values()) {
 			val pack = appConn.appPackage
@@ -106,15 +144,6 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 		updateSelectedAppConn()
 
-		container = mainView.findViewById(R.id.share_as_container)
-		val user = telegramHelper.getCurrentUser()
-		if (user != null) {
-			addItemToContainer(inflater, container, user.id.toString(),  TelegramUiHelper.getUserName(user))
-		}
-		settings.shareDevicesIds.forEach {
-			addItemToContainer(inflater, container, it.key, it.value)
-		}
-
 		if (user != null) {
 			TelegramUiHelper.setupPhoto(
 				app,
@@ -150,6 +179,19 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			LogoutBottomSheet.LOGOUT_REQUEST_CODE -> {
 				logoutTelegram()
 				dismiss()
+			}
+			AddNewDeviceBottomSheet.NEW_DEVICE_REQUEST_CODE -> {
+				val user = app.telegramHelper.getCurrentUser()
+				if (user != null && data != null) {
+					val deviceName = data.getStringExtra(AddNewDeviceBottomSheet.DEVICE_NAME)
+					val deviceExternalId = data.getStringExtra(AddNewDeviceBottomSheet.DEVICE_EXTERNAL_ID)
+
+					val inflater = activity?.layoutInflater
+					if (inflater != null && deviceName != null && deviceExternalId != null) {
+						addItemToContainer(inflater, shareAsContainer, deviceExternalId, deviceName)
+						Toast.makeText(app, getString(R.string.device_added_successfully, deviceName), Toast.LENGTH_SHORT).show()
+					}
+				}
 			}
 		}
 	}
@@ -233,6 +275,46 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				}
 			}
 		}
+	}
+
+	private fun updateShareAsDescription() {
+		if (shareAsDescriptionHidden) {
+			shareAsDescription.text = getFullShareAsDescriptionText()
+		} else {
+			shareAsDescription.text = getText(R.string.share_location_as_description)
+		}
+		shareAsDescriptionHidden = !shareAsDescriptionHidden
+	}
+
+	private fun getFullShareAsDescriptionText(): CharSequence {
+		val textHide = "${getString(R.string.shared_string_hide)}."
+		val spannableString = SpannableStringBuilder(getText(R.string.share_location_as_description))
+		val newSpannable = SpannableStringBuilder(getString(R.string.share_location_as_description_second_line, OSMAND_BOT_USERNAME, textHide))
+
+		spannableString.append("\n\n")
+
+		var startIndex = newSpannable.indexOf(OSMAND_BOT_USERNAME)
+		var endIndex = startIndex + OSMAND_BOT_USERNAME.length
+		newSpannable.setSpan(ForegroundColorSpan(app.uiUtils.getActiveColor()), startIndex, endIndex, 0)
+
+		startIndex = newSpannable.indexOf(textHide)
+		endIndex = startIndex + textHide.length
+		newSpannable.setSpan(ForegroundColorSpan(app.uiUtils.getActiveColor()), startIndex, endIndex, 0)
+
+		spannableString.append(newSpannable)
+
+		return spannableString
+	}
+
+	private fun getAddNewDeviceIcon(): Drawable? {
+		val normal = app.uiUtils.getActiveIcon(R.drawable.ic_action_add)
+		if (Build.VERSION.SDK_INT >= 21) {
+			val active = app.uiUtils.getIcon(R.drawable.ic_action_add, R.color.ctrl_light)
+			if (normal != null && active != null) {
+				return AndroidUtils.createPressedStateListDrawable(normal, active)
+			}
+		}
+		return normal
 	}
 
 	private fun logoutTelegram() {
