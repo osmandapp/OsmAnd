@@ -424,7 +424,7 @@
     <string name="gpx_split_interval">Intervalo de divisão</string>
     <string name="sort_by_distance">Ordenar por distância</string>
     <string name="sort_by_name">Ordenar por nome</string>
-    <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="save_as_favorites_points">Salvar como grupo de favoritos</string>
     <string name="select_destination_and_intermediate_points">Selecionar destinos</string>
@@ -2182,8 +2182,8 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_resume_pause_navigation_descr">Toque neste botão para pausar ou retomar a navegação.</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
     <string name="quick_action_start_stop_navigation_descr">Toque neste botão para iniciar ou parar a navegação.</string>
-    <string name="store_tracks_in_monthly_directories">Armazenar trilhas gravadas em pastas mensais</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Armazenar trilhas gravadas em subpastas por mês (ex.: 2018-01).</string>
+    <string name="store_tracks_in_monthly_directories">Salvar trilhas gravadas em pastas mensais</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Salvar trilhas gravadas em subpastas por mês (ex.: 2018-01).</string>
     <string name="shared_string_reset">Redefinir</string>
     <string name="shared_string_reload">Recarregar</string>
     <string name="mapillary_menu_descr_tile_cache">Recarregar para ver dados atualizados.</string>
@@ -2235,7 +2235,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de gelo, vaus</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostrar \'Navegação finalizada\'</string>
+    <string name="quick_action_show_navigation_finish_dialog">Exibir \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="show_from_zoom_level">Exibir a partir do nível de zoom</string>
