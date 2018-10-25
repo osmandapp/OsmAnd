@@ -291,6 +291,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 					}
 					else -> {
 						locationTime = getLastSuccessfulSendTime()
+						statusType = SharingStatusType.SENDING
 						if (locationTime == -1L) {
 							title = app.getString(R.string.sending_location_messages)
 							description = app.getString(R.string.waiting_for_response_from_telegram)
