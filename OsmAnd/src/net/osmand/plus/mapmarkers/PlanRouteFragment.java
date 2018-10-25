@@ -969,7 +969,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 		@Override
 		public int getStatusBarColor(Context context, boolean night) {
-			return -1;
+			return NO_COLOR;
 		}
 	}
 }

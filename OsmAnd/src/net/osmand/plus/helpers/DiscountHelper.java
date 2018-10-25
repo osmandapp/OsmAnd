@@ -333,7 +333,7 @@ public class DiscountHelper {
 
 	public static class DiscountBarController extends TopToolbarController {
 
-		private int statusBarColor = -1;
+		private int statusBarColor = NO_COLOR;
 
 		DiscountBarController() {
 			super(TopToolbarControllerType.DISCOUNT);

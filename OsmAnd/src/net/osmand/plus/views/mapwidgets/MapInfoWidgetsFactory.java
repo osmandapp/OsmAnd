@@ -218,6 +218,9 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public static class TopToolbarController {
+
+		public static final int NO_COLOR = -1;
+
 		private TopToolbarControllerType type;
 
 		@ColorRes

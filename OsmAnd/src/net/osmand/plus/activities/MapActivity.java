@@ -859,14 +859,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
 				return;
 			}
-			int color = -1;
+			int color = TopToolbarController.NO_COLOR;
 			boolean mapControlsVisible = findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			TopToolbarController toolbarController = getMapLayers().getMapInfoLayer().getTopToolbarController();
 			if (toolbarController != null && mapControlsVisible) {
 				color = toolbarController.getStatusBarColor(this, night);
 			}
-			if (color == -1) {
+			if (color == TopToolbarController.NO_COLOR) {
 				boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
 				boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
 				if (mapTopBar && mapControlsVisible) {
