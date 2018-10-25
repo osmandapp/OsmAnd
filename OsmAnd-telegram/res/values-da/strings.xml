@@ -172,4 +172,16 @@
 	<string name="initializing">Initialiserer</string>
 	<string name="searching_for_gps">Søger efter GPS</string>
 	<string name="connecting_to_the_internet">Forbinder til internettet</string>
+	<string name="enter_another_device_name">Indtast et andet navn, der er allerede en enhed med det samme navn</string>
+	<string name="device_added_successfully">%1$s tilføjet.</string>
+	<string name="shared_string_add">Tilføj</string>
+	<string name="error_adding_new_device">Fejl ved tilføjelse af ny enhed</string>
+	<string name="enter_device_name_description">Indtast et navn til den nye enhed. Max længde 200 tegn.</string>
+	<string name="device_name_is_too_long">Enhedsnavn er for langt</string>
+	<string name="device_name_cannot_be_empty">Enhedsnavn må ikke være tomt</string>
+	<string name="device_name">Enhedsnavn</string>
+	<string name="shared_string_hide">Skjul</string>
+	<string name="share_location_as_description_second_line">Opret og få vist enhedens-id i Telegram-klienten ved hjælp af %1$s chat-bot. %2$s</string>
+	<string name="share_location_as_description">Hvis der skal tilsluttes flere enheder til en Telegram-konto, er det nødvendigt til at bruge forskellige enheder til at dele placeringen.</string>
+	<string name="add_new_device_description">Sidst ajourførte placering:</string>
 	</resources>
