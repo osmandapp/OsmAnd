@@ -1878,7 +1878,7 @@
 	<string name="poi_payment_uta_no">Картки UTA не приймаються</string>
 	<string name="poi_health_specialty_surgery_yes">Загальна хірургія</string>
 	<string name="poi_fire_hydrant_type_pond">Ставок</string>
-	<string name="poi_payment_efectivo_yes">Готівка</string>
+	<string name="poi_payment_efectivo_yes">Електронні гроші Efectivo</string>
 	<string name="poi_health_specialty_radiology_yes">Радіологія</string>
 	<string name="poi_fire_hydrant_type_wall">Пожежний кран</string>
 
@@ -3191,7 +3191,7 @@
 	<string name="poi_motorcycle_repair">Ремонт мотоциклів</string>
 	<string name="poi_resource_mercury">Ртуть</string>
 	<string name="poi_route_trolleybus_ref">Тролейбус</string>
-	<string name="poi_crop_poultry">Вирощується культура: свійська птиця</string>
+	<string name="poi_crop_poultry">Вирощується культура: корм для птиці</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Глибинна психологія</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
 	<string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
@@ -3864,7 +3864,7 @@
 <string name="poi_car_pooling">Точка кар-шерінгу</string>
 	<string name="poi_ruins">Руїни</string>
 
-	<string name="poi_license_classes">Ліцензійні класи</string>
+	<string name="poi_license_classes">Види водійських прав</string>
 
 	<string name="poi_hill">Пагорб</string>
 
