@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -39,6 +40,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -57,6 +59,7 @@ public class DiscountHelper {
 	private static final String INAPP_PREFIX = "osmand-in-app:";
 	private static final String SEARCH_QUERY_PREFIX = "osmand-search-query:";
 	private static final String SHOW_POI_PREFIX = "osmand-show-poi:";
+	private static final String OPEN_ACTIVITY = "open_activity";
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -290,10 +293,52 @@ public class DiscountHelper {
 					showPoiFilter(mapActivity, filter);
 				}
 			}
+		} else if (url.equals(OPEN_ACTIVITY)) {
+			if (mData.activityJson != null) {
+				openActivity(mapActivity, mData.activityJson);
+			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
 			mapActivity.startActivity(intent);
+		}
+	}
+
+	private static void openActivity(Context context, JSONObject activityObject) {
+		boolean successful = false;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		try {
+			for (Iterator<String> it = activityObject.keys(); it.hasNext(); ) {
+				String key = it.next();
+				if (key.equals("activity_name")) {
+					intent.setClassName(context, activityObject.getString(key));
+					successful = true;
+					continue;
+				}
+				Object obj = activityObject.get(key);
+				if (obj instanceof Integer) {
+					intent.putExtra(key, (Integer) obj);
+				} else if (obj instanceof Long) {
+					intent.putExtra(key, (Long) obj);
+				} else if (obj instanceof Boolean) {
+					intent.putExtra(key, (Boolean) obj);
+				} else if (obj instanceof Float) {
+					intent.putExtra(key, (Float) obj);
+				} else if (obj instanceof Double) {
+					intent.putExtra(key, (Double) obj);
+				} else if (obj instanceof String) {
+					intent.putExtra(key, (String) obj);
+				}
+			}
+		} catch (JSONException e) {
+			successful = false;
+		}
+		if (successful) {
+			try {
+				context.startActivity(intent);
+			} catch (ActivityNotFoundException e) {
+				// ignore
+			}
 		}
 	}
 
@@ -318,6 +363,8 @@ public class DiscountHelper {
 		@ColorInt
 		int textBtnTitleColor = -1;
 
+		JSONObject activityJson;
+
 		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
 			ControllerData res = new ControllerData();
 			res.message = obj.getString("message");
@@ -331,6 +378,7 @@ public class DiscountHelper {
 			res.descrColor = parseColor("description_color", obj);
 			res.statusBarColor = parseColor("status_bar_color", obj);
 			res.textBtnTitleColor = parseColor("button_title_color", obj);
+			res.activityJson = obj.optJSONObject("activity");
 			return res;
 		}
 
