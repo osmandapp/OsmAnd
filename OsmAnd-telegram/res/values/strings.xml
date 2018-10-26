@@ -8,12 +8,12 @@
 	<string name="device_name_cannot_be_empty">Device name cannot be empty</string>
 	<string name="device_name">Device name</string>
 	<string name="shared_string_hide">Hide</string>
-	<string name="share_location_as_description_second_line">The Device ID can be created and viewed in the Telegram client using the %1$s chat bot. %2$s</string>
-	<string name="share_location_as_description">When connecting multiple devices to one Telegram account, use a different device to share your location.</string>
 	<string name="add_new_device_description">Last sent location:</string>
-	<string name="last_updated_location">Last sent location:</string>
-	<string name="successfully_sent_and_updated">Sent and updated.</string>
-	<string name="not_possible_to_send_to_telegram_chats">Could not send to Telegram chats:</string>
+	<string name="share_location_as_description_second_line">You can create and view the Device ID in the telegram client using the %1$s chat bot. %2$s</string>
+	<string name="share_location_as_description">If you want to connect multiple devices to one telegram account, you need to use different Device to share your location.</string>
+	<string name="last_updated_location">Last updated location:</string>
+	<string name="successfully_sent_and_updated">Successfully sent and updated</string>
+	<string name="not_possible_to_send_to_telegram_chats">Not possible to send to Telegram chats:</string>
 	<string name="waiting_for_response_from_telegram">Waiting for response from Telegram</string>
 	<string name="sending_location_messages">Sending location</string>
 	<string name="initializing">Starting</string>
@@ -28,21 +28,15 @@
 	<string name="not_sent_yet">Not sent yet</string>
 	<string name="not_found_yet">Not found yet</string>
 	<string name="re_send_location">Re-send location</string>
-	<string name="last_sent_location">Last sent location</string>
 	<string name="last_available_location">Last available location</string>
 	<string name="sharing_status">Sharing status</string>
 	<string name="sharing_enabled">Sharing: Enabled</string>
 	<string name="shared_string_status">Status</string>
 	<string name="no_gps_connection">No GPS connection</string>
-	<string name="sharing_success">Sent and updated</string>
-	<string name="not_possible_to_send_to_chats">Could not send to chats:</string>
 	<string name="no_internet_connection">No internet connection</string>
 	<string name="shared_string_disable">Disable</string>
 	<string name="shared_string_save">Save</string>
-	<string name="add_device_descr">Copy your device ID from https://live.osmand.net/device/ID</string>
-	<string name="device_id">Device ID</string>
 	<string name="add_device">Add device</string>
-	<string name="share_location_as_descr">Allow sharing your device location, or location of custom devices added via API.</string>
 	<string name="share_location_as">Share location as</string>
 	<string name="live_now_description">Contacts and groups sharing location to you.</string>
 	<string name="logout_from_osmand_telegram_descr">Are you sure you want to log out of OsmAnd Telegram so you can\'t share location or see the location of others?</string>
@@ -122,13 +116,13 @@
 	<string name="password_descr">Telegram password</string>
 	<string name="shared_string_login">Log in</string>
 	<string name="shared_string_logout">Log out</string>
-	<string name="not_logged_in">Not logged in</string>
 	<string name="initialization">Starting</string>
 	<string name="logging_out">Logging out</string>
 	<string name="closing">Closing</string>
+	<string name="gps_network_not_enabled">Turn on \"Location\"?</string>
+	<string name="not_logged_in">You are not logged in</string>
 	<string name="shared_string_continue">Continue</string>
 	<string name="shared_string_cancel">Cancel</string>
-	<string name="gps_network_not_enabled">Turn on \"Location\"?</string>
 	<string name="shared_string_settings">Settings</string>
 	<string name="no_location_permission">App lacks permission for location data access.</string>
 	<string name="gps_not_available">Please turn on \"Location\" in the system settings</string>
@@ -138,11 +132,6 @@
 	<string name="shared_string_distance">Distance</string>
 	<string name="share_location">Share location</string>
 	<string name="sharing_location">Sharing location</string>
-	<string name="shared_string_paused">Paused</string>
-	<string name="shared_string_no_data">No data</string>
-	<string name="shared_string_pause">Pause</string>
-	<string name="shared_string_start">Start</string>
-	<string name="shared_string_stop">Stop</string>
 	<string name="process_service">OsmAnd Telegram service</string>
 	<string name="osmand_logo">OsmAnd logo</string>
 	<string name="install_osmand_dialog_message">You need to install the free or paid version of OsmAnd first</string>
@@ -182,7 +171,7 @@
 	<string name="plus">+</string>
 	<string name="welcome_descr"><![CDATA[<b>OsmAnd Location Sharing</b> lets you share your location and see that of others in the OsmAnd.<br/><br/>The app uses Telegram API and you need a Telegram account.]]></string>
 	<string name="my_location">My location</string>
-	<string name="live_now">Sending…</string>
+	<string name="live_now">Live now</string>
 
 
 </resources>
