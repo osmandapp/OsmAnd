@@ -218,7 +218,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					if (user != null) {
 						OsmandApiUtils.updateSharingDevices(app, user.id)
 						if (settings.currentSharingMode.isEmpty()) {
-							settings.currentSharingMode = user.id.toString()
+							settings.updateCurrentSharingMode(user.id.toString())
 						}
 					}
 				}

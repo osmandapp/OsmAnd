@@ -3,9 +3,13 @@ package net.osmand.telegram.helpers
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.BASE_URL
+import org.drinkless.td.libcore.telegram.TdApi
+import org.json.JSONException
+import org.json.JSONObject
 
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
@@ -47,13 +51,26 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		if (location != null) {
 			val chatsShareInfo = app.settings.getChatsShareInfo()
 			if (chatsShareInfo.isNotEmpty()) {
+				val latitude = location.latitude
+				val longitude = location.longitude
 				val user = app.telegramHelper.getCurrentUser()
 				val sharingMode = app.settings.currentSharingMode
+
 				if (user != null && sharingMode == user.id.toString()) {
-					app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, location.latitude, location.longitude)
+					app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, latitude, longitude)
 				} else if (sharingMode.isNotEmpty()) {
-					val url = "$BASE_URL/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
-					AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false, null)
+					val url = "$BASE_URL/device/$sharingMode/send?lat=$latitude&lon=$longitude"
+					AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false,
+						object : AndroidNetworkUtils.OnRequestResultListener {
+							override fun onResult(result: String?) {
+								updateShareInfoSuccessfulSendTime(result, chatsShareInfo)
+							}
+						})
+
+					val osmandBot = app.telegramHelper.getOsmandBot()
+					if (osmandBot != null) {
+						checkAndSendViaBotMessages(chatsShareInfo, TdApi.Location(latitude, longitude), osmandBot)
+					}
 				}
 			}
 			lastLocationMessageSentTime = System.currentTimeMillis()
@@ -131,6 +148,34 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		lastTimeInMillis = 0L
 
 		refreshNotification()
+	}
+
+	private fun updateShareInfoSuccessfulSendTime(result: String?, chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>) {
+		if (result != null) {
+			try {
+				val jsonResult = JSONObject(result)
+				val status = jsonResult.getString("status")
+				val currentTime = System.currentTimeMillis()
+				if (status == "OK") {
+					chatsShareInfo.forEach { (_, shareInfo) ->
+						shareInfo.lastSuccessfulSendTimeMs = currentTime
+					}
+				}
+			} catch (e: JSONException) {
+			}
+		}
+	}
+
+	private fun checkAndSendViaBotMessages(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, location: TdApi.Location, osmandBot: TdApi.User) {
+		val deviceName = app.settings.getShareDeviceNameWithExternalId(app.settings.currentSharingMode)
+		if (deviceName != null) {
+			chatsShareInfo.forEach { (_, shareInfo) ->
+				if (shareInfo.shouldSendViaBotMessage) {
+					app.telegramHelper.sendViaBotLocationMessage(osmandBot.id, shareInfo, location, deviceName)
+					shareInfo.shouldSendViaBotMessage = false
+				}
+			}
+		}
 	}
 
 	private fun refreshNotification() {
