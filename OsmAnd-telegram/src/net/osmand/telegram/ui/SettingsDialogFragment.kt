@@ -209,7 +209,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				isChecked = checked
 			}
 			setOnClickListener {
-				settings.currentSharingMode = tag
+				settings.updateCurrentSharingMode(tag)
 				updateSelectedSharingMode()
 			}
 			this.tag = tag

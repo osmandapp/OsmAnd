@@ -84,6 +84,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
 	var currentSharingMode = ""
+		private set
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -138,6 +139,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 				shareChatInfo = ShareChatInfo()
 			}
 			val currentTime = System.currentTimeMillis() / 1000
+			val user = app.telegramHelper.getCurrentUser()
+			if (user != null && currentSharingMode != user.id.toString() && shareChatInfo.start == -1L) {
+				shareChatInfo.shouldSendViaBotMessage = true
+			}
+
 			shareChatInfo.chatId = chatId
 			shareChatInfo.start = currentTime
 			if (shareChatInfo.livePeriod == -1L) {
@@ -157,6 +163,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 		shareDevices = list.toHashSet()
 	}
 
+	fun updateCurrentSharingMode(sharingMode: String) {
+		if (currentSharingMode != sharingMode) {
+			shareChatsInfo.forEach { (_, shareInfo) ->
+				shareInfo.shouldSendViaBotMessage = true
+			}
+		}
+		currentSharingMode = sharingMode
+	}
+
 	fun getChatLivePeriod(chatId: Long) = shareChatsInfo[chatId]?.livePeriod
 
 	fun getChatsShareInfo() = shareChatsInfo
@@ -170,6 +185,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 			}
 		}
 		return false
+	}
+
+	fun getShareDeviceNameWithExternalId(externalId: String): String? {
+		return shareDevices.singleOrNull { it.externalId == externalId }?.deviceName
 	}
 
 	fun getLastSuccessfulSendTime() = shareChatsInfo.values.maxBy { it.lastSuccessfulSendTimeMs }?.lastSuccessfulSendTimeMs ?: -1
@@ -279,6 +298,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 				when {
 					!gpsEnabled -> {
 						locationTime = app.shareLocationHelper.lastLocationMessageSentTime
+						if (locationTime <= 0) {
+							locationTime = getLastSuccessfulSendTime()
+						}
 						title = app.getString(R.string.no_gps_connection)
 						description = app.getString(R.string.last_updated_location)
 						statusType = SharingStatusType.NO_GPS
@@ -441,6 +463,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 				obj.put(ShareChatInfo.CURRENT_MESSAGE_ID_KEY, chatInfo.currentMessageId)
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY, chatInfo.userSetLivePeriod)
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY, chatInfo.userSetLivePeriodStart)
+				obj.put(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY, chatInfo.lastSuccessfulSendTimeMs)
 				jArray.put(obj)
 			}
 			jArray
@@ -461,6 +484,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 				currentMessageId = obj.optLong(ShareChatInfo.CURRENT_MESSAGE_ID_KEY)
 				userSetLivePeriod = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY)
 				userSetLivePeriodStart = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY)
+				lastSuccessfulSendTimeMs = obj.optLong(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY)
 			}
 			shareChatsInfo[shareInfo.chatId] = shareInfo
 		}
@@ -708,8 +732,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastSuccessfulLocation: LatLon? = null
 		var lastSuccessfulSendTimeMs = -1L
 		var shouldDeletePreviousMessage = false
-		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
+		var shouldSendViaBotMessage = false
 		var hasSharingError = false
+		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)
@@ -733,6 +758,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val CURRENT_MESSAGE_ID_KEY = "currentMessageId"
 			internal const val USER_SET_LIVE_PERIOD_KEY = "userSetLivePeriod"
 			internal const val USER_SET_LIVE_PERIOD_START_KEY = "userSetLivePeriodStart"
+			internal const val LAST_SUCCESSFUL_SEND_TIME_KEY = "lastSuccessfulSendTime"
 		}
 	}
 }
