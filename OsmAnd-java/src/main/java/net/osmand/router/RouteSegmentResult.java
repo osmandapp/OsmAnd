@@ -221,4 +221,12 @@ public class RouteSegmentResult {
 	public String getSurface() {
 		return object.getValue("surface");
 	}
+
+	public String getSmoothness() {
+		return object.getValue("smoothness");
+	}
+
+	public String getHighway() {
+		return object.getHighway();
+	}
 }
