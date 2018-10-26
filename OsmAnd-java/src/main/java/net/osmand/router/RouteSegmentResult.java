@@ -217,5 +217,8 @@ public class RouteSegmentResult {
 	public String toString() {
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
-	
+
+	public String getSurface() {
+		return object.getValue("surface");
+	}
 }

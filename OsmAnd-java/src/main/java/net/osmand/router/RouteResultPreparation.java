@@ -10,8 +10,10 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -35,6 +37,7 @@ public class RouteResultPreparation {
 	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;
 	public static final int SHIFT_ID = 6;
+	private static final String UNDEFINED_ROAD_SURFACE = "undefined";
 	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
 	/**
 	 * Helper method to prepare final result 
@@ -1717,5 +1720,27 @@ public class RouteResultPreparation {
 	private static double measuredDist(int x1, int y1, int x2, int y2) {
 		return MapUtils.getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), 
 				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
+	}
+
+	public List<RouteSegmentSurface> splitBySurfaceType(List<RouteSegmentResult> segments) {
+		int index = 0;
+		List<RouteSegmentSurface> routeSurfaces = new ArrayList<>();
+		String prevSurface = null;
+		for (RouteSegmentResult segment : segments) {
+			String currentSurface = segment.getSurface();
+			if (currentSurface == null) {
+				currentSurface = UNDEFINED_ROAD_SURFACE;
+			}
+			if (prevSurface != null && !prevSurface.equals(currentSurface)) {
+				index++;
+			}
+			if (index >= routeSurfaces.size()) {
+				routeSurfaces.add(new RouteSegmentSurface(index, currentSurface));
+			}
+			RouteSegmentSurface surface = routeSurfaces.get(index);
+			surface.incrementDistanceBy(segment.getDistance());
+			prevSurface = currentSurface;
+		}
+		return routeSurfaces;
 	}
 }

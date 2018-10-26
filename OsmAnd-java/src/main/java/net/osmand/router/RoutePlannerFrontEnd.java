@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
@@ -207,6 +208,7 @@ public class RoutePlannerFrontEnd {
 		}
 		return res;
 	}
+
 
 	protected void makeStartEndPointsPrecise(List<RouteSegmentResult> res, LatLon start, LatLon end, List<LatLon> intermediates) {
 		if (res.size() > 0) {
