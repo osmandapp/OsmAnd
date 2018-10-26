@@ -2030,10 +2030,10 @@ Pôr do Sol: %2$s</string>
     <string name="number_of_recipients">Número de destinatários</string>
     <string name="osm_editors_ranking">Ranking de editores de OSM</string>
     <string name="map_widget_battery">Nível da bateria</string>
-    <string name="move_marker_bottom_sheet_title">Movimente o mapa para posicionar o marcador</string>
+    <string name="move_marker_bottom_sheet_title">Mova o mapa para reposicionar o marcador</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="use_osm_live_routing">Navegação OsmAnd Live</string>
-    <string name="access_no_destination">O destino não foi indicado</string>
+    <string name="access_no_destination">Destino não definido</string>
     <string name="access_disable_offroute_recalc_descr">Desabilitar recálculo automático de rota depois de ter deixado a rota.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo automático da rota quando estiver se movendo na direção errada.</string>
     <string name="follow_us">Siga-nos</string>
@@ -2486,7 +2486,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_month_cost_desc">Pagamento mensal.</string>
     <string name="osm_live_active">Ativo</string>
     <string name="osm_live_not_active">Inativo</string>
-    <string name="osm_live_enter_email">Por favor insira um endereço de e-mail válido</string>
+    <string name="osm_live_enter_email">Por favor, digite um endereço de e-mail válido</string>
     <string name="total_donations">Total de doações</string>
 <string name="what_is_here">O que há aqui:</string>
     <string name="parked_at">estacionado em</string>
@@ -2517,7 +2517,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_user_stat">Edições %1$s, classificação %2$s, total de edições %3$s</string>
     <string name="osm_recipient_stat">Edições %1$s, soma de %2$s mBTC</string>
     <string name="osm_live_email_desc">Necessários para fornecer-lhe informações sobre as contribuições.</string>
-    <string name="osm_live_enter_user_name">Por favor, digite o Nome Público</string>
+    <string name="osm_live_enter_user_name">Por favor, digite o nome público</string>
     <string name="osm_live_thanks">Obrigado por assinar as atualizações ao vivo!</string>
     <string name="osm_live_region_desc">Parte da sua doação será enviada para os usuários OSM que enviam alterações para o mapa da região.</string>
     <string name="osm_live_subscription_settings">Configurações de assinatura</string>
@@ -2952,4 +2952,5 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="rendering_value_black_name">Preto</string>
     <string name="more_transport_on_stop_hint">Esta parada tem outros meios de transporte.</string>
+    <string name="keep_passed_markers">Manter os marcadores visitados no mapa\t</string>
     </resources>
