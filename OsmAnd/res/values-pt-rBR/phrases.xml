@@ -167,7 +167,7 @@
 	<string name="poi_border_control">Alfândega</string>
 	<string name="poi_traffic_calming_bump">Lombada (curta)</string>
 	<string name="poi_traffic_calming_hump">Lombada rápida</string>
-	<string name="poi_traffic_calming_cushion">Lomanda cushion</string>
+	<string name="poi_traffic_calming_cushion">Almofada</string>
 	<string name="poi_traffic_calming_chicane">Chicana</string>
 	<string name="poi_traffic_calming_rumble_strip">Sonorizador</string>
 	<string name="poi_traffic_calming_choker">Estreitamento</string>
@@ -1408,16 +1408,16 @@
 	<string name="poi_aerialway_summer_access_exit">Acesso de verão: apenas saída</string>
 	<string name="poi_aerialway_summer_access_both">Acesso de verão: entrada e saída</string>
 
-	<string name="poi_stars_1">Estrelas: 1 (Turista)</string>
-	<string name="poi_stars_1s">Estrelas: 1S (Turista Superior)</string>
-	<string name="poi_stars_2">Estrelas: 2 (Standard)</string>
-	<string name="poi_stars_2s">Estrelas: 2S (Superior Standard)</string>
-	<string name="poi_stars_3">Estrelas: 3 (Conforto)</string>
-	<string name="poi_stars_3s">Estrelas: 3S (Conforto Superior)</string>
-	<string name="poi_stars_4">Estrelas: 4 (Primeira Classe)</string>
-	<string name="poi_stars_4s">Estrelas: 4S (Primeira Classe Superior)</string>
-	<string name="poi_stars_5">Estrelas: 5 (Luxo)</string>
-	<string name="poi_stars_5s">Estrelas: 5S (Luxo Superior)</string>
+	<string name="poi_stars_1">1 (Turista)</string>
+	<string name="poi_stars_1s">1S (Turista Superior)</string>
+	<string name="poi_stars_2">2 (Standard)</string>
+	<string name="poi_stars_2s">2S (Standard Superior)</string>
+	<string name="poi_stars_3">3 (Conforto)</string>
+	<string name="poi_stars_3s">3S (Conforto Superior)</string>
+	<string name="poi_stars_4">4 (Primeira Classe)</string>
+	<string name="poi_stars_4s">4S (Primeira Classe Superior)</string>
+	<string name="poi_stars_5">5 (Luxo)</string>
+	<string name="poi_stars_5s">5S (Luxo Superior)</string>
 	<string name="poi_stars_6">Estrelas: 6</string>
 	<string name="poi_stars_7">Estrelas: 7</string>
 	<string name="poi_rooms">Quartos</string>
@@ -1614,7 +1614,7 @@
 	<string name="poi_delivery_no">Sem entrega</string>
 	<string name="poi_delivery_only">Apenas entrega</string>
 
-	<string name="poi_outdoor_seating_yes">Lugar ao ar livre</string>
+	<string name="poi_outdoor_seating_yes">Lugar ao ar livre: sim</string>
 	<string name="poi_outdoor_seating_no">Sem lugar ao ar livre</string>
 	<string name="poi_outdoor_seating_terrace">Lugar ao ar livre: terraço</string>
 	<string name="poi_outdoor_seating_sidewalk">Lugar ao ar livre: calçada</string>
@@ -1622,7 +1622,7 @@
 	<string name="poi_outdoor_seating_garden">Lugar ao ar livre: jardim</string>
 	<string name="poi_outdoor_seating_patio">Lugar ao ar livre: pátio</string>
 
-	<string name="poi_cocktails_yes">Coquetéis</string>
+	<string name="poi_cocktails_yes">Sim</string>
 
 	<string name="poi_second_hand_yes">Artigos de segunda mão</string>
 	<string name="poi_second_hand_no">Sem artigos de segunda mão</string>
@@ -2310,7 +2310,7 @@
 	<string name="poi_material_plastic">Material: plástico</string>
 	<string name="poi_material_sandstone">Material: arenito</string>
 	<string name="poi_material_granite_stone">Material: pedra de granito</string>
-	<string name="poi_material_metal_wood">Material: metal;madeira</string>
+	<string name="poi_material_metal_wood">Material: metal, madeira</string>
 	<string name="poi_material_glass">Material: vidro</string>
 	<string name="poi_material_bronze">Material: bronze</string>
 	<string name="poi_material_earth">Material: terra</string>
@@ -3890,5 +3890,13 @@
 	<string name="poi_hazard_flood">Risco de inundação</string>
 	<string name="poi_hazard_minefield">Campo minado</string>
 
+
+<string name="poi_car_pooling">Ponto de compartilhamento de carros</string>
+	<string name="poi_atm">Caixa eletrônico</string>
+	<string name="poi_ruins">Ruínas</string>
+
+	<string name="poi_hill">Colina</string>
+
+	<string name="poi_shoe_repair">Conserto de sapatos</string>
 
 </resources>
