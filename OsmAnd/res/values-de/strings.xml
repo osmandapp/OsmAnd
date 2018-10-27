@@ -2035,7 +2035,7 @@ Lon %2$s</string>
     <string name="shared_string_commit">OSM-Notiz</string>
 	
     <string name="av_locations">Standorte</string>
-    <string name="shared_string_hide">verbergen</string>
+    <string name="shared_string_hide">Verbergen</string>
     <string name="av_video_quality_low">Niedrigste Qualität</string>
     <string name="av_video_quality_high">Höchste Qualität</string>
     <string name="av_video_quality">Videoqualität</string>
