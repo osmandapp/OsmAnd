@@ -356,7 +356,7 @@
     <string name="app_mode_aircraft">Aeronave</string>
     
     
-    <string name="local_osm_changes_delete_all_confirm">Está a piques de eliminar %1$d cambios en OSM. Confírmao?</string>
+    <string name="local_osm_changes_delete_all_confirm">Está a piques de eliminar %1$d mudanzas no OSM. Confírmao\?</string>
     <string name="shared_string_delete_all">Eliminar todo</string>
     <string name="animate_routing_route_not_calculated">Calcula-la rota primeiro</string>
     <string name="animate_routing_route">"Simular empregando a rota calculada "</string>
@@ -512,7 +512,7 @@
     <string name="recording_context_menu_precord">Fotografar</string>
     <string name="dropbox_plugin_description">O engadido do Dropbox permite sincronizar pistas e notas de son/vídeo cunha conta do Dropbox.</string>
     <string name="dropbox_plugin_name">Engadido do Dropbox</string>
-    <string name="intermediate_points_change_order">Cambiar a orde</string>
+    <string name="intermediate_points_change_order">Muda-la orde</string>
     <string name="srtm_paid_version_msg">Considere a posibilidade de merca-lo engadido das \"Curvas do nivel\" para así contribuíres co desenvolvemento.</string>
     <string name="srtm_paid_version_title">Engadido das curvas do nivel</string>
     <string name="av_def_action_choose">Seleccionar ao ser pedido</string>
@@ -1019,7 +1019,7 @@
 	<string name="data_to_search_poi_not_available">Non hai datos locais presentes para procurar puntos de interese.</string>
 	<string name="poi_filter_by_name">Procurar polo nome</string>
 	<string name="old_poi_file_should_be_deleted">O ficheiro de datos do PDI «%1$s» é redundante e pode ser eliminado.</string>
-	<string name="update_poi_file_not_found">Non foi posíbel atopar un ficheiro local para manter os cambios nos PDI e tampouco foi posíbel crealo.</string>
+	<string name="update_poi_file_not_found">Non foi posíbel atopar un ficheiro local para mante-las mudanzas nos PDI e tampouco foi posíbel crealo.</string>
 	<string name="button_upgrade_osmandplus">Actualizar OsmAnd+</string>
 	<string name="map_version_changed_info">Descarrega a nova versión da aplicación, para poder emprega-los novos ficheiros dos mapas.</string>
 	<string name="shared_string_rename">Mudar o nome</string>
@@ -1557,14 +1557,14 @@
 	<string name="shared_string_delete">Eliminar</string>
 	<string name="poi_remove_success">O PDI foi eliminado</string>
 	<string name="poi_action_add">engadir</string>
-	<string name="poi_action_change">cambiar</string>
+	<string name="poi_action_change">mudar</string>
 	<string name="poi_action_succeded_template">A acción {0} foi completada.</string>
 	<string name="poi_error_unexpected_template">Non foi posíbel realiza-la acción {0}.</string>
 	<string name="poi_error_io_error_template">Erro do E/S ó realiza-la acción {0}.</string>
 	<string name="poi_error_info_not_loaded">A información sobre o nó non foi cargada</string>
 	<string name="poi_dialog_opening_hours">Aberto</string>
 	<string name="poi_dialog_comment">Comentario</string>
-	<string name="poi_dialog_comment_default">Cambio de PDI</string>
+	<string name="poi_dialog_comment_default">Mudanza do PDI</string>
 	<string name="poi_dialog_other_tags_message">O resto das etiquetas consérvase</string>
 	<string name="default_buttons_commit">Enviar</string>
 	<string name="shared_string_clear">Limpar</string>
@@ -1755,7 +1755,7 @@
     <string name="mark_to_delete">Marcar para eliminar</string>
 	
 	<string name="local_recordings_delete_all_confirm">Está a piques de eliminar %1$d notas. Confírmao?</string>
-	<string name="local_osm_changes_upload_all_confirm">Está a piques de enviar %1$d cambio(s) a OSM. Confírmao?</string>
+	<string name="local_osm_changes_upload_all_confirm">Está a piques de enviar %1$d mudanza(s) ó OSM. Confírmao\?</string>
     <string name="confirmation_to_clear_history">Limpa-lo historial\?</string>
     <string name="shared_string_go">Ir</string>
 	<string name="osm_edits">Edicións de OSM</string>
@@ -1769,7 +1769,7 @@
     <string name="drawer">Lista sinxela</string>
     <string name="short_location_on_map">Lat %1$s
 Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Cuestión frecuentes, cambios recentes e outros.</string>
+    <string name="tips_and_tricks_descr">Cuestións frecuentes, mudanzas recentes e outros.</string>
     <string name="routing_settings_2">Axustes da navegación</string>
     <string name="general_settings_2">Axustes xerais</string>
 	<string name="shared_string_ellipsis">…</string>
@@ -1835,8 +1835,8 @@ Lon %2$s</string>
 	<string name="rate_this_app">Cualificar este aplicativo</string>
 	<string name="rate_this_app_long">Déalle unha puntuación ao OsmAnd en Google Play</string>
 	<string name="user_hates_app_get_feedback">Díganos o porque.</string>
-	<string name="user_hates_app_get_feedback_long">Díganos o que desexa cambiar neste aplicativo.</string>
-	<string name="delete_change">Eliminar o cambio</string>
+	<string name="user_hates_app_get_feedback_long">Díganos o que desexa mudar neste aplicativo.</string>
+	<string name="delete_change">Elimina-la mudanza</string>
 	<string name="successfully_uploaded_pattern">Subido {0}/{1}</string>
 	<string name="try_again">Tentar de novo</string>
 	<string name="error_message_pattern">Erro: {0}</string>
@@ -1947,11 +1947,11 @@ Lon %2$s</string>
 	<string name="show_on_start">Amosar no inicio</string>
 	<string name="commit_poi">Enviar o PDI</string>
 	<string name="saved_at_time">Gardado agora coma: %1$s</string>
-	<string name="poi_deleted_localy">O punto de interese será eliminado unha vez enviados os cambios</string>
+	<string name="poi_deleted_localy">O punto de interese (PDI) será eliminado unha vez enviadas as mudanzas</string>
 	<string name="show_gpx">Amosar datos GPX</string>
 	<string name="count_of_lines">Número de liñas</string>
 	<string name="are_you_sure">Confírmao?</string>
-	<string name="unsaved_changes_will_be_lost">Hanse perder os cambios non gardados. Continuar?</string>
+	<string name="unsaved_changes_will_be_lost">Vanse perde-las mudanzas non gardadas. Proseguer\?</string>
 	<string name="downloads_left_template">Fican %1$s descargas</string>
 	<string name="roads">Estradas</string>
     <string name="downloading_number_of_files">A descargar - ficheiro %1$d</string>
@@ -2085,7 +2085,7 @@ Lon %2$s</string>
     <string name="last_update">Última actualización: %s</string>
     <string name="update_time">Hora da actualización</string>
     <string name="updates_size">Tamaño da actualización</string>
-    <string name="last_map_change">Último cambio do mapa: %s</string>
+    <string name="last_map_change">Última mudanza do mapa: %s</string>
     <string name="hourly">Cada hora</string>
     <string name="daily">Cada día</string>
     <string name="weekly">Cada semana</string>
@@ -2132,7 +2132,7 @@ Lon %2$s</string>
     <string name="show_polygons">Amosar polígonos</string>
     <string name="find_parking">Atopar aparcamento</string>
     <string name="shared_string_status">Estado</string>
-    <string name="shared_string_save_changes">Gardar os cambios</string>
+    <string name="shared_string_save_changes">Garda-las mudanzas</string>
     <string name="shared_string_email_address">Enderezo de correo</string>
     <string name="rendering_attr_hideUnderground_name">Obxectos subterráneos</string>
     <string name="data_is_not_available">Datos non dispoñíbeis</string>
@@ -2273,11 +2273,11 @@ Lon %2$s</string>
     <string name="osmand_plus_banner_desc">Descargas ilimitadas dos mapas, actualizacións e engadido da Wikipedia.</string>
     <string name="routing_attr_short_way_name">Camiño con economía de combustíbel</string>
     <string name="routing_attr_short_way_description">Emprega-lo camiño con economía do combustíbel (normalmente máis curto).</string>
-    <string name="shared_string_change">Cambiar</string>
+    <string name="shared_string_change">Mudar</string>
     <string name="get_started">Comezar</string>
     <string name="route_stops_before">%1$s paraxes antes</string>
     <string name="access_direction_haptic_feedback_descr">Inseri-lo enderezo do destino mediante vibración.</string>
-    <string name="use_osm_live_routing_description">Activa-la navegación por cambios do OsmAnd ao Vivo.</string>
+    <string name="use_osm_live_routing_description">Activa-la navegación por mudanzas do OsmAnd ao Vivo.</string>
 	<string name="access_disable_offroute_recalc">Non recalculares a rota ó saírme da mesma</string>
     <string name="access_disable_offroute_recalc_descr">Non recalcula a rota, ó afastarss da mesma.</string>
     <string name="access_disable_wrong_direction_recalc">Non recalculares a rota cando se estea na dirección contraria</string>
@@ -2318,7 +2318,7 @@ Lon %2$s</string>
     <string name="osm_live_thanks">Grazas por apoiar ó OsmAnd!
 \n
 \nPara activares tódalas características novas, debes reinicia-lo OsmAnd.</string>
-    <string name="osm_live_region_desc">Parte da súa doazón será enviada ós usuarios do OSM que fagan cambios do mapa desa rexión.</string>
+    <string name="osm_live_region_desc">Parte da súa doazón será enviada ós usuarios do OSM que fagan mudanzas do mapa desa rexión.</string>
     <string name="osm_live_ask_for_purchase">Merque primeiro unha subscrición ó OsmAnd ao Vivo</string>
 
     <string name="osm_live_header">Esta subscrición permite actualizacións cada hora para tódolos mapas do mundo. Un anaco dos ingresos voltan á comunidade do OSM e págase por cada contribución ó OSM. Se che gosta o OsmAnd, o OSM e queres apoialos e ser apoiado por eles, esta é un perfecto xeito de facelo.</string>
@@ -2349,7 +2349,7 @@ Lon %2$s</string>
     <string name="show_free_version_banner_description">Amosa o anuncio da versión de balde, mesmo na versión de pago.</string>
     <string name="activate_seamarks_plugin">Activa o engadido da \"Vista náutica\"</string>
     <string name="other_menu_group">Outros</string>
-    <string name="poi_context_menu_modify_osm_change">Modificar cambio de OSM</string>
+    <string name="poi_context_menu_modify_osm_change">Modificar mudanza do OSM</string>
     <string name="number_of_contributors">Número de colaboradores</string>
     <string name="number_of_edits">Número de edicións</string>
     <string name="reports_for">Informe para</string>
@@ -2360,8 +2360,8 @@ Lon %2$s</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
     <string name="quick_action_add_marker">Engadir unha marcaxe do mapa</string>
     <string name="quick_action_add_poi">Engadir un PDI</string>
-    <string name="quick_action_map_style">Cambiar o estilo do mapa</string>
-    <string name="quick_action_map_style_switch">Cambiouse o estilo do mapa a «%s».</string>
+    <string name="quick_action_map_style">Muda-lo estilo do mapa</string>
+    <string name="quick_action_map_style_switch">Mudouse o estilo do mapa a «%s».</string>
     <string name="quick_action_take_audio_note">Nova nota de son</string>
     <string name="quick_action_take_video_note">Nova nota de vídeo</string>
     <string name="quick_action_take_photo_note">Nova nota da imaxe</string>
@@ -2409,11 +2409,11 @@ Lon %2$s</string>
     <string name="quick_action_map_style_action">Engadir un estilo do mapa</string>
     <string name="quick_action_empty_param_error">Rechear tódolos parámetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_source">Cambiar a fonte do mapa</string>
+    <string name="quick_action_map_source">Muda-la fonte do mapa</string>
     <string name="quick_action_map_source_title">Fontes de mapas</string>
     <string name="quick_action_map_source_action">Engadir unha fonte de mapas</string>
-    <string name="quick_action_map_source_switch">Cambiouse a fonte de mapas para «%s».</string>
-    <string name="quick_action_btn_tutorial_title">Cambiar a posición do botón</string>
+    <string name="quick_action_map_source_switch">Mudouse a fonte dos mapas para «%s».</string>
+    <string name="quick_action_btn_tutorial_title">Muda-la posición do botón</string>
     <string name="quick_action_btn_tutorial_descr">Prema e arrastre neste botón para muda-la súa ubicación na pantalla.</string>
 	<string name="shared_string_action_name">Nome da acción</string>
 <string name="animate_my_location_desc">Activa-lo desprazamento animado do mapa para \"A miña ubicación\" durante a navigación.</string>
@@ -2488,7 +2488,7 @@ Lon %2$s</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="routing_attr_allow_private_name">Permitir acceso privado</string>
     <string name="routing_attr_allow_private_description">Permitir acceso ás zonas privadas.</string>
-    <string name="change_color">Cambiar a cor</string>
+    <string name="change_color">Muda-la cor</string>
     <string name="edit_name">Editar o nome</string>
     <string name="lang_fy">Frisón</string>
     <string name="favorite_category_add_new">Engadir novo</string>
