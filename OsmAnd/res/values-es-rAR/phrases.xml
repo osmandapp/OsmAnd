@@ -171,7 +171,7 @@
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
 	<string name="poi_car_wash">Lavadero de automóviles</string>
 	<string name="poi_fuel">Estación de servicio;Gasolinera;Servicentro</string>
-	<string name="poi_fuel_diesel">Euro Diésel (grado 3; euro V);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium;Oil Diesel D10</string>
+	<string name="poi_fuel_diesel">Euro Diésel (grado 3, euro V);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium</string>
 	<string name="poi_fuel_gtl_diesel">Diésel GTL</string>
 	<string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
 	<string name="poi_fuel_biodiesel">Biodiésel</string>
