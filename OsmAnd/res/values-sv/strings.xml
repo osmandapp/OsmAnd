@@ -2164,9 +2164,9 @@ Tillgängligt utrymme är blott {2} MB.</string>
     
     <string name="map_widget_bearing">Relativ bäring</string>
     <string name="access_disable_offroute_recalc">Räkna inte om rutten när du lämnat den</string>
-    <string name="access_disable_offroute_recalc_descr">Förhindrar automatiskt omberäkning av rutten när du lämnat den.</string>
+    <string name="access_disable_offroute_recalc_descr">Ingen ruttomberäkning efter att ha lämnat rutten.</string>
     <string name="access_disable_wrong_direction_recalc">Ingen ny beräkning av rutten vid motsatt riktning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Förhindrar automatisk omberäkning av rutten när du rör dig i motsatt riktning.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Ingen ruttomberäkning när du rör dig i motsatt riktning.</string>
     <string name="access_smart_autoannounce">Smart auto-meddelande</string>
     <string name="access_smart_autoannounce_descr">Meddela endast när riktningen till målpunkten ändras.</string>
     <string name="access_autoannounce_period">Period för auto-meddelande</string>
@@ -2176,7 +2176,7 @@ Tillgängligt utrymme är blott {2} MB.</string>
     <string name="access_hint_enter_name">Skriv in namn</string>
     <string name="access_hint_enter_category">Skriv in kategori</string>
     <string name="access_hint_enter_description">Skriv in beskrivning.</string>
-    <string name="access_map_linked_to_location">Kartan är länkad till platsen</string>
+    <string name="access_map_linked_to_location">Kartan är kopplad till platsen</string>
     <string name="access_collapsed_list">Minimerad lista</string>
     <string name="access_expanded_list">Expanderad lista</string>
     <string name="access_empty_list">Tom lista</string>
@@ -2197,11 +2197,11 @@ Tillgängligt utrymme är blott {2} MB.</string>
 En del av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag.
 Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt sätt att göra det på.</string>
     
-    <string name="access_no_destination">Ingen destination angiven</string>
+    <string name="access_no_destination">Destinationen är inte fastställd</string>
     <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
     <string name="rec_split_clip_length">Klipplängd</string>
     <string name="file_name_containes_illegal_char">Filnamnet innehåller ogiltiga tecken</string>
-<string name="move_marker_bottom_sheet_title">Flytta på kartan för att ändra markörens plats</string>
+<string name="move_marker_bottom_sheet_title">Flytta på kartan för att ändra markörens position</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Följ oss</string>
     <string name="current_track">Nuvarande spår</string>
@@ -2219,8 +2219,8 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="lang_ast">Asturiska</string>
     <string name="access_direction_audio_feedback_descr">Ange riktningen till målet med ljud.</string>
     <string name="access_direction_haptic_feedback_descr">Ange riktningen till målet med vibration.</string>
-    <string name="access_direction_audio_feedback">Riktning (ljudåterkoppling)</string>
-    <string name="access_direction_haptic_feedback">Riktning (vibrationsåterkoppling)</string>
+    <string name="access_direction_audio_feedback">Ljuddirektiv</string>
+    <string name="access_direction_haptic_feedback">Vibrationsdirektiv</string>
     <string name="shared_string_from">från</string>
     <string name="city_type_district">Distrikt</string>
     <string name="city_type_neighbourhood">Grannskap</string>
@@ -2237,7 +2237,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="coords_search">Koordinatsökning</string>
     <string name="advanced_coords_search">Avancerad koordinatsökning</string>
     <string name="back_to_search">Tillbaka till Sök</string>
-    <string name="confirmation_to_delete_history_items">Vill du radera de markerade posterna från historiken?</string>
+    <string name="confirmation_to_delete_history_items">Vill du ta bort de valda posterna från \'Historik\'\?</string>
     <string name="show_something_on_map">Visa %1$s på kartan</string>
     <string name="dist_away_from_my_location">Sök %1$s bort</string>
     <string name="translit_names">Transkribera namn</string>
@@ -2730,12 +2730,12 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_auto_zoom_on">Aktivera autozoom karta</string>
     <string name="quick_action_auto_zoom_off">Inaktivera autozoom karta</string>
     <string name="quick_action_add_first_intermediate">Lägg till första mellanliggande</string>
-    <string name="quick_action_add_destination_desc">Knackning på åtgärdsknappen kommer att lägga till en destination från skärmens mitt. Tidigare inställda destinationen blir den sista mellanliggande destinationen.</string>
-    <string name="quick_action_replace_destination_desc">Knackning på åtgärdsknappen kommer att ersätta destinationen med skärmens mittläge.</string>
-    <string name="quick_action_add_first_intermediate_desc">Knackning på åtgärdsknappen kommer att lägga en första mellanliggande punkt från skärmens mittpunkt.</string>
+    <string name="quick_action_add_destination_desc">Genom att trycka på den här åtgärdsknappen blir skärmens mittpunkt resmålet, alla tidigare valda mål blir den senaste mellanliggande destinationen.</string>
+    <string name="quick_action_replace_destination_desc">Genom att trycka på den här åtgärdsknappen kan skärmen centrera den nya ruttdestinationen och ersätta den tidigare valda destinationen (om någon).</string>
+    <string name="quick_action_add_first_intermediate_desc">Genom att trycka på denna åtgärdsknapp kommer skärmens mittpunkt att bli den första mellanliggande destinationen.</string>
     <string name="subscribe_email_desc">Anmäl dig till vår e-postlista om apprabatter och få 3 extra kartnedladdningar!</string>
     <string name="depth_contour_descr">Havsdjupskonturer och sjömärken.</string>
-    <string name="sea_depth_thanks">Tack för att du köpt nautiska djupkonturer!</string>
+    <string name="sea_depth_thanks">Tack för att du köpt \"Nautiska djupkonturer\"</string>
     <string name="index_item_depth_contours_osmand_ext">Nautiska djupkonturer</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautiska djuppunkter på södra halvklotet</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautiska djuppunkter på norra halvklotet</string>
@@ -2842,11 +2842,11 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="light_rs_render_descr">Enkel och kontrastrik stil för navigering med bil. Skonsam mot ögonen under natten. Viktiga funktioner: höjdkurvor, kontrastrik orange stil på vägar, mindre störande sekundära kartobjekt.</string>
     <string name="topo_render_descr">Kontraststil utformad främst för vandring, trekking och cykling i naturen. Bra läsbarhet vid komplex extern belysning. Viktiga funktioner: kontrastrika vägar och naturliga objekt, olika typer av rutter, höjdkurvor med avancerade inställningar för mer detaljer på motsvarande zoomnivåer än standard. Ytläge-alternativet kan skilja vägens ytkvalitet. Inget nattläge.</string>
     <string name="mapnik_render_descr">Gamla \"Mapnik\'-stil standardrendering. Viktiga funktioner: Färger som liknar \"Mapnik\" stil.</string>
-    <string name="touring_view_render_descr">Högsdetaljsstil för touringändamål. Innehåller alla inställningar av standardstilen, men även: Visar så mycket information som möjligt, i synnerhet alla vägar, stigar och andra sätt att resa. Tydliga visuella skillnader mellan olika vägtyper, påminnande av många atlaser. Högkontrastfärger för användning utomhus, dag- och nattläge.</string>
+    <string name="touring_view_render_descr">Högsdetaljsstil för turiständamål. Innehåller alla konfigurationsinställningar av standardstilen, dessutom: Visar så mycket detaljer som möjligt, i synnerhet alla vägar, stigar och andra sätt att resa. Tydliga visuella skillnader mellan olika vägtyper som påminner om många turistatlaser. Högkontrastfärger för utomhusbruk, dag- och nattläge.</string>
     <string name="default_render_descr">Stil för allmänna ändamål. Förenklad återgivning i tätbefolkade städer. Viktiga funktioner: höjdkurvor, rutter, ytkvalitet, tillträdeskontroll, farthinder, stigrendering enligt SAC-skala, vattensporter.</string>
     <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på nätet</string>
     <string name="open_wikipedia_link_online_description">Länken kommer att öppnas i en webbläsare.</string>
-    <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikipedia-artiklar frånkopplad.</string>
+    <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikivoyage-artiklar frånkopplad.</string>
     <string name="how_to_open_link">Hur öppnar man länken?</string>
     <string name="read_wikipedia_offline">Läs Wikipedia frånkopplad</string>
     <string name="download_all">Hämta alla</string>
