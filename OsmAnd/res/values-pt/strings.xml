@@ -2409,10 +2409,14 @@ Clique no widget de medição para ver mais ações.</string>
 \n• Suporte para editar objetos de polígono de renderização (não-cortesia)
 \n
 \n</string>
-    <string name="search_street"></string>
-    <string name="shared_string_restore"></string>
-    <string name="keep_passed_markers_descr"></string>
-    <string name="keep_passed_markers"></string>
-    <string name="more_transport_on_stop_hint"></string>
-    <string name="ask_for_location_permission"></string>
+    <string name="search_street">Pesquisa de rua</string>
+    <string name="shared_string_restore">Restaurar</string>
+    <string name="keep_passed_markers_descr">Marcadores adicionados como um grupo de favoritos ou waypoints GPX marcados Passado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
+    <string name="keep_passed_markers">Manter marcadores passados no mapa</string>
+    <string name="more_transport_on_stop_hint">Há mais transportes nesta parada.</string>
+    <string name="ask_for_location_permission">Por favor, dê OsmAnd permissão para localização para continuar.</string>
+    <string name="markers_remove_dialog_msg">Apagar o marcador de mapa \'%s\'\?</string>
+    <string name="edit_map_marker">Editar marcador de mapa</string>
+    <string name="third_party_application">Aplicativo de terceiros</string>
+    <string name="start_search_from_city">Iniciar pesquisa a partir da cidade</string>
     </resources>
