@@ -159,8 +159,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	fun updateShareDevicesIds(list: List<DeviceBot>) {
+	fun updateShareDevices(list: List<DeviceBot>) {
 		shareDevices = list.toHashSet()
+	}
+
+	fun addShareDevice(device: DeviceBot) {
+		val devices = shareDevices.toMutableList()
+		devices.add(device)
+		shareDevices = devices.toHashSet()
 	}
 
 	fun updateCurrentSharingMode(sharingMode: String) {
@@ -268,7 +274,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 			statusChangeTime = System.currentTimeMillis()
 			val lm = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 			val gpsEnabled = try {
-				lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+				if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+					val loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+					loc != null && ((statusChangeTime - loc.time) / 1000) < 180
+				} else {
+					false
+				}
 			} catch (ex: Exception) {
 				false
 			}

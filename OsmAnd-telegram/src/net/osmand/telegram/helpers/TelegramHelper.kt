@@ -982,7 +982,9 @@ class TelegramHelper private constructor() {
 						val updatedStr = s.removePrefix(UPDATED_PREFIX)
 						val endIndex = updatedStr.indexOf("(")
 						val updatedS = updatedStr.substring(0, if (endIndex != -1) endIndex else updatedStr.length)
-						res.lastUpdated = (parseTime(updatedS.trim()) / 1000).toInt()
+						val parsedTime = (parseTime(updatedS.trim()) / 1000).toInt()
+						val currentTime = (System.currentTimeMillis() / 1000) - 1
+						res.lastUpdated = if (parsedTime < currentTime) parsedTime else currentTime.toInt()
 					}
 				}
 			}

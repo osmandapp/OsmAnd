@@ -20,7 +20,7 @@ object OsmandApiUtils {
 				override fun onResult(result: String?) {
 					if (result != null) {
 						val list = parseJsonContents(result)
-						app.settings.updateShareDevicesIds(list)
+						app.settings.updateShareDevices(list)
 					}
 				}
 			}

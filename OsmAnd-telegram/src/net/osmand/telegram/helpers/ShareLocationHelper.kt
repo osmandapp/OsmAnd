@@ -64,13 +64,13 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 						object : AndroidNetworkUtils.OnRequestResultListener {
 							override fun onResult(result: String?) {
 								updateShareInfoSuccessfulSendTime(result, chatsShareInfo)
+
+								val osmandBot = app.telegramHelper.getOsmandBot()
+								if (osmandBot != null) {
+									checkAndSendViaBotMessages(chatsShareInfo, TdApi.Location(latitude, longitude), osmandBot)
+								}
 							}
 						})
-
-					val osmandBot = app.telegramHelper.getOsmandBot()
-					if (osmandBot != null) {
-						checkAndSendViaBotMessages(chatsShareInfo, TdApi.Location(latitude, longitude), osmandBot)
-					}
 				}
 			}
 			lastLocationMessageSentTime = System.currentTimeMillis()

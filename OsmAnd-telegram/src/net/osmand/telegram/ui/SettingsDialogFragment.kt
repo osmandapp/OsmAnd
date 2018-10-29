@@ -20,7 +20,9 @@ import net.osmand.telegram.TelegramSettings.DurationPref
 import net.osmand.telegram.helpers.TelegramHelper.Companion.OSMAND_BOT_USERNAME
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandApiUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import org.json.JSONObject
 
 class SettingsDialogFragment : BaseDialogFragment() {
 
@@ -182,14 +184,16 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			}
 			AddNewDeviceBottomSheet.NEW_DEVICE_REQUEST_CODE -> {
 				val user = app.telegramHelper.getCurrentUser()
-				if (user != null && data != null) {
-					val deviceName = data.getStringExtra(AddNewDeviceBottomSheet.DEVICE_NAME)
-					val deviceExternalId = data.getStringExtra(AddNewDeviceBottomSheet.DEVICE_EXTERNAL_ID)
-
-					val inflater = activity?.layoutInflater
-					if (inflater != null && deviceName != null && deviceExternalId != null) {
-						addItemToContainer(inflater, shareAsContainer, deviceExternalId, deviceName)
-						Toast.makeText(app, getString(R.string.device_added_successfully, deviceName), Toast.LENGTH_SHORT).show()
+				if (user != null && data != null && data.hasExtra(AddNewDeviceBottomSheet.DEVICE_JSON)) {
+					val deviceJson = data.getStringExtra(AddNewDeviceBottomSheet.DEVICE_JSON)
+					val device = OsmandApiUtils.parseDeviceBot(JSONObject(deviceJson))
+					if (device != null) {
+						app.settings.addShareDevice(device)
+						val inflater = activity?.layoutInflater
+						if (inflater != null) {
+							addItemToContainer(inflater, shareAsContainer, device.externalId, device.deviceName)
+							Toast.makeText(app, getString(R.string.device_added_successfully, device.deviceName), Toast.LENGTH_SHORT).show()
+						}
 					}
 				}
 			}

@@ -105,10 +105,10 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 			object : AndroidNetworkUtils.OnRequestResultListener {
 				override fun onResult(result: String?) {
 					updatePrimaryBtnAndProgress(false)
-					val deviceBot = getDeviceFromJson(result)
-					if (deviceBot != null) {
+					val deviceJson = getDeviceJson(result)
+					if (deviceJson != null) {
 						targetFragment?.also { target ->
-							val intent = Intent().putExtra(DEVICE_NAME, deviceBot.deviceName).putExtra(DEVICE_EXTERNAL_ID, deviceBot.externalId)
+							val intent = Intent().putExtra(DEVICE_JSON, deviceJson.toString())
 							target.onActivityResult(targetRequestCode, NEW_DEVICE_REQUEST_CODE, intent)
 						}
 						dismiss()
@@ -151,28 +151,23 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 		}
 	}
 
-	private fun getDeviceFromJson(json: String?): TelegramSettings.DeviceBot? {
-		var device: TelegramSettings.DeviceBot? = null
+	private fun getDeviceJson(json: String?): JSONObject? {
 		if (json != null) {
-			device = try {
+			try {
 				val jsonResult = JSONObject(json)
 				val status = jsonResult.getString("status")
 				if (status == "OK") {
-					OsmandApiUtils.parseDeviceBot(jsonResult.getJSONObject("device"))
-				} else {
-					null
+					return jsonResult.getJSONObject("device")
 				}
 			} catch (e: JSONException) {
-				null
 			}
 		}
-		return device
+		return null
 	}
 
 	companion object {
 		const val NEW_DEVICE_REQUEST_CODE = 5
-		const val DEVICE_NAME = "DEVICE_NAME"
-		const val DEVICE_EXTERNAL_ID = "DEVICE_EXTERNAL_ID"
+		const val DEVICE_JSON = "DEVICE_JSON"
 		const val MAX_DEVICE_NAME_LENGTH = 200
 
 		private const val TAG = "AddNewDeviceBottomSheet"
