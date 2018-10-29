@@ -167,7 +167,7 @@ class AddNewDeviceBottomSheet : BaseDialogFragment() {
 
 	companion object {
 		const val NEW_DEVICE_REQUEST_CODE = 5
-		const val DEVICE_JSON = "DEVICE_JSON"
+		const val DEVICE_JSON = "device_json"
 		const val MAX_DEVICE_NAME_LENGTH = 200
 
 		private const val TAG = "AddNewDeviceBottomSheet"
