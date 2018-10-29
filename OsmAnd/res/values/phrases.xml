@@ -107,6 +107,7 @@
 	<string name="poi_service_car">Car service</string>
 	<string name="poi_glacier_type">Glacier type</string>
 	<string name="poi_checkpoint_type">Checkpoint type</string>
+	<string name="poi_bulk_purchase">Bulk purchase</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3856,5 +3857,8 @@
 	<string name="poi_hill">Hill</string>
 
 	<string name="poi_shoe_repair">Shoe repair</string>
+
+	<string name="poi_bulk_purchase_yes">Bulk purchase: yes</string>
+	<string name="poi_bulk_purchase_only">Bulk purchase: only</string>
 
 </resources>
