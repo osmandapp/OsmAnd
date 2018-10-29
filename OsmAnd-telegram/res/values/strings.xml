@@ -88,7 +88,7 @@
 	<string name="shared_string_all">All</string>
 	<string name="shared_string_off">Off</string>
 	<string name="already_registered_in_telegram">You need a registered Telegram account and phone number</string>
-	<string name="do_not_have_telegram">I don\'t have one</string>
+	<string name="do_not_have_telegram">I don\'t have Telegram account</string>
 	<string name="enter_phone_number">Enter phone number</string>
 	<string name="enter_authentication_code">Enter authentication code</string>
 	<string name="set_visible_time_for_all">Set visible time for all</string>
