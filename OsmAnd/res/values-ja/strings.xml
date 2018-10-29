@@ -676,7 +676,7 @@ POIの更新は利用できません</string>
 	<string name="destination_point">目的地 %1$s</string>
     <string name="context_menu_item_destination_point">目的地として設定</string>
     <string name="please_select_address">最初に都市か通りを選択してください</string>
-    <string name="search_street_in_neighborhood_cities">近くの都市の通りを探す</string>
+    <string name="search_street_in_neighborhood_cities">近隣市街の道路を探す</string>
     <string name="intermediate_items_sort_return">現在地から目的地へのルート最適化のために経由地点の順序が変更されました。</string>
     <string name="intermediate_items_sort_by_distance">ルートを最適化して並び替え</string>
     <string name="local_osm_changes_backup_successful">OSMの変更ファイルが正常に生成されました %1$s</string>
@@ -1816,7 +1816,7 @@ POIの更新は利用できません</string>
 	<string name="shared_string_export">エクスポート</string>
 	<string name="shared_string_unexpected_error">予期しないエラーが発生</string>
 	<string name="shared_string_action_template">アクション {0}</string>
-	<string name="shared_string_collapse">折り畳み表示</string>
+	<string name="shared_string_collapse">詳細を閉じる</string>
 	<string name="shared_string_currently_recording_track">現在の経路を記録</string>
 	<string name="shared_string_audio">音声</string>
 	<string name="shared_string_video">動画</string>
@@ -1968,7 +1968,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_translucent_blue_name">半透明ブルー</string>
     <string name="rendering_value_purple_name">パープル</string>
     <string name="rendering_value_translucent_purple_name">半透明パープル</string>
-    <string name="restart_is_required">変更を適用するには手動でアプリケーションを再起動する必要があります。</string>
+    <string name="restart_is_required">全ての変更を適用するためはアプリを再起動する必要があります。</string>
     <string name="archive_wikipedia_data">互換性のない古いWikipediaデータがあります。アーカイブ化しますか？</string>
     <string name="download_wikipedia_files">Wikipediaの追加データ(%1$s MB)をダウンロードしますか？</string>
     <string name="gps_network_not_enabled">位置取得機能(現在地、GPS、位置情報サービス等)がオフになっています。オンにしますか？</string>
@@ -2021,7 +2021,7 @@ POIの更新は利用できません</string>
 	
 	
 	<string name="contact_info">連絡先</string>
-	<string name="description">説明</string>
+	<string name="description">詳細</string>
 	<string name="add_opening_hours">開店時間を追記</string>
 	<string name="poi_dialog_poi_type">POIの種類</string>
 	<string name="number_of_rows_in_dash">ダッシュボードでの表示数： %1$s</string>
@@ -2071,7 +2071,7 @@ POIの更新は利用できません</string>
     <string name="simulate_your_location_descr">計算されたルート、またはGPXに記録されたルートを使用して移動のシミュレーションをします</string>
     <string name="favourites_context_menu_add">お気に入りに追加</string>
 	<string name="are_you_sure">よろしいですか？</string>
-	<string name="unsaved_changes_will_be_lost">未保存の変更は失われます。続行しますか？</string>
+	<string name="unsaved_changes_will_be_lost">このまま終了すると変更した部分が失われます。続行しますか？</string>
 	<string name="downloads_left_template">残りダウンロード %1$s</string>
 	<string name="roads">道路</string>
     <string name="downloading_number_of_files">%1$d のファイルをダウンロード中</string>
@@ -2657,19 +2657,17 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="route_is_too_long_v2">現在の経路は計算するには長すぎるようです。10分以内に結果が出なければ中間に目的地(経由地点)を追加してください。</string>
     <string name="osmand_extended_description_part1">" OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOpenStreetMap(OSM)データ』を使用した、地図＆ナビゲーションアプリです。
 \n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。 "</string>
-    <string name="osmand_extended_description_part2">"
- GPSナビゲーション
- • オフライン(海外の場合はローミング料金が不要に)、またはオンライン(高速)モードのいずれかを選択できます
- • ターンバイターン形式の音声案内が、道中のあなたを案内します(録音された音声とリアルタイムで合成される音声を選択できます）
- • 予定のルートから大きく外れるとルートが再検索されます
- • 車線案内、道路名、到着予定時刻が道中の助けになります
- • 旅行をより安全にするために、昼/夜モードが自動的に切り替わります
- • 速度制限の表示選択の他に、それを超えた場合に警告を表示するように選択できます
- • 移動速度に伴ったマップのズームを行えます
- • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます
- • 旅程上の中間地点をサポートします。
- • GPX経路を自分で使う為の記録や、アップロードしたり等の機能もフォローしています
- "</string>
+    <string name="osmand_extended_description_part2">"GPSナビゲーション
+\n • オフライン(海外の場合はローミング料金が不要に)、またはオンライン(高速)モードのいずれかを選択できます
+\n • ターンバイターン形式の音声案内が、道中のあなたを案内します(録音された音声とリアルタイムで合成される音声を選択できます）
+\n • 予定のルートから大きく外れるとルートが再検索されます
+\n • 車線案内、道路名、到着予定時刻が道中の助けになります
+\n • 旅行をより安全にするために、昼/夜モードが自動的に切り替わります
+\n • 速度制限の表示選択の他に、それを超えた場合に警告を表示するように選択できます
+\n • 移動速度に伴ったマップのズームを行えます
+\n • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます
+\n • 旅程上の中間経由地点をサポートします。
+\n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています "</string>
     <string name="osmand_extended_description_part3">"
  マップ機能
  • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
@@ -2728,15 +2726,13 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。
 \n OsmAnd+は有料のアプリケーションです。購入することで同プロジェクトの資金、新機能開発への援助となり、最新アップデートも利用可能になります。
 \nいくつかの主な機能: "</string>
-    <string name="osmand_plus_extended_description_part2">"
- ナビゲーション
- • オンライン（高速）またはオフライン(海外の場合はローミング料金が不要に）どちらでも動作可能です
- • ターンバイターンの音声案内（録音された音声と合成音声）が可能です
- • 車線案内、道路名、到着予定時刻等の様々なオプションが利用できます
- • 旅程上の中間経由地点をサポートしています
- • ルートから大きく外れると自動的に再ルート検索します
- • 住所別、種類別（例：レストラン、ホテル、ガソリンスタンド、博物館）、または座標の数値で場所を検索可能です
- "</string>
+    <string name="osmand_plus_extended_description_part2">ナビゲーション
+\n • オンライン（高速）またはオフライン(海外の場合はローミング料金が不要に）どちらでも動作可能です
+\n • ターンバイターンの音声案内（録音された音声と合成音声）が可能です
+\n • 車線案内、道路名、到着予定時刻等の様々なオプションが利用できます
+\n • 旅程上の中間経由地点をサポートしています
+\n • ルートから大きく外れると自動的に再ルート検索します
+\n • 住所別、種類別（例：レストラン、ホテル、ガソリンスタンド、博物館）、または座標の数値で場所を検索可能です</string>
     <string name="osmand_plus_extended_description_part3">"
  マップ表示
  • 現在地と現在の方向を表示できます
@@ -2990,15 +2986,15 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
     <string name="live_monitoring_max_interval_to_send">オンライン追跡用のバッファ指定</string>
     <string name="live_monitoring_max_interval_to_send_desrc">送信用現在地データをネット接続せずにどのくらいの時間記録するか、バッファを指定します</string>
-    <string name="release_3_0">\\022 新しい旅行メニュー:インターネットに接続しなくてもWikiVoyage(ウィキボヤージュ)の旅行ガイドを見られるように変更
-\n
-\n• Wikipedia:新しい外見、アクティブリンク、画像の参照
-\n
-\n• 経路の参照UI:経由地点グループの表示
-\n
-\n• マップマーカー:選択した複数GPXファイルからの取り込みに対応、新しい外見の採用
-\n
-\n• OsmAnd LiveサブスクリプションでOsmAndの全ての機能を利用可能に
+    <string name="release_3_0">• 新しい旅行メニュー:インターネットに接続しなくてもWikiVoyage(ウィキボヤージュ)の旅行ガイドを見られるように変更 
+\n 
+\n• Wikipedia:新しい外見、アクティブリンク、画像の参照 
+\n 
+\n• 経路の参照UI:経由地点グループの表示 
+\n 
+\n• マップマーカー:選択した複数GPXファイルからの取り込みに対応、新しい外見の採用 
+\n 
+\n• OsmAnd LiveサブスクリプションでOsmAndの全ての機能を利用可能に 
 \n</string>
     <string name="rendering_attr_hidePOILabels_name">POIのラベル</string>
     <string name="context_menu_read_article">記事を読む</string>
@@ -3054,7 +3050,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="empty_state_my_tracks">GPXファイルに追加しよう</string>
     <string name="empty_state_my_tracks_desc">GPXファイルまたは記録した経路からインポートします。</string>
     <string name="import_track">GPXファイルからインポート</string>
-    <string name="access_intermediate_arrival_time">中間経由地点への到着時間</string>
+    <string name="access_intermediate_arrival_time">中間経由地点への到着時刻</string>
     <string name="send_search_query">検索クエリを送信しますか？</string>
     <string name="read_wikipedia_offline_description">OsmAnd Liveサブスクリプションに登録すると、WikipediaとWikivoyageの旅行に関した各記事をオフラインで読むことができます。</string>
     <string name="read_wikipedia_offline">オフラインでWikipedia記事を読む</string>
@@ -3148,7 +3144,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_contents">コンテンツ</string>
     <string name="shared_string_result">結果</string>
     <string name="waypoints_removed_from_map_markers">マップマーカーから経由地点を削除しました</string>
-    <string name="nothing_found_in_radius">何も見つかりませんでした:</string>
+    <string name="nothing_found_in_radius">指定距離間内には見つかりませんでした:</string>
     <string name="select_waypoints_category_description">経路内の全ての経由地点を追加する、もしくはカテゴリ別に選択してください。</string>
     <string name="shared_string_total">トータル</string>
     <string name="group_deleted">グループを削除しました</string>
@@ -3248,7 +3244,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="markers_remove_dialog_msg">マップマーカー「%s」を削除しますか？</string>
     <string name="edit_map_marker">マップマーカーの編集</string>
     <string name="third_party_application">サードパーティーアプリ</string>
-    <string name="search_street">道路を検索</string>
+    <string name="search_street">指定エリアの道路を検索</string>
     <string name="start_search_from_city">市街から検索を始める</string>
     <string name="keep_passed_markers_descr">GPX経由地点のマーカーで通過済みのマーカーをグループとしてお気に入りに追加します。それらグループマーカーはアクティブにはならずマップ上から削除されます。</string>
     <string name="keep_passed_markers">通過済みマーカーをマップ上に保持</string>
@@ -3260,4 +3256,6 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="wiki_article_not_found">記事が見つかりませんでした</string>
     <string name="how_to_open_wiki_title">どの方法でWikipedia記事を開きますか？</string>
     <string name="test_voice_desrc">ボタンをタップし対応する音声案内を実際に聞いてみて、欠落しているか間違っている文字列や案内用語を特定します。</string>
-</resources>
+<string name="shared_string_restore">通過前に戻す</string>
+    <string name="map_widget_intermediate_time">中間経由地点までの移動時間</string>
+    </resources>
