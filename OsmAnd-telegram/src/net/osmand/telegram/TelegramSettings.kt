@@ -278,7 +278,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val gpsEnabled = try {
 				if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 					val loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-					loc != null && ((statusChangeTime - loc.time) / 1000) < GPS_UPDATE_EXPIRED_TIME
+					val gpsActive = loc != null && ((statusChangeTime - loc.time) / 1000) < GPS_UPDATE_EXPIRED_TIME
+					val lastSentLocationExpired = ((statusChangeTime - app.shareLocationHelper.lastLocationMessageSentTime) / 1000) > GPS_UPDATE_EXPIRED_TIME
+					(gpsActive || !lastSentLocationExpired)
 				} else {
 					false
 				}
