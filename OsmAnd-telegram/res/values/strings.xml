@@ -8,7 +8,6 @@
 	<string name="device_name_cannot_be_empty">Device name cannot be empty</string>
 	<string name="device_name">Device name</string>
 	<string name="shared_string_hide">Hide</string>
-	<string name="add_new_device_description">Last sent location:</string>
 	<string name="share_location_as_description_second_line">You can create and view the Device ID in the telegram client using the %1$s chat bot. %2$s</string>
 	<string name="share_location_as_description">If you want to connect multiple devices to one telegram account, you need to use different Device to share your location.</string>
 	<string name="last_updated_location">Last updated location:</string>
@@ -168,7 +167,6 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">sec</string>
-	<string name="plus">+</string>
 	<string name="welcome_descr"><![CDATA[<b>OsmAnd Location Sharing</b> lets you share your location and see that of others in the OsmAnd.<br/><br/>The app uses Telegram API and you need a Telegram account.]]></string>
 	<string name="my_location">My location</string>
 	<string name="live_now">Live now</string>
