@@ -25,7 +25,7 @@
 	<string name="osmand_service_descr">OsmAnd Telegram работает в фоновом режиме с выключенным экраном.</string>
 	<string name="choose_osmand_desc">Выберите версию OsmAnd, в которой контакты будут отображаться на карте.</string>
 	<string name="choose_osmand">Выберите версию OsmAnd для использования</string>
-	<string name="disable_all_sharing_desc">Отключить общий доступ ко всем выбранным чатам (%1$d).</string>
+	<string name="disable_all_sharing_desc">Остановить трансляцию своей позиции всем ранее выбранным чатам (%1$d).</string>
 	<string name="disable_all_sharing">Отключить все трансляции</string>
 	<string name="shared_string_live">Активных</string>
 	<string name="shared_string_bot">Бот</string>
@@ -60,7 +60,7 @@
 	<string name="shared_string_add">Добавить</string>
 	<string name="enter_device_name_description">Назовите новое устройство макс. 200 символов.</string>
 	<string name="shared_string_distance">Расстояние</string>
-	<string name="my_location">Моё местоположение</string>
+	<string name="my_location">Моя локация</string>
 	<string name="live_now">Активно сейчас</string>
 	<string name="shared_string_hour_short">ч</string>
 	<string name="shared_string_minute_short">мин</string>
@@ -71,7 +71,7 @@
 	<string name="by_group">По группе</string>
 	<string name="shared_string_sort">Сортировать</string>
 	<string name="shared_string_sort_by">Сортировать по</string>
-	<string name="turn_off_all">Выключить всё</string>
+	<string name="turn_off_all">Отстановить все</string>
 	<string name="shared_string_exit">Выход</string>
 	<string name="time_ago">назад</string>
 	<string name="last_response">Последний ответ</string>
@@ -90,7 +90,7 @@
 	<string name="shared_string_off">Отключить</string>
 	<string name="shared_string_settings">Настройки</string>
 	<string name="sharing_time">Время трансляции</string>
-	<string name="turn_off_location_sharing">Отключить отправку локации</string>
+	<string name="turn_off_location_sharing">Отключить трансляцию</string>
 	<string name="expire_at">Истекает в</string>
 	<string name="in_time">через %1$s</string>
 	<string name="shared_string_share">Поделиться</string>
@@ -108,7 +108,7 @@
 	<string name="stale_location_desc">В последний раз контакт отправил местоположение.</string>
 	<string name="stale_location">Устаревание местоположения</string>
 	<string name="send_my_location_desc">Установите минимальный интервал между отправками местоположения.</string>
-	<string name="send_my_location">Отправка моей позиции</string>
+	<string name="send_my_location">Отправка моей локации</string>
 	<string name="gps_and_location">GPS &amp; местоположение</string>
 	<string name="location_history_desc">Скройте контакты, которые не обновили свое местоположение за определенный промежуток времени.</string>
 	<string name="share_location_as">Поделиться местоположением как</string>
