@@ -482,7 +482,6 @@ public class ConfigureMapMenu {
 				.setListener(l).createItem());
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
-		app.getAppCustomization().prepareLayerContextMenu(activity, adapter);
 		boolean srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null
 				&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 		if (srtmDisabled) {
