@@ -143,7 +143,6 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">seg</string>
-	<string name="plus">+</string>
 	<string name="welcome_descr"><b>OsmAnd Location Sharing</b> permite compartir su ubicación y ver las ubicaciones de otras personas en OsmAnd.<br/><br/>La aplicación funciona sobre la base de Telegram API. Para utilizar esta aplicación debe tener una cuenta de Telegram.</string>
 	<string name="my_location">Mi ubicación</string>
 	<string name="live_now">En vivo ahora</string>

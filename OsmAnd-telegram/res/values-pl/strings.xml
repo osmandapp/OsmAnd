@@ -141,7 +141,6 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">sek</string>
-	<string name="plus">+</string>
 	<string name="welcome_descr"><b>Udostępnianie Lokalizacji OsmAnd</b> umożliwi ci udostępnianie twojej lokalizacji i zobaczenie lokalizacji innych osób w OsmAnd.<br/><br/>Aplikacja działa w opraciu o Telegram API. By używać aplikacji musisz mieć konto w Telegramie.</string>
 	<string name="my_location">Moja lokalizacja</string>
 	<string name="live_now">Na żywo teraz</string>

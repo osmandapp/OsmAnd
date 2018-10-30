@@ -126,10 +126,8 @@
 	<string name="shared_string_hour_short">t</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">sek</string>
-	<string name="plus">+</string>
 	<string name="welcome_descr"><b>OsmAnd plasseringsdeling</b> lar deg dele din plassering og se andres posisjon i OsmAnd.<br/><br/>Programmet belager seg på Telegram-API-et. For å bruke dette programmet må du ha en Telegram-konto.</string>
 	<string name="my_location">Min plassering</string>
-	<string name="live_now">Sender nå</string>
 
 
 <string name="last_updated_location">Sist oppdaterte plassering:</string>

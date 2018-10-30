@@ -117,9 +117,7 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">s</string>
-	<string name="plus">+</string>
 	<string name="my_location">Mein Standort</string>
-	<string name="live_now">Sende gerade</string>
 
 
 <string name="background_work">Hintergrundbetrieb</string>
