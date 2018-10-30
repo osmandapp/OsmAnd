@@ -586,7 +586,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				holder.textInArea?.apply {
 					val time = shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE
-					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!, time)}"
+					text = "+ ${OsmandFormatter.getFormattedDuration(context!!, time)}"
 					setOnClickListener {
 						val expireTime = shareInfo?.getChatLiveMessageExpireTime() ?: 0
 						val newLivePeriod = expireTime + (shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0])
