@@ -531,7 +531,7 @@
 	<string name="rendering_attr_roadColors_name">道路颜色主题</string>
     <string name="non_optimal_route_calculation">长距离时计算结果可能非最优</string>
 	<string name="map_widget_monitoring_services">日志服务</string>
-	<string name="replace_destination_point">替换终点</string>
+	<string name="replace_destination_point">替换目的地</string>
     <string name="new_destination_point_dialog">您已经设置了一个目的地：</string>
     <string name="ending_point_too_far">结束点与最近道路太远。</string>
     <string name="add_tag">添加标记</string>
@@ -1680,7 +1680,7 @@
     <string name="upload_osm_note">上传 OSM 注释</string>
     <string name="consider_turning_polygons_off">建议关闭多边形渲染。</string>
     <string name="clear_updates_proposition_message">您可以删除已下载的更新和回到原始地图版本</string>
-    <string name="switch_start_finish">对调起始点和目的地</string>
+    <string name="switch_start_finish">交换起始点和目的地</string>
     <string name="rec_split">录制器拆分</string>
     <string name="rec_split_title">使用录制器拆分</string>
     <string name="rec_split_desc">重写剪辑时，使用的空间超过存储大小</string>
@@ -2718,4 +2718,7 @@
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>
     <string name="send_search_query_description">我们将会发送您的搜索请求：<b>\"%1$s\"</b>，以及您的位置。<br/><br/>我们不会搜集您的个人信息，我们只需要搜索数据以改进搜索算法。<br/></string>
     <string name="send_search_query">发送搜索请求？</string>
+    <string name="search_street">搜索街道</string>
+    <string name="start_search_from_city">从城市开始搜索</string>
+    <string name="thank_you_for_feedback">感谢您的反馈</string>
     </resources>
