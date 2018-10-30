@@ -2133,8 +2133,8 @@
     <string name="voice_data_unavailable">Ընտրված ձայնային տվյալները հասանելի չեն</string>
     <string name="sd_unmounted">SD քարտը հասանելի չէ:
 \nԴուք չեք կարողանա աշխատել քարտի հետ:</string>
-    <string name="sd_mounted_ro">SD քարտը հասանելի է միայն կարդալու համար:
-\nԴուք չեք կարողանա ներբեռնել քարտեզներ Ինտերնետից:</string>
+    <string name="sd_mounted_ro">SD քարտը միայն կարդալու համար: 
+\nԱյժմ կարող եք դիտել միայն նախապես բեռնված քարտեզը, այլ ոչ թե ներբեռնել քարտեզներ Ինտերնետից:</string>
     <string name="unzipping_file">Ֆայլը արդյունահանվում է…</string>
     <string name="route_tr">Աջ թեքվեք և շարժվեք</string>
     <string name="route_tshr">Կտրուկ աջ թեքվեք և շարժվեք</string>
@@ -2309,7 +2309,7 @@
     <string name="poi_remove_success">POI ջնջվել է</string>
     <string name="poi_action_delete">ջնջել</string>
     <string name="poi_action_succeded_template">{0} գործողությունը ավարտվեց:</string>
-    <string name="poi_error_unexpected_template">Անսպասելի սխալ գործողություն {0} կատարման ժամանակ։</string>
+    <string name="poi_error_unexpected_template">Չհաջողվեց կատարել գործողությունը {0}։</string>
     <string name="poi_error_io_error_template">I/O սխալ գործողություն {0} կատարման ժամանակ։</string>
     <string name="poi_error_info_not_loaded">POI-ի տեղեկություն վերբեռնման ընթացքում սխալ տեղի ունեցավ</string>
     <string name="poi_dialog_opening_hours">Աշխատանքային ժամերը</string>
@@ -2338,19 +2338,19 @@
     <string name="use_fast_recalculation">Երթուղու խելացի վերահաշվարկ</string>
     <string name="use_fast_recalculation_desc">Երկար ուղեւորությունների ժամանակ միայն վերահաշվարկել երթուղու նախնական մասը:</string>
     <string name="do_you_like_osmand">Ձեզ դուր է գալիս OsmAnd?</string>
-    <string name="we_really_care_about_your_opinion">Մենք շատ ենք հետաքրքրված ձեր կարծիքով, և կարեւոր է ստանալ ձեր արձագանքը:</string>
+    <string name="we_really_care_about_your_opinion">Մենք շատ ենք հետաքրքրված ձեր կարծիքով, և մեր համար կարևոր է ձեր արձագանքը:</string>
     <string name="rate_this_app">Գնահատել հավելվածը</string>
     <string name="rate_this_app_long">Խնդրում ենք գնահատել OsmAnd-ը Google Play-ում</string>
     <string name="user_hates_app_get_feedback">Ասեք մեզ, թե ինչու։</string>
     <string name="user_hates_app_get_feedback_long">Խնդրում ենք ասել մեզ, թե ինչ եք ուզում փոխել այս հավելվածում:</string>
     <string name="failed_to_upload">Չհաջողվեց վերբեռնել</string>
     <string name="delete_change">Ջնջել փոփոխությունները</string>
-    <string name="successfully_uploaded_pattern">Հաջողությամբ վերբեռնվեց {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">Վերբեռնվեց {0}/{1}</string>
     <string name="try_again">Կրկին փորձեք</string>
     <string name="error_message_pattern">Սխալ՝ {0}</string>
     <string name="dahboard_options_dialog_title">Վահանակի կարգավորումները</string>
     <string name="shared_string_card_was_hidden">Քարտը թաքնված էր</string>
-    <string name="shared_string_undo">ՉԵՂԱՐԿԵԼ</string>
+    <string name="shared_string_undo">Չեղարկել</string>
     <string name="shared_string_skip">Բաց թողնել</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Անցանց քարտեզներ
@@ -2371,9 +2371,9 @@
     <string name="working_days">Աշխատանքային օրեր</string>
     <string name="recent_places">Վերջին վայրերը</string>
     <string name="favourites">«Սիրված»</string>
-    <string name="saved_at_time">Հաջողությամբ պահպանվեց՝ %1$s</string>
+    <string name="saved_at_time">Պահպանվեց՝ %1$s</string>
     <string name="poi_deleted_localy">POI-րը կհեռացվեն ձեր փոփոխությունները վերբեռնելուց հետո</string>
-    <string name="show_gpx">Ցույց տալ GPX</string>
+    <string name="show_gpx">Ցույց տալ GPX տվյալները</string>
     <string name="count_of_lines">Տողերի քանակը</string>
     <string name="are_you_sure">Վստա՞հ եք?</string>
     
@@ -2385,9 +2385,9 @@
     <string name="downloading_number_of_files">Ֆայլի ներբեռնում - %1$d</string>
     <string name="show_free_version_banner">Ցույց տալ անվճար տարբերակների պաստառը</string>
     <string name="show_free_version_banner_description">Ցույց տալ անվճար տարբերակների պաստառը նաև վճարովի տարբերակում։</string>
-    <string name="buy">ԳՆԵԼ</string>
-    <string name="activate_seamarks_plugin">Խնդրում ենք ակտիվացնել Ծովային քարտեզների plugin-ը</string>
-    <string name="activate_srtm_plugin">Խնդրում ենք ակտիվացնել SRTM plugin-ը</string>
+    <string name="buy">Գնել</string>
+    <string name="activate_seamarks_plugin">Խնդրում ենք ակտիվացնել «Ծովային քարտեզներ»-ի plugin-ը</string>
+    <string name="activate_srtm_plugin">Խնդրում ենք ակտիվացնել «Contour lines» plugin-ը</string>
     <string name="later">Ավելի ուշ</string>
     <string name="get_full_version">Ամբողջական տարբերակը</string>
     <string name="downloads">Ներբեռնումներ</string>
@@ -2402,7 +2402,7 @@
     <string name="new_version">Նոր տարբերակ</string>
     <string name="begin_with_osmand_menu_group">Առաջին քայլերը OsmAnd-ի հետ</string>
     <string name="features_menu_group">Հնարավորությունները</string>
-    <string name="help_us_to_improve_menu_group">Օգնեք մեզ բարելավել OsmAnd-ը</string>
+    <string name="help_us_to_improve_menu_group">Օգնեք բարելավել OsmAnd-ը</string>
     <string name="other_menu_group">Այլ</string>
     <string name="plugins_menu_group">Պլագիններ (Plugins)</string>
     <string name="first_usage_item">Առաջին մեկնարկը</string>
