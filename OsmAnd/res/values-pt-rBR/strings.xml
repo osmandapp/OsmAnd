@@ -970,7 +970,7 @@ Pôr do Sol: %2$s</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Vaga de estacionamento</string>
-	<string name="context_menu_item_add_parking_point">Marcar local de estacionamento</string>
+	<string name="context_menu_item_add_parking_point">Marcar estacionamento</string>
 	<string name="context_menu_item_delete_parking_point">Apagar marcador de estacionamento</string>
 	<string name="gpxup_public">Público</string>
 	<string name="gpxup_identifiable">Identificável</string>
