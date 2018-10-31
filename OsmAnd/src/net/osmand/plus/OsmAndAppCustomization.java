@@ -1,6 +1,11 @@
 package net.osmand.plus;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -16,6 +21,9 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +32,8 @@ public class OsmAndAppCustomization {
 
 	protected OsmandApplication app;
 	protected OsmandSettings osmandSettings;
+
+	private Bitmap navDrawerLogo;
 
 	public void setup(OsmandApplication app) {
 		this.app = app;
@@ -97,6 +107,30 @@ public class OsmAndAppCustomization {
 	}
 
 	public boolean onDestinationReached() {
+		return true;
+	}
+
+	@Nullable
+	public Bitmap getNavDrawerLogo() {
+		return navDrawerLogo;
+	}
+
+	public boolean setNavDrawerLogo(@Nullable String uri) {
+		if (TextUtils.isEmpty(uri)) {
+			navDrawerLogo = null;
+		} else {
+			try {
+				InputStream is = app.getContentResolver().openInputStream(Uri.parse(uri));
+				if (is != null) {
+					navDrawerLogo = BitmapFactory.decodeStream(is);
+					is.close();
+				}
+			} catch (FileNotFoundException e) {
+				return false;
+			} catch (IOException e) {
+				// ignore
+			}
+		}
 		return true;
 	}
 }

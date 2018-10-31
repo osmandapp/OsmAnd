@@ -671,6 +671,12 @@ public class OsmandAidlService extends Service {
 			return true;
 		}
 
+		@Override
+		public boolean setNavDrawerLogo(String imageUri) throws RemoteException {
+			OsmandAidlApi api = getApi("setNavDrawerLogo");
+			return api != null && api.setNavDrawerLogo(imageUri);
+		}
+
 		void startRemoteUpdates(final long updateTimeMS, final long callbackId, final IOsmAndAidlCallback callback) {
 			mHandler.postDelayed(new Runnable() {
 				@Override

@@ -1655,6 +1655,10 @@ public class OsmandAidlApi {
 		}
 	}
 
+	boolean setNavDrawerLogo(@Nullable String uri) {
+		return app.getAppCustomization().setNavDrawerLogo(uri);
+	}
+
 	public static class ConnectedApp implements Comparable<ConnectedApp> {
 
 		static final String PACK_KEY = "pack";

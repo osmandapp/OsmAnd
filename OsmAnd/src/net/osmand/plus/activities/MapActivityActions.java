@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,9 +19,11 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -47,7 +51,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
-import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
@@ -109,10 +112,14 @@ public class MapActivityActions implements DialogProvider {
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 
+	@NonNull
+	private ImageView navDrawerLogoHeader;
+
 	public MapActivityActions(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		navDrawerLogoHeader = new ImageView(mapActivity);
 	}
 
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
@@ -956,6 +963,12 @@ public class MapActivityActions implements DialogProvider {
 			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_dark));
 		} else {
 			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_light));
+		}
+		menuItemsListView.removeHeaderView(navDrawerLogoHeader);
+		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
+		if (navDrawerLogo != null) {
+			navDrawerLogoHeader.setImageBitmap(navDrawerLogo);
+			menuItemsListView.addHeaderView(navDrawerLogoHeader);
 		}
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
