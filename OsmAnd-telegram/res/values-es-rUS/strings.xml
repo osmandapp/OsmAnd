@@ -161,7 +161,7 @@
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">seg</string>
 	<string name="plus">+</string>
-	<string name="welcome_descr"><b>OsmAnd Location Sharing</b> permite compartir su ubicación y ver la de otros en OsmAnd.<br/><br/>&gt;La aplicación utiliza Telegram API y necesita una cuenta de Telegram.</string>
+	<string name="welcome_descr"><b>OsmAnd Location Sharing</b> permite compartir su ubicación y ver la de otros en OsmAnd.<br/><br/> La aplicación utiliza Telegram API y necesita una cuenta de Telegram.</string>
 	<string name="my_location">Mi ubicación</string>
 	<string name="live_now">Enviar ahora</string>
 
