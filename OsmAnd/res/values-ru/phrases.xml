@@ -3837,4 +3837,22 @@
 	<string name="poi_bulk_purchase_yes">Массовая закупка: есть</string>
 	<string name="poi_bulk_purchase_only">Только массовая закупка</string>
 
+	<string name="poi_pipeline_substation">Трубопроводная подстанция</string>
+	<string name="poi_substation_type">Тип</string>
+	<string name="poi_substation_transmission">Передаточная</string>
+	<string name="poi_substation_distribution">Распределительная</string>
+	<string name="poi_substation_minor_distribution">Локальная распределительная</string>
+	<string name="poi_substation_industrial">Промышленная</string>
+	<string name="poi_substation_transition">Переходная</string>
+	<string name="poi_substation_traction">Тяговая</string>
+	<string name="poi_substation_converter">Преобразовательная</string>
+	<string name="poi_substation_compensation">Компенсаторная</string>
+
+	<string name="poi_substation_compression">Для сжатия</string>
+	<string name="poi_substation_measurement">Измерительная</string>
+	<string name="poi_substation_valve">Вентиль</string>
+	<string name="poi_substation_valve_group">Группа вентилей</string>
+	<string name="poi_substation_inspection_gauge">Контрольно-измерительная</string>
+	<string name="poi_substation_field_gathering">Собирательная</string>
+
 </resources>

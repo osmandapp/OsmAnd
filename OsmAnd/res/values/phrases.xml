@@ -108,6 +108,7 @@
 	<string name="poi_glacier_type">Glacier type</string>
 	<string name="poi_checkpoint_type">Checkpoint type</string>
 	<string name="poi_bulk_purchase">Bulk purchase</string>
+	<string name="poi_substation_type">Type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3860,5 +3861,22 @@
 
 	<string name="poi_bulk_purchase_yes">Bulk purchase: yes</string>
 	<string name="poi_bulk_purchase_only">Bulk purchase: only</string>
+
+	<string name="poi_pipeline_substation">Pipeline substation</string>
+	<string name="poi_substation_transmission">Transmission</string>
+	<string name="poi_substation_distribution">Distribution</string>
+	<string name="poi_substation_minor_distribution">Minor distribution</string>
+	<string name="poi_substation_industrial">Industrial</string>
+	<string name="poi_substation_transition">Transition</string>
+	<string name="poi_substation_traction">Traction</string>
+	<string name="poi_substation_converter">Converter</string>
+	<string name="poi_substation_compensation">Compensation</string>
+
+	<string name="poi_substation_compression">Compression</string>
+	<string name="poi_substation_measurement">Measurement</string>
+	<string name="poi_substation_valve">Valve</string>
+	<string name="poi_substation_valve_group">Valve group</string>
+	<string name="poi_substation_inspection_gauge">Inspection gauge</string>
+	<string name="poi_substation_field_gathering">Field gathering</string>
 
 </resources>
