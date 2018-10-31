@@ -204,15 +204,6 @@ public class RoutePlannerFrontEnd {
 		makeStartEndPointsPrecise(res, start, end, intermediates);
 		if (res != null) {
 			new RouteResultPreparation().printResults(ctx, start, end, res);
-			RouteStatistics routeStatistics = RouteStatistics.calculate(res);
-			System.out.println("Smoothness");
-			System.out.println(routeStatistics.getRouteSmoothnessStatistic());
-
-			System.out.println("Surface");
-			System.out.println(routeStatistics.getRouteSurfaceStatistic());
-
-            System.out.println("Highway");
-            System.out.println(routeStatistics.getRouteClassStatistic());
 		}
 		return res;
 	}

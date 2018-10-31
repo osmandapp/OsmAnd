@@ -49,7 +49,7 @@ public class RouteSegmentResult {
 				res[2 * k] = 0;
 			} else {
 				if(ind < pf.length) {
-					res[2 * k] = pf[k];
+					res[2 * k] = pf[ind];
 				}
 			}
 			if(ind < pf.length) {
