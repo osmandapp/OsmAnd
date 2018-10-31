@@ -80,6 +80,33 @@ public class ConfigureMapMenu {
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
 	public static final String COLOR_ATTR = "color";
 	public static final String ROAD_STYLE_ATTR = "roadStyle";
+
+	private static final String ITEM_ID_SCHEME = "map.configure.";
+	private static final String SHOW_ITEMS_ID_SCHEME = ITEM_ID_SCHEME + "show.";
+	private static final String RENDERING_ITEMS_ID_SCHEME = ITEM_ID_SCHEME + "rendering.";
+	private static final String CUSTOM_RENDERING_ITEMS_ID_SCHEME = RENDERING_ITEMS_ID_SCHEME + "custom.";
+
+	private static final String APP_PROFILES_ID = ITEM_ID_SCHEME + "app_profiles";
+
+	private static final String FAVORITES_ID = SHOW_ITEMS_ID_SCHEME + "favorites";
+	private static final String POI_OVERLAY_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay";
+	private static final String POI_OVERLAY_LABELS_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay_labels";
+	private static final String TRANSPORT_ID = SHOW_ITEMS_ID_SCHEME + "transport";
+	private static final String GPX_FILES_ID = SHOW_ITEMS_ID_SCHEME + "gpx_files";
+	private static final String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
+	private static final String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
+
+	private static final String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
+	private static final String MAP_MODE_ID = RENDERING_ITEMS_ID_SCHEME + "map_mode";
+	private static final String MAP_MAGNIFIER_ID = RENDERING_ITEMS_ID_SCHEME + "map_marnifier";
+	private static final String ROAD_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "road_style";
+	private static final String TEXT_SIZE_ID = RENDERING_ITEMS_ID_SCHEME + "text_size";
+	private static final String MAP_LANGUAGE_ID = RENDERING_ITEMS_ID_SCHEME + "map_language";
+	private static final String TRANSPORT_RENDERING_ID = RENDERING_ITEMS_ID_SCHEME + "transport";
+	private static final String DETAILS_ID = RENDERING_ITEMS_ID_SCHEME + "details";
+	private static final String HIDE_ID = RENDERING_ITEMS_ID_SCHEME + "hide";
+	private static final String ROUTES_ID = RENDERING_ITEMS_ID_SCHEME + "routes";
+
 	private int hikingRouteOSMCValue;
 	private int selectedLanguageIndex;
 	private boolean transliterateNames;
@@ -93,6 +120,7 @@ public class ConfigureMapMenu {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(APP_PROFILES_ID)
 				.setTitleId(R.string.app_modes_choose, ma)
 				.setLayout(R.layout.mode_toggles).createItem());
 		adapter.setChangeAppModeListener(new OnClickListener() {
@@ -256,6 +284,7 @@ public class ConfigureMapMenu {
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		boolean selected = settings.SHOW_FAVORITES.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(FAVORITES_ID)
 				.setTitleId(R.string.shared_string_favorites, activity)
 				.setSelected(settings.SHOW_FAVORITES.get())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -263,6 +292,7 @@ public class ConfigureMapMenu {
 				.setListener(l).createItem());
 		selected = app.getPoiFilters().isShowingAnyPoi();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(POI_OVERLAY_ID)
 				.setTitleId(R.string.layer_poi, activity)
 				.setSelected(selected)
 				.setDescription(app.getPoiFilters().getSelectedPoiFiltersName())
@@ -272,6 +302,7 @@ public class ConfigureMapMenu {
 				.setListener(l).createItem());
 		selected = settings.SHOW_POI_LABEL.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(POI_OVERLAY_LABELS_ID)
 				.setTitleId(R.string.layer_amenity_label, activity)
 				.setSelected(settings.SHOW_POI_LABEL.get())
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -308,6 +339,7 @@ public class ConfigureMapMenu {
 		}
 		final boolean transportSelected = selected;
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(TRANSPORT_ID)
 				.setTitleId(R.string.rendering_category_transport, activity)
 				.setIcon(R.drawable.ic_action_bus_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
@@ -459,6 +491,7 @@ public class ConfigureMapMenu {
 				}).createItem());
 		selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(GPX_FILES_ID)
 				.setTitleId(R.string.layer_gpx_layer, activity)
 				.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles())
 				.setDescription(app.getSelectedGpxHelper().getGpxDescription())
@@ -469,6 +502,7 @@ public class ConfigureMapMenu {
 
 		selected = settings.SHOW_MAP_MARKERS.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(MAP_MARKERS_ID)
 				.setTitleId(R.string.map_markers, activity)
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -476,6 +510,7 @@ public class ConfigureMapMenu {
 				.setListener(l).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(MAP_SOURCE_ID)
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
 				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : null)
@@ -503,6 +538,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_renderer, activity)
+				.setId(MAP_STYLE_ID)
 				.setDescription(getRenderDescr(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_map).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
@@ -515,6 +551,7 @@ public class ConfigureMapMenu {
 				}).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_mode, activity)
+				.setId(MAP_MODE_ID)
 				.setDescription(getDayNightDescr(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(getDayNightIcon(activity)).setListener(new ItemClickListener() {
 					@Override
@@ -547,6 +584,7 @@ public class ConfigureMapMenu {
 				}).createItem());
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(MAP_MAGNIFIER_ID)
 				.setTitleId(R.string.map_magnifier, activity)
 				.setDescription(
 						String.format(Locale.UK, "%.0f",
@@ -608,12 +646,13 @@ public class ConfigureMapMenu {
 				}).createItem());
 
 		ContextMenuItem props;
-		props = createRenderingProperty(customRules, adapter, activity, R.drawable.ic_action_intersection, ROAD_STYLE_ATTR);
+		props = createRenderingProperty(customRules, adapter, activity, R.drawable.ic_action_intersection, ROAD_STYLE_ATTR, ROAD_STYLE_ID);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.text_size, activity)
+				.setId(TEXT_SIZE_ID)
 				.setDescription(getScale(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_text_size).setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
@@ -652,6 +691,7 @@ public class ConfigureMapMenu {
 		localeDescr = localeDescr == null || localeDescr.equals("") ? activity.getString(R.string.local_map_names)
 				: localeDescr;
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_locale, activity)
+				.setId(MAP_LANGUAGE_ID)
 				.setDescription(localeDescr).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_language)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -742,17 +782,17 @@ public class ConfigureMapMenu {
 				}).createItem());
 
 		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
-				"transport", null, adapter, activity, true);
+				"transport", null, adapter, activity, true, TRANSPORT_RENDERING_ID);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, null, R.string.rendering_category_details, R.drawable.ic_action_layers_dark,
-				"details", null, adapter, activity, true);
+				"details", null, adapter, activity, true, DETAILS_ID);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, null, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				"hide", null, adapter, activity, true);
+				"hide", null, adapter, activity, true, HIDE_ID);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -764,7 +804,7 @@ public class ConfigureMapMenu {
 			}
 		}
 		props = createProperties(customRules, customRulesIncluded, R.string.rendering_category_routes, R.drawable.ic_action_map_routes,
-				"routes", null, adapter, activity, true);
+				"routes", null, adapter, activity, true, ROUTES_ID);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -826,7 +866,8 @@ public class ConfigureMapMenu {
 											 final ListStringPreference defaultSettings,
 											 final ContextMenuAdapter adapter,
 											 final MapActivity activity,
-											 final boolean useDescription) {
+											 final boolean useDescription,
+											 final String id) {
 
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
 		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<>();
@@ -882,6 +923,7 @@ public class ConfigureMapMenu {
 
 			};
 			ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder().setTitleId(strId, activity)
+					.setId(id)
 					.setIcon(icon).setListener(clickListener);
 			boolean selected = false;
 			for (OsmandSettings.CommonPreference<Boolean> p : prefs) {
@@ -1137,7 +1179,7 @@ public class ConfigureMapMenu {
 												 List<RenderingRuleProperty> customRules) {
 		for (final RenderingRuleProperty p : customRules) {
 			if (isPropertyAccepted(p)) {
-				adapter.addItem(createRenderingProperty(adapter, activity, 0, p));
+				adapter.addItem(createRenderingProperty(adapter, activity, 0, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName()));
 			}
 		}
 	}
@@ -1154,17 +1196,17 @@ public class ConfigureMapMenu {
 
 	private ContextMenuItem createRenderingProperty(final List<RenderingRuleProperty> customRules,
 													final ContextMenuAdapter adapter, final MapActivity activity,
-													@DrawableRes final int icon, final String attrName) {
+													@DrawableRes final int icon, final String attrName, String id) {
 		for (final RenderingRuleProperty p : customRules) {
 			if (p.getAttrName().equals(attrName)) {
-				return createRenderingProperty(adapter, activity, icon, p);
+				return createRenderingProperty(adapter, activity, icon, p, id);
 			}
 		}
 		return null;
 	}
 
 	private ContextMenuItem createRenderingProperty(final ContextMenuAdapter adapter, final MapActivity activity,
-										 @DrawableRes final int icon, final RenderingRuleProperty p) {
+										 @DrawableRes final int icon, final RenderingRuleProperty p, final String id) {
 		final OsmandMapTileView view = activity.getMapView();
 		String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
 				p.getName());
@@ -1175,6 +1217,7 @@ public class ConfigureMapMenu {
 			final OsmandSettings.CommonPreference<Boolean> pref = view.getApplication().getSettings()
 					.getCustomRenderBooleanProperty(p.getAttrName());
 			return ContextMenuItem.createBuilder(propertyName)
+					.setId(id)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
@@ -1197,6 +1240,7 @@ public class ConfigureMapMenu {
 						p.getDefaultValueDescription());
 			}
 			ContextMenuItem.ItemBuilder builder = ContextMenuItem.createBuilder(propertyName)
+					.setId(id)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
