@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="city_type_district">ജില്ല</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="city_type_district">ജില്ല</string>
     <string name="city_type_neighbourhood">സമീപദേശം</string>
     <string name="map_widget_search">തെരച്ചില്‍</string>
 	<string name="app_mode_bus">ബസ്</string>
@@ -1861,4 +1862,5 @@
     <string name="quick_action_add_navigation">ഗതിനിയന്ത്രണം</string>
     <string name="quick_action_bug_message">സന്ദേശം</string>
     <string name="add_route_points">പാതബിന്ദുക്കള്‍ ചേര്‍ക്കു</string>
+    <string name="shared_string_restore">പുനഃസ്ഥാപിക്കുക</string>
     </resources>
