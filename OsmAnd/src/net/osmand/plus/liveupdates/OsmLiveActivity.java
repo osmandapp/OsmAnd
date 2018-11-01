@@ -34,11 +34,9 @@ import java.util.TimeZone;
 
 public class OsmLiveActivity extends AbstractDownloadActivity implements DownloadEvents, ChoosePlanDialogListener {
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
-	public final static String OPEN_SUBSCRIPTION_INTENT_PARAM = "open_subscription_intent_param";
 	public final static String SHOW_SETTINGS_ONLY_INTENT_PARAM = "show_settings_only_intent_param";
 
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
-	private boolean openSubscription;
 	private boolean showSettingOnly;
 	private GetLastUpdateDateTask getLastUpdateDateTask;
 	private static final String URL = "https://osmand.net/api/osmlive_status";
@@ -51,10 +49,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 
 		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
-			openSubscription = intent.getExtras().getBoolean(OPEN_SUBSCRIPTION_INTENT_PARAM, false);
 			showSettingOnly = intent.getExtras().getBoolean(SHOW_SETTINGS_ONLY_INTENT_PARAM, false);
 		} else if (savedInstanceState != null) {
-			openSubscription = savedInstanceState.getBoolean(OPEN_SUBSCRIPTION_INTENT_PARAM, false);
 			showSettingOnly = savedInstanceState.getBoolean(SHOW_SETTINGS_ONLY_INTENT_PARAM, false);
 		}
 
@@ -109,13 +105,12 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(OPEN_SUBSCRIPTION_INTENT_PARAM, openSubscription);
 		outState.putBoolean(SHOW_SETTINGS_ONLY_INTENT_PARAM, showSettingOnly);
 	}
 
 	@Override
 	public void onChoosePlanDialogDismiss() {
-		finish();
+		//finish();
 	}
 
 	public boolean isShowSettingOnly() {
@@ -138,10 +133,6 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	@Override
 	public void downloadHasFinished() {
 		((LiveUpdatesFragment) pagerAdapter.fragments[0]).notifyLiveUpdatesChanged();
-	}
-
-	public boolean shouldOpenSubscription() {
-		return openSubscription;
 	}
 
 	private static class GetLastUpdateDateTask extends AsyncTask<Void, Void, String> {

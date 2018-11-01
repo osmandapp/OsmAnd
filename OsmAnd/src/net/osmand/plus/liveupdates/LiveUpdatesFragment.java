@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -47,10 +48,12 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
@@ -153,9 +156,14 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					if (position == 0 && !processing && InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
-						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-						subscriptionFragment.setEditMode(true);
-						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							if (isDonationSupported()) {
+								showDonationSettings();
+							} else {
+								ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+							}
+						}
 					}
 				}
 			});
@@ -179,17 +187,46 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
 				statusTextView.setText(getString(R.string.osm_live_active));
 				statusIcon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_done));
+
 				regionNameHeaderTextView.setText(R.string.osm_live_support_region);
 				String countryName = getSettings().BILLING_USER_COUNTRY.get();
-				if (Algorithms.isEmpty(countryName)) {
-					if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+				if (purchaseHelper != null) {
+					InAppSubscription s = purchaseHelper.getMonthlyLiveUpdates();
+					if (s.isDonationSupported() && s.isAnyPurchased()) {
+						if (Algorithms.isEmpty(countryName)) {
+							if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+								regionNameHeaderTextView.setText(R.string.default_buttons_support);
+								countryName = getString(R.string.osmand_team);
+							} else {
+								countryName = getString(R.string.shared_string_world);
+							}
+						}
+					} else {
 						regionNameHeaderTextView.setText(R.string.default_buttons_support);
 						countryName = getString(R.string.osmand_team);
-					} else {
-						countryName = getString(R.string.shared_string_world);
 					}
+				} else {
+					regionNameHeaderTextView.setText(R.string.default_buttons_support);
+					countryName = getString(R.string.osmand_team);
 				}
 				regionNameTextView.setText(countryName);
+
+				View divButtonSettings = subscriptionHeader.findViewById(R.id.div_button_settings);
+				View buttonSettings = subscriptionHeader.findViewById(R.id.button_settings);
+				if (isDonationSupported()) {
+					buttonSettings.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							showDonationSettings();
+						}
+					});
+					divButtonSettings.setVisibility(View.VISIBLE);
+					buttonSettings.setVisibility(View.VISIBLE);
+				} else {
+					divButtonSettings.setVisibility(View.GONE);
+					buttonSettings.setVisibility(View.GONE);
+				}
 
 				subscriptionBanner.setVisibility(View.GONE);
 				subscriptionInfo.setVisibility(View.VISIBLE);
@@ -209,8 +246,10 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				subscriptionButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+						}
 					}
 				});
 
@@ -228,10 +267,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			if (purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 				enableProgress();
 			}
-		}
-		if (((OsmLiveActivity) getActivity()).shouldOpenSubscription()) {
-			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
 		}
 	}
 
@@ -273,12 +308,31 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == SUBSCRIPTION_SETTINGS && !processing) {
-			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-			subscriptionFragment.setEditMode(true);
-			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				if (isDonationSupported()) {
+					showDonationSettings();
+				} else {
+					ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+				}
+			}
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private boolean isDonationSupported() {
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			InAppSubscription s = purchaseHelper.getMonthlyLiveUpdates();
+			return s.isDonationSupported() && s.isAnyPurchased();
+		}
+		return false;
+	}
+
+	private void showDonationSettings() {
+		SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+		subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
 	}
 
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
@@ -715,7 +769,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
+		if (purchaseHelper != null && purchaseHelper.getLiveUpdates().containsSku(sku)) {
 			updateSubscriptionHeader();
 		}
 

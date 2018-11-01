@@ -29,6 +29,8 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -128,9 +130,15 @@ public class DiscountHelper {
 			if (data.url.startsWith(INAPP_PREFIX) && data.url.length() > INAPP_PREFIX.length()) {
 				String inAppSku = data.url.substring(INAPP_PREFIX.length());
 				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null
-						&& (purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app))) {
-					return;
+				if (purchaseHelper != null) {
+					if (purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+						return;
+					} else {
+						InAppSubscription discountSubscription = purchaseHelper.getLiveUpdates().applyDiscountSubscription(inAppSku);
+						if (discountSubscription != null && discountSubscription.fetchRequired()) {
+							purchaseHelper.requestInventory();
+						}
+					}
 				}
 			}
 
@@ -251,15 +259,20 @@ public class DiscountHelper {
 
 	private static void openUrl(final MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
-			if (url.contains(InAppPurchaseHelper.SKU_FULL_VERSION_PRICE)) {
-				OsmandApplication app = mapActivity.getMyApplication();
-				app.logEvent(mapActivity, "in_app_purchase_redirect");
-				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null) {
+				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
+					app.logEvent(mapActivity, "in_app_purchase_redirect");
 					purchaseHelper.purchaseFullVersion(mapActivity);
+				} else {
+					for (InAppPurchase p : purchaseHelper.getLiveUpdates().getAllSubscriptions()) {
+						if (url.contains(p.getSku())) {
+							ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
+							break;
+						}
+					}
 				}
-			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)) {
-				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else if (url.startsWith(SEARCH_QUERY_PREFIX)) {
 			String query = url.substring(SEARCH_QUERY_PREFIX.length());

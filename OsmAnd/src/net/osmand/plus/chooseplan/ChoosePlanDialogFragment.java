@@ -1,9 +1,12 @@
 package net.osmand.plus.chooseplan;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -11,6 +14,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +29,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -39,8 +44,11 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.liveupdates.SubscriptionFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -53,7 +61,8 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	private boolean nightMode;
 
-	private View osmLiveCardButton;
+	private ViewGroup osmLiveCardButtonsContainer;
+	private ProgressBar osmLiveCardProgress;
 	private View planTypeCardButton;
 
 	public interface ChoosePlanDialogListener {
@@ -61,24 +70,30 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	public enum OsmAndFeature {
-		WIKIVOYAGE_OFFLINE(R.string.wikivoyage_offline),
-		DAILY_MAP_UPDATES(R.string.daily_map_updates),
-		MONTHLY_MAP_UPDATES(R.string.monthly_map_updates),
-		UNLIMITED_DOWNLOADS(R.string.unlimited_downloads),
-		WIKIPEDIA_OFFLINE(R.string.wikipedia_offline),
-		CONTOUR_LINES_HILLSHADE_MAPS(R.string.contour_lines_hillshade_maps),
-		SEA_DEPTH_MAPS(R.string.index_item_depth_contours_osmand_ext),
-		UNLOCK_ALL_FEATURES(R.string.unlock_all_features),
-		DONATION_TO_OSM(R.string.donation_to_osm);
+		WIKIVOYAGE_OFFLINE(R.string.wikivoyage_offline, R.drawable.ic_action_explore),
+		DAILY_MAP_UPDATES(R.string.daily_map_updates, R.drawable.ic_action_time_span),
+		MONTHLY_MAP_UPDATES(R.string.monthly_map_updates, R.drawable.ic_action_sand_clock),
+		UNLIMITED_DOWNLOADS(R.string.unlimited_downloads, R.drawable.ic_action_unlimited_download),
+		WIKIPEDIA_OFFLINE(R.string.wikipedia_offline, R.drawable.ic_plugin_wikipedia),
+		CONTOUR_LINES_HILLSHADE_MAPS(R.string.contour_lines_hillshade_maps, R.drawable.ic_plugin_srtm),
+		SEA_DEPTH_MAPS(R.string.index_item_depth_contours_osmand_ext, R.drawable.ic_action_nautical_depth),
+		UNLOCK_ALL_FEATURES(R.string.unlock_all_features, R.drawable.ic_action_osmand_logo),
+		DONATION_TO_OSM(R.string.donation_to_osm, 0);
 
 		private final int key;
+		private final int iconId;
 
-		OsmAndFeature(int key) {
+		OsmAndFeature(int key, int iconId) {
 			this.key = key;
+			this.iconId = iconId;
 		}
 
 		public String toHumanString(Context ctx) {
 			return ctx.getString(key);
+		}
+
+		public int getIconId() {
+			return iconId;
 		}
 
 		public boolean isFeaturePurchased(OsmandApplication ctx) {
@@ -205,7 +220,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	public void onDismiss(DialogInterface dialog) {
 		super.onDismiss(dialog);
 		Activity activity = getActivity();
-		if (activity != null && activity instanceof ChoosePlanDialogListener) {
+		if (activity instanceof ChoosePlanDialogListener) {
 			((ChoosePlanDialogListener) activity).onChoosePlanDialogDismiss();
 		}
 	}
@@ -252,7 +267,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private ViewGroup buildOsmLiveCard(@NonNull Context ctx, ViewGroup container) {
-		ViewGroup cardView = (ViewGroup) inflate(R.layout.purchase_dialog_active_card, container);
+		ViewGroup cardView = (ViewGroup) inflate(R.layout.purchase_dialog_osm_live_card, container);
 		TextView headerTitle = (TextView) cardView.findViewById(R.id.header_title);
 		TextView headerDescr = (TextView) cardView.findViewById(R.id.header_descr);
 		headerTitle.setText(R.string.osm_live);
@@ -269,6 +284,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				imgView.setVisibility(View.GONE);
 				imgPurchasedView.setVisibility(View.VISIBLE);
 			} else {
+				imgView.setImageResource(feature.getIconId());
 				imgView.setVisibility(View.VISIBLE);
 				imgPurchasedView.setVisibility(View.GONE);
 			}
@@ -283,54 +299,187 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		if (featureRowDiv != null) {
 			featureRowDiv.setVisibility(View.GONE);
 		}
-		TextViewEx cardDescription = (TextViewEx) cardView.findViewById(R.id.card_descr);
-		cardDescription.setText(R.string.osm_live_payment_desc);
 
-		osmLiveCardButton = cardView.findViewById(R.id.card_button);
-
+		osmLiveCardButtonsContainer = (ViewGroup) cardView.findViewById(R.id.card_buttons_container);
+		osmLiveCardProgress = (ProgressBar) cardView.findViewById(R.id.card_progress);
+		if (osmLiveCardProgress != null) {
+			int color =  ContextCompat.getColor(ctx, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
+			osmLiveCardProgress.getIndeterminateDrawable().setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY);
+		}
 		return cardView;
 	}
 
-	private void setupOsmLiveCardButton(boolean progress) {
-		if (osmLiveCardButton != null) {
-			ProgressBar progressBar = (ProgressBar) osmLiveCardButton.findViewById(R.id.card_button_progress);
-			TextViewEx buttonTitle = (TextViewEx) osmLiveCardButton.findViewById(R.id.card_button_title);
-			TextViewEx buttonSubtitle = (TextViewEx) osmLiveCardButton.findViewById(R.id.card_button_subtitle);
-			if (purchaseHelper == null || !purchaseHelper.hasPrices()) {
-				buttonTitle.setText(getString(R.string.purchase_subscription_title, getString(R.string.osm_live_default_price)));
-			} else {
-				buttonTitle.setText(getString(R.string.purchase_subscription_title, purchaseHelper.getLiveUpdatesPrice()));
+	@SuppressLint("CutPasteId")
+	private void setupOsmLiveCardButtons(boolean progress) {
+		final Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		if (progress) {
+			if (osmLiveCardButtonsContainer != null) {
+				osmLiveCardButtonsContainer.setVisibility(View.GONE);
 			}
-			buttonSubtitle.setText(R.string.osm_live_month_cost_desc);
-			if (progress) {
-				buttonTitle.setVisibility(View.GONE);
-				buttonSubtitle.setVisibility(View.GONE);
-				progressBar.setVisibility(View.VISIBLE);
-				osmLiveCardButton.setOnClickListener(null);
-			} else {
-				buttonTitle.setVisibility(View.VISIBLE);
-				buttonSubtitle.setVisibility(View.VISIBLE);
-				progressBar.setVisibility(View.GONE);
-				osmLiveCardButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						subscript();
+			if (osmLiveCardProgress != null) {
+				osmLiveCardProgress.setVisibility(View.VISIBLE);
+			}
+		} else if (osmLiveCardButtonsContainer != null) {
+			osmLiveCardButtonsContainer.removeAllViews();
+			View lastBtn = null;
+			InAppSubscription monthlyLiveUpdates = purchaseHelper.getMonthlyLiveUpdates();
+			double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
+			for (final InAppSubscription s : purchaseHelper.getLiveUpdates().getVisibleSubscriptions()) {
+				if (s.isPurchased()) {
+					if (lastBtn != null) {
+						View lastBtnDiv = lastBtn.findViewById(R.id.div);
+						if (lastBtnDiv != null) {
+							lastBtnDiv.setVisibility(View.GONE);
+						}
 					}
-				});
+					View buttonPurchased = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
+					View buttonContainer = buttonPurchased.findViewById(R.id.button_container);
+					TextViewEx title = (TextViewEx) buttonPurchased.findViewById(R.id.title);
+					TextViewEx description = (TextViewEx) buttonPurchased.findViewById(R.id.description);
+					TextViewEx buttonTitle = (TextViewEx) buttonPurchased.findViewById(R.id.button_title);
+					View buttonView = buttonPurchased.findViewById(R.id.button_view);
+					View buttonCancelView = buttonPurchased.findViewById(R.id.button_cancel_view);
+					View divTop = buttonPurchased.findViewById(R.id.div_top);
+					View divBottom = buttonPurchased.findViewById(R.id.div_bottom);
+					View div = buttonPurchased.findViewById(R.id.div);
+
+					title.setText(s.getTitle(ctx));
+					description.setText(s.getDescription(ctx));
+					buttonTitle.setText(s.getPrice(ctx));
+					buttonView.setVisibility(View.VISIBLE);
+					buttonCancelView.setVisibility(View.GONE);
+					buttonPurchased.setOnClickListener(null);
+					divTop.setVisibility(View.VISIBLE);
+					div.setVisibility(View.VISIBLE);
+					divBottom.setVisibility(View.GONE);
+					if (s.isDonationSupported()) {
+						buttonPurchased.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								showDonationSettings();
+								dismiss();
+							}
+						});
+					} else {
+						buttonPurchased.setOnClickListener(null);
+					}
+					osmLiveCardButtonsContainer.addView(buttonPurchased);
+
+					View buttonCancel = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
+					buttonContainer = buttonCancel.findViewById(R.id.button_container);
+					title = (TextViewEx) buttonCancel.findViewById(R.id.title);
+					description = (TextViewEx) buttonCancel.findViewById(R.id.description);
+					buttonView = buttonCancel.findViewById(R.id.button_view);
+					buttonCancelView = buttonCancel.findViewById(R.id.button_cancel_view);
+					divTop = buttonCancel.findViewById(R.id.div_top);
+					divBottom = buttonCancel.findViewById(R.id.div_bottom);
+					div = buttonCancel.findViewById(R.id.div);
+
+					buttonContainer.setBackgroundDrawable(null);
+					title.setText(getString(R.string.osm_live_payment_current_subscription));
+					description.setText(s.getRenewDescription(ctx));
+					buttonView.setVisibility(View.GONE);
+					buttonCancelView.setVisibility(View.VISIBLE);
+					buttonCancel.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							manageSubscription(ctx, s.getSku());
+						}
+					});
+					divTop.setVisibility(View.GONE);
+					div.setVisibility(View.GONE);
+					divBottom.setVisibility(View.VISIBLE);
+					osmLiveCardButtonsContainer.addView(buttonCancel);
+
+				} else {
+					View button = inflate(R.layout.purchase_dialog_card_button_ex, osmLiveCardButtonsContainer);
+					TextViewEx title = (TextViewEx) button.findViewById(R.id.title);
+					TextViewEx description = (TextViewEx) button.findViewById(R.id.description);
+					TextViewEx buttonTitle = (TextViewEx) button.findViewById(R.id.button_title);
+					TextViewEx discountRegular = (TextViewEx) button.findViewById(R.id.discount_banner_regular);
+					TextViewEx discountActive = (TextViewEx) button.findViewById(R.id.discount_banner_active);
+					View div = button.findViewById(R.id.div);
+					title.setText(s.getTitle(ctx));
+					description.setText(s.getDescription(ctx));
+					buttonTitle.setText(s.getPrice(ctx));
+
+					if (regularMonthlyPrice > 0 && s.getMonthlyPriceValue() > 0 && s.getMonthlyPriceValue() < regularMonthlyPrice) {
+						int discount = (int) ((1 - s.getMonthlyPriceValue() / regularMonthlyPrice) * 100d);
+						String discountStr = discount + "%";
+						if (discount > 50) {
+							discountActive.setText(String.format(" %s ", getString(R.string.osm_live_payment_discount_descr, discountStr)));
+							discountActive.setVisibility(View.VISIBLE);
+							discountRegular.setVisibility(View.GONE);
+						} else if (discount > 0) {
+							discountActive.setVisibility(View.GONE);
+							discountRegular.setText(String.format(" %s ", getString(R.string.osm_live_payment_discount_descr, discountStr)));
+							discountRegular.setVisibility(View.VISIBLE);
+						} else {
+							discountActive.setVisibility(View.GONE);
+							discountRegular.setVisibility(View.GONE);
+						}
+					} else {
+						discountActive.setVisibility(View.GONE);
+						discountRegular.setVisibility(View.GONE);
+					}
+					button.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							subscribe(s.getSku());
+						}
+					});
+					div.setVisibility(View.VISIBLE);
+					osmLiveCardButtonsContainer.addView(button);
+					lastBtn = button;
+				}
+			}
+			if (lastBtn != null) {
+				View div = lastBtn.findViewById(R.id.div);
+				if (div != null) {
+					div.setVisibility(View.GONE);
+				}
+			}
+			if (osmLiveCardProgress != null) {
+				osmLiveCardProgress.setVisibility(View.GONE);
+			}
+			osmLiveCardButtonsContainer.setVisibility(View.VISIBLE);
+		}
+	}
+
+	private void showDonationSettings() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+			subscriptionFragment.show(activity.getSupportFragmentManager(), SubscriptionFragment.TAG);
+		}
+	}
+
+	private void subscribe(String sku) {
+		if (!app.getSettings().isInternetConnectionAvailable(true)) {
+			Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+		} else {
+			FragmentActivity ctx = getActivity();
+			if (ctx != null && purchaseHelper != null) {
+				OsmandSettings settings = app.getSettings();
+				purchaseHelper.purchaseLiveUpdates(ctx, sku,
+						settings.BILLING_USER_EMAIL.get(),
+						settings.BILLING_USER_NAME.get(),
+						settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
+						settings.BILLING_HIDE_USER_NAME.get());
 			}
 		}
 	}
 
-	private void subscript() {
-		FragmentActivity ctx = getActivity();
-		if (ctx != null && purchaseHelper != null) {
-			OsmandSettings settings = app.getSettings();
-			purchaseHelper.purchaseLiveUpdates(ctx,
-					settings.BILLING_USER_EMAIL.get(),
-					settings.BILLING_USER_NAME.get(),
-					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
-					settings.BILLING_HIDE_USER_NAME.get());
+	private void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
+		String url = "https://play.google.com/store/account/subscriptions?package=" + ctx.getPackageName();
+		if (!Algorithms.isEmpty(sku)) {
+			url += "&sku=" + sku;
 		}
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		startActivity(intent);
 	}
 
 	private ViewGroup buildPlanTypeCard(@NonNull Context ctx, ViewGroup container) {
@@ -366,6 +515,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				imgView.setVisibility(View.GONE);
 				imgPurchasedView.setVisibility(View.VISIBLE);
 			} else {
+				imgView.setImageResource(feature.getIconId());
 				imgView.setVisibility(View.VISIBLE);
 				imgPurchasedView.setVisibility(View.GONE);
 			}
@@ -408,7 +558,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@Nullable
 	public MapActivity getMapActivity() {
 		Activity activity = getActivity();
-		if (activity != null && activity instanceof MapActivity) {
+		if (activity instanceof MapActivity) {
 			return (MapActivity) activity;
 		}
 		return null;
@@ -424,8 +574,8 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 
 		boolean requestingInventory = purchaseHelper != null && purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY;
-		if (osmLiveCardButton != null) {
-			setupOsmLiveCardButton(requestingInventory);
+		if (osmLiveCardButtonsContainer != null) {
+			setupOsmLiveCardButtons(requestingInventory);
 		}
 		if (planTypeCardButton != null) {
 			setupPlanTypeCardButton(requestingInventory);
@@ -445,7 +595,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public void onError(InAppPurchaseTaskType taskType, String error) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-			setupOsmLiveCardButton(false);
+			setupOsmLiveCardButtons(false);
 			setupPlanTypeCardButton(false);
 		}
 	}
@@ -456,13 +606,19 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
+		if (purchaseHelper != null) {
+			InAppSubscription s = purchaseHelper.getLiveUpdates().getSubscriptionBySku(sku);
+			if (s != null && s.isDonationSupported()) {
+				showDonationSettings();
+			}
+		}
 		dismiss();
 	}
 
 	@Override
 	public void showProgress(InAppPurchaseTaskType taskType) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-			setupOsmLiveCardButton(true);
+			setupOsmLiveCardButtons(true);
 			setupPlanTypeCardButton(true);
 		}
 	}
@@ -470,7 +626,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
-			setupOsmLiveCardButton(false);
+			setupOsmLiveCardButtons(false);
 			setupPlanTypeCardButton(false);
 		}
 	}

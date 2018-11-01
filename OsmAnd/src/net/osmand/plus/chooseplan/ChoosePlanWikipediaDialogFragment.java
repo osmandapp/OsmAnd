@@ -11,7 +11,6 @@ public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialo
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
 			OsmAndFeature.SEA_DEPTH_MAPS,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
-			OsmAndFeature.DONATION_TO_OSM,
 	};
 	private final OsmAndFeature[] selectedOsmLiveFeatures = {
 			OsmAndFeature.WIKIPEDIA_OFFLINE,

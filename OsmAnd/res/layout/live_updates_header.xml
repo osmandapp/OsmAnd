@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:osmand="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingLeft="6dp"
     android:paddingRight="6dp"
@@ -177,6 +177,37 @@
                 android:gravity="right"
                 android:text="World"
                 android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                app:typeface="@string/font_roboto_medium"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/div_button_settings"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/button_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:visibility="gone">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="4dp"
+                android:gravity="right"
+                app:textAllCapsCompat="true"
+                android:text="@string/shared_string_settings"
+                android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_list_text_size"
                 app:typeface="@string/font_roboto_medium"/>
 

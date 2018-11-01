@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="subscription_active_bg_color_light">#fff9b2</color>
+	<color name="subscription_active_bg_color_dark">#43453b</color>
+	<color name="subscription_active_div_color_light">#f3edae</color>
+	<color name="subscription_active_div_color_dark">#32332c</color>
+
 	<color name="feature_purchased_bg">#78cc5c</color>
 
 	<color name="dialog_bg_color_light">#f0f0f0</color>
