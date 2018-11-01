@@ -166,4 +166,18 @@
 	<string name="live_now">En vivo ahora</string>
 
 
-</resources>
+<string name="enter_another_device_name">Introduce otro nombre, ya tienes el dispositivo con el mismo nombre</string>
+	<string name="device_added_successfully">%1$ s agregado correctamente.</string>
+	<string name="shared_string_add">Añadir</string>
+	<string name="error_adding_new_device">Error al agregar un nuevo dispositivo</string>
+	<string name="enter_device_name_description">Introduce un nombre para tu nuevo dispositivo. Longitud máxima de 200 símbolos.</string>
+	<string name="device_name_is_too_long">El nombre del dispositivo es demasiado largo</string>
+	<string name="device_name_cannot_be_empty">El nombre del dispositivo no puede estar vacío</string>
+	<string name="device_name">Nombre del dispositivo</string>
+	<string name="shared_string_hide">Ocultar</string>
+	<string name="share_location_as_description_second_line">Puedes crear y ver el ID de dispositivo en el cliente de telegrama usando el chat bot %1$s. %2$s</string>
+	<string name="share_location_as_description">Si deseas conectar varios dispositivos a una cuenta de telegram, debes utilizar un dispositivo diferente para compartir tu ubicación.</string>
+	<string name="add_new_device_description">Última ubicación actualizada:</string>
+	<string name="last_updated_location">Última ubicación actualizada:</string>
+	<string name="successfully_sent_and_updated">Enviado y actualizado con éxito</string>
+	</resources>
