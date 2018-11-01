@@ -14,7 +14,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -329,12 +328,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
 			for (final InAppSubscription s : purchaseHelper.getLiveUpdates().getVisibleSubscriptions()) {
 				if (s.isPurchased()) {
-					if (lastBtn != null) {
-						View lastBtnDiv = lastBtn.findViewById(R.id.div);
-						if (lastBtnDiv != null) {
-							lastBtnDiv.setVisibility(View.GONE);
-						}
-					}
 					View buttonPurchased = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
 					View buttonContainer = buttonPurchased.findViewById(R.id.button_container);
 					TextViewEx title = (TextViewEx) buttonPurchased.findViewById(R.id.title);
@@ -378,7 +371,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					divBottom = buttonCancel.findViewById(R.id.div_bottom);
 					div = buttonCancel.findViewById(R.id.div);
 
-					buttonContainer.setBackgroundDrawable(null);
 					title.setText(getString(R.string.osm_live_payment_current_subscription));
 					description.setText(s.getRenewDescription(ctx));
 					buttonView.setVisibility(View.GONE);
@@ -393,6 +385,18 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					div.setVisibility(View.GONE);
 					divBottom.setVisibility(View.VISIBLE);
 					osmLiveCardButtonsContainer.addView(buttonCancel);
+
+					if (lastBtn != null) {
+						View lastBtnDiv = lastBtn.findViewById(R.id.div);
+						if (lastBtnDiv != null) {
+							lastBtnDiv.setVisibility(View.GONE);
+						}
+						View lastBtnDivBottom = lastBtn.findViewById(R.id.div_bottom);
+						if (lastBtnDivBottom != null) {
+							lastBtnDivBottom.setVisibility(View.GONE);
+						}
+					}
+					lastBtn = buttonCancel;
 
 				} else {
 					View button = inflate(R.layout.purchase_dialog_card_button_ex, osmLiveCardButtonsContainer);
@@ -440,6 +444,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				View div = lastBtn.findViewById(R.id.div);
 				if (div != null) {
 					div.setVisibility(View.GONE);
+				}
+				View divBottom = lastBtn.findViewById(R.id.div_bottom);
+				if (divBottom != null) {
+					divBottom.setVisibility(View.GONE);
 				}
 			}
 			if (osmLiveCardProgress != null) {
