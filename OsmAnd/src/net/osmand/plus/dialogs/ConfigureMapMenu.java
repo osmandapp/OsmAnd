@@ -68,6 +68,25 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
+import static net.osmand.plus.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.FAVORITES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MARKERS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.POI_OVERLAY_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.TEXT_SIZE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -80,32 +99,6 @@ public class ConfigureMapMenu {
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
 	public static final String COLOR_ATTR = "color";
 	public static final String ROAD_STYLE_ATTR = "roadStyle";
-
-	private static final String ITEM_ID_SCHEME = "map.configure.";
-	private static final String SHOW_ITEMS_ID_SCHEME = ITEM_ID_SCHEME + "show.";
-	private static final String RENDERING_ITEMS_ID_SCHEME = ITEM_ID_SCHEME + "rendering.";
-	private static final String CUSTOM_RENDERING_ITEMS_ID_SCHEME = RENDERING_ITEMS_ID_SCHEME + "custom.";
-
-	private static final String APP_PROFILES_ID = ITEM_ID_SCHEME + "app_profiles";
-
-	private static final String FAVORITES_ID = SHOW_ITEMS_ID_SCHEME + "favorites";
-	private static final String POI_OVERLAY_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay";
-	private static final String POI_OVERLAY_LABELS_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay_labels";
-	private static final String TRANSPORT_ID = SHOW_ITEMS_ID_SCHEME + "transport";
-	private static final String GPX_FILES_ID = SHOW_ITEMS_ID_SCHEME + "gpx_files";
-	private static final String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
-	private static final String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
-
-	private static final String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
-	private static final String MAP_MODE_ID = RENDERING_ITEMS_ID_SCHEME + "map_mode";
-	private static final String MAP_MAGNIFIER_ID = RENDERING_ITEMS_ID_SCHEME + "map_marnifier";
-	private static final String ROAD_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "road_style";
-	private static final String TEXT_SIZE_ID = RENDERING_ITEMS_ID_SCHEME + "text_size";
-	private static final String MAP_LANGUAGE_ID = RENDERING_ITEMS_ID_SCHEME + "map_language";
-	private static final String TRANSPORT_RENDERING_ID = RENDERING_ITEMS_ID_SCHEME + "transport";
-	private static final String DETAILS_ID = RENDERING_ITEMS_ID_SCHEME + "details";
-	private static final String HIDE_ID = RENDERING_ITEMS_ID_SCHEME + "hide";
-	private static final String ROUTES_ID = RENDERING_ITEMS_ID_SCHEME + "routes";
 
 	private int hikingRouteOSMCValue;
 	private int selectedLanguageIndex;

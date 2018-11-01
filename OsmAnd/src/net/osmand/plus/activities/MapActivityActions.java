@@ -79,6 +79,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_HELP_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_OSMAND_LIVE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 
 public class MapActivityActions implements DialogProvider {
@@ -105,22 +119,6 @@ public class MapActivityActions implements DialogProvider {
 	private static final int DIALOG_RELOAD_TITLE = 103;
 
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
-
-	private static final String DRAWER_ITEM_ID_SCHEME = "drawer.action.";
-	private static final String DRAWER_DASHBOARD_ID = DRAWER_ITEM_ID_SCHEME + "dashboard";
-	private static final String DRAWER_MAP_MARKERS_ID = DRAWER_ITEM_ID_SCHEME + "map_markers";
-	private static final String DRAWER_MY_PLACES_ID = DRAWER_ITEM_ID_SCHEME + "my_places";
-	private static final String DRAWER_SEARCH_ID = DRAWER_ITEM_ID_SCHEME + "search";
-	private static final String DRAWER_DIRECTIONS_ID = DRAWER_ITEM_ID_SCHEME + "directions";
-	private static final String DRAWER_CONFIGURE_MAP_ID = DRAWER_ITEM_ID_SCHEME + "configure_map";
-	private static final String DRAWER_DOWNLOAD_MAPS_ID = DRAWER_ITEM_ID_SCHEME + "download_maps";
-	private static final String DRAWER_OSMAND_LIVE_ID = DRAWER_ITEM_ID_SCHEME + "osmand_live";
-	private static final String DRAWER_TRAVEL_GUIDES_ID = DRAWER_ITEM_ID_SCHEME + "travel_guides";
-	private static final String DRAWER_MEASURE_DISTANCE_ID = DRAWER_ITEM_ID_SCHEME + "measure_distance";
-	private static final String DRAWER_CONFIGURE_SCREEN_ID = DRAWER_ITEM_ID_SCHEME + "configure_screen";
-	private static final String DRAWER_PLUGINS_ID = DRAWER_ITEM_ID_SCHEME + "plugins";
-	private static final String DRAWER_SETTINGS_ID = DRAWER_ITEM_ID_SCHEME + "settings";
-	private static final String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
 
 	// make static
 	private static Bundle dialogBundle = new Bundle();

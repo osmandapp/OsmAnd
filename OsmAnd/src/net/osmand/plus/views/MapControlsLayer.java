@@ -61,22 +61,21 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
 	private static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
-
-	private static final String HUD_BTN_ID_SCHEME = "map.view.";
-	private static final String LAYERS_HUD_ID = HUD_BTN_ID_SCHEME + "layers";
-	private static final String COMPASS_HUD_ID = HUD_BTN_ID_SCHEME + "compass";
-	private static final String QUICK_SEARCH_HUD_ID = HUD_BTN_ID_SCHEME + "quick_search";
-	private static final String BACK_TO_LOC_HUD_ID = HUD_BTN_ID_SCHEME + "back_to_loc";
-	private static final String MENU_HUD_ID = HUD_BTN_ID_SCHEME + "menu";
-	private static final String ROUTE_PLANNING_HUD_ID = HUD_BTN_ID_SCHEME + "route_planning";
-	private static final String ZOOM_IN_HUD_ID = HUD_BTN_ID_SCHEME + "zoom_id";
-	private static final String ZOOM_OUT_HUD_ID = HUD_BTN_ID_SCHEME + "zoom_out";
 
 	public MapHudButton createHudButton(View iv, int resId, String id) {
 		MapHudButton mc = new MapHudButton();
