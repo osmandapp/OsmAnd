@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<dimen name="dialog_button_ex_height">60dp</dimen>
+	<dimen name="dialog_button_ex_min_width">72dp</dimen>
+	<dimen name="dialog_button_ex_max_width">120dp</dimen>
 	<dimen name="wpt_list_category_height">60dp</dimen>
 	<dimen name="wpt_list_item_height">56dp</dimen>
 	<dimen name="list_item_button_padding">4dp</dimen>
@@ -12,6 +15,7 @@
     <dimen name="card_row_min_height">48dp</dimen>
 	<dimen name="card_button_min_size">58dp</dimen>
 	<dimen name="card_button_progress_size">32dp</dimen>
+	<dimen name="card_button_progress_size_small">24dp</dimen>
 	<dimen name="card_padding">12dp</dimen>
 
 	<dimen name="widget_turn_lane_size">36dp</dimen>

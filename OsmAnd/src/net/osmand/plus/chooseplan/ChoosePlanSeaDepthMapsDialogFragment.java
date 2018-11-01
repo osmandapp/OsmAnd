@@ -18,7 +18,6 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 			OsmAndFeature.DAILY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
-			OsmAndFeature.DONATION_TO_OSM,
 	};
 	private final OsmAndFeature[] selectedOsmLiveFeatures = {
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
@@ -68,11 +67,7 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 	@Override
 	public String getPlanTypeButtonTitle() {
 		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
-		if (purchaseHelper == null || !purchaseHelper.hasPrices()) {
-			return getString(R.string.purchase_unlim_title, getString(R.string.sea_depth_maps_price));
-		} else {
-			return getString(R.string.purchase_unlim_title, purchaseHelper.getDepthContoursPrice());
-		}
+		return getString(R.string.purchase_unlim_title, purchaseHelper.getDepthContours().getPrice(getContext()));
 	}
 
 	@Override

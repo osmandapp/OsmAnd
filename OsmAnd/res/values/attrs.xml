@@ -19,6 +19,7 @@
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />
         <attr name="btn_round_border" format="reference" />
+		<attr name="btn_round_border_2" format="reference" />
 		<attr name="bg_card" format="reference" />
         <attr name="context_menu_card" format="reference" />
         <attr name="ctx_menu_card_btn" format="reference" />
@@ -74,6 +75,9 @@
         <attr name="dialog_text_description_color" format="reference"/>
         <attr name="card_description_text_color" format="reference"/>
 
+		<attr name="subscription_active_bg_color" format="reference"/>
+		<attr name="subscription_active_div_color" format="reference"/>
+
 		<attr name="wikivoyage_bg_color" format="reference"/>
 		<attr name="wikivoyage_card_bg_color" format="reference"/>
 		<attr name="wikivoyage_card_divider_color" format="reference"/>
@@ -96,7 +100,10 @@
         <attr name="bottom_nav_shadow" format="reference"/>
 
         <attr name="purchase_dialog_active_card_bg" format="reference"/>
-    </declare-styleable>
+
+		<attr name="text_rounded_bg_regular" format="reference" />
+		<attr name="text_rounded_bg_active" format="reference" />
+	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
         <attr name="pstsTextColor" format="color"/>

@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -56,7 +55,6 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
 			OsmAndFeature.SEA_DEPTH_MAPS,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
-			OsmAndFeature.DONATION_TO_OSM,
 	};
 
 	@Override
@@ -93,7 +91,9 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 		if (ctx == null) {
 			return null;
 		}
-		View view = inflate(R.layout.osmlive_cancelled_dialog_fragment, container);
+		int themeRes = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		View view = LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
+				.inflate(R.layout.osmlive_cancelled_dialog_fragment, container, false);
 
 		view.findViewById(R.id.button_close).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -118,7 +118,7 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 	@Nullable
 	public MapActivity getMapActivity() {
 		Activity activity = getActivity();
-		if (activity != null && activity instanceof MapActivity) {
+		if (activity instanceof MapActivity) {
 			return (MapActivity) activity;
 		}
 		return null;
@@ -194,11 +194,13 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 			ProgressBar progressBar = (ProgressBar) osmLiveButton.findViewById(R.id.card_button_progress);
 			TextViewEx buttonTitle = (TextViewEx) osmLiveButton.findViewById(R.id.card_button_title);
 			TextViewEx buttonSubtitle = (TextViewEx) osmLiveButton.findViewById(R.id.card_button_subtitle);
+			/*
 			if (!purchaseHelper.hasPrices()) {
 				buttonTitle.setText(getString(R.string.purchase_subscription_title, getString(R.string.osm_live_default_price)));
 			} else {
 				buttonTitle.setText(getString(R.string.purchase_subscription_title, purchaseHelper.getLiveUpdatesPrice()));
 			}
+			*/
 			buttonSubtitle.setText(R.string.osm_live_month_cost_desc);
 			if (progress) {
 				buttonTitle.setVisibility(View.GONE);
@@ -224,18 +226,12 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 		FragmentActivity ctx = getActivity();
 		if (ctx != null && purchaseHelper != null) {
 			OsmandSettings settings = app.getSettings();
-			purchaseHelper.purchaseLiveUpdates(ctx,
+			purchaseHelper.purchaseLiveUpdates(ctx, "",
 					settings.BILLING_USER_EMAIL.get(),
 					settings.BILLING_USER_NAME.get(),
 					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
 					settings.BILLING_HIDE_USER_NAME.get());
 		}
-	}
-
-	private View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		return LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
-				.inflate(layoutId, container, false);
 	}
 
 	public static boolean shouldShowDialog(OsmandApplication app) {

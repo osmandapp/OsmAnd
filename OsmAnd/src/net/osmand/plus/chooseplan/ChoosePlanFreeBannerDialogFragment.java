@@ -19,7 +19,6 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
 			OsmAndFeature.SEA_DEPTH_MAPS,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
-			OsmAndFeature.DONATION_TO_OSM,
 	};
 	private final OsmAndFeature[] selectedOsmLiveFeatures = {
 			OsmAndFeature.DAILY_MAP_UPDATES,
@@ -76,11 +75,7 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 	@Override
 	public String getPlanTypeButtonTitle() {
 		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
-		if (purchaseHelper == null || !purchaseHelper.hasPrices()) {
-			return getString(R.string.purchase_unlim_title, getString(R.string.full_version_price));
-		} else {
-			return getString(R.string.purchase_unlim_title, purchaseHelper.getFullVersionPrice());
-		}
+		return getString(R.string.purchase_unlim_title, purchaseHelper.getFullVersion().getPrice(getContext()));
 	}
 
 	@Override
