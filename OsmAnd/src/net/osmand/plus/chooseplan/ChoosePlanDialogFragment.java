@@ -43,6 +43,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.liveupdates.SubscriptionFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -50,6 +51,8 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.util.List;
 
 public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 	public static final String TAG = ChoosePlanDialogFragment.class.getSimpleName();
@@ -63,6 +66,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	private ViewGroup osmLiveCardButtonsContainer;
 	private ProgressBar osmLiveCardProgress;
 	private View planTypeCardButton;
+	private View planTypeCardButtonDisabled;
 
 	public interface ChoosePlanDialogListener {
 		void onChoosePlanDialogDismiss();
@@ -253,11 +257,24 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	public abstract String getPlanTypeHeaderDescription();
 
-	public abstract String getPlanTypeButtonTitle();
+	public String getPlanTypeButtonTitle() {
+		InAppPurchase purchase = getPlanTypePurchase();
+		if (purchase != null) {
+			if (purchase.isPurchased()) {
+				return purchase.getPrice(getContext());
+			} else {
+				return getString(R.string.purchase_unlim_title, purchase.getPrice(getContext()));
+			}
+		}
+		return "";
+	}
 
 	public abstract String getPlanTypeButtonDescription();
 
 	public abstract void setPlanTypeButtonClickListener(View button);
+
+	@Nullable
+	public abstract InAppPurchase getPlanTypePurchase();
 
 	private View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
 		int themeRes = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
@@ -326,7 +343,15 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			View lastBtn = null;
 			InAppSubscription monthlyLiveUpdates = purchaseHelper.getMonthlyLiveUpdates();
 			double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
-			for (final InAppSubscription s : purchaseHelper.getLiveUpdates().getVisibleSubscriptions()) {
+			List<InAppSubscription> visibleSubscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
+			boolean anyPurchased = false;
+			for (final InAppSubscription s : visibleSubscriptions) {
+				if (s.isPurchased()) {
+					anyPurchased = true;
+					break;
+				}
+			}
+			for (final InAppSubscription s : visibleSubscriptions) {
 				if (s.isPurchased()) {
 					View buttonPurchased = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
 					View buttonContainer = buttonPurchased.findViewById(R.id.button_container);
@@ -402,13 +427,22 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					View button = inflate(R.layout.purchase_dialog_card_button_ex, osmLiveCardButtonsContainer);
 					TextViewEx title = (TextViewEx) button.findViewById(R.id.title);
 					TextViewEx description = (TextViewEx) button.findViewById(R.id.description);
+
+					View buttonView = button.findViewById(R.id.button_view);
+					View buttonExView = button.findViewById(R.id.button_ex_view);
 					TextViewEx buttonTitle = (TextViewEx) button.findViewById(R.id.button_title);
+					TextViewEx buttonExTitle = (TextViewEx) button.findViewById(R.id.button_ex_title);
+					buttonView.setVisibility(anyPurchased ? View.VISIBLE : View.GONE);
+					buttonExView.setVisibility(!anyPurchased ? View.VISIBLE : View.GONE);
+
 					TextViewEx discountRegular = (TextViewEx) button.findViewById(R.id.discount_banner_regular);
 					TextViewEx discountActive = (TextViewEx) button.findViewById(R.id.discount_banner_active);
 					View div = button.findViewById(R.id.div);
+
 					title.setText(s.getTitle(ctx));
 					description.setText(s.getDescription(ctx));
 					buttonTitle.setText(s.getPrice(ctx));
+					buttonExTitle.setText(s.getPrice(ctx));
 
 					if (regularMonthlyPrice > 0 && s.getMonthlyPriceValue() > 0 && s.getMonthlyPriceValue() < regularMonthlyPrice) {
 						int discount = (int) ((1 - s.getMonthlyPriceValue() / regularMonthlyPrice) * 100d);
@@ -435,6 +469,21 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 							subscribe(s.getSku());
 						}
 					});
+					if (anyPurchased) {
+						buttonView.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								subscribe(s.getSku());
+							}
+						});
+					} else {
+						buttonExView.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								subscribe(s.getSku());
+							}
+						});
+					}
 					div.setVisibility(View.VISIBLE);
 					osmLiveCardButtonsContainer.addView(button);
 					lastBtn = button;
@@ -538,27 +587,44 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		cardDescription.setText(R.string.in_app_purchase_desc_ex);
 
 		planTypeCardButton = cardView.findViewById(R.id.card_button);
+		planTypeCardButtonDisabled = cardView.findViewById(R.id.card_button_disabled);
 
 		return cardView;
 	}
 
-	private void setupPlanTypeCardButton(boolean progress) {
-		if (planTypeCardButton != null) {
+	private void setupPlanTypeCardButtons(boolean progress) {
+		if (planTypeCardButton != null && planTypeCardButtonDisabled != null) {
+			InAppPurchase purchase = getPlanTypePurchase();
+			boolean purchased = purchase != null && purchase.isPurchased();
+
 			ProgressBar progressBar = (ProgressBar) planTypeCardButton.findViewById(R.id.card_button_progress);
 			TextViewEx buttonTitle = (TextViewEx) planTypeCardButton.findViewById(R.id.card_button_title);
 			TextViewEx buttonSubtitle = (TextViewEx) planTypeCardButton.findViewById(R.id.card_button_subtitle);
 			buttonTitle.setText(getPlanTypeButtonTitle());
 			buttonSubtitle.setText(getPlanTypeButtonDescription());
 			if (progress) {
+				planTypeCardButton.setVisibility(View.VISIBLE);
+				planTypeCardButtonDisabled.setVisibility(View.GONE);
 				buttonTitle.setVisibility(View.GONE);
 				buttonSubtitle.setVisibility(View.GONE);
 				progressBar.setVisibility(View.VISIBLE);
 				planTypeCardButton.setOnClickListener(null);
 			} else {
-				buttonTitle.setVisibility(View.VISIBLE);
-				buttonSubtitle.setVisibility(View.VISIBLE);
-				progressBar.setVisibility(View.GONE);
-				setPlanTypeButtonClickListener(planTypeCardButton);
+				if (!purchased) {
+					planTypeCardButton.setVisibility(View.VISIBLE);
+					planTypeCardButtonDisabled.setVisibility(View.GONE);
+					buttonTitle.setVisibility(View.VISIBLE);
+					buttonSubtitle.setVisibility(View.VISIBLE);
+					progressBar.setVisibility(View.GONE);
+					setPlanTypeButtonClickListener(planTypeCardButton);
+				} else {
+					planTypeCardButton.setVisibility(View.GONE);
+					planTypeCardButtonDisabled.setVisibility(View.VISIBLE);
+					buttonTitle = (TextViewEx) planTypeCardButtonDisabled.findViewById(R.id.card_button_title);
+					buttonSubtitle = (TextViewEx) planTypeCardButtonDisabled.findViewById(R.id.card_button_subtitle);
+					buttonTitle.setText(getPlanTypeButtonTitle());
+					buttonSubtitle.setText(getPlanTypeButtonDescription());
+				}
 			}
 		}
 	}
@@ -586,7 +652,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			setupOsmLiveCardButtons(requestingInventory);
 		}
 		if (planTypeCardButton != null) {
-			setupPlanTypeCardButton(requestingInventory);
+			setupPlanTypeCardButtons(requestingInventory);
 		}
 	}
 
@@ -604,7 +670,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	public void onError(InAppPurchaseTaskType taskType, String error) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 			setupOsmLiveCardButtons(false);
-			setupPlanTypeCardButton(false);
+			setupPlanTypeCardButtons(false);
 		}
 	}
 
@@ -627,7 +693,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	public void showProgress(InAppPurchaseTaskType taskType) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 			setupOsmLiveCardButtons(true);
-			setupPlanTypeCardButton(true);
+			setupPlanTypeCardButtons(true);
 		}
 	}
 
@@ -635,7 +701,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 			setupOsmLiveCardButtons(false);
-			setupPlanTypeCardButton(false);
+			setupPlanTypeCardButtons(false);
 		}
 	}
 

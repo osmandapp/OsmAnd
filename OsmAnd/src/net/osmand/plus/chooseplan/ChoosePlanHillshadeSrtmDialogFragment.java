@@ -1,11 +1,13 @@
 package net.osmand.plus.chooseplan;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 
 public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragment {
 	public static final String TAG = ChoosePlanHillshadeSrtmDialogFragment.class.getSimpleName();
@@ -65,12 +67,6 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragm
 	}
 
 	@Override
-	public String getPlanTypeButtonTitle() {
-		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
-		return getString(R.string.purchase_unlim_title, purchaseHelper.getContourLines().getPrice(getContext()));
-	}
-
-	@Override
 	public String getPlanTypeButtonDescription() {
 		return getString(R.string.in_app_purchase_desc);
 	}
@@ -87,5 +83,15 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragm
 				}
 			}
 		});
+	}
+
+	@Nullable
+	@Override
+	public InAppPurchase getPlanTypePurchase() {
+		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			return purchaseHelper.getContourLines();
+		}
+		return null;
 	}
 }

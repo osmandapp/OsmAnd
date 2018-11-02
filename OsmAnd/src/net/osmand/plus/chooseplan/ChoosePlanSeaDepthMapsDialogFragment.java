@@ -1,11 +1,13 @@
 package net.osmand.plus.chooseplan;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 
 public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragment {
 	public static final String TAG = ChoosePlanSeaDepthMapsDialogFragment.class.getSimpleName();
@@ -65,12 +67,6 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 	}
 
 	@Override
-	public String getPlanTypeButtonTitle() {
-		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
-		return getString(R.string.purchase_unlim_title, purchaseHelper.getDepthContours().getPrice(getContext()));
-	}
-
-	@Override
 	public String getPlanTypeButtonDescription() {
 		return getString(R.string.in_app_purchase_desc);
 	}
@@ -86,5 +82,15 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 				}
 			}
 		});
+	}
+
+	@Nullable
+	@Override
+	public InAppPurchase getPlanTypePurchase() {
+		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			return purchaseHelper.getDepthContours();
+		}
+		return null;
 	}
 }
