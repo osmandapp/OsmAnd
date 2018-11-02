@@ -731,8 +731,7 @@ public class SearchUICore {
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
-			if (!ObjectType.isTopVisible(o1.objectType) && !ObjectType.isTopVisible(o2.objectType)
-					&& o1.getFoundWordCount() != o2.getFoundWordCount()) {
+			if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 				return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 			}
 			if (!sortByName) {

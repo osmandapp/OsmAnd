@@ -41,16 +41,10 @@ android {
 		}
 
 		publishing {
-			storeFile file("../keystores/debug.keystore")
-			storePassword "android"
-			keyAlias "androiddebugkey"
-			keyPassword "android"
-			/*
 			storeFile file("/var/lib/jenkins/osmand_key")
 			storePassword System.getenv("OSMAND_APK_PASSWORD")
 			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_APK_PASSWORD")
-			*/
 		}
 	}
 
@@ -363,16 +357,6 @@ task appStart(type: Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
-//configurations.all {
-//	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-//}
-//
-//repositories {
-//	// Local build
-//	flatDir {
-//		dirs 'libs'
-//	}
-//}
 
 project.logger.warn("Analytics enabled for free version: $analytics")
 dependencies {
@@ -382,7 +366,7 @@ dependencies {
 		implementation 'com.google.firebase:firebase-messaging:12.0.1'
 		implementation 'com.google.firebase:firebase-iid:12.0.1'
 		implementation 'com.google.firebase:firebase-config:12.0.1'
-		//implementation 'com.facebook.android:facebook-android-sdk:4.31.0'
+		implementation 'com.facebook.android:facebook-android-sdk:4.31.0'	
 	}
 	implementation 'com.android.support:multidex:1.0.1'
 	implementation 'com.android.support:gridlayout-v7:27.1.1'
@@ -413,18 +397,10 @@ dependencies {
 	qtcoredebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
 
 	legacyImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
-
 	qtcoredebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-
-	// Test
-	//qtcoreImplementation (name: 'OsmAndCore_android-release', ext: 'aar') { changing = true }
-	//qtcoreImplementation (name: 'OsmAndCore_androidNativeRelease-release', ext: 'aar') { changing = true }
-	//qtcoredebugImplementation (name: 'OsmAndCore_android-debug', ext: 'aar') { changing = true  }
-	//qtcoredebugImplementation (name: 'OsmAndCore_androidNativeDebug-debug', ext: 'aar') { changing = true }
-
 	implementation ("com.getkeepsafe.taptargetview:taptargetview:1.12.0"){
 		exclude group: 'com.android.support'
 	}

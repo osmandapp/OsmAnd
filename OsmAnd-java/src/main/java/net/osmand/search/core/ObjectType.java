@@ -34,10 +34,6 @@ public enum ObjectType {
 		return t == CITY || t == VILLAGE || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
 	}
 
-	public static boolean isTopVisible(ObjectType t) {
-		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == LOCATION || t == PARTIAL_LOCATION;
-	}
-
 	public static ObjectType getExclusiveSearchType(ObjectType t) {
 		if (t == FAVORITE_GROUP) {
 			return FAVORITE;
