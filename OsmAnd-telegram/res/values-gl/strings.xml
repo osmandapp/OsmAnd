@@ -12,14 +12,18 @@
 	<string name="sharing_enabled">Partillar ou compartir: Activado</string>
 	<string name="shared_string_status">Estado</string>
 	<string name="no_gps_connection">Sen unha conexión GPS</string>
+	<string name="sharing_success">Enviado e actualizado</string>
+	<string name="not_possible_to_send_to_chats">Non foi posíbel enviar ás parolas:</string>
 	<string name="no_internet_connection">Sen conexión á Internet</string>
 	<string name="shared_string_disable">Desactivar</string>
 	<string name="shared_string_save">Gardar</string>
+	<string name="add_device_descr">Atopa o seu ID do dispositivo en https://live.osmand.net/device/ID</string>
+	<string name="device_id">Identificador (ID) do dispositivo</string>
 	<string name="add_device">Engadir dispositivo</string>
 	<string name="share_location_as">Partillar ou compartir ubicación coma</string>
-	<string name="live_now_description">Contactos e grupos que partillan ou comparten a súa ubicación con vostede.</string>
-	<string name="logout_from_osmand_telegram_descr">Se pecha a sesión no Telegram do OsmAnd, non poderá envia-la súa ubicación nin olla-las localizacións dos seus contactos no mapa do OsmAnd.</string>
-	<string name="logout_from_osmand_telegram">Pechar sesión do Telegram do OsmAnd\?</string>
+	<string name="live_now_description">Contactos e grupos que están a partillar ou comparti-la súa ubicación para vostede.</string>
+	<string name="logout_from_osmand_telegram_descr">Está na certeza de que desexa desconectarse do Telegram OsmAnd para non poder partillar ou comparti-la ubicación ou olla-la ubicación doutros\?</string>
+	<string name="logout_from_osmand_telegram">Pechar sesión do Telegram OsmAnd\?</string>
 	<string name="shared_string_name">Nome</string>
 	<string name="by_distance">Pola distancia</string>
 	<string name="by_name">Polo nome</string>
@@ -28,7 +32,7 @@
 	<string name="shared_string_sort_by">Ordenar polo</string>
 	<string name="choose_osmand_desc">Escolle a versión do OsmAnd onde os contactos amosaranse no mapa.</string>
 	<string name="choose_osmand">Escolle a versión do OsmAnd para empregar</string>
-	<string name="disable_all_sharing_desc">Deixarás de partillar ou comparti-la ubicación con tódalas parolas elixidas (%1$d).</string>
+	<string name="disable_all_sharing_desc">Desactiva a ubicación partillada ou compartida en tódalas parolas elixidas (%1$d).</string>
 	<string name="disable_all_sharing">Desactiva-lo emprego partillado ou compartido</string>
 	<string name="turn_off_all">Desactivar todos</string>
 	<string name="shared_string_exit">Saír</string>
@@ -56,4 +60,5 @@
 	<string name="shared_string_install">Instalar</string>
 	<string name="shared_string_share">Partillar ou compartir</string>
 	<string name="shared_string_back">Voltar</string>
+	<string name="shared_string_add">Engadir</string>
 	</resources>
