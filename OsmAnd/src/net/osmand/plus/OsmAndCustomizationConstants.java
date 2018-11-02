@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 public interface OsmAndCustomizationConstants {
 
+	// TODO: add ids for category items
+
 	// Navigation Drawer:
 
 	String DRAWER_ITEM_ID_SCHEME = "drawer.action.";

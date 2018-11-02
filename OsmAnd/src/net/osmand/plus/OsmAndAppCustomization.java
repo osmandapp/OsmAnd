@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -24,9 +25,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class OsmAndAppCustomization {
 
@@ -34,6 +38,11 @@ public class OsmAndAppCustomization {
 	protected OsmandSettings osmandSettings;
 
 	private Bitmap navDrawerLogo;
+
+	private Set<String> enabledIds = new HashSet<>();
+	private Set<String> disabledIds = new HashSet<>();
+	private Set<String> enabledPatterns = new HashSet<>();
+	private Set<String> disabledPatterns = new HashSet<>();
 
 	public void setup(OsmandApplication app) {
 		this.app = app;
@@ -132,5 +141,47 @@ public class OsmAndAppCustomization {
 			}
 		}
 		return true;
+	}
+
+	public void setEnabledIds(@NonNull Collection<String> ids) {
+		enabledIds.clear();
+		enabledIds.addAll(ids);
+	}
+
+	public void setDisabledIds(@NonNull Collection<String> ids) {
+		disabledIds.clear();
+		disabledIds.addAll(ids);
+	}
+
+	public void setEnabledPatterns(@NonNull Collection<String> patterns) {
+		enabledPatterns.clear();
+		enabledPatterns.addAll(patterns);
+	}
+
+	public void setDisabledPatterns(@NonNull Collection<String> patterns) {
+		disabledPatterns.clear();
+		disabledPatterns.addAll(patterns);
+	}
+
+	public boolean isFeatureEnabled(@NonNull String id) {
+		if (enabledIds.contains(id)) {
+			return true;
+		}
+		if (disabledIds.contains(id)) {
+			return false;
+		}
+		if (isMatchesPattern(id, enabledPatterns)) {
+			return true;
+		}
+		return !isMatchesPattern(id, disabledPatterns);
+	}
+
+	private boolean isMatchesPattern(@NonNull String id, @NonNull Set<String> patterns) {
+		for (String pattern : patterns) {
+			if (id.startsWith(pattern)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

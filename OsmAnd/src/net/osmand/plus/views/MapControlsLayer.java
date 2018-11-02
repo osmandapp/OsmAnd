@@ -36,6 +36,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -107,6 +108,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private TextView zoomText;
 	private OsmandMapTileView mapView;
 	private OsmandApplication app;
+	private OsmAndAppCustomization appCustomization;
 	private MapHudButton routePlanningBtn;
 	private long touchEvent;
 	private MapHudButton mapZoomOut;
@@ -122,6 +124,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
 		app = activity.getMyApplication();
+		appCustomization = app.getAppCustomization();
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
 		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
@@ -1105,6 +1108,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public boolean updateVisibility(boolean visible) {
+			if (visible) {
+				visible = appCustomization.isFeatureEnabled(id);
+			}
 			if (!compassOutside && visible != (iv.getVisibility() == View.VISIBLE)) {
 				if (visible) {
 					if (hideAnimator != null) {
