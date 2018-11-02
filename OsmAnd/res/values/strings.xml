@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
     <string name="osm_live_payment_monthly_title">Pay monthly</string>
     <string name="osm_live_payment_3_months_title">Pay once in 3 months</string>
     <string name="osm_live_payment_annual_title">Pay once a year</string>

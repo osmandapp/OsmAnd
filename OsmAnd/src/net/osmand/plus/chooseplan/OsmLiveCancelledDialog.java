@@ -194,43 +194,26 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 			ProgressBar progressBar = (ProgressBar) osmLiveButton.findViewById(R.id.card_button_progress);
 			TextViewEx buttonTitle = (TextViewEx) osmLiveButton.findViewById(R.id.card_button_title);
 			TextViewEx buttonSubtitle = (TextViewEx) osmLiveButton.findViewById(R.id.card_button_subtitle);
-			/*
-			if (!purchaseHelper.hasPrices()) {
-				buttonTitle.setText(getString(R.string.purchase_subscription_title, getString(R.string.osm_live_default_price)));
-			} else {
-				buttonTitle.setText(getString(R.string.purchase_subscription_title, purchaseHelper.getLiveUpdatesPrice()));
-			}
-			*/
-			buttonSubtitle.setText(R.string.osm_live_month_cost_desc);
+			buttonTitle.setText(getString(R.string.osm_live_plan_pricing));
+			buttonSubtitle.setVisibility(View.GONE);
 			if (progress) {
 				buttonTitle.setVisibility(View.GONE);
-				buttonSubtitle.setVisibility(View.GONE);
 				progressBar.setVisibility(View.VISIBLE);
 				osmLiveButton.setOnClickListener(null);
 			} else {
 				buttonTitle.setVisibility(View.VISIBLE);
-				buttonSubtitle.setVisibility(View.VISIBLE);
 				progressBar.setVisibility(View.GONE);
 				osmLiveButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						subscript();
 						dismiss();
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+						}
 					}
 				});
 			}
-		}
-	}
-
-	private void subscript() {
-		FragmentActivity ctx = getActivity();
-		if (ctx != null && purchaseHelper != null) {
-			OsmandSettings settings = app.getSettings();
-			purchaseHelper.purchaseLiveUpdates(ctx, "",
-					settings.BILLING_USER_EMAIL.get(),
-					settings.BILLING_USER_NAME.get(),
-					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
-					settings.BILLING_HIDE_USER_NAME.get());
 		}
 	}
 
