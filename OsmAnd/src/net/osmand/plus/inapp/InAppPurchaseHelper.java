@@ -635,6 +635,7 @@ public class InAppPurchaseHelper {
 				// bought live updates
 				logDebug("Live updates subscription purchased.");
 				final String sku = liveUpdatesPurchase.getSku();
+				liveUpdatesPurchase.setPurchaseState(purchase.getPurchaseState() == 0 ? PurchaseState.PURCHASED : PurchaseState.NOT_PURCHASED);
 				sendTokens(Collections.singletonList(purchase), new OnRequestResultListener() {
 					@Override
 					public void onResult(String result) {
@@ -654,6 +655,7 @@ public class InAppPurchaseHelper {
 
 			} else if (purchase.getSku().equals(getFullVersion().getSku())) {
 				// bought full version
+				getFullVersion().setPurchaseState(purchase.getPurchaseState() == 0 ? PurchaseState.PURCHASED : PurchaseState.NOT_PURCHASED);
 				logDebug("Full version purchased.");
 				showToast(ctx.getString(R.string.full_version_thanks));
 				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
@@ -664,6 +666,7 @@ public class InAppPurchaseHelper {
 
 			} else if (purchase.getSku().equals(getDepthContours().getSku())) {
 				// bought sea depth contours
+				getDepthContours().setPurchaseState(purchase.getPurchaseState() == 0 ? PurchaseState.PURCHASED : PurchaseState.NOT_PURCHASED);
 				logDebug("Sea depth contours purchased.");
 				showToast(ctx.getString(R.string.sea_depth_thanks));
 				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
