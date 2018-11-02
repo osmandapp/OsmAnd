@@ -164,5 +164,4 @@
 	<string name="shared_string_hide">Skjul</string>
 	<string name="share_location_as_description_second_line">Opret og få vist enhedens-id i Telegram-klienten ved hjælp af %1$s chat-bot. %2$s</string>
 	<string name="share_location_as_description">Hvis der skal tilsluttes flere enheder til en Telegram-konto, er det nødvendigt til at bruge forskellige enheder til at dele placeringen.</string>
-	<string name="add_new_device_description">Sidst ajourførte placering:</string>
 	</resources>

@@ -15,15 +15,10 @@
 	<string name="sharing_enabled">Udostępnianie: Włączone</string>
 	<string name="shared_string_status">Status</string>
 	<string name="no_gps_connection">Brak połączenia GPS</string>
-	<string name="sharing_success">Wysłano i zaktualizowano</string>
-	<string name="not_possible_to_send_to_chats">Nie można wysłać na czat:</string>
 	<string name="no_internet_connection">Brak połączenia z internetem</string>
 	<string name="shared_string_disable">Wyłącz</string>
 	<string name="shared_string_save">Zapisz</string>
-	<string name="add_device_descr">Znajdź swój identyfikator urządzenia na https://live.osmand.net/device/ID</string>
-	<string name="device_id">Identyfikator urządzenia</string>
 	<string name="add_device">Dodaj urządzenie</string>
-	<string name="share_location_as_descr">Pozwól na udostępnianie lokalizacji urządzenia lub lokalizacji niestandardowych urządzeń dodawanych przez API.</string>
 	<string name="share_location_as">Udostępnij lokalizację jako</string>
 	<string name="live_now_description">Kontakty i grupy, które udostępniają Ci swoją lokalizację.</string>
 	<string name="logout_from_osmand_telegram_descr">Czy na pewno chcesz się wylogować z OsmAnd Telegram, aby nie udostępniać lokalizacji ani nie widzieć lokalizacji innych\?</string>
@@ -148,8 +143,7 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">sek</string>
-	<string name="plus">+</string>
-	<string name="welcome_descr"><b>Udostępnianie Lokalizacji OsmAnd</b> pozwala Ci udostępniać swoją lokalizację i widzieć ją w OsmAnd.<br/><br/>Aplikacja używa Telegram API i potrzebujesz konta Telegram.</string>
+	<string name="welcome_descr"><b>Udostępnianie Lokalizacji OsmAnd</b> umożliwi ci udostępnianie twojej lokalizacji i zobaczenie lokalizacji innych osób w OsmAnd.<br/><br/>Aplikacja działa w opraciu o Telegram API. By używać aplikacji musisz mieć konto w Telegramie.</string>
 	<string name="my_location">Moja lokalizacja</string>
 	<string name="live_now">Przesyłam teraz</string>
 
@@ -165,7 +159,6 @@
 	<string name="shared_string_hide">Ukryj</string>
 	<string name="share_location_as_description_second_line">Możesz utworzyć i zobaczyć ID sprzętu w telegramie klienta, używając %1$s bota czatu. %2$s</string>
 	<string name="share_location_as_description">Jeśli chcesz połączyć wiele urządzeń z jednym kontem telegramu, potrzebujesz użyć innego sprzętu do udostępniania lokalizacji.</string>
-	<string name="add_new_device_description">Ostatnia aktualizacja lokalizacji:</string>
 	<string name="last_updated_location">Ostatnia aktualizacja lokalizacji:</string>
 	<string name="successfully_sent_and_updated">Wysłano i zaktualizowano z powodzeniem</string>
 	<string name="not_possible_to_send_to_telegram_chats">Nie można wysłać na czaty Telegramu:</string>
