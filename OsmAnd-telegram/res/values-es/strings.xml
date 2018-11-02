@@ -15,6 +15,8 @@
 	<string name="sharing_enabled">Compartir: Activado</string>
 	<string name="shared_string_status">Estado</string>
 	<string name="no_gps_connection">Sin conexión GPS</string>
+	<string name="sharing_success">Enviado y actualizado</string>
+	<string name="not_possible_to_send_to_chats">Imposible enviar a los chats:</string>
 	<string name="no_internet_connection">Sin conexión a Internet</string>
 	<string name="shared_string_disable">Desactivar</string>
 	<string name="add_device">Añadir dispositivo</string>
