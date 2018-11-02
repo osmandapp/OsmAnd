@@ -137,7 +137,7 @@
 	<string name="mile">mi</string>
 	<string name="km">km</string>
 	<string name="m">m</string>
-	<string name="nm">nmi</string>
+	<string name="nm">Mm</string>
 	<string name="min_mile">min/m</string>
 	<string name="min_km">min/km</string>
 	<string name="nm_h">nmi/h</string>
