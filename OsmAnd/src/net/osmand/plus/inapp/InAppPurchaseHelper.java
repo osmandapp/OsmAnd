@@ -68,6 +68,7 @@ public class InAppPurchaseHelper {
 	private String token = "";
 	private InAppPurchaseTaskType activeTask;
 	private boolean processingTask = false;
+	private boolean inventoryRequestPending = false;
 
 	private OsmandApplication ctx;
 	private InAppPurchaseListener uiActivity = null;
@@ -181,7 +182,10 @@ public class InAppPurchaseHelper {
 		}
 
 		if (processingTask) {
-			logError("Already processing task: " + taskType + ". Exit.");
+			if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
+				inventoryRequestPending = true;
+			}
+			logError("Already processing task: " + activeTask + ". Exit.");
 			return;
 		}
 
@@ -702,6 +706,10 @@ public class InAppPurchaseHelper {
 		} else {
 			processingTask = false;
 			activeTask = null;
+		}
+		if (inventoryRequestPending) {
+			inventoryRequestPending = false;
+			requestInventory();
 		}
 	}
 
