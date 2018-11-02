@@ -26,7 +26,7 @@
 	<string name="share_location_as_descr">Pozwól na udostępnianie lokalizacji urządzenia lub lokalizacji niestandardowych urządzeń dodawanych przez API.</string>
 	<string name="share_location_as">Udostępnij lokalizację jako</string>
 	<string name="live_now_description">Kontakty i grupy, które udostępniają Ci swoją lokalizację.</string>
-	<string name="logout_from_osmand_telegram_descr">Czy na pewno chcesz się wylogować z OsmAnd Telegram\? Po tym czasie nie będziesz mógł wysłać swojej pozycji i zobaczyć lokalizacji swoich kontaktów na mapie w OsmAnd.</string>
+	<string name="logout_from_osmand_telegram_descr">Czy na pewno chcesz się wylogować z OsmAnd Telegram, aby nie udostępniać lokalizacji ani nie widzieć lokalizacji innych\?</string>
 	<string name="logout_from_osmand_telegram">Wylogować się z OsmAnd Telegram\?</string>
 	<string name="shared_string_name">Nazwa</string>
 	<string name="by_distance">Według odległości</string>
@@ -106,7 +106,7 @@
 	<string name="shared_string_settings">Opcje</string>
 	<string name="no_location_permission">Aplikacja nie ma uprawnień dostępu do danych o położeniu.</string>
 	<string name="gps_not_available">Proszę włączyć GPS w opcjach</string>
-	<string name="location_service_no_gps_available">Usługa udostępniania lokalizacji wymaga włączonego dostawcy lokalizacji.</string>
+	<string name="location_service_no_gps_available">Wybierz dostawców lokalizacji, aby udostępnić swoją lokalizację.</string>
 	<string name="osmand_service">Tryb tła</string>
 	<string name="osmand_service_descr">Telegram OsmAnd będzie działał w tle przy wygaszonym ekranie.</string>
 	<string name="shared_string_distance">Odległość</string>
@@ -119,7 +119,7 @@
 	<string name="show_users_on_map">Pokazuj użytkowników na mapie</string>
 	<string name="active_chats">Aktywuj czat</string>
 	<string name="shared_string_authorization">Autoryzacja</string>
-	<string name="shared_string_authorization_descr">Proszę wprowadzić numer telefonu konta Telegramu w formacie międzynarodowym</string>
+	<string name="shared_string_authorization_descr">Wprowadź swój numer Telegram w formacie międzynarodowym</string>
 	<string name="shared_string_welcome">Witamy</string>
 
 	<string name="yard">yd</string>
@@ -148,9 +148,14 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">sek</string>
+<<<<<<< HEAD
 	<string name="welcome_descr"><b>Udostępnianie Lokalizacji OsmAnd</b> umożliwi ci udostępnianie twojej lokalizacji i zobaczenie lokalizacji innych osób w OsmAnd.<br/><br/>Aplikacja działa w opraciu o Telegram API. By używać aplikacji musisz mieć konto w Telegramie.</string>
+=======
+	<string name="plus">+</string>
+	<string name="welcome_descr"><b>Udostępnianie Lokalizacji OsmAnd</b> pozwala Ci udostępniać swoją lokalizację i widzieć ją w OsmAnd.<br/><br/>Aplikacja używa Telegram API i potrzebujesz konta Telegram.</string>
+>>>>>>> Translated using Weblate (Polish)
 	<string name="my_location">Moja lokalizacja</string>
-	<string name="live_now">Na żywo teraz</string>
+	<string name="live_now">Przesyłam teraz</string>
 
 
 <string name="enter_another_device_name">Wpisz inną nazwę, masz już urządzenie o tej samej nazwie</string>
@@ -173,4 +178,6 @@
 	<string name="initializing">Inicjalizacja</string>
 	<string name="searching_for_gps">Szukanie sygnału GPS</string>
 	<string name="connecting_to_the_internet">Łączenie z internetem</string>
+	<string name="disconnect_from_telegram_desc">Aby anulować dostęp do udostępniania lokalizacji. Otwórz Telegram, przejdź do Ustawienia - Prywatność i bezpieczeństwo - Sesje i zakończ sesję OsmAnd Telegram.</string>
+	<string name="stale_location">Stała lokalizacja</string>
 	</resources>
