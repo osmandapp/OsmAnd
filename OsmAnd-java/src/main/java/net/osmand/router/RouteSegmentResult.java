@@ -2,6 +2,7 @@ package net.osmand.router;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,19 +44,28 @@ public class RouteSegmentResult {
 		int st = Math.min(startPointIndex, endPointIndex);
 		int end = Math.max(startPointIndex, endPointIndex);
 		float[] res = new float[(end - st + 1) * 2];
-		for (int k = 0; k < res.length / 2; k++) {
-			int ind = reverse ? (2 * (end - k)) : (2 * (k + st));
-			if (k == 0) {
-				res[2 * k] = 0;
-			} else {
-				if(ind < pf.length) {
+		if (reverse) {
+			for (int k = 1; k <= res.length / 2; k++) {
+				int ind = (2 * (end--));
+				if (ind < pf.length && k < res.length / 2) {
 					res[2 * k] = pf[ind];
 				}
+				if (ind < pf.length) {
+					res[2 * (k - 1) + 1] = pf[ind + 1];
+				}
 			}
-			if(ind < pf.length) {
-				res[2 * k + 1] = pf[ind + 1];
+		} else {
+			for (int k = 0; k < res.length / 2; k++) {
+				int ind = (2 * (st + k));
+				if (k > 0 && ind < pf.length) {
+					res[2 * k] = pf[ind];
+				}
+				if (ind < pf.length) {
+					res[2 * k + 1] = pf[ind + 1];
+				}
 			}
 		}
+
 		return res;
 	}
 	

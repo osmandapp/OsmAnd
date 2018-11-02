@@ -6,47 +6,34 @@ public class RouteStatistics {
 
     private static final String UNDEFINED = "undefined";
 
-    private final RouteStatisticComputer routeSurfaceStatisticComputer;
-    private final RouteStatisticComputer routeSmoothnessStatisticComputer;
-    private final RouteStatisticComputer routeClassStatisticComputer;
-    private final RouteStatisticComputer routeSteepnessStatisticComputer;
+    private final List<RouteSegmentResult> route;
 
-
-    private RouteStatistics(RouteStatisticComputer routeSurfaceStatisticComputer,
-                            RouteStatisticComputer routeSmoothnessStatisticComputer,
-                            RouteStatisticComputer routeClassStatisticComputer,
-                            RouteStatisticComputer routeSteepnessStatisticComputer) {
-        this.routeSurfaceStatisticComputer = routeSurfaceStatisticComputer;
-        this.routeSmoothnessStatisticComputer = routeSmoothnessStatisticComputer;
-        this.routeClassStatisticComputer = routeClassStatisticComputer;
-        this.routeSteepnessStatisticComputer = routeSteepnessStatisticComputer;
+    private RouteStatistics(List<RouteSegmentResult> route) {
+        this.route = route;
     }
 
     public static RouteStatistics newRouteStatistic(List<RouteSegmentResult> route) {
-        RouteStatisticComputer routeSurfaceStatisticComputer = new RouteSegmentSurfaceStatisticComputer(route);
-        RouteStatisticComputer routeSmoothnessStatisticComputer = new RouteSegmentSmoothnessStatisticComputer(route);
-        RouteStatisticComputer routeClassStatisticComputer = new RouteSegmentClassStatisticComputer(route);
-        RouteStatisticComputer routeSteepnessStatisticComputer = new RouteSegmentSteepnessStatisticComputer(route);
-        return new RouteStatistics(routeSurfaceStatisticComputer,
-                routeSmoothnessStatisticComputer,
-                routeClassStatisticComputer,
-                routeSteepnessStatisticComputer);
+        return new RouteStatistics(route);
     }
 
-    public List<RouteSegmentAttribute> getRouteSurfaceStatistic() {
-        return routeSurfaceStatisticComputer.computeStatistic();
+    public RouteStatistic getRouteSurfaceStatistic() {
+        RouteStatisticComputer statisticComputer = new RouteSurfaceStatisticComputer(route);
+        return statisticComputer.computeStatistic();
     }
 
-    public List<RouteSegmentAttribute> getRouteSmoothnessStatistic() {
-        return routeSmoothnessStatisticComputer.computeStatistic();
+    public RouteStatistic getRouteSmoothnessStatistic() {
+        RouteStatisticComputer statisticComputer = new RouteSmoothnessStatisticComputer(route);
+        return statisticComputer.computeStatistic();
     }
 
-    public List<RouteSegmentAttribute> getRouteClassStatistic() {
-        return routeClassStatisticComputer.computeStatistic();
+    public RouteStatistic getRouteClassStatistic() {
+        RouteStatisticComputer statisticComputer = new RouteClassStatisticComputer(route);
+        return statisticComputer.computeStatistic();
     }
 
-    public List<RouteSegmentAttribute> getRouteSteepnessStatistic() {
-        return routeSteepnessStatisticComputer.computeStatistic();
+    public RouteStatistic getRouteSteepnessStatistic() {
+        RouteStatisticComputer statisticComputer = new RouteSteepnessStatisticComputer(route);
+        return statisticComputer.computeStatistic();
     }
 
 
@@ -58,13 +45,35 @@ public class RouteStatistics {
             this.route = new ArrayList<>(route);
         }
 
-        public List<RouteSegmentResult> getRoute() {
+        private Map<String, RouteSegmentAttribute> makePartition(List<RouteSegmentAttribute> routeAttributes) {
+            Map<String, RouteSegmentAttribute> partition = new HashMap<>();
+            for (RouteSegmentAttribute attribute : routeAttributes) {
+                String key = attribute.getAttribute();
+                RouteSegmentAttribute pattr = partition.get(key);
+                if (pattr == null) {
+                    pattr = new RouteSegmentAttribute(attribute.getIndex(), attribute.getAttribute());
+                    partition.put(key, pattr);
+                }
+                pattr.incrementDistanceBy(attribute.getDistance());
+            }
+            return partition;
+        }
+
+        private float computeTotalDistance(List<RouteSegmentAttribute> attributes) {
+            float distance = 0f;
+            for (RouteSegmentAttribute attribute : attributes) {
+                distance += attribute.getDistance();
+            }
+            return distance;
+        }
+
+        protected List<RouteSegmentResult> getRoute() {
             return route;
         }
 
-        protected List<RouteSegmentAttribute> computeStatistic() {
+        protected List<RouteSegmentAttribute> processRoute() {
             int index = 0;
-            List<RouteSegmentAttribute> routeSurfaces = new ArrayList<>();
+            List<RouteSegmentAttribute> routes = new ArrayList<>();
             String prev = null;
             for (RouteSegmentResult segment : getRoute()) {
                 String current = getAttribute(segment);
@@ -74,23 +83,61 @@ public class RouteStatistics {
                 if (prev != null && !prev.equals(current)) {
                     index++;
                 }
-                if (index >= routeSurfaces.size()) {
-                    routeSurfaces.add(new RouteSegmentAttribute(index, current));
+                if (index >= routes.size()) {
+                    routes.add(new RouteSegmentAttribute(index, current));
                 }
-                RouteSegmentAttribute surface = routeSurfaces.get(index);
+                RouteSegmentAttribute surface = routes.get(index);
                 surface.incrementDistanceBy(segment.getDistance());
                 prev = current;
             }
-            return routeSurfaces;
+            return routes;
+        }
+
+        public RouteStatistic computeStatistic() {
+            List<RouteSegmentAttribute> routeAttributes = processRoute();
+            Map<String, RouteSegmentAttribute> partition = makePartition(routeAttributes);
+            float totalDistance = computeTotalDistance(routeAttributes);
+            return new RouteStatisticImpl(routeAttributes, partition, totalDistance);
         }
 
         public abstract String getAttribute(RouteSegmentResult segment);
 
+        private static class RouteStatisticImpl implements RouteStatistic {
+
+            private final List<RouteStatistics.RouteSegmentAttribute> elements;
+            private final Map<String, RouteStatistics.RouteSegmentAttribute> partition;
+            private final float totalDistance;
+
+            public RouteStatisticImpl(List<RouteSegmentAttribute> elements,
+                                       Map<String, RouteSegmentAttribute> partition,
+                                       float totalDistance) {
+                this.elements = elements;
+                this.partition = partition;
+                this.totalDistance = totalDistance;
+            }
+
+            @Override
+            public float getTotalDistance() {
+                return totalDistance;
+            }
+
+            @Override
+            public List<RouteSegmentAttribute> getElements() {
+                return new ArrayList<>(elements);
+            }
+
+            @Override
+            public Map<String, RouteSegmentAttribute> getPartition() {
+                return new HashMap<>(partition);
+            }
+        }
     }
 
-    private static class RouteSegmentSurfaceStatisticComputer extends RouteStatisticComputer {
 
-        public RouteSegmentSurfaceStatisticComputer(List<RouteSegmentResult> route) {
+
+    private static class RouteSurfaceStatisticComputer extends RouteStatisticComputer {
+
+        public RouteSurfaceStatisticComputer(List<RouteSegmentResult> route) {
             super(route);
         }
 
@@ -109,9 +156,9 @@ public class RouteStatistics {
         }
     }
 
-    private static class RouteSegmentSmoothnessStatisticComputer extends RouteStatisticComputer {
+    private static class RouteSmoothnessStatisticComputer extends RouteStatisticComputer {
 
-        public RouteSegmentSmoothnessStatisticComputer(List<RouteSegmentResult> route) {
+        public RouteSmoothnessStatisticComputer(List<RouteSegmentResult> route) {
             super(route);
         }
 
@@ -121,9 +168,10 @@ public class RouteStatistics {
         }
     }
 
-    private static class RouteSegmentClassStatisticComputer extends RouteStatisticComputer {
 
-        public RouteSegmentClassStatisticComputer(List<RouteSegmentResult> route) {
+    private static class RouteClassStatisticComputer extends RouteStatisticComputer {
+
+        public RouteClassStatisticComputer(List<RouteSegmentResult> route) {
             super(route);
         }
 
@@ -142,28 +190,31 @@ public class RouteStatistics {
         }
     }
 
-    private static class RouteSegmentSteepnessStatisticComputer extends RouteStatisticComputer {
 
-        public RouteSegmentSteepnessStatisticComputer(List<RouteSegmentResult> route) {
+    private static class RouteSteepnessStatisticComputer extends RouteStatisticComputer {
+
+        public RouteSteepnessStatisticComputer(List<RouteSegmentResult> route) {
             super(route);
         }
 
-        @Override
-        public String getAttribute(RouteSegmentResult segment) {
-            return null;
+        private float computeIncline(float prevHeight, float currHeight, float distance) {
+            float incline = (currHeight - prevHeight) / distance;
+            if (incline > 30f || incline < -30f) {
+                throw new IllegalArgumentException("Invalid incline " + incline);
+            }
+            if (Float.isInfinite(incline) || Float.isNaN(incline)) {
+                incline = 0f;
+            }
+            return incline * 100;
         }
 
-        @Override
-        public List<RouteSegmentAttribute> computeStatistic() {
-            List<RouteSegmentAttribute> routeInclines = new ArrayList<>();
-            int inclineIndex = 0;
+        private List<Incline> computeSegmentInclines() {
+            List<Incline> inclines = new ArrayList<>();
             for (RouteSegmentResult segment : getRoute()) {
                 float[] heights = segment.getHeightValues();
                 if (heights.length == 0) {
-                    RouteSegmentIncline routeIncline = new RouteSegmentIncline(inclineIndex++);
-                    routeIncline.mayJoin(0);
-                    routeIncline.incrementDistanceBy(segment.getDistance());
-                    routeInclines.add(routeIncline);
+                    Incline incline = new Incline(0, segment.getDistance());
+                    inclines.add(incline);
                     continue;
                 }
                 for (int index = 1; index < heights.length / 2; index++) {
@@ -173,33 +224,40 @@ public class RouteStatistics {
                     float prevHeight = heights[prevHeightIndex];
                     float currHeight = heights[currHeightIndex];
                     float distanceBetweenHeights = heights[distanceBetweenHeightsIndex];
-                    float incline = computeIncline(prevHeight, currHeight, distanceBetweenHeights);
-
-                    if (inclineIndex >= routeInclines.size()) {
-                        routeInclines.add(new RouteSegmentIncline(inclineIndex));
-                    }
-
-                    RouteSegmentIncline routeIncline = (RouteSegmentIncline) routeInclines.get(inclineIndex);
-
-                    if (routeIncline.mayJoin(incline)) {
-                        routeIncline.addIncline(incline);
-                        routeIncline.incrementDistanceBy(distanceBetweenHeights);
-                    } else {
-                        inclineIndex++;
-                    }
+                    float computedIncline = computeIncline(prevHeight, currHeight, distanceBetweenHeights);
+                    Incline incline = new Incline(computedIncline, distanceBetweenHeights);
+                    inclines.add(incline);
                 }
+            }
+            return inclines;
+        }
+
+        @Override
+        public List<RouteSegmentAttribute> processRoute() {
+            List<RouteSegmentAttribute> routeInclines = new ArrayList<>();
+            int index = 0;
+            String prev = null;
+            for (Incline incline : computeSegmentInclines()) {
+                String current = incline.getBoundariesAsString();
+                if (prev != null && !prev.equals(current)) {
+                    index++;
+                }
+                if (index >= routeInclines.size()) {
+                    routeInclines.add(new RouteSegmentAttribute(index, current));
+                }
+                RouteSegmentAttribute routeIncline = routeInclines.get(index);
+                routeIncline.incrementDistanceBy(incline.getDistance());
+                prev = current;
             }
             return routeInclines;
         }
 
-        private float computeIncline(float prevHeight, float currHeight, float distance) {
-            float incline = (currHeight - prevHeight) / distance;
-            if (Float.isInfinite(incline) || Float.isNaN(incline)) {
-                incline = 0f;
-            }
-            return incline * 100;
+        @Override
+        public String getAttribute(RouteSegmentResult segment) {
+            return null;
         }
     }
+
 
 
     public static class RouteSegmentAttribute {
@@ -241,7 +299,9 @@ public class RouteStatistics {
         }
     }
 
-    public static class RouteSegmentIncline extends RouteSegmentAttribute {
+
+
+    private static class Incline {
 
         private static final float MAX_INCLINE = 30;
         private static final float MIN_INCLINE = -30;
@@ -257,15 +317,6 @@ public class RouteStatistics {
             }
         }
 
-        private final List<Float> inclines = new ArrayList<>();
-        private float upperBoundary;
-        private float lowerBoundary;
-        private float middlePoint;
-
-        public RouteSegmentIncline(int index) {
-            super(index,"incline");
-        }
-
         private void determineBoundaries(float incline) {
             for (int pos = 1; pos < INTERVALS.length; pos++) {
                 float lower = INTERVALS[pos - 1];
@@ -279,6 +330,22 @@ public class RouteStatistics {
             }
         }
 
+        private float upperBoundary;
+        private float lowerBoundary;
+        private float middlePoint;
+
+        private final float inclineValue;
+        private final float distance;
+
+        public Incline(float inclineValue, float distance) {
+            this.inclineValue = inclineValue;
+            this.distance = distance;
+            determineBoundaries(inclineValue);
+            if (upperBoundary == lowerBoundary) {
+                throw new IllegalArgumentException("Invalid boundaries");
+            }
+        }
+
         public float getUpperBoundary() {
             return upperBoundary;
         }
@@ -287,88 +354,31 @@ public class RouteStatistics {
             return lowerBoundary;
         }
 
-        public boolean mayJoin(float incline) {
-            if (lowerBoundary == upperBoundary) {
-                determineBoundaries(incline);
-            }
-            return incline >= lowerBoundary && incline < upperBoundary;
-        }
-
-        public void addIncline(float incline) {
-            inclines.add(incline);
-        }
-
         public float getMiddlePoint() {
-            return this.middlePoint;
+            return middlePoint;
+        }
+
+        public float getValue() {
+            return inclineValue;
+        }
+
+        public float getDistance() {
+            return distance;
+        }
+
+        public String getBoundariesAsString() {
+            return String.format("%.2f|%.2f", getLowerBoundary(), getUpperBoundary());
         }
 
         @Override
         public String toString() {
-            return "RouteSegmentIncline{" +
-                    "index=" + getIndex() +
-                    ", distance=" + getDistance() +
-                    ", inclines=" + inclines +
-                    ", upperBoundary=" + upperBoundary +
+            return "Incline{" +
+                    "upperBoundary=" + upperBoundary +
                     ", lowerBoundary=" + lowerBoundary +
                     ", middlePoint=" + middlePoint +
+                    ", incline=" + inclineValue +
+                    ", distance=" + distance +
                     '}';
-        }
-    }
-
-    public enum RoadSurface {
-        PAVED("paved"),
-        UNPAVED("unpaved"),
-        ASPHALT("asphalt"),
-        CONCRETE("concrete"),
-        COMPACTED("compacted"),
-        GRAVEL("gravel"),
-        FINE_GRAVEL("fine_gravel"),
-        PAVING_STONES("paving_stones"),
-        SETT("sett"),
-        COBBLESTONE("cobblestone"),
-        PEBBLESTONE("pebblestone"),
-        STONE("stone"),
-        METAL("metal"),
-        GROUND("ground", "mud"),
-        WOOD("wood"),
-        GRASS_PAVER("grass_paver"),
-        GRASS("grass"),
-        SAND("sand"),
-        SALT("salt"),
-        SNOW("snow"),
-        ICE("ice"),
-        CLAY("clay");
-
-        final Set<String> surfaces = new TreeSet<>();
-
-        RoadSurface(String... surfaces) {
-            this.surfaces.addAll(Arrays.asList(surfaces));
-        }
-
-        boolean contains(String surface) {
-            return surfaces.contains(surface);
-        }
-    }
-
-    public enum RoadClass {
-        MOTORWAY("motorway", "motorway_link"),
-        STATE_ROAD("trunk", "trunk_link", "primary", "primary_link"),
-        ROAD("secondary", "secondary_link", "tertiary", "tertiary_link", "unclassified"),
-        STREET("residential", "living_street"),
-        SERVICE("service"),
-        TRACK("track", "road"),
-        FOOTWAY("footway"),
-        PATH("path"),
-        CYCLE_WAY("cycleway");
-
-        final Set<String> roadClasses = new TreeSet<>();
-
-        RoadClass(String... classes) {
-           roadClasses.addAll(Arrays.asList(classes));
-        }
-
-        boolean contains(String roadClass) {
-            return roadClasses.contains(roadClass);
         }
     }
 }
