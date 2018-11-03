@@ -530,7 +530,7 @@ public class SearchCoreFactory {
 				return false;
 			}
 			if (phrase.isNoSelectedType() && phrase.isUnknownSearchWordPresent()
-					&& phrase.isUnknownSearchWordComplete() && searchAmenityTypesAPI.hasFoundPoiTypes()) {
+					&& phrase.isUnknownSearchWordComplete() && phrase.hasUnknownSearchWordPoiTypes()) {
 				return false;
 			}
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
@@ -653,28 +653,10 @@ public class SearchCoreFactory {
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
 		private MapPoiTypes types;
-		private List<AbstractPoiType> foundPoiTypes = new ArrayList<>();
-		private SearchPhrase lastSearchedPhrase;
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			super(ObjectType.POI_TYPE);
 			this.types = types;
-		}
-
-		public List<AbstractPoiType> getFoundPoiTypes() {
-			return foundPoiTypes;
-		}
-
-		public boolean hasFoundPoiTypes() {
-			return foundPoiTypes.size() > 0;
-		}
-
-		public SearchPhrase getLastSearchedPhrase() {
-			return lastSearchedPhrase;
-		}
-
-		public void setLastSearchedPhrase(SearchPhrase lastSearchedPhrase) {
-			this.lastSearchedPhrase = lastSearchedPhrase;
 		}
 
 		public void clearCustomFilters() {
@@ -739,8 +721,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
-			foundPoiTypes = new ArrayList<>(results);
-			lastSearchedPhrase = phrase;
+			phrase.setUnknownSearchWordPoiTypes(new ArrayList<>(results));
 
 			if (resultMatcher != null) {
 				for (AbstractPoiType pt : results) {
@@ -852,18 +833,16 @@ public class SearchCoreFactory {
 				}
 				searchPoi(phrase, resultMatcher, obj, null, ptf);
 			} else if (searchAmenityTypesAPI != null) {
-				if (searchAmenityTypesAPI.lastSearchedPhrase == null
-						|| !searchAmenityTypesAPI.lastSearchedPhrase.getUnknownSearchPhrase().equals(phrase.getUnknownSearchPhrase())) {
+				if (phrase.getUnknownSearchWordPoiTypes() == null) {
 					searchAmenityTypesAPI.search(phrase, null);
 				}
-				List<AbstractPoiType> poiTypes = searchAmenityTypesAPI.getFoundPoiTypes();
-				for (AbstractPoiType pt : poiTypes) {
-					SearchPoiTypeFilter ptf = getPoiTypeFilter(pt);
-					String customName = phrase.getPoiNameFilter(pt);
+				AbstractPoiType poiType = phrase.getUnknownSearchWordPoiType();
+				if (poiType != null) {
+					SearchPoiTypeFilter ptf = getPoiTypeFilter(poiType);
+					String customName = phrase.getPoiNameFilter(poiType);
 					if (customName != null) {
-						phrase.setUnknownSearchWordPoiType(pt);
-						searchPoi(phrase, resultMatcher, null, customName, ptf);
-						break;
+						phrase.setUnknownSearchWordPoiType(poiType);
+						searchPoi(phrase, resultMatcher, null, customName.length() == 0 ? null : customName, ptf);
 					}
 				}
 			}
@@ -939,7 +918,14 @@ public class SearchCoreFactory {
 					res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
 					res.priorityDistance = 1;
 					if (phraseMatcher != null) {
-						res.unknownPhraseMatches = phraseMatcher.matches(res.localeName) || phraseMatcher.matches(res.otherNames);
+						boolean unknownPhraseMatches = phraseMatcher.matches(res.localeName) || phraseMatcher.matches(res.otherNames);
+						AbstractPoiType unknownSearchWordPoiType = phrase.getUnknownSearchWordPoiType();
+						if (unknownPhraseMatches && unknownSearchWordPoiType != null) {
+							unknownPhraseMatches = !phraseMatcher.matches(unknownSearchWordPoiType.getTranslation())
+									&& !phraseMatcher.matches(unknownSearchWordPoiType.getEnTranslation())
+									&& !phraseMatcher.matches(unknownSearchWordPoiType.getSynonyms());
+						}
+						res.unknownPhraseMatches = unknownPhraseMatches;
 					}
 					res.objectType = ObjectType.POI;
 					resultMatcher.publish(res);
@@ -988,7 +974,7 @@ public class SearchCoreFactory {
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			if ((p.isLastWord(ObjectType.POI_TYPE) && p.getLastTokenLocation() != null)
-					|| (p.isNoSelectedType() && p.isUnknownSearchWordComplete())) {
+					|| (p.isNoSelectedType())) {
 				return SEARCH_AMENITY_BY_TYPE_PRIORITY;
 			}
 			return -1;
