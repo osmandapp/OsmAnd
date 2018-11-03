@@ -200,8 +200,8 @@
 	<string name="srtm_plugin_description">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e qualquer interessado na estrutura de relevo da paisagem. (Por favor, note que as curvas de nível e/ou dados de relevo são downloads adicionais separados disponíveis depois de ativar o plugin.)
 \n 
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
-	<string name="osmand_parking_plugin_description">O plugin de posição de estacionamento grava onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado).
-\nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário, se você quiser um lembrete.</string>
+	<string name="osmand_parking_plugin_description">O plugin de posição de estacionamento grava onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado). 
+\nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário Android como lembrete.</string>
 	<string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abertura ou comentários de erros do OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
 	<string name="osmand_development_plugin_description">Este complemento exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização de tela ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
 	<string name="proxy_pref_descr">Configurar proxy</string>
@@ -783,11 +783,11 @@ Pôr do Sol: %2$s</string>
     <string name="recording_is_recorded">Gravando áudio/vídeo. Para parar, toque no widget AV.</string>
     <string name="recording_playing">Reproduzindo áudio da gravação especificada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reprodutor externo</string>
-    <string name="recording_delete_confirm">Você quer excluir esta gravação?</string>
+    <string name="recording_delete_confirm">Apagar este item\?</string>
     
     <string name="recording_unavailable">Indisponível</string>
-    <string name="recording_context_menu_arecord">Tomar uma nota de áudio</string>
-    <string name="recording_context_menu_vrecord">Tomar uma nota de vídeo</string>
+    <string name="recording_context_menu_arecord">Tomar nota de áudio</string>
+    <string name="recording_context_menu_vrecord">Tomar nota de vídeo</string>
     <string name="layer_recordings">Camada de gravação</string>
     <string name="recording_can_not_be_played">Gravação não pode ser reproduzida</string>
     <string name="recording_context_menu_delete">Apagar gravação</string>
@@ -804,7 +804,7 @@ Pôr do Sol: %2$s</string>
     <string name="download_regular_maps">Mapa padrão</string>
     <string name="download_roads_only_maps">Apenas mapa de estradas</string>
     <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposição de símbolo de montanhismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Camada de símbolos de caminhada</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Limites</string>
@@ -881,7 +881,7 @@ Pôr do Sol: %2$s</string>
     <string name="download_srtm_maps">Curvas de nível</string>
     <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
     <string name="rendering_attr_showRoadMaps_name">Apenas mapa de estradas</string>
-    <string name="safe_mode_description">Executar o aplicativo em modo seguro (usando código de Android, mais lento, em vez de código nativo).</string>
+    <string name="safe_mode_description">Executar o aplicativo em modo seguro (usando código Android, mais lento, em vez do código nativo).</string>
     <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na loja de apps?</string>
 	<string name="shared_location">Posição compartilhada</string>
 	<string name="osmand_parking_lim_text">Tempo limitado</string>
@@ -1158,7 +1158,7 @@ Pôr do Sol: %2$s</string>
 	<string name="auto_follow_route_navigation_descr">Centralizar a posição no mapa apenas durante a navegação.</string>
 	<string name="auto_follow_location_enabled">Mapa automaticamente centrado.</string>
 	<string name="pref_vector_rendering">Opções específicas para renderizar vetores</string>
-	<string name="pref_overlay">Sobreposição / Subjacente</string>
+	<string name="pref_overlay">Camada superior / Camada inferior</string>
 	<string name="pref_raster_map">Configurações de fonte de mapa</string>
 	<string name="pref_vector_map">Configurações de mapa vetorial</string>
 	<string name="delete_confirmation_msg">Apagar %1$s?</string>
@@ -1203,8 +1203,8 @@ Pôr do Sol: %2$s</string>
 	<string name="transport_search_before">Itinerário anterior</string>
 	<string name="use_english_names_descr">Escolher entre os nomes nativos ou em inglês</string>
 	<string name="use_english_names">Usar nomes em inglês nos mapas</string>
-	<string name="show_poi_over_map_description">Mostrar POI no mapa (usar o último filtro)</string>
-	<string name="show_poi_over_map">Mostrar POI</string>
+	<string name="show_poi_over_map_description">Mostrar a camada de POI selecionada por último no mapa.</string>
+	<string name="show_poi_over_map">Mostrar camada de POI</string>
 	
 	<string name="poi_edit_title">Modificar POI</string>
 	<string name="city_type_suburb">Bairro</string>
@@ -1290,8 +1290,8 @@ Pôr do Sol: %2$s</string>
 	<string name="voice_stream_voice_call">Áudio de chamada de voz</string>
 	<string name="voice_stream_music">Áudio de mídia/música</string>
 	<string name="warning_tile_layer_not_downloadable">Aplicativo não pode baixar camada %1$s do mapa, por favor, tente reinstalá-lo.</string>
-	<string name="overlay_transparency_descr">Modificar a transparência da sobreposição</string>
-	<string name="overlay_transparency">Transparência da sobreposição</string>
+	<string name="overlay_transparency_descr">Modificar a transparência da camada superior.</string>
+	<string name="overlay_transparency">Transparência da camada superior</string>
 	<string name="map_transparency_descr">Modificar transparência do mapa base</string>
 	<string name="map_transparency">Transparência do mapa base</string>
 	<string name="layer_underlay">Camada inferior…</string>
@@ -1997,7 +1997,7 @@ Pôr do Sol: %2$s</string>
     <string name="number_of_edits">Número de edições</string>
     <string name="reports_for">Relatório para</string>
 <string name="shared_string_remove">Excluir</string>
-    <string name="clear_updates_proposition_message">Você pode excluir atualizações baixadas e voltar para a versão original do mapa</string>
+    <string name="clear_updates_proposition_message">Excluir atualizações baixadas e voltar para a versão original do mapa</string>
     <string name="add_time_span">Adicionar intervalo de tempo</string>
     <string name="road_blocked">Estrada bloqueada</string>
     <string name="shared_string_select">Selecionar</string>
@@ -2182,7 +2182,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_resume_pause_navigation_descr">Toque neste botão para pausar ou retomar a navegação.</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
     <string name="quick_action_start_stop_navigation_descr">Toque neste botão para iniciar ou parar a navegação.</string>
-    <string name="store_tracks_in_monthly_directories">Salvar trilhas gravadas em pastas mensais</string>
+    <string name="store_tracks_in_monthly_directories">Salvar trilhas em pastas mensais</string>
     <string name="store_tracks_in_monthly_directories_descrp">Salvar trilhas gravadas em subpastas por mês (ex.: 2018-01).</string>
     <string name="shared_string_reset">Redefinir</string>
     <string name="shared_string_reload">Recarregar</string>
@@ -2302,7 +2302,7 @@ Pôr do Sol: %2$s</string>
     <string name="empty_state_markers_active_desc">Toque longo ou rápido em \'Lugares\', e em seguida toque no botão de bandeira.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Importar grupos de Favoritos ou pontos de passagem de trilhas como marcadores.</string>
-    <string name="empty_state_markers_history_desc">Marcadores marcados como visitados aparecerão nesta tela.</string>
+    <string name="empty_state_markers_history_desc">Marcadores visitados aparecerão nesta tela.</string>
     <string name="shared_string_two">Dois</string>
     <string name="shared_string_one">Um</string>
     <string name="show_guide_line_descr">Mostrar linha direcional desde a sua posição até os locais dos marcadores ativos.</string>
@@ -2851,12 +2851,12 @@ Pôr do Sol: %2$s</string>
 
     <string name="maps_you_need_descr">Baseado nos artigos que você marcou, recomendamos você baixar os seguintes mapas:</string>
     <string name="maps_you_need">Mapas que você precisa</string>
-    <string name="travel_card_download_descr">Baixe guias de viagem Wikivoyage para ver os artigos sobre lugares ao redor do mundo sem uma conexão à Internet.</string>
+    <string name="travel_card_download_descr">Baixe os guias de viagem Wikivoyage para ver artigos sobre lugares ao redor do mundo sem conexão à Internet.</string>
 	<string name="welcome_to_open_beta_description">Os guias de viagem atualmente baseiam-se no Wikivoyage. Teste todos os recursos durante o teste beta aberto, de graça. Depois, os guias estarão disponíveis para assinantes OsmAnd Unlimited e proprietários do OsmAnd+.</string>
     
     <string name="download_wikipedia_description">Baixe artigos da Wikipédia por %1$s para lê-los offline.</string>
     <string name="wiki_article_search_text">Procurando o artigo wiki correspondente</string>
-    <string name="shared_string_bookmark">Marcador</string>
+    <string name="shared_string_bookmark">Marcar</string>
     <string name="hide_full_description">Ocultar descrição completa</string>
     <string name="show_full_description">Mostrar descrição completa</string>
     <string name="open_wikipedia_link_online_description">O link será aberto em um navegador web.</string>
@@ -2877,7 +2877,7 @@ Pôr do Sol: %2$s</string>
     <string name="ski_map_render_descr">Estilo esqui. Principais características: processa pistas, teleféricos e outros recursos de esqui de forma conveniente. Objetos de mapa secundário menos distrativos.</string>
     <string name="error_notification_desc">Favor enviar a captura de tela desta notificação para support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar ações</string>
-    <string name="start_editing_card_description">Você pode e deve editar qualquer artigo do Wikivoyage. Compartilhe conhecimento, experiência, talento e sua atenção</string>
+    <string name="start_editing_card_description">Você pode e é convidado a editar qualquer artigo do Wikivoyage. Compartilhe conhecimento, experiência, talento e sua atenção.</string>
     <string name="coord_input_edit_point">Editar ponto</string>
     <string name="coord_input_add_point">Adicionar ponto</string>
     <string name="coord_input_save_as_track">Salvar como trilha</string>
@@ -2954,4 +2954,20 @@ Pôr do Sol: %2$s</string>
     <string name="more_transport_on_stop_hint">Esta parada tem outros meios de transporte.</string>
     <string name="keep_passed_markers">Manter os marcadores visitados no mapa\t</string>
     <string name="keep_passed_markers_descr">Marcadores adicionados como grupo de Favoritos ou pontos de passagem GPX marcados como Visitado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
-    </resources>
+    <string name="release_3_2_pre">• Corrigida a falha na inicialização que ocorria em alguns dispositivos.
+\n
+\n• Novo recurso de Marcadores: apresenta os marcadores que já foram percorridos.
+\n
+\n• Histórico de pesquisa agora mostra as categorias que você pesquisou anteriormente.
+\n
+\n• Corrigida a falha na inicialização que ocorria com os mapas não-latinos.
+\n
+\n• Reduz problemas com a velocidade de processamento nos dispositivos Android 8.0.
+\n
+\n• Suporte para edição de objetos poligonais (exceto utilidades).
+\n
+\n• Medição de distância: adiciona botão Medição em Ações no menu de contexto.
+\n
+\n</string>
+    <string name="test_voice_desrc">Toque num botão e ouça a correspondente voz de comando para identificar os comandos faltantes ou com falha.</string>
+</resources>
