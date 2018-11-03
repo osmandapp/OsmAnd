@@ -2,8 +2,6 @@ package net.osmand.plus;
 
 public interface OsmAndCustomizationConstants {
 
-	// TODO: add ids for category items
-
 	// Navigation Drawer:
 
 	String DRAWER_ITEM_ID_SCHEME = "drawer.action.";
@@ -21,6 +19,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_PLUGINS_ID = DRAWER_ITEM_ID_SCHEME + "plugins";
 	String DRAWER_SETTINGS_ID = DRAWER_ITEM_ID_SCHEME + "settings";
 	String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
+	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
 
 	// Configure Map:
 
@@ -31,6 +30,7 @@ public interface OsmAndCustomizationConstants {
 
 	String APP_PROFILES_ID = ITEM_ID_SCHEME + "app_profiles";
 
+	String SHOW_CATEGORY_ID = SHOW_ITEMS_ID_SCHEME + "category";
 	String FAVORITES_ID = SHOW_ITEMS_ID_SCHEME + "favorites";
 	String POI_OVERLAY_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay";
 	String POI_OVERLAY_LABELS_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay_labels";
@@ -39,6 +39,7 @@ public interface OsmAndCustomizationConstants {
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
 
+	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
 	String MAP_MODE_ID = RENDERING_ITEMS_ID_SCHEME + "map_mode";
 	String MAP_MAGNIFIER_ID = RENDERING_ITEMS_ID_SCHEME + "map_marnifier";

@@ -78,12 +78,14 @@ import static net.osmand.plus.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MARKERS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_SOURCE_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.POI_OVERLAY_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.ROAD_STYLE_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.TRANSPORT_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
@@ -272,6 +274,7 @@ public class ConfigureMapMenu {
 		final OsmandSettings settings = app.getSettings();
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(SHOW_CATEGORY_ID)
 				.setTitleId(R.string.shared_string_show, activity)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
@@ -529,6 +532,7 @@ public class ConfigureMapMenu {
 	private void createRenderingAttributeItems(List<RenderingRuleProperty> customRules,
 											   final ContextMenuAdapter adapter, final MapActivity activity) {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
+				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_renderer, activity)
 				.setId(MAP_STYLE_ID)

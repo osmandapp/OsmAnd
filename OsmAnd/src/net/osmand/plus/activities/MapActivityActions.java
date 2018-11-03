@@ -83,6 +83,7 @@ import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_HELP_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
@@ -918,6 +919,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
+		divider.setId(DRAWER_DIVIDER_ID);
 		divider.setPosition(dividerItemIndex >= 0 ? dividerItemIndex : 8);
 		optionsMenuHelper.addItem(divider.createItem());
 
