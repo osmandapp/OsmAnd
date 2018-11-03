@@ -44,6 +44,8 @@ public class OsmAndAppCustomization {
 	private Set<String> enabledPatterns = new HashSet<>();
 	private Set<String> disabledPatterns = new HashSet<>();
 
+	private boolean customizationEnabled;
+
 	public void setup(OsmandApplication app) {
 		this.app = app;
 		this.osmandSettings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app));
@@ -146,24 +148,31 @@ public class OsmAndAppCustomization {
 	public void setEnabledIds(@NonNull Collection<String> ids) {
 		enabledIds.clear();
 		enabledIds.addAll(ids);
+		updateCustomizationEnabled();
 	}
 
 	public void setDisabledIds(@NonNull Collection<String> ids) {
 		disabledIds.clear();
 		disabledIds.addAll(ids);
+		updateCustomizationEnabled();
 	}
 
 	public void setEnabledPatterns(@NonNull Collection<String> patterns) {
 		enabledPatterns.clear();
 		enabledPatterns.addAll(patterns);
+		updateCustomizationEnabled();
 	}
 
 	public void setDisabledPatterns(@NonNull Collection<String> patterns) {
 		disabledPatterns.clear();
 		disabledPatterns.addAll(patterns);
+		updateCustomizationEnabled();
 	}
 
 	public boolean isFeatureEnabled(@NonNull String id) {
+		if (!customizationEnabled) {
+			return true;
+		}
 		if (enabledIds.contains(id)) {
 			return true;
 		}
@@ -174,6 +183,11 @@ public class OsmAndAppCustomization {
 			return true;
 		}
 		return !isMatchesPattern(id, disabledPatterns);
+	}
+
+	private void updateCustomizationEnabled() {
+		customizationEnabled = !enabledIds.isEmpty() || !disabledIds.isEmpty()
+				|| !enabledPatterns.isEmpty() || !disabledPatterns.isEmpty();
 	}
 
 	private boolean isMatchesPattern(@NonNull String id, @NonNull Set<String> patterns) {
