@@ -133,4 +133,11 @@ interface IOsmAndAidlInterface {
 
     long registerForUpdates(in long updateTimeMS, IOsmAndAidlCallback callback);
     boolean unregisterFromUpdates(in long callbackId);
+
+    boolean setNavDrawerLogo(in String imageUri);
+
+    boolean setEnabledIds(in List<String> ids);
+    boolean setDisabledIds(in List<String> ids);
+    boolean setEnabledPatterns(in List<String> patterns);
+    boolean setDisabledPatterns(in List<String> patterns);
 }

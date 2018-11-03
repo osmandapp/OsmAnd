@@ -46,6 +46,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.plus.OsmAndCustomizationConstants.UNDERLAY_MAP;
+
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
 
@@ -323,6 +326,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		boolean hasOverlayDescription = overlayMapDescr != null;
 		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
+				.setId(OVERLAY_MAP)
 				.setDescription(overlayMapDescr)
 				.setSelected(hasOverlayDescription)
 				.setColor(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -335,6 +339,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		boolean hasUnderlayDescription = underlayMapDescr != null;
 		underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
+				.setId(UNDERLAY_MAP)
 				.setDescription(underlayMapDescr)
 				.setSelected(hasUnderlayDescription)
 				.setColor(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)

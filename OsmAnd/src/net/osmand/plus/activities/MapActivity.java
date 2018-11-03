@@ -90,7 +90,6 @@ import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
-import net.osmand.plus.helpers.DiscountHelper.DiscountBarController;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
@@ -770,7 +769,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 
-		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
@@ -1306,7 +1304,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
-		getMyApplication().getAppCustomization().pauseActivity(MapActivity.class);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);
 	}

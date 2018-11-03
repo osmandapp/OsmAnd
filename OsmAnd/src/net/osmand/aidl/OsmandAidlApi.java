@@ -82,6 +82,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -1653,6 +1654,30 @@ public class OsmandAidlApi {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	boolean setNavDrawerLogo(@Nullable String uri) {
+		return app.getAppCustomization().setNavDrawerLogo(uri);
+	}
+
+	boolean setEnabledIds(Collection<String> ids) {
+		app.getAppCustomization().setEnabledIds(ids);
+		return true;
+	}
+
+	boolean setDisabledIds(Collection<String> ids) {
+		app.getAppCustomization().setDisabledIds(ids);
+		return true;
+	}
+
+	boolean setEnabledPatterns(Collection<String> patterns) {
+		app.getAppCustomization().setEnabledPatterns(patterns);
+		return true;
+	}
+
+	boolean setDisabledPatterns(Collection<String> patterns) {
+		app.getAppCustomization().setDisabledPatterns(patterns);
+		return true;
 	}
 
 	public static class ConnectedApp implements Comparable<ConnectedApp> {

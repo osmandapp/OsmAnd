@@ -39,6 +39,7 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import static android.content.Intent.ACTION_VIEW;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAPILLARY;
 
 public class MapillaryPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.mapillary";
@@ -179,6 +180,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			settings.SHOW_MAPILLARY.set(false);
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(MAPILLARY)
 				.setTitleId(R.string.mapillary, mapActivity)
 				.setSelected(settings.SHOW_MAPILLARY.get())
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)

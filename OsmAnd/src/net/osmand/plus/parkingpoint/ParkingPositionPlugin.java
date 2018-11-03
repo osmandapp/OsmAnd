@@ -420,10 +420,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		}
 		clearParkingPosition();
 	}
-
-	@Override
-	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
-    }
 	
 	/**
 	 * @return the control to be added on a MapInfoLayer 

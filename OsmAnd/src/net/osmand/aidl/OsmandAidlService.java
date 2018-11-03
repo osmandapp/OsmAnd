@@ -671,6 +671,36 @@ public class OsmandAidlService extends Service {
 			return true;
 		}
 
+		@Override
+		public boolean setNavDrawerLogo(String imageUri) throws RemoteException {
+			OsmandAidlApi api = getApi("setNavDrawerLogo");
+			return api != null && api.setNavDrawerLogo(imageUri);
+		}
+
+		@Override
+		public boolean setEnabledIds(List<String> ids) throws RemoteException {
+			OsmandAidlApi api = getApi("setEnabledIds");
+			return api != null && api.setEnabledIds(ids);
+		}
+
+		@Override
+		public boolean setDisabledIds(List<String> ids) throws RemoteException {
+			OsmandAidlApi api = getApi("setDisabledIds");
+			return api != null && api.setDisabledIds(ids);
+		}
+
+		@Override
+		public boolean setEnabledPatterns(List<String> patterns) throws RemoteException {
+			OsmandAidlApi api = getApi("setEnabledPatterns");
+			return api != null && api.setEnabledPatterns(patterns);
+		}
+
+		@Override
+		public boolean setDisabledPatterns(List<String> patterns) throws RemoteException {
+			OsmandAidlApi api = getApi("setDisabledPatterns");
+			return api != null && api.setDisabledPatterns(patterns);
+		}
+
 		void startRemoteUpdates(final long updateTimeMS, final long callbackId, final IOsmAndAidlCallback callback) {
 			mHandler.postDelayed(new Runnable() {
 				@Override

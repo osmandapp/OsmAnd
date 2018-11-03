@@ -47,6 +47,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.OSM_NOTES;
+
 
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
@@ -292,6 +294,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(OSM_NOTES)
 				.setTitleId(R.string.layer_osm_bugs, mapActivity)
 				.setSelected(settings.SHOW_OSM_BUGS.get())
 				.setIcon(R.drawable.ic_action_bug_dark)
