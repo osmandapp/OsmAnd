@@ -36,6 +36,7 @@ public class SearchPhrase {
 	private String rawUnknownSearchPhrase = "";
 	private String unknownSearchPhrase = "";
 	private AbstractPoiType unknownSearchWordPoiType;
+	private List<AbstractPoiType> unknownSearchWordPoiTypes = null;
 
 	private NameStringMatcher sm;
 	private SearchSettings settings;
@@ -186,7 +187,7 @@ public class SearchPhrase {
 	
 
 	public boolean isUnknownSearchWordComplete() {
-		return lastUnknownSearchWordComplete || unknownWords.size() > 0;
+		return lastUnknownSearchWordComplete || unknownWords.size() > 0 || unknownSearchWordPoiType != null;
 	}
 	
 	public boolean isLastUnknownSearchWordComplete() {
@@ -248,6 +249,24 @@ public class SearchPhrase {
 		return getPoiNameFilter(unknownSearchWordPoiType);
 	}
 
+	public boolean hasUnknownSearchWordPoiTypes() {
+		return unknownSearchWordPoiTypes != null && unknownSearchWordPoiTypes.size() > 0;
+	}
+
+	public List<AbstractPoiType> getUnknownSearchWordPoiTypes() {
+		return unknownSearchWordPoiTypes;
+	}
+
+	public void setUnknownSearchWordPoiTypes(List<AbstractPoiType> unknownSearchWordPoiTypes) {
+		this.unknownSearchWordPoiTypes = unknownSearchWordPoiTypes;
+		for (AbstractPoiType pt : unknownSearchWordPoiTypes) {
+			if (getPoiNameFilter(pt) != null) {
+				setUnknownSearchWordPoiType(pt);
+				break;
+			}
+		}
+	}
+
 	public String getPoiNameFilter(AbstractPoiType pt) {
 		String nameFilter = null;
 		if (pt != null) {
@@ -256,11 +275,11 @@ public class SearchPhrase {
 			String enTranslation = pt.getEnTranslation();
 			String translation = pt.getTranslation();
 			String synonyms = pt.getSynonyms();
-			if (unknownSearchPhrase.length() > enTranslation.length() && nm.matches(enTranslation)) {
+			if (unknownSearchPhrase.length() >= enTranslation.length() && nm.matches(enTranslation)) {
 				nameFilter = unknownSearchPhrase.substring(enTranslation.length()).trim();
-			} else if (unknownSearchPhrase.length() > translation.length() && nm.matches(translation)) {
+			} else if (unknownSearchPhrase.length() >= translation.length() && nm.matches(translation)) {
 				nameFilter = unknownSearchPhrase.substring(translation.length()).trim();
-			} else if (unknownSearchPhrase.length() > synonyms.length() && nm.matches(synonyms)) {
+			} else if (unknownSearchPhrase.length() >= synonyms.length() && nm.matches(synonyms)) {
 				nameFilter = unknownSearchPhrase.substring(synonyms.length()).trim();
 			}
 		}
