@@ -19,6 +19,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_PLUGINS_ID = DRAWER_ITEM_ID_SCHEME + "plugins";
 	String DRAWER_SETTINGS_ID = DRAWER_ITEM_ID_SCHEME + "settings";
 	String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
+	String DRAWER_BUILDS_ID = DRAWER_ITEM_ID_SCHEME + "builds";
 	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
 
 	// Configure Map:
@@ -38,6 +39,13 @@ public interface OsmAndCustomizationConstants {
 	String GPX_FILES_ID = SHOW_ITEMS_ID_SCHEME + "gpx_files";
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
+	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
+	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
+	String OSM_NOTES = SHOW_ITEMS_ID_SCHEME + "osm_notes";
+	String OVERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "overlay_map";
+	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
+	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
+	String HILLSHADE_LAYER = SHOW_ITEMS_ID_SCHEME + "hillshade_layer";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";

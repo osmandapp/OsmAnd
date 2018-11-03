@@ -18,6 +18,8 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";
 	private OsmandApplication app;
@@ -57,6 +59,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
 			helper.addItem(new ContextMenuItem.ItemBuilder()
+					.setId(DRAWER_BUILDS_ID)
 					.setTitleId(R.string.version_settings, mapActivity)
 					.setIcon(R.drawable.ic_action_gabout_dark)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
