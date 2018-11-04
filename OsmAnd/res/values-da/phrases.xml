@@ -3967,4 +3967,27 @@
 <string name="poi_atm">Pengeautomat</string>
 	<string name="poi_shoe_repair">Skoreparation</string>
 
+<string name="poi_bulk_purchase">Storkøb</string>
+	<string name="poi_substation_type">Type</string>
+
+<string name="poi_bulk_purchase_yes">Storkøb: ja</string>
+	<string name="poi_bulk_purchase_only">Storkøb: kun</string>
+
+	<string name="poi_pipeline_substation">Rørledningsstation</string>
+	<string name="poi_substation_transmission">Transmission</string>
+	<string name="poi_substation_distribution">Distribution</string>
+	<string name="poi_substation_minor_distribution">Mindre distribution</string>
+	<string name="poi_substation_industrial">Industriel</string>
+	<string name="poi_substation_transition">Overgang</string>
+	<string name="poi_substation_traction">Trækkraft</string>
+	<string name="poi_substation_converter">Converter</string>
+	<string name="poi_substation_compensation">Kompensation</string>
+
+	<string name="poi_substation_compression">Komprimering:</string>
+	<string name="poi_substation_measurement">Måling</string>
+	<string name="poi_substation_valve">Ventil</string>
+	<string name="poi_substation_valve_group">Ventilgruppe</string>
+	<string name="poi_substation_inspection_gauge">Inspektionsmåler</string>
+	<string name="poi_substation_field_gathering">Feltsamling</string>
+
 </resources>
