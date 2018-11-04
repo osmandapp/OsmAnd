@@ -98,7 +98,7 @@
 <string name="shared_string_clear">Limpar</string>
 <string name="shared_string_clear_all">Limpar tudo</string>
 <string name="shared_string_save">Salvar</string>
-<string name="shared_string_save_as_gpx">Salvar como trilha GPX</string>
+<string name="shared_string_save_as_gpx">Salvar como novo arquivo GPX</string>
 <string name="shared_string_rename">Renomear</string>
 <string name="shared_string_delete">Apagar</string>
 <string name="shared_string_delete_all">Apagar tudo</string>
@@ -319,10 +319,10 @@
 <string name="save_track_to_gpx_globally">Registrar trilha em arquivo GPX</string>
 <string name="save_track_to_gpx_globally_headline">Registro de trilha sob demanda</string>
 <string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de registro de GPX na tela do mapa</string>
-<string name="save_current_track_descr">Salvar a trilha atual no SD agora</string>
-<string name="save_current_track">Salvar a trilha GPX atual</string>
+<string name="save_current_track_descr">Salvar a trilha atual como arquivo GPX agora.</string>
+<string name="save_current_track">Salvar a trilha atual</string>
 <string name="save_track_to_gpx">Auto-registrar a trilha durante a navegação</string>
-<string name="save_track_to_gpx_descrp">trilha serão salvas no diretório de trilhas durante a navegação</string>
+<string name="save_track_to_gpx_descrp">A trilha GPX será salva automaticamente no diretório de trilhas durante a navegação.</string>
 <string name="save_track_interval_globally">Intervalo de registro</string>
 <string name="save_track_interval">Intervalo de registro durante a navegação</string>
 <string name="save_track_interval_descr">Escolher o intervalo de registro para a gravação de trilha durante a navegação.</string>
@@ -2182,7 +2182,7 @@ Pôr do Sol: %2$s</string>
 <string name="quick_action_resume_pause_navigation_descr">Toque neste botão para pausar ou retomar a navegação.</string>
 <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
 <string name="quick_action_start_stop_navigation_descr">Toque neste botão para iniciar ou parar a navegação.</string>
-    <string name="store_tracks_in_monthly_directories">Salvar trilhas gravadas em pastas mensais</string>
+    <string name="store_tracks_in_monthly_directories">Salvar trilhas em pastas mensais</string>
     <string name="store_tracks_in_monthly_directories_descrp">Salvar trilhas gravadas em subpastas por mês (ex.: 2018-01).</string>
     <string name="shared_string_reset">Redefinir</string>
     <string name="shared_string_reload">Recarregar</string>
@@ -2952,7 +2952,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="rendering_value_black_name">Preto</string>
     <string name="more_transport_on_stop_hint">Esta parada tem outros meios de transporte.</string>
-    <string name="keep_passed_markers">Manter os marcadores visitados no mapa\t</string>
+    <string name="keep_passed_markers">Manter os marcadores visitados no mapa</string>
     <string name="keep_passed_markers_descr">Marcadores adicionados como grupo de Favoritos ou pontos de passagem GPX marcados como Visitado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
     <string name="release_3_2_pre">• Corrigida a falha na inicialização que ocorria em alguns dispositivos.
 \n

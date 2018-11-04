@@ -3885,4 +3885,25 @@
 <string name="poi_atm">Geldautomat</string>
 	<string name="poi_shoe_repair">Schuhreparatur</string>
 
+<string name="poi_bulk_purchase">Großeinkauf</string>
+	<string name="poi_substation_type">Typ</string>
+
+<string name="poi_bulk_purchase_yes">Großbestellung: ja</string>
+	<string name="poi_bulk_purchase_only">Großbestellung: nur</string>
+
+	<string name="poi_substation_transmission">Übertragung</string>
+	<string name="poi_substation_distribution">Vertrieb</string>
+	<string name="poi_substation_minor_distribution">Geringe Verteilung</string>
+	<string name="poi_substation_industrial">Industriell</string>
+	<string name="poi_substation_transition">Übergang</string>
+	<string name="poi_substation_traction">Bodenhaftung</string>
+	<string name="poi_substation_converter">Umrichter</string>
+	<string name="poi_substation_compensation">Kompensation</string>
+
+	<string name="poi_substation_compression">Kompression</string>
+	<string name="poi_substation_measurement">Messung</string>
+	<string name="poi_substation_valve">Ventil</string>
+	<string name="poi_substation_valve_group">Ventilgruppe</string>
+	<string name="poi_substation_field_gathering">Feldsammlung</string>
+
 </resources>

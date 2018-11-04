@@ -3110,4 +3110,16 @@
     <string name="markers_remove_dialog_msg">למחוק את סמן המפה ‚%s’\?</string>
     <string name="edit_map_marker">עריכת סמן מפה</string>
     <string name="third_party_application">יישום צד שלישי</string>
+    <string name="osm_live_plan_pricing">תכנית ומחיר</string>
+    <string name="osm_live_payment_monthly_title">תשלום חודשי</string>
+    <string name="osm_live_payment_3_months_title">תשלום אחת ל־3 חודשים</string>
+    <string name="osm_live_payment_annual_title">תשלום אחת לשנה</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s לחודש</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s לחודש</string>
+    <string name="osm_live_payment_discount_descr">חיסכון של %1$s!</string>
+	<string name="osm_live_payment_current_subscription">המינוי הנוכחי שלך</string>
+    <string name="osm_live_payment_renews_monthly">מתחדש חודשית</string>
+    <string name="osm_live_payment_renews_quarterly">מתחדש רבעונית</string>
+    <string name="osm_live_payment_renews_annually">מתחדש שנתית</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     </resources>

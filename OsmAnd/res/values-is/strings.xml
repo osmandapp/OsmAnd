@@ -2982,7 +2982,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n</string>
     <string name="rendering_value_black_name">Svart</string>
     <string name="search_street">Leita að götu</string>
-    <string name="start_search_from_city">Hefja leit út frá borg</string>
+    <string name="start_search_from_city">Veldu fyrst borgina</string>
     <string name="shared_string_restore">Endurheimta</string>
     <string name="keep_passed_markers_descr">Kortamerki sem bætt er inn sem hópi eftirlæta eða sem GPX-ferli og sem þegar hefur verið farið um, verða áfram á kortinu. Ef hópurinn er ekki virkur, munu kortamerkin hverfa.</string>
     <string name="keep_passed_markers">Halda merkjum sem þegar hefur verið farið um á kortinu</string>
@@ -2990,4 +2990,18 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="markers_remove_dialog_msg">Eyða kortamerkinu \'%s\'\?</string>
     <string name="edit_map_marker">Breyta kortamerki</string>
     <string name="third_party_application">Utanaðkomandi forrit</string>
+    <string name="osm_live_plan_pricing">Áskrift og verð</string>
+    <string name="osm_live_payment_monthly_title">Greiða mánaðarlega</string>
+    <string name="osm_live_payment_3_months_title">Greiða á þriggja mánaða fresti</string>
+    <string name="osm_live_payment_annual_title">Greiða árlega</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mánuði</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mánuði</string>
+    <string name="osm_live_payment_discount_descr">Sparaðu %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Núverandi áskrift þín</string>
+    <string name="osm_live_payment_renews_monthly">Endurnýjast mánaðarlega</string>
+    <string name="osm_live_payment_renews_quarterly">Endurnýjast ársfjórðungslega</string>
+    <string name="osm_live_payment_renews_annually">Endurnýjast árlega</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Veldu greiðslumátann sem hentar þér best:</string>
+    <string name="osm_live_payment_contribute_descr">Hluti innkomunnar fer til þeirra sem leggja OpenStreetMap lið.</string>
     </resources>

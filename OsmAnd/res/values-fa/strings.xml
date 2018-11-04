@@ -3213,11 +3213,26 @@
     <string name="ask_for_location_permission">برای ادامه، لطفاً به OsmAnd اجازهٔ دسترسی به موقعیت مکانی را بدهید.</string>
     <string name="rendering_value_black_name">سیاه</string>
     <string name="search_street">جست‌وجوی خیابان</string>
-    <string name="start_search_from_city">آغاز جست‌وجو از شهر</string>
+    <string name="start_search_from_city">ابتدا شهر را انتخاب کنید</string>
     <string name="shared_string_restore">بازیابی</string>
     <string name="keep_passed_markers_descr">نشانه‌هایی که در قالب گروهی از برگزیده‌ها یا نقاط بین‌راهی GPX وارد شده‌اند و از آن‌ها عبور کرده‌اید روی نقشه باقی می‌مانند. اگر گروه مربوط به آن‌ها را غیرفعال کنید، نشانه‌ها از روی نقشه محو می‌شوند.</string>
     <string name="keep_passed_markers">نشانه‌های پشت سر گذاشته را روی نقشه نگه دار</string>
     <string name="markers_remove_dialog_msg">نشانهٔ %s حذف شود؟</string>
     <string name="edit_map_marker">ویرایش نشانه</string>
     <string name="third_party_application">برنامهٔ شخص ثالث</string>
+    <string name="osm_live_plan_pricing">طرح و قیمت</string>
+    <string name="osm_live_payment_monthly_title">پرداخت ماهانه</string>
+    <string name="osm_live_payment_3_months_title">پرداخت سه‌ماهه</string>
+    <string name="osm_live_payment_annual_title">پرداخت سالانه</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s در ماه</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s در ماه</string>
+    <string name="osm_live_payment_discount_descr">%1$s صرفه‌جویی کنید!</string>
+	<string name="osm_live_payment_current_subscription">اشتراک کنونی شما</string>
+    <string name="osm_live_payment_renews_monthly">ماهانه تمدید می‌شود</string>
+    <string name="osm_live_payment_renews_quarterly">سه‌ماهه تمدید می‌شود</string>
+    <string name="osm_live_payment_renews_annually">سالانه تمدید می‌شود</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">دورهٔ پرداخت مناسب خود را برگزینید:</string>
+    <string name="osm_live_payment_contribute_descr">بخشی از درآمد به مشارکت‌کنندگان نقشهٔ شهری باز اهدا می‌شود.</string>
+    <string name="more_transport_on_stop_hint">در این ایستگاه حمل‌ونقل بیشتری وجود دارد.</string>
     </resources>
