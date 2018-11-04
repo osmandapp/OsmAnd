@@ -91,6 +91,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+
 
 public class OsmandAidlApi {
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
@@ -1518,6 +1520,7 @@ public class OsmandAidlApi {
 					}
 					final Intent finalIntent = intent;
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setId(item.getId())
 							.setTitle(item.name)
 							.setIcon(getIconId(item.iconName))
 							.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -1733,6 +1736,10 @@ public class OsmandAidlApi {
 			this.uri = uri;
 			this.iconName = iconName;
 			this.flags = flags;
+		}
+
+		public String getId() {
+			return DRAWER_ITEM_ID_SCHEME + name;
 		}
 	}
 
