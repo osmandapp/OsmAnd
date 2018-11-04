@@ -3028,7 +3028,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="ask_for_location_permission">Per continuar cal que doneu a OsmAnd accés a la ubicació.</string>
     <string name="rendering_value_black_name">Negre</string>
     <string name="search_street">Cerca un carrer</string>
-    <string name="start_search_from_city">Comença la cerca des de la ciutat</string>
+    <string name="start_search_from_city">Seleccioneu primer la ciutat</string>
     <string name="shared_string_restore">Restaura</string>
     <string name="keep_passed_markers_descr">Els marcadors afegits a un grup de Preferits i les fites GPX ja assolides romandran al mapa. Si el grup no estigués activat, els marcadors no apareixerien al mapa.</string>
     <string name="keep_passed_markers">Manté al mapa les fites assolides</string>
@@ -3036,4 +3036,18 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="markers_remove_dialog_msg">Voleu esborrar el marcador de mapa \'%s\'\?</string>
     <string name="edit_map_marker">Edita el marcador de mapa</string>
     <string name="third_party_application">Aplicació de tercers</string>
+    <string name="osm_live_plan_pricing">Pla i preu</string>
+    <string name="osm_live_payment_monthly_title">Pagament mensual</string>
+    <string name="osm_live_payment_3_months_title">Pagament trimestral</string>
+    <string name="osm_live_payment_annual_title">Pagament anual</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
+    <string name="osm_live_payment_discount_descr">Desa %1$s!</string>
+	<string name="osm_live_payment_current_subscription">La vostra subscripció actual</string>
+    <string name="osm_live_payment_renews_monthly">Renovació mensual</string>
+    <string name="osm_live_payment_renews_quarterly">Renovació trimestral</string>
+    <string name="osm_live_payment_renews_annually">Renovació anual</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Seleccioneu el període de pagament que us convingui:</string>
+    <string name="osm_live_payment_contribute_descr">Una part dels ingressos és pels col·laboradors d\'OpenStreetMap.</string>
     </resources>
