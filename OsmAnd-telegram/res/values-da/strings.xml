@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="background_work_description">Skift indstillinger for batterioptimering, for stabil deling af placering</string>
+<resources><string name="background_work_description">Skift indstillinger for batterioptimering, for stabil deling af placering.</string>
 	<string name="background_work">Baggrundstilstand</string>
 	<string name="battery_optimization_description">Sluk for batterioptimering af OsmAnd Telegram, så det ikke pludseligt bliver slukket, når det er i baggrunden.</string>
 	<string name="sharing_in_background">Deling i baggrunden</string>
@@ -75,8 +75,8 @@
 	<string name="shared_string_install">Installer</string>
 	<string name="shared_string_share">Del</string>
 	<string name="shared_string_back">Tilbage</string>
-	<string name="visible_time_for_all">Synlige tid for alle</string>
-	<string name="set_time_description">Sæt tidrummet hvor de valgte kontakter og grupper kan se placering i realtid.</string>
+	<string name="visible_time_for_all">Synlig tid for alle</string>
+	<string name="set_time_description">Sæt tiden hvor de valgte kontakter og grupper kan se placering i realtid.</string>
 	<string name="set_time">Sæt tid</string>
 	<string name="location_sharing_description">Vælg de kontakter og grupper, som placeringen skal deles med.</string>
 	<string name="my_location_search_hint">Søg: gruppe eller kontakt</string>
@@ -98,7 +98,7 @@
 	<string name="shared_string_cancel">Annuller</string>
 	<string name="shared_string_settings">Indstillinger</string>
 	<string name="no_location_permission">Mangler tilladelse til at bruge placeringsdata.</string>
-	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
+	<string name="gps_not_available">Tænd for \"Placering\" i systemindstillinger</string>
 	<string name="location_service_no_gps_available">Vælg en af placeringsudbyderne til at dele placering.</string>
 	<string name="osmand_service">Baggrundstilstand</string>
 	<string name="osmand_service_descr">OsmAnd Telegram kører i baggrunden med skærmen slukket.</string>
@@ -112,7 +112,7 @@
 	<string name="show_users_on_map">Vis brugere på kortet</string>
 	<string name="active_chats">Aktive samtaler</string>
 	<string name="shared_string_authorization">Autorisation</string>
-	<string name="shared_string_authorization_descr">Indtast telefonnummer på Telegram-konto i internationalt format</string>
+	<string name="shared_string_authorization_descr">Indtast Telegram telefonnummer i internationalt format</string>
 	<string name="shared_string_welcome">Velkommen</string>
 
 	<string name="yard">yd</string>
@@ -141,7 +141,7 @@
 	<string name="shared_string_hour_short">t</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">sek</string>
-	<string name="welcome_descr"><b>OsmAnd placeringsdeling</b> giver mulighed for at dele placering og se placering af andre i OsmAnd.<br/><br/>Programmet bruger Telegram API og skal have en Telegram konto.</string>
+	<string name="welcome_descr"><b>OsmAnd placeringsdeling</b> giver mulighed for at dele placering og se placering af andre i OsmAnd.<br/><br/>Programmet bruger Telegram API og skal bruge en Telegram konto.</string>
 	<string name="my_location">Placering</string>
 	
 
@@ -169,4 +169,8 @@
 	<string name="initialization">Starter</string>
 	<string name="logging_out">Logger ud</string>
 	<string name="closing">Lukker</string>
-	</resources>
+	<string name="gps_network_not_enabled">Tænd for \"Placering\"\?</string>
+	<string name="live_now">Live now</string>
+
+
+</resources>
