@@ -24,12 +24,12 @@ public interface OsmAndCustomizationConstants {
 
 	// Configure Map:
 
-	String ITEM_ID_SCHEME = "map.configure.";
-	String SHOW_ITEMS_ID_SCHEME = ITEM_ID_SCHEME + "show.";
-	String RENDERING_ITEMS_ID_SCHEME = ITEM_ID_SCHEME + "rendering.";
+	String CONFIGURE_MAP_ITEM_ID_SCHEME = "map.configure.";
+	String SHOW_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "show.";
+	String RENDERING_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "rendering.";
 	String CUSTOM_RENDERING_ITEMS_ID_SCHEME = RENDERING_ITEMS_ID_SCHEME + "custom.";
 
-	String APP_PROFILES_ID = ITEM_ID_SCHEME + "app_profiles";
+	String APP_PROFILES_ID = CONFIGURE_MAP_ITEM_ID_SCHEME + "app_profiles";
 
 	String SHOW_CATEGORY_ID = SHOW_ITEMS_ID_SCHEME + "category";
 	String FAVORITES_ID = SHOW_ITEMS_ID_SCHEME + "favorites";
