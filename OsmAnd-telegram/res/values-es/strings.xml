@@ -15,8 +15,6 @@
 	<string name="sharing_enabled">Compartir: Activado</string>
 	<string name="shared_string_status">Estado</string>
 	<string name="no_gps_connection">Sin conexión GPS</string>
-	<string name="sharing_success">Enviado y actualizado</string>
-	<string name="not_possible_to_send_to_chats">Imposible enviar a los chats:</string>
 	<string name="no_internet_connection">Sin conexión a Internet</string>
 	<string name="shared_string_disable">Desactivar</string>
 	<string name="add_device">Añadir dispositivo</string>
@@ -161,7 +159,6 @@
 	<string name="shared_string_hide">Ocultar</string>
 	<string name="share_location_as_description_second_line">Puedes crear y ver el ID de dispositivo en el cliente de telegrama usando el chat bot %1$s. %2$s</string>
 	<string name="share_location_as_description">Si deseas conectar varios dispositivos a una cuenta de telegram, debes utilizar un dispositivo diferente para compartir tu ubicación.</string>
-	<string name="add_new_device_description">Última ubicación actualizada:</string>
 	<string name="last_updated_location">Última ubicación actualizada:</string>
 	<string name="successfully_sent_and_updated">Enviado y actualizado con éxito</string>
 	</resources>
