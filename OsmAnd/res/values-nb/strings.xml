@@ -2449,7 +2449,7 @@
     <string name="rendering_exception">Kunne ikke tegne valgt område</string>
     <string name="renderer_load_sucess">Kartgenerator lastet</string>
     <string name="error_reading_gpx">Kunne ikke lese GPX-data</string>
-    <string name="any_poi">Alle</string>
+    <string name="any_poi">Hvilke som helst</string>
     <string name="thanks_yandex_traffic">Takk til Yandex for trafikkinfo.</string>
     <string name="layer_yandex_traffic">Yandex-trafikk</string>
     <string name="background_service_provider">Stedsbestemmelsestjeneste</string>
@@ -2556,7 +2556,7 @@
     <string name="shared_string_added">Lagt til</string>
     <string name="marker_activated">Markøren %s er aktivert.</string>
     <string name="one_tap_active_descr">Trykk en markør på kartet for å flytte den til toppen av de aktive markørene uten å åpne kontekstmenyen.</string>
-    <string name="one_tap_active">Ett-trykk aktiv</string>
+    <string name="one_tap_active">«Ett-trykk» aktiv</string>
     <string name="empty_state_av_notes">Ta notater!</string>
     <string name="empty_state_av_notes_desc">Legg til lyd-, video- eller bildenotat til hvert punkt på kartet, ved bruk av modul eller kontekstmeny.</string>
     <string name="notes_by_date">Notater etter dato</string>
@@ -2767,13 +2767,13 @@
     <string name="nothing_found_in_radius">Ingenting funnet innen radiusen:</string>
     <string name="select_waypoints_category_description">Legg til alle sporets rutepunkter, eller velg separate kategorier.</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
-    <string name="poi_error_info_not_loaded">Info om knutepunktet ble ikke innlastet</string>
+    <string name="poi_error_info_not_loaded">Info om knutepunktet ble ikke lastet inn</string>
     <string name="poi_dialog_other_tags_message">Alle andre etiketter beholdes</string>
     <string name="we_really_care_about_your_opinion">Vi bryr oss om din mening og din tilbakemelding er viktig.</string>
     <string name="number_of_rows_in_dash">Antall rader %1$s</string>
     <string name="show_free_version_banner">Vis gratisversjonsbanner</string>
     <string name="show_free_version_banner_description">Vis gratisversjonsbanneret selv i den betalte versjonen.</string>
-    <string name="commiting_node">Overfører knutepunkt…</string>
+    <string name="commiting_node">Sjekker inn knutepunkt…</string>
     <string name="previous_run_crashed">Den siste kjøringen av OsmAnd kræsjet. Loggfilen finnes i {0}. Rapporter hendelsen og legg ved loggfilen.</string>
     <string name="poi_error_poi_not_found">Knutepunktet ble ikke funnet, eller så består fasiliteten av flere knutepunkter som ikke støttes ennå.</string>
     <string name="android_19_location_disabled">Siden Android-versjon 4.4 (KitKat) kan du ikke laste ned og oppdatere kart til den gamle lagringsmappen (%s). Kopiere alle OsmAnd-filer til nytt lagringssted? 
@@ -3062,7 +3062,7 @@
 \n</string>
     <string name="ask_for_location_permission">Gi OsmAnd tilgang til plassering for å fortsette.</string>
     <string name="rendering_value_black_name">Svart</string>
-    <string name="more_transport_on_stop_hint">Det er mer transport på dette stoppet.</string>
+    <string name="more_transport_on_stop_hint">Det er flere ruter på dette stoppestedet.</string>
     <string name="markers_remove_dialog_msg">Slett kartmarkør \"%s\"\?</string>
     <string name="edit_map_marker">Rediger kartmarkør</string>
     <string name="third_party_application">Tredjepartsprogram</string>

@@ -164,4 +164,5 @@
 	<string name="shared_string_hide">Verbergen</string>
 	<string name="share_location_as_description_second_line">Sie können die Geräte-ID im Telegram-Client mit dem Chat-Bot %1$s erstellen und anzeigen. %2$s</string>
 	<string name="share_location_as_description">Wenn Sie mehrere Geräte mit einem Telegram-Konto verbinden möchten, müssen Sie ein anderes Gerät verwenden, um Ihren Standort zu teilen.</string>
+	<string name="add_new_device_description">Zuletzt aktualisierter Ort:</string>
 	</resources>

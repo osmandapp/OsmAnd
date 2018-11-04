@@ -1979,7 +1979,7 @@ Długość %2$s</string>
     <string name="default_speed_system_descr">Zdefiniuj jednostkę prędkości.</string>
     <string name="default_speed_system">Jednostki prędkości</string>
     <string name="si_nm">Mile morskie</string>
-    <string name="nm">nmi</string>
+    <string name="nm">Mm</string>
     <string name="si_kmh">Kilometry na godzinę</string>
     <string name="si_mph">Mile na godzinę</string>
     <string name="si_m_s">Metry na sekundę</string>

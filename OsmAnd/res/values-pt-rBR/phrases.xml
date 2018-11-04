@@ -1606,9 +1606,9 @@
 	<string name="poi_microbrewery_yes">Microcervejaria</string>
 	<string name="poi_microbrewery_no">Sem microcervejaria</string>
 
-	<string name="poi_takeaway_yes">Encomenda</string>
-	<string name="poi_takeaway_no">Sem encomenda</string>
-	<string name="poi_takeaway_only">Apenas encomenda</string>
+	<string name="poi_takeaway_yes">Para viagem</string>
+	<string name="poi_takeaway_no">Sem para viagem</string>
+	<string name="poi_takeaway_only">Apenas para viagem</string>
 
 	<string name="poi_delivery_yes">Entrega</string>
 	<string name="poi_delivery_no">Sem entrega</string>
@@ -3899,4 +3899,6 @@
 
 	<string name="poi_shoe_repair">Conserto de sapatos</string>
 
-</resources>
+<string name="poi_license_classes">Categorias</string>
+
+	</resources>
