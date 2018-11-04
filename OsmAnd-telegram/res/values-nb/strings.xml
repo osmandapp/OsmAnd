@@ -164,4 +164,13 @@
 	<string name="shared_string_hide">Skjul</string>
 	<string name="share_location_as_description_second_line">Du kan opprette og vise enhets-ID i Telegram-klienten ved bruk av %1$s-sludrebot-en. %2$s</string>
 	<string name="share_location_as_description">Hvis du vil koble flere enheter til én Telegram-konto, må du bruke en annen enhet til å dele din plassering.</string>
-	</resources>
+	<string name="shared_string_save">Lagre</string>
+	<string name="stop_sharing_all">Deling er på (skru av)</string>
+	<string name="initialization">Starter</string>
+	<string name="logging_out">Logger ut</string>
+	<string name="closing">Lukker</string>
+	<string name="gps_network_not_enabled">Skru på \"Plassering\"\?</string>
+	<string name="live_now">Sanntidsdeler nå</string>
+
+
+</resources>
