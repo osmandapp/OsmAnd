@@ -2563,7 +2563,7 @@
     <string name="by_date">Etter dato</string>
     <string name="by_type">Etter type</string>
     <string name="shared_string_more_without_dots">Mer</string>
-    <string name="add_favourites_group_to_markers_descr">Velg en favorittkategori å legge til markørene.</string>
+    <string name="add_favourites_group_to_markers_descr">Velg en favorittkategori å legge til markørene i.</string>
     <string name="show_number_pad">Vis numerisk tastatur</string>
     <string name="wrong_input">Feil inndata</string>
 	<string name="osn_modify_dialog_title">Endre notat</string>

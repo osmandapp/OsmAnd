@@ -2996,4 +2996,15 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_restore">Obnovi</string>
     <string name="thank_you_for_feedback">Zahvaljujemo se vam za vaš odziv</string>
     <string name="shared_string_world">Svet</string>
+    <string name="search_no_results_feedback">Na iskalni niz ni zadetkov iskanja\?
+\nPošljite nam odziv in podatke.</string>
+    <string name="send_search_query">Ali želite poslati iskalno poizvedbo\?</string>
+    <string name="point_deleted">Točka %1$s je izbrisana.</string>
+    <string name="coord_input_edit_point">Uredi točko</string>
+    <string name="coord_input_add_point">Dodaj točko</string>
+    <string name="coord_input_save_as_track">Shrani kot sled</string>
+    <string name="open_wikipedia_link_online">Odpri povezavo do spletišča Wikipedija</string>
+    <string name="open_wikipedia_link_online_description">Povezava bo odprta v spletnem brskalniku.</string>
+    <string name="download_all">Prejmi vse</string>
+    <string name="show_images">Pokaži slike</string>
     </resources>
