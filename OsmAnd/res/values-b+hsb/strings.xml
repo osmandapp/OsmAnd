@@ -1520,4 +1520,20 @@
     <string name="gpx_monitoring_start">GPX-nahrawanje započeć</string>
     <string name="gpx_monitoring_stop">GPX-nahrawanje zastajić</string>
     <string name="map_widget_monitoring">GPX-nahrawanje</string>
+    <string name="distance_farthest">Zdalenosć: najdalši jako prěni</string>
+    <string name="distance_nearest">Zdalenosć: najbliši jako prěni</string>
+    <string name="enter_lat_and_lon">Šěrinu a dołhotu zapodać</string>
+	<string name="east_abbreviation">W</string>
+	<string name="west_abbreviation">Z</string>
+	<string name="south_abbreviation">J</string>
+	<string name="north_abbreviation">S</string>
+	<string name="transport_nearby_routes_within">Bliske linije we wokruhu</string>
+    <string name="map_imported_successfully">Karta importěrowana</string>
+    <string name="osm_live_banner_desc">Za njewobmjezowane sćehnjenje kartow a aktualizacije husćišo hač jónu wob měsac: tydźensce, wšědnje abo hodźinsce.</string>
+    <string name="save_global_track_interval">Powšitkowny interwal nahrawanja</string>
+    <string name="save_track_to_gpx_globally">Čaru jako GPX-dataju nahrać</string>
+    <string name="save_track_interval_globally">Interwal nahrawanja</string>
+    <string name="save_track_interval">Interwal nahrawanja w běhu nawigacije</string>
+    <string name="save_track_interval_descr">Wuběr interwal za nahrawanje čary w běhu nawigacije.</string>
+    <string name="gpx_start_new_segment">Nowy wotrězk zahajić</string>
     </resources>
