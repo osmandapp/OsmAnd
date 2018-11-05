@@ -3871,4 +3871,27 @@
 <string name="poi_atm">Банкомат</string>
 	<string name="poi_shoe_repair">Ремонт взуття</string>
 
+<string name="poi_bulk_purchase">Масове придбання</string>
+	<string name="poi_substation_type">Тип</string>
+
+<string name="poi_bulk_purchase_yes">Масове придбання: так</string>
+	<string name="poi_bulk_purchase_only">Масове придбання: виключно</string>
+
+	<string name="poi_pipeline_substation">Трубопровідна підстанція</string>
+	<string name="poi_substation_transmission">Передавальна</string>
+	<string name="poi_substation_distribution">Розподільча</string>
+	<string name="poi_substation_minor_distribution">Локальна розподільча</string>
+	<string name="poi_substation_industrial">Промислова</string>
+	<string name="poi_substation_transition">Перехідна</string>
+	<string name="poi_substation_traction">Тягова</string>
+	<string name="poi_substation_converter">Перетворювальна</string>
+	<string name="poi_substation_compensation">Компенсаторна</string>
+
+	<string name="poi_substation_compression">Компресійна</string>
+	<string name="poi_substation_measurement">Вимірювальна</string>
+	<string name="poi_substation_valve">Вентиль</string>
+	<string name="poi_substation_valve_group">Група вентилів</string>
+	<string name="poi_substation_inspection_gauge">Контрольно-вимірювальна</string>
+	<string name="poi_substation_field_gathering">Збиральна</string>
+
 </resources>
