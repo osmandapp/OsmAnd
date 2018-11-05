@@ -134,7 +134,7 @@
 	<string name="poi_bicycle_service">kolesowarski serwis</string>
 	<string name="poi_payment_toll_type">wašnje zapłaćenja</string>
 	<string name="poi_traffic_signals_sound">Zwuk</string>
-	<string name="poi_subway_station_filter">Zastanišćo metra</string>
+	<string name="poi_subway_station_filter">zastanišćo metra</string>
 	<string name="poi_pump">Klumpa</string>
 	<string name="poi_city_capital">Stolica</string>
 	<string name="poi_religion_type">Nabožina</string>
@@ -2076,4 +2076,10 @@
 	<string name="poi_leaf_type_mixed">měšany</string>
 	<string name="poi_climbing_mixed_yes">měšane: haj</string>
 	<string name="poi_climbing_mixed_no">měšane: ně</string>
+	<string name="poi_aerialway_bicycle">transport kolesow</string>
+	<string name="poi_transportation">transport</string>
+	<string name="poi_bicycle_parking">parkowanje kolesow</string>
+
+	<string name="poi_railway_yard">nakładne dwórnišćo</string>
+
 	</resources>
