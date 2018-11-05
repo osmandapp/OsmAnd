@@ -169,16 +169,10 @@ public class RouteStatistics {
         }
 
         private int computeIncline(float prevHeight, float currHeight, float distance) {
+            if (distance == 0f) {
+                return 0;
+            }
             float incline = (currHeight - prevHeight) / distance * 100;
-            if (incline > 30f) {
-                incline = 30;
-            }
-            if (incline < -30f) {
-                incline = -30;
-            }
-            if (Float.isInfinite(incline) || Float.isNaN(incline)) {
-                incline = 0f;
-            }
             return Math.round(incline);
         }
 
