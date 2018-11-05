@@ -3938,4 +3938,27 @@
 <string name="poi_atm">Cajero automático</string>
 	<string name="poi_shoe_repair">Reparación de calzado;Zapatero</string>
 
+<string name="poi_bulk_purchase">Compra al por mayor</string>
+	<string name="poi_substation_type">Tipo de subestación</string>
+
+<string name="poi_bulk_purchase_yes">Compra al por mayor: sí</string>
+	<string name="poi_bulk_purchase_only">Compra al por mayor: solamente</string>
+
+	<string name="poi_pipeline_substation">Canalización de la subestación</string>
+	<string name="poi_substation_transmission">Transmisión</string>
+	<string name="poi_substation_distribution">Distribución</string>
+	<string name="poi_substation_minor_distribution">Distribución menor</string>
+	<string name="poi_substation_industrial">Industrial</string>
+	<string name="poi_substation_transition">Transición</string>
+	<string name="poi_substation_traction">Tracción</string>
+	<string name="poi_substation_converter">Convertidora</string>
+	<string name="poi_substation_compensation">Compensación</string>
+
+	<string name="poi_substation_compression">Compresión</string>
+	<string name="poi_substation_measurement">Medición</string>
+	<string name="poi_substation_valve">Válvula</string>
+	<string name="poi_substation_valve_group">Grupo de válvulas</string>
+	<string name="poi_substation_inspection_gauge">Calibre de inspección</string>
+	<string name="poi_substation_field_gathering">Recolección de campo</string>
+
 </resources>
