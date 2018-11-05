@@ -16,22 +16,22 @@ public class RouteStatistics {
         return new RouteStatistics(route);
     }
 
-    public RouteStatistic getRouteSurfaceStatistic() {
+    public Statistics getRouteSurfaceStatistic() {
         RouteStatisticComputer statisticComputer = new RouteSurfaceStatisticComputer(route);
         return statisticComputer.computeStatistic();
     }
 
-    public RouteStatistic getRouteSmoothnessStatistic() {
+    public Statistics getRouteSmoothnessStatistic() {
         RouteStatisticComputer statisticComputer = new RouteSmoothnessStatisticComputer(route);
         return statisticComputer.computeStatistic();
     }
 
-    public RouteStatistic getRouteClassStatistic() {
+    public Statistics getRouteClassStatistic() {
         RouteStatisticComputer statisticComputer = new RouteClassStatisticComputer(route);
         return statisticComputer.computeStatistic();
     }
 
-    public RouteStatistic getRouteSteepnessStatistic() {
+    public Statistics getRouteSteepnessStatistic() {
         RouteStatisticComputer statisticComputer = new RouteSteepnessStatisticComputer(route);
         return statisticComputer.computeStatistic();
     }
@@ -93,44 +93,15 @@ public class RouteStatistics {
             return routes;
         }
 
-        public RouteStatistic computeStatistic() {
+        public Statistics computeStatistic() {
             List<RouteSegmentAttribute> routeAttributes = processRoute();
             Map<String, RouteSegmentAttribute> partition = makePartition(routeAttributes);
             float totalDistance = computeTotalDistance(routeAttributes);
-            return new RouteStatisticImpl(routeAttributes, partition, totalDistance);
+            return new Statistics(routeAttributes, partition, totalDistance);
         }
 
         public abstract String getAttribute(RouteSegmentResult segment);
 
-        private static class RouteStatisticImpl implements RouteStatistic {
-
-            private final List<RouteStatistics.RouteSegmentAttribute> elements;
-            private final Map<String, RouteStatistics.RouteSegmentAttribute> partition;
-            private final float totalDistance;
-
-            public RouteStatisticImpl(List<RouteSegmentAttribute> elements,
-                                       Map<String, RouteSegmentAttribute> partition,
-                                       float totalDistance) {
-                this.elements = elements;
-                this.partition = partition;
-                this.totalDistance = totalDistance;
-            }
-
-            @Override
-            public float getTotalDistance() {
-                return totalDistance;
-            }
-
-            @Override
-            public List<RouteSegmentAttribute> getElements() {
-                return new ArrayList<>(elements);
-            }
-
-            @Override
-            public Map<String, RouteSegmentAttribute> getPartition() {
-                return new HashMap<>(partition);
-            }
-        }
     }
 
 
@@ -197,15 +168,18 @@ public class RouteStatistics {
             super(route);
         }
 
-        private float computeIncline(float prevHeight, float currHeight, float distance) {
-            float incline = (currHeight - prevHeight) / distance;
-            if (incline > 30f || incline < -30f) {
-                throw new IllegalArgumentException("Invalid incline " + incline);
+        private int computeIncline(float prevHeight, float currHeight, float distance) {
+            float incline = (currHeight - prevHeight) / distance * 100;
+            if (incline > 30f) {
+                incline = 30;
+            }
+            if (incline < -30f) {
+                incline = -30;
             }
             if (Float.isInfinite(incline) || Float.isNaN(incline)) {
                 incline = 0f;
             }
-            return incline * 100;
+            return Math.round(incline);
         }
 
         private List<Incline> computeSegmentInclines() {
@@ -224,7 +198,7 @@ public class RouteStatistics {
                     float prevHeight = heights[prevHeightIndex];
                     float currHeight = heights[currHeightIndex];
                     float distanceBetweenHeights = heights[distanceBetweenHeightsIndex];
-                    float computedIncline = computeIncline(prevHeight, currHeight, distanceBetweenHeights);
+                    int computedIncline = computeIncline(prevHeight, currHeight, distanceBetweenHeights);
                     Incline incline = new Incline(computedIncline, distanceBetweenHeights);
                     inclines.add(incline);
                 }
@@ -299,66 +273,18 @@ public class RouteStatistics {
         }
     }
 
-
-
     private static class Incline {
 
-        private static final float MAX_INCLINE = 30;
-        private static final float MIN_INCLINE = -30;
-        private static final float STEP = 3;
-        private static final int NUM;
-        private static final float[] INTERVALS;
-
-        static {
-            NUM = (int) ((MAX_INCLINE - MIN_INCLINE) / STEP) + 1;
-            INTERVALS = new float[NUM];
-            for (int k = 0; k < INTERVALS.length; k++) {
-                INTERVALS[k] = STEP * k + MIN_INCLINE;
-            }
-        }
-
-        private void determineBoundaries(float incline) {
-            for (int pos = 1; pos < INTERVALS.length; pos++) {
-                float lower = INTERVALS[pos - 1];
-                float upper = INTERVALS[pos];
-                if (incline >= lower && incline < upper) {
-                    this.lowerBoundary = lower;
-                    this.upperBoundary = upper;
-                    this.middlePoint = (upperBoundary + lowerBoundary) / 2f;
-                    break;
-                }
-            }
-        }
-
-        private float upperBoundary;
-        private float lowerBoundary;
-        private float middlePoint;
-
-        private final float inclineValue;
+        private int inclineValue;
         private final float distance;
 
-        public Incline(float inclineValue, float distance) {
+        public Incline(int inclineValue, float distance) {
             this.inclineValue = inclineValue;
             this.distance = distance;
-            determineBoundaries(inclineValue);
-            if (upperBoundary == lowerBoundary) {
-                throw new IllegalArgumentException("Invalid boundaries");
-            }
         }
 
-        public float getUpperBoundary() {
-            return upperBoundary;
-        }
 
-        public float getLowerBoundary() {
-            return lowerBoundary;
-        }
-
-        public float getMiddlePoint() {
-            return middlePoint;
-        }
-
-        public float getValue() {
+        public int getValue() {
             return inclineValue;
         }
 
@@ -367,18 +293,99 @@ public class RouteStatistics {
         }
 
         public String getBoundariesAsString() {
-            return String.format("%.2f|%.2f", getLowerBoundary(), getUpperBoundary());
+            return String.valueOf(getValue());
         }
 
         @Override
         public String toString() {
             return "Incline{" +
-                    "upperBoundary=" + upperBoundary +
-                    ", lowerBoundary=" + lowerBoundary +
-                    ", middlePoint=" + middlePoint +
                     ", incline=" + inclineValue +
                     ", distance=" + distance +
                     '}';
+        }
+    }
+
+    public static class Statistics  {
+
+        private final List<RouteSegmentAttribute> elements;
+        private final Map<String, RouteSegmentAttribute> partition;
+        private final float totalDistance;
+
+        public Statistics(List<RouteSegmentAttribute> elements,
+                          Map<String, RouteSegmentAttribute> partition,
+                          float totalDistance) {
+            this.elements = elements;
+            this.partition = partition;
+            this.totalDistance = totalDistance;
+        }
+
+        public float getTotalDistance() {
+            return totalDistance;
+        }
+
+        public List<RouteSegmentAttribute> getElements() {
+            return new ArrayList<>(elements);
+        }
+
+        public Map<String, RouteSegmentAttribute> getPartition() {
+            return new HashMap<>(partition);
+        }
+    }
+
+    public enum RoadClass {
+        MOTORWAY("motorway", "motorway_link"),
+        STATE_ROAD("trunk", "trunk_link", "primary", "primary_link"),
+        ROAD("secondary", "secondary_link", "tertiary", "tertiary_link", "unclassified"),
+        STREET("residential", "living_street"),
+        SERVICE("service"),
+        TRACK("track", "road"),
+        FOOTWAY("footway"),
+        PATH("path"),
+        CYCLE_WAY("cycleway");
+
+        final Set<String> roadClasses = new TreeSet<>();
+
+        RoadClass(String... classes) {
+           roadClasses.addAll(Arrays.asList(classes));
+        }
+
+        boolean contains(String roadClass) {
+            return roadClasses.contains(roadClass);
+        }
+    }
+
+    public enum RoadSurface {
+        PAVED("paved"),
+        UNPAVED("unpaved"),
+        ASPHALT("asphalt"),
+        CONCRETE("concrete"),
+        COMPACTED("compacted"),
+        GRAVEL("gravel"),
+        FINE_GRAVEL("fine_gravel"),
+        PAVING_STONES("paving_stones"),
+        SETT("sett"),
+        COBBLESTONE("cobblestone"),
+        PEBBLESTONE("pebblestone"),
+        STONE("stone"),
+        METAL("metal"),
+        GROUND("ground", "mud"),
+        WOOD("wood"),
+        GRASS_PAVER("grass_paver"),
+        GRASS("grass"),
+        SAND("sand"),
+        SALT("salt"),
+        SNOW("snow"),
+        ICE("ice"),
+        CLAY("clay");
+
+        final Set<String> surfaces = new TreeSet<>();
+
+        RoadSurface(String... surfaces) {
+            this.surfaces.addAll(Arrays.asList(surfaces));
+        }
+
+        boolean contains(String surface) {
+            return surfaces.contains(surface);
         }
     }
 }
