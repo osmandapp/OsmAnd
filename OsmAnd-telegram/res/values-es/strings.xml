@@ -161,4 +161,5 @@
 	<string name="share_location_as_description">Si deseas conectar varios dispositivos a una cuenta de telegram, debes utilizar un dispositivo diferente para compartir tu ubicación.</string>
 	<string name="last_updated_location">Última ubicación actualizada:</string>
 	<string name="successfully_sent_and_updated">Enviado y actualizado con éxito</string>
+	<string name="shared_string_save">Guardar</string>
 	</resources>

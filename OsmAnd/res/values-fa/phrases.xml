@@ -740,7 +740,7 @@
 
 	<string name="facebook">فیسبوک</string>
 	<string name="poi_access_private">دسترسی خصوصی</string>
-	<string name="poi_access_no">ورود ممنوع</string>
+	<string name="poi_access_no">دسترسی ندارد</string>
 	<string name="poi_access_customers">دسترسی مشتری</string>
 	<string name="poi_access_agricultural">دسترسی کشاورزی</string>
 
@@ -1146,4 +1146,15 @@
 	<string name="poi_cuisine_grill">توری</string>
 	<string name="poi_cuisine_tea">چای</string>
 	<string name="poi_cuisine_soup">سوپ</string>
+	<string name="poi_tourism_yes">چیز گردشگری</string>
+	<string name="poi_internet_access_no">دسترسی اینترنت: ندارد</string>
+	<string name="poi_internet_access_fee_no">دسترسی اینترنت - بدون هزینه</string>
+
+	<string name="poi_fee_no">خیر</string>
+	<string name="poi_drinking_water_no">خیر</string>
+	<string name="poi_seasonal_no">خیر</string>
+	<string name="poi_traffic_signals_sound_no">خیر</string>
+	<string name="poi_piste_grooming_no">خیر</string>
+	<string name="poi_historic_quarry">"معدن تاریخی سنگ "</string>
+
 	</resources>

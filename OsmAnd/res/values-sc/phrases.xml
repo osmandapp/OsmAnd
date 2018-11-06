@@ -3901,4 +3901,27 @@
 <string name="poi_atm">Bancomat</string>
 	<string name="poi_shoe_repair">Acontzu de iscarpas</string>
 
+<string name="poi_bulk_purchase">Còmpora a s\'ingrossu</string>
+	<string name="poi_substation_type">Casta</string>
+
+<string name="poi_bulk_purchase_yes">Còmpora a s\'ingrossu: eja</string>
+	<string name="poi_bulk_purchase_only">Compora a s\'ingrossu: petzi</string>
+
+	<string name="poi_pipeline_substation">Sutaistatzione de sas condutas</string>
+	<string name="poi_substation_transmission">Trasmissione</string>
+	<string name="poi_substation_distribution">Distributzione</string>
+	<string name="poi_substation_minor_distribution">Distributzione minore</string>
+	<string name="poi_substation_industrial">Industriale</string>
+	<string name="poi_substation_transition">Transitzione</string>
+	<string name="poi_substation_traction">Tratzione</string>
+	<string name="poi_substation_converter">Cunvertidore</string>
+	<string name="poi_substation_compensation">Cumpensatzione</string>
+
+	<string name="poi_substation_compression">Compressione</string>
+	<string name="poi_substation_measurement">Mèdida</string>
+	<string name="poi_substation_valve">Vàlvula</string>
+	<string name="poi_substation_valve_group">Grupu de vàlvulas</string>
+	<string name="poi_substation_inspection_gauge">Indicadore de ispetzione</string>
+	<string name="poi_substation_field_gathering">Regorta de campu</string>
+
 </resources>

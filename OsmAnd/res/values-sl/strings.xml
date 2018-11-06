@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="search_button">Poišči</string>
+    <string name="search_button">Iskanje ►</string>
     <string name="search_activity">Iskanje podatkov</string>
 
     <string name="choose_available_region">Izberi regijo s seznama</string>
@@ -217,9 +217,9 @@
 
     <string name="unit_of_length_descr">Izbor enote za prikaz dolžine.</string>
     <string name="unit_of_length">Enote dolžine</string>
-    <string name="si_mi_feet">Milje / Čevlji</string>
-    <string name="si_mi_yard">Milje / Jardi</string>
-    <string name="si_km_m">Kilometri / Metri</string>
+    <string name="si_mi_feet">Milje/Čevlji</string>
+    <string name="si_mi_yard">Milje/Jardi</string>
+    <string name="si_km_m">Kilometri/Metri</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
@@ -484,7 +484,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="city_type_village">Vas</string>
     <string name="city_type_town">Kraj</string>
     <string name="favorite_friends_category">Naslovi prijateljev</string>
-    <string name="shared_string_name">Naziv</string>
+    <string name="shared_string_name">Ime</string>
     <string name="favourites_edit_dialog_category">Skupina</string>
     <string name="shared_string_others">Druge točke</string>
     <string name="favorite_home_category">Domači naslovi</string>
@@ -598,7 +598,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     
     
     
-    <string name="osb_comment_dialog_success">Opomba je bila uspešno dodana</string>
+    <string name="osb_comment_dialog_success">Opomba je dodana</string>
     <string name="osb_comment_dialog_error">Opombe ni mogoče dodati</string>
     
     
@@ -668,7 +668,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="pref_vector_rendering">Možnosti vektorskega izrisovanja</string>
     <string name="pref_overlay">Prekrivna plast/Podloga zemljevida</string>
     <string name="pref_raster_map">Nastavitve vira zemljevidov</string>
-    <string name="pref_vector_map">Nastavitve vektorskega zemljevida</string>
+    <string name="pref_vector_map">Možnosti vektorskega zemljevida</string>
     <string name="delete_confirmation_msg">Ali želite izbrisati %1$s?</string>
     <string name="city_type_suburb">Predmestje</string>
 
@@ -712,7 +712,9 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="gpx_option_reverse_route">Obratna smer GPX</string>
     <string name="gpx_option_destination_point">Uporabi trenutni cilj</string>
     <string name="gpx_option_from_start_point">Podaj celotno sled</string>
-    <string name="switch_to_vector_map_to_see">Za to območje zemljevida so na voljo vektorski zemljevidi za delo brez povezave.\n\t\n\tOmogočite jih lahko preko \'Menija\' → \'Nastavitve zemljevida\' → \'Vir zemljevida …\' → \'Vektorski zemljevidi za delo brez povezave\'.</string>
+    <string name="switch_to_vector_map_to_see">Za to območje so na voljo vektorski zemljevidi za delo brez povezave.
+\n\t
+\n\tMožnosti so na voljo v »Meniju« → »Možnosti zemljevida« → »Vir zemljevida …« → »Vektorski zemljevidi za delo brez povezave«.</string>
     <string name="voice_stream_notification">Zvok obvestila</string>
     <string name="voice_stream_music">Zvok glasbe</string>
     <string name="warning_tile_layer_not_downloadable">Program ne more prejeti podatkovnega sloja zemljevida %1$s. Poskusite ga ponovno namestiti.</string>
@@ -1574,14 +1576,14 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="map_widget_right">Desni pult</string>
     <string name="map_widget_left">Levi pult</string>
     <string name="shared_string_show">Pokaži</string>
-    <string name="configure_map">Nastavitve zemljevida</string>
+    <string name="configure_map">Možnosti zemljevida</string>
     <string name="search_radius_proximity">Znotraj</string>
     
     
-    <string name="anonymous_user_hint">Brezimni uporabnik ne more:
-- ustvariti skupin,
-- usklajevati skupin in naprav s strežnikom,
-- zasebno upravljati skupin in naprav prek spletnega vmesnika.</string>
+    <string name="anonymous_user_hint">Nevpisan uporabnik ne more:
+\n- ustvarjati skupin,
+\n- usklajevati skupin in naprav s strežnikom,
+\n- zasebno upravljati skupin in naprav prek spletnega vmesnika.</string>
     <string name="anonymous_user">Brezimni uporabnik</string>
     <string name="logged_as">Prijava kot %1$s</string>
     <string name="speed_limit_exceed">Upoštevanje omejitve hitrosti</string>
@@ -1741,7 +1743,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="shared_string_show_description">Pokaži opis.</string>
     <string name="agps_data_last_downloaded">Zadnja osvežitev podatkov A-GPS: %1$s</string>
     <string name="confirm_usage_speed_cameras">V mnogih državah (na primer v Nemčiji, Franciji, Italiji in drugih) je uporaba kamer za merjenje hitrosti prepovedana z zakonom. Razvijalci programa ne sprejemamo odgovornosti za tako rabo. Potrdite uporabo le, če ste res prepričani v svoje ravnanje.</string>
-    <string name="welmode_download_maps">Prejmi zemljevide</string>
+    <string name="welmode_download_maps">Posodobitve zemljevidov</string>
     <string name="welcome_select_region">Za pravilno prikazovanje prometnih določil mora biti izbran krajevni prometni režim. Trenutno dejaven je način:</string>
     <string name="welcome_text">Program OsmAnd omogoča navigacijo s kakovostnimi brezplačnimi zemljevidi v načinu brez povezave.</string>
     <string name="current_route">Trenutna pot</string>
@@ -1918,7 +1920,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="roads">Poti</string>
     <string name="shared_string_trip_recording">Beleženje poti</string>
     <string name="shared_string_navigation">Navigacija</string>
-    <string name="osmand_running_in_background">Delovanje v ozadju</string>
+    <string name="osmand_running_in_background">Zaženi v ozadju</string>
     <string name="favourites_edit_dialog_title">Podrobnosti o točki</string>
     <string name="favourites_context_menu_add">Dodaj priljubljeno</string>
     <string name="favorite_category_add_new">Dodaj novo</string>
@@ -1926,7 +1928,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="default_speed_system_descr">Določi enoto hitrosti.</string>
     <string name="default_speed_system">Enota hitrosti</string>
     <string name="nm">nmi</string>
-    <string name="si_nm">Morske milje</string>
+    <string name="si_nm">Navtične milje</string>
     <string name="si_kmh">Kilometri na uro</string>
     <string name="si_mph">Milje na uro</string>
     <string name="si_m_s">Metri na sekundo</string>
@@ -1954,7 +1956,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="world_maps">Svetovni zemljevidi</string>
 
     <string name="downloads">Prejemi</string>
-    <string name="favorite_category_dublicate_message">Ime kategorije že obstaja. Izberite drugo ime.</string>
+    <string name="favorite_category_dublicate_message">Določiti je treba ime kategorije, ki še ne obstaja.</string>
     <string name="favorite_category_name">Ime kategorije</string>
     <string name="favorite_category_add_new_title">Dodaj kategorijo</string>
     <string name="confirm_download_roadmaps">Ali ste prepričani, da želite prejeti zemljevid le s podatki cest, čeprav je nameščen že polni zemljevid?</string>
@@ -2036,9 +2038,9 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
 	<string name="osn_comment_dialog_title">Dodaj opombo</string>
 	<string name="osn_reopen_dialog_title">Ponovno odpri opombo</string>
 	<string name="osn_close_dialog_title">Zapri opombo</string>
-	<string name="osn_add_dialog_success">Opomba je uspešno ustvarjena</string>
+	<string name="osn_add_dialog_success">Opomba je ustvarjena</string>
 	<string name="osn_add_dialog_error">Opombe ni mogoče ustvariti</string>
-	<string name="osn_close_dialog_success">Opomba je uspešno zaprta</string>
+	<string name="osn_close_dialog_success">Opomba je zaprta</string>
 	<string name="osn_close_dialog_error">Opombe ni mogoče zapreti</string>
 	<string name="shared_string_commit">Uveljavi</string>
 	
@@ -2115,7 +2117,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="number_of_edits">Število urejanj</string>
     <string name="reports_for">Poročilo za</string>
 <string name="shared_string_remove">Odstrani</string>
-    <string name="clear_updates_proposition_message">Posodobitve zemljevidov je mogoče izbrisati in povrniti stanje na izvorni zemljevid.</string>
+    <string name="clear_updates_proposition_message">Odstrani prejete posodobitve in povrniti stanje na izvorni zemljevid</string>
     <string name="add_time_span">Dodaj časovni razmik</string>
     <string name="road_blocked">Cesta je zaprta</string>
     <string name="rendering_attr_hideUnderground_name">Ne izriši podzemnih zgradb</string>
@@ -2141,17 +2143,15 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="map_marker_2nd">Druga označba na zemljevidu</string>
     <string name="shared_string_toolbar">Orodna vrstica</string>
     <string name="shared_string_widgets">Gradniki</string>
-    <string name="add_points_to_map_markers_q">Ali želite dodati vse točke k označbam zemljevida?</string>
+    <string name="add_points_to_map_markers_q">Ali želite dodati vse točke na zemljevid kot označbe\?</string>
     <string name="shared_string_add_to_map_markers">Dodaj med označbe zemljevida</string>
-    <string name="consider_turning_polygons_off">Priporočljivo je onemogočiti izrisovanje poligonov.</string>
+    <string name="consider_turning_polygons_off">Priporočljivo je onemogočiti izrisovanje večkotnikov.</string>
     <string name="select_map_marker">Izbor označbe na zemljevidu</string>
     <string name="map_markers_other">Druge označbe</string>
     <string name="download_files_error_not_enough_space">Ni dovolj prostora!
  Možnost zahteva {3} MB začasnega in {1} MB trajnega pomnilnika.
  Na voljo je le {2} MB prostora.</string>
-    <string name="download_files_question_space_with_temp">Ali res želite prejeti datoteke {0}?
- Prejem zahteva {3} MB začasnega in {1} MB trajnega pomnilnika.
- (Na voljo je le {2} MB.)</string>
+    <string name="download_files_question_space_with_temp">Ali res želite prejeti datoteke ({0})\? Prejem zahteva {3} MB začasnega in {1} MB stalnega prostora (na napravi je na voljo {2} MB).</string>
     <string name="upload_osm_note_description">Opombo OSM je mogoče poslati brezimno, ali pa prek profila OpenStreetMap.org.</string>
     <string name="upload_osm_note">Pošlji Opombo OSM</string>
     <string name="upload_anonymously">Pošlji anonimno</string>
@@ -2162,7 +2162,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="number_of_recipients">Število prejemnikov</string>
     <string name="osm_user_stat">Urejanj: %1$s, rang: %2$s, skupno urejanj: %3$s</string>
     <string name="osm_editors_ranking">Rangiranje urednikov OSM</string>
-    <string name="osm_live_subscription">Naročila OSM</string>
+    <string name="osm_live_subscription">Naročnina na storitev OsmAnd Live</string>
     <string name="osm_live_email_desc">Podatke potrebujemo za posredovanje
 \npodrobnosti o potrjenih objavah.</string>
     <string name="osm_live_user_public_name">Javno ime</string>
@@ -2172,13 +2172,12 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="osm_live_month_cost_desc">Mesečno plačilo</string>
     <string name="osm_live_active">Dejaven</string>
     <string name="osm_live_not_active">Nedejaven</string>
-    <string name="osm_live_enter_email">Vpišite veljavni elektronski naslov</string>
+    <string name="osm_live_enter_email">Vpišite veljaven elektronski naslov</string>
     <string name="osm_live_enter_user_name">Vpišite naziv ali ime, ki bo prikazano javno</string>
     <string name="osm_live_thanks">Zahvaljujemo se vam za naročilo\nna sprotne posodobitve!</string>
     <string name="osm_live_region_desc">Del donacije bo posredovan uporabnikom OSM, ki objavljajo spremembe zemljevidov v vaši najpogosteje uporabljeni regiji.</string>
     <string name="osm_live_subscription_settings">Nastavitve naročil</string>
-    <string name="osm_live_ask_for_purchase">Najprej je treba kupiti
-\nnaročnino na OSM v živo.</string>
+    <string name="osm_live_ask_for_purchase">Najprej se je treba naročiti na storitve OsmAnd Live.</string>
 
     <string name="shared_string_topbar">Vrhnja vrstica</string>
     <string name="avoid_road">Izogni se cesti</string>
@@ -2195,18 +2194,17 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
 <string name="no_map_markers_found">Ni nobene določene označbe</string>
     <string name="no_waypoints_found">Ni vmesnih točk</string>
     
-    <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta.
-Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to dober način za začetek sodelovanja.</string>
+    <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta. Del prihodka se vrne v skupnost OSM in se izplačuje za vsako opravljeno dejavnost oziroma podporo. Če sta vam OsmAnd in OSM všeč in bi želeli projekt podpreti, je to dober način za začetek sodelovanja.</string>
     
     <string name="rendering_value_thin_name">Tanko</string>
     <string name="rendering_value_medium_name">Srednje</string>
     <string name="rendering_value_bold_name">Krepko</string>
     <string name="access_disable_offroute_recalc">Ne preračunavaj poti, če navigacija skrene s poti</string>
-    <string name="access_disable_offroute_recalc_descr">Prepreči samodejno preračunavanje poti, ko je trenutna navigacija daleč od začrtane poti.</string>
+    <string name="access_disable_offroute_recalc_descr">Prepreči preračunavanje poti pri večjem odstopanju od začrtane poti.</string>
     <string name="access_disable_wrong_direction_recalc">Ne spreminjaj začrtane poti, če je trenutna smer v obratni smeri poti</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Prepreči samodejno preračunavanje poti, ko je trenutno gibanje v nasprotni smeri.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Prepreči preračunavanje poti pri gibanju v nasprotni smeri vodenja.</string>
     <string name="access_smart_autoannounce">Pametno napovedovanje</string>
-    <string name="access_smart_autoannounce_descr">Napovej obvestilo le, če je spremenjena ciljna točka.</string>
+    <string name="access_smart_autoannounce_descr">Napovej obvestilo le, če se spremeni smer do ciljne točke.</string>
     <string name="access_autoannounce_period">Obdobje napovedovanja</string>
     <string name="access_autoannounce_period_descr">Najmanjši časovni razmik med najavami.</string>
     <string name="access_default_color">Privzeta barva</string>
@@ -2229,8 +2227,8 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="map_widget_bearing">Relativna smer</string>
     <string name="access_no_destination">Ciljno mesto še ni določeno</string>
     <string name="map_widget_magnetic_bearing">Smer po magnetnem polju</string>
-    <string name="use_osm_live_routing_description">Omogoči navigacijo za spremembe OSM v živo.</string>
-	<string name="use_osm_live_routing">Navigacija OSM v živo</string>
+    <string name="use_osm_live_routing_description">Omogoči navigacijo z uporabo storitve OsmAnd Live.</string>
+	<string name="use_osm_live_routing">Navigacija s storitvijo OsmAnd Live</string>
     <string name="follow_us">Sledi nam</string>
     <string name="access_direction_audio_feedback">Zvočno najavljanje smeri</string>
     <string name="access_direction_audio_feedback_descr">Določi smer ciljne točke z zvokom.</string>
@@ -2285,10 +2283,10 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="no_inet_connection_desc_map">Zahtevano je prejemanje zemljevidov</string>
     <string name="search_location">Iskanje mesta …</string>
     <string name="storage_free_space">Razpoložljiv prostor</string>
-    <string name="storage_place_description">Shranjevanje podatkov OsmAnd (zemljevidi, sledi in drugo): %1$s.</string>
+    <string name="storage_place_description">Shranjevanje podatkov OsmAnd (zemljevidi, datoteke GPX in drugo): %1$s.</string>
     <string name="give_permission">Dodeli dovoljenje</string>
     <string name="allow_access_location">Dovoli dostop do mesta</string>
-    <string name="first_usage_greeting">Pridobi mesta in razišči nove kraje brez internetne povezave</string>
+    <string name="first_usage_greeting">Kakovostno vodenje za raziskovanje novih krajev brez internetne povezave</string>
     <string name="search_my_location">Najdi moje mesto</string>
     <string name="no_update_info">Ne pokaži posodobitev</string>
     <string name="update_all_maps_now">Ali želite posodobiti vse zemljevide?</string>
@@ -2300,7 +2298,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="get_it">Pridobi</string>
     <string name="get_for">Pridobi za %1$s</string>
     <string name="get_for_month">Pridobi za %1$s na mesec</string>
-    <string name="si_mi_meters">Milje / Metri</string>
+    <string name="si_mi_meters">Milje/Metri</string>
     <string name="lang_kab">Kabili</string>
     <string name="driving_region_australia">Avstralija</string>
     <string name="shared_string_filters">Filtri</string>
@@ -2311,8 +2309,8 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="new_filter_desc">Vpisati je treba ime novega filtra, ki se bo pojavilo na seznamu »kategorij«.</string>
     <string name="osm_live_payment_desc">Naročnina se obračuna mesečno. kadarkoli jo je mogoče preklicati prek Google Play.</string>
     <string name="donation_to_osm_desc">Del donacije se prenese uporabnikom OSM, ki so objavljali posodobitve na spletišču OpenStreetMap. Vsota naročnine ostaja nespremenjena.</string>
-    <string name="osm_live_subscription_desc">Naročnina omogoča urne, dnevne ali tedenske posodobitve in neomejene prejeme kateregakoli zemljevida.</string>
-    <string name="osm_live_banner_desc">Pridobite si neomejen dostop do zemljevidov in drugih posodobitev več kot le enkrat mesečno: tedensko, dnevno ali vsako uro.</string>
+    <string name="osm_live_subscription_desc">Naročnina omogoča urne, dnevne ali tedenske posodobitve in neomejene prejeme vseh zemljevidov.</string>
+    <string name="osm_live_banner_desc">Pridobite si neomejen dostop do zemljevidov in drugih posodobitev: ne le enkrat mesečno, ampak tedensko, dnevno ali kar vsako uro.</string>
     <string name="osmand_plus_banner_desc">Neomejene posodobitve zemljevidov, programske posodobitve in vstavek za Wikipedijo.</string>
     <string name="edit_filter">Uredi kategorije</string>
     <string name="subcategories">Podkategorije</string>
@@ -2351,9 +2349,9 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="rendering_attr_contourColorScheme_name">Barvna shema izohips</string>
     <string name="upload_poi">Pošlji točko POI</string>
     <string name="route_calculation">Izračunavanje poti</string>
-    <string name="gpx_no_tracks_title">Ni še shranjenih poti</string>
-    <string name="gpx_no_tracks_title_folder">Poti so shranjene v mapi</string>
-    <string name="gpx_add_track">Dodaj pot</string>
+    <string name="gpx_no_tracks_title">Ni še shranjenih datotek GPX</string>
+    <string name="gpx_no_tracks_title_folder">Datoteke GPX je mogoče dodati tudi v mapo</string>
+    <string name="gpx_add_track">Dodaj več …</string>
     <string name="gpx_appearance">Videz</string>
     <string name="rendering_value_fine_name">Drobno</string>
     <string name="route_roundabout_short">Pojdite na %1$d izhod in nadaljujte</string>
@@ -2542,7 +2540,20 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="edit_name">Uredi ime</string>
     <string name="select_street">Izbor ulice</string>
     <string name="osmand_extended_description_part4">Smučanje Smučarski zemljevidi OsmAnd omogočajo pregled prog in ocenjene ravni zahtevnosti, na voljo pa so tudi podatki o postavitvi žičnic in drugih pomembnih zgradbah.</string>
-    <string name="osmand_plus_extended_description_part8">"Približna pokritost zemljevidov in kakovost podatkov: • Zahodna Evropa: **** • Vzhodna Evropa: *** • Rusija: *** • Severna Amerika: *** • Južna Amerika: ** • Azija:  • Japonska &amp; Koreja: *** • Bližnji Vzhod: ** • Afrika: ** • Anketarica: * Zemljevidi večine držav so na voljo za prejem! Od Afganistana to Zimbabveja, od Avstralije do Združenih držav. Argentina, Brazilija, Kanada, Francija, Nemčija, Mehika, Združeno kraljestvo, Španija …"</string>
+    <string name="osmand_plus_extended_description_part8">Približna pokritost zemljevidov in kakovost podatkov:
+\n• Zahodna Evropa: ****
+\n• Vzhodna Evropa: ***
+\n• Rusija: ***
+\n• Severna Amerika: ***
+\n• Južna Amerika: **
+\n• Azija: **
+\n• Japonska &amp; Koreja: ***
+\n• Bližnji Vzhod: **
+\n• Afrika: **
+\n• Antarktika: *
+\nZemljevidi večine držav so na voljo za prejem!
+\nOd Afganistana to Zimbabveja, od Avstralije do Združenih držav. Argentina, Brazilija, Kanada, Francija, Nemčija, Mehika, Združeno kraljestvo, Španija, Slovenija …
+\n</string>
     <string name="save_poi_too_many_uppercase">V imenu je preveč velikih črk. Ali želite vseeno nadaljevati?</string>
     <string name="restart_search">Ponovno začni iskanje</string>
     <string name="increase_search_radius">Povečaj območje iskanja</string>
@@ -2610,7 +2621,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n • Beležijo se podatki hitrosti in spremembe višine
 \n • Možnost shranjevanja poti GPX omogoča beleženje in izmenjavo poti
 \n • Prek dodatnih vstavkov je mogoče prikazati tudi izohipse terena in senčenje hribovitih predelov</string>
-    <string name="osmand_plus_extended_description_part5">Varnostne možnosti • Izbirno preklapljanje dnevno-nočnega pogleda • Nastavitev prikaza omejitev hitrosti z možnostjo opozoril v primeru prekoračitev • Prilagajanje približanja zemljevida glede na hitrost vožnje • Skupinsko objavljanje podatkov o trenutni točki za lažje iskanje med prijatelji</string>
+    <string name="osmand_plus_extended_description_part5">Varnostne možnosti
+\n• Izbirno preklapljanje dnevno-nočnega prikaza
+\n• Nastavitev prikaza omejitev hitrosti z možnostjo opozoril v primeru prekoračitev
+\n• Samodejno prilagajanje približanja zemljevida glede na hitrost vožnje
+\n• Skupinsko objavljanje podatkov o trenutni točki za lažje iskanje med prijatelji
+\n</string>
     <string name="shared_string_reset">Ponastavi</string>
     <string name="shared_string_reload">Ponovno naloži</string>
     <string name="mapillary_menu_descr_tile_cache">Ponovno posodobi sličice zemljevida.</string>
@@ -2650,7 +2666,14 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n • Postaje javnih prevozov (avtobus, tramvaj, vlak) in nazivi tras omogočajo hitro orientacijo v mestu
 \n • Navigacija GPS v načinu za pešce preračuna pot po pešpoteh
 \n • Sledi poti GPX je mogoče shraniti in prikazati za sledenje</string>
-    <string name="osmand_plus_extended_description_part4">Uporaba podatkov OSM in Wikipedije • Kakovostni podatki dveh najboljših sodelovalnih projektov na svetu • Podatki OSM so na voljo po državah ali regijah • Točke POI prek Wikipedije so odličen pripomoček za ogledovanje znamenitosti • Neomejeni prejemi posodobitev neposredno iz programa • Skrčeni vektorski zemljevidi za delo brez povezave se posodabljajo vsaj enkrat mesečno • Možnost izbire med popolnimi podatki območja ali pa zgolj cestnega omrežja (primer: zemljevid Japonske zasede 700 MB, japonsko cestno omrežje pa zgolj 200 MB)</string>
+    <string name="osmand_plus_extended_description_part4">Uporaba podatkov OSM in Wikipedije
+\n• Kakovostni podatki dveh najboljših sodelovalnih projektov na svetu
+\n• Podatki OSM so na voljo po državah ali regijah
+\n• Točke POI prek Wikipedije so odličen pripomoček za ogledovanje znamenitosti
+\n• Neomejeni prejemi posodobitev neposredno iz programa
+\n• Skrčeni vektorski zemljevidi za delo brez povezave se posodabljajo vsaj enkrat mesečno
+\n
+\n• Možnost izbire med popolnimi podatki območja ali pa zgolj cestnega omrežja (primer: zemljevid Japonske zasede 700 MB, japonsko cestno omrežje pa zgolj 200 MB)</string>
     <string name="min_max">Najmanj/Največ</string>
     <string name="osmand_extended_description_part8">OsmAnd je odprtokodni program, ki je v neprestanem razvoju. Vsakdo lahko sodeluje pri razvoju z objavljanjem hroščev, pregledom prevodov in razvojem programske opreme. Pri programu sodeluje živahna odprtokodna skupnost, ki jo sestavljajo posamezniki s celega sveta. Napredek razvoja je odvisen tudi od donacij za programiranje in preizkušanje programske opreme.
 \nOcena kakovosti in pokritosti zemljevidov:
@@ -2732,9 +2755,29 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n• Podpora vmesnim točkam na poti
 \n• Samodejno preusmerjanje in preračunavanje poti ob nepričakovani spremembi poti
 \n• Iskanje mest po naslovu, po vrsti (na primer: restavracija, hotel, bencinska črpalka, muzej) ali po koordinatah</string>
-    <string name="osmand_plus_extended_description_part3">Pregledovanje zemljevida • Prikaz trenutnega mesta in usmerjenost • Izbirno prilagajanje po kompasu oziroma po smeri gibanja • Shranjevanje priljubljenih točk • Prikaz točk POI (točke zanimivosti) v bližini • Prikaz spletnih satelitskih sličic (Bing), različne prekrivne plasti kot so potovalne/navigacijske sledi GPX • Izbirno prikazovanje imen v krajevnem zapisu, angleško ali fonetično</string>
-    <string name="osmand_plus_extended_description_part6">Možnosti za pešce in kolesarje • Pregledovanje pešpoti, kolesarskih poti in označenih kolovozov • Poseben način prikazovanja z dodatnimi pogledi • Izbirni prikaz postajališč javnega prometa (avtobus, trolejbus, vlak), vključno z imeni prog • Možnost beleženja poti v krajevno datoteko GPX ali pošiljanje na spletno mesto • Prikaz hitrosti in nadmorske višine • Prikaz izohips in senčenja hribovitosti pokrajine (prek dodatnega vstavka)</string>
-    <string name="osmand_plus_extended_description_part7">Neposredno objavljanje na OSM • Objavljanje poročil o hroščih • Pošiljanje sledi GPX neposredno na OSM • Dodajanje točk POI • Izbirno beleženje tudi v stanju pripravljenosti naprave Program OsmAnd je odprtokoden, zato lahko vsak sodeluje pri razvoju. Zaželena je pomoč pri objavljanju hroščev, pregledovanje prevodov in pri razvoju novih možnosti programa. Trenutno je skupnost zelo živa. Napredovanje projekta se zanaša tudi na finančne donacije za nove zmožnosti in preizkušanje delovanja.</string>
+    <string name="osmand_plus_extended_description_part3">Pregledovanje zemljevida
+\n• Prikaz trenutnega mesta in usmerjenost
+\n• Izbirno prilagajanje po kompasu oziroma po smeri gibanja
+\n• Shranjevanje priljubljenih točk
+\n• Prikaz točk POI (točke zanimivosti) v bližini
+\n• Prikaz spletnih satelitskih sličic (Bing), različne prekrivne plasti kot so potovalne/navigacijske sledi GPX
+\n• Izbirno prikazovanje imen v krajevnem zapisu, angleško ali fonetično
+\n</string>
+    <string name="osmand_plus_extended_description_part6">Možnosti za pešce in kolesarje
+\n• Pregledovanje pešpoti, kolesarskih poti in označenih kolovozov
+\n• Poseben način prikazovanja z dodatnimi možnostmi prikaza
+\n• Izbirni prikaz postajališč javnega prometa (avtobus, trolejbus, vlak), vključno z imeni prog
+\n• Možnost beleženja poti v krajevno datoteko GPX ali pošiljanje na spletno mesto
+\n• Prikaz hitrosti in nadmorske višine trenutne točke
+\n• Prikaz izohips in senčenja hribovitosti pokrajine (prek dodatnega vstavka)
+\n</string>
+    <string name="osmand_plus_extended_description_part7">Neposredno objavljanje na OSM
+\n• Objavljanje poročil o hroščih
+\n• Pošiljanje sledi GPX neposredno na OSM
+\n• Dodajanje točk POI in neposredno pošiljanje podatkov na strežnik OSM (ob vzpostavitvi povezave)
+\n• Izbirno beleženje tudi v stanju pripravljenosti naprave
+\nOsmAnd je hitro razvijajoči se odprtokodni program. Vsak lahko sodeluje pri razvoju z objavljanjem hroščev, pregledovanjem jezikovnih prilagoditev in pri razvoju novih možnosti programa. Razvoj projekta temelji na donacijah za pripravo in pregled novih zmožnosti ter preizkušanja delovanja.
+\n</string>
     <string name="show_guide_line">Pokaži vodilne črte</string>
     <string name="show_arrows_on_the_map">Na zemljevidu pokaži puščice</string>
     <string name="show_passed">Pokaži dosežene</string>
@@ -2917,7 +2960,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="show_tunnels">Tuneli</string>
 <string name="shared_string_result">Rezultat</string>
     <string name="use_two_digits_longitude">Uporabi dvoštevilčno geografsko dolžino</string>
-    <string name="shared_string_travel_guides">Potovanje</string>
+    <string name="shared_string_travel_guides">Popotniški vodniki</string>
     <string name="waypoints_removed_from_map_markers">Vmesne točke so odstranjene iz označb zemljevida</string>
     <string name="nothing_found_in_radius">Ni zadetkov iskanja:</string>
     <string name="select_waypoints_category_description">Dodati je mogoče vse vmesne točke sledi, ali pa ločene kategorije.</string>
@@ -2970,16 +3013,16 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="show_full_description">Pokaži polni opis</string>
     <string name="quick_action_edit_actions">Uredi dejanja</string>
     <string name="purchase_dialog_title">Izbor načrta</string>
-    <string name="release_3_0">• Novo: podpora za popotniške vodnike. Mesta vodnikov so povezana z zemljevidom, začetni podatki pa s spletišča Wikivoyage.
-\n
-\n• Wikipedija: nov videz, dejavne povezave, podpora za prikaz slik
-\n
-\n• Vmesnik Open Track: podpora za skupine vmesnih točk
-\n
-\n• Označbe zemljevida: možnost uvoza izbranih skupin iz datotek GPX, vpis koordinat, spremenjen vmesnik
-\n
-\n• Naročnine na OsmAnd Live podpirajo vse možnosti programa OsmAnd
-\n
+    <string name="release_3_0">• Novo: podpora za popotniške vodnike. Mesta vodnikov so povezana z zemljevidom, začetni podatki pa s spletišča Wikivoyage. 
+\n 
+\n• Wikipedija: nov videz, dejavne povezave, podpora za prikaz slik 
+\n 
+\n• Vmesnik Open Track: podpora za skupine vmesnih točk 
+\n 
+\n• Označbe zemljevida: možnost uvoza izbranih skupin iz datotek GPX, vpis koordinat, spremenjen vmesnik 
+\n 
+\n• Naročnine na storitev OsmAnd Live podpirajo vse možnosti programa OsmAnd 
+\n 
 \n</string>
     <string name="download_wikipedia_label">Prejmi podatke Wikipedije</string>
     <string name="open_in_browser_wiki">Odpri prispevek na spletni strani</string>
@@ -2992,7 +3035,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="edit_map_marker">Uredi označbo zemljevida</string>
     <string name="third_party_application">Programi tretjih oseb</string>
     <string name="search_street">Iskanje ulice</string>
-    <string name="start_search_from_city">Začni z iskanjem mesta</string>
+    <string name="start_search_from_city">Začeti je treba z izborom mesta</string>
     <string name="shared_string_restore">Obnovi</string>
     <string name="thank_you_for_feedback">Zahvaljujemo se vam za vaš odziv</string>
     <string name="shared_string_world">Svet</string>
@@ -3007,4 +3050,67 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="open_wikipedia_link_online_description">Povezava bo odprta v spletnem brskalniku.</string>
     <string name="download_all">Prejmi vse</string>
     <string name="show_images">Pokaži slike</string>
+    <string name="osm_live_plan_pricing">Paket in cenik</string>
+    <string name="osm_live_payment_monthly_title">Mesečna plačila</string>
+    <string name="osm_live_payment_3_months_title">Plačilo na četrtletje</string>
+    <string name="osm_live_payment_annual_title">Letno plačilo</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mesec</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mesec</string>
+    <string name="osm_live_payment_discount_descr">Prihranite %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Trenutno naročen paket</string>
+    <string name="osm_live_payment_renews_monthly">Mesečna obnovitev</string>
+    <string name="osm_live_payment_renews_quarterly">Četrtletna obnovitev</string>
+    <string name="osm_live_payment_renews_annually">Letna obnovitev</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Izberite obdobje plačila, ki vam najbolj ustreza:</string>
+    <string name="osm_live_payment_contribute_descr">Del prihodkov je namenjen sodelavcem OpenStreetMap.</string>
+    <string name="keep_passed_markers_descr">Označbe, dodane kot skupina priljubljenih točk oziroma točk GPX, ki so bile opredeljene kot prevožene, bodo ostale vidne na zemljevidu. Če skupina oziroma točke niso označene kot dejavne, bodo odstranjene.</string>
+    <string name="keep_passed_markers">Ohrani prevožene označbe na zemljevidu</string>
+    <string name="more_transport_on_stop_hint">Na tej postaji ustavlja več različnih prevozov.</string>
+    <string name="poi_cannot_be_found">Vozlišča ali poti ni mogoče najti.</string>
+    <string name="release_3_2_pre">• Odpravljena je napaka, ki je lahko povzročila sesutje programa
+\n
+\n• Nova zmožnost označb: prikaz že prepotovanih označb
+\n
+\n• Zgodovina iskanje po novem vključuje tudi že iskane kategorije
+\n
+\n• Odpravljena je napaka odpiranja zemljevidov z nelatinskimi črkami
+\n
+\n• Izboljšana hitrost izrisovanja na napravah s sistemom Android 8.0
+\n
+\n• Podpora za urejanje večkotnih predmetov (neoznačnih)
+\n
+\n• Merjenje razdalje: mogoče je dodajanje gumba za merjenje v meni dejanj
+\n</string>
+    <string name="release_3_1">• Navigacija: popravki vrstice napredovanja poti, možnost hitre menjave začetne in končne točke poti
+\n
+\n• Označbe na zemljevidih: skrivanje in prikaz skupin, možnost shrivanja označb
+\n
+\n• Urejanje OSM: možnost urejanja oznak za netočkovne predmete in poti, popravki opomb in varnostnih kopij urejanj
+\n
+\n• Izboljšano razčlenjevanje vsebin Wikipedije in Wikivoyage, posodobljene datoteke so že na voljo
+\n
+\n• Vsebinski meni: popravek prikaza oznak v nočnem načinu in popravki velikosti menijev
+\n
+\n• Navigacija za plovila: podpora za plovne poti v vodnem prometu
+\n
+\n• Številni drugi popravki hroščev
+\n</string>
+    <string name="commiting_way">Poteka objavljanje poti …</string>
+    <string name="increase_search_radius_to">Povečaj območje iskanja na %1$s</string>
+    <string name="coord_input_save_as_track_descr">Dodanih je %1$s točk. Vpisati je treba še ime datoteke in potrditi shranjevanje.</string>
+    <string name="error_notification_desc">Pošljite zaslonsko sliko obvestila na elektronski naslov support@osmand.net</string>
+    <string name="how_to_open_link">Kako odpreti povezavo\?</string>
+    <string name="read_wikipedia_offline">Pregled Wikipedije brez povezave</string>
+    <string name="shared_string_restart">Ponovni zagon programa</string>
+    <string name="purchase_cancelled_dialog_title">Naročnina na storitev OsmAnd Live je bila preklicana.</string>
+    <string name="start_editing_card_image_text">Brezplačen svetovni popotniški vodnik, ki ga lahko ureja vsak popotnik.</string>
+    <string name="purchase_dialog_subtitle">Izberite ustrezno možnost:</string>
+    <string name="online_webpage_warning">Stran je na voljo le na spletu. Ali jo želite odpreti v spletnem brskalniku\?</string>
+    <string name="wikivoyage_search_hint">Iskanje: država, mesto, okraj</string>
+    <string name="index_item_world_wikivoyage">Svetovni prispevki Wikivoyage</string>
+    <string name="rendering_value_black_name">Črna</string>
+    <string name="shared_string_gpx_files">Datoteke GPX</string>
+    <string name="access_intermediate_arrival_time">Vmesni čas prihoda</string>
+    <string name="map_widget_intermediate_time">Vmesni čas</string>
     </resources>

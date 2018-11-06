@@ -1157,7 +1157,7 @@
 	
 	<string name="update_poi_file_not_found">فایل محلی برای نگهداری تغییرات POI وجود ندارد و قابل‌ایجاد نیست.</string>
 	<string name="map_version_changed_info">برای استفاده از فایل‌های جدید نقشه نسخهٔ جدید برنامه را دانلود کنید.</string>
-	<string name="poi_filter_nominatim">جست‌وجوی آنلاین با Nominatim</string>
+	<string name="poi_filter_nominatim">‏Nominatim‏ آنلاین</string>
 	
 	<string name="vector_data_missing">برای استفاده از نقشه‌های آفلاین، داده‌های «آفلاین» را دانلود کنید.</string>
 	<string name="local_index_gpx_info_show">"
@@ -2131,7 +2131,7 @@
     <string name="index_item_depth_points_northern_hemisphere">نقاط عمقی دریا در نیمکرهٔ شمالی</string>
     <string name="nautical_maps">نقشهٔ دریایی</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">کم‌تپه</string>
-    <string name="routing_attr_driving_style_safety_name">ترجیح‌دادن بیراهه</string>
+    <string name="routing_attr_driving_style_safety_name">ترجیح‌دادن راه‌های فرعی‌تر</string>
     <string name="relief_smoothness_factor_descr">اولویت ساختار زمین: هموار یا پرتپه.</string>
     <string name="shared_string_slope">شیب</string>
     <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئن هستید؟</string>

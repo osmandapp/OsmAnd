@@ -3150,11 +3150,25 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_value_black_name">Nieddu</string>
     <string name="more_transport_on_stop_hint">In custa firmada bi sunt àteros mesos de trasportu.</string>
     <string name="search_street">Chirca una carrera</string>
-    <string name="start_search_from_city">Incumintza sa chirca dae sa tzitade</string>
+    <string name="start_search_from_city">In antis issèbera sa tzitade</string>
     <string name="shared_string_restore">Riprìstina</string>
     <string name="keep_passed_markers_descr">Sos marcadores annantos comente grupu de Preferidos e sos puntos de coladòrgiu GPX sinnados comente colados ant a abarrare in sa mapa. Si su grupu no est ativu, sos marcadores ant a isparèssere dae sa mapa.</string>
     <string name="keep_passed_markers">Mantene sos marcadores colados in sa mapa</string>
     <string name="markers_remove_dialog_msg">Iscantzellare su marcadore mapa \'%s\'\?</string>
     <string name="edit_map_marker">Modìfica su marcadore mapa</string>
     <string name="third_party_application">Aplicatzione de tertza parte</string>
+    <string name="osm_live_plan_pricing">Pianos e prètzios</string>
+    <string name="osm_live_payment_monthly_title">Paga cada mese</string>
+    <string name="osm_live_payment_3_months_title">Paga cada 3 meses</string>
+    <string name="osm_live_payment_annual_title">Paga una borta a s\'annu</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mese</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mese</string>
+    <string name="osm_live_payment_discount_descr">Rispàrmia %1$s!</string>
+	<string name="osm_live_payment_current_subscription">S\'abbonamentu atuale tuo</string>
+    <string name="osm_live_payment_renews_monthly">Si rinnovat cada mese</string>
+    <string name="osm_live_payment_renews_quarterly">Si rinnovat cada tres meses</string>
+    <string name="osm_live_payment_renews_annually">Si rinnovat cada annu</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Issèbera sa manera de pagamentu prus discansosa pro tie:</string>
+    <string name="osm_live_payment_contribute_descr">Una parte de su balàngiu andat a sos contribuidores de OpenStreetMap.</string>
     </resources>

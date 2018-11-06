@@ -2723,7 +2723,7 @@ Lon %2$s</string>
     <string name="edit_map_marker">Editar marcaxe do mapa</string>
     <string name="third_party_application">Aplicación de terceiros</string>
     <string name="search_street">Procurar rúa</string>
-    <string name="start_search_from_city">Comezar procura da cidade</string>
+    <string name="start_search_from_city">Escolla a cidade primeiro</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="keep_passed_markers">Manter no mapa as marcaxes descartadas</string>
     <string name="more_transport_on_stop_hint">Hai máis transportes nesta paraxe.</string>
@@ -3139,4 +3139,18 @@ Lon %2$s</string>
 \n • Antártida: * 
 \n 
 \n Máis países arredor do globo están dispoñíbeis para descarregar! Dende Afganistán a Zimbabue, dende Australia a Estados Unidos. A Arxentina, Brasil, Canadá, Francia, Alemaña, México, Reino Unido, España, … "</string>
+    <string name="osm_live_plan_pricing">Plans e prezos</string>
+    <string name="osm_live_payment_monthly_title">Pagamento mensual</string>
+    <string name="osm_live_payment_3_months_title">Pagamento trimestral</string>
+    <string name="osm_live_payment_annual_title">Pagamento anual</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
+    <string name="osm_live_payment_discount_descr">Garda %1$s!</string>
+	<string name="osm_live_payment_current_subscription">A súa subscrición actual</string>
+    <string name="osm_live_payment_renews_monthly">Renovación mensual</string>
+    <string name="osm_live_payment_renews_quarterly">Renovación trimestral</string>
+    <string name="osm_live_payment_renews_annually">Renovación anual</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Escolla o período de pagamento convinte para vostede:</string>
+    <string name="osm_live_payment_contribute_descr">Un anaco dos ingresos vai ós contribuíntes do OpenStreetMap.</string>
     </resources>

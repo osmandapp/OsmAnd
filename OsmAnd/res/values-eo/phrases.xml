@@ -3892,4 +3892,27 @@
 <string name="poi_atm">Bankaŭtomato</string>
 	<string name="poi_shoe_repair">Ŝu-riparejo</string>
 
+<string name="poi_bulk_purchase">Vendado sen pakumo</string>
+	<string name="poi_substation_type">Speco</string>
+
+<string name="poi_bulk_purchase_yes">Vendado sen pakumo: jes</string>
+	<string name="poi_bulk_purchase_only">Vendado sen pakumo: ne</string>
+
+	<string name="poi_pipeline_substation">Konduktuba substacio</string>
+	<string name="poi_substation_transmission">transsenda</string>
+	<string name="poi_substation_distribution">distribua</string>
+	<string name="poi_substation_minor_distribution">detal-distribua</string>
+	<string name="poi_substation_industrial">industria</string>
+	<string name="poi_substation_transition">sub-super-grunda</string>
+	<string name="poi_substation_traction">kontakt-linea (fervojo/trolebuso)</string>
+	<string name="poi_substation_converter">rektifilo aŭ ondigilo</string>
+	<string name="poi_substation_compensation">kompensa</string>
+
+	<string name="poi_substation_compression">premiga</string>
+	<string name="poi_substation_measurement">mezura</string>
+	<string name="poi_substation_valve">valvo</string>
+	<string name="poi_substation_valve_group">valvaro</string>
+	<string name="poi_substation_inspection_gauge">indikilo</string>
+	<string name="poi_substation_field_gathering">kolekta</string>
+
 </resources>
