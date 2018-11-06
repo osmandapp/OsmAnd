@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
+	<string name="last_update_from_telegram">Последнее обновление в Telegram</string>
 	<string name="device_name">Имя устройства</string>
 	<string name="shared_string_hide">Спрятать</string>
 	<string name="share_location_as_description_second_line">Вы можете создать и просмотреть идентификатор устройства в клиенте telegram, используя %1$s чат бота. %2$s</string>
