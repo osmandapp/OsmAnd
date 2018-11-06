@@ -52,10 +52,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	private lateinit var openOsmAndBtn: TextView
 	private lateinit var sortByBtn: TextView
+	private lateinit var lastTelegramUpdateTime: TextView
 
 	private var location: Location? = null
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
+
+	private var lastTelegramUpdateStr = ""
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -64,6 +67,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	): View? {
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
+
+		lastTelegramUpdateTime = mainView.findViewById<TextView>(R.id.last_telegram_update_time)
+		lastTelegramUpdateStr = getString(R.string.last_update_from_telegram) + ": "
+
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 		adapter = LiveNowListAdapter()
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
@@ -278,6 +285,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
+		if (res.isEmpty()) {
+			lastTelegramUpdateTime.visibility = View.VISIBLE
+			lastTelegramUpdateTime.text = OsmandFormatter.getListItemLiveTimeDescr(app, telegramHelper.lastTelegramUpdateTime, lastTelegramUpdateStr)
+		} else {
+			lastTelegramUpdateTime.visibility = View.GONE
+		}
 		adapter.items = sortAdapterItems(res)
 	}
 
@@ -446,6 +459,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 
+			if (lastItem) {
+				holder.lastTelegramUpdateTime?.visibility = View.VISIBLE
+				holder.lastTelegramUpdateTime?.text = OsmandFormatter.getListItemLiveTimeDescr(app, telegramHelper.lastTelegramUpdateTime, lastTelegramUpdateStr)
+			} else {
+				holder.lastTelegramUpdateTime?.visibility = View.GONE
+			}
+
 			if (item is ChatItem && holder is ChatViewHolder) {
 				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !sortByGroup)
 				val chatId = item.chatId
@@ -545,6 +565,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val distanceText: TextView? = view.findViewById(R.id.distance_text)
 			val description: TextView? = view.findViewById(R.id.description)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
+			val lastTelegramUpdateTime: TextView? = view.findViewById(R.id.last_telegram_update_time)
 
 			abstract fun getOpenOnMapClickView(): View?
 		}

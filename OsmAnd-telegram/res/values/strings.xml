@@ -1,4 +1,5 @@
 <resources>
+	<string name="last_update_from_telegram">Last update from Telegram</string>
 	<string name="enter_another_device_name">Pick a name you haven\'t already used</string>
 	<string name="device_added_successfully">%1$s added.</string>
 	<string name="shared_string_add">Add</string>

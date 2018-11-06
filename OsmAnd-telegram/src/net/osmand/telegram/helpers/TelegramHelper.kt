@@ -65,6 +65,8 @@ class TelegramHelper private constructor() {
 
 	var messageActiveTimeSec: Long = 0
 
+	var lastTelegramUpdateTime: Int = 0
+
 	private val users = ConcurrentHashMap<Int, TdApi.User>()
 	private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
 	private val supergroups = ConcurrentHashMap<Int, TdApi.Supergroup>()
@@ -572,6 +574,7 @@ class TelegramHelper private constructor() {
 	}
 
 	private fun addNewMessage(message: TdApi.Message) {
+		lastTelegramUpdateTime = Math.max(message.date, message.editDate)
 		if (message.isAppropriate()) {
 			val fromBot = isOsmAndBot(message.senderUserId)
 			val viaBot = isOsmAndBot(message.viaBotUserId)
@@ -1235,6 +1238,7 @@ class TelegramHelper private constructor() {
 					} else {
 						synchronized(message) {
 							message.editDate = updateMessageEdited.editDate
+							lastTelegramUpdateTime = Math.max(message.date, message.editDate)
 						}
 						incomingMessagesListeners.forEach {
 							it.onReceiveChatLocationMessages(message.chatId, message)
@@ -1250,6 +1254,7 @@ class TelegramHelper private constructor() {
 						}
 					} else {
 						synchronized(message) {
+							lastTelegramUpdateTime = Math.max(message.date, message.editDate)
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
 								parseOsmAndBotLocation(newContent.text.text)
