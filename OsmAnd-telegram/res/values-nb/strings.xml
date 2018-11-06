@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="background_work_description">Endre batterioptimiseringsinnstillinger, for stabil plasseringsdeling</string>
+<resources><string name="background_work_description">Endre batterioptimiseringsinnstillinger, for stabil plasseringsdeling.</string>
 	<string name="background_work">Bakgrunnsarbeid</string>
 	<string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd Telegram slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
 	<string name="sharing_in_background">Deling i bakgrunnen</string>
@@ -18,7 +18,7 @@
 	<string name="add_device">Legg til enhet</string>
 	<string name="share_location_as">Del plassering som</string>
 	<string name="live_now_description">Kontakter og grupper som deler sin plassering med deg.</string>
-	<string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Telegram\? Etter det, vil du ikke kunne sende din plassering, og se dine kontakters plassering på kartet i OsmAnd.</string>
+	<string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Telegram slik at du ikke kan sende din plassering eller se andres\?</string>
 	<string name="logout_from_osmand_telegram">Logg ut av OsmAnd Telegram\?</string>
 	<string name="shared_string_name">Navn</string>
 	<string name="by_distance">Etter distanse</string>
@@ -134,7 +134,7 @@
 	<string name="waiting_for_response_from_telegram">Venter på svar fra Telegram</string>
 	<string name="sending_location_messages">Sender plasseringsmeldinger</string>
 	<string name="initializing">Starter</string>
-	<string name="searching_for_gps">Søker etter GPS</string>
+	<string name="searching_for_gps">Posisjonerer…</string>
 	<string name="connecting_to_the_internet">Kobler til Internett</string>
 	<string name="yard">yd</string>
 	<string name="foot">fot</string>
@@ -154,7 +154,7 @@
 	<string name="si_nm">Nautiske mil</string>
 	<string name="si_mi_meters">Engelske mil/meter</string>
 	<string name="enter_another_device_name">Du har allerede en enhet med samme navn, velg noe annet</string>
-	<string name="device_added_successfully">%1$s lagt til</string>
+	<string name="device_added_successfully">%1$s lagt til.</string>
 	<string name="shared_string_add">Legg til</string>
 	<string name="error_adding_new_device">Kunne ikke legge til ny enhet</string>
 	<string name="enter_device_name_description">Skriv inn et nytt navn for din nye enhet. Maksimal lengde 200 tegn.</string>
@@ -173,4 +173,5 @@
 	<string name="live_now">Sanntidsdeler nå</string>
 
 
-</resources>
+<string name="last_update_from_telegram">Siste oppdatering fra Telegram</string>
+	</resources>
