@@ -3840,4 +3840,6 @@
 <string name="poi_atm">Bankomat</string>
 	<string name="poi_shoe_repair">Oprava obuvi</string>
 
+<string name="poi_substation_type">Typ</string>
+
 </resources>
