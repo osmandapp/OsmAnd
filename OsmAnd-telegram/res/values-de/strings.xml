@@ -173,4 +173,5 @@
 	<string name="live_now">Jetzt live</string>
 
 
-</resources>
+<string name="last_update_from_telegram">Letztes Update von Telegram</string>
+	</resources>
