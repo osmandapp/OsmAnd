@@ -3906,4 +3906,6 @@
 	<string name="poi_substation_valve_group">Ventilgruppe</string>
 	<string name="poi_substation_field_gathering">Feldsammlung</string>
 
-</resources>
+<string name="poi_pipeline_substation">Rohrleitungsunterstation</string>
+	<string name="poi_substation_inspection_gauge">Prüflehre</string>
+	</resources>
