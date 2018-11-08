@@ -48,6 +48,7 @@ public class InAppPurchases {
 	private InAppPurchase depthContours;
 	private InAppPurchase contourLines;
 	private InAppSubscription monthlyLiveUpdates;
+	private InAppSubscription discountedMonthlyLiveUpdates;
 	private InAppSubscriptionList liveUpdates;
 
 	InAppPurchases(OsmandApplication ctx) {
@@ -59,8 +60,11 @@ public class InAppPurchases {
 		}
 		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
 			if (s instanceof InAppPurchaseLiveUpdatesMonthly) {
-				monthlyLiveUpdates = s;
-				break;
+				if (s.isDiscounted()) {
+					discountedMonthlyLiveUpdates = s;
+				} else {
+					monthlyLiveUpdates = s;
+				}
 			}
 		}
 		if (Version.isFreeVersion(ctx)) {
@@ -89,6 +93,16 @@ public class InAppPurchases {
 
 	public InAppSubscription getMonthlyLiveUpdates() {
 		return monthlyLiveUpdates;
+	}
+
+	@Nullable
+	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
+		if (monthlyLiveUpdates.isAnyPurchased()) {
+			return monthlyLiveUpdates;
+		} else if (discountedMonthlyLiveUpdates.isAnyPurchased()) {
+			return discountedMonthlyLiveUpdates;
+		}
+		return null;
 	}
 
 	public InAppSubscriptionList getLiveUpdates() {
@@ -559,17 +573,22 @@ public class InAppPurchases {
 
 		InAppPurchaseLiveUpdatesMonthly(String skuNoVersion, int version) {
 			super(skuNoVersion, version);
+			donationSupported = true;
+		}
+
+		InAppPurchaseLiveUpdatesMonthly(@NonNull String sku, boolean discounted) {
+			super(sku, discounted);
+			donationSupported = true;
 		}
 
 		InAppPurchaseLiveUpdatesMonthly(@NonNull String sku) {
-			super(sku, false);
+			this(sku, false);
 		}
 
 		@Override
 		public void setPriceValue(double priceValue) {
 			super.setPriceValue(priceValue);
 			monthlyPriceValue = priceValue;
-			donationSupported = true;
 		}
 
 		@Override
@@ -789,14 +808,19 @@ public class InAppPurchases {
 		}
 	}
 
-	public static class InAppPurchaseLiveUpdatesOldMonthly extends InAppSubscription {
+	public static class InAppPurchaseLiveUpdatesOldMonthly extends InAppPurchaseLiveUpdatesMonthly {
 
-		private InAppPurchaseLiveUpdatesOldMonthly(String sku) {
+		InAppPurchaseLiveUpdatesOldMonthly(String sku) {
 			super(sku, true);
 		}
 
 		@Override
 		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_live_default_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
 			return ctx.getString(R.string.osm_live_default_price);
 		}
 

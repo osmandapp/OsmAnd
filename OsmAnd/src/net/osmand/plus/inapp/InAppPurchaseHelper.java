@@ -155,6 +155,11 @@ public class InAppPurchaseHelper {
 		return purchases.getMonthlyLiveUpdates();
 	}
 
+	@Nullable
+	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
+		return purchases.getPurchasedMonthlyLiveUpdates();
+	}
+
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);
