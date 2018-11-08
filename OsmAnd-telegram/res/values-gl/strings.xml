@@ -59,4 +59,16 @@
 	<string name="shared_string_add">Engadir</string>
 	<string name="enter_another_device_name">Escolle un nome que aínda non está a ser empregado</string>
 	<string name="device_added_successfully">%1$s engadido.</string>
+	<string name="shared_string_cancel">Desbotar</string>
+	<string name="nm">mn</string>
+	<string name="si_kmh">Quilómetros por hora</string>
+	<string name="si_mph">Millas por hora</string>
+	<string name="si_m_s">Metros por segundo</string>
+	<string name="si_min_km">Minutos por quilómetro</string>
+	<string name="si_min_m">Minutos por milla</string>
+	<string name="si_mi_feet">Millas/pés</string>
+	<string name="si_mi_yard">Millas/iardas</string>
+	<string name="si_km_m">Quilómetros/metros</string>
+	<string name="si_nm">Millas náuticas</string>
+	<string name="si_mi_meters">Millas/metros</string>
 	</resources>
