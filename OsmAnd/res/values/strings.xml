@@ -12,67 +12,67 @@
 -->
     <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
     <string name="osm_live_payment_monthly_title">Pay monthly</string>
-    <string name="osm_live_payment_3_months_title">Pay once in 3 months</string>
-    <string name="osm_live_payment_annual_title">Pay once a year</string>
-    <string name="osm_live_payment_month_cost_descr">%1$s / month</string>
-    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / month</string>
+    <string name="osm_live_payment_3_months_title">Pay every 3 months</string>
+    <string name="osm_live_payment_annual_title">Pay annually</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s/month</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s/month</string>
     <string name="osm_live_payment_discount_descr">Save %1$s!</string>
 	<string name="osm_live_payment_current_subscription">Your current subscription</string>
     <string name="osm_live_payment_renews_monthly">Renews monthly</string>
     <string name="osm_live_payment_renews_quarterly">Renews quarterly</string>
     <string name="osm_live_payment_renews_annually">Renews annually</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Select the payment period convenient for you:</string>
-    <string name="osm_live_payment_contribute_descr">Part of income goes to OpenStreetMap contributors.</string>
-    <string name="markers_remove_dialog_msg">Delete Map marker \'%s\'?</string>
+    <string name="osm_live_payment_header">Select payment frequency:</string>
+    <string name="osm_live_payment_contribute_descr">Donations help fund OpenStreetMap contributors.</string>
+    <string name="markers_remove_dialog_msg">Delete map marker \'%s\'?</string>
     <string name="edit_map_marker">Edit map marker</string>
-    <string name="third_party_application">Third-party application</string>
-    <string name="search_street">Search street</string>
-    <string name="start_search_from_city">Select the city first</string>
+    <string name="third_party_application">Third-party app</string>
+    <string name="search_street">Search for street</string>
+    <string name="start_search_from_city">In what city?</string>
     <string name="shared_string_restore">Restore</string>
-    <string name="keep_passed_markers_descr">Markers added as a group of Favorites or GPX waypoints marked "Passed" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
+    <string name="keep_passed_markers_descr">Markers added as a group of Favorites or GPX waypoints marked \"Passed\" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
     <string name="keep_passed_markers">Keep passed markers on the map</string>
-    <string name="more_transport_on_stop_hint">There is more transport on this stop.</string>
-    <string name="ask_for_location_permission">Please give OsmAnd permission for location to continue.</string>
-    <string name="thank_you_for_feedback">Thank you for feedback</string>
-    <string name="poi_cannot_be_found">Node or way cannot be found.</string>
-    <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
+    <string name="more_transport_on_stop_hint">More transport available from this stop.</string>
+    <string name="ask_for_location_permission">Please grant OsmAnd location access to continue.</string>
+    <string name="thank_you_for_feedback">Thank you for your feedback.</string>
+    <string name="poi_cannot_be_found">Could not find node or way.</string>
+    <string name="search_no_results_feedback">No search results?\nProvide feedback.</string>
     <string name="release_3_2_pre">
     • Fixed crash on startup that occurred on some devices\n\n
-    • New Markers feature: display the markers that have already been traversed\n\n 
+    • New Markers feature: Display already traversed markers\n\n 
     • Search history now shows the categories you have searched for previously\n\n
     • Fixed crash on startup that occurred with non-latin maps\n\n
-    • Improve rendering speed issues on Android 8.0 devices\n\n
+    • Improved rendering speed on Android 8.0 devices\n\n
     • Support for polygon (non-amenity) objects editing\n\n
-    • Measure distance: add Measure button to Actions in the context menu\n\n
+    • Measure distance: Add \'Measure\' button to \'Actions\' in the context menu\n\n
     </string>
     <string name="release_3_1">
-    • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
-    • Map markers: fix turn on/off groups, ability to hide markers from the map\n\n
+    • Navigation: Fix for progress bar, fast swapping of the start and end-point of the route\n\n
+    • Map markers: Fix for turning on/off groups, ability to hide markers from the map\n\n
     • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
     • Improve Wikipedia and Wikivoyage parsing, updated files are already available\n\n
-    • Context menu: fix transport shields color in the night mode, fix additional menu sizes\n\n
-    • Boat navigation: support for waterway fairway\n\n
+    • Context menu: Fix for transport shields color in night mode, additional menu sizes\n\n
+    • Boat navigation: Support for waterway sea lane\n\n
     • Other bug fixes\n\n
     </string>
     <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
-    <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
-        We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>
-    <string name="send_search_query">Send search query?</string>
+    <string name="send_search_query_description"><![CDATA[Your search: <b>\"%1$s\"</b>, as well as your location will be sent.<br/><br/>
+        Personal info is not collected, and search data is only used to improve the search algorithm.<br/>]]></string>
+    <string name="send_search_query">Send search?</string>
     <string name="shared_string_world">World</string>
     <string name="point_deleted">Point %1$s deleted</string>
     <string name="coord_input_edit_point">Edit point</string>
     <string name="coord_input_add_point">Add point</string>
     <string name="coord_input_save_as_track">Save as track</string>
-    <string name="coord_input_save_as_track_descr">You added %1$s points. Type a filename and tap \"Save\".</string>
+    <string name="coord_input_save_as_track_descr">You added %1$s points. Type a filename and tap \'Save\'.</string>
     <string name="error_notification_desc">Please send a screenshot of this notification to support@osmand.net</string>
     <string name="quick_action_edit_actions">Edit actions</string>
     <string name="get_osmand_live">Get OsmAnd Live to unlock all features: Daily map updates with unlimited downloads, all paid and free plugins, Wikipedia, Wikivoyage and much more.</string>
-    <string name="unirs_render_descr">Modification of the default style to increase contrast of pedestrian and bicycle roads. Uses legacy Mapnik colors.</string>
+    <string name="unirs_render_descr">Increased contrast of pedestrian and bicycle roads in default style. Uses legacy Mapnik colors.</string>
     <string name="shared_string_bookmark">Bookmark</string>
     <string name="hide_full_description">Hide full description</string>
-    <string name="show_full_description">Show full description</string>
+    <string name="show_full_description">Full description</string>
     <string name="off_road_render_descr">Suitable for use during off-road driving. Suitable for use with green satellite images as an underlay map. Key points: Reduced main road thickness, increased thickness of tracks, paths, bicycle and other routes. Based on \'Topo\' style.</string>
     <string name="nautical_render_descr">Nautical navigation style. Key features: Buoys, lighthouses, riverways, sea lanes and marks, harbours, seamark services, depth contours.</string>
     <string name="ski_map_render_descr">Skiing style. Key features: Renders pistes, ski-lifts and other ski features in a convenient way. Less distracting secondary map objects.</string>
@@ -216,7 +216,7 @@
 • Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
 • OsmAnd Live subscription now supports all OsmAnd features\n\n
     </string>
-    <string name="modify_the_search_query">Modify the search query.</string>
+    <string name="modify_the_search_query">Change your search.</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
     <string name="empty_state_osm_edits">Create or modify OSM objects</string>
@@ -308,7 +308,7 @@
     <string name="show_arrows_on_the_map">Show arrows on the map</string>
     <string name="show_passed">Show passed</string>
     <string name="hide_passed">Hide passed</string>
-    <string name="remove_from_map_markers">Remove from map markers\'</string>
+    <string name="remove_from_map_markers">Remove from \'map markers\'</string>
     <string name="descendingly">descending</string>
     <string name="ascendingly">ascending</string>
     <string name="date_added">Date added</string>
@@ -366,10 +366,10 @@
     <string name="wrong_user_name">Wrong username</string>
     <string name="shared_string_to">To</string>
     <string name="mapillary_menu_date_from">From</string>
-    <string name="mapillary_menu_descr_dates">View only images added</string>
+    <string name="mapillary_menu_descr_dates">Only show added images</string>
     <string name="mapillary_menu_title_dates">Date</string>
     <string name="mapillary_menu_edit_text_hint">Type username</string>
-    <string name="mapillary_menu_descr_username">View only images added by</string>
+    <string name="mapillary_menu_descr_username">Only show images added by</string>
     <string name="mapillary_menu_title_username">Username</string>
     <string name="mapillary_menu_filter_description">Filter images by submitter or by date. Only active in closeup zoom.</string>
     <string name="map_widget_ruler_control">Radius ruler</string>
@@ -394,13 +394,13 @@
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
     <string name="nothing_found">Nothing found</string>
-    <string name="nothing_found_descr">Modify the search query or increase the search radius.</string>
+    <string name="nothing_found_descr">Change the search or increase its radius.</string>
     <string name="quick_action_showhide_osmbugs_title">Toggle OSM Notes</string>
     <string name="quick_action_osmbugs_show">Show OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
     <string name="quick_action_showhide_osmbugs_descr">Tapping this action button shows or hides OSM Notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
-    <string name="search_favorites">Search Favorites</string>
+    <string name="search_favorites">Search in Favorites</string>
     <string name="hillshade_menu_download_descr">To see relief hillshading on the map, download the hillshade overlay map of this region.</string>
     <string name="hillshade_purchase_header">To see relief hillshading on the map, you need to buy and install the \'Contour Lines\' plugin</string>
     <string name="hide_from_zoom_level">Hide from zoom level</string>
@@ -528,7 +528,7 @@
 	\u2022 Updated the context menu: Show when the POI opens / closes\n\n
 	\u2022 Transport menu: all available routes are now at the top\n\n
 	\u2022 Wikipedia: added the button to open the original article, updated the appearance of articles\n\n
-	\u2022 Route: added possibility to swap start and end points in one tap\n\n
+	\u2022 Route: added possibility to swap start and end-points in one tap\n\n
 	\u2022 Notes: added sorting by type and date\n\n
 	\u2022 OSM edits: Show an icon and a name of the POI category, display completed actions\n\n
 	\u2022 New quick coordinate input screen for quick markers creation\n\n
@@ -551,7 +551,7 @@
     <string name="routing_attr_allow_motorway_description">Allow motorways.</string>
     <string name="upload_osm_note_description">Upload your OSM Note anonymously or by using your OpenStreetMap.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
-    <string name="search_map_hint">Search city or region</string>
+    <string name="search_map_hint">Search for city or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
     <string name="upload_poi">Upload POI</string>
     <string name="route_calculation">Route calculation</string>
@@ -742,7 +742,7 @@
     <string name="osm_editors_ranking">OSM Editors ranking</string>
     <string name="osm_live_subscription">OsmAnd Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
-    <string name="osm_live_email_desc">Needed to provide you information about contributions.</string>
+    <string name="osm_live_email_desc">Needed to provide you info about contributions.</string>
     <string name="osm_live_user_public_name">Public Name</string>
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
@@ -824,9 +824,10 @@
     <string name="select_voice_provider_descr">Select or download voice guidance for your language.</string>
     <string name="impassable_road_desc">Select roads you want to avoid during navigation.</string>
     <string name="shared_string_sound">Sound</string>
-    <string name="no_location_permission">App has no permission to access location data.</string>
-    <string name="no_camera_permission">App has no permission to access the camera.</string>
-    <string name="no_microphone_permission">App has no permission to access the microphone.</string>
+    <string name="no_location_permission">OsmAnd needs location data access.</string>
+    <string name="no_camera_permission">OsmAnd needs camera access.</string>
+    <string name="no_microphone_permission">OsmAnd needs microphone access.</string>
+    <string name="missing_write_external_storage_permission">OsmAnd needs memory card access.</string>
     <string name="route_distance">Distance:</string>
     <string name="route_duration">Time:</string>
     <string name="rendering_attr_horseRoutes_name">Horse routes</string>
@@ -1259,6 +1260,7 @@
     <string name="map_locale">Map language</string>
     <string name="rendering_attr_transportStops_name">Transport stops</string>
     <string name="navigate_point_zone">Zone</string>
+    <!-- (OLC) is a geocode system -->
     <string name="navigate_point_olc">Open Location Code</string>
     <string name="navigate_point_olc_info_invalid">Invalid OLC\n</string>
     <string name="navigate_point_olc_info_short">Short OLC\nPlease provide a full code</string>
@@ -1305,7 +1307,7 @@
     <string name="logged_as">Logged in as %1$s</string>
     <string name="speed_limit_exceed">Speed limit tolerance</string>
     <string name="speed_limit_exceed_message">Select speed limit tolerance margin, above which you will receive a voice warning.</string>
-    <string name="fav_point_emoticons_message">The Favorite name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
+    <string name="fav_point_emoticons_message">Favorite name modified to %1$s to save string containing emoticons as a file.</string>
     <string name="print_route">Print route</string>
     <string name="fav_point_dublicate">Favorite point name duplicate</string>
     <string name="fav_point_dublicate_message">Specified Favorite name already in use, was changed to %1$s to avoid duplication.</string>
@@ -1418,7 +1420,7 @@
     <string name="gpx_info_waypoints">Waypoints: %1$s </string>
     <string name="gpx_info_distance">Distance: %1$s (%2$s points) </string>
     <string name="gpx_info_start_time">Start time: %1$tF,  %1$tT </string>
-    <string name="gpx_info_end_time">End time: %1$tF,  %1$tT </string>
+    <string name="gpx_info_end_time">End time: %1$tF, %1$tT </string>
     <string name="gpx_info_average_speed">Average speed: %1$s </string>
     <string name="gpx_info_maximum_speed">Maximum speed: %1$s </string>
     <string name="gpx_info_avg_altitude">Average altitude: %1$s</string>
@@ -1744,8 +1746,8 @@
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No buildings found.</string>
-    <string name="incremental_search_city">Search city incrementally</string>
-    <string name="search_villages_and_postcodes">Search more villages/postcode</string>
+    <string name="incremental_search_city">Incremental city search</string>
+    <string name="search_villages_and_postcodes">Search for more villages/postcode</string>
     <string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
     <string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
     <string name="safe_mode_description">Run the app in safe mode (using slower Android instead of native code).</string>
@@ -1799,10 +1801,10 @@
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="snap_to_road_descr">Snap position to roads during navigation.</string>
     <string name="snap_to_road">Snap to road</string>
-    <string name="interrupt_music_descr">Voice prompts pause, not just subdue, music playback.</string>
+    <string name="interrupt_music_descr">Voice prompts pause (as opposed to mute), music playback.</string>
     <string name="interrupt_music">Pause music</string>
     <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
-    <string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+    <string name="osmand_short_description_80_chars">Global mobile map viewing &amp; navigation for offline and online OSM maps.</string>
     <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)\n\n
 
@@ -2054,7 +2056,7 @@
     <string name="shared_location">Shared location</string>
     <string name="osmand_parking_event">Pick up the car from parking</string>
     <string name="osmand_parking_warning">Warning</string>
-    <string name="osmand_parking_warning_text">A notification to pick up your car has been added to your calendar. It will remain there until you will delete it manually.</string>
+    <string name="osmand_parking_warning_text">Notification to pick up your car added to calendar. It will remain there until deleted manually.</string>
     <string name="osmand_parking_time_limit_title">Set parking time limit</string>
     <string name="osmand_parking_delete_confirm">Delete the parking location marker?</string>
     <string name="osmand_parking_delete">Delete a parking marker</string>
@@ -2103,7 +2105,7 @@
     <string name="local_index_description">Tap any existing item to see more details, long-tap to deactivate or delete. Current data on device (%1$s free):</string>
     <string name="unknown_from_location">Starting point not yet determined</string>
     <string name="unknown_location">Position not yet known</string>
-    <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
+    <string name="modify_transparency">Change transparency (0 - transparent, 255 - opaque)</string>
     <string name="confirm_interrupt_download">Cancel file download?</string>
     <!-- Use ← for RTL languages -->
     <string name="first_time_msg">Thank you for using OsmAnd. Download regional data for offline use via \'Settings\' →  \'Manage map files\' to view maps, locate addresses, look up POIs, find public transport and more.</string>
@@ -2195,8 +2197,8 @@
     <string name="local_openstreetmap_uploading">Uploading…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Notes were uploaded</string>
     <string name="local_openstreetmap_uploadall">Upload all</string>
-    <string name="local_openstreetmap_upload">Upload modification to OSM</string>
-    <string name="local_openstreetmap_delete">Delete modification</string>
+    <string name="local_openstreetmap_upload">Upload edit to OSM</string>
+    <string name="local_openstreetmap_delete">Delete edit</string>
     <string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
     <string name="local_openstreetmap_settings">OSM POIs/Notes saved on device</string>
     <string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Notes noted in database on device.</string>
@@ -2271,7 +2273,7 @@
     <string name="file_can_not_be_renamed">File can not be renamed.</string>
     <string name="file_with_name_already_exists">File with that name already exists.</string>
     <string name="shared_string_gpx_route">GPX route</string>
-    <string name="poi_query_by_name_matches_categories">Several POI categories found matching the query:</string>
+    <string name="poi_query_by_name_matches_categories">Found several POI categories:</string>
     <string name="data_to_search_poi_not_available">Local data to search POI is not present.</string>
     <string name="poi_filter_by_name">Search by name</string>
     <string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
@@ -2349,9 +2351,9 @@
     <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Media/music audio</string>
     <string name="warning_tile_layer_not_downloadable">The app cannot download the map layer %1$s, reinstalling it might help.</string>
-    <string name="overlay_transparency_descr">Modify the overlay transparency.</string>
+    <string name="overlay_transparency_descr">Adjust overlay transparency.</string>
     <string name="overlay_transparency">Overlay transparency</string>
-    <string name="map_transparency_descr">Modify the base map transparency.</string>
+    <string name="map_transparency_descr">Adjust base map transparency.</string>
     <string name="map_transparency">Base map transparency</string>
     <string name="layer_underlay">Underlay map…</string>
     <string name="map_underlay">Underlay map</string>
@@ -2466,7 +2468,7 @@
     <string name="download_type_to_filter">type to filter</string>
     <string name="use_high_res_maps">High resolution display</string>
     <string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays.</string>
-    <string name="context_menu_item_search_transport">Search public transport</string>
+    <string name="context_menu_item_search_transport">Search for public transport</string>
     <string name="transport_searching_transport">Transport results (no destination):</string>
     <string name="transport_searching_route">Transport results ({0} to destination):</string>
     <string name="transport_search_again">Reset transport search</string>
@@ -2478,7 +2480,7 @@
     <string name="layer_gpx_layer">GPX files…</string>
     <string name="error_reading_gpx">Could not read GPX data</string>
     <string name="vector_data">Offline vector maps</string>
-    <string name="transport_context_menu">Search transport at stop</string>
+    <string name="transport_context_menu">Search for transport at stop</string>
     <string name="poi_context_menu_modify">Modify POI</string>
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
@@ -2505,7 +2507,7 @@
     <string name="layer_poi">POI overlay…</string>
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
-    <string name="context_menu_item_search_poi">Search POI</string>
+    <string name="context_menu_item_search_poi">Search for POI</string>
     <string name="use_trackball_descr">Use a trackball device to move the map.</string>
     <string name="use_trackball">Use trackball</string>
     <string name="background_service_wait_int_descr">Sets highest waiting time allowed for each background position fix.</string>
@@ -2646,7 +2648,7 @@
     <string name="use_english_names_descr">Select between local and English names.</string>
     <string name="use_english_names">Use English names on maps</string>
     <string name="app_settings">App settings</string>
-    <string name="search_address">Search address</string>
+    <string name="search_address">Search for address</string>
     <string name="choose_building">Choose building</string>
     <string name="choose_street">Choose street</string>
     <string name="choose_city">Choose city or postcode</string>
@@ -2668,8 +2670,8 @@
     <string name="search_activity">Search</string>
     <string name="searchpoi_activity">Choose POI</string>
     <string name="search_POI_level_btn">Find more</string>
-    <string name="incremental_search_street">Search street incrementally</string>
-    <string name="incremental_search_building">Search building incrementally</string>
+    <string name="incremental_search_street">Incremental street search</string>
+    <string name="incremental_search_building">Incremental buidling search</string>
     <string name="choose_available_region">Choose region from list</string>
     <string name="choose_intersected_street">Choose intersecting street</string>
     <string name="Closest_Amenities">Closest amenities</string>
@@ -2723,8 +2725,8 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Save As</string>
     <string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
-    <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
-    <string name="edit_filter_create_message">Filter {0} has been created</string>
+    <string name="edit_filter_delete_message">Filter {0} deleted</string>
+    <string name="edit_filter_create_message">Filter {0} created</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Camera focus type</string>
     <string name="av_camera_focus_descr">Select the internal camera focus mode.</string>
@@ -2833,7 +2835,6 @@
     <string name="only_download_over_wifi">Only download on Wi-Fi</string>
     <string name="live_update">Live update</string>
     <string name="update_now">Update now</string>
-    <string name="missing_write_external_storage_permission">OsmAnd lacks permission to use the memory card</string>
     <string name="last_update">Last update: %s</string>
     <string name="update_time">Update time</string>
     <string name="updates_size">Update size</string>
@@ -2854,7 +2855,8 @@
     <string name="quick_action_add_marker">Add map marker</string>
     <string name="quick_action_add_poi">Add POI</string>
     <string name="quick_action_map_style">Change map style</string>
-    <string name="quick_action_map_style_switch">The map style has been changed to \"%s\".</string>
+    <!-- This is a notification. -->
+    <string name="quick_action_map_style_switch">Map style changed to \"%s\".</string>
     <string name="quick_action_take_audio_note">New audio note</string>
     <string name="quick_action_take_video_note">New video note</string>
     <string name="quick_action_take_photo_note">New photo note</string>
@@ -2912,15 +2914,18 @@
     <string name="quick_action_map_overlay">Change map overlay</string>
     <string name="quick_action_map_overlay_title">Map overlays</string>
     <string name="quick_action_map_overlay_action">Add overlay</string>
-    <string name="quick_action_map_overlay_switch">The map overlay has been changed to \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">The map underlay has been changed to \"%s\".</string>
+    <!-- This is a notification -->
+    <string name="quick_action_map_overlay_switch">Map overlay changed to \"%s\".</string>
+    <!-- This is a notification -->
+    <string name="quick_action_map_underlay_switch">Map underlay changed to \"%s\".</string>
     <string name="quick_action_map_underlay">Change map underlay</string>
     <string name="quick_action_map_underlay_title">Map underlays</string>
     <string name="quick_action_map_underlay_action">Add underlay</string>
     <string name="quick_action_map_source">Change map source</string>
     <string name="quick_action_map_source_title">Map sources</string>
     <string name="quick_action_map_source_action">Add map source</string>
-    <string name="quick_action_map_source_switch">The map source has been changed to \"%s\".</string>
+    <!-- This is a notification -->
+    <string name="quick_action_map_source_switch">Map source changed to \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Change button position</string>
     <string name="quick_action_btn_tutorial_descr">Long-tapping and dragging the button changes its position on the screen.</string>
     <string name="shared_string_action_name">Action name</string>
@@ -2959,5 +2964,5 @@
     <string name="wiki_article_search_text">Searching for the corresponding wiki article</string>
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
-    <string name="test_voice_desrc">Tap a button and listen to the corresponding voice prompt to identify missing or faulty prompts.</string>
+    <string name="test_voice_desrc">Tap a button and listen to its corresponding voice prompt to hear if it is missing or faulty.</string>
 </resources>
