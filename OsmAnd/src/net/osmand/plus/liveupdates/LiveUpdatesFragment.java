@@ -192,8 +192,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				String countryName = getSettings().BILLING_USER_COUNTRY.get();
 				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 				if (purchaseHelper != null) {
-					InAppSubscription s = purchaseHelper.getMonthlyLiveUpdates();
-					if (s.isDonationSupported() && s.isAnyPurchased()) {
+					InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
+					if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
 						if (Algorithms.isEmpty(countryName)) {
 							if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
 								regionNameHeaderTextView.setText(R.string.default_buttons_support);
@@ -324,8 +324,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	private boolean isDonationSupported() {
 		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 		if (purchaseHelper != null) {
-			InAppSubscription s = purchaseHelper.getMonthlyLiveUpdates();
-			return s.isDonationSupported() && s.isAnyPurchased();
+			InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
+			return monthlyPurchased != null && monthlyPurchased.isDonationSupported();
 		}
 		return false;
 	}
