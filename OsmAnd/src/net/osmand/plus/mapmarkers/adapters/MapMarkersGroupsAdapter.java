@@ -11,22 +11,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.MapMarkersHelper.ShowHideHistoryButton;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
@@ -563,7 +564,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		if (!visible && selectedGpxFile != null && selectedGpxFile.selectedByUser) {
 			return;
 		}
-		gpxHelper.selectGpxFile(gpxFile, visible, false, false, false);
+		gpxHelper.selectGpxFile(gpxFile, visible, false, false, false, false);
 	}
 
 	public void hideSnackbar() {

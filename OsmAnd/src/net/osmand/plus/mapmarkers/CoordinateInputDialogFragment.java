@@ -1510,7 +1510,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		@Override
 		protected void onPostExecute(Void aVoid) {
 			if (!gpxSelected) {
-				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false, true, true, false);
 			}
 		}
 	}
