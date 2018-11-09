@@ -730,7 +730,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="map_overlay_descr">Izbor prekrivnega zemljevida</string>
     <string name="tile_source_already_installed">Zemljevid je že nameščen. Nastavitve bodo posodobljene.</string>
     <string name="select_tile_source_to_install">Izbor zemljevidov za namestitev ali posodobitev</string>
-    <string name="internet_not_available">To opravilo zahteva vzpostavljeno povezavo z internetom, ki pa ni na voljo.</string>
+    <string name="internet_not_available">Opravila ni mogoče izvesti brez vzpostavljene povezave z internetom.</string>
     <string name="install_more">Namesti več …</string>
     <string name="create_poi_link_to_osm_doc">Določitev <u>spletnega OSM</u> s slikami.</string>
     <string name="error_doing_search">Iskanja v načinu brez povezave ni mogoče izvesti.</string>
@@ -2289,13 +2289,13 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="storage_place_description">Shranjevanje podatkov OsmAnd (zemljevidi, datoteke GPX in drugo): %1$s.</string>
     <string name="give_permission">Dodeli dovoljenje</string>
     <string name="allow_access_location">Dovoli dostop do mesta</string>
-    <string name="first_usage_greeting">Kakovostno vodenje za raziskovanje novih krajev brez internetne povezave</string>
+    <string name="first_usage_greeting">Navigacija in spoznavanje novih krajev tudi brez internetne povezave</string>
     <string name="search_my_location">Najdi moje mesto</string>
     <string name="no_update_info">Ne pokaži posodobitev</string>
     <string name="update_all_maps_now">Ali želite posodobiti vse zemljevide?</string>
     <string name="clear_tile_data">Počisti vse sličice</string>
     <string name="skip_map_downloading_desc">Nameščenega ni nobenega zemljevida za delo brez povezave. Izbrati je mogoče zemljevid s seznama, ali pa ga prejeti preko menija »%1$s«.</string>
-    <string name="first_usage_wizard_desc">Naj program OsmAnd določi trenutno mesto in predlaga zemljevid za prejem.</string>
+    <string name="first_usage_wizard_desc">Zemljevidi za prejem so predlagani po podatkih trenutnega mesta.</string>
     <string name="no_update_info_desc">Ne preverjaj za posodobitve programa OsmAnd in drugih ugodnosti.</string>
     <string name="donation_to_osm">Doniraj skupinosti OpenStreetMap</string>
     <string name="get_it">Pridobi</string>
