@@ -5,6 +5,7 @@ import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+
 import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -411,7 +412,7 @@ public class GpxSelectionHelper {
 	public void setGpxFileToDisplay(GPXFile... gpxs) {
 		// special case for gpx current route
 		for (GPXFile gpx : gpxs) {
-			selectGpxFileImpl(gpx, true, false, true, true);
+			selectGpxFile(gpx, true, false);
 		}
 		saveCurrentSelections();
 	}
@@ -438,7 +439,7 @@ public class GpxSelectionHelper {
 						if (gpx.warning != null) {
 							save = true;
 						} else {
-							selectGpxFile(gpx, true, false, true, selectedByUser);
+							selectGpxFile(gpx, true, false, true, selectedByUser, false);
 						}
 					} else if (obj.has(CURRENT_TRACK)) {
 						SelectedGpxFile file = savingTrackHelper.getCurrentTrack();
@@ -516,13 +517,23 @@ public class GpxSelectionHelper {
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
-		return selectGpxFile(gpx, show, notShowNavigationDialog, true, true);
+		return selectGpxFile(gpx, show, notShowNavigationDialog, true, true, true);
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser) {
 		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser);
 		saveCurrentSelections();
 		return sf;
+	}
+
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser, boolean canAddToMarkers) {
+		if (canAddToMarkers && show) {
+			GPXDatabase.GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(gpx.path));
+			if (dataItem != null && dataItem.isShowAsMarkers()) {
+				app.getMapMarkersHelper().addOrEnableGroup(gpx);
+			}
+		}
+		return selectGpxFile(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser);
 	}
 
 	public void clearPoints(GPXFile gpxFile) {

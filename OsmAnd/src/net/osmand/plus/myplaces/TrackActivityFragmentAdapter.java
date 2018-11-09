@@ -22,7 +22,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -321,10 +320,10 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 
 		vis.setChecked(gpxFileSelected);
-		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		vis.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (!isChecked) {
+			public void onClick(View v) {
+				if (!vis.isChecked()) {
 					selectedSplitInterval = 0;
 				}
 				setTrackVisibilityOnMap(vis.isChecked());
@@ -335,6 +334,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				TrackActivity trackActivity = getTrackActivity();
 				if (trackActivity != null) {
 					trackActivity.updateHeader(fragment);
+					trackActivity.invalidateOptionsMenu();
 				}
 			}
 		});
