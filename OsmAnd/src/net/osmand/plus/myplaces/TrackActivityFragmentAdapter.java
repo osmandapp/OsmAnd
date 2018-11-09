@@ -334,6 +334,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				TrackActivity trackActivity = getTrackActivity();
 				if (trackActivity != null) {
 					trackActivity.updateHeader(fragment);
+					trackActivity.invalidateOptionsMenu();
 				}
 			}
 		});
