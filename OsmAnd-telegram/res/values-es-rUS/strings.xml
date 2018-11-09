@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="background_work_description">Cambiar los ajustes de optimización de la batería, para compartir una ubicación estable</string>
+<resources><string name="background_work_description">Cambiar los ajustes de optimización de la batería para estabilizar la ubicación compartida.</string>
 	<string name="background_work">Funcionamiento en segundo plano</string>
 	<string name="battery_optimization_description">Para un uso compartido estable de su posición en segundo plano, es aconsejable desactivar la optimización de la batería para OsmAnd Telegram.
 \n
@@ -40,21 +40,21 @@
 	<string name="shared_string_group">Grupo</string>
 	<string name="logout_no_internet_msg">Conéctese a Internet para cerrar sesión en Telegram correctamente.</string>
 	<string name="shared_string_close">Cerrar</string>
-	<string name="disconnect_from_telegram_desc">Para revocar el acceso al uso compartido de ubicaciones. Abra Telegram, vaya a «Ajustes - Privacidad y Seguridad - Sesiones» y cierre sesión de OsmAnd Telegram.</string>
+	<string name="disconnect_from_telegram_desc">Para revocar el acceso al uso compartido de ubicaciones. Abra Telegram, vaya a «Ajustes → Privacidad y Seguridad → Sesiones» y cierre sesión de OsmAnd Telegram.</string>
 	<string name="disconnect_from_telegram">Cómo desactivar «OsmAnd Location Sharing» desde Telegram</string>
 	<string name="logout_help_desc">Cómo desactivar «OsmAnd Location Sharing» desde Telegram</string>
 	<string name="connected_account">Cuenta conectada</string>
 	<string name="shared_string_account">Cuenta</string>
 	<string name="in_time">en %1$s</string>
-	<string name="osmand_connect_desc">Elija la versión de OsmAnd el cual «OsmAnd Telegram» utilizará para mostrar las ubicaciones en el mapa.</string>
+	<string name="osmand_connect_desc">Elija la versión de OsmAnd el cual «OsmAnd Telegram» utilizará para mostrar las ubicaciones.</string>
 	<string name="osmand_connect">Conectar OsmAnd</string>
-	<string name="location_history_desc">Ocultar los contactos que no han actualizado su ubicación en un tiempo determinado.</string>
+	<string name="location_history_desc">Ocultar los contactos que no se han movido en un tiempo determinado.</string>
 	<string name="location_history">Historial de ubicación</string>
-	<string name="stale_location_desc">La última vez que un contacto envió una ubicación.</string>
-	<string name="stale_location">Ubicación obsoleta</string>
+	<string name="stale_location_desc">La última vez que un contacto se movió.</string>
+	<string name="stale_location">Sin movimiento</string>
 	<string name="send_my_location_desc">Fijar el intervalo mínimo para compartir la ubicación.</string>
 	<string name="send_my_location">Enviar mi ubicación</string>
-	<string name="gps_and_location">GPS y ubicación</string>
+	<string name="gps_and_location">Ubicación</string>
 	<string name="sharing_time">Tiempo compartido</string>
 	<string name="expire_at">Expira en</string>
 	<string name="turn_off_location_sharing">Desactivar el uso compartido de ubicaciones</string>
@@ -150,12 +150,12 @@
 	<string name="live_now">Enviar ahora</string>
 
 
-<string name="enter_another_device_name">Ingrese otro nombre, ya existe un dispositivo con el mismo nombre</string>
-	<string name="device_added_successfully">%1$s añadido(s) con éxito.</string>
+<string name="enter_another_device_name">Elige un nombre que no se haya usado</string>
+	<string name="device_added_successfully">%1$s añadido(s).</string>
 	<string name="shared_string_add">Añadir</string>
-	<string name="error_adding_new_device">Error al añadir un nuevo dispositivo</string>
-	<string name="enter_device_name_description">Ingrese un nombre para su nuevo dispositivo. Longitud máxima de 200 símbolos.</string>
-	<string name="device_name_is_too_long">El nombre del dispositivo es muy largo</string>
+	<string name="error_adding_new_device">No se pudo añadir el dispositivo</string>
+	<string name="enter_device_name_description">El nombre del dispositivo nuevo (máx. 200 símbolos).</string>
+	<string name="device_name_is_too_long">Nombre del dispositivo demasiado largo</string>
 	<string name="device_name_cannot_be_empty">El nombre del dispositivo no debe estar vacío</string>
 	<string name="device_name">Nombre del dispositivo</string>
 	<string name="shared_string_hide">Ocultar</string>
@@ -165,8 +165,10 @@
 	<string name="successfully_sent_and_updated">Enviado y actualizado con éxito</string>
 	<string name="not_possible_to_send_to_telegram_chats">Imposible enviar a los chats de Telegram:</string>
 	<string name="waiting_for_response_from_telegram">Esperando la respuesta de Telegram</string>
-	<string name="sending_location_messages">Envío de mensajes de ubicación</string>
-	<string name="initializing">Inicializando</string>
-	<string name="searching_for_gps">Buscando GPS</string>
+	<string name="sending_location_messages">Ubicación de envío</string>
+	<string name="initializing">Iniciando</string>
+	<string name="searching_for_gps">Ubicando…</string>
 	<string name="connecting_to_the_internet">Conexión a Internet</string>
+	<string name="last_update_from_telegram">Última actualización de Telegram</string>
+	<string name="stop_sharing_all">Compartir está activado (desactivar)</string>
 	</resources>

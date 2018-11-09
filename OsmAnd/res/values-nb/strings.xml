@@ -221,7 +221,7 @@
     
     <string name="pref_raster_map">Kartkilde-innstillinger</string>
     <string name="pref_vector_map">Vektorkart-innstillinger</string>
-    <string name="delete_confirmation_msg">Slette %1$s?</string>
+    <string name="delete_confirmation_msg">Slett %1$s\?</string>
     <string name="city_type_suburb">Bydel</string>
     <string name="city_type_hamlet">Grend</string>
     <string name="city_type_village">Landsby</string>
@@ -543,13 +543,13 @@
     <string name="add_favorite_dialog_favourite_added_template">Favorittpunkt \'\'{0}\'\' er lagt til.</string>
     <string name="favourites_context_menu_edit">Rediger favoritt</string>
     <string name="favourites_context_menu_delete">Slett favoritt</string>
-    <string name="favourites_remove_dialog_msg">Slette favorittpunkt \'%s\'?</string>
-    <string name="favourites_remove_dialog_success">Favorittpunkt {0} er slettet.</string>
+    <string name="favourites_remove_dialog_msg">Slett favorittpunkt \'%s\'\?</string>
+    <string name="favourites_remove_dialog_success">Favorittpunkt {0} slettet.</string>
     
     <string name="osb_comment_dialog_message">Melding</string>
     <string name="poi_edit_title">Rediger interessepunkt</string>
     <string name="poi_create_title">Opprett interessepunkt</string>
-    <string name="poi_remove_confirm_template">Slette {0} (kommentar)?</string>
+    <string name="poi_remove_confirm_template">Slett {0} (kommentar)\?</string>
     <string name="poi_remove_title">Slett interessepunkt</string>
     <string name="poi_remove_success">Interessepunkt slettet</string>
     <string name="poi_action_add">legg til</string>
@@ -562,7 +562,7 @@
     <string name="filter_current_poiButton">Filter</string>
 
     <string name="edit_filter_save_as_menu_item">Lagre som</string>
-    <string name="edit_filter_delete_dialog_title">Slette valgte filter?</string>
+    <string name="edit_filter_delete_dialog_title">Slett valgte filter\?</string>
     <string name="edit_filter_delete_message">Filter {0} har blitt slettet</string>
     <string name="edit_filter_create_message">Filter {0} har blitt opprettet</string>
 
@@ -709,7 +709,7 @@
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
     <string name="map_widget_plain_time">Nåtid</string>
     <string name="osmo_edit_color">Visningsfarge</string>
-    <string name="always_center_position_on_map">Vis posisjon alltid i midten</string>
+    <string name="always_center_position_on_map">Sentrer posisjon på kart</string>
     <string name="guidance_preferences_descr">Navigeringsinnstillinger</string>
     <string name="routing_preferences_descr">Ruteplanleggingsinnstillinger</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenser</string>
@@ -1292,7 +1292,7 @@
     <string name="av_camera_pic_size_descr">Velg bildestørrelsen for det interne kameraet.</string>
     <string name="action_create">Aksjon opprette</string>
     <string name="action_modify">Aksjon endre</string>
-    <string name="action_delete">Aksjon slette</string>
+    <string name="action_delete">Slettingshandling</string>
     <string name="drawer">Flat liste</string>
     <string name="shared_string_export">Eksporter</string>
     <string name="shared_string_collapse">Fold sammen</string>
@@ -1447,7 +1447,7 @@
     <string name="access_from_map">Tilgang fra kart</string>
     <string name="show_on_start">Vis ved start</string>
     <string name="copied_to_clipboard">Kopiert til utklippstavle</string>
-    <string name="context_menu_item_delete_waypoint">Slette GPX-rutepunkt?</string>
+    <string name="context_menu_item_delete_waypoint">Slett GPX-rutepunkt\?</string>
     <string name="context_menu_item_edit_waypoint">Rediger GPX-rutepunkt</string>
     <string name="lang_nds">Lavtysk</string>
     <string name="lang_mk">Makedonsk</string>

@@ -3005,4 +3005,18 @@
     <string name="markers_remove_dialog_msg">Удалить маркер \'%s\'\?</string>
     <string name="edit_map_marker">Редактировать маркер</string>
     <string name="third_party_application">Стороннее приложение</string>
+    <string name="osm_live_plan_pricing">План и цены</string>
+    <string name="osm_live_payment_monthly_title">Платить ежемесячно</string>
+    <string name="osm_live_payment_3_months_title">Платить раз в 3 месяца</string>
+    <string name="osm_live_payment_annual_title">Платить раз в год</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / месяц</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / месяц</string>
+    <string name="osm_live_payment_discount_descr">Экономия %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Ваша текущая подписка</string>
+    <string name="osm_live_payment_renews_monthly">Продлевается ежемесячно</string>
+    <string name="osm_live_payment_renews_quarterly">Продлевается ежеквартально</string>
+    <string name="osm_live_payment_renews_annually">"Продлевается  ежегодно"</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Выберите удобный для вас период оплаты:</string>
+    <string name="osm_live_payment_contribute_descr">Часть доходов поступает участникам OpenStreetMap.</string>
     </resources>
