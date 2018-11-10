@@ -95,7 +95,7 @@
     <string name="rendering_attr_moreDetailed_name">Máis detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricións de acceso</string>
-    <string name="rendering_attr_showAccess_name">Amosar restricións do acceso e portaxes</string>
+    <string name="rendering_attr_showAccess_name">Amosar restricións do acceso e portaxes ou peaxes</string>
     <string name="rendering_attr_showSurfaceGrade_name">Amosar calidade das estradas</string>
     <string name="rendering_attr_showSurfaces_name">Amosar superficie das estradas</string>
     <string name="rendering_attr_showCycleRoutes_name">Amosar ciclovías</string>
@@ -705,7 +705,7 @@
 	<string name="avoid_unpaved">Evita-las estradas sen asfaltar</string>
 	<string name="avoid_ferries">Evita-los ferris</string>
 	<string name="avoid_in_routing_title">Evitar…</string>
-	<string name="avoid_in_routing_descr">Evitar estradas de portaxe, sen asfaltar ou ferris e outros.</string>
+	<string name="avoid_in_routing_descr">Evitar estradas de portaxe ou peaxe, sen asfaltar ou ferris e outros.</string>
 	<string name="map_widget_fluorescent">Rotas fluorescentes</string>
 	<string name="map_widget_show_ruler">Regra</string>
 	<string name="map_widget_view_direction">Dirección da vista</string>
@@ -740,7 +740,7 @@
 	<string name="bg_service_interval">Estabelecer o intervalo para espertar:</string>
 	<string name="show_cameras">Radares da velocidade</string>
 	<string name="show_traffic_warnings">Avisos do tráfico</string>
-	<string name="avoid_toll_roads">Evita-las estradas de portaxe</string>
+	<string name="avoid_toll_roads">Evita-las estradas de portaxe ou peaxe</string>
 	<string name="continue_follow_previous_route_auto">Desexa continua-la navigación anterior non rematada\? (%1$s segundos)</string>
 	<string name="route_updated_loc_found">Estase a agarda-la ubicación para calcula-la rota</string>
 	<string name="osmand_parking_hours">Horas</string>
