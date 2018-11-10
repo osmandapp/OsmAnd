@@ -49,7 +49,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -130,14 +129,16 @@ public class MapActivityActions implements DialogProvider {
 	private RoutingHelper routingHelper;
 
 	@NonNull
-	private ImageView navDrawerLogoHeader;
+	private ImageView drawerLogoHeader;
+	private View drawerOsmAndFooter;
 
 	public MapActivityActions(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-		navDrawerLogoHeader = new ImageView(mapActivity);
-		navDrawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f), AndroidUtils.dpToPx(mapActivity, 16f), 0,0);
+		drawerLogoHeader = new ImageView(mapActivity);
+		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f), AndroidUtils.dpToPx(mapActivity, 16f), 0,0);
+		drawerOsmAndFooter = mapActivity.getLayoutInflater().inflate(R.layout.powered_by_osmand_item, null);
 	}
 
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
@@ -997,11 +998,14 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_light));
 		}
-		menuItemsListView.removeHeaderView(navDrawerLogoHeader);
-		final Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
+		menuItemsListView.removeHeaderView(drawerLogoHeader);
+		menuItemsListView.removeFooterView(drawerOsmAndFooter);
+		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
+		boolean customHeader = false;
 		if (navDrawerLogo != null) {
-			navDrawerLogoHeader.setImageBitmap(navDrawerLogo);
-			menuItemsListView.addHeaderView(navDrawerLogoHeader);
+			customHeader = true;
+			drawerLogoHeader.setImageBitmap(navDrawerLogo);
+			menuItemsListView.addHeaderView(drawerLogoHeader);
 		}
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
@@ -1013,7 +1017,9 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				mapActivity.dismissCardDialog();
-				if (position == 0 && navDrawerLogo != null) {
+				boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
+				boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
+				if ((hasHeader && position == 0) || (hasFooter && position == menuItemsListView.getCount() - 1)) {
 					getMyApplication().getAppCustomization().restoreOsmand();
 					mapActivity.closeDrawer();
 				} else {
@@ -1027,6 +1033,40 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}
 		});
+		if (customHeader) {
+			menuItemsListView.post(new Runnable() {
+				public void run() {
+					View footerLayout = mapActivity.findViewById(R.id.drawer_footer_layout);
+					boolean showFooterLayout = false;
+					if (menuItemsListView.getChildCount() > 0) {
+						int numItemsVisible = menuItemsListView.getLastVisiblePosition() -
+								menuItemsListView.getFirstVisiblePosition();
+						View lastView = menuItemsListView.getChildAt(menuItemsListView.getLastVisiblePosition());
+						boolean overlapped = lastView != null && lastView.getY() + lastView.getHeight() * 2 > menuItemsListView.getHeight();
+						if (simpleListAdapter.getCount() - 1 > numItemsVisible || overlapped) {
+							menuItemsListView.addFooterView(drawerOsmAndFooter);
+						} else {
+							showFooterLayout = true;
+						}
+					} else {
+						showFooterLayout = true;
+					}
+					if (showFooterLayout) {
+						footerLayout.setVisibility(View.VISIBLE);
+						footerLayout.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								getMyApplication().getAppCustomization().restoreOsmand();
+								mapActivity.closeDrawer();
+
+							}
+						});
+					} else {
+						footerLayout.setVisibility(View.GONE);
+					}
+				}
+			});
+		}
 	}
 
 	public void setFirstMapMarkerAsTarget() {
