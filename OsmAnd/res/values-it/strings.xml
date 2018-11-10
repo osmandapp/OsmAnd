@@ -48,7 +48,7 @@
     <string name="open_street_map_login_descr">Necessario per inviare contributi a openstreetmap.org</string>
     <string name="user_password">Password in OSM</string>
     
-    <string name="osmand_service">"Modalità  background"</string>
+    <string name="osmand_service">In secondo piano</string>
     <string name="osmand_service_descr">OsmAnd, a schermo spento, è eseguito in background</string>
 
 
@@ -207,13 +207,13 @@ La memoria utilizzata è  {1} MB.
 
     <string name="unit_of_length_descr">Cambia le unità di misura di lunghezza</string>
     <string name="unit_of_length">Unità di misura di lunghezza</string>
-    <string name="si_mi_feet">Miglia/piede</string>
+    <string name="si_mi_feet">Miglia/piedi</string>
     <string name="si_mi_yard">Miglia/iarde</string>
     <string name="si_km_m">Chilometri/metri</string>
-    <string name="yard">iarda</string>
-    <string name="foot">piedi</string>
+    <string name="yard">yd</string>
+    <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
-    <string name="mile">miglia</string>
+    <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Condividi la posizione usando</string>
     <string name="send_location_sms_pattern">Posizione: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Per vedere la posizione segui il collegamento web %1$s o il collegamento %2$s</string>
@@ -1517,7 +1517,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="speak_favorites">Preferiti nelle vicinanze</string>
     <string name="speak_poi">PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
-    <string name="shared_string_all">Tutto</string>
+    <string name="shared_string_all">Tutti</string>
     <string name="record_plugin_description">Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nello schermo della mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.
 \n
 \n
@@ -1695,7 +1695,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_previous">Precedente</string>
     <string name="shared_string_next">Successivo</string>
     <string name="shared_string_enable">Abilita</string>
-    <string name="shared_string_disable">Disabilita</string>
+    <string name="shared_string_disable">Disattiva</string>
     <string name="shared_string_enabled">Abilitato</string>
     <string name="shared_string_disabled">Disabilitato</string>
     <string name="shared_string_selected">Selezionato</string>
@@ -1736,7 +1736,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_io_error">Errore di lettura/scrittura</string>
     <string name="shared_string_unexpected_error">Si è verificato un errore imprevisto</string>
     <string name="shared_string_action_template">"Azione {0}"</string>
-    <string name="shared_string_close">Chiudi</string>
+    <string name="shared_string_close">Vicino</string>
     <string name="shared_string_exit">Esci</string>
     <string name="shared_string_show">Mostra</string>
     <string name="shared_string_show_all">Mostra tutto</string>
@@ -1960,13 +1960,13 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="osmand_running_in_background">Esecuzione in background</string>
     <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità.</string>
     <string name="default_speed_system">Unità di misura della velocità</string>
-    <string name="nm">NM</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Miglia nautiche</string>
     <string name="si_kmh">Chilometri all\'ora</string>
-    <string name="si_mph">Miglia per ora</string>
+    <string name="si_mph">Miglia all\'ora</string>
     <string name="si_m_s">Metri al secondo</string>
     <string name="si_min_km">Minuti al chilometro</string>
-    <string name="si_min_m">Minuti per miglia</string>
+    <string name="si_min_m">Minuti al miglio</string>
     <string name="si_nm_h">Miglia nautiche per ora (nodi)</string>
     <string name="nm_h">nm/h</string>
     <string name="min_mile">min/m</string>
