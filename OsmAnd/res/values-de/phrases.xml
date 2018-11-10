@@ -3896,7 +3896,7 @@
 	<string name="poi_substation_minor_distribution">Geringe Verteilung</string>
 	<string name="poi_substation_industrial">Industriell</string>
 	<string name="poi_substation_transition">Übergang</string>
-	<string name="poi_substation_traction">Bodenhaftung</string>
+	<string name="poi_substation_traction">Bahnstrom</string>
 	<string name="poi_substation_converter">Umrichter</string>
 	<string name="poi_substation_compensation">Kompensation</string>
 
@@ -3904,8 +3904,8 @@
 	<string name="poi_substation_measurement">Messung</string>
 	<string name="poi_substation_valve">Ventil</string>
 	<string name="poi_substation_valve_group">Ventilgruppe</string>
-	<string name="poi_substation_field_gathering">Feldsammlung</string>
+	<string name="poi_substation_field_gathering">Feldleitung</string>
 
 <string name="poi_pipeline_substation">Rohrleitungsunterstation</string>
-	<string name="poi_substation_inspection_gauge">Prüflehre</string>
+	<string name="poi_substation_inspection_gauge">Kontrollmanometer</string>
 	</resources>
