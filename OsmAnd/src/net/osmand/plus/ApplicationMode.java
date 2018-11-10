@@ -187,19 +187,29 @@ public class ApplicationMode {
 		this.stringKey = stringKey;
 	}
 
-	public static List<ApplicationMode> values(OsmandSettings settings) {
+	public static List<ApplicationMode> values(OsmandApplication app) {
+		if (customizationListener == null) {
+			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
+				@Override
+				public void onOsmAndSettingsCustomized() {
+					cachedFilteredValues = new ArrayList<>();
+				}
+			};
+			app.getAppCustomization().addListener(customizationListener);
+		}
 		if (cachedFilteredValues.isEmpty()) {
+			OsmandSettings settings = app.getSettings();
 			if (listener == null) {
 				listener = new StateChangedListener<String>() {
 					@Override
 					public void stateChanged(String change) {
-						cachedFilteredValues = new ArrayList<ApplicationMode>();
+						cachedFilteredValues = new ArrayList<>();
 					}
 				};
 				settings.AVAILABLE_APP_MODES.addListener(listener);
 			}
 			String available = settings.AVAILABLE_APP_MODES.get();
-			cachedFilteredValues = new ArrayList<ApplicationMode>();
+			cachedFilteredValues = new ArrayList<>();
 			for (ApplicationMode v : values) {
 				if (available.indexOf(v.getStringKey() + ",") != -1 || v == DEFAULT) {
 					cachedFilteredValues.add(v);
@@ -236,7 +246,10 @@ public class ApplicationMode {
 		return false;
 	}
 
-	public boolean isWidgetVisible(String key) {
+	public boolean isWidgetVisible(OsmandApplication app, String key) {
+		if (app.getAppCustomization().areWidgetsCustomized()) {
+			return app.getAppCustomization().isWidgetVisible(key, this);
+		}
 		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
 		if (set == null) {
 			return false;
@@ -261,7 +274,10 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String key) {
+	public boolean isWidgetAvailable(OsmandApplication app, String key) {
+		if (app.getAppCustomization().areWidgetsCustomized()) {
+			return app.getAppCustomization().isWidgetAvailable(key, this);
+		}
 		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
 		if (set == null) {
 			return true;
@@ -393,4 +409,5 @@ public class ApplicationMode {
 	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 	private static StateChangedListener<String> listener;
+	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
 }

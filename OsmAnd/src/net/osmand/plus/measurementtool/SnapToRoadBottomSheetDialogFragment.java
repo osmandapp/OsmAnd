@@ -48,13 +48,13 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 	@Override
 	public void setupDialog(Dialog dialog, int style) {
 		super.setupDialog(dialog, style);
-		if (getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+		OsmandApplication app = getMyApplication();
+		if (app.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 			dialog.getWindow().setWindowAnimations(R.style.Animations_NoAnimation);
 		}
 
-		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		final OsmandSettings settings = getMyApplication().getSettings();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, null);
@@ -76,7 +76,7 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 		}
 
 		LinearLayout container = (LinearLayout) mainView.findViewById(R.id.navigation_types_container);
-		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(settings));
+		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
 		if (removeDefaultMode) {
 			modes.remove(ApplicationMode.DEFAULT);
 		}

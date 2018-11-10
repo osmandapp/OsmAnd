@@ -13,6 +13,8 @@ import android.support.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.customization.OsmandSettingsParams;
+import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.favorite.AddFavoriteParams;
 import net.osmand.aidl.favorite.RemoveFavoriteParams;
 import net.osmand.aidl.favorite.UpdateFavoriteParams;
@@ -679,25 +681,25 @@ public class OsmandAidlService extends Service {
 
 		@Override
 		public boolean setEnabledIds(List<String> ids) throws RemoteException {
-			OsmandAidlApi api = getApi("setEnabledIds");
+			OsmandAidlApi api = getApi("setFeaturesEnabledIds");
 			return api != null && api.setEnabledIds(ids);
 		}
 
 		@Override
 		public boolean setDisabledIds(List<String> ids) throws RemoteException {
-			OsmandAidlApi api = getApi("setDisabledIds");
+			OsmandAidlApi api = getApi("setFeaturesDisabledIds");
 			return api != null && api.setDisabledIds(ids);
 		}
 
 		@Override
 		public boolean setEnabledPatterns(List<String> patterns) throws RemoteException {
-			OsmandAidlApi api = getApi("setEnabledPatterns");
+			OsmandAidlApi api = getApi("setFeaturesEnabledPatterns");
 			return api != null && api.setEnabledPatterns(patterns);
 		}
 
 		@Override
 		public boolean setDisabledPatterns(List<String> patterns) throws RemoteException {
-			OsmandAidlApi api = getApi("setDisabledPatterns");
+			OsmandAidlApi api = getApi("setFeaturesDisabledPatterns");
 			return api != null && api.setDisabledPatterns(patterns);
 		}
 
@@ -718,6 +720,24 @@ public class OsmandAidlService extends Service {
 					}
 				}
 			}, updateTimeMS);
+		}
+
+		@Override
+		public boolean regWidgetVisibility(SetWidgetsParams params) throws RemoteException {
+			OsmandAidlApi api = getApi("regWidgetVisibility");
+			return api != null && api.regWidgetVisibility(params.getWidgetKey(), params.getAppModesKeys());
+		}
+
+		@Override
+		public boolean regWidgetAvailability(SetWidgetsParams params) throws RemoteException {
+			OsmandAidlApi api = getApi("regWidgetVisibility");
+			return api != null && api.regWidgetAvailability(params.getWidgetKey(), params.getAppModesKeys());
+		}
+
+		@Override
+		public boolean customizeOsmandSettings(OsmandSettingsParams params) throws RemoteException {
+			OsmandAidlApi api = getApi("customizeOsmandSettings");
+			return api != null && api.customizeOsmandSettings(params.getSharedPreferencesName(), params.getBundle());
 		}
 	};
 }

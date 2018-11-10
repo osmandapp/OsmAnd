@@ -324,20 +324,21 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = getMyApplication().getSettings();
+		OsmandApplication app = getMyApplication();
+		settings = app.getSettings();
 		getToolbar().setTitle(R.string.shared_string_settings);
 
 		
 		if (profileSettings) {
 			modes.clear();
-			for (ApplicationMode a : ApplicationMode.values(settings)) {
+			for (ApplicationMode a : ApplicationMode.values(app)) {
 				if (a != ApplicationMode.DEFAULT) {
 					modes.add(a);
 				}
 			}
 			List<String> s = new ArrayList<String>();
 			for (ApplicationMode a : modes) {
-				s.add(a.toHumanString(getMyApplication()));
+				s.add(a.toHumanString(app));
 			}
 			SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this,
 					R.layout.spinner_item, s);

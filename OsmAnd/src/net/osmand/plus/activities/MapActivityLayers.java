@@ -96,7 +96,7 @@ public class MapActivityLayers {
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
-		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication().getSettings());
+		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication());
 		this.quickActionRegistry = new QuickActionRegistry(activity.getMyApplication().getSettings());
 	}
 

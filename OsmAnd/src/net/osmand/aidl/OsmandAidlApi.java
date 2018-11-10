@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -84,10 +85,12 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -1664,22 +1667,37 @@ public class OsmandAidlApi {
 	}
 
 	boolean setEnabledIds(Collection<String> ids) {
-		app.getAppCustomization().setEnabledIds(ids);
+		app.getAppCustomization().setFeaturesEnabledIds(ids);
 		return true;
 	}
 
 	boolean setDisabledIds(Collection<String> ids) {
-		app.getAppCustomization().setDisabledIds(ids);
+		app.getAppCustomization().setFeaturesDisabledIds(ids);
 		return true;
 	}
 
 	boolean setEnabledPatterns(Collection<String> patterns) {
-		app.getAppCustomization().setEnabledPatterns(patterns);
+		app.getAppCustomization().setFeaturesEnabledPatterns(patterns);
 		return true;
 	}
 
 	boolean setDisabledPatterns(Collection<String> patterns) {
-		app.getAppCustomization().setDisabledPatterns(patterns);
+		app.getAppCustomization().setFeaturesDisabledPatterns(patterns);
+		return true;
+	}
+
+	boolean regWidgetVisibility(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
+		app.getAppCustomization().regWidgetVisibility(widgetId, appModeKeys);
+		return true;
+	}
+
+	boolean regWidgetAvailability(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
+		app.getAppCustomization().regWidgetAvailability(widgetId, appModeKeys);
+		return true;
+	}
+
+	boolean customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
+		app.getAppCustomization().customizeOsmandSettings(sharedPreferencesName, bundle);
 		return true;
 	}
 

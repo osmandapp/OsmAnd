@@ -67,6 +67,9 @@ import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.navigation.NavigateSearchParams;
 
+import net.osmand.aidl.customization.SetWidgetsParams;
+import net.osmand.aidl.customization.OsmandSettingsParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -140,4 +143,9 @@ interface IOsmAndAidlInterface {
     boolean setDisabledIds(in List<String> ids);
     boolean setEnabledPatterns(in List<String> patterns);
     boolean setDisabledPatterns(in List<String> patterns);
+
+    boolean regWidgetVisibility(in SetWidgetsParams params);
+    boolean regWidgetAvailability(in SetWidgetsParams params);
+
+    boolean customizeOsmandSettings(in OsmandSettingsParams params);
 }

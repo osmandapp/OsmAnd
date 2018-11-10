@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -25,9 +27,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,12 +43,43 @@ public class OsmAndAppCustomization {
 
 	private Bitmap navDrawerLogo;
 
-	private Set<String> enabledIds = new HashSet<>();
-	private Set<String> disabledIds = new HashSet<>();
-	private Set<String> enabledPatterns = new HashSet<>();
-	private Set<String> disabledPatterns = new HashSet<>();
+	private Set<String> featuresEnabledIds = new HashSet<>();
+	private Set<String> featuresDisabledIds = new HashSet<>();
+	private Set<String> featuresEnabledPatterns = new HashSet<>();
+	private Set<String> featuresDisabledPatterns = new HashSet<>();
+	private Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
+	private Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+	private CustomOsmandSettings customOsmandSettings;
 
-	private boolean customizationEnabled;
+	private boolean featuresCustomized;
+	private boolean widgetsCustomized;
+
+	private List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
+
+	public interface OsmAndAppCustomizationListener {
+
+		void onOsmAndSettingsCustomized();
+	}
+
+	public static class CustomOsmandSettings {
+		private String sharedPreferencesName;
+		private OsmandSettings settings;
+
+		CustomOsmandSettings(OsmandApplication app, String sharedPreferencesName, Bundle bundle) {
+			this.sharedPreferencesName = sharedPreferencesName;
+			this.settings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app), sharedPreferencesName);
+			if (bundle != null) {
+				for (String key : bundle.keySet()) {
+					Object object = bundle.get(key);
+					this.settings.setPreference(key, object);
+				}
+			}
+		}
+
+		public OsmandSettings getSettings() {
+			return settings;
+		}
+	}
 
 	public void setup(OsmandApplication app) {
 		this.app = app;
@@ -52,7 +87,25 @@ public class OsmAndAppCustomization {
 	}
 
 	public OsmandSettings getOsmandSettings() {
-		return osmandSettings;
+		return customOsmandSettings != null ? customOsmandSettings.getSettings() : osmandSettings;
+	}
+
+	public void customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
+		customOsmandSettings = new CustomOsmandSettings(app, sharedPreferencesName, bundle);
+		OsmandSettings newSettings = customOsmandSettings.getSettings();
+		if (Build.VERSION.SDK_INT < 19) {
+			if (osmandSettings.isExternalStorageDirectorySpecifiedPre19()) {
+				File externalStorageDirectory = osmandSettings.getExternalStorageDirectoryPre19();
+				newSettings.setExternalStorageDirectoryPre19(externalStorageDirectory.getAbsolutePath());
+			}
+		} else if (osmandSettings.isExternalStorageDirectoryTypeSpecifiedV19()
+				&& osmandSettings.isExternalStorageDirectorySpecifiedV19()) {
+			int type = osmandSettings.getExternalStorageDirectoryTypeV19();
+			String directory = osmandSettings.getExternalStorageDirectoryV19();
+			newSettings.setExternalStorageDirectoryV19(type, directory);
+		}
+		app.setOsmandSettings(newSettings);
+		notifySettingsCustomized();
 	}
 
 	// Activities
@@ -145,49 +198,109 @@ public class OsmAndAppCustomization {
 		return true;
 	}
 
-	public void setEnabledIds(@NonNull Collection<String> ids) {
-		enabledIds.clear();
-		enabledIds.addAll(ids);
-		updateCustomizationEnabled();
+	public void setFeaturesEnabledIds(@NonNull Collection<String> ids) {
+		featuresEnabledIds.clear();
+		featuresEnabledIds.addAll(ids);
+		setFeaturesCustomized();
 	}
 
-	public void setDisabledIds(@NonNull Collection<String> ids) {
-		disabledIds.clear();
-		disabledIds.addAll(ids);
-		updateCustomizationEnabled();
+	public void setFeaturesDisabledIds(@NonNull Collection<String> ids) {
+		featuresDisabledIds.clear();
+		featuresDisabledIds.addAll(ids);
+		setFeaturesCustomized();
 	}
 
-	public void setEnabledPatterns(@NonNull Collection<String> patterns) {
-		enabledPatterns.clear();
-		enabledPatterns.addAll(patterns);
-		updateCustomizationEnabled();
+	public void setFeaturesEnabledPatterns(@NonNull Collection<String> patterns) {
+		featuresEnabledPatterns.clear();
+		featuresEnabledPatterns.addAll(patterns);
+		setFeaturesCustomized();
 	}
 
-	public void setDisabledPatterns(@NonNull Collection<String> patterns) {
-		disabledPatterns.clear();
-		disabledPatterns.addAll(patterns);
-		updateCustomizationEnabled();
+	public void setFeaturesDisabledPatterns(@NonNull Collection<String> patterns) {
+		featuresDisabledPatterns.clear();
+		featuresDisabledPatterns.addAll(patterns);
+		setFeaturesCustomized();
+	}
+
+	public Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
+		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
+		widgetsVisibilityMap.put(widgetId, set);
+		setWidgetsCustomized();
+		return set;
+	}
+
+	public Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
+		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
+		widgetsAvailabilityMap.put(widgetId, set);
+		setWidgetsCustomized();
+		return set;
+	}
+
+	public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {
+		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
+		if (set == null) {
+			return false;
+		}
+		return set.contains(appMode);
+	}
+
+	public boolean isWidgetAvailable(@NonNull String key, ApplicationMode appMode) {
+		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
+		if (set == null) {
+			return true;
+		}
+		return set.contains(appMode);
+	}
+
+	@NonNull
+	private HashSet<ApplicationMode> getAppModesSet(@Nullable List<String> appModeKeys) {
+		HashSet<ApplicationMode> set = new HashSet<>();
+		List<ApplicationMode> values = ApplicationMode.allPossibleValues();
+		if (appModeKeys == null) {
+			set.addAll(values);
+		} else {
+			for (String key : appModeKeys) {
+				ApplicationMode am = ApplicationMode.valueOfStringKey(key, null);
+				if (am != null) {
+					set.add(am);
+				}
+			}
+		}
+		for (ApplicationMode m : values) {
+			// add derived modes
+			if (set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		return set;
 	}
 
 	public boolean isFeatureEnabled(@NonNull String id) {
-		if (!customizationEnabled) {
+		if (!featuresCustomized) {
 			return true;
 		}
-		if (enabledIds.contains(id)) {
+		if (featuresEnabledIds.contains(id)) {
 			return true;
 		}
-		if (disabledIds.contains(id)) {
+		if (featuresDisabledIds.contains(id)) {
 			return false;
 		}
-		if (isMatchesPattern(id, enabledPatterns)) {
+		if (isMatchesPattern(id, featuresEnabledPatterns)) {
 			return true;
 		}
-		return !isMatchesPattern(id, disabledPatterns);
+		return !isMatchesPattern(id, featuresDisabledPatterns);
 	}
 
-	private void updateCustomizationEnabled() {
-		customizationEnabled = !enabledIds.isEmpty() || !disabledIds.isEmpty()
-				|| !enabledPatterns.isEmpty() || !disabledPatterns.isEmpty();
+	public boolean areWidgetsCustomized() {
+		return widgetsCustomized;
+	}
+
+	private void setFeaturesCustomized() {
+		featuresCustomized = true;
+	}
+
+	private void setWidgetsCustomized() {
+		widgetsCustomized = true;
 	}
 
 	private boolean isMatchesPattern(@NonNull String id, @NonNull Set<String> patterns) {
@@ -197,5 +310,25 @@ public class OsmAndAppCustomization {
 			}
 		}
 		return false;
+	}
+
+	private void notifySettingsCustomized() {
+		app.uiHandler.post(new Runnable() {
+
+			@Override
+			public void run() {
+				for (OsmAndAppCustomizationListener l : listeners) {
+					l.onOsmAndSettingsCustomized();
+				}
+			}
+		});
+	}
+
+	public void addListener(OsmAndAppCustomizationListener listener) {
+		this.listeners.add(listener);
+	}
+
+	public void removeListener(OsmAndAppCustomizationListener listener) {
+		this.listeners.remove(listener);
 	}
 }

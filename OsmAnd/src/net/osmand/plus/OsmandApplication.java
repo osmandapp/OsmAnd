@@ -6,8 +6,8 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
@@ -25,6 +25,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -269,6 +270,12 @@ public class OsmandApplication extends MultiDexApplication {
 			LOG.error("Trying to access settings before they were created");
 		}
 		return osmandSettings;
+	}
+
+	public void setOsmandSettings(OsmandSettings osmandSettings) {
+		//android.os.Process.killProcess(android.os.Process.myPid());
+		this.osmandSettings = osmandSettings;
+		OsmandPlugin.initPlugins(this);
 	}
 
 	public SavingTrackHelper getSavingTrackHelper() {

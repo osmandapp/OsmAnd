@@ -23,8 +23,9 @@ public class AppModeDialog {
 
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
 			ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
-		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
-		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
+		OsmandApplication app = (OsmandApplication) a.getApplication();
+		OsmandSettings settings = app.getSettings();
+		final List<ApplicationMode> values = new ArrayList<>(ApplicationMode.values(app));
 		if(!showDefault) {
 			values.remove(ApplicationMode.DEFAULT);
 		}
@@ -38,8 +39,9 @@ public class AppModeDialog {
 	//needed because if there's more than 4 items  - the don't fit in drawer
 	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected,
 												boolean useMapTheme, final View.OnClickListener onClickListener) {
-		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
-		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
+		OsmandApplication app = (OsmandApplication) a.getApplication();
+		OsmandSettings settings = app.getSettings();
+		final List<ApplicationMode> values = new ArrayList<>(ApplicationMode.values(app));
 		selected.add(settings.getApplicationMode());
 		return prepareAppModeView(a, values, selected, null, true, true, useMapTheme, onClickListener);
 	}

@@ -134,6 +134,7 @@ public abstract class OsmandPlugin {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 
+		allPlugins.clear();
 		allPlugins.add(new MapillaryPlugin(app));
 		enabledPlugins.add(MapillaryPlugin.ID);
 
