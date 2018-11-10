@@ -998,7 +998,7 @@ public class MapActivityActions implements DialogProvider {
 			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_light));
 		}
 		menuItemsListView.removeHeaderView(navDrawerLogoHeader);
-		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
+		final Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
 		if (navDrawerLogo != null) {
 			navDrawerLogoHeader.setImageBitmap(navDrawerLogo);
 			menuItemsListView.addHeaderView(navDrawerLogoHeader);
@@ -1013,12 +1013,17 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				mapActivity.dismissCardDialog();
-				position -= menuItemsListView.getHeaderViewsCount();
-				ContextMenuItem item = contextMenuAdapter.getItem(position);
-				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
-				if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
-						position, false, AndroidUtils.getCenterViewCoordinates(view))) {
+				if (position == 0 && navDrawerLogo != null) {
+					getMyApplication().getAppCustomization().restoreOsmand();
 					mapActivity.closeDrawer();
+				} else {
+					position -= menuItemsListView.getHeaderViewsCount();
+					ContextMenuItem item = contextMenuAdapter.getItem(position);
+					ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
+					if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
+							position, false, AndroidUtils.getCenterViewCoordinates(view))) {
+						mapActivity.closeDrawer();
+					}
 				}
 			}
 		});

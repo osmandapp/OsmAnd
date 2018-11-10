@@ -209,6 +209,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean pendingPause = false;
 	private Timer splashScreenTimer;
 	private boolean activityRestartNeeded = false;
+	private boolean stopped = false;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
@@ -1221,6 +1222,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onStart() {
 		super.onStart();
+		stopped = false;
 		wakeLockHelper.onStart(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
@@ -1240,6 +1242,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if(pendingPause) {
 			onPauseActivity();
 		}
+		stopped = true;
 		super.onStop();
 	}
 
@@ -1958,7 +1961,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onOsmAndSettingsCustomized() {
-		activityRestartNeeded = true;
+		if (stopped) {
+			activityRestartNeeded = true;
+		} else {
+			recreate();
+		}
 	}
 
 	public enum ShowQuickSearchMode {

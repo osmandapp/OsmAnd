@@ -108,6 +108,26 @@ public class OsmAndAppCustomization {
 		notifySettingsCustomized();
 	}
 
+	private void restoreOsmandSetting() {
+		app.setOsmandSettings(osmandSettings);
+		notifySettingsCustomized();
+	}
+
+	public void restoreOsmand() {
+		navDrawerLogo = null;
+		featuresCustomized = false;
+		widgetsCustomized = false;
+		customOsmandSettings = null;
+		restoreOsmandSetting();
+
+		featuresEnabledIds.clear();
+		featuresDisabledIds.clear();
+		featuresEnabledPatterns.clear();
+		featuresDisabledPatterns.clear();
+		widgetsVisibilityMap.clear();
+		widgetsAvailabilityMap.clear();
+	}
+
 	// Activities
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsActivity.class;
