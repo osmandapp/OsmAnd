@@ -14,8 +14,8 @@
     <string name="osm_live_payment_monthly_title">Pay monthly</string>
     <string name="osm_live_payment_3_months_title">Pay every 3 months</string>
     <string name="osm_live_payment_annual_title">Pay annually</string>
-    <string name="osm_live_payment_month_cost_descr">%1$s/month</string>
-    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s/month</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / month</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / month</string>
     <string name="osm_live_payment_discount_descr">Save %1$s!</string>
 	<string name="osm_live_payment_current_subscription">Your current subscription</string>
     <string name="osm_live_payment_renews_monthly">Renews monthly</string>
@@ -28,7 +28,7 @@
     <string name="edit_map_marker">Edit map marker</string>
     <string name="third_party_application">Third-party app</string>
     <string name="search_street">Search for street</string>
-    <string name="start_search_from_city">In what city?</string>
+    <string name="start_search_from_city">Select the city first</string>
     <string name="shared_string_restore">Restore</string>
     <string name="keep_passed_markers_descr">Markers added as a group of Favorites or GPX waypoints marked \"Passed\" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
     <string name="keep_passed_markers">Keep passed markers on the map</string>
@@ -52,7 +52,7 @@
     • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
     • Improve Wikipedia and Wikivoyage parsing, updated files are already available\n\n
     • Context menu: Fix for transport shields color in night mode, additional menu sizes\n\n
-    • Boat navigation: Support for waterway sea lane\n\n
+    • Boat navigation: Support for waterway fairway\n\n
     • Other bug fixes\n\n
     </string>
     <string name="commiting_way">Committing way…</string>
@@ -69,10 +69,10 @@
     <string name="error_notification_desc">Please send a screenshot of this notification to support@osmand.net</string>
     <string name="quick_action_edit_actions">Edit actions</string>
     <string name="get_osmand_live">Get OsmAnd Live to unlock all features: Daily map updates with unlimited downloads, all paid and free plugins, Wikipedia, Wikivoyage and much more.</string>
-    <string name="unirs_render_descr">Increased contrast of pedestrian and bicycle roads in default style. Uses legacy Mapnik colors.</string>
+    <string name="unirs_render_descr">Modification of the default style to increase contrast of pedestrian and bicycle roads in default style. Uses legacy Mapnik colors.</string>
     <string name="shared_string_bookmark">Bookmark</string>
     <string name="hide_full_description">Hide full description</string>
-    <string name="show_full_description">Full description</string>
+    <string name="show_full_description">Show full description</string>
     <string name="off_road_render_descr">Suitable for use during off-road driving. Suitable for use with green satellite images as an underlay map. Key points: Reduced main road thickness, increased thickness of tracks, paths, bicycle and other routes. Based on \'Topo\' style.</string>
     <string name="nautical_render_descr">Nautical navigation style. Key features: Buoys, lighthouses, riverways, sea lanes and marks, harbours, seamark services, depth contours.</string>
     <string name="ski_map_render_descr">Skiing style. Key features: Renders pistes, ski-lifts and other ski features in a convenient way. Less distracting secondary map objects.</string>
