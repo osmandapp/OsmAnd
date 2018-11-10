@@ -3180,7 +3180,7 @@
     <string name="edit_map_marker">Рэдагаваць пазнаку мапы</string>
     <string name="third_party_application">Старонняе прыкладанне</string>
     <string name="search_street">Пошук вуліцы</string>
-    <string name="start_search_from_city">Пачаць пошук з горада</string>
+    <string name="start_search_from_city">Спачатку абярыце горад</string>
     <string name="shared_string_restore">Аднавіць</string>
     <string name="keep_passed_markers_descr">Пазнакі, даданыя як група улюблёных ці пройденых маршрутных GPX-кропак, застануцца на мапе. Калі група неактыўная, пазнакі знікнуць з мапы.</string>
     <string name="keep_passed_markers">Пакінуць пройдзеныя пакнакі на мапе</string>
@@ -3202,4 +3202,18 @@
 \n
 \n</string>
     <string name="rendering_value_black_name">Чорны</string>
+    <string name="osm_live_plan_pricing">План і цэны</string>
+    <string name="osm_live_payment_monthly_title">Плаціць штомесячна</string>
+    <string name="osm_live_payment_3_months_title">Плаціць раз у 3 месяцы</string>
+    <string name="osm_live_payment_annual_title">Праціць штогодна</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / месяц</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / месяц</string>
+    <string name="osm_live_payment_discount_descr">Ашчада %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Ваша цяперашняя падпіска</string>
+    <string name="osm_live_payment_renews_monthly">Абнаўляецца штомесяц</string>
+    <string name="osm_live_payment_renews_quarterly">Абнаўляецца штоквартальна</string>
+    <string name="osm_live_payment_renews_annually">Абнаўляецца штогодна</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Абярыце зручную для вас перыядычнасць аплат:</string>
+    <string name="osm_live_payment_contribute_descr">Частка даходу ідзе ўдзельнікам OpenStreetMap.</string>
     </resources>
