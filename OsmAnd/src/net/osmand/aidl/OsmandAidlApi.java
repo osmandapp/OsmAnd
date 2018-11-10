@@ -190,9 +190,11 @@ public class OsmandAidlApi {
 		registerMuteNavigationReceiver(mapActivity);
 		registerUnmuteNavigationReceiver(mapActivity);
 		initOsmandTelegram();
+		app.getAppCustomization().addListener(mapActivity);
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
+		app.getAppCustomization().removeListener(mapActivity);
 		mapActivityActive = false;
 		for (BroadcastReceiver b : receivers.values()) {
 			if(b == null) {

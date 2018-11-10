@@ -209,7 +209,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean pendingPause = false;
 	private Timer splashScreenTimer;
 	private boolean activityRestartNeeded = false;
-	private boolean stopped = false;
+	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
@@ -328,7 +328,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		registerReceiver(screenOffReceiver, filter);
 
 		app.getAidlApi().onCreateMapActivity(this);
-		app.getAppCustomization().addListener(this);
 
 		mIsDestroyed = false;
 	}
