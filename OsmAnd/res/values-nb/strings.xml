@@ -3071,4 +3071,18 @@
     <string name="shared_string_restore">Gjenopprett</string>
     <string name="keep_passed_markers_descr">Markører lagt til som favorittgrupper eller GPX-veipunkter markert som passert vil forbli på kartet. Hvis gruppen ikke er aktiv, vil markørene forsvinne fra kartet.</string>
     <string name="keep_passed_markers">Behold passerte markører på kartet</string>
+    <string name="osm_live_plan_pricing">Betalingsplan og pris</string>
+    <string name="osm_live_payment_monthly_title">Betal månedlig</string>
+    <string name="osm_live_payment_3_months_title">Betal hver tredje måned</string>
+    <string name="osm_live_payment_annual_title">Betal årlig</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s per måned</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s per måned</string>
+    <string name="osm_live_payment_discount_descr">Lagre %1$s.</string>
+	<string name="osm_live_payment_current_subscription">Ditt nåværende abonnement</string>
+    <string name="osm_live_payment_renews_monthly">Fornyes månedlig</string>
+    <string name="osm_live_payment_renews_quarterly">Fornyes kvartalsvis</string>
+    <string name="osm_live_payment_renews_annually">Fornyes årlig</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Velg betalingsfrekvensen som passer for deg:</string>
+    <string name="osm_live_payment_contribute_descr">Deler av inntekten går til OpenStreetMap-bidragsytere.</string>
     </resources>
