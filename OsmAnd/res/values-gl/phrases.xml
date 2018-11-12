@@ -3140,4 +3140,56 @@
 	<string name="poi_substation_field_gathering">Recolleita de campo</string>
 
 <string name="poi_historic_civilization_prehistoric">Civilización: prehistórica</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilización: grega antiga</string>
+	<string name="poi_historic_civilization_roman">Civilización: romana</string>
+	<string name="poi_historic_civilization_byzantine">Civilización: bizantina (do 285 d.C. ó 1453 d.C.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilización: exipcia antiga (até o 332 a.C.)</string>
+	<string name="poi_historic_civilization_celtic">Civilización: celta</string>
+	<string name="poi_historic_civilization_western_roman">Civilización: romana occidental (do 285 d.C. ó 476 d.C.)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilización: micénica</string>
+	<string name="poi_historic_civilization_dacian">Civilización: dacios</string>
+	<string name="poi_historic_civilization_hernici">Civilización: hérnicos</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilización: grego-exipcia (do 332 a.C. ó 30 a.C.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilización: romana e bizantino-exipcia</string>
+	<string name="poi_historic_civilization_helladic">Civilización: heládica</string>
+	<string name="poi_historic_civilization_cycladic">Civilización: cicládica</string>
+	<string name="poi_historic_civilization_minoan">Civilización: cretense ou minoica</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilización: tiahuanaca</string>
+
+	<string name="poi_animal_training">Adestramento de animais</string>
+	<string name="poi_animal_training_dog">Cans</string>
+	<string name="poi_animal_training_horse">Cabalos</string>
+
+	<string name="poi_animal_yes">Permitidos animais</string>
+	<string name="poi_animal_no">Prohibidos animais</string>
+
+	<string name="poi_historic_period_nuragic">Período histórico: nuráxico</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Período histórico: idade da pedra/bronce (indeterminado)</string>
+	<string name="poi_historic_period_bronze_age">Período histórico: idade do bronce</string>
+	<string name="poi_historic_period_principate">Período histórico: principado (do 27 a.C. ó 284 d.C.)</string>
+	<string name="poi_historic_period_classical_greece">Período histórico: Grecia clásica (do século V ó IV a.C.)</string>
+	<string name="poi_historic_period_archaic_greece">Período histórico: Grecia arcaica</string>
+	<string name="poi_historic_period_iron_age">Período histórico: idade do ferro</string>
+	<string name="poi_historic_period_hellenistic_greece">Período histórico: Grecia helenística</string>
+	<string name="poi_historic_period_new_kingdom">Período histórico: novo reinado (do 1550 ó 1069 a.C.)</string>
+	<string name="poi_historic_period_middle_kingdom">Período histórico: medio reinado (do 2055 ó 1650 a.C.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Período histórico: Exipto pre-dinástico</string>
+	<string name="poi_historic_period_early_dynastic_period">Período histórico: período dinástico cedo (do 3100 ó 2686 a.C.)</string>
+	<string name="poi_historic_period_old_kingdom">Período histórico: antigo reinado (do 2686 ó 2181 a.C.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Período histórico: primeiro período intermedio (do 2181 ó 2055 a.C.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Período histórico: segundo período intermedio (do 1650 ó 1550 a.C.)</string>
+	<string name="poi_historic_period_third_intermediate_period">Período histórico: terceiro período intermedio (do 1069 ó 664 a.C.)</string>
+	<string name="poi_historic_period_first_persian_period">Período histórico: primeiro período persa</string>
+	<string name="poi_historic_period_late_period">Período histórico: derradeiro período (do 664 ó 332 a.C.)</string>
+	<string name="poi_historic_period_second_persian_period">Período histórico: segundo período persa</string>
+	<string name="poi_historic_period_alexander_the_great">Período histórico: Alexandre o Grande</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Período histórico: Exipto ptolemaico (do 305 ó 30 a.C.)</string>
+	<string name="poi_historic_period_christian_egypt">Período histórico: Exipto cristián</string>
+	<string name="poi_historic_period_byzantine_egypt">Período histórico: Exipto bizantino (do 30 a.C. ó 641 d.C.)</string>
+	<string name="poi_historic_period_persian_occupation">Período histórico: ocupación persa</string>
+	<string name="poi_historic_period_greek_dark_ages">Período histórico: Idade escura grega (do 1100 ó 800 a.C.)</string>
+	<string name="poi_historic_period_roman_greece">Período histórico: Grecia romana (do 146 a.C. ó 330 d.C.)</string>
+	<string name="poi_historic_period_roman_kingdom">Período histórico: Reinado romano (do 753 ó 509 a.C.)</string>
+	<string name="poi_historic_period_dominate">Período histórico: dominato (do 285 ó 476 d.C.)</string>
+	<string name="poi_historic_period_villager">Período histórico: aldeáns (época I, II, do 1580 a.C. ó 133 d.C.)</string>
 	</resources>
