@@ -476,7 +476,7 @@
 	<string name="poi_recycling_aluminium">Aluminio</string>
 	<string name="poi_recycling_organic">Orgánico</string>
 	<string name="poi_recycling_beverage_cartons">Cartóns de bebidas</string>
-	<string name="poi_recycling_fluorescent_tubes">Tubos fluorescentes</string>
+	<string name="poi_recycling_fluorescent_tubes">Tubaxes fluorescentes</string>
 	<string name="poi_recycling_metal">Metal</string>
 	<string name="poi_recycling_cooking_oil">Aceite de cociña</string>
 	<string name="poi_recycling_engine_oil">Aceite de motor</string>
@@ -2921,4 +2921,222 @@
 
 	<string name="poi_railway_yard">Estación de trens de mercadorías</string>
 
-	</resources>
+	<string name="poi_step_condition_even">Condicións dos chanzos: boas</string>
+	<string name="poi_step_condition_uneven">Condicións dos chanzos: malas</string>
+	<string name="poi_step_condition_rough">Condicións dos chanzos: pésimas</string>
+
+	<string name="poi_cairn">Morea de pedras</string>
+
+	<string name="poi_defibrillator">Desfibrilador</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilización: Roma antiga (do 753 a.C. ó 284 d.C.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilización: nurague (do século XVIII a.C. ó II d.C.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilização: etrusca (do século XII ó VI a.C.)</string>
+	<string name="poi_coworking_space">Espazo de traballo conxunto (coworking)</string>
+
+	<string name="poi_charging_station_output">Saída da estación de carrega</string>
+
+	<string name="poi_map_size_site">Tamaño do mapa: lugar</string>
+	<string name="poi_map_size_city">Tamaño do mapa: cidade</string>
+	<string name="poi_map_size_region">Tamaño do mapa: rexión</string>
+
+	<string name="poi_charging_station_filter">Estación de carrega</string>
+
+	<string name="poi_depot">Depósito</string>
+
+	<string name="poi_letter_box">Caixa das postais</string>
+	<string name="poi_post_street">Rúa</string>
+	<string name="poi_post_housenumber">Número da casa</string>
+	<string name="poi_post_flats">Apartamento</string>
+
+	<string name="poi_payment_centre">Centro de pagamentos</string>
+	<string name="poi_money_transfer">Transferencia de cartos</string>
+
+	<string name="poi_ref_post">Código postal</string>
+
+	<string name="poi_climbing_sport_no">Deportiva: non</string>
+	<string name="poi_climbing_boulder_no">Escalada en bloque: non</string>
+	<string name="poi_climbing_toprope_no">Moulinette: non</string>
+	<string name="poi_climbing_trad_no">Tradicional: non</string>
+	<string name="poi_climbing_ice_no">Xeo: non</string>
+	<string name="poi_climbing_mixed_no">Mesturado: non</string>
+	<string name="poi_climbing_deepwater_no">Psicobloc: non</string>
+
+	<string name="poi_climbing_length">Lonxitude da escalada</string>
+	<string name="poi_climbing_length_min">Lonxitude mínima da escalada</string>
+	<string name="poi_climbing_length_max">Lonxitude máxima da escalada</string>
+	<string name="poi_climbing_rock_limestone">Escalada na rocha: pedra calcaria</string>
+	<string name="poi_climbing_rock_granite">Escalada na rocha: granito</string>
+	<string name="poi_climbing_rock_quartzite">Escalada na rocha: cuarcita</string>
+	<string name="poi_climbing_rock_gneiss">Escalada na rocha: gneis</string>
+	<string name="poi_climbing_rock_porphyry">Escalada na rocha: pórfiro</string>
+	<string name="poi_climbing_quality_solid">Escalada na rocha: sólido</string>
+	<string name="poi_climbing_quality_fragile">Calidade da escalada: feble</string>
+	<string name="poi_climbing_bolted_no">Ancoraxes fixas: non</string>
+	<string name="poi_climbing_orientation_n">Orientación da parede: N</string>
+	<string name="poi_climbing_orientation_ne">Orientación da parede: NL</string>
+	<string name="poi_climbing_orientation_e">Orientación da parede: L</string>
+	<string name="poi_climbing_orientation_se">Orientación da parede: SL</string>
+	<string name="poi_climbing_orientation_s">Orientación da parede: S</string>
+	<string name="poi_climbing_orientation_sw">Orientación da parede: SO</string>
+	<string name="poi_climbing_orientation_w">Orientación da parede: O</string>
+	<string name="poi_climbing_orientation_nw">Orientación da parede: NO</string>
+	<string name="poi_climbing_summit_log_no">Rexistro da escalada no cumio: non</string>
+	<string name="poi_climbing_routes">Roteiros de escalada</string>
+
+	<string name="poi_circumference">Circunferencia</string>
+	<string name="poi_diameter_crown">Diámetro da coroa</string>
+
+	<string name="poi_frozen_food">Comida conxelada</string>
+
+	<string name="poi_agrarian">Tenda agrícola</string>
+
+	<string name="poi_shop_fireplace">Tenda de chemineas e lareiras</string>
+
+	<string name="poi_shop_boat">Tenda de embarcacións</string>
+
+	<string name="poi_cannabis">Tenda de cánnabis</string>
+
+	<string name="poi_socket_cee_blue_yes">CEE azul</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE vermella 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE vermella 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE vermella 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE vermella 125A</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla estándar</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_socket_chademo_output_high">Alta</string>
+	<string name="poi_socket_chademo_output_medium">Media</string>
+	<string name="poi_socket_chademo_output_low">Baixa</string>
+	<string name="poi_socket_type2_output_high">Alta</string>
+	<string name="poi_socket_type2_output_medium">Media</string>
+	<string name="poi_socket_type2_output_low">Baixa</string>
+	<string name="poi_socket_type2_combo_output_high">Alta</string>
+	<string name="poi_socket_type2_combo_output_medium">Media</string>
+	<string name="poi_socket_type2_combo_output_low">Baixa</string>
+	<string name="poi_socket_type3_output_high">Alta</string>
+	<string name="poi_socket_type3_output_medium">Media</string>
+	<string name="poi_socket_type3_output_low">Baixa</string>
+	<string name="poi_socket_cee_blue_output_high">Alta</string>
+	<string name="poi_socket_cee_blue_output_medium">Media</string>
+	<string name="poi_socket_cee_blue_output_low">Baixa</string>
+	<string name="poi_socket_schuko_output_high">Alta</string>
+	<string name="poi_socket_schuko_output_medium">Media</string>
+	<string name="poi_socket_schuko_output_low">Baixa</string>
+
+	<string name="poi_flooring">Tenda de chans</string>
+	<string name="poi_pottery">Oleiro</string>
+
+	<string name="poi_whitewater_rapid_name">Nome dos rápidos do río</string>
+
+	<string name="poi_outpost">Punto da entrega da tenda</string>
+
+	<string name="poi_water_utility">Ofinina do servizo das augas</string>
+
+	<string name="poi_adult_gaming_centre">Centro de xogos para adultos</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Teller mecánico</string>
+	<string name="poi_service_vehicle_oil_change_yes">Troco do aceite</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Venda de automóbiles usados</string>
+	<string name="poi_service_vehicle_brakes_yes">Freos</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Venda de automóbiles novos</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnósticos</string>
+	<string name="poi_service_vehicle_car_parts_yes">Pezas dos automóbiles</string>
+	<string name="poi_service_vehicle_batteries_yes">Baterías</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Ar acondicionado</string>
+	<string name="poi_service_vehicle_body_repair_yes">Arranxo da carrozaría</string>
+	<string name="poi_service_vehicle_electrical_yes">Eléctrico</string>
+	<string name="poi_service_vehicle_wheels_yes">Rodas</string>
+	<string name="poi_service_vehicle_glass_yes">Vidro</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Taller mecánico para camións</string>
+	<string name="poi_service_vehicle_muffler_yes">Silenciador</string>
+	<string name="poi_service_vehicle_alignment_yes">Aliñamento</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Arranxo da transmisión</string>
+	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_insurance_yes">Seguro</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneumáticos</string>
+
+	<string name="poi_aerialway_zip_line">Tirolesa</string>
+
+	<string name="poi_climbing_adventure">Aventura da escalada</string>
+
+	<string name="poi_via_ferrata">Vía ferrata</string>
+	<string name="poi_cable_number">Número do cabo</string>
+	<string name="poi_via_ferrata_scale">Dificuldade</string>
+
+	<string name="poi_glacier_type_icecap">Capa de xeo</string>
+	<string name="poi_glacier_type_icefield">Campo de xeo</string>
+	<string name="poi_glacier_type_plateau">Chaira</string>
+	<string name="poi_glacier_type_valley">Val</string>
+	<string name="poi_glacier_type_outlet">Saída</string>
+	<string name="poi_glacier_type_tidewater">Costeiro</string>
+	<string name="poi_glacier_type_mountain">Montaña</string>
+	<string name="poi_glacier_type_hanging">Pendurado</string>
+	<string name="poi_glacier_type_icefall">Fervenza de xeo</string>
+	<string name="poi_glacier_type_rock">Rocha</string>
+	<string name="poi_glacier_type_shelf">Plataforma</string>
+	<string name="poi_glacier_type_remnant">Remanencia</string>
+	<string name="poi_glacier_type_ice_tongue">Lingua de xeo</string>
+
+	<string name="poi_glacier_ele_top">Punto máis alto</string>
+	<string name="poi_glacier_ele_bottom">Punto máis baixo</string>
+	<string name="poi_glacier_slope">Pendente media</string>
+
+	<string name="poi_checkpoint_hiking">Posto de control do sendeirismo</string>
+	<string name="poi_checkpoint_type_stamp">Posto de selado</string>
+	<string name="poi_checkpoint_type_code">Código</string>
+	<string name="poi_checkpoint_type_notebook">Caderno</string>
+	<string name="poi_checkpoint_type_needler">Perforadora</string>
+	<string name="poi_checkpoint_type_electronic">Electrónico</string>
+	<string name="poi_course">Circuíto</string>
+
+	<string name="poi_rock">Rocha</string>
+
+	<string name="poi_appliance">Tenda de electrodomésticos</string>
+
+	<string name="poi_outcrop">Afloramento</string>
+
+	<string name="poi_payment_contactless_yes">Sen contacto</string>
+	<string name="poi_hazard_nuclear">Risco nuclear</string>
+	<string name="poi_hazard_erosion">Risco de erosión</string>
+	<string name="poi_hazard_avalanche">Risco de alude</string>
+	<string name="poi_hazard_slippery_road">Estrada esvaradía</string>
+	<string name="poi_hazard_flood">Risco de inundación</string>
+	<string name="poi_hazard_minefield">Campo de minas</string>
+
+	<string name="poi_ruins">Ruínas</string>
+
+	<string name="poi_license_classes">Clases de licenza</string>
+
+	<string name="poi_hill">Outeiro</string>
+
+	<string name="poi_shoe_repair">Arranxo do calzado</string>
+
+	<string name="poi_bulk_purchase_only">Mercar ó por maior: só</string>
+
+	<string name="poi_pipeline_substation">Subestación de tubaxes</string>
+	<string name="poi_substation_transmission">Transmisión</string>
+	<string name="poi_substation_distribution">Distribución</string>
+	<string name="poi_substation_minor_distribution">Distribución menor</string>
+	<string name="poi_substation_industrial">Industrial</string>
+	<string name="poi_substation_transition">Transición</string>
+	<string name="poi_substation_traction">Tracción</string>
+	<string name="poi_substation_converter">Convertedora</string>
+	<string name="poi_substation_compensation">Compensación</string>
+
+	<string name="poi_substation_compression">Compresión</string>
+	<string name="poi_substation_measurement">Medición</string>
+	<string name="poi_substation_valve">Válvula</string>
+	<string name="poi_substation_valve_group">Conxunto de válvulas</string>
+	<string name="poi_substation_inspection_gauge">Calibre de inspeción</string>
+	<string name="poi_substation_field_gathering">Recolleita de campo</string>
+
+</resources>
