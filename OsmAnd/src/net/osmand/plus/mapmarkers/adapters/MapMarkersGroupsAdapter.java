@@ -446,7 +446,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
 
-						if (enabled && !group.wasShown() && group.getWptCategories().size() > 1) {
+						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
 							group.setWasShown(true);
 							Bundle args = new Bundle();
 							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
