@@ -645,7 +645,7 @@ public class MapMarkersHelper {
 		Iterator<MapMarker> iterator = groupMarkers.iterator();
 		while (iterator.hasNext()) {
 			MapMarker marker = iterator.next();
-			if (marker.id.equals(group.getId() + name + MapUtils.createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15))) {
+			if (marker.id.equals(group.getId() + name + MapUtils.createShortLinkString(latLon.getLatitude(), latLon.getLongitude(), 15))) {
 				exists = true;
 				marker.favouritePoint = favouritePoint;
 				marker.wptPt = wptPt;
