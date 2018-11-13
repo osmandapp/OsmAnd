@@ -49,9 +49,7 @@ public class GpxSelectionHelper {
 	}
 
 	public void clearAllGpxFileToShow() {
-		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
-			selectGpxFile(selectedGpxFile.gpxFile, false, false);
-		}
+		selectedGPXFiles.clear();
 		saveCurrentSelections();
 	}
 
