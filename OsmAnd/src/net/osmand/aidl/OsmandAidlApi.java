@@ -27,6 +27,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
+import net.osmand.aidl.gpx.AGpxFile;
+import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
@@ -35,6 +37,7 @@ import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.search.SearchResult;
+import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -46,18 +49,22 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -85,12 +92,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -142,6 +147,10 @@ public class OsmandAidlApi {
 	private static final String AIDL_MUTE_NAVIGATION = "mute_navigation";
 	private static final String AIDL_UNMUTE_NAVIGATION = "unmute_navigation";
 
+	private static final String AIDL_SHOW_SQLITEDB_FILE = "aidl_show_sqlitedb_file";
+	private static final String AIDL_HIDE_SQLITEDB_FILE = "aidl_hide_sqlitedb_file";
+	private static final String AIDL_FILE_NAME = "aidl_file_name";
+
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
 	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
@@ -189,6 +198,8 @@ public class OsmandAidlApi {
 		registerStopNavigationReceiver(mapActivity);
 		registerMuteNavigationReceiver(mapActivity);
 		registerUnmuteNavigationReceiver(mapActivity);
+		registerShowSqliteDbFileReceiver(mapActivity);
+		registerHideSqliteDbFileReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 	}
@@ -733,6 +744,52 @@ public class OsmandAidlApi {
 		registerReceiver(unmuteNavigationReceiver, mapActivity, AIDL_UNMUTE_NAVIGATION);
 	}
 
+	private void registerShowSqliteDbFileReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver showSqliteDbFileReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				OsmandSettings settings = app.getSettings();
+				String fileName = intent.getStringExtra(AIDL_FILE_NAME);
+				if (!Algorithms.isEmpty(fileName)) {
+					settings.MAP_OVERLAY.set(fileName);
+					settings.MAP_OVERLAY_PREVIOUS.set(fileName);
+					MapActivity mapActivity = mapActivityRef.get();
+					if (mapActivity != null) {
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+						if (plugin != null) {
+							plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_OVERLAY, mapActivity.getMapLayers());
+						}
+					}
+				}
+			}
+		};
+		registerReceiver(showSqliteDbFileReceiver, mapActivity, AIDL_SHOW_SQLITEDB_FILE);
+	}
+
+	private void registerHideSqliteDbFileReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver hideSqliteDbFileReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				OsmandSettings settings = app.getSettings();
+				String fileName = intent.getStringExtra(AIDL_FILE_NAME);
+				if (!Algorithms.isEmpty(fileName) && fileName.equals(settings.MAP_OVERLAY.get())) {
+					settings.MAP_OVERLAY.set(null);
+					settings.MAP_OVERLAY_PREVIOUS.set(null);
+					MapActivity mapActivity = mapActivityRef.get();
+					if (mapActivity != null) {
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+						if (plugin != null) {
+							plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_OVERLAY, mapActivity.getMapLayers());
+						}
+					}
+				}
+			}
+		};
+		registerReceiver(hideSqliteDbFileReceiver, mapActivity, AIDL_HIDE_SQLITEDB_FILE);
+	}
+
 	public void registerMapLayers(MapActivity mapActivity) {
 		for (AMapLayer layer : layers.values()) {
 			OsmandMapLayer mapLayer = mapLayers.get(layer.getId());
@@ -1248,24 +1305,28 @@ public class OsmandAidlApi {
 	boolean showGpx(String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
 			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+			File fi = app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName);
+			AsyncTask<File, Void, GPXFile> asyncTask = new AsyncTask<File, Void, GPXFile>() {
+
+				@Override
+				protected GPXFile doInBackground(File... files) {
+					return GPXUtilities.loadGPXFile(app, files[0]);
+				}
+
+				@Override
+				protected void onPostExecute(GPXFile gpx) {
+					if (gpx.warning == null) {
+						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+						refreshMap();
+					}
+				}
+			};
+
 			if (f.exists()) {
-				new AsyncTask<File, Void, GPXFile>() {
-
-					@Override
-					protected GPXFile doInBackground(File... files) {
-						return GPXUtilities.loadGPXFile(app, files[0]);
-					}
-
-					@Override
-					protected void onPostExecute(GPXFile gpx) {
-						if (gpx.warning == null) {
-							app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
-							refreshMap();
-						}
-					}
-
-				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
-
+				asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+				return true;
+			} else if (fi.exists()) {
+				asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fi);
 				return true;
 			}
 		}
@@ -1289,13 +1350,41 @@ public class OsmandAidlApi {
 			List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			String gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 			for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-				String path = selectedGpxFile.getGpxFile().path;
+				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				String path = gpxFile.path;
 				if (!Algorithms.isEmpty(path)) {
 					if (path.startsWith(gpxPath)) {
 						path = path.substring(gpxPath.length() + 1);
 					}
-					files.add(new ASelectedGpxFile(path));
+					long modifiedTime = gpxFile.modifiedTime;
+					long fileSize = new File(gpxFile.path).length();
+					files.add(new ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetails(selectedGpxFile.getTrackAnalysis())));
 				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	boolean getImportedGpx(List<AGpxFile> files) {
+		if (files != null) {
+			List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
+			for (GpxDataItem dataItem : gpxDataItems) {
+				//if (dataItem.isApiImported()) {
+					File file = dataItem.getFile();
+					if (file.exists()) {
+						String fileName = file.getName();
+						boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
+						long modifiedTime = dataItem.getFileLastModifiedTime();
+						long fileSize = file.length();
+						AGpxFileDetails details = null;
+						GPXTrackAnalysis analysis = dataItem.getAnalysis();
+						if (analysis != null) {
+							details = createGpxFileDetails(analysis);
+						}
+						files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
+					}
+				//}
 			}
 			return true;
 		}
@@ -1312,6 +1401,74 @@ public class OsmandAidlApi {
 					app.getGpxDatabase().remove(f);
 					return true;
 				}
+			}
+		}
+		return false;
+	}
+
+	private boolean getSqliteDbFiles(List<ASqliteDbFile> fileNames, boolean activeOnly) {
+		if (fileNames != null) {
+			File tilesPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+			if (tilesPath.canRead()) {
+				File[] files = tilesPath.listFiles();
+				if (files != null) {
+					String activeFile = app.getSettings().MAP_OVERLAY.get();
+					for (File tileFile : files) {
+						String fileName = tileFile.getName();
+						String fileNameLC = fileName.toLowerCase();
+						if (tileFile.isFile() && !fileNameLC.startsWith("hillshade") && fileNameLC.endsWith(SQLiteTileSource.EXT)) {
+							boolean active = fileName.equals(activeFile);
+							if (!activeOnly || active) {
+								fileNames.add(new ASqliteDbFile(fileName, tileFile.lastModified(), tileFile.length(), active));
+							}
+						}
+					}
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	boolean getSqliteDbFiles(List<ASqliteDbFile> fileNames) {
+		return getSqliteDbFiles(fileNames, false);
+	}
+
+	boolean getActiveSqliteDbFiles(List<ASqliteDbFile> fileNames) {
+		return getSqliteDbFiles(fileNames, true);
+	}
+
+	boolean showSqliteDbFile(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			File tileFile = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR), fileName);
+			String fileNameLC = fileName.toLowerCase();
+			if (tileFile.isFile() && !fileNameLC.startsWith("hillshade") && fileNameLC.endsWith(SQLiteTileSource.EXT)) {
+				OsmandSettings settings = app.getSettings();
+				settings.MAP_OVERLAY.set(fileName);
+				settings.MAP_OVERLAY_PREVIOUS.set(fileName);
+
+				Intent intent = new Intent();
+				intent.setAction(AIDL_SHOW_SQLITEDB_FILE);
+				intent.putExtra(AIDL_FILE_NAME, fileName);
+				app.sendBroadcast(intent);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	boolean hideSqliteDbFile(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			if (fileName.equals(app.getSettings().MAP_OVERLAY.get())) {
+				OsmandSettings settings = app.getSettings();
+				settings.MAP_OVERLAY.set(null);
+				settings.MAP_OVERLAY_PREVIOUS.set(null);
+
+				Intent intent = new Intent();
+				intent.setAction(AIDL_HIDE_SQLITEDB_FILE);
+				intent.putExtra(AIDL_FILE_NAME, fileName);
+				app.sendBroadcast(intent);
+				return true;
 			}
 		}
 		return false;
@@ -1701,6 +1858,13 @@ public class OsmandAidlApi {
 	boolean customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
 		app.getAppCustomization().customizeOsmandSettings(sharedPreferencesName, bundle);
 		return true;
+	}
+
+	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
+		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
+				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
+				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
+				a.points, a.wptPoints, a.wptCategoryNames);
 	}
 
 	public static class ConnectedApp implements Comparable<ConnectedApp> {

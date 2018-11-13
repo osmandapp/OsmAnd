@@ -21,6 +21,7 @@ import net.osmand.aidl.favorite.UpdateFavoriteParams;
 import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
+import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
@@ -57,6 +58,7 @@ import net.osmand.aidl.note.StopRecordingParams;
 import net.osmand.aidl.note.TakePhotoNoteParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
+import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -387,6 +389,12 @@ public class OsmandAidlService extends Service {
 		public boolean getActiveGpx(List<ASelectedGpxFile> files) throws RemoteException {
 			OsmandAidlApi api = getApi("getActiveGpx");
 			return api != null && api.getActiveGpx(files);
+		}
+
+		@Override
+		public boolean getImportedGpx(List<AGpxFile> files) throws RemoteException {
+			OsmandAidlApi api = getApi("getImportedGpx");
+			return api != null && api.getImportedGpx(files);
 		}
 
 		@Override
@@ -738,6 +746,30 @@ public class OsmandAidlService extends Service {
 		public boolean customizeOsmandSettings(OsmandSettingsParams params) throws RemoteException {
 			OsmandAidlApi api = getApi("customizeOsmandSettings");
 			return api != null && api.customizeOsmandSettings(params.getSharedPreferencesName(), params.getBundle());
+		}
+
+		@Override
+		public boolean getSqliteDbFiles(List<ASqliteDbFile> files) throws RemoteException {
+			OsmandAidlApi api = getApi("getSqliteDbFiles");
+			return api != null && api.getSqliteDbFiles(files);
+		}
+
+		@Override
+		public boolean getActiveSqliteDbFiles(List<ASqliteDbFile> files) throws RemoteException {
+			OsmandAidlApi api = getApi("getActiveSqliteDbFiles");
+			return api != null && api.getActiveSqliteDbFiles(files);
+		}
+
+		@Override
+		public boolean showSqliteDbFile(String fileName) throws RemoteException {
+			OsmandAidlApi api = getApi("showSqliteDbFile");
+			return api != null && api.showSqliteDbFile(fileName);
+		}
+
+		@Override
+		public boolean hideSqliteDbFile(String fileName) throws RemoteException {
+			OsmandAidlApi api = getApi("hideSqliteDbFile");
+			return api != null && api.hideSqliteDbFile(fileName);
 		}
 	};
 }

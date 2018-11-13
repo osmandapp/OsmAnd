@@ -70,6 +70,11 @@ import net.osmand.aidl.navigation.NavigateSearchParams;
 import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
 
+import net.osmand.aidl.gpx.AGpxFile;
+import net.osmand.aidl.gpx.AGpxFileDetails;
+import net.osmand.aidl.tiles.ASqliteDbFile;
+
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -148,4 +153,11 @@ interface IOsmAndAidlInterface {
     boolean regWidgetAvailability(in SetWidgetsParams params);
 
     boolean customizeOsmandSettings(in OsmandSettingsParams params);
+
+    boolean getImportedGpx(out List<AGpxFile> files);
+
+    boolean getSqliteDbFiles(out List<ASqliteDbFile> files);
+    boolean getActiveSqliteDbFiles(out List<ASqliteDbFile> files);
+    boolean showSqliteDbFile(String fileName);
+    boolean hideSqliteDbFile(String fileName);
 }

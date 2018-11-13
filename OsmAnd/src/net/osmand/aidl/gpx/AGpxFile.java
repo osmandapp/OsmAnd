@@ -8,36 +8,34 @@ import android.text.TextUtils;
 
 import java.io.File;
 
-public class ASelectedGpxFile implements Parcelable {
+public class AGpxFile implements Parcelable {
 
 	private String fileName;
 	private long modifiedTime;
 	private long fileSize;
+	private boolean active;
 	private AGpxFileDetails details;
 
-	public ASelectedGpxFile(@NonNull String fileName) {
-		this.fileName = fileName;
-	}
-
-	public ASelectedGpxFile(@NonNull String fileName, long modifiedTime, long fileSize, @Nullable AGpxFileDetails details) {
+	public AGpxFile(@NonNull String fileName, long modifiedTime, long fileSize, boolean active, @Nullable AGpxFileDetails details) {
 		this.fileName = fileName;
 		this.modifiedTime = modifiedTime;
 		this.fileSize = fileSize;
+		this.active = active;
 		this.details = details;
 	}
 
-	public ASelectedGpxFile(Parcel in) {
+	public AGpxFile(Parcel in) {
 		readFromParcel(in);
 	}
 
-	public static final Creator<ASelectedGpxFile> CREATOR = new
-			Creator<ASelectedGpxFile>() {
-				public ASelectedGpxFile createFromParcel(Parcel in) {
-					return new ASelectedGpxFile(in);
+	public static final Creator<AGpxFile> CREATOR = new
+			Creator<AGpxFile>() {
+				public AGpxFile createFromParcel(Parcel in) {
+					return new AGpxFile(in);
 				}
 
-				public ASelectedGpxFile[] newArray(int size) {
-					return new ASelectedGpxFile[size];
+				public AGpxFile[] newArray(int size) {
+					return new AGpxFile[size];
 				}
 			};
 
@@ -53,6 +51,10 @@ public class ASelectedGpxFile implements Parcelable {
 		return fileSize;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
 	public AGpxFileDetails getDetails() {
 		return details;
 	}
@@ -61,6 +63,7 @@ public class ASelectedGpxFile implements Parcelable {
 		out.writeString(fileName);
 		out.writeLong(modifiedTime);
 		out.writeLong(fileSize);
+		out.writeByte((byte) (active ? 1 : 0));
 
 		out.writeByte((byte) (details != null ? 1 : 0));
 		if (details != null) {
@@ -72,6 +75,7 @@ public class ASelectedGpxFile implements Parcelable {
 		fileName = in.readString();
 		modifiedTime = in.readLong();
 		fileSize = in.readLong();
+		active = in.readByte() != 0;
 
 		boolean hasDetails= in.readByte() != 0;
 		if (hasDetails) {
