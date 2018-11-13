@@ -446,6 +446,18 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
 
+						if (enabled && !group.wasShown() && group.getWptCategories().size() > 1) {
+							group.setWasShown(true);
+							Bundle args = new Bundle();
+							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
+							args.putString(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, group.getWptCategoriesString());
+							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
+
+							SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
+							fragment.setArguments(args);
+							fragment.setUsedOnMap(false);
+							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+						}
 						mapMarkersHelper.updateGroupDisabled(group, disabled);
 						if (group.getType() == MapMarkersGroup.GPX_TYPE) {
 							group.setVisibleUntilRestart(disabled);
@@ -458,18 +470,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 								gpxFile[0] = GPXUtilities.loadGPXFile(app, new File(gpxPath));
 							}
 							switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
-							if (enabled && !group.wasShown() && gpxFile[0] != null && gpxFile[0].getWaypointCategories(false).size() > 1) {
-								group.setWasShown(true);
-								Bundle args = new Bundle();
-								args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
-								args.putString(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, group.getWptCategoriesString());
-								args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
-
-								SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-								fragment.setArguments(args);
-								fragment.setUsedOnMap(false);
-								fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
-							}
 						}
 						if(!disabled) {
 							mapMarkersHelper.enableGroup(group);
