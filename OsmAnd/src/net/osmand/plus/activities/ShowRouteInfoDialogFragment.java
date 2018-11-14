@@ -256,8 +256,8 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		return 0;
 	}
 
-	private void buildStatisticChart(View view, int chartId, Statistics routeStatistics) {
-		List<RouteSegmentAttribute> segments = routeStatistics.getElements();
+	private <E> void buildStatisticChart(View view, int chartId, Statistics<E> routeStatistics) {
+		List<RouteSegmentAttribute<E>> segments = routeStatistics.getElements();
 		HorizontalBarChart hbc = view.findViewById(chartId);
 		List<BarEntry> entries = new ArrayList<>();
 		float[] stacks = new float[segments.size()];
@@ -299,10 +299,10 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		hbc.invalidate();
 	}
 
-	private void attachLegend(OsmandApplication app, LayoutInflater inflater, ViewGroup container, Statistics routeStatistics) {
-		Map<String, RouteSegmentAttribute> partition = routeStatistics.getPartition();
-		for (String key : partition.keySet()) {
-			RouteSegmentAttribute segment = partition.get(key);
+	private <E> void attachLegend(OsmandApplication app, LayoutInflater inflater, ViewGroup container, Statistics<E> routeStatistics) {
+		Map<E, RouteSegmentAttribute<E>> partition = routeStatistics.getPartition();
+		for (E key : partition.keySet()) {
+			RouteSegmentAttribute<E> segment = partition.get(key);
 			View view = inflater.inflate(R.layout.route_info_stat_item, container, false);
 			TextView textView = view.findViewById(R.id.route_stat_item_text);
 			String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistance(), getMyApplication());
