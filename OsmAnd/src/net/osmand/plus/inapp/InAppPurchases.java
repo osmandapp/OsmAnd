@@ -160,7 +160,7 @@ public class InAppPurchases {
 			List<InAppSubscription> res = new ArrayList<>();
 			for (InAppSubscription s : getSubscriptions()) {
 				res.add(s);
-				res.addAll(s.getDiscounts());
+				res.addAll(s.getUpgrades());
 			}
 			return res;
 		}
@@ -173,16 +173,16 @@ public class InAppPurchases {
 					res.add(s);
 					added = true;
 				} else {
-					for (InAppSubscription discount : s.getDiscounts()) {
-						if (discount.isPurchased()) {
-							res.add(discount);
+					for (InAppSubscription upgrade : s.getUpgrades()) {
+						if (upgrade.isPurchased()) {
+							res.add(upgrade);
 							added = true;
 						}
 					}
 				}
 				if (!added) {
-					for (InAppSubscription discount : s.getDiscounts()) {
-						res.add(discount);
+					for (InAppSubscription upgrade : s.getUpgrades()) {
+						res.add(upgrade);
 						added = true;
 					}
 				}
@@ -208,12 +208,12 @@ public class InAppPurchases {
 		}
 
 		@Nullable
-		public InAppSubscription applyDiscountSubscription(String sku) {
+		public InAppSubscription upgradeSubscription(String sku) {
 			List<InAppSubscription> subscriptions = getAllSubscriptions();
 			for (InAppSubscription s : subscriptions) {
-				InAppSubscription discount = s.applyDiscountSubscription(sku);
-				if (discount != null) {
-					return discount;
+				InAppSubscription upgrade = s.upgradeSubscription(sku);
+				if (upgrade != null) {
+					return upgrade;
 				}
 			}
 			return null;
@@ -408,10 +408,10 @@ public class InAppPurchases {
 
 	public static abstract class InAppSubscription extends InAppPurchase {
 
-		private Map<String, InAppSubscription> discounts = new ConcurrentHashMap<>();
+		private Map<String, InAppSubscription> upgrades = new ConcurrentHashMap<>();
 		private String skuNoVersion;
 		private String subscriptionPeriod;
-		protected boolean discount = false;
+		private boolean upgrade = false;
 
 		InAppSubscription(@NonNull String skuNoVersion, int version) {
 			super(skuNoVersion + "_v" + version);
@@ -424,20 +424,20 @@ public class InAppPurchases {
 		}
 
 		@NonNull
-		public List<InAppSubscription> getDiscounts() {
-			return new ArrayList<>(discounts.values());
+		private List<InAppSubscription> getUpgrades() {
+			return new ArrayList<>(upgrades.values());
 		}
 
 		@Nullable
-		public InAppSubscription applyDiscountSubscription(@NonNull String sku) {
+		InAppSubscription upgradeSubscription(@NonNull String sku) {
 			InAppSubscription s = null;
-			if (!discount) {
-				s = discounts.get(sku);
+			if (!upgrade) {
+				s = upgrades.get(sku);
 				if (s == null) {
 					s = newInstance(sku);
 					if (s != null) {
-						s.discount = true;
-						discounts.put(sku, s);
+						s.upgrade = true;
+						upgrades.put(sku, s);
 					}
 				}
 			}
@@ -448,17 +448,13 @@ public class InAppPurchases {
 			if (isPurchased()) {
 				return true;
 			} else {
-				for (InAppSubscription s : getDiscounts()) {
+				for (InAppSubscription s : getUpgrades()) {
 					if (s.isPurchased()) {
 						return true;
 					}
 				}
 			}
 			return false;
-		}
-
-		public boolean isDiscount() {
-			return discount;
 		}
 
 		public String getSkuNoVersion() {

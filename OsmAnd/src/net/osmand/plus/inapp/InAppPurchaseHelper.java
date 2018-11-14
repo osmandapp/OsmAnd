@@ -32,6 +32,7 @@ import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -240,25 +241,7 @@ public class InAppPurchaseHelper {
 
 	public void requestInventory() {
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
-		exec(InAppPurchaseTaskType.REQUEST_INVENTORY, new InAppRunnable() {
-			@Override
-			public boolean run(InAppPurchaseHelper helper) {
-				logDebug("Setup successful. Querying inventory.");
-				List<String> skus = new ArrayList<>();
-				for (InAppPurchase purchase : purchases.getAllInAppPurchases()) {
-					skus.add(purchase.getSku());
-				}
-				try {
-					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
-					return false;
-				} catch (Exception e) {
-					logError("queryInventoryAsync Error", e);
-					notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
-					stop(true);
-				}
-				return true;
-			}
-		});
+		new RequestInventoryTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public void purchaseFullVersion(final Activity activity) {
@@ -392,7 +375,7 @@ public class InAppPurchaseHelper {
 			for (String sku : allOwnedSubscriptionSkus) {
 				Purchase purchase = inventory.getPurchase(sku);
 				SkuDetails liveUpdatesDetails = inventory.getSkuDetails(sku);
-				InAppSubscription s = getLiveUpdates().applyDiscountSubscription(sku);
+				InAppSubscription s = getLiveUpdates().upgradeSubscription(sku);
 				if (s == null) {
 					s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
 				}
@@ -612,6 +595,74 @@ public class InAppPurchaseHelper {
 		} catch (Exception e) {
 			logError("onActivityResultHandled", e);
 			return false;
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private class RequestInventoryTask extends AsyncTask<Void, Void, String> {
+
+		RequestInventoryTask() {
+		}
+
+		@Override
+		protected String doInBackground(Void... params) {
+			try {
+				Map<String, String> parameters = new HashMap<>();
+				parameters.put("androidPackage", ctx.getPackageName());
+				parameters.put("version", Version.getFullVersion(ctx));
+				parameters.put("lang", ctx.getLanguage() + "");
+
+				return AndroidNetworkUtils.sendRequest(ctx,
+						"https://osmand.net/api/subscriptions/active",
+						parameters, "Requesting active subscriptions...", false, false);
+
+			} catch (Exception e) {
+				logError("sendRequest Error", e);
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String response) {
+			logDebug("Response=" + response);
+			if (response != null) {
+				try {
+					/*
+					{ "monthly" : { "sku": "osm_live_subscription_monthly_free_v1" }, "quarterly" : { "sku": "osm_live_subscription_3_months_free_v1" }, "annual" : { "sku": "osm_live_subscription_annual_free_v1" } }
+					 */
+					JSONObject obj = new JSONObject(response);
+					JSONArray names = obj.names();
+					for (int i = 0; i < names.length(); i++) {
+						String skuType = names.getString(i);
+						JSONObject subObj = obj.getJSONObject(skuType);
+						String sku = subObj.getString("sku");
+						if (!Algorithms.isEmpty(sku)) {
+							getLiveUpdates().upgradeSubscription(sku);
+						}
+					}
+				} catch (JSONException e) {
+					logError("Json parsing error", e);
+				}
+			}
+			exec(InAppPurchaseTaskType.REQUEST_INVENTORY, new InAppRunnable() {
+				@Override
+				public boolean run(InAppPurchaseHelper helper) {
+					logDebug("Setup successful. Querying inventory.");
+					Set<String> skus = new HashSet<>();
+					for (InAppPurchase purchase : purchases.getAllInAppPurchases()) {
+						skus.add(purchase.getSku());
+					}
+					try {
+						mHelper.queryInventoryAsync(true, new ArrayList<>(skus), mGotInventoryListener);
+						return false;
+					} catch (Exception e) {
+						logError("queryInventoryAsync Error", e);
+						notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
+						stop(true);
+					}
+					return true;
+				}
+			});
 		}
 	}
 
