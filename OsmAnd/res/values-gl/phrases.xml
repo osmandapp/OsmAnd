@@ -3192,4 +3192,201 @@
 	<string name="poi_historic_period_roman_kingdom">Período histórico: Reinado romano (do 753 ó 509 a.C.)</string>
 	<string name="poi_historic_period_dominate">Período histórico: dominato (do 285 ó 476 d.C.)</string>
 	<string name="poi_historic_period_villager">Período histórico: aldeáns (época I, II, do 1580 a.C. ó 133 d.C.)</string>
+	<string name="poi_historic_period_urban">Período histórico: urbá (época III do 133 ó 374 d.C.)</string>
+	<string name="poi_historic_period_classical">Período histórico: clásica (época IV do 374 ó 900 d.C.)</string>
+	<string name="poi_historic_stone">Pedra histórica</string>
+	<string name="poi_site_type_tumulus">Catafalco</string>
+	<string name="poi_site_type_fortification">Fortificación</string>
+	<string name="poi_site_type_settlement">Asentamento</string>
+	<string name="poi_site_type_city">Cidade</string>
+	<string name="poi_site_type_hut_circle">Círculo de cabana</string>
+	<string name="poi_site_type_necropolis">Necrópole</string>
+	<string name="poi_site_type_petroglyph">Petróglifo</string>
+	<string name="poi_site_type_earthwork">Obra na terra</string>
+	<string name="poi_pa">Pā (asentamento fortificado maorí)</string>
+
+	<string name="poi_historic_farm">Granxa histórica</string>
+	<string name="poi_historic_railway_station">Estación de trens histórica</string>
+
+	<string name="poi_historic_threshing_floor">Era histórica</string>
+	<string name="poi_historic_gallows">Forcada histórica</string>
+	<string name="poi_historic_railway">Vía ferroviaria histórica</string>
+
+	<string name="poi_sculptor">Escultor</string>
+
+	<string name="poi_cross">Cruz</string>
+	<string name="poi_prison_camp">Antigo campo de prisioneiros</string>
+	<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bathing_no">Baño: non</string>
+
+	<string name="poi_boat_storage">Almacenaxe das embarcacións</string>
+
+	<string name="poi_bridge_ref">Referencia da ponte</string>
+	<string name="poi_tunnel_ref">Referencia do túnel</string>
+
+	<string name="poi_ref">Referencia</string>
+
+	<string name="poi_cargo_passengers">Pasaxeiros</string>
+	<string name="poi_cargo_vehicle">Vehículos</string>
+	<string name="poi_cargo_container">Contedores</string>
+	<string name="poi_cargo_hgv">Vehículos pesados</string>
+
+	<string name="poi_fitness_station">Ximnasio ó ar libre</string>
+
+	<string name="poi_hackerspace">Xuntanza de hackers</string>
+
+
+	<string name="poi_craft_electronics_repair">Arranxo de electrónicos</string>
+	<string name="poi_fireworks">Tenda de fogos artificiais</string>
+
+	<string name="poi_aerialway_length">Lonxitude</string>
+
+	<string name="poi_health_specialty_general_yes">Médico xeral</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmoloxía</string>
+	<string name="poi_health_specialty_gynaecology_yes">Xinecoloxía</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otorrinolaringoloxía</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatría</string>
+	<string name="poi_health_specialty_paediatrics_no">Especialidade en saúde: sen pediatría</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatoloxía</string>
+	<string name="poi_health_specialty_urology_yes">Uroloxía</string>
+	<string name="poi_health_specialty_surgery_yes">Cirurxía xeral</string>
+	<string name="poi_health_specialty_radiology_yes">Radioloxía</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psiquiatría</string>
+	<string name="poi_health_specialty_neurology_yes">Neuroloxía</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatovenereoloxía</string>
+	<string name="poi_health_specialty_cardiology_yes">Cardioloxía</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatoloxía</string>
+	<string name="poi_health_specialty_biology_yes">Bioloxía clínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatía</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anestesioloxía</string>
+	<string name="poi_health_specialty_pulmonology_yes">Pneumoloxía</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Cirurxía dental, oral e maxilofacial</string>
+	<string name="poi_health_specialty_maternity_yes">Maternidade</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Cirurxía plástica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodoncia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Psicoterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Bioquímica</string>
+	<string name="poi_health_specialty_occupational_yes">Terapia ocupacional</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Psiquiatría infantil</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Cirurxía maxilofacial</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Radioloxía diagnóstica</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloxía</string>
+	<string name="poi_health_specialty_dentistry_yes">Odontoloxía</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefroloxía (doenzas renais)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurocirurxía</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatría</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endocrinoloxía</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Medicina nuclear</string>
+	<string name="poi_health_specialty_pathology_yes">Anatomía patolóxica</string>
+	<string name="poi_health_specialty_oncology_yes">Oncoloxía</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Medicina tropical</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Especialidade en saúde: sen medicina tropical</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Obstetricia (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Especialidade en saúde: sen obstetricia (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Obstetricia (prenatal</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Especialidade en saúde: sen obstetricia (prenatal)</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Pediatría social</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Especialidade en saúde: sen pediatría social</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Obstetricia (cesárea)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialidade en saúde: sen obstetricia (cesárea)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Medicina toxicolóxica</string>
+	<string name="poi_health_specialty_optometry_yes">Optometría</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Patoloxía clínica</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Terapia da fala</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Terapia manual</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Medicina deportiva</string>
+	<string name="poi_health_specialty_podology_yes">Podoloxía</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatría adulta</string>
+	<string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopatía</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Medicina chinesa tradicional</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Herbolaria</string>
+	<string name="poi_health_specialty_chiropractic_yes">Quiropraxia</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopatía</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Psicoloxía profunda</string>
+	<string name="poi_health_specialty_behavior_yes">Comportamento</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medicina paliativa</string>
+
+	<string name="poi_fitness_centre">Ximnasio</string>
+	<string name="poi_fitness">Exercicio físico</string>
+
+	<string name="poi_billiards">Billar</string>
+
+	<string name="poi_microwave_oven_no">Forno microondas: non</string>
+	<string name="poi_water_heater_no">Quentador de auga: non</string>
+
+	<string name="poi_parking_garage_boxes">Cocheira comunitaria individual</string>
+	<string name="poi_parking_carports">Cocheira aberta</string>
+
+	<string name="poi_dojo">Dojo</string>
+
+	<string name="poi_gaelic_games">Xogos gaélicos</string>
+	<string name="poi_running">Correr</string>
+	<string name="poi_netball">Netball</string>
+	<string name="poi_karting">Karting</string>
+	<string name="poi_badminton">Bádminton</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_disc_golf">Disco golf</string>
+	<string name="poi_futsal">Fútbol sala</string>
+	<string name="poi_rc_car">Automóbil de carreiras teledirixido</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_shuffleboard">Texo ou shuffleboard</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_boxing">Boxeo</string>
+
+	<string name="poi_official_name">Nome oficial</string>
+
+	<string name="poi_dolphin">Golfiño</string>
+
+	<string name="poi_forestry_compartment">Sinal: compartimento forestal</string>
+	<string name="poi_forestry_allotment">Sinal: terreo forestal</string>
+	<string name="poi_inscription_n">Inscrición: N</string>
+	<string name="poi_inscription_nw">Inscrición: NO</string>
+	<string name="poi_inscription_w">Inscrición: O</string>
+	<string name="poi_inscription_sw">Inscrición: SO</string>
+	<string name="poi_inscription_s">Inscrición: S</string>
+	<string name="poi_inscription_se">Inscrición: SE</string>
+	<string name="poi_inscription_e">Inscrición: E</string>
+	<string name="poi_inscription_ne">Inscrición: NE</string>
+
+	<string name="poi_construction_yes">Baixo construción</string>
+	<string name="poi_firepit">Cacharela</string>
+	<string name="poi_street_cabinet">Distribuidor na rúa</string>
+
+	<string name="poi_fair_trade_no">Comercio xusto: non</string>
+	<string name="poi_fair_trade_only">Só produtos de comercio xusto</string>
+
+
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_protected_area">Área protexida</string>
+	<string name="poi_protection_title">Nome da protección</string>
+	<string name="poi_protection_object_historic">Protección do obxecto: histórico</string>
+	<string name="poi_protection_object_nature">Protección do obxecto: natureza</string>
+	<string name="poi_protection_object_habitat">Protección do obxecto: habitat</string>
+	<string name="poi_protection_object_water">Protección do obxecto: auga</string>
+
+	<string name="poi_nuclear_explosion_country">Estourido: país</string>
+	<string name="poi_nuclear_explosion_site">Estourido: lugar</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Nome do disparo (en)</string>
+	<string name="poi_nuclear_explosion_series">Serie de estouridos</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Obxectivo do estourido: relacionado con armas nucleares</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Obxectivo do estourido: efectos das armas</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Obxectivo do estourido: experimento de seguridade</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Obxectivo do estourido: pescudar para aplicacións científicas</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Obxectivo do estourido: ciencia sinxela</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Obxectivo do estourido: aplicación industrial, excavación de cavidade</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Obxectivo do estourido: aplicación industrial, sondaxe sísmica</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Obxectivo do estourido: aplicación industrial, estimulación petroleira</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Obxectivo do estourido: aplicación industrial</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Obxectivo do estourido: aplicación industrial, movemento da terra</string>
+	<string name="poi_nuclear_explosion_time_utc">Hora do estourido (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Rendemento do estourido</string>
+	<string name="poi_nuclear_explosion_hole">Buraco do estourido</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Altitude do estourido</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitude da zona cero</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitude das ondas de propagación</string>
 	</resources>
