@@ -628,9 +628,6 @@ public class InAppPurchaseHelper {
 			logDebug("Response=" + response);
 			if (response != null) {
 				try {
-					/*
-					{ "monthly" : { "sku": "osm_live_subscription_monthly_free_v1" }, "quarterly" : { "sku": "osm_live_subscription_3_months_free_v1" }, "annual" : { "sku": "osm_live_subscription_annual_free_v1" } }
-					 */
 					JSONObject obj = new JSONObject(response);
 					JSONArray names = obj.names();
 					for (int i = 0; i < names.length(); i++) {
