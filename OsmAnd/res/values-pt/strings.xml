@@ -1784,7 +1784,7 @@
 
     <string name="world_map_download_descr">Mapa base mundial (cobrindo o mundo inteiro em baixo nível de zoom) ausente ou ultrapassado. Por favor, considere descarrega-lo para uma visão global.</string>
     <string name="shared_string_qr_code">Código QR</string>
-    <string name="map_downloaded_descr">O mapa %1$ s está pronto para ser usado.</string>
+    <string name="map_downloaded_descr">O mapa %1$s está pronto para ser usado.</string>
     <string name="map_downloaded">Mapa obtido com sucesso</string>
     <string name="go_to_map">Mostrar mapa</string>
     <string name="simulate_initial_startup_descr">Define o sinalizador que indica a primeira inicialização do aplicativo, mantém todas as outras configurações inalteradas.</string>
