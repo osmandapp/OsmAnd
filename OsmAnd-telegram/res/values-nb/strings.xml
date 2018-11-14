@@ -18,7 +18,7 @@
 	<string name="add_device">Legg til enhet</string>
 	<string name="share_location_as">Del posisjon som</string>
 	<string name="live_now_description">Kontakter og grupper som deler sin posisjon med deg.</string>
-	<string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Telegram slik at du ikke kan sende din posisjon eller se andres posisjon\?</string>
+	<string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Telegram slik at du ikke kan sende din posisjon, eller se andres\?</string>
 	<string name="logout_from_osmand_telegram">Logg ut av OsmAnd Telegram\?</string>
 	<string name="shared_string_name">Navn</string>
 	<string name="by_distance">Etter distanse</string>
