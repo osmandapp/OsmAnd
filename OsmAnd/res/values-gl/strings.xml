@@ -1983,7 +1983,7 @@ Lon %2$s</string>
     <string name="instalation_troubleshooting_item">Instalación e resolución de problemas</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="versions_item">Versións</string>
-    <string name="feedback">Opinións</string>
+    <string name="feedback">Enquisa</string>
     <string name="contact_us">Contacto</string>
     <string name="map_legend">Lenda do mapa</string>
     <string name="hillshade_layer_disabled">A capa de curvas de nivel está desactivada</string>
@@ -2730,7 +2730,7 @@ Lon %2$s</string>
     <string name="ask_for_location_permission">Para proseguer, debe permiti-la ubicación ó OsmAnd.</string>
     <string name="thank_you_for_feedback">Grazas polo seu comentario</string>
     <string name="poi_cannot_be_found">O nó ou camiño non pode ser atopado.</string>
-    <string name="search_no_results_feedback">Sen resultados da procura\? Mandenos as súas opinións</string>
+    <string name="search_no_results_feedback">Sen resultados da procura\? Mándenos as súas opinións</string>
     <string name="commiting_way">Estase a envíar camiño…</string>
     <string name="increase_search_radius_to">Aumenta-lo raio da procura para %1$s</string>
     <string name="shared_string_world">Mundo</string>

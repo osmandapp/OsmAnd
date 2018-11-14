@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="background_work_description">Cambiar los ajustes de optimización de la batería para estabilizar la ubicación compartida.</string>
 	<string name="background_work">Funcionamiento en segundo plano</string>
-	<string name="battery_optimization_description">Para un uso compartido estable de su posición en segundo plano, es aconsejable desactivar la optimización de la batería para OsmAnd Telegram.
-\n
-\nSi la optimización está activada, el sistema puede desactivar automáticamente la aplicación que se está ejecutando en segundo plano (con la pantalla bloqueada y/o la aplicación minimizada). Esto sucede sin notificación y hace que la transmisión de la posición geográfica se detenga.</string>
+	<string name="battery_optimization_description">Desactivar la optimización de la batería para OsmAnd Telegram de modo que no se desconecte repentinamente cuando esté en segundo plano.</string>
 	<string name="sharing_in_background">Compartir en segundo plano</string>
 	<string name="go_to_settings">Ir a los ajustes</string>
 	<string name="shared_string_later">Luego</string>
@@ -31,7 +29,7 @@
 	<string name="shared_string_sort_by">Ordenar por</string>
 	<string name="choose_osmand_desc">Seleccione la versión de OsmAnd donde los contactos se mostrarán en el mapa.</string>
 	<string name="choose_osmand">Seleccione la versión de OsmAnd para usar</string>
-	<string name="disable_all_sharing_desc">Desactiva el uso compartido de ubicaciones en todos los chats seleccionados (%1$d).</string>
+	<string name="disable_all_sharing_desc">Desactivar la ubicación compartida en todos los chats seleccionados (%1$d).</string>
 	<string name="disable_all_sharing">Desactivar el uso compartido</string>
 	<string name="turn_off_all">Apagar todos</string>
 	<string name="shared_string_exit">Salir</string>
@@ -40,9 +38,9 @@
 	<string name="shared_string_group">Grupo</string>
 	<string name="logout_no_internet_msg">Conéctese a Internet para cerrar sesión en Telegram correctamente.</string>
 	<string name="shared_string_close">Cerrar</string>
-	<string name="disconnect_from_telegram_desc">Para revocar el acceso al uso compartido de ubicaciones. Abra Telegram, vaya a «Ajustes → Privacidad y Seguridad → Sesiones» y cierre sesión de OsmAnd Telegram.</string>
-	<string name="disconnect_from_telegram">Cómo desactivar «OsmAnd Location Sharing» desde Telegram</string>
-	<string name="logout_help_desc">Cómo desactivar «OsmAnd Location Sharing» desde Telegram</string>
+	<string name="disconnect_from_telegram_desc">Para revocar el acceso a la ubicación compartida. Abra Telegram, vaya a «Ajustes → Privacidad y Seguridad → Sesiones» y cierre sesión de OsmAnd Telegram.</string>
+	<string name="disconnect_from_telegram">Cómo desactivar la «Ubicación Compartida de OsmAnd» desde Telegram</string>
+	<string name="logout_help_desc">Cómo desactivar la «Ubicación Compartida de OsmAnd» desde Telegram</string>
 	<string name="connected_account">Cuenta conectada</string>
 	<string name="shared_string_account">Cuenta</string>
 	<string name="in_time">en %1$s</string>
@@ -57,14 +55,14 @@
 	<string name="gps_and_location">Ubicación</string>
 	<string name="sharing_time">Tiempo compartido</string>
 	<string name="expire_at">Expira en</string>
-	<string name="turn_off_location_sharing">Desactivar el uso compartido de ubicaciones</string>
+	<string name="turn_off_location_sharing">Desactivar la ubicación compartida</string>
 	<string name="open_osmand">Abrir OsmAnd</string>
 	<string name="shared_string_live">En vivo</string>
 	<string name="shared_string_bot">Bot</string>
 	<string name="get_telegram_title">Registro en Telegram</string>
-	<string name="get_telegram_account_first">Necesita una cuenta en Telegram para utilizar «OsmAnd Location Sharing».</string>
-	<string name="get_telegram_description_continue">Instale Telegram desde Google Play y registre una cuenta para hacerlo.</string>
-	<string name="get_telegram_after_creating_account">Después de crear la cuenta, puede utilizar esta aplicación.</string>
+	<string name="get_telegram_account_first">Necesita una cuenta en Telegram para utilizar la ubicación compartida.</string>
+	<string name="get_telegram_description_continue">Instale Telegram y cree una cuenta.</string>
+	<string name="get_telegram_after_creating_account">Después podrá utilizar esta aplicación.</string>
 	<string name="shared_string_all">Todos</string>
 	<string name="shared_string_off">No</string>
 	<string name="already_registered_in_telegram">Necesita una cuenta registrada en Telegram y un número de teléfono</string>
@@ -82,8 +80,8 @@
 	<string name="set_time_description">Ajustar la hora en que los contactos y grupos marcados verán la ubicación en tiempo real.</string>
 	<string name="set_time">Fijar la hora</string>
 	<string name="location_sharing_description">Marque los contactos y grupos con los que desea compartir su ubicación.</string>
-	<string name="my_location_search_hint">Buscar: grupo o contacto</string>
-	<string name="start_location_sharing">Iniciar el uso compartido de ubicaciones</string>
+	<string name="my_location_search_hint">Buscar: Grupo o contacto</string>
+	<string name="start_location_sharing">Compartir ubicación</string>
 	<string name="show_on_map">Mostrar en el mapa</string>
 	<string name="app_name">OsmAnd Telegram</string>
 	<string name="phone_number_title">Número de teléfono</string>
@@ -93,16 +91,16 @@
 	<string name="authentication_code">Código de autenticación</string>
 	<string name="authentication_code_descr">Telegram ha enviado un código para que OsmAnd inicie sesión en su cuenta.</string>
 	<string name="enter_password">Ingresar contraseña</string>
-	<string name="password_descr">Ingrese la contraseña de su cuenta de Telegram</string>
+	<string name="password_descr">Contraseña de Telegram</string>
 	<string name="shared_string_login">Iniciar sesión</string>
 	<string name="shared_string_logout">Cerrar sesión</string>
 	<string name="not_logged_in">No ha iniciado sesión</string>
 	<string name="shared_string_continue">Continuar</string>
 	<string name="shared_string_cancel">Cancelar</string>
-	<string name="gps_network_not_enabled">¿Activar el servicio de ubicación\?</string>
+	<string name="gps_network_not_enabled">¿Activar «Ubicación»\?</string>
 	<string name="shared_string_settings">Ajustes</string>
 	<string name="no_location_permission">La aplicación no tiene permiso para acceder a los datos de ubicación.</string>
-	<string name="gps_not_available">Encienda el GPS en los ajustes</string>
+	<string name="gps_not_available">Activar «Ubicación» en los ajustes del sistema</string>
 	<string name="location_service_no_gps_available">Elija uno de los proveedores de ubicación para compartir su ubicación.</string>
 	<string name="osmand_service">Modo reposo</string>
 	<string name="osmand_service_descr">OsmAnd Telegram se ejecuta en modo reposo con la pantalla apagada.</string>
@@ -145,9 +143,9 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="shared_string_second_short">seg</string>
-	<string name="welcome_descr"><b>OsmAnd Location Sharing</b> permite compartir su ubicación y ver las ubicaciones de otras personas en OsmAnd.<br/><br/>La aplicación funciona sobre la base de Telegram API. Para utilizar esta aplicación debe tener una cuenta de Telegram.</string>
+	<string name="welcome_descr">La <b>Ubicación Compartida de OsmAnd</b> (en inglés, «OsmAnd Location Sharing») permite compartir su ubicación y ver las ubicaciones de otras personas en OsmAnd.<br/><br/>La aplicación funciona sobre la base de Telegram API. Para utilizar esta aplicación debe tener una cuenta de Telegram.</string>
 	<string name="my_location">Mi ubicación</string>
-	<string name="live_now">Enviar ahora</string>
+	<string name="live_now">En vivo ahora</string>
 
 
 <string name="enter_another_device_name">Elige un nombre que no se haya usado</string>
@@ -171,4 +169,7 @@
 	<string name="connecting_to_the_internet">Conexión a Internet</string>
 	<string name="last_update_from_telegram">Última actualización de Telegram</string>
 	<string name="stop_sharing_all">Compartir está activado (desactivar)</string>
+	<string name="initialization">Iniciando</string>
+	<string name="logging_out">Cerrar sesión</string>
+	<string name="closing">Cerrando</string>
 	</resources>

@@ -3054,11 +3054,20 @@
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Ditt søk <b>\"%1$s\"</b>, vil bli sent inn sammen med din plassering.<br/><br/> Ingen personvernsinfo samles inn, søkedata trengs kun til forbedring av søket.<br/></string>
     <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å identifisere manglende eller feilaktige meldinger.</string>
-<string name="release_3_2_pre">• Fikset oppstartskræsj som følge av ikke-latinske bindinger
+<string name="release_3_2_pre">• Fikset krasj ved oppstart som skjedde på noen enheter
 \n
-\n • Forbedret opptegningshastighet på Android 8.0-enheter
+\n • Ny mulighet med markører: vis markører som allerede er passert
 \n
-\n • Støtte for redigering av polygoner (ikke-omgivelsesforhold)
+\n • Søkehistorien viser nå hvilke kategorier du har søkt etter tidligere
+\n
+\n • Fikset krasj ved oppstart som skjedde med ikke-latinske kart
+\n
+\n • Forbedret utfordring med opptegningshastighet på Android 8.0-enheter
+\n
+\n • Støtte for endring av polygon-objekter (ikke-bekvemmelighet)
+\n
+\n • Mål avstand: la til Avstand-knapp til handlingslisten i kontekstmenyen
+\n
 \n</string>
     <string name="ask_for_location_permission">Gi OsmAnd tilgang til plassering for å fortsette.</string>
     <string name="rendering_value_black_name">Svart</string>
@@ -3067,8 +3076,22 @@
     <string name="edit_map_marker">Rediger kartmarkør</string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Gatesøk</string>
-    <string name="start_search_from_city">Start søk fra by</string>
+    <string name="start_search_from_city">Velg byen først</string>
     <string name="shared_string_restore">Gjenopprett</string>
     <string name="keep_passed_markers_descr">Markører lagt til som favorittgrupper eller GPX-veipunkter markert som passert vil forbli på kartet. Hvis gruppen ikke er aktiv, vil markørene forsvinne fra kartet.</string>
     <string name="keep_passed_markers">Behold passerte markører på kartet</string>
+    <string name="osm_live_plan_pricing">Betalingsplan og pris</string>
+    <string name="osm_live_payment_monthly_title">Betal månedlig</string>
+    <string name="osm_live_payment_3_months_title">Betal hver tredje måned</string>
+    <string name="osm_live_payment_annual_title">Betal årlig</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s per måned</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s per måned</string>
+    <string name="osm_live_payment_discount_descr">Lagre %1$s.</string>
+	<string name="osm_live_payment_current_subscription">Ditt nåværende abonnement</string>
+    <string name="osm_live_payment_renews_monthly">Fornyes månedlig</string>
+    <string name="osm_live_payment_renews_quarterly">Fornyes kvartalsvis</string>
+    <string name="osm_live_payment_renews_annually">Fornyes årlig</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Velg betalingsfrekvensen som passer for deg:</string>
+    <string name="osm_live_payment_contribute_descr">Deler av inntekten går til OpenStreetMap-bidragsytere.</string>
     </resources>
