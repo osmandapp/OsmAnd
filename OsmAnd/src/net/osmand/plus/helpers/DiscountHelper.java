@@ -30,7 +30,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -63,6 +62,7 @@ public class DiscountHelper {
 	private static final String SHOW_POI_PREFIX = "osmand-show-poi:";
 	private static final String OPEN_ACTIVITY = "open_activity";
 
+	@SuppressLint("HardwareIds")
 	public static void checkAndDisplay(final MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
@@ -130,15 +130,9 @@ public class DiscountHelper {
 			if (data.url.startsWith(INAPP_PREFIX) && data.url.length() > INAPP_PREFIX.length()) {
 				String inAppSku = data.url.substring(INAPP_PREFIX.length());
 				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null) {
-					if (purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-						return;
-					} else {
-						InAppSubscription discountSubscription = purchaseHelper.getLiveUpdates().applyDiscountSubscription(inAppSku);
-						if (discountSubscription != null && discountSubscription.fetchRequired()) {
-							purchaseHelper.requestInventory();
-						}
-					}
+				if (purchaseHelper != null
+						&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+					return;
 				}
 			}
 
