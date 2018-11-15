@@ -16,21 +16,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.SwitchCompat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
@@ -150,23 +143,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		if (!Version.isDeveloperVersion(getMyApplication())) {
 			subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
 			updateSubscriptionHeader();
-
-			listView.addHeaderView(subscriptionHeader);
-			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					if (position == 0 && !processing && InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							if (isDonationSupported()) {
-								showDonationSettings();
-							} else {
-								ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
-							}
-						}
-					}
-				}
-			});
+			listView.addHeaderView(subscriptionHeader, "subscriptionHeader", false);
 		}
 		listView.setAdapter(adapter);
 
@@ -212,20 +189,26 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				}
 				regionNameTextView.setText(countryName);
 
-				View divButtonSettings = subscriptionHeader.findViewById(R.id.div_button_settings);
-				View buttonSettings = subscriptionHeader.findViewById(R.id.button_settings);
+				View subscriptionsButton = subscriptionHeader.findViewById(R.id.button_subscriptions);
+				View settingsButtonContainer = subscriptionHeader.findViewById(R.id.button_settings_container);
+				View settingsButton = subscriptionHeader.findViewById(R.id.button_settings);
+				subscriptionsButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ChoosePlanDialogFragment.showOsmLiveInstance(getActivity().getSupportFragmentManager());
+					}
+				});
 				if (isDonationSupported()) {
-					buttonSettings.setOnClickListener(new View.OnClickListener() {
+					settingsButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							showDonationSettings();
 						}
 					});
-					divButtonSettings.setVisibility(View.VISIBLE);
-					buttonSettings.setVisibility(View.VISIBLE);
+					settingsButtonContainer.setVisibility(View.VISIBLE);
 				} else {
-					divButtonSettings.setVisibility(View.GONE);
-					buttonSettings.setVisibility(View.GONE);
+					settingsButton.setOnClickListener(null);
+					settingsButtonContainer.setVisibility(View.GONE);
 				}
 
 				subscriptionBanner.setVisibility(View.GONE);
@@ -284,41 +267,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				adapter.notifyLiveUpdatesChanged();
 			}
 		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())
-				&& !Version.isDeveloperVersion(getMyApplication())) {
-
-			ActionBar actionBar = getMyActivity().getSupportActionBar();
-			if (actionBar != null) {
-				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-			}
-
-			SubMenu split = menu.addSubMenu(R.string.shared_string_more_actions);
-			split.setIcon(R.drawable.ic_overflow_menu_white);
-			MenuItemCompat.setShowAsAction(split.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			MenuItem item = split.add(0, SUBSCRIPTION_SETTINGS, 0, R.string.osm_live_subscription_settings);
-			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == SUBSCRIPTION_SETTINGS && !processing) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				if (isDonationSupported()) {
-					showDonationSettings();
-				} else {
-					ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
-				}
-			}
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	private boolean isDonationSupported() {
