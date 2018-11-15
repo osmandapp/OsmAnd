@@ -2561,7 +2561,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="wrong_user_name">Erara uzantnomo</string>
     <string name="shared_string_to">al</string>
     <string name="mapillary_menu_date_from">de</string>
-    <string name="mapillary_menu_descr_dates">Montri nur aldonitajn bildojn</string>
+    <string name="mapillary_menu_descr_dates">Montri bildojn aldonitajn nur</string>
     <string name="mapillary_menu_title_dates">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Entajpu uzantnomon</string>
     <string name="mapillary_menu_descr_username">Montri nur bildojn aldonitajn de</string>
