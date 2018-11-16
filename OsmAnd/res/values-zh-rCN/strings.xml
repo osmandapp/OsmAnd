@@ -2721,4 +2721,14 @@
     <string name="search_street">搜索街道</string>
     <string name="start_search_from_city">从城市开始搜索</string>
     <string name="thank_you_for_feedback">感谢您的反馈</string>
+    <string name="powered_by_osmand">由 OsmAnd 出品</string>
+    <string name="osm_live_plan_pricing">方案和价格</string>
+    <string name="osm_live_payment_monthly_title">每月付款</string>
+    <string name="osm_live_payment_3_months_title">每季度付款</string>
+    <string name="osm_live_payment_annual_title">每年付款</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
+    <string name="osm_live_payment_discount_descr">节省 %1$s！</string>
+	<string name="osm_live_payment_current_subscription">您的当前订阅</string>
+    <string name="open_in_browser_wiki_description"></string>
     </resources>
