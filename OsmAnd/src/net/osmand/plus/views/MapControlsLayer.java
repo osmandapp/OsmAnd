@@ -16,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -30,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererContext;
@@ -51,7 +51,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
@@ -304,49 +304,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		trackDetailsMenu = new TrackDetailsMenu(mapActivity);
 	}
 
-	public void updateRouteButtons(View main, boolean routeInfo) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		ImageView cancelRouteButton = (ImageView) main.findViewById(R.id.map_cancel_route_button);
-		cancelRouteButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.map_action_cancel, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
-		cancelRouteButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clickRouteCancel();
-			}
-		});
-
-		ImageView waypointsButton = (ImageView) main.findViewById(R.id.map_waypoints_route_button);
-		waypointsButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_intermediate_destination, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
-		waypointsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clickRouteWaypoints();
-			}
-		});
-
-		ImageView options = (ImageView) main.findViewById(R.id.map_options_route_button);
-		options.setImageDrawable(!routeInfo ? app.getUIUtilities().getIcon(R.drawable.map_action_settings,
-				R.color.osmand_orange) : app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
-		options.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clickRouteParams();
-			}
-		});
-
-		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
-		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(R.drawable.map_start_navigation, R.color.color_white), null, null, null);
-		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go));
-		routeGoButton.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
-		AndroidUtils.setBackground(mapActivity, routeGoButton, nightMode, R.drawable.route_info_go_btn_bg_light, R.drawable.route_info_go_btn_bg_dark);
-		routeGoButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clickRouteGo();
-			}
-		});
-	}
-
 	public void setControlsClickable(boolean clickable) {
 		for (MapHudButton mb : controls) {
 			mb.iv.setClickable(clickable);
@@ -355,16 +312,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private TargetPointsHelper getTargets() {
 		return mapActivity.getMyApplication().getTargetPointsHelper();
-	}
-
-	protected void clickRouteParams() {
-		mapActivity.getMapActions().openRoutePreferencesDialog();
-	}
-
-	protected void clickRouteWaypoints() {
-		if (getTargets().checkPointToNavigateShort()) {
-			mapActivity.getMapActions().openIntermediatePointsDialog();
-		}
 	}
 
 	public void stopNavigation() {
@@ -379,17 +326,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void stopNavigationWithoutConfirm() {
 		mapRouteInfoMenu.hide();
 		mapActivity.getMapActions().stopNavigationWithoutConfirm();
-	}
-
-	protected void clickRouteCancel() {
-		stopNavigation();
-	}
-
-	protected void clickRouteGo() {
-		if (app.getTargetPointsHelper().getPointToNavigate() != null) {
-			mapRouteInfoMenu.hide();
-		}
-		startNavigation();
 	}
 
 	public void showRouteInfoControlDialog() {

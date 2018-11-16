@@ -19,6 +19,8 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 	@ColorRes
 	protected int titleColorId = INVALID_ID;
 
+	private TextView titleTv;
+
 	public SimpleBottomSheetItem(View customView,
 								 @LayoutRes int layoutId,
 								 Object tag,
@@ -38,14 +40,19 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+		titleTv.setText(title);
+	}
+
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
 		if (icon != null) {
 			((ImageView) view.findViewById(R.id.icon)).setImageDrawable(icon);
 		}
-		if (title != null) {
-			TextView titleTv = (TextView) view.findViewById(R.id.title);
+		titleTv = (TextView) view.findViewById(R.id.title);
+		if (title != null && titleTv != null) {
 			titleTv.setText(title);
 			if (titleColorId != INVALID_ID) {
 				titleTv.setTextColor(ContextCompat.getColor(app, titleColorId));

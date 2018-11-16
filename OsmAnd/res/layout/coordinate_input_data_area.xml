@@ -324,7 +324,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginTop="@dimen/content_padding"
-		android:background="@color/route_info_divider_dark"/>
+		android:background="@color/dialog_divider_dark"/>
 
 	<LinearLayout
 		android:id="@+id/point_name_et_container"

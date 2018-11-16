@@ -425,6 +425,9 @@ public class TargetPointsHelper {
 		listeners.add(l);
 	}
 
+	public void removeListener(StateChangedListener<Void> l) {
+		listeners.remove(l);
+	}
 
 	private void updateListeners() {
 		for(StateChangedListener<Void> l : listeners) {

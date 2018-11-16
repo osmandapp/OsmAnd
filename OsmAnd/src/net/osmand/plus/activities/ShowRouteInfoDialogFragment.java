@@ -41,21 +41,20 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
@@ -71,7 +70,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class ShowRouteInfoDialogFragment extends DialogFragment {
 
@@ -83,9 +81,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private RouteInfoAdapter adapter;
 	private GPXFile gpx;
 	private OrderedLineDataSet elevationDataSet;
-	private OrderedLineDataSet slopeDataSet;
 	private GpxDisplayItem gpxItem;
-	private boolean hasHeights;
 
 	public ShowRouteInfoDialogFragment() {
 	}
@@ -186,7 +182,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		makeGpx();
-		if (hasHeights) {
+		if (gpx.hasAltitude) {
 			View headerView = inflater.inflate(R.layout.route_info_header, null);
 			buildHeader(headerView);
 			listView.addHeaderView(headerView);
@@ -196,43 +192,13 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	}
 
 	private void makeGpx() {
-		double lastHeight = HEIGHT_UNDEFINED;
-		gpx = new GPXFile();
-		List<Location> locations = helper.getRoute().getRouteLocations();
-		if (locations != null) {
-			Track track = new Track();
-			TrkSegment seg = new TrkSegment();
-			for (Location l : locations) {
-				WptPt point = new WptPt();
-				point.lat = l.getLatitude();
-				point.lon = l.getLongitude();
-				if (l.hasAltitude()) {
-					if (!hasHeights) {
-						hasHeights = true;
-					}
-					float h = (float) l.getAltitude();
-					point.ele = h;
-					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (WptPt pt : seg.points) {
-							if (Double.isNaN(pt.ele)) {
-								pt.ele = h;
-							}
-						}
-					}
-					lastHeight = h;
-				}
-				seg.points.add(point);
-			}
-			track.segments.add(seg);
-			gpx.tracks.add(track);
-
-			String groupName = getMyApplication().getString(R.string.current_route);
-			GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
-			if (group != null && group.getModifiableList().size() > 0) {
-				gpxItem = group.getModifiableList().get(0);
-				if (gpxItem != null) {
-					gpxItem.route = true;
-				}
+		gpx = GPXUtilities.makeGpxFromRoute(helper.getRoute());
+		String groupName = getMyApplication().getString(R.string.current_route);
+		GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
+		if (group != null && group.getModifiableList().size() > 0) {
+			gpxItem = group.getModifiableList().get(0);
+			if (gpxItem != null) {
+				gpxItem.route = true;
 			}
 		}
 	}
@@ -250,6 +216,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+		OrderedLineDataSet slopeDataSet;
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,

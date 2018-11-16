@@ -23,7 +23,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -45,14 +44,11 @@ import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.getVoiceFiles;
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
 
@@ -246,7 +242,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
 		String[] entries;
 		String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles(this);
+		Set<String> voiceFiles = getMyApplication().getRoutingOptionsHelper().getVoiceFiles(this);
 		entries = new String[voiceFiles.size() + 2];
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;

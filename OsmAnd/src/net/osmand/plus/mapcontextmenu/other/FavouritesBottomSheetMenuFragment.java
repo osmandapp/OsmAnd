@@ -22,6 +22,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.util.MapUtils;
 
 import java.text.Collator;

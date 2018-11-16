@@ -10,6 +10,13 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="show_along_the_route">Show along the route</string>
+    <string name="simulate_navigation">Simulate navigation</string>
+    <string name="choose_track_file_to_follow">Choose track file to follow</string>
+    <string name="voice_announcements">Voice announcements</string>
+    <string name="intermediate_destinations">Intermediate destinations: %1$s</string>
+    <string name="arrive_at_time">Arrive at %1$s</string>
+    <string name="sound_is">Sound is: %1$s</string>
     <string name="osm_live_subscriptions">Subscriptions</string>
     <string name="powered_by_osmand">Powered by OsmAnd</string>
     <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
