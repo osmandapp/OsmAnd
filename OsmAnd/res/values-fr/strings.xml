@@ -3210,4 +3210,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_live_payment_renews_monthly">Abonnement mensuel</string>
     <string name="osm_live_payment_renews_quarterly">Abonnement trimestriel</string>
     <string name="osm_live_payment_renews_annually">Abonnement annuel</string>
+    <string name="powered_by_osmand">Propulsé par OsmAnd</string>
     </resources>
