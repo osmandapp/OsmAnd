@@ -3094,4 +3094,5 @@
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Velg betalingsfrekvensen som passer for deg:</string>
     <string name="osm_live_payment_contribute_descr">Deler av inntekten går til OpenStreetMap-bidragsytere.</string>
+    <string name="powered_by_osmand">Muliggjort av OsmAnd</string>
     </resources>
