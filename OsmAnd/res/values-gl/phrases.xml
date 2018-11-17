@@ -624,7 +624,7 @@
 	<string name="poi_denomination_iglesia_ni_cristo">Igrexa ni cristo</string>
 	<string name="poi_denomination_latter_day_saints">Santos dos derradeiros días</string>
 	<string name="poi_denomination_united_church_of_christ">Igrexa Unida de Cristo</string>
-	<string name="poi_tomb">Tumba</string>
+	<string name="poi_tomb">Tomba</string>
 	<string name="poi_piste">Pista</string>
 	<string name="poi_piste_downhill">Pista de esquí</string>
 	<string name="poi_piste_nordic">Pista de esquí nórdico</string>
@@ -720,7 +720,7 @@
 	<string name="vk">Vkontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_mobile">Móbil</string>
-	<string name="poi_maxheight">Altura máxima</string>
+	<string name="poi_maxheight">Altitude máxima</string>
 	<string name="poi_maxweight">Peso máximo</string>
 	<string name="poi_abandoned">Abandonado</string>
 	<string name="poi_abandoned_poi">Obxecto abandoado</string>
@@ -861,7 +861,7 @@
 	<string name="poi_cycle_barrier">Barreira para bicicletas</string>
 	<string name="poi_motorcycle_barrier">Barreira para motos</string>
 	<string name="poi_service_times">Horario de funcionamento</string>
-	<string name="poi_height">Altura</string>
+	<string name="poi_height">Altitude</string>
 	<string name="poi_ele">Elevación sobre o nivel do mar</string>
 	<string name="poi_wheelchair_no">Non</string>
 	<string name="poi_wheelchair_limited">Con limitacións</string>
@@ -1329,7 +1329,7 @@
 	<string name="poi_block">Bloqueo</string>
 	<string name="poi_debris">Escombros</string>
 	<string name="poi_jersey_barrier">Barreira de Nova Jersey</string>
-	<string name="poi_height_restrictor">Limitador de altura</string>
+	<string name="poi_height_restrictor">Limitador da altitude</string>
 	<string name="poi_horse_stile">Pasaxe para cabalos</string>
 	<string name="poi_operator">Operador</string>
 	<string name="poi_fee_yes">Si</string>
@@ -3389,4 +3389,33 @@
 	<string name="poi_nuclear_explosion_height_of_burst">Altitude do estourido</string>
 	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitude da zona cero</string>
 	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitude das ondas de propagación</string>
+	<string name="poi_voltage">Voltaxe</string>
+	<string name="poi_diplomatic_consulate_general">Consulado xeral</string>
+	<string name="poi_diplomatic_honorary_consulate">Consulado honorario</string>
+	<string name="poi_diplomatic_permanent_mission">Misión permanente</string>
+	<string name="poi_diplomatic_delegation">Delegación</string>
+	<string name="poi_diplomatic_ambassadors_residence">Residencia do embaixador</string>
+	<string name="poi_diplomatic_high_commission">Alto comisionado</string>
+
+	<string name="poi_fire_operator">Operador de incendios</string>
+
+	<string name="poi_water_tank">Depósito de auga</string>
+
+	<string name="poi_length">Lonxitude</string>
+
+	<string name="poi_wiki_link">Wikipedia</string>
+
+	<string name="poi_xmas">Nadal</string>
+	<string name="poi_xmas_event">Acontecemento do Nadal</string>
+	<string name="poi_xmas_market">Mercado de Nadal</string>
+	<string name="poi_xmas_pyramid">Pirámide do Nadal</string>
+	<string name="poi_xmas_shop">Tenda de Nadal</string>
+	<string name="poi_xmas_shop_christmas_tree">Tenda de árbores</string>
+	<string name="poi_xmas_tree">Árbore de Nadal</string>
+	<string name="poi_xmas_day_date">Nadal: período para o acontecemento</string>
+	<string name="poi_xmas_note">Nadal: nota</string>
+	<string name="poi_xmas_opening_hours">Nadal: horario de apertura</string>
+	<string name="poi_drink_wine_retail">Viño: venda</string>
+	<string name="poi_drink_wine_served">Viño: servido</string>
+
 	</resources>
