@@ -56,7 +56,7 @@
 	<string name="last_response">Ultima risposta</string>
 	<string name="shared_string_group">Gruppo</string>
 	<string name="logout_no_internet_msg">Connettiti a Internet per uscire correttamente dall\'account di Telegram.</string>
-	<string name="shared_string_close">Vicino</string>
+	<string name="shared_string_close">Chiudi</string>
 	<string name="disconnect_from_telegram_desc">Per revocare l\'accesso alla condivisione della posizione, apri Telegram, vai a Impostazioni →Privacy e Sicurezza → Sessioni, e termina la sessione di OsmAnd Telegram.</string>
 	<string name="disconnect_from_telegram">Come disattivare la condivisione della posizione di OsmAnd da Telegram</string>
 	<string name="logout_help_desc">Come disattivare la condivisione della posizione di OsmAnd da Telegram</string>
