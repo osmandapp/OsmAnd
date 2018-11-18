@@ -1736,7 +1736,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_io_error">Errore di lettura/scrittura</string>
     <string name="shared_string_unexpected_error">Si è verificato un errore imprevisto</string>
     <string name="shared_string_action_template">"Azione {0}"</string>
-    <string name="shared_string_close">Vicino</string>
+    <string name="shared_string_close">Chiudi</string>
     <string name="shared_string_exit">Esci</string>
     <string name="shared_string_show">Mostra</string>
     <string name="shared_string_show_all">Mostra tutto</string>
