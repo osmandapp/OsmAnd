@@ -2597,7 +2597,7 @@
     <string name="local_openstreetmap_were_uploaded">{0} interessepunkter/notater opplastet</string>
     <string name="local_openstreetmap_settings">Lokalt lagrede OSM-interessepunkter/notater</string>
     <string name="local_openstreetmap_settings_descr">Vis og behandle OSM-interessepunkter/notater i databasen på enheten.</string>
-    <string name="gpx_monitoring_disabled_warn">Logg spor ved bruk av GPX-miniprogram eller via \"Turopptak\"-innstillinger.</string>
+    <string name="gpx_monitoring_disabled_warn">Spar spor ved bruk av GPX-miniprogram eller via \"Turopptak\"-innstillinger.</string>
     <string name="native_library_not_supported">Innebygd bibliotek støttes ikke på denne enheten.</string>
     <string name="init_native_library">Igangsetter innebygget bibliotek…</string>
     <string name="local_index_upload_gpx_description">Last opp GPX-filer til OSM-fellesskapet, og forbedre kartene.</string>
@@ -3052,7 +3052,7 @@
 \n• Andre feilrettinger 
 \n</string>
     <string name="commiting_way">Sender inn vei…</string>
-    <string name="send_search_query_description">Ditt søk <b>\"%1$s\"</b>, vil bli sent inn sammen med din plassering.<br/><br/> Ingen personvernsinfo samles inn, søkedata trengs kun til forbedring av søket.<br/></string>
+    <string name="send_search_query_description">Vi kommer til å sende inn ditt søk <b>\"%1$s\"</b>, sammen med din plassering.<br/><br/> Vi samler ikke på personlig informasjon, vi treger bare søkedata for å forbedre søkealgoritmen.<br/></string>
     <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å identifisere manglende eller feilaktige meldinger.</string>
 <string name="release_3_2_pre">• Fikset krasj ved oppstart som skjedde på noen enheter
 \n
