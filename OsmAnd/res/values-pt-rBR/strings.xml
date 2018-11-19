@@ -98,7 +98,7 @@
 <string name="shared_string_clear">Limpar</string>
 <string name="shared_string_clear_all">Limpar tudo</string>
 <string name="shared_string_save">Salvar</string>
-<string name="shared_string_save_as_gpx">Salvar como novo arquivo GPX</string>
+<string name="shared_string_save_as_gpx">Salvar novo arquivo GPX</string>
 <string name="shared_string_rename">Renomear</string>
 <string name="shared_string_delete">Apagar</string>
 <string name="shared_string_delete_all">Apagar tudo</string>
@@ -141,10 +141,15 @@
 <string name="route_points">Pontos da rota</string>
 <string name="track_segments">Segmentos da trilha</string>
 <string name="shared_string_online_maps">Mapas on-line</string>
-<string name="osmand_rastermaps_plugin_description">"Com este complemento você pode acessar muitos tipos de mapas online (chamados de quadrícula ou ladrilho), tais como quadrículas predefinidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.\n\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline padrão do OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado.\n\nQuadrículas de mapas podem ser obtidas diretamente através de fontes online ou podem ser preparados para uso offline (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
+<string name="osmand_rastermaps_plugin_description">"Com este plugin você pode acessar muitos tipos de mapas online (chamados de quadrícula ou ladrilho), tais como quadrículas predefinidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.
+\n
+\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline padrão do OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado.
+\n
+\nQuadrículas de mapas podem ser obtidas diretamente através de fontes online ou podem ser preparados para uso offline (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
 <string name="record_plugin_name">Gravação de viagem</string>
-<string name="record_plugin_description">"Este complemento ativa a funcionalidade para gravar e salvar suas trilhas manualmente tocando o widget de registro de GPX na tela do mapa ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
-\n\nTrilhas gravadas podem ser compartilhadas com seus amigos ou serem usadas para contribuições ao OSM. Atletas podem usar trilhas gravadas para monitorar seus treinos. Algumas análises básicas da trilha podem ser feitas diretamente no OsmAnd, como tempos de percurso, velocidade média, etc. E, claro, trilhas também podem ser analisadas mais tarde em ferramentas de terceiros. "</string>
+<string name="record_plugin_description">"Este plugin ativa a funcionalidade de gravar e salvar suas trilhas manualmente tocando o widget de registro de GPX na tela do mapa ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX. 
+\n
+\nTrilhas gravadas podem ser compartilhadas com seus amigos ou serem usadas para contribuições ao OSM. Atletas podem usar trilhas gravadas para monitorar seus treinos. Algumas análises básicas da trilha podem ser feitas diretamente no OsmAnd, como tempos de percurso, velocidade média, etc. E, claro, trilhas também podem ser analisadas mais tarde em ferramentas de terceiros. "</string>
 
 
 <string name="srtm_paid_version_title">Plugin de curvas de nível</string>
@@ -158,19 +163,22 @@
 \n\nNão é necessário baixar mapa especial, pois esse modo de exibição é criado a partir do mapa padrão.
 \n\nEssa visão pode ser revertida desativando aqui mesmo ou alterando o \'Estilo do mapa\' em \'Configurar mapa\' quando desejar. "</string>
 <string name="plugin_nautical_name">Mapa náutico</string>
-<string name="plugin_nautical_descr">"Este complemento enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos.
-\n\nUm complemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.).
-\n\nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
+<string name="plugin_nautical_descr">"Este plugin enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos. 
+\n
+\nUm complemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.). 
+\n
+\nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
 <string name="plugin_ski_name">Mapa de esqui</string>
-<string name="plugin_ski_descr">"Este complemento para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve.
-\n\nAtivando esta mudança na visão do estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
+<string name="plugin_ski_descr">"Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve. 
+\n
+\nAtivando esta visão muda o estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
 <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
 <string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
 <string name="osmand_parking_plugin_name">Estacionamento</string>
 <string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 <string name="osmand_distance_planning_plugin_description">Este plugin fornece um widget da tela de mapa que permite a criação de caminhos tocando no mapa ou usando ou modificando arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
 <string name="shared_string_accessibility">Acessibilidade</string>
-<string name="osmand_accessibility_description">Este complemento disponibiliza recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade para vozes TTS, configuração da navegação direcional na tela, uso do trackball para controle de zoom, ou retorno de texto para fala, por exemplo para anunciar automaticamente sua posição.</string>
+<string name="osmand_accessibility_description">Este plugin disponibiliza recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade para vozes TTS, configuração da navegação direcional na tela, uso do trackball para controle de zoom, ou retorno de texto para fala, por exemplo para anunciar automaticamente sua posição.</string>
 <string name="osm_settings">Edição no OSM</string>
 <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
 <string name="rename_failed">Renomeação falhou.</string>
@@ -202,8 +210,8 @@
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
 <string name="osmand_parking_plugin_description">O plugin de posição de estacionamento grava onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado). 
 \nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário Android como lembrete.</string>
-<string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abertura ou comentários de erros do OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
-<string name="osmand_development_plugin_description">Este complemento exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização de tela ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
+<string name="osm_editing_plugin_description">Este plugin do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abrir ou comentar Notas OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
+<string name="osmand_development_plugin_description">Este plugin exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização de tela ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
 <string name="proxy_pref_descr">Configurar proxy</string>
 <string name="settings_privacy">Privacidade</string>
 <string name="shared_string_gpx_points">Pontos</string>
@@ -418,7 +426,7 @@
 
 
 <string name="no_index_file_to_download">Transferência não encontrada, por favor, verifique sua conexão com a Internet.</string>
-<string name="select_index_file_to_download">Nada foi encontrado. Se você não encontrar a sua região, você pode criá-la (veja http://osmand.net).</string>
+<string name="select_index_file_to_download">Nada foi encontrado. Se você não encontrar a sua região, você pode criá-la (veja https://osmand.net).</string>
 <string name="none_selected_gpx">Não há arquivos GPX selecionados. Para selecionar toque e segure a trilha disponível.</string>
 <string name="local_index_select_gpx_file">Selecione para mostrar</string>
 <string name="gpx_split_interval">Intervalo de divisão</string>
@@ -435,7 +443,7 @@
 <string name="delay_navigation_start">Iniciar automaticamente instruções curva a curva</string>
 <string name="local_index_gpx_info_show">\n\nToque e segure para opções</string>
 <string name="gpx_info_subtracks">"Subtrilhas: %1$s "</string>
-<string name="gpx_info_waypoints">Marco de trajeto: %1$s</string>
+<string name="gpx_info_waypoints">Ponto de trajeto: %1$s</string>
 <string name="gpx_info_distance">"Distância: %1$s (%2$s pontos) "</string>
 <string name="gpx_info_start_time">"Hora de início: %1$tF, %1$tT "</string>
 <string name="gpx_info_end_time">"Hora de fim: %1$tF, %1$tT "</string>
@@ -455,7 +463,7 @@
 <string name="gpx_file_is_empty">A trilha GPX está vazia</string>
 
 
-<string name="shared_string_waypoint">Marco de trajeto</string>
+<string name="shared_string_waypoint">Ponto de trajeto</string>
 <string name="gpx_selection_segment_title">Segmento</string>
 
 
@@ -762,8 +770,8 @@ Pôr do Sol: %2$s</string>
 <string name="recording_photo_description">Foto %1$s %2$s</string>
 <string name="av_def_action_picture">Tirar uma foto</string>
 <string name="recording_context_menu_precord">Tirar uma foto</string>
-<string name="dropbox_plugin_description">O complemento do Dropbox permite sincronizar trilhas e notas de áudio/vídeo com a sua conta.</string>
-<string name="dropbox_plugin_name">Complemento Dropbox</string>
+<string name="dropbox_plugin_description">O plugin do Dropbox permite sincronizar trilhas e notas de áudio/vídeo com a sua conta.</string>
+<string name="dropbox_plugin_name">Plugin Dropbox</string>
 <string name="intermediate_points_change_order">Alterar ordem</string>
 <string name="srtm_paid_version_msg">Por favor, considere comprar o plugin \'Curvas de nível\' para apoiar o desenvolvimento.</string>
 <string name="av_def_action_choose">Selecionar a pedido</string>
@@ -979,7 +987,7 @@ Pôr do Sol: %2$s</string>
 <string name="asap">o quanto antes</string>
 <string name="share_route_as_gpx">Compartilhar rota como arquivo GPX</string>
 <string name="share_route_subject">Rota compartilhada via OsmAnd</string>
-<string name="route_roundabout">Rotatória: pegue a %1$dª saída e siga</string>
+<string name="route_roundabout">Rotatória: Pegue a %1$dª saída e siga</string>
 <string name="route_kl">Mantenha à esquerda e siga</string>
 <string name="route_kr">Mantenha à direita e siga</string>
 <string name="rendering_attr_noPolygons_description">Tornar transparente todas as características de terra no mapa</string>
@@ -1168,7 +1176,7 @@ Pôr do Sol: %2$s</string>
 <string name="search_osm_offline">Pesquisar posição geográfica</string>
 
 
-<string name="send_location_email_pattern">Para ver a posição siga o seguinte link %1$s ou o android intent link %2$s</string>
+<string name="send_location_email_pattern">Para ver a posição, siga o link %1$s ou o Android intent link %2$s</string>
 <string name="send_location">Enviar posição</string>
 <string name="voice_is_not_available_msg">Nenhuma orientação por voz disponível, por favor vá a \'Configurações gerais\' → \'Instruções por voz\' e selecione ou baixe um pacote de comandos de voz.</string>
 <string name="voice_is_not_available_title">Nenhuma orientação por voz selecionada</string>
@@ -1332,9 +1340,9 @@ Pôr do Sol: %2$s</string>
 <string name="send_location_way_choose_title">Compartilhar posição usando</string>
 <string name="send_location_sms_pattern">Posição: %1$s\n%2$s</string>
 <string name="context_menu_item_share_location">Compartilhar posição</string>
-<string name="add_waypoint_dialog_added">Marco de trajeto GPX \'\'{0}\'\' foi adicionado</string>
+<string name="add_waypoint_dialog_added">Ponto de trajeto GPX \'\'{0}\'\' adicionado</string>
 <string name="add_waypoint_dialog_title">Adicionar parada à trilha GPX gravada</string>
-<string name="context_menu_item_add_waypoint">Adicionar marco de trajeto GPX</string>
+<string name="context_menu_item_add_waypoint">Adicionar ponto GPX</string>
 <string name="amenity_type_administrative">Administrativo</string>
 <string name="amenity_type_barrier">Barreira</string>
 <string name="amenity_type_education">Educação</string>
@@ -1834,8 +1842,8 @@ Pôr do Sol: %2$s</string>
 <string name="osn_close_dialog_error">Não se pôde fechar a nota</string>
 <string name="shared_string_commit">Enviar</string>
 
-<string name="context_menu_item_delete_waypoint">Apagar marco de trajeto GPX?</string>
-<string name="context_menu_item_edit_waypoint">Editar marco de trajeto GPX</string>
+<string name="context_menu_item_delete_waypoint">Apagar ponto de trajeto GPX\?</string>
+<string name="context_menu_item_edit_waypoint">Editar ponto de trajeto GPX</string>
 <string name="shared_string_location">Posição</string>
 <string name="share_osm_edits_subject">Edições no OSM compartilhadas via OsmAnd</string>
 <string name="lang_nds">Baixo-alemão</string>
@@ -2938,10 +2946,10 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_world">Mundo</string>
     <string name="thank_you_for_feedback">Obrigado por comentar</string>
     <string name="poi_cannot_be_found">Nó ou caminho não pode ser encontrado.</string>
-    <string name="search_no_results_feedback">Nenhum resultado de pesquisa?
-\nMande-nos seu comentário</string>
+    <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
+\nMande-nos o seu comentário</string>
     <string name="commiting_way">Enviando caminho…</string>
-    <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
+    <string name="increase_search_radius_to">Aumentar raio de pesquisa para %1$s</string>
     <string name="send_search_query">Enviar consulta de pesquisa?</string>
     <string name="ask_for_location_permission">Por favor, dê permissão ao OsmAnd para ver a sua localização para continuar.</string>
     <string name="markers_remove_dialog_msg">Apagar marcador de mapa \'%s\'\?</string>
