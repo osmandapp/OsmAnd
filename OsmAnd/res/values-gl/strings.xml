@@ -384,7 +384,7 @@
     <string name="local_index_tile_data_downloadable">Descargábel: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Achegamento máximo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Achegamento mínimo: %1$s</string>
-    <string name="local_index_tile_data_name">Datos das deselas: %1$s</string>
+    <string name="local_index_tile_data_name">Datos das teselas: %1$s</string>
     <string name="edit_tilesource_successfully">A fonte das teselas \"%1$s\" foi gardada</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptico</string>
     <string name="edit_tilesource_maxzoom">Achegamento máximo</string>
@@ -1217,7 +1217,7 @@
 	<string name="gps_status_app_not_found">A aplicación de estado do GPS non está instalado. Desexa procuralo na Google Play\?</string>
 	<string name="voice_is_not_available_msg">A orientación por voz non está dispoñíbel. Vaia a «Axustes» → «Xeral» →«Indicacións con voz» e escolla ou descarregue un paquete de datos de voz.</string>
 	<string name="voice_is_not_available_title">A orientación por voz non está elixida</string>
-	<string name="daynight_mode_day">Diúrno</string>
+	<string name="daynight_mode_day">Día</string>
 	<string name="daynight_mode_night">Noite</string>
 	<string name="daynight_mode_auto">Amencer/Solpor</string>
 	<string name="daynight_mode_sensor">Sensor luminoso</string>
@@ -1318,7 +1318,7 @@
 	<string name="off_router_service_no_gps_available">O servizo de navigación en segundo plano precisa que se active un fornecedor de localización.</string>
 	<string name="hide_poi_filter">Agochar o filtro</string>
 	<string name="show_poi_filter">Amosar filtro</string>
-	<string name="search_poi_filter">Filter</string>
+	<string name="search_poi_filter">Filtro</string>
 	<string name="menu_mute_off">O son está activado</string>
 	<string name="menu_mute_on">O son está desactivado</string>
 	<string name="voice_data_initializing">A inicializar os datos de voz…</string>
@@ -1474,7 +1474,7 @@
 	<string name="show_poi_over_map_description">Amosa-los PDI no mapa (emprega-lo derradeiro filtro escollido).</string>
 	<string name="show_poi_over_map">Amosar superposición dos PDI</string>
 	<string name="map_tile_source_descr">Escolle-la fonte das teselas do mapa con conexión ou gardadas de xeito temporal (na caché).</string>
-	<string name="map_tile_source">Fonte das deselas do mapa</string>
+	<string name="map_tile_source">Fonte das teselas do mapa</string>
 	<string name="map_source">Fonte do mapa</string>
 	<string name="use_internet">Emprega-la Internet</string>
 	<string name="show_location">Amosa-la súa ubicación</string>
@@ -1568,7 +1568,7 @@
 	<string name="poi_dialog_other_tags_message">O resto das etiquetas consérvase</string>
 	<string name="default_buttons_commit">Enviar</string>
 	<string name="shared_string_clear">Limpar</string>
-	<string name="filter_current_poiButton">Filtrar</string>
+	<string name="filter_current_poiButton">Filtro</string>
 	
 	<string name="edit_filter_save_as_menu_item">Gardar coma</string>
 	<string name="edit_filter_delete_dialog_title">Elimina-lo filtro elixido\?</string>
@@ -1799,7 +1799,7 @@ Lon %2$s</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esquí</string>
 	<string name="device_memory">Memoria do dispositivo</string>
     <string name="world_ski_missing">Para poder amosar mapas de esquí hai que descargar mapas especiais sen conexión</string>
-    <string name="remove_the_tag">RETIRAR A ETIQUETA</string>
+    <string name="remove_the_tag">ELIMINAR ETIQUETA</string>
     <string name="gps_status">Estado do GPS</string>
     <string name="rendering_attr_streetLighting_name">Alumeado da rúa</string>
     <string name="proxy_pref_title">Proxy</string>
@@ -1846,7 +1846,7 @@ Lon %2$s</string>
 	<string name="offline_maps_and_navigation">Mapas e navegación\nsen conexión</string>
 	<string name="tab_title_basic">Básico</string>
 	<string name="tab_title_advanced">Avanzado</string>
-	<string name="building_number">Número de versión</string>
+	<string name="building_number">Número do edificio</string>
 	<string name="next_proceed">Seguinte</string>
 	
 	<string name="contact_info">información de contacto</string>
@@ -2063,7 +2063,7 @@ Lon %2$s</string>
     <string name="rendering_attr_currentTrackColor_description">Cor de GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largo do GPX</string>
     <string name="free">"Libre %1$s "</string>
-    <string name="rendering_attr_roadStyle_description">Estilo de estrada</string>
+    <string name="rendering_attr_roadStyle_description">Estilo das estradas</string>
     <string name="routing_attr_avoid_stairs_name">Evitar escadas</string>
     <string name="routing_attr_avoid_stairs_description">Evitar escadas</string>
     <string name="routing_attr_avoid_borders_name">Evitar pasaxes fronteirizas</string>
@@ -2461,7 +2461,7 @@ Lon %2$s</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminado(s).</string>
     <string name="points_delete_multiple">Vai eliminar %1$d punto(s). Confírmao?</string>
     <string name="track_points_category_name">Puntos da rota, puntos de interese, características nomeadas</string>
-    <string name="route_points_category_name">Viraxes que descartar na rota</string>
+    <string name="route_points_category_name">Viraxes a pasar nesta rota</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="average_speed">Velocidade media</string>
     <string name="shared_string_time_moving">Tempo en movemento</string>
@@ -2709,7 +2709,7 @@ Lon %2$s</string>
     <string name="add_favourites_group_to_markers_descr">Escolla unha categoría favorita para engadir ás marcaxes.</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="empty_state_markers_active">Faga marcaxes do mapa!</string>
-    <string name="empty_state_markers_history_desc">As marcaxes marcadas coma descartadas amósanse nesta lapela.</string>
+    <string name="empty_state_markers_history_desc">As marcaxes marcadas coma desbotadas amósanse nesta lapela.</string>
     <string name="tap_on_map_to_hide_interface_descr">Un toque no mapa alterna entre os botóns de control e os trebellos.</string>
     <string name="mark_passed">Marcaxe xa ollada</string>
     <string name="shared_string_gpx_track">Pista</string>
@@ -2725,7 +2725,7 @@ Lon %2$s</string>
     <string name="search_street">Procurar rúa</string>
     <string name="start_search_from_city">Escolla a cidade primeiro</string>
     <string name="shared_string_restore">Restaurar</string>
-    <string name="keep_passed_markers">Manter no mapa as marcaxes descartadas</string>
+    <string name="keep_passed_markers">Manter no mapa as marcaxes desbotadas</string>
     <string name="more_transport_on_stop_hint">Hai máis transportes nesta paraxe.</string>
     <string name="ask_for_location_permission">Para proseguer, debe permiti-la ubicación ó OsmAnd.</string>
     <string name="thank_you_for_feedback">Grazas polo seu comentario</string>
@@ -2765,7 +2765,7 @@ Lon %2$s</string>
     <string name="import_track">Importar ficheiro GPX</string>
     <string name="import_track_desc">O ficheiro %1$s non contén puntos de pasaxe, queres importalo coma unha pista\?</string>
     <string name="copy_location_name">Copiar nome do punto/PDI</string>
-    <string name="keep_passed_markers_descr">As marcaxes engadidas coma un grupo de Favoritos ou puntos de rota GPX descartados ficarán no mapa. Se o grupo non está dispoñíbel, as marcaxes agocharanse do mapa.</string>
+    <string name="keep_passed_markers_descr">As marcaxes engadidas coma un grupo de Favoritos ou puntos de rota GPX desbotados ficarán no mapa. Se o grupo non está dispoñíbel, as marcaxes agocharanse do mapa.</string>
     <string name="release_3_2_pre">• Corrixido o erro no inicio que se producía nalgúns dispositivos
 \n
 \n • Nova función das marcaxes: amosa as marcaxes que xa foran atravesadas.
@@ -2879,8 +2879,8 @@ Lon %2$s</string>
     <string name="show_closed_notes">Amosar notas do OSM pechadas</string>
     <string name="wrong_input">Entrada non correcta</string>
 	<string name="waypoints_added_to_map_markers">Puntos de pasaxe engadidos nas \"Marcaxes do mapa\"</string>
-	<string name="show_passed">Amosar descartados</string>
-    <string name="hide_passed">Agochar descartados</string>
+	<string name="show_passed">Amosar desbotados</string>
+    <string name="hide_passed">Agochar desbotados</string>
     <string name="keep_showing_on_map">Manter amosado no mapa</string>
     <string name="quick_action_show_navigation_finish_dialog">Amosar diálogo \"Navigación rematada\"</string>
     <string name="map_widget_ruler_control">Regra de raio</string>
@@ -2973,7 +2973,7 @@ Lon %2$s</string>
 \n Conseguir un explorador fiábel no voso país - selo Francia, Alemaña, México, UK, España, Países Baixos, EE.UU., Rusia, Brasil ou algún outro.</string>
     <string name="live_monitoring_max_interval_to_send">Tempo do carregado (búfer) para o seguemento en liña</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica o tempo que o carregado (búfer) manterá as localizacións para enviar sen conexión</string>
-    <string name="number_of_rows_in_dash">Número de filas no panel %1$s</string>
+    <string name="number_of_rows_in_dash">Número de filas no taboleiro %1$s</string>
     <string name="save_poi_too_many_uppercase">O nome contén demasiadas maiúsculas. Proseguer\?</string>
     <string name="quick_action_navigation_voice">Activar ou desactivar voz</string>
     <string name="quick_action_navigation_voice_off">Voz desactivada</string>
@@ -3153,4 +3153,5 @@ Lon %2$s</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Escolla o período de pagamento convinte para vostede:</string>
     <string name="osm_live_payment_contribute_descr">Un anaco dos ingresos vai ós contribuíntes do OpenStreetMap.</string>
+    <string name="powered_by_osmand">Desenvolvido polo OsmAnd</string>
     </resources>

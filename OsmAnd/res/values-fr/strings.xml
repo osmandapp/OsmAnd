@@ -1580,9 +1580,9 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="speak_poi">Points d\'intérêt à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
-\n
-\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire, etc.). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.</string>
+    <string name="record_plugin_description">Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte. 
+\n 
+\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OsmAnd (comme la vitesse moyenne, la durée de l\'itinéraire, etc.). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -3210,4 +3210,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_live_payment_renews_monthly">Abonnement mensuel</string>
     <string name="osm_live_payment_renews_quarterly">Abonnement trimestriel</string>
     <string name="osm_live_payment_renews_annually">Abonnement annuel</string>
+    <string name="powered_by_osmand">Propulsé par OsmAnd</string>
     </resources>

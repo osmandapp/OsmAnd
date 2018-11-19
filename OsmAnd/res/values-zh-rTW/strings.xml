@@ -3187,4 +3187,5 @@
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">選擇適合您的付款期：</string>
     <string name="osm_live_payment_contribute_descr">部分收入歸 OpenStreetMap 的貢獻者所有。</string>
+    <string name="powered_by_osmand">Powered by OsmAnd</string>
     </resources>

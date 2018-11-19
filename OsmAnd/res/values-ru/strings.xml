@@ -2903,7 +2903,7 @@
 	<string name="download_file">Скачать файл</string>
     <string name="start_editing_card_image_text">Свободный всемирный путеводитель, который может редактировать каждый.</string>
     <string name="welcome_to_open_beta_description">Проверьте бесплатно все функции во время открытого бета-тестирования. Впоследствии Путеводитель будет доступен подписчикам OsmAnd Unlimited и владельцам OsmAnd +</string>
-    <string name="start_editing_card_description">Вы можете редактировать любую статью Викигида, и мы надеемся, что вы это сделаете. Нам нужны ваши знания, ваш опыт, ваш талант и ваше внимание</string>
+    <string name="start_editing_card_description">Вы можете отредактировать любую статью Викигида, этот проект написан такими же волонтерами как и вы. Нам нужны ваши знания, ваш опыт, ваш талант и ваше внимание</string>
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>

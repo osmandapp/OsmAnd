@@ -3043,4 +3043,5 @@ Lon %2$s</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Marca el período de pago más conveniente:</string>
     <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
+    <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
     </resources>

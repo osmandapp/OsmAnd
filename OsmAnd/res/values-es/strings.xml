@@ -3025,4 +3025,5 @@
     <string name="default_price_currency_format">1$.2f %2$s</string>
     <string name="osm_live_payment_header">Selecciona el período de pago que más te convenga:</string>
     <string name="osm_live_payment_contribute_descr">Parte de los ingresos van a los contribuyentes de OpenStreetMap.</string>
+    <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
     </resources>
