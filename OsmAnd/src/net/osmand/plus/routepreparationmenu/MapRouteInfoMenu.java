@@ -313,6 +313,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (fragmentRef != null) {
 			fragmentRef.get().hideRouteCalculationProgressBar();
 			fragmentRef.get().updateControlButtons();
+			if (currentMenuState == MenuState.HEADER_ONLY) {
+				fragmentRef.get().openMenuHalfScreen();
+			}
 		}
 	}
 
@@ -932,8 +935,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
 					targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
 					targetPointsHelper.updateRouteAndRefresh(true);
-
-//					updateInfo(mainView);
 				}
 			}
 		});

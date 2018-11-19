@@ -29,17 +29,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
-import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.widgets.ImageViewExProgress;
 import net.osmand.plus.widgets.TextViewExProgress;
+
+import java.util.List;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
@@ -49,7 +54,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 	private MapRouteInfoMenu menu;
 	private InterceptorLinearLayout mainView;
-	private View toolbarContainer;
 	private View view;
 	private View.OnLayoutChangeListener containerLayoutListener;
 
@@ -64,7 +68,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	private int menuTopShadowAllHeight;
 	private int topScreenPosY;
 	private int menuBottomViewHeight;
-	private int bottomToolbarPosY;
 	private int menuFullHeightMax;
 	private int menuTitleHeight;
 	private int shadowHeight;
@@ -86,7 +89,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		shadowHeight = AndroidUtils.dpToPx(mapActivity, SHADOW_HEIGHT_TOP_DP);
 		topScreenPosY = addStatusBarHeightIfNeeded(0);
-		bottomToolbarPosY = addStatusBarHeightIfNeeded(getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar));
 		minHalfY = viewHeight - (int) (viewHeight * .75f);
 
 		view = inflater.inflate(R.layout.plan_route_info, container, false);
@@ -102,16 +104,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				dismiss();
-			}
-		});
-
-		toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
-		View toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
-		updateVisibility(toolbarContainer, 0);
-		toolbarBackButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openMenuHeaderOnly();
 			}
 		});
 
@@ -216,8 +208,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 							initVelocityTrackerIfNotExists();
 							velocityTracker.addMovement(ev);
-
-							updateToolbar();
 						}
 
 						break;
@@ -341,7 +331,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		if (menu != null && (menu.getCurrentMenuState() == MenuController.MenuState.FULL_SCREEN || !portrait)) {
+		if (menu != null && (menu.getCurrentMenuState() == MapRouteInfoMenu.MenuState.FULL_SCREEN || !portrait)) {
 			return nightMode ? R.color.status_bar_dark : R.color.status_bar_route_light;
 		}
 		return -1;
@@ -370,7 +360,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private int getFullScreenTopPosY() {
-		return -menuTitleHeight + bottomToolbarPosY;
+		return -menuTitleHeight + AndroidUtils.getStatusBarHeight(getMyApplication());
 	}
 
 	private int addStatusBarHeightIfNeeded(int res) {
@@ -385,18 +375,18 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public void openMenuFullScreen() {
-		changeMenuState(getMenuStatePosY(MenuController.MenuState.FULL_SCREEN), false, false);
+		changeMenuState(getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN), false, false);
 	}
 
 	public void openMenuHeaderOnly() {
 		if (portrait) {
-			changeMenuState(getMenuStatePosY(MenuController.MenuState.HEADER_ONLY), false, false);
+			changeMenuState(getMenuStatePosY(MapRouteInfoMenu.MenuState.HEADER_ONLY), false, false);
 		}
 	}
 
 	public void openMenuHalfScreen() {
 		if (portrait) {
-			changeMenuState(getMenuStatePosY(MenuController.MenuState.HALF_SCREEN), false, false);
+			changeMenuState(getMenuStatePosY(MapRouteInfoMenu.MenuState.HALF_SCREEN), false, false);
 		}
 	}
 
@@ -426,16 +416,16 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			int fullDist = Math.abs(currentY - getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN));
 			int newState;
 			if (headerDist < halfDist && headerDist < fullDist) {
-				newState = MenuController.MenuState.HEADER_ONLY;
+				newState = MapRouteInfoMenu.MenuState.HEADER_ONLY;
 			} else if (halfDist < headerDist && halfDist < fullDist) {
-				newState = MenuController.MenuState.HALF_SCREEN;
+				newState = MapRouteInfoMenu.MenuState.HALF_SCREEN;
 			} else {
-				newState = MenuController.MenuState.FULL_SCREEN;
+				newState = MapRouteInfoMenu.MenuState.FULL_SCREEN;
 			}
 
-			if (slidingDown && currentMenuState == MenuController.MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
+			if (slidingDown && currentMenuState == MapRouteInfoMenu.MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
 				slidingDown = false;
-				newState = MenuController.MenuState.FULL_SCREEN;
+				newState = MapRouteInfoMenu.MenuState.FULL_SCREEN;
 			}
 			if (menuBottomViewHeight > 0 && slidingUp) {
 				while (menu.getCurrentMenuState() != newState) {
@@ -444,7 +434,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 					}
 				}
 			} else if (slidingDown) {
-				if (currentMenuState == MenuController.MenuState.HEADER_ONLY) {
+				if (currentMenuState == MapRouteInfoMenu.MenuState.HEADER_ONLY) {
 					needCloseMenu = true;
 				} else {
 					while (menu.getCurrentMenuState() != newState) {
@@ -471,7 +461,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			}
 		}
 		int newMenuState = menu.getCurrentMenuState();
-		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuController.MenuState.FULL_SCREEN;
+		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MapRouteInfoMenu.MenuState.FULL_SCREEN;
 
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0);
 	}
@@ -487,20 +477,20 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 		int posY = 0;
 		switch (destinationState) {
-			case MenuController.MenuState.HEADER_ONLY:
-				posY = getMenuStatePosY(MenuController.MenuState.HEADER_ONLY);
+			case MapRouteInfoMenu.MenuState.HEADER_ONLY:
+				posY = getMenuStatePosY(MapRouteInfoMenu.MenuState.HEADER_ONLY);
 				break;
-			case MenuController.MenuState.HALF_SCREEN:
-				posY = getMenuStatePosY(MenuController.MenuState.HALF_SCREEN);
+			case MapRouteInfoMenu.MenuState.HALF_SCREEN:
+				posY = getMenuStatePosY(MapRouteInfoMenu.MenuState.HALF_SCREEN);
 				break;
-			case MenuController.MenuState.FULL_SCREEN:
+			case MapRouteInfoMenu.MenuState.FULL_SCREEN:
 				if (currentY != CURRENT_Y_UNDEFINED) {
 					int maxPosY = viewHeight - menuFullHeightMax;
-					int minPosY = getMenuStatePosY(MenuController.MenuState.FULL_SCREEN);
+					int minPosY = getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN);
 					if (maxPosY > minPosY) {
 						maxPosY = minPosY;
 					}
-					if (currentY > minPosY || previousState != MenuController.MenuState.FULL_SCREEN) {
+					if (currentY > minPosY || previousState != MapRouteInfoMenu.MenuState.FULL_SCREEN) {
 						posY = minPosY;
 					} else if (currentY < maxPosY) {
 						posY = maxPosY;
@@ -508,7 +498,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 						posY = currentY;
 					}
 				} else {
-					posY = getMenuStatePosY(MenuController.MenuState.FULL_SCREEN);
+					posY = getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN);
 				}
 				break;
 			default:
@@ -539,21 +529,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				updateMainViewLayout(posY);
 			}
 
-			final float toolbarAlpha = getToolbarAlpha(posY);
-			if (toolbarAlpha > 0) {
-				updateVisibility(toolbarContainer, true);
-			}
-			toolbarContainer.animate().alpha(toolbarAlpha)
-					.setDuration(200)
-					.setInterpolator(new DecelerateInterpolator())
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							updateVisibility(toolbarContainer, toolbarAlpha);
-						}
-					})
-					.start();
-
 			mainView.animate().y(posY)
 					.setDuration(200)
 					.setInterpolator(new DecelerateInterpolator())
@@ -582,49 +557,14 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 					})
 					.start();
 
+			if (needMapAdjust) {
+				adjustMapPosition(posY);
+			}
 		}
 	}
 
 	private void doAfterMenuStateChange(int previousState, int newState) {
 		runLayoutListener();
-	}
-
-	private float getToolbarAlpha(int y) {
-		float a = 0;
-		if (menu != null && portrait) {
-			if (y < bottomToolbarPosY) {
-				a = 1f - (y - topScreenPosY) * (1f / (bottomToolbarPosY - topScreenPosY));
-			}
-			if (a < 0) {
-				a = 0;
-			} else if (a > 1) {
-				a = 1;
-			}
-		}
-		return a;
-	}
-
-	private void updateToolbar() {
-		float a = getToolbarAlpha(getViewY());
-		updateVisibility(toolbarContainer, a);
-	}
-
-	private void updateVisibility(View v, float alpha) {
-		boolean visible = alpha > 0;
-		v.setAlpha(alpha);
-		if (visible && v.getVisibility() != View.VISIBLE) {
-			v.setVisibility(View.VISIBLE);
-		} else if (!visible && v.getVisibility() == View.VISIBLE) {
-			v.setVisibility(View.INVISIBLE);
-		}
-	}
-
-	private void updateVisibility(View v, boolean visible) {
-		if (visible && v.getVisibility() != View.VISIBLE) {
-			v.setVisibility(View.VISIBLE);
-		} else if (!visible && v.getVisibility() == View.VISIBLE) {
-			v.setVisibility(View.INVISIBLE);
-		}
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -677,10 +617,55 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public int getHeight() {
-		if (mainView != null) {
-			return mainView.getHeight();
+		if (menu != null) {
+			int height = getMenuStatePosY(menu.getCurrentMenuState());
+			return viewHeight - height - AndroidUtils.getStatusBarHeight(getMyApplication());
 		} else {
 			return 0;
+		}
+	}
+
+	private void adjustMapPosition(int y) {
+		if (menu.isSelectFromMapTouch()) {
+			return;
+		}
+
+		RoutingHelper rh = getMyApplication().getRoutingHelper();
+		if (rh.isRoutePlanningMode() && getMapActivity().getMapView() != null) {
+			Location lt = rh.getLastProjection();
+			if (lt == null) {
+				lt = getMyApplication().getTargetPointsHelper().getPointToStartLocation();
+			}
+			if (lt != null) {
+				double left = lt.getLongitude(), right = lt.getLongitude();
+				double top = lt.getLatitude(), bottom = lt.getLatitude();
+				List<Location> list = rh.getCurrentCalculatedRoute();
+				for (Location l : list) {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
+				List<TargetPointsHelper.TargetPoint> targetPoints = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
+				for (TargetPointsHelper.TargetPoint l : targetPoints) {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
+
+				RotatedTileBox tb = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+				int tileBoxWidthPx = 0;
+				int tileBoxHeightPx = 0;
+
+				if (!portrait) {
+					tileBoxWidthPx = tb.getPixWidth() - getWidth();
+				} else {
+					int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(getMyApplication());
+					tileBoxHeightPx = tb.getPixHeight() - fHeight;
+				}
+				getMapActivity().getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+			}
 		}
 	}
 

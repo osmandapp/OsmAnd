@@ -523,52 +523,6 @@
 
 	</net.osmand.plus.mapcontextmenu.InterceptorLinearLayout>
 
-	<android.support.design.widget.AppBarLayout
-		android:id="@+id/context_menu_toolbar_container"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:alpha="0">
-
-		<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-			xmlns:app="http://schemas.android.com/apk/res-auto"
-			xmlns:tools="http://schemas.android.com/tools"
-			android:id="@+id/context_menu_toolbar"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/dashboard_map_toolbar"
-			android:background="@color/actionbar_light_color"
-			app:contentInsetLeft="4dp"
-			app:contentInsetStart="4dp">
-
-			<ImageView
-				android:id="@+id/context_menu_toolbar_back"
-				android:layout_width="@dimen/list_item_height"
-				android:layout_height="match_parent"
-				android:layout_gravity="left"
-				android:background="?attr/selectableItemBackgroundBorderless"
-				android:contentDescription="@string/shared_string_collapse"
-				android:scaleType="center"
-				android:src="@drawable/ic_arrow_back"
-				tools:visibility="visible" />
-
-			<TextView
-				android:id="@+id/context_menu_toolbar_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="left"
-				android:ellipsize="end"
-				android:lines="1"
-				android:maxLines="1"
-				android:scaleType="center"
-				android:singleLine="true"
-				android:text="Toolbar"
-				android:textColor="@color/abc_primary_text_material_dark"
-				android:textSize="@dimen/abc_text_size_large_material"
-				tools:visibility="visible" />
-
-		</android.support.v7.widget.Toolbar>
-
-	</android.support.design.widget.AppBarLayout>
-
 	<LinearLayout
 		android:id="@+id/control_buttons"
 		android:layout_width="match_parent"
