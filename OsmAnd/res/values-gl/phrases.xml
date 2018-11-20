@@ -650,7 +650,7 @@
 	<string name="poi_dyke">Dique</string>
 	<string name="poi_mooring">Amarre</string>
 	<string name="poi_military_landuse">Zona militar</string>
-	<string name="poi_military_nuclear_explosion_site">Lugar de explosión nuclear</string>
+	<string name="poi_military_nuclear_explosion_site">Lugar do estourido nuclear</string>
 
 	<string name="poi_wiki_place">Wikipedia</string>
 	<string name="poi_wiki_lang_en">Wiki en inglés</string>
@@ -1456,9 +1456,9 @@
 
 	<string name="poi_historic_period_roman_republic">Período histórico: República romana (do 508 ó 27 a.C.)</string>
 	<string name="poi_square">Praza</string>
-	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo da explosión: subterránea, escavación</string>
-	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo da explosión: subterránea, túnel</string>
-	<string name="poi_nuclear_explosion_type_underground">Tipo da explosión: subterránea</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo do estourido: subterráneo, escavación</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo do estourido: subterráneo, túnel</string>
+	<string name="poi_nuclear_explosion_type_underground">Tipo do estourido: subterráneo</string>
 	<string name="poi_fire_hydrant_type_underground">Subterráneo</string>
 	<string name="poi_health_amenity_type_scales">Básculas públicas</string>
 
@@ -1694,16 +1694,16 @@
 	<string name="poi_building_type_pyramid">Tipo do edificio: pirámide</string>
 
 	<string name="poi_parking_surface">Tipo do aparcadoiro: na superficie</string>
-	<string name="poi_nuclear_explosion_type_atmospheric">Tipo da explosión: atmosférica</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo da explosión: atmosférica, lanzamento aéreo</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipo da explosión: atmosférica, na superficie, torre</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo da explosión: atmosférica, globo</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipo da explosión: atmosférica, na superficie</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo da explosión: atmosférica, na superficie da auga, barquiña</string>
-	<string name="poi_nuclear_explosion_type_cratering_burst">Tipo da explosión: estoupido do cráter (subsolo pouco afundido)</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipo da explosión: atmosférica, foguete ou mísil</string>
-	<string name="poi_nuclear_explosion_type_space">Tipo da explosión: espacial (altitude &gt; 80 km)</string>
-	<string name="poi_nuclear_explosion_type_underwater">Tipo da explosión: mergullada ou submariña</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Tipo do estourido: atmosférico</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo do estourido: atmosférico, lanzamento aéreo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipo do estourido: atmosférico, na superficie, torre</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo do estourido: atmosférico, globo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipo do estourido: atmosférico, na superficie</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo do estourido: atmosférico, na superficie da auga, barquiña</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Tipo do estourido: estoupido do cráter (subsolo pouco afundido)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipo do estourido: atmosférico, foguete ou mísil</string>
+	<string name="poi_nuclear_explosion_type_space">Tipo do estourido: espacial (altitude &gt; 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Tipo do estourido: mergullado ou submariño</string>
 	<string name="poi_addr_housename">Nome do edificio</string>
 
 
@@ -1831,7 +1831,7 @@
 	<string name="poi_surface_snow">Superficie: neve</string>
 
 	<string name="poi_consulting">Oficina de consultoría</string>
-	<string name="poi_nuclear_explosion_date_utc">Data da explosión (UTC)</string>
+	<string name="poi_nuclear_explosion_date_utc">Data do estourido (UTC)</string>
 	<string name="poi_date_yes">Amosado da data</string>
 	<string name="poi_date_no">Amosado da data: non</string>
 
@@ -3600,4 +3600,48 @@
 	<string name="poi_socket_nema_5_15">Enchufe: NEMA 5-15R</string>
 	<string name="poi_socket_nema_5_15_current">Enchufe: NEMA 5-15R: corrente</string>
 	<string name="poi_socket_nema_5_15_output">Enchufe: NEMA 5-15R: saída</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Estourido de salva: primeira detonación de proba</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Estourido de salva: segundo ou seguinte detonación de proba</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Estourido: diámetro do buraco</string>
+	<string name="poi_nuclear_explosion_warhead">Estourido: oxiva</string>
+	<string name="poi_nuclear_explosion_device">Estourido: dispositivo</string>
+
+	<string name="poi_plant_nursery">Viveiro de plantas</string>
+
+	<string name="poi_compressed_air_no">Ar comprimido: non</string>
+
+	<string name="poi_vacuum_cleaner_no">Aspirador: non</string>
+	<string name="poi_amenity_vacuum_cleaner">Aspirador</string>
+
+	<string name="poi_sport_free_flying">Á delta (deporte)</string>
+
+	<string name="poi_water_tap">Billa de auga</string>
+	<string name="poi_button_operated_no">Operado por botóns: non</string>
+
+	<string name="poi_free_flying_site_takeoff">Engalaxe</string>
+	<string name="poi_free_flying_site_landing">Aterraxe</string>
+	<string name="poi_socket_nema_5_20">Enchufe: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Enchufe: NEMA 5-20: corrente</string>
+	<string name="poi_socket_nema_5_20_output">Enchufe: NEMA 5-20: saída</string>
+	<string name="poi_socket_nema_14_30">Enchufe: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Enchufe: NEMA 14-30: corrente</string>
+	<string name="poi_socket_nema_14_30_output">Enchufe: NEMA 14-30: saída</string>
+	<string name="poi_socket_nema_14_50">Enchufe: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Enchufe: NEMA 14-50: corrente</string>
+	<string name="poi_socket_nema_14_50_output">Enchufe: NEMA 14-50: saída</string>
+	<string name="poi_socket_schuko">Enchufe: Schuko</string>
+	<string name="poi_socket_schuko_current">Enchufe: Schuko: corrente</string>
+	<string name="poi_socket_schuko_output">Enchufe: Schuko: saída</string>
+	<string name="poi_socket_bs1363">Enchufe: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Enchufe: BS 1363: corrente</string>
+	<string name="poi_socket_bs1363_output">Enchufe: BS 1363: saída</string>
+	<string name="poi_socket_as3112">Enchufe: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Enchufe: AS/NZS 3112: corrente</string>
+	<string name="poi_socket_as3112_output">Enchufe: AS/NZS 3112: saída</string>
+
+	<string name="poi_car_no">Automóbil: non</string>
+	<string name="poi_scooter_no">Scooter: non</string>
+	<string name="poi_truck_no">Camión: non</string>
+
+	<string name="poi_amperage">Amperaxe</string>
 	</resources>
