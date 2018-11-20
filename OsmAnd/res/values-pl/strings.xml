@@ -3209,4 +3209,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Wybierz dogodny okres płatności:</string>
     <string name="osm_live_payment_contribute_descr">Część dochodu przeznacza się na współtwórców OpenStreetMap.</string>
+    <string name="powered_by_osmand">Obsługiwane przez OsmAnd</string>
     </resources>
