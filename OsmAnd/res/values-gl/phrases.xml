@@ -3454,4 +3454,150 @@
 	<string name="poi_motorcycle_clothes_no">Roupa de moto: non</string>
 	<string name="poi_motorcycle_type_scooter">Scooter</string>
 	<string name="poi_motorcycle_type_sportbike">Deportiva</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Todo terreo</string>
+	<string name="poi_motorcycle_type_dualsport">Duplo propósito</string>
+	<string name="poi_motorcycle_type_standard">Estándar</string>
+
+	<string name="poi_generator_output_electricity_no">Saída (electricidade): non</string>
+
+	<string name="poi_owner">Dono</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_no">Adopción: non</string>
+	<string name="poi_animal_shelter_purpose_release_no">Rehabilitación e liberación: non</string>
+
+	<string name="poi_spaceport">Porto espacial</string>
+
+	<string name="poi_direction_n">Dirección: norte</string>
+	<string name="poi_direction_nne">Dirección: norte-nordeste</string>
+	<string name="poi_direction_ne">Dirección: nordeste</string>
+	<string name="poi_direction_ene">Dirección: leste-nordeste</string>
+	<string name="poi_direction_e">Dirección: leste</string>
+	<string name="poi_direction_ese">Dirección: leste-sureste</string>
+	<string name="poi_direction_se">Dirección: sureste</string>
+	<string name="poi_direction_sse">Dirección: sur-sureste</string>
+	<string name="poi_direction_s">Dirección: sur</string>
+	<string name="poi_direction_ssw">Dirección: sur-suroeste</string>
+	<string name="poi_direction_sw">Dirección: suroeste</string>
+	<string name="poi_direction_wsw">Dirección: oeste-suroeste</string>
+	<string name="poi_direction_w">Dirección: oeste</string>
+	<string name="poi_direction_wnw">Dirección: oeste-noroeste</string>
+	<string name="poi_direction_nw">Dirección: noroeste</string>
+	<string name="poi_direction_nnw">Dirección: norte-noroeste</string>
+	<string name="poi_direction_forward">Dirección: no sentido da vía</string>
+	<string name="poi_direction_backward">Dirección: no sentido contrario da vía</string>
+	<string name="poi_direction_clockwise">Dirección: cara a dereita (segundo as agullas do reloxo)</string>
+	<string name="poi_direction_anticlockwise">Dirección: cara a esquerda (contrario ás agullas do reloxo)</string>
+	<string name="poi_direction_up">Dirección: cara enriba</string>
+	<string name="poi_direction_down">Dirección: cara embaixo</string>
+	<string name="poi_direction_entrance">Dirección: entrada</string>
+	<string name="poi_direction_exit">Dirección: saída</string>
+	<string name="poi_direction_all">Dirección: todas</string>
+
+	<string name="poi_winter_room_no">Refuxio do inverno: non</string>
+	<string name="poi_reservation_required">Reserva: requirida</string>
+	<string name="poi_reservation_recommended">Reserva: recomendada</string>
+	<string name="poi_reservation_no">Reserva: non</string>
+	<string name="poi_reservation_members_only">Reserva: só membros</string>
+
+	<string name="poi_beds">Leitos</string>
+
+	<string name="poi_boat_rental">Aluguer de embarcacións</string>
+	<string name="poi_boat_motorboat_rental_no">Embarcacións a motor: non</string>
+	<string name="poi_boat_houseboat_rental_no">Casas flotantes: non</string>
+	<string name="poi_boat_pedalboat_rental_no">Embarcacións a pedais: non</string>
+	<string name="poi_boat_jetski_rental_no">Motos de auga: non</string>
+	<string name="poi_boat_sailboat_rental_no">Veleiros: non</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Botes: non</string>
+	<string name="poi_boat_kayak_rental_rental_no">Caiaques: non</string>
+	<string name="poi_boat_canoe_rental_rental_no">Canoas: non</string>
+
+	<string name="poi_government_archive">Arquivo</string>
+	<string name="poi_government_ministry">Ministerio</string>
+	<string name="poi_government_social_security">Seguridade social</string>
+	<string name="poi_government_social_services">Servizos sociais</string>
+	<string name="poi_government_treasury">Facenda pública</string>
+	<string name="poi_vhf">Canle VHF</string>
+
+	<string name="poi_gorge">Desfiladeiro</string>
+	<string name="poi_couloir">Cavorco</string>
+	<string name="poi_mountain_area">Área montañosa</string>
+
+	<string name="poi_surface_clay">Arxila</string>
+	<string name="poi_surface_tartan">Tartán</string>
+	<string name="poi_surface_artificial_turf">Céspede artificial</string>
+	<string name="poi_surface_decoturf">Decoturf</string>
+	<string name="poi_surface_metal_grid">Grella metálica</string>
+
+	<string name="poi_location_underwater">Localización: mergullado</string>
+	<string name="poi_location_overground">Localización: na superficie</string>
+	<string name="poi_location_overhead">Localización: suspendido</string>
+	<string name="poi_location_roof">Localización: teito</string>
+	<string name="poi_location_rooftop">Localización: tellado</string>
+	<string name="poi_location_indoor">Localización: interior</string>
+	<string name="poi_location_platform">Localización: plataforma</string>
+	<string name="poi_location_kiosk">Localización: quiosque</string>
+	<string name="poi_location_bridge">Localización: ponte</string>
+	<string name="poi_location_wall">Localización: muro</string>
+	<string name="poi_location_entrance">Localización: entrada</string>
+
+	<string name="poi_visibility_house">Localización: casa</string>
+	<string name="poi_visibility_street">Localización: rúa</string>
+	<string name="poi_visibility_area">Localización: área</string>
+
+	<string name="poi_operational_status_open">Aberto</string>
+	<string name="poi_operational_status_closed">Pechado</string>
+	<string name="poi_operational_status_restricted">Restrinxido</string>
+	<string name="poi_operational_status_broken">Rachado</string>
+	<string name="poi_operational_status_needs_maintenance">Precisa dun mantemento</string>
+
+	<string name="poi_water_place_durability_durable">Durabilidade da fonte de auga: duradeira</string>
+	<string name="poi_water_purification_none">Ningunha</string>
+	<string name="poi_water_purification_chlorine">Cloro</string>
+	<string name="poi_water_purification_reverse_osmosis">Osmose inversa</string>
+	<string name="poi_water_purification_aquatabs">Pastillas</string>
+
+	<string name="poi_water_supply_water_well">Pozo de auga</string>
+	<string name="poi_water_supply_pipeline">Tubaxe</string>
+	<string name="poi_water_supply_running_water">Auga corrente</string>
+	<string name="poi_water_supply_pump">Bomba</string>
+	<string name="poi_water_supply_borehole">Pozo artesán</string>
+	<string name="poi_water_supply_water_trucking">Camión de auga</string>
+	<string name="poi_water_supply_water_tank">Tanque de auga</string>
+	<string name="poi_water_supply_bottled_water">Auga embotellada</string>
+
+	<string name="poi_water_place_access_community">Comunidade</string>
+	<string name="poi_water_place_access_family">Familia</string>
+	<string name="poi_water_place_access_multifamilies">Múltiples familias</string>
+
+	<string name="poi_socket_cee_blue">Enchufe: CEE azul</string>
+	<string name="poi_socket_cee_blue_current">Enchufe: CEE azul: corrente</string>
+	<string name="poi_socket_cee_blue_output">Enchufe: CEE azul: saída</string>
+	<string name="poi_socket_cee_red_16a">Enchufe: CEE vermello 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Enchufe: CEE vermello 16A: corrente</string>
+	<string name="poi_socket_cee_red_16a_output">Enchufe: CEE vermello 16A: saída</string>
+	<string name="poi_socket_cee_red_32a">Enchufe: CEE vermello 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Enchufe: CEE vermello 32A: corrente</string>
+	<string name="poi_socket_cee_red_32a_output">Enchufe: CEE vermello 32A: saída</string>
+	<string name="poi_socket_cee_red_64a">Enchufe: CEE vermello 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Enchufe: CEE vermello 64A: corrente</string>
+	<string name="poi_socket_cee_red_64a_output">Enchufe: CEE vermello 64A: saída</string>
+	<string name="poi_socket_cee_red_125a">Enchufe: CEE vermello 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Enchufe: CEE vermello 125A: corrente</string>
+	<string name="poi_socket_cee_red_125a_output">Enchufe: CEE vermello 125A: saída</string>
+	<string name="poi_socket_chademo">Enchufe: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Enchufe: CHAdeMO: corrente</string>
+	<string name="poi_socket_chademo_output">Enchufe: CHAdeMO: saída</string>
+	<string name="poi_socket_tesla_standard">Enchufe: Tesla estándar</string>
+	<string name="poi_socket_tesla_standard_current">Enchufe: Tesla estándar: corrente</string>
+	<string name="poi_socket_tesla_standard_output">Enchufe: Tesla estándar: saída</string>
+	<string name="poi_socket_tesla_supercharger">Enchufe: Supercargador Tesla</string>
+	<string name="poi_socket_tesla_supercharger_current">Enchufe: Supercargador Tesla: corrente</string>
+	<string name="poi_socket_tesla_supercharger_output">Enchufe: Supercargador Tesla: saída</string>
+	<string name="poi_socket_tesla_roadster">Enchufe: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Enchufe: Tesla Roadster: corrente</string>
+	<string name="poi_socket_tesla_roadster_output">Enchufe: Tesla Roadster: saída</string>
+	<string name="poi_socket_nema_5_15">Enchufe: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Enchufe: NEMA 5-15R: corrente</string>
+	<string name="poi_socket_nema_5_15_output">Enchufe: NEMA 5-15R: saída</string>
 	</resources>
