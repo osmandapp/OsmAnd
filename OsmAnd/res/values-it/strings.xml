@@ -2706,7 +2706,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="none_point_error">Aggiungi almeno un punto.</string>
     <string name="enter_gpx_name">Nome del file GPX:</string>
     <string name="show_on_map_after_saving">Dopo averlo salvato mostralo sulla mappa</string>
-    <string name="mappilary_no_internet_desc">Hai bisogno di internet per vedere le foto di Mapillary</string>
+    <string name="mappilary_no_internet_desc">Hai bisogno di essere connesso a Internet per vedere le foto da Mapillary.</string>
     <string name="add_waypoint">Aggiungi punto intermedio</string>
     <string name="save_gpx_waypoint">Salva Waypoint GPX</string>
     <string name="waypoint_one">Waypoint 1</string>
@@ -2734,7 +2734,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="add_line">Aggiungi una linea</string>
     <string name="save_route_point">Salva il Punto Percorso</string>
     <string name="route_point_one">Punto Percorso 1</string>
-    <string name="empty_state_my_tracks">Aggiungi e registra Tracce</string>
+    <string name="empty_state_my_tracks">Aggiungi file GPX</string>
     <string name="move_all_to_history">Sposta tutto nella cronologia</string>
     
     <string name="show_direction">Indicazione della direzione</string>
@@ -2792,13 +2792,13 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_markers">Marcatori</string>
     <string name="osmand_extended_description_part4">Skiing OsmAnd mappe sciistiche è un componente aggiuntivo che ti permette di vedere le piste da sci con il livello di difficoltà e alcune altre informazioni come la localizzazione degli skilift e altri servizi.</string>
     <string name="osmand_extended_description_part5">Bicicletta • Puoi individuare sulla mappa i percorsi ciclabili • La navigazione GPS nella modalità bicicletta crea percorsi utilizzando i percorsi ciclabili • Puoi vedere velocità e altitudine • L\'opzione registrazione del GPX ti permette di registrare il tuo percorso e di condividerlo • Con un componente aggiuntivo puoi abilitare la visualizzazione delle isoipse e dell\'ombreggiatura dei rilievi</string>
-    <string name="empty_state_my_tracks_desc">Registra o importa le tracce per visualizzarle</string>
-    <string name="empty_state_favourites">Aggiungi Luoghi preferiti</string>
-    <string name="empty_state_favourites_desc">Aggiungi dei luoghi favoriti sulla mappa o importali dal filesystem</string>
-    <string name="import_track">Importa traccia</string>
+    <string name="empty_state_my_tracks_desc">Importa i file GPX o registra delle tracce.</string>
+    <string name="empty_state_favourites">Aggiungi Preferiti</string>
+    <string name="empty_state_favourites_desc">Importa i Preferiti o aggiungili come marcatori sulla mappa.</string>
+    <string name="import_track">Importa il file GPX</string>
     <string name="import_track_desc">Il file %1$s non contiene punti intermedi, importarlo come traccia?</string>
-    <string name="move_point">Sposta il punto</string>
-    <string name="add_segment_to_the_track">Aggiungi a una traccia GPX</string>
+    <string name="move_point">Sposta il Punto</string>
+    <string name="add_segment_to_the_track">Aggiungi a un file GPX</string>
 <string name="osn_modify_dialog_error">Non è possibile modificare la nota</string>
     <string name="shared_string_road">Strada</string>
     <string name="show_map">Mostra la mappa</string>
@@ -2930,7 +2930,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="map_import_error">Errore importazione mappa</string>
     <string name="map_imported_successfully">Mappa importata</string>
     <string name="winter_and_ski_renderer">Inverno e sci</string>
-    <string name="touring_view_renderer">Vista turistica (contrasto e dettagli)</string>
+    <string name="touring_view_renderer">Vista turistica</string>
     <string name="group_deleted">Gruppo cancellato</string>
     <string name="clear_all_intermediates">Cancella tutti i punti intermedi</string>
     <string name="osm_recipients_label">Riceventi OSM</string>
@@ -3113,7 +3113,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="coord_input_add_point">Aggiungi punto</string>
     <string name="coord_input_save_as_track">Salva come traccia</string>
     <string name="coord_input_save_as_track_descr">Hai aggiunto %1$s punti. Digita il nome del file e tappa su \"Salva\".</string>
-    <string name="test_voice_desrc">Tap sul pulsante e ascolta l\'avviso vocale corrispondente per identificare gli avvisi errati o mancanti</string>
+    <string name="test_voice_desrc">Tap sul pulsante e ascolta l\'avviso vocale corrispondente per identificare gli avvisi errati o mancanti.</string>
 <string name="release_3_2_pre">• Sistemato il crash all\'avvio che avveniva con alcuni dispositivi
 \n
 \n • Nuova funzione Marcatori: mostra i marcatori che sono stati già superati
