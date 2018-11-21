@@ -2739,7 +2739,7 @@ Lon %2$s</string>
     <string name="wrong_format">Formato incorrecto</string>
     <string name="shared_string_view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
-	<string name="import_gpx_file_description">pueden importarse como Favoritos o como un archivo GPX.</string>
+	<string name="import_gpx_file_description">puede importarse como Favoritos o como un archivo GPX.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
