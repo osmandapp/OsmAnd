@@ -4,7 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -25,6 +31,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.mapcontextmenu.TransportStopRouteAdapter;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
@@ -37,7 +44,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -47,18 +54,38 @@ import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
 public class RoutingOptionsHelper {
 
+
+	public static final String MORE_VALUE = "MORE_VALUE";
+	public static final String DRIVING_STYLE = "driving_style";
+
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 
+	Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
 
 	public RoutingOptionsHelper(OsmandApplication application) {
 		app = application;
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
+
+		modes.put(ApplicationMode.CAR, new RouteMenuAppModes(ApplicationMode.CAR, getRoutingParameters(ApplicationMode.CAR, MapRouteInfoMenu.PermanentAppModeOptions.CAR.routingParameters)));
+		modes.put(ApplicationMode.BICYCLE, new RouteMenuAppModes(ApplicationMode.BICYCLE, getRoutingParameters(ApplicationMode.BICYCLE, MapRouteInfoMenu.PermanentAppModeOptions.BICYCLE.routingParameters)));
+		modes.put(ApplicationMode.PEDESTRIAN, new RouteMenuAppModes(ApplicationMode.PEDESTRIAN, getRoutingParameters(ApplicationMode.PEDESTRIAN, MapRouteInfoMenu.PermanentAppModeOptions.PEDESTRIAN.routingParameters)));
 	}
 
-	public static final String MORE_VALUE = "MORE_VALUE";
+	public void addNewRouteMenuParameter(ApplicationMode applicationMode, LocalRoutingParameter parameter) {
+		RouteMenuAppModes mode = modes.get(applicationMode);
+		if (mode != null) {
+			if (parameter.canAddToRouteMenu() && mode.am.equals(applicationMode) && !mode.containsParameter(parameter)) {
+				mode.parameters.add(parameter);
+			}
+		} else if (parameter.canAddToRouteMenu()) {
+			List<LocalRoutingParameter> list = new ArrayList<>();
+			list.add(parameter);
+			modes.put(applicationMode, new RouteMenuAppModes(applicationMode, list));
+		}
+	}
 
 	public void switchSound() {
 		boolean mt = !routingHelper.getVoiceRouter().isMute();
@@ -233,15 +260,9 @@ public class RoutingOptionsHelper {
 		}
 	}
 
-	public List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
+	public List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am, List<String> routingParameters) {
 		List<LocalRoutingParameter> list = new ArrayList<>();
-		if (am.equals(ApplicationMode.CAR)) {
-			getAppModeItems(am, list, AppModeOptions.CAR.routingParameters);
-		} else if (am.equals(ApplicationMode.BICYCLE)) {
-			getAppModeItems(am, list, AppModeOptions.BICYCLE.routingParameters);
-		} else if (am.equals(ApplicationMode.PEDESTRIAN)) {
-			getAppModeItems(am, list, AppModeOptions.PEDESTRIAN.routingParameters);
-		}
+		getAppModeItems(am, list, routingParameters);
 		return list;
 	}
 
@@ -253,6 +274,79 @@ public class RoutingOptionsHelper {
 			}
 		}
 		return list;
+	}
+
+	public interface OnClickListener {
+		void onClick(String text);
+	}
+
+	public void showDialog(final LocalRoutingParameterGroup group, final MapActivity mapActivity, final OnClickListener listener) {
+		final ContextMenuAdapter adapter = new ContextMenuAdapter();
+		int i = 0;
+		int selectedIndex = -1;
+		for (LocalRoutingParameter p : group.getRoutingParameters()) {
+			adapter.addItem(ContextMenuItem.createBuilder(p.getText(mapActivity))
+					.setSelected(false).createItem());
+			if (p.isSelected(settings)) {
+				selectedIndex = i;
+			}
+			i++;
+		}
+		if (selectedIndex == -1) {
+			selectedIndex = 0;
+		}
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		final int layout = R.layout.list_menu_item_native_singlechoice;
+
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1,
+				adapter.getItemNames()) {
+			@NonNull
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				// User super class to create the View
+				View v = convertView;
+				if (v == null) {
+					v = mapActivity.getLayoutInflater().inflate(layout, null);
+				}
+				final ContextMenuItem item = adapter.getItem(position);
+				TextView tv = (TextView) v.findViewById(R.id.text1);
+				tv.setText(item.getTitle());
+				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
+
+				return v;
+			}
+		};
+
+		final int[] selectedPosition = {selectedIndex};
+		builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int position) {
+				selectedPosition[0] = position;
+			}
+		});
+		builder.setTitle(group.getText(mapActivity))
+				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						int position = selectedPosition[0];
+						if (position >= 0 && position < group.getRoutingParameters().size()) {
+							for (int i = 0; i < group.getRoutingParameters().size(); i++) {
+								LocalRoutingParameter rp = group.getRoutingParameters().get(i);
+								rp.setSelected(settings, i == position);
+							}
+							mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+							LocalRoutingParameter selected = group.getSelected(settings);
+							if (selected != null&&listener != null) {
+								listener.onClick(selected.getText(mapActivity));
+							}
+						}
+					}
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null);
+
+		builder.create().show();
 	}
 
 	public LocalRoutingParameter getItem(ApplicationMode am, String parameter) {
@@ -385,6 +479,22 @@ public class RoutingOptionsHelper {
 		return null;
 	}
 
+
+	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
+		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
+		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), routingHelper.getAppMode());
+		if (router != null) {
+			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
+				String param = e.getKey();
+				GeneralRouter.RoutingParameter routingParameter = e.getValue();
+				if (param.startsWith("avoid_")) {
+					avoidParameters.add(routingParameter);
+				}
+			}
+		}
+		return avoidParameters;
+	}
+
 	public static class LocalRoutingParameter {
 
 		public static final String KEY = "LocalRoutingParameter";
@@ -392,6 +502,10 @@ public class RoutingOptionsHelper {
 		public GeneralRouter.RoutingParameter routingParameter;
 
 		private ApplicationMode am;
+
+		public boolean canAddToRouteMenu() {
+			return true;
+		}
 
 		public LocalRoutingParameter(ApplicationMode am) {
 			this.am = am;
@@ -491,6 +605,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "DividerItem";
 
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
 		public DividerItem() {
 			super(null);
 		}
@@ -499,6 +617,10 @@ public class RoutingOptionsHelper {
 	public static class RouteSimulationItem extends LocalRoutingParameter {
 
 		public static final String KEY = "RouteSimulationItem";
+
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
 
 		public RouteSimulationItem() {
 			super(null);
@@ -538,6 +660,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "GpxLocalRoutingParameter";
 
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
 		public GpxLocalRoutingParameter() {
 			super(null);
 		}
@@ -547,6 +673,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "OtherSettingsRoutingParameter";
 
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
 		public OtherSettingsRoutingParameter() {
 			super(null);
 		}
@@ -555,6 +685,10 @@ public class RoutingOptionsHelper {
 	public static class OtherLocalRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "OtherLocalRoutingParameter";
+
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
 
 		public String text;
 		public boolean selected;
@@ -601,45 +735,24 @@ public class RoutingOptionsHelper {
 		}
 	}
 
-	public enum AppModeOptions {
+	public static class RouteMenuAppModes {
 
-		CAR(MuteSoundRoutingParameter.KEY,
-				DividerItem.KEY,
-				AvoidRoadsRoutingParameter.KEY,
-				ShowAlongTheRouteItem.KEY,
-				GeneralRouter.ALLOW_PRIVATE,
-				GeneralRouter.USE_SHORTEST_WAY,
-				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
-				OtherSettingsRoutingParameter.KEY,
-				RouteSimulationItem.KEY),
+		public ApplicationMode am;
 
-		BICYCLE(MuteSoundRoutingParameter.KEY,
-				"driving_style",
-				GeneralRouter.USE_HEIGHT_OBSTACLES,
-				DividerItem.KEY,
-				AvoidRoadsTypesRoutingParameter.KEY,
-				ShowAlongTheRouteItem.KEY,
-				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
-				OtherSettingsRoutingParameter.KEY,
-				RouteSimulationItem.KEY),
+		public List<LocalRoutingParameter> parameters;
 
-		PEDESTRIAN(MuteSoundRoutingParameter.KEY,
-				GeneralRouter.USE_HEIGHT_OBSTACLES,
-				DividerItem.KEY,
-				AvoidRoadsTypesRoutingParameter.KEY,
-				ShowAlongTheRouteItem.KEY,
-				DividerItem.KEY,
-				GpxLocalRoutingParameter.KEY,
-				OtherSettingsRoutingParameter.KEY,
-				RouteSimulationItem.KEY);
+		public RouteMenuAppModes(ApplicationMode am, List<LocalRoutingParameter> parameters) {
+			this.am = am;
+			this.parameters = parameters;
+		}
 
-
-		List<String> routingParameters;
-
-		AppModeOptions(String... routingParameters) {
-			this.routingParameters = Arrays.asList(routingParameters);
+		public boolean containsParameter(LocalRoutingParameter parameter) {
+			for (LocalRoutingParameter p : parameters) {
+				if (p.getClass().equals(parameter.getClass())) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

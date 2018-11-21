@@ -51,10 +51,10 @@ import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -68,7 +68,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private RoutingOptionsHelper routingOptionsHelper;
 	private ApplicationMode applicationMode;
 
-	private List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,21 +79,28 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		mapActivity = getMapActivity();
 		controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 		applicationMode = routingHelper.getAppMode();
-		prepareRoutingPrefs();
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 
-		List<LocalRoutingParameter> list = routingOptionsHelper.getRoutingParameters(applicationMode);
-		for (LocalRoutingParameter optionsItem : list) {
+		List<LocalRoutingParameter> list = new ArrayList<>();
+		if (applicationMode.equals(ApplicationMode.CAR)) {
+			list = routingOptionsHelper.getRoutingParameters(applicationMode, AppModeOptions.CAR.routingParameters);
+		} else if (applicationMode.equals(ApplicationMode.BICYCLE)) {
+			list = routingOptionsHelper.getRoutingParameters(applicationMode, AppModeOptions.BICYCLE.routingParameters);
+		} else if (applicationMode.equals(ApplicationMode.PEDESTRIAN)) {
+			list = routingOptionsHelper.getRoutingParameters(applicationMode, AppModeOptions.PEDESTRIAN.routingParameters);
+		}
+
+		for (final LocalRoutingParameter optionsItem : list) {
 
 			if (optionsItem instanceof DividerItem) {
 				items.add(new DividerHalfItem(app));
 			} else if (optionsItem instanceof MuteSoundRoutingParameter) {
-				final BottomSheetItemWithCompoundButton[] MuteSoundRoutingParameter = new BottomSheetItemWithCompoundButton[1];
-				MuteSoundRoutingParameter[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				final BottomSheetItemWithCompoundButton[] muteSoundRoutingParameter = new BottomSheetItemWithCompoundButton[1];
+				muteSoundRoutingParameter[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 						.setChecked(!routingHelper.getVoiceRouter().isMute())
 						.setDescription(getString(R.string.voice_announcements))
 						.setIcon(getContentIcon(R.drawable.ic_action_volume_up))
@@ -103,30 +109,32 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
+								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 								boolean mt = !routingHelper.getVoiceRouter().isMute();
 								settings.VOICE_MUTE.set(mt);
 								routingHelper.getVoiceRouter().setMute(mt);
-								MuteSoundRoutingParameter[0].setChecked(!routingHelper.getVoiceRouter().isMute());
+								muteSoundRoutingParameter[0].setChecked(!routingHelper.getVoiceRouter().isMute());
 							}
 						})
 						.create();
-				items.add(MuteSoundRoutingParameter[0]);
+				items.add(muteSoundRoutingParameter[0]);
 
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
-				BaseBottomSheetItem ShowAlongTheRouteItem = new SimpleBottomSheetItem.Builder()
+				BaseBottomSheetItem showAlongTheRouteItem = new SimpleBottomSheetItem.Builder()
 						.setIcon(getContentIcon(R.drawable.ic_action_snap_to_road))
 						.setTitle(getString(R.string.show_along_the_route))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
+								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 								Toast.makeText(app, getText(R.string.show_along_the_route), Toast.LENGTH_LONG).show();
 							}
 						})
 						.create();
-				items.add(ShowAlongTheRouteItem);
+				items.add(showAlongTheRouteItem);
 			} else if (optionsItem instanceof RouteSimulationItem) {
-				BaseBottomSheetItem RouteSimulationItem = new SimpleBottomSheetItem.Builder()
+				BaseBottomSheetItem routeSimulationItem = new SimpleBottomSheetItem.Builder()
 						.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
 						.setTitle(getString(R.string.simulate_navigation))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
@@ -139,15 +147,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 							}
 						})
 						.create();
-				items.add(RouteSimulationItem);
+				items.add(routeSimulationItem);
 			} else if (optionsItem instanceof AvoidRoadsTypesRoutingParameter) {
-				BaseBottomSheetItem AvoidRoadsRoutingParameter = new SimpleBottomSheetItem.Builder()
+				BaseBottomSheetItem avoidRoadsRoutingParameter = new SimpleBottomSheetItem.Builder()
 						.setIcon(getContentIcon(R.drawable.ic_action_road_works_dark))
 						.setTitle(getString(R.string.impassable_road))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
+								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+								List<GeneralRouter.RoutingParameter> avoidParameters = routingOptionsHelper.getAvoidRoutingPrefsForAppMode(applicationMode);
 								String[] vals = new String[avoidParameters.size()];
 								OsmandSettings.OsmandPreference[] bls = new OsmandSettings.OsmandPreference[avoidParameters.size()];
 								for (int i = 0; i < avoidParameters.size(); i++) {
@@ -155,19 +165,20 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 									vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
 									bls[i] = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 								}
-								showBooleanSettings(vals, bls, getString(R.string.impassable_road));
+								showBooleanSettings(vals, bls, getString(R.string.impassable_road), mapActivity);
 							}
 						})
 						.create();
-				items.add(AvoidRoadsRoutingParameter);
+				items.add(avoidRoadsRoutingParameter);
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
-				BaseBottomSheetItem AvoidRoadsRoutingParameter = new SimpleBottomSheetItem.Builder()
+				BaseBottomSheetItem avoidRoadsRoutingParameter = new SimpleBottomSheetItem.Builder()
 						.setIcon(getContentIcon(R.drawable.ic_action_road_works_dark))
 						.setTitle(getString(R.string.impassable_road))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
+								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 								mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
 								controlsLayer.getMapRouteInfoMenu().hide();
 								app.getAvoidSpecificRoads().showDialog(mapActivity);
@@ -175,7 +186,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 							}
 						})
 						.create();
-				items.add(AvoidRoadsRoutingParameter);
+				items.add(avoidRoadsRoutingParameter);
 
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
 				View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
@@ -186,7 +197,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				((ImageView) v.findViewById(R.id.dropDownIcon))
 						.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
 
-				BaseBottomSheetItem GpxLocalRoutingParameter = new BottomSheetItemWithDescription.Builder()
+				BaseBottomSheetItem gpxLocalRoutingParameter = new BottomSheetItemWithDescription.Builder()
 						.setDescription(getString(R.string.choose_track_file_to_follow))
 						.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
 						.setTitle(getString(R.string.shared_string_gpx_route))
@@ -198,10 +209,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 							}
 						})
 						.create();
-				items.add(GpxLocalRoutingParameter);
+				items.add(gpxLocalRoutingParameter);
 
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
-				BaseBottomSheetItem OtherSettingsRoutingParameter = new SimpleBottomSheetItem.Builder()
+				BaseBottomSheetItem otherSettingsRoutingParameter = new SimpleBottomSheetItem.Builder()
 						.setIcon(getContentIcon(R.drawable.map_action_settings))
 						.setTitle(getString(R.string.routing_settings_2))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
@@ -215,7 +226,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 							}
 						})
 						.create();
-				items.add(OtherSettingsRoutingParameter);
+				items.add(otherSettingsRoutingParameter);
 
 			} else {
 				inflateRoutingParameter(optionsItem);
@@ -228,20 +239,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_close;
 	}
 
-	private void prepareRoutingPrefs() {
-		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), applicationMode);
-		if (router != null) {
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
-				String param = e.getKey();
-				GeneralRouter.RoutingParameter routingParameter = e.getValue();
-				if (param.startsWith("avoid_")) {
-					avoidParameters.add(routingParameter);
-				}
-			}
-		}
-	}
 
-	public AlertDialog showBooleanSettings(String[] vals, final OsmandSettings.OsmandPreference<Boolean>[] prefs, final CharSequence title) {
+	public static AlertDialog showBooleanSettings(String[] vals, final OsmandSettings.OsmandPreference<Boolean>[] prefs, final CharSequence title, MapActivity mapActivity) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 		boolean[] checkedItems = new boolean[prefs.length];
 		for (int i = 0; i < prefs.length; i++) {
@@ -296,6 +295,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, parameter);
+
 						final ContextMenuAdapter adapter = new ContextMenuAdapter();
 						int i = 0;
 						int selectedIndex = -1;
@@ -377,6 +378,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				builder.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, parameter);
+
 						boolean selected = parameter.isSelected(settings);
 						routingOptionsHelper.applyRoutingParameter(parameter, !selected);
 						item[0].setChecked(!selected);
@@ -408,5 +411,47 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				return true;
 			}
 		});
+	}
+
+	public enum AppModeOptions {
+
+		CAR(MuteSoundRoutingParameter.KEY,
+				DividerItem.KEY,
+				AvoidRoadsRoutingParameter.KEY,
+				ShowAlongTheRouteItem.KEY,
+				GeneralRouter.ALLOW_PRIVATE,
+				GeneralRouter.USE_SHORTEST_WAY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				OtherSettingsRoutingParameter.KEY,
+				RouteSimulationItem.KEY),
+
+		BICYCLE(MuteSoundRoutingParameter.KEY,
+				DRIVING_STYLE,
+				GeneralRouter.USE_HEIGHT_OBSTACLES,
+				DividerItem.KEY,
+				AvoidRoadsTypesRoutingParameter.KEY,
+				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				OtherSettingsRoutingParameter.KEY,
+				RouteSimulationItem.KEY),
+
+		PEDESTRIAN(MuteSoundRoutingParameter.KEY,
+				GeneralRouter.USE_HEIGHT_OBSTACLES,
+				DividerItem.KEY,
+				AvoidRoadsTypesRoutingParameter.KEY,
+				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				OtherSettingsRoutingParameter.KEY,
+				RouteSimulationItem.KEY);
+
+
+		List<String> routingParameters;
+
+		AppModeOptions(String... routingParameters) {
+			this.routingParameters = Arrays.asList(routingParameters);
+		}
 	}
 }

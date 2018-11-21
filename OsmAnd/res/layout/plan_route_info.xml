@@ -406,79 +406,47 @@
 				tools:background="@color/dashboard_divider_dark" />
 
 			<FrameLayout
+				android:id="@+id/map_route_options"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/list_item_height">
 
-				<LinearLayout
-					android:id="@+id/map_route_options"
-					android:layout_width="match_parent"
+				<HorizontalScrollView
+					android:id="@+id/route_options_scroll_container"
+					android:layout_width="wrap_content"
 					android:layout_height="match_parent"
-					android:layout_gravity="bottom">
+					android:layout_gravity="start"
+					android:paddingBottom="@dimen/bottom_sheet_content_margin_small"
+					android:paddingTop="@dimen/bottom_sheet_content_margin_small">
 
-					<FrameLayout
-						android:id="@+id/sound_setting_button"
-						android:layout_width="wrap_content"
-						android:layout_height="@dimen/route_info_settings_buttons_height"
-						android:layout_marginBottom="@dimen/bottom_sheet_content_margin_small"
-						android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
-						android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
-						android:layout_marginTop="@dimen/bottom_sheet_content_margin_small"
-						tools:background="@drawable/btn_border_trans_light"
-						tools:foreground="@drawable/ripple_light">
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/sound_setting_button_descr"
-							android:layout_width="wrap_content"
-							android:layout_height="match_parent"
-							android:layout_gravity="center"
-							android:drawablePadding="@dimen/content_padding_small"
-							android:ellipsize="end"
-							android:gravity="center"
-							android:letterSpacing="@dimen/text_button_letter_spacing"
-							android:maxLines="1"
-							android:paddingBottom="3dp"
-							android:paddingEnd="4dp"
-							android:paddingLeft="3dp"
-							android:paddingRight="4dp"
-							android:paddingStart="3dp"
-							android:paddingTop="3dp"
-							android:textSize="@dimen/text_button_text_size"
-							osmand:typeface="@string/font_roboto_medium"
-							tools:background="@drawable/btn_border_trans_dark"
-							tools:drawableLeft="@drawable/ic_action_volume_up"
-							tools:drawableStart="@drawable/ic_action_volume_up"
-							tools:ignore="UnusedAttribute"
-							tools:text="@string/menu_mute_on"
-							tools:textColor="?attr/wikivoyage_active_color" />
-
-					</FrameLayout>
-
-					<View
-						android:id="@+id/old_options"
-						android:layout_width="0dp"
-						android:layout_height="match_parent"
-						android:layout_weight="1"
-						android:background="?attr/selectableItemBackground" />
-
-					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/map_options_route_button"
+					<LinearLayout
+						android:id="@+id/route_options_container"
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
-						android:background="?attr/selectableItemBackground"
-						android:drawablePadding="@dimen/content_padding_small"
-						android:ellipsize="end"
-						android:gravity="center"
-						android:letterSpacing="@dimen/text_button_letter_spacing"
-						android:maxLines="1"
-						android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
-						android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
-						android:text="@string/shared_string_options"
-						android:textSize="@dimen/text_button_text_size"
-						osmand:typeface="@string/font_roboto_medium"
-						tools:ignore="UnusedAttribute"
-						tools:textColor="?attr/wikivoyage_active_color" />
+						android:gravity="start"
+						android:orientation="horizontal">
 
-				</LinearLayout>
+					</LinearLayout>
+
+				</HorizontalScrollView>
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/map_options_route_button"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="end"
+					android:background="?attr/selectableItemBackground"
+					android:drawablePadding="@dimen/content_padding_small"
+					android:ellipsize="end"
+					android:gravity="center"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
+					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
+					android:text="@string/shared_string_options"
+					android:textSize="@dimen/text_button_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:ignore="UnusedAttribute"
+					tools:textColor="?attr/wikivoyage_active_color" />
 
 				<ProgressBar
 					android:id="@+id/progress_bar"
