@@ -2803,7 +2803,7 @@
     
     
     
-    <string name="av_locations_descr">فایل GPX از مکان‌های یادداشت‌دار.</string>
+    <string name="av_locations_descr">از مکان یادداشت‌ها فایل GPX بسازید.</string>
     <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار بر پایهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند. 
 \n 
 \nراهبر دیداری و شنیداری، مشاهدهٔ مکان‌های محبوب (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های تراز و اطلاعات ارتفاع، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی را در کار با نقشه برایتان به ارمغان می‌آورد. 
@@ -2992,8 +2992,8 @@
     <string name="will_open_at">ساعت بازکردن</string>
     <string name="will_open_on">زمان بازشدن</string>
     <string name="additional_actions">عملیات بیشتر</string>
-    <string name="av_locations_selected_desc">فایل GPX از مختصات و اطلاعات یادداشت‌های انتخابی.</string>
-    <string name="av_locations_all_desc">فایل GPX از مختصات و اطلاعات همهٔ یادداشت‌ها.</string>
+    <string name="av_locations_selected_desc">فایل GPX از مختصات و مشخصات یادداشت‌های انتخابی.</string>
+    <string name="av_locations_all_desc">فایل GPX از مختصات و مشخصات همهٔ یادداشت‌ها.</string>
     <string name="shared_string_actions">عملیات</string>
     <string name="shared_string_marker">نشانه</string>
     <string name="osm_recipient_stat">ویرایش‌ها: %1$s، مبلغ: %2$s هزارم بیت‌کوین</string>
@@ -3226,11 +3226,11 @@
     <string name="osm_live_payment_annual_title">پرداخت سالانه</string>
     <string name="osm_live_payment_month_cost_descr">%1$s در ماه</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s در ماه</string>
-    <string name="osm_live_payment_discount_descr">%1$s صرفه‌جویی کنید!</string>
+    <string name="osm_live_payment_discount_descr">%1$s ارزان‌تر!</string>
 	<string name="osm_live_payment_current_subscription">اشتراک کنونی شما</string>
-    <string name="osm_live_payment_renews_monthly">ماهانه تمدید می‌شود</string>
-    <string name="osm_live_payment_renews_quarterly">سه‌ماهه تمدید می‌شود</string>
-    <string name="osm_live_payment_renews_annually">سالانه تمدید می‌شود</string>
+    <string name="osm_live_payment_renews_monthly">هر ماه تمدید می‌شود</string>
+    <string name="osm_live_payment_renews_quarterly">هر سه ماه تمدید می‌شود</string>
+    <string name="osm_live_payment_renews_annually">هر سال تمدید می‌شود</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">دورهٔ پرداخت مناسب خود را برگزینید:</string>
     <string name="osm_live_payment_contribute_descr">بخشی از درآمد به مشارکت‌کنندگان نقشهٔ شهری باز اهدا می‌شود.</string>
