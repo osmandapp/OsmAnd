@@ -2597,7 +2597,7 @@
     <string name="edit_line">اصلاح خط</string>
     <string name="add_point_before">افزودن نقطه به قبل</string>
     <string name="add_point_after">افزودن نقطه به بعد</string>
-    <string name="measurement_tool_snap_to_road_descr">برای پروفایل انتخابی، OsmAnd نقطه‌ها را به مسیرها متصل می‌کند.</string>
+    <string name="measurement_tool_snap_to_road_descr">بر اساس پروفایل انتخابی، OsmAnd نقطه‌ها را به مسیر متصل می‌کند.</string>
     <string name="choose_navigation_type">پروفایل راهبری را انتخاب کنید</string>
     <string name="none_point_error">لطفاً حداقل یک نقطه اضافه کنید.</string>
     <string name="quick_action_resume_pause_navigation_descr">برای مکث‌کردن در/ادامه‌دادن به راهبری این دکمه را لمس کنید.</string>
