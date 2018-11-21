@@ -3644,4 +3644,252 @@
 	<string name="poi_truck_no">Camión: non</string>
 
 	<string name="poi_amperage">Amperaxe</string>
+	<string name="poi_free_flying_site_toplanding">Aterraxe elevado</string>
+	<string name="poi_free_flying_site_towing">Remolque</string>
+	<string name="poi_free_flying_site_training">Adestramento</string>
+	<string name="poi_free_flying_official_no">Oficial: non</string>
+	<string name="poi_free_flying_paragliding_yes">Parapente</string>
+	<string name="poi_free_flying_paragliding_no">Parapente: non</string>
+	<string name="poi_free_flying_hanggliding_yes">Á delta</string>
+	<string name="poi_free_flying_hanggliding_no">Á delta: non</string>
+	<string name="poi_free_flying_rigid_yes">Á delta ríxida</string>
+	<string name="poi_free_flying_rigid_no">Á delta ríxida: non</string>
+	<string name="poi_free_flying_site_orientation_n">Orientación do lugar para a á delta: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Orientación do lugar para a á delta: NL</string>
+	<string name="poi_free_flying_site_orientation_e">Orientación do lugar para a á delta: L</string>
+	<string name="poi_free_flying_site_orientation_se">Orientación do lugar para a á delta: SL</string>
+	<string name="poi_free_flying_site_orientation_s">Orientación do lugar para a á delta: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Orientación do lugar para a á delta: SO</string>
+	<string name="poi_free_flying_site_orientation_w">Orientación do lugar para a á delta: O</string>
+	<string name="poi_free_flying_site_orientation_nw">Orientación do lugar para a á delta: NO</string>
+	<string name="poi_free_flying_no_flight_time">Sen horario de voo (á delta)</string>
+	<string name="poi_free_flying_guest_guidelines_no">Directrices de convidado: non</string>
+
+	<string name="poi_tanning_salon">Solario</string>
+
+	<string name="poi_sanitary_dump_station">Estación de refugallos sanitarios</string>
+
+	<string name="poi_medical_system_western_yes">Occidental</string>
+	<string name="poi_medical_system_chinese_yes">Chinés tradicional</string>
+	<string name="poi_medical_system_ayurveeda_yes">Aiurveda</string>
+	<string name="poi_medical_system_kampo_yes">Campo</string>
+	<string name="poi_medical_system_mongolian_yes">Mongol tradicional</string>
+	<string name="poi_medical_system_tibetan_yes">Tibetano tradicional</string>
+	<string name="poi_medical_system_sidda_yes">Sidda</string>
+	<string name="poi_medical_system_unani_yes">Unani</string>
+
+	<string name="poi_health_service_nursing_no">Servizo de saúde: enfermaría: non</string>
+	<string name="poi_health_service_counselling_no">Servizo de saúde: asesoramento: non</string>
+	<string name="poi_health_service_examination_no">Servizo de saúde: recoñecemento médico: non</string>
+	<string name="poi_health_service_child_care_no">Servizo de saúde: coidados infantís: non</string>
+	<string name="poi_health_service_prevention_no">Servizo de saúde: prevención: non</string>
+	<string name="poi_health_service_prevention_vaccination_no">Servizo de saúde: vacinación: non</string>
+	<string name="poi_health_service_support_no">Servizo de saúde: apoio: non</string>
+	<string name="poi_health_service_test_no">Servizo de saúde: análise: non</string>
+
+	<string name="poi_health_facility_type_office">Consultorio médico</string>
+	<string name="poi_suction_point">Punto de succión</string>
+
+	<string name="poi_fire_hydrant_type_pillar">Piar</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Bocoi seco</string>
+	<string name="poi_fire_hydrant_type_pond">Lagoa</string>
+	<string name="poi_fire_hydrant_type_wall">Parede</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Caixa de urxencias</string>
+	<string name="poi_health_person_type_assistant">Rol do traballador en saúde: asistente</string>
+	<string name="poi_health_person_type_healer">Rol do traballador en saúde: curandeiro</string>
+	<string name="poi_health_person_type_midwife">Rol do traballador en saúde: parteira</string>
+	<string name="poi_health_person_type_nurse">Rol do traballador en saúde: enfermeiro</string>
+	<string name="poi_health_person_type_paramedic">Rol do traballador en saúde: paramédico</string>
+	<string name="poi_health_person_type_physician">Rol do traballador en saúde: médico</string>
+	<string name="poi_health_person_type_podologist">Rol do traballador en saúde: podólogo</string>
+	<string name="poi_health_person_type_psychologist">Rol do traballador en saúde: psicólogo</string>
+	<string name="poi_health_person_type_therapist">Rol do traballador en saúde: terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Rol do traballador en saúde: axudante médico</string>
+	<string name="poi_health_person_type_technician">Rol do traballador en saúde: técnico</string>
+	<string name="poi_health_person_type_witchdoctor">Rol do traballador en saúde: bruxo</string>
+
+	<string name="poi_counselling_type_addiction_no">Asesoramento (adicción): non</string>
+	<string name="poi_counselling_type_antenatal_no">Asesoramento (prenatal): non</string>
+	<string name="poi_counselling_type_child_guidance_no">Asesoramento (orientacións infantís): non</string>
+	<string name="poi_counselling_type_couple_no">Asesoramento (parella): non</string>
+	<string name="poi_counselling_type_crisis_no">Asesoramento (crise): non</string>
+	<string name="poi_counselling_type_drugs_no">Asesoramento (drogas): non</string>
+	<string name="poi_counselling_type_education_no">Asesoramento (educación): non</string>
+	<string name="poi_counselling_type_family_no">Asesoramento (familia): non</string>
+	<string name="poi_counselling_type_homeless_no">Asesoramento (sen lar): non</string>
+	<string name="poi_counselling_type_immigrant_no">Asesoramento (inmigrantes): non</string>
+	<string name="poi_counselling_type_marriage_no">Asesoramento (casamento): non</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoramento (nutrición): non</string>
+	<string name="poi_counselling_type_sexual_no">Asesoramento (sexual): non</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Asesoramento (abusos sexuais): non</string>
+	<string name="poi_counselling_type_victim_no">Asesoramento (vítimas): non</string>
+	<string name="poi_counselling_type_violence_no">Asesoramento (violencia): non</string>
+
+	<string name="poi_provided_for_infant_no">Atende meniños: non</string>
+	<string name="poi_provided_for_toddler_no">Atende crianzas pequenas: non</string>
+	<string name="poi_provided_for_child_no">Atende crianzas: non</string>
+	<string name="poi_provided_for_adult_no">Atende adultos: non</string>
+	<string name="poi_provided_for_woman_no">Atende mulleres: non</string>
+	<string name="poi_provided_for_girl_no">Atende rapazas: non</string>
+	<string name="poi_provided_for_man_no">Atende homes: non</string>
+	<string name="poi_provided_for_boy_no">Atende rapaces: non</string>
+
+	<string name="poi_capacity_beds">Capacidade (leitos)</string>
+
+	<string name="poi_treat_inpatient_no">Servizos hospitalarios: non</string>
+	<string name="poi_treat_inpatient_only">Servizos hospitalarios: soamente</string>
+	<string name="poi_counselling_no">Asesoramento: non</string>
+	<string name="poi_home_visit_no">Visitas a domicilio: non</string>
+
+	<string name="poi_disease_malaria_no">Malaria: non</string>
+	<string name="poi_disease_ebola_no">Ébola: non</string>
+	<string name="poi_disease_autism_no">Autismo: non</string>
+	<string name="poi_disease_aids_no">SIDA: non</string>
+
+	<string name="poi_office_physician">Consultorio médico</string>
+	<string name="poi_office_therapist">Oficina de terapeuta</string>
+	<string name="poi_office_podologist">Oficina de podólogo</string>
+	<string name="poi_office_healer">Oficina de curandeiro</string>
+	<string name="poi_office_psychologist">Oficina de psicólogo</string>
+	<string name="poi_office_nursing_service">Servizo de enfermaría</string>
+	<string name="poi_office_midwife">Oficina de parteira</string>
+
+	<string name="poi_fire_hydrant_diameter">Diámetro do hidrante</string>
+	<string name="poi_fire_hydrant_pressure">Presión do hidrante</string>
+	<string name="poi_fire_hydrant_count">Cantidade de hidrantes</string>
+	<string name="poi_fire_hydrant_flow_capacity">Capacidade de caudal do hidrante</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Na beirarrúa</string>
+	<string name="poi_fire_hydrant_position_green">No céspede</string>
+	<string name="poi_fire_hydrant_position_lane">No carril</string>
+	<string name="poi_fire_hydrant_position_parking_lot">No aparcadoiro</string>
+	<string name="poi_fire_hydrant_position_street">Na rúa</string>
+	<string name="poi_fire_hydrant_style_wsh">Estilo do hidrante: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Principal</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Lagoa</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Regato</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
+	<string name="poi_military_checkpoint">Posto de control militar</string>
+
+	<string name="poi_bicycle_parking_lockers">Portelos</string>
+	<string name="poi_bicycle_parking_streetpod">Rañura plástica</string>
+
+	<string name="poi_depth">Afundimento</string>
+
+	<string name="poi_salt_yes">Salgado</string>
+	<string name="poi_salt_no">Salgado: non</string>
+	<string name="poi_wheelchair_designated">Sinalado</string>
+	<string name="poi_spoil_heap">Escombreira</string>
+	
+	<string name="poi_summer_camp">Campamento de verán</string>
+	<string name="poi_recreation_center">Centro de lecer</string>
+
+	<string name="poi_crossing_activation_automatic">Activación do cruzamento: automático</string>
+	<string name="poi_crossing_activation_local">Activación do cruzamento: local</string>
+	<string name="poi_crossing_activation_remote">Activación do cruzamento: remoto</string>
+	<string name="poi_crossing_barrier_no">Cruzamento de barreiras: non</string>
+	<string name="poi_crossing_barrier_yes">Cruzamento de barreiras: si</string>
+	<string name="poi_crossing_barrier_full">Cruzamento de barreiras: total</string>
+	<string name="poi_crossing_barrier_half">Cruzamento de barreiras: á metade</string>
+	<string name="poi_crossing_barrier_double_half">Cruzamento de barreiras: dupla metade</string>
+	<string name="poi_crossing_bell_yes">Sinal de son</string>
+	<string name="poi_crossing_bell_no">Cruzamento de son: non</string>
+	<string name="poi_crossing_light_yes">Cruzamento de luz</string>
+	<string name="poi_crossing_light_no">Cruzamento de luz: non</string>
+	<string name="poi_crossing_on_demand_yes">Cruzamento baixo demanda</string>
+	<string name="poi_crossing_on_demand_no">Cruzamento baixo demanda: non</string>
+	<string name="poi_crossing_saltire_yes">Sinal de paso a nivel</string>
+	<string name="poi_crossing_saltire_no">Sinal de paso a nivel: non</string>
+	<string name="poi_crossing_supervision_yes">Cruzamento vixiado</string>
+	<string name="poi_crossing_supervision_no">Cruzamento vixiado: non</string>
+	<string name="poi_crossing_supervision_attendant">Cruzamento vixiado: en persoa</string>
+	<string name="poi_crossing_supervision_camera">Cruzamento vixiado: cámara</string>
+
+	<string name="poi_dispensing_no">Receita médica: non</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Rexional</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_private">Privado</string>
+
+	<string name="poi_valley_balka">Balka (pequeno val)</string>
+
+	<string name="poi_ventilation_shaft">Conducto da ventilación</string>
+
+	<string name="poi_pump_style_modern">Estilo da bomba: moderna</string>
+	<string name="poi_pump_style_historic">Estilo da bomba: antiga</string>
+	<string name="poi_pump_status_ok">Estado da bomba: bo</string>
+	<string name="poi_pump_status_broken">Estado da bomba: rachada</string>
+	<string name="poi_pump_status_locked">Estado da bomba: bloqueada</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_telescope">Telescopio</string>
+	<string name="poi_telescope_type_optical">Óptico</string>
+	<string name="poi_telescope_type_radio">Radiotelescopio</string>
+	<string name="poi_telescope_type_gamma">Raios gamma</string>
+	<string name="poi_telescope_diameter">Diámetro</string>
+	<string name="poi_telescope_spectrum">Espectro</string>
+	<string name="poi_telescope_usage_education">Emprego: educativo</string>
+	<string name="poi_telescope_usage_espionage">Emprego: espionaxe</string>
+	<string name="poi_telescope_usage_research">Emprego: pesquisa</string>
+
+	<string name="poi_observatory_type_espionage">Emprego: espionaxe</string>
+	<string name="poi_observatory_type_meteorological">Meteorolóxico</string>
+	<string name="poi_observatory_type_gravitational">Gravitacional</string>
+
+	<string name="poi_greenhouse_horticulture">Horticultura no invernadoiro</string>
+
+	<string name="poi_generator_output_electricity">Potencia da saída</string>
+	<string name="poi_generator_output_electricity_yes">Saída: eletricidade</string>
+	<string name="poi_generator_output_hot_water">Potencia da saída de auga quente</string>
+	<string name="poi_generator_output_hot_water_yes">Saída: auga quente</string>
+	<string name="poi_generator_output_steam_yes">Saída: vapor</string>
+	<string name="poi_generator_output_hot_air_yes">Saída: ar quente</string>
+	<string name="poi_generator_output_cold_water_yes">Saída: auga fría</string>
+	<string name="poi_generator_output_compressed_air">Potencia da saída de ar comprimido</string>
+	<string name="poi_generator_output_compressed_air_yes">Saída: ar comprimido</string>
+	<string name="poi_generator_output_vacuum_yes">Saída: baleiro</string>
+	<string name="poi_generator_output_biogas">Potencia da saída de biogás</string>
+	<string name="poi_generator_output_biogas_yes">Saída: biogás</string>
+
+	<string name="poi_pumping_station">Estación do bombeo</string>
+
+	<string name="poi_display_no">Pantalla: non</string>
+	<string name="poi_display_analog_yes">Pantalla analóxica</string>
+	<string name="poi_display_digital_yes">Pantalla dixital</string>
+	<string name="poi_display_sundial_yes">Reloxo de sol</string>
+
+	<string name="poi_barometer_yes">Barómetro</string>
+	<string name="poi_barometer_no">Barómetro: non</string>
+	<string name="poi_thermometer_yes">Termómetro</string>
+	<string name="poi_thermometer_no">Termómetro: non</string>
+	<string name="poi_hygrometer_yes">Higrómetro</string>
+	<string name="poi_hygrometer_no">Higrómetro: non</string>
+	<string name="poi_support_pole">Subxección: poste</string>
+	<string name="poi_support_wall_mounted">Subxección: muro</string>
+	<string name="poi_support_tree">Subxección: árbore</string>
+	<string name="poi_support_pedestal">Subxección: pedestal</string>
+	<string name="poi_support_ground">Subxección: chan</string>
+	<string name="poi_support_billboard">Subxección: cateleira</string>
+	<string name="poi_support_ceiling">Subxección: teito</string>
+	<string name="poi_support_suspended">Subxección: pendurado</string>
+	<string name="poi_support_roof">Subxección: tellado</string>
+	<string name="poi_support_tower">Subxección: torre</string>
+
+	<string name="poi_passenger_information_display_no">Pantalla da información ó pasaxeiro: non</string>
+
+	<string name="poi_aquaculture">Acuicultura</string>
+	<string name="poi_aquaculture_shrimp">Acuicultura: camarón</string>
+	<string name="poi_aquaculture_fish">Acuicultura: peixes</string>
+	<string name="poi_aquaculture_mussels">Acuicultura: mexillóns</string>
+
+	<string name="poi_mdf">Rede da distribución principal (MDF)</string>
+	<string name="poi_min_age">Idade mínima</string>
+
+	<string name="poi_organic_no">Non</string>
+	<string name="poi_organic_only">Soamente</string>
+
+	<string name="poi_traffic_mirror">Espello de tráfico</string>
+
+	<string name="poi_diplomatic_consulate">Consulado</string>
 	</resources>
