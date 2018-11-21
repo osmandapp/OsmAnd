@@ -49,8 +49,6 @@
 	<asset source="fonts/10_NotoSans-Bold.ttf" destination="fonts/10_NotoSans-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/15_NotoSans-Italic.ttf" destination="fonts/15_NotoSans-Italic.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/20_NotoSans-BoldItalic.ttf" destination="fonts/20_NotoSans-BoldItalic.ttf" mode="alwaysOverwriteOrCopy" />
-	<asset source="fonts/25_NotoSansArabic-Regular.ttf" destination="fonts/25_NotoSansArabic-Regular.ttf" mode="alwaysOverwriteOrCopy" />
-	<asset source="fonts/30_NotoSansArabic-Bold.ttf" destination="fonts/30_NotoSansArabic-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/35_NotoSansSouthAsian-Regular.ttf" destination="fonts/35_NotoSansSouthAsian-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/40_NotoSansSouthAsian-Bold.ttf" destination="fonts/40_NotoSansSouthAsian-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/45_NotoSansSoutheastAsian-Regular.ttf" destination="fonts/45_NotoSansSoutheastAsian-Regular.ttf" mode="alwaysOverwriteOrCopy" />
