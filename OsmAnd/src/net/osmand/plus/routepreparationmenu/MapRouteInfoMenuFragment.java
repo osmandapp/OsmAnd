@@ -818,7 +818,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(color);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(color);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(color);
-		((TextView) mainView.findViewById(R.id.sound_setting_button_descr)).setTextColor(color);
 		((TextView) mainView.findViewById(R.id.map_options_route_button)).setTextColor(color);
 
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(
