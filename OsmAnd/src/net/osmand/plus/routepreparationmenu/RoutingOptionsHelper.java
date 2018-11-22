@@ -31,7 +31,6 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.mapcontextmenu.TransportStopRouteAdapter;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
@@ -277,16 +276,15 @@ public class RoutingOptionsHelper {
 	}
 
 	public interface OnClickListener {
-		void onClick(String text);
+		void onClick();
 	}
 
-	public void showDialog(final LocalRoutingParameterGroup group, final MapActivity mapActivity, final OnClickListener listener) {
+	public void showLocalRoutingParameterGroupDialog(final LocalRoutingParameterGroup group, final MapActivity mapActivity, final OnClickListener listener) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		int i = 0;
 		int selectedIndex = -1;
 		for (LocalRoutingParameter p : group.getRoutingParameters()) {
-			adapter.addItem(ContextMenuItem.createBuilder(p.getText(mapActivity))
-					.setSelected(false).createItem());
+			adapter.addItem(ContextMenuItem.createBuilder(p.getText(mapActivity)).setSelected(false).createItem());
 			if (p.isSelected(settings)) {
 				selectedIndex = i;
 			}
@@ -295,12 +293,10 @@ public class RoutingOptionsHelper {
 		if (selectedIndex == -1) {
 			selectedIndex = 0;
 		}
-
 		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		final int layout = R.layout.list_menu_item_native_singlechoice;
 
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1,
-				adapter.getItemNames()) {
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1, adapter.getItemNames()) {
 			@NonNull
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
@@ -327,7 +323,6 @@ public class RoutingOptionsHelper {
 		});
 		builder.setTitle(group.getText(mapActivity))
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						int position = selectedPosition[0];
@@ -337,15 +332,13 @@ public class RoutingOptionsHelper {
 								rp.setSelected(settings, i == position);
 							}
 							mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-							LocalRoutingParameter selected = group.getSelected(settings);
-							if (selected != null&&listener != null) {
-								listener.onClick(selected.getText(mapActivity));
+							if (listener != null) {
+								listener.onClick();
 							}
 						}
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
-
 		builder.create().show();
 	}
 
@@ -507,6 +500,13 @@ public class RoutingOptionsHelper {
 			return true;
 		}
 
+		public String getId() {
+			if (routingParameter != null) {
+				return routingParameter.getId();
+			}
+			return KEY;
+		}
+
 		public LocalRoutingParameter(ApplicationMode am) {
 			this.am = am;
 		}
@@ -547,6 +547,13 @@ public class RoutingOptionsHelper {
 
 		private String groupName;
 		private List<LocalRoutingParameter> routingParameters = new ArrayList<>();
+
+		public String getId() {
+			if (groupName != null) {
+				return groupName;
+			}
+			return KEY;
+		}
 
 		public LocalRoutingParameterGroup(ApplicationMode am, String groupName) {
 			super(am);
@@ -596,6 +603,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "MuteSoundRoutingParameter";
 
+		public String getId() {
+			return KEY;
+		}
+
 		public MuteSoundRoutingParameter() {
 			super(null);
 		}
@@ -604,6 +615,10 @@ public class RoutingOptionsHelper {
 	public static class DividerItem extends LocalRoutingParameter {
 
 		public static final String KEY = "DividerItem";
+
+		public String getId() {
+			return KEY;
+		}
 
 		public boolean canAddToRouteMenu() {
 			return false;
@@ -618,6 +633,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "RouteSimulationItem";
 
+		public String getId() {
+			return KEY;
+		}
+
 		public boolean canAddToRouteMenu() {
 			return false;
 		}
@@ -631,6 +650,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "ShowAlongTheRouteItem";
 
+		public String getId() {
+			return KEY;
+		}
+
 		public ShowAlongTheRouteItem() {
 			super(null);
 		}
@@ -639,6 +662,10 @@ public class RoutingOptionsHelper {
 	public static class AvoidRoadsRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "AvoidRoadsRoutingParameter";
+
+		public String getId() {
+			return KEY;
+		}
 
 		public AvoidRoadsRoutingParameter() {
 			super(null);
@@ -650,6 +677,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "AvoidRoadsTypesRoutingParameter";
 
+		public String getId() {
+			return KEY;
+		}
+
 		public AvoidRoadsTypesRoutingParameter() {
 			super(null);
 		}
@@ -659,6 +690,10 @@ public class RoutingOptionsHelper {
 	public static class GpxLocalRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "GpxLocalRoutingParameter";
+
+		public String getId() {
+			return KEY;
+		}
 
 		public boolean canAddToRouteMenu() {
 			return false;
@@ -673,6 +708,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "OtherSettingsRoutingParameter";
 
+		public String getId() {
+			return KEY;
+		}
+
 		public boolean canAddToRouteMenu() {
 			return false;
 		}
@@ -685,6 +724,10 @@ public class RoutingOptionsHelper {
 	public static class OtherLocalRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "OtherLocalRoutingParameter";
+
+		public String getId() {
+			return KEY;
+		}
 
 		public boolean canAddToRouteMenu() {
 			return false;
@@ -721,6 +764,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "InterruptMusicRoutingParameter";
 
+		public String getId() {
+			return KEY;
+		}
+
 		public InterruptMusicRoutingParameter() {
 			super(null);
 		}
@@ -729,6 +776,10 @@ public class RoutingOptionsHelper {
 	public static class VoiceGuidanceRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "VoiceGuidanceRoutingParameter";
+
+		public String getId() {
+			return KEY;
+		}
 
 		public VoiceGuidanceRoutingParameter() {
 			super(null);
@@ -748,7 +799,7 @@ public class RoutingOptionsHelper {
 
 		public boolean containsParameter(LocalRoutingParameter parameter) {
 			for (LocalRoutingParameter p : parameters) {
-				if (p.getClass().equals(parameter.getClass())) {
+				if (p.getId().equals(parameter.getId())) {
 					return true;
 				}
 			}

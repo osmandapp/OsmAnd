@@ -9,6 +9,7 @@
 				android:endColor="@color/activity_background_dark"
 				android:centerX="0.2"
 				android:type="linear" />
+			<corners android:radius="4dp" />
 		</shape>
 	</item>
 </selector>

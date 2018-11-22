@@ -3,13 +3,9 @@ package net.osmand.plus.routepreparationmenu;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,8 +13,6 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -77,12 +71,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		routingHelper = app.getRoutingHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 		mapActivity = getMapActivity();
-		controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 		applicationMode = routingHelper.getAppMode();
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+
 		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 
 		List<LocalRoutingParameter> list = new ArrayList<>();
@@ -121,7 +116,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				BaseBottomSheetItem showAlongTheRouteItem = new SimpleBottomSheetItem.Builder()
-						.setIcon(getContentIcon(R.drawable.ic_action_snap_to_road))
+						.setIcon(getContentIcon(R.drawable.ic_action_show_along_route))
 						.setTitle(getString(R.string.show_along_the_route))
 						.setLayoutId(R.layout.bottom_sheet_item_simple)
 						.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +182,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						})
 						.create();
 				items.add(avoidRoadsRoutingParameter);
-
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
 				View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
 				AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
@@ -210,7 +204,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						})
 						.create();
 				items.add(gpxLocalRoutingParameter);
-
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
 				BaseBottomSheetItem otherSettingsRoutingParameter = new SimpleBottomSheetItem.Builder()
 						.setIcon(getContentIcon(R.drawable.map_action_settings))
@@ -280,7 +273,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			final LocalRoutingParameter parameter = (LocalRoutingParameter) optionsItem;
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			BottomSheetItemWithCompoundButton.Builder builder = new BottomSheetItemWithCompoundButton.Builder();
-			builder.setIcon(getContentIcon(R.drawable.mx_amenity_fuel));
+			builder.setIcon(getContentIcon(R.drawable.ic_action_fuel));
 			if (parameter.routingParameter != null) {
 				builder.setTitle(parameter.getText(mapActivity));
 			}
@@ -296,73 +289,15 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View v) {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, parameter);
-
-						final ContextMenuAdapter adapter = new ContextMenuAdapter();
-						int i = 0;
-						int selectedIndex = -1;
-						for (LocalRoutingParameter p : group.getRoutingParameters()) {
-							adapter.addItem(ContextMenuItem.createBuilder(p.getText(mapActivity))
-									.setSelected(false).createItem());
-							if (p.isSelected(settings)) {
-								selectedIndex = i;
-							}
-							i++;
-						}
-						if (selectedIndex == -1) {
-							selectedIndex = 0;
-						}
-
-						AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-						final int layout = R.layout.list_menu_item_native_singlechoice;
-
-						final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1,
-								adapter.getItemNames()) {
-							@NonNull
+						routingOptionsHelper.showLocalRoutingParameterGroupDialog(group, mapActivity, new RoutingOptionsHelper.OnClickListener() {
 							@Override
-							public View getView(final int position, View convertView, ViewGroup parent) {
-								// User super class to create the View
-								View v = convertView;
-								if (v == null) {
-									v = mapActivity.getLayoutInflater().inflate(layout, null);
+							public void onClick() {
+								LocalRoutingParameter selected = group.getSelected(settings);
+								if (selected != null) {
+									item[0].setDescription(selected.getText(mapActivity));
 								}
-								final ContextMenuItem item = adapter.getItem(position);
-								TextView tv = (TextView) v.findViewById(R.id.text1);
-								tv.setText(item.getTitle());
-								tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
-
-								return v;
-							}
-						};
-
-						final int[] selectedPosition = {selectedIndex};
-						builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int position) {
-								selectedPosition[0] = position;
 							}
 						});
-						builder.setTitle(group.getText(mapActivity))
-								.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										int position = selectedPosition[0];
-										if (position >= 0 && position < group.getRoutingParameters().size()) {
-											for (int i = 0; i < group.getRoutingParameters().size(); i++) {
-												LocalRoutingParameter rp = group.getRoutingParameters().get(i);
-												rp.setSelected(settings, i == position);
-											}
-											mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-											LocalRoutingParameter selected = group.getSelected(settings);
-											if (selected != null) {
-												item[0].setDescription(selected.getText(mapActivity));
-											}
-										}
-									}
-								})
-								.setNegativeButton(R.string.shared_string_cancel, null);
-
-						builder.create().show();
 					}
 				});
 			} else {

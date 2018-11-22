@@ -222,6 +222,8 @@
 							android:layout_marginBottom="3dp"
 							android:layout_marginTop="5dp"
 							android:gravity="left"
+							android:singleLine="true"
+							android:ellipsize="end"
 							android:text="@string/intermediate_destinations"
 							android:textSize="@dimen/default_sub_text_size" />
 
@@ -416,6 +418,7 @@
 					android:layout_height="match_parent"
 					android:layout_gravity="start"
 					android:paddingBottom="@dimen/bottom_sheet_content_margin_small"
+					android:paddingLeft="@dimen/bottom_sheet_content_margin_small"
 					android:paddingTop="@dimen/bottom_sheet_content_margin_small">
 
 					<LinearLayout
