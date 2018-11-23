@@ -379,8 +379,8 @@ public class TargetPointsHelper {
 	}
 
 	public void updateRouteAndRefresh(boolean updateRoute) {
-		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
-				routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
+		if(updateRoute && (routingHelper.isPublicTransportMode() || routingHelper.isRouteBeingCalculated() ||
+				routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
 			updateRoutingHelper();
 		}
 		updateListeners();
@@ -388,15 +388,14 @@ public class TargetPointsHelper {
 
 	private void updateRoutingHelper() {
 		LatLon start = settings.getPointToStart();
-		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
+		LatLon finish = settings.getPointToNavigate();
 		List<LatLon> is = getIntermediatePointsLatLonNavigation();
+		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
 		if((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					is, lastKnownLocation);
+			routingHelper.setFinalAndCurrentLocation(finish, is, lastKnownLocation);
 		} else {
 			Location loc = wrap(start);
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					is, loc);
+			routingHelper.setFinalAndCurrentLocation(finish, is, loc);
 		}
 	}
 

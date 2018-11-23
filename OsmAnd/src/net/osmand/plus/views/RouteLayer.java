@@ -17,6 +17,9 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.osm.edit.Way;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -24,6 +27,10 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -42,6 +49,7 @@ public class RouteLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 	
 	private final RoutingHelper helper;
+	private final TransportRoutingHelper transportHelper;
 	// keep array lists created
 	private List<Location> actionPoints = new ArrayList<Location>();
 	
@@ -63,8 +71,9 @@ public class RouteLayer extends OsmandMapLayer {
 	private RenderingLineAttributes attrs;
 
 
-	public RouteLayer(RoutingHelper helper){
+	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
+		this.transportHelper = helper.getTransportRoutingHelper();
 	}
 
 	public void setTrackChartPoints(TrackDetailsMenu.TrackChartPoints trackChartPoints) {
@@ -119,7 +128,9 @@ public class RouteLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
+		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
+				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
+
 			updateAttrs(settings, tileBox);
 			
 			if(coloredArrowUp == null) {
@@ -413,6 +424,7 @@ public class RouteLayer extends OsmandMapLayer {
 	
 	private class RouteSimplificationGeometry {
 		RouteCalculationResult route;
+		TransportRouteResult transportRoute;
 		double mapDensity;
 		TreeMap<Integer, RouteGeometryZoom> zooms = new TreeMap<>();
 		List<Location> locations = Collections.emptyList(); 
@@ -426,10 +438,40 @@ public class RouteLayer extends OsmandMapLayer {
 		public void updateRoute(RotatedTileBox tb, RouteCalculationResult route) {
 			if(tb.getMapDensity() != mapDensity || this.route != route) {
 				this.route = route;
-				if(route == null) {
+				if (route == null) {
 					locations = Collections.emptyList();
 				} else {
 					locations = route.getImmutableAllLocations();
+				}
+				this.mapDensity = tb.getMapDensity();
+				zooms.clear();
+			}
+		}
+
+		public void updateTransportRoute(RotatedTileBox tb, TransportRouteResult route) {
+			if (tb.getMapDensity() != mapDensity || this.transportRoute != route) {
+				this.transportRoute = route;
+				if (route == null) {
+					locations = Collections.emptyList();
+				} else {
+					LatLon start = transportHelper.getStartLocation();
+					LatLon end = transportHelper.getEndLocation();
+					List<Way> list = new ArrayList<>();
+					calculateTransportResult(start, end, route, list);
+					List<Location> locs = new ArrayList<>();
+					for (Way w : list) {
+						//Location loc = new Location("transport");
+						//loc.setLatitude(w.getLatitude());
+						//loc.setLongitude(w.getLongitude());
+						//locs.add(loc);
+						for (Node n : w.getNodes()) {
+							Location ln = new Location("transport");
+							ln.setLatitude(n.getLatitude());
+							ln.setLongitude(n.getLongitude());
+							locs.add(ln);
+						}
+					}
+					locations = locs;
 				}
 				this.mapDensity = tb.getMapDensity();
 				zooms.clear();
@@ -555,16 +597,32 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 	
 	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-		RouteCalculationResult route = helper.getRoute();
-		routeGeometry.updateRoute(tb, route);
-		routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, 
-				helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute());
-		List<RouteDirectionInfo> rd = helper.getRouteDirections();
-		Iterator<RouteDirectionInfo> it = rd.iterator();
-		if (tb.getZoom() >= 14) {
-			List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
-					helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
-			drawAction(tb, canvas, actionPoints);
+		if (helper.isPublicTransportMode()) {
+			int currentRoute = transportHelper.getCurrentRoute();
+			List<TransportRouteResult> routes = transportHelper.getRoutes();
+			TransportRouteResult route = routes != null && routes.size() > currentRoute ? routes.get(currentRoute) : null;
+			routeGeometry.updateRoute(tb, null);
+			routeGeometry.updateTransportRoute(tb, route);
+			if (route != null) {
+				LatLon start = transportHelper.getStartLocation();
+				Location startLocation = new Location("transport");
+				startLocation.setLatitude(start.getLatitude());
+				startLocation.setLongitude(start.getLongitude());
+				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, startLocation, 0);
+			}
+		} else {
+			RouteCalculationResult route = helper.getRoute();
+			routeGeometry.updateTransportRoute(tb, null);
+			routeGeometry.updateRoute(tb, route);
+			routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+					helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute());
+			List<RouteDirectionInfo> rd = helper.getRouteDirections();
+			Iterator<RouteDirectionInfo> it = rd.iterator();
+			if (tb.getZoom() >= 14) {
+				List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, helper.getLastProjection(),
+						helper.getRoute().getRouteLocations(), helper.getRoute().getCurrentRoute(), it, tb.getZoom());
+				drawAction(tb, canvas, actionPoints);
+			}
 		}
 	}
 	
@@ -711,6 +769,27 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 
 
-	
+	private void calculateTransportResult(LatLon start, LatLon end, TransportRouteResult r, List<Way> res) {
+		if (r != null) {
+			LatLon p = start;
+			for (TransportRouteResultSegment s : r.getSegments()) {
+				LatLon floc = s.getStart().getLocation();
+				addWalk(res, p, floc);
+				res.addAll(s.getGeometry());
+				p = s.getEnd().getLocation();
+			}
+			addWalk(res, p, end);
+		}
+	}
 
+	private void addWalk(List<Way> res, LatLon s, LatLon e) {
+		double dist = MapUtils.getDistance(s, e);
+		if (dist > 50) {
+			Way way = new Way(-1);
+			way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format("Walk %.1f m", dist));
+			way.addNode(new Node(s.getLatitude(), s.getLongitude(), -1));
+			way.addNode(new Node(e.getLatitude(), e.getLongitude(), -1));
+			res.add(way);
+		}
+	}
 }
