@@ -472,10 +472,9 @@ public class RoutingOptionsHelper {
 		return null;
 	}
 
-
 	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), routingHelper.getAppMode());
+		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), applicationMode);
 		if (router != null) {
 			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
 				String param = e.getKey();
@@ -486,6 +485,17 @@ public class RoutingOptionsHelper {
 			}
 		}
 		return avoidParameters;
+	}
+
+	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
+		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), applicationMode);
+		GeneralRouter.RoutingParameter parameter=null;
+
+		if (router != null) {
+			parameter = router.getParameters().get(parameterId);
+		}
+
+		return parameter;
 	}
 
 	public static class LocalRoutingParameter {

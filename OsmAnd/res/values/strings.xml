@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="avoid_roads_descr">Select road on the map or from the list below that you want to avoid during navigation:</string>
     <string name="show_along_the_route">Show along the route</string>
     <string name="simulate_navigation">Simulate navigation</string>
     <string name="choose_track_file_to_follow">Choose track file to follow</string>

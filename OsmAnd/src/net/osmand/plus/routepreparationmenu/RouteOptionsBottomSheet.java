@@ -1,10 +1,8 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +14,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,7 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsTypesRoutingParameter;
@@ -90,7 +89,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 
 		for (final LocalRoutingParameter optionsItem : list) {
-
 			if (optionsItem instanceof DividerItem) {
 				items.add(new DividerHalfItem(app));
 			} else if (optionsItem instanceof MuteSoundRoutingParameter) {
@@ -129,6 +127,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						.create();
 				items.add(showAlongTheRouteItem);
 			} else if (optionsItem instanceof RouteSimulationItem) {
+				if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) == null) {
+					continue;
+				}
 				BaseBottomSheetItem routeSimulationItem = new SimpleBottomSheetItem.Builder()
 						.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
 						.setTitle(getString(R.string.simulate_navigation))
@@ -152,15 +153,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 							@Override
 							public void onClick(View view) {
 								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-								List<GeneralRouter.RoutingParameter> avoidParameters = routingOptionsHelper.getAvoidRoutingPrefsForAppMode(applicationMode);
-								String[] vals = new String[avoidParameters.size()];
-								OsmandSettings.OsmandPreference[] bls = new OsmandSettings.OsmandPreference[avoidParameters.size()];
-								for (int i = 0; i < avoidParameters.size(); i++) {
-									GeneralRouter.RoutingParameter p = avoidParameters.get(i);
-									vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
-									bls[i] = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-								}
-								showBooleanSettings(vals, bls, getString(R.string.impassable_road), mapActivity);
+								AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+								avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+								avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 							}
 						})
 						.create();
@@ -174,10 +169,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 							@Override
 							public void onClick(View view) {
 								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-								mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-								controlsLayer.getMapRouteInfoMenu().hide();
-								app.getAvoidSpecificRoads().showDialog(mapActivity);
-								dismiss();
+								AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+								avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+								avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 							}
 						})
 						.create();
@@ -230,42 +224,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
-	}
-
-
-	public static AlertDialog showBooleanSettings(String[] vals, final OsmandSettings.OsmandPreference<Boolean>[] prefs, final CharSequence title, MapActivity mapActivity) {
-		AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
-		boolean[] checkedItems = new boolean[prefs.length];
-		for (int i = 0; i < prefs.length; i++) {
-			checkedItems[i] = prefs[i].get();
-		}
-
-		final boolean[] tempPrefs = new boolean[prefs.length];
-		for (int i = 0; i < prefs.length; i++) {
-			tempPrefs[i] = prefs[i].get();
-		}
-
-		bld.setMultiChoiceItems(vals, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				tempPrefs[which] = isChecked;
-			}
-		});
-
-		bld.setTitle(title);
-
-		bld.setNegativeButton(R.string.shared_string_cancel, null);
-
-		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-				for (int i = 0; i < prefs.length; i++) {
-					prefs[i].set(tempPrefs[i]);
-				}
-			}
-		});
-
-		return bld.show();
 	}
 
 	private void inflateRoutingParameter(final LocalRoutingParameter optionsItem) {
@@ -323,6 +281,15 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			item[0] = builder.create();
 			items.add(item[0]);
+		}
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE
+				&& resultCode == AvoidRoadsBottomSheetDialogFragment.OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE) {
+			dismiss();
 		}
 	}
 

@@ -101,7 +101,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private final MapContextMenu contextMenu;
 	private final RoutingHelper routingHelper;
 	private final RoutingOptionsHelper routingOptionsHelper;
-	private OsmandMapTileView mapView;
 	private GeocodingLookupService geocodingLookupService;
 	private boolean selectFromMapTouch;
 	private boolean selectFromMapForTarget;
@@ -157,7 +156,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		contextMenu = mapActivity.getContextMenu();
 		routingHelper = mapActivity.getRoutingHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
-		mapView = mapActivity.getMapView();
 		routingHelper.addListener(this);
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		currentMenuState = getInitialMenuState();
@@ -678,7 +676,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				Iterator<RouteDataObject> it = impassableRoads.values().iterator();
 				while (it.hasNext()) {
 					final RouteDataObject routeDataObject = it.next();
-					final LinearLayout container = createToolbarSubOptionView(false, getText(routeDataObject), R.drawable.ic_action_remove_dark, !it.hasNext(), new View.OnClickListener() {
+					final LinearLayout container = createToolbarSubOptionView(false, avoidSpecificRoads.getText(routeDataObject), R.drawable.ic_action_remove_dark, !it.hasNext(), new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							if (routeDataObject != null) {
@@ -823,23 +821,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		container.setOnClickListener(listener);
 
 		return container;
-	}
-
-	private String getText(@Nullable RouteDataObject obj) {
-		if (obj != null) {
-			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-			String name = RoutingHelper.formatStreetName(
-					obj.getName(locale, transliterate),
-					obj.getRef(locale, transliterate, true),
-					obj.getDestinationName(locale, transliterate, true),
-					app.getString(R.string.towards)
-			);
-			if (!TextUtils.isEmpty(name)) {
-				return name;
-			}
-		}
-		return app.getString(R.string.shared_string_road);
 	}
 
 	private void clickRouteGo() {
