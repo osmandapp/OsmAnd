@@ -212,7 +212,7 @@ La memoria utilizzata è  {1} MB.
     <string name="si_km_m">Chilometri/metri</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
-    <string name="mile_per_hour">mph</string>
+    <string name="mile_per_hour">mi/h</string>
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Condividi la posizione usando</string>
     <string name="send_location_sms_pattern">Posizione: %1$s\n%2$s</string>
@@ -651,7 +651,7 @@ La memoria utilizzata è  {1} MB.
 \n
 \nLe mappe a tasselli possono essere ricevuto direttamente dalle risorse online oppure preparate in precedenza per l\'uso offline (e copiate manualmente nella cartella dati di OsmAnd) come un database sqlite che può essere prodotto da molteplici strumenti per la costruzione di mappe di terze parti.</string>
     <string name="osmand_background_plugin_description">Visualizza le impostazioni per abilitare il tracking e navigazione in background (a schermo spento) tramite il risveglio periodico del GPS.</string>
-    <string name="osmand_accessibility_description">Questo componente aggiuntivo rende disponibili le funzioni per l\'accessibilità direttamente in OsmAnd. Facilita per esempio la regolazione della velocità di lettura per le voci TTS, la configurazione del pad direzionale di navigazione a schermo, l\'utilizzo di un trackball per il controllo dello zoom, oppure l\'utilizzo del feedback text-to-speech, oppure per esempio per annunciare automaticamente la vostra posizione.</string>
+    <string name="osmand_accessibility_description">Questo componente aggiuntivo rende disponibili le funzioni per l\'accessibilità direttamente in OsmAnd. Facilita per esempio la regolazione della velocità di lettura per le voci TTS, la configurazione del pad direzionale di navigazione a schermo, l\'utilizzo di una trackball per il controllo dello zoom, oppure l\'utilizzo del feedback text-to-speech, ad esempio per annunciare automaticamente la vostra posizione.</string>
 
 
     <string name="osmand_development_plugin_description">Questo plugin visualizza le impostazioni per le funzionalità di sviluppo e debug come il test o la simulazione di navigazione, la prestazione del rendering o le indicazioni vocali. Queste impostazioni sono utili agli sviluppatori e non sono necessarie per gli utenti finali.</string>
@@ -788,10 +788,10 @@ La memoria utilizzata è  {1} MB.
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Punto di parcheggio</string>
-  <string name="osmand_parking_plugin_description">Il plugin posizione di parcheggio ti permette di memorizzare quando l\'auto è stata parcheggiata e quanto tempo rimane (se il parcheggio è a tempo). 
+  <string name="osmand_parking_plugin_description">Il plugin della posizione di parcheggio ti permette di memorizzare dove l\'auto è parcheggiata e quanto tempo rimane (se il parcheggio è a tempo). 
 \n
 \nPuoi trovare il luogo di parcheggio e il tempo rimanente nella scheda del plugin e nel widget sulla mappa.
-\nAggiunge una notifica al calendario se vuoi che te lo ricordi.</string>
+\nSi può aggiungere un promemoria al calendario di Android per ricordarsi della scadenza.</string>
     <string name="osmand_parking_plugin_name">Posizione parcheggio</string>
     <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
     <string name="context_menu_item_delete_parking_point">Elimina un marcatore di parcheggio</string>
@@ -970,9 +970,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Linee isoipse</string>
-    <string name="srtm_plugin_description">Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzati sopra alle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia del paesaggio. (Per favore notare che linee isoipse e dati elevazione sono separati, una volta attivato il componente aggiuntivo saranno disponibili altri file scaricare.) 
+    <string name="srtm_plugin_description">Questo plugin fornisce sia le curve di livello che lo strato di ombreggiatura (dei rilievi) che possono essere visualizzati sopra alle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, escursionisti, e tutti coloro che sono interessati all\'orografia del paesaggio. (Per favore notare che le linee isoipse e i dati di elevazione sono separati, una volta attivato il componente aggiuntivo saranno disponibili altri file da scaricare.)
 \n 
-\nI dati globali (fra i 70° nord e 70° sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento per raccogliere immagini a bordo Terra, il satellite fiore all\'occhiello del Sistema Nasa di Osservazione della Terra . ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
+\nI dati globali (fra i 70° nord e 70° sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento per raccogliere immagini a bordo di Terra, il satellite fiore all\'occhiello del Sistema di Osservazione della Terra della NASA. ASTER è un lavoro di cooperazione tra NASA, il Ministero dell\'Economia, Commercio e Industria del Giappone (METI) e il Sistema Spaziale Giapponese (J-spacesystems).</string>
     <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Il componente aggiuntivo note Audio/video fornisce la funzionalità per prendere note audio/video/foto durante il viaggio, usando pulsante sulla schermata della mappa, oppure direttamente nel menù contestuale per ogni posizione sulla mappa.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
@@ -1090,7 +1090,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra i punti. I risultati possono essere salvati come file GPX, che possono essere utilizzati in seguito per la navigazione.</string>
+    <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra dei punti. I risultati possono essere salvati come file GPX, che può essere usato in seguito per la navigazione.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto.
 \n* Premere e tenere premuto sulla mappa per eliminare il punto precedente.
@@ -1665,10 +1665,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 		\n\nÈ disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".
 		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
-    <string name="plugin_ski_descr">"Questo plugin per OsmAnd ti mette a portata di mano i dettagli delle piste da sci di fondo e alpino mondiali, funivie e ski lift di tutto il mondo. I percorsi e le piste vengono codificate per colore in base alla difficoltà e raffigurate in uno stile mappa speciale \'Inverno\', che sembra un paesaggio imbiancato dalla neve.
-
-Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali. Questa visualizzazione può essere ripristinata o disattivata nuovamente da qui o cambiando lo \'Stile della mappa\' in \'Configura mappa\' come desiderato.
- "</string>
+    <string name="plugin_ski_descr">Questo plugin per OsmAnd mette a portata di mano i dettagli delle piste da sci di fondo e alpino, funivie e ski lift di tutto il mondo. I percorsi e le piste vengono codificate per colore in base alla difficoltà e raffigurate in uno speciale stile \'Inverno\' della mappa, che con esso sembra un paesaggio imbiancato dalla neve.
+\n
+\nAttivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali. Questa visualizzazione può essere disattivata da qui oppure cambiando lo \'Stile della mappa\' in \'Configura mappa\' come si desidera.</string>
 	<string name="plugin_touringview_descr">Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali. 
 \n
 \nQuesta visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento). 
@@ -1741,7 +1740,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_download">Scarica</string>
     <string name="shared_string_downloading">Scaricamento in corso</string>
     <string name="shared_string_download_successful">Scaricato</string>
-    <string name="shared_string_io_error">Errore di I/O</string>
+    <string name="shared_string_io_error">Errore di input/output</string>
     <string name="shared_string_unexpected_error">Errore imprevisto</string>
     <string name="shared_string_action_template">"Azione {0}"</string>
     <string name="shared_string_close">Chiudi</string>
@@ -1795,7 +1794,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="agps_data_last_downloaded">ultimo aggiornamento dei dati dell\'A-GPS: %1$s</string>
     <string name="welmode_download_maps">Scarica mappe</string>
     <string name="welcome_select_region">Per rappresentare correttamente i segnali stradali e le restrizioni per favore seleziona la tua regione di guida:</string>
-    <string name="confirm_usage_speed_cameras">In molti Paesi (Germania, Francia, Italia, e altri) l\'utilizzo degli avvertimenti di presenza di autovelox non è legale. OsmAnd non si assume alcuna responsabilità in caso di violazione della legge. Si prega di premere \'Si\' solo in caso di utilizzo autorizzato di questa funzionalità.</string>
+    <string name="confirm_usage_speed_cameras">In molti Paesi (Germania, Francia, Italia, e altri) l\'uso degli avvertimenti di autovelox è illegale. OsmAnd non si assume alcuna responsabilità in caso di violazione della legge. Si prega di premere \'Sì\' solo nel caso in cui sia autorizzato l\'uso di questa funzionalità.</string>
     <string name="welcome_text">OsmAnd fornisce mappe consultabili e di navigazione offline globali.</string>
     <string name="welcome_header">Benvenuto</string>
     <string name="current_route">Percorso attuale</string>
@@ -1823,7 +1822,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="storage_directory_default">Memoria interna</string>
     <string name="storage_directory">Posizione di memorizzazione delle mappe</string>
     <string name="shared_string_copy">Copia</string>
-    <string name="storage_directory_internal_app">Memoria interna dell\'app</string>
+    <string name="storage_directory_internal_app">Memoria interna dell\'applicazione</string>
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
@@ -1838,9 +1837,9 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_logoff">Esci</string>
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colora per rete di appartenenza</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colore in base ai simboli escursionistici OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colora in base ai simboli escursionistici OSMC</string>
     <string name="osm_edit_context_menu_delete">Cancella la modifica di OSM</string>
-    <string name="archive_wikipedia_data">Ci sono dati Wikipedia vecchi e incompatibili. Vuoi archiviarli\?</string>
+    <string name="archive_wikipedia_data">Sono presenti vecchi dati di Wikipedia incompatibili. Vuoi archiviarli\?</string>
     <string name="download_wikipedia_files">Scaricare i dati aggiuntivi di Wikipedia (%1$s MB)\?</string>
     <string name="gps_network_not_enabled">Il servizio di localizzazione non è attivo. Vuoi avviarlo?</string>
     <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
@@ -1853,11 +1852,11 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="local_recordings_delete_all_confirm">Stai per cancellare %1$d nota/e. Sei sicuro?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="lang_es_ar">Spagnolo (Argentina)</string>
-    <string name="lang_nb">Norvegese Bokmål</string>
+    <string name="lang_nb">Norvegese bokmål</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thailandese</string>
     <string name="lang_te">Telugu</string>
-    <string name="lang_nn">Norvegese Nynorsk</string>
+    <string name="lang_nn">Norvegese nynorsk</string>
     <string name="light_theme">Chiaro</string>
     <string name="dark_theme">Scuro</string>
     <string name="lang_pms">Piemontese</string>
@@ -1960,7 +1959,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="simulate_your_location_stop_descr">Arresta la simulazione della posizione.</string>
     <string name="simulate_your_location_descr">Simula la posizione utilizzando un GPX registrato o una percorso calcolato.</string>
     <string name="downloads_left_template">%1$s download rimanenti</string>
-    <string name="favourites_edit_dialog_title">Informazioni preferiti</string>
+    <string name="favourites_edit_dialog_title">Informazioni sui preferiti</string>
     <string name="favourites_context_menu_add">Aggiungi preferito</string>
     <string name="roads">Strade</string>
     <string name="shared_string_trip_recording">Registrazione viaggio</string>
@@ -2244,7 +2243,7 @@ Sono disponibili solo {2} MB.</string>
 <string name="no_map_markers_found">Aggiungi i marcatori sulla mappa</string>
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
     
-    <string name="rec_split">Frazionatore delle registrazioni</string>
+    <string name="rec_split">Suddivisione delle registrazioni</string>
     <string name="rec_split_title">Usa il frazionamento delle registrazioni</string>
     <string name="rendering_value_thin_name">Sottile</string>
     <string name="rendering_value_medium_name">Medio</string>
