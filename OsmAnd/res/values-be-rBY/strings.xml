@@ -3166,4 +3166,5 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Abiarycie zručnuju dlia vas pieryjadyčnasć aplat:</string>
     <string name="osm_live_payment_contribute_descr">Častka dachodu idzie ŭdzieĺnikam OpenStreetMap.</string>
+    <string name="powered_by_osmand">Pracuje na OsmAnd</string>
     </resources>
