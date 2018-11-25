@@ -155,19 +155,11 @@ public class RoutingHelper {
 		this.isRoutePlanningMode = isRoutePlanningMode;
 	}
 
-	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation) {
-		if (isPublicTransportMode()) {
-			clearCurrentRoute(null, null);
-			if (currentLocation != null) {
-				transportRoutingHelper.setFinalAndCurrentLocation(finalLocation,
-						new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()));
-			}
-		} else {
-			RouteCalculationResult previousRoute = route;
-			clearCurrentRoute(finalLocation, intermediatePoints);
-			// to update route
-			setCurrentLocation(currentLocation, false, previousRoute, true);
-		}
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
+		RouteCalculationResult previousRoute = route;
+		clearCurrentRoute(finalLocation, intermediatePoints);
+		// to update route
+		setCurrentLocation(currentLocation, false, previousRoute, true);
 	}
 
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
@@ -202,6 +194,7 @@ public class RoutingHelper {
 			this.lastProjection = null;
 			setFollowingMode(false);
 		}
+		transportRoutingHelper.clearCurrentRoute(newFinalLocation);
 	}
 
 	private synchronized void finishCurrentRoute() {
@@ -267,6 +260,7 @@ public class RoutingHelper {
 
 	public void addListener(IRouteInformationListener l){
 		listeners.add(new WeakReference<>(l));
+		transportRoutingHelper.addListener(l);
 	}
 
 	public boolean removeListener(IRouteInformationListener lt){
@@ -279,6 +273,7 @@ public class RoutingHelper {
 				return true;
 			}
 		}
+		transportRoutingHelper.removeListener(lt);
 		return false;
 	}
 
@@ -306,7 +301,11 @@ public class RoutingHelper {
 	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation,
 			RouteCalculationResult previousRoute, boolean targetPointsChanged) {
 		Location locationProjection = currentLocation;
-		if (finalLocation == null || currentLocation == null) {
+		if (isPublicTransportMode() && currentLocation != null) {
+			transportRoutingHelper.setFinalAndCurrentLocation(finalLocation,
+					new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()));
+		}
+		if (finalLocation == null || currentLocation == null || isPublicTransportMode()) {
 			isDeviatedFromRoute = false;
 			return locationProjection;
 		}
@@ -568,7 +567,7 @@ public class RoutingHelper {
 
 
 	private boolean identifyUTurnIsNeeded(Location currentLocation, float posTolerance) {
-		if (finalLocation == null || currentLocation == null || !route.isCalculated()) {
+		if (finalLocation == null || currentLocation == null || !route.isCalculated() || isPublicTransportMode()) {
 			return false;
 		}
 		boolean isOffRoute = false;
@@ -940,7 +939,6 @@ public class RoutingHelper {
 		if (isPublicTransportMode()) {
 			Location start = lastFixedLocation;
 			LatLon finish = finalLocation;
-			clearCurrentRoute(null, null);
 			if (start != null && finish != null) {
 				transportRoutingHelper.setFinalAndCurrentLocation(finish,
 						new LatLon(start.getLatitude(), start.getLongitude()));
@@ -948,15 +946,8 @@ public class RoutingHelper {
 				transportRoutingHelper.recalculateRouteDueToSettingsChange();
 			}
 		} else {
-			if (finalLocation == null && intermediatePoints == null) {
-				LatLon finish = settings.getPointToNavigate();
-				List<LatLon> intermediates = app.getTargetPointsHelper().getIntermediatePointsLatLonNavigation();
-				clearCurrentRoute(finish, intermediates);
-				setCurrentLocation(lastFixedLocation, false);
-			} else {
-				clearCurrentRoute(finalLocation, intermediatePoints);
-				recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
-			}
+			clearCurrentRoute(finalLocation, intermediatePoints);
+			recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
 		}
 	}
 
