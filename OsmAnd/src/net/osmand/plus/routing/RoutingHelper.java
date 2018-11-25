@@ -936,6 +936,7 @@ public class RoutingHelper {
 	}
 
 	public void recalculateRouteDueToSettingsChange() {
+		clearCurrentRoute(finalLocation, intermediatePoints);
 		if (isPublicTransportMode()) {
 			Location start = lastFixedLocation;
 			LatLon finish = finalLocation;
@@ -946,7 +947,6 @@ public class RoutingHelper {
 				transportRoutingHelper.recalculateRouteDueToSettingsChange();
 			}
 		} else {
-			clearCurrentRoute(finalLocation, intermediatePoints);
 			recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
 		}
 	}
