@@ -422,7 +422,7 @@ public class SQLiteTileSource implements ITileSource {
 		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
 			return;
 		}
-		db.execSQL("TRUNCATE TABLE tiles");
+		db.execSQL("DELETE FROM tiles");
 	}
 	
 	/**
