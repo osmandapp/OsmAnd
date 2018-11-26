@@ -163,11 +163,11 @@
 \n\nNão é necessário baixar mapa especial, pois esse modo de exibição é criado a partir do mapa padrão.
 \n\nEssa visão pode ser revertida desativando aqui mesmo ou alterando o \'Estilo do mapa\' em \'Configurar mapa\' quando desejar. "</string>
 <string name="plugin_nautical_name">Mapa náutico</string>
-<string name="plugin_nautical_descr">"Este plugin enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos. 
+<string name="plugin_nautical_descr">Este plugin enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos.
 \n
-\nUm complemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.). 
+\nUm complemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.).
 \n
-\nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
+\nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
 <string name="plugin_ski_name">Mapa de esqui</string>
 <string name="plugin_ski_descr">"Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve. 
 \n
@@ -2989,4 +2989,23 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
     <string name="osm_live_payment_renews_quarterly">Renova trimestralmente</string>
+    <string name="powered_by_osmand">Distribuído por OsmAnd</string>
+    <string name="default_price_currency_format">%1$,2f %2$s</string>
+    <string name="osm_live_payment_header">Selecione o período de pagamento conveniente para você:</string>
+    <string name="osm_live_payment_contribute_descr">Parte da renda vai para os contribuidores do OpenStreetMap.</string>
+    <string name="release_3_1">• Navegação: corrige barra de progresso, inversão rápida de início e fim de rota
+\n
+\n• Marcadores de mapa: corrige ligar/desligar grupos, habilidade para ocultar os marcadores do mapa
+\n
+\n• Edição OSM: habilidade para editar etiquetas de objetos não pontuais e caminhos, corrige falta de comentários em notas, backup de edições
+\n
+\n• Melhora análise da Wikipédia e Wikivoyage, arquivos atualizados já estão disponíveis
+\n
+\n• Menu de contexto: corrige a cor de escudos de rodovias no modo noite, corrige tamanhos adicionais de menu
+\n
+\n• Navegação a barco: suporte para o canal navegável
+\n
+\n• Outras correções de bugs
+\n</string>
+    <string name="send_search_query_description">Enviaremos a sua pesquisa: <b>\"%1$s\"</b>, bem como a sua localização.<br/><br/> Não coletamos informação pessoal, só precisamos dos dados da pesquisa para melhorar o algorítimo de pesquisa.<br/></string>
     </resources>
