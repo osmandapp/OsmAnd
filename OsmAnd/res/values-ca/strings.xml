@@ -3050,4 +3050,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Seleccioneu el període de pagament que us convingui:</string>
     <string name="osm_live_payment_contribute_descr">Una part dels ingressos és pels col·laboradors d\'OpenStreetMap.</string>
+    <string name="powered_by_osmand">Recolzat en OsmAnd</string>
     </resources>

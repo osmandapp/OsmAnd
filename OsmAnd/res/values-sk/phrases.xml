@@ -3546,4 +3546,38 @@
 	<string name="poi_hazard_minefield">Mínové pole</string>
 
 
-</resources>
+<string name="poi_bulk_purchase">Množstevný predaj</string>
+	<string name="poi_substation_type">Typ</string>
+
+<string name="poi_climbing_orientation_n">Smerovanie steny: S</string>
+	<string name="poi_climbing_orientation_ne">Smerovanie steny: SV</string>
+	<string name="poi_climbing_orientation_e">Smerovanie steny: V</string>
+	<string name="poi_climbing_orientation_se">Smerovanie steny: JV</string>
+	<string name="poi_climbing_orientation_s">Smerovanie steny: J</string>
+	<string name="poi_climbing_orientation_sw">Smerovanie steny: JZ</string>
+	<string name="poi_climbing_orientation_w">Smerovanie steny: Z</string>
+	<string name="poi_climbing_orientation_nw">Smerovanie steny: SZ</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla standard</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_outpost">Výdajňa tovaru</string>
+
+	<string name="poi_rock">Skala</string>
+
+	<string name="poi_end_date">Dátum ukončenia</string>
+
+	<string name="poi_ruins">Ruiny</string>
+
+	<string name="poi_hill">Pahorok</string>
+
+	<string name="poi_shoe_repair">Oprava obuvi</string>
+
+	<string name="poi_bulk_purchase_yes">Množstevný predaj: áno</string>
+	<string name="poi_bulk_purchase_only">Množstevný predaj: výhradne</string>
+
+	</resources>

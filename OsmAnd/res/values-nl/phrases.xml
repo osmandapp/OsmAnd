@@ -1499,9 +1499,9 @@
 	<string name="poi_vending_ice_cream">IJs</string>
 	<string name="poi_cuisine_ice_cream">IJs</string>
 	<string name="poi_fuel_avia_type">Brandstoftype (avia)</string>
-	<string name="poi_internet_access_type">Internet</string>
+	<string name="poi_internet_access_type">Internet verbinding type</string>
 	<string name="poi_vending_type">Verkoop</string>
-	<string name="poi_bicycle_service">Fietsreparatie</string>
+	<string name="poi_bicycle_service">Fietsonderhoud</string>
 	<string name="poi_clothes_type">Soort</string>
 	<string name="poi_shoes_type">Soort</string>
 	<string name="poi_fire_hydrant_type">Soort</string>
