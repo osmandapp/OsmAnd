@@ -143,7 +143,7 @@
         <string name="poi_railway_station">Banegård</string>
         <string name="poi_railway_platform">Perron</string>
         <string name="poi_subway_entrance">Metroindgang</string>
-        <string name="poi_subway_station">Metrostation</string>
+        <string name="poi_subway_station">Ja</string>
         <string name="poi_taxi">Taxaholdeplads</string>
 
         <string name="poi_aerodrome">Lufthavn</string>
@@ -961,7 +961,7 @@
 	<string name="poi_access_agricultural">Adgang for landbrug</string>
 
 	<string name="poi_monitoring_station">Målestation</string>
-	<string name="poi_capital">Hovedstad</string>
+	<string name="poi_capital">Ja</string>
 	<string name="poi_fee_no">Nej</string>
 
 	<string name="poi_email">E-mail</string>
@@ -1153,7 +1153,7 @@
 	<string name="poi_denomination_scientist">Kristen Videnskab</string>
 	<string name="poi_landfill_waste_nuclear">Atomaffald</string>
 	<string name="poi_start_date">Startdato</string>
-	<string name="poi_wheelchair_yes">Kørestol</string>
+	<string name="poi_wheelchair_yes">Ja</string>
 
 	<string name="poi_content_silage">Indhold: ensilage</string>
 	<string name="poi_content_water">Indhold: vand</string>
@@ -1620,7 +1620,7 @@
 	<string name="poi_drive_through_no">Drive-through: nej</string>
 
 	<string name="poi_brewery_additional">Bryggerinavn</string>
-	<string name="poi_microbrewery_yes">Mikrobryggeri</string>
+	<string name="poi_microbrewery_yes">Ja</string>
 	<string name="poi_microbrewery_no">Ingen mikrobryggeri</string>
 
 	<string name="poi_takeaway_yes">Take Away</string>
@@ -3970,7 +3970,7 @@
 <string name="poi_bulk_purchase">Storkøb</string>
 	<string name="poi_substation_type">Type</string>
 
-<string name="poi_bulk_purchase_yes">Storkøb: ja</string>
+<string name="poi_bulk_purchase_yes">Ja</string>
 	<string name="poi_bulk_purchase_only">Storkøb: kun</string>
 
 	<string name="poi_pipeline_substation">Rørledningsstation</string>

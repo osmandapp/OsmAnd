@@ -68,7 +68,7 @@
 	<string name="poi_public_transport_platform_trolleybus">Trolibuszmegálló</string>
 	<string name="poi_public_transport_platform_tram">Villamosmegálló</string>
 	<string name="poi_subway_entrance">Metrólejárat</string>
-	<string name="poi_subway_station">Metróállomás</string>
+	<string name="poi_subway_station">Igen</string>
 	<string name="poi_taxi">Taxiállomás</string>
 
 	<string name="poi_aerodrome">Repülőtér</string>
@@ -772,7 +772,7 @@
 	<string name="poi_migration">Bevándorlás</string>
 	<string name="poi_tax_inspection">Adóellenőrzés</string>
 	<string name="poi_country">Ország</string>
-	<string name="poi_capital">Főváros</string>
+	<string name="poi_capital">Igen</string>
 	<string name="poi_healthcare_alternative">Alternatív gyógyászat</string>
 	<string name="poi_audiologist">Hallásspecialista</string>
 	<string name="poi_optometrist">Optometrikus</string>
@@ -1259,7 +1259,7 @@
 	<string name="poi_diet_pescetarian_yes">Peszketáriánus</string>
 
 	<string name="poi_brewery_additional">Sörfőzde neve</string>
-	<string name="poi_microbrewery_yes">Házi sörfőzés</string>
+	<string name="poi_microbrewery_yes">Igen</string>
 	<string name="poi_microbrewery_no">Házi sörfőzés nincs</string>
 
 	<string name="poi_takeaway_yes">Elvitelre</string>

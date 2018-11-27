@@ -148,7 +148,7 @@
 	<string name="poi_railway_station">Чыгуначная станцыя</string>
 	<string name="poi_railway_platform">Чыгуначная плятформа</string>
 	<string name="poi_subway_entrance">Уваход у мэтро</string>
-	<string name="poi_subway_station">Станцыя мэтро</string>
+	<string name="poi_subway_station">Так</string>
 	<string name="poi_taxi">Стаянка таксі</string>
 
 	<string name="poi_aerodrome">Аэрапорт</string>
@@ -953,7 +953,7 @@
 	<string name="poi_access_agricultural">Сельгасп. доступ</string>
 
 	<string name="poi_access_destination">Транзіт забаронены</string>
-	<string name="poi_capital">Сталіца</string>
+	<string name="poi_capital">Так</string>
 	<string name="poi_fee_no">Не</string>
 
 	<string name="poi_monitoring_station">Станцыя назіраньня</string>
@@ -1110,7 +1110,7 @@
 	<string name="poi_height">Вышыня</string>
 	<string name="poi_ele">Вышыня над узроўнем мора</string>
 	<string name="poi_start_date">Дата пачатку будаўніцтва</string>
-	<string name="poi_wheelchair_yes">Даступна для інвалідных крэслаў</string>
+	<string name="poi_wheelchair_yes">Так</string>
 	<string name="poi_parking_underground">Падземная</string>
 	<string name="poi_parking_multi_storey">Шматпавярховая</string>
 
@@ -1734,7 +1734,7 @@
 	<string name="poi_drive_through_no">Кліенты, што сядзяць у аўтамабілі, не абслугоўваюцца</string>
 
 	<string name="poi_brewery_additional">Назва бровару</string>
-	<string name="poi_microbrewery_yes">Уласны бровар</string>
+	<string name="poi_microbrewery_yes">Так</string>
 	<string name="poi_microbrewery_no">Няма ўласнага бровара</string>
 
 	<string name="poi_takeaway_yes">На вынас</string>
@@ -2133,7 +2133,7 @@
 	<string name="poi_openfire_no">Развядзеньне адкрытага агню забаронена</string>
 	<string name="poi_backcountry_yes">Так</string>
 	<string name="poi_backcountry_no">Не</string>
-	<string name="poi_scout_yes">так</string>
+	<string name="poi_scout_yes">Так</string>
 	<string name="poi_scout_no">Лягер скаўтаў: не</string>
 	<string name="poi_group_only_yes">Даступна толькі для груп: так</string>
 	<string name="poi_group_only_no">Даступна толькі для груп: не</string>
@@ -3927,7 +3927,7 @@
 <string name="poi_bulk_purchase">Аптовая купля</string>
 	<string name="poi_substation_type">Тып</string>
 
-<string name="poi_bulk_purchase_yes">Аптовая купля: так</string>
+<string name="poi_bulk_purchase_yes">Так</string>
 	<string name="poi_bulk_purchase_only">Аптовая купля: толькі</string>
 
 	<string name="poi_pipeline_substation">Трубаправодная падстанцыя</string>

@@ -143,7 +143,7 @@
 	<string name="poi_railway_station">Stacja kolejowa</string>
 	<string name="poi_railway_platform">Peron kolejowy</string>
 	<string name="poi_subway_entrance">Wejście do metra</string>
-	<string name="poi_subway_station">Stacja metra</string>
+	<string name="poi_subway_station">Tak</string>
 	<string name="poi_taxi">Postój taksówek</string>
 
 	<string name="poi_aerodrome">Lotnisko</string>
@@ -1185,7 +1185,7 @@
 
 	<string name="poi_lighting_tower">Maszt oświetleniowy</string>
 	<string name="poi_greenfield">Teren niezagospodarowany</string>
-	<string name="poi_capital">Stolica</string>
+	<string name="poi_capital">Tak</string>
 	<string name="poi_religion_multifaith">Wielowyznaniowość</string>
 	<string name="poi_denomination_shia">Szyityzm</string>
 	<string name="poi_denomination_united">Zjednoczony Kościół Kanady</string>
@@ -1274,7 +1274,7 @@
 	<string name="poi_delivery_no">Brak dostawy</string>
 	<string name="poi_delivery_only">Wyłącznie dostawa</string>
 
-	<string name="poi_microbrewery_yes">Browar rzemieślniczy</string>
+	<string name="poi_microbrewery_yes">Tak</string>
 	<string name="poi_microbrewery_no">Brak browaru rzemieślniczego</string>
 
 	<string name="poi_takeaway_yes">Na wynos</string>
@@ -3911,7 +3911,7 @@
 <string name="poi_bulk_purchase">Zakup hurtowy</string>
 	<string name="poi_substation_type">Typ</string>
 
-<string name="poi_bulk_purchase_yes">Zakup zbiorczy: tak</string>
+<string name="poi_bulk_purchase_yes">Tak</string>
 	<string name="poi_bulk_purchase_only">Zakup zbiorczy: tylko</string>
 
 	<string name="poi_pipeline_substation">Podstacja rurociągów</string>

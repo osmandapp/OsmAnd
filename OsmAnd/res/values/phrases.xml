@@ -365,7 +365,7 @@
 	<string name="poi_railway_platform">Railroad platform</string>
 	<string name="poi_halt">Railroad stop</string>
 	<string name="poi_subway_entrance">Subway entrance</string>
-	<string name="poi_subway_station">Subway station</string>
+	<string name="poi_subway_station">Yes</string>
 	<string name="poi_railway_buffer_stop">Railroad buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
 
@@ -576,7 +576,7 @@
 	<string name="poi_customs">Customs</string>
 	<string name="poi_country">Country</string>
 	<string name="poi_city">City</string>
-	<string name="poi_capital">Capital</string>
+	<string name="poi_capital">Yes</string>
 	<string name="poi_town">Town</string>
 	<string name="poi_village">Village</string>
 	<string name="poi_hamlet">Hamlet</string>
@@ -1777,7 +1777,7 @@
 	<string name="poi_drive_through_no">Drive-through: no</string>
 
 	<string name="poi_brewery_additional">Brewery name</string>
-	<string name="poi_microbrewery_yes">Microbrewery</string>
+	<string name="poi_microbrewery_yes">Yes</string>
 	<string name="poi_microbrewery_no">No microbrewery</string>
 
 	<string name="poi_takeaway_filter_yes">Yes</string>
@@ -3859,8 +3859,8 @@
 
 	<string name="poi_shoe_repair">Shoe repair</string>
 
-	<string name="poi_bulk_purchase_yes">Bulk purchase: yes</string>
-	<string name="poi_bulk_purchase_only">Bulk purchase: only</string>
+	<string name="poi_bulk_purchase_yes">Yes</string>
+	<string name="poi_bulk_purchase_only">Only</string>
 
 	<string name="poi_pipeline_substation">Pipeline substation</string>
 	<string name="poi_substation_transmission">Transmission</string>

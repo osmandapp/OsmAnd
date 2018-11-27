@@ -239,7 +239,7 @@
 	<string name="poi_fuel_biogas">Біогаз</string>
 	<string name="poi_halt">Залізнична зупинка</string>
 	<string name="poi_subway_entrance">Вхід в метро</string>
-	<string name="poi_subway_station">Станція метро</string>
+	<string name="poi_subway_station">Так</string>
 	<string name="poi_taxi">Стоянка таксі</string>
 
 	<string name="poi_aerodrome">Аеропорт</string>
@@ -445,7 +445,7 @@
 	<string name="poi_prosecutor">Прокуратура</string>
 	<string name="poi_migration">Міграційна служба</string>
 	<string name="poi_tax_inspection">Налоговая інспекція</string>
-	<string name="poi_capital">Столиця</string>
+	<string name="poi_capital">Так</string>
 	<string name="poi_hamlet">Хутір</string>
 	<string name="poi_suburb">Район</string>
 	<string name="poi_neighbourhood">Мікрорайон</string>
@@ -2669,7 +2669,7 @@
 	<string name="poi_diet_vegetarian_only">Лише вегетаріанське харчування</string>
 	<string name="poi_memorial_column">Колона</string>
 	<string name="poi_service_bicycle_diy_yes">Інструменти для самостійного ремонту</string>
-	<string name="poi_scout_yes">так</string>
+	<string name="poi_scout_yes">Так</string>
 	<string name="poi_water_tap">Водопровідний кран</string>
 	<string name="poi_diplomatic_delegation">Делегація</string>
 	<string name="poi_cuisine_bavarian">Баварська</string>
@@ -2897,7 +2897,7 @@
 	<string name="poi_telescope_type_gamma">Гамма</string>
 	<string name="poi_cuisine_diner">Дайнер (американська дешева закусочна)</string>
 	<string name="poi_cuisine_cuban">Кубинська</string>
-	<string name="poi_microbrewery_yes">Власна пивоварня</string>
+	<string name="poi_microbrewery_yes">Так</string>
 	<string name="poi_vending_tickets">Квитки</string>
 	<string name="poi_bridge_movable_retractable">Тип розвідного моста: висувається</string>
 
@@ -3874,8 +3874,8 @@
 <string name="poi_bulk_purchase">Масове придбання</string>
 	<string name="poi_substation_type">Тип</string>
 
-<string name="poi_bulk_purchase_yes">Масове придбання: так</string>
-	<string name="poi_bulk_purchase_only">Масове придбання: виключно</string>
+<string name="poi_bulk_purchase_yes">Так</string>
+	<string name="poi_bulk_purchase_only">Виключно</string>
 
 	<string name="poi_pipeline_substation">Трубопровідна підстанція</string>
 	<string name="poi_substation_transmission">Передавальна</string>
