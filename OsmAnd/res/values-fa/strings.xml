@@ -126,7 +126,7 @@
 	<string name="show_cameras">دوربین‌های کنترل سرعت</string>
 	<string name="show_traffic_warnings">هشدارهای ترافیکی</string>
 	<string name="avoid_toll_roads">پرهیز از جاد‌ه‌های دارای عوارضی</string>
-	<string name="continue_follow_previous_route_auto">راهبری ناتمام قبلی را ادامه می‌دهید؟ (%1$s ثانیه)</string>
+	<string name="continue_follow_previous_route_auto">ناوبری ناتمام قبلی را ادامه می‌دهید؟ (%1$s ثانیه)</string>
 	<string name="route_updated_loc_found">در انتظار دریافت موقعیت برای محاسبهٔ مسیر</string>
 	<string name="osmand_parking_hours">ساعت</string>
 	<string name="osmand_parking_minutes">دقیقه</string>
@@ -291,7 +291,7 @@
 	
 	<string name="show_gps_coordinates_text">مختصات GPS را روی نقشه نشان بده</string>
 	<string name="use_internet_to_download_tile">کاشی‌های از قلم افتادهٔ نقشه دانلود شود</string>
-	<string name="app_description">برنامهٔ راهبری</string>
+	<string name="app_description">نرم‌افزار ناوبری</string>
 	<string name="shared_string_exit">خروج</string>
 	
 	
@@ -339,7 +339,7 @@
 	<string name="fav_points_not_exist">هیچ نقطهٔ برگزیده‌ای وجود ندارد</string>
 	<string name="update_existing">جایگزین‌کردن</string>
 	<string name="only_show">مسیر را نشان بده</string>
-	<string name="follow">شروع راهبری</string>
+	<string name="follow">شروع ناوبری</string>
 	<string name="mark_final_location_first">لطفاً ابتدا مقصد را انتخاب کنید</string>
 	<string name="get_directions">مسیریابی</string>
 	
@@ -456,8 +456,8 @@
 	<string name="index_name_voice">پیام‌های گفتاری (ضبطی، قابلیت محدود)</string>
 	<string name="index_name_tts_voice">پیام‌های گفتاری (ماشینی، TTS - بهتر)</string>
 	<string name="amenity_type_osmwiki">ویکی‌پدیا (آفلاین)</string>
-	<string name="routing_settings">راهبری</string>
-	<string name="routing_settings_descr">گزینه‌های راهبری را تعریف کنید.</string>
+	<string name="routing_settings">ناوبری</string>
+	<string name="routing_settings_descr">گزینه‌های ناوبری را تعریف کنید.</string>
 	<string name="global_settings">تنظیمات کلی</string>
 	<string name="osmand_parking_delete">حذف نشانگر پارکینگ</string>
 	
@@ -778,8 +778,8 @@
 	<string name="choose_auto_follow_route">نمای نقشه خودکار-مرکز</string>
 	<string name="choose_auto_follow_route_descr">مدت‌زمانی که طول می‌کشد تا نقشه با موقعیت کنونی همگام شود.</string>
 	
-	<string name="auto_follow_route_navigation">راهبری فقط با حالت خودکار-مرکز</string>
-	<string name="auto_follow_route_navigation_descr">نمای خودکار-مرکز برای نقشه فقط در زمان مسیریابی فعال باشد.</string>
+	<string name="auto_follow_route_navigation">ناوبری فقط با حالت خودکار-مرکز</string>
+	<string name="auto_follow_route_navigation_descr">نمای خودکار-مرکز برای نقشه فقط در زمان ناوبری فعال باشد.</string>
 	<string name="auto_follow_location_enabled">نمای نقشه خودکار-مرکز است.</string>
 	<string name="pref_vector_rendering">تنظیمات مربوط به رندرکنندهٔ بُرداری</string>
 	<string name="pref_overlay">لایهٔ رویی/لایهٔ زیری</string>
@@ -931,7 +931,7 @@
 	<string name="context_menu_item_update_map_confirm">داده‌های محلی از طریق اینترنت به‌روز شود؟</string>
 	<string name="update_poi_error_loading">بارگیری داده از سرور ناموفق بود</string>
 	<string name="update_poi_no_offline_poi_index">برای این ناحیه هیچ POIای به‌صورت آفلاین موجود نیست</string>
-	<string name="hello">برنامهٔ راهبری OsmAnd</string>
+	<string name="hello">نرم‌افزار ناوبری OsmAnd</string>
 	<string name="update_poi_success">داده‌های POI به‌روز شد ({0} مورد بارگیری شد)</string>
 	<string name="update_poi_error_local">به‌روزرسانی لیست محلی POI ناموفق بود</string>
 	<string name="shared_string_ok">خُب</string>
@@ -957,14 +957,14 @@
 	<string name="voice_data_unavailable">دادهٔ گفتاری انتخاب‌شده موجود نیست</string>
 	<string name="sd_mounted_ro">کارت حافظه در حالت فقط‌خواندنی است. 
 \nبا این حساب تنها می‌توانید نقشه‌هایی را ببینید که قبلاً دریافت شده‌اند و نمی‌توانید مناطق جدیدی را دانلود کنید.</string>
-	<string name="process_navigation_service">سرویس راهبری OsmAnd</string>
+	<string name="process_navigation_service">خدمات ناوبری OsmAnd</string>
 	<string name="background_service_int_descr">بازهٔ بیدارباش سرویس پس‌زمینه را تنظیم کنید.</string>
 	<string name="background_service_int">بازهٔ زمانی بیدارباش GPS</string>
 	<string name="background_service_provider_descr">مشخص کنید سرویس پس‌زمینه اطلاعات مکانی را چگونه دریافت کند.</string>
 	<string name="background_service_provider">ارائه‌دهندهٔ موقعیت</string>
 	<string name="background_router_service_descr">زمانی که صفحه خاموش است موقعیت شما را ردگیری می‌کند.</string>
 	<string name="background_router_service">اجرای OsmAnd در پس‌زمینه</string>
-	<string name="off_router_service_no_gps_available">برای استفاده از سرویس راهبری موقعیت مکانی را روشن کنید.</string>
+	<string name="off_router_service_no_gps_available">برای استفاده از خدمات ناوبری موقعیت مکانی را روشن کنید.</string>
 	<string name="hide_poi_filter">مخفی‌کردن فیلتر</string>
 	<string name="show_poi_filter">نمایش فیلتر</string>
 	<string name="search_poi_filter">فیلتر</string>
@@ -1001,7 +1001,7 @@
 	<string name="loading_builds">بارگیری ساخت‌های OsmAnd…</string>
 	<string name="select_build_to_install">یک ساخت OsmAnd را برای نصب انتخاب کنید</string>
 	<string name="gps_status_app_not_found">این برنامهٔ وضعیت GPS نصب نیست. در بازار اندروید بگردیم؟</string>
-	<string name="voice_is_not_available_msg">راهنمای گفتاری موجود نیست. لطفاً به «تنطیمات» ← «تنظیمات راهبری» ← «راهنمای گفتاری» بروید و یکی از بسته‌های پیام گفتاری را انتخاب یا دانلود کنید.</string>
+	<string name="voice_is_not_available_msg">راهنمای گفتاری موجود نیست. لطفاً به «تنطیمات» ← «تنظیمات ناوبری» ← «راهنمای گفتاری» بروید و یکی از بسته‌های پیام گفتاری را انتخاب یا دانلود کنید.</string>
 	<string name="voice_is_not_available_title">راهنمای گفتاری انتخاب نشده</string>
 	<string name="download_files_question">آیا {0} فایل دانلود شود ({1} مگابایت)؟</string>
 	<string name="filter_existing_indexes">دانلود شد</string>
@@ -1089,11 +1089,11 @@
 \n 
 \n* لطفاً OsmAnd+‎ را بخرید یا برای ویژگی‌های تازه و خاص سرمایه‌گذاری کنید. همچنین می‌توانید از طریق سایت https://osmand.net مبلغی هدیه کنید.</string>
 	
-	<string name="osmand_plus_long_description_1000_chars">برنامهٔ OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار بر پایهٔ OSM) یک نرم‌افزار مسیریابی متن‌باز است که به گسترهٔ وسیعی از داده‌های جهانی OSM دسترسی دارد. 
+	<string name="osmand_plus_long_description_1000_chars">برنامهٔ OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی ناوبری خودکار بر پایهٔ OSM) یک نرم‌افزار مسیریابی متن‌باز است که به گسترهٔ وسیعی از داده‌های جهانی OSM دسترسی دارد. 
 \n 
 \nتمام داده‌های نقشه (بُرداری یا کاشی) را می‌توانید برای استفادهٔ آفلاین روی کارت حافظه ذخیره کنید. 
-\nهمچنین OsmAnd می‌تواند به‌صورت آنلاین و آفلاین مسیریابی کند و با راهنمای گفتاری شما را گام‌به‌گام هدایت کند.
-\n
+\nهمچنین OsmAnd می‌تواند به‌صورت آنلاین و آفلاین مسیریابی کند و با راهنمای گفتاری شما را گام‌به‌گام هدایت کند. 
+\n 
 \n‏OsmAnd+‎ نسخهٔ پولی این برنامه است. با خریدن آن از این پروژه حمایت می‌کنید، سرمایه‌ای برای توسعهٔ قابلیت‌های جدید فراهم می‌کنید و آخرین به‌روزرسانی‌ها در اختیارتان قرار می‌گیرد. 
 \n 
 \n* از ویژگی‌های مهم: 
@@ -1406,8 +1406,8 @@
 	<string name="share_route_as_gpx">اشتراک‌گذاری مسیر در قالب فایل GPX</string>
 	<string name="share_route_subject">مسیر از طریق OsmAnd به‌اشتراک گذاشته شد</string>
 	<string name="keep_informing_never">دستی (روی فِلِش بزنید)</string>
-    <string name="keep_informing_descr">دستورات راهبری در بازه‌های منظم بازگو می‌شود.</string>
-    <string name="keep_informing">تکرار دستورات راهبری</string>
+    <string name="keep_informing_descr">دستورات ناوبری در بازه‌های منظم بازگو می‌شود.</string>
+    <string name="keep_informing">تکرار دستورات ناوبری</string>
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام رسیدن</string>
     
@@ -1916,7 +1916,7 @@
     <string name="contact_us">تماس</string>
     <string name="map_legend">علائم نقشه</string>
     <string name="save_poi_without_poi_type_message">آیا واقعاً POI را بدون ذکر نوع آن ذخیره می‌کنید؟</string>
-    <string name="navigation_item_description">تنظیمات راهبری را انجام دهید.</string>
+    <string name="navigation_item_description">تنظیمات ناوبری را انجام دهید.</string>
     <string name="planning_trip_item">طرح‌ریزی سفر</string>
     <string name="faq_item">سؤالات رایج</string>
     <string name="faq_item_description">سؤالاتی که زیاد پرسیده شده است</string>
@@ -2415,8 +2415,8 @@
     <string name="shared_string_undo">خنثی‌کردن</string>
     <string name="shared_string_skip">ردکردن</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="offline_maps_and_navigation">نقشه‌های آفلاین
-\nو مسیریابی</string>
+    <string name="offline_maps_and_navigation">نقشه‌های آفلاین 
+\nو ناوبری</string>
     <string name="tab_title_basic">ساده</string>
     <string name="tab_title_advanced">پیشرفته</string>
     <string name="building_number">پلاک ساختمان</string>
@@ -2516,7 +2516,7 @@
     <string name="quick_action_take_photo_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت تصویری در مرکز صفحه ایجاد می‌شود.</string>
     <string name="quick_action_add_osm_bug_descr">با لمس این دکمهٔ عملیاتی یک توضیح ویرایشی OSM در مرکز صفحه ایجاد می‌شود.</string>
     <string name="quick_action_add_poi_descr">با لمس این دکمهٔ عملیاتی یک مکان POI در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_navigation_voice_descr">با لمس این دکمهٔ عملیاتی، راهنمای گفتاری در زمان راهبری فعال یا غیرفعال می‌شود.</string>
+    <string name="quick_action_navigation_voice_descr">با لمس این دکمهٔ عملیاتی، راهنمای گفتاری در زمان ناوبری فعال یا غیرفعال می‌شود.</string>
     <string name="quick_action_add_parking_descr">با لمس این دکمهٔ عملیاتی یک جای پارک در مرکز صفحه علامت‌گذاری می‌شود.</string>
     <string name="favorite_autofill_toast_text">" اینجا ذخیره شد: "</string>
     <string name="favorite_empty_place_name">مکان</string>
@@ -2532,7 +2532,7 @@
     <string name="quick_action_poi_hide">پنهان‌کردن %1$s</string>
     <string name="quick_action_add_category">افزودن دسته</string>
     <string name="quick_action_add_configure_map">پیکربندی نقشه</string>
-    <string name="quick_action_add_navigation">راهبری</string>
+    <string name="quick_action_add_navigation">ناوبری</string>
     <string name="quick_action_fav_name_descr">خالی بگذارید تا از نشانی یا نام محل استفاده شود.</string>
     <string name="quick_action_bug_descr">این نوشته به‌صورت خودکار در قسمت پیام درج می‌شود.</string>
     <string name="quick_action_bug_message">پیام</string>
@@ -2782,7 +2782,7 @@
 \n • موقعیتتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند 
 \n • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید 
 \n • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده 
-\n • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای گردشگردی یا ناوبری GPX با امکان تنظیم شفافیت</string>
+\n • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای GPX گردشگردی یا ناوبری با امکان تنظیم شفافیت</string>
     
     <string name="context_menu_item_delete_waypoint">نقطهٔ بین‌راهی GPX را حذف می‌کنید؟</string>
     <string name="context_menu_item_edit_waypoint">ویرایش نقطهٔ بین‌راهی GPX</string>
@@ -2804,7 +2804,7 @@
     
     
     <string name="av_locations_descr">از مکان یادداشت‌ها فایل GPX می‌سازد.</string>
-    <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار بر پایهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند. 
+    <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی ناوبری خودکار بر پایهٔ OSM) یک نرم‌افزار نقشه و ناوبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند. 
 \n 
 \nراهبر دیداری و شنیداری، مشاهدهٔ مکان‌های محبوب (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های تراز و اطلاعات ارتفاع، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی را در کار با نقشه برایتان به ارمغان می‌آورد. 
 \n 
@@ -2858,7 +2858,7 @@
 \n • جنوبگان: * 
 \nبا این نرم‌افزار نقشهٔ بیشتر مناطق جهان را خواهید یافت! 
 \nاز یک مسیریاب معتبر و قابل‌اعتماد استفاده کنید. هر کجا که هستید؛ در فرانسه، آلمان، انگلستان، مکزیک، آمریکا، هلند، ایران، روسیه، برزیل یا هر جای دیگر، فرقی نمی‌کند.</string>
-    <string name="osmand_plus_extended_description_part2">راهبری 
+    <string name="osmand_plus_extended_description_part2">ناوبری 
 \n • امکان انتخاب بین حالت آنلاین (سریع) و آفلاین (بدون هزینهٔ اضافی بابت اینترنت) 
 \n • راهنمای گام‌به‌گام گفتاری (پیام‌های گفتاری انسانی و ماشینی) 
 \n • راهنمای خطوط عبوری، نام خیابان‌ها و زمان تخمینی رسیدن 
@@ -2879,12 +2879,12 @@
 \nبا این نرم‌افزار نقشهٔ بیشتر مناطق جهان را خواهید یافت. 
 \nهر کجا که باشید، فرقی نمی‌کند؛ در فرانسه، آلمان، انگلستان، مکزیک، آمریکا، هلند، ایران، روسیه، برزیل و... 
 \n</string>
-    <string name="osmand_plus_extended_description_part3">نمایش نقشه
-\n • نمایش موقعیت و جهت قرارگیری شما
-\n • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند
-\n • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید
-\n • نقاط محبوب (POI یا Points of interest) اطرافتان را نشان می‌دهد
-\n • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای گردشگردی یا راهبری GPX با امکان تنظیم شفافیت
+    <string name="osmand_plus_extended_description_part3">نمایش نقشه 
+\n • نمایش موقعیت و جهت قرارگیری شما 
+\n • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند 
+\n • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید 
+\n • نقاط محبوب (POI یا Points of interest) اطرافتان را نشان می‌دهد 
+\n • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای GPX گردشگردی یا ناوبری با امکان تنظیم شفافیت 
 \n • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده</string>
     <string name="osmand_plus_extended_description_part4">استفاده از اطلاعات ویکی‌پدیا و OSM
 \n • ارائهٔ اطلاعات درجه‌یک از طریق بهترین پروژه‌های گروهی در سرتاسر جهان
