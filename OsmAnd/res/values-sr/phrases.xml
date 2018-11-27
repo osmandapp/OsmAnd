@@ -269,7 +269,7 @@
 	<string name="poi_bus_station">Аутобуска станица</string>
 	<string name="poi_railway_station">Железничка станица</string>
 	<string name="poi_subway_entrance">Улаз у подземну</string>
-	<string name="poi_subway_station">Подземна станица</string>
+	<string name="poi_subway_station">Да</string>
 	<string name="poi_taxi">Такси станица</string>
 
 	<string name="poi_aerodrome">Аеродром</string>
@@ -462,7 +462,7 @@
 	<string name="poi_customs">Царина</string>
 	<string name="poi_country">Држава</string>
 	<string name="poi_city">Град</string>
-	<string name="poi_capital">Престоница</string>
+	<string name="poi_capital">Да</string>
 	<string name="poi_town">Варошица</string>
 	<string name="poi_village">Село</string>
 	<string name="poi_hamlet">Засеок</string>
@@ -1921,7 +1921,7 @@
 	<string name="poi_drive_through_no">Пролазак кроз: не</string>
 
 	<string name="poi_brewery_additional">Име пиваре</string>
-	<string name="poi_microbrewery_yes">Микропивара</string>
+	<string name="poi_microbrewery_yes">Да</string>
 	<string name="poi_microbrewery_no">Не микропивара</string>
 
 	<string name="poi_takeaway_filter_yes">Да</string>

@@ -43,7 +43,7 @@
 	<string name="poi_customs">Tollafgreiðsla</string>
 	<string name="poi_country">Land</string>
 	<string name="poi_city">Borg</string>
-	<string name="poi_capital">Höfuðborg</string>
+	<string name="poi_capital">Já</string>
 	<string name="poi_town">Bær</string>
 	<string name="poi_village">Þorp</string>
 	<string name="poi_hamlet">Byggðakjarni</string>
@@ -1836,7 +1836,7 @@
 	<string name="poi_railway_station">Járnbrautarstöð</string>
 	<string name="poi_halt">Járnbrautarpallur</string>
 	<string name="poi_subway_entrance">Inngangur í neðanjarðarlest</string>
-	<string name="poi_subway_station">Neðanjarðarlestarstöð</string>
+	<string name="poi_subway_station">Já</string>
 	<string name="poi_taxi">Leigubílastaur</string>
 
 	<string name="poi_bicycle_rental">Reiðhjólaleiga</string>
@@ -2430,7 +2430,7 @@
 	<string name="poi_drive_through_no">Bílaafgreiðsla: nei</string>
 
 	<string name="poi_brewery_additional">Nafn á brugghúsi</string>
-	<string name="poi_microbrewery_yes">Bruggað á staðnum</string>
+	<string name="poi_microbrewery_yes">Já</string>
 	<string name="poi_microbrewery_no">Ekki bruggað á staðnum</string>
 
 	<string name="poi_service_electrical">Viðgerðir rafknúinna ökutækja</string>
@@ -3871,7 +3871,7 @@
 <string name="poi_bulk_purchase">Magnkaup</string>
 	<string name="poi_substation_type">Tegund</string>
 
-<string name="poi_bulk_purchase_yes">Magnkaup: já</string>
+<string name="poi_bulk_purchase_yes">Já</string>
 	<string name="poi_bulk_purchase_only">Magnkaup: einungis</string>
 
 	</resources>

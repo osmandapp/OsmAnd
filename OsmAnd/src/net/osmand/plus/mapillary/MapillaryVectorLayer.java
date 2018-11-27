@@ -202,6 +202,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		long capturedAt = ((Number) userData.get("captured_at")).longValue();
 		long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
 		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
+		boolean pano = settings.MAPILLARY_FILTER_PANO.get();
 
 		if (!userKey.equals("")) {
 			String key = (String) userData.get("userkey");
@@ -215,6 +216,10 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			}
 		} else if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
 			return true;
+		}
+
+		if (pano) {
+			return (long) userData.get("pano") == 0;
 		}
 		return false;
 	}

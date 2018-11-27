@@ -348,7 +348,7 @@
 	<string name="poi_railway_platform">Αποβάθρα σιδηροδρόμου</string>
 	<string name="poi_halt">Στάση σιδηροδρόμου</string>
 	<string name="poi_subway_entrance">Είσοδος μετρό</string>
-	<string name="poi_subway_station">Σταθμός μετρό</string>
+	<string name="poi_subway_station">Ναι</string>
 	<string name="poi_traffic_calming_cushion">Σαμαράκι (Μαξιλαράκι)</string>
 	<string name="poi_traffic_calming_chicane">Επιβραδυντής (απότομη στροφή)</string>
 	<string name="poi_traffic_calming_rumble_strip">Λωρίδα τραχειάς επιφάνειας</string>
@@ -577,7 +577,7 @@
 	<string name="poi_customs">Τελωνεία</string>
 	<string name="poi_country">Ύπαιθρος</string>
 	<string name="poi_city">Πόλη</string>
-	<string name="poi_capital">Πρωτεύουσα</string>
+	<string name="poi_capital">Ναι</string>
 	<string name="poi_town">Κωμόπολη</string>
 	<string name="poi_village">Χωριό</string>
 	<string name="poi_hamlet">Μικρό χωριό</string>
@@ -1774,7 +1774,7 @@
 	<string name="poi_drive_through_no">Στο όχημα σε στάση: όχι</string>
 
 	<string name="poi_brewery_additional">Όνομα ζυθοποιίας</string>
-	<string name="poi_microbrewery_yes">Μικροζυθοποιία</string>
+	<string name="poi_microbrewery_yes">Ναι</string>
 	<string name="poi_microbrewery_no">Χωρίς μικροζυθοποιία</string>
 
 	<string name="poi_takeaway_filter_yes">Ναι</string>

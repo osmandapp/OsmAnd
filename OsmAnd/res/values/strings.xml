@@ -381,7 +381,8 @@
     <string name="mapillary_menu_edit_text_hint">Type username</string>
     <string name="mapillary_menu_descr_username">View only images added by</string>
     <string name="mapillary_menu_title_username">Username</string>
-    <string name="mapillary_menu_filter_description">Filter images by submitter or by date. Only active in closeup zoom.</string>
+    <string name="mapillary_menu_filter_description">Filter images by submitter, by date or by type. Only active in closeup zoom.</string>
+    <string name="mapillary_menu_title_pano">Display only 360° images</string>
     <string name="map_widget_ruler_control">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
     <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>

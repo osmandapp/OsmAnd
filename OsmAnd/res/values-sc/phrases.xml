@@ -121,7 +121,7 @@
 	<string name="poi_railway_station">Istatzione de sos trenos</string>
 	<string name="poi_railway_platform">Piattaredda ferroviària</string>
 	<string name="poi_subway_entrance">Intrada de sa metropolitana</string>
-	<string name="poi_subway_station">Istatzione de sa metropolitana</string>
+	<string name="poi_subway_station">Eja</string>
 	<string name="poi_taxi">Postèggiu de sos taxi</string>
 
 	<string name="poi_aerodrome">Aeroportu</string>
@@ -926,7 +926,7 @@
 	<string name="poi_brownfield">Terrinu abbandonadu</string>
 	<string name="poi_greenfield">Terrinu egadu</string>
 	<string name="poi_bunker_silo">Lòssia \"bunker\"</string>
-	<string name="poi_capital">Capitale</string>
+	<string name="poi_capital">Eja</string>
 	<string name="poi_office_religion">Ufìtziu religiosu</string>
 	<string name="poi_association">Ufìtziu de un’assòtziu</string>
 	<string name="poi_financial">Ufìtziu finantziàriu</string>
@@ -1122,7 +1122,7 @@
 	<string name="poi_crossing_uncontrolled">Non controlladu</string>
 	<string name="poi_crossing_unmarked">Non sinnaladu</string>
 	<string name="poi_start_date">Data de cumintzu</string>
-	<string name="poi_wheelchair_yes">Cadira a rodas</string>
+	<string name="poi_wheelchair_yes">Eja</string>
 	<string name="poi_wheelchair_no">Nono</string>
 	<string name="poi_wheelchair_limited">Limitada</string>
 	<string name="poi_access_private">Atzessu privadu</string>
@@ -2107,7 +2107,7 @@
 	<string name="poi_drive_through_no">Servìtziu pro automobilistas (drive-through): nono</string>
 
 	<string name="poi_brewery_additional">Nùmene birrifìtziu</string>
-	<string name="poi_microbrewery_yes">Micro-birrifìtziu</string>
+	<string name="poi_microbrewery_yes">Eja</string>
 	<string name="poi_microbrewery_no">Chene micro-birrifìtziu</string>
 
 	<string name="poi_takeaway_filter_yes">Eja</string>
@@ -3904,7 +3904,7 @@
 <string name="poi_bulk_purchase">Còmpora a s\'ingrossu</string>
 	<string name="poi_substation_type">Casta</string>
 
-<string name="poi_bulk_purchase_yes">Còmpora a s\'ingrossu: eja</string>
+<string name="poi_bulk_purchase_yes">Eja</string>
 	<string name="poi_bulk_purchase_only">Compora a s\'ingrossu: petzi</string>
 
 	<string name="poi_pipeline_substation">Sutaistatzione de sas condutas</string>

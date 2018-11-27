@@ -391,7 +391,7 @@
 
 	<string name="poi_service_tyres">Pneus</string>
 	<string name="poi_public_transport_platform_bus">Arrêt de bus</string>
-	<string name="poi_subway_station">Station de métro</string>
+	<string name="poi_subway_station">Oui</string>
 	<string name="poi_tunnel">Tunnel</string>
 	<string name="poi_register_office">Bureau d\'état civil</string>
 	<string name="poi_customs">Douanes</string>
@@ -1036,7 +1036,7 @@
 	<string name="poi_notary">Office de notaire</string>
 	<string name="poi_doors">Magasin de portes</string>
 	<string name="poi_landfill_waste_nuclear">Déchet nucléaire</string>
-	<string name="poi_capital">Capitale</string>
+	<string name="poi_capital">Oui</string>
 	<string name="poi_office_religion">Lieu de culte</string>
 	<string name="poi_association">Siège d\'association</string>
 	<string name="poi_financial">Société financière</string>
@@ -1565,7 +1565,7 @@
 
 	<string name="poi_payment_cheque_yes">Chèques</string>
 	<string name="poi_payment_cheque_no">Chèques non acceptés</string>
-	<string name="poi_microbrewery_yes">Microbrasserie</string>
+	<string name="poi_microbrewery_yes">Oui</string>
 	<string name="poi_microbrewery_no">Pas de microbrasserie</string>
 
 	<string name="poi_takeaway_no">Pas de vente à emporter</string>
@@ -3505,7 +3505,7 @@
 	<string name="poi_appliance">Magasin d\'électroménager</string>
 
 	<string name="poi_bulk_purchase">Vente en vrac</string>
-	<string name="poi_bulk_purchase_yes">Vente en vrac : oui</string>
+	<string name="poi_bulk_purchase_yes">Oui</string>
 	<string name="poi_bulk_purchase_only">Vente en vrac : uniquement</string>
 
 	<string name="poi_atm">Distributeur de billets</string>
