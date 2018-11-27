@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources> 
 	<string name="poi_bakery">Булочная</string>
-	<string name="poi_alcohol">Винно-водочный магазин</string>
+	<string name="poi_alcohol">Винно-водочный магазин;Алкоголь</string>
 	<string name="poi_convenience">Продукты</string>
 	<string name="poi_mall">Торговый центр</string>
 	<string name="poi_beverages">Напитки</string>
-	<string name="poi_butcher">Мясная лавка</string>
+	<string name="poi_butcher">Мясная лавка;Мясо</string>
 	<string name="poi_deli">Деликатесы</string>
 	<string name="poi_greengrocer">Овощи и фрукты</string>
 	<string name="poi_seafood">Морепродукты</string>
 	<string name="poi_confectionery">Кондитерская</string>
 	<string name="poi_ice_cream">Мороженое</string>
-	<string name="poi_supermarket">Супермаркет</string>
+	<string name="poi_supermarket">Супермаркет;Универсам</string>
 	<string name="poi_tea">Чайный магазин</string>
-	<string name="poi_dairy">Молочный магазин</string>
+	<string name="poi_dairy">Молочный магазин;Молоко</string>
 	<string name="poi_vending_machine">Торговый автомат</string>
 	<string name="poi_cheese">Сыр</string>
 	<string name="poi_chocolate">Шоколад</string>
@@ -21,25 +21,25 @@
 	<string name="poi_pasta">Макаронные изделия</string>
 	<string name="poi_pastry">Хлебобулочные и кондитерские изделия</string>
 
-	<string name="poi_camera">Фотокамеры и объективы</string>
+	<string name="poi_camera">Фотокамеры и объективы;Фототехника</string>
 	<string name="poi_candles">Свечи и подсвечники</string>
 
-	<string name="poi_books">Книжный магазин</string>
-	<string name="poi_bicycle">Магазин велосипедов</string>
+	<string name="poi_books">Книжный магазин;Книги</string>
+	<string name="poi_bicycle">Магазин велосипедов;Веломагазин</string>
 	<string name="poi_anime">Магазин аниме</string>
 	<string name="poi_antiques">Антиквариат</string>
 	<string name="poi_art">Предметы искусства</string>
-	<string name="poi_baby_goods">Товары для детей</string>
+	<string name="poi_baby_goods">Товары для детей;Детские товары</string>
 	<string name="poi_bag">Сумки, чемоданы</string>
 	<string name="poi_bathroom_furnishing">Сантехника, ванные</string>
 	<string name="poi_bed">Магазин постельного белья</string>
 	<string name="poi_boutique">Бутик</string>
-	<string name="poi_carpet">Магазин ковров</string>
+	<string name="poi_carpet">Магазин ковров;Ковры</string>
 	<string name="poi_charity">Благотворительный магазин</string>
 	<string name="poi_chemist">Бытовая химия, косметика</string>
 	<string name="poi_clothes">Одежда</string>
 	<string name="poi_clothes_children">Детская одежда</string>
-	<string name="poi_shoes">Обувь</string>
+	<string name="poi_shoes">Обувь;Ботинки</string>
 	<string name="poi_computer">Компьютеры</string>
 	<string name="poi_copyshop">Ксерокопия, полиграфия</string>
 	<string name="poi_curtain">Шторы, портьеры</string>
@@ -48,9 +48,9 @@
 	<string name="poi_dive">Снаряжение для дайвинга</string>
 	<string name="poi_doityourself">Инструменты и стройматериалы</string>
 	<string name="poi_doors">Двери</string>
-	<string name="poi_erotic">Секс-шоп</string>
+	<string name="poi_erotic">Секс-шоп;Интим-салон;Магазин для взрослых</string>
 	<string name="poi_fishing">Рыболовный магазин</string>
-	<string name="poi_florist">Цветочный магазин</string>
+	<string name="poi_florist">Цветочный магазин;Цветы</string>
 	<string name="poi_frame">Рамки, багет</string>
 	<string name="poi_furniture">Мебель</string>
 	<string name="poi_garden_centre">Садово-огородный магазин</string>
@@ -62,63 +62,63 @@
 	<string name="poi_hearing_aids">Слуховые аппараты</string>
 	<string name="poi_herbalist">Травы (народная медицина)</string>
 	<string name="poi_hifi">Hi-Fi аппаратура</string>
-	<string name="poi_houseware">Хозяйственные товары</string>
+	<string name="poi_houseware">Хозяйственные товары;Хозтовары</string>
 	<string name="poi_hunting">Охотничий магазин</string>
 	<string name="poi_interior_decoration">Декор и оформление</string>
-	<string name="poi_jewelry">Ювелирный магазин</string>
+	<string name="poi_jewelry">Ювелирный магазин;Ювелирный салон</string>
 	<string name="poi_kiosk">Киоск, ларёк</string>
 	<string name="poi_kitchen">Кухни</string>
 	<string name="poi_mobile_phone">Салон связи</string>
 	<string name="poi_motorcycle">Мотоциклы</string>
 	<string name="poi_musical_instrument">Музыкальные инструменты</string>
-	<string name="poi_music">Аудиозаписи</string>
-	<string name="poi_newsagent">Журнальный киоск</string>
+	<string name="poi_music">Аудиозаписи;Музыкальный магазин</string>
+	<string name="poi_newsagent">Журнальный киоск;Журналы</string>
 	<string name="poi_optician">Оптика</string>
-	<string name="poi_organic">Биопродукты</string>
+	<string name="poi_organic">Биопродукты;Экологически чистые продукты;Органическая пища</string>
 	<string name="poi_outdoor">Товары для активного отдыха</string>
 	<string name="poi_paint">Краски</string>
-	<string name="poi_pet">Зоомагазин</string>
+	<string name="poi_pet">Зоомагазин;Товары для животных</string>
 	<string name="poi_radiotechnics">Радиодетали</string>
 	<string name="poi_second_hand">Секонд-хенд</string>
 	<string name="poi_ship_chandler">Яхты, запчасти, оснастка</string>
-	<string name="poi_sports">Спорттовары</string>
-	<string name="poi_stationery">Канцелярские товары</string>
+	<string name="poi_sports">Спорттовары;Товары для спорта;Спортивные товары</string>
+	<string name="poi_stationery">Канцелярские товары;Канцтовары</string>
 	<string name="poi_tableware">Кухонные принадлежности</string>
-	<string name="poi_ticket">Продажа, бронирование билетов</string>
-	<string name="poi_tobacco">Табак</string>
-	<string name="poi_toys">Игрушки</string>
+	<string name="poi_ticket">Продажа, бронирование билетов;Билеты</string>
+	<string name="poi_tobacco">Табак;Сигареты</string>
+	<string name="poi_toys">Игрушки;Детские игрушки</string>
 	<string name="poi_trade">Оптовый склад</string>
 	<string name="poi_vacuum_cleaner">Пылесосы и аксессуары</string>
 	<string name="poi_variety_store">Всё по одной цене</string>
-	<string name="poi_video">Продажа, прокат DVD</string>
+	<string name="poi_video">Видеосалон;Продажа, прокат DVD</string>
 	<string name="poi_window_blind">Жалюзи, ставни, маркизы</string>
 	<string name="poi_department_store">Универмаг</string>
 	<string name="poi_electronics">Электроника</string>
 	<string name="poi_car">Автосалон</string>
-	<string name="poi_car_parts">Автозапчасти</string>
+	<string name="poi_car_parts">Автозапчасти;Запчасти для автомобилей</string>
 	<string name="poi_atv">Квадроциклы</string>
 	<string name="poi_cosmetics">Косметика, парфюмерия</string>
 	<string name="poi_marketplace">Рынок</string>
 	<string name="poi_sewing">Шитьё и рукоделие</string>
 	<string name="poi_perfumery">Парфюмерия</string>
-	<string name="poi_energy">Элементы питания</string>
+	<string name="poi_energy">Элементы питания;Батарейки</string>
 	<string name="poi_fashion">Модная одежда</string>
 	<string name="poi_free_flying">Товары для свободного полёта</string>
-	<string name="poi_games">Магазин игр</string>
+	<string name="poi_games">Магазин игр;Игры</string>
 	<string name="poi_garden_furniture">Садовая мебель, аксессуары</string>
 	<string name="poi_furnace">Системы отопления</string>
-	<string name="poi_leather">Изделия из кожи</string>
-	<string name="poi_pyrotechnics">Пиротехника</string>
+	<string name="poi_leather">Изделия из кожи;Кожаные изделия</string>
+	<string name="poi_pyrotechnics">Пиротехника;Фейерверки</string>
 	<string name="poi_weapons">Оружие</string>
 	<string name="poi_model">Масштабные модели</string>
 	<string name="poi_trophy">Трофеи, награды</string>
 	<string name="poi_scuba_diving_shop">Товары для аквалангистов</string>
 	<string name="poi_swimming_pool_shop">Оборудование и аксессуары для плавательных бассейнов</string>
 	<string name="poi_tyres">Шины</string>
-	<string name="poi_video_games">Магазин видеоигр</string>
-	<string name="poi_watches">Магазин часов</string>
+	<string name="poi_video_games">Магазин видеоигр;Видеоигры</string>
+	<string name="poi_watches">Магазин часов;Часы</string>
 
-	<string name="poi_police">Отделение полиции</string>
+	<string name="poi_police">Отделение полиции;Полиция</string>
 	<string name="poi_fire_station">Пожарная часть</string>
 	<string name="poi_emergency_phone">Экстренный телефон</string>
 	<string name="poi_fire_hydrant">Пожарный гидрант</string>
@@ -127,7 +127,7 @@
 	<string name="poi_fire_hose">Пожарный шланг</string>
 	<string name="poi_fire_water_pond">Пожарный водоём</string>
 	<string name="poi_grit_bin">Ящик с песком</string>
-	<string name="poi_ambulance_station">Станция скорой помощи</string>
+	<string name="poi_ambulance_station">Станция скорой помощи;Скорая помощь</string>
 	<string name="poi_ses_station">Станция SES</string>
 	<string name="poi_emergency_access_point">Табличка с кодом для службы спасения</string>
 
@@ -152,7 +152,7 @@
 
 	<string name="poi_service_general">Услуги</string>
 	<string name="poi_service_tyres">Шиномонтаж</string>
-	<string name="poi_vehicle_inspection">Пункт техосмотра</string>
+	<string name="poi_vehicle_inspection">Пункт техосмотра;Техосмотр</string>
 	<string name="poi_car_wash">Автомойка</string>
 	<string name="poi_fuel">Автомобильная заправка;Автозаправка;Бензоколонка;АЗС;Бензозаправка</string>
 	<string name="poi_electricity_combined_charging">Зарядная станция</string>
@@ -177,7 +177,7 @@
 
 	<string name="poi_subway_station_filter">Станция метро</string>
 	<string name="poi_subway_station">Да</string>
-	<string name="poi_taxi">Стоянка такси</string>
+	<string name="poi_taxi">Стоянка такси;Такси</string>
 
 	<string name="poi_aerodrome">Аэропорт</string>
 	<string name="poi_helipad">Вертолётная площадка</string>
@@ -189,8 +189,8 @@
 	<string name="poi_ferry_terminal">Причал парома</string>
 	<string name="poi_lighthouse">Маяк</string>
 
-	<string name="poi_bicycle_rental">Прокат велосипедов</string>
-	<string name="poi_bicycle_parking">Велопарковка</string>
+	<string name="poi_bicycle_rental">Прокат велосипедов;Велопрокат</string>
+	<string name="poi_bicycle_parking">Велопарковка;Велосипедная парковка;Парковка для велосипедов</string>
 
 	<string name="poi_aerialway_station">Станция канатной дороги</string>
 	<string name="poi_aerialway_cable_car">Канатная дорога с кабинами</string>
@@ -231,7 +231,7 @@
 	<string name="poi_power_tower">Опора линии электропередач</string>
 	<string name="poi_power_pole">Столб линии электропередач</string>
 
-	<string name="poi_post_office">Почта</string>
+	<string name="poi_post_office">Почта;Почтовое отделение</string>
 	<string name="poi_post_box">Почтовый ящик</string>
 	<string name="poi_telephone">Телефон</string>
 	<string name="poi_communication_tower">Вышка связи</string>
@@ -349,13 +349,13 @@
 
 	<string name="poi_pharmacy">Аптека</string>
 	<string name="poi_hospital">Больница</string>
-	<string name="poi_doctors">Врач</string>
+	<string name="poi_doctors">Врач;Доктор</string>
 	<string name="poi_clinic">Поликлиника, клиника</string>
 	<string name="poi_first_aid">Первая помощь</string>
-	<string name="poi_dentist">Стоматология</string>
+	<string name="poi_dentist">Стоматология;Лечение зубов;Зубной врач</string>
 	<string name="poi_nursing_home">Дом престарелых</string>
 	<string name="poi_baby_hatch">Бэби-бокс</string>
-	<string name="poi_veterinary">Ветеринарная лечебница</string>
+	<string name="poi_veterinary">Ветеринарная лечебница;Ветеринария</string>
 
 	<string name="poi_resort_type">Тип</string>
 	<string name="poi_sanatorium">Санаторий</string>
@@ -377,14 +377,14 @@
 	<string name="poi_company">Фирма</string>
 	<string name="poi_insurance">Страховая компания</string>
 	<string name="poi_estate_agent">Агентство недвижимости</string>
-	<string name="poi_lawyer">Юридические услуги</string>
+	<string name="poi_lawyer">Юридические услуги;Юрист</string>
 	<string name="poi_office_telecommunication">Телекоммуникационная компания</string>
 	<string name="poi_ngo">Общественная организация</string>
 	<string name="poi_townhall">Администрация населенного пункта</string>
 	<string name="poi_employment_agency">Биржа труда</string>
 	<string name="poi_research">Исследовательский центр</string>
 	<string name="poi_it">Информационные технологии</string>
-	<string name="poi_newspaper">Печатное издание</string>
+	<string name="poi_newspaper">Печатное издание;Офис газеты</string>
 	<string name="poi_architect">Архитектура, офис</string>
 	<string name="poi_advertising_agency">Рекламное агентство</string>
 	<string name="poi_educational_institution">Образовательное учреждение (администрация)</string>
