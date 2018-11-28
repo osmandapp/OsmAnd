@@ -70,7 +70,7 @@ import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
 

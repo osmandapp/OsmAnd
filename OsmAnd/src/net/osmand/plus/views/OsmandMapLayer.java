@@ -13,6 +13,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Pair;
 import android.view.MotionEvent;
 
 import net.osmand.binary.BinaryMapIndexReader;
@@ -137,14 +138,25 @@ public abstract class OsmandMapLayer {
 		return x >= lx && x <= rx && y >= ty && y <= by;
 	}
 
-
 	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, Path path) {
+		List<Pair<Path, Integer>> paths = new ArrayList<>();
+		int res = calculatePath(tb, xs, ys, null, paths);
+		if (paths.size() > 0) {
+			path.addPath(paths.get(0).first);
+		}
+		return res;
+	}
+
+	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, List<Integer> colors, List<Pair<Path, Integer>> paths) {
 		boolean segmentStarted = false;
 		int prevX = xs.get(0);
 		int prevY = ys.get(0);
 		int height = tb.getPixHeight();
 		int width = tb.getPixWidth();
 		int cnt = 0;
+		boolean hasColors = colors != null && colors.size() == xs.size();
+		int color = hasColors ? colors.get(0) : 0;
+		Path path = new Path();
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
 		for (int i = 1; i < xs.size(); i++) {
 			int currX = xs.get(i);
@@ -186,6 +198,21 @@ public abstract class OsmandMapLayer {
 			prevIn = currIn;
 			prevX = currX;
 			prevY = currY;
+
+			if (hasColors) {
+				int newColor = colors.get(i);
+				if (color != newColor) {
+					paths.add(new Pair<>(path, color));
+					path = new Path();
+					if (segmentStarted) {
+						path.moveTo(currX, currY);
+					}
+					color = newColor;
+				}
+			}
+		}
+		if (!path.isEmpty()) {
+			paths.add(new Pair<>(path, color));
 		}
 		return cnt;
 	}
@@ -383,6 +410,8 @@ public abstract class OsmandMapLayer {
 	protected static class RenderingLineAttributes {
 		protected int cachedHash;
 		public Paint paint;
+		public Paint customColorPaint;
+		public int customColor = 0;
 		public int defaultWidth = 0;
 		public int defaultColor = 0;
 		public boolean isPaint2;
@@ -402,6 +431,7 @@ public abstract class OsmandMapLayer {
 		public RenderingLineAttributes(String renderingAttribute) {
 			this.renderingAttribute = renderingAttribute;
 			paint = initPaint();
+			customColorPaint = new Paint(paint);
 			paint2 = initPaint();
 			paint3 = initPaint();
 			paint_1 = initPaint();
@@ -462,6 +492,7 @@ public abstract class OsmandMapLayer {
 					if (paint.getStrokeWidth() == 0 && defaultWidth != 0) {
 						paint.setStrokeWidth(defaultWidth);
 					}
+					customColorPaint = new Paint(paint);
 				}
 				return true;
 			}
@@ -486,7 +517,12 @@ public abstract class OsmandMapLayer {
 			if (isShadowPaint) {
 				canvas.drawPath(path, shadowPaint);
 			}
-			canvas.drawPath(path, paint);
+			if (customColor != 0) {
+				customColorPaint.setColor(customColor);
+				canvas.drawPath(path, customColorPaint);
+			} else {
+				canvas.drawPath(path, paint);
+			}
 			if (isPaint2) {
 				canvas.drawPath(path, paint2);
 			}

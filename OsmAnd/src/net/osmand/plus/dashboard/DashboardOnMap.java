@@ -80,7 +80,7 @@ import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
 import net.osmand.plus.osmedit.OsmNotesMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.srtmplugin.HillshadeMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;

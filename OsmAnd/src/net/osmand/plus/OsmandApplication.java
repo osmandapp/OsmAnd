@@ -57,6 +57,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -106,6 +107,7 @@ public class OsmandApplication extends MultiDexApplication {
 	PoiFiltersHelper poiFilters;
 	MapPoiTypes poiTypes;
 	RoutingHelper routingHelper;
+	TransportRoutingHelper transportRoutingHelper;
 	FavouritesDbHelper favorites;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
@@ -400,6 +402,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public RoutingHelper getRoutingHelper() {
 		return routingHelper;
+	}
+
+	public TransportRoutingHelper getTransportRoutingHelper() {
+		return transportRoutingHelper;
 	}
 
 	public RoutingOptionsHelper getRoutingOptionsHelper() {

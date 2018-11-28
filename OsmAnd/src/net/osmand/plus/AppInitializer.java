@@ -44,6 +44,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
@@ -458,6 +459,7 @@ public class AppInitializer implements IProgress {
 		app.applyTheme(app);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelper(app), InAppPurchaseHelper.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
+		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
 		app.resourceManager = startupInit(new ResourceManager(app), ResourceManager.class);
 		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);

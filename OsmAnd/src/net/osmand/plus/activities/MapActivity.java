@@ -110,9 +110,11 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -439,7 +441,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
 
-		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
+		final RouteCalculationProgressCallback progressCallback = new RouteCalculationProgressCallback() {
 
 			@Override
 			public void start() {
@@ -500,6 +502,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
+			}
+		};
+
+		app.getRoutingHelper().setProgressBar(progressCallback);
+
+		app.getTransportRoutingHelper().setProgressBar(new TransportRouteCalculationProgressCallback() {
+			@Override
+			public void start() {
+				progressCallback.start();
+			}
+
+			@Override
+			public void updateProgress(int progress) {
+				progressCallback.updateProgress(progress);
+			}
+
+			@Override
+			public void finish() {
+				progressCallback.finish();
 			}
 		});
 	}

@@ -108,7 +108,8 @@ public class ResourceManager {
 		TRANSPORT,
 		ADDRESS,
 		QUICK_SEARCH, 
-		ROUTING
+		ROUTING,
+		TRANSPORT_ROUTING
 	}
 	
 	public static class BinaryMapReaderResource {
@@ -998,7 +999,20 @@ public class ResourceManager {
 		}
 		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
 	}
-	
+
+	public BinaryMapIndexReader[] getTransportRoutingMapFiles() {
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for(BinaryMapReaderResource r : fileReaders.values()) {
+			if(r.isUseForRouting()) {
+				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.TRANSPORT_ROUTING);
+				if (reader != null) {
+					readers.add(reader);
+				}
+			}
+		}
+		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
+	}
+
 	public BinaryMapIndexReader[] getQuickSearchFiles() {
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for(BinaryMapReaderResource r : fileReaders.values()) {
