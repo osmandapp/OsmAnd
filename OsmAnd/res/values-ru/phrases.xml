@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources> 
 	<string name="poi_bakery">Булочная</string>
-	<string name="poi_alcohol">Винно-водочный магазин;Алкоголь</string>
+	<string name="poi_alcohol">Вино-водочный магазин;Алкоголь</string>
 	<string name="poi_convenience">Продукты</string>
 	<string name="poi_mall">Торговый центр</string>
 	<string name="poi_beverages">Напитки</string>
