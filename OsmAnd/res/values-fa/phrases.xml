@@ -1146,7 +1146,7 @@
 	<string name="poi_cuisine_grill">توری (گریل)</string>
 	<string name="poi_cuisine_tea">چای</string>
 	<string name="poi_cuisine_soup">سوپ</string>
-	<string name="poi_tourism_yes">چیز گردشگری</string>
+	<string name="poi_tourism_yes">نقطهٔ گردشگری</string>
 	<string name="poi_internet_access_no">دسترسی اینترنت: ندارد</string>
 	<string name="poi_internet_access_fee_no">دسترسی اینترنت - رایگان</string>
 
@@ -1288,4 +1288,17 @@
 
 	<string name="poi_site_type_city">شهر</string>
 	<string name="poi_map_size_city">اندازهٔ نقشه: شهر</string>
+	<string name="poi_material_wood">جنس: چوب</string>
+	<string name="poi_material_metal">جنس: فلز</string>
+	<string name="poi_material_concrete">جنس: بتن</string>
+	<string name="poi_material_steel">جنس: فولاد</string>
+	<string name="poi_material_stone">جنس: سنگ</string>
+	<string name="poi_material_brick">جنس: آجر</string>
+	<string name="poi_material_plastic">جنس: پلاستیک</string>
+	<string name="poi_material_granite_stone">جنس: سنگ گرانیت</string>
+	<string name="poi_material_metal_wood">جنس: فلز، چوب</string>
+	<string name="poi_material_glass">جنس: شیشه</string>
+	<string name="poi_material_bronze">جنس: برنز</string>
+	<string name="poi_material_aluminium">جنس: آلومینیوم</string>
+
 	</resources>
