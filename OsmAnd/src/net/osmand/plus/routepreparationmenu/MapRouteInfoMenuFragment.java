@@ -747,12 +747,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
 				textViewExProgress.percent = 1;
 				imageViewExProgress.percent = 1;
-			} else {
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					view.findViewById(R.id.start_button).setBackground(null);
-				} else {
-					view.findViewById(R.id.start_button).setBackgroundDrawable(null);
-				}
 			}
 		}
 	}

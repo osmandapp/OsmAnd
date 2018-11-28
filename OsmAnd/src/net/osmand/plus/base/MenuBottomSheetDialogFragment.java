@@ -90,24 +90,29 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				dismiss();
 			}
 		});
-		((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
+		if (hideButtonsContainer()) {
+			mainView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
+			mainView.findViewById(R.id.buttons_container).setVisibility(View.GONE);
+		} else {
+			((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
 
-		int rightBottomButtonTextId = getRightBottomButtonTextId();
-		if (rightBottomButtonTextId != DEFAULT_VALUE) {
-			View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
-			buttonsDivider.setVisibility(View.VISIBLE);
-			if (bottomDividerColorId != DEFAULT_VALUE) {
-				buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
-			}
-			View rightButton = mainView.findViewById(R.id.right_bottom_button);
-			rightButton.setVisibility(View.VISIBLE);
-			rightButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onRightBottomButtonClick();
+			int rightBottomButtonTextId = getRightBottomButtonTextId();
+			if (rightBottomButtonTextId != DEFAULT_VALUE) {
+				View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
+				buttonsDivider.setVisibility(View.VISIBLE);
+				if (bottomDividerColorId != DEFAULT_VALUE) {
+					buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
 				}
-			});
-			((TextView) rightButton.findViewById(R.id.right_bottom_button_text)).setText(rightBottomButtonTextId);
+				View rightButton = mainView.findViewById(R.id.right_bottom_button);
+				rightButton.setVisibility(View.VISIBLE);
+				rightButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onRightBottomButtonClick();
+					}
+				});
+				((TextView) rightButton.findViewById(R.id.right_bottom_button_text)).setText(rightBottomButtonTextId);
+			}
 		}
 
 		setupHeightAndBackground(mainView);
@@ -213,6 +218,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected boolean useScrollableItemsContainer() {
 		return true;
+	}
+
+	protected boolean hideButtonsContainer() {
+		return false;
 	}
 
 	@ColorRes

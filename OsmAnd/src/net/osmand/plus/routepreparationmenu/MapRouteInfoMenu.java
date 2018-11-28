@@ -15,7 +15,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -73,7 +72,6 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.GeneralRouter;
 
 import java.lang.ref.WeakReference;
@@ -98,7 +96,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	public static int directionInfo = -1;
 	public static boolean controlVisible = false;
-	private final MapContextMenu contextMenu;
 	private final RoutingHelper routingHelper;
 	private final RoutingOptionsHelper routingOptionsHelper;
 	private GeocodingLookupService geocodingLookupService;
@@ -127,11 +124,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private int currentMenuState;
 	private boolean portraitMode;
 	private GPXUtilities.GPXFile gpx;
-	private View view;
-	private ListView listView;
 	private GpxUiHelper.OrderedLineDataSet elevationDataSet;
 	private GpxUiHelper.OrderedLineDataSet slopeDataSet;
-	private boolean hasHeights;
 
 	private static final long SPINNER_MY_LOCATION_ID = 1;
 	public static final long SPINNER_FAV_ID = 2;
@@ -153,7 +147,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.mapControlsLayer = mapControlsLayer;
-		contextMenu = mapActivity.getContextMenu();
 		routingHelper = mapActivity.getRoutingHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 		routingHelper.addListener(this);
@@ -735,6 +728,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 							if (parameter.routingParameter != null) {
 								boolean selected = parameter.isSelected(settings);
 								routingOptionsHelper.applyRoutingParameter(parameter, !selected);
+
+								Drawable itemDrawable = app.getUIUtilities().getIcon(R.drawable.mx_amenity_fuel, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+								Drawable activeItemDrawable = app.getUIUtilities().getIcon(R.drawable.mx_amenity_fuel, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+
+								if (Build.VERSION.SDK_INT >= 21) {
+									itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
+								}
+								((ImageView) v.findViewById(R.id.route_option_image_view)).setImageDrawable(!selected ? activeItemDrawable : itemDrawable);
 								((TextView) v.findViewById(R.id.route_option_title)).setTextColor(parameter.isSelected(settings) ? colorActive : colorDisabled);
 							}
 						}

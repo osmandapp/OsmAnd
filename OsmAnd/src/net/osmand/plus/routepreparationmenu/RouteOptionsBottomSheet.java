@@ -40,7 +40,6 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherSettingsRo
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteSimulationItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
 
 import java.util.ArrayList;
@@ -55,11 +54,11 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	private MapActivity mapActivity;
-	private MapControlsLayer controlsLayer;
 	private RoutingHelper routingHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 	private ApplicationMode applicationMode;
+	private MapActivity mapActivity;
+	private MapRouteInfoMenu mapRouteInfoMenu;
 
 
 	@Override
@@ -75,8 +74,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-
 		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 
 		List<LocalRoutingParameter> list = new ArrayList<>();
@@ -107,6 +104,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 								settings.VOICE_MUTE.set(mt);
 								routingHelper.getVoiceRouter().setMute(mt);
 								muteSoundRoutingParameter[0].setChecked(!routingHelper.getVoiceRouter().isMute());
+								updateMenu();
 							}
 						})
 						.create();
@@ -121,7 +119,21 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 							@Override
 							public void onClick(View view) {
 								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-								Toast.makeText(app, getText(R.string.show_along_the_route), Toast.LENGTH_LONG).show();
+								if (!routingHelper.isRouteCalculated()) {
+									Toast.makeText(app, getText(R.string.show_along_the_route), Toast.LENGTH_LONG).show();
+									return;
+								}
+								FragmentManager fm = getFragmentManager();
+								if (fm == null) {
+									return;
+								}
+								Bundle args = new Bundle();
+								ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
+								fragment.setUsedOnMap(false);
+								fragment.setArguments(args);
+								fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
+								fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
+								updateMenu();
 							}
 						})
 						.create();
@@ -156,6 +168,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 								AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
 								avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 								avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
+								updateMenu();
 							}
 						})
 						.create();
@@ -172,6 +185,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 								AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
 								avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 								avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
+								updateMenu();
 							}
 						})
 						.create();
@@ -254,6 +268,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 								if (selected != null) {
 									item[0].setDescription(selected.getText(mapActivity));
 								}
+								updateMenu();
 							}
 						});
 					}
@@ -276,6 +291,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						boolean selected = parameter.isSelected(settings);
 						routingOptionsHelper.applyRoutingParameter(parameter, !selected);
 						item[0].setChecked(!selected);
+						updateMenu();
 					}
 				});
 			}
@@ -290,6 +306,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (requestCode == AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE
 				&& resultCode == AvoidRoadsBottomSheetDialogFragment.OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE) {
 			dismiss();
+		}
+		if (requestCode == ShowAlongTheRouteBottomSheet.REQUEST_CODE
+				&& resultCode == ShowAlongTheRouteBottomSheet.SHOW_CONTENT_ITEM_REQUEST_CODE) {
+			dismiss();
+		}
+	}
+
+	private void updateMenu(){
+		final MapRouteInfoMenu mapRouteInfoMenu = getMapActivity().getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+		if (mapRouteInfoMenu != null) {
+			mapRouteInfoMenu.updateMenu();
 		}
 	}
 
