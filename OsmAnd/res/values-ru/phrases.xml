@@ -398,10 +398,10 @@
 	<string name="poi_tax_advisor">Специалист по подготовке налоговых деклараций</string>
 
 	<string name="poi_stadium">Стадион</string>
-	<string name="poi_sports_centre">Спортивный центр</string>
+	<string name="poi_sports_centre">Спортивный центр;Спортцентр</string>
 	<string name="poi_golf_course">Поле для гольфа</string>
 	<string name="poi_ice_rink">Каток</string>
-	<string name="poi_pitch">Спортивная площадка, поле, корт</string>
+	<string name="poi_pitch">Спортивная площадка, поле, корт;Спортплощадка</string>
 	<string name="poi_running_track">Беговая дорожка</string>
 	<string name="poi_bicycle_track">Велотрек</string>
 	<string name="poi_horse_track">Ипподром</string>
@@ -421,7 +421,7 @@
 	<string name="poi_climbing">Скалолазание</string>
 	<string name="poi_cricket">Крикет</string>
 	<string name="poi_croquet">Крокет</string>
-	<string name="poi_cycling">Велосипедный спорт</string>
+	<string name="poi_cycling">Велосипедный спорт;Велоспорт</string>
 	<string name="poi_diving">Прыжки в воду</string>
 	<string name="poi_scuba_diving">Плавание с аквалангом</string>
 	<string name="poi_dog_racing">Собачьи бега</string>
@@ -464,7 +464,7 @@
 	<string name="poi_archaeological_site">Археологические раскопки</string>
 	<string name="poi_battlefield">Поле битвы</string>
 	<string name="poi_boundary_stone">Межевой камень</string>
-	<string name="poi_castle">Замок</string>
+	<string name="poi_castle">Замок;Крепость</string>
 	<string name="poi_city_gate">Городские ворота</string>
 	<string name="poi_fort">Фортификационные сооружения</string>
 	<string name="poi_fountain">Фонтан</string>
@@ -477,7 +477,7 @@
 	<string name="poi_zoo">Зоопарк</string>
 	<string name="poi_theme_park">Парк развлечений</string>
 
-	<string name="poi_hotel">Гостиница, отель</string>
+	<string name="poi_hotel">Гостиница;Отель</string>
 	<string name="poi_guest_house">Гостевой дом</string>
 	<string name="poi_hostel">Хостел</string>
 	<string name="poi_motel">Мотель</string>
@@ -649,7 +649,7 @@
 	<string name="poi_bitcoin_yes">Оплата bitcoin</string>
 
 	<string name="poi_cave_entrance">Вход в пещеру</string>
-	<string name="poi_peak">Горная вершина</string>
+	<string name="poi_peak">Горная вершина;Пик</string>
 	<string name="poi_saddle">Седловая точка (перевал)</string>
 	<string name="poi_volcano">Вулкан</string>
 	<string name="poi_crater">Кратер</string>
@@ -720,7 +720,7 @@
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
-	<string name="poi_suburb">Пригород (suburb)</string>
+	<string name="poi_suburb">Пригород</string>
 	<string name="poi_isolated_dwelling">Хутор</string>
 	<string name="poi_locality">Урочище</string>
 
@@ -745,7 +745,7 @@
 	<string name="poi_bmx">Веломотокросс</string>
 	<string name="poi_canadian_football">Канадский футбол</string>
 	<string name="poi_surfing">Серфинг</string>
-	<string name="poi_historic_cannon">Исторические пушки</string>
+	<string name="poi_historic_cannon">Историческая пушка</string>
 	<string name="poi_harbour">Гавань</string>
 	<string name="poi_attraction_big_wheel">Колесо обозрения</string>
 	<string name="poi_attraction_carousel">Карусель</string>
@@ -832,7 +832,7 @@
 	<string name="poi_piste_sleigh">Трасса для санных повозок</string>
 	<string name="poi_piste_playground">Зимняя игровая площадка</string>
 	<string name="poi_ski_rental">Прокат лыж</string>
-	<string name="poi_smoking_area">Место для курения</string>
+	<string name="poi_smoking_area">Место для курения;Курилка</string>
 	<string name="poi_canal">Канал</string>
 	<string name="poi_water">Вода</string>
 	<string name="poi_wood">Лес</string>
@@ -852,7 +852,7 @@
 	<string name="poi_fuel_cng">Метан (CNG)</string>
 	<string name="poi_fuel_1_25">Смесь 1:25</string>
 	<string name="poi_fuel_1_50">Смесь 1:50</string>
-	<string name="poi_photo">Фото магазин</string>
+	<string name="poi_photo">Фотомагазин</string>
 	<string name="poi_power">Энергетика</string>
 		<string name="poi_landuse">Землепользование</string>
 	<string name="poi_craft">Мастерские</string>
@@ -1146,10 +1146,10 @@
 	<string name="poi_garden">Сад</string>
 
 	<string name="poi_heath">Пустошь</string>
-	<string name="poi_grass">Газон</string>
+	<string name="poi_grass">Газон;Трава</string>
 	<string name="poi_grassland">Луг</string>
-	<string name="poi_scrub">Заросли кустарника</string>
-	<string name="poi_farmland">Сельскохозяйственные угодья</string>
+	<string name="poi_scrub">Заросли кустарника;Кусты</string>
+	<string name="poi_farmland">Сельскохозяйственные угодья;Сельхозугодья</string>
 	<string name="poi_logging">Вырубка</string>
 	<string name="poi_sand">Песок</string>
 	<string name="poi_village_green">Общественная территория</string>
@@ -1171,7 +1171,7 @@
 	<string name="poi_breakwater">Волнорез</string>
 	<string name="poi_groyne">Мол</string>
 
-	<string name="poi_animal_shelter">Приют для животных</string>
+	<string name="poi_animal_shelter">Приют для животных;Приют для бездомных животных</string>
 
 	<string name="poi_animal_shelter_dog">Собаки</string>
 	<string name="poi_animal_shelter_cat">Кошки</string>
