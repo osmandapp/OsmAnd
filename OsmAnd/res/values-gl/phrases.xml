@@ -1003,7 +1003,7 @@
 	<string name="poi_capacity_parent">Lugares reservados para familias</string>
 
 	<string name="poi_aerialway_capacity">Capacidade por hora</string>
-	<string name="poi_aerialway_duration">Tempo medio de viaxe, minutos</string>
+	<string name="poi_aerialway_duration">Tempo medio da viaxe, minutos</string>
 	<string name="poi_aerialway_heating_yes">Si</string>
 	<string name="poi_aerialway_heating_no">Sen calefación</string>
 	<string name="poi_aerialway_bicycle_yes">Permitido</string>
