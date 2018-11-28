@@ -2518,7 +2518,7 @@ Lon %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Insire o nome do usuario</string>
     <string name="mapillary_menu_descr_username">Ollar só imaxes engadidas por</string>
     <string name="mapillary_menu_title_username">Nome de usuario</string>
-    <string name="mapillary_menu_filter_description">Filtrar imaxes polo usuario ou por data. Só activado nos primeiros achegamentos.</string>
+    <string name="mapillary_menu_filter_description">Filtrar imaxes polo usuario, pola data ou polo tipo. Só activado nos primeiros achegamentos.</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">O OsmAnd non pode importa-lo ficheiro. Comprobe se o OsmAnd ten permiso para ler o ficheiro neste sitio.</string>
     <string name="distance_moving">Distancia corrixida</string>
@@ -3155,4 +3155,6 @@ Lon %2$s</string>
     <string name="osm_live_payment_header">Escolla o período de pagamento convinte para vostede:</string>
     <string name="osm_live_payment_contribute_descr">Un anaco dos ingresos vai ós contribuíntes do OpenStreetMap.</string>
     <string name="powered_by_osmand">Desenvolvido polo OsmAnd</string>
+    <string name="osm_live_subscriptions">Subscricións</string>
+    <string name="mapillary_menu_title_pano">Amosar só imaxes 360°</string>
     </resources>
