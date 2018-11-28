@@ -21,24 +21,28 @@ public class SearchResult {
 	public Collection<String> otherWordsMatch = null;
 	public boolean firstUnknownWordMatches = true;
 	public boolean unknownPhraseMatches = false;
-	
-	
+
+	public boolean isUnknownPhraseMatches() {
+		boolean res = unknownPhraseMatches;
+		if (!res && parentSearchResult != null) {
+			res = parentSearchResult.unknownPhraseMatches;
+		}
+		return res;
+	}
+
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
 	}
 	
 	public int getFoundWordCount() {
 		int inc = 0;
-		if(firstUnknownWordMatches) {
+		if (firstUnknownWordMatches) {
 			inc = 1;
 		}
-		if (unknownPhraseMatches) {
-			inc += 1000;
-		}
-		if(otherWordsMatch != null) {
+		if (otherWordsMatch != null) {
 			inc += otherWordsMatch.size();
 		}
-		if(parentSearchResult != null) {
+		if (parentSearchResult != null) {
 			inc += parentSearchResult.getFoundWordCount();
 		}
 		return inc;

@@ -48,7 +48,8 @@ public class SearchPhrase {
 	private static final String ALLDELIMITERS = "\\s|,";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private Collator clt;
-	
+	private static Comparator<String> commonWordsComparator;
+
 	private static Set<String> conjunctions = new TreeSet<>();
 	static {
 		// the
@@ -111,6 +112,20 @@ public class SearchPhrase {
 		conjunctions.add("den");
 		conjunctions.add("dr");
 		conjunctions.add("y");
+
+		commonWordsComparator = new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
+				int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
+				if (i1 != i2) {
+					return icompare(i1, i2);
+				}
+				// compare length without numbers to not include house numbers
+				return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
+			}
+		};
 	}
 	
 	
@@ -142,7 +157,7 @@ public class SearchPhrase {
 		for(SearchWord w : leftWords) {
 			if(restText.startsWith(w.getWord() + DELIMITER)) {
 				sp.words.add(w);
-				restText = restText.substring(w.getWord().length() + DELIMITER.length()).trim();
+				restText = restText.substring(w.getWord().length() + DELIMITER.length());
 			} else {
 				break;
 			}
@@ -746,42 +761,32 @@ public class SearchPhrase {
 		}
 		return getUnknownSearchWord();
 	}
-	
+
+	private static int lengthWithoutNumbers(String s) {
+		int len = 0;
+		for(int k = 0; k < s.length(); k++) {
+			if (s.charAt(k) >= '0' && s.charAt(k) <= '9') {
+
+			} else {
+				len++;
+			}
+		}
+		return len;
+	}
+
 	public String getUnknownWordToSearch() {
 		List<String> unknownSearchWords = getUnknownSearchWords();
-		
 		String wordToSearch = getUnknownSearchWord();
 		if (unknownSearchWords.size() > 0) {
 			List<String> searchWords = new ArrayList<>(unknownSearchWords);
 			searchWords.add(0, getUnknownSearchWord());
-			Collections.sort(searchWords, new Comparator<String>() {
-
-				private int lengthWithoutNumbers(String s) {
-					int len = 0;
-					for(int k = 0; k < s.length(); k++) {
-						if(s.charAt(k) >= '0' && s.charAt(k) <= '9') {
-							
-						} else {
-							len++;
-						}
-					}
-					return len;
+			Collections.sort(searchWords, commonWordsComparator);
+			for (String s : searchWords) {
+				if (s.length() > 0 && !Character.isDigit(s.charAt(0))) {
+					return s;
 				}
-				
-				@Override
-				public int compare(String o1, String o2) {
-					int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
-					int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
-					if (i1 != i2) {
-						return icompare(i1, i2);
-					}
-					// compare length without numbers to not include house numbers
-					return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
-				}
-			});						
-			wordToSearch = searchWords.get(0);
+			}
 		}
-
 		return wordToSearch;
 	}
 

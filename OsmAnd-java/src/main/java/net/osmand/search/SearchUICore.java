@@ -731,9 +731,12 @@ public class SearchUICore {
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
-			if (!ObjectType.isTopVisible(o1.objectType) && !ObjectType.isTopVisible(o2.objectType)
-					&& o1.getFoundWordCount() != o2.getFoundWordCount()) {
-				return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
+			if (!ObjectType.isTopVisible(o1.objectType) && !ObjectType.isTopVisible(o2.objectType)) {
+				if (o1.isUnknownPhraseMatches() != o2.isUnknownPhraseMatches()) {
+					return o1.isUnknownPhraseMatches() ? -1 : 1;
+				} else if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
+					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
+				}
 			}
 			if (!sortByName) {
 				double s1 = o1.getSearchDistance(loc);
@@ -747,6 +750,17 @@ public class SearchUICore {
 			int st2 = Algorithms.extractFirstIntegerNumber(o2.localeName);
 			if (st1 != st2) {
 				return Algorithms.compare(st1, st2);
+			}
+			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
+				if (o1.parentSearchResult == o2.parentSearchResult) {
+					int cmp = collator.compare(o1.localeName, o2.localeName);
+					if (cmp != 0) {
+						return cmp;
+					}
+				}
+				double s1 = o1.getSearchDistance(loc, 1);
+				double s2 = o2.getSearchDistance(loc, 1);
+				return Double.compare(s1, s2);
 			}
 			int cmp = collator.compare(o1.localeName, o2.localeName);
 			if (cmp != 0) {
