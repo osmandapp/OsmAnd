@@ -3019,4 +3019,6 @@
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Выберите удобный для вас период оплаты:</string>
     <string name="osm_live_payment_contribute_descr">Часть доходов поступает участникам OpenStreetMap.</string>
+    <string name="osm_live_subscriptions">Подписки</string>
+    <string name="powered_by_osmand">Работает на OsmAnd</string>
     </resources>
