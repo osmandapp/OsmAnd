@@ -2990,7 +2990,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="coord_input_save_as_track_descr">Du lade till %1$s punkter. Skriv ett filnamn och tryck sedan på \"Spara\".</string>
     <string name="error_notification_desc">Skicka gärna en skärmdump av detta meddelande till support@osmand.net</string>
     <string name="quick_action_edit_actions">Redigera åtgärder</string>
-    <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla features: Dagliga kartuppdateringar med obegränsat antal nedladdningar, alla betal-och gratistillägg, Wikipedia, Wikivoyage och mycket mer.</string>
+    <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla funktioner: Dagliga kartuppdateringar med obegränsat antal hämtningar, alla betal-och gratistillägg, Wikipedia, Wikivoyage och mycket mer.</string>
     <string name="unirs_render_descr">Ändring av standardstilen för att öka kontrasten av gång och cykelvägar. Använder färger från tidigare versioner av Mapink.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="release_3_0">"• Nyhet: Stöd för globala frånkopplade  reseguider. Refererade platser är länkade till kartan. Datan kommer initialt från Wikivoyage. 
