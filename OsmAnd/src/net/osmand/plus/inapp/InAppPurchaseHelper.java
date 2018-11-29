@@ -317,6 +317,58 @@ public class InAppPurchaseHelper {
 			 * verifyDeveloperPayload().
 			 */
 
+			List<String> allOwnedSubscriptionSkus = inventory.getAllOwnedSkus(ITEM_TYPE_SUBS);
+			for (InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
+				if (inventory.hasDetails(p.getSku())) {
+					Purchase purchase = inventory.getPurchase(p.getSku());
+					SkuDetails liveUpdatesDetails = inventory.getSkuDetails(p.getSku());
+					fetchInAppPurchase(p, liveUpdatesDetails, purchase);
+					allOwnedSubscriptionSkus.remove(p.getSku());
+				}
+			}
+			for (String sku : allOwnedSubscriptionSkus) {
+				Purchase purchase = inventory.getPurchase(sku);
+				SkuDetails liveUpdatesDetails = inventory.getSkuDetails(sku);
+				InAppSubscription s = getLiveUpdates().upgradeSubscription(sku);
+				if (s == null) {
+					s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
+				}
+				fetchInAppPurchase(s, liveUpdatesDetails, purchase);
+			}
+
+			InAppPurchase fullVersion = getFullVersion();
+			if (inventory.hasDetails(fullVersion.getSku())) {
+				Purchase purchase = inventory.getPurchase(fullVersion.getSku());
+				SkuDetails fullPriceDetails = inventory.getSkuDetails(fullVersion.getSku());
+				fetchInAppPurchase(fullVersion, fullPriceDetails, purchase);
+			}
+
+			InAppPurchase depthContours = getDepthContours();
+			if (inventory.hasDetails(depthContours.getSku())) {
+				Purchase purchase = inventory.getPurchase(depthContours.getSku());
+				SkuDetails depthContoursDetails = inventory.getSkuDetails(depthContours.getSku());
+				fetchInAppPurchase(depthContours, depthContoursDetails, purchase);
+			}
+
+			InAppPurchase contourLines = getContourLines();
+			if (inventory.hasDetails(contourLines.getSku())) {
+				Purchase purchase = inventory.getPurchase(contourLines.getSku());
+				SkuDetails contourLinesDetails = inventory.getSkuDetails(contourLines.getSku());
+				fetchInAppPurchase(contourLines, contourLinesDetails, purchase);
+			}
+
+			Purchase fullVersionPurchase = inventory.getPurchase(fullVersion.getSku());
+			boolean fullVersionPurchased = (fullVersionPurchase != null && fullVersionPurchase.getPurchaseState() == 0);
+			if (fullVersionPurchased) {
+				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+			}
+
+			Purchase depthContoursPurchase = inventory.getPurchase(depthContours.getSku());
+			boolean depthContoursPurchased = (depthContoursPurchase != null && depthContoursPurchase.getPurchaseState() == 0);
+			if (depthContoursPurchased) {
+				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+			}
+
 			// Do we have the live updates?
 			boolean subscribedToLiveUpdates = false;
 			List<Purchase> liveUpdatesPurchases = new ArrayList<>();
@@ -346,58 +398,10 @@ public class InAppPurchaseHelper {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
 
-			InAppPurchase fullVersion = getFullVersion();
-			Purchase fullVersionPurchase = inventory.getPurchase(fullVersion.getSku());
-			boolean fullVersionPurchased = (fullVersionPurchase != null && fullVersionPurchase.getPurchaseState() == 0);
-			if (fullVersionPurchased) {
-				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
-			}
-
-			InAppPurchase depthContours = getDepthContours();
-			Purchase depthContoursPurchase = inventory.getPurchase(depthContours.getSku());
-			boolean depthContoursPurchased = (depthContoursPurchase != null && depthContoursPurchase.getPurchaseState() == 0);
-			if (depthContoursPurchased) {
-				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
-			}
-
 			lastValidationCheckTime = System.currentTimeMillis();
 			logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
 
-			List<String> allOwnedSubscriptionSkus = inventory.getAllOwnedSkus(ITEM_TYPE_SUBS);
-			for (InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
-				if (inventory.hasDetails(p.getSku())) {
-					Purchase purchase = inventory.getPurchase(p.getSku());
-					SkuDetails liveUpdatesDetails = inventory.getSkuDetails(p.getSku());
-					fetchInAppPurchase(p, liveUpdatesDetails, purchase);
-					allOwnedSubscriptionSkus.remove(p.getSku());
-				}
-			}
-			for (String sku : allOwnedSubscriptionSkus) {
-				Purchase purchase = inventory.getPurchase(sku);
-				SkuDetails liveUpdatesDetails = inventory.getSkuDetails(sku);
-				InAppSubscription s = getLiveUpdates().upgradeSubscription(sku);
-				if (s == null) {
-					s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
-				}
-				fetchInAppPurchase(s, liveUpdatesDetails, purchase);
-			}
-			if (inventory.hasDetails(fullVersion.getSku())) {
-				Purchase purchase = inventory.getPurchase(fullVersion.getSku());
-				SkuDetails fullPriceDetails = inventory.getSkuDetails(fullVersion.getSku());
-				fetchInAppPurchase(fullVersion, fullPriceDetails, purchase);
-			}
-			if (inventory.hasDetails(depthContours.getSku())) {
-				Purchase purchase = inventory.getPurchase(depthContours.getSku());
-				SkuDetails depthContoursDetails = inventory.getSkuDetails(depthContours.getSku());
-				fetchInAppPurchase(depthContours, depthContoursDetails, purchase);
-			}
-			InAppPurchase contourLines = getContourLines();
-			if (inventory.hasDetails(contourLines.getSku())) {
-				Purchase purchase = inventory.getPurchase(contourLines.getSku());
-				SkuDetails contourLinesDetails = inventory.getSkuDetails(contourLines.getSku());
-				fetchInAppPurchase(contourLines, contourLinesDetails, purchase);
-			}
 			OsmandSettings settings = ctx.getSettings();
 			settings.INAPPS_READ.set(true);
 

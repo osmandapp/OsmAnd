@@ -255,15 +255,16 @@ public class InAppPurchases {
 
 		private NumberFormat currencyFormatter;
 
-		private InAppPurchase(String sku) {
+		private InAppPurchase(@NonNull String sku) {
 			this.sku = sku;
 		}
 
-		private InAppPurchase(String sku, boolean discounted) {
+		private InAppPurchase(@NonNull String sku, boolean discounted) {
 			this(sku);
 			this.discounted = discounted;
 		}
 
+		@NonNull
 		public String getSku() {
 			return sku;
 		}
@@ -432,7 +433,7 @@ public class InAppPurchases {
 		InAppSubscription upgradeSubscription(@NonNull String sku) {
 			InAppSubscription s = null;
 			if (!upgrade) {
-				s = upgrades.get(sku);
+				s = getSku().equals(sku) ? this : upgrades.get(sku);
 				if (s == null) {
 					s = newInstance(sku);
 					if (s != null) {
