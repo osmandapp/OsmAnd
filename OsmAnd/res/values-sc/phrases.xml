@@ -3905,7 +3905,7 @@
 	<string name="poi_substation_type">Casta</string>
 
 <string name="poi_bulk_purchase_yes">Eja</string>
-	<string name="poi_bulk_purchase_only">Compora a s\'ingrossu: petzi</string>
+	<string name="poi_bulk_purchase_only">Petzi</string>
 
 	<string name="poi_pipeline_substation">Sutaistatzione de sas condutas</string>
 	<string name="poi_substation_transmission">Trasmissione</string>
