@@ -278,6 +278,14 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			routingHelper.recalculateRouteDueToSettingsChange();
 		}
 
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			final MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+			if (mapRouteInfoMenu != null) {
+				mapRouteInfoMenu.updateMenu();
+			}
+		}
+
 		dismiss();
 	}
 
