@@ -3203,9 +3203,9 @@
 	<string name="poi_map_type_street">Tipo de mapa: rua</string>
 	<string name="poi_map_type_scheme">Tipo de mapa: esquema</string>
 	<string name="poi_map_type_toposcope">Tipo de mapa: toposcópio</string>
-	<string name="poi_map_size_site">Tamanho do mapa: local</string>
-	<string name="poi_map_size_city">Tamanho do mapa: cidade</string>
-	<string name="poi_map_size_region">Tamanho do mapa: região</string>
+	<string name="poi_map_size_site">Cobertura do mapa: local</string>
+	<string name="poi_map_size_city">Cobertura do mapa: cidade</string>
+	<string name="poi_map_size_region">Cobertura do mapa: região</string>
 
 	<string name="poi_charging_station_filter">Eletroposto</string>
 

@@ -2605,7 +2605,7 @@ Lon %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario o por fecha. Sólo activado en los primeros zooms.</string>
+    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario, fecha o tipo. Sólo activado en los primeros zooms.</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recarga las teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
@@ -2739,7 +2739,7 @@ Lon %2$s</string>
     <string name="wrong_format">Formato incorrecto</string>
     <string name="shared_string_view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
-	<string name="import_gpx_file_description">pueden importarse como Favoritos o como un archivo GPX.</string>
+	<string name="import_gpx_file_description">puede importarse como Favoritos o como un archivo GPX.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
@@ -3045,4 +3045,6 @@ Lon %2$s</string>
     <string name="osm_live_payment_header">Marca el período de pago más conveniente:</string>
     <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
     <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
+    <string name="osm_live_subscriptions">Suscripciones</string>
+    <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
     </resources>

@@ -110,7 +110,7 @@
 <string name="poi_ford">گدار</string>
 <string name="poi_mountain_pass">ایستگاه کوهستانی</string>
 <string name="poi_gate">دروازه</string>
-<string name="poi_city_wall">دیوار شهرستان</string>
+<string name="poi_city_wall">دیوار شهر</string>
 <string name="poi_lift_gate">دروازه آسانسور</string>
 <string name="poi_toll_booth">غرفه تلفن</string>
 <string name="poi_border_control">کنترل مرزی</string>
@@ -128,7 +128,7 @@
 <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
 <string name="poi_car_wash">کارواش</string>
 <string name="poi_fuel">پمپ بنزین</string>
-<string name="poi_electricity_combined_charging">باطریسازی</string>
+<string name="poi_electricity_combined_charging">ایستگاه شارژ</string>
 <string name="poi_vehicle_ramp">سطح شیب دار خودرو</string>
 <string name="poi_compressed_air">هوای فشرده</string>
 <string name="poi_parking">پارکینگ</string>
@@ -248,7 +248,7 @@
 <string name="poi_tax_inspection">اداره مالیات</string>
 <string name="poi_office_administrative">دفتر اجرایی</string>
 <string name="poi_customs">گمرک</string>
-<string name="poi_city">شهرستان</string>
+<string name="poi_city">شهر</string>
 <string name="poi_town">شهر</string>
 <string name="poi_village">روستا</string>
 <string name="poi_hamlet">دهکده</string>
@@ -309,37 +309,37 @@
 <string name="poi_running_track">مسیر پیاده روی</string>
 <string name="poi_bicycle_track">مسیر دوچرخه</string>
 <string name="poi_horse_track">مسیز سوارکاری</string>
-<string name="poi_raceway">جوی اب</string>
+<string name="poi_raceway">مسیر مسابقه</string>
 <string name="poi_9pin">بولینگ نه‌ماسوره‌ای</string>
 <string name="poi_10pin">بولینگ ده‌ماسوره‌ای</string>
 <string name="poi_archery">مرکز تیر اندازی</string>
 <string name="poi_athletics">سالن بدنسازی</string>
-<string name="poi_american_football">زمین فوتبال آمریکایی</string>
-<string name="poi_australian_football">زمین فوتبال استرالیا</string>
-<string name="poi_base">پیست دو میدانی</string>
-<string name="poi_baseball">زمین بیس بال</string>
-<string name="poi_basketball">زمین بسکتبال</string>
-<string name="poi_beachvolleyball">زمین والیبال ساحلی</string>
+<string name="poi_american_football">فوتبال آمریکایی</string>
+<string name="poi_australian_football">فوتبال استرالیایی</string>
+<string name="poi_base">پرش بیس</string>
+<string name="poi_baseball">بیس بال</string>
+<string name="poi_basketball">بسکتبال</string>
+<string name="poi_beachvolleyball">والیبال ساحلی</string>
 <string name="poi_bmx">پیست دوچرخه سواری</string>
 <string name="poi_boules">زمین بولینگ</string>
 <string name="poi_bowls">بولینگ</string>
-<string name="poi_canadian_football">زمین فوتبال کانادایی</string>
+<string name="poi_canadian_football">فوتبال کانادایی</string>
 <string name="poi_canoe">قایق رانی</string>
 <string name="poi_chess">میز شطرنج</string>
 <string name="poi_climbing">کوهنوردی</string>
-<string name="poi_cricket">زمین بازی کریکت</string>
+<string name="poi_cricket">کریکت</string>
 <string name="poi_croquet">زمین کروکت</string>
 <string name="poi_cycling">پیست دوچرخه سواری</string>
 <string name="poi_diving">غواصی</string>
 <string name="poi_scuba_diving">غواصی در عمق</string>
 <string name="poi_dog_racing">مسابقات حیوانات</string>
 <string name="poi_equestrian">مرکز سوارکاری</string>
-<string name="poi_golf">زمین گلف</string>
+<string name="poi_golf">گلف</string>
 <string name="poi_gymnastics">سالن ژیمناستیک</string>
-<string name="poi_handball">زمین هند بال</string>
-<string name="poi_hockey">زمین هاکی</string>
+<string name="poi_handball">هندبال</string>
+<string name="poi_hockey">هاکی</string>
 <string name="poi_horse_racing">پیست اسب دوانی</string>
-<string name="poi_ice_skating">زمین اسکیت روی یخ</string>
+<string name="poi_ice_skating">اسکیت روی یخ</string>
 <string name="poi_ice_stock">زمین یخ</string>
 <string name="poi_korfbal">زمین بسکتبال اسکاتلندی</string>
 <string name="poi_sport_motor">پیست موتور سواری</string>
@@ -363,7 +363,7 @@
 <string name="poi_table_tennis">تنیس روی میز</string>
 <string name="poi_tennis">تنیس</string>
 <string name="poi_toboggan">سورتمه سواری</string>
-<string name="poi_volleyball">زمین والیبال</string>
+<string name="poi_volleyball">والیبال</string>
 
 <string name="poi_museum">موزه</string>
 <string name="poi_memorial">بنای یادبود</string>
@@ -373,7 +373,7 @@
 <string name="poi_boundary_stone">سنگ یادبود</string>
 <string name="poi_historic_cannon">توپ تاریخی</string>
 <string name="poi_castle">قلعه</string>
-<string name="poi_city_gate">دروازه شهرستان</string>
+<string name="poi_city_gate">دروازه شهر</string>
 <string name="poi_fort">برج و بارو</string>
 <string name="poi_fountain">فواره</string>
 <string name="poi_historic_ruins">خرابه های تاریخی</string>
@@ -559,7 +559,7 @@
 <string name="poi_brothel"/>
 <string name="poi_mortuary">سردخانه مردگان</string>
 <string name="poi_crematorium">کوره جسد سوزی</string>
-<string name="poi_internet_cafe">کافی نت</string>
+<string name="poi_internet_cafe">کافی‌نت</string>
 
 <string name="poi_bank">بانک</string>
 <string name="poi_amenity_atm">ATM</string>
@@ -820,7 +820,7 @@
 	<string name="poi_tourism">گردشگری</string>
 	<string name="poi_sightseeing">دیدنی‌ها</string>
 	<string name="poi_accomodation">محل اسکان</string>
-	<string name="poi_internet_access">اینترنت</string>
+	<string name="poi_internet_access">دسترسی اینترنت</string>
 	<string name="poi_entertainment">اوقات فراغت</string>
 	<string name="poi_club">باشگاه</string>
 	<string name="poi_sustenance">غذا</string>
@@ -1146,9 +1146,9 @@
 	<string name="poi_cuisine_grill">توری (گریل)</string>
 	<string name="poi_cuisine_tea">چای</string>
 	<string name="poi_cuisine_soup">سوپ</string>
-	<string name="poi_tourism_yes">چیز گردشگری</string>
+	<string name="poi_tourism_yes">نقطهٔ گردشگری</string>
 	<string name="poi_internet_access_no">دسترسی اینترنت: ندارد</string>
-	<string name="poi_internet_access_fee_no">دسترسی اینترنت - بدون هزینه</string>
+	<string name="poi_internet_access_fee_no">دسترسی اینترنت - رایگان</string>
 
 	<string name="poi_fee_no">خیر</string>
 	<string name="poi_drinking_water_no">خیر</string>
@@ -1264,5 +1264,41 @@
 	<string name="poi_cuisine_jewish">کلیمی</string>
 	<string name="poi_cuisine_bulgarian">بلغاری</string>
 	<string name="poi_cuisine_tibetan">تبتی</string>
+
+	<string name="poi_internet_access_wlan">دسترسی اینترنت: بی‌سیم (وای‌فای)</string>
+	<string name="poi_internet_access_terminal">دسترسی اینترنت: پشت کامپیوتر</string>
+	<string name="poi_internet_access_wired">دسترسی اینترنت: با سیم</string>
+	<string name="poi_internet_access_public">دسترسی اینترنت: عمومی</string>
+	<string name="poi_internet_access_service">دسترسی اینترنت: با خدمات</string>
+	<string name="poi_internet_access_yes">دسترسی اینترنت: دارد</string>
+	<string name="poi_internet_access_fee_yes">دسترسی اینترنت - پولی</string>
+	<string name="poi_smoking_separated">در اتاق جداگانه</string>
+	<string name="poi_smoking_isolated">در اتاق ایزوله</string>
+	<string name="poi_piste_grooming_scooter">اسکوتر</string>
+	<string name="poi_piste_grooming_skating">اسکیت</string>
+	<string name="poi_rooms">اتاق‌ها</string>
+
+	<string name="poi_internet_access_type_wlan">وای‌فای</string>
+	<string name="poi_internet_access_type_terminal">پشت کامپیوتر</string>
+	<string name="poi_internet_access_type_wired">سیمی</string>
+	<string name="poi_internet_access_type_public">نوع دسترسی اینترنت: عمومی</string>
+	<string name="poi_internet_access_type_service">نوع دسترسی اینترنت: با خدمات</string>
+	<string name="poi_internet_access_type_no">بدون دسترسی اینترنت</string>
+	<string name="poi_internet_access_type_yes">با دسترسی اینترنت</string>
+
+	<string name="poi_site_type_city">شهر</string>
+	<string name="poi_map_size_city">اندازهٔ نقشه: شهر</string>
+	<string name="poi_material_wood">جنس: چوب</string>
+	<string name="poi_material_metal">جنس: فلز</string>
+	<string name="poi_material_concrete">جنس: بتن</string>
+	<string name="poi_material_steel">جنس: فولاد</string>
+	<string name="poi_material_stone">جنس: سنگ</string>
+	<string name="poi_material_brick">جنس: آجر</string>
+	<string name="poi_material_plastic">جنس: پلاستیک</string>
+	<string name="poi_material_granite_stone">جنس: سنگ گرانیت</string>
+	<string name="poi_material_metal_wood">جنس: فلز، چوب</string>
+	<string name="poi_material_glass">جنس: شیشه</string>
+	<string name="poi_material_bronze">جنس: برنز</string>
+	<string name="poi_material_aluminium">جنس: آلومینیوم</string>
 
 	</resources>
