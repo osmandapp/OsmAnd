@@ -769,8 +769,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
 
-		DiscountHelper.checkAndDisplay(this);
-
 		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
 		if (searchDialogFragment != null) {
 			if (searchDialogFragment.isSearchHidden()) {
@@ -1965,6 +1963,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			recreate();
 		}
+	}
+
+	@Override
+	public void onInAppPurchaseGetItems() {
+		DiscountHelper.checkAndDisplay(this);
 	}
 
 	public enum ShowQuickSearchMode {

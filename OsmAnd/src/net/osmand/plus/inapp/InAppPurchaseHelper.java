@@ -136,6 +136,10 @@ public class InAppPurchaseHelper {
 		return Version.isDeveloperBuild(ctx) || ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
 	}
 
+	public InAppPurchases getInAppPurchases() {
+		return purchases;
+	}
+
 	public InAppSubscriptionList getLiveUpdates() {
 		return purchases.getLiveUpdates();
 	}

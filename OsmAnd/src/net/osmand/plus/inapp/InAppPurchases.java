@@ -50,6 +50,7 @@ public class InAppPurchases {
 	private InAppSubscription monthlyLiveUpdates;
 	private InAppSubscription discountedMonthlyLiveUpdates;
 	private InAppSubscriptionList liveUpdates;
+	private InAppPurchase[] inAppPurchases;
 
 	InAppPurchases(OsmandApplication ctx) {
 		fullVersion = FULL_VERSION;
@@ -77,6 +78,8 @@ public class InAppPurchases {
 		} else {
 			contourLines = CONTOUR_LINES_FULL;
 		}
+
+		inAppPurchases = new InAppPurchase[] { fullVersion, depthContours, contourLines };
 	}
 
 	public InAppPurchase getFullVersion() {
@@ -89,6 +92,16 @@ public class InAppPurchases {
 
 	public InAppPurchase getContourLines() {
 		return contourLines;
+	}
+
+	@Nullable
+	public InAppPurchase getInAppPurchaseBySku(@NonNull String sku) {
+		for (InAppPurchase p : inAppPurchases) {
+			if (p.getSku().equals(sku)) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 	public InAppSubscription getMonthlyLiveUpdates() {
