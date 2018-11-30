@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -25,7 +24,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -52,14 +51,12 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = "RouteOptionsBottomSheet";
 
-	private OsmandSettings settings;
 	private OsmandApplication app;
+	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 	private ApplicationMode applicationMode;
 	private MapActivity mapActivity;
-	private MapRouteInfoMenu mapRouteInfoMenu;
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,159 +73,36 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 
-		List<LocalRoutingParameter> list = new ArrayList<>();
+		List<String> routingParameters = new ArrayList<>();
 		if (applicationMode.equals(ApplicationMode.CAR)) {
-			list = routingOptionsHelper.getRoutingParameters(applicationMode, AppModeOptions.CAR.routingParameters);
+			routingParameters = AppModeOptions.CAR.routingParameters;
 		} else if (applicationMode.equals(ApplicationMode.BICYCLE)) {
-			list = routingOptionsHelper.getRoutingParameters(applicationMode, AppModeOptions.BICYCLE.routingParameters);
+			routingParameters = AppModeOptions.BICYCLE.routingParameters;
 		} else if (applicationMode.equals(ApplicationMode.PEDESTRIAN)) {
-			list = routingOptionsHelper.getRoutingParameters(applicationMode, AppModeOptions.PEDESTRIAN.routingParameters);
+			routingParameters = AppModeOptions.PEDESTRIAN.routingParameters;
 		}
+
+		List<LocalRoutingParameter> list = routingOptionsHelper.getRoutingParameters(applicationMode, routingParameters);
 
 		for (final LocalRoutingParameter optionsItem : list) {
 			if (optionsItem instanceof DividerItem) {
-				items.add(new DividerHalfItem(app));
+				items.add(new DividerStartItem(app));
 			} else if (optionsItem instanceof MuteSoundRoutingParameter) {
-				final BottomSheetItemWithCompoundButton[] muteSoundRoutingParameter = new BottomSheetItemWithCompoundButton[1];
-				muteSoundRoutingParameter[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-						.setChecked(!routingHelper.getVoiceRouter().isMute())
-						.setDescription(getString(R.string.voice_announcements))
-						.setIcon(getContentIcon(R.drawable.ic_action_volume_up))
-						.setTitle(getString(R.string.shared_string_sound))
-						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-								boolean mt = !routingHelper.getVoiceRouter().isMute();
-								settings.VOICE_MUTE.set(mt);
-								routingHelper.getVoiceRouter().setMute(mt);
-								muteSoundRoutingParameter[0].setChecked(!routingHelper.getVoiceRouter().isMute());
-								updateMenu();
-							}
-						})
-						.create();
-				items.add(muteSoundRoutingParameter[0]);
-
+				items.add(createMuteSoundItem(optionsItem));
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
-				BaseBottomSheetItem showAlongTheRouteItem = new SimpleBottomSheetItem.Builder()
-						.setIcon(getContentIcon(R.drawable.ic_action_show_along_route))
-						.setTitle(getString(R.string.show_along_the_route))
-						.setLayoutId(R.layout.bottom_sheet_item_simple)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-								if (!routingHelper.isRouteCalculated()) {
-									Toast.makeText(app, getText(R.string.show_along_the_route), Toast.LENGTH_LONG).show();
-									return;
-								}
-								FragmentManager fm = getFragmentManager();
-								if (fm == null) {
-									return;
-								}
-								Bundle args = new Bundle();
-								ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
-								fragment.setUsedOnMap(false);
-								fragment.setArguments(args);
-								fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
-								fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
-								updateMenu();
-							}
-						})
-						.create();
-				items.add(showAlongTheRouteItem);
+				items.add(createShowAlongTheRouteItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
-				if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) == null) {
-					continue;
+				if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
+					items.add(createRouteSimulationItem(optionsItem));
 				}
-				BaseBottomSheetItem routeSimulationItem = new SimpleBottomSheetItem.Builder()
-						.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
-						.setTitle(getString(R.string.simulate_navigation))
-						.setLayoutId(R.layout.bottom_sheet_item_simple)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								final OsmAndLocationProvider loc = app.getLocationProvider();
-								loc.getLocationSimulation().startStopRouteAnimation(getActivity());
-								dismiss();
-							}
-						})
-						.create();
-				items.add(routeSimulationItem);
 			} else if (optionsItem instanceof AvoidRoadsTypesRoutingParameter) {
-				BaseBottomSheetItem avoidRoadsRoutingParameter = new SimpleBottomSheetItem.Builder()
-						.setIcon(getContentIcon(R.drawable.ic_action_road_works_dark))
-						.setTitle(getString(R.string.impassable_road))
-						.setLayoutId(R.layout.bottom_sheet_item_simple)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-								AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
-								avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
-								avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
-								updateMenu();
-							}
-						})
-						.create();
-				items.add(avoidRoadsRoutingParameter);
+				items.add(createAvoidRoadsTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
-				BaseBottomSheetItem avoidRoadsRoutingParameter = new SimpleBottomSheetItem.Builder()
-						.setIcon(getContentIcon(R.drawable.ic_action_road_works_dark))
-						.setTitle(getString(R.string.impassable_road))
-						.setLayoutId(R.layout.bottom_sheet_item_simple)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-								AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
-								avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
-								avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
-								updateMenu();
-							}
-						})
-						.create();
-				items.add(avoidRoadsRoutingParameter);
+				items.add(createAvoidRoadsItem(optionsItem));
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
-				View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
-				AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
-				AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.GPXRouteTitle), nightMode);
-				final TextView gpxSpinner = (TextView) v.findViewById(R.id.GPXRouteSpinner);
-				AndroidUtils.setTextPrimaryColor(mapActivity, gpxSpinner, nightMode);
-				((ImageView) v.findViewById(R.id.dropDownIcon))
-						.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
-
-				BaseBottomSheetItem gpxLocalRoutingParameter = new BottomSheetItemWithDescription.Builder()
-						.setDescription(getString(R.string.choose_track_file_to_follow))
-						.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
-						.setTitle(getString(R.string.shared_string_gpx_route))
-						.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								openGPXFileSelection();
-							}
-						})
-						.create();
-				items.add(gpxLocalRoutingParameter);
+				items.add(createGpxRoutingItem(optionsItem));
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
-				BaseBottomSheetItem otherSettingsRoutingParameter = new SimpleBottomSheetItem.Builder()
-						.setIcon(getContentIcon(R.drawable.map_action_settings))
-						.setTitle(getString(R.string.routing_settings_2))
-						.setLayoutId(R.layout.bottom_sheet_item_simple)
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
-								settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
-								settings.putExtra(SettingsBaseActivity.INTENT_APP_MODE, routingHelper.getAppMode().getStringKey());
-								mapActivity.startActivity(settings);
-							}
-						})
-						.create();
-				items.add(otherSettingsRoutingParameter);
-
+				items.add(createOtherSettingsRoutingItem(optionsItem));
 			} else {
 				inflateRoutingParameter(optionsItem);
 			}
@@ -240,14 +114,169 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_close;
 	}
 
-	private void inflateRoutingParameter(final LocalRoutingParameter optionsItem) {
-		if (optionsItem != null) {
-			final LocalRoutingParameter parameter = (LocalRoutingParameter) optionsItem;
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE
+				&& resultCode == AvoidRoadsBottomSheetDialogFragment.OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE) {
+			dismiss();
+		}
+		if (requestCode == ShowAlongTheRouteBottomSheet.REQUEST_CODE
+				&& resultCode == ShowAlongTheRouteBottomSheet.SHOW_CONTENT_ITEM_REQUEST_CODE) {
+			dismiss();
+		}
+	}
+
+	private BaseBottomSheetItem createMuteSoundItem(final LocalRoutingParameter optionsItem) {
+		final BottomSheetItemWithCompoundButton[] muteSoundItem = new BottomSheetItemWithCompoundButton[1];
+		muteSoundItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(!routingHelper.getVoiceRouter().isMute())
+				.setDescription(getString(R.string.voice_announcements))
+				.setIcon(getContentIcon((routingHelper.getVoiceRouter().isMute() ? optionsItem.getDisabledIconId() : optionsItem.getActiveIconId())))
+				.setTitle(getString(R.string.shared_string_sound))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+						boolean mt = !routingHelper.getVoiceRouter().isMute();
+						settings.VOICE_MUTE.set(mt);
+						routingHelper.getVoiceRouter().setMute(mt);
+						muteSoundItem[0].setChecked(!routingHelper.getVoiceRouter().isMute());
+						muteSoundItem[0].setIcon(getContentIcon((routingHelper.getVoiceRouter().isMute() ? optionsItem.getDisabledIconId() : optionsItem.getActiveIconId())));
+						updateMenu();
+					}
+				})
+				.create();
+		return muteSoundItem[0];
+	}
+
+	private BaseBottomSheetItem createShowAlongTheRouteItem(final LocalRoutingParameter optionsItem) {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
+				.setTitle(getString(R.string.show_along_the_route))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+						FragmentManager fm = getFragmentManager();
+						if (fm == null) {
+							return;
+						}
+						Bundle args = new Bundle();
+						ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
+						fragment.setUsedOnMap(false);
+						fragment.setArguments(args);
+						fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
+						fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
+						updateMenu();
+					}
+				}).create();
+	}
+
+	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
+				.setTitle(getString(R.string.simulate_navigation))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						final OsmAndLocationProvider loc = app.getLocationProvider();
+						loc.getLocationSimulation().startStopRouteAnimation(getActivity());
+						dismiss();
+					}
+				})
+				.create();
+	}
+
+	private BaseBottomSheetItem createAvoidRoadsTypesItem(final LocalRoutingParameter optionsItem) {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
+				.setTitle(getString(R.string.impassable_road))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
+						updateMenu();
+					}
+				})
+				.create();
+	}
+
+	private BaseBottomSheetItem createAvoidRoadsItem(final LocalRoutingParameter optionsItem) {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
+				.setTitle(getString(R.string.impassable_road))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
+						updateMenu();
+					}
+				})
+				.create();
+	}
+
+	private BaseBottomSheetItem createGpxRoutingItem(final LocalRoutingParameter optionsItem) {
+		View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
+		AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
+		AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.GPXRouteTitle), nightMode);
+		final TextView gpxSpinner = (TextView) v.findViewById(R.id.GPXRouteSpinner);
+		AndroidUtils.setTextPrimaryColor(mapActivity, gpxSpinner, nightMode);
+		((ImageView) v.findViewById(R.id.dropDownIcon))
+				.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
+
+		return new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.choose_track_file_to_follow))
+				.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
+				.setTitle(getString(R.string.shared_string_gpx_route))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						openGPXFileSelection();
+					}
+				})
+				.create();
+	}
+
+	private BaseBottomSheetItem createOtherSettingsRoutingItem(final LocalRoutingParameter optionsItem) {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(optionsItem.getActiveIconId()))
+				.setTitle(getString(R.string.routing_settings_2))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						final Intent settings = new Intent(mapActivity, SettingsNavigationActivity.class);
+						settings.putExtra(SettingsNavigationActivity.INTENT_SKIP_DIALOG, true);
+						settings.putExtra(SettingsBaseActivity.INTENT_APP_MODE, routingHelper.getAppMode().getStringKey());
+						mapActivity.startActivity(settings);
+					}
+				})
+				.create();
+	}
+
+	private void inflateRoutingParameter(final LocalRoutingParameter parameter) {
+		if (parameter != null) {
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			BottomSheetItemWithCompoundButton.Builder builder = new BottomSheetItemWithCompoundButton.Builder();
-			builder.setIcon(getContentIcon(R.drawable.ic_action_fuel));
 			if (parameter.routingParameter != null) {
 				builder.setTitle(parameter.getText(mapActivity));
+				int iconId = parameter.isSelected(settings) ? parameter.getActiveIconId() : parameter.getDisabledIconId();
+				if (iconId != -1) {
+					builder.setIcon(getContentIcon(iconId));
+				}
 			}
 			if (parameter instanceof LocalRoutingParameterGroup) {
 				final LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) parameter;
@@ -274,7 +303,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					}
 				});
 			} else {
-				builder.setLayoutId(R.layout.bottom_sheet_item_with_switch);
+				builder.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp);
 				if (parameter.routingParameter != null) {
 					if (parameter.routingParameter.getId().equals("short_way")) {
 						// if short route settings - it should be inverse of fast_route_mode
@@ -287,10 +316,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View v) {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, parameter);
-
-						boolean selected = parameter.isSelected(settings);
-						routingOptionsHelper.applyRoutingParameter(parameter, !selected);
-						item[0].setChecked(!selected);
+						boolean selected = !parameter.isSelected(settings);
+						routingOptionsHelper.applyRoutingParameter(parameter, selected);
+						item[0].setChecked(selected);
+						int iconId = selected ? parameter.getActiveIconId() : parameter.getDisabledIconId();
+						if (iconId != -1) {
+							item[0].setIcon(getContentIcon(iconId));
+						}
 						updateMenu();
 					}
 				});
@@ -300,20 +332,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE
-				&& resultCode == AvoidRoadsBottomSheetDialogFragment.OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE) {
-			dismiss();
-		}
-		if (requestCode == ShowAlongTheRouteBottomSheet.REQUEST_CODE
-				&& resultCode == ShowAlongTheRouteBottomSheet.SHOW_CONTENT_ITEM_REQUEST_CODE) {
-			dismiss();
-		}
-	}
-
-	private void updateMenu(){
+	private void updateMenu() {
 		final MapRouteInfoMenu mapRouteInfoMenu = getMapActivity().getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 		if (mapRouteInfoMenu != null) {
 			mapRouteInfoMenu.updateMenu();
@@ -359,6 +378,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DRIVING_STYLE,
 				GeneralRouter.USE_HEIGHT_OBSTACLES,
 				DividerItem.KEY,
+				GeneralRouter.ALLOW_MOTORWAYS,
 				AvoidRoadsTypesRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
 				DividerItem.KEY,

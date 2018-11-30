@@ -25,7 +25,6 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -64,13 +63,12 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
 
@@ -551,15 +549,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				if (mode.parameters.size() <= 2) {
 					text = app.getString(active ? R.string.shared_string_on : R.string.shared_string_off);
 				}
-				View item = createToolbarOptionView(active, text, R.drawable.ic_action_volume_up, R.drawable.ic_action_volume_mute, new View.OnClickListener() {
+				View item = createToolbarOptionView(active, text, parameter.getActiveIconId(), parameter.getDisabledIconId(), new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						routingOptionsHelper.switchSound();
 						boolean active = !app.getRoutingHelper().getVoiceRouter().isMute();
 						String text = app.getString(active ? R.string.shared_string_on : R.string.shared_string_off);
 
-						Drawable itemDrawable = app.getUIUtilities().getIcon(active ? R.drawable.ic_action_volume_up : R.drawable.ic_action_volume_mute, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-						Drawable activeItemDrawable = app.getUIUtilities().getIcon(active ? R.drawable.ic_action_volume_up : R.drawable.ic_action_volume_mute, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+						Drawable itemDrawable = app.getUIUtilities().getIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+						Drawable activeItemDrawable = app.getUIUtilities().getIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 
 						if (Build.VERSION.SDK_INT >= 21) {
 							itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
@@ -699,7 +697,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				if (selected != null) {
 					text = group.getText(mapActivity);
 				}
-				View item = createToolbarOptionView(false, text, R.drawable.mx_amenity_fuel, R.drawable.mx_amenity_fuel, new View.OnClickListener() {
+				View item = createToolbarOptionView(false, text, parameter.getActiveIconId(), parameter.getDisabledIconId(), new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						routingOptionsHelper.showLocalRoutingParameterGroupDialog(group, mapActivity, new RoutingOptionsHelper.OnClickListener() {
@@ -722,21 +720,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						active = parameter.isSelected(settings);
 					}
 					text = parameter.getText(mapActivity);
-					View item = createToolbarOptionView(active, text, R.drawable.mx_amenity_fuel, R.drawable.mx_amenity_fuel, new View.OnClickListener() {
+					View item = createToolbarOptionView(active, text, parameter.getActiveIconId(), parameter.getDisabledIconId(), new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							if (parameter.routingParameter != null) {
-								boolean selected = parameter.isSelected(settings);
-								routingOptionsHelper.applyRoutingParameter(parameter, !selected);
+								boolean selected = !parameter.isSelected(settings);
+								routingOptionsHelper.applyRoutingParameter(parameter, selected);
 
-								Drawable itemDrawable = app.getUIUtilities().getIcon(R.drawable.mx_amenity_fuel, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-								Drawable activeItemDrawable = app.getUIUtilities().getIcon(R.drawable.mx_amenity_fuel, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+								Drawable itemDrawable = app.getUIUtilities().getIcon(selected ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+								Drawable activeItemDrawable = app.getUIUtilities().getIcon(selected ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 
 								if (Build.VERSION.SDK_INT >= 21) {
 									itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
 								}
-								((ImageView) v.findViewById(R.id.route_option_image_view)).setImageDrawable(!selected ? activeItemDrawable : itemDrawable);
-								((TextView) v.findViewById(R.id.route_option_title)).setTextColor(parameter.isSelected(settings) ? colorActive : colorDisabled);
+								((ImageView) v.findViewById(R.id.route_option_image_view)).setImageDrawable(selected ? activeItemDrawable : itemDrawable);
+								((TextView) v.findViewById(R.id.route_option_title)).setTextColor(selected ? colorActive : colorDisabled);
 							}
 						}
 					});
@@ -1602,6 +1600,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			visible = false;
 		}
+		routingHelper.removeListener(this);
 	}
 
 	public void setShowMenu() {

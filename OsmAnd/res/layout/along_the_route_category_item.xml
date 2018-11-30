@@ -8,18 +8,13 @@
 	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
 	android:orientation="vertical">
 
-	<View
-		android:id="@+id/top_divider"
-		android:layout_width="match_parent"
-		android:layout_height="1dp" />
-
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/bottom_sheet_selected_item_title_height"
 		android:background="?attr/selectableItemBackground">
 
 		<ImageView
-			android:id="@+id/explist_indicator"
+			android:id="@+id/icon"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="start|center_vertical"

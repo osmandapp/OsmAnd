@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
@@ -269,6 +270,7 @@ public class RoutingOptionsHelper {
 		for (String itemId : routingParameters) {
 			LocalRoutingParameter item = getItem(am, itemId);
 			if (item != null) {
+				updateRoutingParameterIcons(item);
 				list.add(item);
 			}
 		}
@@ -455,12 +457,57 @@ public class RoutingOptionsHelper {
 				} else {
 					LocalRoutingParameter rp = new LocalRoutingParameter(am);
 					rp.routingParameter = r;
+					updateRoutingParameterIcons(rp);
 					list.add(rp);
 				}
 			}
 		}
 
 		return list;
+	}
+
+	private static void updateRoutingParameterIcons(LocalRoutingParameter rp) {
+		if (rp.routingParameter == null) {
+			return;
+		}
+		switch (rp.routingParameter.getId()) {
+			case GeneralRouter.USE_SHORTEST_WAY:
+				rp.activeIconId = R.drawable.ic_action_fuel;
+				rp.disabledIconId = R.drawable.ic_action_fuel;
+				break;
+			case GeneralRouter.USE_HEIGHT_OBSTACLES:
+				rp.activeIconId = R.drawable.ic_action_elevation;
+				rp.disabledIconId = R.drawable.ic_action_elevation;
+				break;
+			case GeneralRouter.AVOID_FERRIES:
+				rp.activeIconId = R.drawable.ic_action_fuel;
+				rp.disabledIconId = R.drawable.ic_action_fuel;
+				break;
+			case GeneralRouter.AVOID_TOLL:
+				rp.activeIconId = R.drawable.ic_action_fuel;
+				rp.disabledIconId = R.drawable.ic_action_fuel;
+				break;
+			case GeneralRouter.AVOID_MOTORWAY:
+				rp.activeIconId = R.drawable.ic_action_motorways;
+				rp.disabledIconId = R.drawable.ic_action_avoid_motorways;
+				break;
+			case GeneralRouter.AVOID_UNPAVED:
+				rp.activeIconId = R.drawable.ic_action_fuel;
+				rp.disabledIconId = R.drawable.ic_action_fuel;
+				break;
+			case GeneralRouter.PREFER_MOTORWAYS:
+				rp.activeIconId = R.drawable.ic_action_motorways;
+				rp.activeIconId = R.drawable.ic_action_avoid_motorways;
+				break;
+			case GeneralRouter.ALLOW_PRIVATE:
+				rp.activeIconId = R.drawable.ic_action_allow_private_access;
+				rp.disabledIconId = R.drawable.ic_action_forbid_private_access;
+				break;
+			case GeneralRouter.ALLOW_MOTORWAYS:
+				rp.activeIconId = R.drawable.ic_action_motorways;
+				rp.disabledIconId = R.drawable.ic_action_avoid_motorways;
+				break;
+		}
 	}
 
 	public static LocalRoutingParameterGroup getLocalRoutingParameterGroup(List<LocalRoutingParameter> list, String groupName) {
@@ -489,7 +536,7 @@ public class RoutingOptionsHelper {
 
 	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
 		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), applicationMode);
-		GeneralRouter.RoutingParameter parameter=null;
+		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {
 			parameter = router.getParameters().get(parameterId);
@@ -506,6 +553,13 @@ public class RoutingOptionsHelper {
 
 		private ApplicationMode am;
 
+		@DrawableRes
+		public
+		int activeIconId = -1;
+
+		@DrawableRes
+		int disabledIconId = -1;
+
 		public boolean canAddToRouteMenu() {
 			return true;
 		}
@@ -515,6 +569,14 @@ public class RoutingOptionsHelper {
 				return routingParameter.getId();
 			}
 			return KEY;
+		}
+
+		public int getActiveIconId() {
+			return activeIconId;
+		}
+
+		public int getDisabledIconId() {
+			return disabledIconId;
 		}
 
 		public LocalRoutingParameter(ApplicationMode am) {
@@ -613,12 +675,22 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "MuteSoundRoutingParameter";
 
+		public MuteSoundRoutingParameter() {
+			super(null);
+		}
+
 		public String getId() {
 			return KEY;
 		}
 
-		public MuteSoundRoutingParameter() {
-			super(null);
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_volume_up;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_volume_mute;
 		}
 	}
 
@@ -660,12 +732,22 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "ShowAlongTheRouteItem";
 
+		public ShowAlongTheRouteItem() {
+			super(null);
+		}
+
 		public String getId() {
 			return KEY;
 		}
 
-		public ShowAlongTheRouteItem() {
-			super(null);
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_show_along_route;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_show_along_route;
 		}
 	}
 
@@ -673,28 +755,46 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "AvoidRoadsRoutingParameter";
 
-		public String getId() {
-			return KEY;
-		}
-
 		public AvoidRoadsRoutingParameter() {
 			super(null);
 		}
 
+		public String getId() {
+			return KEY;
+		}
+
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_road_works_dark;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_road_works_dark;
+		}
 	}
 
 	public static class AvoidRoadsTypesRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "AvoidRoadsTypesRoutingParameter";
 
-		public String getId() {
-			return KEY;
-		}
-
 		public AvoidRoadsTypesRoutingParameter() {
 			super(null);
 		}
 
+		public String getId() {
+			return KEY;
+		}
+
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_road_works_dark;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_road_works_dark;
+		}
 	}
 
 	public static class GpxLocalRoutingParameter extends LocalRoutingParameter {
@@ -718,6 +818,10 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "OtherSettingsRoutingParameter";
 
+		public OtherSettingsRoutingParameter() {
+			super(null);
+		}
+
 		public String getId() {
 			return KEY;
 		}
@@ -726,8 +830,14 @@ public class RoutingOptionsHelper {
 			return false;
 		}
 
-		public OtherSettingsRoutingParameter() {
-			super(null);
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.map_action_settings;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.map_action_settings;
 		}
 	}
 

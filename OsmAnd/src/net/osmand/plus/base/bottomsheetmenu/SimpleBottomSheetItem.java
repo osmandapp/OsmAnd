@@ -20,6 +20,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 	protected int titleColorId = INVALID_ID;
 
 	private TextView titleTv;
+	private ImageView iconView;
 
 	public SimpleBottomSheetItem(View customView,
 								 @LayoutRes int layoutId,
@@ -45,11 +46,17 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		titleTv.setText(title);
 	}
 
+	public void setIcon(Drawable icon) {
+		this.icon = icon;
+		iconView.setImageDrawable(icon);
+	}
+
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
-		if (icon != null) {
-			((ImageView) view.findViewById(R.id.icon)).setImageDrawable(icon);
+		iconView = ((ImageView) view.findViewById(R.id.icon));
+		if (iconView != null) {
+			iconView.setImageDrawable(icon);
 		}
 		titleTv = (TextView) view.findViewById(R.id.title);
 		if (title != null && titleTv != null) {

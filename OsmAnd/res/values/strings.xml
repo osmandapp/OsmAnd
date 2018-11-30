@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="points_of_interests">Points of interests(POI)</string>
+    <string name="waiting_for_route_calculation">Waiting for route calculation</string>
     <string name="app_mode_public_transport">Public transport</string>
     <string name="avoid_roads_descr">Select road on the map or from the list below that you want to avoid during navigation:</string>
     <string name="show_along_the_route">Show along the route</string>

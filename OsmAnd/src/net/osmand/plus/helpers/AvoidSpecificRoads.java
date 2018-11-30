@@ -186,7 +186,7 @@ public class AvoidSpecificRoads {
 		bld.show();
 	}
 
-	private void selectFromMap(final MapActivity mapActivity) {
+	public void selectFromMap(final MapActivity mapActivity) {
 		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
 		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
 			@Override

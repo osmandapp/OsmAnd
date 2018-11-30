@@ -206,7 +206,7 @@ public class RoutePreferencesMenu {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.switch_select_list_item, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 					((ImageView) v.findViewById(R.id.icon))
-							.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_road_works_dark, !nightMode));
+							.setImageDrawable(app.getUIUtilities().getIcon(parameter.getActiveIconId(), !nightMode));
 					v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 					final TextView btn = (TextView) v.findViewById(R.id.select_button);
 					btn.setTextColor(btn.getLinkTextColors());
@@ -300,7 +300,7 @@ public class RoutePreferencesMenu {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 					final ImageView icon = (ImageView) v.findViewById(R.id.icon);
-					icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.map_action_settings, !nightMode));
+					icon.setImageDrawable(app.getUIUtilities().getIcon(parameter.getActiveIconId(), !nightMode));
 					icon.setVisibility(View.VISIBLE);
 					TextView titleView = (TextView) v.findViewById(R.id.title);
 					titleView.setText(R.string.routing_settings_2);

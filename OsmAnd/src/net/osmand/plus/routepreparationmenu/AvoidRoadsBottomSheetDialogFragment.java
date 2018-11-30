@@ -136,7 +136,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				if (mapActivity != null) {
 					mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
 					mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
-					app.getAvoidSpecificRoads().showDialog(mapActivity);
+					app.getAvoidSpecificRoads().selectFromMap(mapActivity);
 					Fragment fragment = getTargetFragment();
 					if (fragment != null) {
 						fragment.onActivityResult(getTargetRequestCode(), OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE, null);
