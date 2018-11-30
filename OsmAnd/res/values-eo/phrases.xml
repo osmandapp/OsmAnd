@@ -94,7 +94,7 @@
 	<string name="poi_aerodrome">Aerodromo</string>
 	<string name="poi_country">Lando</string>
 	<string name="poi_city">Urbego</string>
-	<string name="poi_capital">Ĉefurbo</string>
+	<string name="poi_capital">jes</string>
 	<string name="poi_town">Urbo</string>
 	<string name="poi_village">Vilaĝo</string>
 	<string name="poi_hamlet">Vilaĝeto</string>
@@ -173,7 +173,7 @@
 	<string name="poi_halt">Haltejo fervoja</string>
 	<string name="poi_railway_platform">Kajo fervoja</string>
 	<string name="poi_subway_entrance">Metro-enirejo</string>
-	<string name="poi_subway_station">Stacidomo metroa</string>
+	<string name="poi_subway_station">jes</string>
 	<string name="poi_waste_basket">Rubujo</string>
 
 	<string name="poi_tower">Turo</string>
@@ -1583,7 +1583,7 @@
 	<string name="poi_drive_through_no">Sen-elaŭtiĝa servo (trans-veturo): ne</string>
 
 	<string name="poi_brewery_additional">Nomo de bierfarejo</string>
-	<string name="poi_microbrewery_yes">Bierfarejeto-restoracio</string>
+	<string name="poi_microbrewery_yes">jes</string>
 	<string name="poi_microbrewery_no">Sen bierfarejeto-restoracio</string>
 
 	<string name="poi_takeaway_yes">Elportado</string>
@@ -3895,8 +3895,8 @@
 <string name="poi_bulk_purchase">Vendado sen pakumo</string>
 	<string name="poi_substation_type">Speco</string>
 
-<string name="poi_bulk_purchase_yes">Vendado sen pakumo: jes</string>
-	<string name="poi_bulk_purchase_only">Vendado sen pakumo: ne</string>
+<string name="poi_bulk_purchase_yes">jes</string>
+	<string name="poi_bulk_purchase_only">nur</string>
 
 	<string name="poi_pipeline_substation">Konduktuba substacio</string>
 	<string name="poi_substation_transmission">transsenda</string>

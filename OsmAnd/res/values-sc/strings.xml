@@ -3172,4 +3172,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="osm_live_payment_header">Issèbera sa manera de pagamentu prus discansosa pro tie:</string>
     <string name="osm_live_payment_contribute_descr">Una parte de su balàngiu andat a sos contribuidores de OpenStreetMap.</string>
     <string name="powered_by_osmand">Suportadu dae OsmAnd</string>
+    <string name="osm_live_subscriptions">Abbonamentos</string>
+    <string name="mapillary_menu_title_pano">Ammustra petzi immàgines a 360°</string>
     </resources>

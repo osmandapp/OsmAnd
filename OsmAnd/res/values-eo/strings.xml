@@ -2566,7 +2566,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="mapillary_menu_edit_text_hint">Entajpu uzantnomon</string>
     <string name="mapillary_menu_descr_username">Montri nur bildojn aldonitajn de</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
-    <string name="mapillary_menu_filter_description">Filtri bildojn laŭ alŝutinto aŭ laŭ dato; aktivaj nur je pligrandigo.</string>
+    <string name="mapillary_menu_filter_description">Filtri bildojn laŭ alŝutinto, laŭ dato aŭ laŭ tipo; aktivaj nur je pligrandigo.</string>
     <string name="shared_string_reset">Reagordi</string>
     <string name="store_tracks_in_monthly_directories">Konservi registritajn spurojn en monataj dosierujoj</string>
     <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en dosierujoj por registrita monato (kiel 2018-01).</string>
@@ -3004,4 +3004,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osm_live_payment_header">Elektu la plej oportunan pagmanieron por vi:</string>
     <string name="osm_live_payment_contribute_descr">Parto de enspezoj transdoniĝas al OpenStreetMap-kontribuantoj.</string>
     <string name="powered_by_osmand">Povigata de OsmAnd</string>
+    <string name="osm_live_subscriptions">Abonoj</string>
+    <string name="mapillary_menu_title_pano">Montri nur bildojn 360°</string>
     </resources>
