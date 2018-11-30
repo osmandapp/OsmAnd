@@ -2156,7 +2156,7 @@
     <string name="mapillary_menu_edit_text_hint">Introduza nome de utilizador</string>
     <string name="mapillary_menu_descr_username">Ver imagens adicionadas por</string>
     <string name="mapillary_menu_title_username">Nome de utilizador</string>
-    <string name="mapillary_menu_filter_description">Pode filtrar imagens por quem submeteu ou por data. Filtros aplicáveis apenas para zoom de proximidade.</string>
+    <string name="mapillary_menu_filter_description">Pode filtrar imagens por quem submeteu, por data our por tipo. Filtros aplicáveis apenas para zoom de proximidade.</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="shared_string_permissions">Permissões</string>
     <string name="import_gpx_failed_descr">OsmAnd não pode importar o ficheiro. Por favor confirme se OsmAnd tem permissão para ler o ficheiro da sua localização.</string>
@@ -2412,11 +2412,19 @@
     <string name="hide_full_description">Esconder descrição completa</string>
     <string name="show_full_description">Mostrar a descrição completa</string>
     <string name="thank_you_for_feedback">Obrigado pelo feedback</string>
-    <string name="release_3_2_pre">• A falha na inicialização que ocorreu com mapas não-latinos corrigida
+    <string name="release_3_2_pre">• A falha na inicialização que ocorreu em alguns dispositivos corrigida
 \n
+\n• Novos Marcadores de recurso: apresentar os marcadores que já foi percorrida
+\n
+\n• Histórico de pesquisa agora mostra as categorias que você procurou anteriormente
+\n
+\n• A falha na inicialização que ocorreu com mapas não-latinos corrigida 
+\n 
 \n• Melhorar problemas de velocidade em dispositivos com 8.0 Android 
+\n 
+\n• Suporte para editar objetos de polígono de renderização (não-cortesia) 
 \n
-\n• Suporte para editar objetos de polígono de renderização (não-cortesia)
+\n• Medir a distância: adicionar botão de medição para ações no menu de contexto
 \n
 \n</string>
     <string name="search_street">Pesquisa de rua</string>
@@ -3113,4 +3121,6 @@
     <string name="test_voice_desrc">Toque num botão e ouça a correspondente voz de comando para identificar os comandos faltantes ou com falha.</string>
 <string name="powered_by_osmand">Powered by OsmAnd</string>
     <string name="navigate_point_olc">Código de localização aberto</string>
+    <string name="osm_live_subscriptions">Assinaturas</string>
+    <string name="mapillary_menu_title_pano">Exibir apenas imagens de 360°</string>
     </resources>
