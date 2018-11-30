@@ -3106,30 +3106,30 @@
     <string name="purchase_cancelled_dialog_title">Вы анулявалі падпіску OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Прадоўжыць падпіску, каб і далей карыстацца ўсімі функцыямі:</string>
 
-    <string name="maps_you_need_descr">На падставе закладзеных вамі артыкулаў, наступныя мапы рэкамендуюцца для сцягвання:</string>
+    <string name="maps_you_need_descr">На падставе закладзеных вамі артыкулаў рэкамендуецца спампаваць наступныя мапы:</string>
     <string name="maps_you_need">Патрэбныя вам мапы</string>
     <string name="contour_lines_hillshade_maps">Контупныя лініі і зацяненне рэльефу</string>
     <string name="hide_full_description">Схаваць поўнае апісанне</string>
     <string name="show_full_description">Паказаць поўнае апісанне</string>
-    <string name="nautical_render_descr">Стыль для марской навігацыі. Асноўныя магчымасці: буі, маякі, рачныя і марскія маршруты і адзнакі, гавані, марскія паслугі, контуры глыбіні.</string>
+    <string name="nautical_render_descr">Стыль для марской навігацыі. Асноўныя магчымасці: буі, маякі, рачныя і марскія маршруты і адмеціны, гавані, марскія паслугі, контуры глыбіні.</string>
     <string name="ski_map_render_descr">Стыль для катання на лыжах. Асноўныя магчымасці: адмалёўка трас, пад\'ёмнікаў і іншых лыжных аб\'ектаў зручным спосабам. Менш другасных аб\'ектаў мапы, што адцягваюць увагу.</string>
-    <string name="light_rs_render_descr">Просты і кантрастны стыль для аўтамабільнай навігацыі. Пяшчотны для вачэй начны рэжым. Асноўныя магчымасці: контурныя лініі, кантрастныя памаранчавыя дарогі, менш другасных аб\'ектаў, што адцягваюць увагу.</string>
-    <string name="topo_render_descr">Кантрастны стыль, прызначаны ў першую чаргу для шпацыру, паходу і катання на ровары. Добрая чытальнасць пры складаным вонкавым асвятленні. Асноўныя магчамасці: кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з пашыранымі наладамі, больш падрабязная інфармацыя на адпаведных узроўнях маштабавання, чым у агаданым стылі. Опцыя цэласнасці паверхні дазваляе адрозніваць дарогі з рознай якасцю паверхні. Без начнога рэжыму.</string>
-    <string name="mapnik_render_descr">Стары агаданы стыль адмалёўкі Mapnik. Асноўныя магчымасці: колеры падобныя на стыль Mapnik.</string>
-    <string name="default_render_descr">Стыль агульнага прызначэння. Спрошчаная чыстая адмалёўка ў шчыльнанаселеных гарадах. Асноўныя магчымасці: контурныя лініі, якаць паверхні, абмежаванні доступу, дарожныя шчыты, адмалёўка шляхоў па шкале SAC, аб\'екты водных сплаваў.</string>
-    <string name="open_wikipedia_link_online">Адкрыць Вікіпедыя-спасылку анлайн</string>
+    <string name="light_rs_render_descr">Просты і кантрастны стыль для аўтамабільнай навігацыі. Пяшчотны для вачэй начны рэжым. Асноўныя магчымасці: контурныя лініі, кантрастныя аранжавыя дарогі, менш другасных аб\'ектаў, што адцягваюць увагу.</string>
+    <string name="topo_render_descr">"Кантрастны стыль, прызначаны ў першую чаргу для шпацыру, паходу і катання на ровары. Добрая чытальнасць пры складаным  асвятленні. Асноўныя магчамасці: кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з пашыранымі наладамі, больш падрабязная інфармацыя на адпаведных узроўнях маштабавання, чым у прадвызначаным стылі. Параметр цэласнасці паверхні дазваляе адрозніваць дарогі з рознай якасцю паверхні. Без начнога рэжыму."</string>
+    <string name="mapnik_render_descr">Стары прадвызначаны стыль адмалёўкі Mapnik. Асноўныя магчымасці: колеры падобныя на стыль Mapnik.</string>
+    <string name="default_render_descr">Стыль агульнага прызначэння. Спрошчаная чыстая адмалёўка ў шчыльнанаселеных гарадах. Асноўныя магчымасці: контурныя лініі, якасць паверхні, абмежаванні доступу, дарожныя шчыты, адмалёўка шляхоў па шкале SAC, аб\'екты водных сплаваў.</string>
+    <string name="open_wikipedia_link_online">Адкрыць спасылку на Вікіпедыю анлайн</string>
     <string name="open_wikipedia_link_online_description">Спасылка адкрыецца ў вэб-браўзеры.</string>
-    <string name="read_wikipedia_offline_description">Атрымайце падпіску на OsmAnd Live, каб чытаць артыкулы Вікіпедыі і Wikivoyage аўтаномна.</string>
+    <string name="read_wikipedia_offline_description">Атрымайце падпіску на OsmAnd Live, каб чытаць артыкулы Вікіпедыі і Wikivoyage па-за сецівам.</string>
     <string name="how_to_open_link">Як адкрыць спасылку?</string>
-    <string name="read_wikipedia_offline">Чытаць Вікіпедыю аўтаномна</string>
+    <string name="read_wikipedia_offline">Чытаць Вікіпедыю па-за сецівам</string>
     <string name="download_all">Спампаваць усё</string>
     <string name="shared_string_bookmark">Закладка</string>
-    <string name="off_road_render_descr">Падыходзіць для выкарыстання падчас кіравання па бездарожжы. Падыходзіць для выкарыстання з зялёнымі спадарожнікавымі здымкамі ў якасць падкладкі. Аснойныя асаблівасці: паменшаная таўшчыня асноўных дарог, павялічаная таўшчыня дарожак, сцяжын, роварных і іншых маршрутаў. Заснаваны на стылі «Topo».</string>
-    <string name="touring_view_render_descr">Высокадэталізаваны стыль для турыстычнах мэт. Уключае ў сябе ўсе параметры канфігурацыі агаданага стылю і, акрамя таго: паказвае, як мага больш дэталяў, наколькі гэта магчыма, у прыватнасці, усе дарогі, шляхі і іншыя спосабы перамяшчэння. Яснае візуальнае адрозненне паміж рознымі тыпамі дарог, якое нагадвае многія турыстычныя атласы. Высокакантрастная каляровая схема для вулічнага выкарыстання з дзённым і начным рэжымам.</string>
+    <string name="off_road_render_descr">Падыходзіць для выкарыстання падчас кіравання па бездарожжы. Падыходзіць для выкарыстання з зялёнымі спадарожнікавымі здымкамі ў якасці падкладкі. Асноўныя асаблівасці: паменшаная таўшчыня асноўных дарог, павялічаная таўшчыня дарожак, сцежак, роварных і іншых маршрутаў. Заснаваны на стылі \"Topo\".</string>
+    <string name="touring_view_render_descr">Высокадэталізаваны стыль для турыстычнах мэтаў. Уключае ў сябе ўсе параметры канфігурацыі прадвызначанага стылю і, акрамя таго: паказвае, як мага больш дэталяў, наколькі гэта магчыма, у прыватнасці, усе дарогі, шляхі і іншыя спосабы перамяшчэння. Зразумелае візуальнае адрозненне паміж рознымі тыпамі дарог, якое нагадвае многія турыстычныя атласы. Высокакантрастная каляровая схема для вулічнага выкарыстання з дзённым і начным рэжымам.</string>
     <string name="access_intermediate_arrival_time">Прамежкавы час прыбыцця</string>
     <string name="map_widget_intermediate_time">Прамежкавы час</string>
-    <string name="unirs_render_descr">Мадыфікацыя агаданага стылю для павялічэння кантрастнасці пешаходных і роварных дарог. Выкарыстоўвае старыя Mapnik-колеры.</string>
-    <string name="get_osmand_live">Атрымайце OsmAnd Live, каб разблакаваць усе функцыі: штодзённыя абнаўленні мап з неабмежаванай спампоўкай, усе платныя і бясплатныя дадаткі, Вікіпедыю, Вікігід і шмат іншага.</string>
+    <string name="unirs_render_descr">Мадыфікацыя прадвызначанага стылю для павялічэння кантрастнасці пешаходных і роварных дарог. Выкарыстоўвае старыя Mapnik-колеры.</string>
+    <string name="get_osmand_live">Атрымайце OsmAnd Live, каб разблакаваць усе функцыі: штодзённыя абнаўленні мап з неабмежаванымі спампоўваннямі, усе платныя і бясплатныя ўбудовы, Вікіпедыю, Вікігід і шмат іншага.</string>
     <string name="shared_string_gpx_files">GPX-файлы</string>
     <string name="quick_action_edit_actions">Рэдагаваць дзеянні</string>
     <string name="release_3_0">• Новае: падтрымка светавых аўтаномных турыстычных даведнікаў. Спасылачныя мясціны звязаны з мапай. Зыходныя даныя ад Wikivoyage. 
@@ -3144,28 +3144,28 @@
 \n 
 \n</string>
     <string name="error_notification_desc">Калі ласка, адпраўце здымак экрана з гэтым апавяшчэннем на support@osmand.net</string>
-    <string name="coord_input_edit_point">Рэдагаваць кропку</string>
-    <string name="coord_input_add_point">Дадаць кропку</string>
+    <string name="coord_input_edit_point">Рэдагаваць пункт</string>
+    <string name="coord_input_add_point">Дадаць пункт</string>
     <string name="coord_input_save_as_track">Захаваць як след</string>
-    <string name="coord_input_save_as_track_descr">Вы дадалі %1$s кропак. Увядзіце назву файла і націсніце «захаваць».</string>
-    <string name="point_deleted">Кропка %1$s выдаленая</string>
+    <string name="coord_input_save_as_track_descr">Вы дадалі %1$s пунктаў. Увядзіце назву файла і націсніце \"захаваць\".</string>
+    <string name="point_deleted">Пункт %1$s выдалены</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Вы адправім ваш пашуковы запыт <b>«%1$s»</b>, а таксама ваша месцазнаходжанне. <br/><br/> Мы не збіраем асабістыя звесткі, нам патрэбныя толькі даныя пошуку, каб палепшыць алгарытм.<br/></string>
+    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт <b>«%1$s»</b>, а таксама вашае месцазнаходжанне. <br/><br/> Мы не збіраем асабістыя звесткі, нам патрэбныя толькі даныя пошуку, каб палепшыць алгарытм.<br/></string>
     <string name="search_no_results_description">Няма вынікаў?
 \nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
     <string name="increase_search_radius_to">Павялічыць радыус пошуку да %1$s</string>
-    <string name="thank_you_for_feedback">Дзякуй вам за водгук</string>
-    <string name="poi_cannot_be_found">Вузел ці шлях не знайдзены.</string>
-    <string name="search_no_results_feedback">Няма вынікаў пошуку?
-\nДайце нам водгук</string>
+    <string name="thank_you_for_feedback">Дзякуй за водгук</string>
+    <string name="poi_cannot_be_found">Вузел ці шлях не знойдзены.</string>
+    <string name="search_no_results_feedback">Нічога не знойдзена\? 
+\nПакінце водгук</string>
     <string name="commiting_way">Фіксуецца шлях…</string>
     <string name="test_voice_desrc">Націсніце на кнопку і паслухайце адпаведную галасавую падказку, каб вызначыць адсутныя або пашкоджаныя падказкі.</string>
-<string name="release_3_1">• Навігацыя: выпраўленне індыкатару прагрэсу, хуткая перамена пачатковага і канчатковага пунктаў маршруту 
+<string name="release_3_1">• Навігацыя: выпраўленне індыкатару прагрэсу, хуткая замена пачатковага і канчатковага пунктаў маршруту 
 \n 
-\n • Пазнакі мапы: выпраўленне ўключэння/адключэння груп, магчымасць хаваць пазнакі з мапы 
+\n • Пазнакі мапы: выпраўленне ўключэння/выключэння групаў, магчымасць хаваць адмеціны на мапе
 \n 
-\n • Рэдагаванне OSM: магчымасць праўкі тэгаў для некропкавых аб\'ектаў і шляхоў, выпраўленне адсутных каментароў на нататках, рэзервовае капіяванне правак 
+\n • Рэдагаванне OSM: магчымасць рэдагавання пазнак для некропкавых аб\'ектаў і шляхоў, выпраўленне адсутных каментароў на нататках, рэзервовае капіраванне правак 
 \n 
 \n • Паляпшэнне разбору Wikipedia і Wikivoyage, абноўленыя файлы ўжо даступныя 
 \n 
@@ -3176,45 +3176,45 @@
 \n • Выпраўленне іншых хібаў 
 \n 
 \n</string>
-    <string name="markers_remove_dialog_msg">Выдаліць пазнаку мапы «%s»\?</string>
-    <string name="edit_map_marker">Рэдагаваць пазнаку мапы</string>
-    <string name="third_party_application">Старонняе прыкладанне</string>
+    <string name="markers_remove_dialog_msg">Выдаліць адмеціну мапы \"%s\"\?</string>
+    <string name="edit_map_marker">Рэдагаваць адмеціну мапы</string>
+    <string name="third_party_application">Дадатак іншага распрацоўшчыка</string>
     <string name="search_street">Пошук вуліцы</string>
     <string name="start_search_from_city">Спачатку абярыце горад</string>
     <string name="shared_string_restore">Аднавіць</string>
-    <string name="keep_passed_markers_descr">Пазнакі, даданыя як група улюблёных ці пройденых маршрутных GPX-кропак, застануцца на мапе. Калі група неактыўная, пазнакі знікнуць з мапы.</string>
-    <string name="keep_passed_markers">Пакінуць пройдзеныя пакнакі на мапе</string>
-    <string name="more_transport_on_stop_hint">На гэтым прыпынку ёсць больш грамадскага транспарту.</string>
-    <string name="ask_for_location_permission">Калі ласка, дайце OsmAnd дазвол на вызначэння месцазнаходжання.</string>
-    <string name="release_3_2_pre">• Выпраўлены вылет пры запуску, што адбываўся на некаторых прыладах
-\n
-\n • Новыя функцыі пазнак: паказваюцца пройдзенныя пазнакі
-\n
-\n • Гісторыя пошуку зараз паказвае катэгорыі, што вы шукалі раней
-\n
-\n • Выпраўлены вылет пры запуску, што адбываўся з нелацінскімі картамі
-\n
-\n • Паляпшэнне хуткасці адмалёўкі на прыладах з Android 8.0
-\n
-\n • Падтрымка рэдагавання палігонных аб\'ектаў (не зручнасцей)
-\n
-\n • Вымярэнне дыстанцый: дададзена кнопка «Вымярэнне» ў «Дзеянні» кантэкстнага меню
-\n
+    <string name="keep_passed_markers_descr">Адмеціны, дададзеныя як група улюблёных ці пройдзеных маршрутных GPX-пунктаў, застануцца на мапе. Калі група неактыўная, адмеціны знікнуць з мапы.</string>
+    <string name="keep_passed_markers">Пакінуць пройдзеныя адмеціны на мапе</string>
+    <string name="more_transport_on_stop_hint">На гэтым прыпынку спыняецца больш грамадскага транспарту.</string>
+    <string name="ask_for_location_permission">Калі ласка, дайце OsmAnd дазвол на вызначэнне месцазнаходжання.</string>
+    <string name="release_3_2_pre">• Выпраўлена хіба пры запуску, што ўзнікала на некаторых прыладах 
+\n 
+\n • Новыя функцыі адмецін: паказваюцца пройдзенныя
+\n 
+\n • Гісторыя пошуку зараз паказвае катэгорыі, што вы шукалі раней 
+\n 
+\n • Выпраўлена хіба пры запуску, што ўзнікала з нелацінскімі мапамі 
+\n 
+\n • Паляпшэнне хуткасці адмалёўкі на прыладах з Android 8.0 
+\n 
+\n • Падтрымка рэдагавання шматвугольных (нязручных) аб\'ектаў
+\n 
+\n • Вымярэнне дыстанцый: дададзена кнопка \"Вымярэнне\" ў \"Дзеянні\" кантэкстнага меню 
+\n 
 \n</string>
     <string name="rendering_value_black_name">Чорны</string>
     <string name="osm_live_plan_pricing">План і цэны</string>
-    <string name="osm_live_payment_monthly_title">Плаціць штомесячна</string>
-    <string name="osm_live_payment_3_months_title">Плаціць раз у 3 месяцы</string>
-    <string name="osm_live_payment_annual_title">Праціць штогодна</string>
+    <string name="osm_live_payment_monthly_title">Аплачваць штомесяц</string>
+    <string name="osm_live_payment_3_months_title">Аплачваць раз на 3 месяцы</string>
+    <string name="osm_live_payment_annual_title">Аплачваць штогод</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / месяц</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / месяц</string>
-    <string name="osm_live_payment_discount_descr">Ашчада %1$s!</string>
-	<string name="osm_live_payment_current_subscription">Ваша цяперашняя падпіска</string>
+    <string name="osm_live_payment_discount_descr">Эканомія %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Ваша бягучая падпіска</string>
     <string name="osm_live_payment_renews_monthly">Абнаўляецца штомесяц</string>
-    <string name="osm_live_payment_renews_quarterly">Абнаўляецца штоквартальна</string>
-    <string name="osm_live_payment_renews_annually">Абнаўляецца штогодна</string>
+    <string name="osm_live_payment_renews_quarterly">Абнаўляецца штоквартал</string>
+    <string name="osm_live_payment_renews_annually">Абнаўляецца штогод</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Абярыце зручную для вас перыядычнасць аплат:</string>
+    <string name="osm_live_payment_header">Абярыце зручную для вас перыядычнасць аплаты:</string>
     <string name="osm_live_payment_contribute_descr">Частка даходу ідзе ўдзельнікам OpenStreetMap.</string>
     <string name="powered_by_osmand">Працуе на OsmAnd</string>
     <string name="mapillary_menu_title_pano">Паказаць толькі 360° малюнкі</string>
