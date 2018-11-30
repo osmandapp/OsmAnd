@@ -182,6 +182,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		if (adapter != null) {
 			adapter.contentItem = getAdapterContentItems();
 			adapter.notifyDataSetChanged();
+			setupHeightAndBackground(getView());
 		}
 	}
 
@@ -309,6 +310,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					}
 					if (isChecked) {
 						expListView.expandGroup(groupPosition);
+						setupHeightAndBackground(getView());
 					}
 				}
 			});
@@ -322,6 +324,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 						} else {
 							expListView.expandGroup(groupPosition);
 						}
+						setupHeightAndBackground(getView());
 					}
 				}
 			});

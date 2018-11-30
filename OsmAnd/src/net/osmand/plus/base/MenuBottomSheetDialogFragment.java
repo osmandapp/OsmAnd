@@ -179,7 +179,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			public void onGlobalLayout() {
 				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
-					contentView.getLayoutParams().height = contentHeight;
+					if (useScrollableItemsContainer()) {
+						contentView.getLayoutParams().height = contentHeight;
+					} else {
+						contentView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+					}
 					contentView.requestLayout();
 				}
 
@@ -187,6 +191,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
 					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
+					if (!useScrollableItemsContainer() && !showTopShadow) {
+						mainView.setPadding(0, 0, 0, 0);
+					}
 				} else {
 					mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
 				}

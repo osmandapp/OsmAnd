@@ -188,7 +188,6 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 			counter++;
 		}
-
 	}
 
 	private void populateImpassableRoadsTypes() {
