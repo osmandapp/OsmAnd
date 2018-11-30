@@ -2775,7 +2775,7 @@
     <string name="mapillary_menu_edit_text_hint">Увядзіце імя карыстальніка</string>
     <string name="mapillary_menu_descr_username">Паглядзець толькі выявы даданыя</string>
     <string name="mapillary_menu_title_username">Імя карыстальніка</string>
-    <string name="mapillary_menu_filter_description">Фільтраваць выявы па адпраўніку ці даце. Актыўныя толькі для буйнога павелічэння.</string>
+    <string name="mapillary_menu_filter_description">Фільтраваць выявы па адпраўніку, па даце або па тыпу. Актыўныя толькі для буйнога павелічэння.</string>
     <string name="shared_string_reload">Абнавіць</string>
     <string name="mapillary_menu_descr_tile_cache">Абнавіць фрагменты, каб убачыць актуальныя даныя.</string>
     <string name="mapillary_menu_title_tile_cache">Кэш фрагментаў</string>
@@ -3217,4 +3217,5 @@
     <string name="osm_live_payment_header">Абярыце зручную для вас перыядычнасць аплат:</string>
     <string name="osm_live_payment_contribute_descr">Частка даходу ідзе ўдзельнікам OpenStreetMap.</string>
     <string name="powered_by_osmand">Працуе на OsmAnd</string>
+    <string name="mapillary_menu_title_pano">Паказаць толькі 360° малюнкі</string>
     </resources>
