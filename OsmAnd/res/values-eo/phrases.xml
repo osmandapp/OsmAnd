@@ -3817,7 +3817,7 @@
 	<string name="poi_service_vehicle_wheels_yes">radoj</string>
 	<string name="poi_service_vehicle_glass_yes">fenestroj</string>
 	<string name="poi_service_vehicle_truck_repair_yes">riparo de kamionoj</string>
-	<string name="poi_service_vehicle_muffler_yes">malbruigilo</string>
+	<string name="poi_service_vehicle_muffler_yes">malbruigiloj</string>
 	<string name="poi_service_vehicle_alignment_yes">alĝustigo</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">rapidumskatolo</string>
 	<string name="poi_service_vehicle_motor_yes">motoro</string>
