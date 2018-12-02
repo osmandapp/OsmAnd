@@ -1,11 +1,14 @@
 package net.osmand.data;
 
 
+import net.osmand.util.Algorithms;
+
+import org.json.JSONObject;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
-
-import net.osmand.util.Algorithms;
 
 public class Building extends MapObject {
 	
@@ -216,4 +219,43 @@ public class Building extends MapObject {
 		return "";
 	}
 
+	public JSONObject toJSON() {
+		JSONObject json = super.toJSON();
+		json.put("postcode", postcode);
+		if (latLon2 != null) {
+			json.put("lat2", String.format(Locale.US, "%.5f", latLon2.getLatitude()));
+			json.put("lon2", String.format(Locale.US, "%.5f", latLon2.getLongitude()));
+		}
+		if (interpolationType != null) {
+			json.put("interpolationType", interpolationType.name());
+		}
+		if (interpolationInterval != 0) {
+			json.put("interpolationInterval", interpolationInterval);
+		}
+		json.put("name2", name2);
+
+		return json;
+	}
+
+	public static Building parseJSON(JSONObject json) throws IllegalArgumentException {
+		Building b = new Building();
+		MapObject.parseJSON(json, b);
+
+		if (json.has("postcode")) {
+			b.postcode = json.getString("postcode");
+		}
+		if (json.has("lat2") && json.has("lon2")) {
+			b.latLon2 = new LatLon(json.getDouble("lat2"), json.getDouble("lon2"));
+		}
+		if (json.has("interpolationType")) {
+			b.interpolationType = BuildingInterpolation.valueOf(json.getString("interpolationType"));
+		}
+		if (json.has("interpolationInterval")) {
+			b.interpolationInterval = json.getInt("interpolationInterval");
+		}
+		if (json.has("name2")) {
+			b.name2 = json.getString("name2");
+		}
+		return b;
+	}
 }

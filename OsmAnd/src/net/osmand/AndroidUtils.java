@@ -438,26 +438,6 @@ public class AndroidUtils {
 		return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
 	}
 
-	public static String getFileAsString(File file) {
-		try {
-			FileInputStream fin = new FileInputStream(file);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-			StringBuilder sb = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				if (sb.length() > 0) {
-					sb.append("\n");
-				}
-				sb.append(line);
-			}
-			reader.close();
-			fin.close();
-			return sb.toString();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
 	public static PointF centroidForPoly(PointF[] points) {
 		float centroidX = 0, centroidY = 0;
 

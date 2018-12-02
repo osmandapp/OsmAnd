@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
-import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -824,7 +823,7 @@ public class ExternalApiHelper {
 				// test show gpx (data)
 				uri = Uri.parse("osmand.api://show_gpx");
 				intent = new Intent(Intent.ACTION_VIEW, uri);
-				intent.putExtra("data", AndroidUtils.getFileAsString(
+				intent.putExtra("data", Algorithms.getFileAsString(
 						new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxName)));
 			}
 
@@ -836,7 +835,7 @@ public class ExternalApiHelper {
 				// test navigate gpx (data)
 				uri = Uri.parse("osmand.api://navigate_gpx?force=true");
 				intent = new Intent(Intent.ACTION_VIEW, uri);
-				intent.putExtra("data", AndroidUtils.getFileAsString(
+				intent.putExtra("data", Algorithms.getFileAsString(
 						new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), gpxName)));
 			}
 

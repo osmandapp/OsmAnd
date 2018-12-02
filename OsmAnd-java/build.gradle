@@ -40,9 +40,15 @@ task collectRegionsInfoResources(type: Copy) {
 }
 
 task collectTestResources(type: Copy) {
-	from "../../resources/test-resources"
 	into "src/test/resources/"
-	include "*"
+	from("../../resources/test-resources") {
+		include "*"
+	}
+	from("../../resources/poi") {
+		include "poi_types.xml"
+		include "/phrases/en/*"
+		//include "/phrases/ru/*"
+	}
 }
 
 

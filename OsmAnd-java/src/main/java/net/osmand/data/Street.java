@@ -1,11 +1,14 @@
 package net.osmand.data;
 
+import net.osmand.util.Algorithms;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import net.osmand.util.Algorithms;
 
 
 public class Street extends MapObject {
@@ -85,5 +88,54 @@ public class Street extends MapObject {
 			return nm.substring(0, t);
 		}
 		return nm;
+	}
+
+	public JSONObject toJSON() {
+		JSONObject json = super.toJSON();
+		if (buildings.size() > 0) {
+			JSONArray buildingsArr = new JSONArray();
+			for (Building b : buildings) {
+				buildingsArr.put(b.toJSON());
+			}
+			json.put("buildings", buildingsArr);
+		}
+		if (intersectedStreets != null) {
+			JSONArray intersectedStreetsArr = new JSONArray();
+			for (Street s : intersectedStreets) {
+				intersectedStreetsArr.put(s.toJSON());
+			}
+			json.put("intersectedStreets", intersectedStreetsArr);
+		}
+
+		return json;
+	}
+
+	public static Street parseJSON(City city, JSONObject json) throws IllegalArgumentException {
+		Street s = new Street(city);
+		MapObject.parseJSON(json, s);
+
+		if (json.has("buildings")) {
+			JSONArray buildingsArr = json.getJSONArray("buildings");
+			s.buildings = new ArrayList<>();
+			for (int i = 0; i < buildingsArr.length(); i++) {
+				JSONObject buildingObj = buildingsArr.getJSONObject(i);
+				Building building = Building.parseJSON(buildingObj);
+				if (building != null) {
+					s.buildings.add(building);
+				}
+			}
+		}
+		if (json.has("intersectedStreets")) {
+			JSONArray streetsArr = json.getJSONArray("intersectedStreets");
+			s.intersectedStreets = new ArrayList<>();
+			for (int i = 0; i < streetsArr.length(); i++) {
+				JSONObject streetObj = streetsArr.getJSONObject(i);
+				Street street = parseJSON(city, streetObj);
+				if (street != null) {
+					s.intersectedStreets.add(street);
+				}
+			}
+		}
+		return s;
 	}
 }
