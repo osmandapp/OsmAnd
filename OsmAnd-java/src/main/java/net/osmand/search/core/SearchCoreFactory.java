@@ -226,8 +226,6 @@ public class SearchCoreFactory {
 		return retName;
 	}
 
-
-
 	public static class SearchAddressByNameAPI extends SearchBaseAPI {
 
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
@@ -322,6 +320,9 @@ public class SearchCoreFactory {
 				resArray = townCitiesQR.queryInBox(bbox, resArray);
 				int limit = 0;
 				for (City c : resArray) {
+					if (phrase.getSettings().isExportObjects()) {
+						resultMatcher.exportCity(c);
+					}
 					SearchResult res = new SearchResult(phrase);
 					res.object = c;
 					res.file = (BinaryMapIndexReader) c.getReferenceFile();
@@ -347,7 +348,6 @@ public class SearchCoreFactory {
 			}
 		}
 
-
 		private void searchByName(final SearchPhrase phrase, final SearchResultMatcher resultMatcher)
 				throws IOException {
 			if (phrase.getRadiusLevel() > 1 || phrase.getUnknownSearchWordLength() > 3 || phrase.getUnknownSearchWords().size() > 0) {
@@ -361,12 +361,14 @@ public class SearchCoreFactory {
 				final int priority = phrase.isNoSelectedType() ?
 						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
-				
-				
+
 				ResultMatcher<MapObject> rm = new ResultMatcher<MapObject>() {
 					int limit = 0;
 					@Override
 					public boolean publish(MapObject object) {
+						if (phrase.getSettings().isExportObjects()) {
+							resultMatcher.exportObject(object);
+						}
 						if (isCancelled()) {
 							return false;
 						}
@@ -408,7 +410,6 @@ public class SearchCoreFactory {
 										|| !phrase.isSearchTypeAllowed(ObjectType.CITY)) {
 									return false;
 								}
-
 								sr.objectType = ObjectType.CITY;
 								sr.priorityDistance = 0.1;
 							} else if (((City)object).isPostcode()) {
@@ -418,7 +419,7 @@ public class SearchCoreFactory {
 								}
 								sr.objectType = ObjectType.POSTCODE;
 								sr.priorityDistance = 0;
-							}  else {
+							} else {
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
 									return false;
@@ -452,8 +453,6 @@ public class SearchCoreFactory {
 						immediateResults.add(sr);
 						return false;
 					}
-
-
 
 					@Override
 					public boolean isCancelled() {
@@ -496,8 +495,6 @@ public class SearchCoreFactory {
 			}
 		}
 	}
-
-
 
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
@@ -543,6 +540,9 @@ public class SearchCoreFactory {
 						int limit = 0;
 						@Override
 						public boolean publish(Amenity object) {
+							if (phrase.getSettings().isExportObjects()) {
+								resultMatcher.exportObject(object);
+							}
 							if (limit ++ > LIMIT) {
 								return false;
 							}
@@ -629,8 +629,6 @@ public class SearchCoreFactory {
 			return phrase.getNextRadiusSearch(BBOX_RADIUS);
 		}
 	}
-
-
 
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
@@ -762,8 +760,6 @@ public class SearchCoreFactory {
 		}
 	}
 
-
-
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
 		private static final int BBOX_RADIUS = 10000;
 		private SearchAmenityTypesAPI searchAmenityTypesAPI;
@@ -884,6 +880,9 @@ public class SearchCoreFactory {
 
 				@Override
 				public boolean publish(Amenity object) {
+					if (phrase.getSettings().isExportObjects()) {
+						resultMatcher.exportObject(object);
+					}
 					SearchResult res = new SearchResult(phrase);
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
 					if(!searchedPois.add(poiID)) {
@@ -976,8 +975,6 @@ public class SearchCoreFactory {
 			return -1;
 		}
 	}
-
-
 
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {
 		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
@@ -1075,8 +1072,6 @@ public class SearchCoreFactory {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||
 				p.isLastWord(ObjectType.VILLAGE);
 	}
-
-
 
 	public static class SearchBuildingAndIntersectionsByStreetAPI extends SearchBaseAPI {
 		Street cacheBuilding;
@@ -1219,8 +1214,6 @@ public class SearchCoreFactory {
 		}
 	}
 
-
-
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 
 		public SearchLocationAndUrlAPI() {
@@ -1345,6 +1338,4 @@ public class SearchCoreFactory {
 			return SEARCH_LOCATION_PRIORITY;
 		}
 	}
-	
-	
 }

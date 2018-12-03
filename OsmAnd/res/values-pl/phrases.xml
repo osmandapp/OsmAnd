@@ -3912,7 +3912,7 @@
 	<string name="poi_substation_type">Typ</string>
 
 <string name="poi_bulk_purchase_yes">Tak</string>
-	<string name="poi_bulk_purchase_only">Zakup zbiorczy: tylko</string>
+	<string name="poi_bulk_purchase_only">Tylko</string>
 
 	<string name="poi_pipeline_substation">Podstacja rurociągów</string>
 	<string name="poi_substation_transmission">Transmisja</string>

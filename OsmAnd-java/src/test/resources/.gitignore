@@ -1,3 +1,5 @@
-*.json
+/*.json
+/osm_live/*.json
 *.obf
 *.osm
+phrases.xml

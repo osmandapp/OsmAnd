@@ -9,7 +9,7 @@
 	<string name="device_name_cannot_be_empty">Il nome del dispositivo non può essere vuoto</string>
 	<string name="device_name">Nome del dispositivo</string>
 	<string name="shared_string_hide">Nascondi</string>
-	<string name="share_location_as_description_second_line">Puoi creare e visualizzare l\'ID del dispositivo nel client telegram usando il chat bot %1$s. %2$s</string>
+	<string name="share_location_as_description_second_line">Puoi creare e visualizzare l\'ID del dispositivo nel client Telegram usando il chat bot %1$s. %2$s</string>
 	<string name="share_location_as_description">Se vuoi connettere più dispositivi a un account telegram, devi usare un dispositivo diverso per condividere la tua posizione.</string>
 	<string name="last_updated_location">Ultimo aggiornamento della posizione:</string>
 	<string name="successfully_sent_and_updated">Inviato e caricato con successo</string>
@@ -50,14 +50,14 @@
 	<string name="choose_osmand">Seleziona la versione di OsmAnd da usare</string>
 	<string name="disable_all_sharing_desc">Disattiva la condivisione della posizione per tutte le conversazioni selezionate (%1$d).</string>
 	<string name="disable_all_sharing">Disattiva tutte le condivisioni</string>
-	<string name="turn_off_all">Disattiva tutti</string>
+	<string name="turn_off_all">Disattiva tutto</string>
 	<string name="shared_string_exit">Esci</string>
 	<string name="time_ago">fa</string>
 	<string name="last_response">Ultima risposta</string>
 	<string name="shared_string_group">Gruppo</string>
 	<string name="logout_no_internet_msg">Connettiti a Internet per uscire correttamente dall\'account di Telegram.</string>
 	<string name="shared_string_close">Chiudi</string>
-	<string name="disconnect_from_telegram_desc">Per revocare l\'accesso alla condivisione della posizione, apri Telegram, vai a Impostazioni →Privacy e Sicurezza → Sessioni, e termina la sessione di OsmAnd Telegram.</string>
+	<string name="disconnect_from_telegram_desc">Per revocare l\'accesso alla condivisione della posizione, apri Telegram, vai a Impostazioni → Privacy e Sicurezza → Sessioni, e termina la sessione di OsmAnd Telegram.</string>
 	<string name="disconnect_from_telegram">Come disattivare la condivisione della posizione di OsmAnd da Telegram</string>
 	<string name="logout_help_desc">Come disattivare la condivisione della posizione di OsmAnd da Telegram</string>
 	<string name="connected_account">Account connesso</string>
@@ -106,7 +106,7 @@
 	<string name="shared_string_password">Password</string>
 	<string name="enter_code">Inserisci il codice</string>
 	<string name="authentication_code">Codice di autenticazione</string>
-	<string name="authentication_code_descr">Telegram ti ha inviato un codice per OsmAnd per entrare nel tuo account</string>
+	<string name="authentication_code_descr">Telegram ti ha inviato un codice per OsmAnd per entrare nel tuo account.</string>
 	<string name="enter_password">Inserisci la password</string>
 	<string name="password_descr">Password di Telegram</string>
 	<string name="shared_string_login">Entra</string>
@@ -163,4 +163,13 @@
 	<string name="live_now">Ora in diretta</string>
 
 
-</resources>
+<string name="logout_from_osmand_telegram_descr">Sei sicuro di volerti disconnettere da OsmAnd Telegram, cosicché non potrai condividere la posizione o vedere quella di altri\?</string>
+	<string name="osmand_connect">OsmAnd connect</string>
+	<string name="set_visible_time_for_all">Imposta un orario visibile a tutti</string>
+	<string name="visible_time_for_all">Orario visibile a tutti</string>
+	<string name="min_km">min/km</string>
+	<string name="nm_h">kn</string>
+	<string name="m_s">m/s</string>
+	<string name="km_h">km/h</string>
+	<string name="mile_per_hour">mi/h</string>
+	</resources>

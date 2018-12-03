@@ -84,7 +84,7 @@
   <string name="accessibility_mode">Режим допоміжних можливостей</string>
   <string name="accessibility_mode_descr">Вмикає функції для користувачів із вадами.</string>
   <string name="shared_string_on">Увімкнено</string>
-  <string name="shared_string_off">Вимкнено</string>
+  <string name="shared_string_off">Вимкнути</string>
   <string name="accessibility_default">Використовувати системні налаштування</string>
   <string name="backToMenu">Повернутися до меню</string>
   <string name="zoomOut">Зменшити</string>
@@ -268,7 +268,7 @@
   <string name="favorite_friends_category">Друзі</string>
   <string name="favorite_places_category">Місця</string>
   
-  <string name="shared_string_name">Назва</string>
+  <string name="shared_string_name">Імʼя</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="shared_string_no_thanks">Ні, дякую</string>
   <string name="basemap_missing">Завантажте базову мапу світу, щоб оглядати весь світ на малих рівнях масштабування.</string>
@@ -1577,7 +1577,7 @@
 	<string name="create_poi_link_to_osm_doc"><u>Онлайнова OSM</u> класифікація мапи із зображеннями.</string>
 	<string name="import_file_favourites">Зберегти дані як GPX-файл чи імпортувати маршрутні точки в \'Закладки\'?</string>
 	
-	<string name="shared_string_share">Поділитись</string>
+	<string name="shared_string_share">Поділитися</string>
 	<string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
 	<string name="navigation_intent_invalid">Невірний формат: %s</string>
 <string name="rendering_attr_coloredBuildings_name">Кольорове маркування будівель за типом</string>
@@ -1618,7 +1618,7 @@
     <string name="duration">Тривалість</string>
     <string name="distance">Віддаль</string>
     <string name="index_tours">Подорожі</string>
-    <string name="shared_string_all">Усі</string>
+    <string name="shared_string_all">Всі</string>
     <string name="shared_string_waypoints">Шляхові точки</string>
     
     <string name="way_alarms">Перешкоди</string>
@@ -2885,7 +2885,7 @@
     <string name="my_location">Моє місцезнаходження</string>
     <string name="shared_string_finish">Фініш</string>
     <string name="plan_route">Планувати маршрут</string>
-    <string name="shared_string_sort">Сортувати</string>
+    <string name="shared_string_sort">Впорядкувати</string>
     <string name="coordinate_input">Введення координат</string>
     <string name="is_saved">збережено</string>
     <string name="marker_save_as_track_descr">Експортувати Ваші маркери у наступний GPX-файл:</string>
@@ -3219,4 +3219,5 @@
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Оберіть зручну для вас періодичність платежів:</string>
     <string name="osm_live_payment_contribute_descr">Частина доходу йде до наповнювачів OpenStreetMap.</string>
+    <string name="powered_by_osmand">За підтримки OsmAnd</string>
     </resources>

@@ -2,8 +2,12 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
+import net.osmand.router.GeneralRouter;
+import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -27,6 +31,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
 
@@ -691,4 +696,54 @@ public class Algorithms {
         return str1.compareTo(str2);
     }
 
+	public static String getFileAsString(File file) {
+		try {
+			FileInputStream fin = new FileInputStream(file);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				if (sb.length() > 0) {
+					sb.append("\n");
+				}
+				sb.append(line);
+			}
+			reader.close();
+			fin.close();
+			return sb.toString();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public static Map<String, String> parseStringsXml(File file) throws IOException, XmlPullParserException {
+		InputStream is = new FileInputStream(file);
+		XmlPullParser parser = PlatformUtil.newXMLPullParser();
+		Map<String, String> map = new HashMap<>();
+		parser.setInput(is, "UTF-8");
+		int tok;
+		String key = null;
+		StringBuilder text = null;
+		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+			if (tok == XmlPullParser.START_TAG) {
+				text = new StringBuilder();
+				String name = parser.getName();
+				if ("string".equals(name)) {
+					key = parser.getAttributeValue("", "name");
+				}
+			} else if (tok == XmlPullParser.TEXT) {
+				if (text != null) {
+					text.append(parser.getText());
+				}
+			} else if (tok == XmlPullParser.END_TAG) {
+				if (key != null) {
+					map.put(key, text.toString());
+				}
+				key = null;
+				text = null;
+			}
+		}
+		is.close();
+		return map;
+	}
 }

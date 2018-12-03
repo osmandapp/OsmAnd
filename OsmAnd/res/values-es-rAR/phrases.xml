@@ -215,7 +215,7 @@
 	<string name="poi_railway_platform">Andén de tren</string>
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_subway_entrance">Entrada de subte;Entrada de metro</string>
-	<string name="poi_subway_station">Estación de subte;Estación de metro</string>
+	<string name="poi_subway_station">Sí</string>
 	<string name="poi_railway_buffer_stop">Fin de vía</string>
 	<string name="poi_taxi">Parada de taxi;Remis</string>
 
@@ -3084,7 +3084,7 @@
 	<string name="poi_traffic_signals_sound">Sonoro</string>
 	<string name="poi_highway_crossing_type">Tipo de cruce</string>
 	<string name="poi_tactile_paving">Pavimento táctil</string>
-	<string name="poi_service_general">Servicio para el automóvil</string>
+	<string name="poi_service_general">Servicio automotriz</string>
 	<string name="poi_self_service">Autoservicio</string>
 	<string name="poi_automated">Automatizado</string>
 	<string name="poi_parking_type">Tipo de estacionamiento</string>
@@ -3848,7 +3848,7 @@
 <string name="poi_amusement_arcade">Salón recreativo</string>
 	<string name="poi_adult_gaming_centre">Centro de juegos para adultos</string>
 
-<string name="poi_service_car">Servicio para el automóvil</string>
+<string name="poi_service_car">Servicio automotriz</string>
 
 <string name="poi_service_vehicle_car_repair_yes">Taller mecánico</string>
 	<string name="poi_service_vehicle_oil_change_yes">Cambio de aceite</string>
@@ -3942,7 +3942,7 @@
 	<string name="poi_substation_type">Tipo de subestación</string>
 
 <string name="poi_bulk_purchase_yes">Sí</string>
-	<string name="poi_bulk_purchase_only">Compra al por mayor: solamente</string>
+	<string name="poi_bulk_purchase_only">Únicamente</string>
 
 	<string name="poi_pipeline_substation">Subestación de tuberías</string>
 	<string name="poi_substation_transmission">Transmisión</string>

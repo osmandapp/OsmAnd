@@ -387,6 +387,15 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	public static OsmandPlugin getPlugin(String id) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			if (plugin.getId().equals(id)) {
+				return plugin;
+			}
+		}
+		return null;
+	}
+
 	public static List<String> onIndexingFiles(IProgress progress) {
 		List<String> l = new ArrayList<String>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
