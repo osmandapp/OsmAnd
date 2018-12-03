@@ -46,8 +46,8 @@
 	
     <string name="monitoring_settings">Gravación de viaxes</string>
     <string name="monitoring_settings_descr">Configure de que xeito gravar as súas viaxes.</string>
-    <string name="record_plugin_description">Este engadido activa a funcionalidade de gravar e garda-as pistas premendo o trebello de rexistro de GPX na pantalla do mapa ou tamén de rexistrar de xeito automático tódalas rotas de navegación nun ficheiro GPX.
-\n
+    <string name="record_plugin_description">Este engadido activa a funcionalidade de gravar e garda-las pistas premendo o trebello de rexistro de GPX na pantalla do mapa ou tamén de rexistrar de xeito automático tódalas rotas de navegación nun ficheiro GPX. 
+\n 
 \nAs pistas gravadas pódense compartir ou empregar colaborando co OSM. Os atletas poden empregar pistas gravadas para estudar os seus adestramentos. Co OsmAnd é posíbel realizar directamente algunhas análises básicas, coma tempos, velocidade media, etc. e as pistas tamén pódense analizar posteriormente con ferramentas de análise de terceiros.</string>
     <string name="record_plugin_name">Gravación de viaxes</string>
     <string name="int_hour">h</string>
@@ -642,7 +642,7 @@
 	<string name="auto_zoom_map">Achegamento automático do mapa</string>
 	<string name="snap_to_road_descr">Axusta-la ubicación ás estradas durante a navigación.</string>
 	<string name="snap_to_road">Axustar á estrada</string>
-	<string name="interrupt_music_descr">O aviso por voz, pausa a reprodución da música (non só baixa o volume).</string>
+	<string name="interrupt_music_descr">O aviso por voz, detén a reprodución da música (non só baixa o volume).</string>
 	<string name="interrupt_music">Deter a música</string>
 	
 	<string name="osmand_play_title_30_chars">Mapas e navegación OsmAnd</string>
@@ -1306,7 +1306,7 @@
 	<string name="background_service_wait_int">Tempo de espera</string>
 	
 	<string name="where_am_i">Onde estou?</string>
-	<string name="process_navigation_service">OsmAnd navigation service</string>
+	<string name="process_navigation_service">Servizo de navigación do OsmAnd</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">segundos</string>
@@ -1394,7 +1394,7 @@
 	<string name="max_level_download_tile_descr">Non procurar nas teselas dos mapas en liña para niveis do achegamento alén disto.</string>
 	<string name="route_general_information">Distancia total %1$s, tempo da viaxe %2$d h %3$d min.</string>
 	<string name="router_service_descr">Escoller un servizo da navigación con conexión ou sen ela.</string>
-	<string name="router_service">Navigation service</string>
+	<string name="router_service">Servizo de navigación</string>
 	<string name="sd_dir_not_accessible">O cartafol do almacenaxe dos datos na tarxeta da memoria non é accesíbel!</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Xa existen datos sen conexión ({1}) para {0}. Desexa actualizalos ({2})\?</string>
@@ -1759,7 +1759,7 @@
 	<string name="local_osm_changes_upload_all_confirm">Está a piques de enviar %1$d mudanza(s) ó OSM. Confírmao\?</string>
     <string name="confirmation_to_clear_history">Limpa-lo historial\?</string>
     <string name="shared_string_go">Ir</string>
-	<string name="osm_edits">Edicións de OSM</string>
+	<string name="osm_edits">Edicións do OSM</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
 	<string name="osmand_parking_time_left">esquerda</string>
@@ -2500,8 +2500,8 @@ Lon %2$s</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para engadir unha ou máis imaxes a esta localización do mapa.</string>
     <string name="online_photos">Imaxes da rede</string>
-    <string name="quick_action_resume_pause_navigation">Pausar/Voltar a navigación</string>
-    <string name="quick_action_resume_pause_navigation_descr">Preme neste botón para pausar ou reemprender a navigación.</string>
+    <string name="quick_action_resume_pause_navigation">Deter/Voltar á navigación</string>
+    <string name="quick_action_resume_pause_navigation_descr">Preme neste botón para deter ou voltar á navigación.</string>
     <string name="quick_action_start_stop_navigation">Iniciar/Parar a navigación</string>
     <string name="quick_action_start_stop_navigation_descr">Prema neste botón para iniciar a navegación, ou para detela se xa estaba iniciada.</string>
     <string name="store_tracks_in_monthly_directories">Almacenar as pistas gravadas en cartafoles mensuais</string>
@@ -2915,7 +2915,7 @@ Lon %2$s</string>
     <string name="rendering_attr_depthContours_name">Curvas do afundimento náuticos</string>
     <string name="auto_split_recording_title">División automática das gravacións en intervalos</string>
     <string name="auto_split_recording_descr">Comezar novo segmento despois dun intre de 6 min, nova pista despois dun intre de 2 h, ou novo ficheiro despois dun intre máis longo se mudaches a data.</string>
-    <string name="shared_string_paused">Pausado</string>
+    <string name="shared_string_paused">Detido</string>
     <string name="save_track_min_distance">Mínimo desprazamento para o rexistro</string>
     <string name="access_direction_audio_feedback">Indicacións por son</string>
     <string name="access_direction_haptic_feedback">Indicacións polo tacto</string>
