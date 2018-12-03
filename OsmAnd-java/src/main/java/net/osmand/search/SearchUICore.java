@@ -18,6 +18,7 @@ import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
+import net.osmand.search.core.SearchExportSettings;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
@@ -784,6 +785,7 @@ public class SearchUICore {
 				}
 			}
 
+			SearchExportSettings exportSettings = phrase.getSettings().getExportSettings();
 			json.put("settings", phrase.getSettings().toJSON());
 			json.put("phrase", phrase.getRawUnknownSearchPhrase());
 			if (searchResult.searchResults != null && searchResult.searchResults.size() > 0) {
@@ -800,18 +802,14 @@ public class SearchUICore {
 				}
 				json.put("amenities", amenitiesArr);
 			}
-			if (exportedCities != null && exportedCities.size() > 0) {
-				JSONArray citiesArr = new JSONArray();
-				for (City city : exportedCities) {
-					citiesArr.put(city.toJSON());
-				}
-				json.put("cities", citiesArr);
-			}
 			if (cities.size() > 0) {
 				JSONArray citiesArr = new JSONArray();
 				for (City city : cities) {
-					final JSONObject cityObj = city.toJSON();
+					final JSONObject cityObj = city.toJSON(exportSettings.isExportBuildings());
 					if (exportedCities.contains(city)) {
+						if (!exportSettings.isExportEmptyCities()) {
+							continue;
+						}
 						cityObj.put("init", 1);
 					}
 					if (matchedCities.contains(city)) {

@@ -91,8 +91,12 @@ public class Street extends MapObject {
 	}
 
 	public JSONObject toJSON() {
+		return toJSON(true);
+	}
+
+	public JSONObject toJSON(boolean includingBuildings) {
 		JSONObject json = super.toJSON();
-		if (buildings.size() > 0) {
+		if (buildings.size() > 0 && includingBuildings) {
 			JSONArray buildingsArr = new JSONArray();
 			for (Building b : buildings) {
 				buildingsArr.put(b.toJSON());

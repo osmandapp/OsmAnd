@@ -159,12 +159,16 @@ public class City extends MapObject {
 	}
 
 	public JSONObject toJSON() {
+		return toJSON(true);
+	}
+
+	public JSONObject toJSON(boolean includingBuildings) {
 		JSONObject json = super.toJSON();
 		json.put("type", type.name());
 		json.put("postcode", postcode);
 		JSONArray listOfStreetsArr = new JSONArray();
 		for (Street s : listOfStreets) {
-			listOfStreetsArr.put(s.toJSON());
+			listOfStreetsArr.put(s.toJSON(includingBuildings));
 		}
 		json.put("listOfStreets", listOfStreetsArr);
 
