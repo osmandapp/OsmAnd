@@ -36,7 +36,7 @@
 	<string name="save_track_to_gpx">Rexistra-la pista de xeito automático durante a navigación</string>
 	<string name="save_track_to_gpx_descrp">Unha pista do GPX gárdarase de xeito automático no cartafol das pistas durante a navigación.</string>
 	<string name="save_track_interval_globally">Intervalo de rexistro</string>
-	<string name="save_track_interval">Intervalo de rexistro durantea a navegación</string>
+	<string name="save_track_interval">Intervalo de rexistro durante a navegación</string>
 	<string name="save_track_interval_descr">Elixi-lo intervalo do rexistro das pistas durante a navigación.</string>
 	<string name="voice_provider_descr">Escolle a voz das indicacións para a navigación.</string>
 	<string name="voice_provider">Indicacións por voz</string>
@@ -46,8 +46,8 @@
 	
     <string name="monitoring_settings">Gravación de viaxes</string>
     <string name="monitoring_settings_descr">Configure de que xeito gravar as súas viaxes.</string>
-    <string name="record_plugin_description">Este engadido activa a funcionalidade de gravar e garda-as pistas premendo o trebello de rexistro de GPX na pantalla do mapa ou tamén de rexistrar de xeito automático tódalas rotas de navegación nun ficheiro GPX.
-\n
+    <string name="record_plugin_description">Este engadido activa a funcionalidade de gravar e garda-las pistas premendo o trebello de rexistro de GPX na pantalla do mapa ou tamén de rexistrar de xeito automático tódalas rotas de navegación nun ficheiro GPX. 
+\n 
 \nAs pistas gravadas pódense compartir ou empregar colaborando co OSM. Os atletas poden empregar pistas gravadas para estudar os seus adestramentos. Co OsmAnd é posíbel realizar directamente algunhas análises básicas, coma tempos, velocidade media, etc. e as pistas tamén pódense analizar posteriormente con ferramentas de análise de terceiros.</string>
     <string name="record_plugin_name">Gravación de viaxes</string>
     <string name="int_hour">h</string>
@@ -342,7 +342,7 @@
     <string name="speech_rate_descr">Indica-la velocidade na que fala o TTS.</string>
     <string name="speech_rate">Velocidade da fala</string>
     
-    <string name="complex_route_calculation_failed">Fallou o cálculo axiña da rota (%s), voltando para cálculo lento.</string>
+    <string name="complex_route_calculation_failed">Fallou o cálculo rápido da rota (%s), voltando para cálculo lento.</string>
     <string name="disable_complex_routing_descr">Desactiva-lo cálculo da rota de dúas fases para a navigación no automóbil.</string>
     <string name="disable_complex_routing">Desactivar navigación complexa</string>
     <string name="amenity_type_seamark">Baliza</string>
@@ -642,7 +642,7 @@
 	<string name="auto_zoom_map">Achegamento automático do mapa</string>
 	<string name="snap_to_road_descr">Axusta-la ubicación ás estradas durante a navigación.</string>
 	<string name="snap_to_road">Axustar á estrada</string>
-	<string name="interrupt_music_descr">O aviso por voz, pausa a reprodución da música (non só baixa o volume).</string>
+	<string name="interrupt_music_descr">O aviso por voz, detén a reprodución da música (non só baixa o volume).</string>
 	<string name="interrupt_music">Deter a música</string>
 	
 	<string name="osmand_play_title_30_chars">Mapas e navegación OsmAnd</string>
@@ -1230,8 +1230,8 @@
 	
 	<string name="shared_string_select_all">Selecciónao todo</string>
 	<string name="shared_string_refresh">Anovar</string>
-	<string name="fast_route_mode">Rota máis axiña</string>
-	<string name="fast_route_mode_descr">Active isto para calcula-la rota máis axiña ou desactíveo para a máis eficiencia no combustíbel.</string>
+	<string name="fast_route_mode">Rota máis rápida</string>
+	<string name="fast_route_mode_descr">Active isto para calcula-la rota máis rápida ou desactíveo para a máis eficiencia no combustíbel.</string>
 	<string name="tiles_to_download_estimated_size">No achegamento {0}, descarregar {1} teselas ({2} MB)</string>
 	<string name="shared_string_download_map">Descarregar mapa</string>
 	<string name="select_max_zoom_preload_area">Escolle-lo achegamento máximo que precarregar</string>
@@ -1306,7 +1306,7 @@
 	<string name="background_service_wait_int">Tempo de espera</string>
 	
 	<string name="where_am_i">Onde estou?</string>
-	<string name="process_navigation_service">OsmAnd navigation service</string>
+	<string name="process_navigation_service">Servizo de navigación do OsmAnd</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">segundos</string>
@@ -1394,7 +1394,7 @@
 	<string name="max_level_download_tile_descr">Non procurar nas teselas dos mapas en liña para niveis do achegamento alén disto.</string>
 	<string name="route_general_information">Distancia total %1$s, tempo da viaxe %2$d h %3$d min.</string>
 	<string name="router_service_descr">Escoller un servizo da navigación con conexión ou sen ela.</string>
-	<string name="router_service">Navigation service</string>
+	<string name="router_service">Servizo de navigación</string>
 	<string name="sd_dir_not_accessible">O cartafol do almacenaxe dos datos na tarxeta da memoria non é accesíbel!</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Xa existen datos sen conexión ({1}) para {0}. Desexa actualizalos ({2})\?</string>
@@ -1759,7 +1759,7 @@
 	<string name="local_osm_changes_upload_all_confirm">Está a piques de enviar %1$d mudanza(s) ó OSM. Confírmao\?</string>
     <string name="confirmation_to_clear_history">Limpa-lo historial\?</string>
     <string name="shared_string_go">Ir</string>
-	<string name="osm_edits">Edicións de OSM</string>
+	<string name="osm_edits">Edicións do OSM</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
 	<string name="osmand_parking_time_left">esquerda</string>
@@ -2170,7 +2170,7 @@ Lon %2$s</string>
     
     
     
-    <string name="trip_rec_notification_settings">Activar comezo axiña da gravación</string>
+    <string name="trip_rec_notification_settings">Activar comezo rápido da gravación</string>
     <string name="trip_rec_notification_settings_desc">Amosar unha notificación que permita comezar a gravar a viaxe premendo no botón de gravar.</string>
     <string name="shared_string_notifications">Notificacións</string>
     <string name="shared_string_continue">Proseguer</string>
@@ -2180,10 +2180,10 @@ Lon %2$s</string>
     <string name="shared_string_record">Gravar</string>
     <string name="gpx_logging_no_data">Sen datos</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de cores das liñas de nivel</string>
-    <string name="save_track_min_speed">Velocidade de rexistro mínima</string>
+    <string name="save_track_min_speed">Mínima velocidade para o rexistro</string>
     <string name="save_track_min_speed_descr">Filtro: Non rexistrar puntos embaixo desta velocidade.</string>
-    <string name="save_track_min_distance_descr">Filtro: Define a distancia mínima do rexistro entre puntos da ubicación.</string>
-    <string name="save_track_precision">Precisión mínima do rexistro</string>
+    <string name="save_track_min_distance_descr">Filtro: Define a distancia mínima entre puntos para que se rexistre un novo.</string>
+    <string name="save_track_precision">Precisión mínima para o rexistro</string>
     <string name="save_track_precision_descr">Filtro: Non rexistrar, alo menos que se acade esta precisión.</string>
     <string name="christmas_poi">PDI de Nadal</string>
     <string name="christmas_desc">Anticipando as vacacións de Nadal e de Aninovo, pode decidir amosar puntos de interese asociados co Nadal: árbores de Nadal, mercados, etc.</string>
@@ -2355,7 +2355,7 @@ Lon %2$s</string>
     <string name="number_of_edits">Número de edicións</string>
     <string name="reports_for">Informe para</string>
     <string name="file_name_containes_illegal_char">O nome de ficheiro contén un carácter incorrecto</string>
-    <string name="configure_screen_quick_action">Acción axiña</string>
+    <string name="configure_screen_quick_action">Acción rápida</string>
 
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
@@ -2385,8 +2385,8 @@ Lon %2$s</string>
     <string name="quick_action_add_parking_descr">Ó premer no botón de acción engádese unha localización de aparcamento na posición central da pantalla.</string>
     <string name="favorite_autofill_toast_text">" gárdase en "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">Este nome da acción axiña indicado xa está a ser usado; mudouse cara \"%1$s\" para evitar duplicidades.</string>
-    <string name="quick_action_duplicate">Duplicidade do nome da acción axiña</string>
+    <string name="quick_action_duplicates">Este nome da acción rápida indicado xa está a ser usado; mudouse cara \"%1$s\" para evitar duplicidades.</string>
+    <string name="quick_action_duplicate">Duplicidade do nome da acción rápida</string>
     <string name="quick_action_showhide_favorites_descr">Ó premer no botón de acción amósanse ou agóchanse os puntos favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Ó premer no botón de acción amósanse ou agóchanse os puntos de interese (PDI) no mapa.</string>
     <string name="quick_action_showhide_favorites_title">Amosar/Agochar os Favoritos</string>
@@ -2500,8 +2500,8 @@ Lon %2$s</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para engadir unha ou máis imaxes a esta localización do mapa.</string>
     <string name="online_photos">Imaxes da rede</string>
-    <string name="quick_action_resume_pause_navigation">Pausar/Voltar a navigación</string>
-    <string name="quick_action_resume_pause_navigation_descr">Preme neste botón para pausar ou reemprender a navigación.</string>
+    <string name="quick_action_resume_pause_navigation">Deter/Voltar á navigación</string>
+    <string name="quick_action_resume_pause_navigation_descr">Preme neste botón para deter ou voltar á navigación.</string>
     <string name="quick_action_start_stop_navigation">Iniciar/Parar a navigación</string>
     <string name="quick_action_start_stop_navigation_descr">Prema neste botón para iniciar a navegación, ou para detela se xa estaba iniciada.</string>
     <string name="store_tracks_in_monthly_directories">Almacenar as pistas gravadas en cartafoles mensuais</string>
@@ -2550,8 +2550,8 @@ Lon %2$s</string>
     <string name="coordinates_format">Formato das coordenadas</string>
     <string name="use_system_keyboard">Empregar teclado do sistema</string>
     <string name="fast_coordinates_input_descr">Escolla o formato de inserimento das coordenadas. Pódeas mudar en \"Opcións\" sempre que quixer.</string>
-    <string name="fast_coordinates_input">Inserimento axiña das coordenadas</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">evitar estradas de xeo, vaos</string>
+    <string name="fast_coordinates_input">Inserimento rápido das coordenadas</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de xeo e vaos</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de xeo e vaos.</string>
     <string name="use_location">Empregar posición</string>
     <string name="add_location_as_first_point_descr">Engada a súa ubicación coma primeiro punto para indagar nunha rota perfecta.</string>
@@ -2915,8 +2915,8 @@ Lon %2$s</string>
     <string name="rendering_attr_depthContours_name">Curvas do afundimento náuticos</string>
     <string name="auto_split_recording_title">División automática das gravacións en intervalos</string>
     <string name="auto_split_recording_descr">Comezar novo segmento despois dun intre de 6 min, nova pista despois dun intre de 2 h, ou novo ficheiro despois dun intre máis longo se mudaches a data.</string>
-    <string name="shared_string_paused">Pausado</string>
-    <string name="save_track_min_distance">Rexistro do desprazamento mínimo</string>
+    <string name="shared_string_paused">Detido</string>
+    <string name="save_track_min_distance">Mínimo desprazamento para o rexistro</string>
     <string name="access_direction_audio_feedback">Indicacións por son</string>
     <string name="access_direction_haptic_feedback">Indicacións polo tacto</string>
     <string name="access_shared_string_navigate_up">Navigar até</string>
@@ -3031,24 +3031,33 @@ Lon %2$s</string>
 \n 
 \n • A subscrición do OsmAnd Live, suporta agora tódalas características do OsmAnd "</string>
     <string name="osmand_extended_description_part2">"Navigación GPS 
-\n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis axiña) 
+\n
+\n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
+\n
 \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 
+\n
 \n • A rota recalcúlase ó saírse da mesma 
+\n
 \n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota 
+\n
 \n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático 
+\n
 \n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo 
-\n • O achegamento do mapa axústase á velocidade
+\n
+\n • O achegamento do mapa axústase á velocidade 
 \n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas 
+\n
 \n • Suporta puntos intermedios no itinerario 
+\n
 \n • Grave a súa viaxe ou soba unha pista GPX e séguea "</string>
     <string name="osmand_extended_description_part3">Navigación GPS 
-\n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis axiña) 
+\n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
 \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 
 \n • A rota recalcúlase ó saírse da mesma 
 \n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota 
 \n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático 
 \n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo 
-\n • O achegamento do mapa axústase á velocidade
+\n • O achegamento do mapa axústase á velocidade 
 \n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas 
 \n • Suporta puntos intermedios no itinerario 
 \n • Grave a súa viaxe ou soba unha pista GPX e séguea 
@@ -3076,16 +3085,16 @@ Lon %2$s</string>
 \n 
 \nAlgunhas das principais funcións son:</string>
     <string name="osmand_plus_extended_description_part2">Navigación GPS 
-\n • Funciona en liña (axiña) ou sen conexión (sen pagamentos do roaming ó viaxares ó extranxeiro)
-\n
+\n • Funciona en liña (rápido) ou sen conexión (sen pagamentos do roaming ó viaxares ó extranxeiro) 
+\n 
 \n • Guía por voz xiro-a-xiro (voces gravadas e sintetizadas) 
-\n
+\n 
 \n • (Opcional) Guía dos carrís, nomes das rúas e tempo estimado ó destino 
-\n
+\n 
 \n • Suporta puntos intermedios no itinerario 
-\n
+\n 
 \n • A rota recalcúlase ó saírse da mesma 
-\n
+\n 
 \n • Procura destinos por enderezo, por tipo (por exemplo: Restaurantes, hoteis, gasolineiras, museos), ou por coordenada xeográfica 
 \n</string>
     <string name="osmand_plus_extended_description_part3">Vista do mapa 

@@ -1666,7 +1666,7 @@
     <string name="mapillary_menu_edit_text_hint">Унесите корисничко име</string>
     <string name="mapillary_menu_descr_username">Прегледај само слике које је додао</string>
     <string name="mapillary_menu_title_username">Корисничко име</string>
-    <string name="mapillary_menu_filter_description">Филтрирајте слике према отпремачу или према датуму. Филтрирање се примењује само при зумирању.</string>
+    <string name="mapillary_menu_filter_description">Филтрирајте слике према пошиљаоцу, према датуму или према типу. Филтрирање се примењује само при зумирању.</string>
     <string name="map_widget_ruler_control">Обим лењира</string>
     <string name="shared_string_permissions">Дозволе</string>
     <string name="import_gpx_failed_descr">OsmAnd не може да увезе фајл. Молим, проверите да ли OsmAnd има дозволе за читање фајла са ове локације.</string>
@@ -3034,4 +3034,6 @@
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Одаберите период плаћања који Вам највише одговара:</string>
     <string name="osm_live_payment_contribute_descr">Део прихода иде уређивачима OpenStreetMap-а.</string>
+    <string name="osm_live_subscriptions">Претплате</string>
+    <string name="mapillary_menu_title_pano">Прикажи само слике од 360°</string>
     </resources>
