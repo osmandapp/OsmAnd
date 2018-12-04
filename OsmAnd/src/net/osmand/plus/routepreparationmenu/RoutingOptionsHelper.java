@@ -54,20 +54,17 @@ import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
 public class RoutingOptionsHelper {
 
-
 	public static final String MORE_VALUE = "MORE_VALUE";
 	public static final String DRIVING_STYLE = "driving_style";
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private RoutingHelper routingHelper;
 
 	Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
 
 	public RoutingOptionsHelper(OsmandApplication application) {
 		app = application;
 		settings = app.getSettings();
-		routingHelper = app.getRoutingHelper();
 
 		modes.put(ApplicationMode.CAR, new RouteMenuAppModes(ApplicationMode.CAR, getRoutingParameters(ApplicationMode.CAR, MapRouteInfoMenu.PermanentAppModeOptions.CAR.routingParameters)));
 		modes.put(ApplicationMode.BICYCLE, new RouteMenuAppModes(ApplicationMode.BICYCLE, getRoutingParameters(ApplicationMode.BICYCLE, MapRouteInfoMenu.PermanentAppModeOptions.BICYCLE.routingParameters)));
@@ -88,6 +85,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void switchSound() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		boolean mt = !routingHelper.getVoiceRouter().isMute();
 		settings.VOICE_MUTE.set(mt);
 		routingHelper.getVoiceRouter().setMute(mt);
@@ -196,7 +194,7 @@ public class RoutingOptionsHelper {
 		final OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		// if short way that it should set valut to fast mode opposite of current
-		if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")) {
+		if (rp.routingParameter != null && rp.routingParameter.getId().equals(GeneralRouter.USE_SHORTEST_WAY)) {
 			settings.FAST_ROUTE_MODE.setModeValue(routingHelper.getAppMode(), !isChecked);
 		}
 		rp.setSelected(settings, isChecked);
@@ -272,6 +270,9 @@ public class RoutingOptionsHelper {
 			if (item != null) {
 				updateRoutingParameterIcons(item);
 				list.add(item);
+				if (item instanceof GpxLocalRoutingParameter) {
+					list.addAll(getGpxAndOsmandRouterParameters(am));
+				}
 			}
 		}
 		return list;
@@ -363,11 +364,11 @@ public class RoutingOptionsHelper {
 			case OtherSettingsRoutingParameter.KEY:
 				return new OtherSettingsRoutingParameter();
 			default:
-				return getRoutingParametersInner(am, parameter);
+				return getRoutingParameterInnerById(am, parameter);
 		}
 	}
 
-	public LocalRoutingParameter getRoutingParametersInner(ApplicationMode am, String parameter) {
+	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		GeneralRouter rm = getRouter(app.getDefaultRoutingConfig(), am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
@@ -376,7 +377,7 @@ public class RoutingOptionsHelper {
 
 		LocalRoutingParameter rp;
 		Map<String, GeneralRouter.RoutingParameter> parameters = rm.getParameters();
-		GeneralRouter.RoutingParameter routingParameter = parameters.get(parameter);
+		GeneralRouter.RoutingParameter routingParameter = parameters.get(parameterId);
 
 		if (routingParameter != null) {
 			rp = new LocalRoutingParameter(am);
@@ -385,7 +386,7 @@ public class RoutingOptionsHelper {
 			LocalRoutingParameterGroup rpg = null;
 			for (GeneralRouter.RoutingParameter r : rm.getParameters().values()) {
 				if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN
-						&& !Algorithms.isEmpty(r.getGroup()) && r.getGroup().equals(parameter)) {
+						&& !Algorithms.isEmpty(r.getGroup()) && r.getGroup().equals(parameterId)) {
 					if (rpg == null) {
 						rpg = new LocalRoutingParameterGroup(am, r.getGroup());
 					}
@@ -409,7 +410,7 @@ public class RoutingOptionsHelper {
 		return list;
 	}
 
-	public List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
+	public List<LocalRoutingParameter> getGpxAndOsmandRouterParameters(ApplicationMode am) {
 		final OsmandSettings settings = app.getSettings();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
@@ -438,6 +439,12 @@ public class RoutingOptionsHelper {
 						.isCalculateOsmAndRouteParts()));
 			}
 		}
+		return list;
+	}
+
+	public List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
+		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
+		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxAndOsmandRouterParameters(am));
 		GeneralRouter rm = SettingsNavigationActivity.getRouter(app.getDefaultRoutingConfig(), am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
@@ -564,7 +571,7 @@ public class RoutingOptionsHelper {
 			return true;
 		}
 
-		public String getId() {
+		public String getKey() {
 			if (routingParameter != null) {
 				return routingParameter.getId();
 			}
@@ -620,7 +627,7 @@ public class RoutingOptionsHelper {
 		private String groupName;
 		private List<LocalRoutingParameter> routingParameters = new ArrayList<>();
 
-		public String getId() {
+		public String getKey() {
 			if (groupName != null) {
 				return groupName;
 			}
@@ -679,7 +686,7 @@ public class RoutingOptionsHelper {
 			super(null);
 		}
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -698,7 +705,7 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "DividerItem";
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -715,7 +722,7 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "RouteSimulationItem";
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -736,7 +743,7 @@ public class RoutingOptionsHelper {
 			super(null);
 		}
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -759,7 +766,7 @@ public class RoutingOptionsHelper {
 			super(null);
 		}
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -782,7 +789,7 @@ public class RoutingOptionsHelper {
 			super(null);
 		}
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -801,7 +808,7 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "GpxLocalRoutingParameter";
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -811,6 +818,16 @@ public class RoutingOptionsHelper {
 
 		public GpxLocalRoutingParameter() {
 			super(null);
+		}
+
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_polygom_dark;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_polygom_dark;
 		}
 	}
 
@@ -822,7 +839,7 @@ public class RoutingOptionsHelper {
 			super(null);
 		}
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -845,7 +862,7 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "OtherLocalRoutingParameter";
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -884,7 +901,7 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "InterruptMusicRoutingParameter";
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -897,7 +914,7 @@ public class RoutingOptionsHelper {
 
 		public static final String KEY = "VoiceGuidanceRoutingParameter";
 
-		public String getId() {
+		public String getKey() {
 			return KEY;
 		}
 
@@ -919,7 +936,7 @@ public class RoutingOptionsHelper {
 
 		public boolean containsParameter(LocalRoutingParameter parameter) {
 			for (LocalRoutingParameter p : parameters) {
-				if (p.getId().equals(parameter.getId())) {
+				if (p.getKey().equals(parameter.getKey())) {
 					return true;
 				}
 			}

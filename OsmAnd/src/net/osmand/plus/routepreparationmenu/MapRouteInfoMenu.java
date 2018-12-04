@@ -713,7 +713,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				String text;
 				boolean active;
 				if (parameter.routingParameter != null) {
-					if (parameter.routingParameter.getId().equals("short_way")) {
+					if (parameter.routingParameter.getId().equals(GeneralRouter.USE_SHORTEST_WAY)) {
 						// if short route settings - it should be inverse of fast_route_mode
 						active = !settings.FAST_ROUTE_MODE.getModeValue(routingHelper.getAppMode());
 					} else {

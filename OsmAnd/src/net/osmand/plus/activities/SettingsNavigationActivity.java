@@ -37,6 +37,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
@@ -302,7 +303,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();
-				if(parameters.containsKey("short_way")) {
+				if(parameters.containsKey(GeneralRouter.USE_SHORTEST_WAY)) {
 					cat.addPreference(fastRoute);
 				}
 				List<RoutingParameter> others = new ArrayList<GeneralRouter.RoutingParameter>();
@@ -315,7 +316,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 						preferParameters.add(routingParameter);
 					} else if ("relief_smoothness_factor".equals(routingParameter.getGroup())) {
 						reliefFactorParameters.add(routingParameter);
-					} else if (!param.equals("short_way") && !"driving_style".equals(routingParameter.getGroup())) {
+					} else if (!param.equals(GeneralRouter.USE_SHORTEST_WAY) && !RoutingOptionsHelper.DRIVING_STYLE.equals(routingParameter.getGroup())) {
 						others.add(routingParameter);
 					}
 				}

@@ -74,9 +74,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			itemsContainer.setVisibility(View.VISIBLE);
 		}
 
-		for (BaseBottomSheetItem item : items) {
-			item.inflate(app, itemsContainer, nightMode);
-		}
+		inflateMenuItems();
 
 		int bottomDividerColorId = getBottomDividerColorId();
 		if (bottomDividerColorId != DEFAULT_VALUE) {
@@ -148,6 +146,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	public abstract void createMenuItems(Bundle savedInstanceState);
 
+	protected void inflateMenuItems(){
+		OsmandApplication app = getMyApplication();
+		for (BaseBottomSheetItem item : items) {
+			item.inflate(app, itemsContainer, nightMode);
+		}
+	}
+
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
@@ -191,7 +196,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
 					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
-					if (!useScrollableItemsContainer() && !showTopShadow) {
+					if (!showTopShadow) {
 						mainView.setPadding(0, 0, 0, 0);
 					}
 				} else {

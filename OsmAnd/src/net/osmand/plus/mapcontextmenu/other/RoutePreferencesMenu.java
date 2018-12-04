@@ -42,6 +42,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherSettingsRo
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.VoiceGuidanceRoutingParameter;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.router.GeneralRouter;
 
 import java.io.File;
 
@@ -161,8 +162,8 @@ public class RoutePreferencesMenu {
 					btn.performClick();
 				} else if (obj instanceof AvoidRoadsRoutingParameter) {
 					routingOptionsHelper.selectRestrictedRoads(mapActivity);
-				} else if (view.findViewById(R.id.GPXRouteSpinner) != null) {
-					showOptionsMenu((TextView) view.findViewById(R.id.GPXRouteSpinner));
+				} else if (obj instanceof GpxLocalRoutingParameter) {
+					showOptionsMenu((TextView) view.findViewById(R.id.description));
 				} else {
 					CheckBox ch = (CheckBox) view.findViewById(R.id.toggle_item);
 					if (ch != null) {
@@ -288,8 +289,8 @@ public class RoutePreferencesMenu {
 				if (parameter instanceof GpxLocalRoutingParameter) {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_gpx, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
-					AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.GPXRouteTitle), nightMode);
-					final TextView gpxSpinner = (TextView) v.findViewById(R.id.GPXRouteSpinner);
+					AndroidUtils.setTextPrimaryColor(mapActivity, (TextView) v.findViewById(R.id.title), nightMode);
+					final TextView gpxSpinner = (TextView) v.findViewById(R.id.description);
 					AndroidUtils.setTextPrimaryColor(mapActivity, gpxSpinner, nightMode);
 					((ImageView) v.findViewById(R.id.dropDownIcon))
 							.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
@@ -331,7 +332,7 @@ public class RoutePreferencesMenu {
 					}
 					ch.setVisibility(View.GONE);
 				} else {
-					if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")) {
+					if (rp.routingParameter != null && rp.routingParameter.getId().equals(GeneralRouter.USE_SHORTEST_WAY)) {
 						// if short route settings - it should be inverse of fast_route_mode
 						ch.setChecked(!settings.FAST_ROUTE_MODE.getModeValue(routingHelper.getAppMode()));
 					} else {
