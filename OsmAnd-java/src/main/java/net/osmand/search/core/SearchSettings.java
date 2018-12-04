@@ -2,18 +2,14 @@ package net.osmand.search.core;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 // immutable object
 public class SearchSettings {
@@ -27,7 +23,7 @@ public class SearchSettings {
 	private ObjectType[] searchTypes;
 	private boolean emptyQueryAllowed;
 	private boolean sortByName;
-	private boolean exportObjects = false;
+	private SearchExportSettings exportSettings;
 
 	public SearchSettings(SearchSettings s) {
 		if(s != null) {
@@ -40,15 +36,14 @@ public class SearchSettings {
 			this.searchTypes = s.searchTypes;
 			this.emptyQueryAllowed = s.emptyQueryAllowed;
 			this.sortByName = s.sortByName;
-			this.exportObjects = s.exportObjects;
+			this.exportSettings = s.exportSettings;
 		}
 	}
 	
 	public SearchSettings(List<? extends BinaryMapIndexReader> offlineIndexes) {
 		this.offlineIndexes = Collections.unmodifiableList(offlineIndexes);
 	}
-	
-	
+
 	public List<BinaryMapIndexReader> getOfflineIndexes() {
 		return offlineIndexes;
 	}
@@ -142,14 +137,18 @@ public class SearchSettings {
 		return s;
 	}
 
-	public boolean isExportObjects() {
-		return exportObjects;
+	public SearchExportSettings getExportSettings() {
+		return exportSettings;
 	}
 
-	public SearchSettings setExportObjects(boolean exportObjects) {
+	public SearchSettings setExportSettings(SearchExportSettings exportSettings) {
 		SearchSettings s = new SearchSettings(this);
-		this.exportObjects = exportObjects;
+		this.exportSettings = exportSettings;
 		return s;
+	}
+
+	public boolean isExportObjects() {
+		return exportSettings != null;
 	}
 
 	public boolean hasCustomSearchType(ObjectType type) {

@@ -2723,7 +2723,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
     <string name="mapillary_menu_descr_username">Pahliadzieć toĺki vyjavy dadanyja</string>
     <string name="mapillary_menu_title_username">Imia karystaĺnika</string>
-    <string name="mapillary_menu_filter_description">Fiĺtravać vyjavy pa adpraŭniku ci dacie. Aktyŭnyja toĺki dlia bujnoha pavieličennia.</string>
+    <string name="mapillary_menu_filter_description">Filtravać vyjavy pa adpraŭniku, pa dacie abo pa typu. Aktyŭnyja toĺki dlia bujnoha pavieličennia.</string>
     <string name="shared_string_reload">Abnavić</string>
     <string name="mapillary_menu_descr_tile_cache">Abnavić frahmienty, kab ubačyć aktuaĺnyja danyja.</string>
     <string name="mapillary_menu_title_tile_cache">Keš frahmientaŭ</string>
@@ -3167,4 +3167,5 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osm_live_payment_header">Abiarycie zručnuju dlia vas pieryjadyčnasć aplat:</string>
     <string name="osm_live_payment_contribute_descr">Častka dachodu idzie ŭdzieĺnikam OpenStreetMap.</string>
     <string name="powered_by_osmand">Pracuje na OsmAnd</string>
+    <string name="mapillary_menu_title_pano">Pakazać tolki 360° malunki</string>
     </resources>

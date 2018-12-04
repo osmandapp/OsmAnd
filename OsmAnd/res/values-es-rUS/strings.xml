@@ -3032,7 +3032,7 @@ Lon %2$s</string>
     <string name="third_party_application">Aplicación de terceros</string>
     <string name="osm_live_plan_pricing">Plan y Precios</string>
     <string name="osm_live_payment_monthly_title">Pago mensual</string>
-    <string name="osm_live_payment_3_months_title">Pago cada 3 meses</string>
+    <string name="osm_live_payment_3_months_title">Pago trimestral</string>
     <string name="osm_live_payment_annual_title">Pago anual</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
@@ -3042,7 +3042,7 @@ Lon %2$s</string>
     <string name="osm_live_payment_renews_quarterly">Renovar trimestralmente</string>
     <string name="osm_live_payment_renews_annually">Renovar anualmente</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Marca el período de pago más conveniente:</string>
+    <string name="osm_live_payment_header">Elige la frecuencia de pago:</string>
     <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
     <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
     <string name="osm_live_subscriptions">Suscripciones</string>

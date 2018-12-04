@@ -2748,7 +2748,7 @@
     <string name="mapillary_menu_edit_text_hint">輸入使用者名稱</string>
     <string name="mapillary_menu_descr_username">僅檢視增加的圖片由</string>
     <string name="mapillary_menu_title_username">使用者名稱</string>
-    <string name="mapillary_menu_filter_description">按照提供者或日期篩選圖片，僅動作於特寫的縮放才有效。</string>
+    <string name="mapillary_menu_filter_description">按照提供者、日期或類型篩選圖片。僅動作於特寫的縮放才有效。</string>
     <string name="shared_string_reload">重新載入</string>
     <string name="mapillary_menu_descr_tile_cache">請重新載入圖磚，以查看最新的資料。</string>
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
@@ -3188,4 +3188,6 @@
     <string name="osm_live_payment_header">選擇適合您的付款期：</string>
     <string name="osm_live_payment_contribute_descr">部分收入歸 OpenStreetMap 的貢獻者所有。</string>
     <string name="powered_by_osmand">Powered by OsmAnd</string>
+    <string name="osm_live_subscriptions">訂閱</string>
+    <string name="mapillary_menu_title_pano">只顯示 360° 圖片</string>
     </resources>

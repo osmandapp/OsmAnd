@@ -3022,7 +3022,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="enter_lat_and_lon">緯度と経度を入力してください</string>
 	<string name="optional_point_name">任意の地点名を入力</string>
     <string name="subsequent_dest_description">選択した地点を、最終目的地として設定します</string>
-    <string name="get_osmand_live">OsmAnd Liveに加入すると全ての機能がアンロックされます:毎日更新されるマップを無制限にダウンロード・すべての有料と無料のプラグイン・Wikipedia、Wikivoyageなどの旅行ガイドの利用。</string>
+    <string name="get_osmand_live">OsmAnd Liveに加入すると以下の機能がアンロックされます:毎日更新されるマップを制限なしでダウンロード・有料＆無料プラグイン全ての利用・Wikipedia、Wikivoyageなど旅行ガイドの利用。</string>
     <string name="unirs_render_descr">歩行者と自転車道路のコントラストを強調するようにデフォルトスタイルを変更します。 その際従来のMapnikカラーが適用されます。</string>
     <string name="shared_string_bookmark">ブックマーク</string>
     <string name="hide_full_description">詳しい説明文を非表示</string>

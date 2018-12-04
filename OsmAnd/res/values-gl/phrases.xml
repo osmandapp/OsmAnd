@@ -360,7 +360,7 @@
 	<string name="poi_rapids">Rápidos</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_beach">Praia</string>
-	<string name="poi_bay">Baía</string>
+	<string name="poi_bay">Badía</string>
 	<string name="poi_fjord">Fiordo</string>
 	<string name="poi_reef">Arrecife</string>
 	<string name="poi_nature_reserve">Reserva natural</string>
@@ -956,7 +956,7 @@
 	<string name="poi_board_type_astronomy">Astronomía</string>
 
 	<string name="poi_smoking_no">Non</string>
-	<string name="poi_smoking_outside">So fóra</string>
+	<string name="poi_smoking_outside">Só fóra</string>
 	<string name="poi_smoking_yes">Si</string>
 	<string name="poi_smoking_separated">Nunha sala separada</string>
 	<string name="poi_smoking_isolated">En dependencia illada</string>
@@ -1354,7 +1354,7 @@
 	<string name="poi_covered_yes">Si</string>
 	<string name="poi_fireplace_no">Sen lareira</string>
 
-	<string name="poi_covered_no">Descuberto</string>
+	<string name="poi_covered_no">Descoberto</string>
 
 	<string name="poi_tactile_paving_yes">Si</string>
 	<string name="poi_railway_level_crossing">Pasaxe a nivel</string>
