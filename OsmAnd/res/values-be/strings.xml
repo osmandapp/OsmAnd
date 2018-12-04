@@ -4,48 +4,48 @@
     <string name="auto_zoom_far">Для сярэдняга маштабу</string>
     <string name="auto_zoom_farthest">Драбней</string>
     <string name="map_magnifier">Лупа мапы</string>
-    <string name="base_world_map">Асноўная мапа сьвету</string>
+    <string name="base_world_map">Асноўная мапа свету</string>
     <string name="about_version">Версія:</string>
-    <string name="shared_string_about">Аб праграме</string>
-    <string name="about_settings_descr">Вэрсія, ліцэнзіі, удзельнікі праекту</string>
+    <string name="shared_string_about">Аб дадатку</string>
+    <string name="about_settings_descr">Версія, ліцэнзіі, удзельнікі праекта</string>
     
     
-    <string name="local_index_tile_data_zooms">Сьцягнутыя маштабы: %1$s</string>
-    <string name="local_index_tile_data_expire">Тэрмін дзеяньня (у хвілінах): %1$s</string>
-    <string name="local_index_tile_data_downloadable">Можна сьцягнуць: %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Максымальнае павелічэньне: %1$s</string>
-    <string name="local_index_tile_data_minzoom">Мінімальнае павелічэньне: %1$s</string>
-    <string name="local_index_tile_data_name">Зьвесткі фрагмэнту: %1$s</string>
+    <string name="local_index_tile_data_zooms">Спампаваныя маштабы: %1$s</string>
+    <string name="local_index_tile_data_expire">Тэрмін дзеяння (у хвілінах): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Можна спампаваць: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Максімальнае павелічэнне: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Мінімальнае павелічэнне: %1$s</string>
+    <string name="local_index_tile_data_name">Даныя фрагменту: %1$s</string>
     <string name="edit_tilesource_successfully">Крыніца фрагментаў мапы «%1$s» захаваная</string>
     <string name="edit_tilesource_elliptic_tile">Эліптычны меркатар</string>
-    <string name="edit_tilesource_maxzoom">Максімальнае павелічэньне</string>
-    <string name="edit_tilesource_expiration_time">Тэрмін дзеяньня (у хвілінах)</string>
-    <string name="edit_tilesource_minzoom">Мінімальнае павелічэньне</string>
+    <string name="edit_tilesource_maxzoom">Максімальнае павелічэнне</string>
+    <string name="edit_tilesource_expiration_time">Тэрмін дзеяння (у хвілінах)</string>
+    <string name="edit_tilesource_minzoom">Мінімальнае павелічэнне</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Абярыце наяўную…</string>
-    <string name="maps_define_edit">Вызначыць/зьмянiць…</string>
+    <string name="maps_define_edit">Вызначыць/змянiць…</string>
 	<string name="map_widget_fps_info">Адладачная інфармацыя FPS</string>
-	<string name="driving_region_descr">Абярыце рэгіён кіраваньня: ЗША, Эўропа, Вялікабрытанія, Азія і іншыя.</string>
+	<string name="driving_region_descr">Абярыце рэгіён кіраваньня: ЗША, Еўропа, Вялікабрытанія, Азія і іншыя.</string>
 	<string name="driving_region">Рэгіён кіравання</string>
 	<string name="driving_region_japan">Японія</string>
 	<string name="driving_region_us">ЗША</string>
 	<string name="driving_region_canada">Канада</string>
-	<string name="driving_region_europe_asia">Эўропа, Азія, Лацінская Амерыка ды іншыя</string>
+	<string name="driving_region_europe_asia">Еўропа, Азія, Лацінская Амерыка ды іншыя</string>
 	<string name="driving_region_uk">Вялікабрытанія, Індыія ды іншыя</string>
 	    
     
     
     <string name="speak_title">Агалошваць…</string>
-	<string name="speak_descr">Агалошваць назвы вуліц, дарожныя перасцярогі (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасцярогі аб камерах хуткасці, абмежаванні хуткасці.</string>
+	<string name="speak_descr">Агалошваць назвы вуліц, дарожныя папярэджанні (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасцярогі аб камерах хуткасці, абмежаванні хуткасці.</string>
 	<string name="speak_street_names">Назвы вуліц (TTS)</string>
     <string name="speak_speed_limit">Абмежаванне хуткасці</string>
     <string name="speak_cameras">Камеры хуткасці</string>
-	<string name="speak_traffic_warnings">Перасцярогі руху</string>
+	<string name="speak_traffic_warnings">Папярэджанні руху</string>
     
     <string name="osb_author_or_password_not_specified">Калі ласка, пазначце карыстальніка OSM і ягоны пароль у «Наладах»</string>
-    <string name="clear_intermediate_points">Ачысьціць прамежкавыя пункты прызначэньня</string>
-    <string name="keep_intermediate_points">Захаваць прамежкавыя пункты прызначэньня</string>
-    <string name="new_directions_point_dialog">У вас ужо ёсьць набор прамежкавых пунктаў прызначэньня.</string>
+    <string name="clear_intermediate_points">Ачысціць прамежкавыя пункты прызначэння</string>
+    <string name="keep_intermediate_points">Захаваць прамежкавыя пункты прызначэння</string>
+    <string name="new_directions_point_dialog">У вас ужо ёсць набор прамежкавых пунктаў прызначэння.</string>
     <string name="context_menu_item_directions_to">Маршрут да</string>
     <string name="context_menu_item_directions_from">Маршрут адсюль</string>
     <string name="route_descr_map_location">Мапа: </string>
@@ -57,25 +57,25 @@
 	
 	
 	<string name="app_mode_default">Прагляд мапы</string>
-	<string name="settings_preset">Стандартны профіль</string>
-	<string name="settings_preset_descr">Выгляд мапы й налады навігацыі захоўваюцца для кожнага асобнага профілю. Вызначце Ваш стандартны профіль.</string>
-    <string name="destination_point">Месца прызначэньня %1$s</string>
-    <string name="context_menu_item_destination_point">Ужыць як прызначэньне</string>
+	<string name="settings_preset">Прадвызначаны профіль</string>
+	<string name="settings_preset_descr">Выгляд мапы і налады навігацыі захоўваюцца для кожнага асобнага профілю. Вызначце ваш прадвызначаны профіль.</string>
+    <string name="destination_point">Месца прызначэння %1$s</string>
+    <string name="context_menu_item_destination_point">Ужыць як пункт прызначэння</string>
     <string name="please_select_address">Абярыце спачатку горад ці вуліцу</string>
     
     <string name="search_street_in_neighborhood_cities">Пошук вуліцы ў суседніх гарадах</string>
     <string name="intermediate_items_sort_return">Аптымальны парадак прамежкавых пунктаў прызначэння па шляху да месца прызначэння.</string>
-    <string name="intermediate_items_sort_by_distance">Упарадкаваць ад дзьвярэй да дзьвярэй</string>
+    <string name="intermediate_items_sort_by_distance">Упарадкаваць ад дзвярэй да дзвярэй</string>
     <string name="local_osm_changes_backup_successful">Файл OSM-змен створаны ў %1$s</string>
-    <string name="local_osm_changes_backup_failed">Не атрымалася зарэзерваваць OSM-зьмены</string>
-    <string name="local_osm_changes_backup">Рэзервовае капіяваньне файлу зьмен OSM</string>
-    <string name="delete_point">Выдаліць кропку</string>
+    <string name="local_osm_changes_backup_failed">Не атрымалася зарэзерваваць OSM-змены</string>
+    <string name="local_osm_changes_backup">Рэзервовае капіраванне файлу змен OSM</string>
+    <string name="delete_point">Выдаліць пункт</string>
     <string name="plugin_distance_point_time">час</string>
-    <string name="plugin_distance_point_hdop">дакладнасьць</string>
-    <string name="plugin_distance_point_speed">хуткасьць</string>
+    <string name="plugin_distance_point_hdop">дакладнасць</string>
+    <string name="plugin_distance_point_speed">хуткасць</string>
     <string name="plugin_distance_point_ele">вышыня</string>
     <string name="plugin_distance_point">Пункт</string>
-    <string name="gpx_file_name">Назва GPX файлу</string>
+    <string name="gpx_file_name">Назва файла GPX</string>
     <string name="gpx_saved_sucessfully">GPX-файл захаваны ў {0}</string>
     <string name="osmand_distance_planning_plugin_description">Убудова дадае на экран мапы віджэт, які дазваляе ствараць маршруты, націснуйшы на мапу, а таксама выкарыстоўваць ці змяняць наяўныя файлы GPX, планаваць паездку і вымяраць адлегласць паміж пунктамі. Вынікі могуць быць захаваныя ў выглядзе файла GPX, які пасля можа быць выкарыстаны для навігацыі.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разліку адлегласцяў і плянавання</string>
@@ -83,24 +83,24 @@
 \n * Доўга ўтрымлівайце на мапе, каб выдаліць папярэдні пункт.
 \n * Доўга ўтрымлівайце на пункце, каб паглядзець і дадаць апісанне.
 \n * Націсніце на віджэце вымярэння, каб убачыць больш дзеянняў.</string>
-    <string name="distance_measurement_start_editing">Пачаць рэдагаваньне</string>
-    <string name="distance_measurement_finish_editing">Скончыць рэдагаваньне</string>
-    <string name="distance_measurement_finish_subtrack">Пачаць новы падтрэк</string>
+    <string name="distance_measurement_start_editing">Пачаць рэдагаванне</string>
+    <string name="distance_measurement_finish_editing">Скончыць рэдагаванне</string>
+    <string name="distance_measurement_finish_subtrack">Пачаць новы падслед</string>
     <string name="distance_measurement_clear_route">Выдаліць ўсе пункты</string>
     
     <string name="distance_measurement_load_gpx">Адкрыць існы GPX-файл</string>
-    <string name="wait_current_task_finished">Калі ласка, пачакайце пакуль дзейная задача не будзе завершаная</string>
-    <string name="use_kalman_filter_compass_descr">Зніжае шум паказаньняў компасу, але дадае інэрцыю.</string>
-    <string name="use_kalman_filter_compass">Выкарыстоўваць фільтар Калмана</string>
+    <string name="wait_current_task_finished">Калі ласка, пачакайце пакуль бягучая задача не будзе завершаная</string>
+    <string name="use_kalman_filter_compass_descr">Зніжае шум паказанняў компасу, але дадае інэрцыю.</string>
+    <string name="use_kalman_filter_compass">Выкарыстоўваць фільтр Калмана</string>
     <string name="use_magnetic_sensor_descr">Выкарыстоўваць для працы компаса магнітны датчык замест датчыка арыентацыі.</string>
-    <string name="use_magnetic_sensor">Выкарыстоўваць магнітомэтр</string>
+    <string name="use_magnetic_sensor">Выкарыстоўваць магнітометр</string>
     <string name="other_location">Іншае</string>
     <string name="files_limit">засталося %1$d файлаў</string>
     <string name="available_downloads_left">Засталося %1$d файлаў для спампоўвання</string>
-    <string name="install_paid">Поўная вэрсія</string>
+    <string name="install_paid">Поўная версія</string>
     <string name="cancel_route">Скасаваць маршрут</string>
     <string name="cancel_navigation">Спыніць навігацыю</string>
-    <string name="clear_destination">Сьцерці месца прызначэньня</string>
+    <string name="clear_destination">Выдаліць месца прызначэння</string>
     <string name="download_using_mobile_internet">Wi-Fi не падлучаны. Выкарыстаць дзейнае падлучэнне да Інтэрнэту для спампоўвання?</string>
     <string name="street_name">Назва вуліцы</string>
 	<string name="hno">Нумар дома</string>
@@ -111,81 +111,81 @@
     <string name="monitoring_settings_descr">Налады запісу вашых падарожжаў.</string>
     
     
-    <string name="osmand_background_plugin_description">Паказвае налады ўключэньня фонавага адсочвання і навігацыі праз перыядычнае абуджэнне GPS-прыймача (з адключаным экранам).</string>
-    <string name="contribution_activity">Усталяваньне версіі</string>
-    <string name="choose_osmand_theme_descr">Абраць, як выглядае прыкладанне.</string>
+    <string name="osmand_background_plugin_description">Паказвае налады ўключэння фонавага адсочвання і навігацыі праз перыядычнае абуджэнне GPS прылады (з выключаным экранам).</string>
+    <string name="contribution_activity">Усталёўка версіі</string>
+    <string name="choose_osmand_theme_descr">Абраць выгляд дадатка.</string>
     <string name="choose_osmand_theme">Выгляд</string>
-    <string name="accessibility_options">Налады даступнасьці</string>
+    <string name="accessibility_options">Налады даступнасці</string>
     <string name="select_address_activity">Абраць адрас</string>
-    <string name="favourites_list_activity">Абярыце ўпадабанае</string>
+    <string name="favourites_list_activity">Абярыце ўлюбёнае</string>
     <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>    
 	
-    <string name="layer_hillshade">Слой рэльефу мясцовасьці</string>
-    <string name="map_widget_gps_info">Зьвесткі GPS</string>
+    <string name="layer_hillshade">Слой рэльефу мясцовасці</string>
+    <string name="map_widget_gps_info">Інфармацыя GPS</string>
     
-    <string name="access_arrival_time">Час прыбыцьця</string>
+    <string name="access_arrival_time">Час прыбыцця</string>
     <string name="item_checked">адзначана</string>
     <string name="item_unchecked">не адзначана</string>
-    <string name="prefer_motorways">Надаваць перавагу аўтамагістралям</string>
-	<string name="prefer_in_routing_title">Надаваць перавагу…</string>
-	<string name="prefer_in_routing_descr">Надаваць перавагу аўтамагістралям.</string>
+    <string name="prefer_motorways">Аддаваць перавагу аўтамагістралям</string>
+	<string name="prefer_in_routing_title">Аддаваць перавагу…</string>
+	<string name="prefer_in_routing_descr">Аддаваць перавагу аўтамагістралям.</string>
     <string name="max_speed_none">няма</string>
-    <string name="index_name_openmaps">OpenMaps Эўропа</string>
+    <string name="index_name_openmaps">OpenMaps Еўропа</string>
     
-    <string name="download_hillshade_maps">Слой з рэльефам мясцовасьці</string>
+    <string name="download_hillshade_maps">Пласт з рэльефам мясцовасці</string>
     
     
     
     <string name="local_indexes_cat_srtm">Ізалініі вышынь</string>
-    <string name="local_indexes_cat_av">Аўдыё/відэа зьвесткі</string>
+    <string name="local_indexes_cat_av">Аўдыё/відэа даныя</string>
     <string name="stop_routing_confirm">Сапраўды спыніць навігацыю?</string>
-    <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і прамежкавыя пункты прызначэньня)?</string>
-    <string name="precise_routing_mode_descr">Разлічыць дакладныя маршруты без памылак. Усё яшчэ абмежавана адлегласцю і павольная.</string>
+    <string name="clear_dest_confirm">Сапраўды выдаліць месца прызначэння (і прамежкавыя пункты прызначэння)\?</string>
+    <string name="precise_routing_mode_descr">Разлічыць дакладныя маршруты без памылак. Усё яшчэ абмежаваная адлегласцю і павольная.</string>
     <string name="precise_routing_mode">Дакладны маршрут (эксп.)</string>
     <string name="recording_context_menu_show">Паказаць</string>
     <string name="recording_photo_description">Фота %1$s %2$s</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
-    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе вам сінхранізаваць трэкі і аўдыё/відэа-натакi з вашым Dropbox-контам.</string>
-    <string name="dropbox_plugin_name">Модуль Dropbox</string>
+    <string name="dropbox_plugin_description">Убудова Dropbox дазваляе вам сінхранізаваць сляды і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
+    <string name="dropbox_plugin_name">Убудова Dropbox</string>
     
-    <string name="intermediate_points_change_order">Зьмяніць парадак</string>
-    <string name="srtm_paid_version_msg">Калі ласка, падумайце пра набыццё дадатку «Contour lines» для падтрымкі далейшай распрацоўкі.</string>
+    <string name="intermediate_points_change_order">Змяніць парадак</string>
+    <string name="srtm_paid_version_msg">Калі ласка, падумайце пра набыццё ўбудовы «Contour lines» для падтрымкі далейшай распрацоўкі.</string>
     <string name="srtm_paid_version_title">Убудова Ізалініі вышынь</string>
     <string name="av_def_action_choose">Выбар па запыце</string>
     <string name="av_def_action_video">Запіс відэа</string>
     <string name="av_def_action_audio">Запіс аўдыё</string>
-    <string name="av_widget_action_descr">Выберыце агаданае дзеянне віджэта.</string>
-    <string name="av_widget_action">Дзеяньне віджэта па змаўчанні</string>
-    <string name="av_video_format_descr">Выбар выхаднога фармату відэа.</string>
+    <string name="av_widget_action_descr">Абярыце прадвызначанае дзеянне віджэта.</string>
+    <string name="av_widget_action">Прадвызначанае дзеянне віджэта</string>
+    <string name="av_video_format_descr">Выбар выоднага фармату відэа.</string>
     <string name="av_video_format">Фармат відэа</string>
-    <string name="av_use_external_recorder_descr">Выкарыстоўваць сістэмную праграму для запісу відэа.</string>
-    <string name="av_use_external_recorder">Выкарыстоўваць сістэмны рэкордэр</string>
-    <string name="av_use_external_camera_descr">Выкарыстоўваць сістэмнае прыкладанне для фота.</string>
-    <string name="av_use_external_camera">Выкарыстоўваць праграму камеры</string>
-    <string name="av_settings_descr">Настроіць параметры аўдыё і відэа.</string>
+    <string name="av_use_external_recorder_descr">Выкарыстоўваць сістэмны дадатак для запісу відэа.</string>
+    <string name="av_use_external_recorder">Выкарыстоўваць сістэмны дадатак для запісу</string>
+    <string name="av_use_external_camera_descr">Выкарыстоўваць сістэмны дадатак для фота.</string>
+    <string name="av_use_external_camera">Выкарыстоўваць дадатак камеры</string>
+    <string name="av_settings_descr">Наладзіць параметры аўдыё і відэа.</string>
     <string name="av_settings">Налады аўдыё і відэа </string>
-    <string name="recording_error">Запіс не ўдаўся</string>
-    <string name="recording_camera_not_available">Камера не даступная</string>
+    <string name="recording_error">Запісаць не атрымалася</string>
+    <string name="recording_camera_not_available">Камера недаступная</string>
     <string name="recording_is_recorded">Аўдыё/відэа запісваецца. Каб спыніць, націсніце на AV-віджэт.</string>
     <string name="recording_playing">Прайграецца аўдыё з абранага запісу.\n%1$s</string>
-    <string name="recording_open_external_player">Адкрыць зьнешні прайгравальнік</string>
-    <string name="recording_delete_confirm">Выдаліць гэты запіс?</string>
-    <string name="recording_unavailable">недаступны</string>
-    <string name="recording_context_menu_arecord">Запісаць аўдыё-нататку</string>
-    <string name="recording_context_menu_vrecord">Запісаць відэа-нататку</string>
-    <string name="layer_recordings">Слой запісу</string>
-    <string name="recording_can_not_be_played">Запіс не можа быць прайграны</string>
+    <string name="recording_open_external_player">Адкрыць вонкавы прайгравальнік</string>
+    <string name="recording_delete_confirm">Выдаліць гэты аб’ект\?</string>
+    <string name="recording_unavailable">недаступна</string>
+    <string name="recording_context_menu_arecord">Запісаць аўдыянататку</string>
+    <string name="recording_context_menu_vrecord">Запісаць відэанататку</string>
+    <string name="layer_recordings">Пласт запісу</string>
+    <string name="recording_can_not_be_played">Запіс немагчыма прайграць</string>
     <string name="recording_context_menu_delete">Выдаліць запіс</string>
     <string name="recording_context_menu_play">Граць</string>
     <string name="recording_description">Запіс %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запіс</string>
-    <string name="map_widget_av_notes">Аўдыё/відэа-нататкі</string>
+    <string name="map_widget_av_notes">Аўдыё/відэа нататкі</string>
     <string name="osmand_srtm_short_description_80_chars">Убудова OsmAnd для пазасеціўных ізаліній вышынь</string>
-    <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
-    <string name="audionotes_location_not_defined">Месцазнаходжанне для прывязкі нататкі пакуль яшчэ не вызначылася. «Выкарыстаць месцазнаходжаньне…» каб прызначыць нататку ў выбраным месцы.</string>
+    <string name="map_widget_distancemeasurement">Вымярэнне адлегласці</string>
+    <string name="audionotes_location_not_defined">Месцазнаходжанне для прывязкі нататкі пакуль яшчэ не вызначылася. «Выкарыстаць месцазнаходжанне…» для запісу нататкі ў абраным месцы.</string>
     
-    <string name="map_widget_audionotes">Аўдыё-нататкі</string>
+    <string name="map_widget_audionotes">Аўдыянататкі</string>
     <string name="audionotes_plugin_description">Убудова для стварэння аўдыё/відэа нататак падчас падарожжаў, з дапамогай кнопкі на экране мапы альбо праз кантэкстнае меню на любым месцы на мапе.</string>
     <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
     <string name="index_srtm_parts">частак</string>
@@ -204,66 +204,66 @@
 	
 	<string name="map_widget_max_speed">Абмежаванне хуткасці</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="no_buildings_found">Будынкаў ня знойдзена.</string>
-    <string name="incremental_search_city">Выберыце горад</string>
+    <string name="no_buildings_found">Будынкаў не знойдзена.</string>
+    <string name="incremental_search_city">Абярыце горад</string>
     <string name="search_villages_and_postcodes">Дадатковы пошук вёсак і паштовага індэкса</string>
 	<string name="rendering_attr_showRoadMaps_description">Абярыце калі паказваць дарожныя мапы:</string>
 	<string name="rendering_attr_showRoadMaps_name">Мапы толькі дарог</string>
-    <string name="safe_mode_description">Працаваць у бяспечным рэжыме (трохі павольней але без свойскіх бібліятэк).</string>
-    <string name="safe_mode">Бясьпечны рэжым</string>
-    <string name="native_library_not_running">Прыкладанне працуе ў бяспечным рэжыме (адключыць яго ў «Наладах»).</string>
+    <string name="safe_mode_description">Працаваць у бяспечным рэжыме (трохі павольней, але без уласных бібліятэк).</string>
+    <string name="safe_mode">Бяспечны рэжым</string>
+    <string name="native_library_not_running">Дадатак працуе ў бяспечным рэжыме (выключыць яго можна ў «Наладах»).</string>
     <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Спыніць яго?</string>
     
-    <string name="close_changeset">Зачыніць мноства зьмен</string>
-	<string name="zxing_barcode_scanner_not_found">Прыкладанне «ZXing Barcode Scanner» не ўстаноўленае. Шукаць у Google Play?</string>
-	<string name="rendering_attr_roadColors_description">Выберыце схему колераў дарог:</string>
+    <string name="close_changeset">Закрыць набор змен</string>
+	<string name="zxing_barcode_scanner_not_found">Дадатак «ZXing Barcode Scanner» не ўсталяваны. Знайсці ў Google Play\?</string>
+	<string name="rendering_attr_roadColors_description">Абярыце схему колераў дарог:</string>
 	<string name="rendering_attr_roadColors_name">Схема колераў дарог</string>
-    <string name="map_widget_show_destination_arrow">Паказваць напрамак да месца прызначэньня</string>
-    <string name="enable_plugin_monitoring_services">Дазволіць модулю запісу падарожжа выкарыстоўваць сэрвісы запісу сьледу (запіс GPX, адсочваньне праз сетку)</string>
-    <string name="non_optimal_route_calculation">Разлічваць прыблізны шлях на вялікія адлегласьці</string>
+    <string name="map_widget_show_destination_arrow">Паказваць напрамак да месца прызначэння</string>
+    <string name="enable_plugin_monitoring_services">Дазволіць убудове запісу падарожжа выкарыстоўваць сэрвісы запісу следу (запіс GPX, адсочванне праз сетку)</string>
+    <string name="non_optimal_route_calculation">Разлічваць прыблізны шлях на вялікія адлегласці</string>
 	<string name="gps_not_available">Калі ласка, уключыце GPS у наладах</string>
     
-	<string name="map_widget_monitoring_services">Службы адсочваньня</string>
+	<string name="map_widget_monitoring_services">Сэрвісы адсочвання</string>
 	<string name="no_route">Няма маршруту</string>
-	<string name="delete_target_point">Выдаліць пункт прызначэньня</string>
-	<string name="target_point">Пункт прызначэньня %1$s</string>
+	<string name="delete_target_point">Выдаліць пункт прызначэння</string>
+	<string name="target_point">Пункт прызначэння %1$s</string>
     <string name="intermediate_point">Прамежкавы пункт %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Дадаць апошнім пунктам прызначэньня</string>
-    <string name="context_menu_item_first_intermediate_point">Дадаць першым пунктам прызначэньня</string>
-    <string name="add_as_last_destination_point">Дадаць апошнім прамежкавым пунктам прызначэньня</string>
-    <string name="add_as_first_destination_point">Дадаць першым прамежкавым пунктам прызначэньня</string>
-    <string name="replace_destination_point">Замяніць пункт прызначэньня</string>
-    <string name="new_destination_point_dialog">Вы ўжо абралі пункт прызначэньня:</string>
-    <string name="shared_string_target_points">Пункты прызначэньня</string>
-    <string name="intermediate_point_too_far">Прамежкавы пункт прызначэньня %1$s занадта далёка ад бліжэйшай дарогі.</string>
+    <string name="context_menu_item_last_intermediate_point">Дадаць апошнім пунктам прызначэння</string>
+    <string name="context_menu_item_first_intermediate_point">Дадаць першым пунктам прызначэння</string>
+    <string name="add_as_last_destination_point">Дадаць апошнім прамежкавым пунктам прызначэння</string>
+    <string name="add_as_first_destination_point">Дадаць першым прамежкавым пунктам прызначэння</string>
+    <string name="replace_destination_point">Замяніць пункт прызначэння</string>
+    <string name="new_destination_point_dialog">Вы ўжо абралі пункт прызначэння:</string>
+    <string name="shared_string_target_points">Пункты прызначэння</string>
+    <string name="intermediate_point_too_far">Прамежкавы пункт прызначэння %1$s занадта далёка ад бліжэйшай дарогі.</string>
     <string name="arrived_at_intermediate_point">Вы дасягнулі прамежкавага пункта</string>
-    <string name="context_menu_item_intermediate_point">Дадаць прамежкавым пунктам прызначэньня</string>
-    <string name="map_widget_intermediate_distance">Прамежкавы пункт прызначэньня</string>
+    <string name="context_menu_item_intermediate_point">Дадаць прамежкавым пунктам прызначэння</string>
+    <string name="map_widget_intermediate_distance">Прамежкавы пункт прызначэння</string>
     <string name="ending_point_too_far">Канцавы пункт занадта далёка ад бліжэйшай дарогі.</string>
-    <string name="add_tag">Дадаць тэг</string>
+    <string name="add_tag">Дадаць пазнаку</string>
     <string name="btn_advanced_mode">Пашыраны рэжым…</string>
     <string name="poi_filter_parking">Паркоўка</string>
     <string name="poi_filter_emergency">Аварыйныя службы</string>
-    <string name="poi_filter_public_transport">Грамадзкі транспарт</string>
+    <string name="poi_filter_public_transport">Грамадскі транспарт</string>
     <string name="poi_filter_entertainment">Забавы</string>
-    <string name="poi_filter_accomodation">Жыльлё</string>
+    <string name="poi_filter_accomodation">Жыллё</string>
     <string name="poi_filter_restaurants">Рэстараны</string>
-    <string name="poi_filter_sightseeing">Славутасьці</string>
+    <string name="poi_filter_sightseeing">Славутасці</string>
     <string name="poi_filter_car_aid">Аўтамабільная дапамога</string>
 	<string name="poi_filter_food_shop">Прадуктовая крама</string>
 	<string name="poi_filter_for_tourists">Для турыстаў</string>
 	<string name="poi_filter_fuel">Паліва</string>
-	<string name="show_warnings_title">Паказваць папярэджванні…</string>
+	<string name="show_warnings_title">Паказваць папярэджанні…</string>
 	<string name="show_warnings_descr">Наладзіць папярэджанні руху (абмежаванні хуткасці, вымушаныя прыпынкі, штучныя няроўнасці, тунэлі), камеры хуткасці, інфармацыю аб палосах.</string>
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак.</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
-	<string name="avoid_motorway">Пазьбягаць аўтамагістраляў</string>
-	<string name="auto_zoom_map_descr">Узровень павелічэння згодна вашай хуткасці (калі мапа сінхранізуецца з дзейным становішчам).</string>
+	<string name="avoid_motorway">Пазбягаць аўтамагістраляў</string>
+	<string name="auto_zoom_map_descr">Узровень павелічэння згодна вашай хуткасці (калі мапа сінхранізуецца з бягучым становішчам).</string>
 	<string name="auto_zoom_map">Аўтаматычнае памяншэнне/павелічэнне</string>
 	<string name="snap_to_road_descr">Прывязвацца да дарог падчас навігацыі.</string>
 	<string name="snap_to_road">Прывязвацца да дарог</string>
-	<string name="osmand_play_title_30_chars">OsmAnd Мапы й навігацыя</string>
-	<string name="osmand_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеткавых мапаў OSM</string>
+	<string name="osmand_play_title_30_chars">OsmAnd Мапы і навігацыя</string>
+	<string name="osmand_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеціўных мапаў OSM</string>
 	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n 
 \nOsmAnd — праграмнае навігацыйнае дастасаванне з адкрытым кодам з доступам да розных картаграфічных дадзеных ад OpenStreetMap (OSM). Усе картаграфічныя дадзеныя (вектарныя і растравыя) могуць быць захаваныя на карце памяці для аўтаномнага выкарыстання. Аўтаномная і анлайн-маршрутызацыя падтрымліваецца таксама, уключаючы пакрокавае галасавое суправаджэнне. 
@@ -1221,13 +1221,13 @@
 	<string name="lang_sv">Шведская</string>
 	<string name="lang_tr">Турэцкая</string>
 	<string name="lang_uk">Украінская</string>
-	<string name="lang_vi">Віетнамская</string>
+	<string name="lang_vi">В’етнамская</string>
 	<string name="lang_cy">Валійская</string>
-	<string name="index_name_canada">Паўночная Амэрыка - Канада</string>
-    <string name="index_name_italy">Эўропа - Італія</string>
-    <string name="index_name_gb">Эўропа - Вялікабрытанія</string>
-    <string name="calculate_osmand_route_without_internet">Аўтаномны разлік адрэзак маршруту OsmAnd</string>
-    <string name="gpx_option_calculate_first_last_segment">Разлічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
+	<string name="index_name_canada">Паўночная Амерыка - Канада</string>
+    <string name="index_name_italy">Еўропа - Італія</string>
+    <string name="index_name_gb">Еўропа - Вялікабрытанія</string>
+    <string name="calculate_osmand_route_without_internet">Пазасеціўны разлік адрэзку маршруту OsmAnd</string>
+    <string name="gpx_option_calculate_first_last_segment">Разлічыць маршрут OsmAnd для першага і апошняга адрэзку маршруту</string>
     <string name="use_displayed_track_for_navigation">Выкарыстаць паказаны след для навігацыі?</string>
     <string name="route_info">Маршрутная інфармацыя</string>
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
@@ -1235,8 +1235,8 @@
 	
 	<string name="routing_attr_avoid_toll_name">Пазбягаць платных дарог</string>
 	<string name="routing_attr_avoid_toll_description">Пазбягаць платных дарог</string>
-	<string name="routing_attr_avoid_unpaved_name">Пазбягаць грунтавых дарог</string>
-	<string name="routing_attr_avoid_unpaved_description">Пазбягаць грунтавых дарог.</string>
+	<string name="routing_attr_avoid_unpaved_name">Пазбягаць грунтовых дарог</string>
+	<string name="routing_attr_avoid_unpaved_description">Пазбягаць грунтовых дарог.</string>
 	<string name="routing_attr_avoid_ferries_name">Пазбягаць паромных перапраў</string>
 	<string name="routing_attr_avoid_ferries_description">Пазбягаць перапраў</string>
 	<string name="routing_attr_avoid_motorway_name">Пазбягаць аўтамагістраляў</string>
@@ -1244,12 +1244,12 @@
 	<string name="routing_attr_weight_name">Абмежаванне вагі</string>
 	<string name="routing_attr_weight_description">Пазначыць дазволеную вагу аўтамабіля на маршрутах.</string>
     
-    <string name="copying_osmand_one_file_descr">Капіраваньне файла (%s) у новае месца…</string>
-    <string name="copying_osmand_files_descr">Капіяваньне дадзеных OsmAnd у новае месца (%s)…</string>
-    <string name="copying_osmand_files">Капіяваньне дадзеных OsmAnd…</string>
+    <string name="copying_osmand_one_file_descr">Капіраванне файла (%s) у новае месца…</string>
+    <string name="copying_osmand_files_descr">Капіраванне даных OsmAnd у новае месца (%s)…</string>
+    <string name="copying_osmand_files">Капіраванне даных OsmAnd…</string>
     <string name="app_mode_truck">Грузавік</string>
     <string name="speech_rate_descr">Задайце хуткасць вымаўлення для TTS.</string>
-    <string name="speech_rate">Хуткасьць вымаўленьня</string>
+    <string name="speech_rate">Хуткасць вымаўлення</string>
     <string name="disable_complex_routing">Адключыць складаную маршрутызацыю</string>
     <string name="map_widget_map_rendering">Адмалёўка мапы</string>
     <string name="app_mode_motorcycle">Матацыкл</string>
@@ -1263,33 +1263,33 @@
     <string name="index_item_world_ski">Сусветная лыжная мапа</string>
     <string name="select_gpx">Абраць GPX…</string>
     <string name="routing_attr_prefer_motorway_description">Аддаваць перавагу аўтамагістралям</string>
-	<string name="animate_routing_route">Імітацыя з выкарыстаньнем разлічанага маршруту </string>
-    <string name="animate_routing_gpx">Імітацыя з выкарыстаньнем GPX-сьледу</string>
-    <string name="app_modes_choose">Профілі прыкладання</string>
+	<string name="animate_routing_route">Імітацыя з выкарыстаннем разлічанага маршруту</string>
+    <string name="animate_routing_gpx">Імітацыя з выкарыстаннем GPX-следу</string>
+    <string name="app_modes_choose">Профілі дадатка</string>
 	<string name="index_item_world_altitude_correction">Глабальная карэкцыя вышыні</string>
 	<string name="index_item_world_seamarks">Навігацыйныя знакі ўсяго свету</string>
 	<string name="index_item_world_bitcoin_payments">Плацяжы Bitcoin ўсяго свету</string>
-	<string name="keep_and_add_destination_point">Дадаць наступным пунктам прызначэньня</string>
-    <string name="route_descr_select_destination">Выбраць месца прызначэньня</string>
-    <string name="route_preferences">Настройкі маршрута</string>
-    <string name="calculate_osmand_route_gpx">Аўтаномны разлік маршруту ў OsmAnd</string>
-    <string name="guidance_preferences_descr">Навігацыйныя настройкі</string>
-    <string name="routing_preferences_descr">Настройкі маршрутызацыі</string>
-    <string name="complex_route_calculation_failed">Хуткі разлік маршруту ня ўдаўся (%s), пераход на марудны разлік.</string>
+	<string name="keep_and_add_destination_point">Дадаць наступным пунктам прызначэння</string>
+    <string name="route_descr_select_destination">Абраць месца прызначэння</string>
+    <string name="route_preferences">Налады маршруту</string>
+    <string name="calculate_osmand_route_gpx">Пазасеціўны разлік маршруту ў OsmAnd</string>
+    <string name="guidance_preferences_descr">Налады навігацыі</string>
+    <string name="routing_preferences_descr">Налады маршрутызацыі</string>
+    <string name="complex_route_calculation_failed">Хуткі разлік маршруту схібіў (%s), пераход на марудны разлік.</string>
     <string name="disable_complex_routing_descr">Адключэнне дзвюхфазнай маршрутызацыі для аўтамабільнай навігацыі.</string>
     <string name="amenity_type_seamark">Навігацыйны знак</string>
     <string name="app_mode_hiking">Пешы турызм</string>
     <string name="app_mode_boat">Човен</string>
     
-    <string name="local_osm_changes_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d зьмены OSM. Вы ўпэўненыя?</string>
-    <string name="animate_routing_route_not_calculated">Калі ласка, спачатку разьлічыце маршрут</string>
+    <string name="local_osm_changes_delete_all_confirm">Вы збіраецеся выдаліць %1$d змены OSM. Вы ўпэўненыя\?</string>
+    <string name="animate_routing_route_not_calculated">Калі ласка, спачатку разлічыце маршрут</string>
     
-    <string name="android_19_location_disabled">З версіі 4.4 Android (KitKat) вы ня можаце загружаць і абнаўляць мапу ў старым каталогу захоўваньня (%s). Скапіяваць усе файлы OsmAnd у новае сховішча?
+    <string name="android_19_location_disabled">З версіі 4.4 Android (KitKat) вы не можаце спампоўваць і абнаўляць мапу ў старым каталогу захоўвання (%s). Скапіраваць усе файлы OsmAnd у новае сховішча\? 
 \n Заўвага 1: Вашы старыя файлы застануцца некранутымі (вы можаце выдаліць іх самастойна).          
-\n Заўвага 2: У новым месцы захоўваньня будзе немагчыма адначасова выкарыстоўваць файлы ў OsmAnd і OsmAnd+.</string>
+\n Заўвага 2: У новым месцы захоўвання будзе немагчыма адначасова выкарыстоўваць файлы ў OsmAnd і OsmAnd+.</string>
     
 	
-    <string name="app_modes_choose_descr">Абярыце профілі, бачныя ў праграме.</string>
+    <string name="app_modes_choose_descr">Абярыце профілі, бачныя ў дадатку.</string>
     <string name="voice_pref_title">Голас</string>
     <string name="misc_pref_title">Рознае</string>
     <string name="localization_pref_title">Лакалізацыя</string>
@@ -1300,7 +1300,7 @@
     
     
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
-    <string name="route_descr_destination">Пункт прызначэньня</string>
+    <string name="route_descr_destination">Пункт прызначэння</string>
     <string name="interrupt_music_descr">Галасавыя падказкі прыпыняюць музыку, а не толькі прыглушаюць яе.</string>
 	<string name="share_route_as_gpx">Падзяліцца маршрутам праз GPX файл</string>
 	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
@@ -1514,8 +1514,8 @@
     <string name="pause_navigation">Прыпыніць навігацыю</string>
     <string name="rendering_attr_alpineHiking_name">Пешы горны турызм</string>
     <string name="rendering_attr_alpineHiking_description">Візуалізацыя шляху па шкале SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Накладаньне знакаў пешага турызму</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізацыя шляху згодна трасам OSMC.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Накладанне знакаў пешага турызму</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізацыя шляху згодна трас OSMC.</string>
     
 	<string name="arrival_distance_factor_early">Раней</string>
     <string name="arrival_distance_factor_normally">Звычайна</string>
@@ -1849,9 +1849,9 @@
     <string name="application_dir_change_warning3">Скапіраваць файлы даных OsmAnd у новае месца\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Нумары дамоў</string>
     
-	<string name="routing_attr_avoid_borders_description">Пазбягаць перасячэння нацыянальных меж</string>
+	<string name="routing_attr_avoid_borders_description">Пазбягаць перасячэння нацыянальных межаў</string>
 	<string name="routing_attr_height_name">Абмежаванне па вышыні</string>
-	<string name="routing_attr_height_description">Пазначце вышыню транспартнага сродку для разліку маршруту.</string>
+	<string name="routing_attr_height_description">Пазначыць вышыню транспартнага сродку для разліку маршруту.</string>
     <string name="use_fast_recalculation">Разумны пераразьлік маршруту</string>
 	<string name="use_fast_recalculation_desc">Пераразлічваць толькі пачатак маршруту для доўгіх паездак.</string>
 
@@ -1864,7 +1864,7 @@
     
     <string name="local_indexes_cat_wiki">Вікіпедыя</string>
     <string name="shared_string_show_details">Паказаць падрабязнасці</string>
-    <string name="download_wikipedia_maps">Вікіпэдыя</string>
+    <string name="download_wikipedia_maps">Вікіпедыя</string>
     <string name="local_recordings_delete_all_confirm">Вы збіраецеся выдаліць %1$d нататкі. Вы ўпэўнены\?</string>
 	<string name="shared_string_import2osmand">Імпартаваць у OsmAnd</string>
     <string name="disable_recording_once_app_killed">Прадухіліць аўтаномны запіс</string>

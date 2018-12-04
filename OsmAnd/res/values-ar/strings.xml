@@ -63,7 +63,7 @@
     <string name="download_srtm_maps">الخطوط المحيطية (الكنتورية)</string>
     <string name="download_regular_maps">الخرائط العادية</string>
     <string name="rendering_attr_noAdminboundaries_name">الحدود</string>
-	<string name="map_widget_max_speed">حدّ السرعة</string>
+	<string name="map_widget_max_speed">حد السرعة</string>
     
     
     
@@ -91,7 +91,7 @@
 	<string name="poi_filter_food_shop">متاجر المواد الغذائية</string>
 	<string name="poi_filter_for_tourists">للسياح</string>
 	<string name="poi_filter_fuel">وقود</string>
-	<string name="show_warnings_title">إظهار تنبيهات…</string>
+	<string name="show_warnings_title">إظهار التنبيهات…</string>
 	<string name="use_compass_navigation">استخدم البوصلة</string>
 	<string name="avoid_motorway">تجنب الطرق السريعة</string>
 	
@@ -208,7 +208,7 @@
 	<string name="driving_region_europe_asia">أوروبا، آسيا، أمريكا اللاتينية، وغيرها</string>
 	<string name="driving_region_uk">المملكة المتحدة، الهند وما شابه ذلك</string>
 	
-    <string name="speak_title">أعلن…</string>
+    <string name="speak_title">أعلان…</string>
 	<string name="osb_author_or_password_not_specified">يرجى تحديد مستخدم OSM وكلمة سره في الإعدادات</string>
     <string name="clear_intermediate_points">محو الوجهات الوسيطة</string>
     <string name="keep_intermediate_points">الحفاظ على الوجهات الوسيطة</string>
@@ -326,17 +326,17 @@
 	    
     
     <string name="speak_descr">ضبط إعدادات نطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى.</string>
-	<string name="speak_street_names">نطق أسماء الشوارع ( نطق آلي TTS )</string>
-    <string name="speak_speed_limit">السرعة القصوى</string>
+	<string name="speak_street_names">أسماء الشوارع (TTS)</string>
+    <string name="speak_speed_limit">حد السرعة</string>
     <string name="speak_cameras">كاميرات السرعة</string>
 	<string name="speak_traffic_warnings">تحذيرات حركة المرور</string>
     <string name="route_descr_map_location">الخريطة: </string>
     <string name="destination_point">الوجهة %1$s</string>
     <string name="search_street_in_neighborhood_cities">البحث عن الشارع في المدن المجاورة</string>
-    <string name="intermediate_items_sort_by_distance">فرز باب لـ باب </string>
+    <string name="intermediate_items_sort_by_distance">فرز باب لـ باب</string>
     <string name="wait_current_task_finished">الرجاء الانتظار حتى انتهاء المهمة الحالية</string>
     <string name="available_downloads_left">توفر %1$d ملفات للتنزيل</string>
-    <string name="cancel_route">ألغ المسار</string>
+    <string name="cancel_route">صرف المسار</string>
     <string name="monitoring_settings">تسجيل الرحلة</string>
     <string name="monitoring_settings_descr">قم بضبط كيفية تسجيل الرحلات.</string>
     
@@ -397,9 +397,9 @@
     <string name="add_as_last_destination_point">أضف كآخر وجهة وسيطة</string>
     <string name="add_as_first_destination_point">أضف كأول وجهة وسيطة</string>
     <string name="intermediate_point_too_far">الوجهة %1$s بعيدة جدا من أقرب طريق.</string>
-    <string name="arrived_at_intermediate_point">إنك قد وصلت إلى وجهتك الوسيطة</string>
+    <string name="arrived_at_intermediate_point">لقد وصلت إلى وجهتك الوسيطة</string>
     <string name="context_menu_item_intermediate_point">أضف كوجهة وسيطة</string>
-    <string name="map_widget_intermediate_distance">وجهة متوسطة</string>
+    <string name="map_widget_intermediate_distance">وجهة وسيطة</string>
     <string name="ending_point_too_far">نقطة الوصول بعيدة جدا عن أقرب طريق.</string>
     <string name="add_tag">أضف وسما</string>
     <string name="show_warnings_descr">ضبط تحذيرات المرور ( حدود السرعة، والتوقف القسري، والمطبات الصناعية ) ، وتحذيرات كاميرا السرعة ، ومعلومات الممرات.</string>
@@ -409,7 +409,7 @@
     <string name="edit_tilesource_successfully">حُفِظ المصدر التّجانبي %1$s بنجاح</string>
     <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة.</string>
 	<string name="auto_zoom_map_descr">ملائمة تقريب الخريطة وفقا لسرعتك (هذا بينما تتزامن الخريطة مع الموقع الحالي).</string>
-	<string name="auto_zoom_map">تقريب الخريطة تلقائيًا</string>
+	<string name="auto_zoom_map">تكبير الخريطة تلقائيًا</string>
 	<string name="snap_to_road_descr">ألصق الموقع إلى الشوارع أثناء الملاحة.</string>
 	<string name="snap_to_road">الالتصاق بالطريق</string>
 	<string name="osmand_play_title_30_chars">خرائط OsmAnd وملاحة</string>
@@ -625,16 +625,16 @@
 	<string name="auto_announce_on">تفعيل الإخطار التلقائي</string>
 	
 	<string name="audionotes_location_not_defined">لم يتم ربط الملاحظة بأي موقع. إضغط على \"استخدام المكان …\" لترفق ملاحظة بالمكان المحدد.</string>
-	<string name="animate_routing_route_not_calculated">الرجاء، احتسب المسار أولا</string>
+	<string name="animate_routing_route_not_calculated">الرجاء حساب الطريق أولا</string>
     <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
     <string name="shared_string_remember_my_choice">تذكر اختياري</string>
 	
 	<string name="native_app_allocated_memory_descr">إجمالي الذاكرة الأصلية المخصصة من قبل التطبيق %1$s ميغابايت (Dalvik %2$s ميغابايت، الأخرى %3$s ميغابايت). الذاكرة النسبية %4$s ميغابايت (حد الجهاز %5$s ميغابايت Dalvik %6$s ميغابايت).</string>
-	<string name="app_mode_hiking">مشي</string>
+	<string name="app_mode_hiking">التنزه</string>
     <string name="app_mode_motorcycle">دراجة نارية</string>
     <string name="app_mode_boat">قارب</string>
-    <string name="app_mode_aircraft">الطائرات</string>
+    <string name="app_mode_aircraft">طائرة</string>
     <string name="app_modes_choose_descr">اختر أوضاع الاستخدام لتكون مرئية في التطبيق.</string>
     <string name="app_modes_choose">ملامح التطبيق</string>
 	
@@ -1009,7 +1009,7 @@
 	<string name="routing_attr_avoid_unpaved_name">تجنب الطرق غير المعبّدة</string>
 	<string name="routing_attr_avoid_unpaved_description">اجتناب الطرق الترابية والوعرة.</string>
 	<string name="routing_attr_avoid_ferries_name">تجنب العبّارات</string>
-	<string name="routing_attr_weight_name">حد الوزن المسموح</string>
+	<string name="routing_attr_weight_name">الوزن الأقصى</string>
 	<string name="android_19_location_disabled">منذ نسخة أندرويد كتكات 4.4، لا يمكنك تنزيل أو تحديث الخرائط في مكان التخزين السابق (%s). هل تريد تغيير المكان إلى مكان مسموح ونسخ كل الملفات إليه ؟
 
  ملاحظة 1 : الملفات القديمة ستبقى كما هي دون لمس (ولكن يمكن حذفها يدويا).
@@ -1142,7 +1142,7 @@
 	<string name="get_directions">الاتجاهات</string>
 	<string name="show_point_options">إستخدام الموقع …</string>
 	<string name="favorite">مفضلة</string>
-	<string name="speak_favorites">نقاط مفضلة مجاورة</string>
+	<string name="speak_favorites">النقاط المفضلة مجاورة</string>
 	<string name="save_as_favorites_points">إحفظ كمجموعة مفضلة</string>
     <string name="add_favorite_dialog_top_text">أدخل اسم المفضلة</string>
 	<string name="add_favorite_dialog_favourite_added_template">"تم إضافة النقطة المفضلة  \'\'{0}\'\' بنجاح."</string>
@@ -1221,12 +1221,12 @@
     <string name="rendering_attr_tramRoutes_name">خطوط الترام</string>
     <string name="rendering_category_routes">طرق</string>
     <string name="rendering_category_transport">المواصلات</string>
-    <string name="rendering_category_others">سمات أخرى للخريطة</string>
+    <string name="rendering_category_others">ميزات آخرى للخريطة</string>
     <string name="map_widget_appearance_rem">العناصر المتبقية</string>
     <string name="map_widget_top">شريط المعلومات</string>
 	<string name="map_widget_right">اللوحة اليمنى</string>
 	<string name="map_widget_left">اللوحة اليسرى</string>
-	<string name="search_radius_proximity">ضمن</string>
+	<string name="search_radius_proximity">في غضون</string>
     
     <string name="anonymous_user">مستخدم مجهول</string>
     <string name="logged_as">سجل الدخول بـ %1$s</string>
@@ -1285,7 +1285,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">الطرق السريعة غير المخصصة للمركبات</string>
     <string name="rendering_attr_hideText_name">النص</string>
     <string name="rendering_attr_buildings15zoom_name">المباني في التقريب 15</string>
-    <string name="rendering_attr_moreDetailed_name">مزيد من التفاصيل</string>
+    <string name="rendering_attr_moreDetailed_name">التفاصيل اكثر</string>
     <string name="rendering_attr_lessDetailed_name">تفاصيل أقل</string>
     <string name="rendering_attr_showSurfaceGrade_name">إظهار جودة الطريق</string>
     
@@ -1327,21 +1327,21 @@
     <string name="rendering_attr_busRoutes_name">طرق الحافلات</string>
     <string name="rendering_attr_subwayMode_name">سكك مترو الأنفاق</string>
     <string name="rendering_attr_shareTaxiRoutes_name">شارك طرق التاكسي</string>
-    <string name="speed_limit_exceed_message">حدد حد السرعة المسموح به لتلقي تنبيه صوتي ما إذا تجاوزته.</string>
+    <string name="speed_limit_exceed_message">حدد مجال السرعة المسموح به لتتلقى تنبيه صوتي ما إذا تجاوزته.</string>
 	<string name="traffic_warning_border_control">مراقبة الحدود</string>
     <string name="traffic_warning_payment">كشك الرسوم</string>
     <string name="traffic_warning_calming">تخفيف الازدحام</string>
-    <string name="traffic_warning_speed_camera">كاميرا مراقبة السرعة</string>
-    <string name="traffic_warning">تنبيه مروري</string>
-	<string name="speak_poi">POI مجاورة</string>
+    <string name="traffic_warning_speed_camera">كاميرا السرعة</string>
+    <string name="traffic_warning">تحذير حركة المرور</string>
+	<string name="speak_poi">POI المجاورة</string>
 	<string name="way_alarms">تنبيهات مرورية</string>
 	<string name="save_track_to_gpx_globally_headline">تسجيل المسار حسب الطلب</string>
 	<string name="download_additional_maps">حمّل الخرائط المفقودة %1$s (%2$d MB)؟</string>
     
     <string name="rendering_attr_hideAccess_name">قيود الدخول</string>
     <string name="rendering_attr_showAccess_name">عرض قيود الدخول</string>
-    <string name="rendering_attr_showSurfaces_name">عرض سطح الطريق</string>
-    <string name="rendering_attr_showCycleRoutes_name">عرض الطرق الدائرية</string>
+    <string name="rendering_attr_showSurfaces_name">إظهار سطح الطريق</string>
+    <string name="rendering_attr_showCycleRoutes_name">عرض الطرق الخاصة بالدرجات</string>
     
     
     <string name="delay_navigation_start">ابدأ التوجيه دروان بدوران تلقائيا</string>
@@ -1417,7 +1417,7 @@
 	<string name="routing_attr_prefer_motorway_description">تفضيل طرق الدراجات النارية.</string>
 	<string name="routing_attr_avoid_ferries_description">تجنب العبّارات المائية.</string>
 	<string name="routing_attr_avoid_motorway_name">تجنب الطرق السريعة</string>
-	<string name="routing_attr_avoid_motorway_description">تجنب طرق الدراجات النارية.</string>
+	<string name="routing_attr_avoid_motorway_description">تجنب الطرق السريعة</string>
 	<string name="routing_attr_weight_description">حدد وزن المركبة الأقصى المسموح به على الطرقات.</string>
     <string name="copying_osmand_files_descr">نسخ ملفات بيانات OsmAnd إلى المسار الجديد (%s)…</string>
     <string name="calculate_osmand_route_gpx">احسب طريق OsmAnd بدون اتصال</string>
@@ -1640,7 +1640,7 @@
     <string name="lang_es_ar">الإسبانية (الأرجنتين)</string>
     <string name="si_nm">ميل بحري</string>
     <string name="dark_theme">داكن</string>
-    <string name="routing_attr_height_name">تحديد الإرتفاع</string>
+    <string name="routing_attr_height_name">الإرتفاع الاقصى</string>
     <string name="default_speed_system_descr">تحديد وحدة السرعة.</string>
     <string name="default_speed_system">وحدة السرعة</string>
     <string name="plugin_settings">ملحقات</string>
@@ -1819,7 +1819,7 @@
     <string name="active_markers">العلامات المفعلة</string>
     <string name="map_markers">علامات خرائطية</string>
     
-    <string name="routing_attr_avoid_borders_name">منع تخطي الحدود</string>
+    <string name="routing_attr_avoid_borders_name">تجنب عبور الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">فئات</string>
     <string name="shared_string_near">قرب</string>
@@ -2128,11 +2128,11 @@
     
     <string name="lang_hu_formal">الهنغارية (الرسمية)</string>
     <string name="routing_attr_avoid_stairs_name">تجنب الأدراج</string>
-    <string name="routing_attr_avoid_stairs_description">تجنب الأدراج.</string>
+    <string name="routing_attr_avoid_stairs_description">تجنب الأدراج</string>
     <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود إلى بلد آخر.</string>
     <string name="routing_attr_height_description">تحديد ارتفاع السيارة المسموح على الطرق.</string>
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
-    <string name="rendering_attr_alpineHiking_name">مقياس جبال الألب للتنزه (نادي جبال الألب السويسرية)</string>
+    <string name="rendering_attr_alpineHiking_name">مقياس جبال الألب للتنزه (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">تقديم مسارات وفقا لمقياس SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">غطاء رمز التنزه</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم مسارات وفقا لآثار OSMC.</string>
@@ -2810,7 +2810,7 @@
 	<string name="south_abbreviation">ج</string>
 	<string name="north_abbreviation">ش</string>
 	<string name="optional_point_name">الإسم الإختياري للنقطة</string>
-    <string name="transport_nearby_routes_within">المسارات القريبة مِن</string>
+    <string name="transport_nearby_routes_within">المسارات القريبة في غضون</string>
     <string name="enter_the_file_name">أدخل إسم الملف.</string>
     <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
     <string name="map_imported_successfully">تمت عملية استيراد الخريطة</string>
@@ -2911,4 +2911,24 @@
     <string name="search_street">البحث عن شارع</string>
     <string name="start_search_from_city">اختر المدينة أولا</string>
     <string name="shared_string_restore">استعادة</string>
+    <string name="third_party_application">تطبيق من طرف-ثالث</string>
+    <string name="keep_passed_markers_descr">العلامات المضافة كمجموعة مفضلة أو نقاط طريق GPX ستظل على الخريطة. اذا كانت المجموعة غير نشطة، العلامات سوف تختفي من الخريطة.</string>
+    <string name="keep_passed_markers">إبقاء العلامات المتجاوزة على الخريطة</string>
+    <string name="more_transport_on_stop_hint">هناك المزيد من النقل في هذا الموقف.</string>
+    <string name="ask_for_location_permission">يرجى إعطاء إذن الموقع للتطبيق لكي يواصل.</string>
+    <string name="thank_you_for_feedback">شكرا على ردود الفعل</string>
+    <string name="poi_cannot_be_found">النقطة أو الطريق غير موجود.</string>
+    <string name="search_no_results_feedback">لا نتائج بحث؟
+\nاخبرنا بانطباعك</string>
+    <string name="increase_search_radius_to">توسيع دائرة البحث بقطر %1$s</string>
+    <string name="send_search_query">ارسال استفسار البحث؟</string>
+    <string name="shared_string_world">العالم</string>
+    <string name="point_deleted">تم حذف %1$s نقطة</string>
+    <string name="coord_input_edit_point">تحرير نقطة</string>
+    <string name="coord_input_add_point">إضافة نقطة</string>
+    <string name="coord_input_save_as_track">حفظ كمسار</string>
+    <string name="coord_input_save_as_track_descr">لقد أضفت %1$s نقطة. اكتب اسم الملف و اضغط على \"حفظ\".</string>
+    <string name="error_notification_desc">يرجى إرسال لقطة شاشة من هذا الإخطار الى support@osmand.net</string>
+    <string name="quick_action_edit_actions">تعديل الإجراءات</string>
+    <string name="get_osmand_live">احصل على OsmAnd Live لفتح جميع الميزات: تحديثات يومية للخريطة مع تنزيلات غير محدودة، جميع الإضافات المدفوعة والمجانية، Wikipedia ،wikivoyage وأكثر من ذلك بكثير.</string>
     </resources>
