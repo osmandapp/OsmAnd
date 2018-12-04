@@ -2251,7 +2251,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \nFor at aktivere alle nye funktioner, er det nødvendigt at genstarte OsmAnd.</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM-brugere, som indsender ændringer til kortet i det pågældende område.</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
-    <string name="osm_live_ask_for_purchase">Køb først OsnAnd Live-abonnement</string>
+    <string name="osm_live_ask_for_purchase">Køb først OsmAnd Live-abonnement</string>
 
     <string name="osm_live_header">"Abonnementet giver timebaserede opdateringer til alle kort i hele verden. 
 \nEn del af indtægten går tilbage til OSM-fællesskabet og udbetales for hvert OSM-bidrag. 
