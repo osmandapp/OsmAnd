@@ -664,15 +664,12 @@ public class SearchCoreFactory {
 			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
 			NameStringMatcher nm =
 					new NameStringMatcher(phrase.getUnknownSearchPhrase(), StringMatcherMode.CHECK_ONLY_STARTS_WITH_TRIM);
-
-			Set<String> filters = new HashSet<>();
 			for (AbstractPoiType pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent()
 						|| nm.matches(pf.getTranslation())
 						|| nm.matches(pf.getEnTranslation())
 						|| nm.matches(pf.getSynonyms())) {
 					results.add(pf);
-					filters.add(pf.getTranslation());
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
@@ -682,7 +679,6 @@ public class SearchCoreFactory {
 							|| nm.matches(c.getEnTranslation())
 							|| nm.matches(c.getSynonyms()))) {
 						results.add(c);
-						filters.add(c.getTranslation());
 					}
 				}
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
@@ -690,7 +686,7 @@ public class SearchCoreFactory {
 					Entry<String, PoiType> e = it.next();
 					PoiType pt = e.getValue();
 					if (pt.getCategory() != types.getOtherMapCategory()) {
-						if (!results.contains(pt) && !filters.contains(pt.getTranslation())
+						if (!results.contains(pt)
 								&& (nm.matches(pt.getEnTranslation())
 								|| nm.matches(pt.getTranslation())
 								|| nm.matches(pt.getSynonyms()))) {
