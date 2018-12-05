@@ -662,8 +662,13 @@ public class SearchCoreFactory {
 				categories = types.getCategories(false);
 			}
 			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
-			NameStringMatcher nm =
-					new NameStringMatcher(phrase.getUnknownSearchPhrase(), StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+			NameStringMatcher nm;
+			String unknownSearchPhrase = phrase.getUnknownSearchPhrase();
+			if (phrase.getUnknownSearchWord().length() < unknownSearchPhrase.length()) {
+				nm = new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_ONLY_STARTS_WITH_TRIM);
+			} else {
+				nm = new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+			}
 			for (AbstractPoiType pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent()
 						|| nm.matches(pf.getTranslation())
