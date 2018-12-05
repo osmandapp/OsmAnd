@@ -68,6 +68,7 @@ class TelegramHelper private constructor() {
 	var lastTelegramUpdateTime: Int = 0
 
 	private val users = ConcurrentHashMap<Int, TdApi.User>()
+	private val contacts = ConcurrentHashMap<Int, TdApi.User>()
 	private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
 	private val supergroups = ConcurrentHashMap<Int, TdApi.Supergroup>()
 	private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
@@ -140,6 +141,8 @@ class TelegramHelper private constructor() {
 	}
 
 	fun getChatListIds() = getChatList().map { it.chatId }
+
+	fun getContacts() = contacts
 
 	fun getChatIds() = chats.keys().toList()
 
@@ -237,6 +240,7 @@ class TelegramHelper private constructor() {
 		fun onTelegramChatsRead()
 		fun onTelegramChatsChanged()
 		fun onTelegramChatChanged(chat: TdApi.Chat)
+		fun onTelegramChatCreated(chat: TdApi.Chat)
 		fun onTelegramUserChanged(user: TdApi.User)
 		fun onTelegramError(code: Int, message: String)
 	}
@@ -556,6 +560,73 @@ class TelegramHelper private constructor() {
 					if (!hasLocalUserPhoto(currUser) && hasRemoteUserPhoto(currUser)) {
 						requestUserPhoto(currUser)
 					}
+				}
+			}
+		}
+	}
+
+	private fun requestContacts(){
+		client?.send(TdApi.GetContacts()) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Users.CONSTRUCTOR -> {
+					val usersIds = obj as TdApi.Users
+					usersIds.userIds.forEach {
+						requestUser(it)
+					}
+				}
+			}
+		}
+	}
+
+	private fun requestUser(id: Int) {
+		client?.send(TdApi.GetUser(id)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.User.CONSTRUCTOR -> {
+					val user = obj as TdApi.User
+					contacts[user.id] = user
+					if (!hasLocalUserPhoto(user) && hasRemoteUserPhoto(user)) {
+						requestUserPhoto(user)
+					}
+				}
+			}
+		}
+	}
+
+	fun createPrivateChatWithUser(
+		userId: Int,
+		shareInfo: TelegramSettings.ShareChatInfo,
+		shareChatsInfo: ConcurrentHashMap<Long, TelegramSettings.ShareChatInfo>
+	) {
+		client?.send(TdApi.CreatePrivateChat(userId, false)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					needRefreshActiveLiveLocationMessages = true
+					if (error.code == MESSAGE_CANNOT_BE_EDITED_ERROR_CODE) {
+						shareInfo.shouldDeletePreviousMessage = true
+					} else if (error.code != IGNORED_ERROR_CODE) {
+						shareInfo.hasSharingError = true
+						outgoingMessagesListeners.forEach {
+							it.onSendLiveLocationError(error.code, error.message)
+						}
+					}
+				}
+				TdApi.Chat.CONSTRUCTOR -> {
+					shareInfo.chatId = (obj as TdApi.Chat).id
+					shareChatsInfo[shareInfo.chatId] = shareInfo
+					listener?.onTelegramChatCreated(obj)
 				}
 			}
 		}
@@ -896,6 +967,7 @@ class TelegramHelper private constructor() {
 			if (haveAuthorization) {
 				requestChats(true)
 				requestCurrentUser()
+				requestContacts()
 			}
 		}
 		val newAuthState = getTelegramAuthorizationState()
@@ -1085,6 +1157,9 @@ class TelegramHelper private constructor() {
 					val updateUser = obj as TdApi.UpdateUser
 					val user = updateUser.user
 					users[updateUser.user.id] = user
+					if (user.outgoingLink is TdApi.LinkStateIsContact) {
+						contacts[user.id] = user
+					}
 					if (isOsmAndBot(user.id)) {
 						osmandBot = user
 					}
