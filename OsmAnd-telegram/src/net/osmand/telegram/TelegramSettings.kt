@@ -113,14 +113,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun isSharingLocationToChat(chatId: Long) = shareChatsInfo.containsKey(chatId)
 
-	fun isSharingLocationToUser(userId: Int): Boolean {
-		shareChatsInfo.forEach { (_, shareInfo: ShareChatInfo) ->
-			if (shareInfo.userId == userId) {
-				return true
-			}
-		}
-		return false
-	}
+	fun isSharingLocationToUser(userId: Int) = shareChatsInfo.values.any { it.userId == userId }
 
 	fun hasAnyChatToShowOnMap() = !hiddenOnMapChats.containsAll(getLiveNowChats())
 
