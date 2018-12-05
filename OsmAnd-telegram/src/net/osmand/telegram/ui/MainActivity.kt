@@ -254,6 +254,12 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
+	override fun onTelegramChatCreated(chat: TdApi.Chat) {
+		runOnUi {
+			listeners.forEach { it.get()?.onTelegramChatCreated(chat) }
+		}
+	}
+
 	override fun onTelegramUserChanged(user: TdApi.User) {
 		val photoPath = telegramHelper.getUserPhotoPath(user)
 		if (photoPath != null) {

@@ -44,8 +44,8 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 )
 
 private const val SEND_MY_LOC_DEFAULT_INDEX = 6
-private const val STALE_LOC_DEFAULT_INDEX = 4
-private const val LOC_HISTORY_DEFAULT_INDEX = 2
+private const val STALE_LOC_DEFAULT_INDEX = 0
+private const val LOC_HISTORY_DEFAULT_INDEX = 7
 
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
@@ -113,6 +113,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun isSharingLocationToChat(chatId: Long) = shareChatsInfo.containsKey(chatId)
 
+	fun isSharingLocationToUser(userId: Int) = shareChatsInfo.values.any { it.userId == userId }
+
 	fun hasAnyChatToShowOnMap() = !hiddenOnMapChats.containsAll(getLiveNowChats())
 
 	fun isShowingChatOnMap(chatId: Long) = !hiddenOnMapChats.contains(chatId)
@@ -132,33 +134,31 @@ class TelegramSettings(private val app: TelegramApplication) {
 		addActiveTime: Long = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 	) {
 		if (share) {
-			val lp: Long = when {
-				livePeriod < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-				else -> livePeriod
-			}
 			var shareChatInfo = shareChatsInfo[chatId]
 			if (shareChatInfo == null) {
 				shareChatInfo = ShareChatInfo()
 			}
-			val currentTime = System.currentTimeMillis() / 1000
-			val user = app.telegramHelper.getCurrentUser()
-			if (user != null && currentSharingMode != user.id.toString() && shareChatInfo.start == -1L) {
-				shareChatInfo.shouldSendViaBotMessage = true
+			val chat = app.telegramHelper.getChat(chatId)
+			if (chat != null && (chat.type is TdApi.ChatTypePrivate || chat.type is TdApi.ChatTypeSecret)) {
+				shareChatInfo.userId = app.telegramHelper.getUserIdFromChatType(chat.type)
 			}
-
 			shareChatInfo.chatId = chatId
-			shareChatInfo.start = currentTime
-			if (shareChatInfo.livePeriod == -1L) {
-				shareChatInfo.livePeriod = lp
-			}
-			shareChatInfo.userSetLivePeriod = lp
-			shareChatInfo.userSetLivePeriodStart = currentTime
-			shareChatInfo.currentMessageLimit = currentTime + Math.min(lp, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
-			shareChatInfo.additionalActiveTime = addActiveTime
+			updateChatShareInfo(shareChatInfo, livePeriod, addActiveTime)
 			shareChatsInfo[chatId] = shareChatInfo
 		} else {
 			shareChatsInfo.remove(chatId)
 		}
+	}
+
+	fun shareLocationToUser(
+		userId: Int,
+		livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS,
+		addActiveTime: Long = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
+	) {
+		val shareChatInfo = ShareChatInfo()
+		shareChatInfo.userId = userId
+		updateChatShareInfo(shareChatInfo, livePeriod, addActiveTime)
+		app.telegramHelper.createPrivateChatWithUser(userId, shareChatInfo, shareChatsInfo)
 	}
 
 	fun updateShareDevices(list: List<DeviceBot>) {
@@ -235,10 +235,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun updateShareInfo(message: TdApi.Message) {
 		val shareChatInfo = shareChatsInfo[message.chatId]
 		val content = message.content
-		if (shareChatInfo != null && content is TdApi.MessageLocation) {
+		if (shareChatInfo != null) {
 			shareChatInfo.currentMessageId = message.id
-			shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
-			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
+			if (content is TdApi.MessageLocation) {
+				shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
+				shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
+			}
 		}
 	}
 
@@ -269,6 +271,31 @@ class TelegramSettings(private val app: TelegramApplication) {
 		} else {
 			sharingStatusChanges.add(newSharingStatus)
 		}
+	}
+
+	private fun updateChatShareInfo(
+		shareChatInfo: ShareChatInfo,
+		livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS,
+		addActiveTime: Long = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
+	) {
+		val lp: Long = when {
+			livePeriod < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+			else -> livePeriod
+		}
+		val currentTime = System.currentTimeMillis() / 1000
+		val user = app.telegramHelper.getCurrentUser()
+		if (user != null && currentSharingMode != user.id.toString() && shareChatInfo.start == -1L) {
+			shareChatInfo.shouldSendViaBotMessage = true
+		}
+
+		shareChatInfo.start = currentTime
+		if (shareChatInfo.livePeriod == -1L) {
+			shareChatInfo.livePeriod = lp
+		}
+		shareChatInfo.userSetLivePeriod = lp
+		shareChatInfo.userSetLivePeriodStart = currentTime
+		shareChatInfo.currentMessageLimit = currentTime + Math.min(lp, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
+		shareChatInfo.additionalActiveTime = addActiveTime
 	}
 
 	private fun getNewSharingStatusHistoryItem(): SharingStatus {
@@ -472,6 +499,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			shareChatsInfo.forEach { (chatId, chatInfo) ->
 				val obj = JSONObject()
 				obj.put(ShareChatInfo.CHAT_ID_KEY, chatId)
+				obj.put(ShareChatInfo.USER_ID_KEY, chatInfo.userId)
 				obj.put(ShareChatInfo.START_KEY, chatInfo.start)
 				obj.put(ShareChatInfo.LIVE_PERIOD_KEY, chatInfo.livePeriod)
 				obj.put(ShareChatInfo.LIMIT_KEY, chatInfo.currentMessageLimit)
@@ -493,6 +521,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val obj = json.getJSONObject(i)
 			val shareInfo = ShareChatInfo().apply {
 				chatId = obj.optLong(ShareChatInfo.CHAT_ID_KEY)
+				userId = obj.optInt(ShareChatInfo.USER_ID_KEY)
 				start = obj.optLong(ShareChatInfo.START_KEY)
 				livePeriod = obj.optLong(ShareChatInfo.LIVE_PERIOD_KEY)
 				currentMessageLimit = obj.optLong(ShareChatInfo.LIMIT_KEY)
@@ -738,6 +767,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	class ShareChatInfo {
 
 		var chatId = -1L
+		var userId = -1
 		var start = -1L
 		var livePeriod = -1L
 		var currentMessageLimit = -1L
@@ -767,6 +797,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		companion object {
 
 			internal const val CHAT_ID_KEY = "chatId"
+			internal const val USER_ID_KEY = "userId"
 			internal const val START_KEY = "start"
 			internal const val LIVE_PERIOD_KEY = "livePeriod"
 			internal const val LIMIT_KEY = "limit"
