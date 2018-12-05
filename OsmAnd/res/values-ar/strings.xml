@@ -2931,4 +2931,6 @@
     <string name="error_notification_desc">يرجى إرسال لقطة شاشة من هذا الإخطار الى support@osmand.net</string>
     <string name="quick_action_edit_actions">تعديل الإجراءات</string>
     <string name="get_osmand_live">احصل على OsmAnd Live لفتح جميع الميزات: تحديثات يومية للخريطة مع تنزيلات غير محدودة، جميع الإضافات المدفوعة والمجانية، Wikipedia ،wikivoyage وأكثر من ذلك بكثير.</string>
+    <string name="osm_live_subscriptions">الاشتراكات</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     </resources>
