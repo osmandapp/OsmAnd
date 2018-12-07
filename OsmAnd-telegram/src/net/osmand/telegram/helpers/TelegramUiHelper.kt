@@ -7,6 +7,7 @@ import net.osmand.data.LatLon
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper.MessageOsmAndBotLocation
+import net.osmand.telegram.helpers.TelegramHelper.MessageUserTextLocation
 import org.drinkless.td.libcore.telegram.TdApi
 
 object TelegramUiHelper {
@@ -67,6 +68,8 @@ object TelegramUiHelper {
 					val content = message.content
 					if (content is TdApi.MessageLocation) {
 						res.latLon = LatLon(content.location.latitude, content.location.longitude)
+					} else if (content is MessageUserTextLocation) {
+						res.latLon = LatLon(content.lat, content.lon)
 					}
 				}
 				if (user != null) {
@@ -106,6 +109,7 @@ object TelegramUiHelper {
 		val content = message.content
 		return when (content) {
 			is MessageOsmAndBotLocation -> botMessageToLocationItem(chat, content)
+			is MessageUserTextLocation -> locationMessageToLocationItem(helper, chat, message)
 			is TdApi.MessageLocation -> locationMessageToLocationItem(helper, chat, message)
 			else -> null
 		}
@@ -120,6 +124,7 @@ object TelegramUiHelper {
 		return when (content) {
 			is MessageOsmAndBotLocation -> botMessageToChatItem(helper, chat, content)
 			is TdApi.MessageLocation -> locationMessageToChatItem(helper, chat, message)
+			is MessageUserTextLocation -> locationMessageToChatItem(helper, chat, message)
 			else -> null
 		}
 	}
@@ -148,12 +153,16 @@ object TelegramUiHelper {
 		message: TdApi.Message
 	): LocationItem? {
 		val user = helper.getUser(message.senderUserId) ?: return null
-		val content = message.content as TdApi.MessageLocation
+		val content = message.content
 		return LocationItem().apply {
 			chatId = chat.id
 			chatTitle = chat.title
 			name = TelegramUiHelper.getUserName(user)
-			latLon = LatLon(content.location.latitude, content.location.longitude)
+			latLon = when (content) {
+				is TdApi.MessageLocation -> LatLon(content.location.latitude, content.location.longitude)
+				is MessageUserTextLocation -> LatLon(content.lat, content.lon)
+				else -> null
+			}
 			photoPath = helper.getUserPhotoPath(user)
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
@@ -190,12 +199,16 @@ object TelegramUiHelper {
 		message: TdApi.Message
 	): ChatItem? {
 		val user = helper.getUser(message.senderUserId) ?: return null
-		val content = message.content as TdApi.MessageLocation
+		val content = message.content
 		return ChatItem().apply {
 			chatId = chat.id
 			chatTitle = chat.title
 			name = TelegramUiHelper.getUserName(user)
-			latLon = LatLon(content.location.latitude, content.location.longitude)
+			latLon = when (content) {
+				is TdApi.MessageLocation -> LatLon(content.location.latitude, content.location.longitude)
+				is MessageUserTextLocation -> LatLon(content.lat, content.lon)
+				else -> null
+			}
 			if (helper.isGroup(chat)) {
 				photoPath = helper.getUserPhotoPath(user)
 				groupPhotoPath = chat.photo?.small?.local?.path

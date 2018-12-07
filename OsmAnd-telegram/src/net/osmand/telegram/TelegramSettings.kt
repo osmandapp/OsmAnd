@@ -43,9 +43,15 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 	24 * 60 * 60L
 )
 
+const val SHARE_TYPE_MAP = "Map"
+const val SHARE_TYPE_TEXT =  "Text"
+const val SHARE_TYPE_MAP_AND_TEXT = "Map and text"
+private val SHARE_TYPE_VALUES = listOf(SHARE_TYPE_MAP, SHARE_TYPE_TEXT, SHARE_TYPE_MAP_AND_TEXT)
+
 private const val SEND_MY_LOC_DEFAULT_INDEX = 6
 private const val STALE_LOC_DEFAULT_INDEX = 0
 private const val LOC_HISTORY_DEFAULT_INDEX = 7
+private const val SHARE_TYPE_DEFAULT_INDEX = 2
 
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
@@ -60,6 +66,7 @@ private const val SPEED_CONSTANTS_KEY = "speed_constants"
 private const val SEND_MY_LOC_INTERVAL_KEY = "send_my_loc_interval"
 private const val STALE_LOC_TIME_KEY = "stale_loc_time"
 private const val LOC_HISTORY_TIME_KEY = "loc_history_time"
+private const val SHARE_TYPE_KEY = "share_type"
 
 private const val APP_TO_CONNECT_PACKAGE_KEY = "app_to_connect_package"
 
@@ -94,13 +101,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var sendMyLocInterval = SEND_MY_LOC_VALUES_SEC[SEND_MY_LOC_DEFAULT_INDEX]
 	var staleLocTime = STALE_LOC_VALUES_SEC[STALE_LOC_DEFAULT_INDEX]
 	var locHistoryTime = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
+	var shareTypeValue = SHARE_TYPE_VALUES[SHARE_TYPE_DEFAULT_INDEX]
 
 	var appToConnectPackage = ""
 		private set
 
 	var liveNowSortType = LiveNowSortType.SORT_BY_GROUP
 
-	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
+	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
 
 	var batteryOptimisationAsked = false
 
@@ -236,10 +244,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val shareChatInfo = shareChatsInfo[message.chatId]
 		val content = message.content
 		if (shareChatInfo != null) {
-			shareChatInfo.currentMessageId = message.id
 			if (content is TdApi.MessageLocation) {
+				shareChatInfo.currentMapMessageId = message.id
 				shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
 				shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
+			} else if (content is TdApi.MessageText) {
+				shareChatInfo.currentTextMessageId = message.id
 			}
 		}
 	}
@@ -384,9 +394,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun onDeleteLiveMessages(chatId: Long, messages: List<Long>) {
-		val currentMessageId = shareChatsInfo[chatId]?.currentMessageId
-		if (messages.contains(currentMessageId)) {
-			shareChatsInfo[chatId]?.currentMessageId = -1
+		val currentMapMessageId = shareChatsInfo[chatId]?.currentMapMessageId
+		if (messages.contains(currentMapMessageId)) {
+			shareChatsInfo[chatId]?.currentMapMessageId = -1
+		}
+		val currentTextMessageId = shareChatsInfo[chatId]?.currentTextMessageId
+		if (messages.contains(currentTextMessageId)) {
+			shareChatsInfo[chatId]?.currentTextMessageId = -1
+			shareChatsInfo[chatId]?.updateTextMessageId = 1
 		}
 	}
 	
@@ -409,6 +424,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		edit.putLong(SEND_MY_LOC_INTERVAL_KEY, sendMyLocInterval)
 		edit.putLong(STALE_LOC_TIME_KEY, staleLocTime)
 		edit.putLong(LOC_HISTORY_TIME_KEY, locHistoryTime)
+
+		edit.putString(SHARE_TYPE_KEY, shareTypeValue)
 
 		edit.putString(APP_TO_CONNECT_PACKAGE_KEY, appToConnectPackage)
 
@@ -460,6 +477,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		staleLocTime = prefs.getLong(STALE_LOC_TIME_KEY, staleLocDef)
 		val locHistoryDef = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 		locHistoryTime = prefs.getLong(LOC_HISTORY_TIME_KEY, locHistoryDef)
+		val shareTypeDef = SHARE_TYPE_VALUES[SHARE_TYPE_DEFAULT_INDEX]
+		shareTypeValue = prefs.getString(SHARE_TYPE_KEY, shareTypeDef)
 
 		currentSharingMode = prefs.getString(SHARING_MODE_KEY, "")
 
@@ -503,7 +522,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 				obj.put(ShareChatInfo.START_KEY, chatInfo.start)
 				obj.put(ShareChatInfo.LIVE_PERIOD_KEY, chatInfo.livePeriod)
 				obj.put(ShareChatInfo.LIMIT_KEY, chatInfo.currentMessageLimit)
-				obj.put(ShareChatInfo.CURRENT_MESSAGE_ID_KEY, chatInfo.currentMessageId)
+				obj.put(ShareChatInfo.UPDATE_TEXT_MESSAGE_ID_KEY, chatInfo.updateTextMessageId)
+				obj.put(ShareChatInfo.CURRENT_MAP_MESSAGE_ID_KEY, chatInfo.currentMapMessageId)
+				obj.put(ShareChatInfo.CURRENT_TEXT_MESSAGE_ID_KEY, chatInfo.currentTextMessageId)
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY, chatInfo.userSetLivePeriod)
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY, chatInfo.userSetLivePeriodStart)
 				obj.put(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY, chatInfo.lastSuccessfulSendTimeMs)
@@ -525,7 +546,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 				start = obj.optLong(ShareChatInfo.START_KEY)
 				livePeriod = obj.optLong(ShareChatInfo.LIVE_PERIOD_KEY)
 				currentMessageLimit = obj.optLong(ShareChatInfo.LIMIT_KEY)
-				currentMessageId = obj.optLong(ShareChatInfo.CURRENT_MESSAGE_ID_KEY)
+				updateTextMessageId = obj.optInt(ShareChatInfo.UPDATE_TEXT_MESSAGE_ID_KEY)
+				currentMapMessageId = obj.optLong(ShareChatInfo.CURRENT_MAP_MESSAGE_ID_KEY)
+				currentTextMessageId = obj.optLong(ShareChatInfo.CURRENT_TEXT_MESSAGE_ID_KEY)
 				userSetLivePeriod = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY)
 				userSetLivePeriodStart = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY)
 				lastSuccessfulSendTimeMs = obj.optLong(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY)
@@ -601,6 +624,30 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
+	inner class ShareTypePref : DurationPref(
+		R.drawable.ic_action_location_history,
+		R.string.location_history,
+		R.string.location_history_desc,
+		emptyList()
+	) {
+
+		override fun getCurrentValue(): String {
+			return when (shareTypeValue) {
+				SHARE_TYPE_MAP -> "Map"
+				SHARE_TYPE_TEXT -> "Text"
+				SHARE_TYPE_MAP_AND_TEXT -> "Map and text"
+				else -> ""
+			}
+		}
+
+		override fun setCurrentValue(index: Int) {
+			shareTypeValue = SHARE_TYPE_VALUES[index]
+		}
+
+		override fun getMenuItems() = SHARE_TYPE_VALUES
+
+	}
+
 	abstract inner class DurationPref(
 		@DrawableRes val iconId: Int,
 		@StringRes val titleId: Int,
@@ -612,7 +659,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		abstract fun setCurrentValue(index: Int)
 
-		fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it) }
+		open fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it) }
 	}
 
 	enum class AppConnect(
@@ -770,8 +817,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var userId = -1
 		var start = -1L
 		var livePeriod = -1L
+		var updateTextMessageId = 1
 		var currentMessageLimit = -1L
-		var currentMessageId = -1L
+		var currentMapMessageId = -1L
+		var currentTextMessageId = -1L
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
 		var lastSuccessfulLocation: LatLon? = null
@@ -801,7 +850,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val START_KEY = "start"
 			internal const val LIVE_PERIOD_KEY = "livePeriod"
 			internal const val LIMIT_KEY = "limit"
-			internal const val CURRENT_MESSAGE_ID_KEY = "currentMessageId"
+			internal const val UPDATE_TEXT_MESSAGE_ID_KEY = "updateTextMessageId"
+			internal const val CURRENT_MAP_MESSAGE_ID_KEY = "currentMapMessageId"
+			internal const val CURRENT_TEXT_MESSAGE_ID_KEY = "currentTextMessageId"
 			internal const val USER_SET_LIVE_PERIOD_KEY = "userSetLivePeriod"
 			internal const val USER_SET_LIVE_PERIOD_START_KEY = "userSetLivePeriodStart"
 			internal const val LAST_SUCCESSFUL_SEND_TIME_KEY = "lastSuccessfulSendTime"
