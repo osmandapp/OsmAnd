@@ -2933,4 +2933,11 @@
     <string name="get_osmand_live">احصل على OsmAnd Live لفتح جميع الميزات: تحديثات يومية للخريطة مع تنزيلات غير محدودة، جميع الإضافات المدفوعة والمجانية، Wikipedia ،wikivoyage وأكثر من ذلك بكثير.</string>
     <string name="osm_live_subscriptions">الاشتراكات</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="read_wikipedia_offline_description">احصل على اشتراك OsmAnd Live لقراءة مقالات Wikipedia و wikivoyage.</string>
+    <string name="purchase_cancelled_dialog_descr">جدد الاشتراك لتستمر في استخدام كافة الميزات:</string>
+
+    <string name="maps_you_need_descr">استنادا إلى المقالات التي قمتم بحفظها، الخرائط التالية موصى بتحميلها:</string>
+    <string name="paid_app">تطبيق مدفوع</string>
+    <string name="paid_plugin">أداة مدفوعة</string>
+    <string name="start_editing_card_image_text">دليل السفر العالمي المجانا الذي بامكان أي شخص التعديل عليه.</string>
     </resources>
