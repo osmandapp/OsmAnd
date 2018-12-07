@@ -19,4 +19,5 @@
 	<string name="re_send_location">بازفرستی موقعیت</string>
 	<string name="sharing_enabled">اشتراک‌گذاری: فعال</string>
 	<string name="shared_string_status">وضعیت</string>
+	<string name="shared_string_close">بستن</string>
 	</resources>

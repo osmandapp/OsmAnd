@@ -1733,8 +1733,8 @@
     <string name="first_intermediate_dest_description">Додаје прво стајање</string>
     <string name="switch_osm_notes_visibility_desc">Прикажи/Сакриј ОСМ белешке на карти.</string>
     <string name="shared_string_gpx_file">GPX фајл</string>
-    <string name="release_3_0">• Ново: Подршка за глобалне туристичке водиче без потребе за интернет конекцијом. Референтни положају су повезани на карти. Иницијални подаци са сајта Wikivoyage.
-\n
+    <string name="release_3_0">• Ново: Подршка за глобалне туристичке водиче без потребе за интернет конекцијом. Референтни положаји су повезани на карти. Иницијални подаци са сајта Wikivoyage. 
+\n 
 \n • Википедија: нови изглед, активне везе, слике 
 \n 
 \n • Open Track UI: приказ група пролазних тачака 

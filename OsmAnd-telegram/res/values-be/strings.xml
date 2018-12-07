@@ -1,2 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="last_update_from_telegram">Апошняе абнаўленне з Telegram</string>
+	<string name="enter_another_device_name">Абярыце імя, якое вы яшчэ не выкарыстоўвалі</string>
+	<string name="device_added_successfully">%1$s дададзена.</string>
+	<string name="shared_string_add">Дадаць</string>
+	<string name="error_adding_new_device">Не атрымалася дадаць новую прыладу</string>
+	<string name="enter_device_name_description">Максімальная даўжыня назвы новай прылады - 200 сімвалаў.</string>
+	<string name="device_name_is_too_long">Назва прылады занадта доўгая</string>
+	<string name="device_name_cannot_be_empty">Назва прылады не можа быць пустой</string>
+	<string name="device_name">Назва прылады</string>
+	<string name="shared_string_hide">Схаваць</string>
+	</resources>
