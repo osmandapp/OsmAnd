@@ -34,6 +34,6 @@ public class RouteCalculationParams {
 	public RouteCalculationResultListener resultListener;
 
 	public interface RouteCalculationResultListener {
-		void onRouteCalculated(List<Location> locations);
+		void onRouteCalculated(RouteCalculationResult route);
 	}
 }

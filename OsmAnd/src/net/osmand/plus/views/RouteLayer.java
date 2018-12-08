@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.TreeMap;
 
 import gnu.trove.list.array.TByteArrayList;
@@ -806,25 +807,37 @@ public class RouteLayer extends OsmandMapLayer {
 			LatLon p = start;
 			for (TransportRouteResultSegment s : r.getSegments()) {
 				LatLon floc = s.getStart().getLocation();
-				addRouteWalk(p, floc, res, colors);
+				addRouteWalk(s, p, floc, res, colors);
 				List<Way> geometry = s.getGeometry();
 				res.addAll(geometry);
 				addColors(s.route, geometry.size(), colors);
 				p = s.getEnd().getLocation();
 			}
-			addRouteWalk(p, end, res, colors);
+			addRouteWalk(r.getFinishWalkSegment(), p, end, res, colors);
 		}
 	}
 
-	private void addRouteWalk(LatLon s, LatLon e, List<Way> res, List<Integer> colors) {
-		double dist = MapUtils.getDistance(s, e);
-		if (dist > 50) {
+	private void addRouteWalk(TransportRouteResultSegment s, LatLon start, LatLon end, List<Way> res, List<Integer> colors) {
+		final RouteCalculationResult walkingRouteSegment = transportHelper.getWalkingRouteSegment(s);
+		if (walkingRouteSegment != null && walkingRouteSegment.getRouteLocations().size() > 0) {
+			final List<Location> routeLocations = walkingRouteSegment.getRouteLocations();
 			Way way = new Way(-1);
-			way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format("Walk %.1f m", dist));
-			way.addNode(new Node(s.getLatitude(), s.getLongitude(), -1));
-			way.addNode(new Node(e.getLatitude(), e.getLongitude(), -1));
+			way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format(Locale.US, "Walk %d m", walkingRouteSegment.getWholeDistance()));
+			for (Location l : routeLocations) {
+				way.addNode(new Node(l.getLatitude(), l.getLongitude(), -1));
+			}
 			res.add(way);
 			addColors(null, 1, colors);
+		} else {
+			double dist = MapUtils.getDistance(start, end);
+			if (dist > 50) {
+				Way way = new Way(-1);
+				way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format(Locale.US, "Walk %.1f m", dist));
+				way.addNode(new Node(start.getLatitude(), start.getLongitude(), -1));
+				way.addNode(new Node(end.getLatitude(), end.getLongitude(), -1));
+				res.add(way);
+				addColors(null, 1, colors);
+			}
 		}
 	}
 

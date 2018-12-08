@@ -91,6 +91,7 @@ public class RoutingHelper {
 		voiceRouter = new VoiceRouter(this, settings);
 		provider = new RouteProvider();
 		transportRoutingHelper = context.getTransportRoutingHelper();
+		transportRoutingHelper.setRoutingHelper(this);
 		setAppMode(settings.APPLICATION_MODE.get());
 	}
 
@@ -898,7 +899,7 @@ public class RoutingHelper {
 						route = res;
 					}
 					if (params.resultListener != null) {
-						params.resultListener.onRouteCalculated(res.getRouteLocations());
+						params.resultListener.onRouteCalculated(res);
 					}
 				} else {
 					evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2); // for Issue #3899
