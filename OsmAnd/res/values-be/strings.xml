@@ -665,7 +665,7 @@
 	<string name="favorite_friends_category">Сябры</string>
 	<string name="favorite_places_category">Месцы</string>
 	<string name="shared_string_others">Іншае</string>
-	<string name="shared_string_name">Назва</string>
+	<string name="shared_string_name">Імя</string>
 	<string name="favourites_edit_dialog_category">Катэгорыя</string>
 	<string name="shared_string_no_thanks">Не, дзякуй</string>
 	<string name="basemap_missing">Спампаваць асноўную мапу свету, каб мець агляд усяго свету на малых узроўнях набліжэння.</string>
@@ -765,8 +765,8 @@
 	<string name="si_km_m">Кіламетры/метры</string>
 	<string name="yard">ярд</string>
 	<string name="foot">фут</string>
-	<string name="mile_per_hour">мл/г</string>
-	<string name="mile">мл</string>
+	<string name="mile_per_hour">м/г</string>
+	<string name="mile">міл</string>
 	<string name="send_location_way_choose_title">Даслаць каардынаты праз</string>
 	<string name="send_location_sms_pattern">Месцазнаходжанне: %1$s
 \n%2$s</string>
@@ -1702,7 +1702,7 @@
 	<string name="shared_string_yes">Так</string>
 	<string name="shared_string_no">Не</string>
 	<string name="shared_string_on">Уключыць</string>
-	<string name="shared_string_off">Выключыць</string>
+	<string name="shared_string_off">Выкл</string>
 	<string name="shared_string_previous">Назад</string>
 	<string name="shared_string_next">Далей</string>
 	<string name="shared_string_enable">Уключыць</string>
@@ -1747,7 +1747,7 @@
 	<string name="shared_string_unexpected_error">Нечаканая памылка</string>
 	<string name="shared_string_action_template">Дзеянне {0}</string>
 	<string name="shared_string_close">Закрыць</string>
-	<string name="shared_string_exit">Выхад</string>
+	<string name="shared_string_exit">Выйсці</string>
 	<string name="shared_string_show">Паказаць</string>
 	<string name="shared_string_show_all">Паказаць усе</string>
 	<string name="shared_string_show_on_map">Паказаць на мапе</string>
@@ -2879,7 +2879,7 @@
     <string name="my_location">Маё становішча</string>
     <string name="shared_string_finish">Фініш</string>
     <string name="plan_route">Планаваць маршрут</string>
-    <string name="shared_string_sort">Сартаваць</string>
+    <string name="shared_string_sort">Упарадкаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
     <string name="is_saved">захаваны</string>
     <string name="marker_save_as_track_descr">Экспартаваць вашыя адмеціны ў наступны GPX-файл:</string>
