@@ -3041,7 +3041,24 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="send_search_query_description">Vi skickar din sökfråga: <b>\"%1$s\"</b>, såväl som din plats.<br/><br/> Vi samlar inte in personlig information, vi behöver bara sökdata för att förbättra sökalgoritmen.<br/></string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Sök gata</string>
-    <string name="start_search_from_city">Börja sökning från stad</string>
+    <string name="start_search_from_city">Välj en stad först</string>
     <string name="shared_string_restore">Återställ</string>
     <string name="keep_passed_markers">Behåll passerade markörer på kartan</string>
+    <string name="powered_by_osmand">Drivs av OsmAnd</string>
+    <string name="osm_live_plan_pricing">Abonnemang &amp; Priser</string>
+    <string name="osm_live_payment_monthly_title">Betala månadsvis</string>
+    <string name="osm_live_payment_3_months_title">Betala var 3:e månad</string>
+    <string name="osm_live_payment_annual_title">Betala en gång om året</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / månad</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / månad</string>
+    <string name="osm_live_payment_discount_descr">Spara %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Ditt nuvarande abonnemang</string>
+    <string name="osm_live_payment_renews_monthly">Förnyas varje månad</string>
+    <string name="osm_live_payment_renews_quarterly">Förnyas kvartalsvis</string>
+    <string name="osm_live_payment_renews_annually">Förnyas årligen</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Välj en passande betalningsperiod:</string>
+    <string name="osm_live_payment_contribute_descr">En del av intäkterna går till OpenStreetMap bidragsgivare.</string>
+    <string name="markers_remove_dialog_msg">Ta bort kartmarkör \'%s\'\?</string>
+    <string name="edit_map_marker">Redigera kartmarkör</string>
     </resources>
