@@ -1755,7 +1755,7 @@
     <string name="shared_string_dismiss">بی‌خیال</string>
     <string name="use_opengl_render">استفاده از رندرگیری OpenGL</string>
     <string name="use_opengl_render_descr">از رندرگیری سرعت‌یافتهٔ سخت‌افزاری OpenGL استفاده کن (شاید مصرف باتری افزایش یابد یا روی دستگاه‌های خیلی قدیمی کار نکند).</string>
-    <string name="lock_screen_request_explanation">%1$s به این مجوز نیاز دارد تا برای صرفه‌جویی در انرژی، بتواند نمایشگر را خاموش کند.</string>
+    <string name="lock_screen_request_explanation">‏%1$s به این مجوز نیاز دارد تا برای صرفه‌جویی در انرژی بتواند نمایشگر را خاموش کند.</string>
     <string name="wake_on_voice_descr">هنگام نزدیک‌شدن به پیچ، نمایشگر روشن شود (اگر خاموش است).</string>
     <string name="shared_string_never">هرگز</string>
     <string name="rendering_attr_trolleybusRoutes_name">مسیرهای اتوبوس برقی</string>
