@@ -158,6 +158,7 @@ public class RouteResultPreparation {
 	}
 
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+		combineWayPointsForAreaRouting(ctx, result);
 		validateAllPointsConnected(result);
 		splitRoadsAndAttachRoadSegments(ctx, result);
 		calculateTimeSpeed(ctx, result);
