@@ -1,2 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="last_update_from_telegram">עדכון אחרון מטלגרם</string>
+	<string name="enter_another_device_name">נא לבחור שם שלא השתמשת בו עדיין</string>
+	<string name="device_added_successfully">%1$s נוסף.</string>
+	<string name="shared_string_add">הוספה</string>
+	<string name="error_adding_new_device">לא ניתן להוסיף מכשיר חדש</string>
+	<string name="enter_device_name_description">נא לתת שם באורך של עד 200 תווים למכשיר החדש שלך.</string>
+	<string name="device_name_is_too_long">שם המכשיר ארוך מדי</string>
+	<string name="device_name_cannot_be_empty">שם המכשיר לא יכול להישאר ריק</string>
+	<string name="device_name">שם המכשיר</string>
+	<string name="shared_string_hide">הסתרה</string>
+	<string name="share_location_as_description_second_line">ניתן ליצור ולצפות במזהה ההתקן בלקוח הטלגרם הזה באמצעות רובוט ההתכתבות %1$s.‏ %2$s</string>
+	<string name="share_location_as_description">אם ברצונך לחבר מגוון מכשירים לחשבון טלגרם אחד, עליך להשתמש במכשיר אחר כדי לשתף את המיקום שלך.</string>
+	<string name="last_updated_location">המיקום האחרון שעודכן:</string>
+	<string name="successfully_sent_and_updated">נשלח ועודכן בהצלחה</string>
+	<string name="not_possible_to_send_to_telegram_chats">אין אפשרות לשלוח להתכתבויות בטלגרם:</string>
+	</resources>
