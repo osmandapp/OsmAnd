@@ -393,7 +393,12 @@ class TelegramHelper private constructor() {
 	fun hasGrayscaleUserPhoto(userId: Int): Boolean {
 		return File("$appDir/$GRAYSCALE_PHOTOS_DIR$userId$GRAYSCALE_PHOTOS_EXT").exists()
 	}
-	
+
+	private fun isUserLocationMessage(message: TdApi.Message): Boolean {
+		val cont = message.content
+		return (cont is MessageUserTextLocation || cont is TdApi.MessageLocation)
+	}
+
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
 		val localPhoto = user.profilePhoto?.small?.local
 		return if (localPhoto != null) {
@@ -686,7 +691,7 @@ class TelegramHelper private constructor() {
 							}
 						}
 					}
-				} else if (sameSender) {
+				} else if (sameSender && isUserLocationMessage(message) && isUserLocationMessage(newMessage)) {
 					iterator.remove()
 				}
 			}
