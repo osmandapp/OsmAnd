@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Pair;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -46,7 +47,7 @@ public class TransportRoutingHelper {
 	private RoutingHelper routingHelper;
 
 	private List<TransportRouteResult> routes;
-	private Map<TransportRouteResultSegment, RouteCalculationResult> walkingRouteSegments;
+	private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments;
 	private int currentRoute;
 
 	private LatLon startLocation;
@@ -93,8 +94,8 @@ public class TransportRoutingHelper {
 	}
 
 	@Nullable
-	public RouteCalculationResult getWalkingRouteSegment(TransportRouteResultSegment s) {
-		return walkingRouteSegments.get(s);
+	public RouteCalculationResult getWalkingRouteSegment(TransportRouteResultSegment s1, TransportRouteResultSegment s2) {
+		return walkingRouteSegments.get(new Pair<>(s1, s2));
 	}
 
 	public void setCurrentRoute(int currentRoute) {
@@ -294,14 +295,35 @@ public class TransportRoutingHelper {
 	}
 
 	private class WalkingRouteSegment {
-		TransportRouteResultSegment s;
+		TransportRouteResultSegment s1;
+		TransportRouteResultSegment s2;
 		LatLon start;
+		boolean startTransportStop;
 		LatLon end;
+		boolean endTransportStop;
 
-		WalkingRouteSegment(TransportRouteResultSegment s, LatLon start, LatLon end) {
-			this.s = s;
+		WalkingRouteSegment(TransportRouteResultSegment s1, TransportRouteResultSegment s2) {
+			this.s1 = s1;
+			this.s2 = s2;
+
+			start = s1.getEnd().getLocation();
+			end = s2.getStart().getLocation();
+			startTransportStop = true;
+			endTransportStop = true;
+		}
+
+		WalkingRouteSegment(LatLon start, TransportRouteResultSegment s) {
 			this.start = start;
+			this.s2 = s;
+			end = s2.getStart().getLocation();
+			endTransportStop = true;
+		}
+
+		WalkingRouteSegment(TransportRouteResultSegment s, LatLon end) {
+			this.s1 = s;
 			this.end = end;
+			start = s1.getEnd().getLocation();
+			startTransportStop = true;
 		}
 	}
 
@@ -311,7 +333,7 @@ public class TransportRoutingHelper {
 		private Thread prevRunningJob;
 
 		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
-		private Map<TransportRouteResultSegment, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
+		private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
 		private boolean walkingSegmentsCalculated;
 
 		public RouteRecalculationThread(String name, TransportRouteCalculationParams params) {
@@ -353,12 +375,15 @@ public class TransportRoutingHelper {
 			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
 
 			final float currentDistanceFromBegin =
-					RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin + (float) walkingRouteSegment.s.getTravelDist();
+					RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin +
+							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
 
 			final RouteCalculationParams params = new RouteCalculationParams();
-			params.inSnapToRoadMode = true;
+			params.inPublicTransportMode = true;
 			params.start = start;
 			params.end = end;
+			params.startTransportStop = walkingRouteSegment.startTransportStop;
+			params.targetTransportStop = walkingRouteSegment.endTransportStop;
 			RoutingHelper.applyApplicationSettings(params, app.getSettings(), walkingMode);
 			params.mode = walkingMode;
 			params.ctx = app;
@@ -396,7 +421,7 @@ public class TransportRoutingHelper {
 			params.resultListener = new RouteCalculationResultListener() {
 				@Override
 				public void onRouteCalculated(RouteCalculationResult route) {
-					RouteRecalculationThread.this.walkingRouteSegments.put(walkingRouteSegment.s, route);
+					RouteRecalculationThread.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
 					if (!walkingSegmentsToCalculate.isEmpty()) {
 						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 						if (walkingRouteParams != null) {
@@ -415,16 +440,21 @@ public class TransportRoutingHelper {
 			walkingRouteSegments.clear();
 			if (routes != null && routes.size() > 0) {
 				for (TransportRouteResult r : routes) {
-					LatLon start = params.start;
+					TransportRouteResultSegment prev = null;
 					for (TransportRouteResultSegment s : r.getSegments()) {
+						LatLon start = prev != null ? prev.getEnd().getLocation() : params.start;
 						LatLon end = s.getStart().getLocation();
-						double dist = MapUtils.getDistance(start, end);
-						if (dist > 50) {
-							walkingSegmentsToCalculate.add(new WalkingRouteSegment(s, start, end));
+						if (start != null && end != null) {
+							if (prev == null || MapUtils.getDistance(start, end) > 50) {
+								walkingSegmentsToCalculate.add(prev == null ?
+										new WalkingRouteSegment(start, s) : new WalkingRouteSegment(prev, s));
+							}
 						}
-						start = s.getEnd().getLocation();
+						prev = s;
 					}
-					walkingSegmentsToCalculate.add(new WalkingRouteSegment(r.getFinishWalkSegment(), start, params.end));
+					if (prev != null) {
+						walkingSegmentsToCalculate.add(new WalkingRouteSegment(prev, params.end));
+					}
 				}
 				RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
 				if (walkingRouteParams != null) {

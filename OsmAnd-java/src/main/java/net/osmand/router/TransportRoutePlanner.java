@@ -162,7 +162,6 @@ public class TransportRoutePlanner {
 				}
 				p = p.parentRoute;
 			}
-			route.finishWalkSegment = new TransportRouteResultSegment(null, 0, 0, route.finishWalkDist, -1);
 			// test if faster routes fully included
 			boolean include = false;
 			for(TransportRouteResult s : lst) {
@@ -317,7 +316,6 @@ public class TransportRoutePlanner {
 	public static class TransportRouteResult {
 		
 		List<TransportRouteResultSegment> segments  = new ArrayList<TransportRouteResultSegment>(4);
-		TransportRouteResultSegment finishWalkSegment;
 		double finishWalkDist;
 		double routeTime;
 		private final TransportRoutingConfiguration cfg;
@@ -328,10 +326,6 @@ public class TransportRoutePlanner {
 		
 		public List<TransportRouteResultSegment> getSegments() {
 			return segments;
-		}
-
-		public TransportRouteResultSegment getFinishWalkSegment() {
-			return finishWalkSegment;
 		}
 
 		public double getWalkDist() {

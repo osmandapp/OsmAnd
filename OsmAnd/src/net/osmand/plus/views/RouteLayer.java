@@ -805,20 +805,23 @@ public class RouteLayer extends OsmandMapLayer {
 	private void calculateTransportResult(LatLon start, LatLon end, TransportRouteResult r, List<Way> res, List<Integer> colors) {
 		if (r != null) {
 			LatLon p = start;
+			TransportRouteResultSegment prev = null;
 			for (TransportRouteResultSegment s : r.getSegments()) {
 				LatLon floc = s.getStart().getLocation();
-				addRouteWalk(s, p, floc, res, colors);
+				addRouteWalk(prev, s, p, floc, res, colors);
 				List<Way> geometry = s.getGeometry();
 				res.addAll(geometry);
 				addColors(s.route, geometry.size(), colors);
 				p = s.getEnd().getLocation();
+				prev = s;
 			}
-			addRouteWalk(r.getFinishWalkSegment(), p, end, res, colors);
+			addRouteWalk(prev, null, p, end, res, colors);
 		}
 	}
 
-	private void addRouteWalk(TransportRouteResultSegment s, LatLon start, LatLon end, List<Way> res, List<Integer> colors) {
-		final RouteCalculationResult walkingRouteSegment = transportHelper.getWalkingRouteSegment(s);
+	private void addRouteWalk(TransportRouteResultSegment s1, TransportRouteResultSegment s2,
+							  LatLon start, LatLon end, List<Way> res, List<Integer> colors) {
+		final RouteCalculationResult walkingRouteSegment = transportHelper.getWalkingRouteSegment(s1, s2);
 		if (walkingRouteSegment != null && walkingRouteSegment.getRouteLocations().size() > 0) {
 			final List<Location> routeLocations = walkingRouteSegment.getRouteLocations();
 			Way way = new Way(-1);
@@ -830,14 +833,12 @@ public class RouteLayer extends OsmandMapLayer {
 			addColors(null, 1, colors);
 		} else {
 			double dist = MapUtils.getDistance(start, end);
-			if (dist > 50) {
-				Way way = new Way(-1);
-				way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format(Locale.US, "Walk %.1f m", dist));
-				way.addNode(new Node(start.getLatitude(), start.getLongitude(), -1));
-				way.addNode(new Node(end.getLatitude(), end.getLongitude(), -1));
-				res.add(way);
-				addColors(null, 1, colors);
-			}
+			Way way = new Way(-1);
+			way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format(Locale.US, "Walk %.1f m", dist));
+			way.addNode(new Node(start.getLatitude(), start.getLongitude(), -1));
+			way.addNode(new Node(end.getLatitude(), end.getLongitude(), -1));
+			res.add(way);
+			addColors(null, 1, colors);
 		}
 	}
 
