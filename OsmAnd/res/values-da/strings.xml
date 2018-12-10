@@ -2795,7 +2795,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
     <string name="mapillary_menu_descr_username">Se kun billeder tilføjet af</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
-    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender eller dato. Kun aktiv for højere zoomniveauer.</string>
+    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender, dato eller type. Kun aktiv for højere zoomniveauer.</string>
     <string name="mapillary_menu_descr_dates">Se kun de billeder, der er tilføjet</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
@@ -3222,17 +3222,19 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="keep_passed_markers">Behold passerede markører på kortet</string>
     <string name="osm_live_plan_pricing">Plan &amp; Priser</string>
     <string name="osm_live_payment_monthly_title">Betal månedligt</string>
-    <string name="osm_live_payment_3_months_title">Betal én gang i 3 måneder</string>
+    <string name="osm_live_payment_3_months_title">Betal én gang hver 3. måned</string>
     <string name="osm_live_payment_annual_title">Betal en gang om året</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / måned</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / måned</string>
     <string name="osm_live_payment_discount_descr">Spar %1$s!</string>
 	<string name="osm_live_payment_current_subscription">Nuværende abonnement</string>
-    <string name="osm_live_payment_renews_monthly">Forny månedlig</string>
-    <string name="osm_live_payment_renews_quarterly">Forny kvartalsvis</string>
-    <string name="osm_live_payment_renews_annually">Forny hvert år</string>
+    <string name="osm_live_payment_renews_monthly">Fornyes månedligt</string>
+    <string name="osm_live_payment_renews_quarterly">Fornyes kvartalsvis</string>
+    <string name="osm_live_payment_renews_annually">Fornyes hvert år</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Vælg en passende betalingsperiode:</string>
-    <string name="osm_live_payment_contribute_descr">En del af indtægterne går til OpenStreetMap bidragydere.</string>
+    <string name="osm_live_payment_contribute_descr">En del af indtægterne går til OpenStreetMap bidragsydere.</string>
     <string name="powered_by_osmand">Drevet af OsmAnd</string>
+    <string name="osm_live_subscriptions">Abonnementer</string>
+    <string name="mapillary_menu_title_pano">Vis kun 360° billeder</string>
     </resources>

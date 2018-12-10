@@ -976,7 +976,7 @@
     <string name="hours_ago">ساعة</string>
     <string name="minutes_ago">دقيقة</string>
     <string name="seconds_ago">ثانية</string>
-    <string name="always_center_position_on_map">اظهر الموضع في المنتصف دائماً</string>
+    <string name="always_center_position_on_map">اظهر الموقع في الوسط دائما</string>
     <string name="localization_pref_title">التوطين</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
@@ -1005,8 +1005,8 @@
     <string name="route_info">معلومات الطريق</string>
     
 	<string name="routing_attr_avoid_toll_name">تجنب الطرق ذات الرسوم</string>
-	<string name="routing_attr_avoid_toll_description">إجتناب الطرق التي يجب دفع رسوم للمرور فيها.</string>
-	<string name="routing_attr_avoid_unpaved_name">تجنب الطرق غير المعبّدة</string>
+	<string name="routing_attr_avoid_toll_description">تجنب الطرق ذات الرسوم</string>
+	<string name="routing_attr_avoid_unpaved_name">تجنب الطرق غير المعبدة</string>
 	<string name="routing_attr_avoid_unpaved_description">اجتناب الطرق الترابية والوعرة.</string>
 	<string name="routing_attr_avoid_ferries_name">تجنب العبّارات</string>
 	<string name="routing_attr_weight_name">الوزن الأقصى</string>
@@ -1410,12 +1410,12 @@
 	<string name="calculate_osmand_route_without_internet">احسب قسم طريق OsmAnd بدون إنترنت</string>
     <string name="gpx_option_calculate_first_last_segment">احسب طريق OsmAnd لأول وآخر قسمين في الطريق</string>
     <string name="use_displayed_track_for_navigation">هل ترغب باستخدام المسار المعروض للملاحة؟</string>
-    <string name="keep_and_add_destination_point">أضافة كنقطة وجهة لاحقة</string>
+    <string name="keep_and_add_destination_point">اضافة كنقطة وجهة لاحقة</string>
     <string name="select_gpx">اختر GPX…</string>
     <string name="route_descr_select_destination">حدد الوجهة</string>
-    <string name="routing_attr_prefer_motorway_name">تفضيل طرق الدراجات النارية</string>
-	<string name="routing_attr_prefer_motorway_description">تفضيل طرق الدراجات النارية.</string>
-	<string name="routing_attr_avoid_ferries_description">تجنب العبّارات المائية.</string>
+    <string name="routing_attr_prefer_motorway_name">تفضل الطرق السريعة</string>
+	<string name="routing_attr_prefer_motorway_description">تفضيل الطرق السريعة</string>
+	<string name="routing_attr_avoid_ferries_description">تجنب العبّارات المائية</string>
 	<string name="routing_attr_avoid_motorway_name">تجنب الطرق السريعة</string>
 	<string name="routing_attr_avoid_motorway_description">تجنب الطرق السريعة</string>
 	<string name="routing_attr_weight_description">حدد وزن المركبة الأقصى المسموح به على الطرقات.</string>
@@ -2075,7 +2075,7 @@
     <string name="region_maps">خرائط واسعة النطاق</string>
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
     <string name="srtm_plugin_disabled">الخطوط الكفافية معطلة</string>
-    <string name="nm">nmi</string>
+    <string name="nm">ميل بحري</string>
     <string name="nm_h">ميل بحري/ساعة</string>
     <string name="simulate_your_location_descr">محاكاة موقعك باستخدام طريق مقاس أو مسار GPX مسجل.</string>
     <string name="routing_attr_avoid_shuttle_train_name">تجنب قطار المدينة</string>
@@ -2931,4 +2931,13 @@
     <string name="error_notification_desc">يرجى إرسال لقطة شاشة من هذا الإخطار الى support@osmand.net</string>
     <string name="quick_action_edit_actions">تعديل الإجراءات</string>
     <string name="get_osmand_live">احصل على OsmAnd Live لفتح جميع الميزات: تحديثات يومية للخريطة مع تنزيلات غير محدودة، جميع الإضافات المدفوعة والمجانية، Wikipedia ،wikivoyage وأكثر من ذلك بكثير.</string>
+    <string name="osm_live_subscriptions">الاشتراكات</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="read_wikipedia_offline_description">احصل على اشتراك OsmAnd Live لقراءة مقالات Wikipedia و wikivoyage.</string>
+    <string name="purchase_cancelled_dialog_descr">جدد الاشتراك لتستمر في استخدام كافة الميزات:</string>
+
+    <string name="maps_you_need_descr">استنادا إلى المقالات التي قمتم بحفظها، الخرائط التالية موصى بتحميلها:</string>
+    <string name="paid_app">تطبيق مدفوع</string>
+    <string name="paid_plugin">أداة مدفوعة</string>
+    <string name="start_editing_card_image_text">دليل السفر العالمي المجانا الذي بامكان أي شخص التعديل عليه.</string>
     </resources>
