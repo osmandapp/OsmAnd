@@ -895,7 +895,7 @@ public class RoutingHelper {
 			RouteCalculationResult prev = route;
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
-					if (!params.inSnapToRoadMode) {
+					if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
 						route = res;
 					}
 					if (params.resultListener != null) {
@@ -908,7 +908,7 @@ public class RoutingHelper {
 				currentRunningJob = null;
 			}
 			if(res.isCalculated()){
-				if (!params.inSnapToRoadMode) {
+				if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
 					setNewRoute(prev, res, params.start);
 				}
 			} else if (onlineSourceWithoutInternet) {

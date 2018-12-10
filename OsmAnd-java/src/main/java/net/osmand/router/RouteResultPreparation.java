@@ -41,7 +41,6 @@ public class RouteResultPreparation {
 	 */
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, FinalRouteSegment finalSegment) throws IOException {
 		List<RouteSegmentResult> result  = convertFinalSegmentToResults(ctx, finalSegment);
-		combineWayPointsForAreaRouting(ctx, result);
 		prepareResult(ctx, result);
 		return result;
 	}
