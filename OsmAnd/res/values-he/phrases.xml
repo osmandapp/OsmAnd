@@ -2273,4 +2273,10 @@
 	<string name="poi_dispensing_yes">כן</string>
 	<string name="poi_observatory_type_espionage">שימוש: ריגול</string>
 	<string name="poi_telescope_usage_espionage">שימוש: ריגול</string>
+	<string name="poi_telescope_usage_education">שימוש: חינוך</string>
+	<string name="poi_telescope_usage_research">שימוש: מחקר</string>
+
+	<string name="poi_observatory_type_meteorological">מטאורולוגי</string>
+	<string name="poi_observatory_type_gravitational">כבידתי</string>
+
 	</resources>
