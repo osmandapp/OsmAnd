@@ -582,9 +582,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, placeholderId, false)
-			holder.icon?.setOnClickListener {
-				app.forceUpdateMyLocation()
-			}
+
 			val title = when (item) {
 				is TdApi.Chat -> item.title
 				is TdApi.User -> TelegramUiHelper.getUserName(item)

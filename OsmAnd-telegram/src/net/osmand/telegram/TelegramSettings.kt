@@ -44,7 +44,7 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 
 const val SHARE_TYPE_MAP = "Map"
 const val SHARE_TYPE_TEXT =  "Text"
-const val SHARE_TYPE_MAP_AND_TEXT = "Map and text"
+const val SHARE_TYPE_MAP_AND_TEXT = "Map_and_text"
 private val SHARE_TYPE_VALUES = listOf(SHARE_TYPE_MAP, SHARE_TYPE_TEXT, SHARE_TYPE_MAP_AND_TEXT)
 
 private const val SEND_MY_LOC_DEFAULT_INDEX = 6
@@ -626,26 +626,31 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	inner class ShareTypePref : DurationPref(
 		R.drawable.ic_action_location_history,
-		R.string.location_history,
-		R.string.location_history_desc,
+		R.string.send_location_as,
+		R.string.send_location_as_descr,
 		emptyList()
 	) {
 
 		override fun getCurrentValue(): String {
-			return when (shareTypeValue) {
-				SHARE_TYPE_MAP -> "Map"
-				SHARE_TYPE_TEXT -> "Text"
-				SHARE_TYPE_MAP_AND_TEXT -> "Map and text"
-				else -> ""
-			}
+			return getTextValue(shareTypeValue)
 		}
 
 		override fun setCurrentValue(index: Int) {
 			shareTypeValue = SHARE_TYPE_VALUES[index]
 		}
 
-		override fun getMenuItems() = SHARE_TYPE_VALUES
+		override fun getMenuItems(): List<String> {
+			return SHARE_TYPE_VALUES.map { getTextValue(it) }
+		}
 
+		private fun getTextValue(shareType: String): String {
+			return when (shareType) {
+				SHARE_TYPE_MAP -> app.getString(R.string.shared_string_map)
+				SHARE_TYPE_TEXT -> app.getString(R.string.shared_string_text)
+				SHARE_TYPE_MAP_AND_TEXT -> app.getString(R.string.map_and_text)
+				else -> ""
+			}
+		}
 	}
 
 	abstract inner class DurationPref(
