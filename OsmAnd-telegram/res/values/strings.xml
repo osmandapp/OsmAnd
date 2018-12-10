@@ -1,4 +1,9 @@
 <resources>
+	<string name="send_location_as">Send location as</string>
+	<string name="send_location_as_descr">Choose how messages with your location will look like.</string>
+	<string name="shared_string_map">Map</string>
+	<string name="shared_string_text">Text</string>
+	<string name="map_and_text">Map and text</string>
 	<string name="last_update_from_telegram">Last update from Telegram</string>
 	<string name="enter_another_device_name">Pick a name you haven\'t already used</string>
 	<string name="device_added_successfully">%1$s added.</string>

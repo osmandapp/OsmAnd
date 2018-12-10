@@ -2,8 +2,7 @@ package net.osmand.telegram.helpers
 
 import net.osmand.Location
 import net.osmand.PlatformUtil
-import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.TelegramSettings
+import net.osmand.telegram.*
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.BASE_URL
@@ -57,7 +56,14 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				val sharingMode = app.settings.currentSharingMode
 
 				if (user != null && sharingMode == user.id.toString()) {
-					app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, latitude, longitude)
+					when (app.settings.shareTypeValue) {
+						SHARE_TYPE_MAP -> app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, latitude, longitude)
+						SHARE_TYPE_TEXT -> app.telegramHelper.sendLiveLocationText(chatsShareInfo, location)
+						SHARE_TYPE_MAP_AND_TEXT -> {
+							app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, latitude, longitude)
+							app.telegramHelper.sendLiveLocationText(chatsShareInfo, location)
+						}
+					}
 				} else if (sharingMode.isNotEmpty()) {
 					val url = "$BASE_URL/device/$sharingMode/send?lat=$latitude&lon=$longitude"
 					AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false,

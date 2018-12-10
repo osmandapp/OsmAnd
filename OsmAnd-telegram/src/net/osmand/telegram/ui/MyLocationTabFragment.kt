@@ -98,8 +98,14 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		sharingMode = settings.hasAnyChatToShareLocation()
 				
 		savedInstanceState?.apply {
-			selectedChats.addAll(getLongArray(SELECTED_CHATS_KEY).toSet())
-			selectedUsers.addAll(getLongArray(SELECTED_CHATS_USERS).toSet())
+			val chatsArray = getLongArray(SELECTED_CHATS_KEY)
+			val usersArray = getLongArray(SELECTED_CHATS_KEY)
+			if (chatsArray != null) {
+				selectedChats.addAll(chatsArray.toSet())
+			}
+			if (usersArray != null) {
+				selectedUsers.addAll(usersArray.toSet())
+			}
 			actionButtonsListener?.switchButtonsVisibility((selectedUsers.isNotEmpty() || selectedChats.isNotEmpty()))
 		}
 
@@ -237,6 +243,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		outState.putLongArray(SELECTED_CHATS_KEY, selectedChats.toLongArray())
+		outState.putLongArray(SELECTED_CHATS_USERS, selectedUsers.toLongArray())
 	}
 
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -461,6 +468,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private fun updateList() {
 		val items: MutableList<TdApi.Object> = mutableListOf()
+		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		val currentUser = telegramHelper.getCurrentUser()
 		val contacts = telegramHelper.getContacts()
 		val chatList = if (sharingMode) {
@@ -478,12 +486,14 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						continue
 					}
 				}
-				items.add(chat)
+				chats.add(chat)
 			}
 		}
+		items.addAll(chats)
 		if (!sharingMode) {
 			for (user in contacts.values) {
-				if ((!sharingMode && settings.isSharingLocationToUser(user.id)) || user.id == currentUser?.id) {
+				val containsInChats = chats.any { telegramHelper.getUserIdFromChatType(it.type) == user.id }
+				if ((!sharingMode && settings.isSharingLocationToUser(user.id)) || user.id == currentUser?.id || containsInChats) {
 					continue
 				}
 				items.add(user)
