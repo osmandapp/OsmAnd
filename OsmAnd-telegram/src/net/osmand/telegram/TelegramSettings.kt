@@ -7,7 +7,6 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
-import net.osmand.data.LatLon
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.AndroidUtils
@@ -244,13 +243,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val shareChatInfo = shareChatsInfo[message.chatId]
 		val content = message.content
 		if (shareChatInfo != null) {
-			if (content is TdApi.MessageLocation) {
-				shareChatInfo.currentMapMessageId = message.id
-				shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
-				shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
-			} else if (content is TdApi.MessageText) {
-				shareChatInfo.currentTextMessageId = message.id
+			when (content) {
+				is TdApi.MessageLocation -> shareChatInfo.currentMapMessageId = message.id
+				is TdApi.MessageText -> shareChatInfo.currentTextMessageId = message.id
 			}
+			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
 		}
 	}
 
@@ -823,7 +820,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var currentTextMessageId = -1L
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
-		var lastSuccessfulLocation: LatLon? = null
 		var lastSuccessfulSendTimeMs = -1L
 		var shouldDeletePreviousMessage = false
 		var shouldSendViaBotMessage = false
