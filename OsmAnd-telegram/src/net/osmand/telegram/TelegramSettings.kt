@@ -245,7 +245,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		if (shareChatInfo != null) {
 			when (content) {
 				is TdApi.MessageLocation -> shareChatInfo.currentMapMessageId = message.id
-				is TdApi.MessageText -> shareChatInfo.currentTextMessageId = message.id
+				is TdApi.MessageText -> {
+					shareChatInfo.currentTextMessageId = message.id
+					shareChatInfo.updateTextMessageId++
+				}
 			}
 			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
 		}

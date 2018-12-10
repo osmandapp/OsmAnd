@@ -228,7 +228,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			isModal = true
 			anchorView = valueView
 			setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
-			height = if (menuList.size > 6) {
+			height = if (menuList.size < 6) {
 				ListPopupWindow.WRAP_CONTENT
 			} else {
 				AndroidUtils.getPopupMenuHeight(ctx)
