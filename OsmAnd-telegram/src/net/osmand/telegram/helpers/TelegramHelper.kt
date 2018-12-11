@@ -3,10 +3,15 @@ package net.osmand.telegram.helpers
 import android.text.TextUtils
 import net.osmand.Location
 import net.osmand.PlatformUtil
+import net.osmand.telegram.SHARE_TYPE_MAP
+import net.osmand.telegram.SHARE_TYPE_MAP_AND_TEXT
+import net.osmand.telegram.SHARE_TYPE_TEXT
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
+import net.osmand.telegram.utils.BASE_SHARING_URL
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
+import net.osmand.util.GeoPointParserUtil
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
@@ -37,6 +42,11 @@ class TelegramHelper private constructor() {
 		private const val UPDATED_PREFIX = "Updated: "
 		private const val USER_TEXT_LOCATION_TITLE = "\uD83D\uDDFA OsmAnd sharing:"
 
+		private const val ALTITUDE_PREFIX = "Altitude: "
+		private const val SPEED_PREFIX = "Speed: "
+		private const val HDOP_PREFIX = "Horizontal precision: "
+
+		private const val NOW = "now"
 		private const val FEW_SECONDS_AGO = "few seconds ago"
 		private const val SECONDS_AGO_SUFFIX = " seconds ago"
 		private const val MINUTES_AGO_SUFFIX = " minutes ago"
@@ -496,9 +506,9 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun sendViaBotLocationMessage(userId: Int, shareInfo: TelegramSettings.ShareChatInfo, location: TdApi.Location, query: String) {
+	fun sendViaBotLocationMessage(userId: Int, shareInfo: TelegramSettings.ShareChatInfo, location: TdApi.Location, device: TelegramSettings.DeviceBot, shareType:String) {
 		log.debug("sendViaBotLocationMessage - ${shareInfo.chatId}")
-		client?.send(TdApi.GetInlineQueryResults(userId, shareInfo.chatId, location, query, "")) { obj ->
+		client?.send(TdApi.GetInlineQueryResults(userId, shareInfo.chatId, location, device.deviceName, "")) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
 					val error = obj as TdApi.Error
@@ -509,7 +519,7 @@ class TelegramHelper private constructor() {
 					}
 				}
 				TdApi.InlineQueryResults.CONSTRUCTOR -> {
-					sendViaBotMessageFromQueryResults(shareInfo, obj as TdApi.InlineQueryResults, query)
+					sendViaBotMessageFromQueryResults(shareInfo, obj as TdApi.InlineQueryResults, device.externalId, shareType)
 				}
 			}
 		}
@@ -518,16 +528,26 @@ class TelegramHelper private constructor() {
 	private fun sendViaBotMessageFromQueryResults(
 		shareInfo: TelegramSettings.ShareChatInfo,
 		inlineQueryResults: TdApi.InlineQueryResults,
-		query: String
+		deviceId: String,
+		shareType: String
 	) {
 		val queryResults = inlineQueryResults.results.asList()
 		if (queryResults.isNotEmpty()) {
-			val resultArticle = queryResults.firstOrNull {
-				(it is TdApi.InlineQueryResultArticle && it.id.startsWith("t") && it.title == query)
+			val resultArticles = mutableListOf<TdApi.InlineQueryResultArticle>()
+			queryResults.forEach {
+				if (it is TdApi.InlineQueryResultArticle && it.id.substring(1) == deviceId) {
+					val textLocationArticle = it.id.startsWith("t")
+					val mapLocationArticle = it.id.startsWith("m")
+					if (shareType == SHARE_TYPE_MAP && mapLocationArticle
+						|| shareType == SHARE_TYPE_TEXT && textLocationArticle
+						|| shareType == SHARE_TYPE_MAP_AND_TEXT && (textLocationArticle || mapLocationArticle)) {
+						resultArticles.add(it)
+					}
+				}
 			}
-			if (resultArticle != null && resultArticle is TdApi.InlineQueryResultArticle) {
+			resultArticles.forEach {
 				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, true,
-						true, inlineQueryResults.inlineQueryId, resultArticle.id)) { obj ->
+					true, inlineQueryResults.inlineQueryId, it.id)) { obj ->
 					handleLiveLocationMessageUpdate(obj, shareInfo)
 				}
 			}
@@ -659,9 +679,9 @@ class TelegramHelper private constructor() {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
 				if (oldContent.text.text.startsWith(DEVICE_PREFIX)) {
-					message.content = parseTextLocation(oldContent.text.text)
+					message.content = parseTextLocation(oldContent.text)
 				} else if (oldContent.text.text.startsWith(USER_TEXT_LOCATION_TITLE)) {
-					message.content = parseTextLocation(oldContent.text.text, false)
+					message.content = parseTextLocation(oldContent.text, false)
 				}
 			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
@@ -870,7 +890,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun sendLiveLocationText(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, location: Location?) {
+	fun sendLiveLocationText(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, location: Location) {
 		chatsShareInfo.forEach { (chatId, shareInfo) ->
 			if (shareInfo.getChatLiveMessageExpireTime() <= 0) {
 				return@forEach
@@ -892,17 +912,15 @@ class TelegramHelper private constructor() {
 					}
 				}
 			} else {
-				client?.send(TdApi.SendMessage(chatId, 0, false, false, null, content), UpdatesHandler())
+				client?.send(TdApi.SendMessage(chatId, 0, false, false, null, content)) { obj ->
+					handleLiveLocationMessageUpdate(obj, shareInfo)
+				}
 			}
 		}
 	}
 
-	private fun formatLocation(sig: Location?, now: Boolean): String {
-		var locMsg = "n/a"
-		if (sig != null) {
-			locMsg = String.format(Locale.US,"%.5f, %.5f (%s)", sig.latitude, sig.longitude, formatTime(sig.time, now))
-		}
-		return locMsg
+	private fun formatLocation(sig: Location): String {
+		return String.format(Locale.US, "%.5f, %.5f", sig.latitude, sig.longitude)
 	}
 
 	private fun formatTime(ti: Long, now: Boolean): String {
@@ -910,11 +928,11 @@ class TelegramHelper private constructor() {
 		val current = System.currentTimeMillis() / 1000
 		val tm = ti / 1000
 		return when {
-			current - tm < 10 -> if (now) "now" else "few seconds ago"
-			current - tm < 50 -> (current - tm).toString() + " seconds ago"
-			current - tm < 60 * 60 * 2 -> ((current - tm) / 60).toString() + " minutes ago"
-			current - tm < 60 * 60 * 24 -> ((current - tm) / (60 * 60)).toString() + " hours ago"
-			else -> UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + " UTC"
+			current - tm < 10 -> if (now) NOW else FEW_SECONDS_AGO
+			current - tm < 50 -> (current - tm).toString() + SECONDS_AGO_SUFFIX
+			current - tm < 60 * 60 * 2 -> ((current - tm) / 60).toString() + MINUTES_AGO_SUFFIX
+			current - tm < 60 * 60 * 24 -> ((current - tm) / (60 * 60)).toString() + HOURS_AGO_SUFFIX
+			else -> UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + UTC_FORMAT_SUFFIX
 		}
 	}
 
@@ -923,32 +941,37 @@ class TelegramHelper private constructor() {
 		return UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + " UTC"
 	}
 
-	private fun getTextMessageContent(updateId: Int, location: Location?): TdApi.InputMessageText {
+	private fun getTextMessageContent(updateId: Int, location: Location): TdApi.InputMessageText {
 		val entities = mutableListOf<TdApi.TextEntity>()
 		val builder = StringBuilder()
-		val locationMessage = formatLocation(location, true)
-		builder.append("$USER_TEXT_LOCATION_TITLE\n")
-		entities.add(TdApi.TextEntity(builder.lastIndex, LOCATION_PREFIX.length, TdApi.TextEntityTypeBold()))
-		builder.append(String.format("$LOCATION_PREFIX%s\n", locationMessage))
+		val locationMessage = formatLocation(location)
+		val locationTime = formatTime(location.time, true)
 
-		if (location != null) {
-			if (location.hasAltitude()) {
-				entities.add(TdApi.TextEntity(builder.lastIndex, "Altitude:".length, TdApi.TextEntityTypeBold()))
-				builder.append(String.format(Locale.US, "Altitude: %.1f\n", location.altitude))
-			}
-			if (location.hasSpeed() && location.speed > 0) {
-				entities.add(TdApi.TextEntity(builder.lastIndex, "Speed:".length, TdApi.TextEntityTypeBold()))
-				builder.append(String.format(Locale.US, "Speed: %.1f\n", location.speed))
-			}
-			if (location.hasAccuracy() && location.speed == 0.0f) {
-				entities.add(TdApi.TextEntity(builder.lastIndex, "Horizontal precision:".length, TdApi.TextEntityTypeBold()))
-				builder.append(String.format(Locale.US, "Horizontal precision: %d m\n", location.accuracy.toInt()))
-			}
-			if (updateId == 0) {
-				builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
-			} else {
-				builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
-			}
+		builder.append("$USER_TEXT_LOCATION_TITLE\n")
+
+		entities.add(TdApi.TextEntity(builder.lastIndex, LOCATION_PREFIX.length, TdApi.TextEntityTypeBold()))
+		builder.append(LOCATION_PREFIX)
+
+		entities.add(TdApi.TextEntity(builder.length, locationMessage.length,
+			TdApi.TextEntityTypeTextUrl("$BASE_SHARING_URL?lat=${location.latitude}&lon=${location.longitude}")))
+		builder.append("$locationMessage ($locationTime)\n")
+
+		if (location.hasAltitude() && location.altitude != 0.0) {
+			entities.add(TdApi.TextEntity(builder.lastIndex, ALTITUDE_PREFIX.length, TdApi.TextEntityTypeBold()))
+			builder.append(String.format(Locale.US, "$ALTITUDE_PREFIX%.1f m\n", location.altitude))
+		}
+		if (location.hasSpeed() && location.speed > 0) {
+			entities.add(TdApi.TextEntity(builder.lastIndex, SPEED_PREFIX.length, TdApi.TextEntityTypeBold()))
+			builder.append(String.format(Locale.US, "$SPEED_PREFIX%.1f m/s\n", location.speed))
+		}
+		if (location.hasAccuracy() && location.accuracy != 0.0f && location.speed == 0.0f) {
+			entities.add(TdApi.TextEntity(builder.lastIndex, HDOP_PREFIX.length, TdApi.TextEntityTypeBold()))
+			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.accuracy.toInt()))
+		}
+		if (updateId == 0) {
+			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
+		} else {
+			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
 		}
 		val textMessage = builder.toString().trim()
 
@@ -1119,11 +1142,11 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun parseTextLocation(text: String, botLocation: Boolean = true): MessageLocation {
+	private fun parseTextLocation(text: TdApi.FormattedText, botLocation: Boolean = true): MessageLocation {
 		val res = if (botLocation) MessageOsmAndBotLocation() else MessageUserTextLocation()
 
 		var locationNA = false
-		for (s in text.lines()) {
+		for (s in text.text.lines()) {
 			when {
 				s.startsWith(DEVICE_PREFIX) -> {
 					if (res is MessageOsmAndBotLocation) {
@@ -1145,7 +1168,15 @@ class TelegramHelper private constructor() {
 							parse = false
 						}
 					}
-					if (parse) {
+					val urlTextEntity = text.entities.firstOrNull { it.type is TdApi.TextEntityTypeTextUrl }
+					if (urlTextEntity != null && urlTextEntity.offset == text.text.indexOf(locStr)) {
+						val url = (urlTextEntity.type as TdApi.TextEntityTypeTextUrl).url
+						val point: GeoPointParserUtil.GeoParsedPoint? = GeoPointParserUtil.parse(url)
+						if (point != null) {
+							res.lat = point.latitude
+							res.lon = point.longitude
+						}
+					} else if (parse) {
 						try {
 							val (latS, lonS) = locStr.split(" ")
 							val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
@@ -1454,7 +1485,7 @@ class TelegramHelper private constructor() {
 							val fromBot = isOsmAndBot(message.senderUserId)
 							val viaBot = isOsmAndBot(message.viaBotUserId)
 							message.content = if (newContent is TdApi.MessageText) {
-								parseTextLocation(newContent.text.text, (fromBot || viaBot))
+								parseTextLocation(newContent.text, (fromBot || viaBot))
 							} else if (newContent is TdApi.MessageLocation &&
 								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)

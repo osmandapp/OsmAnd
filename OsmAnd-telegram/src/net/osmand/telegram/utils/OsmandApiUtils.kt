@@ -10,6 +10,8 @@ import org.json.JSONObject
 
 const val BASE_URL = "https://live.osmand.net"
 
+const val BASE_SHARING_URL = "http://osmand.net/go"
+
 object OsmandApiUtils {
 
 	private val log = PlatformUtil.getLog(OsmandApiUtils::class.java)
