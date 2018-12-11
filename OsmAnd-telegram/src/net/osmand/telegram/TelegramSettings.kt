@@ -202,9 +202,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		return false
 	}
 
-	fun getShareDeviceNameWithExternalId(externalId: String): String? {
-		return shareDevices.singleOrNull { it.externalId == externalId }?.deviceName
-	}
+	fun getCurrentSharingDevice() = shareDevices.singleOrNull { it.externalId == currentSharingMode }
 
 	fun getLastSuccessfulSendTime() = shareChatsInfo.values.maxBy { it.lastSuccessfulSendTimeMs }?.lastSuccessfulSendTimeMs ?: -1
 
@@ -636,7 +634,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 
 		override fun setCurrentValue(index: Int) {
-			shareTypeValue = SHARE_TYPE_VALUES[index]
+			val newSharingType = SHARE_TYPE_VALUES[index]
+			if (shareTypeValue != newSharingType && app.telegramHelper.getCurrentUser()?.id.toString() != currentSharingMode) {
+				shareChatsInfo.forEach { (_, shareInfo) ->
+					shareInfo.shouldSendViaBotMessage = true
+				}
+			}
+			shareTypeValue = newSharingType
 		}
 
 		override fun getMenuItems(): List<String> {
