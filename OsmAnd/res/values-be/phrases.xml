@@ -838,7 +838,7 @@
 	<string name="poi_wiki_lang_uk">Вікіпедыя на украінскай мове</string>
 	<string name="poi_wiki_lang_vi">Вікіпедыя на в’етнамскай мове</string>
 	<string name="poi_wiki_lang_sw">Вікіпедыя на суахілі</string>
-	<string name="poi_barrier_entrance">Праход у сьцяне ці плоце</string>
+	<string name="poi_barrier_entrance">Праход у сцяне ці плоце</string>
 	<string name="poi_entrance_main">Асноўны ўваход</string>
 	<string name="poi_entrance">Уваход</string>
 	<string name="poi_entrance_exit">Выхад</string>
@@ -886,7 +886,7 @@
 	<string name="poi_swing_gate">Паваротны шлагбаўм</string>
 	<string name="poi_turnstile">Турнікет</string>
 	<string name="poi_kent_carriage_gap">Праезд для фурманак</string>
-	<string name="poi_highway_crossing">Пешаходныя пераход</string>
+	<string name="poi_highway_crossing">Пешаходны пераход</string>
 
 <string name="poi_wiki_lang_ceb">Вікіпедыя на себуанскай мове</string>
 	<string name="poi_energy">Энэргетыка</string>
@@ -896,10 +896,10 @@
 	<string name="poi_tourism_attraction">Турыстычная славутасьць</string>
 	<string name="poi_tree">Дрэва</string>
 	<string name="poi_opening_hours">Гадзіны працы</string>
-	<string name="poi_description">Апісаньне</string>
+	<string name="poi_description">Апісанне</string>
 	<string name="poi_phone">Тэлефон</string>
 	<string name="poi_website">Вэб-сайт</string>
-	<string name="poi_operator">Апэратар</string>
+	<string name="poi_operator">Аператар</string>
 	<string name="poi_brand">Брэнд</string>
 
 	<string name="poi_power_cable_distribution_cabinet">Размеркавальная скрыня</string>
@@ -927,30 +927,30 @@
 	<string name="poi_icn_ref">Пункт міжнароднай роварнай сеткі</string>
 	<string name="poi_ncn_ref">Пункт нацыянальнай роварнай сеткі</string>
 	<string name="poi_rcn_ref">Пункт рэгіянальнай роварнай сеткі</string>
-	<string name="poi_lcn_ref">Пункт лякальнай роварнай сеткі</string>
+	<string name="poi_lcn_ref">Пункт мясцовай роварнай сеткі</string>
 	<string name="poi_iwn_ref">Пункт міжнароднай сеткі пешых маршрутаў</string>
 	<string name="poi_nwn_ref">Пункт нацыянальнай сеткі пешых маршрутаў</string>
 	<string name="poi_rwn_ref">Пункт рэгіянальнай сеткі пешых маршрутаў</string>
-	<string name="poi_lwn_ref">Пункт лякальнай сеткі пешых маршрутаў</string>
+	<string name="poi_lwn_ref">Пункт мясцовай сеткі пешых маршрутаў</string>
 
 	<string name="poi_route_hiking_iwn_poi">Міжнародны пешы маршрут</string>
 	<string name="poi_route_hiking_nwn_poi">Нацыянальны пешы маршрут</string>
 	<string name="poi_route_hiking_rwn_poi">Рэгіянальны пешы маршрут</string>
-	<string name="poi_route_hiking_lwn_poi">Лякальны пешы маршрут</string>
+	<string name="poi_route_hiking_lwn_poi">Мясцовы пешы маршрут</string>
 	<string name="poi_conservation">Абароненая вобласьць</string>
 
 	<string name="poi_node_networks">Вузлы пешаходнай ці рованай сеткі</string>
 		<string name="poi_hiking_routes">Пешыя маршруты</string>
 		<string name="poi_traffic_enforcement">Кантроль руху</string>
-	<string name="poi_collection_times">Гадзіны выманьня</string>
-	<string name="poi_route_hiking_ref_poi">Абазначэньне пешага маршруту</string>
+	<string name="poi_collection_times">Гадзіны вымання</string>
+	<string name="poi_route_hiking_ref_poi">Абазначэнне пешага маршруту</string>
 
 	<string name="poi_access_private">Прыватны доступ</string>
 	<string name="poi_access_no">Няма доступу</string>
 	<string name="poi_access_permissive">Доступ з дазволу</string>
 	<string name="poi_access_customers">Доступ спажыўцам</string>
 	<string name="poi_access_delivery">Доступ для дастаўкі</string>
-	<string name="poi_access_agricultural">Сельгасп. доступ</string>
+	<string name="poi_access_agricultural">Сельгас доступ</string>
 
 	<string name="poi_access_destination">Транзіт забаронены</string>
 	<string name="poi_capital">Так</string>
@@ -960,7 +960,7 @@
 	<string name="poi_email">Эл. пошта</string>
 	<string name="poi_fax">Факс</string>
 	<string name="facebook">Facebook</string>
-	<string name="poi_mobile">Сотавы тэлефон</string>
+	<string name="poi_mobile">Мабільны тэлефон</string>
 	<string name="poi_animal_shelter_dog">Сабакі</string>
 	<string name="poi_animal_shelter_cat">Каты</string>
 	<string name="poi_animal_shelter_dog_cat">Сабакі, каты</string>
@@ -1045,21 +1045,21 @@
 	<string name="poi_supervised_no">Некантралюемы аб\'ект</string>
 	<string name="poi_seasonal_yes">Так</string>
 	<string name="poi_seasonal_no">Не</string>
-	<string name="poi_seasonal_dry_season">Сухі сэзон</string>
-	<string name="poi_seasonal_wet_season">Сэзон дажджоў</string>
-	<string name="poi_crossing_traffic_signals">Са сьвятлафорам</string>
+	<string name="poi_seasonal_dry_season">Сухі сезон</string>
+	<string name="poi_seasonal_wet_season">Сезон дажджоў</string>
+	<string name="poi_crossing_traffic_signals">Са святлафорам</string>
 	<string name="poi_crossing_uncontrolled">Нерэгулюемы</string>
-	<string name="poi_crossing_unmarked">Неразьмечаны</string>
+	<string name="poi_crossing_unmarked">Неразмечаны</string>
 
 	<string name="poi_recycling_waste_oil">Адпрацаваная алiва</string>
 	<string name="poi_perfumery">Парфумерыя</string>
 
-	<string name="twitter">Твітар</string>
-	<string name="poi_skype">Скайп</string>
-	<string name="poi_youtube">Ютуб</string>
-	<string name="poi_instagram">Інстаграм</string>
+	<string name="twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
 	<string name="vk">УКантакце</string>
-	<string name="poi_google_plus">Гугл+</string>
+	<string name="poi_google_plus">Google+</string>
 	<string name="poi_mill_pond">Млынавая сажалка</string>
 	<string name="poi_building">Будынак</string>
 
@@ -1524,20 +1524,20 @@
 	<string name="poi_resource_zircon">Цыркон</string>
 
 	<string name="poi_highway_steps">Сходы</string>
-	<string name="poi_content_silage">Зьмесьціва: сілас</string>
-	<string name="poi_content_water">Зьмесьціва: вада</string>
-	<string name="poi_content_oil">Зьмесьціва: нафта</string>
-	<string name="poi_content_fuel">Зьмесьціва: паліва</string>
-	<string name="poi_content_manure">Зьмесьціва: гной</string>
-	<string name="poi_content_wine">Зьмесьціва: віно</string>
-	<string name="poi_content_sewage">Зьмесьціва: стокавыя воды</string>
-	<string name="poi_content_gas">Зьмесьціва: газ</string>
-	<string name="poi_content_biomass">Зьмесьціва: біямаса</string>
-	<string name="poi_content_crop">Зьмесьціва: ураджай</string>
-	<string name="poi_content_fodder">Зьмесьціва: корм</string>
-	<string name="poi_content_beer">Зьмесьціва: піва</string>
-	<string name="poi_content_salt">Зьмесьціва: соль</string>
-	<string name="poi_content_grain">Зьмесьціва: збожжа</string>
+	<string name="poi_content_silage">Змесціва: сілас</string>
+	<string name="poi_content_water">Змесціва: вада</string>
+	<string name="poi_content_oil">Змесціва: нафта</string>
+	<string name="poi_content_fuel">Змесціва: паліва</string>
+	<string name="poi_content_manure">Змесціва: гной</string>
+	<string name="poi_content_wine">Змесціва: віно</string>
+	<string name="poi_content_sewage">Змесціва: стокавыя воды</string>
+	<string name="poi_content_gas">Змесціва: газ</string>
+	<string name="poi_content_biomass">Змесціва: біямаса</string>
+	<string name="poi_content_crop">Змесціва: ураджай</string>
+	<string name="poi_content_fodder">Змесціва: корм</string>
+	<string name="poi_content_beer">Змесціва: піва</string>
+	<string name="poi_content_salt">Змесціва: соль</string>
+	<string name="poi_content_grain">Змесціва: збожжа</string>
 
 	<string name="poi_nudism_yes">Дазволены</string>
 	<string name="poi_nudism_no">Забаронены</string>
@@ -1546,24 +1546,24 @@
 	<string name="poi_nudism_permissive">З дазволу</string>
 
 	<string name="poi_trade_building_supplies">Будаўнічыя матэрыялы</string>
-	<string name="poi_trade_plumbing">Матэрыялы для вадавода</string>
+	<string name="poi_trade_plumbing">Матэрыялы для вадаавода</string>
 	<string name="poi_trade_wood">Лесаматэрыялы</string>
 	<string name="poi_trade_agricultural_supplies">Сельгаспрадукцыя</string>
 	<string name="poi_trade_tile">Кафля</string>
 
-	<string name="poi_content_slurry">Зьмесьціва: завісь</string>
-	<string name="poi_bicycle_parking_anchors">Замацаванае кольца</string>
+	<string name="poi_content_slurry">Змесціва: завісь</string>
+	<string name="poi_bicycle_parking_anchors">Замацаванае кальцо</string>
 	<string name="poi_bicycle_parking_stands">Стойка</string>
-	<string name="poi_bicycle_parking_wall_loops">Мацаваньне толькі для пярэдняга кола</string>
+	<string name="poi_bicycle_parking_wall_loops">Мацаванне толькі для пярэдняга кола</string>
 	<string name="poi_bicycle_parking_rack">Рама</string>
 	<string name="poi_bicycle_parking_building">Адмысловы будынак</string>
 	<string name="poi_bicycle_parking_shed">Падстрэшак</string>
-	<string name="poi_bicycle_parking_bollard">Слупок з мацаваньнем</string>
+	<string name="poi_bicycle_parking_bollard">Слупок з мацаваннем</string>
 	<string name="poi_bicycle_parking_informal">Неафіцыйная</string>
 
-	<string name="poi_leaf_type_broadleaved">Шырокалісьцевая расьліннасьць</string>
-	<string name="poi_leaf_type_needleleaved">Хвойная расьліннасьць</string>
-	<string name="poi_leaf_type_mixed">Зьмяшанага тыпу</string>
+	<string name="poi_leaf_type_broadleaved">Шырокалісцевая расліннасць</string>
+	<string name="poi_leaf_type_needleleaved">Хвойная расліннасць</string>
+	<string name="poi_leaf_type_mixed">Змяшанага тыпу</string>
 	<string name="poi_leaf_type_leafless">Бязьлісьцевая расьліннасьць</string>
 	<string name="poi_species">Від</string>
 	<string name="poi_genus">Род</string>
@@ -2457,32 +2457,32 @@
 	<string name="poi_wiki_lang_war">Вікіпедыя на варайскай мове</string>
 	<string name="poi_wiki_lang_min">Вікіпедыя на мінангкабаў</string>
 	<string name="poi_wiki_lang_kk">Вікіпедыя на казахскай мове</string>
-	<string name="poi_wiki_lang_uz">Вікіпэдыя на ўзбецкай</string>
-	<string name="poi_wiki_lang_ce">Вікіпэдыя на чачэнскай</string>
-	<string name="poi_wiki_lang_ur">Вікіпэдыя на урду</string>
-	<string name="poi_wiki_lang_oc">Вікіпэдыя на аксітанскай</string>
-	<string name="poi_wiki_lang_zhminnan">Вікіпэдыя на паўднёваміньскай</string>
-	<string name="poi_wiki_lang_mg">Вікіпэдыя на малагасійскай</string>
-	<string name="poi_wiki_lang_tt">Вікіпэдыя на татарскай</string>
-	<string name="poi_wiki_lang_jv">Вікіпэдыя на яванскай</string>
-	<string name="poi_wiki_lang_ky">Вікіпэдыя на кіргізкай</string>
-	<string name="poi_wiki_lang_zhyue">Вікіпэдыя на кантонскай</string>
-	<string name="poi_wiki_lang_ast">Вікіпэдыя на астурлеонскай</string>
-	<string name="poi_wiki_lang_tg">Вікіпэдыя на таджыцкай</string>
-	<string name="poi_wiki_lang_ba">Вікіпэдыя на башкірскай</string>
-	<string name="poi_wiki_lang_sco">Вікіпэдыя на шатляндзкай</string>
-	<string name="poi_wiki_lang_pnb">Вікіпэдыя на заходнім панджабі</string>
-	<string name="poi_wiki_lang_cv">Вікіпэдыя на чувашскай</string>
-	<string name="poi_wiki_lang_lmo">Вікіпэдыя на лямбардзкай</string>
-	<string name="poi_wiki_lang_my">Вікіпэдыя на бірманскай</string>
-	<string name="poi_wiki_lang_yo">Вікіпэдыя на ёруба</string>
-	<string name="poi_wiki_lang_an">Вікіпэдыя на арагонскай</string>
-	<string name="poi_wiki_lang_ne">Вікіпэдыя на нэпальскай</string>
-	<string name="poi_wiki_lang_gu">Вікіпэдыя на гуджараці</string>
-	<string name="poi_wiki_lang_scn">Вікіпэдыя на сіцылійскай</string>
-	<string name="poi_wiki_lang_bar">Вікіпэдыя на баварскай</string>
-	<string name="poi_wiki_lang_mn">Вікіпэдыя на мангольскай</string>
-	<string name="poi_wiki_lang_nap">Вікіпэдыя на нэапалітанскай</string>
+	<string name="poi_wiki_lang_uz">Вікіпедыя на ўзбецкай мове</string>
+	<string name="poi_wiki_lang_ce">Вікіпедыя на чачэнскай мове</string>
+	<string name="poi_wiki_lang_ur">Вікіпедыя на урду</string>
+	<string name="poi_wiki_lang_oc">Вікіпедыя на аксітанскай мове</string>
+	<string name="poi_wiki_lang_zhminnan">Вікіпедыя на паўднёваміньскай мове</string>
+	<string name="poi_wiki_lang_mg">Вікіпедыя на малагасійскай мове</string>
+	<string name="poi_wiki_lang_tt">Вікіпедыя на татарскай мове</string>
+	<string name="poi_wiki_lang_jv">Вікіпедыя на яванскай мове</string>
+	<string name="poi_wiki_lang_ky">Вікіпедыя на кіргізскай мове</string>
+	<string name="poi_wiki_lang_zhyue">Вікіпедыя на кантонскай мове</string>
+	<string name="poi_wiki_lang_ast">Вікіпедыя на астурлеонскай мове</string>
+	<string name="poi_wiki_lang_tg">Вікіпедыя на таджыцкай мове</string>
+	<string name="poi_wiki_lang_ba">Вікіпедыя на башкірскай мове</string>
+	<string name="poi_wiki_lang_sco">Вікіпедыя на шатландскай мове</string>
+	<string name="poi_wiki_lang_pnb">Вікіпедыя на заходнім панджабі</string>
+	<string name="poi_wiki_lang_cv">Вікіпедыя на чувашскай мове</string>
+	<string name="poi_wiki_lang_lmo">Вікіпедыя на ламбардскай мове</string>
+	<string name="poi_wiki_lang_my">Вікіпедыя на бірманскай мове</string>
+	<string name="poi_wiki_lang_yo">Вікіпедыя на ёруба</string>
+	<string name="poi_wiki_lang_an">Вікіпедыя на арагонскай мове</string>
+	<string name="poi_wiki_lang_ne">Вікіпедыя на непальскай мове</string>
+	<string name="poi_wiki_lang_gu">Вікіпедыя на гуджараці</string>
+	<string name="poi_wiki_lang_scn">Вікіпедыя на сіцылійскай мове</string>
+	<string name="poi_wiki_lang_bar">Вікіпедыя на баварскай мове</string>
+	<string name="poi_wiki_lang_mn">Вікіпедыя на мангольскай мове</string>
+	<string name="poi_wiki_lang_nap">Вікіпедыя на неапалітанскай мове</string>
 
 	<string name="poi_fireworks">Крама феервэркаў</string>
 
@@ -3041,7 +3041,7 @@
 	<string name="poi_dolphin">Дэльфінарыюм</string>
 
 	<string name="poi_seamark_dyke">Вадзяны знак: насып</string>
-	<string name="poi_content_wastewater">Зьмесьціва: сьцёкі</string>
+	<string name="poi_content_wastewater">Змесціва: сцёкі</string>
 	<string name="poi_fire_hydrant_position_green">Трава</string>
 	<string name="poi_wiki_link">Вікіпэдыя</string>
 
