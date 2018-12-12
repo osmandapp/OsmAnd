@@ -153,7 +153,7 @@
 	<string name="poi_railway_platform">Tren andena</string>
 	<string name="poi_halt">Tren geltokia</string>
 	<string name="poi_subway_entrance">Metro sarrera</string>
-	<string name="poi_subway_station">Metro geltokia</string>
+	<string name="poi_subway_station">Bai</string>
 	<string name="poi_taxi">Taxi geltokia</string>
 
 	<string name="poi_aerodrome">Aireportua</string>
@@ -444,7 +444,7 @@
 	<string name="poi_prison">Kartzela</string>
 	<string name="poi_migration">Migrazioa</string>
 	<string name="poi_tax_inspection">Ogasun ikuskaritza</string>
-	<string name="poi_capital">Hiriburua</string>
+	<string name="poi_capital">Bai</string>
 	<string name="poi_town">Herria</string>
 	<string name="poi_neighbourhood">Auzoa</string>
 	<string name="poi_place_allotments">Baratza komunitarioak</string>
@@ -1541,7 +1541,7 @@
 	<string name="poi_diet_pescetarian_yes">Peszetarianoa</string>
 
 	<string name="poi_brewery_additional">Garagardotegiaren izena</string>
-	<string name="poi_microbrewery_yes">Mikro-garagardotegia</string>
+	<string name="poi_microbrewery_yes">Bai</string>
 	<string name="poi_microbrewery_no">Ez da mikro-garagardotegia</string>
 
 	<string name="poi_piste_grooming_skating">Patinajea</string>
@@ -3878,8 +3878,8 @@
 <string name="poi_bulk_purchase">Handizkaria</string>
 	<string name="poi_substation_type">Mota</string>
 
-<string name="poi_bulk_purchase_yes">Handizkaria: bai</string>
-	<string name="poi_bulk_purchase_only">Handizkaria: besterik ez</string>
+<string name="poi_bulk_purchase_yes">Bai</string>
+	<string name="poi_bulk_purchase_only">Besterik ez</string>
 
 	<string name="poi_substation_transmission">Transmisioa</string>
 	<string name="poi_substation_distribution">Banaketa</string>
@@ -3887,7 +3887,7 @@
 	<string name="poi_substation_industrial">Industriala</string>
 	<string name="poi_substation_transition">Trantsizioa</string>
 	<string name="poi_substation_traction">Trakzioa</string>
-	<string name="poi_substation_converter"></string>
+	<string name="poi_substation_converter">Bihurtzailea</string>
 	<string name="poi_substation_compensation">Konpentsazioa</string>
 
 	<string name="poi_substation_compression">Konpresioa</string>

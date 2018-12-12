@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="last_update_from_telegram">עדכון אחרון מטלגרם</string>
+	<string name="enter_another_device_name">נא לבחור שם שלא השתמשת בו עדיין</string>
+	<string name="device_added_successfully">%1$s נוסף.</string>
+	<string name="shared_string_add">הוספה</string>
+	<string name="error_adding_new_device">לא ניתן להוסיף מכשיר חדש</string>
+	<string name="enter_device_name_description">נא לתת שם באורך של עד 200 תווים למכשיר החדש שלך.</string>
+	<string name="device_name_is_too_long">שם המכשיר ארוך מדי</string>
+	<string name="device_name_cannot_be_empty">שם המכשיר לא יכול להישאר ריק</string>
+	<string name="device_name">שם המכשיר</string>
+	<string name="shared_string_hide">הסתרה</string>
+	<string name="share_location_as_description_second_line">ניתן ליצור ולצפות במזהה ההתקן בלקוח הטלגרם הזה באמצעות רובוט ההתכתבות %1$s.‏ %2$s</string>
+	<string name="share_location_as_description">אם ברצונך לחבר מגוון מכשירים לחשבון טלגרם אחד, עליך להשתמש במכשיר אחר כדי לשתף את המיקום שלך.</string>
+	<string name="last_updated_location">המיקום האחרון שעודכן:</string>
+	<string name="successfully_sent_and_updated">נשלח ועודכן בהצלחה</string>
+	<string name="not_possible_to_send_to_telegram_chats">אין אפשרות לשלוח להתכתבויות בטלגרם:</string>
+	<string name="send_location_as">שליחת מיקום בתור</string>
+	<string name="send_location_as_descr">נא לבחור כיצד הודעות עם המיקום שלך תיראנה.</string>
+	<string name="shared_string_map">מפה</string>
+	<string name="shared_string_text">טקסט</string>
+	<string name="map_and_text">מפה וטקסט</string>
+	<string name="waiting_for_response_from_telegram">בהמתנה לתגובה מטלגרם</string>
+	<string name="sending_location_messages">המיקום נשלח</string>
+	<string name="initializing">מופעל</string>
+	<string name="searching_for_gps">מתבצע איתור המיקום…</string>
+	<string name="connecting_to_the_internet">מתבצעת התחברות לאינטרנט</string>
+	<string name="background_work_description">ניתן לשנות הגדרות מיטוב סוללה כדי לייצב את שיתוף המיקום.</string>
+	<string name="background_work">עבודת רקע</string>
+	</resources>

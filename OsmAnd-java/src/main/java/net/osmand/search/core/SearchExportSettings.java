@@ -9,6 +9,11 @@ public class SearchExportSettings {
 		exportBuildings = true;
 	}
 
+	public SearchExportSettings(boolean exportEmptyCities, boolean exportBuildings) {
+		this.exportEmptyCities = exportEmptyCities;
+		this.exportBuildings = exportBuildings;
+	}
+
 	public boolean isExportEmptyCities() {
 		return exportEmptyCities;
 	}

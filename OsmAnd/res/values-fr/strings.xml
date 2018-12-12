@@ -2737,7 +2737,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapillary_menu_title_tile_cache">Cache des tuiles</string>
     <string name="mapillary_menu_descr_dates">Afficher uniquement les images ajoutées</string>
     <string name="mapillary_menu_descr_username">Afficher uniquement les images ajoutées par</string>
-    <string name="mapillary_menu_filter_description">Filtrer les images par date ou nom d\'utilisateur. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
+    <string name="mapillary_menu_filter_description">Filtrez les images par date, nom d\'utilisateur ou type. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
     <string name="shared_string_reset">Réinitialiser</string>
     <string name="average">Moyenne</string>
     <string name="ascent_descent">Croissant / Décroissant</string>
@@ -3207,8 +3207,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_live_payment_header">Sélectionnez la fréquence de règlement qui vous convient :</string>
     <string name="osm_live_payment_contribute_descr">Une partie des revenus est reversée aux contributeurs OpenStreetMap.</string>
     <string name="osm_live_plan_pricing">Plans et Tarifs</string>
-    <string name="osm_live_payment_renews_monthly">Abonnement mensuel</string>
-    <string name="osm_live_payment_renews_quarterly">Abonnement trimestriel</string>
-    <string name="osm_live_payment_renews_annually">Abonnement annuel</string>
+    <string name="osm_live_payment_renews_monthly">Abonnements mensuels</string>
+    <string name="osm_live_payment_renews_quarterly">Abonnements trimestriels</string>
+    <string name="osm_live_payment_renews_annually">Abonnements annuels</string>
     <string name="powered_by_osmand">Propulsé par OsmAnd</string>
+    <string name="osm_live_subscriptions">Abonnements</string>
+    <string name="mapillary_menu_title_pano">N\'afficher que les images à 360°</string>
     </resources>

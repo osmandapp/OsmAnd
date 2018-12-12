@@ -523,7 +523,7 @@
 	<string name="rendering_attr_showRoadMaps_description">选择何时显示仅包含道路的地图：</string>
 	<string name="rendering_attr_showRoadMaps_name">仅包含道路的地图</string>
     <string name="safe_mode_description">在安全模式运行应用（使用较慢的 Android 代码代替原生代码）。</string>
-    <string name="native_library_not_running">应用正运行在安全模式下（可在设置中关闭）。</string>
+    <string name="native_library_not_running">应用正运行在安全模式下（可在“设置”中关闭）。</string>
     <string name="background_service_is_enabled_question">OsmAnd 睡眠模式服务仍在运行。是否要关闭？</string>
     <string name="close_changeset">关闭修改集</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing 条形码扫描应用未安装，是否转到应用市场中搜索？</string>
@@ -680,13 +680,13 @@
 	<string name="local_indexes_cat_poi">兴趣点数据</string>
 	<string name="ttsvoice">TTS语音</string>
 	<string name="search_offline_clear_search">新搜索</string>
-	<string name="map_text_size_descr">选择地图上名称的字体大小</string>
+	<string name="map_text_size_descr">选择地图上名称的字体大小。</string>
 	<string name="map_text_size">地图字体大小</string>
-	<string name="trace_rendering_descr">显示渲染性能</string>
+	<string name="trace_rendering_descr">显示渲染性能。</string>
 	
 	<string name="installing_new_resources">解包新数据…</string>
 	<string name="internet_connection_required_for_online_route">已选择在线导航服务，但网络连接不可用。</string>
-	<string name="tts_language_not_supported_title">语言不支持</string>
+	<string name="tts_language_not_supported_title">不支持的语言</string>
 	<string name="tts_missing_language_data_title">数据丢失</string>
 	<string name="gpx_option_destination_point">使用当前终点</string>
 	<string name="voice_stream_notification">提醒语音音频</string>
@@ -1424,7 +1424,7 @@
     <string name="dash_download_manage">管理</string>
     <string name="rendering_attr_trainLightrailRoutes_name">铁路线路</string>
     <string name="rendering_category_hide">隐藏</string>
-    <string name="traffic_warning_pedestrian">人行橫道</string>
+    <string name="traffic_warning_pedestrian">人行横道</string>
     <string name="rendering_category_routes">线路</string>
     <string name="show_railway_warnings">铁道交口</string>
     <string name="rendering_category_details">详细信息</string>
@@ -1844,7 +1844,7 @@
     <string name="traffic_warning_speed_limit">速度限制</string>
     <string name="traffic_warning_border_control">边境管制</string>
     <string name="traffic_warning_payment">收费站</string>
-    <string name="traffic_warning_stop">停车标志</string>
+    <string name="traffic_warning_stop">停止标志</string>
     <string name="traffic_warning_calming">交通稳静化</string>
     <string name="traffic_warning_speed_camera">测速摄像机</string>
     <string name="traffic_warning">交通警告</string>
@@ -2730,5 +2730,10 @@
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
     <string name="osm_live_payment_discount_descr">节省 %1$s！</string>
 	<string name="osm_live_payment_current_subscription">您的当前订阅</string>
-    <string name="open_in_browser_wiki_description"></string>
+    <string name="open_in_browser_wiki_description">在网页浏览器中查看文章。</string>
+    <string name="osm_live_subscriptions">订阅</string>
+    <string name="osm_live_payment_renews_monthly">每月续期</string>
+    <string name="osm_live_payment_renews_quarterly">每季度续期</string>
+    <string name="osm_live_payment_renews_annually">每年续期</string>
+    <string name="third_party_application">第三方应用程序</string>
     </resources>

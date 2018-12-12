@@ -319,7 +319,7 @@ public class SearchUICore {
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchCoreFactory.SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI(searchAmenityTypesAPI));
+		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
 				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
@@ -500,7 +500,7 @@ public class SearchUICore {
 						}
 						currentSearchResult = collection;
 						if (phrase.getSettings().isExportObjects()) {
-							rm.createTestJSON(collection);
+							//rm.createTestJSON(collection);
 						}
 						rm.searchFinished(phrase);
 						if (onResultsComplete != null) {
@@ -841,7 +841,9 @@ public class SearchUICore {
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
-			if (!ObjectType.isTopVisible(o1.objectType) && !ObjectType.isTopVisible(o2.objectType)) {
+			boolean topVisible1 = ObjectType.isTopVisible(o1.objectType);
+			boolean topVisible2 = ObjectType.isTopVisible(o2.objectType);
+			if ((!topVisible1 && !topVisible2) || (topVisible1 && topVisible2)) {
 				if (o1.isUnknownPhraseMatches() != o2.isUnknownPhraseMatches()) {
 					return o1.isUnknownPhraseMatches() ? -1 : 1;
 				} else if (o1.getFoundWordCount() != o2.getFoundWordCount()) {

@@ -174,4 +174,9 @@
 
 
 <string name="last_update_from_telegram">Siste oppdatering fra Telegram</string>
+	<string name="send_location_as">Send plassering som</string>
+	<string name="send_location_as_descr">Velg hvordan meldinger med din plassering skal se ut.</string>
+	<string name="shared_string_map">Kart</string>
+	<string name="shared_string_text">Tekst</string>
+	<string name="map_and_text">Kart og tekst</string>
 	</resources>

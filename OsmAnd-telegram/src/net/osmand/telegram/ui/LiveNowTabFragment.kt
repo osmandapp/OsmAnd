@@ -171,6 +171,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		updateList()
 	}
 
+	override fun onTelegramChatCreated(chat: TdApi.Chat) {
+		updateList()
+	}
+
 	override fun onTelegramUserChanged(user: TdApi.User) {
 		updateList()
 	}
