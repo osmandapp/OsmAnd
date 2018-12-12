@@ -3221,6 +3221,5 @@
     <string name="osm_live_payment_contribute_descr">Частка даходу ідзе ўдзельнікам OpenStreetMap.</string>
     <string name="powered_by_osmand">Працуе на OsmAnd</string>
     <string name="mapillary_menu_title_pano">Паказаць толькі 360° малюнкі</string>
-    <string name="osm_live_subscriptions">Падпіска
-\n</string>
+    <string name="osm_live_subscriptions">Падпіскі</string>
     </resources>

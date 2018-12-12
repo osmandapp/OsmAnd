@@ -476,7 +476,7 @@ Nyttjat utrymme är {1} MB.
     <string name="search_offline_geo_error">Det gick inte att tolka geo-uppsåt \'%s\'.</string>
     <string name="search_osm_offline">Sök adress med hjälp av offline-kartor</string>
     <string name="system_locale">System</string>
-    <string name="preferred_locale_descr">Välj visningsspråk (starta om OsmAnd efter språkbyte).</string>
+    <string name="preferred_locale_descr">Välj visningsspråk (träder i kraft när OsmAnd startas om).</string>
     <string name="preferred_locale">Visningsspråk</string>
 
 
