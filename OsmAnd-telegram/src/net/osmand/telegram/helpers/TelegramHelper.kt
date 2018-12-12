@@ -42,6 +42,8 @@ class TelegramHelper private constructor() {
 		private const val UPDATED_PREFIX = "Updated: "
 		private const val USER_TEXT_LOCATION_TITLE = "\uD83D\uDDFA OsmAnd sharing:"
 
+		private const val SHARING_LINK = "https://play.google.com/store/apps/details?id=net.osmand.telegram"
+
 		private const val ALTITUDE_PREFIX = "Altitude: "
 		private const val SPEED_PREFIX = "Speed: "
 		private const val HDOP_PREFIX = "Horizontal precision: "
@@ -933,8 +935,9 @@ class TelegramHelper private constructor() {
 		val builder = StringBuilder()
 		val locationMessage = formatLocation(location)
 
-		entities.add(TdApi.TextEntity(builder.length, USER_TEXT_LOCATION_TITLE.length,
-			TdApi.TextEntityTypeTextUrl("https://play.google.com/store/apps/details?id=net.osmand.telegram")))
+		val firstSpace = USER_TEXT_LOCATION_TITLE.indexOf(' ')
+		val secondSpace = USER_TEXT_LOCATION_TITLE.indexOf(' ', firstSpace + 1)
+		entities.add(TdApi.TextEntity(builder.length + firstSpace + 1, secondSpace - firstSpace, TdApi.TextEntityTypeTextUrl(SHARING_LINK)))
 		builder.append("$USER_TEXT_LOCATION_TITLE\n")
 
 		entities.add(TdApi.TextEntity(builder.lastIndex, LOCATION_PREFIX.length, TdApi.TextEntityTypeBold()))
@@ -963,7 +966,7 @@ class TelegramHelper private constructor() {
 		}
 		val textMessage = builder.toString().trim()
 
-		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), false, true)
+		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
 	}
 
 	/**
@@ -1170,6 +1173,12 @@ class TelegramHelper private constructor() {
 								val (latS, lonS) = locStr.split(" ")
 								res.lat = latS.dropLast(1).toDouble()
 								res.lon = lonS.toDouble()
+
+								val timeIndex = locStr.indexOf("(")
+								if (timeIndex != -1) {
+									val updatedS = locStr.substring(timeIndex, locStr.length)
+									res.lastUpdated = (parseTime(updatedS.removePrefix("(").removeSuffix(")")) / 1000).toInt()
+								}
 							}
 						} catch (e: Exception) {
 							e.printStackTrace()
