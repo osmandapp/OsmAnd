@@ -923,19 +923,6 @@ class TelegramHelper private constructor() {
 		return String.format(Locale.US, "%.5f, %.5f", sig.latitude, sig.longitude)
 	}
 
-	private fun formatTime(ti: Long, now: Boolean): String {
-		val dt = Date(ti)
-		val current = System.currentTimeMillis() / 1000
-		val tm = ti / 1000
-		return when {
-			current - tm < 10 -> if (now) NOW else FEW_SECONDS_AGO
-			current - tm < 50 -> (current - tm).toString() + SECONDS_AGO_SUFFIX
-			current - tm < 60 * 60 * 2 -> ((current - tm) / 60).toString() + MINUTES_AGO_SUFFIX
-			current - tm < 60 * 60 * 24 -> ((current - tm) / (60 * 60)).toString() + HOURS_AGO_SUFFIX
-			else -> UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + UTC_FORMAT_SUFFIX
-		}
-	}
-
 	private fun formatFullTime(ti: Long): String {
 		val dt = Date(ti)
 		return UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + " UTC"
@@ -945,8 +932,9 @@ class TelegramHelper private constructor() {
 		val entities = mutableListOf<TdApi.TextEntity>()
 		val builder = StringBuilder()
 		val locationMessage = formatLocation(location)
-		val locationTime = formatTime(location.time, true)
 
+		entities.add(TdApi.TextEntity(builder.length, USER_TEXT_LOCATION_TITLE.length,
+			TdApi.TextEntityTypeTextUrl("https://play.google.com/store/apps/details?id=net.osmand.telegram")))
 		builder.append("$USER_TEXT_LOCATION_TITLE\n")
 
 		entities.add(TdApi.TextEntity(builder.lastIndex, LOCATION_PREFIX.length, TdApi.TextEntityTypeBold()))
@@ -954,7 +942,7 @@ class TelegramHelper private constructor() {
 
 		entities.add(TdApi.TextEntity(builder.length, locationMessage.length,
 			TdApi.TextEntityTypeTextUrl("$BASE_SHARING_URL?lat=${location.latitude}&lon=${location.longitude}")))
-		builder.append("$locationMessage ($locationTime)\n")
+		builder.append("$locationMessage\n")
 
 		if (location.hasAltitude() && location.altitude != 0.0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, ALTITUDE_PREFIX.length, TdApi.TextEntityTypeBold()))
@@ -1168,28 +1156,25 @@ class TelegramHelper private constructor() {
 							parse = false
 						}
 					}
-					val urlTextEntity = text.entities.firstOrNull { it.type is TdApi.TextEntityTypeTextUrl }
-					if (urlTextEntity != null && urlTextEntity.offset == text.text.indexOf(locStr)) {
-						val url = (urlTextEntity.type as TdApi.TextEntityTypeTextUrl).url
-						val point: GeoPointParserUtil.GeoParsedPoint? = GeoPointParserUtil.parse(url)
-						if (point != null) {
-							res.lat = point.latitude
-							res.lon = point.longitude
-						}
-					} else if (parse) {
+					if (parse) {
 						try {
-							val (latS, lonS) = locStr.split(" ")
-							val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
-
-							res.lastUpdated =
-									(parseTime(updatedS.removePrefix("(").removeSuffix(")")) / 1000).toInt()
-							res.lat = latS.dropLast(1).toDouble()
-							res.lon = lonS.toDouble()
-
+							val urlTextEntity = text.entities.firstOrNull { it.type is TdApi.TextEntityTypeTextUrl }
+							if (urlTextEntity != null && urlTextEntity.offset == text.text.indexOf(locStr)) {
+								val url = (urlTextEntity.type as TdApi.TextEntityTypeTextUrl).url
+								val point: GeoPointParserUtil.GeoParsedPoint? = GeoPointParserUtil.parse(url)
+								if (point != null) {
+									res.lat = point.latitude
+									res.lon = point.longitude
+								}
+							} else {
+								val (latS, lonS) = locStr.split(" ")
+								res.lat = latS.dropLast(1).toDouble()
+								res.lon = lonS.toDouble()
+							}
 						} catch (e: Exception) {
 							e.printStackTrace()
 						}
-					}
+					 }
 				}
 				s.startsWith(UPDATED_PREFIX) -> {
 					if (res.lastUpdated == 0) {
