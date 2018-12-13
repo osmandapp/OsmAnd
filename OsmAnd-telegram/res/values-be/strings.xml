@@ -172,4 +172,9 @@
 	<string name="live_now">Зараз дзейнічае</string>
 
 
-</resources>
+<string name="send_location_as">Адправіць месцазнаходжанне як</string>
+	<string name="send_location_as_descr">Абярыце як будуць выглядаць паведамленні з вашым месцазнаходжаннем.</string>
+	<string name="shared_string_map">Мапа</string>
+	<string name="shared_string_text">Тэкст</string>
+	<string name="map_and_text">Мапа і тэкст</string>
+	</resources>
