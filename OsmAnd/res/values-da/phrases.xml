@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
         <string name="poi_bakery">Bager</string>
         <string name="poi_alcohol">Spiritus</string>
@@ -3971,7 +3971,7 @@
 	<string name="poi_substation_type">Type</string>
 
 <string name="poi_bulk_purchase_yes">Ja</string>
-	<string name="poi_bulk_purchase_only">Storkøb: kun</string>
+	<string name="poi_bulk_purchase_only">Kun</string>
 
 	<string name="poi_pipeline_substation">Rørledningsstation</string>
 	<string name="poi_substation_transmission">Transmission</string>
@@ -3989,5 +3989,6 @@
 	<string name="poi_substation_valve_group">Ventilgruppe</string>
 	<string name="poi_substation_inspection_gauge">Inspektionsmåler</string>
 	<string name="poi_substation_field_gathering">Feltsamling</string>
-
+    <string name="poi_craft_confectionery">Konfekt produktion</string>
+    <string name="poi_shop_wholesale">Engros-butik</string>
 </resources>
