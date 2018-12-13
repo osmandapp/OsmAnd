@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Vendejo</string>
 		<string name="poi_shop_food">Butiko oportuna kaj superbazaro</string>
 	<string name="poi_emergency">Vivsavo</string>
@@ -58,7 +58,7 @@
 	<string name="poi_farm">Terfrukt-vendejo</string>
 	<string name="poi_greengrocer">Legom-butiko</string>
 	<string name="poi_seafood">Marfrukt-vendejo</string>
-	<string name="poi_confectionery">Sukeraĵejo</string>
+	<string name="poi_confectionery">Sukeraĵejo (vendejo)</string>
 	<string name="poi_ice_cream">Glaciaĵejo</string>
 	<string name="poi_supermarket">Superbazaro</string>
 	<string name="poi_tea">Teejo</string>
@@ -3914,5 +3914,6 @@
 	<string name="poi_substation_valve_group">valvaro</string>
 	<string name="poi_substation_inspection_gauge">indikilo</string>
 	<string name="poi_substation_field_gathering">kolekta</string>
-
+    <string name="poi_craft_confectionery">Sukeraĵejo (metiejo)</string>
+    <string name="poi_shop_wholesale">Pogranda vendejo</string>
 </resources>
