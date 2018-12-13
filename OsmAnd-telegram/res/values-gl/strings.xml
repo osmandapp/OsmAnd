@@ -172,4 +172,9 @@
 	<string name="live_now">Ao vivo agora</string>
 
 
-</resources>
+<string name="send_location_as">Enviar ubicación coma</string>
+	<string name="send_location_as_descr">Escolla de que xeito se verán as mensaxes ca súa ubicación.</string>
+	<string name="shared_string_map">Mapa</string>
+	<string name="shared_string_text">Texto</string>
+	<string name="map_and_text">Mapa e texto</string>
+	</resources>
