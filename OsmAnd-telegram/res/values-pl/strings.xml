@@ -174,4 +174,9 @@
 	<string name="initialization">Wystartuj</string>
 	<string name="logging_out">Wylogowuję się</string>
 	<string name="closing">Zamykanie</string>
+	<string name="send_location_as">Wyślij lokalizację jako</string>
+	<string name="send_location_as_descr">Wybierz sposób wyświetlania wiadomości z Twoją lokalizacją.</string>
+	<string name="shared_string_map">Mapa</string>
+	<string name="shared_string_text">Tekst</string>
+	<string name="map_and_text">Mapa i tekst</string>
 	</resources>
