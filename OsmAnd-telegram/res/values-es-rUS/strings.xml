@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="background_work_description">Cambiar los ajustes de optimización de la batería para estabilizar la ubicación compartida.</string>
 	<string name="background_work">Funcionamiento en segundo plano</string>
 	<string name="battery_optimization_description">Desactivar la optimización de la batería para OsmAnd Telegram de modo que no se desconecte repentinamente cuando esté en segundo plano.</string>
@@ -172,4 +172,9 @@
 	<string name="initialization">Iniciando</string>
 	<string name="logging_out">Cerrar sesión</string>
 	<string name="closing">Cerrando</string>
-	</resources>
+    <string name="send_location_as">Enviar ubicación como</string>
+    <string name="send_location_as_descr">Elige cómo se verán los mensajes con tu ubicación.</string>
+    <string name="shared_string_map">Mapa</string>
+    <string name="shared_string_text">Texto</string>
+    <string name="map_and_text">Mapa y texto</string>
+</resources>
