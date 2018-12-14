@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Tienda;Almacén</string>
 		<string name="poi_shop_food">Tienda de comestibles y supermercado</string>
 	<string name="poi_emergency">Emergencia</string>
@@ -3719,5 +3719,6 @@
 	<string name="poi_substation_valve_group">Grupo de válvulas</string>
 	<string name="poi_substation_inspection_gauge">Calibre de inspección</string>
 	<string name="poi_substation_field_gathering">Recolección de campo</string>
-
+    <string name="poi_craft_confectionery">Elaboración de dulces</string>
+    <string name="poi_shop_wholesale">Venta mayorista</string>
 </resources>
