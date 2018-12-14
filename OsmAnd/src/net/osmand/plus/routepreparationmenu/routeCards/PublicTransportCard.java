@@ -89,7 +89,7 @@ public class PublicTransportCard extends BaseRouteCard {
 		String walkTime = OsmAndFormatter.getFormattedDuration((int) routeResult.getWalkTime(), app);
 		String walkDistance = OsmAndFormatter.getFormattedDistance((int) routeResult.getTravelDist(), app);
 
-		wayLine.setText(app.getString(R.string.route_way) + " " + travelTime + " *  walking - " + walkTime + " * " + walkDistance);
+		wayLine.setText(app.getString(R.string.route_way) + " " + travelTime + " •  walking - " + walkTime + " • " + walkDistance);
 		wayLine.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -107,6 +107,7 @@ public class PublicTransportCard extends BaseRouteCard {
 			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		}
 
+		AndroidUtils.setBackground(app, view, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
 		AndroidUtils.setBackground(app, view.findViewById(R.id.top_divider), nightMode,
 				R.color.divider_light, R.color.divider_dark);
 		AndroidUtils.setBackground(app, view.findViewById(R.id.routes_info_container), nightMode,

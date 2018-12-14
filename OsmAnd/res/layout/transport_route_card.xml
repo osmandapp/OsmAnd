@@ -39,7 +39,7 @@
 				android:layout_height="wrap_content"
 				android:orientation="vertical"
 				android:paddingBottom="14dp"
-				android:paddingTop="14dp">
+				android:paddingTop="8dp">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/from_line"
