@@ -31,20 +31,21 @@
 			<net.osmand.plus.routepreparationmenu.FlowLayout
 				android:id="@+id/routes_badges"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent" />
+				android:layout_height="match_parent"
+				android:layout_marginBottom="4dp" />
 
 			<LinearLayout
 				android:id="@+id/routes_info"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="vertical"
-				android:paddingBottom="14dp"
-				android:paddingTop="8dp">
+				android:paddingBottom="14dp">
 
-				<net.osmand.plus.widgets.TextViewEx
+				<android.support.v7.widget.AppCompatTextView
 					android:id="@+id/from_line"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:paddingBottom="10dp"
 					tools:text="@string/route_from" />
 
 				<net.osmand.plus.widgets.TextViewEx
