@@ -10,6 +10,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.RouteCalculationProgress;
 
@@ -312,7 +313,8 @@ public class MeasurementEditingContext {
 		};
 		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
 			@Override
-			public void onRouteCalculated(List<Location> locations) {
+			public void onRouteCalculated(RouteCalculationResult route) {
+				List<Location> locations = route.getRouteLocations();
 				ArrayList<WptPt> pts = new ArrayList<>(locations.size());
 				for (Location loc : locations) {
 					if(!loc.hasAltitude()){
