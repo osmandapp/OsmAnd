@@ -461,6 +461,7 @@ public class AppInitializer implements IProgress {
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
 		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
+		app.routingOptionsHelper = startupInit(new RoutingOptionsHelper(app), RoutingOptionsHelper.class);
 		app.resourceManager = startupInit(new ResourceManager(app), ResourceManager.class);
 		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.locationProvider = startupInit(new OsmAndLocationProvider(app), OsmAndLocationProvider.class);
@@ -472,7 +473,6 @@ public class AppInitializer implements IProgress {
 		app.gpxDatabase = startupInit(new GPXDatabase(app), GPXDatabase.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
-		app.routingOptionsHelper = startupInit(new RoutingOptionsHelper(app), RoutingOptionsHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
 
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
