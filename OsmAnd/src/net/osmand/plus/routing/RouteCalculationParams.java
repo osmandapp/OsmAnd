@@ -29,14 +29,11 @@ public class RouteCalculationParams {
 	public boolean fast;
 	public boolean leftSide;
 	public boolean inSnapToRoadMode;
-	public boolean inPublicTransportMode;
-	public boolean startTransportStop;
-	public boolean targetTransportStop;
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressCallback calculationProgressCallback;
 	public RouteCalculationResultListener resultListener;
 
 	public interface RouteCalculationResultListener {
-		void onRouteCalculated(RouteCalculationResult route);
+		void onRouteCalculated(List<Location> locations);
 	}
 }

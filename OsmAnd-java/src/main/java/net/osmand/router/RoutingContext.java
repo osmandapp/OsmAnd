@@ -57,11 +57,8 @@ public class RoutingContext {
 	// 1. Initial variables
 	public int startX;
 	public int startY;
-	public boolean startTransportStop;
 	public int targetX;
 	public int targetY;
-	public boolean targetTransportStop;
-	public boolean publicTransport;
 	// deprecated
 	public long firstRoadId;
 	public int firstRoadDirection;

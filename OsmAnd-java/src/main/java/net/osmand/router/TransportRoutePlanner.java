@@ -327,7 +327,7 @@ public class TransportRoutePlanner {
 		public List<TransportRouteResultSegment> getSegments() {
 			return segments;
 		}
-
+		
 		public double getWalkDist() {
 			double d = finishWalkDist;
 			for (TransportRouteResultSegment s : segments) {

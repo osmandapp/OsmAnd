@@ -1,39 +1,27 @@
 package net.osmand.plus.routing;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Pair;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRoutePlanner.TransportRoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
-import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
@@ -44,10 +32,8 @@ public class TransportRoutingHelper {
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 
 	private OsmandApplication app;
-	private RoutingHelper routingHelper;
 
 	private List<TransportRouteResult> routes;
-	private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments;
 	private int currentRoute;
 
 	private LatLon startLocation;
@@ -63,10 +49,6 @@ public class TransportRoutingHelper {
 
 	public TransportRoutingHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-	}
-
-	public void setRoutingHelper(RoutingHelper routingHelper) {
-		this.routingHelper = routingHelper;
 	}
 
 	public LatLon getStartLocation() {
@@ -91,11 +73,6 @@ public class TransportRoutingHelper {
 
 	public List<TransportRouteResult> getRoutes() {
 		return routes;
-	}
-
-	@Nullable
-	public RouteCalculationResult getWalkingRouteSegment(TransportRouteResultSegment s1, TransportRouteResultSegment s2) {
-		return walkingRouteSegments.get(new Pair<>(s1, s2));
 	}
 
 	public void setCurrentRoute(int currentRoute) {
@@ -135,9 +112,6 @@ public class TransportRoutingHelper {
 		params.type = RouteService.OSMAND;
 		params.ctx = app;
 		params.calculationProgress = new RouteCalculationProgress();
-
-		float rd = (float) MapUtils.getDistance(start, end);
-		params.calculationProgress.totalEstimatedDistance = rd * 1.5f;
 
 		startRouteCalculationThread(params);
 	}
@@ -229,7 +203,6 @@ public class TransportRoutingHelper {
 
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation) {
 		routes = null;
-		walkingRouteSegments = null;
 		app.getWaypointHelper().setNewRoute(new RouteCalculationResult(""));
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -294,47 +267,10 @@ public class TransportRoutingHelper {
 		}
 	}
 
-	private class WalkingRouteSegment {
-		TransportRouteResultSegment s1;
-		TransportRouteResultSegment s2;
-		LatLon start;
-		boolean startTransportStop;
-		LatLon end;
-		boolean endTransportStop;
-
-		WalkingRouteSegment(TransportRouteResultSegment s1, TransportRouteResultSegment s2) {
-			this.s1 = s1;
-			this.s2 = s2;
-
-			start = s1.getEnd().getLocation();
-			end = s2.getStart().getLocation();
-			startTransportStop = true;
-			endTransportStop = true;
-		}
-
-		WalkingRouteSegment(LatLon start, TransportRouteResultSegment s) {
-			this.start = start;
-			this.s2 = s;
-			end = s2.getStart().getLocation();
-			endTransportStop = true;
-		}
-
-		WalkingRouteSegment(TransportRouteResultSegment s, LatLon end) {
-			this.s1 = s;
-			this.end = end;
-			start = s1.getEnd().getLocation();
-			startTransportStop = true;
-		}
-	}
-
 	private class RouteRecalculationThread extends Thread {
 
 		private final TransportRouteCalculationParams params;
 		private Thread prevRunningJob;
-
-		private final Queue<WalkingRouteSegment> walkingSegmentsToCalculate = new ConcurrentLinkedQueue<>();
-		private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = new HashMap<>();
-		private boolean walkingSegmentsCalculated;
 
 		public RouteRecalculationThread(String name, TransportRouteCalculationParams params) {
 			super(name);
@@ -359,118 +295,6 @@ public class TransportRoutingHelper {
 			return planner.buildRoute(ctx, params.start, params.end);
 		}
 
-		@Nullable
-		private RouteCalculationParams getWalkingRouteParams() {
-
-			ApplicationMode walkingMode = ApplicationMode.PEDESTRIAN;
-
-			final WalkingRouteSegment walkingRouteSegment = walkingSegmentsToCalculate.poll();
-			if (walkingRouteSegment == null) {
-				return null;
-			}
-
-			Location start = new Location("");
-			start.setLatitude(walkingRouteSegment.start.getLatitude());
-			start.setLongitude(walkingRouteSegment.start.getLongitude());
-			LatLon end = new LatLon(walkingRouteSegment.end.getLatitude(), walkingRouteSegment.end.getLongitude());
-
-			final float currentDistanceFromBegin =
-					RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin +
-							(walkingRouteSegment.s1 != null ? (float) walkingRouteSegment.s1.getTravelDist() : 0);
-
-			final RouteCalculationParams params = new RouteCalculationParams();
-			params.inPublicTransportMode = true;
-			params.start = start;
-			params.end = end;
-			params.startTransportStop = walkingRouteSegment.startTransportStop;
-			params.targetTransportStop = walkingRouteSegment.endTransportStop;
-			RoutingHelper.applyApplicationSettings(params, app.getSettings(), walkingMode);
-			params.mode = walkingMode;
-			params.ctx = app;
-			params.calculationProgress = new RouteCalculationProgress();
-			params.calculationProgressCallback = new RouteCalculationProgressCallback() {
-
-				@Override
-				public void start() {
-
-				}
-
-				@Override
-				public void updateProgress(int progress) {
-					float p = Math.max(params.calculationProgress.distanceFromBegin,
-							params.calculationProgress.distanceFromEnd);
-
-					RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin =
-							Math.max(RouteRecalculationThread.this.params.calculationProgress.distanceFromBegin, currentDistanceFromBegin + p);
-				}
-
-				@Override
-				public void requestPrivateAccessRouting() {
-
-				}
-
-				@Override
-				public void finish() {
-					if (walkingSegmentsToCalculate.isEmpty()) {
-						walkingSegmentsCalculated = true;
-					} else {
-						updateProgress(0);
-					}
-				}
-			};
-			params.resultListener = new RouteCalculationResultListener() {
-				@Override
-				public void onRouteCalculated(RouteCalculationResult route) {
-					RouteRecalculationThread.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
-					if (!walkingSegmentsToCalculate.isEmpty()) {
-						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
-						if (walkingRouteParams != null) {
-							routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
-						}
-					}
-				}
-			};
-
-			return params;
-		}
-
-		private void calculateWalkingRoutes(List<TransportRouteResult> routes) {
-			walkingSegmentsCalculated = false;
-			walkingSegmentsToCalculate.clear();
-			walkingRouteSegments.clear();
-			if (routes != null && routes.size() > 0) {
-				for (TransportRouteResult r : routes) {
-					TransportRouteResultSegment prev = null;
-					for (TransportRouteResultSegment s : r.getSegments()) {
-						LatLon start = prev != null ? prev.getEnd().getLocation() : params.start;
-						LatLon end = s.getStart().getLocation();
-						if (start != null && end != null) {
-							if (prev == null || MapUtils.getDistance(start, end) > 50) {
-								walkingSegmentsToCalculate.add(prev == null ?
-										new WalkingRouteSegment(start, s) : new WalkingRouteSegment(prev, s));
-							}
-						}
-						prev = s;
-					}
-					if (prev != null) {
-						walkingSegmentsToCalculate.add(new WalkingRouteSegment(prev, params.end));
-					}
-				}
-				RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
-				if (walkingRouteParams != null) {
-					routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
-					// wait until all segments calculated
-					while (!walkingSegmentsCalculated) {
-						try {
-							Thread.sleep(50);
-						} catch (InterruptedException e) {
-							// ignore
-						}
-					}
-				}
-			}
-		}
-
 		@Override
 		public void run() {
 			synchronized (TransportRoutingHelper.this) {
@@ -493,9 +317,6 @@ public class TransportRoutingHelper {
 			String error = null;
 			try {
 				res = calculateRouteImpl(params);
-				if (res != null) {
-					calculateWalkingRoutes(res);
-				}
 			} catch (IOException e) {
 				error = e.getMessage();
 				log.error(e);
@@ -508,7 +329,6 @@ public class TransportRoutingHelper {
 			}
 			synchronized (TransportRoutingHelper.this) {
 				routes = res;
-				TransportRoutingHelper.this.walkingRouteSegments = walkingRouteSegments;
 				if (res != null) {
 					if (params.resultListener != null) {
 						params.resultListener.onRouteCalculated(res);

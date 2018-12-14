@@ -91,7 +91,6 @@ public class RoutingHelper {
 		voiceRouter = new VoiceRouter(this, settings);
 		provider = new RouteProvider();
 		transportRoutingHelper = context.getTransportRoutingHelper();
-		transportRoutingHelper.setRoutingHelper(this);
 		setAppMode(settings.APPLICATION_MODE.get());
 	}
 
@@ -895,11 +894,11 @@ public class RoutingHelper {
 			RouteCalculationResult prev = route;
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
-					if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
+					if (!params.inSnapToRoadMode) {
 						route = res;
 					}
 					if (params.resultListener != null) {
-						params.resultListener.onRouteCalculated(res);
+						params.resultListener.onRouteCalculated(res.getRouteLocations());
 					}
 				} else {
 					evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2); // for Issue #3899
@@ -908,7 +907,7 @@ public class RoutingHelper {
 				currentRunningJob = null;
 			}
 			if(res.isCalculated()){
-				if (!params.inSnapToRoadMode && !params.inPublicTransportMode) {
+				if (!params.inSnapToRoadMode) {
 					setNewRoute(prev, res, params.start);
 				}
 			} else if (onlineSourceWithoutInternet) {

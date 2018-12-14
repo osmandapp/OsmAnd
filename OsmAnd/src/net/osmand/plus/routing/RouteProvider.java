@@ -648,9 +648,6 @@ public class RouteProvider {
 				&& precalculated == null;
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
-		ctx.publicTransport = params.inPublicTransportMode;
-		ctx.startTransportStop = params.startTransportStop;
-		ctx.targetTransportStop = params.targetTransportStop;
 		if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
 			int currentRoute = params.previousToRecalculate.getCurrentRoute();
 			List<RouteSegmentResult> originalRoute = params.previousToRecalculate.getOriginalRoute();

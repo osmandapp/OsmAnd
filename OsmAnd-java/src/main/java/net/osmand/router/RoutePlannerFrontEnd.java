@@ -55,10 +55,6 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list) throws IOException {
-		return findRouteSegment(lat, lon, ctx, list, false);
-	}
-
-	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list, boolean transportStop) throws IOException {
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		ArrayList<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
@@ -96,26 +92,7 @@ public class RoutePlannerFrontEnd {
 			}
 		});
 		if (list.size() > 0) {
-			RouteSegmentPoint ps = null;
-			if (ctx.publicTransport) {
-				for (RouteSegmentPoint p : list) {
-					if (transportStop && p.distSquare > 100) {
-						break;
-					}
-					boolean platform = p.road.platform();
-					if (transportStop && platform) {
-						ps = p;
-						break;
-					}
-					if (!transportStop && !platform) {
-						ps = p;
-						break;
-					}
-				}
-			}
-			if (ps == null) {
-				ps = list.get(0);
-			}
+			RouteSegmentPoint ps = list.get(0);
 			ps.others = list;
 			return ps;
 		}
@@ -208,17 +185,17 @@ public class RoutePlannerFrontEnd {
 		}
 		int indexNotFound = 0;
 		List<RouteSegmentPoint> points = new ArrayList<RouteSegmentPoint>();
-		if (!addSegment(start, ctx, indexNotFound++, points, ctx.startTransportStop)) {
+		if (!addSegment(start, ctx, indexNotFound++, points)) {
 			return null;
 		}
 		if (intermediates != null) {
 			for (LatLon l : intermediates) {
-				if (!addSegment(l, ctx, indexNotFound++, points, false)) {
+				if (!addSegment(l, ctx, indexNotFound++, points)) {
 					return null;
 				}
 			}
 		}
-		if (!addSegment(end, ctx, indexNotFound++, points, ctx.targetTransportStop)) {
+		if (!addSegment(end, ctx, indexNotFound++, points)) {
 			return null;
 		}
 		ctx.calculationProgress.nextIteration();
@@ -338,8 +315,8 @@ public class RoutePlannerFrontEnd {
 
 	}
 
-	private boolean addSegment(LatLon s, RoutingContext ctx, int indexNotFound, List<RouteSegmentPoint> res, boolean transportStop) throws IOException {
-		RouteSegmentPoint f = findRouteSegment(s.getLatitude(), s.getLongitude(), ctx, null, transportStop);
+	private boolean addSegment(LatLon s, RoutingContext ctx, int indexNotFound, List<RouteSegmentPoint> res) throws IOException {
+		RouteSegmentPoint f = findRouteSegment(s.getLatitude(), s.getLongitude(), ctx, null);
 		if (f == null) {
 			ctx.calculationProgress.segmentNotFound = indexNotFound;
 			return false;
