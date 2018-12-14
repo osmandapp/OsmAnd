@@ -55,6 +55,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	private MapRouteInfoMenu menu;
 	private InterceptorLinearLayout mainView;
 	private View view;
+	private LinearLayout cardsContainer;
 	private View.OnLayoutChangeListener containerLayoutListener;
 
 	private boolean portrait;
@@ -118,7 +119,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			bottomContainer.setForeground(null);
 		}
 
-		view.findViewById(R.id.route_menu_bottom_view).setBackgroundColor(getResources().getColor(nightMode ? R.color.activity_background_dark : R.color.activity_background_light));
+		cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
+//		cardsContainer.setBackgroundColor(getResources().getColor(nightMode ? R.color.activity_background_dark : R.color.activity_background_light));
 
 		buildBottomView();
 
@@ -338,10 +340,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private void buildBottomView() {
-		if (view != null) {
-			LinearLayout bottomView = view.findViewById(R.id.route_menu_bottom_view);
-			View view = getMapActivity().getLayoutInflater().inflate(R.layout.route_info_statistic, bottomView);
-			view.setBackgroundColor(ContextCompat.getColor(getMapActivity(), nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+		if (cardsContainer != null) {
+			menu.build(cardsContainer);
 		}
 	}
 
@@ -595,7 +595,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 						menuTopShadowAllHeight = newMenuTopShadowAllHeight;
 						menuTitleHeight = menuTopShadowAllHeight + dy;
-						menuBottomViewHeight = view.findViewById(R.id.route_menu_bottom_view).getHeight();
+						menuBottomViewHeight = view.findViewById(R.id.route_menu_cards_container).getHeight();
 
 						menuFullHeightMax = menuTitleHeight + menuBottomViewHeight;
 
@@ -796,16 +796,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				R.color.divider_light, R.color.divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.app_modes_options_container), nightMode,
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerToDropDown), nightMode,
-				R.color.divider_light, R.color.divider_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.dividerControlButtons), nightMode,
 				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.info_divider), nightMode,
-				R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.route_info_details_card), nightMode,
-				R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.RouteInfoControls), nightMode,
-				R.color.route_info_bg_light, R.color.route_info_bg_dark);
 
 		int color = ContextCompat.getColor(getMapActivity(), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 

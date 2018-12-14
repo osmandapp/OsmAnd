@@ -335,7 +335,15 @@ public class TransportRoutePlanner {
 			}
 			return d;
 		}
-		
+
+		public double getFinishWalkDist() {
+			return finishWalkDist;
+		}
+
+		public double getWalkSpeed() {
+			return  cfg.walkSpeed;
+		}
+
 		public double getRouteTime() {
 			return routeTime;
 		}
