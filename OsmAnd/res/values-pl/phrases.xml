@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_bakery">Piekarnia</string>
 	<string name="poi_alcohol">Sklep monopolowy</string>
 	<string name="poi_convenience">Sklep ogólnospożywczy</string>
@@ -9,7 +9,7 @@
 	<string name="poi_farm">Produkty rolne</string>
 	<string name="poi_greengrocer">Warzywniak</string>
 	<string name="poi_seafood">Owoce morza</string>
-	<string name="poi_confectionery">Cukiernia</string>
+	<string name="poi_confectionery">Sklep cukierniczy</string>
 	<string name="poi_ice_cream">Lodziarnia</string>
 	<string name="poi_palaeontological_site">Stanowisko paleontologiczne</string>
 
@@ -3930,5 +3930,6 @@
 	<string name="poi_substation_valve_group">Grupa zaworów</string>
 	<string name="poi_substation_inspection_gauge">Wskaźnik inspekcji</string>
 	<string name="poi_substation_field_gathering">Pole gromadzenia</string>
-
+    <string name="poi_craft_confectionery">Produkcja słodyczy</string>
+    <string name="poi_shop_wholesale">Hurtownia</string>
 </resources>
