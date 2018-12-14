@@ -3,18 +3,18 @@
 	<string name="poi_alcohol">Sklep monopolowy</string>
 	<string name="poi_convenience">Sklep ogólnospożywczy</string>
 	<string name="poi_mall">Centrum handlowe</string>
-	<string name="poi_beverages">Napoje</string>
+	<string name="poi_beverages">Sklep z napojami</string>
 	<string name="poi_butcher">Sklep mięsny</string>
 	<string name="poi_deli">Delikatesy</string>
-	<string name="poi_farm">Produkty rolne</string>
+	<string name="poi_farm">Sklep z produktami rolnymi</string>
 	<string name="poi_greengrocer">Warzywniak</string>
-	<string name="poi_seafood">Owoce morza</string>
+	<string name="poi_seafood">Sklep z owocami morza</string>
 	<string name="poi_confectionery">Sklep cukierniczy</string>
 	<string name="poi_ice_cream">Lodziarnia</string>
 	<string name="poi_palaeontological_site">Stanowisko paleontologiczne</string>
 
 	<string name="poi_supermarket">Supermarket</string>
-	<string name="poi_tea">Sklep herbaciany</string>
+	<string name="poi_tea">Sklep z herbatą</string>
 	<string name="poi_dairy">Sklep z nabiałem</string>
 	<string name="poi_vending_machine">Automat sprzedający</string>
 
@@ -27,7 +27,7 @@
 	<string name="poi_bag">Sklep z torbami</string>
 	<string name="poi_bathroom_furnishing">Wyposażenie łazienek</string>
 	<string name="poi_bed">Sklep z pościelą</string>
-	<string name="poi_boutique">Butik</string>
+	<string name="poi_boutique">Butik modowy</string>
 	<string name="poi_carpet">Sklep z dywanami</string>
 	<string name="poi_chemist">Drogeria</string>
 	<string name="poi_clothes">Sklep odzieżowy</string>
@@ -40,7 +40,7 @@
 	<string name="poi_dive">Sprzęt do nurkowania</string>
 	<string name="poi_copyshop">Punkt ksero i drukowania</string>
 	<string name="poi_doityourself">Sklep dla majsterkowiczów</string>
-	<string name="poi_erotic">Seks-sklep</string>
+	<string name="poi_erotic">Sklep z artykułami erotycznymi</string>
 	<string name="poi_fishing">Sklep wędkarski</string>
 	<string name="poi_florist">Kwiaciarnia</string>
 	<string name="poi_frame">Ramy obrazowe</string>
@@ -61,47 +61,47 @@
 	<string name="poi_kiosk">Kiosk</string>
 	<string name="poi_kitchen">Meble kuchenne</string>
 	<string name="poi_mobile_phone">Telefony komórkowe</string>
-	<string name="poi_motorcycle">Motocykle</string>
+	<string name="poi_motorcycle">Sklep z motocyklami</string>
 	<string name="poi_musical_instrument">Instrumenty muzyczne</string>
 	<string name="poi_newsagent">Kiosk gazetowy</string>
 	<string name="poi_optician">Optyk</string>
 	<string name="poi_organic">Żywność ekologiczna</string>
 	<string name="poi_outdoor">Artykuły wyposażenia zewnętrznego</string>
 	<string name="poi_paint">Farby</string>
-	<string name="poi_pet">Zoologiczny</string>
+	<string name="poi_pet">Sklep zoologiczny</string>
 	<string name="poi_radiotechnics">Sklep elektroniczny</string>
 	<string name="poi_second_hand">Sklep z używanymi towarami</string>
 	<string name="poi_ship_chandler">Armator</string>
-	<string name="poi_sports">Sportowy</string>
-	<string name="poi_stationery">Papierniczy</string>
+	<string name="poi_sports">Sklep sportowy</string>
+	<string name="poi_stationery">Sklep papierniczy</string>
 	<string name="poi_tableware">Zastawy stołowe</string>
-	<string name="poi_ticket">Bilety</string>
-	<string name="poi_tobacco">Tytoniowy</string>
-	<string name="poi_toys">Zabawki</string>
+	<string name="poi_ticket">Sprzedaż biletów</string>
+	<string name="poi_tobacco">Sklep z wyrobami tytoniowymi</string>
+	<string name="poi_toys">Sklep z zabawkami</string>
 	<string name="poi_trade">Stoisko handlowe</string>
 	<string name="poi_vacuum_cleaner">Odkurzacze</string>
 	<string name="poi_variety_store">Sklep z tanimi rzeczami</string>
 	<string name="poi_video">Filmy</string>
 	<string name="poi_window_blind">Zasłony</string>
 	<string name="poi_department_store">Dom handlowy</string>
-	<string name="poi_electronics">RTV</string>
+	<string name="poi_electronics">Sklep z RTV</string>
 	<string name="poi_car">Salon/komis samochodowy</string>
 	<string name="poi_car_parts">Części samochodowe</string>
 	<string name="poi_atv">Quady</string>
-	<string name="poi_cosmetics">Drogeria</string>
+	<string name="poi_cosmetics">Sklep z kosmetykami</string>
 	<string name="poi_marketplace">Targowisko</string>
 	<string name="poi_sewing">Pasmanteria</string>
 
 	<string name="poi_police">Policja</string>
 	<string name="poi_fire_station">Straż pożarna</string>
 	<string name="poi_emergency_phone">Telefon alarmowy</string>
-	<string name="poi_fire_hydrant">Hydrant</string>
+	<string name="poi_fire_hydrant">Hydrant przeciwpożarowy</string>
 	<string name="poi_fire_extinguisher">Gaśnica</string>
 	<string name="poi_fire_flapper">Tłumica (pożarnictwo)</string>
 	<string name="poi_fire_hose">Wąż pożarniczy</string>
 	<string name="poi_fire_water_pond">Zbiornik przeciwpożarowy</string>
 	<string name="poi_grit_bin">Piasek gaśniczy</string>
-	<string name="poi_ambulance_station">Stacja karetek</string>
+	<string name="poi_ambulance_station">Stacja karetek pogotowia</string>
 	<string name="poi_ses_station">Powiadamianie kryzysowe</string>
 	<string name="poi_mountain_pass">Przejście górskie</string>
 	<string name="poi_ford">Bród</string>
@@ -132,13 +132,13 @@
 	<string name="poi_parking_entrance">Wjazd na parking</string>
 	<string name="poi_garages">Garaże</string>
 
-	<string name="poi_public_transport_platform">Przystanek transportu miejskiego</string>
+	<string name="poi_public_transport_platform">Przystanek transportu publicznego</string>
 	<string name="poi_public_transport_platform_bus">Przystanek autobusowy</string>
 	<string name="poi_public_transport_platform_trolleybus">Przystanek trolejbusowy</string>
 	<string name="poi_bus_stop">Przystanek autobusowy</string>
 	<string name="poi_public_transport_platform_tram">Przystanek tramwajowy</string>
 	<string name="poi_tram_stop">Przystanek tramwajowy</string>
-	<string name="poi_public_transport_station">Dworzec transportu miejskiego</string>
+	<string name="poi_public_transport_station">Dworzec transportu publicznego</string>
 	<string name="poi_bus_station">Dworzec autobusowy</string>
 	<string name="poi_railway_station">Stacja kolejowa</string>
 	<string name="poi_railway_platform">Peron kolejowy</string>
@@ -209,7 +209,7 @@
 	<string name="poi_landfill">Składowisko odpadów</string>
 	<string name="poi_waste_disposal">Śmietnik</string>
 	<string name="poi_pier">Molo</string>
-	<string name="poi_surveillance">Centrum nadzoru</string>
+	<string name="poi_surveillance">Obserwacja</string>
 	<string name="poi_observatory">Obserwatorium</string>
 	<string name="poi_astronomical_observatory">Astronomiczne</string>
 	<string name="poi_tower">Wieża</string>
@@ -235,12 +235,12 @@
 	<string name="poi_prison">Więzienie</string>
 	<string name="poi_register_office">Urząd stanu cywilnego</string>
 	<string name="poi_embassy">Ambasada</string>
-	<string name="poi_government">Instytucja publiczna</string>
+	<string name="poi_government">Instytucja rządowa</string>
 	<string name="poi_bailiff">Komornik</string>
 	<string name="poi_prosecutor">Prokurator</string>
 	<string name="poi_pension_fund">Fundusz emerytalny</string>
-	<string name="poi_tax_inspection">Urząd podatkowy</string>
-	<string name="poi_office_administrative">Urząd</string>
+	<string name="poi_tax_inspection">Urząd skarbowy</string>
+	<string name="poi_office_administrative">Urząd administracyjny</string>
 	<string name="poi_customs">Urząd celny</string>
 	<string name="poi_city">Miasto</string>
 	<string name="poi_town">Małe miasto</string>
@@ -296,7 +296,7 @@
 	<string name="poi_cricket">Krykiet</string>
 	<string name="poi_cycling">Kolarstwo</string>
 	<string name="poi_diving">Nurkowanie</string>
-	<string name="poi_scuba_diving">Nurkowanie</string>
+	<string name="poi_scuba_diving">Nurkowanie z akwalungiem</string>
 	<string name="poi_dog_racing">Wyścigi psów</string>
 	<string name="poi_golf">Golf</string>
 	<string name="poi_gymnastics">Gimnastyka</string>
@@ -316,7 +316,7 @@
 	<string name="poi_volleyball">Siatkówka</string>
 
 	<string name="poi_museum">Muzeum</string>
-	<string name="poi_memorial">Pomnik</string>
+	<string name="poi_memorial">Miejsce pamięci</string>
 	<string name="poi_archaeological_site">Wykopalisko archeologiczne</string>
 	<string name="poi_boundary_stone">Kamień graniczny</string>
 	<string name="poi_historic_cannon">Zabytkowa armata</string>
@@ -328,7 +328,7 @@
 	<string name="poi_rune_stone">Kamień runiczny</string>
 	<string name="poi_wreck">Wrak statku</string>
 	<string name="poi_historic_ship">Zabytkowy statek</string>
-	<string name="poi_monument">Monument</string>
+	<string name="poi_monument">Pomnik</string>
 	<string name="poi_zoo">Zoo</string>
 	<string name="poi_aquarium">Akwarium</string>
 	<string name="poi_theme_park">Park rozrywki</string>
@@ -381,7 +381,7 @@
 	<string name="poi_craft_blacksmith">Kowal</string>
 	<string name="poi_craft_brewery">Browar</string>
 	<string name="poi_craft_bookbinder">Introligator</string>
-	<string name="poi_craft_carpenter">Cieśla</string>
+	<string name="poi_craft_carpenter">Stolarz</string>
 	<string name="poi_craft_clockmaker">Zegarmistrz</string>
 	<string name="poi_craft_dressmaker">Krawiec (damskie ubrania)</string>
 	<string name="poi_craft_electrician">Elektryk</string>
@@ -417,7 +417,7 @@
 	<string name="poi_dock">Dok</string>
 	<string name="poi_toilets">Toalety</string>
 	<string name="poi_sauna">Sauna</string>
-	<string name="poi_brothel">Dom publiczny</string>
+	<string name="poi_brothel">Burdel</string>
 	<string name="poi_mortuary">Kostnica</string>
 	<string name="poi_crematorium">Krematorium</string>
 	<string name="poi_internet_cafe">Kawiarenka internetowa</string>
@@ -428,7 +428,7 @@
 	<string name="poi_accountant">Księgowy</string>
 	<string name="poi_bitcoin_yes">Płatność bitcoinami</string>
 
-	<string name="poi_peak">Szczyt</string>
+	<string name="poi_peak">Szczyt góry</string>
 	<string name="poi_volcano">Wulkan</string>
 	<string name="poi_crater">Krater</string>
 	<string name="poi_waterfall">Wodospad</string>
@@ -501,34 +501,34 @@
 	<string name="poi_military_nuclear_explosion_site">Miejsce eksplozji jądrowej</string>
 <string name="poi_military_naval_base">Wojskowa baza morska</string>
 	<string name="poi_military_danger_area">Strefa zagrożenia</string>
-	<string name="poi_military_landuse">Strefa wojskowa</string>
+	<string name="poi_military_landuse">Teren wojskowy</string>
 	<string name="poi_accomodation">Noclegi</string>
 		<string name="poi_club">Klub</string>
 	<string name="poi_cafe_and_restaurant">Kawiarnia i restauracja</string>
 	<string name="poi_fuel_biodiesel">Biodiesel</string>
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_cng">CNG</string>
-	<string name="poi_public_transport_stop_position">Przystanek transportu publicznego</string>
+	<string name="poi_public_transport_stop_position">Miejsce zatrzymywania transportu publicznego</string>
 	<string name="poi_halt">Przystanek kolejowy</string>
 	<string name="poi_rest_area">Miejsce obsługi podróżnych (bez sklepu)</string>
 
-	<string name="poi_industrial">Tereny przemysłowe</string>
+	<string name="poi_industrial">Obszar przemysłowy</string>
 	<string name="poi_emergency">Służby ratunkowe</string>
 	<string name="poi_aerialway_transport">Transport linowy</string>
 	<string name="poi_landuse">Przeznaczenie obszaru</string>
 	<string name="poi_service">Usługi</string>
-		<string name="poi_craft">Rzemieślnik</string>
+		<string name="poi_craft">Profesja</string>
 	<string name="poi_seamark">Żeglarstwo</string>
 	<string name="poi_medical_supply">Artykuły medyczne</string>
 	<string name="poi_fuel_diesel">Olej napędowy</string>
 	<string name="poi_fuel_gtl_diesel">Modyfikowany olej napędowy</string>
 	<string name="poi_fuel_hgv_diesel">Olej napędowy (ciężarówki)</string>
-	<string name="poi_fuel_octane_80">Benzyna 80 oktanów</string>
-	<string name="poi_fuel_octane_91">Benzyna 91 oktanów</string>
-	<string name="poi_fuel_octane_92">Benzyna 92 oktany</string>
-	<string name="poi_fuel_octane_95">Benzyna 95 oktanów</string>
-	<string name="poi_fuel_octane_98">Benzyna 98 oktanów</string>
-	<string name="poi_fuel_octane_100">Benzyna 100 oktanów</string>
+	<string name="poi_fuel_octane_80">Benzyna 80-oktanowa</string>
+	<string name="poi_fuel_octane_91">Benzyna 91-oktanowa</string>
+	<string name="poi_fuel_octane_92">Benzyna 92-oktanowa</string>
+	<string name="poi_fuel_octane_95">Benzyna 95-oktanowa</string>
+	<string name="poi_fuel_octane_98">Benzyna 98-oktanowa</string>
+	<string name="poi_fuel_octane_100">Benzyna 100-oktanowa</string>
 	<string name="poi_fuel_1_25">Paliwo 1:25</string>
 	<string name="poi_fuel_1_50">Paliwo 1:50</string>
 	<string name="poi_fuel_ethanol">Paliwo: etanol</string>
@@ -544,7 +544,7 @@
 	<string name="poi_junction">Skrzyżowanie</string>
 	<string name="poi_lock_gate">Śluza wodna</string>
 	<string name="poi_allotments">Ogródki działkowe</string>
-	<string name="poi_forest">Las</string>
+	<string name="poi_forest">Las zarządzany przez człowieka</string>
 	<string name="poi_farmyard">Podwórze w gospodarstwie</string>
 	<string name="poi_meadow">Łąka</string>
 	<string name="poi_landuse_railway">Obszar kolejowy</string>
@@ -561,13 +561,13 @@
 	<string name="poi_training">Sala treningowa</string>
 	<string name="poi_migration">Migracja</string>
 	<string name="poi_isolated_dwelling">Chatka</string>
-	<string name="poi_suburb">Dzielnica</string>
-	<string name="poi_quarter">Kwatera</string>
+	<string name="poi_suburb">Przedmieście</string>
+	<string name="poi_quarter">Dzielnica</string>
 	<string name="poi_neighbourhood">Osiedle</string>
 	<string name="poi_locality">Miejscowość</string>
 	<string name="poi_place_allotments">Ogródki działkowe</string>
 	<string name="poi_place_farm">Gospodarstwo rolne</string>
-	<string name="poi_residential">Teren zamieszkania</string>
+	<string name="poi_residential">Obszar zamieszkania</string>
 
 	<string name="poi_podiatrist">Podolog</string>
 	<string name="poi_it">Biuro IT</string>
@@ -615,7 +615,7 @@
 	<string name="poi_club_game">Klub gier</string>
 	<string name="poi_club_automobile">Klub motoryzacyjny</string>
 	<string name="poi_club_chess">Klub szachowy</string>
-	<string name="poi_club_cinema">Klub kinowy</string>
+	<string name="poi_club_cinema">Klub filmowy</string>
 	<string name="poi_club_fan">Fanklub</string>
 	<string name="poi_club_fishing">Klub wędkarski</string>
 	<string name="poi_club_veterans">Klub weteranów</string>
@@ -633,8 +633,8 @@
 
 	<string name="poi_charity">Sklep charytatywny</string>
 	<string name="poi_photo">Sklep fotograficzny</string>
-	<string name="poi_10pin">Bowling (10 pionów)</string>
-	<string name="poi_bowls">Bowls</string>
+	<string name="poi_10pin">Kręgle klasyczne (10 pionów)</string>
+	<string name="poi_bowls">Gra w kule</string>
 	<string name="poi_sport_motor">Sporty motorowe</string>
 	<string name="poi_rugby_union">Rugby union</string>
 	<string name="poi_rugby_league">Rugby league</string>
@@ -706,7 +706,7 @@
 	<string name="poi_wilderness_hut">Pustelnia</string>
 	<string name="poi_internet_access_service">Dostęp do Internetu: z obsługą</string>
 	
-	<string name="poi_wine_cellar">Winiarnia</string>
+	<string name="poi_wine_cellar">Piwniczka z winem</string>
 	<string name="poi_ski_rental">Wypożyczalnia nart</string>
 
 	<string name="poi_gallery">Galeria sztuki</string>
@@ -739,7 +739,7 @@
 
 	<string name="poi_craft_agricultural_engines">Silniki rolnicze (wystawa)</string>
 	<string name="poi_craft_carpet_layer">Kładzenie dywanów</string>
-	<string name="poi_craft_caterer">Dostawca</string>
+	<string name="poi_craft_caterer">Dostawca usług gastronomicznych</string>
 	<string name="poi_craft_glaziery">Szklarz</string>
 	<string name="poi_craft_insulation">Ocieplanie</string>
 	<string name="poi_craft_key_cutter">Dorabianie kluczy</string>
@@ -843,7 +843,7 @@
 	<string name="poi_music">Sklep muzyczny</string>
 	<string name="poi_tyres">Sklep z oponami</string>
 	<string name="poi_watches">Sklep z zegarkami</string>
-	<string name="poi_model">Modelarski</string>
+	<string name="poi_model">Sklep modelarski</string>
 	<string name="poi_weapons">Sklep z bronią</string>
 
 	<string name="poi_highway_crossing">Przejście dla pieszych</string>
@@ -851,7 +851,7 @@
 <string name="poi_entrance">Wejście</string>
 	<string name="poi_entrance_exit">Wyjście</string>
 
-	<string name="poi_barrier_entrance">Przejście</string>
+	<string name="poi_barrier_entrance">Przejście w murze lub płocie</string>
 	<string name="poi_entrance_main">Wejście główne</string>
 	<string name="poi_height_restrictor">Ogranicznik wysokości</string>
 	<string name="poi_religious">Obszar religijny</string>
@@ -863,7 +863,7 @@
 	<string name="poi_swimming_pool_shop">Sklep z akcesoriami basenowymi</string>
 	<string name="poi_games">Gry</string>
 	<string name="poi_trophy">Puchary, nagrody</string>
-	<string name="poi_video_games">Gry video</string>
+	<string name="poi_video_games">Gry wideo</string>
 	<string name="poi_pyrotechnics">Materiały pirotechniczne</string>
 	<string name="poi_bollard">Słupek</string>
 	<string name="poi_cycle_barrier">Bariera rowerowa</string>
@@ -922,7 +922,7 @@
 	<string name="poi_abandoned_poi">Obiekt opuszczony</string>
 	<string name="poi_disused">Wyłączony z użycia</string>
 
-	<string name="poi_operator">Operator</string>
+	<string name="poi_operator">Zarządzający</string>
 	<string name="poi_brand">Marka</string>
 	<string name="poi_fee_yes">Tak</string>
 
@@ -955,7 +955,7 @@
 	<string name="poi_recycling_cartons">Kartony</string>
 	<string name="poi_recycling_cardboard">Tektury</string>
 	<string name="poi_recycling_magazines">Czasopisma</string>
-	<string name="poi_recycling_paper_packaging">Papierowe opakowania</string>
+	<string name="poi_recycling_paper_packaging">Opakowania papierowe</string>
 	<string name="poi_recycling_small_appliances">Drobny sprzęt</string>
 	<string name="poi_recycling_wood">Drewno</string>
 	<string name="poi_recycling_books">Książki</string>
@@ -971,13 +971,13 @@
 	<string name="poi_recycling_white_goods">Sprzęt AGD</string>
 	<string name="poi_recycling_cooking_oil">Olej spożywczy</string>
 	<string name="poi_recycling_engine_oil">Olej silnikowy</string>
-	<string name="poi_recycling_plastic_bags">Plastikowe torby</string>
-	<string name="poi_recycling_hazardous_waste">Niebezpieczne odpady</string>
+	<string name="poi_recycling_plastic_bags">Torby plastikowe</string>
+	<string name="poi_recycling_hazardous_waste">Odpady niebezpieczne</string>
 	<string name="poi_recycling_mobile_phones">Telefony komórkowe</string>
 	<string name="poi_recycling_hydrargyrum">Rtęć</string>
 	<string name="poi_recycling_computers">Komputery</string>
 	<string name="poi_recycling_tyres">Opony</string>
-	<string name="poi_recycling_tv_monitor">telewizory, monitory</string>
+	<string name="poi_recycling_tv_monitor">Telewizory, monitory</string>
 	<string name="poi_recycling_tetrapak">Tetra Pak</string>
 	<string name="poi_recycling_rubble">Gruz</string>
 	<string name="poi_recycling_cds">Płyty CD</string>
@@ -1020,7 +1020,7 @@
 
 	<string name="poi_denomination_catholic">Katolicyzm</string>
 	<string name="poi_denomination_baptist">Baptyzm</string>
-	<string name="poi_denomination_roman_catholic">Rzymski katolicyzm</string>
+	<string name="poi_denomination_roman_catholic">Katolicyzm rzymski</string>
 	<string name="poi_denomination_orthodox">Prawosławie</string>
 	<string name="poi_denomination_lutheran">Luteranizm</string>
 	<string name="poi_denomination_sunni">Sunnizm</string>
@@ -1029,11 +1029,11 @@
 	<string name="poi_denomination_anglican">Anglikanizm</string>
 	<string name="poi_denomination_presbyterian">Prezbiterianizm</string>
 	<string name="poi_denomination_evangelical">Ewangelicyzm</string>
-	<string name="poi_denomination_russian_orthodox">Rosyjskie prawosławie</string>
+	<string name="poi_denomination_russian_orthodox">Prawosławie rosyjskie</string>
 	<string name="poi_denomination_pentecostal">Pentekostalizm</string>
 	<string name="poi_denomination_mormon">Mormonizm</string>
 	<string name="poi_denomination_jehovahs_witness">Świadkowie Jehowy</string>
-	<string name="poi_denomination_greek_orthodox">Greckie prawosławie</string>
+	<string name="poi_denomination_greek_orthodox">Prawosławie greckie</string>
 	<string name="poi_denomination_reformed">Kościół reformowany</string>
 	<string name="poi_denomination_seventh_day_adventist">Adwentyści Dnia Siódmego</string>
 	<string name="poi_denomination_new_apostolic">Kościół Nowoapostolski</string>
@@ -1165,7 +1165,7 @@
 	<string name="poi_monitoring_station">Stacja monitoringu</string>
 	<string name="poi_office_religion">Biuro religijne</string>
 	<string name="poi_highway_steps">Schody</string>
-	<string name="poi_political_party">Biuro partii</string>
+	<string name="poi_political_party">Biuro partii politycznej</string>
 	<string name="poi_foundation">Biuro fundacji</string>
 	<string name="poi_tax_advisor">Biuro doradcy podatkowego</string>
 
@@ -1173,7 +1173,7 @@
 	<string name="poi_denomination_church_of_england">Kościół Anglii</string>
 	<string name="poi_denomination_church_of_scotland">Kościół Szkocji</string>
 	<string name="poi_denomination_salvation_army">Armia Zbawienia</string>
-	<string name="poi_denomination_bulgarian_orthodox">Bułgarski ortodoksyjny</string>
+	<string name="poi_denomination_bulgarian_orthodox">Prawosławie bułgarskie</string>
 	<string name="poi_denomination_united_methodist">Zjednoczeni metodyści</string>
 	<string name="poi_power_pole">Słup energetyczny</string>
 
@@ -1197,22 +1197,22 @@
 	<string name="poi_denomination_adventist">Adwentyści</string>
 	<string name="poi_denomination_nazarene">Kościół Nazarejczyka</string>
 	<string name="poi_denomination_old_believers">Staroobrzędowcy</string>
-	<string name="poi_denomination_serbian_orthodox">Serbski prawosławny</string>
+	<string name="poi_denomination_serbian_orthodox">Prawosławie serbskie</string>
 	<string name="poi_denomination_armenian_apostolic">Apostolski Kościół Ormiański</string>
 	<string name="poi_denomination_dutch_reformed">Holenderski Kościół Reformowany</string>
 	<string name="poi_denomination_apostolic">Kościół Apostolski</string>
 	<string name="poi_denomination_latter_day_saints">Kościół Jezusa Chrystusa Świętych w Dniach Ostatnich</string>
 	<string name="poi_denomination_church_of_christ">Kościół Chrystusowy</string>
-	<string name="poi_denomination_georgian_orthodox">Gruziński prawosławny</string>
-	<string name="poi_denomination_romanian_orthodox">Rumuński prawosławny</string>
+	<string name="poi_denomination_georgian_orthodox">Prawosławie gruzińskie</string>
+	<string name="poi_denomination_romanian_orthodox">Prawosławie rumuńskie</string>
 	<string name="poi_denomination_coptic_orthodox">Koptyjski</string>
 	<string name="poi_denomination_shaktism">Śaktyzm</string>
 	<string name="poi_denomination_shingon_shu">Shingon</string>
 	<string name="poi_denomination_maronite">Maronityzm</string>
 	<string name="poi_denomination_mahayana">Mahajana</string>
 
-	<string name="poi_internet_access_yes">Dostęp do internetu: tak</string>
-	<string name="poi_internet_access_no">Dostęp do internetu: nie</string>
+	<string name="poi_internet_access_yes">Dostęp do Internetu: tak</string>
+	<string name="poi_internet_access_no">Dostęp do Internetu: nie</string>
 
 	<string name="poi_mobile">Telefon komórkowy</string>
 	<string name="poi_drinking_water_no">Nie</string>
@@ -1256,7 +1256,7 @@
 	<string name="poi_bunker_silo">Silos bunkrowy</string>
 	<string name="poi_denomination_nondenominational">Bezwyznaniowy</string>
 	<string name="poi_denomination_congregational">Kongregacyjny</string>
-	<string name="poi_denomination_spiritist">Spirytyczny</string>
+	<string name="poi_denomination_spiritist">Spirytyzm</string>
 	<string name="poi_denomination_united_church_of_christ">Zjednoczony Kościół Chrystusowy</string>
 	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopski ortodoksyjny tewahedo</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
@@ -1270,7 +1270,7 @@
 	<string name="poi_disease_aids_yes">AIDS: tak</string>
 	<string name="poi_disease_aids_no">AIDS: nie</string>
 
-	<string name="poi_delivery_yes">Dostawa do domu</string>
+	<string name="poi_delivery_yes">Dostawa</string>
 	<string name="poi_delivery_no">Brak dostawy</string>
 	<string name="poi_delivery_only">Wyłącznie dostawa</string>
 
@@ -1411,7 +1411,7 @@
 	<string name="poi_supervised_yes">Nadzorowany</string>
 	<string name="poi_rural">Wiejski</string>
 
-	<string name="poi_military_office">Koszary</string>
+	<string name="poi_military_office">Urząd wojskowy</string>
 	<string name="poi_debris">Ruiny</string>
 	<string name="poi_supervised_no">Bez nadzoru</string>
 	<string name="poi_wheelchair_limited">Ograniczony</string>
@@ -1592,7 +1592,7 @@
 	<string name="poi_content_sewage">Zawartość: ścieki</string>
 	<string name="poi_content_wastewater">Zawartość: ścieki</string>
 	<string name="poi_content_fodder">Zawartość: pasza</string>
-	<string name="poi_trade_wood">Drewno</string>
+	<string name="poi_trade_wood">Materiały drewniane</string>
 	<string name="poi_trade_tile">Kafelki</string>
 
 	<string name="poi_bicycle_parking_anchors">Kotwice</string>
@@ -1833,8 +1833,8 @@
 	<string name="poi_payment_sube_no">Karty SUBE nieakceptowane</string>
 	<string name="poi_payment_via_verde_yes">Via Verde</string>
 	<string name="poi_payment_via_verde_no">Via Verde nieakceptowane</string>
-	<string name="poi_payment_meal_voucher_yes">Kartki na mięso</string>
-	<string name="poi_payment_meal_voucher_no">Kartki na mięso nieakceptowane</string>
+	<string name="poi_payment_meal_voucher_yes">Kupon posiłkowy</string>
+	<string name="poi_payment_meal_voucher_no">Kupony posiłkowe nieakceptowane</string>
 	<string name="poi_payment_paypal_yes">PayPal</string>
 	<string name="poi_payment_paypal_no">PayPal nieakceptowany</string>
 	<string name="poi_payment_u_key_yes">U-Key</string>
@@ -1973,7 +1973,7 @@
 	<string name="poi_memorial_blue_plaque">Niebieska tablica</string>
 	<string name="poi_memorial_cross">Krzyż</string>
 	<string name="poi_memorial_vehicle">Pojazd</string>
-	<string name="poi_memorial_stolperstein">Stolperstein</string>
+	<string name="poi_memorial_stolperstein">Kamień pamięci</string>
 	<string name="poi_memorial_obelisk">Obelisk</string>
 	<string name="poi_memorial_column">Kolumna</string>
 	<string name="poi_memorial_stupa">Stupa</string>
@@ -2126,7 +2126,7 @@
 	<string name="poi_animal_boarding">Hotel dla zwierząt</string>
 	<string name="poi_craft_electronics_repair">Naprawa elektroniki</string>
 	<string name="poi_architecture_modern">Architektura: modernizm</string>
-	<string name="poi_architecture_stalinist_neoclassicism">Architektura: socrealizm (stalinistyczny neoklasycyzm)</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Architektura: socrealizm (stalinowski neoklasycyzm)</string>
 	<string name="poi_architecture_eclectic">Architektura: eklektyzm</string>
 	<string name="poi_architecture_new_objectivity">Architektura: Nowa Rzeczowość (Realizm Magiczny)</string>
 	<string name="poi_architecture_contemporary">Architektura: współczesna</string>
@@ -2235,8 +2235,8 @@
 	<string name="poi_elevator_no">Brak windy</string>
 
 	<string name="poi_model_aerodrome">Lotnisko modelarskie</string>
-	<string name="poi_fuel_91ul">Benzyna 91 oktanów bezołowiowa</string>
-	<string name="poi_fuel_100ll">Benzyna 100 oktanów ołowiowa</string>
+	<string name="poi_fuel_91ul">Benzyna 91-oktanowa bezołowiowa</string>
+	<string name="poi_fuel_100ll">Benzyna 100-oktanowa ołowiowa</string>
 	<string name="poi_fuel_autogas">LPG samolotowy</string>
 	<string name="poi_fuel_jeta1">Paliwo Jet A-1</string>
 	<string name="poi_fuel_adblue">Dodatek AdBlue (wodny roztwór mocznika)</string>
@@ -2305,7 +2305,7 @@
 	<string name="poi_power_supply_no">Prąd: nie</string>
 	<string name="poi_power_supply_cee_17_blue">Prąd (wtyczka): CEE 17 niebieska (IEC 60309)</string>
 	<string name="poi_power_supply_cee_7_4">Prąd (wtyczka): CEE 7/4 (typ F)</string>
-	<string name="poi_power_supply_cee_7_5">Prąd wtyczka: CEE 7/5 (typ E))</string>
+	<string name="poi_power_supply_cee_7_5">Prąd (wtyczka): CEE 7/5 (typ E)</string>
 	<string name="poi_power_supply_nema_5_15">Prąd (wtyczka): NEMA 5-15 (typ B)</string>
 
 	<string name="poi_capacity_tents">Pojemność pola (namiotów)</string>
@@ -2342,7 +2342,7 @@
 	<string name="poi_theatre_genre_philharmonic">Filharmonia</string>
 	<string name="poi_theatre_genre_musical">Teatr muzyczny</string>
 	<string name="poi_theatre_genre_drama">Teatr dramatyczny</string>
-	<string name="poi_theatre_genre_puppet">Lalkowy</string>
+	<string name="poi_theatre_genre_puppet">Teatr lalek</string>
 	<string name="poi_theatre_genre_comedy">Teatr bulwarowy</string>
 	<string name="poi_theatre_genre_chamber_music">Teatr kameralny (solisty)</string>
 	<string name="poi_theatre_genre_marionette">Marionetkowy</string>
@@ -3056,7 +3056,7 @@
 	<string name="poi_fire_hydrant_water_source">Źródło wody</string>
 	<string name="poi_payment_toll_type">Metoda płatności</string>
 	<string name="poi_traffic_signals_sound">Sygnał dźwiękowy</string>
-	<string name="poi_highway_crossing_type">Typ</string>
+	<string name="poi_highway_crossing_type">Rodzaj</string>
 	<string name="poi_tactile_paving">Wypustki dla niewidomych</string>
 	<string name="poi_service_general">Usługa</string>
 	<string name="poi_brushless">Bezszczotkowa</string>
@@ -3090,7 +3090,7 @@
 	<string name="poi_resort_type">Rodzaj</string>
 	<string name="poi_piste_difficulty">Trudność stoku</string>
 	<string name="poi_piste_grooming">Typ ratrakowania</string>
-	<string name="poi_theatre_genre">Typ</string>
+	<string name="poi_theatre_genre">Gatunek</string>
 	<string name="poi_outdoor_seating">Siedzenia na zewnątrz</string>
 	<string name="poi_fee">Opłata</string>
 	<string name="poi_smoking">Palenie</string>
@@ -3801,7 +3801,7 @@
 	<string name="poi_cable_number">Numer przewodu</string>
 	<string name="poi_via_ferrata_scale">Trudność</string>
 
-<string name="poi_glacier_type">Typ lodowca</string>
+<string name="poi_glacier_type">Rodzaj lodowca</string>
 
 <string name="poi_glacier_type_icecap">Czapa lodowa</string>
 	<string name="poi_glacier_type_icefield">Pole lodowe</string>
@@ -3909,7 +3909,7 @@
 	<string name="poi_shoe_repair">Naprawa obuwia</string>
 
 <string name="poi_bulk_purchase">Zakup hurtowy</string>
-	<string name="poi_substation_type">Typ</string>
+	<string name="poi_substation_type">Rodzaj</string>
 
 <string name="poi_bulk_purchase_yes">Tak</string>
 	<string name="poi_bulk_purchase_only">Tylko</string>
