@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="show_warnings_title">Mostra alertes…</string>
@@ -3036,7 +3036,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="markers_remove_dialog_msg">Voleu esborrar el marcador de mapa \'%s\'\?</string>
     <string name="edit_map_marker">Edita el marcador de mapa</string>
     <string name="third_party_application">Aplicació de tercers</string>
-    <string name="osm_live_plan_pricing">Pla i preu</string>
+    <string name="osm_live_plan_pricing">Opcions i preus</string>
     <string name="osm_live_payment_monthly_title">Pagament mensual</string>
     <string name="osm_live_payment_3_months_title">Pagament trimestral</string>
     <string name="osm_live_payment_annual_title">Pagament anual</string>
