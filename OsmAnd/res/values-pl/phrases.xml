@@ -95,7 +95,7 @@
 	<string name="poi_police">Policja</string>
 	<string name="poi_fire_station">Straż pożarna</string>
 	<string name="poi_emergency_phone">Telefon alarmowy</string>
-	<string name="poi_fire_hydrant">Hydrant przeciwpożarowy</string>
+	<string name="poi_fire_hydrant">Hydrant</string>
 	<string name="poi_fire_extinguisher">Gaśnica</string>
 	<string name="poi_fire_flapper">Tłumica (pożarnictwo)</string>
 	<string name="poi_fire_hose">Wąż pożarniczy</string>
@@ -417,7 +417,7 @@
 	<string name="poi_dock">Dok</string>
 	<string name="poi_toilets">Toalety</string>
 	<string name="poi_sauna">Sauna</string>
-	<string name="poi_brothel">Burdel</string>
+	<string name="poi_brothel">Dom publiczny</string>
 	<string name="poi_mortuary">Kostnica</string>
 	<string name="poi_crematorium">Krematorium</string>
 	<string name="poi_internet_cafe">Kawiarenka internetowa</string>
@@ -739,7 +739,7 @@
 
 	<string name="poi_craft_agricultural_engines">Silniki rolnicze (wystawa)</string>
 	<string name="poi_craft_carpet_layer">Kładzenie dywanów</string>
-	<string name="poi_craft_caterer">Dostawca usług gastronomicznych</string>
+	<string name="poi_craft_caterer">Firma cateringowa</string>
 	<string name="poi_craft_glaziery">Szklarz</string>
 	<string name="poi_craft_insulation">Ocieplanie</string>
 	<string name="poi_craft_key_cutter">Dorabianie kluczy</string>
