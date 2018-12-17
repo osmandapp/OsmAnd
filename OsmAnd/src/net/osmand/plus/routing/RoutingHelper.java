@@ -302,7 +302,8 @@ public class RoutingHelper {
 	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation,
 			RouteCalculationResult previousRoute, boolean targetPointsChanged) {
 		Location locationProjection = currentLocation;
-		if (isPublicTransportMode() && currentLocation != null) {
+		if (isPublicTransportMode() && currentLocation != null && finalLocation != null &&
+				(targetPointsChanged || transportRoutingHelper.getRoutes() == null)) {
 			transportRoutingHelper.setFinalAndCurrentLocation(finalLocation,
 					new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()));
 		}

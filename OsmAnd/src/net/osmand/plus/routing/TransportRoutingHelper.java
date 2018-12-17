@@ -466,6 +466,10 @@ public class TransportRoutingHelper {
 						} catch (InterruptedException e) {
 							// ignore
 						}
+						if (params.calculationProgress.isCancelled) {
+							walkingSegmentsToCalculate.clear();
+							walkingSegmentsCalculated = true;
+						}
 					}
 				}
 			}
@@ -493,10 +497,10 @@ public class TransportRoutingHelper {
 			String error = null;
 			try {
 				res = calculateRouteImpl(params);
-				if (res != null) {
+				if (res != null && !params.calculationProgress.isCancelled) {
 					calculateWalkingRoutes(res);
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				error = e.getMessage();
 				log.error(e);
 			}
