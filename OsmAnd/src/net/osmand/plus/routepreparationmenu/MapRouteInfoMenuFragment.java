@@ -120,7 +120,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		}
 
 		cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
-//		cardsContainer.setBackgroundColor(getResources().getColor(nightMode ? R.color.activity_background_dark : R.color.activity_background_light));
 
 		buildBottomView();
 

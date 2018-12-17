@@ -338,8 +338,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public void build(LinearLayout rootView) {
 		rootView.removeAllViews();
 		for (BaseRouteCard card : routeCards) {
-			card.bindViewHolder();
-			rootView.addView(card.getView());
+			rootView.addView(card.createCardView());
 		}
 	}
 

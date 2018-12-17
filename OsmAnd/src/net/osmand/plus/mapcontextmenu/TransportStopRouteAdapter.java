@@ -45,7 +45,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 			int bgColor = 0;
 			if (object instanceof TransportStopRoute) {
 				TransportStopRoute transportStopRoute = (TransportStopRoute) object;
-				routeRef = getAdjustedRouteRef(transportStopRoute.route.getRef());
+				routeRef = transportStopRoute.route.getAdjustedRouteRef();
 				bgColor = transportStopRoute.getColor(app, nightMode);
 			} else if (object instanceof String) {
 				routeRef = (String) object;
@@ -68,19 +68,6 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 		}
 
 		return convertView;
-	}
-
-	private String getAdjustedRouteRef(String ref) {
-		if (ref != null) {
-			int charPos = ref.lastIndexOf(':');
-			if (charPos != -1) {
-				ref = ref.substring(0, charPos);
-			}
-			if (ref.length() > 4) {
-				ref = ref.substring(0, 4);
-			}
-		}
-		return ref;
 	}
 
 	public interface OnClickListener {

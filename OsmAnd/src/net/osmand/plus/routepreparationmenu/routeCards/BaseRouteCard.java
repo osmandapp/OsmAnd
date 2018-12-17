@@ -13,20 +13,18 @@ import net.osmand.plus.R;
 public abstract class BaseRouteCard {
 
 	protected OsmandApplication app;
-	protected boolean nightMode;
-	protected View view;
+
 	protected boolean isLastItem;
+	protected boolean nightMode;
 
 	public BaseRouteCard(OsmandApplication app, boolean nightMode) {
 		this.app = app;
 		this.nightMode = nightMode;
 	}
 
-	public abstract void bindViewHolder();
+	public abstract View createCardView();
 
-	public View getView() {
-		return view;
-	}
+	protected abstract void applyDayNightMode();
 
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {

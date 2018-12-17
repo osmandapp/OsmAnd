@@ -31,7 +31,9 @@ public class SimpleRouteCard extends BaseRouteCard {
 
 	private MapActivity mapActivity;
 	private GPXUtilities.GPXFile gpx;
-	private final RoutingHelper routingHelper;
+	private RoutingHelper routingHelper;
+
+	private View view;
 
 	public SimpleRouteCard(MapActivity mapActivity, boolean nightMode, GPXUtilities.GPXFile gpx) {
 		super(mapActivity.getMyApplication(), nightMode);
@@ -41,7 +43,7 @@ public class SimpleRouteCard extends BaseRouteCard {
 	}
 
 	@Override
-	public void bindViewHolder() {
+	public View createCardView() {
 		view = mapActivity.getLayoutInflater().inflate(R.layout.route_info_statistic, null);
 		view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 
@@ -93,7 +95,21 @@ public class SimpleRouteCard extends BaseRouteCard {
 			AndroidUtils.setTextPrimaryColor(ctx, durationText, nightMode);
 			AndroidUtils.setTextSecondaryColor(ctx, durationTitle, nightMode);
 		}
+		applyDayNightMode();
 
+		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
+			}
+		});
+
+		buildHeader(view);
+
+		return view;
+	}
+
+	protected void applyDayNightMode() {
 		FrameLayout detailsButton = view.findViewById(R.id.details_button);
 
 		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
@@ -103,26 +119,12 @@ public class SimpleRouteCard extends BaseRouteCard {
 			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		}
 		int color = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.dividerToDropDown), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.info_divider), nightMode,
-				R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.route_info_details_card), nightMode,
-				R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.RouteInfoControls), nightMode,
-				R.color.route_info_bg_light, R.color.route_info_bg_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.dividerToDropDown), nightMode, R.color.divider_light, R.color.divider_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.info_divider), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.route_info_details_card), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.RouteInfoControls), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
 
 		((TextView) view.findViewById(R.id.details_button_descr)).setTextColor(color);
-
-		detailsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
-			}
-		});
-
-		buildHeader(view);
 	}
 
 	private void buildHeader(View headerView) {
@@ -148,8 +150,6 @@ public class SimpleRouteCard extends BaseRouteCard {
 			mChart.setData(new LineData(dataSets));
 			mChart.setVisibility(View.VISIBLE);
 		} else {
-			elevationDataSet = null;
-			slopeDataSet = null;
 			mChart.setVisibility(View.GONE);
 		}
 	}
