@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="shared_string_my_places">Meus lugares</string>
 <string name="days_behind">dias atrás</string>
 <string name="watch">Ver</string>
@@ -11,7 +11,7 @@
 <string name="favorite_home_category">Casa</string>
 <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
 <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
-<string name="application_dir_change_warning3">Você quer que o OsmAnd também copie seus arquivos de dados para o novo destino?</string>
+<string name="application_dir_change_warning3">Copiar arquivos de dados OsmAnd para o novo destino\?</string>
 <string name="specified_directiory_not_writeable">Mapas não podem ser criados no diretório especificado</string>
 <string name="copying_osmand_file_failed">A cópia de arquivos falhou</string>    
 <string name="storage_directory_external">Armazenamento externo</string>
@@ -141,15 +141,15 @@
 <string name="route_points">Pontos da rota</string>
 <string name="track_segments">Segmentos da trilha</string>
 <string name="shared_string_online_maps">Mapas on-line</string>
-<string name="osmand_rastermaps_plugin_description">"Com este plugin você pode acessar muitos tipos de mapas online (chamados de quadrícula ou ladrilho), tais como quadrículas predefinidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.
-\n
-\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline padrão do OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado.
-\n
-\nQuadrículas de mapas podem ser obtidas diretamente através de fontes online ou podem ser preparados para uso offline (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
-<string name="record_plugin_name">Gravação de viagem</string>
-<string name="record_plugin_description">"Este plugin ativa a funcionalidade de gravar e salvar suas trilhas manualmente tocando o widget de registro de GPX na tela do mapa ou também registrar automaticamente todas as suas rotas de navegação para um arquivo GPX. 
+<string name="osmand_rastermaps_plugin_description">Com este plugin você pode acessar muitos tipos de mapas online (chamados de quadrícula ou ladrilho), tais como quadrículas predefinidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc. 
 \n 
-\nTrilhas gravadas podem ser compartilhadas com seus amigos ou serem usadas para contribuições ao OSM. Atletas podem usar trilhas gravadas para monitorar seus treinos. Algumas análises básicas da trilha podem ser feitas diretamente no OsmAnd, como tempos de percurso, velocidade média, etc. E, claro, trilhas também podem ser analisadas depois em ferramentas de terceiros. "</string>
+\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline padrão do OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado. 
+\n 
+\nQuadrículas de mapas podem ser obtidas diretamente através de fontes online ou podem ser preparados para uso offline (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas.</string>
+<string name="record_plugin_name">Gravação de viagem</string>
+<string name="record_plugin_description">Este plugin ativa a funcionalidade de gravar e salvar suas trilhas manualmente tocando o widget de registro de GPX na tela do mapa ou também registrar automaticamente todas as suas rotas de navegação para um arquivo GPX. 
+\n 
+\nTrilhas gravadas podem ser compartilhadas com seus amigos ou serem usadas para contribuições ao OSM. Atletas podem usar trilhas gravadas para monitorar seus treinos. Algumas análises básicas da trilha podem ser feitas diretamente no OsmAnd, como tempos de percurso, velocidade média, etc. E, claro, trilhas também podem ser analisadas depois em ferramentas de terceiros.</string>
 
 
 <string name="srtm_paid_version_title">Plugin de curvas de nível</string>
@@ -169,9 +169,10 @@
 \n
 \nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
 <string name="plugin_ski_name">Mapa de esqui</string>
-<string name="plugin_ski_descr">"Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve. 
+<string name="plugin_ski_descr">Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve. 
 \n
-\nAtivando esta visão muda o estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
+\n 
+\nAtivando esta visão muda o estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
 <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
 <string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
 <string name="osmand_parking_plugin_name">Estacionamento</string>
@@ -1632,7 +1633,7 @@ Pôr do Sol: %2$s</string>
 
 
 <string name="osb_comment_dialog_success">Comentário adicionado</string>
-<string name="osb_comment_dialog_error">Erro: o comentário não foi adicionado</string>
+<string name="osb_comment_dialog_error">Não foi possível adicionar comentário</string>
 
 
 
@@ -1699,7 +1700,7 @@ Pôr do Sol: %2$s</string>
 <string name="shared_string_import2osmand">Importar para OsmAnd</string>
 <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
 <string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
-<string name="gps_network_not_enabled">Serviço de posição está desativado. Você quer ativá-lo?</string>
+<string name="gps_network_not_enabled">Serviço de localização não ativado. Quer ligá-lo\?</string>
 <string name="disable_recording_once_app_killed_descrp">Pausará o registro de GPX após o encerramento do app (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)</string>
 <string name="archive_wikipedia_data">Você tem dados da Wikipédia antigos e incompatíveis. Quer arquivá-los\?</string>
 <string name="download_wikipedia_files">Baixar dados adicionais da Wikipédia (%1$s MB)\?</string>
@@ -1860,7 +1861,7 @@ Pôr do Sol: %2$s</string>
 <string name="share_geo">geo:</string>
 <string name="share_menu_location">Compartilhar posição</string>
 <string name="shared_string_send">Enviar</string>
-<string name="favorite_category_dublicate_message">O nome da categoria escolhido já existe. Por favor, defina outro nome.</string>
+<string name="favorite_category_dublicate_message">Por favor, use um nome de categoria que ainda não existe.</string>
 <string name="favorite_category_name">Nome da categoria</string>
 <string name="favorite_category_add_new_title">Adicionar nova categoria</string>
 <string name="regions">Regiões</string>
@@ -2526,10 +2527,11 @@ Pôr do Sol: %2$s</string>
     <string name="osm_recipient_stat">Edições %1$s, soma de %2$s mBTC</string>
     <string name="osm_live_email_desc">Necessários para fornecer-lhe informações sobre as contribuições.</string>
     <string name="osm_live_enter_user_name">Por favor, digite o nome público</string>
-    <string name="osm_live_thanks">Obrigado por assinar as atualizações ao vivo!</string>
+    <string name="osm_live_thanks">Obrigado por apoiar o OsmAnd!
+\nPara ativar todos os novos recursos você precisa reiniciar o OsmAnd.</string>
     <string name="osm_live_region_desc">Parte da sua doação será enviada para os usuários OSM que enviam alterações para o mapa da região.</string>
     <string name="osm_live_subscription_settings">Configurações de assinatura</string>
-    <string name="osm_live_ask_for_purchase">Por favor, adquira a assinatura OsmAnd Live primeiro</string>
+    <string name="osm_live_ask_for_purchase">Favor adquirir uma assinatura do OsmAnd Live primeiro</string>
     <string name="osm_live_header">Esta assinatura permite atualizações a cada hora para todos os mapas ao redor do mundo. Parte da renda retorna à Comunidade OSM e é pago por cada contribuição OSM. Se você gosta do OsmAnd e OSM e deseja apoiar e ser apoiado por eles, esta é a maneira perfeita de fazê-lo.</string>
     <string name="select_map_marker">Selecione marcador de mapa</string>
     <string name="map_markers_other">Outros marcadores</string>
