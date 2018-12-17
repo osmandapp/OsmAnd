@@ -66,18 +66,17 @@ public class PublicTransportCard extends BaseRouteCard {
 		fromLine.setText(getFirstLineDescrSpan());
 		wayLine.setText(getSecondLineDescrSpan());
 
-		FrameLayout detailsButton = view.findViewById(R.id.details_button);
-		detailsButton.setOnClickListener(new View.OnClickListener() {
+		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				transportHelper.setCurrentRoute(routeId);
 			}
 		});
+		view.findViewById(R.id.bottom_shadow).setVisibility(isLastItem ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.card_divider).setVisibility(routeId != 0 ? View.VISIBLE : View.GONE);
 
 		applyDayNightMode();
-		if (isLastItem) {
-			view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom() + AndroidUtils.dpToPx(app, 60));
-		}
+
 		return view;
 	}
 
@@ -157,7 +156,7 @@ public class PublicTransportCard extends BaseRouteCard {
 				double walkTime = getWalkTime(s.walkDist, routeResult.getWalkSpeed());
 				if (walkTime > MIN_WALK_TIME) {
 					String walkTimeS = OsmAndFormatter.getFormattedDuration((int) walkTime, app);
-					routesBadges.addView(createWalkRouteBadge(walkTimeS.toLowerCase()), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
+					routesBadges.addView(createWalkRouteBadge(walkTimeS), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
 					routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
 				}
 			}
@@ -171,7 +170,7 @@ public class PublicTransportCard extends BaseRouteCard {
 					if (walkTime2 > MIN_WALK_TIME) {
 						String walkTimeS = OsmAndFormatter.getFormattedDuration((int) walkTime2, app);
 						routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
-						routesBadges.addView(createWalkRouteBadge(walkTimeS.toLowerCase()));
+						routesBadges.addView(createWalkRouteBadge(walkTimeS));
 					}
 				}
 			}

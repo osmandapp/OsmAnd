@@ -5,8 +5,16 @@
 	android:id="@+id/route_info_details_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:paddingBottom="10dp">
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/card_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include layout="@layout/list_item_divider" />
+
+	</LinearLayout>
 
 	<View
 		android:id="@+id/top_divider"
@@ -90,11 +98,11 @@
 
 	</LinearLayout>
 
-	<include
-		android:id="@+id/shadow"
-		layout="@layout/card_bottom_divider"
+	<ImageView
+		android:id="@+id/bottom_shadow"
 		android:layout_width="match_parent"
-		android:layout_height="2dp"
-		android:visibility="visible" />
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		android:src="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

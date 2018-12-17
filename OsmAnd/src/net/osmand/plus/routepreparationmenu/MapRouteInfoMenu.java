@@ -353,14 +353,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateOptionsButtons(main);
 
 		routeCards.clear();
-		if (isRouteCalculated()) {
+		if (isBasicRouteCalculated()) {
 			GPXUtilities.GPXFile gpx = GPXUtilities.makeGpxFromRoute(routingHelper.getRoute());
 			if (gpx != null) {
 				routeCards.add(new SimpleRouteCard(mapActivity, nightMode, gpx));
-				LinearLayout bottomView = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
-				build(bottomView);
+				LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+				build(cardsContainer);
 			}
-		} else if ((routingHelper.isPublicTransportMode() && transportHelper.getRoutes() != null)) {
+		} else if (isTransportRouteCalculated()) {
 			List<TransportRoutePlanner.TransportRouteResult> routes = transportHelper.getRoutes();
 			for (int i = 0; i < routes.size(); i++) {
 				PublicTransportCard card = new PublicTransportCard(mapActivity, nightMode, routes.get(i), i);
@@ -369,14 +369,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				}
 				routeCards.add(card);
 			}
-			LinearLayout bottomView = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
-			build(bottomView);
+			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+			build(cardsContainer);
 		} else {
 			updateRouteCalcProgress(main);
 		}
 	}
 
 	public boolean isRouteCalculated() {
+		return isBasicRouteCalculated() || isTransportRouteCalculated();
+	}
+
+	private boolean isTransportRouteCalculated() {
+		return routingHelper.isPublicTransportMode() && transportHelper.getRoutes() != null;
+	}
+
+	private boolean isBasicRouteCalculated() {
 		return routingHelper.getFinalLocation() != null && routingHelper.isRouteCalculated();
 	}
 
