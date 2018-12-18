@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="access_code_is_not_valid">Le code d\'accès n\'est pas valide</string>
+    <string name="download_more">Télécharger plus</string>
+    <string name="continue_stage">Continuer</string>
+ </resources>

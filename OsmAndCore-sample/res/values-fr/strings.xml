@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="compass">Boussole</string>
+    <string name="shared_string_my_location">Ma position</string>
+    <string name="shared_string_search">Rechercher</string>
+    <string name="yard">yd</string>
+    <string name="foot">ft</string>
+    <string name="mile">mi</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
+    <string name="nm">mn</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="nm_h">nœuds</string>
+    <string name="m_s">m/s</string>
+    <string name="km_h">km/h</string>
+    <string name="mile_per_hour">mph</string>
+    <string name="si_kmh">Kilomètres par heure</string>
+    <string name="si_mph">Miles par heure</string>
+    <string name="si_m_s">Mètres par seconde</string>
+    <string name="si_min_km">Minutes par kilomètre</string>
+    <string name="si_min_m">Minutes par mile</string>
+    <string name="si_nm_h">Miles nautiques par heure (nœuds)</string>
+    <string name="si_mi_feet">Miles/pieds</string>
+    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_km_m">Kilomètres/mètres</string>
+    <string name="si_nm">Miles nautiques</string>
+    <string name="si_mi_meters">Miles / Mètres</string>
+    <string name="shared_string_cancel">Annuler</string>
+    <string name="app_name">Greffon Parking pour OsmAnd</string>
+    <string name="zoomIn">Zoom +</string>
+    <string name="zoomOut">Zoom -</string>
+    <string name="search_hint">Saisissez une ville, une adresse ou un nom de PI</string>
+    <string name="shared_string_close">Fermer</string>
+</resources>
