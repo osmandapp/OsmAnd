@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_palaeontological_site">Xacemento paleontolóxico</string>
 
 	<string name="poi_bakery">Panadaría</string>
@@ -79,7 +79,7 @@
 	<string name="poi_public_transport_platform_tram">Paraxe do tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
 	<string name="poi_subway_entrance">Entrada de metro</string>
-	<string name="poi_subway_station">Estación de metro</string>
+	<string name="poi_subway_station">Si</string>
 	<string name="poi_taxi">Paraxe de taxis</string>
 
 	<string name="poi_aerodrome">Aeroporto</string>
@@ -517,7 +517,7 @@
 	<string name="poi_storage_tank">Tanque de almacenamento</string>
 
 	<string name="poi_country">País</string>
-	<string name="poi_capital">Capital</string>
+	<string name="poi_capital">Si</string>
 	<string name="poi_isolated_dwelling">Vivenda illada</string>
 	<string name="poi_residential">Área residencial</string>
 
@@ -2225,7 +2225,7 @@
 	<string name="poi_climbing_summit_log_yes">Rexistro da escalada no cume: si</string>
 	<string name="poi_barbecue_grill">Grella do churrasco: si</string>
 
-	<string name="poi_bulk_purchase_yes">Mercar ó por maior: si</string>
+	<string name="poi_bulk_purchase_yes">Si</string>
 	<string name="poi_aerialway_occupancy">Capacidade da cabina/cadeira/automóbil</string>
 	<string name="poi_aerialway_bubble_yes">Gurgulla</string>
 	<string name="poi_aerialway_bubble_no">Sen gurgulla</string>
@@ -2291,7 +2291,7 @@
 	<string name="poi_drive_through_no">Servizo no automóbil: non</string>
 
 	<string name="poi_brewery_additional">Nome da cervexaría</string>
-	<string name="poi_microbrewery_yes">Cervexaría artesá</string>
+	<string name="poi_microbrewery_yes">Si</string>
 	<string name="poi_microbrewery_no">Cervexaría artesá: non</string>
 
 	<string name="poi_delivery_yes">Servizo a domicilio: si</string>
@@ -3120,7 +3120,7 @@
 
 	<string name="poi_shoe_repair">Arranxo do calzado</string>
 
-	<string name="poi_bulk_purchase_only">Mercar ó por maior: só</string>
+	<string name="poi_bulk_purchase_only">Só</string>
 
 	<string name="poi_pipeline_substation">Subestación de tubaxes</string>
 	<string name="poi_substation_transmission">Transmisión</string>
@@ -3892,4 +3892,6 @@
 	<string name="poi_traffic_mirror">Espello de tráfico</string>
 
 	<string name="poi_diplomatic_consulate">Consulado</string>
-	</resources>
+    <string name="poi_craft_confectionery">Elaboración de doces e confeitaría</string>
+    <string name="poi_shop_wholesale">Tenda maiorista</string>
+</resources>
