@@ -4,7 +4,7 @@
     android:versionCode="9"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="16" />
+    <uses-sdk android:targetSdkVersion="16" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
 	<supports-screens  android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" 
 	    android:xlargeScreens="true" android:anyDensity="true" />
