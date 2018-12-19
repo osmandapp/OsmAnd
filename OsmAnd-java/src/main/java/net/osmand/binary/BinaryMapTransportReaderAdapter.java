@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.TransportRouteSchedule;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
+import net.osmand.data.TransportStopExit;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
@@ -446,6 +447,14 @@ public class BinaryMapTransportReaderAdapter {
 	}
 
 	protected void initializeNames(TIntObjectHashMap<String> stringTable, TransportStop s) {
+		for (TransportStopExit exit : s.getExits())	{
+			if (exit.getName().length() > 0) {
+				exit.setName(stringTable.get(exit.getName().charAt(0)));
+			}
+			if (exit.getEnName(false).length() > 0) {
+				exit.setEnName(stringTable.get(exit.getEnName(false).charAt(0)));
+			}
+		}
 		if (s.getName().length() > 0) {
 			s.setName(stringTable.get(s.getName().charAt(0)));
 		}
@@ -548,11 +557,66 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportStop.ID_FIELD_NUMBER :
 				dataObject.setId(codedIS.readSInt64());
 				break;
+			case OsmandOdb.TransportStop.EXITS_FIELD_NUMBER :
+				int length = codedIS.readRawVarint32();
+				int oldLimit = codedIS.pushLimit(length);
+
+				TransportStopExit transportStopExit = readTransportStopExit(cleft, ctop, req);
+				dataObject.addExit(transportStopExit);
+				codedIS.popLimit(oldLimit);
+				break;
 			default:
 				skipUnknownField(t);
 				break;
 			}
 		}
 	}
-	
+
+	private TransportStopExit readTransportStopExit(int cleft, int ctop, SearchRequest<TransportStop> req) throws IOException {
+
+		TransportStopExit dataObject = new TransportStopExit();
+		int x = 0;
+		int y = 0;
+
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+
+			switch (tag) {
+				case 0:
+					if (dataObject.getName("en").length() == 0) {
+						dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
+					}
+					if (x != 0 || y != 0) {
+						dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
+					}
+					return dataObject;
+				case OsmandOdb.TransportStopExit.NAME_FIELD_NUMBER:
+					if (req.stringTable != null) {
+						dataObject.setName(regStr(req.stringTable));
+					} else {
+						skipUnknownField(t);
+					}
+					break;
+				case OsmandOdb.TransportStopExit.NAME_EN_FIELD_NUMBER:
+					if (req.stringTable != null) {
+						dataObject.setEnName(regStr(req.stringTable));
+					} else {
+						skipUnknownField(t);
+					}
+					break;
+				case OsmandOdb.TransportStopExit.DX_FIELD_NUMBER:
+					x = codedIS.readSInt32() + cleft;
+					break;
+				case OsmandOdb.TransportStopExit.DY_FIELD_NUMBER:
+					y = codedIS.readSInt32() + ctop;
+					break;
+				default:
+					skipUnknownField(t);
+					break;
+			}
+		}
+	}
+
+
 }
