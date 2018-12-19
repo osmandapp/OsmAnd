@@ -454,6 +454,9 @@ public class BinaryMapTransportReaderAdapter {
 			if (exit.getEnName(false).length() > 0) {
 				exit.setEnName(stringTable.get(exit.getEnName(false).charAt(0)));
 			}
+			if (exit.getRef().length() > 0) {
+				exit.setRef(stringTable.get(exit.getRef().charAt(0)));
+			}
 		}
 		if (s.getName().length() > 0) {
 			s.setName(stringTable.get(s.getName().charAt(0)));
@@ -601,6 +604,13 @@ public class BinaryMapTransportReaderAdapter {
 				case OsmandOdb.TransportStopExit.NAME_EN_FIELD_NUMBER:
 					if (req.stringTable != null) {
 						dataObject.setEnName(regStr(req.stringTable));
+					} else {
+						skipUnknownField(t);
+					}
+					break;
+				case OsmandOdb.TransportStopExit.REF_FIELD_NUMBER:
+					if (req.stringTable != null) {
+						dataObject.setRef(regStr(req.stringTable));
 					} else {
 						skipUnknownField(t);
 					}

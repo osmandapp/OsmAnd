@@ -61,16 +61,16 @@ public class TransportStop extends MapObject {
 
 	public String getExitsString () {
 		String exitsString = "";
+		String refString = "";
 		if (this.exits != null) {
 			int i = 1;
 			exitsString = exitsString +  " Exits: [";
-			for (TransportStopExit e : this.exits )
-			{
-				if (e != null) {
-					exitsString = exitsString + " " + i + ") " + e.getName() + " " + e.getLocation();
-					i++;
+			for (TransportStopExit e : this.exits ) {
+				if (e.getRef() != null) {
+					refString = " [ref:" + e.getRef() + "] ";
 				}
-				exitsString = exitsString + " ]";
+				exitsString = exitsString + " " + i + ")" + refString + e.getName() + " " + e.getLocation() + " ]";
+				i++;
 			}
 		}
 		return exitsString;
