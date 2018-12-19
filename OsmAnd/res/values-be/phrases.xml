@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_bakery">Пякарня</string>
 	<string name="poi_alcohol">Вінна-гарэлкавая крама</string>
 	<string name="poi_convenience">Прадуктовая крама</string>
@@ -11,7 +11,7 @@
 	<string name="poi_farm">Фермерскія прадукты</string>
 	<string name="poi_greengrocer">Гародніна і садавіна</string>
 	<string name="poi_seafood">Морапрадукты</string>
-	<string name="poi_confectionery">Кандытарская</string>
+	<string name="poi_confectionery">Кандытарская крама</string>
 	<string name="poi_ice_cream">Марозіва</string>
 	<string name="poi_supermarket">Супермаркет</string>
 	<string name="poi_dairy">Малочная крама</string>
@@ -959,7 +959,7 @@
 	<string name="poi_monitoring_station">Станцыя назірання</string>
 	<string name="poi_email">Эл. пошта</string>
 	<string name="poi_fax">Факс</string>
-	<string name="facebook">Facebook</string>
+	<string name="facebook">Фэйсбук</string>
 	<string name="poi_mobile">Мабільны тэлефон</string>
 	<string name="poi_animal_shelter_dog">Сабакі</string>
 	<string name="poi_animal_shelter_cat">Каты</string>
@@ -3946,5 +3946,6 @@
 	<string name="poi_substation_valve_group">Група клапанаў</string>
 	<string name="poi_substation_inspection_gauge">Кантрольна-вымяральная</string>
 	<string name="poi_substation_field_gathering">Збіральная</string>
-
+    <string name="poi_craft_confectionery">Кандытарская вытворчасць</string>
+    <string name="poi_shop_wholesale">Аптовы склад</string>
 </resources>
