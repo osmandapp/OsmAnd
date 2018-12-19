@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">متجر</string>
 		<string name="poi_personal_transport">نقل شخصي</string>
 		<string name="poi_public_transport">نقل عام</string>
@@ -1063,8 +1063,8 @@
 	<string name="poi_description">وصف</string>
 	<string name="poi_email">البريد الإلكتروني</string>
 	<string name="poi_fax">فاكس</string>
-	<string name="facebook">فيسبوك</string>
-	<string name="twitter">تويتر</string>
+	<string name="facebook">فايسبوك</string>
+	<string name="twitter">توييتر</string>
 	<string name="poi_skype">سكايب</string>
 	<string name="poi_youtube">يوتيوب</string>
 	<string name="poi_instagram">إنستجرام</string>

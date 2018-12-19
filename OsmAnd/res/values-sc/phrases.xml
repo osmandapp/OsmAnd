@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_palaeontological_site">Giassu paleontològicu</string>
 
 	<string name="poi_bakery">Furru de su pane</string>
@@ -3923,5 +3923,6 @@
 	<string name="poi_substation_valve_group">Grupu de vàlvulas</string>
 	<string name="poi_substation_inspection_gauge">Indicadore de ispetzione</string>
 	<string name="poi_substation_field_gathering">Regorta de campu</string>
-
+    <string name="poi_craft_confectionery">Produtzione de durches</string>
+    <string name="poi_shop_wholesale">Butega a s\'ingrussu</string>
 </resources>

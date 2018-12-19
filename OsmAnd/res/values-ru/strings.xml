@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
@@ -115,7 +115,7 @@
     <string name="routing_attr_relief_smoothness_factor_name">Выберите пересеченность местности</string>
     
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
-    <string name="routing_attr_height_obstacles_description">Использовать данные о высоте местности, предоставленные SRTM, ASTER и EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Фактор рельефа местности (по данным SRTM, ASTER и EU-DEM).</string>
 
     <string name="quick_action_duplicates">Указанное имя для быстрого действия уже используется. Действие будет сохранено как %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
@@ -170,7 +170,7 @@
 
     <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
-    <string name="gpx_add_track">Добавить</string>
+    <string name="gpx_add_track">Добавь еще…</string>
     <string name="gpx_appearance">Вид</string>
 
     
@@ -1930,7 +1930,7 @@
     <string name="storage_directory_manual">Указать вручную</string>
     <string name="storage_directory">Хранилище карт</string>
     <string name="shared_string_copy">Копировать</string>
-    <string name="application_dir_change_warning3">Скопировать файлы данных в новое место назначения?</string>
+    <string name="application_dir_change_warning3">Скопировать файлы данных Osmand в новое место назначения\?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     
@@ -2246,7 +2246,7 @@
     <string name="osm_live_not_active">Неактивные</string>
     <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OSM внесшим изменения в карту этого региона.</string>
     <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. Свободного места - {2} Мб.</string>
-    <string name="upload_osm_note_description">Вы можете загрузить свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Загрузите свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать панель управления</string>
@@ -2335,12 +2335,12 @@
     <string name="clear_tile_data">Очистить всю плитку</string>
     <string name="routing_attr_short_way_name">Экономичный путь</string>
     <string name="routing_attr_short_way_description">Использование топливо-сберегающего пути (обычно короче).</string>
-    <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить любимые %1$s?</string>
+    <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>
     <string name="get_started">Начать</string>
     <string name="shared_string_from">от</string>
     <string name="follow_us">Подписывайтесь на нас</string>
-    <string name="osm_live_email_desc">Необходимо предоставить информацию о взносах.</string>
+    <string name="osm_live_email_desc">Необходимо, чтобы предоставить вам информацию о вкладах.</string>
     <string name="download_files_question_space_with_temp">Скачать {0} файл (ов)? Используется {3} Мб временной и {1} Мб постоянной памяти. (Свободного места - {2} Мб.)</string>
     <string name="search_my_location">Найти мое местоположение</string>
     <string name="first_usage_greeting">Прокладывайте маршруты и открывайте новые для себя места без подключения к Интернету</string>
@@ -2362,7 +2362,7 @@
     <string name="get_for">Получить за %1$s</string>
     <string name="get_for_month">Получить за %1$s в месяц</string>
     <string name="get_it">Получить</string>
-    <string name="osm_live_banner_desc">Получите неограниченные загрузки для карт, а также обновления карт чаще, чем один раз в месяц: еженедельно, ежедневно или ежечасно.</string>
+    <string name="osm_live_banner_desc">Получайте неограниченное количество загрузок карт и обновлений карт более одного раза в месяц: еженедельно, ежедневно или ежечасно.</string>
     <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину Wikipedia.</string>
     <string name="select_voice_provider">Выберите голосовое сопровождение</string>
     <string name="osm_live_payment_desc">Абонентская плата взимается ежемесячно. Отменить подписку можно в Google Play в любой момент.</string>
@@ -2459,7 +2459,7 @@
     <string name="shared_string_to">До</string>
     <string name="mapillary_menu_date_from">От</string>
     <string name="shared_string_reload">Обновить</string>
-    <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю или по дате. Фильтры применяются только для больших масштабов.</string>
+    <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">OsmAnd не удается импортировать файл. Проверьте имеет ли OsmAnd разрешение на чтение файла из его местоположения.</string>
     <string name="distance_moving">Откорректированное расстояние</string>
     <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить одну или несколько фотографий к этому месту на карте.</string>
@@ -2876,7 +2876,7 @@
     <string name="shared_string_dont">Нет</string>
     <string name="shared_string_do">Выполнить</string>
     <string name="purchase_dialog_title">Выберите план</string>
-    <string name="purchase_dialog_travel_description">Чтобы читать статьи путеводителя в автономном режиме, вам необходимо приобрести один из следующих пунктов.</string>
+    <string name="purchase_dialog_travel_description">Приобретите один из следующих планов, чтобы получить оффлайн путеводитель:</string>
     <string name="purchase_dialog_subtitle">Выберите подходящий пункт:</string>
     <string name="in_app_purchase">Покупка в приложении</string>
     <string name="in_app_purchase_desc">Разовый платеж.</string>
@@ -2900,7 +2900,7 @@
 	<string name="update_is_available">Доступно обновление</string>
 	<string name="download_file">Скачать файл</string>
     <string name="start_editing_card_image_text">Свободный всемирный путеводитель, который может редактировать каждый.</string>
-    <string name="welcome_to_open_beta_description">Проверьте бесплатно все функции во время открытого бета-тестирования. Впоследствии Путеводитель будет доступен подписчикам OsmAnd Unlimited и владельцам OsmAnd +</string>
+    <string name="welcome_to_open_beta_description">В настоящее время путеводители основаны на Викигиде. Проверьте бесплатно все функции во время открытого бета-тестирования. Впоследствии путеводители будут доступны подписчикам OsmAnd Unlimited и владельцам OsmAnd+.</string>
     <string name="start_editing_card_description">Вы можете отредактировать любую статью Викигида, этот проект написан такими же волонтерами как и вы. Нам нужны ваши знания, ваш опыт, ваш талант и ваше внимание</string>
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
@@ -2997,7 +2997,7 @@
     <string name="ask_for_location_permission">Пожалуйста, для продолжения дайте OsmAnd разрешение на определение местоположения.</string>
     <string name="rendering_value_black_name">Чёрный</string>
     <string name="search_street">Поиск улицы</string>
-    <string name="start_search_from_city">Начать поиск с города</string>
+    <string name="start_search_from_city">Сначала выберите город</string>
     <string name="shared_string_restore">Восстановить</string>
     <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или путевых точек GPX и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
     <string name="keep_passed_markers">Оставить пройденные маркеры на карте</string>

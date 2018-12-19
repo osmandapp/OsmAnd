@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="sharing_in_background">Teilen im Hintergrund</string>
 	<string name="go_to_settings">Einstellungen öffnen</string>
 	<string name="not_sent_yet">Noch nicht gesendet</string>
@@ -174,4 +174,5 @@
 
 
 <string name="last_update_from_telegram">Letztes Update von Telegram</string>
-	</resources>
+    <string name="send_location_as">Senden Standort als</string>
+</resources>
