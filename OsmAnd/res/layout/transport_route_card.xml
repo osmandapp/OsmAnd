@@ -28,46 +28,38 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical"
 		android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
-		android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
+		android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
+		android:paddingTop="@dimen/content_padding">
+
+		<net.osmand.plus.routepreparationmenu.FlowLayout
+			android:id="@+id/routes_badges"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="4dp" />
 
 		<LinearLayout
-			android:id="@+id/info_container"
+			android:id="@+id/routes_info"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			android:paddingTop="@dimen/content_padding">
+			android:paddingBottom="14dp">
 
-			<net.osmand.plus.routepreparationmenu.FlowLayout
-				android:id="@+id/routes_badges"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginBottom="4dp" />
-
-			<LinearLayout
-				android:id="@+id/routes_info"
-				android:layout_width="match_parent"
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/from_line"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				android:paddingBottom="14dp">
+				android:paddingBottom="6dp"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_regular"
+				tools:text="@string/route_from" />
 
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/from_line"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:paddingBottom="6dp"
-					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_regular"
-					tools:text="@string/route_from" />
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/way_line"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_regular"
-					tools:text="@string/route_from" />
-
-			</LinearLayout>
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/way_line"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/default_desc_text_size"
+				osmand:typeface="@string/font_roboto_regular"
+				tools:text="@string/route_from" />
 
 		</LinearLayout>
 

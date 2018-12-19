@@ -22,7 +22,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.routepreparationmenu.FlowLayout;
-import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -38,7 +38,6 @@ public class PublicTransportCard extends BaseRouteCard {
 
 	private MapActivity mapActivity;
 	private TransportRouteResult routeResult;
-	private TransportRoutingHelper transportHelper;
 
 	private View view;
 
@@ -46,7 +45,6 @@ public class PublicTransportCard extends BaseRouteCard {
 
 	public PublicTransportCard(MapActivity mapActivity, boolean nightMode, TransportRouteResult routeResult, int routeId) {
 		super(mapActivity.getMyApplication(), nightMode);
-		this.transportHelper = app.getTransportRoutingHelper();
 		this.mapActivity = mapActivity;
 		this.routeResult = routeResult;
 		this.routeId = routeId;
@@ -69,15 +67,20 @@ public class PublicTransportCard extends BaseRouteCard {
 		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				transportHelper.setCurrentRoute(routeId);
+				mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
+				ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		});
-		view.findViewById(R.id.bottom_shadow).setVisibility(isLastItem ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.card_divider).setVisibility(routeId != 0 ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
 
 		applyDayNightMode();
 
 		return view;
+	}
+
+	public int getRouteId() {
+		return routeId;
 	}
 
 	protected void applyDayNightMode() {

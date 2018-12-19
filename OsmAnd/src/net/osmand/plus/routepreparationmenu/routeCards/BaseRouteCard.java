@@ -14,7 +14,8 @@ public abstract class BaseRouteCard {
 
 	protected OsmandApplication app;
 
-	protected boolean isLastItem;
+	boolean showTopShadow;
+	boolean showBottomShadow;
 	protected boolean nightMode;
 
 	public BaseRouteCard(OsmandApplication app, boolean nightMode) {
@@ -46,7 +47,12 @@ public abstract class BaseRouteCard {
 	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int color) {
 		return app.getUIUtilities().getIcon(icon, color);
 	}
-	public void setLastItem(boolean lastItem) {
-		isLastItem = lastItem;
+
+	public void setShowTopShadow(boolean showTopShadow) {
+		this.showTopShadow = showTopShadow;
+	}
+
+	public void setShowBottomShadow(boolean showBottomShadow) {
+		this.showBottomShadow = showBottomShadow;
 	}
 }

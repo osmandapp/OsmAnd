@@ -92,6 +92,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public static int directionInfo = -1;
 	private static boolean visible;
 	public static boolean controlVisible = false;
+	public static boolean chooseRoutesVisible = false;
 	public static final String TARGET_SELECT = "TARGET_SELECT";
 
 	private final RoutingHelper routingHelper;
@@ -249,7 +250,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
-
 	public int getCurrentMenuState() {
 		return currentMenuState;
 	}
@@ -364,9 +364,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			List<TransportRoutePlanner.TransportRouteResult> routes = transportHelper.getRoutes();
 			for (int i = 0; i < routes.size(); i++) {
 				PublicTransportCard card = new PublicTransportCard(mapActivity, nightMode, routes.get(i), i);
-				if (i == routes.size() - 1) {
-					card.setLastItem(true);
-				}
+				card.setShowBottomShadow(i == routes.size() - 1);
+				card.setShowTopShadow(i != 0);
 				routeCards.add(card);
 			}
 			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
