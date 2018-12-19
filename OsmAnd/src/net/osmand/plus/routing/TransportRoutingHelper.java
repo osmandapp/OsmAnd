@@ -356,6 +356,7 @@ public class TransportRoutingHelper {
 			cfg.useSchedule = params.useSchedule;
 			TransportRoutePlanner planner = new TransportRoutePlanner();
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, files);
+			ctx.calculationProgress =  params.calculationProgress;
 			return planner.buildRoute(ctx, params.start, params.end);
 		}
 

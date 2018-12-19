@@ -47,6 +47,9 @@ public class TransportRoutePlanner {
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		
 		while (!queue.isEmpty()) {
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				return null;
+			}
 			TransportRouteSegment segment = queue.poll();
 			TransportRouteSegment ex = ctx.visitedSegments.get(segment.getId());
 			if(ex != null) {
@@ -72,7 +75,10 @@ public class TransportRoutePlanner {
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			for (int ind = 1 + segment.segStart; ind < segment.getLength(); ind++) {
-				segmentId ++; 
+				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+					return null;
+				}
+				segmentId ++;
 				ctx.visitedSegments.put(segmentId, segment);
 				TransportStop stop = segment.getStop(ind);
 				// could be geometry size
@@ -88,6 +94,9 @@ public class TransportRoutePlanner {
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
 				for (TransportRouteSegment sgm : sgms) {
+					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+						return null;
+					}
 					if (segment.wasVisited(sgm)) {
 						continue;
 					}
@@ -149,11 +158,17 @@ public class TransportRoutePlanner {
 				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedRoutesCount, 
 				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000)));
 		for(TransportRouteSegment res : results) {
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				return null;
+			}
 			TransportRouteResult route = new TransportRouteResult(ctx);
 			route.routeTime = res.distFromStart;
 			route.finishWalkDist = res.walkDist;
 			TransportRouteSegment p = res;
 			while (p != null) {
+				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+					return null;
+				}
 				if (p.parentRoute != null) {
 					TransportRouteResultSegment sg = new TransportRouteResultSegment(p.parentRoute.road, 
 							p.parentRoute.segStart, p.parentStop, p.parentRoute.walkDist, 
@@ -165,6 +180,9 @@ public class TransportRoutePlanner {
 			// test if faster routes fully included
 			boolean include = false;
 			for(TransportRouteResult s : lst) {
+				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+					return null;
+				}
 				if(includeRoute(s, route)) {
 					include = true;
 					break;
