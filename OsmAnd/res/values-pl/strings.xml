@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -3082,7 +3082,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="default_render_descr">Styl ogólnego przeznaczenia. Zapewnia uproszczone renderowanie w gęsto zaludnionych miastach. Kluczowe cechy: poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
     <string name="contour_lines_hillshade_maps">Poziomice i cieniowanie rzeźby terenu</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
-    <string name="purchase_dialog_travel_description">Proszę zakupić jeden z następujących, aby otrzymać funkcjonalność przewodnika podróży bez połączenia sieciowego:</string>
+    <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
     <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię offline</string>
