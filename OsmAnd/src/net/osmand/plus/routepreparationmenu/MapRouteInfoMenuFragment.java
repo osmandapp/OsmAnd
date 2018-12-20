@@ -31,6 +31,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -43,6 +44,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.widgets.ImageViewExProgress;
 import net.osmand.plus.widgets.TextViewExProgress;
+import net.osmand.router.TransportRoutePlanner;
 
 import java.util.List;
 
@@ -644,6 +646,17 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 					right = Math.max(right, l.getLongitude());
 					top = Math.max(top, l.getLatitude());
 					bottom = Math.min(bottom, l.getLatitude());
+				}
+				if (menu.isTransportRouteCalculated()) {
+					TransportRoutePlanner.TransportRouteResult result = getMyApplication().getTransportRoutingHelper().getCurrentRouteResult();
+					for (TransportRoutePlanner.TransportRouteResultSegment segment : result.getSegments()) {
+						for (Node n : segment.getNodes()) {
+							left = Math.min(left, n.getLongitude());
+							right = Math.max(right, n.getLongitude());
+							top = Math.max(top, n.getLatitude());
+							bottom = Math.min(bottom, n.getLatitude());
+						}
+					}
 				}
 				List<TargetPointsHelper.TargetPoint> targetPoints = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
 				for (TargetPointsHelper.TargetPoint l : targetPoints) {

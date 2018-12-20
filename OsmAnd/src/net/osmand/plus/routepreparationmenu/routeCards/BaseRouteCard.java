@@ -1,29 +1,51 @@
 package net.osmand.plus.routepreparationmenu.routeCards;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 public abstract class BaseRouteCard {
 
 	protected OsmandApplication app;
+	protected MapActivity mapActivity;
+
+	protected View view;
 
 	boolean showTopShadow;
 	boolean showBottomShadow;
 	protected boolean nightMode;
 
-	public BaseRouteCard(OsmandApplication app, boolean nightMode) {
-		this.app = app;
-		this.nightMode = nightMode;
+	public BaseRouteCard(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		this.app = mapActivity.getMyApplication();
 	}
 
-	public abstract View createCardView();
+	public abstract int getCardLayoutId();
+
+	public abstract void update();
+
+	public View build(Context ctx) {
+		view = LayoutInflater.from(ctx).inflate(getCardLayoutId(), null);
+		update();
+		return view;
+	}
+
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public OsmandApplication getMyApplication() {
+		return app;
+	}
 
 	protected abstract void applyDayNightMode();
 

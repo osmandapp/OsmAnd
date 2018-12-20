@@ -14,7 +14,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
@@ -31,87 +30,15 @@ public class SimpleRouteCard extends BaseRouteCard {
 
 	private MapActivity mapActivity;
 	private GPXUtilities.GPXFile gpx;
-	private RoutingHelper routingHelper;
 
-	private View view;
-
-	public SimpleRouteCard(MapActivity mapActivity, boolean nightMode, GPXUtilities.GPXFile gpx) {
-		super(mapActivity.getMyApplication(), nightMode);
+	public SimpleRouteCard(MapActivity mapActivity, GPXUtilities.GPXFile gpx) {
+		super(mapActivity);
 		this.mapActivity = mapActivity;
 		this.gpx = gpx;
-		routingHelper = mapActivity.getRoutingHelper();
-	}
-
-	@Override
-	public View createCardView() {
-		view = mapActivity.getLayoutInflater().inflate(R.layout.route_info_statistic, null);
-		view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
-
-		view.findViewById(R.id.dividerToDropDown).setVisibility(View.VISIBLE);
-		view.findViewById(R.id.route_info_details_card).setVisibility(View.VISIBLE);
-		final OsmandApplication ctx = mapActivity.getMyApplication();
-
-		View info = view.findViewById(R.id.info_container);
-		info.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
-			}
-		});
-
-		ImageView infoIcon = (ImageView) view.findViewById(R.id.InfoIcon);
-		ImageView durationIcon = (ImageView) view.findViewById(R.id.DurationIcon);
-		View infoDistanceView = view.findViewById(R.id.InfoDistance);
-		View infoDurationView = view.findViewById(R.id.InfoDuration);
-		if (directionInfo >= 0) {
-			infoIcon.setVisibility(View.GONE);
-			durationIcon.setVisibility(View.GONE);
-			infoDistanceView.setVisibility(View.GONE);
-			infoDurationView.setVisibility(View.GONE);
-		} else {
-			infoIcon.setImageDrawable(ctx.getUIUtilities().getIcon(R.drawable.ic_action_route_distance, R.color.route_info_unchecked_mode_icon_color));
-			infoIcon.setVisibility(View.VISIBLE);
-			durationIcon.setImageDrawable(ctx.getUIUtilities().getIcon(R.drawable.ic_action_time_span, R.color.route_info_unchecked_mode_icon_color));
-			durationIcon.setVisibility(View.VISIBLE);
-			infoDistanceView.setVisibility(View.VISIBLE);
-			infoDurationView.setVisibility(View.VISIBLE);
-		}
-		if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
-				&& directionInfo < routingHelper.getRouteDirections().size()) {
-			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
-		} else {
-			TextView distanceText = (TextView) view.findViewById(R.id.DistanceText);
-			TextView distanceTitle = (TextView) view.findViewById(R.id.DistanceTitle);
-			TextView durationText = (TextView) view.findViewById(R.id.DurationText);
-			TextView durationTitle = (TextView) view.findViewById(R.id.DurationTitle);
-
-			distanceText.setText(OsmAndFormatter.getFormattedDistance(ctx.getRoutingHelper().getLeftDistance(), ctx));
-
-			durationText.setText(OsmAndFormatter.getFormattedDuration(ctx.getRoutingHelper().getLeftTime(), ctx));
-			durationTitle.setText(ctx.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(ctx.getRoutingHelper().getLeftTime(), true)));
-
-			AndroidUtils.setTextPrimaryColor(ctx, distanceText, nightMode);
-			AndroidUtils.setTextSecondaryColor(ctx, distanceTitle, nightMode);
-			AndroidUtils.setTextPrimaryColor(ctx, durationText, nightMode);
-			AndroidUtils.setTextSecondaryColor(ctx, durationTitle, nightMode);
-		}
-		applyDayNightMode();
-
-		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
-			}
-		});
-
-		buildHeader(view);
-
-		return view;
 	}
 
 	protected void applyDayNightMode() {
 		FrameLayout detailsButton = view.findViewById(R.id.details_button);
-
 		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
@@ -128,7 +55,6 @@ public class SimpleRouteCard extends BaseRouteCard {
 	}
 
 	private void buildHeader(View headerView) {
-		OsmandApplication app = mapActivity.getMyApplication();
 		final LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
 		final GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
@@ -151,6 +77,77 @@ public class SimpleRouteCard extends BaseRouteCard {
 			mChart.setVisibility(View.VISIBLE);
 		} else {
 			mChart.setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public int getCardLayoutId() {
+		return R.layout.route_info_statistic;
+	}
+
+	@Override
+	public void update() {
+		if (view != null) {
+			RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+
+			view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+
+			view.findViewById(R.id.dividerToDropDown).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.route_info_details_card).setVisibility(View.VISIBLE);
+
+			View info = view.findViewById(R.id.info_container);
+			info.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
+				}
+			});
+
+			ImageView infoIcon = (ImageView) view.findViewById(R.id.InfoIcon);
+			ImageView durationIcon = (ImageView) view.findViewById(R.id.DurationIcon);
+			View infoDistanceView = view.findViewById(R.id.InfoDistance);
+			View infoDurationView = view.findViewById(R.id.InfoDuration);
+			if (directionInfo >= 0) {
+				infoIcon.setVisibility(View.GONE);
+				durationIcon.setVisibility(View.GONE);
+				infoDistanceView.setVisibility(View.GONE);
+				infoDurationView.setVisibility(View.GONE);
+			} else {
+				infoIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_route_distance, R.color.route_info_unchecked_mode_icon_color));
+				infoIcon.setVisibility(View.VISIBLE);
+				durationIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_time_span, R.color.route_info_unchecked_mode_icon_color));
+				durationIcon.setVisibility(View.VISIBLE);
+				infoDistanceView.setVisibility(View.VISIBLE);
+				infoDurationView.setVisibility(View.VISIBLE);
+			}
+			if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
+					&& directionInfo < routingHelper.getRouteDirections().size()) {
+				RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
+			} else {
+				TextView distanceText = (TextView) view.findViewById(R.id.DistanceText);
+				TextView distanceTitle = (TextView) view.findViewById(R.id.DistanceTitle);
+				TextView durationText = (TextView) view.findViewById(R.id.DurationText);
+				TextView durationTitle = (TextView) view.findViewById(R.id.DurationTitle);
+
+				distanceText.setText(OsmAndFormatter.getFormattedDistance(app.getRoutingHelper().getLeftDistance(), app));
+
+				durationText.setText(OsmAndFormatter.getFormattedDuration(app.getRoutingHelper().getLeftTime(), app));
+				durationTitle.setText(app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(app.getRoutingHelper().getLeftTime(), true)));
+
+				AndroidUtils.setTextPrimaryColor(app, distanceText, nightMode);
+				AndroidUtils.setTextSecondaryColor(app, distanceTitle, nightMode);
+				AndroidUtils.setTextPrimaryColor(app, durationText, nightMode);
+				AndroidUtils.setTextSecondaryColor(app, durationTitle, nightMode);
+			}
+			view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
+				}
+			});
+
+			buildHeader(view);
+			applyDayNightMode();
 		}
 	}
 }

@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,18 @@ import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.routeCards.PublicTransportCard;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.TransportRoutePlanner;
 
@@ -40,6 +45,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 	private OsmandMapTileView map;
 	private MapActivity mapActivity;
 
+	private View view;
+	private LockableViewPager viewPager;
 	private ImageButton myLocButtonView;
 
 	private boolean portrait;
@@ -53,25 +60,38 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		map = getMapActivity().getMapView();
 
-		View view = inflater.inflate(R.layout.fragment_show_all_routes, null);
+		view = inflater.inflate(R.layout.fragment_show_all_routes, null);
 
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 
-		LockableViewPager viewPager = view.findViewById(R.id.pager);
+		viewPager = view.findViewById(R.id.pager);
 
-		List<PublicTransportCard> routeCards = new ArrayList<>();
+		final List<PublicTransportCard> routeCards = new ArrayList<>();
 		List<TransportRoutePlanner.TransportRouteResult> routes = getMyApplication().getTransportRoutingHelper().getRoutes();
 		for (int i = 0; i < routes.size(); i++) {
-			PublicTransportCard card = new PublicTransportCard(mapActivity, nightMode, routes.get(i), i);
+			PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
+			card.setSecondButtonVisible(true);
 			card.setShowTopShadow(false);
 			card.setShowBottomShadow(false);
 			routeCards.add(card);
 		}
 
 		viewPager.setClipToPadding(false);
-		ViewsPagerAdapter pagerAdapter = new ViewsPagerAdapter(mapActivity, routeCards);
+		final ViewsPagerAdapter pagerAdapter = new ViewsPagerAdapter(mapActivity, routeCards);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setSwipeLocked(routeCards.size() < 2);
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			public void onPageScrollStateChanged(int state) {
+			}
+
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+			}
+
+			public void onPageSelected(int position) {
+				mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(routeCards.get(position).getRouteId());
+				mapActivity.refreshMap();
+			}
+		});
 
 		if (!portrait) {
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(getMyApplication(), 200f));
@@ -132,6 +152,55 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	private void adjustMapPosition() {
+		RoutingHelper rh = mapActivity.getRoutingHelper();
+		TransportRoutingHelper transportRoutingHelper = rh.getTransportRoutingHelper();
+		if (getMapActivity().getMapView() != null) {
+			Location lt = rh.getLastProjection();
+			if (lt == null) {
+				lt = getMyApplication().getTargetPointsHelper().getPointToStartLocation();
+			}
+			if (lt != null) {
+				double left = lt.getLongitude(), right = lt.getLongitude();
+				double top = lt.getLatitude(), bottom = lt.getLatitude();
+				List<Location> list = rh.getCurrentCalculatedRoute();
+				for (Location l : list) {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
+				TransportRoutePlanner.TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
+				for (TransportRoutePlanner.TransportRouteResultSegment segment : result.getSegments()) {
+					for (Node n : segment.getNodes()) {
+						left = Math.min(left, n.getLongitude());
+						right = Math.max(right, n.getLongitude());
+						top = Math.max(top, n.getLatitude());
+						bottom = Math.min(bottom, n.getLatitude());
+					}
+				}
+				List<TargetPointsHelper.TargetPoint> targetPoints = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
+				for (TargetPointsHelper.TargetPoint l : targetPoints) {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
+				RotatedTileBox tb = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+				int tileBoxWidthPx = 0;
+				int tileBoxHeightPx = 0;
+
+				if (!portrait) {
+					tileBoxWidthPx = tb.getPixWidth() - view.getWidth();
+				} else {
+					int fHeight = viewPager.getHeight() + AndroidUtils.getStatusBarHeight(getMyApplication());
+					tileBoxHeightPx = tb.getPixHeight() - fHeight;
+				}
+				getMapActivity().getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+			}
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -155,7 +224,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
 		if (!enabled) {
-			myLocButtonView.setImageResource(R.drawable.map_my_location);
+			myLocButtonView.setImageDrawable(getContentIcon(R.drawable.map_my_location));
 			AndroidUtils.setBackground(mapActivity, myLocButtonView, nightMode, R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
 			myLocButtonView.setContentDescription(mapActivity.getString(R.string.unknown_location));
 		} else if (tracked) {
@@ -262,7 +331,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		}
 
 		private View createPageView(int position) {
-			return cards.get(position).createCardView();
+			return cards.get(position).build(mapActivity);
 		}
 
 		@NonNull
@@ -277,6 +346,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 				public void onClick(View v) {
 					mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(cards.get(position).getRouteId());
 					mapActivity.getMapView().refreshMap(true);
+				}
+			});
+			view.findViewById(R.id.show_button).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					adjustMapPosition();
 				}
 			});
 			container.addView(view, 0);

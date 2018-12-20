@@ -1,9 +1,14 @@
 package net.osmand.router;
 
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.LatLon;
+import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportSchedule;
+import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,15 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.data.LatLon;
-import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportSchedule;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.MapUtils;
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class TransportRoutePlanner {
 	
@@ -273,7 +273,16 @@ public class TransportRoutePlanner {
 		public TransportStop getEnd() {
 			return route.getForwardStops().get(end);
 		}
-		
+
+		public List<Node> getNodes() {
+			List<Node> nodes = new ArrayList<>();
+			List<Way> ways = getGeometry();
+			for (Way way : ways) {
+				nodes.addAll(way.getNodes());
+			}
+			return nodes;
+		}
+
 		public List<Way> getGeometry() {
 			List<Way> list = new ArrayList<Way>();
 			route.mergeForwardWays();

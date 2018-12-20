@@ -338,7 +338,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public void build(LinearLayout rootView) {
 		rootView.removeAllViews();
 		for (BaseRouteCard card : routeCards) {
-			rootView.addView(card.createCardView());
+			rootView.addView(card.build(mapActivity));
 		}
 	}
 
@@ -356,14 +356,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (isBasicRouteCalculated()) {
 			GPXUtilities.GPXFile gpx = GPXUtilities.makeGpxFromRoute(routingHelper.getRoute());
 			if (gpx != null) {
-				routeCards.add(new SimpleRouteCard(mapActivity, nightMode, gpx));
+				routeCards.add(new SimpleRouteCard(mapActivity, gpx));
 				LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
 				build(cardsContainer);
 			}
 		} else if (isTransportRouteCalculated()) {
 			List<TransportRoutePlanner.TransportRouteResult> routes = transportHelper.getRoutes();
 			for (int i = 0; i < routes.size(); i++) {
-				PublicTransportCard card = new PublicTransportCard(mapActivity, nightMode, routes.get(i), i);
+				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
 				card.setShowBottomShadow(i == routes.size() - 1);
 				card.setShowTopShadow(i != 0);
 				routeCards.add(card);
@@ -379,11 +379,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		return isBasicRouteCalculated() || isTransportRouteCalculated();
 	}
 
-	private boolean isTransportRouteCalculated() {
+	public boolean isTransportRouteCalculated() {
 		return routingHelper.isPublicTransportMode() && transportHelper.getRoutes() != null;
 	}
 
-	private boolean isBasicRouteCalculated() {
+	public boolean isBasicRouteCalculated() {
 		return routingHelper.getFinalLocation() != null && routingHelper.isRouteCalculated();
 	}
 
@@ -855,7 +855,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (getTargets().getPointToNavigate() != null) {
 			hide();
 		}
-		mapControlsLayer.startNavigation();
+		if (isTransportRouteCalculated()) {
+			ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager());
+		} else {
+			mapControlsLayer.startNavigation();
+		}
 	}
 
 	private void clickRouteCancel() {

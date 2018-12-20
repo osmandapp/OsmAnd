@@ -89,6 +89,10 @@ public class TransportRoutingHelper {
 		return currentRoute;
 	}
 
+	public TransportRouteResult getCurrentRouteResult() {
+		return routes.get(currentRoute);
+	}
+
 	public List<TransportRouteResult> getRoutes() {
 		return routes;
 	}
