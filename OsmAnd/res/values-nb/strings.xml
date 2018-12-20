@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
@@ -3095,4 +3095,6 @@
     <string name="osm_live_payment_header">Velg betalingsfrekvensen som passer for deg:</string>
     <string name="osm_live_payment_contribute_descr">Deler av inntekten går til OpenStreetMap-bidragsytere.</string>
     <string name="powered_by_osmand">Muliggjort av OsmAnd</string>
-    </resources>
+    <string name="osm_live_subscriptions">Abonnementer</string>
+    <string name="mapillary_menu_title_pano">Vis kun 360°-bilder</string>
+</resources>
