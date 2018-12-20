@@ -37,49 +37,6 @@ public class SimpleRouteCard extends BaseRouteCard {
 		this.gpx = gpx;
 	}
 
-	protected void applyDayNightMode() {
-		FrameLayout detailsButton = view.findViewById(R.id.details_button);
-		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		}
-		int color = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.dividerToDropDown), nightMode, R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.info_divider), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.route_info_details_card), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.RouteInfoControls), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
-
-		((TextView) view.findViewById(R.id.details_button_descr)).setTextColor(color);
-	}
-
-	private void buildHeader(View headerView) {
-		final LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
-		final GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-
-		GpxUiHelper.setupGPXChart(mChart, 4, 4f, 4f, !nightMode, false);
-		GpxUiHelper.OrderedLineDataSet elevationDataSet;
-		GpxUiHelper.OrderedLineDataSet slopeDataSet;
-		if (analysis.hasElevationData) {
-			List<ILineDataSet> dataSets = new ArrayList<>();
-			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true);
-			if (elevationDataSet != null) {
-				dataSets.add(elevationDataSet);
-			}
-			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
-			if (slopeDataSet != null) {
-				dataSets.add(slopeDataSet);
-			}
-			mChart.setData(new LineData(dataSets));
-			mChart.setVisibility(View.VISIBLE);
-		} else {
-			mChart.setVisibility(View.GONE);
-		}
-	}
-
 	@Override
 	public int getCardLayoutId() {
 		return R.layout.route_info_statistic;
@@ -148,6 +105,49 @@ public class SimpleRouteCard extends BaseRouteCard {
 
 			buildHeader(view);
 			applyDayNightMode();
+		}
+	}
+
+	protected void applyDayNightMode() {
+		FrameLayout detailsButton = view.findViewById(R.id.details_button);
+		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		} else {
+			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		}
+		int color = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.dividerToDropDown), nightMode, R.color.divider_light, R.color.divider_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.info_divider), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.route_info_details_card), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.RouteInfoControls), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
+
+		((TextView) view.findViewById(R.id.details_button_descr)).setTextColor(color);
+	}
+
+	private void buildHeader(View headerView) {
+		final LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
+		final GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+
+		GpxUiHelper.setupGPXChart(mChart, 4, 4f, 4f, !nightMode, false);
+		GpxUiHelper.OrderedLineDataSet elevationDataSet;
+		GpxUiHelper.OrderedLineDataSet slopeDataSet;
+		if (analysis.hasElevationData) {
+			List<ILineDataSet> dataSets = new ArrayList<>();
+			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
+					GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true);
+			if (elevationDataSet != null) {
+				dataSets.add(elevationDataSet);
+			}
+			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+					GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
+			if (slopeDataSet != null) {
+				dataSets.add(slopeDataSet);
+			}
+			mChart.setData(new LineData(dataSets));
+			mChart.setVisibility(View.VISIBLE);
+		} else {
+			mChart.setVisibility(View.GONE);
 		}
 	}
 }

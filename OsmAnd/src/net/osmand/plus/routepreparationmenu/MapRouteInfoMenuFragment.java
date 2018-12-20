@@ -65,6 +65,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	private boolean moving;
 	private boolean forceUpdateLayout;
 	private boolean initLayout = true;
+	private boolean wasDrawerDisabled;
 
 	private int menuFullHeight;
 	private int minHalfY;
@@ -311,17 +312,24 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
 		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
+		wasDrawerDisabled = getMapActivity().isDrawerDisabled();
+		if (!wasDrawerDisabled) {
+			getMapActivity().disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
+		super.onPause();
 		if (view != null) {
 			ViewParent parent = view.getParent();
 			if (parent != null && containerLayoutListener != null) {
 				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
 			}
 		}
-		super.onPause();
+		if (!wasDrawerDisabled) {
+			getMapActivity().enableDrawer();
+		}
 	}
 
 	@Override

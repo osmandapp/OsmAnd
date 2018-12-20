@@ -51,6 +51,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 
 	private boolean portrait;
 	private boolean nightMode;
+	private boolean wasDrawerDisabled;
 
 	@Nullable
 	@Override
@@ -59,95 +60,93 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		map = getMapActivity().getMapView();
-
-		view = inflater.inflate(R.layout.fragment_show_all_routes, null);
-
-		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
-
-		viewPager = view.findViewById(R.id.pager);
-
-		final List<PublicTransportCard> routeCards = new ArrayList<>();
 		List<TransportRoutePlanner.TransportRouteResult> routes = getMyApplication().getTransportRoutingHelper().getRoutes();
-		for (int i = 0; i < routes.size(); i++) {
-			PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
-			card.setSecondButtonVisible(true);
-			card.setShowTopShadow(false);
-			card.setShowBottomShadow(false);
-			routeCards.add(card);
-		}
+		if (routes != null && !routes.isEmpty()) {
+			view = inflater.inflate(R.layout.fragment_show_all_routes, null);
+			viewPager = view.findViewById(R.id.pager);
 
-		viewPager.setClipToPadding(false);
-		final ViewsPagerAdapter pagerAdapter = new ViewsPagerAdapter(mapActivity, routeCards);
-		viewPager.setAdapter(pagerAdapter);
-		viewPager.setSwipeLocked(routeCards.size() < 2);
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-			public void onPageScrollStateChanged(int state) {
+			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
+
+			final List<PublicTransportCard> routeCards = new ArrayList<>();
+			for (int i = 0; i < routes.size(); i++) {
+				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
+				card.setSecondButtonVisible(true);
+				card.setShowTopShadow(false);
+				card.setShowBottomShadow(false);
+				routeCards.add(card);
 			}
+			viewPager.setClipToPadding(false);
+			final ViewsPagerAdapter pagerAdapter = new ViewsPagerAdapter(mapActivity, routeCards);
+			viewPager.setAdapter(pagerAdapter);
+			viewPager.setSwipeLocked(routeCards.size() < 2);
+			viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+				public void onPageScrollStateChanged(int state) {
+				}
 
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-			}
+				public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				}
 
-			public void onPageSelected(int position) {
-				mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(routeCards.get(position).getRouteId());
-				mapActivity.refreshMap();
-			}
-		});
-
-		if (!portrait) {
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(getMyApplication(), 200f));
-			params.gravity = Gravity.BOTTOM;
-			viewPager.setLayoutParams(params);
-		}
-
-		ImageButton backButtonView = (ImageButton) view.findViewById(R.id.back_button);
-		backButtonView.setImageDrawable(getContentIcon(R.drawable.ic_arrow_back));
-		AndroidUtils.setBackground(mapActivity, backButtonView, nightMode, R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
-		backButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss(mapActivity);
-			}
-		});
-
-		View fabButtonsView = view.findViewById(R.id.fab_container);
-		ImageButton zoomInButtonView = (ImageButton) view.findViewById(R.id.map_zoom_in_button);
-		ImageButton zoomOutButtonView = (ImageButton) view.findViewById(R.id.map_zoom_out_button);
-		myLocButtonView = (ImageButton) view.findViewById(R.id.map_my_location_button);
-		if (portrait) {
-			updateImageButton(zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
-					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-			updateImageButton(zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
-					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-			zoomInButtonView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					doZoomIn();
+				public void onPageSelected(int position) {
+					mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(routeCards.get(position).getRouteId());
+					mapActivity.refreshMap();
 				}
 			});
-			zoomOutButtonView.setOnClickListener(new View.OnClickListener() {
+
+			if (!portrait) {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(getMyApplication(), 200f));
+				params.gravity = Gravity.BOTTOM;
+				viewPager.setLayoutParams(params);
+			}
+
+			ImageButton backButtonView = (ImageButton) view.findViewById(R.id.back_button);
+			backButtonView.setImageDrawable(getIcon(R.drawable.ic_arrow_back, R.color.icon_color));
+			AndroidUtils.setBackground(mapActivity, backButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
+			backButtonView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					doZoomOut();
+					dismiss(mapActivity);
 				}
 			});
-			myLocButtonView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-					} else {
-						ActivityCompat.requestPermissions(mapActivity,
-								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+
+			View fabButtonsView = view.findViewById(R.id.fab_container);
+			ImageButton zoomInButtonView = (ImageButton) view.findViewById(R.id.map_zoom_in_button);
+			ImageButton zoomOutButtonView = (ImageButton) view.findViewById(R.id.map_zoom_out_button);
+			myLocButtonView = (ImageButton) view.findViewById(R.id.map_my_location_button);
+			if (portrait) {
+				updateImageButton(zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+				updateImageButton(zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+				zoomInButtonView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						doZoomIn();
 					}
-				}
-			});
-			fabButtonsView.setVisibility(View.VISIBLE);
-		} else {
-			fabButtonsView.setVisibility(View.GONE);
+				});
+				zoomOutButtonView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						doZoomOut();
+					}
+				});
+				myLocButtonView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+							mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+						} else {
+							ActivityCompat.requestPermissions(mapActivity,
+									new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+									OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+						}
+					}
+				});
+				fabButtonsView.setVisibility(View.VISIBLE);
+			} else {
+				fabButtonsView.setVisibility(View.GONE);
+			}
+			updateMyLocation(mapActivity.getRoutingHelper());
 		}
-
-		updateMyLocation(mapActivity.getRoutingHelper());
 
 		return view;
 	}
@@ -206,11 +205,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		super.onResume();
 		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 		MapRouteInfoMenu.chooseRoutesVisible = true;
+		wasDrawerDisabled = getMapActivity().isDrawerDisabled();
+		if (!wasDrawerDisabled) {
+			getMapActivity().disableDrawer();
+		}
 	}
 
 	public void onPause() {
 		super.onPause();
 		MapRouteInfoMenu.chooseRoutesVisible = false;
+		if (!wasDrawerDisabled) {
+			getMapActivity().enableDrawer();
+		}
 	}
 
 	@Override
@@ -224,12 +230,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
 		if (!enabled) {
-			myLocButtonView.setImageDrawable(getContentIcon(R.drawable.map_my_location));
-			AndroidUtils.setBackground(mapActivity, myLocButtonView, nightMode, R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
+			myLocButtonView.setImageDrawable(getIcon(R.drawable.map_my_location, R.color.icon_color));
+			AndroidUtils.setBackground(mapActivity, myLocButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
 			myLocButtonView.setContentDescription(mapActivity.getString(R.string.unknown_location));
 		} else if (tracked) {
 			myLocButtonView.setImageDrawable(getIcon(R.drawable.map_my_location, R.color.color_myloc_distance));
-			AndroidUtils.setBackground(mapActivity, myLocButtonView, nightMode, R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
+			AndroidUtils.setBackground(mapActivity, myLocButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
 		} else {
 			myLocButtonView.setImageResource(R.drawable.map_my_location);
 			AndroidUtils.setBackground(mapActivity, myLocButtonView, nightMode, R.drawable.btn_circle_blue, R.drawable.btn_circle_blue);

@@ -29,9 +29,10 @@
 			android:id="@+id/fab_container"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="bottom|right"
+			android:layout_gravity="right"
 			android:layout_marginBottom="@dimen/map_button_margin"
-			android:layout_marginRight="@dimen/map_button_margin">
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding">
 
 			<ImageButton
 				android:id="@+id/map_my_location_button"
@@ -45,7 +46,6 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="bottom"
 				android:layout_marginLeft="@dimen/map_button_spacing"
 				android:orientation="vertical">
 
@@ -74,8 +74,7 @@
 			android:id="@+id/pager"
 			android:layout_width="match_parent"
 			android:layout_height="200dp"
-			android:layout_gravity="bottom"
-			android:layout_marginTop="@dimen/content_padding" />
+			android:layout_gravity="bottom" />
 
 	</LinearLayout>
 
