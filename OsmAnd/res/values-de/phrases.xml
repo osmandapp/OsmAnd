@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="poi_10pin">Bowling</string>
 	<string name="poi_9pin">Kegeln</string>
@@ -153,7 +153,7 @@
 	<string name="poi_compressed_air">Druckluft</string>
 	<string name="poi_craft_computer">Computer</string>
 	<string name="poi_computer">Computergeschäft</string>
-	<string name="poi_confectionery">Süßwaren</string>
+	<string name="poi_confectionery">Süßwarenladen</string>
 	<string name="poi_construction">Anlage</string>
 	<string name="poi_convenience">Lebensmittelgeschäft</string>
 	<string name="poi_copyshop">Copy-Shop</string>
@@ -3908,4 +3908,6 @@
 
 <string name="poi_pipeline_substation">Pipeline-Umspannwerk</string>
 	<string name="poi_substation_inspection_gauge">Kontrollmanometer</string>
-	</resources>
+    <string name="poi_craft_confectionery">Süßwarenproduktion</string>
+    <string name="poi_shop_wholesale">Großhandel</string>
+</resources>
