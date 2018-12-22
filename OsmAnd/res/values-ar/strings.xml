@@ -2941,4 +2941,5 @@
     <string name="paid_plugin">أداة مدفوعة</string>
     <string name="start_editing_card_image_text">دليل السفر العالمي المجانا الذي بامكان أي شخص التعديل عليه.</string>
     <string name="day_off_label">معطّل</string>
+    <string name="unirs_render_descr">تعديل النمط الافتراضي لزيادة تباين المشاة و طرق الدراجات .يستخدم Legasy Mapnik colors .</string>
 </resources>
