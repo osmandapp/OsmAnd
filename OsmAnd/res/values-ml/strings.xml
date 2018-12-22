@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="city_type_district">ജില്ല</string>
     <string name="city_type_neighbourhood">സമീപദേശം</string>
     <string name="map_widget_search">തെരച്ചില്‍</string>
@@ -1663,7 +1663,7 @@
     <string name="osmand_parking_time_limit_title">പാര്‍ക്ക് ചെയ്യാവുന്ന സമയ പരിധി ചൂണ്ടിക്കാണിക്കുക</string>
     <string name="osmand_parking_delete_confirm">പാര്‍ക്കിങ്ങ് സ്ഥാനം അടയാളം നീക്കം ചെയ്യട്ടെ?</string>
     <string name="osmand_parking_lim_text">സമയ പരിമിതം</string>
-    <string name="osmand_parking_no_lim_text">സമയ-അപരിമിതം</string>
+    <string name="osmand_parking_no_lim_text">"സമയ-പരിമിതിയില്ലാത്തത് "</string>
     <string name="osmand_parking_position_description">നിങ്ങളുടെ കാറിന്റെ പാര്‍ക്കിങ്ങ് സ്ഥാനം. %1$s</string>
     <string name="rendering_attr_noPolygons_name">"ബഹുഭുജങ്ങള്‍(പോളിഗണ്‍ ) മറയ്ക്കുക "</string>
     <string name="favourites_search_desc">ഇഷ്ടമുള്ളവ തെരയുക</string>
@@ -1875,9 +1875,9 @@
     <string name="osm_live_payment_renews_quarterly">മൂന്നുമാസത്തിലൊരിക്കൽ ആവര്‍ത്തിക്കുക</string>
     <string name="osm_live_payment_renews_annually">"വര്‍ഷത്തിലൊരിക്കല്‍ ആവര്‍ത്തിക്കുക "</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">"വരിസംഖ്യ അടക്കാനുള്ള ഇടവേള തെരഞ്ഞെടുക്കുക: "</string>
+    <string name="osm_live_payment_header">വരിസംഖ്യ അടക്കാനുള്ള ഇടവേള തെരഞ്ഞെടുക്കുക:</string>
     <string name="osm_live_payment_contribute_descr">"വരുമാനം ഭാഗികമായി ഓപ്പണ്‍സ്ട്രീറ്റ്മാപ്പ്  അംശദാതാവിനാ‌ണ്."</string>
-    <string name="markers_remove_dialog_msg">"മാപ്പ് മാര്‍ക്കര്‍  \'%s\' നീക്കം ചെയ്യട്ടെ \? "</string>
+    <string name="markers_remove_dialog_msg">"മാപ്പ് മാര്‍ക്കര്‍  \'%s\' നീക്കം ചെയ്യട്ടെ\?"</string>
     <string name="edit_map_marker">മാപ്പ് മാര്‍ക്കര്‍ തിരുത്തുക</string>
     <string name="third_party_application">അന്യ ആപ്പ്ളിക്കേഷന്‍</string>
     <string name="search_street">"തെരുവ് തെരയുക "</string>
@@ -1922,7 +1922,7 @@
     <string name="get_osmand_live">"എല്ലാ പ്ളഗ്ഗിനുകളും, വിക്കിപ്പീഡിയ, വിക്കിവൊയേജ്, എല്ലാദിവസവും പുതുക്കുന്ന ഭൂപടങ്ങള്‍  നിയന്ത്രണങ്ങളില്ലാതെ ഡൗണ്ലോഡ്  ചെയ്യുക തുടങ്ങിയ   സവിശേഷകള്‍ക്ക്    ഓഎസ്എംആന്‍ഡ്  ലൈവ് നേടുക. "</string>
     <string name="unirs_render_descr">"ഡീഫാള്‍ട്ട് സ്ടൈല്‍ നവീകരിച്ച്  നടപ്പാതകളൂം സൈക്കിള്‍ പാതകളൂം എടുത്ത് കാണിച്ചിരിക്കുന്നു. മാപ്നിക് കളറൂകളാണ് ഉപയോഗിച്ചിരിക്കുന്നത്. "</string>
     <string name="shared_string_bookmark">ബുക്ക്മാര്‍ക്ക്</string>
-    <string name="hide_full_description">"പൂര്‍ണ്ണ വിവരണം  മറക്കു"</string>
+    <string name="hide_full_description">"പൂര്‍ണ്ണ വിവരണം  മറക്കുക "</string>
     <string name="show_full_description">"പൂര്‍ണ്ണവിവരങ്ങള്‍  കാണിക്കുക "</string>
     <string name="open_wikipedia_link_online">വിക്കിപ്പീഡിയ ലേഖനം ഓണ്‍ലൈനില്‍ തുറക്കുക</string>
     <string name="download_all">എല്ലാം ഡൗണ്‍ലോഡ് ചെയ്യുക</string>
@@ -1998,11 +1998,9 @@
     <string name="total_donations">"ആകെ സംഭാവനകള്‍ "</string>
     <string name="day_off_label">ഓഫ്</string>
     <string name="winter_and_ski_renderer">"വിന്റെര്‍ ആന്‍ഡ് സ്കീ "</string>
-    <string name="touring_view_renderer">ടൂറിങ്ങ് വ്യൂ
-\n</string>
+    <string name="touring_view_renderer">ടൂറിങ്ങ് വ്യൂ</string>
     <string name="nautical_renderer">നോട്ടിക്കല്‍</string>
-    <string name="copy_location_name">പോയിന്റ്/പിഓഐ യുടെ പേര് കോപ്പി ചെയ്യുക
-\n</string>
+    <string name="copy_location_name">"പോയിന്റ്/പിഓഐ യുടെ പേര് കോപ്പി ചെയ്യുക "</string>
     <string name="show_tunnels">"തുരങ്കങ്ങള്‍ "</string>
     <string name="download_wikipedia_description">%1$s വിക്കിപീഡിയ ലേഖനങ്ങള്‍ ഓഫ്ലൈനില്‍ വായിക്കാനായ് ഡൗണ്‍ലോഡ് ചെയ്യു</string>
     <string name="download_wikipedia_label">"വിക്കിപ്പീഡിയ വിവരങ്ങള്‍ ഡൗണ്‍ലോഡ്  ചെയ്യുക "</string>
@@ -2012,4 +2010,88 @@
     <string name="wiki_article_search_text">"സമാനമായ വിക്കിലേഖനം തെരയുന്നു "</string>
     <string name="wiki_article_not_found">"ലേഖനം   കണ്ടെത്താനായില്ല "</string>
     <string name="how_to_open_wiki_title">വിക്കിപ്പീഡിയ ലേഖനം എങ്ങനെ തുറക്കാം</string>
-    </resources>
+    <string name="osm_live_subscriptions">സബ്സ്ക്രിപ്ഷനുകള്‍</string>
+    <string name="powered_by_osmand">പവേര്‍ഡ് ബൈ ഓഎസ്എംആന്‍ഡ്</string>
+    <string name="release_3_1">"നാവിഗേഷന്‍: പ്രോഗ്രസ് ബാര്‍ ശരിയാക്കി, റൂട്ടിന്റെ തുടക്കവും ഒടുക്കവും വേഗത്തില്‍ തിരിച്ചിടാം 
+\n
+\nമാപ്പ് മാര്‍ക്കറുകള്‍: ഗ്രൂപ്പ് ഓണ്‍/ഓഫ് ശരിയാക്കി, മാര്‍ക്കറുകള്‍ മറയ്ക്കാനാവും 
+\n
+\nഓഎസ്എം തിരുത്തലുകള്‍: വഴികളും മറ്റു വസ്തുക്കളും ചേര്‍ക്കാം , കുറിപ്പുകളില്‍ കമന്റുകള്‍ ചേര്‍ക്കാം, തിരുത്തുകള്‍ക്ക് ബാക്ക് അപ്പ് 
+\n
+\nവിക്കിപ്പീഡിയ, വിക്കിവോയേജ്  എന്നിവയുടെ പ്രവര്‍ത്തനങ്ങള്‍ മെച്ചപ്പെടുത്തിയിരിക്കുന്നു , പുതുക്കിയ ഫയലുകള്‍ ലഭ്യമാണ് 
+\n
+\nകോന്റെക്സ്ട് മെനു: ട്രാന്സ്പോര്‍ട്ട് ഷീല്‍ഡ് കളര്‍ രാത്രിക്കാഴ്ചക്കായ് ശരിപ്പെടുത്തിയിരിക്കുന്നു, കൂടുതല്‍ മെനു സൈസ്  ചേര്‍ത്തിരിക്കുന്നു
+\n
+\nബോട്ട് നാവിഗേഷന്‍: മെച്ചപ്പെടുത്തിയിരിക്കുന്നു 
+\n
+\nമറ്റു ബഗ് ഫിക്സുകള്‍ 
+\n"</string>
+    <string name="off_road_render_descr">❢</string>
+    <string name="read_wikipedia_offline_description">"വിക്കിപീഡിയയും വിക്കിവൊയേജ് ലേഖനങ്ങള്‍ ഓഫ്ലൈനായ് വായിക്കാന്‍ ഓഎസ്എം ആന്‍ഡ് ലൈവ്  വരിക്കാരനാവുക."</string>
+    <string name="how_to_open_link">ലിങ്ക് എങ്ങനെ തുറക്കണം\?</string>
+    <string name="read_wikipedia_offline">വിക്കിപീഡിയ ഓഫ്ലൈനായ് വായിക്കുക</string>
+    <string name="purchase_cancelled_dialog_descr">എല്ല സവിശേഷതകളും ലഭ്യമാകാന്‍ സബ്സ്ക്റിപ്ഷന്‍ പുതുക്കുക:</string>
+    <string name="maps_you_need_descr">"നിങ്ങള്‍ ബുക്ക്മാര്‍ക്ക്  ചെയ്തിരിക്കുന്നതിനെ ആസ്പദമാക്കി  താഴെതന്നിരിക്കുന്ന മാപ്പുകള്‍ ഡൗണ്‍ലോഡ്  നിര്‍ദേശിച്ചിരിക്കുന്നു:     "</string>
+    <string name="paid_app">"പെയ്ഡ് ആപ്പ് "</string>
+    <string name="paid_plugin">"പെയ്ഡ് പ്ളഗ്ഗിന്‍ "</string>
+    <string name="unlimited_downloads">"പരിധിയില്ലാത്ത  ഡൌണ്‍ലോഡുകള്‍"</string>
+    <string name="wikipedia_offline">ഓഫ്‌ലൈന്‍ വിക്കിപീഡിയ</string>
+    <string name="shared_string_travel_book">യാത്റ പുസ്തകം</string>
+    <string name="delete_search_history">"തെരച്ചിലിന്റെ നാള്‍വഴി മായിച്ചു കളയുക "</string>
+    <string name="download_images">"പടങ്ങള്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക "</string>
+    <string name="download_maps_travel">"യാത്റാ സഹായികള്‍ "</string>
+    <string name="shared_string_wikivoyage">"വിക്കി വൊയേജ് "</string>
+    <string name="article_removed">"ലേഖനം നീക്കം ചെയ്തിരിക്കുന്നു "</string>
+    <string name="wikivoyage_search_hint">"തെരയുക : രാജ്യം, നഗരം , സംസ്ഥാനം "</string>
+    <string name="shared_string_read">"വായിക്കുക "</string>
+    <string name="saved_articles">ബുക്ക് മാര്‍ക്ക് ചെയ്തിട്ടുള്ള ലേഖനങ്ങള്‍</string>
+    <string name="shared_string_explore">"തെരയുക "</string>
+    <string name="shared_string_result">"ഫലം "</string>
+    <string name="shared_string_travel_guides">"യാത്റാ സഹായികള്‍  "</string>
+    <string name="shared_string_total">മൊത്തം</string>
+    <string name="enter_lon">"രേഖാംശം ചേര്‍ക്കുക "</string>
+    <string name="enter_lat">"അക്ഷാംശം ചേര്‍ക്കുക "</string>
+    <string name="enter_lat_and_lon">"അക്ഷാംശവും രേഖാംശവും ചേര്‍ക്കുക "</string>
+    <string name="dd_mm_ss_format">"ഡിഡി°എംഎം\' എസ്എസ്\'\' "</string>
+    <string name="dd_dddddd_format">ഡിഡി.ഡിഡിഡിഡിഡിഡി°</string>
+    <string name="dd_ddddd_format">ഡിഡി.ഡിഡിഡിഡിഡി°</string>
+    <string name="dd_mm_mmmm_format">"ഡിഡി°എംഎം.എംഎംഎംഎം\' "</string>
+    <string name="dd_mm_mmm_format">"ഡിഡി°എംഎം.എംഎംഎം\' "</string>
+    <string name="shared_string_current">ഇപ്പോഴത്തേത്</string>
+    <string name="last_intermediate_dest_description">"ഇടലക്ഷ്യസ്ഥാനം ചേര്‍ക്കുക "</string>
+    <string name="additional_actions">കൂടുതല്‍ പ്രവര്‍ത്തികള്‍</string>
+    <string name="one_tap_active">ഒറ്റ ഞെക്കില്‍ അക്ടീവാക്കുക</string>
+    <string name="notes_by_date">"കുറിപ്പുകള്‍ ദിനമനുസരിച്ച് "</string>
+    <string name="looking_for_tracks_with_waypoints">വേ പോയിന്റുകളുള്ള പാതകള്‍ തെരയുന്നു</string>
+    <string name="add_track_to_markers_descr">മാര്‍ക്കറാക്കാനുള്ള വേപോയിന്റുകളുള്ള പാത തിരഞ്ഞെടുക്കുക.</string>
+    <string name="add_favourites_group_to_markers_descr">"മാര്‍ക്കറിലേക്ക് ചേര്‍ക്കാനായുള്ള  ഫേവറൈറ്റുകളുടെ ഇനം തിരഞ്ഞെടുക്കുക."</string>
+    <string name="shared_string_gpx_waypoints">വേപോയിന്റ് ട്രാക്ക് ചെയ്യു</string>
+    <string name="favourites_group">"ഫേവറൈറ്റുകളുടെ ഇനം "</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">"മഞ്ഞിലുള്ള (ice) റോഡുകള്‍, കടത്തുകള്‍ (ford) എന്നിവ ഒഴിവാക്കുക "</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">"മഞ്ഞിലുള്ള (ice) റോഡുകളും  കടത്തുകളും (ford)  ഒഴിവാക്കുക "</string>
+    <string name="use_location">സ്ഥാനം ഉപയോഗിക്കു</string>
+    <string name="shared_string_gpx_tracks">"ജിപിഎക്സ്  പാതകള്‍"</string>
+    <string name="osmand_plus_extended_description_part8">"മാപ്പിന്റെ ഏകദേശ വ്യാപ്തിയും നിലവാരവും:
+\n. പടിഞ്ഞാറന്‍ യൂറോപ്പ് : ****
+\n .കിഴക്കന്‍ യൂറോപ്പ്  : ***
+\n.റഷ്യ: ***
+\n. വടക്കേ അമേരിക്ക: *** 
+\n. തെക്കേ അമേരിക്ക:**
+\n. ഏഷ്യ: **
+\n. ജപ്പാന്‍ &amp; കൊറിയ :***
+\n. ഗള്‍ഫ് : **
+\n. ആഫ്റിക്ക : **
+\n. അന്റാര്‍ട്ടിക്ക:*
+\nഅഫ്ഗാനിസ്ഥാന്‍ തുടങ്ങി സിംബാവേ വരെ ലോകത്തെ മിക്കവാറും എല്ലാ രാജ്യങ്ങളുടെ ഭൂപടങ്ങളും ഡൗണ്‍ലോഡ് ചെയ്യാനായ് ലഭ്യമാണ്, ഇന്ത്യ, അമേരിക്ക , ആസ്ട്രേലിയ, ഫ്രാന്‍സ്, റഷ്യ, ഇംഗ്ളണ്ട്  , സ്പെയ്ന്‍, ......   
+\n"</string>
+    <string name="recalculate_route_to_your_location">ഗതാഗത രീതി:</string>
+    <string name="show_lanes">ലേനുകള്‍</string>
+    <string name="int_continuosly">തുടരെയുളള</string>
+    <string name="screen_is_locked">ലോക്ക് ബട്ടണില്‍ ഞെക്കി തുറക്കുക</string>
+    <string name="osmand_parking_event">കാര്‍ പാര്‍ക്ക് ചെയ്ത സ്ഥാനത്ത് നിന്ന് കൂട്ടു</string>
+    <string name="osmand_parking_add_event">"കലണ്ടറില്‍ നോട്ടിഫിക്കേഷന്‍ ചേര്‍ക്കുക "</string>
+    <string name="osmand_parking_am">ഏഎം</string>
+    <string name="gpxup_identifiable">"തിരിച്ചറിയാവുന്ന "</string>
+    <string name="gpxup_trackable">"പിന്തുടരാവുന്ന "</string>
+    <string name="route_roundabout">"റൗണ്ടാന: %1$d പുറത്തേക്കുള്ള വഴി എടുത്ത് പോവുക "</string>
+</resources>

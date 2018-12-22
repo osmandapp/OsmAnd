@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
 <string name="poi_palaeontological_site">محوطه دیرینه شناسی</string>
@@ -671,7 +671,7 @@
 
 	<string name="poi_fuel_type">نوع جایگاه سوخت</string>
 	<string name="poi_fire_hydrant_type">نوع شیر آتش نشانی</string>
-	<string name="poi_highway_crossing_type">‫روش عبور از بزرگراه</string>
+	<string name="poi_highway_crossing_type">نوع</string>
 	<string name="poi_tactile_paving">کفپوش برجسته</string>
 	<string name="poi_automated">خودکار</string>
 	<string name="poi_parking_type">نوع پارکینگ</string>
@@ -1302,4 +1302,27 @@
 	<string name="poi_material_aluminium">جنس: آلومینیوم</string>
 
 	<string name="poi_industrial_factory">نوع: کارخانه</string>
-	</resources>
+    <string name="poi_crossing_traffic_signals">با چراغ ایست</string>
+    <string name="poi_crossing_uncontrolled">کنترل‌نشده</string>
+    <string name="poi_crossing_unmarked">بدون نشانه‌گذاری</string>
+    <string name="poi_crossing_activation_automatic">فعال‌شدن گذرگاه: خودکار</string>
+    <string name="poi_crossing_activation_local">فعال‌شدن گذرگاه: محلی</string>
+    <string name="poi_crossing_activation_remote">فعال‌شدن گذرگاه: از دور</string>
+    <string name="poi_crossing_barrier_no">مانع در گذرگاه: خیر</string>
+    <string name="poi_crossing_barrier_yes">مانع در گذرگاه</string>
+    <string name="poi_crossing_barrier_full">مانع در گذرگاه: کامل</string>
+    <string name="poi_crossing_barrier_half">مانع در گذرگاه: نیم‌مانع</string>
+    <string name="poi_crossing_barrier_double_half">مانع در گذرگاه: دو تا نیم‌مانع</string>
+    <string name="poi_crossing_bell_yes">زنگ هشدار گذرگاه</string>
+    <string name="poi_crossing_bell_no">زنگ هشدار گذرگاه: خیر</string>
+    <string name="poi_crossing_light_yes">چراغ هشدار گذرگاه</string>
+    <string name="poi_crossing_light_no">چراغ هشدار گذرگاه: خیر</string>
+    <string name="poi_crossing_on_demand_yes">بازشدن گذرگاه با درخواست گذرنده</string>
+    <string name="poi_crossing_on_demand_no">بازشدن گذرگاه با درخواست گذرنده: خیر</string>
+    <string name="poi_crossing_saltire_yes">تابلوی تقاطع با راه‌آهن</string>
+    <string name="poi_crossing_saltire_no">تابلوی تقاطع با راه‌آهن: خیر</string>
+    <string name="poi_crossing_supervision_yes">نظارت بر گذرگاه</string>
+    <string name="poi_crossing_supervision_no">نظارت بر گذرگاه: خیر</string>
+    <string name="poi_crossing_supervision_attendant">نظارت بر گذرگاه: متصدی</string>
+    <string name="poi_crossing_supervision_camera">نظارت بر گذرگاه: دوربین</string>
+</resources>
