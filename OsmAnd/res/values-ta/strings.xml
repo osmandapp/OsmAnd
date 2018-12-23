@@ -21,4 +21,8 @@
     <string name="keep_passed_markers">கடந்த அடையாளக்குறியை வரைபடத்தில் குறிக்கவும்</string>
     <string name="more_transport_on_stop_hint">இந்த நிறுத்தத்தில் அதிக போக்குவரத்து உள்ளது.</string>
     <string name="ask_for_location_permission">மேலும் தொடர இருப்பிடத்திற்கான Osm அனுமதியை கொடுக்கவும்.</string>
+    <string name="thank_you_for_feedback">கருத்துக்கு நன்றி</string>
+    <string name="send_search_query">தேடல் வினவலை அனுப்ப</string>
+    <string name="coord_input_edit_point">திருத்தும் நிலை</string>
+    <string name="quick_action_edit_actions">செயல்களை திருத்த</string>
 </resources>
