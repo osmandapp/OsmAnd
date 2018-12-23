@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources/>
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="osm_live_subscriptions">சந்தாக்கள்</string>
+    <string name="powered_by_osmand">osm மூலம் இயக்கப்படுகிறது</string>
+    <string name="osm_live_plan_pricing">திட்டம் &amp; விலை</string>
+    <string name="osm_live_payment_monthly_title">"மாத தவணை "</string>
+    <string name="osm_live_payment_3_months_title">3 மாதங்களுக்கு ஒருமுறை செலுத்துங்கள்</string>
+    <string name="osm_live_payment_annual_title">ஒரு வருடத்திற்கு ஒரு முறை செலுத்துங்கள்</string>
+    <string name="osm_live_payment_month_cost_descr">1$ / மாதம்</string>
+    <string name="osm_live_payment_current_subscription">உங்கள் தற்போதைய சந்தா</string>
+    <string name="osm_live_payment_renews_monthly">மாதாந்திர புதுப்பிப்பு</string>
+    <string name="osm_live_payment_renews_quarterly">காலாண்டு புதுப்பிப்பு</string>
+    <string name="osm_live_payment_renews_annually">வருடாந்திர புதுப்பிப்பு</string>
+    <string name="osm_live_payment_header">"உங்களுக்கு உரிய  கட்டண காலத்தை தேர்ந்தெடுக்கவும்:"</string>
+    <string name="osm_live_payment_contribute_descr">வருவாயின் ஒரு பகுதி OpenStreetMap பங்களிப்பாளர்களுக்கு செல்கிறது.</string>
+    <string name="edit_map_marker">வரைபட குறியீட்டை திருத்த</string>
+    <string name="third_party_application">மூன்றாம்-தரப்பு மென்பொருள்</string>
+    <string name="search_street">தெருவை தேட</string>
+    <string name="start_search_from_city">முதலில் நகரத்தை தேர்வு செய்</string>
+    <string name="shared_string_restore">மீட்டெடு</string>
+    <string name="keep_passed_markers_descr">பிடித்தவர்களின் குழுவாக அல்லது ஜி.பீ.எக்ஸ் வழிப்பாதைகளின் வரைபடத்தில் இருக்கும் கடவுச்சொல் என குறியிடப்படும் குறிப்பான்கள் சேர்க்கப்பட்டுள்ளன. குழு செயலில் இல்லை என்றால், குறிப்பான்கள் வரைபடத்தில் இருந்து மறைந்துவிடும்.</string>
+    <string name="keep_passed_markers">கடந்த அடையாளக்குறியை வரைபடத்தில் குறிக்கவும்</string>
+    <string name="more_transport_on_stop_hint">இந்த நிறுத்தத்தில் அதிக போக்குவரத்து உள்ளது.</string>
+    <string name="ask_for_location_permission">மேலும் தொடர இருப்பிடத்திற்கான Osm அனுமதியை கொடுக்கவும்.</string>
+</resources>
