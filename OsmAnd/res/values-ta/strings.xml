@@ -6,7 +6,6 @@
     <string name="osm_live_payment_monthly_title">"மாத தவணை "</string>
     <string name="osm_live_payment_3_months_title">3 மாதங்களுக்கு ஒருமுறை செலுத்துங்கள்</string>
     <string name="osm_live_payment_annual_title">ஒரு வருடத்திற்கு ஒரு முறை செலுத்துங்கள்</string>
-    <string name="osm_live_payment_month_cost_descr">1$ / மாதம்</string>
     <string name="osm_live_payment_current_subscription">உங்கள் தற்போதைய சந்தா</string>
     <string name="osm_live_payment_renews_monthly">மாதாந்திர புதுப்பிப்பு</string>
     <string name="osm_live_payment_renews_quarterly">காலாண்டு புதுப்பிப்பு</string>
