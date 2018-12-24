@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -466,11 +466,11 @@
   <string name="osmand_rastermaps_plugin_description">"Com este plugin, pode ter acesso a muitos tipos de mapas on-line (também chamada de quadrícula ou ladrilho), de quadrículas pré-definidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais, como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.\n\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd, ou como uma sobreposição, ou sub-camada para outro mapa base (como o mapa off-line normal de OsmAnd). Para fazer qualquer sub-camada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\'.
 \n\nQuadrículas de mapas podem ser obtidas diretamente através de fontes on-line ou podem ser preparados para uso off-line (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
   <string name="osmand_background_plugin_description">Mostra as configurações para ativar o rastreamento em segundo plano e a navegação, despertando periodicamente o dispositivo GPS (com a tela desligada).</string>
-  <string name="osmand_accessibility_description">Mostrar configurações de características especiais de acessibilidade.</string>
+  <string name="osmand_accessibility_description">Este plugin torna os recursos de acessibilidade do dispositivo disponíveis diretamente no OsmAnd. Ele facilita, p. ex., o ajuste da velocidade de fala para vozes TTS, configurando a navegação na tela do teclado direcional, usando um trackball para controle de zoom, ou feedback texto-para-fala, por exemplo, para anunciar automaticamente a sua posição.</string>
   
   
   
-  <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
+  <string name="osmand_development_plugin_description">Este plugin exibe configurações para recursos de desenvolvimento e depuração como testar ou simular roteamento, o desempenho de renderização da tela ou solicitação de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário geral.</string>
   <string name="plugins_screen">Gerenciar plugins</string>
   
   <string name="prefs_plugins_descr">Plugins activam as configurações avançadas e funcionalidades adicionais</string>
@@ -841,7 +841,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Local de estacionamento</string>
-  <string name="osmand_parking_plugin_description">Este plugin permite armazenar a localização do seu estacionamento, e quanto tempo resta de parquímetro (se houver limite de tempo).\nTanto a localização como o tempo são visíveis no \'Dashboard\', bem como no widget do mapa. Um lembrete de alarme pode ser adicionado ao calendário Android.</string>
+  <string name="osmand_parking_plugin_description">Este plugin grava onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se houver um limite de tempo).
+\nA localização e o tempo ficam visíveis no painel de controle do OsmAnd e em um widget na tela do mapa. Um alarme pode ser adicionado ao calendário Android como lembrete.</string>
   <string name="osmand_parking_plugin_name">Local de estacionamento</string>
   <string name="context_menu_item_add_parking_point">Marcar como local de estacionamento</string>
   <string name="context_menu_item_delete_parking_point">Apagar um marcador de estacionamento</string>
@@ -1531,13 +1532,13 @@
     <string name="rendering_value_germanRoadAtlas_name">Atlas de vias alemãs</string>
 	<string name="traffic_warning_railways">Cruzamento de ferrovia</string>
 	<string name="traffic_warning_pedestrian">Cruzamento de faixa de pedestre</string>
-	<string name="show_railway_warnings">Exibir cruzamento de ferrovia</string>
-	<string name="show_pedestrian_warnings">Exibir faixas de pedestre</string>
+	<string name="show_railway_warnings">Passagens de nível</string>
+	<string name="show_pedestrian_warnings">Faixas de pedestre</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas de vias americanas</string>
     <string name="routing_attr_no_new_routing_name">Evitar regras de roteamento da v1.9</string>
     <string name="remove_the_tag">REMOVA A TAG</string>
-    <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na versão 1.9</string>
-    <string name="dash_download_msg_none">Deseja baixar mapas offline?</string>
+    <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9.</string>
+    <string name="dash_download_msg_none">Baixar mapas offline\?</string>
     <string name="dash_download_msg">Você baixou %1$s mapas</string>
     <string name="dash_download_new_one">Baixe um novo mapa</string>
     <string name="map_locale">Idioma do mapa</string>
@@ -1545,7 +1546,7 @@
     <string name="download_tab_downloads">Todos os Downloads</string>
     <string name="download_tab_updates">Atualizações</string>
     <string name="download_tab_local">Local</string>
-	<string name="no_internet_connection">Download não é possível, por favor, verifique sua conexão com a internet.</string>
+	<string name="no_internet_connection">Não é possível baixar, por favor, verifique sua conexão com a internet.</string>
     <string name="everything_up_to_date">Todos os arquivos foram atualizados</string>
     <string name="use_opengl_render">Use o renderizador OpenGL</string>
     <string name="home_button">Início</string>
@@ -1604,8 +1605,8 @@
     <string name="shared_string_go">Ir</string>
 	<string name="routing_settings_2">Configurações de navegação</string>
     <string name="general_settings_2">"Configurações gerais  "</string>
-	<string name="version_settings_descr">Baixando visões noturnas</string>
-    <string name="proxy_pref_descr">Informe um proxy de comunicação com a internet</string>
+	<string name="version_settings_descr">Baixar compilações noturnas.</string>
+    <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="dash_download_manage">Gerenciador</string>
     <string name="rendering_category_transport">Transporte</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rotas de bonde e trem</string>
@@ -1665,7 +1666,7 @@
 	<string name="plugin_touringview_name">Ver mapa de turismo</string>
 	<string name="plugin_nautical_name">Ver mapa náutico</string>
 	<string name="plugin_ski_name">Ver mapa de esqui</string>
-	<string name="rename_failed">Falha ao renomear.</string>
+	<string name="rename_failed">Renomeação falhou.</string>
 	<string name="back_to_map">Voltar ao mapa</string>
 	<string name="share_note">Compartilhar anotação</string>
     <string name="location_on_map">Posição:\n Lat %1$s\n Lon %2$s</string>
@@ -1673,17 +1674,17 @@
 	<string name="online_map">Mapa on-line</string>
 	<string name="roads_only">Apenas vias</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de esqui</string>
-	<string name="free">"Livre %1$s "</string>
+	<string name="free">Livre %1$s</string>
 	<string name="device_memory">Memória do aparelho</string>
     <string name="world_ski_missing">Para exibir mapas de esqui, o mapa offline especial precisa ser baixado</string>
     <string name="nautical_maps_missing">Para exibir mapas náuticos, o mapa offline especial precisa ser baixado</string>
 	<string name="edit_group">Editar grupo</string>
-    <string name="parking_place">Estacionamento</string>
+    <string name="parking_place">Vaga de estacionamento</string>
     <string name="version_settings">Compilações</string>
     <string name="navigation_over_track">Iniciar navegação através do trajeto?</string>
 	<string name="rendering_attr_transportStops_name">Parada de transporte</string>
     
-    <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (pode não funcionar em alguns aparelhos)</string>
+    <string name="use_opengl_render_descr">Usar a renderização OpenGL acelerada por hardware (pode usar mais bateria ou não funcionar em dispositivos muito antigos).</string>
     <string name="wake_on_voice">Acender a tela</string>
     <string name="configure_map">Configurar mapa</string>
     <string name="shared_string_waypoints">ponto de rota</string>
@@ -2736,9 +2737,9 @@
     <string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="shared_string_gpx_files">Ficheiro s GPX</string>
     <string name="plugin_nautical_descr">"Este complemento enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos. 
-\n
+\n 
 \nUm complemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.). 
-\n
+\n 
 \nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
     <string name="plugin_ski_descr">Este plugin para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve. 
 \n
