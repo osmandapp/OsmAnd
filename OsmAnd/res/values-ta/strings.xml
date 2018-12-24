@@ -34,5 +34,4 @@
     <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: <b>1\"%1$s\"</b>2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.<br/>3<br/>"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல் 
 \n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."<br/>5</string>
     <string name="shared_string_world">உலகம்</string>
-    <string name="point_deleted">புள்ளி% 1 $ s நீக்கப்பட்டது</string>
 </resources>
