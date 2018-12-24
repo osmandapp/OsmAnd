@@ -72,4 +72,14 @@
     <string name="monthly_map_updates">வரைபட புதுப்பிப்புகள்: <b>1 எல்லா மாதமும்</b>2</string>
     <string name="daily_map_updates">வரைபட புதுப்பிப்புகள்:<b>1 எல்லா
 \nமணிநேரமும் </b>2</string>
+    <string name="shared_string_result">முடிவு</string>
+    <string name="use_two_digits_longitude">இரட்டை இலக்கு தீர்க்கரேகையை பயன்படுத்துக</string>
+    <string name="shared_string_travel_guides">பயண வழிகாட்டிகள்</string>
+    <string name="waypoints_removed_from_map_markers">வரைபட குறியீட்டிலிருந்து நிறுத்தங்கள் அகற்றப்பட்டன</string>
+    <string name="nothing_found_in_radius">எதையும் கண்டுபிடிக்க முடியவில்லை:</string>
+    <string name="shared_string_total">மொத்தம்</string>
+    <string name="clear_all_intermediates">அனைத்து இடைநிலை புள்ளிகளையும் அழிக்கவும்</string>
+    <string name="group_deleted">குழு நீக்கப்பட்டது</string>
+    <string name="rendering_attr_whiteWaterSports_name">வெண்ணீர் விளையாட்டுகள்</string>
+    <string name="distance_farthest">"தொலைவு: முதலாவதாக வெகுதொலைவு "</string>
 </resources>
