@@ -148,4 +148,9 @@
     <string name="additional_actions">கூடுதல் செயல்கள்</string>
     <string name="modify_the_search_query">தேடல் வினவலை மாற்றுக</string>
     <string name="shared_string_actions">செயல்கள்</string>
+    <string name="marker_show_distance_descr">வரைபட திரையில் வரைபட குறீட்டில் காட்டும் இடத்திற்க்கு செல்லும் தூரம் மற்ற்ம் வழிதடத்தை சுட்டுவது எப்படி என்னும் அமைப்பை தேர்ந்தேடு:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">நோக்குநிலையிலன் தொடக்கநிலையை வரைக</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">நோக்குநிலை மாற்றியின் வேகத்தை \"அசைவின் திசையில்\" இருந்து \"திசைகாட்டியின் திசைக்கு\" மாற்று,</string>
+    <string name="all_markers_moved_to_history">அத்தனை வரைபட குறியீடுகளும் வரலாற்றுக்கு நகர்த்தபட்டது</string>
+    <string name="marker_moved_to_history">வரைபட குறியீடுகளும் வரலாற்றுக்கு நகர்த்தபட்டது</string>
 </resources>
