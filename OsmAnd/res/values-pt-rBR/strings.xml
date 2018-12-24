@@ -179,7 +179,7 @@
 <string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 <string name="osmand_distance_planning_plugin_description">Este plugin fornece um widget da tela de mapa que permite a criação de caminhos tocando no mapa ou usando ou modificando arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
 <string name="shared_string_accessibility">Acessibilidade</string>
-<string name="osmand_accessibility_description">Este plugin disponibiliza recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade para vozes TTS, configuração da navegação direcional na tela, uso do trackball para controle de zoom, ou retorno de texto para fala, por exemplo para anunciar automaticamente sua posição.</string>
+<string name="osmand_accessibility_description">Este plugin disponibiliza os recursos de acessibilidade do dispositivo diretamente no OsmAnd. Ele facilita, p. ex., o ajuste da velocidade de fala para vozes TTS, configurando a navegação na tela do teclado direcional, usando um trackball para controle de zoom, ou feedback texto-para-fala, por exemplo, para anunciar automaticamente a sua posição.</string>
 <string name="osm_settings">Edição no OSM</string>
 <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
 <string name="rename_failed">Renomeação falhou.</string>
@@ -209,15 +209,15 @@
 <string name="srtm_plugin_description">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e qualquer interessado na estrutura de relevo da paisagem. (Por favor, note que as curvas de nível e/ou dados de relevo são downloads adicionais separados disponíveis depois de ativar o plugin.)
 \n 
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
-<string name="osmand_parking_plugin_description">O plugin de posição de estacionamento grava onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado). 
-\nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário Android como lembrete.</string>
+<string name="osmand_parking_plugin_description">Este plugin grava onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se houver um limite de tempo).
+\nA localização e o tempo ficam visíveis no painel de controle do OsmAnd e em um widget na tela do mapa. Um alarme pode ser adicionado ao calendário Android como lembrete.</string>
 <string name="osm_editing_plugin_description">Este plugin do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abrir ou comentar Notas OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
 <string name="osmand_development_plugin_description">Este plugin exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização de tela ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
-<string name="proxy_pref_descr">Configurar proxy</string>
+<string name="proxy_pref_descr">Especifique um servidor proxy.</string>
 <string name="settings_privacy">Privacidade</string>
 <string name="shared_string_gpx_points">Pontos</string>
 <string name="navigation_over_track">Iniciar a navegação pela trilha?</string>
-<string name="speak_pedestrian">Travessias de pedestre</string>
+<string name="speak_pedestrian">Faixas de pedestre</string>
 <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
 <string name="avoid_roads_msg">Obter uma rota alternativa, selecionando quais vias evitar</string>
 <string name="rendering_value__name">Predefinido</string>
@@ -227,7 +227,7 @@
 <string name="rendering_value_highContrastRoads_name">Vias em alto contraste</string>
 <string name="traffic_warning_railways">Cruzamento de ferrovia</string>
 <string name="traffic_warning_pedestrian">Travessia de pedestres</string>
-<string name="show_railway_warnings">Cruzamento de ferrovia</string>
+<string name="show_railway_warnings">Passagens de nível</string>
 <string name="rendering_value_americanRoadAtlas_name">Atlas de vias americanas</string>
 <string name="dash_download_msg_none">Baixar mapas offline\?</string>
 <string name="dash_download_msg">Você baixou %1$s mapa(s)</string>
@@ -239,10 +239,10 @@
 <string name="download_tab_downloads">Todos downloads</string>
 <string name="download_tab_updates">Atualizações</string>
 <string name="download_tab_local">Local</string>
-<string name="no_internet_connection">Não foi possível baixar, por favor, verifique sua conexão com a Internet.</string>
+<string name="no_internet_connection">Não é possível baixar. Favor verificar sua conexão com a internet.</string>
 <string name="everything_up_to_date">Todos os arquivos foram atualizados</string>
 <string name="use_opengl_render">Usar renderização OpenGL</string>
-<string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (talvez não funcione em alguns aparelhos)</string>
+<string name="use_opengl_render_descr">Usar a renderização OpenGL acelerada por hardware (pode usar mais bateria ou não funcionar em dispositivos muito antigos).</string>
 <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
 
 
@@ -317,11 +317,11 @@
 
 
 
-<string name="background_service_is_enabled_question">O serviço OsmAnd ainda está rodando em segundo plano. Você quer pará-lo, também?</string>
+<string name="background_service_is_enabled_question">O serviço OsmAnd ainda rodando em segundo plano. Deseja pará-lo também\?</string>
 <string name="sleep_mode_stop_dialog">Parar o modo em segundo plano do GPS?</string>
 <string name="stop_navigation_service">Parar</string>
 <string name="confirm_every_run">Sempre perguntar</string>
-<string name="save_global_track_interval_descr">Escolher o intervalo geral de registro para a gravação de trilha (habilitado através do widget de registro de GPX no mapa)</string>
+<string name="save_global_track_interval_descr">Escolha o intervalo de registo para a gravação geral da pista (ativado via widget de registo GPX no mapa).</string>
 <string name="save_global_track_interval">Intervalo de registro geral</string>
 <string name="background_service_int">Intervalo de ativação do GPS</string>
 <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
@@ -2525,7 +2525,7 @@ Pôr do Sol: %2$s</string>
     <string name="full_report">Relatório completo</string>
     <string name="osm_user_stat">Edições %1$s, classificação %2$s, total de edições %3$s</string>
     <string name="osm_recipient_stat">Edições %1$s, soma de %2$s mBTC</string>
-    <string name="osm_live_email_desc">Necessários para fornecer-lhe informações sobre as contribuições.</string>
+    <string name="osm_live_email_desc">Necessário para fornecer-lhe informações sobre as contribuições.</string>
     <string name="osm_live_enter_user_name">Por favor, digite o nome público</string>
     <string name="osm_live_thanks">Obrigado por apoiar o OsmAnd!
 \nPara ativar todos os novos recursos você precisa reiniciar o OsmAnd.</string>
