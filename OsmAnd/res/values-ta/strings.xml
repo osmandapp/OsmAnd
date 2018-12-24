@@ -35,10 +35,10 @@
 \n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."<br/>5</string>
     <string name="shared_string_world">உலகம்</string>
 
-    <string name="point_deleted">புள்ளி% 1 $ s நீக்கப்பட்டது</string>
+    <string name="point_deleted">புள்ளி %1$s நீக்கப்பட்டது</string>
     <string name="coord_input_add_point">புள்ளியே சேர்க்க</string>
     <string name="coord_input_save_as_track">பாதை எனச் சேமி</string>
-    <string name="coord_input_save_as_track_descr">% 1 $ s புள்ளிகளை நீங்கள் சேர்த்துள்ளீர்கள். ஒரு கோப்பு பெயரை தரவும் பின் \"சேமி\" என்பதை அழுத்தவும்.</string>
+    <string name="coord_input_save_as_track_descr">%1$s புள்ளிகளை நீங்கள் சேர்த்துள்ளீர்கள். ஒரு கோப்பு பெயரை தரவும் பின் \"சேமி\" என்பதை அழுத்தவும்.</string>
     <string name="error_notification_desc">Support@osmand.net க்கு இந்த அறிவிப்பின் ஸ்கிரீன் ஷாட்டை அனுப்பவும்</string>
     <string name="get_osmand_live">வரம்பற்ற பதிவிறக்கங்கள், அனைத்து பணம் மற்றும் இலவச கூடுதல், விக்கிபீடியா, விக்கிவோயேஜ், தினசரி வரைபடத்தை மேம்படுத்தல்கள் மற்றும் பல அம்சங்கள் திறக்க பெற OsmAndLive பெறவும்:</string>
     <string name="update_is_available">மேம்படுத்தல் உள்ளது</string>
