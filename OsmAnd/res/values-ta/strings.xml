@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="osm_live_subscriptions">சந்தாக்கள்</string>
+<resources><string name="osm_live_subscriptions">சந்தாக்கள்
+\n</string>
     <string name="powered_by_osmand">osm மூலம் இயக்கப்படுகிறது</string>
     <string name="osm_live_plan_pricing">திட்டம் &amp; விலை</string>
     <string name="osm_live_payment_monthly_title">"மாத தவணை "</string>
@@ -25,4 +26,14 @@
     <string name="send_search_query">தேடல் வினவலை அனுப்ப</string>
     <string name="coord_input_edit_point">திருத்தும் நிலை</string>
     <string name="quick_action_edit_actions">செயல்களை திருத்த</string>
+    <string name="poi_cannot_be_found">முனை அல்லது வழி கண்டுபிடிக்க முடியவில்லை.</string>
+    <string name="search_no_results_feedback">தேடல் முடிவு இல்லையா\?
+\nஎங்களுக்கு கருத்து தெரிவிக்கவும்
+\n</string>
+    <string name="commiting_way">உறுதி செய்வதற்கான வழி…</string>
+    <string name="increase_search_radius_to">தேடுதல் வட்டத்தை %1$s ஆக கூட்டவும்</string>
+    <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: <b>1\"%1$s\"</b>2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.<br/>3<br/>"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல் 
+\n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."<br/>5</string>
+    <string name="shared_string_world">உலகம்</string>
+    <string name="point_deleted">புள்ளி% 1 $ s நீக்கப்பட்டது</string>
 </resources>
