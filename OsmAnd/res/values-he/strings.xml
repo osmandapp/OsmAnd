@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
@@ -1272,7 +1272,7 @@
     <string name="mapillary_menu_edit_text_hint">הקלדת שם משתמש</string>
     <string name="mapillary_menu_descr_username">הצגת תמונות שנוספו רק על ידי</string>
     <string name="mapillary_menu_title_username">שם משתמש</string>
-    <string name="mapillary_menu_filter_description">ניתן לסנן תמונות לפי השולח או לפי תאריך. פעיל רק במבט מקרוב.</string>
+    <string name="mapillary_menu_filter_description">ניתן לסנן תמונות לפי השולח, לפי תאריך או לפי סוג. פעיל רק במבט מקרוב.</string>
     <string name="map_widget_ruler_control">מד זווית</string>
     <string name="shared_string_permissions">הרשאות</string>
     <string name="import_gpx_failed_descr">ל־OsmAnd אין אפשרות לייבא את הקובץ. נא לוודא של־OsmAnd יש הרשאה לקרוא קבצים מהמיקום הזה.</string>
@@ -3125,4 +3125,6 @@
     <string name="osm_live_payment_header">נא לבחור את מחזור התשלום המועדף עליך:</string>
     <string name="osm_live_payment_contribute_descr">חלק מההכנסות נתרמות לטובת מתנדבי OpenStreetMap.</string>
     <string name="powered_by_osmand">מופעל על ידי OsmAnd</string>
-    </resources>
+    <string name="osm_live_subscriptions">מינויים</string>
+    <string name="mapillary_menu_title_pano">הצגת תמונות 360° בלבד</string>
+</resources>
