@@ -201,6 +201,10 @@ public class DiscountHelper {
 						if (showChristmasDialog) {
 							mapActivity.showXMasDialog();
 						} else {
+							InAppPurchaseHelper purchaseHelper = mapActivity.getPurchaseHelper();
+							if (purchaseHelper != null) {
+								purchaseHelper.requestInventory();
+							}
 							showDiscountBanner(mapActivity, data);
 						}
 					}
