@@ -179,7 +179,7 @@
 <string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 <string name="osmand_distance_planning_plugin_description">Este plugin fornece um widget da tela de mapa que permite a criação de caminhos tocando no mapa ou usando ou modificando arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
 <string name="shared_string_accessibility">Acessibilidade</string>
-<string name="osmand_accessibility_description">Este plugin disponibiliza os recursos de acessibilidade do dispositivo diretamente no OsmAnd. Ele facilita, p. ex., o ajuste da velocidade de fala para vozes TTS, configurando a navegação na tela do teclado direcional, usando um trackball para controle de zoom, ou feedback texto-para-fala, por exemplo, para anunciar automaticamente a sua posição.</string>
+<string name="osmand_accessibility_description">Este plugin disponibiliza os recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, ajustando a velocidade de fala para voz TTS, configurando a navegação por botões direcionais na tela, o uso de trackball para controle de zoom, ou retorno de texto-para-fala para, por exemplo, anunciar automaticamente a sua posição.</string>
 <string name="osm_settings">Edição no OSM</string>
 <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
 <string name="rename_failed">Renomeação falhou.</string>
@@ -317,7 +317,7 @@
 
 
 
-<string name="background_service_is_enabled_question">O serviço OsmAnd ainda rodando em segundo plano. Deseja pará-lo também\?</string>
+<string name="background_service_is_enabled_question">O processo de segundo plano do OsmAnd ainda está rodando. Deseja pará-lo também\?</string>
 <string name="sleep_mode_stop_dialog">Parar o modo em segundo plano do GPS?</string>
 <string name="stop_navigation_service">Parar</string>
 <string name="confirm_every_run">Sempre perguntar</string>
