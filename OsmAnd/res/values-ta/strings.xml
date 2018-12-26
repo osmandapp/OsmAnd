@@ -378,7 +378,7 @@
 \n</string>
     <string name="rendering_attr_surfaceIntegrity_name">சாலை மேற்பரப்பு ஒருமைப்பாடு</string>
     <string name="search_hint">நகரம், முகவரி, POI பெயர்</string>
-    <string name="translit_name_if_miss">% 1 $ s பெயர் காணவில்லை என்றால், குறிக்கவும்</string>
+    <string name="translit_name_if_miss">%1$s பெயர் காணவில்லை என்றால், குறிக்கவும்</string>
     <string name="translit_names">பெயரிடும் பெயர்கள்</string>
     <string name="edit_filter">திருத்து வகைகள்</string>
     <string name="subcategories">துணை வகைகள்</string>
@@ -396,8 +396,8 @@
     <string name="donation_to_osm_desc">OpenStreetMap இல் மாற்றங்களைச் சமர்ப்பிக்கும் ஓஎஸ்எம் பயனர்களுக்கு உங்கள் நன்கொடைக்கான ஒரு பகுதி அனுப்பப்பட்டுள்ளது. சந்தாவின் செலவு அதேதான்.</string>
     <string name="osm_live_subscription_desc">சந்தா உலகளாவிய அனைத்து வரைபடங்களுக்கான மணிநேர, தினசரி, வாராந்திர மேம்படுத்தல்கள் மற்றும் வரம்பற்ற பதிவிறக்கங்களை இயக்குகிறது.</string>
     <string name="get_it">அதைப் பெறுங்கள்</string>
-    <string name="get_for">% 1 $ s ஐப் பெறுக</string>
-    <string name="get_for_month">% 1 $ s மாதத்திற்குப் பெறுக</string>
+    <string name="get_for">%1$s ஐப் பெறுக</string>
+    <string name="get_for_month">%1$s மாதத்திற்குப் பெறுக</string>
     <string name="osm_live_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்களைப் பெறுக, மேலும் ஒரு மாதத்திற்கு ஒருமுறை விட மேம்படுத்துங்கள்: வாராந்திர, தினசரி அல்லது மணிநேரம்.</string>
     <string name="osmand_plus_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்கள், புதுப்பிப்புகள் மற்றும் விக்கிபீடியா சொருகி.</string>
     <string name="si_mi_meters">மைல்கள் / மீட்டர்</string>
@@ -414,7 +414,7 @@
 \n</string>
     <string name="search_location">இடம் தேடுகிறது …</string>
     <string name="storage_free_space">வெற்று இடம்</string>
-    <string name="storage_place_description">ஓஸ்மண்டின் தரவு சேமிப்பிடம் (வரைபடங்கள், ஜிபிஎக்ஸ் கோப்புகள், முதலியன):% 1 $ s.</string>
+    <string name="storage_place_description">ஓஸ்மண்டின் தரவு சேமிப்பிடம் (வரைபடங்கள், ஜிபிஎக்ஸ் கோப்புகள், முதலியன):%1$s.</string>
     <string name="give_permission">அனுமதி அனுமதிப்பத்திரம்</string>
     <string name="allow_access_location">இருப்பிட அணுகலை அனுமதி</string>
     <string name="first_usage_greeting">இணைய இணைப்பு இல்லாமல் திசைகளைப் பெறவும் புதிய இடங்களை கண்டறியவும்</string>
@@ -423,7 +423,7 @@
     <string name="clear_tile_data">அனைத்து ஓலைகளையும் அழி</string>
     <string name="routing_attr_short_way_name">எரிபொருள்-திறனுள்ள வழி</string>
     <string name="routing_attr_short_way_description">எரிபொருள்-திறனுள்ள வழி (வழக்கமாக குறுகியது) பயன்படுத்தவும்.</string>
-    <string name="replace_favorite_confirmation">% 1 $ s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா\?
+    <string name="replace_favorite_confirmation">%1$s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா\?
 \n</string>
     <string name="rendering_attr_hideOverground_name">நிலப்பரப்பு பொருட்கள்</string>
     <string name="shared_string_change">மாற்றம்</string>
