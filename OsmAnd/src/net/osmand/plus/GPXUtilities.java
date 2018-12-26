@@ -75,8 +75,9 @@ public class GPXUtilities {
 
 		@ColorInt
 		public int getColor(@ColorInt int defColor) {
+			String clrValue = null;
 			if (extensions != null) {
-				String clrValue = extensions.get("color");
+				clrValue = extensions.get("color");
 				if (clrValue == null) {
 					clrValue = extensions.get("colour");
 				}
