@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="last_update_from_telegram">עדכון אחרון מטלגרם</string>
 	<string name="enter_another_device_name">נא לבחור שם שלא השתמשת בו עדיין</string>
 	<string name="device_added_successfully">%1$s נוסף.</string>
@@ -43,4 +43,13 @@
 	<string name="add_device">הוספת מכשיר</string>
 	<string name="share_location_as">שיתוף מיקום בתור</string>
 	<string name="live_now_description">אנשי קשר וקבוצות שמשתפים אתך מיקום.</string>
-	</resources>
+    <string name="battery_optimization_description">כיבוי מיטוב סוללה עבור טלגרם OsmAnd כדי שהשירות לא יכבה ברקע.</string>
+    <string name="logout_from_osmand_telegram_descr">לצאת מטלגרם OsmAnd כדי לכבות את האפשרות לשתף מיקום או לצפות במיקום של אחרים\?</string>
+    <string name="logout_from_osmand_telegram">לצאת מטלגרם OsmAnd\?</string>
+    <string name="shared_string_name">שם</string>
+    <string name="by_distance">לפי מרחק</string>
+    <string name="by_name">לפי שם</string>
+    <string name="by_group">לפי קבוצה</string>
+    <string name="shared_string_sort">מיון</string>
+    <string name="shared_string_sort_by">מיון לפי</string>
+</resources>
