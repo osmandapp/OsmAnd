@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
@@ -2199,14 +2199,14 @@
     <string name="osm_live_not_active">失效的</string>
     <string name="osm_live_enter_email">請輸入有效的電子郵件地址</string>
     <string name="osm_live_enter_user_name">請輸入公開名稱</string>
-    <string name="osm_live_subscription_settings">認捐設定</string>
-    <string name="osm_live_subscription">OsmAnd Live 會費</string>
+    <string name="osm_live_subscription_settings">訂閱設定</string>
+    <string name="osm_live_subscription">Osmand Live 訂閱</string>
     <string name="osm_live_thanks">感謝您對 OsmAnd 的支持！
 \n要啟動所有新功能，您需要重開 OsmAnd。</string>
     <string name="osm_live_region_desc">您捐助的一部分會發送到 OSM，使用者將送交更改到該地區的地圖。</string>
-    <string name="osm_live_ask_for_purchase">請先購買 OsmAnd Live 的訂閱</string>
+    <string name="osm_live_ask_for_purchase">請先購買 OsmAnd Live 訂閱</string>
 
-    <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。 部分收入又回到了 OSM 社群和支付每個 OSM 的貢獻。 假如您喜愛 OsmAnd 和 OSM 並且想要支持和得到他們的支持，這是個完美方式的作法。</string>
+    <string name="osm_live_header">此訂閱能夠為世界各地所有的地圖每小時更新一次。 部分收入又回到了 OSM 社群和支付每個 OSM 的貢獻。 假如您喜愛 OsmAnd 和 OSM 並且想要支持和得到他們的支持，這是個完美方式的作法。</string>
     
     <string name="recalculate_route">重新計算路線</string>
     <string name="shared_string_topbar">頂端列</string>

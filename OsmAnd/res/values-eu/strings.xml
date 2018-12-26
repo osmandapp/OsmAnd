@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
@@ -690,14 +690,14 @@ Biltegiratzean {1} MB erabiliko dira.
   
   
   <string name="local_index_installed">Bertsio lokala</string>
-  <string name="local_index_items_backuped">%2$d-tik %1$d elementu desgaitu dira.</string>
+  <string name="local_index_items_backuped">%2$d-tik %1$d elementu desaktibatu dira.</string>
   <string name="local_index_items_deleted">%2$d-tik %1$d elementu ezabatu dira.</string>
-  <string name="local_index_items_restored">%2$d-tik %1$d elementu gaitu dira.</string>
+  <string name="local_index_items_restored">%2$d-tik %1$d elementu aktibatu dira.</string>
   <string name="local_index_no_items_to_do">Elementurik ez %1$s-rentzat</string>
   <string name="local_index_action_do">%2$s elementu %1$sko dituzu. Jarraitu?</string>
   <string name="local_index_descr_title">Kudeatu mapa-fitxategiak.</string>
-  <string name="local_index_mi_restore">Gaitu</string>
-  <string name="local_index_mi_backup">Ezgaitu</string>
+  <string name="local_index_mi_restore">Aktibatu</string>
+  <string name="local_index_mi_backup">Desaktibatu</string>
   
   
   <string name="shared_string_download">Deskargatu</string>
@@ -705,7 +705,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="local_index_address_data">Helbide datuak</string>
   <string name="local_index_transport_data">Garraio publikoaren datuak</string>
   <string name="local_index_map_data">Mapa datuak</string>
-  <string name="local_indexes_cat_backup">Esgaitua</string>
+  <string name="local_indexes_cat_backup">Desaktibatuta</string>
   <string name="local_indexes_cat_tts">Ahots abisuak (TTS)</string>
   <string name="local_indexes_cat_voice">Ahots abisuak (grabatua)</string>
   
@@ -1535,7 +1535,7 @@ Lorratza %2$s</string>
     <string name="select_map_markers">Hautatu mapa-markatzaileak</string>
     <string name="shared_string_reverse_order">Alderantzikatu ordena</string>
     <string name="show_map_markers_description">Aktibatu mapa-markatzaileen ezaugarria.</string>
-    <string name="clear_active_markers_q">Ezabatu mapa-markatzaile guztiak?</string>
+    <string name="clear_active_markers_q">Ezabatu mapa-markatzaile aktibo guztiak\?</string>
     <string name="clear_markers_history_q">Garbitu mapa-markatzaileen historiala?</string>
     <string name="active_markers">Markatzaile aktiboak</string>
     <string name="map_markers">Mapa-markatzaileak</string>
