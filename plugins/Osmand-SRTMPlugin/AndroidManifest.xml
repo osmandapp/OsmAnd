@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.osmand.srtmPlugin.paid"
-    android:versionCode="9"
-    android:versionName="1.0" >
+    package="net.osmand.srtmPlugin.paid">
 
-    <uses-sdk android:targetSdkVersion="16" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/> 
 	<supports-screens  android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" 
 	    android:xlargeScreens="true" android:anyDensity="true" />
