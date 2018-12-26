@@ -1376,4 +1376,24 @@
     <string name="shared_string_off">நிறுத்து</string>
     <string name="shared_string_previous">முன்னே</string>
     <string name="shared_string_next">அடுத்து</string>
+    <string name="images_cache">புகைப்படம் மறைவிடம்</string>
+    <string name="one_tap_active">\'ஒருத்ததொடு\' செயல்பாடு</string>
+    <string name="appearance_on_the_map">வரைபடத்தில் தோன்றுவது</string>
+    <string name="add_track_to_markers_descr">குறிப்பான்களுக்கு அதன் வழிகாட்டுதல்களை சேர்க்க ஒரு பாதையைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="add_favourites_group_to_markers_descr">குறிப்பான்களை சேர்க்க ஒரு பிடித்தவை வகையைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="shared_string_gpx_waypoints">வழிப்பாதைகளைக் கண்காணியுங்கள்</string>
+    <string name="favourites_group">பிடித்தவை வகை</string>
+    <string name="add_group">ஒரு குழுவைச் சேர்க்கவும்</string>
+    <string name="add_group_descr">பிடித்தவை அல்லது GPX வழிப்பாதைகளிலிருந்து குழுக்களை இறக்குமதி செய்.</string>
+    <string name="empty_state_markers_active">வரைபட குறியீடை உருவாக்க!</string>
+    <string name="empty_state_markers_active_desc">"நீண்ட அல்லது குறுகிய தட்டளுக்கு  \' இடங்கள்\' , பின்னர் குறியீடு கொடி பொத்தானை தட்டவும்."</string>
+    <string name="empty_state_markers_groups">குழுக்கள் இருக்குமதி செய்ய</string>
+    <string name="empty_state_markers_groups_desc">குறிக்கோளிகளாக பிடித்த குழுக்கள் அல்லது பாதை புள்ளிகளை இறக்குமதி செய்யுங்கள்.</string>
+    <string name="empty_state_markers_history_desc">இந்த திரையில் தோன்றியவாறு குறிக்கப்பட்ட குறிப்பான்கள் மாறும்.</string>
+    <string name="shared_string_two">இரண்டு</string>
+    <string name="shared_string_one">ஒன்று</string>
+    <string name="show_guide_line_descr">உங்கள் நிலைப்பாட்டிலிருந்து செய்யலில் உள்ள குறியீடுளுக்கு திசை வழியைக் காண்பி.</string>
+    <string name="show_arrows_descr">"செய்யளில் உள்ள அடையாளங்களுக்கான திசையை குறிக்கும்  ஒன்று அல்லது இரண்டு அம்புகளை காட்டு."</string>
+    <string name="distance_indication_descr">செய்யலிள் உள்ள குறியீடுகளை எவ்வாறு காட்ட வேண்டும் என்பதைத் தேர்வுசெய்யவும்.</string>
+    <string name="active_markers_descr">காண்பிப்பதற்காக எத்தனை திசையில் குறிகாட்டிகள் தேவை என்பதைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
