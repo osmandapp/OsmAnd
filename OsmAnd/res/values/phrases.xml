@@ -109,6 +109,7 @@
 	<string name="poi_checkpoint_type">Checkpoint type</string>
 	<string name="poi_bulk_purchase">Bulk purchase</string>
 	<string name="poi_substation_type">Type</string>
+	<string name="poi_books_type">Books</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3886,5 +3887,10 @@
 	<string name="poi_laboratory">Medical laboratory</string>
 
 	<string name="poi_blood_donation">Blood donation</string>
+	<string name="poi_books_comic">Comic</string>
+	<string name="poi_books_antiquarian">Antiquarian</string>
+	<string name="poi_books_religion">Religion</string>
+	<string name="poi_books_academic">Academic</string>
+	<string name="poi_books_children">Children</string>
 
 </resources>
