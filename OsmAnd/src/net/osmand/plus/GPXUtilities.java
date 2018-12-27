@@ -78,9 +78,19 @@ public class GPXUtilities {
 
 		@ColorInt
 		public int getColor(@ColorInt int defColor) {
-			if (extensions != null && extensions.containsKey("color")) {
+			String clrValue = null;
+			if (extensions != null) {
+				clrValue = extensions.get("color");
+				if (clrValue == null) {
+					clrValue = extensions.get("colour");
+				}
+				if (clrValue == null) {
+					clrValue = extensions.get("displaycolor");
+				}
+			}
+			if (clrValue != null && clrValue.length() > 0) {
 				try {
-					return Color.parseColor(extensions.get("color").toUpperCase());
+					return Color.parseColor(clrValue.toUpperCase());
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				}
@@ -110,6 +120,7 @@ public class GPXUtilities {
 		public int time;
 		public float elevation;
 	}
+
 	public static class Speed {
 		public float distance;
 		public int time;
@@ -1506,7 +1517,7 @@ public class GPXUtilities {
 					if (extensionReadMode && parse instanceof GPXExtensions) {
 						String value = readText(parser, tag);
 						if (value != null) {
-							((GPXExtensions) parse).getExtensionsToWrite().put(tag, value);
+							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
 							if (tag.equals("speed") && parse instanceof WptPt) {
 								try {
 									((WptPt) parse).speed = Float.parseFloat(value);

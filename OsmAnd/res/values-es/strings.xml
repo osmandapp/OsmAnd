@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -87,7 +87,7 @@
     <string name="pref_raster_map">Ajustes de la fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
     <string name="delete_confirmation_msg">¿Borrar «%1$s»?</string>
-    <string name="city_type_suburb">Barrio</string>
+    <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Pueblo</string>
     <string name="city_type_town">Ciudad pequeña</string>
@@ -1135,7 +1135,7 @@
     <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin pavimentar</string>
     <string name="routing_attr_avoid_unpaved_description">Evita los caminos sin pavimentar.</string>
     <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
-    <string name="routing_attr_avoid_ferries_description">Evita usar ferries</string>
+    <string name="routing_attr_avoid_ferries_description">Evita usar ferris</string>
     <string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evita usar las autopistas</string>
     <string name="routing_attr_weight_name">Límite de peso</string>
@@ -2124,7 +2124,7 @@
     <string name="lang_kn">Canarés</string>
     <string name="share_history_subject">compartido vía OsmAnd</string>
     
-    <string name="coords_search">Búsqueda de coordenadas</string>
+    <string name="coords_search">Buscar coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="back_to_search">Volver a la búsqueda</string>
     <string name="confirmation_to_delete_history_items">¿Quitar elementos marcados del «Historial»?</string>
@@ -2469,8 +2469,8 @@
     <string name="type_city_town">Escribe la ciudad o pueblo</string>
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
-    <string name="select_city">Elegir ciudad o pueblo</string>
-    <string name="select_postcode">Elegir código postal</string>
+    <string name="select_city">Elegir la ciudad o pueblo</string>
+    <string name="select_postcode">Elegir el código postal</string>
     <string name="shared_string_paused">Pausado</string>
     <string name="favorite_group_name">Nombre del grupo</string>
     <string name="change_color">Cambiar color</string>
@@ -3018,13 +3018,13 @@
     <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
     <string name="osm_live_payment_discount_descr">¡Ahorra %1$s!</string>
-	<string name="osm_live_payment_current_subscription">Tu suscripción actual</string>
-    <string name="osm_live_payment_renews_monthly">Se renueva mensualmente</string>
-    <string name="osm_live_payment_renews_quarterly">Se renueva trimestralmente</string>
-    <string name="osm_live_payment_renews_annually">Se renueva anualmente</string>
+	<string name="osm_live_payment_current_subscription">Suscripción actual</string>
+    <string name="osm_live_payment_renews_monthly">Renovar mensualmente</string>
+    <string name="osm_live_payment_renews_quarterly">Renovar trimestralmente</string>
+    <string name="osm_live_payment_renews_annually">Renovar anualmente</string>
     <string name="default_price_currency_format">1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Seleccione la frecuencia de pago:</string>
-    <string name="osm_live_payment_contribute_descr">Parte de los ingresos van a los contribuyentes de OpenStreetMap.</string>
+    <string name="osm_live_payment_header">Elige la frecuencia de pago:</string>
+    <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
     <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
     <string name="osm_live_subscriptions">Suscripciones</string>
     <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
