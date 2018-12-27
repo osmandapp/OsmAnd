@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="intermediate_waypoint">Промежуточная точка: %1$s</string>
+    <string name="waypoints">Путевые точки: %1$s</string>
     <string name="intermediate_destinations">Промежуточные точки: %1$s</string>
     <string name="arrive_at_time">Прибытие в %1$s</string>
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>

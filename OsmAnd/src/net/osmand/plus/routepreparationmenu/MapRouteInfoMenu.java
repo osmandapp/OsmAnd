@@ -204,7 +204,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 			show();
 			if (selectFromMapForIntermediate && getTargets().checkPointToNavigateShort()) {
-				mapActivity.getMapActions().openIntermediatePointsDialog();
+				WaypointsFragment fragment = new WaypointsFragment();
+				mapActivity.getSupportFragmentManager()
+						.beginTransaction()
+						.replace(R.id.routeMenuContainer, fragment, WaypointsFragment.TAG)
+						.addToBackStack(WaypointsFragment.TAG)
+						.commitAllowingStateLoss();
 			}
 			return true;
 		}
@@ -305,7 +310,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	public void updateRouteCalculationProgress(int progress) {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null) {
+		if (fragmentRef != null && fragmentRef.get().isVisible()) {
 			fragmentRef.get().updateRouteCalculationProgress(progress);
 			fragmentRef.get().updateControlButtons();
 		}
@@ -313,7 +318,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	public void routeCalculationFinished() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null) {
+		if (fragmentRef != null && fragmentRef.get().isVisible()) {
 			fragmentRef.get().hideRouteCalculationProgressBar();
 			fragmentRef.get().updateControlButtons();
 			fragmentRef.get().updateInfo();
@@ -889,8 +894,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			((TextView) parentView.findViewById(R.id.ViaView)).setText(via);
 			((TextView) parentView.findViewById(R.id.ViaSubView)).setText(app.getString(R.string.intermediate_destinations, getTargets().getIntermediatePoints().size()));
 		}
+		FrameLayout viaButton = (FrameLayout) parentView.findViewById(R.id.via_button);
 
-		viaLayout.setOnClickListener(new View.OnClickListener() {
+		viaButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (getTargets().checkPointToNavigateShort()) {
+					WaypointsFragment fragment = new WaypointsFragment();
+					mapActivity.getSupportFragmentManager()
+							.beginTransaction()
+							.replace(R.id.routeMenuContainer, fragment, WaypointsFragment.TAG)
+							.addToBackStack(WaypointsFragment.TAG)
+							.commitAllowingStateLoss();
+				}
+			}
+		});
+
+		ImageView viaIcon = (ImageView) parentView.findViewById(R.id.viaIcon);
+		viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
+		viaIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (getTargets().checkPointToNavigateShort()) {
@@ -898,11 +920,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				}
 			}
 		});
-
-		ImageView viaIcon = (ImageView) parentView.findViewById(R.id.viaIcon);
-		viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
-
-		FrameLayout viaButton = (FrameLayout) parentView.findViewById(R.id.via_button);
 		LinearLayout viaButtonContainer = (LinearLayout) parentView.findViewById(R.id.via_button_container);
 
 		AndroidUtils.setBackground(app, viaButton, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
@@ -920,14 +937,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			normal = AndroidUtils.createPressedStateListDrawable(normal, active);
 		}
 		viaButtonImageView.setImageDrawable(normal);
-		viaButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (getTargets().checkPointToNavigateShort()) {
-					mapActivity.getMapActions().openIntermediatePointsDialog();
-				}
-			}
-		});
 	}
 
 	private void updateToSpinner(final View parentView) {

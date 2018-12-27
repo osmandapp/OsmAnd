@@ -459,6 +459,18 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
+	public void clearAllPoints(boolean updateRoute) {
+		cancelStartPointAddressRequest();
+		cancelAllIntermediatePointsAddressRequests();
+		cancelTargetPointAddressRequest();
+		settings.clearPointToStart();
+		settings.clearIntermediatePoints();
+		settings.clearPointToNavigate();
+		intermediatePoints.clear();
+		readFromSettings();
+		updateRouteAndRefresh(updateRoute);
+	}
+
 	public void reorderAllTargetPoints(List<TargetPoint> point, boolean updateRoute) {
 		cancelTargetPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();
