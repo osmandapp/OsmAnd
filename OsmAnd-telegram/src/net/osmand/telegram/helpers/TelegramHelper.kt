@@ -770,6 +770,7 @@ class TelegramHelper private constructor() {
 				TdApi.Messages.CONSTRUCTOR -> {
 					val messages = (obj as TdApi.Messages).messages
 					if (messages.isNotEmpty()) {
+						log.debug("getActiveLiveLocationMessages: $messages")
 						outgoingMessagesListeners.forEach {
 							it.onUpdateMessages(messages.asList())
 						}
@@ -1650,6 +1651,7 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateMessageSendSucceeded.CONSTRUCTOR -> {
 					val udateMessageSendSucceeded = obj as TdApi.UpdateMessageSendSucceeded
 					val message = udateMessageSendSucceeded.message
+					log.debug("UpdateMessageSendSucceeded: $message")
 					outgoingMessagesListeners.forEach {
 						it.onUpdateMessages(listOf(message))
 					}

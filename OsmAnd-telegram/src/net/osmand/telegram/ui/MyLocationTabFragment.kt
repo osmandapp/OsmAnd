@@ -457,9 +457,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private fun updateSharingStatus() {
 		if (sharingMode) {
-			if (settings.sharingStatusChanges.isEmpty()) {
-				settings.updateSharingStatusHistory()
-			}
+			settings.updateSharingStatusHistory()
 			val sharingStatus = settings.sharingStatusChanges.last()
 			sharingStatusTitle.text = sharingStatus.getTitle(app)
 			sharingStatusIcon.setImageDrawable(app.uiUtils.getIcon(sharingStatus.statusType.iconId, sharingStatus.statusType.iconColorRes))
