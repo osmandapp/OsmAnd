@@ -4,7 +4,9 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransportStop extends MapObject {
 	private int[] referencesToRoutes = null;
@@ -13,7 +15,7 @@ public class TransportStop extends MapObject {
 	public int x31;
 	public int y31;
 	private List<TransportStopExit> exits;
-	
+	private HashMap<String,String> names;
 
 	public TransportStop(){
 	}

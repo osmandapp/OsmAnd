@@ -4,7 +4,9 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.TransportRouteSchedule;
@@ -529,6 +531,7 @@ public class BinaryMapTransportReaderAdapter {
 		TransportStop dataObject = new TransportStop();
 		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
 		dataObject.setFileOffset(shift);
+		List<String> names = null;
 		while(true){
 			int t = codedIS.readTag();
 			tag = WireFormat.getTagFieldNumber(t);
@@ -555,7 +558,16 @@ public class BinaryMapTransportReaderAdapter {
 				} else {
 					skipUnknownField(t);
 				}
-				
+				break;
+			case OsmandOdb.TransportStop.ADDITIONALNAMEPAIRS_FIELD_NUMBER :
+				if (req.stringTable != null) {
+					int tgid = codedIS.readUInt32();
+					names = new ArrayList<String>();
+					names.add(regStr(req.stringTable));
+				}
+				else {
+					skipUnknownField(t);
+				}
 				break;
 			case OsmandOdb.TransportStop.ID_FIELD_NUMBER :
 				dataObject.setId(codedIS.readSInt64());
@@ -594,20 +606,6 @@ public class BinaryMapTransportReaderAdapter {
 						dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
 					}
 					return dataObject;
-				case OsmandOdb.TransportStopExit.NAME_FIELD_NUMBER:
-					if (req.stringTable != null) {
-						dataObject.setName(regStr(req.stringTable));
-					} else {
-						skipUnknownField(t);
-					}
-					break;
-				case OsmandOdb.TransportStopExit.NAME_EN_FIELD_NUMBER:
-					if (req.stringTable != null) {
-						dataObject.setEnName(regStr(req.stringTable));
-					} else {
-						skipUnknownField(t);
-					}
-					break;
 				case OsmandOdb.TransportStopExit.REF_FIELD_NUMBER:
 					if (req.stringTable != null) {
 						dataObject.setRef(regStr(req.stringTable));
