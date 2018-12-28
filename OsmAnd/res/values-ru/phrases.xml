@@ -3869,4 +3869,7 @@
 	<string name="poi_books_religion">Религиозные</string>
 	<string name="poi_books_academic">Академические</string>
 	<string name="poi_books_children">Детские</string>
+
+	<string name="poi_atoll">Атолл</string>
+
 </resources>
