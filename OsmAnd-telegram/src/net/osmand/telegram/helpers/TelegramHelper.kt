@@ -840,6 +840,7 @@ class TelegramHelper private constructor() {
 			val content = TdApi.InputMessageLocation(location, livePeriod)
 			val msgId = shareInfo.currentMapMessageId
 			val timeAfterLastSendMessage = ((System.currentTimeMillis() / 1000) - shareInfo.lastSendMapMessageTime)
+			log.debug("sendLiveLocationImpl - $msgId pendingMapMessage ${shareInfo.pendingMapMessage}")
 			if (msgId != -1L) {
 				if (shareInfo.shouldDeletePreviousMapMessage) {
 					recreateLiveLocationMessage(shareInfo, content)
@@ -854,6 +855,35 @@ class TelegramHelper private constructor() {
 				}
 			} else if (!shareInfo.pendingMapMessage || shareInfo.pendingMapMessage && timeAfterLastSendMessage > SEND_NEW_MESSAGE_INTERVAL_SEC) {
 				sendNewLiveLocationMessage(shareInfo, content)
+			}
+		}
+	}
+
+	fun sendLiveLocationText(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, location: Location) {
+		chatsShareInfo.forEach { (chatId, shareInfo) ->
+			if (shareInfo.getChatLiveMessageExpireTime() <= 0) {
+				return@forEach
+			}
+			val msgId = shareInfo.currentTextMessageId
+			if (msgId == -1L) {
+				shareInfo.updateTextMessageId = 1
+			}
+			val content = getTextMessageContent(shareInfo.updateTextMessageId, location)
+			val timeAfterLastSendMessage = ((System.currentTimeMillis() / 1000) - shareInfo.lastSendTextMessageTime)
+			log.debug("sendLiveLocationText - $msgId pendingMapMessage ${shareInfo.pendingTextMessage}")
+			if (msgId != -1L) {
+				if (shareInfo.shouldDeletePreviousTextMessage) {
+					recreateLiveLocationMessage(shareInfo, content)
+					shareInfo.shouldDeletePreviousTextMessage = false
+				} else {
+					client?.send(TdApi.EditMessageText(chatId, msgId, null, content)) { obj ->
+						handleTextLocationMessageUpdate(obj, shareInfo)
+					}
+				}
+			} else if (!shareInfo.pendingTextMessage || shareInfo.pendingTextMessage && timeAfterLastSendMessage > SEND_NEW_MESSAGE_INTERVAL_SEC) {
+				client?.send(TdApi.SendMessage(chatId, 0, false, false, null, content)) { obj ->
+					handleTextLocationMessageUpdate(obj, shareInfo)
+				}
 			}
 		}
 	}
@@ -934,34 +964,6 @@ class TelegramHelper private constructor() {
 							}
 						}
 					}
-				}
-			}
-		}
-	}
-
-	fun sendLiveLocationText(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, location: Location) {
-		chatsShareInfo.forEach { (chatId, shareInfo) ->
-			if (shareInfo.getChatLiveMessageExpireTime() <= 0) {
-				return@forEach
-			}
-			val msgId = shareInfo.currentTextMessageId
-			if (msgId == -1L) {
-				shareInfo.updateTextMessageId = 1
-			}
-			val content = getTextMessageContent(shareInfo.updateTextMessageId, location)
-			val timeAfterLastSendMessage = ((System.currentTimeMillis() / 1000) - shareInfo.lastSendTextMessageTime)
-			if (msgId != -1L) {
-				if (shareInfo.shouldDeletePreviousTextMessage) {
-					recreateLiveLocationMessage(shareInfo, content)
-					shareInfo.shouldDeletePreviousTextMessage = false
-				} else {
-					client?.send(TdApi.EditMessageText(chatId, msgId, null, content)) { obj ->
-						handleTextLocationMessageUpdate(obj, shareInfo)
-					}
-				}
-			} else if (!shareInfo.pendingTextMessage || shareInfo.pendingTextMessage && timeAfterLastSendMessage > SEND_NEW_MESSAGE_INTERVAL_SEC) {
-				client?.send(TdApi.SendMessage(chatId, 0, false, false, null, content)) { obj ->
-					handleTextLocationMessageUpdate(obj, shareInfo)
 				}
 			}
 		}
