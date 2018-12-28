@@ -463,7 +463,7 @@
 <string name="poi_arts_centre">مرکز هنر</string>
 <string name="poi_cinema">سینما</string>
 <string name="poi_casino">کازینو</string>
-<string name="poi_community_centre">مراکز محلی</string>
+<string name="poi_community_centre">مرکز اجتماع</string>
 <string name="poi_social_centre">مرکز سوسیال</string>
 <string name="poi_theatre">تئاتر</string>
 <string name="poi_theatre_genre_circus">سیرک</string>
@@ -492,7 +492,7 @@
 <string name="poi_drinking_water">آب آشامیدنی</string>
 <string name="poi_barbecue">اجاق کباب پزی</string>
 
-<string name="poi_craft_agricultural_engines">ادوات کشاورزی</string>
+<string name="poi_craft_agricultural_engines">ماشین آلات و ادوات کشاورزی</string>
 <string name="poi_craft_basket_maker">سبد خرید</string>
 <string name="poi_craft_beekeeper">زنبورداری</string>
 <string name="poi_craft_blacksmith">آهنگر</string>
@@ -1325,4 +1325,7 @@
     <string name="poi_crossing_supervision_no">نظارت بر گذرگاه: خیر</string>
     <string name="poi_crossing_supervision_attendant">نظارت بر گذرگاه: متصدی</string>
     <string name="poi_crossing_supervision_camera">نظارت بر گذرگاه: دوربین</string>
+    <string name="poi_trade_agricultural_supplies">اقلام کشاورزی</string>
+    <string name="poi_meadow_agricultural">نوع: کشاورزی</string>
+    <string name="poi_agrarian">فروشگاه کشاورزی</string>
 </resources>
