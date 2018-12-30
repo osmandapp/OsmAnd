@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
@@ -985,7 +985,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
     <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
     <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online útvonalrögzítés) használatához engedélyed az Útvonalrögzítés bővítményt</string>
-    <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal számítása nagyobb távolságokra</string>
+    <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal kiszámítása nagyobb távolságokra</string>
     <string name="rendering_attr_roadColors_description">Útszínséma kiválasztása:</string>
     <string name="rendering_attr_roadColors_name">Útszín sémája</string>
     <string name="close_changeset">Módosításcsomag lezárása</string>
@@ -1003,7 +1003,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="incomplete_locale">hiányos</string>
     <string name="no_buildings_found">Nem található épület.</string>
     <string name="search_villages_and_postcodes">További települések/irányítószám keresése</string>
-    <string name="route_descr_lat_lon">szél. %1$.3f, hossz. %2$.3f</string>
+    <string name="route_descr_lat_lon">%1$.3f szélesség, %2$.3f hosszúság</string>
     
 
 
@@ -2517,7 +2517,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_gpx_tracks">Nyomvonalak</string>
     <string name="routing_attr_driving_style_name">Vezetési stílus</string>
     
-    <string name="route_altitude">Útvonal magassága</string>
+    <string name="route_altitude">Útvonal magassági profilja</string>
     <string name="altitude_descent">Lejtő</string>
     <string name="altitude_ascent">Emelkedő</string>
     <string name="altitude_range">Magasságtartomány</string>
@@ -2623,7 +2623,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="animate_my_location">Saját pozícióm animálása</string>
     <string name="animate_my_location_desc">A saját pozíció mozgásának animálása navigáció közben.</string>
     <string name="shared_string_overview">Áttekintés</string>
-    <string name="route_is_too_long_v2">Kérlek adj hozzá köztes célpontokat, ha 10 percen belül nem kapsz eredményt erre a hosszú útvonalra.</string>
+    <string name="route_is_too_long_v2">Ha 10 percen belül nem kapsz eredményt erre a hosszú útvonalra, kérlek adj hozzá köztes célpontokat.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhetsz az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz.
 \n
 \nÉlvezd a hangalapú és vizuális navigációs szolgáltatást, tekints meg érdekes helyeket (POI-kat), hozz létre és kezelj GPX nyomvonalakat, szintvonalak és magasságinformációk használatával (egy plugin segítségével), válassz az autós, kerékpáros és gyalogos üzemmód közül, szerkessz OSM-et és használd ki a számos egyéb lehetőséget.</string>
