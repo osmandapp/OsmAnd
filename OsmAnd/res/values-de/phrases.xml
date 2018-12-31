@@ -3910,4 +3910,13 @@
 	<string name="poi_substation_inspection_gauge">Kontrollmanometer</string>
     <string name="poi_craft_confectionery">Süßwarenproduktion</string>
     <string name="poi_shop_wholesale">Großhandel</string>
+    <string name="poi_books_type">Bücher</string>
+    <string name="poi_laboratory">Medizinisches Labor</string>
+    <string name="poi_blood_donation">Blutspende</string>
+    <string name="poi_books_comic">Comics</string>
+    <string name="poi_books_antiquarian">Antiquarische</string>
+    <string name="poi_books_religion">Religiöse</string>
+    <string name="poi_books_academic">Akademische</string>
+    <string name="poi_books_children">Kinder</string>
+    <string name="poi_atoll">Atoll</string>
 </resources>
