@@ -1327,7 +1327,7 @@
     <string name="gpx_info_avg_altitude">Altitud media: %1$s</string>
     <string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
     <string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
-    <string name="map_widget_plain_time">Tiempo actual</string>
+    <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Punto de referencia</string>
     <string name="select_destination_and_intermediate_points">Marque los destinos</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
