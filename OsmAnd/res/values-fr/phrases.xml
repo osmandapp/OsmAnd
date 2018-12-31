@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="poi_10pin">Bowling américain</string>
 	<string name="poi_9pin">Bowling à 9 quilles</string>
@@ -3506,7 +3506,7 @@
 
 	<string name="poi_bulk_purchase">Vente en vrac</string>
 	<string name="poi_bulk_purchase_yes">Oui</string>
-	<string name="poi_bulk_purchase_only">Vente en vrac : uniquement</string>
+	<string name="poi_bulk_purchase_only">Uniquement</string>
 
 	<string name="poi_atm">Distributeur de billets</string>
 	<string name="poi_substation_type">Type</string>
@@ -3515,4 +3515,25 @@
 	<string name="poi_nuclear_explosion_type_space">Type d\'explosion : espace (au delà de 80 km d\'altitude)</string>
 	<string name="poi_nuclear_explosion_type_underwater">Type d\'explosion : sous-marine</string>
 	<string name="poi_nuclear_explosion_type_underground_tunnel">Type d\'explosion : sous terre, tunnel</string>
-	</resources>
+    <string name="poi_books_type">Livres</string>
+    <string name="poi_motorcycle_type_standard">Standard</string>
+    <string name="poi_direction_nne">Direction : nord nord-est</string>
+    <string name="poi_direction_ene">Direction : est nord-est</string>
+    <string name="poi_direction_ese">Direction : est sud-est</string>
+    <string name="poi_direction_sse">Direction : sud sud-est</string>
+    <string name="poi_direction_ssw">Direction : sud sud-ouest</string>
+    <string name="poi_direction_wsw">Direction : ouest sud-ouest</string>
+    <string name="poi_direction_wnw">Direction : ouest nord-ouest</string>
+    <string name="poi_direction_nnw">Direction : nord nord-ouest</string>
+    <string name="poi_direction_all">Direction : toutes</string>
+    <string name="poi_government_legislative">Institution législative</string>
+    <string name="poi_hill">Coline</string>
+    <string name="poi_shoe_repair">Cordonnier</string>
+    <string name="poi_substation_industrial">Industriel</string>
+    <string name="poi_substation_valve">Valve</string>
+    <string name="poi_shop_wholesale">Magasin de vente en gros</string>
+    <string name="poi_laboratory">Laboratoire médical</string>
+    <string name="poi_blood_donation">Don du sang</string>
+    <string name="poi_books_academic">Académique</string>
+    <string name="poi_books_children">Enfants</string>
+</resources>
