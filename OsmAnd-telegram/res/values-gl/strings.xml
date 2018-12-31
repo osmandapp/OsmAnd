@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="background_work_description">Muda-los axustes de optimización da batería, para estabilizares a ubicación compartillada.</string>
 	<string name="background_work">Funcionamento no segundo plano</string>
 	<string name="sharing_in_background">Compartillar no segundo plano</string>
@@ -155,7 +155,7 @@
 	<string name="yard">id</string>
 	<string name="foot">pés</string>
 	<string name="mile">mi</string>
-	<string name="km">quilómetros</string>
+	<string name="km">km</string>
 	<string name="m">m</string>
 	<string name="min_mile">min/mi</string>
 	<string name="min_km">min/km</string>

@@ -2203,7 +2203,7 @@
     <string name="osm_live_subscription">Osmand Live 訂閱</string>
     <string name="osm_live_thanks">感謝您對 OsmAnd 的支持！
 \n要啟動所有新功能，您需要重開 OsmAnd。</string>
-    <string name="osm_live_region_desc">您捐助的一部分會發送到 OSM，使用者將送交更改到該地區的地圖。</string>
+    <string name="osm_live_region_desc">您的部分捐款會發送給在該地區提交地圖更改的 OSM 使用者。</string>
     <string name="osm_live_ask_for_purchase">請先購買 OsmAnd Live 訂閱</string>
 
     <string name="osm_live_header">此訂閱能夠為世界各地所有的地圖每小時更新一次。 部分收入又回到了 OSM 社群和支付每個 OSM 的貢獻。 假如您喜愛 OsmAnd 和 OSM 並且想要支持和得到他們的支持，這是個完美方式的作法。</string>
@@ -2366,7 +2366,7 @@
     <string name="shared_string_record">記錄</string>
     <string name="gpx_logging_no_data">沒有資料</string>
     <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示與聖誕節關聯的 POI：聖誕樹、市場等等。</string>
-    <string name="donation_to_osm_desc">您捐款的一部分會發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
+    <string name="donation_to_osm_desc">您的部分捐款會發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
     
     
     <string name="shared_string_notifications">通知</string>

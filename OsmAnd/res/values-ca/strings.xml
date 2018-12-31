@@ -2057,7 +2057,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="finish_navigation">Atura la navegació</string>
     <string name="full_report">Informe complert</string>
     <string name="open_street_map_login_and_pass">Nom d\'usuari i contrasenya d\'OpenStreetMap</string>
-    <string name="osm_live_subscribe_btn">Subscriu</string>
+    <string name="osm_live_subscribe_btn">Subscriviu</string>
     
     <string name="osm_live_subscription">Subscripció a OsmAnd Live</string>
     <string name="osm_live_email_desc">Cal proporcionar-vos informació respecte les aportacions.</string>

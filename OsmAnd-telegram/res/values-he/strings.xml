@@ -52,4 +52,9 @@
     <string name="by_group">לפי קבוצה</string>
     <string name="shared_string_sort">מיון</string>
     <string name="shared_string_sort_by">מיון לפי</string>
+    <string name="shared_string_exit">יציאה</string>
+    <string name="last_response">תגובה אחרונה</string>
+    <string name="shared_string_group">קבוצה</string>
+    <string name="logout_no_internet_msg">יש להתחבר לאינטרנט כדי לצאת מטלגרם כראוי.</string>
+    <string name="shared_string_close">סגירה</string>
 </resources>
