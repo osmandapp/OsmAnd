@@ -62,4 +62,5 @@
     <string name="disable_all_sharing_desc">כיבוי שיתוף מיקום לכל ההתכתבויות הנבחרות (%1$d).</string>
     <string name="disable_all_sharing">השבתת כל השיתופים</string>
     <string name="turn_off_all">לכבות הכול</string>
+    <string name="shared_string_account">חשבון</string>
 </resources>
