@@ -3925,4 +3925,13 @@
 	<string name="poi_substation_field_gathering">Regorta de campu</string>
     <string name="poi_craft_confectionery">Produtzione de durches</string>
     <string name="poi_shop_wholesale">Butega a s\'ingrussu</string>
+    <string name="poi_books_type">Libros</string>
+    <string name="poi_laboratory">Laboratòriu mèigu</string>
+    <string name="poi_blood_donation">Donatzione de sàmbene</string>
+    <string name="poi_books_comic">Fumetos</string>
+    <string name="poi_books_antiquarian">Anticuàriu</string>
+    <string name="poi_books_religion">Religione</string>
+    <string name="poi_books_academic">Acadèmicu</string>
+    <string name="poi_books_children">Pitzinnos</string>
+    <string name="poi_atoll">Atollu</string>
 </resources>
