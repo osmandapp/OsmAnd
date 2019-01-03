@@ -880,7 +880,7 @@
     <string name="routing_attr_weight_description">அனுமதிக்கப்பட்ட வாகனம் எடை வரம்பை வழிகளில் குறிக்கவும்.</string>
     <string name="routing_attr_height_name">உயரம் வரம்பு</string>
     <string name="routing_attr_height_description">வாகன உயரத்தை பாதைகளில் அனுமதிக்கப்படுவதைக் குறிப்பிடவும்.</string>
-    <string name="android_19_location_disabled">ஆண்ட்ராய்டு பதிப்பு 4.4 (KitKat) என்பதால் பழைய சேமிப்பக கோப்புறையில் (% s) வரைபடங்களைப் பதிவிறக்க மற்றும் புதுப்பிக்க முடியாது. புதிய சேமிப்பக இருப்பிடத்திற்கு அனைத்து OsmAnd கோப்புகளை நகலெடுக்கவா\?
+    <string name="android_19_location_disabled">ஆண்ட்ராய்டு பதிப்பு 4.4 (KitKat) என்பதால் பழைய சேமிப்பக கோப்புறையில் (%s) வரைபடங்களைப் பதிவிறக்க மற்றும் புதுப்பிக்க முடியாது. புதிய சேமிப்பக இருப்பிடத்திற்கு அனைத்து OsmAnd கோப்புகளை நகலெடுக்கவா\?
 \n குறிப்பு 1: உங்கள் பழைய கோப்புகள் தொடாமல் இருக்கும் (ஆனால் கைமுறையாக நீக்க முடியும்).
 \n குறிப்பு 2: புதிய சேமிப்பிட இருப்பிடத்தில், OsmAnd மற்றும் OsmAnd + க்குள்ளும் கோப்புகளை பகிர்ந்து கொள்ள முடியாது.</string>
     <string name="copying_osmand_one_file_descr">புதிய கோட்டிற்கு கோப்பை நகலெடுக்கிறது (%s) …</string>
@@ -903,7 +903,7 @@
     <string name="app_mode_motorcycle">மோட்டார் சைக்கிள்</string>
     <string name="app_mode_boat">படகு</string>
     <string name="app_mode_aircraft">விமான</string>
-    <string name="local_osm_changes_delete_all_confirm">நீங்கள்% 1 $ d OSM மாற்றங்களை நீக்கிவிடப் போகிறீர்கள். நீ சொல்வது உறுதியா\?</string>
+    <string name="local_osm_changes_delete_all_confirm">நீங்கள் %1$d OSM மாற்றங்களை நீக்கிவிடப் போகிறீர்கள். நீ சொல்வது உறுதியா\?</string>
     <string name="animate_routing_route_not_calculated">முதலில் பாதை கணக்கிடவும்</string>
     <string name="animate_routing_route">கணக்கிடப்பட்ட வழியைப் பயன்படுத்தி சிமுலேடு</string>
     <string name="animate_routing_gpx">ஜி.பி.எக்ஸ் டிராக்கைப் பயன்படுத்தி சிமுலேட்</string>
@@ -1119,7 +1119,7 @@
     <string name="level_to_switch_vector_raster">குறைந்தபட்ச வெக்டார் ஜூம் நிலை</string>
     <string name="create_poi_link_to_osm_doc"><u>ஆன்லைன் OSM</u>படங்களுடன் வரைபட வகைப்பாடு.</string>
     <string name="error_doing_search">ஆஃப்லைன் தேடலைச் செயல்படுத்த முடியவில்லை.</string>
-    <string name="search_offline_geo_error">புவி நோக்கத்தை \'% s\' ஐப் பாகுபடுத்த முடியவில்லை.</string>
+    <string name="search_offline_geo_error">புவி நோக்கத்தை \'%s\' ஐப் பாகுபடுத்த முடியவில்லை.</string>
     <string name="search_osm_offline">புவி இருப்பிடத்தைத் தேடு</string>
     <string name="system_locale">முறை</string>
     <string name="preferred_locale_descr">காட்சி மொழியை தேர்ந்தெடு (OsmAnd மறுதொடக்கம் செய்யப்படும் போது நடைமுறைக்கு வரும்).
