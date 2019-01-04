@@ -1359,8 +1359,8 @@
 	<string name="poi_parking_multi_storey">Multi-storey</string>
 
 	<string name="poi_bicycle_parking_anchors">Anchors</string>
-	<string name="poi_bicycle_parking_stands">Stands</string>
-	<string name="poi_bicycle_parking_wall_loops">Wall loops</string>
+	<string name="poi_bicycle_parking_stands">Sheffield Stands</string>
+	<string name="poi_bicycle_parking_wall_loops">Wheel Benders</string>
 	<string name="poi_bicycle_parking_rack">Rack</string>
 	<string name="poi_bicycle_parking_building">Special building</string>
 	<string name="poi_bicycle_parking_shed">Shed</string>
@@ -1742,31 +1742,31 @@
 	<string name="poi_events_venue">Events venue</string>
 
 	<string name="poi_diet_vegetarian_filter_yes">Vegetarian</string>
-	<string name="poi_diet_vegetarian_few">Vegetarian (few)</string>
+	<string name="poi_diet_vegetarian_few">Few Vegetarian Options</string>
 	<string name="poi_diet_vegetarian_only">Vegetarian only</string>
-	<string name="poi_diet_vegetarian_yes">Vegetarian</string>
-	<string name="poi_diet_vegetarian_no">Vegetarian diet: no</string>
-	<string name="poi_diet_vegan_filter_yes">Vegan</string>
+	<string name="poi_diet_vegetarian_yes">Some Vegetarian Options</string>
+	<string name="poi_diet_vegetarian_no">No Vegetarian Options</string>
+	<string name="poi_diet_vegan_filter_yes">Some Vegan Options</string>
 	<string name="poi_diet_vegan_only">Vegan only</string>
-	<string name="poi_diet_vegan_yes">Vegan</string>
-	<string name="poi_diet_vegan_no">Vegan diet: no</string>
+	<string name="poi_diet_vegan_yes">Some Vegan Options</string>
+	<string name="poi_diet_vegan_no">No Vegan Options</string>
 	<string name="poi_diet_gluten_free_filter_yes">Gluten free</string>
 	<string name="poi_diet_gluten_free_only">Gluten-free only</string>
 	<string name="poi_diet_gluten_free_yes">Gluten-free</string>
 	<string name="poi_diet_gluten_free_no">Gluten-free diet: no</string>
-	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_kosher_filter_yes">Some Kosher Options</string>
 	<string name="poi_diet_kosher_only">Kosher only</string>
-	<string name="poi_diet_kosher_yes">Kosher</string>
-	<string name="poi_diet_kosher_no">Kosher diet: no</string>
-	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_kosher_yes">Some Kosher Options</string>
+	<string name="poi_diet_kosher_no">No Kosher Options</string>
+	<string name="poi_diet_halal_filter_yes">Some Halal Options</string>
 	<string name="poi_diet_halal_only">Halal only</string>
-	<string name="poi_diet_halal_yes">Halal</string>
+	<string name="poi_diet_halal_yes">Some Halal Options</string>
 	<string name="poi_diet_halal_no">Halal diet: no</string>
-	<string name="poi_diet_lactose_free_filter_yes">Lactose free</string>
+	<string name="poi_diet_lactose_free_filter_yes">Some Lactose-free Options</string>
 	<string name="poi_diet_lactose_free_only">Lactose-free only</string>
-	<string name="poi_diet_lactose_free_yes">Lactose-free</string>
-	<string name="poi_diet_lactose_free_no">Lactose-free diet: no</string>
-	<string name="poi_diet_pescetarian_yes">Pescetarian</string>
+	<string name="poi_diet_lactose_free_yes">Some Lactose-free Options</string>
+	<string name="poi_diet_lactose_free_no">No Lactose-free diet Options</string>
+	<string name="poi_diet_pescetarian_yes">Some Pescetarian Options</string>
 
 	<string name="poi_drive_in_yes">Yes</string>
 	<string name="poi_drive_in_no">Drive-in: no</string>
@@ -1778,12 +1778,12 @@
 	<string name="poi_microbrewery_no">No microbrewery</string>
 
 	<string name="poi_takeaway_filter_yes">Yes</string>
-	<string name="poi_takeaway_yes">Takeaway</string>
+	<string name="poi_takeaway_yes">Takeaway available</string>
 	<string name="poi_takeaway_no">No takeaway</string>
 	<string name="poi_takeaway_only">Takeaway only</string>
 
 	<string name="poi_delivery_filter_yes">Yes</string>
-	<string name="poi_delivery_yes">Delivery</string>
+	<string name="poi_delivery_yes">Delivery available</string>
 	<string name="poi_delivery_no">No delivery</string>
 	<string name="poi_delivery_only">Delivery only</string>
 
@@ -1798,7 +1798,7 @@
 
 	<string name="poi_cocktails_yes">Yes</string>
 
-	<string name="poi_second_hand_yes">Second-hand goods</string>
+	<string name="poi_second_hand_yes">Some Second-hand goods</string>
 	<string name="poi_second_hand_no">No second-hand goods</string>
 	<string name="poi_second_hand_only">Second-hand goods only</string>
 
@@ -1820,9 +1820,9 @@
 
 	<string name="poi_public_bath">Public bath</string>
 
-	<string name="poi_male_yes">Male</string>
+	<string name="poi_male_yes">Male Only</string>
 	<string name="poi_male_no">Forbidden for men</string>
-	<string name="poi_female_yes">Female</string>
+	<string name="poi_female_yes">Female Only</string>
 	<string name="poi_female_no">Forbidden for female</string>
 	<string name="poi_indoor_yes">Indoor</string>
 	<string name="poi_indoor_no">Outdoor</string>
