@@ -2065,7 +2065,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="osm_live_thanks">Us agraïm el vostre recolçament a OsmAnd
 \nPer activar totes les noves funcionalitats us caldrà reiniciar OsmAnd.</string>
     <string name="osm_live_region_desc">Una part del vostre donatiu s\'enviarà als usuaris d\'OSM que enviïn modificacions del mapa a aquesta regió.</string>
-    <string name="osm_live_ask_for_purchase">Primer heu de comprar una subscripció a OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Primer heu d\'adquirir la subscripció d\'OsmAnd Live</string>
 
     <string name="select_map_marker">Seleccioneu un marcador de mapa</string>
     <string name="map_markers_other">Altres marcadors</string>
