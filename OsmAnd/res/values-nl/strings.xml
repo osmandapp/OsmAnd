@@ -3107,7 +3107,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="osm_live_subscriptions">Abonnementen</string>
     <string name="powered_by_osmand">Mogelijk gemaakt door OsmAnd</string>
     <string name="osm_live_plan_pricing">Tariefoverzicht</string>
-    <string name="osm_live_payment_monthly_title">Maandelijkse betaling</string>
+    <string name="osm_live_payment_monthly_title">Betaal maandelijks</string>
     <string name="osm_live_payment_3_months_title">Betaling per kwartaal</string>
     <string name="osm_live_payment_annual_title">"Jaarlijkse betaling "</string>
     <string name="osm_live_payment_month_cost_descr">"%1$s per maand "</string>
