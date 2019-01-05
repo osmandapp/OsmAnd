@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
@@ -938,7 +938,7 @@
     <string name="mapillary_image">Wobraz z Mapillary</string>
     <string name="open_mapillary">Mapillary wočinić</string>
     <string name="improve_coverage_install_mapillary_desc">Instaluj Mapillary, zo by swójske wobrazy abo seriju wobrazow z tutym městnom zwjazał(a).</string>
-    <string name="online_photos">Fota online</string>
+    <string name="online_photos">Wobrazy w syći</string>
     <string name="mapillary_widget">Asistent Mapillary</string>
     <string name="private_access_routing_req">Twój cil leži w priwatnej kónčinje. Za tutu jězbu přistup k priwatnym pućam dowolić?</string>
     <string name="restart_search">Pytanje wospjetować</string>
