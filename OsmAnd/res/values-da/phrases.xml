@@ -3983,12 +3983,21 @@
 	<string name="poi_substation_converter">Converter</string>
 	<string name="poi_substation_compensation">Kompensation</string>
 
-	<string name="poi_substation_compression">Komprimering:</string>
+	<string name="poi_substation_compression">Komprimering</string>
 	<string name="poi_substation_measurement">Måling</string>
 	<string name="poi_substation_valve">Ventil</string>
 	<string name="poi_substation_valve_group">Ventilgruppe</string>
 	<string name="poi_substation_inspection_gauge">Inspektionsmåler</string>
 	<string name="poi_substation_field_gathering">Feltsamling</string>
-    <string name="poi_craft_confectionery">Konfekt produktion</string>
+    <string name="poi_craft_confectionery">Konfektureproduktion</string>
     <string name="poi_shop_wholesale">Engros-butik</string>
+    <string name="poi_books_type">Bøger</string>
+    <string name="poi_laboratory">Medicinsk laboratorium</string>
+    <string name="poi_blood_donation">Bloddonor</string>
+    <string name="poi_books_comic">Tegneserier</string>
+    <string name="poi_books_antiquarian">Antikvarisk</string>
+    <string name="poi_books_religion">Religion</string>
+    <string name="poi_books_academic">Akademisk</string>
+    <string name="poi_books_children">Børn</string>
+    <string name="poi_atoll">Atoll</string>
 </resources>
