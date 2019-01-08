@@ -1860,32 +1860,15 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean setNavDrawerLogoWithIntent(
+	boolean setNavDrawerLogoWithParams(
 			@Nullable String uri, @Nullable String packageName, @Nullable String intent) {
-
-		return app.getAppCustomization().setNavDrawerLogoWithIntent(uri, packageName, intent);
+		return app.getAppCustomization().setNavDrawerLogoWithParams(uri, packageName, intent);
 	}
 
-	boolean setNavDrawerFooterAction(@Nullable String packageName, @Nullable String intent, @Nullable String appName) {
-
+	boolean setNavDrawerFooterParams(@Nullable String packageName, @Nullable String intent, @Nullable String appName) {
 		return app.getAppCustomization().setNavDrawerFooterAction(packageName, intent, appName);
 	}
 
-	boolean setPointMenuEnabledIds(List<String> ids){
-		return true;
-	}
-
-	boolean setPointMenuDisabledIds(List<String> ids){
-		return true;
-	}
-
-	boolean setPointMenuEnabledPatterns(List<String> patterns){
-		return true;
-	}
-
-	boolean setPointMenuDisabledPatterns(List<String> patterns){
-		return true;
-	}
 
 
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {

@@ -51,7 +51,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
-import net.osmand.plus.audionotes.SortByMenuBottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
@@ -80,6 +79,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.POINT_ADD_GPX_WAYPOINT;
+import static net.osmand.plus.OsmAndCustomizationConstants.POINT_DIRECTIONS_FROM_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -95,6 +96,9 @@ import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.POINT_EDIT_GPX_WP;
+import static net.osmand.plus.OsmAndCustomizationConstants.POINT_MEASURE_DISTANCE;
+import static net.osmand.plus.OsmAndCustomizationConstants.POINT_SEARCH_NEARBY;
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 
 public class MapActivityActions implements DialogProvider {
@@ -320,11 +324,13 @@ public class MapActivityActions implements DialogProvider {
 
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
+				.setId(POINT_DIRECTIONS_FROM_ID)
 				.setIcon(R.drawable.ic_action_route_direction_from_here)
 				.setOrder(DIRECTIONS_FROM_ITEM_ORDER)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_search, mapActivity)
+				.setId(POINT_SEARCH_NEARBY)
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setOrder(SEARCH_NEAR_ITEM_ORDER)
 				.createItem());
@@ -347,6 +353,7 @@ public class MapActivityActions implements DialogProvider {
 				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
+					.setId(POINT_EDIT_GPX_WP)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(EDIT_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
@@ -354,6 +361,7 @@ public class MapActivityActions implements DialogProvider {
 				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
+					.setTitle(POINT_ADD_GPX_WAYPOINT)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
 					.setOrder(ADD_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
@@ -361,6 +369,7 @@ public class MapActivityActions implements DialogProvider {
 
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.measurement_tool, mapActivity)
+				.setId(POINT_MEASURE_DISTANCE)
 				.setIcon(R.drawable.ic_action_ruler)
 				.setOrder(MEASURE_DISTANCE_ITEM_ORDER)
 				.createItem());

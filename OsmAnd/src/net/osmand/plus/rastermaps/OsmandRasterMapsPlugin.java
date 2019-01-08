@@ -46,8 +46,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.POINT_DOWNLOAD_MAP;
 import static net.osmand.plus.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.plus.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.OsmAndCustomizationConstants.POINT_UPDATE_MAP;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
@@ -370,11 +372,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			};
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_update_map, mapActivity)
+					.setId(POINT_UPDATE_MAP)
 					.setIcon(R.drawable.ic_action_refresh_dark)
 					.setOrder(UPDATE_MAP_ITEM_ORDER)
 					.setListener(listener).createItem());
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
+					.setId(POINT_DOWNLOAD_MAP)
 					.setIcon(R.drawable.ic_action_import)
 					.setOrder(DOWNLOAD_MAP_ITEM_ORDER)
 					.setListener(listener).createItem());

@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import static net.osmand.plus.osmedit.OpenstreetmapLocalUtil.LOG;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -221,7 +223,6 @@ public class OsmAndAppCustomization {
 				// ignore
 			}
 			if(packageName!=null && intent!=null) {
-                Log.d("setNavDrawerLogo", packageName + ", " + intent);
 			    navDrawerParams = new ArrayList<>();
 				navDrawerParams.add(packageName);
 				navDrawerParams.add(intent);
@@ -286,7 +287,8 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean setNavDrawerLogoWithIntent(String uri, @Nullable String packageName, @Nullable String intent) {
+	public boolean setNavDrawerLogoWithParams(String uri, @Nullable String packageName, @Nullable String intent) {
+		LOG.info("setNavDrawerLogoWithParams called");
 		return setNavDrawerLogo(uri, packageName, intent);
 	}
 

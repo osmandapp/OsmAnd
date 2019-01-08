@@ -161,11 +161,8 @@ interface IOsmAndAidlInterface {
     boolean showSqliteDbFile(String fileName);
     boolean hideSqliteDbFile(String fileName);
 
+    boolean setNavDrawerLogoWithParams(in String imageUri, String packageName, String intent);
+    boolean setNavDrawerFooterParams(in String packageName, String intent, String appName);
 
-    boolean setNavDrawerLogoWithIntent(in String imageUri, String packageName, String intent);
-    boolean setNavDrawerFooterAction(in String packageName, String intent, String appName);
-    boolean setPointMenuEnabledIds(in List<String> ids);
-    boolean setPointMenuDisabledIds(in List<String> ids);
-    boolean setPointMenuEnabledPatterns(in List<String> patterns);
-    boolean setPointMenuDisabledPatterns(in List<String> patterns);
+
 }
