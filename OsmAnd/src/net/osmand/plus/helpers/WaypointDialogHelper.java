@@ -90,6 +90,10 @@ public class WaypointDialogHelper {
 		helperCallbacks.add(callbacks);
 	}
 
+	public void removeHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
+		helperCallbacks.add(callbacks);
+	}
+
 	public WaypointDialogHelper(MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
 		waypointHelper = this.app.getWaypointHelper();

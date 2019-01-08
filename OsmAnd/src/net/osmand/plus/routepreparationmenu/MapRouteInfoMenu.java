@@ -204,12 +204,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 			show();
 			if (selectFromMapForIntermediate && getTargets().checkPointToNavigateShort()) {
-				WaypointsFragment fragment = new WaypointsFragment();
-				mapActivity.getSupportFragmentManager()
-						.beginTransaction()
-						.replace(R.id.routeMenuContainer, fragment, WaypointsFragment.TAG)
-						.addToBackStack(WaypointsFragment.TAG)
-						.commitAllowingStateLoss();
+				WaypointsFragment.showInstance(mapActivity);
 			}
 			return true;
 		}
@@ -900,12 +895,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			@Override
 			public void onClick(View v) {
 				if (getTargets().checkPointToNavigateShort()) {
-					WaypointsFragment fragment = new WaypointsFragment();
-					mapActivity.getSupportFragmentManager()
-							.beginTransaction()
-							.replace(R.id.routeMenuContainer, fragment, WaypointsFragment.TAG)
-							.addToBackStack(WaypointsFragment.TAG)
-							.commitAllowingStateLoss();
+					WaypointsFragment.showInstance(mapActivity);
 				}
 			}
 		});
