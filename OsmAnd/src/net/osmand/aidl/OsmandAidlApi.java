@@ -1822,7 +1822,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean setNavDrawerLogo(@Nullable String uri) {
-		return app.getAppCustomization().setNavDrawerLogo(uri);
+		return app.getAppCustomization().setNavDrawerLogo(uri,null, null);
 	}
 
 	boolean setEnabledIds(Collection<String> ids) {
@@ -1859,6 +1859,34 @@ public class OsmandAidlApi {
 		app.getAppCustomization().customizeOsmandSettings(sharedPreferencesName, bundle);
 		return true;
 	}
+
+	boolean setNavDrawerLogoWithIntent(
+			@Nullable String uri, @Nullable String packageName, @Nullable String intent) {
+
+		return app.getAppCustomization().setNavDrawerLogoWithIntent(uri, packageName, intent);
+	}
+
+	boolean setNavDrawerFooterAction(@Nullable String packageName, @Nullable String intent, @Nullable String appName) {
+
+		return app.getAppCustomization().setNavDrawerFooterAction(packageName, intent, appName);
+	}
+
+	boolean setPointMenuEnabledIds(List<String> ids){
+		return true;
+	}
+
+	boolean setPointMenuDisabledIds(List<String> ids){
+		return true;
+	}
+
+	boolean setPointMenuEnabledPatterns(List<String> patterns){
+		return true;
+	}
+
+	boolean setPointMenuDisabledPatterns(List<String> patterns){
+		return true;
+	}
+
 
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,

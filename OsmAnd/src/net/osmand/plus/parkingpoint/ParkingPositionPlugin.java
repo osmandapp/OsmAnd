@@ -237,6 +237,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				.setOrder(MARK_AS_PARKING_POS_ITEM_ORDER)
 				.setListener(addListener)
 				.createItem());
+
 	}
 
 	/**

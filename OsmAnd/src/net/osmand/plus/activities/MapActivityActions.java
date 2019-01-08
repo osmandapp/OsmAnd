@@ -51,6 +51,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
+import net.osmand.plus.audionotes.SortByMenuBottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
@@ -990,6 +991,26 @@ public class MapActivityActions implements DialogProvider {
 		menu.show();
 	}
 
+	public void restoreOrReturnDialog(final String packageName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+        builder.setTitle("Restore OsmAnd");
+        builder.setMessage("Do you want to Restore OsmAnd or get back to the Client App?");
+        builder.setPositiveButton("Restore", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                restoreOsmand();
+            }
+        });
+        builder.setNeutralButton("Return", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                executeHeadersIntent(packageName);
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
 	protected void updateDrawerMenu() {
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
@@ -1001,6 +1022,8 @@ public class MapActivityActions implements DialogProvider {
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
 		menuItemsListView.removeFooterView(drawerOsmAndFooter);
 		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
+		final ArrayList<String> navDrawerLogoParams = getMyApplication().getAppCustomization().getNavDrawerLogoParams();
+
 		boolean customHeader = false;
 		if (navDrawerLogo != null) {
 			customHeader = true;
@@ -1019,19 +1042,20 @@ public class MapActivityActions implements DialogProvider {
 				mapActivity.dismissCardDialog();
 				boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
 				boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
-				if ((hasHeader && position == 0) || (hasFooter && position == menuItemsListView.getCount() - 1)) {
-					getMyApplication().getAppCustomization().restoreOsmand();
-					mapActivity.closeDrawer();
-				} else {
-					position -= menuItemsListView.getHeaderViewsCount();
-					ContextMenuItem item = contextMenuAdapter.getItem(position);
-					ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
-					if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
-							position, false, AndroidUtils.getCenterViewCoordinates(view))) {
-						mapActivity.closeDrawer();
-					}
-				}
+				if (hasHeader && position ==0 || (hasFooter && position== menuItemsListView.getCount() - 1)) {
+						if(navDrawerLogoParams!=null) executeHeadersIntent(navDrawerLogoParams.get(0));
+						else restoreOsmand();
+					} else {
+						position -= menuItemsListView.getHeaderViewsCount();
+						ContextMenuItem item = contextMenuAdapter.getItem(position);
+						ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
+						if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
+								position, false, AndroidUtils.getCenterViewCoordinates(view))) {
+							mapActivity.closeDrawer();
+						}
+			        }
 			}
+
 		});
 		if (customHeader) {
 			menuItemsListView.post(new Runnable() {
@@ -1056,9 +1080,8 @@ public class MapActivityActions implements DialogProvider {
 						footerLayout.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								getMyApplication().getAppCustomization().restoreOsmand();
-								mapActivity.closeDrawer();
-
+                                if(navDrawerLogoParams!=null) showReturnConfirmationDialog(navDrawerLogoParams.get(0));
+                                else restoreOsmand();
 							}
 						});
 					} else {
@@ -1068,6 +1091,23 @@ public class MapActivityActions implements DialogProvider {
 			});
 		}
 	}
+
+	private void executeHeadersIntent(String packageName) {
+		Intent launchIntent = mapActivity.getPackageManager().getLaunchIntentForPackage(packageName);
+		if(launchIntent!=null) mapActivity.startActivity(launchIntent);
+		mapActivity.closeDrawer();
+	}
+
+	private void showReturnConfirmationDialog(String packageName) {
+		restoreOrReturnDialog(packageName);
+	    mapActivity.closeDrawer();
+	}
+
+	private void restoreOsmand(){
+		getMyApplication().getAppCustomization().restoreOsmand();
+		mapActivity.closeDrawer();
+	}
+
 
 	public void setFirstMapMarkerAsTarget() {
 		if (getMyApplication().getMapMarkersHelper().getMapMarkers().size() > 0) {

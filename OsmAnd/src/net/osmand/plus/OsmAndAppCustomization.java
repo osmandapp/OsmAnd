@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -42,6 +43,7 @@ public class OsmAndAppCustomization {
 	protected OsmandSettings osmandSettings;
 
 	private Bitmap navDrawerLogo;
+	private ArrayList<String> navDrawerParams;
 
 	private Set<String> featuresEnabledIds = new HashSet<>();
 	private Set<String> featuresDisabledIds = new HashSet<>();
@@ -199,7 +201,10 @@ public class OsmAndAppCustomization {
 		return navDrawerLogo;
 	}
 
-	public boolean setNavDrawerLogo(@Nullable String uri) {
+	@Nullable
+	public ArrayList<String> getNavDrawerLogoParams() {return navDrawerParams; }
+
+	public boolean setNavDrawerLogo(@Nullable String uri, @Nullable String packageName, @Nullable String intent) {
 		if (TextUtils.isEmpty(uri)) {
 			navDrawerLogo = null;
 		} else {
@@ -208,15 +213,24 @@ public class OsmAndAppCustomization {
 				if (is != null) {
 					navDrawerLogo = BitmapFactory.decodeStream(is);
 					is.close();
+
 				}
 			} catch (FileNotFoundException e) {
 				return false;
 			} catch (IOException e) {
 				// ignore
 			}
+			if(packageName!=null && intent!=null) {
+                Log.d("setNavDrawerLogo", packageName + ", " + intent);
+			    navDrawerParams = new ArrayList<>();
+				navDrawerParams.add(packageName);
+				navDrawerParams.add(intent);
+			}
 		}
 		return true;
 	}
+
+
 
 	public void setFeaturesEnabledIds(@NonNull Collection<String> ids) {
 		featuresEnabledIds.clear();
@@ -270,6 +284,15 @@ public class OsmAndAppCustomization {
 			return true;
 		}
 		return set.contains(appMode);
+	}
+
+	public boolean setNavDrawerLogoWithIntent(String uri, @Nullable String packageName, @Nullable String intent) {
+		return setNavDrawerLogo(uri, packageName, intent);
+	}
+
+	public boolean setNavDrawerFooterAction(String packageName, String intent, String appName) {
+		//todo implement custom action to "Powered by Osmand" action in NavDrawer
+		return true;
 	}
 
 	@NonNull

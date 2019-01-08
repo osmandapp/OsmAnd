@@ -771,5 +771,37 @@ public class OsmandAidlService extends Service {
 			OsmandAidlApi api = getApi("hideSqliteDbFile");
 			return api != null && api.hideSqliteDbFile(fileName);
 		}
+
+		@Override
+		public boolean setNavDrawerLogoWithIntent(String imageUri, String packageName, String intent) throws RemoteException {
+			OsmandAidlApi api = getApi("setNavDrawerLogoWithIntent");
+			return api != null && api.setNavDrawerLogoWithIntent(imageUri, packageName, intent);
+		}
+
+		@Override
+		public boolean setNavDrawerFooterAction(String packageName, String intent, String appName) throws RemoteException {
+			OsmandAidlApi api = getApi ("setNavDrawerFooterAction");
+			return api != null && api.setNavDrawerFooterAction(packageName, intent, appName);
+		}
+
+		@Override
+		public boolean setPointMenuEnabledIds(List<String> ids) throws RemoteException {
+			return true;
+		}
+
+		@Override
+		public boolean setPointMenuDisabledIds(List<String> ids) throws RemoteException {
+			return true;
+		}
+
+		@Override
+		public boolean setPointMenuEnabledPatterns(List<String> patterns) throws RemoteException {
+			return true;
+		}
+
+		@Override
+		public boolean setPointMenuDisabledPatterns(List<String> patterns) throws RemoteException {
+			return true;
+		}
 	};
 }
