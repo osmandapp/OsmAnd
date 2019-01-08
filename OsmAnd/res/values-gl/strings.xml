@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="fav_point_dublicate_message">O nome do Favorito xa está en uso, mudado a \"%1$s\" para evita-la duplicación.</string>
     <string name="text_size_descr">Configura-lo tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
@@ -1190,7 +1190,7 @@
 	<string name="indexing_poi">A indexar os PDI…</string>
 	<string name="indexing_transport">A indexar os transportes…</string>
 	<string name="shared_string_io_error">Erro do E/S</string>
-	<string name="km">quilómetros</string>
+	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">O formato dos datos do mapa \"{0}\" é obsoleto e incompatíbel</string>

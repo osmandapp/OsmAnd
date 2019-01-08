@@ -2464,7 +2464,7 @@
     <string name="nearest_cities">أقرب المدن</string>
     <string name="type_city_town">اكتب إسم بلدة أو مدينة</string>
     <string name="type_postcode">اكتب رمز بريدي</string>
-    <string name="nothing_found">لم يتم العثور على أي شيء :(</string>
+    <string name="nothing_found">لم يتم العثور على أي شيء</string>
     <string name="increase_search_radius">قم بتوسيع دائرة البحث</string>
     <string name="search_favorites">ابحث في المفضلة</string>
     <string name="shared_string_plugin">ملحق</string>
@@ -2497,7 +2497,7 @@
 \n • تحميل مسارات GPX إلى الموقع مباشرة بالتطبيق
 \n • إضافة POI ورفعها مباشرة إلى الموقع (أو في وقت لاحق إن كنت غير متصل بالشبكة)</string>
     <string name="nothing_found_descr">حاول تغيير طلب البحث أو وسع دائرة البحث.</string>
-    <string name="quick_action_showhide_osmbugs_title">إظهار أو إخفاء ملاحظات الخريطة</string>
+    <string name="quick_action_showhide_osmbugs_title">تبديل ملاحظات الخريطة</string>
     <string name="quick_action_osmbugs_show">أظهر ملاحظات الخريطة</string>
     <string name="quick_action_osmbugs_hide">اخفي ملاحظات الخريطة</string>
     <string name="sorted_by_distance">ترتيب حسب المسافة</string>
@@ -2526,14 +2526,14 @@
     <string name="online_photos">صور على الإنترنت</string>
     <string name="shared_string_add_photos">إضافة صور</string>
     <string name="no_photos_descr">ليس لدينا صور لهذا الموقع.</string>
-    <string name="mapillary_action_descr">ساهم بصور الشوارع الخاصة بك لهذا الموقع عن طريق مابيلاري.</string>
+    <string name="mapillary_action_descr">ساهم بمنظر الشارع الخاص بك لهذا الموقع عن طريق مابيلاري.</string>
     <string name="mapillary_widget">ويدجت مابيلاري</string>
-    <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري.</string>
+    <string name="mapillary_widget_descr">يسمح بمساهمة سريعة في مابيلاري.</string>
     <string name="mapillary_descr">صور شوارع متاحة على الإنترنت للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
     <string name="mapillary">مابيلاري</string>
     <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
-    <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات ولوج خاص. هل تريد تفعيل خاصية السماح بالوصول إلى هاته الأماكن لهذه الرحلة؟</string>
-    <string name="quick_action_showhide_osmbugs_descr">النقر على زر الإجراء سيظهر أو يخفي ملاحظات OSM على الخريطة.</string>
+    <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات ولوج خاص. هل تسمح بالدخول إلى الطرق الخاصة لهذه الرحلة؟</string>
+    <string name="quick_action_showhide_osmbugs_descr">النقر على زر الإجراء هذا يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
     <string name="srtm_menu_download_descr">لعرض الخطوط الكنتورية على الخريطة، تحتاج إلى تحميل خريطة الخط الكنتوري لهذه المنطقة.</string>
     <string name="show_from_zoom_level">عرض من مستوى التكبير/التصغير</string>
@@ -2544,10 +2544,8 @@
     <string name="quick_action_auto_zoom_desc">النقر على زر الإجراء سوف يقوم بتشغيل/إيقاف تكبير الخريطة وفقا لسرعتك.</string>
     <string name="quick_action_add_destination_desc">النقر على زر الإجراء سيقوم بإضافة وجهة في مركز الشاشة. الوجهة المعينة مسبقا تصبح النقطة الوسيطة الأخيرة.</string>
     <string name="quick_action_replace_destination_desc">النقر على زر الإجراء سيحل محل الوجهة بالموقع الظاهر على مركز الشاشة.</string>
-    <string name="improve_coverage_install_mapillary_desc">يمكنك أن تأخذ صورك الخاصة أو سلسلة من الصور وإرفاقها بهذا الموقع.
-\n
-\nللقيام بذل، تحتاج إلى تثبيت تطبيق مابيلاري من البلاي ستور.</string>
-    <string name="hillshade_menu_download_descr">لمشاهدة التضاريس على الخريطة، تحتاج إلى تحميل خريطة طبقة التضاريس لهذه المنطقة.</string>
+    <string name="improve_coverage_install_mapillary_desc">ثبت تطبيق مابيلاري لإضافة صورة أو أكثر إلى هذا الموقع.</string>
+    <string name="hillshade_menu_download_descr">لمشاهدة التضاريس على الخريطة، حمل خريطة طبقة التضاريس لهذه المنطقة.</string>
     <string name="hillshade_purchase_header">لمشاهدة التضاريس على الخريطة، تحتاج إلى شراء وتثبيت برنامج الخطوط الكنتورية المساعد</string>
     <string name="quick_action_add_first_intermediate_desc">النقر على زر الإجراء سيتم إضافة نقطة وسيطة أولى في موقع مركز الشاشة.</string>
     <string name="no_overlay">لا طبقة فوقية</string>
@@ -2593,7 +2591,7 @@
     <string name="quick_action_page_list_descr">النقر على زر الإجراء سوف يوجهك خلال القائمة أدناه.</string>
     <string name="route_points_category_name">انعطافات لتمر بهذا الطريق</string>
     <string name="navigate_point_olc_info_area">OLC الصالحة بالكامل\nتمثل المنطقة: %1$s x %2$s</string>
-    <string name="wrong_user_name">اسم المستخدم خاطئ !</string>
+    <string name="wrong_user_name">اسم المستخدم خاطئ</string>
     <string name="shared_string_to">إلى</string>
     <string name="mapillary_menu_date_from">من</string>
     <string name="mapillary_menu_descr_dates">عرض الصور المضافة فقط</string>
@@ -2607,7 +2605,7 @@
     <string name="mapillary_menu_title_tile_cache">التخزين المؤقت لأجزاء الخريطة</string>
     <string name="shared_string_reset">إعادة تعيين</string>
     <string name="store_tracks_in_monthly_directories">تخزين المسارات المسجلة في المجلدات الشهرية</string>
-    <string name="store_tracks_in_monthly_directories_descrp">تخزين المسارات المسجلة في مجلدات فرعية لكل تسجيل شهري (مثل 01-2017).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">تخزين المسارات المسجلة في مجلدات فرعية لكل تسجيل شهري (مثل 01-2018).</string>
     <string name="average">متوسط</string>
     <string name="of">%1$d من %2$d</string>
     <string name="ascent_descent">صعود/نزول</string>
@@ -2618,9 +2616,9 @@
     <string name="min_max">الأدنى/الأقصى</string>
     
     <string name="rendering_value_translucent_pink_name">وردي شفاف</string>
-    <string name="quick_action_resume_pause_navigation">استئناف/وقف الملاحة</string>
+    <string name="quick_action_resume_pause_navigation">وقف/استئناف الملاحة</string>
     <string name="quick_action_resume_pause_navigation_descr">اضغط هذا الزر لإيقاف أو استئناف الملاحة.</string>
-    <string name="quick_action_show_navigation_finish_dialog">إظهار انتهاء الملاحة</string>
+    <string name="quick_action_show_navigation_finish_dialog">إظهار نافذة \'انتهاء الملاحة\'</string>
     <string name="quick_action_start_stop_navigation">بدء/انهاء الملاحة</string>
     <string name="quick_action_start_stop_navigation_descr">اضغط هذا الزر لبدء أو إنهاء الملاحة.</string>
     <string name="live_monitoring_max_interval_to_send">الوقت الإضافي المخزن المؤقت للتتبع على الإنترنت</string>
@@ -2682,7 +2680,7 @@
     
     <string name="show_direction">مؤشر المسافة</string>
     <string name="sort_by">فرز حسب</string>
-    <string name="do_not_use_animations">عدم استخدام الرسوم المتحركة</string>
+    <string name="do_not_use_animations">بدون رسوم متحركة</string>
     <string name="do_not_use_animations_descr">تعطيل الرسوم المتحركة في التطبيق.</string>
     <string name="keep_showing_on_map">استمرار العرض على الخريطة</string>
     <string name="exit_without_saving">الخروج دون حفظ؟</string>
@@ -2831,7 +2829,7 @@
     <string name="tunnel_warning">على مقربة مِن نفق</string>
     <string name="show_tunnels">الأنفاق</string>
 <string name="wikivoyage_search_hint">البحث : بلد أو مدينة أو منطقة</string>
-    <string name="shared_string_explore">إكتشف</string>
+    <string name="shared_string_explore">اكتشف</string>
     <string name="shared_string_result">النتيجة</string>
     <string name="shared_string_travel_guides">السفر</string>
     <string name="enter_lon">إدخال خط الطول</string>
@@ -2840,9 +2838,9 @@
     <string name="shared_string_current">الحالي</string>
     <string name="delete_search_history">حذف تأريخ البحث</string>
     <string name="show_images">إظهار الصور</string>
-    <string name="download_maps_travel">خرائط السفر</string>
+    <string name="download_maps_travel">أدلة السفر</string>
     <string name="shared_string_wikivoyage">ويكي سفر</string>
-    <string name="select_travel_book">إختيار كتاب للسفر</string>
+    <string name="select_travel_book">اختيار كتاب للسفر</string>
     <string name="shared_string_travel_book">كتاب السفر</string>
     <string name="purchase_cancelled_dialog_title">لقد قمت بإلغاء اشتراك OsmAnd Live</string>
     <string name="maps_you_need">خرائط قد تحتاجها</string>
@@ -2854,7 +2852,7 @@
     <string name="start_editing">إبداء التحرير</string>
     <string name="get_unlimited_access">تحصل على نفاذ بلا حدود</string>
     <string name="welcome_to_open_beta">مرحبا بكم على النسخة التجريبية المفتوحة</string>
-    <string name="wikivoyage_travel_guide">دليل ويكي سفر</string>
+    <string name="wikivoyage_travel_guide">أدلة السفر</string>
     <string name="monthly_map_updates">تحديثات الخرائط : <b>كل شهر</b></string>
     <string name="daily_map_updates">تحديثات الخرائط : <b>كل ساعة</b></string>
     <string name="purchase_unlim_title">شراء - %1$s</string>
@@ -2942,4 +2940,29 @@
     <string name="start_editing_card_image_text">دليل السفر العالمي المجانا الذي بامكان أي شخص التعديل عليه.</string>
     <string name="day_off_label">معطّل</string>
     <string name="unirs_render_descr">تعديل النمط الافتراضي لزيادة تباين المشاة و طرق الدراجات .يستخدم Legasy Mapnik colors .</string>
+    <string name="commiting_way">تعديل طريق…</string>
+    <string name="wikivoyage_travel_guide_descr">أدلة إلى الأماكن الأكثر أهمية في العالم، في أوسماند بدون الحاجة إلى اتصال انترنت.</string>
+    <string name="in_app_purchase">شراء بداخل التطبيق</string>
+    <string name="in_app_purchase_desc">دفع مرة واحدة</string>
+    <string name="in_app_purchase_desc_ex">عند الشراء مرة واحدة سيكون متاحًا لك إلى الأبد</string>
+    <string name="unlock_all_features">فتح كل ميزات أوسماند</string>
+    <string name="purchase_dialog_title">اختيار خطة</string>
+    <string name="purchase_dialog_travel_description">"اشترِ واحدًا من الآتي للحصول على وظائف دليل سفر بدون نت "</string>
+    <string name="purchase_dialog_subtitle">اختر العنصر المناسب</string>
+    <string name="shared_string_dont">لا تفعل</string>
+    <string name="shared_string_do">افعل</string>
+    <string name="wikivoyage_download_pics_descr">صور المقالة يمكن تحمل للاستخدام بدون اتصال.
+\nدائمًا متوفرة في \'إكتشف\'←\'خيارات\'.</string>
+    <string name="online_webpage_warning">الصفحة متوفرة فقط بالاتصال. هل تريد الفتح في المتصفح؟</string>
+    <string name="images_cache">تخزين مؤقت للصور</string>
+    <string name="use_two_digits_longitude">استخدم خط طول برقمين</string>
+    <string name="last_intermediate_dest_description">يضيف وقفة عاجلة</string>
+    <string name="first_intermediate_dest_description">يضيف وقفة ابتدائية</string>
+    <string name="subsequent_dest_description">يرفع الوجهة للأعلى وينشئها</string>
+    <string name="gpx_file_desc">GPX - مناسب للتصدير إلى JOSM ومحررات OSM الأخرى.</string>
+    <string name="osc_file_desc">OSC - مناسب للتصدير إلى خريطة الشارع المفتوحة.</string>
+    <string name="osm_edits_export_desc">اختر نوع التصدير: ملاحظة OSM أو POI أو كلاهما.</string>
+    <string name="add_group_descr">استيراد مجموعات من المفضلة أو نقاط طريق GPX.</string>
+    <string name="coordinate_input_accuracy_description">انتقال تلقائيًا إلى الحقل التالي بعد إدخال %1$d أرقام عشرية.</string>
+    <string name="mapillary_menu_title_pano">عرض صور 360° فقط</string>
 </resources>

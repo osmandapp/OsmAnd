@@ -242,10 +242,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val content = message.content
 		if (shareChatInfo != null) {
 			when (content) {
-				is TdApi.MessageLocation -> shareChatInfo.currentMapMessageId = message.id
+				is TdApi.MessageLocation -> {
+					shareChatInfo.currentMapMessageId = message.id
+					shareChatInfo.pendingMapMessage = false
+				}
 				is TdApi.MessageText -> {
 					shareChatInfo.currentTextMessageId = message.id
 					shareChatInfo.updateTextMessageId++
+					shareChatInfo.pendingTextMessage = false
 				}
 			}
 			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
@@ -526,6 +530,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY, chatInfo.userSetLivePeriod)
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY, chatInfo.userSetLivePeriodStart)
 				obj.put(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY, chatInfo.lastSuccessfulSendTimeMs)
+				obj.put(ShareChatInfo.LAST_SEND_MAP_TIME_KEY, chatInfo.lastSendMapMessageTime)
+				obj.put(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY, chatInfo.lastSendTextMessageTime)
 				jArray.put(obj)
 			}
 			jArray
@@ -550,6 +556,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 				userSetLivePeriod = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY)
 				userSetLivePeriodStart = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY)
 				lastSuccessfulSendTimeMs = obj.optLong(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY)
+				lastSendMapMessageTime = obj.optInt(ShareChatInfo.LAST_SEND_MAP_TIME_KEY)
+				lastSendTextMessageTime = obj.optInt(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY)
 			}
 			shareChatsInfo[shareInfo.chatId] = shareInfo
 		}
@@ -833,9 +841,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
 		var lastSuccessfulSendTimeMs = -1L
-		var shouldDeletePreviousMessage = false
+		var lastSendTextMessageTime = -1
+		var lastSendMapMessageTime = -1
+		var pendingTextMessage = false
+		var pendingMapMessage = false
 		var shouldSendViaBotMessage = false
 		var hasSharingError = false
+		var shouldDeletePreviousMapMessage = false
+		var shouldDeletePreviousTextMessage = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 
 		fun getNextAdditionalActiveTime(): Long {
@@ -864,6 +877,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val USER_SET_LIVE_PERIOD_KEY = "userSetLivePeriod"
 			internal const val USER_SET_LIVE_PERIOD_START_KEY = "userSetLivePeriodStart"
 			internal const val LAST_SUCCESSFUL_SEND_TIME_KEY = "lastSuccessfulSendTime"
+			internal const val LAST_SEND_MAP_TIME_KEY = "lastSendMapMessageTime"
+			internal const val LAST_SEND_TEXT_TIME_KEY = "lastSendTextMessageTime"
 		}
 	}
 }

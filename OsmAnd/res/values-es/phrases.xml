@@ -3944,4 +3944,13 @@
 	<string name="poi_substation_field_gathering">Recolección de campo</string>
     <string name="poi_craft_confectionery">Elaboración de confitería</string>
     <string name="poi_shop_wholesale">Tienda mayorista</string>
+    <string name="poi_books_type">Libros</string>
+    <string name="poi_laboratory">Laboratorio médico</string>
+    <string name="poi_blood_donation">Donación de sangre</string>
+    <string name="poi_books_comic">Historietas</string>
+    <string name="poi_books_antiquarian">Anticuario</string>
+    <string name="poi_books_religion">Religión</string>
+    <string name="poi_books_academic">Académico</string>
+    <string name="poi_books_children">Infantil</string>
+    <string name="poi_atoll">Atolón</string>
 </resources>

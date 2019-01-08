@@ -2057,7 +2057,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="finish_navigation">Atura la navegació</string>
     <string name="full_report">Informe complert</string>
     <string name="open_street_map_login_and_pass">Nom d\'usuari i contrasenya d\'OpenStreetMap</string>
-    <string name="osm_live_subscribe_btn">Subscriu</string>
+    <string name="osm_live_subscribe_btn">Subscriviu</string>
     
     <string name="osm_live_subscription">Subscripció a OsmAnd Live</string>
     <string name="osm_live_email_desc">Cal proporcionar-vos informació respecte les aportacions.</string>
@@ -2191,7 +2191,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més d\'un cop al mes: cada hora, dia o setmana.</string>
     <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes, actualitzacions i el connector Viquipèdia.</string>
     <string name="get_it">Obteniu-lo</string>
-    <string name="osm_live_payment_desc">La subscripció es carregar mensualment. Cancel·leu-la amb Google Play quan ho desitgeu.</string>
+    <string name="osm_live_payment_desc">Subscripció mensual. Quan vulgueu cancel·lar-la feu-ho des de Google Play.</string>
     <string name="donation_to_osm">Donació a la comunitat OpenStreetMap</string>
     <string name="donation_to_osm_desc">"Part de la vostra donació s\'envia als usuaris d\'OSM que facin edicions a OpenStreetMaps.  El cost de la subscripció és el mateix."</string>
     <string name="osm_live_subscription_desc">La subscripció permet actualitzacions setmanals, diàries i horàries i baixades sense limitació de qualsevol mapa del món.</string>

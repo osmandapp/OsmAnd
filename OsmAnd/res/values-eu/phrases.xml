@@ -3899,4 +3899,13 @@
     <string name="poi_substation_field_gathering">Tokiko bilketa</string>
     <string name="poi_craft_confectionery">Gozogintza</string>
     <string name="poi_shop_wholesale">Handizkako denda</string>
+    <string name="poi_books_type">Liburuak</string>
+    <string name="poi_laboratory">Laborategi medikoa</string>
+    <string name="poi_blood_donation">Odol donazioa</string>
+    <string name="poi_books_comic">Komikia</string>
+    <string name="poi_books_antiquarian">Antikuarioa</string>
+    <string name="poi_books_religion">Erlijioa</string>
+    <string name="poi_books_academic">Akademikoa</string>
+    <string name="poi_books_children">Haurrak</string>
+    <string name="poi_atoll">Atoloia</string>
 </resources>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -1363,4 +1364,31 @@
     <string name="shared_string_edited">ჩასწორებულია</string>
     <string name="shared_string_added">დამატებულია</string>
     <string name="shared_string_action_name">მოქმედების სახელი</string>
-    </resources>
+    <string name="osm_live_plan_pricing">ფასი</string>
+    <string name="osm_live_payment_monthly_title">თვიური გადასახადი</string>
+    <string name="osm_live_payment_3_months_title">ყოველ 3 თვეში გადახდა</string>
+    <string name="osm_live_payment_annual_title">წელიწადში ერთხელ გადახდა</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s თვეში</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s თვეში</string>
+    <string name="osm_live_payment_discount_descr">დაზოგეთ %1$s !</string>
+    <string name="osm_live_payment_current_subscription">თქვენი მიმდინარე გამოწერა</string>
+    <string name="osm_live_payment_renews_monthly">თვიური განახლება</string>
+    <string name="osm_live_payment_renews_annually">წლიური განახლება</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">აირჩიეთ გადახდის თქვენთვის ხელსაყრელი პერიოდი:</string>
+    <string name="osm_live_payment_contribute_descr">გადასახადის ნაწილი მიედინება OpenStreetMap-ის ავტორებთან.</string>
+    <string name="edit_map_marker">რუკის სანიშნის ჩასწორება</string>
+    <string name="third_party_application">სხვა აპლიკაცია</string>
+    <string name="search_street">ქუჩის ძებნა</string>
+    <string name="start_search_from_city">ქალაქის არჩევა</string>
+    <string name="shared_string_restore">აღდგენა</string>
+    <string name="commiting_way">გზის ატვირთვა…</string>
+    <string name="increase_search_radius_to">ძებნის რადიუსის გაზრდა %1$s-მდე</string>
+    <string name="shared_string_world">სამყარო</string>
+    <string name="point_deleted">წერტილი %1$s წაშლილია</string>
+    <string name="coord_input_edit_point">წერტილის ჩასწორება</string>
+    <string name="coord_input_add_point">წერტილის დამატება</string>
+    <string name="shared_string_bookmark">სანიშნი</string>
+    <string name="hide_full_description">სრული აღწერის დამალვა</string>
+    <string name="show_full_description">სრული აღწერის ჩვენება</string>
+</resources>

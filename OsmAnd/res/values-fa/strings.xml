@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
@@ -314,7 +314,7 @@
 	<string name="osb_comment_dialog_error">افزودن توضیح ناموفق بود</string>
 	
 	<string name="Closest_Amenities">نزدیک‌ترین امکانات رفاهی</string>
-	<string name="map_tile_source_descr">منبع نقشهٔ آنلاین یا کاشی‌های ذخیره‌شده را انتخاب کنید.</string>
+	<string name="map_tile_source_descr">منبع کاشی‌های آنلاین یا کاشی‌های ذخیره‌شدهٔ نقشه را انتخاب کنید.</string>
 	<string name="error_calculating_route_occured">محاسبهٔ مسیر ناموفق بود</string>
 	<string name="empty_route_calculated">مسیر محاسبه‌شده تُهی است</string>					
 	<string name="new_route_calculated_dist">مسیر جدید؛ مسافت</string>
@@ -713,11 +713,11 @@
 	<string name="navigate_point_format">قالب</string>
 	<string name="basemap_was_selected_to_download">نقشهٔ پایه انتخاب شد که دانلود شود تا برنامه راه بیفتد.</string>
 	<string name="select_index_file_to_download">چیزی پیدا نشد. اگر نمی‌توانید منطقهٔ خود را پیدا کنید، خودتان آن را بسازید (https://osmand.net را ببینید).</string>
-	<string name="local_indexes_cat_tile">نقشه‌های آنلاین و کاشی‌های ذخیره‌شده</string>
-	<string name="map_online_data">نقشه‌ها و کاشی‌های آنلاین</string>
+	<string name="local_indexes_cat_tile">نقشه‌های کاشی‌کاشی آنلاین و ذخیره‌شده</string>
+	<string name="map_online_data">نقشه‌های کاشی‌کاشی و آنلاین</string>
 	<string name="map_online_data_descr">از نقشه‌های آنلاین استفاده کنید (کاشی‌های نقشه را دانلود و روی کارت حافظه ذخیره کنید).</string>
 	<string name="shared_string_online_maps">نقشه‌های آنلاین</string>
-	<string name="online_map_settings_descr">منبع نقشه‌های آنلاین یا کاشی‌های ذخیره‌شده را تنظیم کنید.</string>
+	<string name="online_map_settings_descr">منبع کاشی‌های آنلاین یا ذخیره‌شدهٔ نقشه را تنظیم کنید.</string>
 	
 	<string name="vector_maps_may_display_faster_on_some_devices">نقشه‌های بُرداری معمولاً زودتر نمایش داده می‌شوند. شاید روی برخی دستگاه‌ها خوب کار نکند.</string>
 	<string name="test_voice_prompts">امتحان‌کردن پیام‌های گفتاری</string>    
@@ -858,7 +858,7 @@
 	<string name="shared_string_io_error">خطای ورودی/خروجی</string>
 	<string name="km">ک‌م</string>
 	<string name="m">متر</string>
-	<string name="map_tile_source">منبع نقشهٔ کاشی‌مانند</string>
+	<string name="map_tile_source">منبع کاشی‌های نقشه</string>
 	<string name="mark_point">هدف</string>
 	
 	
@@ -1115,11 +1115,11 @@
 	
 	
 	<string name="asap">دراسرع‌وقت</string>
-	<string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین (کاشی‌مانند یا شطرنجی) دسترسی پیدا می‌کنید. این نقشه‌ها از کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک) تا تصاویر ماهواره‌ای و لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی و لایه‌های سایه‌روشن و... را در بر می‌گیرد. 
+	<string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاینِ کاشی‌کاشی (tile map) یا شطرنجی (raster map) دسترسی پیدا می‌کنید؛ از قبیل کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک)، تصاویر ماهواره‌ای، لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی، لایه‌های سایه‌روشن و... . 
 \n 
-\nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ پایه و هم به‌عنوان لایهٔ رویی یا زیری برای لایهٔ پایه (مثلاً نقشه‌های آفلاین و استاندارد OsmAnd) قابل‌نمایش هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
+\nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ پایه و هم به‌عنوان لایهٔ رویی یا زیری برای لایهٔ پایه (مثلاً نقشه‌های آفلاین OsmAnd) قابل‌تنظیم هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
 \n 
-\nنقشه‌های کاشی‌مانند مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند. همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ داده‌های OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
+\nنقشه‌ها مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند. همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ داده‌های OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
 	
 	<string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به‌کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهت‌دار و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
 	
@@ -1184,7 +1184,7 @@
 	<string name="overlay_transparency">شفافیت لایهٔ رویی</string>
 	<string name="map_transparency_descr">شفافیت نقشهٔ پایه را تغییر دهید.</string>
 	<string name="map_transparency">شفافیت نقشهٔ پایه</string>
-	<string name="select_tile_source_to_install">نقشه‌ها (کاشی) را برای نصب یا به‌روزرسانی انتخاب کنید.</string>
+	<string name="select_tile_source_to_install">نقشه‌ها(ی کاشی‌کاشی) را برای نصب یا به‌روزرسانی انتخاب کنید.</string>
 	<string name="level_to_switch_vector_raster">کمترین سطح زوم بُرداری</string>
 	
 	
@@ -1736,7 +1736,7 @@
 	<string name="enable_proxy_title">فعال‌کردن پروکسی HTTP</string>
 	<string name="enable_proxy_descr">یک پروکسی HTTP برای همهٔ تقاضاهای شبکه تنظیم کنید.</string>
 	<string name="proxy_host_title">میزبان پروکسی</string>
-	<string name="proxy_port_title">پورت پروکسی</string>
+	<string name="proxy_port_title">درگاه پروکسی</string>
 	<string name="nautical_maps_missing">برای نمایش نقشه‌های دریایی باید نقشهٔ آفلاین آن را دانلود کنید</string>
 	<string name="version_settings">ساخت‌ها</string>
     <string name="settings_privacy">حریم خصوصی</string>
@@ -1762,7 +1762,7 @@
     <string name="rendering_attr_busRoutes_name">مسیرهای اتوبوس</string>
     <string name="rendering_category_routes">مسیرها</string>
     <string name="fav_point_dublicate_message">نام نقطهٔ برگزیده تکراری است، برای جلوگیری از تکرار آن را به %1$s تغییر دادیم.</string>
-    <string name="proxy_port_descr">شمارهٔ پورت پروکسی را تنظیم کنید (مثلاً 8118).</string>
+    <string name="proxy_port_descr">شمارهٔ درگاه پروکسی را تنظیم کنید (مثلاً 8118).</string>
 	<string name="proxy_host_descr">نام میزبان پروکسی را تنظیم کنید (مثلاً 127.0.0.1).</string>
 	<string name="plugin_install_needs_network">برای نصب این افزونه به اینترنت وصل شوید.</string>
 	
@@ -2369,7 +2369,7 @@
     <string name="navigate_point_olc_info_area">کد کامل و معتبر است؛
 \nپهنهٔ متناظر: %1$s × %2$s</string>
     <string name="increase_search_radius">محدودهٔ جست‌وجو را بزرگ‌تر کن</string>
-    <string name="nothing_found_descr">عبارت جست‌وجو را اصلاح کنید یا اینکه محدودهٔ جست‌وجو را بزرگ‌تر کنید.</string>
+    <string name="nothing_found_descr">عبارت جست‌وجو را اصلاح کنید یا محدودهٔ جست‌وجو را بزرگ‌تر کنید.</string>
     <string name="save_track_to_gpx_globally_headline">ضبط مسیر درصورت تقاضا</string>
     <string name="average">میانگین</string>
     <string name="of">%1$d از %2$d</string>
@@ -3105,7 +3105,7 @@
 	<string name="travel_card_download_descr">راهنمای مسافرت از ویکی‌سفر را دانلود کنید تا بدون نیاز به اینترنت دربارهٔ مناطق مختلف جهان مطالعه کنید.</string>
 	<string name="update_is_available">به‌روزرسانی وجود دارد</string>
 	<string name="download_file">دانلود فایل</string>
-    <string name="start_editing_card_image_text">یک راهنمای رایگان جهانی برای سفر که همه می‌توانند آن را ویرایش کنند.</string>
+    <string name="start_editing_card_image_text">راهنمای سفر رایگان با پوشش جهانی که همه می‌توانند آن را ویرایش کنند.</string>
     <string name="welcome_to_open_beta_description">راهنمای «مسافرت» هم‌اکنون بر پایهٔ ویکی‌سفر ساخته شده است. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید. با پایان دورهٔ آزمایشی، «مسافرت» در اختیار مشترکان نسخهٔ نامحدود OsmAnd و دارندگان OsmAnd+‎ خواهد بود.</string>
     <string name="start_editing_card_description">شما می‌توانید هر یک از مقالات ویکی‌سفر را ویرایش کنید. امیدواریم با انجام این کار دیگران را در دانش، تجربه، استعداد و توجهتان سهیم کنید.</string>
     <string name="start_editing">شروع ویرایش</string>
@@ -3169,7 +3169,7 @@
     <string name="coord_input_save_as_track_descr">%1$s نقطه افزودید. نام فایل را بنویسید و روی «ذخیره» بزنید.</string>
     <string name="point_deleted">نقطهٔ %1$s پاک شد</string>
     <string name="shared_string_world">جهان</string>
-    <string name="send_search_query_description">ما عبارت جست‌وجویتان: <b>«%1$s»</b> و نیز مکانتان را ارسال خواهیم کرد.<br/><br/> ما اطلاعات خصوصی را جمع‌آوری نمی‌کنیم و داده‌های جست‌وجو را هم فقط به این خاطر نیاز داریم که الگوریتم جست‌وجو را بهتر کنیم.<br/></string>
+    <string name="send_search_query_description">عبارت جست‌وجوی شما: <b>«%1$s»</b> و همچنین مکانتان را ارسال خواهیم کرد.<br/><br/> ما اطلاعات خصوصی را جمع‌آوری نمی‌کنیم و داده‌های جست‌وجو را هم فقط به این خاطر نیاز داریم که الگوریتم جست‌وجو را بهتر سازیم.<br/></string>
     <string name="search_no_results_description">چیزی پیدا نشد؟
 \nدر این باره با ما صحبت کنید.</string>
     <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>

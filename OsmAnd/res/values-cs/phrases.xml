@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_bakery">Pekařství</string>
 	<string name="poi_alcohol">Obchod s alkoholem</string>
 	<string name="poi_convenience">Smíšené zboží</string>
@@ -3841,5 +3841,11 @@
 	<string name="poi_shoe_repair">Oprava obuvi</string>
 
 <string name="poi_substation_type">Typ</string>
-
+    <string name="poi_books_type">Knihy</string>
+    <string name="poi_books_comic">Komiksy</string>
+    <string name="poi_books_antiquarian">Starožitné</string>
+    <string name="poi_books_religion">Náboženské</string>
+    <string name="poi_books_academic">Odborné</string>
+    <string name="poi_books_children">Dětské</string>
+    <string name="poi_atoll">Atol</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_palaeontological_site">Jaciment paleontològic</string>
 
 	<string name="poi_bakery">Fleca</string>
@@ -27,7 +27,7 @@
 	<string name="poi_deli">Delicadeses</string>
 	<string name="poi_farm">Productes de granja</string>
 	<string name="poi_greengrocer">Verdureria</string>
-	<string name="poi_confectionery">Confiteria</string>
+	<string name="poi_confectionery">Botiga de pastisseria</string>
 	<string name="poi_ice_cream">Gelateria</string>
 	<string name="poi_tea">Botiga de te</string>
 	<string name="poi_dairy">Productes làctics</string>
@@ -90,12 +90,12 @@
 	<string name="poi_ford">Gual</string>
 	<string name="poi_lift_gate">Tanca llevadissa</string>
 	<string name="poi_border_control">Control de fronteres</string>
-	<string name="poi_traffic_calming_bump">Banda reductora</string>
-	<string name="poi_traffic_calming_hump">Ressalt</string>
-	<string name="poi_traffic_calming_cushion">Coixí berlinès</string>
+	<string name="poi_traffic_calming_bump">Ressalt reductor</string>
+	<string name="poi_traffic_calming_hump">Gepa reductora</string>
+	<string name="poi_traffic_calming_cushion">Reducció selectiva</string>
 	<string name="poi_traffic_calming_chicane">Xicana</string>
 	<string name="poi_traffic_calming_rumble_strip">Banda rugosa</string>
-	<string name="poi_traffic_calming_table">Plataforma</string>
+	<string name="poi_traffic_calming_table">Plataforma reductora</string>
 	<string name="poi_traffic_signals">Semàfor</string>
 
 	<string name="poi_service_tyres">Pneumàtics</string>
@@ -124,7 +124,7 @@
 	<string name="poi_railway_platform">Andana de tren</string>
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_subway_entrance">Entrada de metro</string>
-	<string name="poi_subway_station">Estació de metro</string>
+	<string name="poi_subway_station">Sí</string>
 	<string name="poi_taxi">Parada de taxis</string>
 
 	<string name="poi_aerodrome">Aeroport</string>
@@ -314,7 +314,7 @@
 	<string name="poi_traffic_calming_choker">Estretament</string>
 	<string name="poi_car_repair">Taller de reparació de cotxes</string>
 	<string name="poi_car_wash">Neteja de cotxes</string>
-	<string name="poi_fuel">Benzinera</string>
+	<string name="poi_fuel">Benzinera;Estació de servei;Estació de recàrrega</string>
 	<string name="poi_electricity_combined_charging">Estació de recàrrega</string>
 	<string name="poi_seamark_wreck">Restes de naufragi, senyal marítim</string>
 
@@ -575,7 +575,7 @@
 	<string name="poi_theatre_genre_circus">Circ</string>
 	<string name="poi_gallery">Galeria d\'art</string>
 	<string name="poi_dance_floor">Sala de ball</string>
-	<string name="poi_nightclub">Club nocturn</string>
+	<string name="poi_nightclub">Club nocturn;Disco;Discoteca</string>
 	<string name="poi_ski_resort">Estació d\'esquí</string>
 	<string name="poi_aerialway_j_bar">Teleesquí individual</string>
 	<string name="poi_aerialway_mixed_lift">Telemix</string>
@@ -949,7 +949,7 @@
 	<string name="poi_access_agricultural">Accés per a activitats agrícoles</string>
 
 	<string name="poi_monitoring_station">Centre de control</string>
-	<string name="poi_capital">Capital</string>
+	<string name="poi_capital">Sí</string>
 	<string name="poi_fee_no">No</string>
 
 	<string name="poi_email">Correu electrònic</string>
@@ -2020,7 +2020,7 @@
 	<string name="poi_material_brick">Material: maons</string>
 	<string name="poi_material_plastic">Material: plàstic</string>
 	<string name="poi_material_granite_stone">Material: pedra de granit</string>
-	<string name="poi_material_metal_wood">Material: metall;fusta</string>
+	<string name="poi_material_metal_wood">Material: metall, fusta</string>
 	<string name="poi_material_glass">Material: vidre</string>
 	<string name="poi_material_bronze">Material: bronze</string>
 	<string name="poi_material_earth">Material: terra</string>
@@ -2780,7 +2780,7 @@
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_lactose_free_filter_yes">Sense lactosa</string>
 	<string name="poi_brewery_additional">Nom de la cerveseria</string>
-	<string name="poi_microbrewery_yes">Microcerveseria</string>
+	<string name="poi_microbrewery_yes">Sí</string>
 	<string name="poi_takeaway_filter_yes">Sí</string>
 	<string name="poi_delivery_filter_yes">Sí</string>
 	<string name="poi_outdoor_seating_filter_yes">Sí</string>
@@ -2996,7 +2996,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Addictes a les drogues</string>
 	<string name="poi_social_facility_for_unemployed">Aturats</string>
 	<string name="poi_social_facility_for_diseased">Malalts</string>
-	<string name="poi_social_facility_for_child_juvenile">Infants; joves</string>
+	<string name="poi_social_facility_for_child_juvenile">Infants joves</string>
 
 	<string name="poi_theatre_genre_philharmonic">Filharmònica</string>
 	<string name="poi_theatre_genre_musical">Musical</string>
@@ -3146,4 +3146,9 @@
 	<string name="poi_socket">Endoll</string>
 	<string name="poi_bicycle_parking_stands">Anclatje</string>
 	<string name="poi_bicycle_parking_wall_loops">Anclatje de Pared</string>
-	</resources>
+    <string name="poi_service_car">Servei automobilístic</string>
+    <string name="poi_checkpoint_type">Tipus de punt de control</string>
+    <string name="poi_substation_type">Tipus</string>
+    <string name="poi_books_type">Llibres</string>
+    <string name="poi_atm">Caixer automàtic</string>
+</resources>

@@ -3932,4 +3932,13 @@
 	<string name="poi_substation_field_gathering">Pole gromadzenia</string>
     <string name="poi_craft_confectionery">Produkcja słodyczy</string>
     <string name="poi_shop_wholesale">Hurtownia</string>
+    <string name="poi_books_type">Książki</string>
+    <string name="poi_laboratory">Laboratorium medyczne</string>
+    <string name="poi_blood_donation">Punkt poboru krwi</string>
+    <string name="poi_books_comic">Komiksy</string>
+    <string name="poi_books_antiquarian">Antykwariat</string>
+    <string name="poi_books_religion">Religijne</string>
+    <string name="poi_books_academic">Akademickie</string>
+    <string name="poi_books_children">Dla dzieci</string>
+    <string name="poi_atoll">Atol</string>
 </resources>

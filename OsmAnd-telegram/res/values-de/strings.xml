@@ -175,4 +175,8 @@
 
 <string name="last_update_from_telegram">Letztes Update von Telegram</string>
     <string name="send_location_as">Senden Standort als</string>
+    <string name="send_location_as_descr">Wählen Sie, wie Nachrichten mit Ihrem Standort aussehen sollen.</string>
+    <string name="shared_string_map">Karte</string>
+    <string name="shared_string_text">Text</string>
+    <string name="map_and_text">Karte und Text</string>
 </resources>

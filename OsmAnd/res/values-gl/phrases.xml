@@ -3894,4 +3894,13 @@
 	<string name="poi_diplomatic_consulate">Consulado</string>
     <string name="poi_craft_confectionery">Elaboración de doces e confeitaría</string>
     <string name="poi_shop_wholesale">Tenda maiorista</string>
+    <string name="poi_books_type">Libros</string>
+    <string name="poi_laboratory">Laboratorio médico</string>
+    <string name="poi_blood_donation">Doazón de sangue</string>
+    <string name="poi_books_comic">Banda deseñada</string>
+    <string name="poi_books_antiquarian">Anticuario</string>
+    <string name="poi_books_religion">Relixión</string>
+    <string name="poi_books_academic">Académico</string>
+    <string name="poi_books_children">Infantís</string>
+    <string name="poi_atoll">Atol</string>
 </resources>

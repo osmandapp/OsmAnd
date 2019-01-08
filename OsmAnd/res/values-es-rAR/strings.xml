@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
@@ -270,7 +270,7 @@ Lon %2$s</string>
     <string name="select_destination_and_intermediate_points">Elige los destinos</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
     <string name="loading_smth">Cargando %1$s…</string>
-    <string name="map_widget_plain_time">Tiempo actual</string>
+    <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Punto de referencia</string>
     <string name="selected_gpx_info_show">"
 \n

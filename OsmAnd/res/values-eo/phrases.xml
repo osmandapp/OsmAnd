@@ -3916,4 +3916,13 @@
 	<string name="poi_substation_field_gathering">kolekta</string>
     <string name="poi_craft_confectionery">Sukeraĵejo (metiejo)</string>
     <string name="poi_shop_wholesale">Pogranda vendejo</string>
+    <string name="poi_books_type">Libroj</string>
+    <string name="poi_laboratory">Medicina laboratorio</string>
+    <string name="poi_blood_donation">Sang-donejo</string>
+    <string name="poi_books_comic">bildrakontoj</string>
+    <string name="poi_books_antiquarian">uzitaj</string>
+    <string name="poi_books_religion">religiaj</string>
+    <string name="poi_books_academic">lernolibroj</string>
+    <string name="poi_books_children">infanaj</string>
+    <string name="poi_atoll">Atolo</string>
 </resources>
