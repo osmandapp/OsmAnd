@@ -771,5 +771,24 @@ public class OsmandAidlService extends Service {
 			OsmandAidlApi api = getApi("hideSqliteDbFile");
 			return api != null && api.hideSqliteDbFile(fileName);
 		}
+
+		@Override
+		public boolean setNavDrawerLogoWithParams(String imageUri, String packageName, String intent) throws RemoteException {
+			OsmandAidlApi api = getApi("setNavDrawerLogoWithParams");
+			return api != null && api.setNavDrawerLogoWithParams(imageUri, packageName, intent);
+		}
+
+		@Override
+		public boolean setNavDrawerFooterParams(String packageName, String intent, String appName) throws RemoteException {
+			OsmandAidlApi api = getApi ("setNavDrawerFooterParams");
+			return api != null && api.setNavDrawerFooterParams(packageName, intent, appName);
+		}
+
+		@Override
+		public boolean restoreOsmand() {
+      OsmandAidlApi api = getApi("restoreOsmand");
+      return api != null && api.restoreOsmand();
+    }
+
 	};
 }

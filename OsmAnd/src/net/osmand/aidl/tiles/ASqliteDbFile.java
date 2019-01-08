@@ -3,6 +3,7 @@ package net.osmand.aidl.tiles;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 public class ASqliteDbFile implements Parcelable {
 
