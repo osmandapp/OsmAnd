@@ -19,7 +19,7 @@ public class ApplicationMode {
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 	/*
-	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
+	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat")
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
 			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
@@ -36,7 +36,7 @@ public class ApplicationMode {
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
 
-	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
+	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().nauticalLocation().
 			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).reg();
 
 	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
@@ -156,6 +156,13 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+			return this;
+		}
+
+		//todo need night mode icon
+		public ApplicationModeBuilder nauticalLocation() {
+			applicationMode.bearingIconDay = R.drawable.map_nautical_bearing;
+			applicationMode.bearingIconNight = R.drawable.map_nautical_bearing;
 			return this;
 		}
 
