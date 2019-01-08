@@ -275,6 +275,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 										ContextMenuItem item = adapter.getItem(pos);
 
 										String overlayMapDescr = settings.MAP_OVERLAY.get();
+
 										boolean hasOverlayDescription = overlayMapDescr != null;
 										overlayMapDescr = hasOverlayDescription ? overlayMapDescr
 												: mapActivity.getString(R.string.shared_string_none);
@@ -294,6 +295,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 										ContextMenuItem item = adapter.getItem(pos);
 
 										String underlayMapDescr = settings.MAP_UNDERLAY.get();
+
 										boolean hasUnderlayDescription = underlayMapDescr != null;
 										underlayMapDescr = hasUnderlayDescription ? underlayMapDescr
 												: mapActivity.getString(R.string.shared_string_none);
@@ -325,6 +327,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			settings.MAP_UNDERLAY_PREVIOUS.set(null);
 		}
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
+		if (overlayMapDescr!=null && overlayMapDescr.contains(".sqlitedb")) {
+			overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");
+		}
 		boolean hasOverlayDescription = overlayMapDescr != null;
 		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_overlay, mapActivity)
@@ -338,6 +343,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setPosition(14)
 				.createItem());
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
+		if (underlayMapDescr!=null && underlayMapDescr.contains(".sqlitedb")) {
+			underlayMapDescr = underlayMapDescr.replaceFirst(".sqlitedb", "");
+		}
 		boolean hasUnderlayDescription = underlayMapDescr != null;
 		underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_underlay, mapActivity)
