@@ -3725,9 +3725,9 @@
     <string name="poi_laboratory">Laboratorio médico</string>
     <string name="poi_blood_donation">Donación de sangre</string>
     <string name="poi_books_comic">Historietas</string>
-    <string name="poi_books_antiquarian">Anticuario</string>
-    <string name="poi_books_religion">Religión</string>
-    <string name="poi_books_academic">Académico</string>
-    <string name="poi_books_children">Infantil</string>
+    <string name="poi_books_antiquarian">Antiguos</string>
+    <string name="poi_books_religion">Religiosos</string>
+    <string name="poi_books_academic">Académicos</string>
+    <string name="poi_books_children">Infantiles</string>
     <string name="poi_atoll">Atolón</string>
 </resources>

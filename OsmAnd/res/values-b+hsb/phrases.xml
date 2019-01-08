@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="poi_shop">wobchod</string>
 		<string name="poi_shop_food">žiwidłowy wobchod a superwiki</string>
@@ -1522,7 +1522,7 @@
 	<string name="poi_traffic_calming_island">wobchadna kupa</string>
 	<string name="poi_traffic_signals">ampla</string>
 
-	<string name="poi_car_repair">awtowa reparatura</string>
+	<string name="poi_car_repair">awtowa porjedźernja</string>
 	<string name="poi_service_tyres">wobruče</string>
 	<string name="poi_vehicle_inspection">inspekcija awta</string>
 	<string name="poi_car_wash">awtowa myjernja</string>
@@ -1610,7 +1610,7 @@
 	<string name="poi_power_plant">milinarnja</string>
 	<string name="poi_power_generator">milinowy generator</string>
 	<string name="poi_post_office">póšta</string>
-	<string name="poi_post_box">listowy kašćik</string>
+	<string name="poi_post_box">póštowy kašćik</string>
 	<string name="poi_telephone">telefon</string>
 	<string name="poi_observation_tower">wobkedźowanska wěža</string>
 	<string name="poi_bell_tower">zwóńca</string>
@@ -2081,5 +2081,53 @@
 	<string name="poi_bicycle_parking">parkowanje kolesow</string>
 
 	<string name="poi_railway_yard">nakładne dwórnišćo</string>
-
-	</resources>
+    <string name="poi_healthcare_rehabilitation">rehabilitacija</string>
+    <string name="poi_company">firma</string>
+    <string name="poi_health_specialty_physiatry_yes">medicina a rehapilitacija</string>
+    <string name="poi_counselling_type_marriage_yes">poradźowanje (kwas): haj</string>
+    <string name="poi_counselling_type_marriage_no">poradźowanje (kwas): ně</string>
+    <string name="poi_counselling_type_nutrition_yes">poradźowanje (zežiwjenje): haj</string>
+    <string name="poi_counselling_type_nutrition_nfire_hydo">poradźowanje (zežiwjenje): ně</string>
+    <string name="poi_counselling_type_rehabilitation_yes">poradźowanje (rehabilitacija): haj</string>
+    <string name="poi_counselling_type_rehabilitation_no">poradźowanje (rehabilitacija): ně</string>
+    <string name="poi_counselling_type_sexual_yes">poradźowanje (seksualne): haj</string>
+    <string name="poi_counselling_type_sexual_no">poradźowanje (seksualne): ně</string>
+    <string name="poi_counselling_type_sexual_abuse_yes">poradźowanje (seksualne znjewužiwanje): haj</string>
+    <string name="poi_counselling_type_sexual_abuse_no">poradźowanje (seksualne znjewužiwanje): ně</string>
+    <string name="poi_counselling_type_victim_yes">poradźowanje (wopory): haj</string>
+    <string name="poi_counselling_type_victim_no">poradźowanje (wopory): ně</string>
+    <string name="poi_counselling_type_violence_yes">poradźowanje (namóc): haj</string>
+    <string name="poi_counselling_type_violence_no">poradźowanje (namóc): ně</string>
+    <string name="poi_provided_for_infant_yes">poskitk za dźěći: haj</string>
+    <string name="poi_provided_for_infant_no">poskitk za dźěći: ně</string>
+    <string name="poi_provided_for_toddler_yes">poskitk za ćěšenki: haj</string>
+    <string name="poi_provided_for_toddler_no">poskitk za ćěšenki: ně</string>
+    <string name="poi_provided_for_adult_yes">poskitk za dorosćenych: haj</string>
+    <string name="poi_provided_for_adult_no">poskitk za dorosćenych: ně</string>
+    <string name="poi_provided_for_woman_yes">poskitk za žony: haj</string>
+    <string name="poi_provided_for_woman_no">poskitk za žony: ně</string>
+    <string name="poi_provided_for_senior_yes">poskitk za seniorow: haj</string>
+    <string name="poi_provided_for_senior_no">poskitk za seniorow: ně</string>
+    <string name="poi_provided_for_girl_yes">poskitk za holcy: haj</string>
+    <string name="poi_provided_for_girl_no">poskitk za holcy: ně</string>
+    <string name="poi_provided_for_man_yes">poskitk za mužow: haj</string>
+    <string name="poi_provided_for_man_no">poskitk za mužow: ně</string>
+    <string name="poi_provided_for_boy_yes">poskitk za hólcow: haj</string>
+    <string name="poi_provided_for_boy_no">poskitk za hólcow: ně</string>
+    <string name="poi_counselling_yes">poradźowanje: haj</string>
+    <string name="poi_counselling_no">poradźowanje: ně</string>
+    <string name="poi_emergency_yes">nuzowe pady: haj</string>
+    <string name="poi_emergency_no">nuzowe pady: ně</string>
+    <string name="poi_home_visit_no">domowy wopyt: ně</string>
+    <string name="poi_fire_hydrant_position_green">zelenišćo</string>
+    <string name="poi_fire_hydrant_position_parking_lot">parkowanišćo</string>
+    <string name="poi_salt_yes">sel</string>
+    <string name="poi_salt_no">sel: ně</string>
+    <string name="poi_telescope_usage_education">wužiwanje: kubłanje</string>
+    <string name="poi_telescope_usage_espionage">wužiwanje: spionaža</string>
+    <string name="poi_telescope_usage_research">wužiwanje: slědźenje</string>
+    <string name="poi_observatory_type_espionage">wužiwanje: spionaža</string>
+    <string name="poi_display_yes">display: haj</string>
+    <string name="poi_display_no">display: ně</string>
+    <string name="poi_service_vehicle_car_repair_yes">awtowa porjedźernja</string>
+</resources>
