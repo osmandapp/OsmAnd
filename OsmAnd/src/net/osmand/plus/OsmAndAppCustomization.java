@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -112,17 +111,17 @@ public class OsmAndAppCustomization {
 		notifySettingsCustomized();
 	}
 
-	private void restoreOsmandSetting() {
+	public void restoreOsmandSettings() {
 		app.setOsmandSettings(osmandSettings);
 		notifySettingsCustomized();
 	}
 
-	public void restoreOsmand() {
+	public boolean restoreOsmand() {
 		navDrawerLogo = null;
 		featuresCustomized = false;
 		widgetsCustomized = false;
 		customOsmandSettings = null;
-		restoreOsmandSetting();
+		restoreOsmandSettings();
 
 		featuresEnabledIds.clear();
 		featuresDisabledIds.clear();
@@ -130,6 +129,8 @@ public class OsmAndAppCustomization {
 		featuresDisabledPatterns.clear();
 		widgetsVisibilityMap.clear();
 		widgetsAvailabilityMap.clear();
+
+		return true;
 	}
 
 	// Activities

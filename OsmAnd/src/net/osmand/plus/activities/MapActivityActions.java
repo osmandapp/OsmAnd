@@ -1089,8 +1089,8 @@ public class MapActivityActions implements DialogProvider {
 						footerLayout.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-                                if(navDrawerLogoParams!=null) showReturnConfirmationDialog(navDrawerLogoParams.get(0));
-                                else restoreOsmand();
+								if(navDrawerLogoParams!=null) showReturnConfirmationDialog(navDrawerLogoParams.get(0));
+								else restoreOsmand();
 							}
 						});
 					} else {

@@ -784,5 +784,11 @@ public class OsmandAidlService extends Service {
 			return api != null && api.setNavDrawerFooterParams(packageName, intent, appName);
 		}
 
+		@Override
+		public boolean restoreOsmand() {
+      OsmandAidlApi api = getApi("restoreOsmand");
+      return api != null && api.restoreOsmand();
+    }
+
 	};
 }

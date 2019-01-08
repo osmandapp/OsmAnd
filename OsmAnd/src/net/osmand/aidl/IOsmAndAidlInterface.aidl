@@ -164,5 +164,6 @@ interface IOsmAndAidlInterface {
     boolean setNavDrawerLogoWithParams(in String imageUri, String packageName, String intent);
     boolean setNavDrawerFooterParams(in String packageName, String intent, String appName);
 
+    boolean restoreOsmand();
 
 }
