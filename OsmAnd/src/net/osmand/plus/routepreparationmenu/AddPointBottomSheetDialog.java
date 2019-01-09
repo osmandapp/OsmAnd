@@ -278,8 +278,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private void createSwitchStartAndEndItem() {
 		final View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
 		TextView title = (TextView) switchStartAndEndView.findViewById(R.id.title);
-		ImageView iconIv = (ImageView) switchStartAndEndView.findViewById(R.id.icon);
-		iconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_change_navigation_points));
 
 		String titleS = getString(R.string.swap_start_and_destination);
 		SpannableString titleSpan = new SpannableString(titleS);
@@ -291,19 +289,22 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		}
 		title.setText(titleSpan);
 
-		switchStartAndEndView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = (MapActivity) getActivity();
-				if (mapActivity != null) {
-					TargetPointsHelper targetsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
-					WaypointDialogHelper.switchStartAndFinish(targetsHelper, targetsHelper.getPointToNavigate(),
-							mapActivity, targetsHelper.getPointToStart(), mapActivity.getMyApplication(),
-							mapActivity.getDashboard().getWaypointDialogHelper());
-				}
-				dismiss();
-			}
-		});
-		items.add(new BaseBottomSheetItem.Builder().setCustomView(switchStartAndEndView).create());
+		BaseBottomSheetItem switchStartAndEndItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_change_navigation_points))
+				.setCustomView(switchStartAndEndView)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						MapActivity mapActivity = (MapActivity) getActivity();
+						if (mapActivity != null) {
+							TargetPointsHelper targetsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+							WaypointDialogHelper.switchStartAndFinish(targetsHelper, targetsHelper.getPointToNavigate(),
+									mapActivity, targetsHelper.getPointToStart(), mapActivity.getMyApplication(),
+									mapActivity.getDashboard().getWaypointDialogHelper());
+						}
+						dismiss();
+					}
+				}).create();
+		items.add(switchStartAndEndItem);
 	}
 }
