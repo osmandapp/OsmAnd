@@ -1874,6 +1874,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		showQuickSearch(mode, showCategories, "", null);
 	}
 
+	public void showQuickSearch(ShowQuickSearchMode mode, QuickSearchTab showSearchTab) {
+		showQuickSearch(mode, showSearchTab, "", null);
+	}
+
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
 								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
@@ -1913,6 +1917,48 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
 					QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, searchLocation);
+		}
+	}
+
+	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, QuickSearchTab showSearchTab,
+								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+		if (mode == ShowQuickSearchMode.CURRENT) {
+			mapContextMenu.close();
+		} else {
+			hideContextMenu();
+		}
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION
+				|| mode == ShowQuickSearchMode.DESTINATION_SELECTION_AND_START || mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+			if (fragment != null) {
+				fragment.dismiss();
+			}
+			if (mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.INTERMEDIATE, showSearchTab, searchLocation);
+			} else if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.START_POINT, showSearchTab, searchLocation);
+			} else if (mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION, showSearchTab, searchLocation);
+			} else {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION_AND_START, showSearchTab, searchLocation);
+			}
+		} else if (fragment != null) {
+			if (mode == ShowQuickSearchMode.NEW
+					|| (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
+				fragment.dismiss();
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.REGULAR, showSearchTab, searchLocation);
+			} else {
+				fragment.show();
+			}
+			refreshMap();
+		} else {
+			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+					QuickSearchType.REGULAR, showSearchTab, searchLocation);
 		}
 	}
 

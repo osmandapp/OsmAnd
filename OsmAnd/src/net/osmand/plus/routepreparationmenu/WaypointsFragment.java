@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.ListPopupWindow;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -271,7 +270,13 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		addButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onWaypointItemClick(view.findViewById(R.id.waypoints_control_buttons));
+				Bundle args = new Bundle();
+				args.putBoolean(AddPointBottomSheetDialog.TARGET_KEY, false);
+				args.putBoolean(AddPointBottomSheetDialog.INTERMEDIATE_KEY, true);
+				AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
+				fragment.setArguments(args);
+				fragment.setUsedOnMap(false);
+				fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 			}
 		});
 
@@ -597,47 +602,14 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		title.setText(app.getString(R.string.waypoints, (pointsSize != 0 ? pointsSize : 1)));
 	}
 
-	private void onWaypointItemClick(View addWaypointItem) {
-		if (mapActivity != null) {
-			final MapRouteInfoMenu routeMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-			final ListPopupWindow popup = new ListPopupWindow(mapActivity);
-			popup.setAnchorView(addWaypointItem);
-			popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-			popup.setModal(true);
-			popup.setAdapter(routeMenu.getIntermediatesPopupAdapter(mapActivity));
-			popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					boolean hideDashboard = false;
-					if (id == MapRouteInfoMenu.SPINNER_FAV_ID) {
-						routeMenu.selectFavorite(null, false, true);
-					} else if (id == MapRouteInfoMenu.SPINNER_MAP_ID) {
-						hideDashboard = true;
-						routeMenu.selectOnScreen(false, true);
-						dismiss();
-					} else if (id == MapRouteInfoMenu.SPINNER_ADDRESS_ID) {
-						mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.INTERMEDIATE_SELECTION, false);
-					} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_MORE_ID) {
-						routeMenu.selectMapMarker(-1, false, true);
-					} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_1_ID) {
-						routeMenu.selectMapMarker(0, false, true);
-					} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_2_ID) {
-						routeMenu.selectMapMarker(1, false, true);
-					}
-					popup.dismiss();
-					if (hideDashboard) {
-						mapActivity.getDashboard().hideDashboard();
-					}
-				}
-			});
-			popup.show();
-		}
-	}
-
 	private void applyPointsChanges() {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
+				OsmandApplication app = getMyApplication();
+				if (app == null || !isVisible()) {
+					return;
+				}
 				List<TargetPointsHelper.TargetPoint> allTargets = new ArrayList<>();
 				TargetPointsHelper.TargetPoint start = null;
 				List<Object> items = listAdapter.getActiveObjects();
@@ -905,7 +877,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			WaypointsFragment fragment = new WaypointsFragment();
 			mapActivity.getSupportFragmentManager()
 					.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, TAG)
+					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 

@@ -14,8 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.ListPopupWindow;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -870,7 +868,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 	}
 
-	protected void clickRouteWaypoints() {
+	private void clickRouteWaypoints() {
 		if (getTargets().checkPointToNavigateShort()) {
 			mapActivity.getMapActions().openIntermediatePointsDialog();
 		}
@@ -894,6 +892,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		viaButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+//				clickRouteWaypoints();
 				if (getTargets().checkPointToNavigateShort()) {
 					WaypointsFragment.showInstance(mapActivity);
 				}
@@ -905,9 +904,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		viaIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (getTargets().checkPointToNavigateShort()) {
-					mapActivity.getMapActions().openIntermediatePointsDialog();
-				}
+				clickRouteWaypoints();
 			}
 		});
 		LinearLayout viaButtonContainer = (LinearLayout) parentView.findViewById(R.id.via_button_container);
@@ -976,7 +973,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		toLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				toSpinner.performClick();
+				openAddPointDialog(true, false);
 			}
 		});
 
@@ -1002,38 +999,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		toButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (mapActivity != null) {
-					final ListPopupWindow popup = new ListPopupWindow(mapActivity);
-					popup.setAnchorView(toLayout);
-					popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-					popup.setModal(true);
-					popup.setAdapter(getIntermediatesPopupAdapter(mapActivity));
-					popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-						@Override
-						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-							boolean hideDashboard = false;
-							if (id == MapRouteInfoMenu.SPINNER_FAV_ID) {
-								selectFavorite(null, false, true);
-							} else if (id == MapRouteInfoMenu.SPINNER_MAP_ID) {
-								hideDashboard = true;
-								selectOnScreen(false, true);
-							} else if (id == MapRouteInfoMenu.SPINNER_ADDRESS_ID) {
-								mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.INTERMEDIATE_SELECTION, false);
-							} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_MORE_ID) {
-								selectMapMarker(-1, false, true);
-							} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_1_ID) {
-								selectMapMarker(0, false, true);
-							} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_2_ID) {
-								selectMapMarker(1, false, true);
-							}
-							popup.dismiss();
-							if (hideDashboard) {
-								mapActivity.getDashboard().hideDashboard();
-							}
-						}
-					});
-					popup.show();
-				}
+				openAddPointDialog(false, true);
 			}
 		});
 
@@ -1100,7 +1066,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		fromLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				fromSpinner.performClick();
+				openAddPointDialog(false, false);
 			}
 		});
 
@@ -1206,12 +1172,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				getTargets().setStartPoint(point, true, m.getPointDescription(mapActivity));
 			}
 			updateFromIcon();
-
 		} else {
-
 			MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(target, intermediate);
 			selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
 		}
+	}
+
+	private void openAddPointDialog(final boolean target, final boolean intermediate) {
+		Bundle args = new Bundle();
+		args.putBoolean(AddPointBottomSheetDialog.TARGET_KEY, target);
+		args.putBoolean(AddPointBottomSheetDialog.INTERMEDIATE_KEY, intermediate);
+		AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
+		fragment.setArguments(args);
+		fragment.setUsedOnMap(false);
+		fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 	}
 
 	private boolean isLight() {

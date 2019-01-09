@@ -1,4 +1,4 @@
-package net.osmand.plus.routepreparationmenu;
+package net.osmand.plus.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;

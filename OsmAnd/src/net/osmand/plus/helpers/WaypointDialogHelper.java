@@ -498,7 +498,7 @@ public class WaypointDialogHelper {
 	}
 
 	// switch start & finish
-	private static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
+	public static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
 											 Activity ctx, TargetPoint start, OsmandApplication app,
 											 WaypointDialogHelper helper) {
 		targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),

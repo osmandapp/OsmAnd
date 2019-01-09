@@ -21,7 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.routepreparationmenu.FlowLayout;
+import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
