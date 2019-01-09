@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import alice.tuprolog.Int;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -73,6 +74,8 @@ public class ContextMenuAdapter {
 	public void removeItem(int position) {
 		items.remove(position);
 	}
+
+	public void clearAdapter() { items.clear(); }
 
 	public void setDefaultLayoutId(int defaultLayoutId) {
 		this.DEFAULT_LAYOUT_ID = defaultLayoutId;

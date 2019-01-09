@@ -70,4 +70,23 @@ public interface OsmAndCustomizationConstants {
 	String ROUTE_PLANNING_HUD_ID = HUD_BTN_ID_SCHEME + "route_planning";
 	String ZOOM_IN_HUD_ID = HUD_BTN_ID_SCHEME + "zoom_id";
 	String ZOOM_OUT_HUD_ID = HUD_BTN_ID_SCHEME + "zoom_out";
+
+	//Point's Context Action Menu:
+	String POINTS_ACTION_MENU = "point.actions.";
+	String POINT_DIRECTIONS_FROM_ID = POINTS_ACTION_MENU + "directions_from";
+	String POINT_SEARCH_NEARBY = POINTS_ACTION_MENU + "search_nearby";
+	String POINT_CHANGE_MARKER_POSITION = POINTS_ACTION_MENU + "change_m_position";
+	String POINT_MARK_AS_PARKING_LOC = POINTS_ACTION_MENU + "mark_as_parking";
+	String POINT_MEASURE_DISTANCE = POINTS_ACTION_MENU + "measure_distance";
+	String POINT_EDIT_GPX_WP = POINTS_ACTION_MENU + "edit_gpx_waypoint";
+	String POINT_ADD_GPX_WAYPOINT = POINTS_ACTION_MENU + "add_gpx_waypoint";
+  String POINT_UPDATE_MAP = POINTS_ACTION_MENU + "update_map";
+  String POINT_DOWNLOAD_MAP = POINTS_ACTION_MENU + "download_map";
+  String POINT_MODIFY_POI = POINTS_ACTION_MENU + "modify_poi";
+  String POINT_MODIFY_OSM_CHANGE = POINTS_ACTION_MENU + "modify_osm_change";
+  String POINT_CREATE_POI = POINTS_ACTION_MENU + "create_poi";
+  String POINT_MODIFY_OSM_NOTE = POINTS_ACTION_MENU + "modify_osm_note";
+  String POINT_OPEN_OSM_NOTE = POINTS_ACTION_MENU + "open_osm_note";
+
+
 }

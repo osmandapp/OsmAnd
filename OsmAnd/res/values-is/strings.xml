@@ -850,7 +850,7 @@
     <string name="agps_info">Upplýsingar A-GPS</string>
     <string name="current_route">Núverandi leið</string>
     <string name="shared_string_download_successful">Tókst að sækja</string>
-    <string name="shared_string_io_error">I/O-villa kom upp</string>
+    <string name="shared_string_io_error">I/O villa</string>
     <string name="shared_string_unexpected_error">Óvænt villa kom upp</string>
     <string name="shared_string_currently_recording_track">Er að skrá feril</string>
     <string name="track_segments">Bútar ferils</string>

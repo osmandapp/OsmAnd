@@ -28,7 +28,7 @@ public class TransportRoutePlanner {
 	
 
 
-	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException {
+	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
 		ctx.startCalcTime = System.currentTimeMillis();
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
@@ -45,7 +45,7 @@ public class TransportRoutePlanner {
 		}
 		double finishTime = ctx.cfg.maxRouteTime;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
-		
+		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
@@ -59,7 +59,6 @@ public class TransportRoutePlanner {
 				continue;
 			}
 			ctx.visitedRoutesCount++;
-			System.out.println(segment);
 			ctx.visitedSegments.put(segment.getId(), segment);
 			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges) {
 				continue;
@@ -146,10 +145,36 @@ public class TransportRoutePlanner {
 					results.add(finish);
 				}
 			}
+			
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				throw new InterruptedException("Route calculation interrupted");
+			}
+			updateCalculationProgress(ctx, queue);
+			
 		}
 		
 		return prepareResults(ctx, results);
 	}
+	
+	private void initProgressBar(TransportRoutingContext ctx, LatLon start, LatLon end) {
+		ctx.calculationProgress.distanceFromEnd = 0;
+		ctx.calculationProgress.reverseSegmentQueueSize = 0;
+		ctx.calculationProgress.directSegmentQueueSize = 0;
+		float speed = (float) ctx.cfg.travelSpeed + 1; // assume 
+		ctx.calculationProgress.totalEstimatedDistance = (float) (MapUtils.getDistance(start, end)/ speed);
+	}
+
+	private void updateCalculationProgress(TransportRoutingContext ctx, PriorityQueue<TransportRouteSegment> queue) {
+		if (ctx.calculationProgress != null) {
+			ctx.calculationProgress.directSegmentQueueSize = queue.size();
+			if (queue.size() > 0) {
+				TransportRouteSegment peek = queue.peek();
+				ctx.calculationProgress.distanceFromBegin = (float) Math.max(peek.distFromStart,
+						ctx.calculationProgress.distanceFromBegin);
+			}
+		}		
+	}
+
 
 	private List<TransportRouteResult> prepareResults(TransportRoutingContext ctx, List<TransportRouteSegment> results) {
 		Collections.sort(results, new SegmentsComparator(ctx));

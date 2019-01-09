@@ -31,7 +31,7 @@
     <string name="prefer_motorways">تفضل الطرق السريعة</string>
 	<string name="prefer_in_routing_title">فضّل…</string>
 	<string name="prefer_in_routing_descr">فضّل الطرق السريعة.</string>
-    <string name="max_speed_none">لا شيء</string>
+    <string name="max_speed_none">بلا</string>
     <string name="index_name_openmaps">فتح خرائط الاتحاد الأوروبي</string>
     
     <string name="local_indexes_cat_av">بيانات الصوت / الفيديو</string>
@@ -2252,7 +2252,7 @@
     <string name="rendering_attr_hideOverground_name">أشياء فوق سطح الأرض</string>
 
     <string name="shared_string_change">تغيير</string>
-    <string name="get_started">باشر</string>
+    <string name="get_started">ابدأ</string>
     <string name="routing_attr_short_way_name">طريق أقل استهلاكا للوقود</string>
     <string name="routing_attr_short_way_description">استخدم طريق أقل استهلاكا للوقود (عادة أقصر).</string>
     <string name="replace_favorite_confirmation">هل أنت متأكد من أنك تريد استبدال المفضلة %1$s؟</string>
@@ -2537,7 +2537,7 @@
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
     <string name="srtm_menu_download_descr">لعرض الخطوط الكنتورية على الخريطة، تحتاج إلى تحميل خريطة الخط الكنتوري لهذه المنطقة.</string>
     <string name="show_from_zoom_level">عرض من مستوى التكبير/التصغير</string>
-    <string name="display_zoom_level">عرض مستوى التكبير/التصغير: %1$s</string>
+    <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">قم بتحريك موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة الخطوط الكنتورية على الخريطة، أنت بحاجة لشراء وتثبيت البرنامج المساعد للخطوط الكنتورية</string>
     <string name="animate_my_location_desc">تفعيل حركة تعديل مجال رؤية الخريطة بالنسبة لموقعي أثناء الملاحة.</string>
@@ -2944,11 +2944,11 @@
     <string name="wikivoyage_travel_guide_descr">أدلة إلى الأماكن الأكثر أهمية في العالم، في أوسماند بدون الحاجة إلى اتصال انترنت.</string>
     <string name="in_app_purchase">شراء بداخل التطبيق</string>
     <string name="in_app_purchase_desc">دفع مرة واحدة</string>
-    <string name="in_app_purchase_desc_ex">عند الشراء مرة واحدة سيكون متاحًا لك إلى الأبد</string>
+    <string name="in_app_purchase_desc_ex">عند الشراء مرة واحدة سيكون متاحًا لك إلى الأبد.</string>
     <string name="unlock_all_features">فتح كل ميزات أوسماند</string>
     <string name="purchase_dialog_title">اختيار خطة</string>
-    <string name="purchase_dialog_travel_description">"اشترِ واحدًا من الآتي للحصول على وظائف دليل سفر بدون نت "</string>
-    <string name="purchase_dialog_subtitle">اختر العنصر المناسب</string>
+    <string name="purchase_dialog_travel_description">اشترِ واحدًا من الآتي للحصول على وظائف دليل سفر بدون نت:</string>
+    <string name="purchase_dialog_subtitle">اختر العنصر المناسب:</string>
     <string name="shared_string_dont">لا تفعل</string>
     <string name="shared_string_do">افعل</string>
     <string name="wikivoyage_download_pics_descr">صور المقالة يمكن تحمل للاستخدام بدون اتصال.
@@ -2965,4 +2965,31 @@
     <string name="add_group_descr">استيراد مجموعات من المفضلة أو نقاط طريق GPX.</string>
     <string name="coordinate_input_accuracy_description">انتقال تلقائيًا إلى الحقل التالي بعد إدخال %1$d أرقام عشرية.</string>
     <string name="mapillary_menu_title_pano">عرض صور 360° فقط</string>
+    <string name="release_3_2_pre">• اصلاح الفشل عند بدء التشغيل التي وقعت في بعض الأجهزة
+\n
+\n• ميزة علامات جديدة: عرض العلامات التي تم اجتيازها بالفعل
+\n
+\n• يعرض سجل البحث الآن الفئات التي بحثت عنها مسبقًا
+\n
+\n• اصلاح الفشل عند بدء التشغيل الذي حدث مع الخرائط غير اللاتينية
+\n
+\n• تحسين مشكلات سرعة العرض على أجهزة Android 8.0
+\n
+\n• دعم لتحرير الكائنات المضلعة (غير الملائمة)
+\n
+\n• قياس المسافة: إضافة زر القياس إلى الإجراءات في قائمة السياق</string>
+    <string name="release_3_1">• التنقل: إصلاح شريط التقدم ، تبديل سريع لنقطة البداية والنهاية للطريق
+\n
+\n• محددات الخرائط: قم بإيقاف تشغيل / إيقاف مجموعات ، والقدرة على إخفاء علامات من الخريطة
+\n
+\n• OSM Edit (تحرير OSM): القدرة على تحرير العلامات للكائنات غير المحددة النقاط وطرقها ، إصلاح التعليقات المفقودة على الملاحظات ، النسخ الاحتياطي للتحرير
+\n
+\n• تحسين تحليل Wikipedia و Wikivoyage ، الملفات المحدثة متوفرة بالفعل
+\n
+\n• قائمة السياق: إصلاح لون دروع النقل في الوضع الليلي ، إصلاح أحجام القوائم الإضافية
+\n
+\n• قارب الملاحة: دعم الممر المائي الممر
+\n
+\n• إصلاحات الأخطاء الأخرى</string>
+    <string name="start_editing_card_description">يمكنك وتحرير أي مقال على Wikivoyage. تبادل المعرفة والخبرة والموهبة واهتمامك</string>
 </resources>

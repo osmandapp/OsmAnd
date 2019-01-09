@@ -160,4 +160,10 @@ interface IOsmAndAidlInterface {
     boolean getActiveSqliteDbFiles(out List<ASqliteDbFile> files);
     boolean showSqliteDbFile(String fileName);
     boolean hideSqliteDbFile(String fileName);
+
+    boolean setNavDrawerLogoWithParams(in String imageUri, String packageName, String intent);
+    boolean setNavDrawerFooterParams(in String packageName, String intent, String appName);
+
+    boolean restoreOsmand();
+
 }

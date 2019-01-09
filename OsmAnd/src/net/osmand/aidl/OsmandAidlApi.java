@@ -151,6 +151,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_HIDE_SQLITEDB_FILE = "aidl_hide_sqlitedb_file";
 	private static final String AIDL_FILE_NAME = "aidl_file_name";
 
+
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
 	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
@@ -1822,7 +1823,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean setNavDrawerLogo(@Nullable String uri) {
-		return app.getAppCustomization().setNavDrawerLogo(uri);
+		return app.getAppCustomization().setNavDrawerLogo(uri,null, null);
 	}
 
 	boolean setEnabledIds(Collection<String> ids) {
@@ -1859,6 +1860,20 @@ public class OsmandAidlApi {
 		app.getAppCustomization().customizeOsmandSettings(sharedPreferencesName, bundle);
 		return true;
 	}
+
+	boolean setNavDrawerLogoWithParams(
+			@Nullable String uri, @Nullable String packageName, @Nullable String intent) {
+		return app.getAppCustomization().setNavDrawerLogoWithParams(uri, packageName, intent);
+	}
+
+	boolean setNavDrawerFooterParams(@Nullable String packageName, @Nullable String intent, @Nullable String appName) {
+		return app.getAppCustomization().setNavDrawerFooterAction(packageName, intent, appName);
+	}
+
+	boolean restoreOsmand() {
+		return app.getAppCustomization().restoreOsmand();
+	}
+
 
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
