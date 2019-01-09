@@ -159,10 +159,13 @@ public class ApplicationMode {
 			return this;
 		}
 
-		//todo need night mode icon
 		public ApplicationModeBuilder nauticalLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_nautical_bearing;
-			applicationMode.bearingIconNight = R.drawable.map_nautical_bearing;
+			applicationMode.bearingIconNight = R.drawable.map_nautical_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_nautical_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
+			applicationMode.locationIconDay = R.drawable.map_nautical_location;
+			applicationMode.locationIconNight = R.drawable.map_nautical_location_night;
 			return this;
 		}
 

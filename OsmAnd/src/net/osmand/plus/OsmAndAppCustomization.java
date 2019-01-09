@@ -14,6 +14,7 @@ import android.text.TextUtils;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
@@ -40,341 +41,369 @@ import java.util.Set;
 
 public class OsmAndAppCustomization {
 
-	protected OsmandApplication app;
-	protected OsmandSettings osmandSettings;
+  protected OsmandApplication app;
+  protected OsmandSettings osmandSettings;
 
-	private Bitmap navDrawerLogo;
-	private ArrayList<String> navDrawerParams;
+  private Bitmap navDrawerLogo;
+  private ArrayList<String> navDrawerParams;
 
-	private Set<String> featuresEnabledIds = new HashSet<>();
-	private Set<String> featuresDisabledIds = new HashSet<>();
-	private Set<String> featuresEnabledPatterns = new HashSet<>();
-	private Set<String> featuresDisabledPatterns = new HashSet<>();
-	private Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
-	private Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
-	private CustomOsmandSettings customOsmandSettings;
+  private Set<String> featuresEnabledIds = new HashSet<>();
+  private Set<String> featuresDisabledIds = new HashSet<>();
+  private Set<String> featuresEnabledPatterns = new HashSet<>();
+  private Set<String> featuresDisabledPatterns = new HashSet<>();
+  private Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
+  private Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+  private CustomOsmandSettings customOsmandSettings;
 
-	private boolean featuresCustomized;
-	private boolean widgetsCustomized;
+  private boolean featuresCustomized;
+  private boolean widgetsCustomized;
 
-	private List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
+  private List<OsmAndAppCustomizationListener> listeners = new ArrayList<>();
 
-	public interface OsmAndAppCustomizationListener {
+  public interface OsmAndAppCustomizationListener {
 
-		void onOsmAndSettingsCustomized();
-	}
+    void onOsmAndSettingsCustomized();
+  }
 
-	public static class CustomOsmandSettings {
-		private String sharedPreferencesName;
-		private OsmandSettings settings;
+  public static class CustomOsmandSettings {
 
-		CustomOsmandSettings(OsmandApplication app, String sharedPreferencesName, Bundle bundle) {
-			this.sharedPreferencesName = sharedPreferencesName;
-			this.settings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app), sharedPreferencesName);
-			if (bundle != null) {
-				for (String key : bundle.keySet()) {
-					Object object = bundle.get(key);
-					this.settings.setPreference(key, object);
-				}
-			}
-		}
+    private String sharedPreferencesName;
+    private OsmandSettings settings;
 
-		public OsmandSettings getSettings() {
-			return settings;
-		}
-	}
+    CustomOsmandSettings(OsmandApplication app, String sharedPreferencesName, Bundle bundle) {
+      this.sharedPreferencesName = sharedPreferencesName;
+      this.settings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app),
+          sharedPreferencesName);
+      if (bundle != null) {
+        for (String key : bundle.keySet()) {
+          Object object = bundle.get(key);
+          this.settings.setPreference(key, object);
+        }
+      }
+    }
 
-	public void setup(OsmandApplication app) {
-		this.app = app;
-		this.osmandSettings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app));
-	}
+    public OsmandSettings getSettings() {
+      return settings;
+    }
+  }
 
-	public OsmandSettings getOsmandSettings() {
-		return customOsmandSettings != null ? customOsmandSettings.getSettings() : osmandSettings;
-	}
+  public void setup(OsmandApplication app) {
+    this.app = app;
+    this.osmandSettings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app));
+  }
 
-	public void customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
-		customOsmandSettings = new CustomOsmandSettings(app, sharedPreferencesName, bundle);
-		OsmandSettings newSettings = customOsmandSettings.getSettings();
-		if (Build.VERSION.SDK_INT < 19) {
-			if (osmandSettings.isExternalStorageDirectorySpecifiedPre19()) {
-				File externalStorageDirectory = osmandSettings.getExternalStorageDirectoryPre19();
-				newSettings.setExternalStorageDirectoryPre19(externalStorageDirectory.getAbsolutePath());
-			}
-		} else if (osmandSettings.isExternalStorageDirectoryTypeSpecifiedV19()
-				&& osmandSettings.isExternalStorageDirectorySpecifiedV19()) {
-			int type = osmandSettings.getExternalStorageDirectoryTypeV19();
-			String directory = osmandSettings.getExternalStorageDirectoryV19();
-			newSettings.setExternalStorageDirectoryV19(type, directory);
-		}
-		app.setOsmandSettings(newSettings);
-		notifySettingsCustomized();
-	}
+  public OsmandSettings getOsmandSettings() {
+    return customOsmandSettings != null ? customOsmandSettings.getSettings() : osmandSettings;
+  }
 
-	public void restoreOsmandSettings() {
-		app.setOsmandSettings(osmandSettings);
-		notifySettingsCustomized();
-	}
+  public void customizeOsmandSettings(@NonNull String sharedPreferencesName,
+      @Nullable Bundle bundle) {
+    customOsmandSettings = new CustomOsmandSettings(app, sharedPreferencesName, bundle);
+    OsmandSettings newSettings = customOsmandSettings.getSettings();
+    if (Build.VERSION.SDK_INT < 19) {
+      if (osmandSettings.isExternalStorageDirectorySpecifiedPre19()) {
+        File externalStorageDirectory = osmandSettings.getExternalStorageDirectoryPre19();
+        newSettings.setExternalStorageDirectoryPre19(externalStorageDirectory.getAbsolutePath());
+      }
+    } else if (osmandSettings.isExternalStorageDirectoryTypeSpecifiedV19()
+        && osmandSettings.isExternalStorageDirectorySpecifiedV19()) {
+      int type = osmandSettings.getExternalStorageDirectoryTypeV19();
+      String directory = osmandSettings.getExternalStorageDirectoryV19();
+      newSettings.setExternalStorageDirectoryV19(type, directory);
+    }
+    app.setOsmandSettings(newSettings);
+    notifySettingsCustomized();
+  }
 
-	public boolean restoreOsmand() {
-		navDrawerLogo = null;
-		featuresCustomized = false;
-		widgetsCustomized = false;
-		customOsmandSettings = null;
-		restoreOsmandSettings();
+  public void restoreOsmandSettings() {
+    app.setOsmandSettings(osmandSettings);
+    notifySettingsCustomized();
+  }
 
-		featuresEnabledIds.clear();
-		featuresDisabledIds.clear();
-		featuresEnabledPatterns.clear();
-		featuresDisabledPatterns.clear();
-		widgetsVisibilityMap.clear();
-		widgetsAvailabilityMap.clear();
+  public boolean restoreOsmand() {
+    navDrawerLogo = null;
+    featuresCustomized = false;
+    widgetsCustomized = false;
+    customOsmandSettings = null;
+    restoreOsmandSettings();
 
-		return true;
-	}
+    featuresEnabledIds.clear();
+    featuresDisabledIds.clear();
+    featuresEnabledPatterns.clear();
+    featuresDisabledPatterns.clear();
+    widgetsVisibilityMap.clear();
+    widgetsAvailabilityMap.clear();
 
-	// Activities
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsActivity.class;
-	}
+    return true;
+  }
 
-	public Class<MapActivity> getMapActivity() {
-		return MapActivity.class;
-	}
+  // Activities
+  public Class<? extends Activity> getSettingsActivity() {
+    return SettingsActivity.class;
+  }
 
-	public Class<TrackActivity> getTrackActivity() {
-		return TrackActivity.class;
-	}
+  public Class<MapActivity> getMapActivity() {
+    return MapActivity.class;
+  }
 
-	public Class<FavoritesActivity> getFavoritesActivity() {
-		return FavoritesActivity.class;
-	}
+  public Class<TrackActivity> getTrackActivity() {
+    return TrackActivity.class;
+  }
 
-	public Class<? extends Activity> getDownloadIndexActivity() {
-		return DownloadActivity.class;
-	}
+  public Class<FavoritesActivity> getFavoritesActivity() {
+    return FavoritesActivity.class;
+  }
 
-	public Class<? extends Activity> getPluginsActivity() {
-		return PluginsActivity.class;
-	}
+  public Class<? extends Activity> getDownloadIndexActivity() {
+    return DownloadActivity.class;
+  }
 
-	public Class<? extends Activity> getDownloadActivity() {
-		return DownloadActivity.class;
-	}
+  public Class<? extends Activity> getPluginsActivity() {
+    return PluginsActivity.class;
+  }
 
-	public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
-		return Collections.emptyList();
-	}
+  public Class<? extends Activity> getDownloadActivity() {
+    return DownloadActivity.class;
+  }
 
-	public String getIndexesUrl() {
-		return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/get_indexes?gzip&" + Version.getVersionAsURLParam(app);
-	}
+  public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
+    return Collections.emptyList();
+  }
 
-	public boolean showDownloadExtraActions() {
-		return true;
-	}
+  public String getIndexesUrl() {
+    return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/get_indexes?gzip&" + Version
+        .getVersionAsURLParam(app);
+  }
 
-	public File getTracksDir() {
-		return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
-	}
+  public boolean showDownloadExtraActions() {
+    return true;
+  }
 
-	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
+  public File getTracksDir() {
+    return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
+  }
 
-	}
+  public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
 
-	public List<? extends LocationPoint> getWaypoints() {
-		return Collections.emptyList();
-	}
+  }
 
-	public boolean isWaypointGroupVisible(int waypointType, RouteCalculationResult route) {
-		if (waypointType == WaypointHelper.ALARMS) {
-			return route != null && !route.getAlarmInfo().isEmpty();
-		} else if (waypointType == WaypointHelper.WAYPOINTS) {
-			return route != null && !route.getLocationPoints().isEmpty();
-		}
-		return true;
-	}
+  public List<? extends LocationPoint> getWaypoints() {
+    return Collections.emptyList();
+  }
 
-	public boolean onDestinationReached() {
-		return true;
-	}
+  public boolean isWaypointGroupVisible(int waypointType, RouteCalculationResult route) {
+    if (waypointType == WaypointHelper.ALARMS) {
+      return route != null && !route.getAlarmInfo().isEmpty();
+    } else if (waypointType == WaypointHelper.WAYPOINTS) {
+      return route != null && !route.getLocationPoints().isEmpty();
+    }
+    return true;
+  }
 
-	@Nullable
-	public Bitmap getNavDrawerLogo() {
-		return navDrawerLogo;
-	}
+  public boolean onDestinationReached() {
+    return true;
+  }
 
-	@Nullable
-	public ArrayList<String> getNavDrawerLogoParams() {return navDrawerParams; }
+  @Nullable
+  public Bitmap getNavDrawerLogo() {
+    return navDrawerLogo;
+  }
 
-	public boolean setNavDrawerLogo(@Nullable String uri, @Nullable String packageName, @Nullable String intent) {
-		if (TextUtils.isEmpty(uri)) {
-			navDrawerLogo = null;
-		} else {
-			try {
-				InputStream is = app.getContentResolver().openInputStream(Uri.parse(uri));
-				if (is != null) {
-					navDrawerLogo = BitmapFactory.decodeStream(is);
-					is.close();
+  @Nullable
+  public ArrayList<String> getNavDrawerLogoParams() {
+    return navDrawerParams;
+  }
 
-				}
-			} catch (FileNotFoundException e) {
-				return false;
-			} catch (IOException e) {
-				// ignore
-			}
-			if(packageName!=null && intent!=null) {
-			    navDrawerParams = new ArrayList<>();
-				navDrawerParams.add(packageName);
-				navDrawerParams.add(intent);
-			}
-		}
-		return true;
-	}
+  public boolean setNavDrawerLogo(@Nullable String uri, @Nullable String packageName,
+      @Nullable String intent) {
+    if (TextUtils.isEmpty(uri)) {
+      navDrawerLogo = null;
+    } else {
+      try {
+        InputStream is = app.getContentResolver().openInputStream(Uri.parse(uri));
+        if (is != null) {
+          navDrawerLogo = BitmapFactory.decodeStream(is);
+          is.close();
+
+        }
+      } catch (FileNotFoundException e) {
+        return false;
+      } catch (IOException e) {
+        // ignore
+      }
+      if (packageName != null && intent != null) {
+        navDrawerParams = new ArrayList<>();
+        navDrawerParams.add(packageName);
+        navDrawerParams.add(intent);
+      }
+    }
+    return true;
+  }
 
 
+  public void setFeaturesEnabledIds(@NonNull Collection<String> ids) {
+    featuresEnabledIds.clear();
+    featuresEnabledIds.addAll(ids);
+    setFeaturesCustomized();
+  }
 
-	public void setFeaturesEnabledIds(@NonNull Collection<String> ids) {
-		featuresEnabledIds.clear();
-		featuresEnabledIds.addAll(ids);
-		setFeaturesCustomized();
-	}
+  public void setFeaturesDisabledIds(@NonNull Collection<String> ids) {
+    featuresDisabledIds.clear();
+    featuresDisabledIds.addAll(ids);
+    setFeaturesCustomized();
+  }
 
-	public void setFeaturesDisabledIds(@NonNull Collection<String> ids) {
-		featuresDisabledIds.clear();
-		featuresDisabledIds.addAll(ids);
-		setFeaturesCustomized();
-	}
+  public void setFeaturesEnabledPatterns(@NonNull Collection<String> patterns) {
+    featuresEnabledPatterns.clear();
+    featuresEnabledPatterns.addAll(patterns);
+    setFeaturesCustomized();
+  }
 
-	public void setFeaturesEnabledPatterns(@NonNull Collection<String> patterns) {
-		featuresEnabledPatterns.clear();
-		featuresEnabledPatterns.addAll(patterns);
-		setFeaturesCustomized();
-	}
+  public void setFeaturesDisabledPatterns(@NonNull Collection<String> patterns) {
+    featuresDisabledPatterns.clear();
+    featuresDisabledPatterns.addAll(patterns);
+    setFeaturesCustomized();
+  }
 
-	public void setFeaturesDisabledPatterns(@NonNull Collection<String> patterns) {
-		featuresDisabledPatterns.clear();
-		featuresDisabledPatterns.addAll(patterns);
-		setFeaturesCustomized();
-	}
+  public Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId,
+      @Nullable List<String> appModeKeys) {
+    HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
+    widgetsVisibilityMap.put(widgetId, set);
+    setWidgetsCustomized();
+    return set;
+  }
 
-	public Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
-		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
-		widgetsVisibilityMap.put(widgetId, set);
-		setWidgetsCustomized();
-		return set;
-	}
+  public Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId,
+      @Nullable List<String> appModeKeys) {
+    HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
+    widgetsAvailabilityMap.put(widgetId, set);
+    setWidgetsCustomized();
+    return set;
+  }
 
-	public Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
-		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
-		widgetsAvailabilityMap.put(widgetId, set);
-		setWidgetsCustomized();
-		return set;
-	}
+  public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {
+    Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
+    if (set == null) {
+      return false;
+    }
+    return set.contains(appMode);
+  }
 
-	public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {
-		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
-		if (set == null) {
-			return false;
-		}
-		return set.contains(appMode);
-	}
+  public boolean isWidgetAvailable(@NonNull String key, ApplicationMode appMode) {
+    Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
+    if (set == null) {
+      return true;
+    }
+    return set.contains(appMode);
+  }
 
-	public boolean isWidgetAvailable(@NonNull String key, ApplicationMode appMode) {
-		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
-		if (set == null) {
-			return true;
-		}
-		return set.contains(appMode);
-	}
+  public boolean setNavDrawerLogoWithParams(String uri, @Nullable String packageName,
+      @Nullable String intent) {
+    return setNavDrawerLogo(uri, packageName, intent);
+  }
 
-	public boolean setNavDrawerLogoWithParams(String uri, @Nullable String packageName, @Nullable String intent) {
-		LOG.info("setNavDrawerLogoWithParams called");
-		return setNavDrawerLogo(uri, packageName, intent);
-	}
+  public boolean setNavDrawerFooterAction(String packageName, String intent, String appName) {
+    //todo implement custom action to "Powered by Osmand" action in NavDrawer
+    return true;
+  }
 
-	public boolean setNavDrawerFooterAction(String packageName, String intent, String appName) {
-		//todo implement custom action to "Powered by Osmand" action in NavDrawer
-		return true;
-	}
+  public boolean changePluginStatus(PluginParams params) {
+    if (params.getNewState() == 0) {
+      for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
+        if(plugin.getId().equals(params.getPluginId())) plugin.setActive(false);
+      }
+      return true;
+    }
 
-	@NonNull
-	private HashSet<ApplicationMode> getAppModesSet(@Nullable List<String> appModeKeys) {
-		HashSet<ApplicationMode> set = new HashSet<>();
-		List<ApplicationMode> values = ApplicationMode.allPossibleValues();
-		if (appModeKeys == null) {
-			set.addAll(values);
-		} else {
-			for (String key : appModeKeys) {
-				ApplicationMode am = ApplicationMode.valueOfStringKey(key, null);
-				if (am != null) {
-					set.add(am);
-				}
-			}
-		}
-		for (ApplicationMode m : values) {
-			// add derived modes
-			if (set.contains(m.getParent())) {
-				set.add(m);
-			}
-		}
-		return set;
-	}
+    if (params.getNewState() == 1) {
+      for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
+        if (plugin.getId().equals(params.getPluginId())) {
+          plugin.setActive(true);
+        }
+      }
+      return true;
+    }
 
-	public boolean isFeatureEnabled(@NonNull String id) {
-		if (!featuresCustomized) {
-			return true;
-		}
-		if (featuresEnabledIds.contains(id)) {
-			return true;
-		}
-		if (featuresDisabledIds.contains(id)) {
-			return false;
-		}
-		if (isMatchesPattern(id, featuresEnabledPatterns)) {
-			return true;
-		}
-		return !isMatchesPattern(id, featuresDisabledPatterns);
-	}
+    return false;
+  }
 
-	public boolean areWidgetsCustomized() {
-		return widgetsCustomized;
-	}
+  @NonNull
+  private HashSet<ApplicationMode> getAppModesSet(@Nullable List<String> appModeKeys) {
+    HashSet<ApplicationMode> set = new HashSet<>();
+    List<ApplicationMode> values = ApplicationMode.allPossibleValues();
+    if (appModeKeys == null) {
+      set.addAll(values);
+    } else {
+      for (String key : appModeKeys) {
+        ApplicationMode am = ApplicationMode.valueOfStringKey(key, null);
+        if (am != null) {
+          set.add(am);
+        }
+      }
+    }
+    for (ApplicationMode m : values) {
+      // add derived modes
+      if (set.contains(m.getParent())) {
+        set.add(m);
+      }
+    }
+    return set;
+  }
 
-	private void setFeaturesCustomized() {
-		featuresCustomized = true;
-	}
+  public boolean isFeatureEnabled(@NonNull String id) {
+    if (!featuresCustomized) {
+      return true;
+    }
+    if (featuresEnabledIds.contains(id)) {
+      return true;
+    }
+    if (featuresDisabledIds.contains(id)) {
+      return false;
+    }
+    if (isMatchesPattern(id, featuresEnabledPatterns)) {
+      return true;
+    }
+    return !isMatchesPattern(id, featuresDisabledPatterns);
+  }
 
-	private void setWidgetsCustomized() {
-		widgetsCustomized = true;
-	}
+  public boolean areWidgetsCustomized() {
+    return widgetsCustomized;
+  }
 
-	private boolean isMatchesPattern(@NonNull String id, @NonNull Set<String> patterns) {
-		for (String pattern : patterns) {
-			if (id.startsWith(pattern)) {
-				return true;
-			}
-		}
-		return false;
-	}
+  private void setFeaturesCustomized() {
+    featuresCustomized = true;
+  }
 
-	private void notifySettingsCustomized() {
-		app.uiHandler.post(new Runnable() {
+  private void setWidgetsCustomized() {
+    widgetsCustomized = true;
+  }
 
-			@Override
-			public void run() {
-				for (OsmAndAppCustomizationListener l : listeners) {
-					l.onOsmAndSettingsCustomized();
-				}
-			}
-		});
-	}
+  private boolean isMatchesPattern(@NonNull String id, @NonNull Set<String> patterns) {
+    for (String pattern : patterns) {
+      if (id.startsWith(pattern)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	public void addListener(OsmAndAppCustomizationListener listener) {
-		this.listeners.add(listener);
-	}
+  private void notifySettingsCustomized() {
+    app.uiHandler.post(new Runnable() {
 
-	public void removeListener(OsmAndAppCustomizationListener listener) {
-		this.listeners.remove(listener);
-	}
+      @Override
+      public void run() {
+        for (OsmAndAppCustomizationListener l : listeners) {
+          l.onOsmAndSettingsCustomized();
+        }
+      }
+    });
+  }
+
+  public void addListener(OsmAndAppCustomizationListener listener) {
+    this.listeners.add(listener);
+  }
+
+  public void removeListener(OsmAndAppCustomizationListener listener) {
+    this.listeners.remove(listener);
+  }
 }
