@@ -352,7 +352,7 @@ public class TransportRoutingHelper {
 			params.calculationProgress.isCancelled = true;
 		}
 
-		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException {
+		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException, InterruptedException {
 			RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 
