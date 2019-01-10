@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -43,6 +44,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -1642,6 +1645,50 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+  boolean registerForOsmandInitialization(final OsmandAppInitCallback callback) throws RemoteException {
+		if (app.isApplicationInitializing()) {
+      app.getAppInitializer().addListener(new AppInitializeListener() {
+        @Override
+        public void onProgress(AppInitializer init, InitEvents event) {}
+
+        @Override
+        public void onFinish(AppInitializer init) {
+          try{
+            LOG.debug("AIDL App registerForOsmandInitialization");
+            callback.onAppInitialized();
+          } catch(Exception e){
+            e.printStackTrace();
+          }
+        }
+      });
+    } else {
+      callback.onAppInitialized();
+    }
+    return true;
+  }
+
+//	void registerForOsmandInitialization(final IOsmAndAidlCallback callback) throws RemoteException {
+//	  if (app.isApplicationInitializing()) {
+//	  	app.getAppInitializer().addListener(new AppInitializeListener() {
+//        @Override
+//        public void onProgress(AppInitializer init, InitEvents event) {}
+//
+//        @Override
+//        public void onFinish(AppInitializer init) {
+//        	LOG.debug("App init finished callback");
+//        	try{
+//          	callback.onAppInitialized();
+//        	} catch(Exception e){
+//        		e.printStackTrace();
+//
+//					}
+//        }
+//      });
+//    } else {
+//	    callback.onAppInitialized();
+//    }
+//  }
+
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
 			if (items.isEmpty()) {
@@ -1880,6 +1927,7 @@ public class OsmandAidlApi {
 	}
 
 
+
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
@@ -1950,4 +1998,8 @@ public class OsmandAidlApi {
 	public interface SearchCompleteCallback {
 		void onSearchComplete(List<SearchResult> resultSet);
 	}
+
+	public interface OsmandAppInitCallback {
+    void onAppInitialized();
+  }
 }

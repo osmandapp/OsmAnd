@@ -6,4 +6,6 @@ interface IOsmAndAidlCallback {
     void onSearchComplete(in List<SearchResult> resultSet);
     
     void onUpdate();
+
+    void onAppInitialized();
 }
