@@ -221,10 +221,10 @@ class TelegramHelper private constructor() {
 			is MessageUserTextLocation -> content.lastUpdated
 			else -> Math.max(message.editDate, message.date)
 		}
-	} 
+	}
 
 	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
-	
+
 	fun isSecretChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypeSecret
 
 	private fun isChannel(chat: TdApi.Chat): Boolean {
@@ -384,7 +384,7 @@ class TelegramHelper private constructor() {
 		is TdApi.ChatTypeSecret -> type.userId
 		else -> 0
 	}
-	
+
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
@@ -753,7 +753,7 @@ class TelegramHelper private constructor() {
 			stopSendingLiveLocationToChat(chatInfo)
 		}
 	}
-	
+
 	fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {
 		requestingActiveLiveLocationMessages = true
 		client?.send(TdApi.GetActiveLiveLocationMessages()) { obj ->
@@ -1234,6 +1234,33 @@ class TelegramHelper private constructor() {
 						}
 					 }
 				}
+				s.startsWith(ALTITUDE_PREFIX) -> {
+					val altStr = s.removePrefix(ALTITUDE_PREFIX)
+					try {
+						val alt = altStr.split(" ").first()
+						res.altitude = alt.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
+				s.startsWith(SPEED_PREFIX) -> {
+					val altStr = s.removePrefix(SPEED_PREFIX)
+					try {
+						val alt = altStr.split(" ").first()
+						res.speed = alt.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
+				s.startsWith(HDOP_PREFIX) -> {
+					val altStr = s.removePrefix(HDOP_PREFIX)
+					try {
+						val alt = altStr.split(" ").first()
+						res.hdop = alt.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
 				s.startsWith(UPDATED_PREFIX) -> {
 					if (res.lastUpdated == 0) {
 						val updatedStr = s.removePrefix(UPDATED_PREFIX)
@@ -1290,6 +1317,12 @@ class TelegramHelper private constructor() {
 		var lon: Double = Double.NaN
 			internal set
 		var lastUpdated: Int = 0
+			internal set
+		var speed: Double = 0.0
+			internal set
+		var altitude: Double = 0.0
+			internal set
+		var hdop: Double = 0.0
 			internal set
 
 		override fun getConstructor() = -1

@@ -467,7 +467,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.lastTelegramUpdateTime?.visibility = View.VISIBLE
 				holder.lastTelegramUpdateTime?.text = OsmandFormatter.getListItemLiveTimeDescr(app, telegramHelper.lastTelegramUpdateTime, lastTelegramUpdateStr)
 				holder.lastTelegramUpdateTime?.setOnClickListener {
-					app.tracksDbHelper.writeToFile()
+					app.savingTracksDbHelper.saveDataToGpx(app.getExternalFilesDir(null))
 				}
 			} else {
 				holder.lastTelegramUpdateTime?.visibility = View.GONE
