@@ -105,7 +105,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var appToConnectPackage = ""
 		private set
 
-	var liveNowSortType = LiveNowSortType.SORT_BY_GROUP
+	var liveNowSortType = LiveNowSortType.SORT_BY_DISTANCE
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
 
@@ -487,7 +487,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
 
 		liveNowSortType = LiveNowSortType.valueOf(
-			prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_GROUP.name)
+			prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_DISTANCE.name)
 		)
 
 		batteryOptimisationAsked = prefs.getBoolean(BATTERY_OPTIMISATION_ASKED,false)

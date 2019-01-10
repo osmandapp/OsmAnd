@@ -25,6 +25,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	lateinit var osmandAidlHelper: OsmandAidlHelper private set
 	lateinit var locationProvider: TelegramLocationProvider private set
 	lateinit var messagesDbHelper: MessagesDbHelper private set
+	lateinit var tracksDbHelper: TracksDbHelper private set
 
 	var telegramService: TelegramService? = null
 
@@ -68,6 +69,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		notificationHelper = NotificationHelper(this)
 		locationProvider = TelegramLocationProvider(this)
 		messagesDbHelper = MessagesDbHelper(this)
+		tracksDbHelper = TracksDbHelper(this)
 
 		if (settings.hasAnyChatToShareLocation() && AndroidUtils.isLocationPermissionAvailable(this)) {
 			shareLocationHelper.startSharingLocation()
