@@ -685,10 +685,16 @@ class TelegramHelper private constructor() {
 			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
 			}
-			removeOldMessages(message, fromBot, viaBot)
-			usersLocationMessages[message.id] = message
-			incomingMessagesListeners.forEach {
-				it.onReceiveChatLocationMessages(message.chatId, message)
+			if (message.isOutgoing) {
+				outgoingMessagesListeners.forEach {
+					it.onUpdateMessages(listOf(message))
+				}
+			} else {
+				removeOldMessages(message, fromBot, viaBot)
+				usersLocationMessages[message.id] = message
+				incomingMessagesListeners.forEach {
+					it.onReceiveChatLocationMessages(message.chatId, message)
+				}
 			}
 		}
 	}
@@ -1145,19 +1151,20 @@ class TelegramHelper private constructor() {
 		if (isChannelPost) {
 			return false
 		}
+		val content = content
+		val isUserTextLocation = (content is TdApi.MessageText) && content.text.text.startsWith(USER_TEXT_LOCATION_TITLE)
 		val isOsmAndBot = isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
-		if (isOutgoing && !isOsmAndBot) {
+		if (!(isUserTextLocation || content is MessageLocation || isOsmAndBot)) {
 			return false
 		}
 		val lastEdited = Math.max(date, editDate)
 		if (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - lastEdited > messageActiveTimeSec) {
 			return false
 		}
-		val content = content
-		val isUserTextLocation = (content is TdApi.MessageText) && content.text.text.startsWith(USER_TEXT_LOCATION_TITLE)
+
 		return when (content) {
 			is TdApi.MessageLocation -> true
-			is TdApi.MessageText -> (isOsmAndBot) && content.text.text.startsWith(DEVICE_PREFIX) || (isUserTextLocation && senderUserId != currentUser?.id)
+			is TdApi.MessageText -> (isOsmAndBot) && content.text.text.startsWith(DEVICE_PREFIX) || isUserTextLocation
 			else -> false
 		}
 	}
@@ -1543,7 +1550,7 @@ class TelegramHelper private constructor() {
 							lastTelegramUpdateTime = Math.max(message.date, message.editDate)
 						}
 						incomingMessagesListeners.forEach {
-							it.onReceiveChatLocationMessages(message.chatId, message)
+							it.updateLocationMessages()
 						}
 					}
 				}
@@ -1569,6 +1576,7 @@ class TelegramHelper private constructor() {
 								newContent
 							}
 						}
+						log.debug("UpdateMessageContent " + message.senderUserId)
 						incomingMessagesListeners.forEach {
 							it.onReceiveChatLocationMessages(message.chatId, message)
 						}

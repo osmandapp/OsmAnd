@@ -49,6 +49,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
+// copy from net.osmand.plus.GPXUtilities and changes done to WptPt (userId,chatId)
+
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 
