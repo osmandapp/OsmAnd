@@ -33,6 +33,7 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.io.File
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
@@ -230,6 +231,15 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	fun tabClosed() {
 		stopLocationUpdate()
+	}
+
+	fun shareGpx(path: String) {
+		val fileUri = AndroidUtils.getUriForFile(app, File(path))
+		val sendIntent = Intent(Intent.ACTION_SEND)
+		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+		sendIntent.type = "application/gpx+xml"
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+		startActivity(sendIntent)
 	}
 
 	private fun chooseOsmAnd() {
@@ -446,6 +456,15 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 						app.showLocationHelper.showLocationOnMap(item, staleLocation)
 					}
 				}
+				openOnMapView?.setOnLongClickListener {
+					app.savingTracksDbHelper.saveAsyncUserDataToGpx(
+						this@LiveNowTabFragment,
+						app.getExternalFilesDir(null),
+						item.userId,
+						60 * 60 * 6 * 1000
+					)
+					true
+				}
 			} else {
 				openOnMapView?.setOnClickListener(null)
 			}
@@ -467,7 +486,15 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.lastTelegramUpdateTime?.visibility = View.VISIBLE
 				holder.lastTelegramUpdateTime?.text = OsmandFormatter.getListItemLiveTimeDescr(app, telegramHelper.lastTelegramUpdateTime, lastTelegramUpdateStr)
 				holder.lastTelegramUpdateTime?.setOnClickListener {
-					app.tracksDbHelper.writeToFile()
+					val currentUserId = telegramHelper.getCurrentUser()?.id
+					if (currentUserId != null) {
+						app.savingTracksDbHelper.saveAsyncUserDataToGpx(
+							this@LiveNowTabFragment,
+							app.getExternalFilesDir(null),
+							currentUserId,
+							60 * 60 * 6 * 1000
+						)
+					}
 				}
 			} else {
 				holder.lastTelegramUpdateTime?.visibility = View.GONE

@@ -221,10 +221,10 @@ class TelegramHelper private constructor() {
 			is MessageUserTextLocation -> content.lastUpdated
 			else -> Math.max(message.editDate, message.date)
 		}
-	} 
+	}
 
 	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
-	
+
 	fun isSecretChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypeSecret
 
 	private fun isChannel(chat: TdApi.Chat): Boolean {
@@ -384,7 +384,7 @@ class TelegramHelper private constructor() {
 		is TdApi.ChatTypeSecret -> type.userId
 		else -> 0
 	}
-	
+
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
@@ -685,10 +685,16 @@ class TelegramHelper private constructor() {
 			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
 			}
-			removeOldMessages(message, fromBot, viaBot)
-			usersLocationMessages[message.id] = message
-			incomingMessagesListeners.forEach {
-				it.onReceiveChatLocationMessages(message.chatId, message)
+			if (message.isOutgoing) {
+				outgoingMessagesListeners.forEach {
+					it.onUpdateMessages(listOf(message))
+				}
+			} else {
+				removeOldMessages(message, fromBot, viaBot)
+				usersLocationMessages[message.id] = message
+				incomingMessagesListeners.forEach {
+					it.onReceiveChatLocationMessages(message.chatId, message)
+				}
 			}
 		}
 	}
@@ -753,7 +759,7 @@ class TelegramHelper private constructor() {
 			stopSendingLiveLocationToChat(chatInfo)
 		}
 	}
-	
+
 	fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {
 		requestingActiveLiveLocationMessages = true
 		client?.send(TdApi.GetActiveLiveLocationMessages()) { obj ->
@@ -1145,19 +1151,20 @@ class TelegramHelper private constructor() {
 		if (isChannelPost) {
 			return false
 		}
+		val content = content
+		val isUserTextLocation = (content is TdApi.MessageText) && content.text.text.startsWith(USER_TEXT_LOCATION_TITLE)
 		val isOsmAndBot = isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
-		if (isOutgoing && !isOsmAndBot) {
+		if (!(isUserTextLocation || content is TdApi.MessageLocation || isOsmAndBot)) {
 			return false
 		}
 		val lastEdited = Math.max(date, editDate)
 		if (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - lastEdited > messageActiveTimeSec) {
 			return false
 		}
-		val content = content
-		val isUserTextLocation = (content is TdApi.MessageText) && content.text.text.startsWith(USER_TEXT_LOCATION_TITLE)
+
 		return when (content) {
 			is TdApi.MessageLocation -> true
-			is TdApi.MessageText -> (isOsmAndBot) && content.text.text.startsWith(DEVICE_PREFIX) || (isUserTextLocation && senderUserId != currentUser?.id)
+			is TdApi.MessageText -> (isOsmAndBot) && content.text.text.startsWith(DEVICE_PREFIX) || isUserTextLocation
 			else -> false
 		}
 	}
@@ -1234,6 +1241,33 @@ class TelegramHelper private constructor() {
 						}
 					 }
 				}
+				s.startsWith(ALTITUDE_PREFIX) -> {
+					val altStr = s.removePrefix(ALTITUDE_PREFIX)
+					try {
+						val alt = altStr.split(" ").first()
+						res.altitude = alt.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
+				s.startsWith(SPEED_PREFIX) -> {
+					val altStr = s.removePrefix(SPEED_PREFIX)
+					try {
+						val alt = altStr.split(" ").first()
+						res.speed = alt.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
+				s.startsWith(HDOP_PREFIX) -> {
+					val altStr = s.removePrefix(HDOP_PREFIX)
+					try {
+						val alt = altStr.split(" ").first()
+						res.hdop = alt.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
 				s.startsWith(UPDATED_PREFIX) -> {
 					if (res.lastUpdated == 0) {
 						val updatedStr = s.removePrefix(UPDATED_PREFIX)
@@ -1290,6 +1324,12 @@ class TelegramHelper private constructor() {
 		var lon: Double = Double.NaN
 			internal set
 		var lastUpdated: Int = 0
+			internal set
+		var speed: Double = 0.0
+			internal set
+		var altitude: Double = 0.0
+			internal set
+		var hdop: Double = 0.0
 			internal set
 
 		override fun getConstructor() = -1
@@ -1510,7 +1550,7 @@ class TelegramHelper private constructor() {
 							lastTelegramUpdateTime = Math.max(message.date, message.editDate)
 						}
 						incomingMessagesListeners.forEach {
-							it.onReceiveChatLocationMessages(message.chatId, message)
+							it.updateLocationMessages()
 						}
 					}
 				}
@@ -1536,6 +1576,7 @@ class TelegramHelper private constructor() {
 								newContent
 							}
 						}
+						log.debug("UpdateMessageContent " + message.senderUserId)
 						incomingMessagesListeners.forEach {
 							it.onReceiveChatLocationMessages(message.chatId, message)
 						}

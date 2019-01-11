@@ -1,6 +1,9 @@
 package net.osmand;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
 
 public class PlatformUtil {
 
@@ -143,4 +146,11 @@ public class PlatformUtil {
 		return getLog(cl.getName());
 	}
 
+	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
+		return new org.kxml2.io.KXmlParser();
+	}
+
+	public static XmlSerializer newSerializer() {
+		return new org.kxml2.io.KXmlSerializer();
+	}
 }
