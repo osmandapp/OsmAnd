@@ -14,6 +14,8 @@ import android.text.TextUtils;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -46,6 +48,7 @@ public class OsmAndAppCustomization {
 
   private Bitmap navDrawerLogo;
   private ArrayList<String> navDrawerParams;
+  private NavDrawerFooterParams navDrawerFooterParams;
 
   private Set<String> featuresEnabledIds = new HashSet<>();
   private Set<String> featuresDisabledIds = new HashSet<>();
@@ -240,6 +243,14 @@ public class OsmAndAppCustomization {
     return true;
   }
 
+  public boolean setNavDrawerFooterParams(NavDrawerFooterParams params){
+    navDrawerFooterParams = params;
+    return true;
+  }
+
+  public NavDrawerFooterParams getNavFooterParams(){
+    return navDrawerFooterParams;
+  }
 
   public void setFeaturesEnabledIds(@NonNull Collection<String> ids) {
     featuresEnabledIds.clear();

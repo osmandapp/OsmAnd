@@ -808,8 +808,7 @@ public class OsmandAidlService extends Service {
     public boolean setNavDrawerFooterWithParams(NavDrawerFooterParams params)
         throws RemoteException {
       OsmandAidlApi api = getApi("setNavDrawerFooterParams");
-      return api != null && api.setNavDrawerFooterWithParams(
-          params.getPackageName(), params.getIntent(), params.getAppName());
+      return api != null && api.setNavDrawerFooterWithParams(params);
     }
 
     @Override

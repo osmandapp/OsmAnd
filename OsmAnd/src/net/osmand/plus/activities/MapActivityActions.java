@@ -51,7 +51,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
+import net.osmand.plus.activities.actions.OsmandRestoreOrExitDialog;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
@@ -1089,8 +1091,11 @@ public class MapActivityActions implements DialogProvider {
 						footerLayout.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								if(navDrawerLogoParams!=null) showReturnConfirmationDialog(navDrawerLogoParams.get(0));
-								else restoreOsmand();
+								if(navDrawerLogoParams!=null)
+									mapActivity.closeDrawer();
+									new OsmandRestoreOrExitDialog().show(mapActivity.getSupportFragmentManager(), "dialog");
+									//showReturnConfirmationDialog(navDrawerLogoParams.get(0));
+
 							}
 						});
 					} else {

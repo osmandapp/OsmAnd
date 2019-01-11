@@ -37,6 +37,7 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -1914,8 +1915,8 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().setNavDrawerLogoWithParams(uri, packageName, intent);
 	}
 
-	boolean setNavDrawerFooterWithParams(@NonNull String packageName, @Nullable String intent, @Nullable String appName) {
-		return app.getAppCustomization().setNavDrawerFooterAction(packageName, intent, appName);
+	boolean setNavDrawerFooterWithParams(@NonNull NavDrawerFooterParams params) {
+		return app.getAppCustomization().setNavDrawerFooterParams(params);
 	}
 
 	boolean restoreOsmand() {
