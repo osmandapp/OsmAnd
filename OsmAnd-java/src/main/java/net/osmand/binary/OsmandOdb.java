@@ -35628,19 +35628,23 @@ public final class OsmandOdb {
      */
     int getNameEn();
 
-    // repeated uint32 additionalNamePairs = 8;
+    // optional bytes additionalNamePairs = 8;
     /**
-     * <code>repeated uint32 additionalNamePairs = 8;</code>
+     * <code>optional bytes additionalNamePairs = 8;</code>
+     *
+     * <pre>
+     * array of bytes (array of pairs &lt;raw var int&gt;)
+     * </pre>
      */
-    java.util.List<java.lang.Integer> getAdditionalNamePairsList();
+    boolean hasAdditionalNamePairs();
     /**
-     * <code>repeated uint32 additionalNamePairs = 8;</code>
+     * <code>optional bytes additionalNamePairs = 8;</code>
+     *
+     * <pre>
+     * array of bytes (array of pairs &lt;raw var int&gt;)
+     * </pre>
      */
-    int getAdditionalNamePairsCount();
-    /**
-     * <code>repeated uint32 additionalNamePairs = 8;</code>
-     */
-    int getAdditionalNamePairs(int index);
+    com.google.protobuf.ByteString getAdditionalNamePairs();
 
     // repeated .OsmAnd.OBF.TransportStopExit exits = 9;
     /**
@@ -35769,25 +35773,9 @@ public final class OsmandOdb {
               nameEn_ = input.readUInt32();
               break;
             }
-            case 64: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                additionalNamePairs_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
-              }
-              additionalNamePairs_.add(input.readUInt32());
-              break;
-            }
             case 66: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
-                additionalNamePairs_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                additionalNamePairs_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
+              bitField0_ |= 0x00000020;
+              additionalNamePairs_ = input.readBytes();
               break;
             }
             case 74: {
@@ -35827,9 +35815,6 @@ public final class OsmandOdb {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-          additionalNamePairs_ = java.util.Collections.unmodifiableList(additionalNamePairs_);
-        }
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           exits_ = java.util.Collections.unmodifiableList(exits_);
         }
@@ -35988,27 +35973,28 @@ public final class OsmandOdb {
       return nameEn_;
     }
 
-    // repeated uint32 additionalNamePairs = 8;
+    // optional bytes additionalNamePairs = 8;
     public static final int ADDITIONALNAMEPAIRS_FIELD_NUMBER = 8;
-    private java.util.List<java.lang.Integer> additionalNamePairs_;
+    private com.google.protobuf.ByteString additionalNamePairs_;
     /**
-     * <code>repeated uint32 additionalNamePairs = 8;</code>
+     * <code>optional bytes additionalNamePairs = 8;</code>
+     *
+     * <pre>
+     * array of bytes (array of pairs &lt;raw var int&gt;)
+     * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getAdditionalNamePairsList() {
+    public boolean hasAdditionalNamePairs() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bytes additionalNamePairs = 8;</code>
+     *
+     * <pre>
+     * array of bytes (array of pairs &lt;raw var int&gt;)
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getAdditionalNamePairs() {
       return additionalNamePairs_;
-    }
-    /**
-     * <code>repeated uint32 additionalNamePairs = 8;</code>
-     */
-    public int getAdditionalNamePairsCount() {
-      return additionalNamePairs_.size();
-    }
-    /**
-     * <code>repeated uint32 additionalNamePairs = 8;</code>
-     */
-    public int getAdditionalNamePairs(int index) {
-      return additionalNamePairs_.get(index);
     }
 
     // repeated .OsmAnd.OBF.TransportStopExit exits = 9;
@@ -36088,7 +36074,7 @@ public final class OsmandOdb {
       id_ = 0L;
       name_ = 0;
       nameEn_ = 0;
-      additionalNamePairs_ = java.util.Collections.emptyList();
+      additionalNamePairs_ = com.google.protobuf.ByteString.EMPTY;
       exits_ = java.util.Collections.emptyList();
       routes_ = java.util.Collections.emptyList();
     }
@@ -36141,8 +36127,8 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeUInt32(7, nameEn_);
       }
-      for (int i = 0; i < additionalNamePairs_.size(); i++) {
-        output.writeUInt32(8, additionalNamePairs_.get(i));
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(8, additionalNamePairs_);
       }
       for (int i = 0; i < exits_.size(); i++) {
         output.writeMessage(9, exits_.get(i));
@@ -36179,14 +36165,9 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(7, nameEn_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < additionalNamePairs_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(additionalNamePairs_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getAdditionalNamePairsList().size();
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, additionalNamePairs_);
       }
       for (int i = 0; i < exits_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -36328,7 +36309,7 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000008);
         nameEn_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        additionalNamePairs_ = java.util.Collections.emptyList();
+        additionalNamePairs_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000020);
         if (exitsBuilder_ == null) {
           exits_ = java.util.Collections.emptyList();
@@ -36386,9 +36367,8 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000010;
         }
         result.nameEn_ = nameEn_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          additionalNamePairs_ = java.util.Collections.unmodifiableList(additionalNamePairs_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.additionalNamePairs_ = additionalNamePairs_;
         if (exitsBuilder_ == null) {
@@ -36436,15 +36416,8 @@ public final class OsmandOdb {
         if (other.hasNameEn()) {
           setNameEn(other.getNameEn());
         }
-        if (!other.additionalNamePairs_.isEmpty()) {
-          if (additionalNamePairs_.isEmpty()) {
-            additionalNamePairs_ = other.additionalNamePairs_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureAdditionalNamePairsIsMutable();
-            additionalNamePairs_.addAll(other.additionalNamePairs_);
-          }
-          onChanged();
+        if (other.hasAdditionalNamePairs()) {
+          setAdditionalNamePairs(other.getAdditionalNamePairs());
         }
         if (exitsBuilder_ == null) {
           if (!other.exits_.isEmpty()) {
@@ -36776,68 +36749,54 @@ public final class OsmandOdb {
         return this;
       }
 
-      // repeated uint32 additionalNamePairs = 8;
-      private java.util.List<java.lang.Integer> additionalNamePairs_ = java.util.Collections.emptyList();
-      private void ensureAdditionalNamePairsIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          additionalNamePairs_ = new java.util.ArrayList<java.lang.Integer>(additionalNamePairs_);
-          bitField0_ |= 0x00000020;
-         }
+      // optional bytes additionalNamePairs = 8;
+      private com.google.protobuf.ByteString additionalNamePairs_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes additionalNamePairs = 8;</code>
+       *
+       * <pre>
+       * array of bytes (array of pairs &lt;raw var int&gt;)
+       * </pre>
+       */
+      public boolean hasAdditionalNamePairs() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>repeated uint32 additionalNamePairs = 8;</code>
+       * <code>optional bytes additionalNamePairs = 8;</code>
+       *
+       * <pre>
+       * array of bytes (array of pairs &lt;raw var int&gt;)
+       * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getAdditionalNamePairsList() {
-        return java.util.Collections.unmodifiableList(additionalNamePairs_);
+      public com.google.protobuf.ByteString getAdditionalNamePairs() {
+        return additionalNamePairs_;
       }
       /**
-       * <code>repeated uint32 additionalNamePairs = 8;</code>
+       * <code>optional bytes additionalNamePairs = 8;</code>
+       *
+       * <pre>
+       * array of bytes (array of pairs &lt;raw var int&gt;)
+       * </pre>
        */
-      public int getAdditionalNamePairsCount() {
-        return additionalNamePairs_.size();
-      }
-      /**
-       * <code>repeated uint32 additionalNamePairs = 8;</code>
-       */
-      public int getAdditionalNamePairs(int index) {
-        return additionalNamePairs_.get(index);
-      }
-      /**
-       * <code>repeated uint32 additionalNamePairs = 8;</code>
-       */
-      public Builder setAdditionalNamePairs(
-          int index, int value) {
-        ensureAdditionalNamePairsIsMutable();
-        additionalNamePairs_.set(index, value);
+      public Builder setAdditionalNamePairs(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        additionalNamePairs_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 additionalNamePairs = 8;</code>
-       */
-      public Builder addAdditionalNamePairs(int value) {
-        ensureAdditionalNamePairsIsMutable();
-        additionalNamePairs_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 additionalNamePairs = 8;</code>
-       */
-      public Builder addAllAdditionalNamePairs(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureAdditionalNamePairsIsMutable();
-        super.addAll(values, additionalNamePairs_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 additionalNamePairs = 8;</code>
+       * <code>optional bytes additionalNamePairs = 8;</code>
+       *
+       * <pre>
+       * array of bytes (array of pairs &lt;raw var int&gt;)
+       * </pre>
        */
       public Builder clearAdditionalNamePairs() {
-        additionalNamePairs_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000020);
+        additionalNamePairs_ = getDefaultInstance().getAdditionalNamePairs();
         onChanged();
         return this;
       }
@@ -62425,7 +62384,7 @@ public final class OsmandOdb {
       "e\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"\255\001\n\rTransportSt" +
       "op\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014" +
       "\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additio" +
-      "nalNamePairs\030\010 \003(\r\022,\n\005exits\030\t \003(\0132\035.OsmA" +
+      "nalNamePairs\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmA" +
       "nd.OBF.TransportStopExit\022\016\n\006routes\030\020 \003(\r" +
       "\"8\n\021TransportStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030",
       "\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportStopsTre" +

@@ -4,12 +4,13 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.OsmandOdb.TransportRouteSchedule;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
 import net.osmand.data.TransportStopExit;
@@ -18,7 +19,6 @@ import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
 
-import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
@@ -241,6 +241,11 @@ public class BinaryMapTransportReaderAdapter {
 		stringTable.putIfAbsent(i, "");
 		return ((char) i)+"";
 	}
+
+	private String regStr(TIntObjectHashMap<String> stringTable, int i) throws IOException{
+		stringTable.putIfAbsent(i, "");
+		return ((char) i)+"";
+	}
 	
 	public net.osmand.data.TransportRoute getTransportRoute(int filePointer, TIntObjectHashMap<String> stringTable,
 			boolean onlyDescription) throws IOException {
@@ -450,12 +455,6 @@ public class BinaryMapTransportReaderAdapter {
 
 	protected void initializeNames(TIntObjectHashMap<String> stringTable, TransportStop s) {
 		for (TransportStopExit exit : s.getExits())	{
-			if (exit.getName().length() > 0) {
-				exit.setName(stringTable.get(exit.getName().charAt(0)));
-			}
-			if (exit.getEnName(false).length() > 0) {
-				exit.setEnName(stringTable.get(exit.getEnName(false).charAt(0)));
-			}
 			if (exit.getRef().length() > 0) {
 				exit.setRef(stringTable.get(exit.getRef().charAt(0)));
 			}
@@ -465,6 +464,15 @@ public class BinaryMapTransportReaderAdapter {
 		}
 		if (s.getEnName(false).length() > 0) {
 			s.setEnName(stringTable.get(s.getEnName(false).charAt(0)));
+		}
+		Map<String, String> namesMap = new HashMap<>(s.getNamesMap(false));
+		if (!s.getNamesMap(false).isEmpty()) {
+			s.getNamesMap(false).clear();
+		}
+		Iterator<Map.Entry<String, String>> it = namesMap.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, String> e = it.next();
+			s.setName(stringTable.get(e.getKey().charAt(0)),stringTable.get(e.getValue().charAt(0)));
 		}
 	}
 
@@ -561,11 +569,14 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportStop.ADDITIONALNAMEPAIRS_FIELD_NUMBER :
 				if (req.stringTable != null) {
-					int tgid = codedIS.readUInt32();
-					names = new ArrayList<String>();
-					names.add(regStr(req.stringTable));
-				}
-				else {
+					int sizeL = codedIS.readRawVarint32();
+					int oldRef = codedIS.pushLimit(sizeL);
+					while (codedIS.getBytesUntilLimit() > 0) {
+						dataObject.setName(regStr(req.stringTable,codedIS.readRawVarint32()),
+								regStr(req.stringTable,codedIS.readRawVarint32()));
+					}
+					codedIS.popLimit(oldRef);
+				} else {
 					skipUnknownField(t);
 				}
 				break;
