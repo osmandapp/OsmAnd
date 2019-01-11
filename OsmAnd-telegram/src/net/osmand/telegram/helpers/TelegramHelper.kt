@@ -1154,7 +1154,7 @@ class TelegramHelper private constructor() {
 		val content = content
 		val isUserTextLocation = (content is TdApi.MessageText) && content.text.text.startsWith(USER_TEXT_LOCATION_TITLE)
 		val isOsmAndBot = isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
-		if (!(isUserTextLocation || content is MessageLocation || isOsmAndBot)) {
+		if (!(isUserTextLocation || content is TdApi.MessageLocation || isOsmAndBot)) {
 			return false
 		}
 		val lastEdited = Math.max(date, editDate)
