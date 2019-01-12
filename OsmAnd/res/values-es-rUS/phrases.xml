@@ -3609,24 +3609,24 @@
 
 <string name="poi_service_car">Servicio automotriz</string>
 
-<string name="poi_service_vehicle_car_repair_yes">Taller mecánico</string>
+<string name="poi_service_vehicle_car_repair_yes">Taller para automóviles</string>
 	<string name="poi_service_vehicle_oil_change_yes">Cambio de aceite</string>
 	<string name="poi_service_vehicle_used_car_sales_yes">Venta de autos usados</string>
 	<string name="poi_service_vehicle_brakes_yes">Frenos</string>
 	<string name="poi_service_vehicle_new_car_sales_yes">Venta de autos nuevos</string>
-	<string name="poi_service_vehicle_diagnostics_yes">Diagnóstico</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnósticos</string>
 	<string name="poi_service_vehicle_car_parts_yes">Autopartes</string>
 	<string name="poi_service_vehicle_batteries_yes">Baterías</string>
 	<string name="poi_service_vehicle_air_conditioning_yes">Aire acondicionado</string>
-	<string name="poi_service_vehicle_body_repair_yes">Reparación de carrocería</string>
+	<string name="poi_service_vehicle_body_repair_yes">Reparación de carrocerías</string>
 	<string name="poi_service_vehicle_electrical_yes">Eléctrico</string>
 	<string name="poi_service_vehicle_wheels_yes">Ruedas</string>
-	<string name="poi_service_vehicle_glass_yes">Vidrio</string>
-	<string name="poi_service_vehicle_truck_repair_yes">Taller mecánico para camiones</string>
+	<string name="poi_service_vehicle_glass_yes">Vidrios</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Taller para camiones</string>
 	<string name="poi_service_vehicle_muffler_yes">Silenciador</string>
 	<string name="poi_service_vehicle_alignment_yes">Alineación</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">Reparación de la transmisión</string>
-	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_motor_yes">Motores</string>
 	<string name="poi_service_vehicle_insurance_yes">Aseguradora</string>
 	<string name="poi_service_vehicle_tyres_yes">Neumáticos</string>
 
