@@ -1,2 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources><string name="send_location_as">傳送位置為</string>
+    <string name="send_location_as_descr">選擇您所在位置怎樣的訊息外觀。</string>
+    <string name="shared_string_map">地圖</string>
+    <string name="shared_string_text">文字</string>
+    <string name="map_and_text">地圖與文字</string>
+    <string name="device_added_successfully">%1$s 已新增。</string>
+    <string name="shared_string_add">新增</string>
+    <string name="error_adding_new_device">無法增加新的裝置</string>
+    <string name="enter_device_name_description">命名您的新裝置，最多 200 個字符。</string>
+    <string name="device_name_is_too_long">裝置名稱太長</string>
+    <string name="device_name_cannot_be_empty">裝置名稱不能為空白</string>
+    <string name="device_name">裝置名稱</string>
+    <string name="shared_string_hide">隱藏</string>
+    <string name="last_updated_location">上次更新的位置：</string>
+    <string name="sending_location_messages">正在傳送位置</string>
+    <string name="initializing">正在啟動</string>
+    <string name="searching_for_gps">正在定位…</string>
+    <string name="connecting_to_the_internet">正在連線至網路</string>
+    <string name="background_work">背景工作</string>
+    <string name="sharing_in_background">在背景分享</string>
+    <string name="go_to_settings">轉至設定</string>
+    <string name="shared_string_later">隨後</string>
+    <string name="not_sent_yet">尚未傳送</string>
+    <string name="not_found_yet">尚未找到</string>
+    <string name="re_send_location">重新傳送位置</string>
+    <string name="last_available_location">最後可用的位置</string>
+    <string name="sharing_status">分享狀態</string>
+    <string name="sharing_enabled">分享：已啟用</string>
+    <string name="shared_string_status">狀態</string>
+    <string name="no_gps_connection">沒有 GPS 連接</string>
+    <string name="no_internet_connection">沒有網際網路連線</string>
+    <string name="shared_string_disable">停用</string>
+    <string name="shared_string_save">儲存</string>
+    <string name="add_device">新增裝置</string>
+    <string name="share_location_as">分享位置為</string>
+    <string name="shared_string_name">名稱</string>
+    <string name="by_distance">按距離</string>
+    <string name="by_name">按名稱</string>
+    <string name="by_group">按群組</string>
+    <string name="shared_string_sort">分類</string>
+    <string name="shared_string_sort_by">排序方式</string>
+    <string name="disable_all_sharing">停用所有分享</string>
+    <string name="turn_off_all">關閉全部</string>
+    <string name="shared_string_exit">離開</string>
+</resources>
