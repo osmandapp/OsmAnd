@@ -361,7 +361,7 @@ public class MapActivityActions implements DialogProvider {
 				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
-					.setTitle(POINT_ADD_GPX_WAYPOINT)
+					.setId(POINT_ADD_GPX_WAYPOINT)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
 					.setOrder(ADD_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
