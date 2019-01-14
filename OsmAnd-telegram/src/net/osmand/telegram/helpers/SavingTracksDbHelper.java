@@ -113,7 +113,7 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 	public void saveAsyncUserDataToGpx(LiveNowTabFragment fragment, File dir, int userId, long interval) {
 		GPXFile gpxFile = app.getSavingTracksDbHelper().collectRecordedDataForUser(userId, interval);
 		if (gpxFile != null && !gpxFile.isEmpty()) {
-			LiveUpdatesPurchaseTask task = new LiveUpdatesPurchaseTask(fragment, gpxFile, dir, userId);
+			SaveGPXTrackToFileTask task = new SaveGPXTrackToFileTask(fragment, gpxFile, dir, userId);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
@@ -244,7 +244,7 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 		return gpxFile;
 	}
 
-	private static class LiveUpdatesPurchaseTask extends AsyncTask<Void, Void, List<String>> {
+	private static class SaveGPXTrackToFileTask extends AsyncTask<Void, Void, List<String>> {
 
 		private TelegramApplication app;
 		private WeakReference<LiveNowTabFragment> fragmentRef;
@@ -253,7 +253,7 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 		private File dir;
 		private int userId;
 
-		LiveUpdatesPurchaseTask(LiveNowTabFragment fragment, GPXFile gpxFile, File dir, int userId) {
+		SaveGPXTrackToFileTask(LiveNowTabFragment fragment, GPXFile gpxFile, File dir, int userId) {
 			this.gpxFile = gpxFile;
 			this.fragmentRef = new WeakReference<>(fragment);
 			this.app = (TelegramApplication) fragment.getActivity().getApplication();

@@ -66,6 +66,8 @@ class TelegramHelper private constructor() {
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
 		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
 
+		const val MAX_LOCATION_MESSAGE_HISTORY_SCAN_SEC = 60 * 60 * 24 // one day
+
 		const val SEND_NEW_MESSAGE_INTERVAL_SEC = 10 * 60 // 10 minutes
 
 		private var helper: TelegramHelper? = null
@@ -450,7 +452,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun requestChats(reload: Boolean = false) {
+	private fun requestChats(reload: Boolean = false, onComplete: (() -> Unit)?) {
 		synchronized(chatList) {
 			if (reload) {
 				chatList.clear()
@@ -481,7 +483,8 @@ class TelegramHelper private constructor() {
 								}
 							}
 							// chats had already been received through updates, let's retry request
-							requestChats()
+							requestChats(false, this@TelegramHelper::scanChatsHistory)
+							onComplete?.invoke()
 						}
 						else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 					}
@@ -615,6 +618,49 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun scanChatsHistory() {
+		log.debug("scanChatsHistory: chatList: ${chatList.size}")
+		chatList.forEach {
+			scanChatHistory(it.chatId, 0, 0, 100)
+		}
+	}
+
+	private fun scanChatHistory(
+		chatId: Long,
+		fromMessageId: Long,
+		offset: Int,
+		limit: Int,
+		onlyLocal: Boolean = false
+	) {
+		client?.send(TdApi.GetChatHistory(chatId, fromMessageId, offset, limit, onlyLocal)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Messages.CONSTRUCTOR -> {
+					val messages = (obj as TdApi.Messages).messages
+					log.debug("scanChatHistory: chatId: $chatId fromMessageId: $fromMessageId size: ${messages.size}")
+					if (messages.isNotEmpty()) {
+						messages.forEach {
+							addNewMessage(it)
+						}
+						val lastMessage = messages.last()
+						val currentTime = System.currentTimeMillis() / 1000
+						if (currentTime-Math.max(lastMessage.date, lastMessage.editDate) < MAX_LOCATION_MESSAGE_HISTORY_SCAN_SEC) {
+							scanChatHistory(chatId, lastMessage.id, 0, 100)
+							log.debug("scanChatHistory searchMessageId: ${lastMessage.id}")
+						} else {
+							log.debug("scanChatHistory finishForChat: $chatId")
+						}
+					}
+				}
+			}
+		}
+	}
+
 	private fun requestUser(id: Int) {
 		client?.send(TdApi.GetUser(id)) { obj ->
 			when (obj.constructor) {
@@ -671,8 +717,9 @@ class TelegramHelper private constructor() {
 	}
 
 	private fun addNewMessage(message: TdApi.Message) {
-		lastTelegramUpdateTime = Math.max(message.date, message.editDate)
+		lastTelegramUpdateTime = Math.max(lastTelegramUpdateTime, Math.max(message.date, message.editDate))
 		if (message.isAppropriate()) {
+			log.debug("addNewMessage: $message")
 			val fromBot = isOsmAndBot(message.senderUserId)
 			val viaBot = isOsmAndBot(message.viaBotUserId)
 			val oldContent = message.content
@@ -691,9 +738,12 @@ class TelegramHelper private constructor() {
 				}
 			} else {
 				removeOldMessages(message, fromBot, viaBot)
-				usersLocationMessages[message.id] = message
-				incomingMessagesListeners.forEach {
-					it.onReceiveChatLocationMessages(message.chatId, message)
+				val oldMessage = usersLocationMessages.values.firstOrNull { it.senderUserId == message.senderUserId && !fromBot && !viaBot }
+				if (oldMessage == null || (Math.max(message.editDate, message.date) > Math.max(oldMessage.editDate, oldMessage.date))) {
+					usersLocationMessages[message.id] = message
+					incomingMessagesListeners.forEach {
+						it.onReceiveChatLocationMessages(message.chatId, message)
+					}
 				}
 			}
 		}
@@ -716,7 +766,8 @@ class TelegramHelper private constructor() {
 							}
 						}
 					}
-				} else if (sameSender && isUserLocationMessage(message) && isUserLocationMessage(newMessage)) {
+				} else if (sameSender && isUserLocationMessage(message) && isUserLocationMessage(newMessage)
+					&& Math.max(newMessage.editDate, newMessage.date) > Math.max(message.editDate, message.date)) {
 					iterator.remove()
 				}
 			}
@@ -1138,7 +1189,7 @@ class TelegramHelper private constructor() {
 		if (wasAuthorized != haveAuthorization) {
 			needRefreshActiveLiveLocationMessages = true
 			if (haveAuthorization) {
-				requestChats(true)
+				requestChats(true, null)
 				requestCurrentUser()
 				requestContacts()
 			}
