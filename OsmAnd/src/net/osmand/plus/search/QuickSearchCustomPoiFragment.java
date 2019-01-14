@@ -21,6 +21,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.UiUtilities;
@@ -68,14 +69,15 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		boolean isLightTheme =
+				getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+			Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
 		helper = app.getPoiFilters();
 		if (getArguments() != null) {
@@ -136,9 +138,17 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				dismiss();
-				QuickSearchDialogFragment quickSearchDialogFragment = getQuickSearchDialogFragment();
-				if (quickSearchDialogFragment != null) {
-					quickSearchDialogFragment.showFilter(filterId);
+				if (!editMode) {
+					dismiss();
+					QuickSearchDialogFragment quickSearchDialogFragment = getQuickSearchDialogFragment();
+					if (quickSearchDialogFragment != null) {
+						quickSearchDialogFragment.showFilter(filterId);
+					}
+				} else {
+					QuickSearchPoiFilterFragment quickSearchPoiFilterFragment = getQuickSearchPoiFilterFragment();
+					if(quickSearchPoiFilterFragment!= null) {
+						quickSearchPoiFilterFragment.refreshList();
+					}
 				}
 			}
 		});
@@ -177,6 +187,15 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 	}
 
+	private QuickSearchPoiFilterFragment getQuickSearchPoiFilterFragment() {
+		Fragment parent = getParentFragment();
+		if (parent instanceof QuickSearchPoiFilterFragment) {
+			return (QuickSearchPoiFilterFragment) parent;
+		} else {
+			return null;
+		}
+	}
+
 	private int getIconId(PoiCategory category) {
 		OsmandApplication app = getMyApplication();
 		String id = null;
@@ -203,6 +222,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	}
 
 	private class CategoryListAdapter extends ArrayAdapter<PoiCategory> {
+
 		private OsmandApplication app;
 
 		CategoryListAdapter(OsmandApplication app, List<PoiCategory> items) {
@@ -213,7 +233,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		@NonNull
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater inflater = (LayoutInflater) app
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View row = convertView;
 			if (row == null) {
 				row = inflater.inflate(R.layout.list_item_icon24_and_menu, parent, false);
@@ -221,7 +242,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			PoiCategory category = getItem(position);
 			if (category != null) {
 				AppCompatImageView iconView = (AppCompatImageView) row.findViewById(R.id.icon);
-				AppCompatImageView secondaryIconView = (AppCompatImageView) row.findViewById(R.id.secondary_icon);
+				AppCompatImageView secondaryIconView = (AppCompatImageView) row
+						.findViewById(R.id.secondary_icon);
 				AppCompatTextView titleView = (AppCompatTextView) row.findViewById(R.id.title);
 				AppCompatTextView descView = (AppCompatTextView) row.findViewById(R.id.description);
 				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
@@ -239,7 +261,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 					iconView.setImageDrawable(null);
 				}
 				secondaryIconView.setImageDrawable(
-						ic.getIcon(R.drawable.ic_action_additional_option, app.getSettings().isLightContent() ? R.color.icon_color_light : 0));
+						ic.getIcon(R.drawable.ic_action_additional_option,
+								app.getSettings().isLightContent() ? R.color.icon_color_light : 0));
 				check.setOnCheckedChangeListener(null);
 				check.setChecked(filter.isTypeAccepted(category));
 				String textString = category.getTranslation();
@@ -262,7 +285,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				} else {
 					descView.setVisibility(View.GONE);
 				}
-				row.findViewById(R.id.divider).setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
+				row.findViewById(R.id.divider)
+						.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
 				addRowListener(category, check);
 			}
 			return (row);
@@ -291,7 +315,18 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				bottomBarShadow.setVisibility(View.GONE);
 				bottomBar.setVisibility(View.GONE);
 			} else {
-				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter.getAcceptedTypesCount());
+				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter
+						.getAcceptedTypesCount());
+				bottomBarShadow.setVisibility(View.VISIBLE);
+				bottomBar.setVisibility(View.VISIBLE);
+			}
+		} else {
+			if (filter.isEmpty()) {
+				bottomBarShadow.setVisibility(View.GONE);
+				bottomBar.setVisibility(View.GONE);
+			} else {
+				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter
+						.getAcceptedTypesCount());
 				bottomBarShadow.setVisibility(View.VISIBLE);
 				bottomBar.setVisibility(View.VISIBLE);
 			}
@@ -306,11 +341,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		final LinkedHashMap<String, String> subCategories = new LinkedHashMap<String, String>();
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
 		if (acceptedCategories != null) {
-			for(String s : acceptedCategories) {
+			for (String s : acceptedCategories) {
 				subCategories.put(s, Algorithms.capitalizeFirstLetterAndLowercase(s));
 			}
 		}
-		for(PoiType pt :  poiCategory.getPoiTypes()) {
+		for (PoiType pt : poiCategory.getPoiTypes()) {
 			subCategories.put(pt.getKeyName(), pt.getTranslation());
 		}
 
@@ -351,43 +386,46 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		builder.setCustomTitle(titleView);
 
 		builder.setCancelable(true);
-		builder.setNegativeButton(getContext().getText(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				listAdapter.notifyDataSetChanged();
-			}
-		});
-		builder.setPositiveButton(getContext().getText(R.string.shared_string_apply), new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				LinkedHashSet<String> accepted = new LinkedHashSet<String>();
-				for (int i = 0; i < selected.length; i++) {
-					if(selected[i]){
-						accepted.add(array[i]);
+		builder.setNegativeButton(getContext().getText(R.string.shared_string_cancel),
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						listAdapter.notifyDataSetChanged();
 					}
-				}
-				if (subCategories.size() == accepted.size()) {
-					filter.selectSubTypesToAccept(poiCategory, null);
-				} else if(accepted.size() == 0){
-					filter.setTypeToAccept(poiCategory, false);
-				} else {
-					filter.selectSubTypesToAccept(poiCategory, accepted);
-				}
-				saveFilter();
-				listAdapter.notifyDataSetChanged();
-				listView.setSelectionFromTop(index, top);
-			}
-		});
+				});
+		builder.setPositiveButton(getContext().getText(R.string.shared_string_apply),
+				new DialogInterface.OnClickListener() {
 
-		builder.setMultiChoiceItems(visibleNames, selected, new DialogInterface.OnMultiChoiceClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						LinkedHashSet<String> accepted = new LinkedHashSet<String>();
+						for (int i = 0; i < selected.length; i++) {
+							if (selected[i]) {
+								accepted.add(array[i]);
+							}
+						}
+						if (subCategories.size() == accepted.size()) {
+							filter.selectSubTypesToAccept(poiCategory, null);
+						} else if (accepted.size() == 0) {
+							filter.setTypeToAccept(poiCategory, false);
+						} else {
+							filter.selectSubTypesToAccept(poiCategory, accepted);
+						}
+						saveFilter();
+						listAdapter.notifyDataSetChanged();
+						listView.setSelectionFromTop(index, top);
+					}
+				});
 
-			@Override
-			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
-				selected[item] = isChecked;
-			}
-		});
+		builder.setMultiChoiceItems(visibleNames, selected,
+				new DialogInterface.OnMultiChoiceClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int item, boolean isChecked) {
+						selected[item] = isChecked;
+					}
+				});
 		final AlertDialog dialog = builder.show();
 		check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
