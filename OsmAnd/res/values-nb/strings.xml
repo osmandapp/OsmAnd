@@ -2370,7 +2370,7 @@
     <string name="marker_moved_to_active">Kartmarkør flyttet til aktive</string>
     <string name="shared_string_list">Liste</string>
     <string name="passed">Sist brukt: %1$s</string>
-    <string name="mapillary_menu_filter_description">Filtrer bilder etter innsender eller etter dato. Kun aktiv på høyere zoomnivåer.</string>
+    <string name="mapillary_menu_filter_description">Filtrer bilder etter innsender, dato eller type. Kun aktivt på nærgående forstørrelsesnivå.</string>
     <string name="improve_coverage_install_mapillary_desc">Installer Mapillary for å legge til et eller flere bilder til denne kartposisjonen.</string>
     <string name="plugin_mapillary_descr">Foto på gatenivå for alle. Oppdag plasser, samarbeid, fang inn verden.</string>
     <string name="quick_action_showhide_osmbugs_title">Vis/skjul OSM-notater</string>

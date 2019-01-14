@@ -364,6 +364,7 @@ public class MapActivityActions implements DialogProvider {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
 					.setTitle(MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT)
+					.setId(POINT_ADD_GPX_WAYPOINT)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
 					.setOrder(ADD_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
