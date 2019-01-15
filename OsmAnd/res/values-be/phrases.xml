@@ -3948,4 +3948,13 @@
 	<string name="poi_substation_field_gathering">Збіральная</string>
     <string name="poi_craft_confectionery">Кандытарская вытворчасць</string>
     <string name="poi_shop_wholesale">Аптовы склад</string>
+    <string name="poi_books_type">Кнігі</string>
+    <string name="poi_laboratory">Медыцынская лабараторыя</string>
+    <string name="poi_blood_donation">Здача крыві</string>
+    <string name="poi_books_comic">Коміксы</string>
+    <string name="poi_books_antiquarian">Антыкварыят</string>
+    <string name="poi_books_religion">Рэлігіёзныя</string>
+    <string name="poi_books_academic">Акадэмічныя</string>
+    <string name="poi_books_children">Дзіцячыя</string>
+    <string name="poi_atoll">Атол</string>
 </resources>
