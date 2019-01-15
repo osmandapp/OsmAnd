@@ -3042,9 +3042,9 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="more_transport_on_stop_hint">Ebben a megállóban több közlekedési eszköz is előfordul.</string>
     <string name="send_search_query">Elküldöd a keresést\?</string>
     <string name="osmand_extended_description_part5">Kerékpározás
-\n• Találj kerékpárutakat a térképen
-\n• A GPS navigáció kerékpáros módban kerékpárutakat használva készül
-\n• Sebesség és magasság kijelzése
-\n• GPX felvétel opció lehetővé teszi az útvonalrögzítést és megosztást
-\n• Bővítményen keresztül elérhetők a szintvonalak és a hillshading</string>
+\n • A kerékpárutak megjelennek a térképen
+\n • A GPS navigáció kerékpáros módban kerékpárutakat használva tervez utat
+\n • Láthatod a sebességed és milyen magasan jársz
+\n • GPX felvétel opcióval felveheted és megoszthatod a túráidat
+\n • Bővítményen keresztül bekapcsolhatóak a szintvonalak és a domborzatárnyékolás</string>
 </resources>
