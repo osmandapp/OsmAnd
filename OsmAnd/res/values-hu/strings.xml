@@ -3028,7 +3028,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="touring_view_render_descr">"Nagyon részletes stílus utazásokhoz. Tartalmazza az alapértelmezett stílus összes beállítási lehetőségét, valamint: annyi részletet jelenít meg, amennyit csak lehetséges, különösen az utak, ösvények és más utazásnál hasznos utak tekintetében.  Tisztán elkülönülnek a különféle úttípusok, felidézve az utazóatlaszok stílusát. Nagy kontrasztú színvilág kültéri használatra, nappali és éjszakai móddal."</string>
     <string name="default_render_descr">Általános célú stílus. Egyszerű, tiszta kinézet sűrűn lakott településeken. Főbb tulajdonságok: szintvonalak, útvonalak, útminőség, behajtási korlátozások, útszám pajzsok, ösvények megjelenítése SAC-skála szerint, vadvízi sportok.</string>
     <string name="shared_string_gpx_files">GPX fájlok</string>
-    <string name="quick_action_edit_actions">Szerkesztés műveletek</string>
+    <string name="quick_action_edit_actions">Műveletek szerkesztése</string>
     <string name="shared_string_dont">Nem</string>
     <string name="shared_string_do">Igen</string>
     <string name="shared_string_total">Összesen</string>
@@ -3040,4 +3040,5 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="coord_input_add_point">Pont hozzáadása</string>
     <string name="coord_input_save_as_track">Mentés nyomvonalként</string>
     <string name="more_transport_on_stop_hint">Ebben a megállóban több közlekedési eszköz is előfordul.</string>
-    </resources>
+    <string name="send_search_query">Elküldöd a keresést\?</string>
+</resources>
