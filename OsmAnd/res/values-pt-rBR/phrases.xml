@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Loja</string>
 		<string name="poi_shop_food">Loja de conveniência e supermercado</string>
 	<string name="poi_emergency">Emergência</string>
@@ -220,7 +220,7 @@
 	<string name="poi_railway_platform">Plataforma ferroviária</string>
 	<string name="poi_halt">Parada ferroviária</string>
 	<string name="poi_subway_entrance">Entrada do metrô</string>
-	<string name="poi_subway_station">Estação de metrô</string>
+	<string name="poi_subway_station">Sim</string>
 	<string name="poi_vacuum_cleaner">Loja de aspiradores de pó</string>
 	<string name="poi_variety_store">Loja de variedades</string>
 	<string name="poi_video">Loja/locadora de vídeos</string>
@@ -944,7 +944,7 @@
 	<string name="poi_access_agricultural">Acesso agrícola</string>
 
 	<string name="poi_monitoring_station">Estação de medição ambiental</string>
-	<string name="poi_capital">Capital</string>
+	<string name="poi_capital">Sim</string>
 	<string name="poi_fee_no">Não</string>
 
 	<string name="poi_email">Email</string>
@@ -2100,11 +2100,11 @@
 
 	<string name="poi_historic_milestone">Marco histórico</string>
 
-	<string name="poi_shoes_children">Calçados infantis</string>
-	<string name="poi_shoes_women">Calçados femininos</string>
-	<string name="poi_shoes_sport">Calçados esportivos</string>
-	<string name="poi_shoes_men">Calçados masculinos</string>
-	<string name="poi_shoes_orthopedic">Calçados ortopédicos</string>
+	<string name="poi_shoes_children">Crianças</string>
+	<string name="poi_shoes_women">femininos</string>
+	<string name="poi_shoes_sport">esportivos</string>
+	<string name="poi_shoes_men">Masculinos</string>
+	<string name="poi_shoes_orthopedic">Ortopédicos</string>
 
 	<string name="poi_historic_manor">Mansão histórica</string>
 	<string name="poi_castle_type_stately">Tipo de castelo: majestoso</string>
@@ -3900,5 +3900,34 @@
 	<string name="poi_shoe_repair">Conserto de sapatos</string>
 
 <string name="poi_license_classes">Categorias</string>
-
-	</resources>
+    <string name="poi_bulk_purchase">Compra a granel</string>
+    <string name="poi_substation_type">Tipo</string>
+    <string name="poi_books_type">Livros</string>
+    <string name="poi_bulk_purchase_yes">Sim</string>
+    <string name="poi_bulk_purchase_only">Somente</string>
+    <string name="poi_pipeline_substation">Subestação de oleoduto</string>
+    <string name="poi_substation_transmission">Transmissão</string>
+    <string name="poi_substation_distribution">Distribuição</string>
+    <string name="poi_substation_minor_distribution">Distribuição menor</string>
+    <string name="poi_substation_industrial">Industrial</string>
+    <string name="poi_substation_transition">Transição</string>
+    <string name="poi_substation_traction">Tração</string>
+    <string name="poi_substation_converter">Conversor</string>
+    <string name="poi_substation_compensation">Compensação</string>
+    <string name="poi_substation_compression">Compressão</string>
+    <string name="poi_substation_measurement">Medição</string>
+    <string name="poi_substation_valve">Válvula</string>
+    <string name="poi_substation_valve_group">Grupo de válvulas</string>
+    <string name="poi_substation_inspection_gauge">Medidor de inspeção</string>
+    <string name="poi_substation_field_gathering">Recolhimento de campo</string>
+    <string name="poi_craft_confectionery">Produção de confeitos</string>
+    <string name="poi_shop_wholesale">Loja de atacado</string>
+    <string name="poi_laboratory">Laboratório médico</string>
+    <string name="poi_blood_donation">Doação de sangue</string>
+    <string name="poi_books_comic">Quadrinho</string>
+    <string name="poi_books_antiquarian">Antiquário</string>
+    <string name="poi_books_religion">Religião</string>
+    <string name="poi_books_academic">Acadêmicos</string>
+    <string name="poi_books_children">Crianças</string>
+    <string name="poi_atoll">Atol</string>
+</resources>
