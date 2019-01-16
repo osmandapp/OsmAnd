@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
@@ -3061,4 +3061,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="osm_live_payment_contribute_descr">En del av intäkterna går till OpenStreetMap bidragsgivare.</string>
     <string name="markers_remove_dialog_msg">Ta bort kartmarkör \'%s\'\?</string>
     <string name="edit_map_marker">Redigera kartmarkör</string>
-    </resources>
+    <string name="osm_live_subscriptions">Abonnemang</string>
+    <string name="keep_passed_markers_descr">Markörer tillagda som en grupp av favoriter eller GPX waypoints märkta som \'passerad\' kommer att finnas kvar på kartan. Om gruppen inte är aktiv, kommer markörerna att försvinna från kartan.</string>
+</resources>
