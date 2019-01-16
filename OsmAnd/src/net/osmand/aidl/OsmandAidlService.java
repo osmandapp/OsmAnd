@@ -832,7 +832,6 @@ public class OsmandAidlService extends Service {
 					@Override
 					public void onAppInitialized() {
 						try {
-							LOG.debug("OsmandAidlService callback.onAppInitialized()");
 							callback.onAppInitialized();
 						} catch (Exception e) {
 							handleException(e);
