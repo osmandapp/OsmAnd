@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
@@ -22,10 +23,11 @@ import net.sf.junidecode.Junidecode;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
+
 public class BinaryMapTransportReaderAdapter {
 	private CodedInputStream codedIS;
 	private final BinaryMapIndexReader map;
-	
+
 	protected BinaryMapTransportReaderAdapter(BinaryMapIndexReader map){
 		this.codedIS = map.codedIS;
 		this.map = map;
@@ -34,7 +36,7 @@ public class BinaryMapTransportReaderAdapter {
 	private void skipUnknownField(int t) throws IOException {
 		map.skipUnknownField(t);
 	}
-	
+
 	private int readInt() throws IOException {
 		return map.readInt();
 	}
@@ -47,7 +49,7 @@ public class BinaryMapTransportReaderAdapter {
 
 		int stopsFileOffset = 0;
 		int stopsFileLength = 0;
-		
+
 		public String getPartName() {
 			return "Transport";
 		}
@@ -84,8 +86,8 @@ public class BinaryMapTransportReaderAdapter {
 		TIntArrayList offsets = new TIntArrayList();
 
 	}
-	
-	
+
+
 	protected void readTransportIndex(TransportIndex ind) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
@@ -121,7 +123,7 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 	}
-	
+
 	private void readTransportBounds(TransportIndex ind) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
@@ -133,13 +135,13 @@ public class BinaryMapTransportReaderAdapter {
 				ind.left = codedIS.readSInt32();
 				break;
 			case OsmandOdb.TransportStopsTree.RIGHT_FIELD_NUMBER :
-				ind.right = codedIS.readSInt32(); 
+				ind.right = codedIS.readSInt32();
 				break;
 			case OsmandOdb.TransportStopsTree.TOP_FIELD_NUMBER :
 				ind.top = codedIS.readSInt32();
 				break;
 			case OsmandOdb.TransportStopsTree.BOTTOM_FIELD_NUMBER :
-				ind.bottom = codedIS.readSInt32(); 
+				ind.bottom = codedIS.readSInt32();
 				break;
 			default:
 				skipUnknownField(t);
@@ -147,7 +149,7 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 	}
-	
+
 	protected void searchTransportTreeBounds(int pleft, int pright, int ptop, int pbottom,
 			SearchRequest<TransportStop> req) throws IOException {
 		int init = 0;
@@ -206,7 +208,7 @@ public class BinaryMapTransportReaderAdapter {
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmandOdb.TransportStopsTree.SUBTREES_FIELD_NUMBER :
-				// left, ... already initialized 
+				// left, ... already initialized
 				length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
 				if (req.limit == -1 || req.limit >= req.getSearchResults().size()) {
@@ -215,7 +217,7 @@ public class BinaryMapTransportReaderAdapter {
 					codedIS.popLimit(oldLimit);
 				}
 				codedIS.seek(filePointer + length);
-				
+
 				if(lastIndexResult >= 0){
 					throw new IllegalStateException();
 				}
@@ -235,7 +237,7 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 	}
-	
+
 	private String regStr(TIntObjectHashMap<String> stringTable) throws IOException{
 		int i = codedIS.readUInt32();
 		stringTable.putIfAbsent(i, "");
@@ -246,7 +248,7 @@ public class BinaryMapTransportReaderAdapter {
 		stringTable.putIfAbsent(i, "");
 		return ((char) i)+"";
 	}
-	
+
 	public net.osmand.data.TransportRoute getTransportRoute(int filePointer, TIntObjectHashMap<String> stringTable,
 			boolean onlyDescription) throws IOException {
 		codedIS.seek(filePointer);
@@ -291,7 +293,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportRoute.GEOMETRY_FIELD_NUMBER:
 				int sizeL = codedIS.readRawVarint32();
 				int pold = codedIS.pushLimit(sizeL);
-				int px = 0; 
+				int px = 0;
 				int py = 0;
 				Way w = new Way(-1);
 				while (codedIS.getBytesUntilLimit() > 0) {
@@ -345,11 +347,11 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 		codedIS.popLimit(old);
-		
-		
+
+
 		return dataObject;
 	}
-	
+
 	private void readTransportSchedule(TransportSchedule schedule) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
@@ -365,7 +367,7 @@ public class BinaryMapTransportReaderAdapter {
 					interval = codedIS.readRawVarint32();
 					schedule.tripIntervals.add(interval);
 				}
-				codedIS.popLimit(old);				
+				codedIS.popLimit(old);
 				break;
 			case OsmandOdb.TransportRouteSchedule.AVGSTOPINTERVALS_FIELD_NUMBER:
 				sizeL = codedIS.readRawVarint32();
@@ -392,7 +394,7 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			}
 		}
-		
+
 	}
 
 	protected void initializeStringTable(TransportIndex ind, TIntObjectHashMap<String> stringTable) throws IOException {
@@ -402,12 +404,12 @@ public class BinaryMapTransportReaderAdapter {
 		int oldLimit = codedIS.pushLimit(ind.stringTable.length);
 		int current = 0;
 		int i = 0;
-		while (i < values.length) {
+		while (i < values.length && codedIS.getBytesUntilLimit() > 0) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				break;
+				return;
 			case OsmandOdb.StringTable.S_FIELD_NUMBER:
 				if (current == values[i]) {
 					String value = codedIS.readString();
@@ -456,11 +458,14 @@ public class BinaryMapTransportReaderAdapter {
 	protected void initializeNames(TIntObjectHashMap<String> stringTable, TransportStop s) {
 		for (TransportStopExit exit : s.getExits())	{
 			if (exit.getRef().length() > 0) {
+
 				exit.setRef(stringTable.get(exit.getRef().charAt(0)));
 			}
 		}
 		if (s.getName().length() > 0) {
+
 			s.setName(stringTable.get(s.getName().charAt(0)));
+
 		}
 		if (s.getEnName(false).length() > 0) {
 			s.setEnName(stringTable.get(s.getEnName(false).charAt(0)));
@@ -476,9 +481,9 @@ public class BinaryMapTransportReaderAdapter {
 		}
 	}
 
-	
-	
-	private TransportStop readTransportRouteStop(int dx, int dy, long did, TIntObjectHashMap<String> stringTable, 
+
+
+	private TransportStop readTransportRouteStop(int dx, int dy, long did, TIntObjectHashMap<String> stringTable,
 			int filePointer) throws IOException {
 		TransportStop dataObject = new TransportStop();
 		dataObject.setFileOffset(codedIS.getTotalBytesRead());
@@ -515,14 +520,14 @@ public class BinaryMapTransportReaderAdapter {
 		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, dx, dy);
 		return dataObject;
 	}
-	
+
 	private TransportStop readTransportStop(int shift, int cleft, int cright, int ctop, int cbottom, SearchRequest<TransportStop> req) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.TransportStop.DX_FIELD_NUMBER != tag) {
 			throw new IllegalArgumentException();
 		}
 		int x = codedIS.readSInt32() + cleft;
-		
+
 		tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.TransportStop.DY_FIELD_NUMBER != tag) {
 			throw new IllegalArgumentException();
@@ -532,10 +537,10 @@ public class BinaryMapTransportReaderAdapter {
 			codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 			return null;
 		}
-		
+
 		req.numberOfAcceptedObjects++;
 		req.cacheTypes.clear();
-		
+
 		TransportStop dataObject = new TransportStop();
 		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
 		dataObject.setFileOffset(shift);
