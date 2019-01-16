@@ -1162,6 +1162,7 @@
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Photo</string>
+    <string name="shared_string_launch">Launch</string>
     <string name="route_points">Route points</string>
     <string name="track_segments">Track segments</string>
     <string name="track_points">Track points</string>
@@ -2963,4 +2964,6 @@
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
     <string name="test_voice_desrc">Tap a button and listen to the corresponding voice prompt to identify missing or faulty prompts.</string>
+    <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
+    <string name="run_full_osmand_header">Launch OsmAnd?</string>
 </resources>

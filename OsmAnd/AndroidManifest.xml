@@ -163,24 +163,12 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
 				<data android:scheme="file"/>
-				<data android:host="*"/>
-				<data android:pathPattern=".*\\.kml" />
-				<data android:pathPattern=".*\\..*\\.kml" />
-				<data android:pathPattern=".*\\..*\\..*\\.kml" />
-				<data android:pathPattern=".*\\..*\\..*\\..*\\.kml" />
-				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kml" />
-			</intent-filter>
-
-			<intent-filter
-				android:label="@string/app_name"
-				android:priority="50">
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="file"/>
+				<data android:scheme="data"/>
 				<data android:host="*"/>
 				<data android:mimeType="*/*"/>
+				<data android:pathPattern="*.kml"/>
 				<data android:pathPattern=".*\\.kml" />
 				<data android:pathPattern=".*\\..*\\.kml" />
 				<data android:pathPattern=".*\\..*\\..*\\.kml" />
@@ -271,9 +259,12 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="content"/>
 				<data android:scheme="file"/>
+				<data android:scheme="data"/>
 				<data android:host="*"/>
 				<data android:mimeType="*/*"/>
+				<data android:pathPattern="*.sqlitedb" />
 				<data android:pathPattern=".*\\.sqlitedb" />
 				<data android:pathPattern=".*\\..*\\.sqlitedb" />
 				<data android:pathPattern=".*\\..*\\..*\\.sqlitedb" />
