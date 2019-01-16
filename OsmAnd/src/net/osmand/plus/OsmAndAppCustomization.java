@@ -69,14 +69,12 @@ public class OsmAndAppCustomization {
 	}
 
 	public static class CustomOsmandSettings {
-
 		private String sharedPreferencesName;
 		private OsmandSettings settings;
 
 		CustomOsmandSettings(OsmandApplication app, String sharedPreferencesName, Bundle bundle) {
 			this.sharedPreferencesName = sharedPreferencesName;
-			this.settings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app),
-					sharedPreferencesName);
+			this.settings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app), sharedPreferencesName);
 			if (bundle != null) {
 				for (String key : bundle.keySet()) {
 					Object object = bundle.get(key);
@@ -99,8 +97,7 @@ public class OsmAndAppCustomization {
 		return customOsmandSettings != null ? customOsmandSettings.getSettings() : osmandSettings;
 	}
 
-	public void customizeOsmandSettings(@NonNull String sharedPreferencesName,
-			@Nullable Bundle bundle) {
+	public void customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
 		customOsmandSettings = new CustomOsmandSettings(app, sharedPreferencesName, bundle);
 		OsmandSettings newSettings = customOsmandSettings.getSettings();
 		if (Build.VERSION.SDK_INT < 19) {
@@ -174,8 +171,7 @@ public class OsmAndAppCustomization {
 	}
 
 	public String getIndexesUrl() {
-		return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/get_indexes?gzip&" + Version
-				.getVersionAsURLParam(app);
+		return "https://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/get_indexes?gzip&" + Version.getVersionAsURLParam(app);
 	}
 
 	public boolean showDownloadExtraActions() {
@@ -213,12 +209,9 @@ public class OsmAndAppCustomization {
 	}
 
 	@Nullable
-	public ArrayList<String> getNavDrawerLogoParams() {
-		return navDrawerParams;
-	}
+	public ArrayList<String> getNavDrawerLogoParams() {return navDrawerParams; }
 
-	public boolean setNavDrawerLogo(@NonNull String uri, @Nullable String packageName,
-			@Nullable String intent) {
+	public boolean setNavDrawerLogo(String uri, @Nullable String packageName, @Nullable String intent) {
 		if (TextUtils.isEmpty(uri)) {
 			navDrawerLogo = null;
 		} else {
@@ -276,16 +269,14 @@ public class OsmAndAppCustomization {
 		setFeaturesCustomized();
 	}
 
-	public Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId,
-			@Nullable List<String> appModeKeys) {
+	public Set<ApplicationMode> regWidgetVisibility(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
 		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
 		widgetsVisibilityMap.put(widgetId, set);
 		setWidgetsCustomized();
 		return set;
 	}
 
-	public Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId,
-			@Nullable List<String> appModeKeys) {
+	public Set<ApplicationMode> regWidgetAvailability(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
 		HashSet<ApplicationMode> set = getAppModesSet(appModeKeys);
 		widgetsAvailabilityMap.put(widgetId, set);
 		setWidgetsCustomized();
@@ -308,7 +299,7 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean setNavDrawerLogoWithParams(@NonNull String imageUri, @Nullable String packageName,
+	public boolean setNavDrawerLogoWithParams(String imageUri, @Nullable String packageName,
 			@Nullable String intent) {
 		return setNavDrawerLogo(imageUri, packageName, intent);
 	}

@@ -1646,27 +1646,29 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-  boolean registerForOsmandInitialization(final OsmandAppInitCallback callback) throws RemoteException {
+	boolean registerForOsmandInitialization(final OsmandAppInitCallback callback)
+		throws RemoteException {
 		if (app.isApplicationInitializing()) {
-      app.getAppInitializer().addListener(new AppInitializeListener() {
-        @Override
-        public void onProgress(AppInitializer init, InitEvents event) {}
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
+				}
 
-        @Override
-        public void onFinish(AppInitializer init) {
-          try{
-            LOG.debug("AIDL App registerForOsmandInitialization");
-            callback.onAppInitialized();
-          } catch(Exception e){
-            e.printStackTrace();
-          }
-        }
-      });
-    } else {
-      callback.onAppInitialized();
-    }
-    return true;
-  }
+				@Override
+				public void onFinish(AppInitializer init) {
+					try {
+						LOG.debug("AIDL App registerForOsmandInitialization");
+						callback.onAppInitialized();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		} else {
+			callback.onAppInitialized();
+		}
+		return true;
+	}
 
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
@@ -1889,7 +1891,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean setNavDrawerLogoWithParams(
-			@NonNull String uri, @Nullable String packageName, @Nullable String intent) {
+			String uri, @Nullable String packageName, @Nullable String intent) {
 		return app.getAppCustomization().setNavDrawerLogoWithParams(uri, packageName, intent);
 	}
 
