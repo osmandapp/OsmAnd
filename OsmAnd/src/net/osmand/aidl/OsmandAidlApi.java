@@ -1668,28 +1668,6 @@ public class OsmandAidlApi {
     return true;
   }
 
-//	void registerForOsmandInitialization(final IOsmAndAidlCallback callback) throws RemoteException {
-//	  if (app.isApplicationInitializing()) {
-//	  	app.getAppInitializer().addListener(new AppInitializeListener() {
-//        @Override
-//        public void onProgress(AppInitializer init, InitEvents event) {}
-//
-//        @Override
-//        public void onFinish(AppInitializer init) {
-//        	LOG.debug("App init finished callback");
-//        	try{
-//          	callback.onAppInitialized();
-//        	} catch(Exception e){
-//        		e.printStackTrace();
-//
-//					}
-//        }
-//      });
-//    } else {
-//	    callback.onAppInitialized();
-//    }
-//  }
-
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
 			if (items.isEmpty()) {
@@ -1911,7 +1889,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean setNavDrawerLogoWithParams(
-			@Nullable String uri, @Nullable String packageName, @Nullable String intent) {
+			@NonNull String uri, @Nullable String packageName, @Nullable String intent) {
 		return app.getAppCustomization().setNavDrawerLogoWithParams(uri, packageName, intent);
 	}
 

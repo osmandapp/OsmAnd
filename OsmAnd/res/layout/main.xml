@@ -99,8 +99,7 @@
         android:id="@+id/drawer_relative_layout"
         android:layout_width="280dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        >
+        android:layout_gravity="start">
 
         <ListView
             android:id="@+id/menuItems"
