@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne.</string>
@@ -266,7 +266,7 @@
     <string name="indexing_map">Indexation de la carte…</string>
     <string name="indexing_poi">Indexation du point d\'intérêt…</string>
     <string name="indexing_transport">Indexation des transports…</string>
-    <string name="shared_string_io_error">Erreur d\'entrée/sortie</string>
+    <string name="shared_string_io_error">Erreur I/O</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
@@ -1772,7 +1772,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Désélectionner</string>
     <string name="shared_string_deselect_all">Désélectionner tout</string>
-    <string name="shared_string_unexpected_error">Erreur inconnue</string>
+    <string name="shared_string_unexpected_error">Erreur inattendue</string>
     <string name="shared_string_action_template">Action {0}</string>
     <string name="shared_string_video">Vidéo</string>
     <string name="shared_string_photo">Photo</string>
@@ -2204,7 +2204,7 @@ Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="osm_live_month_cost_desc">Règlement mensuel</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
-    <string name="osm_live_enter_email">Merci de saisir un courriel valide</string>
+    <string name="osm_live_enter_email">Veuillez entrer une adresse email valide</string>
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
@@ -2354,7 +2354,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="get_it">Obtenir</string>
     <string name="osm_live_banner_desc">Téléchargez un nombre illimité de cartes et obtenez des mises à jour plus fréquentes (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
     <string name="osmand_plus_banner_desc">Téléchargements illimités des cartes, des mises à jour et des données pour le greffon Wikipédia.</string>
-    <string name="donation_to_osm">Faire un don à la communauté OpenStreetMap</string>
+    <string name="donation_to_osm">Don à la communauté OpenStreetMap</string>
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
     <string name="osm_live_payment_desc">Abonnement mensuel. Vous pouvez l\'annuler à tout moment sur Google Play.</string>
     <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMap. Le coût de l\'abonnement reste identique.</string>
@@ -3085,7 +3085,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipedia hors-ligne</string>
     
-    <string name="unlock_all_features">Activez toutes les fonctionnalités d\'OsmAnd</string>
+    <string name="unlock_all_features">Débloquer toutes les options OsmAnd</string>
 
     <string name="monthly_map_updates">Mise à jour des cartes : <b>Tous les mois</b></string>
     <string name="daily_map_updates">Mise à jour des cartes : <b>Toutes les heures</b></string>
