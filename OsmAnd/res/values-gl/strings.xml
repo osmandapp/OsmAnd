@@ -3166,4 +3166,7 @@ Lon %2$s</string>
     <string name="powered_by_osmand">Desenvolvido polo OsmAnd</string>
     <string name="osm_live_subscriptions">Subscricións</string>
     <string name="mapillary_menu_title_pano">Amosar só imaxes 360°</string>
-    </resources>
+    <string name="shared_string_launch">Executar</string>
+    <string name="run_full_osmand_msg">Estás a emprega-lo mapa {0} que funciona co OsmAnd. Desexas executar a versión completa do OsmAnd\?</string>
+    <string name="run_full_osmand_header">Executar OsmAnd\?</string>
+</resources>
