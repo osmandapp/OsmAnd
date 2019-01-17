@@ -3186,4 +3186,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="powered_by_osmand">OsmAnd-ek bultzatua</string>
     <string name="osm_live_subscriptions">Harpidetzak</string>
     <string name="mapillary_menu_title_pano">Erakutsi 360º argazkiak besterik ez</string>
-    </resources>
+    <string name="shared_string_launch">Abiatu</string>
+    <string name="run_full_osmand_msg">OsmAnd darabilen {0} mapa erabiltzen ari zara eta. OsmAnd bertsio osoa abiatu nahi duzu\?</string>
+    <string name="run_full_osmand_header">Abiatu OsmAnd\?</string>
+</resources>
