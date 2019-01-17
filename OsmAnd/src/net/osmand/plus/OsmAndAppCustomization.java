@@ -14,6 +14,9 @@ import android.text.TextUtils;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
+import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
@@ -45,6 +48,7 @@ public class OsmAndAppCustomization {
 
 	private Bitmap navDrawerLogo;
 	private ArrayList<String> navDrawerParams;
+	private NavDrawerFooterParams navDrawerFooterParams;
 
 	private Set<String> featuresEnabledIds = new HashSet<>();
 	private Set<String> featuresDisabledIds = new HashSet<>();
@@ -207,7 +211,7 @@ public class OsmAndAppCustomization {
 	@Nullable
 	public ArrayList<String> getNavDrawerLogoParams() {return navDrawerParams; }
 
-	public boolean setNavDrawerLogo(@Nullable String uri, @Nullable String packageName, @Nullable String intent) {
+	public boolean setNavDrawerLogo(String uri, @Nullable String packageName, @Nullable String intent) {
 		if (TextUtils.isEmpty(uri)) {
 			navDrawerLogo = null;
 		} else {
@@ -223,8 +227,8 @@ public class OsmAndAppCustomization {
 			} catch (IOException e) {
 				// ignore
 			}
-			if(packageName!=null && intent!=null) {
-			    navDrawerParams = new ArrayList<>();
+			if (packageName != null && intent != null) {
+				navDrawerParams = new ArrayList<>();
 				navDrawerParams.add(packageName);
 				navDrawerParams.add(intent);
 			}
@@ -232,7 +236,14 @@ public class OsmAndAppCustomization {
 		return true;
 	}
 
+	public boolean setNavDrawerFooterParams(NavDrawerFooterParams params) {
+		navDrawerFooterParams = params;
+		return true;
+	}
 
+	public NavDrawerFooterParams getNavFooterParams() {
+		return navDrawerFooterParams;
+	}
 
 	public void setFeaturesEnabledIds(@NonNull Collection<String> ids) {
 		featuresEnabledIds.clear();
@@ -288,14 +299,31 @@ public class OsmAndAppCustomization {
 		return set.contains(appMode);
 	}
 
-	public boolean setNavDrawerLogoWithParams(String uri, @Nullable String packageName, @Nullable String intent) {
-		LOG.info("setNavDrawerLogoWithParams called");
-		return setNavDrawerLogo(uri, packageName, intent);
+	public boolean setNavDrawerLogoWithParams(String imageUri, @Nullable String packageName,
+			@Nullable String intent) {
+		return setNavDrawerLogo(imageUri, packageName, intent);
 	}
 
-	public boolean setNavDrawerFooterAction(String packageName, String intent, String appName) {
-		//todo implement custom action to "Powered by Osmand" action in NavDrawer
-		return true;
+	public boolean changePluginStatus(PluginParams params) {
+		if (params.getNewState() == 0) {
+			for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
+				if (plugin.getId().equals(params.getPluginId())) {
+					plugin.setActive(false);
+				}
+			}
+			return true;
+		}
+
+		if (params.getNewState() == 1) {
+			for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
+				if (plugin.getId().equals(params.getPluginId())) {
+					plugin.setActive(true);
+				}
+			}
+			return true;
+		}
+
+		return false;
 	}
 
 	@NonNull

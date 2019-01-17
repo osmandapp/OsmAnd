@@ -54,6 +54,8 @@ import net.osmand.aidl.gpx.RemoveGpxParams;
 import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 
 import net.osmand.aidl.navigation.PauseNavigationParams;
 import net.osmand.aidl.navigation.ResumeNavigationParams;
@@ -73,6 +75,10 @@ import net.osmand.aidl.customization.OsmandSettingsParams;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+
+import net.osmand.aidl.plugins.PluginParams;
+
+
 
 
 // NOTE: Add new methods at the end of file!!!
@@ -161,9 +167,12 @@ interface IOsmAndAidlInterface {
     boolean showSqliteDbFile(String fileName);
     boolean hideSqliteDbFile(String fileName);
 
-    boolean setNavDrawerLogoWithParams(in String imageUri, String packageName, String intent);
-    boolean setNavDrawerFooterParams(in String packageName, String intent, String appName);
+    boolean setNavDrawerLogoWithParams(in NavDrawerHeaderParams params);
+    boolean setNavDrawerFooterWithParams(in NavDrawerFooterParams params);
 
     boolean restoreOsmand();
 
+    boolean changePluginState(in PluginParams params);
+
+    boolean registerForOsmandInitListener(in IOsmAndAidlCallback callback);
 }

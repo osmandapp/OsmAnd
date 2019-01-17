@@ -720,7 +720,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="poi_edit_title">POI szerkesztése</string>
     <string name="poi_create_title">POI létrehozása</string>
     <string name="poi_error_poi_not_found">A pont nem található, vagy a létesítmény több pontból áll, ami pillanatnyilag nem támogatott.</string>
-    <string name="poi_remove_confirm_template">{0} törlése (írj megjegyzést)?</string>
+    <string name="poi_remove_confirm_template">{0} törlése (megjegyzés)\?</string>
     <string name="poi_remove_title">POI törlése</string>
     <string name="shared_string_delete">Törlés</string>
     <string name="poi_remove_success">POI törölve</string>
@@ -2161,7 +2161,7 @@ Hosszúság: %2$s</string>
     <string name="osm_user_stat">Szerkesztések: %1$s, helyezés: %2$s, összes szerkesztés: %3$s</string>
     <string name="osm_editors_ranking">OSM szerkesztők rangsora</string>
     <string name="osm_live_subscription">OsmAnd Live előfizetés</string>
-    <string name="osm_live_subscribe_btn">Előfizetés</string>
+    <string name="osm_live_subscribe_btn">Feliratkozás</string>
     <string name="osm_live_user_public_name">Nyilvános név</string>
     <string name="osm_live_hide_user_name">Ne jelenjen meg a nevem a jelentésekben</string>
     <string name="osm_live_support_region">Támogatott régió</string>
@@ -3047,4 +3047,65 @@ Kérlek adj meg egy teljes kódot</string>
 \n • Láthatod a sebességed és milyen magasan jársz
 \n • GPX felvétel opcióval felveheted és megoszthatod a túráidat
 \n • Bővítményen keresztül bekapcsolhatóak a szintvonalak és a domborzatárnyékolás</string>
+    <string name="osm_live_subscriptions">Előfizetések</string>
+    <string name="osm_live_plan_pricing">Csomag &amp; Árak</string>
+    <string name="osm_live_payment_monthly_title">Fizetés havonta</string>
+    <string name="osm_live_payment_3_months_title">Fizetés három havonta</string>
+    <string name="osm_live_payment_annual_title">Fizetés évente egyszer</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / hó</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / hó</string>
+    <string name="osm_live_payment_discount_descr">Takaríts meg ennyit: %1$s!</string>
+    <string name="osm_live_payment_current_subscription">Jelenlegi előfizetéseid</string>
+    <string name="osm_live_payment_renews_monthly">Havonta megújul</string>
+    <string name="osm_live_payment_renews_quarterly">Negyedévente megújul</string>
+    <string name="osm_live_payment_renews_annually">Évente megújul</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Válaszd ki a számodra kényelmes fizetési időszakot:</string>
+    <string name="osm_live_payment_contribute_descr">A bevétel egy részét az OpenStreetMap közreműködői kapják.</string>
+    <string name="markers_remove_dialog_msg">Törlöd „%s” térképjelölőt\?</string>
+    <string name="edit_map_marker">Térképjelölő szerkesztése</string>
+    <string name="search_street">Utca keresése</string>
+    <string name="start_search_from_city">Előbb a város kiválasztása</string>
+    <string name="shared_string_restore">Visszaállítás</string>
+    <string name="keep_passed_markers">Elhagyott jelölők megtartása a térképen</string>
+    <string name="ask_for_location_permission">A folytatáshoz kérlek engedélyezd a helymeghatározást az OsmAnd számára.</string>
+    <string name="thank_you_for_feedback">Köszönjük a visszajelzést</string>
+    <string name="release_3_2_pre">• Pár eszközt érintő indításkori összeomlás javítása
+\n
+\n • Új térképjelölők lehetőség: a már elhagyott jelölők térképen tartása
+\n
+\n • A keresési előzmények a korábban keresett kategóriákat is megjeleníti
+\n
+\n • A nem latin betűs térképek okozta indításkori összeomlás javítása
+\n
+\n • Térkép megjelentési sebesség javítása Android 8.0 eszközön
+\n
+\n • Sokszögkén ábrázolt objektumok (nem szolgáltatás) szerkesztése
+\n
+\n • Távolságmérés: Mérés gomb hozzáadva Műveletekhez a helyi menüben
+\n
+\n</string>
+    <string name="release_3_1">• Navigáció: folyamatjelző sáv javítása, az út kezdő és célpontjának gyors felcserélése
+\n
+\n • Térképjelölők: csoportok ki-be kapcsolásának javítása, lehetőség a jelölők eltüntetésére
+\n
+\n • OSM szerkesztés: Nem pontként ábrázolt objektumok és vonalak címkéinek szerkesztése, hiányzó megjegyzések javítása a jegyzeteken, szerkesztések biztonsági mentése
+\n
+\n • Wikipédia és Wikivoyage cikkek feldolgozásának javítása, a frissített fájlok már elérhetőek
+\n
+\n • Helyi menü: pajzsok javítása éjszakai módban, további menüméretek javítása
+\n
+\n • Hajós navigáció: vízi utak támogatása
+\n
+\n • Egyéb hibajavítások
+\n
+\n</string>
+    <string name="commiting_way">Vonal beküldése…</string>
+    <string name="increase_search_radius_to">Keresési sugár növelése: %1$s</string>
+    <string name="point_deleted">%1$s pont törölve</string>
+    <string name="coord_input_save_as_track_descr">%1$s pontot hoztál létre. Adj meg egy fájlnevet és nyomj a „Mentés”-re.</string>
+    <string name="error_notification_desc">Kérlek, küldj egy képernyőképet erről a figyelmeztetésről a support@osmand.net-re</string>
+    <string name="mapillary_menu_title_pano">Csak 360°-os képek megjelenítése</string>
+    <string name="rendering_value_black_name">Fekete</string>
+    <string name="test_voice_desrc">Nyomj egy gombra és hallgasd meg a hangutasítást, hogy megtaláld a hiányzó, vagy hibás utasításokat.</string>
 </resources>
