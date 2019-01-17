@@ -383,7 +383,7 @@
 	<string name="poi_bag">Tenda de bolsos e/ou maletas</string>
 	<string name="poi_hardware">Ferraxaría</string>
 	<string name="poi_shop">Tenda</string>
-		<string name="poi_shop_food">Tenda de comestíbeis e supermercado</string>
+		<string name="poi_shop_food">Tenda de ultramarinos e supermercado</string>
 	<string name="poi_emergency">Urxencias</string>
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo na estrada</string>
@@ -1490,7 +1490,7 @@
 	<string name="poi_glacier_type">Tipo do glaciar</string>
 	<string name="poi_checkpoint_type">Tipo do posto de control</string>
 
-<string name="poi_convenience">Tenda de comestíbeis</string>
+<string name="poi_convenience">Tenda de ultramarinos</string>
 	<string name="poi_halt">Paraxe de trens</string>
 	<string name="poi_railway_buffer_stop">Fin da vía</string>
 	<string name="poi_food_court">Estabelecemento de comidas</string>
