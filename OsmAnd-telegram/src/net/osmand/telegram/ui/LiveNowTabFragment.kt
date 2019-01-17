@@ -461,7 +461,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 						this@LiveNowTabFragment,
 						app.getExternalFilesDir(null),
 						item.userId,
-						60 * 60 * 6 * 1000
+						60 * 60 * 24 * 1000
 					)
 					true
 				}
