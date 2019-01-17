@@ -239,7 +239,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public static boolean isSmallSpeedForDirectionOfMovement(Location location, float speedToDirectionOfMovement) {
-		return !location.hasSpeed() || location.getSpeed() < speedToDirectionOfMovement;
+		return !location.hasSpeed() || location.getSpeed()* 3.6 < speedToDirectionOfMovement;
 	}
 
 	public static boolean isSmallSpeedForCompass(Location location) {
