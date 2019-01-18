@@ -21,6 +21,7 @@
 	<asset source="voice/fa/fa_tts.js" destination="voice/fa-tts/fa_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fi/fi_tts.js" destination="voice/fi-tts/fi_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fr/fr_tts.js" destination="voice/fr-tts/fr_tts.js" mode="alwaysOverwriteOrCopy" />
+	<asset source="voice/gn-py/gn-py_tts.js" destination="voice/gn-py-tts/gn-py_tts.js" mode="overwriteOnlyIfExists" />
 	<!--<asset source="voice/he/he_tts.js" destination="voice/he-tts/he_tts.js" mode="overwriteOnlyIfExists" />-->
 	<asset source="voice/nb/nb_tts.js" destination="voice/nb-tts/nb_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hi/hi_tts.js" destination="voice/hi-tts/hi_tts.js" mode="overwriteOnlyIfExists" />
