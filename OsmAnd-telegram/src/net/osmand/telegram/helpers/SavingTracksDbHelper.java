@@ -238,13 +238,14 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 				+ " AND " + TRACK_COL_CHAT_ID + " = ?" + " AND " + TRACK_COL_DATE + " BETWEEN " + start + " AND " + end
 				+ " ORDER BY " + TRACK_COL_DATE + " ASC ", new String[]{String.valueOf(userId), String.valueOf(chatId)});
 
-		GPXFile gpxFile = new GPXFile();
-		gpxFile.chatId = chatId;
-		gpxFile.userId = userId;
+		GPXFile gpxFile = null;
 		long previousTime = 0;
 		TrkSegment segment = null;
 		Track track = null;
 		if (query.moveToFirst()) {
+			gpxFile = new GPXFile();
+			gpxFile.chatId = chatId;
+			gpxFile.userId = userId;
 			do {
 				long time = query.getLong(7);
 				WptPt pt = new WptPt();
@@ -289,12 +290,13 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 				+ " AND " + TRACK_COL_DATE + " BETWEEN " + start + " AND " + end
 				+ " ORDER BY " + TRACK_COL_DATE + " ASC ", new String[]{String.valueOf(userId)});
 
-		GPXFile gpxFile = new GPXFile();
-		gpxFile.userId = userId;
+		GPXFile gpxFile = null;
 		long previousTime = 0;
 		TrkSegment segment = null;
 		Track track = null;
 		if (query.moveToFirst()) {
+			gpxFile = new GPXFile();
+			gpxFile.userId = userId;
 			do {
 				long time = query.getLong(7);
 				WptPt pt = new WptPt();

@@ -182,7 +182,6 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		val fileUri = AndroidUtils.getUriForFile(app, File(path))
 		val openGpxIntent = Intent(Intent.ACTION_VIEW)
 		openGpxIntent.setDataAndType(fileUri, "application/gpx+xml")
-//		openGpxIntent.type = "application/gpx+xml"
 		openGpxIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
 		val resolved = activity?.packageManager?.resolveActivity(openGpxIntent, PackageManager.MATCH_DEFAULT_ONLY)
 		if (resolved != null) {

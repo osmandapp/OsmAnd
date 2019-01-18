@@ -21,6 +21,7 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.ui.TimelineTabFragment.LiveNowListAdapter.BaseViewHolder
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.GPXUtilities
 import net.osmand.telegram.utils.OsmandFormatter
 import java.util.*
 
@@ -103,6 +104,10 @@ class TimelineTabFragment : Fragment() {
 				from.set(Calendar.YEAR, year)
 				from.set(Calendar.MONTH, monthOfYear)
 				from.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+				from.set(Calendar.HOUR_OF_DAY, 0)
+				from.clear(Calendar.MINUTE)
+				from.clear(Calendar.SECOND)
+				from.clear(Calendar.MILLISECOND)
 				start = from.timeInMillis
 				updateList()
 				updateDateButtons()
@@ -123,6 +128,10 @@ class TimelineTabFragment : Fragment() {
 				from.set(Calendar.YEAR, year)
 				from.set(Calendar.MONTH, monthOfYear)
 				from.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+				from.set(Calendar.HOUR_OF_DAY, 23)
+				from.set(Calendar.MINUTE, 59)
+				from.set(Calendar.SECOND, 59)
+				from.set(Calendar.MILLISECOND, 999)
 				end = from.timeInMillis
 				updateList()
 				updateDateButtons()
@@ -156,13 +165,15 @@ class TimelineTabFragment : Fragment() {
 	private fun updateList() {
 		val res = mutableListOf<ListItem>()
 		val s = System.currentTimeMillis()
-		log.debug("updateList $start")
+		log.debug("updateList $s")
 		val ignoredUsersIds = ArrayList<Int>()
 		val currentUserId = telegramHelper.getCurrentUser()?.id
 		if (currentUserId != null) {
-			val currentUserGpx = app.savingTracksDbHelper.collectRecordedDataForUser(currentUserId, 0, start, end)
-			TelegramUiHelper.gpxToChatItem(telegramHelper, currentUserGpx, true)?.also {
-				res.add(it)
+			val currentUserGpx:GPXUtilities.GPXFile? = app.savingTracksDbHelper.collectRecordedDataForUser(currentUserId, 0, start, end)
+			if (currentUserGpx != null) {
+				TelegramUiHelper.gpxToChatItem(telegramHelper, currentUserGpx, true)?.also {
+					res.add(it)
+				}
 			}
 			ignoredUsersIds.add(currentUserId)
 		}
