@@ -146,6 +146,4 @@ dependencies {
 	implementation("com.github.HITGIF:TextFieldBoxes:1.4.4") {
 		exclude group: 'com.android.support'
 	}
-
-	implementation 'net.sf.kxml:kxml2:2.1.8'
 }
