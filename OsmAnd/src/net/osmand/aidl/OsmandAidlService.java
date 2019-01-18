@@ -11,6 +11,7 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
@@ -22,8 +23,10 @@ import net.osmand.aidl.favorite.UpdateFavoriteParams;
 import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
+import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
+import net.osmand.aidl.gpx.CreateGpxBitmapParams;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.RemoveGpxParams;
@@ -813,6 +816,26 @@ public class OsmandAidlService extends Service {
 						try {
 							callback.onAppInitialized();
 						} catch (Exception e) {
+							handleException(e);
+						}
+					}
+				});
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getBitmapForGpx(CreateGpxBitmapParams params, final IOsmAndAidlCallback callback) throws RemoteException {
+			try {
+				OsmandAidlApi api = getApi("getBitmapForGpx");
+				return params != null && api != null && api.getBitmapForGpx(params.getGpxUri(), params.getDensity(), params.getWidthPixels(), params.getHeightPixels(), params.getColor(), new GpxBitmapCreatedCallback() {
+					@Override
+					public void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap) {
+						try {
+							callback.onGpxBitmapCreated(aGpxBitmap);
+						} catch (RemoteException e) {
 							handleException(e);
 						}
 					}

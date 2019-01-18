@@ -27,6 +27,7 @@ import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
 import net.osmand.telegram.ui.views.LockableViewPager
 import net.osmand.telegram.utils.*
 import org.drinkless.td.libcore.telegram.TdApi
+import java.io.File
 import java.lang.ref.WeakReference
 
 const val OPEN_MY_LOCATION_TAB_KEY = "open_my_location_tab"
@@ -35,6 +36,7 @@ private const val PERMISSION_REQUEST_LOCATION = 1
 
 private const val MY_LOCATION_TAB_POS = 0
 private const val LIVE_NOW_TAB_POS = 1
+private const val TIMELINE_TAB_POS = 2
 
 class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener, TelegramIncomingMessagesListener {
 
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	private var myLocationTabFragment: MyLocationTabFragment? = null
 	private var liveNowTabFragment: LiveNowTabFragment? = null
+	private var timelineTabFragment: TimelineTabFragment? = null
 
 	private lateinit var buttonsBar: LinearLayout
 	private lateinit var bottomNav: BottomNavigationView
@@ -72,7 +75,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 		val viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
 			swipeLocked = true
-			offscreenPageLimit = 2
+			offscreenPageLimit = 3
 			adapter = ViewPagerAdapter(supportFragmentManager)
 		}
 
@@ -82,11 +85,13 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				when (it.itemId) {
 					R.id.action_my_location -> pos = MY_LOCATION_TAB_POS
 					R.id.action_live_now -> pos = LIVE_NOW_TAB_POS
+					R.id.action_timeline -> pos = TIMELINE_TAB_POS
 				}
 				if (pos != -1 && pos != viewPager.currentItem) {
 					when (pos) {
 						MY_LOCATION_TAB_POS -> liveNowTabFragment?.tabClosed()
 						LIVE_NOW_TAB_POS -> liveNowTabFragment?.tabOpened()
+						TIMELINE_TAB_POS -> liveNowTabFragment?.tabClosed()
 					}
 					viewPager.currentItem = pos
 					return@setOnNavigationItemSelectedListener true
@@ -139,10 +144,10 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		if (fragment is TelegramListener) {
 			listeners.add(WeakReference(fragment))
 		}
-		if (fragment is MyLocationTabFragment) {
-			myLocationTabFragment = fragment
-		} else if (fragment is LiveNowTabFragment) {
-			liveNowTabFragment = fragment
+		when (fragment) {
+			is MyLocationTabFragment -> myLocationTabFragment = fragment
+			is LiveNowTabFragment -> liveNowTabFragment = fragment
+			is TimelineTabFragment -> timelineTabFragment = fragment
 		}
 	}
 
@@ -317,6 +322,15 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		android.os.Process.killProcess(android.os.Process.myPid())
 	}
 
+	fun shareGpx(path: String) {
+		val fileUri = AndroidUtils.getUriForFile(app, File(path))
+		val sendIntent = Intent(Intent.ACTION_SEND)
+		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+		sendIntent.type = "application/gpx+xml"
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+		startActivity(sendIntent)
+	}
+
 	fun loginTelegram() {
 		if (telegramHelper.getTelegramAuthorizationState() != TelegramAuthorizationState.CLOSED) {
 			telegramHelper.logout()
@@ -463,7 +477,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-		private val fragments = listOf<Fragment>(MyLocationTabFragment(), LiveNowTabFragment())
+		private val fragments = listOf<Fragment>(MyLocationTabFragment(), LiveNowTabFragment(), TimelineTabFragment())
 
 		override fun getItem(position: Int) = fragments[position]
 

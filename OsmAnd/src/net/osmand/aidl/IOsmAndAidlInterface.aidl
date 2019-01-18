@@ -74,6 +74,8 @@ import net.osmand.aidl.customization.OsmandSettingsParams;
 
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
+import net.osmand.aidl.gpx.CreateGpxBitmapParams;
+
 import net.osmand.aidl.tiles.ASqliteDbFile;
 
 import net.osmand.aidl.plugins.PluginParams;
@@ -175,4 +177,6 @@ interface IOsmAndAidlInterface {
     boolean changePluginState(in PluginParams params);
 
     boolean registerForOsmandInitListener(in IOsmAndAidlCallback callback);
+
+    boolean getBitmapForGpx(in CreateGpxBitmapParams file, IOsmAndAidlCallback callback);
 }

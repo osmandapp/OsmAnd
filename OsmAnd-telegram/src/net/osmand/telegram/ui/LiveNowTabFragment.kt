@@ -11,10 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
@@ -22,6 +19,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.TelegramSettings
+import net.osmand.telegram.helpers.SavingTracksDbHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -33,7 +31,7 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
-import java.io.File
+import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
@@ -231,15 +229,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	fun tabClosed() {
 		stopLocationUpdate()
-	}
-
-	fun shareGpx(path: String) {
-		val fileUri = AndroidUtils.getUriForFile(app, File(path))
-		val sendIntent = Intent(Intent.ACTION_SEND)
-		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
-		sendIntent.type = "application/gpx+xml"
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-		startActivity(sendIntent)
 	}
 
 	private fun chooseOsmAnd() {
@@ -456,15 +445,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 						app.showLocationHelper.showLocationOnMap(item, staleLocation)
 					}
 				}
-				openOnMapView?.setOnLongClickListener {
-					app.savingTracksDbHelper.saveAsyncUserDataToGpx(
-						this@LiveNowTabFragment,
-						app.getExternalFilesDir(null),
-						item.userId,
-						60 * 60 * 24 * 1000
-					)
-					true
-				}
 			} else {
 				openOnMapView?.setOnClickListener(null)
 			}
@@ -485,17 +465,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			if (lastItem) {
 				holder.lastTelegramUpdateTime?.visibility = View.VISIBLE
 				holder.lastTelegramUpdateTime?.text = OsmandFormatter.getListItemLiveTimeDescr(app, telegramHelper.lastTelegramUpdateTime, lastTelegramUpdateStr)
-				holder.lastTelegramUpdateTime?.setOnClickListener {
-					val currentUserId = telegramHelper.getCurrentUser()?.id
-					if (currentUserId != null) {
-						app.savingTracksDbHelper.saveAsyncUserDataToGpx(
-							this@LiveNowTabFragment,
-							app.getExternalFilesDir(null),
-							currentUserId,
-							60 * 60 * 24 * 1000
-						)
-					}
-				}
 			} else {
 				holder.lastTelegramUpdateTime?.visibility = View.GONE
 			}
