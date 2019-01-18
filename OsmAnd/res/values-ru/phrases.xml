@@ -3872,4 +3872,9 @@
 
 	<string name="poi_atoll">Атолл</string>
 
+	<string name="poi_toll_gantry">Рамка оплаты</string>
+
+	<string name="poi_childcare">Уход за детьми</string>
+
+
 </resources>
