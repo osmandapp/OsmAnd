@@ -402,12 +402,12 @@ public class BinaryMapTransportReaderAdapter {
 		int oldLimit = codedIS.pushLimit(ind.stringTable.length);
 		int current = 0;
 		int i = 0;
-		while (i < values.length) {
+		while (i < values.length && codedIS.getBytesUntilLimit() > 0) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				break;
+				return;
 			case OsmandOdb.StringTable.S_FIELD_NUMBER:
 				if (current == values[i]) {
 					String value = codedIS.readString();

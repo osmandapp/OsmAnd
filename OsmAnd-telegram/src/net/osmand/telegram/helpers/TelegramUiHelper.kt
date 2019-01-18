@@ -8,6 +8,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper.MessageOsmAndBotLocation
 import net.osmand.telegram.helpers.TelegramHelper.MessageUserTextLocation
+import net.osmand.telegram.utils.GPXUtilities
 import org.drinkless.td.libcore.telegram.TdApi
 
 object TelegramUiHelper {
@@ -129,6 +130,10 @@ object TelegramUiHelper {
 		}
 	}
 
+	fun gpxToChatItem(helper: TelegramHelper, gpx: GPXUtilities.GPXFile, simpleUserItem: Boolean): GpxChatItem? {
+		return if (simpleUserItem) gpxToUserGpxChatItem(helper, gpx) else gpxToGpxChatItem(helper, gpx)
+	}
+
 	private fun botMessageToLocationItem(
 		chat: TdApi.Chat,
 		content: MessageOsmAndBotLocation
@@ -224,6 +229,49 @@ object TelegramUiHelper {
 		}
 	}
 
+	private fun gpxToGpxChatItem(
+		helper: TelegramHelper,
+		gpx: GPXUtilities.GPXFile
+	): GpxChatItem? {
+		val user = helper.getUser(gpx.userId) ?: return null
+		val chat = helper.getChat(gpx.chatId) ?: return null
+		return GpxChatItem().apply {
+			chatId = chat.id
+			chatTitle = chat.title
+			gpxFile = gpx
+			name = TelegramUiHelper.getUserName(user)
+			if (helper.isGroup(chat)) {
+				photoPath = helper.getUserPhotoPath(user)
+				groupPhotoPath = chat.photo?.small?.local?.path
+			} else {
+				photoPath = user.profilePhoto?.small?.local?.path
+			}
+			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
+			placeholderId = R.drawable.img_user_picture
+			userId = user.id
+			privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
+			chatWithBot = helper.isBot(userId)
+			lastUpdated = (gpx.modifiedTime / 1000).toInt()
+		}
+	}
+
+	private fun gpxToUserGpxChatItem(
+		helper: TelegramHelper,
+		gpx: GPXUtilities.GPXFile
+	): GpxChatItem? {
+		val user = helper.getUser(gpx.userId) ?: return null
+		return GpxChatItem().apply {
+			gpxFile = gpx
+			name = TelegramUiHelper.getUserName(user)
+			photoPath = user.profilePhoto?.small?.local?.path
+			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
+			placeholderId = R.drawable.img_user_picture
+			userId = user.id
+			chatWithBot = helper.isBot(userId)
+			lastUpdated = (gpx.modifiedTime / 1000).toInt()
+		}
+	}
+
 	abstract class ListItem {
 
 		var chatId: Long = 0
@@ -263,6 +311,24 @@ object TelegramUiHelper {
 		var membersCount: Int = 0
 			internal set
 		var liveMembersCount: Int = 0
+			internal set
+
+		override fun canBeOpenedOnMap() = latLon != null
+
+		override fun getMapPointId() = "${chatId}_$userId"
+
+		override fun getVisibleName() = chatTitle
+	}
+
+	class GpxChatItem : ListItem() {
+
+		var gpxFile: GPXUtilities.GPXFile? = null
+			internal set
+		var groupPhotoPath: String? = null
+			internal set
+		var privateChat: Boolean = false
+			internal set
+		var chatWithBot: Boolean = false
 			internal set
 
 		override fun canBeOpenedOnMap() = latLon != null

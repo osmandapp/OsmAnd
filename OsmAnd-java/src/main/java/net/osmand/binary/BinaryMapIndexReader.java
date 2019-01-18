@@ -554,7 +554,6 @@ public class BinaryMapIndexReader {
 		}
 		return false;
 	}
-
 	public List<TransportStop> searchTransportIndex(SearchRequest<TransportStop> req) throws IOException {
 		for (TransportIndex index : transportIndexes) {
 			if (index.stopsFileLength == 0 || index.right < req.left || index.left > req.right || index.top > req.bottom
@@ -877,6 +876,8 @@ public class BinaryMapIndexReader {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
+
+
 
 					// lazy initializing trees
 					if (index.trees == null) {

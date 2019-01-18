@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштабу</string>
@@ -68,7 +68,7 @@
     <string name="intermediate_items_sort_by_distance">Упарадкаваць ад дзвярэй да дзвярэй</string>
     <string name="local_osm_changes_backup_successful">Файл OSM-змен створаны ў %1$s</string>
     <string name="local_osm_changes_backup_failed">Не атрымалася зарэзерваваць OSM-змены</string>
-    <string name="local_osm_changes_backup">Рэзервовае капіраванне файлу змен OSM</string>
+    <string name="local_osm_changes_backup">Рэзервовае капіяванне файлу змен OSM</string>
     <string name="delete_point">Выдаліць пункт</string>
     <string name="plugin_distance_point_time">час</string>
     <string name="plugin_distance_point_hdop">дакладнасць</string>
@@ -146,7 +146,7 @@
     <string name="recording_photo_description">Фота %1$s %2$s</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
-    <string name="dropbox_plugin_description">Убудова Dropbox дазваляе вам сінхранізаваць сляды і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
+    <string name="dropbox_plugin_description">Убудова Dropbox дазваляе вам сінхранізаваць сляды і аўдыё/відэа натакi з вашым акаўнтам Dropbox.</string>
     <string name="dropbox_plugin_name">Убудова Dropbox</string>
     
     <string name="intermediate_points_change_order">Змяніць парадак</string>
@@ -454,7 +454,7 @@
 \n 
 \nЛюбая з гэтых мапаў можа быць выкарыстана ў якасці асноўнай (базавай) мапы для адлюстравання на экране OsmAnd або ў выглядзе накладкі / падкладкі да іншай базавай мапы (стандартнай аўтаномнай мапы OsmAnd). Для таго каб зрабіць любую падкладку больш бачнай, некаторыя элементы вектарнай мапы OsmAnd могуць быць па жаданні лёгка схаваныя праз меню «Налады мапы». 
 \n 
-\nТайлавыя мапы могуць быць атрыманыя непасрэдна з дапамогай сеціўных крыніц або могуць быць падрыхтаваныя для выкарыстання ў аўтаномным рэжыме (і ўласнаручна скапіраваныя ў каталог даных OsmAnd) як база даных SQLite, якую можна атрымаць з дапамогай розных інструментаў падрыхтоўкі мапаў іншых вытворцаў.</string>
+\nТайлавыя мапы могуць быць атрыманыя непасрэдна з дапамогай сеціўных крыніц або могуць быць падрыхтаваныя для выкарыстання ў аўтаномным рэжыме (і ўласнаручна скапіяваныя ў каталог даных OsmAnd) як база даных SQLite, якую можна атрымаць з дапамогай розных інструментаў падрыхтоўкі мапаў іншых вытворцаў.</string>
 	
 	<string name="osmand_accessibility_description">Убудова дадае падтрымку дадатковых магчымасцяў непасрэдна ў OsmAnd. Гэта палягчае, напрыклад, рэгуляванне хуткасці вымаўлення для голасу TTS, наладу накіраванасці экрана навігацыі, кіраванне маштабам пры дапамозе трэкбола або выкарыстанне галасавых загадаў зваротнай сувязі для аўтаматычнага агалошвання вашага месцазнаходжання.</string>
 	
@@ -466,7 +466,7 @@
 	<string name="prefs_plugins_descr">Убудовы актывуюць дадатковыя налады і магчымасці.</string>
 	<string name="prefs_plugins">Убудовы</string>
 	
-	<string name="osm_editing_plugin_description">З дапамогай гэтай убудовы OsmAnd можа быць выкарыстаны для паляпшэння OSM праз стварэнне альбо змену аб\'ектаў OSM POI, адкрыццё або каментаванне OSM-нататак, адпраўленне запісаных GPX-файлаў. OSM развіваецца грамадствам. Гэта глабальны праект па стварэнні свабоднай мапы. Для атрымання дадатковай інфармацыі, калі ласка, наведайце https://openstreetmap.org. Актыўны ўдзел цэніцца, і ўнёскі могуць быць зробленыя непасрэдна праз OsmAnd, калі вы ўкажаце даныя свайго рахунка OSM у наладах.</string>
+	<string name="osm_editing_plugin_description">З дапамогай гэтай убудовы OsmAnd можа быць выкарыстаны для паляпшэння OSM праз стварэнне альбо змену аб\'ектаў OSM POI, адкрыццё або каментаванне OSM-нататак, адпраўленне запісаных GPX-файлаў. OSM развіваецца грамадствам. Гэта глабальны праект па стварэнні свабоднай мапы. Для атрымання дадатковай інфармацыі, калі ласка, наведайце https://openstreetmap.org. Актыўны ўдзел цэніцца, і ўнёскі могуць быць зробленыя непасрэдна праз OsmAnd, калі вы ўкажаце даныя свайго акаўнта OSM у наладах.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Вектарныя мапы могуць адлюстроўвацца хутчэй. Падтрымліваецца не ўсімі прыладамі.</string>
 	<string name="play_commands_of_currently_selected_voice">Абраць голас і прайграць падказкі</string>
 	<string name="debugging_and_development">Для распрацоўшчыкаў OsmAnd</string>
@@ -1287,7 +1287,7 @@
     <string name="local_osm_changes_delete_all_confirm">Вы збіраецеся выдаліць %1$d змены OSM. Вы ўпэўненыя\?</string>
     <string name="animate_routing_route_not_calculated">Калі ласка, спачатку разлічыце маршрут</string>
     
-    <string name="android_19_location_disabled">З версіі 4.4 Android (KitKat) вы не можаце спампоўваць і абнаўляць мапу ў старым каталогу захоўвання (%s). Скапіраваць усе файлы OsmAnd у новае сховішча\? 
+    <string name="android_19_location_disabled">З версіі 4.4 Android (KitKat) вы не можаце спампоўваць і абнаўляць мапу ў старым каталогу захоўвання (%s). Скапіяваць усе файлы OsmAnd у новае сховішча\? 
 \n Заўвага 1: Вашы старыя файлы застануцца некранутымі (вы можаце выдаліць іх самастойна).          
 \n Заўвага 2: У новым месцы захоўвання будзе немагчыма адначасова выкарыстоўваць файлы ў OsmAnd і OsmAnd+.</string>
     
@@ -1841,7 +1841,7 @@
 	<string name="rendering_value__name">Прадвызначана</string>
     <string name="rendering_value_highContrastRoads_name">Высокая кантрастнасць дарог</string>
 	<string name="specified_directiory_not_writeable">Немагчыма стварыць мапы ў вызначаным каталозе</string>
-	<string name="copying_osmand_file_failed">Скапіраваць файлы не атрымалася</string>    
+	<string name="copying_osmand_file_failed">Скапіяваць файлы не атрымалася</string>    
     <string name="storage_directory_internal_app">Унутраная памяць дадатка</string>
     <string name="storage_directory_manual">Вызначана ўласнаручна</string>
     <string name="storage_directory_default">Унутраная памяць</string>
@@ -1849,7 +1849,7 @@
     <string name="storage_directory_external">Вонкавы носьбіт інфармацыі</string>
     <string name="storage_directory">Захоўванне мапы</string>
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
-    <string name="application_dir_change_warning3">Скапіраваць файлы даных OsmAnd у новае месца\?</string>
+    <string name="application_dir_change_warning3">Скапіяваць файлы даных OsmAnd у новае месца\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Нумары дамоў</string>
     
 	<string name="routing_attr_avoid_borders_description">Пазбягаць перасячэння нацыянальных межаў</string>
@@ -2083,7 +2083,7 @@
     <string name="save_poi_without_poi_type_message">Вы сапраўды хочаце захаваць POI без тыпу?</string>
     <string name="share_osm_edits_subject">Праўкі OSM, апублікаваныя праз OsmAnd</string>
     <string name="shared_string_location">Месцазнаходжанне</string>
-    <string name="copied_to_clipboard">Скапіравана ў буфер абмену</string>
+    <string name="copied_to_clipboard">Скапіявана ў буфер абмену</string>
     <string name="osm_save_offline">Захаваць лакальна</string>
     <string name="osm_edit_modified_poi">OSM POI адрэдагаваная</string>
     <string name="osm_edit_deleted_poi">OSM POI выдаленая</string>
@@ -2992,7 +2992,7 @@
     <string name="touring_view_renderer">Турыстычны выгляд</string>
     <string name="nautical_renderer">Марскі</string>
 <string name="will_open_tomorrow_at">Адчыніцца заўтра а</string>
-    <string name="copy_location_name">Скапіраваць назву пункта/POI</string>
+    <string name="copy_location_name">Скапіяваць назву пункта/POI</string>
     <string name="toast_empty_name_error">Месца без назвы</string>
 <string name="shared_string_current">Цяперашні</string>
     <string name="last_intermediate_dest_description">Дадае прамежкавы прыпынак</string>
@@ -3168,7 +3168,7 @@
 \n 
 \n • Пазнакі мапы: выпраўленне ўключэння/выключэння групаў, магчымасць хаваць адмеціны на мапе
 \n 
-\n • Рэдагаванне OSM: магчымасць рэдагавання пазнак для некропкавых аб\'ектаў і шляхоў, выпраўленне адсутных каментароў на нататках, рэзервовае капіраванне правак 
+\n • Рэдагаванне OSM: магчымасць рэдагавання пазнак для некропкавых аб\'ектаў і шляхоў, выпраўленне адсутных каментароў на нататках, рэзервовае капіяванне правак 
 \n 
 \n • Паляпшэнне разбору Wikipedia і Wikivoyage, абноўленыя файлы ўжо даступныя 
 \n 

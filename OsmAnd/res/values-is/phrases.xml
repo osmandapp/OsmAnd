@@ -3888,7 +3888,16 @@
     <string name="poi_blood_donation">Blóðgjöf</string>
     <string name="poi_books_comic">Myndasögur</string>
     <string name="poi_books_religion">Trúarbrögð</string>
-    <string name="poi_books_academic">Akademískt</string>
-    <string name="poi_books_children">Börn</string>
+    <string name="poi_books_academic">Akademískar</string>
+    <string name="poi_books_children">Barnabækur</string>
     <string name="poi_atoll">Kóralrif</string>
+    <string name="poi_pipeline_substation">Millistöð leiðslu</string>
+    <string name="poi_substation_transmission">Spennuvirki</string>
+    <string name="poi_substation_minor_distribution">Minni háttar dreifing</string>
+    <string name="poi_substation_transition">Millistöð</string>
+    <string name="poi_substation_traction">Spennustöð lestakerfis</string>
+    <string name="poi_substation_converter">Umbreytir</string>
+    <string name="poi_substation_compensation">Mótvægisjöfnun</string>
+    <string name="poi_substation_field_gathering">Safnstöð</string>
+    <string name="poi_books_antiquarian">Gamlar bækur</string>
 </resources>

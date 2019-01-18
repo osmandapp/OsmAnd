@@ -11,6 +11,8 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
+import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
@@ -21,8 +23,10 @@ import net.osmand.aidl.favorite.UpdateFavoriteParams;
 import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
+import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
+import net.osmand.aidl.gpx.CreateGpxBitmapParams;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.RemoveGpxParams;
@@ -43,6 +47,8 @@ import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
+import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
@@ -56,6 +62,7 @@ import net.osmand.aidl.note.StartAudioRecordingParams;
 import net.osmand.aidl.note.StartVideoRecordingParams;
 import net.osmand.aidl.note.StopRecordingParams;
 import net.osmand.aidl.note.TakePhotoNoteParams;
+import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -773,22 +780,70 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean setNavDrawerLogoWithParams(String imageUri, String packageName, String intent) throws RemoteException {
+		public boolean setNavDrawerLogoWithParams(NavDrawerHeaderParams params) throws RemoteException {
 			OsmandAidlApi api = getApi("setNavDrawerLogoWithParams");
-			return api != null && api.setNavDrawerLogoWithParams(imageUri, packageName, intent);
+			return api != null && api.setNavDrawerLogoWithParams(
+					params.getImageUri(), params.getPackageName(), params.getIntent());
 		}
 
 		@Override
-		public boolean setNavDrawerFooterParams(String packageName, String intent, String appName) throws RemoteException {
-			OsmandAidlApi api = getApi ("setNavDrawerFooterParams");
-			return api != null && api.setNavDrawerFooterParams(packageName, intent, appName);
+		public boolean setNavDrawerFooterWithParams(NavDrawerFooterParams params)
+				throws RemoteException {
+			OsmandAidlApi api = getApi("setNavDrawerFooterParams");
+			return api != null && api.setNavDrawerFooterWithParams(params);
 		}
 
 		@Override
 		public boolean restoreOsmand() {
-      OsmandAidlApi api = getApi("restoreOsmand");
-      return api != null && api.restoreOsmand();
-    }
+			OsmandAidlApi api = getApi("restoreOsmand");
+			return api != null && api.restoreOsmand();
+		}
 
+		@Override
+		public boolean changePluginState(PluginParams params) {
+			OsmandAidlApi api = getApi("changePluginState");
+			return api != null && api.changePluginState(params);
+		}
+
+		@Override
+		public boolean registerForOsmandInitListener(final IOsmAndAidlCallback callback)
+				throws RemoteException {
+			try {
+				OsmandAidlApi api = getApi("registerForOsmandInitListener");
+				return api != null && api.registerForOsmandInitialization(new OsmandAppInitCallback() {
+					@Override
+					public void onAppInitialized() {
+						try {
+							callback.onAppInitialized();
+						} catch (Exception e) {
+							handleException(e);
+						}
+					}
+				});
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getBitmapForGpx(CreateGpxBitmapParams params, final IOsmAndAidlCallback callback) throws RemoteException {
+			try {
+				OsmandAidlApi api = getApi("getBitmapForGpx");
+				return params != null && api != null && api.getBitmapForGpx(params.getGpxUri(), params.getDensity(), params.getWidthPixels(), params.getHeightPixels(), params.getColor(), new GpxBitmapCreatedCallback() {
+					@Override
+					public void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap) {
+						try {
+							callback.onGpxBitmapCreated(aGpxBitmap);
+						} catch (RemoteException e) {
+							handleException(e);
+						}
+					}
+				});
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
 	};
 }

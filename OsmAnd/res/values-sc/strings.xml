@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
@@ -2735,7 +2735,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="mapillary_menu_edit_text_hint">Iscrie su nùmene de s\'impreadore</string>
     <string name="mapillary_menu_descr_username">Ammustra petzi sas immàgines annantas dae su</string>
     <string name="mapillary_menu_title_username">Nùmene impreadore</string>
-    <string name="mapillary_menu_filter_description">Filtra sas immàgines pro impreadore o data. Sos filtros s\'aplicant petzi a pustis de ismanniamentu.</string>
+    <string name="mapillary_menu_filter_description">Filtra sas immàgines pro impreadore, data o casta. Sos filtros s\'aplicant petzi a pustis de ismanniamentu.</string>
     <string name="shared_string_reset">Reimposta</string>
     <string name="store_tracks_in_monthly_directories">Sarva sas rastas registradas in cartellas diferentes pro cada mese</string>
     <string name="store_tracks_in_monthly_directories_descrp">Sarva sas rastas registradas in suta-cartellas diferentes pro mese de registratzione (es. 2018-01).</string>
@@ -3174,4 +3174,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="powered_by_osmand">Suportadu dae OsmAnd</string>
     <string name="osm_live_subscriptions">Abbonamentos</string>
     <string name="mapillary_menu_title_pano">Ammustra petzi immàgines a 360°</string>
-    </resources>
+    <string name="shared_string_launch">Allughe</string>
+    <string name="run_full_osmand_msg">Ses impreende sa mapa {0} chi est frunida dae OsmAnd. Cheres allùghere sa versione intrea de OsmAnd\?</string>
+    <string name="run_full_osmand_header">Cheres allùghere OsmAnd\?</string>
+</resources>

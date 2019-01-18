@@ -1,7 +1,7 @@
 package net.osmand.plus.parkingpoint;
 
 
-import static net.osmand.plus.OsmAndCustomizationConstants.POINT_MARK_AS_PARKING_LOC;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -235,7 +235,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		};
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.context_menu_item_add_parking_point, mapActivity)
-				.setId(POINT_MARK_AS_PARKING_LOC)
+				.setId(MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC)
 				.setIcon(R.drawable.ic_action_parking_dark)
 				.setOrder(MARK_AS_PARKING_POS_ITEM_ORDER)
 				.setListener(addListener)
