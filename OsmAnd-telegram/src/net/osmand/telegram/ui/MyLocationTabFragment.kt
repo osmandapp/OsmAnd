@@ -599,12 +599,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 
 			holder.title?.text = title
-			holder.icon?.setOnClickListener {
-				app.forceUpdateMyLocation()
-				val curUser = telegramHelper.getCurrentUser()
-				val text = "${curUser?.id}  ${curUser?.firstName} ${curUser?.lastName}"
-				Toast.makeText(app, text, Toast.LENGTH_LONG).show()
-			}
 			if (holder is ChatViewHolder) {
 				holder.description?.visibility = View.GONE
 				if (live) {

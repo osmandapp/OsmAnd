@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,10 +25,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
+import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
@@ -69,6 +72,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
@@ -1907,7 +1911,96 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
 
+	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+		if (gpxUri == null || callback == null) {
+			return false;
+		}
+		final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawer.TrackBitmapDrawerListener() {
+			@Override
+			public void onTrackBitmapDrawing() {
+			}
 
+			@Override
+			public void onTrackBitmapDrawn() {
+			}
+
+			@Override
+			public boolean isTrackBitmapSelectionSupported() {
+				return false;
+			}
+
+			@Override
+			public void drawTrackBitmap(Bitmap bitmap) {
+				callback.onGpxBitmapCreatedComplete(new AGpxBitmap(bitmap));
+			}
+		};
+
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+				}
+			});
+		} else {
+			createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+		}
+		return true;
+	}
+
+	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener) {
+		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, new CallbackWithObject<GPXFile>() {
+			@Override
+			public boolean processResult(GPXFile result) {
+				TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, null, result.getRect(), density, widthPixels, heightPixels);
+				trackBitmapDrawer.addListener(drawerListener);
+				trackBitmapDrawer.setDrawEnabled(true);
+				trackBitmapDrawer.setTrackColor(color);
+				trackBitmapDrawer.initAndDraw();
+				return false;
+			}
+		});
+		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+
+		private final OsmandApplication app;
+		private final CallbackWithObject<GPXFile> callback;
+		private final Uri gpxUri;
+
+		GpxAsyncLoaderTask(@NonNull OsmandApplication app, @NonNull Uri gpxUri, final CallbackWithObject<GPXFile> callback) {
+			this.app = app;
+			this.gpxUri = gpxUri;
+			this.callback = callback;
+		}
+
+		@Override
+		protected void onPostExecute(GPXFile gpxFile) {
+			if (gpxFile.warning == null && callback != null) {
+				callback.processResult(gpxFile);
+			}
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... voids) {
+			ParcelFileDescriptor gpxParcelDescriptor = null;
+			try {
+				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			if (gpxParcelDescriptor != null) {
+				final FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+				return GPXUtilities.loadGPXFile(app, new FileInputStream(fileDescriptor));
+			}
+			return null;
+		}
+	}
 
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
@@ -1978,6 +2071,10 @@ public class OsmandAidlApi {
 
 	public interface SearchCompleteCallback {
 		void onSearchComplete(List<SearchResult> resultSet);
+	}
+
+	public interface GpxBitmapCreatedCallback {
+		void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap);
 	}
 
 	public interface OsmandAppInitCallback {

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.telegram.TelegramApplication;
 import net.osmand.util.Algorithms;
@@ -49,7 +50,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
-// copy from net.osmand.plus.GPXUtilities and changes done to WptPt (userId,chatId)
+// copy from net.osmand.plus.GPXUtilities and changes done to WptPt and GPXFile (userId,chatId)
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -815,6 +816,8 @@ public class GPXUtilities {
 		public String path = "";
 		public boolean showCurrentTrack;
 		public long modifiedTime = 0;
+		public int userId;
+		public long chatId;
 
 		private Track generalTrack;
 		private TrkSegment generalSegment;
@@ -1247,6 +1250,57 @@ public class GPXUtilities {
 				}
 			}
 			return categories;
+		}
+
+		public QuadRect getRect() {
+			double left = 0, right = 0;
+			double top = 0, bottom = 0;
+			for (Track track : tracks) {
+				for (TrkSegment segment : track.segments) {
+					for (WptPt p : segment.points) {
+						if (left == 0 && right == 0) {
+							left = p.getLongitude();
+							right = p.getLongitude();
+							top = p.getLatitude();
+							bottom = p.getLatitude();
+						} else {
+							left = Math.min(left, p.getLongitude());
+							right = Math.max(right, p.getLongitude());
+							top = Math.max(top, p.getLatitude());
+							bottom = Math.min(bottom, p.getLatitude());
+						}
+					}
+				}
+			}
+			for (WptPt p : points) {
+				if (left == 0 && right == 0) {
+					left = p.getLongitude();
+					right = p.getLongitude();
+					top = p.getLatitude();
+					bottom = p.getLatitude();
+				} else {
+					left = Math.min(left, p.getLongitude());
+					right = Math.max(right, p.getLongitude());
+					top = Math.max(top, p.getLatitude());
+					bottom = Math.min(bottom, p.getLatitude());
+				}
+			}
+			for (GPXUtilities.Route route : routes) {
+				for (WptPt p : route.points) {
+					if (left == 0 && right == 0) {
+						left = p.getLongitude();
+						right = p.getLongitude();
+						top = p.getLatitude();
+						bottom = p.getLatitude();
+					} else {
+						left = Math.min(left, p.getLongitude());
+						right = Math.max(right, p.getLongitude());
+						top = Math.max(top, p.getLatitude());
+						bottom = Math.min(bottom, p.getLatitude());
+					}
+				}
+			}
+			return new QuadRect(left, top, right, bottom);
 		}
 	}
 

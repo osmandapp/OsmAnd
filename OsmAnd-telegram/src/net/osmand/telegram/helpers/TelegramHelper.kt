@@ -391,6 +391,15 @@ class TelegramHelper private constructor() {
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
 
+	fun getSenderMessageId(message: TdApi.Message): Int {
+		val forwardInfo = message.forwardInfo
+		return if (forwardInfo != null && forwardInfo is TdApi.MessageForwardedFromUser) {
+			forwardInfo.senderUserId
+		} else {
+			message.senderUserId
+		}
+	}
+
 	fun startLiveMessagesUpdates(interval: Long) {
 		stopLiveMessagesUpdates()
 
@@ -738,10 +747,13 @@ class TelegramHelper private constructor() {
 				}
 			} else {
 				removeOldMessages(message, fromBot, viaBot)
-				val oldMessage = usersLocationMessages.values.firstOrNull { it.senderUserId == message.senderUserId && !fromBot && !viaBot }
-				if (oldMessage == null || (Math.max(message.editDate, message.date) > Math.max(oldMessage.editDate, oldMessage.date))) {
+				val oldMessage = usersLocationMessages.values.firstOrNull { getSenderMessageId(it) == getSenderMessageId(message) && !fromBot && !viaBot }
+				val hasNewerMessage = oldMessage != null && (Math.max(message.editDate, message.date) < Math.max(oldMessage.editDate, oldMessage.date))
+				if (!hasNewerMessage) {
 					usersLocationMessages[message.id] = message
-					incomingMessagesListeners.forEach {
+				}
+				incomingMessagesListeners.forEach {
+					if (!hasNewerMessage || it is SavingTracksDbHelper) {
 						it.onReceiveChatLocationMessages(message.chatId, message)
 					}
 				}
@@ -754,7 +766,7 @@ class TelegramHelper private constructor() {
 		while (iterator.hasNext()) {
 			val message = iterator.next().value
 			if (newMessage.chatId == message.chatId) {
-				val sameSender = newMessage.senderUserId == message.senderUserId
+				val sameSender = getSenderMessageId(newMessage) == getSenderMessageId(message)
 				val viaSameBot = newMessage.viaBotUserId == message.viaBotUserId
 				if (fromBot || viaBot) {
 					if ((fromBot && sameSender) || (viaBot && viaSameBot)) {
@@ -1073,23 +1085,6 @@ class TelegramHelper private constructor() {
 		val textMessage = builder.toString().trim()
 
 		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
-	}
-
-	/**
-	 * @chatId Id of the chat
-	 * @message Text of the message
-	 */
-	fun sendTextMessage(chatId: Long, message: String): Boolean {
-		// initialize reply markup just for testing
-		//val row = arrayOf(TdApi.InlineKeyboardButton("https://telegram.org?1", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?2", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?3", TdApi.InlineKeyboardButtonTypeUrl()))
-		//val replyMarkup = TdApi.ReplyMarkupInlineKeyboard(arrayOf(row, row, row))
-
-		if (haveAuthorization) {
-			val content = TdApi.InputMessageText(TdApi.FormattedText(message, null), false, true)
-			client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), defaultHandler)
-			return true
-		}
-		return false
 	}
 
 	fun logout(): Boolean {

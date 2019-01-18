@@ -75,6 +75,12 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		fun onSearchComplete(resultSet: List<SearchResult>)
 	}
 
+	private var gpxBitmapCreatedListener: GpxBitmapCreatedListener? = null
+
+	interface GpxBitmapCreatedListener {
+		fun onGpxBitmapCreated(bitmap: AGpxBitmap)
+	}
+
 	private val mIOsmAndAidlCallback = object : IOsmAndAidlCallback.Stub() {
 
 		@Throws(RemoteException::class)
@@ -90,10 +96,24 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				mUpdatesListener!!.update()
 			}
 		}
+
+		override fun onAppInitialized() {
+
+		}
+
+		override fun onGpxBitmapCreated(bitmap: AGpxBitmap) {
+			if (gpxBitmapCreatedListener != null) {
+				gpxBitmapCreatedListener!!.onGpxBitmapCreated(bitmap)
+			}
+		}
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
 		this.mSearchCompleteListener = mSearchCompleteListener
+	}
+
+	fun setGpxBitmapCreatedListener(gpxBitmapCreatedListener: GpxBitmapCreatedListener) {
+		this.gpxBitmapCreatedListener = gpxBitmapCreatedListener
 	}
 
 	private var mUpdatesListener: UpdatesListener? = null
@@ -1053,6 +1073,18 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				return mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandCallbackId)
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
+
+	fun getBitmapForGpx(gpxUri: Uri, density: Float, widthPixels: Int, heightPixels: Int, color: Int): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				app.grantUriPermission(app.settings.appToConnectPackage, gpxUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+				return mIOsmAndAidlInterface!!.getBitmapForGpx(CreateGpxBitmapParams(gpxUri, density, widthPixels, heightPixels, color), mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
