@@ -270,15 +270,14 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 						
 		}
 
-
-		public void sortByDefault() {
+		public void sortByDefault(boolean isSortedByDistance) {
 			Location loc = app.getLocationProvider().getLastStaleKnownLocation();
 			LatLon map = app.getMapViewTrackingUtilities().getMapLocation();
-			if (loc != null) {
+			if (loc != null && isSortedByDistance) {
 				sortByDistance(new LatLon(loc.getLatitude(), loc.getLongitude()));
-			} else if(map != null){
+			} else if (map != null && isSortedByDistance){
 				sortByDistance(map);
-			} else{
+			} else {
 				sortByName();
 			}			
 		}
