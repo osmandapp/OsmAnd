@@ -2157,7 +2157,7 @@
     <string name="quick_action_map_overlay_switch">Kartoverlegget er endret til \"%s\".</string>
     <string name="points_delete_multiple_succesful">Punkt(er) slettet.</string>
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
-    <string name="average_speed">Gjennomsnittshastighet</string>
+    <string name="average_speed">Gjennomsnittsfart</string>
     <string name="select_gpx_folder">Velg mappe for GPX-fil</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
 \n
@@ -2227,7 +2227,7 @@
     <string name="altitude_descent">Fall</string>
     <string name="altitude_ascent">Stigning</string>
     <string name="altitude_range">Høydeintervall</string>
-    <string name="average_altitude">Gjennomsnittshøyde</string>
+    <string name="average_altitude">Gjennomsnittlig høyde</string>
     <string name="route_head">Følg</string>
     <string name="shared_string_action_name">Handlingsnavn</string>
 <string name="display_zoom_level">Visningszoomnivå: %1$s</string>
@@ -3110,4 +3110,5 @@
     <string name="shared_string_launch">Kjør</string>
     <string name="run_full_osmand_msg">Du bruker {0}-kart, muliggjort av OsmAnd. Ønsker du å kjøre fullversjonen av OsmAnd\?</string>
     <string name="run_full_osmand_header">Kjør OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraní</string>
 </resources>
