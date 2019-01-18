@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
     <string name="donations">Donacoj</string>
@@ -3006,4 +3006,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="powered_by_osmand">Povigata de OsmAnd</string>
     <string name="osm_live_subscriptions">Abonoj</string>
     <string name="mapillary_menu_title_pano">Montri nur bildojn 360°</string>
-    </resources>
+    <string name="shared_string_launch">Lanĉi</string>
+    <string name="run_full_osmand_msg">Vi uzas mapon {0}, kiu estas povigata de OsmAnd. Ĉu lanĉi la plenan version de OsmAnd\?</string>
+    <string name="run_full_osmand_header">Ĉu lanĉi OsmAnd\?</string>
+</resources>
