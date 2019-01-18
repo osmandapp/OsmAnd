@@ -266,7 +266,7 @@
     <string name="indexing_map">Indexation de la carte…</string>
     <string name="indexing_poi">Indexation du point d\'intérêt…</string>
     <string name="indexing_transport">Indexation des transports…</string>
-    <string name="shared_string_io_error">Erreur I/O</string>
+    <string name="shared_string_io_error">Erreur d\'entrée/sortie</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
@@ -2204,7 +2204,7 @@ Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="osm_live_month_cost_desc">Règlement mensuel</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
-    <string name="osm_live_enter_email">Veuillez entrer une adresse email valide</string>
+    <string name="osm_live_enter_email">Veuillez saisir une adresse email valide</string>
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
@@ -3213,4 +3213,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="powered_by_osmand">Propulsé par OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">N\'afficher que les images à 360°</string>
-    </resources>
+    <string name="shared_string_launch">Ouvrir</string>
+    <string name="run_full_osmand_msg">Vous utilisez la carte {0} qui est proposée par OsmAnd. Souhaitez-vous lancer la version complète d\'OsmAnd \?</string>
+    <string name="run_full_osmand_header">Ouvrir OsmAnd \?</string>
+</resources>

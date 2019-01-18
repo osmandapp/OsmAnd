@@ -3190,4 +3190,7 @@
     <string name="powered_by_osmand">Powered by OsmAnd</string>
     <string name="osm_live_subscriptions">訂閱</string>
     <string name="mapillary_menu_title_pano">只顯示 360° 圖片</string>
-    </resources>
+    <string name="shared_string_launch">啟動</string>
+    <string name="run_full_osmand_msg">您正在使用裝有 OsmAnd 的 {0} 地圖。是否要啟動完整版本的 OsmAnd？</string>
+    <string name="run_full_osmand_header">啟動 OsmAnd？</string>
+</resources>
