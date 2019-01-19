@@ -3049,4 +3049,5 @@ Lon %2$s</string>
     <string name="shared_string_launch">Ejecutar</string>
     <string name="run_full_osmand_msg">Estás utilizando el mapa {0} que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
     <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraní</string>
 </resources>
