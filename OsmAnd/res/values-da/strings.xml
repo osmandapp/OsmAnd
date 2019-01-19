@@ -3239,4 +3239,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapillary_menu_title_pano">Vis kun 360° billeder</string>
     <string name="shared_string_launch">Start</string>
     <string name="run_full_osmand_header">Start OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraní</string>
 </resources>
