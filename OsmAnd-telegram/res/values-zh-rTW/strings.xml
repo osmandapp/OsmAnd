@@ -175,4 +175,14 @@
     <string name="welcome_descr"><b>OsmAnd 位置共用</b>可以讓您共用您的位置，並在 OsmAnd 中看到其他人的位置。<br/><br/>該應用程式使用電報 API，你需要一個 Telegram 帳戶。</string>
     <string name="my_location">我的位置</string>
     <string name="live_now">即時狀況</string>
+    <string name="monitoring_is_enabled">監視已啟用</string>
+    <string name="monitoring_is_disabled">監視已停用</string>
+    <string name="time_on_the_move">移動時間</string>
+    <string name="average_altitude">平均海拔</string>
+    <string name="average_speed">平均速率</string>
+    <string name="open_in_osmand">在 OsmAnd 中開啟</string>
+    <string name="end_date">結束日期</string>
+    <string name="start_date">開始日期</string>
+    <string name="timeline_description">啟用監視以在背景蒐集移動資料。</string>
+    <string name="timeline">時間軸</string>
 </resources>
