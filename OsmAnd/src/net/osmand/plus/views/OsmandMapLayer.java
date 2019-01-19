@@ -147,15 +147,29 @@ public abstract class OsmandMapLayer {
 		return res;
 	}
 
-	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, List<Integer> colors, List<Pair<Path, Integer>> paths) {
+	public static class GeometryWayStyle {
+		static final int WAY_TYPE_SOLID_LINE = 0;
+		static final int WAY_TYPE_TRANSPORT_LINE = 1;
+		static final int WAY_TYPE_WALK_LINE = 2;
+
+		Integer color;
+		int type;
+
+		public GeometryWayStyle(Integer color, int type) {
+			this.color = color;
+			this.type = type;
+		}
+	}
+
+	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, List<GeometryWayStyle> styles, List<Pair<Path, Integer>> paths) {
 		boolean segmentStarted = false;
 		int prevX = xs.get(0);
 		int prevY = ys.get(0);
 		int height = tb.getPixHeight();
 		int width = tb.getPixWidth();
 		int cnt = 0;
-		boolean hasColors = colors != null && colors.size() == xs.size();
-		int color = hasColors ? colors.get(0) : 0;
+		boolean hasStyles = styles != null && styles.size() == xs.size();
+		int color = hasStyles ? styles.get(0).color : 0;
 		Path path = new Path();
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
 		for (int i = 1; i < xs.size(); i++) {
@@ -199,8 +213,8 @@ public abstract class OsmandMapLayer {
 			prevX = currX;
 			prevY = currY;
 
-			if (hasColors) {
-				int newColor = colors.get(i);
+			if (hasStyles) {
+				int newColor = styles.get(i).color;
 				if (color != newColor) {
 					paths.add(new Pair<>(path, color));
 					path = new Path();

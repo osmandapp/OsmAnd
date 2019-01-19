@@ -37,11 +37,11 @@ import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TreeMap;
 
 import gnu.trove.list.array.TByteArrayList;
@@ -432,24 +432,28 @@ public class RouteLayer extends OsmandMapLayer {
 		double mapDensity;
 		TreeMap<Integer, RouteGeometryZoom> zooms = new TreeMap<>();
 		List<Location> locations = Collections.emptyList();
-		TreeMap<Integer, Integer> colorsMap = new TreeMap<>();
+		Map<Integer, GeometryWayStyle> styleMap = Collections.emptyMap();
 
 		// cache arrays
 		TIntArrayList tx = new TIntArrayList();
 		TIntArrayList ty = new TIntArrayList();
 		List<Double> angles = new ArrayList<>();
 		List<Double> distances = new ArrayList<>();
-		List<Integer> colors = new ArrayList<>();
+		List<GeometryWayStyle> styles = new ArrayList<>();
 
-		private int getColor(int index) {
-			List<Integer> list = new ArrayList<>(colorsMap.keySet());
-			for (int i = list.size() -1; i >= 0; i--) {
+		private GeometryWayStyle getStyle(int index, GeometryWayStyle defaultWayStyle) {
+			List<Integer> list = new ArrayList<>(styleMap.keySet());
+			for (int i = list.size() - 1; i >= 0; i--) {
 				int c = list.get(i);
 				if (c <= index) {
-					return colorsMap.get(c);
+					return styleMap.get(c);
 				}
 			}
-			return attrs.paint.getColor();
+			return defaultWayStyle;
+		}
+
+		private boolean isTransportRoute() {
+			return transportRoute != null;
 		}
 
 		public void updateRoute(RotatedTileBox tb, RouteCalculationResult route) {
@@ -460,7 +464,7 @@ public class RouteLayer extends OsmandMapLayer {
 				} else {
 					locations = route.getImmutableAllLocations();
 				}
-				colorsMap.clear();
+				styleMap = Collections.emptyMap();
 				this.mapDensity = tb.getMapDensity();
 				zooms.clear();
 			}
@@ -471,24 +475,20 @@ public class RouteLayer extends OsmandMapLayer {
 				this.transportRoute = route;
 				if (route == null) {
 					locations = Collections.emptyList();
-					colorsMap.clear();
+					styleMap = Collections.emptyMap();
 				} else {
 					LatLon start = transportHelper.getStartLocation();
 					LatLon end = transportHelper.getEndLocation();
 					List<Way> list = new ArrayList<>();
-					List<Integer> cols = new ArrayList<>();
-					calculateTransportResult(start, end, route, list, cols);
+					List<GeometryWayStyle> styles = new ArrayList<>();
+					calculateTransportResult(start, end, route, list, styles);
 					List<Location> locs = new ArrayList<>();
-					TreeMap<Integer, Integer> colsMap = new TreeMap<>();
+					Map<Integer, GeometryWayStyle> stlMap = new TreeMap<>();
 					int i = 0;
 					int k = 0;
 					if (list.size() > 0) {
 						for (Way w : list) {
-							colsMap.put(k, cols.get(i++));
-							//Location loc = new Location("");
-							//loc.setLatitude(w.getLatitude());
-							//loc.setLongitude(w.getLongitude());
-							//locs.add(loc);
+							stlMap.put(k, styles.get(i++));
 							for (Node n : w.getNodes()) {
 								Location ln = new Location("");
 								ln.setLatitude(n.getLatitude());
@@ -499,7 +499,7 @@ public class RouteLayer extends OsmandMapLayer {
 						}
 					}
 					locations = locs;
-					colorsMap = colsMap;
+					styleMap = stlMap;
 				}
 				this.mapDensity = tb.getMapDensity();
 				zooms.clear();
@@ -523,12 +523,13 @@ public class RouteLayer extends OsmandMapLayer {
 			List<Double> odistances = geometryZoom.getDistances();
 			
 			clearArrays();
-			int color = attrs.paint.getColor();
+			GeometryWayStyle defaultWayStyle = new GeometryWayStyle(attrs.paint.getColor(), GeometryWayStyle.WAY_TYPE_SOLID_LINE);
+			GeometryWayStyle style = defaultWayStyle;
 			boolean previousVisible = false;
 			if (lastProjection != null) {
 				if (leftLongitude <= lastProjection.getLongitude() && lastProjection.getLongitude() <= rightLongitude
 						&& bottomLatitude <= lastProjection.getLatitude() && lastProjection.getLatitude() <= topLatitude) {
-					addLocation(tb, lastProjection, color, tx, ty, angles, distances, 0, colors);
+					addLocation(tb, lastProjection, style, tx, ty, angles, distances, 0, styles);
 					previousVisible = true;
 				}
 			}
@@ -536,8 +537,8 @@ public class RouteLayer extends OsmandMapLayer {
 			int previous = -1;
 			for (int i = currentRoute; i < routeNodes.size(); i++) {
 				Location ls = routeNodes.get(i);
-				color = getColor(i);
-				if (simplification.getQuick(i) == 0 && !colorsMap.containsKey(i)) {
+				style = getStyle(i, defaultWayStyle);
+				if (simplification.getQuick(i) == 0 && !styleMap.containsKey(i)) {
 					continue;
 				}
 				if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
@@ -551,23 +552,23 @@ public class RouteLayer extends OsmandMapLayer {
 						} else if (lastProjection != null) {
 							lt = lastProjection;
 						}
-						addLocation(tb, lt, color, tx, ty, angles, distances, 0, colors); // first point
+						addLocation(tb, lt, style, tx, ty, angles, distances, 0, styles); // first point
 					}
-					addLocation(tb, ls, color, tx, ty, angles, distances, dist, colors);
+					addLocation(tb, ls, style, tx, ty, angles, distances, dist, styles);
 					previousVisible = true;
 				} else if (previousVisible) {
-					addLocation(tb, ls, color, tx, ty, angles, distances, previous == -1 ? 0 : odistances.get(i), colors);
+					addLocation(tb, ls, style, tx, ty, angles, distances, previous == -1 ? 0 : odistances.get(i), styles);
 					double distToFinish = 0;
 					for(int ki = i + 1; ki < odistances.size(); ki++) {
 						distToFinish += odistances.get(ki);
 					}
-					drawRouteSegment(tb, canvas, tx, ty, angles, distances, distToFinish, colors);
+					drawRouteSegment(tb, canvas, tx, ty, angles, distances, distToFinish, styles);
 					previousVisible = false;
 					clearArrays();
 				}
 				previous = i;
 			}
-			drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, colors);
+			drawRouteSegment(tb, canvas, tx, ty, angles, distances, 0, styles);
 		}
 
 		private void clearArrays() {
@@ -575,11 +576,11 @@ public class RouteLayer extends OsmandMapLayer {
 			ty.clear();
 			distances.clear();
 			angles.clear();
-			colors.clear();
+			styles.clear();
 		}
 
-		private void addLocation(RotatedTileBox tb, Location ls, int color, TIntArrayList tx, TIntArrayList ty,
-				List<Double> angles, List<Double> distances, double dist, List<Integer> colors) {
+		private void addLocation(RotatedTileBox tb, Location ls, GeometryWayStyle style, TIntArrayList tx, TIntArrayList ty,
+				List<Double> angles, List<Double> distances, double dist, List<GeometryWayStyle> styles) {
 			float x = tb.getPixXFromLatLon(ls.getLatitude(), ls.getLongitude());
 			float y = tb.getPixYFromLatLon(ls.getLatitude(), ls.getLongitude());
 			float px = x;
@@ -602,21 +603,21 @@ public class RouteLayer extends OsmandMapLayer {
 			ty.add((int) y);
 			angles.add(angle);
 			distances.add(distSegment);
-			colors.add(color);
+			styles.add(style);
 		}
 	}
 	
 	RouteSimplificationGeometry routeGeometry  = new RouteSimplificationGeometry();
 	
 	private void drawRouteSegment(RotatedTileBox tb, Canvas canvas, TIntArrayList tx, TIntArrayList ty,
-			List<Double> angles, List<Double> distances, double distToFinish, List<Integer> colors) {
+			List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle> styles) {
 		if (tx.size() < 2) {
 			return;
 		}
 		try {
 			List<Pair<Path, Integer>> paths = new ArrayList<>();
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-			calculatePath(tb, tx, ty, colors, paths);
+			calculatePath(tb, tx, ty, styles, paths);
 			for (Pair<Path, Integer> pc : paths) {
 				attrs.customColor = pc.second;
 				attrs.drawPath(canvas, pc.first);
@@ -802,25 +803,25 @@ public class RouteLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private void calculateTransportResult(LatLon start, LatLon end, TransportRouteResult r, List<Way> res, List<Integer> colors) {
+	private void calculateTransportResult(LatLon start, LatLon end, TransportRouteResult r, List<Way> res, List<GeometryWayStyle> styles) {
 		if (r != null) {
 			LatLon p = start;
 			TransportRouteResultSegment prev = null;
 			for (TransportRouteResultSegment s : r.getSegments()) {
 				LatLon floc = s.getStart().getLocation();
-				addRouteWalk(prev, s, p, floc, res, colors);
+				addRouteWalk(prev, s, p, floc, res, styles);
 				List<Way> geometry = s.getGeometry();
 				res.addAll(geometry);
-				addColors(s.route, geometry.size(), colors);
+				addStyle(s.route, geometry.size(), styles);
 				p = s.getEnd().getLocation();
 				prev = s;
 			}
-			addRouteWalk(prev, null, p, end, res, colors);
+			addRouteWalk(prev, null, p, end, res, styles);
 		}
 	}
 
 	private void addRouteWalk(TransportRouteResultSegment s1, TransportRouteResultSegment s2,
-							  LatLon start, LatLon end, List<Way> res, List<Integer> colors) {
+							  LatLon start, LatLon end, List<Way> res, List<GeometryWayStyle> styles) {
 		final RouteCalculationResult walkingRouteSegment = transportHelper.getWalkingRouteSegment(s1, s2);
 		if (walkingRouteSegment != null && walkingRouteSegment.getRouteLocations().size() > 0) {
 			final List<Location> routeLocations = walkingRouteSegment.getRouteLocations();
@@ -830,7 +831,7 @@ public class RouteLayer extends OsmandMapLayer {
 				way.addNode(new Node(l.getLatitude(), l.getLongitude(), -1));
 			}
 			res.add(way);
-			addColors(null, 1, colors);
+			addStyle(null, 1, styles);
 		} else {
 			double dist = MapUtils.getDistance(start, end);
 			Way way = new Way(-1);
@@ -838,26 +839,26 @@ public class RouteLayer extends OsmandMapLayer {
 			way.addNode(new Node(start.getLatitude(), start.getLongitude(), -1));
 			way.addNode(new Node(end.getLatitude(), end.getLongitude(), -1));
 			res.add(way);
-			addColors(null, 1, colors);
+			addStyle(null, 1, styles);
 		}
 	}
 
-	private void addColors(TransportRoute route, int count, List<Integer> colors) {
+	private void addStyle(TransportRoute route, int count, List<GeometryWayStyle> styles) {
 		int color;
+		int type;
 		if (route == null) {
 			color = attrs.paint.getColor();
+			type = GeometryWayStyle.WAY_TYPE_WALK_LINE;
 		} else {
 			TransportStopRoute r = new TransportStopRoute();
 			r.type = TransportStopType.findType(route.getType());
 			r.route = route;
 			color = r.getColor(helper.getApplication(), nightMode);
+			type = GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE;
 		}
-		addColors(color, count, colors);
-	}
-
-	private void addColors(int color, int count, List<Integer> colors) {
-		Integer[] integers = new Integer[count];
-		Arrays.fill(integers, color);
-		colors.addAll(Arrays.asList(integers));
+		GeometryWayStyle style = new GeometryWayStyle(color, type);
+		for (int i = 0; i < count; i++) {
+			styles.add(style);
+		}
 	}
 }
