@@ -1312,7 +1312,7 @@
 	<string name="shared_string_collapse">إغلاق</string>
 	<string name="drawer">قائمة منبسطة</string>
     <string name="osm_settings">تعديل OSM</string>
-	<string name="free">مجاني %1$s</string>
+	<string name="free">فارغ %1$s</string>
 	<string name="parking_place">مكان للركن</string>
     <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
     <string name="version_settings">إصدرات</string>
