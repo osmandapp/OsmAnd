@@ -139,7 +139,7 @@ public abstract class OsmandMapLayer {
 	}
 
 	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, Path path) {
-		List<Pair<Path, Integer>> paths = new ArrayList<>();
+		List<Pair<Path, GeometryWayStyle>> paths = new ArrayList<>();
 		int res = calculatePath(tb, xs, ys, null, paths);
 		if (paths.size() > 0) {
 			path.addPath(paths.get(0).first);
@@ -152,16 +152,24 @@ public abstract class OsmandMapLayer {
 		static final int WAY_TYPE_TRANSPORT_LINE = 1;
 		static final int WAY_TYPE_WALK_LINE = 2;
 
-		Integer color;
-		int type;
+		private Integer color;
+		private int type;
 
 		public GeometryWayStyle(Integer color, int type) {
 			this.color = color;
 			this.type = type;
 		}
+
+		public Integer getColor() {
+			return color;
+		}
+
+		public int getType() {
+			return type;
+		}
 	}
 
-	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, List<GeometryWayStyle> styles, List<Pair<Path, Integer>> paths) {
+	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
 		boolean segmentStarted = false;
 		int prevX = xs.get(0);
 		int prevY = ys.get(0);
@@ -169,6 +177,7 @@ public abstract class OsmandMapLayer {
 		int width = tb.getPixWidth();
 		int cnt = 0;
 		boolean hasStyles = styles != null && styles.size() == xs.size();
+		GeometryWayStyle style = hasStyles ? styles.get(0) : null;
 		int color = hasStyles ? styles.get(0).color : 0;
 		Path path = new Path();
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
@@ -214,19 +223,21 @@ public abstract class OsmandMapLayer {
 			prevY = currY;
 
 			if (hasStyles) {
-				int newColor = styles.get(i).color;
+				GeometryWayStyle newStyle = styles.get(i);
+				int newColor = newStyle.getColor();
 				if (color != newColor) {
-					paths.add(new Pair<>(path, color));
+					paths.add(new Pair<>(path, style));
 					path = new Path();
 					if (segmentStarted) {
 						path.moveTo(currX, currY);
 					}
 					color = newColor;
+					style = newStyle;
 				}
 			}
 		}
 		if (!path.isEmpty()) {
-			paths.add(new Pair<>(path, color));
+			paths.add(new Pair<>(path, style));
 		}
 		return cnt;
 	}

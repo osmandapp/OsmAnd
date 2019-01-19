@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.RectF;
 import android.support.annotation.ColorInt;
 import android.util.Pair;
 
@@ -63,6 +64,9 @@ public class RouteLayer extends OsmandMapLayer {
 	private Bitmap actionArrow;
 
 	private Paint paintIcon;
+	private Paint paintIconTransport;
+	private Paint paintIconWalk;
+	private Paint paintIconWalkCircle;
 	private Paint paintIconAction;
 	private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
@@ -93,6 +97,23 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIcon.setColor(Color.BLACK);
 		paintIcon.setStrokeWidth(3);
 
+		paintIconTransport = new Paint();
+		paintIconTransport.setFilterBitmap(true);
+		paintIconTransport.setAntiAlias(true);
+		paintIconTransport.setColor(Color.BLACK);
+		paintIconTransport.setStrokeWidth(3);
+
+		paintIconWalk = new Paint();
+		paintIconWalk.setFilterBitmap(true);
+		paintIconWalk.setAntiAlias(true);
+		paintIconWalk.setColor(Color.WHITE);
+		paintIconWalk.setStrokeWidth(3);
+
+		paintIconWalkCircle = new Paint();
+		paintIconWalkCircle.setAntiAlias(true);
+		paintIconWalkCircle.setColor(Color.BLUE);
+		paintIconWalkCircle.setStrokeWidth(3);
+
 		paintIconAction = new Paint();
 		paintIconAction.setFilterBitmap(true);
 		paintIconAction.setAntiAlias(true);
@@ -103,7 +124,7 @@ public class RouteLayer extends OsmandMapLayer {
 		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
 		attrs.paint3.setStrokeCap(Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
-		
+
 		attrs.paint2.setStrokeCap(Cap.BUTT);
 		attrs.paint2.setColor(Color.BLACK);
 
@@ -296,14 +317,16 @@ public class RouteLayer extends OsmandMapLayer {
 	
 
 	private void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, TIntArrayList tx, TIntArrayList ty,
-			List<Double> angles, List<Double> distances, Bitmap arrow, double distPixToFinish) {
+			List<Double> angles, List<Double> distances, Bitmap arrow, double distPixToFinish, List<GeometryWayStyle> styles) {
 		int h = tb.getPixHeight();
 		int w = tb.getPixWidth();
 		int left =  -w / 4;
 		int right = w + w / 4;
 		int top = - h/4;
 		int bottom = h + h/4;
-		
+
+		boolean hasStyles = styles != null && styles.size() == tx.size();
+
 		double pxStep = arrow.getHeight() * 4f;
 		Matrix matrix = new Matrix();
 		double dist = 0;
@@ -312,6 +335,7 @@ public class RouteLayer extends OsmandMapLayer {
 		}
 		
 		for (int i = tx.size() - 2; i >= 0; i --) {
+			GeometryWayStyle style = hasStyles ? styles.get(i) : null;
 			int px = tx.get(i);
 			int py = ty.get(i);
 			int x = tx.get(i + 1);
@@ -335,11 +359,33 @@ public class RouteLayer extends OsmandMapLayer {
 				if (isIn((int)(px + pdx), (int) (py + pdy), left, top, right, bottom)) {
 					float icony = (float) (py + pdy);
 					float iconx = (float) (px + pdx - arrow.getWidth() / 2);
-					matrix.reset();
-					matrix.postTranslate(0, -arrow.getHeight() / 2);
-					matrix.postRotate((float) angle, arrow.getWidth() / 2, 0);
-					matrix.postTranslate(iconx, icony);
-					canvas.drawBitmap(arrow, matrix, paintIcon);
+					canvas.save();
+					canvas.translate(iconx, icony);
+					//canvas.translate(0, -arrow.getHeight() / 2);
+					canvas.rotate((float) angle, arrow.getWidth() / 2, 0);
+					//matrix.reset();
+					//matrix.postTranslate(0, -arrow.getHeight() / 2);
+					//matrix.postRotate((float) angle, arrow.getWidth() / 2, 0);
+					//matrix.postTranslate(iconx, icony);
+					if (style != null) {
+						switch (style.getType()) {
+							case GeometryWayStyle.WAY_TYPE_WALK_LINE:
+								canvas.drawRoundRect(new RectF(arrow.getWidth() / 2 - 20, arrow.getHeight() / 2 - 30, arrow.getWidth() / 2 + 20, arrow.getHeight() / 2 + 30), 20, 20, paintIconWalkCircle);
+								canvas.drawBitmap(arrow, matrix, paintIconWalk);
+								break;
+							case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE:
+								canvas.drawBitmap(arrow, matrix, paintIconTransport);
+								break;
+							case GeometryWayStyle.WAY_TYPE_SOLID_LINE:
+								canvas.drawBitmap(arrow, matrix, paintIcon);
+								break;
+							default:
+								break;
+						}
+					} else {
+						canvas.drawBitmap(arrow, matrix, paintIcon);
+					}
+					canvas.restore();
 				}
 				dist -= pxStep;
 				percent -= pxStep / distSegment;
@@ -615,16 +661,27 @@ public class RouteLayer extends OsmandMapLayer {
 			return;
 		}
 		try {
-			List<Pair<Path, Integer>> paths = new ArrayList<>();
+			List<Pair<Path, GeometryWayStyle>> paths = new ArrayList<>();
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			calculatePath(tb, tx, ty, styles, paths);
-			for (Pair<Path, Integer> pc : paths) {
-				attrs.customColor = pc.second;
-				attrs.drawPath(canvas, pc.first);
+			for (Pair<Path, GeometryWayStyle> pc : paths) {
+				GeometryWayStyle style = pc.second;
+				switch (style.getType()) {
+					case GeometryWayStyle.WAY_TYPE_SOLID_LINE:
+						attrs.customColor = style.getColor();
+						attrs.drawPath(canvas, pc.first);
+						break;
+					case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE:
+						attrs.customColor = style.getColor();
+						attrs.drawPath(canvas, pc.first);
+						break;
+					default:
+						break;
+				}
 			}
 			attrs.customColor = 0;
 			if (tb.getZoomAnimation() == 0) {
-				drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, coloredArrowUp, distToFinish);
+				drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, coloredArrowUp, distToFinish, styles);
 			}
 		} finally {
 			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
