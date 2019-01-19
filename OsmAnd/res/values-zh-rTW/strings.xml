@@ -2514,7 +2514,7 @@
     <string name="shared_string_end_time">結束時間</string>
     <string name="shared_string_color">顏色</string>
     <string name="max_speed">最高速度</string>
-    <string name="average_speed">平均速度</string>
+    <string name="average_speed">平均速率</string>
     <string name="shared_string_gpx_track">軌跡</string>
     <string name="points_delete_multiple_succesful">標點已刪除。</string>
     <string name="points_delete_multiple">您將要刪除 %1$d 個標點。您確定嗎？</string>
@@ -3193,4 +3193,5 @@
     <string name="shared_string_launch">啟動</string>
     <string name="run_full_osmand_msg">您正在使用裝有 OsmAnd 的 {0} 地圖。是否要啟動完整版本的 OsmAnd？</string>
     <string name="run_full_osmand_header">啟動 OsmAnd？</string>
+    <string name="lang_gn_py">瓜拉尼語</string>
 </resources>
