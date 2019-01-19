@@ -39,7 +39,7 @@
 	<string name="add_device">Дадаць прыладу</string>
 	<string name="share_location_as">Падзяліцца месцазнаходжаннем як</string>
 	<string name="live_now_description">Кантакты і групы для абмену месцазнаходжаннем.</string>
-	<string name="logout_from_osmand_telegram_descr">"Вы не зможаце падзяліцца сваім месцазнаходжаннем і ўбачыць месцазнаходжанне іншых. Сапраўды выйсці з OsmAnd Telegram\? "</string>
+	<string name="logout_from_osmand_telegram_descr">Вы не зможаце падзяліцца сваім месцазнаходжаннем і ўбачыць месцазнаходжанне іншых. Сапраўды выйсці з OsmAnd Telegram\?</string>
 	<string name="logout_from_osmand_telegram">Выйсці з OsmAnd Telegram\?</string>
 	<string name="shared_string_name">Імя</string>
 	<string name="by_distance">Па адлегласці</string>
@@ -177,4 +177,14 @@
 	<string name="shared_string_map">Мапа</string>
 	<string name="shared_string_text">Тэкст</string>
 	<string name="map_and_text">Мапа і тэкст</string>
-	</resources>
+    <string name="monitoring_is_enabled">Маніторынг уключаны</string>
+    <string name="monitoring_is_disabled">Маніторынг адключаны</string>
+    <string name="time_on_the_move">час руху</string>
+    <string name="average_altitude">Сярэдняя вышыня</string>
+    <string name="average_speed">Сярэдняя хуткасць</string>
+    <string name="open_in_osmand">Адкрыць у OsmAnd</string>
+    <string name="end_date">Дата закрыцця</string>
+    <string name="start_date">Час адкрыцця</string>
+    <string name="timeline_description">Уключаць маніторынг для збору данных руху ў фоне.</string>
+    <string name="timeline">Храналогія</string>
+</resources>
