@@ -508,7 +508,7 @@ La memoria utilizzata è  {1} MB.
     <string name="data_settings">Dati</string>
 
     <string name="osm_settings">Modifiche OSM</string>
-    <string name="auto_zoom_map_descr">Zoom mappa automatico in base alla velocità (fintanto che la mappa è sincronizzata con la posizione corrente).</string>
+    <string name="auto_zoom_map_descr">Livello di Zoom automatico in base alla velocità (fintanto che la mappa è sincronizzata con la posizione corrente).</string>
     <string name="auto_zoom_map">Zoom automatico mappa</string>
     <string name="additional_settings">Impostazioni aggiuntive</string>
     <string name="save_current_track_descr">Salva adesso la traccia come file GPX.</string>
@@ -861,7 +861,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="avoid_in_routing_title">Evita…</string>
     <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti.</string>
     <string name="show_warnings_title">Mostra avvisi…</string>
-    <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori), avvisi autovelox e indicazioni di corsia.</string>
+    <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori, tunnel), avvisi autovelox e indicazioni di corsia.</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
     <string name="map_widget_show_ruler">Righello</string>
 
@@ -875,31 +875,24 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
 
     <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione di navigazione opensource per mappe offline e online</string>
-<string name="osmand_long_description_1000_chars">"
- ↵
-→→OsmAnd (OSM Automatizzata Navigazione Direzioni)↵
-↵
-→→OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.↵
-↵
-→→Alcune delle caratteristiche principali:↵
-→→- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵
-→→- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵
-→→- Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵
-→→- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵
-→→- Ricerca offline per indirizzi e luoghi (PDI)↵
-→→- Calcolo del percorso per distanze a medio raggio↵
-→→- Modalità automobile, bicicletta e pedonale con:↵
-→→- Commutazione opzionale automatica della vista giorno/notte↵
-→→- Zoom automatico opzionale in base alla velocità↵
-→→- Allineamento della mappa in base alla direzione o alla bussola↵
-↵
-→→Limitazioni di questa versione gratuita di OsmAnd:↵
-→→- Numero di mappe scaricabili limitato↵
-→→- Non funziona l\'accesso ai PDI offline di Wikipedia↵
-↵
-→→OsmAnd è continuamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net↵
-→
- "</string>
+<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)↵ ↵
+\nOsmAnd è un\'applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida svolta per svolta.↵
+\n↵
+\n Alcune delle caratteristiche principali:↵
+\n - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵
+\n - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵
+\n - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵
+\n - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, Preferiti, curve isoipse, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵ 
+\n - Ricerca offline per indirizzi e luoghi (PDI)↵
+\n - Calcolo del percorso per distanze a medio raggio↵
+\n - Modalità automobile, bicicletta e pedonale con:↵
+\n - Commutazione automatica della vista giorno/notte↵ 
+\n - Zoom automatico in base alla velocità↵ 
+\n - Allineamento della mappa in base alla direzione o alla bussola↵ ↵ 
+\n - Limitazioni di questa versione gratuita di OsmAnd:↵
+\n - Numero di mappe scaricabili limitato↵ 
+\n - Non funziona l\'accesso ai PDI offline di Wikipedia↵ ↵ 
+\n OsmAnd è continuamente in sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizzate Navigazione e Direzioni) OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a mattonelle) possono essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. OsmAnd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a mattonelle in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per i giri turistici - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - commutazione opzionale automatica della vista giorno/notte - zoom automatico opzionale in base alla velocità - allineamento della mappa in base alla direzione o alla bussola - opzionali: indicazione di corsia indicazione del limite di velocità voci registrate e TTS</string>
 
@@ -939,11 +932,11 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="enable_plugin_monitoring_services">Abilita il plugin di registrazione del viaggio per utilizzare i servizi di registrazione della posizione (registrazione GPX, monitoraggio in tempo reale)</string>
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
     <string name="rendering_attr_roadColors_name">Schema di colorazioni per le strade</string>
-    <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla in Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">L\'app ZXing Barcode Scanner non è installata. Cercarla in Google Play\?</string>
     <string name="close_changeset">Chiudi le modifiche</string>
-    <string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il più lento Android invece del codice nativo).</string>
+    <string name="safe_mode_description">Avvia l\'app in modalità sicura (usando il più lento codice Android invece del nativo).</string>
     <string name="safe_mode">Modalità sicura</string>
-    <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitala nelle Impostazioni).</string>
+    <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitala nelle \'Impostazioni\').</string>
     <string name="background_service_is_enabled_question">Il servizio OsmAnd è ancora in esecuzione in background. Si desidera arrestare anche questo?</string>
 
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
@@ -999,12 +992,12 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="av_use_external_recorder">Utilizza il registratore di sistema</string>
     <string name="av_settings_descr">Configura le impostazioni audio e video.</string>
     <string name="av_settings">Impostazioni audio/video </string>
-    <string name="recording_error">Errore durante la registrazione </string>
-    <string name="recording_camera_not_available">La fotocamera non è disponibile</string>
-    <string name="recording_is_recorded">L\'audio/video sta per essere registrato. Per fermarlo tocca il widget AV.</string>
+    <string name="recording_error">Registrazione fallita</string>
+    <string name="recording_camera_not_available">Fotocamera non disponibile</string>
+    <string name="recording_is_recorded">Audio/video in registrazione. Per fermarlo tocca il widget AV.</string>
     <string name="recording_playing">L\'audio della registrazione specificata sta per essere riprodotto.\n%1$s</string>
     <string name="recording_open_external_player">Apri riproduttore esterno</string>
-    <string name="recording_delete_confirm">Vuoi cancellare questa registrazione?</string>
+    <string name="recording_delete_confirm">Vuoi cancellare questo elemento\?</string>
 
     <string name="recording_unavailable">non disponibile</string>
     <string name="recording_context_menu_arecord">Prendi una nota audio</string>
@@ -1016,7 +1009,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrazione in corso</string>
     <string name="map_widget_av_notes">Note audio/video</string>
-    <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del plugin per le linee isoipse per sostenere lo sviluppo futuro.</string>
+    <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto del plugin per le \'Linee isoipse\' per sostenerne lo sviluppo futuro.</string>
     <string name="srtm_paid_version_title">Plugin linee isoipse</string>
 
     <string name="intermediate_points_change_order">Modifica l\'ordine</string>
@@ -1028,7 +1021,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="stop_routing_confirm">Sei sicuro di voler interrompere la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler eliminare la tua destinazione (e le destinazioni intermedie)?</string>
-    <string name="precise_routing_mode_descr">Abilita per calcolare percorsi precisi senza intoppi. È lento e limitato in distanza.</string>
+    <string name="precise_routing_mode_descr">Calcola percorsi precisi senza intoppi. È ancora lento e limitato in distanza.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso (alfa)</string>
     <string name="local_indexes_cat_av">Dati audio/video</string>
 
@@ -1063,19 +1056,19 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="monitoring_settings_descr">Configura come registrare i tuoi viaggi.</string>
 
 
-    <string name="choose_osmand_theme_descr">Scegli il tema dell\'applicazione.</string>
+    <string name="choose_osmand_theme_descr">Scegli l\'aspetto dell\'applicazione.</string>
     <string name="choose_osmand_theme">Tema dell\'app</string>
     <string name="accessibility_options">Opzioni di accessibilità</string>
     <string name="select_address_activity">Seleziona l\'indirizzo</string>
-    <string name="favourites_list_activity">Seleziona preferito</string>
+    <string name="favourites_list_activity">Seleziona Preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
-    <string name="download_using_mobile_internet">La connessione WiFi non è attualmente attiva. Vuoi continuare a scaricare con la connessione internet attuale?</string>
+    <string name="download_using_mobile_internet">Non connesso al WiFi. Usare la connessione a Internet attuale per il download\?</string>
     <string name="cancel_route">Cancella il percorso</string>
     <string name="cancel_navigation">Interrompere la navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
     <string name="other_location">Altra</string>
     <string name="files_limit">hai ancora %1$d file</string>
-    <string name="available_downloads_left">Disponibili %1$d file da scaricare</string>
+    <string name="available_downloads_left">Ancora %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
     <string name="use_magnetic_sensor_descr">Per utilizzare il valore della bussola invece del sensore di orientamento, utilizza il utilizza il sensore magnetico.</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
@@ -1089,26 +1082,26 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="plugin_distance_point_ele">altitudine</string>
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
-    <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
+    <string name="gpx_saved_sucessfully">File GPX salvato in {0}</string>
     <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra dei punti. I risultati possono essere salvati come file GPX, che può essere usato in seguito per la navigazione.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
-    <string name="use_distance_measurement_help">* Toccare per segnare un punto.
-\n* Premere e tenere premuto sulla mappa per eliminare il punto precedente.
-\n* Premere e tenere premuto sul punto per vedere e allegare una descrizione.
-\n* Fare clic sul widget di misura per vedere ulteriori azioni.</string>
+    <string name="use_distance_measurement_help">* Toccare per segnare un punto. 
+\n* Premere e tenere premuto sulla mappa per eliminare il punto precedente. 
+\n* Premere e tenere premuto sul punto per vedere e allegare una descrizione. 
+\n* Toccare sul widget di misura per vedere ulteriori azioni.</string>
     <string name="distance_measurement_start_editing">Inizia a modificare</string>
     <string name="distance_measurement_finish_editing">Finisci di modificare</string>
     <string name="distance_measurement_finish_subtrack">Inizia una nuova sottotraccia</string>
     <string name="distance_measurement_clear_route">Cancella tutti i punti</string>
 
-    <string name="distance_measurement_load_gpx">Apri GPX esistente</string>
+    <string name="distance_measurement_load_gpx">Apri un file GPX esistente</string>
     <string name="delete_point">Elimina punto</string>
-    <string name="local_osm_changes_backup_successful">Creazione file di modifica OSM %1$s completata</string>
+    <string name="local_osm_changes_backup_successful">Creazione file di modifica OSM %1$s generato</string>
     <string name="local_osm_changes_backup_failed">Backup modifiche OSM fallito</string>
     <string name="local_osm_changes_backup">Backup come modifica OSM</string>
 
     <string name="search_street_in_neighborhood_cities">Cerca la strada nelle località vicine</string>
-    <string name="intermediate_items_sort_return">Destinazioni intermedie riordinate in modo da ottimizzare il percorso dalla posizione attuale verso la destinazione.</string>
+    <string name="intermediate_items_sort_return">Destinazioni intermedie riordinate in modo da ottimizzare il percorso verso la destinazione.</string>
     <string name="intermediate_items_sort_by_distance">Ordina porta a porta</string>
     <string name="please_select_address">Scegli prima la città o la strada</string>
     <string name="context_menu_item_destination_point">Imposta come destinazione</string>
@@ -1130,7 +1123,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="speak_cameras">Autovelox</string>
     <string name="speak_traffic_warnings">Avvisi di traffico</string>
 
-    <string name="osb_author_or_password_not_specified">Prego specificare il nome utente OSM e la password nelle Impostazioni</string>
+    <string name="osb_author_or_password_not_specified">Prego specificare il nome utente OSM e la password nelle \'Impostazioni\'</string>
     <string name="clear_intermediate_points">Cancella le destinazioni intermedie</string>
     <string name="keep_intermediate_points">Mantieni le destinazioni intermedie</string>
     <string name="new_directions_point_dialog">Hai già delle destinazioni intermedie impostate.</string>
@@ -1161,7 +1154,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="local_index_tile_data_maxzoom">Zoom massimo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom minimo: %1$s</string>
     <string name="local_index_tile_data_name">Dati tasselli: %1$s</string>
-    <string name="edit_tilesource_successfully">Sorgente mattonelle : %1$s è stata salvata con successo</string>
+    <string name="edit_tilesource_successfully">Sorgente mattonelle %1$s salvata</string>
     <string name="edit_tilesource_maxzoom">Zoom massimo</string>
     <string name="edit_tilesource_expiration_time">Scadenza (minuti)</string>
     <string name="edit_tilesource_minzoom">Zoom minimo</string>
@@ -1203,21 +1196,21 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
 
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallita (%s), rinvio al calcolo lento.</string>
-    <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l\'uso in automobile.</string>
+    <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per la navigazione automobilistica.</string>
     <string name="disable_complex_routing">Disabilita il calcolo complesso del percorso</string>
     <string name="speech_rate_descr">Imposta la velocità della sintesi vocale TTS.</string>
     <string name="speech_rate">Velocità di lettura</string>
     <string name="guidance_preferences_descr">Preferenze di navigazione</string>
     <string name="routing_preferences_descr">Preferenze di calcolo del percorso</string>
     <string name="app_mode_truck">Camion</string>
-    <string name="android_19_location_disabled">Dalla versione KitKat non è più possibile scaricare e aggiornare le mappe nel precedente indirizzo di memorizzazione (%s). Vuoi sostituirlo con quello consentito e copiare lì tutti i file?
-\n Nota: i file precedenti non verranno modificati.
-\n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
+    <string name="android_19_location_disabled">Dalla versione di Android 4.4 (KitKat) puoi scaricare e aggiornare le mappe nella vecchia cartella di memorizzazione (%s). Vuoi copiare tutti i file nella nuova cartella di memorizzazione\? 
+\n Nota 1: i file precedenti non verranno modificati (ma potranno essere cancellati manualmente). 
+\n Nota 2: nella nuova cartella di memorizzazione non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
 
     <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione…</string>
     <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)…</string>
     <string name="copying_osmand_files">Copia dei file di dati di OsmAnd…</string>
-    <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
+    <string name="calculate_osmand_route_gpx">Calcolo percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
     <string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
     
@@ -1237,9 +1230,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="route_preferences">Preferenze di percorso</string>
     <string name="route_info">Informazioni sul percorso</string>
     <string name="keep_and_add_destination_point">Aggiungi come destinazione successiva</string>
-    <string name="use_displayed_track_for_navigation">Vuoi usare la traccia visualizzata per la navigazione?</string>
+    <string name="use_displayed_track_for_navigation">Usare la traccia visualizzata per la navigazione\?</string>
 
-    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di Internet</string>
+    <string name="calculate_osmand_route_without_internet">Calcolo offline di un tratto di percorso OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola percorso OsmAnd per i tratti prima e dopo il GPX</string>
 
     <string name="lang_en">Inglese</string>
@@ -1268,7 +1261,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="lang_lv">Lettone</string>
     <string name="lang_lt">Lituano</string>
     <string name="lang_mr">Marathi</string>
-    <string name="lang_no">Norvegese</string>
+    <string name="lang_no">Norvegese Bokmål</string>
     <string name="lang_pl">Polacco</string>
     <string name="lang_pt">Portoghese</string>
     <string name="lang_ro">Rumeno</string>
@@ -1398,7 +1391,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
 
     
-    <string name="gpx_file_is_empty">La traccia GPX è vuota</string>
+    <string name="gpx_file_is_empty">Traccia GPX vuota</string>
     <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tT </string>
     <string name="gpx_info_average_speed">Velocità media: %1$s </string>
     <string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
@@ -1425,19 +1418,19 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
     <string name="delay_navigation_start">Avvia la navigazione passo per passo automaticamente</string>
     <string name="map_widget_plain_time">Orario attuale</string>
-    <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
+    <string name="save_as_favorites_points">Salva come gruppo di Preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le destinazioni</string>
-    <string name="layer_amenity_label">Visualizza etichette PDI</string>
+    <string name="layer_amenity_label">Sovrapposizione etichette PDI</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione.</string>
 
     <string name="sort_by_distance">Ordina per distanza</string>
     <string name="sort_by_name">Ordina per nome</string>
-    <string name="none_selected_gpx">Nessun file GPX selezionato. Per selezionarlo tieni premuto su una delle tracce disponibili.</string>
+    <string name="none_selected_gpx">Nessun file GPX selezionato. Selezionalo tenendo premuto.</string>
 
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     <string name="route_descr_destination">Destinazione</string>
-    <string name="no_index_file_to_download">Non è stato trovato niente da scaricare, per favore controllare la connessione internet.</string>
+    <string name="no_index_file_to_download">Non è stato trovato niente da scaricare, per favore controlla la connessione internet.</string>
     
     
     
@@ -1591,7 +1584,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
     <string name="error_avoid_specific_road">Nessuna alternativa trovata</string>
     <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
-    <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe utilizzare più batteria e non funzionare in alcuni dispositivi molto vecchi).</string>
+    <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe utilizzare più batteria o non funzionare in dispositivi molto vecchi).</string>
     <string name="everything_up_to_date">Tutti i file sono aggiornati</string>
     <string name="no_internet_connection">Non sono in grado di scaricare. Prego, verifica la connessione a internet.</string>
     <string name="download_tab_downloads">Tutti i download</string>
@@ -2622,7 +2615,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_name">Permetti l\'accesso alle proprietà private</string>
     <string name="routing_attr_allow_private_description">Permetti l\'accesso alle aree private.</string>
     <string name="edit_name">Modifica il nome</string>
-    <string name="route_is_too_long_v2">Questo percorso è troppo lungo per essere calcolato. Per favore aggiungere delle mete intermedie se non si ottiene un risultato in 10 minuti.</string>
+    <string name="route_is_too_long_v2">Per favore aggiungere delle mete intermedie se non si ottiene un risultato per questo percorso entro 10 minuti.</string>
     <string name="save_poi_too_many_uppercase">Il nome contiene troppe maiuscole. Vuoi continuare?</string>
     <string name="osmand_plus_extended_description_part8">"
  Copertura e qualità approssimativamente:
