@@ -99,6 +99,10 @@ public class GPXUtilities {
 			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
 		}
 
+		public void setColor(String colorName) {
+			getExtensionsToWrite().put("color", Algorithms.colorNameToString(colorName));
+		}
+
 		public void removeColor() {
 			getExtensionsToWrite().remove("color");
 		}
@@ -1510,18 +1514,26 @@ public class GPXUtilities {
 				if (tok == XmlPullParser.START_TAG) {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
-					if (extensionReadMode && parse instanceof GPXExtensions) {
+					if (extensionReadMode && parse != null) {
 						String value = readText(parser, tag);
 						if (value != null) {
 							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
 							if (tag.equals("speed") && parse instanceof WptPt) {
 								try {
 									((WptPt) parse).speed = Float.parseFloat(value);
-								} catch (NumberFormatException e) {
+								} catch (NumberFormatException e) {}
+							}
+							if (tag.equals("trackextension") || tag.equals("color") || tag.equals("colour") || tag.equals("displaycolor")) {
+								int color;
+								try {
+									color = Integer.parseInt(value);
+									((GPXExtensions) parse).setColor(color);
+								} catch (NumberFormatException nfe) {
+									((GPXExtensions) parse).setColor(value);
 								}
 							}
-						}
 
+						}
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = true;
 					} else {

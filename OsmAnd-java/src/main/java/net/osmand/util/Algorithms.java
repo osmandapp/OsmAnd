@@ -646,6 +646,23 @@ public class Algorithms {
 		}
 	}
 
+	public static String colorNameToString(String colorName) {
+		Map<String, String> colorTable = new HashMap<>();
+		colorTable.put("black", "#000000");
+		colorTable.put("white", "#FFFFFF");
+		colorTable.put("red", "#ff0000");
+		colorTable.put("orange", "#ff8800");
+		colorTable.put("green", "#23b03b");
+		colorTable.put("blue", "#2f7af5");
+		for (String key : colorTable.keySet()) {
+			if(colorName.toLowerCase().contains(key)) {
+				return colorTable.get(key);
+			}
+		}
+
+		return "#FF0000";
+	}
+
 	private static String format(int i, String hexString) {
 		while (hexString.length() < i) {
 			hexString = "0" + hexString;

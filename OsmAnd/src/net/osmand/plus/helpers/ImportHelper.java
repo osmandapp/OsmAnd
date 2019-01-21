@@ -261,6 +261,7 @@ public class ImportHelper {
 				final List<FavouritePoint> favourites = asFavourites(gpxFile.getPoints(), fileName, forceImportFavourites);
 				final FavouritesDbHelper favoritesHelper = app.getFavorites();
 				for (final FavouritePoint favourite : favourites) {
+					favoritesHelper.deleteFavourite(favourite, false);
 					favoritesHelper.addFavourite(favourite, false);
 				}
 				favoritesHelper.sortAll();
