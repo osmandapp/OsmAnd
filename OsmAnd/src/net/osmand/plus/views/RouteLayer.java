@@ -71,6 +71,10 @@ public class RouteLayer extends OsmandMapLayer {
 	private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
 
+	private float walkCircleH2;
+	private float walkCircleW2;
+	private float walkCircleRadius;
+
 	private Paint paintIconSelected;
 	private Bitmap selectedPoint;
 	private TrackChartPoints trackChartPoints;
@@ -89,6 +93,8 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 
 	private void initUI() {
+		float density = view.getDensity();
+
 		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
 
 		paintIcon = new Paint();
@@ -114,13 +120,17 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIconWalkCircle.setAntiAlias(true);
 		paintIconWalkCircle.setStrokeWidth(3);
 
+		walkCircleH2 = 10f * density;
+		walkCircleW2 = 7.5f * density;
+		walkCircleRadius = 7.5f * density;
+
 		paintIconAction = new Paint();
 		paintIconAction.setFilterBitmap(true);
 		paintIconAction.setAntiAlias(true);
 
 		attrs = new RenderingLineAttributes("route");
-		attrs.defaultWidth = (int) (12 * view.getDensity());
-		attrs.defaultWidth3 = (int) (7 * view.getDensity());
+		attrs.defaultWidth = (int) (12 * density);
+		attrs.defaultWidth3 = (int) (7 * density);
 		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
 		attrs.paint3.setStrokeCap(Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
@@ -329,6 +339,7 @@ public class RouteLayer extends OsmandMapLayer {
 
 		int arrowW2 = arrow.getWidth() / 2;
 		int arrowH2 = arrow.getHeight() / 2;
+		float walkRectShift = arrowH2 / 5f;
 		double pxStep = arrow.getHeight() * 4f;
 		double dist = 0;
 		if(distPixToFinish != 0) {
@@ -390,16 +401,13 @@ public class RouteLayer extends OsmandMapLayer {
 			if (style != -1) {
 				switch (style) {
 					case GeometryWayStyle.WAY_TYPE_WALK_LINE:
-						float outerRectH2 = 26f;
-						float outerRectW2 = 20f;
-						float rectRadius = 20f;
-						RectF rect = new RectF(arrowW2 - outerRectW2, arrowH2 - outerRectH2 + 2, arrowW2 + outerRectW2, arrowH2 + outerRectH2 + 2);
+						RectF rect = new RectF(arrowW2 - walkCircleW2, arrowH2 - walkCircleH2 + walkRectShift, arrowW2 + walkCircleW2, arrowH2 + walkCircleH2 + walkRectShift);
 						paintIconWalkCircle.setColor(view.getResources().getColor(R.color.nav_track_walk_fill));
 						paintIconWalkCircle.setStyle(Paint.Style.FILL);
-						canvas.drawRoundRect(rect, rectRadius, rectRadius, paintIconWalkCircle);
+						canvas.drawRoundRect(rect, walkCircleRadius, walkCircleRadius, paintIconWalkCircle);
 						paintIconWalkCircle.setColor(view.getResources().getColor(R.color.nav_track_walk_stroke));
 						paintIconWalkCircle.setStyle(Paint.Style.STROKE);
-						canvas.drawRoundRect(rect, rectRadius, rectRadius, paintIconWalkCircle);
+						canvas.drawRoundRect(rect, walkCircleRadius, walkCircleRadius, paintIconWalkCircle);
 						canvas.drawBitmap(arrow, 0, 0, paintIconWalk);
 						break;
 					case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE:
