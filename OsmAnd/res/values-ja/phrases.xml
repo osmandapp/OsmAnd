@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="poi_aerodrome">空港(Aireport)</string>
 	<string name="poi_bank">銀行(Bank)</string>
@@ -73,7 +73,7 @@
 	<string name="poi_farm">農作物直売所(Farm store)</string>
 	<string name="poi_greengrocer">青果店(Greengrocery)</string>
 	<string name="poi_seafood">魚屋(Seafood store)</string>
-	<string name="poi_confectionery">菓子屋(Confectionery)</string>
+	<string name="poi_confectionery">菓子店(Confectionery)</string>
 	<string name="poi_ice_cream">アイスクリーム屋(Ice cream parlor)</string>
 	<string name="poi_supermarket">スーパーマーケット(Supermarket)</string>
 	<string name="poi_tea">ティーショップ(Tea shop)</string>
@@ -348,7 +348,7 @@
 	<string name="poi_isolated_dwelling">孤立住居(Isolated dwelling)</string>
 	<string name="poi_suburb">区・区画(Suburb)</string>
 	<string name="poi_quarter">大字(Quarter)</string>
-	<string name="poi_neighbourhood">町丁(Neighbourhood)</string>
+	<string name="poi_neighbourhood">小字・丁目(Neighbourhood)</string>
 	<string name="poi_locality">非居住地(Locality)</string>
 	<string name="poi_place_allotments">住居付き農園(Allotments)</string>
 	<string name="poi_place_farm">農場(Farm)</string>
@@ -850,7 +850,7 @@
 	<string name="poi_recycling_organic">生ごみ(Organic)</string>
 	<string name="poi_recycling_beverage_cartons">飲食物の紙パック(Beverage cartons)</string>
 	<string name="poi_recycling_garden_waste">木質系廃棄物(Garden waste)</string>
-	<string name="poi_recycling_low_energy_bulbs">蛍光灯型電球(Low energy bulbs)</string>
+	<string name="poi_recycling_low_energy_bulbs">電球型蛍光灯(Low energy bulbs)</string>
 	<string name="poi_recycling_fluorescent_tubes">蛍光管(Fluorescent tubes)</string>
 	<string name="poi_recycling_metal">金属(Metal)</string>
 	<string name="poi_recycling_electrical_items">大型家電製品(Electrical items)</string>
@@ -1639,7 +1639,7 @@
 	<string name="poi_health_specialty_behavior_yes">行動療法(Behavior)</string>
 	<string name="poi_health_specialty_palliative_medicine_yes">緩和医療・ホスピス(Health specialty: palliative medicine)</string>
 
-	<string name="poi_social_facility_type">福祉施設種(Type)</string>
+	<string name="poi_social_facility_type">福祉施設種類(Type)</string>
 	<string name="poi_social_facility_for">対象者(Target group)</string>
 	<string name="poi_social_facility_group_home">グループホーム・集団生活型介護施設(Group home)</string>
 	<string name="poi_social_facility_assisted_living">居住型支援施設(Assisted living)</string>
@@ -1665,7 +1665,7 @@
 	<string name="poi_social_facility_for_child_juvenile">子供;少年(Child;juvenile)</string>
 
 	<string name="poi_free_flying_characteristic">スカイスポーツの対応要素(Characteristic)</string>
-	<string name="poi_seasonal">営業期(Seasonal)</string>
+	<string name="poi_seasonal">季節営業(Seasonal)</string>
 	<string name="poi_drive_in">ドライブイン(Drive in)</string>
 	<string name="poi_drive_in_no">無し</string>
 	<string name="poi_power_supply_yes">有り</string>
@@ -1823,7 +1823,7 @@
 	<string name="poi_cuisine_sagardotegia">_形式_バスク伝統サイダーハウス(リンゴ酒・ワイン)(Sagardotegia)</string>
 	<string name="poi_automated_yes">肯定</string>
 	<string name="poi_automated_no">非自動化</string>
-	<string name="poi_brushless">非回転ブラシ洗車の有無（Brushless)</string>
+	<string name="poi_brushless">ノンブラシ洗車の有無（Brushless)</string>
 	<string name="poi_brushless_yes">有り</string>
 	<string name="poi_brushless_no">非回転ブラシ洗車:無し</string>
 	<string name="poi_capacity_disabled">障害者専用コーナーの有無(Dedicated places for disabled)</string>
@@ -1939,7 +1939,7 @@
 	<string name="poi_beach_rocky">丸石</string>
 
 	<string name="poi_beauty_salon_service">美容サービス</string>
-	<string name="poi_city_capital">首都検索</string>
+	<string name="poi_city_capital">首都</string>
 	<string name="poi_xmas">クリスマスや年越し限定物</string>
 	<string name="poi_xmas_event">クリスマスイベント</string>
 	<string name="poi_xmas_market">クリスマス市場</string>

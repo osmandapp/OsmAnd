@@ -3130,4 +3130,5 @@
     <string name="shared_string_launch">הפעלה</string>
     <string name="run_full_osmand_msg">המפה שבשימוש היא {0} שמוגשת על ידי OsmAnd. להפעיל את הגרסה המלאה של OsmAnd\?</string>
     <string name="run_full_osmand_header">להפעיל את OsmAnd\?</string>
+    <string name="lang_gn_py">גוארני</string>
 </resources>

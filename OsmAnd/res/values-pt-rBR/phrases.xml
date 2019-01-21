@@ -2091,7 +2091,7 @@
 	<string name="poi_clothes_maternity">Roupa de maternidade</string>
 	<string name="poi_clothes_vintage">Roupas vintage</string>
 	<string name="poi_clothes_oversize">Roupas tamanho grande</string>
-	<string name="poi_clothes_schoolwear">Roupas escolares</string>
+	<string name="poi_clothes_schoolwear">Escolar</string>
 	<string name="poi_clothes_swimwear">Roupas de banho</string>
 	<string name="poi_clothes_socks">Meias</string>
 	<string name="poi_clothes_shirts">Camisas</string>
@@ -3930,4 +3930,6 @@
     <string name="poi_books_academic">Acadêmicos</string>
     <string name="poi_books_children">Crianças</string>
     <string name="poi_atoll">Atol</string>
+    <string name="poi_toll_gantry">"Portal de pedágio "</string>
+    <string name="poi_childcare">Creche</string>
 </resources>

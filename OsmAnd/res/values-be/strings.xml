@@ -3222,4 +3222,8 @@
     <string name="powered_by_osmand">Працуе на OsmAnd</string>
     <string name="mapillary_menu_title_pano">Паказаць толькі 360° малюнкі</string>
     <string name="osm_live_subscriptions">Падпіскі</string>
-    </resources>
+    <string name="shared_string_launch">Запуск</string>
+    <string name="lang_gn_py">Гуарані</string>
+    <string name="run_full_osmand_msg">Вы карыстаецеся мапай {0}, якая пастаўляецца OsmAnd. Вы хочаце запусціць поўную версію OsmAnd\?</string>
+    <string name="run_full_osmand_header">Запусціць OsmAnd\?</string>
+</resources>

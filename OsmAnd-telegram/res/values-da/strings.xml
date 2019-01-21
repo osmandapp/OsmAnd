@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="background_work_description">Skift indstillinger for batterioptimering, for stabil deling af placering.</string>
 	<string name="background_work">Baggrundstilstand</string>
 	<string name="battery_optimization_description">Sluk for batterioptimering af OsmAnd Telegram, så det ikke pludseligt bliver slukket, når det er i baggrunden.</string>
@@ -179,4 +179,10 @@
 	<string name="shared_string_map">Kort</string>
 	<string name="shared_string_text">Tekst</string>
 	<string name="map_and_text">Kort og tekst</string>
-	</resources>
+    <string name="average_altitude">Gennemsnitshøjde</string>
+    <string name="average_speed">Gennemsnitshastighed</string>
+    <string name="open_in_osmand">Åbn i OsmAnd</string>
+    <string name="end_date">Slutdato</string>
+    <string name="start_date">Startdato</string>
+    <string name="timeline">Tidslinje</string>
+</resources>
