@@ -171,8 +171,8 @@ public abstract class OsmandMapLayer {
 
 	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
 		boolean segmentStarted = false;
-		int prevX = xs.get(0);
-		int prevY = ys.get(0);
+		int prevX = xs.get(0) / 100;
+		int prevY = ys.get(0) / 100;
 		int height = tb.getPixHeight();
 		int width = tb.getPixWidth();
 		int cnt = 0;
@@ -182,8 +182,8 @@ public abstract class OsmandMapLayer {
 		Path path = new Path();
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
 		for (int i = 1; i < xs.size(); i++) {
-			int currX = xs.get(i);
-			int currY = ys.get(i);
+			int currX = xs.get(i) / 100;
+			int currY = ys.get(i) / 100;
 			boolean currIn = isIn(currX, currY, 0, 0, width, height);
 			boolean draw = false;
 			if (prevIn && currIn) {

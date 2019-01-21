@@ -108,10 +108,10 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIconWalk.setAntiAlias(true);
 		paintIconWalk.setColor(Color.WHITE);
 		paintIconWalk.setStrokeWidth(3);
+		paintIconWalk.setAlpha(200);
 
 		paintIconWalkCircle = new Paint();
 		paintIconWalkCircle.setAntiAlias(true);
-		paintIconWalkCircle.setColor(Color.BLUE);
 		paintIconWalkCircle.setStrokeWidth(3);
 
 		paintIconAction = new Paint();
@@ -327,19 +327,24 @@ public class RouteLayer extends OsmandMapLayer {
 
 		boolean hasStyles = styles != null && styles.size() == tx.size();
 
+		int arrowW2 = arrow.getWidth() / 2;
+		int arrowH2 = arrow.getHeight() / 2;
 		double pxStep = arrow.getHeight() * 4f;
-		Matrix matrix = new Matrix();
 		double dist = 0;
 		if(distPixToFinish != 0) {
 			dist = distPixToFinish - pxStep * ((int) (distPixToFinish / pxStep)); // dist < 1
 		}
-		
+
+		List<Float> rx = new ArrayList<>();
+		List<Float> ry = new ArrayList<>();
+		List<Double> ra = new ArrayList<>();
+		List<Integer> rs = new ArrayList<>();
 		for (int i = tx.size() - 2; i >= 0; i --) {
 			GeometryWayStyle style = hasStyles ? styles.get(i) : null;
-			int px = tx.get(i);
-			int py = ty.get(i);
-			int x = tx.get(i + 1);
-			int y = ty.get(i + 1);
+			double px = tx.get(i) / 100d;
+			double py = ty.get(i) / 100d;
+			double x = tx.get(i + 1) / 100d;
+			double y = ty.get(i + 1) / 100d;
 			double distSegment = distances.get(i + 1);
 			double angle = angles.get(i + 1);
 //			double angleRad = Math.atan2(y - py, x - px);
@@ -358,38 +363,58 @@ public class RouteLayer extends OsmandMapLayer {
 				double pdy = (y - py) * percent;
 				if (isIn((int)(px + pdx), (int) (py + pdy), left, top, right, bottom)) {
 					float icony = (float) (py + pdy);
-					float iconx = (float) (px + pdx - arrow.getWidth() / 2);
-					canvas.save();
-					canvas.translate(iconx, icony);
-					//canvas.translate(0, -arrow.getHeight() / 2);
-					canvas.rotate((float) angle, arrow.getWidth() / 2, 0);
-					//matrix.reset();
-					//matrix.postTranslate(0, -arrow.getHeight() / 2);
-					//matrix.postRotate((float) angle, arrow.getWidth() / 2, 0);
-					//matrix.postTranslate(iconx, icony);
+					float iconx = (float) (px + pdx - arrowW2);
+					rx.add(iconx);
+					ry.add(icony);
+					ra.add(angle);
 					if (style != null) {
-						switch (style.getType()) {
-							case GeometryWayStyle.WAY_TYPE_WALK_LINE:
-								canvas.drawRoundRect(new RectF(arrow.getWidth() / 2 - 20, arrow.getHeight() / 2 - 30, arrow.getWidth() / 2 + 20, arrow.getHeight() / 2 + 30), 20, 20, paintIconWalkCircle);
-								canvas.drawBitmap(arrow, matrix, paintIconWalk);
-								break;
-							case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE:
-								canvas.drawBitmap(arrow, matrix, paintIconTransport);
-								break;
-							case GeometryWayStyle.WAY_TYPE_SOLID_LINE:
-								canvas.drawBitmap(arrow, matrix, paintIcon);
-								break;
-							default:
-								break;
-						}
+						rs.add(style.getType());
 					} else {
-						canvas.drawBitmap(arrow, matrix, paintIcon);
+						rs.add(-1);
 					}
-					canvas.restore();
 				}
 				dist -= pxStep;
 				percent -= pxStep / distSegment;
 			}
+		}
+		for (int i = rx.size() - 1; i >= 0; i--) {
+			float iconx = rx.get(i);
+			float icony = ry.get(i);
+			double angle = ra.get(i);
+			int style = rs.get(i);
+
+			canvas.save();
+			canvas.translate(iconx, icony);
+			//canvas.translate(0, -arrow.getHeight() / 2);
+			canvas.rotate((float) angle, arrowW2, 0);
+			if (style != -1) {
+				switch (style) {
+					case GeometryWayStyle.WAY_TYPE_WALK_LINE:
+						float outerRectH2 = 26f;
+						float outerRectW2 = 20f;
+						float rectRadius = 20f;
+						RectF rect = new RectF(arrowW2 - outerRectW2, arrowH2 - outerRectH2 + 2, arrowW2 + outerRectW2, arrowH2 + outerRectH2 + 2);
+						paintIconWalkCircle.setColor(view.getResources().getColor(R.color.nav_track_walk_fill));
+						paintIconWalkCircle.setStyle(Paint.Style.FILL);
+						canvas.drawRoundRect(rect, rectRadius, rectRadius, paintIconWalkCircle);
+						paintIconWalkCircle.setColor(view.getResources().getColor(R.color.nav_track_walk_stroke));
+						paintIconWalkCircle.setStyle(Paint.Style.STROKE);
+						canvas.drawRoundRect(rect, rectRadius, rectRadius, paintIconWalkCircle);
+						canvas.drawBitmap(arrow, 0, 0, paintIconWalk);
+						break;
+					case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE:
+						canvas.drawBitmap(arrow, 0, 0, paintIconTransport);
+						break;
+					case GeometryWayStyle.WAY_TYPE_SOLID_LINE:
+						canvas.drawBitmap(arrow, 0, 0, paintIcon);
+						break;
+					default:
+						break;
+				}
+			} else {
+				canvas.drawBitmap(arrow, 0, 0, paintIcon);
+			}
+			canvas.restore();
 		}
 	}
 	
@@ -633,8 +658,8 @@ public class RouteLayer extends OsmandMapLayer {
 			float py = y;
 			int previous = tx.size() - 1;
 			if (previous >= 0 && previous < tx.size()) {
-				px = tx.get(previous);
-				py = ty.get(previous);
+				px = tx.get(previous) / 100f;
+				py = ty.get(previous) / 100f;
 			}
 			double angle = 0;
 			if (px != x || py != y) {
@@ -645,8 +670,8 @@ public class RouteLayer extends OsmandMapLayer {
 			if(dist != 0) {
 				distSegment = dist;
 			}
-			tx.add((int) x);
-			ty.add((int) y);
+			tx.add((int) (x * 100f));
+			ty.add((int) (y * 100f));
 			angles.add(angle);
 			distances.add(distSegment);
 			styles.add(style);
