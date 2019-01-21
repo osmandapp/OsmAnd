@@ -74,6 +74,8 @@ public class RouteLayer extends OsmandMapLayer {
 	private float walkCircleH2;
 	private float walkCircleW2;
 	private float walkCircleRadius;
+	private float routeShieldRadius;
+	private float routeShieldCornerRadius;
 
 	private Paint paintIconSelected;
 	private Bitmap selectedPoint;
@@ -120,10 +122,6 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIconWalkCircle.setAntiAlias(true);
 		paintIconWalkCircle.setStrokeWidth(3);
 
-		walkCircleH2 = 10f * density;
-		walkCircleW2 = 7.5f * density;
-		walkCircleRadius = 7.5f * density;
-
 		paintIconAction = new Paint();
 		paintIconAction.setFilterBitmap(true);
 		paintIconAction.setAntiAlias(true);
@@ -137,6 +135,8 @@ public class RouteLayer extends OsmandMapLayer {
 
 		attrs.paint2.setStrokeCap(Cap.BUTT);
 		attrs.paint2.setColor(Color.BLACK);
+
+		calculateTransportRouteParams();
 
 		paintIconSelected = new Paint();
 		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
@@ -152,7 +152,16 @@ public class RouteLayer extends OsmandMapLayer {
 		paintGridOuterCircle.setColor(Color.WHITE);
 		paintGridOuterCircle.setAlpha(204);
 	}
-	
+
+	private void calculateTransportRouteParams() {
+		float density = view.getDensity();
+		walkCircleH2 = attrs.paint.getStrokeWidth() / 1.5f;
+		walkCircleW2 = attrs.paint.getStrokeWidth() / 2;
+		walkCircleRadius = attrs.paint.getStrokeWidth() / 2;
+		routeShieldRadius = attrs.paint.getStrokeWidth() / 1.6f;
+		routeShieldCornerRadius = 4 * density;
+	}
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
@@ -222,6 +231,7 @@ public class RouteLayer extends OsmandMapLayer {
 		if(updatePaints) {
 			paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
 			paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), Mode.MULTIPLY));
+			calculateTransportRouteParams();
 		}
 		nightMode = settings != null && settings.isNightMode();
 	}
@@ -350,6 +360,11 @@ public class RouteLayer extends OsmandMapLayer {
 		List<Float> ry = new ArrayList<>();
 		List<Double> ra = new ArrayList<>();
 		List<Integer> rs = new ArrayList<>();
+		List<Boolean> rh = new ArrayList<>();
+		List<Float> rpx = new ArrayList<>();
+		List<Float> rpy = new ArrayList<>();
+		boolean showShield = false;
+		int prevStyleType = -1;
 		for (int i = tx.size() - 2; i >= 0; i --) {
 			GeometryWayStyle style = hasStyles ? styles.get(i) : null;
 			double px = tx.get(i) / 100d;
@@ -363,6 +378,12 @@ public class RouteLayer extends OsmandMapLayer {
 //			distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
 			if(distSegment == 0) {
 				continue;
+			}
+			int styleType = style != null ? style.getType() : -1;
+			if (style != null && prevStyleType != styleType && (prevStyleType != -1 || styleType != GeometryWayStyle.WAY_TYPE_WALK_LINE)) {
+				prevStyleType = styleType;
+				rpx.add((float) x);
+				rpy.add((float) y);
 			}
 			if(dist >= pxStep) {
 				dist = 0; // unnecessary but double check to avoid errors
@@ -378,15 +399,29 @@ public class RouteLayer extends OsmandMapLayer {
 					rx.add(iconx);
 					ry.add(icony);
 					ra.add(angle);
+					rh.add(showShield);
 					if (style != null) {
 						rs.add(style.getType());
 					} else {
 						rs.add(-1);
 					}
 				}
+				showShield = !showShield;
 				dist -= pxStep;
 				percent -= pxStep / distSegment;
 			}
+		}
+
+		for (int i = rpx.size() - 1; i >= 0; i--) {
+			float x = rpx.get(i);
+			float y = rpy.get(i);
+
+			paintIconWalkCircle.setColor(Color.WHITE);
+			paintIconWalkCircle.setStyle(Paint.Style.FILL);
+			canvas.drawCircle(x, y, routeShieldRadius, paintIconWalkCircle);
+			paintIconWalkCircle.setColor(Color.BLACK);
+			paintIconWalkCircle.setStyle(Paint.Style.STROKE);
+			canvas.drawCircle(x, y, routeShieldRadius, paintIconWalkCircle);
 		}
 		for (int i = rx.size() - 1; i >= 0; i--) {
 			float iconx = rx.get(i);
@@ -400,7 +435,7 @@ public class RouteLayer extends OsmandMapLayer {
 			canvas.rotate((float) angle, arrowW2, 0);
 			if (style != -1) {
 				switch (style) {
-					case GeometryWayStyle.WAY_TYPE_WALK_LINE:
+					case GeometryWayStyle.WAY_TYPE_WALK_LINE: {
 						RectF rect = new RectF(arrowW2 - walkCircleW2, arrowH2 - walkCircleH2 + walkRectShift, arrowW2 + walkCircleW2, arrowH2 + walkCircleH2 + walkRectShift);
 						paintIconWalkCircle.setColor(view.getResources().getColor(R.color.nav_track_walk_fill));
 						paintIconWalkCircle.setStyle(Paint.Style.FILL);
@@ -410,12 +445,26 @@ public class RouteLayer extends OsmandMapLayer {
 						canvas.drawRoundRect(rect, walkCircleRadius, walkCircleRadius, paintIconWalkCircle);
 						canvas.drawBitmap(arrow, 0, 0, paintIconWalk);
 						break;
-					case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE:
-						canvas.drawBitmap(arrow, 0, 0, paintIconTransport);
+					}
+					case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE: {
+						if (rh.get(i)) {
+							RectF rect = new RectF(arrowW2 - routeShieldRadius, arrowH2 - routeShieldRadius, arrowW2 + routeShieldRadius, arrowH2 + routeShieldRadius);
+							paintIconWalkCircle.setColor(Color.WHITE);
+							paintIconWalkCircle.setStyle(Paint.Style.FILL);
+							canvas.drawRoundRect(rect, routeShieldCornerRadius, routeShieldCornerRadius, paintIconWalkCircle);
+							paintIconWalkCircle.setColor(Color.BLACK);
+							paintIconWalkCircle.setStyle(Paint.Style.STROKE);
+							canvas.drawRoundRect(rect, routeShieldCornerRadius, routeShieldCornerRadius, paintIconWalkCircle);
+							canvas.drawBitmap(arrow, 0, 0, paintIconWalk);
+						} else {
+							canvas.drawBitmap(arrow, 0, 0, paintIconTransport);
+						}
 						break;
-					case GeometryWayStyle.WAY_TYPE_SOLID_LINE:
+					}
+					case GeometryWayStyle.WAY_TYPE_SOLID_LINE: {
 						canvas.drawBitmap(arrow, 0, 0, paintIcon);
 						break;
+					}
 					default:
 						break;
 				}
@@ -602,7 +651,7 @@ public class RouteLayer extends OsmandMapLayer {
 			List<Double> odistances = geometryZoom.getDistances();
 			
 			clearArrays();
-			GeometryWayStyle defaultWayStyle = new GeometryWayStyle(attrs.paint.getColor(), GeometryWayStyle.WAY_TYPE_SOLID_LINE);
+			GeometryWayStyle defaultWayStyle = new GeometryWayStyle(attrs.paint.getColor(), isTransportRoute() ? GeometryWayStyle.WAY_TYPE_WALK_LINE : GeometryWayStyle.WAY_TYPE_SOLID_LINE);
 			GeometryWayStyle style = defaultWayStyle;
 			boolean previousVisible = false;
 			if (lastProjection != null) {
