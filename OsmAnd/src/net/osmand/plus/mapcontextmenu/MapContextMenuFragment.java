@@ -889,7 +889,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
 		if (newMenuState != currentMenuState) {
-			restoreCustomMapRatio();
+			//restoreCustomMapRatio();
 			menu.updateControlsVisibility(true);
 			doBeforeMenuStateChange(currentMenuState, newMenuState);
 			toggleDetailsHideButton();
@@ -899,6 +899,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void restoreCustomMapRatio() {
+		//do we need this? setCustomRatio never used, so what we restoring?
 		if (map != null && map.hasCustomMapRatio()) {
 			map.restoreMapRatio();
 		}
@@ -1245,7 +1246,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	@Override
 	public void onPause() {
-		restoreCustomMapRatio();
+		//restoreCustomMapRatio();
 
 		if (view != null) {
 			ViewParent parent = view.getParent();
