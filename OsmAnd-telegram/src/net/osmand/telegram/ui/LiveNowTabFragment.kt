@@ -11,10 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
@@ -22,6 +19,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.TelegramSettings
+import net.osmand.telegram.helpers.SavingTracksDbHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -33,6 +31,7 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1

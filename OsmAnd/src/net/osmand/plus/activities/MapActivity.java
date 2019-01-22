@@ -589,7 +589,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (dashboardOnMap.onBackPressed()) {
 			return;
 		}
-		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+		if (drawerLayout.isDrawerOpen(Gravity.START)) {
 			closeDrawer();
 			return;
 		}
@@ -1595,7 +1595,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
 		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
-		drawerLayout.openDrawer(Gravity.LEFT, animate);
+		drawerLayout.openDrawer(Gravity.START, animate);
 	}
 
 	public void disableDrawer() {
@@ -1619,7 +1619,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+				if (drawerLayout.isDrawerOpen(Gravity.START)) {
 					int width = AndroidUtils.dpToPx(this, 280);
 					if (event.getRawX() > width) {
 						closeDrawer();
@@ -1633,11 +1633,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void closeDrawer() {
 		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
-		drawerLayout.closeDrawer(Gravity.LEFT, animate);
+		drawerLayout.closeDrawer(Gravity.START, animate);
 	}
 
 	public void toggleDrawer() {
-		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+		if (drawerLayout.isDrawerOpen(Gravity.START)) {
 			closeDrawer();
 		} else {
 			openDrawer();

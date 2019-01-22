@@ -38,6 +38,7 @@
 
     <dimen name="subHeaderPadding">2dp</dimen>
     <dimen name="subHeaderMarginLeft">15dp</dimen>
+		<dimen name = "subHeaderMarginRight">15dp</dimen>
     <dimen name="showAllButtonMarginRight">14dp</dimen>
     <dimen name="showAllButtonHeight">36dp</dimen>
     <dimen name="dashFavIconSize">28dp</dimen>

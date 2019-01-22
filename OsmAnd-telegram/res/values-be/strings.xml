@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="last_update_from_telegram">Апошняе абнаўленне з Telegram</string>
 	<string name="enter_another_device_name">Абярыце імя, якое вы яшчэ не выкарыстоўвалі</string>
 	<string name="device_added_successfully">%1$s дададзена.</string>
@@ -10,7 +10,7 @@
 	<string name="device_name">Назва прылады</string>
 	<string name="shared_string_hide">Схаваць</string>
 	<string name="share_location_as_description_second_line">Вы можаце стварыць і праглядзець ідэнтыфікатар прылады ў кліенце Тэлеграма, выкарыстоўваючы %1$s бота. %2$s</string>
-	<string name="share_location_as_description">Калі вы хочаце падлучыць некалькі прылад да аднаго рахунка тэлеграм, то вам неабходна выкарыстаць розныя прылады, каб падзяліцца месцазнаходжаннем.</string>
+	<string name="share_location_as_description">Калі вы хочаце падлучыць некалькі прылад да аднаго акаўнта тэлеграм, то вам неабходна выкарыстаць розныя прылады, каб падзяліцца месцазнаходжаннем.</string>
 	<string name="last_updated_location">Апошняе абнаўленне месцазнаходжання:</string>
 	<string name="successfully_sent_and_updated">Паспяхова адпраўлена і абноўлена</string>
 	<string name="not_possible_to_send_to_telegram_chats">Немагчыма адправіць у размову Тэлеграм:</string>
@@ -61,7 +61,7 @@
 	<string name="disconnect_from_telegram_desc">Для таго, каб скасаваць абмен месцазнаходжаннем, адкрыйце Тэлеграм, перайдзіце ў Налады → Прыватнасць і бяспека → Сеансы і спыніце сеанс OsmAnd Telegram.</string>
 	<string name="disconnect_from_telegram">Як выключыць абмен месцазнаходжаннем у OsmAnd праз Тэлеграм</string>
 	<string name="logout_help_desc">Як выключыць абмен месцазнаходжаннем у OsmAnd праз Тэлеграм</string>
-	<string name="connected_account">Падлучаны рахунак</string>
+	<string name="connected_account">Падлучаны акаўнт</string>
 	<string name="shared_string_account">Рахунак</string>
 	<string name="in_time">у %1$s</string>
 	<string name="osmand_connect_desc">Абраць версію OsmAnd, якую OsmAnd Telegram будзе выкарыстоўваць для адлюстравання пазіцыі.</string>
@@ -81,13 +81,13 @@
 	<string name="shared_string_live">Дзейных</string>
 	<string name="shared_string_bot">Бот</string>
 	<string name="get_telegram_title">Рэгістрацыя ў Telegram</string>
-	<string name="get_telegram_account_first">Для абмену вам неабходны рахунак Тэлеграм.</string>
-	<string name="get_telegram_description_continue">Калі ласка, ўсталюйце Тэлеграм і наладзьце рахунак.</string>
+	<string name="get_telegram_account_first">Для абмену вам неабходны акаўнт Тэлеграм.</string>
+	<string name="get_telegram_description_continue">Калі ласка, ўсталюйце Тэлеграм і наладзьце акаўнт.</string>
 	<string name="get_telegram_after_creating_account">Пасля гэтага вы зможаце выкарыстоўваць дадатак.</string>
 	<string name="shared_string_all">Усе</string>
 	<string name="shared_string_off">Выкл</string>
-	<string name="already_registered_in_telegram">Вам неабходна мець рахунак Тэлеграм і нумар тэлефона</string>
-	<string name="do_not_have_telegram">У мяне няма рахунка Тэлеграм</string>
+	<string name="already_registered_in_telegram">Вам неабходна мець акаўнт Тэлеграм і нумар тэлефона</string>
+	<string name="do_not_have_telegram">У мяне няма акаўнта Тэлеграм</string>
 	<string name="enter_phone_number">Увядзіце нумар тэлефона</string>
 	<string name="enter_authentication_code">Увядзіце код аўтарызацыі</string>
 	<string name="set_visible_time_for_all">Вызначце бачны час для ўсіх</string>
@@ -110,7 +110,7 @@
 	<string name="shared_string_password">Пароль</string>
 	<string name="enter_code">Увядзіце код</string>
 	<string name="authentication_code">Код аўтэнтыфікацыі</string>
-	<string name="authentication_code_descr">Тэлеграм адправіў вам код для OsmAnd для ўваходу ў рахунак.</string>
+	<string name="authentication_code_descr">Тэлеграм адправіў вам код для OsmAnd для ўваходу ў акаўнт.</string>
 	<string name="enter_password">Увядзіце пароль</string>
 	<string name="password_descr">Пароль Тэлеграм</string>
 	<string name="shared_string_login">Увайсці</string>
@@ -167,7 +167,7 @@
 	<string name="shared_string_hour_short">г</string>
 	<string name="shared_string_minute_short">хвіл</string>
 	<string name="shared_string_second_short">сек</string>
-	<string name="welcome_descr"><b>Абмен месцазнаходжаннем OsmAnd</b> Дае магчымасць дзяліцца сваім месцазнаходжаннем і бачыць месцазнаходжанне іншых у OsmAnd.<br/><br/> Дадатак выкарыстоўвае Telegram API, таму вам неабходны рахунак Тэлеграм.</string>
+	<string name="welcome_descr"><b>Абмен месцазнаходжаннем OsmAnd</b> Дае магчымасць дзяліцца сваім месцазнаходжаннем і бачыць месцазнаходжанне іншых у OsmAnd.<br/><br/> Дадатак выкарыстоўвае Telegram API, таму вам неабходны акаўнт Тэлеграм.</string>
 	<string name="my_location">Маё месцазнаходжанне</string>
 	<string name="live_now">Зараз дзейнічае</string>
 

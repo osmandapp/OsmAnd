@@ -3007,4 +3007,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="powered_by_osmand">Keyrt með OsmAnd</string>
     <string name="osm_live_subscriptions">Áskriftir</string>
     <string name="mapillary_menu_title_pano">Einungis birta 360° myndir</string>
-    </resources>
+    <string name="shared_string_launch">Keyra</string>
+    <string name="run_full_osmand_msg">Þú ert að nota kortið {0} sem er keyrt með OsmAnd. Myndirðu vilja keyra fulla útgáfu af OsmAnd\?</string>
+    <string name="run_full_osmand_header">Ræsa OsmAnd\?</string>
+</resources>

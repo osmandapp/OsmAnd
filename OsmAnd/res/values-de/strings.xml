@@ -3090,7 +3090,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse?
 \nGeben Sie uns eine Rückmeldung</string>
-    <string name="commiting_way">Übermitteln via…</string>
+    <string name="commiting_way">Übermitteln Linie…</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen.</string>
 <string name="release_3_2_pre">• Absturz beim Start behoben, der bei manchen Geräten auftrat
 \n

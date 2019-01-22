@@ -3046,4 +3046,8 @@ Lon %2$s</string>
     <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
     <string name="osm_live_subscriptions">Suscripciones</string>
     <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
-    </resources>
+    <string name="shared_string_launch">Ejecutar</string>
+    <string name="run_full_osmand_msg">Estás utilizando el mapa {0} que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
+    <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraní</string>
+</resources>

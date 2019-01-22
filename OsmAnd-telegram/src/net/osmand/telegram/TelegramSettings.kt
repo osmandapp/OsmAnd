@@ -79,6 +79,8 @@ private const val SHARE_CHATS_INFO_KEY = "share_chats_info"
 
 private const val BATTERY_OPTIMISATION_ASKED = "battery_optimisation_asked"
 
+private const val MONITORING_ENABLED = "monitoring_enabled"
+
 private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
 
 private const val GPS_UPDATE_EXPIRED_TIME = 60 * 3L // 3 minutes
@@ -105,11 +107,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var appToConnectPackage = ""
 		private set
 
-	var liveNowSortType = LiveNowSortType.SORT_BY_GROUP
+	var liveNowSortType = LiveNowSortType.SORT_BY_DISTANCE
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
 
 	var batteryOptimisationAsked = false
+
+	var monitoringEnabled = false
 
 	init {
 		updatePrefs()
@@ -435,6 +439,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putBoolean(BATTERY_OPTIMISATION_ASKED, batteryOptimisationAsked)
 
+		edit.putBoolean(MONITORING_ENABLED, monitoringEnabled)
+
 		val jArray = convertShareChatsInfoToJson()
 		if (jArray != null) {
 			edit.putString(SHARE_CHATS_INFO_KEY, jArray.toString())
@@ -487,10 +493,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
 
 		liveNowSortType = LiveNowSortType.valueOf(
-			prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_GROUP.name)
+			prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_DISTANCE.name)
 		)
 
 		batteryOptimisationAsked = prefs.getBoolean(BATTERY_OPTIMISATION_ASKED,false)
+
+		monitoringEnabled = prefs.getBoolean(MONITORING_ENABLED,false)
 	}
 
 	private fun convertShareDevicesToJson():JSONObject?{

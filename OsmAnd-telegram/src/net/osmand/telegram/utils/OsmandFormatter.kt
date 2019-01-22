@@ -23,6 +23,7 @@ object OsmandFormatter {
 	private const val SHORT_TIME_FORMAT = "%02d:%02d"
 	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm"
 	private const val SIMPLE_DATE_FORMAT = "dd MMM HH:mm:ss"
+	private const val SHORT_DATE_FORMAT = "dd MMM yyyy"
 
 	private const val MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60
 
@@ -77,8 +78,13 @@ object OsmandFormatter {
 		}
 	}
 
-	fun getFormattedDate(seconds: Long): String =
-		SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(seconds * 1000L)
+	fun getFormattedDate(seconds: Long, shortFormat: Boolean = false): String {
+		return if (shortFormat) {
+			SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(seconds * 1000L)
+		} else {
+			SimpleDateFormat(SHORT_DATE_FORMAT, Locale.getDefault()).format(seconds * 1000L)
+		}
+	}
 
 	fun getListItemLiveTimeDescr(ctx: TelegramApplication, lastUpdated: Int, prefix: String = ""): String {
 		return if (lastUpdated > 0) {

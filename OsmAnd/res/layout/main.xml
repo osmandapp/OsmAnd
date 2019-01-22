@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/mapBackground">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/drawer_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?attr/mapBackground"
+  android:layout_gravity="start">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -103,10 +105,10 @@
             android:id="@+id/menuItems"
             android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:layout_gravity="left"
             android:background="?attr/bg_color"
             android:clipToPadding="false"
-            android:drawSelectorOnTop="true" />
+            android:drawSelectorOnTop="true"
+            android:layout_gravity="start"/>
 
         <RelativeLayout
             android:id="@+id/drawer_footer_layout"
@@ -114,6 +116,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:layout_alignParentBottom="true"
+            android:layout_gravity="start"
             android:visibility="gone">
 
             <include layout="@layout/powered_by_osmand_item"/>

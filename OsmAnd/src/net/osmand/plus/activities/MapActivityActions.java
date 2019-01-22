@@ -51,6 +51,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
+import net.osmand.plus.activities.actions.OsmandRestoreOrExitDialog;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
@@ -79,8 +80,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.POINT_ADD_GPX_WAYPOINT;
-import static net.osmand.plus.OsmAndCustomizationConstants.POINT_DIRECTIONS_FROM_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -96,10 +97,11 @@ import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.POINT_EDIT_GPX_WP;
-import static net.osmand.plus.OsmAndCustomizationConstants.POINT_MEASURE_DISTANCE;
-import static net.osmand.plus.OsmAndCustomizationConstants.POINT_SEARCH_NEARBY;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
+
 
 public class MapActivityActions implements DialogProvider {
 	private static final Log LOG = PlatformUtil.getLog(MapActivityActions.class);
@@ -142,7 +144,8 @@ public class MapActivityActions implements DialogProvider {
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		drawerLogoHeader = new ImageView(mapActivity);
-		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f), AndroidUtils.dpToPx(mapActivity, 16f), 0,0);
+		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f), AndroidUtils.dpToPx(mapActivity, 16f), 0,
+						0);
 		drawerOsmAndFooter = mapActivity.getLayoutInflater().inflate(R.layout.powered_by_osmand_item, null);
 	}
 
@@ -324,20 +327,20 @@ public class MapActivityActions implements DialogProvider {
 
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_directions_from, mapActivity)
-				.setId(POINT_DIRECTIONS_FROM_ID)
+				.setId(MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID)
 				.setIcon(R.drawable.ic_action_route_direction_from_here)
 				.setOrder(DIRECTIONS_FROM_ITEM_ORDER)
 				.createItem());
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.context_menu_item_search, mapActivity)
-				.setId(POINT_SEARCH_NEARBY)
+				.setId(MAP_CONTEXT_MENU_SEARCH_NEARBY)
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setOrder(SEARCH_NEAR_ITEM_ORDER)
 				.createItem());
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
-		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+		ItemClickListener listener = new ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked, int[] viewCoordinates) {
 				if (resId == R.string.context_menu_item_add_waypoint) {
@@ -351,17 +354,17 @@ public class MapActivityActions implements DialogProvider {
 
 		if (selectedObj instanceof WptPt
 				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
+			adapter.addItem(new ItemBuilder()
 					.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
-					.setId(POINT_EDIT_GPX_WP)
+					.setId(MAP_CONTEXT_MENU_EDIT_GPX_WP)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setOrder(EDIT_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
 		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
 				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
+			adapter.addItem(new ItemBuilder()
 					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
-					.setTitle(POINT_ADD_GPX_WAYPOINT)
+					.setId(MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT)
 					.setIcon(R.drawable.ic_action_gnew_label_dark)
 					.setOrder(ADD_GPX_WAYPOINT_ITEM_ORDER)
 					.setListener(listener).createItem());
@@ -369,7 +372,7 @@ public class MapActivityActions implements DialogProvider {
 
 		adapter.addItem(itemBuilder
 				.setTitleId(R.string.measurement_tool, mapActivity)
-				.setId(POINT_MEASURE_DISTANCE)
+				.setId(MAP_CONTEXT_MENU_MEASURE_DISTANCE)
 				.setIcon(R.drawable.ic_action_ruler)
 				.setOrder(MEASURE_DISTANCE_ITEM_ORDER)
 				.createItem());
@@ -685,7 +688,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.home, mapActivity)
 				.setId(DRAWER_DASHBOARD_ID)
 				.setIcon(R.drawable.map_dashboard)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_dashboard_open");
@@ -699,7 +702,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_markers, mapActivity)
 				.setId(DRAWER_MAP_MARKERS_ID)
 				.setIcon(R.drawable.ic_action_flag_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_markers_open");
@@ -712,7 +715,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_my_places, mapActivity)
 				.setId(DRAWER_MY_PLACES_ID)
 				.setIcon(R.drawable.ic_action_fav_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_myplaces_open");
@@ -727,7 +730,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.search_button, mapActivity)
 				.setId(DRAWER_SEARCH_ID)
 				.setIcon(R.drawable.ic_action_search_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_search_open");
@@ -740,7 +743,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_directions_open");
@@ -765,10 +768,10 @@ public class MapActivityActions implements DialogProvider {
 				}).createItem());
 		*/
 
-		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
 				.setId(DRAWER_CONFIGURE_MAP_ID)
 				.setIcon(R.drawable.ic_action_layers_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_config_map_open");
@@ -788,7 +791,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.welmode_download_maps, null)
 				.setId(DRAWER_DOWNLOAD_MAPS_ID)
 				.setTitle(d).setIcon(R.drawable.ic_type_archive)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_download_maps_open");
@@ -804,7 +807,7 @@ public class MapActivityActions implements DialogProvider {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.osm_live, mapActivity)
 					.setId(DRAWER_OSMAND_LIVE_ID)
 					.setIcon(R.drawable.ic_action_osm_live)
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
+					.setListener(new ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 							app.logEvent(mapActivity, "drawer_osm_live_open");
@@ -836,10 +839,10 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
 				.setId(DRAWER_MEASURE_DISTANCE_ID)
 				.setIcon(R.drawable.ic_action_ruler)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager());
@@ -852,7 +855,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.layer_map_appearance, mapActivity)
 				.setId(DRAWER_CONFIGURE_SCREEN_ID)
 				.setIcon(R.drawable.ic_configure_screen_dark)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_config_screen_open");
@@ -880,7 +883,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_settings, mapActivity)
 				.setId(DRAWER_SETTINGS_ID)
 				.setIcon(R.drawable.ic_action_settings)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_settings_open");
@@ -908,7 +911,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_help, mapActivity)
 				.setId(DRAWER_HELP_ID)
 				.setIcon(R.drawable.ic_action_help)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent(mapActivity, "drawer_help_open");
@@ -1057,7 +1060,7 @@ public class MapActivityActions implements DialogProvider {
 					} else {
 						position -= menuItemsListView.getHeaderViewsCount();
 						ContextMenuItem item = contextMenuAdapter.getItem(position);
-						ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
+						ItemClickListener click = item.getItemClickListener();
 						if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
 								position, false, AndroidUtils.getCenterViewCoordinates(view))) {
 							mapActivity.closeDrawer();
@@ -1089,8 +1092,13 @@ public class MapActivityActions implements DialogProvider {
 						footerLayout.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								if(navDrawerLogoParams!=null) showReturnConfirmationDialog(navDrawerLogoParams.get(0));
-								else restoreOsmand();
+								if (navDrawerLogoParams != null) {
+									mapActivity.closeDrawer();
+								}
+								new OsmandRestoreOrExitDialog()
+										.show(mapActivity.getSupportFragmentManager(), "dialog");
+								//showReturnConfirmationDialog(navDrawerLogoParams.get(0));
+
 							}
 						});
 					} else {

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="background_work_description">Endre batterioptimiseringsinnstillinger for mer stabil posisjonsdeling.</string>
 	<string name="background_work">Bakgrunnsarbeid</string>
 	<string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd Telegram slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
@@ -179,4 +179,14 @@
 	<string name="shared_string_map">Kart</string>
 	<string name="shared_string_text">Tekst</string>
 	<string name="map_and_text">Kart og tekst</string>
-	</resources>
+    <string name="monitoring_is_enabled">Oppsyn er påskrudd</string>
+    <string name="monitoring_is_disabled">Oppsyn er avskrudd</string>
+    <string name="time_on_the_move">tid i bevegelse</string>
+    <string name="average_altitude">Gjennomsnittlig høyde</string>
+    <string name="average_speed">Gjennomsnittsfart</string>
+    <string name="open_in_osmand">Åpne i OsmAnd</string>
+    <string name="end_date">Sluttdato</string>
+    <string name="start_date">Startdato</string>
+    <string name="timeline_description">Skru på oppsyn for å samle bevegelsesdata i bakgrunnen.</string>
+    <string name="timeline">Tidslinje</string>
+</resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
@@ -3018,17 +3018,17 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla funktioner: Dagliga kartuppdateringar med obegränsat antal hämtningar, alla betal-och gratistillägg, Wikipedia, Wikivoyage och mycket mer.</string>
     <string name="unirs_render_descr">Ändring av standardstilen för att öka kontrasten av gång och cykelvägar. Använder färger från tidigare versioner av Mapink.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
-    <string name="release_3_0">"• Nyhet: Stöd för globala frånkopplade  reseguider. Refererade platser är länkade till kartan. Datan kommer initialt från Wikivoyage. 
-\n 
-\n • Wikipedia: Nytt utseende, aktiva länkar, stöd för bilder 
-\n 
-\n • Open Track UI: Stöd för waypoint-grupper 
-\n 
+    <string name="release_3_0">• Nyhet: Stöd för globala frånkopplade reseguider. Refererade platser är länkade till kartan. Datan kommer initialt från Wikivoyage.
+\n
+\n • Wikipedia: Nytt utseende, aktiva länkar, stöd för bilder
+\n
+\n • Open Track UI: Stöd för waypoint-grupper
+\n
 \n • Kartmarkörer: Importering av valda grupper från GPX-filer, koordinatinmatning, nytt utseende 
-\n 
+\n
 \n • OsmAnd Live-prenumeration stödjer nu alla OsmAnd funktioner
-\n 
-\n"</string>
+\n
+\n</string>
     <string name="quick_action_page_list_descr">Att trycka på denna åtgärdsknapp bläddrar genom listan nedan.</string>
     <string name="poi_cannot_be_found">Nod eller väg kan inte hittas.</string>
     <string name="search_no_results_feedback">Inga sökresultat?
@@ -3061,4 +3061,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="osm_live_payment_contribute_descr">En del av intäkterna går till OpenStreetMap bidragsgivare.</string>
     <string name="markers_remove_dialog_msg">Ta bort kartmarkör \'%s\'\?</string>
     <string name="edit_map_marker">Redigera kartmarkör</string>
-    </resources>
+    <string name="osm_live_subscriptions">Abonnemang</string>
+    <string name="keep_passed_markers_descr">Markörer tillagda som en grupp av favoriter eller GPX waypoints märkta som \'passerad\' kommer att finnas kvar på kartan. Om gruppen inte är aktiv, kommer markörerna att försvinna från kartan.</string>
+</resources>

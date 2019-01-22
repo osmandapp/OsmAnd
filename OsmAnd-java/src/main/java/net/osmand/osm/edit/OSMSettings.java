@@ -13,6 +13,7 @@ public class OSMSettings {
 		BOUNDARY("boundary"), //$NON-NLS-1$
 		POSTAL_CODE("postal_code"), //$NON-NLS-1$
 		RAILWAY("railway"), //$NON-NLS-1$
+		STATION("subway"), //$NON-NLS-1$
 		ONEWAY("oneway"), //$NON-NLS-1$
 		LAYER("layer"), //$NON-NLS-1$
 		BRIDGE("bridge"), //$NON-NLS-1$

@@ -435,7 +435,6 @@ public class TileSourceManager {
 	public static java.util.List<TileSourceTemplate> getKnownSourceTemplates() {
 		java.util.List<TileSourceTemplate> list = new ArrayList<TileSourceTemplate>();
 		list.add(getMapnikSource());
-		list.add(getCycleMapSource());
 		list.add(getMapillaryRasterSource());
 		list.add(getMapillaryVectorSource());
 		return list;
@@ -445,9 +444,6 @@ public class TileSourceManager {
 		return MAPNIK_SOURCE;
 	}
 
-	public static TileSourceTemplate getCycleMapSource(){
-		return CYCLE_MAP_SOURCE;
-	}
 
 	public static TileSourceTemplate getMapillaryRasterSource() {
 		return MAPILLARY_RASTER_SOURCE;

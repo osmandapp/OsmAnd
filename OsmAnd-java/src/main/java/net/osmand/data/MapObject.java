@@ -77,6 +77,15 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 	}
 
+	public void setNames(Map<String, String> name) {
+		if (name != null) {
+			if (names == null) {
+				names = new HashMap<String, String>();
+			}
+			names.putAll(name);
+		}
+	}
+
 	public Map<String, String> getNamesMap(boolean includeEn) {
 		if (!includeEn || Algorithms.isEmpty(enName)) {
 			if (names == null) {

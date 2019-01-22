@@ -3238,4 +3238,8 @@
     <string name="osm_live_subscriptions">اشتراک‌ها</string>
     <string name="powered_by_osmand">گروه OsmAnd</string>
     <string name="mapillary_menu_title_pano">فقط نمایش عکس‌های ۳۶۰ درجه</string>
-    </resources>
+    <string name="shared_string_launch">راه‌اندازی</string>
+    <string name="lang_gn_py">گوارانی</string>
+    <string name="run_full_osmand_msg">شما هم‌اکنون نقشهٔ {0} را بر بستر نرم‌افزار OsmAnd استفاده می‌کنید. دوست دارید نسخهٔ کامل OsmAnd را راه‌اندازی کنید؟</string>
+    <string name="run_full_osmand_header">‏OsmAnd ‌راه‌اندازی شود؟</string>
+</resources>

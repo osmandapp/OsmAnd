@@ -177,4 +177,14 @@
     <string name="shared_string_map">Mapa</string>
     <string name="shared_string_text">Texto</string>
     <string name="map_and_text">Mapa y texto</string>
+    <string name="monitoring_is_enabled">Monitorización activada</string>
+    <string name="monitoring_is_disabled">Monitorización desactivada</string>
+    <string name="time_on_the_move">tiempo en movimiento</string>
+    <string name="average_altitude">Altitud media</string>
+    <string name="average_speed">Velocidad media</string>
+    <string name="open_in_osmand">Abrir en OsmAnd</string>
+    <string name="end_date">Fecha de finalización</string>
+    <string name="start_date">Fecha de inicio</string>
+    <string name="timeline_description">Activar la monitorización para recopilar datos de movimiento en segundo plano.</string>
+    <string name="timeline">Línea de tiempo</string>
 </resources>
