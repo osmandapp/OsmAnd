@@ -334,7 +334,28 @@ public class RouteLayer extends OsmandMapLayer {
             survivor.set(end, (byte) 1);
         }
     }
-	
+
+    private static class PathArrow {
+		float x;
+		float y;
+		double angle;
+		int styleType;
+		boolean shield;
+
+		PathArrow(float x, float y, double angle, int styleType, boolean shield) {
+			this.x = x;
+			this.y = y;
+			this.angle = angle;
+			this.styleType = styleType;
+			this.shield = shield;
+		}
+	}
+
+	private static class PathAnchor extends PathArrow {
+		PathAnchor(float x, float y) {
+			super(x, y, 0, 0, true);
+		}
+	}
 
 	private void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, TIntArrayList tx, TIntArrayList ty,
 			List<Double> angles, List<Double> distances, Bitmap arrow, double distPixToFinish, List<GeometryWayStyle> styles) {
@@ -352,59 +373,50 @@ public class RouteLayer extends OsmandMapLayer {
 		float walkRectShift = arrowH2 / 5f;
 		double pxStep = arrow.getHeight() * 4f;
 		double dist = 0;
-		if(distPixToFinish != 0) {
+		if (distPixToFinish != 0) {
 			dist = distPixToFinish - pxStep * ((int) (distPixToFinish / pxStep)); // dist < 1
 		}
 
-		List<Float> rx = new ArrayList<>();
-		List<Float> ry = new ArrayList<>();
-		List<Double> ra = new ArrayList<>();
-		List<Integer> rs = new ArrayList<>();
-		List<Boolean> rh = new ArrayList<>();
-		List<Float> rpx = new ArrayList<>();
-		List<Float> rpy = new ArrayList<>();
+		List<PathArrow> arrows = new ArrayList<>();
+		List<PathAnchor> anchors = new ArrayList<>();
+		RectF lastArrowRect = null;
+		RectF lastAnchorRect = null;
 		boolean showShield = false;
 		int prevStyleType = -1;
 		for (int i = tx.size() - 2; i >= 0; i --) {
 			GeometryWayStyle style = hasStyles ? styles.get(i) : null;
-			double px = tx.get(i) / 100d;
-			double py = ty.get(i) / 100d;
-			double x = tx.get(i + 1) / 100d;
-			double y = ty.get(i + 1) / 100d;
+			float px = tx.get(i) / 100f;
+			float py = ty.get(i) / 100f;
+			float x = tx.get(i + 1) / 100f;
+			float y = ty.get(i + 1) / 100f;
 			double distSegment = distances.get(i + 1);
 			double angle = angles.get(i + 1);
-//			double angleRad = Math.atan2(y - py, x - px);
-//			angle = (angleRad * 180 / Math.PI) + 90f;
-//			distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-			if(distSegment == 0) {
+			if (distSegment == 0) {
 				continue;
 			}
 			int styleType = style != null ? style.getType() : -1;
 			if (style != null && prevStyleType != styleType && (prevStyleType != -1 || styleType != GeometryWayStyle.WAY_TYPE_WALK_LINE)) {
 				prevStyleType = styleType;
-				rpx.add((float) x);
-				rpy.add((float) y);
+				anchors.add(new PathAnchor(x, y));
+				lastAnchorRect = new RectF(x - routeShieldRadius, y - routeShieldRadius, x + routeShieldRadius, y + routeShieldRadius);
+				if (lastArrowRect != null && lastArrowRect.intersect(lastAnchorRect)) {
+					arrows.remove(arrows.size() - 1);
+				}
 			}
-			if(dist >= pxStep) {
+			if (dist >= pxStep) {
 				dist = 0; // unnecessary but double check to avoid errors
 			}
 			double percent = 1 - (pxStep - dist) / distSegment;
 			dist += distSegment;
-			while(dist >= pxStep) {
+			while (dist >= pxStep) {
 				double pdx = (x - px) * percent;
 				double pdy = (y - py) * percent;
-				if (isIn((int)(px + pdx), (int) (py + pdy), left, top, right, bottom)) {
-					float icony = (float) (py + pdy);
-					float iconx = (float) (px + pdx - arrowW2);
-					rx.add(iconx);
-					ry.add(icony);
-					ra.add(angle);
-					rh.add(showShield);
-					if (style != null) {
-						rs.add(style.getType());
-					} else {
-						rs.add(-1);
-					}
+				float iconx = (float) (px + pdx - arrowW2);
+				float icony = (float) (py + pdy);
+				RectF arrowRect = new RectF(iconx + arrowW2 - routeShieldRadius, icony + arrowH2 - routeShieldRadius, iconx + arrowW2 + routeShieldRadius, icony + arrowH2 + routeShieldRadius);
+				if (isIn((int)(iconx + arrowW2), (int) (icony), left, top, right, bottom) && (lastAnchorRect == null || !lastAnchorRect.intersect(arrowRect))) {
+					arrows.add(new PathArrow(iconx, icony, angle, style != null ? style.getType() : -1, showShield));
+					lastArrowRect = arrowRect;
 				}
 				showShield = !showShield;
 				dist -= pxStep;
@@ -412,10 +424,10 @@ public class RouteLayer extends OsmandMapLayer {
 			}
 		}
 
-		for (int i = rpx.size() - 1; i >= 0; i--) {
-			float x = rpx.get(i);
-			float y = rpy.get(i);
-
+		for (int i = anchors.size() - 1; i >= 0; i--) {
+			PathAnchor anchor = anchors.get(i);
+			float x = anchor.x;
+			float y = anchor.y;
 			paintIconWalkCircle.setColor(Color.WHITE);
 			paintIconWalkCircle.setStyle(Paint.Style.FILL);
 			canvas.drawCircle(x, y, routeShieldRadius, paintIconWalkCircle);
@@ -423,18 +435,14 @@ public class RouteLayer extends OsmandMapLayer {
 			paintIconWalkCircle.setStyle(Paint.Style.STROKE);
 			canvas.drawCircle(x, y, routeShieldRadius, paintIconWalkCircle);
 		}
-		for (int i = rx.size() - 1; i >= 0; i--) {
-			float iconx = rx.get(i);
-			float icony = ry.get(i);
-			double angle = ra.get(i);
-			int style = rs.get(i);
-
+		for (int i = arrows.size() - 1; i >= 0; i--) {
+			PathArrow a = arrows.get(i);
 			canvas.save();
-			canvas.translate(iconx, icony);
+			canvas.translate(a.x, a.y);
 			//canvas.translate(0, -arrow.getHeight() / 2);
-			canvas.rotate((float) angle, arrowW2, 0);
-			if (style != -1) {
-				switch (style) {
+			canvas.rotate((float) a.angle, arrowW2, 0);
+			if (a.styleType != -1) {
+				switch (a.styleType) {
 					case GeometryWayStyle.WAY_TYPE_WALK_LINE: {
 						RectF rect = new RectF(arrowW2 - walkCircleW2, arrowH2 - walkCircleH2 + walkRectShift, arrowW2 + walkCircleW2, arrowH2 + walkCircleH2 + walkRectShift);
 						paintIconWalkCircle.setColor(view.getResources().getColor(R.color.nav_track_walk_fill));
@@ -447,7 +455,7 @@ public class RouteLayer extends OsmandMapLayer {
 						break;
 					}
 					case GeometryWayStyle.WAY_TYPE_TRANSPORT_LINE: {
-						if (rh.get(i)) {
+						if (a.shield) {
 							RectF rect = new RectF(arrowW2 - routeShieldRadius, arrowH2 - routeShieldRadius, arrowW2 + routeShieldRadius, arrowH2 + routeShieldRadius);
 							paintIconWalkCircle.setColor(Color.WHITE);
 							paintIconWalkCircle.setStyle(Paint.Style.FILL);
