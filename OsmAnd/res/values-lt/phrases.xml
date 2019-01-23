@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Parduotuvė</string>
 		<string name="poi_shop_food">Maisto parduotuvė ir supermarketas</string>
 	<string name="poi_emergency">Pagalbos tarnybos</string>
@@ -189,7 +189,7 @@
 	<string name="poi_medical_supply">Medicinos priemonės</string>
 	<string name="poi_massage_type">Masažo tipas</string>
 	<string name="poi_washing_machine">Skalbyklė</string>
-	<string name="poi_dish">Valgis</string>
+	<string name="poi_dish">Valgiai</string>
 	<string name="poi_social_facility_type">Tipas</string>
 	<string name="poi_social_facility_for">Tikslinė grupė</string>
 	<string name="poi_vacuum_cleaner_filter">Dulkių siurblys</string>
@@ -234,7 +234,7 @@
 	<string name="poi_railway_station">Geležinkelio stotis</string>
 	<string name="poi_railway_platform">Geležinkelio platforma</string>
 	<string name="poi_subway_entrance">Įėjimas į metro</string>
-	<string name="poi_subway_station">Metro stotis</string>
+	<string name="poi_subway_station">Taip</string>
 	<string name="poi_aerodrome">Oro uostas</string>
 	<string name="poi_runway">Pakilimo juosta</string>
 	<string name="poi_aeroway_terminal">Oro uosto terminalas</string>
@@ -346,7 +346,7 @@
 	<string name="poi_customs">Muitinė</string>
 	<string name="poi_country">Šalis</string>
 	<string name="poi_city">Miestas</string>
-	<string name="poi_capital">Sostinė</string>
+	<string name="poi_capital">Taip</string>
 	<string name="poi_town">Miestelis</string>
 	<string name="poi_village">Kaimas</string>
 	<string name="poi_isolated_dwelling">Vienkiemis</string>
