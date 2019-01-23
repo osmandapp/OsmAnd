@@ -2886,6 +2886,10 @@
     <string name="quick_action_add_poi_descr">Tapping this action button adds a POI in the middle of the screen.</string>
     <string name="quick_action_navigation_voice_descr">Tapping this action button disables or enables voice guidance during navigation.</string>
     <string name="quick_action_add_parking_descr">Tapping this action button adds a parking location in the middle of the screen.</string>
+    <string name="quick_action_switch_day_night_descr">Tapping this action button switch between Day and Night modes for OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Day Mode</string>
+    <string name="quick_action_switch_night_mode">Night Mode</string>
+    <string name="quick_action_day_night_switch_mode">Switch Day/Night mode</string>
     <string name="quick_action_interim_dialog">Show an interim dialog</string>
     <string name="favorite_autofill_toast_text">" is saved to "</string>
     <string name="favorite_empty_place_name">Place</string>
