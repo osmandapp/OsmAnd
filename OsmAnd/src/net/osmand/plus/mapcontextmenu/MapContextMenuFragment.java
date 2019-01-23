@@ -899,7 +899,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void restoreCustomMapRatio() {
-		//do we need this? setCustomRatio never used, so what we restoring?
 		if (map != null && map.hasCustomMapRatio()) {
 			map.restoreMapRatio();
 		}
