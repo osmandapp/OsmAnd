@@ -21,15 +21,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -42,7 +41,9 @@ import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
+import org.apache.commons.logging.Log;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -59,13 +60,16 @@ import java.util.Map;
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private static final String WIKI_LINK = ".wikipedia.org/w";
-
+	public final static Log log = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	private OsmandSettings.MetricsConstants metricSystem;
 	private final Amenity amenity;
+
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
 		setShowNearestWiki(true, amenity.getId());
+		metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
 	@Override
@@ -521,6 +525,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			}
 
+			String[] formattedPrefixAndText = getFormattedPrefixAndText(key, textPrefix, vl);
+			textPrefix = formattedPrefixAndText[0];
+			vl = formattedPrefixAndText[1];
+
 			boolean matchWidthDivider = !isDescription && isWiki;
 			AmenityInfoRow row;
 			if (isDescription) {
@@ -672,6 +680,58 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		} catch (NumberFormatException e) {
 			return value;
 		}
+	}
+
+	private String[] getFormattedPrefixAndText(String key, String prefix, String value) {
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.CEILING);
+		String units = "";
+		switch (key){
+			case "width":
+			case "height":
+			case "depth":
+				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
+					units = mapActivity.getResources().getString(R.string.foot);
+					value = String.valueOf(df.format(Double.valueOf(value)*OsmAndFormatter.FEET_IN_ONE_METER));
+				} else if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
+					units = mapActivity.getResources().getString(R.string.yard);
+					value = String.valueOf(df.format(Double.valueOf(value)*OsmAndFormatter.YARDS_IN_ONE_METER));
+				} else {
+					units = mapActivity.getResources().getString(R.string.m);
+				}
+				break;
+			case "distance":
+				value = String.valueOf(OsmAndFormatter
+						.calculateRoundedDist(Double.valueOf(value)*1000, mapActivity.getMyApplication()));
+				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET ||
+						metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS ||
+						metricSystem == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
+					units = mapActivity.getResources().getString(R.string.mile);
+				} else if (metricSystem == OsmandSettings.MetricsConstants.NAUTICAL_MILES) {
+					units = mapActivity.getResources().getString(R.string.nm);
+				} else {
+					units = mapActivity.getResources().getString(R.string.km);
+				}
+				break;
+			case "capacity":
+				units = mapActivity.getResources().getString(R.string.cubic_m);
+				break;
+			case "maxweight":
+				units = mapActivity.getResources().getString(R.string.cubic_m);
+				break;
+			case "students":
+			case "spots":
+			case "seats":
+				units = "capacity";
+		}
+
+		if (!prefix.isEmpty()) {
+			prefix = prefix + ", " + units;
+		} else {
+			prefix = units;
+		}
+
+		return new String[]{prefix, value};
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
