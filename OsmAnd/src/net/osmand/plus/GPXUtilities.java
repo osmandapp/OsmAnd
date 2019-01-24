@@ -99,10 +99,6 @@ public class GPXUtilities {
 			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
 		}
 
-		public void setColor(String colorName) {
-			getExtensionsToWrite().put("color", Algorithms.colorNameToString(colorName));
-		}
-
 		public void removeColor() {
 			getExtensionsToWrite().remove("color");
 		}
@@ -1523,16 +1519,6 @@ public class GPXUtilities {
 									((WptPt) parse).speed = Float.parseFloat(value);
 								} catch (NumberFormatException e) {}
 							}
-							if (tag.equals("trackextension") || tag.equals("color") || tag.equals("colour") || tag.equals("displaycolor")) {
-								int color;
-								try {
-									color = Integer.parseInt(value);
-									((GPXExtensions) parse).setColor(color);
-								} catch (NumberFormatException nfe) {
-									((GPXExtensions) parse).setColor(value);
-								}
-							}
-
 						}
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = true;
