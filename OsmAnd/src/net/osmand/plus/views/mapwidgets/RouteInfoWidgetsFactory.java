@@ -1180,8 +1180,6 @@ public class RouteInfoWidgetsFactory {
 			// update cache
 			if (view.isZooming()) {
 				visible = false;
-			} else if (!orientationPortrait && ma.getRoutingHelper().isRoutePlanningMode()) {
-				visible = false;
 			} else if (!tb.isZoomAnimated() && (tb.getZoom() != cacheRulerZoom || Math.abs(tb.getCenterTileX() - cacheRulerTileX) > 1 || Math
 					.abs(tb.getCenterTileY() - cacheRulerTileY) > 1 || mapDensity.get() != cacheMapDensity) &&
 					tb.getPixWidth() > 0 && maxWidth > 0) {
