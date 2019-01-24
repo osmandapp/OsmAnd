@@ -2459,7 +2459,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_end_time">Beendigungszeit</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
-    <string name="average_speed">Durchschnittsgeschwindigkeit</string>
+    <string name="average_speed">Durchschnittliche Geschwindigkeit</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
@@ -3135,4 +3135,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="powered_by_osmand">Betrieben von OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">Nur 360°-Bilder anzeigen</string>
-    </resources>
+    <string name="shared_string_launch">Starten</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="run_full_osmand_header">OsmAnd starten\?</string>
+</resources>
