@@ -3242,4 +3242,8 @@
     <string name="lang_gn_py">گوارانی</string>
     <string name="run_full_osmand_msg">شما هم‌اکنون نقشهٔ {0} را بر بستر نرم‌افزار OsmAnd استفاده می‌کنید. دوست دارید نسخهٔ کامل OsmAnd را راه‌اندازی کنید؟</string>
     <string name="run_full_osmand_header">‏OsmAnd ‌راه‌اندازی شود؟</string>
+    <string name="quick_action_switch_day_night_descr">با لمس این دکمهٔ عملیاتی بین حالت‌های شب و روز OsmAnd جابه‌جا شوید</string>
+    <string name="quick_action_switch_day_mode">حالت روز</string>
+    <string name="quick_action_switch_night_mode">حالت شب</string>
+    <string name="quick_action_day_night_switch_mode">تعویض حالت شب/روز</string>
 </resources>
