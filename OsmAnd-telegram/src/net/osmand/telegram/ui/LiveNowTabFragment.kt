@@ -19,7 +19,6 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.TelegramSettings
-import net.osmand.telegram.helpers.SavingTracksDbHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem

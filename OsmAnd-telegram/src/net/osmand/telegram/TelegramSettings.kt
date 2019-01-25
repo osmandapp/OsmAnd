@@ -851,6 +851,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastSuccessfulSendTimeMs = -1L
 		var lastSendTextMessageTime = -1
 		var lastSendMapMessageTime = -1
+		var bufferedMessages = 0
 		var pendingTextMessage = false
 		var pendingMapMessage = false
 		var shouldSendViaBotMessage = false

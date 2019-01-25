@@ -6,8 +6,9 @@ import android.widget.ImageView
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.helpers.TelegramHelper.MessageOsmAndBotLocation
-import net.osmand.telegram.helpers.TelegramHelper.MessageUserTextLocation
+import net.osmand.telegram.utils.OsmandLocationUtils
+import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserTextLocation
+import net.osmand.telegram.utils.OsmandLocationUtils.MessageOsmAndBotLocation
 import net.osmand.telegram.utils.GPXUtilities
 import org.drinkless.td.libcore.telegram.TdApi
 
@@ -65,7 +66,7 @@ object TelegramUiHelper {
 				val user = helper.getUser(userId)
 				val message = messages.firstOrNull { it.viaBotUserId == 0 }
 				if (message != null) {
-					res.lastUpdated = helper.getLastUpdatedTime(message)
+					res.lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 					val content = message.content
 					if (content is TdApi.MessageLocation) {
 						res.latLon = LatLon(content.location.latitude, content.location.longitude)
@@ -172,7 +173,7 @@ object TelegramUiHelper {
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
-			lastUpdated = helper.getLastUpdatedTime(message)
+			lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 		}
 	}
 
@@ -225,7 +226,7 @@ object TelegramUiHelper {
 			userId = message.senderUserId
 			privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
 			chatWithBot = helper.isBot(userId)
-			lastUpdated = helper.getLastUpdatedTime(message)
+			lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 		}
 	}
 

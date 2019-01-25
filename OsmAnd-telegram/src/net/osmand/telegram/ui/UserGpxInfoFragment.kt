@@ -21,11 +21,11 @@ import net.osmand.PlatformUtil
 import net.osmand.aidl.gpx.AGpxBitmap
 import net.osmand.telegram.R
 import net.osmand.telegram.helpers.OsmandAidlHelper
-import net.osmand.telegram.helpers.SavingTracksDbHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.GPXUtilities
 import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.util.Algorithms
 import java.io.File
 import java.text.SimpleDateFormat
@@ -63,7 +63,6 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		readFromBundle(savedInstanceState ?: arguments)
 
 		val userId = gpxFile.userId
-		val chatId = gpxFile.chatId
 
 		val user = app.telegramHelper.getUser(userId)
 		if (user != null) {
@@ -134,12 +133,13 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					openGpx(gpx.path)
 				} else {
 					saveCurrentGpxToFile(object :
-						SavingTracksDbHelper.SaveGpxListener {
+						OsmandLocationUtils.SaveGpxListener {
+
 						override fun onSavingGpxFinish(path: String) {
 							openGpx(path)
 						}
 
-						override fun onSavingGpxError(warnings: MutableList<String>?) {
+						override fun onSavingGpxError(warnings: List<String>?) {
 							Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
 						}
 					})
@@ -156,12 +156,12 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					(activity as MainActivity).shareGpx(gpx.path)
 				} else {
 					saveCurrentGpxToFile(object :
-						SavingTracksDbHelper.SaveGpxListener {
+						OsmandLocationUtils.SaveGpxListener {
 						override fun onSavingGpxFinish(path: String) {
 							(activity as MainActivity).shareGpx(path)
 						}
 
-						override fun onSavingGpxError(warnings: MutableList<String>?) {
+						override fun onSavingGpxError(warnings: List<String>?) {
 							Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
 						}
 					})
@@ -189,8 +189,10 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun saveCurrentGpxToFile(listener: SavingTracksDbHelper.SaveGpxListener) {
-		app.savingTracksDbHelper.saveGpx(listener, app.getExternalFilesDir(null), gpxFile)
+	private fun saveCurrentGpxToFile(listener: OsmandLocationUtils.SaveGpxListener) {
+		if (!gpxFile.isEmpty) {
+			OsmandLocationUtils.saveGpx(app, listener, app.getExternalFilesDir(null)!!, gpxFile)
+		}
 	}
 
 	private fun readFromBundle(bundle: Bundle?) {
@@ -205,7 +207,14 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun updateGpxInfo() {
-		gpxFile = app.savingTracksDbHelper.collectRecordedDataForUser(gpxFile.userId, gpxFile.chatId, startCalendar.timeInMillis, endCalendar.timeInMillis)
+		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(
+			app.locationMessages.collectRecordedDataForUser(
+				gpxFile.userId,
+				gpxFile.chatId,
+				startCalendar.timeInMillis,
+				endCalendar.timeInMillis
+			)
+		).first()
 		updateGPXStatisticRow()
 		updateDateAndTimeButtons()
 		updateGPXMap()
@@ -229,7 +238,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private fun updateGPXMap() {
 		saveCurrentGpxToFile(object :
-			SavingTracksDbHelper.SaveGpxListener {
+			OsmandLocationUtils.SaveGpxListener {
 			override fun onSavingGpxFinish(path: String) {
 				val mgr = activity?.getSystemService(Context.WINDOW_SERVICE)
 				if (mgr != null) {
@@ -242,7 +251,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 				}
 			}
 
-			override fun onSavingGpxError(warnings: MutableList<String>?) {
+			override fun onSavingGpxError(warnings: List<String>?) {
 				log.debug("onSavingGpxError ${warnings?.firstOrNull()}")
 			}
 		})

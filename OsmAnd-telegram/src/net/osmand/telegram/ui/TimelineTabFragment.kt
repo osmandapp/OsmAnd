@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -21,8 +22,8 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.ui.TimelineTabFragment.LiveNowListAdapter.BaseViewHolder
 import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.GPXUtilities
 import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.OsmandLocationUtils
 import java.util.*
 
 
@@ -44,6 +45,8 @@ class TimelineTabFragment : Fragment() {
 
 	private var start = 0L
 	private var end = 0L
+
+	private var updateEnable: Boolean = false
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -91,6 +94,17 @@ class TimelineTabFragment : Fragment() {
 		setupBtnTextColor(dateEndBtn)
 
 		return mainView
+	}
+
+	override fun onResume() {
+		super.onResume()
+		updateEnable = true
+		startHandler()
+	}
+
+	override fun onPause() {
+		super.onPause()
+		updateEnable = false
 	}
 
 	private fun setupBtnTextColor(textView: TextView) {
@@ -162,32 +176,37 @@ class TimelineTabFragment : Fragment() {
 		return normal
 	}
 
+	private fun startHandler() {
+		val updateAdapter = Handler()
+		updateAdapter.postDelayed({
+			if (updateEnable) {
+				updateList()
+				startHandler()
+			}
+		}, ADAPTER_UPDATE_INTERVAL_MIL)
+	}
+
 	private fun updateList() {
 		val res = mutableListOf<ListItem>()
-		val s = System.currentTimeMillis()
-		log.debug("updateList $s")
 		val ignoredUsersIds = ArrayList<Int>()
 		val currentUserId = telegramHelper.getCurrentUser()?.id
 		if (currentUserId != null) {
-			val currentUserGpx:GPXUtilities.GPXFile? = app.savingTracksDbHelper.collectRecordedDataForUser(currentUserId, 0, start, end)
-			if (currentUserGpx != null) {
-				TelegramUiHelper.gpxToChatItem(telegramHelper, currentUserGpx, true)?.also {
-					res.add(it)
+			val locationMessages = app.locationMessages.collectRecordedDataForUser(currentUserId, 0, start, end)
+			OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages, false).forEach {
+				TelegramUiHelper.gpxToChatItem(telegramHelper, it, true)?.also { chatItem ->
+					res.add(chatItem)
 				}
 			}
 			ignoredUsersIds.add(currentUserId)
 		}
-		val gpxFiles = app.savingTracksDbHelper.collectRecordedDataForUsers(start, end, ignoredUsersIds)
-		val e = System.currentTimeMillis()
-
-		gpxFiles.forEach {
+		val locationMessages = app.locationMessages.collectRecordedDataForUsers(start, end, ignoredUsersIds)
+		OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).forEach {
 			TelegramUiHelper.gpxToChatItem(telegramHelper, it,false)?.also { chatItem ->
 				res.add(chatItem)
 			}
 		}
 
 		adapter.items = sortAdapterItems(res)
-		log.debug("updateList $s dif: ${e - s}")
 	}
 
 	private fun sortAdapterItems(list: MutableList<ListItem>): MutableList<ListItem> {
@@ -268,5 +287,9 @@ class TimelineTabFragment : Fragment() {
 			val topDivider: View? = view.findViewById(R.id.top_divider)
 			val bottomDivider: View? = view.findViewById(R.id.bottom_divider)
 		}
+	}
+
+	companion object {
+		private const val ADAPTER_UPDATE_INTERVAL_MIL = 15 * 1000L // 15 sec
 	}
 }

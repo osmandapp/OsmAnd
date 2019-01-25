@@ -1,4 +1,7 @@
 <resources>
+	<string name="shared_string_collected">Collected</string>
+	<string name="gps_points">Gps points</string>
+	<string name="shared_string_sent">Sent</string>
 	<string name="monitoring_is_enabled">Monitoring is enabled</string>
 	<string name="monitoring_is_disabled">Monitoring is disabled</string>
 	<string name="time_on_the_move">time on the move</string>

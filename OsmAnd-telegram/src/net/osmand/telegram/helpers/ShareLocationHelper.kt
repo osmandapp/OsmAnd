@@ -3,6 +3,7 @@ package net.osmand.telegram.helpers
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.telegram.*
+import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.BASE_URL
@@ -48,36 +49,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		lastLocation = location
 
 		if (location != null) {
-			val chatsShareInfo = app.settings.getChatsShareInfo()
-			if (chatsShareInfo.isNotEmpty()) {
-				val latitude = location.latitude
-				val longitude = location.longitude
-				val user = app.telegramHelper.getCurrentUser()
-				val sharingMode = app.settings.currentSharingMode
-
-				if (user != null && sharingMode == user.id.toString()) {
-					when (app.settings.shareTypeValue) {
-						SHARE_TYPE_MAP -> app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, latitude, longitude)
-						SHARE_TYPE_TEXT -> app.telegramHelper.sendLiveLocationText(chatsShareInfo, location)
-						SHARE_TYPE_MAP_AND_TEXT -> {
-							app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, latitude, longitude)
-							app.telegramHelper.sendLiveLocationText(chatsShareInfo, location)
-						}
-					}
-				} else if (sharingMode.isNotEmpty()) {
-					val url = getDeviceSharingUrl(location,sharingMode)
-					AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false,
-						object : AndroidNetworkUtils.OnRequestResultListener {
-							override fun onResult(result: String?) {
-								updateShareInfoSuccessfulSendTime(result, chatsShareInfo)
-
-								val osmandBot = app.telegramHelper.getOsmandBot()
-								if (osmandBot != null) {
-									checkAndSendViaBotMessages(chatsShareInfo, TdApi.Location(latitude, longitude), osmandBot)
-								}
-							}
-						})
-				}
+			if (app.settings.getChatsShareInfo().isNotEmpty()) {
+				addNewLocationMessages(location, app.telegramHelper.getCurrentUserId())
+				shareMessages()
 			}
 			lastLocationMessageSentTime = System.currentTimeMillis()
 		}
@@ -158,25 +132,119 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		refreshNotification()
 	}
 
-	private fun getDeviceSharingUrl(loc: Location, sharingMode: String): String {
-		val url = "$BASE_URL/device/$sharingMode/send?lat=${loc.latitude}&lon=${loc.longitude}"
+	private fun addNewLocationMessages(location: Location, userId: Int) {
+		val chatsShareInfo = app.settings.getChatsShareInfo()
+		val latitude = location.latitude
+		val longitude = location.longitude
+		val isBot = app.settings.currentSharingMode != userId.toString()
+		val types = mutableListOf<Int>()
+
+		when (app.settings.shareTypeValue) {
+			SHARE_TYPE_MAP -> {
+				types.add(if (isBot) LocationMessage.TYPE_BOT_MAP else LocationMessage.TYPE_USER_MAP)
+			}
+			SHARE_TYPE_TEXT -> {
+				types.add(if (isBot) LocationMessage.TYPE_BOT_TEXT else LocationMessage.TYPE_USER_TEXT)
+			}
+			SHARE_TYPE_MAP_AND_TEXT -> {
+				types.add(if (isBot) LocationMessage.TYPE_BOT_MAP else LocationMessage.TYPE_USER_MAP)
+				types.add(if (isBot) LocationMessage.TYPE_BOT_TEXT else LocationMessage.TYPE_USER_TEXT)
+			}
+		}
+		chatsShareInfo.values.forEach { shareInfo ->
+			types.forEach {
+				val message = LocationMessage(userId, shareInfo.chatId, latitude, longitude, location.altitude, location.speed.toDouble(),
+					location.accuracy.toDouble(), location.bearing.toDouble(), location.time, it, LocationMessage.STATUS_PREPARING, shareInfo.currentMapMessageId)
+				app.locationMessages.addLocationMessage(message)
+			}
+		}
+	}
+
+	private fun shareMessages() {
+		var bufferedMessagesFull = false
+		app.locationMessages.getPreparedToShareMessages().forEach {
+			val shareChatInfo = app.settings.getChatsShareInfo()[it.chatId]
+			if (shareChatInfo != null) {
+				bufferedMessagesFull = shareChatInfo.bufferedMessages < 10
+				if (bufferedMessagesFull) {
+					when {
+						it.type == LocationMessage.TYPE_USER_TEXT -> {
+							shareChatInfo.bufferedMessages++
+							it.status = LocationMessage.STATUS_PENDING
+							app.telegramHelper.sendLiveLocationText(shareChatInfo, it)
+						}
+						it.type == LocationMessage.TYPE_USER_MAP -> {
+							shareChatInfo.bufferedMessages++
+							it.status = LocationMessage.STATUS_PENDING
+							app.telegramHelper.sendLiveLocationMap(shareChatInfo, it)
+						}
+						it.type == LocationMessage.TYPE_BOT_TEXT -> {
+							sendLocationToBot(it, app.settings.currentSharingMode, shareChatInfo, SHARE_TYPE_TEXT)
+						}
+						it.type == LocationMessage.TYPE_BOT_MAP -> {
+							sendLocationToBot(it, app.settings.currentSharingMode, shareChatInfo, SHARE_TYPE_MAP)
+						}
+					}
+				}
+			}
+		}
+		if (bufferedMessagesFull) {
+			checkNetworkType()
+		}
+	}
+
+	private fun checkNetworkType(){
+		if (app.isInternetConnectionAvailable) {
+			val networkType = when {
+				app.isWifiConnected -> TdApi.NetworkTypeWiFi()
+				app.isMobileConnected -> TdApi.NetworkTypeMobile()
+				else -> TdApi.NetworkTypeOther()
+			}
+			app.telegramHelper.networkChange(networkType)
+		}
+	}
+
+	private fun sendLocationToBot(locationMessage: LocationMessage, sharingMode: String, shareInfo: TelegramSettings.ShareChatInfo, shareType: String) {
+		if (app.isInternetConnectionAvailable) {
+			locationMessage.status = LocationMessage.STATUS_PENDING
+			val url = getDeviceSharingUrl(locationMessage, sharingMode)
+			AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false,
+				object : AndroidNetworkUtils.OnRequestResultListener {
+					override fun onResult(result: String?) {
+						val chatsShareInfo = app.settings.getChatsShareInfo()
+						val success = checkResultAndUpdateShareInfoSuccessfulSendTime(result, chatsShareInfo)
+						val osmandBotId = app.telegramHelper.getOsmandBot()?.id ?: -1
+						val device = app.settings.getCurrentSharingDevice()
+
+						locationMessage.status = if (success) LocationMessage.STATUS_SENT else LocationMessage.STATUS_ERROR
+						if (success && shareInfo.shouldSendViaBotMessage && osmandBotId != -1 && device != null) {
+							app.telegramHelper.sendViaBotLocationMessage(osmandBotId, shareInfo, TdApi.Location(locationMessage.lat, locationMessage.lon), device, shareType)
+							shareInfo.shouldSendViaBotMessage = false
+						}
+					}
+				})
+		}
+	}
+
+	private fun getDeviceSharingUrl(loc: LocationMessage, sharingMode: String): String {
+		val url = "$BASE_URL/device/$sharingMode/send?lat=${loc.lat}&lon=${loc.lon}"
 		val builder = StringBuilder(url)
-		if (loc.hasBearing() && loc.bearing != 0.0f) {
+		if (loc.bearing != 0.0) {
 			builder.append("&azi=${loc.bearing}")
 		}
-		if (loc.hasSpeed() && loc.speed != 0.0f) {
+		if (loc.speed != 0.0) {
 			builder.append("&spd=${loc.speed}")
 		}
-		if (loc.hasAltitude() && loc.altitude != 0.0) {
+		if (loc.altitude != 0.0) {
 			builder.append("&alt=${loc.altitude}")
 		}
-		if (loc.hasAccuracy() && loc.accuracy != 0.0f) {
-			builder.append("&hdop=${loc.accuracy}")
+		if (loc.hdop != 0.0) {
+			builder.append("&hdop=${loc.hdop}")
 		}
 		return builder.toString()
 	}
 
-	private fun updateShareInfoSuccessfulSendTime(result: String?, chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>) {
+	private fun checkResultAndUpdateShareInfoSuccessfulSendTime(result: String?, chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>):Boolean {
 		if (result != null) {
 			try {
 				val jsonResult = JSONObject(result)
@@ -186,22 +254,12 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					chatsShareInfo.forEach { (_, shareInfo) ->
 						shareInfo.lastSuccessfulSendTimeMs = currentTime
 					}
+					return true
 				}
 			} catch (e: JSONException) {
 			}
 		}
-	}
-
-	private fun checkAndSendViaBotMessages(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, location: TdApi.Location, osmandBot: TdApi.User) {
-		val device = app.settings.getCurrentSharingDevice()
-		if (device != null) {
-			chatsShareInfo.forEach { (_, shareInfo) ->
-				if (shareInfo.shouldSendViaBotMessage) {
-					app.telegramHelper.sendViaBotLocationMessage(osmandBot.id, shareInfo, location, device,app.settings.shareTypeValue)
-					shareInfo.shouldSendViaBotMessage = false
-				}
-			}
-		}
+		return false
 	}
 
 	private fun refreshNotification() {
