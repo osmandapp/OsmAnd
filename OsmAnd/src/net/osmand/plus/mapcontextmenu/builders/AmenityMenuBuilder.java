@@ -689,6 +689,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		switch (key){
 			case "width":
 			case "height":
+			case "seamark_height":
 			case "depth":
 				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
 					units = mapActivity.getResources().getString(R.string.foot);
@@ -699,6 +700,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				} else {
 					units = mapActivity.getResources().getString(R.string.m);
 				}
+				prefix = prefixConstructor(prefix, units);
 				break;
 			case "distance":
 				value = String.valueOf(OsmAndFormatter
@@ -712,26 +714,31 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				} else {
 					units = mapActivity.getResources().getString(R.string.km);
 				}
+				prefix = prefixConstructor(prefix, units);
 				break;
 			case "capacity":
 				units = mapActivity.getResources().getString(R.string.cubic_m);
+				prefix = prefixConstructor(prefix, units);
 				break;
 			case "maxweight":
 				units = mapActivity.getResources().getString(R.string.cubic_m);
+				prefix = prefixConstructor(prefix, units);
 				break;
 			case "students":
 			case "spots":
 			case "seats":
 				units = "capacity";
+				prefix = prefixConstructor(prefix, units);
+				break;
 		}
 
-		if (!prefix.isEmpty()) {
-			prefix = prefix + ", " + units;
-		} else {
-			prefix = units;
-		}
 
 		return new String[]{prefix, value};
+	}
+
+	private String prefixConstructor(String prefix, String units){
+		return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
+
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
