@@ -685,59 +685,54 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private String[] getFormattedPrefixAndText(String key, String prefix, String value) {
 		DecimalFormat df = new DecimalFormat("#.##");
 		df.setRoundingMode(RoundingMode.CEILING);
-		String units = "";
 		switch (key){
 			case "width":
 			case "height":
-			case "seamark_height":
+				prefix = Algorithms.capitalizeFirstLetter(key);
 			case "depth":
+			case "seamark_height":
 				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
-					units = mapActivity.getResources().getString(R.string.foot);
-					value = String.valueOf(df.format(Double.valueOf(value)*OsmAndFormatter.FEET_IN_ONE_METER));
+					value = String.valueOf(df.format(Double.valueOf(value)*OsmAndFormatter.FEET_IN_ONE_METER))
+						+ " " + mapActivity.getResources().getString(R.string.foot);
 				} else if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
-					units = mapActivity.getResources().getString(R.string.yard);
-					value = String.valueOf(df.format(Double.valueOf(value)*OsmAndFormatter.YARDS_IN_ONE_METER));
+					value = String.valueOf(df.format(Double.valueOf(value)*OsmAndFormatter.YARDS_IN_ONE_METER))
+						+ " "+ mapActivity.getResources().getString(R.string.yard);
 				} else {
-					units = mapActivity.getResources().getString(R.string.m);
+					value = value + " " + mapActivity.getResources().getString(R.string.m);
 				}
-				prefix = prefixConstructor(prefix, units);
 				break;
 			case "distance":
-				value = String.valueOf(OsmAndFormatter
-						.calculateRoundedDist(Double.valueOf(value)*1000, mapActivity.getMyApplication()));
 				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET ||
 						metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS ||
 						metricSystem == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
-					units = mapActivity.getResources().getString(R.string.mile);
+					value = String.valueOf(df.format(Double.valueOf(value)*1000/OsmAndFormatter.METERS_IN_ONE_MILE))
+						+ " " + mapActivity.getResources().getString(R.string.mile);
 				} else if (metricSystem == OsmandSettings.MetricsConstants.NAUTICAL_MILES) {
-					units = mapActivity.getResources().getString(R.string.nm);
+					value = String.valueOf(df.format(Double.valueOf(value)*1000/OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE))
+						+ " " + mapActivity.getResources().getString(R.string.nm);
 				} else {
-					units = mapActivity.getResources().getString(R.string.km);
+					value = value + " " + mapActivity.getResources().getString(R.string.km);
 				}
-				prefix = prefixConstructor(prefix, units);
+				prefix = Algorithms.capitalizeFirstLetter(key);
 				break;
 			case "capacity":
-				units = mapActivity.getResources().getString(R.string.cubic_m);
-				prefix = prefixConstructor(prefix, units);
+				value = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
 				break;
 			case "maxweight":
-				units = mapActivity.getResources().getString(R.string.cubic_m);
-				prefix = prefixConstructor(prefix, units);
+				value = value + " " +  mapActivity.getResources().getString(R.string.cubic_m);
 				break;
 			case "students":
 			case "spots":
 			case "seats":
-				units = "capacity";
-				prefix = prefixConstructor(prefix, units);
+				prefix = prefixConstructor(prefix, mapActivity.getResources().getString(R.string.capacity));
 				break;
 		}
-
 
 		return new String[]{prefix, value};
 	}
 
 	private String prefixConstructor(String prefix, String units){
-		return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
+		return (!prefix.isEmpty()) ? (prefix + ", " + units) : Algorithms.capitalizeFirstLetter(units);
 
 	}
 
