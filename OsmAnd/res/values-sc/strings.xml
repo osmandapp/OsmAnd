@@ -358,7 +358,7 @@
     <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
     <string name="enable_plugin_monitoring_services">"Abìlita s’estensione de registratzione biàgios pro impreare sos servìtzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
     <string name="non_optimal_route_calculation">Càlcula un’àndala, s’in casu mai fintzas non primorosa, pro sas distantzias longas</string>
-    <string name="gps_not_available">Allue su GPS in sas impostatziones</string>
+    <string name="gps_not_available">Allughe su GPS in sas impostatziones</string>
 
     <string name="map_widget_monitoring_services">Servitzios de registratzione</string>
     <string name="no_route">Peruna àndala</string>
@@ -1433,7 +1433,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="show_gps_coordinates_text">Ammustra coordinadas GPS in sa mapa</string>
     <string name="use_internet_to_download_tile">Iscàrriga tasseddos fartantes de sa mapa</string>
     <string name="app_description">Aplicatzione de nàvigu</string>
-    <string name="shared_string_exit">Essida</string>
+    <string name="shared_string_exit">Essi</string>
 
 
     <string name="search_button">Chirca</string>
@@ -1470,7 +1470,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="context_menu_item_update_map">Agiorna sa mapa</string>
     
     <string name="context_menu_item_create_poi">Crea PDI</string>
-    <string name="shared_string_cancel">Iscantzella</string>
+    <string name="shared_string_cancel">Annulla</string>
     <string name="shared_string_apply">Àplica</string>
     <string name="shared_string_add">Annanghe</string>
     <string name="add_favorite_dialog_top_text">Inserta su nùmene de su preferidu</string>
@@ -2072,7 +2072,7 @@ Lon %2$s</string>
 	<string name="routing_attr_avoid_stairs_description">Istransi sas iscalas</string>
 	<string name="routing_attr_avoid_borders_name">Istransi sa rugradura de sas fronteras</string>
 	<string name="shared_string_near">A curtzu</string>
-    <string name="shared_string_hide">Cua</string>
+    <string name="shared_string_hide">Istichi</string>
     <string name="av_video_quality_low">Calidade prus bassa</string>
     <string name="av_video_quality_high">Calidade prus arta</string>
     <string name="av_video_quality">Calidade de su vìdeo</string>
@@ -3178,4 +3178,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="run_full_osmand_msg">Ses impreende sa mapa {0} chi est frunida dae OsmAnd. Cheres allùghere sa versione intrea de OsmAnd\?</string>
     <string name="run_full_osmand_header">Cheres allùghere OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Incarcare custu butone faghet colare intre sas modalidade pro sa die e pro sa note de OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Modalidade pro sa die</string>
+    <string name="quick_action_switch_night_mode">Modalidade pro sa note</string>
+    <string name="quick_action_day_night_switch_mode">Cola intre Die/Note</string>
 </resources>
