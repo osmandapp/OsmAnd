@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -62,10 +63,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.logging.Log;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
-
+	public final static Log log = PlatformUtil.getLog(FavoritesTreeFragment.class);
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
 	// public static final int IMPORT_ID = 1;
@@ -948,7 +950,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						} else {
 							Set<FavouritePoint> set = favoritesSelected.get(group.name);
 							if (set != null) {
+								groupsToDelete.remove(group);
+								getGroupPosition(group.name);
 								set.remove(model);
+								favouritesAdapter.notifyDataSetInvalidated();
 							}
 						}
 						updateSelectionMode(actionMode);
