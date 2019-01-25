@@ -3010,4 +3010,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="run_full_osmand_msg">Vi uzas mapon {0}, kiu estas povigata de OsmAnd. Ĉu lanĉi la plenan version de OsmAnd\?</string>
     <string name="run_full_osmand_header">Ĉu lanĉi OsmAnd\?</string>
     <string name="lang_gn_py">Gvarania</string>
+    <string name="quick_action_switch_day_night_descr">Frapetu tiun ĉi ag-butonon por baskuli inter nokta kaj taga reĝimoj.</string>
+    <string name="quick_action_switch_day_mode">Taga reĝimo</string>
+    <string name="quick_action_switch_night_mode">Nokta reĝimo</string>
+    <string name="quick_action_day_night_switch_mode">Taga/nokta reĝimo</string>
 </resources>
