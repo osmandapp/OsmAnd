@@ -184,7 +184,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onStop() {
 		super.onStop()
 		settings.save()
-		app.locationMessages.saveMessages()
 	}
 
 	override fun onDestroy() {
@@ -294,7 +293,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 		if (app.telegramService == null) {
 			messages.forEach {
-				val locationMessage = OsmandLocationUtils.parseMessage(it, telegramHelper, LocationMessages.LocationMessage.STATUS_SENT)
+				val locationMessage = OsmandLocationUtils.parseMessage(it, telegramHelper, LocationMessages.LocationMessage.STATUS_INCOMING)
 				if (locationMessage != null) {
 					app.locationMessages.addLocationMessage(locationMessage)
 				}

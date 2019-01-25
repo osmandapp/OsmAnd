@@ -106,7 +106,7 @@ object OsmandLocationUtils {
 			}
 
 		if (parsedMessageContent != null) {
-			locationMessage = LocationMessages.LocationMessage(message.senderUserId, message.chatId, parsedMessageContent.lat,
+			locationMessage = LocationMessages.LocationMessage(helper.getSenderMessageId(message), message.chatId, parsedMessageContent.lat,
 				parsedMessageContent.lon, parsedMessageContent.altitude, parsedMessageContent.speed, parsedMessageContent.hdop,
 				parsedMessageContent.bearing, parsedMessageContent.lastUpdated * 1000L, messageType, status, message.id)
 		}

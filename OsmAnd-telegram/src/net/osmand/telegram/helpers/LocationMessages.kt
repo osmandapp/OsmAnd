@@ -4,14 +4,10 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramApplication
-import org.apache.commons.logging.Log
-import java.util.*
+import kotlin.collections.ArrayList
 
 class LocationMessages(val app: TelegramApplication) {
-
-	private val log: Log = PlatformUtil.getLog(LocationMessages::class.java)
 
 	private val locationMessages = ArrayList<LocationMessage>()
 
@@ -28,7 +24,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 	fun getPreparedToShareMessages(): List<LocationMessage> {
 		val currentUserId = app.telegramHelper.getCurrentUserId()
-		return locationMessages.filter { it.userId == currentUserId && it.status == LocationMessage.STATUS_PREPARING }.sortedBy { it.date }
+		return locationMessages.filter { it.userId == currentUserId && it.status == LocationMessage.STATUS_PREPARED }.sortedBy { it.date }
 	}
 
 	fun getOutgoingMessagesToChat(chatId: Long): List<LocationMessage> {
@@ -47,28 +43,12 @@ class LocationMessages(val app: TelegramApplication) {
 	}
 
 	fun getIncomingMessages(): List<LocationMessage> {
-		val currentUserId = app.telegramHelper.getCurrentUserId()
-		return locationMessages.filter { it.userId != currentUserId }.sortedBy { it.date }
+		return locationMessages.filter { it.status != LocationMessage.STATUS_INCOMING }.sortedBy { it.date }
 	}
 
 	fun addLocationMessage(locationMessage: LocationMessage) {
-		log.debug("addLocationMessage $locationMessage")
-		synchronized(locationMessages) {
-			locationMessages.add(locationMessage)
-		}
-	}
-
-	fun removeMessage(locationMessage: LocationMessage) {
-		synchronized(locationMessages) {
-			locationMessages.remove(locationMessage)
-		}
-	}
-
-	fun saveMessages() {
-		clearMessages()
-		synchronized(locationMessages) {
-			sqliteHelper.addLocationMessages(locationMessages)
-		}
+		locationMessages.add(locationMessage)
+		sqliteHelper.addLocationMessage(locationMessage)
 	}
 
 	fun clearMessages() {
@@ -92,9 +72,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private fun readMessages() {
 		val messages = sqliteHelper.getLocationMessages()
-		synchronized(locationMessages) {
-			locationMessages.addAll(messages)
-		}
+		locationMessages.addAll(messages)
 	}
 
 	private class SQLiteHelper(context: Context) :
@@ -117,8 +95,14 @@ class LocationMessages(val app: TelegramApplication) {
 			}
 		}
 
-		internal fun getLocationMessages(): Set<LocationMessage> {
-			val res = HashSet<LocationMessage>()
+		internal fun addLocationMessage(locationMessage: LocationMessage) {
+				writableDatabase?.execSQL(TRACKS_TABLE_INSERT,
+					arrayOf(locationMessage.userId, locationMessage.chatId, locationMessage.lat, locationMessage.lon, locationMessage.altitude, locationMessage.speed,
+						locationMessage.hdop, locationMessage.bearing, locationMessage.date, locationMessage.type, locationMessage.status, locationMessage.messageId))
+		}
+
+		internal fun getLocationMessages(): List<LocationMessage> {
+			val res = ArrayList<LocationMessage>()
 			readableDatabase?.rawQuery(TRACKS_TABLE_SELECT, null)?.apply {
 				if (moveToFirst()) {
 					do {
@@ -166,10 +150,8 @@ class LocationMessages(val app: TelegramApplication) {
 			private const val TRACK_COL_SPEED = "speed"
 			private const val TRACK_COL_HDOP = "hdop"
 			private const val TRACK_COL_BEARING = "bearing"
-			private const val TRACK_COL_TYPE =
-				"type" // 0 = user map message, 1 = user text message, 2 = bot map message, 3 = bot text message
-			private const val TRACK_COL_MESSAGE_STATUS =
-				"status" // 0 = preparing , 1 = pending, 2 = sent, 3 = error
+			private const val TRACK_COL_TYPE = "type" // 0 = user map message, 1 = user text message, 2 = bot map message, 3 = bot text message
+			private const val TRACK_COL_MESSAGE_STATUS = "status" // 0 = preparing , 1 = pending, 2 = sent, 3 = error
 			private const val TRACK_COL_MESSAGE_ID = "message_id"
 
 			private const val TRACK_DATE_INDEX = "date_index"
@@ -206,10 +188,11 @@ class LocationMessages(val app: TelegramApplication) {
 
 		companion object {
 
-			const val STATUS_PREPARING = 0
+			const val STATUS_PREPARED = 0
 			const val STATUS_PENDING = 1
 			const val STATUS_SENT = 2
 			const val STATUS_ERROR = 3
+			const val STATUS_INCOMING = 4
 
 			const val TYPE_USER_MAP = 0
 			const val TYPE_USER_TEXT = 1

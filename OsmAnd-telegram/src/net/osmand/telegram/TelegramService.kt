@@ -122,7 +122,6 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onDestroy() {
 		super.onDestroy()
 		val app = app()
-		app.locationMessages.saveMessages()
 		app.telegramHelper.stopLiveMessagesUpdates()
 		app.telegramHelper.removeIncomingMessagesListener(this)
 		app.telegramHelper.removeOutgoingMessagesListener(this)
@@ -278,7 +277,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app().showLocationHelper.startShowMessagesTask(chatId, *messages)
 		messages.forEach {
-			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper, LocationMessages.LocationMessage.STATUS_SENT)
+			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper, LocationMessages.LocationMessage.STATUS_INCOMING)
 			if (locationMessage != null) {
 				app().locationMessages.addLocationMessage(locationMessage)
 			}

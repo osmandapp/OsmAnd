@@ -154,7 +154,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		chatsShareInfo.values.forEach { shareInfo ->
 			types.forEach {
 				val message = LocationMessage(userId, shareInfo.chatId, latitude, longitude, location.altitude, location.speed.toDouble(),
-					location.accuracy.toDouble(), location.bearing.toDouble(), location.time, it, LocationMessage.STATUS_PREPARING, shareInfo.currentMapMessageId)
+					location.accuracy.toDouble(), location.bearing.toDouble(), location.time, it, LocationMessage.STATUS_PREPARED, shareInfo.currentMapMessageId)
 				app.locationMessages.addLocationMessage(message)
 			}
 		}
