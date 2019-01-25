@@ -3216,4 +3216,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_launch">Ouvrir</string>
     <string name="run_full_osmand_msg">Vous utilisez la carte {0} qui est proposée par OsmAnd. Souhaitez-vous lancer la version complète d\'OsmAnd \?</string>
     <string name="run_full_osmand_header">Ouvrir OsmAnd \?</string>
+    <string name="quick_action_switch_day_night_descr">Ce bouton permet de basculer entre les modes Jour et Nuit d\'OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Mode Jour</string>
+    <string name="quick_action_switch_night_mode">Mode Nuit</string>
+    <string name="quick_action_day_night_switch_mode">Bascule les modes Jour / Nuit</string>
 </resources>
