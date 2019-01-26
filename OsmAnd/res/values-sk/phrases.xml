@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Obchod</string>
 	<string name="poi_emergency">Núdzová situácia/Záchrana</string>
 	<string name="poi_transportation">Doprava</string>
@@ -159,7 +159,7 @@
 	<string name="poi_halt">Železničná zastávka</string>
 	<string name="poi_bus_station">Autobusová stanica</string>
 	<string name="poi_subway_entrance">Vchod do metra</string>
-	<string name="poi_subway_station">Stanica metra</string>
+	<string name="poi_subway_station">Áno</string>
 	<string name="poi_railway_buffer_stop">Železničná zarážka</string>
 	<string name="poi_taxi">Stanovište taxíkov</string>
 
@@ -988,7 +988,7 @@
 	<string name="poi_recycling_bicycles">Bicykle</string>
 
 	<string name="poi_monitoring_station">Meracia stanica</string>
-	<string name="poi_capital">Hlavné mesto</string>
+	<string name="poi_capital">Áno</string>
 	<string name="poi_shower">Sprcha</string>
 	<string name="poi_animal_shelter_bird">Vtáky</string>
 
@@ -1564,7 +1564,7 @@
 	<string name="poi_drive_through_no">Prejazd autom: nie</string>
 
 	<string name="poi_brewery_additional">Názov pivovaru</string>
-	<string name="poi_microbrewery_yes">Minipivovar</string>
+	<string name="poi_microbrewery_yes">Áno</string>
 	<string name="poi_microbrewery_no">Žiadny minipivovar</string>
 
 	<string name="poi_takeaway_yes">Jedlo so sebou</string>
@@ -3577,7 +3577,19 @@
 
 	<string name="poi_shoe_repair">Oprava obuvi</string>
 
-	<string name="poi_bulk_purchase_yes">Množstevný predaj: áno</string>
-	<string name="poi_bulk_purchase_only">Množstevný predaj: výhradne</string>
-
-	</resources>
+	<string name="poi_bulk_purchase_yes">Áno</string>
+	<string name="poi_bulk_purchase_only">Výhradne</string>
+    <string name="poi_books_type">Knihy</string>
+    <string name="poi_craft_confectionery">Výroba sladkostí</string>
+    <string name="poi_shop_wholesale">Veľkoobchod</string>
+    <string name="poi_laboratory">Zdravotnícke laboratórium</string>
+    <string name="poi_blood_donation">Darovanie krvi</string>
+    <string name="poi_books_comic">Komiksy</string>
+    <string name="poi_books_antiquarian">Starožitné</string>
+    <string name="poi_books_religion">Náboženské</string>
+    <string name="poi_books_academic">Odborné</string>
+    <string name="poi_books_children">Detské</string>
+    <string name="poi_atoll">Atol</string>
+    <string name="poi_childcare">Starostlivosť o deti</string>
+    <string name="poi_denotation_natural_monument">Prírodný monument</string>
+</resources>
