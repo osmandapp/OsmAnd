@@ -3057,4 +3057,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="run_full_osmand_msg">"Esteu utilitzant el mapa {0} mitjançant OsmAnd.  Voleu iniciar la versió sencera d\'OsmAnd \?"</string>
     <string name="run_full_osmand_header">Voleu iniciar OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Prement aquest botó d\'acció es canvia entre el modes Diürn i Nocturn d\'OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Mode Diürn</string>
+    <string name="quick_action_switch_night_mode">Mode Nocturn</string>
+    <string name="quick_action_day_night_switch_mode">Canvia mode Diürn/Nocturn</string>
 </resources>
