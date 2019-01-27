@@ -3221,4 +3221,23 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_switch_night_mode">Mode Nuit</string>
     <string name="quick_action_day_night_switch_mode">Bascule les modes Jour / Nuit</string>
     <string name="lang_gn_py">Guarani</string>
+    <string name="swap_start_and_destination">Inverser départ et arrivée</string>
+    <string name="add_destination_point">Ajouter destination</string>
+    <string name="add_intermediate_point">Ajouter étape</string>
+    <string name="add_start_point">Ajouter départ</string>
+    <string name="intermediate_waypoint">Étape : %1$s</string>
+    <string name="waypoints">Points de passage : %1$s</string>
+    <string name="transfers">transferts : %1$s</string>
+    <string name="on_foot">à pied : %1$s</string>
+    <string name="route_way">Mode : %1$s</string>
+    <string name="points_of_interests">Points d\'intérêt (PI)</string>
+    <string name="waiting_for_route_calculation">Calcul de l\'itinéraire en cours</string>
+    <string name="app_mode_public_transport">Transports publics</string>
+    <string name="avoid_roads_descr">Sélectionnez la route, sur la carte ou parmi la liste ci-dessous, que vous souhaitez éviter pendant la navigation :</string>
+    <string name="show_along_the_route">Afficher sur l\'itinéraire</string>
+    <string name="simulate_navigation">Simuler la navigation</string>
+    <string name="choose_track_file_to_follow">Sélectionner un fichier de trace à suivre</string>
+    <string name="voice_announcements">Annonces vocales</string>
+    <string name="intermediate_destinations">Destinations intermédiaires : %1$s</string>
+    <string name="arrive_at_time">Arrivée à %1$s</string>
 </resources>
