@@ -3240,4 +3240,21 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_launch">Start</string>
     <string name="run_full_osmand_header">Start OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
+    <string name="add_destination_point">Tilføj destination</string>
+    <string name="add_intermediate_point">Tilføj mellemliggende</string>
+    <string name="add_start_point">Tilføj startpunkt</string>
+    <string name="intermediate_waypoint">Mellemliggende punkt: %1$s</string>
+    <string name="waypoints">Rutepunkter: %1$s</string>
+    <string name="transfers">overførsler: %1$s</string>
+    <string name="on_foot">til fods: %1$s</string>
+    <string name="points_of_interests">Interessepunkter (IP)</string>
+    <string name="waiting_for_route_calculation">Venter på ruteberegningen</string>
+    <string name="app_mode_public_transport">Offentlig transport</string>
+    <string name="avoid_roads_descr">Vælg vejen på kortet eller fra nedenstående liste, der skal undgås under navigation:</string>
+    <string name="show_along_the_route">Vis langs ruten</string>
+    <string name="simulate_navigation">Simulere navigation</string>
+    <string name="intermediate_destinations">Mellemliggende destinationer: %1$s</string>
+    <string name="quick_action_switch_day_mode">Dag tilstand</string>
+    <string name="quick_action_switch_night_mode">Nat tilstand</string>
+    <string name="quick_action_day_night_switch_mode">Skift dag/nat tilstand</string>
 </resources>
