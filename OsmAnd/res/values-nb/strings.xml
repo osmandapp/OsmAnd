@@ -3115,4 +3115,5 @@
     <string name="quick_action_switch_day_mode">Dagmodus</string>
     <string name="quick_action_switch_night_mode">Nattmodus</string>
     <string name="quick_action_day_night_switch_mode">Veksle dag-/nattmodus</string>
+    <string name="app_mode_public_transport">Offentlig transport</string>
 </resources>
