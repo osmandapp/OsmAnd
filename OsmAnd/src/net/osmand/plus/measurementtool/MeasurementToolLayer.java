@@ -181,7 +181,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
-			lineAttrs.updatePaints(view, settings, tb);
+			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
 			before.renders.clear();
@@ -198,7 +198,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
-			lineAttrs.updatePaints(view, settings, tb);
+			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			if (editingCtx.getSelectedPointPosition() == -1) {
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());

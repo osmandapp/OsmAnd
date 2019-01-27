@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -11,8 +14,11 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.ColorUtils;
 import android.util.Pair;
 import android.view.MotionEvent;
 
@@ -25,6 +31,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -35,6 +43,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -147,25 +156,287 @@ public abstract class OsmandMapLayer {
 		return res;
 	}
 
-	public static class GeometryWayStyle {
-		static final int WAY_TYPE_SOLID_LINE = 0;
-		static final int WAY_TYPE_TRANSPORT_LINE = 1;
-		static final int WAY_TYPE_WALK_LINE = 2;
+	public static class GeometryWayContext {
 
-		private Integer color;
-		private int type;
+		private Context ctx;
+		private float density;
+		private boolean nightMode;
 
-		public GeometryWayStyle(Integer color, int type) {
+		private Paint paintIcon;
+		private Paint paintIconCustom;
+
+		private RenderingLineAttributes attrs;
+		private RenderingLineAttributes attrsPT;
+		private RenderingLineAttributes attrsW;
+
+		private Bitmap arrowBitmap;
+		private Bitmap walkArrowBitmap;
+		private Bitmap anchorBitmap;
+		private Map<Pair<Integer, Bitmap>, Bitmap> stopBitmapsCache = new HashMap();
+
+		public GeometryWayContext(Context ctx, float density) {
+			this.ctx = ctx;
+			this.density = density;
+
+			paintIcon = new Paint();
+			paintIcon.setFilterBitmap(true);
+			paintIcon.setAntiAlias(true);
+			paintIcon.setColor(Color.BLACK);
+			paintIcon.setStrokeWidth(1f * density);
+
+			paintIconCustom = new Paint();
+			paintIconCustom.setFilterBitmap(true);
+			paintIconCustom.setAntiAlias(true);
+			paintIconCustom.setColor(Color.BLACK);
+			paintIconCustom.setStrokeWidth(1f * density);
+
+			attrsW = new RenderingLineAttributes("walkingRouteLine");
+			attrsW.defaultWidth = (int) (12 * density);
+			attrsW.defaultWidth3 = (int) (7 * density);
+			attrsW.defaultColor = ctx.getResources().getColor(R.color.nav_track_walk_fill);
+			attrsW.paint3.setStrokeCap(Cap.BUTT);
+			attrsW.paint3.setColor(Color.WHITE);
+			attrsW.paint2.setStrokeCap(Cap.BUTT);
+			attrsW.paint2.setColor(Color.BLACK);
+
+			arrowBitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_route_direction_arrow, null);
+		}
+
+		public OsmandApplication getApp() {
+			return (OsmandApplication) ctx.getApplicationContext();
+		}
+
+		public float getDensity() {
+			return density;
+		}
+
+		public boolean isNightMode() {
+			return nightMode;
+		}
+
+		private int calculateHash(Object... o) {
+			return Arrays.hashCode(o);
+		}
+
+		public void updatePaints(boolean nightMode,
+									@NonNull RenderingLineAttributes attrs,
+									@NonNull RenderingLineAttributes attrsPT,
+									@NonNull RenderingLineAttributes attrsW) {
+			this.attrs = attrs;
+			this.attrsPT = attrsPT;
+			this.attrsW = attrsW;
+			paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), Mode.MULTIPLY));
+
+			this.nightMode = nightMode;
+			recreateBitmaps();
+		}
+
+		private boolean hasAttrs() {
+			return attrs != null && attrsPT != null && attrsW != null;
+		}
+
+		public int getStrokeColor(int sourceColor) {
+			return ColorUtils.blendARGB(sourceColor, Color.BLACK, 0.6f);
+		}
+
+		private void recreateBitmaps() {
+			if (hasAttrs()) {
+				float walkCircleH = attrsW.paint.getStrokeWidth() * 1.33f;
+				float walkCircleW = attrsW.paint.getStrokeWidth();
+				float walkCircleRadius = attrsW.paint.getStrokeWidth() / 2f;
+				float routeShieldRadius = attrsPT.paint3.getStrokeWidth() / 2f;
+
+				// create anchor bitmap
+				float margin = 2f * density;
+				float width = routeShieldRadius * 2 + margin * 2;
+				float height = routeShieldRadius * 2 + margin * 2;
+				Bitmap bitmap = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
+
+				Canvas canvas = new Canvas(bitmap);
+				Paint paint = new Paint();
+				paint.setAntiAlias(true);
+				paint.setStrokeWidth(1f * density);
+
+				float x = width / 2;
+				float y = height / 2;
+				paint.setColor(Color.WHITE);
+				paint.setStyle(Paint.Style.FILL);
+				canvas.drawCircle(x, y, routeShieldRadius, paint);
+				paint.setColor(Color.BLACK);
+				paint.setStyle(Paint.Style.STROKE);
+				canvas.drawCircle(x, y, routeShieldRadius, paint);
+
+				anchorBitmap = bitmap;
+
+				// create walk arrow bitmap
+				width = walkCircleW + margin * 2;
+				height = walkCircleH + margin * 2;
+				bitmap = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
+
+				canvas = new Canvas(bitmap);
+				paint = new Paint();
+				paint.setAntiAlias(true);
+				paint.setStrokeWidth(1f * density);
+
+				RectF rect = new RectF(margin, margin, width - margin, height - margin);
+				paint.setColor(attrsW.paint.getColor());
+				paint.setStyle(Paint.Style.FILL);
+				canvas.drawRoundRect(rect, walkCircleRadius, walkCircleRadius, paint);
+				paint.setColor(getStrokeColor(paint.getColor()));
+				paint.setStyle(Paint.Style.STROKE);
+				canvas.drawRoundRect(rect, walkCircleRadius, walkCircleRadius, paint);
+
+				paint = new Paint();
+				paint.setAntiAlias(true);
+				paint.setColor(Color.WHITE);
+				paint.setStrokeWidth(1f * density);
+				paint.setAlpha(200);
+				canvas.drawBitmap(arrowBitmap, width / 2 - arrowBitmap.getWidth() / 2f, height / 2 - arrowBitmap.getHeight() / 2f, paint);
+
+				walkArrowBitmap = bitmap;
+				stopBitmapsCache = new HashMap<>();
+			}
+		}
+
+		public Paint getPaintIcon() {
+			return paintIcon;
+		}
+
+		public Paint getPaintIconCustom() {
+			return paintIconCustom;
+		}
+
+		public Bitmap getArrowBitmap() {
+			return arrowBitmap;
+		}
+
+		public Bitmap getWalkArrowBitmap() {
+			return walkArrowBitmap;
+		}
+
+		public Bitmap getAnchorBitmap() {
+			return anchorBitmap;
+		}
+
+		public Bitmap getStopShieldBitmap(int color, Bitmap stopBitmap) {
+			Bitmap bmp = stopBitmapsCache.get(new Pair<>(color, stopBitmap));
+			if (bmp == null) {
+				int fillColor = UiUtilities.getContrastColor(getApp(), color, true);
+				int strokeColor = getStrokeColor(color);
+
+				float routeShieldRadius = attrsPT.paint3.getStrokeWidth() / 2;
+				float routeShieldCornerRadius = 3 * density;
+
+				float margin = 2f * density;
+				float width = routeShieldRadius * 2 + margin * 2;
+				float height = routeShieldRadius * 2 + margin * 2;
+				bmp = Bitmap.createBitmap((int) width, (int) height, Bitmap.Config.ARGB_8888);
+
+				Canvas canvas = new Canvas(bmp);
+				Paint paint = new Paint();
+				paint.setAntiAlias(true);
+				paint.setStrokeWidth(1f * density);
+
+				RectF rect = new RectF(margin, margin, width - margin, height - margin);
+				paint.setColor(fillColor);
+				paint.setStyle(Paint.Style.FILL);
+				canvas.drawRoundRect(rect, routeShieldCornerRadius, routeShieldCornerRadius, paint);
+				paint.setColor(strokeColor);
+				paint.setStyle(Paint.Style.STROKE);
+				canvas.drawRoundRect(rect, routeShieldCornerRadius, routeShieldCornerRadius, paint);
+
+				if (stopBitmap != null) {
+					paint.setFilterBitmap(true);
+					paint.setColorFilter(new PorterDuffColorFilter(strokeColor, Mode.SRC_IN));
+					Rect src = new Rect(0, 0, stopBitmap.getWidth(), stopBitmap.getHeight());
+					float marginBitmap = 1f * density;
+					rect.inset(marginBitmap, marginBitmap);
+					canvas.drawBitmap(stopBitmap, src, rect, paint);
+				}
+				stopBitmapsCache.put(new Pair<>(color, stopBitmap), bmp);
+			}
+			return bmp;
+		}
+	}
+
+	public abstract static class GeometryWayStyle {
+
+		private GeometryWayContext context;
+		protected Integer color;
+
+		public GeometryWayStyle(GeometryWayContext context) {
+			this.context = context;
+		}
+
+		public GeometryWayStyle(GeometryWayContext context, Integer color) {
+			this.context = context;
 			this.color = color;
-			this.type = type;
+		}
+
+		public GeometryWayContext getContext() {
+			return context;
+		}
+
+		public Context getCtx() {
+			return context.ctx;
 		}
 
 		public Integer getColor() {
 			return color;
 		}
 
-		public int getType() {
-			return type;
+		public Integer getStrokeColor() {
+			return context.getStrokeColor(color);
+		}
+
+		public Integer getPointColor() {
+			return null;
+		}
+
+		public boolean isNightMode() {
+			return context.nightMode;
+		}
+
+		public boolean hasAnchors() {
+			return false;
+		}
+
+		public boolean hasPathLine() {
+			return true;
+		}
+
+		public boolean isTransportLine() {
+			return false;
+		}
+
+		public boolean isWalkLine() {
+			return false;
+		}
+
+		public abstract Bitmap getPointBitmap();
+
+		public boolean hasPaintedPointBitmap() {
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			return (color != null ? color.hashCode() : 0) + (context.nightMode ? 1231 : 1237) + (hasAnchors() ? 12310 : 12370);
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			if (this == other) {
+				return true;
+			}
+			if (!(other instanceof GeometryWayStyle)) {
+				return false;
+			}
+			GeometryWayStyle o = (GeometryWayStyle) other;
+			if (color != null && o.color != null) {
+				return color.equals(o.color);
+			}
+			return color == null && o.color == null;
 		}
 	}
 
@@ -178,7 +449,6 @@ public abstract class OsmandMapLayer {
 		int cnt = 0;
 		boolean hasStyles = styles != null && styles.size() == xs.size();
 		GeometryWayStyle style = hasStyles ? styles.get(0) : null;
-		int color = hasStyles ? styles.get(0).color : 0;
 		Path path = new Path();
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
 		for (int i = 1; i < xs.size(); i++) {
@@ -224,14 +494,12 @@ public abstract class OsmandMapLayer {
 
 			if (hasStyles) {
 				GeometryWayStyle newStyle = styles.get(i);
-				int newColor = newStyle.getColor();
-				if (color != newColor) {
+				if (!style.equals(newStyle)) {
 					paths.add(new Pair<>(path, style));
 					path = new Path();
 					if (segmentStarted) {
 						path.moveTo(currX, currY);
 					}
-					color = newColor;
 					style = newStyle;
 				}
 			}
@@ -474,8 +742,7 @@ public abstract class OsmandMapLayer {
 		}
 
 
-		public boolean updatePaints(OsmandMapTileView view, DrawSettings settings, RotatedTileBox tileBox) {
-			OsmandApplication app = view.getApplication();
+		public boolean updatePaints(OsmandApplication app, DrawSettings settings, RotatedTileBox tileBox) {
 			OsmandRenderer renderer = app.getResourceManager().getRenderer().getRenderer();
 			RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
 			final boolean isNight = settings != null && settings.isNightMode();

@@ -233,7 +233,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		OsmandSettings settings = map.getMyApplication().getSettings();
+		OsmandApplication app = map.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_MAP_MARKERS.get()) {
 			return;
 		}
@@ -244,14 +245,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			myLoc.setLatitude(fingerLocation.getLatitude());
 			myLoc.setLongitude(fingerLocation.getLongitude());
 		} else {
-			myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		}
-		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (route != null && route.points.size() > 0) {
-			planRouteAttrs.updatePaints(view, nightMode, tileBox);
+			planRouteAttrs.updatePaints(app, nightMode, tileBox);
 			route.renders.clear();
 			route.renders.add(new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2));
 			route.drawRenderers(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
@@ -261,8 +262,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			textAttrs.paint.setTextSize(textSize);
 			textAttrs.paint2.setTextSize(textSize);
 
-			lineAttrs.updatePaints(view, nightMode, tileBox);
-			textAttrs.updatePaints(view, nightMode, tileBox);
+			lineAttrs.updatePaints(app, nightMode, tileBox);
+			textAttrs.updatePaints(app, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
 
 			textPaint.set(textAttrs.paint);
