@@ -10,6 +10,7 @@ import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserTextLocation
 import net.osmand.telegram.utils.OsmandLocationUtils.MessageOsmAndBotLocation
 import net.osmand.telegram.utils.GPXUtilities
+import net.osmand.telegram.utils.GPXUtilities.GPXFile
 import org.drinkless.td.libcore.telegram.TdApi
 
 object TelegramUiHelper {
@@ -131,7 +132,7 @@ object TelegramUiHelper {
 		}
 	}
 
-	fun gpxToChatItem(helper: TelegramHelper, gpx: GPXUtilities.GPXFile, simpleUserItem: Boolean): GpxChatItem? {
+	fun gpxToChatItem(helper: TelegramHelper, gpx: GPXFile, simpleUserItem: Boolean): GpxChatItem? {
 		return if (simpleUserItem) gpxToUserGpxChatItem(helper, gpx) else gpxToGpxChatItem(helper, gpx)
 	}
 
@@ -232,7 +233,7 @@ object TelegramUiHelper {
 
 	private fun gpxToGpxChatItem(
 		helper: TelegramHelper,
-		gpx: GPXUtilities.GPXFile
+		gpx: GPXFile
 	): GpxChatItem? {
 		val user = helper.getUser(gpx.userId) ?: return null
 		val chat = helper.getChat(gpx.chatId) ?: return null
@@ -258,7 +259,7 @@ object TelegramUiHelper {
 
 	private fun gpxToUserGpxChatItem(
 		helper: TelegramHelper,
-		gpx: GPXUtilities.GPXFile
+		gpx: GPXFile
 	): GpxChatItem? {
 		val user = helper.getUser(gpx.userId) ?: return null
 		return GpxChatItem().apply {
@@ -323,7 +324,7 @@ object TelegramUiHelper {
 
 	class GpxChatItem : ListItem() {
 
-		var gpxFile: GPXUtilities.GPXFile? = null
+		var gpxFile: GPXFile? = null
 			internal set
 		var groupPhotoPath: String? = null
 			internal set

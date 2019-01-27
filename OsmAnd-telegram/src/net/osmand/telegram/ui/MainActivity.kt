@@ -19,7 +19,7 @@ import android.widget.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.helpers.LocationMessages
+import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
@@ -293,9 +293,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 		if (app.telegramService == null) {
 			messages.forEach {
-				val locationMessage = OsmandLocationUtils.parseMessage(it, telegramHelper, LocationMessages.LocationMessage.STATUS_INCOMING)
+				val locationMessage = OsmandLocationUtils.parseMessage(it, telegramHelper, LocationMessage.STATUS_PREPARED)
 				if (locationMessage != null) {
-					app.locationMessages.addLocationMessage(locationMessage)
+					app.locationMessages.addIngoingMessage(locationMessage)
 				}
 			}
 		}
@@ -349,7 +349,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
 			if (app.isInternetConnectionAvailable) {
-				app.locationMessages.clearMessages()
+				// todo - why delete messages on logout?
+				app.locationMessages.clearOutgoingMessages()
 				settings.clear()
 				telegramHelper.logout()
 			} else {

@@ -716,13 +716,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				holder.gpsPointsCollected?.apply {
 					if (shareInfo != null) {
-						val all = app.locationMessages.getOutgoingMessagesToChat(shareInfo.chatId)
+						val all = app.locationMessages.getOutgoingMessages(shareInfo.chatId)
 						text = "${all.size}"
 					}
 				}
 				holder.gpsPointsSent?.apply {
 					if (shareInfo != null) {
-						val sent = app.locationMessages.getOutgoingMessagesToChatFromDate(shareInfo.chatId, shareInfo.start * 1000)
+						val sent = app.locationMessages.getSentMessages(shareInfo.chatId, shareInfo.start * 1000)
 						text = "${sent.size}"
 					}
 				}

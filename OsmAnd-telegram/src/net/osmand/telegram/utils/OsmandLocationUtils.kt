@@ -3,7 +3,7 @@ package net.osmand.telegram.utils
 import android.os.AsyncTask
 import net.osmand.Location
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.helpers.LocationMessages
+import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.util.GeoPointParserUtil
@@ -74,8 +74,8 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun parseMessage(message: TdApi.Message, helper: TelegramHelper, status: Int): LocationMessages.LocationMessage? {
-		var locationMessage: LocationMessages.LocationMessage? = null
+	fun parseMessage(message: TdApi.Message, helper: TelegramHelper, status: Int): LocationMessage? {
+		var locationMessage: LocationMessage? = null
 		val oldContent = message.content
 
 		val fromBot = helper.isOsmAndBot(message.senderUserId)
@@ -106,9 +106,9 @@ object OsmandLocationUtils {
 			}
 
 		if (parsedMessageContent != null) {
-			locationMessage = LocationMessages.LocationMessage(helper.getSenderMessageId(message), message.chatId, parsedMessageContent.lat,
-				parsedMessageContent.lon, parsedMessageContent.altitude, parsedMessageContent.speed, parsedMessageContent.hdop,
-				parsedMessageContent.bearing, parsedMessageContent.lastUpdated * 1000L, messageType, status, message.id)
+			locationMessage = LocationMessage(helper.getSenderMessageId(message), message.chatId, parsedMessageContent.lat,
+					parsedMessageContent.lon, parsedMessageContent.altitude, parsedMessageContent.speed, parsedMessageContent.hdop,
+					parsedMessageContent.bearing, parsedMessageContent.lastUpdated * 1000L, messageType, status, message.id)
 		}
 		return locationMessage
 	}
@@ -117,7 +117,7 @@ object OsmandLocationUtils {
 		return String.format(Locale.US, "%.5f, %.5f", sig.latitude, sig.longitude)
 	}
 
-	fun formatLocation(sig: LocationMessages.LocationMessage): String {
+	fun formatLocation(sig: LocationMessage): String {
 		return String.format(Locale.US, "%.5f, %.5f", sig.lat, sig.lon)
 	}
 
@@ -274,7 +274,7 @@ object OsmandLocationUtils {
 		return 0
 	}
 
-	fun getTextMessageContent(updateId: Int, location: LocationMessages.LocationMessage): TdApi.InputMessageText {
+	fun getTextMessageContent(updateId: Int, location: LocationMessage): TdApi.InputMessageText {
 		val entities = mutableListOf<TdApi.TextEntity>()
 		val builder = StringBuilder()
 		val locationMessage = formatLocation(location)
@@ -313,7 +313,7 @@ object OsmandLocationUtils {
 		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
 	}
 
-	fun convertLocationMessagesToGpxFiles(items: List<LocationMessages.LocationMessage>, newGpxPerChat: Boolean = true): List<GPXUtilities.GPXFile> {
+	fun convertLocationMessagesToGpxFiles(items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXUtilities.GPXFile> {
 		val dataTracks = ArrayList<GPXUtilities.GPXFile>()
 
 		var previousTime: Long = -1

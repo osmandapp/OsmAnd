@@ -192,6 +192,7 @@ class TimelineTabFragment : Fragment() {
 		val currentUserId = telegramHelper.getCurrentUser()?.id
 		if (currentUserId != null) {
 			val locationMessages = app.locationMessages.collectRecordedDataForUser(currentUserId, 0, start, end)
+			// todo - why do we need convert to gpx on update? Is locationMessages not enough to display info?
 			OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages, false).forEach {
 				TelegramUiHelper.gpxToChatItem(telegramHelper, it, true)?.also { chatItem ->
 					res.add(chatItem)

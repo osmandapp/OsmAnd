@@ -1,11 +1,9 @@
 package net.osmand.telegram.helpers
 
 import android.text.TextUtils
-import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.telegram.*
 import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
-import net.osmand.telegram.utils.BASE_SHARING_URL
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -22,7 +20,6 @@ import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
 import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
 import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
