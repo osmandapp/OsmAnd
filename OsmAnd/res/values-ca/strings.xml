@@ -3061,4 +3061,23 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Mode Diürn</string>
     <string name="quick_action_switch_night_mode">Mode Nocturn</string>
     <string name="quick_action_day_night_switch_mode">Canvia mode Diürn/Nocturn</string>
+    <string name="swap_start_and_destination">Bescanvia sortida i arribada</string>
+    <string name="add_destination_point">Afegeix destinació</string>
+    <string name="add_intermediate_point">Afegeix punt intermedi</string>
+    <string name="add_start_point">Afegeix punt d\'Inici</string>
+    <string name="intermediate_waypoint">Punt intermedi: %1$s</string>
+    <string name="waypoints">Fites: %1$s</string>
+    <string name="transfers">transferències: %1$s</string>
+    <string name="on_foot">a peu: %1$s</string>
+    <string name="route_way">Via: %1$s</string>
+    <string name="points_of_interests">Punts d\'interès(PDI)</string>
+    <string name="waiting_for_route_calculation">Esperant el càlcul de la ruta</string>
+    <string name="app_mode_public_transport">Transport públic</string>
+    <string name="avoid_roads_descr">Seleccioneu la carretera del mapa o de la llista de sota que volgueu evitar en la navegació:</string>
+    <string name="show_along_the_route">Mostra al llarg de la ruta</string>
+    <string name="simulate_navigation">Simula la navegació</string>
+    <string name="choose_track_file_to_follow">Seleccioneu l\'arxiu de la traça a seguir</string>
+    <string name="voice_announcements">Anuncis de veu</string>
+    <string name="intermediate_destinations">Destinacions intermèdies: %1$s</string>
+    <string name="arrive_at_time">Arribada a %1$s</string>
 </resources>
