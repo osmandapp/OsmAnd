@@ -3030,4 +3030,20 @@
     <string name="lang_gn_py">Гуарани</string>
     <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
     <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
+    <string name="swap_start_and_destination">Поменять местами пункты отправления и назначения</string>
+    <string name="add_destination_point">Добавить пункт назначения</string>
+    <string name="add_intermediate_point">Добавить промежуточный пункт</string>
+    <string name="add_start_point">Добавить пункт отправления</string>
+    <string name="route_way">Путь: %1$s</string>
+    <string name="points_of_interests">Точки интереса (POI)</string>
+    <string name="waiting_for_route_calculation">Ожидание расчета маршрута</string>
+    <string name="app_mode_public_transport">Общественный транспорт</string>
+    <string name="avoid_roads_descr">Выберите дорогу на карте или из списка ниже, которую вы хотите избежать во время навигации:</string>
+    <string name="simulate_navigation">Моделировать навигацию</string>
+    <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
+    <string name="voice_announcements">Голосовые объявления</string>
+    <string name="quick_action_switch_day_night_descr">Нажатие на кнопку действия переключает дневной и ночной режимы для OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Дневной режим</string>
+    <string name="quick_action_switch_night_mode">Ночной режим</string>
+    <string name="quick_action_day_night_switch_mode">Переключить дневной/ночной режим</string>
 </resources>
