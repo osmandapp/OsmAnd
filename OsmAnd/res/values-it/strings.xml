@@ -1251,7 +1251,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="keep_and_add_destination_point">Aggiungi come destinazione successiva</string>
     <string name="use_displayed_track_for_navigation">Usare la traccia visualizzata per la navigazione\?</string>
 
-    <string name="calculate_osmand_route_without_internet">Calcolo offline di un tratto di percorso OsmAnd</string>
+    <string name="calculate_osmand_route_without_internet">Calcolo offline OsmAnd di un tratto di percorso</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola percorso OsmAnd per i tratti prima e dopo il GPX</string>
 
     <string name="lang_en">Inglese</string>
@@ -2677,7 +2677,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n • Carica tracce GPX in OSM direttamente dall\'app
 \n • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline)</string>
     <string name="mapillary">Mapillary</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automatica Navigazione Direzioni ) è un\'app di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM). 
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automatizzata Navigazione Direzioni ) è un\'app di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM). 
 \n 
 \n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle linee isoipse e delle informazioni di altitudine (attraverso un componente aggiuntivo), la scelta tra le modalità automobile, bici, a piedi, con le modifiche OSM e molto altro.</string>
     <string name="mapillary_widget">Widget di Mapillary</string>
