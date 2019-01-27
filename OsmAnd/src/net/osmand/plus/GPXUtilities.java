@@ -1566,18 +1566,16 @@ public class GPXUtilities {
 				if (tok == XmlPullParser.START_TAG) {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
-					if (extensionReadMode && parse instanceof GPXExtensions) {
+					if (extensionReadMode && parse != null) {
 						String value = readText(parser, tag);
 						if (value != null) {
 							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
 							if (tag.equals("speed") && parse instanceof WptPt) {
 								try {
 									((WptPt) parse).speed = Float.parseFloat(value);
-								} catch (NumberFormatException e) {
-								}
+								} catch (NumberFormatException e) {}
 							}
 						}
-
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = true;
 					} else {

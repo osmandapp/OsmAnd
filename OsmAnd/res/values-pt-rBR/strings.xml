@@ -1751,7 +1751,7 @@ Pôr do Sol: %2$s</string>
 <string name="lang_lb">Luxemburguês</string>
 <string name="lang_os">Osseta</string>
 <string name="lang_eo">Esperanto</string>
-<string name="restart_is_required">Reinicie o aplicativo manualmente para aplicar todas as alterações.</string>
+<string name="restart_is_required">Reinicie o aplicativo para aplicar todas as alterações.</string>
 <string name="rendering_attr_currentTrackColor_name">Cor do GPX</string>
 <string name="rendering_attr_currentTrackWidth_name">Largura do GPX</string>
 <string name="rendering_value_red_name">Vermelho</string>
@@ -3006,11 +3006,11 @@ Pôr do Sol: %2$s</string>
     <string name="test_voice_desrc">Toque num botão e ouça a correspondente voz de comando para identificar os comandos faltantes ou com falha.</string>
 <string name="osm_live_plan_pricing">Planos</string>
     <string name="osm_live_payment_monthly_title">Pague mensalmente</string>
-    <string name="osm_live_payment_3_months_title">Pague trimestralmente</string>
-    <string name="osm_live_payment_annual_title">Pague anualmente</string>
+    <string name="osm_live_payment_3_months_title">Pague 3 meses</string>
+    <string name="osm_live_payment_annual_title">Pague 1 ano</string>
     <string name="osm_live_payment_month_cost_descr">%1$s ao mês</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s ao mês</string>
-    <string name="osm_live_payment_discount_descr">Economize %1$s!</string>
+    <string name="osm_live_payment_discount_descr">Menos %1$s!</string>
 	<string name="osm_live_payment_current_subscription">Sua assinatura atual</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>

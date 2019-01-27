@@ -3111,4 +3111,8 @@
     <string name="run_full_osmand_msg">Du bruker {0}-kart, muliggjort av OsmAnd. Ønsker du å kjøre fullversjonen av OsmAnd\?</string>
     <string name="run_full_osmand_header">Kjør OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Å trykke på denne knappen bytter mellom dag- og nattmodus i OsmAnd.</string>
+    <string name="quick_action_switch_day_mode">Dagmodus</string>
+    <string name="quick_action_switch_night_mode">Nattmodus</string>
+    <string name="quick_action_day_night_switch_mode">Veksle dag-/nattmodus</string>
 </resources>

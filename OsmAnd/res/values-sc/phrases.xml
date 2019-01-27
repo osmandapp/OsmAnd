@@ -3934,4 +3934,9 @@
     <string name="poi_books_academic">Acadèmicu</string>
     <string name="poi_books_children">Pitzinnos</string>
     <string name="poi_atoll">Atollu</string>
+    <string name="poi_toll_gantry">Incasteddadura de pedàgiu</string>
+    <string name="poi_childcare">Assistèntzia a sos pitzinnos</string>
+    <string name="poi_denotation">Denotatzione</string>
+    <string name="poi_denotation_natural_monument">Monumentu naturale</string>
+    <string name="poi_denotation_landmark">Puntu de riferimentu</string>
 </resources>

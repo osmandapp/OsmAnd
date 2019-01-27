@@ -3919,4 +3919,9 @@
     <string name="poi_books_academic">Akademische</string>
     <string name="poi_books_children">Kinder</string>
     <string name="poi_atoll">Atoll</string>
+    <string name="poi_denotation">Bezeichnung</string>
+    <string name="poi_toll_gantry">Mautkontrollbrücke</string>
+    <string name="poi_childcare">Kinderbetreuung</string>
+    <string name="poi_denotation_natural_monument">Naturdenkmal</string>
+    <string name="poi_denotation_landmark">Orientierungspunkt</string>
 </resources>

@@ -3876,5 +3876,8 @@
 
 	<string name="poi_childcare">Уход за детьми</string>
 
+	<string name="poi_denotation">Значение</string>
+	<string name="poi_denotation_natural_monument">Памятник природы</string>
+	<string name="poi_denotation_landmark">Ориентир</string>
 
 </resources>

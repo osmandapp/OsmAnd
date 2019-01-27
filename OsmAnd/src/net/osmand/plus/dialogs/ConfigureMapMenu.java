@@ -1399,7 +1399,10 @@ public class ConfigureMapMenu {
 
 		public static int parseTrackColor(RenderingRulesStorage renderer, String colorName) {
 			int defaultColor = -1;
-			RenderingRule gpxRule = renderer.getRenderingAttributeRule("gpx");
+			RenderingRule gpxRule = null;
+			if(renderer!=null) {
+				gpxRule = renderer.getRenderingAttributeRule("gpx");
+			}
 			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
 				List<RenderingRule> rules = renderer.getRenderingAttributeRule("gpx").getIfElseChildren().get(0).getIfElseChildren();
 				for (RenderingRule r : rules) {

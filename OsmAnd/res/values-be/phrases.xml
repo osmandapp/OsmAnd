@@ -3957,4 +3957,9 @@
     <string name="poi_books_academic">Акадэмічныя</string>
     <string name="poi_books_children">Дзіцячыя</string>
     <string name="poi_atoll">Атол</string>
+    <string name="poi_toll_gantry">Рамка аплаты</string>
+    <string name="poi_childcare">Догляд за дзецьмі</string>
+    <string name="poi_denotation">Абазначэнне</string>
+    <string name="poi_denotation_natural_monument">Помнік прыроды</string>
+    <string name="poi_denotation_landmark">Арыенцір</string>
 </resources>

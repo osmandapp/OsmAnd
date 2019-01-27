@@ -3941,4 +3941,9 @@
     <string name="poi_books_academic">Akademickie</string>
     <string name="poi_books_children">Dla dzieci</string>
     <string name="poi_atoll">Atol</string>
+    <string name="poi_denotation">Denotacja</string>
+    <string name="poi_toll_gantry">Brama poboru opłat</string>
+    <string name="poi_childcare">Opieka nad dziećmi</string>
+    <string name="poi_denotation_natural_monument">Pomnik przyrody</string>
+    <string name="poi_denotation_landmark">Punkt orientacyjny</string>
 </resources>
