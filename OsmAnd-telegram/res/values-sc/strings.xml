@@ -1,2 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources><string name="average_altitude">Artària mèdia</string>
+    <string name="average_speed">Lestresa mèdia</string>
+    <string name="open_in_osmand">Aberi in OsmAnd</string>
+    <string name="end_date">Data de fine</string>
+    <string name="start_date">Data de incumintzu</string>
+    <string name="shared_string_map">Mapa</string>
+    <string name="shared_string_text">Testu</string>
+    <string name="map_and_text">Mapa e testu</string>
+    <string name="shared_string_add">Annanghe</string>
+    <string name="device_name">Nùmene de su dispositivu</string>
+    <string name="shared_string_hide">Istichi</string>
+    <string name="shared_string_later">Prus a tardu</string>
+    <string name="shared_string_status">Istadu</string>
+    <string name="shared_string_disable">Disabìlita</string>
+    <string name="shared_string_save">Sarva</string>
+    <string name="shared_string_name">Nùmene</string>
+    <string name="shared_string_sort">Òrdina</string>
+    <string name="shared_string_exit">Essi</string>
+    <string name="shared_string_close">Serra</string>
+    <string name="shared_string_all">Totus</string>
+    <string name="shared_string_off">Istudadu</string>
+    <string name="shared_string_install">Installa</string>
+    <string name="shared_string_share">Cumpartzi</string>
+    <string name="shared_string_back">In dae segus</string>
+    <string name="shared_string_continue">Sighi</string>
+    <string name="shared_string_cancel">Annulla</string>
+    <string name="shared_string_settings">Impostatziones</string>
+    <string name="no_location_permission">S’aplicatzione no est autorizada a atzèdere a sos datos de positzione.</string>
+    <string name="gps_not_available">Allughe sa \"positzione\" in sas impostatziones</string>
+    <string name="osmand_service">Modalidade de isfundu</string>
+    <string name="osmand_service_descr">OsmAnd Telegram sighit a funtzionare in s’isfundu, cun s’ischermu mortu.</string>
+    <string name="shared_string_distance">Distàntzia</string>
+    <string name="share_location">Cumpartzi sa positzione</string>
+    <string name="install_osmand">Installa OsmAnd</string>
+    <string name="active_chats">Tzarradas ativas</string>
+</resources>
