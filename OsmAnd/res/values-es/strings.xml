@@ -1542,7 +1542,7 @@
     <string name="shared_string_enabled">Activado</string>
     <string name="plugin_description_title">Descripción</string>
     <string name="edit_group">Editar grupo</string>
-    <string name="plugin_install_needs_network">Es necesaria una conexión a Internet para instalar este complemento.</string>
+    <string name="plugin_install_needs_network">Debe conectarse a Internet para instalar este complemento.</string>
     <string name="plugin_ski_name">Vista invernal</string>
     <string name="plugin_nautical_name">Vista náutica</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, debe descargarse el mapa especial sin conexión</string>
@@ -2561,7 +2561,7 @@
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
     <string name="nothing_found">Nada encontrado</string>
-    <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda.</string>
+    <string name="nothing_found_descr">Modificar la consulta de búsqueda o aumentar el radio de búsqueda.</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
     <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje?</string>
@@ -2985,7 +2985,7 @@
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDenos su opinión</string>
     <string name="commiting_way">Enviando vía…</string>
-    <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar las indicaciones que faltan o son defectuosas.</string>
+    <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar avisos faltantes o defectuosos.</string>
 <string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía en algunos dispositivos
 \n
 \n • Nueva función de marcadores: muestra los marcadores que ya han sido atravesados.
@@ -3002,12 +3002,12 @@
 \n</string>
     <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
     <string name="rendering_value_black_name">Negro</string>
-    <string name="search_street">Buscar calle</string>
-    <string name="start_search_from_city">Selecciona primero la ciudad</string>
+    <string name="search_street">Buscar la calle</string>
+    <string name="start_search_from_city">Elegir la ciudad o pueblo</string>
     <string name="shared_string_restore">Restaurar</string>
-    <string name="keep_passed_markers_descr">Los marcadores añadidos como un grupo de Favoritos o puntos de ruta GPX marcados como Pasados permanecerán en el mapa. Si el grupo no está activo, los marcadores desaparecerán del mapa.</string>
-    <string name="keep_passed_markers">Mantener marcadores pasados en el mapa</string>
-    <string name="more_transport_on_stop_hint">Hay más transporte en esta parada.</string>
+    <string name="keep_passed_markers_descr">Los marcadores añadidos como un grupo de Favoritos o puntos de ruta GPX marcados como «Usados», permanecerán en el mapa. Si el grupo no está activo, los marcadores desaparecerán del mapa.</string>
+    <string name="keep_passed_markers">Mantener en el mapa los marcadores ya usados</string>
+    <string name="more_transport_on_stop_hint">Hay más transportes en esta parada.</string>
     <string name="markers_remove_dialog_msg">¿Borrar marcador del mapa «%s»\?</string>
     <string name="edit_map_marker">Editar marcador del mapa</string>
     <string name="third_party_application">Aplicación de terceros</string>
@@ -3022,7 +3022,7 @@
     <string name="osm_live_payment_renews_monthly">Renovar mensualmente</string>
     <string name="osm_live_payment_renews_quarterly">Renovar trimestralmente</string>
     <string name="osm_live_payment_renews_annually">Renovar anualmente</string>
-    <string name="default_price_currency_format">1$.2f %2$s</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Elige la frecuencia de pago:</string>
     <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
     <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
@@ -3032,27 +3032,27 @@
     <string name="lang_gn_py">Guaraní</string>
     <string name="run_full_osmand_msg">Está utilizando el mapa «{0}» que funciona con OsmAnd. ¿Quiere ejecutar la versión completa de OsmAnd\?</string>
     <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
-    <string name="quick_action_switch_day_night_descr">Pulsando este botón de acción alterna entre los modos Día y Noche para OsmAnd</string>
-    <string name="quick_action_switch_day_mode">Modo Día</string>
-    <string name="quick_action_switch_night_mode">Modo Noche</string>
-    <string name="quick_action_day_night_switch_mode">Cambia modo Día/Noche</string>
-    <string name="swap_start_and_destination">Swap inicio y destino</string>
-    <string name="add_destination_point">Agregar destino</string>
-    <string name="add_intermediate_point">Añadir intermedio</string>
-    <string name="add_start_point">Añadir punto de inicio</string>
+    <string name="quick_action_switch_day_night_descr">Este botón de acción, alterna entre el modo «Diurno» y «Nocturno» para OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Modo diurno</string>
+    <string name="quick_action_switch_night_mode">Modo nocturno</string>
+    <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
+    <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
+    <string name="add_destination_point">Añadir destino</string>
+    <string name="add_intermediate_point">Añadir punto intermedio</string>
+    <string name="add_start_point">Añadir punto de partida</string>
     <string name="intermediate_waypoint">Punto intermedio: %1$s</string>
-    <string name="waypoints">Puntos de ruta: %1$s</string>
-    <string name="transfers">transferencias %1$s</string>
+    <string name="waypoints">Puntos de referencia: %1$s</string>
+    <string name="transfers">transferencias: %1$s</string>
     <string name="on_foot">a pie: %1$s</string>
     <string name="route_way">Camino: %1$s</string>
-    <string name="points_of_interests">Puntos de interés(PI)</string>
+    <string name="points_of_interests">Puntos de interés (PDI)</string>
     <string name="waiting_for_route_calculation">Esperando el cálculo de la ruta</string>
     <string name="app_mode_public_transport">Transporte público</string>
-    <string name="avoid_roads_descr">Seleccione la ruta en el mapa o en la lista a continuación que desee evitar durante la navegación:</string>
-    <string name="show_along_the_route">Mostrar ruta mas larga</string>
-    <string name="simulate_navigation">Simular la navegación</string>
-    <string name="choose_track_file_to_follow">Elija el archivo de seguimiento a seguir</string>
+    <string name="avoid_roads_descr">Marca el camino a evitar durante la navegación, desde el mapa o de la siguiente lista:</string>
+    <string name="show_along_the_route">Mostrar a lo largo de la ruta</string>
+    <string name="simulate_navigation">Simular navegación</string>
+    <string name="choose_track_file_to_follow">Elija el archivo de la traza a seguir</string>
     <string name="voice_announcements">Anuncios de voz</string>
     <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
-    <string name="arrive_at_time">Llegar a %1$s</string>
+    <string name="arrive_at_time">Llegará a las %1$s</string>
 </resources>
