@@ -486,7 +486,7 @@
 \n
 \nMantene incarcadu pro sas optziones"</string>
     <string name="gpx_info_subtracks">Suta-rastas: %1$s</string>
-    <string name="gpx_info_waypoints">Puntu de coladòrgiu: %1$s</string>
+    <string name="gpx_info_waypoints">Puntos de coladòrgiu: %1$s</string>
     <string name="gpx_info_distance">Distàntzia: %1$s (%2$s points)</string>
     <string name="gpx_info_start_time">Oràriu de tzuccada: %1$tF, %1$tT</string>
     <string name="gpx_info_end_time">Oràriu de lòmpida: %1$tF, %1$tT</string>
@@ -3182,4 +3182,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_switch_day_mode">Modalidade pro sa die</string>
     <string name="quick_action_switch_night_mode">Modalidade pro sa note</string>
     <string name="quick_action_day_night_switch_mode">Cola intre Die/Note</string>
+    <string name="add_destination_point">Annanghe una destinatzione</string>
+    <string name="waypoints">Puntos de coladòrgiu: %1$s</string>
 </resources>
