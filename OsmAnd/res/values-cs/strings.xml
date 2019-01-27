@@ -2996,4 +2996,8 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="run_full_osmand_msg">Používáte mapu {0}, která běží na aplikaci OsmAnd. Chcete spustit plnou verzi OsmAnd\?</string>
     <string name="run_full_osmand_header">Spustit OsmAnd\?</string>
     <string name="lang_gn_py">Guaranština</string>
+    <string name="quick_action_switch_day_night_descr">Klepnutím na tlačítko akce se přepíná mezi denním a nočním režimem OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Denní režim</string>
+    <string name="quick_action_switch_night_mode">Noční režim</string>
+    <string name="quick_action_day_night_switch_mode">Přepnout denní/noční režim</string>
 </resources>
