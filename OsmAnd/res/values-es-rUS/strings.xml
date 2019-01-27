@@ -3051,4 +3051,8 @@ Lon %2$s</string>
     <string name="run_full_osmand_msg">Estás utilizando el mapa «{0}» que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
     <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Este botón de acción, alterna entre el modo «Diurno» y «Nocturno» para OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Modo diurno</string>
+    <string name="quick_action_switch_night_mode">Modo nocturno</string>
+    <string name="quick_action_day_night_switch_mode">Alternar modos Diurno/Nocturno</string>
 </resources>
