@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Сapacity</string>
+    <string name="shared_string_width">Width</string>
+    <string name="shared_string_height">Height</string>
     <string name="osm_live_subscriptions">Subscriptions</string>
     <string name="powered_by_osmand">Powered by OsmAnd</string>
     <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
@@ -2423,12 +2428,6 @@
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="cubic_m">m³</string>
-    <string name="metric_ton">t</string>
-    <string name ="capacity">Сapacity</string>
-    <string name="width_label">Width</string>
-    <string name="height_label">Height</string>
-    <string name="distance_label">Distance</string>
     <string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\', not supported</string>
     <string name="poi_filter_closest_poi">Nearest POIs</string>
     <string name="poi_filter_custom_filter">Custom filter</string>

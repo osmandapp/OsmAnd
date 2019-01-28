@@ -61,7 +61,8 @@ import java.util.Map;
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private static final String WIKI_LINK = ".wikipedia.org/w";
-	public final static Log log = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	public final static Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	private final static DecimalFormat DF = new DecimalFormat("#.##");
 	private OsmandSettings.MetricsConstants metricSystem;
 	private final Amenity amenity;
 
@@ -684,26 +685,25 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private String[] getFormattedPrefixAndText(String key, String prefix, String value) {
-		DecimalFormat df = new DecimalFormat("#.##");
-		df.setRoundingMode(RoundingMode.CEILING);
+		DF.setRoundingMode(RoundingMode.CEILING);
 		String formattedValue = "";
 		String formattedPrefix = "";
 		switch (key) {
 			case "width":
 			case "height":
 				if (key.equals("width")) {
-					formattedPrefix = mapActivity.getResources().getString(R.string.width_label);
+					formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_width);
 				} else {
-					formattedPrefix = mapActivity.getResources().getString(R.string.height_label);
+					formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_height);
 				}
 			case "depth":
 			case "seamark_height":
 				double valueAsDouble = Double.valueOf(value);
 				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
-					formattedValue = String.valueOf(df.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
+					formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
 							+ " " + mapActivity.getResources().getString(R.string.foot);
 				} else if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
-					formattedValue = String.valueOf(df.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER))
+					formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER))
 							+ " " + mapActivity.getResources().getString(R.string.yard);
 				} else {
 					formattedValue = value + " " + mapActivity.getResources().getString(R.string.m);
@@ -727,7 +727,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			case "students":
 			case "spots":
 			case "seats":
-				formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.capacity));
+				formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
 				break;
 			default:
 				formattedValue = value;
