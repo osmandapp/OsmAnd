@@ -2098,7 +2098,7 @@ Lon %2$s</string>
     <string name="shared_string_read_more">Mehr lesen</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Änderungen speichern</string>
-    <string name="shared_string_email_address">E-Mail-Adresse speichern</string>
+    <string name="shared_string_email_address">E-Mail-Adresse</string>
     <string name="find_parking">Parkplatz finden</string>
     <string name="show_polygons">Flächen anzeigen</string>
     
@@ -3143,4 +3143,23 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_switch_night_mode">Nacht-Modus</string>
     <string name="quick_action_day_night_switch_mode">Schalter Tag/Nacht Modus</string>
     <string name="run_full_osmand_msg">Sie verwenden {0} Karte, die von OsmAnd unterstützt wird. Möchten Sie die OsmAnd Vollversion starten\?</string>
+    <string name="swap_start_and_destination">Vertausche Start und Ziel</string>
+    <string name="add_destination_point">Ziel hinzufügen</string>
+    <string name="add_intermediate_point">Zwischenpunkt hinzufügen</string>
+    <string name="add_start_point">Startpunkt hinzufügen</string>
+    <string name="intermediate_waypoint">Zwischenpunkt: %1$s</string>
+    <string name="waypoints">Wegpunkte: %1$s</string>
+    <string name="transfers">Umstiege: %1$s</string>
+    <string name="on_foot">Zu Fuß: %1$s</string>
+    <string name="route_way">Weg: %1$s</string>
+    <string name="points_of_interests">Orte von Interesse(OVI)</string>
+    <string name="waiting_for_route_calculation">Warten auf Routenberechung</string>
+    <string name="app_mode_public_transport">Öffentlicher Verkehr</string>
+    <string name="avoid_roads_descr">Wähle die Straße aus die während der Navigation vermieden werden soll, von der Karte oder von der Liste unten:</string>
+    <string name="show_along_the_route">Entlang der Route anzeigen</string>
+    <string name="simulate_navigation">Navigation simulieren</string>
+    <string name="choose_track_file_to_follow">Wähle Track-Datei zum Verfolgen aus</string>
+    <string name="voice_announcements">Sprachmeldungen</string>
+    <string name="intermediate_destinations">Zwischenziele: %1$s</string>
+    <string name="arrive_at_time">Ankunftszeit um %1$s</string>
 </resources>
