@@ -687,13 +687,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		DecimalFormat df = new DecimalFormat("#.##");
 		df.setRoundingMode(RoundingMode.CEILING);
 		String formattedValue = "";
+		String formattedPrefix = "";
 		switch (key) {
 			case "width":
 			case "height":
 				if (key.equals("width")) {
-					prefix = mapActivity.getResources().getString(R.string.width_label);
+					formattedPrefix = mapActivity.getResources().getString(R.string.width_label);
 				} else {
-					prefix = mapActivity.getResources().getString(R.string.height_label);
+					formattedPrefix = mapActivity.getResources().getString(R.string.height_label);
 				}
 			case "depth":
 			case "seamark_height":
@@ -715,8 +716,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				} else {
 					formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters, mapActivity.getMyApplication());
 				}
-				prefix = (!prefix.isEmpty()) ? (prefix + ", " + mapActivity.getResources().getString(R.string.distance))
-					: mapActivity.getResources().getString(R.string.distance);
+				formattedPrefix =  formatPrefix(prefix, mapActivity.getResources().getString(R.string.distance));
 				break;
 			case "capacity":
 				formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
@@ -727,13 +727,17 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			case "students":
 			case "spots":
 			case "seats":
-				prefix = (!prefix.isEmpty()) ? (prefix + ", " + mapActivity.getResources().getString(R.string.capacity))
-					: mapActivity.getResources().getString(R.string.capacity);
+				formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.capacity));
 				break;
 			default:
 				formattedValue = value;
+				formattedPrefix = prefix;
 		}
-		return new String[]{prefix, formattedValue};
+		return new String[]{formattedPrefix, formattedValue};
+	}
+
+	private String formatPrefix(String prefix, String units) {
+		return (!prefix.isEmpty()) ? (prefix + ", " + units): units;
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
