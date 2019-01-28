@@ -3246,4 +3246,23 @@
     <string name="quick_action_switch_day_mode">حالت روز</string>
     <string name="quick_action_switch_night_mode">حالت شب</string>
     <string name="quick_action_day_night_switch_mode">تعویض حالت شب/روز</string>
+    <string name="swap_start_and_destination">تعویض مبدأ با مقصد</string>
+    <string name="add_destination_point">افزودن مقصد</string>
+    <string name="add_intermediate_point">افزودن نقطهٔ میانی</string>
+    <string name="add_start_point">افزودن نقطهٔ شروع</string>
+    <string name="intermediate_waypoint">نقطهٔ میانی: %1$s</string>
+    <string name="waypoints">نقاط بین‌راهی: %1$s</string>
+    <string name="transfers">انتقال‌ها: %1$s</string>
+    <string name="on_foot">روی پا: %1$s</string>
+    <string name="route_way">راه: %1$s</string>
+    <string name="points_of_interests">نقاط پرکاربرد (POI)</string>
+    <string name="waiting_for_route_calculation">در انتظار محاسبهٔ مسیر</string>
+    <string name="app_mode_public_transport">حمل‌ونقل عمومی</string>
+    <string name="avoid_roads_descr">جاده‌ای که می‌خواهید از آن پرهیز کنید را روی نقشه یا از لیست زیر انتخاب کنید:</string>
+    <string name="show_along_the_route">در امتداد مسیر نشان بده</string>
+    <string name="simulate_navigation">شبیه‌سازی ناوبری</string>
+    <string name="choose_track_file_to_follow">فایل رد را برای دنبال‌کردن انتخاب کنید</string>
+    <string name="voice_announcements">پیام‌های گفتاری</string>
+    <string name="intermediate_destinations">مقصدهای میانی: %1$s</string>
+    <string name="arrive_at_time">زمان رسیدن: %1$s</string>
 </resources>
