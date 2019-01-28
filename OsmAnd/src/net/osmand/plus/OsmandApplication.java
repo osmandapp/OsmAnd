@@ -647,7 +647,7 @@ public class OsmandApplication extends MultiDexApplication {
 				defaultHandler.uncaughtException(thread, ex);
 			} catch (Exception e) {
 				// swallow all exceptions
-				LOG.error("Exception while handle other exception" + e.getMessage(), e); //$NON-NLS-1$
+				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e); //$NON-NLS-1$
 			}
 
 		}

@@ -1715,21 +1715,18 @@ public class OsmandAidlApi {
 						intent.addFlags(item.flags);
 					}
 					final Intent finalIntent = intent;
-
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setId(item.getId())
-						.setTitle(item.name)
-						.setIcon(getIconId(item.iconName))
-						.setListener(new ContextMenuAdapter.ItemClickListener() {
-							@Override
-							public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
-								int itemId, int position, boolean isChecked,
-								int[] viewCoordinates) {
-								activity.startActivity(finalIntent);
-								return true;
-							}
-						})
-						.createItem());
+							.setId(item.getId())
+							.setTitle(item.name)
+							.setIcon(getIconId(item.iconName))
+							.setListener(new ContextMenuAdapter.ItemClickListener() {
+								@Override
+								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+									activity.startActivity(finalIntent);
+									return true;
+								}
+							})
+							.createItem());
 				}
 			}
 		}

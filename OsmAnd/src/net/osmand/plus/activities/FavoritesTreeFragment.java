@@ -67,7 +67,6 @@ import org.apache.commons.logging.Log;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
-	public final static Log log = PlatformUtil.getLog(FavoritesTreeFragment.class);
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
 	// public static final int IMPORT_ID = 1;
