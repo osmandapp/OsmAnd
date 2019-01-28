@@ -45,7 +45,7 @@
 	<string name="poi_cocktails"></string>
 	<string name="poi_beauty_salon_service"></string>
 	<string name="poi_recycling_type"></string>
-	<string name="poi_shelter_type">Triba</string>
+	<string name="poi_shelter_type"></string>
 	<string name="poi_medical_system">Sistema mélicu</string>
 	<string name="poi_vending_type"></string>
 	<string name="poi_self_service"></string>
