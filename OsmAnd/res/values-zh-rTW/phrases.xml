@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">商店</string>
 		<string name="poi_shop_food">食品商店</string>
 	<string name="poi_emergency">緊急救助</string>
@@ -52,7 +52,7 @@
 	<string name="poi_farm">農產品店</string>
 	<string name="poi_greengrocer">蔬果店</string>
 	<string name="poi_seafood">海産店</string>
-	<string name="poi_confectionery">糖果糕點店</string>
+	<string name="poi_confectionery">糖果店</string>
 	<string name="poi_ice_cream">冰淇淋店</string>
 	<string name="poi_supermarket">超市</string>
 	<string name="poi_tea">茶飲店</string>
@@ -216,7 +216,7 @@
 	<string name="poi_railway_platform">鐵路月台</string>
 	<string name="poi_halt">火車站</string>
 	<string name="poi_subway_entrance">捷運入口</string>
-	<string name="poi_subway_station">捷運車站</string>
+	<string name="poi_subway_station">是</string>
 	<string name="poi_railway_buffer_stop">鐵路止衝擋</string>
 	<string name="poi_taxi">計程車站</string>
 
@@ -943,7 +943,7 @@
 	<string name="poi_access_agricultural">農產通路</string>
 
 	<string name="poi_monitoring_station">監測站</string>
-	<string name="poi_capital">首都</string>
+	<string name="poi_capital">是</string>
 	<string name="poi_fee_no">不收費</string>
 
 	<string name="poi_email">電子郵件</string>
@@ -1607,7 +1607,7 @@
 	<string name="poi_drive_through_no">得來速：無</string>
 
 	<string name="poi_brewery_additional">啤酒廠名</string>
-	<string name="poi_microbrewery_yes">自釀酒廠</string>
+	<string name="poi_microbrewery_yes">是</string>
 	<string name="poi_microbrewery_no">無自釀酒廠</string>
 
 	<string name="poi_takeaway_yes">外帶</string>
@@ -2181,7 +2181,7 @@
 	<string name="poi_social_facility_for_drug_addicted">目標社群：吸毒成癮者</string>
 	<string name="poi_social_facility_for_unemployed">目標社群：失業者</string>
 	<string name="poi_social_facility_for_diseased">目標社群：病患者</string>
-	<string name="poi_social_facility_for_child_juvenile">目標社群：兒童；青少年</string>
+	<string name="poi_social_facility_for_child_juvenile">兒童、青少年</string>
 
 	<string name="poi_internet_access_type_yes">有網際網路存取</string>
 
@@ -3881,4 +3881,57 @@
 	<string name="poi_checkpoint_type_code">程式碼</string>
 	<string name="poi_checkpoint_type_notebook">筆記電腦</string>
 	<string name="poi_checkpoint_type_electronic">電子</string>
-	</resources>
+    <string name="poi_bulk_purchase">批量購買</string>
+    <string name="poi_substation_type">類型</string>
+    <string name="poi_books_type">書</string>
+    <string name="poi_car_pooling">計程車招呼站</string>
+    <string name="poi_atm">ATM</string>
+    <string name="poi_checkpoint_type_stamp">標記點</string>
+    <string name="poi_checkpoint_type_needler">針刺者</string>
+    <string name="poi_course">路程</string>
+    <string name="poi_rock">岩石</string>
+    <string name="poi_end_date">結束日期</string>
+    <string name="poi_appliance">電器行</string>
+    <string name="poi_outcrop">礦脈</string>
+    <string name="poi_payment_contactless_yes">非接觸式</string>
+    <string name="poi_payment_contactless_no">不接受非接觸式</string>
+    <string name="poi_hazard_nuclear">核災危害</string>
+    <string name="poi_hazard_erosion">侵蝕危害</string>
+    <string name="poi_hazard_avalanche">雪崩危害</string>
+    <string name="poi_hazard_slippery_road">路滑</string>
+    <string name="poi_hazard_flood">洪水危害</string>
+    <string name="poi_hazard_minefield">雷區</string>
+    <string name="poi_ruins">廢墟</string>
+    <string name="poi_license_classes">許可等級</string>
+    <string name="poi_hill">爬坡道</string>
+    <string name="poi_shoe_repair">修鞋店</string>
+    <string name="poi_bulk_purchase_yes">是</string>
+    <string name="poi_bulk_purchase_only">只有</string>
+    <string name="poi_pipeline_substation">變電所</string>
+    <string name="poi_substation_transmission">傳輸</string>
+    <string name="poi_substation_distribution">分佈</string>
+    <string name="poi_substation_minor_distribution">次要分佈</string>
+    <string name="poi_substation_industrial">工業區</string>
+    <string name="poi_substation_transition">過渡</string>
+    <string name="poi_substation_traction">牽引</string>
+    <string name="poi_substation_converter">轉換器</string>
+    <string name="poi_substation_compensation">補償</string>
+    <string name="poi_substation_compression">壓縮</string>
+    <string name="poi_substation_measurement">測量</string>
+    <string name="poi_substation_valve">閥門</string>
+    <string name="poi_substation_valve_group">閥組</string>
+    <string name="poi_substation_inspection_gauge">檢具</string>
+    <string name="poi_substation_field_gathering">野外採集</string>
+    <string name="poi_craft_confectionery">糖果生產</string>
+    <string name="poi_shop_wholesale">批發商店</string>
+    <string name="poi_laboratory">醫學實驗室</string>
+    <string name="poi_blood_donation">捐血站</string>
+    <string name="poi_books_comic">漫畫</string>
+    <string name="poi_books_antiquarian">古物</string>
+    <string name="poi_books_religion">宗教</string>
+    <string name="poi_books_academic">學術</string>
+    <string name="poi_books_children">兒童</string>
+    <string name="poi_atoll">環礁</string>
+    <string name="poi_toll_gantry">收費站</string>
+    <string name="poi_childcare">托兒</string>
+</resources>

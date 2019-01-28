@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Loja</string>
 		<string name="poi_shop_food">Loja de conveniência e supermercado</string>
 	<string name="poi_emergency">Emergência</string>
@@ -21,7 +21,7 @@
 	<string name="poi_education">Educação</string>
 	<string name="poi_administrative">Administrativo</string>
 	<string name="poi_healthcare">Saúde</string>
-	<string name="poi_office">Escritório</string>
+	<string name="poi_office">Ponto de informação</string>
 	<string name="poi_sport">Esporte</string>
 	<string name="poi_tourism">Turismo</string>
 		<string name="poi_accomodation">Alojamento</string>
@@ -220,7 +220,7 @@
 	<string name="poi_railway_platform">Plataforma ferroviária</string>
 	<string name="poi_halt">Parada ferroviária</string>
 	<string name="poi_subway_entrance">Entrada do metrô</string>
-	<string name="poi_subway_station">Estação de metrô</string>
+	<string name="poi_subway_station">Sim</string>
 	<string name="poi_vacuum_cleaner">Loja de aspiradores de pó</string>
 	<string name="poi_variety_store">Loja de variedades</string>
 	<string name="poi_video">Loja/locadora de vídeos</string>
@@ -944,7 +944,7 @@
 	<string name="poi_access_agricultural">Acesso agrícola</string>
 
 	<string name="poi_monitoring_station">Estação de medição ambiental</string>
-	<string name="poi_capital">Capital</string>
+	<string name="poi_capital">Sim</string>
 	<string name="poi_fee_no">Não</string>
 
 	<string name="poi_email">Email</string>
@@ -1272,7 +1272,7 @@
 <string name="poi_information_guidepost">Poste com direções</string>
 	<string name="poi_information_board">Painel</string>
 	<string name="poi_information_map">Mapa</string>
-	<string name="poi_information_office">Centro de informação</string>
+	<string name="poi_information_office">Ponto de informação</string>
 	<string name="poi_information_trail_blaze">Marca de caminho</string>
 	<string name="poi_information_terminal">Terminal</string>
 	<string name="poi_information_route_marker">Marcador de rota</string>
@@ -1343,7 +1343,7 @@
 	<string name="poi_dead_wood">Árvores mortas</string>
 
 	<string name="poi_passing_place">Lugar de passagem</string>
-	<string name="poi_level">Nível</string>
+	<string name="poi_level">Andar</string>
 
 <string name="poi_bird_hide">Observatório de aves</string>
 	<string name="poi_internet_access_yes">Com acesso à Internet</string>
@@ -1458,26 +1458,26 @@
 	<string name="poi_payment_american_express_no">Não aceita cartão American Express (AMEX)</string>
 	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">Não aceita cartão Diners Club</string>
-	<string name="poi_payment_dkv_yes">Aceita DKV</string>
+	<string name="poi_payment_dkv_yes">DKV</string>
 	<string name="poi_payment_dkv_no">Não aceita DKV</string>
-	<string name="poi_payment_uta_yes">Aceita cartão UTA</string>
+	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">Não aceita cartão UTA</string>
 	<string name="poi_payment_efectivo_yes">Efectivo</string>
 	<string name="poi_payment_efectivo_no">Não aceita Efectivo</string>
-	<string name="poi_payment_girocard_yes">Aceita Girocard</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
 	<string name="poi_payment_girocard_no">Não aceita Girocard</string>
-	<string name="poi_payment_discover_card_yes">Aceita Discover Card</string>
+	<string name="poi_payment_discover_card_yes">Discover Card</string>
 	<string name="poi_payment_discover_card_no">Não aceita Discover Card</string>
-	<string name="poi_payment_visa_electron_yes">Aceita Visa Electron</string>
+	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
 	<string name="poi_payment_visa_electron_no">Não aceita Visa Electron</string>
-	<string name="poi_payment_litecoin_yes">Aceita Litecoin</string>
+	<string name="poi_payment_litecoin_yes">Litecoin</string>
 	<string name="poi_payment_litecoin_no">Não aceita Litecoin</string>
 	<string name="poi_payment_cheque_yes">Cheque</string>
 	<string name="poi_payment_cheque_no">Não aceita cheque</string>
-	<string name="poi_payment_pikepass_yes">Aceita PIKEPASS</string>
+	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">Não aceita PIKEPASS</string>
-	<string name="poi_payment_pikepass_designated">Aceita PIKEPASS (designated)</string>
-	<string name="poi_payment_visa_debit_yes">Aceita cartão Visa Débito</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (designado)</string>
+	<string name="poi_payment_visa_debit_yes">Cartão Visa Débito</string>
 	<string name="poi_payment_visa_debit_no">Não aceita cartão Visa Débito</string>
 	<string name="poi_payment_cryptocurrencies_no">Não aceita criptomoedas</string>
 	<string name="poi_payment_others_yes">Outros</string>
@@ -1796,7 +1796,7 @@
 
 	<string name="poi_aerialway_bubble_yes">Bolha</string>
 	<string name="poi_aerialway_bubble_no">Sem bolha</string>
-	<string name="poi_vending_bicycle_tube">Tubos para bicicletas</string>
+	<string name="poi_vending_bicycle_tube">Câmaras de ar para bicicleta</string>
 	<string name="poi_branch">Seção</string>
 
 	<string name="poi_memorial_cross">Cruzeiro</string>
@@ -2091,7 +2091,7 @@
 	<string name="poi_clothes_maternity">Roupa de maternidade</string>
 	<string name="poi_clothes_vintage">Roupas vintage</string>
 	<string name="poi_clothes_oversize">Roupas tamanho grande</string>
-	<string name="poi_clothes_schoolwear">Roupas escolares</string>
+	<string name="poi_clothes_schoolwear">Escolar</string>
 	<string name="poi_clothes_swimwear">Roupas de banho</string>
 	<string name="poi_clothes_socks">Meias</string>
 	<string name="poi_clothes_shirts">Camisas</string>
@@ -2100,11 +2100,11 @@
 
 	<string name="poi_historic_milestone">Marco histórico</string>
 
-	<string name="poi_shoes_children">Calçados infantis</string>
-	<string name="poi_shoes_women">Calçados femininos</string>
-	<string name="poi_shoes_sport">Calçados esportivos</string>
-	<string name="poi_shoes_men">Calçados masculinos</string>
-	<string name="poi_shoes_orthopedic">Calçados ortopédicos</string>
+	<string name="poi_shoes_children">Crianças</string>
+	<string name="poi_shoes_women">femininos</string>
+	<string name="poi_shoes_sport">esportivos</string>
+	<string name="poi_shoes_men">Masculinos</string>
+	<string name="poi_shoes_orthopedic">Ortopédicos</string>
 
 	<string name="poi_historic_manor">Mansão histórica</string>
 	<string name="poi_castle_type_stately">Tipo de castelo: majestoso</string>
@@ -2554,7 +2554,7 @@
 	<string name="poi_craft_electronics_repair">Conserto de eletrônicos</string>
 	<string name="poi_fireworks">Loja de fogos de artifício</string>
 
-	<string name="poi_memorial_fassade_decoration">Decoração da fachada</string>
+	<string name="poi_memorial_fassade_decoration">Decoração de fachada</string>
 	<string name="poi_site_type_hut_circle">Círculo de cabana</string>
 	<string name="poi_fortification_type_ring_ditch">Tipo de fortificação: vala circular</string>
 
@@ -3900,5 +3900,36 @@
 	<string name="poi_shoe_repair">Conserto de sapatos</string>
 
 <string name="poi_license_classes">Categorias</string>
-
-	</resources>
+    <string name="poi_bulk_purchase">Compra a granel</string>
+    <string name="poi_substation_type">Tipo</string>
+    <string name="poi_books_type">Livros</string>
+    <string name="poi_bulk_purchase_yes">Sim</string>
+    <string name="poi_bulk_purchase_only">Somente</string>
+    <string name="poi_pipeline_substation">Subestação de oleoduto</string>
+    <string name="poi_substation_transmission">Transmissão</string>
+    <string name="poi_substation_distribution">Distribuição</string>
+    <string name="poi_substation_minor_distribution">Distribuição menor</string>
+    <string name="poi_substation_industrial">Industrial</string>
+    <string name="poi_substation_transition">Transição</string>
+    <string name="poi_substation_traction">Tração</string>
+    <string name="poi_substation_converter">Conversor</string>
+    <string name="poi_substation_compensation">Compensação</string>
+    <string name="poi_substation_compression">Compressão</string>
+    <string name="poi_substation_measurement">Medição</string>
+    <string name="poi_substation_valve">Válvula</string>
+    <string name="poi_substation_valve_group">Grupo de válvulas</string>
+    <string name="poi_substation_inspection_gauge">Medidor de inspeção</string>
+    <string name="poi_substation_field_gathering">Recolhimento de campo</string>
+    <string name="poi_craft_confectionery">Produção de confeitos</string>
+    <string name="poi_shop_wholesale">Loja de atacado</string>
+    <string name="poi_laboratory">Laboratório médico</string>
+    <string name="poi_blood_donation">Doação de sangue</string>
+    <string name="poi_books_comic">Quadrinho</string>
+    <string name="poi_books_antiquarian">Antiquário</string>
+    <string name="poi_books_religion">Religião</string>
+    <string name="poi_books_academic">Acadêmicos</string>
+    <string name="poi_books_children">Crianças</string>
+    <string name="poi_atoll">Atol</string>
+    <string name="poi_toll_gantry">"Portal de pedágio "</string>
+    <string name="poi_childcare">Creche</string>
+</resources>

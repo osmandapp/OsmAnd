@@ -100,8 +100,8 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
@@ -110,9 +110,11 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -439,7 +441,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
 
-		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
+		final RouteCalculationProgressCallback progressCallback = new RouteCalculationProgressCallback() {
 
 			@Override
 			public void start() {
@@ -500,6 +502,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
+			}
+		};
+
+		app.getRoutingHelper().setProgressBar(progressCallback);
+
+		app.getTransportRoutingHelper().setProgressBar(new TransportRouteCalculationProgressCallback() {
+			@Override
+			public void start() {
+				progressCallback.start();
+			}
+
+			@Override
+			public void updateProgress(int progress) {
+				progressCallback.updateProgress(progress);
+			}
+
+			@Override
+			public void finish() {
+				progressCallback.finish();
 			}
 		});
 	}
@@ -1853,6 +1874,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		showQuickSearch(mode, showCategories, "", null);
 	}
 
+	public void showQuickSearch(ShowQuickSearchMode mode, QuickSearchTab showSearchTab) {
+		showQuickSearch(mode, showSearchTab, "", null);
+	}
+
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
 								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
@@ -1892,6 +1917,48 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
 					QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, searchLocation);
+		}
+	}
+
+	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, QuickSearchTab showSearchTab,
+								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+		if (mode == ShowQuickSearchMode.CURRENT) {
+			mapContextMenu.close();
+		} else {
+			hideContextMenu();
+		}
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION
+				|| mode == ShowQuickSearchMode.DESTINATION_SELECTION_AND_START || mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+			if (fragment != null) {
+				fragment.dismiss();
+			}
+			if (mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.INTERMEDIATE, showSearchTab, searchLocation);
+			} else if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.START_POINT, showSearchTab, searchLocation);
+			} else if (mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION, showSearchTab, searchLocation);
+			} else {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION_AND_START, showSearchTab, searchLocation);
+			}
+		} else if (fragment != null) {
+			if (mode == ShowQuickSearchMode.NEW
+					|| (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
+				fragment.dismiss();
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.REGULAR, showSearchTab, searchLocation);
+			} else {
+				fragment.show();
+			}
+			refreshMap();
+		} else {
+			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+					QuickSearchType.REGULAR, showSearchTab, searchLocation);
 		}
 	}
 

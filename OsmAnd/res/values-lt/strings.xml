@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
@@ -2220,7 +2220,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="move_marker_bottom_sheet_title">Slinkite žemėlapį, norėdami pakeisti žymeklio vietą</string>
     <string name="access_direction_audio_feedback">Garsinis krypties indikavimas</string>
     <string name="access_disable_offroute_recalc">Neperskaičiuoti maršruto jei jo nebesekate</string>
-    <string name="access_disable_offroute_recalc_descr">Automatiškai neperskaičiuoja maršruto kai jūs nuo jo nesekate.</string>
+    <string name="access_disable_offroute_recalc_descr">Automatiškai neperskaičiuoti maršruto nuo jo nukrypus.</string>
     <string name="access_disable_wrong_direction_recalc">Neperskaičiuoti maršruto važiuojant priešinga kryptimi</string>
     <string name="access_disable_wrong_direction_recalc_descr">Nevykdyti automatinio maršruto perskaičiavimo, kai jūs judate į priešingą pusę.</string>
     <string name="access_smart_autoannounce">Išmanus autopranešėjas</string>
@@ -2364,7 +2364,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="average_speed">Vidutinis greitis</string>
     <string name="shared_string_color">Spalva</string>
     <string name="shared_string_time">Laikas</string>
-    <string name="gpx_add_track">Pridėti GPX failą</string>
+    <string name="gpx_add_track">Pridėti dar…</string>
     <string name="quick_action_item_action">Veiksmas %d</string>
     <string name="quick_action_add_poi">Pridėti LV</string>
     <string name="quick_action_map_style">Pakeisti žemėlapio stilių</string>
@@ -2427,11 +2427,11 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="add_new_folder">Pridėti naują aplanką</string>
     <string name="shared_string_slope">Nuolydis</string>
     <string name="routing_attr_driving_style_speed_name">Trumpesni maršrutai</string>
-    <string name="routing_attr_driving_style_safety_name">Saugus</string>
+    <string name="routing_attr_driving_style_safety_name">Pasirinkti gatvelę</string>
     <string name="shared_string_time_moving">Važiavimo trukmė</string>
     <string name="shared_string_max">Maks.</string>
-    <string name="shared_string_start_time">Išvykimas</string>
-    <string name="shared_string_end_time">Atvykimas</string>
+    <string name="shared_string_start_time">Pradžios laikas</string>
+    <string name="shared_string_end_time">Pabaigos laikas</string>
     <string name="file_can_not_be_moved">Failas negali būti perkeltas.</string>
     <string name="shared_string_move">Perkelti</string>
     <string name="routing_attr_driving_style_name">Vairavimo stilius</string>
@@ -2510,7 +2510,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="mapillary_menu_descr_tile_cache">Užkrauti žemėlapio lakštus iš naujo kad pamatytumėte naujus duomenis.</string>
     <string name="mapillary_menu_title_tile_cache">Žemėlapio lakštų talpykla</string>
     <string name="shared_string_to">Iki</string>
-    <string name="mapillary_menu_filter_description">Vaizdus galima filtruoti pagal pateikėją arba pagal datą. Filtrai veikia tik labai priartinus.</string>
+    <string name="mapillary_menu_filter_description">Vaizdus galima filtruoti pagal pateikėją, datą arba tipą. Filtrai veikia tik labai priartinus.</string>
     
     <string name="map_widget_ruler_control">Spindulio liniuotė</string>
     <string name="improve_coverage_install_mapillary_desc">Įdiekite Mapillary jei norite pridėti vieną ar daugiau fotografijų šioje žemėlapio vietoje.</string>
@@ -2561,7 +2561,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="total_distance">Bendras atstumas</string>
     <string name="routing_attr_relief_smoothness_factor_name">Pasirinkite aukščio kaitos diapazoną</string>
     <string name="routing_attr_height_obstacles_name">Naudoti aukščio informaciją</string>
-    <string name="routing_attr_height_obstacles_description">Naudoti SRTM, ASTER ir EU-DEM pateikiamus vietovės aukščio duomenis.</string>
+    <string name="routing_attr_height_obstacles_description">Vietovės reljefo faktorius (SRTM, ASTER ir EU-DEM duomenimis).</string>
     <string name="rendering_attr_depthContours_description">Rodyti gylio kontūrus ir taškus.</string>
     <string name="rendering_attr_depthContours_name">Vandenyno gylio kontūrai</string>
     
@@ -2650,20 +2650,20 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
 \n• Įkelkite GPX maršrutus į OSM tiesiai iš programos 
 \n• Pridėkite LV-as ir tiesiogiai jas įkelkite į OSM (arba vėliau, jei neprisijungę)
 \n</string>
-    <string name="osmand_extended_description_part8">"OsmAnd yra atviro kodo ir aktyviai plėtojama. Kiekvienas gali prisidėti prie plėtros pranešdamas apie klaidas, tobulindamas vertimus ar kurdamas naujas funkcijas. Projektas yra  nuolat gerinamas sąveikaujant programuotojamas ir vartotojams. Projekto eiga taip pat priklauso nuo finansinių įnašų paremiant programavimą ir naujų funkcijų testavimą.
+    <string name="osmand_extended_description_part8">OsmAnd yra atviro kodo ir aktyviai plėtojama. Kiekvienas gali prisidėti prie plėtros pranešdamas apie klaidas, tobulindamas vertimus ar kurdamas naujas funkcijas. Projekto eiga taip pat priklauso nuo finansinių įnašų paremiant programavimą ir naujų funkcijų testavimą. 
 \n Apytikslė žemėlapyje aprėptis ir kokybė: 
-\n• Vakarų Europa: *** 
-\n• Rytų Europa: *** 
+\n• Vakarų Europa: ****
+\n• Rytų Europa: ***
 \n• Rusija: *** 
 \n• Šiaurės Amerika: *** 
-\n• Pietų Amerika: ** 
+\n• Pietų Amerika: **
 \n• Azija: ** 
 \n• Japonija ir Korėja: *** 
 \n• Artimieji Rytai: ** 
 \n• Afrika: ** 
 \n• Antarktida: * 
-\nGalima atsisiųsti didžiąją dalį šalių!
-\n Gaukite patikimą navigatorius jūsų šalyje - ar tai būtų Prancūzija, Vokietija, Meksika, Jungtinė Karalystė, Ispanija, Nyderlandai, JAV, Rusija, Brazilija ar kita."</string>
+\nGalima atsisiųsti didžiąją dalį šalių! 
+\n Gaukite patikimą navigatorius jūsų šalyje - ar tai būtų Prancūzija, Vokietija, Meksika, Jungtinė Karalystė, Ispanija, Nyderlandai, JAV, Rusija, Brazilija ar kita.</string>
     <string name="quick_action_navigation_voice">Balso įj/išj</string>
     <string name="quick_action_navigation_voice_off">Balso išjungtas</string>
     <string name="quick_action_navigation_voice_on">Balsas įjungtas</string>
@@ -2891,4 +2891,13 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="map_widget_intermediate_time">Tarpinis laikas</string>
     <string name="empty_state_my_tracks">Pridėti GPX failus</string>
     <string name="download_wikipedia_label">Atsisiųsti Vikipedijos duomenys</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Planas ir kainos</string>
+    <string name="osm_live_payment_monthly_title">Mokėti kas mėnesį</string>
+    <string name="osm_live_payment_3_months_title">Mokėti kas 3-is mėnesius</string>
+    <string name="osm_live_payment_annual_title">Mokėti kartą per metus</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mėnuo</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mėnuo</string>
+    <string name="osm_live_payment_discount_descr">Sutaupyk %1$s!</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="start_search_from_city">Pirmiausiai parinkite miestą</string>
+</resources>

@@ -1,4 +1,13 @@
 <resources>
+	<string name="monitoring_is_enabled">Monitoring is enabled</string>
+	<string name="monitoring_is_disabled">Monitoring is disabled</string>
+	<string name="time_on_the_move">time on the move</string>
+	<string name="average_altitude">Average altitude</string>
+	<string name="average_speed">Average speed</string>
+	<string name="open_in_osmand">Open in OsmAnd</string>
+	<string name="end_date">End date</string>
+	<string name="start_date">Start date</string>
+	<string name="timeline_description">Enable monitoring to collect movement data in the background.</string>
 	<string name="send_location_as">Send location as</string>
 	<string name="send_location_as_descr">Choose how messages with your location will look like.</string>
 	<string name="shared_string_map">Map</string>
@@ -176,6 +185,7 @@
 	<string name="welcome_descr"><![CDATA[<b>OsmAnd Location Sharing</b> lets you share your location and see that of others in the OsmAnd.<br/><br/>The app uses Telegram API and you need a Telegram account.]]></string>
 	<string name="my_location">My location</string>
 	<string name="live_now">Live now</string>
+	<string name="timeline">Timeline</string>
 
 
 </resources>

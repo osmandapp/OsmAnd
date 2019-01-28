@@ -2098,7 +2098,7 @@ Lon %2$s</string>
     <string name="shared_string_read_more">Mehr lesen</string>
     <string name="shared_string_status">Status</string>
     <string name="shared_string_save_changes">Änderungen speichern</string>
-    <string name="shared_string_email_address">E-Mail-Adresse speichern</string>
+    <string name="shared_string_email_address">E-Mail-Adresse</string>
     <string name="find_parking">Parkplatz finden</string>
     <string name="show_polygons">Flächen anzeigen</string>
     
@@ -2459,7 +2459,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_end_time">Beendigungszeit</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
-    <string name="average_speed">Durchschnittsgeschwindigkeit</string>
+    <string name="average_speed">Durchschnittliche Geschwindigkeit</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
@@ -2623,7 +2623,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Tragen Sie sich in unsere Mail-Liste zu App-Angeboten ein, und erhalten Sie dafür 3 zusätzliche Karten-Downloads!</string>
     <string name="depth_contour_descr">Meeresbodenkonturlinien und Seezeichen.</string>
     <string name="sea_depth_thanks">Vielen Dank, dass Sie die \'Meerestiefenkonturen\' erworben haben</string>
-    <string name="index_item_depth_contours_osmand_ext">Nautische Tiefenkonturen</string>
+    <string name="index_item_depth_contours_osmand_ext">Nautische Tiefenlinien</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautische Meerestiefen der Südhalbkugel</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautische Meerestiefen der Nordhalbkugel</string>
     <string name="download_depth_countours">Nautische Tiefenkonturen</string>
@@ -2794,7 +2794,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="plan_route">Route planen</string>
     <string name="shared_string_sort">Sortieren</string>
     <string name="coordinate_input">Koordinateneingabe</string>
-    <string name="is_saved">gespeichert</string>
+    <string name="is_saved">ist gespeichert</string>
     <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte GPX-Datei exportieren:</string>
     <string name="marker_save_as_track">Als GPX-Datei speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
@@ -3090,7 +3090,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse?
 \nGeben Sie uns eine Rückmeldung</string>
-    <string name="commiting_way">Übermitteln via…</string>
+    <string name="commiting_way">Übertrage Weg…</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen.</string>
 <string name="release_3_2_pre">• Absturz beim Start behoben, der bei manchen Geräten auftrat
 \n
@@ -3135,4 +3135,31 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="powered_by_osmand">Betrieben von OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">Nur 360°-Bilder anzeigen</string>
-    </resources>
+    <string name="shared_string_launch">Starten</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="run_full_osmand_header">OsmAnd starten\?</string>
+    <string name="quick_action_switch_day_night_descr">Durch Antippen dieser Aktionstaste können Sie zwischen Tag- und Nacht-Modus für OsmAnd wechseln</string>
+    <string name="quick_action_switch_day_mode">Tag-Modus</string>
+    <string name="quick_action_switch_night_mode">Nacht-Modus</string>
+    <string name="quick_action_day_night_switch_mode">Schalter Tag/Nacht Modus</string>
+    <string name="run_full_osmand_msg">Sie verwenden {0} Karte, die von OsmAnd unterstützt wird. Möchten Sie die OsmAnd Vollversion starten\?</string>
+    <string name="swap_start_and_destination">Start und Ziel tauschen</string>
+    <string name="add_destination_point">Ziel hinzufügen</string>
+    <string name="add_intermediate_point">Zwischenpunkt hinzufügen</string>
+    <string name="add_start_point">Startpunkt hinzufügen</string>
+    <string name="intermediate_waypoint">Zwischenpunkt: %1$s</string>
+    <string name="waypoints">Wegpunkte: %1$s</string>
+    <string name="transfers">Umstiege: %1$s</string>
+    <string name="on_foot">Zu Fuß: %1$s</string>
+    <string name="route_way">Weg: %1$s</string>
+    <string name="points_of_interests">Orte von Interesse(OVI)</string>
+    <string name="waiting_for_route_calculation">Warten auf Routenberechung</string>
+    <string name="app_mode_public_transport">Öffentlicher Verkehr</string>
+    <string name="avoid_roads_descr">Wähle die Straße aus die während der Navigation vermieden werden soll, von der Karte oder von der Liste unten:</string>
+    <string name="show_along_the_route">Entlang der Route anzeigen</string>
+    <string name="simulate_navigation">Navigation simulieren</string>
+    <string name="choose_track_file_to_follow">Wähle Track-Datei zum Verfolgen aus</string>
+    <string name="voice_announcements">Sprachmeldungen</string>
+    <string name="intermediate_destinations">Zwischenziele: %1$s</string>
+    <string name="arrive_at_time">Ankunftszeit um %1$s</string>
+</resources>

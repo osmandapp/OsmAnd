@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
@@ -22,6 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.util.MapUtils;
 
 import java.text.Collator;
@@ -154,6 +156,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		if (routeMenu != null) {
 			setupMapRouteInfoMenuSpinners(routeMenu);
 			updateMapRouteInfoMenuFromIcon(routeMenu);
+		}
+		Fragment fragment = getTargetFragment();
+		if (fragment != null) {
+			fragment.onActivityResult(getTargetRequestCode(), 0, null);
 		}
 		dismiss();
 	}

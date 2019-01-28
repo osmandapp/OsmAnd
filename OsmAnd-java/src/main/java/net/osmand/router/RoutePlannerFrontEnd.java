@@ -55,6 +55,10 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list) throws IOException {
+		return findRouteSegment(lat, lon, ctx, list, false);
+	}
+
+	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx, List<RouteSegmentPoint> list, boolean transportStop) throws IOException {
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		ArrayList<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
@@ -92,7 +96,26 @@ public class RoutePlannerFrontEnd {
 			}
 		});
 		if (list.size() > 0) {
-			RouteSegmentPoint ps = list.get(0);
+			RouteSegmentPoint ps = null;
+			if (ctx.publicTransport) {
+				for (RouteSegmentPoint p : list) {
+					if (transportStop && p.distSquare > 100) {
+						break;
+					}
+					boolean platform = p.road.platform();
+					if (transportStop && platform) {
+						ps = p;
+						break;
+					}
+					if (!transportStop && !platform) {
+						ps = p;
+						break;
+					}
+				}
+			}
+			if (ps == null) {
+				ps = list.get(0);
+			}
 			ps.others = list;
 			return ps;
 		}
@@ -185,17 +208,17 @@ public class RoutePlannerFrontEnd {
 		}
 		int indexNotFound = 0;
 		List<RouteSegmentPoint> points = new ArrayList<RouteSegmentPoint>();
-		if (!addSegment(start, ctx, indexNotFound++, points)) {
+		if (!addSegment(start, ctx, indexNotFound++, points, ctx.startTransportStop)) {
 			return null;
 		}
 		if (intermediates != null) {
 			for (LatLon l : intermediates) {
-				if (!addSegment(l, ctx, indexNotFound++, points)) {
+				if (!addSegment(l, ctx, indexNotFound++, points, false)) {
 					return null;
 				}
 			}
 		}
-		if (!addSegment(end, ctx, indexNotFound++, points)) {
+		if (!addSegment(end, ctx, indexNotFound++, points, ctx.targetTransportStop)) {
 			return null;
 		}
 		ctx.calculationProgress.nextIteration();
@@ -315,8 +338,8 @@ public class RoutePlannerFrontEnd {
 
 	}
 
-	private boolean addSegment(LatLon s, RoutingContext ctx, int indexNotFound, List<RouteSegmentPoint> res) throws IOException {
-		RouteSegmentPoint f = findRouteSegment(s.getLatitude(), s.getLongitude(), ctx, null);
+	private boolean addSegment(LatLon s, RoutingContext ctx, int indexNotFound, List<RouteSegmentPoint> res, boolean transportStop) throws IOException {
+		RouteSegmentPoint f = findRouteSegment(s.getLatitude(), s.getLongitude(), ctx, null, transportStop);
 		if (f == null) {
 			ctx.calculationProgress.segmentNotFound = indexNotFound;
 			return false;
@@ -405,7 +428,8 @@ public class RoutePlannerFrontEnd {
 
 		long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
-				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE);
+				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE,
+				ctx.publicTransport, ctx.startTransportStop, ctx.targetTransportStop);
 		log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
 		ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
 		if (recalculationEnd != null) {

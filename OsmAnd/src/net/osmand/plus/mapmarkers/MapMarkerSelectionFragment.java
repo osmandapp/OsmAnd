@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -20,10 +19,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu.OnMarkerSelectListener;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.OnMarkerSelectListener;
 
 import java.util.List;
 

@@ -1,9 +1,14 @@
 package net.osmand.router;
 
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.LatLon;
+import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportSchedule;
+import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,15 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.data.LatLon;
-import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportSchedule;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.MapUtils;
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class TransportRoutePlanner {
 	
@@ -47,6 +47,9 @@ public class TransportRoutePlanner {
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				return null;
+			}
 			TransportRouteSegment segment = queue.poll();
 			TransportRouteSegment ex = ctx.visitedSegments.get(segment.getId());
 			if(ex != null) {
@@ -71,7 +74,10 @@ public class TransportRoutePlanner {
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			for (int ind = 1 + segment.segStart; ind < segment.getLength(); ind++) {
-				segmentId ++; 
+				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+					return null;
+				}
+				segmentId ++;
 				ctx.visitedSegments.put(segmentId, segment);
 				TransportStop stop = segment.getStop(ind);
 				// could be geometry size
@@ -87,6 +93,9 @@ public class TransportRoutePlanner {
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
 				for (TransportRouteSegment sgm : sgms) {
+					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+						return null;
+					}
 					if (segment.wasVisited(sgm)) {
 						continue;
 					}
@@ -174,11 +183,17 @@ public class TransportRoutePlanner {
 				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedRoutesCount, 
 				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000)));
 		for(TransportRouteSegment res : results) {
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				return null;
+			}
 			TransportRouteResult route = new TransportRouteResult(ctx);
 			route.routeTime = res.distFromStart;
 			route.finishWalkDist = res.walkDist;
 			TransportRouteSegment p = res;
 			while (p != null) {
+				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+					return null;
+				}
 				if (p.parentRoute != null) {
 					TransportRouteResultSegment sg = new TransportRouteResultSegment(p.parentRoute.road, 
 							p.parentRoute.segStart, p.parentStop, p.parentRoute.walkDist, 
@@ -190,6 +205,9 @@ public class TransportRoutePlanner {
 			// test if faster routes fully included
 			boolean include = false;
 			for(TransportRouteResult s : lst) {
+				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+					return null;
+				}
 				if(includeRoute(s, route)) {
 					include = true;
 					break;
@@ -280,7 +298,16 @@ public class TransportRoutePlanner {
 		public TransportStop getEnd() {
 			return route.getForwardStops().get(end);
 		}
-		
+
+		public List<Node> getNodes() {
+			List<Node> nodes = new ArrayList<>();
+			List<Way> ways = getGeometry();
+			for (Way way : ways) {
+				nodes.addAll(way.getNodes());
+			}
+			return nodes;
+		}
+
 		public List<Way> getGeometry() {
 			List<Way> list = new ArrayList<Way>();
 			route.mergeForwardWays();
@@ -352,7 +379,7 @@ public class TransportRoutePlanner {
 		public List<TransportRouteResultSegment> getSegments() {
 			return segments;
 		}
-		
+
 		public double getWalkDist() {
 			double d = finishWalkDist;
 			for (TransportRouteResultSegment s : segments) {
@@ -360,7 +387,15 @@ public class TransportRoutePlanner {
 			}
 			return d;
 		}
-		
+
+		public double getFinishWalkDist() {
+			return finishWalkDist;
+		}
+
+		public double getWalkSpeed() {
+			return  cfg.walkSpeed;
+		}
+
 		public double getRouteTime() {
 			return routeTime;
 		}

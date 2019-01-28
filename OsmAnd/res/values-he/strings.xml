@@ -531,7 +531,7 @@
 	<string name="si_km_m">קילומטרים/מטרים</string>
 	<string name="yard">יארד</string>
 	<string name="foot">רגל</string>
-	<string name="mile_per_hour">מיילשעה</string>
+	<string name="mile_per_hour">מייל לשעה</string>
 	<string name="mile">מייל</string>
 	<string name="send_location_way_choose_title">שיתוף המיקום באמצעות</string>
 	<string name="send_location_sms_pattern">מיקום: %1$s\n%2$s</string>
@@ -2134,12 +2134,12 @@
     <string name="favorite_category_select">בחירת קטגוריה</string>
     <string name="default_speed_system_descr">הגדרת יחידת מהירות.</string>
     <string name="default_speed_system">יחידת מהירות</string>
-    <string name="si_nm">מילים ימיים</string>
+    <string name="si_nm">מיילים ימיים</string>
     <string name="si_kmh">קילומטרים לשעה</string>
-    <string name="si_mph">מילים לשעה</string>
+    <string name="si_mph">מיילים לשעה</string>
     <string name="si_m_s">מטרים לשנייה</string>
     <string name="si_min_km">דקות לקילומטר</string>
-    <string name="si_min_m">דקות למיל</string>
+    <string name="si_min_m">דקות למייל</string>
     <string name="si_nm_h">מיל ימי לשעה (קשר)</string>
     <string name="nm_h">קשר</string>
     <string name="m_s">מ/שנ׳</string>
@@ -2585,7 +2585,7 @@
     <string name="get_for_month">הרשמה למשך חודש</string>
     <string name="osm_live_banner_desc">קבלת כמות הורדות בלתי מוגבלת ועדכונים מפות בתדירות שהיא יותר מפעם בחודש: שבועית, יומית או שעתית.</string>
     <string name="osmand_plus_banner_desc">עדכונים והורדות של המפה באופן בלתי מוגבל לרבות תוסף ויקיפדיה.</string>
-    <string name="si_mi_meters">מילים/מטרים</string>
+    <string name="si_mi_meters">מיילים/מטרים</string>
     <string name="skip_map_downloading">דילוג על הורדת המפות</string>
     <string name="skip_map_downloading_desc">אין לך מפות בלתי מקוונות מותקנות. ניתן לבחור במפה מהרשימה או להוריד מאוחר יותר באמצעות ‚תפריט - %1$s’.</string>
     <string name="search_another_country">נא לבחור באזור אחר</string>
@@ -3007,7 +3007,7 @@
 \n ניתן לקבל נווט אמין למדינה שלך - בין אם זו ישראל, צרפת, גרמניה, מקסיקו, אנגליה, ספרד, הולנד, ארה״ב, רוסיה, ברזיל או כל מדינה אחרת.</string>
     
     
-    <string name="nm">nmi</string>
+    <string name="nm">מייל ימי</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">עיבוד מסלולים לפי עקבות OSMC.</string>
     <string name="routing_attr_height_obstacles_description">מקדם נתוני גובה פני קרקע (נתונים של SRTM,‏ ASTER ו־EU-DEM).</string>
     
@@ -3127,4 +3127,31 @@
     <string name="powered_by_osmand">מופעל על ידי OsmAnd</string>
     <string name="osm_live_subscriptions">מינויים</string>
     <string name="mapillary_menu_title_pano">הצגת תמונות 360° בלבד</string>
+    <string name="shared_string_launch">הפעלה</string>
+    <string name="run_full_osmand_msg">המפה שבשימוש היא {0} שמוגשת על ידי OsmAnd. להפעיל את הגרסה המלאה של OsmAnd\?</string>
+    <string name="run_full_osmand_header">להפעיל את OsmAnd\?</string>
+    <string name="lang_gn_py">גוארני</string>
+    <string name="swap_start_and_destination">החלפת היעד עם המוצא</string>
+    <string name="add_destination_point">הוספת יעד</string>
+    <string name="add_intermediate_point">הוספת נקודת ביניים</string>
+    <string name="add_start_point">הוספת נקודת התחלה</string>
+    <string name="intermediate_waypoint">נקודת ביניים: %1$s</string>
+    <string name="waypoints">נקודות דרך: %1$s</string>
+    <string name="transfers">החלפות: %1$s</string>
+    <string name="on_foot">ברגל: %1$s</string>
+    <string name="route_way">דרך: %1$s</string>
+    <string name="points_of_interests">נקודות עניין (נ״ע)</string>
+    <string name="waiting_for_route_calculation">בהמתנה לחישוב מסלול</string>
+    <string name="app_mode_public_transport">תחבורה ציבורית</string>
+    <string name="avoid_roads_descr">נא לבחור סוג דרך במפה או מהרשימה שלהלן שברצונך להימנע ממנה במהלך ניווט:</string>
+    <string name="show_along_the_route">הצגה לאורך המסלול</string>
+    <string name="simulate_navigation">הדמיית ניווט</string>
+    <string name="choose_track_file_to_follow">נא לבחור קובץ מסלול להצגה</string>
+    <string name="voice_announcements">הכרזות קוליות</string>
+    <string name="intermediate_destinations">יעדי ביניים: %1$s</string>
+    <string name="arrive_at_time">הגעה ב־%1$s</string>
+    <string name="quick_action_switch_day_night_descr">נגיעה בכפתור פעולה זה תחליף בין מצבי יום ולילה עבור OsmAnd</string>
+    <string name="quick_action_switch_day_mode">מצב יום</string>
+    <string name="quick_action_switch_night_mode">מצב לילה</string>
+    <string name="quick_action_day_night_switch_mode">החלפה בין מצבי יום/לילה</string>
 </resources>

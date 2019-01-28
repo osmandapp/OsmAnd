@@ -196,7 +196,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				objects = stopRoute.route.getForwardStops();
 				int color = stopRoute.getColor(mapActivity.getMyApplication(), settings.isNightMode());
 				attrs.paint.setColor(color);
-				attrs.updatePaints(view, settings, tb);
+				attrs.updatePaints(view.getApplication(), settings, tb);
 				try {
 					path.reset();
 					List<Way> ws = stopRoute.route.getForwardWays();

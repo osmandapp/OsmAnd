@@ -64,7 +64,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		updateBackground(false);
 		cancelRowBgView.setBackgroundResource(getCancelRowBgResId());
 		mainView.findViewById(R.id.divider).setBackgroundResource(nightMode
-				? R.color.route_info_bottom_view_bg_dark : R.color.route_info_divider_light);
+				? R.color.route_info_bottom_view_bg_dark : R.color.ctx_menu_buttons_divider_light);
 
 		View.OnClickListener dismissOnClickListener = new View.OnClickListener() {
 			@Override

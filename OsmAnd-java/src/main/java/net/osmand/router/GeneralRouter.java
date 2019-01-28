@@ -32,6 +32,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
+	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;

@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 
 import net.osmand.PlatformUtil;
 import net.osmand.telegram.TelegramApplication;
-import net.osmand.telegram.ui.LiveNowTabFragment;
 import net.osmand.telegram.utils.GPXUtilities;
 import net.osmand.telegram.utils.GPXUtilities.GPXFile;
 import net.osmand.telegram.utils.GPXUtilities.Track;
@@ -19,7 +18,6 @@ import org.drinkless.td.libcore.telegram.TdApi;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,7 +48,7 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 			+ TRACK_COL_ALTITUDE + " double, " + TRACK_COL_SPEED + " double, "  //$NON-NLS-1$ //$NON-NLS-2$
 			+ TRACK_COL_HDOP + " double, " + TRACK_COL_DATE + " long, " + TRACK_COL_TEXT_INFO + " int )";
 
-	public final static Log log = PlatformUtil.getLog(SavingTracksDbHelper.class);
+	private final static Log log = PlatformUtil.getLog(SavingTracksDbHelper.class);
 
 	private final TelegramApplication app;
 
@@ -110,23 +108,32 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 		}
 	}
 
-	public void saveAsyncUserDataToGpx(LiveNowTabFragment fragment, File dir, int userId, long interval) {
-		GPXFile gpxFile = app.getSavingTracksDbHelper().collectRecordedDataForUser(userId, interval);
+	public void saveUserDataToGpx(SaveGpxListener listener, File dir, int userId, long chatId, long start, long end) {
+		GPXFile gpxFile = collectRecordedDataForUserAndChat(userId, chatId, start, end);
 		if (gpxFile != null && !gpxFile.isEmpty()) {
-			LiveUpdatesPurchaseTask task = new LiveUpdatesPurchaseTask(fragment, gpxFile, dir, userId);
+			SaveGPXTrackToFileTask task = new SaveGPXTrackToFileTask(app, listener, gpxFile, dir, userId);
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
+	public void saveGpx(SaveGpxListener listener, File dir, GPXFile gpxFile) {
+		if (gpxFile != null && !gpxFile.isEmpty()) {
+			SaveGPXTrackToFileTask task = new SaveGPXTrackToFileTask(app, listener, gpxFile, dir, 0);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
 	private void updateLocationMessage(TdApi.Message message) {
+		log.debug(message);
 		TdApi.MessageContent content = message.content;
+		int senderId = app.getTelegramHelper().getSenderMessageId(message);
 		if (content instanceof TdApi.MessageLocation) {
 			long lastTextMessageUpdate = getLastTextTrackPointTimeForUser(message.senderUserId);
 			long currentTime = System.currentTimeMillis();
 			if (lastTextMessageUpdate == 0 || currentTime - lastTextMessageUpdate < 10 * 1000) {
-				log.debug("Add map message" + message.senderUserId);
+				log.debug("Add map message " + message.senderUserId);
 				TdApi.MessageLocation messageLocation = (TdApi.MessageLocation) content;
-				insertData(message.senderUserId, message.chatId, messageLocation.location.latitude,
+				insertData(senderId, message.chatId, messageLocation.location.latitude,
 						messageLocation.location.longitude, 0.0, 0.0, 0.0,
 						Math.max(message.date, message.editDate), 0);
 			} else {
@@ -135,7 +142,7 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 		} else if (content instanceof TelegramHelper.MessageLocation) {
 			log.debug("Add text message " + message.senderUserId);
 			TelegramHelper.MessageLocation messageLocation = (TelegramHelper.MessageLocation) content;
-			insertData(message.senderUserId, message.chatId, messageLocation.getLat(), messageLocation.getLon(),
+			insertData(senderId, message.chatId, messageLocation.getLat(), messageLocation.getLon(),
 					messageLocation.getAltitude(), messageLocation.getSpeed(), messageLocation.getHdop(),
 					messageLocation.getLastUpdated() * 1000L, 1);
 		}
@@ -181,12 +188,12 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 		return res;
 	}
 
-	private GPXFile collectRecordedDataForUser(int userId, long interval) {
+	public GPXFile collectRecordedDataForUserAndChat(int userId, long chatId, long start, long end) {
 		GPXFile gpxFile = null;
 		SQLiteDatabase db = getReadableDatabase();
 		if (db != null && db.isOpen()) {
 			try {
-				gpxFile = collectDBTracksForUser(db, userId, interval);
+				gpxFile = collectDBTracksForUser(db, userId, chatId, start, end);
 			} finally {
 				db.close();
 			}
@@ -194,21 +201,53 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 		return gpxFile;
 	}
 
-	private GPXFile collectDBTracksForUser(SQLiteDatabase db, int userId, long interval) {
-		Cursor query = db.rawQuery("SELECT " + TRACK_COL_USER_ID + "," + TRACK_COL_CHAT_ID + "," + TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-				+ TRACK_COL_SPEED + "," + TRACK_COL_HDOP + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +
-				" WHERE " + TRACK_COL_USER_ID + " = ? ORDER BY " + TRACK_COL_DATE + " ASC ", new String[]{String.valueOf(userId)}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		GPXFile gpxFile = new GPXFile();
+	public GPXFile collectRecordedDataForUser(int userId, long chatId, long start, long end) {
+		GPXFile gpxFile = null;
+		SQLiteDatabase db = getReadableDatabase();
+		if (db != null && db.isOpen()) {
+			try {
+				if (chatId == 0) {
+					gpxFile = collectDBTracksForUser(db, userId, start, end);
+				} else {
+					gpxFile = collectDBTracksForUser(db, userId, chatId, start, end);
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return gpxFile;
+	}
+
+	public ArrayList<GPXFile> collectRecordedDataForUsers(long start, long end, ArrayList<Integer> ignoredUsersIds) {
+		ArrayList<GPXFile> data = new ArrayList<>();
+		SQLiteDatabase db = getReadableDatabase();
+		if (db != null && db.isOpen()) {
+			try {
+				collectDBTracksForUsers(db, data, start, end, ignoredUsersIds);
+			} finally {
+				db.close();
+			}
+		}
+		return data;
+	}
+
+	private GPXFile collectDBTracksForUser(SQLiteDatabase db, int userId, long chatId, long start, long end) {
+		Cursor query = db.rawQuery("SELECT " + TRACK_COL_USER_ID + "," + TRACK_COL_CHAT_ID + ","
+				+ TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," + TRACK_COL_SPEED + ","
+				+ TRACK_COL_HDOP + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME + " WHERE " + TRACK_COL_USER_ID + " = ?"
+				+ " AND " + TRACK_COL_CHAT_ID + " = ?" + " AND " + TRACK_COL_DATE + " BETWEEN " + start + " AND " + end
+				+ " ORDER BY " + TRACK_COL_DATE + " ASC ", new String[]{String.valueOf(userId), String.valueOf(chatId)});
+
+		GPXFile gpxFile = null;
 		long previousTime = 0;
 		TrkSegment segment = null;
 		Track track = null;
 		if (query.moveToFirst()) {
+			gpxFile = new GPXFile();
+			gpxFile.chatId = chatId;
+			gpxFile.userId = userId;
 			do {
 				long time = query.getLong(7);
-				long curTime = System.currentTimeMillis();
-				if (curTime - time > interval) {
-					continue;
-				}
 				WptPt pt = new WptPt();
 				pt.userId = query.getInt(0);
 				pt.chatId = query.getLong(1);
@@ -244,19 +283,136 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 		return gpxFile;
 	}
 
-	private static class LiveUpdatesPurchaseTask extends AsyncTask<Void, Void, List<String>> {
+	private GPXFile collectDBTracksForUser(SQLiteDatabase db, int userId, long start, long end) {
+		Cursor query = db.rawQuery("SELECT " + TRACK_COL_USER_ID + "," + TRACK_COL_CHAT_ID + ","
+				+ TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," + TRACK_COL_SPEED + ","
+				+ TRACK_COL_HDOP + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME + " WHERE " + TRACK_COL_USER_ID + " = ?"
+				+ " AND " + TRACK_COL_DATE + " BETWEEN " + start + " AND " + end
+				+ " ORDER BY " + TRACK_COL_DATE + " ASC ", new String[]{String.valueOf(userId)});
+
+		GPXFile gpxFile = null;
+		long previousTime = 0;
+		TrkSegment segment = null;
+		Track track = null;
+		if (query.moveToFirst()) {
+			gpxFile = new GPXFile();
+			gpxFile.userId = userId;
+			do {
+				long time = query.getLong(7);
+				WptPt pt = new WptPt();
+				pt.userId = query.getInt(0);
+				pt.chatId = query.getLong(1);
+				pt.lat = query.getDouble(2);
+				pt.lon = query.getDouble(3);
+				pt.ele = query.getDouble(4);
+				pt.speed = query.getDouble(5);
+				pt.hdop = query.getDouble(6);
+				pt.time = time;
+				long currentInterval = Math.abs(time - previousTime);
+
+				if (track != null) {
+					if (currentInterval < 30 * 60 * 1000) {
+						// 30 minute - same segment
+						segment.points.add(pt);
+					} else {
+						segment = new TrkSegment();
+						segment.points.add(pt);
+						track.segments.add(segment);
+					}
+				} else {
+					track = new Track();
+					segment = new TrkSegment();
+					track.segments.add(segment);
+					segment.points.add(pt);
+
+					gpxFile.tracks.add(track);
+				}
+				previousTime = time;
+			} while (query.moveToNext());
+		}
+		query.close();
+		return gpxFile;
+	}
+
+	private void collectDBTracksForUsers(SQLiteDatabase db, ArrayList<GPXFile> dataTracks, long start, long end, ArrayList<Integer> ignoredUsersIds) {
+		Cursor query = db.rawQuery("SELECT " + TRACK_COL_USER_ID + "," + TRACK_COL_CHAT_ID + ","
+				+ TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," + TRACK_COL_SPEED + ","
+				+ TRACK_COL_HDOP + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE
+				+ " BETWEEN " + start + " AND " + end + " ORDER BY " + TRACK_COL_USER_ID + " ASC, "
+				+ TRACK_COL_CHAT_ID + " ASC, " + TRACK_COL_DATE + " ASC ", null);
+
+		long previousTime = 0;
+		long previousChatId = 0;
+		int previousUserId = 0;
+		TrkSegment segment = null;
+		Track track = null;
+		GPXFile gpx = new GPXFile();
+		if (query.moveToFirst()) {
+			do {
+				int userId = query.getInt(0);
+				if (ignoredUsersIds.contains(userId)) {
+					continue;
+				}
+				int chatId = query.getInt(1);
+				long time = query.getLong(7);
+				if (previousUserId != userId || previousChatId != chatId) {
+					gpx = new GPXFile();
+					gpx.chatId = chatId;
+					gpx.userId = userId;
+					previousTime = 0;
+					track = null;
+					segment = null;
+					dataTracks.add(gpx);
+				}
+
+				WptPt pt = new WptPt();
+				pt.userId = userId;
+				pt.chatId = chatId;
+				pt.lat = query.getDouble(2);
+				pt.lon = query.getDouble(3);
+				pt.ele = query.getDouble(4);
+				pt.speed = query.getDouble(5);
+				pt.hdop = query.getDouble(6);
+				pt.time = time;
+				long currentInterval = Math.abs(time - previousTime);
+				if (track != null) {
+					if (currentInterval < 30 * 60 * 1000) {
+						// 30 minute - same segment
+						segment.points.add(pt);
+					} else {
+						segment = new TrkSegment();
+						segment.points.add(pt);
+						track.segments.add(segment);
+					}
+				} else {
+					track = new Track();
+					segment = new TrkSegment();
+					track.segments.add(segment);
+					segment.points.add(pt);
+
+					gpx.tracks.add(track);
+				}
+				previousTime = time;
+				previousUserId = userId;
+				previousChatId = chatId;
+			} while (query.moveToNext());
+		}
+		query.close();
+	}
+
+	private static class SaveGPXTrackToFileTask extends AsyncTask<Void, Void, List<String>> {
 
 		private TelegramApplication app;
-		private WeakReference<LiveNowTabFragment> fragmentRef;
+		private SaveGpxListener listener;
 
 		private final GPXFile gpxFile;
 		private File dir;
 		private int userId;
 
-		LiveUpdatesPurchaseTask(LiveNowTabFragment fragment, GPXFile gpxFile, File dir, int userId) {
+		SaveGPXTrackToFileTask(TelegramApplication app, SaveGpxListener listener, GPXFile gpxFile, File dir, int userId) {
 			this.gpxFile = gpxFile;
-			this.fragmentRef = new WeakReference<>(fragment);
-			this.app = (TelegramApplication) fragment.getActivity().getApplication();
+			this.listener = listener;
+			this.app = app;
 			this.dir = dir;
 			this.userId = userId;
 		}
@@ -300,12 +456,21 @@ public class SavingTracksDbHelper extends SQLiteOpenHelper {
 
 		@Override
 		protected void onPostExecute(List<String> warnings) {
-			if (warnings != null && warnings.isEmpty()) {
-				LiveNowTabFragment fragment = fragmentRef.get();
-				if (fragment != null && fragment.isResumed()) {
-					fragment.shareGpx(gpxFile.path);
+			if (listener != null) {
+				if (warnings != null && warnings.isEmpty()) {
+					listener.onSavingGpxFinish(gpxFile.path);
+				} else {
+					listener.onSavingGpxError(warnings);
 				}
 			}
 		}
+	}
+
+
+	public interface SaveGpxListener {
+
+		void onSavingGpxFinish(String path);
+
+		void onSavingGpxError(List<String> warnings);
 	}
 }

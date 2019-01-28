@@ -1,5 +1,7 @@
 package net.osmand;
 
+import android.util.Xml;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -147,10 +149,10 @@ public class PlatformUtil {
 	}
 
 	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
-		return new org.kxml2.io.KXmlParser();
+		return Xml.newPullParser();
 	}
 
 	public static XmlSerializer newSerializer() {
-		return new org.kxml2.io.KXmlSerializer();
+		return Xml.newSerializer();
 	}
 }

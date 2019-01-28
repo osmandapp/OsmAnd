@@ -57,6 +57,9 @@ public class ApplicationMode {
 	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
 			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
 
+	public static final ApplicationMode PUBLIC_TRANSPORT = create(R.string.app_mode_public_transport, "public_transport").
+			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark).reg();
+
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN};
 		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN};

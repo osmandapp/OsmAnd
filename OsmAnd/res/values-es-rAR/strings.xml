@@ -3046,4 +3046,31 @@ Lon %2$s</string>
     <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
     <string name="osm_live_subscriptions">Suscripciones</string>
     <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
-    </resources>
+    <string name="shared_string_launch">Ejecutar</string>
+    <string name="run_full_osmand_msg">Estás utilizando el mapa «{0}» que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
+    <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Este botón de acción, alterna entre el modo «Diurno» y «Nocturno» para OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Modo diurno</string>
+    <string name="quick_action_switch_night_mode">Modo nocturno</string>
+    <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
+    <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
+    <string name="add_destination_point">Añadir destino</string>
+    <string name="add_intermediate_point">Añadir punto intermedio</string>
+    <string name="add_start_point">Añadir punto de partida</string>
+    <string name="intermediate_waypoint">Punto intermedio: %1$s</string>
+    <string name="waypoints">Puntos de referencia: %1$s</string>
+    <string name="transfers">transferencias: %1$s</string>
+    <string name="on_foot">a pie: %1$s</string>
+    <string name="route_way">Modo: %1$s</string>
+    <string name="points_of_interests">Puntos de interés (PDI)</string>
+    <string name="waiting_for_route_calculation">Esperando el cálculo de la ruta</string>
+    <string name="app_mode_public_transport">Transporte público</string>
+    <string name="avoid_roads_descr">Marca el camino a evitar durante la navegación, desde el mapa o de la siguiente lista:</string>
+    <string name="show_along_the_route">Mostrar a lo largo de la ruta</string>
+    <string name="simulate_navigation">Simular navegación</string>
+    <string name="choose_track_file_to_follow">Elige el archivo de la traza a seguir</string>
+    <string name="voice_announcements">Anuncios de voz</string>
+    <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
+    <string name="arrive_at_time">Llegará a las %1$s</string>
+</resources>

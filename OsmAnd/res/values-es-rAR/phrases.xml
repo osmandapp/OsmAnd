@@ -3971,4 +3971,9 @@
     <string name="poi_books_academic">Académicos</string>
     <string name="poi_books_children">Infantiles</string>
     <string name="poi_atoll">Atolón</string>
+    <string name="poi_toll_gantry">Pórtico de peaje</string>
+    <string name="poi_childcare">Guardería;Cuidado de niños</string>
+    <string name="poi_denotation">Denotación</string>
+    <string name="poi_denotation_natural_monument">Monumento natural</string>
+    <string name="poi_denotation_landmark">Referencia terrestre</string>
 </resources>

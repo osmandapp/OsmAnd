@@ -67,12 +67,12 @@ import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Speed;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
@@ -966,17 +966,19 @@ public class GpxUiHelper {
 
 	public static void setupGPXChart(OsmandApplication ctx, LineChart mChart, int yLabelsCount) {
 		OsmandSettings settings = ctx.getSettings();
-		boolean light = settings.isLightContent();
+		setupGPXChart(mChart, yLabelsCount, 24f, 16f, settings.isLightContent(), true);
+	}
 
+	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset, boolean light, boolean useGesturesAndScale) {
 		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 			mChart.setHardwareAccelerationEnabled(false);
 		} else {
 			mChart.setHardwareAccelerationEnabled(true);
 		}
-		mChart.setTouchEnabled(true);
-		mChart.setDragEnabled(true);
-		mChart.setScaleEnabled(true);
-		mChart.setPinchZoom(true);
+		mChart.setTouchEnabled(useGesturesAndScale);
+		mChart.setDragEnabled(useGesturesAndScale);
+		mChart.setScaleEnabled(useGesturesAndScale);
+		mChart.setPinchZoom(useGesturesAndScale);
 		mChart.setScaleYEnabled(false);
 		mChart.setAutoScaleMinMaxEnabled(true);
 		mChart.setDrawBorders(false);
@@ -985,8 +987,8 @@ public class GpxUiHelper {
 		mChart.setMinOffset(0f);
 		mChart.setDragDecelerationEnabled(false);
 
-		mChart.setExtraTopOffset(24f);
-		mChart.setExtraBottomOffset(16f);
+		mChart.setExtraTopOffset(topOffset);
+		mChart.setExtraBottomOffset(bottomOffset);
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it

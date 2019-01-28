@@ -181,12 +181,13 @@ public class RulerControlLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (rulerModeOn()) {
-			lineAttrs.updatePaints(view, settings, tb);
-			lineFontAttrs.updatePaints(view, settings, tb);
+			OsmandApplication app = view.getApplication();
+			lineAttrs.updatePaints(app, settings, tb);
+			lineFontAttrs.updatePaints(app, settings, tb);
 			lineFontAttrs.paint.setStyle(Style.FILL);
-			circleAttrs.updatePaints(view, settings, tb);
+			circleAttrs.updatePaints(app, settings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
-			circleAttrsAlt.updatePaints(view, settings, tb);
+			circleAttrsAlt.updatePaints(app, settings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 			final QuadPoint center = tb.getCenterPixelPoint();
 			final RulerMode mode = app.getSettings().RULER_MODE.get();

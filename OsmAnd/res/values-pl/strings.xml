@@ -2234,15 +2234,15 @@ Długość %2$s</string>
     <string name="osm_live_subscription">Subskrypcja OsmAnd Live</string>
     <string name="osm_live_email_desc">Do informowania Ciebie o wkładzie.</string>
     <string name="osm_live_user_public_name">Nazwa publiczna</string>
-    <string name="osm_live_hide_user_name">Ukrywanie nazwy w raportach</string>
+    <string name="osm_live_hide_user_name">Nie pokazuj mojej nazwy w raportach</string>
     <string name="osm_live_support_region">Wspierane regiony</string>
     <string name="osm_live_month_cost">Koszt miesięczny</string>
     <string name="osm_live_month_cost_desc">Miesięczna płatność</string>
     <string name="osm_live_active">Aktywny</string>
     <string name="osm_live_not_active">Nieaktywny</string>
-    <string name="osm_live_enter_user_name">Proszę wprowadź nazwę publiczną</string>
+    <string name="osm_live_enter_user_name">Proszę wpisać nazwę publiczną</string>
     <string name="osm_live_region_desc">Część wpłat zostanie wysłana do użytkowników OSM, którzy prześlą zmiany na mapie w tym regionie.</string>
-    <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Proszę najpierw zakupić subskrypcję OsmAnd Live</string>
 
     <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata. Część dochodów powraca do społeczności OSM i jest wypłacana za każdą edycję OSM. Jeśli lubisz OsmAnd i OSM i chcesz je wspierać i być przez nie wspierany, jest to doskonały sposób, aby to zrobić.</string>
     
@@ -3212,4 +3212,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="powered_by_osmand">Obsługiwane przez OsmAnd</string>
     <string name="osm_live_subscriptions">Subskrypcje</string>
     <string name="mapillary_menu_title_pano">Wyświetlaj tylko obrazy 360°</string>
-    </resources>
+    <string name="shared_string_launch">Włącz</string>
+    <string name="lang_gn_py">Guarani</string>
+    <string name="run_full_osmand_msg">Korzystasz z mapy {0}, która jest udostępniona przez OsmAnd. Czy chcesz włączyć pełną wersję OsmAnd\?</string>
+    <string name="run_full_osmand_header">Włączyć OsmAnd\?</string>
+</resources>

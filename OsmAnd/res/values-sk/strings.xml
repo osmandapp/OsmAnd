@@ -3032,4 +3032,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="osm_live_subscriptions">Predplatné</string>
     <string name="mapillary_menu_title_pano">Zobraziť iba 360° obrázky</string>
     <string name="powered_by_osmand">Beží na OsmAnd</string>
+    <string name="shared_string_launch">Spustiť</string>
+    <string name="run_full_osmand_msg">Používate mapu {0}, ktorá beží na aplikácii OsmAnd. Chcete spustiť plnú verziu OsmAnd\?</string>
+    <string name="run_full_osmand_header">Spustiť OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraníjsky (Guaraní)</string>
+    <string name="quick_action_switch_day_night_descr">Aktivovaním tohto tlačidla sa prepne denný a nočný režim v OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Denný režim</string>
+    <string name="quick_action_switch_night_mode">Nočný režim</string>
+    <string name="quick_action_day_night_switch_mode">Prepnúť Denný/Nočný režim</string>
 </resources>

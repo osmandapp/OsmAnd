@@ -73,15 +73,14 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.WaypointDialogHelperCallbacks;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
-import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
 import net.osmand.plus.osmedit.OsmNotesMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.srtmplugin.HillshadeMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -236,7 +235,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void createDashboardView() {
 		baseColor = ContextCompat.getColor(mapActivity, R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		waypointDialogHelper.setHelperCallbacks(this);
+		waypointDialogHelper.addHelperCallbacks(this);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);

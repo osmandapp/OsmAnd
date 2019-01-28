@@ -268,8 +268,15 @@
 	<dimen name="route_info_directions_margin">56dp</dimen>
 	<dimen name="route_info_icon_padding_left">12dp</dimen>
 	<dimen name="route_info_icon_padding_right">16dp</dimen>
-	<dimen name="route_info_divider_margin">52dp</dimen>
 	<dimen name="route_info_modes_height">48dp</dimen>
+	<dimen name="route_info_details_padding">12dp</dimen>
+	<dimen name="route_info_icon_vertical_padding">6dp</dimen>
+	<dimen name="route_info_start_divider_margin">64dp</dimen>
+	<dimen name="route_info_end_divider_margin">56dp</dimen>
+	<dimen name="route_info_list_item_height">48dp</dimen>
+	<dimen name="route_info_buttons_height">36dp</dimen>
+	<dimen name="route_info_settings_buttons_height">32dp</dimen>
+	<dimen name="route_info_app_modes_padding">40dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
 

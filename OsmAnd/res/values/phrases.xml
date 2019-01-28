@@ -110,6 +110,7 @@
 	<string name="poi_bulk_purchase">Bulk purchase</string>
 	<string name="poi_substation_type">Type</string>
 	<string name="poi_books_type">Books</string>
+	<string name="poi_denotation">Denotation</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3894,5 +3895,12 @@
 	<string name="poi_books_children">Children</string>
 
 	<string name="poi_atoll">Atoll</string>
+
+	<string name="poi_toll_gantry">Toll gantry</string>
+
+	<string name="poi_childcare">Childcare</string>
+
+	<string name="poi_denotation_natural_monument">Natural monument</string>
+	<string name="poi_denotation_landmark">Landmark</string>
 
 </resources>

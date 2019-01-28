@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
@@ -3169,4 +3169,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="powered_by_osmand">Pracuje na OsmAnd</string>
     <string name="mapillary_menu_title_pano">Pakazać tolki 360° malunki</string>
     <string name="osm_live_subscriptions">Padpiski</string>
-    </resources>
+    <string name="shared_string_launch">Zapusk</string>
+    <string name="lang_gn_py">Huarani</string>
+    <string name="run_full_osmand_msg">Vy karystajeciesia mapaj {0}, jakaja pastaŭliajecca OsmAnd. Vy chočacie zapuscić poŭnuju viersiju OsmAnd\?</string>
+    <string name="run_full_osmand_header">Zapuscić OsmAnd\?</string>
+</resources>

@@ -379,8 +379,8 @@ public class TargetPointsHelper {
 	}
 
 	public void updateRouteAndRefresh(boolean updateRoute) {
-		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
-				routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
+		if(updateRoute && (routingHelper.isPublicTransportMode() || routingHelper.isRouteBeingCalculated() ||
+				routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
 			updateRoutingHelper();
 		}
 		updateListeners();
@@ -388,15 +388,14 @@ public class TargetPointsHelper {
 
 	private void updateRoutingHelper() {
 		LatLon start = settings.getPointToStart();
-		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
+		LatLon finish = settings.getPointToNavigate();
 		List<LatLon> is = getIntermediatePointsLatLonNavigation();
+		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
 		if((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					is, lastKnownLocation);
+			routingHelper.setFinalAndCurrentLocation(finish, is, lastKnownLocation);
 		} else {
 			Location loc = wrap(start);
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					is, loc);
+			routingHelper.setFinalAndCurrentLocation(finish, is, loc);
 		}
 	}
 
@@ -425,6 +424,9 @@ public class TargetPointsHelper {
 		listeners.add(l);
 	}
 
+	public void removeListener(StateChangedListener<Void> l) {
+		listeners.remove(l);
+	}
 
 	private void updateListeners() {
 		for(StateChangedListener<Void> l : listeners) {
@@ -452,6 +454,18 @@ public class TargetPointsHelper {
 	public void clearAllIntermediatePoints(boolean updateRoute) {
 		cancelAllIntermediatePointsAddressRequests();
 		settings.clearIntermediatePoints();
+		intermediatePoints.clear();
+		readFromSettings();
+		updateRouteAndRefresh(updateRoute);
+	}
+
+	public void clearAllPoints(boolean updateRoute) {
+		cancelStartPointAddressRequest();
+		cancelAllIntermediatePointsAddressRequests();
+		cancelTargetPointAddressRequest();
+		settings.clearPointToStart();
+		settings.clearIntermediatePoints();
+		settings.clearPointToNavigate();
 		intermediatePoints.clear();
 		readFromSettings();
 		updateRouteAndRefresh(updateRoute);

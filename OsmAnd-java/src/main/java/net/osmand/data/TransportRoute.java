@@ -1,5 +1,9 @@
 package net.osmand.data;
 
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.MapUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,10 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.MapUtils;
 
 public class TransportRoute extends MapObject {
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
@@ -209,4 +209,16 @@ public class TransportRoute extends MapObject {
 		return d;
 	}
 
+	public String getAdjustedRouteRef() {
+		if (ref != null) {
+			int charPos = ref.lastIndexOf(':');
+			if (charPos != -1) {
+				ref = ref.substring(0, charPos);
+			}
+			if (ref.length() > 4) {
+				ref = ref.substring(0, 4);
+			}
+		}
+		return ref;
+	}
 }

@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+	<string name="timeline_description">Включите мониторинг, для сбора данных о перемещении в фоновом режиме.</string>
 	<string name="last_update_from_telegram">Последнее обновление в Telegram</string>
 	<string name="device_name">Имя устройства</string>
 	<string name="shared_string_hide">Спрятать</string>

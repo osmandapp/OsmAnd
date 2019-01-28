@@ -472,7 +472,7 @@ public class BinaryMapTransportReaderAdapter {
 		Iterator<Map.Entry<String, String>> it = namesMap.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, String> e = it.next();
-			s.setName(stringTable.get(e.getKey().charAt(0)),stringTable.get(e.getValue().charAt(0)));
+			s.setName(stringTable.get(e.getKey().charAt(0)), stringTable.get(e.getValue().charAt(0)));
 		}
 	}
 

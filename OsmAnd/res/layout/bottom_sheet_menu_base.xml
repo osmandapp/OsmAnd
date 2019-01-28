@@ -36,6 +36,7 @@
 		android:background="?attr/dashboard_divider"/>
 
 	<LinearLayout
+		android:id="@+id/buttons_container"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/bottom_sheet_cancel_button_height">
 

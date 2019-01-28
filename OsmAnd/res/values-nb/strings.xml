@@ -2157,7 +2157,7 @@
     <string name="quick_action_map_overlay_switch">Kartoverlegget er endret til \"%s\".</string>
     <string name="points_delete_multiple_succesful">Punkt(er) slettet.</string>
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
-    <string name="average_speed">Gjennomsnittshastighet</string>
+    <string name="average_speed">Gjennomsnittsfart</string>
     <string name="select_gpx_folder">Velg mappe for GPX-fil</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
 \n
@@ -2227,7 +2227,7 @@
     <string name="altitude_descent">Fall</string>
     <string name="altitude_ascent">Stigning</string>
     <string name="altitude_range">Høydeintervall</string>
-    <string name="average_altitude">Gjennomsnittshøyde</string>
+    <string name="average_altitude">Gjennomsnittlig høyde</string>
     <string name="route_head">Følg</string>
     <string name="shared_string_action_name">Handlingsnavn</string>
 <string name="display_zoom_level">Visningszoomnivå: %1$s</string>
@@ -2770,7 +2770,7 @@
     <string name="poi_error_info_not_loaded">Info om knutepunktet ble ikke lastet inn</string>
     <string name="poi_dialog_other_tags_message">Alle andre etiketter beholdes</string>
     <string name="we_really_care_about_your_opinion">Vi bryr oss om din mening og din tilbakemelding er viktig.</string>
-    <string name="number_of_rows_in_dash">Antall rader %1$s</string>
+    <string name="number_of_rows_in_dash">Antall rader i oversikt: %1$s</string>
     <string name="show_free_version_banner">Vis gratisversjonsbanner</string>
     <string name="show_free_version_banner_description">Vis gratisversjonsbanneret selv i den betalte versjonen.</string>
     <string name="commiting_node">Sjekker inn knutepunkt…</string>
@@ -3078,7 +3078,7 @@
     <string name="search_street">Gatesøk</string>
     <string name="start_search_from_city">Velg byen først</string>
     <string name="shared_string_restore">Gjenopprett</string>
-    <string name="keep_passed_markers_descr">Markører lagt til som favorittgrupper eller GPX-veipunkter markert som passert vil forbli på kartet. Hvis gruppen ikke er aktiv, vil markørene forsvinne fra kartet.</string>
+    <string name="keep_passed_markers_descr">Markører lagt til som favorittgrupper eller GPX-rutepunkter markert som passert vil forbli på kartet. Hvis gruppen ikke er aktiv, vil markørene forsvinne fra kartet.</string>
     <string name="keep_passed_markers">Behold passerte markører på kartet</string>
     <string name="osm_live_plan_pricing">Betalingsplan og pris</string>
     <string name="osm_live_payment_monthly_title">Betal månedlig</string>
@@ -3097,4 +3097,23 @@
     <string name="powered_by_osmand">Muliggjort av OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnementer</string>
     <string name="mapillary_menu_title_pano">Vis kun 360°-bilder</string>
+    <string name="release_3_0">• New: Støtte for verdensomspennende reiseguider. Nevnte plasseringer lenkes til på kartet. Initiell data fra Wikivoyage.
+\n
+\n • Wikipedia: Nytt utseende, aktive lenker og støtte for bilder
+\n
+\n • Open Track UI: Støtte for rutepunktgrupper
+\n
+\n • Kartmarkører: Import av valgte grupper fra GPX-filer, koordiner inndata, nytt utseende
+\n
+\n • OsmAnd Live-abonnement støtter nå alle OsmAnd-funksjoner
+\n</string>
+    <string name="shared_string_launch">Kjør</string>
+    <string name="run_full_osmand_msg">Du bruker {0}-kart, muliggjort av OsmAnd. Ønsker du å kjøre fullversjonen av OsmAnd\?</string>
+    <string name="run_full_osmand_header">Kjør OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Å trykke på denne knappen bytter mellom dag- og nattmodus i OsmAnd.</string>
+    <string name="quick_action_switch_day_mode">Dagmodus</string>
+    <string name="quick_action_switch_night_mode">Nattmodus</string>
+    <string name="quick_action_day_night_switch_mode">Veksle dag-/nattmodus</string>
+    <string name="app_mode_public_transport">Offentlig transport</string>
 </resources>

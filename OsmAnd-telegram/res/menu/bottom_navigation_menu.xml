@@ -9,4 +9,9 @@
 		android:id="@+id/action_live_now"
 		android:icon="@drawable/ic_action_live_now"
 		android:title="@string/live_now"/>
+
+	<item
+		android:id="@+id/action_timeline"
+		android:icon="@drawable/ic_action_timeline"
+		android:title="@string/timeline"/>
 </menu>
