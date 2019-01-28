@@ -18,73 +18,73 @@
     <string name="swap_start_and_destination">Swap start and destination</string>
     <string name="add_destination_point">Add destination</string>
     <string name="add_intermediate_point">Add intermediate</string>
-    <string name="add_start_point">Add Start point</string>
+    <string name="add_start_point">Add starting point</string>
     <string name="intermediate_waypoint">Intermediate point: %1$s</string>
     <string name="waypoints">Waypoints: %1$s</string>
-    <string name="transfers">transfers: %1$s</string>
-    <string name="on_foot">on foot: %1$s</string>
+    <string name="transfers">Transfers: %1$s</string>
+    <string name="on_foot">On foot: %1$s</string>
     <string name="route_way">Way: %1$s</string>
-    <string name="points_of_interests">Points of interests(POI)</string>
-    <string name="waiting_for_route_calculation">Waiting for route calculation</string>
+    <string name="points_of_interests">Points of interest (POI)</string>
+    <string name="waiting_for_route_calculation">Calculating route…</string>
     <string name="app_mode_public_transport">Public transport</string>
-    <string name="avoid_roads_descr">Select road on the map or from the list below that you want to avoid during navigation:</string>
+    <string name="avoid_roads_descr">Select a road you want to avoid during navigation, either on the map, or from the list below:</string>
     <string name="show_along_the_route">Show along the route</string>
     <string name="simulate_navigation">Simulate navigation</string>
     <string name="choose_track_file_to_follow">Choose track file to follow</string>
     <string name="voice_announcements">Voice announcements</string>
-    <string name="intermediate_destinations">Intermediate destinations: %1$s</string>
+    <string name="intermediate_destinations">Intermediate waypoints: %1$s</string>
     <string name="arrive_at_time">Arrive at %1$s</string>
     <string name="osm_live_subscriptions">Subscriptions</string>
-    <string name="powered_by_osmand">Powered by OsmAnd</string>
+    <string name="powered_by_osmand">By OsmAnd</string>
     <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
-    <string name="osm_live_payment_monthly_title">Pay monthly</string>
-    <string name="osm_live_payment_3_months_title">Pay once in 3 months</string>
-    <string name="osm_live_payment_annual_title">Pay once a year</string>
+    <string name="osm_live_payment_monthly_title">Monthly</string>
+    <string name="osm_live_payment_3_months_title">Every three months</string>
+    <string name="osm_live_payment_annual_title">Annually</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / month</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / month</string>
     <string name="osm_live_payment_discount_descr">Save %1$s!</string>
-	<string name="osm_live_payment_current_subscription">Your current subscription</string>
+	<string name="osm_live_payment_current_subscription">Current subscription</string>
     <string name="osm_live_payment_renews_monthly">Renews monthly</string>
     <string name="osm_live_payment_renews_quarterly">Renews quarterly</string>
     <string name="osm_live_payment_renews_annually">Renews annually</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Select the payment period convenient for you:</string>
-    <string name="osm_live_payment_contribute_descr">Part of income goes to OpenStreetMap contributors.</string>
-    <string name="markers_remove_dialog_msg">Delete Map marker \'%s\'?</string>
+    <string name="osm_live_payment_contribute_descr">Part of the income goes to OpenStreetMap contributors.</string>
+    <string name="markers_remove_dialog_msg">Delete map marker \'%s\'?</string>
     <string name="edit_map_marker">Edit map marker</string>
-    <string name="third_party_application">Third-party application</string>
+    <string name="third_party_application">Third-party app</string>
     <string name="search_street">Search street</string>
     <string name="start_search_from_city">Select the city first</string>
     <string name="shared_string_restore">Restore</string>
     <string name="keep_passed_markers_descr">Markers added as a group of Favorites or GPX waypoints marked "Passed" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
     <string name="keep_passed_markers">Keep passed markers on the map</string>
     <string name="more_transport_on_stop_hint">There is more transport on this stop.</string>
-    <string name="ask_for_location_permission">Please give OsmAnd permission for location to continue.</string>
-    <string name="thank_you_for_feedback">Thank you for feedback</string>
+    <string name="ask_for_location_permission">Please grant OsmAnd location access to continue.</string>
+    <string name="thank_you_for_feedback">Thank you for your feedback</string>
     <string name="poi_cannot_be_found">Node or way cannot be found.</string>
     <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
     <string name="release_3_2_pre">
     • Fixed crash on startup that occurred on some devices\n\n
-    • New Markers feature: display the markers that have already been traversed\n\n 
-    • Search history now shows the categories you have searched for previously\n\n
+    • New Markers feature: Display already traversed markers\n\n 
+    • Search history now shows previously searched categories\n\n
     • Fixed crash on startup that occurred with non-latin maps\n\n
     • Improve rendering speed issues on Android 8.0 devices\n\n
     • Support for polygon (non-amenity) objects editing\n\n
-    • Measure distance: add Measure button to Actions in the context menu\n\n
+    • Measure distance: Add \"Measure\" button to Actions in the context menu\n\n
     </string>
     <string name="release_3_1">
     • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
-    • Map markers: fix turn on/off groups, ability to hide markers from the map\n\n
+    • Map markers: Fix turning on/off groups, ability to hide markers from the map\n\n
     • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
     • Improve Wikipedia and Wikivoyage parsing, updated files are already available\n\n
-    • Context menu: fix transport shields color in the night mode, fix additional menu sizes\n\n
-    • Boat navigation: support for waterway fairway\n\n
-    • Other bug fixes\n\n
+    • Context menu: Fix transport shields color in the night mode, fix additional menu sizes\n\n
+    • Boat navigation: Support for waterway fairway\n\n
+    • Other bugfixes\n\n
     </string>
     <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
-        We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>
+        No personal info is collected, search data is only used to improve the search algorithm.<br/>]]></string>
     <string name="send_search_query">Send search query?</string>
     <string name="shared_string_world">World</string>
     <string name="point_deleted">Point %1$s deleted</string>
@@ -460,9 +460,9 @@
     <string name="quick_action_add_destination">Add destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
-    <string name="quick_action_add_destination_desc">Tapping this action button makes the screen center the route destination, any previously selected destination becomes the last intermediate destination.</string>
+    <string name="quick_action_add_destination_desc">Tapping this action button makes the screen center the route destination, any previously selected destination becomes the last intermediate waypoint.</string>
     <string name="quick_action_replace_destination_desc">Tapping this action button makes the screen center the new route destination, replacing the previously selected destination (if any).</string>
-    <string name="quick_action_add_first_intermediate_desc">Tapping this action button makes the screen center the first intermediate destination.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tapping this action button makes the screen center the first intermediate waypoint.</string>
     <string name="no_overlay">No overlay</string>
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
@@ -1559,7 +1559,7 @@
     <string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
     <string name="routing_attr_avoid_stairs_name">Avoid stairs</string>
     <string name="routing_attr_avoid_stairs_description">Avoid stairs</string>
-    <string name="routing_attr_avoid_borders_name">Avoid border crossing</string>
+    <string name="routing_attr_avoid_borders_name">Avoid border crossings</string>
     <string name="routing_attr_avoid_borders_description">Avoid crossing national borders</string>
     <string name="routing_attr_weight_name">Weight limit</string>
     <string name="routing_attr_weight_description">Specify permitted vehicle weight limit on routes.</string>
@@ -1592,7 +1592,7 @@
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
-    <string name="route_is_too_long_v2">Please add intermediate destinations if no path is found for this long route within 10 mins.</string>
+    <string name="route_is_too_long_v2">Please add intermediate waypoints if no path is found for this long route within 10 mins.</string>
     <string name="auto_zoom_none">No auto zoom</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
@@ -1632,9 +1632,9 @@
     <string name="speak_cameras">Speed cameras</string>
     <string name="speak_traffic_warnings">Traffic warnings</string>
     <string name="osb_author_or_password_not_specified">Please specify OSM user and password in \'Settings\'</string>
-    <string name="clear_intermediate_points">Clear intermediate destinations</string>
-    <string name="keep_intermediate_points">Keep intermediate destinations</string>
-    <string name="new_directions_point_dialog">You already have intermediate destinations set.</string>
+    <string name="clear_intermediate_points">Clear intermediate waypoints</string>
+    <string name="keep_intermediate_points">Keep intermediate waypoints</string>
+    <string name="new_directions_point_dialog">You already have intermediate waypoints set.</string>
     <string name="context_menu_item_directions_to">Directions to</string>
     <string name="context_menu_item_directions_from">Directions from</string>
     <string name="route_descr_map_location">Map: </string>
@@ -1651,7 +1651,7 @@
     <string name="context_menu_item_destination_point">Set as destination</string>
     <string name="please_select_address">Select city or street first</string>
     <string name="search_street_in_neighborhood_cities">Search for street in neighborhood cities</string>
-    <string name="intermediate_items_sort_return">Optimized order of intermediate destinations en-route to the destination.</string>
+    <string name="intermediate_items_sort_return">Optimized order of intermediate waypoints en-route to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort door-to-door</string>
     <string name="local_osm_changes_backup_successful">OSM change file was generated %1$s</string>
     <string name="local_osm_changes_backup_failed">Could not back up OSM changes</string>
@@ -1714,7 +1714,7 @@
     <string name="local_indexes_cat_srtm">Contour lines</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
-    <string name="clear_dest_confirm">Are you sure you want to clear your destination (and intermediate destinations)?</string>
+    <string name="clear_dest_confirm">Are you sure you want to clear your destination (and intermediate waypoints)?</string>
     <string name="precise_routing_mode_descr">Calculate precise routes without glitches. Still distance-limited and slow.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
     <string name="recording_context_menu_show">Show</string>
@@ -1779,31 +1779,31 @@
     <string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
     <string name="safe_mode_description">Run the app in safe mode (using slower Android instead of native code).</string>
     <string name="safe_mode">Safe mode</string>
-    <string name="native_library_not_running">The app is running in safe mode (disable it in \'Settings\').</string>
+    <string name="native_library_not_running">The app is running in safe mode (turn it off in \'Settings\').</string>
     <string name="close_changeset">Close changeset</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app not installed. Search in Google Play?</string>
     <string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
     <string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destination_arrow">Show destination direction</string>
-    <string name="enable_plugin_monitoring_services">Enable the Trip recording plugin to use position logging services (GPX logging, online tracking)</string>
+    <string name="enable_plugin_monitoring_services">Enable the \"Trip recording\" plugin to use position logging services (GPX logging, online tracking)</string>
     <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
     <string name="gps_not_available">Please enable GPS in the settings</string>
     <string name="map_widget_monitoring_services">Logging services</string>
     <string name="no_route">No route</string>
     <string name="delete_target_point">Remove destination</string>
     <string name="target_point">Destination %1$s</string>
-    <string name="intermediate_point">Intermediate destination %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Add as last intermediate destination</string>
-    <string name="context_menu_item_first_intermediate_point">Add as first intermediate destination</string>
-    <string name="add_as_last_destination_point">Add as last intermediate destination</string>
-    <string name="add_as_first_destination_point">Add as first intermediate destination</string>
+    <string name="intermediate_point">Intermediate waypoint %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Add as last intermediate waypoint</string>
+    <string name="context_menu_item_first_intermediate_point">Add as first intermediate waypoint</string>
+    <string name="add_as_last_destination_point">Add as last intermediate waypoint</string>
+    <string name="add_as_first_destination_point">Add as first intermediate waypoint</string>
     <string name="replace_destination_point">Replace the destination</string>
     <string name="new_destination_point_dialog">You have already set a destination:</string>
     <string name="shared_string_target_points">Destinations</string>
-    <string name="intermediate_point_too_far">Intermediate destination %1$s is too far from the nearest road.</string>
-    <string name="arrived_at_intermediate_point">You have arrived at your intermediate destination</string>
-    <string name="context_menu_item_intermediate_point">Add as intermediate destination</string>
-    <string name="map_widget_intermediate_distance">Intermediate destination</string>
+    <string name="intermediate_point_too_far">Intermediate waypoint %1$s is too far from the nearest road.</string>
+    <string name="arrived_at_intermediate_point">Intermediate waypoint reached</string>
+    <string name="context_menu_item_intermediate_point">Add as intermediate waypoint</string>
+    <string name="map_widget_intermediate_distance">Intermediate waypoint</string>
     <string name="map_widget_intermediate_time">Intermediate time</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
     <string name="add_tag">Add Tag</string>
