@@ -24,6 +24,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -33,7 +34,8 @@ import net.osmand.plus.routepreparationmenu.routeCards.PublicTransportCard;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		map = getMapActivity().getMapView();
-		List<TransportRoutePlanner.TransportRouteResult> routes = getMyApplication().getTransportRoutingHelper().getRoutes();
+		List<TransportRouteResult> routes = getMyApplication().getTransportRoutingHelper().getRoutes();
 		if (routes != null && !routes.isEmpty()) {
 			view = inflater.inflate(R.layout.fragment_show_all_routes, null);
 			viewPager = view.findViewById(R.id.pager);
@@ -153,11 +155,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 
 	private void adjustMapPosition() {
 		RoutingHelper rh = mapActivity.getRoutingHelper();
+		OsmandApplication app = mapActivity.getMyApplication();
 		TransportRoutingHelper transportRoutingHelper = rh.getTransportRoutingHelper();
 		if (getMapActivity().getMapView() != null) {
 			Location lt = rh.getLastProjection();
 			if (lt == null) {
-				lt = getMyApplication().getTargetPointsHelper().getPointToStartLocation();
+				lt = app.getTargetPointsHelper().getPointToStartLocation();
 			}
 			if (lt != null) {
 				double left = lt.getLongitude(), right = lt.getLongitude();
@@ -169,16 +172,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 					top = Math.max(top, l.getLatitude());
 					bottom = Math.min(bottom, l.getLatitude());
 				}
-				TransportRoutePlanner.TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
-				for (TransportRoutePlanner.TransportRouteResultSegment segment : result.getSegments()) {
-					for (Node n : segment.getNodes()) {
-						left = Math.min(left, n.getLongitude());
-						right = Math.max(right, n.getLongitude());
-						top = Math.max(top, n.getLatitude());
-						bottom = Math.min(bottom, n.getLatitude());
+				TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
+				if (result != null) {
+					for (TransportRouteResultSegment segment : result.getSegments()) {
+						for (Node n : segment.getNodes()) {
+							left = Math.min(left, n.getLongitude());
+							right = Math.max(right, n.getLongitude());
+							top = Math.max(top, n.getLatitude());
+							bottom = Math.min(bottom, n.getLatitude());
+						}
 					}
 				}
-				List<TargetPointsHelper.TargetPoint> targetPoints = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
+				List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 				for (TargetPointsHelper.TargetPoint l : targetPoints) {
 					left = Math.min(left, l.getLongitude());
 					right = Math.max(right, l.getLongitude());
@@ -192,7 +197,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 				if (!portrait) {
 					tileBoxWidthPx = tb.getPixWidth() - view.getWidth();
 				} else {
-					int fHeight = viewPager.getHeight() + AndroidUtils.getStatusBarHeight(getMyApplication());
+					int fHeight = viewPager.getHeight() + AndroidUtils.getStatusBarHeight(app);
 					tileBoxHeightPx = tb.getPixHeight() - fHeight;
 				}
 				getMapActivity().getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);

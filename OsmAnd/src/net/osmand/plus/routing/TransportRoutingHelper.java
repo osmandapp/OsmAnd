@@ -89,8 +89,12 @@ public class TransportRoutingHelper {
 		return currentRoute;
 	}
 
+	@Nullable
 	public TransportRouteResult getCurrentRouteResult() {
-		return routes.get(currentRoute);
+		if (routes != null && currentRoute < routes.size()) {
+			return routes.get(currentRoute);
+		}
+		return null;
 	}
 
 	public List<TransportRouteResult> getRoutes() {

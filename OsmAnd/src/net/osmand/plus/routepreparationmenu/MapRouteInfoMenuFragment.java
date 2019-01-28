@@ -45,6 +45,8 @@ import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.widgets.ImageViewExProgress;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 
 import java.util.List;
 
@@ -635,15 +637,16 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private void adjustMapPosition(int y) {
-		if (menu.isSelectFromMapTouch()) {
+		OsmandApplication app = getMyApplication();
+		if (menu.isSelectFromMapTouch() || app == null) {
 			return;
 		}
 
-		RoutingHelper rh = getMyApplication().getRoutingHelper();
+		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode() && getMapActivity().getMapView() != null) {
 			Location lt = rh.getLastProjection();
 			if (lt == null) {
-				lt = getMyApplication().getTargetPointsHelper().getPointToStartLocation();
+				lt = app.getTargetPointsHelper().getPointToStartLocation();
 			}
 			if (lt != null) {
 				double left = lt.getLongitude(), right = lt.getLongitude();
@@ -656,17 +659,19 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 					bottom = Math.min(bottom, l.getLatitude());
 				}
 				if (menu.isTransportRouteCalculated()) {
-					TransportRoutePlanner.TransportRouteResult result = getMyApplication().getTransportRoutingHelper().getCurrentRouteResult();
-					for (TransportRoutePlanner.TransportRouteResultSegment segment : result.getSegments()) {
-						for (Node n : segment.getNodes()) {
-							left = Math.min(left, n.getLongitude());
-							right = Math.max(right, n.getLongitude());
-							top = Math.max(top, n.getLatitude());
-							bottom = Math.min(bottom, n.getLatitude());
+					TransportRouteResult result = app.getTransportRoutingHelper().getCurrentRouteResult();
+					if (result != null) {
+						for (TransportRouteResultSegment segment : result.getSegments()) {
+							for (Node n : segment.getNodes()) {
+								left = Math.min(left, n.getLongitude());
+								right = Math.max(right, n.getLongitude());
+								top = Math.max(top, n.getLatitude());
+								bottom = Math.min(bottom, n.getLatitude());
+							}
 						}
 					}
 				}
-				List<TargetPointsHelper.TargetPoint> targetPoints = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
+				List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 				for (TargetPointsHelper.TargetPoint l : targetPoints) {
 					left = Math.min(left, l.getLongitude());
 					right = Math.max(right, l.getLongitude());
@@ -681,7 +686,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				if (!portrait) {
 					tileBoxWidthPx = tb.getPixWidth() - getWidth();
 				} else {
-					int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(getMyApplication());
+					int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(app);
 					tileBoxHeightPx = tb.getPixHeight() - fHeight;
 				}
 				getMapActivity().getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
