@@ -3131,4 +3131,27 @@
     <string name="run_full_osmand_msg">המפה שבשימוש היא {0} שמוגשת על ידי OsmAnd. להפעיל את הגרסה המלאה של OsmAnd\?</string>
     <string name="run_full_osmand_header">להפעיל את OsmAnd\?</string>
     <string name="lang_gn_py">גוארני</string>
+    <string name="swap_start_and_destination">החלפת היעד עם המוצא</string>
+    <string name="add_destination_point">הוספת יעד</string>
+    <string name="add_intermediate_point">הוספת נקודת ביניים</string>
+    <string name="add_start_point">הוספת נקודת התחלה</string>
+    <string name="intermediate_waypoint">נקודת ביניים: %1$s</string>
+    <string name="waypoints">נקודות דרך: %1$s</string>
+    <string name="transfers">החלפות: %1$s</string>
+    <string name="on_foot">ברגל: %1$s</string>
+    <string name="route_way">דרך: %1$s</string>
+    <string name="points_of_interests">נקודות עניין (נ״ע)</string>
+    <string name="waiting_for_route_calculation">בהמתנה לחישוב מסלול</string>
+    <string name="app_mode_public_transport">תחבורה ציבורית</string>
+    <string name="avoid_roads_descr">נא לבחור סוג דרך במפה או מהרשימה שלהלן שברצונך להימנע ממנה במהלך ניווט:</string>
+    <string name="show_along_the_route">הצגה לאורך המסלול</string>
+    <string name="simulate_navigation">הדמיית ניווט</string>
+    <string name="choose_track_file_to_follow">נא לבחור קובץ מסלול להצגה</string>
+    <string name="voice_announcements">הכרזות קוליות</string>
+    <string name="intermediate_destinations">יעדי ביניים: %1$s</string>
+    <string name="arrive_at_time">הגעה ב־%1$s</string>
+    <string name="quick_action_switch_day_night_descr">נגיעה בכפתור פעולה זה תחליף בין מצבי יום ולילה עבור OsmAnd</string>
+    <string name="quick_action_switch_day_mode">מצב יום</string>
+    <string name="quick_action_switch_night_mode">מצב לילה</string>
+    <string name="quick_action_day_night_switch_mode">החלפה בין מצבי יום/לילה</string>
 </resources>
