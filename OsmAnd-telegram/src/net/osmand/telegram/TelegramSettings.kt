@@ -845,13 +845,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var updateTextMessageId = 1
 		var currentMessageLimit = -1L
 		var currentMapMessageId = -1L
+		var oldMapMessageId = -1L
 		var currentTextMessageId = -1L
+		var oldTextMessageId = -1L
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
 		var lastSuccessfulSendTimeMs = -1L
 		var lastSendTextMessageTime = -1
 		var lastSendMapMessageTime = -1
-		var bufferedMessages = 0
+		var pendingTdLib = 0
 		var pendingTextMessage = false
 		var pendingMapMessage = false
 		var shouldSendViaBotMessage = false

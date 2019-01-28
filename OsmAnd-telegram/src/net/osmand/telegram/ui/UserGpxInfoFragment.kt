@@ -207,14 +207,14 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun updateGpxInfo() {
-		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(
-			app.locationMessages.collectRecordedDataForUser(
-				gpxFile.userId,
-				gpxFile.chatId,
-				startCalendar.timeInMillis,
-				endCalendar.timeInMillis
-			)
-		).first()
+//		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(
+//			app.locationMessages.collectRecordedDataForUser(
+//				gpxFile.userId,
+//				gpxFile.chatId,
+//				startCalendar.timeInMillis,
+//				endCalendar.timeInMillis
+//			)
+//		).first()
 		updateGPXStatisticRow()
 		updateDateAndTimeButtons()
 		updateGPXMap()

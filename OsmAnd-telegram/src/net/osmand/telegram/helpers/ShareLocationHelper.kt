@@ -3,7 +3,7 @@ package net.osmand.telegram.helpers
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.telegram.*
-import net.osmand.telegram.helpers.LocationMessages.LocationMessage
+import net.osmand.telegram.helpers.LocationMessages.BufferMessage
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.BASE_URL
@@ -50,8 +50,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 		if (location != null) {
 			if (app.settings.getChatsShareInfo().isNotEmpty()) {
-				addNewLocationMessages(location, app.telegramHelper.getCurrentUserId())
-				shareMessages()
+				shareLocationMessages(location, app.telegramHelper.getCurrentUserId())
 			}
 			lastLocationMessageSentTime = System.currentTimeMillis()
 		}
@@ -132,64 +131,103 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		refreshNotification()
 	}
 
-	private fun addNewLocationMessages(location: Location, userId: Int) {
+	private fun shareLocationMessages(location: Location, userId: Int) {
 		val chatsShareInfo = app.settings.getChatsShareInfo()
 		val latitude = location.latitude
 		val longitude = location.longitude
-		val isBot = app.settings.currentSharingMode != userId.toString()
+		val sharingMode = app.settings.currentSharingMode
+		val isBot = sharingMode != userId.toString()
 		val types = mutableListOf<Int>()
+		var bufferedMessagesFull = false
 
 		when (app.settings.shareTypeValue) {
 			SHARE_TYPE_MAP -> {
-				types.add(if (isBot) LocationMessage.TYPE_BOT_MAP else LocationMessage.TYPE_USER_MAP)
+				types.add(if (isBot) LocationMessages.TYPE_BOT_MAP else LocationMessages.TYPE_USER_MAP)
 			}
 			SHARE_TYPE_TEXT -> {
-				types.add(if (isBot) LocationMessage.TYPE_BOT_TEXT else LocationMessage.TYPE_USER_TEXT)
+				types.add(if (isBot) LocationMessages.TYPE_BOT_TEXT else LocationMessages.TYPE_USER_TEXT)
 			}
 			SHARE_TYPE_MAP_AND_TEXT -> {
-				types.add(if (isBot) LocationMessage.TYPE_BOT_MAP else LocationMessage.TYPE_USER_MAP)
-				types.add(if (isBot) LocationMessage.TYPE_BOT_TEXT else LocationMessage.TYPE_USER_TEXT)
+				types.add(if (isBot) LocationMessages.TYPE_BOT_MAP else LocationMessages.TYPE_USER_MAP)
+				types.add(if (isBot) LocationMessages.TYPE_BOT_TEXT else LocationMessages.TYPE_USER_TEXT)
 			}
 		}
 		chatsShareInfo.values.forEach { shareInfo ->
-			types.forEach {
-				val message = LocationMessage(userId, shareInfo.chatId, latitude, longitude, location.altitude, location.speed.toDouble(),
-						location.accuracy.toDouble(), location.bearing.toDouble(), location.time, it, LocationMessage.STATUS_PREPARED, shareInfo.currentMapMessageId)
-				app.locationMessages.addOutgoingMessage(message)
+			if (shareInfo.pendingTdLib >= 10) {
+				bufferedMessagesFull = true
 			}
-		}
-	}
+			types.forEach {
+				val message = BufferMessage(shareInfo.chatId, latitude, longitude, location.altitude, location.speed.toDouble(),
+					location.accuracy.toDouble(), location.bearing.toDouble(), location.time, it, LocationMessages.STATUS_PREPARED)
 
-	private fun shareMessages() {
-		var bufferedMessagesFull = false
-		app.locationMessages.getPreparedMessages().forEach {
-			val shareChatInfo = app.settings.getChatsShareInfo()[it.chatId]
-			if (shareChatInfo != null) {
-				bufferedMessagesFull = shareChatInfo.bufferedMessages < 10
-				if (bufferedMessagesFull) {
-					when {
-						it.type == LocationMessage.TYPE_USER_TEXT -> {
-							shareChatInfo.bufferedMessages++
-							it.status = LocationMessage.STATUS_PENDING
-							app.telegramHelper.sendLiveLocationText(shareChatInfo, it)
-						}
-						it.type == LocationMessage.TYPE_USER_MAP -> {
-							shareChatInfo.bufferedMessages++
-							it.status = LocationMessage.STATUS_PENDING
-							app.telegramHelper.sendLiveLocationMap(shareChatInfo, it)
-						}
-						it.type == LocationMessage.TYPE_BOT_TEXT -> {
-							sendLocationToBot(it, app.settings.currentSharingMode, shareChatInfo, SHARE_TYPE_TEXT)
-						}
-						it.type == LocationMessage.TYPE_BOT_MAP -> {
-							sendLocationToBot(it, app.settings.currentSharingMode, shareChatInfo, SHARE_TYPE_MAP)
-						}
+				when (app.settings.shareTypeValue) {
+					SHARE_TYPE_MAP -> {
+						prepareMapMessage(shareInfo, message, isBot, sharingMode)
+					}
+					SHARE_TYPE_TEXT -> {
+						prepareTextMessage(shareInfo, message, isBot, sharingMode)
+					}
+					SHARE_TYPE_MAP_AND_TEXT -> {
+						prepareMapMessage(shareInfo, message, isBot, sharingMode)
+						prepareTextMessage(shareInfo, message, isBot, sharingMode)
 					}
 				}
 			}
 		}
 		if (bufferedMessagesFull) {
 			checkNetworkType()
+		}
+	}
+
+	private fun prepareTextMessage(shareInfo: TelegramSettings.ShareChatInfo,message: BufferMessage,isBot:Boolean, sharingMode: String) {
+		if (shareInfo.currentTextMessageId == -1L) {
+			if (shareInfo.pendingTextMessage) {
+				app.locationMessages.addBufferedMessage(message)
+			} else {
+				if (isBot) {
+					sendLocationToBot(message, sharingMode, shareInfo, SHARE_TYPE_TEXT)
+				} else {
+					shareInfo.pendingTdLib++
+					app.telegramHelper.sendNewTextLocation(shareInfo, message)
+				}
+			}
+		} else {
+			if (isBot) {
+				sendLocationToBot(message, sharingMode, shareInfo, SHARE_TYPE_TEXT)
+			} else {
+				if (shareInfo.pendingTdLib < 10) {
+					shareInfo.pendingTdLib++
+					app.telegramHelper.editTextLocation(shareInfo, message)
+				} else {
+					app.locationMessages.addBufferedMessage(message)
+				}
+			}
+		}
+	}
+
+	private fun prepareMapMessage(shareInfo: TelegramSettings.ShareChatInfo,message: BufferMessage,isBot:Boolean, sharingMode: String) {
+		if (shareInfo.currentMapMessageId == -1L) {
+			if (shareInfo.pendingMapMessage) {
+				app.locationMessages.addBufferedMessage(message)
+			} else {
+				if (isBot) {
+					sendLocationToBot(message, sharingMode, shareInfo, SHARE_TYPE_MAP)
+				} else {
+					shareInfo.pendingTdLib++
+					app.telegramHelper.sendNewMapLocation(shareInfo, message)
+				}
+			}
+		} else {
+			if (isBot) {
+				sendLocationToBot(message, sharingMode, shareInfo, SHARE_TYPE_MAP)
+			} else {
+				if (shareInfo.pendingTdLib < 10) {
+					shareInfo.pendingTdLib++
+					app.telegramHelper.editMapLocation(shareInfo, message)
+				} else {
+					app.locationMessages.addBufferedMessage(message)
+				}
+			}
 		}
 	}
 
@@ -204,9 +242,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	private fun sendLocationToBot(locationMessage: LocationMessage, sharingMode: String, shareInfo: TelegramSettings.ShareChatInfo, shareType: String) {
+	private fun sendLocationToBot(locationMessage: BufferMessage, sharingMode: String, shareInfo: TelegramSettings.ShareChatInfo, shareType: String) {
 		if (app.isInternetConnectionAvailable) {
-			locationMessage.status = LocationMessage.STATUS_PENDING
+//			locationMessage.status = LocationMessage.STATUS_PENDING
 			val url = getDeviceSharingUrl(locationMessage, sharingMode)
 			AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false,
 				object : AndroidNetworkUtils.OnRequestResultListener {
@@ -216,7 +254,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 						val osmandBotId = app.telegramHelper.getOsmandBot()?.id ?: -1
 						val device = app.settings.getCurrentSharingDevice()
 
-						locationMessage.status = if (success) LocationMessage.STATUS_SENT else LocationMessage.STATUS_ERROR
+//						locationMessage.status = if (success) LocationMessage.STATUS_SENT else LocationMessage.STATUS_ERROR
 						if (success && shareInfo.shouldSendViaBotMessage && osmandBotId != -1 && device != null) {
 							app.telegramHelper.sendViaBotLocationMessage(osmandBotId, shareInfo, TdApi.Location(locationMessage.lat, locationMessage.lon), device, shareType)
 							shareInfo.shouldSendViaBotMessage = false
@@ -226,7 +264,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	private fun getDeviceSharingUrl(loc: LocationMessage, sharingMode: String): String {
+	private fun getDeviceSharingUrl(loc: BufferMessage, sharingMode: String): String {
 		val url = "$BASE_URL/device/$sharingMode/send?lat=${loc.lat}&lon=${loc.lon}"
 		val builder = StringBuilder(url)
 		if (loc.bearing != 0.0) {

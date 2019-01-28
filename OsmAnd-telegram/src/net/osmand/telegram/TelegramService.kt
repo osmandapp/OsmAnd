@@ -13,6 +13,7 @@ import android.os.*
 import android.util.Log
 import android.widget.Toast
 import net.osmand.PlatformUtil
+import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
@@ -277,7 +278,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app().showLocationHelper.startShowMessagesTask(chatId, *messages)
 		messages.forEach {
-			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper, LocationMessage.STATUS_PREPARED)
+			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper, LocationMessages.STATUS_PREPARED)
 			if (locationMessage != null) {
 				app().locationMessages.addIngoingMessage(locationMessage)
 			}
