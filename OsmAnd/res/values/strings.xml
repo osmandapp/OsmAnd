@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Сapacity</string>
+    <string name="shared_string_width">Width</string>
+    <string name="shared_string_height">Height</string>
     <string name="swap_start_and_destination">Swap start and destination</string>
     <string name="add_destination_point">Add destination</string>
     <string name="add_intermediate_point">Add intermediate</string>
