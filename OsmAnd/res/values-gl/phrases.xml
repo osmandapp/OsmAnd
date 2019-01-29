@@ -941,7 +941,7 @@
 	<string name="poi_board_type_notice">Taboleiro de anuncios</string>
 	<string name="poi_horse_track">Hipódromo</string>
 	<string name="poi_resort">Lugar turístico</string>
-	<string name="poi_craft_winery">Vinoteca</string>
+	<string name="poi_craft_winery">Adega de viños</string>
 
 	<string name="poi_pawnbroker">Prestamista</string>
 	<string name="poi_information_nature">Natureza</string>
@@ -3903,4 +3903,9 @@
     <string name="poi_books_academic">Académico</string>
     <string name="poi_books_children">Infantís</string>
     <string name="poi_atoll">Atol</string>
+    <string name="poi_denotation">Denotación</string>
+    <string name="poi_toll_gantry">Caseto de portaxe</string>
+    <string name="poi_childcare">Coidado de nenos</string>
+    <string name="poi_denotation_natural_monument">Monumento da natureza</string>
+    <string name="poi_denotation_landmark">Referencia terrestre</string>
 </resources>
