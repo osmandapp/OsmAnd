@@ -3134,4 +3134,9 @@
     <string name="voice_announcements">Stemmeveivisning</string>
     <string name="intermediate_destinations">Mellomliggende mål: %1$s</string>
     <string name="arrive_at_time">Ankom klokken %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Kapasitet</string>
+    <string name="shared_string_width">Bredde</string>
+    <string name="shared_string_height">Høyde</string>
 </resources>
