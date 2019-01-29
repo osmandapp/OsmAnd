@@ -3265,4 +3265,9 @@
     <string name="voice_announcements">پیام‌های گفتاری</string>
     <string name="intermediate_destinations">مقصدهای میانی: %1$s</string>
     <string name="arrive_at_time">زمان رسیدن: %1$s</string>
+    <string name="cubic_m">مترمکعب</string>
+    <string name="metric_ton">تن</string>
+    <string name="shared_string_capacity">ظرفیت</string>
+    <string name="shared_string_width">عرض</string>
+    <string name="shared_string_height">طول</string>
 </resources>
