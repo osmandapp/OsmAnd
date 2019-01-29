@@ -599,6 +599,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 
 			holder.title?.text = title
+			holder.icon?.setOnClickListener {
+				app.forceUpdateMyLocation()
+			}
 			if (holder is ChatViewHolder) {
 				holder.description?.visibility = View.GONE
 				if (live) {
@@ -716,14 +719,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				holder.gpsPointsCollected?.apply {
 					if (shareInfo != null) {
-						val all = app.locationMessages.getOutgoingMessages(shareInfo.chatId)
-						text = "${all.size}"
+						text = "${shareInfo.collectedMessages}"
 					}
 				}
 				holder.gpsPointsSent?.apply {
 					if (shareInfo != null) {
-						val sent = app.locationMessages.getSentMessages(shareInfo.chatId, shareInfo.start * 1000)
-						text = "${sent.size}"
+						text = "${shareInfo.sentMessages}"
 					}
 				}
 			}

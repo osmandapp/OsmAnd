@@ -190,22 +190,22 @@ class TimelineTabFragment : Fragment() {
 		val res = mutableListOf<ListItem>()
 		val ignoredUsersIds = ArrayList<Int>()
 		val currentUserId = telegramHelper.getCurrentUser()?.id
-//		if (currentUserId != null) {
-//			val locationMessages = app.locationMessages.collectRecordedDataForUser(currentUserId, 0, start, end)
-//			// todo - why do we need convert to gpx on update? Is locationMessages not enough to display info?
-//			OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages, false).forEach {
-//				TelegramUiHelper.gpxToChatItem(telegramHelper, it, true)?.also { chatItem ->
-//					res.add(chatItem)
-//				}
-//			}
-//			ignoredUsersIds.add(currentUserId)
-//		}
-//		val locationMessages = app.locationMessages.collectRecordedDataForUsers(start, end, ignoredUsersIds)
-//		OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).forEach {
-//			TelegramUiHelper.gpxToChatItem(telegramHelper, it,false)?.also { chatItem ->
-//				res.add(chatItem)
-//			}
-//		}
+		if (currentUserId != null) {
+			val outgoingMessages = app.locationMessages.getOutgoingMessages(currentUserId, start, end)
+			// todo - why do we need convert to gpx on update? Is locationMessages not enough to display info?
+			OsmandLocationUtils.convertLocationMessagesToGpxFiles(outgoingMessages, false).forEach {
+				TelegramUiHelper.gpxToChatItem(telegramHelper, it, true)?.also { chatItem ->
+					res.add(chatItem)
+				}
+			}
+			ignoredUsersIds.add(currentUserId)
+			val ingoingMessages = app.locationMessages.getIngoingMessages(currentUserId, start, end)
+			OsmandLocationUtils.convertLocationMessagesToGpxFiles(ingoingMessages).forEach {
+				TelegramUiHelper.gpxToChatItem(telegramHelper, it, false)?.also { chatItem ->
+					res.add(chatItem)
+				}
+			}
+		}
 
 		adapter.items = sortAdapterItems(res)
 	}

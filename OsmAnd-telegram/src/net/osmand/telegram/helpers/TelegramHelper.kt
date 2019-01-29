@@ -293,7 +293,7 @@ class TelegramHelper private constructor() {
 		try {
 			log.debug("Loading native tdlib...")
 			System.loadLibrary("tdjni")
-			Client.setLogVerbosityLevel(0)
+			Client.setLogVerbosityLevel(1)
 			libraryLoaded = true
 		} catch (e: Throwable) {
 			log.error("Failed to load tdlib", e)
@@ -539,7 +539,7 @@ class TelegramHelper private constructor() {
 			resultArticles.forEach {
 				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, true,
 					true, inlineQueryResults.inlineQueryId, it.id)) { obj ->
-					handleTextLocationMessageUpdate(obj, shareInfo, null)
+					handleTextLocationMessageUpdate(obj, shareInfo)
 				}
 			}
 		}
@@ -765,7 +765,7 @@ class TelegramHelper private constructor() {
 		if (shareInfo.currentMapMessageId != -1L && shareInfo.chatId != -1L) {
 			client?.send(
 				TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId, null, null)) { obj ->
-				handleMapLocationMessageUpdate(obj, shareInfo, null)
+				handleMapLocationMessageUpdate(obj, shareInfo)
 			}
 		}
 		needRefreshActiveLiveLocationMessages = true
@@ -808,10 +808,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun recreateLiveLocationMessage(
-		shareInfo: TelegramSettings.ShareChatInfo,
-		content: TdApi.InputMessageContent,locationMessage: LocationMessages.BufferMessage?
-	) {
+	private fun recreateLiveLocationMessage(shareInfo: TelegramSettings.ShareChatInfo, content: TdApi.InputMessageContent) {
 		if (shareInfo.chatId != -1L) {
 			val array = LongArray(1)
 			if (content is TdApi.InputMessageLocation) {
@@ -823,7 +820,7 @@ class TelegramHelper private constructor() {
 				log.debug("recreateLiveLocationMessage - ${array[0]}")
 				client?.send(TdApi.DeleteMessages(shareInfo.chatId, array, true)) { obj ->
 					when (obj.constructor) {
-						TdApi.Ok.CONSTRUCTOR -> sendNewLiveLocationMessage(shareInfo, content,locationMessage)
+						TdApi.Ok.CONSTRUCTOR -> sendNewLiveLocationMessage(shareInfo, content)
 						TdApi.Error.CONSTRUCTOR -> {
 							val error = obj as TdApi.Error
 							if (error.code != IGNORED_ERROR_CODE) {
@@ -840,14 +837,14 @@ class TelegramHelper private constructor() {
 		needRefreshActiveLiveLocationMessages = true
 	}
 
-	private fun sendNewLiveLocationMessage(shareInfo: TelegramSettings.ShareChatInfo, content: TdApi.InputMessageContent, locationMessage: LocationMessages.BufferMessage?) {
+	private fun sendNewLiveLocationMessage(shareInfo: TelegramSettings.ShareChatInfo, content: TdApi.InputMessageContent) {
 		needRefreshActiveLiveLocationMessages = true
 		log.debug("sendNewLiveLocationMessage")
 		client?.send(TdApi.SendMessage(shareInfo.chatId, 0, false, true, null, content)) { obj ->
-			if (locationMessage?.type == LocationMessages.TYPE_USER_TEXT || locationMessage?.type == LocationMessages.TYPE_BOT_TEXT) {
-				handleTextLocationMessageUpdate(obj, shareInfo, locationMessage)
-			} else if (locationMessage?.type == LocationMessages.TYPE_USER_MAP || locationMessage?.type == LocationMessages.TYPE_BOT_MAP) {
-				handleMapLocationMessageUpdate(obj, shareInfo, locationMessage)
+			if (content is TdApi.InputMessageText) {
+				handleTextLocationMessageUpdate(obj, shareInfo)
+			} else if (content is TdApi.InputMessageLocation) {
+				handleMapLocationMessageUpdate(obj, shareInfo)
 			}
 		}
 	}
@@ -857,8 +854,10 @@ class TelegramHelper private constructor() {
 		val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, location)
 		if (!shareInfo.pendingTextMessage) {
 			shareInfo.pendingTextMessage = true
+			shareInfo.pendingTdLib++
+			log.error("sendNewTextLocation ${shareInfo.pendingTdLib}")
 			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, false, true, null, content)) { obj ->
-				handleTextLocationMessageUpdate(obj, shareInfo, location)
+				handleTextLocationMessageUpdate(obj, shareInfo)
 			}
 		}
 	}
@@ -866,8 +865,10 @@ class TelegramHelper private constructor() {
 	fun editTextLocation(shareInfo: TelegramSettings.ShareChatInfo, location: LocationMessages.BufferMessage) {
 		val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, location)
 		if (shareInfo.currentTextMessageId!=-1L) {
+			shareInfo.pendingTdLib++
+			log.info("editTextLocation ${shareInfo.currentTextMessageId} pendingTdLib: ${shareInfo.pendingTdLib}")
 			client?.send(TdApi.EditMessageText(shareInfo.chatId, shareInfo.currentTextMessageId, null, content)) { obj ->
-				handleTextLocationMessageUpdate(obj, shareInfo, location)
+				handleTextLocationMessageUpdate(obj, shareInfo)
 			}
 		}
 	}
@@ -884,8 +885,10 @@ class TelegramHelper private constructor() {
 		val content = TdApi.InputMessageLocation(location, livePeriod)
 		if (!shareInfo.pendingMapMessage) {
 			shareInfo.pendingMapMessage = true
+			shareInfo.pendingTdLib++
+			log.error("sendNewMapLocation ${shareInfo.pendingTdLib}")
 			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, false, true, null, content)) { obj ->
-				handleMapLocationMessageUpdate(obj, shareInfo, locationMessage)
+				handleMapLocationMessageUpdate(obj, shareInfo)
 			}
 		}
 	}
@@ -894,16 +897,18 @@ class TelegramHelper private constructor() {
 		needRefreshActiveLiveLocationMessages = true
 		val location = TdApi.Location(locationMessage.lat, locationMessage.lon)
 		if (shareInfo.currentMapMessageId!=-1L) {
-			client?.send(
-				TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId, null, location)) { obj ->
-				handleMapLocationMessageUpdate(obj, shareInfo, locationMessage)
+			shareInfo.pendingTdLib++
+			log.info("editMapLocation ${shareInfo.currentMapMessageId} pendingTdLib: ${shareInfo.pendingTdLib}")
+			client?.send(TdApi.EditMessageLiveLocation(shareInfo.chatId, shareInfo.currentMapMessageId, null, location)) { obj ->
+				handleMapLocationMessageUpdate(obj, shareInfo)
 			}
 		}
 	}
 
-	private fun handleMapLocationMessageUpdate(obj: TdApi.Object, shareInfo: TelegramSettings.ShareChatInfo, location: LocationMessages.BufferMessage?) {
+	private fun handleMapLocationMessageUpdate(obj: TdApi.Object, shareInfo: TelegramSettings.ShareChatInfo) {
 		when (obj.constructor) {
 			TdApi.Error.CONSTRUCTOR -> {
+				log.debug("handleMapLocationMessageUpdate - ERROR")
 				val error = obj as TdApi.Error
 				needRefreshActiveLiveLocationMessages = true
 				if (error.code == MESSAGE_CANNOT_BE_EDITED_ERROR_CODE) {
@@ -922,7 +927,7 @@ class TelegramHelper private constructor() {
 							shareInfo.hasSharingError = true
 							needRefreshActiveLiveLocationMessages = true
 							shareInfo.pendingMapMessage = false
-//							location?.status = LocationMessages.LocationMessage.STATUS_ERROR
+							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
 							outgoingMessagesListeners.forEach {
 								it.onSendLiveLocationError(-1, "Map location message ${obj.id} failed to send")
 							}
@@ -930,15 +935,15 @@ class TelegramHelper private constructor() {
 						obj.sendingState?.constructor == TdApi.MessageSendingStatePending.CONSTRUCTOR -> {
 							shareInfo.pendingMapMessage = true
 							shareInfo.lastSendMapMessageTime = obj.date
-//							location?.status = LocationMessages.LocationMessage.STATUS_PENDING
 							log.debug("handleMapLocationMessageUpdate - MessageSendingStatePending")
+							outgoingMessagesListeners.forEach {
+								it.onUpdateMessages(listOf(obj))
+							}
 						}
 						else -> {
 							shareInfo.hasSharingError = false
-							shareInfo.pendingTdLib--
 							shareInfo.pendingMapMessage = false
-//							location?.messageId = obj.id
-//							location?.status = LocationMessages.LocationMessage.STATUS_SENT
+							log.debug("handleMapLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
 								it.onUpdateMessages(listOf(obj))
 							}
@@ -949,9 +954,10 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun handleTextLocationMessageUpdate(obj: TdApi.Object, shareInfo: TelegramSettings.ShareChatInfo, location: LocationMessages.BufferMessage?) {
+	private fun handleTextLocationMessageUpdate(obj: TdApi.Object, shareInfo: TelegramSettings.ShareChatInfo) {
 		when (obj.constructor) {
 			TdApi.Error.CONSTRUCTOR -> {
+				log.debug("handleTextLocationMessageUpdate - ERROR")
 				val error = obj as TdApi.Error
 				if (error.code == MESSAGE_CANNOT_BE_EDITED_ERROR_CODE) {
 					shareInfo.shouldDeletePreviousTextMessage = true
@@ -970,7 +976,7 @@ class TelegramHelper private constructor() {
 							shareInfo.pendingTdLib--
 							shareInfo.pendingTextMessage = false
 							needRefreshActiveLiveLocationMessages = true
-//							location?.status = LocationMessages.LocationMessage.STATUS_ERROR
+							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
 							outgoingMessagesListeners.forEach {
 								it.onSendLiveLocationError(-1, "Text location message ${obj.id} failed to send")
 							}
@@ -978,15 +984,15 @@ class TelegramHelper private constructor() {
 						obj.sendingState?.constructor == TdApi.MessageSendingStatePending.CONSTRUCTOR -> {
 							shareInfo.pendingTextMessage = true
 							shareInfo.lastSendTextMessageTime = obj.date
-//							location?.status = LocationMessages.LocationMessage.STATUS_PENDING
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStatePending")
+							outgoingMessagesListeners.forEach {
+								it.onUpdateMessages(listOf(obj))
+							}
 						}
 						else -> {
 							shareInfo.hasSharingError = false
-							shareInfo.pendingTdLib--
 							shareInfo.pendingTextMessage = false
-//							location?.messageId = obj.id
-//							location?.status = LocationMessages.LocationMessage.STATUS_SENT
+							log.debug("handleTextLocationMessageUpdate - MessageSendingStateSuccess")
 							outgoingMessagesListeners.forEach {
 								it.onUpdateMessages(listOf(obj))
 							}
@@ -1464,9 +1470,9 @@ class TelegramHelper private constructor() {
 					}
 				}
 				TdApi.UpdateMessageSendSucceeded.CONSTRUCTOR -> {
-					val udateMessageSendSucceeded = obj as TdApi.UpdateMessageSendSucceeded
-					val message = udateMessageSendSucceeded.message
-					log.debug("UpdateMessageSendSucceeded: $message")
+					val updateSucceeded = obj as TdApi.UpdateMessageSendSucceeded
+					val message = updateSucceeded.message
+					log.debug("UpdateMessageSendSucceeded: ${message.id} oldId: ${updateSucceeded.oldMessageId}")
 					outgoingMessagesListeners.forEach {
 						it.onUpdateMessages(listOf(message))
 					}

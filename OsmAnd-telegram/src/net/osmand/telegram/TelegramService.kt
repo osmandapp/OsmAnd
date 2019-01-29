@@ -13,8 +13,6 @@ import android.os.*
 import android.util.Log
 import android.widget.Toast
 import net.osmand.PlatformUtil
-import net.osmand.telegram.helpers.LocationMessages
-import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
@@ -278,7 +276,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app().showLocationHelper.startShowMessagesTask(chatId, *messages)
 		messages.forEach {
-			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper, LocationMessages.STATUS_PREPARED)
+			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper)
 			if (locationMessage != null) {
 				app().locationMessages.addIngoingMessage(locationMessage)
 			}
@@ -296,6 +294,13 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onUpdateMessages(messages: List<TdApi.Message>) {
 		messages.forEach {
 			app().settings.updateShareInfo(it)
+			app().shareLocationHelper.checkAndSendBufferMessagesToChat(it.chatId)
+			if (it.sendingState == null && (it.content is TdApi.MessageLocation || it.content is TdApi.MessageText)) {
+				val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper)
+				if (locationMessage != null) {
+					app().locationMessages.addOutgoingMessage(locationMessage)
+				}
+			}
 		}
 	}
 

@@ -294,7 +294,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 		if (app.telegramService == null) {
 			messages.forEach {
-				val locationMessage = OsmandLocationUtils.parseMessage(it, telegramHelper, LocationMessages.STATUS_PREPARED)
+				val locationMessage = OsmandLocationUtils.parseMessage(it, telegramHelper)
 				if (locationMessage != null) {
 					app.locationMessages.addIngoingMessage(locationMessage)
 				}

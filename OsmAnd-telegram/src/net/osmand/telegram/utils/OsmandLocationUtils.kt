@@ -4,8 +4,8 @@ import android.os.AsyncTask
 import net.osmand.Location
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.LocationMessages
-import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.LocationMessages.BufferMessage
+import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.util.GeoPointParserUtil
@@ -76,7 +76,7 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun parseMessage(message: TdApi.Message, helper: TelegramHelper, status: Int): LocationMessage? {
+	fun parseMessage(message: TdApi.Message, helper: TelegramHelper): LocationMessage? {
 		var locationMessage: LocationMessage? = null
 		val oldContent = message.content
 
@@ -88,17 +88,17 @@ object OsmandLocationUtils {
 			if (oldContent is TdApi.MessageText) {
 				when {
 					oldContent.text.text.startsWith(DEVICE_PREFIX) -> {
-						messageType = 3
+						messageType = LocationMessages.TYPE_BOT_TEXT
 						parseTextLocation(oldContent.text)
 					}
 					oldContent.text.text.startsWith(USER_TEXT_LOCATION_TITLE) -> {
-						messageType = 1
+						messageType = LocationMessages.TYPE_USER_TEXT
 						parseTextLocation(oldContent.text, false)
 					}
 					else -> null
 				}
 			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
-				messageType = 2
+				messageType = LocationMessages.TYPE_BOT_MAP
 				parseOsmAndBotLocation(message)
 			} else if (oldContent is MessageLocation) {
 				messageType = 0
@@ -111,6 +111,10 @@ object OsmandLocationUtils {
 			locationMessage = LocationMessage(helper.getSenderMessageId(message), message.chatId, parsedMessageContent.lat,
 					parsedMessageContent.lon, parsedMessageContent.altitude, parsedMessageContent.speed, parsedMessageContent.hdop,
 					parsedMessageContent.bearing, parsedMessageContent.lastUpdated * 1000L, messageType)
+		} else if(oldContent is TdApi.MessageLocation){
+			locationMessage = LocationMessage(helper.getSenderMessageId(message), message.chatId, oldContent.location.latitude,
+				oldContent.location.longitude, 0.0, 0.0, 0.0,
+				0.0, getLastUpdatedTime(message) * 1000L, LocationMessages.TYPE_USER_MAP)
 		}
 		return locationMessage
 	}
@@ -139,12 +143,13 @@ object OsmandLocationUtils {
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
 			lastUpdated = (System.currentTimeMillis() / 1000).toInt()
+			type = LocationMessages.TYPE_BOT_MAP
 		}
 	}
 
 	fun parseTextLocation(text: TdApi.FormattedText, botLocation: Boolean = true): MessageLocation {
 		val res = if (botLocation) MessageOsmAndBotLocation() else MessageUserTextLocation()
-
+		res.type = if (botLocation) LocationMessages.TYPE_BOT_TEXT else LocationMessages.TYPE_USER_TEXT
 		var locationNA = false
 		for (s in text.text.lines()) {
 			when {
@@ -310,9 +315,9 @@ object OsmandLocationUtils {
 			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.hdop.toInt()))
 		}
 		if (updateId == 0) {
-			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.date)))
+			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
 		} else {
-			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.date), updateId))
+			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
 		}
 		val textMessage = builder.toString().trim()
 
@@ -349,9 +354,9 @@ object OsmandLocationUtils {
 			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.hdop.toInt()))
 		}
 		if (updateId == 0) {
-			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.date)))
+			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
 		} else {
-			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.date), updateId))
+			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
 		}
 		val textMessage = builder.toString().trim()
 
@@ -371,7 +376,7 @@ object OsmandLocationUtils {
 		items.forEach {
 			val userId = it.userId
 			val chatId = it.chatId
-			val time = it.date
+			val time = it.time
 			if (previousUserId != userId || (newGpxPerChat && previousChatId != chatId)) {
 				gpx = GPXUtilities.GPXFile()
 				gpx!!.chatId = chatId
@@ -438,6 +443,8 @@ object OsmandLocationUtils {
 		var hdop: Double = 0.0
 			internal set
 		var bearing: Double = 0.0
+			internal set
+		var type: Int = -1
 			internal set
 
 		override fun getConstructor() = -1
