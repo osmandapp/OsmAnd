@@ -3900,4 +3900,9 @@
     <string name="poi_substation_compensation">Mótvægisjöfnun</string>
     <string name="poi_substation_field_gathering">Safnstöð</string>
     <string name="poi_books_antiquarian">Gamlar bækur</string>
+    <string name="poi_denotation">Staða</string>
+    <string name="poi_toll_gantry">Tollhlið</string>
+    <string name="poi_childcare">Barnagæsla</string>
+    <string name="poi_denotation_natural_monument">Náttúruvætti</string>
+    <string name="poi_denotation_landmark">Landmerki</string>
 </resources>
