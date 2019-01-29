@@ -3046,4 +3046,12 @@
     <string name="quick_action_switch_day_mode">Дневной режим</string>
     <string name="quick_action_switch_night_mode">Ночной режим</string>
     <string name="quick_action_day_night_switch_mode">Переключить дневной/ночной режим</string>
+    <string name="cubic_m">м³</string>
+    <string name="metric_ton">т</string>
+    <string name="shared_string_capacity">Объем</string>
+    <string name="shared_string_width">Ширина</string>
+    <string name="shared_string_height">Высота</string>
+    <string name="transfers">трансферы: %1$s</string>
+    <string name="on_foot">пешком: %1$s</string>
+    <string name="show_along_the_route">Показать вдоль маршрута</string>
 </resources>
