@@ -2583,9 +2583,9 @@
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Kunne ikke endre notatet</string>
     <string name="quick_action_auto_zoom_desc">Trykking på denne handlingsknappen slår av/på automatisk kartforstørrelse i henhold til hastigheten din.</string>
-    <string name="quick_action_add_destination_desc">Trykking på denne handlingsknappen gjør skjermsenteret til rutemål, ethvert tidligere valgt mål blir det siste mellomliggende målet.</string>
-    <string name="quick_action_replace_destination_desc">Trykking på denne handlingsknappen gjør skjermsenteret det nye rutemålet, og erstatter det tidligere valgte målet (hvis noe).</string>
-    <string name="quick_action_add_first_intermediate_desc">Trykking på denne handlingsknappen gjør skjermsenteret til det første mellomliggende målet.</string>
+    <string name="quick_action_add_destination_desc">Trykking på denne handlingsknappen gjør skjermsenteret til rutemål, ethvert tidligere valgt reisemål blir det siste mellomliggende målet.</string>
+    <string name="quick_action_replace_destination_desc">Trykking på denne handlingsknappen gjør skjermsenteret det nye rutemålet, og erstatter det tidligere valgte reisemålet (hvis noe).</string>
+    <string name="quick_action_add_first_intermediate_desc">Trykking på denne handlingsknappen gjør skjermsenteret til det første mellomliggende reisemålet.</string>
     <string name="subscribe_email_desc">Abonner på vår e-postliste om programrabatter og få tre kartnedlastinger til!</string>
     <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for sørlige halvkule</string>
     <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for nordlige halvkule</string>
@@ -3116,4 +3116,22 @@
     <string name="quick_action_switch_night_mode">Nattmodus</string>
     <string name="quick_action_day_night_switch_mode">Veksle dag-/nattmodus</string>
     <string name="app_mode_public_transport">Offentlig transport</string>
+    <string name="swap_start_and_destination">Bytt utgangspunkt og reisemål</string>
+    <string name="add_destination_point">Legg til reisemål</string>
+    <string name="add_intermediate_point">Legg til mellomliggende</string>
+    <string name="add_start_point">Legg til startpunkt</string>
+    <string name="intermediate_waypoint">Mellomliggende punkt: %1$s</string>
+    <string name="waypoints">Rutepunkter: %1$s</string>
+    <string name="transfers">overføringer: %1$s</string>
+    <string name="on_foot">til fots: %1$s</string>
+    <string name="route_way">Vei: %1$s</string>
+    <string name="points_of_interests">Interessepunkter (POI)</string>
+    <string name="waiting_for_route_calculation">Regner ut rute…</string>
+    <string name="avoid_roads_descr">Velg vei på kartet fra listen nedenfor som du ønsker å unngå under navigering:</string>
+    <string name="show_along_the_route">Vis langs ruten</string>
+    <string name="simulate_navigation">Simuler navigering</string>
+    <string name="choose_track_file_to_follow">Velg sporfil å følge</string>
+    <string name="voice_announcements">Stemmeveivisning</string>
+    <string name="intermediate_destinations">Mellomliggende mål: %1$s</string>
+    <string name="arrive_at_time">Ankom klokken %1$s</string>
 </resources>

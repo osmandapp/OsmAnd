@@ -174,4 +174,14 @@
     <string name="welcome_descr"><b>Compartilhamento de local OsmAnd</b> permite que você compartilhe sua localização e veja a dos outros no OsmAnd.<br/><br/>O aplicativo usa a API Telegram e você precisa de uma conta Telegram.</string>
     <string name="my_location">Minha localização</string>
     <string name="live_now">Ao vivo agora</string>
+    <string name="monitoring_is_enabled">O monitoramento está ativado</string>
+    <string name="monitoring_is_disabled">O monitoramento está desativado</string>
+    <string name="time_on_the_move">tempo em movimento</string>
+    <string name="average_altitude">Altitude média</string>
+    <string name="average_speed">Velocidade média</string>
+    <string name="open_in_osmand">Aberto no OsmAnd</string>
+    <string name="end_date">Data final</string>
+    <string name="start_date">Data de início</string>
+    <string name="timeline_description">Ative o monitoramento para coletar dados de movimento em segundo plano.</string>
+    <string name="timeline">"Linha do tempo "</string>
 </resources>
