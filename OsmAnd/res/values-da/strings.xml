@@ -3257,4 +3257,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Dag tilstand</string>
     <string name="quick_action_switch_night_mode">Nat tilstand</string>
     <string name="quick_action_day_night_switch_mode">Skift dag/nat tilstand</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Kapacitet</string>
+    <string name="shared_string_width">Bredde</string>
+    <string name="shared_string_height">Højde</string>
+    <string name="route_way">Vej: %1$s</string>
+    <string name="choose_track_file_to_follow">Vælg sporfil til at følge</string>
 </resources>
