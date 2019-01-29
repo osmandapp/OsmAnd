@@ -3033,4 +3033,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="voice_announcements">Voĉaj anoncoj</string>
     <string name="intermediate_destinations">Interceloj: %1$s</string>
     <string name="arrive_at_time">Alveno je %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">Mg</string>
+    <string name="shared_string_capacity">Enhaveco</string>
+    <string name="shared_string_width">Larĝo</string>
+    <string name="shared_string_height">Alto</string>
 </resources>
