@@ -986,7 +986,7 @@
     <string name="safe_mode_description">Execute o aplicativo em modo de segurança (usando do código do Android mais lento em vez do nativo).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">O aplicativo está sendo executado em modo seguro (desativar em \'Configurações\').</string>
-    <string name="background_service_is_enabled_question">Serviço em segundo plano ainda em execução. Deseja cancelá-lo?</string>
+    <string name="background_service_is_enabled_question">O serviço de segundo plano OsmAnd ainda está em execução. Tambẽm pará-lo\?</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
 	
     
@@ -1497,11 +1497,11 @@
     <string name="traffic_warning_calming">Acalmia de tráfego</string>
     <string name="traffic_warning_speed_camera">Câmara de velocidade</string>
     <string name="traffic_warning">Aviso de tráfego</string>
-	<string name="speak_favorites">Anunciar nas proximidades favoritos</string>
-	<string name="speak_poi">Anunciar nas proximidades de POI</string>
+	<string name="speak_favorites">Favoritos pertos</string>
+	<string name="speak_poi">POI perto</string>
 	<string name="way_alarms">Avisos de tráfego</string>
-	<string name="sleep_mode_stop_dialog">Interromper o modo de hibernação do GPS?</string>
-	<string name="stop_navigation_service">Interrupção</string>
+	<string name="sleep_mode_stop_dialog">Parar o modo de fundo do GPS\?</string>
+	<string name="stop_navigation_service">Parar</string>
 	<string name="confirm_every_run">Sempre perguntar</string>
 	<string name="save_global_track_interval_descr">Escolher o intervalo de log para a gravação de faixa geral (habilitado através do widget de gravação GPX no mapa)</string>
 	<string name="save_global_track_interval">Intervalo de log geral</string>
@@ -1523,7 +1523,7 @@
     <string name="shared_string_gpx_points">Pontos</string>
     <string name="shared_string_my_location">Minha localização</string>
     
-	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
+	<string name="avoid_roads_msg">Inciar rotas alternativas selecionando estradas a serem evitadas</string>
     
 	<string name="speak_pedestrian">Passadeiras</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
@@ -1879,11 +1879,11 @@
     <string name="rendering_attr_roadStyle_description">Estilo de estrada</string>
     <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
     
-    <string name="wake_on_voice_descr">Acender o visor do dispositivo (se desligado) ao aproximar duma curva</string>
+    <string name="wake_on_voice_descr">Ligar o ecrã do dispositivo (se estiver desligado) ao aproximar a uma curva.</string>
     <string name="map_widget_top">Barra de estado</string>
     <string name="map_widget_right">Painel direito</string>
     <string name="map_widget_left">Painel esquerdo</string>
-    <string name="search_radius_proximity">Na proximidade de</string>
+    <string name="search_radius_proximity">Dentro</string>
     
     
     <string name="anonymous_user_hint">Um utilizador anónimo não pode:\n- Criar grupos;\n- Sincronizar grupos e dispositivos com o servidor;\n- Gerir grupos e dispositivos num painel de controle pessoal no sitio web.</string>
@@ -2755,7 +2755,7 @@
     <string name="fav_point_emoticons_message">O nome do Favorito foi modificado para %1$s para facilitar gravar corretamente a sequência de caracteres com emoticons para um ficheiro.</string>
     <string name="print_route">Imprimir rota</string>
     <string name="fav_point_dublicate">Nome de favorito duplicado</string>
-    <string name="fav_point_dublicate_message">O nome do favorito já está em uso, mudamos para %1$s a fim de evitar nomes duplicados.</string>
+    <string name="fav_point_dublicate_message">Nome favorito especificado já está em uso, foi alterado para %1$ s para evitar a duplicação.</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trilha sob demanda</string>
     <string name="enable_proxy_title">Ativar proxy HTTP</string>
     <string name="enable_proxy_descr">Configurar o proxy HTTP para todas as solicitações de rede.</string>
@@ -3132,4 +3132,28 @@
     <string name="quick_action_day_night_switch_mode">Mudar de modo Dia/Nocturno</string>
     <string name="run_full_osmand_msg">Você está usando {0} Mapa que é alimentado por OsmAnd. Você quer lançar a versão completa do OsmAnd\?</string>
     <string name="run_full_osmand_header">Lançar OsmAnd\?</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Capacidade</string>
+    <string name="shared_string_width">Largura</string>
+    <string name="shared_string_height">Altura</string>
+    <string name="swap_start_and_destination">Trocar o iniçio e o destino</string>
+    <string name="add_destination_point">Adicionar destino</string>
+    <string name="add_intermediate_point">Adicionar intermediário</string>
+    <string name="add_start_point">Adicionar ponto de partida</string>
+    <string name="intermediate_waypoint">Ponto intermédio: %1$s</string>
+    <string name="waypoints">Pontos de passagem: %1$s</string>
+    <string name="transfers">transferências: %1$s</string>
+    <string name="on_foot">a pé: %1$s</string>
+    <string name="route_way">Caminho: %1$s</string>
+    <string name="points_of_interests">Pontos de interesse (POI)</string>
+    <string name="waiting_for_route_calculation">Aguardando o cálculo da rota</string>
+    <string name="app_mode_public_transport">Transporte público</string>
+    <string name="avoid_roads_descr">Seleccione uma estrada no mapa ou na lista abaixo que pretende evitar durante a navegação:</string>
+    <string name="show_along_the_route">Mostrar ao longo da rota</string>
+    <string name="simulate_navigation">Simular navegação</string>
+    <string name="choose_track_file_to_follow">Escolha o ficheiro de caminho a seguir</string>
+    <string name="voice_announcements">Anúncios de voz</string>
+    <string name="intermediate_destinations">Destinos intermediários: %1$s</string>
+    <string name="arrive_at_time">Chegar às %1$ s</string>
 </resources>
