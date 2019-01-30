@@ -278,7 +278,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		messages.forEach {
 			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper)
 			if (locationMessage != null) {
-				app().locationMessages.addIngoingMessage(locationMessage)
+				app().locationMessages.addLocationMessage(locationMessage)
 			}
 		}
 	}
@@ -298,7 +298,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			if (it.sendingState == null && (it.content is TdApi.MessageLocation || it.content is TdApi.MessageText)) {
 				val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper)
 				if (locationMessage != null) {
-					app().locationMessages.addOutgoingMessage(locationMessage)
+					app().locationMessages.addLocationMessage(locationMessage)
 				}
 			}
 		}

@@ -30,12 +30,6 @@ class LocationMessages(val app: TelegramApplication) {
 		return bufferedMessages.filter { it.chatId==chatId }.sortedBy { it.time }
 	}
 
-//	// todo - drop method. add collected / sent messages count to ShareChatInfo
-//	fun getOutgoingMessages(chatId: Long): List<LocationMessage> {
-//		val currentUserId = app.telegramHelper.getCurrentUserId()
-//		return bufferedMessages.filter { it.userId == currentUserId && it.chatId == chatId }.sortedBy { it.date }
-//	}
-
 	// todo - read from db by date (Victor's suggestion - filter by one day only. Need to be changed in UI also.
 	fun getIngoingMessages(currentUserId: Int, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getIngoingMessages(currentUserId, start, end)
@@ -45,8 +39,8 @@ class LocationMessages(val app: TelegramApplication) {
 		return dbHelper.getIngoingMessagesForUser(userId, chatId, start, end)
 	}
 
-	fun getOutgoingMessages(userId: Int, start: Long, end: Long): List<LocationMessage> {
-		return dbHelper.getOutgoingMessagesForUser(userId, start, end)
+	fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
+		return dbHelper.getMessagesForUser(userId, start, end)
 	}
 
 	fun addBufferedMessage(message: BufferMessage) {
@@ -57,14 +51,9 @@ class LocationMessages(val app: TelegramApplication) {
 		dbHelper.addBufferedMessage(message)
 	}
 
-	fun addIngoingMessage(message: LocationMessage) {
+	fun addLocationMessage(message: LocationMessage) {
 		log.debug("addIngoingMessage $message")
-		dbHelper.addIngoingMessage(message)
-	}
-
-	fun addOutgoingMessage(message: LocationMessage) {
-		log.debug("addOutgoingMessage $message")
-		dbHelper.addOutgoingMessage(message)
+		dbHelper.addLocationMessage(message)
 	}
 
 	fun clearBufferedMessages() {
@@ -100,7 +89,19 @@ class LocationMessages(val app: TelegramApplication) {
 			onCreate(db)
 		}
 
-		internal fun getOutgoingMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
+		internal fun addBufferedMessage(message: BufferMessage) {
+			writableDatabase?.execSQL(BUFFER_TABLE_INSERT,
+				arrayOf(message.chatId, message.lat, message.lon, message.altitude, message.speed,
+					message.hdop, message.bearing, message.time, message.type))
+		}
+
+		internal fun addLocationMessage(message: LocationMessage) {
+			writableDatabase?.execSQL(TIMELINE_TABLE_INSERT,
+				arrayOf(message.userId, message.chatId, message.lat, message.lon, message.altitude, message.speed,
+					message.hdop, message.bearing, message.time, message.type))
+		}
+
+		internal fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			readableDatabase?.rawQuery(
 				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_TIME ASC ",
@@ -135,37 +136,6 @@ class LocationMessages(val app: TelegramApplication) {
 			readableDatabase?.rawQuery(
 				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_CHAT_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_TIME ASC ",
 				arrayOf(userId.toString(), chatId.toString(), start.toString(), end.toString()))?.apply {
-				if (moveToFirst()) {
-					do {
-						res.add(readLocationMessage(this@apply))
-					} while (moveToNext())
-				}
-				close()
-			}
-			return res
-		}
-
-		internal fun addBufferedMessage(message: BufferMessage) {
-			writableDatabase?.execSQL(BUFFER_TABLE_INSERT,
-					arrayOf(message.chatId, message.lat, message.lon, message.altitude, message.speed,
-							message.hdop, message.bearing, message.time, message.type))
-		}
-
-		internal fun addIngoingMessage(message: LocationMessage) {
-			writableDatabase?.execSQL(TIMELINE_TABLE_INSERT,
-					arrayOf(message.userId, message.chatId, message.lat, message.lon, message.altitude, message.speed,
-							message.hdop, message.bearing, message.time, message.type))
-		}
-
-		internal fun addOutgoingMessage(message: LocationMessage) {
-			writableDatabase?.execSQL(TIMELINE_TABLE_INSERT,
-					arrayOf(message.userId, message.chatId, message.lat, message.lon, message.altitude, message.speed,
-							message.hdop, message.bearing, message.time, message.type))
-		}
-
-		internal fun getOutgoingMessages(): List<LocationMessage> {
-			val res = arrayListOf<LocationMessage>()
-			readableDatabase?.rawQuery(TIMELINE_TABLE_SELECT, null)?.apply {
 				if (moveToFirst()) {
 					do {
 						res.add(readLocationMessage(this@apply))
