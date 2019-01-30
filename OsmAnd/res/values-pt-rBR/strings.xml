@@ -1341,7 +1341,7 @@ Pôr do Sol: %2$s</string>
 
 
 
-<string name="unit_of_length_descr">Alterar unidades de distância e velocidade</string>
+<string name="unit_of_length_descr">Alterar unidades de distância e velocidade.</string>
 <string name="unit_of_length">Unidades de medida</string>
 <string name="si_mi_feet">Milhas/pés</string>
 <string name="si_mi_yard">Milhas/jardas</string>
@@ -3063,4 +3063,9 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_switch_night_mode">"Modo noturno "</string>
     <string name="quick_action_day_night_switch_mode">Alternar modo dia/noite</string>
     <string name="run_full_osmand_msg">Você está usando {0} Mapa, que é alimentado por OsmAnd. Você quer iniciar a versão completa do OsmAnd\?</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Capacidade</string>
+    <string name="shared_string_width">Largura</string>
+    <string name="shared_string_height">Altura</string>
 </resources>
