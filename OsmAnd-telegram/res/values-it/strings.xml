@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="last_update_from_telegram">Ultimo aggiornamento da Telegram</string>
 	<string name="enter_another_device_name">Scegli un nome che non hai ancora usato</string>
 	<string name="device_added_successfully">%1$s aggiunto.</string>
@@ -164,7 +164,7 @@
 
 
 <string name="logout_from_osmand_telegram_descr">Sei sicuro di volerti disconnettere da OsmAnd Telegram, cosicché non potrai condividere la posizione o vedere quella di altri\?</string>
-	<string name="osmand_connect">OsmAnd connect</string>
+	<string name="osmand_connect">Connessione OsmAnd</string>
 	<string name="set_visible_time_for_all">Imposta un orario visibile a tutti</string>
 	<string name="visible_time_for_all">Orario visibile a tutti</string>
 	<string name="min_km">min/km</string>
@@ -172,4 +172,19 @@
 	<string name="m_s">m/s</string>
 	<string name="km_h">km/h</string>
 	<string name="mile_per_hour">mi/h</string>
-	</resources>
+    <string name="monitoring_is_enabled">Monitoraggio abilitato</string>
+    <string name="monitoring_is_disabled">Monitoraggio disabilitato</string>
+    <string name="time_on_the_move">tempo in movimento</string>
+    <string name="average_altitude">Altitudine media</string>
+    <string name="average_speed">Velocità media</string>
+    <string name="open_in_osmand">Apri in OsmAnd</string>
+    <string name="end_date">Data di fine</string>
+    <string name="start_date">Data d\'inizio</string>
+    <string name="timeline_description">Abilita il monitoraggio per raccogliere i dati degli spostamenti in secondo piano.</string>
+    <string name="send_location_as">Invia la localizzazione come</string>
+    <string name="send_location_as_descr">Scegli l\'aspetto dei messaggi con la tua localizzazione.</string>
+    <string name="shared_string_map">Mappa</string>
+    <string name="shared_string_text">Testo</string>
+    <string name="map_and_text">Mappa e testo</string>
+    <string name="timeline">Cronologia</string>
+</resources>
