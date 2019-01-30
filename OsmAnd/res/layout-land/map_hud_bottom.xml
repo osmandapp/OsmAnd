@@ -183,14 +183,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"/>
 
-                <ImageButton
-                    android:id="@+id/map_transparency_hide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/btn_circle_transparent"
-                    android:contentDescription="@string/shared_string_hide"
-                    android:src="@drawable/headliner_close"/>
             </LinearLayout>
             
                	<ProgressBar

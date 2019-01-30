@@ -925,15 +925,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		});
-		ImageButton imageButton = (ImageButton) mapActivity.findViewById(R.id.map_transparency_hide);
-		imageButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				transparencyBarLayout.setVisibility(View.GONE);
-				settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
-				hideTransparencyBar(transparencySetting);
-			}
-		});
 
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
