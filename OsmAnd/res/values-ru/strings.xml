@@ -3053,5 +3053,5 @@
     <string name="shared_string_height">Высота</string>
     <string name="transfers">трансферы: %1$s</string>
     <string name="on_foot">пешком: %1$s</string>
-    <string name="show_along_the_route">Показать вдоль маршрута</string>
+    <string name="show_along_the_route">Показывать вдоль маршрута</string>
 </resources>

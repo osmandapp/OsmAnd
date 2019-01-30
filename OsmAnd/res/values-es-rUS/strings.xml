@@ -3063,7 +3063,7 @@ Lon %2$s</string>
     <string name="waypoints">Puntos de referencia: %1$s</string>
     <string name="transfers">transferencias: %1$s</string>
     <string name="on_foot">a pie: %1$s</string>
-    <string name="route_way">Modo: %1$s</string>
+    <string name="route_way">Ruta: %1$s</string>
     <string name="points_of_interests">Puntos de interés (PDI)</string>
     <string name="waiting_for_route_calculation">Esperando el cálculo de la ruta</string>
     <string name="app_mode_public_transport">Transporte público</string>
@@ -3074,4 +3074,9 @@ Lon %2$s</string>
     <string name="voice_announcements">Anuncios de voz</string>
     <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
     <string name="arrive_at_time">Llegará a las %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">ton</string>
+    <string name="shared_string_capacity">Capacidad</string>
+    <string name="shared_string_width">Ancho</string>
+    <string name="shared_string_height">Altura</string>
 </resources>

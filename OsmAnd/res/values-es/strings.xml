@@ -3055,4 +3055,9 @@
     <string name="voice_announcements">Anuncios de voz</string>
     <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
     <string name="arrive_at_time">Llegará a las %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">ton</string>
+    <string name="shared_string_capacity">Capacidad</string>
+    <string name="shared_string_width">Ancho</string>
+    <string name="shared_string_height">Altura</string>
 </resources>

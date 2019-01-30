@@ -3162,4 +3162,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="voice_announcements">Sprachmeldungen</string>
     <string name="intermediate_destinations">Zwischenziele: %1$s</string>
     <string name="arrive_at_time">Ankunftszeit um %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Kapazität</string>
+    <string name="shared_string_width">Breite</string>
+    <string name="shared_string_height">Höhe</string>
 </resources>

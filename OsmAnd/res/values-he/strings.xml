@@ -3154,4 +3154,9 @@
     <string name="quick_action_switch_day_mode">מצב יום</string>
     <string name="quick_action_switch_night_mode">מצב לילה</string>
     <string name="quick_action_day_night_switch_mode">החלפה בין מצבי יום/לילה</string>
+    <string name="cubic_m">מ״ק</string>
+    <string name="metric_ton">ט׳</string>
+    <string name="shared_string_capacity">נפח</string>
+    <string name="shared_string_width">רוחב</string>
+    <string name="shared_string_height">גובה</string>
 </resources>

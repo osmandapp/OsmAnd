@@ -3184,4 +3184,26 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_day_night_switch_mode">Cola intre Die/Note</string>
     <string name="add_destination_point">Annanghe una destinatzione</string>
     <string name="waypoints">Puntos de coladòrgiu: %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Capatzidade</string>
+    <string name="shared_string_width">Largària</string>
+    <string name="shared_string_height">Artària</string>
+    <string name="swap_start_and_destination">Cuncàmbia sa partèntzia e sa destinatzione</string>
+    <string name="add_intermediate_point">Annanghe unu puntu de coladòrgiu</string>
+    <string name="add_start_point">Annanghe unu puntu de incumintzu</string>
+    <string name="intermediate_waypoint">Puntu de coladòrgiu: %1$s</string>
+    <string name="transfers">tramudadas: %1$s</string>
+    <string name="on_foot">a pede: %1$s</string>
+    <string name="route_way">Modalidade: %1$s</string>
+    <string name="points_of_interests">Puntos de interesse (PDI)</string>
+    <string name="waiting_for_route_calculation">Isetende pro su càlculu de s\'àndala</string>
+    <string name="app_mode_public_transport">Trasportu pùblicu</string>
+    <string name="avoid_roads_descr">Ischerta su caminu chi cheres istransire durante su nàvigu in sa mapa o dae sa lista inoghe in suta:</string>
+    <string name="show_along_the_route">Ammustra in s\'àndala</string>
+    <string name="simulate_navigation">Sìmula su nàvigu</string>
+    <string name="choose_track_file_to_follow">Ischerta unu documentu de rasta de sighire</string>
+    <string name="voice_announcements">Annùntzios vocales</string>
+    <string name="intermediate_destinations">Destinatziones intermèdias: %1$s</string>
+    <string name="arrive_at_time">Arribada a sas %1$s</string>
 </resources>

@@ -3201,4 +3201,25 @@
     <string name="intermediate_waypoint">中轉地點：%1$s</string>
     <string name="waypoints">航點：%1$s</string>
     <string name="transfers">移動：%1$s</string>
+    <string name="cubic_m">立方公尺</string>
+    <string name="metric_ton">公噸</string>
+    <string name="shared_string_capacity">容量</string>
+    <string name="shared_string_width">寬度</string>
+    <string name="shared_string_height">高度</string>
+    <string name="on_foot">步行：%1$s</string>
+    <string name="route_way">道路：%1$s</string>
+    <string name="points_of_interests">興趣點 (POI)</string>
+    <string name="waiting_for_route_calculation">等待計算路徑</string>
+    <string name="app_mode_public_transport">大眾運輸</string>
+    <string name="avoid_roads_descr">在導航時從地圖上的道路或下面的列表選擇您想要避免的地方：</string>
+    <string name="show_along_the_route">在路徑旁顯示</string>
+    <string name="simulate_navigation">模擬導航</string>
+    <string name="choose_track_file_to_follow">選擇要跟隨的軌跡檔案</string>
+    <string name="voice_announcements">語音通知</string>
+    <string name="intermediate_destinations">中轉地點：%1$s</string>
+    <string name="arrive_at_time">到達 %1$s</string>
+    <string name="quick_action_switch_day_night_descr">輕觸此動作按鈕以在 OsmAnd 的日間與夜間模式間切換</string>
+    <string name="quick_action_switch_day_mode">日間模式</string>
+    <string name="quick_action_switch_night_mode">夜間模式</string>
+    <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
 </resources>
