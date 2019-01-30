@@ -11,7 +11,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandLocationUtils
-import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserTextLocation
+import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserLocation
 import net.osmand.telegram.utils.OsmandLocationUtils.MessageOsmAndBotLocation
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
@@ -81,7 +81,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			val content = message.content
 			val date = OsmandLocationUtils.getLastUpdatedTime(message)
 			val stale = System.currentTimeMillis() / 1000 - date > app.settings.staleLocTime
-			if (chatTitle != null && (content is TdApi.MessageLocation || (content is MessageUserTextLocation && content.isValid()))) {
+			if (chatTitle != null && (content is TdApi.MessageLocation || (content is MessageUserLocation && content.isValid()))) {
 				var userName = ""
 				var photoPath: String? = null
 				val user = telegramHelper.getUser(message.senderUserId)
@@ -106,7 +106,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				val params = generatePointParams(photoPath, stale)
 				val aLatLon = when (content) {
 					is TdApi.MessageLocation -> ALatLon(content.location.latitude, content.location.longitude)
-					is MessageUserTextLocation -> ALatLon(content.lat, content.lon)
+					is MessageUserLocation -> ALatLon(content.lat, content.lon)
 					else -> null
 				}
 				if (aLatLon != null) {
@@ -251,7 +251,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private fun removeMapPoint(chatId: Long, message: TdApi.Message) {
 		val content = message.content
-		if (content is TdApi.MessageLocation || content is MessageUserTextLocation) {
+		if (content is TdApi.MessageLocation || content is MessageUserLocation) {
 			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatId}_${message.senderUserId}")
 		} else if (content is MessageOsmAndBotLocation) {
 			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatId}_${content.name}")

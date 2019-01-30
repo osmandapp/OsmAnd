@@ -96,7 +96,7 @@
 			android:layout_height="1dp"
 			android:background="@color/app_bar_divider" />
 
-		<LinearLayout
+		<FrameLayout
 			android:id="@+id/date_row"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/list_header_height"
@@ -106,13 +106,12 @@
 			android:paddingRight="@dimen/content_padding_standard">
 
 			<net.osmand.telegram.ui.views.TextViewEx
-				android:id="@+id/date_start_btn"
-				android:layout_width="0dp"
+				android:id="@+id/date_btn"
+				android:layout_width="wrap_content"
 				android:layout_height="@dimen/dialog_button_height"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="center"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				android:layout_weight="1"
 				android:background="@drawable/btn_round_border"
 				android:drawablePadding="@dimen/content_padding_half"
 				android:ellipsize="end"
@@ -120,38 +119,12 @@
 				android:maxLines="1"
 				android:paddingLeft="@dimen/image_button_padding"
 				android:paddingRight="@dimen/image_button_padding"
-				android:text="@string/start_date"
+				android:text="@string/shared_string_date"
 				android:textColor="?attr/ctrl_active_color"
 				android:textSize="@dimen/text_button_text_size"
 				app:typeface="@string/font_roboto_medium" />
 
-			<View
-				android:layout_width="16dp"
-				android:layout_height="1dp"
-				android:layout_gravity="center_vertical"
-				android:background="@color/app_bar_divider" />
-
-			<net.osmand.telegram.ui.views.TextViewEx
-				android:id="@+id/date_end_btn"
-				android:layout_width="0dp"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="@dimen/content_padding_half"
-				android:layout_marginStart="@dimen/content_padding_half"
-				android:layout_weight="1"
-				android:background="@drawable/btn_round_border"
-				android:drawablePadding="@dimen/content_padding_half"
-				android:ellipsize="end"
-				android:gravity="start|center_vertical"
-				android:maxLines="1"
-				android:paddingLeft="@dimen/image_button_padding"
-				android:paddingRight="@dimen/image_button_padding"
-				android:text="@string/end_date"
-				android:textColor="?attr/ctrl_active_color"
-				android:textSize="@dimen/text_button_text_size"
-				app:typeface="@string/font_roboto_medium" />
-
-		</LinearLayout>
+		</FrameLayout>
 
 	</android.support.design.widget.AppBarLayout>
 

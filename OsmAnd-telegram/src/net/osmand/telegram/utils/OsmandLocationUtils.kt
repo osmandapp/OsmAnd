@@ -9,6 +9,7 @@ import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.util.GeoPointParserUtil
+import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.text.SimpleDateFormat
@@ -48,7 +49,7 @@ object OsmandLocationUtils {
 		val content = message.content
 		return when (content) {
 			is MessageOsmAndBotLocation -> content.lastUpdated
-			is MessageUserTextLocation -> content.lastUpdated
+			is MessageUserLocation -> content.lastUpdated
 			else -> Math.max(message.editDate, message.date)
 		}
 	}
@@ -76,47 +77,77 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun parseMessage(message: TdApi.Message, helper: TelegramHelper): LocationMessage? {
+	fun parseUserMapLocation(message: TdApi.Message): MessageUserLocation {
+		val messageLocation = message.content as TdApi.MessageLocation
+		return MessageUserLocation().apply {
+			lat = messageLocation.location.latitude
+			lon = messageLocation.location.longitude
+			lastUpdated = getLastUpdatedTime(message)
+		}
+	}
+
+	fun parseMessage(message: TdApi.Message, helper: TelegramHelper, previousMessage: LocationMessage?): LocationMessage? {
 		var locationMessage: LocationMessage? = null
 		val oldContent = message.content
-
-		val fromBot = helper.isOsmAndBot(message.senderUserId)
-		val viaBot = helper.isOsmAndBot(message.viaBotUserId)
-
-		var messageType: Int = -1
-		val parsedMessageContent =
-			if (oldContent is TdApi.MessageText) {
-				when {
-					oldContent.text.text.startsWith(DEVICE_PREFIX) -> {
-						messageType = LocationMessages.TYPE_BOT_TEXT
-						parseTextLocation(oldContent.text)
-					}
-					oldContent.text.text.startsWith(USER_TEXT_LOCATION_TITLE) -> {
-						messageType = LocationMessages.TYPE_USER_TEXT
-						parseTextLocation(oldContent.text, false)
-					}
-					else -> null
+		val messageType = getMessageType(message,helper)
+		var parsedMessageContent: MessageLocation? = null
+		if (messageType != -1) {
+			parsedMessageContent = when (messageType) {
+				LocationMessages.TYPE_BOT_TEXT -> {
+					parseTextLocation((oldContent as TdApi.MessageText).text)
 				}
-			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
-				messageType = LocationMessages.TYPE_BOT_MAP
-				parseOsmAndBotLocation(message)
-			} else if (oldContent is MessageLocation) {
-				messageType = 0
-				oldContent
-			} else {
-				null
+				LocationMessages.TYPE_USER_TEXT -> {
+					if (oldContent is TdApi.MessageText) {
+						parseTextLocation(oldContent.text, false)
+					} else {
+						oldContent as MessageUserLocation
+					}
+				}
+				LocationMessages.TYPE_BOT_MAP -> {
+					parseOsmAndBotLocation(message)
+				}
+				LocationMessages.TYPE_USER_MAP -> {
+					parseUserMapLocation(message)
+				}
+				else -> null
 			}
+		}
 
 		if (parsedMessageContent != null) {
+			val distanceFromPrev = if (previousMessage != null) {
+				MapUtils.getDistance(previousMessage.lat, previousMessage.lon,
+					parsedMessageContent.lat, parsedMessageContent.lon)
+			} else 0.0
+
 			locationMessage = LocationMessage(helper.getSenderMessageId(message), message.chatId, parsedMessageContent.lat,
 					parsedMessageContent.lon, parsedMessageContent.altitude, parsedMessageContent.speed, parsedMessageContent.hdop,
-					parsedMessageContent.bearing, parsedMessageContent.lastUpdated * 1000L, messageType)
-		} else if(oldContent is TdApi.MessageLocation){
-			locationMessage = LocationMessage(helper.getSenderMessageId(message), message.chatId, oldContent.location.latitude,
-				oldContent.location.longitude, 0.0, 0.0, 0.0,
-				0.0, getLastUpdatedTime(message) * 1000L, LocationMessages.TYPE_USER_MAP)
+					parsedMessageContent.bearing, parsedMessageContent.lastUpdated * 1000L, messageType, message.id, distanceFromPrev)
 		}
+
 		return locationMessage
+	}
+
+	fun getMessageType(message: TdApi.Message, helper: TelegramHelper): Int {
+		val fromBot = helper.isOsmAndBot(message.senderUserId)
+		val viaBot = helper.isOsmAndBot(message.viaBotUserId)
+		val oldContent = message.content
+		return if (oldContent is TdApi.MessageText) {
+			if (fromBot || viaBot) {
+				LocationMessages.TYPE_BOT_TEXT
+			} else {
+				LocationMessages.TYPE_USER_TEXT
+			}
+		} else if (oldContent is TdApi.MessageLocation) {
+			if (fromBot || viaBot) {
+				LocationMessages.TYPE_BOT_MAP
+			} else {
+				LocationMessages.TYPE_USER_MAP
+			}
+		} else if (oldContent is MessageLocation) {
+			oldContent.type
+		} else {
+			-1
+		}
 	}
 
 	fun formatLocation(sig: Location): String {
@@ -148,7 +179,7 @@ object OsmandLocationUtils {
 	}
 
 	fun parseTextLocation(text: TdApi.FormattedText, botLocation: Boolean = true): MessageLocation {
-		val res = if (botLocation) MessageOsmAndBotLocation() else MessageUserTextLocation()
+		val res = if (botLocation) MessageOsmAndBotLocation() else MessageUserLocation()
 		res.type = if (botLocation) LocationMessages.TYPE_BOT_TEXT else LocationMessages.TYPE_USER_TEXT
 		var locationNA = false
 		for (s in text.text.lines()) {
@@ -460,7 +491,7 @@ object OsmandLocationUtils {
 		override fun isValid() = name != "" && lat != Double.NaN && lon != Double.NaN
 	}
 
-	class MessageUserTextLocation : MessageLocation() {
+	class MessageUserLocation : MessageLocation() {
 
 		override fun isValid() = lat != Double.NaN && lon != Double.NaN
 

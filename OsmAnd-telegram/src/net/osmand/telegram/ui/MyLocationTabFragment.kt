@@ -231,7 +231,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	override fun onResume() {
 		super.onResume()
 		updateCurrentUserPhoto()
-		telegramHelper.getActiveLiveLocationMessages(null)
 		updateContent()
 		updateEnable = true
 		startHandler()
@@ -719,7 +718,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				holder.gpsPointsCollected?.apply {
 					if (shareInfo != null) {
-						text = "${shareInfo.collectedMessages}"
+						val bufferedMessages = shareInfo.pendingTdLib + app.locationMessages.getBufferedMessagesForChat(shareInfo.chatId).size
+						text = "$bufferedMessages"
 					}
 				}
 				holder.gpsPointsSent?.apply {

@@ -96,10 +96,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	}
 
 	fun checkAndSendBufferMessagesToChat(chatId: Long) {
-		log.debug("checkAndSendBufferMessagesToChat $chatId")
 		val shareInfo = app.settings.getChatsShareInfo()[chatId]
 		if (shareInfo != null && shareInfo.pendingTdLib < 10) {
-			app.locationMessages.getPreparedMessagesForChat(shareInfo.chatId).forEach {
+			app.locationMessages.getBufferedMessagesForChat(shareInfo.chatId).forEach {
 				if (it.type == LocationMessages.TYPE_USER_TEXT && !shareInfo.pendingTextMessage && shareInfo.currentTextMessageId != -1L) {
 					app.telegramHelper.editTextLocation(shareInfo, it)
 					app.locationMessages.removeBufferedMessage(it)
@@ -169,7 +168,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		log.debug("checkAndSendBufferMessages")
 		app.settings.getChatsShareInfo().forEach loop@{ (chatId, shareInfo) ->
 			if (shareInfo.pendingTdLib < 10) {
-				app.locationMessages.getPreparedMessagesForChat(chatId).forEach {
+				app.locationMessages.getBufferedMessagesForChat(chatId).forEach {
 					if (it.type == LocationMessages.TYPE_USER_TEXT && !shareInfo.pendingTextMessage && shareInfo.currentTextMessageId != -1L) {
 						app.telegramHelper.editTextLocation(shareInfo, it)
 						app.locationMessages.removeBufferedMessage(it)

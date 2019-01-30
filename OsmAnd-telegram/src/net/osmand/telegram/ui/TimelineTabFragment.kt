@@ -18,12 +18,12 @@ import android.widget.TextView
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.ui.TimelineTabFragment.LiveNowListAdapter.BaseViewHolder
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
-import net.osmand.telegram.utils.OsmandLocationUtils
 import java.util.*
 
 
@@ -39,8 +39,7 @@ class TimelineTabFragment : Fragment() {
 
 	private lateinit var adapter: LiveNowListAdapter
 
-	private lateinit var dateStartBtn: TextView
-	private lateinit var dateEndBtn: TextView
+	private lateinit var dateBtn: TextView
 	private lateinit var mainView: View
 
 	private var start = 0L
@@ -77,21 +76,13 @@ class TimelineTabFragment : Fragment() {
 			monitoringTv.setText(if (monitoringEnabled) R.string.monitoring_is_enabled else R.string.monitoring_is_disabled)
 		}
 
-		dateStartBtn = mainView.findViewById<TextView>(R.id.date_start_btn).apply {
+		dateBtn = mainView.findViewById<TextView>(R.id.date_btn).apply {
 			setOnClickListener {
-				selectStartDate()
+				selectDate()
 			}
 			setCompoundDrawablesWithIntrinsicBounds(getPressedStateIcon(R.drawable.ic_action_date_start), null, null, null)
+			setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
 		}
-		dateEndBtn = mainView.findViewById<TextView>(R.id.date_end_btn).apply {
-			setOnClickListener {
-				selectEndDate()
-			}
-			setCompoundDrawablesWithIntrinsicBounds(getPressedStateIcon(R.drawable.ic_action_date_add), null, null, null)
-		}
-
-		setupBtnTextColor(dateStartBtn)
-		setupBtnTextColor(dateEndBtn)
 
 		return mainView
 	}
@@ -107,24 +98,28 @@ class TimelineTabFragment : Fragment() {
 		updateEnable = false
 	}
 
-	private fun setupBtnTextColor(textView: TextView) {
-		textView.setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
-	}
-
-	private fun selectStartDate() {
+	private fun selectDate() {
 		val dateFromDialog =
 			DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
 				val from = Calendar.getInstance()
 				from.set(Calendar.YEAR, year)
 				from.set(Calendar.MONTH, monthOfYear)
 				from.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
 				from.set(Calendar.HOUR_OF_DAY, 0)
 				from.clear(Calendar.MINUTE)
 				from.clear(Calendar.SECOND)
 				from.clear(Calendar.MILLISECOND)
 				start = from.timeInMillis
+
+				from.set(Calendar.HOUR_OF_DAY, 23)
+				from.set(Calendar.MINUTE, 59)
+				from.set(Calendar.SECOND, 59)
+				from.set(Calendar.MILLISECOND, 999)
+				end = from.timeInMillis
+
 				updateList()
-				updateDateButtons()
+				updateDateButton()
 			}
 		val startCalendar = Calendar.getInstance()
 		startCalendar.timeInMillis = start
@@ -135,34 +130,8 @@ class TimelineTabFragment : Fragment() {
 		).show()
 	}
 
-	private fun selectEndDate() {
-		val dateFromDialog =
-			DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-				val from = Calendar.getInstance()
-				from.set(Calendar.YEAR, year)
-				from.set(Calendar.MONTH, monthOfYear)
-				from.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-				from.set(Calendar.HOUR_OF_DAY, 23)
-				from.set(Calendar.MINUTE, 59)
-				from.set(Calendar.SECOND, 59)
-				from.set(Calendar.MILLISECOND, 999)
-				end = from.timeInMillis
-				updateList()
-				updateDateButtons()
-			}
-		val endCalendar = Calendar.getInstance()
-		endCalendar.timeInMillis = end
-		DatePickerDialog(context, dateFromDialog,
-			endCalendar.get(Calendar.YEAR),
-			endCalendar.get(Calendar.MONTH),
-			endCalendar.get(Calendar.DAY_OF_MONTH)
-		).show()
-	}
-
-	private fun updateDateButtons() {
-		dateStartBtn.text = OsmandFormatter.getFormattedDate(start / 1000)
-		dateEndBtn.text = OsmandFormatter.getFormattedDate(end / 1000)
-		dateEndBtn.setCompoundDrawablesWithIntrinsicBounds(getPressedStateIcon(R.drawable.ic_action_date_end), null, null, null)
+	private fun updateDateButton() {
+		dateBtn.text = OsmandFormatter.getFormattedDate(start / 1000)
 	}
 
 	private fun getPressedStateIcon(@DrawableRes iconId: Int): Drawable? {
@@ -188,22 +157,19 @@ class TimelineTabFragment : Fragment() {
 
 	private fun updateList() {
 		val res = mutableListOf<ListItem>()
-		val ignoredUsersIds = ArrayList<Int>()
 		val currentUserId = telegramHelper.getCurrentUser()?.id
 		if (currentUserId != null) {
 			val outgoingMessages = app.locationMessages.getMessagesForUser(currentUserId, start, end)
-			// todo - why do we need convert to gpx on update? Is locationMessages not enough to display info?
-			OsmandLocationUtils.convertLocationMessagesToGpxFiles(outgoingMessages, false).forEach {
-				TelegramUiHelper.gpxToChatItem(telegramHelper, it, true)?.also { chatItem ->
+			TelegramUiHelper.locationMessagesToChatItem(telegramHelper, outgoingMessages)?.also { chatItem ->
 					res.add(chatItem)
 				}
-			}
-			ignoredUsersIds.add(currentUserId)
 			val ingoingMessages = app.locationMessages.getIngoingMessages(currentUserId, start, end)
-			OsmandLocationUtils.convertLocationMessagesToGpxFiles(ingoingMessages).forEach {
-				TelegramUiHelper.gpxToChatItem(telegramHelper, it, false)?.also { chatItem ->
-					res.add(chatItem)
-				}
+			val emm = ingoingMessages.distinctBy { Pair(it.userId, it.chatId) }
+			emm.forEach { message ->
+				TelegramUiHelper.locationMessagesToChatItem(telegramHelper,
+					ingoingMessages.filter { it.chatId == message.chatId && it.userId == message.userId })?.also { chatItem ->
+						res.add(chatItem)
+					}
 			}
 		}
 
@@ -245,29 +211,30 @@ class TimelineTabFragment : Fragment() {
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			holder.lastTelegramUpdateTime?.visibility = View.GONE
 
-			if (item is TelegramUiHelper.GpxChatItem) {
-				val gpx = item.gpxFile
-				val groupDescrRowVisible = (!item.privateChat || item.chatWithBot) && item.userId != currentUserId
-				if (groupDescrRowVisible) {
-					holder.groupDescrContainer?.visibility = View.VISIBLE
-					holder.groupTitle?.text = item.getVisibleName()
-					TelegramUiHelper.setupPhoto(app, holder.groupImage, item.groupPhotoPath, item.placeholderId, false)
-				} else {
-					holder.groupDescrContainer?.visibility = View.GONE
-				}
+			if (item is TelegramUiHelper.LocationMessagesChatItem) {
+				val distance = OsmandFormatter.getFormattedDistance(getDistance(item.locationMessages),app)
+				val name = if ((!item.privateChat || item.chatWithBot) && item.userId != currentUserId) item.getVisibleName() else ""
+				holder.groupDescrContainer?.visibility = View.VISIBLE
+				holder.groupTitle?.text = "$distance (${getString(R.string.points_size, item.locationMessages.size)}) $name"
+				TelegramUiHelper.setupPhoto(app, holder.groupImage, item.groupPhotoPath, item.placeholderId, false)
 				holder.userRow?.setOnClickListener {
-					if (gpx != null) {
-						childFragmentManager.also {
-							UserGpxInfoFragment.showInstance(it, gpx, start, end)
-						}
+					childFragmentManager.also {
+						UserGpxInfoFragment.showInstance(it, item.userId, item.chatId, start, end)
 					}
 				}
-
 				holder.imageButton?.visibility = View.GONE
 				holder.showOnMapRow?.visibility = View.GONE
 				holder.bottomDivider?.visibility = if (lastItem) View.GONE else View.VISIBLE
 				holder.topDivider?.visibility = if (position != 0) View.GONE else View.VISIBLE
 			}
+		}
+
+		private fun getDistance(messages: List<LocationMessages.LocationMessage>): Float {
+			var dist = 0.0
+			messages.forEach {
+				dist += it.distanceFromPrev
+			}
+			return dist.toFloat()
 		}
 
 		override fun getItemCount() = items.size

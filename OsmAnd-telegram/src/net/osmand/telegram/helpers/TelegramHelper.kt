@@ -9,7 +9,7 @@ import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.telegram.utils.OsmandLocationUtils.DEVICE_PREFIX
 import net.osmand.telegram.utils.OsmandLocationUtils.MessageOsmAndBotLocation
-import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserTextLocation
+import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserLocation
 import net.osmand.telegram.utils.OsmandLocationUtils.USER_TEXT_LOCATION_TITLE
 import net.osmand.telegram.utils.OsmandLocationUtils.getLastUpdatedTime
 import net.osmand.telegram.utils.OsmandLocationUtils.parseOsmAndBotLocation
@@ -396,7 +396,7 @@ class TelegramHelper private constructor() {
 
 	private fun isUserLocationMessage(message: TdApi.Message): Boolean {
 		val cont = message.content
-		return (cont is MessageUserTextLocation || cont is TdApi.MessageLocation)
+		return (cont is MessageUserLocation || cont is TdApi.MessageLocation)
 	}
 
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
@@ -688,10 +688,6 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun loadMessage(chatId: Long, messageId: Long) {
-		requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
-	}
-
 	private fun requestMessage(chatId: Long, messageId: Long, onComplete: (TdApi.Message) -> Unit) {
 		client?.send(TdApi.GetMessage(chatId, messageId)) { obj ->
 			if (obj is TdApi.Message) {
@@ -703,6 +699,9 @@ class TelegramHelper private constructor() {
 	private fun addNewMessage(message: TdApi.Message) {
 		lastTelegramUpdateTime = Math.max(lastTelegramUpdateTime, Math.max(message.date, message.editDate))
 		if (message.isAppropriate()) {
+			if (message.isOutgoing) {
+				return
+			}
 			log.debug("addNewMessage: ${message.id}")
 			val fromBot = isOsmAndBot(message.senderUserId)
 			val viaBot = isOsmAndBot(message.viaBotUserId)
@@ -716,21 +715,15 @@ class TelegramHelper private constructor() {
 			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
 			}
-			if (message.isOutgoing) {
-				outgoingMessagesListeners.forEach {
-					it.onUpdateMessages(listOf(message))
-				}
-			} else {
-				removeOldMessages(message, fromBot, viaBot)
-				val oldMessage = usersLocationMessages.values.firstOrNull { getSenderMessageId(it) == getSenderMessageId(message) && !fromBot && !viaBot }
-				val hasNewerMessage = oldMessage != null && (Math.max(message.editDate, message.date) < Math.max(oldMessage.editDate, oldMessage.date))
-				if (!hasNewerMessage) {
-					usersLocationMessages[message.id] = message
-				}
-				incomingMessagesListeners.forEach {
-					if (!hasNewerMessage || it is TelegramService) {
-						it.onReceiveChatLocationMessages(message.chatId, message)
-					}
+			removeOldMessages(message, fromBot, viaBot)
+			val oldMessage = usersLocationMessages.values.firstOrNull { getSenderMessageId(it) == getSenderMessageId(message) && !fromBot && !viaBot }
+			val hasNewerMessage = oldMessage != null && (Math.max(message.editDate, message.date) < Math.max(oldMessage.editDate, oldMessage.date))
+			if (!hasNewerMessage) {
+				usersLocationMessages[message.id] = message
+			}
+			incomingMessagesListeners.forEach {
+				if (!hasNewerMessage || it is TelegramService) {
+					it.onReceiveChatLocationMessages(message.chatId, message)
 				}
 			}
 		}
@@ -908,7 +901,7 @@ class TelegramHelper private constructor() {
 	private fun handleMapLocationMessageUpdate(obj: TdApi.Object, shareInfo: TelegramSettings.ShareChatInfo) {
 		when (obj.constructor) {
 			TdApi.Error.CONSTRUCTOR -> {
-				log.debug("handleMapLocationMessageUpdate - ERROR")
+				log.debug("handleMapLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				needRefreshActiveLiveLocationMessages = true
 				if (error.code == MESSAGE_CANNOT_BE_EDITED_ERROR_CODE) {
@@ -973,7 +966,6 @@ class TelegramHelper private constructor() {
 					when {
 						obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
 							shareInfo.hasSharingError = true
-							shareInfo.pendingTdLib--
 							shareInfo.pendingTextMessage = false
 							needRefreshActiveLiveLocationMessages = true
 							log.debug("handleTextLocationMessageUpdate - MessageSendingStateFailed")
@@ -1317,26 +1309,10 @@ class TelegramHelper private constructor() {
 						}
 					}
 				}
-				TdApi.UpdateMessageEdited.CONSTRUCTOR -> {
-					val updateMessageEdited = obj as TdApi.UpdateMessageEdited
-					val message = usersLocationMessages[updateMessageEdited.messageId]
-					if (message == null) {
-						updateMessageEdited.apply {
-							requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
-						}
-					} else {
-						synchronized(message) {
-							message.editDate = updateMessageEdited.editDate
-							lastTelegramUpdateTime = Math.max(message.date, message.editDate)
-						}
-						incomingMessagesListeners.forEach {
-							it.updateLocationMessages()
-						}
-					}
-				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
 					val message = usersLocationMessages[updateMessageContent.messageId]
+					log.debug("UpdateMessageContent " + updateMessageContent.messageId)
 					if (message == null) {
 						updateMessageContent.apply {
 							requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
@@ -1356,7 +1332,6 @@ class TelegramHelper private constructor() {
 								newContent
 							}
 						}
-						log.debug("UpdateMessageContent " + message.senderUserId)
 						incomingMessagesListeners.forEach {
 							it.onReceiveChatLocationMessages(message.chatId, message)
 						}
@@ -1364,6 +1339,7 @@ class TelegramHelper private constructor() {
 				}
 				TdApi.UpdateNewMessage.CONSTRUCTOR -> {
 					addNewMessage((obj as TdApi.UpdateNewMessage).message)
+					log.debug("UpdateNewMessage " + obj.message.id)
 				}
 				TdApi.UpdateMessageMentionRead.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateMessageMentionRead

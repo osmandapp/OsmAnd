@@ -276,10 +276,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app().showLocationHelper.startShowMessagesTask(chatId, *messages)
 		messages.forEach {
-			val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper)
-			if (locationMessage != null) {
-				app().locationMessages.addLocationMessage(locationMessage)
-			}
+			app().locationMessages.addNewLocationMessage(it)
 		}
 	}
 
@@ -296,10 +293,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			app().settings.updateShareInfo(it)
 			app().shareLocationHelper.checkAndSendBufferMessagesToChat(it.chatId)
 			if (it.sendingState == null && (it.content is TdApi.MessageLocation || it.content is TdApi.MessageText)) {
-				val locationMessage = OsmandLocationUtils.parseMessage(it, app().telegramHelper)
-				if (locationMessage != null) {
-					app().locationMessages.addLocationMessage(locationMessage)
-				}
+				app().locationMessages.addNewLocationMessage(it)
 			}
 		}
 	}
