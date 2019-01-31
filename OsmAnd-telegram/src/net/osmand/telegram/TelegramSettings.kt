@@ -7,6 +7,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.AndroidUtils
@@ -86,6 +87,8 @@ private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
 private const val GPS_UPDATE_EXPIRED_TIME = 60 * 3L // 3 minutes
 
 class TelegramSettings(private val app: TelegramApplication) {
+
+	private val log = PlatformUtil.getLog(TelegramSettings::class.java)
 
 	private var shareChatsInfo = ConcurrentHashMap<Long, ShareChatInfo>()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
@@ -242,21 +245,56 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun updateShareInfo(message: TdApi.Message) {
-		val shareChatInfo = shareChatsInfo[message.chatId]
+		val shareInfo = shareChatsInfo[message.chatId]
 		val content = message.content
-		if (shareChatInfo != null) {
+		if (shareInfo != null) {
 			when (content) {
 				is TdApi.MessageLocation -> {
-					shareChatInfo.currentMapMessageId = message.id
-					shareChatInfo.pendingMapMessage = false
+					val state = message.sendingState
+					if (state != null) {
+						if (state.constructor == TdApi.MessageSendingStatePending.CONSTRUCTOR) {
+							shareInfo.pendingMapMessage = true
+							log.debug("updateShareInfo MAP ${message.id} MessageSendingStatePending")
+							shareInfo.oldMapMessageId = message.id
+						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
+							shareInfo.hasSharingError = true
+							shareInfo.pendingMapMessage = false
+							log.debug("updateShareInfo MAP ${message.id} MessageSendingStateFailed")
+						}
+					} else {
+						shareInfo.currentMapMessageId = message.id
+						shareInfo.pendingMapMessage = false
+						shareInfo.pendingTdLib--
+						shareInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
+						if (shareTypeValue == SHARE_TYPE_MAP) {
+							shareInfo.sentMessages++
+						}
+						log.debug("updateShareInfo MAP ${message.id} SUCCESS pendingTdLib: ${shareInfo.pendingTdLib}")
+					}
 				}
 				is TdApi.MessageText -> {
-					shareChatInfo.currentTextMessageId = message.id
-					shareChatInfo.updateTextMessageId++
-					shareChatInfo.pendingTextMessage = false
+					val state = message.sendingState
+					if (state != null) {
+						if (state.constructor == TdApi.MessageSendingStatePending.CONSTRUCTOR) {
+							log.debug("updateShareInfo TEXT ${message.id} MessageSendingStatePending")
+							shareInfo.pendingTextMessage = true
+							shareInfo.oldTextMessageId = message.id
+						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
+							log.debug("updateShareInfo TEXT ${message.id} MessageSendingStateFailed")
+							shareInfo.hasSharingError = true
+							shareInfo.pendingTextMessage = false
+						}
+					} else {
+						shareInfo.currentTextMessageId = message.id
+						shareInfo.updateTextMessageId++
+						shareInfo.pendingTextMessage = false
+						shareInfo.pendingTdLib--
+						shareInfo.sentMessages++
+						shareInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
+						log.debug("updateShareInfo TEXT ${message.id} SUCCESS pendingTdLib: ${shareInfo.pendingTdLib}")
+					}
 				}
 			}
-			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
 		}
 	}
 
@@ -540,6 +578,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 				obj.put(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY, chatInfo.lastSuccessfulSendTimeMs)
 				obj.put(ShareChatInfo.LAST_SEND_MAP_TIME_KEY, chatInfo.lastSendMapMessageTime)
 				obj.put(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY, chatInfo.lastSendTextMessageTime)
+				obj.put(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY, chatInfo.pendingTextMessage)
+				obj.put(ShareChatInfo.PENDING_MAP_MESSAGE_KEY, chatInfo.pendingMapMessage)
+				obj.put(ShareChatInfo.COLLECTED_MESSAGES_KEY, chatInfo.collectedMessages)
+				obj.put(ShareChatInfo.SENT_MESSAGES_KEY, chatInfo.sentMessages)
+				obj.put(ShareChatInfo.PENDING_TDLIB_KEY, chatInfo.pendingTdLib)
 				jArray.put(obj)
 			}
 			jArray
@@ -566,6 +609,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 				lastSuccessfulSendTimeMs = obj.optLong(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY)
 				lastSendMapMessageTime = obj.optInt(ShareChatInfo.LAST_SEND_MAP_TIME_KEY)
 				lastSendTextMessageTime = obj.optInt(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY)
+				pendingTextMessage = obj.optBoolean(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY)
+				pendingMapMessage = obj.optBoolean(ShareChatInfo.PENDING_MAP_MESSAGE_KEY)
+				collectedMessages = obj.optInt(ShareChatInfo.COLLECTED_MESSAGES_KEY)
+				sentMessages = obj.optInt(ShareChatInfo.SENT_MESSAGES_KEY)
+				pendingTdLib = obj.optInt(ShareChatInfo.PENDING_TDLIB_KEY)
 			}
 			shareChatsInfo[shareInfo.chatId] = shareInfo
 		}
@@ -845,12 +893,17 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var updateTextMessageId = 1
 		var currentMessageLimit = -1L
 		var currentMapMessageId = -1L
+		var oldMapMessageId = -1L
 		var currentTextMessageId = -1L
+		var oldTextMessageId = -1L
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
 		var lastSuccessfulSendTimeMs = -1L
 		var lastSendTextMessageTime = -1
 		var lastSendMapMessageTime = -1
+		var collectedMessages = 0
+		var sentMessages = 0
+		var pendingTdLib = 0
 		var pendingTextMessage = false
 		var pendingMapMessage = false
 		var shouldSendViaBotMessage = false
@@ -887,6 +940,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val LAST_SUCCESSFUL_SEND_TIME_KEY = "lastSuccessfulSendTime"
 			internal const val LAST_SEND_MAP_TIME_KEY = "lastSendMapMessageTime"
 			internal const val LAST_SEND_TEXT_TIME_KEY = "lastSendTextMessageTime"
+			internal const val PENDING_TEXT_MESSAGE_KEY = "pendingTextMessage"
+			internal const val PENDING_MAP_MESSAGE_KEY = "pendingMapMessage"
+			internal const val COLLECTED_MESSAGES_KEY = "collectedMessages"
+			internal const val SENT_MESSAGES_KEY = "sentMessages"
+			internal const val PENDING_TDLIB_KEY = "sentMessages"
 		}
 	}
 }

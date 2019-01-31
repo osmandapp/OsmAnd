@@ -24,8 +24,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	lateinit var notificationHelper: NotificationHelper private set
 	lateinit var osmandAidlHelper: OsmandAidlHelper private set
 	lateinit var locationProvider: TelegramLocationProvider private set
-	lateinit var messagesDbHelper: MessagesDbHelper private set
-	lateinit var savingTracksDbHelper: SavingTracksDbHelper private set
+	lateinit var locationMessages: LocationMessages private set
 
 	var telegramService: TelegramService? = null
 
@@ -68,8 +67,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		showLocationHelper = ShowLocationHelper(this)
 		notificationHelper = NotificationHelper(this)
 		locationProvider = TelegramLocationProvider(this)
-		messagesDbHelper = MessagesDbHelper(this)
-		savingTracksDbHelper = SavingTracksDbHelper(this)
+		locationMessages = LocationMessages(this)
 
 		if (settings.hasAnyChatToShareLocation() && AndroidUtils.isLocationPermissionAvailable(this)) {
 			shareLocationHelper.startSharingLocation()
@@ -94,6 +92,13 @@ class TelegramApplication : Application(), OsmandHelperListener {
 			val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 			val ni = mgr.activeNetworkInfo
 			return ni != null && ni.type == ConnectivityManager.TYPE_WIFI
+		}
+
+	val isMobileConnected: Boolean
+		get() {
+			val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+			val ni = mgr.activeNetworkInfo
+			return ni != null && ni.type == ConnectivityManager.TYPE_MOBILE
 		}
 
 	private val isInternetConnected: Boolean

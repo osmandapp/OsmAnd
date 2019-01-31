@@ -13,10 +13,11 @@ import android.os.*
 import android.util.Log
 import android.widget.Toast
 import net.osmand.PlatformUtil
-import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
+import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
@@ -274,6 +275,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app().showLocationHelper.startShowMessagesTask(chatId, *messages)
+		messages.forEach {
+			app().locationMessages.addNewLocationMessage(it)
+		}
 	}
 
 	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {
@@ -287,6 +291,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onUpdateMessages(messages: List<TdApi.Message>) {
 		messages.forEach {
 			app().settings.updateShareInfo(it)
+			app().shareLocationHelper.checkAndSendBufferMessagesToChat(it.chatId)
+			if (it.sendingState == null && (it.content is TdApi.MessageLocation || it.content is TdApi.MessageText)) {
+				app().locationMessages.addNewLocationMessage(it)
+			}
 		}
 	}
 

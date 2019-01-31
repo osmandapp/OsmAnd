@@ -21,11 +21,11 @@ import net.osmand.PlatformUtil
 import net.osmand.aidl.gpx.AGpxBitmap
 import net.osmand.telegram.R
 import net.osmand.telegram.helpers.OsmandAidlHelper
-import net.osmand.telegram.helpers.SavingTracksDbHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.GPXUtilities
 import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.util.Algorithms
 import java.io.File
 import java.text.SimpleDateFormat
@@ -37,7 +37,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
 
-	private lateinit var gpxFile: GPXUtilities.GPXFile
+	private var gpxFile = GPXUtilities.GPXFile()
 
 	private lateinit var dateStartBtn: TextView
 	private lateinit var timeStartBtn: TextView
@@ -52,6 +52,9 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	private var startCalendar = Calendar.getInstance()
 	private var endCalendar = Calendar.getInstance()
 
+	private var userId = -1
+	private var chatId = -1L
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		parent: ViewGroup?,
@@ -61,9 +64,6 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		AndroidUtils.addStatusBarPadding19v(context!!, mainView)
 
 		readFromBundle(savedInstanceState ?: arguments)
-
-		val userId = gpxFile.userId
-		val chatId = gpxFile.chatId
 
 		val user = app.telegramHelper.getUser(userId)
 		if (user != null) {
@@ -79,8 +79,6 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					}
 				}
 			})
-
-		updateGPXMap()
 
 		val backBtn = mainView.findViewById<ImageView>(R.id.back_button)
 		backBtn.setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_arrow_back))
@@ -134,12 +132,13 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					openGpx(gpx.path)
 				} else {
 					saveCurrentGpxToFile(object :
-						SavingTracksDbHelper.SaveGpxListener {
+						OsmandLocationUtils.SaveGpxListener {
+
 						override fun onSavingGpxFinish(path: String) {
 							openGpx(path)
 						}
 
-						override fun onSavingGpxError(warnings: MutableList<String>?) {
+						override fun onSavingGpxError(warnings: List<String>?) {
 							Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
 						}
 					})
@@ -156,18 +155,20 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					(activity as MainActivity).shareGpx(gpx.path)
 				} else {
 					saveCurrentGpxToFile(object :
-						SavingTracksDbHelper.SaveGpxListener {
+						OsmandLocationUtils.SaveGpxListener {
 						override fun onSavingGpxFinish(path: String) {
 							(activity as MainActivity).shareGpx(path)
 						}
 
-						override fun onSavingGpxError(warnings: MutableList<String>?) {
+						override fun onSavingGpxError(warnings: List<String>?) {
 							Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
 						}
 					})
 				}
 			}
 		}
+
+		updateGpxInfo()
 
 		return mainView
 	}
@@ -189,12 +190,16 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun saveCurrentGpxToFile(listener: SavingTracksDbHelper.SaveGpxListener) {
-		app.savingTracksDbHelper.saveGpx(listener, app.getExternalFilesDir(null), gpxFile)
+	private fun saveCurrentGpxToFile(listener: OsmandLocationUtils.SaveGpxListener) {
+		if (!gpxFile.isEmpty) {
+			OsmandLocationUtils.saveGpx(app, listener, app.getExternalFilesDir(null)!!, gpxFile)
+		}
 	}
 
 	private fun readFromBundle(bundle: Bundle?) {
 		bundle?.also {
+			userId = it.getInt(USER_ID_KEY)
+			chatId = it.getLong(CHAT_ID_KEY)
 			startCalendar.timeInMillis = it.getLong(START_KEY)
 			endCalendar.timeInMillis = it.getLong(END_KEY)
 		}
@@ -205,7 +210,10 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun updateGpxInfo() {
-		gpxFile = app.savingTracksDbHelper.collectRecordedDataForUser(gpxFile.userId, gpxFile.chatId, startCalendar.timeInMillis, endCalendar.timeInMillis)
+		val emm = app.locationMessages.getMessagesForUserInChat(
+			userId, chatId, startCalendar.timeInMillis, endCalendar.timeInMillis)
+
+		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(emm).firstOrNull()?:GPXUtilities.GPXFile()
 		updateGPXStatisticRow()
 		updateDateAndTimeButtons()
 		updateGPXMap()
@@ -229,7 +237,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private fun updateGPXMap() {
 		saveCurrentGpxToFile(object :
-			SavingTracksDbHelper.SaveGpxListener {
+			OsmandLocationUtils.SaveGpxListener {
 			override fun onSavingGpxFinish(path: String) {
 				val mgr = activity?.getSystemService(Context.WINDOW_SERVICE)
 				if (mgr != null) {
@@ -242,7 +250,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 				}
 			}
 
-			override fun onSavingGpxError(warnings: MutableList<String>?) {
+			override fun onSavingGpxError(warnings: List<String>?) {
 				log.debug("onSavingGpxError ${warnings?.firstOrNull()}")
 			}
 		})
@@ -299,18 +307,21 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		private const val TAG = "UserGpxInfoFragment"
 		private const val START_KEY = "start_key"
 		private const val END_KEY = "end_key"
+		private const val USER_ID_KEY = "user_id_key"
+		private const val CHAT_ID_KEY = "chat_id_key"
 
 		private const val GPX_TRACK_COLOR = -65536
 
-		fun showInstance(fm: FragmentManager, gpxFile: GPXUtilities.GPXFile, start: Long, end: Long): Boolean {
+		fun showInstance(fm: FragmentManager,userId:Int,chatId:Long, start: Long, end: Long): Boolean {
 			return try {
 				val fragment = UserGpxInfoFragment().apply {
 					arguments = Bundle().apply {
+						putInt(USER_ID_KEY, userId)
+						putLong(CHAT_ID_KEY, chatId)
 						putLong(START_KEY, start)
 						putLong(END_KEY, end)
 					}
 				}
-				fragment.gpxFile = gpxFile
 				fragment.show(fm, TAG)
 				true
 			} catch (e: RuntimeException) {

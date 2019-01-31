@@ -19,6 +19,8 @@ import android.widget.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.LocationMessages
+import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
@@ -183,7 +185,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onStop() {
 		super.onStop()
 		settings.save()
-		app.messagesDbHelper.saveMessages()
 	}
 
 	override fun onDestroy() {
@@ -291,6 +292,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		if (!app.showLocationHelper.showingLocation && settings.hasAnyChatToShowOnMap()) {
 			app.showLocationHelper.startShowingLocation()
 		}
+		if (app.telegramService == null) {
+			messages.forEach {
+					app.locationMessages.addNewLocationMessage(it)
+			}
+		}
 	}
 
 	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {}
@@ -341,7 +347,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
 			if (app.isInternetConnectionAvailable) {
-				app.messagesDbHelper.clearMessages()
+				app.locationMessages.clearBufferedMessages()
 				settings.clear()
 				telegramHelper.logout()
 			} else {

@@ -21,6 +21,7 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.telegram.utils.UiUtils
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
@@ -328,7 +329,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 				val message = telegramHelper.getChatMessages(itemId).firstOrNull()
 				val content = message?.content
 				if (message != null && content is TdApi.MessageLocation && (location != null && content.location != null)) {
-					val lastUpdated = telegramHelper.getLastUpdatedTime(message)
+					val lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 					holder.description?.visibility = View.VISIBLE
 					holder.description?.text = OsmandFormatter.getListItemLiveTimeDescr(app, lastUpdated)
 

@@ -231,7 +231,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	override fun onResume() {
 		super.onResume()
 		updateCurrentUserPhoto()
-		telegramHelper.getActiveLiveLocationMessages(null)
 		updateContent()
 		updateEnable = true
 		startHandler()
@@ -599,6 +598,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 
 			holder.title?.text = title
+			holder.icon?.setOnClickListener {
+				app.forceUpdateMyLocation()
+			}
 			if (holder is ChatViewHolder) {
 				holder.description?.visibility = View.GONE
 				if (live) {
@@ -714,6 +716,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						OsmandFormatter.getFormattedDuration(context!!, expiresIn, true)
 					)})"
 				}
+				holder.gpsPointsCollected?.apply {
+					if (shareInfo != null) {
+						val bufferedMessages = shareInfo.pendingTdLib + app.locationMessages.getBufferedMessagesForChat(shareInfo.chatId).size
+						text = "$bufferedMessages"
+					}
+				}
+				holder.gpsPointsSent?.apply {
+					if (shareInfo != null) {
+						text = "${shareInfo.sentMessages}"
+					}
+				}
 			}
 		}
 
@@ -751,6 +764,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val stopSharingDescr: TextView? = view.findViewById(R.id.stop_in)
 			val stopSharingFirstPart: TextView? = view.findViewById(R.id.ending_in_first_part)
 			val stopSharingSecondPart: TextView? = view.findViewById(R.id.ending_in_second_part)
+			val gpsPointsCollected: TextView? = view.findViewById(R.id.gps_points_collected)
+			val gpsPointsSent: TextView? = view.findViewById(R.id.gps_points_sent)
 		}
 	}
 
