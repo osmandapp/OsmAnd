@@ -124,6 +124,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app.telegramHelper.stopLiveMessagesUpdates()
 		app.telegramHelper.removeIncomingMessagesListener(this)
 		app.telegramHelper.removeOutgoingMessagesListener(this)
+		app.settings.save()
 		app.telegramService = null
 		mHandlerThread.quit()
 
