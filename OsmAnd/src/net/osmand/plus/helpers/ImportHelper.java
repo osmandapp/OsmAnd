@@ -25,7 +25,11 @@ import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -60,12 +64,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
+import org.apache.commons.logging.Log;
 
 /**
  * @author Koen Rabaey
  */
 public class ImportHelper {
-
+	public final static Log log = PlatformUtil.getLog(ImportHelper.class);
 	public static final String KML_SUFFIX = ".kml";
 	public static final String KMZ_SUFFIX = ".kmz";
 	public static final String GPX_SUFFIX = ".gpx";
@@ -248,39 +253,57 @@ public class ImportHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void importFavoritesImpl(final GPXFile gpxFile, final String fileName, final boolean forceImportFavourites) {
-		new AsyncTask<Void, Void, GPXFile>() {
-			ProgressDialog progress = null;
+		if(!app.isApplicationInitializing()) {
+			new AsyncTask<Void, Void, GPXFile>() {
+				ProgressDialog progress = null;
 
-			@Override
-			protected void onPreExecute() {
-				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
-			}
-
-			@Override
-			protected GPXFile doInBackground(Void... nothing) {
-				final List<FavouritePoint> favourites = asFavourites(gpxFile.getPoints(), fileName, forceImportFavourites);
-				final FavouritesDbHelper favoritesHelper = app.getFavorites();
-				for (final FavouritePoint favourite : favourites) {
-					favoritesHelper.deleteFavourite(favourite, false);
-					favoritesHelper.addFavourite(favourite, false);
+				@Override
+				protected void onPreExecute() {
+					progress = ProgressDialog
+						.show(activity, app.getString(R.string.loading_smth, ""),
+							app.getString(R.string.loading_data));
 				}
-				favoritesHelper.sortAll();
-				favoritesHelper.saveCurrentPointsIntoFile();
-				return null;
-			}
 
-			@Override
-			protected void onPostExecute(GPXFile result) {
-				if (isActivityNotDestroyed(activity)) {
-					progress.dismiss();
+				@Override
+				protected GPXFile doInBackground(Void... nothing) {
+					final List<FavouritePoint> favourites = asFavourites(gpxFile.getPoints(),
+						fileName, forceImportFavourites);
+					final FavouritesDbHelper favoritesHelper = app.getFavorites();
+					for (final FavouritePoint favourite : favourites) {
+						favoritesHelper.deleteFavourite(favourite, false);
+						favoritesHelper.addFavourite(favourite, false);
+					}
+					favoritesHelper.sortAll();
+					favoritesHelper.saveCurrentPointsIntoFile();
+					return null;
 				}
-				Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
-				final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
-				newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
-				activity.startActivity(newIntent);
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+				@Override
+				protected void onPostExecute(GPXFile result) {
+					if (isActivityNotDestroyed(activity)) {
+						progress.dismiss();
+					}
+					Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG)
+						.show();
+					final Intent newIntent = new Intent(activity,
+						app.getAppCustomization().getFavoritesActivity());
+					newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
+					activity.startActivity(newIntent);
+				}
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		} else {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					importFavoritesImpl(gpxFile, fileName, forceImportFavourites);
+				}
+			});
+		}
 	}
 
 	@SuppressLint("StaticFieldLeak")
