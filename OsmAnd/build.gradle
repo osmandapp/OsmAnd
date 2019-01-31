@@ -234,6 +234,12 @@ task validateTranslate {
 	}
 }
 
+task downloadWorldMiniBasemap {
+	doLast {
+		ant.get(src: 'http://builder.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
+	}
+}
+
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -292,13 +298,14 @@ task copyWidgetIcons(type: Exec) {
 
 task collectExternalResources {
 	dependsOn collectVoiceAssets,
-		collectFonts,
-		collectHelpContentsAssets,
-		collectHelpContentsStyle,
-		copyStyleIcons,
-		updateNoTranslate,
-		validateTranslate,
-		copyWidgetIcons
+			collectFonts,
+			collectHelpContentsAssets,
+			collectHelpContentsStyle,
+			copyStyleIcons,
+			updateNoTranslate,
+			validateTranslate,
+			copyWidgetIcons,
+			downloadWorldMiniBasemap
 }
 
 // Legacy core build
