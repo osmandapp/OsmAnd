@@ -4,19 +4,21 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import net.osmand.Location
 import net.osmand.PlatformUtil
+import net.osmand.data.LatLon
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.utils.OsmandLocationUtils
+import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
 class LocationMessages(val app: TelegramApplication) {
 
 	private val log = PlatformUtil.getLog(LocationMessages::class.java)
 
-	// todo - bufferedMessages is for prepared/pending messages only. On app start we read prepared/pending messages to bufferedMessages. After status changed to sent/error - remove message from buffered.
 	private var bufferedMessages = emptyList<BufferMessage>()
 
-	private var lastMessages = emptyList<LocationMessage>()
+	private var lastLocationPoints = mutableMapOf<LocationHistoryPoint, LatLon>()
 
 	private val dbHelper: SQLiteHelper
 
@@ -33,9 +35,12 @@ class LocationMessages(val app: TelegramApplication) {
 		return bufferedMessages.filter { it.chatId==chatId }.sortedBy { it.time }
 	}
 
-	// todo - read from db by date (Victor's suggestion - filter by one day only. Need to be changed in UI also.
 	fun getIngoingMessages(currentUserId: Int, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getIngoingMessages(currentUserId, start, end)
+	}
+
+	fun getIngoingUserLocations(currentUserId: Int, start: Long, end: Long): List<UserLocations> {
+		return dbHelper.getIngoingUserLocations(currentUserId, start, end)
 	}
 
 	fun getMessagesForUserInChat(userId: Int, chatId: Long, start: Long, end: Long): List<LocationMessage> {
@@ -44,6 +49,10 @@ class LocationMessages(val app: TelegramApplication) {
 
 	fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getMessagesForUser(userId, start, end)
+	}
+
+	fun getUserLocations(userId: Int, start: Long, end: Long): UserLocations? {
+		return dbHelper.getUserLocations(userId, start, end)
 	}
 
 	fun addBufferedMessage(message: BufferMessage) {
@@ -58,15 +67,26 @@ class LocationMessages(val app: TelegramApplication) {
 		log.debug("addNewLocationMessage ${message.id}")
 		val type = OsmandLocationUtils.getMessageType(message, app.telegramHelper)
 
-		val previousMessage = lastMessages.firstOrNull { it.chatId == message.chatId && it.userId == message.senderUserId && it.type == type }
-		val locationMessage = OsmandLocationUtils.parseMessage(message, app.telegramHelper, previousMessage)
+		val newItem = LocationHistoryPoint(message.senderUserId, message.chatId, type)
+		val previousMessageLatLon = lastLocationPoints[newItem]
+		val locationMessage = OsmandLocationUtils.parseMessage(message, app.telegramHelper, previousMessageLatLon)
 		if (locationMessage != null) {
 			dbHelper.addLocationMessage(locationMessage)
-			val messages = mutableListOf(*this.lastMessages.toTypedArray())
-			messages.remove(previousMessage)
-			messages.add(locationMessage)
-			this.lastMessages = messages
+			lastLocationPoints[newItem] = LatLon(locationMessage.lat, locationMessage.lon)
 		}
+	}
+
+	fun addMyLocationMessage(loc: Location) {
+		log.debug("addMyLocationMessage")
+		val currentUserId = app.telegramHelper.getCurrentUserId()
+		val newItem = LocationHistoryPoint(currentUserId, 0, -1)
+		val previousMessageLatLon = lastLocationPoints[newItem]
+		val distance = if (previousMessageLatLon != null) { MapUtils.getDistance(previousMessageLatLon, loc.latitude, loc.longitude) } else 0.0
+		val message = LocationMessages.LocationMessage(currentUserId, 0, loc.latitude, loc.longitude, loc.altitude,
+			loc.speed.toDouble(), loc.accuracy.toDouble(), loc.bearing.toDouble(), loc.time, -1, 0, distance)
+
+		dbHelper.addLocationMessage(message)
+		lastLocationPoints[newItem] = LatLon(message.lat, message.lon)
 	}
 
 	fun clearBufferedMessages() {
@@ -88,7 +108,7 @@ class LocationMessages(val app: TelegramApplication) {
 	}
 
 	private fun readLastMessages() {
-		this.lastMessages = dbHelper.getLastMessages()
+		this.lastLocationPoints = dbHelper.getLastMessages()
 	}
 
 	private class SQLiteHelper(context: Context) :
@@ -121,7 +141,7 @@ class LocationMessages(val app: TelegramApplication) {
 		internal fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			readableDatabase?.rawQuery(
-				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_TIME ASC ",
+				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_CHAT_ID ASC, $COL_TYPE DESC, $COL_TIME ASC ",
 				arrayOf(userId.toString()))?.apply {
 				if (moveToFirst()) {
 					do {
@@ -131,6 +151,33 @@ class LocationMessages(val app: TelegramApplication) {
 				close()
 			}
 			return res
+		}
+
+		internal fun getUserLocations(userId: Int, start: Long, end: Long): UserLocations? {
+			var userLocations: UserLocations? = null
+			readableDatabase?.rawQuery(
+				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_CHAT_ID ASC, $COL_TYPE DESC, $COL_TIME ASC ",
+				arrayOf(userId.toString()))?.apply {
+				var type = -1
+				val userLocationsMap: MutableMap<Int, List<LocationMessage>> = mutableMapOf()
+				userLocations = UserLocations(userId, 0, emptyMap())
+				var userLocationsListBytetype: MutableList<LocationMessage>? = null
+				if (moveToFirst()) {
+					do {
+						val locationMessage = readLocationMessage(this@apply)
+						if (type != locationMessage.type) {
+							type = locationMessage.type
+							userLocationsListBytetype = mutableListOf()
+							userLocationsListBytetype.add(locationMessage)
+							userLocationsMap.set(type, userLocationsListBytetype)
+						} else {
+							userLocationsListBytetype?.add(locationMessage)
+						}
+					} while (moveToNext())
+				}
+				close()
+			}
+			return userLocations
 		}
 
 		internal fun getPreviousMessage(userId: Int, chatId: Long): LocationMessage? {
@@ -149,7 +196,7 @@ class LocationMessages(val app: TelegramApplication) {
 		internal fun getIngoingMessages(currentUserId: Int, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			readableDatabase?.rawQuery(
-				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID != ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID ASC, $COL_CHAT_ID ASC, $COL_TIME ASC ",
+				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID != ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_TYPE DESC, $COL_TIME ",
 				arrayOf(currentUserId.toString()))?.apply {
 				if (moveToFirst()) {
 					do {
@@ -161,10 +208,50 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
+		internal fun getIngoingUserLocations(currentUserId: Int, start: Long, end: Long): List<UserLocations> {
+			val res = arrayListOf<UserLocations>()
+			readableDatabase?.rawQuery(
+				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID != ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_TYPE DESC, $COL_TIME ",
+				arrayOf(currentUserId.toString()))?.apply {
+				var type = -1
+				var userId = -1
+				var chatId = -1L
+				var userLocations: UserLocations? = null
+				var userLocationsMap: MutableMap<Int, List<LocationMessage>>? = null
+				var userLocationsListBytetype: MutableList<LocationMessage>? = null
+				if (moveToFirst()) {
+					do {
+						val locationMessage = readLocationMessage(this@apply)
+						if (userId != locationMessage.userId || chatId != locationMessage.chatId) {
+							userId = locationMessage.userId
+							chatId = locationMessage.chatId
+							type = locationMessage.type
+							userLocationsMap = mutableMapOf()
+							userLocationsListBytetype = mutableListOf()
+							userLocationsListBytetype.add(locationMessage)
+							userLocationsMap[type] = userLocationsListBytetype
+							userLocations = UserLocations(userId, chatId, userLocationsMap)
+							res.add(userLocations)
+						}
+						if (type != locationMessage.type) {
+							type = locationMessage.type
+							userLocationsListBytetype = mutableListOf()
+							userLocationsListBytetype.add(locationMessage)
+							userLocationsMap?.set(type, userLocationsListBytetype)
+						} else {
+							userLocationsListBytetype?.add(locationMessage)
+						}
+					} while (moveToNext())
+				}
+				close()
+			}
+			return res
+		}
+
 		internal fun getMessagesForUserInChat(userId: Int, chatId: Long, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			readableDatabase?.rawQuery(
-				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_CHAT_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_TIME ASC ",
+				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_CHAT_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_TYPE DESC, $COL_TIME ",
 				arrayOf(userId.toString(), chatId.toString()))?.apply {
 				if (moveToFirst()) {
 					do {
@@ -189,12 +276,12 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun getLastMessages(): List<LocationMessage> {
-			val res = arrayListOf<LocationMessage>()
-			readableDatabase?.rawQuery(TIMELINE_TABLE_SELECT, null)?.apply {
+		internal fun getLastMessages(): MutableMap<LocationHistoryPoint, LatLon> {
+			val res = mutableMapOf<LocationHistoryPoint, LatLon>()
+			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT_HISTORY_POINTS ORDER BY $COL_TIME ASC", null)?.apply {
 				if (moveToFirst()) {
 					do {
-						res.add(readLocationMessage(this@apply))
+//						res.add(readLocationMessage(this@apply))
 					} while (moveToNext())
 				}
 				close()
@@ -231,6 +318,16 @@ class LocationMessages(val app: TelegramApplication) {
 			val type = cursor.getInt(8)
 
 			return BufferMessage(chatId, lat, lon, altitude, speed, hdop, bearing, date, type)
+		}
+
+		internal fun readLocationHistoryPoint(cursor: Cursor): Pair<LocationHistoryPoint, LatLon> {
+			val userId = cursor.getInt(0)
+			val chatId = cursor.getLong(1)
+			val lat = cursor.getDouble(2)
+			val lon = cursor.getDouble(3)
+			val type = cursor.getInt(4)
+
+			return Pair(LocationHistoryPoint(userId, chatId, type), LatLon(lat, lon))
 		}
 
 		internal fun clearBufferedMessages() {
@@ -288,6 +385,9 @@ class LocationMessages(val app: TelegramApplication) {
 			private const val TIMELINE_TABLE_SELECT =
 				"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_ALTITUDE, $COL_SPEED, $COL_HDOP, $COL_BEARING, $COL_TIME, $COL_TYPE, $COL_MESSAGE_ID, $COL_DISTANCE_FROM_PREV FROM $TIMELINE_TABLE_NAME"
 
+			private const val TIMELINE_TABLE_SELECT_HISTORY_POINTS =
+				"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_TIME, $COL_TYPE FROM $TIMELINE_TABLE_NAME"
+
 			private const val TIMELINE_TABLE_CLEAR = "DELETE FROM $TIMELINE_TABLE_NAME"
 
 			private const val TIMELINE_TABLE_DELETE = "DROP TABLE IF EXISTS $TIMELINE_TABLE_NAME"
@@ -334,6 +434,40 @@ class LocationMessages(val app: TelegramApplication) {
 		val bearing: Double,
 		val time: Long,
 		val type: Int)
+
+	data class UserLocations(
+		var userId: Int,
+		var chatId: Long,
+		var locationsByType: Map<Int, List<LocationMessage>>
+	)
+
+	data class LocationHistoryPoint(
+		val userId: Int,
+		val chatId: Long,
+		val type: Int
+	) {
+
+		override fun equals(other: Any?): Boolean {
+			if (other == null) {
+				return false
+			}
+			if (other !is LocationHistoryPoint) {
+				return false
+			}
+			val o = other as LocationHistoryPoint?
+			return this.userId == o!!.userId && this.chatId == o.chatId && this.type == o.type
+		}
+
+		override fun hashCode(): Int {
+			val prime = 31
+			var result = 1
+			result = prime * result + userId.hashCode()
+			result = prime * result + chatId.hashCode()
+			result = prime * result + type.hashCode()
+			return result
+		}
+	}
+
 
 	companion object {
 

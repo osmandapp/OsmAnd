@@ -20,12 +20,10 @@ import android.widget.Toast
 import net.osmand.PlatformUtil
 import net.osmand.aidl.gpx.AGpxBitmap
 import net.osmand.telegram.R
+import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
-import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.GPXUtilities
-import net.osmand.telegram.utils.OsmandFormatter
-import net.osmand.telegram.utils.OsmandLocationUtils
+import net.osmand.telegram.utils.*
 import net.osmand.util.Algorithms
 import java.io.File
 import java.text.SimpleDateFormat
@@ -51,6 +49,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private var startCalendar = Calendar.getInstance()
 	private var endCalendar = Calendar.getInstance()
+
+	private var locationMessages = emptyList<LocationMessages.LocationMessage>()
 
 	private var userId = -1
 	private var chatId = -1L
@@ -115,10 +115,10 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_speed_average))
 		}
 		mainView.findViewById<ImageView>(R.id.distance_icon).apply {
-			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_altitude_range))
+			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_sort_by_distance))
 		}
 		mainView.findViewById<ImageView>(R.id.duration_icon).apply {
-			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_altitude_range))
+			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_time_span))
 		}
 
 		updateGPXStatisticRow()
@@ -192,7 +192,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private fun saveCurrentGpxToFile(listener: OsmandLocationUtils.SaveGpxListener) {
 		if (!gpxFile.isEmpty) {
-			OsmandLocationUtils.saveGpx(app, listener, app.getExternalFilesDir(null)!!, gpxFile)
+			val file = File(app.getExternalFilesDir(null), TRACKS_DIR)
+			OsmandLocationUtils.saveGpx(app, listener, file, gpxFile)
 		}
 	}
 
@@ -210,10 +211,9 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun updateGpxInfo() {
-		val emm = app.locationMessages.getMessagesForUserInChat(
-			userId, chatId, startCalendar.timeInMillis, endCalendar.timeInMillis)
+		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, startCalendar.timeInMillis, endCalendar.timeInMillis)
 
-		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(emm).firstOrNull()?:GPXUtilities.GPXFile()
+		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).firstOrNull()?:GPXUtilities.GPXFile()
 		updateGPXStatisticRow()
 		updateDateAndTimeButtons()
 		updateGPXMap()
@@ -246,7 +246,9 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					val widthPixels = dm.widthPixels - (2 * app.resources.getDimensionPixelSize(R.dimen.content_padding_standard))
 					val heightPixels = AndroidUtils.dpToPx(app, 152f)
 					val gpxUri = AndroidUtils.getUriForFile(app, File(path))
-					app.osmandAidlHelper.getBitmapForGpx(gpxUri, dm.density , widthPixels, heightPixels, GPX_TRACK_COLOR)
+					app.osmandAidlHelper.execOsmandApi {
+						app.osmandAidlHelper.getBitmapForGpx(gpxUri, dm.density , widthPixels, heightPixels, GPX_TRACK_COLOR)
+					}
 				}
 			}
 

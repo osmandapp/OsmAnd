@@ -19,8 +19,6 @@ import android.widget.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.helpers.LocationMessages
-import net.osmand.telegram.helpers.LocationMessages.LocationMessage
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
@@ -294,7 +292,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 		if (app.telegramService == null) {
 			messages.forEach {
+				if (!it.isOutgoing) {
 					app.locationMessages.addNewLocationMessage(it)
+				}
 			}
 		}
 	}

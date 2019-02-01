@@ -277,7 +277,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app().showLocationHelper.startShowMessagesTask(chatId, *messages)
 		messages.forEach {
-			app().locationMessages.addNewLocationMessage(it)
+			if (!it.isOutgoing) {
+				app().locationMessages.addNewLocationMessage(it)
+			}
 		}
 	}
 
@@ -294,7 +296,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			app().settings.updateShareInfo(it)
 			app().shareLocationHelper.checkAndSendBufferMessagesToChat(it.chatId)
 			if (it.sendingState == null && (it.content is TdApi.MessageLocation || it.content is TdApi.MessageText)) {
-				app().locationMessages.addNewLocationMessage(it)
+				if (!it.isOutgoing) {
+					app().locationMessages.addNewLocationMessage(it)
+				}
 			}
 		}
 	}

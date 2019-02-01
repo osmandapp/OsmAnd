@@ -131,10 +131,6 @@ object TelegramUiHelper {
 		}
 	}
 
-	fun gpxToChatItem(helper: TelegramHelper, gpx: GPXFile, simpleUserItem: Boolean): GpxChatItem? {
-		return if (simpleUserItem) gpxToUserGpxChatItem(helper, gpx) else gpxToGpxChatItem(helper, gpx)
-	}
-
 	private fun botMessageToLocationItem(
 		chat: TdApi.Chat,
 		content: MessageOsmAndBotLocation
@@ -256,47 +252,31 @@ object TelegramUiHelper {
 		}
 	}
 
-	fun locationMessagesToChatItem(
-		helper: TelegramHelper,
-		messages: List<LocationMessages.LocationMessage>
-	): LocationMessagesChatItem? {
-		val message = messages.firstOrNull()
-		val user = helper.getUser(message?.userId ?: -1) ?: return null
-		val chat = helper.getChat(message?.chatId ?: -1) ?: return null
+	fun userLocationsToChatItem(helper: TelegramHelper, userLocation: LocationMessages.UserLocations): LocationMessagesChatItem? {
+		val user = helper.getUser(userLocation.userId)
+		val chat = helper.getChat(userLocation.chatId)
 		return LocationMessagesChatItem().apply {
-			chatId = chat.id
-			chatTitle = chat.title
-			locationMessages = messages
-			name = TelegramUiHelper.getUserName(user)
-			if (helper.isGroup(chat)) {
-				photoPath = helper.getUserPhotoPath(user)
-				groupPhotoPath = chat.photo?.small?.local?.path
+			if (chat != null) {
+				chatId = chat.id
+				chatTitle = chat.title
+				if (helper.isGroup(chat)) {
+					photoPath = helper.getUserPhotoPath(user)
+					groupPhotoPath = chat.photo?.small?.local?.path
+				} else {
+					photoPath = user?.profilePhoto?.small?.local?.path
+					privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
+				}
 			} else {
-				photoPath = user.profilePhoto?.small?.local?.path
+				photoPath = user?.profilePhoto?.small?.local?.path
 			}
+			if (user != null) {
+				name = TelegramUiHelper.getUserName(user)
+				userId = user.id
+			}
+			userLocations = userLocation
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
-			userId = user.id
-			privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
 			chatWithBot = helper.isBot(userId)
-			lastUpdated = (messages.maxBy { it.time }?.time ?: -1).toInt()
-		}
-	}
-
-	private fun gpxToUserGpxChatItem(
-		helper: TelegramHelper,
-		gpx: GPXFile
-	): GpxChatItem? {
-		val user = helper.getUser(gpx.userId) ?: return null
-		return GpxChatItem().apply {
-			gpxFile = gpx
-			name = TelegramUiHelper.getUserName(user)
-			photoPath = user.profilePhoto?.small?.local?.path
-			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
-			placeholderId = R.drawable.img_user_picture
-			userId = user.id
-			chatWithBot = helper.isBot(userId)
-			lastUpdated = (gpx.modifiedTime / 1000).toInt()
 		}
 	}
 
@@ -368,7 +348,7 @@ object TelegramUiHelper {
 
 	class LocationMessagesChatItem : ListItem() {
 
-		var locationMessages: List<LocationMessages.LocationMessage> = emptyList()
+		var userLocations: LocationMessages.UserLocations? = null
 			internal set
 		var groupPhotoPath: String? = null
 			internal set
