@@ -46,7 +46,7 @@ public class FavouritesDbHelper {
 	private List<FavoriteGroup> favoriteGroups = new ArrayList<FavouritesDbHelper.FavoriteGroup>();
 	private Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<String, FavouritesDbHelper.FavoriteGroup>();
 	private final OsmandApplication context;
-	protected static final String HIDDEN = "HIDDEN";
+	protected static final String HIDDEN = "hidden";
 	private static final String DELIMETER = "__";
 
 	private Set<FavoritesListener> listeners = new HashSet<>();
