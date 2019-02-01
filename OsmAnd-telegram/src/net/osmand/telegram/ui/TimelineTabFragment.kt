@@ -159,17 +159,17 @@ class TimelineTabFragment : Fragment() {
 		val res = mutableListOf<ListItem>()
 		val currentUserId = telegramHelper.getCurrentUser()?.id
 		if (currentUserId != null) {
-			val outgoingMessages = app.locationMessages.getMessagesForUser(currentUserId, start, end)
-			TelegramUiHelper.locationMessagesToChatItem(telegramHelper, outgoingMessages)?.also { chatItem ->
-					res.add(chatItem)
-				}
-			val ingoingMessages = app.locationMessages.getIngoingMessages(currentUserId, start, end)
-			val emm = ingoingMessages.distinctBy { Pair(it.userId, it.chatId) }
-			emm.forEach { message ->
-				TelegramUiHelper.locationMessagesToChatItem(telegramHelper,
-					ingoingMessages.filter { it.chatId == message.chatId && it.userId == message.userId })?.also { chatItem ->
+			val currentUserLocations = app.locationMessages.getUserLocations(currentUserId, start, end)
+			if (currentUserLocations != null) {
+				TelegramUiHelper.userLocationsToChatItem(telegramHelper, currentUserLocations)?.also { chatItem ->
 						res.add(chatItem)
 					}
+			}
+			val ingoingUserLocations = app.locationMessages.getIngoingUserLocations(currentUserId, start, end)
+			ingoingUserLocations.forEach {
+				TelegramUiHelper.userLocationsToChatItem(telegramHelper, it)?.also { chatItem ->
+					res.add(chatItem)
+				}
 			}
 		}
 
@@ -205,17 +205,21 @@ class TimelineTabFragment : Fragment() {
 			val lastItem = position == itemCount - 1
 			val item = items[position]
 			val currentUserId = telegramHelper.getCurrentUser()?.id ?: 0
-
 			TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, R.drawable.img_user_picture_active, false)
 			holder.title?.text = item.name
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			holder.lastTelegramUpdateTime?.visibility = View.GONE
 
-			if (item is TelegramUiHelper.LocationMessagesChatItem) {
-				val distance = OsmandFormatter.getFormattedDistance(getDistance(item.locationMessages),app)
-				val name = if ((!item.privateChat || item.chatWithBot) && item.userId != currentUserId) item.getVisibleName() else ""
-				holder.groupDescrContainer?.visibility = View.VISIBLE
-				holder.groupTitle?.text = "$distance (${getString(R.string.points_size, item.locationMessages.size)}) $name"
+			if (item is TelegramUiHelper.LocationMessagesChatItem ) {
+				val userLocations = item.userLocations
+
+				if(userLocations!=null){
+					val pair = getDistanceAndCountedPoints(userLocations)
+					val distance = OsmandFormatter.getFormattedDistance(pair.first,app)
+					val name = if ((!item.privateChat || item.chatWithBot) && item.userId != currentUserId) item.getVisibleName() else ""
+					holder.groupDescrContainer?.visibility = View.VISIBLE
+					holder.groupTitle?.text = "$distance (${getString(R.string.points_size, pair.second)}) $name"
+				}
 				TelegramUiHelper.setupPhoto(app, holder.groupImage, item.groupPhotoPath, item.placeholderId, false)
 				holder.userRow?.setOnClickListener {
 					childFragmentManager.also {
@@ -229,12 +233,27 @@ class TimelineTabFragment : Fragment() {
 			}
 		}
 
-		private fun getDistance(messages: List<LocationMessages.LocationMessage>): Float {
+		private fun getDistanceAndCountedPoints(userLocations: LocationMessages.UserLocations): Pair<Float, Int> {
+			val textUserLoc = userLocations.locationsByType[LocationMessages.TYPE_USER_TEXT]
+			val textBotLoc = userLocations.locationsByType[LocationMessages.TYPE_BOT_TEXT]
 			var dist = 0.0
-			messages.forEach {
-				dist += it.distanceFromPrev
+			var countedPoints = 0
+			when {
+				textUserLoc != null -> textUserLoc.forEach {
+					dist += it.distanceFromPrev
+					countedPoints++
+				}
+				textBotLoc != null -> textBotLoc.forEach {
+					dist += it.distanceFromPrev
+					countedPoints++
+				}
+				else -> userLocations.locationsByType.values.firstOrNull()?.forEach {
+					dist += it.distanceFromPrev
+					countedPoints++
+				}
 			}
-			return dist.toFloat()
+
+			return Pair(dist.toFloat(), countedPoints)
 		}
 
 		override fun getItemCount() = items.size

@@ -2,6 +2,7 @@ package net.osmand.telegram.utils
 
 import android.os.AsyncTask
 import net.osmand.Location
+import net.osmand.data.LatLon
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.LocationMessages.BufferMessage
@@ -15,6 +16,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
+const val TRACKS_DIR = "tracker/"
 
 object OsmandLocationUtils {
 
@@ -83,10 +85,11 @@ object OsmandLocationUtils {
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
 			lastUpdated = getLastUpdatedTime(message)
+			type = LocationMessages.TYPE_USER_MAP
 		}
 	}
 
-	fun parseMessage(message: TdApi.Message, helper: TelegramHelper, previousMessage: LocationMessage?): LocationMessage? {
+	fun parseMessage(message: TdApi.Message, helper: TelegramHelper, previousMessageLatLon: LatLon?): LocationMessage? {
 		var locationMessage: LocationMessage? = null
 		val oldContent = message.content
 		val messageType = getMessageType(message,helper)
@@ -114,10 +117,8 @@ object OsmandLocationUtils {
 		}
 
 		if (parsedMessageContent != null) {
-			val distanceFromPrev = if (previousMessage != null) {
-				MapUtils.getDistance(previousMessage.lat, previousMessage.lon,
-					parsedMessageContent.lat, parsedMessageContent.lon)
-			} else 0.0
+			val distanceFromPrev = if (previousMessageLatLon != null) {
+				MapUtils.getDistance(previousMessageLatLon, parsedMessageContent.lat, parsedMessageContent.lon) } else 0.0
 
 			locationMessage = LocationMessage(helper.getSenderMessageId(message), message.chatId, parsedMessageContent.lat,
 					parsedMessageContent.lon, parsedMessageContent.altitude, parsedMessageContent.speed, parsedMessageContent.hdop,
@@ -403,11 +404,16 @@ object OsmandLocationUtils {
 		var segment: GPXUtilities.TrkSegment? = null
 		var track: GPXUtilities.Track? = null
 		var gpx: GPXUtilities.GPXFile? = null
+		var countedLocations = 0
 
 		items.forEach {
 			val userId = it.userId
 			val chatId = it.chatId
 			val time = it.time
+			if (previousTime >= time) {
+				return@forEach
+			}
+			countedLocations++
 			if (previousUserId != userId || (newGpxPerChat && previousChatId != chatId)) {
 				gpx = GPXUtilities.GPXFile()
 				gpx!!.chatId = chatId
@@ -521,10 +527,6 @@ object OsmandLocationUtils {
 							userId.toString() + "_" + SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(Date(pt.time))
 						}
 						fout = File(dir, "$fileName.gpx")
-						var ind = 1
-						while (fout.exists()) {
-							fout = File(dir, "${fileName}_${++ind}.gpx")
-						}
 					}
 					val warn = GPXUtilities.writeGpxFile(fout, gpxFile, app)
 					if (warn != null) {

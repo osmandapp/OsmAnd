@@ -718,8 +718,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				holder.gpsPointsCollected?.apply {
 					if (shareInfo != null) {
-						val bufferedMessages = shareInfo.pendingTdLib + app.locationMessages.getBufferedMessagesForChat(shareInfo.chatId).size
-						text = "$bufferedMessages"
+						text = "${shareInfo.pendingTdLib + shareInfo.collectedMessages}"
 					}
 				}
 				holder.gpsPointsSent?.apply {

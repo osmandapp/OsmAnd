@@ -203,6 +203,15 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		}
 	}
 
+	fun execOsmandApi(action: (() -> Unit)) {
+		if (!isOsmandConnected() && isOsmandBound()) {
+			connectOsmand()
+		}
+		if (isOsmandConnected()) {
+			action.invoke()
+		}
+	}
+
 	private fun bindService(packageName: String): Boolean {
 		return if (mIOsmAndAidlInterface == null) {
 			val intent = Intent("net.osmand.aidl.OsmandAidlService")

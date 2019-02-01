@@ -13,6 +13,8 @@ import org.json.JSONObject
 
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
+private const val MY_LOCATION_UPDATE_MS = 15000 // 15 sec
+
 class ShareLocationHelper(private val app: TelegramApplication) {
 
 	private val log = PlatformUtil.getLog(ShareLocationHelper::class.java)
@@ -26,7 +28,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	var distance: Int = 0
 		private set
 
-	var lastLocationMessageSentTime: Long = 0
+	var lastLocationUpdateTime: Long = 0
 
 	var lastLocation: Location? = null
 		set(value) {
@@ -52,7 +54,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			if (app.settings.getChatsShareInfo().isNotEmpty()) {
 				shareLocationMessages(location, app.telegramHelper.getCurrentUserId())
 			}
-			lastLocationMessageSentTime = System.currentTimeMillis()
+			lastLocationUpdateTime = System.currentTimeMillis()
 		}
 		app.settings.updateSharingStatusHistory()
 		refreshNotification()
@@ -188,6 +190,11 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		val chatsShareInfo = app.settings.getChatsShareInfo()
 		val latitude = location.latitude
 		val longitude = location.longitude
+		val altitude = location.altitude
+		val speed = location.speed.toDouble()
+		val accuracy = location.accuracy.toDouble()
+		val bearing = location.bearing.toDouble()
+		val time = location.time
 		val sharingMode = app.settings.currentSharingMode
 		val isBot = sharingMode != userId.toString()
 		var bufferedMessagesFull = false
@@ -206,10 +213,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			if (shareInfo.pendingTdLib >= 10) {
 				bufferedMessagesFull = true
 			}
-			val message = BufferMessage(
-				shareInfo.chatId, latitude, longitude, location.altitude, location.speed.toDouble(),
-				location.accuracy.toDouble(), location.bearing.toDouble(), System.currentTimeMillis(), type
-			)
+			val message = BufferMessage(shareInfo.chatId, latitude, longitude, altitude, speed, accuracy, bearing, time, type)
 
 			if (type == LocationMessages.TYPE_USER_MAP || type == LocationMessages.TYPE_BOT_MAP) {
 				prepareMapMessage(shareInfo, message, isBot, sharingMode)
@@ -219,6 +223,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				prepareMapAndTextMessage(shareInfo, message, isBot, sharingMode)
 			}
 		}
+		if (System.currentTimeMillis() - lastLocationUpdateTime > MY_LOCATION_UPDATE_MS) {
+			app.locationMessages.addMyLocationMessage(location)
+		}
 		if (bufferedMessagesFull) {
 			checkNetworkType()
 		}
@@ -226,9 +233,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 	private fun prepareTextMessage(shareInfo: TelegramSettings.ShareChatInfo,message: BufferMessage,isBot:Boolean, sharingMode: String) {
 		log.debug("prepareTextMessage $message")
-		shareInfo.collectedMessages++
 		if (shareInfo.currentTextMessageId == -1L) {
 			if (shareInfo.pendingTextMessage) {
+				shareInfo.collectedMessages++
 				app.locationMessages.addBufferedMessage(message)
 			} else {
 				if (isBot) {
@@ -244,6 +251,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				if (shareInfo.pendingTdLib < 10) {
 					app.telegramHelper.editTextLocation(shareInfo, message)
 				} else {
+					shareInfo.collectedMessages++
 					app.locationMessages.addBufferedMessage(message)
 				}
 			}
@@ -252,9 +260,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 	private fun prepareMapMessage(shareInfo: TelegramSettings.ShareChatInfo,message: BufferMessage,isBot:Boolean, sharingMode: String) {
 		log.debug("prepareMapMessage $message")
-		shareInfo.collectedMessages++
 		if (shareInfo.currentMapMessageId == -1L) {
 			if (shareInfo.pendingMapMessage) {
+				shareInfo.collectedMessages++
 				app.locationMessages.addBufferedMessage(message)
 			} else {
 				if (isBot) {
@@ -279,8 +287,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 	private fun prepareMapAndTextMessage(shareInfo: TelegramSettings.ShareChatInfo, message: BufferMessage, isBot:Boolean, sharingMode: String) {
 		log.debug("prepareMapAndTextMessage $message")
-		shareInfo.collectedMessages++
 		if (shareInfo.pendingMapMessage || shareInfo.pendingTextMessage || shareInfo.pendingTdLib >= 10) {
+			shareInfo.collectedMessages++
 			app.locationMessages.addBufferedMessage(message)
 		} else {
 			if (isBot) {
