@@ -718,12 +718,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				holder.gpsPointsCollected?.apply {
 					if (shareInfo != null) {
-						text = "${shareInfo.pendingTdLib + shareInfo.collectedMessages}"
+						text = " ${shareInfo.sentMessages}"
 					}
 				}
 				holder.gpsPointsSent?.apply {
 					if (shareInfo != null) {
-						text = "${shareInfo.sentMessages}"
+						text = getString(R.string.gps_points_in_buffer,shareInfo.pendingTdLib + app.locationMessages.getBufferedMessagesCount())
 					}
 				}
 			}
@@ -764,7 +764,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val stopSharingFirstPart: TextView? = view.findViewById(R.id.ending_in_first_part)
 			val stopSharingSecondPart: TextView? = view.findViewById(R.id.ending_in_second_part)
 			val gpsPointsCollected: TextView? = view.findViewById(R.id.gps_points_collected)
-			val gpsPointsSent: TextView? = view.findViewById(R.id.gps_points_sent)
+			val gpsPointsSent: TextView? = view.findViewById(R.id.gps_points_in_buffer_txt)
 		}
 	}
 

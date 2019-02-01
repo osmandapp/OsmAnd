@@ -39,8 +39,8 @@ class LocationMessages(val app: TelegramApplication) {
 		return dbHelper.getIngoingMessages(currentUserId, start, end)
 	}
 
-	fun getIngoingUserLocations(currentUserId: Int, start: Long, end: Long): List<UserLocations> {
-		return dbHelper.getIngoingUserLocations(currentUserId, start, end)
+	fun getIngoingUserLocations(start: Long, end: Long): List<UserLocations> {
+		return dbHelper.getIngoingUserLocations(start, end)
 	}
 
 	fun getMessagesForUserInChat(userId: Int, chatId: Long, start: Long, end: Long): List<LocationMessage> {
@@ -49,10 +49,6 @@ class LocationMessages(val app: TelegramApplication) {
 
 	fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getMessagesForUser(userId, start, end)
-	}
-
-	fun getUserLocations(userId: Int, start: Long, end: Long): UserLocations? {
-		return dbHelper.getUserLocations(userId, start, end)
 	}
 
 	fun addBufferedMessage(message: BufferMessage) {
@@ -101,6 +97,10 @@ class LocationMessages(val app: TelegramApplication) {
 		messages.remove(message)
 		this.bufferedMessages = messages
 		dbHelper.removeBufferedMessage(message)
+	}
+
+	fun getBufferedMessagesCount(): Int {
+		return bufferedMessages.size
 	}
 
 	private fun readBufferedMessages() {
@@ -153,33 +153,6 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun getUserLocations(userId: Int, start: Long, end: Long): UserLocations? {
-			var userLocations: UserLocations? = null
-			readableDatabase?.rawQuery(
-				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_CHAT_ID ASC, $COL_TYPE DESC, $COL_TIME ASC ",
-				arrayOf(userId.toString()))?.apply {
-				if (moveToFirst()) {
-					var type = -1
-					val userLocationsMap: MutableMap<Int, List<LocationMessage>> = mutableMapOf()
-					userLocations = UserLocations(userId, 0, userLocationsMap)
-					var userLocationsListByType: MutableList<LocationMessage>? = null
-					do {
-						val locationMessage = readLocationMessage(this@apply)
-						if (type != locationMessage.type) {
-							type = locationMessage.type
-							userLocationsListByType = mutableListOf()
-							userLocationsListByType.add(locationMessage)
-							userLocationsMap.set(type, userLocationsListByType)
-						} else {
-							userLocationsListByType?.add(locationMessage)
-						}
-					} while (moveToNext())
-				}
-				close()
-			}
-			return userLocations
-		}
-
 		internal fun getPreviousMessage(userId: Int, chatId: Long): LocationMessage? {
 			var res:LocationMessage? = null
 			readableDatabase?.rawQuery(
@@ -208,39 +181,47 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun getIngoingUserLocations(currentUserId: Int, start: Long, end: Long): List<UserLocations> {
+		internal fun getIngoingUserLocations(start: Long, end: Long): List<UserLocations> {
 			val res = arrayListOf<UserLocations>()
 			readableDatabase?.rawQuery(
-				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID != ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_TYPE DESC, $COL_TIME ",
-				arrayOf(currentUserId.toString()))?.apply {
+				"$TIMELINE_TABLE_SELECT WHERE $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_TYPE DESC, $COL_TIME ", null
+				)?.apply {
 				if (moveToFirst()) {
-					var type = -1
 					var userId = -1
 					var chatId = -1L
-					var userLocations: UserLocations?
-					var userLocationsMap: MutableMap<Int, List<LocationMessage>>? = null
+					// TODO query bot name
+					var botName = ""
+					var userLocations: UserLocations? = null
+					var userLocationsMap: MutableMap<Int, MutableList<UserTrkSegment>>? = null
 					var userLocationsListByType: MutableList<LocationMessage>? = null
+					var segment: UserTrkSegment? = null
 					do {
 						val locationMessage = readLocationMessage(this@apply)
-						if (userId != locationMessage.userId || chatId != locationMessage.chatId) {
-							userId = locationMessage.userId
-							chatId = locationMessage.chatId
-							type = locationMessage.type
+						userId = locationMessage.userId
+						chatId = locationMessage.chatId
+						// TODO compare bot name as well
+						if(userLocations == null || userLocations.userId != userId ||
+							userLocations.chatId != chatId) {
 							userLocationsMap = mutableMapOf()
-							userLocationsListByType = mutableListOf()
-							userLocationsListByType.add(locationMessage)
-							userLocationsMap[type] = userLocationsListByType
-							userLocations = UserLocations(userId, chatId, userLocationsMap)
+							userLocations = UserLocations(userId, chatId, botName, userLocationsMap)
 							res.add(userLocations)
+							segment = null
 						}
-						if (type != locationMessage.type) {
-							type = locationMessage.type
-							userLocationsListByType = mutableListOf()
-							userLocationsListByType.add(locationMessage)
-							userLocationsMap?.set(type, userLocationsListByType)
-						} else {
-							userLocationsListByType?.add(locationMessage)
+						if(segment == null ||
+							segment.type != locationMessage.type || locationMessage.time - segment.maxTime > 30 * 1000 * 60) {
+							segment = UserTrkSegment(mutableListOf(), 0.0, locationMessage.type,
+								locationMessage.time, locationMessage.time)
+							if(userLocationsMap!![segment.type] == null) {
+								userLocationsMap[segment.type] = mutableListOf()
+							}
+							userLocationsMap[segment.type]!!.add(segment)
 						}
+						if(segment.points.size > 0) {
+							segment.distance += MapUtils.getDistance(locationMessage.lat,
+								locationMessage.lon, segment.points.last().lat, segment.points.last().lon)
+						}
+						segment.maxTime = locationMessage.time
+						segment.points.add(locationMessage)
 					} while (moveToNext())
 				}
 				close()
@@ -438,8 +419,58 @@ class LocationMessages(val app: TelegramApplication) {
 	data class UserLocations(
 		var userId: Int,
 		var chatId: Long,
-		var locationsByType: Map<Int, List<LocationMessage>>
-	)
+		var botName: String,
+		var locationsByType: Map<Int, List<UserTrkSegment>>
+
+
+	){
+		fun getUniqueSegments(): List<UserTrkSegment> {
+			// TODO TYPE_BOT_MAP. TYPE_BOT_TEXT, TYPE_USER_BOTH, TYPE_BOT_BOTH - delete
+			val list = mutableListOf<UserTrkSegment>()
+			if(locationsByType.containsKey(TYPE_MY_LOCATION)) {
+				return locationsByType.get(TYPE_MY_LOCATION)?: list
+			}
+			list.addAll(locationsByType.get(TYPE_USER_TEXT)?: emptyList())
+			val mapList = locationsByType.get(TYPE_USER_MAP)?: emptyList();
+			mapList.forEach {
+				var ti = 0;
+				while(ti < list.size && list[ti].maxTime < it.minTime) {
+					ti++;
+				}
+				if(ti < list.size  && list[ti].minTime > it.maxTime ) {
+					list.add(ti, it)
+				} else if(ti == list.size) {
+					list.add(it)
+				}
+			}
+
+
+			return list
+		}
+	}
+
+	data class UserTrkSegment(
+		val points: MutableList<LocationMessage>,
+		var distance: Double,
+		var type: Int,
+		var minTime: Long,
+		var maxTime: Long
+	) {
+		fun newer(other: UserTrkSegment): Boolean {
+			return other.maxTime < maxTime;
+		}
+
+
+		fun overlap(other: UserTrkSegment): Boolean {
+
+			if(other.maxTime < maxTime) {
+				return other.maxTime > minTime;
+			} else {
+				return other.minTime < maxTime;
+			}
+		}
+
+	}
 
 	data class LocationHistoryPoint(
 		val userId: Int,

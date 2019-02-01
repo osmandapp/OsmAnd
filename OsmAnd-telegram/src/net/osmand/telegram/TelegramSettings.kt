@@ -580,7 +580,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 				obj.put(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY, chatInfo.lastSendTextMessageTime)
 				obj.put(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY, chatInfo.pendingTextMessage)
 				obj.put(ShareChatInfo.PENDING_MAP_MESSAGE_KEY, chatInfo.pendingMapMessage)
-				obj.put(ShareChatInfo.COLLECTED_MESSAGES_KEY, chatInfo.collectedMessages)
 				obj.put(ShareChatInfo.SENT_MESSAGES_KEY, chatInfo.sentMessages)
 				obj.put(ShareChatInfo.PENDING_TDLIB_KEY, chatInfo.pendingTdLib)
 				jArray.put(obj)
@@ -611,7 +610,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 				lastSendTextMessageTime = obj.optInt(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY)
 				pendingTextMessage = obj.optBoolean(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY)
 				pendingMapMessage = obj.optBoolean(ShareChatInfo.PENDING_MAP_MESSAGE_KEY)
-				collectedMessages = obj.optInt(ShareChatInfo.COLLECTED_MESSAGES_KEY)
 				sentMessages = obj.optInt(ShareChatInfo.SENT_MESSAGES_KEY)
 				pendingTdLib = obj.optInt(ShareChatInfo.PENDING_TDLIB_KEY)
 			}
@@ -901,7 +899,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastSuccessfulSendTimeMs = -1L
 		var lastSendTextMessageTime = -1
 		var lastSendMapMessageTime = -1
-		var collectedMessages = 0
 		var sentMessages = 0
 		var pendingTdLib = 0
 		var pendingTextMessage = false
@@ -942,7 +939,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val LAST_SEND_TEXT_TIME_KEY = "lastSendTextMessageTime"
 			internal const val PENDING_TEXT_MESSAGE_KEY = "pendingTextMessage"
 			internal const val PENDING_MAP_MESSAGE_KEY = "pendingMapMessage"
-			internal const val COLLECTED_MESSAGES_KEY = "collectedMessages"
 			internal const val SENT_MESSAGES_KEY = "sentMessages"
 			internal const val PENDING_TDLIB_KEY = "sentMessages"
 		}
