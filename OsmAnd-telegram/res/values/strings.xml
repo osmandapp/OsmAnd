@@ -1,4 +1,5 @@
 <resources>
+	<string name="gps_points_in_buffer">sent (%1$d in buffer)</string>
 	<string name="points_size">%1$d points</string>
 	<string name="shared_string_date">Date</string>
 	<string name="shared_string_collected">Collected</string>

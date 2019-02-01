@@ -238,7 +238,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		log.debug("prepareTextMessage $message")
 		if (shareInfo.currentTextMessageId == -1L) {
 			if (shareInfo.pendingTextMessage) {
-				shareInfo.collectedMessages++
 				app.locationMessages.addBufferedMessage(message)
 			} else {
 				if (isBot) {
@@ -254,7 +253,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				if (shareInfo.pendingTdLib < 10) {
 					app.telegramHelper.editTextLocation(shareInfo, message)
 				} else {
-					shareInfo.collectedMessages++
 					app.locationMessages.addBufferedMessage(message)
 				}
 			}
@@ -265,7 +263,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		log.debug("prepareMapMessage $message")
 		if (shareInfo.currentMapMessageId == -1L) {
 			if (shareInfo.pendingMapMessage) {
-				shareInfo.collectedMessages++
 				app.locationMessages.addBufferedMessage(message)
 			} else {
 				if (isBot) {
@@ -281,7 +278,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				if (shareInfo.pendingTdLib < 10) {
 					app.telegramHelper.editMapLocation(shareInfo, message)
 				} else {
-					shareInfo.collectedMessages++
 					app.locationMessages.addBufferedMessage(message)
 				}
 			}
@@ -291,7 +287,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	private fun prepareMapAndTextMessage(shareInfo: TelegramSettings.ShareChatInfo, message: BufferMessage, isBot:Boolean, sharingMode: String) {
 		log.debug("prepareMapAndTextMessage $message")
 		if (shareInfo.pendingMapMessage || shareInfo.pendingTextMessage || shareInfo.pendingTdLib >= 10) {
-			shareInfo.collectedMessages++
 			app.locationMessages.addBufferedMessage(message)
 		} else {
 			if (isBot) {

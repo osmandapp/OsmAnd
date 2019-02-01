@@ -158,20 +158,13 @@ class TimelineTabFragment : Fragment() {
 	private fun updateList() {
 		val res = mutableListOf<ListItem>()
 		val currentUserId = telegramHelper.getCurrentUser()?.id
-		if (currentUserId != null) {
-			val currentUserLocations = app.locationMessages.getUserLocations(currentUserId, start, end)
-			if (currentUserLocations != null) {
-				TelegramUiHelper.userLocationsToChatItem(telegramHelper, currentUserLocations)?.also { chatItem ->
-						res.add(chatItem)
-					}
-			}
-			val ingoingUserLocations = app.locationMessages.getIngoingUserLocations(currentUserId, start, end)
+
+			val ingoingUserLocations = app.locationMessages.getIngoingUserLocations(start, end)
 			ingoingUserLocations.forEach {
 				TelegramUiHelper.userLocationsToChatItem(telegramHelper, it)?.also { chatItem ->
 					res.add(chatItem)
 				}
 			}
-		}
 
 		adapter.items = sortAdapterItems(res)
 	}
@@ -214,18 +207,19 @@ class TimelineTabFragment : Fragment() {
 				val userLocations = item.userLocations
 
 				if(userLocations!=null){
-					val pair = getDistanceAndCountedPoints(userLocations)
-					val distance = OsmandFormatter.getFormattedDistance(pair.first,app)
+					val trackData = getDistanceAndCountedPoints(userLocations)
+					val distance = OsmandFormatter.getFormattedDistance(trackData.dist,app)
 					val name = if ((!item.privateChat || item.chatWithBot) && item.userId != currentUserId) item.getVisibleName() else ""
 					holder.groupDescrContainer?.visibility = View.VISIBLE
-					holder.groupTitle?.text = "$distance (${getString(R.string.points_size, pair.second)}) $name"
-				}
-				TelegramUiHelper.setupPhoto(app, holder.groupImage, item.groupPhotoPath, item.placeholderId, false)
-				holder.userRow?.setOnClickListener {
-					childFragmentManager.also {
-						UserGpxInfoFragment.showInstance(it, item.userId, item.chatId, start, end)
+					holder.groupTitle?.text = "$distance (${getString(R.string.points_size, trackData.points)}) $name"
+					TelegramUiHelper.setupPhoto(app, holder.groupImage, item.groupPhotoPath, item.placeholderId, false)
+					holder.userRow?.setOnClickListener {
+						childFragmentManager.also {
+							UserGpxInfoFragment.showInstance(it, item.userId, item.chatId, trackData.minTime, trackData.maxTime)
+						}
 					}
 				}
+
 				holder.imageButton?.visibility = View.GONE
 				holder.showOnMapRow?.visibility = View.GONE
 				holder.bottomDivider?.visibility = if (lastItem) View.GONE else View.VISIBLE
@@ -233,27 +227,20 @@ class TimelineTabFragment : Fragment() {
 			}
 		}
 
-		private fun getDistanceAndCountedPoints(userLocations: LocationMessages.UserLocations): Pair<Float, Int> {
-			val textUserLoc = userLocations.locationsByType[LocationMessages.TYPE_USER_TEXT]
-			val textBotLoc = userLocations.locationsByType[LocationMessages.TYPE_BOT_TEXT]
-			var dist = 0.0
-			var countedPoints = 0
-			when {
-				textUserLoc != null -> textUserLoc.forEach {
-					dist += it.distanceFromPrev
-					countedPoints++
-				}
-				textBotLoc != null -> textBotLoc.forEach {
-					dist += it.distanceFromPrev
-					countedPoints++
-				}
-				else -> userLocations.locationsByType.values.firstOrNull()?.forEach {
-					dist += it.distanceFromPrev
-					countedPoints++
-				}
-			}
 
-			return Pair(dist.toFloat(), countedPoints)
+		private fun getDistanceAndCountedPoints(userLocations: LocationMessages.UserLocations): UITrackData {
+			var uiTrackData= UITrackData(0.0f, 0, 0, 0)
+
+
+			userLocations.getUniqueSegments().forEach {
+				if(uiTrackData.minTime == 0L) {
+					uiTrackData.minTime = it.minTime
+				}
+				uiTrackData.dist += it.distance.toFloat();
+				uiTrackData.points += it.points.size
+				uiTrackData.maxTime = it.maxTime
+			}
+			return uiTrackData
 		}
 
 		override fun getItemCount() = items.size
@@ -276,6 +263,12 @@ class TimelineTabFragment : Fragment() {
 		}
 	}
 
+	data class UITrackData (
+		var dist: Float,
+		var points: Int,
+		var minTime: Long,
+		var maxTime: Long
+	)
 	companion object {
 		private const val ADAPTER_UPDATE_INTERVAL_MIL = 15 * 1000L // 15 sec
 	}

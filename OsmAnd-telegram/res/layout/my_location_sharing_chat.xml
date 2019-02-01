@@ -199,31 +199,12 @@
 
 					<net.osmand.telegram.ui.views.TextViewEx
 						android:layout_width="wrap_content"
+						android:id="@+id/gps_points_in_buffer_txt"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
 						android:textColor="?android:attr/textColorSecondary"
 						android:textSize="@dimen/hint_text_size"
-						app:typeface="@string/font_roboto_regular"
-						android:text="@string/shared_string_collected" />
-
-					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/gps_points_sent"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:layout_marginLeft="4dp"
-						android:layout_marginRight="4dp"
-						android:textColor="?android:attr/textColorPrimary"
-						android:textSize="@dimen/hint_text_size"
-						app:typeface="@string/font_roboto_mono_bold" />
-
-					<net.osmand.telegram.ui.views.TextViewEx
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:textColor="?android:attr/textColorSecondary"
-						android:textSize="@dimen/hint_text_size"
-						android:text="@string/shared_string_sent"
+						android:text="@string/gps_points_in_buffer"
 						app:typeface="@string/font_roboto_regular" />
 
 				</LinearLayout>
