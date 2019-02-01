@@ -581,7 +581,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 				obj.put(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY, chatInfo.pendingTextMessage)
 				obj.put(ShareChatInfo.PENDING_MAP_MESSAGE_KEY, chatInfo.pendingMapMessage)
 				obj.put(ShareChatInfo.SENT_MESSAGES_KEY, chatInfo.sentMessages)
-				obj.put(ShareChatInfo.PENDING_TDLIB_KEY, chatInfo.pendingTdLib)
 				jArray.put(obj)
 			}
 			jArray
@@ -611,7 +610,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 				pendingTextMessage = obj.optBoolean(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY)
 				pendingMapMessage = obj.optBoolean(ShareChatInfo.PENDING_MAP_MESSAGE_KEY)
 				sentMessages = obj.optInt(ShareChatInfo.SENT_MESSAGES_KEY)
-				pendingTdLib = obj.optInt(ShareChatInfo.PENDING_TDLIB_KEY)
 			}
 			shareChatsInfo[shareInfo.chatId] = shareInfo
 		}
@@ -940,7 +938,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val PENDING_TEXT_MESSAGE_KEY = "pendingTextMessage"
 			internal const val PENDING_MAP_MESSAGE_KEY = "pendingMapMessage"
 			internal const val SENT_MESSAGES_KEY = "sentMessages"
-			internal const val PENDING_TDLIB_KEY = "sentMessages"
 		}
 	}
 }
