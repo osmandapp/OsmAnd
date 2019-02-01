@@ -1556,14 +1556,19 @@ public class GPXUtilities {
 		loadGPXFile(null, new FileInputStream("/home/denisxs/Downloads/cascades.gpx"));
 	}
 
-	private static String[] readExtensionsText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
-		int tok = 2;
-
+	private static String[] readExtensionsText(XmlPullParser parser, String key, int startToken) throws XmlPullParserException, IOException {
+		int tok = startToken;
 		String text = null;
 		String tagOftext = null;
 		while (tok != XmlPullParser.END_DOCUMENT) {
-			System.out.println("token => " + tok + ", readExtText. tag => "+ parser.getName() + ", text = " + parser.getText());
-
+			if(tok==2) System.out.println("OPEN_TAG <"+parser.getName() + ">");
+			else if (tok==3) System.out.println("CLOSE TAG <" + parser.getName()+ ">");
+			else if (tok==4) System.out.println("TEXT = " + parser.getText());
+			if(parser.getAttributeCount()>0) {
+				for (int a = 0; a<parser.getAttributeCount(); a++) {
+					System.out.println("Attributes: " + parser.getAttributeName(a) + ": " + parser.getAttributeValue(a));
+				}
+			}
 			if (tok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
 				break;
 			} else if (tok==2){
@@ -1571,6 +1576,8 @@ public class GPXUtilities {
 			} else if (tok == XmlPullParser.TEXT) {
 				if (text == null) {
 					text = parser.getText();
+				} else if (text.replaceAll(" ", "").replaceAll("\n", "").isEmpty()) {
+					text = null;
 				} else {
 					text += parser.getText();
 				}
@@ -1578,7 +1585,7 @@ public class GPXUtilities {
 			tok = parser.next();
 
 		}
-		String[] tagAndText = {tagOftext, text.replaceAll(" ", "").replaceAll("\n", "")};
+		String[] tagAndText = {tagOftext, text}; //.replaceAll(" ", "").replaceAll("\n", "")
 		return tagAndText;
 	}
 
@@ -1590,35 +1597,34 @@ public class GPXUtilities {
 		formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+			//XmlPullParser parser = Xml.newPullParser();
 			parser.setInput(getUTF8Reader(f));
 			Stack<GPXExtensions> parserState = new Stack<>();
 			boolean extensionReadMode = false;
 			parserState.push(res);
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-
 				if (tok == XmlPullParser.START_TAG) {
-
 					Object parse = parserState.peek();
 					String tag = parser.getName();
-
 					if (extensionReadMode && parse != null) {
-						log.debug("tag on start of ext => " + tag);
-						if(tag.equals("trackextension") || tag.contains("TrackExtension")) {
-							String[] result = readExtensionsText(parser, tag);
-							System.out.println("tag: " + result[0] + ", value: " + result[1]);
-							((GPXExtensions) parse).getExtensionsToWrite().put(result[0].toLowerCase(), result[1]);
-						} else {
-							String value = readText(parser, tag);
-							if (value != null) {
-								((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
-								if (tag.equals("speed") && parse instanceof WptPt) {
-									try {
-										((WptPt) parse).speed = Float.parseFloat(value);
-									} catch (NumberFormatException e) {}
-								}
-							}
-						}
+						String[] result = readExtensionsText(parser, tag, tok);
+//						System.out.println("\nResult ==> tag: " + result[0] + ", value: " + result[1] + "\n");
+//						if(tag.equals("trackextension") || tag.contains("TrackExtension")) {
+//							String[] result = readExtensionsText(parser, tag, tok);
+//							//System.out.println("tag: " + result[0] + ", value: " + result[1]);
+//							//((GPXExtensions) parse).getExtensionsToWrite().put(result[0].toLowerCase(), result[1]);
+//						} else {
+//							String value = readText(parser, tag);
+//							if (value != null) {
+//								((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
+//								if (tag.equals("speed") && parse instanceof WptPt) {
+//									try {
+//										((WptPt) parse).speed = Float.parseFloat(value);
+//									} catch (NumberFormatException e) {}
+//								}
+//							}
+//						}
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = true;
 					} else {
