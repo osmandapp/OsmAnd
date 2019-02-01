@@ -9,6 +9,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import java.io.FileNotFoundException;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
@@ -1522,6 +1523,8 @@ public class GPXUtilities {
 		return text;
 	}
 
+
+
 	public static GPXFile loadGPXFile(Context ctx, File f) {
 		FileInputStream fis = null;
 		try {
@@ -1549,6 +1552,36 @@ public class GPXUtilities {
 		}
 	}
 
+	public static void main(String... args) throws FileNotFoundException {
+		loadGPXFile(null, new FileInputStream("/home/denisxs/Downloads/cascades.gpx"));
+	}
+
+	private static String[] readExtensionsText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
+		int tok = 2;
+
+		String text = null;
+		String tagOftext = null;
+		while (tok != XmlPullParser.END_DOCUMENT) {
+			System.out.println("token => " + tok + ", readExtText. tag => "+ parser.getName() + ", text = " + parser.getText());
+
+			if (tok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
+				break;
+			} else if (tok==2){
+				tagOftext = parser.getName();
+			} else if (tok == XmlPullParser.TEXT) {
+				if (text == null) {
+					text = parser.getText();
+				} else {
+					text += parser.getText();
+				}
+			}
+			tok = parser.next();
+
+		}
+		String[] tagAndText = {tagOftext, text.replaceAll(" ", "").replaceAll("\n", "")};
+		return tagAndText;
+	}
+
 	public static GPXFile loadGPXFile(Context ctx, InputStream f) {
 		GPXFile res = new GPXFile();
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
@@ -1563,17 +1596,27 @@ public class GPXUtilities {
 			parserState.push(res);
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+
 				if (tok == XmlPullParser.START_TAG) {
+
 					Object parse = parserState.peek();
 					String tag = parser.getName();
+
 					if (extensionReadMode && parse != null) {
-						String value = readText(parser, tag);
-						if (value != null) {
-							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
-							if (tag.equals("speed") && parse instanceof WptPt) {
-								try {
-									((WptPt) parse).speed = Float.parseFloat(value);
-								} catch (NumberFormatException e) {}
+						log.debug("tag on start of ext => " + tag);
+						if(tag.equals("trackextension") || tag.contains("TrackExtension")) {
+							String[] result = readExtensionsText(parser, tag);
+							System.out.println("tag: " + result[0] + ", value: " + result[1]);
+							((GPXExtensions) parse).getExtensionsToWrite().put(result[0].toLowerCase(), result[1]);
+						} else {
+							String value = readText(parser, tag);
+							if (value != null) {
+								((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
+								if (tag.equals("speed") && parse instanceof WptPt) {
+									try {
+										((WptPt) parse).speed = Float.parseFloat(value);
+									} catch (NumberFormatException e) {}
+								}
 							}
 						}
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {

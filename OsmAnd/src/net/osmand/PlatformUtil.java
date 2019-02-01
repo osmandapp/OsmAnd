@@ -3,6 +3,7 @@ package net.osmand;
 import android.util.Xml;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
@@ -154,22 +155,34 @@ public class PlatformUtil {
 		}
 	}
 	
-	public static Log getLog(String name){
-		return new OsmandLogImplementation(name);
-	}
-	
+//	public static Log getLog(String name){
+//		return new OsmandLogImplementation(name);
+//	}
 	public static Log getLog(Class<?> cl){
-		return getLog(cl.getName());
+		return LogFactory.getLog(cl);
 	}
 	
-	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
-		// return XmlPullParserFactory.newInstance().newPullParser();
-		return Xml.newPullParser();
+//	public static Log getLog(Class<?> cl){
+//		return getLog(cl.getName());
+//	}
+//
+
+	public static XmlPullParser newXMLPullParser() throws XmlPullParserException{
+		return new org.kxml2.io.KXmlParser();
 	}
-	
+
 	public static XmlSerializer newSerializer() {
-		return Xml.newSerializer();
+		return new org.kxml2.io.KXmlSerializer();
 	}
+
+//	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
+//		// return XmlPullParserFactory.newInstance().newPullParser();
+//		return Xml.newPullParser();
+//	}
+//
+//	public static XmlSerializer newSerializer() {
+//		return Xml.newSerializer();
+//	}
 	
 
 }
