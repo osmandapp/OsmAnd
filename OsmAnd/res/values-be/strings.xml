@@ -2169,7 +2169,7 @@
 <string name="shared_string_select">Абраць</string>
     <string name="shared_string_remove">Выдаліць</string>
     <string name="road_blocked">Дарога заблакаваная</string>
-    <string name="switch_start_finish">Памяняць месцамі пункт адпраўлення і пункт прызначэння</string>
+    <string name="switch_start_finish">Памяняць месцамі пачатковы пункт і пункт прызначэння</string>
     <string name="rendering_attr_hideIcons_name">Значкі POI</string>
     <string name="rec_split">Разбіццё на часткі</string>
     <string name="rec_split_title">Выкарыстоўваць разбіццё на часткі</string>
@@ -2656,7 +2656,7 @@
 \nУбудова лыжных мап для OsmAnd дазваляе бачыць лыжныя трасы з узроўнем складанасці і некаторай дадатковай інфармацыяй: размяшчэнне пад\'ёмнікаў і іншых аб\'ектаў.</string>
     <string name="save_poi_too_many_uppercase">Назва змяшчае занадта шмат вялікіх літар. Працягнуць\?</string>
     <string name="osmand_extended_description_part3">Мапа 
-\n• Адлюстроўвае POI (пункт інтарэсаў) побач вас 
+\n• Адлюстроўвае POI (пункт цікавасці) побач вас 
 \n• Адаптуе мапу ў напрамку вашага руху (ці компаса) 
 \n• Паказвае, дзе вы знаходзіцеся і куды вы глядзіце 
 \n• Дзяліцеся сваім месцазнаходжаннем, каб сябры змаглі знайсці вас 
@@ -2723,20 +2723,26 @@
 \n Большасць краін свету даступныя да спампоўвання! 
 \n Атрымайце надзейны навігатар у вашай краіне — будзь то Беларусь, Францыя, Германія, Мексіка, Вялікабрытанія, Гіспанія, Нідэрланды, ЗША, Расія, Бразілія ці якая іншая.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — мапа і навігацыйны дадатак з доступам да бясплатных, сусветных і высокаякасных даных OpenStreetMap (OSM). 
-\n Атрымоўвайце асалоду ад галасавой і візуальная навігацыі, праглядайце пукты інтарэсаў (POI), запісвайце GPX-сляды, выкарыстоўвайце візуалізацыю контурных ліній ды даных вышыні, пераключайцеся паміж рэжымамі кіравання, яздой на ровары ды шпацырамі, рэдагуйце OSM-даныя і шмат іншага. 
+\n Атрымоўвайце асалоду ад галасавой і візуальная навігацыі, праглядайце пукты цікавасцяў (POI), запісвайце GPX-сляды, выкарыстоўвайце візуалізацыю контурных ліній ды даных вышыні, пераключайцеся паміж рэжымамі кіравання, яздой на ровары ды шпацырамі, рэдагуйце OSM-даныя і шмат іншага. 
 \n OsmAnd+ — платная версія праграмы. Пры набыцці, вы падтрымоўваеце праект, фінансуеце распрацоўку новых магчымасцяў ды атрымоўваце апошнія абнаўленні. 
 \nНекаторыя з галоўных магчымасцяў:</string>
     <string name="osmand_plus_extended_description_part3">"Прагляд мапы 
+\n
 \n • Паказвае дзе вы знаходзіцеся і куды глядзіце 
+\n
 \n • Пры патрэбе выраўняе мапу па компасе ці па напрамку вашага руху 
+\n
 \n • Захавае вашыя найважнейшыя месцы ва ўлюблёных 
-\n • Адлюстроўвае пункты інтарэсаў вакол вас 
+\n
+\n • Адлюстроўвае пункты цікавасцяў вакол вас 
+\n
 \n • Паказвае адмысловыя сеціўныя мапы, спадарожнікавыя здымкі (Bing), розныя накладкі накшталт турыстычных/навігацыйных GPX-слядоў і дадатковыя пласты з наладжваемай празрыстасцю 
+\n
 \n • Можа адлюстроўваць на мапе беларускія, англійскія, мясцовыя назвы ці  фанетычным напісаннем"</string>
     <string name="osmand_plus_extended_description_part4">Выкарыстоўваюцца даныя OSM ды Вікіпедыі 
 \n • Высокаякасная інфармацыя ад найлепшых праектаў свету 
 \n • OSM-даныя даступныя па краіне ці рэгіёну 
-\n • Пункты інтарэсаў з Вікіпедыі, выдатна падыходзіць для агляду выбітнасцяў 
+\n • Пункты цікавасцяў з Вікіпедыі, выдатна падыходзіць для агляду выбітнасцяў 
 \n • Неабмежаваная колькасць бясплатных спампоўванняў непасрэдна з дадатка 
 \n • Кампактныя пазасеціўныя вектарныя мапы абнаўляюцца не радзей за раз на месяц 
 \n • Выбар паміж поўнымі данымі рэгіёна ці толькі дарожнай сеткай (напрыклад, уся Японія займае 700 МБ, а дарожная сетка — 200 МБ)</string>
@@ -2756,7 +2762,7 @@
     <string name="osmand_plus_extended_description_part7">Непасрэдны ўклад у OSM 
 \n • Заявы аб памылках у даных 
 \n • Запампоўванне GPX-слядоў у OSM проста з дадатка 
-\n • Даданне пунктаў інтарэсаў (POI) і непасрэдная запампоўка іх у OSM (ці пазней, па-за сецівам) 
+\n • Даданне пунктаў цікавасцяў (POI) і непасрэдная запампоўка іх у OSM (ці пазней, па-за сецівам) 
 \n • Магчымасць запісу падарожжа ў фонавым рэжыме (у той час, як прылада знаходзіцца ў спячым рэжыме) 
 \n OsmAnd — адкрытае праграмнае забяспячэнне ў актыўнай распрацоўцы. Кожны можа ўнесці ўклад паведамляючы аб памылках, паляпшаючы пераклад ці распрацоўваючы новыя магчымасці. Ход праекта залежыць таксама ад фінансавых унёскаў для забяспячэння кадавання і тэставання новай функцыянальнасці. 
 \n</string>
@@ -3062,7 +3068,7 @@
 	<string name="update_is_available">Даступна абнаўленне</string>
 	<string name="download_file">Спампаваць файл</string>
     <string name="start_editing_card_image_text">Бясплатны сусветны турыстычны даведнік, які можа рэдагаваць кожны.</string>
-    <string name="welcome_to_open_beta_description">Турыстычныя даведнікі ў цяперашні час базуюцца на аснове Wikivoyage. Тэстуйце усе функцыі бясплатна падчас адкрытага бэта-тэставання. Потым даведнікі будуць даступныя падпішчыкам OsmAnd Unlimited і ўладальнікам OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Турыстычныя даведнікі ў цяперашні час базуюцца на Wikivoyage. Тэстуйце усе функцыі бясплатна падчас адкрытага бэта-тэставання. Потым даведнікі будуць даступныя падпісантам OsmAnd Unlimited і карыстальнікам OsmAnd+.</string>
     <string name="start_editing_card_description">Вам можна і варта рэдагаваць любы артыкул на Wikivoyage. Дзяліцеся ведамі, досведам, талентам і тым, што заўважылі</string>
     <string name="start_editing">Пачаць рэдагаванне</string>
     <string name="get_unlimited_access">Атрымаць неабмежаваны доступ</string>
@@ -3226,4 +3232,32 @@
     <string name="lang_gn_py">Гуарані</string>
     <string name="run_full_osmand_msg">Вы карыстаецеся мапай {0}, якая пастаўляецца OsmAnd. Вы хочаце запусціць поўную версію OsmAnd\?</string>
     <string name="run_full_osmand_header">Запусціць OsmAnd\?</string>
+    <string name="cubic_m">м³</string>
+    <string name="metric_ton">Т</string>
+    <string name="shared_string_capacity">Аб’ём</string>
+    <string name="shared_string_width">Шырыня</string>
+    <string name="shared_string_height">Вышыня</string>
+    <string name="swap_start_and_destination">Памяняць месцамі пачатковы пункт і пункт прызначэння</string>
+    <string name="add_destination_point">Дадаць пункт прызначэння</string>
+    <string name="add_intermediate_point">Дадаць прамежкавы пункт</string>
+    <string name="add_start_point">Дадаць пачатковы пункт</string>
+    <string name="intermediate_waypoint">Прамежкавы пункт: %1$s</string>
+    <string name="waypoints">Пункты шляху: %1$s</string>
+    <string name="transfers">трансферы: %1$s</string>
+    <string name="on_foot">пешшу: %1$s</string>
+    <string name="route_way">Шлях: %1$s</string>
+    <string name="points_of_interests">Пункты цікавасцяў (POI)</string>
+    <string name="waiting_for_route_calculation">Чаканне падліку маршруту</string>
+    <string name="app_mode_public_transport">Грамадскі транспарт</string>
+    <string name="avoid_roads_descr">Абярыце на мапе альбо са спіса ніжэй дарогу, якой хочаце пазбягаць падчас навігацыі:</string>
+    <string name="show_along_the_route">Паказваць уздоўж маршруту</string>
+    <string name="simulate_navigation">Сімуляваць навігацыю</string>
+    <string name="choose_track_file_to_follow">Абярыце файл следу</string>
+    <string name="voice_announcements">Галасавыя апавяшчэнні</string>
+    <string name="intermediate_destinations">Прамежкавыя пункты: %1$s</string>
+    <string name="arrive_at_time">Прыбыццё а %1$s</string>
+    <string name="quick_action_switch_day_night_descr">Націсканне на кнопку дзеяння пераключае начны і дзённы рэжымы OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Дзённы рэжым</string>
+    <string name="quick_action_switch_night_mode">Начны рэжым</string>
+    <string name="quick_action_day_night_switch_mode">Пераключыць дзённы/начны рэжым</string>
 </resources>
