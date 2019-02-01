@@ -229,10 +229,11 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private fun updateGPXStatisticRow() {
 		val analysis: GPXUtilities.GPXTrackAnalysis = gpxFile.getAnalysis(0)
-		avgElevationTv.text = OsmandFormatter.getFormattedAlt(analysis.avgElevation, app)
-		avgSpeedTv.text = if (analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else ""
-		totalDistanceTv.text = OsmandFormatter.getFormattedDistance(analysis.totalDistance, app)
-		timeSpanTv.text = Algorithms.formatDuration((analysis.timeSpan / 1000).toInt(), true)
+
+		avgElevationTv.text = if (analysis.avgElevation != 0.0) OsmandFormatter.getFormattedAlt(analysis.avgElevation, app) else "-"
+		avgSpeedTv.text = if (analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else "-"
+		totalDistanceTv.text = if (analysis.totalDistance != 0.0f) OsmandFormatter.getFormattedDistance(analysis.totalDistance, app)  else  "-"
+		timeSpanTv.text = if (analysis.timeSpan != 0L)  Algorithms.formatDuration((analysis.timeSpan / 1000).toInt(), true) else  "-"
 	}
 
 	private fun updateGPXMap() {

@@ -83,7 +83,7 @@ class LocationMessages(val app: TelegramApplication) {
 		val previousMessageLatLon = lastLocationPoints[newItem]
 		val distance = if (previousMessageLatLon != null) { MapUtils.getDistance(previousMessageLatLon, loc.latitude, loc.longitude) } else 0.0
 		val message = LocationMessages.LocationMessage(currentUserId, 0, loc.latitude, loc.longitude, loc.altitude,
-			loc.speed.toDouble(), loc.accuracy.toDouble(), loc.bearing.toDouble(), loc.time, -1, 0, distance)
+			loc.speed.toDouble(), loc.accuracy.toDouble(), loc.bearing.toDouble(), loc.time, TYPE_MY_LOCATION, 0, distance)
 
 		dbHelper.addLocationMessage(message)
 		lastLocationPoints[newItem] = LatLon(message.lat, message.lon)
@@ -158,20 +158,20 @@ class LocationMessages(val app: TelegramApplication) {
 			readableDatabase?.rawQuery(
 				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_CHAT_ID ASC, $COL_TYPE DESC, $COL_TIME ASC ",
 				arrayOf(userId.toString()))?.apply {
-				var type = -1
-				val userLocationsMap: MutableMap<Int, List<LocationMessage>> = mutableMapOf()
-				userLocations = UserLocations(userId, 0, emptyMap())
-				var userLocationsListBytetype: MutableList<LocationMessage>? = null
 				if (moveToFirst()) {
+					var type = -1
+					val userLocationsMap: MutableMap<Int, List<LocationMessage>> = mutableMapOf()
+					userLocations = UserLocations(userId, 0, userLocationsMap)
+					var userLocationsListByType: MutableList<LocationMessage>? = null
 					do {
 						val locationMessage = readLocationMessage(this@apply)
 						if (type != locationMessage.type) {
 							type = locationMessage.type
-							userLocationsListBytetype = mutableListOf()
-							userLocationsListBytetype.add(locationMessage)
-							userLocationsMap.set(type, userLocationsListBytetype)
+							userLocationsListByType = mutableListOf()
+							userLocationsListByType.add(locationMessage)
+							userLocationsMap.set(type, userLocationsListByType)
 						} else {
-							userLocationsListBytetype?.add(locationMessage)
+							userLocationsListByType?.add(locationMessage)
 						}
 					} while (moveToNext())
 				}
@@ -213,13 +213,13 @@ class LocationMessages(val app: TelegramApplication) {
 			readableDatabase?.rawQuery(
 				"$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID != ? AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_TYPE DESC, $COL_TIME ",
 				arrayOf(currentUserId.toString()))?.apply {
-				var type = -1
-				var userId = -1
-				var chatId = -1L
-				var userLocations: UserLocations? = null
-				var userLocationsMap: MutableMap<Int, List<LocationMessage>>? = null
-				var userLocationsListBytetype: MutableList<LocationMessage>? = null
 				if (moveToFirst()) {
+					var type = -1
+					var userId = -1
+					var chatId = -1L
+					var userLocations: UserLocations?
+					var userLocationsMap: MutableMap<Int, List<LocationMessage>>? = null
+					var userLocationsListByType: MutableList<LocationMessage>? = null
 					do {
 						val locationMessage = readLocationMessage(this@apply)
 						if (userId != locationMessage.userId || chatId != locationMessage.chatId) {
@@ -227,19 +227,19 @@ class LocationMessages(val app: TelegramApplication) {
 							chatId = locationMessage.chatId
 							type = locationMessage.type
 							userLocationsMap = mutableMapOf()
-							userLocationsListBytetype = mutableListOf()
-							userLocationsListBytetype.add(locationMessage)
-							userLocationsMap[type] = userLocationsListBytetype
+							userLocationsListByType = mutableListOf()
+							userLocationsListByType.add(locationMessage)
+							userLocationsMap[type] = userLocationsListByType
 							userLocations = UserLocations(userId, chatId, userLocationsMap)
 							res.add(userLocations)
 						}
 						if (type != locationMessage.type) {
 							type = locationMessage.type
-							userLocationsListBytetype = mutableListOf()
-							userLocationsListBytetype.add(locationMessage)
-							userLocationsMap?.set(type, userLocationsListBytetype)
+							userLocationsListByType = mutableListOf()
+							userLocationsListByType.add(locationMessage)
+							userLocationsMap?.set(type, userLocationsListByType)
 						} else {
-							userLocationsListBytetype?.add(locationMessage)
+							userLocationsListByType?.add(locationMessage)
 						}
 					} while (moveToNext())
 				}
@@ -477,5 +477,6 @@ class LocationMessages(val app: TelegramApplication) {
 		const val TYPE_BOT_MAP = 3
 		const val TYPE_BOT_TEXT = 4
 		const val TYPE_BOT_BOTH = 5
+		const val TYPE_MY_LOCATION = 6
 	}
 }
