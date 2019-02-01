@@ -522,9 +522,9 @@ object OsmandLocationUtils {
 						val user = app.telegramHelper.getUser(pt!!.userId)
 						val fileName: String
 						fileName = if (user != null) {
-							(TelegramUiHelper.getUserName(user) + "_" + SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(Date(pt.time)))
+							(TelegramUiHelper.getUserName(user) + "_" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(pt.time)))
 						} else {
-							userId.toString() + "_" + SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(Date(pt.time))
+							userId.toString() + "_" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(pt.time))
 						}
 						fout = File(dir, "$fileName.gpx")
 					}

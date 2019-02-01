@@ -1309,24 +1309,6 @@ class TelegramHelper private constructor() {
 						}
 					}
 				}
-				TdApi.UpdateMessageEdited.CONSTRUCTOR -> {
-					val updateMessageEdited = obj as TdApi.UpdateMessageEdited
-					val message = usersLocationMessages[updateMessageEdited.messageId]
-					log.debug("UpdateMessageEdited " + updateMessageEdited.messageId)
-					if (message == null) {
-						updateMessageEdited.apply {
-							requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
-						}
-					} else {
-						synchronized(message) {
-							message.editDate = updateMessageEdited.editDate
-							lastTelegramUpdateTime = Math.max(message.date, message.editDate)
-						}
-						incomingMessagesListeners.forEach {
-							it.updateLocationMessages()
-						}
-					}
-				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
 					val message = usersLocationMessages[updateMessageContent.messageId]

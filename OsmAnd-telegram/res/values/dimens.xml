@@ -52,6 +52,9 @@
 	<dimen name="my_location_text_sides_margin">32dp</dimen>
 	<dimen name="my_location_user_icon_size">60dp</dimen>
 
+	<dimen name="timeline_user_icon_size">56dp</dimen>
+	<dimen name="timeline_time_buttons_height">50dp</dimen>
+
 	<dimen name="disable_sharing_image_height">132dp</dimen>
 	<dimen name="disable_sharing_icon_top_margin">30dp</dimen>
 

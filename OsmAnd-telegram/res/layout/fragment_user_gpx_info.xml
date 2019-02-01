@@ -14,7 +14,7 @@
 		<FrameLayout
 			android:id="@+id/image_container"
 			android:layout_width="match_parent"
-			android:layout_height="120dp"
+			android:layout_height="102dp"
 			app:layout_scrollFlags="scroll">
 
 			<ImageView
@@ -22,7 +22,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="start"
-				android:layout_marginTop="@dimen/content_padding_standard"
 				android:background="?attr/selectableItemBackgroundBorderless"
 				android:contentDescription="@string/shared_string_back"
 				android:padding="@dimen/content_padding_standard"
@@ -31,10 +30,10 @@
 
 			<ImageView
 				android:id="@+id/user_icon"
-				android:layout_width="@dimen/my_location_user_icon_size"
-				android:layout_height="@dimen/my_location_user_icon_size"
+				android:layout_width="@dimen/timeline_user_icon_size"
+				android:layout_height="@dimen/timeline_user_icon_size"
 				android:layout_gravity="center_horizontal"
-				android:layout_marginTop="@dimen/content_padding_standard"
+				android:layout_marginTop="@dimen/content_padding_half"
 				tools:src="@drawable/img_user_picture" />
 
 			<net.osmand.telegram.ui.views.TextViewEx
@@ -84,8 +83,8 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
-					android:layout_marginLeft="@dimen/content_padding_standard"
 					android:layout_marginStart="@dimen/content_padding_standard"
+					android:layout_marginLeft="@dimen/content_padding_standard"
 					android:layout_weight="1"
 					android:ellipsize="end"
 					android:maxLines="1"
@@ -99,7 +98,9 @@
 
 			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/list_header_height"
+				android:layout_height="wrap_content"
+				android:paddingTop="@dimen/card_divider_bottom_margin"
+				android:paddingBottom="@dimen/content_padding_half"
 				android:orientation="horizontal">
 
 				<net.osmand.telegram.ui.views.TextViewEx
@@ -112,7 +113,7 @@
 					android:layout_weight="1"
 					android:background="@drawable/btn_round"
 					android:ellipsize="end"
-					android:gravity="center"
+					android:gravity="center_vertical"
 					android:maxLines="1"
 					android:paddingLeft="@dimen/image_button_padding"
 					android:paddingRight="@dimen/image_button_padding"
@@ -225,7 +226,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="5dp"
-						android:src="@drawable/ic_action_polygom_dark" />
+						android:src="@drawable/ic_action_sort_by_distance" />
 
 					<LinearLayout
 						android:layout_width="wrap_content"
@@ -233,25 +234,27 @@
 						android:layout_marginLeft="18dp"
 						android:orientation="vertical">
 
-						<TextView
+						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/distance_desc"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="3dp"
+							android:layout_marginBottom="6dp"
 							android:background="@null"
 							android:text="@string/shared_string_distance"
 							android:textColor="?android:attr/textColorSecondary"
-							android:textSize="@dimen/list_item_description_text_size" />
+							android:textSize="@dimen/list_item_description_text_size"
+							app:typeface="@string/font_roboto_regular" />
 
 						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/distance_text"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:background="@null"
-							android:text="40 km"
 							android:textColor="?android:attr/textColorPrimary"
-							android:textSize="@dimen/hint_text_size"
-							app:typeface="@string/font_roboto_medium" />
+							android:textSize="@dimen/descr_text_size"
+							app:typeface="@string/font_roboto_mono_bold"
+							tools:text="40 km" />
 
 					</LinearLayout>
 
@@ -277,25 +280,27 @@
 						android:layout_marginLeft="18dp"
 						android:orientation="vertical">
 
-						<TextView
+						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/duration_desc"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="3dp"
+							android:layout_marginBottom="6dp"
 							android:background="@null"
 							android:text="@string/time_on_the_move"
 							android:textColor="?android:attr/textColorSecondary"
-							android:textSize="@dimen/list_item_description_text_size" />
+							android:textSize="@dimen/list_item_description_text_size"
+							app:typeface="@string/font_roboto_regular" />
 
 						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/duration_text"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:background="@null"
-							android:text="3:32:44"
 							android:textColor="?android:attr/textColorPrimary"
-							android:textSize="@dimen/hint_text_size"
-							app:typeface="@string/font_roboto_medium" />
+							android:textSize="@dimen/descr_text_size"
+							app:typeface="@string/font_roboto_mono_bold"
+							tools:text="3:32:44" />
 
 					</LinearLayout>
 
@@ -346,8 +351,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="horizontal"
-				android:paddingBottom="11dp"
-				android:paddingTop="13dp">
+				android:paddingTop="13dp"
+				android:paddingBottom="11dp">
 
 				<LinearLayout
 					android:layout_width="0dp"
@@ -369,25 +374,27 @@
 						android:layout_marginLeft="18dp"
 						android:orientation="vertical">
 
-						<TextView
+						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/average_speed_desc"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="8dp"
+							android:layout_marginBottom="6dp"
 							android:background="@null"
 							android:text="@string/average_speed"
 							android:textColor="?android:attr/textColorSecondary"
-							android:textSize="@dimen/list_item_description_text_size" />
+							android:textSize="@dimen/list_item_description_text_size"
+							app:typeface="@string/font_roboto_regular" />
 
 						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/average_speed_text"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:background="@null"
-							android:text="15:04:58"
 							android:textColor="?android:attr/textColorPrimary"
-							android:textSize="@dimen/hint_text_size"
-							app:typeface="@string/font_roboto_medium" />
+							android:textSize="@dimen/descr_text_size"
+							app:typeface="@string/font_roboto_mono_bold"
+							tools:text="15:04:58" />
 
 					</LinearLayout>
 
@@ -413,25 +420,27 @@
 						android:layout_marginLeft="18dp"
 						android:orientation="vertical">
 
-						<TextView
+						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/average_altitude_desc"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="8dp"
+							android:layout_marginBottom="6dp"
 							android:background="@null"
 							android:text="@string/average_altitude"
 							android:textColor="?android:attr/textColorSecondary"
-							android:textSize="@dimen/list_item_description_text_size" />
+							android:textSize="@dimen/list_item_description_text_size"
+							app:typeface="@string/font_roboto_regular" />
 
 						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/average_altitude_text"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:background="@null"
-							android:text="20:58:00"
 							android:textColor="?android:attr/textColorPrimary"
-							android:textSize="@dimen/hint_text_size"
-							app:typeface="@string/font_roboto_medium" />
+							android:textSize="@dimen/descr_text_size"
+							app:typeface="@string/font_roboto_mono_bold"
+							tools:text="20:58:00" />
 
 					</LinearLayout>
 
@@ -446,13 +455,13 @@
 			android:id="@+id/open_in_osmand_btn"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/list_item_height_min"
-			android:layout_marginBottom="@dimen/content_padding_standard"
-			android:layout_marginLeft="@dimen/content_padding_half"
-			android:layout_marginRight="@dimen/content_padding_half"
+			android:layout_marginLeft="@dimen/content_padding_standard"
+			android:layout_marginRight="@dimen/content_padding_standard"
+			android:layout_marginBottom="@dimen/image_button_padding"
 			android:background="@drawable/btn_round"
 			android:gravity="center_vertical"
-			android:paddingLeft="@dimen/content_padding_half"
-			android:paddingRight="@dimen/content_padding_half">
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard">
 
 			<ImageView
 				android:id="@+id/open_in_osmand_icon"
@@ -469,7 +478,7 @@
 				android:text="@string/open_in_osmand"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/list_item_title_text_size"
-				app:typeface="@string/font_roboto_medium" />
+				app:typeface="@string/font_roboto_regular" />
 
 		</LinearLayout>
 
@@ -477,13 +486,13 @@
 			android:id="@+id/share_gpx_btn"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/list_item_height_min"
+			android:layout_marginLeft="@dimen/content_padding_standard"
+			android:layout_marginRight="@dimen/content_padding_standard"
 			android:layout_marginBottom="@dimen/content_padding_standard"
-			android:layout_marginLeft="@dimen/content_padding_half"
-			android:layout_marginRight="@dimen/content_padding_half"
 			android:background="@drawable/btn_round"
 			android:gravity="center_vertical"
-			android:paddingLeft="@dimen/content_padding_half"
-			android:paddingRight="@dimen/content_padding_half">
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard">
 
 			<ImageView
 				android:id="@+id/share_gpx_icon"
@@ -501,7 +510,7 @@
 				android:text="@string/shared_string_share"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/list_item_title_text_size"
-				app:typeface="@string/font_roboto_medium" />
+				app:typeface="@string/font_roboto_regular" />
 
 		</LinearLayout>
 	</LinearLayout>
