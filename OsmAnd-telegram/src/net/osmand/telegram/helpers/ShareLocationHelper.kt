@@ -15,6 +15,8 @@ private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
 private const val MY_LOCATION_UPDATE_MS = 15000 // 15 sec
 
+private const val UPDATE_LOCATION_ACCURACY = 30 // 30 meters
+
 class ShareLocationHelper(private val app: TelegramApplication) {
 
 	private val log = PlatformUtil.getLog(ShareLocationHelper::class.java)
@@ -52,7 +54,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	fun updateLocation(location: Location?) {
 		lastLocation = location
 
-		if (location != null) {
+		if (location != null && location.accuracy < UPDATE_LOCATION_ACCURACY) {
 			lastLocationUpdateTime = System.currentTimeMillis()
 			if (app.settings.getChatsShareInfo().isNotEmpty()) {
 				shareLocationMessages(location, app.telegramHelper.getCurrentUserId())

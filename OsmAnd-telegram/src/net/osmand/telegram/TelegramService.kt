@@ -204,13 +204,14 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			providers.add(0, providers.removeAt(passiveFirst))
 		}
 		// find location
+		var location: net.osmand.Location? = null
 		for (provider in providers) {
-			val location = convertLocation(service.getLastKnownLocation(provider))
-			if (location != null) {
-				return location
+			val loc = convertLocation(service.getLastKnownLocation(provider))
+			if (loc != null && (location == null || loc.hasAccuracy() && loc.accuracy < location.accuracy)) {
+				location = loc
 			}
 		}
-		return null
+		return location
 	}
 
 	private fun setupAlarm() {
