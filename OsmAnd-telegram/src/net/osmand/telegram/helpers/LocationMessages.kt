@@ -116,7 +116,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 		override fun onCreate(db: SQLiteDatabase) {
 			db.execSQL(TIMELINE_TABLE_CREATE)
-			db.execSQL("CREATE INDEX $DATE_INDEX ON $TIMELINE_TABLE_NAME (\"$COL_TIME\" DESC);")
+			db.execSQL("CREATE INDEX IF NOT EXISTS $DATE_INDEX ON $TIMELINE_TABLE_NAME (\"$COL_TIME\" DESC);")
 			db.execSQL(BUFFER_TABLE_CREATE)
 		}
 
