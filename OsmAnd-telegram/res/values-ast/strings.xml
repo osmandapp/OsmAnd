@@ -147,4 +147,7 @@
     <string name="my_location">El mio allugamientu</string>
     <string name="live_now">En direuto</string>
     <string name="timeline">Llinia temporal</string>
+    <string name="last_available_location">L\'últimu allugamientu disponible</string>
+    <string name="sharing_status">Estáu de la compartición</string>
+    <string name="set_time_description">Afita\'l tiempu nel que los contautos y grupos esbillaos van ver el to allugamientu en tiempu real.</string>
 </resources>
