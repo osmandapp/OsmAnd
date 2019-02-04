@@ -1676,8 +1676,8 @@ public class OsmandAidlApi {
 
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
+			clearNavDrawerItems(appPackage);
 			if (items.isEmpty()) {
-				clearNavDrawerItems(appPackage);
 				return true;
 			}
 			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
