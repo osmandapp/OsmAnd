@@ -82,11 +82,11 @@ public class GPXUtilities {
 			String clrValue = null;
 			if (extensions != null) {
 				clrValue = extensions.get("color");
-				if (clrValue == null) {
+				if (clrValue == null||clrValue.isEmpty()) {
 					clrValue = extensions.get("colour");
 				}
-				if (clrValue == null) {
-					clrValue = extensions.get("displaycolor");
+				if (clrValue == null ||clrValue.isEmpty()) {
+					clrValue = extensions.get("DisplayColor");
 				}
 			}
 			if (clrValue != null && clrValue.length() > 0) {
@@ -1522,6 +1522,25 @@ public class GPXUtilities {
 		return text;
 	}
 
+	private static Map<String, String> readExtensionText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
+		int tok;
+		Map<String, String> innerTagAndText = new HashMap<>();
+		String innerTag = "";
+		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+			innerTag = parser.getName();
+			log.debug("tag: " + parser.getName()+ ", prefix: " + parser.getPrefix());
+			if (tok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
+				break;
+			} else if (tok == XmlPullParser.TEXT) {
+				String text = parser.getText();
+				if (text!=null  || !text.isEmpty() ) {
+					innerTagAndText.put(innerTag, text);
+				}
+			}
+		}
+		return innerTagAndText;
+	}
+
 	public static GPXFile loadGPXFile(Context ctx, File f) {
 		FileInputStream fis = null;
 		try {
@@ -1567,15 +1586,24 @@ public class GPXUtilities {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
 					if (extensionReadMode && parse != null) {
-						String value = readText(parser, tag);
-						if (value != null) {
-							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
-							if (tag.equals("speed") && parse instanceof WptPt) {
-								try {
-									((WptPt) parse).speed = Float.parseFloat(value);
-								} catch (NumberFormatException e) {}
+						if (tag.equals("TrackExtension")) {
+							Map<String, String> innerTagAndText = readExtensionText(parser, tag);
+							for (Map.Entry<String, String> entity : innerTagAndText.entrySet()) {
+								((GPXExtensions) parse).getExtensionsToWrite().put(entity.getKey(), entity.getValue());
+							}
+
+						} else {
+							String value = readText(parser, tag);
+							if (value != null) {
+								((GPXExtensions) parse).getExtensionsToWrite().put(tag, value);
+								if (tag.equals("speed") && parse instanceof WptPt) {
+									try {
+										((WptPt) parse).speed = Float.parseFloat(value);
+									} catch (NumberFormatException e) {}
+								}
 							}
 						}
+
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = true;
 					} else {

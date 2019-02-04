@@ -845,5 +845,11 @@ public class OsmandAidlService extends Service {
 				return false;
 			}
 		}
+
+		@Override
+		public boolean appendDataToFile(String filename, byte[] data) {
+			OsmandAidlApi api = getApi("appendDataToFile");
+			return api != null && api.appendDataToFile(filename, data);
+		}
 	};
 }

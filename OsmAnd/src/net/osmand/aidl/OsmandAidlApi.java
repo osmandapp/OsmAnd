@@ -1967,6 +1967,36 @@ public class OsmandAidlApi {
 		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	boolean appendDataToFile(final String filename, final byte[] data) {
+		if (filename.isEmpty() || data == null || data.length == 0) {
+			return false;
+		} else {
+			File f = app.getAppPath(IndexConstants.TEMP_DIR + filename);
+
+			try {
+				if (!f.exists()) {
+					f.getParentFile().mkdirs();
+					f.createNewFile();
+				}
+			} catch (IOException ioe) {
+				LOG.debug(ioe.getMessage(), ioe);
+			}
+			try {
+				FileOutputStream outputStream
+					= new FileOutputStream(IndexConstants.TEMP_DIR+filename, true);
+				outputStream.write(data);
+			} catch (IOException ioe) {
+				LOG.debug(ioe.getMessage(), ioe);
+			}
+
+
+
+
+
+			return true;
+		}
+	}
+
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
 		private final OsmandApplication app;

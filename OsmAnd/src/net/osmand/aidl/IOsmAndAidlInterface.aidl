@@ -179,4 +179,6 @@ interface IOsmAndAidlInterface {
     boolean registerForOsmandInitListener(in IOsmAndAidlCallback callback);
 
     boolean getBitmapForGpx(in CreateGpxBitmapParams file, IOsmAndAidlCallback callback);
+
+    boolean appendDataToFile(in String filename, in byte[] data);
 }
