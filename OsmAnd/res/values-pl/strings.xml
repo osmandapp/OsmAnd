@@ -2776,7 +2776,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="ascendingly">rosnąco</string>
     <string name="date_added">Data dodania</string>
     <string name="order_by">Porządkowanie według:</string>
-    <string name="show_guide_line">Pokaż linie przewodnie</string>
+    <string name="show_guide_line">Linie przewodnie</string>
     <string name="show_arrows_on_the_map">Strzałki na mapie</string>
     <string name="show_passed">Wyświetl ominięte</string>
     <string name="hide_passed">Ukryj ominięte</string>
@@ -2829,7 +2829,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Wyświetla na mapie linię łączącą aktualne położenie z położeniem aktywnego znacznika.</string>
     <string name="show_arrows_descr">Wyświetla na mapie jedną lub dwie strzałki wskazujące kierunek do aktywnych znaczników.</string>
     <string name="distance_indication_descr">Wybiera sposób wyświetlania odległości od aktywnego znacznika.</string>
-    <string name="active_markers_descr">Wybierz liczbę wskaźników kierunku do wyświetlenia.</string>
+    <string name="active_markers_descr">Wybiera liczbę wyświetlanych wskaźników kierunku.</string>
     <string name="looking_for_tracks_with_waypoints">Wyszukiwanie ścieżek z punktami</string>
     <string name="shared_string_more_without_dots">Więcej</string>
     <string name="appearance_on_the_map">Wygląd na mapie</string>
@@ -2894,7 +2894,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
     <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich notatek.</string>
     <string name="modify_the_search_query">Modyfikuj zapytanie.</string>
-    <string name="one_tap_active_descr">Naciśnij znacznik na mapie, by przesunąć do na górę listy aktywnych znaczników bez otwierania menu kontekstowego.</string>
+    <string name="one_tap_active_descr">Dotknięciem znacznika na mapie przenosi go na górę listy aktywnych znaczników, bez otwierania menu kontekstowego.</string>
     <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
     <string name="show_tunnels">Tunele</string>
 <string name="import_as_gpx">Zapisz plik w formacie GPX</string>
@@ -3189,7 +3189,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_restore">Przywróć</string>
     <string name="keep_passed_markers">Zachowanie miniętych znaczników na mapie</string>
     <string name="more_transport_on_stop_hint">Na tym przystanku zatrzymuje się więcej środków transportu.</string>
-    <string name="markers_remove_dialog_msg">Usuń znacznik mapy \'%s\'\?</string>
+    <string name="markers_remove_dialog_msg">Usunąć znacznik mapy „%s”\?</string>
     <string name="edit_map_marker">Edytuj znacznik mapy</string>
     <string name="third_party_application">Aplikacja innej firmy</string>
     <string name="search_street">Wyszukaj ulicę</string>
@@ -3231,7 +3231,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="on_foot">pieszo: %1$s</string>
     <string name="route_way">Trasa: %1$s</string>
     <string name="points_of_interests">Użyteczne miejsca (UM)</string>
-    <string name="waiting_for_route_calculation">Oczekiwanie na przeliczenie trasy</string>
+    <string name="waiting_for_route_calculation">Oczekiwanie na wyznaczenie trasy</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
     <string name="avoid_roads_descr">Wybierz, na mapie lub z listy poniżej, drogę, którą chcesz unikać podczas nawigacji:</string>
     <string name="show_along_the_route">Pokaż na trasie</string>

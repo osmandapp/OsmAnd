@@ -407,7 +407,7 @@
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Asia, América Llatina y similar</string>
     <string name="driving_region_uk">Reinu Xuníu India y similar</string>
-    <string name="speak_speed_limit">Llende de velocidá</string>
+    <string name="speak_speed_limit">Llendes de velocidá</string>
     <string name="speak_cameras"/>
     <string name="speak_traffic_warnings"/>
     <string name="osb_author_or_password_not_specified">Especifica un usuariu y contraseña d\'OSM n\'«Axustes»</string>
@@ -516,7 +516,7 @@
     <string name="daily">Caldía</string>
     <string name="missing_write_external_storage_permission">A OsmAnd fálta-y un permisu pa usar la tarxeta de memoria</string>
     <string name="only_download_over_wifi">Baxar namái na Wi-Fi</string>
-    <string name="application_dir_description">Escueyi ónde quier atroxar los mapes y otros ficheros.</string>
+    <string name="application_dir_description">Escueyi ónde quies atroxar los mapes y otros ficheros.</string>
 
     <string name="index_name_voice"/>
     <string name="index_name_tts_voice"/>
@@ -567,7 +567,7 @@
     <string name="shared_string_move_up">Xubir</string>
     <string name="shared_string_move_down">Baxar</string>
     <string name="finish_navigation"/>
-    <string name="storage_directory_shared"/>
+    <string name="storage_directory_shared">Memoria compartida</string>
     <string name="full_report">Informe completu</string>
     <string name="osm_live_subscription">Soscripción a OsmAnd Live</string>
     <string name="osm_live_hide_user_name">Nun amosar el mio nome nos informes</string>
@@ -597,7 +597,7 @@
     <string name="shared_string_search"/>
     <string name="shared_string_show_description"/>
     <string name="shared_string_message"/>
-    <string name="welmode_download_maps"/>
+    <string name="welmode_download_maps">Baxar mapes</string>
     <string name="shared_string_not_selected"/>
     <string name="no_address_found">Nun se determinó la direición</string>
     <string name="shared_string_download">Baxar</string>
@@ -626,7 +626,7 @@
     <string name="error_occurred_saving_gpx"/>
     <string name="fast_route_mode">La ruta más rápida</string>
     <string name="fast_route_mode_descr"/>
-    <string name="speak_street_names"/>
+    <string name="speak_street_names">Nomes de cais (TTS)</string>
     <string name="si_mi_meters">Milles/metros</string>
     <string name="si_mi_feet">Milles/pies</string>
     <string name="si_mi_yard">Milles/yardes</string>
@@ -755,8 +755,8 @@
     <string name="shared_string_time">Tiempu</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_relief_smoothness_factor_name"/>
-    <string name="routing_attr_height_obstacles_name"/>
-    <string name="routing_attr_height_obstacles_description"/>
+    <string name="routing_attr_height_obstacles_name">Usar datos d\'elevación</string>
+    <string name="routing_attr_height_obstacles_description">Inclúi la elevación del tarrén (pelos datos de SRTM, ASTER y EU-DEM).</string>
 
     <string name="rendering_attr_depthContours_description"/>
     <string name="rendering_attr_depthContours_name"/>
@@ -791,7 +791,7 @@
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_color_scheme">Esquema de colores</string>
     <string name="routing_attr_allow_private_name"/>
-    <string name="routing_attr_allow_private_description">Permite l\'accesu a árees privaes.</string>
+    <string name="routing_attr_allow_private_description">Permitir l\'accesu a árees privaes.</string>
     <string name="favorite_group_name"/>
     <string name="change_color">Camudar el color</string>
     <string name="edit_name">Editar el nome</string>
@@ -1570,7 +1570,7 @@
 \n La mayoría de países del mundu tán disponibles como descarga
 \n Dende Afganistán hasta Zimbabue, dende Australia hasta EE.XX. Arxentina, Brasil, Canadá, Francia, Alemaña, Méxicu, Reinu Xuníu, España…
 \n</string>
-    <string name="native_app_allocated_memory_descr">Memoria nativa total asignada pola aplicación %1$sMB (Dalvik %2$s MB, otra %3$sMB). Memoria proporcional %4$sMB (llende d\'Android %5$sMB, Dalvik %6$sMB).</string>
+    <string name="native_app_allocated_memory_descr">L\'aplicación asignó %1$sMB de memoria nativa (Dalvik %2$sMB, otra %3$sMB). Memoria proporcional %4$sMB (llende d\'Android %5$sMB, Dalvik %6$sMB).</string>
     <string name="osmand_parking_warning">Alvertencia</string>
     <string name="local_openstreetmap_were_uploaded">Xubiéronse {0} PdI/notes</string>
     <string name="filename_input">Nome de ficheru:</string>
@@ -1645,7 +1645,7 @@
     <string name="map_widget_monitoring_services">Servicios de rexistru</string>
     <string name="poi_filter_for_tourists">Pa turistes</string>
     <string name="poi_filter_fuel">Combustible</string>
-    <string name="global_app_allocated_memory_descr">Memoria asignada %1$sMB (llende d\'Android %2$sMB, Dalvik %3$sMB).</string>
+    <string name="global_app_allocated_memory_descr">Asignóse %1$sMB de memoria (llende d\'Android %2$sMB, Dalvik %3$sMB).</string>
     <string name="local_indexes_cat_tile">Mapes de mosaicos en llinia y na caché</string>
     <string name="local_indexes_cat_map">Mapes estándar (vectores)</string>
     <string name="map_online_data">Mapes de mosaicos en llinia</string>
@@ -1670,4 +1670,22 @@
     <string name="search_address_building">Edificiu</string>
     <string name="search_address_building_option">Edificiu</string>
     <string name="save_poi_without_poi_type_message">¿De xuru que quies guardar el PdI ensin una triba\?</string>
+    <string name="show_along_the_route">Amosar pel camín…</string>
+    <string name="osm_live_subscription_desc">La soscripción permite anovamientos cada hora, caldía, cada selmana y descargues ensin llende pa tolos mapes.</string>
+    <string name="rendering_value_thin_name">Delgáu</string>
+    <string name="agps_data_last_downloaded">Data de los últimos datos baxaos d\'A-GPS: %1$s</string>
+    <string name="plugin_nautical_name">Vista de mapa náuticu</string>
+    <string name="wake_on_voice">Prender la pantalla</string>
+    <string name="wake_on_voice_descr">Prende la pantalla del preséu (si ta apagada) cuando t\'aproximes a un xiru.</string>
+    <string name="speak_favorites">Favoritos cercanos</string>
+    <string name="speak_poi">PdI cercanos</string>
+    <string name="routing_attr_avoid_unpaved_name">Carreteres ensin pavimentar</string>
+    <string name="routing_attr_avoid_motorway_name">Autopistes</string>
+    <string name="snap_to_road_descr">Axusta la posición a los caminos na navegación.</string>
+    <string name="snap_to_road">Axustar a la carretera</string>
+    <string name="keep_informing_never">Namái a mano (toca na flecha)</string>
+    <string name="keep_informing">Repitir les instrucciones de navegación</string>
+    <string name="trace_rendering_descr">Amuesa\'l rindimientu del renderizáu.</string>
+    <string name="planning_trip_item">Planificación d\'un viaxe</string>
+    <string name="search_on_the_map_item">Guetes nel mapa</string>
 </resources>

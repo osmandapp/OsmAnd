@@ -179,4 +179,7 @@
     <string name="shared_string_second_short">שנ׳</string>
     <string name="my_location">המיקום שלי</string>
     <string name="timeline">ציר זמן</string>
+    <string name="send_my_location_desc">הגדרת טווח הזמן המזערי לשיתוף מיקום.</string>
+    <string name="welcome_descr"><b>שיתוף המקום דרךOsmAnd</b> מאפשר לך לשתף את המיקום ולראות את מיקומם של אחרים ב־OsmAnd.<br/><br/>היישומון משתמש ב־API ודורש חשבון טלגרם.</string>
+    <string name="live_now">חי כעת</string>
 </resources>
