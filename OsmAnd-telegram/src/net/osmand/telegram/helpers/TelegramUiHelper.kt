@@ -226,32 +226,6 @@ object TelegramUiHelper {
 		}
 	}
 
-	private fun gpxToGpxChatItem(
-		helper: TelegramHelper,
-		gpx: GPXFile
-	): GpxChatItem? {
-		val user = helper.getUser(gpx.userId) ?: return null
-		val chat = helper.getChat(gpx.chatId) ?: return null
-		return GpxChatItem().apply {
-			chatId = chat.id
-			chatTitle = chat.title
-			gpxFile = gpx
-			name = TelegramUiHelper.getUserName(user)
-			if (helper.isGroup(chat)) {
-				photoPath = helper.getUserPhotoPath(user)
-				groupPhotoPath = chat.photo?.small?.local?.path
-			} else {
-				photoPath = user.profilePhoto?.small?.local?.path
-			}
-			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
-			placeholderId = R.drawable.img_user_picture
-			userId = user.id
-			privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
-			chatWithBot = helper.isBot(userId)
-			lastUpdated = (gpx.modifiedTime / 1000).toInt()
-		}
-	}
-
 	fun userLocationsToChatItem(helper: TelegramHelper, userLocation: LocationMessages.UserLocations): LocationMessagesChatItem? {
 		val user = helper.getUser(userLocation.userId)
 		val chat = helper.getChat(userLocation.chatId)
@@ -319,24 +293,6 @@ object TelegramUiHelper {
 		var membersCount: Int = 0
 			internal set
 		var liveMembersCount: Int = 0
-			internal set
-
-		override fun canBeOpenedOnMap() = latLon != null
-
-		override fun getMapPointId() = "${chatId}_$userId"
-
-		override fun getVisibleName() = chatTitle
-	}
-
-	class GpxChatItem : ListItem() {
-
-		var gpxFile: GPXFile? = null
-			internal set
-		var groupPhotoPath: String? = null
-			internal set
-		var privateChat: Boolean = false
-			internal set
-		var chatWithBot: Boolean = false
 			internal set
 
 		override fun canBeOpenedOnMap() = latLon != null
