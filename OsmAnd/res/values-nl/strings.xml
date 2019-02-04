@@ -2229,9 +2229,8 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een
 \nabonnement op OsmAnd Live</string>
 
-    <string name="osm_live_header">"Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
-Een  gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
-Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen."</string>
+    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
+\nEen gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen. Als je OsmAnd en OSM wil ondersteunen, en ondersteund wilt worden door hen, is dit de perfecte manier om dat te doen.</string>
     
     <string name="select_map_marker">Kies markeervlaggetjes</string>
     <string name="map_markers_other">Andere markeervlaggetjes</string>
@@ -2240,9 +2239,7 @@ Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.
     <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! 
 Tijdelijk is {3} MB nodig en permanent {1} MB extra
 Nu is maar {2} MB beschikbaar.</string>
-    <string name="download_files_question_space_with_temp">{0} bestanden downloaden? 
-Tijdelijk is {3} MB nodig en permanent {1} MB. 
-Er is nu {2} MB beschikbaar</string>
+    <string name="download_files_question_space_with_temp">{0} bestanden downloaden\? Tijdelijk is {3} MB nodig en permanent {1} MB. Er is nu {2} MB beschikbaar.</string>
     <string name="upload_osm_note_description">Je kunt OSM Opmerkingen anoniem uploaden of je OpenStreetMap.org profiel gebruiken.</string>
     <string name="upload_osm_note">Upload OSM-notitie</string>
     <string name="map_marker_1st">Eerste Markeervlaggetje</string>
@@ -2539,7 +2536,7 @@ voor Gebied: %1$s x %2$s</string>
 	<string name="shared_string_action_name">Titel voor de Actie (eventueel wijzigen)</string>
 <string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten.</string>
     <string name="rendering_attr_depthContours_name">Zeedieptelijnen</string>
-	<string name="select_gpx_folder">Kies map voor GPX-tracks</string>
+	<string name="select_gpx_folder">Kies map voor GPX bestanden</string>
     <string name="file_can_not_be_moved">Bestand kan niet verplaatst worden.</string>
     <string name="shared_string_move">Verplaats</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
