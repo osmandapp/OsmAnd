@@ -2755,7 +2755,7 @@
     <string name="fav_point_emoticons_message">O nome do Favorito foi modificado para %1$s para facilitar gravar corretamente a sequência de caracteres com emoticons para um ficheiro.</string>
     <string name="print_route">Imprimir rota</string>
     <string name="fav_point_dublicate">Nome de favorito duplicado</string>
-    <string name="fav_point_dublicate_message">Nome favorito especificado já está em uso, foi alterado para %1$ s para evitar a duplicação.</string>
+    <string name="fav_point_dublicate_message">Nome favorito especificado já está em uso, foi alterado para %1$s para evitar a duplicação.</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trilha sob demanda</string>
     <string name="enable_proxy_title">Ativar proxy HTTP</string>
     <string name="enable_proxy_descr">Configurar o proxy HTTP para todas as solicitações de rede.</string>
@@ -3155,5 +3155,5 @@
     <string name="choose_track_file_to_follow">Escolha o ficheiro de caminho a seguir</string>
     <string name="voice_announcements">Anúncios de voz</string>
     <string name="intermediate_destinations">Destinos intermediários: %1$s</string>
-    <string name="arrive_at_time">Chegar às %1$ s</string>
+    <string name="arrive_at_time">Chegar às %1$s</string>
 </resources>
