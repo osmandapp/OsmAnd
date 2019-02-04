@@ -13,9 +13,7 @@ import org.json.JSONObject
 
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
-private const val MY_LOCATION_UPDATE_MS = 15000 // 15 sec
-
-private const val UPDATE_LOCATION_ACCURACY = 30 // 30 meters
+private const val UPDATE_LOCATION_ACCURACY = 150 // 150 meters
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
@@ -31,8 +29,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		private set
 
 	var lastLocationUpdateTime: Long = 0
-
-	var lastMyLocationUpdateTime: Long = 0
 
 	var lastLocation: Location? = null
 		set(value) {
@@ -227,10 +223,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				prepareMapAndTextMessage(shareInfo, message, isBot, sharingMode)
 			}
 		}
-		if (System.currentTimeMillis() - lastMyLocationUpdateTime > MY_LOCATION_UPDATE_MS) {
-			app.locationMessages.addMyLocationMessage(location)
-			lastMyLocationUpdateTime = System.currentTimeMillis()
-		}
+		app.locationMessages.addMyLocationMessage(location)
 		if (bufferedMessagesFull) {
 			checkNetworkType()
 		}
