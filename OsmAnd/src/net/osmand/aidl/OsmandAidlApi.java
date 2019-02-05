@@ -1661,7 +1661,6 @@ public class OsmandAidlApi {
 				@Override
 				public void onFinish(AppInitializer init) {
 					try {
-						LOG.debug("AIDL App registerForOsmandInitialization");
 						callback.onAppInitialized();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -1967,34 +1966,37 @@ public class OsmandAidlApi {
 		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	private static int counter = 0;
+
 	boolean appendDataToFile(final String filename, final byte[] data) {
-		if (filename.isEmpty() || data == null || data.length == 0) {
+		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + filename);
+		if (filename.isEmpty() || data == null) {
 			return false;
+		}else if (data.length == 0) {
+			if (file.exists() && filename.endsWith(IndexConstants.SQLITE_EXT)) {
+				processSqliteFileImport(Uri.fromFile(file), filename);
+			}
 		} else {
-			File f = app.getAppPath(IndexConstants.TEMP_DIR + filename);
-
+			FileOutputStream fos;
+			file.getParentFile().mkdirs();
 			try {
-				if (!f.exists()) {
-					f.getParentFile().mkdirs();
-					f.createNewFile();
-				}
-			} catch (IOException ioe) {
-				LOG.debug(ioe.getMessage(), ioe);
+				counter++;
+				LOG.debug("File chunk #" + counter + " of size: " + data.length);
+				file.createNewFile();
+				fos = new FileOutputStream(file);
+				fos.write(data);
+				fos.close();
+				fos.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			try {
-				FileOutputStream outputStream
-					= new FileOutputStream(IndexConstants.TEMP_DIR+filename, true);
-				outputStream.write(data);
-			} catch (IOException ioe) {
-				LOG.debug(ioe.getMessage(), ioe);
-			}
-
-
-
-
-
-			return true;
 		}
+		return true;
+	}
+
+	private void processSqliteFileImport(Uri uri, String filename) {
+		LOG.debug("path:" + uri.getPath());
+		LOG.debug("file:" + filename);
 	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
