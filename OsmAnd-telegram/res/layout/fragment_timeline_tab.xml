@@ -107,21 +107,10 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<FrameLayout
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:id="@+id/swipe_refresh"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
-
-		<net.osmand.telegram.ui.views.TextViewEx
-			android:id="@+id/last_telegram_update_time"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="top|center_horizontal"
-			android:gravity="center"
-			android:paddingTop="@dimen/content_padding_half"
-			android:textColor="?android:attr/textColorSecondary"
-			android:textSize="@dimen/list_item_description_text_size"
-			android:visibility="gone"
-			app:typeface="@string/font_roboto_regular" />
 
 		<android.support.v7.widget.RecyclerView
 			android:id="@+id/recycler_view"
@@ -131,6 +120,6 @@
 			android:paddingBottom="@dimen/list_item_content_margin"
 			android:scrollbars="vertical" />
 
-	</FrameLayout>
+	</android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -301,7 +301,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	private fun checkNetworkType(){
+	fun checkNetworkType(){
 		if (app.isInternetConnectionAvailable) {
 			val networkType = when {
 				app.isWifiConnected -> TdApi.NetworkTypeWiFi()

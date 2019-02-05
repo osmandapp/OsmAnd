@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/card_bg_color">
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -73,7 +78,7 @@
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:text="@string/start_date"
-					android:textColor="?attr/android:textColorSecondary"
+					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/list_item_description_text_size"
 					app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height"
 					app:typeface="@string/font_roboto_regular" />
@@ -89,7 +94,7 @@
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:text="@string/end_date"
-					android:textColor="?attr/android:textColorSecondary"
+					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/list_item_description_text_size"
 					app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height"
 					app:typeface="@string/font_roboto_regular" />
@@ -498,8 +503,8 @@
 				android:id="@+id/share_gpx_icon"
 				android:layout_width="@dimen/list_item_icon_size"
 				android:layout_height="@dimen/list_item_icon_size"
-				android:src="@drawable/ic_action_share"
-				android:tint="@color/ctrl_active_light" />
+				tools:src="@drawable/ic_action_share"
+				tools:tint="@color/ctrl_active_light" />
 
 			<net.osmand.telegram.ui.views.TextViewEx
 				android:id="@+id/share_gpx_title"
@@ -513,6 +518,9 @@
 				app:typeface="@string/font_roboto_regular" />
 
 		</LinearLayout>
+
 	</LinearLayout>
 
-</ScrollView>
+	</ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

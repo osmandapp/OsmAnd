@@ -1,8 +1,10 @@
 package net.osmand.telegram.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.RecyclerView
@@ -11,7 +13,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
@@ -42,7 +47,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
-	private val osmandAidlHelper get() = app.osmandAidlHelper
 	private val settings get() = app.settings
 
 	private lateinit var adapter: LiveNowListAdapter
@@ -97,11 +101,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
+		mainView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).apply {
+			setOnRefreshListener {
+				app.shareLocationHelper.checkNetworkType()
+				updateList()
+				isRefreshing = false
+			}
+			setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.CYAN)
+		}
+
 		openOsmAndBtn = mainView.findViewById<TextView>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
-				val pack = settings.appToConnectPackage
-				if (AndroidUtils.isAppInstalled(context, pack)) {
-					activity?.packageManager?.getLaunchIntentForPackage(pack)?.also { intent ->
+				if (app.isOsmAndInstalled()) {
+					activity?.packageManager?.getLaunchIntentForPackage(settings.appToConnectPackage)?.also { intent ->
 						startActivity(intent)
 					}
 				} else {
@@ -438,9 +450,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
-					if (!app.isOsmAndInstalled()) {
+					if (!app.isAnyOsmAndInstalled()) {
 						showOsmAndMissingDialog()
-					} else {
+					} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
+						fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this@LiveNowTabFragment) }
+					} else if(app.isOsmAndInstalled()){
 						app.showLocationHelper.showLocationOnMap(item, staleLocation)
 					}
 				}
@@ -533,17 +547,21 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 					settings.showChatOnMap(chatId, allSelected)
 					if (settings.hasAnyChatToShowOnMap()) {
-						if (!app.isOsmAndInstalled()) {
+						if (!app.isAnyOsmAndInstalled()) {
 							if (allSelected) {
 								showOsmAndMissingDialog()
 							}
+						} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
+							fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this@LiveNowTabFragment) }
 						} else {
-							if (allSelected) {
-								app.showLocationHelper.showChatMessages(chatId)
-							} else {
-								app.showLocationHelper.hideChatMessages(chatId)
+							if (app.isOsmAndInstalled()) {
+								if (allSelected) {
+									app.showLocationHelper.showChatMessages(chatId)
+								} else {
+									app.showLocationHelper.hideChatMessages(chatId)
+								}
+								app.showLocationHelper.startShowingLocation()
 							}
-							app.showLocationHelper.startShowingLocation()
 						}
 					} else {
 						app.showLocationHelper.stopShowingLocation()

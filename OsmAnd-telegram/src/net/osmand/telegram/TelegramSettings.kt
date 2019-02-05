@@ -528,7 +528,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		currentSharingMode = prefs.getString(SHARING_MODE_KEY, "")
 
-		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
+		val defPackage = if (AppConnect.getInstalledApps(app).size == 1) AppConnect.getInstalledApps(app).first().appPackage else ""
+		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, defPackage)
 
 		liveNowSortType = LiveNowSortType.valueOf(
 			prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_DISTANCE.name)
@@ -767,6 +768,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 				for (item in values()) {
 					if (item.appPackage == appPackage) {
 						return item.whiteIconId
+					}
+				}
+				return 0
+			}
+
+			@DrawableRes
+			fun getIconId(appPackage: String): Int {
+				for (item in values()) {
+					if (item.appPackage == appPackage) {
+						return item.iconId
 					}
 				}
 				return 0
