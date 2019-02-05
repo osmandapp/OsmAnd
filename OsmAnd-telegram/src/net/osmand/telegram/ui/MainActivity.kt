@@ -290,13 +290,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		if (!app.showLocationHelper.showingLocation && settings.hasAnyChatToShowOnMap()) {
 			app.showLocationHelper.startShowingLocation()
 		}
-		if (app.telegramService == null) {
-			messages.forEach {
-				if (!it.isOutgoing) {
-					app.locationMessages.addNewLocationMessage(it)
-				}
-			}
-		}
 	}
 
 	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {}
