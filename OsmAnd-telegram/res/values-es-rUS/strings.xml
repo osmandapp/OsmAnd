@@ -187,4 +187,10 @@
     <string name="start_date">Fecha de inicio</string>
     <string name="timeline_description">Activar la monitorización para recopilar datos de movimiento en segundo plano.</string>
     <string name="timeline">Línea de tiempo</string>
+    <string name="gps_points_in_buffer">enviado (%1$d en búfer)</string>
+    <string name="points_size">%1$d puntos</string>
+    <string name="shared_string_date">Fecha</string>
+    <string name="shared_string_collected">Recolectados</string>
+    <string name="gps_points">Puntos de GPS</string>
+    <string name="shared_string_sent">Enviado</string>
 </resources>
