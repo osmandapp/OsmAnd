@@ -51,7 +51,6 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	private lateinit var avgSpeedTv: TextView
 	private lateinit var totalDistanceTv: TextView
 	private lateinit var timeSpanTv: TextView
-	private var snackbar: Snackbar? = null
 
 	private var startCalendar = Calendar.getInstance()
 	private var endCalendar = Calendar.getInstance()
@@ -106,10 +105,11 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 				}
 			})
 
-		val backBtn = mainView.findViewById<ImageView>(R.id.back_button)
-		backBtn.setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_arrow_back))
-		backBtn.setOnClickListener {
-			dismiss()
+		mainView.findViewById<ImageView>(R.id.back_button).apply {
+			setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_arrow_back))
+			setOnClickListener {
+				dismiss()
+			}
 		}
 
 		dateStartBtn = mainView.findViewById<TextView>(R.id.date_start_btn)
@@ -280,13 +280,13 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		} else if (!app.isConnectedOsmAndChosen()) {
 			fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this) }
 		} else if (!isOsmandCreateBitmap()) {
-			snackbar = Snackbar.make(mainView, R.string.please_update_osmand, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_update) {
+			 val snackbar = Snackbar.make(mainView, R.string.please_update_osmand, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_update) {
 					val packageName = if (app.settings.appToConnectPackage == OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME)
 							OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME else app.settings.appToConnectPackage
 					startActivity(AndroidUtils.getPlayMarketIntent(app, packageName))
 				}
-			AndroidUtils.setSnackbarTextColor(snackbar!!, R.color.ctrl_active_dark)
-			snackbar?.show()
+			AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
+			snackbar.show()
 		} else {
 			saveCurrentGpxToFile(object :
 				OsmandLocationUtils.SaveGpxListener {
