@@ -19,6 +19,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -372,6 +373,17 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	}
 
 	private static class PathTransportStop extends PathPoint {
+
+		private boolean smallPoint;
+
+		public boolean isSmallPoint() {
+			return smallPoint;
+		}
+
+		public void setSmallPoint(boolean smallPoint) {
+			this.smallPoint = smallPoint;
+		}
+
 		PathTransportStop(float x, float y, GeometryTransportWayStyle style) {
 			super(x, y, 0, style);
 		}
@@ -380,9 +392,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			return (GeometryTransportWayStyle) style;
 		}
 
+
 		@Override
 		void draw(Canvas canvas, GeometryWayContext context) {
-			Bitmap stopBitmap = getTransportWayStyle().getStopBitmap();
+			Bitmap stopBitmap = smallPoint ?
+					getTransportWayStyle().getStopSmallBitmap() : getTransportWayStyle().getStopBitmap();
 			float paintH2 = stopBitmap.getHeight() / 2f;
 			float paintW2 = stopBitmap.getWidth() / 2f;
 
@@ -542,6 +556,10 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			return getContext().getStopShieldBitmap(color, stopBitmap);
 		}
 
+		public Bitmap getStopSmallBitmap() {
+			return getContext().getStopSmallShieldBitmap(color);
+		}
+
 		@Override
 		public boolean isTransportLine() {
 			return true;
@@ -669,9 +687,30 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			PathAnchor anchor = anchors.get(i);
 			anchor.draw(canvas, wayContext);
 		}
-		for (int i = stops.size() - 1; i >= 0; i--) {
-			PathTransportStop stop = stops.get(i);
-			stop.draw(canvas, wayContext);
+		if (stops.size() > 0) {
+			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
+			List<PathTransportStop> fullObjects = new ArrayList<>();
+			Bitmap stopBitmap = null;
+			float iconSize = 1f;
+			for (int i = stops.size() - 1; i >= 0; i--) {
+				PathTransportStop stop = stops.get(i);
+				if (stopBitmap == null) {
+					stopBitmap = stop.getTransportWayStyle().getStopBitmap();
+					iconSize = stopBitmap.getWidth() * 3 / 2.5f;
+				}
+				float x = stop.x;
+				float y = stop.y;
+				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+					stop.setSmallPoint(true);
+					stop.draw(canvas, wayContext);
+				} else {
+					stop.setSmallPoint(false);
+					fullObjects.add(stop);
+				}
+			}
+			for (PathTransportStop stop : fullObjects) {
+				stop.draw(canvas, wayContext);
+			}
 		}
 	}
 	

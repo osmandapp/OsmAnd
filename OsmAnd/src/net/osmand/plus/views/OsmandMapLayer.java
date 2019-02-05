@@ -169,7 +169,8 @@ public abstract class OsmandMapLayer {
 		private Bitmap arrowBitmap;
 		private Bitmap walkArrowBitmap;
 		private Bitmap anchorBitmap;
-		private Map<Pair<Integer, Bitmap>, Bitmap> stopBitmapsCache = new HashMap();
+		private Map<Pair<Integer, Bitmap>, Bitmap> stopBitmapsCache = new HashMap<>();
+		private Map<Integer, Bitmap> stopSmallBitmapsCache = new HashMap<>();
 
 		public GeometryWayContext(Context ctx, float density) {
 			this.ctx = ctx;
@@ -351,6 +352,35 @@ public abstract class OsmandMapLayer {
 					canvas.drawBitmap(stopBitmap, src, rect, paint);
 				}
 				stopBitmapsCache.put(new Pair<>(color, stopBitmap), bmp);
+			}
+			return bmp;
+		}
+
+		public Bitmap getStopSmallShieldBitmap(int color) {
+			Bitmap bmp = stopSmallBitmapsCache.get(color);
+			if (bmp == null) {
+				int fillColor = UiUtilities.getContrastColor(getApp(), color, true);
+				int strokeColor = getStrokeColor(color);
+
+				float routeShieldRadius = attrsPT.paint3.getStrokeWidth() / 4;
+
+				float margin = 3f * density;
+				float width = routeShieldRadius * 2 + margin * 2;
+				float height = routeShieldRadius * 2 + margin * 2;
+				bmp = Bitmap.createBitmap((int) width, (int) height, Bitmap.Config.ARGB_8888);
+
+				Canvas canvas = new Canvas(bmp);
+				Paint paint = new Paint();
+				paint.setAntiAlias(true);
+				paint.setStrokeWidth(1f * density);
+				paint.setColor(fillColor);
+				paint.setStyle(Paint.Style.FILL);
+				canvas.drawCircle(width / 2, height / 2, routeShieldRadius, paint);
+				paint.setColor(strokeColor);
+				paint.setStyle(Paint.Style.STROKE);
+				canvas.drawCircle(width / 2, height / 2, routeShieldRadius, paint);
+
+				stopSmallBitmapsCache.put(color, bmp);
 			}
 			return bmp;
 		}
