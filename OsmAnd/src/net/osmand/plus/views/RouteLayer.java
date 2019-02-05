@@ -53,7 +53,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import gnu.trove.list.array.TByteArrayList;
-import gnu.trove.list.array.TIntArrayList;
 
 public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	
@@ -563,7 +562,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 	}
 
-	private void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, TIntArrayList tx, TIntArrayList ty,
+	private void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, List<Float> tx, List<Float> ty,
 			List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle> styles) {
 		int h = tb.getPixHeight();
 		int w = tb.getPixWidth();
@@ -573,9 +572,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		int bottom = h + h/4;
 
 		boolean hasStyles = styles != null && styles.size() == tx.size();
+		double zoomCoef = tb.getZoomAnimation() > 0 ? (Math.pow(2, tb.getZoomAnimation() + tb.getZoomFloatPart())) : 1f;
 
 		Bitmap arrow = wayContext.getArrowBitmap();
-		double pxStep = arrow.getHeight() * 4f;
+		int arrowHeight = arrow.getHeight();
+		double pxStep = arrowHeight * 4f * zoomCoef;
 		double dist = 0;
 		if (distPixToFinish != 0) {
 			dist = distPixToFinish - pxStep * ((int) (distPixToFinish / pxStep)); // dist < 1
@@ -590,23 +591,26 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 		GeometryWalkWayStyle walkWayStyle = new GeometryWalkWayStyle(wayContext);
 		Bitmap walkArrow = walkWayStyle.getPointBitmap();
+		int walkArrowHeight = walkArrow.getHeight();
+		double pxStepWalk = walkArrowHeight * 1.2f * zoomCoef;
+		double pxStepRegular = arrowHeight * 4f * zoomCoef;
 
 		GeometryWayStyle prevStyle = null;
 		for (int i = tx.size() - 2; i >= 0; i --) {
 			GeometryWayStyle style = hasStyles ? styles.get(i) : null;
-			float px = tx.get(i) / 100f;
-			float py = ty.get(i) / 100f;
-			float x = tx.get(i + 1) / 100f;
-			float y = ty.get(i + 1) / 100f;
+			float px = tx.get(i);
+			float py = ty.get(i);
+			float x = tx.get(i + 1);
+			float y = ty.get(i + 1);
 			double distSegment = distances.get(i + 1);
 			double angle = angles.get(i + 1);
 			if (distSegment == 0) {
 				continue;
 			}
 			if (style != null && style.isWalkLine()) {
-				pxStep = walkArrow.getHeight() * 1.2f;
+				pxStep = pxStepWalk;
 			} else {
-				pxStep = arrow.getHeight() * 4f;
+				pxStep = pxStepRegular;
 			}
 			if (style != null && !style.equals(prevStyle) && (prevStyle != null || style.hasAnchors())) {
 				prevStyle = style;
@@ -626,7 +630,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				double pdy = (y - py) * percent;
 				float iconx = (float) (px + pdx);
 				float icony = (float) (py + pdy);
-				if (isIn((int)(iconx), (int) (icony), left, top, right, bottom)) {
+				if (isIn(iconx, icony, left, top, right, bottom)) {
 					arrows.add(new PathPoint(iconx, icony, angle, style));
 				}
 				dist -= pxStep;
@@ -645,7 +649,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				double lon = stop.getLocation().getLongitude();
 				float x = tb.getPixXFromLatLon(lat, lon);
 				float y = tb.getPixYFromLatLon(lat, lon);
-				if (isIn((int) (x), (int) (y), left, top, right, bottom)) {
+				if (isIn(x, y, left, top, right, bottom)) {
 					if (i != start && i != end) {
 						stops.add(new PathTransportStop(x, y, style));
 					}
@@ -657,7 +661,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 		for (int i = arrows.size() - 1; i >= 0; i--) {
 			PathPoint a = arrows.get(i);
-			a.draw(canvas, wayContext);
+			if (!tb.isZoomAnimated() || a.style.isWalkLine()) {
+				a.draw(canvas, wayContext);
+			}
 		}
 		for (int i = anchors.size() - 1; i >= 0; i--) {
 			PathAnchor anchor = anchors.get(i);
@@ -757,8 +763,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		Map<Integer, GeometryWayStyle> styleMap = Collections.emptyMap();
 
 		// cache arrays
-		TIntArrayList tx = new TIntArrayList();
-		TIntArrayList ty = new TIntArrayList();
+		List<Float> tx = new ArrayList<>();
+		List<Float> ty = new ArrayList<>();
 		List<Double> angles = new ArrayList<>();
 		List<Double> distances = new ArrayList<>();
 		List<GeometryWayStyle> styles = new ArrayList<>();
@@ -903,7 +909,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			styles.clear();
 		}
 
-		private void addLocation(RotatedTileBox tb, Location ls, GeometryWayStyle style, TIntArrayList tx, TIntArrayList ty,
+		private void addLocation(RotatedTileBox tb, Location ls, GeometryWayStyle style, List<Float> tx, List<Float> ty,
 				List<Double> angles, List<Double> distances, double dist, List<GeometryWayStyle> styles) {
 			float x = tb.getPixXFromLatLon(ls.getLatitude(), ls.getLongitude());
 			float y = tb.getPixYFromLatLon(ls.getLatitude(), ls.getLongitude());
@@ -911,8 +917,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			float py = y;
 			int previous = tx.size() - 1;
 			if (previous >= 0 && previous < tx.size()) {
-				px = tx.get(previous) / 100f;
-				py = ty.get(previous) / 100f;
+				px = tx.get(previous);
+				py = ty.get(previous);
 			}
 			double angle = 0;
 			if (px != x || py != y) {
@@ -923,8 +929,8 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			if(dist != 0) {
 				distSegment = dist;
 			}
-			tx.add((int) (x * 100f));
-			ty.add((int) (y * 100f));
+			tx.add(x);
+			ty.add(y);
 			angles.add(angle);
 			distances.add(distSegment);
 			styles.add(style);
@@ -933,7 +939,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	
 	private RouteSimplificationGeometry routeGeometry  = new RouteSimplificationGeometry();
 	
-	private void drawRouteSegment(RotatedTileBox tb, Canvas canvas, TIntArrayList tx, TIntArrayList ty,
+	private void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Float> tx, List<Float> ty,
 			List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle> styles) {
 		if (tx.size() < 2) {
 			return;
@@ -960,7 +966,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 			attrs.customColor = 0;
 			attrsPT.customColor = 0;
-			if (tb.getZoomAnimation() == 0) {
+			if (!view.isAnimatingZoom()) {
 				drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
 			}
 		} finally {

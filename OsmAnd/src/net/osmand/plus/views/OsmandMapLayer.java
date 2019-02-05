@@ -47,8 +47,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import gnu.trove.list.array.TIntArrayList;
-
 public abstract class OsmandMapLayer {
 
 	protected List<LatLon> fullObjectsLatLon;
@@ -142,12 +140,11 @@ public abstract class OsmandMapLayer {
 		}
 	}
 
-
-	protected boolean isIn(int x, int y, int lx, int ty, int rx, int by) {
+	protected boolean isIn(float x, float y, int lx, int ty, int rx, int by) {
 		return x >= lx && x <= rx && y >= ty && y <= by;
 	}
 
-	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, Path path) {
+	public int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, Path path) {
 		List<Pair<Path, GeometryWayStyle>> paths = new ArrayList<>();
 		int res = calculatePath(tb, xs, ys, null, paths);
 		if (paths.size() > 0) {
@@ -440,10 +437,10 @@ public abstract class OsmandMapLayer {
 		}
 	}
 
-	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
+	public int calculatePath(RotatedTileBox tb, List<Float> xs, List<Float> ys, List<GeometryWayStyle> styles, List<Pair<Path, GeometryWayStyle>> paths) {
 		boolean segmentStarted = false;
-		int prevX = xs.get(0) / 100;
-		int prevY = ys.get(0) / 100;
+		float prevX = xs.get(0);
+		float prevY = ys.get(0);
 		int height = tb.getPixHeight();
 		int width = tb.getPixWidth();
 		int cnt = 0;
@@ -452,14 +449,14 @@ public abstract class OsmandMapLayer {
 		Path path = new Path();
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
 		for (int i = 1; i < xs.size(); i++) {
-			int currX = xs.get(i) / 100;
-			int currY = ys.get(i) / 100;
+			float currX = xs.get(i);
+			float currY = ys.get(i);
 			boolean currIn = isIn(currX, currY, 0, 0, width, height);
 			boolean draw = false;
 			if (prevIn && currIn) {
 				draw = true;
 			} else {
-				long intersection = MapAlgorithms.calculateIntersection(currX, currY, prevX, prevY, 0, width, height, 0);
+				long intersection = MapAlgorithms.calculateIntersection((int)currX, (int)currY, (int)prevX, (int)prevY, 0, width, height, 0);
 				if (intersection != -1) {
 					if (prevIn && (i == 1)) {
 						cnt++;
@@ -471,7 +468,7 @@ public abstract class OsmandMapLayer {
 					draw = true;
 				}
 				if (i == xs.size() - 1 && !currIn) {
-					long inter = MapAlgorithms.calculateIntersection(prevX, prevY, currX, currY, 0, width, height, 0);
+					long inter = MapAlgorithms.calculateIntersection((int)prevX, (int)prevY, (int)currX, (int)currY, 0, width, height, 0);
 					if (inter != -1) {
 						currX = (int) (inter >> 32);
 						currY = (int) (inter & 0xffffffff);

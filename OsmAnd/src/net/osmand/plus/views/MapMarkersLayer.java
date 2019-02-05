@@ -49,8 +49,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import gnu.trove.list.array.TIntArrayList;
-
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
@@ -93,8 +91,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float textSize;
 	private int verticalOffset;
 
-	private TIntArrayList tx = new TIntArrayList();
-	private TIntArrayList ty = new TIntArrayList();
+	private List<Float> tx = new ArrayList<>();
+	private List<Float> ty = new ArrayList<>();
 	private Path linePath = new Path();
 
 	private LatLon fingerLocation;
@@ -270,22 +268,22 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			boolean drawMarkerName = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
 
-			int locX;
-			int locY;
+			float locX;
+			float locY;
 			if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()
 					&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(myLoc)
 					&& !map.getMapViewTrackingUtilities().isMovingToMyLocation()) {
-				locX = (int) tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
-				locY = (int) tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+				locX = tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+				locY = tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
 			} else {
-				locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
-				locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+				locX = tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+				locY = tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
 			}
 			int[] colors = MapMarker.getColors(map);
 			for (int i = 0; i < activeMapMarkers.size() && i < displayedWidgets; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
-				int markerX = (int) tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
-				int markerY = (int) tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
+				float markerX = tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
+				float markerY = tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
 
 				linePath.reset();
 				tx.clear();

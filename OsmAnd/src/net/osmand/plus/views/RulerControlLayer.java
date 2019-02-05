@@ -27,8 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-
-import gnu.trove.list.array.TIntArrayList;
+import java.util.List;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
@@ -68,8 +67,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private boolean touched;
 	private boolean wasZoom;
 
-	private TIntArrayList tx = new TIntArrayList();
-	private TIntArrayList ty = new TIntArrayList();
+	private List<Float> tx = new ArrayList<>();
+	private List<Float> ty = new ArrayList<>();
 	private Path linePath = new Path();
 
 	private Bitmap centerIconDay;
@@ -309,15 +308,15 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, Location currLoc, boolean night) {
 		float x = tb.getPixXFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
 		float y = tb.getPixYFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
-		int currX = (int) tb.getPixXFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
-		int currY = (int) tb.getPixYFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
+		float currX = tb.getPixXFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
+		float currY = tb.getPixYFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
 
 		linePath.reset();
-		tx.reset();
-		ty.reset();
+		tx.clear();
+		ty.clear();
 
-		tx.add((int) x);
-		ty.add((int) y);
+		tx.add(x);
+		ty.add(y);
 		tx.add(currX);
 		ty.add(currY);
 

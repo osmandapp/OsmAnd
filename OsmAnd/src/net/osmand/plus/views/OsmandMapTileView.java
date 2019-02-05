@@ -711,6 +711,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return additional.fps;
 	}
 
+	public boolean isAnimatingZoom() {
+		return animatedDraggingThread.isAnimatingZoom();
+	}
+
 	@SuppressLint("WrongCall")
 	public void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if (mapRenderer == null) {
