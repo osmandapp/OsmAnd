@@ -182,4 +182,11 @@
     <string name="send_my_location_desc">הגדרת טווח הזמן המזערי לשיתוף מיקום.</string>
     <string name="welcome_descr"><b>שיתוף המקום דרךOsmAnd</b> מאפשר לך לשתף את המיקום ולראות את מיקומם של אחרים ב־OsmAnd.<br/><br/>היישומון משתמש ב־API ודורש חשבון טלגרם.</string>
     <string name="live_now">חי כעת</string>
+    <string name="gps_points_in_buffer">נשלחו (%1$d ממתינות)</string>
+    <string name="points_size">%1$d נקודות</string>
+    <string name="shared_string_date">תאריך</string>
+    <string name="shared_string_collected">נאספו</string>
+    <string name="gps_points">נקודות GPS</string>
+    <string name="shared_string_sent">נשלחו</string>
+    <string name="osmand_connect">OsmAnd connect</string>
 </resources>

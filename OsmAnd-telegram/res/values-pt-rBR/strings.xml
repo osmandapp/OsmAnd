@@ -25,7 +25,7 @@
     <string name="searching_for_gps">Posicionando…</string>
     <string name="connecting_to_the_internet">Conectando-se à Internet</string>
     <string name="background_work_description">Altere as configurações de otimização da bateria para estabilizar o compartilhamento de local.</string>
-    <string name="background_work">Trabalho de fundo</string>
+    <string name="background_work">"Funcionamento em segundo plano "</string>
     <string name="battery_optimization_description">Desative a otimização da bateria do OsmAnd Telegram para que não seja desligado repentinamente quando estiver em segundo plano.</string>
     <string name="sharing_in_background">Compartilhando em segundo plano</string>
     <string name="go_to_settings">Vá para as configurações</string>
@@ -174,8 +174,8 @@
     <string name="welcome_descr"><b>Compartilhamento de local OsmAnd</b> permite que você compartilhe sua localização e veja a dos outros no OsmAnd.<br/><br/>O aplicativo usa a API Telegram e você precisa de uma conta Telegram.</string>
     <string name="my_location">Minha localização</string>
     <string name="live_now">Ao vivo agora</string>
-    <string name="monitoring_is_enabled">O monitoramento está ativado</string>
-    <string name="monitoring_is_disabled">O monitoramento está desativado</string>
+    <string name="monitoring_is_enabled">Monitoramento está ativado</string>
+    <string name="monitoring_is_disabled">Monitoramento está desativado</string>
     <string name="time_on_the_move">tempo em movimento</string>
     <string name="average_altitude">Altitude média</string>
     <string name="average_speed">Velocidade média</string>
@@ -184,4 +184,10 @@
     <string name="start_date">Data de início</string>
     <string name="timeline_description">Ative o monitoramento para coletar dados de movimento em segundo plano.</string>
     <string name="timeline">"Linha do tempo "</string>
+    <string name="gps_points_in_buffer">enviado (%1$d em buffer)</string>
+    <string name="points_size">"%1$d pontos "</string>
+    <string name="shared_string_date">Data</string>
+    <string name="shared_string_collected">Coletado</string>
+    <string name="gps_points">Pontos de Gps</string>
+    <string name="shared_string_sent">"Enviar "</string>
 </resources>

@@ -150,7 +150,7 @@
     <string name="shared_string_second_short">seg</string>
     <string name="my_location">Positzione mea</string>
     <string name="timeline">Lìnia temporale</string>
-    <string name="osmand_connect">OsmAnd connect</string>
+    <string name="osmand_connect">Connessione OsmAnd</string>
     <string name="set_time_description">Imposta su tempus in su cale sos cuntatos e sos grupos chi as ischertadu ant a bìdere sa positzione tua in direta.</string>
     <string name="set_time">Imposta su tempus</string>
     <string name="location_sharing_description">Ischerta sos cuntatos e sos grupos cun sos cales cheres cumpartzire sa positzione.</string>
@@ -184,4 +184,10 @@
     <string name="shared_string_welcome">Bene bènnidu</string>
     <string name="welcome_descr">Sa <b>Cumpartzidura de sa Positzione de OsmAnd</b> ti permitit de cumpartzire sa positzione tua e de bìdere cussa de sos àteros in OsmAnd.<br/><br/>S\'aplicatzione impreat s\'API de Telegram e tenes bisòngiu de unu contu de Telegram.</string>
     <string name="live_now">In direta como</string>
+    <string name="gps_points_in_buffer">imbiadu (%1$d in sa memòria tampone)</string>
+    <string name="points_size">%1$d puntos</string>
+    <string name="shared_string_date">Data</string>
+    <string name="shared_string_collected">Collidos</string>
+    <string name="gps_points">Puntos GPS</string>
+    <string name="shared_string_sent">Imbiadu</string>
 </resources>
