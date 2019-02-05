@@ -149,7 +149,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 		updateGPXStatisticRow()
 
-		val imageRes = if (app.isConnectedOsmAndInstalled()) {
+		val imageRes = if (app.isOsmAndInstalled()) {
 			TelegramSettings.AppConnect.getIconId(settings.appToConnectPackage)
 		} else {
 			R.drawable.ic_logo_osmand_free
@@ -199,7 +199,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun isOsmandCreateBitmap(): Boolean {
+	private fun canOsmandCreateBitmap(): Boolean {
 		val version = AndroidUtils.getAppVersionCode(app, app.settings.appToConnectPackage)
 		return version >= MIN_OSMAND_BITMAP_VERSION_CODE
 	}
@@ -247,12 +247,21 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun updateGpxInfo() {
+		checkTime()
 		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, startCalendar.timeInMillis, endCalendar.timeInMillis)
 
 		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).firstOrNull()?:GPXUtilities.GPXFile()
 		updateGPXStatisticRow()
 		updateDateAndTimeButtons()
 		updateGPXMap()
+	}
+
+	private fun checkTime() {
+		if (startCalendar.timeInMillis > endCalendar.timeInMillis) {
+			val time = startCalendar.timeInMillis
+			startCalendar.timeInMillis = endCalendar.timeInMillis
+			endCalendar.timeInMillis = time
+		}
 	}
 
 	private fun updateDateAndTimeButtons() {
@@ -273,13 +282,13 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun updateGPXMap() {
-		if (!app.isOsmAndInstalled()) {
+		if (!app.isAnyOsmAndInstalled()) {
 			activity?.let {
 				MainActivity.OsmandMissingDialogFragment().show(it.supportFragmentManager, null)
 			}
-		} else if (!app.isConnectedOsmAndChosen()) {
+		} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
 			fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this) }
-		} else if (!isOsmandCreateBitmap()) {
+		} else if (!canOsmandCreateBitmap()) {
 			 val snackbar = Snackbar.make(mainView, R.string.please_update_osmand, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_update) {
 					val packageName = if (app.settings.appToConnectPackage == OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME)
 							OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME else app.settings.appToConnectPackage

@@ -112,7 +112,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		openOsmAndBtn = mainView.findViewById<TextView>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
-				if (app.isConnectedOsmAndInstalled()) {
+				if (app.isOsmAndInstalled()) {
 					activity?.packageManager?.getLaunchIntentForPackage(settings.appToConnectPackage)?.also { intent ->
 						startActivity(intent)
 					}
@@ -450,11 +450,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
-					if (!app.isOsmAndInstalled()) {
+					if (!app.isAnyOsmAndInstalled()) {
 						showOsmAndMissingDialog()
-					} else if (!app.isConnectedOsmAndChosen()) {
+					} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
 						fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this@LiveNowTabFragment) }
-					} else if(app.isConnectedOsmAndInstalled()){
+					} else if(app.isOsmAndInstalled()){
 						app.showLocationHelper.showLocationOnMap(item, staleLocation)
 					}
 				}
@@ -547,15 +547,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 					settings.showChatOnMap(chatId, allSelected)
 					if (settings.hasAnyChatToShowOnMap()) {
-						if (!app.isOsmAndInstalled()) {
+						if (!app.isAnyOsmAndInstalled()) {
 							if (allSelected) {
 								showOsmAndMissingDialog()
 							}
-						} else if (!app.isConnectedOsmAndChosen()) {
-							fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this@LiveNowTabFragment)
-							}
+						} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
+							fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this@LiveNowTabFragment) }
 						} else {
-							if (app.isConnectedOsmAndInstalled()) {
+							if (app.isOsmAndInstalled()) {
 								if (allSelected) {
 									app.showLocationHelper.showChatMessages(chatId)
 								} else {

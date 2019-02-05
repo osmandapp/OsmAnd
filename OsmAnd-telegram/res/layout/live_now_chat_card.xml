@@ -87,7 +87,7 @@
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
 							app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height"
-							app:typeface="@string/font_roboto_medium"
+							app:typeface="@string/font_roboto_regular"
 							tools:text="213 m" />
 
 					</LinearLayout>
