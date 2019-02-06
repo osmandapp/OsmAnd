@@ -2993,6 +2993,10 @@
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
     <string name="test_voice_desrc">Tap a button and listen to the corresponding voice prompt to identify missing or faulty prompts.</string>
+    <string name="route_class_stat_container">Class</string>
+    <string name="route_surface_stat_container">Surface</string>
+    <string name="route_smoothness_stat_container">Smoothenss</string>
+    <string name="route_steepness_stat_container">Steepness</string>
     <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
 </resources>

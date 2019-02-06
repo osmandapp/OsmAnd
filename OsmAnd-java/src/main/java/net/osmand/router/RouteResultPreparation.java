@@ -1718,4 +1718,6 @@ public class RouteResultPreparation {
 		return MapUtils.getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), 
 				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
 	}
+
+
 }
