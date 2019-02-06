@@ -103,6 +103,10 @@ class LocationMessages(val app: TelegramApplication) {
 		return bufferedMessages.size
 	}
 
+	fun getBufferedMessagesCountForChat(chatId: Long): Int {
+		return bufferedMessages.count { it.chatId == chatId }
+	}
+
 	private fun readBufferedMessages() {
 		this.bufferedMessages = dbHelper.getBufferedMessages()
 	}

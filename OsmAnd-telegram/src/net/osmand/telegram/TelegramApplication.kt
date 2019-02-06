@@ -72,6 +72,9 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		if (settings.hasAnyChatToShareLocation() && AndroidUtils.isLocationPermissionAvailable(this)) {
 			shareLocationHelper.startSharingLocation()
 		}
+		if (settings.monitoringEnabled) {
+			showLocationHelper.startShowingLocation()
+		}
 	}
 
 	fun cleanupResources() {

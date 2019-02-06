@@ -75,10 +75,10 @@ class TimelineTabFragment : Fragment() {
 		monitoringTv.setText(if (settings.monitoringEnabled) R.string.monitoring_is_enabled else R.string.monitoring_is_disabled)
 
 		mainView.findViewById<View>(R.id.monitoring_container).setOnClickListener {
-			val monitoringEnabled = !settings.monitoringEnabled
-			settings.monitoringEnabled = monitoringEnabled
-			switcher.isChecked = monitoringEnabled
-			monitoringTv.setText(if (monitoringEnabled) R.string.monitoring_is_enabled else R.string.monitoring_is_disabled)
+			settings.monitoringEnabled = !settings.monitoringEnabled
+			app.showLocationHelper.changeUpdatesType()
+			switcher.isChecked = settings.monitoringEnabled
+			monitoringTv.setText(if (settings.monitoringEnabled) R.string.monitoring_is_enabled else R.string.monitoring_is_disabled)
 		}
 
 		dateBtn = mainView.findViewById<TextView>(R.id.date_btn).apply {

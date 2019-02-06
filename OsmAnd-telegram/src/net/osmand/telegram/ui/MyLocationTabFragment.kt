@@ -720,7 +720,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				holder.gpsPointsSent?.apply {
 					if (shareInfo != null) {
-						text = getString(R.string.gps_points_in_buffer,shareInfo.pendingTdLib + app.locationMessages.getBufferedMessagesCount())
+						text = getString(R.string.gps_points_in_buffer, shareInfo.pendingTdLib + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId))
 					}
 				}
 			}

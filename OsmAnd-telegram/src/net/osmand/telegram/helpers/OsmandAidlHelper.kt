@@ -126,6 +126,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		this.mUpdatesListener = mUpdatesListener
 	}
 
+	fun updatesCallbackRegistered() = osmandCallbackId > 0
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -1081,7 +1082,11 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun unregisterFromUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandCallbackId)
+				val unregistered = mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandCallbackId)
+				if (unregistered) {
+					osmandCallbackId = 0
+				}
+				return unregistered
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
