@@ -918,17 +918,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (map.isZooming() && map.hasCustomMapRatio()) {
 			getMapActivity().changeZoom(2, System.currentTimeMillis());
 		} else {
-			if (!map.hasCustomMapRatio()) {
-				//setCustomMapRatio();
-			}
+			setCustomMapRatio();
 			getMapActivity().changeZoom(1, System.currentTimeMillis());
 		}
 	}
 
 	public void doZoomOut() {
-		if (!map.hasCustomMapRatio()) {
-			//setCustomMapRatio();
-		}
+		setCustomMapRatio();
 		getMapActivity().changeZoom(-1, System.currentTimeMillis());
 	}
 
@@ -1250,6 +1246,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void onPause() {
 
 		if (view != null) {
+			restoreCustomMapRatio();
 			ViewParent parent = view.getParent();
 			if (parent != null && containerLayoutListener != null) {
 				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);

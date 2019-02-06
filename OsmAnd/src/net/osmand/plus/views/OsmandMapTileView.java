@@ -511,7 +511,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			ry -= 0.35;
 		}
 		box.setCenterLocation(rx, ry);
-		LatLon screenCenter = box.getLatLonFromPixel(box.getPixWidth() / 2, box.getPixHeight() / 2);
+		LatLon screenCenter = box.getLatLonFromPixel(box.getPixWidth() / 2f, box.getPixHeight() / 2f);
 		mapRatioX = 0;
 		mapRatioY = 0;
 		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude());
