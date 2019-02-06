@@ -1966,38 +1966,46 @@ public class OsmandAidlApi {
 		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private static int counter = 0;
+	private static int partsCounter = 0;
+	private static long startTime = 0;
 
 	boolean appendDataToFile(final String filename, final byte[] data) {
 		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + filename);
+		if (partsCounter == 0) {
+			startTime = System.currentTimeMillis();
+			LOG.debug("Start time = " + startTime);
+		}
+
 		if (filename.isEmpty() || data == null) {
 			return false;
+
 		}else if (data.length == 0) {
 			if (file.exists() && filename.endsWith(IndexConstants.SQLITE_EXT)) {
-				processSqliteFileImport(Uri.fromFile(file), filename);
+				LOG.debug("Copied file: " + filename +" (size = " + file.length()
+						+ " bytes) in: " + ((System.currentTimeMillis() - startTime) + " ms"));
+				partsCounter = 0;
 			}
 		} else {
 			FileOutputStream fos;
 			file.getParentFile().mkdirs();
 			try {
-				counter++;
-				LOG.debug("File chunk #" + counter + " of size: " + data.length);
-				file.createNewFile();
-				fos = new FileOutputStream(file);
+				if (partsCounter == 0) {
+					fos = new FileOutputStream(file);
+				} else {
+					fos = new FileOutputStream(file, true);
+				}
 				fos.write(data);
+				partsCounter++;
 				fos.close();
-				fos.flush();
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
 		}
 		return true;
 	}
 
-	private void processSqliteFileImport(Uri uri, String filename) {
-		LOG.debug("path:" + uri.getPath());
-		LOG.debug("file:" + filename);
-	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
