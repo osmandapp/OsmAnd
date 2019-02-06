@@ -11,8 +11,8 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandLocationUtils
-import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserLocation
 import net.osmand.telegram.utils.OsmandLocationUtils.MessageOsmAndBotLocation
+import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserLocation
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.util.concurrent.Executors
@@ -171,10 +171,28 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		forcedStop = force
 		if (showingLocation) {
 			showingLocation = false
-			if (isUseOsmandCallback()) {
+			if (isUseOsmandCallback() && app.osmandAidlHelper.updatesCallbackRegistered()) {
 				osmandAidlHelper.unregisterFromUpdates()
-			} else {
+			} else if (!app.settings.monitoringEnabled) {
 				app.stopUserLocationService()
+			}
+		}
+	}
+
+	fun changeUpdatesType() {
+		if (!forcedStop) {
+			if (app.settings.monitoringEnabled) {
+				if (app.osmandAidlHelper.updatesCallbackRegistered()) {
+					osmandAidlHelper.unregisterFromUpdates()
+				}
+				app.startUserLocationService()
+			} else {
+				if (isUseOsmandCallback()) {
+					app.stopUserLocationService()
+					osmandAidlHelper.registerForUpdates()
+				} else {
+					app.startUserLocationService()
+				}
 			}
 		}
 	}

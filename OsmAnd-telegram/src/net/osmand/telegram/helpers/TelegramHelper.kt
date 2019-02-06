@@ -1309,6 +1309,10 @@ class TelegramHelper private constructor() {
 						}
 					}
 				}
+				TdApi.UpdateMessageEdited.CONSTRUCTOR -> {
+					val updateMessageEdited = obj as TdApi.UpdateMessageEdited
+					lastTelegramUpdateTime = Math.max(lastTelegramUpdateTime, updateMessageEdited.editDate)
+				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
 					val message = usersLocationMessages[updateMessageContent.messageId]
@@ -1319,7 +1323,7 @@ class TelegramHelper private constructor() {
 						}
 					} else {
 						synchronized(message) {
-							lastTelegramUpdateTime = Math.max(message.date, message.editDate)
+							lastTelegramUpdateTime = Math.max(lastTelegramUpdateTime, Math.max(message.date, message.editDate))
 							val newContent = updateMessageContent.newContent
 							val fromBot = isOsmAndBot(message.senderUserId)
 							val viaBot = isOsmAndBot(message.viaBotUserId)
