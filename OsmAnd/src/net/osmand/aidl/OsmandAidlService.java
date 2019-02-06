@@ -66,6 +66,7 @@ import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidl.tiles.FilePartParams;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -847,9 +848,9 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean appendDataToFile(String filename, byte[] data) {
+		public boolean copyFileOverApi(FilePartParams filePart) {
 			OsmandAidlApi api = getApi("appendDataToFile");
-			return api != null && api.appendDataToFile(filename, data);
+			return api != null && api.copyFileOverApi(filePart);
 		}
 	};
 }

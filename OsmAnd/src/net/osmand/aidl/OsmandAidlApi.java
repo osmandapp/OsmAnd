@@ -44,6 +44,7 @@ import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidl.tiles.FilePartParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -98,14 +99,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
@@ -1966,46 +1960,49 @@ public class OsmandAidlApi {
 		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private static int partsCounter = 0;
-	private static long startTime = 0;
+	private Map<String, FileOutputStream> copyFilesCache = new HashMap<>();
 
-	boolean appendDataToFile(final String filename, final byte[] data) {
-		File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + filename);
-		if (partsCounter == 0) {
-			startTime = System.currentTimeMillis();
-			LOG.debug("Start time = " + startTime);
-		}
-
-		if (filename.isEmpty() || data == null) {
+	boolean copyFileOverApi(final FilePartParams filePart) {
+		if (filePart.getFilename().isEmpty() || filePart.getFilePartData() == null) {
 			return false;
-
-		}else if (data.length == 0) {
-			if (file.exists() && filename.endsWith(IndexConstants.SQLITE_EXT)) {
-				LOG.debug("Copied file: " + filename +" (size = " + file.length()
-						+ " bytes) in: " + ((System.currentTimeMillis() - startTime) + " ms"));
-				partsCounter = 0;
-			}
-		} else {
-			FileOutputStream fos;
-			file.getParentFile().mkdirs();
-			try {
-				if (partsCounter == 0) {
-					fos = new FileOutputStream(file);
-				} else {
-					fos = new FileOutputStream(file, true);
-				}
-				fos.write(data);
-				partsCounter++;
-				fos.close();
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
 		}
-		return true;
+
+		if (filePart.getFilename().endsWith(IndexConstants.SQLITE_EXT)) {
+			return copySqlFileImpl(filePart, app.getAppPath(IndexConstants.TILES_INDEX_DIR + filePart.getFilename()));
+		}
+
+		return false;
 	}
 
+	private boolean copySqlFileImpl(FilePartParams filePart, File file){
+		FileOutputStream fos;
+		try {
+			if (copyFilesCache.containsKey(filePart.getFilename())) {
+				fos = copyFilesCache.get(filePart.getFilename());
+				if (file.length() == filePart.getSentSize()) {
+					fos.write(filePart.getFilePartData());
+					return true;
+				} else if (file.length() == filePart.getSize()) {
+					copyFilesCache.remove(file.getName());
+					fos.close();
+					return true;
+				}
+				return false;
+			} else {
+				if (file.exists()) file.delete();
+				file.getParentFile().mkdirs();
+				fos = new FileOutputStream(file, true);
+				fos.write(filePart.getFilePartData());
+				copyFilesCache.put(filePart.getFilename(), fos);
+				return true;
+			}
+
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+
+		}
+		return false;
+	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
