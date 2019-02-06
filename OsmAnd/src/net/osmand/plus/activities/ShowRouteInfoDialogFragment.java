@@ -39,12 +39,10 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -99,6 +97,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private ListView listView;
 	private RouteInfoAdapter adapter;
 	private GPXFile gpx;
+	private OrderedLineDataSet slopeDataSet;
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
 
@@ -207,17 +206,19 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			listView.addHeaderView(headerView);
 		}
 
-		List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues());
+		if (slopeDataSet != null) {
+			List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues());
 
-		RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(helper.getRoute().getOriginalRoute());
-		buildChartAndAttachLegend(app, view, inflater, R.id.route_class_stat_chart,
-				R.id.route_class_stat_items, routeStatistics.getRouteClassStatistic());
-		buildChartAndAttachLegend(app, view, inflater, R.id.route_surface_stat_chart,
-				R.id.route_surface_stat_items, routeStatistics.getRouteSurfaceStatistic());
-		buildChartAndAttachLegend(app, view, inflater, R.id.route_smoothness_stat_chart,
-				R.id.route_smoothness_stat_items, routeStatistics.getRouteSmoothnessStatistic());
-		buildChartAndAttachLegend(app, view, inflater, R.id.route_steepness_stat_chart,
-				R.id.route_steepness_stat_items, routeStatistics.getRouteSteepnessStatistic(inclines));
+			RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(helper.getRoute().getOriginalRoute());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_class_stat_chart,
+					R.id.route_class_stat_items, routeStatistics.getRouteClassStatistic());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_surface_stat_chart,
+					R.id.route_surface_stat_items, routeStatistics.getRouteSurfaceStatistic());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_smoothness_stat_chart,
+					R.id.route_smoothness_stat_items, routeStatistics.getRouteSmoothnessStatistic());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_steepness_stat_chart,
+					R.id.route_steepness_stat_items, routeStatistics.getRouteSteepnessStatistic(inclines));
+		}
 		return view;
 	}
 
@@ -341,7 +342,6 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-		OrderedLineDataSet slopeDataSet;
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
