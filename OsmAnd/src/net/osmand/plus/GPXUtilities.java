@@ -555,7 +555,7 @@ public class GPXUtilities {
 						// totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 						// a little more exact, also seems slightly faster:
-						Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
+						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 						totalDistance += calculations[0];
 						segmentDistance += calculations[0];
 						point.distance = segmentDistance;
@@ -734,7 +734,7 @@ public class GPXUtilities {
 
 			@Override
 			public double metric(WptPt p1, WptPt p2) {
-				Location.distanceBetween(p1.lat, p1.lon, p2.lat, p2.lon, calculations);
+				net.osmand.Location.distanceBetween(p1.lat, p1.lon, p2.lat, p2.lon, calculations);
 				return calculations[0];
 			}
 		};
@@ -930,7 +930,7 @@ public class GPXUtilities {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
 			g.wptCategoryNames = getWaypointCategories(true);
-			List<SplitSegment> splitSegments = new ArrayList<SplitSegment>();
+			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
@@ -1286,7 +1286,7 @@ public class GPXUtilities {
 					bottom = Math.min(bottom, p.getLatitude());
 				}
 			}
-			for (Route route : routes) {
+			for (GPXUtilities.Route route : routes) {
 				for (WptPt p : route.points) {
 					if (left == 0 && right == 0) {
 						left = p.getLongitude();
@@ -1807,13 +1807,13 @@ public class GPXUtilities {
 
 	public static GPXFile makeGpxFromRoute(RouteCalculationResult route) {
 		double lastHeight = HEIGHT_UNDEFINED;
-		GPXFile gpx = new GPXFile();
+		GPXFile gpx = new GPXUtilities.GPXFile();
 		List<Location> locations = route.getRouteLocations();
 		if (locations != null) {
-			Track track = new Track();
-			TrkSegment seg = new TrkSegment();
+			GPXUtilities.Track track = new GPXUtilities.Track();
+			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
 			for (Location l : locations) {
-				WptPt point = new WptPt();
+				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
 				point.lat = l.getLatitude();
 				point.lon = l.getLongitude();
 				if (l.hasAltitude()) {
@@ -1821,7 +1821,7 @@ public class GPXUtilities {
 					float h = (float) l.getAltitude();
 					point.ele = h;
 					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (WptPt pt : seg.points) {
+						for (GPXUtilities.WptPt pt : seg.points) {
 							if (Double.isNaN(pt.ele)) {
 								pt.ele = h;
 							}
