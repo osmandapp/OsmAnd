@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.MapMarker;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -320,6 +319,7 @@ public class MapMarkersHelper {
 
 	
 	public MapMarkersGroup addOrEnableGpxGroup(@NonNull File file) {
+		updateGpxShowAsMarkers(file);
 		MapMarkersGroup gr = getMapMarkerGroupById(getMarkerGroupId(file), MapMarkersGroup.GPX_TYPE);
 		if (gr == null) {
 			gr = createGPXMarkerGroup(file);
@@ -330,6 +330,7 @@ public class MapMarkersHelper {
 	}
 	
 	public MapMarkersGroup addOrEnableGroup(@NonNull GPXFile file) {
+		updateGpxShowAsMarkers(new File(file.path));
 		MapMarkersGroup gr = getMarkersGroup(file);
 		if (gr == null) {
 			gr = createGPXMarkerGroup(new File(file.path));
@@ -350,9 +351,6 @@ public class MapMarkersHelper {
 		return gr;
 	}
 	
-
-	
-	
 	public void enableGroup(@NonNull MapMarkersGroup gr) {
 		// check if group doesn't exist internally
 		if(!mapMarkersGroups.contains(gr)) {
@@ -363,13 +361,20 @@ public class MapMarkersHelper {
 		}
 		runSynchronization(gr);
 	}
-	
+
 	private void addGroupInternally(MapMarkersGroup gr) {
 		markersDbHelper.addGroup(gr);
 		addHistoryMarkersToGroup(gr);
 		addToGroupsList(gr);
 	}
-	
+
+	private void updateGpxShowAsMarkers(File file) {
+		GPXDatabase.GpxDataItem dataItem = ctx.getGpxDatabase().getItem(file);
+		if (dataItem != null) {
+			ctx.getGpxDatabase().updateShowAsMarkers(dataItem, true);
+			dataItem.setShowAsMarkers(true);
+		}
+	}
 
 	private void addHistoryMarkersToGroup(@NonNull MapMarkersGroup group) {
 		List<MapMarker> historyMarkers = new ArrayList<>(mapMarkersHistory);
@@ -640,7 +645,7 @@ public class MapMarkersHelper {
 		Iterator<MapMarker> iterator = groupMarkers.iterator();
 		while (iterator.hasNext()) {
 			MapMarker marker = iterator.next();
-			if (marker.id.equals(group.getId() + name)) {
+			if (marker.id.equals(group.getId() + name + MapUtils.createShortLinkString(latLon.getLatitude(), latLon.getLongitude(), 15))) {
 				exists = true;
 				marker.favouritePoint = favouritePoint;
 				marker.wptPt = wptPt;
@@ -907,7 +912,7 @@ public class MapMarkersHelper {
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
 				if (group != null) {
-					marker.id = group.getId() + marker.getName(ctx);
+					marker.id = group.getId() + marker.getName(ctx) + MapUtils.createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
 					// TODO ???????
 					if (markersDbHelper.getMarker(marker.id) != null) {
 						continue;

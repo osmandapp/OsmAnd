@@ -41,7 +41,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -1179,8 +1179,6 @@ public class RouteInfoWidgetsFactory {
 			OsmandMapTileView view = ma.getMapView();
 			// update cache
 			if (view.isZooming()) {
-				visible = false;
-			} else if (!orientationPortrait && ma.getRoutingHelper().isRoutePlanningMode()) {
 				visible = false;
 			} else if (!tb.isZoomAnimated() && (tb.getZoom() != cacheRulerZoom || Math.abs(tb.getCenterTileX() - cacheRulerTileX) > 1 || Math
 					.abs(tb.getCenterTileY() - cacheRulerTileY) > 1 || mapDensity.get() != cacheMapDensity) &&

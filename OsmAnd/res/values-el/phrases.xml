@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_fuel_type">Τύπος καυσίμου</string>
 	<string name="poi_fuel_avia_type">Τύπος καυσίμου (αεροπορία)</string>
 	<string name="poi_payment_type">Τύπος πληρωμής</string>
@@ -162,7 +162,7 @@
 	<string name="poi_deli">Εδεσματοπωλείο</string>
 	<string name="poi_greengrocer">Οπωροκηπευτικά</string>
 	<string name="poi_seafood">Ιχθυοπωλείο</string>
-	<string name="poi_confectionery">Γλυκίσματα</string>
+	<string name="poi_confectionery">Ζαχαροπλαστείο</string>
 	<string name="poi_ice_cream">Παγωτατζίδικο</string>
 	<string name="poi_supermarket">Υπεραγορά</string>
 	<string name="poi_tea">Τσαγάδικο</string>
@@ -348,11 +348,11 @@
 	<string name="poi_railway_platform">Αποβάθρα σιδηροδρόμου</string>
 	<string name="poi_halt">Στάση σιδηροδρόμου</string>
 	<string name="poi_subway_entrance">Είσοδος μετρό</string>
-	<string name="poi_subway_station">Σταθμός μετρό</string>
-	<string name="poi_traffic_calming_cushion">Σαμαράκι (Μαξιλαράκι)</string>
+	<string name="poi_subway_station">Ναι</string>
+	<string name="poi_traffic_calming_cushion">Μαξιλαράκι ταχύτητας</string>
 	<string name="poi_traffic_calming_chicane">Επιβραδυντής (απότομη στροφή)</string>
 	<string name="poi_traffic_calming_rumble_strip">Λωρίδα τραχειάς επιφάνειας</string>
-	<string name="poi_traffic_calming_table">Σαμαράκι (πίνακας)</string>
+	<string name="poi_traffic_calming_table">Πίνακας ταχύτητας</string>
 	<string name="poi_traffic_signals">Κόκκινο φανάρι</string>
 
 	<string name="poi_car_repair">Επισκευή οχήματος</string>
@@ -577,7 +577,7 @@
 	<string name="poi_customs">Τελωνεία</string>
 	<string name="poi_country">Ύπαιθρος</string>
 	<string name="poi_city">Πόλη</string>
-	<string name="poi_capital">Πρωτεύουσα</string>
+	<string name="poi_capital">Ναι</string>
 	<string name="poi_town">Κωμόπολη</string>
 	<string name="poi_village">Χωριό</string>
 	<string name="poi_hamlet">Μικρό χωριό</string>
@@ -1774,7 +1774,7 @@
 	<string name="poi_drive_through_no">Στο όχημα σε στάση: όχι</string>
 
 	<string name="poi_brewery_additional">Όνομα ζυθοποιίας</string>
-	<string name="poi_microbrewery_yes">Μικροζυθοποιία</string>
+	<string name="poi_microbrewery_yes">Ναι</string>
 	<string name="poi_microbrewery_no">Χωρίς μικροζυθοποιία</string>
 
 	<string name="poi_takeaway_filter_yes">Ναι</string>
@@ -3841,6 +3841,40 @@
 	<string name="poi_hazard_slippery_road">Ολισθηρό οδόστρωμα</string>
 	<string name="poi_hazard_flood">Κίνδυνος πλημμύρας</string>
 	<string name="poi_hazard_minefield">Ναρκοπέδιο</string>
-
-
+    <string name="poi_bulk_purchase">Μαζική αγορά</string>
+    <string name="poi_substation_type">Τύπος</string>
+    <string name="poi_books_type">Βιβλία</string>
+    <string name="poi_car_pooling">Σημείο συγκέντρωσης οχημάτων</string>
+    <string name="poi_atm">Αυτόματο ταμειακό μηχάνημα (ATM)</string>
+    <string name="poi_ruins">Ερείπια</string>
+    <string name="poi_license_classes">Κλάσεις αδείας</string>
+    <string name="poi_hill">Λόφος</string>
+    <string name="poi_shoe_repair">Υποδηματοποιείο</string>
+    <string name="poi_bulk_purchase_yes">Ναι</string>
+    <string name="poi_bulk_purchase_only">Μόνο</string>
+    <string name="poi_pipeline_substation">"Υποσταθμός  ρεύματος"</string>
+    <string name="poi_substation_transmission">Μεταφορά</string>
+    <string name="poi_substation_distribution">Διανομή</string>
+    <string name="poi_substation_minor_distribution">Μικρή διανομή</string>
+    <string name="poi_substation_industrial">Βιομηχανική</string>
+    <string name="poi_substation_transition">Μετάβαση</string>
+    <string name="poi_substation_traction">Έλξη</string>
+    <string name="poi_substation_converter">Μετατροπέας</string>
+    <string name="poi_substation_compensation">Αντιστάθμιση</string>
+    <string name="poi_substation_compression">Συμπίεση</string>
+    <string name="poi_substation_measurement">Μέτρηση</string>
+    <string name="poi_substation_valve">Βαλβίδα</string>
+    <string name="poi_substation_valve_group">Ομάδα βαλβίδων</string>
+    <string name="poi_substation_inspection_gauge">Μετρητής ελέγχου</string>
+    <string name="poi_substation_field_gathering">Συγκέντρωση πεδίου</string>
+    <string name="poi_craft_confectionery">Παραγωγή ζαχαροπλαστικής</string>
+    <string name="poi_shop_wholesale">Κατάστημα χονδρικής</string>
+    <string name="poi_laboratory">Ιατρικό εργαστήριο</string>
+    <string name="poi_blood_donation">Αιμοδοσία</string>
+    <string name="poi_books_comic">Κόμικ</string>
+    <string name="poi_books_antiquarian">Αντίκες</string>
+    <string name="poi_books_religion">Θρησκευτικά</string>
+    <string name="poi_books_academic">Ακαδημαϊκά</string>
+    <string name="poi_books_children">Παιδικά</string>
+    <string name="poi_atoll">Ατόλη</string>
 </resources>

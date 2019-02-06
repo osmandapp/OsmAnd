@@ -45,13 +45,14 @@ public class MapWidgetRegistry {
 	private Set<MapWidgetRegInfo> leftWidgetSet = new TreeSet<>();
 	private Set<MapWidgetRegInfo> rightWidgetSet = new TreeSet<>();
 	private Map<ApplicationMode, Set<String>> visibleElementsFromSettings = new LinkedHashMap<>();
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
+	public MapWidgetRegistry(OsmandApplication app) {
+		this.app = app;
+		this.settings = app.getSettings();
 
-	public MapWidgetRegistry(OsmandSettings settings) {
-		this.settings = settings;
-
-		for (ApplicationMode ms : ApplicationMode.values(settings)) {
+		for (ApplicationMode ms : ApplicationMode.values(app)) {
 			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
 			if (mpf.equals(SHOW_PREFIX)) {
 				visibleElementsFromSettings.put(ms, null);
@@ -193,9 +194,9 @@ public class MapWidgetRegistry {
 	}
 
 	private void processVisibleModes(String key, MapWidgetRegInfo ii) {
-		for (ApplicationMode ms : ApplicationMode.values(settings)) {
+		for (ApplicationMode ms : ApplicationMode.values(app)) {
 			boolean collapse = ms.isWidgetCollapsible(key);
-			boolean def = ms.isWidgetVisible(key);
+			boolean def = ms.isWidgetVisible(app, key);
 			Set<String> set = visibleElementsFromSettings.get(ms);
 			if (set != null) {
 				if (set.contains(key)) {
@@ -288,7 +289,7 @@ public class MapWidgetRegistry {
 		for (MapWidgetRegInfo ri : set) {
 			ri.visibleCollapsible.remove(mode);
 			ri.visibleModes.remove(mode);
-			if (mode.isWidgetVisible(ri.key)) {
+			if (mode.isWidgetVisible(app, ri.key)) {
 				if (mode.isWidgetCollapsible(ri.key)) {
 					ri.visibleCollapsible.add(mode);
 				} else {
@@ -457,7 +458,7 @@ public class MapWidgetRegistry {
 	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 							 Set<MapWidgetRegInfo> groupTitle, final ApplicationMode mode) {
 		for (final MapWidgetRegInfo r : groupTitle) {
-			if (!mode.isWidgetAvailable(r.key)) {
+			if (!mode.isWidgetAvailable(app, r.key)) {
 				continue;
 			}
 
@@ -484,7 +485,7 @@ public class MapWidgetRegistry {
 							MenuInflater inflater = popup.getMenuInflater();
 							final Menu menu = popup.getMenu();
 							inflater.inflate(R.menu.widget_visibility_menu, menu);
-							UiUtilities ic = mapActivity.getMyApplication().getUIUtilities();
+							UiUtilities ic = app.getUIUtilities();
 							menu.findItem(R.id.action_show).setIcon(ic.getThemedIcon(R.drawable.ic_action_view));
 							menu.findItem(R.id.action_hide).setIcon(ic.getThemedIcon(R.drawable.ic_action_hide));
 							menu.findItem(R.id.action_collapse).setIcon(ic.getThemedIcon(R.drawable.ic_action_widget_collapse));

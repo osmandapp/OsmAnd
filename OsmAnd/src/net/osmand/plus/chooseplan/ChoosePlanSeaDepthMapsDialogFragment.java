@@ -1,11 +1,13 @@
 package net.osmand.plus.chooseplan;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 
 public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragment {
 	public static final String TAG = ChoosePlanSeaDepthMapsDialogFragment.class.getSimpleName();
@@ -18,7 +20,6 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 			OsmAndFeature.DAILY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
-			OsmAndFeature.DONATION_TO_OSM,
 	};
 	private final OsmAndFeature[] selectedOsmLiveFeatures = {
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
@@ -66,16 +67,6 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 	}
 
 	@Override
-	public String getPlanTypeButtonTitle() {
-		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
-		if (purchaseHelper == null || !purchaseHelper.hasPrices()) {
-			return getString(R.string.purchase_unlim_title, getString(R.string.sea_depth_maps_price));
-		} else {
-			return getString(R.string.purchase_unlim_title, purchaseHelper.getDepthContoursPrice());
-		}
-	}
-
-	@Override
 	public String getPlanTypeButtonDescription() {
 		return getString(R.string.in_app_purchase_desc);
 	}
@@ -91,5 +82,15 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 				}
 			}
 		});
+	}
+
+	@Nullable
+	@Override
+	public InAppPurchase getPlanTypePurchase() {
+		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			return purchaseHelper.getDepthContours();
+		}
+		return null;
 	}
 }

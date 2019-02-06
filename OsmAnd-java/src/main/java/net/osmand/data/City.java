@@ -1,5 +1,8 @@
 package net.osmand.data;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,7 +57,6 @@ public class City extends MapObject {
 	public static City createPostcode(String postcode){
 		return new City(postcode, POSTCODE_INTERNAL_ID--);
 	}
-
 
 	public City(CityType type) {
 		if (type == null) {
@@ -156,4 +158,47 @@ public class City extends MapObject {
 		return m;
 	}
 
+	public JSONObject toJSON() {
+		return toJSON(true);
+	}
+
+	public JSONObject toJSON(boolean includingBuildings) {
+		JSONObject json = super.toJSON();
+		json.put("type", type.name());
+		json.put("postcode", postcode);
+		JSONArray listOfStreetsArr = new JSONArray();
+		for (Street s : listOfStreets) {
+			listOfStreetsArr.put(s.toJSON(includingBuildings));
+		}
+		json.put("listOfStreets", listOfStreetsArr);
+
+		return json;
+	}
+
+	public static City parseJSON(JSONObject json) throws IllegalArgumentException {
+		CityType type;
+		if (json.has("type")) {
+			type = CityType.valueOf(json.getString("type"));
+		} else {
+			throw new IllegalArgumentException();
+		}
+		City c = new City(type);
+		MapObject.parseJSON(json, c);
+
+		if (json.has("postcode")) {
+			c.postcode = json.getString("postcode");
+		}
+		if (json.has("listOfStreets")) {
+			JSONArray streetsArr = json.getJSONArray("listOfStreets");
+			c.listOfStreets = new ArrayList<>();
+			for (int i = 0; i < streetsArr.length(); i++) {
+				JSONObject streetObj = streetsArr.getJSONObject(i);
+				Street street = Street.parseJSON(c, streetObj);
+				if (street != null) {
+					c.listOfStreets.add(street);
+				}
+			}
+		}
+		return c;
+	}
 }

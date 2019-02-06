@@ -194,7 +194,6 @@ public class Way extends Entity {
 		}
 		if (nodeIds != null) {
 			nodeIds.reverse();
-			;
 		}
 	}
 }

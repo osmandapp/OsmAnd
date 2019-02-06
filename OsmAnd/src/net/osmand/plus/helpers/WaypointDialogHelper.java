@@ -47,7 +47,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.controls.DynamicListView.DragIcon;
 import net.osmand.plus.views.controls.ListDividerShape;
@@ -65,7 +65,7 @@ public class WaypointDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private WaypointHelper waypointHelper;
-	private WaypointDialogHelperCallbacks helperCallbacks;
+	private List<WaypointDialogHelperCallbacks> helperCallbacks= new ArrayList<>();
 
 	private boolean flat;
 	private List<LocationPointWrapper> deletedPoints;
@@ -86,15 +86,18 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	public void setHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
-		this.helperCallbacks = callbacks;
+	public void addHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
+		helperCallbacks.add(callbacks);
+	}
+
+	public void removeHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
+		helperCallbacks.add(callbacks);
 	}
 
 	public WaypointDialogHelper(MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
 		waypointHelper = this.app.getWaypointHelper();
 		this.mapActivity = mapActivity;
-
 	}
 
 	public static void updatePointInfoView(final OsmandApplication app, final Activity activity,
@@ -217,7 +220,46 @@ public class WaypointDialogHelper {
 		return points;
 	}
 
-	private List<Object> getActivePoints(List<Object> points) {
+	public List<Object> getTargetPoints() {
+		final List<Object> points = new ArrayList<>();
+		for (int i = 0; i < WaypointHelper.MAX; i++) {
+			List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
+			if ((i == WaypointHelper.WAYPOINTS || i == WaypointHelper.TARGETS) && waypointHelper.isTypeVisible(i)) {
+				if (i == WaypointHelper.TARGETS) {
+					TargetPoint start = app.getTargetPointsHelper().getPointToStart();
+					if (start == null) {
+						LatLon latLon;
+						Location loc = app.getLocationProvider().getLastKnownLocation();
+						if (loc != null) {
+							latLon = new LatLon(loc.getLatitude(), loc.getLongitude());
+						} else {
+							latLon = new LatLon(mapActivity.getMapView().getLatitude(),
+									mapActivity.getMapView().getLongitude());
+						}
+						start = TargetPoint.createStartPoint(latLon,
+								new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
+										mapActivity.getString(R.string.shared_string_my_location)));
+					} else {
+						String oname = start.getOnlyName().length() > 0 ? start.getOnlyName()
+								: (mapActivity.getString(R.string.route_descr_map_location)
+								+ " " + mapActivity.getString(R.string.route_descr_lat_lon, start.getLatitude(), start.getLongitude()));
+
+						start = TargetPoint.createStartPoint(new LatLon(start.getLatitude(), start.getLongitude()),
+								new PointDescription(PointDescription.POINT_TYPE_LOCATION,
+										oname));
+					}
+					points.add(new LocationPointWrapper(null, WaypointHelper.TARGETS, start, 0f, 0));
+
+				}
+				if (tp != null && tp.size() > 0) {
+					points.addAll(tp);
+				}
+			}
+		}
+		return points;
+	}
+
+	public List<Object> getActivePoints(List<Object> points) {
 		List<Object> activePoints = new ArrayList<>();
 		for (Object p : points) {
 			if (p instanceof LocationPointWrapper) {
@@ -358,8 +400,10 @@ public class WaypointDialogHelper {
 								= new GeocodingLookupService.AddressLookupRequest(t.point, new GeocodingLookupService.OnAddressLookupResult() {
 							@Override
 							public void geocodingDone(String address) {
-								if (helperCallbacks != null) {
-									helperCallbacks.reloadAdapter();
+								if (!helperCallbacks.isEmpty()) {
+									for (WaypointDialogHelperCallbacks callback : helperCallbacks) {
+										callback.reloadAdapter();
+									}
 								} else {
 									reloadListAdapter(listAdapter);
 								}
@@ -454,7 +498,7 @@ public class WaypointDialogHelper {
 	}
 
 	// switch start & finish
-	private static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
+	public static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
 											 Activity ctx, TargetPoint start, OsmandApplication app,
 											 WaypointDialogHelper helper) {
 		targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
@@ -472,9 +516,11 @@ public class WaypointDialogHelper {
 		updateControls(ctx, helper);
 	}
 
-	private static void updateControls(Activity ctx, WaypointDialogHelper helper) {
+	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
 		if (helper != null && helper.helperCallbacks != null) {
-			helper.helperCallbacks.reloadAdapter();
+			for (WaypointDialogHelperCallbacks callback : helper.helperCallbacks) {
+				callback.reloadAdapter();
+			}
 		}
 		updateRouteInfoMenu(ctx);
 	}
@@ -484,7 +530,7 @@ public class WaypointDialogHelper {
 		updateControls(ctx, helper);
 	}
 
-	private static void replaceStartWithFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
+	public static void replaceStartWithFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
 														  WaypointDialogHelper helper) {
 		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
 		TargetPoint firstIntermediate = intermediatePoints.remove(0);
@@ -521,8 +567,10 @@ public class WaypointDialogHelper {
 			LocationPointWrapper point = (LocationPointWrapper) item;
 			if (point.type == WaypointHelper.TARGETS && adapter instanceof StableArrayAdapter) {
 				StableArrayAdapter stableAdapter = (StableArrayAdapter) adapter;
-				if (helper != null && helper.helperCallbacks != null && needCallback) {
-					helper.helperCallbacks.deleteWaypoint(stableAdapter.getPosition(item));
+				if (helper != null && !helper.helperCallbacks.isEmpty() && needCallback) {
+					for (WaypointDialogHelperCallbacks callback : helper.helperCallbacks) {
+						callback.deleteWaypoint(stableAdapter.getPosition(item));
+					}
 				}
 				updateRouteInfoMenu(ctx);
 			} else {
@@ -684,8 +732,10 @@ public class WaypointDialogHelper {
 								enableType(running, listAdapter, type, enable);
 							} else {
 								running[0] = -1;
-								if (helperCallbacks != null) {
-									helperCallbacks.reloadAdapter();
+								if (!helperCallbacks.isEmpty()) {
+									for (WaypointDialogHelperCallbacks callback : helperCallbacks) {
+										callback.reloadAdapter();
+									}
 								} else {
 									reloadListAdapter(listAdapter);
 								}
@@ -709,8 +759,10 @@ public class WaypointDialogHelper {
 
 			protected void onPostExecute(Void result) {
 				running[0] = -1;
-				if (helperCallbacks != null) {
-					helperCallbacks.reloadAdapter();
+				if (!helperCallbacks.isEmpty()) {
+					for (WaypointDialogHelperCallbacks callback : helperCallbacks) {
+						callback.reloadAdapter();
+					}
 				} else {
 					reloadListAdapter(listAdapter);
 				}
@@ -776,8 +828,10 @@ public class WaypointDialogHelper {
 
 			protected void onPostExecute(Void result) {
 				running[0] = -1;
-				if (helperCallbacks != null) {
-					helperCallbacks.reloadAdapter();
+				if (!helperCallbacks.isEmpty()) {
+					for (WaypointDialogHelperCallbacks callback : helperCallbacks) {
+						callback.reloadAdapter();
+					}
 				} else {
 					reloadListAdapter(listAdapter);
 				}
@@ -800,7 +854,7 @@ public class WaypointDialogHelper {
 		listAdapter.notifyDataSetChanged();
 	}
 
-	protected String getHeader(int type, boolean checked, Activity ctx) {
+	public String getHeader(int type, boolean checked, Activity ctx) {
 		String str = ctx.getString(R.string.shared_string_waypoints);
 		switch (type) {
 			case WaypointHelper.TARGETS:
@@ -965,8 +1019,10 @@ public class WaypointDialogHelper {
 				if (!eq) {
 					targets.reorderAllTargetPoints(intermediates, true);
 				}
-				if (helper.helperCallbacks != null) {
-					helper.helperCallbacks.reloadAdapter();
+				if (!helper.helperCallbacks.isEmpty()) {
+					for (WaypointDialogHelperCallbacks callback : helper.helperCallbacks) {
+						callback.reloadAdapter();
+					}
 				}
 				updateRouteInfoMenu(activity);
 			}

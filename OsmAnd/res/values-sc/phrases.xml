@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_palaeontological_site">Giassu paleontològicu</string>
 
 	<string name="poi_bakery">Furru de su pane</string>
@@ -121,7 +121,7 @@
 	<string name="poi_railway_station">Istatzione de sos trenos</string>
 	<string name="poi_railway_platform">Piattaredda ferroviària</string>
 	<string name="poi_subway_entrance">Intrada de sa metropolitana</string>
-	<string name="poi_subway_station">Istatzione de sa metropolitana</string>
+	<string name="poi_subway_station">Eja</string>
 	<string name="poi_taxi">Postèggiu de sos taxi</string>
 
 	<string name="poi_aerodrome">Aeroportu</string>
@@ -926,7 +926,7 @@
 	<string name="poi_brownfield">Terrinu abbandonadu</string>
 	<string name="poi_greenfield">Terrinu egadu</string>
 	<string name="poi_bunker_silo">Lòssia \"bunker\"</string>
-	<string name="poi_capital">Capitale</string>
+	<string name="poi_capital">Eja</string>
 	<string name="poi_office_religion">Ufìtziu religiosu</string>
 	<string name="poi_association">Ufìtziu de un’assòtziu</string>
 	<string name="poi_financial">Ufìtziu finantziàriu</string>
@@ -1121,8 +1121,8 @@
 	<string name="poi_crossing_traffic_signals">Cun semàforos</string>
 	<string name="poi_crossing_uncontrolled">Non controlladu</string>
 	<string name="poi_crossing_unmarked">Non sinnaladu</string>
-	<string name="poi_start_date">Data de cumintzu</string>
-	<string name="poi_wheelchair_yes">Cadira a rodas</string>
+	<string name="poi_start_date">Data de incumintzu</string>
+	<string name="poi_wheelchair_yes">Eja</string>
 	<string name="poi_wheelchair_no">Nono</string>
 	<string name="poi_wheelchair_limited">Limitada</string>
 	<string name="poi_access_private">Atzessu privadu</string>
@@ -2107,7 +2107,7 @@
 	<string name="poi_drive_through_no">Servìtziu pro automobilistas (drive-through): nono</string>
 
 	<string name="poi_brewery_additional">Nùmene birrifìtziu</string>
-	<string name="poi_microbrewery_yes">Micro-birrifìtziu</string>
+	<string name="poi_microbrewery_yes">Eja</string>
 	<string name="poi_microbrewery_no">Chene micro-birrifìtziu</string>
 
 	<string name="poi_takeaway_filter_yes">Eja</string>
@@ -3901,4 +3901,42 @@
 <string name="poi_atm">Bancomat</string>
 	<string name="poi_shoe_repair">Acontzu de iscarpas</string>
 
+<string name="poi_bulk_purchase">Còmpora a s\'ingrossu</string>
+	<string name="poi_substation_type">Casta</string>
+
+<string name="poi_bulk_purchase_yes">Eja</string>
+	<string name="poi_bulk_purchase_only">Petzi</string>
+
+	<string name="poi_pipeline_substation">Sutaistatzione de sas condutas</string>
+	<string name="poi_substation_transmission">Trasmissione</string>
+	<string name="poi_substation_distribution">Distributzione</string>
+	<string name="poi_substation_minor_distribution">Distributzione minore</string>
+	<string name="poi_substation_industrial">Industriale</string>
+	<string name="poi_substation_transition">Transitzione</string>
+	<string name="poi_substation_traction">Tratzione</string>
+	<string name="poi_substation_converter">Cunvertidore</string>
+	<string name="poi_substation_compensation">Cumpensatzione</string>
+
+	<string name="poi_substation_compression">Compressione</string>
+	<string name="poi_substation_measurement">Mèdida</string>
+	<string name="poi_substation_valve">Vàlvula</string>
+	<string name="poi_substation_valve_group">Grupu de vàlvulas</string>
+	<string name="poi_substation_inspection_gauge">Indicadore de ispetzione</string>
+	<string name="poi_substation_field_gathering">Regorta de campu</string>
+    <string name="poi_craft_confectionery">Produtzione de durches</string>
+    <string name="poi_shop_wholesale">Butega a s\'ingrussu</string>
+    <string name="poi_books_type">Libros</string>
+    <string name="poi_laboratory">Laboratòriu mèigu</string>
+    <string name="poi_blood_donation">Donatzione de sàmbene</string>
+    <string name="poi_books_comic">Fumetos</string>
+    <string name="poi_books_antiquarian">Anticuàriu</string>
+    <string name="poi_books_religion">Religione</string>
+    <string name="poi_books_academic">Acadèmicu</string>
+    <string name="poi_books_children">Pitzinnos</string>
+    <string name="poi_atoll">Atollu</string>
+    <string name="poi_toll_gantry">Incasteddadura de pedàgiu</string>
+    <string name="poi_childcare">Assistèntzia a sos pitzinnos</string>
+    <string name="poi_denotation">Denotatzione</string>
+    <string name="poi_denotation_natural_monument">Monumentu naturale</string>
+    <string name="poi_denotation_landmark">Puntu de riferimentu</string>
 </resources>

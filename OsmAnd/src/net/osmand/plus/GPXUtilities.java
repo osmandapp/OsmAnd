@@ -13,7 +13,9 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.Renderable;
 import net.osmand.util.Algorithms;
 
@@ -52,6 +54,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 
@@ -75,9 +79,19 @@ public class GPXUtilities {
 
 		@ColorInt
 		public int getColor(@ColorInt int defColor) {
-			if (extensions != null && extensions.containsKey("color")) {
+			String clrValue = null;
+			if (extensions != null) {
+				clrValue = extensions.get("color");
+				if (clrValue == null) {
+					clrValue = extensions.get("colour");
+				}
+				if (clrValue == null) {
+					clrValue = extensions.get("displaycolor");
+				}
+			}
+			if (clrValue != null && clrValue.length() > 0) {
 				try {
-					return Color.parseColor(extensions.get("color").toUpperCase());
+					return Color.parseColor(clrValue.toUpperCase());
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				}
@@ -107,6 +121,7 @@ public class GPXUtilities {
 		public int time;
 		public float elevation;
 	}
+
 	public static class Speed {
 		public float distance;
 		public int time;
@@ -802,6 +817,7 @@ public class GPXUtilities {
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
+		public boolean hasAltitude;
 		public long modifiedTime = 0;
 
 		private Track generalTrack;
@@ -1236,6 +1252,57 @@ public class GPXUtilities {
 			}
 			return categories;
 		}
+
+		public QuadRect getRect() {
+			double left = 0, right = 0;
+			double top = 0, bottom = 0;
+			for (Track track : tracks) {
+				for (TrkSegment segment : track.segments) {
+					for (WptPt p : segment.points) {
+						if (left == 0 && right == 0) {
+							left = p.getLongitude();
+							right = p.getLongitude();
+							top = p.getLatitude();
+							bottom = p.getLatitude();
+						} else {
+							left = Math.min(left, p.getLongitude());
+							right = Math.max(right, p.getLongitude());
+							top = Math.max(top, p.getLatitude());
+							bottom = Math.min(bottom, p.getLatitude());
+						}
+					}
+				}
+			}
+			for (WptPt p : points) {
+				if (left == 0 && right == 0) {
+					left = p.getLongitude();
+					right = p.getLongitude();
+					top = p.getLatitude();
+					bottom = p.getLatitude();
+				} else {
+					left = Math.min(left, p.getLongitude());
+					right = Math.max(right, p.getLongitude());
+					top = Math.max(top, p.getLatitude());
+					bottom = Math.min(bottom, p.getLatitude());
+				}
+			}
+			for (GPXUtilities.Route route : routes) {
+				for (WptPt p : route.points) {
+					if (left == 0 && right == 0) {
+						left = p.getLongitude();
+						right = p.getLongitude();
+						top = p.getLatitude();
+						bottom = p.getLatitude();
+					} else {
+						left = Math.min(left, p.getLongitude());
+						right = Math.max(right, p.getLongitude());
+						top = Math.max(top, p.getLatitude());
+						bottom = Math.min(bottom, p.getLatitude());
+					}
+				}
+			}
+			return new QuadRect(left, top, right, bottom);
+		}
 	}
 
     public static String asString(GPXFile file, OsmandApplication ctx) {
@@ -1499,18 +1566,16 @@ public class GPXUtilities {
 				if (tok == XmlPullParser.START_TAG) {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
-					if (extensionReadMode && parse instanceof GPXExtensions) {
+					if (extensionReadMode && parse != null) {
 						String value = readText(parser, tag);
 						if (value != null) {
-							((GPXExtensions) parse).getExtensionsToWrite().put(tag, value);
+							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
 							if (tag.equals("speed") && parse instanceof WptPt) {
 								try {
 									((WptPt) parse).speed = Float.parseFloat(value);
-								} catch (NumberFormatException e) {
-								}
+								} catch (NumberFormatException e) {}
 							}
 						}
-
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = true;
 					} else {
@@ -1738,5 +1803,37 @@ public class GPXUtilities {
 		if (from.warning != null) {
 			to.warning = from.warning;
 		}
+	}
+
+	public static GPXFile makeGpxFromRoute(RouteCalculationResult route) {
+		double lastHeight = HEIGHT_UNDEFINED;
+		GPXFile gpx = new GPXUtilities.GPXFile();
+		List<Location> locations = route.getRouteLocations();
+		if (locations != null) {
+			GPXUtilities.Track track = new GPXUtilities.Track();
+			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
+			for (Location l : locations) {
+				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
+				point.lat = l.getLatitude();
+				point.lon = l.getLongitude();
+				if (l.hasAltitude()) {
+					gpx.hasAltitude = true;
+					float h = (float) l.getAltitude();
+					point.ele = h;
+					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
+						for (GPXUtilities.WptPt pt : seg.points) {
+							if (Double.isNaN(pt.ele)) {
+								pt.ele = h;
+							}
+						}
+					}
+					lastHeight = h;
+				}
+				seg.points.add(point);
+			}
+			track.segments.add(seg);
+			gpx.tracks.add(track);
+		}
+		return gpx;
 	}
 }

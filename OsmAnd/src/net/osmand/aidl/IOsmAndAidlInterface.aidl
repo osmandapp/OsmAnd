@@ -54,6 +54,8 @@ import net.osmand.aidl.gpx.RemoveGpxParams;
 import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 
 import net.osmand.aidl.navigation.PauseNavigationParams;
 import net.osmand.aidl.navigation.ResumeNavigationParams;
@@ -66,6 +68,20 @@ import net.osmand.aidl.IOsmAndAidlCallback;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.navigation.NavigateSearchParams;
+
+import net.osmand.aidl.customization.SetWidgetsParams;
+import net.osmand.aidl.customization.OsmandSettingsParams;
+
+import net.osmand.aidl.gpx.AGpxFile;
+import net.osmand.aidl.gpx.AGpxFileDetails;
+import net.osmand.aidl.gpx.CreateGpxBitmapParams;
+
+import net.osmand.aidl.tiles.ASqliteDbFile;
+
+import net.osmand.aidl.plugins.PluginParams;
+
+
+
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -133,4 +149,34 @@ interface IOsmAndAidlInterface {
 
     long registerForUpdates(in long updateTimeMS, IOsmAndAidlCallback callback);
     boolean unregisterFromUpdates(in long callbackId);
+
+    boolean setNavDrawerLogo(in String imageUri);
+
+    boolean setEnabledIds(in List<String> ids);
+    boolean setDisabledIds(in List<String> ids);
+    boolean setEnabledPatterns(in List<String> patterns);
+    boolean setDisabledPatterns(in List<String> patterns);
+
+    boolean regWidgetVisibility(in SetWidgetsParams params);
+    boolean regWidgetAvailability(in SetWidgetsParams params);
+
+    boolean customizeOsmandSettings(in OsmandSettingsParams params);
+
+    boolean getImportedGpx(out List<AGpxFile> files);
+
+    boolean getSqliteDbFiles(out List<ASqliteDbFile> files);
+    boolean getActiveSqliteDbFiles(out List<ASqliteDbFile> files);
+    boolean showSqliteDbFile(String fileName);
+    boolean hideSqliteDbFile(String fileName);
+
+    boolean setNavDrawerLogoWithParams(in NavDrawerHeaderParams params);
+    boolean setNavDrawerFooterWithParams(in NavDrawerFooterParams params);
+
+    boolean restoreOsmand();
+
+    boolean changePluginState(in PluginParams params);
+
+    boolean registerForOsmandInitListener(in IOsmAndAidlCallback callback);
+
+    boolean getBitmapForGpx(in CreateGpxBitmapParams file, IOsmAndAidlCallback callback);
 }

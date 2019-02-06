@@ -115,7 +115,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top_dark, colorRes));
 
-
         final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, getMyApplication()));
         String selectedUsername = settings.MAPILLARY_FILTER_USERNAME.get();
@@ -150,13 +149,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 view.findViewById(R.id.warning_linear_layout).setVisibility(View.GONE);
-                if (!settings.MAPILLARY_FILTER_USERNAME.get().equals("") ||
-                        settings.MAPILLARY_FILTER_TO_DATE.get() != 0 ||
-                        settings.MAPILLARY_FILTER_FROM_DATE.get() != 0) {
-                    changeButtonState((Button) view.findViewById(R.id.button_apply), 1, true);
-                } else {
-                    changeButtonState((Button) view.findViewById(R.id.button_apply), .5f, false);
-                }
+                enableButtonApply(view);
             }
 
             @Override
@@ -179,7 +172,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 dateFromEt.setText(dateFormat.format(from.getTime()));
                 settings.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
-                changeButtonState((Button) view.findViewById(R.id.button_apply), 1, true);
+                enableButtonApply(view);
                 mapActivity.getDashboard().refreshContent(true);
             }
         };
@@ -206,7 +199,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 dateToEt.setText(dateFormat.format(to.getTime()));
                 settings.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
-                changeButtonState((Button) view.findViewById(R.id.button_apply), 1, true);
+                enableButtonApply(view);
                 mapActivity.getDashboard().refreshContent(true);
             }
         };
@@ -233,9 +226,28 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             }
         }
 
+        final View rowPano = view.findViewById(R.id.pano_row);
+        final CompoundButton pano = (CompoundButton) rowPano.findViewById(R.id.pano_row_toggle);
+        pano.setOnCheckedChangeListener(null);
+        pano.setChecked(settings.MAPILLARY_FILTER_PANO.get());
+        pano.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                settings.MAPILLARY_FILTER_PANO.set(!settings.MAPILLARY_FILTER_PANO.get());
+                enableButtonApply(view);
+                mapActivity.getDashboard().refreshContent(true);
+            }
+        });
+        rowPano.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pano.setChecked(!pano.isChecked());
+            }
+        });
+
 
         final Button apply = (Button) view.findViewById(R.id.button_apply);
-        changeButtonState(apply, .5f, false);
+        disableButtonApply(view);
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +255,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 String dateFrom = dateFromEt.getText().toString();
                 String dateTo = dateToEt.getText().toString();
 
-                if (!settings.MAPILLARY_FILTER_USERNAME.get().equals("") || !dateFrom.equals("") || !dateTo.equals("")) {
+                if (!settings.MAPILLARY_FILTER_USERNAME.get().equals("") || !dateFrom.equals("") || !dateTo.equals("") || settings.MAPILLARY_FILTER_PANO.get()) {
                     settings.USE_MAPILLARY_FILTER.set(true);
                 }
                 if (dateFrom.equals("")) {
@@ -272,12 +284,14 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 textView.setText("");
                 dateFromEt.setText("");
                 dateToEt.setText("");
+                pano.setChecked(false);
 
                 settings.USE_MAPILLARY_FILTER.set(false);
                 settings.MAPILLARY_FILTER_USER_KEY.set("");
                 settings.MAPILLARY_FILTER_USERNAME.set("");
                 settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
                 settings.MAPILLARY_FILTER_TO_DATE.set(0L);
+                settings.MAPILLARY_FILTER_PANO.set(false);
 
                 plugin.updateLayers(mapActivity.getMapView(), mapActivity);
                 hideKeyboard();
@@ -293,6 +307,14 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
         }
+    }
+
+    private void enableButtonApply(View view) {
+        changeButtonState((Button) view.findViewById(R.id.button_apply), 1, true);
+    }
+
+    private void disableButtonApply(View view) {
+        changeButtonState((Button) view.findViewById(R.id.button_apply), .5f, false);
     }
 
     private void changeButtonState(Button button, float alpha, boolean enabled) {

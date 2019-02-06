@@ -65,6 +65,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OnDismissDialogFragmentListener;
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -90,7 +91,6 @@ import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
-import net.osmand.plus.helpers.DiscountHelper.DiscountBarController;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
@@ -100,8 +100,8 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
@@ -110,9 +110,11 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -150,7 +152,7 @@ import java.util.regex.Pattern;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener,
-		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener {
+		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
@@ -208,6 +210,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean mIsDestroyed = false;
 	private boolean pendingPause = false;
 	private Timer splashScreenTimer;
+	private boolean activityRestartNeeded = false;
+	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
@@ -437,7 +441,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
 
-		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
+		final RouteCalculationProgressCallback progressCallback = new RouteCalculationProgressCallback() {
 
 			@Override
 			public void start() {
@@ -467,7 +471,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(getRoutingHelper().getAppMode())) {
 					final OsmandSettings.CommonPreference<Boolean> allowPrivate
 							= settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
-					final List<ApplicationMode> modes = ApplicationMode.values(settings);
+					final List<ApplicationMode> modes = ApplicationMode.values(app);
 					for (ApplicationMode mode : modes) {
 						if (!allowPrivate.getModeValue(mode)) {
 							settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
@@ -498,6 +502,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
+			}
+		};
+
+		app.getRoutingHelper().setProgressBar(progressCallback);
+
+		app.getTransportRoutingHelper().setProgressBar(new TransportRouteCalculationProgressCallback() {
+			@Override
+			public void start() {
+				progressCallback.start();
+			}
+
+			@Override
+			public void updateProgress(int progress) {
+				progressCallback.updateProgress(progress);
+			}
+
+			@Override
+			public void finish() {
+				progressCallback.finish();
 			}
 		});
 	}
@@ -566,7 +589,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (dashboardOnMap.onBackPressed()) {
 			return;
 		}
-		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+		if (drawerLayout.isDrawerOpen(Gravity.START)) {
 			closeDrawer();
 			return;
 		}
@@ -634,6 +657,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+		if (activityRestartNeeded) {
+			activityRestartNeeded = false;
+			recreate();
+			return;
+		}
+
 		long tm = System.currentTimeMillis();
 
 		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
@@ -760,8 +790,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
 
-		DiscountHelper.checkAndDisplay(this);
-
 		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
 		if (searchDialogFragment != null) {
 			if (searchDialogFragment.isSearchHidden()) {
@@ -770,7 +798,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 
-		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
@@ -1213,6 +1240,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onStart() {
 		super.onStart();
+		stopped = false;
 		wakeLockHelper.onStart(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
@@ -1232,6 +1260,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if(pendingPause) {
 			onPauseActivity();
 		}
+		stopped = true;
 		super.onStop();
 	}
 
@@ -1306,7 +1335,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
-		getMyApplication().getAppCustomization().pauseActivity(MapActivity.class);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);
 	}
@@ -1567,7 +1595,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
 		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
-		drawerLayout.openDrawer(Gravity.LEFT, animate);
+		drawerLayout.openDrawer(Gravity.START, animate);
 	}
 
 	public void disableDrawer() {
@@ -1591,7 +1619,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+				if (drawerLayout.isDrawerOpen(Gravity.START)) {
 					int width = AndroidUtils.dpToPx(this, 280);
 					if (event.getRawX() > width) {
 						closeDrawer();
@@ -1605,11 +1633,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void closeDrawer() {
 		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
-		drawerLayout.closeDrawer(Gravity.LEFT, animate);
+		drawerLayout.closeDrawer(Gravity.START, animate);
 	}
 
 	public void toggleDrawer() {
-		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+		if (drawerLayout.isDrawerOpen(Gravity.START)) {
 			closeDrawer();
 		} else {
 			openDrawer();
@@ -1846,6 +1874,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		showQuickSearch(mode, showCategories, "", null);
 	}
 
+	public void showQuickSearch(ShowQuickSearchMode mode, QuickSearchTab showSearchTab) {
+		showQuickSearch(mode, showSearchTab, "", null);
+	}
+
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
 								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
@@ -1885,6 +1917,48 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
 					QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, searchLocation);
+		}
+	}
+
+	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, QuickSearchTab showSearchTab,
+								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+		if (mode == ShowQuickSearchMode.CURRENT) {
+			mapContextMenu.close();
+		} else {
+			hideContextMenu();
+		}
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION
+				|| mode == ShowQuickSearchMode.DESTINATION_SELECTION_AND_START || mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+			if (fragment != null) {
+				fragment.dismiss();
+			}
+			if (mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.INTERMEDIATE, showSearchTab, searchLocation);
+			} else if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.START_POINT, showSearchTab, searchLocation);
+			} else if (mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION, showSearchTab, searchLocation);
+			} else {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION_AND_START, showSearchTab, searchLocation);
+			}
+		} else if (fragment != null) {
+			if (mode == ShowQuickSearchMode.NEW
+					|| (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
+				fragment.dismiss();
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.REGULAR, showSearchTab, searchLocation);
+			} else {
+				fragment.show();
+			}
+			refreshMap();
+		} else {
+			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+					QuickSearchType.REGULAR, showSearchTab, searchLocation);
 		}
 	}
 
@@ -1947,6 +2021,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void removeActivityResultListener(ActivityResultListener listener) {
 		activityResultListeners.remove(listener);
+	}
+
+	@Override
+	public void onOsmAndSettingsCustomized() {
+		if (stopped) {
+			activityRestartNeeded = true;
+		} else {
+			recreate();
+		}
+	}
+
+	@Override
+	public void onInAppPurchaseGetItems() {
+		DiscountHelper.checkAndDisplay(this);
 	}
 
 	public enum ShowQuickSearchMode {

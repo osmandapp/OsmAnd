@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import alice.tuprolog.Int;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -72,6 +75,8 @@ public class ContextMenuAdapter {
 		items.remove(position);
 	}
 
+	public void clearAdapter() { items.clear(); }
+
 	public void setDefaultLayoutId(int defaultLayoutId) {
 		this.DEFAULT_LAYOUT_ID = defaultLayoutId;
 	}
@@ -100,6 +105,13 @@ public class ContextMenuAdapter {
 	public ArrayAdapter<ContextMenuItem> createListAdapter(final Activity activity, final boolean lightTheme) {
 		final int layoutId = DEFAULT_LAYOUT_ID;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		final OsmAndAppCustomization customization = app.getAppCustomization();
+		for (Iterator<ContextMenuItem> iterator = items.iterator(); iterator.hasNext(); ) {
+			String id = iterator.next().getId();
+			if (!TextUtils.isEmpty(id) && !customization.isFeatureEnabled(id)) {
+				iterator.remove();
+			}
+		}
 		return new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
 				items.toArray(new ContextMenuItem[items.size()]), app, lightTheme, changeAppModeListener);
 	}

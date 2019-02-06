@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne.</string>
@@ -1580,9 +1580,9 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="speak_poi">Points d\'intérêt à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
-\n
-\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire, etc.). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.</string>
+    <string name="record_plugin_description">Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte. 
+\n 
+\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OsmAnd (comme la vitesse moyenne, la durée de l\'itinéraire, etc.). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -1772,7 +1772,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Désélectionner</string>
     <string name="shared_string_deselect_all">Désélectionner tout</string>
-    <string name="shared_string_unexpected_error">Erreur inconnue</string>
+    <string name="shared_string_unexpected_error">Erreur inattendue</string>
     <string name="shared_string_action_template">Action {0}</string>
     <string name="shared_string_video">Vidéo</string>
     <string name="shared_string_photo">Photo</string>
@@ -2204,7 +2204,7 @@ Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="osm_live_month_cost_desc">Règlement mensuel</string>
     <string name="osm_live_active">Actif</string>
     <string name="osm_live_not_active">Inactif</string>
-    <string name="osm_live_enter_email">Merci de saisir un courriel valide</string>
+    <string name="osm_live_enter_email">Veuillez saisir une adresse email valide</string>
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
@@ -2354,7 +2354,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="get_it">Obtenir</string>
     <string name="osm_live_banner_desc">Téléchargez un nombre illimité de cartes et obtenez des mises à jour plus fréquentes (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
     <string name="osmand_plus_banner_desc">Téléchargements illimités des cartes, des mises à jour et des données pour le greffon Wikipédia.</string>
-    <string name="donation_to_osm">Faire un don à la communauté OpenStreetMap</string>
+    <string name="donation_to_osm">Don à la communauté OpenStreetMap</string>
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
     <string name="osm_live_payment_desc">Abonnement mensuel. Vous pouvez l\'annuler à tout moment sur Google Play.</string>
     <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMap. Le coût de l\'abonnement reste identique.</string>
@@ -2737,7 +2737,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapillary_menu_title_tile_cache">Cache des tuiles</string>
     <string name="mapillary_menu_descr_dates">Afficher uniquement les images ajoutées</string>
     <string name="mapillary_menu_descr_username">Afficher uniquement les images ajoutées par</string>
-    <string name="mapillary_menu_filter_description">Filtrer les images par date ou nom d\'utilisateur. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
+    <string name="mapillary_menu_filter_description">Filtrez les images par date, nom d\'utilisateur ou type. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
     <string name="shared_string_reset">Réinitialiser</string>
     <string name="average">Moyenne</string>
     <string name="ascent_descent">Croissant / Décroissant</string>
@@ -3189,11 +3189,60 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_value_black_name">Noir</string>
     <string name="more_transport_on_stop_hint">Il y a d\'autres moyens de transport à cet arrêt.</string>
     <string name="search_street">Rechercher une rue</string>
-    <string name="start_search_from_city">Recherche par nom de ville</string>
+    <string name="start_search_from_city">Tapez un nom de ville</string>
     <string name="shared_string_restore">Restaurer</string>
     <string name="keep_passed_markers_descr">Les marques visitées resteront affichées sur la carte, que les marques appartiennent à un groupe de favoris ou qu\'il s\'agisse de points de passage GPX. Ces marques ne disparaîtront que lorsque le groupe ou la trace sera désactivé.</string>
     <string name="keep_passed_markers">Afficher sur la carte les marques visitées</string>
     <string name="markers_remove_dialog_msg">Supprimer la marque \'%s\' \?</string>
     <string name="edit_map_marker">Modifier la marque</string>
     <string name="third_party_application">Application tierce</string>
-    </resources>
+    <string name="osm_live_payment_monthly_title">Payer chaque mois</string>
+    <string name="osm_live_payment_3_months_title">Payer tous les 3 mois</string>
+    <string name="osm_live_payment_annual_title">Payer chaque année</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mois</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mois</string>
+    <string name="osm_live_payment_discount_descr">Économisez %1$s !</string>
+	<string name="osm_live_payment_current_subscription">Votre abonnement actuel</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Sélectionnez la fréquence de règlement qui vous convient :</string>
+    <string name="osm_live_payment_contribute_descr">Une partie des revenus est reversée aux contributeurs OpenStreetMap.</string>
+    <string name="osm_live_plan_pricing">Plans et Tarifs</string>
+    <string name="osm_live_payment_renews_monthly">Abonnements mensuels</string>
+    <string name="osm_live_payment_renews_quarterly">Abonnements trimestriels</string>
+    <string name="osm_live_payment_renews_annually">Abonnements annuels</string>
+    <string name="powered_by_osmand">Propulsé par OsmAnd</string>
+    <string name="osm_live_subscriptions">Abonnements</string>
+    <string name="mapillary_menu_title_pano">N\'afficher que les images à 360°</string>
+    <string name="shared_string_launch">Ouvrir</string>
+    <string name="run_full_osmand_msg">Vous utilisez la carte {0} qui est proposée par OsmAnd. Souhaitez-vous lancer la version complète d\'OsmAnd \?</string>
+    <string name="run_full_osmand_header">Ouvrir OsmAnd \?</string>
+    <string name="quick_action_switch_day_night_descr">Ce bouton permet de basculer entre les modes Jour et Nuit d\'OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Mode Jour</string>
+    <string name="quick_action_switch_night_mode">Mode Nuit</string>
+    <string name="quick_action_day_night_switch_mode">Bascule les modes Jour / Nuit</string>
+    <string name="lang_gn_py">Guarani</string>
+    <string name="swap_start_and_destination">Inverser départ et arrivée</string>
+    <string name="add_destination_point">Ajouter destination</string>
+    <string name="add_intermediate_point">Ajouter étape</string>
+    <string name="add_start_point">Ajouter départ</string>
+    <string name="intermediate_waypoint">Étape : %1$s</string>
+    <string name="waypoints">Points de passage : %1$s</string>
+    <string name="transfers">transferts : %1$s</string>
+    <string name="on_foot">à pied : %1$s</string>
+    <string name="route_way">Mode : %1$s</string>
+    <string name="points_of_interests">Points d\'intérêt (PI)</string>
+    <string name="waiting_for_route_calculation">Calcul de l\'itinéraire en cours</string>
+    <string name="app_mode_public_transport">Transports publics</string>
+    <string name="avoid_roads_descr">Sélectionnez la route, sur la carte ou parmi la liste ci-dessous, que vous souhaitez éviter pendant la navigation :</string>
+    <string name="show_along_the_route">Afficher sur l\'itinéraire</string>
+    <string name="simulate_navigation">Simuler la navigation</string>
+    <string name="choose_track_file_to_follow">Sélectionner un fichier de trace à suivre</string>
+    <string name="voice_announcements">Annonces vocales</string>
+    <string name="intermediate_destinations">Destinations intermédiaires : %1$s</string>
+    <string name="arrive_at_time">Arrivée à %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Сapacité</string>
+    <string name="shared_string_width">Largeur</string>
+    <string name="shared_string_height">Hauteur</string>
+</resources>

@@ -1,8 +1,10 @@
 package net.osmand.telegram.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.RecyclerView
@@ -33,6 +35,7 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
@@ -44,7 +47,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
-	private val osmandAidlHelper get() = app.osmandAidlHelper
 	private val settings get() = app.settings
 
 	private lateinit var adapter: LiveNowListAdapter
@@ -52,10 +54,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	private lateinit var openOsmAndBtn: TextView
 	private lateinit var sortByBtn: TextView
+	private lateinit var lastTelegramUpdateTime: TextView
 
 	private var location: Location? = null
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
+
+	private var lastTelegramUpdateStr = ""
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -64,6 +69,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	): View? {
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
+
+		lastTelegramUpdateTime = mainView.findViewById<TextView>(R.id.last_telegram_update_time)
+		lastTelegramUpdateStr = getString(R.string.last_update_from_telegram) + ": "
+
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 		adapter = LiveNowListAdapter()
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
@@ -92,11 +101,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
+		mainView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).apply {
+			setOnRefreshListener {
+				app.shareLocationHelper.checkNetworkType()
+				updateList()
+				isRefreshing = false
+			}
+			setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.CYAN)
+		}
+
 		openOsmAndBtn = mainView.findViewById<TextView>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
-				val pack = settings.appToConnectPackage
-				if (AndroidUtils.isAppInstalled(context, pack)) {
-					activity?.packageManager?.getLaunchIntentForPackage(pack)?.also { intent ->
+				if (app.isOsmAndInstalled()) {
+					activity?.packageManager?.getLaunchIntentForPackage(settings.appToConnectPackage)?.also { intent ->
 						startActivity(intent)
 					}
 				} else {
@@ -161,6 +178,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
+		updateList()
+	}
+
+	override fun onTelegramChatCreated(chat: TdApi.Chat) {
 		updateList()
 	}
 
@@ -278,6 +299,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
+		if (res.isEmpty()) {
+			lastTelegramUpdateTime.visibility = View.VISIBLE
+			lastTelegramUpdateTime.text = OsmandFormatter.getListItemLiveTimeDescr(app, telegramHelper.lastTelegramUpdateTime, lastTelegramUpdateStr)
+		} else {
+			lastTelegramUpdateTime.visibility = View.GONE
+		}
 		adapter.items = sortAdapterItems(res)
 	}
 
@@ -423,9 +450,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
-					if (!app.isOsmAndInstalled()) {
+					if (!app.isAnyOsmAndInstalled()) {
 						showOsmAndMissingDialog()
-					} else {
+					} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
+						fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this@LiveNowTabFragment) }
+					} else if(app.isOsmAndInstalled()){
 						app.showLocationHelper.showLocationOnMap(item, staleLocation)
 					}
 				}
@@ -445,6 +474,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.locationViewContainer?.visibility = View.GONE
 			}
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
+
+			if (lastItem) {
+				holder.lastTelegramUpdateTime?.visibility = View.VISIBLE
+				holder.lastTelegramUpdateTime?.text = OsmandFormatter.getListItemLiveTimeDescr(app, telegramHelper.lastTelegramUpdateTime, lastTelegramUpdateStr)
+			} else {
+				holder.lastTelegramUpdateTime?.visibility = View.GONE
+			}
 
 			if (item is ChatItem && holder is ChatViewHolder) {
 				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !sortByGroup)
@@ -511,17 +547,21 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 					settings.showChatOnMap(chatId, allSelected)
 					if (settings.hasAnyChatToShowOnMap()) {
-						if (!app.isOsmAndInstalled()) {
+						if (!app.isAnyOsmAndInstalled()) {
 							if (allSelected) {
 								showOsmAndMissingDialog()
 							}
+						} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
+							fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this@LiveNowTabFragment) }
 						} else {
-							if (allSelected) {
-								app.showLocationHelper.showChatMessages(chatId)
-							} else {
-								app.showLocationHelper.hideChatMessages(chatId)
+							if (app.isOsmAndInstalled()) {
+								if (allSelected) {
+									app.showLocationHelper.showChatMessages(chatId)
+								} else {
+									app.showLocationHelper.hideChatMessages(chatId)
+								}
+								app.showLocationHelper.startShowingLocation()
 							}
-							app.showLocationHelper.startShowingLocation()
 						}
 					} else {
 						app.showLocationHelper.stopShowingLocation()
@@ -545,6 +585,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val distanceText: TextView? = view.findViewById(R.id.distance_text)
 			val description: TextView? = view.findViewById(R.id.description)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
+			val lastTelegramUpdateTime: TextView? = view.findViewById(R.id.last_telegram_update_time)
 
 			abstract fun getOpenOnMapClickView(): View?
 		}

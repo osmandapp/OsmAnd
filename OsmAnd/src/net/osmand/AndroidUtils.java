@@ -40,6 +40,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
@@ -310,6 +311,15 @@ public class AndroidUtils {
 		}
 	}
 
+	public static void setForeground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+			view.setForeground(ctx.getResources().getDrawable(night ? darkResId : lightResId,
+					ctx.getTheme()));
+		} else if (view instanceof FrameLayout) {
+			((FrameLayout) view).setForeground(ctx.getResources().getDrawable(night ? darkResId : lightResId));
+		}
+	}
+
 	public static void setDashButtonBackground(Context ctx, View view, boolean night) {
 		setBackground(ctx, view, night, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 	}
@@ -436,26 +446,6 @@ public class AndroidUtils {
 
 	public static boolean isValidEmail(CharSequence target) {
 		return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-	}
-
-	public static String getFileAsString(File file) {
-		try {
-			FileInputStream fin = new FileInputStream(file);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-			StringBuilder sb = new StringBuilder();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				if (sb.length() > 0) {
-					sb.append("\n");
-				}
-				sb.append(line);
-			}
-			reader.close();
-			fin.close();
-			return sb.toString();
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	public static PointF centroidForPoly(PointF[] points) {

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -403,6 +404,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		if (editText.hasFocus()) {
 			AndroidUtils.hideSoftKeyboard(getActivity(), editText);
 		}
+	}
+
+	public void refreshList() {
+		initListItems();
+		updateListView();
 	}
 
 	private void updateListView() {

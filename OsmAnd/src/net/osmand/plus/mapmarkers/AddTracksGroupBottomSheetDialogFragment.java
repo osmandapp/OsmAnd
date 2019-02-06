@@ -73,7 +73,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 				File gpx = dataItem.getFile();
 				if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
 					GPXFile res = GPXUtilities.loadGPXFile(app, gpx);
-					selectionHelper.selectGpxFile(res, true, false, false, false);
+					selectionHelper.selectGpxFile(res, true, false, false, false, false);
 				}
 				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
 			}

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="start">
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/app_modes_scroll_container"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="start">
 
-    <LinearLayout
-        android:id="@+id/app_modes_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:orientation="horizontal">
-    </LinearLayout>
+	<LinearLayout
+		android:id="@+id/app_modes_content"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="start"
+		android:orientation="horizontal"/>
 
 </HorizontalScrollView>

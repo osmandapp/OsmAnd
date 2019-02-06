@@ -14,13 +14,14 @@ import android.widget.TextView
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
-import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
+import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.telegram.utils.UiUtils
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
@@ -36,6 +37,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 	private lateinit var timeForAllValue: TextView
 
 	private val chatLivePeriods = HashMap<Long, Long>()
+	private val userLivePeriods = HashMap<Long, Long>()
 
 	private var location: Location? = null
 	private var heading: Float? = null
@@ -90,6 +92,9 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 					chatLivePeriods.forEach { (chatId, livePeriod) ->
 						settings.shareLocationToChat(chatId, true, livePeriod)
 					}
+					userLivePeriods.forEach { (userId, livePeriod) ->
+						settings.shareLocationToUser(userId.toInt(),  livePeriod)
+					}
 					app.shareLocationHelper.startSharingLocation()
 					targetFragment?.also {
 						it.onActivityResult(targetRequestCode, LOCATION_SHARED_REQUEST_CODE, null)
@@ -121,7 +126,13 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 			chats.add(id)
 			chats.add(livePeriod)
 		}
+		val users = mutableListOf<Long>()
+		for ((id, livePeriod) in userLivePeriods) {
+			users.add(id)
+			users.add(livePeriod)
+		}
 		outState.putLongArray(CHATS_KEY, chats.toLongArray())
+		outState.putLongArray(USERS_KEY, users.toLongArray())
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -167,17 +178,27 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 	
 	private fun readFromBundle(bundle: Bundle?) {
 		chatLivePeriods.clear()
+		userLivePeriods.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
 			for (i in 0 until it.size step 2) {
 				val livePeriod = settings.getChatLivePeriod(it[i])
 				chatLivePeriods[it[i]] = livePeriod ?: it[i + 1]
 			}
 		}
+		bundle?.getLongArray(USERS_KEY)?.also {
+			for (j in 0 until it.size step 2) {
+				val livePeriod = settings.getChatLivePeriod(it[j])
+				userLivePeriods[it[j]] = livePeriod ?: it[j + 1]
+			}
+		}
 	}
 
 	private fun getTimeForAll(useDefValue: Boolean = false): Long {
 		val returnVal = if (useDefValue) DEFAULT_VISIBLE_TIME_SECONDS else NO_VALUE
-		val iterator = chatLivePeriods.values.iterator()
+		val allTime = mutableListOf<Long>()
+		allTime.addAll(chatLivePeriods.values)
+		allTime.addAll(userLivePeriods.values)
+		val iterator = allTime.iterator()
 		if (!iterator.hasNext()) {
 			return returnVal
 		}
@@ -202,7 +223,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 		}
 	}
 
-	private fun selectDuration(id: Long? = null) {
+	private fun selectDuration(id: Long? = null, isChat: Boolean = true) {
 		val timeForAll = getTimeForAll(true)
 		val defSeconds = if (id == null) timeForAll else chatLivePeriods[id] ?: timeForAll
 		val (defHours, defMinutes) = secondsToHoursAndMinutes(defSeconds)
@@ -213,10 +234,17 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 						TimeUnit.MINUTES.toSeconds(minutes.toLong())
 				if (seconds >= ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
 					if (id != null) {
-						chatLivePeriods[id] = seconds
+						if (isChat) {
+							chatLivePeriods[id] = seconds
+						} else {
+							userLivePeriods[id] = seconds
+						}
 					} else {
 						chatLivePeriods.keys.forEach {
 							chatLivePeriods[it] = seconds
+						}
+						userLivePeriods.keys.forEach {
+							userLivePeriods[it] = seconds
 						}
 					}
 					updateTimeForAllRow()
@@ -242,17 +270,19 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 	}
 
 	private fun updateList() {
-		val chats: MutableList<TdApi.Chat> = mutableListOf()
+		val items: MutableList<TdApi.Object> = mutableListOf()
 		telegramHelper.getChatList().filter { chatLivePeriods.keys.contains(it.chatId) }
 			.forEach { orderedChat ->
-				telegramHelper.getChat(orderedChat.chatId)?.also { chats.add(it) }
+				telegramHelper.getChat(orderedChat.chatId)?.also { items.add(it) }
 			}
-		adapter.chats = chats
+		telegramHelper.getContacts().values.filter { userLivePeriods.keys.contains(it.id.toLong()) }
+			.forEach { user -> items.add(user) }
+		adapter.items = items
 	}
 
 	inner class SetTimeListAdapter : RecyclerView.Adapter<ChatViewHolder>() {
 
-		var chats: List<TdApi.Chat> = emptyList()
+		var items: List<TdApi.Object> = emptyList()
 			set(value) {
 				field = value
 				notifyDataSetChanged()
@@ -265,21 +295,41 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 		}
 
 		override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-			val chat = chats[position]
-			val placeholderId = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
+			val item = items[position]
+			val isChat = item is TdApi.Chat
+			val itemId = if (isChat) {
+				(item as TdApi.Chat).id
+			} else {
+				(item as TdApi.User).id.toLong()
+			}
 
-			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
-			holder.title?.text = chat.title
+			val placeholderId = if (isChat && telegramHelper.isGroup((item as TdApi.Chat))) R.drawable.img_group_picture else R.drawable.img_user_picture
 
-			if (telegramHelper.isGroup(chat)) {
+			val photoPath = when (item) {
+				is TdApi.Chat -> item.photo?.small?.local?.path
+				is TdApi.User -> item.profilePhoto?.small?.local?.path
+				else -> null
+			}
+
+			TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, placeholderId, false)
+
+			val title = when (item) {
+				is TdApi.Chat -> item.title
+				is TdApi.User -> TelegramUiHelper.getUserName(item)
+				else -> null
+			}
+
+			holder.title?.text = title
+
+			if (isChat && telegramHelper.isGroup((item as TdApi.Chat))) {
 				holder.locationViewContainer?.visibility = View.GONE
 				holder.description?.visibility = View.VISIBLE
 				holder.description?.text = getString(R.string.shared_string_group)
 			} else {
-				val message = telegramHelper.getChatMessages(chat.id).firstOrNull()
+				val message = telegramHelper.getChatMessages(itemId).firstOrNull()
 				val content = message?.content
 				if (message != null && content is TdApi.MessageLocation && (location != null && content.location != null)) {
-					val lastUpdated = telegramHelper.getLastUpdatedTime(message)
+					val lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 					holder.description?.visibility = View.VISIBLE
 					holder.description?.text = OsmandFormatter.getListItemLiveTimeDescr(app, lastUpdated)
 
@@ -301,15 +351,19 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 
 			holder.textInArea?.apply {
 				visibility = View.VISIBLE
-				chatLivePeriods[chat.id]?.also { text = formatLivePeriod(it) }
+				if (isChat) {
+					chatLivePeriods[itemId]?.also { text = formatLivePeriod(it) }
+				} else {
+					userLivePeriods[itemId]?.also { text = formatLivePeriod(it) }
+				}
 			}
 			holder.bottomShadow?.visibility = View.GONE
 			holder.itemView.setOnClickListener {
-				selectDuration(chat.id)
+				selectDuration(itemId, isChat)
 			}
 		}
 
-		override fun getItemCount() = chats.size
+		override fun getItemCount() = items.size
 
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
@@ -329,18 +383,31 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 
 		private const val TAG = "SetTimeDialogFragment"
 		private const val CHATS_KEY = "chats_key"
+		private const val USERS_KEY = "users_key"
 		private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 		private const val NO_VALUE = -1L
 
-		fun showInstance(fm: FragmentManager, chatIds: Set<Long>, target: Fragment): Boolean {
+		fun showInstance(fm: FragmentManager, chatIds: Set<Long>, usersIds: Set<Long>, target: Fragment): Boolean {
 			return try {
 				val chats = mutableListOf<Long>()
 				for (id in chatIds) {
 					chats.add(id)
 					chats.add(DEFAULT_VISIBLE_TIME_SECONDS)
 				}
+				val users = mutableListOf<Long>()
+				for (id in usersIds) {
+					users.add(id)
+					users.add(DEFAULT_VISIBLE_TIME_SECONDS)
+				}
 				SetTimeDialogFragment().apply {
-					arguments = Bundle().apply { putLongArray(CHATS_KEY, chats.toLongArray()) }
+					arguments = Bundle().apply {
+						if (chats.isNotEmpty()) {
+							putLongArray(CHATS_KEY, chats.toLongArray())
+						}
+						if (users.isNotEmpty()) {
+							putLongArray(USERS_KEY, users.toLongArray())
+						}
+					}
 					setTargetFragment(target, LOCATION_SHARED_REQUEST_CODE)
 					show(fm, TAG)
 				}

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Butikk</string>
 	<string name="poi_attraction">Turistattraksjon</string>
 	<string name="poi_viewpoint">Utsiktspunkt</string>
@@ -1334,4 +1334,26 @@
 	<string name="poi_checkpoint_type_code">Kode</string>
 	<string name="poi_checkpoint_type_notebook">Notatbok</string>
 	<string name="poi_ford">Vadested</string>
-	</resources>
+    <string name="poi_glacier_type">Isbretype</string>
+    <string name="poi_substation_type">Type</string>
+    <string name="poi_books_type">Bøker</string>
+    <string name="poi_office_administrative">Administrativt kontor</string>
+    <string name="poi_estate_agent">Eiendomsmegler</string>
+    <string name="poi_attraction_big_wheel">Pariserhjul</string>
+    <string name="poi_attraction_roller_coaster">Berg og dalbane</string>
+    <string name="poi_attraction_slide">Rutsjebane</string>
+    <string name="poi_attraction_summer_toboggan">Sommeraking</string>
+    <string name="poi_attraction_swing_carousel">Tivolikarusell</string>
+    <string name="poi_attraction_train">Tog (attraksjon)</string>
+    <string name="poi_attraction_water_slide">Vannrutsjebane</string>
+    <string name="poi_hostel">Vandrehjem</string>
+    <string name="poi_motel">Motell</string>
+    <string name="poi_alpine_hut">Alpehytte</string>
+    <string name="poi_religion_sikh">Sikhisme</string>
+    <string name="poi_religion_shinto">Shintōisme</string>
+    <string name="poi_religion_jain">Jainisme</string>
+    <string name="poi_religion_bahai">Bahai</string>
+    <string name="poi_religion_scientologist">Scientologi</string>
+    <string name="poi_religion_pagan">Paganisme</string>
+    <string name="poi_denomination_jehovahs_witness">Jehovas vitner</string>
+</resources>

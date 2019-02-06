@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="subscription_active_bg_color_light">#fff9b2</color>
+	<color name="subscription_active_bg_color_dark">#43453b</color>
+	<color name="subscription_active_div_color_light">#f3edae</color>
+	<color name="subscription_active_div_color_dark">#32332c</color>
+
 	<color name="feature_purchased_bg">#78cc5c</color>
 
 	<color name="dialog_bg_color_light">#f0f0f0</color>
@@ -232,6 +237,8 @@
 	<color name="nav_track_fluorescent">#CC00ddff</color>
 	<color name="transport_route_line">#CC2f7af5</color>
 
+	<color name="nav_track_walk_fill">#ff407ef5</color>
+	<color name="nav_track_walk_stroke">#ff1f478c</color>
 
 	<color name="nav_arrow_distant">#C0C0C0</color>
 	<color name="nav_arrow">#FADE23</color>
@@ -392,8 +399,6 @@
 	<color name="route_info_bg_dark">#17191a</color>
 	<color name="route_info_bottom_view_bg_light">#f2f2f2</color>
 	<color name="route_info_bottom_view_bg_dark">#222526</color>
-	<color name="route_info_divider_light">#e6e6e6</color>
-	<color name="route_info_divider_dark">#2d3133</color>
 	<color name="route_info_control_icon_color_light">#505050</color>
 	<color name="route_info_control_icon_color_dark">#727272</color>
 	<color name="route_info_go_btn_inking_light">#4c63e6</color>
@@ -405,6 +410,8 @@
 	<color name="route_info_checked_mode_icon_color_light">#ff8800</color>
 	<color name="route_info_checked_mode_icon_color_dark">#d28521</color>
 	<color name="route_info_unchecked_mode_icon_color">#727272</color>
+	<color name="route_info_cancel_button_color_light">#5959ff</color>
+	<color name="route_info_cancel_button_color_dark">#17181a</color>
 
 	<color name="multi_selection_menu_divider_light">#f0f0f0</color>
 	<color name="multi_selection_menu_divider_dark">#222526</color>
@@ -447,5 +454,24 @@
 
 	<color name="wiki_webview_background_light">#ffffff</color>
 	<color name="wiki_webview_background_dark">#17191a</color>
+
+	<!-- Basic colors -->
+	<color name="app_bar_main_dark">#17191a</color>
+	<color name="app_bar_main_light">#ff8800</color>
+	<color name="activity_background_dark">#17191a</color>
+	<color name="activity_background_light">#f0f0f0</color>
+	<color name="card_and_list_background_dark">#222526</color>
+	<color name="card_and_list_background_light">#ffffff</color>
+	<color name="divider_dark">#1b1d1f</color>
+	<color name="divider_light">#f0f0f0</color>
+	<color name="main_font_dark">#cccccc</color>
+	<color name="main_font_light">#212121</color>
+	<color name="description_font_and_bottom_sheet_icons">#727272</color>
+	<color name="additional_description_dark">#4d4d4d</color>
+	<color name="additional_description_light">#b3b3b3</color>
+	<color name="active_buttons_and_links_light">#237bff</color>
+	<color name="active_buttons_and_links_dark">#d28521</color>
+	<color name="active_buttons_and_links_trans_light">#66237bff</color>
+	<color name="active_buttons_and_links_trans_dark">#66d28521</color>
 
 </resources>

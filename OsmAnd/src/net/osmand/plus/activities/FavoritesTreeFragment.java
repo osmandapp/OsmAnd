@@ -65,7 +65,6 @@ import java.util.Set;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
-
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
 	// public static final int IMPORT_ID = 1;
@@ -948,7 +947,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						} else {
 							Set<FavouritePoint> set = favoritesSelected.get(group.name);
 							if (set != null) {
+								groupsToDelete.remove(group);
+								getGroupPosition(group.name);
 								set.remove(model);
+								favouritesAdapter.notifyDataSetInvalidated();
 							}
 						}
 						updateSelectionMode(actionMode);

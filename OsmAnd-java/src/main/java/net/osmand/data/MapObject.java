@@ -1,18 +1,22 @@
 package net.osmand.data;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.util.Algorithms;
 import net.sf.junidecode.Junidecode;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 public abstract class MapObject implements Comparable<MapObject> {
@@ -70,6 +74,15 @@ public abstract class MapObject implements Comparable<MapObject> {
 				names = new HashMap<String, String>();
 			}
 			names.put(lang, name);
+		}
+	}
+
+	public void setNames(Map<String, String> name) {
+		if (name != null) {
+			if (names == null) {
+				names = new HashMap<String, String>();
+			}
+			names.putAll(name);
 		}
 	}
 
@@ -289,4 +302,48 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return referenceFile;
 	}
 
+	public JSONObject toJSON() {
+		JSONObject json = new JSONObject();
+		json.put("name", name);
+		json.put("enName", enName);
+		if (names != null && names.size() > 0) {
+			JSONObject namesObj = new JSONObject();
+			for (Entry<String, String> e : names.entrySet()) {
+				namesObj.put(e.getKey(), e.getValue());
+			}
+			json.put("names", namesObj);
+		}
+		if (location != null) {
+			json.put("lat", String.format(Locale.US, "%.5f", location.getLatitude()));
+			json.put("lon", String.format(Locale.US, "%.5f", location.getLongitude()));
+		}
+		json.put("id", id);
+
+		return json;
+	}
+
+	protected static void parseJSON(JSONObject json, MapObject o) {
+		if (json.has("name")) {
+			o.name = json.getString("name");
+		}
+		if (json.has("enName")) {
+			o.enName = json.getString("enName");
+		}
+		if (json.has("names")) {
+			JSONObject namesObj = json.getJSONObject("names");
+			o.names = new HashMap<>();
+			Iterator<String> iterator = namesObj.keys();
+			while (iterator.hasNext()) {
+				String key = iterator.next();
+				String value = namesObj.getString(key);
+				o.names.put(key, value);
+			}
+		}
+		if (json.has("lat") && json.has("lon")) {
+			o.location = new LatLon(json.getDouble("lat"), json.getDouble("lon"));
+		}
+		if (json.has("id")) {
+			o.id = json.getLong("id");
+		}
+	}
 }

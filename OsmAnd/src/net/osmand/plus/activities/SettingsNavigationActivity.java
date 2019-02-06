@@ -23,7 +23,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -38,6 +37,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
@@ -45,14 +45,11 @@ import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.getVoiceFiles;
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
 
@@ -246,7 +243,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
 		String[] entries;
 		String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles(this);
+		Set<String> voiceFiles = getMyApplication().getRoutingOptionsHelper().getVoiceFiles(this);
 		entries = new String[voiceFiles.size() + 2];
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
@@ -306,7 +303,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();
-				if(parameters.containsKey("short_way")) {
+				if(parameters.containsKey(GeneralRouter.USE_SHORTEST_WAY)) {
 					cat.addPreference(fastRoute);
 				}
 				List<RoutingParameter> others = new ArrayList<GeneralRouter.RoutingParameter>();
@@ -319,7 +316,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 						preferParameters.add(routingParameter);
 					} else if ("relief_smoothness_factor".equals(routingParameter.getGroup())) {
 						reliefFactorParameters.add(routingParameter);
-					} else if (!param.equals("short_way") && !"driving_style".equals(routingParameter.getGroup())) {
+					} else if (!param.equals(GeneralRouter.USE_SHORTEST_WAY) && !RoutingOptionsHelper.DRIVING_STYLE.equals(routingParameter.getGroup())) {
 						others.add(routingParameter);
 					}
 				}

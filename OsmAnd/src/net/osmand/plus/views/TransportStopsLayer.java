@@ -23,9 +23,9 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.transport.TransportStopType;
 
 import java.util.ArrayList;
@@ -33,8 +33,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
-
-import gnu.trove.list.array.TIntArrayList;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
@@ -196,18 +194,18 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				objects = stopRoute.route.getForwardStops();
 				int color = stopRoute.getColor(mapActivity.getMyApplication(), settings.isNightMode());
 				attrs.paint.setColor(color);
-				attrs.updatePaints(view, settings, tb);
+				attrs.updatePaints(view.getApplication(), settings, tb);
 				try {
 					path.reset();
 					List<Way> ws = stopRoute.route.getForwardWays();
 					if (ws != null) {
 						for (Way w : ws) {
-							TIntArrayList tx = new TIntArrayList();
-							TIntArrayList ty = new TIntArrayList();
+							List<Float> tx = new ArrayList<>();
+							List<Float> ty = new ArrayList<>();
 							for (int i = 0; i < w.getNodes().size(); i++) {
 								Node o = w.getNodes().get(i);
-								int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-								int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+								float x = tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+								float y = tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 								tx.add(x);
 								ty.add(y);
 							}

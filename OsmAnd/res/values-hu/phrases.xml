@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_palaeontological_site">Őslénytani lelőhely</string>
 
 	<string name="poi_bakery">Pékség</string>
@@ -68,7 +68,7 @@
 	<string name="poi_public_transport_platform_trolleybus">Trolibuszmegálló</string>
 	<string name="poi_public_transport_platform_tram">Villamosmegálló</string>
 	<string name="poi_subway_entrance">Metrólejárat</string>
-	<string name="poi_subway_station">Metróállomás</string>
+	<string name="poi_subway_station">igen</string>
 	<string name="poi_taxi">Taxiállomás</string>
 
 	<string name="poi_aerodrome">Repülőtér</string>
@@ -98,7 +98,7 @@
 	<string name="poi_landfill">Hulladéklerakó</string>
 	<string name="poi_pier">Móló</string>
 	<string name="poi_windmill">Szélmalom</string>
-	<string name="poi_quarry">Kőfejtő</string>
+	<string name="poi_quarry">Külszíni fejtés, kőfejtő</string>
 	<string name="poi_vineyard">Szőlő</string>
 	<string name="poi_orchard">Gyümölcsös</string>
 	<string name="poi_salt_pond">Sólepárló medence</string>
@@ -486,7 +486,7 @@
 	<string name="poi_internet_access_service">Internetcsatlakozás: segítenek</string>
 
 	<string name="poi_historic_monastery">Régi kolostor</string>
-	<string name="poi_religious">Vallási terület</string>
+	<string name="poi_religious">Egyházi terület</string>
 	<string name="poi_wayside_shrine">Útmenti kegyhely</string>
 	<string name="poi_travel_agent">Utazási iroda</string>
 	<string name="poi_picnic_table">Piknikezőasztal</string>
@@ -772,7 +772,7 @@
 	<string name="poi_migration">Bevándorlás</string>
 	<string name="poi_tax_inspection">Adóellenőrzés</string>
 	<string name="poi_country">Ország</string>
-	<string name="poi_capital">Főváros</string>
+	<string name="poi_capital">igen</string>
 	<string name="poi_healthcare_alternative">Alternatív gyógyászat</string>
 	<string name="poi_audiologist">Hallásspecialista</string>
 	<string name="poi_optometrist">Optometrikus</string>
@@ -1259,7 +1259,7 @@
 	<string name="poi_diet_pescetarian_yes">Peszketáriánus</string>
 
 	<string name="poi_brewery_additional">Sörfőzde neve</string>
-	<string name="poi_microbrewery_yes">Házi sörfőzés</string>
+	<string name="poi_microbrewery_yes">van</string>
 	<string name="poi_microbrewery_no">Házi sörfőzés nincs</string>
 
 	<string name="poi_takeaway_yes">Elvitelre</string>
@@ -1364,7 +1364,7 @@
 	<string name="poi_memorial_obelisk">Obeliszk</string>
 	<string name="poi_memorial_column">Oszlop</string>
 	<string name="poi_memorial_stupa">Sztúpa</string>
-	<string name="poi_historic_quarry">Történelmi kőfejtő</string>
+	<string name="poi_historic_quarry">Történelmi külszíni fejtés, kőfejtő</string>
 
 	<string name="poi_wetland_wet_meadow">Láprét</string>
 	<string name="poi_wetland_swamp">Erdős mocsár</string>
@@ -2144,7 +2144,7 @@
 	<string name="poi_service_bicycle_chaintool_no">Kerékpárlánc-szerszám nincs</string>
 	<string name="poi_service_bicycle_second_hand_yes">Használtkerékpár-kereskedés</string>
 	<string name="poi_service_bicycle_second_hand_no">Használtkerékpár-kereskedés nincs</string>
-	<string name="poi_service_bicycle_charging_yes">Töltés: van</string>
+	<string name="poi_service_bicycle_charging_yes">Töltés van</string>
 	<string name="poi_service_bicycle_charging_no">Töltés: nincs</string>
 	<string name="poi_bicycle_repair_station">Önálló kerékpárszerelő pont</string>
 
@@ -2853,7 +2853,7 @@
 
 	<string name="poi_min_age">Alsó korhatár</string>
 
-	<string name="poi_organic_yes">Igen</string>
+	<string name="poi_organic_yes">igen</string>
 	<string name="poi_organic_no">Nem</string>
 	<string name="poi_organic_only">Kizárólagosan</string>
 
@@ -3893,5 +3893,38 @@
 
 <string name="poi_atm">Bankautomata</string>
 	<string name="poi_hill">Domb</string>
-
+    <string name="poi_substation_type">Típus</string>
+    <string name="poi_shop_wholesale">Nagykereskedés</string>
+    <string name="poi_bulk_purchase">Ömlesztett (csomagolás nélküli) áru</string>
+    <string name="poi_books_type">Könyv</string>
+    <string name="poi_denotation">Jelentőség</string>
+    <string name="poi_shoe_repair">Cipőjavítás</string>
+    <string name="poi_bulk_purchase_yes">van</string>
+    <string name="poi_bulk_purchase_only">kizárólag</string>
+    <string name="poi_pipeline_substation">Csővezeték-alállomás</string>
+    <string name="poi_substation_transmission">átmeneti</string>
+    <string name="poi_substation_distribution">elosztó</string>
+    <string name="poi_substation_minor_distribution">háztartási elosztó</string>
+    <string name="poi_substation_industrial">ipari</string>
+    <string name="poi_substation_transition">átmeneti</string>
+    <string name="poi_substation_traction">vasúti vagy trolibusz</string>
+    <string name="poi_substation_converter">konverter</string>
+    <string name="poi_substation_compensation">kiegyenlítő</string>
+    <string name="poi_substation_compression">kompressziós</string>
+    <string name="poi_substation_measurement">mérő</string>
+    <string name="poi_substation_valve">szelep</string>
+    <string name="poi_substation_valve_group">szelepcsoport</string>
+    <string name="poi_craft_confectionery">Édességkészítő</string>
+    <string name="poi_laboratory">Orvosi labor</string>
+    <string name="poi_blood_donation">Véradás</string>
+    <string name="poi_books_comic">képregény</string>
+    <string name="poi_books_antiquarian">antikvárium</string>
+    <string name="poi_books_religion">vallási</string>
+    <string name="poi_books_academic">akadémiai</string>
+    <string name="poi_books_children">gyermekkönyv</string>
+    <string name="poi_atoll">Atoll</string>
+    <string name="poi_toll_gantry">Útdíjellenőrző kapu</string>
+    <string name="poi_childcare">Gyermekgondozás (bölcsőde)</string>
+    <string name="poi_denotation_natural_monument">Természeti emlék</string>
+    <string name="poi_denotation_landmark">Tájékozódási pont</string>
 </resources>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_bg_color">
+
+		<net.osmand.telegram.ui.views.TextViewEx
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:ellipsize="end"
+			android:gravity="center_vertical"
+			android:letterSpacing="@dimen/title_letter_spacing"
+			android:maxLines="1"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard"
+			android:text="@string/timeline"
+			android:textColor="@color/app_bar_title_light"
+			android:paddingTop="@dimen/content_padding_standard"
+			android:paddingBottom="12dp"
+			android:textSize="@dimen/title_text_size"
+			app:typeface="@string/font_roboto_mono_bold" />
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard"
+			android:text="@string/timeline_description"
+			android:textColor="?android:attr/textColorSecondary"
+			android:textSize="@dimen/descr_text_size" />
+
+		<FrameLayout
+			android:id="@+id/monitoring_container"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/action_bar_height"
+			android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard">
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/monitoring_title"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_vertical|start"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:maxLines="1"
+				android:text="@string/monitoring_is_enabled"
+				android:textColor="@color/ctrl_active_light"
+				android:textSize="@dimen/descr_text_size"
+				app:typeface="@string/font_roboto_medium" />
+
+			<Switch
+				android:id="@+id/monitoring_switcher"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="end|center_vertical"
+				android:background="@null"
+				android:clickable="false"
+				android:focusable="false" />
+
+		</FrameLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="@color/app_bar_divider" />
+
+		<FrameLayout
+			android:id="@+id/date_row"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/timeline_time_buttons_height"
+			android:background="@color/screen_bg_light"
+			android:orientation="horizontal"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard">
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/date_btn"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_gravity="center"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
+				android:background="@drawable/btn_round_border"
+				android:drawablePadding="@dimen/content_padding_half"
+				android:ellipsize="end"
+				android:gravity="start|center_vertical"
+				android:maxLines="1"
+				android:paddingLeft="@dimen/image_button_padding"
+				android:paddingRight="@dimen/image_button_padding"
+				android:text="@string/shared_string_date"
+				android:textColor="?attr/ctrl_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				app:typeface="@string/font_roboto_medium" />
+
+		</FrameLayout>
+
+	</android.support.design.widget.AppBarLayout>
+
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:id="@+id/swipe_refresh"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingBottom="@dimen/list_item_content_margin"
+			android:scrollbars="vertical" />
+
+	</android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

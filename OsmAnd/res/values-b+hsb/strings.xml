@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
@@ -420,7 +420,7 @@
     <string name="rendering_attr_roadColors_description">Wubjerće barbowu šemu za dróhi:</string>
     <string name="rendering_attr_roadColors_name">Barbowa šema dróhow</string>
     <string name="map_widget_show_destination_arrow">Pokazaj směr do cila</string>
-    <string name="enable_plugin_monitoring_services">Zapińće nahrawanski modul, zo byšće móhł(a) wužiwać nahrawanske słužby (GPX-logging, online-tracking)</string>
+    <string name="enable_plugin_monitoring_services">Zapińće nahrawanski modul, zo byšće móhł(a) wužiwać nahrawanske słužby (GPX-nahrawanje, online-tracking)</string>
     <string name="non_optimal_route_calculation">Snadź njeoptimalne čary přez dołhe distancy wobličeć</string>
     <string name="gps_not_available">Prošu zapińće GPS w swojich nastajenjach</string>
     <string name="map_widget_monitoring_services">Słužby nahrawanja</string>
@@ -938,7 +938,7 @@
     <string name="mapillary_image">Wobraz z Mapillary</string>
     <string name="open_mapillary">Mapillary wočinić</string>
     <string name="improve_coverage_install_mapillary_desc">Instaluj Mapillary, zo by swójske wobrazy abo seriju wobrazow z tutym městnom zwjazał(a).</string>
-    <string name="online_photos">Fota online</string>
+    <string name="online_photos">Wobrazy w syći</string>
     <string name="mapillary_widget">Asistent Mapillary</string>
     <string name="private_access_routing_req">Twój cil leži w priwatnej kónčinje. Za tutu jězbu přistup k priwatnym pućam dowolić?</string>
     <string name="restart_search">Pytanje wospjetować</string>
@@ -1517,4 +1517,23 @@
     <string name="route_info">Informacije wo čarje</string>
     <string name="routing_attr_prefer_motorway_name">Awtodróhi preferować</string>
     <string name="routing_attr_prefer_motorway_description">Awtodróhi preferować</string>
+    <string name="gpx_monitoring_start">GPX-nahrawanje započeć</string>
+    <string name="gpx_monitoring_stop">GPX-nahrawanje zastajić</string>
+    <string name="map_widget_monitoring">GPX-nahrawanje</string>
+    <string name="distance_farthest">Zdalenosć: najdalši jako prěni</string>
+    <string name="distance_nearest">Zdalenosć: najbliši jako prěni</string>
+    <string name="enter_lat_and_lon">Šěrinu a dołhotu zapodać</string>
+	<string name="east_abbreviation">W</string>
+	<string name="west_abbreviation">Z</string>
+	<string name="south_abbreviation">J</string>
+	<string name="north_abbreviation">S</string>
+	<string name="transport_nearby_routes_within">Bliske linije we wokruhu</string>
+    <string name="map_imported_successfully">Karta importěrowana</string>
+    <string name="osm_live_banner_desc">Za njewobmjezowane sćehnjenje kartow a aktualizacije husćišo hač jónu wob měsac: tydźensce, wšědnje abo hodźinsce.</string>
+    <string name="save_global_track_interval">Powšitkowny interwal nahrawanja</string>
+    <string name="save_track_to_gpx_globally">Čaru jako GPX-dataju nahrać</string>
+    <string name="save_track_interval_globally">Interwal nahrawanja</string>
+    <string name="save_track_interval">Interwal nahrawanja w běhu nawigacije</string>
+    <string name="save_track_interval_descr">Wuběr interwal za nahrawanje čary w běhu nawigacije.</string>
+    <string name="gpx_start_new_segment">Nowy wotrězk zahajić</string>
     </resources>

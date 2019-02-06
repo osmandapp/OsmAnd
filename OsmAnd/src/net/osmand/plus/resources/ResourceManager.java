@@ -108,7 +108,8 @@ public class ResourceManager {
 		TRANSPORT,
 		ADDRESS,
 		QUICK_SEARCH, 
-		ROUTING
+		ROUTING,
+		TRANSPORT_ROUTING
 	}
 	
 	public static class BinaryMapReaderResource {
@@ -638,6 +639,19 @@ public class ResourceManager {
 		}
 		File liveDir = context.getAppPath(IndexConstants.LIVE_INDEX_DIR);
 		depthContours = false;
+		boolean hasWorldBasemap = false;
+		File worldBasemapMini = null;
+		for (File f : files) {
+			if (f.getName().equals("World_basemap.obf")) {
+				hasWorldBasemap = true;
+			}
+			if (f.getName().startsWith("World_basemap_mini")) {
+				worldBasemapMini = f;
+			}
+		}
+		if (hasWorldBasemap && worldBasemapMini != null) {
+			files.remove(worldBasemapMini);
+		}
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
@@ -998,7 +1012,20 @@ public class ResourceManager {
 		}
 		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
 	}
-	
+
+	public BinaryMapIndexReader[] getTransportRoutingMapFiles() {
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for(BinaryMapReaderResource r : fileReaders.values()) {
+			if(r.isUseForRouting()) {
+				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.TRANSPORT_ROUTING);
+				if (reader != null) {
+					readers.add(reader);
+				}
+			}
+		}
+		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
+	}
+
 	public BinaryMapIndexReader[] getQuickSearchFiles() {
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for(BinaryMapReaderResource r : fileReaders.values()) {
@@ -1029,7 +1056,8 @@ public class ResourceManager {
 		File[] maps = dir.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
-				return pathname.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT);
+				return pathname.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) &&
+						!pathname.getName().endsWith("World_basemap_mini.obf");
 			}
 		});
 		return maps != null && maps.length > 0;

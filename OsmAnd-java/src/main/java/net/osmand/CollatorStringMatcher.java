@@ -124,6 +124,9 @@ public class CollatorStringMatcher implements StringMatcher {
 	public static boolean cstartsWith(Collator collator, String searchInParam, String theStart, 
 			boolean checkBeginning, boolean checkSpaces, boolean equals, boolean trim) {
 		String searchIn = searchInParam.toLowerCase(Locale.getDefault());
+		if (trim && searchIn.length() > 0) {
+			searchIn += " ";
+		}
 		int searchInLength = searchIn.length();
 		if (trim && searchInLength > 0 && theStart.length() > searchInLength) {
 			theStart = theStart.substring(0, searchInLength);

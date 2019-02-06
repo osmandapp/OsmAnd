@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_palaeontological_site">Xacemento paleontolóxico</string>
 
 	<string name="poi_bakery">Panadaría</string>
@@ -17,7 +17,7 @@
 	<string name="poi_art">Tenda de arte</string>
 	<string name="poi_boutique">Tenda de moda</string>
 	<string name="poi_carpet">Tenda de alfombras</string>
-	<string name="poi_clothes_children">Roupa infantil</string>
+	<string name="poi_clothes_children">Roupa para cativos</string>
 	<string name="poi_shoes">Zapataría</string>
 	<string name="poi_computer">Tenda de informática</string>
 	<string name="poi_copyshop">Copistaría</string>
@@ -36,7 +36,7 @@
 	<string name="poi_mobile_phone">Tenda de telefonía móbil</string>
 	<string name="poi_motorcycle">Tenda de motos</string>
 	<string name="poi_musical_instrument">Instrumentos musicais</string>
-	<string name="poi_newsagent">Axencia de noticias</string>
+	<string name="poi_newsagent">Axencia de xornalismo</string>
 	<string name="poi_organic">Comida ecolóxica</string>
 	<string name="poi_paint">Tenda de pinturas</string>
 	<string name="poi_pet">Tenda de animais</string>
@@ -48,7 +48,7 @@
 	<string name="poi_vacuum_cleaner">Tenda de aspiradoras</string>
 	<string name="poi_department_store">Grandes almacéns</string>
 	<string name="poi_electronics">Tenda de electrónica</string>
-	<string name="poi_car_parts">Recambios de automóbil</string>
+	<string name="poi_car_parts">Recambios do automóbil</string>
 	<string name="poi_atv">Tenda de quads</string>
 	<string name="poi_cosmetics">Cosméticos</string>
 	<string name="poi_marketplace">Mercado</string>
@@ -62,11 +62,11 @@
 	<string name="poi_mountain_pass">Pasaxe de montaña</string>
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_border_control">Control fronteirizo</string>
-	<string name="poi_traffic_calming_bump">Lomba</string>
+	<string name="poi_traffic_calming_bump">Lomba pequena de velocidade</string>
 	<string name="poi_service_tyres">Rodas</string>
 	<string name="poi_vehicle_inspection">Inspección técnica de vehículos</string>
 	<string name="poi_car_wash">Lavadura de automóbiles</string>
-	<string name="poi_fuel">Gasolineira</string>
+	<string name="poi_fuel">Gasolineira;Estación de combustíbel;Estación de servizo</string>
 	<string name="poi_compressed_air">Ar comprimido</string>
 	<string name="poi_parking">Aparcadoiro</string>
 	<string name="poi_motorcycle_parking">Aparcadoiro de motos</string>
@@ -79,7 +79,7 @@
 	<string name="poi_public_transport_platform_tram">Paraxe do tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
 	<string name="poi_subway_entrance">Entrada de metro</string>
-	<string name="poi_subway_station">Estación de metro</string>
+	<string name="poi_subway_station">Si</string>
 	<string name="poi_taxi">Paraxe de taxis</string>
 
 	<string name="poi_aerodrome">Aeroporto</string>
@@ -114,7 +114,7 @@
 	<string name="poi_recycling">Reciclaxe</string>
 	<string name="poi_surveillance">Vixilancia</string>
 	<string name="poi_observatory">Observatorio</string>
-	<string name="poi_astronomical_observatory">Observatorio astronómico</string>
+	<string name="poi_astronomical_observatory">Astronómico</string>
 	<string name="poi_construction">Construción</string>
 	<string name="poi_works">Obras</string>
 	<string name="poi_mineshaft">Pozo mineiro</string>
@@ -239,7 +239,7 @@
 	<string name="poi_religion_christian">Cristiandade</string>
 	<string name="poi_religion_jewish">Xudaísmo</string>
 	<string name="poi_religion_muslim">Islam</string>
-	<string name="poi_religion_sikh"/>
+	<string name="poi_religion_sikh">Sixismo</string>
 	<string name="poi_religion_buddhist">Budismo</string>
 	<string name="poi_religion_hindu">Hinduísmo</string>
 	<string name="poi_religion_shinto">Xintoísmo</string>
@@ -247,12 +247,12 @@
 	<string name="poi_monastery">Mosteiro</string>
 	<string name="poi_historic_monastery">Mosteiro histórico</string>
 	<string name="poi_wayside_cross">Cruceiro</string>
-	<string name="poi_information">Información turística</string>
+	<string name="poi_information">Información</string>
 	<string name="poi_clock">Reloxo</string>
 	<string name="poi_travel_agent">Axencia de viaxes</string>
 	<string name="poi_camp_site">Cámping</string>
 	<string name="poi_caravan_site">Cámping de caravanas</string>
-	<string name="poi_picnic_site">Merendeiro</string>
+	<string name="poi_picnic_site">Área de merendeiro</string>
 	<string name="poi_spring">Fonte</string>
 	<string name="poi_hot_spring">Augas termais</string>
 	<string name="poi_geyser">Géyser</string>
@@ -310,7 +310,7 @@
 	<string name="poi_craft_dressmaker">Modista</string>
 	<string name="poi_craft_electrician">Electricista</string>
 	<string name="poi_craft_gardener">Xardineiro</string>
-	<string name="poi_craft_handicraft">Manualidades</string>
+	<string name="poi_craft_handicraft">Taballos manuais (artesán)</string>
 	<string name="poi_craft_hvac">Climatizacións</string>
 	<string name="poi_craft_insulation">Illamento</string>
 	<string name="poi_craft_jeweller">Xoeiro</string>
@@ -328,14 +328,14 @@
 	<string name="poi_funeral_directors">Tanatorio</string>
 	<string name="poi_craft_computer">Montaxe de computadores</string>
 	<string name="poi_beauty">Salón de beleza</string>
-	<string name="poi_beauty_salon_nails">Salón de uñas</string>
+	<string name="poi_beauty_salon_nails">Manicura</string>
 	<string name="poi_hairdresser">Perrucaría</string>
 	<string name="poi_massage">Salón de masaxes</string>
 	<string name="poi_tattoo">Salón de tatuaxes</string>
 	<string name="poi_dry_cleaning">Limpeza en seco</string>
 	<string name="poi_laundry">Lavandaría</string>
 	<string name="poi_car_rental">Aluguer de automóbiles</string>
-	<string name="poi_toilets">Aseos</string>
+	<string name="poi_toilets">Servizos</string>
 	<string name="poi_sauna">Sauna</string>
 	<string name="poi_brothel">Prostíbulo</string>
 	<string name="poi_mortuary">Tanatorio</string>
@@ -350,7 +350,7 @@
 	<string name="poi_bitcoin_yes">Pagamento con bitcoin</string>
 
 	<string name="poi_cave_entrance">Entrada de cova</string>
-	<string name="poi_peak">Cumio de montaña</string>
+	<string name="poi_peak">Cumio</string>
 	<string name="poi_volcano">Volcán</string>
 	<string name="poi_crater">Cráter</string>
 	<string name="poi_glacier">Glaciar</string>
@@ -360,7 +360,7 @@
 	<string name="poi_rapids">Rápidos</string>
 	<string name="poi_cape">Cabo</string>
 	<string name="poi_beach">Praia</string>
-	<string name="poi_bay">Baía</string>
+	<string name="poi_bay">Badía</string>
 	<string name="poi_fjord">Fiordo</string>
 	<string name="poi_reef">Arrecife</string>
 	<string name="poi_nature_reserve">Reserva natural</string>
@@ -383,7 +383,7 @@
 	<string name="poi_bag">Tenda de bolsos e/ou maletas</string>
 	<string name="poi_hardware">Ferraxaría</string>
 	<string name="poi_shop">Tenda</string>
-		<string name="poi_shop_food">Tenda de comestíbeis e supermercado</string>
+		<string name="poi_shop_food">Tenda de ultramarinos e supermercado</string>
 	<string name="poi_emergency">Urxencias</string>
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo na estrada</string>
@@ -392,7 +392,7 @@
 		<string name="poi_public_transport">Transporte público</string>
 		<string name="poi_air_transport">Transporte aéreo</string>
 		<string name="poi_water_transport">Transporte acuático</string>
-		<string name="poi_bicycle_transport">Transporte ciclista</string>
+		<string name="poi_bicycle_transport">Transporte en bicicleta</string>
 		<string name="poi_aerialway_transport">Teleférico</string>
 		<string name="poi_node_networks">Nós da rede de sendeiros/bicicletas</string>
 		<string name="poi_hiking_routes">Roteiros de sendeirismo</string>
@@ -435,7 +435,7 @@
 	<string name="poi_perfumery">Perfumaría</string>
 
 	<string name="poi_toll_booth">Cabina de portaxe</string>
-	<string name="poi_fuel_diesel">Diesel</string>
+	<string name="poi_fuel_diesel">Diésel</string>
 	<string name="poi_fuel_biodiesel">Biodiesel</string>
 	<string name="poi_fuel_octane_80">Octano 80</string>
 	<string name="poi_fuel_octane_91">Octano 91</string>
@@ -456,7 +456,7 @@
 	<string name="poi_bell_tower">Campanario</string>
 	<string name="poi_recycling_centre">Centro de reciclaxe</string>
 	<string name="poi_recycling_glass">Vidro</string>
-	<string name="poi_recycling_container">Tipo: contedor</string>
+	<string name="poi_recycling_container">Contedor</string>
 	<string name="poi_recycling_paper">Papeis</string>
 	<string name="poi_recycling_clothes">Roupa</string>
 	<string name="poi_recycling_cans">Latas</string>
@@ -476,7 +476,7 @@
 	<string name="poi_recycling_aluminium">Aluminio</string>
 	<string name="poi_recycling_organic">Orgánico</string>
 	<string name="poi_recycling_beverage_cartons">Cartóns de bebidas</string>
-	<string name="poi_recycling_fluorescent_tubes">Tubos fluorescentes</string>
+	<string name="poi_recycling_fluorescent_tubes">Tubaxes fluorescentes</string>
 	<string name="poi_recycling_metal">Metal</string>
 	<string name="poi_recycling_cooking_oil">Aceite de cociña</string>
 	<string name="poi_recycling_engine_oil">Aceite de motor</string>
@@ -485,13 +485,13 @@
 	<string name="poi_recycling_computers">Computadores</string>
 	<string name="poi_recycling_tyres">Rodas</string>
 	<string name="poi_recycling_tv_monitor">TV, monitores</string>
-	<string name="poi_recycling_tetrapak">Tetrapak</string>
+	<string name="poi_recycling_tetrapak">Tetrapak (brics)</string>
 	<string name="poi_recycling_cds">CD</string>
 	<string name="poi_recycling_bottles">Botellas</string>
 	<string name="poi_recycling_cork">Rolla</string>
 	<string name="poi_recycling_printer_cartridges">Cartuchos de impresora</string>
 	<string name="poi_recycling_paint">Pintura</string>
-	<string name="poi_recycling_compost">Compost</string>
+	<string name="poi_recycling_compost">Compostaxe</string>
 	<string name="poi_recycling_christmas_trees">Árbores de Nadal</string>
 	<string name="poi_recycling_furniture">Mobiliario</string>
 	<string name="poi_recycling_diapers">Cueiros</string>
@@ -507,7 +507,7 @@
 
 	<string name="poi_recycling_fridge_and_freezer">Neveira e conxelador</string>
 	<string name="poi_meadow">Lameiro</string>
-	<string name="poi_canal">Canle</string>
+	<string name="poi_canal">Canle fluvial</string>
 	<string name="poi_pier">Peirao</string>
 	<string name="poi_tower">Torre</string>
 	<string name="poi_radar">Radar</string>
@@ -517,7 +517,7 @@
 	<string name="poi_storage_tank">Tanque de almacenamento</string>
 
 	<string name="poi_country">País</string>
-	<string name="poi_capital">Capital</string>
+	<string name="poi_capital">Si</string>
 	<string name="poi_isolated_dwelling">Vivenda illada</string>
 	<string name="poi_residential">Área residencial</string>
 
@@ -624,7 +624,7 @@
 	<string name="poi_denomination_iglesia_ni_cristo">Igrexa ni cristo</string>
 	<string name="poi_denomination_latter_day_saints">Santos dos derradeiros días</string>
 	<string name="poi_denomination_united_church_of_christ">Igrexa Unida de Cristo</string>
-	<string name="poi_tomb">Tumba</string>
+	<string name="poi_tomb">Tomba</string>
 	<string name="poi_piste">Pista</string>
 	<string name="poi_piste_downhill">Pista de esquí</string>
 	<string name="poi_piste_nordic">Pista de esquí nórdico</string>
@@ -650,7 +650,7 @@
 	<string name="poi_dyke">Dique</string>
 	<string name="poi_mooring">Amarre</string>
 	<string name="poi_military_landuse">Zona militar</string>
-	<string name="poi_military_nuclear_explosion_site">Lugar de explosión nuclear</string>
+	<string name="poi_military_nuclear_explosion_site">Lugar do estourido nuclear</string>
 
 	<string name="poi_wiki_place">Wikipedia</string>
 	<string name="poi_wiki_lang_en">Wiki en inglés</string>
@@ -720,19 +720,19 @@
 	<string name="vk">Vkontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_mobile">Móbil</string>
-	<string name="poi_maxheight">Altura máxima</string>
+	<string name="poi_maxheight">Altitude máxima</string>
 	<string name="poi_maxweight">Peso máximo</string>
 	<string name="poi_abandoned">Abandonado</string>
 	<string name="poi_abandoned_poi">Obxecto abandoado</string>
 	<string name="poi_disused">En desuso</string>
 
 	<string name="poi_brand">Marca</string>
-	<string name="poi_drinking_water_yes">Auga potábel: si</string>
-	<string name="poi_drinking_water_no">Auga potábel: non</string>
+	<string name="poi_drinking_water_yes">Si</string>
+	<string name="poi_drinking_water_no">Non</string>
 	<string name="poi_supervised_yes">Vixiado</string>
 	<string name="poi_supervised_no">Non vixiado</string>
-	<string name="poi_seasonal_yes">Temporal</string>
-	<string name="poi_seasonal_no">Non temporal</string>
+	<string name="poi_seasonal_yes">Si</string>
+	<string name="poi_seasonal_no">Non</string>
 	<string name="poi_seasonal_dry_season">Estación seca</string>
 	<string name="poi_seasonal_wet_season">Estación húmida</string>
 	<string name="poi_seasonal_spring">Primavera</string>
@@ -743,7 +743,7 @@
 	<string name="poi_crossing_uncontrolled">Sen semáforo</string>
 	<string name="poi_crossing_unmarked">Sen marcas</string>
 	<string name="poi_start_date">Data de comezo</string>
-	<string name="poi_wheelchair_yes">Cadeira de rodas</string>
+	<string name="poi_wheelchair_yes">Si</string>
 
 	<string name="poi_access_private">Acceso privado</string>
 	<string name="poi_access_no">Sen acceso</string>
@@ -772,16 +772,16 @@
 
 <string name="poi_content_grain">Contido: gran</string>
 
-	<string name="poi_animal_shelter_dog">To de refuxio: can</string>
-	<string name="poi_animal_shelter_cat">To de refuxio: gato</string>
-	<string name="poi_animal_shelter_dog_cat">To de refuxio: can, gato</string>
-	<string name="poi_animal_shelter_bird">To de refuxio: ave</string>
+	<string name="poi_animal_shelter_dog">Cans</string>
+	<string name="poi_animal_shelter_cat">Gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Cans, gatos</string>
+	<string name="poi_animal_shelter_bird">Paxaros</string>
 
 	<string name="poi_service">Servizo</string>
-		<string name="poi_wine">Enoteca</string>
+		<string name="poi_wine">Tenda de viños</string>
 
 	<string name="poi_doors">Portas</string>
-	<string name="poi_leather">Curtidoría</string>
+	<string name="poi_leather">Peletaría</string>
 	<string name="poi_photo">Tenda de fotografía</string>
 	<string name="poi_video">Tenda de vídeo</string>
 	<string name="poi_fuel_gtl_diesel">Diesel GTL</string>
@@ -796,7 +796,7 @@
 	<string name="poi_internet_access_yes">Acceso á Internet: si</string>
 	<string name="poi_internet_access_no">Acceso á Internet: non</string>
 
-	<string name="poi_picnic_table">Mesa de pícnic</string>
+	<string name="poi_picnic_table">Táboa de merendeiro</string>
 	<string name="poi_marina">Porto deportivo</string>
 	<string name="poi_craft_carpet_layer">Moqueta</string>
 	<string name="poi_aeroway_terminal">Terminal do aeroporto</string>
@@ -805,7 +805,7 @@
 	<string name="poi_trash_disposal">Contedor de lixo</string>
 		<string name="poi_landuse">Uso do solo</string>
 	<string name="poi_accomodation">Aloxamento</string>
-		<string name="poi_farm">Produtos agrícolas polos labregos</string>
+		<string name="poi_farm">Produtos da granxa</string>
 	<string name="poi_greengrocer">Froitaría</string>
 	<string name="poi_confectionery">Dozaría ou confeitaría</string>
 	<string name="poi_pastry">Confeitaría</string>
@@ -814,10 +814,10 @@
 	<string name="poi_furnace">Tenda de calefacción</string>
 	<string name="poi_garden_furniture">Mobiliario do xardín</string>
 	<string name="poi_glaziery">Tenda de vidro</string>
-	<string name="poi_tableware">Tenda de vaixela</string>
-	<string name="poi_ticket">Billeteira</string>
+	<string name="poi_tableware">Tenda de vaixelas</string>
+	<string name="poi_ticket">Portelo</string>
 	<string name="poi_window_blind">Tenda de persianas</string>
-	<string name="poi_car">Concesionario de automóbiles</string>
+	<string name="poi_car">Venda de automóbiles</string>
 	<string name="poi_swimming_pool_shop">Tenda de materiais da piscina</string>
 	<string name="poi_gate">Canceleira</string>
 	<string name="poi_traffic_signals">Semáforo</string>
@@ -861,18 +861,18 @@
 	<string name="poi_cycle_barrier">Barreira para bicicletas</string>
 	<string name="poi_motorcycle_barrier">Barreira para motos</string>
 	<string name="poi_service_times">Horario de funcionamento</string>
-	<string name="poi_height">Altura</string>
+	<string name="poi_height">Altitude</string>
 	<string name="poi_ele">Elevación sobre o nivel do mar</string>
-	<string name="poi_wheelchair_no">Cadeira de rodas: inaccesíbel</string>
-	<string name="poi_wheelchair_limited">Cadeira de rodas: limitado</string>
+	<string name="poi_wheelchair_no">Non</string>
+	<string name="poi_wheelchair_limited">Con limitacións</string>
 	<string name="poi_content_oil">Contido: aceite</string>
 	<string name="poi_content_gas">Contido: gas</string>
 	<string name="poi_content_wastewater">Contido: augas residuais</string>
-	<string name="poi_nudism_yes">Nudismo: permitido</string>
-	<string name="poi_nudism_no">Nudismo: prohibido</string>
-	<string name="poi_nudism_obligatory">Nudismo: obrigatorio</string>
+	<string name="poi_nudism_yes">Permitido</string>
+	<string name="poi_nudism_no">Prohibido</string>
+	<string name="poi_nudism_obligatory">Obrigatorio</string>
 	<string name="poi_nudism_customary">Costume</string>
-	<string name="poi_nudism_permissive">Nudismo: permisivo</string>
+	<string name="poi_nudism_permissive">Permisivo</string>
 
 	<string name="poi_population">Poboación</string>
 	<string name="poi_species">Especie</string>
@@ -925,63 +925,63 @@
 	<string name="poi_old_name">Nome antigo</string>
 	<string name="poi_alt_name">Nome alternativo</string>
 
-	<string name="poi_pump_manual">Bomba manual</string>
-	<string name="poi_pump_powered">Bomba automática</string>
+	<string name="poi_pump_manual">Manual</string>
+	<string name="poi_pump_powered">Automática</string>
 	<string name="poi_pump_no">Sen bomba</string>
-	<string name="poi_pump_yes">Bomba</string>
+	<string name="poi_pump_yes">Si</string>
 
-	<string name="poi_water_characteristic_mineral">Característica da auga: mineral</string>
-	<string name="poi_water_characteristic_sulfuric">Característica da auga: sulfurosa</string>
+	<string name="poi_water_characteristic_mineral">Mineralizada</string>
+	<string name="poi_water_characteristic_sulfuric">Sulfurosa</string>
 
-	<string name="poi_information_board">Taboleiro informativo</string>
+	<string name="poi_information_board">Taboleiro</string>
 	<string name="poi_information_map">Mapa</string>
-	<string name="poi_information_office">Oficina de información</string>
+	<string name="poi_information_office">Oficina</string>
 	<string name="poi_information_sign">Sinal</string>
 	<string name="poi_information_audioguide">Audioguía</string>
 	<string name="poi_board_type_notice">Taboleiro de anuncios</string>
 	<string name="poi_horse_track">Hipódromo</string>
 	<string name="poi_resort">Lugar turístico</string>
-	<string name="poi_craft_winery">Vinoteca</string>
+	<string name="poi_craft_winery">Adega de viños</string>
 
 	<string name="poi_pawnbroker">Prestamista</string>
-	<string name="poi_information_nature">Marcador informativo: natureza</string>
+	<string name="poi_information_nature">Natureza</string>
 	<string name="poi_information_wildlife">Marcador informativo: vida salvaxe</string>
-	<string name="poi_information_history">Marcador informativo: historia</string>
+	<string name="poi_information_history">Historia</string>
 	<string name="poi_information_bicyclemap">Mapa ciclista</string>
 	<string name="poi_information_tactile_map">Mapa táctil</string>
-	<string name="poi_board_type_plants">Marcador informativo: plantas</string>
-	<string name="poi_board_type_geology">Marcador informativo: xeoloxía</string>
+	<string name="poi_board_type_plants">Plantas</string>
+	<string name="poi_board_type_geology">Xeoloxía</string>
 	<string name="poi_board_type_public_transport">Transporte público</string>
-	<string name="poi_board_type_technology">Marcador informativo: tecnoloxía</string>
-	<string name="poi_board_type_astronomy">Marcador informativo: astronomía</string>
+	<string name="poi_board_type_technology">Tecnoloxía</string>
+	<string name="poi_board_type_astronomy">Astronomía</string>
 
-	<string name="poi_smoking_no">Prohibido fumar</string>
-	<string name="poi_smoking_outside">Só está permitido fumar no exterior</string>
-	<string name="poi_smoking_yes">Permítese fumar</string>
+	<string name="poi_smoking_no">Non</string>
+	<string name="poi_smoking_outside">Só fóra</string>
+	<string name="poi_smoking_yes">Si</string>
 	<string name="poi_smoking_separated">Nunha sala separada</string>
 	<string name="poi_smoking_isolated">En dependencia illada</string>
 	<string name="poi_smoking_dedicated">Dedicado a fumadores</string>
 
 	<string name="poi_toll_yes">Portaxe</string>
 	<string name="poi_toll_no">Sen portaxe</string>
-	<string name="poi_traffic_signals_sound_yes">Con son</string>
-	<string name="poi_traffic_signals_sound_no">Sen son</string>
+	<string name="poi_traffic_signals_sound_yes">Si</string>
+	<string name="poi_traffic_signals_sound_no">Non</string>
 	<string name="poi_services">Área de servizo</string>
 	<string name="poi_bird_hide">Lugar para observar paxaros</string>
 	<string name="poi_farmland">Agras</string>
 	<string name="poi_sand">Area</string>
 
 	<string name="poi_level">Nivel</string>
-	<string name="poi_piste_difficulty_easy">Dificultade da pista: fácil</string>
-	<string name="poi_piste_difficulty_intermediate">Dificultade da pista: intermedia</string>
-	<string name="poi_piste_difficulty_advanced">Dificultade da pista: avanzada</string>
-	<string name="poi_piste_difficulty_novice">Dificultade da pista: novatos</string>
-	<string name="poi_piste_difficulty_expert">Dificultade da pista: expertos</string>
-	<string name="poi_piste_difficulty_freeride">Dificultade da pista: libre</string>
-	<string name="poi_piste_grooming_classic">Coidado da pista: clásico</string>
-	<string name="poi_piste_grooming_classic_skating">Coidado da pista: clásico e patinaxe</string>
-	<string name="poi_piste_grooming_skating">Coidado da pista: patinaxe</string>
-	<string name="poi_piste_grooming_no">Coidado da pista: non</string>
+	<string name="poi_piste_difficulty_easy">Doada</string>
+	<string name="poi_piste_difficulty_intermediate">Intermedia</string>
+	<string name="poi_piste_difficulty_advanced">Avanzada</string>
+	<string name="poi_piste_difficulty_novice">Noveis ou principiantes</string>
+	<string name="poi_piste_difficulty_expert">Expertos</string>
+	<string name="poi_piste_difficulty_freeride">Estilo ceibe ou libre</string>
+	<string name="poi_piste_grooming_classic">Clásico</string>
+	<string name="poi_piste_grooming_classic_skating">Patinaxe clásico</string>
+	<string name="poi_piste_grooming_skating">Patinaxe</string>
+	<string name="poi_piste_grooming_no">Non</string>
 	<string name="poi_garden_type_residential">Tipo do xardín: residencial</string>
 	<string name="poi_garden_type_community">Tipo do xardín: comunitario</string>
 	<string name="poi_garden_type_private">Tipo do xardín: privado</string>
@@ -1003,12 +1003,12 @@
 	<string name="poi_capacity_parent">Lugares reservados para familias</string>
 
 	<string name="poi_aerialway_capacity">Capacidade por hora</string>
-	<string name="poi_aerialway_duration">Tempo medio de viaxe, minutos</string>
-	<string name="poi_aerialway_heating_yes">Calefacción</string>
+	<string name="poi_aerialway_duration">Tempo medio da viaxe, minutos</string>
+	<string name="poi_aerialway_heating_yes">Si</string>
 	<string name="poi_aerialway_heating_no">Sen calefación</string>
-	<string name="poi_aerialway_bicycle_yes">Bicicleta: permitida</string>
+	<string name="poi_aerialway_bicycle_yes">Permitido</string>
 	<string name="poi_aerialway_bicycle_no">Bicicleta: non permitida</string>
-	<string name="poi_aerialway_bicycle_summer">Bicicleta: permitida só no verán</string>
+	<string name="poi_aerialway_bicycle_summer">Permitido só no verán</string>
 	<string name="poi_aerialway_access_entry">Só entrada</string>
 	<string name="poi_aerialway_access_exit">Só saída</string>
 	<string name="poi_aerialway_access_both">Entrada e saída</string>
@@ -1016,51 +1016,51 @@
 	<string name="poi_aerialway_summer_access_exit">Acceso no verán: só saida</string>
 	<string name="poi_aerialway_summer_access_both">Acceso no verán: entrada e saída</string>
 
-	<string name="poi_stars_1">Estrelas: 1 (Turista)</string>
+	<string name="poi_stars_1">1 (Turista)</string>
 	<string name="poi_stars_1s">1S (Turista superior)</string>
-	<string name="poi_stars_2">Estrelas: 2 (Normal)</string>
+	<string name="poi_stars_2">2 (Normal)</string>
 	<string name="poi_stars_2s">2S (Estándar superior)</string>
-	<string name="poi_stars_3">Estrelas: 3 (Comfort)</string>
+	<string name="poi_stars_3">3 (Comfortábel)</string>
 	<string name="poi_stars_3s">3S (Confortábel superior)</string>
-	<string name="poi_stars_4">Estrelas: 4 (Primeira clase)</string>
+	<string name="poi_stars_4">4 (Primeira clase)</string>
 	<string name="poi_stars_4s">4S (Primeira clase superior)</string>
-	<string name="poi_stars_5">Estrelas: 5 (Luxo)</string>
+	<string name="poi_stars_5">5 (Luxo)</string>
 	<string name="poi_stars_5s">5S (Luxoso superior)</string>
 	<string name="poi_stars_6">Estrelas: 6</string>
 	<string name="poi_stars_7">Estrelas: 7</string>
 	<string name="poi_rooms">Cuartos</string>
 
-	<string name="poi_payment_coins_yes">Acéptanse moedas</string>
+	<string name="poi_payment_coins_yes">Moedas</string>
 	<string name="poi_payment_coins_no">Non se admiten moedas</string>
-	<string name="poi_payment_coins_50c12">Acéptanse moedas de 50c, 1€ e 2€</string>
-	<string name="poi_payment_telephone_cards_yes">Acéptanse tarxetas de teléfono</string>
+	<string name="poi_payment_coins_50c12">Moedas de 50c, 1€ e 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Tarxetas de teléfono</string>
 	<string name="poi_payment_telephone_cards_no">Non se admiten cartóns telefónicos</string>
-	<string name="poi_payment_credit_cards_yes">Acéptanse tarxetas de crédito</string>
+	<string name="poi_payment_credit_cards_yes">Tarxetas de crédito</string>
 	<string name="poi_payment_credit_cards_no">Non se admiten tarxetas de crédito</string>
-	<string name="poi_payment_notes_yes">Acéptanse billetes</string>
+	<string name="poi_payment_notes_yes">Billetes</string>
 	<string name="poi_payment_notes_no">Non se admiten billetes</string>
-	<string name="poi_payment_electronic_purses_yes">Acéptanse moedeiros electrónicos</string>
+	<string name="poi_payment_electronic_purses_yes">Moedeiros electrónicos</string>
 	<string name="poi_payment_electronic_purses_no">Non se admiten moedeiros electrónicos</string>
-	<string name="poi_payment_cash_yes">Acéptase metálico</string>
+	<string name="poi_payment_cash_yes">Cartos en metálico</string>
 	<string name="poi_payment_cash_no">Non se admiten cartos en metálico</string>
-	<string name="poi_payment_debit_cards_yes">Acéptanse tarxetas de débito</string>
+	<string name="poi_payment_debit_cards_yes">Tarxetas de débito</string>
 	<string name="poi_payment_debit_cards_no">Non se admiten tarxetas de débito</string>
-	<string name="poi_payment_bitcoin_yes">Acéptase bitcoin</string>
+	<string name="poi_payment_bitcoin_yes">Bitcoin</string>
 	<string name="poi_payment_bitcoin_no">Non se admite Bitcoin</string>
-	<string name="poi_payment_visa_yes">Acéptanse tarxetas Visa</string>
+	<string name="poi_payment_visa_yes">Visa</string>
 	<string name="poi_payment_visa_no">Non se admiten tarxetas Visa</string>
-	<string name="poi_payment_mastercard_yes">Acéptase MasterCard</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
 	<string name="poi_payment_mastercard_no">Non se admite MasterCard</string>
 	<string name="poi_payment_none">Gratis</string>
-	<string name="poi_payment_maestro_yes">Acéptanse tarxetas Maestro</string>
+	<string name="poi_payment_maestro_yes">Tarxetas Maestro</string>
 	<string name="poi_payment_maestro_no">Non se admiten tarxetas Maestro</string>
-	<string name="poi_payment_american_express_yes">Acéptanse tarxetas American Expres (AMEX)</string>
+	<string name="poi_payment_american_express_yes">American Expres (AMEX)</string>
 	<string name="poi_payment_american_express_no">Non se admiten tarxetas American Expres (AMEX)</string>
-	<string name="poi_payment_diners_club_yes">Acéptanse tarxetas Diners Club</string>
+	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">Non se admiten tarxetas Diners Club</string>
-	<string name="poi_payment_visa_electron_yes">Acéptanse tarxetas Visa Electron</string>
+	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
 	<string name="poi_payment_visa_electron_no">Non se admiten tarxetas Visa Electron</string>
-	<string name="poi_payment_others_yes">Acéptanse outros métodos de pagamento</string>
+	<string name="poi_payment_others_yes">Outros</string>
 	<string name="poi_payment_others_no">Non se admiten outros xeitos de pagamento</string>
 	<string name="poi_fuel_type">Tipo do combustíbel</string>
 	<string name="poi_fuel_avia_type">Tipo do combustíbel (avións)</string>
@@ -1137,7 +1137,7 @@
 	<string name="poi_free_flying_characteristic">Característica</string>
 
 <string name="poi_emergency_infrastructure">Infraestrutura de emerxencia</string>
-	<string name="poi_craft">Artesanía</string>
+	<string name="poi_craft">Traballos manuais (artesanía)</string>
 	<string name="poi_bathroom_furnishing">Mobiliario de baño</string>
 	<string name="poi_bed">Tenda de roupa de cama</string>
 	<string name="poi_chemist">Drogaría</string>
@@ -1166,7 +1166,7 @@
 
 	<string name="poi_fire_hydrant">Boca de incendio</string>
 	<string name="poi_grit_bin">Contedor de sal</string>
-	<string name="poi_traffic_calming_hump">Lomba</string>
+	<string name="poi_traffic_calming_hump">Lomba grande de velocidade</string>
 	<string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
 	<string name="poi_fuel_1_25">Combustíbel 1:25</string>
 	<string name="poi_fuel_1_50">Combustíbel 1:50</string>
@@ -1265,9 +1265,9 @@
 	<string name="poi_buoy_safe_water">Boia de augas seguras</string>
 	<string name="poi_buoy_special_purpose">Boia de propósito especial</string>
 	<string name="poi_distance_mark">Marca de distancia</string>
-	<string name="poi_wiki_lang_af"/>
+	<string name="poi_wiki_lang_af">Wiki en afrikaans</string>
 	<string name="poi_wiki_lang_als">Wiki en alsaciano</string>
-	<string name="poi_wiki_lang_az">Wiki en azerí</string>
+	<string name="poi_wiki_lang_az">Wiki en azarí ou acerbaixano</string>
 	<string name="poi_wiki_lang_bn">Wiki en bengalí</string>
 	<string name="poi_wiki_lang_bpy">Wiki en bishnupriya</string>
 	<string name="poi_wiki_lang_br">Wiki en bretón</string>
@@ -1329,14 +1329,14 @@
 	<string name="poi_block">Bloqueo</string>
 	<string name="poi_debris">Escombros</string>
 	<string name="poi_jersey_barrier">Barreira de Nova Jersey</string>
-	<string name="poi_height_restrictor">Limitador de altura</string>
+	<string name="poi_height_restrictor">Limitador da altitude</string>
 	<string name="poi_horse_stile">Pasaxe para cabalos</string>
 	<string name="poi_operator">Operador</string>
 	<string name="poi_fee_yes">Si</string>
 	<string name="poi_fee_no">Non</string>
 	<string name="poi_wheelchair_accessibility">Accesibilidade para cadeiras de rodas</string>
 	<string name="poi_access_destination">Acceso do destino</string>
-	<string name="poi_content_silage"/>
+	<string name="poi_content_silage">Contido: ensilado</string>
 	<string name="poi_content_manure">Contido: estrume</string>
 	<string name="poi_trade_building_supplies">Materiais da construción</string>
 	<string name="poi_trade_plumbing">Materiais da fontanaría</string>
@@ -1354,7 +1354,7 @@
 	<string name="poi_covered_yes">Si</string>
 	<string name="poi_fireplace_no">Sen lareira</string>
 
-	<string name="poi_covered_no">Descuberto</string>
+	<string name="poi_covered_no">Descoberto</string>
 
 	<string name="poi_tactile_paving_yes">Si</string>
 	<string name="poi_railway_level_crossing">Pasaxe a nivel</string>
@@ -1438,7 +1438,7 @@
 	<string name="poi_parking_underground">Subterráneo</string>
 	<string name="poi_public_bath">Baño público</string>
 
-	<string name="poi_toilets_access_public">Acceso ós aseos: público</string>
+	<string name="poi_toilets_access_public">Acceso ós servizos: público</string>
 
 	<string name="poi_vending_public_transport_tickets">Billetes de transporte público</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Billetes de aparcamento e transporte público</string>
@@ -1456,9 +1456,9 @@
 
 	<string name="poi_historic_period_roman_republic">Período histórico: República romana (do 508 ó 27 a.C.)</string>
 	<string name="poi_square">Praza</string>
-	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo da explosión: subterránea, escavación</string>
-	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo da explosión: subterránea, túnel</string>
-	<string name="poi_nuclear_explosion_type_underground">Tipo da explosión: subterránea</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Tipo do estourido: subterráneo, escavación</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipo do estourido: subterráneo, túnel</string>
+	<string name="poi_nuclear_explosion_type_underground">Tipo do estourido: subterráneo</string>
 	<string name="poi_fire_hydrant_type_underground">Subterráneo</string>
 	<string name="poi_health_amenity_type_scales">Básculas públicas</string>
 
@@ -1490,7 +1490,7 @@
 	<string name="poi_glacier_type">Tipo do glaciar</string>
 	<string name="poi_checkpoint_type">Tipo do posto de control</string>
 
-<string name="poi_convenience">Tenda de comestíbeis</string>
+<string name="poi_convenience">Tenda de ultramarinos</string>
 	<string name="poi_halt">Paraxe de trens</string>
 	<string name="poi_railway_buffer_stop">Fin da vía</string>
 	<string name="poi_food_court">Estabelecemento de comidas</string>
@@ -1500,7 +1500,7 @@
 	<string name="poi_general_barrier">Barreira xeral</string>
 	<string name="poi_highway_crossing">Paso de peóns</string>
 
-	<string name="poi_bicycle_parking_stands">Anclaxes en forma de U invertida</string>
+	<string name="poi_bicycle_parking_stands">Ancoraxes en forma de U invertida</string>
 	<string name="poi_enforcement_traffic_signals">Control de semáforos</string>
 	<string name="poi_payment_account_cards_no">Non se admiten tarxetas de conta</string>
 	<string name="poi_payment_dkv_no">Non se admite DKV</string>
@@ -1538,12 +1538,12 @@
 	<string name="poi_outdoor_seating_patio">Mesas ó ar libre: patio</string>
 
 	<string name="poi_indoor_no">Ó ar libre</string>
-	<string name="poi_toilets_no">Aseos: non</string>
-	<string name="poi_toilets_wheelchair_yes">Aseos para persoas en cadeiras de rodas: si</string>
-	<string name="poi_toilets_wheelchair_no">Aseos para persoas en cadeiras de rodas: non</string>
-	<string name="poi_toilets_access_customers">Acceso ós aseos: clientes</string>
-	<string name="poi_toilets_access_permissive">Acceso ós aseos: permisivo</string>
-	<string name="poi_toilets_access_community">Acceso ós aseos: comunidade</string>
+	<string name="poi_toilets_no">Servizos: non</string>
+	<string name="poi_toilets_wheelchair_yes">Servizos para persoas en cadeiras de rodas: si</string>
+	<string name="poi_toilets_wheelchair_no">Servizos para persoas en cadeiras de rodas: non</string>
+	<string name="poi_toilets_access_customers">Acceso ós servizos: clientes</string>
+	<string name="poi_toilets_access_permissive">Acceso ós servizos: permisivo</string>
+	<string name="poi_toilets_access_community">Acceso ós servizos: comunidade</string>
 	<string name="poi_memorial_statue">Estatua</string>
 	<string name="poi_resource_barite">Barita</string>
 	<string name="poi_resource_platinum">Platino</string>
@@ -1554,19 +1554,19 @@
 
 	<string name="poi_internet_access_type_terminal">Por terminal</string>
 	<string name="poi_internet_access_type_service">Tipo do acceso á Internet: servizo</string>
-	<string name="poi_artwork_type_sculpture">Tipo de obra: escultura</string>
-	<string name="poi_artwork_type_statue">Tipo de obra: estatua</string>
-	<string name="poi_artwork_type_mural">Tipo de obra: mural</string>
-	<string name="poi_artwork_type_architecture">Tipo de obra: arquitectónica</string>
-	<string name="poi_artwork_type_painting">Tipo de obra: pintura</string>
-	<string name="poi_artwork_type_stone">Tipo de obra: pedra</string>
-	<string name="poi_artwork_type_bust">Tipo de obra: busto</string>
-	<string name="poi_artwork_type_installation">Tipo de obra: instalación</string>
-	<string name="poi_artwork_type_mosaic">Tipo de obra: mosaico</string>
-	<string name="poi_artwork_type_relief">Tipo de obra: relevo</string>
-	<string name="poi_artwork_type_graffiti">Tipo de obra: pintada ou graffiti</string>
-	<string name="poi_artwork_type_stele">Tipo de obra: estela</string>
-	<string name="poi_artwork_type_fountain">Tipo de obra: fonte</string>
+	<string name="poi_artwork_type_sculpture">Tipo da obra: escultura</string>
+	<string name="poi_artwork_type_statue">Tipo da obra: estatua</string>
+	<string name="poi_artwork_type_mural">Tipo da obra: mural</string>
+	<string name="poi_artwork_type_architecture">Tipo da obra: arquitectónica</string>
+	<string name="poi_artwork_type_painting">Tipo da obra: pintura</string>
+	<string name="poi_artwork_type_stone">Tipo da obra: pedra</string>
+	<string name="poi_artwork_type_bust">Tipo da obra: busto</string>
+	<string name="poi_artwork_type_installation">Tipo da obra: instalación</string>
+	<string name="poi_artwork_type_mosaic">Tipo da obra: mosaico</string>
+	<string name="poi_artwork_type_relief">Tipo da obra: relevo</string>
+	<string name="poi_artwork_type_graffiti">Tipo da obra: pintada ou graffiti</string>
+	<string name="poi_artwork_type_stele">Tipo da obra: estela</string>
+	<string name="poi_artwork_type_fountain">Tipo da obra: fonte</string>
 
 	<string name="poi_architecture_baroque">Arquitectura: barroca</string>
 	<string name="poi_bridge_type_movable">Tipo da ponte: móbil</string>
@@ -1694,16 +1694,16 @@
 	<string name="poi_building_type_pyramid">Tipo do edificio: pirámide</string>
 
 	<string name="poi_parking_surface">Tipo do aparcadoiro: na superficie</string>
-	<string name="poi_nuclear_explosion_type_atmospheric">Tipo da explosión: atmosférica</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo da explosión: atmosférica, lanzamento aéreo</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipo da explosión: atmosférica, na superficie, torre</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo da explosión: atmosférica, globo</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipo da explosión: atmosférica, na superficie</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo da explosión: atmosférica, na superficie da auga, barquiña</string>
-	<string name="poi_nuclear_explosion_type_cratering_burst">Tipo da explosión: estoupido do cráter (subsolo pouco afundido)</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipo da explosión: atmosférica, foguete ou mísil</string>
-	<string name="poi_nuclear_explosion_type_space">Tipo da explosión: espacial (altitude &gt; 80 km)</string>
-	<string name="poi_nuclear_explosion_type_underwater">Tipo da explosión: mergullada ou submariña</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Tipo do estourido: atmosférico</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Tipo do estourido: atmosférico, lanzamento aéreo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Tipo do estourido: atmosférico, na superficie, torre</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo do estourido: atmosférico, globo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipo do estourido: atmosférico, na superficie</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo do estourido: atmosférico, na superficie da auga, barquiña</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Tipo do estourido: estoupido do cráter (subsolo pouco afundido)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipo do estourido: atmosférico, foguete ou mísil</string>
+	<string name="poi_nuclear_explosion_type_space">Tipo do estourido: espacial (altitude &gt; 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Tipo do estourido: mergullado ou submariño</string>
 	<string name="poi_addr_housename">Nome do edificio</string>
 
 
@@ -1831,7 +1831,7 @@
 	<string name="poi_surface_snow">Superficie: neve</string>
 
 	<string name="poi_consulting">Oficina de consultoría</string>
-	<string name="poi_nuclear_explosion_date_utc">Data da explosión (UTC)</string>
+	<string name="poi_nuclear_explosion_date_utc">Data do estourido (UTC)</string>
 	<string name="poi_date_yes">Amosado da data</string>
 	<string name="poi_date_no">Amosado da data: non</string>
 
@@ -1843,7 +1843,7 @@
 	<string name="poi_vending_bicycle_tube">Válvulas de bicicleta</string>
 	<string name="poi_bridge_bicycle">Ponte ciclista</string>
 	<string name="poi_service_bicycle_retail_no">Venda de bicicletas: non</string>
-	<string name="poi_service_bicycle_repair_no">Reparación de bicicletas: non</string>
+	<string name="poi_service_bicycle_repair_no">Arranxo de bicicletas: non</string>
 	<string name="poi_service_bicycle_rental_no">Aluguer de bicicletas: non</string>
 	<string name="poi_service_bicycle_pump_no">Inchado de bicicletas: non</string>
 	<string name="poi_service_bicycle_diy_no">Ferramentas para autoarranxado: non</string>
@@ -1863,4 +1863,2049 @@
 	<string name="poi_additional_atm_yes">Caixeiro automático: si</string>
 	<string name="poi_atm_no">Caixeiro automático: non</string>
 
-	</resources>
+	<string name="poi_brushless">Sen vasoira</string>
+	<string name="poi_pharmacy_dispensing">Dispensa recetas médicas</string>
+	<string name="poi_scout_camp">Campamento de exploradores</string>
+	<string name="poi_backcountry">Acampada libre</string>
+	<string name="poi_drive_in">Conducir por dentro</string>
+	<string name="poi_drive_through">Servizo no automóbil</string>
+	<string name="poi_microbrewery">Cervexaría artesanal</string>
+	<string name="poi_seasonal">Estacional</string>
+	<string name="poi_motorcycle_services">Servizos</string>
+	<string name="poi_animal_shelter_purpose">Obxectivo</string>
+	<string name="poi_boat_rental_type">Aluguer de embarcacións</string>
+	<string name="poi_operational_status">Estado operativo</string>
+	<string name="poi_water_purification">Depuración das aguas</string>
+	<string name="poi_water_place_access">Acceso á fonte da auga</string>
+	<string name="poi_climbing_style">Estilo da escalada</string>
+	<string name="poi_socket">Conector</string>
+	<string name="poi_socket_chademo_output_filter">Saída CHAdeMO</string>
+	<string name="poi_socket_cee_blue_output_filter">Saída CEE azul</string>
+	<string name="poi_socket_schuko_output_filter">Saída Schuko</string>
+	<string name="poi_service_car">Servizo para o automóbil</string>
+	<string name="poi_bulk_purchase">Merca ó por maior</string>
+	<string name="poi_substation_type">Tipo da subestación</string>
+
+<string name="poi_traffic_enforcement">Control do tráfico</string>
+	<string name="poi_transport_construction">Construcción de materiais de transporte</string>
+	<string name="poi_charity">Tenda da caridade</string>
+	<string name="poi_association">Asociación</string>
+	<string name="poi_village_green">Zona verde</string>
+	<string name="poi_animal_shelter_horse">Cabalos</string>
+	<string name="poi_backrest_yes">Respaldo: si</string>
+	<string name="poi_fireplace_yes">Si</string>
+	<string name="poi_drive_in_yes">Si</string>
+	<string name="poi_drive_through_yes">Si</string>
+	<string name="poi_takeaway_filter_yes">Si</string>
+	<string name="poi_delivery_filter_yes">Si</string>
+	<string name="poi_outdoor_seating_filter_yes">Si</string>
+	<string name="poi_cocktails_yes">Si</string>
+
+	<string name="poi_self_service_yes">Si</string>
+	<string name="poi_automated_yes">Si</string>
+	<string name="poi_brushless_yes">Si</string>
+	<string name="poi_toilets_yes">Si</string>
+	<string name="poi_resource_sand">Area</string>
+	<string name="poi_resource_sandstone">Arenito</string>
+	<string name="poi_beach_sand">Area</string>
+	<string name="poi_bench_yes">Si</string>
+	<string name="poi_surveillance_yes">Vixiancia: si</string>
+	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico: si</string>
+	<string name="poi_backcountry_yes">Si</string>
+	<string name="poi_scout_yes">Si</string>
+	<string name="poi_group_only_yes">Só grupos: si</string>
+	<string name="poi_washing_machine_yes">Si</string>
+	<string name="poi_shower_filter_yes">Si</string>
+	<string name="poi_shower_yes">Ducha: si</string>
+	<string name="poi_caravans_yes">Si</string>
+	<string name="poi_impromptu_yes">Improvisado: si</string>
+	<string name="poi_sanitary_dump_station_yes">Estación de refugallos sanitarios: si</string>
+	<string name="poi_power_supply_yes">Si</string>
+	<string name="poi_social_facility_for_underprivileged">Desfavorecidos</string>
+	<string name="poi_handrail_yes">Varanda: si</string>
+	<string name="poi_ramp_yes">Rampla: si</string>
+	<string name="poi_ramp_wheelchair_yes">Rampla para cadeiras de rodas: si</string>
+	<string name="poi_ramp_stroller_yes">Rampla (cocheciños): si</string>
+	<string name="poi_ramp_luggage_yes">Rampla para bagaxes: si</string>
+	<string name="poi_defibrillator_yes">Desfibrilador: si</string>
+
+	<string name="poi_horse_yes">Cabalos: permitido</string>
+	<string name="poi_horse_no">Cabalos: non permitido</string>
+	<string name="poi_artist_name">Artista</string>
+	<string name="poi_summit_cross">Cruz no cumio: si</string>
+
+	<string name="poi_bathing_yes">Permítese o baño: si</string>
+	<string name="poi_microwave_oven_yes">Forno microondas: si</string>
+	<string name="poi_water_heater_yes">Quentador de auga: si</string>
+	<string name="poi_fair_trade_yes">Comercio xusto: si</string>
+	<string name="poi_compressed_air_yes">Si</string>
+	<string name="poi_car_wash_yes">Si</string>
+
+	<string name="poi_vacuum_cleaner_yes">Si</string>
+	<string name="poi_button_operated_yes">Operado por botóns: si</string>
+	<string name="poi_free_flying_official_yes">Oficial: si</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Directrices do convidado: si</string>
+	<string name="poi_health_service_nursing_yes">Servizo de saúde: enfermaría: si</string>
+	<string name="poi_health_service_counselling_yes">Servizo de saúde: asesoramento: si</string>
+	<string name="poi_health_service_examination_yes">Servizo de saúde: revisión médica: si</string>
+	<string name="poi_health_service_child_care_yes">Servizo de saúde: coidados infantís: si</string>
+	<string name="poi_health_service_prevention_yes">Servizo de saúde: prevención: si</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Servizo de saúde: vacinación: si</string>
+	<string name="poi_health_service_support_yes">Servizo de saúde: apoio: si</string>
+	<string name="poi_health_service_test_yes">Servizo de saúde: análise: si</string>
+	<string name="poi_counselling_type_addiction_yes">Asesoramento (adiccións): si</string>
+	<string name="poi_counselling_type_antenatal_yes">Asesoramento (prenatal): si</string>
+	<string name="poi_counselling_type_child_guidance_yes">Asesoramento (orientacións infantís): si</string>
+	<string name="poi_counselling_type_couple_yes">Asesoramento (parella): si</string>
+	<string name="poi_counselling_type_crisis_yes">Asesoramento (crise): si</string>
+	<string name="poi_counselling_type_drugs_yes">Asesoramento (drogas): si</string>
+	<string name="poi_counselling_type_education_yes">Asesoramento (educación): si</string>
+	<string name="poi_counselling_type_family_yes">Asesoramento (familiar): si</string>
+	<string name="poi_counselling_type_homeless_yes">Asesoramento (sen lar): si</string>
+	<string name="poi_counselling_type_immigrant_yes">Asesoramento (inmigrantes): si</string>
+	<string name="poi_counselling_type_marriage_yes">Asesoramento (casamento): si</string>
+	<string name="poi_counselling_type_nutrition_yes">Asesoramento (nutrición): si</string>
+	<string name="poi_counselling_type_sexual_yes">Asesoramento (sexual): si</string>
+	<string name="poi_cuisine_sandwich">Sandwiches</string>
+	<string name="poi_climbing_rock_sandstone">Escalada na rocha: arenito</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Asesoramento (abusos sexuais): si</string>
+	<string name="poi_radiotechnics">Tenda de radiotecnia</string>
+	<string name="poi_shop_craft">Tenda de materiais de artes e traballos manuais (artesanía)</string>
+	<string name="poi_fire_flapper">Cortalumes</string>
+	<string name="poi_fire_water_pond">Lagoa de auga para incendios</string>
+	<string name="poi_ses_station">Servizo de emerxencia (SES)</string>
+	<string name="poi_traffic_calming_cushion">Coxín berlinés</string>
+	<string name="poi_traffic_calming_chicane">Chicana</string>
+	<string name="poi_traffic_calming_table">Plataforma elevada</string>
+	<string name="poi_traffic_calming_choker">Estreitamento</string>
+	<string name="poi_fuel_lpg">GLP</string>
+	<string name="poi_fuel_cng">GNC (gas para vehículos)</string>
+	<string name="poi_fuel_svo">SVO (combustíbel vexetal)</string>
+	<string name="poi_aeroway_fuel">Estación de combustíbel das aeronaves</string>
+	<string name="poi_waterway_fuel">Estación de combustíbel para embarcacións</string>
+	<string name="poi_electricity_combined_charging">Estación de carga eléctrica</string>
+	<string name="poi_vehicle_ramp">Rampla de vehículos</string>
+	<string name="poi_turning_circle">Círculo de xiro</string>
+	<string name="poi_motorway_junction">Saída da autroestrada</string>
+	<string name="poi_standpipe">Boca de incendios</string>
+	<string name="poi_boatyard">Estaleiro</string>
+	<string name="poi_waterway_turning_point">Punto de manobra de embarcacións</string>
+	<string name="poi_weir">Vertedoiro</string>
+	<string name="poi_breakwater">Dique</string>
+	<string name="poi_groyne">Espigo</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Cadro da distribución eléctrica</string>
+	<string name="poi_recycling_scrap_metal">Ferralla</string>
+	<string name="poi_recycling_hydrargyrum">Mercurio</string>
+	<string name="poi_recycling_waste_oil">Aceite usado</string>
+	<string name="poi_recycling_sheet_metal">Chapas metálicas</string>
+	<string name="poi_recycling_styrofoam">Poliestireno extruído</string>
+	<string name="poi_recycling_chipboard">Cartóns prensados</string>
+	<string name="poi_farmyard">Granxa</string>
+	<string name="poi_brownfield">Chan abandoado urbanizábel</string>
+	<string name="poi_greenfield">Chan virxe urbanizábel</string>
+	<string name="poi_adit">Boca da mina</string>
+	<string name="poi_bunker_silo">Silo búnquer</string>
+	<string name="poi_bailiff">Oficial de xustiza</string>
+	<string name="poi_quarter">Distrito</string>
+	<string name="poi_place_allotments">Hortas comunitarias</string>
+	<string name="poi_sanatorium">Sanatorio</string>
+	<string name="poi_audiologist">Audioloxía</string>
+	<string name="poi_newspaper">Oficina de xornal</string>
+	<string name="poi_architect">Oficina de arquitectura</string>
+	<string name="poi_office_religion">Oficina relixiosa</string>
+	<string name="poi_financial">Oficina financeira</string>
+	<string name="poi_raceway">Circuíto de carreiras</string>
+	<string name="poi_9pin">Birlos alemáns</string>
+	<string name="poi_10pin">Birlos americáns</string>
+	<string name="poi_base">Brinco base</string>
+	<string name="poi_bmx">Bicicross (BMX)</string>
+	<string name="poi_bowls">Birlos</string>
+	<string name="poi_ice_hockey">Hóquei sobre xeo</string>
+	<string name="poi_ice_stock">Icestock</string>
+	<string name="poi_korfbal">Baloncorf</string>
+	<string name="poi_attraction_swing_carousel">Cabaliños ou carrusel</string>
+	<string name="poi_cabin">Cabana</string>
+	<string name="poi_lean_to">Pendello</string>
+	<string name="poi_religious">Área relixiosa</string>
+	<string name="poi_wayside_shrine">Ermida no camiño</string>
+	<string name="poi_club_charity">Clube da caridade</string>
+	<string name="poi_club_scout">Clube de exploradores</string>
+
+	<string name="poi_piste_sled">Pista de zorras</string>
+	<string name="poi_piste_playground">Pista infantil</string>
+	<string name="poi_beach_resort">Complexo turístico de praia</string>
+	<string name="poi_hunting_stand">Cabana de caza</string>
+	<string name="poi_trail_riding_station">Estación de equitación</string>
+
+	<string name="poi_craft_basket_maker">Cesteiro</string>
+	<string name="poi_craft_boatbuilder">Fabricante de embarcacións</string>
+	<string name="poi_craft_caterer">Fornecedor de comidas (catering)</string>
+	<string name="poi_craft_glaziery">Vidreiro</string>
+	<string name="poi_craft_locksmith">Zarralleiro</string>
+	<string name="poi_craft_key_cutter">Duplicado de chaves</string>
+	<string name="poi_craft_metal_construction">Metalistaría</string>
+	<string name="poi_craft_plasterer">Xeseiro</string>
+	<string name="poi_craft_rigger">Armador ou montador</string>
+	<string name="poi_craft_saddler">Gornicioneiro ou seleiro</string>
+	<string name="poi_craft_sawmill">Serradoiro</string>
+	<string name="poi_craft_scaffolder">Montador das estadas ou andamiaxes</string>
+	<string name="poi_craft_stand_builder">Creador de estandes</string>
+	<string name="poi_craft_sun_protection">Tendais</string>
+	<string name="poi_craft_sweep">Varredor</string>
+	<string name="poi_craft_tiler">Albanel ou ladrilleiro</string>
+	<string name="poi_craft_tinsmith">Latoeiro</string>
+	<string name="poi_craft_upholsterer">Tapiceiro</string>
+	<string name="poi_car_sharing">Automóbil partillado ou compartido</string>
+	<string name="poi_car_pooling">Punto dos automóbiles compartidos</string>
+	<string name="poi_boat_sharing">Embarcacións compartidas</string>
+	<string name="poi_dock">Dársena</string>
+	<string name="poi_cutline">Cortalumes</string>
+	<string name="poi_ridge">Crista</string>
+	<string name="poi_wetland">Zona húmida</string>
+	<string name="poi_berth">Atracadoiro</string>
+	<string name="poi_seamark_building">Edificio náutico</string>
+	<string name="poi_seamark_bridge">Ponte náutica</string>
+	<string name="poi_buoy_cardinal">Boia cardinal</string>
+	<string name="poi_daymark">"Marcaxe do día "</string>
+	<string name="poi_seamark_dyke">Dique náutico</string>
+	<string name="poi_harbour_basin">Conca do porto</string>
+	<string name="poi_landmark">Referenza terrestre</string>
+	<string name="poi_seamark_light">Luz náutica</string>
+	<string name="poi_seamark_light_major">Luz náutica maior</string>
+	<string name="poi_seamark_light_minor">Luz náutica menor</string>
+	<string name="poi_seamark_light_float">Boia luminosa</string>
+	<string name="poi_seamark_light_vessel">Navío faro</string>
+	<string name="poi_lock_basin">Esclusa</string>
+	<string name="poi_notice">Sinal náutica</string>
+	<string name="poi_pile">Piar</string>
+	<string name="poi_radar_transponder">Radar transpoñedor</string>
+	<string name="poi_radio_station">Estación de radio náutica</string>
+	<string name="poi_signal_station_traffic">Estación de sinais do tráfico</string>
+	<string name="poi_signal_station_warning">Estación de sinais de perigo</string>
+	<string name="poi_topmark">Bordo náutico</string>
+	<string name="poi_seamark_rock">Rocha náutica, baixo</string>
+	<string name="poi_seamark_wreck">Afundimento ou naufraxio náutico</string>
+
+	<string name="poi_seamark_clearance_height">Altitude de seguranza</string>
+	<string name="poi_seamark_clearance_height_closed">Altitude de seguranza (fechada)</string>
+	<string name="poi_seamark_clearance_height_open">Altitude de seguranza (aberta)</string>
+	<string name="poi_seamark_clearance_width">Amplitude de seguranza</string>
+
+	<string name="poi_bus_trap">Trallo do bus</string>
+	<string name="poi_cattle_grid">Paso canadiense</string>
+	<string name="poi_full_height_turnstile">Muíño de altitude completa</string>
+	<string name="poi_bump_gate">Cancela</string>
+	<string name="poi_stile">Escada de paso</string>
+	<string name="poi_kissing_gate">Porta labiríntica</string>
+	<string name="poi_sally_port">Poterna</string>
+	<string name="poi_swing_gate">Barreira xiratoria</string>
+	<string name="poi_turnstile">Torno</string>
+	<string name="poi_kent_carriage_gap">Paso para carruaxes</string>
+	<string name="poi_route_hiking_iwn_poi">Roteiro internacional de sendeirismo</string>
+	<string name="poi_route_hiking_nwn_poi">Roteiro nacional de sendeirismo</string>
+	<string name="poi_route_hiking_rwn_poi">Roteiro rexional de sendeirismo</string>
+	<string name="poi_route_hiking_lwn_poi">Roteiro local de sendeirismo</string>
+	<string name="poi_route_hiking_ref_poi">Referenza do roteiro de sendeirismo</string>
+
+	<string name="poi_wholesale">Venda maiorista</string>
+
+	<string name="poi_content_slurry">Contido: mesturanza</string>
+	<string name="poi_content_sewage">Contido: augas residuais</string>
+	<string name="poi_trade_wood">Venda de madeira</string>
+	<string name="poi_trade_tile">Venda de tellas e azulexos</string>
+
+	<string name="poi_parking_multi_storey">Varios andares</string>
+
+	<string name="poi_bicycle_parking_anchors">Ancoraxes</string>
+	<string name="poi_bicycle_parking_wall_loops">Ancoraxes de roda</string>
+	<string name="poi_bicycle_parking_shed">Pendello</string>
+	<string name="poi_bicycle_parking_bollard">Pivote (bolardo)</string>
+	<string name="poi_leaf_type_broadleaved">Folla ampla</string>
+	<string name="poi_leaf_type_needleleaved">Folla acicular</string>
+	<string name="poi_leaf_type_mixed">Mesturado</string>
+	<string name="poi_leaf_type_leafless">Sen follas</string>
+	<string name="poi_trees_persimmon">Caqui</string>
+	<string name="poi_trees_meadow_orchard">Horta</string>
+	<string name="poi_enforcement_maxspeed">Control da velocidade</string>
+	<string name="poi_enforcement_maxheight">Control da altitude máxima</string>
+	<string name="poi_enforcement_mindistance">Control da distanza mínima</string>
+	<string name="poi_enforcement_check">Control de tráfico</string>
+	<string name="poi_enforcement_access">Control do acceso</string>
+	<string name="poi_enforcement_toll">Control de portaxe ou peaxe</string>
+
+	<string name="poi_animal_shelter_wildlife">Animais salvaxes</string>
+	<string name="poi_animal_shelter_mammal">Mamíferos</string>
+	<string name="poi_animal_shelter_fish">Peixes</string>
+
+	<string name="poi_backrest_no">Respaldo: non</string>
+
+	<string name="poi_deadlock">Sen saída</string>
+
+	<string name="poi_water_characteristic_mud">Trazos da auga: lama</string>
+	<string name="poi_information_trail_blaze">Marcaxe do camiño</string>
+	<string name="poi_information_route_marker">Marcaxe do roteiro</string>
+	<string name="poi_toll_hgv_yes">Portaxe ou peaxe para camións</string>
+	<string name="poi_tactile_paving_no">Pavimento táctil: non</string>
+	<string name="poi_traffic_signals_sound_walk">Só permítese ó camiñar</string>
+
+	<string name="poi_rescue_station">Estación do rescate</string>
+
+	<string name="poi_mini_roundabout">Rotonda pequena</string>
+	<string name="poi_railway_crossing">Cruzamento de trens</string>
+	<string name="poi_heath">Uceira ou uzal</string>
+	<string name="poi_grassland">Pradaría</string>
+	<string name="poi_scrub">Matogueira</string>
+	<string name="poi_logging">Cortado de árbores</string>
+	<string name="poi_windfall">Froito caído</string>
+	<string name="poi_dead_wood">Árbores mortas</string>
+
+	<string name="poi_passing_place">Lugar de pasaxe</string>
+	<string name="poi_rtsa_scale">Escala RTSA</string>
+
+	<string name="poi_piste_grooming_backcountry">Fóra da pista</string>
+	<string name="poi_piste_grooming_scooter">Scooter</string>
+	<string name="poi_piste_grooming_mogul">Mogul (esquí acrobático)</string>
+
+	<string name="poi_garden_style_rosarium">Estilo do xardín: roseiras</string>
+	<string name="poi_historic_aircraft">Aeronave histórica</string>
+
+	<string name="poi_counselling_type_victim_yes">Asesoramento (vítimas): si</string>
+	<string name="poi_counselling_type_violence_yes">Asesoramento (violencia): si</string>
+	<string name="poi_provided_for_infant_yes">"Atende meniños: si "</string>
+	<string name="poi_provided_for_toddler_yes">Atende crianzas pequenas: si</string>
+	<string name="poi_provided_for_child_yes">Atende crianzas: si</string>
+	<string name="poi_provided_for_adult_yes">Atende adultos: si</string>
+	<string name="poi_provided_for_woman_yes">Atende mulleres: si</string>
+	<string name="poi_provided_for_girl_yes">Atende mozas: si</string>
+	<string name="poi_provided_for_man_yes">"Atende homes: si "</string>
+	<string name="poi_provided_for_boy_yes">Atende mozos: si</string>
+	<string name="poi_treat_inpatient_yes">Servizos hospitalarios: si</string>
+	<string name="poi_counselling_yes">Asesoramento: si</string>
+	<string name="poi_home_visit_yes">Si</string>
+	<string name="poi_disease_malaria_yes">Paludismo ou malaria: si</string>
+	<string name="poi_disease_ebola_yes">Ébola: si</string>
+	<string name="poi_disease_autism_yes">Autismo: si</string>
+	<string name="poi_disease_aids_yes">Sida: si</string>
+	<string name="poi_in_service_yes">En servizo: si</string>
+
+	<string name="poi_dispensing_yes">Si</string>
+	<string name="poi_display_yes">Pantalla: si</string>
+	<string name="poi_passenger_information_display_yes">Pantalla da información ó pasaxeiro: si</string>
+	<string name="poi_organic_yes">Si</string>
+	<string name="poi_fast_food_cafeteria">Si</string>
+
+	<string name="poi_drink_wine_yes">Viño: si</string>
+	<string name="poi_motorcycle_sales_yes_used">Venda de motos: si, de segunda mán</string>
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adopcións: si</string>
+	<string name="poi_animal_shelter_purpose_release_yes">En liberdade: si</string>
+	<string name="poi_winter_room_yes">Refuxio do inverno: si</string>
+	<string name="poi_reservation_yes">Reserva: si</string>
+	<string name="poi_boat_motorboat_rental_yes">Lanchas a motor: si</string>
+	<string name="poi_boat_houseboat_rental_yes">Casas flotantes: si</string>
+	<string name="poi_boat_pedalboat_rental_yes">Barcos a pedais: si</string>
+	<string name="poi_boat_jetski_rental_yes">Motos da auga: si</string>
+	<string name="poi_boat_sailboat_rental_yes">Veleiros: si</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Botes: si</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Caiaques: si</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Canoas: si</string>
+	<string name="poi_car_yes">Automóbil: si</string>
+	<string name="poi_scooter_yes">Scooter: si</string>
+	<string name="poi_truck_yes">Camións: si</string>
+	<string name="poi_climbing_sport_yes">Deporte: si</string>
+	<string name="poi_climbing_boulder_yes">Búlder: si</string>
+	<string name="poi_climbing_toprope_yes">Moulinette: si</string>
+	<string name="poi_climbing_trad_yes">Tradicional: si</string>
+	<string name="poi_climbing_multipitch_yes">Roteiros multipaso: si</string>
+	<string name="poi_climbing_multipitch_no">Roteiros multipaso: non</string>
+	<string name="poi_climbing_ice_yes">Xeo: si</string>
+	<string name="poi_climbing_mixed_yes">Mesturado: si</string>
+	<string name="poi_climbing_deepwater_yes">Psicobloc: si</string>
+	<string name="poi_climbing_bolted_yes">Áncoras fixas: si</string>
+	<string name="poi_climbing_summit_log_yes">Rexistro da escalada no cume: si</string>
+	<string name="poi_barbecue_grill">Grella do churrasco: si</string>
+
+	<string name="poi_bulk_purchase_yes">Si</string>
+	<string name="poi_aerialway_occupancy">Capacidade da cabina/cadeira/automóbil</string>
+	<string name="poi_aerialway_bubble_yes">Gurgulla</string>
+	<string name="poi_aerialway_bubble_no">Sen gurgulla</string>
+	<string name="poi_love_hotel">Hotel para parellas</string>
+
+	<string name="poi_payment_coins_0.5">Moedas de $0,5</string>
+	<string name="poi_payment_account_cards_yes">Tarxetas da cuenta</string>
+	<string name="poi_payment_dkv_yes">DKV</string>
+	<string name="poi_payment_uta_yes">UTA</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
+	<string name="poi_payment_discover_card_yes">Discover Card</string>
+	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (indicado)</string>
+	<string name="poi_payment_icsf_yes">IC Stored Fare</string>
+	<string name="poi_payment_prepaid_ticket_yes">Tíquets de prepagamento</string>
+	<string name="poi_payment_jcb_yes">JCB</string>
+	<string name="poi_payment_ep_cash_yes">Tarxeta de cartos (Geldkarte)</string>
+	<string name="poi_payment_oyster_yes">Oyster</string>
+	<string name="poi_payment_sube_yes">SUBE</string>
+	<string name="poi_payment_via_verde_yes">Via Verde</string>
+	<string name="poi_payment_meal_voucher_yes">Vales da comida</string>
+	<string name="poi_payment_paypal_yes">PayPal</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
+	<string name="poi_payment_token_yes">Fichas ou tokens</string>
+	<string name="poi_payment_gift_card_yes">Tarxetas de agasallo</string>
+	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
+	<string name="poi_payment_union_card_yes">Union Card</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
+	<string name="poi_description_payment">Descrición do pagamento</string>
+
+	<string name="poi_events_venue">Salón de acontecementos</string>
+
+	<string name="poi_diet_vegetarian_filter_yes">Vexetariá</string>
+	<string name="poi_diet_vegetarian_few">Vexetariá (pouco)</string>
+	<string name="poi_diet_vegetarian_only">Só vexetariá</string>
+	<string name="poi_diet_vegetarian_yes">Vexetariá</string>
+	<string name="poi_diet_vegetarian_no">Dieta vexetariá: non</string>
+	<string name="poi_diet_vegan_filter_yes">Vegá</string>
+	<string name="poi_diet_vegan_only">Só vegá</string>
+	<string name="poi_diet_vegan_yes">Vegá</string>
+	<string name="poi_diet_vegan_no">Dieta vegá: non</string>
+	<string name="poi_diet_gluten_free_filter_yes">Sen glute</string>
+	<string name="poi_diet_gluten_free_only">Só sen glute</string>
+	<string name="poi_diet_gluten_free_yes">Sen glute</string>
+	<string name="poi_diet_gluten_free_no">Dieta sen glute: non</string>
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_kosher_only">Só kosher</string>
+	<string name="poi_diet_kosher_yes">Kosher</string>
+	<string name="poi_diet_kosher_no">Dieta kosher: non</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_halal_only">Só halal</string>
+	<string name="poi_diet_halal_yes">Halal</string>
+	<string name="poi_diet_halal_no">Dieta halal: non</string>
+	<string name="poi_diet_lactose_free_filter_yes">Sen lactosa</string>
+	<string name="poi_diet_lactose_free_only">Só sen lactosa</string>
+	<string name="poi_diet_lactose_free_yes">Sen lactosa</string>
+	<string name="poi_diet_lactose_free_no">Dieta sen lactosa: non</string>
+	<string name="poi_diet_pescetarian_yes">Pescetariá</string>
+
+	<string name="poi_drive_in_no">Mercar no automóbil: non</string>
+	<string name="poi_drive_through_no">Servizo no automóbil: non</string>
+
+	<string name="poi_brewery_additional">Nome da cervexaría</string>
+	<string name="poi_microbrewery_yes">Si</string>
+	<string name="poi_microbrewery_no">Cervexaría artesá: non</string>
+
+	<string name="poi_delivery_yes">Servizo a domicilio: si</string>
+	<string name="poi_delivery_no">Servizo a domicilio: non</string>
+	<string name="poi_delivery_only">Só servizo a domicilio</string>
+
+	<string name="poi_second_hand_yes">Artigos de segunda mán</string>
+	<string name="poi_second_hand_no">Sen artigos de segunda mán</string>
+	<string name="poi_second_hand_only">Só artigos de segunda mán</string>
+
+	<string name="poi_service_parts">Partes</string>
+	<string name="poi_service_dealer">Venda</string>
+	<string name="poi_service_repair">Arranxo</string>
+	<string name="poi_service_repair_no">Non fan arranxos</string>
+	<string name="poi_service_electrical">Arranxo de automóbiles eléctricos</string>
+	<string name="poi_motorcycle_repair">Arranxo de motos</string>
+	<string name="poi_self_service_no">Non hai autoservizo</string>
+	<string name="poi_automated_no">Non automatizado</string>
+	<string name="poi_full_service_yes">Servizo completo</string>
+	<string name="poi_brushless_no">Vasoira xiratoria: non</string>
+	<string name="poi_car_wash_no">Lavadoiro de automóbiles: non</string>
+
+
+	<string name="poi_male_yes">Homes</string>
+	<string name="poi_male_no">Prohibido para homes</string>
+	<string name="poi_female_yes">Mulleres</string>
+	<string name="poi_female_no">Prohibido para mulleres</string>
+	<string name="poi_indoor_yes">Coberto</string>
+	<string name="poi_diaper_table_count">Cambiadoiro de cueiros</string>
+	<string name="poi_diaper_yes">Con cambiadoiro de cueiros</string>
+	<string name="poi_diaper_no">Sen cambiadoiro de cueiros</string>
+	<string name="poi_diaper_room">Habitación de cambiadoiro de cueiros</string>
+
+	<string name="poi_maxstay">Límite de tempo do aparcamento</string>
+
+	<string name="poi_vending_parking_tickets">Billetes de aparcamento</string>
+	<string name="poi_vending_cigarettes">Cigarros</string>
+	<string name="poi_vending_excrement_bags">Bolsas para feces</string>
+	<string name="poi_vending_drinks">Bebidas</string>
+	<string name="poi_vending_sweets">Doces</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Instalación de paquetaría e correos</string>
+	<string name="poi_vending_condoms">Preservativos</string>
+	<string name="poi_vending_stamps">Selos</string>
+	<string name="poi_vending_food">Comida</string>
+	<string name="poi_vending_drinks_food">Comida e bebida</string>
+	<string name="poi_vending_fuel">Venda de combustíbel</string>
+	<string name="poi_vending_parcel_pickup">Instalación de paquetaría</string>
+	<string name="poi_vending_parcel_mail_in">Instalación de correos</string>
+	<string name="poi_vending_milk">Leite</string>
+	<string name="poi_vending_elongated_coin">Moeda alongada</string>
+	<string name="poi_vending_bread">Pan</string>
+	<string name="poi_vending_chewing_gums">Gomas de mascar</string>
+	<string name="poi_vending_toll">Billetes de portaxe ou peaxe</string>
+	<string name="poi_vending_tickets">Venda de billetes</string>
+	<string name="poi_vending_water">Venda de auga</string>
+	<string name="poi_vending_telephone_vouchers">Vales telefónicos</string>
+	<string name="poi_vending_animal_food">Comida para animais</string>
+	<string name="poi_vending_drinks_sweets">Bebidas e doces</string>
+	<string name="poi_vending_vouchers">Vales</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Candeas</string>
+	<string name="poi_vending_toys">Xoguetes</string>
+	<string name="poi_vending_ice_cream">Xeados</string>
+	<string name="poi_vending_sim_cards">Tarxetas SIM</string>
+
+	<string name="poi_branch">Sucursal ou cadea</string>
+
+	<string name="poi_memorial_war">Lembranza ou memorial de guerra</string>
+	<string name="poi_memorial_plaque">Placa</string>
+	<string name="poi_memorial_stone">Pedra</string>
+	<string name="poi_memorial_stele">Estela</string>
+	<string name="poi_memorial_bust">Busto</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_memorial_blue_plaque">Placa azul</string>
+	<string name="poi_memorial_jizo">Jizo</string>
+	<string name="poi_memorial_cross">Cruceiro</string>
+	<string name="poi_memorial_vehicle">Vehículo</string>
+	<string name="poi_memorial_stolperstein">Stolpersteine</string>
+	<string name="poi_memorial_column">Columna</string>
+	<string name="poi_memorial_stupa">Estupa</string>
+	<string name="poi_memorial_prasat">Templo piramidal</string>
+	<string name="poi_memorial_fassade_decoration">Decoración da fronte</string>
+
+	<string name="poi_inscription">Inscrición</string>
+	<string name="poi_historic_quarry">Pedreira ou canteira histórica</string>
+
+	<string name="poi_resource_aggregate">Engadido</string>
+	<string name="poi_resource_antimony">Antimonio</string>
+	<string name="poi_resource_asbestos">Amianto</string>
+	<string name="poi_resource_basalt">Basalto</string>
+	<string name="poi_resource_bauxite">Bauxita</string>
+	<string name="poi_resource_beryl">Berilo</string>
+	<string name="poi_resource_bismuth">Bismuto</string>
+	<string name="poi_resource_chromite">Cromita</string>
+	<string name="poi_resource_clay">Arxila</string>
+	<string name="poi_resource_coal">Carbón</string>
+	<string name="poi_resource_copper">Cobre</string>
+	<string name="poi_resource_diamond">Diamante</string>
+	<string name="poi_resource_dimension_stone">Pedras grandes</string>
+	<string name="poi_resource_dolomite">Dolomita</string>
+	<string name="poi_resource_gas">Gas</string>
+	<string name="poi_resource_gold">Ouro</string>
+	<string name="poi_resource_graphite">Grafito</string>
+	<string name="poi_resource_gravel">Pedregullo</string>
+	<string name="poi_resource_gypsum">Xeso</string>
+	<string name="poi_resource_iron_ore">Mena de ferro</string>
+	<string name="poi_resource_lead">Chumbo</string>
+	<string name="poi_resource_lignite">Lignito</string>
+	<string name="poi_resource_limestone">Pedra calcaria</string>
+	<string name="poi_resource_marble">Mármore</string>
+	<string name="poi_resource_mercury">Azougue ou mercurio</string>
+	<string name="poi_resource_mica">Mica</string>
+	<string name="poi_resource_mineral_oil">Petróleo mineral</string>
+	<string name="poi_resource_nickel">Níquel</string>
+	<string name="poi_resource_oil">Petróleo</string>
+	<string name="poi_resource_opal">Ópalo</string>
+	<string name="poi_resource_peat">Turba</string>
+	<string name="poi_resource_radium">Radio</string>
+	<string name="poi_resource_ruby">Rubí</string>
+	<string name="poi_resource_rutile">Rútilo</string>
+	<string name="poi_resource_salt">Sal</string>
+	<string name="poi_resource_silica">Sílice</string>
+	<string name="poi_resource_silver">Prata</string>
+	<string name="poi_resource_slate_iron_ore_copper">Louxa;mena de ferro;cobre</string>
+	<string name="poi_resource_stone">Pedra</string>
+	<string name="poi_resource_tin">Estaño</string>
+	<string name="poi_resource_tuff">Tobo</string>
+	<string name="poi_resource_uranium">Uranio</string>
+	<string name="poi_resource_vanadium">Vanadio</string>
+	<string name="poi_resource_water">Auga</string>
+	<string name="poi_resource_zinc">Cinc</string>
+	<string name="poi_resource_zircon">Circón</string>
+
+	<string name="poi_wetland_wet_meadow">Pradaría humida</string>
+	<string name="poi_wetland_bog">Pantano</string>
+	<string name="poi_wetland_marsh">Marisma</string>
+	<string name="poi_wetland_reedbed">Canedo ou canaval</string>
+	<string name="poi_wetland_swamp">Lamazal</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_wetland_saltmarsh">Marisma salgada</string>
+	<string name="poi_wetland_mangrove">Mangleiral</string>
+	<string name="poi_wetland_string_bog">Cadea de humidais</string>
+	<string name="poi_wetland_fen">Humidal subterráneo</string>
+	<string name="poi_wetland_palsa_bog">Palsa</string>
+	<string name="poi_wetland_mud">Lameiro</string>
+
+	<string name="poi_beach_shingle">Croio</string>
+	<string name="poi_beach_rocky">Rochosa</string>
+
+	<string name="poi_chimney">Fumeira ou chaminea</string>
+	<string name="poi_palm">Palmeira</string>
+	<string name="poi_cypress">Alcipreste ou criprés</string>
+	<string name="poi_flagpole">Mastro da bandeira</string>
+
+	<string name="poi_bin_yes">Con cesto do lixo</string>
+	<string name="poi_bin_no">Sen cesto do lixo</string>
+
+	<string name="poi_shelter_type_picnic_shelter">Merendeiro</string>
+	<string name="poi_shelter_type_weather_shelter">Meteorolóxico</string>
+	<string name="poi_shelter_type_lean_to">Marquesiña</string>
+	<string name="poi_shelter_type_basic_hut">Cabana sinxela</string>
+	<string name="poi_shelter_type_building">Edificio</string>
+	<string name="poi_shelter_type_wildlife_hide">Observación agochada dos animais</string>
+	<string name="poi_shelter_type_rock_shelter">Refuxio da rocha</string>
+	<string name="poi_shelter_type_sun_shelter">Refuxio do sol</string>
+	<string name="poi_shelter_type_field_shelter">Refuxio do campo</string>
+	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
+	<string name="poi_internet_access_type_wired">Por cabo</string>
+	<string name="poi_internet_access_type_no">Sen acceso á Internet</string>
+	<string name="poi_internet_access_type_yes">Con acceso á Internet</string>
+
+	<string name="poi_maxwidth">Amplo máximo</string>
+	<string name="poi_iata">Código IATA</string>
+	<string name="poi_icao">Código ICAO</string>
+	<string name="poi_faa">Código FAA</string>
+	
+	<string name="poi_width">Amplo</string>
+
+	<string name="poi_architect_name">Arquitecto</string>
+
+	<string name="poi_architecture_modern">Arquitectura: moderna</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arquitectura: neoclasicismo estalinista</string>
+	<string name="poi_architecture_eclectic">Arquitectura: ecléctica</string>
+	<string name="poi_architecture_new_objectivity">Arquitectura: nova obxectividade</string>
+	<string name="poi_architecture_contemporary">Arquitectura: contemporánea</string>
+	<string name="poi_architecture_constructivism">Arquitectura: constructivimo</string>
+	<string name="poi_architecture_umgebinde">Arquitectura: alemá</string>
+	<string name="poi_architecture_timber_frame">Arquitectura: estrutura de madeira</string>
+	<string name="poi_architecture_art_nouveau">Arquitectura: arte novo (art nouveau)</string>
+	<string name="poi_architecture_neoclassicism">Arquitectura: neoclasicismo</string>
+	<string name="poi_architecture_victorian">Arquitectura: vitoriana</string>
+	<string name="poi_architecture_classicism">Arquitectura: clasicismo</string>
+	<string name="poi_architecture_gothic">Arquitectura: gótica</string>
+	<string name="poi_architecture_oldrussian">Arquitectura: rusa antiga</string>
+	<string name="poi_architecture_postconstructivism">Arquitectura: post-constructivismo</string>
+	<string name="poi_architecture_wilhelminian_style">Arquitectura: estilo guillermenista</string>
+	<string name="poi_architecture_renaissance">Arquitectura: renascentista</string>
+	<string name="poi_architecture_romanesque">Arquitectura: románica</string>
+
+	<string name="poi_tunnel_waterway">Túnel fluvial</string>
+	<string name="poi_tunnel_car">Túnel da estrada</string>
+	<string name="poi_tunnel_pedestrian">Túnel peonil</string>
+	<string name="poi_tunnel_railway">Túnel ferroviario</string>
+	<string name="poi_bridge_car">Ponte da estrada</string>
+	<string name="poi_bridge_pedestrian">Ponte peonil</string>
+	<string name="poi_bridge_railway">Ponte ferroviaria</string>
+	<string name="poi_bridge_waterway">Ponte fluvial</string>
+	<string name="poi_bridge_structure_beam">Estrutura da ponte: viga</string>
+	<string name="poi_bridge_structure_simple_suspension">Estrutura da ponte: suspensión sinxela</string>
+	<string name="poi_bridge_structure_suspension">Estrutura da ponte: suspensión</string>
+	<string name="poi_bridge_structure_arch">Estrutura da ponte: arco</string>
+	<string name="poi_bridge_structure_truss">Estrutura da ponte: reticular</string>
+	<string name="poi_bridge_structure_floating">Estrutura da ponte: flotante</string>
+	<string name="poi_bridge_structure_humpback">Estrutura da ponte: gobelo ou xiba</string>
+	<string name="poi_bridge_structure_cable_stayed">Estrutura da ponte: atirantada</string>
+	<string name="poi_bridge_structure_boardwalk">Estrutura da ponte: pasarela</string>
+	<string name="poi_bridge_structure_simple_wooden">Estrutura da ponte: madeira sinxela</string>
+	<string name="poi_bridge_structure_viaduct">Estrutura da ponte: viaduto</string>
+	<string name="poi_bridge_structure_aqueduct">Estrutura da ponte: acueduto</string>
+	<string name="poi_bridge_structure_log">Estrutura da ponte: tronco</string>
+	<string name="poi_route_bus_ref">Bus</string>
+	<string name="poi_route_trolleybus_ref">Trolebus</string>
+	<string name="poi_route_tram_ref">Tranvía</string>
+	<string name="poi_route_train_ref">Tren</string>
+	<string name="poi_route_light_rail_ref">Tren lixeiro</string>
+	<string name="poi_route_monorail_ref">Monorraíl</string>
+	<string name="poi_route_funicular_ref">Funicular</string>
+	<string name="poi_route_ferry_ref">Ferri</string>
+	<string name="poi_route_subway_ref">Metro</string>
+
+	<string name="poi_route_railway_ref">Liña ferroviaria</string>
+
+	<string name="poi_historic_yes">Atracción histórica</string>
+	<string name="poi_shop_additional_yes">Con tenda</string>
+
+	<string name="poi_service_bicycle_retail_yes">Venda</string>
+	<string name="poi_service_bicycle_repair_yes">Arranxo</string>
+	<string name="poi_service_bicycle_rental_yes">Aluguer</string>
+	<string name="poi_service_bicycle_pump_yes">Inchadoiro</string>
+	<string name="poi_service_bicycle_diy_yes">Ferramentas para o autoarranxo</string>
+	<string name="poi_service_bicycle_cleaning_yes">Limpeza</string>
+	<string name="poi_service_bicycle_chaintool_yes">Ferramenta para as cadeas</string>
+	<string name="poi_service_bicycle_charging_no">Cargador eléctrico: non</string>
+	<string name="poi_wildlife_hide">Observatorio de vida salvaxe</string>
+
+	<string name="poi_training_language">Adestramento: lingua</string>
+	<string name="poi_training_music">Adestramento: música</string>
+	<string name="poi_training_dance">Adestramento: danza</string>
+	<string name="poi_training_sport">Adestramento: deporte</string>
+	<string name="poi_training_art">Adestramento: arte</string>
+	<string name="poi_training_cooking">Adestramento: cociña</string>
+	<string name="poi_training_computer">Adestramento: informática</string>
+	<string name="poi_training_yoga">Adestramento: ioga</string>
+	<string name="poi_training_martial_art">Adestramento: artes marciais</string>
+	<string name="poi_training_aviation">Adestramento: aviación</string>
+	<string name="poi_training_hairdressing">Adestramento: perrucaría</string>
+
+	<string name="poi_monument_yes">Monumento</string>
+
+	<string name="poi_note">Nota</string>
+	<string name="poi_watering_place">Augada</string>
+	<string name="poi_animal_boarding">Aloxamento dos animais</string>
+	<string name="poi_elevator_yes">Con elevadoiro</string>
+	<string name="poi_elevator_no">Sen elevadoiro</string>
+
+	<string name="poi_technical_monument">Monumento técnico</string>
+
+	<string name="poi_office_camping">Oficina do campamento</string>
+	<string name="poi_model_aerodrome">Aeródromo a escala</string>
+	<string name="poi_guide">Oficina do guía</string>
+	<string name="poi_quango">ONG case autónoma</string>
+	<string name="poi_cooperative">Oficina da cooperativa</string>
+	<string name="poi_office_forestry">Oficina forestal</string>
+	<string name="poi_logistics">Oficina loxística</string>
+	<string name="poi_parish">Oficina parroquial</string>
+	<string name="poi_fuel_91ul">Combustíbel 91UL</string>
+	<string name="poi_fuel_100ll">Combustíbel 100LL</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Combustíbel Jet A-1</string>
+	<string name="poi_fuel_adblue">Combustíbel AdBlue</string>
+
+	<string name="poi_fuel_wood">Combustíbel: madeira</string>
+	<string name="poi_fuel_charcoal">Combustíbel: carbón vexetal</string>
+	<string name="poi_fuel_coal">Combustíbel: carbón</string>
+
+	<string name="poi_street_lamp">Lámpada da rúa</string>
+
+	<string name="poi_escape_lane">Camiño de emerxencia</string>
+
+	<string name="poi_crop_rice">Cultivo: arroz</string>
+	<string name="poi_crop_grass">Cultivo: céspede</string>
+	<string name="poi_crop_corn">Cultivo: millo</string>
+	<string name="poi_crop_cereal">Cultivo: cereais</string>
+	<string name="poi_crop_sugarcane">Cultivo: cana do azucre</string>
+	<string name="poi_crop_wheat">Cultivo: trigo</string>
+	<string name="poi_crop_soy">Cultivo: soia</string>
+	<string name="poi_crop_vegetables">Cultivo: verduras</string>
+	<string name="poi_crop_hop">Cultivo: lúpulo</string>
+	<string name="poi_crop_rape">Cultivo: colza</string>
+	<string name="poi_crop_beet">Cultivo: remolacha</string>
+	<string name="poi_crop_lavender">Cultivo: lavanda</string>
+	<string name="poi_crop_tea">Cultivo: té</string>
+	<string name="poi_crop_poultry">Cultivo: avícola</string>
+	<string name="poi_crop_sunflower">Cultivo: xirasois</string>
+	<string name="poi_crop_raspberry">Cultivo: framboesas</string>
+	<string name="poi_crop_tobacco">Cultivo: tabaco</string>
+	<string name="poi_crop_strawberry">Cultivo: amorodo ou morote</string>
+	<string name="poi_crop_vegetables_flowers">Cultivo: verduras, flores</string>
+	<string name="poi_crop_cassava">Cultivo: mandioca</string>
+	<string name="poi_crop_cranberry">Cultivo: arandos</string>
+	<string name="poi_crop_asparagus">Cultivo: esparragueira</string>
+	<string name="poi_crop_flowers">Cultivo: flores</string>
+
+	<string name="poi_surveillance_indoor">Vixiancia: interior</string>
+	<string name="poi_clothes_women">Muller</string>
+	<string name="poi_clothes_underwear">Roupa interior</string>
+	<string name="poi_clothes_men">Home</string>
+	<string name="poi_clothes_wedding">Vestidos das noivas</string>
+	<string name="poi_clothes_sports">Deportes</string>
+	<string name="poi_clothes_babies">Meniños</string>
+	<string name="poi_clothes_denim">Vaqueiros</string>
+	<string name="poi_clothes_workwear">Vestiario de traballo</string>
+	<string name="poi_clothes_hats">Chapeus ou sombreiros</string>
+	<string name="poi_clothes_fur">Peles</string>
+	<string name="poi_clothes_leather">Coiros</string>
+	<string name="poi_clothes_costumes">Disfraces</string>
+	<string name="poi_clothes_traditional">Tradicional</string>
+	<string name="poi_clothes_suits">Ternos ou traxes</string>
+	<string name="poi_clothes_maternity">Maternidade</string>
+	<string name="poi_clothes_vintage">Antiga</string>
+	<string name="poi_clothes_oversize">Talles grandes</string>
+	<string name="poi_clothes_schoolwear">Escolar</string>
+	<string name="poi_clothes_swimwear">Traxes de baño</string>
+	<string name="poi_clothes_socks">Meias e calcetíns</string>
+	<string name="poi_clothes_shirts">Camisolas</string>
+	<string name="poi_clothes_dance">Baile ou danza</string>
+	<string name="poi_historic_milestone">Fito histórico</string>
+
+	<string name="poi_shoes_children">Nenos</string>
+	<string name="poi_shoes_women">Mulleres</string>
+	<string name="poi_shoes_sport">Deportes</string>
+	<string name="poi_shoes_men">Homes</string>
+	<string name="poi_shoes_orthopedic">Ortopédico</string>
+
+	<string name="poi_historic_manor">Pazo histórico</string>
+	<string name="poi_massage_thai">Tailandés</string>
+	<string name="poi_massage_sexual">Sexual</string>
+	<string name="poi_massage_chinese">Chino</string>
+	<string name="poi_massage_therapeutic">Terapéutico</string>
+
+	<string name="poi_massage_yes">Servizo de masaxes</string>
+	<string name="poi_sauna_yes">Servizo de sauna</string>
+	<string name="poi_solarium_yes">Servizo de solario</string>
+
+	<string name="poi_tents_yes">Permitidas</string>
+	<string name="poi_tents_no">Tendas non permitidas</string>
+	<string name="poi_openfire_yes">Permitido acender lume</string>
+	<string name="poi_openfire_no">Prohibido acender lume</string>
+	<string name="poi_backcountry_no">Non</string>
+	<string name="poi_scout_no">Campamento de exploradores: non</string>
+	<string name="poi_group_only_no">Só grupos: non</string>
+	<string name="poi_washing_machine_no">Lavadora: non</string>
+	<string name="poi_shower_no">Ducha: non</string>
+	<string name="poi_shower_hot">Ducha: quente</string>
+	<string name="poi_shower_cold">Ducha: fría</string>
+	<string name="poi_shower_indoor">Ducha: interior</string>
+	<string name="poi_caravans_no">Caravanas: non</string>
+	<string name="poi_impromptu_no">Improvisado: non</string>
+	<string name="poi_sanitary_dump_station_no">Instalación de refugallos sanitarios: non</string>
+	<string name="poi_power_supply_no">Fonte de enerxía: non</string>
+	<string name="poi_power_supply_cee_17_blue">Fonte de enerxía (enchufe): CEE 17 azul</string>
+	<string name="poi_power_supply_cee_7_4">Fonte de enerxía (enchufe): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Fonte de enerxía (enchufe): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Fonte de enerxía (enchufe): NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Carpas máximas</string>
+	<string name="poi_capacity_caravans">Caravanas máximas</string>
+	<string name="poi_dog_yes">Permitidos cans</string>
+	<string name="poi_dog_no">Prohibidos cans</string>
+
+	<string name="poi_refugee_yes">Servizos para os refuxiados</string>
+	<string name="poi_refugee_no">Refuxiados: non</string>
+
+	<string name="poi_social_facility_group_home">Grupo residencial</string>
+	<string name="poi_social_facility_assisted_living">Vida asistida</string>
+	<string name="poi_social_facility_outreach">Divulgación</string>
+	<string name="poi_social_facility_food_bank">Banco de alimentos</string>
+	<string name="poi_social_facility_shelter">Refuxio</string>
+	<string name="poi_social_facility_ambulatory_care">Asistencia sanitaria</string>
+	<string name="poi_social_facility_workshop">Taller</string>
+	<string name="poi_social_facility_day_care">Asistencia de día</string>
+
+	<string name="poi_social_facility_for_child">Crianzas</string>
+	<string name="poi_social_facility_for_orphan">Orfos</string>
+	<string name="poi_social_facility_for_disabled">Persoas con discapacidade</string>
+	<string name="poi_social_facility_for_mental_health">Persoas con desordes mentais</string>
+	<string name="poi_social_facility_for_juvenile">Xoves</string>
+	<string name="poi_social_facility_for_homeless">Persoas sen lar</string>
+	<string name="poi_social_facility_for_migrant">Migrantes</string>
+	<string name="poi_social_facility_for_drug_addicted">Dependentes ás drogas</string>
+	<string name="poi_social_facility_for_unemployed">Desempregados</string>
+	<string name="poi_social_facility_for_diseased">Doentes</string>
+	<string name="poi_social_facility_for_child_juvenile">Nenos xoves</string>
+
+	<string name="poi_theatre_genre_philharmonic">Filarmónica</string>
+	<string name="poi_theatre_genre_musical">Musical</string>
+	<string name="poi_theatre_genre_drama">Drama</string>
+	<string name="poi_theatre_genre_opera">Ópera</string>
+	<string name="poi_theatre_genre_puppet">Monicreques ou monifates</string>
+	<string name="poi_theatre_genre_comedy">Comedia</string>
+	<string name="poi_theatre_genre_chamber_music">Música de cámara</string>
+	<string name="poi_theatre_genre_marionette">Monicreques ou monifates</string>
+	<string name="poi_theatre_genre_ballet">Balé</string>
+	<string name="poi_theatre_genre_shadow_play">Xogo de sombras</string>
+
+	<string name="poi_bandstand">Orquestra</string>
+	<string name="poi_kiln">Forno</string>
+	<string name="poi_product_brick">Produto: ladrillo</string>
+	<string name="poi_product_quicklime">Produto: cal viva</string>
+	<string name="poi_product_leather">Produto: coiro</string>
+	<string name="poi_product_lime">Produto: cal</string>
+	<string name="poi_product_beer">Produto: cervexa</string>
+	<string name="poi_product_charcoal">Produto: carbón vexetal</string>
+	<string name="poi_product_meat">Produto: carne</string>
+
+	<string name="poi_wheelchair_description">Descrición para usuarios nunha cadeira de rodas</string>
+	<string name="poi_blind_description">Descrición para cegos</string>
+	<string name="poi_deaf_description">Descrición para xordos</string>
+
+	<string name="poi_highway_steps">Escadas</string>
+	<string name="poi_handrail_no">Varanda: non</string>
+	<string name="poi_ramp_no">Rampla: non</string>
+	<string name="poi_ramp_wheelchair_no">Rampla para cadeiras de rodas: non</string>
+	<string name="poi_ramp_stroller_no">Rampla para carriños: non</string>
+	<string name="poi_ramp_luggage_no">Rampla para bagaxes: non</string>
+	<string name="poi_step_count">Cantidade de chanzos</string>
+	<string name="poi_xmas_location">Nadal: localización</string>
+	<string name="poi_xmas_url">Nadal: páxina web</string>
+
+	<string name="poi_cuisine_pizza">Pizzas</string>
+	<string name="poi_cuisine_burger">Hamburguesas</string>
+	<string name="poi_cuisine_kebab">Kebabs</string>
+	<string name="poi_cuisine_doner">Döner kebab (shawarma)</string>
+	<string name="poi_cuisine_chicken">Polos</string>
+	<string name="poi_cuisine_ice_cream">Xeados</string>
+	<string name="poi_cuisine_sushi">Sushis</string>
+	<string name="poi_cuisine_fish_and_chips">Peixes fritidos e patacas fritidas</string>
+	<string name="poi_cuisine_seafood">Mariscos</string>
+	<string name="poi_cuisine_barbecue">Churrasco</string>
+	<string name="poi_cuisine_noodle">Tallaríns</string>
+	<string name="poi_cuisine_donut">Rosquillas</string>
+	<string name="poi_cuisine_ramen">Ramens</string>
+	<string name="poi_cuisine_crepe">Filloas ou creps</string>
+	<string name="poi_cuisine_breakfast">Almorzos</string>
+	<string name="poi_cuisine_beef_bowl">Gyūdon</string>
+	<string name="poi_cuisine_steak">Biestés ou filetes</string>
+	<string name="poi_cuisine_tapas">Tapas</string>
+	<string name="poi_cuisine_gastropub">Gastrobar</string>
+	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_curry">Curri</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank</string>
+	<string name="poi_cuisine_grill">Grella</string>
+	<string name="poi_cuisine_bagel">Bagel</string>
+	<string name="poi_cuisine_diner">Ceas</string>
+	<string name="poi_cuisine_sausage">Salchichas</string>
+	<string name="poi_cuisine_cake">Doces e pasteis</string>
+	<string name="poi_cuisine_pancake">Panquiñas</string>
+	<string name="poi_cuisine_pasta">Pastas</string>
+	<string name="poi_cuisine_fast_food">Comida rápida</string>
+	<string name="poi_cuisine_juice">Zumes</string>
+	<string name="poi_cuisine_soba">Soba</string>
+	<string name="poi_cuisine_fine_dining">Alta cociña</string>
+	<string name="poi_cuisine_tea">Tés</string>
+	<string name="poi_cuisine_tea_shop">Tenda de tés</string>
+	<string name="poi_cuisine_soup">Sopas</string>
+	<string name="poi_cuisine_pie">Tortas</string>
+	<string name="poi_cuisine_hotdog">Hotdogs</string>
+	<string name="poi_cuisine_deli">Delicatessen</string>
+	<string name="poi_cuisine_salad">Ensaladas</string>
+	<string name="poi_cuisine_frozen_yogurt">Iogures xeados</string>
+	<string name="poi_cuisine_fried_food">Comida fritida</string>
+	<string name="poi_cuisine_savory_pancakes">Panquiñas salgadas</string>
+	<string name="poi_cuisine_bistro">Bistró</string>
+	<string name="poi_cuisine_bakery">Panadaría ou tafona</string>
+	<string name="poi_cuisine_couscous">Cuscús</string>
+	<string name="poi_cuisine_fried_chicken">Polo fritido</string>
+	<string name="poi_cuisine_dessert">Sobremesas</string>
+	<string name="poi_cuisine_canteen">Cantina</string>
+	<string name="poi_cuisine_tacos">Tacos</string>
+	<string name="poi_cuisine_piadina">Piadinas</string>
+	<string name="poi_cuisine_falafel">Falafeles</string>
+	<string name="poi_cuisine_smoothie">Smoothies</string>
+	<string name="poi_cuisine_souvlaki">Souvlakis</string>
+	<string name="poi_cuisine_snack">Petiscos</string>
+	<string name="poi_cuisine_yogurt">Iogures</string>
+	<string name="poi_cuisine_gyros">Gyros</string>
+	<string name="poi_cuisine_empanada">Empanadas</string>
+	<string name="poi_cuisine_crepes">Filloas ou creps</string>
+	<string name="poi_cuisine_yakiniku">Yakiniku</string>
+	<string name="poi_cuisine_suki">Sukis</string>
+	<string name="poi_cuisine_udon">Udons</string>
+	<string name="poi_cuisine_brasserie">Brasaría</string>
+	<string name="poi_cuisine_bubble_tea">Té de gurgullas</string>
+	<string name="poi_cuisine_yakitori">Yakitori</string>
+	<string name="poi_cuisine_sagardotegia">Sidraría</string>
+	<string name="poi_cuisine_meat">Carnes</string>
+	<string name="poi_cuisine_wings">Ás</string>
+	<string name="poi_cuisine_waffle">Gofres</string>
+	<string name="poi_cuisine_chocolate">Chocolates</string>
+	<string name="poi_cuisine_wine">Viños</string>
+	<string name="poi_cuisine_potato">Patacas</string>
+	<string name="poi_cuisine_brunch">Almorzo e xantar (brunch)</string>
+	<string name="poi_cuisine_sub">Sándwich submarino</string>
+	<string name="poi_cuisine_pita">Pan de pita</string>
+	<string name="poi_cuisine_fondue">Fundís</string>
+	<string name="poi_cuisine_baguette">Baguetes</string>
+	<string name="poi_cuisine_pastel">Pasteis</string>
+	<string name="poi_cuisine_burrito">Burritos</string>
+	<string name="poi_cuisine_teriyaki">Teriyakis</string>
+	<string name="poi_cuisine_shawarma">Shawarmas</string>
+
+	<string name="poi_cuisine_regional">Rexional</string>
+	<string name="poi_cuisine_italian">Italiana</string>
+	<string name="poi_cuisine_chinese">Chinesa</string>
+	<string name="poi_cuisine_mexican">Mexicana</string>
+	<string name="poi_cuisine_japanese">Xaponesa</string>
+	<string name="poi_cuisine_german">Alemá</string>
+	<string name="poi_cuisine_indian">India</string>
+	<string name="poi_cuisine_american">Americana</string>
+	<string name="poi_cuisine_asian">Asiática</string>
+	<string name="poi_cuisine_french">Francesa</string>
+	<string name="poi_cuisine_greek">Grega</string>
+	<string name="poi_cuisine_thai">Tailandesa</string>
+	<string name="poi_cuisine_international">Internacional</string>
+	<string name="poi_cuisine_turkish">Turca</string>
+	<string name="poi_cuisine_vietnamese">Vietnamita</string>
+	<string name="poi_cuisine_korean">Coreana</string>
+	<string name="poi_cuisine_mediterranean">Mediterránea</string>
+	<string name="poi_cuisine_bavarian">Bavaresa</string>
+	<string name="poi_cuisine_lebanese">Libanesa</string>
+	<string name="poi_cuisine_russian">Rusa</string>
+	<string name="poi_cuisine_filipino">Filipina</string>
+	<string name="poi_cuisine_portuguese">Portuguesa</string>
+	<string name="poi_cuisine_georgian">Xeorxiana</string>
+	<string name="poi_cuisine_polish">Polonesa</string>
+	<string name="poi_cuisine_brazilian">Brasileira</string>
+	<string name="poi_cuisine_arab">Árabe</string>
+	<string name="poi_cuisine_danish">Dinamarquesa</string>
+	<string name="poi_cuisine_indonesian">Indonesa</string>
+	<string name="poi_cuisine_african">Africana</string>
+	<string name="poi_cuisine_caribbean">Caribeña</string>
+	<string name="poi_cuisine_argentinian">Arxentina</string>
+	<string name="poi_cuisine_balkan">Balcanesa</string>
+	<string name="poi_cuisine_peruvian">Peruana</string>
+	<string name="poi_cuisine_croatian">Croata</string>
+	<string name="poi_cuisine_bolivian">Boliviana</string>
+	<string name="poi_cuisine_malagasy">Malgaxe</string>
+	<string name="poi_cuisine_persian">Persa</string>
+	<string name="poi_cuisine_moroccan">Marroquina</string>
+	<string name="poi_cuisine_austrian">Austríaca</string>
+	<string name="poi_cuisine_malaysian">Malaia</string>
+	<string name="poi_cuisine_irish">Irlandesa</string>
+	<string name="poi_cuisine_ethiopian">Etíope</string>
+	<string name="poi_cuisine_hungarian">Maxiar ou húngara</string>
+	<string name="poi_cuisine_lao">Laosiana</string>
+	<string name="poi_cuisine_european">Europea</string>
+	<string name="poi_cuisine_uzbek">Uzbeca</string>
+	<string name="poi_cuisine_czech">Checa</string>
+	<string name="poi_cuisine_cuban">Cubana</string>
+	<string name="poi_cuisine_british">Británica</string>
+	<string name="poi_cuisine_latin_american">Latinoamericana</string>
+	<string name="poi_cuisine_nepalese">Nepalesa</string>
+	<string name="poi_cuisine_mongolian">Mongola</string>
+	<string name="poi_cuisine_middle_eastern">Oriente medio</string>
+	<string name="poi_cuisine_ukrainian">Ucraína</string>
+	<string name="poi_cuisine_afghan">Afgá</string>
+	<string name="poi_cuisine_belgian">Belga</string>
+	<string name="poi_cuisine_basque">Vasca</string>
+	<string name="poi_cuisine_swiss">Helvérica ou suíza</string>
+	<string name="poi_cuisine_cantonese">Cantonesa</string>
+	<string name="poi_cuisine_swedish">Sueca</string>
+	<string name="poi_cuisine_jamaican">Xamaicana</string>
+	<string name="poi_cuisine_armenian">Arménica</string>
+	<string name="poi_cuisine_hawaiian">Hawaiana</string>
+	<string name="poi_cuisine_english">Inglesa</string>
+	<string name="poi_cuisine_pakistani">Paquistaní</string>
+	<string name="poi_cuisine_taiwanese">Taiwanesa</string>
+	<string name="poi_cuisine_tex_mex">Tex-mex</string>
+	<string name="poi_cuisine_dutch">Holandesa</string>
+	<string name="poi_cuisine_syrian">Siria</string>
+	<string name="poi_cuisine_australian">Australiana</string>
+	<string name="poi_cuisine_cajun">Caxún</string>
+	<string name="poi_cuisine_egyptian">Exipcíaca</string>
+	<string name="poi_cuisine_senegalese">Senegalesa</string>
+	<string name="poi_cuisine_jewish">Xudiaca</string>
+	<string name="poi_cuisine_bulgarian">Búlgara</string>
+	<string name="poi_cuisine_tibetan">Tibetana</string>
+
+	<string name="poi_party">Artigos de festas</string>
+	<string name="poi_electrical">Tenda de electricidade</string>
+	<string name="poi_locksmith">Zarralleiro</string>
+	<string name="poi_lighting">Materiais da iluminación</string>
+	<string name="poi_gambling">Sala de apostas</string>
+
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Comecartos</string>
+	<string name="poi_gambling_betting">Apostas</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_e_cigarette">Tenda de cigarros electrónicos</string>
+
+	<string name="poi_locomotive">Locomotora</string>
+
+	<string name="poi_nutrition_supplements">Sumplementos nutricionais</string>
+	<string name="poi_photo_studio">Estudio de fotografía</string>
+
+	<string name="poi_cliff">Cantil</string>
+
+	<string name="poi_animal_keeping">Refuxio de animais</string>
+	<string name="poi_animal_keeping_horse">Refuxio: cabalos</string>
+	<string name="poi_animal_keeping_sheep">Refuxio: ovellas</string>
+	<string name="poi_tower_construction_lattice">Construción: celosía</string>
+	<string name="poi_tower_construction_freestanding">Construción: independente</string>
+	<string name="poi_tower_construction_dish">Construción: parabólica</string>
+	<string name="poi_tower_construction_dome">Construción: cúpula</string>
+	<string name="poi_tower_construction_concealed">Construción: agochada</string>
+
+	<string name="poi_railway_yard">Estación de trens de mercadorías</string>
+
+	<string name="poi_step_condition_even">Condicións dos chanzos: boas</string>
+	<string name="poi_step_condition_uneven">Condicións dos chanzos: malas</string>
+	<string name="poi_step_condition_rough">Condicións dos chanzos: pésimas</string>
+
+	<string name="poi_cairn">Morea de pedras</string>
+
+	<string name="poi_defibrillator">Desfibrilador</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilización: Roma antiga (do 753 a.C. ó 284 d.C.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilización: nurague (do século XVIII a.C. ó II d.C.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilização: etrusca (do século XII ó VI a.C.)</string>
+	<string name="poi_coworking_space">Espazo de traballo conxunto (coworking)</string>
+
+	<string name="poi_charging_station_output">Saída da estación de carrega</string>
+
+	<string name="poi_map_size_site">Tamaño do mapa: lugar</string>
+	<string name="poi_map_size_city">Tamaño do mapa: cidade</string>
+	<string name="poi_map_size_region">Tamaño do mapa: rexión</string>
+
+	<string name="poi_charging_station_filter">Estación de carrega</string>
+
+	<string name="poi_depot">Depósito</string>
+
+	<string name="poi_letter_box">Caixa das postais</string>
+	<string name="poi_post_street">Rúa</string>
+	<string name="poi_post_housenumber">Número da casa</string>
+	<string name="poi_post_flats">Apartamento</string>
+
+	<string name="poi_payment_centre">Centro de pagamentos</string>
+	<string name="poi_money_transfer">Transferencia de cartos</string>
+
+	<string name="poi_ref_post">Código postal</string>
+
+	<string name="poi_climbing_sport_no">Deportiva: non</string>
+	<string name="poi_climbing_boulder_no">Escalada en bloque: non</string>
+	<string name="poi_climbing_toprope_no">Moulinette: non</string>
+	<string name="poi_climbing_trad_no">Tradicional: non</string>
+	<string name="poi_climbing_ice_no">Xeo: non</string>
+	<string name="poi_climbing_mixed_no">Mesturado: non</string>
+	<string name="poi_climbing_deepwater_no">Psicobloc: non</string>
+
+	<string name="poi_climbing_length">Lonxitude da escalada</string>
+	<string name="poi_climbing_length_min">Lonxitude mínima da escalada</string>
+	<string name="poi_climbing_length_max">Lonxitude máxima da escalada</string>
+	<string name="poi_climbing_rock_limestone">Escalada na rocha: pedra calcaria</string>
+	<string name="poi_climbing_rock_granite">Escalada na rocha: granito</string>
+	<string name="poi_climbing_rock_quartzite">Escalada na rocha: cuarcita</string>
+	<string name="poi_climbing_rock_gneiss">Escalada na rocha: gneis</string>
+	<string name="poi_climbing_rock_porphyry">Escalada na rocha: pórfiro</string>
+	<string name="poi_climbing_quality_solid">Escalada na rocha: sólido</string>
+	<string name="poi_climbing_quality_fragile">Calidade da escalada: feble</string>
+	<string name="poi_climbing_bolted_no">Ancoraxes fixas: non</string>
+	<string name="poi_climbing_orientation_n">Orientación da parede: N</string>
+	<string name="poi_climbing_orientation_ne">Orientación da parede: NL</string>
+	<string name="poi_climbing_orientation_e">Orientación da parede: L</string>
+	<string name="poi_climbing_orientation_se">Orientación da parede: SL</string>
+	<string name="poi_climbing_orientation_s">Orientación da parede: S</string>
+	<string name="poi_climbing_orientation_sw">Orientación da parede: SO</string>
+	<string name="poi_climbing_orientation_w">Orientación da parede: O</string>
+	<string name="poi_climbing_orientation_nw">Orientación da parede: NO</string>
+	<string name="poi_climbing_summit_log_no">Rexistro da escalada no cumio: non</string>
+	<string name="poi_climbing_routes">Roteiros de escalada</string>
+
+	<string name="poi_circumference">Circunferencia</string>
+	<string name="poi_diameter_crown">Diámetro da coroa</string>
+
+	<string name="poi_frozen_food">Comida conxelada</string>
+
+	<string name="poi_agrarian">Tenda agrícola</string>
+
+	<string name="poi_shop_fireplace">Tenda de chemineas e lareiras</string>
+
+	<string name="poi_shop_boat">Tenda de embarcacións</string>
+
+	<string name="poi_cannabis">Tenda de cánnabis</string>
+
+	<string name="poi_socket_cee_blue_yes">CEE azul</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE vermella 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE vermella 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE vermella 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE vermella 125A</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla estándar</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_socket_chademo_output_high">Alta</string>
+	<string name="poi_socket_chademo_output_medium">Media</string>
+	<string name="poi_socket_chademo_output_low">Baixa</string>
+	<string name="poi_socket_type2_output_high">Alta</string>
+	<string name="poi_socket_type2_output_medium">Media</string>
+	<string name="poi_socket_type2_output_low">Baixa</string>
+	<string name="poi_socket_type2_combo_output_high">Alta</string>
+	<string name="poi_socket_type2_combo_output_medium">Media</string>
+	<string name="poi_socket_type2_combo_output_low">Baixa</string>
+	<string name="poi_socket_type3_output_high">Alta</string>
+	<string name="poi_socket_type3_output_medium">Media</string>
+	<string name="poi_socket_type3_output_low">Baixa</string>
+	<string name="poi_socket_cee_blue_output_high">Alta</string>
+	<string name="poi_socket_cee_blue_output_medium">Media</string>
+	<string name="poi_socket_cee_blue_output_low">Baixa</string>
+	<string name="poi_socket_schuko_output_high">Alta</string>
+	<string name="poi_socket_schuko_output_medium">Media</string>
+	<string name="poi_socket_schuko_output_low">Baixa</string>
+
+	<string name="poi_flooring">Tenda de chans</string>
+	<string name="poi_pottery">Oleiro</string>
+
+	<string name="poi_whitewater_rapid_name">Nome dos rápidos do río</string>
+
+	<string name="poi_outpost">Punto da entrega da tenda</string>
+
+	<string name="poi_water_utility">Ofinina do servizo das augas</string>
+
+	<string name="poi_adult_gaming_centre">Centro de xogos para adultos</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Teller mecánico</string>
+	<string name="poi_service_vehicle_oil_change_yes">Troco do aceite</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Venda de automóbiles usados</string>
+	<string name="poi_service_vehicle_brakes_yes">Freos</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Venda de automóbiles novos</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnósticos</string>
+	<string name="poi_service_vehicle_car_parts_yes">Pezas dos automóbiles</string>
+	<string name="poi_service_vehicle_batteries_yes">Baterías</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Ar acondicionado</string>
+	<string name="poi_service_vehicle_body_repair_yes">Arranxo da carrozaría</string>
+	<string name="poi_service_vehicle_electrical_yes">Eléctrico</string>
+	<string name="poi_service_vehicle_wheels_yes">Rodas</string>
+	<string name="poi_service_vehicle_glass_yes">Vidro</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Taller mecánico para camións</string>
+	<string name="poi_service_vehicle_muffler_yes">Silenciador</string>
+	<string name="poi_service_vehicle_alignment_yes">Aliñamento</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Arranxo da transmisión</string>
+	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_insurance_yes">Seguro</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneumáticos</string>
+
+	<string name="poi_aerialway_zip_line">Tirolesa</string>
+
+	<string name="poi_climbing_adventure">Aventura da escalada</string>
+
+	<string name="poi_via_ferrata">Vía ferrata</string>
+	<string name="poi_cable_number">Número do cabo</string>
+	<string name="poi_via_ferrata_scale">Dificuldade</string>
+
+	<string name="poi_glacier_type_icecap">Capa de xeo</string>
+	<string name="poi_glacier_type_icefield">Campo de xeo</string>
+	<string name="poi_glacier_type_plateau">Chaira</string>
+	<string name="poi_glacier_type_valley">Val</string>
+	<string name="poi_glacier_type_outlet">Saída</string>
+	<string name="poi_glacier_type_tidewater">Costeiro</string>
+	<string name="poi_glacier_type_mountain">Montaña</string>
+	<string name="poi_glacier_type_hanging">Pendurado</string>
+	<string name="poi_glacier_type_icefall">Fervenza de xeo</string>
+	<string name="poi_glacier_type_rock">Rocha</string>
+	<string name="poi_glacier_type_shelf">Plataforma</string>
+	<string name="poi_glacier_type_remnant">Remanencia</string>
+	<string name="poi_glacier_type_ice_tongue">Lingua de xeo</string>
+
+	<string name="poi_glacier_ele_top">Punto máis alto</string>
+	<string name="poi_glacier_ele_bottom">Punto máis baixo</string>
+	<string name="poi_glacier_slope">Pendente media</string>
+
+	<string name="poi_checkpoint_hiking">Posto de control do sendeirismo</string>
+	<string name="poi_checkpoint_type_stamp">Posto de selado</string>
+	<string name="poi_checkpoint_type_code">Código</string>
+	<string name="poi_checkpoint_type_notebook">Caderno</string>
+	<string name="poi_checkpoint_type_needler">Perforadora</string>
+	<string name="poi_checkpoint_type_electronic">Electrónico</string>
+	<string name="poi_course">Circuíto</string>
+
+	<string name="poi_rock">Rocha</string>
+
+	<string name="poi_appliance">Tenda de electrodomésticos</string>
+
+	<string name="poi_outcrop">Afloramento</string>
+
+	<string name="poi_payment_contactless_yes">Sen contacto</string>
+	<string name="poi_hazard_nuclear">Risco nuclear</string>
+	<string name="poi_hazard_erosion">Risco de erosión</string>
+	<string name="poi_hazard_avalanche">Risco de alude</string>
+	<string name="poi_hazard_slippery_road">Estrada esvaradía</string>
+	<string name="poi_hazard_flood">Risco de inundación</string>
+	<string name="poi_hazard_minefield">Campo de minas</string>
+
+	<string name="poi_ruins">Ruínas</string>
+
+	<string name="poi_license_classes">Clases de licenza</string>
+
+	<string name="poi_hill">Outeiro</string>
+
+	<string name="poi_shoe_repair">Arranxo do calzado</string>
+
+	<string name="poi_bulk_purchase_only">Só</string>
+
+	<string name="poi_pipeline_substation">Subestación de tubaxes</string>
+	<string name="poi_substation_transmission">Transmisión</string>
+	<string name="poi_substation_distribution">Distribución</string>
+	<string name="poi_substation_minor_distribution">Distribución menor</string>
+	<string name="poi_substation_industrial">Industrial</string>
+	<string name="poi_substation_transition">Transición</string>
+	<string name="poi_substation_traction">Tracción</string>
+	<string name="poi_substation_converter">Convertedora</string>
+	<string name="poi_substation_compensation">Compensación</string>
+
+	<string name="poi_substation_compression">Compresión</string>
+	<string name="poi_substation_measurement">Medición</string>
+	<string name="poi_substation_valve">Válvula</string>
+	<string name="poi_substation_valve_group">Conxunto de válvulas</string>
+	<string name="poi_substation_inspection_gauge">Calibre de inspeción</string>
+	<string name="poi_substation_field_gathering">Recolleita de campo</string>
+
+<string name="poi_historic_civilization_prehistoric">Civilización: prehistórica</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilización: grega antiga</string>
+	<string name="poi_historic_civilization_roman">Civilización: romana</string>
+	<string name="poi_historic_civilization_byzantine">Civilización: bizantina (do 285 d.C. ó 1453 d.C.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilización: exipcia antiga (até o 332 a.C.)</string>
+	<string name="poi_historic_civilization_celtic">Civilización: celta</string>
+	<string name="poi_historic_civilization_western_roman">Civilización: romana occidental (do 285 d.C. ó 476 d.C.)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilización: micénica</string>
+	<string name="poi_historic_civilization_dacian">Civilización: dacios</string>
+	<string name="poi_historic_civilization_hernici">Civilización: hérnicos</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilización: grego-exipcia (do 332 a.C. ó 30 a.C.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilización: romana e bizantino-exipcia</string>
+	<string name="poi_historic_civilization_helladic">Civilización: heládica</string>
+	<string name="poi_historic_civilization_cycladic">Civilización: cicládica</string>
+	<string name="poi_historic_civilization_minoan">Civilización: cretense ou minoica</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilización: tiahuanaca</string>
+
+	<string name="poi_animal_training">Adestramento de animais</string>
+	<string name="poi_animal_training_dog">Cans</string>
+	<string name="poi_animal_training_horse">Cabalos</string>
+
+	<string name="poi_animal_yes">Permitidos animais</string>
+	<string name="poi_animal_no">Prohibidos animais</string>
+
+	<string name="poi_historic_period_nuragic">Período histórico: nuráxico</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Período histórico: idade da pedra/bronce (indeterminado)</string>
+	<string name="poi_historic_period_bronze_age">Período histórico: idade do bronce</string>
+	<string name="poi_historic_period_principate">Período histórico: principado (do 27 a.C. ó 284 d.C.)</string>
+	<string name="poi_historic_period_classical_greece">Período histórico: Grecia clásica (do século V ó IV a.C.)</string>
+	<string name="poi_historic_period_archaic_greece">Período histórico: Grecia arcaica</string>
+	<string name="poi_historic_period_iron_age">Período histórico: idade do ferro</string>
+	<string name="poi_historic_period_hellenistic_greece">Período histórico: Grecia helenística</string>
+	<string name="poi_historic_period_new_kingdom">Período histórico: novo reinado (do 1550 ó 1069 a.C.)</string>
+	<string name="poi_historic_period_middle_kingdom">Período histórico: medio reinado (do 2055 ó 1650 a.C.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Período histórico: Exipto pre-dinástico</string>
+	<string name="poi_historic_period_early_dynastic_period">Período histórico: período dinástico cedo (do 3100 ó 2686 a.C.)</string>
+	<string name="poi_historic_period_old_kingdom">Período histórico: antigo reinado (do 2686 ó 2181 a.C.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Período histórico: primeiro período intermedio (do 2181 ó 2055 a.C.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Período histórico: segundo período intermedio (do 1650 ó 1550 a.C.)</string>
+	<string name="poi_historic_period_third_intermediate_period">Período histórico: terceiro período intermedio (do 1069 ó 664 a.C.)</string>
+	<string name="poi_historic_period_first_persian_period">Período histórico: primeiro período persa</string>
+	<string name="poi_historic_period_late_period">Período histórico: derradeiro período (do 664 ó 332 a.C.)</string>
+	<string name="poi_historic_period_second_persian_period">Período histórico: segundo período persa</string>
+	<string name="poi_historic_period_alexander_the_great">Período histórico: Alexandre o Grande</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Período histórico: Exipto ptolemaico (do 305 ó 30 a.C.)</string>
+	<string name="poi_historic_period_christian_egypt">Período histórico: Exipto cristián</string>
+	<string name="poi_historic_period_byzantine_egypt">Período histórico: Exipto bizantino (do 30 a.C. ó 641 d.C.)</string>
+	<string name="poi_historic_period_persian_occupation">Período histórico: ocupación persa</string>
+	<string name="poi_historic_period_greek_dark_ages">Período histórico: Idade escura grega (do 1100 ó 800 a.C.)</string>
+	<string name="poi_historic_period_roman_greece">Período histórico: Grecia romana (do 146 a.C. ó 330 d.C.)</string>
+	<string name="poi_historic_period_roman_kingdom">Período histórico: Reinado romano (do 753 ó 509 a.C.)</string>
+	<string name="poi_historic_period_dominate">Período histórico: dominato (do 285 ó 476 d.C.)</string>
+	<string name="poi_historic_period_villager">Período histórico: aldeáns (época I, II, do 1580 a.C. ó 133 d.C.)</string>
+	<string name="poi_historic_period_urban">Período histórico: urbá (época III do 133 ó 374 d.C.)</string>
+	<string name="poi_historic_period_classical">Período histórico: clásica (época IV do 374 ó 900 d.C.)</string>
+	<string name="poi_historic_stone">Pedra histórica</string>
+	<string name="poi_site_type_tumulus">Catafalco</string>
+	<string name="poi_site_type_fortification">Fortificación</string>
+	<string name="poi_site_type_settlement">Asentamento</string>
+	<string name="poi_site_type_city">Cidade</string>
+	<string name="poi_site_type_hut_circle">Círculo de cabana</string>
+	<string name="poi_site_type_necropolis">Necrópole</string>
+	<string name="poi_site_type_petroglyph">Petróglifo</string>
+	<string name="poi_site_type_earthwork">Obra na terra</string>
+	<string name="poi_pa">Pā (asentamento fortificado maorí)</string>
+
+	<string name="poi_historic_farm">Granxa histórica</string>
+	<string name="poi_historic_railway_station">Estación de trens histórica</string>
+
+	<string name="poi_historic_threshing_floor">Era histórica</string>
+	<string name="poi_historic_gallows">Forcada histórica</string>
+	<string name="poi_historic_railway">Vía ferroviaria histórica</string>
+
+	<string name="poi_sculptor">Escultor</string>
+
+	<string name="poi_cross">Cruz</string>
+	<string name="poi_prison_camp">Antigo campo de prisioneiros</string>
+	<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bathing_no">Baño: non</string>
+
+	<string name="poi_boat_storage">Almacenaxe das embarcacións</string>
+
+	<string name="poi_bridge_ref">Referencia da ponte</string>
+	<string name="poi_tunnel_ref">Referencia do túnel</string>
+
+	<string name="poi_ref">Referencia</string>
+
+	<string name="poi_cargo_passengers">Pasaxeiros</string>
+	<string name="poi_cargo_vehicle">Vehículos</string>
+	<string name="poi_cargo_container">Contedores</string>
+	<string name="poi_cargo_hgv">Vehículos pesados</string>
+
+	<string name="poi_fitness_station">Ximnasio ó ar libre</string>
+
+	<string name="poi_hackerspace">Xuntanza de hackers</string>
+
+
+	<string name="poi_craft_electronics_repair">Arranxo de electrónicos</string>
+	<string name="poi_fireworks">Tenda de fogos artificiais</string>
+
+	<string name="poi_aerialway_length">Lonxitude</string>
+
+	<string name="poi_health_specialty_general_yes">Médico xeral</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmoloxía</string>
+	<string name="poi_health_specialty_gynaecology_yes">Xinecoloxía</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otorrinolaringoloxía</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatría</string>
+	<string name="poi_health_specialty_paediatrics_no">Especialidade en saúde: sen pediatría</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatoloxía</string>
+	<string name="poi_health_specialty_urology_yes">Uroloxía</string>
+	<string name="poi_health_specialty_surgery_yes">Cirurxía xeral</string>
+	<string name="poi_health_specialty_radiology_yes">Radioloxía</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psiquiatría</string>
+	<string name="poi_health_specialty_neurology_yes">Neuroloxía</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatovenereoloxía</string>
+	<string name="poi_health_specialty_cardiology_yes">Cardioloxía</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatoloxía</string>
+	<string name="poi_health_specialty_biology_yes">Bioloxía clínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatía</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anestesioloxía</string>
+	<string name="poi_health_specialty_pulmonology_yes">Pneumoloxía</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Cirurxía dental, oral e maxilofacial</string>
+	<string name="poi_health_specialty_maternity_yes">Maternidade</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Cirurxía plástica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodoncia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Psicoterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Bioquímica</string>
+	<string name="poi_health_specialty_occupational_yes">Terapia ocupacional</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Psiquiatría infantil</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Cirurxía maxilofacial</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Radioloxía diagnóstica</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloxía</string>
+	<string name="poi_health_specialty_dentistry_yes">Odontoloxía</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefroloxía (doenzas renais)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurocirurxía</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatría</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endocrinoloxía</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Medicina nuclear</string>
+	<string name="poi_health_specialty_pathology_yes">Anatomía patolóxica</string>
+	<string name="poi_health_specialty_oncology_yes">Oncoloxía</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Medicina tropical</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Especialidade en saúde: sen medicina tropical</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Obstetricia (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Especialidade en saúde: sen obstetricia (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Obstetricia (prenatal</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Especialidade en saúde: sen obstetricia (prenatal)</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Pediatría social</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Especialidade en saúde: sen pediatría social</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Obstetricia (cesárea)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialidade en saúde: sen obstetricia (cesárea)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Medicina toxicolóxica</string>
+	<string name="poi_health_specialty_optometry_yes">Optometría</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Patoloxía clínica</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Terapia da fala</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Terapia manual</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Medicina deportiva</string>
+	<string name="poi_health_specialty_podology_yes">Podoloxía</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatría adulta</string>
+	<string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopatía</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Medicina chinesa tradicional</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Herbolaria</string>
+	<string name="poi_health_specialty_chiropractic_yes">Quiropraxia</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopatía</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Psicoloxía profunda</string>
+	<string name="poi_health_specialty_behavior_yes">Comportamento</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medicina paliativa</string>
+
+	<string name="poi_fitness_centre">Ximnasio</string>
+	<string name="poi_fitness">Exercicio físico</string>
+
+	<string name="poi_billiards">Billar</string>
+
+	<string name="poi_microwave_oven_no">Forno microondas: non</string>
+	<string name="poi_water_heater_no">Quentador de auga: non</string>
+
+	<string name="poi_parking_garage_boxes">Cocheira comunitaria individual</string>
+	<string name="poi_parking_carports">Cocheira aberta</string>
+
+	<string name="poi_dojo">Dojo</string>
+
+	<string name="poi_gaelic_games">Xogos gaélicos</string>
+	<string name="poi_running">Correr</string>
+	<string name="poi_netball">Netball</string>
+	<string name="poi_karting">Karting</string>
+	<string name="poi_badminton">Bádminton</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_disc_golf">Disco golf</string>
+	<string name="poi_futsal">Fútbol sala</string>
+	<string name="poi_rc_car">Automóbil de carreiras teledirixido</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_shuffleboard">Texo ou shuffleboard</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_boxing">Boxeo</string>
+
+	<string name="poi_official_name">Nome oficial</string>
+
+	<string name="poi_dolphin">Golfiño</string>
+
+	<string name="poi_forestry_compartment">Sinal: compartimento forestal</string>
+	<string name="poi_forestry_allotment">Sinal: terreo forestal</string>
+	<string name="poi_inscription_n">Inscrición: N</string>
+	<string name="poi_inscription_nw">Inscrición: NO</string>
+	<string name="poi_inscription_w">Inscrición: O</string>
+	<string name="poi_inscription_sw">Inscrición: SO</string>
+	<string name="poi_inscription_s">Inscrición: S</string>
+	<string name="poi_inscription_se">Inscrición: SE</string>
+	<string name="poi_inscription_e">Inscrición: E</string>
+	<string name="poi_inscription_ne">Inscrición: NE</string>
+
+	<string name="poi_construction_yes">Baixo construción</string>
+	<string name="poi_firepit">Cacharela</string>
+	<string name="poi_street_cabinet">Distribuidor na rúa</string>
+
+	<string name="poi_fair_trade_no">Comercio xusto: non</string>
+	<string name="poi_fair_trade_only">Só produtos de comercio xusto</string>
+
+
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_protected_area">Área protexida</string>
+	<string name="poi_protection_title">Nome da protección</string>
+	<string name="poi_protection_object_historic">Protección do obxecto: histórico</string>
+	<string name="poi_protection_object_nature">Protección do obxecto: natureza</string>
+	<string name="poi_protection_object_habitat">Protección do obxecto: habitat</string>
+	<string name="poi_protection_object_water">Protección do obxecto: auga</string>
+
+	<string name="poi_nuclear_explosion_country">Estourido: país</string>
+	<string name="poi_nuclear_explosion_site">Estourido: lugar</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Nome do disparo (en)</string>
+	<string name="poi_nuclear_explosion_series">Serie de estouridos</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Obxectivo do estourido: relacionado con armas nucleares</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Obxectivo do estourido: efectos das armas</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Obxectivo do estourido: experimento de seguridade</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Obxectivo do estourido: pescudar para aplicacións científicas</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Obxectivo do estourido: ciencia sinxela</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Obxectivo do estourido: aplicación industrial, excavación de cavidade</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Obxectivo do estourido: aplicación industrial, sondaxe sísmica</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Obxectivo do estourido: aplicación industrial, estimulación petroleira</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Obxectivo do estourido: aplicación industrial</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Obxectivo do estourido: aplicación industrial, movemento da terra</string>
+	<string name="poi_nuclear_explosion_time_utc">Hora do estourido (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Rendemento do estourido</string>
+	<string name="poi_nuclear_explosion_hole">Buraco do estourido</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Altitude do estourido</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitude da zona cero</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Magnitude das ondas de propagación</string>
+	<string name="poi_voltage">Voltaxe</string>
+	<string name="poi_diplomatic_consulate_general">Consulado xeral</string>
+	<string name="poi_diplomatic_honorary_consulate">Consulado honorario</string>
+	<string name="poi_diplomatic_permanent_mission">Misión permanente</string>
+	<string name="poi_diplomatic_delegation">Delegación</string>
+	<string name="poi_diplomatic_ambassadors_residence">Residencia do embaixador</string>
+	<string name="poi_diplomatic_high_commission">Alto comisionado</string>
+
+	<string name="poi_fire_operator">Operador de incendios</string>
+
+	<string name="poi_water_tank">Depósito de auga</string>
+
+	<string name="poi_length">Lonxitude</string>
+
+	<string name="poi_wiki_link">Wikipedia</string>
+
+	<string name="poi_xmas">Nadal</string>
+	<string name="poi_xmas_event">Acontecemento do Nadal</string>
+	<string name="poi_xmas_market">Mercado de Nadal</string>
+	<string name="poi_xmas_pyramid">Pirámide do Nadal</string>
+	<string name="poi_xmas_shop">Tenda de Nadal</string>
+	<string name="poi_xmas_shop_christmas_tree">Tenda de árbores</string>
+	<string name="poi_xmas_tree">Árbore de Nadal</string>
+	<string name="poi_xmas_day_date">Nadal: período para o acontecemento</string>
+	<string name="poi_xmas_note">Nadal: nota</string>
+	<string name="poi_xmas_opening_hours">Nadal: horario de apertura</string>
+	<string name="poi_drink_wine_retail">Viño: venda</string>
+	<string name="poi_drink_wine_served">Viño: servido</string>
+
+	<string name="poi_energy_supplier">Oficina de fornecedor da enerxía</string>
+
+	<string name="poi_electronics_repair_computer">Arranxo de electrónicos: computadores</string>
+	<string name="poi_electronics_repair_appliance">Arranxo de electrónicos: electrodomésticos</string>
+	<string name="poi_electronics_repair_phone">Arranxo de electrónicos: teléfonos móbiles</string>
+	<string name="poi_electronics_repair_tv">Arranxo de electrónicos: televisores</string>
+
+	<string name="poi_resort_kids_camp">Campamento de nenos</string>
+	<string name="poi_language_school">Escola de idiomas</string>
+
+	<string name="poi_life_ring">Aro salvavidas</string>
+
+	<string name="poi_zoo_petting_zoo">Zoolóxico interactivo</string>
+	<string name="poi_zoo_wildlife_park">Reserva da natureza</string>
+	<string name="poi_zoo_enclosure">Recinto</string>
+	<string name="poi_zoo_safari_park">Parque safari</string>
+	<string name="poi_zoo_birds">Paxaros</string>
+	<string name="poi_zoo_aviary">Paxareira</string>
+	<string name="poi_zoo_falconry">Falcoaría</string>
+	<string name="poi_zoo_reptile">Réptís</string>
+
+	<string name="poi_motorcycle_sales_yes">Venda</string>
+	<string name="poi_motorcycle_sales_no">Venda: non</string>
+	<string name="poi_motorcycle_sales_used">Venda: usado</string>
+	<string name="poi_motorcycle_rental_yes">Aluguer</string>
+	<string name="poi_motorcycle_rental_no">Aluguer: non</string>
+	<string name="poi_motorcycle_repair_yes">Arranxo</string>
+	<string name="poi_motorcycle_repair_no">Arranxo: non</string>
+	<string name="poi_motorcycle_parts_yes">Pezas ou repostos</string>
+	<string name="poi_motorcycle_parts_no">Repostos: non</string>
+	<string name="poi_motorcycle_tyres_yes">Pneumáticos</string>
+	<string name="poi_motorcycle_tyres_no">Pneumáticos: non</string>
+	<string name="poi_motorcycle_clothes_yes">Roupa de moto</string>
+	<string name="poi_motorcycle_clothes_no">Roupa de moto: non</string>
+	<string name="poi_motorcycle_type_scooter">Scooter</string>
+	<string name="poi_motorcycle_type_sportbike">Deportiva</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Todo terreo</string>
+	<string name="poi_motorcycle_type_dualsport">Duplo propósito</string>
+	<string name="poi_motorcycle_type_standard">Estándar</string>
+
+	<string name="poi_generator_output_electricity_no">Saída (electricidade): non</string>
+
+	<string name="poi_owner">Dono</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_no">Adopción: non</string>
+	<string name="poi_animal_shelter_purpose_release_no">Rehabilitación e liberación: non</string>
+
+	<string name="poi_spaceport">Porto espacial</string>
+
+	<string name="poi_direction_n">Dirección: norte</string>
+	<string name="poi_direction_nne">Dirección: norte-nordeste</string>
+	<string name="poi_direction_ne">Dirección: nordeste</string>
+	<string name="poi_direction_ene">Dirección: leste-nordeste</string>
+	<string name="poi_direction_e">Dirección: leste</string>
+	<string name="poi_direction_ese">Dirección: leste-sureste</string>
+	<string name="poi_direction_se">Dirección: sureste</string>
+	<string name="poi_direction_sse">Dirección: sur-sureste</string>
+	<string name="poi_direction_s">Dirección: sur</string>
+	<string name="poi_direction_ssw">Dirección: sur-suroeste</string>
+	<string name="poi_direction_sw">Dirección: suroeste</string>
+	<string name="poi_direction_wsw">Dirección: oeste-suroeste</string>
+	<string name="poi_direction_w">Dirección: oeste</string>
+	<string name="poi_direction_wnw">Dirección: oeste-noroeste</string>
+	<string name="poi_direction_nw">Dirección: noroeste</string>
+	<string name="poi_direction_nnw">Dirección: norte-noroeste</string>
+	<string name="poi_direction_forward">Dirección: no sentido da vía</string>
+	<string name="poi_direction_backward">Dirección: no sentido contrario da vía</string>
+	<string name="poi_direction_clockwise">Dirección: cara a dereita (segundo as agullas do reloxo)</string>
+	<string name="poi_direction_anticlockwise">Dirección: cara a esquerda (contrario ás agullas do reloxo)</string>
+	<string name="poi_direction_up">Dirección: cara enriba</string>
+	<string name="poi_direction_down">Dirección: cara embaixo</string>
+	<string name="poi_direction_entrance">Dirección: entrada</string>
+	<string name="poi_direction_exit">Dirección: saída</string>
+	<string name="poi_direction_all">Dirección: todas</string>
+
+	<string name="poi_winter_room_no">Refuxio do inverno: non</string>
+	<string name="poi_reservation_required">Reserva: requirida</string>
+	<string name="poi_reservation_recommended">Reserva: recomendada</string>
+	<string name="poi_reservation_no">Reserva: non</string>
+	<string name="poi_reservation_members_only">Reserva: só membros</string>
+
+	<string name="poi_beds">Leitos</string>
+
+	<string name="poi_boat_rental">Aluguer de embarcacións</string>
+	<string name="poi_boat_motorboat_rental_no">Embarcacións a motor: non</string>
+	<string name="poi_boat_houseboat_rental_no">Casas flotantes: non</string>
+	<string name="poi_boat_pedalboat_rental_no">Embarcacións a pedais: non</string>
+	<string name="poi_boat_jetski_rental_no">Motos de auga: non</string>
+	<string name="poi_boat_sailboat_rental_no">Veleiros: non</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Botes: non</string>
+	<string name="poi_boat_kayak_rental_rental_no">Caiaques: non</string>
+	<string name="poi_boat_canoe_rental_rental_no">Canoas: non</string>
+
+	<string name="poi_government_archive">Arquivo</string>
+	<string name="poi_government_ministry">Ministerio</string>
+	<string name="poi_government_social_security">Seguridade social</string>
+	<string name="poi_government_social_services">Servizos sociais</string>
+	<string name="poi_government_treasury">Facenda pública</string>
+	<string name="poi_vhf">Canle VHF</string>
+
+	<string name="poi_gorge">Desfiladeiro</string>
+	<string name="poi_couloir">Cavorco</string>
+	<string name="poi_mountain_area">Área montañosa</string>
+
+	<string name="poi_surface_clay">Arxila</string>
+	<string name="poi_surface_tartan">Tartán</string>
+	<string name="poi_surface_artificial_turf">Céspede artificial</string>
+	<string name="poi_surface_decoturf">Decoturf</string>
+	<string name="poi_surface_metal_grid">Grella metálica</string>
+
+	<string name="poi_location_underwater">Localización: mergullado</string>
+	<string name="poi_location_overground">Localización: na superficie</string>
+	<string name="poi_location_overhead">Localización: suspendido</string>
+	<string name="poi_location_roof">Localización: teito</string>
+	<string name="poi_location_rooftop">Localización: tellado</string>
+	<string name="poi_location_indoor">Localización: interior</string>
+	<string name="poi_location_platform">Localización: plataforma</string>
+	<string name="poi_location_kiosk">Localización: quiosque</string>
+	<string name="poi_location_bridge">Localización: ponte</string>
+	<string name="poi_location_wall">Localización: muro</string>
+	<string name="poi_location_entrance">Localización: entrada</string>
+
+	<string name="poi_visibility_house">Localización: casa</string>
+	<string name="poi_visibility_street">Localización: rúa</string>
+	<string name="poi_visibility_area">Localización: área</string>
+
+	<string name="poi_operational_status_open">Aberto</string>
+	<string name="poi_operational_status_closed">Pechado</string>
+	<string name="poi_operational_status_restricted">Restrinxido</string>
+	<string name="poi_operational_status_broken">Rachado</string>
+	<string name="poi_operational_status_needs_maintenance">Precisa dun mantemento</string>
+
+	<string name="poi_water_place_durability_durable">Durabilidade da fonte de auga: duradeira</string>
+	<string name="poi_water_purification_none">Ningunha</string>
+	<string name="poi_water_purification_chlorine">Cloro</string>
+	<string name="poi_water_purification_reverse_osmosis">Osmose inversa</string>
+	<string name="poi_water_purification_aquatabs">Pastillas</string>
+
+	<string name="poi_water_supply_water_well">Pozo de auga</string>
+	<string name="poi_water_supply_pipeline">Tubaxe</string>
+	<string name="poi_water_supply_running_water">Auga corrente</string>
+	<string name="poi_water_supply_pump">Bomba</string>
+	<string name="poi_water_supply_borehole">Pozo artesán</string>
+	<string name="poi_water_supply_water_trucking">Camión de auga</string>
+	<string name="poi_water_supply_water_tank">Tanque de auga</string>
+	<string name="poi_water_supply_bottled_water">Auga embotellada</string>
+
+	<string name="poi_water_place_access_community">Comunidade</string>
+	<string name="poi_water_place_access_family">Familia</string>
+	<string name="poi_water_place_access_multifamilies">Múltiples familias</string>
+
+	<string name="poi_socket_cee_blue">Enchufe: CEE azul</string>
+	<string name="poi_socket_cee_blue_current">Enchufe: CEE azul: corrente</string>
+	<string name="poi_socket_cee_blue_output">Enchufe: CEE azul: saída</string>
+	<string name="poi_socket_cee_red_16a">Enchufe: CEE vermello 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Enchufe: CEE vermello 16A: corrente</string>
+	<string name="poi_socket_cee_red_16a_output">Enchufe: CEE vermello 16A: saída</string>
+	<string name="poi_socket_cee_red_32a">Enchufe: CEE vermello 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Enchufe: CEE vermello 32A: corrente</string>
+	<string name="poi_socket_cee_red_32a_output">Enchufe: CEE vermello 32A: saída</string>
+	<string name="poi_socket_cee_red_64a">Enchufe: CEE vermello 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Enchufe: CEE vermello 64A: corrente</string>
+	<string name="poi_socket_cee_red_64a_output">Enchufe: CEE vermello 64A: saída</string>
+	<string name="poi_socket_cee_red_125a">Enchufe: CEE vermello 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Enchufe: CEE vermello 125A: corrente</string>
+	<string name="poi_socket_cee_red_125a_output">Enchufe: CEE vermello 125A: saída</string>
+	<string name="poi_socket_chademo">Enchufe: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Enchufe: CHAdeMO: corrente</string>
+	<string name="poi_socket_chademo_output">Enchufe: CHAdeMO: saída</string>
+	<string name="poi_socket_tesla_standard">Enchufe: Tesla estándar</string>
+	<string name="poi_socket_tesla_standard_current">Enchufe: Tesla estándar: corrente</string>
+	<string name="poi_socket_tesla_standard_output">Enchufe: Tesla estándar: saída</string>
+	<string name="poi_socket_tesla_supercharger">Enchufe: Supercargador Tesla</string>
+	<string name="poi_socket_tesla_supercharger_current">Enchufe: Supercargador Tesla: corrente</string>
+	<string name="poi_socket_tesla_supercharger_output">Enchufe: Supercargador Tesla: saída</string>
+	<string name="poi_socket_tesla_roadster">Enchufe: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Enchufe: Tesla Roadster: corrente</string>
+	<string name="poi_socket_tesla_roadster_output">Enchufe: Tesla Roadster: saída</string>
+	<string name="poi_socket_nema_5_15">Enchufe: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Enchufe: NEMA 5-15R: corrente</string>
+	<string name="poi_socket_nema_5_15_output">Enchufe: NEMA 5-15R: saída</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Estourido de salva: primeira detonación de proba</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Estourido de salva: segundo ou seguinte detonación de proba</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Estourido: diámetro do buraco</string>
+	<string name="poi_nuclear_explosion_warhead">Estourido: oxiva</string>
+	<string name="poi_nuclear_explosion_device">Estourido: dispositivo</string>
+
+	<string name="poi_plant_nursery">Viveiro de plantas</string>
+
+	<string name="poi_compressed_air_no">Ar comprimido: non</string>
+
+	<string name="poi_vacuum_cleaner_no">Aspirador: non</string>
+	<string name="poi_amenity_vacuum_cleaner">Aspirador</string>
+
+	<string name="poi_sport_free_flying">Á delta (deporte)</string>
+
+	<string name="poi_water_tap">Billa de auga</string>
+	<string name="poi_button_operated_no">Operado por botóns: non</string>
+
+	<string name="poi_free_flying_site_takeoff">Engalaxe</string>
+	<string name="poi_free_flying_site_landing">Aterraxe</string>
+	<string name="poi_socket_nema_5_20">Enchufe: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Enchufe: NEMA 5-20: corrente</string>
+	<string name="poi_socket_nema_5_20_output">Enchufe: NEMA 5-20: saída</string>
+	<string name="poi_socket_nema_14_30">Enchufe: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Enchufe: NEMA 14-30: corrente</string>
+	<string name="poi_socket_nema_14_30_output">Enchufe: NEMA 14-30: saída</string>
+	<string name="poi_socket_nema_14_50">Enchufe: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Enchufe: NEMA 14-50: corrente</string>
+	<string name="poi_socket_nema_14_50_output">Enchufe: NEMA 14-50: saída</string>
+	<string name="poi_socket_schuko">Enchufe: Schuko</string>
+	<string name="poi_socket_schuko_current">Enchufe: Schuko: corrente</string>
+	<string name="poi_socket_schuko_output">Enchufe: Schuko: saída</string>
+	<string name="poi_socket_bs1363">Enchufe: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Enchufe: BS 1363: corrente</string>
+	<string name="poi_socket_bs1363_output">Enchufe: BS 1363: saída</string>
+	<string name="poi_socket_as3112">Enchufe: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Enchufe: AS/NZS 3112: corrente</string>
+	<string name="poi_socket_as3112_output">Enchufe: AS/NZS 3112: saída</string>
+
+	<string name="poi_car_no">Automóbil: non</string>
+	<string name="poi_scooter_no">Scooter: non</string>
+	<string name="poi_truck_no">Camión: non</string>
+
+	<string name="poi_amperage">Amperaxe</string>
+	<string name="poi_free_flying_site_toplanding">Aterraxe elevado</string>
+	<string name="poi_free_flying_site_towing">Remolque</string>
+	<string name="poi_free_flying_site_training">Adestramento</string>
+	<string name="poi_free_flying_official_no">Oficial: non</string>
+	<string name="poi_free_flying_paragliding_yes">Parapente</string>
+	<string name="poi_free_flying_paragliding_no">Parapente: non</string>
+	<string name="poi_free_flying_hanggliding_yes">Á delta</string>
+	<string name="poi_free_flying_hanggliding_no">Á delta: non</string>
+	<string name="poi_free_flying_rigid_yes">Á delta ríxida</string>
+	<string name="poi_free_flying_rigid_no">Á delta ríxida: non</string>
+	<string name="poi_free_flying_site_orientation_n">Orientación do lugar para a á delta: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Orientación do lugar para a á delta: NL</string>
+	<string name="poi_free_flying_site_orientation_e">Orientación do lugar para a á delta: L</string>
+	<string name="poi_free_flying_site_orientation_se">Orientación do lugar para a á delta: SL</string>
+	<string name="poi_free_flying_site_orientation_s">Orientación do lugar para a á delta: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Orientación do lugar para a á delta: SO</string>
+	<string name="poi_free_flying_site_orientation_w">Orientación do lugar para a á delta: O</string>
+	<string name="poi_free_flying_site_orientation_nw">Orientación do lugar para a á delta: NO</string>
+	<string name="poi_free_flying_no_flight_time">Sen horario de voo (á delta)</string>
+	<string name="poi_free_flying_guest_guidelines_no">Directrices de convidado: non</string>
+
+	<string name="poi_tanning_salon">Solario</string>
+
+	<string name="poi_sanitary_dump_station">Estación de refugallos sanitarios</string>
+
+	<string name="poi_medical_system_western_yes">Occidental</string>
+	<string name="poi_medical_system_chinese_yes">Chinés tradicional</string>
+	<string name="poi_medical_system_ayurveeda_yes">Aiurveda</string>
+	<string name="poi_medical_system_kampo_yes">Campo</string>
+	<string name="poi_medical_system_mongolian_yes">Mongol tradicional</string>
+	<string name="poi_medical_system_tibetan_yes">Tibetano tradicional</string>
+	<string name="poi_medical_system_sidda_yes">Sidda</string>
+	<string name="poi_medical_system_unani_yes">Unani</string>
+
+	<string name="poi_health_service_nursing_no">Servizo de saúde: enfermaría: non</string>
+	<string name="poi_health_service_counselling_no">Servizo de saúde: asesoramento: non</string>
+	<string name="poi_health_service_examination_no">Servizo de saúde: recoñecemento médico: non</string>
+	<string name="poi_health_service_child_care_no">Servizo de saúde: coidados infantís: non</string>
+	<string name="poi_health_service_prevention_no">Servizo de saúde: prevención: non</string>
+	<string name="poi_health_service_prevention_vaccination_no">Servizo de saúde: vacinación: non</string>
+	<string name="poi_health_service_support_no">Servizo de saúde: apoio: non</string>
+	<string name="poi_health_service_test_no">Servizo de saúde: análise: non</string>
+
+	<string name="poi_health_facility_type_office">Consultorio médico</string>
+	<string name="poi_suction_point">Punto de succión</string>
+
+	<string name="poi_fire_hydrant_type_pillar">Piar</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Bocoi seco</string>
+	<string name="poi_fire_hydrant_type_pond">Lagoa</string>
+	<string name="poi_fire_hydrant_type_wall">Parede</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Caixa de urxencias</string>
+	<string name="poi_health_person_type_assistant">Rol do traballador en saúde: asistente</string>
+	<string name="poi_health_person_type_healer">Rol do traballador en saúde: curandeiro</string>
+	<string name="poi_health_person_type_midwife">Rol do traballador en saúde: parteira</string>
+	<string name="poi_health_person_type_nurse">Rol do traballador en saúde: enfermeiro</string>
+	<string name="poi_health_person_type_paramedic">Rol do traballador en saúde: paramédico</string>
+	<string name="poi_health_person_type_physician">Rol do traballador en saúde: médico</string>
+	<string name="poi_health_person_type_podologist">Rol do traballador en saúde: podólogo</string>
+	<string name="poi_health_person_type_psychologist">Rol do traballador en saúde: psicólogo</string>
+	<string name="poi_health_person_type_therapist">Rol do traballador en saúde: terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Rol do traballador en saúde: axudante médico</string>
+	<string name="poi_health_person_type_technician">Rol do traballador en saúde: técnico</string>
+	<string name="poi_health_person_type_witchdoctor">Rol do traballador en saúde: bruxo</string>
+
+	<string name="poi_counselling_type_addiction_no">Asesoramento (adicción): non</string>
+	<string name="poi_counselling_type_antenatal_no">Asesoramento (prenatal): non</string>
+	<string name="poi_counselling_type_child_guidance_no">Asesoramento (orientacións infantís): non</string>
+	<string name="poi_counselling_type_couple_no">Asesoramento (parella): non</string>
+	<string name="poi_counselling_type_crisis_no">Asesoramento (crise): non</string>
+	<string name="poi_counselling_type_drugs_no">Asesoramento (drogas): non</string>
+	<string name="poi_counselling_type_education_no">Asesoramento (educación): non</string>
+	<string name="poi_counselling_type_family_no">Asesoramento (familia): non</string>
+	<string name="poi_counselling_type_homeless_no">Asesoramento (sen lar): non</string>
+	<string name="poi_counselling_type_immigrant_no">Asesoramento (inmigrantes): non</string>
+	<string name="poi_counselling_type_marriage_no">Asesoramento (casamento): non</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoramento (nutrición): non</string>
+	<string name="poi_counselling_type_sexual_no">Asesoramento (sexual): non</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Asesoramento (abusos sexuais): non</string>
+	<string name="poi_counselling_type_victim_no">Asesoramento (vítimas): non</string>
+	<string name="poi_counselling_type_violence_no">Asesoramento (violencia): non</string>
+
+	<string name="poi_provided_for_infant_no">Atende meniños: non</string>
+	<string name="poi_provided_for_toddler_no">Atende crianzas pequenas: non</string>
+	<string name="poi_provided_for_child_no">Atende crianzas: non</string>
+	<string name="poi_provided_for_adult_no">Atende adultos: non</string>
+	<string name="poi_provided_for_woman_no">Atende mulleres: non</string>
+	<string name="poi_provided_for_girl_no">Atende rapazas: non</string>
+	<string name="poi_provided_for_man_no">Atende homes: non</string>
+	<string name="poi_provided_for_boy_no">Atende rapaces: non</string>
+
+	<string name="poi_capacity_beds">Capacidade (leitos)</string>
+
+	<string name="poi_treat_inpatient_no">Servizos hospitalarios: non</string>
+	<string name="poi_treat_inpatient_only">Servizos hospitalarios: soamente</string>
+	<string name="poi_counselling_no">Asesoramento: non</string>
+	<string name="poi_home_visit_no">Visitas a domicilio: non</string>
+
+	<string name="poi_disease_malaria_no">Malaria: non</string>
+	<string name="poi_disease_ebola_no">Ébola: non</string>
+	<string name="poi_disease_autism_no">Autismo: non</string>
+	<string name="poi_disease_aids_no">SIDA: non</string>
+
+	<string name="poi_office_physician">Consultorio médico</string>
+	<string name="poi_office_therapist">Oficina de terapeuta</string>
+	<string name="poi_office_podologist">Oficina de podólogo</string>
+	<string name="poi_office_healer">Oficina de curandeiro</string>
+	<string name="poi_office_psychologist">Oficina de psicólogo</string>
+	<string name="poi_office_nursing_service">Servizo de enfermaría</string>
+	<string name="poi_office_midwife">Oficina de parteira</string>
+
+	<string name="poi_fire_hydrant_diameter">Diámetro do hidrante</string>
+	<string name="poi_fire_hydrant_pressure">Presión do hidrante</string>
+	<string name="poi_fire_hydrant_count">Cantidade de hidrantes</string>
+	<string name="poi_fire_hydrant_flow_capacity">Capacidade de caudal do hidrante</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Na beirarrúa</string>
+	<string name="poi_fire_hydrant_position_green">No céspede</string>
+	<string name="poi_fire_hydrant_position_lane">No carril</string>
+	<string name="poi_fire_hydrant_position_parking_lot">No aparcadoiro</string>
+	<string name="poi_fire_hydrant_position_street">Na rúa</string>
+	<string name="poi_fire_hydrant_style_wsh">Estilo do hidrante: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Principal</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Lagoa</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Regato</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
+	<string name="poi_military_checkpoint">Posto de control militar</string>
+
+	<string name="poi_bicycle_parking_lockers">Portelos</string>
+	<string name="poi_bicycle_parking_streetpod">Rañura plástica</string>
+
+	<string name="poi_depth">Afundimento</string>
+
+	<string name="poi_salt_yes">Salgado</string>
+	<string name="poi_salt_no">Salgado: non</string>
+	<string name="poi_wheelchair_designated">Sinalado</string>
+	<string name="poi_spoil_heap">Escombreira</string>
+	
+	<string name="poi_summer_camp">Campamento de verán</string>
+	<string name="poi_recreation_center">Centro de lecer</string>
+
+	<string name="poi_crossing_activation_automatic">Activación do cruzamento: automático</string>
+	<string name="poi_crossing_activation_local">Activación do cruzamento: local</string>
+	<string name="poi_crossing_activation_remote">Activación do cruzamento: remoto</string>
+	<string name="poi_crossing_barrier_no">Cruzamento de barreiras: non</string>
+	<string name="poi_crossing_barrier_yes">Cruzamento de barreiras: si</string>
+	<string name="poi_crossing_barrier_full">Cruzamento de barreiras: total</string>
+	<string name="poi_crossing_barrier_half">Cruzamento de barreiras: á metade</string>
+	<string name="poi_crossing_barrier_double_half">Cruzamento de barreiras: dupla metade</string>
+	<string name="poi_crossing_bell_yes">Sinal de son</string>
+	<string name="poi_crossing_bell_no">Cruzamento de son: non</string>
+	<string name="poi_crossing_light_yes">Cruzamento de luz</string>
+	<string name="poi_crossing_light_no">Cruzamento de luz: non</string>
+	<string name="poi_crossing_on_demand_yes">Cruzamento baixo demanda</string>
+	<string name="poi_crossing_on_demand_no">Cruzamento baixo demanda: non</string>
+	<string name="poi_crossing_saltire_yes">Sinal de paso a nivel</string>
+	<string name="poi_crossing_saltire_no">Sinal de paso a nivel: non</string>
+	<string name="poi_crossing_supervision_yes">Cruzamento vixiado</string>
+	<string name="poi_crossing_supervision_no">Cruzamento vixiado: non</string>
+	<string name="poi_crossing_supervision_attendant">Cruzamento vixiado: en persoa</string>
+	<string name="poi_crossing_supervision_camera">Cruzamento vixiado: cámara</string>
+
+	<string name="poi_dispensing_no">Receita médica: non</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Rexional</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_private">Privado</string>
+
+	<string name="poi_valley_balka">Balka (pequeno val)</string>
+
+	<string name="poi_ventilation_shaft">Conducto da ventilación</string>
+
+	<string name="poi_pump_style_modern">Estilo da bomba: moderna</string>
+	<string name="poi_pump_style_historic">Estilo da bomba: antiga</string>
+	<string name="poi_pump_status_ok">Estado da bomba: bo</string>
+	<string name="poi_pump_status_broken">Estado da bomba: rachada</string>
+	<string name="poi_pump_status_locked">Estado da bomba: bloqueada</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_telescope">Telescopio</string>
+	<string name="poi_telescope_type_optical">Óptico</string>
+	<string name="poi_telescope_type_radio">Radiotelescopio</string>
+	<string name="poi_telescope_type_gamma">Raios gamma</string>
+	<string name="poi_telescope_diameter">Diámetro</string>
+	<string name="poi_telescope_spectrum">Espectro</string>
+	<string name="poi_telescope_usage_education">Emprego: educativo</string>
+	<string name="poi_telescope_usage_espionage">Emprego: espionaxe</string>
+	<string name="poi_telescope_usage_research">Emprego: pesquisa</string>
+
+	<string name="poi_observatory_type_espionage">Emprego: espionaxe</string>
+	<string name="poi_observatory_type_meteorological">Meteorolóxico</string>
+	<string name="poi_observatory_type_gravitational">Gravitacional</string>
+
+	<string name="poi_greenhouse_horticulture">Horticultura no invernadoiro</string>
+
+	<string name="poi_generator_output_electricity">Potencia da saída</string>
+	<string name="poi_generator_output_electricity_yes">Saída: eletricidade</string>
+	<string name="poi_generator_output_hot_water">Potencia da saída de auga quente</string>
+	<string name="poi_generator_output_hot_water_yes">Saída: auga quente</string>
+	<string name="poi_generator_output_steam_yes">Saída: vapor</string>
+	<string name="poi_generator_output_hot_air_yes">Saída: ar quente</string>
+	<string name="poi_generator_output_cold_water_yes">Saída: auga fría</string>
+	<string name="poi_generator_output_compressed_air">Potencia da saída de ar comprimido</string>
+	<string name="poi_generator_output_compressed_air_yes">Saída: ar comprimido</string>
+	<string name="poi_generator_output_vacuum_yes">Saída: baleiro</string>
+	<string name="poi_generator_output_biogas">Potencia da saída de biogás</string>
+	<string name="poi_generator_output_biogas_yes">Saída: biogás</string>
+
+	<string name="poi_pumping_station">Estación do bombeo</string>
+
+	<string name="poi_display_no">Pantalla: non</string>
+	<string name="poi_display_analog_yes">Pantalla analóxica</string>
+	<string name="poi_display_digital_yes">Pantalla dixital</string>
+	<string name="poi_display_sundial_yes">Reloxo de sol</string>
+
+	<string name="poi_barometer_yes">Barómetro</string>
+	<string name="poi_barometer_no">Barómetro: non</string>
+	<string name="poi_thermometer_yes">Termómetro</string>
+	<string name="poi_thermometer_no">Termómetro: non</string>
+	<string name="poi_hygrometer_yes">Higrómetro</string>
+	<string name="poi_hygrometer_no">Higrómetro: non</string>
+	<string name="poi_support_pole">Subxección: poste</string>
+	<string name="poi_support_wall_mounted">Subxección: muro</string>
+	<string name="poi_support_tree">Subxección: árbore</string>
+	<string name="poi_support_pedestal">Subxección: pedestal</string>
+	<string name="poi_support_ground">Subxección: chan</string>
+	<string name="poi_support_billboard">Subxección: cateleira</string>
+	<string name="poi_support_ceiling">Subxección: teito</string>
+	<string name="poi_support_suspended">Subxección: pendurado</string>
+	<string name="poi_support_roof">Subxección: tellado</string>
+	<string name="poi_support_tower">Subxección: torre</string>
+
+	<string name="poi_passenger_information_display_no">Pantalla da información ó pasaxeiro: non</string>
+
+	<string name="poi_aquaculture">Acuicultura</string>
+	<string name="poi_aquaculture_shrimp">Acuicultura: camarón</string>
+	<string name="poi_aquaculture_fish">Acuicultura: peixes</string>
+	<string name="poi_aquaculture_mussels">Acuicultura: mexillóns</string>
+
+	<string name="poi_mdf">Rede da distribución principal (MDF)</string>
+	<string name="poi_min_age">Idade mínima</string>
+
+	<string name="poi_organic_no">Non</string>
+	<string name="poi_organic_only">Soamente</string>
+
+	<string name="poi_traffic_mirror">Espello de tráfico</string>
+
+	<string name="poi_diplomatic_consulate">Consulado</string>
+    <string name="poi_craft_confectionery">Elaboración de doces e confeitaría</string>
+    <string name="poi_shop_wholesale">Tenda maiorista</string>
+    <string name="poi_books_type">Libros</string>
+    <string name="poi_laboratory">Laboratorio médico</string>
+    <string name="poi_blood_donation">Doazón de sangue</string>
+    <string name="poi_books_comic">Banda deseñada</string>
+    <string name="poi_books_antiquarian">Anticuario</string>
+    <string name="poi_books_religion">Relixión</string>
+    <string name="poi_books_academic">Académico</string>
+    <string name="poi_books_children">Infantís</string>
+    <string name="poi_atoll">Atol</string>
+    <string name="poi_denotation">Denotación</string>
+    <string name="poi_toll_gantry">Caseto de portaxe</string>
+    <string name="poi_childcare">Coidado de nenos</string>
+    <string name="poi_denotation_natural_monument">Monumento da natureza</string>
+    <string name="poi_denotation_landmark">Referencia terrestre</string>
+</resources>

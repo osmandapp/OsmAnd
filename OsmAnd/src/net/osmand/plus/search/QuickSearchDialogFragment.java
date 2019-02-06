@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
@@ -178,6 +179,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
+	private boolean pausedSearch;
 	private long hideTimeMs;
 	private boolean expired;
 	private boolean poiFilterApplied;
@@ -985,12 +987,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		expired = false;
 		paused = false;
+		if (pausedSearch && !TextUtils.isEmpty(searchQuery)) {
+			runSearch();
+		}
+		pausedSearch = false;
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		paused = true;
+		pausedSearch = searching;
 		hideTimeMs = System.currentTimeMillis();
 		stopLocationUpdate();
 		hideProgressBar();

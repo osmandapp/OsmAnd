@@ -130,6 +130,7 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/bg_color_light</item>
         <item name="btn_round_border">@drawable/btn_round_border_light</item>
+        <item name="btn_round_border_2">@drawable/btn_round_border_light_2</item>
         <item name="bg_card">@drawable/bg_card_light</item>
         <item name="context_menu_card">@drawable/context_menu_card_light</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_light</item>
@@ -199,6 +200,9 @@
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_light</item>
 
+        <item name="subscription_active_bg_color">@color/subscription_active_bg_color_light</item>
+        <item name="subscription_active_div_color">@color/subscription_active_div_color_light</item>
+
         <item name="dialog_bg_color">@color/dialog_bg_color_light</item>
         <item name="dialog_transparent_bg_color">@color/dialog_transparent_bg_color_light</item>
         <item name="dialog_title_color">@color/dialog_title_color_light</item>
@@ -228,6 +232,8 @@
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
 
+        <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_light</item>
+        <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -358,6 +364,7 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/bg_color_dark</item>
         <item name="btn_round_border">@drawable/btn_round_border_dark</item>
+        <item name="btn_round_border_2">@drawable/btn_round_border_dark_2</item>
         <item name="bg_card">@drawable/bg_card_dark</item>
         <item name="context_menu_card">@drawable/context_menu_card_dark</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_dark</item>
@@ -375,8 +382,7 @@
         <item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
         <item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>
         <item name="bg_plugin_logo_disabled">@drawable/bg_plugin_logo_disabled_dark</item>
-        <item name="plugin_details_install_header_bg">@color/plugin_details_install_header_bg_dark
-        </item>
+        <item name="plugin_details_install_header_bg">@color/plugin_details_install_header_bg_dark</item>
         <item name="expandable_list_item_background">
             @drawable/expandable_list_item_background_dark
         </item>
@@ -384,8 +390,7 @@
         <item name="size_progress_bar">@drawable/size_progressbar_dark</item>
         <item name="dash_parking_bg">@drawable/dash_parking_dark</item>
         <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_dark</item>
-        <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_dark
-        </item>
+        <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_dark</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="spinnerItemTextColor">@color/color_white</item>
@@ -413,6 +418,9 @@
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_dark</item>
+
+        <item name="subscription_active_bg_color">@color/subscription_active_bg_color_dark</item>
+        <item name="subscription_active_div_color">@color/subscription_active_div_color_dark</item>
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_night</item>
         <item name="dialog_bg_color">@color/dialog_bg_color_night</item>
@@ -444,6 +452,8 @@
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_night</item>
 
+        <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_dark</item>
+        <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

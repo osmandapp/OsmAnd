@@ -123,7 +123,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 				canvas.restore();
 
 			}
-			boolean isBearing = lastKnownLocation.hasBearing();
+			// Issue 5538: Some devices return positives for hasBearing() at rest, hence add 0.0 check:
+			boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0);
 			if (!locationOutdated && isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);

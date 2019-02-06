@@ -357,7 +357,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		setupSideOfTheWorldBtns(R.id.lat_side_of_the_world_btn, R.id.lon_side_of_the_world_btn);
 
-		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.route_info_divider_light : R.color.route_info_divider_dark);
+		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.ctx_menu_buttons_divider_light : R.color.ctx_menu_buttons_divider_dark);
 		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
 
 		ImageView pointNameKeyboardBtn = (ImageView) mainView.findViewById(R.id.point_name_keyboard_btn);
@@ -1510,7 +1510,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		@Override
 		protected void onPostExecute(Void aVoid) {
 			if (!gpxSelected) {
-				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false, true, true, false);
 			}
 		}
 	}

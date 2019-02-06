@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="search_map_hint">Leita að borg eða héraði</string>
     
     
@@ -850,7 +850,7 @@
     <string name="agps_info">Upplýsingar A-GPS</string>
     <string name="current_route">Núverandi leið</string>
     <string name="shared_string_download_successful">Tókst að sækja</string>
-    <string name="shared_string_io_error">I/O-villa kom upp</string>
+    <string name="shared_string_io_error">I/O villa</string>
     <string name="shared_string_unexpected_error">Óvænt villa kom upp</string>
     <string name="shared_string_currently_recording_track">Er að skrá feril</string>
     <string name="track_segments">Bútar ferils</string>
@@ -2250,7 +2250,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Ritaðu notandanafn</string>
     <string name="mapillary_menu_descr_username">Skoða myndir sem bætt hefur verið við af</string>
     <string name="mapillary_menu_title_username">Notandanafn</string>
-    <string name="mapillary_menu_filter_description">Síaðu myndir eftir sendanda eða dagsetningu. Síum er aðeins beitt í miklum aðdrætti.</string>
+    <string name="mapillary_menu_filter_description">Síaðu myndir eftir sendanda, dagsetningu eða tegund. Aðeins beitt í miklum aðdrætti.</string>
     <string name="shared_string_reset">Frumstilla</string>
     <string name="improve_coverage_install_mapillary_desc">Settu upp Mapillary til að setja myndir eða myndarunur inn á þessa staðsetningu á kortinu.</string>
     <string name="mapillary_action_descr">Legðu þitt af mörkum með þínum eigin götumyndum frá þessari staðsetningu í gegnum Mapillary.</string>
@@ -2982,7 +2982,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n</string>
     <string name="rendering_value_black_name">Svart</string>
     <string name="search_street">Leita að götu</string>
-    <string name="start_search_from_city">Hefja leit út frá borg</string>
+    <string name="start_search_from_city">Veldu fyrst borgina</string>
     <string name="shared_string_restore">Endurheimta</string>
     <string name="keep_passed_markers_descr">Kortamerki sem bætt er inn sem hópi eftirlæta eða sem GPX-ferli og sem þegar hefur verið farið um, verða áfram á kortinu. Ef hópurinn er ekki virkur, munu kortamerkin hverfa.</string>
     <string name="keep_passed_markers">Halda merkjum sem þegar hefur verið farið um á kortinu</string>
@@ -2990,4 +2990,53 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="markers_remove_dialog_msg">Eyða kortamerkinu \'%s\'\?</string>
     <string name="edit_map_marker">Breyta kortamerki</string>
     <string name="third_party_application">Utanaðkomandi forrit</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Áskrift og verð</string>
+    <string name="osm_live_payment_monthly_title">Greiða mánaðarlega</string>
+    <string name="osm_live_payment_3_months_title">Greiða á þriggja mánaða fresti</string>
+    <string name="osm_live_payment_annual_title">Greiða árlega</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mánuði</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mánuði</string>
+    <string name="osm_live_payment_discount_descr">Sparaðu %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Núverandi áskrift þín</string>
+    <string name="osm_live_payment_renews_monthly">Endurnýjast mánaðarlega</string>
+    <string name="osm_live_payment_renews_quarterly">Endurnýjast ársfjórðungslega</string>
+    <string name="osm_live_payment_renews_annually">Endurnýjast árlega</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Veldu þann greiðslumáta sem þér hentar:</string>
+    <string name="osm_live_payment_contribute_descr">Hluti innkomunnar fer til þeirra sem leggja OpenStreetMap lið.</string>
+    <string name="powered_by_osmand">Keyrt með OsmAnd</string>
+    <string name="osm_live_subscriptions">Áskriftir</string>
+    <string name="mapillary_menu_title_pano">Einungis birta 360° myndir</string>
+    <string name="shared_string_launch">Keyra</string>
+    <string name="run_full_osmand_msg">Þú ert að nota kortið {0} sem er keyrt með OsmAnd. Myndirðu vilja keyra fulla útgáfu af OsmAnd\?</string>
+    <string name="run_full_osmand_header">Ræsa OsmAnd\?</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Rýmd</string>
+    <string name="shared_string_width">Breidd</string>
+    <string name="shared_string_height">Hæð</string>
+    <string name="swap_start_and_destination">Skipta á upphafi og áfangastað</string>
+    <string name="add_destination_point">Bæta við áfangastað</string>
+    <string name="add_intermediate_point">Bæta við milliáfanga</string>
+    <string name="add_start_point">Bæta við upphafspunkti</string>
+    <string name="intermediate_waypoint">Millipunktur: %1$s</string>
+    <string name="waypoints">Ferilpunktar: %1$s</string>
+    <string name="transfers">millifærslur: %1$s</string>
+    <string name="on_foot">gangandi: %1$s</string>
+    <string name="route_way">Leið: %1$s</string>
+    <string name="points_of_interests">Merkisstaðir (POI)</string>
+    <string name="waiting_for_route_calculation">Bíð eftir útreikningi leiðar</string>
+    <string name="app_mode_public_transport">Almenningssamgöngur</string>
+    <string name="avoid_roads_descr">Veldu veg á korti eða af lista sem þú vilt forðast á meðan leiðsögn stendur:</string>
+    <string name="show_along_the_route">Birta meðfram leiðinni</string>
+    <string name="simulate_navigation">Herma eftir leiðsögn</string>
+    <string name="choose_track_file_to_follow">Veldu ferilskrá til að fylgja</string>
+    <string name="voice_announcements">Raddtilkynningar</string>
+    <string name="intermediate_destinations">Milliáfangar: %1$s</string>
+    <string name="arrive_at_time">Koma klukkan %1$s</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Ef ýtt er á þennan aðgerðahnapp verður skipt á milli Dags- og Næturhams í OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Dagshamur</string>
+    <string name="quick_action_switch_night_mode">Næturhamur</string>
+    <string name="quick_action_day_night_switch_mode">Skipta á milli Dags/Næturhams</string>
+</resources>

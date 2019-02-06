@@ -2,6 +2,7 @@ package net.osmand.plus.dialogs;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -60,10 +61,15 @@ public class RasterMapMenu {
 		} else {
 			throw new RuntimeException("Unexpected raster map type");
 		}
+
 		final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
 				mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
 
 		String mapTypeDescr = mapTypePreference.get();
+		if (mapTypeDescr!=null && mapTypeDescr.contains(".sqlitedb")) {
+			mapTypeDescr = mapTypeDescr.replaceFirst(".sqlitedb", "");
+		}
+
 		final boolean selected = mapTypeDescr != null;
 		final int toggleActionStringId = selected ? R.string.shared_string_enabled
 				: R.string.shared_string_disabled;
@@ -124,6 +130,7 @@ public class RasterMapMenu {
 				return false;
 			}
 		};
+
 		mapTypeDescr = selected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(toggleActionStringId, mapActivity)

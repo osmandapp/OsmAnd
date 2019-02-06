@@ -1,37 +1,9 @@
 package net.osmand.binary;
 
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TIntHashSet;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.WireFormat;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -72,9 +44,37 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.CodedOutputStream;
-import com.google.protobuf.WireFormat;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 
 public class BinaryMapIndexReader {
 
@@ -130,7 +130,7 @@ public class BinaryMapIndexReader {
 		init();
 	}
 
-	/*private */BinaryMapIndexReader(final RandomAccessFile raf, File file, boolean init) throws IOException {
+	public BinaryMapIndexReader(final RandomAccessFile raf, File file, boolean init) throws IOException {
 		this.raf = raf;
 		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
@@ -554,12 +554,14 @@ public class BinaryMapIndexReader {
 		}
 		return false;
 	}
-
 	public List<TransportStop> searchTransportIndex(SearchRequest<TransportStop> req) throws IOException {
 		for (TransportIndex index : transportIndexes) {
 			if (index.stopsFileLength == 0 || index.right < req.left || index.left > req.right || index.top > req.bottom
 					|| index.bottom < req.top) {
 				continue;
+			}
+			if (req.stringTable != null) {
+				req.stringTable.clear();
 			}
 			codedIS.seek(index.stopsFileOffset);
 			int oldLimit = codedIS.pushLimit(index.stopsFileLength);
@@ -874,6 +876,8 @@ public class BinaryMapIndexReader {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
+
+
 
 					// lazy initializing trees
 					if (index.trees == null) {
@@ -2074,14 +2078,14 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressSearch = false;
 	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = true;
+	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = true;
 	
-	private static int sleft = MapUtils.get31TileNumberX(4.7495);
-	private static int sright = MapUtils.get31TileNumberX(4.8608);
-	private static int stop = MapUtils.get31TileNumberY(52.3395);
-	private static int sbottom = MapUtils.get31TileNumberY(52.2589);
+	private static int sleft = MapUtils.get31TileNumberX(27.55079);
+	private static int sright = MapUtils.get31TileNumberX(27.55317);
+	private static int stop = MapUtils.get31TileNumberY(53.89378);
+	private static int sbottom = MapUtils.get31TileNumberY(53.89276);
 	private static int szoom = 15;
 
 	private static void println(String s) {
@@ -2090,7 +2094,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") + "/Map.obf");
+		fl = new File(System.getProperty("maps") + "/Belarus_europe_2.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2280,6 +2284,9 @@ public class BinaryMapIndexReader {
 				println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 						+ route.getAvgBothDistance());
 				StringBuilder b = new StringBuilder();
+				if(route.getForwardWays() == null) {
+					continue;
+				}
 				for(Way w : route.getForwardWays()) {
 					b.append(w.getNodes()).append(" ");
 				}

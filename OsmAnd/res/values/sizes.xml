@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<dimen name="dialog_button_ex_height">60dp</dimen>
+	<dimen name="dialog_button_ex_min_width">72dp</dimen>
+	<dimen name="dialog_button_ex_max_width">120dp</dimen>
 	<dimen name="wpt_list_category_height">60dp</dimen>
 	<dimen name="wpt_list_item_height">56dp</dimen>
 	<dimen name="list_item_button_padding">4dp</dimen>
@@ -12,6 +15,7 @@
     <dimen name="card_row_min_height">48dp</dimen>
 	<dimen name="card_button_min_size">58dp</dimen>
 	<dimen name="card_button_progress_size">32dp</dimen>
+	<dimen name="card_button_progress_size_small">24dp</dimen>
 	<dimen name="card_padding">12dp</dimen>
 
 	<dimen name="widget_turn_lane_size">36dp</dimen>
@@ -34,6 +38,7 @@
 
     <dimen name="subHeaderPadding">2dp</dimen>
     <dimen name="subHeaderMarginLeft">15dp</dimen>
+		<dimen name = "subHeaderMarginRight">15dp</dimen>
     <dimen name="showAllButtonMarginRight">14dp</dimen>
     <dimen name="showAllButtonHeight">36dp</dimen>
     <dimen name="dashFavIconSize">28dp</dimen>
@@ -263,8 +268,15 @@
 	<dimen name="route_info_directions_margin">56dp</dimen>
 	<dimen name="route_info_icon_padding_left">12dp</dimen>
 	<dimen name="route_info_icon_padding_right">16dp</dimen>
-	<dimen name="route_info_divider_margin">52dp</dimen>
 	<dimen name="route_info_modes_height">48dp</dimen>
+	<dimen name="route_info_details_padding">12dp</dimen>
+	<dimen name="route_info_icon_vertical_padding">6dp</dimen>
+	<dimen name="route_info_start_divider_margin">64dp</dimen>
+	<dimen name="route_info_end_divider_margin">56dp</dimen>
+	<dimen name="route_info_list_item_height">48dp</dimen>
+	<dimen name="route_info_buttons_height">36dp</dimen>
+	<dimen name="route_info_settings_buttons_height">32dp</dimen>
+	<dimen name="route_info_app_modes_padding">40dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
 

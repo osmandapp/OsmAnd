@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="email">電子郵件</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
@@ -523,7 +523,7 @@
 	<string name="rendering_attr_showRoadMaps_description">选择何时显示仅包含道路的地图：</string>
 	<string name="rendering_attr_showRoadMaps_name">仅包含道路的地图</string>
     <string name="safe_mode_description">在安全模式运行应用（使用较慢的 Android 代码代替原生代码）。</string>
-    <string name="native_library_not_running">应用正运行在安全模式下（可在设置中关闭）。</string>
+    <string name="native_library_not_running">应用正运行在安全模式下（可在“设置”中关闭）。</string>
     <string name="background_service_is_enabled_question">OsmAnd 睡眠模式服务仍在运行。是否要关闭？</string>
     <string name="close_changeset">关闭修改集</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing 条形码扫描应用未安装，是否转到应用市场中搜索？</string>
@@ -531,7 +531,7 @@
 	<string name="rendering_attr_roadColors_name">道路颜色主题</string>
     <string name="non_optimal_route_calculation">长距离时计算结果可能非最优</string>
 	<string name="map_widget_monitoring_services">日志服务</string>
-	<string name="replace_destination_point">替换终点</string>
+	<string name="replace_destination_point">替换目的地</string>
     <string name="new_destination_point_dialog">您已经设置了一个目的地：</string>
     <string name="ending_point_too_far">结束点与最近道路太远。</string>
     <string name="add_tag">添加标记</string>
@@ -680,13 +680,13 @@
 	<string name="local_indexes_cat_poi">兴趣点数据</string>
 	<string name="ttsvoice">TTS语音</string>
 	<string name="search_offline_clear_search">新搜索</string>
-	<string name="map_text_size_descr">选择地图上名称的字体大小</string>
+	<string name="map_text_size_descr">选择地图上名称的字体大小。</string>
 	<string name="map_text_size">地图字体大小</string>
-	<string name="trace_rendering_descr">显示渲染性能</string>
+	<string name="trace_rendering_descr">显示渲染性能。</string>
 	
 	<string name="installing_new_resources">解包新数据…</string>
 	<string name="internet_connection_required_for_online_route">已选择在线导航服务，但网络连接不可用。</string>
-	<string name="tts_language_not_supported_title">语言不支持</string>
+	<string name="tts_language_not_supported_title">不支持的语言</string>
 	<string name="tts_missing_language_data_title">数据丢失</string>
 	<string name="gpx_option_destination_point">使用当前终点</string>
 	<string name="voice_stream_notification">提醒语音音频</string>
@@ -1342,8 +1342,8 @@
     <string name="rendering_attr_showSurfaces_name">显示道路表面</string>
     
     
-    <string name="map_widget_left">左侧面板</string>
-    <string name="map_widget_right">右侧面板</string>
+    <string name="map_widget_left">左边栏</string>
+    <string name="map_widget_right">右边栏</string>
     <string name="rendering_attr_showCycleRoutes_name">显示自行车路线</string>
     <string name="rendering_attr_horseRoutes_name">马匹路线</string>
     <string name="download_wikipedia_maps">维基百科</string>
@@ -1424,7 +1424,7 @@
     <string name="dash_download_manage">管理</string>
     <string name="rendering_attr_trainLightrailRoutes_name">铁路线路</string>
     <string name="rendering_category_hide">隐藏</string>
-    <string name="traffic_warning_pedestrian">人行橫道</string>
+    <string name="traffic_warning_pedestrian">人行横道</string>
     <string name="rendering_category_routes">线路</string>
     <string name="show_railway_warnings">铁道交口</string>
     <string name="rendering_category_details">详细信息</string>
@@ -1680,7 +1680,7 @@
     <string name="upload_osm_note">上传 OSM 注释</string>
     <string name="consider_turning_polygons_off">建议关闭多边形渲染。</string>
     <string name="clear_updates_proposition_message">您可以删除已下载的更新和回到原始地图版本</string>
-    <string name="switch_start_finish">对调起始点和目的地</string>
+    <string name="switch_start_finish">交换起始点和目的地</string>
     <string name="rec_split">录制器拆分</string>
     <string name="rec_split_title">使用录制器拆分</string>
     <string name="rec_split_desc">重写剪辑时，使用的空间超过存储大小</string>
@@ -1844,7 +1844,7 @@
     <string name="traffic_warning_speed_limit">速度限制</string>
     <string name="traffic_warning_border_control">边境管制</string>
     <string name="traffic_warning_payment">收费站</string>
-    <string name="traffic_warning_stop">停车标志</string>
+    <string name="traffic_warning_stop">停止标志</string>
     <string name="traffic_warning_calming">交通稳静化</string>
     <string name="traffic_warning_speed_camera">测速摄像机</string>
     <string name="traffic_warning">交通警告</string>
@@ -2118,7 +2118,7 @@
     <string name="app_mode_boat">小船</string>
     <string name="app_mode_aircraft">航空器</string>
     <string name="local_osm_changes_delete_all_confirm">要删除 %1$d 个 OSM 更新。是否确定？</string>
-    <string name="animate_routing_route_not_calculated">请先计算路线</string>
+    <string name="animate_routing_route_not_calculated">请先计算路径</string>
     <string name="animate_routing_route">使用计算的路线进行模拟</string>
     <string name="animate_routing_gpx">模拟使用 GPX 轨迹</string>
     <string name="route_is_too_long_v2">这条路线可能太长，无法推算。如果在10分钟内没有结果，请添加中继节点。</string>
@@ -2718,4 +2718,44 @@
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>
     <string name="send_search_query_description">我们将会发送您的搜索请求：<b>\"%1$s\"</b>，以及您的位置。<br/><br/>我们不会搜集您的个人信息，我们只需要搜索数据以改进搜索算法。<br/></string>
     <string name="send_search_query">发送搜索请求？</string>
-    </resources>
+    <string name="search_street">搜索街道</string>
+    <string name="start_search_from_city">从城市开始搜索</string>
+    <string name="thank_you_for_feedback">感谢您的反馈</string>
+    <string name="powered_by_osmand">由 OsmAnd 出品</string>
+    <string name="osm_live_plan_pricing">方案和价格</string>
+    <string name="osm_live_payment_monthly_title">每月付款</string>
+    <string name="osm_live_payment_3_months_title">每季度付款</string>
+    <string name="osm_live_payment_annual_title">每年付款</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
+    <string name="osm_live_payment_discount_descr">节省 %1$s！</string>
+	<string name="osm_live_payment_current_subscription">您的当前订阅</string>
+    <string name="open_in_browser_wiki_description">在网页浏览器中查看文章。</string>
+    <string name="osm_live_subscriptions">订阅</string>
+    <string name="osm_live_payment_renews_monthly">每月续期</string>
+    <string name="osm_live_payment_renews_quarterly">每季度续期</string>
+    <string name="osm_live_payment_renews_annually">每年续期</string>
+    <string name="third_party_application">第三方应用程序</string>
+    <string name="osm_live_payment_header">选择对您方便的支付周期：</string>
+    <string name="osm_live_payment_contribute_descr">部分收入将由 OpenStreetMap 贡献者获得。</string>
+    <string name="shared_string_restore">恢复</string>
+    <string name="search_no_results_feedback">没有搜索结果？
+\n向我们提供反馈</string>
+    <string name="point_deleted">点 %1$s 已删除</string>
+    <string name="osn_modify_dialog_error">无法修改笔记</string>
+    <string name="fast_coordinates_input">快速坐标输入</string>
+    <string name="my_location">我的位置</string>
+    <string name="descendingly">降序</string>
+    <string name="ascendingly">升序</string>
+    <string name="order_by">排序方式：</string>
+    <string name="this_year">今年</string>
+    <string name="exit_without_saving">不保存退出？</string>
+    <string name="tunnel_warning">前方隧道</string>
+    <string name="show_tunnels">隧道</string>
+    <string name="download_wikipedia_description">下载 %1$s 的维基百科文章以离线阅读。</string>
+    <string name="swap_start_and_destination">交换出发地和目的地</string>
+    <string name="add_destination_point">添加目的地</string>
+    <string name="mapillary_menu_title_pano">仅显示 360° 图像</string>
+    <string name="wiki_article_search_text">搜索对应的维基文章</string>
+    <string name="run_full_osmand_header">启动 OsmAnd？</string>
+</resources>

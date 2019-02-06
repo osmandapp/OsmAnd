@@ -176,7 +176,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
+		if (purchaseHelper != null && purchaseHelper.getLiveUpdates().containsSku(sku)) {
 			getMyApplication().logEvent(this, "live_osm_subscription_purchased");
 
 			if (!active) {

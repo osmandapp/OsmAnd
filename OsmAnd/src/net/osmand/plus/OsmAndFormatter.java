@@ -13,8 +13,12 @@ import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.util.Algorithms;
 
+import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Map.Entry;
 
 public class OsmAndFormatter {
@@ -26,6 +30,9 @@ public class OsmAndFormatter {
 	public final static float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
+	private static final SimpleDateFormat SIMPLE_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
+	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
+
 	{
 		fixed2.setMinimumFractionDigits(2);
 		fixed1.setMinimumFractionDigits(1);
@@ -51,6 +58,20 @@ public class OsmAndFormatter {
 		int minutes = (seconds / 60) % 60;
 		int sec = seconds % 60;
 		return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
+	}
+
+	public static String getFormattedTime(long seconds, boolean useCurrentTime) {
+		Calendar calendar = Calendar.getInstance();
+		if (useCurrentTime) {
+			calendar.setTimeInMillis(System.currentTimeMillis() + seconds * 1000);
+		} else {
+			calendar.setTimeInMillis(seconds * 1000);
+		}
+		if (isSameDay(calendar, Calendar.getInstance())) {
+			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
+		} else {
+			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime()) + " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
+		}
 	}
 
 	public static String getFormattedDate(Context context, long milliseconds) {
@@ -335,5 +356,25 @@ public class OsmAndFormatter {
 			d.append(vl).append('\n');
 		}
 		return d.toString().trim();
+	}
+
+	private static String[] getLettersStringArray(String[] strings, int letters) {
+		String[] newStrings = new String[strings.length];
+		for (int i = 0; i < strings.length; i++) {
+			if (strings[i] != null) {
+				if (strings[i].length() > letters) {
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i].substring(0, letters));
+				} else {
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i]);
+				}
+			}
+		}
+		return newStrings;
+	}
+
+	private static boolean isSameDay(Calendar cal1, Calendar cal2) {
+		return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
+				cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+				cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
 	}
 }

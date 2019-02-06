@@ -1,6 +1,11 @@
 package net.osmand;
 
+import android.util.Xml;
+
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
 
 public class PlatformUtil {
 
@@ -143,4 +148,11 @@ public class PlatformUtil {
 		return getLog(cl.getName());
 	}
 
+	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
+		return Xml.newPullParser();
+	}
+
+	public static XmlSerializer newSerializer() {
+		return Xml.newSerializer();
+	}
 }

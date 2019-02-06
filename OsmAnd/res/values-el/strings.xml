@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
@@ -2021,7 +2021,7 @@
     <string name="mapillary_menu_title_dates">Ημερομηνία</string>
     <string name="mapillary_menu_edit_text_hint">Πληκτρολογήστε όνομα χρήστη</string>
     <string name="mapillary_menu_descr_username">Προβολή μόνο των εικόνων που προστέθηκαν από</string>
-    <string name="mapillary_menu_filter_description">Φιλτράρετε εικόνες κατά υποβάλλοντα ή κατά ημερομηνία. Ενεργό μόνο για κοντινή εστίαση.</string>
+    <string name="mapillary_menu_filter_description">Φιλτράρετε εικόνες κατά υποβάλλοντα, κατά ημερομηνία ή κατά τύπο. Ενεργό μόνο για κοντινή εστίαση.</string>
     <string name="map_widget_ruler_control">Κανόνας ακτίνας</string>
     <string name="import_gpx_failed_descr">Το OsmAnd δεν μπορεί να εισάγει το αρχείο. Παρακαλούμε, ελέγξτε εάν το OsmAnd έχει άδεια να διαβάζει αρχεία από αυτή τη θέση.</string>
     <string name="mapillary_image">Εικόνα Mapillary</string>
@@ -3085,4 +3085,46 @@
     <string name="send_search_query">Αποστολή ερωτήματος αναζήτησης;</string>
     <string name="shared_string_world">Κόσμος</string>
     <string name="test_voice_desrc">Πιέστε ένα κουμπί και ακούστε την αντίστοιχη φωνητική προτροπή για να ταυτοποιήσετε ελλειπείς ή λανθασμένες προτροπές.</string>
+    <string name="osm_live_subscriptions">Συνδρομές</string>
+    <string name="powered_by_osmand">Προωθούμενο από το OsmAnd</string>
+    <string name="osm_live_plan_pricing">"Δυνατότητες  και τιμές"</string>
+    <string name="osm_live_payment_monthly_title">Μηνιαία πληρωμή</string>
+    <string name="osm_live_payment_3_months_title">Τριμηνιαία πληρωμή</string>
+    <string name="osm_live_payment_annual_title">Ετήσια πληρωμή</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / μήνα</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / μήνα</string>
+    <string name="osm_live_payment_discount_descr">Εξοικονόμηση %1$s!</string>
+    <string name="osm_live_payment_current_subscription">Η τρέχουσα εγγραφή σας</string>
+    <string name="osm_live_payment_renews_monthly">Μηνιαίες ανανεώσεις</string>
+    <string name="osm_live_payment_renews_quarterly">Τριμηνιαίες ανανεώσεις</string>
+    <string name="osm_live_payment_renews_annually">Ετήσιες ανανεώσεις</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Επιλέξτε την κατάλληλη περίοδο πληρωμής για σας:</string>
+    <string name="osm_live_payment_contribute_descr">Μέρος του εισοδήματος πηγαίνει στους συντελεστές του OpenStreetMap.</string>
+    <string name="markers_remove_dialog_msg">Διαγραφή σημαδιού χάρτη \'%s\';</string>
+    <string name="edit_map_marker">Επεξεργασία σημαδιού χάρτη</string>
+    <string name="third_party_application">Εφαρμογή τρίτου</string>
+    <string name="search_street">Αναζήτηση οδού</string>
+    <string name="start_search_from_city">Επιλέξτε πρώτα την πόλη</string>
+    <string name="shared_string_restore">Επαναφορά</string>
+    <string name="keep_passed_markers_descr">Τα σημάδια που προστέθηκαν ως ομάδα αγαπημένων ή σημεία διαδρομής GPX που σημειώθηκαν ως περασμένα θα παραμείνουν στον χάρτη. Εάν η ομάδα δεν είναι ενεργή, τα σημάδια θα εξαφανιστούν από τον χάρτη.</string>
+    <string name="keep_passed_markers">Διατήρηση των περασμένων σημαδιών στον χάρτη</string>
+    <string name="more_transport_on_stop_hint">Υπάρχει περισσότερη συγκοινωνία σε αυτήν τη στάση.</string>
+    <string name="ask_for_location_permission">Για να συνεχίσετε, δώστε την άδεια στο OsmAnd να χρησιμοποιήσει τη θέση σας.</string>
+    <string name="release_3_2_pre">"• Διορθώθηκαν οι καταρρεύσεις εκκίνησης που συνέβαιναν σε κάποιες συσκευές
+\n
+\n • Νέο χαρακτηριστικό σημαδιών: εμφανίζονται τα σημάδια που έχουν ήδη διασχιστεί
+\n
+\n • Το ιστορικό αναζήτησης εμφανίζει τώρα τις κατηγορίες που έχετε αναζητήσει προηγουμένως
+\n
+\n • Διορθώθηκαν οι καταρρεύσεις εκκίνησης που συνέβαιναν με μη λατινικούς χάρτες
+\n
+\n • Βελτίωση των προβλημάτων απόδοσης ταχύτητας σε συσκευές Android 8.0
+\n
+\n • Υποστήριξη επεξεργασίας αντικειμένων πολυγώνου (χωρίς υπηρεσίες)
+\n
+\n • Μέτρηση απόστασης: προσθήκη πλήκτρου Μέτρησης  στις Ενέργειες στο μενού περιβάλλοντος
+\n"</string>
+    <string name="mapillary_menu_title_pano">Εμφάνιση μόνο εικόνων 360°</string>
+    <string name="rendering_value_black_name">Μαύρο</string>
 </resources>

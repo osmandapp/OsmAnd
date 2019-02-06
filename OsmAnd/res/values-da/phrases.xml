@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
         <string name="poi_bakery">Bager</string>
         <string name="poi_alcohol">Spiritus</string>
@@ -143,7 +143,7 @@
         <string name="poi_railway_station">Banegård</string>
         <string name="poi_railway_platform">Perron</string>
         <string name="poi_subway_entrance">Metroindgang</string>
-        <string name="poi_subway_station">Metrostation</string>
+        <string name="poi_subway_station">Ja</string>
         <string name="poi_taxi">Taxaholdeplads</string>
 
         <string name="poi_aerodrome">Lufthavn</string>
@@ -961,7 +961,7 @@
 	<string name="poi_access_agricultural">Adgang for landbrug</string>
 
 	<string name="poi_monitoring_station">Målestation</string>
-	<string name="poi_capital">Hovedstad</string>
+	<string name="poi_capital">Ja</string>
 	<string name="poi_fee_no">Nej</string>
 
 	<string name="poi_email">E-mail</string>
@@ -1153,7 +1153,7 @@
 	<string name="poi_denomination_scientist">Kristen Videnskab</string>
 	<string name="poi_landfill_waste_nuclear">Atomaffald</string>
 	<string name="poi_start_date">Startdato</string>
-	<string name="poi_wheelchair_yes">Kørestol</string>
+	<string name="poi_wheelchair_yes">Ja</string>
 
 	<string name="poi_content_silage">Indhold: ensilage</string>
 	<string name="poi_content_water">Indhold: vand</string>
@@ -1620,7 +1620,7 @@
 	<string name="poi_drive_through_no">Drive-through: nej</string>
 
 	<string name="poi_brewery_additional">Bryggerinavn</string>
-	<string name="poi_microbrewery_yes">Mikrobryggeri</string>
+	<string name="poi_microbrewery_yes">Ja</string>
 	<string name="poi_microbrewery_no">Ingen mikrobryggeri</string>
 
 	<string name="poi_takeaway_yes">Take Away</string>
@@ -3967,4 +3967,40 @@
 <string name="poi_atm">Pengeautomat</string>
 	<string name="poi_shoe_repair">Skoreparation</string>
 
+<string name="poi_bulk_purchase">Storkøb</string>
+	<string name="poi_substation_type">Type</string>
+
+<string name="poi_bulk_purchase_yes">Ja</string>
+	<string name="poi_bulk_purchase_only">Kun</string>
+
+	<string name="poi_pipeline_substation">Rørledningsstation</string>
+	<string name="poi_substation_transmission">Transmission</string>
+	<string name="poi_substation_distribution">Distribution</string>
+	<string name="poi_substation_minor_distribution">Mindre distribution</string>
+	<string name="poi_substation_industrial">Industriel</string>
+	<string name="poi_substation_transition">Overgang</string>
+	<string name="poi_substation_traction">Trækkraft</string>
+	<string name="poi_substation_converter">Converter</string>
+	<string name="poi_substation_compensation">Kompensation</string>
+
+	<string name="poi_substation_compression">Komprimering</string>
+	<string name="poi_substation_measurement">Måling</string>
+	<string name="poi_substation_valve">Ventil</string>
+	<string name="poi_substation_valve_group">Ventilgruppe</string>
+	<string name="poi_substation_inspection_gauge">Inspektionsmåler</string>
+	<string name="poi_substation_field_gathering">Feltsamling</string>
+    <string name="poi_craft_confectionery">Konfektureproduktion</string>
+    <string name="poi_shop_wholesale">Engros-butik</string>
+    <string name="poi_books_type">Bøger</string>
+    <string name="poi_laboratory">Medicinsk laboratorium</string>
+    <string name="poi_blood_donation">Bloddonor</string>
+    <string name="poi_books_comic">Tegneserier</string>
+    <string name="poi_books_antiquarian">Antikvarisk</string>
+    <string name="poi_books_religion">Religion</string>
+    <string name="poi_books_academic">Akademisk</string>
+    <string name="poi_books_children">Børn</string>
+    <string name="poi_atoll">Atoll</string>
+    <string name="poi_childcare">Børnepasning</string>
+    <string name="poi_denotation_natural_monument">Naturlig monument</string>
+    <string name="poi_denotation_landmark">Vartegn</string>
 </resources>

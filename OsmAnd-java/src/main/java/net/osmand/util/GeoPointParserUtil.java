@@ -526,11 +526,20 @@ public class GeoPointParserUtil {
 		if (params.containsKey("z")) {
 			zmPart = params.get("z");
 		}
-		String[] vls = silentSplit(path, ",");
+		String[] vls = null;
+		if(path.contains("@")) {
+			path = path.substring(path.indexOf("@") + 1);
+			if(path.contains(",")) {
+				vls = silentSplit(path, ",");
+			}
+		}
+		if(vls == null) {
+			vls = silentSplit(path, ",");
+		}
 
 		if (vls.length >= 2) {
-			double lat = parseSilentDouble(vls[0]);
-			double lon = parseSilentDouble(vls[1]);
+			double lat = parseSilentDouble(vls[0], Double.NaN);
+			double lon = parseSilentDouble(vls[1], Double.NaN);
 			int zoom = GeoParsedPoint.NO_ZOOM;
 			if (vls.length >= 3 || zmPart.length() > 0) {
 				if (zmPart.length() == 0) {
@@ -543,7 +552,9 @@ public class GeoPointParserUtil {
 				}
 				zoom = parseZoom(zmPart);
 			}
-			return new GeoParsedPoint(lat, lon, zoom);
+			if(!Double.isNaN(lat) && !Double.isNaN(lon)) {
+				return new GeoParsedPoint(lat, lon, zoom);
+			}
 		}
 		return new GeoParsedPoint(URLDecoder.decode(opath));
 	}
@@ -566,13 +577,17 @@ public class GeoPointParserUtil {
 	}
 
 	private static double parseSilentDouble(String zoom) {
+		return parseSilentDouble(zoom, 0);
+	}
+	
+	private static double parseSilentDouble(String zoom, double vl) {
 		try {
 			if (zoom != null) {
 				return Double.valueOf(zoom);
 			}
 		} catch (NumberFormatException e) {
 		}
-		return 0;
+		return vl;
 	}
 
 	private static int parseSilentInt(String zoom) {
@@ -739,8 +754,9 @@ public class GeoPointParserUtil {
 
 		@Override
 		public String toString() {
-			return isGeoPoint() ? "GeoParsedPoint [lat=" + lat + ", lon=" + lon + ", zoom=" + zoom
-					+ ", label=" + label + "]" : "GeoParsedPoint [query=" + query;
+			return isGeoPoint() ? 
+					String.format("GeoParsedPoint [lat=%.5f, lon=%.5f, zoom=%d, label=%s]", lat, lon, zoom, label) : 
+						String.format("GeoParsedPoint [query=%s]",query);
 		}
 	}
 }

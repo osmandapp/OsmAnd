@@ -680,13 +680,15 @@ public class WaypointHelper {
 	}
 
 	public static class LocationPointWrapper {
-		LocationPoint point;
-		float deviationDistance;
-		boolean deviationDirectionRight;
+
+		public LocationPoint point;
+		public float deviationDistance;
+		public boolean deviationDirectionRight;
+		public int type;
+
 		int routeIndex;
 		boolean announce = true;
 		RouteCalculationResult route;
-		int type;
 
 		public LocationPointWrapper() {
 		}

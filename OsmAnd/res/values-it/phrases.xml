@@ -72,7 +72,7 @@
 	<string name="poi_public_transport_station">Stazione trasporto pubblico</string>
 	<string name="poi_bus_station">Stazione autobus</string>
 	<string name="poi_subway_entrance">Entrata metropolitana</string>
-	<string name="poi_subway_station">Stazione metropolitana</string>
+	<string name="poi_subway_station">Sì</string>
 	<string name="poi_aerodrome">Aeroporto</string>
 	<string name="poi_helipad">Eliporto</string>
 	<string name="poi_bicycle_rental">Noleggio bici</string>
@@ -967,8 +967,8 @@
 	<string name="poi_collection_times">Tempi di raccolta</string>
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
-	<string name="facebook">"Facebook "</string>
-	<string name="twitter">"Twitter "</string>
+	<string name="facebook">Facebook</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
@@ -1450,7 +1450,7 @@
 	<string name="poi_drive_in_yes">Sì</string>
 	<string name="poi_drive_in_no">"Drive-in: no "</string>
 	<string name="poi_drive_through_yes">Sì</string>
-	<string name="poi_microbrewery_yes">Microbirrificio</string>
+	<string name="poi_microbrewery_yes">Sì</string>
 	<string name="poi_takeaway_filter_yes">Sì</string>
 	<string name="poi_takeaway_yes">A portar via</string>
 	<string name="poi_takeaway_no">No a portar via</string>
@@ -2329,7 +2329,7 @@
 	<string name="poi_allotments">Orti urbani</string>
 	<string name="poi_basin">Bacino</string>
 
-	<string name="poi_capital">Capitale</string>
+	<string name="poi_capital">Sì</string>
 	<string name="poi_place_allotments">Orti di città</string>
 	<string name="poi_ice_hockey">Hockey su ghiaccio</string>
 	<string name="poi_denomination_lutheran">Luterana</string>
@@ -2509,7 +2509,7 @@
 	<string name="poi_fire_hydrant_style_water_source_stream">Ruscello</string>
 	<string name="poi_valley_balka">"Balka "</string>
 
-	<string name="poi_display_yes">Display: Sì</string>
+	<string name="poi_display_yes">Display: sì</string>
 	<string name="poi_display_no">"Display: no "</string>
 	<string name="poi_display_analog_yes">Display analogico</string>
 	<string name="poi_display_digital_yes">Display digitale</string>

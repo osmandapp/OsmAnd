@@ -55,8 +55,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -77,6 +75,7 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
 import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_STOPS_RADIUS_METERS;
 
 public class ContextMenuLayer extends OsmandMapLayer {
@@ -281,6 +280,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		};
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.change_markers_position, activity)
+				.setId(MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION)
 				.setIcon(R.drawable.ic_show_on_map)
 				.setOrder(MapActivityActions.CHANGE_POSITION_ITEM_ORDER)
 				.setClickable(isObjectMoveable(o))

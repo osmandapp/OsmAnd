@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.plus.OsmAndCustomizationConstants.HILLSHADE_LAYER;
+
 public class SRTMPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.srtm";
@@ -217,6 +220,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 			String descr = getPrefDescription(app, contourLinesProp, pref);
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setId(CONTOUR_LINES)
 					.setTitleId(R.string.srtm_plugin_name, mapActivity)
 					.setSelected(contourLinesSelected)
 					.setIcon(R.drawable.ic_plugin_srtm)
@@ -227,6 +231,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setListener(listener).createItem());
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(HILLSHADE_LAYER)
 				.setTitleId(R.string.layer_hillshade, mapActivity)
 				.setSelected(HILLSHADE.get())
 				.setColor(HILLSHADE.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)

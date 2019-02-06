@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +12,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.Settings.Secure;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -21,23 +24,30 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchases;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -56,7 +66,17 @@ public class DiscountHelper {
 	private static final String INAPP_PREFIX = "osmand-in-app:";
 	private static final String SEARCH_QUERY_PREFIX = "osmand-search-query:";
 	private static final String SHOW_POI_PREFIX = "osmand-show-poi:";
+	private static final String OPEN_ACTIVITY = "open_activity";
 
+	private static final String SHOW_CHOOSE_PLAN_PREFIX = "show-choose-plan:";
+	private static final String CHOOSE_PLAN_TYPE_FREE = "free-version";
+	private static final String CHOOSE_PLAN_TYPE_LIVE = "osmand-live";
+	private static final String CHOOSE_PLAN_TYPE_SEA_DEPTH = "sea-depth";
+	private static final String CHOOSE_PLAN_TYPE_HILLSHADE = "hillshade";
+	private static final String CHOOSE_PLAN_TYPE_WIKIPEDIA = "wikipedia";
+	private static final String CHOOSE_PLAN_TYPE_WIKIVOYAGE= "wikivoyage";
+
+	@SuppressLint("HardwareIds")
 	public static void checkAndDisplay(final MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
@@ -125,7 +145,35 @@ public class DiscountHelper {
 				String inAppSku = data.url.substring(INAPP_PREFIX.length());
 				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 				if (purchaseHelper != null
-						&& (purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app))) {
+						&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+					return;
+				}
+			}
+
+			if (data.oneOfConditions != null) {
+				boolean oneOfConditionsMatch = false;
+				try {
+					Conditions conditions = new Conditions(app);
+					JSONArray conditionsArr = data.oneOfConditions;
+					for (int i = 0; i < conditionsArr.length(); i++) {
+						JSONObject conditionObj = conditionsArr.getJSONObject(i);
+						JSONArray conditionArr = conditionObj.getJSONArray("condition");
+						if (conditionArr.length() > 0) {
+							boolean conditionMatch = true;
+							for (int k = 0; k < conditionArr.length(); k++) {
+								JSONObject o = conditionArr.getJSONObject(k);
+								conditionMatch = conditions.matchesCondition(o);
+								if (!conditionMatch) {
+									break;
+								}
+							}
+							oneOfConditionsMatch |= conditionMatch;
+						}
+					}
+				} catch (JSONException e) {
+					// ignore
+				}
+				if (!oneOfConditionsMatch) {
 					return;
 				}
 			}
@@ -153,6 +201,10 @@ public class DiscountHelper {
 						if (showChristmasDialog) {
 							mapActivity.showXMasDialog();
 						} else {
+							InAppPurchaseHelper purchaseHelper = mapActivity.getPurchaseHelper();
+							if (purchaseHelper != null) {
+								purchaseHelper.requestInventory();
+							}
 							showDiscountBanner(mapActivity, data);
 						}
 					}
@@ -200,6 +252,11 @@ public class DiscountHelper {
 		toolbarController.setBackBtnIconIds(iconId, iconId);
 		toolbarController.setBackBtnIconClrs(data.iconColor, data.iconColor);
 		toolbarController.setStatusBarColor(data.statusBarColor);
+		if (!TextUtils.isEmpty(data.textBtnTitle)) {
+			toolbarController.setTextBtnVisible(true);
+			toolbarController.setTextBtnTitle(data.textBtnTitle);
+			toolbarController.setTextBtnTitleClrs(data.textBtnTitleColor, data.textBtnTitleColor);
+		}
 		if (!Algorithms.isEmpty(data.url)) {
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
@@ -212,6 +269,7 @@ public class DiscountHelper {
 			};
 			toolbarController.setOnBackButtonClickListener(clickListener);
 			toolbarController.setOnTitleClickListener(clickListener);
+			toolbarController.setOnTextBtnClickListener(clickListener);
 		}
 		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 			@Override
@@ -241,15 +299,20 @@ public class DiscountHelper {
 
 	private static void openUrl(final MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
-			if (url.contains(InAppPurchaseHelper.SKU_FULL_VERSION_PRICE)) {
-				OsmandApplication app = mapActivity.getMyApplication();
-				app.logEvent(mapActivity, "in_app_purchase_redirect");
-				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null) {
+				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
+					app.logEvent(mapActivity, "in_app_purchase_redirect");
 					purchaseHelper.purchaseFullVersion(mapActivity);
+				} else {
+					for (InAppPurchase p : purchaseHelper.getLiveUpdates().getAllSubscriptions()) {
+						if (url.contains(p.getSku())) {
+							ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
+							break;
+						}
+					}
 				}
-			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)) {
-				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else if (url.startsWith(SEARCH_QUERY_PREFIX)) {
 			String query = url.substring(SEARCH_QUERY_PREFIX.length());
@@ -283,10 +346,67 @@ public class DiscountHelper {
 					showPoiFilter(mapActivity, filter);
 				}
 			}
+		} else if (url.equals(OPEN_ACTIVITY)) {
+			if (mData.activityJson != null) {
+				openActivity(mapActivity, mData.activityJson);
+			}
+		} else if (url.startsWith(SHOW_CHOOSE_PLAN_PREFIX)) {
+			String planType = url.substring(SHOW_CHOOSE_PLAN_PREFIX.length()).trim();
+			if (CHOOSE_PLAN_TYPE_FREE.equals(planType)) {
+				ChoosePlanDialogFragment.showFreeVersionInstance(mapActivity.getSupportFragmentManager());
+			} else if (CHOOSE_PLAN_TYPE_LIVE.equals(planType)) {
+				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
+			} else if (CHOOSE_PLAN_TYPE_SEA_DEPTH.equals(planType)) {
+				ChoosePlanDialogFragment.showSeaDepthMapsInstance(mapActivity.getSupportFragmentManager());
+			} else if (CHOOSE_PLAN_TYPE_HILLSHADE.equals(planType)) {
+				ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(mapActivity.getSupportFragmentManager());
+			} else if (CHOOSE_PLAN_TYPE_WIKIPEDIA.equals(planType)) {
+				ChoosePlanDialogFragment.showWikipediaInstance(mapActivity.getSupportFragmentManager());
+			} else if (CHOOSE_PLAN_TYPE_WIKIVOYAGE.equals(planType)) {
+				ChoosePlanDialogFragment.showWikivoyageInstance(mapActivity.getSupportFragmentManager());
+			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
 			mapActivity.startActivity(intent);
+		}
+	}
+
+	private static void openActivity(Context context, JSONObject activityObject) {
+		boolean successful = false;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		try {
+			for (Iterator<String> it = activityObject.keys(); it.hasNext(); ) {
+				String key = it.next();
+				if (key.equals("activity_name")) {
+					intent.setClassName(context, activityObject.getString(key));
+					successful = true;
+					continue;
+				}
+				Object obj = activityObject.get(key);
+				if (obj instanceof Integer) {
+					intent.putExtra(key, (Integer) obj);
+				} else if (obj instanceof Long) {
+					intent.putExtra(key, (Long) obj);
+				} else if (obj instanceof Boolean) {
+					intent.putExtra(key, (Boolean) obj);
+				} else if (obj instanceof Float) {
+					intent.putExtra(key, (Float) obj);
+				} else if (obj instanceof Double) {
+					intent.putExtra(key, (Double) obj);
+				} else if (obj instanceof String) {
+					intent.putExtra(key, (String) obj);
+				}
+			}
+		} catch (JSONException e) {
+			successful = false;
+		}
+		if (successful) {
+			try {
+				context.startActivity(intent);
+			} catch (ActivityNotFoundException e) {
+				// ignore
+			}
 		}
 	}
 
@@ -296,6 +416,7 @@ public class DiscountHelper {
 		String description;
 		String iconId;
 		String url;
+		String textBtnTitle;
 
 		@ColorInt
 		int iconColor = -1;
@@ -307,6 +428,11 @@ public class DiscountHelper {
 		int descrColor = -1;
 		@ColorInt
 		int statusBarColor = -1;
+		@ColorInt
+		int textBtnTitleColor = -1;
+
+		JSONObject activityJson;
+		JSONArray oneOfConditions;
 
 		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
 			ControllerData res = new ControllerData();
@@ -314,11 +440,15 @@ public class DiscountHelper {
 			res.description = obj.getString("description");
 			res.iconId = obj.getString("icon");
 			res.url = parseUrl(app, obj.getString("url"));
+			res.textBtnTitle = obj.optString("button_title");
 			res.iconColor = parseColor("icon_color", obj);
 			res.bgColor = parseColor("bg_color", obj);
 			res.titleColor = parseColor("title_color", obj);
 			res.descrColor = parseColor("description_color", obj);
 			res.statusBarColor = parseColor("status_bar_color", obj);
+			res.textBtnTitleColor = parseColor("button_title_color", obj);
+			res.activityJson = obj.optJSONObject("activity");
+			res.oneOfConditions = obj.optJSONArray("oneOfConditions");
 			return res;
 		}
 
@@ -358,5 +488,174 @@ public class DiscountHelper {
 
 	private static void logError(String msg, Throwable e) {
 		Log.e(TAG, "Error: " + msg, e);
+	}
+
+	private static abstract class Condition {
+
+		protected OsmandApplication app;
+
+		Condition(OsmandApplication app) {
+			this.app = app;
+		}
+
+		abstract String getId();
+
+		abstract boolean matches(String value);
+
+	}
+
+	private static abstract class InAppPurchaseCondition extends Condition {
+
+		InAppPurchases inAppPurchases;
+
+		InAppPurchaseCondition(OsmandApplication app) {
+			super(app);
+			inAppPurchases = app.getInAppPurchaseHelper().getInAppPurchases();
+		}
+	}
+
+	private static abstract class SubscriptionCondition extends Condition {
+
+		InAppSubscriptionList liveUpdates;
+
+		SubscriptionCondition(OsmandApplication app) {
+			super(app);
+			liveUpdates = app.getInAppPurchaseHelper().getLiveUpdates();
+		}
+	}
+
+	private static class NotPurchasedSubscriptionCondition extends SubscriptionCondition {
+
+		NotPurchasedSubscriptionCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "not_purchased_subscription";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			InAppSubscription subscription = liveUpdates.getSubscriptionBySku(value);
+			return subscription == null || !subscription.isPurchased();
+		}
+	}
+
+	private static class PurchasedSubscriptionCondition extends SubscriptionCondition {
+
+		PurchasedSubscriptionCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "purchased_subscription";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			InAppSubscription subscription = liveUpdates.getSubscriptionBySku(value);
+			return subscription != null && subscription.isPurchased();
+		}
+	}
+
+	private static class NotPurchasedInAppPurchaseCondition extends InAppPurchaseCondition {
+
+		NotPurchasedInAppPurchaseCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "not_purchased_inapp";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			InAppPurchase purchase = inAppPurchases.getInAppPurchaseBySku(value);
+			return purchase == null || !purchase.isPurchased();
+		}
+	}
+
+	private static class PurchasedInAppPurchaseCondition extends InAppPurchaseCondition {
+
+		PurchasedInAppPurchaseCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "purchased_inapp";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			InAppPurchase purchase = inAppPurchases.getInAppPurchaseBySku(value);
+			return purchase != null && purchase.isPurchased();
+		}
+	}
+
+	private static class NotPurchasedPluginCondition extends Condition {
+
+		NotPurchasedPluginCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "not_purchased_plugin";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			OsmandPlugin plugin = OsmandPlugin.getPlugin(value);
+			return plugin == null || plugin.needsInstallation();
+		}
+	}
+
+	private static class PurchasedPluginCondition extends Condition {
+
+		PurchasedPluginCondition(OsmandApplication app) {
+			super(app);
+		}
+
+		@Override
+		String getId() {
+			return "purchased_plugin";
+		}
+
+		@Override
+		boolean matches(@NonNull String value) {
+			OsmandPlugin plugin = OsmandPlugin.getPlugin(value);
+			return plugin != null && !plugin.needsInstallation();
+		}
+	}
+
+	private static class Conditions {
+
+		protected OsmandApplication app;
+		private Condition[] conditions;
+
+		Conditions(OsmandApplication app) {
+			this.app = app;
+			conditions = new Condition[] {
+					new NotPurchasedSubscriptionCondition(app),
+					new PurchasedSubscriptionCondition(app),
+					new NotPurchasedInAppPurchaseCondition(app),
+					new PurchasedInAppPurchaseCondition(app),
+					new NotPurchasedPluginCondition(app),
+					new PurchasedPluginCondition(app) };
+		}
+
+		boolean matchesCondition(JSONObject o) {
+			for (Condition condition : conditions) {
+				String value = o.optString(condition.getId());
+				if (!TextUtils.isEmpty(value)) {
+					return condition.matches(value);
+				}
+			}
+			return false;
+		}
 	}
 }

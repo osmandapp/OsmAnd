@@ -134,6 +134,7 @@ public abstract class OsmandPlugin {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 
+		allPlugins.clear();
 		allPlugins.add(new MapillaryPlugin(app));
 		enabledPlugins.add(MapillaryPlugin.ID);
 
@@ -381,6 +382,15 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin lr : getAvailablePlugins()) {
 			if (clz.isInstance(lr)) {
 				return (T) lr;
+			}
+		}
+		return null;
+	}
+
+	public static OsmandPlugin getPlugin(String id) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			if (plugin.getId().equals(id)) {
+				return plugin;
 			}
 		}
 		return null;

@@ -55,7 +55,7 @@ public class FavoriteDialogs {
 			}
 			
 		};
-		favouritesAdapter.sortByDefault();
+		favouritesAdapter.sortByDefault(true);
 		
 		if(points.size() == 0){
 			Toast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
@@ -208,7 +208,7 @@ public class FavoriteDialogs {
 			final OnDismissListener dismissListener, final Dialog[] dialogHolder, final boolean sortByDist) {
 		ListView listView = new ListView(uiContext);
 		AlertDialog.Builder bld = new AlertDialog.Builder(uiContext);
-		favouritesAdapter.sortByDefault();
+		favouritesAdapter.sortByDefault(sortByDist);
 		listView.setAdapter(favouritesAdapter);
 		listView.setOnItemClickListener(click);
 		bld.setPositiveButton(sortByDist ? R.string.sort_by_name :

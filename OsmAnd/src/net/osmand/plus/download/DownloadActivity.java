@@ -254,7 +254,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	protected void onResume() {
 		super.onResume();
 		initAppStatusVariables();
-		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
 		downloadThread.setUiActivity(this);
 		downloadInProgress();
 	}
@@ -283,7 +282,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
 		downloadThread.resetUiActivity(this);
 	}
 

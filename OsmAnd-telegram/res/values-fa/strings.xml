@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="last_update_from_telegram">آخرین به‌روزرسانی نسخهٔ تلگرام</string>
+	<string name="device_added_successfully">%1$s اضافه شد.</string>
+	<string name="shared_string_add">افزودن</string>
+	<string name="error_adding_new_device">نمی‌توان دستگاه جدید اضافه کرد</string>
+	<string name="enter_device_name_description">نام دستگاه جدید خود را با حداکثر ۲۰۰ نویسه بنویسید.</string>
+	<string name="device_name_is_too_long">نام دستگاه خیلی طولانی است</string>
+	<string name="device_name_cannot_be_empty">نام دستگاه نباید خالی باشد</string>
+	<string name="device_name">نام دستگاه</string>
+	<string name="share_location_as_description">اگر بخواهید چندین دستگاه را به یک حساب تلگرامی متصل کنید، باید موقعیت خود را با دستگاه دیگری به‌اشتراک بگذارید.</string>
+	<string name="successfully_sent_and_updated">با موفقیت ارسال و به‌روز شد</string>
+	<string name="waiting_for_response_from_telegram">در انتظار پاسخ از تلگرام</string>
+	<string name="searching_for_gps">در حال موقعیت‌یابی…</string>
+	<string name="battery_optimization_description">بهینه‌سازی باتری را برای OsmAnd Telegram غیرفعال کنید تا هنگامی که در پس‌زمینه کار می‌کند ناگهان بسته نشود.</string>
+	<string name="go_to_settings">برو به تنظیمات</string>
+	<string name="shared_string_later">بعداً</string>
+	<string name="not_sent_yet">هنوز ارسال نشده</string>
+	<string name="not_found_yet">هنوز پیدا نشده</string>
+	<string name="re_send_location">بازفرستی موقعیت</string>
+	<string name="sharing_enabled">اشتراک‌گذاری: فعال</string>
+	<string name="shared_string_status">وضعیت</string>
+	<string name="shared_string_close">بستن</string>
+	</resources>

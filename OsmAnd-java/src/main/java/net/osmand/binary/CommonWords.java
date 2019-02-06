@@ -28,7 +28,7 @@ public class CommonWords {
 
 	public static int getCommonSearch(String name) {
 		Integer i = commonWordsDictionary.get(name);
-		return i == null ? getFrequentlyUsed(name) : i.intValue();
+		return i == null ? getFrequentlyUsed(name) : i.intValue() + frequentlyUsedWordsDictionary.size();
 	}
 	
 	public static int getCommonGeocoding(String name) {

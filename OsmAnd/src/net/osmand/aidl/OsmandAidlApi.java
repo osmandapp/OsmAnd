@@ -10,11 +10,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -22,10 +25,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
+import net.osmand.aidl.gpx.AGpxBitmap;
+import net.osmand.aidl.gpx.AGpxFile;
+import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
@@ -33,11 +40,16 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
+import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -45,18 +57,23 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.TrackBitmapDrawer;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -82,6 +99,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -89,6 +107,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 
 public class OsmandAidlApi {
@@ -135,6 +155,11 @@ public class OsmandAidlApi {
 	private static final String AIDL_STOP_NAVIGATION = "stop_navigation";
 	private static final String AIDL_MUTE_NAVIGATION = "mute_navigation";
 	private static final String AIDL_UNMUTE_NAVIGATION = "unmute_navigation";
+
+	private static final String AIDL_SHOW_SQLITEDB_FILE = "aidl_show_sqlitedb_file";
+	private static final String AIDL_HIDE_SQLITEDB_FILE = "aidl_hide_sqlitedb_file";
+	private static final String AIDL_FILE_NAME = "aidl_file_name";
+
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -183,10 +208,14 @@ public class OsmandAidlApi {
 		registerStopNavigationReceiver(mapActivity);
 		registerMuteNavigationReceiver(mapActivity);
 		registerUnmuteNavigationReceiver(mapActivity);
+		registerShowSqliteDbFileReceiver(mapActivity);
+		registerHideSqliteDbFileReceiver(mapActivity);
 		initOsmandTelegram();
+		app.getAppCustomization().addListener(mapActivity);
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
+		app.getAppCustomization().removeListener(mapActivity);
 		mapActivityActive = false;
 		for (BroadcastReceiver b : receivers.values()) {
 			if(b == null) {
@@ -725,6 +754,52 @@ public class OsmandAidlApi {
 		registerReceiver(unmuteNavigationReceiver, mapActivity, AIDL_UNMUTE_NAVIGATION);
 	}
 
+	private void registerShowSqliteDbFileReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver showSqliteDbFileReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				OsmandSettings settings = app.getSettings();
+				String fileName = intent.getStringExtra(AIDL_FILE_NAME);
+				if (!Algorithms.isEmpty(fileName)) {
+					settings.MAP_OVERLAY.set(fileName);
+					settings.MAP_OVERLAY_PREVIOUS.set(fileName);
+					MapActivity mapActivity = mapActivityRef.get();
+					if (mapActivity != null) {
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+						if (plugin != null) {
+							plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_OVERLAY, mapActivity.getMapLayers());
+						}
+					}
+				}
+			}
+		};
+		registerReceiver(showSqliteDbFileReceiver, mapActivity, AIDL_SHOW_SQLITEDB_FILE);
+	}
+
+	private void registerHideSqliteDbFileReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver hideSqliteDbFileReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				OsmandSettings settings = app.getSettings();
+				String fileName = intent.getStringExtra(AIDL_FILE_NAME);
+				if (!Algorithms.isEmpty(fileName) && fileName.equals(settings.MAP_OVERLAY.get())) {
+					settings.MAP_OVERLAY.set(null);
+					settings.MAP_OVERLAY_PREVIOUS.set(null);
+					MapActivity mapActivity = mapActivityRef.get();
+					if (mapActivity != null) {
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+						if (plugin != null) {
+							plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_OVERLAY, mapActivity.getMapLayers());
+						}
+					}
+				}
+			}
+		};
+		registerReceiver(hideSqliteDbFileReceiver, mapActivity, AIDL_HIDE_SQLITEDB_FILE);
+	}
+
 	public void registerMapLayers(MapActivity mapActivity) {
 		for (AMapLayer layer : layers.values()) {
 			OsmandMapLayer mapLayer = mapLayers.get(layer.getId());
@@ -1240,24 +1315,28 @@ public class OsmandAidlApi {
 	boolean showGpx(String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
 			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+			File fi = app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName);
+			AsyncTask<File, Void, GPXFile> asyncTask = new AsyncTask<File, Void, GPXFile>() {
+
+				@Override
+				protected GPXFile doInBackground(File... files) {
+					return GPXUtilities.loadGPXFile(app, files[0]);
+				}
+
+				@Override
+				protected void onPostExecute(GPXFile gpx) {
+					if (gpx.warning == null) {
+						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+						refreshMap();
+					}
+				}
+			};
+
 			if (f.exists()) {
-				new AsyncTask<File, Void, GPXFile>() {
-
-					@Override
-					protected GPXFile doInBackground(File... files) {
-						return GPXUtilities.loadGPXFile(app, files[0]);
-					}
-
-					@Override
-					protected void onPostExecute(GPXFile gpx) {
-						if (gpx.warning == null) {
-							app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
-							refreshMap();
-						}
-					}
-
-				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
-
+				asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
+				return true;
+			} else if (fi.exists()) {
+				asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fi);
 				return true;
 			}
 		}
@@ -1281,13 +1360,41 @@ public class OsmandAidlApi {
 			List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			String gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 			for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-				String path = selectedGpxFile.getGpxFile().path;
+				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				String path = gpxFile.path;
 				if (!Algorithms.isEmpty(path)) {
 					if (path.startsWith(gpxPath)) {
 						path = path.substring(gpxPath.length() + 1);
 					}
-					files.add(new ASelectedGpxFile(path));
+					long modifiedTime = gpxFile.modifiedTime;
+					long fileSize = new File(gpxFile.path).length();
+					files.add(new ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetails(selectedGpxFile.getTrackAnalysis())));
 				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	boolean getImportedGpx(List<AGpxFile> files) {
+		if (files != null) {
+			List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
+			for (GpxDataItem dataItem : gpxDataItems) {
+				//if (dataItem.isApiImported()) {
+					File file = dataItem.getFile();
+					if (file.exists()) {
+						String fileName = file.getName();
+						boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
+						long modifiedTime = dataItem.getFileLastModifiedTime();
+						long fileSize = file.length();
+						AGpxFileDetails details = null;
+						GPXTrackAnalysis analysis = dataItem.getAnalysis();
+						if (analysis != null) {
+							details = createGpxFileDetails(analysis);
+						}
+						files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
+					}
+				//}
 			}
 			return true;
 		}
@@ -1304,6 +1411,74 @@ public class OsmandAidlApi {
 					app.getGpxDatabase().remove(f);
 					return true;
 				}
+			}
+		}
+		return false;
+	}
+
+	private boolean getSqliteDbFiles(List<ASqliteDbFile> fileNames, boolean activeOnly) {
+		if (fileNames != null) {
+			File tilesPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+			if (tilesPath.canRead()) {
+				File[] files = tilesPath.listFiles();
+				if (files != null) {
+					String activeFile = app.getSettings().MAP_OVERLAY.get();
+					for (File tileFile : files) {
+						String fileName = tileFile.getName();
+						String fileNameLC = fileName.toLowerCase();
+						if (tileFile.isFile() && !fileNameLC.startsWith("hillshade") && fileNameLC.endsWith(SQLiteTileSource.EXT)) {
+							boolean active = fileName.equals(activeFile);
+							if (!activeOnly || active) {
+								fileNames.add(new ASqliteDbFile(fileName, tileFile.lastModified(), tileFile.length(), active));
+							}
+						}
+					}
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	boolean getSqliteDbFiles(List<ASqliteDbFile> fileNames) {
+		return getSqliteDbFiles(fileNames, false);
+	}
+
+	boolean getActiveSqliteDbFiles(List<ASqliteDbFile> fileNames) {
+		return getSqliteDbFiles(fileNames, true);
+	}
+
+	boolean showSqliteDbFile(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			File tileFile = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR), fileName);
+			String fileNameLC = fileName.toLowerCase();
+			if (tileFile.isFile() && !fileNameLC.startsWith("hillshade") && fileNameLC.endsWith(SQLiteTileSource.EXT)) {
+				OsmandSettings settings = app.getSettings();
+				settings.MAP_OVERLAY.set(fileName);
+				settings.MAP_OVERLAY_PREVIOUS.set(fileName);
+
+				Intent intent = new Intent();
+				intent.setAction(AIDL_SHOW_SQLITEDB_FILE);
+				intent.putExtra(AIDL_FILE_NAME, fileName);
+				app.sendBroadcast(intent);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	boolean hideSqliteDbFile(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			if (fileName.equals(app.getSettings().MAP_OVERLAY.get())) {
+				OsmandSettings settings = app.getSettings();
+				settings.MAP_OVERLAY.set(null);
+				settings.MAP_OVERLAY_PREVIOUS.set(null);
+
+				Intent intent = new Intent();
+				intent.setAction(AIDL_HIDE_SQLITEDB_FILE);
+				intent.putExtra(AIDL_FILE_NAME, fileName);
+				app.sendBroadcast(intent);
+				return true;
 			}
 		}
 		return false;
@@ -1475,10 +1650,34 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	boolean registerForOsmandInitialization(final OsmandAppInitCallback callback)
+		throws RemoteException {
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					try {
+						LOG.debug("AIDL App registerForOsmandInitialization");
+						callback.onAppInitialized();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		} else {
+			callback.onAppInitialized();
+		}
+		return true;
+	}
+
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
+			clearNavDrawerItems(appPackage);
 			if (items.isEmpty()) {
-				clearNavDrawerItems(appPackage);
 				return true;
 			}
 			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
@@ -1517,6 +1716,7 @@ public class OsmandAidlApi {
 					}
 					final Intent finalIntent = intent;
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setId(item.getId())
 							.setTitle(item.name)
 							.setIcon(getIconId(item.iconName))
 							.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -1655,6 +1855,160 @@ public class OsmandAidlApi {
 		}
 	}
 
+	boolean setNavDrawerLogo(@Nullable String uri) {
+		return app.getAppCustomization().setNavDrawerLogo(uri,null, null);
+	}
+
+	boolean setEnabledIds(Collection<String> ids) {
+		app.getAppCustomization().setFeaturesEnabledIds(ids);
+		return true;
+	}
+
+	boolean setDisabledIds(Collection<String> ids) {
+		app.getAppCustomization().setFeaturesDisabledIds(ids);
+		return true;
+	}
+
+	boolean setEnabledPatterns(Collection<String> patterns) {
+		app.getAppCustomization().setFeaturesEnabledPatterns(patterns);
+		return true;
+	}
+
+	boolean setDisabledPatterns(Collection<String> patterns) {
+		app.getAppCustomization().setFeaturesDisabledPatterns(patterns);
+		return true;
+	}
+
+	boolean regWidgetVisibility(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
+		app.getAppCustomization().regWidgetVisibility(widgetId, appModeKeys);
+		return true;
+	}
+
+	boolean regWidgetAvailability(@NonNull String widgetId, @Nullable List<String> appModeKeys) {
+		app.getAppCustomization().regWidgetAvailability(widgetId, appModeKeys);
+		return true;
+	}
+
+	boolean customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
+		app.getAppCustomization().customizeOsmandSettings(sharedPreferencesName, bundle);
+		return true;
+	}
+
+	boolean setNavDrawerLogoWithParams(
+			String uri, @Nullable String packageName, @Nullable String intent) {
+		return app.getAppCustomization().setNavDrawerLogoWithParams(uri, packageName, intent);
+	}
+
+	boolean setNavDrawerFooterWithParams(@NonNull NavDrawerFooterParams params) {
+		return app.getAppCustomization().setNavDrawerFooterParams(params);
+	}
+
+	boolean restoreOsmand() {
+		return app.getAppCustomization().restoreOsmand();
+	}
+
+	boolean changePluginState(PluginParams params) {
+		return app.getAppCustomization().changePluginStatus(params);
+	}
+
+	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+		if (gpxUri == null || callback == null) {
+			return false;
+		}
+		final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawer.TrackBitmapDrawerListener() {
+			@Override
+			public void onTrackBitmapDrawing() {
+			}
+
+			@Override
+			public void onTrackBitmapDrawn() {
+			}
+
+			@Override
+			public boolean isTrackBitmapSelectionSupported() {
+				return false;
+			}
+
+			@Override
+			public void drawTrackBitmap(Bitmap bitmap) {
+				callback.onGpxBitmapCreatedComplete(new AGpxBitmap(bitmap));
+			}
+		};
+
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+				}
+			});
+		} else {
+			createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+		}
+		return true;
+	}
+
+	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener) {
+		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, new CallbackWithObject<GPXFile>() {
+			@Override
+			public boolean processResult(GPXFile result) {
+				TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, null, result.getRect(), density, widthPixels, heightPixels);
+				trackBitmapDrawer.addListener(drawerListener);
+				trackBitmapDrawer.setDrawEnabled(true);
+				trackBitmapDrawer.setTrackColor(color);
+				trackBitmapDrawer.initAndDraw();
+				return false;
+			}
+		});
+		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+
+		private final OsmandApplication app;
+		private final CallbackWithObject<GPXFile> callback;
+		private final Uri gpxUri;
+
+		GpxAsyncLoaderTask(@NonNull OsmandApplication app, @NonNull Uri gpxUri, final CallbackWithObject<GPXFile> callback) {
+			this.app = app;
+			this.gpxUri = gpxUri;
+			this.callback = callback;
+		}
+
+		@Override
+		protected void onPostExecute(GPXFile gpxFile) {
+			if (gpxFile.warning == null && callback != null) {
+				callback.processResult(gpxFile);
+			}
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... voids) {
+			ParcelFileDescriptor gpxParcelDescriptor = null;
+			try {
+				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			if (gpxParcelDescriptor != null) {
+				final FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+				return GPXUtilities.loadGPXFile(app, new FileInputStream(fileDescriptor));
+			}
+			return null;
+		}
+	}
+
+	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
+		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
+				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
+				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
+				a.points, a.wptPoints, a.wptCategoryNames);
+	}
+
 	public static class ConnectedApp implements Comparable<ConnectedApp> {
 
 		static final String PACK_KEY = "pack";
@@ -1709,9 +2063,21 @@ public class OsmandAidlApi {
 			this.iconName = iconName;
 			this.flags = flags;
 		}
+
+		public String getId() {
+			return DRAWER_ITEM_ID_SCHEME + name;
+		}
 	}
 
 	public interface SearchCompleteCallback {
 		void onSearchComplete(List<SearchResult> resultSet);
 	}
+
+	public interface GpxBitmapCreatedCallback {
+		void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap);
+	}
+
+	public interface OsmandAppInitCallback {
+    void onAppInitialized();
+  }
 }

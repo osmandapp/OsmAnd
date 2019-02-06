@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="switch_to_raster_map_to_see">Off-line vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v \'Nastavení\' (\'Stáhnout mapy\'), nebo se přepněte na modul \'Online mapy\'.</string>
@@ -2026,7 +2026,7 @@ Délka %2$s</string>
 \nPro aktivování všech nových funkcí je třeba restartovat aplikaci OsmAnd.</string>
     <string name="osm_live_region_desc">Část vašeho příspěvku bude zaslána uživatelům OSM, kteří upravují mapu ve zvolené oblasti.</string>
     <string name="osm_live_subscription_settings">Nastavení předplatného</string>
-    <string name="osm_live_ask_for_purchase">Prosím nejprve zakupte předplatné pro OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Nejprve prosím zakupte předplatné OsmAnd Live</string>
 
     <string name="osm_live_header">Předplatné umožní hodinové aktualizace pro všechny mapy světa. Část příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna. Pokud máte rádi OsmAnd a OSM, chcete je podpořit a být podporováni, toto je výborný způsob, jak to udělat.</string>
     
@@ -2148,7 +2148,7 @@ Délka %2$s</string>
     <string name="shared_string_change">Změnit</string>
     <string name="get_started">Začít</string>
     
-    <string name="osm_live_payment_desc">Uvedená cena je poplatek za jeden měsíc. Předplatné můžete zrušit kdykoliv přes Google Play.</string>
+    <string name="osm_live_payment_desc">Předplatné je strháváno měsíčně. Můžete jej kdykoliv zrušit přes Google Play.</string>
     <string name="donation_to_osm">Příspěvek komunitě OpenStreetMap</string>
     <string name="donation_to_osm_desc">Část peněz z Vašeho příspěvku je zaslána přímo uživatelům, kteří provádějí změny v databázi OpenStreetMap. Cena předplatného pro Vás však zůstává stejná.</string>
     <string name="osm_live_subscription_desc">Předplatné umožňuje hodinové, denní, týdenní aktualizace a neomezené stahování map celého světa.</string>
@@ -2464,7 +2464,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Zadejte uživatelské jméno</string>
     <string name="mapillary_menu_descr_username">Zobrazit pouze obrázky přidané uživatelem</string>
     <string name="mapillary_menu_title_username">Uživatelské jméno</string>
-    <string name="mapillary_menu_filter_description">Můžete filtrovat snímky podle odesílatele nebo podle datumu. Filtry se použijí pouze pro detailní přiblížení.</string>
+    <string name="mapillary_menu_filter_description">Filtrovat snímky podle odesílatele, data nebo typu. Aktivní pouze při vysokém přiblížení.</string>
     <string name="store_tracks_in_monthly_directories">Ukládat zaznamenané trasy v adresářích po měsících</string>
     <string name="store_tracks_in_monthly_directories_descrp">Ukládat zaznamenané trasy v podadresářích podle měsíce záznamu (např. 2018-01).</string>
     <string name="average">Průměr</string>
@@ -2975,4 +2975,53 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="markers_remove_dialog_msg">Odstranit mapovou značku \'%s\'\?</string>
     <string name="edit_map_marker">Upravit mapovou značku</string>
     <string name="third_party_application">Aplikace třetí strany</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Předplatné &amp; ceník</string>
+    <string name="osm_live_payment_monthly_title">Platit měsíčně</string>
+    <string name="osm_live_payment_3_months_title">Platit čtvrtletně</string>
+    <string name="osm_live_payment_annual_title">Platit ročně</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / měsíc</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / měsíc</string>
+    <string name="osm_live_payment_discount_descr">Ušetříte %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Vaše aktuální předplatné</string>
+    <string name="osm_live_payment_renews_monthly">Obnovuje se měsíčně</string>
+    <string name="osm_live_payment_renews_quarterly">Obnovuje se čtvrtletně</string>
+    <string name="osm_live_payment_renews_annually">Obnovuje se ročně</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Vyberte si frekvenci plateb, která vám vyhovuje:</string>
+    <string name="osm_live_payment_contribute_descr">Část příjmů je posílána přispěvatelům OpenStreetMap.</string>
+    <string name="powered_by_osmand">Běží na OsmAnd</string>
+    <string name="osm_live_subscriptions">Předplatné</string>
+    <string name="mapillary_menu_title_pano">Zobrazit pouze 360° obrázky</string>
+    <string name="shared_string_launch">Spustit</string>
+    <string name="run_full_osmand_msg">Používáte mapu {0}, která běží na aplikaci OsmAnd. Chcete spustit plnou verzi OsmAnd\?</string>
+    <string name="run_full_osmand_header">Spustit OsmAnd\?</string>
+    <string name="lang_gn_py">Guaranština</string>
+    <string name="quick_action_switch_day_night_descr">Klepnutím na tlačítko akce se přepíná mezi denním a nočním režimem OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Denní režim</string>
+    <string name="quick_action_switch_night_mode">Noční režim</string>
+    <string name="quick_action_day_night_switch_mode">Přepnout denní/noční režim</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Kapacita</string>
+    <string name="shared_string_width">Šířka</string>
+    <string name="shared_string_height">Výška</string>
+    <string name="swap_start_and_destination">Prohodit start a cíl</string>
+    <string name="add_destination_point">Přidat cíl</string>
+    <string name="add_intermediate_point">Přidat mezicíl</string>
+    <string name="add_start_point">Přidat startovní bod</string>
+    <string name="intermediate_waypoint">Mezicíl: %1$s</string>
+    <string name="waypoints">Body na cestě: %1$s</string>
+    <string name="transfers">přestupy: %1$s</string>
+    <string name="on_foot">pěšky: %1$s</string>
+    <string name="route_way">Cesta: %1$s</string>
+    <string name="points_of_interests">Body zájmu (POI)</string>
+    <string name="waiting_for_route_calculation">Čekám na výpočet trasy</string>
+    <string name="app_mode_public_transport">Veřejná doprava</string>
+    <string name="avoid_roads_descr">Vyberte cestu na mapě nebo ze seznamu níže, které se chcete během navigace vyhnout:</string>
+    <string name="show_along_the_route">Ukázat podél trasy</string>
+    <string name="simulate_navigation">Simulovat navigaci</string>
+    <string name="choose_track_file_to_follow">Vyberte soubor s trasou, kterou chcete následovat</string>
+    <string name="voice_announcements">Hlasová oznámení</string>
+    <string name="intermediate_destinations">Mezicíle: %1$s</string>
+    <string name="arrive_at_time">Příjezd v %1$s</string>
+</resources>

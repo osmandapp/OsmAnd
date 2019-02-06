@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1984,7 +1984,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="shared_string_navigation">Navigatie</string>
     <string name="favourites_edit_dialog_title">Informatie over favoriet</string>
     <string name="simulate_your_location_stop_descr">Positiesimulatie beëindigen.</string>
-    <string name="simulate_your_location_descr">Positiesimulatie met een berekende route of een opgenomen GPX-track.</string>
+    <string name="simulate_your_location_descr">Routesimulatie met een berekende route of een opgeslagen GPX-track</string>
     <string name="av_locations_descr">GPX-bestand met notities.</string>
     <string name="av_locations">Locaties van geselecteerde AV-Notities</string>
     <string name="plugin_settings">Plugins</string>
@@ -2213,24 +2213,24 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_editors_ranking">OSM-Bijdragers Ranglijst</string>
     <string name="osm_live_subscription">OsmAnd Live abonnement</string>
     <string name="osm_live_subscribe_btn">Abonneren</string>
-    <string name="osm_live_email_desc">Dit is nodig om je informatie te geven over bijdragen.</string>
+    <string name="osm_live_email_desc">Nodig om je informatie te geven over bijdragen.</string>
     <string name="osm_live_user_public_name">Openbare Naam</string>
     <string name="osm_live_hide_user_name">Mijn naam niet tonen in verslagen</string>
     <string name="osm_live_support_region">Ondersteunde regio</string>
     <string name="osm_live_month_cost">Maandelijkse kosten</string>
-    <string name="osm_live_month_cost_desc">Abonnementskosten per maand.</string>
+    <string name="osm_live_month_cost_desc">Abonnementskosten per maand</string>
     <string name="osm_live_active">Actief</string>
     <string name="osm_live_not_active">Niet actief</string>
     <string name="osm_live_enter_email">Voer een geldig emailadres in</string>
     <string name="osm_live_enter_user_name">Voer je Openbare Naam in</string>
-    <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement!</string>
+    <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement! Een herstart van OsmAnd is nodig.</string>
     <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-bijdragers in deze regio.</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
-    <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OsmAnd Live Abonnement</string>
+    <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een
+\nabonnement op OsmAnd Live</string>
 
-    <string name="osm_live_header">"Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
-Een  gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
-Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen."</string>
+    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
+\nEen gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen. Als je OsmAnd en OSM wil ondersteunen, en ondersteund wilt worden door hen, is dit de perfecte manier om dat te doen.</string>
     
     <string name="select_map_marker">Kies markeervlaggetjes</string>
     <string name="map_markers_other">Andere markeervlaggetjes</string>
@@ -2239,9 +2239,7 @@ Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.
     <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! 
 Tijdelijk is {3} MB nodig en permanent {1} MB extra
 Nu is maar {2} MB beschikbaar.</string>
-    <string name="download_files_question_space_with_temp">{0} bestanden downloaden? 
-Tijdelijk is {3} MB nodig en permanent {1} MB. 
-Er is nu {2} MB beschikbaar</string>
+    <string name="download_files_question_space_with_temp">{0} bestanden downloaden\? Tijdelijk is {3} MB nodig en permanent {1} MB. Er is nu {2} MB beschikbaar.</string>
     <string name="upload_osm_note_description">Je kunt OSM Opmerkingen anoniem uploaden of je OpenStreetMap.org profiel gebruiken.</string>
     <string name="upload_osm_note">Upload OSM-notitie</string>
     <string name="map_marker_1st">Eerste Markeervlaggetje</string>
@@ -2261,11 +2259,11 @@ Er is nu {2} MB beschikbaar</string>
     
     <string name="recalculate_route">Route opnieuw berekenen</string>
     <string name="shared_string_topbar">Bovenste balk</string>
-    <string name="storage_directory_readonly_desc">De geselecteerde opslagmap is niet schrijfbaar. Daarom wordt nu intern geheugen gebruikt. Kies een geldige opslagmap.</string>
+    <string name="storage_directory_readonly_desc">De geselecteerde opslagmap is niet beschrijfbaar. Daarom wordt nu intern geheugen gebruikt. Kies een geldige opslagmap.</string>
     <string name="storage_directory_shared">Gedeeld geheugen</string>
     <string name="avoid_road">Deze weg vermijden</string>
-    <string name="shared_string_move_up">Omhoog</string>
-    <string name="shared_string_move_down">Omlaag</string>
+    <string name="shared_string_move_up">Omhoog↑</string>
+    <string name="shared_string_move_down">Omlaag↓</string>
     <string name="finish_navigation">Navigatie stoppen</string>
     
     <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
@@ -2296,9 +2294,9 @@ Er is nu {2} MB beschikbaar</string>
     <string name="access_sort">Sorteren</string>
     <string name="map_widget_bearing">Relatieve koers</string>
     <string name="access_disable_offroute_recalc">Geen herberekeing als u van de berekende route afwijkt</string>
-    <string name="access_disable_offroute_recalc_descr">Voorkom automatische hercalculatie van de route wanneer u van de route afwijkt.</string>
+    <string name="access_disable_offroute_recalc_descr">Geen automatische herberekening van de route, wanneer u van de route afwijkt.</string>
     <string name="access_disable_wrong_direction_recalc">Wijzig de route niet als u de verkeerde kant op gaat</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Voorkom automatische herberekening van de route als u in tegenovergestelde richting beweegt.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Geen automatische herberekening van de route als u in tegenovergestelde richting beweegt.</string>
     <string name="access_smart_autoannounce">Slimme aankondigingen</string>
     <string name="access_smart_autoannounce_descr">Geef alleen instructie als de richting naar het doel veranderd is.</string>
     <string name="access_autoannounce_period">Tijd tussen meldingen</string>
@@ -2351,8 +2349,8 @@ Er is nu {2} MB beschikbaar</string>
     <string name="get_started">Aan de slag</string>
     <string name="routing_attr_short_way_name">Economische route</string>
     <string name="routing_attr_short_way_description">Economische route gebruiken (meestal korter).</string>
-    <string name="replace_favorite_confirmation">Wil je favoriet %1$s inderdaad vervangen?</string>
-    <string name="update_all_maps_now">Wil u alle kaarten nu updaten?</string>
+    <string name="replace_favorite_confirmation">Wil je Favoriet %1$s inderdaad vervangen\?</string>
+    <string name="update_all_maps_now">Nu alle kaarten updaten\?</string>
     <string name="si_mi_meters">Mijlen/meters</string>
     <string name="skip_map_downloading">Kaarten later downloaden</string>
     <string name="search_another_country">Kies een andere regio</string>
@@ -2377,9 +2375,9 @@ Er is nu {2} MB beschikbaar</string>
     <string name="get_for_month">Abonneren voor %1$s per maand</string>
     <string name="osm_live_banner_desc">Krijg onbeperkte downloads van kaarten en updates vaker dan eens per maand: wekelijks, dagelijks of elk uur.</string>
     <string name="osmand_plus_banner_desc">Onbeperkte downloads van kaarten, updates, en Wikipedia plugin.</string>
-    <string name="skip_map_downloading_desc">Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via Menu - %1$s.</string>
+    <string name="skip_map_downloading_desc">"Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via \'Menu - %1$s\'. "</string>
     <string name="first_usage_wizard_desc">Kies kaarten om te downloaden aan de hand van uw huidige locatie.</string>
-    <string name="storage_place_description">OsmAnd bewaart gegevens (kaarten, tracks, enz.) in: %1$s</string>
+    <string name="storage_place_description">OsmAnd bewaart gegevens (kaarten, GPX-tracks, enz.) in: %1$s.</string>
     <string name="no_update_info_desc">Controleer niet op nieuwe versies en aanbiedingen van OsmAnd.</string>
     <string name="driving_region_australia">Australië</string>
     <string name="lang_kab">Kabylisch</string>
@@ -2396,7 +2394,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="subcategories">Subcategorieën</string>
     <string name="translit_names">Transliteratie van namen</string>
     <string name="translit_name_if_miss">Weergeven in westers schrift als naam in %1$s ontbreekt</string>
-    <string name="search_hint">Tik stad, adres of naam</string>
+    <string name="search_hint">Plaatsnaam, adres of naam invoeren</string>
     <string name="rendering_value_light_brown_name">Lichtbruin</string>
     <string name="rendering_value_dark_brown_name">Donkerbruin</string>
     <string name="rendering_attr_contourColorScheme_name">Kleur van hoogtelijnen</string>
@@ -2406,7 +2404,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="christmas_desc_q">Kerst-POI tonen?</string>
     <string name="rendering_attr_contourColorScheme_description">Kleur van hoogtelijnen</string>
     <string name="save_track_min_speed">Minimum snelheid om te registreren</string>
-    <string name="save_track_min_speed_descr">Filter: Kies minimumsnelheid waarboven GPX-opname actief wordt.</string>
+    <string name="save_track_min_speed_descr">Filter: Geen GPX-opname bij lagere snelheid.</string>
     <string name="save_track_min_distance">GPX-opname: minimale afstand</string>
     <string name="save_track_min_distance_descr">Filter: kies de minumumafstand vanaf het vorige punt, waarboven een nieuw GPX-punt wordt opgenomen.</string>
     <string name="save_track_precision">Minimale GPS-nauwkeurigheid</string>
@@ -2420,7 +2418,7 @@ Er is nu {2} MB beschikbaar</string>
     
     <string name="gpx_no_tracks_title">Je hebt nog geen GPX-tracks</string>
     <string name="gpx_no_tracks_title_folder">Je kunt ook GPX-tracks toevoegen aan de map</string>
-    <string name="gpx_add_track">GPX-track toevoegen</string>
+    <string name="gpx_add_track">"GPX-track toevoegen... "</string>
     <string name="gpx_appearance">GPX-stijl</string>
     
     
@@ -2446,8 +2444,8 @@ Er is nu {2} MB beschikbaar</string>
     <string name="rendering_value_high_name">Hoog</string>
     <string name="rendering_value_medium_w_name">Gemiddeld</string>
     <string name="rendering_value_low_name">Laag</string>
-    <string name="rendering_attr_contourWidth_description">Hoogtelijnen dikte</string>
-    <string name="rendering_attr_contourWidth_name">Hoogtelijnen dikte</string>
+    <string name="rendering_attr_contourWidth_description">Hoogtelijnen: dikte</string>
+    <string name="rendering_attr_contourWidth_name">Hoogtelijnen: dikte</string>
     <string name="rendering_attr_hideWaterPolygons_description">Watervlakten</string>
     <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlakten</string>
     
@@ -2538,7 +2536,7 @@ voor Gebied: %1$s x %2$s</string>
 	<string name="shared_string_action_name">Titel voor de Actie (eventueel wijzigen)</string>
 <string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten.</string>
     <string name="rendering_attr_depthContours_name">Zeedieptelijnen</string>
-	<string name="select_gpx_folder">Kies map voor GPX-tracks</string>
+	<string name="select_gpx_folder">Kies map voor GPX bestanden</string>
     <string name="file_can_not_be_moved">Bestand kan niet verplaatst worden.</string>
     <string name="shared_string_move">Verplaats</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
@@ -2580,7 +2578,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="select_city">Plaatsnaam kiezen</string>
     <string name="select_postcode">Postcode kiezen</string>
     <string name="quick_action_auto_zoom">Autozoom aan/uit</string>
-    <string name="quick_action_auto_zoom_desc">Een drukop op de sneltoets zet de automatische zoom volgens de snelheid aan of uit.</string>
+    <string name="quick_action_auto_zoom_desc">Een druk op op de sneltoets zet de automatische zoom volgens de snelheid aan of uit.</string>
     <string name="quick_action_auto_zoom_on">Autozoom aan</string>
     <string name="quick_action_auto_zoom_off">Autozoom uit</string>
     <string name="quick_action_add_destination">Bestemming toevoegen</string>
@@ -2594,7 +2592,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="subscribe_email_error">Foutmelding</string>
     <string name="subscribe_email_desc">Abonneer op de mailinglist voor aanbiedingen en ontvang 3 extra kaart-downloads!</string>
     <string name="depth_contour_descr">Deze kaarten tonen de dieptepunten en -contouren van zeeën en oceanen.</string>
-    <string name="sea_depth_thanks">Bedankt voor het aanschaffen van Zeediepten en -contouren!</string>
+    <string name="sea_depth_thanks">Bedankt voor het aanschaffen van Zeediepten en -contouren</string>
     <string name="index_item_depth_contours_osmand_ext">Zeediepte-contourlijnen</string>
     <string name="index_item_depth_points_southern_hemisphere">Zeediepten Zuidelijk Halfrond</string>
     <string name="index_item_depth_points_northern_hemisphere">Zeediepten Noordelijk Halfrond</string>
@@ -2604,7 +2602,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_visible">Zichtbaar</string>
     <string name="restore_purchases">Aankopen herstellen</string>
     <string name="fonts_header">Lettertypes voor de kaart</string>
-    <string name="do_not_show_startup_messages_desc">Onderdruk meldingen van app-aanbiedingen en speciale lokale gebeurtenissen.</string>
+    <string name="do_not_show_startup_messages_desc">Geen meldingen van app-aanbiedingen en speciale lokale gebeurtenissen tonen.</string>
     <string name="parking_options">Parkeermogelijkheden</string>
     <string name="full_version_thanks">Dank voor het aanschaffen van de volledige versie van OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Heuvelachtige wegen</string>
@@ -2621,17 +2619,17 @@ voor Gebied: %1$s x %2$s</string>
     <string name="animate_my_location_desc">De kaart vloeiend weergeven tijdens navigatie.</string>
     <string name="shared_string_slope">Helling</string>
     <string name="add_new_folder">Nieuwe map ttoevoegen</string>
-    <string name="points_delete_multiple_succesful">Punt(en) met succes verwijderd.</string>
+    <string name="points_delete_multiple_succesful">Punt(en) verwijderd.</string>
     <string name="points_delete_multiple">Er worden %1$d punt(en) verwijderd. Doorgaan ?</string>
     <string name="route_points_category_name">Afslagen op de route</string>
     <string name="track_points_category_name">Belangrijke punten op deze route</string>
     <string name="routing_attr_relief_smoothness_factor_name">Kies voorkeur voor hoogteverschillen</string>
     <string name="shared_string_paused">In pauze</string>
     <string name="lang_ber">Berbers</string>
-    <string name="hillshade_menu_download_descr">Om reliëfschaduw weer te geven, moet je de reliëfschaduwkaart voor deze regio downloaden.</string>
-    <string name="hillshade_purchase_header">Om reliëfschaduw op de kaart weer te geven, moet je de Hoogtelijnen-plugin kopen en installeren.</string>
+    <string name="hillshade_menu_download_descr">Om reliëfschaduw weer te geven, de reliëfschaduwkaart voor deze regio downloaden.</string>
+    <string name="hillshade_purchase_header">Om reliëfschaduw op de kaart weer te geven, de Hoogtelijnen-plugin kopen en installeren</string>
     <string name="hide_from_zoom_level">Niet tonen vanaf zoom-niveau</string>
-    <string name="srtm_menu_download_descr">Download de hoogtelijnenkaart voor deze regio om hoogtelijnen te zien.</string>
+    <string name="srtm_menu_download_descr">Download de hoogtelijnenkaart voor deze regio.</string>
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_purchase_header">Om hoogtelijnen weer te geven, moet je de Hoogtelijnen-plugin kopen en installeren</string>
     <string name="srtm_color_scheme">Kleurschema</string>
@@ -2687,13 +2685,13 @@ voor Gebied: %1$s x %2$s</string>
 \n • Afrika: ** 
 \n • Antarctica: * Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australië tot de VS, Nederland, Duitsland, Spanje, Japan, …</string>
     <string name="save_poi_too_many_uppercase">Naam bevat erg veel hoofdletters, toch doorgaan?</string>
-    <string name="search_favorites">Zoek favorieten</string>
+    <string name="search_favorites">Zoek Favorieten</string>
     <string name="quick_action_showhide_osmbugs_title">OSM-opmerkingen tonen/verbergen</string>
     <string name="quick_action_osmbugs_show">Toon OSM-opmerkingen</string>
     <string name="quick_action_osmbugs_hide">Verberg OSM-opmerkingen</string>
     <string name="quick_action_showhide_osmbugs_descr">Een druk op de sneltoets toont of verbergt OSM-opmerkingen.</string>
     <string name="sorted_by_distance">Gesorteerd op afstand</string>
-    <string name="private_access_routing_req">Uw bestemming ligt in een gebied dat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan?</string>
+    <string name="private_access_routing_req">Uw bestemming ligt in een gebied dat particulier eigendom is. Wilt je gebruik van particuliere wegen voor deze route toestaan\?</string>
     <string name="restart_search">Opnieuw zoeken</string>
     <string name="increase_search_radius">Zoekgebied vergroten</string>
     <string name="nothing_found">Niets gevonden</string>
@@ -2709,7 +2707,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="improve_coverage_mapillary">Verbeter de fotocollectie van Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installeer Mapillary om een of meerdere foto\'s aan deze locatie toe te voegen.</string>
     <string name="mapillary_action_descr">Voeg zelf foto\'s van deze plek toe via Mapillary.</string>
-    <string name="mapillary_widget_descr">Voeg eenvoudig info toe aan Mapillary.</string>
+    <string name="mapillary_widget_descr">Snel bijdragen aan Mapillary.</string>
     <string name="mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
     <string name="plugin_mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
     <string name="shared_string_permissions">Rechten</string>
@@ -2769,7 +2767,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="osn_modify_dialog_title">Wijzig notitie</string>
     <string name="context_menu_item_modify_note">Wijzig OSM-notitie</string>
     <string name="make_round_trip_descr">Kopieer het beginpunt en voeg het toe als bestemming.</string>
-    <string name="make_round_trip">Ga heen en terug</string>
+    <string name="make_round_trip">Een rondreis maken</string>
     
     <string name="shared_string_markers">Markeringen</string>
     <string name="coordinates_format">Coördinatenformaat</string>
@@ -2781,29 +2779,29 @@ voor Gebied: %1$s x %2$s</string>
     <string name="use_location">Gebruik mijn positie</string>
     <string name="add_location_as_first_point_descr">Voeg je positie toe als startpunt voor de optimale route.</string>
     <string name="my_location">Mijn positie</string>
-    <string name="shared_string_finish">Einde</string>
+    <string name="shared_string_finish">Afsluiten</string>
     <string name="plan_route">Plan route</string>
     <string name="shared_string_sort">Sorteer</string>
     <string name="coordinate_input">Invoer van coördinaten</string>
     <string name="is_saved">is opgeslagen</string>
-    <string name="marker_save_as_track_descr">Exporteer uw markeringen naar een bestand dat u hier opgeeft:</string>
-    <string name="marker_save_as_track">Bewaar als spoor</string>
+    <string name="marker_save_as_track_descr">Exporteer uw Markeervlaggetjes naar het volgende bestand:</string>
+    <string name="marker_save_as_track">Opslaan als GPX-track</string>
     <string name="move_to_history">Verplaats naar geschiedenis</string>
-    <string name="group_will_be_removed_after_restart">De groep wordt verwijderd na een herstart van de app.</string>
+    <string name="group_will_be_removed_after_restart">De groep is verwijderd na een herstart van de app.</string>
     <string name="show_guide_line">Richtingslijnen tonen</string>
     <string name="show_arrows_on_the_map">Toon pijlen op de kaart</string>
-    <string name="show_passed">Toon afgelopen</string>
-    <string name="hide_passed">Verberg afgelopen</string>
+    <string name="show_passed">Afgehandelde tonen</string>
+    <string name="hide_passed">Afgehandelde verbergen</string>
     <string name="remove_from_map_markers">Uit kaartmarkeringen verwijderen</string>
     <string name="date_added">Toegevoegd op</string>
     <string name="order_by">Sorteer op:</string>
     <string name="marker_show_distance_descr">Weergave van afstand en richting naar markeingen op het kaartscherm:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kaart naar beweegrichting draaien vanaf</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Kies de snelheid waarboven de kaart gedraaid wordt van \'In richting van beweging\' naar \'volgens kompasrichting\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Snelheidsdrempel beweegrichting</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Kies de snelheid waarboven Kaartrotatie wijzigt van \'Volgens kompas\' naar \'In beweegrichting\'.</string>
     <string name="all_markers_moved_to_history">Alle kaartmarkeringen zijn naar de geschiedenis verplaatst</string>
     <string name="marker_moved_to_history">Kaartmerkering naar geschiedenis verplaatst</string>
     <string name="marker_moved_to_active">Kaartmarkering actief gemaakt</string>
-    <string name="passed">Laatst gebruikte: %1$s</string>
+    <string name="passed">Laatst gebruikt: %1$s</string>
     <string name="make_active">Maak actief</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd zal de punten verbinden met een route voor het gekozen profiel.</string>
     <string name="measurement_tool_save_as_new_track_descr">Sla de punten op als routepunten of als een lijn.</string>
@@ -2815,7 +2813,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="store_tracks_in_monthly_directories">Bewaar opgenomen sporen per maand in een map</string>
     <string name="store_tracks_in_monthly_directories_descrp">Bewaar opgenomen sporen in een map voor elke maand (bijvoorbeeld 2018-01).</string>
     <string name="mapillary_menu_descr_tile_cache">Herlaad de tegels om de gegevens te verversen.</string>
-    <string name="mapillary_menu_title_tile_cache">Tegel-cache</string>
+    <string name="mapillary_menu_title_tile_cache">Tegel-cachegeheugen</string>
     <string name="mapillary_menu_descr_username">Alleen afbeeldingen bekijken die zijn toegevoegd door</string>
     <string name="rendering_value_translucent_pink_name">Transparant roze</string>
     <string name="ascent_descent">Stijgen/Dalen</string>
@@ -2842,7 +2840,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="import_track_desc">Bestand %1$s bevat geen waypoints. Importeren als een track?</string>
     <string name="move_point">Verplaats punt</string>
     <string name="add_segment_to_the_track">Voeg toe aan GPX-track</string>
-<string name="mapillary_menu_filter_description">Filter afbeeldingen op gebruikersnaam of datum. Alleen actief wanneer ingezoomd.</string>
+<string name="mapillary_menu_filter_description">"Filter afbeeldingen op gebruikersnaam,  datum of type. Alleen actief wanneer ingezoomd."</string>
     <string name="show_map">Kaart weergeven</string>
     <string name="route_is_calculated">Route berekend</string>
     <string name="round_trip">Retour</string>
@@ -2859,9 +2857,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface">Volledig scherm</string>
     
     <string name="mark_passed">Markering gepasseerd</string>
-    <string name="import_gpx_file_description">kan worden geïmporteerd als favoriet of trackbestand.</string>
+    <string name="import_gpx_file_description">kan worden geïmporteerd als Favorieten of als GPX-track.</string>
     <string name="import_as_gpx">importeer als GPX bestand</string>
-    <string name="import_as_favorites">Importeren als favoriet</string>
+    <string name="import_as_favorites">"Importeren als Favorieten "</string>
     <string name="import_file">Importeer bestand</string>
 	<string name="appearance_on_the_map">Weergave op de kaart</string>
     <string name="favourites_group">Favorietencategorie</string>
@@ -2869,7 +2867,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="empty_state_markers_active">Maak markeringen aan op de kaart!</string>
     <string name="shared_string_two">Twee</string>
     <string name="shared_string_one">Een</string>
-    <string name="active_markers_descr">Kies hoeveel richtingaanwijzers u wilt zien.</string>
+    <string name="active_markers_descr">"Kies hoeveel richtingaanwijzers getoond worden. "</string>
     <string name="digits_quantity">Aantal decimalen</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
@@ -2909,28 +2907,28 @@ voor Gebied: %1$s x %2$s</string>
     <string name="by_type">Op type</string>
     <string name="shared_string_more_without_dots">Meer</string>
     <string name="show_number_pad">Toon cijfertoetsenbord</string>
-    <string name="shared_string_restart">"Herstarten "</string>
+    <string name="shared_string_restart">"App herstarten "</string>
     <string name="show_images">Afbeeldingen tonen</string>
-    <string name="purchase_cancelled_dialog_title">"Je hebt het abonnement op OsmAnd Live opgezegd "</string>
+    <string name="purchase_cancelled_dialog_title">"U hebt het abonnement op OsmAnd Live opgezegd "</string>
     <string name="purchase_cancelled_dialog_descr">"Vernieuw het abonnement om alle mogelijkheden te blijven gebruiken: "</string>
 
-    <string name="maps_you_need_descr">"Op basis van je opgeslagen artikelen, raden we je aan de volgende kaarten te downloaden: "</string>
+    <string name="maps_you_need_descr">"Op basis van je bladwijzers, raden we je aan de volgende kaarten te downloaden: "</string>
     <string name="maps_you_need">Kaarten die je nodig hebt</string>
     <string name="osmand_team">OsmAnd-team</string>
     <string name="popular_destinations">"Populaire bestemmingen "</string>
     <string name="paid_app">Betaalde app</string>
     <string name="paid_plugin">"Betaalde plugin "</string>
     <string name="travel_card_update_descr">"Nieuwe Wikivoyage-bestanden beschikbaar, updaten om deze te gebruiken. "</string>
-	<string name="travel_card_download_descr">"Download deze Wikivoyage-reisgidsen om artikelen te lezen over plaatsen wereldwijd, zonder internetverbinding. "</string>
+	<string name="travel_card_download_descr">"Download Wikivoyage-reisgidsen om artikelen te lezen over plaatsen wereldwijd, zonder internetverbinding. "</string>
 	<string name="update_is_available">"Update beschikbaar "</string>
 	<string name="download_file">"Bestand downloaden "</string>
     <string name="start_editing_card_image_text">Wikivoyage is de vrije, wereldwijde reisgids die iedereen kan bewerken.</string>
-    <string name="welcome_to_open_beta_description">Reisgids in gebaseerd op Wikivoyage. Test gratis alle mogelijkheden tijdens de open-beta-testfase. Hierna is Reisgids beschikbaar voor abonnees van OsmAnd Unlimited en in OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">"Reisgids in gebaseerd op Wikivoyage. Test gratis alle mogelijkheden tijdens de open-beta-testfase. Hierna is Reisgids beschikbaar voor abonnees van OsmAnd Unlimited en in OsmAnd+. "</string>
     <string name="start_editing_card_description">"Je kunt artikelen bewerken op Wikivoyage.org. Deel jouw kennis, ervaringen, talent en interesses "</string>
     <string name="start_editing">"Begin met bewerken "</string>
     <string name="get_unlimited_access">"Krijg onbegrensde toegang "</string>
     <string name="welcome_to_open_beta">Welkom bij de open beta</string>
-    <string name="wikivoyage_travel_guide">Wikivoyage Reisgids</string>
+    <string name="wikivoyage_travel_guide">Reisgids</string>
     <string name="wikivoyage_travel_guide_descr">Voert je binnen OsmAnd naar de meest interessante plaatsen op aarde, zonder internetverbinding.</string>
     <string name="monthly_map_updates">Kaartupdates: <b>Elke maand</b></string>
     <string name="daily_map_updates">Kaartupdates: <b>Elk uur</b></string>
@@ -2948,7 +2946,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="unlock_all_features">"Alle mogelijkheden van OsmAnd gebruiken "</string>
 
     <string name="purchase_dialog_title">Kies je aankoop</string>
-    <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om reisartikelen offline te lezen:</string>
+    <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om Reisgids offline te gebruiken:</string>
     <string name="purchase_dialog_subtitle">Kies een passend product:</string>
     <string name="shared_string_dont">Niet doen</string>
     <string name="shared_string_do">Wel doen</string>
@@ -2956,13 +2954,13 @@ voor Gebied: %1$s x %2$s</string>
     <string name="wikivoyage_download_pics">"Afbeeldingen downloaden "</string>
     <string name="wikivoyage_download_pics_descr">Afbeeldingen bij de artikelen kunnen gedownload worden voor offline gebruik. Je kan deze instelling altijd wijzigen via Opties.</string>
     <string name="shared_string_wifi_only">Alleen met Wifi</string>
-    <string name="select_travel_book">"Reisgids kiezen "</string>
+    <string name="select_travel_book">"Een reisgids kiezen "</string>
     <string name="shared_string_travel_book">"Reisgids "</string>
     <string name="online_webpage_warning">Pagina is alleen online beschikbaar. Openen in webbrowser?</string>
     <string name="images_cache">Afbeeldingen-cache</string>
     <string name="delete_search_history">"Zoekgeschiedenis wissen "</string>
-    <string name="download_images">Afbeeldingen tonen</string>
-    <string name="download_maps_travel">Reiskaarten</string>
+    <string name="download_images">"Afbeeldingen downloaden "</string>
+    <string name="download_maps_travel">Reisgidsen</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikel verwijderd</string>
     <string name="wikivoyage_search_hint">"Zoek: Land, Provincie, Stad "</string>
@@ -2992,8 +2990,8 @@ voor Gebied: %1$s x %2$s</string>
 	<string name="south_abbreviation">Z</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">"Naam (niet verplicht) "</string>
-    <string name="transport_nearby_routes_within">"Lijnen vanaf nabije halte, afstand "</string>
-    <string name="transport_nearby_routes">"in de buurt "</string>
+    <string name="transport_nearby_routes_within">Lijnen vanaf nabije halte, binnen</string>
+    <string name="transport_nearby_routes">Binnen</string>
     <string name="enter_the_file_name">Bestandsnaam invoeren.</string>
     <string name="map_import_error">"Fout bij kaartimport "</string>
     <string name="map_imported_successfully">"Kaart geïmporteerd "</string>
@@ -3038,7 +3036,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="read_wikipedia_offline">Wikipedia offline lezen</string>
     <string name="download_all">Alles downloaden</string>
     <string name="will_open_on">Gaat open om</string>
-    <string name="add_favourites_group_to_markers_descr">Kies een categorie favorieten om aan de markeringen toe te voegen.</string>
+    <string name="add_favourites_group_to_markers_descr">Kies een categorie Favorieten avorieten om aan de markeringen toe te voegen.</string>
     <string name="empty_state_markers_groups">Groepen importeren</string>
     <string name="distance_indication_descr">Kies hoe de afstand naar actieve markeringen weergegeven wordt.</string>
     <string name="index_item_world_wikivoyage">Wereldwijde Wikivoyage-artikelen</string>
@@ -3104,4 +3102,33 @@ voor Gebied: %1$s x %2$s</string>
 \n • Ondersteuning voor het wijzigen van polygon-(non-faciliteits)voorwerpen
 \n</string>
     <string name="test_voice_desrc">Druk op een knop en luister naar de bijhorende gesproken melding om ontbrekende of foutieve meldingen te identificeren.</string>
+    <string name="osm_live_subscriptions">Abonnementen</string>
+    <string name="powered_by_osmand">Mogelijk gemaakt door OsmAnd</string>
+    <string name="osm_live_plan_pricing">Tariefoverzicht</string>
+    <string name="osm_live_payment_monthly_title">Betaal maandelijks</string>
+    <string name="osm_live_payment_3_months_title">Betaling per kwartaal</string>
+    <string name="osm_live_payment_annual_title">"Jaarlijkse betaling "</string>
+    <string name="osm_live_payment_month_cost_descr">"%1$s per maand "</string>
+    <string name="osm_live_payment_month_cost_descr_ex">"%1$.2f %2$s per maand "</string>
+    <string name="osm_live_payment_discount_descr">Bespaar %1$s!</string>
+    <string name="osm_live_payment_current_subscription">"Uw huidige abonnement "</string>
+    <string name="osm_live_payment_renews_monthly">Wordt maandelijks verlengd</string>
+    <string name="osm_live_payment_renews_quarterly">"Wordt per kwartaal verlengd "</string>
+    <string name="osm_live_payment_renews_annually">"Wordt per jaar verlengd "</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Kies de gewenste betalingsperiode:</string>
+    <string name="osm_live_payment_contribute_descr">"Een gedeelte van de inkomsten gaat naar  OS-medewerkers. "</string>
+    <string name="markers_remove_dialog_msg">Markeervlaggetje \'%s\' verwijderen\?</string>
+    <string name="edit_map_marker">"Markeervlaggetje bewerken "</string>
+    <string name="third_party_application">App van derde partij</string>
+    <string name="search_street">Straatnaam zoeken</string>
+    <string name="start_search_from_city">Plaatsnaam kiezen</string>
+    <string name="shared_string_restore">"Herstellen "</string>
+    <string name="keep_passed_markers">Gepasseerde vlaggetjes op de kaart behouden</string>
+    <string name="more_transport_on_stop_hint">"Op deze halte zijn er meerdere verbindingen. "</string>
+    <string name="ask_for_location_permission">"Geef OsmAnd toegang tot Locatievoorzieningen om door te gaan. "</string>
+    <string name="keep_passed_markers_descr">Markeervlaggetjes die als Favorieten of als GPX-track toegevoegd zijn, en afgehandeld zijn, blijven zichtbaar op de kaart. Als die groep niet meer actief is, zullen ze verdwijnen.</string>
+    <string name="mapillary_menu_title_pano">Alleen 360°-foto\'s tonen</string>
+    <string name="rendering_value_black_name">Zwart</string>
+    <string name="copy_location_name">"Naam kopiëren "</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
@@ -2723,7 +2723,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
     <string name="mapillary_menu_descr_username">Pahliadzieć toĺki vyjavy dadanyja</string>
     <string name="mapillary_menu_title_username">Imia karystaĺnika</string>
-    <string name="mapillary_menu_filter_description">Fiĺtravać vyjavy pa adpraŭniku ci dacie. Aktyŭnyja toĺki dlia bujnoha pavieličennia.</string>
+    <string name="mapillary_menu_filter_description">Filtravać vyjavy pa adpraŭniku, pa dacie abo pa typu. Aktyŭnyja toĺki dlia bujnoha pavieličennia.</string>
     <string name="shared_string_reload">Abnavić</string>
     <string name="mapillary_menu_descr_tile_cache">Abnavić frahmienty, kab ubačyć aktuaĺnyja danyja.</string>
     <string name="mapillary_menu_title_tile_cache">Keš frahmientaŭ</string>
@@ -3130,7 +3130,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="edit_map_marker">Redahavać paznaku mapy</string>
     <string name="third_party_application">Staronniaje prykladannie</string>
     <string name="search_street">Pošuk vulicy</string>
-    <string name="start_search_from_city">Pačać pošuk z horada</string>
+    <string name="start_search_from_city">Spačatku abiarycie horad</string>
     <string name="shared_string_restore">Adnavić</string>
     <string name="keep_passed_markers_descr">Paznaki, dadanyja jak hrupa uliublionych ci projdienych maršrutnych GPX-kropak, zastanucca na mapie. Kali hrupa nieaktyŭnaja, paznaki zniknuć z mapy.</string>
     <string name="keep_passed_markers">Pakinuć projdzienyja paknaki na mapie</string>
@@ -3152,4 +3152,25 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \n
 \n</string>
     <string name="rendering_value_black_name">Čorny</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Plan i ceny</string>
+    <string name="osm_live_payment_monthly_title">Placić štomiesiačna</string>
+    <string name="osm_live_payment_3_months_title">Placić raz u 3 miesiacy</string>
+    <string name="osm_live_payment_annual_title">Pracić štohodna</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / miesiac</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / miesiac</string>
+    <string name="osm_live_payment_discount_descr">Aščada %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Vaša ciapierašniaja padpiska</string>
+    <string name="osm_live_payment_renews_monthly">Abnaŭliajecca štomiesiac</string>
+    <string name="osm_live_payment_renews_quarterly">Abnaŭliajecca štokvartaĺna</string>
+    <string name="osm_live_payment_renews_annually">Abnaŭliajecca štohodna</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Abiarycie zručnuju dlia vas pieryjadyčnasć aplat:</string>
+    <string name="osm_live_payment_contribute_descr">Častka dachodu idzie ŭdzieĺnikam OpenStreetMap.</string>
+    <string name="powered_by_osmand">Pracuje na OsmAnd</string>
+    <string name="mapillary_menu_title_pano">Pakazać tolki 360° malunki</string>
+    <string name="osm_live_subscriptions">Padpiski</string>
+    <string name="shared_string_launch">Zapusk</string>
+    <string name="lang_gn_py">Huarani</string>
+    <string name="run_full_osmand_msg">Vy karystajeciesia mapaj {0}, jakaja pastaŭliajecca OsmAnd. Vy chočacie zapuscić poŭnuju viersiju OsmAnd\?</string>
+    <string name="run_full_osmand_header">Zapuscić OsmAnd\?</string>
+</resources>

@@ -53,12 +53,12 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -514,7 +514,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		if (markersGr != null) {
 			activity.invalidateOptionsMenu();
 			if (gpxFile != null) {
-				app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+				app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false, true, true, false);
 			}
 			if (fragmentAdapter != null) {
 				fragmentAdapter.hideTransparentOverlay();

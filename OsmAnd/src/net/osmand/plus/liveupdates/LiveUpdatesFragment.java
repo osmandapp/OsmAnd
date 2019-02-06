@@ -14,22 +14,16 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.SwitchCompat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
@@ -47,10 +41,12 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
@@ -147,18 +143,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		if (!Version.isDeveloperVersion(getMyApplication())) {
 			subscriptionHeader = inflater.inflate(R.layout.live_updates_header, listView, false);
 			updateSubscriptionHeader();
-
-			listView.addHeaderView(subscriptionHeader);
-			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					if (position == 0 && !processing && InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
-						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-						subscriptionFragment.setEditMode(true);
-						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
-					}
-				}
-			});
+			listView.addHeaderView(subscriptionHeader, "subscriptionHeader", false);
 		}
 		listView.setAdapter(adapter);
 
@@ -179,17 +164,52 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
 				statusTextView.setText(getString(R.string.osm_live_active));
 				statusIcon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_done));
+
 				regionNameHeaderTextView.setText(R.string.osm_live_support_region);
 				String countryName = getSettings().BILLING_USER_COUNTRY.get();
-				if (Algorithms.isEmpty(countryName)) {
-					if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+				if (purchaseHelper != null) {
+					InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
+					if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
+						if (Algorithms.isEmpty(countryName)) {
+							if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+								regionNameHeaderTextView.setText(R.string.default_buttons_support);
+								countryName = getString(R.string.osmand_team);
+							} else {
+								countryName = getString(R.string.shared_string_world);
+							}
+						}
+					} else {
 						regionNameHeaderTextView.setText(R.string.default_buttons_support);
 						countryName = getString(R.string.osmand_team);
-					} else {
-						countryName = getString(R.string.shared_string_world);
 					}
+				} else {
+					regionNameHeaderTextView.setText(R.string.default_buttons_support);
+					countryName = getString(R.string.osmand_team);
 				}
 				regionNameTextView.setText(countryName);
+
+				View subscriptionsButton = subscriptionHeader.findViewById(R.id.button_subscriptions);
+				View settingsButtonContainer = subscriptionHeader.findViewById(R.id.button_settings_container);
+				View settingsButton = subscriptionHeader.findViewById(R.id.button_settings);
+				subscriptionsButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ChoosePlanDialogFragment.showOsmLiveInstance(getActivity().getSupportFragmentManager());
+					}
+				});
+				if (isDonationSupported()) {
+					settingsButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							showDonationSettings();
+						}
+					});
+					settingsButtonContainer.setVisibility(View.VISIBLE);
+				} else {
+					settingsButton.setOnClickListener(null);
+					settingsButtonContainer.setVisibility(View.GONE);
+				}
 
 				subscriptionBanner.setVisibility(View.GONE);
 				subscriptionInfo.setVisibility(View.VISIBLE);
@@ -209,8 +229,10 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				subscriptionButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+						}
 					}
 				});
 
@@ -228,10 +250,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			if (purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 				enableProgress();
 			}
-		}
-		if (((OsmLiveActivity) getActivity()).shouldOpenSubscription()) {
-			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
 		}
 	}
 
@@ -251,34 +269,18 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())
-				&& !Version.isDeveloperVersion(getMyApplication())) {
-
-			ActionBar actionBar = getMyActivity().getSupportActionBar();
-			if (actionBar != null) {
-				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-			}
-
-			SubMenu split = menu.addSubMenu(R.string.shared_string_more_actions);
-			split.setIcon(R.drawable.ic_overflow_menu_white);
-			MenuItemCompat.setShowAsAction(split.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			MenuItem item = split.add(0, SUBSCRIPTION_SETTINGS, 0, R.string.osm_live_subscription_settings);
-			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+	private boolean isDonationSupported() {
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
+			return monthlyPurchased != null && monthlyPurchased.isDonationSupported();
 		}
+		return false;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == SUBSCRIPTION_SETTINGS && !processing) {
-			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-			subscriptionFragment.setEditMode(true);
-			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	private void showDonationSettings() {
+		SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+		subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
 	}
 
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
@@ -715,7 +717,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
+		if (purchaseHelper != null && purchaseHelper.getLiveUpdates().containsSku(sku)) {
 			updateSubscriptionHeader();
 		}
 

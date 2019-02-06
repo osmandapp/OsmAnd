@@ -39,7 +39,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.util.Algorithms;
 

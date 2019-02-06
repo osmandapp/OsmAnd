@@ -84,7 +84,7 @@
   <string name="accessibility_mode">Режим допоміжних можливостей</string>
   <string name="accessibility_mode_descr">Вмикає функції для користувачів із вадами.</string>
   <string name="shared_string_on">Увімкнено</string>
-  <string name="shared_string_off">Вимкнено</string>
+  <string name="shared_string_off">Вимкнути</string>
   <string name="accessibility_default">Використовувати системні налаштування</string>
   <string name="backToMenu">Повернутися до меню</string>
   <string name="zoomOut">Зменшити</string>
@@ -268,7 +268,7 @@
   <string name="favorite_friends_category">Друзі</string>
   <string name="favorite_places_category">Місця</string>
   
-  <string name="shared_string_name">Назва</string>
+  <string name="shared_string_name">Імʼя</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="shared_string_no_thanks">Ні, дякую</string>
   <string name="basemap_missing">Завантажте базову мапу світу, щоб оглядати весь світ на малих рівнях масштабування.</string>
@@ -1577,7 +1577,7 @@
 	<string name="create_poi_link_to_osm_doc"><u>Онлайнова OSM</u> класифікація мапи із зображеннями.</string>
 	<string name="import_file_favourites">Зберегти дані як GPX-файл чи імпортувати маршрутні точки в \'Закладки\'?</string>
 	
-	<string name="shared_string_share">Поділитись</string>
+	<string name="shared_string_share">Поділитися</string>
 	<string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
 	<string name="navigation_intent_invalid">Невірний формат: %s</string>
 <string name="rendering_attr_coloredBuildings_name">Кольорове маркування будівель за типом</string>
@@ -1618,7 +1618,7 @@
     <string name="duration">Тривалість</string>
     <string name="distance">Віддаль</string>
     <string name="index_tours">Подорожі</string>
-    <string name="shared_string_all">Усі</string>
+    <string name="shared_string_all">Всі</string>
     <string name="shared_string_waypoints">Шляхові точки</string>
     
     <string name="way_alarms">Перешкоди</string>
@@ -2595,7 +2595,7 @@
     <string name="show_from_zoom_level">Відображення від рівня масштабування</string>
     <string name="routing_attr_allow_private_name">Дозволити приватний доступ</string>
     <string name="routing_attr_allow_private_description">Дозволити доступ на приватну територію.</string>
-    <string name="display_zoom_level">Відображення рівня масштабування: %1$s</string>
+    <string name="display_zoom_level">Рівень масштабування: %1$s</string>
     <string name="favorite_group_name">Назва групи</string>
     <string name="change_color">Зміна кольору</string>
     <string name="edit_name">Редагувати ім\'я</string>
@@ -2885,7 +2885,7 @@
     <string name="my_location">Моє місцезнаходження</string>
     <string name="shared_string_finish">Фініш</string>
     <string name="plan_route">Планувати маршрут</string>
-    <string name="shared_string_sort">Сортувати</string>
+    <string name="shared_string_sort">Впорядкувати</string>
     <string name="coordinate_input">Введення координат</string>
     <string name="is_saved">збережено</string>
     <string name="marker_save_as_track_descr">Експортувати Ваші маркери у наступний GPX-файл:</string>
@@ -2939,7 +2939,7 @@
     <string name="rename_marker">Перейменувати маркер</string>
     <string name="appearance_on_the_map">Поява на мапі</string>
     <string name="add_track_to_markers_descr">Виберіть трек для додавання шляхових точок в маркери.</string>
-    <string name="add_favourites_group_to_markers_descr">Виберіть категорію закладок для додавання до маркерів.</string>
+    <string name="add_favourites_group_to_markers_descr">Виберіть категорію Закладок для додавання до позначок.</string>
     <string name="shared_string_gpx_waypoints">Шляхові точки треку</string>
     <string name="favourites_group">Категорія закладок</string>
     <string name="add_group">Додати групу</string>
@@ -3029,7 +3029,7 @@
     <string name="enter_lat">Введіть широту</string>
     <string name="enter_lat_and_lon">Введіть широту та довготу</string>
 	<string name="dd_mm_ss_format">DD°MM′SS″</string>
-	<string name="dd_dddddd_format">DD.DDDDDD°</string>
+	<string name="dd_dddddd_format">ГГ.ГГГГГГ°</string>
 	<string name="dd_ddddd_format">DD.DDDDD°</string>
 	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
 	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
@@ -3197,7 +3197,7 @@
     <string name="ask_for_location_permission">Будь ласка, надайте OsmAnd дозвіл визначати місцезнаходження для того, щоб продовжити.</string>
     <string name="rendering_value_black_name">Чорний</string>
     <string name="search_street">Пошук вулиці</string>
-    <string name="start_search_from_city">Почати пошук з міста</string>
+    <string name="start_search_from_city">Спочатку оберіть місто</string>
     <string name="shared_string_restore">Відновити</string>
     <string name="keep_passed_markers_descr">Позначки, додані як група Закладок або маршрутних точок GPX і позначені пройденими, залишаться на мапі. Якщо група неактивна, позначки зникнуть з мапи.</string>
     <string name="keep_passed_markers">Залишити пройдені позначки на мапі</string>
@@ -3205,4 +3205,19 @@
     <string name="markers_remove_dialog_msg">Видалити позначку мапи \'%s\'\?</string>
     <string name="edit_map_marker">Редагувати позначку мапи</string>
     <string name="third_party_application">Стороння програма</string>
+    <string name="osm_live_plan_pricing">План і ціни</string>
+    <string name="osm_live_payment_monthly_title">Платити щомісячно</string>
+    <string name="osm_live_payment_3_months_title">Платити раз на 3 місяці</string>
+    <string name="osm_live_payment_annual_title">Платити раз на рік</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / місяць</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / місяць</string>
+    <string name="osm_live_payment_discount_descr">Заощадьте %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Ваша поточна підписка</string>
+    <string name="osm_live_payment_renews_monthly">Оновлюється щомісяця</string>
+    <string name="osm_live_payment_renews_quarterly">Оновлюється щокварталу</string>
+    <string name="osm_live_payment_renews_annually">Оновлюється щороку</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Оберіть зручну для вас періодичність платежів:</string>
+    <string name="osm_live_payment_contribute_descr">Частина доходу йде до наповнювачів OpenStreetMap.</string>
+    <string name="powered_by_osmand">За підтримки OsmAnd</string>
     </resources>

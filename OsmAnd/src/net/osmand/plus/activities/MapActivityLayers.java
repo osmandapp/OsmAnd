@@ -96,7 +96,7 @@ public class MapActivityLayers {
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
-		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication().getSettings());
+		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication());
 		this.quickActionRegistry = new QuickActionRegistry(activity.getMyApplication().getSettings());
 	}
 
@@ -307,6 +307,9 @@ public class MapActivityLayers {
 							ContextMenuItem item = listAdapter.getItem(i);
 								PoiUIFilter filter = list.get(i);
 							if (item.getSelected()) {
+								if (filter.isStandardFilter()) {
+									filter.setFilterByName(null);
+								}
 								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
 							} else {
 								getApplication().getPoiFilters().removeSelectedPoiFilter(filter);
@@ -372,6 +375,9 @@ public class MapActivityLayers {
 					}
 					activity.showQuickSearch(ShowQuickSearchMode.NEW, true);
 				} else {
+					if (pf.isStandardFilter()) {
+						pf.setFilterByName(null);
+					}
 					getApplication().getPoiFilters().clearSelectedPoiFilters();
 					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
 					mapView.refreshMap();

@@ -55,16 +55,17 @@ class SharingStatusBottomSheet : DialogFragment() {
 				findViewById<TextView>(R.id.status_change_time).text = OsmandFormatter.getFormattedTime(sharingStatus.statusChangeTime, false)
 				findViewById<TextView>(R.id.last_location_line).text = sharingStatus.description
 
-				if (sharingStatusType != TelegramSettings.SharingStatusType.INITIALIZING
-					&& sharingStatusType != TelegramSettings.SharingStatusType.SENDING) {
-					val descriptionTime = when {
-						time > 0 -> OsmandFormatter.getFormattedTime(time, false)
-						sharingStatusType == TelegramSettings.SharingStatusType.NO_GPS -> getString(
-							R.string.not_found_yet
-						)
-						else -> getString(R.string.not_sent_yet)
+				if (sharingStatusType != TelegramSettings.SharingStatusType.INITIALIZING) {
+					if ((sharingStatusType == TelegramSettings.SharingStatusType.SENDING && time <= 0)) {
+						findViewById<TextView>(R.id.last_location_line_time).visibility = View.GONE
+					} else {
+						val descriptionTime = when {
+							time > 0 -> OsmandFormatter.getFormattedTime(time, false)
+							sharingStatusType == TelegramSettings.SharingStatusType.NO_GPS -> getString(R.string.not_found_yet)
+							else -> getString(R.string.not_sent_yet)
+						}
+						findViewById<TextView>(R.id.last_location_line_time).text = descriptionTime
 					}
-					findViewById<TextView>(R.id.last_location_line_time).text = descriptionTime
 				} else {
 					findViewById<TextView>(R.id.last_location_line_time).visibility = View.GONE
 				}

@@ -1,9 +1,11 @@
 package net.osmand.data;
 
 import net.osmand.Location;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.edit.Node;
 import net.osmand.util.Algorithms;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -316,5 +319,50 @@ public class Amenity extends MapObject {
 
 	public boolean isClosed() {
 		return OSM_DELETE_VALUE.equals(getAdditionalInfo(OSM_DELETE_TAG));
+	}
+
+	public JSONObject toJSON() {
+		JSONObject json = super.toJSON();
+		json.put("subType", subType);
+		json.put("type", type.getKeyName());
+		json.put("openingHours", openingHours);
+		if (additionalInfo != null && additionalInfo.size() > 0) {
+			JSONObject additionalInfoObj = new JSONObject();
+			for (Entry<String, String> e : additionalInfo.entrySet()) {
+				additionalInfoObj.put(e.getKey(), e.getValue());
+			}
+			json.put("additionalInfo", additionalInfoObj);
+		}
+
+		return json;
+	}
+
+	public static Amenity parseJSON(JSONObject json) {
+		Amenity a = new Amenity();
+		MapObject.parseJSON(json, a);
+
+		if (json.has("subType")) {
+			a.subType = json.getString("subType");
+		}
+		if (json.has("type")) {
+			String categoryName = json.getString("type");
+			a.setType(MapPoiTypes.getDefault().getPoiCategoryByName(categoryName));
+		} else {
+			a.setType(MapPoiTypes.getDefault().getOtherPoiCategory());
+		}
+		if (json.has("openingHours")) {
+			a.openingHours = json.getString("openingHours");
+		}
+		if (json.has("additionalInfo")) {
+			JSONObject namesObj = json.getJSONObject("additionalInfo");
+			a.additionalInfo = new HashMap<>();
+			Iterator<String> iterator = namesObj.keys();
+			while (iterator.hasNext()) {
+				String key = iterator.next();
+				String value = namesObj.getString(key);
+				a.additionalInfo.put(key, value);
+			}
+		}
+		return a;
 	}
 }

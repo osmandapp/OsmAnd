@@ -226,7 +226,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
 		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
 		modes.remove(ApplicationMode.DEFAULT);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(settings));
+		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(getMyApplication()));
 		selected.remove(ApplicationMode.DEFAULT);
 		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, true, false,
 				new View.OnClickListener() {

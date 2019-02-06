@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
@@ -2595,7 +2595,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Zadajte meno používateľa</string>
     <string name="mapillary_menu_descr_username">Zobraziť iba obrázky pridané</string>
     <string name="mapillary_menu_title_username">Meno používateľa</string>
-    <string name="mapillary_menu_filter_description">Filtrovať obrázky podľa odosielateľa alebo dátumu. Aktívne len pri vysokom priblížení.</string>
+    <string name="mapillary_menu_filter_description">Filtrovať obrázky podľa odosielateľa, dátumu alebo typu. Aktívne len pri vysokom priblížení.</string>
     <string name="store_tracks_in_monthly_directories">Ukladať zaznamenané stopy v priečinkoch po mesiacoch</string>
     <string name="store_tracks_in_monthly_directories_descrp">Ukladať zaznamenané stopy v podpriečinkoch podľa mesiaca záznamu (ako 2018-01).</string>
     <string name="average">Priemer</string>
@@ -3008,11 +3008,60 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="rendering_value_black_name">Čierna</string>
     <string name="more_transport_on_stop_hint">Na tejto zastávke je ešte ďalšia doprava.</string>
     <string name="search_street">Hľadať ulicu</string>
-    <string name="start_search_from_city">Začať hľadanie z mesta</string>
+    <string name="start_search_from_city">Najprv zvoľte mesto</string>
     <string name="shared_string_restore">Obnoviť</string>
     <string name="keep_passed_markers_descr">Značky pridané ako skupina Obľúbených alebo bodov GPX, označené ako Prejdené, zostanú na mape. Ak skupina nie je aktívna, značky zmiznú z mapy.</string>
     <string name="keep_passed_markers">Ponechať prejdené značky na mape</string>
     <string name="markers_remove_dialog_msg">Odstrániť mapovú značku \'%s\'\?</string>
     <string name="edit_map_marker">Upraviť mapovú značku</string>
     <string name="third_party_application">Aplikácia tretej strany</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Predplatné &amp; Cenník</string>
+    <string name="osm_live_payment_monthly_title">Platiť mesačne</string>
+    <string name="osm_live_payment_3_months_title">Platiť štvrťročne</string>
+    <string name="osm_live_payment_annual_title">Platiť ročne</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mesiac</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mesiac</string>
+    <string name="osm_live_payment_discount_descr">Ušetríte %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Vaše aktuálne predplatné</string>
+    <string name="osm_live_payment_renews_monthly">Obnovuje sa mesačne</string>
+    <string name="osm_live_payment_renews_quarterly">Obnovuje sa štvrťročne</string>
+    <string name="osm_live_payment_renews_annually">Obnovuje sa ročne</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Zvoľte frekvenciu platieb, ktorá vám vyhovuje:</string>
+    <string name="osm_live_payment_contribute_descr">Časť príjmov je zasielaná prispievateľom do OpenStreetMap.</string>
+    <string name="osm_live_subscriptions">Predplatné</string>
+    <string name="mapillary_menu_title_pano">Zobraziť iba 360° obrázky</string>
+    <string name="powered_by_osmand">Beží na OsmAnd</string>
+    <string name="shared_string_launch">Spustiť</string>
+    <string name="run_full_osmand_msg">Používate mapu {0}, ktorá beží na aplikácii OsmAnd. Chcete spustiť plnú verziu OsmAnd\?</string>
+    <string name="run_full_osmand_header">Spustiť OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraníjsky (Guaraní)</string>
+    <string name="quick_action_switch_day_night_descr">Aktivovaním tohto tlačidla sa prepne denný a nočný režim v OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Denný režim</string>
+    <string name="quick_action_switch_night_mode">Nočný režim</string>
+    <string name="quick_action_day_night_switch_mode">Prepnúť Denný/Nočný režim</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Kapacita</string>
+    <string name="shared_string_width">Šírka</string>
+    <string name="shared_string_height">Výška</string>
+    <string name="swap_start_and_destination">Vymeniť štart a cieľ</string>
+    <string name="add_destination_point">Pridať cieľ</string>
+    <string name="add_intermediate_point">Pridať medzicieľ</string>
+    <string name="add_start_point">Pridať štartovací bod</string>
+    <string name="intermediate_waypoint">Prechodný bod: %1$s</string>
+    <string name="waypoints">Body na ceste: %1$s</string>
+    <string name="transfers">prestupy: %1$s</string>
+    <string name="on_foot">peši: %1$s</string>
+    <string name="route_way">Cesta: %1$s</string>
+    <string name="points_of_interests">Body záujmu (POI)</string>
+    <string name="waiting_for_route_calculation">Čakám na výpočet trasy</string>
+    <string name="app_mode_public_transport">Verejná doprava</string>
+    <string name="avoid_roads_descr">Zvoľte cestu na mape alebo zo zoznamu dole, ktorej sa chcete počas navigácie vyhnúť:</string>
+    <string name="show_along_the_route">Zobraziť pozdĺž trasy</string>
+    <string name="simulate_navigation">Simulovať navigáciu</string>
+    <string name="choose_track_file_to_follow">Zvoľte súbor trasy, ktorú chcete nasledovať</string>
+    <string name="voice_announcements">Hlasové oznámenia</string>
+    <string name="intermediate_destinations">Medziciele: %1$s</string>
+    <string name="arrive_at_time">Príjazd o %1$s</string>
+</resources>

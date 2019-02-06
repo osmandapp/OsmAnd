@@ -10,11 +10,51 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Сapacity</string>
+    <string name="shared_string_width">Width</string>
+    <string name="shared_string_height">Height</string>
+    <string name="swap_start_and_destination">Swap start and destination</string>
+    <string name="add_destination_point">Add destination</string>
+    <string name="add_intermediate_point">Add intermediate</string>
+    <string name="add_start_point">Add Start point</string>
+    <string name="intermediate_waypoint">Intermediate point: %1$s</string>
+    <string name="waypoints">Waypoints: %1$s</string>
+    <string name="transfers">transfers: %1$s</string>
+    <string name="on_foot">on foot: %1$s</string>
+    <string name="route_way">Way: %1$s</string>
+    <string name="points_of_interests">Points of interests(POI)</string>
+    <string name="waiting_for_route_calculation">Waiting for route calculation</string>
+    <string name="app_mode_public_transport">Public transport</string>
+    <string name="avoid_roads_descr">Select road on the map or from the list below that you want to avoid during navigation:</string>
+    <string name="show_along_the_route">Show along the route</string>
+    <string name="simulate_navigation">Simulate navigation</string>
+    <string name="choose_track_file_to_follow">Choose track file to follow</string>
+    <string name="voice_announcements">Voice announcements</string>
+    <string name="intermediate_destinations">Intermediate destinations: %1$s</string>
+    <string name="arrive_at_time">Arrive at %1$s</string>
+    <string name="osm_live_subscriptions">Subscriptions</string>
+    <string name="powered_by_osmand">Powered by OsmAnd</string>
+    <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
+    <string name="osm_live_payment_monthly_title">Pay monthly</string>
+    <string name="osm_live_payment_3_months_title">Pay once in 3 months</string>
+    <string name="osm_live_payment_annual_title">Pay once a year</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / month</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / month</string>
+    <string name="osm_live_payment_discount_descr">Save %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Your current subscription</string>
+    <string name="osm_live_payment_renews_monthly">Renews monthly</string>
+    <string name="osm_live_payment_renews_quarterly">Renews quarterly</string>
+    <string name="osm_live_payment_renews_annually">Renews annually</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Select the payment period convenient for you:</string>
+    <string name="osm_live_payment_contribute_descr">Part of income goes to OpenStreetMap contributors.</string>
     <string name="markers_remove_dialog_msg">Delete Map marker \'%s\'?</string>
     <string name="edit_map_marker">Edit map marker</string>
     <string name="third_party_application">Third-party application</string>
     <string name="search_street">Search street</string>
-    <string name="start_search_from_city">Start search from city</string>
+    <string name="start_search_from_city">Select the city first</string>
     <string name="shared_string_restore">Restore</string>
     <string name="keep_passed_markers_descr">Markers added as a group of Favorites or GPX waypoints marked "Passed" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
     <string name="keep_passed_markers">Keep passed markers on the map</string>
@@ -357,7 +397,8 @@
     <string name="mapillary_menu_edit_text_hint">Type username</string>
     <string name="mapillary_menu_descr_username">View only images added by</string>
     <string name="mapillary_menu_title_username">Username</string>
-    <string name="mapillary_menu_filter_description">Filter images by submitter or by date. Only active in closeup zoom.</string>
+    <string name="mapillary_menu_filter_description">Filter images by submitter, by date or by type. Only active in closeup zoom.</string>
+    <string name="mapillary_menu_title_pano">Display only 360° images</string>
     <string name="map_widget_ruler_control">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
     <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
@@ -1145,6 +1186,7 @@
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Photo</string>
+    <string name="shared_string_launch">Launch</string>
     <string name="route_points">Route points</string>
     <string name="track_segments">Track segments</string>
     <string name="track_points">Track points</string>
@@ -1493,6 +1535,7 @@
     <string name="lang_uk">Ukrainian</string>
     <string name="lang_vi">Vietnamese</string>
     <string name="lang_cy">Welsh</string>
+    <string name="lang_gn_py">Guaraní</string>
     <string name="index_name_canada">North America - Canada</string>
     <string name="index_name_italy">Europe - Italy</string>
     <string name="index_name_gb">Europe - Great Britain</string>
@@ -2867,6 +2910,10 @@
     <string name="quick_action_add_poi_descr">Tapping this action button adds a POI in the middle of the screen.</string>
     <string name="quick_action_navigation_voice_descr">Tapping this action button disables or enables voice guidance during navigation.</string>
     <string name="quick_action_add_parking_descr">Tapping this action button adds a parking location in the middle of the screen.</string>
+    <string name="quick_action_switch_day_night_descr">Tapping this action button switch between Day and Night modes for OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Day Mode</string>
+    <string name="quick_action_switch_night_mode">Night Mode</string>
+    <string name="quick_action_day_night_switch_mode">Switch Day/Night mode</string>
     <string name="quick_action_interim_dialog">Show an interim dialog</string>
     <string name="favorite_autofill_toast_text">" is saved to "</string>
     <string name="favorite_empty_place_name">Place</string>
@@ -2950,4 +2997,6 @@
     <string name="route_surface_stat_container">Surface</string>
     <string name="route_smoothness_stat_container">Smoothenss</string>
     <string name="route_steepness_stat_container">Steepness</string>
+    <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
+    <string name="run_full_osmand_header">Launch OsmAnd?</string>
 </resources>

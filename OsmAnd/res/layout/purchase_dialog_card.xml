@@ -43,6 +43,7 @@
         android:layout_margin="@dimen/card_padding">
 
         <include layout="@layout/purchase_dialog_card_button"/>
+        <include layout="@layout/purchase_dialog_card_button_disabled"/>
 
     </FrameLayout>
 

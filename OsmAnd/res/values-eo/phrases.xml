@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Vendejo</string>
 		<string name="poi_shop_food">Butiko oportuna kaj superbazaro</string>
 	<string name="poi_emergency">Vivsavo</string>
@@ -58,7 +58,7 @@
 	<string name="poi_farm">Terfrukt-vendejo</string>
 	<string name="poi_greengrocer">Legom-butiko</string>
 	<string name="poi_seafood">Marfrukt-vendejo</string>
-	<string name="poi_confectionery">Sukeraĵejo</string>
+	<string name="poi_confectionery">Sukeraĵejo (vendejo)</string>
 	<string name="poi_ice_cream">Glaciaĵejo</string>
 	<string name="poi_supermarket">Superbazaro</string>
 	<string name="poi_tea">Teejo</string>
@@ -94,7 +94,7 @@
 	<string name="poi_aerodrome">Aerodromo</string>
 	<string name="poi_country">Lando</string>
 	<string name="poi_city">Urbego</string>
-	<string name="poi_capital">Ĉefurbo</string>
+	<string name="poi_capital">jes</string>
 	<string name="poi_town">Urbo</string>
 	<string name="poi_village">Vilaĝo</string>
 	<string name="poi_hamlet">Vilaĝeto</string>
@@ -173,7 +173,7 @@
 	<string name="poi_halt">Haltejo fervoja</string>
 	<string name="poi_railway_platform">Kajo fervoja</string>
 	<string name="poi_subway_entrance">Metro-enirejo</string>
-	<string name="poi_subway_station">Stacidomo metroa</string>
+	<string name="poi_subway_station">jes</string>
 	<string name="poi_waste_basket">Rubujo</string>
 
 	<string name="poi_tower">Turo</string>
@@ -694,7 +694,7 @@
 	<string name="poi_attraction_carousel">Karuselo</string>
 	<string name="poi_attraction_roller_coaster">Onda fervojo</string>
 	<string name="poi_attraction_slide">Deglitejo</string>
-	<string name="poi_attraction_summer_toboggan">Somera toboganejo</string>
+	<string name="poi_attraction_summer_toboggan">Somera tobogano</string>
 	<string name="poi_attraction_swing_carousel">Karuselo ĉenseĝa</string>
 	<string name="poi_attraction_train">Vagonareto (atrakcio)</string>
 	<string name="poi_attraction_water_slide">Akvodeglitejo</string>
@@ -1300,9 +1300,9 @@
 	<string name="poi_smoking_isolated">nur en izolita ĉambro</string>
 	<string name="poi_smoking_dedicated">destinita por fumantoj</string>
 
-	<string name="poi_toll_yes">Imposto</string>
-	<string name="poi_toll_no">Sen imposto</string>
-	<string name="poi_toll_hgv_yes">Imposto por kamionoj</string>
+	<string name="poi_toll_yes">Vojimposto</string>
+	<string name="poi_toll_no">Sen vojimposto</string>
+	<string name="poi_toll_hgv_yes">Vojimposto por kamionoj</string>
 	<string name="poi_tactile_paving_yes">jes</string>
 	<string name="poi_tactile_paving_no">sen reliefo por blinduloj</string>
 	<string name="poi_traffic_signals_sound_yes">jes</string>
@@ -1583,7 +1583,7 @@
 	<string name="poi_drive_through_no">Sen-elaŭtiĝa servo (trans-veturo): ne</string>
 
 	<string name="poi_brewery_additional">Nomo de bierfarejo</string>
-	<string name="poi_microbrewery_yes">Bierfarejeto-restoracio</string>
+	<string name="poi_microbrewery_yes">jes</string>
 	<string name="poi_microbrewery_no">Sen bierfarejeto-restoracio</string>
 
 	<string name="poi_takeaway_yes">Elportado</string>
@@ -3817,7 +3817,7 @@
 	<string name="poi_service_vehicle_wheels_yes">radoj</string>
 	<string name="poi_service_vehicle_glass_yes">fenestroj</string>
 	<string name="poi_service_vehicle_truck_repair_yes">riparo de kamionoj</string>
-	<string name="poi_service_vehicle_muffler_yes">malbruigilo</string>
+	<string name="poi_service_vehicle_muffler_yes">malbruigiloj</string>
 	<string name="poi_service_vehicle_alignment_yes">alĝustigo</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">rapidumskatolo</string>
 	<string name="poi_service_vehicle_motor_yes">motoro</string>
@@ -3892,4 +3892,42 @@
 <string name="poi_atm">Bankaŭtomato</string>
 	<string name="poi_shoe_repair">Ŝu-riparejo</string>
 
+<string name="poi_bulk_purchase">Vendado sen pakumo</string>
+	<string name="poi_substation_type">Speco</string>
+
+<string name="poi_bulk_purchase_yes">jes</string>
+	<string name="poi_bulk_purchase_only">nur</string>
+
+	<string name="poi_pipeline_substation">Konduktuba substacio</string>
+	<string name="poi_substation_transmission">transsenda</string>
+	<string name="poi_substation_distribution">distribua</string>
+	<string name="poi_substation_minor_distribution">detal-distribua</string>
+	<string name="poi_substation_industrial">industria</string>
+	<string name="poi_substation_transition">sub-super-grunda</string>
+	<string name="poi_substation_traction">kontakt-linea (fervojo/trolebuso)</string>
+	<string name="poi_substation_converter">rektifilo aŭ ondigilo</string>
+	<string name="poi_substation_compensation">kompensa</string>
+
+	<string name="poi_substation_compression">premiga</string>
+	<string name="poi_substation_measurement">mezura</string>
+	<string name="poi_substation_valve">valvo</string>
+	<string name="poi_substation_valve_group">valvaro</string>
+	<string name="poi_substation_inspection_gauge">indikilo</string>
+	<string name="poi_substation_field_gathering">kolekta</string>
+    <string name="poi_craft_confectionery">Sukeraĵejo (metiejo)</string>
+    <string name="poi_shop_wholesale">Pogranda vendejo</string>
+    <string name="poi_books_type">Libroj</string>
+    <string name="poi_laboratory">Medicina laboratorio</string>
+    <string name="poi_blood_donation">Sang-donejo</string>
+    <string name="poi_books_comic">bildrakontoj</string>
+    <string name="poi_books_antiquarian">uzitaj</string>
+    <string name="poi_books_religion">religiaj</string>
+    <string name="poi_books_academic">lernolibroj</string>
+    <string name="poi_books_children">infanaj</string>
+    <string name="poi_atoll">Atolo</string>
+    <string name="poi_toll_gantry">Telekontrolo de vojimposto</string>
+    <string name="poi_childcare">Infan-vartejo</string>
+    <string name="poi_denotation">Signifo</string>
+    <string name="poi_denotation_natural_monument">natura monumento</string>
+    <string name="poi_denotation_landmark">orientiĝa punkto</string>
 </resources>

@@ -21,7 +21,9 @@
 	<asset source="voice/fa/fa_tts.js" destination="voice/fa-tts/fa_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fi/fi_tts.js" destination="voice/fi-tts/fi_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fr/fr_tts.js" destination="voice/fr-tts/fr_tts.js" mode="alwaysOverwriteOrCopy" />
+	<asset source="voice/gn-py/gn-py_tts.js" destination="voice/gn-py-tts/gn-py_tts.js" mode="overwriteOnlyIfExists" />
 	<!--<asset source="voice/he/he_tts.js" destination="voice/he-tts/he_tts.js" mode="overwriteOnlyIfExists" />-->
+	<asset source="voice/nb/nb_tts.js" destination="voice/nb-tts/nb_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hi/hi_tts.js" destination="voice/hi-tts/hi_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hr/hr_tts.js" destination="voice/hr-tts/hr_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hu/hu_tts.js" destination="voice/hu-tts/hu_tts.js" mode="overwriteOnlyIfExists" />
@@ -49,8 +51,6 @@
 	<asset source="fonts/10_NotoSans-Bold.ttf" destination="fonts/10_NotoSans-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/15_NotoSans-Italic.ttf" destination="fonts/15_NotoSans-Italic.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/20_NotoSans-BoldItalic.ttf" destination="fonts/20_NotoSans-BoldItalic.ttf" mode="alwaysOverwriteOrCopy" />
-	<asset source="fonts/25_NotoSansArabic-Regular.ttf" destination="fonts/25_NotoSansArabic-Regular.ttf" mode="alwaysOverwriteOrCopy" />
-	<asset source="fonts/30_NotoSansArabic-Bold.ttf" destination="fonts/30_NotoSansArabic-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/35_NotoSansSouthAsian-Regular.ttf" destination="fonts/35_NotoSansSouthAsian-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/40_NotoSansSouthAsian-Bold.ttf" destination="fonts/40_NotoSansSouthAsian-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/45_NotoSansSoutheastAsian-Regular.ttf" destination="fonts/45_NotoSansSoutheastAsian-Regular.ttf" mode="alwaysOverwriteOrCopy" />
@@ -60,4 +60,6 @@
 	<asset source="fonts/65_NotoSansNastaliqUrdu-Regular.ttf" destination="fonts/65_NotoSansNastaliqUrdu-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 
 	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
+
+	<asset source="World_basemap_mini.obf" destination="World_basemap_mini.obf" mode="alwaysOverwriteOrCopy" />
 </assets>

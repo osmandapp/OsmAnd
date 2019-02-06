@@ -144,4 +144,16 @@
 		android:id="@+id/bottom_shadow"
 		layout="@layout/card_bottom_divider"/>
 
+	<net.osmand.telegram.ui.views.TextViewEx
+		android:id="@+id/last_telegram_update_time"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|center_horizontal"
+		android:gravity="center"
+		android:paddingTop="@dimen/content_padding_half"
+		android:textColor="?android:attr/textColorSecondary"
+		android:textSize="@dimen/list_item_description_text_size"
+		android:visibility="gone"
+		app:typeface="@string/font_roboto_regular" />
+
 </LinearLayout>

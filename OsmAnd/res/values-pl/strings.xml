@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -1979,7 +1979,7 @@ Długość %2$s</string>
     <string name="default_speed_system_descr">Zdefiniuj jednostkę prędkości.</string>
     <string name="default_speed_system">Jednostki prędkości</string>
     <string name="si_nm">Mile morskie</string>
-    <string name="nm">nmi</string>
+    <string name="nm">Mm</string>
     <string name="si_kmh">Kilometry na godzinę</string>
     <string name="si_mph">Mile na godzinę</string>
     <string name="si_m_s">Metry na sekundę</string>
@@ -2234,15 +2234,15 @@ Długość %2$s</string>
     <string name="osm_live_subscription">Subskrypcja OsmAnd Live</string>
     <string name="osm_live_email_desc">Do informowania Ciebie o wkładzie.</string>
     <string name="osm_live_user_public_name">Nazwa publiczna</string>
-    <string name="osm_live_hide_user_name">Ukrywanie nazwy w raportach</string>
+    <string name="osm_live_hide_user_name">Nie pokazuj mojej nazwy w raportach</string>
     <string name="osm_live_support_region">Wspierane regiony</string>
     <string name="osm_live_month_cost">Koszt miesięczny</string>
     <string name="osm_live_month_cost_desc">Miesięczna płatność</string>
     <string name="osm_live_active">Aktywny</string>
     <string name="osm_live_not_active">Nieaktywny</string>
-    <string name="osm_live_enter_user_name">Proszę wprowadź nazwę publiczną</string>
+    <string name="osm_live_enter_user_name">Proszę wpisać nazwę publiczną</string>
     <string name="osm_live_region_desc">Część wpłat zostanie wysłana do użytkowników OSM, którzy prześlą zmiany na mapie w tym regionie.</string>
-    <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Proszę najpierw zakupić subskrypcję OsmAnd Live</string>
 
     <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata. Część dochodów powraca do społeczności OSM i jest wypłacana za każdą edycję OSM. Jeśli lubisz OsmAnd i OSM i chcesz je wspierać i być przez nie wspierany, jest to doskonały sposób, aby to zrobić.</string>
     
@@ -2352,7 +2352,7 @@ Długość %2$s</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
     <string name="osm_live_payment_desc">Opłata za subskrypcję na miesiąc. Anuluj ją w Google Play w dowolnym momencie.</string>
-    <string name="donation_to_osm">Dotacja dla społeczności OpenStreetMap</string>
+    <string name="donation_to_osm">Darowizna dla społeczności OpenStreetMap</string>
     <string name="donation_to_osm_desc">Część z dotacji jest przekazywana użytkownikom OSM, którzy wprowadzają zmiany na mapie OpenStreetMap. Koszt subskrypcji pozostaje taki sam.</string>
     <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe uaktualnienia i nieograniczone liczbą pobieranie map całego świata.</string>
     <string name="driving_region_australia">Australia</string>
@@ -2588,7 +2588,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Zapisz się do naszej subskrypcji dotyczącej rabatów na aplikację i zgarnij 3 dodatkowe pobrania map!</string>
     <string name="depth_contour_descr">Mapy przedstawiające punkty głębokości i poziomice dna morskiego.</string>
     <string name="sea_depth_thanks">Dziękujemy za zakup map batymetrycznych</string>
-    <string name="index_item_depth_contours_osmand_ext">Mapy batymetryczne</string>
+    <string name="index_item_depth_contours_osmand_ext">Morskie kontury głębokości</string>
     <string name="index_item_depth_points_southern_hemisphere">Mapa batymetryczna półkuli południowej</string>
     <string name="index_item_depth_points_northern_hemisphere">Mapa batymetryczna półkuli północnej</string>
     <string name="download_depth_countours">Mapy batymetryczne</string>
@@ -2683,7 +2683,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_title_tile_cache">Pamięć podręczna kafelków</string>
     <string name="mapillary_menu_descr_dates">Wyświetl tylko dodane obrazy</string>
     <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
-    <string name="mapillary_menu_filter_description">Filtruje obrazy według nazwy użytkownika lub daty. Są aktywne tylko dla większych przybliżeń.</string>
+    <string name="mapillary_menu_filter_description">Filtrowanie obrazów przez zgłaszającego, według daty lub typu. Tylko aktywne w zbliżenie zoom.</string>
     <string name="mapillary_menu_descr_username">Wyświetl obrazy dodane tylko przez</string>
     <string name="store_tracks_in_monthly_directories">Ślady w miesięcznych katalogach</string>
     <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2018-01).</string>
@@ -2776,7 +2776,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="ascendingly">rosnąco</string>
     <string name="date_added">Data dodania</string>
     <string name="order_by">Porządkowanie według:</string>
-    <string name="show_guide_line">Pokaż linie przewodnie</string>
+    <string name="show_guide_line">Linie przewodnie</string>
     <string name="show_arrows_on_the_map">Strzałki na mapie</string>
     <string name="show_passed">Wyświetl ominięte</string>
     <string name="hide_passed">Ukryj ominięte</string>
@@ -2829,7 +2829,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Wyświetla na mapie linię łączącą aktualne położenie z położeniem aktywnego znacznika.</string>
     <string name="show_arrows_descr">Wyświetla na mapie jedną lub dwie strzałki wskazujące kierunek do aktywnych znaczników.</string>
     <string name="distance_indication_descr">Wybiera sposób wyświetlania odległości od aktywnego znacznika.</string>
-    <string name="active_markers_descr">Wybierz liczbę wskaźników kierunku do wyświetlenia.</string>
+    <string name="active_markers_descr">Wybiera liczbę wyświetlanych wskaźników kierunku.</string>
     <string name="looking_for_tracks_with_waypoints">Wyszukiwanie ścieżek z punktami</string>
     <string name="shared_string_more_without_dots">Więcej</string>
     <string name="appearance_on_the_map">Wygląd na mapie</string>
@@ -2894,7 +2894,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
     <string name="av_locations_all_desc">Plik GPX ze współrzędnymi i danymi wszystkich notatek.</string>
     <string name="modify_the_search_query">Modyfikuj zapytanie.</string>
-    <string name="one_tap_active_descr">Naciśnij znacznik na mapie, by przesunąć do na górę listy aktywnych znaczników bez otwierania menu kontekstowego.</string>
+    <string name="one_tap_active_descr">Dotknięciem znacznika na mapie przenosi go na górę listy aktywnych znaczników, bez otwierania menu kontekstowego.</string>
     <string name="one_tap_active">Aktywacja jednym dotknięciem</string>
     <string name="show_tunnels">Tunele</string>
 <string name="import_as_gpx">Zapisz plik w formacie GPX</string>
@@ -2967,17 +2967,17 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="daily_map_updates">Uaktualnienia map: <b>co godzinę</b></string>
     <string name="wikivoyage_offline">Wikipodróże offline</string>
     
-    <string name="unlimited_downloads">Nieograniczone pobrania</string>
+    <string name="unlimited_downloads">Nieograniczone pobieranie</string>
     <string name="images_cache">Pamięć podręczna obrazów</string>
     <string name="wikivoyage_travel_guide">Przewodnik podróży</string>
     <string name="wikivoyage_travel_guide_descr">Przewodniki po najciekawszych miejscach na świecie w aplikacji OsmAnd, bez połączenia z Internetem.</string>
     <string name="in_app_purchase">Zakupy w aplikacji</string>
     <string name="in_app_purchase_desc">Płatność jednorazowa</string>
-    <string name="in_app_purchase_desc_ex">Raz zakupiony, będzie stale dostępny.</string>
+    <string name="in_app_purchase_desc_ex">Po zakupie będzie on trwale dostępny.</string>
     <string name="purchase_unlim_title">Kup - %1$s</string>
     <string name="purchase_subscription_title">Subskrybuj - %1$s</string>
 
-    <string name="unlock_all_features">Odblokowanie wszystkich funkcji OsmAnd</string>
+    <string name="unlock_all_features">Odblokuj wszystkie funkcje OsmAnd</string>
 
     <string name="purchase_dialog_title">Wybierz plan</string>
     <string name="purchase_dialog_subtitle">Wybierz odpowiedni element:</string>
@@ -3080,9 +3080,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapnik_render_descr">Stary, domyślny styl renderowania wzorowany na stylu „Mapnik”. Kluczowe cechy: kolory podobne do użytych w stylu „Mapnik”.</string>
     <string name="touring_view_render_descr">Styl o dużej ilości szczegółów, przeznaczony do podróżowania. Zawiera wszystkie opcje konfiguracyjne domyślnego stylu i dodatkowo wyświetla możliwie dużo szczegółów, a zwłaszcza wszystkie drogi, ścieżki i inne obiekty związane z podróżowaniem. Odróżnia wizualnie różne rodzaje dróg, przypominając w tym wiele atlasów podróżniczych. Zapewnia duży kontrast podczas używania na zewnątrz budynków oraz tryb dzienny i nocny.</string>
     <string name="default_render_descr">Styl ogólnego przeznaczenia. Zapewnia uproszczone renderowanie w gęsto zaludnionych miastach. Kluczowe cechy: poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
-    <string name="contour_lines_hillshade_maps">Poziomice i cieniowanie rzeźby terenu</string>
+    <string name="contour_lines_hillshade_maps">Linie konturowe i Mapy wzgórz</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
-    <string name="purchase_dialog_travel_description">Proszę zakupić jeden z następujących, aby otrzymać funkcjonalność przewodnika podróży bez połączenia sieciowego:</string>
+    <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
     <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię offline</string>
@@ -3189,10 +3189,59 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_restore">Przywróć</string>
     <string name="keep_passed_markers">Zachowanie miniętych znaczników na mapie</string>
     <string name="more_transport_on_stop_hint">Na tym przystanku zatrzymuje się więcej środków transportu.</string>
-    <string name="markers_remove_dialog_msg">Usuń znacznik mapy \'%s\'\?</string>
+    <string name="markers_remove_dialog_msg">Usunąć znacznik mapy „%s”\?</string>
     <string name="edit_map_marker">Edytuj znacznik mapy</string>
     <string name="third_party_application">Aplikacja innej firmy</string>
     <string name="search_street">Wyszukaj ulicę</string>
-    <string name="start_search_from_city">Rozpocznij wyszukiwanie z miasta</string>
+    <string name="start_search_from_city">Najpierw wybierz miasto</string>
     <string name="keep_passed_markers_descr">Znaczniki dodane jako grupa ulubionych lub punkty trasy GPX oznaczone jako przekazane pozostaną na mapie. Jeśli grupa nie jest aktywna, znaczniki znikną z mapy.</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Plan i ceny</string>
+    <string name="osm_live_payment_monthly_title">Płać co miesiąc</string>
+    <string name="osm_live_payment_3_months_title">Zapłać raz na 3 miesiące</string>
+    <string name="osm_live_payment_annual_title">Zapłać raz w roku</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / miesiąc</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / miesiąc</string>
+    <string name="osm_live_payment_discount_descr">Zapisz %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Twoja aktualna subskrypcja</string>
+    <string name="osm_live_payment_renews_monthly">Odnawia się co miesiąc</string>
+    <string name="osm_live_payment_renews_quarterly">Odnawia się co kwartał</string>
+    <string name="osm_live_payment_renews_annually">Odnawia się co roku</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Wybierz dogodny okres płatności:</string>
+    <string name="osm_live_payment_contribute_descr">Część dochodu przeznacza się na współtwórców OpenStreetMap.</string>
+    <string name="powered_by_osmand">Obsługiwane przez OsmAnd</string>
+    <string name="osm_live_subscriptions">Subskrypcje</string>
+    <string name="mapillary_menu_title_pano">Wyświetlaj tylko obrazy 360°</string>
+    <string name="shared_string_launch">Włącz</string>
+    <string name="lang_gn_py">Guarani</string>
+    <string name="run_full_osmand_msg">Korzystasz z mapy {0}, która jest udostępniona przez OsmAnd. Czy chcesz włączyć pełną wersję OsmAnd\?</string>
+    <string name="run_full_osmand_header">Włączyć OsmAnd\?</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Pojemność</string>
+    <string name="shared_string_width">Szerokość</string>
+    <string name="shared_string_height">Wysokość</string>
+    <string name="swap_start_and_destination">Odwróć start i cel</string>
+    <string name="add_destination_point">Dodaj cel trasy</string>
+    <string name="add_intermediate_point">Dodaj punkt pośredni</string>
+    <string name="add_start_point">Dodaj punkt początkowy</string>
+    <string name="intermediate_waypoint">Punkt pośredni: %1$s</string>
+    <string name="waypoints">Punkty trasy: %1$s</string>
+    <string name="transfers">przesiadki: %1$s</string>
+    <string name="on_foot">pieszo: %1$s</string>
+    <string name="route_way">Trasa: %1$s</string>
+    <string name="points_of_interests">Użyteczne miejsca (UM)</string>
+    <string name="waiting_for_route_calculation">Oczekiwanie na wyznaczenie trasy</string>
+    <string name="app_mode_public_transport">Transport publiczny</string>
+    <string name="avoid_roads_descr">Wybierz, na mapie lub z listy poniżej, drogę, którą chcesz unikać podczas nawigacji:</string>
+    <string name="show_along_the_route">Pokaż na trasie</string>
+    <string name="simulate_navigation">Symulacja nawigacji</string>
+    <string name="choose_track_file_to_follow">Wybierz plik trasy do śledzenia</string>
+    <string name="voice_announcements">Komunikaty głosowe</string>
+    <string name="intermediate_destinations">Pośrednie cele podróży: %1$s</string>
+    <string name="arrive_at_time">Dotrzesz do celu o %1$s</string>
+    <string name="quick_action_switch_day_night_descr">Naciśnięcie przycisku zmieni pomiędzy trybem Dziennym i Nocnym w OsmAndzie</string>
+    <string name="quick_action_switch_day_mode">Tryb Dzienny</string>
+    <string name="quick_action_switch_night_mode">Tryb Nocny</string>
+    <string name="quick_action_day_night_switch_mode">Zmień tryb Dzienny/Nocny</string>
+</resources>

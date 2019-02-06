@@ -35,6 +35,8 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.search.core.ObjectType;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
@@ -119,7 +121,8 @@ public class OsmandSettings {
 	}
 
 	// These settings are stored in SharedPreferences
-	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
+	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
+	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
 
 	/// Settings variables
@@ -143,11 +146,19 @@ public class OsmandSettings {
 		initPrefs();
 	}
 
+	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI, String sharedPreferencesName) {
+		ctx = clientContext;
+		this.settingsAPI = settinsAPI;
+		CUSTOM_SHARED_PREFERENCES_NAME = "net.osmand.customsettings." + sharedPreferencesName;
+		initPrefs();
+	}
+
 	private void initPrefs() {
-		globalPreferences = settingsAPI.getPreferenceObject(SHARED_PREFERENCES_NAME);
+		globalPreferences = settingsAPI.getPreferenceObject(getSharedPreferencesName(null));
 		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
+		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
 	}
 
 	public OsmandApplication getContext() {
@@ -164,15 +175,91 @@ public class OsmandSettings {
 	}
 
 	public static String getSharedPreferencesName(ApplicationMode mode) {
+		String sharedPreferencesName = !Algorithms.isEmpty(CUSTOM_SHARED_PREFERENCES_NAME) ? CUSTOM_SHARED_PREFERENCES_NAME : SHARED_PREFERENCES_NAME;
 		if (mode == null) {
-			return SHARED_PREFERENCES_NAME;
+			return sharedPreferencesName;
 		} else {
-			return SHARED_PREFERENCES_NAME + "." + mode.getStringKey().toLowerCase();
+			return sharedPreferencesName + "." + mode.getStringKey().toLowerCase();
 		}
 	}
 
 	public Object getProfilePreferences(ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
+	}
+
+	public boolean setPreference(String key, Object value) {
+		OsmandPreference<?> preference = registeredPreferences.get(key);
+		if (preference != null) {
+			if (preference == APPLICATION_MODE) {
+				if (value instanceof String) {
+					String appModeKey = (String) value;
+					ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+					if (appMode != null) {
+						APPLICATION_MODE.set(appMode);
+						return true;
+					}
+				}
+			} else if (preference == DEFAULT_APPLICATION_MODE) {
+				if (value instanceof String) {
+					String appModeKey = (String) value;
+					ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
+					if (appMode != null) {
+						DEFAULT_APPLICATION_MODE.set(appMode);
+						return true;
+					}
+				}
+			} else if (preference == METRIC_SYSTEM) {
+				if (value instanceof String) {
+					String metricSystemName = (String) value;
+					MetricsConstants metricSystem;
+					try {
+						metricSystem = MetricsConstants.valueOf(metricSystemName);
+					} catch (IllegalArgumentException e) {
+						return false;
+					}
+					METRIC_SYSTEM.set(metricSystem);
+					return true;
+				}
+			} else if (preference == SPEED_SYSTEM) {
+				if (value instanceof String) {
+					String speedSystemName = (String) value;
+					SpeedConstants speedSystem;
+					try {
+						speedSystem = SpeedConstants.valueOf(speedSystemName);
+					} catch (IllegalArgumentException e) {
+						return false;
+					}
+					SPEED_SYSTEM.set(speedSystem);
+					return true;
+				}
+			} else if (preference instanceof BooleanPreference) {
+				if (value instanceof Boolean) {
+					((BooleanPreference) preference).set((Boolean) value);
+					return true;
+				}
+			} else if (preference instanceof StringPreference) {
+				if (value instanceof String) {
+					((StringPreference) preference).set((String) value);
+					return true;
+				}
+			} else if (preference instanceof FloatPreference) {
+				if (value instanceof Float) {
+					((FloatPreference) preference).set((Float) value);
+					return true;
+				}
+			} else if (preference instanceof IntPreference) {
+				if (value instanceof Integer) {
+					((IntPreference) preference).set((Integer) value);
+					return true;
+				}
+			} else if (preference instanceof LongPreference) {
+				if (value instanceof Long) {
+					((LongPreference) preference).set((Long) value);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
@@ -297,6 +384,7 @@ public class OsmandSettings {
 		public CommonPreference(String id, T defaultValue) {
 			this.id = id;
 			this.defaultValue = defaultValue;
+			registeredPreferences.put(id, this);
 		}
 
 		public CommonPreference<T> makeGlobal() {
@@ -735,6 +823,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> MAPILLARY_FILTER_USERNAME = new StringPreference("mapillary_filter_username", "").makeGlobal();
 	public final CommonPreference<Long> MAPILLARY_FILTER_FROM_DATE = new LongPreference("mapillary_filter_from_date", 0).makeGlobal();
 	public final CommonPreference<Long> MAPILLARY_FILTER_TO_DATE = new LongPreference("mapillary_filter_to_date", 0).makeGlobal();
+	public final CommonPreference<Boolean> MAPILLARY_FILTER_PANO = new BooleanPreference("mapillary_filter_pano", false).makeGlobal();
 
 	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference("use_fast_recalculation", true).makeGlobal().cache();
 	public final CommonPreference<Boolean> FORCE_PRIVATE_ACCESS_ROUTING_ASKED = new BooleanPreference("force_private_access_routing", false).makeProfile().cache();
@@ -970,6 +1059,7 @@ public class OsmandSettings {
 	public final OsmandPreference<String> BILLING_USER_COUNTRY_DOWNLOAD_NAME = new StringPreference("billing_user_country_download_name", BILLING_USER_DONATION_NONE_PARAMETER).makeGlobal();
 	public final OsmandPreference<Boolean> BILLING_HIDE_USER_NAME = new BooleanPreference("billing_hide_user_name", false).makeGlobal();
 	public final OsmandPreference<Boolean> BILLING_PURCHASE_TOKEN_SENT = new BooleanPreference("billing_purchase_token_sent", false).makeGlobal();
+	public final OsmandPreference<String> BILLING_PURCHASE_TOKENS_SENT = new StringPreference("billing_purchase_tokens_sent", "").makeGlobal();
 	public final OsmandPreference<Boolean> LIVE_UPDATES_PURCHASED = new BooleanPreference("billing_live_updates_purchased", false).makeGlobal();
 	public final OsmandPreference<Long> LIVE_UPDATES_PURCHASE_CANCELLED_TIME = new LongPreference("live_updates_purchase_cancelled_time", 0).makeGlobal();
 	public final OsmandPreference<Boolean> LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN = new BooleanPreference("live_updates_purchase_cancelled_first_dlg_shown", false).makeGlobal();
@@ -1595,12 +1685,20 @@ public class OsmandSettings {
 		return isWriteable;
 	}
 
-	public boolean isExternalStorageDirectorySpecifiedV19() {
+	public boolean isExternalStorageDirectoryTypeSpecifiedV19() {
 		return settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19);
 	}
 
 	public int getExternalStorageDirectoryTypeV19() {
 		return settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
+	}
+
+	public boolean isExternalStorageDirectorySpecifiedV19() {
+		return settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR_V19);
+	}
+
+	public String getExternalStorageDirectoryV19() {
+		return settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR_V19, null);
 	}
 
 	public File getExternalStorageDirectoryPre19() {

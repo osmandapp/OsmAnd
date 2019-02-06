@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_bakery">Pekařství</string>
 	<string name="poi_alcohol">Obchod s alkoholem</string>
 	<string name="poi_convenience">Smíšené zboží</string>
@@ -3840,4 +3840,22 @@
 <string name="poi_atm">Bankomat</string>
 	<string name="poi_shoe_repair">Oprava obuvi</string>
 
+<string name="poi_substation_type">Typ</string>
+    <string name="poi_books_type">Knihy</string>
+    <string name="poi_books_comic">Komiksy</string>
+    <string name="poi_books_antiquarian">Starožitné</string>
+    <string name="poi_books_religion">Náboženské</string>
+    <string name="poi_books_academic">Odborné</string>
+    <string name="poi_books_children">Dětské</string>
+    <string name="poi_atoll">Atol</string>
+    <string name="poi_bulk_purchase_yes">Yes</string>
+    <string name="poi_bulk_purchase_only">Výhradně</string>
+    <string name="poi_craft_confectionery">Výroba cukrovinek</string>
+    <string name="poi_shop_wholesale">Velkoobchod</string>
+    <string name="poi_laboratory">Zdravotnická laboratoř</string>
+    <string name="poi_blood_donation">Dárcovství krve</string>
+    <string name="poi_toll_gantry">Mýtná brána</string>
+    <string name="poi_childcare">Péče o děti</string>
+    <string name="poi_denotation_natural_monument">Přírodní památka</string>
+    <string name="poi_denotation_landmark">Orientační bod</string>
 </resources>

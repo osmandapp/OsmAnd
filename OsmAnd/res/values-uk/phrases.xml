@@ -239,7 +239,7 @@
 	<string name="poi_fuel_biogas">Біогаз</string>
 	<string name="poi_halt">Залізнична зупинка</string>
 	<string name="poi_subway_entrance">Вхід в метро</string>
-	<string name="poi_subway_station">Станція метро</string>
+	<string name="poi_subway_station">Так</string>
 	<string name="poi_taxi">Стоянка таксі</string>
 
 	<string name="poi_aerodrome">Аеропорт</string>
@@ -445,7 +445,7 @@
 	<string name="poi_prosecutor">Прокуратура</string>
 	<string name="poi_migration">Міграційна служба</string>
 	<string name="poi_tax_inspection">Налоговая інспекція</string>
-	<string name="poi_capital">Столиця</string>
+	<string name="poi_capital">Так</string>
 	<string name="poi_hamlet">Хутір</string>
 	<string name="poi_suburb">Район</string>
 	<string name="poi_neighbourhood">Мікрорайон</string>
@@ -1878,7 +1878,7 @@
 	<string name="poi_payment_uta_no">Картки UTA не приймаються</string>
 	<string name="poi_health_specialty_surgery_yes">Загальна хірургія</string>
 	<string name="poi_fire_hydrant_type_pond">Ставок</string>
-	<string name="poi_payment_efectivo_yes">Готівка</string>
+	<string name="poi_payment_efectivo_yes">Електронні гроші Efectivo</string>
 	<string name="poi_health_specialty_radiology_yes">Радіологія</string>
 	<string name="poi_fire_hydrant_type_wall">Пожежний кран</string>
 
@@ -2669,7 +2669,7 @@
 	<string name="poi_diet_vegetarian_only">Лише вегетаріанське харчування</string>
 	<string name="poi_memorial_column">Колона</string>
 	<string name="poi_service_bicycle_diy_yes">Інструменти для самостійного ремонту</string>
-	<string name="poi_scout_yes">так</string>
+	<string name="poi_scout_yes">Так</string>
 	<string name="poi_water_tap">Водопровідний кран</string>
 	<string name="poi_diplomatic_delegation">Делегація</string>
 	<string name="poi_cuisine_bavarian">Баварська</string>
@@ -2897,7 +2897,7 @@
 	<string name="poi_telescope_type_gamma">Гамма</string>
 	<string name="poi_cuisine_diner">Дайнер (американська дешева закусочна)</string>
 	<string name="poi_cuisine_cuban">Кубинська</string>
-	<string name="poi_microbrewery_yes">Власна пивоварня</string>
+	<string name="poi_microbrewery_yes">Так</string>
 	<string name="poi_vending_tickets">Квитки</string>
 	<string name="poi_bridge_movable_retractable">Тип розвідного моста: висувається</string>
 
@@ -3191,7 +3191,7 @@
 	<string name="poi_motorcycle_repair">Ремонт мотоциклів</string>
 	<string name="poi_resource_mercury">Ртуть</string>
 	<string name="poi_route_trolleybus_ref">Тролейбус</string>
-	<string name="poi_crop_poultry">Вирощується культура: свійська птиця</string>
+	<string name="poi_crop_poultry">Вирощується культура: корм для птиці</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Глибинна психологія</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
 	<string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
@@ -3864,11 +3864,34 @@
 <string name="poi_car_pooling">Точка кар-шерінгу</string>
 	<string name="poi_ruins">Руїни</string>
 
-	<string name="poi_license_classes">Ліцензійні класи</string>
+	<string name="poi_license_classes">Види водійських прав</string>
 
 	<string name="poi_hill">Пагорб</string>
 
 <string name="poi_atm">Банкомат</string>
 	<string name="poi_shoe_repair">Ремонт взуття</string>
+
+<string name="poi_bulk_purchase">Масове придбання</string>
+	<string name="poi_substation_type">Тип</string>
+
+<string name="poi_bulk_purchase_yes">Так</string>
+	<string name="poi_bulk_purchase_only">Виключно</string>
+
+	<string name="poi_pipeline_substation">Трубопровідна підстанція</string>
+	<string name="poi_substation_transmission">Передавальна</string>
+	<string name="poi_substation_distribution">Розподільча</string>
+	<string name="poi_substation_minor_distribution">Локальна розподільча</string>
+	<string name="poi_substation_industrial">Промислова</string>
+	<string name="poi_substation_transition">Перехідна</string>
+	<string name="poi_substation_traction">Тягова</string>
+	<string name="poi_substation_converter">Перетворювальна</string>
+	<string name="poi_substation_compensation">Компенсаторна</string>
+
+	<string name="poi_substation_compression">Компресійна</string>
+	<string name="poi_substation_measurement">Вимірювальна</string>
+	<string name="poi_substation_valve">Вентиль</string>
+	<string name="poi_substation_valve_group">Група вентилів</string>
+	<string name="poi_substation_inspection_gauge">Контрольно-вимірювальна</string>
+	<string name="poi_substation_field_gathering">Збиральна</string>
 
 </resources>

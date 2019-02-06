@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
@@ -1511,7 +1511,7 @@
     <string name="way_alarms">交通狀況提醒</string>
     <string name="speak_favorites">附近我的收藏</string>
     <string name="speak_poi">附近的 POI</string>
-    <string name="shared_string_all">全部</string>
+    <string name="shared_string_all">所有</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。 
 \n 
@@ -1945,7 +1945,7 @@
     <string name="osmand_running_in_background">在背景執行</string>
     <string name="default_speed_system_descr">定義速度單位。</string>
     <string name="default_speed_system">速度的單位</string>
-    <string name="si_nm">浬</string>
+    <string name="si_nm">海浬</string>
     <string name="nm">浬</string>
     <string name="si_kmh">公里每小時</string>
     <string name="si_mph">英里每小時</string>
@@ -2199,14 +2199,14 @@
     <string name="osm_live_not_active">失效的</string>
     <string name="osm_live_enter_email">請輸入有效的電子郵件地址</string>
     <string name="osm_live_enter_user_name">請輸入公開名稱</string>
-    <string name="osm_live_subscription_settings">認捐設定</string>
-    <string name="osm_live_subscription">OsmAnd Live 會費</string>
+    <string name="osm_live_subscription_settings">訂閱設定</string>
+    <string name="osm_live_subscription">Osmand Live 訂閱</string>
     <string name="osm_live_thanks">感謝您對 OsmAnd 的支持！
 \n要啟動所有新功能，您需要重開 OsmAnd。</string>
-    <string name="osm_live_region_desc">您捐助的一部分會發送到 OSM，使用者將送交更改到該地區的地圖。</string>
-    <string name="osm_live_ask_for_purchase">請先購買 OsmAnd Live 的訂閱</string>
+    <string name="osm_live_region_desc">您的部分捐款會發送給在該地區提交地圖更改的 OSM 使用者。</string>
+    <string name="osm_live_ask_for_purchase">請先購買 OsmAnd Live 訂閱</string>
 
-    <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。 部分收入又回到了 OSM 社群和支付每個 OSM 的貢獻。 假如您喜愛 OsmAnd 和 OSM 並且想要支持和得到他們的支持，這是個完美方式的作法。</string>
+    <string name="osm_live_header">此訂閱能夠為世界各地所有的地圖每小時更新一次。 部分收入又回到了 OSM 社群和支付每個 OSM 的貢獻。 假如您喜愛 OsmAnd 和 OSM 並且想要支持和得到他們的支持，這是個完美方式的作法。</string>
     
     <string name="recalculate_route">重新計算路線</string>
     <string name="shared_string_topbar">頂端列</string>
@@ -2321,7 +2321,7 @@
     <string name="no_update_info">不要顯示新版本</string>
     <string name="osm_live_banner_desc">獲得無限制的地圖下載和每個月超過一次以上的地圖更新︰每週、每天或每小時。</string>
     <string name="osmand_plus_banner_desc">沒有限制的地圖下載、更新和維基百科外掛元件。</string>
-    <string name="si_mi_meters">英哩/公尺</string>
+    <string name="si_mi_meters">英里/米</string>
     <string name="first_usage_wizard_desc">讓 OsmAnd 確定您所在的位置和建議下載該區域的地圖。</string>
     <string name="get_for">獲得 %1$s</string>
     <string name="get_for_month">每個月獲得 %1$s</string>
@@ -2366,7 +2366,7 @@
     <string name="shared_string_record">記錄</string>
     <string name="gpx_logging_no_data">沒有資料</string>
     <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示與聖誕節關聯的 POI：聖誕樹、市場等等。</string>
-    <string name="donation_to_osm_desc">您捐款的一部分會發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
+    <string name="donation_to_osm_desc">您的部分捐款會發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
     
     
     <string name="shared_string_notifications">通知</string>
@@ -2514,7 +2514,7 @@
     <string name="shared_string_end_time">結束時間</string>
     <string name="shared_string_color">顏色</string>
     <string name="max_speed">最高速度</string>
-    <string name="average_speed">平均速度</string>
+    <string name="average_speed">平均速率</string>
     <string name="shared_string_gpx_track">軌跡</string>
     <string name="points_delete_multiple_succesful">標點已刪除。</string>
     <string name="points_delete_multiple">您將要刪除 %1$d 個標點。您確定嗎？</string>
@@ -2748,7 +2748,7 @@
     <string name="mapillary_menu_edit_text_hint">輸入使用者名稱</string>
     <string name="mapillary_menu_descr_username">僅檢視增加的圖片由</string>
     <string name="mapillary_menu_title_username">使用者名稱</string>
-    <string name="mapillary_menu_filter_description">按照提供者或日期篩選圖片，僅動作於特寫的縮放才有效。</string>
+    <string name="mapillary_menu_filter_description">按照提供者、日期或類型篩選圖片。僅動作於特寫的縮放才有效。</string>
     <string name="shared_string_reload">重新載入</string>
     <string name="mapillary_menu_descr_tile_cache">請重新載入圖磚，以查看最新的資料。</string>
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
@@ -3166,11 +3166,60 @@
     <string name="rendering_value_black_name">黑色</string>
     <string name="more_transport_on_stop_hint">在此停靠站有更多的交通工具。</string>
     <string name="search_street">搜尋街道</string>
-    <string name="start_search_from_city">從城市開始搜尋</string>
+    <string name="start_search_from_city">先選擇城市</string>
     <string name="shared_string_restore">還原</string>
     <string name="keep_passed_markers_descr">標記已加入群組作為我的收藏或 GPX 航點標記為已經過的將維持在地圖上。如果該群組未處於活動狀態，則標記將從地圖上消失。</string>
     <string name="keep_passed_markers">在地圖上保留已經過的標記</string>
     <string name="markers_remove_dialog_msg">刪除地圖標記「%s」？</string>
     <string name="edit_map_marker">編輯地圖標記</string>
     <string name="third_party_application">第三方應用程式</string>
-    </resources>
+    <string name="osm_live_plan_pricing">計畫與價格</string>
+    <string name="osm_live_payment_monthly_title">月付</string>
+    <string name="osm_live_payment_3_months_title">季付</string>
+    <string name="osm_live_payment_annual_title">年付</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
+    <string name="osm_live_payment_discount_descr">節省 %1$s！</string>
+	<string name="osm_live_payment_current_subscription">您目前訂閱</string>
+    <string name="osm_live_payment_renews_monthly">每月續訂</string>
+    <string name="osm_live_payment_renews_quarterly">每季續訂</string>
+    <string name="osm_live_payment_renews_annually">每年續訂</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">選擇適合您的付款期：</string>
+    <string name="osm_live_payment_contribute_descr">部分收入歸 OpenStreetMap 的貢獻者所有。</string>
+    <string name="powered_by_osmand">Powered by OsmAnd</string>
+    <string name="osm_live_subscriptions">訂閱</string>
+    <string name="mapillary_menu_title_pano">只顯示 360° 圖片</string>
+    <string name="shared_string_launch">啟動</string>
+    <string name="run_full_osmand_msg">您正在使用裝有 OsmAnd 的 {0} 地圖。是否要啟動完整版本的 OsmAnd？</string>
+    <string name="run_full_osmand_header">啟動 OsmAnd？</string>
+    <string name="lang_gn_py">瓜拉尼語</string>
+    <string name="swap_start_and_destination">替換開始和目的地</string>
+    <string name="add_destination_point">增加目的地</string>
+    <string name="add_intermediate_point">增加中轉</string>
+    <string name="add_start_point">新增起始點</string>
+    <string name="intermediate_waypoint">中轉地點：%1$s</string>
+    <string name="waypoints">航點：%1$s</string>
+    <string name="transfers">移動：%1$s</string>
+    <string name="cubic_m">立方公尺</string>
+    <string name="metric_ton">公噸</string>
+    <string name="shared_string_capacity">容量</string>
+    <string name="shared_string_width">寬度</string>
+    <string name="shared_string_height">高度</string>
+    <string name="on_foot">步行：%1$s</string>
+    <string name="route_way">道路：%1$s</string>
+    <string name="points_of_interests">興趣點 (POI)</string>
+    <string name="waiting_for_route_calculation">等待計算路徑</string>
+    <string name="app_mode_public_transport">大眾運輸</string>
+    <string name="avoid_roads_descr">在導航時從地圖上的道路或下面的列表選擇您想要避免的地方：</string>
+    <string name="show_along_the_route">在路徑旁顯示</string>
+    <string name="simulate_navigation">模擬導航</string>
+    <string name="choose_track_file_to_follow">選擇要跟隨的軌跡檔案</string>
+    <string name="voice_announcements">語音通知</string>
+    <string name="intermediate_destinations">中轉地點：%1$s</string>
+    <string name="arrive_at_time">到達 %1$s</string>
+    <string name="quick_action_switch_day_night_descr">輕觸此動作按鈕以在 OsmAnd 的日間與夜間模式間切換</string>
+    <string name="quick_action_switch_day_mode">日間模式</string>
+    <string name="quick_action_switch_night_mode">夜間模式</string>
+    <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
+</resources>

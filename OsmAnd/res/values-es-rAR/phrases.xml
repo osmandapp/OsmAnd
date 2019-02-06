@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Tienda;Almacén</string>
 		<string name="poi_shop_food">Almacén y supermercado</string>
 	<string name="poi_emergency">Emergencia</string>
@@ -171,7 +171,7 @@
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
 	<string name="poi_car_wash">Lavadero de automóviles</string>
 	<string name="poi_fuel">Estación de servicio;Gasolinera;Servicentro</string>
-	<string name="poi_fuel_diesel">Euro Diésel (grado 3; euro V);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium;Oil Diesel D10</string>
+	<string name="poi_fuel_diesel">Euro Diésel (grado 3, euro V);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium</string>
 	<string name="poi_fuel_gtl_diesel">Diésel GTL</string>
 	<string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
 	<string name="poi_fuel_biodiesel">Biodiésel</string>
@@ -215,7 +215,7 @@
 	<string name="poi_railway_platform">Andén de tren</string>
 	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_subway_entrance">Entrada de subte;Entrada de metro</string>
-	<string name="poi_subway_station">Estación de subte;Estación de metro</string>
+	<string name="poi_subway_station">Sí</string>
 	<string name="poi_railway_buffer_stop">Fin de vía</string>
 	<string name="poi_taxi">Parada de taxi;Remis</string>
 
@@ -944,7 +944,7 @@
 
 	<string name="poi_access_delivery">Acceso para entregas</string>
 	<string name="poi_monitoring_station">Estación de monitoreo</string>
-	<string name="poi_capital">Capital</string>
+	<string name="poi_capital">Sí</string>
 	<string name="poi_fee_no">No</string>
 
 	<string name="poi_email">Correo electrónico;Email</string>
@@ -3084,7 +3084,7 @@
 	<string name="poi_traffic_signals_sound">Sonoro</string>
 	<string name="poi_highway_crossing_type">Tipo de cruce</string>
 	<string name="poi_tactile_paving">Pavimento táctil</string>
-	<string name="poi_service_general">Servicio para el automóvil</string>
+	<string name="poi_service_general">Servicio automotriz</string>
 	<string name="poi_self_service">Autoservicio</string>
 	<string name="poi_automated">Automatizado</string>
 	<string name="poi_parking_type">Tipo de estacionamiento</string>
@@ -3848,26 +3848,26 @@
 <string name="poi_amusement_arcade">Salón recreativo</string>
 	<string name="poi_adult_gaming_centre">Centro de juegos para adultos</string>
 
-<string name="poi_service_car">Servicio para el automóvil</string>
+<string name="poi_service_car">Servicio automotriz</string>
 
-<string name="poi_service_vehicle_car_repair_yes">Taller mecánico</string>
+<string name="poi_service_vehicle_car_repair_yes">Taller para automóviles</string>
 	<string name="poi_service_vehicle_oil_change_yes">Cambio de aceite</string>
 	<string name="poi_service_vehicle_used_car_sales_yes">Venta de autos usados</string>
 	<string name="poi_service_vehicle_brakes_yes">Frenos</string>
 	<string name="poi_service_vehicle_new_car_sales_yes">Venta de autos nuevos</string>
-	<string name="poi_service_vehicle_diagnostics_yes">Diagnóstico</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnósticos</string>
 	<string name="poi_service_vehicle_car_parts_yes">Autopartes</string>
 	<string name="poi_service_vehicle_batteries_yes">Baterías</string>
 	<string name="poi_service_vehicle_air_conditioning_yes">Aire acondicionado</string>
-	<string name="poi_service_vehicle_body_repair_yes">Reparación de carrocería</string>
+	<string name="poi_service_vehicle_body_repair_yes">Reparación de carrocerías</string>
 	<string name="poi_service_vehicle_electrical_yes">Eléctrico</string>
 	<string name="poi_service_vehicle_wheels_yes">Ruedas</string>
-	<string name="poi_service_vehicle_glass_yes">Vidrio</string>
-	<string name="poi_service_vehicle_truck_repair_yes">Taller mecánico para camiones</string>
+	<string name="poi_service_vehicle_glass_yes">Vidrios</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Taller para camiones</string>
 	<string name="poi_service_vehicle_muffler_yes">Silenciador</string>
 	<string name="poi_service_vehicle_alignment_yes">Alineación</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">Reparación de la transmisión</string>
-	<string name="poi_service_vehicle_motor_yes">Motor</string>
+	<string name="poi_service_vehicle_motor_yes">Motores</string>
 	<string name="poi_service_vehicle_insurance_yes">Aseguradora</string>
 	<string name="poi_service_vehicle_tyres_yes">Neumáticos</string>
 
@@ -3921,7 +3921,7 @@
 	<string name="poi_payment_contactless_no">No acepta Pagos sin contacto</string>
 
 <string name="poi_hazard_nuclear">Peligro nuclear</string>
-	<string name="poi_hazard_erosion">Peligro de erosión</string>
+	<string name="poi_hazard_erosion">Peligro de derrumbe por erosión</string>
 	<string name="poi_hazard_avalanche">Peligro de avalancha</string>
 	<string name="poi_hazard_slippery_road">Camino resbaladizo</string>
 	<string name="poi_hazard_flood">Peligro de inundación</string>
@@ -3938,4 +3938,42 @@
 <string name="poi_atm">Cajero automático</string>
 	<string name="poi_shoe_repair">Reparación de calzado;Zapatero</string>
 
+<string name="poi_bulk_purchase">Compra al por mayor</string>
+	<string name="poi_substation_type">Tipo de subestación</string>
+
+<string name="poi_bulk_purchase_yes">Sí</string>
+	<string name="poi_bulk_purchase_only">Únicamente</string>
+
+	<string name="poi_pipeline_substation">Subestación de tuberías</string>
+	<string name="poi_substation_transmission">Transmisión</string>
+	<string name="poi_substation_distribution">Distribución</string>
+	<string name="poi_substation_minor_distribution">Distribución menor</string>
+	<string name="poi_substation_industrial">Industrial</string>
+	<string name="poi_substation_transition">Transición</string>
+	<string name="poi_substation_traction">Tracción</string>
+	<string name="poi_substation_converter">Convertidora</string>
+	<string name="poi_substation_compensation">Compensación</string>
+
+	<string name="poi_substation_compression">Compresión</string>
+	<string name="poi_substation_measurement">Medición</string>
+	<string name="poi_substation_valve">Válvula</string>
+	<string name="poi_substation_valve_group">Grupo de válvulas</string>
+	<string name="poi_substation_inspection_gauge">Calibre de inspección</string>
+	<string name="poi_substation_field_gathering">Recolección de campo</string>
+    <string name="poi_craft_confectionery">Elaboración de dulces</string>
+    <string name="poi_shop_wholesale">Venta mayorista</string>
+    <string name="poi_books_type">Libros</string>
+    <string name="poi_laboratory">Laboratorio médico</string>
+    <string name="poi_blood_donation">Donación de sangre</string>
+    <string name="poi_books_comic">Historietas</string>
+    <string name="poi_books_antiquarian">Antiguos</string>
+    <string name="poi_books_religion">Religiosos</string>
+    <string name="poi_books_academic">Académicos</string>
+    <string name="poi_books_children">Infantiles</string>
+    <string name="poi_atoll">Atolón</string>
+    <string name="poi_toll_gantry">Pórtico de peaje</string>
+    <string name="poi_childcare">Guardería;Cuidado de niños</string>
+    <string name="poi_denotation">Denotación</string>
+    <string name="poi_denotation_natural_monument">Monumento natural</string>
+    <string name="poi_denotation_landmark">Referencia terrestre</string>
 </resources>

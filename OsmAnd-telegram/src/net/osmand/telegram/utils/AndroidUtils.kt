@@ -6,22 +6,29 @@ import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.os.Build
 import android.support.annotation.AttrRes
 import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import net.osmand.telegram.R
 import java.io.File
 
@@ -129,6 +136,52 @@ object AndroidUtils {
 
 	fun getPopupMenuHeight(ctx: Context): Int {
 		return ctx.resources.getDimensionPixelSize(R.dimen.list_popup_window_height)
+	}
+
+	fun setSnackbarTextColor(snackbar: Snackbar, @ColorRes colorId: Int) {
+		val view = snackbar.view
+		val tv = view.findViewById(android.support.design.R.id.snackbar_action) as TextView
+		tv.setTextColor(ContextCompat.getColor(view.context, colorId))
+	}
+
+	fun createPressedColorStateList(
+		ctx: Context, light: Boolean,
+		@ColorRes lightNormal: Int, @ColorRes lightPressed: Int,
+		@ColorRes darkNormal: Int = 0, @ColorRes darkPressed: Int = 0
+	): ColorStateList {
+		return createColorStateList(
+			ctx, light, android.R.attr.state_pressed,
+			lightNormal, lightPressed, darkNormal, darkPressed
+		)
+	}
+
+	fun createColorStateList(
+		ctx: Context, light: Boolean, state: Int,
+		@ColorRes lightNormal: Int, @ColorRes lightState: Int,
+		@ColorRes darkNormal: Int, @ColorRes darkState: Int
+	): ColorStateList {
+		return ColorStateList(
+			arrayOf(intArrayOf(state), intArrayOf()),
+			intArrayOf(
+				ContextCompat.getColor(ctx, if (light) lightState else darkState),
+				ContextCompat.getColor(ctx, if (light) lightNormal else darkNormal)
+			)
+		)
+	}
+
+	fun createPressedStateListDrawable(normal: Drawable, pressed: Drawable): StateListDrawable {
+		return createStateListDrawable(normal, pressed, android.R.attr.state_pressed)
+	}
+
+	fun createStateListDrawable(
+		normal: Drawable,
+		stateDrawable: Drawable,
+		state: Int
+	): StateListDrawable {
+		val res = StateListDrawable()
+		res.addState(intArrayOf(state), stateDrawable)
+		res.addState(intArrayOf(), normal)
+		return res
 	}
 
 	@ColorInt

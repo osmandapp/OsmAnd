@@ -1,5 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="intermediate_waypoint">Промежуточная точка: %1$s</string>
+    <string name="waypoints">Путевые точки: %1$s</string>
+    <string name="intermediate_destinations">Промежуточные точки: %1$s</string>
+    <string name="arrive_at_time">Прибытие в %1$s</string>
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
@@ -115,7 +119,7 @@
     <string name="routing_attr_relief_smoothness_factor_name">Выберите пересеченность местности</string>
     
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
-    <string name="routing_attr_height_obstacles_description">Использовать данные о высоте местности, предоставленные SRTM, ASTER и EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Фактор рельефа местности (по данным SRTM, ASTER и EU-DEM).</string>
 
     <string name="quick_action_duplicates">Указанное имя для быстрого действия уже используется. Действие будет сохранено как %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
@@ -170,7 +174,7 @@
 
     <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
-    <string name="gpx_add_track">Добавить</string>
+    <string name="gpx_add_track">Добавь еще…</string>
     <string name="gpx_appearance">Вид</string>
 
     
@@ -359,7 +363,7 @@
 \nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения или подложки к другой базовой карте (например стандартной офлайн-карте OsmAnd). Чтобы сделать какую-либо подложку лучше видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню «Настроить карту». 
 \n 
 \nТайловые карты можно получить непосредственно с помощью онлайн-источников или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей.</string>
-    <string name="osmand_background_plugin_description">Этот плагин предоставляет навигацию и запись маршрутов в энергосберегающем режиме. Плагин работает в фоновом режиме и периодически активизирует GPS для записи маршрута или воспроизведения голосовых команд.</string>
+    <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путем периодического пробуждения устройства GPS (с выключенным экраном).</string>
     <string name="osmand_accessibility_description">"Плагин добавляет поддержку специальных возможностей устройства непосредственно в OsmAnd. Это облегчает, например, регулировку скорости речи для голоса TTS, настройку направленности  экрана навигации, управление масштабом при помощи трекбола или использование голосовых команд обратной связи для авто аннотации вашего местоположения."</string>
     <string name="osmand_development_plugin_description">Плагин отображает параметры для разработки и отладки функций, таких как, проверка или моделирование маршрута, отображение производительности отрисовки, проверка голосовых подсказок. Эти настройки предназначены для разработчиков и не требуются для обычного пользователя.</string>
     <string name="plugins_screen">Плагины</string>
@@ -400,7 +404,7 @@
     <string name="live_monitoring_url">Web адрес онлайн слежения</string>
     <string name="gpx_monitoring_disabled_warn">Записать трек можно с помощью виджета GPX или выбрав \"Запись поездки\" в Настройках.</string>
     <string name="show_current_gpx_title">Показывать текущий путь</string>
-    <string name="free_version_message">Бесплатная версия OsmAnd ограничена %1$s загрузками (добавлениями или обновлениями карт) и не поддерживает геостатьи из Википедии.</string>
+    <string name="free_version_message">Вы можете скачать или обновить карты %1$s.</string>
     <string name="free_version_title">Бесплатная версия</string>
     <string name="poi_context_menu_showdescription">Показать описание POI.</string>
     <string name="index_name_us">Северная Америка - США</string>
@@ -625,7 +629,7 @@
     <string name="general_settings">Общие</string>
     <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
-    <string name="osmand_service_descr">Оставить OsmAnd работать в фоновом режиме при выключении экрана.</string>
+    <string name="osmand_service_descr">OsmAnd работает в фоновом режиме с выключенным экраном.</string>
     <string name="fast_route_mode">Скоростной маршрут</string>
     <string name="fast_route_mode_descr">Расчет скоростного маршрута вместо кратчайшего.</string>
     <string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
@@ -1024,7 +1028,7 @@
     <string name="address_search_desc">Поиск по адресу</string>
     <string name="navpoint_search_desc">Координаты</string>
     <string name="transport_search_desc">Поиск общественного транспорта</string>
-    <string name="favourites_search_desc">Поиск в избранном</string>
+    <string name="favourites_search_desc">Способ поиска в избранных</string>
     <string name="rendering_attr_noPolygons_description">Отображать только контуры, без заливки.</string>
     <string name="rendering_attr_noPolygons_name">Полигоны</string>
     <string name="rendering_attr_appMode_name">Режим рендеринга</string>
@@ -1390,7 +1394,7 @@
     <string name="calculate_osmand_route_gpx">Рассчитать оффлайновый маршрут OsmAnd</string>
     <string name="copying_osmand_files">Копирование файлов данных OsmAnd…</string>
     <string name="speech_rate">Скорость произношения</string>
-    <string name="app_modes_choose_descr">Выберите профили, видимые в приложении.</string>
+    <string name="app_modes_choose_descr">Выберите профили, которые будут отображаться в приложении.</string>
     <string name="app_modes_choose">Профили приложения</string>
     <string name="edit_tilesource_choose_existing">Выберите существующий…</string>
     <string name="maps_define_edit">Задать/отредактировать …</string>
@@ -1930,7 +1934,7 @@
     <string name="storage_directory_manual">Указать вручную</string>
     <string name="storage_directory">Хранилище карт</string>
     <string name="shared_string_copy">Копировать</string>
-    <string name="application_dir_change_warning3">Скопировать файлы данных в новое место назначения?</string>
+    <string name="application_dir_change_warning3">Скопировать файлы данных Osmand в новое место назначения\?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     
@@ -2246,7 +2250,7 @@
     <string name="osm_live_not_active">Неактивные</string>
     <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OSM внесшим изменения в карту этого региона.</string>
     <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. Свободного места - {2} Мб.</string>
-    <string name="upload_osm_note_description">Вы можете загрузить свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Загрузите свою заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать панель управления</string>
@@ -2335,12 +2339,12 @@
     <string name="clear_tile_data">Очистить всю плитку</string>
     <string name="routing_attr_short_way_name">Экономичный путь</string>
     <string name="routing_attr_short_way_description">Использование топливо-сберегающего пути (обычно короче).</string>
-    <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить любимые %1$s?</string>
+    <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>
     <string name="get_started">Начать</string>
     <string name="shared_string_from">от</string>
     <string name="follow_us">Подписывайтесь на нас</string>
-    <string name="osm_live_email_desc">Необходимо предоставить информацию о взносах.</string>
+    <string name="osm_live_email_desc">Необходимо, чтобы предоставить вам информацию о вкладах.</string>
     <string name="download_files_question_space_with_temp">Скачать {0} файл (ов)? Используется {3} Мб временной и {1} Мб постоянной памяти. (Свободного места - {2} Мб.)</string>
     <string name="search_my_location">Найти мое местоположение</string>
     <string name="first_usage_greeting">Прокладывайте маршруты и открывайте новые для себя места без подключения к Интернету</string>
@@ -2362,7 +2366,7 @@
     <string name="get_for">Получить за %1$s</string>
     <string name="get_for_month">Получить за %1$s в месяц</string>
     <string name="get_it">Получить</string>
-    <string name="osm_live_banner_desc">Получите неограниченные загрузки для карт, а также обновления карт чаще, чем один раз в месяц: еженедельно, ежедневно или ежечасно.</string>
+    <string name="osm_live_banner_desc">Получайте неограниченное количество загрузок карт и обновлений карт более одного раза в месяц: еженедельно, ежедневно или ежечасно.</string>
     <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину Wikipedia.</string>
     <string name="select_voice_provider">Выберите голосовое сопровождение</string>
     <string name="osm_live_payment_desc">Абонентская плата взимается ежемесячно. Отменить подписку можно в Google Play в любой момент.</string>
@@ -2459,7 +2463,7 @@
     <string name="shared_string_to">До</string>
     <string name="mapillary_menu_date_from">От</string>
     <string name="shared_string_reload">Обновить</string>
-    <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю или по дате. Фильтры применяются только для больших масштабов.</string>
+    <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">OsmAnd не удается импортировать файл. Проверьте имеет ли OsmAnd разрешение на чтение файла из его местоположения.</string>
     <string name="distance_moving">Откорректированное расстояние</string>
     <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить одну или несколько фотографий к этому месту на карте.</string>
@@ -2651,17 +2655,17 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) - картографическая и навигационная программа с доступом к свободным, мировым и высококачественным данным OpenStreetMap (OSM). 
 \n 
 \nПолучайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса (англ. POI, points of interest), создавайте и управляйте треками GPX, используйте визуализацию контурных линий и данных высот (через плагин), переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте OSM данные и многое другое.</string>
-    <string name="osmand_extended_description_part2">GPS-навигация
-\n• Вы можете выбрать между автономным режимом (без платы за роуминг) и через Интернет (быстрее)
-\n• Пошаговые голосовые подсказки (записанные или синтезированные голоса) доставят вас к месту назначения
-\n• Повторный расчет маршрута после значительного отклонения от существующего
-\n• Полосы движения, названия улиц и приблизительное время прибытия помогут в дороге
-\n• Для того, чтобы сделать ваше путешествие более безопасным, режим дня/ночи переключается автоматически
-\n• Вы можете настроить отображение ограничений скорости и получать предупреждения при ее превышении
-\n• Карта масштабируется соответственно вашей скорости
-\n• Вы можете искать места по адресу, типу (паркинг, ресторан, отель, заправка, музей и т.д.) или географическим координатам
-\n• Поддержка промежуточных точек маршрута
-\n• Вы можете записать собственный GPX трек или загрузить готовый и придерживаться его</string>
+    <string name="osmand_extended_description_part2">GPS-навигация 
+\n• Выбор между автономным режимом (без платы за роуминг) и через Интернет (быстрее) 
+\n• Пошаговые голосовые подсказки (записанные или синтезированные голоса) доставят вас к месту назначения 
+\n• Повторный расчет маршрута после значительного отклонения от существующего 
+\n• Полосы движения, названия улиц и приблизительное время прибытия помогут в дороге 
+\n• Для того, чтобы сделать ваше путешествие более безопасным, режим дня/ночи переключается автоматически 
+\n• Отображение ограничений скорости и получение предупреждений при их превышении 
+\n• Карта масштабируется соответственно вашей скорости 
+\n• Поиск места по адресу, типу (паркинг, ресторан, отель, заправка, музей и т.д.) или географическим координатам 
+\n• Поддержка промежуточных точек маршрута 
+\n• Запись собственного или загрузка GPX трека и следование ему</string>
     <string name="osmand_extended_description_part3">Карта 
 \n• Отображает POI (точки интереса) около вас 
 \n• Адаптирует карту в направлении вашего движения (или компаса) 
@@ -2876,7 +2880,7 @@
     <string name="shared_string_dont">Нет</string>
     <string name="shared_string_do">Выполнить</string>
     <string name="purchase_dialog_title">Выберите план</string>
-    <string name="purchase_dialog_travel_description">Чтобы читать статьи путеводителя в автономном режиме, вам необходимо приобрести один из следующих пунктов.</string>
+    <string name="purchase_dialog_travel_description">Приобретите один из следующих планов, чтобы получить оффлайн путеводитель:</string>
     <string name="purchase_dialog_subtitle">Выберите подходящий пункт:</string>
     <string name="in_app_purchase">Покупка в приложении</string>
     <string name="in_app_purchase_desc">Разовый платеж.</string>
@@ -2895,13 +2899,13 @@
     <string name="in_app_purchase_desc_ex">После покупки этот план станет доступен для вас навсегда.</string>
     <string name="wikivoyage_travel_guide">Путеводитель</string>
     <string name="wikivoyage_travel_guide_descr">Просматривайте путеводители Викигида по самым интересным местам на планете внутри OsmAnd без подключения к интернету.</string>
-    <string name="travel_card_update_descr">Мы подготовили обновления и исправления в данных Викигида, обновите файл, чтобы увидеть их.</string>
+    <string name="travel_card_update_descr">Доступны новые данные Викигида, обновите файл, чтобы увидеть их.</string>
 	<string name="travel_card_download_descr">Скачайте путеводители Викигида для просмотра статей о местах по всему миру без подключения к Интернету.</string>
 	<string name="update_is_available">Доступно обновление</string>
 	<string name="download_file">Скачать файл</string>
     <string name="start_editing_card_image_text">Свободный всемирный путеводитель, который может редактировать каждый.</string>
-    <string name="welcome_to_open_beta_description">Проверьте бесплатно все функции во время открытого бета-тестирования. Впоследствии Путеводитель будет доступен подписчикам OsmAnd Unlimited и владельцам OsmAnd +</string>
-    <string name="start_editing_card_description">Вы можете редактировать любую статью Викигида, и мы надеемся, что вы это сделаете. Нам нужны ваши знания, ваш опыт, ваш талант и ваше внимание</string>
+    <string name="welcome_to_open_beta_description">В настоящее время путеводители основаны на Викигиде. Проверьте бесплатно все функции во время открытого бета-тестирования. Впоследствии путеводители будут доступны подписчикам OsmAnd Unlimited и владельцам OsmAnd+.</string>
+    <string name="start_editing_card_description">Вы можете отредактировать любую статью Викигида, этот проект написан такими же волонтерами как и вы. Нам нужны ваши знания, ваш опыт, ваш талант и ваше внимание</string>
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>
@@ -2980,18 +2984,24 @@
 \n</string>
     <string name="increase_search_radius_to">Увеличить радиус поиска до %1$s</string>
     <string name="commiting_way">Фиксируется путь…</string>
-    <string name="release_3_2_pre">• Исправлено аварийное завершение приложения при запуске с нелатинскими картами 
+    <string name="release_3_2_pre">• Исправлено падение приложения при запуске, которое происходило на некоторых устройствах
+\n
+\n• Новый функционал маркеров: отображение пройденных маркеров
+\n
+\n• История поиска теперь показывает категории, которые вы искали ранее
+\n
+\n• Исправлено падение приложения при запуске с нелатинскими картами 
 \n 
 \n• Повышена скорость рендеринга на устройствах с Android 8.0 
 \n 
-\n• Поддержка редактирования объектов полигонов (не amenity) 
-\n
-\n• Измерить расстояние: добавлена кнопка «Измерить» в пункт «Действия» контекстного меню
+\n• Поддержка редактирования полигональных объектов (не amenity) 
+\n 
+\n• Измерить расстояние: добавлена кнопка «Измерить» в пункт «Действия» контекстного меню 
 \n</string>
     <string name="ask_for_location_permission">Пожалуйста, для продолжения дайте OsmAnd разрешение на определение местоположения.</string>
     <string name="rendering_value_black_name">Чёрный</string>
     <string name="search_street">Поиск улицы</string>
-    <string name="start_search_from_city">Начать поиск с города</string>
+    <string name="start_search_from_city">Сначала выберите город</string>
     <string name="shared_string_restore">Восстановить</string>
     <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или путевых точек GPX и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
     <string name="keep_passed_markers">Оставить пройденные маркеры на карте</string>
@@ -2999,4 +3009,49 @@
     <string name="markers_remove_dialog_msg">Удалить маркер \'%s\'\?</string>
     <string name="edit_map_marker">Редактировать маркер</string>
     <string name="third_party_application">Стороннее приложение</string>
-    </resources>
+    <string name="osm_live_plan_pricing">План и цены</string>
+    <string name="osm_live_payment_monthly_title">Платить ежемесячно</string>
+    <string name="osm_live_payment_3_months_title">Платить раз в 3 месяца</string>
+    <string name="osm_live_payment_annual_title">Платить раз в год</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / месяц</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / месяц</string>
+    <string name="osm_live_payment_discount_descr">Экономия %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Ваша текущая подписка</string>
+    <string name="osm_live_payment_renews_monthly">Продлевается ежемесячно</string>
+    <string name="osm_live_payment_renews_quarterly">Продлевается ежеквартально</string>
+    <string name="osm_live_payment_renews_annually">"Продлевается  ежегодно"</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Выберите удобный для вас период оплаты:</string>
+    <string name="osm_live_payment_contribute_descr">Часть доходов поступает участникам OpenStreetMap.</string>
+    <string name="osm_live_subscriptions">Подписки</string>
+    <string name="powered_by_osmand">Работает на OsmAnd</string>
+    <string name="mapillary_menu_title_pano">Только панорамы 360°</string>
+    <string name="shared_string_launch">Запуск</string>
+    <string name="lang_gn_py">Гуарани</string>
+    <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
+    <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
+    <string name="swap_start_and_destination">Поменять местами пункты отправления и назначения</string>
+    <string name="add_destination_point">Добавить пункт назначения</string>
+    <string name="add_intermediate_point">Добавить промежуточный пункт</string>
+    <string name="add_start_point">Добавить пункт отправления</string>
+    <string name="route_way">Путь: %1$s</string>
+    <string name="points_of_interests">Точки интереса (POI)</string>
+    <string name="waiting_for_route_calculation">Ожидание расчета маршрута</string>
+    <string name="app_mode_public_transport">Общественный транспорт</string>
+    <string name="avoid_roads_descr">Выберите дорогу на карте или из списка ниже, которую вы хотите избежать во время навигации:</string>
+    <string name="simulate_navigation">Моделировать навигацию</string>
+    <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
+    <string name="voice_announcements">Голосовые объявления</string>
+    <string name="quick_action_switch_day_night_descr">Нажатие на кнопку действия переключает дневной и ночной режимы для OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Дневной режим</string>
+    <string name="quick_action_switch_night_mode">Ночной режим</string>
+    <string name="quick_action_day_night_switch_mode">Переключить дневной/ночной режим</string>
+    <string name="cubic_m">м³</string>
+    <string name="metric_ton">т</string>
+    <string name="shared_string_capacity">Объем</string>
+    <string name="shared_string_width">Ширина</string>
+    <string name="shared_string_height">Высота</string>
+    <string name="transfers">трансферы: %1$s</string>
+    <string name="on_foot">пешком: %1$s</string>
+    <string name="show_along_the_route">Показывать вдоль маршрута</string>
+</resources>

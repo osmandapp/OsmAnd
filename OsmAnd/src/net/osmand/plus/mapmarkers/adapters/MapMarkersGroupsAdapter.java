@@ -11,22 +11,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.MapMarkersHelper.ShowHideHistoryButton;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
@@ -445,7 +446,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						final GPXFile[] gpxFile = new GPXFile[1];
 						boolean disabled = !enabled;
 
-						if (groupIsDisabled && !group.wasShown() && !group.getWptCategories().isEmpty()) {
+						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
 							group.setWasShown(true);
 							Bundle args = new Bundle();
 							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
@@ -462,25 +463,19 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							group.setVisibleUntilRestart(disabled);
 							String gpxPath = group.getGpxPath();
 							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
-							if (disabled) {
-								if (selectedGpxFile != null) {
-									gpxFile[0] = selectedGpxFile.getGpxFile();
-									switchGpxVisibility(gpxFile[0], selectedGpxFile, false);
-								}	
+							if (selectedGpxFile != null) {
+								gpxFile[0] = selectedGpxFile.getGpxFile();
 							} else {
-								if (selectedGpxFile == null) {
-									// TODO IO load in another thread ?
-									gpxFile[0] = GPXUtilities.loadGPXFile(app, new File(gpxPath));
-									switchGpxVisibility(gpxFile[0], null, true);
-								}
+								// TODO IO load in another thread ?
+								gpxFile[0] = GPXUtilities.loadGPXFile(app, new File(gpxPath));
 							}
+							switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
 						}
 						if(!disabled) {
 							mapMarkersHelper.enableGroup(group);
 						} else {
 							mapMarkersHelper.runSynchronization(group);
 						}
-
 
 						if (disabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
@@ -563,7 +558,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		if (!visible && selectedGpxFile != null && selectedGpxFile.selectedByUser) {
 			return;
 		}
-		gpxHelper.selectGpxFile(gpxFile, visible, false, false, false);
+		gpxHelper.selectGpxFile(gpxFile, visible, false, false, false, false);
 	}
 
 	public void hideSnackbar() {

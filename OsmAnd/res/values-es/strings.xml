@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -87,7 +87,7 @@
     <string name="pref_raster_map">Ajustes de la fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
     <string name="delete_confirmation_msg">¿Borrar «%1$s»?</string>
-    <string name="city_type_suburb">Barrio</string>
+    <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Pueblo</string>
     <string name="city_type_town">Ciudad pequeña</string>
@@ -1135,7 +1135,7 @@
     <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin pavimentar</string>
     <string name="routing_attr_avoid_unpaved_description">Evita los caminos sin pavimentar.</string>
     <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
-    <string name="routing_attr_avoid_ferries_description">Evita usar ferries</string>
+    <string name="routing_attr_avoid_ferries_description">Evita usar ferris</string>
     <string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evita usar las autopistas</string>
     <string name="routing_attr_weight_name">Límite de peso</string>
@@ -1327,7 +1327,7 @@
     <string name="gpx_info_avg_altitude">Altitud media: %1$s</string>
     <string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
     <string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
-    <string name="map_widget_plain_time">Tiempo actual</string>
+    <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Punto de referencia</string>
     <string name="select_destination_and_intermediate_points">Marque los destinos</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
@@ -1542,7 +1542,7 @@
     <string name="shared_string_enabled">Activado</string>
     <string name="plugin_description_title">Descripción</string>
     <string name="edit_group">Editar grupo</string>
-    <string name="plugin_install_needs_network">Es necesaria una conexión a Internet para instalar este complemento.</string>
+    <string name="plugin_install_needs_network">Debe conectarse a Internet para instalar este complemento.</string>
     <string name="plugin_ski_name">Vista invernal</string>
     <string name="plugin_nautical_name">Vista náutica</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, debe descargarse el mapa especial sin conexión</string>
@@ -2124,7 +2124,7 @@
     <string name="lang_kn">Canarés</string>
     <string name="share_history_subject">compartido vía OsmAnd</string>
     
-    <string name="coords_search">Búsqueda de coordenadas</string>
+    <string name="coords_search">Buscar coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="back_to_search">Volver a la búsqueda</string>
     <string name="confirmation_to_delete_history_items">¿Quitar elementos marcados del «Historial»?</string>
@@ -2469,8 +2469,8 @@
     <string name="type_city_town">Escribe la ciudad o pueblo</string>
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
-    <string name="select_city">Elegir ciudad o pueblo</string>
-    <string name="select_postcode">Elegir código postal</string>
+    <string name="select_city">Elegir la ciudad o pueblo</string>
+    <string name="select_postcode">Elegir el código postal</string>
     <string name="shared_string_paused">Pausado</string>
     <string name="favorite_group_name">Nombre del grupo</string>
     <string name="change_color">Cambiar color</string>
@@ -2561,7 +2561,7 @@
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
     <string name="nothing_found">Nada encontrado</string>
-    <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda.</string>
+    <string name="nothing_found_descr">Modificar la consulta de búsqueda o aumentar el radio de búsqueda.</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
     <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje?</string>
@@ -2596,7 +2596,7 @@
     <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario o por fecha. Sólo activado en los primeros zooms.</string>
+    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario, fecha o tipo. Sólo activado en los primeros zooms.</string>
     
     <string name="map_widget_ruler_control">Regla radial</string>
     <string name="average">Promedio</string>
@@ -2724,7 +2724,7 @@
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     
     <string name="mark_passed">Descartar</string>
-    <string name="import_gpx_file_description">pueden importarse como Favoritos o como un archivo GPX.</string>
+    <string name="import_gpx_file_description">puede importarse como Favoritos o como un archivo GPX.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
@@ -2985,7 +2985,7 @@
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDenos su opinión</string>
     <string name="commiting_way">Enviando vía…</string>
-    <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar las indicaciones que faltan o son defectuosas.</string>
+    <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar avisos faltantes o defectuosos.</string>
 <string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía en algunos dispositivos
 \n
 \n • Nueva función de marcadores: muestra los marcadores que ya han sido atravesados.
@@ -3002,13 +3002,62 @@
 \n</string>
     <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
     <string name="rendering_value_black_name">Negro</string>
-    <string name="search_street">Buscar calle</string>
-    <string name="start_search_from_city">Iniciar búsqueda desde ciudad</string>
+    <string name="search_street">Buscar la calle</string>
+    <string name="start_search_from_city">Elegir la ciudad o pueblo</string>
     <string name="shared_string_restore">Restaurar</string>
-    <string name="keep_passed_markers_descr">Los marcadores añadidos como un grupo de Favoritos o puntos de ruta GPX marcados como Pasados permanecerán en el mapa. Si el grupo no está activo, los marcadores desaparecerán del mapa.</string>
-    <string name="keep_passed_markers">Mantener marcadores pasados en el mapa</string>
-    <string name="more_transport_on_stop_hint">Hay más transporte en esta parada.</string>
+    <string name="keep_passed_markers_descr">Los marcadores añadidos como un grupo de Favoritos o puntos de ruta GPX marcados como «Usados», permanecerán en el mapa. Si el grupo no está activo, los marcadores desaparecerán del mapa.</string>
+    <string name="keep_passed_markers">Mantener en el mapa los marcadores ya usados</string>
+    <string name="more_transport_on_stop_hint">Hay más transportes en esta parada.</string>
     <string name="markers_remove_dialog_msg">¿Borrar marcador del mapa «%s»\?</string>
     <string name="edit_map_marker">Editar marcador del mapa</string>
     <string name="third_party_application">Aplicación de terceros</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Plan y Precios</string>
+    <string name="osm_live_payment_monthly_title">Pago mensual</string>
+    <string name="osm_live_payment_3_months_title">Pago trimestral</string>
+    <string name="osm_live_payment_annual_title">Pago anual</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
+    <string name="osm_live_payment_discount_descr">¡Ahorra %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Suscripción actual</string>
+    <string name="osm_live_payment_renews_monthly">Renovar mensualmente</string>
+    <string name="osm_live_payment_renews_quarterly">Renovar trimestralmente</string>
+    <string name="osm_live_payment_renews_annually">Renovar anualmente</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Elige la frecuencia de pago:</string>
+    <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
+    <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
+    <string name="osm_live_subscriptions">Suscripciones</string>
+    <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
+    <string name="shared_string_launch">Ejecutar</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="run_full_osmand_msg">Está utilizando el mapa «{0}» que funciona con OsmAnd. ¿Quiere ejecutar la versión completa de OsmAnd\?</string>
+    <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
+    <string name="quick_action_switch_day_night_descr">Este botón de acción, alterna entre el modo «Diurno» y «Nocturno» para OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Modo diurno</string>
+    <string name="quick_action_switch_night_mode">Modo nocturno</string>
+    <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
+    <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
+    <string name="add_destination_point">Añadir destino</string>
+    <string name="add_intermediate_point">Añadir punto intermedio</string>
+    <string name="add_start_point">Añadir punto de partida</string>
+    <string name="intermediate_waypoint">Punto intermedio: %1$s</string>
+    <string name="waypoints">Puntos de referencia: %1$s</string>
+    <string name="transfers">transferencias: %1$s</string>
+    <string name="on_foot">a pie: %1$s</string>
+    <string name="route_way">Camino: %1$s</string>
+    <string name="points_of_interests">Puntos de interés (PDI)</string>
+    <string name="waiting_for_route_calculation">Esperando el cálculo de la ruta</string>
+    <string name="app_mode_public_transport">Transporte público</string>
+    <string name="avoid_roads_descr">Marca el camino a evitar durante la navegación, desde el mapa o de la siguiente lista:</string>
+    <string name="show_along_the_route">Mostrar a lo largo de la ruta</string>
+    <string name="simulate_navigation">Simular navegación</string>
+    <string name="choose_track_file_to_follow">Elija el archivo de la traza a seguir</string>
+    <string name="voice_announcements">Anuncios de voz</string>
+    <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
+    <string name="arrive_at_time">Llegará a las %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">ton</string>
+    <string name="shared_string_capacity">Capacidad</string>
+    <string name="shared_string_width">Ancho</string>
+    <string name="shared_string_height">Altura</string>
+</resources>

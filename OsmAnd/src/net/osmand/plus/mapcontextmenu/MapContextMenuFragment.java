@@ -55,7 +55,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -369,7 +369,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							if (menu.isLandscapeLayout() && newY > topScreenPosY) {
 								newY = topScreenPosY;
 							}
-							setViewY((int) newY, false, false);
+							setViewY((int) newY, false, false, 0);
 
 							menuFullHeight = view.getHeight() - (int) newY + 10;
 							ViewGroup.LayoutParams lp = mainView.getLayoutParams();
@@ -886,10 +886,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		}
 		int newMenuState = menu.getCurrentMenuState();
-		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
+		boolean needMapAdjust = currentMenuState != newMenuState && (currentMenuState == MenuState.HEADER_ONLY || newMenuState == MenuState.HEADER_ONLY);
 
 		if (newMenuState != currentMenuState) {
-			restoreCustomMapRatio();
 			menu.updateControlsVisibility(true);
 			doBeforeMenuStateChange(currentMenuState, newMenuState);
 			toggleDetailsHideButton();
@@ -919,17 +918,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (map.isZooming() && map.hasCustomMapRatio()) {
 			getMapActivity().changeZoom(2, System.currentTimeMillis());
 		} else {
-			if (!map.hasCustomMapRatio()) {
-				//setCustomMapRatio();
-			}
+			setCustomMapRatio();
 			getMapActivity().changeZoom(1, System.currentTimeMillis());
 		}
 	}
 
 	public void doZoomOut() {
-		if (!map.hasCustomMapRatio()) {
-			//setCustomMapRatio();
-		}
+		setCustomMapRatio();
 		getMapActivity().changeZoom(-1, System.currentTimeMillis());
 	}
 
@@ -1005,7 +1000,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					.start();
 
 			if (needMapAdjust) {
-				adjustMapPosition(posY, true, centered, dZoom);
+				int mapPosY = posY;
+				if (newMenuState == MenuState.FULL_SCREEN) {
+					mapPosY = getMenuStatePosY(MenuState.HALF_SCREEN);
+				}
+				adjustMapPosition(mapPosY, true, centered, dZoom);
 			}
 		}
 	}
@@ -1245,9 +1244,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	@Override
 	public void onPause() {
-		restoreCustomMapRatio();
 
 		if (view != null) {
+			restoreCustomMapRatio();
 			ViewParent parent = view.getParent();
 			if (parent != null && containerLayoutListener != null) {
 				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
@@ -1789,12 +1788,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return (int) mainView.getY();
 	}
 
-	private void setViewY(int y, boolean animated, boolean adjustMapPos) {
+	private void setViewY(int y, boolean animated, boolean adjustMapPos, int mapY) {
 		mainView.setY(y);
 		zoomButtonsView.setY(getZoomButtonsY(y));
 		if (!customMapCenter) {
 			if (adjustMapPos) {
-				adjustMapPosition(y, animated, centered, 0);
+				adjustMapPosition(mapY, animated, centered, 0);
 			}
 		} else {
 			customMapCenter = false;
@@ -1889,8 +1888,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void doLayoutMenu() {
-		final int posY = getPosY(getViewY(), false, menu.getCurrentMenuState());
-		setViewY(posY, true, !initLayout || !centered);
+		int state = menu.getCurrentMenuState();
+		int posY = getPosY(getViewY(), false, state);
+		int mapPosY = state == MenuState.FULL_SCREEN ? getMenuStatePosY(MenuState.HALF_SCREEN) : posY;
+		setViewY(posY, true, !initLayout || !centered, mapPosY);
 		updateMainViewLayout(posY);
 	}
 
@@ -1921,7 +1922,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				if (mapCenter != null) {
 					map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
 				}
-				adjustMapPosition(getPosY(), true, false, 0);
+				int posY = getPosY();
+				int mapPosY = menu.getCurrentMenuState() == MenuState.FULL_SCREEN ? getMenuStatePosY(MenuState.HALF_SCREEN) : posY;
+				adjustMapPosition(mapPosY, true, false, 0);
 			} else {
 				view.setVisibility(View.GONE);
 			}

@@ -77,6 +77,6 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 				.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
 	}
 
-	private fun isShowingChatsNotificationEnabled() = !app.showLocationHelper.isUseOsmandCallback()
-			&& app.isOsmAndInstalled() && app.settings.hasAnyChatToShowOnMap()
+	private fun isShowingChatsNotificationEnabled() = (!app.showLocationHelper.isUseOsmandCallback() || app.settings.monitoringEnabled)
+			&& app.isAnyOsmAndInstalled() && app.settings.hasAnyChatToShowOnMap()
 }

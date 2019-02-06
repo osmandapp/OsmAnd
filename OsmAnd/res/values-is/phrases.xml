@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_traffic_signals_sound">Hljóð</string>
 	<string name="poi_bicycle_parking_type">Tegund</string>
 	<string name="poi_piste_grooming">Verið að troða leið</string>
@@ -43,7 +43,7 @@
 	<string name="poi_customs">Tollafgreiðsla</string>
 	<string name="poi_country">Land</string>
 	<string name="poi_city">Borg</string>
-	<string name="poi_capital">Höfuðborg</string>
+	<string name="poi_capital">Já</string>
 	<string name="poi_town">Bær</string>
 	<string name="poi_village">Þorp</string>
 	<string name="poi_hamlet">Byggðakjarni</string>
@@ -1836,7 +1836,7 @@
 	<string name="poi_railway_station">Járnbrautarstöð</string>
 	<string name="poi_halt">Járnbrautarpallur</string>
 	<string name="poi_subway_entrance">Inngangur í neðanjarðarlest</string>
-	<string name="poi_subway_station">Neðanjarðarlestarstöð</string>
+	<string name="poi_subway_station">Já</string>
 	<string name="poi_taxi">Leigubílastaur</string>
 
 	<string name="poi_bicycle_rental">Reiðhjólaleiga</string>
@@ -2430,7 +2430,7 @@
 	<string name="poi_drive_through_no">Bílaafgreiðsla: nei</string>
 
 	<string name="poi_brewery_additional">Nafn á brugghúsi</string>
-	<string name="poi_microbrewery_yes">Bruggað á staðnum</string>
+	<string name="poi_microbrewery_yes">Já</string>
 	<string name="poi_microbrewery_no">Ekki bruggað á staðnum</string>
 
 	<string name="poi_service_electrical">Viðgerðir rafknúinna ökutækja</string>
@@ -3868,4 +3868,41 @@
 <string name="poi_atm">Hraðbanki</string>
 	<string name="poi_shoe_repair">Skóviðgerðir</string>
 
+<string name="poi_bulk_purchase">Magnkaup</string>
+	<string name="poi_substation_type">Tegund</string>
+
+<string name="poi_bulk_purchase_yes">Já</string>
+	<string name="poi_bulk_purchase_only">Einungis</string>
+
+	<string name="poi_substation_distribution">Dreifing</string>
+	<string name="poi_substation_industrial">Iðnaðar</string>
+	<string name="poi_substation_valve">Loki</string>
+	<string name="poi_substation_inspection_gauge">Mælir</string>
+    <string name="poi_books_type">Bækur</string>
+    <string name="poi_substation_compression">Þjöppun</string>
+    <string name="poi_substation_measurement">Mæling</string>
+    <string name="poi_substation_valve_group">Ventlahópur</string>
+    <string name="poi_craft_confectionery">Sælgætisframleiðsla</string>
+    <string name="poi_shop_wholesale">Heildsöluverslun</string>
+    <string name="poi_laboratory">Læknisfræðirannsóknastofa</string>
+    <string name="poi_blood_donation">Blóðgjöf</string>
+    <string name="poi_books_comic">Myndasögur</string>
+    <string name="poi_books_religion">Trúarbrögð</string>
+    <string name="poi_books_academic">Akademískar</string>
+    <string name="poi_books_children">Barnabækur</string>
+    <string name="poi_atoll">Kóralrif</string>
+    <string name="poi_pipeline_substation">Millistöð leiðslu</string>
+    <string name="poi_substation_transmission">Spennuvirki</string>
+    <string name="poi_substation_minor_distribution">Minni háttar dreifing</string>
+    <string name="poi_substation_transition">Millistöð</string>
+    <string name="poi_substation_traction">Spennustöð lestakerfis</string>
+    <string name="poi_substation_converter">Umbreytir</string>
+    <string name="poi_substation_compensation">Mótvægisjöfnun</string>
+    <string name="poi_substation_field_gathering">Safnstöð</string>
+    <string name="poi_books_antiquarian">Gamlar bækur</string>
+    <string name="poi_denotation">Staða</string>
+    <string name="poi_toll_gantry">Tollhlið</string>
+    <string name="poi_childcare">Barnagæsla</string>
+    <string name="poi_denotation_natural_monument">Náttúruvætti</string>
+    <string name="poi_denotation_landmark">Landmerki</string>
 </resources>

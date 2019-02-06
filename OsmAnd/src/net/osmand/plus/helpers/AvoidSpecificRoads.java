@@ -101,7 +101,7 @@ public class AvoidSpecificRoads {
 		return OsmAndFormatter.getFormattedDistance((float) dist, app);
 	}
 
-	private String getText(@Nullable LatLon point) {
+	public String getText(@Nullable LatLon point) {
 		if (point != null) {
 			RouteDataObject obj = impassableRoads.get(point);
 			if (obj != null) {
@@ -121,6 +121,23 @@ public class AvoidSpecificRoads {
 		return app.getString(R.string.shared_string_road);
 	}
 
+	public String getText(@Nullable RouteDataObject obj) {
+		if (obj != null) {
+			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+			String name = RoutingHelper.formatStreetName(
+					obj.getName(locale, transliterate),
+					obj.getRef(locale, transliterate, true),
+					obj.getDestinationName(locale, transliterate, true),
+					app.getString(R.string.towards)
+			);
+			if (!TextUtils.isEmpty(name)) {
+				return name;
+			}
+		}
+		return app.getString(R.string.shared_string_road);
+	}
+
 	private void recalculateRoute() {
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
@@ -128,7 +145,7 @@ public class AvoidSpecificRoads {
 		}
 	}
 
-	private void removeImpassableRoad(LatLon latLon) {
+	public void removeImpassableRoad(LatLon latLon) {
 		app.getSettings().removeImpassableRoad(latLon);
 		RouteDataObject obj = impassableRoads.remove(latLon);
 		if (obj != null) {
@@ -169,7 +186,7 @@ public class AvoidSpecificRoads {
 		bld.show();
 	}
 
-	private void selectFromMap(final MapActivity mapActivity) {
+	public void selectFromMap(final MapActivity mapActivity) {
 		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
 		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
 			@Override

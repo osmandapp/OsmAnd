@@ -19,7 +19,7 @@ public class ApplicationMode {
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 	/*
-	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
+	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat")
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
 			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
@@ -36,7 +36,7 @@ public class ApplicationMode {
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
 
-	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
+	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().nauticalLocation().
 			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).reg();
 
 	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
@@ -56,6 +56,9 @@ public class ApplicationMode {
 
 	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
 			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
+
+	public static final ApplicationMode PUBLIC_TRANSPORT = create(R.string.app_mode_public_transport, "public_transport").
+			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark).reg();
 
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN};
@@ -159,6 +162,16 @@ public class ApplicationMode {
 			return this;
 		}
 
+		public ApplicationModeBuilder nauticalLocation() {
+			applicationMode.bearingIconDay = R.drawable.map_nautical_bearing;
+			applicationMode.bearingIconNight = R.drawable.map_nautical_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_nautical_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
+			applicationMode.locationIconDay = R.drawable.map_nautical_location;
+			applicationMode.locationIconNight = R.drawable.map_nautical_location_night;
+			return this;
+		}
+
 		public ApplicationModeBuilder speed(float defSpeed, int distForTurn) {
 			applicationMode.defaultSpeed = defSpeed;
 			applicationMode.minDistanceForTurn = distForTurn;
@@ -187,19 +200,29 @@ public class ApplicationMode {
 		this.stringKey = stringKey;
 	}
 
-	public static List<ApplicationMode> values(OsmandSettings settings) {
+	public static List<ApplicationMode> values(OsmandApplication app) {
+		if (customizationListener == null) {
+			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
+				@Override
+				public void onOsmAndSettingsCustomized() {
+					cachedFilteredValues = new ArrayList<>();
+				}
+			};
+			app.getAppCustomization().addListener(customizationListener);
+		}
 		if (cachedFilteredValues.isEmpty()) {
+			OsmandSettings settings = app.getSettings();
 			if (listener == null) {
 				listener = new StateChangedListener<String>() {
 					@Override
 					public void stateChanged(String change) {
-						cachedFilteredValues = new ArrayList<ApplicationMode>();
+						cachedFilteredValues = new ArrayList<>();
 					}
 				};
 				settings.AVAILABLE_APP_MODES.addListener(listener);
 			}
 			String available = settings.AVAILABLE_APP_MODES.get();
-			cachedFilteredValues = new ArrayList<ApplicationMode>();
+			cachedFilteredValues = new ArrayList<>();
 			for (ApplicationMode v : values) {
 				if (available.indexOf(v.getStringKey() + ",") != -1 || v == DEFAULT) {
 					cachedFilteredValues.add(v);
@@ -236,7 +259,10 @@ public class ApplicationMode {
 		return false;
 	}
 
-	public boolean isWidgetVisible(String key) {
+	public boolean isWidgetVisible(OsmandApplication app, String key) {
+		if (app.getAppCustomization().areWidgetsCustomized()) {
+			return app.getAppCustomization().isWidgetVisible(key, this);
+		}
 		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
 		if (set == null) {
 			return false;
@@ -261,7 +287,10 @@ public class ApplicationMode {
 		return set;
 	}
 
-	public boolean isWidgetAvailable(String key) {
+	public boolean isWidgetAvailable(OsmandApplication app, String key) {
+		if (app.getAppCustomization().areWidgetsCustomized()) {
+			return app.getAppCustomization().isWidgetAvailable(key, this);
+		}
 		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
 		if (set == null) {
 			return true;
@@ -393,4 +422,5 @@ public class ApplicationMode {
 	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 	private static StateChangedListener<String> listener;
+	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
 }

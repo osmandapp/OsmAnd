@@ -91,6 +91,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.RECORDING_LAYER;
+
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
@@ -640,6 +642,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.layer_recordings, app)
+				.setId(RECORDING_LAYER)
 				.setSelected(SHOW_RECORDINGS.get())
 				.setIcon(R.drawable.ic_action_micro_dark)
 				.setColor(SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)

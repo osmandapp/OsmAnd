@@ -26,6 +26,9 @@ public class SkuDetails {
     String mSku;
     String mType;
     String mPrice;
+    long mPriceAmountMicros;
+    String mPriceCurrencyCode;
+    String mSubscriptionPeriod;
     String mTitle;
     String mDescription;
     String mJson;
@@ -41,6 +44,9 @@ public class SkuDetails {
         mSku = o.optString("productId");
         mType = o.optString("type");
         mPrice = o.optString("price");
+        mPriceAmountMicros = o.optLong("price_amount_micros");
+        mPriceCurrencyCode = o.optString("price_currency_code");
+        mSubscriptionPeriod = o.optString("subscriptionPeriod");
         mTitle = o.optString("title");
         mDescription = o.optString("description");
     }
@@ -48,6 +54,15 @@ public class SkuDetails {
     public String getSku() { return mSku; }
     public String getType() { return mType; }
     public String getPrice() { return mPrice; }
+    public long getPriceAmountMicros() {
+        return mPriceAmountMicros;
+    }
+    public String getPriceCurrencyCode() {
+        return mPriceCurrencyCode;
+    }
+    public String getSubscriptionPeriod() {
+        return mSubscriptionPeriod;
+    }
     public String getTitle() { return mTitle; }
     public String getDescription() { return mDescription; }
 

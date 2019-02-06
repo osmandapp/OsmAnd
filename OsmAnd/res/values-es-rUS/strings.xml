@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
@@ -270,7 +270,7 @@ Lon %2$s</string>
     <string name="select_destination_and_intermediate_points">Elige los destinos</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
     <string name="loading_smth">Cargando %1$s…</string>
-    <string name="map_widget_plain_time">Tiempo actual</string>
+    <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Punto de referencia</string>
     <string name="selected_gpx_info_show">"
 \n
@@ -2605,7 +2605,7 @@ Lon %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario o por fecha. Sólo activado en los primeros zooms.</string>
+    <string name="mapillary_menu_filter_description">Filtrar imágenes por usuario, fecha o tipo. Sólo activado en los primeros zooms.</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recarga las teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
@@ -2739,7 +2739,7 @@ Lon %2$s</string>
     <string name="wrong_format">Formato incorrecto</string>
     <string name="shared_string_view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
-	<string name="import_gpx_file_description">pueden importarse como Favoritos o como un archivo GPX.</string>
+	<string name="import_gpx_file_description">puede importarse como Favoritos o como un archivo GPX.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
@@ -3030,4 +3030,53 @@ Lon %2$s</string>
     <string name="markers_remove_dialog_msg">¿Borrar marcador del mapa «%s»\?</string>
     <string name="edit_map_marker">Editar marcador del mapa</string>
     <string name="third_party_application">Aplicación de terceros</string>
-    </resources>
+    <string name="osm_live_plan_pricing">Plan y Precios</string>
+    <string name="osm_live_payment_monthly_title">Pago mensual</string>
+    <string name="osm_live_payment_3_months_title">Pago trimestral</string>
+    <string name="osm_live_payment_annual_title">Pago anual</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
+    <string name="osm_live_payment_discount_descr">¡Ahorra %1$s!</string>
+	<string name="osm_live_payment_current_subscription">Suscripción actual</string>
+    <string name="osm_live_payment_renews_monthly">Renovar mensualmente</string>
+    <string name="osm_live_payment_renews_quarterly">Renovar trimestralmente</string>
+    <string name="osm_live_payment_renews_annually">Renovar anualmente</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">Elige la frecuencia de pago:</string>
+    <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
+    <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
+    <string name="osm_live_subscriptions">Suscripciones</string>
+    <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
+    <string name="shared_string_launch">Ejecutar</string>
+    <string name="run_full_osmand_msg">Estás utilizando el mapa «{0}» que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
+    <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
+    <string name="lang_gn_py">Guaraní</string>
+    <string name="quick_action_switch_day_night_descr">Este botón de acción, alterna entre el modo «Diurno» y «Nocturno» para OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Modo diurno</string>
+    <string name="quick_action_switch_night_mode">Modo nocturno</string>
+    <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
+    <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
+    <string name="add_destination_point">Añadir destino</string>
+    <string name="add_intermediate_point">Añadir punto intermedio</string>
+    <string name="add_start_point">Añadir punto de partida</string>
+    <string name="intermediate_waypoint">Punto intermedio: %1$s</string>
+    <string name="waypoints">Puntos de referencia: %1$s</string>
+    <string name="transfers">transferencias: %1$s</string>
+    <string name="on_foot">a pie: %1$s</string>
+    <string name="route_way">Ruta: %1$s</string>
+    <string name="points_of_interests">Puntos de interés (PDI)</string>
+    <string name="waiting_for_route_calculation">Esperando el cálculo de la ruta</string>
+    <string name="app_mode_public_transport">Transporte público</string>
+    <string name="avoid_roads_descr">Marca el camino a evitar durante la navegación, desde el mapa o de la siguiente lista:</string>
+    <string name="show_along_the_route">Mostrar a lo largo de la ruta</string>
+    <string name="simulate_navigation">Simular navegación</string>
+    <string name="choose_track_file_to_follow">Elige el archivo de la traza a seguir</string>
+    <string name="voice_announcements">Anuncios de voz</string>
+    <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
+    <string name="arrive_at_time">Llegará a las %1$s</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">ton</string>
+    <string name="shared_string_capacity">Capacidad</string>
+    <string name="shared_string_width">Ancho</string>
+    <string name="shared_string_height">Altura</string>
+</resources>

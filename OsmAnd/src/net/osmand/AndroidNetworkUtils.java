@@ -7,9 +7,7 @@ import android.os.AsyncTask;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -17,8 +15,6 @@ import org.apache.commons.logging.Log;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,6 +25,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Map;
 
 public class AndroidNetworkUtils {
@@ -38,6 +35,35 @@ public class AndroidNetworkUtils {
 
 	public interface OnRequestResultListener {
 		void onResult(String result);
+	}
+
+	public static void sendRequestsAsync(final OsmandApplication ctx,
+										final List<Request> requests,
+										final OnRequestResultListener listener) {
+
+		new AsyncTask<Void, Void, String>() {
+
+			@Override
+			protected String doInBackground(Void... params) {
+				for (Request request : requests) {
+					try {
+						return sendRequest(ctx, request.getUrl(), request.getParameters(),
+								request.getUserOperation(), request.isToastAllowed(), request.isPost());
+					} catch (Exception e) {
+						// ignore
+					}
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(String response) {
+				if (listener != null) {
+					listener.onResult(response);
+				}
+			}
+
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static void sendRequestAsync(final OsmandApplication ctx,
@@ -193,4 +219,39 @@ public class AndroidNetworkUtils {
 		ctx.showToastMessage(message);
 	}
 
+	public static class Request {
+		private String url;
+		private Map<String, String> parameters;
+		private String userOperation;
+		private boolean toastAllowed;
+		private boolean post;
+
+		public Request(String url, Map<String, String> parameters, String userOperation, boolean toastAllowed, boolean post) {
+			this.url = url;
+			this.parameters = parameters;
+			this.userOperation = userOperation;
+			this.toastAllowed = toastAllowed;
+			this.post = post;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public Map<String, String> getParameters() {
+			return parameters;
+		}
+
+		public String getUserOperation() {
+			return userOperation;
+		}
+
+		public boolean isToastAllowed() {
+			return toastAllowed;
+		}
+
+		public boolean isPost() {
+			return post;
+		}
+	}
 }

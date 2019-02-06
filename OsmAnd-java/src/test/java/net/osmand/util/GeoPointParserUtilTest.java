@@ -19,6 +19,19 @@ public class GeoPointParserUtilTest {
 		GeoParsedPoint test = GeoPointParserUtil.parse("geo:0,0?q=86HJV99P%2B29");
 		Assert.assertEquals(test.getQuery(), "86HJV99P+29");
 	}
+	
+	@Test
+	public void testGoogleMaps() {
+		// https://www.google.com/maps?daddr=Bahnhofplatz+3,+7000+Chur@46.853582,9.529903
+		GeoParsedPoint actual = GeoPointParserUtil.parse(
+				"https://www.google.com/maps?daddr=Bahnhofplatz+3,+7000+Chur");
+		assertGeoPoint(actual, new GeoParsedPoint("Bahnhofplatz 3, 7000 Chur"));
+		
+		actual = GeoPointParserUtil.parse(
+				"https://www.google.com/maps?daddr=Bahnhofplatz+3,+7000+Chur@46.853582,9.529903");
+		System.out.println(actual);
+		assertGeoPoint(actual, new GeoParsedPoint(46.853582, 9.529903));
+	}
 
 	@Test
 	public void testGeoPoint() {

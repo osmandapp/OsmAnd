@@ -24,8 +24,6 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import gnu.trove.list.array.TIntArrayList;
-
 public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int POINTS_TO_DRAW = 50;
 
@@ -42,8 +40,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private int marginApplyingPointIconX;
 	private int marginApplyingPointIconY;
 	private final Path path = new Path();
-	private final TIntArrayList tx = new TIntArrayList();
-	private final TIntArrayList ty = new TIntArrayList();
+	private final List<Float> tx = new ArrayList<>();
+	private final List<Float> ty = new ArrayList<>();
 	private OnMeasureDistanceToCenter measureDistanceToCenterListener;
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
@@ -181,7 +179,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
-			lineAttrs.updatePaints(view, settings, tb);
+			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
 			before.renders.clear();
@@ -198,7 +196,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
-			lineAttrs.updatePaints(view, settings, tb);
+			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			if (editingCtx.getSelectedPointPosition() == -1) {
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
@@ -218,26 +216,26 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 			if (before.points.size() > 0 || after.points.size() > 0) {
 				path.reset();
-				tx.reset();
-				ty.reset();
+				tx.clear();
+				ty.clear();
 
 				if (before.points.size() > 0) {
 					WptPt pt = before.points.get(before.points.size() - 1);
-					int locX = tb.getPixXFromLonNoRot(pt.lon);
-					int locY = tb.getPixYFromLatNoRot(pt.lat);
+					float locX = tb.getPixXFromLonNoRot(pt.lon);
+					float locY = tb.getPixYFromLatNoRot(pt.lat);
 					tx.add(locX);
 					ty.add(locY);
-					tx.add(tb.getCenterPixelX());
-					ty.add(tb.getCenterPixelY());
+					tx.add((float)tb.getCenterPixelX());
+					ty.add((float)tb.getCenterPixelY());
 				}
 				if (after.points.size() > 0) {
 					if (before.points.size() == 0) {
-						tx.add(tb.getCenterPixelX());
-						ty.add(tb.getCenterPixelY());
+						tx.add((float)tb.getCenterPixelX());
+						ty.add((float)tb.getCenterPixelY());
 					}
 					WptPt pt = after.points.get(0);
-					int locX = tb.getPixXFromLonNoRot(pt.lon);
-					int locY = tb.getPixYFromLatNoRot(pt.lat);
+					float locX = tb.getPixXFromLonNoRot(pt.lon);
+					float locY = tb.getPixYFromLatNoRot(pt.lat);
 					tx.add(locX);
 					ty.add(locY);
 				}

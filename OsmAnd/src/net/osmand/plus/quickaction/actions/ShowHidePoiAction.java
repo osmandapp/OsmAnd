@@ -23,7 +23,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.ArrayList;
@@ -108,6 +107,9 @@ public class ShowHidePoiAction extends QuickAction {
 			pf.clearSelectedPoiFilters();
 
 			for (PoiUIFilter filter : poiFilters) {
+				if (filter.isStandardFilter()) {
+					filter.setFilterByName(null);
+				}
 				pf.addSelectedPoiFilter(filter);
 			}
 
