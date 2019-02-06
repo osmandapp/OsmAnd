@@ -82,11 +82,11 @@ public class GPXUtilities {
 			String clrValue = null;
 			if (extensions != null) {
 				clrValue = extensions.get("color");
-				if (clrValue == null||clrValue.isEmpty()) {
+				if (clrValue == null) {
 					clrValue = extensions.get("colour");
 				}
-				if (clrValue == null ||clrValue.isEmpty()) {
-					clrValue = extensions.get("DisplayColor");
+				if (clrValue == null) {
+					clrValue = extensions.get("displaycolor");
 				}
 			}
 			if (clrValue != null && clrValue.length() > 0) {
@@ -555,7 +555,7 @@ public class GPXUtilities {
 						// totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 						// a little more exact, also seems slightly faster:
-						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
+						Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 						totalDistance += calculations[0];
 						segmentDistance += calculations[0];
 						point.distance = segmentDistance;
@@ -734,7 +734,7 @@ public class GPXUtilities {
 
 			@Override
 			public double metric(WptPt p1, WptPt p2) {
-				net.osmand.Location.distanceBetween(p1.lat, p1.lon, p2.lat, p2.lon, calculations);
+				Location.distanceBetween(p1.lat, p1.lon, p2.lat, p2.lon, calculations);
 				return calculations[0];
 			}
 		};
@@ -930,7 +930,7 @@ public class GPXUtilities {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
 			g.wptCategoryNames = getWaypointCategories(true);
-			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
+			List<SplitSegment> splitSegments = new ArrayList<SplitSegment>();
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
@@ -1286,7 +1286,7 @@ public class GPXUtilities {
 					bottom = Math.min(bottom, p.getLatitude());
 				}
 			}
-			for (GPXUtilities.Route route : routes) {
+			for (Route route : routes) {
 				for (WptPt p : route.points) {
 					if (left == 0 && right == 0) {
 						left = p.getLongitude();
@@ -1522,25 +1522,6 @@ public class GPXUtilities {
 		return text;
 	}
 
-	private static Map<String, String> readExtensionText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
-		int tok;
-		Map<String, String> innerTagAndText = new HashMap<>();
-		String innerTag = "";
-		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-			innerTag = parser.getName();
-			log.debug("tag: " + parser.getName()+ ", prefix: " + parser.getPrefix());
-			if (tok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
-				break;
-			} else if (tok == XmlPullParser.TEXT) {
-				String text = parser.getText();
-				if (text!=null  || !text.isEmpty() ) {
-					innerTagAndText.put(innerTag, text);
-				}
-			}
-		}
-		return innerTagAndText;
-	}
-
 	public static GPXFile loadGPXFile(Context ctx, File f) {
 		FileInputStream fis = null;
 		try {
@@ -1586,24 +1567,15 @@ public class GPXUtilities {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
 					if (extensionReadMode && parse != null) {
-						if (tag.equals("TrackExtension")) {
-							Map<String, String> innerTagAndText = readExtensionText(parser, tag);
-							for (Map.Entry<String, String> entity : innerTagAndText.entrySet()) {
-								((GPXExtensions) parse).getExtensionsToWrite().put(entity.getKey(), entity.getValue());
-							}
-
-						} else {
-							String value = readText(parser, tag);
-							if (value != null) {
-								((GPXExtensions) parse).getExtensionsToWrite().put(tag, value);
-								if (tag.equals("speed") && parse instanceof WptPt) {
-									try {
-										((WptPt) parse).speed = Float.parseFloat(value);
-									} catch (NumberFormatException e) {}
-								}
+						String value = readText(parser, tag);
+						if (value != null) {
+							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
+							if (tag.equals("speed") && parse instanceof WptPt) {
+								try {
+									((WptPt) parse).speed = Float.parseFloat(value);
+								} catch (NumberFormatException e) {}
 							}
 						}
-
 					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = true;
 					} else {
@@ -1835,13 +1807,13 @@ public class GPXUtilities {
 
 	public static GPXFile makeGpxFromRoute(RouteCalculationResult route) {
 		double lastHeight = HEIGHT_UNDEFINED;
-		GPXFile gpx = new GPXUtilities.GPXFile();
+		GPXFile gpx = new GPXFile();
 		List<Location> locations = route.getRouteLocations();
 		if (locations != null) {
-			GPXUtilities.Track track = new GPXUtilities.Track();
-			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
+			Track track = new Track();
+			TrkSegment seg = new TrkSegment();
 			for (Location l : locations) {
-				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
+				WptPt point = new WptPt();
 				point.lat = l.getLatitude();
 				point.lon = l.getLongitude();
 				if (l.hasAltitude()) {
@@ -1849,7 +1821,7 @@ public class GPXUtilities {
 					float h = (float) l.getAltitude();
 					point.ele = h;
 					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (GPXUtilities.WptPt pt : seg.points) {
+						for (WptPt pt : seg.points) {
 							if (Double.isNaN(pt.ele)) {
 								pt.ele = h;
 							}
