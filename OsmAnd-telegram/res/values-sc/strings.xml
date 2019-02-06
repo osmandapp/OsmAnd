@@ -190,4 +190,6 @@
     <string name="shared_string_collected">Collidos</string>
     <string name="gps_points">Puntos GPS</string>
     <string name="shared_string_sent">Imbiadu</string>
+    <string name="please_update_osmand">Pro praghere agiorna OsmAnd pro bìdere sos datos in sa mapa</string>
+    <string name="shared_string_update">Agiorna</string>
 </resources>
