@@ -70,7 +70,7 @@
     <string name="shared_string_account">Conta</string>
     <string name="in_time">no %1$s</string>
     <string name="osmand_connect_desc">Escolha a versão OsmAnd que OsmAnd Telegram usa para exibir posições.</string>
-    <string name="osmand_connect">"conectar ao OsmAnd "</string>
+    <string name="osmand_connect">"Conectar OsmAnd "</string>
     <string name="location_history_desc">Ocultar contatos que não foram movidos em um determinado momento.</string>
     <string name="location_history">Histórico de localização</string>
     <string name="stale_location_desc">A última vez que um contato foi movido.</string>
@@ -190,4 +190,6 @@
     <string name="shared_string_collected">Coletado</string>
     <string name="gps_points">Pontos de Gps</string>
     <string name="shared_string_sent">"Enviar "</string>
+    <string name="please_update_osmand">Por favor, atualize o OsmAnd para ver os dados no mapa</string>
+    <string name="shared_string_update">"Atualizar "</string>
 </resources>
