@@ -167,22 +167,22 @@ public class PlatformUtil {
 //	}
 //
 
-	public static XmlPullParser newXMLPullParser() throws XmlPullParserException{
-		return new org.kxml2.io.KXmlParser();
-	}
-
-	public static XmlSerializer newSerializer() {
-		return new org.kxml2.io.KXmlSerializer();
-	}
-
-//	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
-//		// return XmlPullParserFactory.newInstance().newPullParser();
-//		return Xml.newPullParser();
+//	public static XmlPullParser newXMLPullParser() throws XmlPullParserException{
+//		return new org.kxml2.io.KXmlParser();
 //	}
 //
 //	public static XmlSerializer newSerializer() {
-//		return Xml.newSerializer();
+//		return new org.kxml2.io.KXmlSerializer();
 //	}
+
+	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
+//		return XmlPullParserFactory.newInstance().newPullParser();
+		return Xml.newPullParser();
+	}
+
+	public static XmlSerializer newSerializer() {
+		return Xml.newSerializer();
+	}
 	
 
 }
