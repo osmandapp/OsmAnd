@@ -237,6 +237,7 @@ public class TextRenderer {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
 				if (preferredLocale.length() > 0) {
+
 					if (CustomTransliterationHelper.isCharCJK(text.text.charAt(0))) {
 						text.text = CustomTransliterationHelper.japanese2Romaji(text.text);
 					} else {

@@ -16,6 +16,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.CustomTransliterationHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
@@ -137,7 +138,14 @@ public class NominatimPoiFilter extends PoiUIFilter {
 								a.setId(Long.parseLong(parser.getAttributeValue("", "place_id"))); //$NON-NLS-1$ //$NON-NLS-2$
 								String name = parser.getAttributeValue("", "display_name"); //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
-								a.setEnName(Junidecode.unidecode(name));
+								log.debug("Setting english name:");
+								log.debug("is CJK sign? : " + CustomTransliterationHelper.isCharCJK(name.charAt(0)));
+								if (CustomTransliterationHelper.isCharCJK(name.charAt(0))) {
+									a.setEnName(CustomTransliterationHelper.japanese2Romaji(name));
+								} else {
+									a.setEnName(Junidecode.unidecode(name));
+								}
+
 								a.setSubType(parser.getAttributeValue("", "type")); //$NON-NLS-1$//$NON-NLS-2$
 								PoiType pt = poiTypes.getPoiTypeByKey(a.getSubType());
 								a.setType(pt != null ? pt.getCategory() : poiTypes.getOtherPoiCategory());

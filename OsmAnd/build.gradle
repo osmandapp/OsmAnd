@@ -66,6 +66,12 @@ android {
 		warningsAsErrors false
 	}
 
+	packagingOptions {
+		exclude '/META-INF/CONTRIBUTORS.md'
+		exclude '/META-INF/LICENSE.md'
+		exclude '/META-INF/NOTICE.md'
+	}
+
 	// This is from OsmAndCore_android.aar - for some reason it's not inherited
 	aaptOptions {
 		// Don't compress any embedded resources
@@ -389,6 +395,9 @@ dependencies {
 	// JS core
 	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
 
+
+
+
 // size restrictions
 // implementation 'com.ibm.icu:icu4j:50.1' 
 // implementation 'net.sf.trove4j:trove4j:3.0.3'
@@ -408,6 +417,8 @@ dependencies {
 	implementation ("com.github.HITGIF:TextFieldBoxes:1.3.5"){
 		exclude group: 'com.android.support'
 	}
+
+	implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 }
 if(analytics) {
 	println "Apply GMS plugin"
