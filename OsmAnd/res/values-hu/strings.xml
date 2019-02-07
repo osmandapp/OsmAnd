@@ -3040,7 +3040,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="coord_input_add_point">Pont hozzáadása</string>
     <string name="coord_input_save_as_track">Mentés nyomvonalként</string>
     <string name="more_transport_on_stop_hint">Ebben a megállóban több közlekedési eszköz is előfordul.</string>
-    <string name="send_search_query">Elküldöd a keresést\?</string>
+    <string name="send_search_query">Keresőkifejezés küldése\?</string>
     <string name="osmand_extended_description_part5">Kerékpározás
 \n • A kerékpárutak megjelennek a térképen
 \n • A GPS navigáció kerékpáros módban kerékpárutakat használva tervez utat
