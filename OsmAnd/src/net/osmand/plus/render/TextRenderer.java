@@ -12,6 +12,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.plus.helpers.CustomTransliterationHelper;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -236,8 +237,14 @@ public class TextRenderer {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
 				if (preferredLocale.length() > 0) {
-					text.text = Junidecode.unidecode(text.text);
+					if (CustomTransliterationHelper.isCharCJK(text.text.charAt(0))) {
+						text.text = CustomTransliterationHelper.japanese2Romaji(text.text);
+					} else {
+						text.text = Junidecode.unidecode(text.text);
+					}
 				}
+
+
 
 				// sest text size before finding intersection (it is used there)
 				float textSize = text.textSize * rc.textScale ;

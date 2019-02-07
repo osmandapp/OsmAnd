@@ -523,4 +523,6 @@ public class AndroidUtils {
 		}
 		return isKana;
 	}
+
+
 }
