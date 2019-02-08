@@ -191,6 +191,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 
 	public String getEnName(boolean transliterate) {
+		System.out.println("Get name");
 		if (!Algorithms.isEmpty(enName)) {
 			return this.enName;
 		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
