@@ -1988,22 +1988,22 @@ public class OsmandAidlApi {
 					copyFilesCache.remove(key);
 					fos.close();
 					file.renameTo(app.getAppPath(destination + filePart.getFilename()));
-//					file.delete();
 					return true;
 				} else if (file.length() == filePart.getSentSize()) {
 					fos.write(filePart.getFilePartData());
 					return true;
 				}
-
 				return false;
 			} else {
-//				if (file.exists()) {
-//					file.delete();
-//				}
 				file.getParentFile().mkdirs();
 				fos = new FileOutputStream(file, true);
 				fos.write(filePart.getFilePartData());
-				copyFilesCache.put(key, fos);
+				if (file.length()==filePart.getSize()) {
+					fos.close();
+					file.renameTo(app.getAppPath(destination + filePart.getFilename()));
+				} else {
+					copyFilesCache.put(key, fos);
+				}
 				return true;
 			}
 
