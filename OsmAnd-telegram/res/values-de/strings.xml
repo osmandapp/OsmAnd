@@ -189,4 +189,12 @@
     <string name="start_date">Startzeit</string>
     <string name="timeline_description">Überwachung aktivieren, um Bewegungsdaten im Hintergrund zu erfassen.</string>
     <string name="timeline">Zeitachse</string>
+    <string name="please_update_osmand">Bitte aktualisiere OsmAnd um die Daten auf der Karte zu sehen</string>
+    <string name="shared_string_update">Aktualisieren</string>
+    <string name="gps_points_in_buffer">gesendet (%1$d im Puffer)</string>
+    <string name="points_size">%1$d Punkte</string>
+    <string name="shared_string_date">Datum</string>
+    <string name="shared_string_collected">Gesammelt</string>
+    <string name="gps_points">Gps-Punkte</string>
+    <string name="shared_string_sent">Gesendet</string>
 </resources>
