@@ -5,26 +5,21 @@ import android.os.Parcelable;
 
 public class CopyFileParams implements Parcelable {
 	private String filename;
-	private long size;
 	private long sentSize;
 	private byte[] filePartData;
 	private long copyStartTime;
+	private boolean isTransmitComplete;
 
-	public CopyFileParams(String filename, long size, long sentSize, byte[] filePartData, long copyStartTime) {
+	public CopyFileParams(String filename, long sentSize, byte[] filePartData, long copyStartTime, boolean isTransmitComplete) {
 		this.filename = filename;
-		this.size = size;
 		this.sentSize = sentSize;
 		this.filePartData = filePartData;
 		this.copyStartTime = copyStartTime;
+		this.isTransmitComplete = isTransmitComplete;
 	}
 
 	public String getFilename() {
 		return filename;
-	}
-
-
-	public long getSize() {
-		return size;
 	}
 
 	public long getSentSize() {
@@ -39,26 +34,15 @@ public class CopyFileParams implements Parcelable {
 		return copyStartTime;
 	}
 
+	public boolean isTransmitComplete() {return  isTransmitComplete; }
+
+
 	protected CopyFileParams(Parcel in) {
 		filename = in.readString();
-		size = in.readLong();
 		sentSize = in.readLong();
 		filePartData = in.createByteArray();
 		copyStartTime = in.readLong();
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(filename);
-		dest.writeLong(size);
-		dest.writeLong(sentSize);
-		dest.writeByteArray(filePartData);
-		dest.writeLong(copyStartTime);
-	}
-
-	@Override
-	public int describeContents() {
-		return 0;
+		isTransmitComplete = in.readByte() != 0;
 	}
 
 	public static final Creator<CopyFileParams> CREATOR = new Creator<CopyFileParams>() {
@@ -72,4 +56,25 @@ public class CopyFileParams implements Parcelable {
 			return new CopyFileParams[size];
 		}
 	};
+
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(filename);
+		dest.writeLong(sentSize);
+		dest.writeByteArray(filePartData);
+		dest.writeLong(copyStartTime);
+		dest.writeByte((byte) (isTransmitComplete ? 1 : 0));
+	}
+
+	@Override
+	public String toString() {
+		return "Filename: " + filename + ", sentSize = " + sentSize + ", filePartData size = " +
+			filePartData.length + ", startTime: " + copyStartTime + ", isTransmitComplete: "+ isTransmitComplete;
+	}
 }

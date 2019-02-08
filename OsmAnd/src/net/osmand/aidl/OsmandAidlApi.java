@@ -1972,36 +1972,33 @@ public class OsmandAidlApi {
 				IndexConstants.TEMP_DIR + filePart.getCopyStartTime() + "/" + filePart.getFilename()),
 				IndexConstants.TILES_INDEX_DIR);
 		}
-
 		return false;
 	}
 
-	private boolean copyFileImpl(CopyFileParams filePart, File file, String destination){
+	private boolean copyFileImpl(CopyFileParams fileParams, File file, String destination){
+		LOG.debug(fileParams.toString());
+
 		FileOutputStream fos;
-		String key = filePart.getFilename()+filePart.getCopyStartTime();
+		String key = fileParams.getFilename() + fileParams.getCopyStartTime();
 		try {
 			if (copyFilesCache.containsKey(key)) {
 				fos = copyFilesCache.get(key);
-				if (file.length() == filePart.getSize()) {
+				if (fileParams.isTransmitComplete()) {
 					copyFilesCache.remove(key);
 					fos.close();
-					file.renameTo(app.getAppPath(destination + filePart.getFilename()));
+					file.renameTo(app.getAppPath(destination + fileParams.getFilename()));
 					return true;
-				} else if (file.length() == filePart.getSentSize()) {
-					fos.write(filePart.getFilePartData());
+
+				} else if (file.length() == fileParams.getSentSize()) {
+					fos.write(fileParams.getFilePartData());
 					return true;
 				}
 				return false;
 			} else {
 				file.getParentFile().mkdirs();
 				fos = new FileOutputStream(file, true);
-				fos.write(filePart.getFilePartData());
-				if (file.length()==filePart.getSize()) {
-					fos.close();
-					file.renameTo(app.getAppPath(destination + filePart.getFilename()));
-				} else {
-					copyFilesCache.put(key, fos);
-				}
+				fos.write(fileParams.getFilePartData());
+				copyFilesCache.put(key, fos);
 				return true;
 			}
 		} catch (IOException e) {
