@@ -119,7 +119,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					}
 				}
 			} else if (chatTitle != null && content is MessageOsmAndBotLocation && content.isValid()) {
-				val name = content.name
+				val name = content.deviceName
 				setupMapLayer()
 				if (update) {
 					osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, "${chatId}_$name", name, name,
@@ -186,12 +186,19 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					osmandAidlHelper.unregisterFromUpdates()
 				}
 				app.startUserLocationService()
+				showingLocation = true
 			} else {
-				if (isUseOsmandCallback()) {
+				showingLocation = if (isUseOsmandCallback()) {
 					app.stopUserLocationService()
 					osmandAidlHelper.registerForUpdates()
 				} else {
-					app.startUserLocationService()
+					if (app.settings.hasAnyChatToShowOnMap()) {
+						app.startUserLocationService()
+						true
+					} else {
+						app.stopUserLocationService()
+						false
+					}
 				}
 			}
 		}
@@ -272,7 +279,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		if (content is TdApi.MessageLocation || content is MessageUserLocation) {
 			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatId}_${message.senderUserId}")
 		} else if (content is MessageOsmAndBotLocation) {
-			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatId}_${content.name}")
+			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatId}_${content.deviceName}")
 		}
 	}
 }
