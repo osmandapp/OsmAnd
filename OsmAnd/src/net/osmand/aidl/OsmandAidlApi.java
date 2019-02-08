@@ -1968,8 +1968,6 @@ public class OsmandAidlApi {
 		}
 
 		if (filePart.getFilename().endsWith(IndexConstants.SQLITE_EXT)) {
-
-			LOG.debug("temp path: " + IndexConstants.TEMP_DIR + filePart.getCopyStartTime() + "/" + filePart.getFilename());
 			return copyFileImpl(filePart, app.getAppPath(
 				IndexConstants.TEMP_DIR + filePart.getCopyStartTime() + "/" + filePart.getFilename()),
 				IndexConstants.TILES_INDEX_DIR);
@@ -2006,10 +2004,8 @@ public class OsmandAidlApi {
 				}
 				return true;
 			}
-
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
-
 		}
 		return false;
 	}
