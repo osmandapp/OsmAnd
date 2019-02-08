@@ -1,3 +1,3 @@
 package net.osmand.aidl.tiles;
 
-parcelable FilePartParams;
+parcelable CopyFileParams;

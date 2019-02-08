@@ -524,4 +524,13 @@ public class AndroidUtils {
 		}
 		return result;
 	}
+
+	public static void deleteRecursive(File fileOrDir){
+		if(fileOrDir.isDirectory()) {
+			for (File child: fileOrDir.listFiles()) {
+				deleteRecursive(child);
+			}
+		}
+		fileOrDir.delete();
+	}
 }

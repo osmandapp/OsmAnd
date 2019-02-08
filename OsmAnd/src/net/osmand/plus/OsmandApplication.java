@@ -26,7 +26,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.aidl.OsmandAidlApi;
@@ -169,6 +171,8 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
+
+		AndroidUtils.deleteRecursive(this.getAppPath(IndexConstants.TEMP_DIR));
 
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();

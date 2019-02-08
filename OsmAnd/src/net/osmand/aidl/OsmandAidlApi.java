@@ -44,7 +44,7 @@ import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
-import net.osmand.aidl.tiles.FilePartParams;
+import net.osmand.aidl.tiles.CopyFileParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -1962,38 +1962,48 @@ public class OsmandAidlApi {
 
 	private Map<String, FileOutputStream> copyFilesCache = new HashMap<>();
 
-	boolean copyFileOverApi(final FilePartParams filePart) {
-		if (filePart.getFilename().isEmpty() || filePart.getFilePartData() == null) {
+	boolean copyFile(final CopyFileParams filePart) {
+		if (Algorithms.isEmpty(filePart.getFilename()) || filePart.getFilePartData() == null) {
 			return false;
 		}
 
 		if (filePart.getFilename().endsWith(IndexConstants.SQLITE_EXT)) {
-			return copySqlFileImpl(filePart, app.getAppPath(IndexConstants.TILES_INDEX_DIR + filePart.getFilename()));
+
+			LOG.debug("temp path: " + IndexConstants.TEMP_DIR + filePart.getCopyStartTime() + "/" + filePart.getFilename());
+			return copyFileImpl(filePart, app.getAppPath(
+				IndexConstants.TEMP_DIR + filePart.getCopyStartTime() + "/" + filePart.getFilename()),
+				IndexConstants.TILES_INDEX_DIR);
 		}
 
 		return false;
 	}
 
-	private boolean copySqlFileImpl(FilePartParams filePart, File file){
+	private boolean copyFileImpl(CopyFileParams filePart, File file, String destination){
 		FileOutputStream fos;
+		String key = filePart.getFilename()+filePart.getCopyStartTime();
 		try {
-			if (copyFilesCache.containsKey(filePart.getFilename())) {
-				fos = copyFilesCache.get(filePart.getFilename());
-				if (file.length() == filePart.getSentSize()) {
+			if (copyFilesCache.containsKey(key)) {
+				fos = copyFilesCache.get(key);
+				if (file.length() == filePart.getSize()) {
+					copyFilesCache.remove(key);
+					fos.close();
+					file.renameTo(app.getAppPath(destination + filePart.getFilename()));
+//					file.delete();
+					return true;
+				} else if (file.length() == filePart.getSentSize()) {
 					fos.write(filePart.getFilePartData());
 					return true;
-				} else if (file.length() == filePart.getSize()) {
-					copyFilesCache.remove(file.getName());
-					fos.close();
-					return true;
 				}
+
 				return false;
 			} else {
-				if (file.exists()) file.delete();
+//				if (file.exists()) {
+//					file.delete();
+//				}
 				file.getParentFile().mkdirs();
 				fos = new FileOutputStream(file, true);
 				fos.write(filePart.getFilePartData());
-				copyFilesCache.put(filePart.getFilename(), fos);
+				copyFilesCache.put(key, fos);
 				return true;
 			}
 
