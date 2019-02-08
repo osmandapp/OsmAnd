@@ -1960,7 +1960,7 @@ public class OsmandAidlApi {
 		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private Map<String, FileOutputStream> copyFilesCache = new HashMap<>();
+	private Map<String, FileOutputStream> copyFilesCache = new ConcurrentHashMap<>();
 
 	boolean copyFile(final CopyFileParams filePart) {
 		if (Algorithms.isEmpty(filePart.getFilename()) || filePart.getFilePartData() == null) {
