@@ -16,62 +16,69 @@
 			android:id="@+id/route_menu_top_shadow_all"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			tools:background="@drawable/route_info_menu_bg_light">
+			android:orientation="vertical">
 
 			<FrameLayout
-				android:id="@+id/ModesLayout"
+				android:id="@+id/modes_layout_list_container"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/route_info_modes_height"
-				android:orientation="horizontal">
+				android:layout_height="@dimen/route_info_modes_height">
 
-				<LinearLayout
-					android:id="@+id/app_modes"
+				<FrameLayout
+					android:id="@+id/modes_layout"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:layout_gravity="center_vertical"
-					android:layout_marginLeft="@dimen/context_menu_buttons_padding_bottom"
-					android:layout_marginRight="@dimen/context_menu_buttons_padding_bottom"
-					android:orientation="horizontal"
-					android:paddingEnd="@dimen/route_info_app_modes_padding"
-					android:paddingRight="@dimen/route_info_app_modes_padding" />
+					tools:ignore="UselessParent">
 
-				<LinearLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal"
-					android:layout_marginLeft="@dimen/list_content_padding"
-					android:layout_marginStart="@dimen/list_content_padding"
-					android:orientation="horizontal"
-					android:visibility="gone">
+					<LinearLayout
+						android:id="@+id/app_modes"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="center_vertical"
+						android:layout_marginLeft="@dimen/context_menu_buttons_padding_bottom"
+						android:layout_marginRight="@dimen/context_menu_buttons_padding_bottom"
+						android:orientation="horizontal"
+						android:paddingStart="40dp"
+						android:paddingLeft="40dp"
+						android:paddingEnd="@dimen/route_info_app_modes_padding"
+						android:paddingRight="@dimen/route_info_app_modes_padding" />
 
-					<ImageView
-						android:id="@+id/waypoints"
-						android:layout_width="@dimen/list_item_height"
-						android:layout_height="@dimen/list_item_height"
-						android:background="?attr/selectableItemBackground"
-						android:scaleType="center"
-						android:src="@drawable/map_action_waypoints" />
-
-				</LinearLayout>
-
-				<LinearLayout
-					android:id="@+id/app_modes_options_container"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:layout_gravity="end"
-					tools:background="@drawable/route_info_trans_gradient_light">
-
-					<ImageView
-						android:id="@+id/app_modes_options"
+					<LinearLayout
+						android:id="@+id/app_modes_fold_container"
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
-						android:background="?attr/selectableItemBackground"
-						android:paddingLeft="@dimen/route_info_icon_padding_right"
-						android:paddingRight="@dimen/route_info_icon_padding_right"
-						android:src="@drawable/ic_overflow_menu_dark" />
+						android:layout_gravity="start"
+						android:orientation="horizontal">
 
-				</LinearLayout>
+						<android.support.v7.widget.AppCompatImageView
+							android:id="@+id/fold_button"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:background="?attr/selectableItemBackgroundBorderless"
+							android:paddingLeft="@dimen/route_info_icon_padding_right"
+							android:paddingRight="@dimen/route_info_icon_padding_right"
+							android:src="@drawable/ic_action_arrow_down"
+							android:tint="?attr/primary_icon_color" />
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/app_modes_options_container"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_gravity="end">
+
+						<ImageView
+							android:id="@+id/app_modes_options"
+							android:layout_width="wrap_content"
+							android:layout_height="match_parent"
+							android:background="?attr/selectableItemBackgroundBorderless"
+							android:paddingLeft="@dimen/route_info_icon_padding_right"
+							android:paddingRight="@dimen/route_info_icon_padding_right"
+							android:src="@drawable/ic_overflow_menu_dark" />
+
+					</LinearLayout>
+
+				</FrameLayout>
 
 			</FrameLayout>
 
@@ -92,12 +99,12 @@
 						android:id="@+id/fromIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
-						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginStart="@dimen/list_content_padding"
+						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginTop="@dimen/list_header_text_left_margin"
+						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+						android:layout_marginRight="@dimen/favorites_icon_right_margin"
+						android:layout_marginBottom="@dimen/list_header_text_left_margin"
 						android:src="@drawable/map_default_location" />
 
 					<LinearLayout
@@ -110,9 +117,9 @@
 							android:id="@+id/fromTitle"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginBottom="3dp"
-							android:layout_marginRight="@dimen/list_content_padding"
 							android:layout_marginTop="5dp"
+							android:layout_marginRight="@dimen/list_content_padding"
+							android:layout_marginBottom="3dp"
 							android:text="@string/route_from"
 							android:textSize="@dimen/default_sub_text_size" />
 
@@ -130,10 +137,10 @@
 						android:id="@+id/from_button"
 						android:layout_width="wrap_content"
 						android:layout_height="@dimen/route_info_buttons_height"
-						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 						android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
-						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
 						android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
+						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
+						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 						tools:background="@drawable/btn_border_trans_rounded_dark">
 
 						<LinearLayout
@@ -165,10 +172,10 @@
 								android:id="@+id/from_button_image_view"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
-								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginLeft="@dimen/route_info_icon_vertical_padding"
-								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
+								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
+								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 								tools:src="@drawable/ic_action_test_light" />
 
 						</LinearLayout>
@@ -181,10 +188,10 @@
 					android:id="@+id/dividerFromDropDown"
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
-					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
-					android:layout_marginRight="@dimen/route_info_end_divider_margin"
 					android:layout_marginStart="@dimen/route_info_start_divider_margin"
+					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
+					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
+					android:layout_marginRight="@dimen/route_info_end_divider_margin"
 					android:background="@color/dashboard_divider_dark"
 					android:focusable="false" />
 
@@ -200,12 +207,12 @@
 						android:id="@+id/viaIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
-						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginStart="@dimen/list_content_padding"
+						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginTop="@dimen/list_header_text_left_margin"
+						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+						android:layout_marginRight="@dimen/favorites_icon_right_margin"
+						android:layout_marginBottom="@dimen/list_header_text_left_margin"
 						android:src="@drawable/map_default_location" />
 
 					<LinearLayout
@@ -218,8 +225,8 @@
 							android:id="@+id/ViaSubView"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:layout_marginBottom="3dp"
 							android:layout_marginTop="5dp"
+							android:layout_marginBottom="3dp"
 							android:ellipsize="end"
 							android:gravity="left"
 							android:singleLine="true"
@@ -242,10 +249,10 @@
 						android:id="@+id/via_button"
 						android:layout_width="wrap_content"
 						android:layout_height="@dimen/route_info_buttons_height"
-						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 						android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
-						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
 						android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
+						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
+						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 						tools:background="@drawable/btn_border_trans_rounded_dark">
 
 						<LinearLayout
@@ -260,8 +267,8 @@
 								android:layout_width="0dp"
 								android:layout_height="wrap_content"
 								android:layout_gravity="center"
-								android:layout_marginLeft="@dimen/content_padding_small"
 								android:layout_marginStart="@dimen/content_padding_small"
+								android:layout_marginLeft="@dimen/content_padding_small"
 								android:layout_weight="1"
 								android:ellipsize="end"
 								android:gravity="center"
@@ -277,10 +284,10 @@
 								android:id="@+id/via_button_image_view"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
-								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginLeft="@dimen/route_info_icon_vertical_padding"
-								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
+								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
+								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 								tools:src="@drawable/ic_action_edit_dark" />
 
 						</LinearLayout>
@@ -293,10 +300,10 @@
 					android:id="@+id/viaLayoutDivider"
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
-					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
-					android:layout_marginRight="@dimen/route_info_end_divider_margin"
 					android:layout_marginStart="@dimen/route_info_start_divider_margin"
+					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
+					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
+					android:layout_marginRight="@dimen/route_info_end_divider_margin"
 					android:background="@color/dashboard_divider_dark"
 					android:focusable="false" />
 
@@ -312,12 +319,12 @@
 						android:id="@+id/toIcon"
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
-						android:layout_marginBottom="@dimen/list_header_text_left_margin"
-						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/favorites_icon_right_margin"
 						android:layout_marginStart="@dimen/list_content_padding"
+						android:layout_marginLeft="@dimen/list_content_padding"
 						android:layout_marginTop="@dimen/list_header_text_left_margin"
+						android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+						android:layout_marginRight="@dimen/favorites_icon_right_margin"
+						android:layout_marginBottom="@dimen/list_header_text_left_margin"
 						android:src="@drawable/map_default_location" />
 
 					<LinearLayout
@@ -330,8 +337,8 @@
 							android:id="@+id/toTitle"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginBottom="3dp"
 							android:layout_marginTop="5dp"
+							android:layout_marginBottom="3dp"
 							android:text="@string/route_to"
 							android:textSize="@dimen/default_sub_text_size" />
 
@@ -349,10 +356,10 @@
 						android:id="@+id/to_button"
 						android:layout_width="wrap_content"
 						android:layout_height="@dimen/route_info_buttons_height"
-						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 						android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
-						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
 						android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
+						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
+						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 						tools:background="@drawable/btn_border_trans_rounded_dark">
 
 						<LinearLayout
@@ -367,8 +374,8 @@
 								android:layout_width="0dp"
 								android:layout_height="match_parent"
 								android:layout_gravity="center"
-								android:layout_marginLeft="@dimen/content_padding_small"
 								android:layout_marginStart="@dimen/content_padding_small"
+								android:layout_marginLeft="@dimen/content_padding_small"
 								android:layout_weight="1"
 								android:ellipsize="end"
 								android:gravity="center"
@@ -384,10 +391,10 @@
 								android:id="@+id/to_button_image_view"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
-								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginLeft="@dimen/route_info_icon_vertical_padding"
-								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
+								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
+								android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
 								tools:src="@drawable/ic_action_plus" />
 
 						</LinearLayout>
@@ -416,8 +423,8 @@
 					android:layout_width="wrap_content"
 					android:layout_height="match_parent"
 					android:layout_gravity="start"
-					android:paddingBottom="@dimen/bottom_sheet_content_margin_small"
-					android:paddingTop="@dimen/bottom_sheet_content_margin_small">
+					android:paddingTop="@dimen/bottom_sheet_content_margin_small"
+					android:paddingBottom="@dimen/bottom_sheet_content_margin_small">
 
 					<LinearLayout
 						android:id="@+id/route_options_container"
@@ -425,10 +432,10 @@
 						android:layout_height="match_parent"
 						android:gravity="start"
 						android:orientation="horizontal"
-						android:paddingEnd="70dp"
+						android:paddingStart="5dp"
 						android:paddingLeft="5dp"
-						android:paddingRight="70dp"
-						android:paddingStart="5dp">
+						android:paddingEnd="70dp"
+						android:paddingRight="70dp">
 
 					</LinearLayout>
 
@@ -440,8 +447,8 @@
 					android:layout_height="match_parent"
 					android:layout_gravity="end"
 					android:orientation="horizontal"
-					android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
-					android:paddingStart="@dimen/route_info_buttons_padding_top_bottom">
+					android:paddingStart="@dimen/route_info_buttons_padding_top_bottom"
+					android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom">
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/map_options_route_button_title"
@@ -462,10 +469,10 @@
 						android:id="@+id/map_options_route_button_icon"
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
-						android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-						android:paddingLeft="@dimen/content_padding_small"
-						android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
 						android:paddingStart="@dimen/content_padding_small"
+						android:paddingLeft="@dimen/content_padding_small"
+						android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
+						android:paddingRight="@dimen/route_info_buttons_padding_top_bottom"
 						tools:src="@drawable/ic_action_edit_dark"
 						tools:tint="@color/recording_color" />
 
@@ -503,8 +510,8 @@
 					android:id="@+id/route_menu_cards_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:paddingBottom="60dp"
 					android:orientation="vertical"
+					android:paddingBottom="60dp"
 					tools:background="?attr/ctx_menu_info_view_bg">
 
 				</LinearLayout>
@@ -514,6 +521,28 @@
 		</FrameLayout>
 
 	</net.osmand.plus.mapcontextmenu.InterceptorLinearLayout>
+
+	<LinearLayout
+		android:id="@+id/modes_layout_toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<FrameLayout
+			android:id="@+id/modes_layout_toolbar_container"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/route_info_modes_height" />
+
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="top"
+			android:scaleType="fitXY"
+			android:src="@drawable/bg_shadow_list_bottom" />
+
+	</LinearLayout>
 
 	<LinearLayout
 		android:id="@+id/control_buttons"

@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -321,6 +322,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
+	public void openMenuFullScreen() {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null && fragmentRef.get().isVisible()) {
+			fragmentRef.get().openMenuFullScreen();
+		}
+	}
+
+	public void openMenuHeaderOnly() {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null && fragmentRef.get().isVisible()) {
+			fragmentRef.get().openMenuHeaderOnly();
+		}
+	}
+
 	public void updateMenu() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null)
@@ -346,7 +361,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateViaView(main);
 		updateFromSpinner(main);
 		updateToSpinner(main);
-		updateApplicationModes(main);
+		updateApplicationModes(mainView);
 		updateApplicationModesOptions(main);
 		updateOptionsButtons(main);
 
@@ -385,13 +400,36 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		return routingHelper.getFinalLocation() != null && routingHelper.isRouteCalculated();
 	}
 
+	public void updateApplicationModesOptions() {
+		updateApplicationModesOptions(mainView);
+	}
+
 	private void updateApplicationModesOptions(final View parentView) {
+		AppCompatImageView foldButtonView = (AppCompatImageView) parentView.findViewById(R.id.fold_button);
+		foldButtonView.setImageResource(currentMenuState == MenuState.HEADER_ONLY ?
+				R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down);
+		foldButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				expandCollapse();
+			}
+		});
+
 		parentView.findViewById(R.id.app_modes_options).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				availableProfileDialog();
 			}
 		});
+	}
+
+	private void expandCollapse() {
+		if (currentMenuState == MenuState.HEADER_ONLY) {
+			openMenuFullScreen();
+		} else {
+			openMenuHeaderOnly();
+		}
+		updateApplicationModesOptions(mainView);
 	}
 
 	private void availableProfileDialog() {
@@ -475,16 +513,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		scrollView.setVerticalScrollBarEnabled(false);
 		scrollView.setHorizontalScrollBarEnabled(false);
 
+		int leftTogglePadding = AndroidUtils.dpToPx(mapActivity, 8f);
+		int rightTogglePadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		Iterator<ApplicationMode> iterator = values.iterator();
+		boolean firstMode = true;
 		while (iterator.hasNext()) {
 			ApplicationMode mode = iterator.next();
-			View toggle = AppModeDialog.createToggle(mapActivity.getLayoutInflater(), (OsmandApplication) mapActivity.getApplication(), R.layout.mode_view_route_preparation, (LinearLayout) ll.findViewById(R.id.app_modes_content), mode, true);
+			View toggle = AppModeDialog.createToggle(mapActivity.getLayoutInflater(), (OsmandApplication) mapActivity.getApplication(),
+					R.layout.mode_view_route_preparation, (LinearLayout) ll.findViewById(R.id.app_modes_content), mode, true);
 
+			if (firstMode && toggle.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+				firstMode = false;
+				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) toggle.getLayoutParams();
+				p.setMargins(p.leftMargin + leftTogglePadding, p.topMargin, p.rightMargin, p.bottomMargin);
+			}
 			if (!iterator.hasNext() && toggle.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
 				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) toggle.getLayoutParams();
-				p.setMargins(p.leftMargin, p.topMargin, p.rightMargin + mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding), p.bottomMargin);
+				p.setMargins(p.leftMargin, p.topMargin, p.rightMargin + rightTogglePadding, p.bottomMargin);
 			}
 
 			buttons[k++] = toggle;
