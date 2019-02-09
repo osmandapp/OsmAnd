@@ -146,7 +146,7 @@
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Escolha um intervalo de atualização da sua posição no serviço em segundo plano</string>
-  <string name="background_service_int">Intervalo de posição</string>
+  <string name="background_service_int">Intervalo de posição GPS</string>
   <string name="background_service_provider_descr">Escolha um provedor de localização para o serviço em segundo plano</string>
   <string name="background_service_provider">Provedor de localização</string>
   <string name="background_router_service_descr">Activar o serviço em segundo plano para monitorar sua posição por longos períodos</string>
@@ -160,7 +160,7 @@
   <string name="menu_mute_off">Som activado</string>
   <string name="menu_mute_on">Som desativado</string>
   
-  <string name="voice_provider_descr">Selecione a orientação por voz para navegação ( ver códigos de idioma ISO 639-1 )</string>
+  <string name="voice_provider_descr">Selecione a orientação por voz para navegação.</string>
   <string name="voice_provider">Instruções por voz</string>
   <string name="voice_data_initializing">Inicializando dados de voz…</string>
   <string name="voice_data_not_supported">Os dados de voz utilizam uma versão não suportada</string>
@@ -245,7 +245,7 @@
   
   <string name="downloading_list_indexes">Baixando lista de regiões disponíveis…</string>
   <string name="list_index_files_was_not_loaded">Não foi possível obter uma lista de regiões em https://osmand.net.</string>
-  <string name="select_index_file_to_download">Se você não encontra a sua região, você pode criá-la. (Veja http://osmand.net).</string>
+  <string name="select_index_file_to_download">Nada foi encontrado. Se não conseguir encontrar a sua região, pode fazê-lo você mesmo (ver https://osmand.net).</string>
   
   <string name="fav_points_edited">O favorito foi modificado</string>
   <string name="fav_points_not_exist">Não existe nenhum favorito</string>
@@ -305,13 +305,13 @@
   <string name="settings_preset_descr">A visão do mapa e as configurações de navegação são guardadas por perfil. Defina aqui o seu.</string>
   <string name="settings_preset">Perfil predefinido</string>
   <string name="shared_string_settings">Configurações</string>
-  <string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
+  <string name="save_current_track_descr">Agora salvar a trilha atual no cartão SD.</string>
   <string name="save_current_track">Salvar a trilha atual</string>
-  <string name="save_track_interval_descr">Escolher o intervalo entre posições nas trilhas</string>
-  <string name="save_track_interval">Intervalo de gravação</string>
+  <string name="save_track_interval_descr">Escolher o intervaloentre posições nas trilhas durante a navegação.</string>
+  <string name="save_track_interval">Intervalo de gravação durante a navegação</string>
   
-  <string name="save_track_to_gpx_descrp">As trilhas serão automaticamente gravadas no directório \'tracks\' durante a navegação</string>
-  <string name="save_track_to_gpx">salvar trilha GPX durante a navegação</string>
+  <string name="save_track_to_gpx_descrp">As trilhas serão automaticamente gravadas no directório \'tracks\' durante a navegação.</string>
+  <string name="save_track_to_gpx">Gravar trilha durante a navegação</string>
   <string name="update_tile">Atualizar mapa</string>
   <string name="reload_tile">Atualizar imagens</string>
   <string name="open_street_map_login_descr">Nome do usuário OpenStreetMap</string>
@@ -677,7 +677,9 @@
   <string name="shared_string_no_thanks">Não, obrigado</string>
   <string name="basemap_missing">Falta o mapa global base (abrange o mundo inteiro com pouco detalhe). Pode fazer download do World_basemap_x.obf para ter um ambiente completo.</string>
   <string name="vector_data_missing">Faltam os dados de mapas no cartão SD. Precisa de fazer download dos mapas, para os usar offline.</string>
-  <string name="local_index_gpx_info_show">\n\nMantenha pressionado para opções</string>
+  <string name="local_index_gpx_info_show">"
+\n
+\nToque longo para opções"</string>
   
   
   
@@ -1090,7 +1092,7 @@
 	<string name="street_name">Nome da rua</string>
 	<string name="hno">Número de casa</string>
     
-    <string name="monitoring_settings">Serviços de monitoramento e Serviço em segundo plano</string>
+    <string name="monitoring_settings">Gravação de viagem</string>
     <string name="choose_osmand_theme_descr">Escolha o tema da aplicação.</string>
     <string name="choose_osmand_theme">Tema da aplicação</string>
     <string name="accessibility_options">Opções de acessibilidade</string>
@@ -1102,7 +1104,7 @@
     <string name="map_widget_gps_info">Informação de GPS</string>
     <string name="download_using_mobile_internet">Não conectado ao Wi-Fi. Use a conexão atual com a Internet para fazer o download\?</string>
     
-    <string name="monitoring_settings_descr">Cancelar rota</string>
+    <string name="monitoring_settings_descr">Configure como gravar suas viagens.</string>
     <string name="clear_destination">Apagar local de destino</string>
     
     
@@ -1241,18 +1243,18 @@
     <string name="shared_string_or">ou</string>
 	
 	
-    <string name="map_widget_map_rendering">Renderização do mapa:</string>
+    <string name="map_widget_map_rendering">Renderização do mapa</string>
     <string name="app_mode_hiking">Caminhada</string>
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Aeronave</string>
     
     
-    <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d osm mudanças .  Você tem certeza ?</string>
+    <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d mudanças no OSM. Tem certeza\?</string>
     <string name="shared_string_delete_all">Eliminar tudo</string>
     <string name="amenity_type_osmwiki">Wikipedia (off-line)</string>
 	<string name="amenity_type_seamark">Marca Marítima</string>
-    <string name="app_modes_choose_descr">Escolha os perfis disponíveis na aplicação</string>
+    <string name="app_modes_choose_descr">Escolha os perfis visíveis na aplicação.</string>
     <string name="app_modes_choose">Perfis da aplicação</string>
 	
     
@@ -1288,7 +1290,7 @@
     
     <string name="guidance_preferences_descr">Preferencias de navegação</string>
     <string name="routing_preferences_descr">Preferências de rota</string>
-    <string name="speech_rate_descr">Definir velocidade de fala para TTS</string>
+    <string name="speech_rate_descr">Definir a velocidade de fala para TTS.</string>
     <string name="speech_rate">Velocidade de fala</string>
     
     
@@ -1340,7 +1342,7 @@
     
    	<string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
-    <string name="misc_pref_title">Vários</string>
+    <string name="misc_pref_title">Diversos</string>
     <string name="localization_pref_title">Localização</string>
     <string name="index_item_nation_addresses">moradas nacionais</string>
 	<string name="index_item_world_altitude_correction">Correcção de altitude mundial</string>
@@ -1354,10 +1356,10 @@
     <string name="lang_en">Inglês</string>
 	<string name="lang_af">Africâner</string>
 	<string name="lang_hy">Armênio</string>
-	<string name="calculate_osmand_route_without_internet">Calcule segmento de rota OsmAnd sem internet</string>
+	<string name="calculate_osmand_route_without_internet">Cálculo off-line do segmento de rota OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeira e último segmeto de rota</string>
-    <string name="use_displayed_track_for_navigation">Você quer usar o trajeto apresentado para a navegação ?</string>
-    <string name="keep_and_add_destination_point">Adicionar como ponto de destino</string>
+    <string name="use_displayed_track_for_navigation">Usar a faixa indicada para a navegação\?</string>
+    <string name="keep_and_add_destination_point">Adicionar como destino posterior</string>
     <string name="select_gpx">Selecione GPX …</string>
     <string name="route_descr_select_destination">Selecionar destino</string>
     <string name="shared_string_select_on_map">Selecione no mapa</string>
@@ -1371,13 +1373,13 @@
 	<string name="routing_attr_avoid_toll_name">Evite estradas com portagem</string>
 	<string name="routing_attr_avoid_toll_description">Evite estradas com portagem</string>
 	<string name="routing_attr_avoid_unpaved_name">Evite estradas não pavimentadas</string>
-	<string name="routing_attr_avoid_unpaved_description">Evite estradas não pavimentadas</string>
-	<string name="routing_attr_avoid_ferries_name">Evite ferries</string>
-	<string name="routing_attr_avoid_ferries_description">Evite ferries</string>
+	<string name="routing_attr_avoid_unpaved_description">Evite estradas não pavimentadas.</string>
+	<string name="routing_attr_avoid_ferries_name">Evite balsas</string>
+	<string name="routing_attr_avoid_ferries_description">Evite balsas</string>
 	<string name="routing_attr_avoid_motorway_name">Evitar auto-estradas</string>
 	<string name="routing_attr_avoid_motorway_description">Evitar auto-estradas</string>
 	<string name="routing_attr_weight_name">Peso máximo</string>
-	<string name="routing_attr_weight_description">Especificar a limitação de peso de veículo</string>
+	<string name="routing_attr_weight_description">Especifique o limite de peso permitido para veículos em rotas.</string>
     <string name="android_19_location_disabled">Desde a versão KitKat você não pode fazer o download e actualização de mapa no local de armazenamento anterior (%s). Você deseja alterar para um local com permissão e copiar todos os ficheiros para lá\?          
 \n Nota: Os ficheiros antigos permanecerão intocados.          
 \n Nota: não será possível compartilhar ficheiros entre OsmAnd e OsmAnd + .</string>
@@ -1385,7 +1387,7 @@
     <string name="copying_osmand_one_file_descr">Copiando o ficheiro (%s) para novo destino …</string>
     <string name="copying_osmand_files_descr">Cópia de ficheiros Osmand para o novo destino (%s)…</string>
     <string name="copying_osmand_files">Copiando ficheiros Osmand…</string>
-    <string name="calculate_osmand_route_gpx">Calcular rota offline OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Cálculo de rota OsmAnd off-line</string>
     <string name="app_mode_truck">Camião</string>
     <string name="lang_eu">Basco</string>
 	<string name="lang_be">Bielorrusso</string>
@@ -1405,7 +1407,7 @@
     <string name="gpx_selection_track">%1$s
 \nTrajeto %2$s</string>
     
-    <string name="gpx_file_is_empty">O trilho Gpx está vazio</string>
+    <string name="gpx_file_is_empty">O ficheiro GPX está vazio</string>
     
     <string name="shared_string_tracks">Trajetos</string>
     <string name="shared_string_my_favorites">Favoritos</string>
@@ -1434,7 +1436,7 @@
 	<string name="lang_lv">Letão</string>
 	<string name="lang_lt">Lituano</string>
 	<string name="lang_mr">Lingua Marathi</string>
-	<string name="lang_no">Norueguês</string>
+	<string name="lang_no">Norueguês Bokmål</string>
 	<string name="lang_pl">Polaco</string>
 	<string name="lang_pt">Português</string>
 	<string name="lang_ro">Romeno</string>
@@ -1451,7 +1453,7 @@
     <string name="index_name_italy">Europa - Itália</string>
     <string name="index_name_gb">Europa - Grã-Bretanha</string>
     <string name="complex_route_calculation_failed">Cálculo rápido de rota falhou (%s), voltando para cálculo lento.</string>
-    <string name="disable_complex_routing_descr">Desativar encaminhamento de 2 fases para navegação automóvel</string>
+    <string name="disable_complex_routing_descr">Desativar encaminhamento de 2 fases para navegação automóvel.</string>
     <string name="disable_complex_routing">Desativar roteamento complexo</string>
     <string name="interrupt_music_descr">Voz solicita pausa, não apenas suprimir, a reprodução de música.</string>
 	<string name="interrupt_music">Pausar a música</string>
@@ -1468,16 +1470,18 @@
 	<string name="shared_string_share">Partilhar</string>
 	<string name="share_fav_subject">Favoritos partilhados via OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
-<string name="save_as_favorites_points">Salvar como grupo de favoritos</string>
-    <string name="select_destination_and_intermediate_points">Selecionar pontos de parada</string>
+<string name="save_as_favorites_points">Gravar como grupo de Favoritos</string>
+    <string name="select_destination_and_intermediate_points">Selecionar destinos</string>
     <string name="layer_amenity_label">Rótulos de sobreposições de POI</string>
     <string name="loading_smth">Carregando %1$s …</string>
     <string name="map_widget_plain_time">Tempo atual</string>
     <string name="shared_string_waypoint">Ponto</string>
-    <string name="selected_gpx_info_show">\n\nPressione e segure para ver no mapa</string>
-    <string name="delay_navigation_start">Iniciar navegação com atraso</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nToque longo para ver no mapa"</string>
+    <string name="delay_navigation_start">Iniciar a orientação passo a passo automaticamente</string>
     <string name="shared_string_selected_lowercase">seleccionado</string>
-    <string name="gpx_split_interval">Selecione intervalo de divisão</string>
+    <string name="gpx_split_interval">Intervalo de divisão</string>
     <string name="gpx_info_waypoints">"ponto de rota: %1$s "</string>
 	<string name="gpx_info_distance">Distância: %1$s (%2$s pontos ) </string>
 	<string name="gpx_info_start_time">Hora de início: %1$tF, %1$tT </string>
@@ -1486,7 +1490,7 @@
 	<string name="gpx_info_diff_altitude">Faixa de altitude : %1$s</string>
 	
     
-    <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
     <string name="text_size">Tamanho do texto</string>
@@ -1503,7 +1507,7 @@
 	<string name="sleep_mode_stop_dialog">Parar o modo de fundo do GPS\?</string>
 	<string name="stop_navigation_service">Parar</string>
 	<string name="confirm_every_run">Sempre perguntar</string>
-	<string name="save_global_track_interval_descr">Escolher o intervalo de log para a gravação de faixa geral (habilitado através do widget de gravação GPX no mapa)</string>
+	<string name="save_global_track_interval_descr">Escolher o intervalo de log para a gravação de faixa geral (ativado através do widget de gravação GPX no mapa).</string>
 	<string name="save_global_track_interval">Intervalo de log geral</string>
 	<string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
 	<string name="save_track_to_gpx_globally">Salvar trilha GPX</string>
@@ -1699,7 +1703,7 @@
     <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposição de símbolo de montanhismo</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rotas para bicicletas</string>
-    <string name="rendering_attr_hideBuildings_name">Ocultar edifícios</string>
+    <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rotas de trólebus</string>
     <string name="favorite_category_dublicate_message">Por favor, use um nome de categoria que ainda não existe.</string>
     <string name="favorite_category_name">Nome da Categoria</string>
@@ -2760,9 +2764,9 @@
     <string name="enable_proxy_title">Ativar proxy HTTP</string>
     <string name="enable_proxy_descr">Configurar o proxy HTTP para todas as solicitações de rede.</string>
     <string name="proxy_host_title">Servidor Proxy</string>
-    <string name="proxy_host_descr">Configurar o hostname do seu proxy (p. ex., 127.0.0.1)</string>
+    <string name="proxy_host_descr">Configurar o hostname do seu proxy (p. ex., 127.0.0.1).</string>
     <string name="proxy_port_title">Porta do proxy</string>
-    <string name="proxy_port_descr">Configurar o número da porta do seu proxy (p. ex. 8118)</string>
+    <string name="proxy_port_descr">Configurar o número da porta do seu proxy (p. ex. 8118).</string>
     <string name="average">Média</string>
     <string name="of">%1$d de %2$d</string>
     <string name="ascent_descent">Subida/Descida</string>
@@ -2818,7 +2822,7 @@
     <string name="lang_zh_hk">Chinês (Hong Kong)</string>
     <string name="lang_zh_tw">"Chinês (tradicional) "</string>
     <string name="routing_attr_avoid_stairs_name">Evitar escadas</string>
-    <string name="routing_attr_avoid_stairs_description">Evitar passar por escadas</string>
+    <string name="routing_attr_avoid_stairs_description">Evitar escadas</string>
     <string name="routing_attr_avoid_borders_name">Evitar passagem por fronteira</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar fronteiras nacionais</string>
     <string name="routing_attr_height_name">Limite de altura</string>

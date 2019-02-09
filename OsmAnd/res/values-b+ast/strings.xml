@@ -119,7 +119,7 @@
 	<string name="confirmation_to_clear_history">¿Llimpiar l\'historial\?</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
-	<string name="osm_edits"/>
+	<string name="osm_edits">Ediciones n\'OSM</string>
 	<string name="your_edits">Les tos ediciones</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="routing_settings_2">Axustes de la navegación</string>
@@ -222,7 +222,7 @@
 	<string name="rendering_value_bicycle_name">Bicicleta</string>
 	<string name="rendering_value_pedestrian_name"/>
 	<string name="speak_pedestrian">Pasos de cebra</string>
-	<string name="traffic_warning_railways"/>
+	<string name="traffic_warning_railways">Pasu a nivel</string>
 	<string name="traffic_warning_pedestrian">Pasu de cebra</string>
 	<string name="dash_download_msg_none"/>
 	<string name="enter_country_name"/>
@@ -243,7 +243,7 @@
 	<string name="native_library_not_running"/>
 	<string name="access_no_destination">Nun s\'afitó\'l destín</string>
 	<string name="access_smart_autoannounce_descr">Avisa namái cuando camude la direición al puntu de destín.</string>
-	<string name="access_autoannounce_period"/>
+	<string name="access_autoannounce_period">Periodu d\'anunciu automáticu</string>
 	<string name="access_autoannounce_period_descr">Intervalu mínimu de tiempu ente anuncios.</string>
 	<string name="access_default_color"/>
 	<string name="access_map_linked_to_location"/>
@@ -539,7 +539,7 @@
     <string name="remove_the_tag">DESANICIAR LA ETIQUETA</string>
     <string name="show_pedestrian_warnings">Pasos de cebra</string>
     <string name="background_service_is_enabled_question">El serviciu en segundu planu d\'OsmAnd ta entá n\'execución, ¿Paralu tamién\?</string>
-    <string name="monitoring_settings"/>
+    <string name="monitoring_settings">Grabación de viaxes</string>
     <string name="monitoring_settings_descr"/>
     <string name="int_hour">h</string>
     <string name="index_tours"/>
@@ -703,7 +703,7 @@
     <string name="shared_string_topbar">Barra cimera</string>
     <string name="text_size_descr"/>
     <string name="use_osm_live_routing_description">Activa la navegación colos cambeos d\'OsmAnd Live.</string>
-	<string name="access_disable_offroute_recalc_descr"/>
+	<string name="access_disable_offroute_recalc_descr">Nun recalcula la ruta tres colar d\'ella.</string>
     <string name="access_disable_wrong_direction_recalc_descr"/>
     
     
@@ -850,13 +850,13 @@
     <string name="show_something_on_map">Amosar %1$s nel mapa</string>
     <string name="shared_string_is_open_24_7">Abiertu 24/7</string>
     <string name="current_track">Itinerariu actual</string>
-    <string name="access_disable_offroute_recalc"/>
+    <string name="access_disable_offroute_recalc">Ensin recálculu de la ruta tres colar d\'ella</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd nun pue importar el ficheru. Comprueba si l\'aplicación tien permisu pa lleer esi ficheru dende\'l so allugmientu.</string>
     <string name="distance_moving"/>
     <string name="wrong_user_name">El nome d\'usuariu ye incorreutu</string>
-    <string name="shared_string_to"/>
-    <string name="mapillary_menu_date_from"/>
+    <string name="shared_string_to">Hasta</string>
+    <string name="mapillary_menu_date_from">Dende</string>
     <string name="mapillary_menu_descr_dates"/>
     <string name="mapillary_menu_title_dates">Data</string>
     <string name="mapillary_menu_edit_text_hint">Teclexa\'l nome d\'usuariu</string>
@@ -871,7 +871,7 @@
     <string name="srtm_menu_download_descr"/>
     <string name="store_tracks_in_monthly_directories">Atroxar itinerarios grabaos en carpetes mensuales</string>
     <string name="store_tracks_in_monthly_directories_descrp">Atroxa los itinerarios grabaos en socarpetes pel mes de grabación (como 2018-01).</string>
-    <string name="shared_string_reset"/>
+    <string name="shared_string_reset">Reafitar</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recarga los mosaicos pa ver los datos anovaos.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de mosaicos</string>
@@ -946,7 +946,7 @@
     <string name="import_as_gpx"/>
     <string name="import_as_favorites"/>
     <string name="import_file"/>
-	<string name="waypoints_added_to_map_markers"/>
+	<string name="waypoints_added_to_map_markers">Amestáronse los puntos a los marcadores del mapa</string>
 	<string name="plan_route_no_markers_toast">Has amestar polo menos un marcador pa usar esta función.</string>
     <string name="osn_modify_dialog_error">Nun pudo modificase la nota</string>
     <string name="empty_state_av_notes"/>
@@ -1085,7 +1085,7 @@
     <string name="powered_by_osmand">Cola potencia d\'OsmAnd</string>
     <string name="osm_live_plan_pricing">Plan y preciu</string>
     <string name="osm_live_payment_monthly_title">Pagu mensual</string>
-    <string name="osm_live_payment_3_months_title">Pagu cada 3 meses</string>
+    <string name="osm_live_payment_3_months_title">Pagu trimestral</string>
     <string name="osm_live_payment_annual_title">Pagu añal</string>
     <string name="osm_live_payment_month_cost_descr">%1$s/mes</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s/mes</string>
@@ -1103,7 +1103,7 @@
     <string name="purchase_cancelled_dialog_descr">Renueva la soscripción pa siguir usando toles carauterístiques:</string>
     <string name="maps_you_need">Mapes que precises</string>
     <string name="osmand_team">L\'equipu d\'OsmAnd</string>
-    <string name="travel_card_download_descr"/>
+    <string name="travel_card_download_descr">Baxa les guíes de viaxes de Wikivoayage pa ver artículos tocante a llugares del mundu ensin una conexón a internet.</string>
     <string name="update_is_available">Anovamientu disponible</string>
     <string name="start_editing_card_image_text">La guía de viaxes mundial y llibre que tol mundu pue editar.</string>
     <string name="start_editing">Apenzar la edición</string>
@@ -1688,4 +1688,33 @@
     <string name="trace_rendering_descr">Amuesa\'l rindimientu del renderizáu.</string>
     <string name="planning_trip_item">Planificación d\'un viaxe</string>
     <string name="search_on_the_map_item">Guetes nel mapa</string>
+    <string name="waypoints">Puntos: %1$s</string>
+    <string name="download_file">Descarga d\'un ficheru</string>
+    <string name="waypoints_removed_from_map_markers">Desaniciáronse los puntos de los marcadores del mapa</string>
+    <string name="quick_action_resume_pause_navigation">Posar/siguir cola navegación</string>
+    <string name="quick_action_start_stop_navigation">Aniciar/parar la navegación</string>
+    <string name="index_item_world_wikivoyage">Artículos mundiales de Wikivoyage</string>
+    <string name="rendering_value_high_name">Alta</string>
+    <string name="rendering_value_low_name">Baxa</string>
+    <string name="rendering_value_medium_name">Media</string>
+    <string name="no_waypoints_found">Nun s\'alcontraron puntos</string>
+    <string name="show_railway_warnings">Pasos a nivel</string>
+    <string name="shared_string_waypoints">Puntos</string>
+    <string name="shared_string_waypoint">Puntu</string>
+    <string name="gpx_info_waypoints">Puntos: %1$s</string>
+    <string name="choose_osmand_theme_descr">Escueyi cómo va vese l\'aplicación.</string>
+    <string name="first_time_msg">Gracies por usar OsmAnd. Baxa datos rexonales pa un usu fuera de llinia per «Axustes» → «Xestionar ficheros de mapes» pa ver mapes, allugar direiciones, guetar PdI, alcontrar tresporte públicu y más.</string>
+    <string name="local_openstreetmap_uploadall">Xubir too</string>
+    <string name="local_openstreetmap_settings">Notes/PdI d\'OSM guardaos nel preséu</string>
+    <string name="index_settings">Xestionar mapes de ficheros</string>
+    <string name="local_index_mi_upload_gpx">Unviar a OSM</string>
+    <string name="reading_cached_tiles">Lleendo los mosaicos de la caché…</string>
+    <string name="reading_indexes">Lleendo los datos llocales…</string>
+    <string name="update_all">Anovar too (%1$sMB)</string>
+    <string name="quick_action_map_style">Camudar l\'estilu del mapa</string>
+    <string name="quick_action_day_night_switch_mode">Cambiar al mou día/nueche</string>
+    <string name="quick_action_showhide_poi_title">Amosar/anubrir PdI</string>
+    <string name="quick_action_add_create_items">Creación d\'elementos</string>
+    <string name="quick_action_add_configure_map">Configuración del mapa</string>
+    <string name="waypoint_one">Puntu 1</string>
 </resources>

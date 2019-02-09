@@ -420,7 +420,7 @@
 	<string name="poi_first_aid">Elsősegély</string>
 	<string name="poi_nursing_home">Ápolóotthon</string>
 	<string name="poi_baby_hatch">Inkubátor</string>
-	<string name="poi_blood_bank">Vérbank</string>
+	<string name="poi_blood_bank">Vérellátó központ</string>
 	<string name="poi_healthcare_centre">Egészségügyi központ</string>
 	<string name="poi_midwife">Szülésznő</string>
 	<string name="poi_company">Vállalat</string>
@@ -1641,8 +1641,8 @@
 
 	<string name="poi_cairn">Kőrakás</string>
 
-	<string name="poi_vending_parcel_pickup_mail_in">Csomagfelvétel és -feladás</string>
-	<string name="poi_vending_parcel_pickup">Csomagfelvétel</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Csomagkiadás és -feladás</string>
+	<string name="poi_vending_parcel_pickup">Csomagkiadás</string>
 	<string name="poi_vending_parcel_mail_in">Csomagfeladás</string>
 	<string name="poi_vending_vouchers">Utalvány</string>
 	<string name="poi_memorial_koshinto">Kosintó</string>
@@ -3916,7 +3916,7 @@
     <string name="poi_substation_valve_group">szelepcsoport</string>
     <string name="poi_craft_confectionery">Édességkészítő</string>
     <string name="poi_laboratory">Orvosi labor</string>
-    <string name="poi_blood_donation">Véradás</string>
+    <string name="poi_blood_donation">Véradó állomás</string>
     <string name="poi_books_comic">képregény</string>
     <string name="poi_books_antiquarian">antikvárium</string>
     <string name="poi_books_religion">vallási</string>

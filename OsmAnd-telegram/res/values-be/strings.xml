@@ -187,4 +187,12 @@
     <string name="start_date">Час адкрыцця</string>
     <string name="timeline_description">Уключаць маніторынг для збору данных руху ў фоне.</string>
     <string name="timeline">Храналогія</string>
+    <string name="please_update_osmand">Калі ласка, абнавіце OsmAnd каб паглядзець даныя на мапе</string>
+    <string name="shared_string_update">Абнавіць</string>
+    <string name="gps_points_in_buffer">адпраўлена (%1$d у буферы)</string>
+    <string name="points_size">%1$d кропак</string>
+    <string name="shared_string_date">Дата</string>
+    <string name="shared_string_collected">Сабраны</string>
+    <string name="gps_points">GPS-кропкі</string>
+    <string name="shared_string_sent">Адпраўлены</string>
 </resources>

@@ -189,4 +189,6 @@
     <string name="gps_points">נקודות GPS</string>
     <string name="shared_string_sent">נשלחו</string>
     <string name="osmand_connect">OsmAnd connect</string>
+    <string name="please_update_osmand">נא לעדכן את OsmAnd כדי לצפות בנתונים במפה</string>
+    <string name="shared_string_update">עדכון</string>
 </resources>

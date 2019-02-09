@@ -1824,7 +1824,7 @@ Pôr do Sol: %2$s</string>
 <string name="count_of_lines">Número de linhas</string>
 <string name="are_you_sure">Tem certeza?</string>
 <string name="unsaved_changes_will_be_lost">Quaisquer alterações não salvas serão perdidas. Continuar?</string>
-<string name="shared_string_update">Atualizar</string>
+<string name="shared_string_update">"Atualizar "</string>
 
 
 

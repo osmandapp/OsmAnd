@@ -189,4 +189,11 @@
     <string name="start_date">Data rozpoczęcia</string>
     <string name="timeline_description">Umożliwia monitorowanie, by zgromadzić dane ruchu w tle.</string>
     <string name="timeline">Linia czasu</string>
+    <string name="please_update_osmand">Proszę zaktualizować OsmAnd, by zobaczyć dane na mapie</string>
+    <string name="shared_string_update">Aktualizuj</string>
+    <string name="points_size">%1$d punktów</string>
+    <string name="shared_string_date">Data</string>
+    <string name="shared_string_collected">Zgromadzone</string>
+    <string name="gps_points">Punkty GPS</string>
+    <string name="shared_string_sent">Wyślij</string>
 </resources>
