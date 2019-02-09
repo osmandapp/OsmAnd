@@ -3078,4 +3078,8 @@ Lon %2$s</string>
     <string name="shared_string_capacity">Capacidad</string>
     <string name="shared_string_width">Ancho</string>
     <string name="shared_string_height">Altura</string>
+    <string name="route_class_stat_container">Clase</string>
+    <string name="route_surface_stat_container">Superficie</string>
+    <string name="route_smoothness_stat_container">Suavidad</string>
+    <string name="route_steepness_stat_container">Inclinación</string>
 </resources>

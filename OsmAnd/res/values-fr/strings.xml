@@ -3245,4 +3245,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_capacity">Сapacité</string>
     <string name="shared_string_width">Largeur</string>
     <string name="shared_string_height">Hauteur</string>
+    <string name="route_class_stat_container">Classe</string>
+    <string name="route_surface_stat_container">Surface</string>
+    <string name="route_smoothness_stat_container">Régularité</string>
+    <string name="route_steepness_stat_container">Pente</string>
 </resources>
