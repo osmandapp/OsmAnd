@@ -3270,4 +3270,8 @@
     <string name="shared_string_capacity">ظرفیت</string>
     <string name="shared_string_width">عرض</string>
     <string name="shared_string_height">طول</string>
+    <string name="route_class_stat_container">رده</string>
+    <string name="route_surface_stat_container">سطح</string>
+    <string name="route_smoothness_stat_container">همواری</string>
+    <string name="route_steepness_stat_container">شیب</string>
 </resources>
