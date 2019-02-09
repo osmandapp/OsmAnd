@@ -3064,4 +3064,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="voice_announcements">Hlasové oznámenia</string>
     <string name="intermediate_destinations">Medziciele: %1$s</string>
     <string name="arrive_at_time">Príjazd o %1$s</string>
+    <string name="route_class_stat_container">Trieda</string>
+    <string name="route_surface_stat_container">Povrch</string>
+    <string name="route_smoothness_stat_container">Hladkosť povrchu</string>
+    <string name="route_steepness_stat_container">Strmosť</string>
 </resources>
