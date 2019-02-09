@@ -225,6 +225,7 @@ class TimelineTabFragment : Fragment() {
 			if (item is TelegramUiHelper.LocationMessagesChatItem) {
 				val userLocations = item.userLocations
 				if (userLocations != null) {
+					holder.title?.text = if (item.chatWithBot) userLocations.deviceName else item.name
 					val trackData = getDistanceAndCountedPoints(userLocations)
 					val distance = OsmandFormatter.getFormattedDistance(trackData.dist, app)
 					val groupDescrRowVisible = (!item.privateChat || item.chatWithBot) && item.userId != currentUserId
@@ -242,7 +243,7 @@ class TimelineTabFragment : Fragment() {
 					holder.distanceAndPointsTitle?.text = "$distance (${getString(R.string.points_size, trackData.points)}) $point "
 					holder.userRow?.setOnClickListener {
 						childFragmentManager.also {
-							UserGpxInfoFragment.showInstance(it, item.userId, item.chatId, trackData.minTime, trackData.maxTime)
+							UserGpxInfoFragment.showInstance(it, item.userId, item.chatId, userLocations.deviceName ,trackData.minTime, trackData.maxTime)
 						}
 					}
 				}

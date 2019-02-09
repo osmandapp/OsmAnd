@@ -17,7 +17,6 @@ import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListen
 import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
@@ -296,10 +295,8 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		messages.forEach {
 			app().settings.updateShareInfo(it)
 			app().shareLocationHelper.checkAndSendBufferMessagesToChat(it.chatId)
-			if (it.sendingState == null && (it.content is TdApi.MessageLocation || it.content is TdApi.MessageText)) {
-				if (!it.isOutgoing) {
-					app().locationMessages.addNewLocationMessage(it)
-				}
+			if (it.sendingState == null && !it.isOutgoing && (it.content is TdApi.MessageLocation || it.content is TdApi.MessageText)) {
+				app().locationMessages.addNewLocationMessage(it)
 			}
 		}
 	}

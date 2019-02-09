@@ -83,6 +83,7 @@ private const val BATTERY_OPTIMISATION_ASKED = "battery_optimisation_asked"
 private const val MONITORING_ENABLED = "monitoring_enabled"
 
 private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
+private const val WAITING_TDLIB_TIME = 30 // 2 seconds
 
 private const val GPS_UPDATE_EXPIRED_TIME = 60 * 3L // 3 minutes
 
@@ -188,10 +189,21 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun updateCurrentSharingMode(sharingMode: String) {
 		if (currentSharingMode != sharingMode) {
 			shareChatsInfo.forEach { (_, shareInfo) ->
-				shareInfo.shouldSendViaBotMessage = true
+				shareInfo.shouldSendViaBotTextMessage = true
+				shareInfo.shouldSendViaBotMapMessage = true
 			}
+			prepareForSharingNewMessages()
 		}
 		currentSharingMode = sharingMode
+	}
+
+	fun prepareForSharingNewMessages() {
+		shareChatsInfo.forEach { (_, shareInfo) ->
+			shareInfo.pendingTdLibText = 0
+			shareInfo.pendingTdLibMap = 0
+			shareInfo.pendingTextMessage = false
+			shareInfo.pendingMapMessage = false
+		}
 	}
 
 	fun getChatLivePeriod(chatId: Long) = shareChatsInfo[chatId]?.livePeriod
@@ -211,7 +223,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun getCurrentSharingDevice() = shareDevices.singleOrNull { it.externalId == currentSharingMode }
 
-	fun getLastSuccessfulSendTime() = shareChatsInfo.values.maxBy { it.lastSuccessfulSendTimeMs }?.lastSuccessfulSendTimeMs ?: -1
+	fun getLastSuccessfulSendTime() = shareChatsInfo.values.maxBy { it.lastSuccessfulSendTime }?.lastSuccessfulSendTime ?: -1
 
 	fun stopSharingLocationToChats() {
 		shareChatsInfo.clear()
@@ -247,6 +259,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun updateShareInfo(message: TdApi.Message) {
 		val shareInfo = shareChatsInfo[message.chatId]
 		val content = message.content
+		val isOsmAndBot = app.telegramHelper.isOsmAndBot(message.senderUserId) || app.telegramHelper.isOsmAndBot(message.viaBotUserId)
 		if (shareInfo != null) {
 			when (content) {
 				is TdApi.MessageLocation -> {
@@ -256,6 +269,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 							shareInfo.pendingMapMessage = true
 							log.debug("updateShareInfo MAP ${message.id} MessageSendingStatePending")
 							shareInfo.oldMapMessageId = message.id
+							if (isOsmAndBot) {
+								shareInfo.shouldSendViaBotMapMessage = false
+							}
 						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
 							shareInfo.hasSharingError = true
 							shareInfo.pendingMapMessage = false
@@ -264,12 +280,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 					} else {
 						shareInfo.currentMapMessageId = message.id
 						shareInfo.pendingMapMessage = false
-						shareInfo.pendingTdLib--
-						shareInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
-						if (shareTypeValue == SHARE_TYPE_MAP) {
-							shareInfo.sentMessages++
+						shareInfo.lastSuccessfulSendTime = Math.max(message.editDate, message.date).toLong()
+						if (!isOsmAndBot) {
+							shareInfo.pendingTdLibMap--
+							if (shareTypeValue == SHARE_TYPE_MAP) {
+								shareInfo.sentMessages++
+							}
+						} else {
+							shareInfo.shouldSendViaBotMapMessage = false
 						}
-						log.debug("updateShareInfo MAP ${message.id} SUCCESS pendingTdLib: ${shareInfo.pendingTdLib}")
+						log.debug("updateShareInfo MAP ${message.id} SUCCESS pendingTdLibMap: ${shareInfo.pendingTdLibMap}")
 					}
 				}
 				is TdApi.MessageText -> {
@@ -279,6 +299,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 							log.debug("updateShareInfo TEXT ${message.id} MessageSendingStatePending")
 							shareInfo.pendingTextMessage = true
 							shareInfo.oldTextMessageId = message.id
+							if (isOsmAndBot) {
+								shareInfo.shouldSendViaBotTextMessage = false
+							}
 						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
 							log.debug("updateShareInfo TEXT ${message.id} MessageSendingStateFailed")
 							shareInfo.hasSharingError = true
@@ -288,10 +311,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 						shareInfo.currentTextMessageId = message.id
 						shareInfo.updateTextMessageId++
 						shareInfo.pendingTextMessage = false
-						shareInfo.pendingTdLib--
-						shareInfo.sentMessages++
-						shareInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
-						log.debug("updateShareInfo TEXT ${message.id} SUCCESS pendingTdLib: ${shareInfo.pendingTdLib}")
+						shareInfo.lastSuccessfulSendTime = Math.max(message.editDate, message.date).toLong()
+						if (!isOsmAndBot) {
+							shareInfo.pendingTdLibText--
+							shareInfo.sentMessages++
+						} else {
+							shareInfo.shouldSendViaBotTextMessage = false
+						}
+						log.debug("updateShareInfo TEXT ${message.id} SUCCESS pendingTdLibMap: ${shareInfo.pendingTdLibText}")
 					}
 				}
 			}
@@ -339,7 +366,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val currentTime = System.currentTimeMillis() / 1000
 		val user = app.telegramHelper.getCurrentUser()
 		if (user != null && currentSharingMode != user.id.toString() && shareChatInfo.start == -1L) {
-			shareChatInfo.shouldSendViaBotMessage = true
+			shareChatInfo.shouldSendViaBotTextMessage = true
+			shareChatInfo.shouldSendViaBotMapMessage = true
 		}
 
 		shareChatInfo.start = currentTime
@@ -373,12 +401,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 			var sendChatsErrors = false
 
 			shareChatsInfo.forEach { (_, shareInfo) ->
-				if (shareInfo.lastSuccessfulSendTimeMs == -1L && ((statusChangeTime / 1000 - shareInfo.start) < SHARING_INITIALIZATION_TIME)) {
+				if (shareInfo.lastSuccessfulSendTime == -1L && ((statusChangeTime / 1000 - shareInfo.start) < SHARING_INITIALIZATION_TIME)) {
 					initializing = true
-				}
-				if (shareInfo.hasSharingError) {
+				} else if (shareInfo.hasSharingError
+					|| (shareInfo.lastSuccessfulSendTime - shareInfo.lastSendTextMessageTime > WAITING_TDLIB_TIME)
+					|| (shareInfo.lastSuccessfulSendTime - shareInfo.lastSendMapMessageTime > WAITING_TDLIB_TIME)
+				) {
 					sendChatsErrors = true
-					locationTime = shareInfo.lastSuccessfulSendTimeMs
+					locationTime = shareInfo.lastSuccessfulSendTime
 					val title = app.telegramHelper.getChat(shareInfo.chatId)?.title
 					if (title != null) {
 						chatsTitles.add(title)
@@ -441,11 +471,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val currentMapMessageId = shareChatsInfo[chatId]?.currentMapMessageId
 		if (messages.contains(currentMapMessageId)) {
 			shareChatsInfo[chatId]?.currentMapMessageId = -1
+			shareChatsInfo[chatId]?.shouldSendViaBotMapMessage = true
+			shareChatsInfo[chatId]?.shouldSendViaBotTextMessage = true
 		}
 		val currentTextMessageId = shareChatsInfo[chatId]?.currentTextMessageId
 		if (messages.contains(currentTextMessageId)) {
 			shareChatsInfo[chatId]?.currentTextMessageId = -1
 			shareChatsInfo[chatId]?.updateTextMessageId = 1
+			shareChatsInfo[chatId]?.shouldSendViaBotMapMessage = true
+			shareChatsInfo[chatId]?.shouldSendViaBotTextMessage = true
 		}
 	}
 	
@@ -576,7 +610,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 				obj.put(ShareChatInfo.CURRENT_TEXT_MESSAGE_ID_KEY, chatInfo.currentTextMessageId)
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY, chatInfo.userSetLivePeriod)
 				obj.put(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY, chatInfo.userSetLivePeriodStart)
-				obj.put(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY, chatInfo.lastSuccessfulSendTimeMs)
+				obj.put(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY, chatInfo.lastSuccessfulSendTime)
 				obj.put(ShareChatInfo.LAST_SEND_MAP_TIME_KEY, chatInfo.lastSendMapMessageTime)
 				obj.put(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY, chatInfo.lastSendTextMessageTime)
 				obj.put(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY, chatInfo.pendingTextMessage)
@@ -605,7 +639,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 				currentTextMessageId = obj.optLong(ShareChatInfo.CURRENT_TEXT_MESSAGE_ID_KEY)
 				userSetLivePeriod = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_KEY)
 				userSetLivePeriodStart = obj.optLong(ShareChatInfo.USER_SET_LIVE_PERIOD_START_KEY)
-				lastSuccessfulSendTimeMs = obj.optLong(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY)
+				lastSuccessfulSendTime = obj.optLong(ShareChatInfo.LAST_SUCCESSFUL_SEND_TIME_KEY)
 				lastSendMapMessageTime = obj.optInt(ShareChatInfo.LAST_SEND_MAP_TIME_KEY)
 				lastSendTextMessageTime = obj.optInt(ShareChatInfo.LAST_SEND_TEXT_TIME_KEY)
 				pendingTextMessage = obj.optBoolean(ShareChatInfo.PENDING_TEXT_MESSAGE_KEY)
@@ -698,7 +732,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val newSharingType = SHARE_TYPE_VALUES[index]
 			if (shareTypeValue != newSharingType && app.telegramHelper.getCurrentUser()?.id.toString() != currentSharingMode) {
 				shareChatsInfo.forEach { (_, shareInfo) ->
-					shareInfo.shouldSendViaBotMessage = true
+					shareInfo.shouldSendViaBotTextMessage = true
+					shareInfo.shouldSendViaBotMapMessage = true
 				}
 			}
 			shareTypeValue = newSharingType
@@ -905,18 +940,22 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var oldTextMessageId = -1L
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
-		var lastSuccessfulSendTimeMs = -1L
+		var lastSuccessfulSendTime = -1L
 		var lastSendTextMessageTime = -1
 		var lastSendMapMessageTime = -1
 		var sentMessages = 0
-		var pendingTdLib = 0
+		var pendingTdLibText = 0
+		var pendingTdLibMap = 0
 		var pendingTextMessage = false
 		var pendingMapMessage = false
-		var shouldSendViaBotMessage = false
+		var shouldSendViaBotTextMessage = false
+		var shouldSendViaBotMapMessage = false
 		var hasSharingError = false
 		var shouldDeletePreviousMapMessage = false
 		var shouldDeletePreviousTextMessage = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
+
+		fun getPendingTdLib() = pendingTdLibText + pendingTdLibMap
 
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)

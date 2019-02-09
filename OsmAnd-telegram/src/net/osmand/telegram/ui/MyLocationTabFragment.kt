@@ -17,9 +17,8 @@ import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
-import net.osmand.telegram.ADDITIONAL_ACTIVE_TIME_VALUES_SEC
-import net.osmand.telegram.R
-import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.*
+import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
@@ -727,7 +726,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		private fun getStopSharingVisibility(expiresIn: Long) =
-			if (expiresIn > 0) View.VISIBLE else View.INVISIBLE
+			if (expiresIn > 0) View.VISIBLE else View.GONE
 
 		private fun removeItem(chat: TdApi.Object) {
 			items.remove(chat)

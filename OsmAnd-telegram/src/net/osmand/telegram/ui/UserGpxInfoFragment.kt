@@ -59,6 +59,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private var userId = -1
 	private var chatId = -1L
+	private var deviceName = ""
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -71,7 +72,11 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		readFromBundle(savedInstanceState ?: arguments)
 
 		val user = app.telegramHelper.getUser(userId)
-		if (user != null) {
+		if (deviceName.isNotEmpty()) {
+			mainView.findViewById<TextView>(R.id.title).text = deviceName
+			TelegramUiHelper.setupPhoto(app, mainView.findViewById<ImageView>(R.id.user_icon),
+				null, R.drawable.img_user_placeholder, false)
+		} else if (user != null) {
 			mainView.findViewById<TextView>(R.id.title).text = TelegramUiHelper.getUserName(user)
 			TelegramUiHelper.setupPhoto(app, mainView.findViewById<ImageView>(R.id.user_icon),
 				telegramHelper.getUserPhotoPath(user), R.drawable.img_user_placeholder, false)
@@ -226,6 +231,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		bundle?.also {
 			userId = it.getInt(USER_ID_KEY)
 			chatId = it.getLong(CHAT_ID_KEY)
+			deviceName = it.getString(DEVICE_NAME_KEY, "")
 			startCalendar.timeInMillis = it.getLong(START_KEY)
 			endCalendar.timeInMillis = it.getLong(END_KEY)
 		}
@@ -248,7 +254,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private fun updateGpxInfo() {
 		checkTime()
-		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, startCalendar.timeInMillis, endCalendar.timeInMillis)
+		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId,deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
 
 		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).firstOrNull()?:GPXUtilities.GPXFile()
 		updateGPXStatisticRow()
@@ -373,16 +379,18 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		private const val END_KEY = "end_key"
 		private const val USER_ID_KEY = "user_id_key"
 		private const val CHAT_ID_KEY = "chat_id_key"
+		private const val DEVICE_NAME_KEY = "device_name_key"
 
 		private const val GPX_TRACK_COLOR = -65536
 		private	const val MIN_OSMAND_BITMAP_VERSION_CODE = 330
 
-		fun showInstance(fm: FragmentManager,userId:Int,chatId:Long, start: Long, end: Long): Boolean {
+		fun showInstance(fm: FragmentManager,userId:Int,chatId:Long,deviceName:String, start: Long, end: Long): Boolean {
 			return try {
 				val fragment = UserGpxInfoFragment().apply {
 					arguments = Bundle().apply {
 						putInt(USER_ID_KEY, userId)
 						putLong(CHAT_ID_KEY, chatId)
+						putString(DEVICE_NAME_KEY, deviceName)
 						putLong(START_KEY, start)
 						putLong(END_KEY, end)
 					}

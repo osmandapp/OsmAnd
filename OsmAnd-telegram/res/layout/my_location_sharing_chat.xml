@@ -107,7 +107,8 @@
 		<LinearLayout
 			android:id="@+id/show_on_map_row"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/list_item_height_big"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/list_item_height_big"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
 			android:paddingLeft="@dimen/content_padding_standard"
