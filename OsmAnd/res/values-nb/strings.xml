@@ -3139,4 +3139,8 @@
     <string name="shared_string_capacity">Kapasitet</string>
     <string name="shared_string_width">Bredde</string>
     <string name="shared_string_height">Høyde</string>
+    <string name="route_class_stat_container">Klasse</string>
+    <string name="route_surface_stat_container">Overflate</string>
+    <string name="route_smoothness_stat_container">Jevnhet</string>
+    <string name="route_steepness_stat_container">Bratthet</string>
 </resources>
