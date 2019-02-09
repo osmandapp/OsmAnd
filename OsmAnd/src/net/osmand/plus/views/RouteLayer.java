@@ -1005,9 +1005,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 			attrs.customColor = 0;
 			attrsPT.customColor = 0;
-			if (!view.isAnimatingZoom()) {
-				drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
-			}
+			drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
 		} finally {
 			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
