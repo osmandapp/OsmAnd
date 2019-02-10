@@ -205,7 +205,7 @@ La memoria utilizzata è  {1} MB.
     <string name="preferred_locale">Lingua interfaccia</string>
 
 
-    <string name="unit_of_length_descr">Cambia le unità di misura di lunghezza</string>
+    <string name="unit_of_length_descr">Cambia l\'unità di misura della distanza.</string>
     <string name="unit_of_length">Unità di misura di lunghezza</string>
     <string name="si_mi_feet">Miglia/piedi</string>
     <string name="si_mi_yard">Miglia/iarde</string>
@@ -2873,7 +2873,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="tap_on_map_to_hide_interface">Modalità a schermo intero</string>
     
     <string name="mark_passed">Marcatore superato</string>
-    <string name="import_gpx_file_description">può essere importato come preferito oppure come file GPX.</string>
+    <string name="import_gpx_file_description">può essere importato come Preferito oppure come file GPX.</string>
     <string name="appearance_on_the_map">Visualizzazione nella mappa</string>
     <string name="add_track_to_markers_descr">Scegli una traccia per aggiornare i suoi punti intermedi ai marcatori.</string>
     <string name="add_favourites_group_to_markers_descr">Scegli una categoria di Preferiti da aggiungere ai marcatori.</string>
@@ -2921,7 +2921,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n • La mappa mostra i percorsi pedonali ed escursionistici 
 \n • Wikipedia può dirti molto nelle visite alle città nel tuo linguaggio preferito 
 \n • Le fermate dei trasporti pubblici (bus, tram, treni), inclusi i nomi delle linee, aiutano a navigare in una nuova città 
-\n • Nella navigazione GPS nella modalità pedone costruisce il tuo percorso usando i percorsi pedonali 
+\n • La navigazione GPS nella modalità pedone costruisce il tuo percorso usando i percorsi pedonali 
 \n • Carica e segui un percorso GPX o registrarne uno e condividilo</string>
     <string name="what_is_here">Cosa c\'è qui:</string>
     <string name="parked_at">parcheggiato alle</string>
@@ -3192,7 +3192,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="start_search_from_city">Inizia dalla scelta della città</string>
     <string name="shared_string_restore">Ripristina</string>
     <string name="keep_passed_markers">Tenere i marcatori superati sulla mappa</string>
-    <string name="more_transport_on_stop_hint">C\'è più trasporto su questa fermata.</string>
+    <string name="more_transport_on_stop_hint">Ci sono più trasporti pubblici in questa fermata.</string>
     <string name="keep_passed_markers_descr">I marcatori aggiunti come gruppo di Preferiti o come punti GPX marcati come Superati rimarranno sulla mappa. Se il gruppo non è attivo i marcatori spariranno dalla mappa.</string>
     <string name="rendering_value_black_name">Nero</string>
     <string name="markers_remove_dialog_msg">Eliminare il marcatore \'%s\'\?</string>
@@ -3217,4 +3217,38 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="mapillary_menu_title_pano">Mostra solo immagini a 360°</string>
     <string name="shared_string_launch">Lancia</string>
     <string name="lang_gn_py">Guaraní</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Capacità</string>
+    <string name="shared_string_width">Larghezza</string>
+    <string name="shared_string_height">Altezza</string>
+    <string name="swap_start_and_destination">Inverti partenza e destinazione</string>
+    <string name="add_destination_point">Aggiungi destinazione</string>
+    <string name="add_intermediate_point">Aggiungi punto intermedio</string>
+    <string name="add_start_point">Aggiungi punto di partenza</string>
+    <string name="intermediate_waypoint">Punto intermedio: %1$s</string>
+    <string name="waypoints">Punto di passaggio: %1$s</string>
+    <string name="transfers">trasferimenti: %1$s</string>
+    <string name="on_foot">a piedi: %1$s</string>
+    <string name="route_way">Via: %1$s</string>
+    <string name="points_of_interests">Punti d\'interesse(PDI)</string>
+    <string name="waiting_for_route_calculation">In attesa del calcolo del percorso</string>
+    <string name="app_mode_public_transport">Trasporto pubblico</string>
+    <string name="avoid_roads_descr">Scegli la strada dalla mappa o dalla lista sotto che vuoi evitare nella navigazione:</string>
+    <string name="show_along_the_route">Mostra lungo il percorso</string>
+    <string name="simulate_navigation">Simula la navigazione</string>
+    <string name="choose_track_file_to_follow">"Scegli il file della traccia da seguire "</string>
+    <string name="voice_announcements">Annunci vocali</string>
+    <string name="intermediate_destinations">Destinazioni intermedie: %1$s</string>
+    <string name="arrive_at_time">Arrivo alle %1$s</string>
+    <string name="quick_action_switch_day_night_descr">Toccando questo bottone si cambierà fra la modalità Notte e Giorno per OsmAnd</string>
+    <string name="quick_action_switch_day_mode">Modalità Giorno</string>
+    <string name="quick_action_switch_night_mode">Modalità Notte</string>
+    <string name="quick_action_day_night_switch_mode">Cambio modalità Giorno/Notte</string>
+    <string name="route_class_stat_container">Tipo</string>
+    <string name="route_surface_stat_container">Superficie</string>
+    <string name="route_smoothness_stat_container">Ruvidezza</string>
+    <string name="route_steepness_stat_container">Ripidezza</string>
+    <string name="run_full_osmand_msg">Stai utilizzano {0} Mappa/e che sono sviluppate da OsmAnd. Vuoi lanciare la versione completa di OsmAnd\?</string>
+    <string name="run_full_osmand_header">Lanciare OsmAnd\?</string>
 </resources>
