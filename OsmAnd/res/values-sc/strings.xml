@@ -3206,4 +3206,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="voice_announcements">Annùntzios vocales</string>
     <string name="intermediate_destinations">Destinatziones intermèdias: %1$s</string>
     <string name="arrive_at_time">Arribada a sas %1$s</string>
+    <string name="route_class_stat_container">Classe</string>
+    <string name="route_surface_stat_container">Superfìtzie</string>
+    <string name="route_smoothness_stat_container">Uniformidade</string>
+    <string name="route_steepness_stat_container">Ratesa</string>
 </resources>
