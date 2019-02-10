@@ -3038,4 +3038,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_capacity">Enhaveco</string>
     <string name="shared_string_width">Larĝo</string>
     <string name="shared_string_height">Alto</string>
+    <string name="route_class_stat_container">Kategorio</string>
+    <string name="route_surface_stat_container">Pavimo</string>
+    <string name="route_smoothness_stat_container">Glateco</string>
+    <string name="route_steepness_stat_container">Klineco</string>
 </resources>

@@ -3159,4 +3159,8 @@
     <string name="shared_string_capacity">נפח</string>
     <string name="shared_string_width">רוחב</string>
     <string name="shared_string_height">גובה</string>
+    <string name="route_class_stat_container">מחלקה</string>
+    <string name="route_surface_stat_container">משטח</string>
+    <string name="route_smoothness_stat_container">רכות</string>
+    <string name="route_steepness_stat_container">תלילות</string>
 </resources>

@@ -3244,4 +3244,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Tryb Dzienny</string>
     <string name="quick_action_switch_night_mode">Tryb Nocny</string>
     <string name="quick_action_day_night_switch_mode">Zmień tryb Dzienny/Nocny</string>
+    <string name="route_class_stat_container">Kategoria</string>
+    <string name="route_surface_stat_container">Powierzchnia</string>
+    <string name="route_smoothness_stat_container">Gładkość</string>
+    <string name="route_steepness_stat_container">Nachylenie</string>
 </resources>
