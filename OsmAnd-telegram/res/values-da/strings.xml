@@ -185,4 +185,16 @@
     <string name="end_date">Slutdato</string>
     <string name="start_date">Startdato</string>
     <string name="timeline">Tidslinje</string>
+    <string name="please_update_osmand">Opdater OsmAnd for at se data på kortet</string>
+    <string name="shared_string_update">Opdater</string>
+    <string name="gps_points_in_buffer">sendt (%1$d i buffer)</string>
+    <string name="points_size">%1$s punkter</string>
+    <string name="shared_string_date">Dato</string>
+    <string name="shared_string_collected">Indsamlet</string>
+    <string name="gps_points">GPS punkter</string>
+    <string name="shared_string_sent">Sendt</string>
+    <string name="monitoring_is_enabled">Overvågning er aktiveret</string>
+    <string name="monitoring_is_disabled">Overvågning er deaktiveret</string>
+    <string name="time_on_the_move">tid i bevægelse</string>
+    <string name="timeline_description">Aktiver overvågning for at indsamle bevægelsesdata i baggrunden.</string>
 </resources>
