@@ -3131,8 +3131,8 @@
     <string name="show_along_the_route">Vis langs ruten</string>
     <string name="simulate_navigation">Simuler navigering</string>
     <string name="choose_track_file_to_follow">Velg sporfil å følge</string>
-    <string name="voice_announcements">Stemmeveivisning</string>
-    <string name="intermediate_destinations">Mellomliggende mål: %1$s</string>
+    <string name="voice_announcements">Talemeldinger</string>
+    <string name="intermediate_destinations">Mellomstasjoner: %1$s</string>
     <string name="arrive_at_time">Ankom klokken %1$s</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
@@ -3142,5 +3142,5 @@
     <string name="route_class_stat_container">Klasse</string>
     <string name="route_surface_stat_container">Overflate</string>
     <string name="route_smoothness_stat_container">Jevnhet</string>
-    <string name="route_steepness_stat_container">Bratthet</string>
+    <string name="route_steepness_stat_container">Stigning</string>
 </resources>
