@@ -6,13 +6,13 @@ import android.os.Parcelable;
 public class CopyFileParams implements Parcelable {
 	private String filename;
 	private byte[] filePartData;
-	private long copyStartTime;
+	private int id;
 	private boolean isTransmitComplete;
 
-	public CopyFileParams(String filename, byte[] filePartData, long copyStartTime, boolean isTransmitComplete) {
+	public CopyFileParams(String filename, byte[] filePartData, int id, boolean isTransmitComplete) {
 		this.filename = filename;
 		this.filePartData = filePartData;
-		this.copyStartTime = copyStartTime;
+		this.id = id;
 		this.isTransmitComplete = isTransmitComplete;
 	}
 
@@ -25,8 +25,8 @@ public class CopyFileParams implements Parcelable {
 		return filePartData;
 	}
 
-	public long getCopyStartTime() {
-		return copyStartTime;
+	public int getId() {
+		return id;
 	}
 
 	public boolean isTransmitComplete() {return  isTransmitComplete; }
@@ -35,7 +35,7 @@ public class CopyFileParams implements Parcelable {
 	protected CopyFileParams(Parcel in) {
 		filename = in.readString();
 		filePartData = in.createByteArray();
-		copyStartTime = in.readLong();
+		id = in.readInt();
 		isTransmitComplete = in.readByte() != 0;
 	}
 
@@ -61,13 +61,9 @@ public class CopyFileParams implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(filename);
 		dest.writeByteArray(filePartData);
-		dest.writeLong(copyStartTime);
+		dest.writeInt(id);
 		dest.writeByte((byte) (isTransmitComplete ? 1 : 0));
 	}
 
-	@Override
-	public String toString() {
-		return "Filename: " + filename + ", filePartData size = " +
-			filePartData.length + ", startTime: " + copyStartTime + ", isTransmitComplete: "+ isTransmitComplete;
-	}
+
 }

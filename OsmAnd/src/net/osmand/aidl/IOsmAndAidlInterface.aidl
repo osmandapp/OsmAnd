@@ -181,5 +181,5 @@ interface IOsmAndAidlInterface {
 
     boolean getBitmapForGpx(in CreateGpxBitmapParams file, IOsmAndAidlCallback callback);
 
-    boolean copyFile(in CopyFileParams filePart);
+    int copyFile(in CopyFileParams filePart);
 }

@@ -848,9 +848,12 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean copyFile(CopyFileParams copyFileParams) {
+		public int copyFile(CopyFileParams copyFileParams) {
 			OsmandAidlApi api = getApi("copyFile");
-			return api != null && api.copyFile(copyFileParams);
+			if (api==null) {
+				return -5;
+			}
+			return api.copyFile(copyFileParams);
 		}
 	};
 }
