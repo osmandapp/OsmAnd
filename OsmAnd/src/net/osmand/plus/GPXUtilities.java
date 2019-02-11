@@ -1639,34 +1639,7 @@ public class GPXUtilities {
 							((GPXExtensions) parse).getExtensionsToWrite().put(er.key.toLowerCase(), er.result);
 
 						} else if (tag.toLowerCase().equals("routepointextension")) {
-							Track track = new Track();
-							res.tracks.add(track);
-							parserState.push(track);
-						}
-
-						if (tag.toLowerCase().equals("subclass")) {
-								TrkSegment trkSeg = new TrkSegment();
-								((Track) parse).segments.add(trkSeg);
-								parserState.push(trkSeg);
-						}
-
-						if(parse instanceof TrkSegment) {
-							if (tag.equals("rpt")) {
-								ExtensionResult er = readExtensionsText(parser, tag, tok);
-								WptPt wptPt = new WptPt(er.lat, er.lon,0,0,0,0);
-								((TrkSegment) parse).points.add(wptPt);
-								parserState.push(wptPt);}
-
-
-//	private static WptPt parseWptAttributes(XmlPullParser parser) {
-//		WptPt wpt = new WptPt();
-//		try {
-//			wpt.lat = Double.parseDouble(parser.getAttributeValue("", "lat")); //$NON-NLS-1$ //$NON-NLS-2$
-//			wpt.lon = Double.parseDouble(parser.getAttributeValue("", "lon")); //$NON-NLS-1$ //$NON-NLS-2$
-//		} catch (NumberFormatException e) {
-//		}
-//		return wpt;
-//	}
+							parseRoutePointExtension(parser, res);
 
 						} else {
 							String value = readText(parser, tag);
@@ -1679,7 +1652,7 @@ public class GPXUtilities {
 								}
 							}
 						}
-					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
+					} else if (parse != null && tag.equals("extensions") ) {
 						extensionReadMode = true;
 					} else {
 						if (parse instanceof GPXFile) {
@@ -1861,6 +1834,20 @@ public class GPXUtilities {
 		return res;
 	}
 
+	private static GPXFile parseRoutePointExtension(XmlPullParser parser, GPXFile res){
+		int tok;
+		try{
+			while (!parser.getName().equals("RoutePointExtension") && (tok = parser.next()) != XmlPullParser.END_TAG) {
+				if (tok==XmlPullParser.START_TAG) {
+					if ()
+				}
+			}
+		} catch (Exception e) {
+
+		}
+		return res;
+	}
+
 	private static Reader getUTF8Reader(InputStream f) throws IOException {
 		BufferedInputStream bis = new BufferedInputStream(f);
 		assert bis.markSupported();
@@ -1876,6 +1863,11 @@ public class GPXUtilities {
 		}
 		return new InputStreamReader(bis, "UTF-8");
 	}
+
+//	private static WptPt parseWptFromExtension(XmlPullParser parser) {
+//		WptPt wpt = new WptPt();
+//
+//	}
 
 	private static WptPt parseWptAttributes(XmlPullParser parser) {
 		WptPt wpt = new WptPt();
