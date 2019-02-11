@@ -3068,4 +3068,8 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_capacity">Capacidade</string>
     <string name="shared_string_width">Largura</string>
     <string name="shared_string_height">Altura</string>
+    <string name="route_class_stat_container">Classe</string>
+    <string name="route_surface_stat_container">Superfície</string>
+    <string name="route_smoothness_stat_container">Suaviza</string>
+    <string name="route_steepness_stat_container">Inclinação</string>
 </resources>
