@@ -1976,7 +1976,10 @@ public class OsmandAidlApi {
 	}
 
 	private boolean copyFileImpl(CopyFileParams fileParams, File file, String destination){
-		LOG.debug(fileParams.toString());
+
+		if (fileParams.getFilePartData().length > 256*1024) {
+			return false;
+		}
 
 		FileOutputStream fos;
 		String key = fileParams.getFilename() + fileParams.getCopyStartTime();
@@ -1989,11 +1992,11 @@ public class OsmandAidlApi {
 					file.renameTo(app.getAppPath(destination + fileParams.getFilename()));
 					return true;
 
-				} else if (file.length() == fileParams.getSentSize()) {
+				} else {
 					fos.write(fileParams.getFilePartData());
 					return true;
 				}
-				return false;
+
 			} else {
 				file.getParentFile().mkdirs();
 				fos = new FileOutputStream(file, true);
