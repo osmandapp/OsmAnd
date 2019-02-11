@@ -3208,4 +3208,16 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Eguneko modua</string>
     <string name="quick_action_switch_night_mode">Gaueko modua</string>
     <string name="quick_action_day_night_switch_mode">Txandakatu eguneko eta gaueko moduen artean</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Edukiera</string>
+    <string name="shared_string_width">Zabalera</string>
+    <string name="shared_string_height">Altuera</string>
+    <string name="waiting_for_route_calculation">Ibilbidea kalkulatu bitartean zain</string>
+    <string name="show_along_the_route">Erakutsi ibilbidean zehar</string>
+    <string name="choose_track_file_to_follow">Hautatu lorratz fitxategia jarraitzeko</string>
+    <string name="route_class_stat_container">Klasea</string>
+    <string name="route_surface_stat_container">Gainazala</string>
+    <string name="route_smoothness_stat_container">Lausotasuna</string>
+    <string name="route_steepness_stat_container">Aldapa</string>
 </resources>
