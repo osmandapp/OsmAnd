@@ -153,7 +153,7 @@ object TelegramUiHelper {
 		chat: TdApi.Chat,
 		message: TdApi.Message
 	): LocationItem? {
-		val user = helper.getUser(message.senderUserId) ?: return null
+		val user = helper.getUser(OsmandLocationUtils.getSenderMessageId(message)) ?: return null
 		val content = OsmandLocationUtils.parseMessageContent(message, helper)
 		return LocationItem().apply {
 			chatId = chat.id
@@ -167,7 +167,7 @@ object TelegramUiHelper {
 			photoPath = helper.getUserPhotoPath(user)
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
-			userId = message.senderUserId
+			userId = OsmandLocationUtils.getSenderMessageId(message)
 			lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 		}
 	}
@@ -199,7 +199,7 @@ object TelegramUiHelper {
 		chat: TdApi.Chat,
 		message: TdApi.Message
 	): ChatItem? {
-		val user = helper.getUser(message.senderUserId) ?: return null
+		val user = helper.getUser(OsmandLocationUtils.getSenderMessageId(message)) ?: return null
 		val content = OsmandLocationUtils.parseMessageContent(message, helper)
 		return ChatItem().apply {
 			chatId = chat.id
@@ -218,7 +218,7 @@ object TelegramUiHelper {
 			}
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
-			userId = message.senderUserId
+			userId = OsmandLocationUtils.getSenderMessageId(message)
 			privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
 			chatWithBot = helper.isBot(userId)
 			lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)

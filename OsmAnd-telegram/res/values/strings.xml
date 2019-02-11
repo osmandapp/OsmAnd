@@ -1,4 +1,8 @@
 <resources>
+	<string name="received_gps_points">Received GPX points: %1$s</string>
+	<string name="shared_string_appearance">Appearance</string>
+	<string name="show_gps_points">Show GPS points</string>
+	<string name="show_gps_points_descr">Show quantity of collected and sent GPS points.</string>
 	<string name="please_update_osmand">Please update OsmAnd to view data on the map</string>
 	<string name="shared_string_update">Update</string>
 	<string name="gps_points_in_buffer">sent (%1$d in buffer)</string>

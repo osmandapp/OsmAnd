@@ -75,6 +75,22 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			}
 		}
 
+		container = mainView.findViewById<ViewGroup>(R.id.gps_points_container)
+		inflater.inflate(R.layout.item_with_descr_and_right_switch, container, false).apply {
+			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_connect))
+			findViewById<TextView>(R.id.title).text = getText(R.string.show_gps_points)
+			findViewById<TextView>(R.id.description).text = getText(R.string.show_gps_points_descr)
+			val switcher = findViewById<Switch>(R.id.switcher).apply {
+				isChecked = app.settings.showGpsPoints
+			}
+			setOnClickListener {
+				val checked = !app.settings.showGpsPoints
+				app.settings.showGpsPoints = checked
+				switcher.isChecked = checked
+			}
+			container.addView(this)
+		}
+
 		shareAsDescription = mainView.findViewById<TextView>(R.id.share_as_description).apply {
 			text = getText(R.string.share_location_as_description)
 			setOnClickListener {

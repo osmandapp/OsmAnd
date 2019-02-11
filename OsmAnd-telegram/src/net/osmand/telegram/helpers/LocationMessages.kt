@@ -56,6 +56,10 @@ class LocationMessages(val app: TelegramApplication) {
 		return dbHelper.getIngoingUserLocations(start, end)
 	}
 
+	fun getIngoingUserLocationsInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): UserLocations? {
+		return dbHelper.getIngoingUserLocationsInChat(userId, chatId, deviceName, start, end)
+	}
+
 	fun getMessagesForUserInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getMessagesForUserInChat(userId, chatId,deviceName, start, end)
 	}
@@ -77,9 +81,9 @@ class LocationMessages(val app: TelegramApplication) {
 		val type = OsmandLocationUtils.getMessageType(message)
 		val content = OsmandLocationUtils.parseMessageContent(message, app.telegramHelper)
 		val deviceName = if (content is OsmandLocationUtils.MessageOsmAndBotLocation) content.deviceName else ""
-		val newItem = LocationHistoryPoint(message.senderUserId, message.chatId, type, deviceName)
+		val newItem = LocationHistoryPoint(OsmandLocationUtils.getSenderMessageId(message), message.chatId, type, deviceName)
 		val previousMessageLatLon = lastLocationPoints[newItem]
-		val locationMessage = OsmandLocationUtils.createLocationMessage(message, app.telegramHelper, content, previousMessageLatLon)
+		val locationMessage = OsmandLocationUtils.createLocationMessage(message, content, previousMessageLatLon)
 		if (locationMessage != null) {
 			dbHelper.addLocationMessage(locationMessage)
 			lastLocationPoints[newItem] = LatLon(locationMessage.lat, locationMessage.lon)
@@ -217,6 +221,35 @@ class LocationMessages(val app: TelegramApplication) {
 				close()
 			}
 			return res
+		}
+
+		internal fun getIngoingUserLocationsInChat(userId: Int, chatId: Long, deviceName: String,start: Long, end: Long): UserLocations? {
+			val userLocationsMap: MutableMap<Int, MutableList<UserTrkSegment>> = mutableMapOf()
+			val userLocations = UserLocations(userId,chatId,deviceName,userLocationsMap)
+			val whereDeviceQuery = if (deviceName.isNotEmpty()) "AND $COL_DEVICE_NAME = ?" else ""
+			val args = if (deviceName.isNotEmpty()) arrayOf(userId.toString(), chatId.toString(), deviceName) else arrayOf(userId.toString(), chatId.toString())
+			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_CHAT_ID = ? $whereDeviceQuery AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_TYPE DESC, $COL_TIME ", args)?.apply {
+				if (moveToFirst()) {
+					var segment: UserTrkSegment? = null
+					do {
+						val locationMessage = readLocationMessage(this@apply)
+						if (segment == null || segment.type != locationMessage.type || locationMessage.time - segment.maxTime > 30 * 1000 * 60) {
+							segment = UserTrkSegment(mutableListOf(), 0.0, locationMessage.type, locationMessage.time, locationMessage.time)
+							if (userLocationsMap[segment.type] == null) {
+								userLocationsMap[segment.type] = mutableListOf<UserTrkSegment>()
+							}
+							userLocationsMap[segment.type]?.add(segment)
+						}
+						if (segment.points.size > 0) {
+							segment.distance += MapUtils.getDistance(locationMessage.lat, locationMessage.lon, segment.points.last().lat, segment.points.last().lon)
+						}
+						segment.maxTime = locationMessage.time
+						segment.points.add(locationMessage)
+					} while (moveToNext())
+				}
+				close()
+			}
+			return userLocations
 		}
 
 		internal fun getMessagesForUserInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
