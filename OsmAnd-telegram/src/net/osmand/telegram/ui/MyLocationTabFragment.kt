@@ -719,7 +719,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				holder.gpsPointsSent?.apply {
 					if (shareInfo != null) {
-						text = getString(R.string.gps_points_in_buffer, shareInfo.pendingTdLib + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId))
+						val bufferedPoints =
+							if (app.settings.shareTypeValue == SHARE_TYPE_MAP_AND_TEXT || app.settings.shareTypeValue == SHARE_TYPE_TEXT) {
+								shareInfo.pendingTdLibText + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_TEXT)
+							} else {
+								shareInfo.pendingTdLibMap + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_MAP)
+							}
+						text = getString(R.string.gps_points_in_buffer, bufferedPoints)
 					}
 				}
 			}
