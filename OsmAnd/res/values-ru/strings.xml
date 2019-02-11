@@ -3054,4 +3054,5 @@
     <string name="transfers">трансферы: %1$s</string>
     <string name="on_foot">пешком: %1$s</string>
     <string name="show_along_the_route">Показывать вдоль маршрута</string>
+    <string name="route_surface_stat_container">Поверхность</string>
 </resources>
