@@ -239,8 +239,9 @@ class TimelineTabFragment : Fragment() {
 					holder.locationAndDescrContainer?.visibility = View.GONE
 					holder.distanceAndPointsContainer?.visibility = View.VISIBLE
 					holder.distanceImage?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_distance_16dp))
-					val point = if (groupDescrRowVisible) " • " else ""
-					holder.distanceAndPointsTitle?.text = "$distance (${getString(R.string.points_size, trackData.points)}) $point "
+					val bullet = if (groupDescrRowVisible) " • " else ""
+					val points = if (app.settings.showGpsPoints) "(${getString(R.string.points_size, trackData.points)})" else ""
+					holder.distanceAndPointsTitle?.text = "$distance $points $bullet "
 					holder.userRow?.setOnClickListener {
 						childFragmentManager.also {
 							UserGpxInfoFragment.showInstance(it, item.userId, item.chatId, userLocations.deviceName ,trackData.minTime, trackData.maxTime)
@@ -263,7 +264,7 @@ class TimelineTabFragment : Fragment() {
 				if (uiTrackData.minTime == 0L) {
 					uiTrackData.minTime = it.minTime
 				}
-				uiTrackData.dist += it.distance.toFloat();
+				uiTrackData.dist += it.distance.toFloat()
 				uiTrackData.points += it.points.size
 				uiTrackData.maxTime = it.maxTime
 			}

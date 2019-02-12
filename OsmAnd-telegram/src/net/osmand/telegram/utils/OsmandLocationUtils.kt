@@ -61,10 +61,11 @@ object OsmandLocationUtils {
 		if (message.replyMarkup is TdApi.ReplyMarkupInlineKeyboard) {
 			val replyMarkup = message.replyMarkup as TdApi.ReplyMarkupInlineKeyboard
 			try {
-				if (replyMarkup.rows[0].size > 1) {
-					deviceName = replyMarkup.rows[0][1].text.split("\\s".toRegex())[1]
-				} else if (message.content is TdApi.MessageText) {
-					deviceName = (message.content as TdApi.MessageText).text.text.lines().firstOrNull()?.removePrefix(DEVICE_PREFIX) ?: ""
+				val content = message.content
+				when {
+					replyMarkup.rows[0].size > 1 -> deviceName = replyMarkup.rows[0][1].text.split("\\s".toRegex())[1]
+					content is TdApi.MessageText -> deviceName = content.text.text.lines().firstOrNull()?.removePrefix(DEVICE_PREFIX) ?: ""
+					content is MessageOsmAndBotLocation -> deviceName = content.deviceName
 				}
 			} catch (e: Exception) {
 
@@ -89,13 +90,22 @@ object OsmandLocationUtils {
 		return res
 	}
 
+	fun getSenderMessageId(message: TdApi.Message): Int {
+		val forwardInfo = message.forwardInfo
+		return if (forwardInfo != null && forwardInfo is TdApi.MessageForwardedFromUser) {
+			forwardInfo.senderUserId
+		} else {
+			message.senderUserId
+		}
+	}
+
 	fun parseMessage(message: TdApi.Message, helper: TelegramHelper, previousMessageLatLon: LatLon?): LocationMessage? {
 		val parsedContent = parseMessageContent(message, helper)
-		return createLocationMessage(message, helper, parsedContent, previousMessageLatLon)
+		return createLocationMessage(message, parsedContent, previousMessageLatLon)
 	}
 
 	fun parseMessageContent(message: TdApi.Message, helper: TelegramHelper): MessageLocation? {
-		val senderUserId = helper.getSenderMessageId(message)
+		val senderUserId = getSenderMessageId(message)
 		val fromBot = helper.isOsmAndBot(senderUserId)
 		val viaBot = helper.isOsmAndBot(message.viaBotUserId)
 		return when (message.content) {
@@ -106,11 +116,11 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun createLocationMessage(message: TdApi.Message, helper: TelegramHelper, content:MessageLocation?, previousMessageLatLon: LatLon?):LocationMessage?{
+	fun createLocationMessage(message: TdApi.Message, content:MessageLocation?, previousMessageLatLon: LatLon?):LocationMessage?{
 		if (content == null) {
 			return null
 		}
-		val senderUserId = helper.getSenderMessageId(message)
+		val senderUserId = getSenderMessageId(message)
 		val messageType = getMessageType(message)
 		val distanceFromPrev = if (previousMessageLatLon != null) MapUtils.getDistance(previousMessageLatLon, content.lat, content.lon) else 0.0
 		val deviceName = if (content is MessageOsmAndBotLocation) content.deviceName else ""

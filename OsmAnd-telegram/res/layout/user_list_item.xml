@@ -15,7 +15,8 @@
 		<LinearLayout
 			android:id="@+id/main_view"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/list_item_height"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/list_item_height"
 			android:layout_marginBottom="@dimen/list_item_bottom_margin"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical">
@@ -103,6 +104,28 @@
 						android:textSize="@dimen/list_item_description_text_size"
 						app:typeface="@string/font_roboto_regular"
 						tools:text="Live: 1 • All: 36"/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/received_gps_points_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:visibility="gone"
+					tools:visibility="visible">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/received_gps_points_description"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?attr/android:textColorSecondary"
+						android:textSize="@dimen/list_item_description_text_size"
+						app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
+						app:typeface="@string/font_roboto_regular"
+						tools:text="@string/received_gps_points" />
 
 				</LinearLayout>
 

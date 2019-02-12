@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -14,11 +13,11 @@
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/image_button_padding"
 		android:layout_marginEnd="@dimen/content_padding_big"
 		android:layout_marginRight="@dimen/content_padding_big"
-		android:layout_marginTop="@dimen/image_button_padding"
 		tools:src="@drawable/ic_action_live_now"
-		tools:tint="@color/icon_light"/>
+		tools:tint="@color/icon_light" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -36,7 +35,7 @@
 			android:textSize="@dimen/list_item_title_text_size"
 			app:firstBaselineToTopHeight="25sp"
 			app:typeface="@string/font_roboto_regular"
-			tools:text="Some title"/>
+			tools:text="Some title" />
 
 		<net.osmand.telegram.ui.views.TextViewEx
 			android:id="@+id/description"
@@ -47,17 +46,17 @@
 			app:firstBaselineToTopHeight="14sp"
 			app:lastBaselineToBottomHeight="16sp"
 			app:typeface="@string/font_roboto_regular"
-			tools:text="Some long description"/>
+			tools:text="Some long description" />
 
 	</LinearLayout>
 
-	<net.osmand.telegram.ui.views.TextViewEx
-		android:id="@+id/value"
+	<Switch
+		android:id="@+id/switcher"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
-		android:textColor="?attr/ctrl_active_color"
-		app:typeface="@string/font_roboto_medium"
-		tools:text="Value"/>
+		android:background="@null"
+		android:clickable="false"
+		android:focusable="false" />
 
 </LinearLayout>

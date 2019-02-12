@@ -123,7 +123,7 @@ object TelegramUiHelper {
 	): ChatItem? {
 		val content = OsmandLocationUtils.parseMessageContent(message, helper)
 		return when (content) {
-			is MessageOsmAndBotLocation -> botMessageToChatItem(helper, chat, content)
+			is MessageOsmAndBotLocation -> botMessageToChatItem(helper, chat, content, message)
 			is TdApi.MessageLocation -> locationMessageToChatItem(helper, chat, message)
 			is MessageUserLocation -> locationMessageToChatItem(helper, chat, message)
 			else -> null
@@ -153,7 +153,7 @@ object TelegramUiHelper {
 		chat: TdApi.Chat,
 		message: TdApi.Message
 	): LocationItem? {
-		val user = helper.getUser(message.senderUserId) ?: return null
+		val user = helper.getUser(OsmandLocationUtils.getSenderMessageId(message)) ?: return null
 		val content = OsmandLocationUtils.parseMessageContent(message, helper)
 		return LocationItem().apply {
 			chatId = chat.id
@@ -167,7 +167,7 @@ object TelegramUiHelper {
 			photoPath = helper.getUserPhotoPath(user)
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
-			userId = message.senderUserId
+			userId = OsmandLocationUtils.getSenderMessageId(message)
 			lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 		}
 	}
@@ -175,10 +175,11 @@ object TelegramUiHelper {
 	private fun botMessageToChatItem(
 		helper: TelegramHelper,
 		chat: TdApi.Chat,
-		content: MessageOsmAndBotLocation
-	): ChatItem? {
+		content: MessageOsmAndBotLocation,
+		message: TdApi.Message): ChatItem? {
 		return if (content.isValid()) {
 			ChatItem().apply {
+				userId = OsmandLocationUtils.getSenderMessageId(message)
 				chatId = chat.id
 				chatTitle = chat.title
 				name = content.deviceName
@@ -199,7 +200,7 @@ object TelegramUiHelper {
 		chat: TdApi.Chat,
 		message: TdApi.Message
 	): ChatItem? {
-		val user = helper.getUser(message.senderUserId) ?: return null
+		val user = helper.getUser(OsmandLocationUtils.getSenderMessageId(message)) ?: return null
 		val content = OsmandLocationUtils.parseMessageContent(message, helper)
 		return ChatItem().apply {
 			chatId = chat.id
@@ -218,7 +219,7 @@ object TelegramUiHelper {
 			}
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
-			userId = message.senderUserId
+			userId = OsmandLocationUtils.getSenderMessageId(message)
 			privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
 			chatWithBot = helper.isBot(userId)
 			lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)

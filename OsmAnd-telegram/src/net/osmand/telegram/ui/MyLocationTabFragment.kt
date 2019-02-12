@@ -13,15 +13,21 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
-import net.osmand.telegram.*
+import net.osmand.telegram.ADDITIONAL_ACTIVE_TIME_VALUES_SEC
+import net.osmand.telegram.R
+import net.osmand.telegram.SHARE_TYPE_MAP
+import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.FontCache
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
+import net.osmand.telegram.ui.views.CustomTypefaceSpan
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import org.drinkless.td.libcore.telegram.TdApi
@@ -695,44 +701,42 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					}
 				}
 
-				holder.stopSharingDescr?.apply {
-					visibility = getStopSharingVisibility(expiresIn)
-					text = getText(R.string.expire_at)
-				}
-
-				holder.stopSharingFirstPart?.apply {
-					visibility = getStopSharingVisibility(expiresIn)
-					text = OsmandFormatter.getFormattedTime(expiresIn * 1000)
-				}
-
-				holder.stopSharingSecondPart?.apply {
-					visibility = getStopSharingVisibility(expiresIn)
-					text = "(${getString(
-						R.string.in_time,
-						OsmandFormatter.getFormattedDuration(context!!, expiresIn, true)
-					)})"
-				}
-				holder.gpsPointsCollected?.apply {
-					if (shareInfo != null) {
-						text = " ${shareInfo.sentMessages}"
+				holder.sharingExpiresLine?.apply {
+					visibility = if (expiresIn > 0) View.VISIBLE else View.GONE
+					val description = SpannableStringBuilder(getText(R.string.expire_at))
+					val typeface = FontCache.getRobotoMonoBold(app)
+					val start = description.length
+					description.append(" ${OsmandFormatter.getFormattedTime(expiresIn * 1000)} ")
+					if (typeface != null) {
+						description.setSpan(CustomTypefaceSpan(typeface), start, description.length, 0)
 					}
+					description.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), start, description.length, 0)
+					description.append((getString(R.string.in_time, OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))))
+					text = description
 				}
-				holder.gpsPointsSent?.apply {
+
+				holder.gpsPointsLine?.apply {
+					visibility = if (app.settings.showGpsPoints && shareInfo != null) View.VISIBLE else View.GONE
 					if (shareInfo != null) {
-						val bufferedPoints =
-							if (app.settings.shareTypeValue == SHARE_TYPE_MAP_AND_TEXT || app.settings.shareTypeValue == SHARE_TYPE_TEXT) {
-								shareInfo.pendingTdLibText + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_TEXT)
-							} else {
-								shareInfo.pendingTdLibMap + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_MAP)
-							}
-						text = getString(R.string.gps_points_in_buffer, bufferedPoints)
+						val description = SpannableStringBuilder(getText(R.string.gps_points))
+						val typeface = FontCache.getRobotoMonoBold(app)
+						val bufferedPoints = if (app.settings.shareTypeValue == SHARE_TYPE_MAP) {
+							shareInfo.pendingTdLibMap + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_MAP)
+						} else {
+							shareInfo.pendingTdLibText + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_TEXT)
+						}
+						val start = description.length
+						description.append(" ${shareInfo.sentMessages} ")
+						if (typeface != null) {
+							description.setSpan(CustomTypefaceSpan(typeface), start, description.length, 0)
+						}
+						description.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), start, description.length, 0)
+						description.append(getString(R.string.gps_points_in_buffer, bufferedPoints))
+						text = description
 					}
 				}
 			}
 		}
-
-		private fun getStopSharingVisibility(expiresIn: Long) =
-			if (expiresIn > 0) View.VISIBLE else View.GONE
 
 		private fun removeItem(chat: TdApi.Object) {
 			items.remove(chat)
@@ -762,11 +766,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		inner class SharingChatViewHolder(val view: View) : BaseViewHolder(view) {
 			val descriptionDuration: TextView? = view.findViewById(R.id.duration)
 			val switcher: Switch? = view.findViewById(R.id.switcher)
-			val stopSharingDescr: TextView? = view.findViewById(R.id.stop_in)
-			val stopSharingFirstPart: TextView? = view.findViewById(R.id.ending_in_first_part)
-			val stopSharingSecondPart: TextView? = view.findViewById(R.id.ending_in_second_part)
-			val gpsPointsCollected: TextView? = view.findViewById(R.id.gps_points_collected)
-			val gpsPointsSent: TextView? = view.findViewById(R.id.gps_points_in_buffer_txt)
+			val sharingExpiresLine: TextView? = view.findViewById(R.id.expires_line)
+			val gpsPointsLine: TextView? = view.findViewById(R.id.gps_points_line)
 		}
 	}
 

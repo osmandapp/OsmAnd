@@ -15,6 +15,7 @@ import net.osmand.telegram.utils.OsmandApiUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
+import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import org.json.JSONArray
 import org.json.JSONException
@@ -82,6 +83,8 @@ private const val BATTERY_OPTIMISATION_ASKED = "battery_optimisation_asked"
 
 private const val MONITORING_ENABLED = "monitoring_enabled"
 
+private const val SHOW_GPS_POINTS = "show_gps_points"
+
 private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
 private const val WAITING_TDLIB_TIME = 30 // 2 seconds
 
@@ -118,6 +121,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var batteryOptimisationAsked = false
 
 	var monitoringEnabled = false
+
+	var showGpsPoints = false
 
 	init {
 		updatePrefs()
@@ -259,7 +264,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun updateShareInfo(message: TdApi.Message) {
 		val shareInfo = shareChatsInfo[message.chatId]
 		val content = message.content
-		val isOsmAndBot = app.telegramHelper.isOsmAndBot(message.senderUserId) || app.telegramHelper.isOsmAndBot(message.viaBotUserId)
+		val isOsmAndBot = app.telegramHelper.isOsmAndBot(OsmandLocationUtils.getSenderMessageId(message)) || app.telegramHelper.isOsmAndBot(message.viaBotUserId)
 		if (shareInfo != null) {
 			when (content) {
 				is TdApi.MessageLocation -> {
@@ -513,6 +518,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putBoolean(MONITORING_ENABLED, monitoringEnabled)
 
+		edit.putBoolean(SHOW_GPS_POINTS, showGpsPoints)
+
 		val jArray = convertShareChatsInfoToJson()
 		if (jArray != null) {
 			edit.putString(SHARE_CHATS_INFO_KEY, jArray.toString())
@@ -572,6 +579,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		batteryOptimisationAsked = prefs.getBoolean(BATTERY_OPTIMISATION_ASKED,false)
 
 		monitoringEnabled = prefs.getBoolean(MONITORING_ENABLED,false)
+
+		showGpsPoints = prefs.getBoolean(SHOW_GPS_POINTS,false)
 	}
 
 	private fun convertShareDevicesToJson():JSONObject?{

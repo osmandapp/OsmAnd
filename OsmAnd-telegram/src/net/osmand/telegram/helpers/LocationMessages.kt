@@ -56,6 +56,10 @@ class LocationMessages(val app: TelegramApplication) {
 		return dbHelper.getIngoingUserLocations(start, end)
 	}
 
+	fun getIngoingUserLocationsInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): UserLocations? {
+		return dbHelper.getIngoingUserLocationsInChat(userId, chatId, deviceName, start, end)
+	}
+
 	fun getMessagesForUserInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getMessagesForUserInChat(userId, chatId,deviceName, start, end)
 	}
@@ -77,9 +81,9 @@ class LocationMessages(val app: TelegramApplication) {
 		val type = OsmandLocationUtils.getMessageType(message)
 		val content = OsmandLocationUtils.parseMessageContent(message, app.telegramHelper)
 		val deviceName = if (content is OsmandLocationUtils.MessageOsmAndBotLocation) content.deviceName else ""
-		val newItem = LocationHistoryPoint(message.senderUserId, message.chatId, type, deviceName)
+		val newItem = LocationHistoryPoint(OsmandLocationUtils.getSenderMessageId(message), message.chatId, type, deviceName)
 		val previousMessageLatLon = lastLocationPoints[newItem]
-		val locationMessage = OsmandLocationUtils.createLocationMessage(message, app.telegramHelper, content, previousMessageLatLon)
+		val locationMessage = OsmandLocationUtils.createLocationMessage(message, content, previousMessageLatLon)
 		if (locationMessage != null) {
 			dbHelper.addLocationMessage(locationMessage)
 			lastLocationPoints[newItem] = LatLon(locationMessage.lat, locationMessage.lon)
@@ -123,6 +127,8 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private class SQLiteHelper(context: Context) :
 		SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
+		private val log = PlatformUtil.getLog(SQLiteHelper::class.java)
 
 		override fun onCreate(db: SQLiteDatabase) {
 			db.execSQL(TIMELINE_TABLE_CREATE)
@@ -219,6 +225,35 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
+		internal fun getIngoingUserLocationsInChat(userId: Int, chatId: Long, deviceName: String,start: Long, end: Long): UserLocations? {
+			val userLocationsMap: MutableMap<Int, MutableList<UserTrkSegment>> = mutableMapOf()
+			val userLocations = UserLocations(userId,chatId,deviceName,userLocationsMap)
+			val whereDeviceQuery = if (deviceName.isNotEmpty()) "AND $COL_DEVICE_NAME = ?" else ""
+			val args = if (deviceName.isNotEmpty()) arrayOf(userId.toString(), chatId.toString(), deviceName) else arrayOf(userId.toString(), chatId.toString())
+			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT WHERE $COL_USER_ID = ? AND $COL_CHAT_ID = ? $whereDeviceQuery AND $COL_TIME BETWEEN $start AND $end ORDER BY $COL_TYPE DESC, $COL_TIME ", args)?.apply {
+				if (moveToFirst()) {
+					var segment: UserTrkSegment? = null
+					do {
+						val locationMessage = readLocationMessage(this@apply)
+						if (segment == null || segment.type != locationMessage.type || locationMessage.time - segment.maxTime > 30 * 1000 * 60) {
+							segment = UserTrkSegment(mutableListOf(), 0.0, locationMessage.type, locationMessage.time, locationMessage.time)
+							if (userLocationsMap[segment.type] == null) {
+								userLocationsMap[segment.type] = mutableListOf<UserTrkSegment>()
+							}
+							userLocationsMap[segment.type]?.add(segment)
+						}
+						if (segment.points.size > 0) {
+							segment.distance += MapUtils.getDistance(locationMessage.lat, locationMessage.lon, segment.points.last().lat, segment.points.last().lon)
+						}
+						segment.maxTime = locationMessage.time
+						segment.points.add(locationMessage)
+					} while (moveToNext())
+				}
+				close()
+			}
+			return userLocations
+		}
+
 		internal fun getMessagesForUserInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			val whereDeviceQuery = if (deviceName.isNotEmpty()) "AND $COL_DEVICE_NAME = ?" else ""
@@ -250,27 +285,19 @@ class LocationMessages(val app: TelegramApplication) {
 
 		internal fun getLastMessages(): MutableMap<LocationHistoryPoint, LatLon> {
 			val res = mutableMapOf<LocationHistoryPoint, LatLon>()
-			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT_HISTORY_POINTS ORDER BY $COL_USER_ID, $COL_CHAT_ID, $COL_TYPE, $COL_DEVICE_NAME, $COL_TIME DESC", null)?.apply {
+			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT_HISTORY_POINTS GROUP BY $COL_USER_ID, $COL_CHAT_ID, $COL_DEVICE_NAME, $COL_TYPE", null)?.apply {
 				if (moveToFirst()) {
-					var userId: Int
-					var chatId: Long
-					var lat: Double
-					var lon: Double
-					var type: Int
-					var deviceName: String
-					var locationHistoryPoint: LocationHistoryPoint? = null
 					do {
-						userId = getInt(0)
-						chatId = getLong(1)
-						lat = getDouble(2)
-						lon = getDouble(3)
-						type = getInt(5)
-						deviceName = getString(6)
-						if (locationHistoryPoint == null || locationHistoryPoint.userId != userId
-							|| locationHistoryPoint.chatId != chatId || locationHistoryPoint.deviceName != deviceName) {
-							locationHistoryPoint = LocationHistoryPoint(userId, chatId, type, deviceName)
-							res[locationHistoryPoint] = LatLon(lat, lon)
-						}
+						val userId = getInt(0)
+						val chatId = getLong(1)
+						val lat = getDouble(2)
+						val lon = getDouble(3)
+						val time = getLong(4)
+						val type = getInt(5)
+						val deviceName = getString(6)
+						val locationHistoryPoint = LocationHistoryPoint(userId, chatId, type, deviceName)
+						res[locationHistoryPoint] = LatLon(lat, lon)
+						log.debug("$locationHistoryPoint time: $time coords: $lat, $lon")
 					} while (moveToNext())
 				}
 				close()
@@ -369,7 +396,7 @@ class LocationMessages(val app: TelegramApplication) {
 				"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_ALTITUDE, $COL_SPEED, $COL_HDOP, $COL_BEARING, $COL_TIME, $COL_TYPE, $COL_MESSAGE_ID, $COL_DISTANCE_FROM_PREV, $COL_DEVICE_NAME FROM $TIMELINE_TABLE_NAME"
 
 			private const val TIMELINE_TABLE_SELECT_HISTORY_POINTS =
-				"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_TIME, $COL_TYPE, $COL_DEVICE_NAME FROM $TIMELINE_TABLE_NAME"
+					"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_TIME, $COL_TYPE, $COL_DEVICE_NAME, MAX($COL_TIME) FROM $TIMELINE_TABLE_NAME"
 
 			private const val TIMELINE_TABLE_CLEAR = "DELETE FROM $TIMELINE_TABLE_NAME"
 

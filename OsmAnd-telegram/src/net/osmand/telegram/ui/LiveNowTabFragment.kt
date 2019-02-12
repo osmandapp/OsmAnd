@@ -104,6 +104,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		mainView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).apply {
 			setOnRefreshListener {
 				app.shareLocationHelper.checkNetworkType()
+				app.telegramHelper.scanChatsHistory()
 				updateList()
 				isRefreshing = false
 			}
@@ -482,6 +483,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.lastTelegramUpdateTime?.visibility = View.GONE
 			}
 
+			val points = getChatItemGpxPointsSize(item)
+			holder.receivedGpxPointsContainer?.visibility = if (settings.showGpsPoints && points > 0) View.VISIBLE else View.GONE
+			holder.receivedGpxPointsDescr?.text = getString(R.string.received_gps_points, points)
+
 			if (item is ChatItem && holder is ChatViewHolder) {
 				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !sortByGroup)
 				val chatId = item.chatId
@@ -531,6 +536,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					}
 				}
 			}
+		}
+
+		private fun getChatItemGpxPointsSize(item: ListItem): Int {
+				val deviceName = if (item is ChatItem && item.chatWithBot) item.name else ""
+				val start = System.currentTimeMillis() - settings.locHistoryTime * 1000
+				val end = System.currentTimeMillis()
+				val userLocations = app.locationMessages.getIngoingUserLocationsInChat(item.userId, item.chatId, deviceName, start, end)
+				var points = 0
+				userLocations?.getUniqueSegments()?.forEach { points += it.points.size }
+				return points
 		}
 
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
@@ -584,6 +599,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val directionIcon: ImageView? = view.findViewById(R.id.direction_icon)
 			val distanceText: TextView? = view.findViewById(R.id.distance_text)
 			val description: TextView? = view.findViewById(R.id.description)
+			val receivedGpxPointsContainer: View? = view.findViewById(R.id.received_gps_points_container)
+			val receivedGpxPointsDescr: TextView? = view.findViewById(R.id.received_gps_points_description)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 			val lastTelegramUpdateTime: TextView? = view.findViewById(R.id.last_telegram_update_time)
 

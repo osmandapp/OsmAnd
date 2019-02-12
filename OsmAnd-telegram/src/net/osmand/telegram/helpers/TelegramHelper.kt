@@ -146,7 +146,7 @@ class TelegramHelper private constructor() {
 	fun getCurrentUserId() = currentUser?.id ?: -1
 
 	fun getUserMessage(user: TdApi.User) =
-		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
+		usersLocationMessages.values.firstOrNull { OsmandLocationUtils.getSenderMessageId(it) == user.id }
 
 	fun getChatMessages(chatId: Long) =
 		usersLocationMessages.values.filter { it.chatId == chatId }
@@ -347,15 +347,6 @@ class TelegramHelper private constructor() {
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
-
-	fun getSenderMessageId(message: TdApi.Message): Int {
-		val forwardInfo = message.forwardInfo
-		return if (forwardInfo != null && forwardInfo is TdApi.MessageForwardedFromUser) {
-			forwardInfo.senderUserId
-		} else {
-			message.senderUserId
-		}
-	}
 
 	fun startLiveMessagesUpdates(interval: Long) {
 		stopLiveMessagesUpdates()
@@ -678,18 +669,19 @@ class TelegramHelper private constructor() {
 		lastTelegramUpdateTime = Math.max(lastTelegramUpdateTime, Math.max(message.date, message.editDate))
 		if (message.isAppropriate()) {
 			log.debug("addNewMessage: ${message.id}")
-			val fromBot = isOsmAndBot(message.senderUserId)
+			val fromBot = isOsmAndBot(OsmandLocationUtils.getSenderMessageId(message))
 			val viaBot = isOsmAndBot(message.viaBotUserId)
 			if (message.isOutgoing && !fromBot && !viaBot) {
 				return
 			}
 			removeOldMessages(message, fromBot, viaBot)
 			val oldMessage = usersLocationMessages.values.firstOrNull {
-				getSenderMessageId(it) == getSenderMessageId(message) && it.chatId == message.chatId
+				OsmandLocationUtils.getSenderMessageId(it) == OsmandLocationUtils.getSenderMessageId(message) && it.chatId == message.chatId
 						&& OsmandLocationUtils.getOsmAndBotDeviceName(it) == OsmandLocationUtils.getOsmAndBotDeviceName(message)
 			}
 			val hasNewerMessage = oldMessage != null && (Math.max(message.editDate, message.date) < Math.max(oldMessage.editDate, oldMessage.date))
 			if (!hasNewerMessage) {
+				message.content = OsmandLocationUtils.parseMessageContent(message, this)
 				usersLocationMessages[message.id] = message
 			}
 			if (message.isOutgoing) {
@@ -713,7 +705,7 @@ class TelegramHelper private constructor() {
 		while (iterator.hasNext()) {
 			val message = iterator.next().value
 			if (newMessage.chatId == message.chatId) {
-				val sameSender = getSenderMessageId(newMessage) == getSenderMessageId(message)
+				val sameSender = OsmandLocationUtils.getSenderMessageId(newMessage) == OsmandLocationUtils.getSenderMessageId(message)
 				val viaSameBot = newMessage.viaBotUserId == message.viaBotUserId
 				if (fromBot || viaBot) {
 					if ((fromBot && sameSender) || (viaBot && viaSameBot)) {
@@ -1091,7 +1083,7 @@ class TelegramHelper private constructor() {
 		}
 		val content = content
 		val isUserTextLocation = (content is TdApi.MessageText) && content.text.text.startsWith(USER_TEXT_LOCATION_TITLE)
-		val isOsmAndBot = isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
+		val isOsmAndBot = isOsmAndBot(OsmandLocationUtils.getSenderMessageId(this)) || isOsmAndBot(viaBotUserId)
 		if (!(isUserTextLocation || content is TdApi.MessageLocation || isOsmAndBot)) {
 			return false
 		}
