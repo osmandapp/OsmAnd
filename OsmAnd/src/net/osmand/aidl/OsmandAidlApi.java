@@ -26,7 +26,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -104,6 +103,7 @@ import java.lang.ref.WeakReference;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.aidl.OsmandAidlConstants.*;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 
@@ -156,11 +156,6 @@ public class OsmandAidlApi {
 	private static final String AIDL_HIDE_SQLITEDB_FILE = "aidl_hide_sqlitedb_file";
 	private static final String AIDL_FILE_NAME = "aidl_file_name";
 
-	private static final int FILE_PARAMS_ERROR = -1001;
-	private static final int LARGE_PARTS_ERROR = -1002;
-	private static final int DOUBLE_COPY_ERROR = -1003;
-	private static final int IO_ERROR = -1004;
-	private static final int UNKNOWN_FILE_TYPE = -1005;
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -1967,66 +1962,86 @@ public class OsmandAidlApi {
 		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private Map<String, Map <Integer, FileOutputStream>>copyFilesCache = new ConcurrentHashMap<>();
-	private AtomicInteger counter = new AtomicInteger(0);
+	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
 
+	private class FileCopyInfo {
+		long start;
+		long lastAccess;
+		FileOutputStream FileOutputStream;
 
-	public int getNextUniqueIndex() {
-		return counter.getAndIncrement();
+		FileCopyInfo(long start, long lastAccess, FileOutputStream fileOutputStream) {
+			this.start = start;
+			this.lastAccess = lastAccess;
+			FileOutputStream = fileOutputStream;
+		}
 	}
 
 	int copyFile(final CopyFileParams filePart) {
 		if (Algorithms.isEmpty(filePart.getFilename()) || filePart.getFilePartData() == null) {
-			return FILE_PARAMS_ERROR;
+			return COPY_FILE_PARAMS_ERROR;
 		}
-
 		if (filePart.getFilename().endsWith(IndexConstants.SQLITE_EXT)) {
-			return copyFileImpl(filePart, app.getAppPath(
-				IndexConstants.TEMP_DIR + filePart.getFilename()),
+			return copyFileImpl(filePart,
 				IndexConstants.TILES_INDEX_DIR);
 		} else {
-			return UNKNOWN_FILE_TYPE;
+			return COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 		}
 	}
 
-	private int copyFileImpl(CopyFileParams fileParams, File file, String destination){
+	private int copyFileImpl(CopyFileParams fileParams, String destination){
 
 		if (fileParams.getFilePartData().length > 256*1024) {
-			return LARGE_PARTS_ERROR;
+			return COPY_FILE_PART_SIZE_LIMIT_ERROR;
 		}
 
+		File file = app.getAppPath(IndexConstants.TEMP_DIR + fileParams.getFilename());
 		FileOutputStream fos;
 		String key = fileParams.getFilename();
+
 		try {
-			if (copyFilesCache.containsKey(key) && fileParams.getId()!=0) {
-				fos = copyFilesCache.get(key).get(fileParams.getId());
-
-				if (fileParams.isTransmitComplete()) {
-					copyFilesCache.remove(key);
-					fos.close();
-					file.renameTo(app.getAppPath(destination + fileParams.getFilename()));
-					return fileParams.getId();
-
-				} else {
+			if (!copyFilesCache.containsKey(key)){
+				if (fileParams.getActionId() == COPY_FILE_START_FLAG) {
+					file.delete();
+					file.getParentFile().mkdirs();
+					fos = new FileOutputStream(file, true);
 					fos.write(fileParams.getFilePartData());
-					return fileParams.getId();
+					copyFilesCache.put(
+						key, new FileCopyInfo(fileParams.getStartTime(), System.currentTimeMillis(), fos));
+					return COPY_FILE_OK_RESPONSE;
+				} else {
+					return COPY_FILE_PARAMS_ERROR;
 				}
-			} else if (copyFilesCache.containsKey(key) && fileParams.getId()==0){
-				return DOUBLE_COPY_ERROR;
-			} else {
-				file.getParentFile().mkdirs();
-				fos = new FileOutputStream(file, true);
-				fos.write(fileParams.getFilePartData());
-				counter.getAndIncrement();
-				Map<Integer, FileOutputStream> fileData = new ConcurrentHashMap<>();
-				fileData.put(counter.intValue(), fos);
-				copyFilesCache.put(key, fileData);
-				return counter.intValue();
+			} else if (copyFilesCache.containsKey(key)) {
+				fos = copyFilesCache.get(key).FileOutputStream;
+				if (fileParams.getActionId() == COPY_FILE_START_FLAG) {
+					if (copyFilesCache.get(key).lastAccess - copyFilesCache.get(key).start > COPY_FILE_VALID_PAUSE) {
+						file.delete();
+						fos.close();
+						copyFilesCache.remove(key);
+						file.getParentFile().mkdirs();
+						fos = new FileOutputStream(file, true);
+						fos.write(fileParams.getFilePartData());
+						copyFilesCache.put(key,
+							new FileCopyInfo(fileParams.getStartTime(), System.currentTimeMillis(), fos));
+						return COPY_FILE_OK_RESPONSE;
+					} else {
+						return COPY_FILE_WRITE_LOCK_ERROR;
+					}
+				} else if (fileParams.getActionId() == COPY_FILE_FINISH_FLAG) {
+						fos.close();
+						copyFilesCache.remove(key);
+						file.renameTo(app.getAppPath(destination + fileParams.getFilename()));
+						return COPY_FILE_OK_RESPONSE;
+				} else {
+						copyFilesCache.get(key).lastAccess = System.currentTimeMillis();
+						fos.write(fileParams.getFilePartData());
+						return COPY_FILE_OK_RESPONSE;
+				}
 			}
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
-		return IO_ERROR;
+		return COPY_FILE_IO_ERROR;
 	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
