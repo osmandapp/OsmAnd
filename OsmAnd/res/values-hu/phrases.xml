@@ -892,7 +892,7 @@
 	<string name="poi_stripclub">Sztriptízbár</string>
 	<string name="poi_craft_agricultural_engines">Mezőgazdaságigép-gyártó</string>
 	<string name="poi_craft_carpet_layer">Szőnyegpadló-lerakó műhely</string>
-	<string name="poi_craft_caterer">Partyszerviz műhely</string>
+	<string name="poi_craft_caterer">Partyszerviz</string>
 	<string name="poi_craft_glaziery">Üvegműves</string>
 	<string name="poi_craft_optician">Látszerész</string>
 	<string name="poi_craft_painter">Szobafestő</string>
@@ -1481,7 +1481,7 @@
 	<string name="poi_craft_sun_protection">Árnyékolástechnikus</string>
 	<string name="poi_craft_sweep">Kéményseprő</string>
 	<string name="poi_craft_tailor">Szabó</string>
-	<string name="poi_craft_tiler">Burkoló</string>
+	<string name="poi_craft_tiler">Beltéri burkoló</string>
 	<string name="poi_craft_tinsmith">Bádogos</string>
 	<string name="poi_craft_upholsterer">Kárpitos</string>
 	<string name="poi_craft_window_construction">Ablakkészítő</string>
