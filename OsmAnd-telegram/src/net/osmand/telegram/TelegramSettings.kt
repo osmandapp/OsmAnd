@@ -30,7 +30,7 @@ const val SHARE_DEVICES_KEY = "devices"
 private val SEND_MY_LOC_VALUES_SEC =
 	listOf(1L, 2L, 3L, 5L, 10L, 15L, 30L, 60L, 90L, 2 * 60L, 3 * 60L, 5 * 60L)
 private val STALE_LOC_VALUES_SEC =
-	listOf(1 * 60L, 2 * 60L, 5 * 60L, 10 * 60L, 15 * 60L, 30 * 60L, 60 * 60L, 60*60*24L)
+	listOf(1 * 60L, 2 * 60L, 5 * 60L, 10 * 60L, 15 * 60L, 30 * 60L, 60 * 60L)
 private val LOC_HISTORY_VALUES_SEC = listOf(
 	5 * 60L,
 	15 * 60L,
@@ -41,8 +41,7 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 	5 * 60 * 60L,
 	8 * 60 * 60L,
 	12 * 60 * 60L,
-	24 * 60 * 60L,
-	7*24 * 60 * 60L
+	24 * 60 * 60L
 )
 
 const val SHARE_TYPE_MAP = "Map"

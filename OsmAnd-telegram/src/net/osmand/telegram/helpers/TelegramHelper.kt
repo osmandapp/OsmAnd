@@ -39,7 +39,7 @@ class TelegramHelper private constructor() {
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
 		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
 
-		const val MAX_LOCATION_MESSAGE_HISTORY_SCAN_SEC = 7 * 60 * 60 * 24 // one day
+		const val MAX_LOCATION_MESSAGE_HISTORY_SCAN_SEC = 60 * 60 * 24 // one day
 
 		private var helper: TelegramHelper? = null
 
