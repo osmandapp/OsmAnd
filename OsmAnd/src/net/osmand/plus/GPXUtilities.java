@@ -1639,7 +1639,7 @@ public class GPXUtilities {
 							((GPXExtensions) parse).getExtensionsToWrite().put(er.key.toLowerCase(), er.result);
 
 						} else if (tag.toLowerCase().equals("routepointextension")) {
-							parseRoutePointExtension(parser, res);
+							res = parseRoutePointExtension(parser, res);
 
 						} else {
 							String value = readText(parser, tag);
@@ -1835,12 +1835,22 @@ public class GPXUtilities {
 	}
 
 	private static GPXFile parseRoutePointExtension(XmlPullParser parser, GPXFile res){
-		int tok;
+
 		try{
-			while (!parser.getName().equals("RoutePointExtension") && (tok = parser.next()) != XmlPullParser.END_TAG) {
+			Stack<GPXExtensions> PPEState = new Stack<>();
+			log.debug("parser.getName = " + parser.getName());
+			int tok = 2;
+			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok==XmlPullParser.START_TAG) {
-					if ()
+					//Object parse = PPEState.peek();
+					String tag = parser.getName();
+					if(tag.toLowerCase().equals("subclass")) {
+						log.debug(tag + " : " + readText(parser,tag));
+					} else if (tag.equals("rpt")) {
+						readExtensionsText(parser,tag,2);
+					}
 				}
+
 			}
 		} catch (Exception e) {
 
