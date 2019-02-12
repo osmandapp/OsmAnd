@@ -2,17 +2,18 @@ package net.osmand.telegram.ui
 
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Rect
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
-import android.text.Editable
-import android.text.Html
-import android.text.TextUtils
-import android.text.TextWatcher
+import android.text.*
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,10 @@ class LoginDialogFragment : BaseDialogFragment() {
 		private const val LOGIN_DIALOG_TYPE_PARAM_KEY = "login_dialog_type_param"
 		private const val SHOW_PROGRESS_PARAM_KEY = "show_progress_param"
 		private const val SHOW_WELCOME_DIALOG_PARAM_KEY = "show_welcome_dialog_param"
+		private const val PRIVACY_POLICY_AGREED_PARAM_KEY = "privacy_policy_agreed_param"
 		private const val TELEGRAM_PACKAGE = "org.telegram.messenger"
+		private const val TELEGRAM_PRIVACY_POLICY = "https://telegram.org/privacy"
+		private const val OSMAND_PRIVACY_POLICY = "https://osmand.net/help-online/privacy-policy"
 		private const val SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15
 
 		var welcomeDialogShown = false
@@ -52,7 +56,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 			showDialog(fragmentManager, welcomeDialog = true)
 		}
 
-		fun showDialog(fragmentManager: FragmentManager, loginDialogType: LoginDialogType? = null, welcomeDialog: Boolean = false) {
+		fun showDialog(fragmentManager: FragmentManager, loginDialogType: LoginDialogType? = null, welcomeDialog: Boolean = false, privacyPolicyAgreed: Boolean = false) {
 			try {
 
 				/*
@@ -70,6 +74,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 						args.putString(LOGIN_DIALOG_TYPE_PARAM_KEY, loginDialogType.name)
 					}
 					args.putBoolean(SHOW_WELCOME_DIALOG_PARAM_KEY, welcomeDialog)
+					args.putBoolean(PRIVACY_POLICY_AGREED_PARAM_KEY, privacyPolicyAgreed)
 					fragment.arguments = args
 					fragment.show(fragmentManager, TAG)
 				} else {
@@ -98,6 +103,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 	private var loginDialogActiveType: LoginDialogType? = null
 
 	private var showWelcomeDialog = false
+	private var privacyPolicyAgreed = false
 	private var showProgress = false
 	private var dismissedManually = false
 	private lateinit var continueButton: Button
@@ -112,7 +118,8 @@ class LoginDialogFragment : BaseDialogFragment() {
 		ENTER_PASSWORD(R.id.enter_password_layout, R.id.password_edit_text,
 				R.string.enter_password, R.string.password_descr, R.string.enter_password),
 		GET_TELEGRAM(R.id.get_telegram_layout, 0,
-				R.string.get_telegram_title, R.string.get_telegram_account_first, 0);
+				R.string.get_telegram_title, R.string.get_telegram_account_first, 0),
+		PRIVACY_POLICY(R.id.privacy_policy_layout, 0, R.string.how_it_works, R.string.privacy_policy_use_telegram, 0);
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,6 +136,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 			}
 			showProgress = args.getBoolean(SHOW_PROGRESS_PARAM_KEY, false)
 			showWelcomeDialog = args.getBoolean(SHOW_WELCOME_DIALOG_PARAM_KEY, false)
+			privacyPolicyAgreed = args.getBoolean(PRIVACY_POLICY_AGREED_PARAM_KEY, false)
 		}
 		val view = inflater.inflate(R.layout.login_dialog, container)
 		continueButton = view.findViewById(R.id.continue_button)
@@ -151,12 +159,13 @@ class LoginDialogFragment : BaseDialogFragment() {
 		return view
 	}
 
-	private fun transformContinueButton(expanded: Boolean) {
+	private fun transformContinueButton(expanded: Boolean, acceptMode: Boolean = false) {
 		val params = continueButton.layoutParams as ViewGroup.MarginLayoutParams
-		val margin = if (expanded) 16f else 40f
+		val bottomMargin = if (expanded || acceptMode) 16f else 40f
 		val width = if (expanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
 		params.apply {
-			setMargins(leftMargin, topMargin, rightMargin, AndroidUtils.dpToPx(context!!, margin))
+			val horizontalMargin = app.resources.getDimensionPixelSize(if (acceptMode) R.dimen.dialog_welcome_padding_horizontal else R.dimen.content_padding_half)
+			setMargins(horizontalMargin, topMargin, horizontalMargin, AndroidUtils.dpToPx(context!!, bottomMargin))
 			this.width = width
 		}
 		continueButton.requestLayout()
@@ -197,7 +206,10 @@ class LoginDialogFragment : BaseDialogFragment() {
 			val continueButton = view?.findViewById<Button>(R.id.welcome_continue_button)
 			continueButton?.setOnClickListener {
 				showWelcomeDialog = false
-				if (loginDialogActiveType == null) {
+				if (!privacyPolicyAgreed) {
+					loginDialogActiveType = LoginDialogType.PRIVACY_POLICY
+					showProgress = false
+				} else if (loginDialogActiveType == null) {
 					loginDialogActiveType = LoginDialogType.ENTER_PHONE_NUMBER
 					showProgress = true
 				}
@@ -235,7 +247,10 @@ class LoginDialogFragment : BaseDialogFragment() {
 						layout.visibility = View.VISIBLE
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
-							editText.setOnEditorActionListener { _, actionId, _ ->
+							if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
+								editText.setText("+")
+							}
+								editText.setOnEditorActionListener { _, actionId, _ ->
 								if (actionId == EditorInfo.IME_ACTION_DONE) {
 									applyAuthParam(t, editText.text.toString())
 									return@setOnEditorActionListener true
@@ -251,10 +266,10 @@ class LoginDialogFragment : BaseDialogFragment() {
 								override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 								override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 								override fun afterTextChanged(s: Editable) {
-									changeContinueButtonEnabled(!s.isEmpty())
+									changeContinueButtonEnabled(s.length > 1)
 								}
 							})
-							changeContinueButtonEnabled(!editText.text.isEmpty())
+							changeContinueButtonEnabled(editText.text.length > 1)
 							editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
 						}
 
@@ -293,6 +308,67 @@ class LoginDialogFragment : BaseDialogFragment() {
 							getTelegramViewContainer?.visibility = View.GONE
 							view.findViewById<Button>(R.id.continue_button).visibility = View.VISIBLE
 						}
+
+						val privacyPolicyContainer: LinearLayout? = view.findViewById(R.id.privacy_policy_layout)
+						if (loginDialogActiveType == LoginDialogType.PRIVACY_POLICY) {
+							titleView?.setTextColor(ContextCompat.getColor(app, R.color.text_bold_highlight))
+							val useTelegramDescr = getString(R.string.privacy_policy_use_telegram)
+								descriptionView?.text = SpannableString(useTelegramDescr).apply {
+									val telegram = getString(R.string.shared_string_telegram)
+									val start = useTelegramDescr.indexOf(telegram)
+									if (start != -1) {
+										setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.text_bold_highlight)), start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+										setSpan(StyleSpan(android.graphics.Typeface.BOLD), start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+									}
+								}
+							view.findViewById<TextView>(R.id.privacy_policy_agree).apply {
+								val policyAgreeDescr = getString(R.string.privacy_policy_agree)
+								text = SpannableString(policyAgreeDescr).apply {
+									val telegramPrivacyPolicy = getString(R.string.telegram_privacy_policy)
+									val osmAndPrivacyPolicy = getString(R.string.osmand_privacy_policy)
+									var start = policyAgreeDescr.indexOf(telegramPrivacyPolicy)
+									if (start != -1) {
+										setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.text_bold_highlight)), start, start + telegramPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+									}
+									start = policyAgreeDescr.indexOf(osmAndPrivacyPolicy)
+									if (start != -1) {
+										setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.text_bold_highlight)), start, start + osmAndPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+									}
+								}
+							}
+							view.findViewById<LinearLayout>(R.id.telegram_privacy_policy_btn).apply {
+								findViewById<TextView>(R.id.telegram_privacy_policy_title).text = getText(R.string.telegram_privacy_policy)
+								findViewById<ImageView>(R.id.telegram_privacy_policy_icon)?.setImageDrawable(app.uiUtils.getIcon(R.drawable.ic_arrow_forward, R.color.text_bold_highlight))
+								setOnClickListener {
+									context?.also {
+										val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_PRIVACY_POLICY))
+										if (AndroidUtils.isIntentSafe(context, intent)) {
+											startActivity(intent)
+										}
+									}
+								}
+							}
+							view.findViewById<LinearLayout>(R.id.osmand_privacy_policy_btn).apply {
+								findViewById<TextView>(R.id.osmand_privacy_policy_title).text = getText(R.string.osmand_privacy_policy)
+								findViewById<ImageView>(R.id.osmand_privacy_policy_icon)?.setImageDrawable(app.uiUtils.getIcon(R.drawable.ic_arrow_forward, R.color.text_bold_highlight))
+								setOnClickListener {
+									context?.also {
+										val intent = Intent(Intent.ACTION_VIEW, Uri.parse(OSMAND_PRIVACY_POLICY))
+										if (AndroidUtils.isIntentSafe(context, intent)) {
+											startActivity(intent)
+										}
+									}
+								}
+							}
+							view.findViewById<Button>(R.id.continue_button).text = getText(R.string.shared_string_accept)
+							changeContinueButtonEnabled(true)
+							transformContinueButton(true, acceptMode = true)
+							privacyPolicyContainer?.visibility = View.VISIBLE
+						} else {
+							privacyPolicyContainer?.visibility = View.GONE
+							titleView?.setTextColor(ContextCompat.getColor(app, R.color.ctrl_active_light))
+							view.findViewById<Button>(R.id.continue_button).text = getText(R.string.shared_string_continue)
+						}
 					}
 				}
 				else -> layout?.visibility = View.GONE
@@ -304,21 +380,27 @@ class LoginDialogFragment : BaseDialogFragment() {
 				progressView?.visibility = View.GONE
 			}
 		}
-		continueButton.isEnabled = !showProgress && continueButton.isEnabled
+		continueButton.isEnabled = !showProgress && continueButton.isEnabled || loginDialogActiveType == LoginDialogType.PRIVACY_POLICY
 		if (showProgress) {
 			continueButton.setOnClickListener(null)
 		} else {
 			continueButton.setOnClickListener {
 				showWelcomeDialog = false
-				for (t in LoginDialogType.values()) {
-					val layout: View? = view?.findViewById(t.viewId)
-					val contains = t == loginDialogActiveType
-					if (contains && layout != null) {
-						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
-						val text = editText?.text.toString()
-						if (!TextUtils.isEmpty(text) && text.length > 1) {
-							continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
-							applyAuthParam(t, text)
+				if (loginDialogActiveType == LoginDialogType.PRIVACY_POLICY) {
+					this.loginDialogActiveType = LoginDialogType.ENTER_PHONE_NUMBER
+					privacyPolicyAgreed = true
+					buildDialog(view)
+				} else {
+					for (t in LoginDialogType.values()) {
+						val layout: View? = view?.findViewById(t.viewId)
+						val contains = t == loginDialogActiveType
+						if (contains && layout != null) {
+							val editText: ExtendedEditText? = layout.findViewById(t.editorId)
+							val text = editText?.text.toString()
+							if (!TextUtils.isEmpty(text) && text.length > 1) {
+								continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
+								applyAuthParam(t, text)
+							}
 						}
 					}
 				}
@@ -360,6 +442,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		}
 		outState.putBoolean(SHOW_PROGRESS_PARAM_KEY, showProgress)
 		outState.putBoolean(SHOW_WELCOME_DIALOG_PARAM_KEY, showWelcomeDialog)
+		outState.putBoolean(PRIVACY_POLICY_AGREED_PARAM_KEY, privacyPolicyAgreed)
 	}
 
 	private fun getMainActivity(): MainActivity? {

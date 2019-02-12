@@ -1,4 +1,12 @@
 <resources>
+	<string name="shared_string_telegram">Telegram</string>
+	<string name="privacy_policy_use_telegram">We use a Telegram (messaging app) to connect people and make it easier for you to communicate with them.</string>
+	<string name="privacy_policy_telegram_client">Telegram open platform and OsmAnd Tracker is one of the customers. Your contacts can use any other Telegram client.</string>
+	<string name="privacy_policy_agree">By clicking continue you agree to the Telegram Privacy Policy and the OsmAnd Privacy Policy.</string>
+	<string name="shared_string_accept">Accept</string>
+	<string name="telegram_privacy_policy">Telegram Privacy Policy</string>
+	<string name="osmand_privacy_policy">OsmAnd Privacy Policy</string>
+	<string name="how_it_works">How it works</string>
 	<string name="received_gps_points">Received GPX points: %1$s</string>
 	<string name="shared_string_appearance">Appearance</string>
 	<string name="show_gps_points">Show GPS points</string>

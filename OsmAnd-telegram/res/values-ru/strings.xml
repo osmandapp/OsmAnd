@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+	<string name="privacy_policy_use_telegram">Мы используем Telegram (messaging app), чтобы соединять людей и чтобы вам было проще общаться с ними.</string>
+	<string name="privacy_policy_telegram_client">Telegram открытая платформа и OsmAnd Tracker является одним из клиентов. Ваши контакты могут использовать любой другой Telegram client.</string>
+	<string name="privacy_policy_agree">Нажимая продолжить, вы соглашаетесь с Telegram Privacy Policy и OsmAnd Privacy Policy.</string>
 	<string name="timeline_description">Включите мониторинг, для сбора данных о перемещении в фоновом режиме.</string>
 	<string name="last_update_from_telegram">Последнее обновление в Telegram</string>
 	<string name="device_name">Имя устройства</string>
