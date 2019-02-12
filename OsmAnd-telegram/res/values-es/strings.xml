@@ -193,4 +193,6 @@
     <string name="shared_string_collected">Recolectados</string>
     <string name="gps_points">Puntos de GPS</string>
     <string name="shared_string_sent">Enviado</string>
+    <string name="please_update_osmand">Actualice OsmAnd para ver datos en el mapa</string>
+    <string name="shared_string_update">Actualizar</string>
 </resources>
