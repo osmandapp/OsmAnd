@@ -3260,4 +3260,8 @@
     <string name="quick_action_switch_day_mode">Дзённы рэжым</string>
     <string name="quick_action_switch_night_mode">Начны рэжым</string>
     <string name="quick_action_day_night_switch_mode">Пераключыць дзённы/начны рэжым</string>
+    <string name="route_class_stat_container">Клас</string>
+    <string name="route_surface_stat_container">Паверхня</string>
+    <string name="route_smoothness_stat_container">Гладкасць</string>
+    <string name="route_steepness_stat_container">Пакатасць</string>
 </resources>
