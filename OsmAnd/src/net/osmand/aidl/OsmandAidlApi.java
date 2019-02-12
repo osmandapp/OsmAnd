@@ -2006,7 +2006,15 @@ public class OsmandAidlApi {
 					fos = new FileOutputStream(file, true);
 					fos.write(fileParams.getFilePartData());
 					copyFilesCache.put(
-						key, new FileCopyInfo(fileParams.getStartTime(), System.currentTimeMillis(), fos));
+						key, new FileCopyInfo(fileParams.getStartTime(), System.currentTimeMillis(),
+							fos));
+					return COPY_FILE_OK_RESPONSE;
+				} else if (fileParams.getActionId() == COPY_FILE_FINISH_FLAG) {
+					file.delete();
+					file.getParentFile().mkdirs();
+					fos = new FileOutputStream(file, true);
+					fos.write(fileParams.getFilePartData());
+					file.renameTo(app.getAppPath(destination + fileParams.getFilename()));
 					return COPY_FILE_OK_RESPONSE;
 				} else {
 					return COPY_FILE_PARAMS_ERROR;

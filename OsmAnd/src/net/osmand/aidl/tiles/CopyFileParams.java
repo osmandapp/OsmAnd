@@ -2,6 +2,7 @@ package net.osmand.aidl.tiles;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.util.Arrays;
 
 public class CopyFileParams implements Parcelable {
 	private String filename;
@@ -56,6 +57,16 @@ public class CopyFileParams implements Parcelable {
 	@Override
 	public int describeContents() {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "CopyFileParams{" +
+			"filename='" + filename + '\'' +
+			", filePartData=" + filePartData +
+			", startTime=" + startTime +
+			", actionId=" + actionId +
+			'}';
 	}
 
 	@Override
