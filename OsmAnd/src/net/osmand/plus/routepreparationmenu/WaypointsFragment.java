@@ -411,11 +411,11 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 		addButtonDescr.setText(R.string.shared_string_add);
 		addButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_plus, R.color.active_buttons_and_links_light), null, null, null);
-		AndroidUtils.setBackground(app, addButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, addButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 			AndroidUtils.setBackground(app, addButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(app, addButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			AndroidUtils.setBackground(app, addButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 
 		int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
@@ -426,7 +426,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		TextView clearButtonDescr = (TextView) view.findViewById(R.id.clear_all_button_descr);
 		clearButtonDescr.setText(R.string.shared_string_clear_all);
 		clearButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_clear_all, R.color.active_buttons_and_links_light), null, null, null);
-		AndroidUtils.setBackground(app, clearButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+		AndroidUtils.setBackground(app, clearButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, clearButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);

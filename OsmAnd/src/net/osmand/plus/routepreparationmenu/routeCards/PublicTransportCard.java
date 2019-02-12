@@ -2,6 +2,7 @@ package net.osmand.plus.routepreparationmenu.routeCards;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
@@ -96,11 +97,11 @@ public class PublicTransportCard extends BaseRouteCard {
 		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
 		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
 
-		AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 			AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 		int color = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 		detailsButtonDescr.setTextColor(color);
@@ -108,11 +109,11 @@ public class PublicTransportCard extends BaseRouteCard {
 		FrameLayout showButton = (FrameLayout) view.findViewById(R.id.show_button);
 		if (secondButtonVisible) {
 			TextView showButtonDescr = (TextView) view.findViewById(R.id.show_button_descr);
-			AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 				AndroidUtils.setBackground(app, showButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 			} else {
-				AndroidUtils.setBackground(app, showButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+				AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 			}
 			showButtonDescr.setTextColor(color);
 			showButton.setVisibility(View.VISIBLE);

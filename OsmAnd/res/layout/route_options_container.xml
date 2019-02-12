@@ -6,7 +6,7 @@
 	android:layout_width="100dp"
 	android:layout_height="32dp"
 	android:orientation="horizontal"
-	tools:background="@drawable/btn_border_trans_dark">
+	tools:background="@drawable/btn_border_dark">
 
 	<FrameLayout
 		android:id="@+id/removable_option"

@@ -13,7 +13,7 @@
 		android:layout_height="match_parent"
 		android:gravity="start"
 		android:visibility="visible"
-		tools:background="@drawable/btn_border_trans_dark">
+		tools:background="@drawable/btn_border_dark">
 
 		<ImageView
 			android:id="@+id/route_option_image_view"
@@ -56,6 +56,6 @@
 		android:gravity="center"
 		android:orientation="horizontal"
 		android:visibility="visible"
-		tools:background="@drawable/btn_border_trans_dark" />
+		tools:background="@drawable/btn_border_dark" />
 
 </LinearLayout>
