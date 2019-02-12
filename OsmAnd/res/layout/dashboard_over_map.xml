@@ -78,7 +78,7 @@
 
             </LinearLayout>
 
-            <net.osmand.plus.views.controls.DynamicListView
+            <com.github.ksoichiro.android.observablescrollview.ObservableListView
                 android:id="@+id/dash_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
