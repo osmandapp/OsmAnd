@@ -123,7 +123,7 @@ object TelegramUiHelper {
 	): ChatItem? {
 		val content = OsmandLocationUtils.parseMessageContent(message, helper)
 		return when (content) {
-			is MessageOsmAndBotLocation -> botMessageToChatItem(helper, chat, content)
+			is MessageOsmAndBotLocation -> botMessageToChatItem(helper, chat, content, message)
 			is TdApi.MessageLocation -> locationMessageToChatItem(helper, chat, message)
 			is MessageUserLocation -> locationMessageToChatItem(helper, chat, message)
 			else -> null
@@ -175,10 +175,11 @@ object TelegramUiHelper {
 	private fun botMessageToChatItem(
 		helper: TelegramHelper,
 		chat: TdApi.Chat,
-		content: MessageOsmAndBotLocation
-	): ChatItem? {
+		content: MessageOsmAndBotLocation,
+		message: TdApi.Message): ChatItem? {
 		return if (content.isValid()) {
 			ChatItem().apply {
+				userId = OsmandLocationUtils.getSenderMessageId(message)
 				chatId = chat.id
 				chatTitle = chat.title
 				name = content.deviceName

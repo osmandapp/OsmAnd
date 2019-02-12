@@ -483,12 +483,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.lastTelegramUpdateTime?.visibility = View.GONE
 			}
 
-			if (settings.showGpsPoints) {
-				holder.receivedGpxPointsContainer?.visibility = View.VISIBLE
-				holder.receivedGpxPointsDescr?.text = getChatItemGpxPointsDescription(item)
-			} else {
-				holder.receivedGpxPointsContainer?.visibility = View.GONE
-			}
+			val points = getChatItemGpxPointsSize(item)
+			holder.receivedGpxPointsContainer?.visibility = if (settings.showGpsPoints && points > 0) View.VISIBLE else View.GONE
+			holder.receivedGpxPointsDescr?.text = getString(R.string.received_gps_points, points)
 
 			if (item is ChatItem && holder is ChatViewHolder) {
 				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !sortByGroup)
@@ -505,13 +502,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					holder.groupDescrContainer?.visibility = View.GONE
 				}
 
-				if (settings.showGpsPoints) {
-					holder.receivedGpxPointsContainer?.visibility = View.VISIBLE
-					holder.receivedGpxPointsDescr?.text = getChatItemGpxPointsDescription(item)
-				} else {
-					holder.receivedGpxPointsContainer?.visibility = View.GONE
-				}
-
 				holder.description?.text = getChatItemDescription(item)
 				holder.imageButton?.visibility = View.GONE
 				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatId) }
@@ -520,12 +510,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.topDivider?.visibility = if (!sortByGroup && position != 0) View.GONE else View.VISIBLE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
 				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
-				if (settings.showGpsPoints) {
-					holder.receivedGpxPointsContainer?.visibility = View.VISIBLE
-					holder.receivedGpxPointsDescr?.text = getChatItemGpxPointsDescription(item)
-				} else {
-					holder.receivedGpxPointsContainer?.visibility = View.GONE
-				}
 			}
 		}
 
@@ -554,49 +538,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
-		private fun getChatItemGpxPointsDescription(item: ListItem): String {
-			return when {
-				item is ChatItem && item.chatWithBot -> {
-					if (settings.liveNowSortType.isSortByGroup()) {
-						getString(R.string.shared_string_bot)
-					} else {
-						val deviceName = if(item.chatWithBot) item.name else ""
-						val start = System.currentTimeMillis() - settings.locHistoryTime * 1000
-						val end = System.currentTimeMillis()
-						val userLocations = app.locationMessages.getIngoingUserLocationsInChat(item.userId, item.chatId,deviceName,start, end)
-						var points = 0
-						userLocations?.getUniqueSegments()?.forEach { points += it.points.size }
-						getString(R.string.received_gps_points, points)
-					}
-				}
-				item is ChatItem && item.privateChat -> {
-					val deviceName = if(item.chatWithBot) item.name else ""
-					val start = System.currentTimeMillis() - settings.locHistoryTime * 1000
-					val end = System.currentTimeMillis()
-					val userLocations = app.locationMessages.getIngoingUserLocationsInChat(item.userId, item.chatId,deviceName,start, end)
-					var points = 0
-					userLocations?.getUniqueSegments()?.forEach { points += it.points.size }
-					getString(R.string.received_gps_points, points)
-				}
-				else -> {
-					if (!settings.liveNowSortType.isSortByGroup()&&item is ChatItem) {
-						val deviceName = if(item.chatWithBot) item.name else ""
-						val start = System.currentTimeMillis() - settings.locHistoryTime * 1000
-						val end = System.currentTimeMillis()
-						val userLocations = app.locationMessages.getIngoingUserLocationsInChat(item.userId, item.chatId,deviceName,start, end)
-						var points = 0
-						userLocations?.getUniqueSegments()?.forEach { points += it.points.size }
-						getString(R.string.received_gps_points, points)
-					} else {
-						val start = System.currentTimeMillis() - settings.locHistoryTime * 1000
-						val end = System.currentTimeMillis()
-						val userLocations = app.locationMessages.getIngoingUserLocationsInChat(item.userId, item.chatId,"",start, end)
-						var points = 0
-						userLocations?.getUniqueSegments()?.forEach { points += it.points.size }
-						getString(R.string.received_gps_points, points)
-					}
-				}
-			}
+		private fun getChatItemGpxPointsSize(item: ListItem): Int {
+				val deviceName = if (item is ChatItem && item.chatWithBot) item.name else ""
+				val start = System.currentTimeMillis() - settings.locHistoryTime * 1000
+				val end = System.currentTimeMillis()
+				val userLocations = app.locationMessages.getIngoingUserLocationsInChat(item.userId, item.chatId, deviceName, start, end)
+				var points = 0
+				userLocations?.getUniqueSegments()?.forEach { points += it.points.size }
+				return points
 		}
 
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
