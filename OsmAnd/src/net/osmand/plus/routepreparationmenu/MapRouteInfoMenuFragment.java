@@ -142,13 +142,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		bottomScrollView.setScrollingEnabled(false);
 		bottomScrollView.setBackgroundColor(getResources().getColor(nightMode ? R.color.activity_background_dark : R.color.activity_background_light));
 
-		FrameLayout bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-		if (!menu.isRouteCalculated()) {
-			bottomContainer.setForeground(getContentIcon(R.drawable.bg_contextmenu_shadow));
-		} else {
-			bottomContainer.setForeground(null);
-		}
-
 		cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
 
 		buildBottomView();
@@ -182,8 +175,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			private boolean slidingUp;
 			private boolean slidingDown;
 
-			private boolean hasMoved;
-
 			{
 				scroller = new OverScroller(getMapActivity());
 				final ViewConfiguration configuration = ViewConfiguration.get(getMapActivity());
@@ -205,7 +196,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
-						hasMoved = false;
 						mDownY = event.getRawY();
 						dy = event.getY();
 						dyMain = getViewY();
@@ -219,7 +209,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 							moving = true;
 						}
 						if (moving) {
-							hasMoved = true;
 							float y = event.getY();
 							float newY = getViewY() + (y - dy);
 							if (!portrait && newY > topScreenPosY) {
@@ -248,7 +237,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 					case MotionEvent.ACTION_UP:
 						if (moving) {
 							moving = false;
-							hasMoved = false;
 							int currentY = getViewY();
 
 							final VelocityTracker velocityTracker = this.velocityTracker;
@@ -278,7 +266,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 						break;
 					case MotionEvent.ACTION_CANCEL:
 						moving = false;
-						hasMoved = false;
 						recycleVelocityTracker();
 						break;
 
@@ -948,13 +935,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 		ctx.setupRouteCalculationProgressBar((ProgressBar) mainView.findViewById(R.id.progress_bar));
 		setupRouteCalculationButtonProgressBar((ProgressBar) view.findViewById(R.id.progress_bar_button));
-
-		FrameLayout bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-		if (!menu.isRouteCalculated()) {
-			bottomContainer.setForeground(getContentIcon(R.drawable.bg_contextmenu_shadow));
-		} else {
-			bottomContainer.setForeground(null);
-		}
 
 		updateControlButtons();
 	}

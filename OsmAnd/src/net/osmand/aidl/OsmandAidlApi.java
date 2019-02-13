@@ -1,5 +1,6 @@
 package net.osmand.aidl;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -44,6 +45,7 @@ import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidl.tiles.CopyFileParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -98,16 +100,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.aidl.OsmandAidlConstants.*;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 
@@ -1661,7 +1657,6 @@ public class OsmandAidlApi {
 				@Override
 				public void onFinish(AppInitializer init) {
 					try {
-						LOG.debug("AIDL App registerForOsmandInitialization");
 						callback.onAppInitialized();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -1965,6 +1960,96 @@ public class OsmandAidlApi {
 			}
 		});
 		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
+
+	private class FileCopyInfo {
+		long start;
+		long lastAccess;
+		FileOutputStream FileOutputStream;
+
+		FileCopyInfo(long start, long lastAccess, FileOutputStream fileOutputStream) {
+			this.start = start;
+			this.lastAccess = lastAccess;
+			FileOutputStream = fileOutputStream;
+		}
+	}
+
+	int copyFile(final CopyFileParams filePart) {
+		if (Algorithms.isEmpty(filePart.getFilename()) || filePart.getFilePartData() == null) {
+			return COPY_FILE_PARAMS_ERROR;
+		}
+		if (filePart.getFilename().endsWith(IndexConstants.SQLITE_EXT)) {
+			return copyFileImpl(filePart,
+				IndexConstants.TILES_INDEX_DIR);
+		} else {
+			return COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+		}
+	}
+
+	private int copyFileImpl(CopyFileParams fileParams, String destination){
+
+		if (fileParams.getFilePartData().length > 256*1024) {
+			return COPY_FILE_PART_SIZE_LIMIT_ERROR;
+		}
+
+		File file = app.getAppPath(IndexConstants.TEMP_DIR + fileParams.getFilename());
+		FileOutputStream fos;
+		String key = fileParams.getFilename();
+
+		try {
+			if (!copyFilesCache.containsKey(key)){
+				if (fileParams.getActionId() == COPY_FILE_START_FLAG) {
+					file.delete();
+					file.getParentFile().mkdirs();
+					fos = new FileOutputStream(file, true);
+					fos.write(fileParams.getFilePartData());
+					copyFilesCache.put(
+						key, new FileCopyInfo(fileParams.getStartTime(), System.currentTimeMillis(),
+							fos));
+					return COPY_FILE_OK_RESPONSE;
+				} else if (fileParams.getActionId() == COPY_FILE_FINISH_FLAG) {
+					file.delete();
+					file.getParentFile().mkdirs();
+					fos = new FileOutputStream(file, true);
+					fos.write(fileParams.getFilePartData());
+					file.renameTo(app.getAppPath(destination + fileParams.getFilename()));
+					return COPY_FILE_OK_RESPONSE;
+				} else {
+					return COPY_FILE_PARAMS_ERROR;
+				}
+			} else if (copyFilesCache.containsKey(key)) {
+				fos = copyFilesCache.get(key).FileOutputStream;
+				if (fileParams.getActionId() == COPY_FILE_START_FLAG) {
+					if (copyFilesCache.get(key).lastAccess - copyFilesCache.get(key).start > COPY_FILE_VALID_PAUSE) {
+						file.delete();
+						fos.close();
+						copyFilesCache.remove(key);
+						file.getParentFile().mkdirs();
+						fos = new FileOutputStream(file, true);
+						fos.write(fileParams.getFilePartData());
+						copyFilesCache.put(key,
+							new FileCopyInfo(fileParams.getStartTime(), System.currentTimeMillis(), fos));
+						return COPY_FILE_OK_RESPONSE;
+					} else {
+						return COPY_FILE_WRITE_LOCK_ERROR;
+					}
+				} else if (fileParams.getActionId() == COPY_FILE_FINISH_FLAG) {
+						fos.close();
+						copyFilesCache.remove(key);
+						file.renameTo(app.getAppPath(destination + fileParams.getFilename()));
+						return COPY_FILE_OK_RESPONSE;
+				} else {
+						copyFilesCache.get(key).lastAccess = System.currentTimeMillis();
+						fos.write(fileParams.getFilePartData());
+						return COPY_FILE_OK_RESPONSE;
+				}
+			}
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		return COPY_FILE_IO_ERROR;
 	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {

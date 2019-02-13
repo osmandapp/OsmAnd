@@ -123,13 +123,17 @@
 							android:text="@string/route_from"
 							android:textSize="@dimen/default_sub_text_size" />
 
-						<Spinner
-							android:id="@+id/FromSpinner"
+						<TextView
+							android:id="@+id/fromText"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:layout_marginLeft="-8dp"
-							android:background="@null"
-							android:textSize="@dimen/default_list_text_size" />
+							android:layout_marginEnd="@dimen/list_content_padding"
+							android:layout_marginRight="@dimen/list_content_padding"
+							android:gravity="left"
+							android:singleLine="true"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="My position" />
 
 					</LinearLayout>
 
@@ -237,11 +241,13 @@
 							android:id="@+id/ViaView"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/list_content_padding"
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
-							android:textSize="@dimen/default_list_text_size" />
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="Intermediate point"/>
 
 					</LinearLayout>
 
@@ -342,13 +348,17 @@
 							android:text="@string/route_to"
 							android:textSize="@dimen/default_sub_text_size" />
 
-						<Spinner
-							android:id="@+id/ToSpinner"
+						<TextView
+							android:id="@+id/toText"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:layout_marginLeft="-8dp"
-							android:background="@null"
-							android:textSize="@dimen/default_list_text_size" />
+							android:layout_marginEnd="@dimen/list_content_padding"
+							android:layout_marginRight="@dimen/list_content_padding"
+							android:gravity="left"
+							android:singleLine="true"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="Destination"/>
 
 					</LinearLayout>
 
@@ -498,7 +508,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:foregroundGravity="top|fill_horizontal"
-			tools:foreground="@drawable/bg_contextmenu_shadow">
+			android:foreground="@drawable/bg_contextmenu_shadow">
 
 			<net.osmand.plus.LockableScrollView
 				android:id="@+id/route_menu_bottom_scroll"
@@ -540,7 +550,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
 			android:scaleType="fitXY"
-			android:src="@drawable/bg_shadow_list_bottom" />
+			android:src="@drawable/bg_contextmenu_shadow" />
 
 	</LinearLayout>
 

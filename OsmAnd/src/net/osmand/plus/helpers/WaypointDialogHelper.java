@@ -47,6 +47,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.controls.DynamicListView.DragIcon;
@@ -318,108 +319,6 @@ public class WaypointDialogHelper {
 		}
 		return res;
 	}
-
-	public StableArrayAdapter getWaypointsDrawerAdapter(
-			final boolean edit, final List<LocationPointWrapper> deletedPoints,
-			final MapActivity ctx, final int[] running, final boolean flat, final boolean nightMode) {
-
-		this.flat = flat;
-		this.deletedPoints = deletedPoints;
-
-		final List<Object> points = getPoints();
-		List<Object> activePoints = getActivePoints(points);
-
-		final WaypointDialogHelper helper = this;
-
-		final StableArrayAdapter listAdapter = new StableArrayAdapter(ctx,
-				R.layout.waypoint_reached, R.id.title, points, activePoints) {
-
-			@Override
-			public void buildDividers() {
-				dividers = getCustomDividers(ctx, getObjects(), nightMode);
-			}
-
-			@Override
-			public boolean isEnabled(int position) {
-				Object obj = getItem(position);
-				boolean labelView = (obj instanceof Integer);
-				boolean topDividerView = (obj instanceof Boolean) && ((Boolean) obj);
-				boolean bottomDividerView = (obj instanceof Boolean) && !((Boolean) obj);
-
-				boolean enabled = !labelView && !topDividerView && !bottomDividerView;
-
-				if (enabled && obj instanceof RadiusItem) {
-					int type = ((RadiusItem) obj).type;
-					enabled = type != WaypointHelper.POI;
-				}
-
-				return enabled;
-			}
-
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				// User super class to create the View
-				View v = convertView;
-				final ArrayAdapter<Object> thisAdapter = this;
-				Object obj = getItem(position);
-				boolean labelView = (obj instanceof Integer);
-				boolean topDividerView = (obj instanceof Boolean) && ((Boolean) obj);
-				boolean bottomDividerView = (obj instanceof Boolean) && !((Boolean) obj);
-				if (obj instanceof RadiusItem) {
-					final int type = ((RadiusItem) obj).type;
-					v = createItemForRadiusProximity(ctx, type, running, position, thisAdapter, nightMode);
-					//Drawable d = new ColorDrawable(mapActivity.getResources().getColor(R.color.dashboard_divider_light));
-					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
-				} else if (labelView) {
-					v = createItemForCategory(ctx, (Integer) obj, running, position, thisAdapter, nightMode, helper);
-					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
-				} else if (topDividerView) {
-					v = ctx.getLayoutInflater().inflate(R.layout.card_top_divider, null);
-					AndroidUtils.setListBackground(mapActivity, v, nightMode);
-				} else if (bottomDividerView) {
-					v = ctx.getLayoutInflater().inflate(R.layout.card_bottom_divider, null);
-					AndroidUtils.setListBackground(mapActivity, v, nightMode);
-				} else if (obj instanceof LocationPointWrapper) {
-					LocationPointWrapper point = (LocationPointWrapper) obj;
-					v = updateWaypointItemView(edit, deletedPoints, app, ctx, helper, v, point, this,
-							nightMode, flat);
-					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
-				}
-				return v;
-			}
-		};
-
-		for (Object p : points) {
-			if (p instanceof LocationPointWrapper) {
-				LocationPointWrapper w = (LocationPointWrapper) p;
-				if (w.type == WaypointHelper.TARGETS) {
-					final TargetPoint t = (TargetPoint) w.point;
-					if (t.getOriginalPointDescription() != null
-							&& t.getOriginalPointDescription().isSearchingAddress(mapActivity)) {
-						GeocodingLookupService.AddressLookupRequest lookupRequest
-								= new GeocodingLookupService.AddressLookupRequest(t.point, new GeocodingLookupService.OnAddressLookupResult() {
-							@Override
-							public void geocodingDone(String address) {
-								if (!helperCallbacks.isEmpty()) {
-									for (WaypointDialogHelperCallbacks callback : helperCallbacks) {
-										callback.reloadAdapter();
-									}
-								} else {
-									reloadListAdapter(listAdapter);
-								}
-								//updateRouteInfoMenu(ctx);
-							}
-						}, null);
-						app.getGeocodingLookupService().lookupAddress(lookupRequest);
-					}
-
-				}
-			}
-		}
-
-		return listAdapter;
-	}
-
 
 	public static View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
 											  final OsmandApplication app, final Activity ctx,
@@ -1129,42 +1028,20 @@ public class WaypointDialogHelper {
 			return R.string.shared_string_close;
 		}
 
+		private void openAddPointDialog(MapActivity mapActivity) {
+			Bundle args = new Bundle();
+			args.putBoolean(AddPointBottomSheetDialog.TARGET_KEY, false);
+			args.putBoolean(AddPointBottomSheetDialog.INTERMEDIATE_KEY, true);
+			AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(false);
+			fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
+		}
+
 		private void onWaypointItemClick(BaseBottomSheetItem[] addWaypointItem) {
 			final MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				final MapRouteInfoMenu routeMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-				final ListPopupWindow popup = new ListPopupWindow(mapActivity);
-				popup.setAnchorView(addWaypointItem[0].getView());
-				popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-				popup.setVerticalOffset(AndroidUtils.dpToPx(mapActivity, 48f));
-				popup.setModal(true);
-				popup.setAdapter(routeMenu.getIntermediatesPopupAdapter(mapActivity));
-				popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						boolean hideDashboard = false;
-						if (id == MapRouteInfoMenu.SPINNER_FAV_ID) {
-							routeMenu.selectFavorite(null, false, true);
-						} else if (id == MapRouteInfoMenu.SPINNER_MAP_ID) {
-							hideDashboard = true;
-							routeMenu.selectOnScreen(false, true);
-						} else if (id == MapRouteInfoMenu.SPINNER_ADDRESS_ID) {
-							mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.INTERMEDIATE_SELECTION, false);
-						} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_MORE_ID) {
-							routeMenu.selectMapMarker(-1, false, true);
-						} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_1_ID) {
-							routeMenu.selectMapMarker(0, false, true);
-						} else if (id == MapRouteInfoMenu.SPINNER_MAP_MARKER_2_ID) {
-							routeMenu.selectMapMarker(1, false, true);
-						}
-						popup.dismiss();
-						dismiss();
-						if (hideDashboard) {
-							mapActivity.getDashboard().hideDashboard();
-						}
-					}
-				});
-				popup.show();
+				openAddPointDialog(mapActivity);
 			}
 		}
 

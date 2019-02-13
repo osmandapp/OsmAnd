@@ -15,16 +15,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -358,14 +355,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public void updateInfo(final View main) {
 		mainView = main;
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		updateViaView(main);
-		updateFromSpinner(main);
-		updateToSpinner(main);
-		updateApplicationModes(mainView);
-		updateApplicationModesOptions(main);
-		updateOptionsButtons(main);
+
+		updateStartPointView();
+		updateWaypointsView();
+		updateFinishPointView();
+
+		updateApplicationModes();
+		updateApplicationModesOptions();
+		updateOptionsButtons();
 
 		routeCards.clear();
+
 		if (isBasicRouteCalculated()) {
 			GPXUtilities.GPXFile gpx = GPXUtilities.makeGpxFromRoute(routingHelper.getRoute());
 			if (gpx != null) {
@@ -401,11 +401,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public void updateApplicationModesOptions() {
-		updateApplicationModesOptions(mainView);
-	}
-
-	private void updateApplicationModesOptions(final View parentView) {
-		AppCompatImageView foldButtonView = (AppCompatImageView) parentView.findViewById(R.id.fold_button);
+		AppCompatImageView foldButtonView = (AppCompatImageView) mainView.findViewById(R.id.fold_button);
 		foldButtonView.setImageResource(currentMenuState == MenuState.HEADER_ONLY ?
 				R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down);
 		foldButtonView.setOnClickListener(new View.OnClickListener() {
@@ -415,7 +411,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
-		parentView.findViewById(R.id.app_modes_options).setOnClickListener(new View.OnClickListener() {
+		mainView.findViewById(R.id.app_modes_options).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				availableProfileDialog();
@@ -429,7 +425,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			openMenuHeaderOnly();
 		}
-		updateApplicationModesOptions(mainView);
+		updateApplicationModesOptions();
 	}
 
 	private void availableProfileDialog() {
@@ -457,7 +453,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				updateApplicationModes(mainView);
+				updateApplicationModes();
 			}
 		});
 		b.setView(v);
@@ -482,11 +478,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
-	private void updateApplicationModes(final View parentView) {
+	private void updateApplicationModes() {
 		final ApplicationMode am = routingHelper.getAppMode();
 		final Set<ApplicationMode> selected = new HashSet<>();
 		selected.add(am);
-		ViewGroup vg = (ViewGroup) parentView.findViewById(R.id.app_modes);
+		ViewGroup vg = (ViewGroup) mainView.findViewById(R.id.app_modes);
 		vg.removeAllViews();
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
@@ -495,7 +491,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					ApplicationMode next = selected.iterator().next();
 					updateApplicationMode(am, next);
 				}
-				updateOptionsButtons(mainView);
+				updateOptionsButtons();
 			}
 		};
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(mapActivity.getMyApplication()));
@@ -541,7 +537,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
-	private void updateOptionsButtons(final View main) {
+	private void updateOptionsButtons() {
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final OsmandSettings settings = app.getSettings();
 		final int colorActive = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
@@ -550,17 +546,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		final RoutingOptionsHelper.RouteMenuAppModes mode = routingOptionsHelper.modes.get(applicationMode);
 		int margin = AndroidUtils.dpToPx(app, 3);
 
-		View startButton = main.findViewById(R.id.start_button);
+		View startButton = mainView.findViewById(R.id.start_button);
 		if (isRouteCalculated()) {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
 			int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
-			((TextView) main.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
-			((ImageView) main.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+			((TextView) mainView.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
+			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
 		} else {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
 			int color = R.color.description_font_and_bottom_sheet_icons;
-			((TextView) main.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
-			((ImageView) main.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+			((TextView) mainView.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
+			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
 		}
 		startButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -569,7 +565,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
-		View cancelButton = main.findViewById(R.id.cancel_button);
+		View cancelButton = mainView.findViewById(R.id.cancel_button);
 		AndroidUtils.setBackground(app, cancelButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -578,9 +574,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
-		LinearLayout optionsButton = (LinearLayout) main.findViewById(R.id.map_options_route_button);
-		TextView optionsTitle = (TextView) main.findViewById(R.id.map_options_route_button_title);
-		ImageView optionsIcon = (ImageView) main.findViewById(R.id.map_options_route_button_icon);
+		LinearLayout optionsButton = (LinearLayout) mainView.findViewById(R.id.map_options_route_button);
+		TextView optionsTitle = (TextView) mainView.findViewById(R.id.map_options_route_button_title);
+		ImageView optionsIcon = (ImageView) mainView.findViewById(R.id.map_options_route_button_icon);
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
 			Drawable active = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
@@ -599,7 +595,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		scrollView.setVerticalScrollBarEnabled(false);
 		scrollView.setHorizontalScrollBarEnabled(false);
 
-		LinearLayout optionsContainer = (LinearLayout) main.findViewById(R.id.route_options_container);
+		LinearLayout optionsContainer = (LinearLayout) mainView.findViewById(R.id.route_options_container);
 		optionsContainer.removeAllViews();
 		if (mode == null) {
 			return;
@@ -658,7 +654,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 							public void onClick(View v) {
 								app.getPoiFilters().removeSelectedPoiFilter(poiUIFilter);
 								mapActivity.getMapView().refreshMap();
-								updateOptionsButtons(mainView);
+								updateOptionsButtons();
 							}
 						});
 						item.addView(container, newLp);
@@ -672,7 +668,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						@Override
 						public void onClick(View v) {
 							app.getWaypointHelper().enableWaypointType(WaypointHelper.ALARMS, false);
-							updateOptionsButtons(mainView);
+							updateOptionsButtons();
 						}
 					});
 					AndroidUtils.setBackground(app, container, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
@@ -686,7 +682,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						@Override
 						public void onClick(View v) {
 							app.getWaypointHelper().enableWaypointType(WaypointHelper.FAVORITES, false);
-							updateOptionsButtons(mainView);
+							updateOptionsButtons();
 						}
 					});
 					AndroidUtils.setBackground(app, container, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
@@ -723,7 +719,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 							if (mode.parameters.size() > 2) {
 								item.removeView(v);
 							} else {
-								updateOptionsButtons(mainView);
+								updateOptionsButtons();
 							}
 						}
 					});
@@ -757,7 +753,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 							if (mode.parameters.size() > 2) {
 								item.removeView(v);
 							} else {
-								updateOptionsButtons(mainView);
+								updateOptionsButtons();
 							}
 						}
 					});
@@ -777,7 +773,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						routingOptionsHelper.showLocalRoutingParameterGroupDialog(group, mapActivity, new RoutingOptionsHelper.OnClickListener() {
 							@Override
 							public void onClick() {
-								updateOptionsButtons(mainView);
+								updateOptionsButtons();
 							}
 						});
 					}
@@ -917,46 +913,33 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		RouteOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 	}
 
-	private void clickRouteWaypoints() {
-		if (getTargets().checkPointToNavigateShort()) {
-			mapActivity.getMapActions().openIntermediatePointsDialog();
-		}
-	}
-
-	private void updateViaView(final View parentView) {
+	private void updateWaypointsView() {
 		String via = generateViaDescription();
-		View viaLayout = parentView.findViewById(R.id.ViaLayout);
-		View viaLayoutDivider = parentView.findViewById(R.id.viaLayoutDivider);
+		View viaLayout = mainView.findViewById(R.id.ViaLayout);
+		View viaLayoutDivider = mainView.findViewById(R.id.viaLayoutDivider);
 		if (via.length() == 0) {
 			viaLayout.setVisibility(View.GONE);
 			viaLayoutDivider.setVisibility(View.GONE);
 		} else {
 			viaLayout.setVisibility(View.VISIBLE);
 			viaLayoutDivider.setVisibility(View.VISIBLE);
-			((TextView) parentView.findViewById(R.id.ViaView)).setText(via);
-			((TextView) parentView.findViewById(R.id.ViaSubView)).setText(app.getString(R.string.intermediate_destinations, getTargets().getIntermediatePoints().size()));
+			((TextView) mainView.findViewById(R.id.ViaView)).setText(via);
+			((TextView) mainView.findViewById(R.id.ViaSubView)).setText(app.getString(R.string.intermediate_destinations, getTargets().getIntermediatePoints().size()));
 		}
-		FrameLayout viaButton = (FrameLayout) parentView.findViewById(R.id.via_button);
+		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
 
 		viaButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				clickRouteWaypoints();
 				if (getTargets().checkPointToNavigateShort()) {
 					WaypointsFragment.showInstance(mapActivity);
 				}
 			}
 		});
 
-		ImageView viaIcon = (ImageView) parentView.findViewById(R.id.viaIcon);
+		ImageView viaIcon = (ImageView) mainView.findViewById(R.id.viaIcon);
 		viaIcon.setImageDrawable(getIconOrig(R.drawable.list_intermediate));
-		viaIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clickRouteWaypoints();
-			}
-		});
-		LinearLayout viaButtonContainer = (LinearLayout) parentView.findViewById(R.id.via_button_container);
+		LinearLayout viaButtonContainer = (LinearLayout) mainView.findViewById(R.id.via_button_container);
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, viaButton, nightMode, R.drawable.btn_border_rounded_light, R.drawable.btn_border_rounded_dark);
@@ -964,7 +947,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			AndroidUtils.setBackground(app, viaButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
 		}
-		ImageView viaButtonImageView = (ImageView) parentView.findViewById(R.id.via_button_image_view);
+		ImageView viaButtonImageView = (ImageView) mainView.findViewById(R.id.via_button_image_view);
 
 		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
@@ -975,50 +958,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		viaButtonImageView.setImageDrawable(normal);
 	}
 
-	private void updateToSpinner(final View parentView) {
-		final Spinner toSpinner = setupToSpinner(parentView);
-		toSpinner.setClickable(false);
-		final View toLayout = parentView.findViewById(R.id.ToLayout);
-		toSpinner.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				event.offsetLocation(AndroidUtils.dpToPx(mapActivity, 48f), 0);
-				toLayout.onTouchEvent(event);
-				return true;
-			}
-		});
-		toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, final long id) {
-				parentView.post(new Runnable() {
-					@Override
-					public void run() {
-						if (id == SPINNER_FAV_ID) {
-							selectFavorite(parentView, true, false);
-						} else if (id == SPINNER_MAP_ID) {
-							selectOnScreen(true, false);
-						} else if (id == SPINNER_ADDRESS_ID) {
-							mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.DESTINATION_SELECTION, false);
-							setupToSpinner(parentView);
-						} else if (id == SPINNER_MAP_MARKER_MORE_ID) {
-							selectMapMarker(-1, true, false);
-							setupToSpinner(parentView);
-						} else if (id == SPINNER_MAP_MARKER_1_ID) {
-							selectMapMarker(0, true, false);
-						} else if (id == SPINNER_MAP_MARKER_2_ID) {
-							selectMapMarker(1, true, false);
-						} else if (id == SPINNER_MAP_MARKER_3_ID) {
-							selectMapMarker(2, true, false);
-						}
-					}
-				});
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
-
+	private void updateFinishPointView() {
+		setupToText(mainView);
+		final View toLayout = mainView.findViewById(R.id.ToLayout);
 		toLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1026,8 +968,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
-		final FrameLayout toButton = (FrameLayout) parentView.findViewById(R.id.to_button);
-		final LinearLayout toButtonContainer = (LinearLayout) parentView.findViewById(R.id.to_button_container);
+		final FrameLayout toButton = (FrameLayout) mainView.findViewById(R.id.to_button);
+		final LinearLayout toButtonContainer = (LinearLayout) mainView.findViewById(R.id.to_button_container);
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, toButton, nightMode, R.drawable.btn_border_rounded_light, R.drawable.btn_border_rounded_dark);
@@ -1035,7 +977,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
 		}
-		ImageView toButtonImageView = (ImageView) parentView.findViewById(R.id.to_button_image_view);
+		ImageView toButtonImageView = (ImageView) mainView.findViewById(R.id.to_button_image_view);
 
 		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
@@ -1052,7 +994,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
-		updateToIcon(parentView);
+		updateToIcon(mainView);
 	}
 
 	private void updateToIcon(View parentView) {
@@ -1060,58 +1002,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		toIcon.setImageDrawable(getIconOrig(R.drawable.list_destination));
 	}
 
-	private void updateFromSpinner(final View parentView) {
-		final TargetPointsHelper targets = getTargets();
-		final Spinner fromSpinner = setupFromSpinner(parentView);
-		fromSpinner.setClickable(false);
-		final View fromLayout = parentView.findViewById(R.id.FromLayout);
-		fromSpinner.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				event.offsetLocation(AndroidUtils.dpToPx(mapActivity, 48f), 0);
-				fromLayout.onTouchEvent(event);
-				return true;
-			}
-		});
-		fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, final long id) {
-				parentView.post(new Runnable() {
-					@Override
-					public void run() {
-						if (id == SPINNER_MY_LOCATION_ID) {
-							if (targets.getPointToStart() != null) {
-								targets.clearStartPoint(true);
-								mapActivity.getMyApplication().getSettings().backupPointToStart();
-							}
-							updateFromIcon(parentView);
-						} else if (id == SPINNER_FAV_ID) {
-							selectFavorite(parentView, false, false);
-						} else if (id == SPINNER_MAP_ID) {
-							selectOnScreen(false, false);
-						} else if (id == SPINNER_ADDRESS_ID) {
-							mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.START_POINT_SELECTION, false);
-							setupFromSpinner(parentView);
-						} else if (id == SPINNER_MAP_MARKER_MORE_ID) {
-							selectMapMarker(-1, false, false);
-							setupFromSpinner(parentView);
-						} else if (id == SPINNER_MAP_MARKER_1_ID) {
-							selectMapMarker(0, false, false);
-						} else if (id == SPINNER_MAP_MARKER_2_ID) {
-							selectMapMarker(1, false, false);
-						} else if (id == SPINNER_MAP_MARKER_3_ID) {
-							selectMapMarker(2, false, false);
-						}
-					}
-				});
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
-
+	private void updateStartPointView() {
+		setupFromText(mainView);
+		final View fromLayout = mainView.findViewById(R.id.FromLayout);
 		fromLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1119,8 +1012,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
-		FrameLayout fromButton = (FrameLayout) parentView.findViewById(R.id.from_button);
-		final LinearLayout fromButtonContainer = (LinearLayout) parentView.findViewById(R.id.from_button_container);
+		FrameLayout fromButton = (FrameLayout) mainView.findViewById(R.id.from_button);
+		final LinearLayout fromButtonContainer = (LinearLayout) mainView.findViewById(R.id.from_button_container);
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, fromButton, nightMode, R.drawable.btn_border_rounded_light, R.drawable.btn_border_rounded_dark);
@@ -1129,7 +1022,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			AndroidUtils.setBackground(app, fromButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
 		}
 
-		ImageView swapDirectionView = (ImageView) parentView.findViewById(R.id.from_button_image_view);
+		ImageView swapDirectionView = (ImageView) mainView.findViewById(R.id.from_button_image_view);
 
 		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_change_navigation_points, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
@@ -1162,7 +1055,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		});
 
-		updateFromIcon(parentView);
+		updateFromIcon(mainView);
 	}
 
 	public void updateFromIcon(View parentView) {
@@ -1202,9 +1095,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public void setupSpinners(final boolean target, final boolean intermediate) {
 		if (!intermediate && mainView != null) {
 			if (target) {
-				setupToSpinner(mainView);
+				setupToText(mainView);
 			} else {
-				setupFromSpinner(mainView);
+				setupFromText(mainView);
 			}
 		}
 	}
@@ -1339,24 +1232,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		return "";
 	}
 
-	private Spinner setupFromSpinner(View view) {
-		List<RouteSpinnerRow> fromActions = new ArrayList<>();
-		fromActions.add(new RouteSpinnerRow(SPINNER_MY_LOCATION_ID, R.drawable.ic_action_get_my_location,
-				mapActivity.getString(R.string.shared_string_my_location)));
-		fromActions.add(new RouteSpinnerRow(SPINNER_FAV_ID, R.drawable.ic_action_fav_dark,
-				mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis)));
-		fromActions.add(new RouteSpinnerRow(SPINNER_MAP_ID, R.drawable.ic_action_marker_dark,
-				mapActivity.getString(R.string.shared_string_select_on_map)));
-		fromActions.add(new RouteSpinnerRow(SPINNER_ADDRESS_ID, R.drawable.ic_action_home_dark,
-				mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis)));
-
+	private void setupFromText(View view) {
 		TargetPoint start = getTargets().getPointToStart();
-		int startPos = -1;
+		String name = null;
 		if (start != null) {
-			String oname = start.getOnlyName().length() > 0 ? start.getOnlyName()
-					: (mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
-			startPos = fromActions.size();
-			fromActions.add(new RouteSpinnerRow(SPINNER_START_ID, R.drawable.ic_action_get_my_location, oname));
+			name = start.getOnlyName().length() > 0 ? start.getOnlyName() :
+					(mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
 
 			final LatLon latLon = start.point;
 			final PointDescription pointDescription = start.getOriginalPointDescription();
@@ -1374,35 +1255,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		}
 
-		addMarkersToSpinner(fromActions);
-
-		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
-		RouteSpinnerArrayAdapter fromAdapter = new RouteSpinnerArrayAdapter(view.getContext());
-		for (RouteSpinnerRow row : fromActions) {
-			fromAdapter.add(row);
-		}
-		fromSpinner.setAdapter(fromAdapter);
+		final TextView fromText = ((TextView) view.findViewById(R.id.fromText));
 		if (start != null) {
-			fromSpinner.setSelection(startPos);
+			fromText.setText(name);
 		} else {
-			if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() == null) {
-				fromSpinner.setPromptId(R.string.search_poi_location);
-			}
-			//fromSpinner.setSelection(0);
+			fromText.setText(R.string.shared_string_my_location);
 		}
-		return fromSpinner;
 	}
 
-	private Spinner setupToSpinner(View view) {
-		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
+	private void setupToText(View view) {
+		final TextView toText = ((TextView) view.findViewById(R.id.toText));
 		final TargetPointsHelper targets = getTargets();
-		List<RouteSpinnerRow> toActions = new ArrayList<>();
-
 		TargetPoint finish = getTargets().getPointToNavigate();
 		if (finish != null) {
-			toActions.add(new RouteSpinnerRow(SPINNER_FINISH_ID, R.drawable.ic_action_get_my_location,
-					getRoutePointDescription(targets.getPointToNavigate().point,
-							targets.getPointToNavigate().getOnlyName())));
+			toText.setText(getRoutePointDescription(targets.getPointToNavigate().point,
+							targets.getPointToNavigate().getOnlyName()));
 
 			final LatLon latLon = finish.point;
 			final PointDescription pointDescription = finish.getOriginalPointDescription();
@@ -1420,25 +1287,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 
 		} else {
-			toSpinner.setPromptId(R.string.route_descr_select_destination);
-			toActions.add(new RouteSpinnerRow(SPINNER_HINT_ID, R.drawable.ic_action_get_my_location,
-					mapActivity.getString(R.string.route_descr_select_destination)));
+			toText.setText(R.string.route_descr_select_destination);
 		}
-		toActions.add(new RouteSpinnerRow(SPINNER_FAV_ID, R.drawable.ic_action_fav_dark,
-				mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis)));
-		toActions.add(new RouteSpinnerRow(SPINNER_MAP_ID, R.drawable.ic_action_marker_dark,
-				mapActivity.getString(R.string.shared_string_select_on_map)));
-		toActions.add(new RouteSpinnerRow(SPINNER_ADDRESS_ID, R.drawable.ic_action_home_dark,
-				mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis)));
-
-		addMarkersToSpinner(toActions);
-
-		RouteSpinnerArrayAdapter toAdapter = new RouteSpinnerArrayAdapter(view.getContext());
-		for (RouteSpinnerRow row : toActions) {
-			toAdapter.add(row);
-		}
-		toSpinner.setAdapter(toAdapter);
-		return toSpinner;
 	}
 
 	public RoutePopupListArrayAdapter getIntermediatesPopupAdapter(Context ctx) {
