@@ -1,5 +1,6 @@
 package net.osmand.telegram.ui
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -25,8 +26,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import net.osmand.PlatformUtil
+import net.osmand.data.LatLon
 import net.osmand.telegram.R
+import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandApiUtils
+import org.json.JSONObject
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 
@@ -35,7 +40,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 	companion object {
 
 		private const val TAG = "LoginDialogFragment"
-		private val LOG = PlatformUtil.getLog(LoginDialogFragment::class.java)
+		private val log = PlatformUtil.getLog(LoginDialogFragment::class.java)
 
 		private const val LOGIN_DIALOG_TYPE_PARAM_KEY = "login_dialog_type_param"
 		private const val SHOW_PROGRESS_PARAM_KEY = "show_progress_param"
@@ -50,6 +55,8 @@ class LoginDialogFragment : BaseDialogFragment() {
 			private set
 
 		private var softKeyboardShown: Boolean = false
+
+		private var countryPhoneCode: String = ""
 
 		fun showWelcomeDialog(fragmentManager: FragmentManager) {
 			welcomeDialogShown = true
@@ -85,7 +92,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 					fragment.updateDialog(loginDialogType, showWelcomeDialog)
 				}
 			} catch (e: RuntimeException) {
-				LOG.error(e)
+				log.error(e)
 			}
 		}
 
@@ -188,6 +195,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		}
 	}
 
+	@SuppressLint("SetTextI18n")
 	@Suppress("DEPRECATION")
 	private fun buildDialog(view: View?) {
 		if (showWelcomeDialog) {
@@ -248,7 +256,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
 							if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
-								editText.setText("+")
+								editText.setText("+$countryPhoneCode")
 							}
 								editText.setOnEditorActionListener { _, actionId, _ ->
 								if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -266,10 +274,10 @@ class LoginDialogFragment : BaseDialogFragment() {
 								override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 								override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 								override fun afterTextChanged(s: Editable) {
-									changeContinueButtonEnabled(s.length > 1)
+									changeContinueButtonEnabled(s.length > countryPhoneCode.length + 1)
 								}
 							})
-							changeContinueButtonEnabled(editText.text.length > 1)
+							changeContinueButtonEnabled(editText.text.length > countryPhoneCode.length + 1)
 							editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
 						}
 
@@ -428,6 +436,51 @@ class LoginDialogFragment : BaseDialogFragment() {
 				}
 			}
 		}
+	}
+
+	override fun onStart() {
+		super.onStart()
+		checkCountryPhoneCode()
+	}
+
+	private fun checkCountryPhoneCode() {
+		OsmandApiUtils.getLocationByIp(app, object : AndroidNetworkUtils.OnRequestResultListener {
+			override fun onResult(result: String?) {
+				if (result != null) {
+					try {
+						val obj = JSONObject(result)
+						val latitude = obj.getDouble("latitude")
+						val longitude = obj.getDouble("longitude")
+						val countryId = obj.getString("country_code")
+						if (latitude == 0.0 && longitude == 0.0) {
+							log.debug("Empty location")
+						} else {
+							val location = LatLon(latitude, longitude)
+							log.debug("$location")
+							countryPhoneCode = getCountryDialCode(countryId)
+							log.debug(countryPhoneCode)
+						}
+					} catch (e: Exception) {
+						log.debug("JSON parsing error: ", e)
+					}
+				} else {
+					log.debug("Empty response")
+				}
+			}
+		})
+	}
+
+	fun getCountryDialCode(countryId: String): String {
+		var countryDialCode = ""
+		val arrCountryCode = this.resources.getStringArray(R.array.DialingCountryCode)
+		arrCountryCode.forEach {
+			val arrDial = it.split(",")
+			if (arrDial[1].trim() == (countryId)) {
+				countryDialCode = arrDial[0]
+				return countryDialCode
+			}
+		}
+		return countryDialCode
 	}
 
 	private fun applyAuthParam(t: LoginDialogType, value: String) {
