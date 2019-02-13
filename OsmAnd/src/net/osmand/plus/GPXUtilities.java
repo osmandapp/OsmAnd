@@ -1639,7 +1639,8 @@ public class GPXUtilities {
 							((GPXExtensions) parse).getExtensionsToWrite().put(er.key.toLowerCase(), er.result);
 
 						} else if (tag.toLowerCase().equals("routepointextension")) {
-							res = parseRoutePointExtension(parser, res);
+							Track extTrack = parseRoutePointExtension(parser);
+							res.tracks.add(extTrack);
 
 						} else {
 							String value = readText(parser, tag);
@@ -1834,28 +1835,30 @@ public class GPXUtilities {
 		return res;
 	}
 
-	private static GPXFile parseRoutePointExtension(XmlPullParser parser, GPXFile res){
-
+	private static Track parseRoutePointExtension(XmlPullParser parser){
+		Track extensionTrack = new Track();
 		try{
-			Stack<GPXExtensions> PPEState = new Stack<>();
 			log.debug("parser.getName = " + parser.getName());
-			int tok = 2;
+			TrkSegment segment = null;
+			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok==XmlPullParser.START_TAG) {
-					//Object parse = PPEState.peek();
 					String tag = parser.getName();
 					if(tag.toLowerCase().equals("subclass")) {
-						log.debug(tag + " : " + readText(parser,tag));
+						segment = new TrkSegment();
+						extensionTrack.segments.add(segment);
 					} else if (tag.equals("rpt")) {
-						readExtensionsText(parser,tag,2);
+						WptPt point = parseWptAttributes(parser);
+						if(segment!=null) {
+							segment.points.add(point);
+						}
 					}
 				}
-
 			}
 		} catch (Exception e) {
 
 		}
-		return res;
+		return extensionTrack;
 	}
 
 	private static Reader getUTF8Reader(InputStream f) throws IOException {
@@ -1873,11 +1876,6 @@ public class GPXUtilities {
 		}
 		return new InputStreamReader(bis, "UTF-8");
 	}
-
-//	private static WptPt parseWptFromExtension(XmlPullParser parser) {
-//		WptPt wpt = new WptPt();
-//
-//	}
 
 	private static WptPt parseWptAttributes(XmlPullParser parser) {
 		WptPt wpt = new WptPt();
