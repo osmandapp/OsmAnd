@@ -56,7 +56,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 
 		private var softKeyboardShown: Boolean = false
 
-		private var countryPhoneCode: String = ""
+		private var countryPhoneCode: String = "+"
 
 		fun showWelcomeDialog(fragmentManager: FragmentManager) {
 			welcomeDialogShown = true
@@ -256,7 +256,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
 							if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
-								editText.setText("+$countryPhoneCode")
+								editText.setText(countryPhoneCode)
 							}
 								editText.setOnEditorActionListener { _, actionId, _ ->
 								if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -274,10 +274,10 @@ class LoginDialogFragment : BaseDialogFragment() {
 								override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 								override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 								override fun afterTextChanged(s: Editable) {
-									changeContinueButtonEnabled(s.length > countryPhoneCode.length + 1)
+									changeContinueButtonEnabled(s.length > countryPhoneCode.length)
 								}
 							})
-							changeContinueButtonEnabled(editText.text.length > countryPhoneCode.length + 1)
+							changeContinueButtonEnabled(editText.text.length > countryPhoneCode.length)
 							editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
 						}
 
@@ -475,8 +475,8 @@ class LoginDialogFragment : BaseDialogFragment() {
 		val arrCountryCode = this.resources.getStringArray(R.array.DialingCountryCode)
 		arrCountryCode.forEach {
 			val arrDial = it.split(",")
-			if (arrDial[1].trim() == (countryId)) {
-				countryDialCode = arrDial[0]
+			if (arrDial[0].trim() == (countryId)) {
+				countryDialCode = arrDial[1]
 				return countryDialCode
 			}
 		}
