@@ -3224,6 +3224,6 @@
     <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
     <string name="route_class_stat_container">級別</string>
     <string name="route_surface_stat_container">路面</string>
-    <string name="route_smoothness_stat_container">平順</string>
+    <string name="route_smoothness_stat_container">平坦</string>
     <string name="route_steepness_stat_container">坡度</string>
 </resources>
