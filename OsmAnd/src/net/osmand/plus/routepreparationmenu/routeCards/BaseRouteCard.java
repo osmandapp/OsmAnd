@@ -27,6 +27,7 @@ public abstract class BaseRouteCard {
 	public BaseRouteCard(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	public abstract int getCardLayoutId();

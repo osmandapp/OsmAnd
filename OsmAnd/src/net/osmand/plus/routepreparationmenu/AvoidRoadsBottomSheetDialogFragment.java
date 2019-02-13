@@ -124,9 +124,11 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		buttonDescription.setTextColor(getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 
 		FrameLayout buttonContainer = buttonView.findViewById(R.id.button_container);
-		AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 			AndroidUtils.setBackground(app, buttonDescription, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		} else {
+			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 
 		buttonContainer.setOnClickListener(new View.OnClickListener() {

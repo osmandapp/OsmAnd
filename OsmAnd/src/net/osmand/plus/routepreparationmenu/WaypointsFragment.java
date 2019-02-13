@@ -227,7 +227,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 							@Override
 							public String getTitle() {
 								List<Object> activeObjects;
-								if ((getMyApplication().getRoutingHelper().isRoutePlanningMode() || getMyApplication().getRoutingHelper().isFollowingMode())
+								if ((mapActivity.getRoutingHelper().isRoutePlanningMode() || mapActivity.getRoutingHelper().isFollowingMode())
 										&& item != null
 										&& ((activeObjects = stableAdapter.getActiveObjects()).isEmpty() || isContainsOnlyStart(activeObjects))) {
 									return mapActivity.getResources().getString(R.string.cancel_navigation);
@@ -247,7 +247,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 						List<Object> activeObjects = stableAdapter.getActiveObjects();
 						if (activeObjects.isEmpty() || isContainsOnlyStart(activeObjects)) {
 							mapActivity.getMapActions().stopNavigationWithoutConfirm();
-							getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, true);
+							mapActivity.getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, true);
 							mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
 						}
 					}
@@ -410,12 +410,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 
 		addButtonDescr.setText(R.string.shared_string_add);
-		addButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_plus, R.color.active_buttons_and_links_light), null, null, null);
-		AndroidUtils.setBackground(app, addButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+		addButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_plus, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light), null, null, null);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, addButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 			AndroidUtils.setBackground(app, addButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(app, addButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			AndroidUtils.setBackground(app, addButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 
 		int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
@@ -425,13 +425,13 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		FrameLayout clearButton = view.findViewById(R.id.clear_all_button);
 		TextView clearButtonDescr = (TextView) view.findViewById(R.id.clear_all_button_descr);
 		clearButtonDescr.setText(R.string.shared_string_clear_all);
-		clearButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_clear_all, R.color.active_buttons_and_links_light), null, null, null);
-		AndroidUtils.setBackground(app, clearButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+		clearButtonDescr.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_clear_all, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light), null, null, null);
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, clearButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 			AndroidUtils.setBackground(app, clearButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 		} else {
-			AndroidUtils.setBackground(app, clearButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			AndroidUtils.setBackground(app, clearButtonDescr, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 
 		AndroidUtils.setBackground(app, view.findViewById(R.id.dividerControlButtons), nightMode,
@@ -468,7 +468,9 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
 				if (listAdapter.getItem(item) instanceof WaypointHelper.LocationPointWrapper) {
 					WaypointHelper.LocationPointWrapper ps = (WaypointHelper.LocationPointWrapper) listAdapter.getItem(item);
-					showOnMap(app, ctx, ps.getPoint(), false);
+					if (ps != null) {
+						showOnMap(app, ctx, ps.getPoint(), false);
+					}
 					dismiss();
 				}
 			}
@@ -552,7 +554,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	public void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb) {
 		int bgColor = ContextCompat.getColor(app, nightMode ? R.color.route_info_cancel_button_color_dark : R.color.activity_background_light);
-		int progressColor = ContextCompat.getColor(getMyApplication(), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		int progressColor = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 	}
@@ -565,7 +567,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	private void updateListAdapter() {
 		List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<>();
 		listView.setEmptyView(null);
-		StableArrayAdapter listAdapter = getWaypointsDrawerAdapter(true, deletedPoints, mapActivity, running, false, false);
+		StableArrayAdapter listAdapter = getWaypointsDrawerAdapter(true, deletedPoints, mapActivity, running, false, nightMode);
 		AdapterView.OnItemClickListener listener = getDrawerItemClickListener(mapActivity, running, listAdapter);
 		setDynamicListItems(listView, listAdapter);
 		updateListAdapter(listAdapter, listener);

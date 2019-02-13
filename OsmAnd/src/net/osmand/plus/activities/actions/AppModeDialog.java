@@ -127,9 +127,9 @@ public class AppModeDialog {
 		}
 	}
 
-	public static void updateButtonState2(final OsmandApplication ctx, final List<ApplicationMode> visible,
-	                                      final Set<ApplicationMode> selected, final View.OnClickListener onClickListener, final View[] buttons,
-	                                      int i, final boolean singleChoice, final boolean useMapTheme, final boolean nightMode) {
+	public static void updateButtonStateForRoute(final OsmandApplication ctx, final List<ApplicationMode> visible,
+	                                             final Set<ApplicationMode> selected, final View.OnClickListener onClickListener, final View[] buttons,
+	                                             int i, final boolean singleChoice, final boolean useMapTheme, final boolean nightMode) {
 		if (buttons[i] != null) {
 			View tb = buttons[i];
 			final ApplicationMode mode = visible.get(i);
@@ -143,11 +143,11 @@ public class AppModeDialog {
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
 
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 				} else {
 					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 				}
-				AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_trans_light, R.drawable.ripple_dark);
 			} else {
 				if (useMapTheme) {
 					Drawable drawable = ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
@@ -157,14 +157,14 @@ public class AppModeDialog {
 					}
 					iv.setImageDrawable(drawable);
 					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+						AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_dark);
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 					} else {
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_dark);
+						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_dark);
 					}
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getSmallIconDark()));
 				}
-				AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_dark);
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_unchecked)));
 			}
 			tb.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +188,7 @@ public class AppModeDialog {
 						onClickListener.onClick(null);
 					}
 					for (int i = 0; i < visible.size(); i++) {
-						updateButtonState2(ctx, visible, selected, onClickListener, buttons, i, singleChoice, useMapTheme, nightMode);
+						updateButtonStateForRoute(ctx, visible, selected, onClickListener, buttons, i, singleChoice, useMapTheme, nightMode);
 					}
 				}
 			});
