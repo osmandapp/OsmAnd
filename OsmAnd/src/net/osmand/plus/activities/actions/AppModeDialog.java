@@ -157,9 +157,10 @@ public class AppModeDialog {
 					}
 					iv.setImageDrawable(drawable);
 					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+						AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_dark);
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 					} else {
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_dark);
+						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_dark);
 					}
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getSmallIconDark()));

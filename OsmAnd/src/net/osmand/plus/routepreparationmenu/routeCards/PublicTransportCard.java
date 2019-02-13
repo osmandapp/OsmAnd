@@ -2,7 +2,6 @@ package net.osmand.plus.routepreparationmenu.routeCards;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
