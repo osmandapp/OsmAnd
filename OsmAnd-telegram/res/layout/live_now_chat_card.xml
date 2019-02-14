@@ -59,6 +59,7 @@
 					android:id="@+id/details_container"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:paddingBottom="2dp"
 					android:gravity="center_vertical">
 
 					<LinearLayout
@@ -86,7 +87,7 @@
 							android:maxLines="1"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
-							app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height"
+							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
 							app:typeface="@string/font_roboto_regular"
 							tools:text="213 m" />
 
@@ -116,7 +117,7 @@
 							android:maxLines="1"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
-							app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height"
+							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
 							app:typeface="@string/font_roboto_regular"
 							tools:text="@string/shared_string_group" />
 
@@ -153,7 +154,7 @@
 							android:layout_height="wrap_content"
 							android:maxLines="1"
 							android:textSize="@dimen/list_item_description_text_size"
-							app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height_small"
+							app:firstBaselineToTopHeight="18dp"
 							app:typeface="@string/font_roboto_medium"
 							tools:text="213 m"
 							tools:textColor="@color/ctrl_active_light"/>
@@ -167,7 +168,7 @@
 							android:textColor="?attr/android:textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
 							android:visibility="visible"
-							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right" />
+							app:firstBaselineToTopHeight="18dp" />
 
 					</LinearLayout>
 
@@ -180,7 +181,7 @@
 						android:maxLines="1"
 						android:textColor="?attr/android:textColorSecondary"
 						android:textSize="@dimen/list_item_description_text_size"
-						app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
+						app:firstBaselineToTopHeight="18dp"
 						app:typeface="@string/font_roboto_regular"
 						tools:text="Live: 1 • All: 36"/>
 
