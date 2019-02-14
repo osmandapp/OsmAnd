@@ -1505,22 +1505,13 @@ public class GPXUtilities {
 		}
 	}
 
-	private static class ExtensionResult {
-		String key = "";
-		String result = "";
-		double lat = 0.0;
-		double lon = 0.0;
+	private static class ExtensionReadResult {
+		String tag = "";
+		String value = "";
 
-		public ExtensionResult(String key, String result) {
-			this.key = key;
-			this.result = result;
-		}
-
-		public ExtensionResult(String key, String result, double lat, double lon) {
-			this.key = key;
-			this.result = result;
-			this.lat = lat;
-			this.lon = lon;
+		public ExtensionReadResult(String tag, String value) {
+			this.tag = tag;
+			this.value = value;
 		}
 	}
 
@@ -1542,6 +1533,31 @@ public class GPXUtilities {
 		return text;
 	}
 
+
+	private static List<ExtensionReadResult> readExtensionsText(XmlPullParser parser, String key, int startTok) throws XmlPullParserException, IOException {
+		List<ExtensionReadResult> results = new ArrayList<>();
+		String tag = null;
+		String text = null;
+		while (startTok != XmlPullParser.END_DOCUMENT) {
+			if (startTok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
+				break;
+			} else if (startTok == XmlPullParser.START_TAG){
+				tag = parser.getName();
+			} else if (startTok == XmlPullParser.TEXT) {
+				if (!parser.getText().isEmpty()){
+					text = parser.getText();
+				}
+			}
+
+			if (tag!=null && text!=null) {
+				results.add(new ExtensionReadResult(tag, text));
+				tag = null;
+				text = null;
+			}
+			startTok = parser.next();
+		}
+		return results;
+	}
 
 
 	public static GPXFile loadGPXFile(Context ctx, File f) {
@@ -1571,49 +1587,7 @@ public class GPXUtilities {
 		}
 	}
 
-	private static ExtensionResult readExtensionsText(XmlPullParser parser, String key, int startToken) throws XmlPullParserException, IOException {
-		ExtensionResult er;
-		int tok = startToken;
-		String text = null;
-		String tag = null;
-		double lat = -1;
-		double lon = -1;
-		while (tok != XmlPullParser.END_DOCUMENT) {
-			if(tok==2) System.out.println("OPEN_TAG <"+parser.getName() + ">");
-			else if (tok==3) System.out.println("CLOSE TAG <" + parser.getName()+ ">");
-			else if (tok==4) System.out.println("TEXT = " + parser.getText());
-			if(tok == 2 && parser.getAttributeCount()>0) {
-				for (int a = 0; a<parser.getAttributeCount(); a++) {
-					if (parser.getAttributeName(a).equals("lat")) {
-						lat = Double.parseDouble(parser.getAttributeValue(a));
-					} else if ((parser.getAttributeName(a).equals("lon"))) {
-						lon = Double.parseDouble(parser.getAttributeValue(a));
-					}
-					System.out.println("Attributes: " + parser.getAttributeName(a) + ": " + parser.getAttributeValue(a));
-				}
-			}
-			if (tok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
-				break;
-			} else if (tok==2){
-				tag = parser.getName();
-			} else if (tok == XmlPullParser.TEXT) {
-				if (text == null) {
-					text = parser.getText();
-				} else {
-					text += parser.getText();
-				}
-			}
-			tok = parser.next();
 
-		}
-		if (lat==-1) {
-			er = new ExtensionResult(tag, text);
-		} else {
-			er = new ExtensionResult(tag, text, lat, lon);
-		}
-
-		return er;
-	}
 
 	public static GPXFile loadGPXFile(Context ctx, InputStream f) {
 		GPXFile res = new GPXFile();
@@ -1633,25 +1607,36 @@ public class GPXUtilities {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
 					if (extensionReadMode && parse != null) {
-
-						if(tag.toLowerCase().equals("trackextension")) {
-							ExtensionResult er = readExtensionsText(parser, tag, tok);
-							((GPXExtensions) parse).getExtensionsToWrite().put(er.key.toLowerCase(), er.result);
-
-						} else if (tag.toLowerCase().equals("routepointextension")) {
-							Track extTrack = parseRoutePointExtension(parser);
-							res.tracks.add(extTrack);
-
-						} else {
-							String value = readText(parser, tag);
-							if (value != null) {
-								((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
-								if (tag.equals("speed") && parse instanceof WptPt) {
-									try {
-										((WptPt) parse).speed = Float.parseFloat(value);
-									} catch (NumberFormatException e) {}
+						switch (tag.toLowerCase()) {
+							case "routeextension":
+							case "trackextension":
+								List<ExtensionReadResult> results = readExtensionsText(parser, tag, tok);
+								if (!results.isEmpty()) {
+									for (ExtensionReadResult result : results) {
+										((GPXExtensions) parse).getExtensionsToWrite().put(result.tag.toLowerCase(), result.value);
+									}
 								}
-							}
+								break;
+
+							case "routepointextension":
+								Track extensionTrack = parseRoutePointExtension(parser);
+								if(extensionTrack!=null) {
+									res.tracks.add(extensionTrack);
+								}
+								break;
+
+							default:
+								String value = readText(parser, tag);
+								if (value != null) {
+									((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
+									if (tag.equals("speed") && parse instanceof WptPt) {
+										try {
+											((WptPt) parse).speed = Float.parseFloat(value);
+										} catch (NumberFormatException e) {
+										}
+									}
+								}
+								break;
 						}
 					} else if (parse != null && tag.equals("extensions") ) {
 						extensionReadMode = true;
@@ -1836,9 +1821,9 @@ public class GPXUtilities {
 	}
 
 	private static Track parseRoutePointExtension(XmlPullParser parser){
-		Track extensionTrack = new Track();
+		Track extensionTrack = null;
 		try{
-			log.debug("parser.getName = " + parser.getName());
+			extensionTrack = new Track();
 			TrkSegment segment = null;
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -1856,7 +1841,7 @@ public class GPXUtilities {
 				}
 			}
 		} catch (Exception e) {
-
+			log.error(e.getMessage(), e);
 		}
 		return extensionTrack;
 	}
