@@ -31,6 +31,7 @@ import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.DataConstants
 import net.osmand.telegram.utils.OsmandApiUtils
 import org.json.JSONObject
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -500,7 +501,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 					try {
 						val obj = JSONObject(result)
 						val countryId = obj.getString("country_code")
-						countryPhoneCode = OsmandApiUtils.countryPhoneCodes[countryId]?.split(",")?.firstOrNull() ?: "+"
+						countryPhoneCode = DataConstants.countryPhoneCodes[countryId]?.split(",")?.firstOrNull() ?: "+"
 					} catch (e: Exception) {
 						log.error("JSON parsing error: ", e)
 					}
