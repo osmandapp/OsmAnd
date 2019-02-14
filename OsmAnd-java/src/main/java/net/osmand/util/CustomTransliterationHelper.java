@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.util;
 
 import com.atilika.kuromoji.ipadic.Token;
 import com.atilika.kuromoji.ipadic.Tokenizer;

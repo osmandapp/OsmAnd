@@ -1,5 +1,8 @@
 package net.osmand.plus.render;
 
+import static net.osmand.plus.helpers.CustomTransliterationHelper.isCharFromCJK;
+import static net.osmand.plus.helpers.CustomTransliterationHelper.japanese2Romaji;
+
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.procedure.TIntObjectProcedure;
 
@@ -8,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
@@ -30,8 +34,11 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import org.apache.commons.logging.Log;
 
 public class TextRenderer {
+
+	public final static Log LOG = PlatformUtil.getLog(TextRenderer.class);
 
 	private Paint paintText;
 	private final Context context;
@@ -236,8 +243,15 @@ public class TextRenderer {
 		for (int i = 0; i < size; i++) {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
+
 				if (preferredLocale.length() > 0) {
-					text.text = Junidecode.unidecode(text.text);
+//					LOG.debug("text before transliteration: " + text.text);
+					if (isCharFromCJK(text.text.charAt(0))) {
+						text.text = japanese2Romaji(text.text);
+//						LOG.debug("text after transliteration: " + text.text);
+					} else {
+						text.text = Junidecode.unidecode(text.text);
+					}
 				}
 
 

@@ -1,6 +1,11 @@
 package net.osmand.data;
 
 
+import static java.awt.SystemColor.text;
+import static net.osmand.util.CustomTransliterationHelper.isCharFromCJK;
+import static net.osmand.util.CustomTransliterationHelper.japanese2Romaji;
+
+import java.awt.SystemColor;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.util.Algorithms;
@@ -27,6 +32,8 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public static final byte NON_AMENITY_ID_RIGHT_SHIFT = 7;
 	
 	public static final byte WAY_MODULO_REMAINDER = 1;
+
+	private int obfCountryLang = 0;
 
 
 	protected String name = null;
@@ -182,6 +189,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 						return nm;
 					}
 					if (transliterate) {
+
 						return Junidecode.unidecode(getName());
 					}
 				}
@@ -195,7 +203,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (!Algorithms.isEmpty(enName)) {
 			return this.enName;
 		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
-			return Junidecode.unidecode(getName());
+			if (isCharFromCJK(getName().charAt(0))) {
+				return japanese2Romaji(getName());
+			} else {
+				return Junidecode.unidecode(getName());
+			}
+
 		}
 		return ""; //$NON-NLS-1$
 	}
