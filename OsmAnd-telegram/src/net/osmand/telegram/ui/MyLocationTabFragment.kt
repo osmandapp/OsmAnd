@@ -164,14 +164,14 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			if (Build.VERSION.SDK_INT >= 16) {
 				layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 			}
-			AndroidUtils.addStatusBarPadding19v(context!!, this)
+			AndroidUtils.addStatusBarPadding19v(app, this)
 			title = findViewById(R.id.title)
 			description = findViewById(R.id.description)
 		}
 
 		searchBoxBg = GradientDrawable().apply {
 			shape = GradientDrawable.RECTANGLE
-			setColor(ContextCompat.getColor(context!!, R.color.screen_bg_light))
+			setColor(ContextCompat.getColor(app, R.color.screen_bg_light))
 			cornerRadius = (searchBoxHeight / 2).toFloat()
 		}
 
@@ -662,8 +662,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 				val duration = shareInfo?.userSetLivePeriod
 				if (duration != null && duration > 0) {
-					holder.descriptionDuration?.text =
-							OsmandFormatter.getFormattedDuration(context!!, duration)
+					holder.descriptionDuration?.text = OsmandFormatter.getFormattedDuration(app, duration)
 					holder.description?.apply {
 						visibility = View.VISIBLE
 						text = "${getText(R.string.sharing_time)}:"
@@ -676,7 +675,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					val time =
 						shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE
-					text = "+ ${OsmandFormatter.getFormattedDuration(context!!, time)}"
+					text = "+ ${OsmandFormatter.getFormattedDuration(app, time)}"
 					setOnClickListener {
 						val expireTime = shareInfo?.getChatLiveMessageExpireTime() ?: 0
 						val newLivePeriod = expireTime + (shareInfo?.additionalActiveTime
@@ -711,7 +710,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						description.setSpan(CustomTypefaceSpan(typeface), start, description.length, 0)
 					}
 					description.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), start, description.length, 0)
-					description.append((getString(R.string.in_time, OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))))
+					description.append((getString(R.string.in_time, OsmandFormatter.getFormattedDuration(app, expiresIn, true))))
 					text = description
 				}
 

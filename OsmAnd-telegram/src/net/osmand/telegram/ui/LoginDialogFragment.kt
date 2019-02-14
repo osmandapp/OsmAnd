@@ -1,5 +1,6 @@
 package net.osmand.telegram.ui
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -12,6 +13,8 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.TypedValue
@@ -26,7 +29,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
+import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.DataConstants
+import net.osmand.telegram.utils.OsmandApiUtils
+import org.json.JSONObject
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 
@@ -35,7 +42,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 	companion object {
 
 		private const val TAG = "LoginDialogFragment"
-		private val LOG = PlatformUtil.getLog(LoginDialogFragment::class.java)
+		private val log = PlatformUtil.getLog(LoginDialogFragment::class.java)
 
 		private const val LOGIN_DIALOG_TYPE_PARAM_KEY = "login_dialog_type_param"
 		private const val SHOW_PROGRESS_PARAM_KEY = "show_progress_param"
@@ -50,6 +57,8 @@ class LoginDialogFragment : BaseDialogFragment() {
 			private set
 
 		private var softKeyboardShown: Boolean = false
+
+		private var countryPhoneCode: String = "+"
 
 		fun showWelcomeDialog(fragmentManager: FragmentManager) {
 			welcomeDialogShown = true
@@ -85,7 +94,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 					fragment.updateDialog(loginDialogType, showWelcomeDialog)
 				}
 			} catch (e: RuntimeException) {
-				LOG.error(e)
+				log.error(e)
 			}
 		}
 
@@ -165,7 +174,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		val width = if (expanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
 		params.apply {
 			val horizontalMargin = app.resources.getDimensionPixelSize(if (acceptMode) R.dimen.dialog_welcome_padding_horizontal else R.dimen.content_padding_half)
-			setMargins(horizontalMargin, topMargin, horizontalMargin, AndroidUtils.dpToPx(context!!, bottomMargin))
+			setMargins(horizontalMargin, topMargin, horizontalMargin, AndroidUtils.dpToPx(app, bottomMargin))
 			this.width = width
 		}
 		continueButton.requestLayout()
@@ -188,6 +197,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		}
 	}
 
+	@SuppressLint("SetTextI18n")
 	@Suppress("DEPRECATION")
 	private fun buildDialog(view: View?) {
 		if (showWelcomeDialog) {
@@ -247,8 +257,8 @@ class LoginDialogFragment : BaseDialogFragment() {
 						layout.visibility = View.VISIBLE
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
-							if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
-								editText.setText("+")
+							if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER && editText.text.isEmpty()) {
+								editText.setText(countryPhoneCode)
 							}
 								editText.setOnEditorActionListener { _, actionId, _ ->
 								if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -262,14 +272,15 @@ class LoginDialogFragment : BaseDialogFragment() {
 								AndroidUtils.softKeyboardDelayed(editText)
 								focusRequested = true
 							}
+							val passTextLength = if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) countryPhoneCode.length else 0
 							editText.addTextChangedListener(object : TextWatcher {
 								override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 								override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 								override fun afterTextChanged(s: Editable) {
-									changeContinueButtonEnabled(s.length > 1)
+									changeContinueButtonEnabled(s.length > passTextLength)
 								}
 							})
-							changeContinueButtonEnabled(editText.text.length > 1)
+							changeContinueButtonEnabled(editText.text.length > passTextLength)
 							editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
 						}
 
@@ -281,8 +292,9 @@ class LoginDialogFragment : BaseDialogFragment() {
 
 							noTelegramViewContainer?.setOnClickListener {
 								val focusedView = dialog.currentFocus
-								if (focusedView != null) {
-									AndroidUtils.hideSoftKeyboard(activity!!, focusedView)
+								val mainActivity = activity
+								if (focusedView != null && mainActivity != null) {
+									AndroidUtils.hideSoftKeyboard(mainActivity, focusedView)
 								}
 								updateDialog(LoginDialogType.GET_TELEGRAM, false)
 							}
@@ -313,14 +325,31 @@ class LoginDialogFragment : BaseDialogFragment() {
 						if (loginDialogActiveType == LoginDialogType.PRIVACY_POLICY) {
 							titleView?.setTextColor(ContextCompat.getColor(app, R.color.text_bold_highlight))
 							val useTelegramDescr = getString(R.string.privacy_policy_use_telegram)
-								descriptionView?.text = SpannableString(useTelegramDescr).apply {
+							descriptionView?.apply {
+								text = SpannableString(useTelegramDescr).apply {
 									val telegram = getString(R.string.shared_string_telegram)
 									val start = useTelegramDescr.indexOf(telegram)
 									if (start != -1) {
+										val clickableSpan = object : ClickableSpan() {
+											override fun onClick(textView: View) {
+												context?.also { ctx ->
+													startActivity(AndroidUtils.getPlayMarketIntent(ctx, TELEGRAM_PACKAGE))
+												}
+											}
+
+											override fun updateDrawState(ds: TextPaint) {
+												super.updateDrawState(ds)
+												ds.isUnderlineText = false
+											}
+										}
+										setSpan(clickableSpan, start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 										setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.text_bold_highlight)), start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 										setSpan(StyleSpan(android.graphics.Typeface.BOLD), start, start + telegram.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 									}
 								}
+								movementMethod = LinkMovementMethod.getInstance()
+							}
+
 							view.findViewById<TextView>(R.id.privacy_policy_agree).apply {
 								val policyAgreeDescr = getString(R.string.privacy_policy_agree)
 								text = SpannableString(policyAgreeDescr).apply {
@@ -328,13 +357,42 @@ class LoginDialogFragment : BaseDialogFragment() {
 									val osmAndPrivacyPolicy = getString(R.string.osmand_privacy_policy)
 									var start = policyAgreeDescr.indexOf(telegramPrivacyPolicy)
 									if (start != -1) {
+										val clickableSpanTelegram = object : ClickableSpan() {
+											override fun onClick(textView: View) {
+												val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_PRIVACY_POLICY))
+												if (AndroidUtils.isIntentSafe(context, intent)) {
+													startActivity(intent)
+												}
+											}
+
+											override fun updateDrawState(ds: TextPaint) {
+												super.updateDrawState(ds)
+												ds.isUnderlineText = false
+											}
+										}
+										setSpan(clickableSpanTelegram, start, start + telegramPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 										setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.text_bold_highlight)), start, start + telegramPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 									}
 									start = policyAgreeDescr.indexOf(osmAndPrivacyPolicy)
 									if (start != -1) {
+										val clickableSpanOsmAnd = object : ClickableSpan() {
+											override fun onClick(textView: View) {
+												val intent = Intent(Intent.ACTION_VIEW, Uri.parse(OSMAND_PRIVACY_POLICY))
+												if (AndroidUtils.isIntentSafe(context, intent)) {
+													startActivity(intent)
+												}
+											}
+
+											override fun updateDrawState(ds: TextPaint) {
+												super.updateDrawState(ds)
+												ds.isUnderlineText = false
+											}
+										}
+										setSpan(clickableSpanOsmAnd, start, start + osmAndPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 										setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.text_bold_highlight)), start, start + osmAndPrivacyPolicy.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 									}
 								}
+								movementMethod = LinkMovementMethod.getInstance()
 							}
 							view.findViewById<LinearLayout>(R.id.telegram_privacy_policy_btn).apply {
 								findViewById<TextView>(R.id.telegram_privacy_policy_title).text = getText(R.string.telegram_privacy_policy)
@@ -398,7 +456,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 							val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 							val text = editText?.text.toString()
 							if (!TextUtils.isEmpty(text) && text.length > 1) {
-								continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
+								continueButton.setTextColor(ContextCompat.getColor(app, R.color.secondary_text_light))
 								applyAuthParam(t, text)
 							}
 						}
@@ -413,8 +471,9 @@ class LoginDialogFragment : BaseDialogFragment() {
 				LoginDialogType.ENTER_PHONE_NUMBER -> {
 					showWelcomeDialog = true
 					val focusedView = dialog.currentFocus
-					if (focusedView != null) {
-						AndroidUtils.hideSoftKeyboard(activity!!, focusedView)
+					val mainActivity = activity
+					if (focusedView != null && mainActivity != null) {
+						AndroidUtils.hideSoftKeyboard(mainActivity, focusedView)
 					}
 					buildDialog(view)
 				}
@@ -428,6 +487,29 @@ class LoginDialogFragment : BaseDialogFragment() {
 				}
 			}
 		}
+	}
+
+	override fun onStart() {
+		super.onStart()
+		checkCountryPhoneCode()
+	}
+
+	private fun checkCountryPhoneCode() {
+		OsmandApiUtils.getLocationByIp(app, object : AndroidNetworkUtils.OnRequestResultListener {
+			override fun onResult(result: String?) {
+				if (result != null) {
+					try {
+						val obj = JSONObject(result)
+						val countryId = obj.getString("country_code")
+						countryPhoneCode = DataConstants.countryPhoneCodes[countryId]?.split(",")?.firstOrNull() ?: "+"
+					} catch (e: Exception) {
+						log.error("JSON parsing error: ", e)
+					}
+				} else {
+					log.debug("Empty response")
+				}
+			}
+		})
 	}
 
 	private fun applyAuthParam(t: LoginDialogType, value: String) {
@@ -469,7 +551,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 	private fun changeContinueButtonEnabled(enabled: Boolean) {
 		if (enabled != continueButton.isEnabled) {
 			val color = if (enabled) R.color.white else R.color.secondary_text_light
-			continueButton.setTextColor(ContextCompat.getColor(context!!, color))
+			continueButton.setTextColor(ContextCompat.getColor(app, color))
 			continueButton.isEnabled = enabled
 		}
 	}
