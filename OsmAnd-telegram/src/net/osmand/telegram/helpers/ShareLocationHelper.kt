@@ -98,7 +98,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		var bufferedMessagesFull = false
 		app.settings.getChatsShareInfo().forEach { (chatId, shareInfo) ->
 			checkAndSendBufferMessagesToChat(chatId)
-			if (shareInfo.getPendingTdLib() > MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
+			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 				bufferedMessagesFull = true
 			}
 		}
@@ -110,28 +110,27 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	fun checkAndSendBufferMessagesToChat(chatId: Long) {
 		val shareInfo = app.settings.getChatsShareInfo()[chatId]
 		if (shareInfo != null) {
-			app.locationMessages.getBufferedMessagesForChat(chatId).take(MAX_MESSAGES_IN_TDLIB_PER_CHAT).forEach {
-				if (it.type == LocationMessages.TYPE_TEXT) {
-					if (shareInfo.pendingTdLibText < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
-						if (it.deviceName.isEmpty()) {
-							if (!shareInfo.pendingTextMessage && shareInfo.currentTextMessageId != -1L) {
-								app.telegramHelper.editTextLocation(shareInfo, it)
-								app.locationMessages.removeBufferedMessage(it)
-							}
-						} else {
-							sendLocationToBot(it, shareInfo, SHARE_TYPE_TEXT)
+			app.locationMessages.getBufferedTextMessagesForChat(chatId).take(MAX_MESSAGES_IN_TDLIB_PER_CHAT).forEach {
+				if (shareInfo.pendingTdLibText < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
+					if (it.deviceName.isEmpty()) {
+						if (!shareInfo.pendingTextMessage && shareInfo.currentTextMessageId != -1L) {
+							app.telegramHelper.editTextLocation(shareInfo, it)
+							app.locationMessages.removeBufferedMessage(it)
 						}
+					} else {
+						sendLocationToBot(it, shareInfo, SHARE_TYPE_TEXT)
 					}
-				} else if (it.type == LocationMessages.TYPE_MAP) {
-					if (shareInfo.pendingTdLibMap < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
-						if (it.deviceName.isEmpty()) {
-							if (!shareInfo.pendingMapMessage && shareInfo.currentMapMessageId != -1L) {
-								app.telegramHelper.editMapLocation(shareInfo, it)
-								app.locationMessages.removeBufferedMessage(it)
-							}
-						} else {
-							sendLocationToBot(it, shareInfo, SHARE_TYPE_MAP)
+				}
+			}
+			app.locationMessages.getBufferedMapMessagesForChat(chatId).take(MAX_MESSAGES_IN_TDLIB_PER_CHAT).forEach {
+				if (shareInfo.pendingTdLibMap < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
+					if (it.deviceName.isEmpty()) {
+						if (!shareInfo.pendingMapMessage && shareInfo.currentMapMessageId != -1L) {
+							app.telegramHelper.editMapLocation(shareInfo, it)
+							app.locationMessages.removeBufferedMessage(it)
 						}
+					} else {
+						sendLocationToBot(it, shareInfo, SHARE_TYPE_MAP)
 					}
 				}
 			}
@@ -191,7 +190,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		var bufferedMessagesFull = false
 
 		chatsShareInfo.values.forEach { shareInfo ->
-			if (shareInfo.getPendingTdLib() >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId) >= 10) {
+			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId) >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 				bufferedMessagesFull = true
 			}
 			when (app.settings.shareTypeValue) {

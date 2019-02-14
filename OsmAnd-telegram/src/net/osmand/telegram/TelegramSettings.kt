@@ -985,8 +985,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var hasSharingError = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 
-		fun getPendingTdLib() = pendingTdLibText + pendingTdLibMap
-
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)
 			return if (ADDITIONAL_ACTIVE_TIME_VALUES_SEC.lastIndex > index) {
