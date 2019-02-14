@@ -1540,10 +1540,10 @@ public class GPXUtilities {
 		while (startTok != XmlPullParser.END_DOCUMENT) {
 			if (startTok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
 				break;
-			} else if (startTok == XmlPullParser.START_TAG){
+			} else if (startTok == XmlPullParser.START_TAG) {
 				tag = parser.getName();
 			} else if (startTok == XmlPullParser.TEXT) {
-				if (!parser.getText().isEmpty()){
+				if (!parser.getText().isEmpty()) {
 					text = parser.getText();
 				}
 			}
