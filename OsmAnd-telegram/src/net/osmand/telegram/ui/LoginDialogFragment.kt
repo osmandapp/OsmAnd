@@ -319,7 +319,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 						layout.visibility = View.VISIBLE
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
-							if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
+							if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER && editText.text.isEmpty()) {
 								editText.setText(countryPhoneCode)
 							}
 								editText.setOnEditorActionListener { _, actionId, _ ->
