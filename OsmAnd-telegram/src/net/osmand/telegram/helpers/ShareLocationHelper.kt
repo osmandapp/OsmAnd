@@ -76,16 +76,12 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 									livePeriod
 								}
 							livePeriod = newLivePeriod
-							shouldDeletePreviousMapMessage = true
-							shouldDeletePreviousTextMessage = true
 							currentMessageLimit = currentTime + Math.min(newLivePeriod, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
 						}
 					}
 					shareInfo.userSetLivePeriod != shareInfo.livePeriod
 							&& (shareInfo.userSetLivePeriodStart + USER_SET_LIVE_PERIOD_DELAY_MS) > currentTime -> {
 						shareInfo.apply {
-							shouldDeletePreviousMapMessage = true
-							shouldDeletePreviousTextMessage = true
 							livePeriod = shareInfo.userSetLivePeriod
 							currentMessageLimit = currentTime + Math.min(livePeriod, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
 						}
@@ -102,7 +98,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		var bufferedMessagesFull = false
 		app.settings.getChatsShareInfo().forEach { (chatId, shareInfo) ->
 			checkAndSendBufferMessagesToChat(chatId)
-			if (shareInfo.getPendingTdLib() > 10) {
+			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 				bufferedMessagesFull = true
 			}
 		}
@@ -113,9 +109,9 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 	fun checkAndSendBufferMessagesToChat(chatId: Long) {
 		val shareInfo = app.settings.getChatsShareInfo()[chatId]
-		if (shareInfo != null && shareInfo.getPendingTdLib() < 10) {
-			app.locationMessages.getBufferedMessagesForChat(chatId).forEach {
-				if (it.type == LocationMessages.TYPE_TEXT) {
+		if (shareInfo != null) {
+			app.locationMessages.getBufferedTextMessagesForChat(chatId).take(MAX_MESSAGES_IN_TDLIB_PER_CHAT).forEach {
+				if (shareInfo.pendingTdLibText < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 					if (it.deviceName.isEmpty()) {
 						if (!shareInfo.pendingTextMessage && shareInfo.currentTextMessageId != -1L) {
 							app.telegramHelper.editTextLocation(shareInfo, it)
@@ -124,7 +120,10 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					} else {
 						sendLocationToBot(it, shareInfo, SHARE_TYPE_TEXT)
 					}
-				} else if (it.type == LocationMessages.TYPE_MAP) {
+				}
+			}
+			app.locationMessages.getBufferedMapMessagesForChat(chatId).take(MAX_MESSAGES_IN_TDLIB_PER_CHAT).forEach {
+				if (shareInfo.pendingTdLibMap < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 					if (it.deviceName.isEmpty()) {
 						if (!shareInfo.pendingMapMessage && shareInfo.currentMapMessageId != -1L) {
 							app.telegramHelper.editMapLocation(shareInfo, it)
@@ -133,9 +132,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					} else {
 						sendLocationToBot(it, shareInfo, SHARE_TYPE_MAP)
 					}
-				}
-				if (shareInfo.getPendingTdLib() >= 10) {
-					return
 				}
 			}
 		}
@@ -194,7 +190,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		var bufferedMessagesFull = false
 
 		chatsShareInfo.values.forEach { shareInfo ->
-			if (shareInfo.getPendingTdLib() >= 10 || app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId) >= 10) {
+			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 				bufferedMessagesFull = true
 			}
 			when (app.settings.shareTypeValue) {
@@ -240,7 +236,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					app.locationMessages.addBufferedMessage(message)
 				}
 			} else {
-				if (shareInfo.getPendingTdLib() < 10) {
+				if (shareInfo.pendingTdLibText < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 					app.telegramHelper.editTextLocation(shareInfo, message)
 				} else {
 					app.locationMessages.addBufferedMessage(message)
@@ -273,7 +269,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					app.locationMessages.addBufferedMessage(message)
 				}
 			} else {
-				if (shareInfo.getPendingTdLib() < 10) {
+				if (shareInfo.pendingTdLibMap < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 					app.telegramHelper.editMapLocation(shareInfo, message)
 				} else {
 					app.locationMessages.addBufferedMessage(message)
@@ -297,18 +293,24 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		if (app.isInternetConnectionAvailable) {
 			log.debug("sendLocationToBot ${locationMessage.deviceName}")
 			val url = getDeviceSharingUrl(locationMessage, locationMessage.deviceName)
-			shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()
-			shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()
+			if (shareType == SHARE_TYPE_TEXT) {
+				shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()
+			} else if (shareType == SHARE_TYPE_MAP) {
+				shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
+			}
 			AndroidNetworkUtils.sendRequestAsync(app, url, null, "Send Location", false, false,
 				object : AndroidNetworkUtils.OnRequestResultListener {
 					override fun onResult(result: String?) {
-						val chatsShareInfo = app.settings.getChatsShareInfo()
-						val success = checkResultAndUpdateShareInfoSuccessfulSendTime(result, chatsShareInfo)
+						val success = checkResult(result)
 						val osmandBotId = app.telegramHelper.getOsmandBot()?.id ?: -1
 						val device = app.settings.getCurrentSharingDevice()
 						if (success) {
 							shareInfo.sentMessages++
-							shareInfo.lastSuccessfulSendTime = System.currentTimeMillis() / 1000
+							if (shareType == SHARE_TYPE_TEXT) {
+								shareInfo.lastTextSuccessfulSendTime = System.currentTimeMillis() / 1000
+							} else if (shareType == SHARE_TYPE_MAP) {
+								shareInfo.lastMapSuccessfulSendTime = System.currentTimeMillis() / 1000
+							}
 							app.locationMessages.removeBufferedMessage(locationMessage)
 							if ((shareInfo.shouldSendViaBotTextMessage || shareInfo.shouldSendViaBotMapMessage) && osmandBotId != -1 && device != null) {
 								app.telegramHelper.sendViaBotLocationMessage(osmandBotId, shareInfo, TdApi.Location(locationMessage.lat, locationMessage.lon), device, shareType)
@@ -339,18 +341,12 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		return builder.toString()
 	}
 
-	private fun checkResultAndUpdateShareInfoSuccessfulSendTime(result: String?, chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>):Boolean {
+	private fun checkResult(result: String?): Boolean {
 		if (result != null) {
 			try {
 				val jsonResult = JSONObject(result)
 				val status = jsonResult.getString("status")
-				val currentTime = System.currentTimeMillis() / 1000
-				if (status == "OK") {
-					chatsShareInfo.forEach { (_, shareInfo) ->
-						shareInfo.lastSuccessfulSendTime = currentTime
-					}
-					return true
-				}
+				return status == "OK"
 			} catch (e: JSONException) {
 			}
 		}
@@ -364,6 +360,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	}
 
 	companion object {
+
+		const val MAX_MESSAGES_IN_TDLIB_PER_CHAT = 10
 
 		// min and max values for the UI
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC - 1

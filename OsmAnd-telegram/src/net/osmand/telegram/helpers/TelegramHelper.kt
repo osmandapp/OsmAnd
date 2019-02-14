@@ -137,7 +137,7 @@ class TelegramHelper private constructor() {
 
 	fun getChat(id: Long) = chats[id]
 
-	fun getUser(id: Int) = users[id]
+	fun getUser(id: Int) = if (id == getCurrentUserId()) currentUser else users[id]
 
 	fun getOsmandBot() = osmandBot
 
@@ -689,8 +689,6 @@ class TelegramHelper private constructor() {
 					outgoingMessagesListeners.forEach {
 						it.onUpdateMessages(listOf(message))
 					}
-				} else {
-					return
 				}
 			} else {
 				incomingMessagesListeners.forEach {
@@ -882,9 +880,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleMapLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				needRefreshActiveLiveLocationMessages = true
-				if (error.code == MESSAGE_CANNOT_BE_EDITED_ERROR_CODE) {
-					shareInfo.shouldDeletePreviousMapMessage = true
-				} else if (error.code != IGNORED_ERROR_CODE) {
+				if (error.code != IGNORED_ERROR_CODE) {
 					shareInfo.hasSharingError = true
 					outgoingMessagesListeners.forEach {
 						it.onSendLiveLocationError(error.code, error.message)
@@ -929,9 +925,7 @@ class TelegramHelper private constructor() {
 			TdApi.Error.CONSTRUCTOR -> {
 				log.debug("handleTextLocationMessageUpdate - ERROR")
 				val error = obj as TdApi.Error
-				if (error.code == MESSAGE_CANNOT_BE_EDITED_ERROR_CODE) {
-					shareInfo.shouldDeletePreviousTextMessage = true
-				} else if (error.code != IGNORED_ERROR_CODE) {
+				if (error.code != IGNORED_ERROR_CODE) {
 					shareInfo.hasSharingError = true
 					outgoingMessagesListeners.forEach {
 						it.onSendLiveLocationError(error.code, error.message)
