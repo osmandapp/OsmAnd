@@ -441,7 +441,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 									if (start != -1) {
 										val clickableSpanOsmAnd = object : ClickableSpan() {
 											override fun onClick(textView: View) {
-												val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_PRIVACY_POLICY))
+												val intent = Intent(Intent.ACTION_VIEW, Uri.parse(OSMAND_PRIVACY_POLICY))
 												if (AndroidUtils.isIntentSafe(context, intent)) {
 													startActivity(intent)
 												}
