@@ -1586,8 +1586,6 @@ public class GPXUtilities {
 		}
 	}
 
-
-
 	public static GPXFile loadGPXFile(Context ctx, InputStream f) {
 		GPXFile res = new GPXFile();
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
@@ -1609,17 +1607,19 @@ public class GPXUtilities {
 						switch (tag.toLowerCase()) {
 							case "routeextension":
 							case "trackextension":
-								List<ExtensionReadResult> results = readExtensionsText(parser, tag, tok);
+								List<ExtensionReadResult> results = readExtensionsText(parser, tag,
+									tok);
 								if (!results.isEmpty()) {
 									for (ExtensionReadResult result : results) {
-										((GPXExtensions) parse).getExtensionsToWrite().put(result.tag.toLowerCase(), result.value);
+										((GPXExtensions) parse).getExtensionsToWrite()
+											.put(result.tag.toLowerCase(), result.value);
 									}
 								}
 								break;
 
 							case "routepointextension":
 								Track extensionTrack = parseRoutePointExtension(parser);
-								if(extensionTrack != null) {
+								if (extensionTrack != null) {
 									res.tracks.add(extensionTrack);
 								}
 								break;
@@ -1627,17 +1627,19 @@ public class GPXUtilities {
 							default:
 								String value = readText(parser, tag);
 								if (value != null) {
-									((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
+									((GPXExtensions) parse).getExtensionsToWrite()
+										.put(tag.toLowerCase(), value);
 									if (tag.equals("speed") && parse instanceof WptPt) {
 										try {
 											((WptPt) parse).speed = Float.parseFloat(value);
 										} catch (NumberFormatException e) {
+											log.debug(e.getMessage(), e);
 										}
 									}
 								}
 								break;
 						}
-					} else if (parse != null && tag.equals("extensions") ) {
+					} else if (parse != null && tag.equals("extensions")) {
 						extensionReadMode = true;
 					} else {
 						if (parse instanceof GPXFile) {
@@ -1819,21 +1821,21 @@ public class GPXUtilities {
 		return res;
 	}
 
-	private static Track parseRoutePointExtension(XmlPullParser parser){
+	private static Track parseRoutePointExtension(XmlPullParser parser) {
 		Track extensionTrack = null;
-		try{
+		try {
 			extensionTrack = new Track();
 			TrkSegment segment = null;
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String tag = parser.getName();
-					if(tag.toLowerCase().equals("subclass")) {
+					if (tag.toLowerCase().equals("subclass")) {
 						segment = new TrkSegment();
 						extensionTrack.segments.add(segment);
 					} else if (tag.equals("rpt")) {
 						WptPt point = parseWptAttributes(parser);
-						if(segment != null) {
+						if (segment != null) {
 							segment.points.add(point);
 						}
 					}
