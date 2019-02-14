@@ -57,71 +57,6 @@ class LoginDialogFragment : BaseDialogFragment() {
 
 		private var softKeyboardShown: Boolean = false
 
-		private var countryPhoneCodes = mapOf(
-			Pair("AB", "+7840,+7940,+99544"), Pair("AF", "+93"), Pair("AX", "+35818"), Pair("AL", "+355"),
-			Pair("DZ", "+213"), Pair("AS", "+1684"), Pair("AD", "+376"), Pair("AO", "+244"),
-			Pair("AI", "+1264"), Pair("AG", "+1268"), Pair("AR", "+54"), Pair("AM", "+374"),
-			Pair("AW", "+297"), Pair("SH", "+247"), Pair("AU", "+61"), Pair("AU", "+672"),
-			Pair("AT", "+43"), Pair("AZ", "+994"), Pair("BS", "+1242"), Pair("BH", "+973"),
-			Pair("BD", "+880"), Pair("BB", "+1246"), Pair("AG", "+1268"), Pair("BY", "+375"),
-			Pair("BE", "+32"), Pair("BZ", "+501"), Pair("BJ", "+229"), Pair("BM", "+1441"),
-			Pair("BT", "+975"), Pair("BO", "+591"), Pair("BQ", "+5997"), Pair("BA", "+387"),
-			Pair("BW", "+267"), Pair("BR", "+55"), Pair("IO", "+246"), Pair("VG", "+1284"),
-			Pair("BN", "+673"), Pair("BG", "+359"), Pair("BF", "+226"), Pair("MY", "+95"),
-			Pair("BI", "+257"), Pair("KH", "+855"), Pair("CM", "+237"), Pair("CA", "+1"),
-			Pair("CV", "+238"), Pair("KY", "+1345"), Pair("CF", "+236"), Pair("TD", "+235"),
-			Pair("CL", "+56"), Pair("CN", "+86"), Pair("CX", "+61"), Pair("CC", "+61"),
-			Pair("CO", "+57"), Pair("KM", "+269"), Pair("CG", "+242"), Pair("CD", "+243"),
-			Pair("CK", "+682"), Pair("CR", "+506"), Pair("CI", "+225"), Pair("HR", "+385"),
-			Pair("CU", "+53"), Pair("CW", "+5999"), Pair("CY", "+357"), Pair("CZ", "+420"),
-			Pair("DK", "+45"), Pair("DG", "+246"), Pair("DJ", "+253"), Pair("DM", "+1767"),
-			Pair("DO", "+1809,+1829,+1849"), Pair("TL", "+670"), Pair("EC", "+593"),
-			Pair("EG", "+20"), Pair("SV", "+503"), Pair("GQ", "+240"), Pair("ER", "+291"),
-			Pair("EE", "+372"), Pair("ET", "+251"), Pair("FK", "+500"), Pair("FO", "+298"),
-			Pair("FJ", "+679"), Pair("FI", "+358"), Pair("FR", "+33"), Pair("GF", "+594"),
-			Pair("PF", "+689"), Pair("GA", "+241"), Pair("GM", "+220"), Pair("GE", "+995"),
-			Pair("DE", "+49"), Pair("GH", "+233"), Pair("GI", "+350"), Pair("GR", "+30"),
-			Pair("GL", "+299"), Pair("GD", "+1473"), Pair("GP", "+590"), Pair("GU", "+1671"),
-			Pair("GT", "+502"), Pair("GG", "+44"), Pair("GN", "+224"), Pair("GW", "+245"),
-			Pair("GY", "+592"), Pair("HT", "+509"), Pair("HN", "+504"), Pair("HK", "+852"),
-			Pair("HU", "+36"), Pair("IS", "+354"), Pair("IN", "+91"), Pair("ID", "+62"),
-			Pair("IR", "+98"), Pair("IQ", "+964"), Pair("IE", "+353"), Pair("IL", "+972"),
-			Pair("IT", "+39"), Pair("JM", "+1876"), Pair("SJ", "+4779"), Pair("JP", "+81"),
-			Pair("JE", "+44"), Pair("JO", "+962"), Pair("KZ", "+76,+77"), Pair("KE", "+254"),
-			Pair("KI", "+686"), Pair("KP", "+850"), Pair("KR", "+82"), Pair("KW", "+965"),
-			Pair("KG", "+996"), Pair("LA", "+856"), Pair("LV", "+371"), Pair("LB", "+961"),
-			Pair("LS", "+266"), Pair("LR", "+231"), Pair("LY", "+218"), Pair("LI", "+423"),
-			Pair("LT", "+370"), Pair("LU", "+352"), Pair("MO", "+853"), Pair("MK", "+389"),
-			Pair("MG", "+261"), Pair("MW", "+265"), Pair("MY", "+60"), Pair("MV", "+960"),
-			Pair("ML", "+223"), Pair("MT", "+356"), Pair("MH", "+692"), Pair("MQ", "+596"),
-			Pair("MR", "+222"), Pair("MU", "+230"), Pair("YT", "+262"), Pair("MX", "+52"),
-			Pair("FM", "+691"), Pair("MD", "+373"), Pair("MC", "+377"), Pair("MN", "+976"),
-			Pair("ME", "+382"), Pair("MS", "+1664"), Pair("MA", "+212"), Pair("MZ", "+258"),
-			Pair("NA", "+264"), Pair("NR", "+674"), Pair("NP", "+977"), Pair("NL", "+31"),
-			Pair("NC", "+687"), Pair("NZ", "+64"), Pair("NI", "+505"), Pair("NE", "+227"),
-			Pair("NG", "+234"), Pair("NU", "+683"), Pair("NF", "+672"), Pair("MP", "+1670"),
-			Pair("NO", "+47"), Pair("OM", "+968"), Pair("PK", "+92"), Pair("PW", "+680"),
-			Pair("PS", "+970"), Pair("PA", "+507"), Pair("PG", "+675"), Pair("PY", "+595"),
-			Pair("PE", "+51"), Pair("PH", "+63"), Pair("PN", "+64"), Pair("PL", "+48"),
-			Pair("PT", "+351"), Pair("PR", "+1787,+1939"), Pair("QA", "+974"), Pair("RE", "+262"),
-			Pair("RO", "+40"), Pair("RU", "+7"), Pair("RW", "+250"), Pair("BL", "+590"),
-			Pair("SH", "+290"), Pair("KN", "+1869"), Pair("LC", "+1758"), Pair("MF", "+590"),
-			Pair("PM", "+508"), Pair("VC", "+1784"), Pair("WS", "+685"), Pair("SM", "+378"),
-			Pair("ST", "+239"), Pair("SA", "+966"), Pair("SN", "+221"), Pair("RS", "+381"),
-			Pair("SC", "+248"), Pair("SL", "+232"), Pair("SG", "+65"), Pair("BQ", "+5993"),
-			Pair("SX", "+1721"), Pair("SK", "+421"), Pair("SI", "+386"), Pair("SB", "+677"),
-			Pair("SO", "+252"), Pair("ZA", "+27"), Pair("GS", "+500"), Pair("!1", "+99534"),
-			Pair("SS", "+211"), Pair("ES", "+34"), Pair("LK", "+94"), Pair("SD", "+249"),
-			Pair("SR", "+597"), Pair("SJ", "+4779"), Pair("SZ", "+268"), Pair("SE", "+46"),
-			Pair("CH", "+41"), Pair("SY", "+963"), Pair("TW", "+886"), Pair("TJ", "+992"),
-			Pair("TZ", "+255"), Pair("TH", "+66"), Pair("TG", "+228"), Pair("TK", "+690"),
-			Pair("TO", "+676"), Pair("TT", "+1868"), Pair("TN", "+216"), Pair("TR", "+90"),
-			Pair("TM", "+993"), Pair("TC", "+1649"), Pair("TV", "+688"), Pair("UG", "+256"),
-			Pair("UA", "+380"), Pair("AE", "+971"), Pair("UK", "+44"), Pair("US", "+1"),
-			Pair("UY", "+598"), Pair("VI", "+1340"), Pair("UZ", "+998"), Pair("VU", "+678"),
-			Pair("VE", "+58"), Pair("VA", "+3906698,+379"), Pair("VN", "+84"), Pair("WF", "+681"),
-			Pair("YE", "+967"), Pair("ZM", "+260"), Pair("ZW", "+263"))
-
 		private var countryPhoneCode: String = "+"
 
 		fun showWelcomeDialog(fragmentManager: FragmentManager) {
@@ -565,7 +500,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 					try {
 						val obj = JSONObject(result)
 						val countryId = obj.getString("country_code")
-						countryPhoneCode = countryPhoneCodes[countryId]?.split(",")?.firstOrNull() ?: "+"
+						countryPhoneCode = OsmandApiUtils.countryPhoneCodes[countryId]?.split(",")?.firstOrNull() ?: "+"
 					} catch (e: Exception) {
 						log.error("JSON parsing error: ", e)
 					}
