@@ -1,33 +1,32 @@
-package net.osmand.aidl.tiles;
+package net.osmand.aidl.copyfile;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.Arrays;
+import android.support.annotation.NonNull;
 
 public class CopyFileParams implements Parcelable {
-	private String filename;
+	private String fileName;
 	private byte[] filePartData;
 	private long startTime;
-	private int actionId;
+	private boolean done;
 
-	public CopyFileParams(String filename, byte[] filePartData, long startTime, int actionId) {
-		this.filename = filename;
+	public CopyFileParams(@NonNull String fileName, @NonNull byte[] filePartData, long startTime, boolean done) {
+		this.fileName = fileName;
 		this.filePartData = filePartData;
 		this.startTime = startTime;
-		this.actionId = actionId;
+		this.done = done;
 	}
 
-	public String getFilename() {
-		return filename;
+	public String getFileName() {
+		return fileName;
 	}
-
 
 	public byte[] getFilePartData() {
 		return filePartData;
 	}
 
-	public int getActionId() {
-		return actionId;
+	public boolean isDone() {
+		return done;
 	}
 
 	public long getStartTime() {
@@ -35,10 +34,10 @@ public class CopyFileParams implements Parcelable {
 	}
 
 	protected CopyFileParams(Parcel in) {
-		filename = in.readString();
+		fileName = in.readString();
 		filePartData = in.createByteArray();
 		startTime = in.readLong();
-		actionId = in.readInt();
+		done = in.readByte() == 0;
 	}
 
 	public static final Creator<CopyFileParams> CREATOR = new Creator<CopyFileParams>() {
@@ -61,22 +60,19 @@ public class CopyFileParams implements Parcelable {
 
 	@Override
 	public String toString() {
-		return "CopyFileParams{" +
-			"filename='" + filename + '\'' +
-			", filePartData=" + filePartData +
-			", startTime=" + startTime +
-			", actionId=" + actionId +
-			'}';
+		return "CopyFileParams {" +
+				" fileName=" + fileName +
+				", filePartData size=" + filePartData.length +
+				", startTime=" + startTime +
+				", done=" + done +
+				" }";
 	}
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(filename);
+		dest.writeString(fileName);
 		dest.writeByteArray(filePartData);
 		dest.writeLong(startTime);
-		dest.writeInt(actionId);
-
+		dest.writeByte((byte) (done ? 0 : 1));
 	}
-
-
 }
