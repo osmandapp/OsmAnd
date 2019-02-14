@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;

@@ -11,12 +11,13 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -186,7 +187,7 @@ public class QuickSearchHelper implements ResourceListener {
 				if (selectedGpx != null) {
 					for (GPXUtilities.WptPt point : selectedGpx.getGpxFile().getPoints()) {
 						SearchResult sr = new SearchResult(phrase);
-						sr.localeName = point.getPointDescription(app).getName();
+						sr.localeName = point.name;
 						sr.object = point;
 						sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
 						sr.objectType = ObjectType.WPT;

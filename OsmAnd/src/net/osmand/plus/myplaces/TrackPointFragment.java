@@ -47,9 +47,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -1269,7 +1269,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			}
 			for (final String f : files.keySet()) {
 				File fout = new File(dir, f + ".gpx");
-				GPXUtilities.writeGpxFile(fout, gpx, app);
+				GPXUtilities.writeGpxFile(fout, gpx);
 			}
 			return shouldClearPath;
 		}
@@ -1327,7 +1327,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					}
 				}
 				if (!gpx.showCurrentTrack) {
-					GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
+					GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
 					boolean selected = app.getSelectedGpxHelper().getSelectedFileByPath(gpx.path) != null;
 					if (selected) {
 						app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);

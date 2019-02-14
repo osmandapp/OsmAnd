@@ -21,10 +21,10 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -452,7 +452,7 @@ public class TrackActivity extends TabActivity {
 				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 					result = selectedGpxFile.getGpxFile();
 				} else {
-					result = GPXUtilities.loadGPXFile(app, file);
+					result = GPXUtilities.loadGPXFile(file);
 				}
 			}
 			if (result != null) {

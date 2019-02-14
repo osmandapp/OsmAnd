@@ -12,9 +12,9 @@ import android.widget.TextView;
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -72,7 +72,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 				GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
 				File gpx = dataItem.getFile();
 				if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
-					GPXFile res = GPXUtilities.loadGPXFile(app, gpx);
+					GPXFile res = GPXUtilities.loadGPXFile(gpx);
 					selectionHelper.selectGpxFile(res, true, false, false, false, false);
 				}
 				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
@@ -134,7 +134,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 					if (item == null
 							|| item.getFileLastModifiedTime() != gpxFile.lastModified()
 							|| item.getAnalysis().wptCategoryNames == null) {
-						GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
+						GPXFile f = GPXUtilities.loadGPXFile(gpxFile);
 						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
 						if (item == null) {
 							item = new GpxDataItem(gpxFile, analysis);

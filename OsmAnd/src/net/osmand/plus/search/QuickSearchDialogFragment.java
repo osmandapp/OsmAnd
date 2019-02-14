@@ -60,9 +60,9 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -70,6 +70,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -2123,7 +2124,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
 				@Override
 				protected GPXFile doInBackground(Void... params) {
-					GPXFile gpx = new GPXFile();
+					GPXFile gpx = new GPXFile(Version.getFullVersion(getMyApplication()));
 					for (HistoryEntry h : historyEntries) {
 						WptPt pt = new WptPt();
 						pt.lat = h.getLat();
@@ -2151,11 +2152,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						dir.mkdir();
 					}
 					File dst = new File(dir, "History.gpx");
-					GPXUtilities.writeGpxFile(dst, gpxFile, app);
+					GPXUtilities.writeGpxFile(dst, gpxFile);
 
 					final Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, app));
+					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
 					sendIntent.setType("text/plain");

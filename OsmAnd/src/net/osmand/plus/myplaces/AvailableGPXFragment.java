@@ -51,11 +51,11 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -704,7 +704,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void showGpxOnMap(GpxInfo info) {
-		info.setGpx(GPXUtilities.loadGPXFile(app, info.file));
+		info.setGpx(GPXUtilities.loadGPXFile(info.file));
 		boolean e = true;
 		if (info.gpx != null) {
 			WptPt loc = info.gpx.findPointToShow();
@@ -1316,7 +1316,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			Track generalTrack = null;
 			if (gpxInfo.gpx == null) {
 				if (gpxInfo.file != null) {
-					gpxFile = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
+					gpxFile = GPXUtilities.loadGPXFile(gpxInfo.file);
 				}
 			} else {
 				gpxFile = gpxInfo.gpx;
@@ -1532,7 +1532,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			for (GpxInfo info : params) {
 				if (!isCancelled()) {
 					if (!info.currentlyRecordingTrack) {
-						info.setGpx(GPXUtilities.loadGPXFile(app, info.file));
+						info.setGpx(GPXUtilities.loadGPXFile(info.file));
 					}
 					publishProgress(info);
 				}
@@ -1612,7 +1612,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					if (item == null
 							|| item.getFileLastModifiedTime() != gpxFile.lastModified()
 							|| item.getAnalysis().wptCategoryNames == null) {
-						GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
+						GPXFile f = GPXUtilities.loadGPXFile(gpxFile);
 						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
 						if (item == null) {
 							item = new GpxDataItem(gpxFile, analysis);

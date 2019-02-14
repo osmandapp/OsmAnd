@@ -13,7 +13,7 @@ import android.webkit.WebViewClient;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;

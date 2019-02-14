@@ -1,28 +1,7 @@
 
-package net.osmand.plus;
+package net.osmand;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.data.LocationPoint;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.views.Renderable;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -54,7 +33,13 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import net.osmand.data.QuadRect;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -67,6 +52,46 @@ public class GPXUtilities {
 	private final static NumberFormat decimalFormat = new DecimalFormat("#.###", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
 
+	public enum GPXColor {
+		BLACK(0xFF000000),
+		DARKGRAY(0xFF444444),
+		GRAY(0xFF888888),
+		LIGHTGRAY(0xFFCCCCCC),
+		WHITE(0xFFFFFFFF),
+		RED(0xFFFF0000),
+		GREEN(0xFF00FF00),
+		BLUE(0xFF0000FF),
+		YELLOW(0xFFFFFF00),
+		CYAN(0xFF00FFFF),
+		MAGENTA(0xFFFF00FF),
+		AQUA(0xFF00FFFF),
+		FUCHSIA(0xFFFF00FF),
+		DARKGREY(0xFF444444),
+		GREY(0xFF888888),
+		LIGHTGREY(0xFFCCCCCC),
+		LIME(0xFF00FF00),
+		MAROON(0xFF800000),
+		NAVY(0xFF000080),
+		OLIVE(0xFF808000),
+		PURPLE(0xFF800080),
+		SILVER(0xFFC0C0C0),
+		TEAL(0xFF008080);
+
+        int color;
+        GPXColor(int color) {
+        	this.color = color;
+        }
+        
+        public static GPXColor getColorFromName(String s) {
+        	for(GPXColor c : values()) {
+        		if(c.name().equalsIgnoreCase(s)) {
+        			return c;
+        		}
+        	}
+        	return null;
+        }
+	}
+	
 	public static class GPXExtensions {
 		Map<String, String> extensions = null;
 
@@ -77,8 +102,7 @@ public class GPXUtilities {
 			return extensions;
 		}
 
-		@ColorInt
-		public int getColor(@ColorInt int defColor) {
+		public int getColor(int defColor) {
 			String clrValue = null;
 			if (extensions != null) {
 				clrValue = extensions.get("color");
@@ -88,12 +112,14 @@ public class GPXUtilities {
 				if (clrValue == null) {
 					clrValue = extensions.get("displaycolor");
 				}
+				if (clrValue == null) {
+					clrValue = extensions.get("displaycolour");
+				}
 			}
 			if (clrValue != null && clrValue.length() > 0) {
-				try {
-					return Color.parseColor(clrValue.toUpperCase());
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
+				GPXColor c = GPXColor.getColorFromName(clrValue);
+				if(c != null) {
+					return c.color;
 				}
 			}
 			return defColor;
@@ -128,7 +154,7 @@ public class GPXUtilities {
 		public float speed;
 	}
 
-	public static class WptPt extends GPXExtensions implements LocationPoint {
+	public static class WptPt extends GPXExtensions {
 		public boolean firstPoint = false;
 		public boolean lastPoint = false;
 		public double lat;
@@ -178,26 +204,18 @@ public class GPXUtilities {
 			return distance;
 		}
 
-		@Override
 		public int getColor() {
 			return getColor(0);
 		}
 
-		@Override
 		public double getLatitude() {
 			return lat;
 		}
 
-		@Override
 		public double getLongitude() {
 			return lon;
 		}
 
-
-		@Override
-		public PointDescription getPointDescription(Context ctx) {
-			return new PointDescription(PointDescription.POINT_TYPE_WPT, name);
-		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
 			this.lat = lat;
@@ -208,7 +226,6 @@ public class GPXUtilities {
 			this.hdop = hdop;
 		}
 
-		@Override
 		public boolean isVisible() {
 			return true;
 		}
@@ -246,7 +263,8 @@ public class GPXUtilities {
 
 		public List<WptPt> points = new ArrayList<>();
 
-		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
+		public Object renderer;
+
 
 		public List<GPXTrackAnalysis> splitByDistance(double meters) {
 			return split(getDistanceMetric(), getTimeSplit(), meters);
@@ -262,11 +280,6 @@ public class GPXUtilities {
 			return convert(splitSegments);
 		}
 
-		public void drawRenderers(double zoom, Paint p, Canvas c, RotatedTileBox tb) {
-			for (Renderable.RenderableSegment rs : renders) {
-				rs.drawSegment(zoom, p, c, tb);
-			}
-		}
 	}
 
 	public static class Track extends GPXExtensions {
@@ -287,12 +300,10 @@ public class GPXUtilities {
 	public static class Metadata extends GPXExtensions {
 		public String desc;
 
-		@Nullable
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
 		}
 
-		@Nullable
 		public String getArticleLang() {
 			return getExtensionsToRead().get("article_lang");
 		}
@@ -814,7 +825,7 @@ public class GPXUtilities {
 		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
-		public String warning = null;
+		public Exception error = null;
 		public String path = "";
 		public boolean showCurrentTrack;
 		public boolean hasAltitude;
@@ -822,6 +833,10 @@ public class GPXUtilities {
 
 		private Track generalTrack;
 		private TrkSegment generalSegment;
+
+		public GPXFile(String author) {
+			this.author = author;
+		}
 
 		public List<WptPt> getPoints() {
 			return Collections.unmodifiableList(points);
@@ -851,11 +866,11 @@ public class GPXUtilities {
 			return points.size();
 		}
 
-		boolean containsPoint(WptPt point) {
+		public boolean containsPoint(WptPt point) {
 			return points.contains(point);
 		}
 
-		void clearPoints() {
+		public void clearPoints() {
 			points.clear();
 			modifiedTime = System.currentTimeMillis();
 		}
@@ -870,7 +885,7 @@ public class GPXUtilities {
 			modifiedTime = System.currentTimeMillis();
 		}
 		
-		void addPoints(Collection<? extends WptPt> collection) {
+		public void addPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
 			modifiedTime = System.currentTimeMillis();
 		}
@@ -1228,7 +1243,7 @@ public class GPXUtilities {
 			Set<String> categories = new HashSet<>();
 			for (WptPt pt : points) {
 				String category = pt.category == null ? "" : pt.category;
-				if (withDefaultCategory || !TextUtils.isEmpty(category)) {
+				if (withDefaultCategory || !Algorithms.isEmpty(category)) {
 					categories.add(category);
 				}
 			}
@@ -1240,7 +1255,7 @@ public class GPXUtilities {
 			for (WptPt pt : points) {
 				String category = pt.category == null ? "" : pt.category;
 				int color = pt.category == null ? 0 : pt.getColor();
-				boolean emptyCategory = TextUtils.isEmpty(category);
+				boolean emptyCategory = Algorithms.isEmpty(category);
 				if (!emptyCategory) {
 					Integer existingColor = categories.get(category);
 					if (existingColor == null || (existingColor == 0 && color != 0)) {
@@ -1305,13 +1320,13 @@ public class GPXUtilities {
 		}
 	}
 
-    public static String asString(GPXFile file, OsmandApplication ctx) {
+    public static String asString(GPXFile file) {
 		final Writer writer = new StringWriter();
-		GPXUtilities.writeGpx(writer, file, ctx);
+		GPXUtilities.writeGpx(writer, file);
 		return writer.toString();
 	}
 
-	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
+	public static Exception writeGpxFile(File fout, GPXFile file) {
 		Writer output = null;
 		try {
 			if(fout.getParentFile() != null) {
@@ -1321,11 +1336,10 @@ public class GPXUtilities {
 			if(Algorithms.isEmpty(file.path)) {
 				file.path = fout.getAbsolutePath();
 			}
-			String msg = writeGpx(output, file, ctx);
-			return msg;
-		} catch (IOException e) {
+			return writeGpx(output, file);
+		} catch (Exception e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			return ctx.getString(R.string.error_occurred_saving_gpx);
+			return e;
 		} finally {
 			if (output != null) {
 				try {
@@ -1337,7 +1351,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static String writeGpx(Writer output, GPXFile file, OsmandApplication ctx) {
+	public static Exception writeGpx(Writer output, GPXFile file) {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 			format.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1347,9 +1361,7 @@ public class GPXUtilities {
 			serializer.startDocument("UTF-8", true); //$NON-NLS-1$
 			serializer.startTag(null, "gpx"); //$NON-NLS-1$
 			serializer.attribute(null, "version", "1.1"); //$NON-NLS-1$ //$NON-NLS-2$
-			if (file.author == null) {
-				serializer.attribute(null, "creator", Version.getAppName(ctx)); //$NON-NLS-1$
-			} else {
+			if (file.author != null) {
 				serializer.attribute(null, "creator", file.author); //$NON-NLS-1$
 			}
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -1409,14 +1421,9 @@ public class GPXUtilities {
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
 			serializer.endDocument();
 			serializer.flush();
-			
-			
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			return ctx.getString(R.string.error_occurred_saving_gpx);
-		} catch (IOException e) {
-			log.error("Error saving gpx", e); //$NON-NLS-1$
-			return ctx.getString(R.string.error_occurred_saving_gpx);
+			return e;
 		}
 		return null;
 	}
@@ -1522,11 +1529,11 @@ public class GPXUtilities {
 		return text;
 	}
 
-	public static GPXFile loadGPXFile(Context ctx, File f) {
+	public static GPXFile loadGPXFile(File f) {
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(f);
-			GPXFile file = loadGPXFile(ctx, fis);
+			GPXFile file = loadGPXFile(fis);
 			file.path = f.getAbsolutePath();
 			try {
 				fis.close();
@@ -1534,10 +1541,10 @@ public class GPXUtilities {
 			}
 			return file;
 		} catch (IOException e) {
-			GPXFile res = new GPXFile();
+			GPXFile res = new GPXFile(null);
 			res.path = f.getAbsolutePath();
 			log.error("Error reading gpx " + res.path, e); //$NON-NLS-1$
-			res.warning = ctx.getString(R.string.error_reading_gpx);
+			res.error = e;
 			return res;
 		} finally {
 			try {
@@ -1549,8 +1556,8 @@ public class GPXUtilities {
 		}
 	}
 
-	public static GPXFile loadGPXFile(Context ctx, InputStream f) {
-		GPXFile res = new GPXFile();
+	public static GPXFile loadGPXFile(InputStream f) {
+		GPXFile res = new GPXFile(null);
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		SimpleDateFormat formatMillis = new SimpleDateFormat(GPX_TIME_FORMAT_MILLIS, Locale.US);
@@ -1744,15 +1751,9 @@ public class GPXUtilities {
 					}
 				}
 			}
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
+			res.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
-			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
-		} catch (XmlPullParserException e) {
-			log.error("Error reading gpx", e); //$NON-NLS-1$
-			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
-		} catch (IOException e) {
-			log.error("Error reading gpx", e); //$NON-NLS-1$
-			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
 		}
 
 		return res;
@@ -1800,40 +1801,9 @@ public class GPXUtilities {
 		if (from.routes != null) {
 			to.routes.addAll(from.routes);
 		}
-		if (from.warning != null) {
-			to.warning = from.warning;
+		if (from.error != null) {
+			to.error = from.error;
 		}
 	}
 
-	public static GPXFile makeGpxFromRoute(RouteCalculationResult route) {
-		double lastHeight = HEIGHT_UNDEFINED;
-		GPXFile gpx = new GPXUtilities.GPXFile();
-		List<Location> locations = route.getRouteLocations();
-		if (locations != null) {
-			GPXUtilities.Track track = new GPXUtilities.Track();
-			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
-			for (Location l : locations) {
-				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
-				point.lat = l.getLatitude();
-				point.lon = l.getLongitude();
-				if (l.hasAltitude()) {
-					gpx.hasAltitude = true;
-					float h = (float) l.getAltitude();
-					point.ele = h;
-					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (GPXUtilities.WptPt pt : seg.points) {
-							if (Double.isNaN(pt.ele)) {
-								pt.ele = h;
-							}
-						}
-					}
-					lastHeight = h;
-				}
-				seg.points.add(point);
-			}
-			track.segments.add(seg);
-			gpx.tracks.add(track);
-		}
-		return gpx;
-	}
 }

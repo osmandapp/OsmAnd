@@ -33,7 +33,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.GPXUtilities;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.MapMarkersHelper;
@@ -50,6 +50,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
@@ -367,7 +368,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		routeCards.clear();
 
 		if (isBasicRouteCalculated()) {
-			GPXUtilities.GPXFile gpx = GPXUtilities.makeGpxFromRoute(routingHelper.getRoute());
+			GPXUtilities.GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), mapActivity.getMyApplication());
 			if (gpx != null) {
 				routeCards.add(new SimpleRouteCard(mapActivity, gpx));
 				LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);

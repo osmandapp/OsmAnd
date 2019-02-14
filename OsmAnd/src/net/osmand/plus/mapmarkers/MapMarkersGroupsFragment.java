@@ -6,7 +6,8 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -242,7 +243,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 									? app.getSelectedGpxHelper().getVisibleWayPointByLatLon(marker.point)
 									: marker.wptPt;
 							if (pt != null) {
-								showMap(marker.point, pt.getPointDescription(mapActivity), pt);
+								showMap(marker.point, new WptLocationPoint(pt).getPointDescription(mapActivity), pt);
 								return;
 							}
 

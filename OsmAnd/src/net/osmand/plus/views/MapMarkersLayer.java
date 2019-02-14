@@ -28,7 +28,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
@@ -251,9 +251,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(app, nightMode, tileBox);
-			route.renders.clear();
-			route.renders.add(new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2));
-			route.drawRenderers(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
+			new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
+					drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {

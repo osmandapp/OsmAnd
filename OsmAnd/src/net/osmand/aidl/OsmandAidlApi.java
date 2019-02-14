@@ -56,9 +56,9 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
@@ -634,7 +634,7 @@ public class OsmandAidlApi {
 					if (intent.getStringExtra(AIDL_DATA) != null) {
 						String gpxStr = intent.getStringExtra(AIDL_DATA);
 						if (!Algorithms.isEmpty(gpxStr)) {
-							gpx = GPXUtilities.loadGPXFile(mapActivity, new ByteArrayInputStream(gpxStr.getBytes()));
+							gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
 						}
 					} else if (intent.getParcelableExtra(AIDL_URI) != null) {
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -648,7 +648,7 @@ public class OsmandAidlApi {
 							}
 							if (gpxParcelDescriptor != null) {
 								FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-								gpx = GPXUtilities.loadGPXFile(mapActivity, new FileInputStream(fileDescriptor));
+								gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 							}
 						}
 					}
@@ -1199,12 +1199,12 @@ public class OsmandAidlApi {
 
 					@Override
 					protected GPXFile doInBackground(File... files) {
-						return GPXUtilities.loadGPXFile(app, files[0]);
+						return GPXUtilities.loadGPXFile(files[0]);
 					}
 
 					@Override
 					protected void onPostExecute(GPXFile gpx) {
-						if (gpx.warning == null) {
+						if (gpx.error == null) {
 							selectedGpx.setGpxFile(gpx);
 							refreshMap();
 						}
@@ -1220,12 +1220,12 @@ public class OsmandAidlApi {
 
 				@Override
 				protected GPXFile doInBackground(File... files) {
-					return GPXUtilities.loadGPXFile(app, files[0]);
+					return GPXUtilities.loadGPXFile(files[0]);
 				}
 
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
-					if (gpx.warning == null) {
+					if (gpx.error == null) {
 						helper.selectGpxFile(gpx, true, false);
 						refreshMap();
 					}
@@ -1328,12 +1328,12 @@ public class OsmandAidlApi {
 
 				@Override
 				protected GPXFile doInBackground(File... files) {
-					return GPXUtilities.loadGPXFile(app, files[0]);
+					return GPXUtilities.loadGPXFile(files[0]);
 				}
 
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
-					if (gpx.warning == null) {
+					if (gpx.error == null) {
 						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 						refreshMap();
 					}
@@ -2082,7 +2082,7 @@ public class OsmandAidlApi {
 
 		@Override
 		protected void onPostExecute(GPXFile gpxFile) {
-			if (gpxFile.warning == null && callback != null) {
+			if (gpxFile.error == null && callback != null) {
 				callback.processResult(gpxFile);
 			}
 		}
@@ -2097,7 +2097,7 @@ public class OsmandAidlApi {
 			}
 			if (gpxParcelDescriptor != null) {
 				final FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-				return GPXUtilities.loadGPXFile(app, new FileInputStream(fileDescriptor));
+				return GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 			}
 			return null;
 		}
