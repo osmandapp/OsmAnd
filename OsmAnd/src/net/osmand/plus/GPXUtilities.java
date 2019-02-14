@@ -1619,7 +1619,7 @@ public class GPXUtilities {
 
 							case "routepointextension":
 								Track extensionTrack = parseRoutePointExtension(parser);
-								if(extensionTrack!=null) {
+								if(extensionTrack != null) {
 									res.tracks.add(extensionTrack);
 								}
 								break;
