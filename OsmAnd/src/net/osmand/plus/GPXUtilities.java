@@ -1548,7 +1548,7 @@ public class GPXUtilities {
 				}
 			}
 
-			if (tag!=null && text!=null) {
+			if (tag != null && text != null) {
 				results.add(new ExtensionReadResult(tag, text));
 				tag = null;
 				text = null;
@@ -1826,14 +1826,14 @@ public class GPXUtilities {
 			TrkSegment segment = null;
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (tok==XmlPullParser.START_TAG) {
+				if (tok == XmlPullParser.START_TAG) {
 					String tag = parser.getName();
 					if(tag.toLowerCase().equals("subclass")) {
 						segment = new TrkSegment();
 						extensionTrack.segments.add(segment);
 					} else if (tag.equals("rpt")) {
 						WptPt point = parseWptAttributes(parser);
-						if(segment!=null) {
+						if(segment != null) {
 							segment.points.add(point);
 						}
 					}
