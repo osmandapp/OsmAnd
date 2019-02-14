@@ -256,6 +256,10 @@ public class GPXUtilities {
 					&& Algorithms.objectEquals(other.lon, lon)
 					&& Algorithms.objectEquals(other.desc, desc);
 		}
+
+		public boolean hasLocation() {
+			return (lat != 0 && lon != 0);
+		}
 	}
 
 	public static class TrkSegment extends GPXExtensions {
@@ -836,6 +840,19 @@ public class GPXUtilities {
 
 		public GPXFile(String author) {
 			this.author = author;
+		}
+		
+		public GPXFile(String title, String lang, String description) {
+			this.metadata = new Metadata();
+			if(description != null) {
+				metadata.extensions.put("desc", description);
+			}
+			if(lang != null) {
+				metadata.extensions.put("article_lang", lang);
+			}
+			if(title != null) {
+				metadata.extensions.put("article_title", title);
+			}
 		}
 
 		public List<WptPt> getPoints() {
