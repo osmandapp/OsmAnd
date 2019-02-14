@@ -190,7 +190,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		var bufferedMessagesFull = false
 
 		chatsShareInfo.values.forEach { shareInfo ->
-			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId) >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
+			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 				bufferedMessagesFull = true
 			}
 			when (app.settings.shareTypeValue) {
