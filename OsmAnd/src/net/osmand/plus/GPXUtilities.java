@@ -1533,7 +1533,8 @@ public class GPXUtilities {
 	}
 
 
-	private static List<ExtensionReadResult> readExtensionsText(XmlPullParser parser, String key, int startTok) throws XmlPullParserException, IOException {
+	private static List<ExtensionReadResult> readExtensionsText(XmlPullParser parser, String key,
+		int startTok) throws XmlPullParserException, IOException {
 		List<ExtensionReadResult> results = new ArrayList<>();
 		String tag = null;
 		String text = null;
