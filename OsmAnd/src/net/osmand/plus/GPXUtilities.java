@@ -9,6 +9,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import java.io.FileNotFoundException;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
@@ -1504,6 +1505,25 @@ public class GPXUtilities {
 		}
 	}
 
+	private static class ExtensionResult {
+		String key = "";
+		String result = "";
+		double lat = 0.0;
+		double lon = 0.0;
+
+		public ExtensionResult(String key, String result) {
+			this.key = key;
+			this.result = result;
+		}
+
+		public ExtensionResult(String key, String result, double lat, double lon) {
+			this.key = key;
+			this.result = result;
+			this.lat = lat;
+			this.lon = lon;
+		}
+	}
+
 	private static String readText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
 		int tok;
 		String text = null;
@@ -1521,6 +1541,8 @@ public class GPXUtilities {
 		}
 		return text;
 	}
+
+
 
 	public static GPXFile loadGPXFile(Context ctx, File f) {
 		FileInputStream fis = null;
@@ -1549,6 +1571,50 @@ public class GPXUtilities {
 		}
 	}
 
+	private static ExtensionResult readExtensionsText(XmlPullParser parser, String key, int startToken) throws XmlPullParserException, IOException {
+		ExtensionResult er;
+		int tok = startToken;
+		String text = null;
+		String tag = null;
+		double lat = -1;
+		double lon = -1;
+		while (tok != XmlPullParser.END_DOCUMENT) {
+			if(tok==2) System.out.println("OPEN_TAG <"+parser.getName() + ">");
+			else if (tok==3) System.out.println("CLOSE TAG <" + parser.getName()+ ">");
+			else if (tok==4) System.out.println("TEXT = " + parser.getText());
+			if(tok == 2 && parser.getAttributeCount()>0) {
+				for (int a = 0; a<parser.getAttributeCount(); a++) {
+					if (parser.getAttributeName(a).equals("lat")) {
+						lat = Double.parseDouble(parser.getAttributeValue(a));
+					} else if ((parser.getAttributeName(a).equals("lon"))) {
+						lon = Double.parseDouble(parser.getAttributeValue(a));
+					}
+					System.out.println("Attributes: " + parser.getAttributeName(a) + ": " + parser.getAttributeValue(a));
+				}
+			}
+			if (tok == XmlPullParser.END_TAG && parser.getName().equals(key)) {
+				break;
+			} else if (tok==2){
+				tag = parser.getName();
+			} else if (tok == XmlPullParser.TEXT) {
+				if (text == null) {
+					text = parser.getText();
+				} else {
+					text += parser.getText();
+				}
+			}
+			tok = parser.next();
+
+		}
+		if (lat==-1) {
+			er = new ExtensionResult(tag, text);
+		} else {
+			er = new ExtensionResult(tag, text, lat, lon);
+		}
+
+		return er;
+	}
+
 	public static GPXFile loadGPXFile(Context ctx, InputStream f) {
 		GPXFile res = new GPXFile();
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
@@ -1567,16 +1633,27 @@ public class GPXUtilities {
 					Object parse = parserState.peek();
 					String tag = parser.getName();
 					if (extensionReadMode && parse != null) {
-						String value = readText(parser, tag);
-						if (value != null) {
-							((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
-							if (tag.equals("speed") && parse instanceof WptPt) {
-								try {
-									((WptPt) parse).speed = Float.parseFloat(value);
-								} catch (NumberFormatException e) {}
+
+						if(tag.toLowerCase().equals("trackextension")) {
+							ExtensionResult er = readExtensionsText(parser, tag, tok);
+							((GPXExtensions) parse).getExtensionsToWrite().put(er.key.toLowerCase(), er.result);
+
+						} else if (tag.toLowerCase().equals("routepointextension")) {
+							Track extTrack = parseRoutePointExtension(parser);
+							res.tracks.add(extTrack);
+
+						} else {
+							String value = readText(parser, tag);
+							if (value != null) {
+								((GPXExtensions) parse).getExtensionsToWrite().put(tag.toLowerCase(), value);
+								if (tag.equals("speed") && parse instanceof WptPt) {
+									try {
+										((WptPt) parse).speed = Float.parseFloat(value);
+									} catch (NumberFormatException e) {}
+								}
 							}
 						}
-					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
+					} else if (parse != null && tag.equals("extensions") ) {
 						extensionReadMode = true;
 					} else {
 						if (parse instanceof GPXFile) {
@@ -1756,6 +1833,32 @@ public class GPXUtilities {
 		}
 
 		return res;
+	}
+
+	private static Track parseRoutePointExtension(XmlPullParser parser){
+		Track extensionTrack = new Track();
+		try{
+			log.debug("parser.getName = " + parser.getName());
+			TrkSegment segment = null;
+			int tok;
+			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				if (tok==XmlPullParser.START_TAG) {
+					String tag = parser.getName();
+					if(tag.toLowerCase().equals("subclass")) {
+						segment = new TrkSegment();
+						extensionTrack.segments.add(segment);
+					} else if (tag.equals("rpt")) {
+						WptPt point = parseWptAttributes(parser);
+						if(segment!=null) {
+							segment.points.add(point);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+
+		}
+		return extensionTrack;
 	}
 
 	private static Reader getUTF8Reader(InputStream f) throws IOException {
