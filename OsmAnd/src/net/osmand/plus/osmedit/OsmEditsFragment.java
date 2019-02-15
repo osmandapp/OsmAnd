@@ -34,13 +34,14 @@ import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -755,7 +756,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					}
 				}
 			} else {
-				GPXFile gpx = new GPXFile();
+				GPXFile gpx = new GPXFile(Version.getFullVersion(getMyApplication()));
 				for (OsmPoint point : points) {
 					if (point.getGroup() == Group.POI) {
 						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
@@ -777,7 +778,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 						gpx.addPoint(wpt);
 					}
 				}
-				GPXUtilities.writeGpxFile(osmchange, gpx, getMyApplication());
+				GPXUtilities.writeGpxFile(osmchange, gpx);
 			}
 
 			return null;

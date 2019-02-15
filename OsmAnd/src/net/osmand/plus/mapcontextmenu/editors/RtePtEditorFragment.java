@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.support.v4.app.DialogFragment;
 
-import net.osmand.plus.GPXUtilities;
+import net.osmand.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 

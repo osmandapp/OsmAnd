@@ -26,7 +26,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;

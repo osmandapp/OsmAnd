@@ -22,8 +22,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -188,12 +188,12 @@ public class ExternalApiHelper {
 				if (path != null) {
 					File f = new File(path);
 					if (f.exists()) {
-						gpx = GPXUtilities.loadGPXFile(mapActivity, f);
+						gpx = GPXUtilities.loadGPXFile(f);
 					}
 				} else if (intent.getStringExtra(PARAM_DATA) != null) {
 					String gpxStr = intent.getStringExtra(PARAM_DATA);
 					if (!Algorithms.isEmpty(gpxStr)) {
-						gpx = GPXUtilities.loadGPXFile(mapActivity, new ByteArrayInputStream(gpxStr.getBytes()));
+						gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
 					}
 				} else if (uri.getBooleanQueryParameter(PARAM_URI, false)) {
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -204,7 +204,7 @@ public class ExternalApiHelper {
 								.openFileDescriptor(gpxUri, "r");
 						if (gpxParcelDescriptor != null) {
 							FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-							gpx = GPXUtilities.loadGPXFile(mapActivity, new FileInputStream(fileDescriptor));
+							gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 						} else {
 							finish = true;
 							resultCode = RESULT_CODE_ERROR_GPX_NOT_FOUND;

@@ -16,9 +16,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -238,16 +238,17 @@ public class TrackBitmapDrawer {
 			if (color == 0) {
 				color = ts.getColor(trackColor);
 			}
-			if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
-					&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
+			if (ts.renderer == null && !ts.points.isEmpty()) {
 				if (g.isShowCurrentTrack()) {
-					ts.renders.add(new Renderable.CurrentTrack(ts.points));
+					ts.renderer = new Renderable.CurrentTrack(ts.points);
 				} else {
-					ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
+					ts.renderer = new Renderable.StandardTrack(ts.points, 17.2);
 				}
 			}
 			paint.setColor(color == 0 ? trackColor : color);
-			ts.drawRenderers(tileBox.getZoom(), paint, canvas, tileBox);
+			if(ts.renderer instanceof  Renderable.RenderableSegment) {
+				((Renderable.RenderableSegment)ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
+			}
 		}
 	}
 

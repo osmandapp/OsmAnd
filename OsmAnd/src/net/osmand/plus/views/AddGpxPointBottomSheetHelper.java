@@ -10,7 +10,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

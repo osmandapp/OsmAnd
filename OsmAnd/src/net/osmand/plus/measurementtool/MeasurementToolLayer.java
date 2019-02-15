@@ -11,8 +11,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -182,14 +182,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
 			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
-			before.renders.clear();
-			before.renders.add(new Renderable.StandardTrack(new ArrayList<>(before.points), 17.2));
-			before.drawRenderers(view.getZoom(), lineAttrs.paint, canvas, tb);
+			new Renderable.StandardTrack(new ArrayList<>(before.points), 17.2).
+					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
 
 			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
-			after.renders.clear();
-			after.renders.add(new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2));
-			after.drawRenderers(view.getZoom(), lineAttrs.paint, canvas, tb);
+			new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2).
+					drawSegment(view.getZoom(), lineAttrs.paint, canvas, tb);
+
 		}
 	}
 

@@ -23,9 +23,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper;
@@ -276,7 +276,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		protected Void doInBackground(Void... voids) {
 			GPXFile gpxFile = group.getGpx();
 			if (gpxFile != null && !gpxFile.showCurrentTrack && wasUpdated) {
-				GPXUtilities.writeGpxFile(new File(gpxFile.path), gpxFile, app);
+				GPXUtilities.writeGpxFile(new File(gpxFile.path), gpxFile);
 			}
 			return null;
 		}

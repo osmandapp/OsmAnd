@@ -31,8 +31,8 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -187,7 +187,7 @@ public class ImportHelper {
 
 					if (pFD != null) {
 						is = new FileInputStream(pFD.getFileDescriptor());
-						return GPXUtilities.loadGPXFile(app, is);
+						return GPXUtilities.loadGPXFile(is);
 					}
 				} catch (FileNotFoundException e) {
 					//
@@ -228,7 +228,7 @@ public class ImportHelper {
 
 					if (pFD != null) {
 						is = new FileInputStream(pFD.getFileDescriptor());
-						return GPXUtilities.loadGPXFile(app, is);
+						return GPXUtilities.loadGPXFile(is);
 					}
 				} catch (FileNotFoundException e) {
 					//
@@ -329,7 +329,7 @@ public class ImportHelper {
 						final String result = Kml2Gpx.toGpx(zis);
 						if (result != null) {
 							try {
-								return GPXUtilities.loadGPXFile(app, new ByteArrayInputStream(result.getBytes("UTF-8")));
+								return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
 							} catch (UnsupportedEncodingException e) {
 								return null;
 							}
@@ -382,7 +382,7 @@ public class ImportHelper {
 						final String result = Kml2Gpx.toGpx(is);
 						if (result != null) {
 							try {
-								return GPXUtilities.loadGPXFile(app, new ByteArrayInputStream(result.getBytes("UTF-8")));
+								return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
 							} catch (UnsupportedEncodingException e) {
 								return null;
 							}
@@ -544,8 +544,8 @@ public class ImportHelper {
 	private void handleResult(final GPXFile result, final String name, final boolean save,
 							  final boolean useImportDir, boolean forceImportFavourites) {
 		if (result != null) {
-			if (result.warning != null) {
-				Toast.makeText(activity, result.warning, Toast.LENGTH_LONG).show();
+			if (result.error != null) {
+				Toast.makeText(activity, result.error.getMessage(), Toast.LENGTH_LONG).show();
 				if (gpxImportCompleteListener != null) {
 					gpxImportCompleteListener.onComplete(false);
 				}
@@ -611,9 +611,12 @@ public class ImportHelper {
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
 				final GPXUtilities.WptPt pt = gpxFile.findPointToShow();
 				final File toWrite = getFileToSave(fileName, importDir, pt);
-				warning = GPXUtilities.writeGpxFile(toWrite, gpxFile, app);
-				if (warning == null) {
+				Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
+				if(e == null) {
 					gpxFile.path = toWrite.getAbsolutePath();
+					warning = null;
+				} else {
+					warning = app.getString(R.string.error_reading_gpx);
 				}
 			} else {
 				warning = app.getString(R.string.sd_dir_not_accessible);

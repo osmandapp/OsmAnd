@@ -26,8 +26,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;

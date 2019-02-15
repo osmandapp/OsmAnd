@@ -48,6 +48,14 @@ class LocationMessages(val app: TelegramApplication) {
 		return bufferedMessages.filter { it.chatId == chatId }.sortedBy { it.time }
 	}
 
+	fun getBufferedTextMessagesForChat(chatId: Long): List<BufferMessage> {
+		return bufferedMessages.filter { it.chatId == chatId && it.type == TYPE_TEXT }.sortedBy { it.time }
+	}
+
+	fun getBufferedMapMessagesForChat(chatId: Long): List<BufferMessage> {
+		return bufferedMessages.filter { it.chatId == chatId && it.type == TYPE_MAP }.sortedBy { it.time }
+	}
+
 	fun getIngoingMessages(currentUserId: Int, start: Long, end: Long): List<LocationMessage> {
 		return dbHelper.getIngoingMessages(currentUserId, start, end)
 	}

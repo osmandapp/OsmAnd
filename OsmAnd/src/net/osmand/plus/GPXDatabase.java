@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;

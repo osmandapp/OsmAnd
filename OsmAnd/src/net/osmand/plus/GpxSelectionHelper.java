@@ -6,15 +6,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Route;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.Route;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -431,12 +432,12 @@ public class GpxSelectionHelper {
 						if (p != null) {
 							p.startTask(getString(R.string.loading_smth, fl.getName()), -1);
 						}
-						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
+						GPXFile gpx = GPXUtilities.loadGPXFile(fl);
 						if (obj.has(COLOR)) {
 							int clr = Algorithms.parseColor(obj.getString(COLOR));
 							gpx.setColor(clr);
 						}
-						if (gpx.warning != null) {
+						if (gpx.error != null) {
 							save = true;
 						} else {
 							selectGpxFile(gpx, true, false, true, selectedByUser, false);

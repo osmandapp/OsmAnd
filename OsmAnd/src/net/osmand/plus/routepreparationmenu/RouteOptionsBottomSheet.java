@@ -14,7 +14,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.GPXUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;

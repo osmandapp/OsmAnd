@@ -1,7 +1,7 @@
 package net.osmand.plus.measurementtool;
 
 import net.osmand.data.QuadRect;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.GPXUtilities;
 
 public class NewGpxData {
 

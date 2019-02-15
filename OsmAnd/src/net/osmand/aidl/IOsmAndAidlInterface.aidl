@@ -79,7 +79,7 @@ import net.osmand.aidl.gpx.CreateGpxBitmapParams;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 
 import net.osmand.aidl.plugins.PluginParams;
-import net.osmand.aidl.tiles.CopyFileParams;
+import net.osmand.aidl.copyfile.CopyFileParams;
 
 
 

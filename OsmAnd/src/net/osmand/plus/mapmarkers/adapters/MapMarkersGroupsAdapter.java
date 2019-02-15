@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
@@ -187,7 +187,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			if (selectedGpx != null && selectedGpx.getGpxFile() != null) {
 				return selectedGpx.getGpxFile();
 			}
-			return GPXUtilities.loadGPXFile(app, new File(filePath));
+			return GPXUtilities.loadGPXFile(new File(filePath));
 		}
 		return null;
 	}
@@ -467,7 +467,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 								gpxFile[0] = selectedGpxFile.getGpxFile();
 							} else {
 								// TODO IO load in another thread ?
-								gpxFile[0] = GPXUtilities.loadGPXFile(app, new File(gpxPath));
+								gpxFile[0] = GPXUtilities.loadGPXFile(new File(gpxPath));
 							}
 							switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
 						}

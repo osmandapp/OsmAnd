@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -271,7 +271,7 @@ public class DashTrackFragment extends DashBaseFragment {
 					Runnable run = new Runnable() {
 						@Override
 						public void run() {
-							showOnMap(GPXUtilities.loadGPXFile(app, f));
+							showOnMap(GPXUtilities.loadGPXFile(f));
 						}
 					};
 					run.run();

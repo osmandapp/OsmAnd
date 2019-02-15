@@ -48,11 +48,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
@@ -318,7 +318,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	}
 
 	private void makeGpx() {
-		gpx = GPXUtilities.makeGpxFromRoute(helper.getRoute());
+		gpx = GpxUiHelper.makeGpxFromRoute(helper.getRoute(), getMyApplication());
 		String groupName = getMyApplication().getString(R.string.current_route);
 		GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
 		if (group != null && group.getModifiableList().size() > 0) {
@@ -544,7 +544,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				File dst = new File(dir, "route.gpx");
 				try {
 					FileWriter fw = new FileWriter(dst);
-					GPXUtilities.writeGpx(fw, gpx, getMyApplication());
+					GPXUtilities.writeGpx(fw, gpx);
 					fw.close();
 					final Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);

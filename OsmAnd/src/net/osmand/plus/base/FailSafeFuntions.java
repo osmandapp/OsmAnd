@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -112,8 +112,8 @@ public class FailSafeFuntions {
 						protected GPXFile doInBackground(String... params) {
 							if (gpxPath != null) {
 								// Reverse also should be stored ?
-								GPXFile f = GPXUtilities.loadGPXFile(app, new File(gpxPath));
-								if (f.warning != null) {
+								GPXFile f = GPXUtilities.loadGPXFile(new File(gpxPath));
+								if (f.error != null) {
 									return null;
 								}
 								return f;

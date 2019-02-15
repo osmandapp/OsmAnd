@@ -18,7 +18,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.GPXUtilities;
+import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -281,7 +282,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 				case WPT:
 					GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
-					pointDescription = wpt.getPointDescription(getMyApplication());
+					pointDescription = new WptLocationPoint(wpt).getPointDescription(app);
 					break;
 			}
 

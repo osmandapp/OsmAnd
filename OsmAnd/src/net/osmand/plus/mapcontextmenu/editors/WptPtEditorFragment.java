@@ -12,9 +12,10 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
@@ -158,7 +159,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
 
 			if (menu.getLatLon().equals(latLon)) {
-				menu.update(latLon, wpt.getPointDescription(getMapActivity()), wpt);
+				menu.update(latLon, new WptLocationPoint(wpt).getPointDescription(getMapActivity()), wpt);
 			}
 		}
 
@@ -316,7 +317,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
+			GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
 			return null;
 		}
 
