@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="average_altitude">Artària mèdia</string>
+<resources>
+    <string name="average_altitude">Artària mèdia</string>
     <string name="average_speed">Lestresa mèdia</string>
     <string name="open_in_osmand">Aberi in OsmAnd</string>
     <string name="end_date">Data de fine</string>
@@ -182,7 +183,8 @@
     <string name="shared_string_authorization">Autorizatzione</string>
     <string name="shared_string_authorization_descr">Pro praghere inserta su nùmeru de telèfono tuo in formadu internatzionale</string>
     <string name="shared_string_welcome">Bene bènnidu</string>
-    <string name="welcome_descr">Sa <b>Cumpartzidura de sa Positzione de OsmAnd</b> ti permitit de cumpartzire sa positzione tua e de bìdere cussa de sos àteros in OsmAnd.<br/><br/>S\'aplicatzione impreat s\'API de Telegram e tenes bisòngiu de unu contu de Telegram.</string>
+    <string name="welcome_descr">Sa <b>Cumpartzidura de sa Positzione de OsmAnd</b> ti permitit de cumpartzire sa positzione tua e de bìdere cussa de sos àteros in OsmAnd.<br/>
+        <br/>S\'aplicatzione impreat s\'API de Telegram e tenes bisòngiu de unu contu de Telegram.</string>
     <string name="live_now">In direta como</string>
     <string name="gps_points_in_buffer">imbiadu (%1$d in sa memòria tampone)</string>
     <string name="points_size">%1$d puntos</string>
@@ -192,4 +194,16 @@
     <string name="shared_string_sent">Imbiadu</string>
     <string name="please_update_osmand">Pro praghere agiorna OsmAnd pro bìdere sos datos in sa mapa</string>
     <string name="shared_string_update">Agiorna</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="privacy_policy_use_telegram">Impreamus Telegram (s\'aplicatzione pro sos messàgios) pro cunnètere sa gente e fàghere in modu chi comunicare cun issos ti siat prus fàtzile.</string>
+    <string name="privacy_policy_telegram_client">Telegram est una prataforma aberta e OsmAnd Tracker est unu de sos comporadores. Sos cuntatos tuos podent impreare cale si siat aplicatzione cliente Telegram.</string>
+    <string name="privacy_policy_agree">Incarchende \"sighi\" atzetas sa Polìtica de Riservadesa de Telegram e cussa de OsmAnd.</string>
+    <string name="shared_string_accept">Atzeta</string>
+    <string name="telegram_privacy_policy">Polìtica de riservadesa de Telegram</string>
+    <string name="osmand_privacy_policy">Polìtica de riservadesa de OsmAnd</string>
+    <string name="how_it_works">Comente funtzionat</string>
+    <string name="received_gps_points">Puntos GPX retzidos: %1$s</string>
+    <string name="shared_string_appearance">Aparèntzia</string>
+    <string name="show_gps_points">Ammustra sos puntos GPS</string>
+    <string name="show_gps_points_descr">Ammustra sa cantidade de puntos GPS collidos e imbiados.</string>
 </resources>
