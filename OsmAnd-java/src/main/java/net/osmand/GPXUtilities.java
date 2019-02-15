@@ -77,19 +77,20 @@ public class GPXUtilities {
 		SILVER(0xFFC0C0C0),
 		TEAL(0xFF008080);
 
-        int color;
-        GPXColor(int color) {
-        	this.color = color;
-        }
-        
-        public static GPXColor getColorFromName(String s) {
-        	for(GPXColor c : GPXColor.values()) {
-        		if(c.name().equalsIgnoreCase(s)) {
-        			return c;
-        		}
-        	}
-        	return null;
-        }
+		int color;
+
+		GPXColor(int color) {
+			this.color = color;
+		}
+
+		public static GPXColor getColorFromName(String s) {
+			for (GPXColor c : values()) {
+				if (c.name().equalsIgnoreCase(s)) {
+					return c;
+				}
+			}
+			return null;
+		}
 	}
 	
 	public static class GPXExtensions {
@@ -1814,7 +1815,6 @@ public class GPXUtilities {
 					if (parse != null && tag.equals("extensions")) {
 						extensionReadMode = false;
 					}
-
 
 					if (tag.equals("metadata")) {
 						Object pop = parserState.pop();
