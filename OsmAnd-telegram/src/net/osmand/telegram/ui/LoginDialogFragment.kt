@@ -257,11 +257,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 
 						titleView?.text = getText(t.titleId)
 						descriptionView?.text = getText(t.descriptionId)
-						titleView?.setOnClickListener {
-							view.findViewById<ScrollView>(R.id.scroll_view)?.post {
-								view.findViewById<ScrollView>(R.id.scroll_view).fullScroll(View.FOCUS_DOWN)
-							}
-						}
+
 						layout.visibility = View.VISIBLE
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
