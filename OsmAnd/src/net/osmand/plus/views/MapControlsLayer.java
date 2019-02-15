@@ -54,7 +54,10 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 import java.util.ArrayList;
@@ -413,7 +416,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 			if (!hasTargets) {
-				getTargets().restoreTargetPoints(false);
+				//getTargets().restoreTargetPoints(false);
 				if (getTargets().getPointToNavigate() == null) {
 					mapActivity.getMapActions().setFirstMapMarkerAsTarget();
 				}
@@ -1252,11 +1255,28 @@ public class MapControlsLayer extends OsmandMapLayer {
 		};
 	}
 
-	public void selectAddress(String name, double latitude, double longitude, boolean target, boolean intermediate) {
-		if (name != null) {
-			mapRouteInfoMenu.selectAddress(name, new LatLon(latitude, longitude), target, intermediate);
-		} else {
-			mapRouteInfoMenu.selectAddress("", new LatLon(latitude, longitude), target, intermediate);
+	public void selectAddress(String name, double latitude, double longitude, QuickSearchType searchType) {
+		PointType pointType = null;
+		switch (searchType) {
+			case START_POINT:
+				pointType = PointType.START;
+				break;
+			case DESTINATION:
+			case DESTINATION_AND_START:
+				pointType = PointType.TARGET;
+				break;
+			case INTERMEDIATE:
+				pointType = PointType.INTERMEDIATE;
+				break;
+			case HOME_POINT:
+				pointType = PointType.HOME;
+				break;
+			case WORK_POINT:
+				pointType = PointType.WORK;
+				break;
+		}
+		if (pointType != null) {
+			mapRouteInfoMenu.selectAddress(name != null ? name : "", new LatLon(latitude, longitude), pointType);
 		}
 	}
 

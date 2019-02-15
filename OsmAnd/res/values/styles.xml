@@ -234,6 +234,8 @@
 
         <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_light</item>
         <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_light</item>
+
+        <item name="menu_bottom_sheet_icon_color">@color/on_map_icon_color</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -454,6 +456,8 @@
 
         <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_dark</item>
         <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_dark</item>
+
+        <item name="menu_bottom_sheet_icon_color">@color/ctx_menu_info_text_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

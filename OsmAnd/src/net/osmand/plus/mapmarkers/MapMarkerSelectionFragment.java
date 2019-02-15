@@ -22,20 +22,19 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.OnMarkerSelectListener;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 
 import java.util.List;
 
 public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "MapMarkerSelectionFragment";
-	private static final String TARGET_KEY = "target_key";
-	private static final String INTERMEDIATE_KEY = "intermediate_key";
+	private static final String POINT_TYPE_KEY = "point_type";
 
 	private LatLon loc;
 	private Float heading;
 	private boolean useCenter;
 	private boolean nightMode;
-	private boolean target;
-	private boolean intermediate;
+	private PointType pointType;
 
 	private OnMarkerSelectListener onClickListener;
 	private int screenOrientation;
@@ -51,8 +50,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			bundle = savedInstanceState;
 		}
 		if (bundle != null) {
-			target = bundle.getBoolean(TARGET_KEY);
-			intermediate = bundle.getBoolean(INTERMEDIATE_KEY);
+			pointType = PointType.valueOf(bundle.getString(POINT_TYPE_KEY));
 		}
 
 		MapActivity mapActivity = getMapActivity();
@@ -103,7 +101,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (onClickListener != null) {
-					onClickListener.onSelect(position, target, intermediate);
+					onClickListener.onSelect(position, pointType);
 				}
 				dismiss();
 			}
@@ -114,8 +112,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(TARGET_KEY, target);
-		outState.putBoolean(INTERMEDIATE_KEY, intermediate);
+		outState.putString(POINT_TYPE_KEY, pointType.name());
 	}
 
 	private class MapMarkersListAdapter extends ArrayAdapter<MapMarker> {
@@ -140,11 +137,10 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static MapMarkerSelectionFragment newInstance(boolean target, boolean intermediate) {
+	public static MapMarkerSelectionFragment newInstance(PointType pointType) {
 		MapMarkerSelectionFragment fragment = new MapMarkerSelectionFragment();
 		Bundle args = new Bundle();
-		args.putBoolean(TARGET_KEY, target);
-		args.putBoolean(INTERMEDIATE_KEY, intermediate);
+		args.putString(POINT_TYPE_KEY, pointType.name());
 		fragment.setArguments(args);
 		return fragment;
 	}

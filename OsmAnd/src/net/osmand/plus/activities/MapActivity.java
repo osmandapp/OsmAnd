@@ -1886,23 +1886,34 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			hideContextMenu();
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
-		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION
-				|| mode == ShowQuickSearchMode.DESTINATION_SELECTION_AND_START || mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+		if (mode.isPointSelection()) {
 			if (fragment != null) {
 				fragment.dismiss();
 			}
-			if (mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+			QuickSearchType searchType = null;
+			switch (mode) {
+				case START_POINT_SELECTION:
+					searchType = QuickSearchType.START_POINT;
+					break;
+				case DESTINATION_SELECTION:
+					searchType = QuickSearchType.DESTINATION;
+					break;
+				case DESTINATION_SELECTION_AND_START:
+					searchType = QuickSearchType.DESTINATION_AND_START;
+					break;
+				case INTERMEDIATE_SELECTION:
+					searchType = QuickSearchType.INTERMEDIATE;
+					break;
+				case HOME_POINT_SELECTION:
+					searchType = QuickSearchType.HOME_POINT;
+					break;
+				case WORK_POINT_SELECTION:
+					searchType = QuickSearchType.WORK_POINT;
+					break;
+			}
+			if (searchType != null) {
 				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
-						QuickSearchType.INTERMEDIATE, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
-			} else if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
-				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
-						QuickSearchType.START_POINT, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
-			} else if (mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
-				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
-						QuickSearchType.DESTINATION, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
-			} else {
-				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
-						QuickSearchType.DESTINATION_AND_START, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
+						searchType, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
 			}
 		} else if (fragment != null) {
 			if (mode == ShowQuickSearchMode.NEW
@@ -2044,6 +2055,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		START_POINT_SELECTION,
 		DESTINATION_SELECTION,
 		DESTINATION_SELECTION_AND_START,
-		INTERMEDIATE_SELECTION
+		INTERMEDIATE_SELECTION,
+		HOME_POINT_SELECTION,
+		WORK_POINT_SELECTION;
+
+		public boolean isPointSelection() {
+			return this != NEW && this != NEW_IF_EXPIRED && this != CURRENT;
+		}
 	}
 }

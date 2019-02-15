@@ -28,6 +28,8 @@ public class TargetPointsHelper {
 	private List<StateChangedListener<Void>> listeners = new ArrayList<>();
 	private List<TargetPointChangedListener> pointListeners = new ArrayList<>();
 	private OsmandApplication ctx;
+	private TargetPoint homePoint = null;
+	private TargetPoint workPoint = null;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -165,6 +167,9 @@ public class TargetPointsHelper {
 			intermediatePoints.add(targetPoint);
 		}
 
+		homePoint = TargetPoint.create(settings.getHomePoint(), settings.getHomePointDescription());
+		workPoint = TargetPoint.create(settings.getWorkPoint(), settings.getWorkPointDescription());
+
 		if (!ctx.isApplicationInitializing()) {
 			lookupAddessAll();
 		}
@@ -245,8 +250,27 @@ public class TargetPointsHelper {
 	public PointDescription getStartPointDescription(){
 		return settings.getStartPointDescription();
 	}
-	
-	
+
+	public TargetPoint getHomePoint() {
+		return homePoint;
+	}
+
+	public TargetPoint getWorkPoint() {
+		return workPoint;
+	}
+
+	public void setHomePoint(TargetPoint homePoint) {
+		this.homePoint = homePoint;
+		settings.setHomePoint(homePoint.getLatitude(), homePoint.getLongitude(),
+				homePoint.pointDescription);
+	}
+
+	public void setWorkPoint(TargetPoint workPoint) {
+		this.workPoint = workPoint;
+		settings.setWorkPoint(workPoint.getLatitude(), workPoint.getLongitude(),
+				workPoint.pointDescription);
+	}
+
 	public List<TargetPoint> getIntermediatePoints() {
 		return intermediatePoints;
 	}

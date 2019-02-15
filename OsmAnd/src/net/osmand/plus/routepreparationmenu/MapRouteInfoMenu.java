@@ -48,9 +48,10 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.routepreparationmenu.routeCards.BaseRouteCard;
-import net.osmand.plus.routepreparationmenu.routeCards.PublicTransportCard;
-import net.osmand.plus.routepreparationmenu.routeCards.SimpleRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
+import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -89,8 +90,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private GeocodingLookupService geocodingLookupService;
 
 	private boolean selectFromMapTouch;
-	private boolean selectFromMapForTarget;
-	private boolean selectFromMapForIntermediate;
+	private PointType selectFromMapPointType;
 
 	private boolean showMenu = false;
 	private MapActivity mapActivity;
@@ -103,7 +103,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private AddressLookupRequest targetPointRequest;
 	private List<LatLon> intermediateRequestsLatLon = new ArrayList<>();
 	private OnDismissListener onDismissListener;
-	private List<BaseRouteCard> routeCards = new ArrayList<BaseRouteCard>();
+	private List<BaseCard> menuCards = new ArrayList<>();
 
 	private OnMarkerSelectListener onMarkerSelectListener;
 	private StateChangedListener<Void> onStateChangedListener;
@@ -113,7 +113,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private boolean portraitMode;
 
 	public interface OnMarkerSelectListener {
-		void onSelect(int index, boolean target, boolean intermediate);
+		void onSelect(int index, PointType pointType);
+	}
+
+	public enum PointType {
+		START,
+		TARGET,
+		INTERMEDIATE,
+		HOME,
+		WORK
 	}
 
 	public MapRouteInfoMenu(MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
@@ -131,8 +139,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		geocodingLookupService = mapActivity.getMyApplication().getGeocodingLookupService();
 		onMarkerSelectListener = new OnMarkerSelectListener() {
 			@Override
-			public void onSelect(int index, boolean target, boolean intermediate) {
-				selectMapMarker(index, target, intermediate);
+			public void onSelect(int index, PointType pointType) {
+				selectMapMarker(index, pointType);
 			}
 		};
 		onStateChangedListener = new StateChangedListener<Void>() {
@@ -171,15 +179,26 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			selectFromMapTouch = false;
-			if (selectFromMapForIntermediate) {
-				getTargets().navigateToPoint(latlon, true, getTargets().getIntermediatePoints().size());
-			} else if (selectFromMapForTarget) {
-				getTargets().navigateToPoint(latlon, true, -1);
-			} else {
-				getTargets().setStartPoint(latlon, true, null);
+			TargetPointsHelper targets = getTargets();
+			switch (selectFromMapPointType) {
+				case START:
+					targets.setStartPoint(latlon, true, null);
+					break;
+				case TARGET:
+					targets.navigateToPoint(latlon, true, -1);
+					break;
+				case INTERMEDIATE:
+					targets.navigateToPoint(latlon, true, targets.getIntermediatePoints().size());
+					break;
+				case HOME:
+					targets.setHomePoint(TargetPoint.create(latlon, new PointDescription(PointDescription.POINT_TYPE_LOCATION, "")));
+					break;
+				case WORK:
+					targets.setWorkPoint(TargetPoint.create(latlon, new PointDescription(PointDescription.POINT_TYPE_LOCATION, "")));
+					break;
 			}
 			show();
-			if (selectFromMapForIntermediate && getTargets().checkPointToNavigateShort()) {
+			if (selectFromMapPointType == PointType.INTERMEDIATE && targets.checkPointToNavigateShort()) {
 				WaypointsFragment.showInstance(mapActivity);
 			}
 			return true;
@@ -327,7 +346,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	public void build(LinearLayout rootView) {
 		rootView.removeAllViews();
-		for (BaseRouteCard card : routeCards) {
+		for (BaseCard card : menuCards) {
 			rootView.addView(card.build(mapActivity));
 		}
 	}
@@ -344,14 +363,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateApplicationModesOptions();
 		updateOptionsButtons();
 
-		routeCards.clear();
+		menuCards.clear();
 
 		if (isBasicRouteCalculated()) {
 			GPXUtilities.GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), mapActivity.getMyApplication());
 			if (gpx != null) {
-				routeCards.add(new SimpleRouteCard(mapActivity, gpx));
-				LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
-				build(cardsContainer);
+				menuCards.add(new SimpleRouteCard(mapActivity, gpx));
 			}
 		} else if (isTransportRouteCalculated()) {
 			List<TransportRoutePlanner.TransportRouteResult> routes = transportHelper.getRoutes();
@@ -359,13 +376,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
 				card.setShowBottomShadow(i == routes.size() - 1);
 				card.setShowTopShadow(i != 0);
-				routeCards.add(card);
+				menuCards.add(card);
 			}
-			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
-			build(cardsContainer);
 		} else {
-			updateRouteCalcProgress(main);
+			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
+			menuCards.add(homeWorkCard);
 		}
+		setupCards();
+	}
+
+	private void setupCards() {
+		LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+		build(cardsContainer);
 	}
 
 	public boolean isRouteCalculated() {
@@ -449,13 +471,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		routingHelper.setAppMode(next);
 		mapActivity.getMyApplication().initVoiceCommandPlayer(mapActivity, next, true, null, false, false);
 		routingHelper.recalculateRouteDueToSettingsChange();
-	}
-
-	private void updateRouteCalcProgress(final View main) {
-		LinearLayout cardsContainer = (LinearLayout) main.findViewById(R.id.route_menu_cards_container);
-		if (cardsContainer != null) {
-			cardsContainer.removeAllViews();
-		}
 	}
 
 	private void updateApplicationModes() {
@@ -944,7 +959,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		toLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openAddPointDialog(true, false);
+				openAddPointDialog(PointType.TARGET);
 			}
 		});
 
@@ -970,7 +985,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		toButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				openAddPointDialog(false, true);
+				openAddPointDialog(PointType.INTERMEDIATE);
 			}
 		});
 
@@ -988,7 +1003,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		fromLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openAddPointDialog(false, false);
+				openAddPointDialog(PointType.START);
 			}
 		});
 
@@ -1043,57 +1058,84 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				getTargets().getPointToStart() == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint));
 	}
 
-	public void selectOnScreen(boolean target, boolean intermediate) {
+	public void selectOnScreen(PointType pointType) {
 		selectFromMapTouch = true;
-		selectFromMapForTarget = target;
-		selectFromMapForIntermediate = intermediate;
+		selectFromMapPointType = pointType;
 		hide();
 	}
 
-	public void selectAddress(String name, LatLon l, final boolean target, final boolean intermediate) {
+	public void selectAddress(String name, LatLon l, PointType pointType) {
 		PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
-		if (intermediate) {
-			getTargets().navigateToPoint(l, true, getTargets().getIntermediatePoints().size(), pd);
-		} else if (target) {
-			getTargets().navigateToPoint(l, true, -1, pd);
-		} else {
-			getTargets().setStartPoint(l, true, pd);
+		TargetPointsHelper targets = getTargets();
+		switch (pointType) {
+			case START:
+				targets.setStartPoint(l, true, pd);
+				break;
+			case TARGET:
+				targets.navigateToPoint(l, true, -1, pd);
+				break;
+			case INTERMEDIATE:
+				targets.navigateToPoint(l, true, targets.getIntermediatePoints().size(), pd);
+				break;
+			case HOME:
+				targets.setHomePoint(TargetPoint.create(l, pd));
+				break;
+			case WORK:
+				targets.setWorkPoint(TargetPoint.create(l, pd));
+				break;
 		}
 		updateMenu();
 	}
 
-	public void setupSpinners(final boolean target, final boolean intermediate) {
-		if (!intermediate && mainView != null) {
-			if (target) {
-				setupToText(mainView);
-			} else {
+	public void setupFields(PointType pointType) {
+		switch (pointType) {
+			case START:
 				setupFromText(mainView);
-			}
+				break;
+			case TARGET:
+				setupToText(mainView);
+				break;
+			case INTERMEDIATE:
+				break;
+			case HOME:
+			case WORK:
+				setupCards();
+				break;
 		}
 	}
 
-	public void selectMapMarker(final int index, final boolean target, final boolean intermediate) {
+	public void selectMapMarker(final int index, final PointType pointType) {
 		if (index != -1) {
 			MapMarker m = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().get(index);
 			LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
-			if (intermediate) {
-				getTargets().navigateToPoint(point, true, getTargets().getIntermediatePoints().size(), m.getPointDescription(mapActivity));
-			} else if (target) {
-				getTargets().navigateToPoint(point, true, -1, m.getPointDescription(mapActivity));
-			} else {
-				getTargets().setStartPoint(point, true, m.getPointDescription(mapActivity));
+			TargetPointsHelper targets = getTargets();
+			switch (pointType) {
+				case START:
+					targets.setStartPoint(point, true, m.getPointDescription(mapActivity));
+					break;
+				case TARGET:
+					targets.navigateToPoint(point, true, -1, m.getPointDescription(mapActivity));
+					break;
+				case INTERMEDIATE:
+					targets.navigateToPoint(point, true, targets.getIntermediatePoints().size(), m.getPointDescription(mapActivity));
+					break;
+				case HOME:
+					targets.setHomePoint(TargetPoint.create(point, m.getPointDescription(mapActivity)));
+					break;
+				case WORK:
+					targets.setWorkPoint(TargetPoint.create(point, m.getPointDescription(mapActivity)));
+					break;
 			}
 			updateFromIcon();
 		} else {
-			MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(target, intermediate);
+			MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
 			selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
 		}
 	}
 
-	private void openAddPointDialog(final boolean target, final boolean intermediate) {
+	private void openAddPointDialog(PointType pointType) {
 		Bundle args = new Bundle();
-		args.putBoolean(AddPointBottomSheetDialog.TARGET_KEY, target);
-		args.putBoolean(AddPointBottomSheetDialog.INTERMEDIATE_KEY, intermediate);
+		args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, pointType.name());
 		AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(false);

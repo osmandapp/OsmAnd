@@ -31,6 +31,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -520,8 +521,7 @@ public class WaypointDialogHelper {
 
 		private void openAddPointDialog(MapActivity mapActivity) {
 			Bundle args = new Bundle();
-			args.putBoolean(AddPointBottomSheetDialog.TARGET_KEY, false);
-			args.putBoolean(AddPointBottomSheetDialog.INTERMEDIATE_KEY, true);
+			args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, MapRouteInfoMenu.PointType.INTERMEDIATE.name());
 			AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(false);

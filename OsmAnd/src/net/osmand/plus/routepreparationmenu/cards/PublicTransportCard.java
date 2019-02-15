@@ -1,4 +1,4 @@
-package net.osmand.plus.routepreparationmenu.routeCards;
+package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -31,7 +31,7 @@ import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import java.util.Iterator;
 import java.util.List;
 
-public class PublicTransportCard extends BaseRouteCard {
+public class PublicTransportCard extends BaseCard {
 
 	private static final int MIN_WALK_TIME = 120;
 

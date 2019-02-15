@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.osmand.GPXUtilities;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
@@ -18,15 +19,14 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
-import net.osmand.GPXUtilities;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -300,38 +300,27 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 								 PointDescription pointDescription, Object object) {
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			boolean targetPoint = false;
-			switch (dialogFragment.getSearchType()) {
+			QuickSearchType searchType = dialogFragment.getSearchType();
+			switch (searchType) {
 				case REGULAR: {
 					app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
 					MapActivity.launchMapActivityMoveToTop(mapActivity);
 					dialogFragment.reloadHistory();
 					break;
 				}
-				case START_POINT: {
-					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
-							pointDescription != null ? pointDescription.getName() : null,
-							latitude, longitude, false, false);
-					targetPoint = true;
-					break;
-				}
+				case START_POINT:
 				case DESTINATION:
-				case DESTINATION_AND_START: {
+				case DESTINATION_AND_START:
+				case INTERMEDIATE:
+				case HOME_POINT:
+				case WORK_POINT: {
 					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
 							pointDescription != null ? pointDescription.getName() : null,
-							latitude, longitude, true, false);
-					targetPoint = true;
-					break;
-				}
-				case INTERMEDIATE: {
-					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
-							pointDescription != null ? pointDescription.getName() : null,
-							latitude, longitude, false, true);
-					targetPoint = true;
+							latitude, longitude, searchType);
 					break;
 				}
 			}
-			if (targetPoint) {
+			if (searchType.isTargetPoint()) {
 				dialogFragment.dismiss();
 				mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
 			}

@@ -13,10 +13,12 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -27,58 +29,84 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.util.List;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_MY_LOCATION;
+
 public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = "AddPointBottomSheetDialog";
-	public static final String TARGET_KEY = "target";
-	public static final String INTERMEDIATE_KEY = "intermediate";
+	public static final String POINT_TYPE_KEY = "point_type";
 
 	public static final int ADD_FAVOURITE_TO_ROUTE_REQUEST_CODE = 1;
 
-	private boolean target;
-	private boolean intermediate;
+	private PointType pointType = PointType.START;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
-		if (args != null && args.containsKey(TARGET_KEY) && args.containsKey(INTERMEDIATE_KEY)) {
-			target = args.getBoolean(TARGET_KEY);
-			intermediate = args.getBoolean(INTERMEDIATE_KEY);
+		if (args != null && args.containsKey(POINT_TYPE_KEY)) {
+			pointType = PointType.valueOf(args.getString(POINT_TYPE_KEY));
 		}
 		String title;
-		if (intermediate) {
-			title = getString(R.string.add_intermediate_point);
-		} else if (target) {
-			title = getString(R.string.add_destination_point);
-		} else {
-			title = getString(R.string.add_start_point);
+		switch (pointType) {
+			case START:
+				title = getString(R.string.add_start_point);
+				break;
+			case TARGET:
+				title = getString(R.string.add_destination_point);
+				break;
+			case INTERMEDIATE:
+				title = getString(R.string.add_intermediate_point);
+				break;
+			case HOME:
+				title = getString(R.string.add_home);
+				break;
+			case WORK:
+				title = getString(R.string.add_work);
+				break;
+			default:
+				title = "";
+				break;
 		}
 		items.add(new TitleItem(title));
 
 		createSearchItem();
-		if (intermediate) {
-			createSelectOnTheMapItem();
-			createFavouritesItem();
-			createMarkersItem();
-		} else if (target) {
-			createMyLocItem();
-			createSelectOnTheMapItem();
-			createFavouritesItem();
-			createMarkersItem();
-			items.add(new DividerHalfItem(getContext()));
-			createSwitchStartAndEndItem();
-		} else {
-			createMyLocItem();
-			createSelectOnTheMapItem();
-			createFavouritesItem();
-			createMarkersItem();
-			items.add(new DividerHalfItem(getContext()));
-			createSwitchStartAndEndItem();
+
+		switch (pointType) {
+			case START:
+				createMyLocItem();
+				createSelectOnTheMapItem();
+				createFavouritesItem();
+				createMarkersItem();
+				items.add(new DividerHalfItem(getContext()));
+				createSwitchStartAndEndItem();
+				break;
+			case TARGET:
+				createMyLocItem();
+				createSelectOnTheMapItem();
+				createFavouritesItem();
+				createMarkersItem();
+				items.add(new DividerHalfItem(getContext()));
+				createSwitchStartAndEndItem();
+				break;
+			case INTERMEDIATE:
+				createSelectOnTheMapItem();
+				createFavouritesItem();
+				createMarkersItem();
+				break;
+			case HOME:
+			case WORK:
+				createSelectOnTheMapItem();
+				createFavouritesItem();
+				createMarkersItem();
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -136,12 +164,19 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private MapActivity.ShowQuickSearchMode getSearchMode() {
-		if (intermediate) {
-			return MapActivity.ShowQuickSearchMode.INTERMEDIATE_SELECTION;
-		} else if (target) {
-			return MapActivity.ShowQuickSearchMode.DESTINATION_SELECTION;
-		} else {
-			return MapActivity.ShowQuickSearchMode.START_POINT_SELECTION;
+		switch (pointType) {
+			case START:
+				return MapActivity.ShowQuickSearchMode.START_POINT_SELECTION;
+			case TARGET:
+				return MapActivity.ShowQuickSearchMode.DESTINATION_SELECTION;
+			case INTERMEDIATE:
+				return MapActivity.ShowQuickSearchMode.INTERMEDIATE_SELECTION;
+			case HOME:
+				return MapActivity.ShowQuickSearchMode.HOME_POINT_SELECTION;
+			case WORK:
+				return MapActivity.ShowQuickSearchMode.WORK_POINT_SELECTION;
+			default:
+				return MapActivity.ShowQuickSearchMode.START_POINT_SELECTION;
 		}
 	}
 
@@ -159,17 +194,29 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							Location myLocation = app.getLocationProvider().getLastKnownLocation();
 							if (myLocation != null) {
 								LatLon ll = new LatLon(myLocation.getLatitude(), myLocation.getLongitude());
-								if (intermediate) {
-									app.showShortToastMessage(R.string.add_intermediate_point);
-									targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
-								} else if (target) {
-									app.showShortToastMessage(R.string.add_destination_point);
-									targetPointsHelper.navigateToPoint(ll, true, -1);
-								} else {
-									if (targetPointsHelper.getPointToStart() != null) {
-										targetPointsHelper.clearStartPoint(true);
-										app.getSettings().backupPointToStart();
-									}
+								switch (pointType) {
+									case START:
+										if (targetPointsHelper.getPointToStart() != null) {
+											targetPointsHelper.clearStartPoint(true);
+											app.getSettings().backupPointToStart();
+										}
+										break;
+									case TARGET:
+										app.showShortToastMessage(R.string.add_destination_point);
+										targetPointsHelper.navigateToPoint(ll, true, -1);
+										break;
+									case INTERMEDIATE:
+										app.showShortToastMessage(R.string.add_intermediate_point);
+										targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
+										break;
+									case HOME:
+										app.showShortToastMessage(R.string.add_intermediate_point);
+										targetPointsHelper.setHomePoint(TargetPoint.create(ll, new PointDescription(POINT_TYPE_MY_LOCATION, "")));
+										break;
+									case WORK:
+										app.showShortToastMessage(R.string.add_intermediate_point);
+										targetPointsHelper.setWorkPoint(TargetPoint.create(ll, new PointDescription(POINT_TYPE_MY_LOCATION, "")));
+										break;
 								}
 							}
 						}
@@ -190,7 +237,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						MapActivity mapActivity = (MapActivity) getActivity();
 						if (mapActivity != null) {
 							MapRouteInfoMenu menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-							menu.selectOnScreen(target, intermediate);
+							menu.selectOnScreen(pointType);
 						}
 						dismiss();
 					}
@@ -212,8 +259,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 							FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
 							Bundle args = new Bundle();
-							args.putBoolean(FavouritesBottomSheetMenuFragment.TARGET, target);
-							args.putBoolean(FavouritesBottomSheetMenuFragment.INTERMEDIATE, intermediate);
+							args.putString(FavouritesBottomSheetMenuFragment.POINT_TYPE_KEY, pointType.name());
 							fragment.setTargetFragment(AddPointBottomSheetDialog.this, ADD_FAVOURITE_TO_ROUTE_REQUEST_CODE);
 							fragment.setArguments(args);
 							fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
@@ -256,7 +302,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
 					MapRouteInfoMenu menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-					menu.selectMapMarker(-1, target, intermediate);
+					menu.selectMapMarker(-1, pointType);
 					dismiss();
 				}
 			}
@@ -267,7 +313,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
 					MapRouteInfoMenu menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-					menu.selectMapMarker(0, target, intermediate);
+					menu.selectMapMarker(0, pointType);
 					dismiss();
 				}
 			}

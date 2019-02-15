@@ -208,7 +208,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		START_POINT,
 		DESTINATION,
 		DESTINATION_AND_START,
-		INTERMEDIATE
+		INTERMEDIATE,
+		HOME_POINT,
+		WORK_POINT;
+
+		public boolean isTargetPoint() {
+			return this != QuickSearchType.REGULAR;
+		}
 	}
 
 	@Override
@@ -384,7 +390,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							SearchWord word = searchPhrase.getLastSelectedWord();
 							if (word != null) {
-								if (isSelectingTargetPoint() && word.getLocation() != null) {
+								if (searchType.isTargetPoint() && word.getLocation() != null) {
 									if (mainSearchFragment != null) {
 										mainSearchFragment.showResult(word.getResult());
 									}
@@ -701,13 +707,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		return dialog;
 	}
 
-	public boolean isSelectingTargetPoint() {
-		return searchType == QuickSearchType.START_POINT
-				|| searchType == QuickSearchType.DESTINATION
-				|| searchType == QuickSearchType.DESTINATION_AND_START
-				|| searchType == QuickSearchType.INTERMEDIATE;
-	}
-
 	public void saveCustomFilter() {
 		final OsmandApplication app = getMyApplication();
 		final PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
@@ -871,7 +870,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
 		} else if (searchEditText.getText().length() > 0) {
-			if (isSelectingTargetPoint()) {
+			if (searchType.isTargetPoint()) {
 				if (word != null && word.getResult() != null) {
 					buttonToolbarText.setText(app.getString(R.string.shared_string_select).toUpperCase() + " " + word.getResult().localeName.toUpperCase());
 				} else {
@@ -1092,7 +1091,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchWord lastWord = searchUICore.getPhrase().getLastSelectedWord();
 			boolean buttonToolbarVisible = (isOnlineSearch() && !isTextEmpty())
 					|| !searchUICore.getSearchSettings().isCustomSearch();
-			if (isSelectingTargetPoint() && (lastWord == null || lastWord.getLocation() == null)) {
+			if (searchType.isTargetPoint() && (lastWord == null || lastWord.getLocation() == null)) {
 				buttonToolbarVisible = false;
 			}
 			buttonToolbarView.setVisibility(buttonToolbarVisible ? View.VISIBLE : View.GONE);
@@ -1862,7 +1861,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (!buttonToolbarVisible) {
 			if (lastWord == null) {
 				buttonToolbarVisible = true;
-			} else if (isSelectingTargetPoint() && lastWord.getLocation() != null) {
+			} else if (searchType.isTargetPoint() && lastWord.getLocation() != null) {
 				buttonToolbarVisible = true;
 			}
 		}

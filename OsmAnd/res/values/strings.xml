@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+	<string name="add_home">Add home</string>
+	<string name="add_work">Add work</string>
+	<string name="work_button">Work</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
     <string name="shared_string_capacity">Сapacity</string>

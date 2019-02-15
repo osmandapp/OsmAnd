@@ -1,4 +1,4 @@
-package net.osmand.plus.routepreparationmenu.routeCards;
+package net.osmand.plus.routepreparationmenu.cards;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
-public abstract class BaseRouteCard {
+public abstract class BaseCard {
 
 	protected OsmandApplication app;
 	protected MapActivity mapActivity;
@@ -24,7 +24,7 @@ public abstract class BaseRouteCard {
 	boolean showBottomShadow;
 	protected boolean nightMode;
 
-	public BaseRouteCard(MapActivity mapActivity) {
+	public BaseCard(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();

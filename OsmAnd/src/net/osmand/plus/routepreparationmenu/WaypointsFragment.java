@@ -42,6 +42,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.DynamicListViewCallbacks;
@@ -148,9 +149,9 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				}
 
 				if (hasActivePoints) {
-					WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment fragment = new WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment();
+					TargetOptionsBottomSheetDialogFragment fragment = new TargetOptionsBottomSheetDialogFragment();
 					fragment.setUsedOnMap(true);
-					fragment.show(mapActivity.getSupportFragmentManager(), WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment.TAG);
+					fragment.show(mapActivity.getSupportFragmentManager(), TargetOptionsBottomSheetDialogFragment.TAG);
 				}
 			}
 		});
@@ -271,8 +272,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			@Override
 			public void onClick(View v) {
 				Bundle args = new Bundle();
-				args.putBoolean(AddPointBottomSheetDialog.TARGET_KEY, false);
-				args.putBoolean(AddPointBottomSheetDialog.INTERMEDIATE_KEY, true);
+				args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, MapRouteInfoMenu.PointType.INTERMEDIATE.name());
 				AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 				fragment.setArguments(args);
 				fragment.setUsedOnMap(false);

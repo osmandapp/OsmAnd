@@ -1,4 +1,4 @@
-package net.osmand.plus.routepreparationmenu.routeCards;
+package net.osmand.plus.routepreparationmenu.cards;
 
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +13,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -26,12 +27,12 @@ import java.util.List;
 
 import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.directionInfo;
 
-public class SimpleRouteCard extends BaseRouteCard {
+public class SimpleRouteCard extends BaseCard {
 
 	private MapActivity mapActivity;
-	private GPXUtilities.GPXFile gpx;
+	private GPXFile gpx;
 
-	public SimpleRouteCard(MapActivity mapActivity, GPXUtilities.GPXFile gpx) {
+	public SimpleRouteCard(MapActivity mapActivity, GPXFile gpx) {
 		super(mapActivity);
 		this.mapActivity = mapActivity;
 		this.gpx = gpx;

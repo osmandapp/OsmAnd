@@ -928,6 +928,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(
 				ContextCompat.getColor(ctx, nightMode ? R.color.active_buttons_and_links_dark : R.color.route_info_cancel_button_color_light));
 
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.fromText), nightMode);
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.toText), nightMode);
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaView), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaSubView), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.toTitle), nightMode);
