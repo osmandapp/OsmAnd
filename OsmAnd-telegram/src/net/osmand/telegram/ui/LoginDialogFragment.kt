@@ -23,10 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.utils.AndroidNetworkUtils
@@ -116,6 +113,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 	private var showProgress = false
 	private var dismissedManually = false
 	private lateinit var continueButton: Button
+	private lateinit var scrollView: ScrollView
 
 	enum class LoginDialogType(val viewId: Int, val editorId: Int,
 							   @StringRes val titleId: Int, @StringRes val descriptionId: Int,
@@ -149,6 +147,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		}
 		val view = inflater.inflate(R.layout.login_dialog, container)
 		continueButton = view.findViewById(R.id.continue_button)
+		scrollView = view.findViewById(R.id.scroll_view)
 
 		buildDialog(view)
 		view.viewTreeObserver.addOnGlobalLayoutListener {
@@ -160,6 +159,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 			if (!softKeyboardShown && softKeyboardVisible) {
 				softKeyboardShown = softKeyboardVisible
 				transformContinueButton(true)
+				scrollToBottom()
 			} else if (softKeyboardShown && !softKeyboardVisible) {
 				transformContinueButton(false)
 			}
@@ -178,6 +178,10 @@ class LoginDialogFragment : BaseDialogFragment() {
 			this.width = width
 		}
 		continueButton.requestLayout()
+	}
+
+	private fun scrollToBottom() {
+		scrollView.post { scrollView.fullScroll(ScrollView.FOCUS_DOWN); }
 	}
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -253,7 +257,11 @@ class LoginDialogFragment : BaseDialogFragment() {
 
 						titleView?.text = getText(t.titleId)
 						descriptionView?.text = getText(t.descriptionId)
-
+						titleView?.setOnClickListener {
+							view.findViewById<ScrollView>(R.id.scroll_view)?.post {
+								view.findViewById<ScrollView>(R.id.scroll_view).fullScroll(View.FOCUS_DOWN)
+							}
+						}
 						layout.visibility = View.VISIBLE
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
