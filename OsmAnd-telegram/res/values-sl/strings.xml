@@ -32,7 +32,7 @@
 	<string name="shared_string_save">Shrani</string>
 	<string name="add_device">Dodaj napravo</string>
 	<string name="share_location_as">Objavi trenutno mesto kot</string>
-	<string name="logout_from_osmand_telegram">Ali se želite odjaviti iz storitve OsmAnd Telegram\?</string>
+	<string name="logout_from_osmand_telegram">Ali se želite odjaviti iz storitve OsmAnd Tracker\?</string>
 	<string name="shared_string_name">Ime</string>
 	<string name="by_distance">Po razdalji</string>
 	<string name="by_name">Po imenu</string>
@@ -51,7 +51,7 @@
 	<string name="shared_string_account">Račun</string>
 	<string name="in_time">v %1$s</string>
 	<string name="show_on_map">Pokaži na zemljevidu</string>
-	<string name="app_name">OsmAnd Telegram</string>
+	<string name="app_name">OsmAnd Online GPS Tracker</string>
 	<string name="phone_number_title">Telefonska številka</string>
 	<string name="phone_number_descr">Telefonska številka v mednarodnem zapisu</string>
 	<string name="shared_string_password">Geslo</string>

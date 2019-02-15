@@ -51,10 +51,10 @@
     <string name="not_possible_to_send_to_telegram_chats">無法發送到 Telegram 聊天：</string>
     <string name="waiting_for_response_from_telegram">等待 Telegram 回復</string>
     <string name="background_work_description">更改電池最佳化設置以穩定位置共用。</string>
-    <string name="battery_optimization_description">關閉 OsmAnd Telegram 的電池最佳化，這樣在後臺時就不會突然關閉。</string>
+    <string name="battery_optimization_description">關閉 OsmAnd Tracker 的電池最佳化，這樣在後臺時就不會突然關閉。</string>
     <string name="live_now_description">連絡人和群組共用位置給您。</string>
-    <string name="logout_from_osmand_telegram_descr">你確定要登出 OsmAnd Telegram，這樣你就不能共用位置或看到其他人的位置嗎？</string>
-    <string name="logout_from_osmand_telegram">要登出 OsmAnd Telegram 嗎\?</string>
+    <string name="logout_from_osmand_telegram_descr">你確定要登出 OsmAnd Tracker，這樣你就不能共用位置或看到其他人的位置嗎？</string>
+    <string name="logout_from_osmand_telegram">要登出 OsmAnd Tracker 嗎\?</string>
     <string name="choose_osmand_desc">選擇將在地圖上顯示連絡人的 OsmAnd 版本。</string>
     <string name="choose_osmand">選擇要使用的 OsmAnd 版本</string>
     <string name="disable_all_sharing_desc">關閉所有選定聊天的位置共用(%1$d)。</string>
@@ -63,13 +63,13 @@
     <string name="shared_string_group">群組</string>
     <string name="logout_no_internet_msg">連接到網路以正確登出 Telegram。</string>
     <string name="shared_string_close">關閉</string>
-    <string name="disconnect_from_telegram_desc">撤銷位置共用訪問。打開 Telegram，進入設定→隱私和安全→會話，並終 OsmAnd Telegram 會話。</string>
+    <string name="disconnect_from_telegram_desc">撤銷位置共用訪問。打開 Telegram，進入設定→隱私和安全→會話，並終 OsmAnd Tracker 會話。</string>
     <string name="disconnect_from_telegram">如何關閉 Telegram 中的 OsmAnd 交給位置共用</string>
     <string name="logout_help_desc">如何關閉 Telegram 中的 OsmAnd 交給位置共用</string>
     <string name="connected_account">已連接帳戶</string>
     <string name="shared_string_account">帳戶</string>
     <string name="in_time">在 %1$s</string>
-    <string name="osmand_connect_desc">選擇 OsmAnd 和版本的 OsmAnd Telegram 用於顯示位置。</string>
+    <string name="osmand_connect_desc">選擇 OsmAnd 和版本的 OsmAnd Tracker 用於顯示位置。</string>
     <string name="osmand_connect">OsMand 連接</string>
     <string name="location_history_desc">隱藏在給定時間內未移動的連絡人。</string>
     <string name="location_history">位置歷史記錄</string>
@@ -110,7 +110,7 @@
     <string name="my_location_search_hint">搜尋：群組或連絡人</string>
     <string name="start_location_sharing">共用位置</string>
     <string name="show_on_map">在地圖上顯示</string>
-    <string name="app_name">OsmAnd Telegram</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">電話號碼</string>
     <string name="phone_number_descr">國際格式的電話號碼</string>
     <string name="shared_string_password">密碼</string>
@@ -137,7 +137,7 @@
     <string name="shared_string_distance">距離</string>
     <string name="share_location">共用位置</string>
     <string name="sharing_location">共用位置</string>
-    <string name="process_service">OsmAnd Telegram 伺服器</string>
+    <string name="process_service">OsmAnd Tracker 伺服器</string>
     <string name="osmand_logo">OsmAnd 圖示</string>
     <string name="install_osmand_dialog_message">您需要先安裝免費或付費版本的 OsmAnd</string>
     <string name="install_osmand">安裝 OsMand</string>
@@ -183,6 +183,5 @@
     <string name="open_in_osmand">在 OsmAnd 中開啟</string>
     <string name="end_date">結束日期</string>
     <string name="start_date">開始日期</string>
-    <string name="timeline_description">啟用監視以在背景蒐集移動資料。</string>
     <string name="timeline">時間軸</string>
 </resources>

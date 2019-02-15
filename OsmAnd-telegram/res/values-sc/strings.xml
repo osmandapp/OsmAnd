@@ -29,7 +29,7 @@
     <string name="no_location_permission">S’aplicatzione no est autorizada a atzèdere a sos datos de positzione.</string>
     <string name="gps_not_available">Allughe sa \"positzione\" in sas impostatziones</string>
     <string name="osmand_service">Modalidade de isfundu</string>
-    <string name="osmand_service_descr">OsmAnd Telegram sighit a funtzionare in s’isfundu, cun s’ischermu mortu.</string>
+    <string name="osmand_service_descr">OsmAnd Tracker sighit a funtzionare in s’isfundu, cun s’ischermu mortu.</string>
     <string name="shared_string_distance">Distàntzia</string>
     <string name="share_location">Cumpartzi sa positzione</string>
     <string name="install_osmand">Installa OsmAnd</string>
@@ -37,7 +37,6 @@
     <string name="monitoring_is_enabled">Su monitoràgiu est abilitadu</string>
     <string name="monitoring_is_disabled">Su monitoràgiu est disabilitadu</string>
     <string name="time_on_the_move">tempus in movimentu</string>
-    <string name="timeline_description">Abìlita su monitoràgiu pro collire datos de su movimentu in s\'isfundu.</string>
     <string name="send_location_as">Imbia sa positzione comente</string>
     <string name="send_location_as_descr">Issèbera comente sos messàgios cun sa positzione tua ant a aparire.</string>
     <string name="last_update_from_telegram">Ùrtimu agiornamentu de Telegram</string>
@@ -59,7 +58,7 @@
     <string name="connecting_to_the_internet">Collegamentu a ìnternet</string>
     <string name="background_work_description">Muda sas impostatziones de otimizatzione de sa bateria pro istabilizare sa cumpartzidura de sa positzione.</string>
     <string name="background_work">Modalidade de isfundu</string>
-    <string name="battery_optimization_description">Istuda s\'otimizatzione de sa bateria pro OsmAnd Telegram pro fàghere in modu chi non bèngiat serradu de repente cando est in s\'isfundu.</string>
+    <string name="battery_optimization_description">Istuda s\'otimizatzione de sa bateria pro OsmAnd Tracker pro fàghere in modu chi non bèngiat serradu de repente cando est in s\'isfundu.</string>
     <string name="sharing_in_background">Cumpartzidura in s\'isfundu</string>
     <string name="go_to_settings">Bae a sas impostatziones</string>
     <string name="not_sent_yet">Galu non imbiadu</string>
@@ -73,8 +72,8 @@
     <string name="add_device">Annanghe unu dispositivu</string>
     <string name="share_location_as">Cumpartzi sa positzione comente</string>
     <string name="live_now_description">Cuntatos e grupos chi cumpartzent sa positzione cun tie.</string>
-    <string name="logout_from_osmand_telegram_descr">Ses seguru de chèrrere essire dae OsmAnd Telegram pro non cumpartzire sa positzione tua o bìdere sa de àtere\?</string>
-    <string name="logout_from_osmand_telegram">Serrare sa sessione de OsmAnd Telegram\?</string>
+    <string name="logout_from_osmand_telegram_descr">Ses seguru de chèrrere essire dae OsmAnd Tracker pro non cumpartzire sa positzione tua o bìdere sa de àtere\?</string>
+    <string name="logout_from_osmand_telegram">Serrare sa sessione de OsmAnd Tracker\?</string>
     <string name="by_distance">Pro distàntzia</string>
     <string name="by_name">Pro nùmene</string>
     <string name="by_group">Pro grupu</string>
@@ -94,7 +93,7 @@
     <string name="connected_account">Contu connessu</string>
     <string name="shared_string_account">Contu</string>
     <string name="in_time">in %1$s</string>
-    <string name="osmand_connect_desc">Issèbera sa versione de OsmAnd chi OsmAnd Telegram at a impreare pro ammustrare sas positziones.</string>
+    <string name="osmand_connect_desc">Issèbera sa versione de OsmAnd chi OsmAnd Tracker at a impreare pro ammustrare sas positziones.</string>
     <string name="location_history_desc">Istichi sos cuntatos chi non si sunt mòvidos in unu perìodu de tempus determinadu.</string>
     <string name="location_history">Cronologia de sas positziones</string>
     <string name="stale_location_desc">S\'ùrtima borta chi unu cuntatu s\'est mòvidu.</string>
@@ -157,7 +156,7 @@
     <string name="my_location_search_hint">Chirca: grupu o cuntatu</string>
     <string name="start_location_sharing">Cumpartzi sa positzione</string>
     <string name="show_on_map">Ammustra in sa mapa</string>
-    <string name="app_name">OsmAnd Telegram</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">Nùmeru de telèfono</string>
     <string name="phone_number_descr">Nùmeru de telèfono in formadu internatzionale</string>
     <string name="shared_string_password">Crae de intrada</string>
@@ -175,7 +174,7 @@
     <string name="not_logged_in">No as fatu s\'atzessu</string>
     <string name="location_service_no_gps_available">Ischerta unu de sos frunidores de sa positzione pro la cumpartzire.</string>
     <string name="sharing_location">Cumpartzende sa positzione</string>
-    <string name="process_service">Servìtziu de OsmAnd Telegram</string>
+    <string name="process_service">Servìtziu de OsmAnd Tracker</string>
     <string name="osmand_logo">Logo de OsmAnd</string>
     <string name="install_osmand_dialog_message">In antis depes installare sa versione de badas o a pagamentu de OsmAnd</string>
     <string name="show_users_on_map">Ammustra sos impreadores in sa mapa</string>

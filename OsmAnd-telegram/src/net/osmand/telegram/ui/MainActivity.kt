@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.Snackbar
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -25,7 +27,10 @@ import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
 import net.osmand.telegram.ui.views.LockableViewPager
-import net.osmand.telegram.utils.*
+import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
+import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
+import net.osmand.telegram.utils.OsmandApiUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
@@ -60,6 +65,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	private lateinit var buttonsBar: LinearLayout
 	private lateinit var bottomNav: BottomNavigationView
+	private lateinit var coordinatorLayout: CoordinatorLayout
+
+	private var snackbarShown = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -78,7 +86,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			offscreenPageLimit = 3
 			adapter = ViewPagerAdapter(supportFragmentManager)
 		}
-
+		coordinatorLayout = findViewById(R.id.coordinator)
 		bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
 			setOnNavigationItemSelectedListener {
 				var pos = -1
@@ -89,9 +97,19 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				}
 				if (pos != -1 && pos != viewPager.currentItem) {
 					when (pos) {
-						MY_LOCATION_TAB_POS -> liveNowTabFragment?.tabClosed()
-						LIVE_NOW_TAB_POS -> liveNowTabFragment?.tabOpened()
-						TIMELINE_TAB_POS -> liveNowTabFragment?.tabClosed()
+						MY_LOCATION_TAB_POS -> {
+							liveNowTabFragment?.tabClosed()
+							timelineTabFragment?.tabClosed()
+						}
+						LIVE_NOW_TAB_POS -> {
+							timelineTabFragment?.tabClosed()
+							liveNowTabFragment?.tabOpened()
+						}
+						TIMELINE_TAB_POS -> {
+							liveNowTabFragment?.tabClosed()
+							timelineTabFragment?.tabOpened()
+							showSnackBar()
+						}
 					}
 					viewPager.currentItem = pos
 					return@setOnNavigationItemSelectedListener true
@@ -358,6 +376,15 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun setupOptionsBtn(imageView: ImageView) {
 		imageView.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
 		imageView.setOnClickListener { showOptionsPopupMenu(imageView) }
+	}
+
+	fun showSnackBar() {
+		if (!snackbarShown) {
+			val snackbar = Snackbar.make(coordinatorLayout, R.string.timeline_available_for_free_now, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_ok) {}
+			AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
+			snackbar.show()
+			snackbarShown = true
+		}
 	}
 
 	private fun showOptionsPopupMenu(anchor: View) {

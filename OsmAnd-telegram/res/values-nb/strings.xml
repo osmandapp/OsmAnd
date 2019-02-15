@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources><string name="background_work_description">Endre batterioptimiseringsinnstillinger for mer stabil posisjonsdeling.</string>
 	<string name="background_work">Bakgrunnsarbeid</string>
-	<string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd Telegram slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
+	<string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd Tracker slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
 	<string name="sharing_in_background">Deling i bakgrunnen</string>
 	<string name="go_to_settings">Gå til innstillinger</string>
 	<string name="shared_string_later">Senere</string>
@@ -18,8 +18,8 @@
 	<string name="add_device">Legg til enhet</string>
 	<string name="share_location_as">Del posisjon som</string>
 	<string name="live_now_description">Kontakter og grupper som deler sin posisjon med deg.</string>
-	<string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Telegram slik at du ikke kan sende din posisjon, eller se andres\?</string>
-	<string name="logout_from_osmand_telegram">Logg ut av OsmAnd Telegram\?</string>
+	<string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Tracker slik at du ikke kan sende din posisjon, eller se andres\?</string>
+	<string name="logout_from_osmand_telegram">Logg ut av OsmAnd Tracker\?</string>
 	<string name="shared_string_name">Navn</string>
 	<string name="by_distance">Etter distanse</string>
 	<string name="by_name">Etter navn</string>
@@ -43,7 +43,7 @@
 	<string name="connected_account">Tilkoblet konto</string>
 	<string name="shared_string_account">Konto</string>
 	<string name="in_time">i %1$s</string>
-	<string name="osmand_connect_desc">Velg OsmAnd-versjonen OsmAnd Telegram bruker for å vise posisjoner på kartet.</string>
+	<string name="osmand_connect_desc">Velg OsmAnd-versjonen OsmAnd Tracker bruker for å vise posisjoner på kartet.</string>
 	<string name="osmand_connect">OsmAnd connect</string>
 	<string name="location_history_desc">Skjul kontaktene som ikke har oppdatert sin plassering etter et gitt tidsintervall.</string>
 	<string name="location_history">Posisjonshistorikk</string>
@@ -82,7 +82,7 @@
 	<string name="my_location_search_hint">Søk: Gruppe eller kontakt</string>
 	<string name="start_location_sharing">Del posisjon</string>
 	<string name="show_on_map">Vis på kartet</string>
-	<string name="app_name">OsmAnd Telegram</string>
+	<string name="app_name">OsmAnd Online GPS Tracker</string>
 	<string name="phone_number_title">Telefonnummer</string>
 	<string name="phone_number_descr">Telefonnummer i internasjonalt format</string>
 	<string name="shared_string_password">Passord</string>
@@ -101,7 +101,7 @@
 	<string name="gps_not_available">Skru på «Posisjon» i systeminnstillingene</string>
 	<string name="location_service_no_gps_available">Velg en av posisjonstilbyderne for å dele din posisjon.</string>
 	<string name="osmand_service">Bakgrunnsmodus</string>
-	<string name="osmand_service_descr">OsmAnd Telegram kjører som nisse med skjermen av.</string>
+	<string name="osmand_service_descr">OsmAnd Tracker kjører som nisse med skjermen av.</string>
 	<string name="shared_string_distance">Distanse</string>
 	<string name="share_location">Del posisjon</string>
 	<string name="sharing_location">Deler posisjon</string>
@@ -187,6 +187,5 @@
     <string name="open_in_osmand">Åpne i OsmAnd</string>
     <string name="end_date">Sluttdato</string>
     <string name="start_date">Startdato</string>
-    <string name="timeline_description">Skru på oppsyn for å samle bevegelsesdata i bakgrunnen.</string>
     <string name="timeline">Tidslinje</string>
 </resources>

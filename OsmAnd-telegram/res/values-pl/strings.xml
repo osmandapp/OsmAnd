@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources><string name="background_work_description">Zmień ustawienia optymalizacji baterii, aby zapewnić stabilną lokalizację.</string>
 	<string name="background_work">Praca w tle</string>
-	<string name="battery_optimization_description">Aby stabilnie udostępniać swoją pozycję w tle, zaleca się wyłączenie optymalizacji baterii dla Telegram OsmAnd.
+	<string name="battery_optimization_description">Aby stabilnie udostępniać swoją pozycję w tle, zaleca się wyłączenie optymalizacji baterii dla Tracker OsmAnd.
 \n
 \nJeśli włączona jest optymalizacja, system może automatycznie wyłączyć aplikację działającą w tle (gdy ekran jest zablokowany i/lub aplikacja jest zminimalizowana). Dzieje się tak bez powiadomienia i powoduje zatrzymanie położenia geograficznego.</string>
 	<string name="sharing_in_background">Udostępnianie w tle</string>
@@ -21,8 +21,8 @@
 	<string name="add_device">Dodaj urządzenie</string>
 	<string name="share_location_as">Udostępnij lokalizację jako</string>
 	<string name="live_now_description">Kontakty i grupy, które udostępniają Ci swoją lokalizację.</string>
-	<string name="logout_from_osmand_telegram_descr">Czy na pewno chcesz się wylogować z OsmAnd Telegram, aby nie udostępniać lokalizacji ani nie widzieć lokalizacji innych\?</string>
-	<string name="logout_from_osmand_telegram">Wylogować się z OsmAnd Telegram\?</string>
+	<string name="logout_from_osmand_telegram_descr">Czy na pewno chcesz się wylogować z OsmAnd Tracker, aby nie udostępniać lokalizacji ani nie widzieć lokalizacji innych\?</string>
+	<string name="logout_from_osmand_telegram">Wylogować się z OsmAnd Tracker\?</string>
 	<string name="shared_string_name">Nazwa</string>
 	<string name="by_distance">Według odległości</string>
 	<string name="by_name">Według nazwy</string>
@@ -45,7 +45,7 @@
 	<string name="connected_account">Połączone konta</string>
 	<string name="shared_string_account">Konto</string>
 	<string name="in_time">w %1$s</string>
-	<string name="osmand_connect_desc">Wybierz wersję OsmAnd, którą Telegram OsmAnd będzie używał do wyświetlaniu pozycji.</string>
+	<string name="osmand_connect_desc">Wybierz wersję OsmAnd, którą Tracker OsmAnd będzie używał do wyświetlaniu pozycji.</string>
 	<string name="osmand_connect">Połącz OsmAnd</string>
 	<string name="location_history_desc">Ukryj kontakty, które nie zostały przeniesione w określonym czasie.</string>
 	<string name="location_history">Historia lokalizacji</string>
@@ -83,7 +83,7 @@
 	<string name="my_location_search_hint">Szukaj: Grupa lub kontakt</string>
 	<string name="start_location_sharing">Udostępnij lokalizację</string>
 	<string name="show_on_map">Pokazuj na mapie</string>
-	<string name="app_name">OsmAnd Telegram</string>
+	<string name="app_name">OsmAnd Online GPS Tracker</string>
 	<string name="phone_number_title">Numer telefonu</string>
 	<string name="phone_number_descr">Numer telefonu w formacie międzynarodowym</string>
 	<string name="shared_string_password">Hasło</string>
@@ -103,11 +103,11 @@
 	<string name="gps_not_available">Włącz \"Lokalizacja\" w ustawieniach systemu</string>
 	<string name="location_service_no_gps_available">Wybierz jednego z dostawców lokalizacji, aby udostępnić swoją lokalizację.</string>
 	<string name="osmand_service">Tryb tła</string>
-	<string name="osmand_service_descr">Telegram OsmAnd będzie działał w tle przy wygaszonym ekranie.</string>
+	<string name="osmand_service_descr">Tracker OsmAnd będzie działał w tle przy wygaszonym ekranie.</string>
 	<string name="shared_string_distance">Odległość</string>
 	<string name="share_location">Udostępnij lokalizację</string>
 	<string name="sharing_location">Udostępnianie lokalizacji</string>
-	<string name="process_service">Usługa Telegramu OsmAnd</string>
+	<string name="process_service">Usługa Tracker OsmAnd</string>
 	<string name="osmand_logo">Logo OsmAnd</string>
 	<string name="install_osmand_dialog_message">Najpierw musisz zainstalować darmową lub płatną wersję OsmAnd</string>
 	<string name="install_osmand">Zainstaluj OsmAnd</string>
@@ -187,7 +187,6 @@
     <string name="open_in_osmand">Otwarte w OsmAnd</string>
     <string name="end_date">Data końcowa</string>
     <string name="start_date">Data rozpoczęcia</string>
-    <string name="timeline_description">Umożliwia monitorowanie, by zgromadzić dane ruchu w tle.</string>
     <string name="timeline">Linia czasu</string>
     <string name="please_update_osmand">Proszę zaktualizować OsmAnd, by zobaczyć dane na mapie</string>
     <string name="shared_string_update">Aktualizuj</string>

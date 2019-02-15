@@ -108,7 +108,7 @@
 			android:id="@+id/show_on_map_row"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:minHeight="@dimen/list_item_height_big"
+			android:minHeight="60dp"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
 			android:paddingLeft="@dimen/content_padding_standard"
@@ -117,7 +117,7 @@
 			<LinearLayout
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="top"
 				android:layout_marginEnd="@dimen/content_padding_standard"
 				android:layout_marginRight="@dimen/content_padding_standard"
 				android:layout_weight="1"
@@ -131,6 +131,7 @@
 					android:text="@string/turn_off_location_sharing"
 					android:textColor="?attr/ctrl_active_color"
 					android:textSize="@dimen/hint_text_size"
+					app:firstBaselineToTopHeight="24sp"
 					app:typeface="@string/font_roboto_medium" />
 
 				<net.osmand.telegram.ui.views.TextViewEx
@@ -141,6 +142,7 @@
 					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/hint_text_size"
 					app:typeface="@string/font_roboto_regular"
+					app:lastBaselineToBottomHeight="10sp"
 					tools:text="@string/expire_at" />
 
 				<net.osmand.telegram.ui.views.TextViewEx
@@ -151,6 +153,7 @@
 					android:text="@string/gps_points"
 					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/hint_text_size"
+					app:lastBaselineToBottomHeight="16sp"
 					app:typeface="@string/font_roboto_regular" />
 
 			</LinearLayout>

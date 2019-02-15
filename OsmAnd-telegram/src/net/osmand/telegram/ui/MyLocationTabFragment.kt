@@ -3,6 +3,7 @@ package net.osmand.telegram.ui
 import android.animation.*
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
@@ -22,12 +24,10 @@ import net.osmand.telegram.ADDITIONAL_ACTIVE_TIME_VALUES_SEC
 import net.osmand.telegram.R
 import net.osmand.telegram.SHARE_TYPE_MAP
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.helpers.FontCache
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
-import net.osmand.telegram.ui.views.CustomTypefaceSpan
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import org.drinkless.td.libcore.telegram.TdApi
@@ -703,12 +703,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				holder.sharingExpiresLine?.apply {
 					visibility = if (expiresIn > 0) View.VISIBLE else View.GONE
 					val description = SpannableStringBuilder(getText(R.string.expire_at))
-					val typeface = FontCache.getRobotoMonoBold(app)
 					val start = description.length
 					description.append(" ${OsmandFormatter.getFormattedTime(expiresIn * 1000)} ")
-					if (typeface != null) {
-						description.setSpan(CustomTypefaceSpan(typeface), start, description.length, 0)
-					}
+					description.setSpan(StyleSpan(Typeface.BOLD), start, description.length, 0)
 					description.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), start, description.length, 0)
 					description.append((getString(R.string.in_time, OsmandFormatter.getFormattedDuration(app, expiresIn, true))))
 					text = description
@@ -717,8 +714,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				holder.gpsPointsLine?.apply {
 					visibility = if (app.settings.showGpsPoints && shareInfo != null) View.VISIBLE else View.GONE
 					if (shareInfo != null) {
-						val description = SpannableStringBuilder(getText(R.string.gps_points))
-						val typeface = FontCache.getRobotoMonoBold(app)
+						val description = SpannableStringBuilder("${getText(R.string.gps_points)}:")
 						val bufferedPoints = if (app.settings.shareTypeValue == SHARE_TYPE_MAP) {
 							shareInfo.pendingTdLibMap + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_MAP)
 						} else {
@@ -726,9 +722,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						}
 						val start = description.length
 						description.append(" ${shareInfo.sentMessages} ")
-						if (typeface != null) {
-							description.setSpan(CustomTypefaceSpan(typeface), start, description.length, 0)
-						}
+						description.setSpan(StyleSpan(Typeface.BOLD), start, description.length, 0)
 						description.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), start, description.length, 0)
 						description.append(getString(R.string.gps_points_in_buffer, bufferedPoints))
 						text = description
