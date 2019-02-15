@@ -14,13 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
@@ -8,16 +7,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -25,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -33,10 +29,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.GPXUtilities;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -51,9 +45,7 @@ import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.mapcontextmenu.other.FavouritesBottomSheetMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routepreparationmenu.routeCards.BaseRouteCard;
@@ -90,7 +82,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private static boolean visible;
 	public static boolean controlVisible = false;
 	public static boolean chooseRoutesVisible = false;
-	public static final String TARGET_SELECT = "TARGET_SELECT";
 
 	private final RoutingHelper routingHelper;
 	private final TransportRoutingHelper transportHelper;
@@ -120,18 +111,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private int currentMenuState;
 	private boolean portraitMode;
-
-	private static final long SPINNER_MY_LOCATION_ID = 1;
-	public static final long SPINNER_FAV_ID = 2;
-	public static final long SPINNER_MAP_ID = 3;
-	public static final long SPINNER_ADDRESS_ID = 4;
-	private static final long SPINNER_START_ID = 5;
-	private static final long SPINNER_FINISH_ID = 6;
-	private static final long SPINNER_HINT_ID = 100;
-	public static final long SPINNER_MAP_MARKER_1_ID = 301;
-	public static final long SPINNER_MAP_MARKER_2_ID = 302;
-	private static final long SPINNER_MAP_MARKER_3_ID = 303;
-	public static final long SPINNER_MAP_MARKER_MORE_ID = 350;
 
 	public interface OnMarkerSelectListener {
 		void onSelect(int index, boolean target, boolean intermediate);
@@ -1083,16 +1062,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		updateMenu();
 	}
 
-	public void selectFavorite(@Nullable final View parentView, final boolean target, final boolean intermediate) {
-		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		FavouritesBottomSheetMenuFragment fragment = new FavouritesBottomSheetMenuFragment();
-		Bundle args = new Bundle();
-		args.putBoolean(FavouritesBottomSheetMenuFragment.TARGET, target);
-		args.putBoolean(FavouritesBottomSheetMenuFragment.INTERMEDIATE, intermediate);
-		fragment.setArguments(args);
-		fragment.show(fragmentManager, FavouritesBottomSheetMenuFragment.TAG);
-	}
-
 	public void setupSpinners(final boolean target, final boolean intermediate) {
 		if (!intermediate && mainView != null) {
 			if (target) {
@@ -1292,55 +1261,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
-	public RoutePopupListArrayAdapter getIntermediatesPopupAdapter(Context ctx) {
-		List<RouteSpinnerRow> viaActions = new ArrayList<>();
-
-		viaActions.add(new RouteSpinnerRow(SPINNER_FAV_ID, R.drawable.ic_action_fav_dark,
-				mapActivity.getString(R.string.shared_string_favorite) + mapActivity.getString(R.string.shared_string_ellipsis)));
-		viaActions.add(new RouteSpinnerRow(SPINNER_MAP_ID, R.drawable.ic_action_marker_dark,
-				mapActivity.getString(R.string.shared_string_select_on_map)));
-		viaActions.add(new RouteSpinnerRow(SPINNER_ADDRESS_ID, R.drawable.ic_action_home_dark,
-				mapActivity.getString(R.string.shared_string_address) + mapActivity.getString(R.string.shared_string_ellipsis)));
-
-		addMarkersToSpinner(viaActions);
-
-		RoutePopupListArrayAdapter viaAdapter = new RoutePopupListArrayAdapter(ctx);
-		for (RouteSpinnerRow row : viaActions) {
-			viaAdapter.add(row);
-		}
-
-		return viaAdapter;
-	}
-
-	private void addMarkersToSpinner(List<RouteSpinnerRow> actions) {
-		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
-		List<MapMarker> markers = markersHelper.getMapMarkers();
-		if (markers.size() > 0) {
-			MapMarker m = markers.get(0);
-			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_1_ID,
-					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
-					m.getName(mapActivity)));
-		}
-		if (markers.size() > 1) {
-			MapMarker m = markers.get(1);
-			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_2_ID,
-					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
-					m.getName(mapActivity)));
-		}
-		/*
-		if (markers.size() > 2) {
-			MapMarker m = markers.get(2);
-			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_3_ID,
-					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
-					m.getOnlyName()));
-		}
-		*/
-		if (markers.size() > 2) {
-			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_MORE_ID, 0,
-					mapActivity.getString(R.string.map_markers_other)));
-		}
-	}
-
 	private TargetPointsHelper getTargets() {
 		return app.getTargetPointsHelper();
 	}
@@ -1414,132 +1334,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		showMenu = true;
 	}
 
-	private class RouteSpinnerRow {
-		long id;
-		int iconId;
-		Drawable icon;
-		String text;
-
-		public RouteSpinnerRow(long id) {
-			this.id = id;
-		}
-
-		public RouteSpinnerRow(long id, int iconId, String text) {
-			this.id = id;
-			this.iconId = iconId;
-			this.text = text;
-		}
-
-		public RouteSpinnerRow(long id, Drawable icon, String text) {
-			this.id = id;
-			this.icon = icon;
-			this.text = text;
-		}
-	}
-
-	private class RouteBaseArrayAdapter extends ArrayAdapter<RouteSpinnerRow> {
-
-		RouteBaseArrayAdapter(@NonNull Context context, int resource) {
-			super(context, resource);
-		}
-
-		@Override
-		public boolean hasStableIds() {
-			return true;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			RouteSpinnerRow row = getItem(position);
-			return row != null ? row.id : -1;
-		}
-
-		@Override
-		public boolean isEnabled(int position) {
-			long id = getItemId(position);
-			return id != SPINNER_HINT_ID;
-		}
-
-		View getRowItemView(int position, View convertView, ViewGroup parent) {
-			TextView label = (TextView) super.getView(position, convertView, parent);
-			RouteSpinnerRow row = getItem(position);
-			label.setText(row != null ? row.text : "");
-			label.setTextColor(!isLight() ?
-					ContextCompat.getColorStateList(mapActivity, android.R.color.primary_text_dark) : ContextCompat.getColorStateList(mapActivity, android.R.color.primary_text_light));
-			return label;
-		}
-
-		View getListItemView(int position, View convertView, ViewGroup parent) {
-			long id = getItemId(position);
-			TextView label = (TextView) super.getDropDownView(position, convertView, parent);
-
-			RouteSpinnerRow row = getItem(position);
-			label.setText(row != null ? row.text : "");
-			if (row != null && id != SPINNER_HINT_ID) {
-				Drawable icon = null;
-				if (row.icon != null) {
-					icon = row.icon;
-				} else if (row.iconId > 0) {
-					icon = mapActivity.getMyApplication().getUIUtilities().getThemedIcon(row.iconId);
-				}
-				label.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-				label.setCompoundDrawablePadding(AndroidUtils.dpToPx(mapActivity, 16f));
-			} else {
-				label.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-				label.setCompoundDrawablePadding(0);
-			}
-
-			if (id == SPINNER_MAP_MARKER_MORE_ID) {
-				label.setTextColor(!mapActivity.getMyApplication().getSettings().isLightContent() ?
-						mapActivity.getResources().getColor(R.color.color_dialog_buttons_dark) : mapActivity.getResources().getColor(R.color.color_dialog_buttons_light));
-			} else {
-				label.setTextColor(!mapActivity.getMyApplication().getSettings().isLightContent() ?
-						ContextCompat.getColorStateList(mapActivity, android.R.color.primary_text_dark) : ContextCompat.getColorStateList(mapActivity, android.R.color.primary_text_light));
-			}
-			label.setPadding(AndroidUtils.dpToPx(mapActivity, 16f), 0, 0, 0);
-
-			return label;
-		}
-	}
-
-	private class RouteSpinnerArrayAdapter extends RouteBaseArrayAdapter {
-
-		RouteSpinnerArrayAdapter(Context context) {
-			super(context, android.R.layout.simple_spinner_item);
-			setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		}
-
-		@NonNull
-		@Override
-		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-			return getRowItemView(position, convertView, parent);
-		}
-
-		@Override
-		public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
-			return getListItemView(position, convertView, parent);
-		}
-	}
-
-	private class RoutePopupListArrayAdapter extends RouteBaseArrayAdapter {
-
-		RoutePopupListArrayAdapter(Context context) {
-			super(context, android.R.layout.simple_spinner_dropdown_item);
-		}
-
-		@NonNull
-		@Override
-		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-			return getListItemView(position, convertView, parent);
-		}
-	}
-
 	public enum PermanentAppModeOptions {
 
 		CAR(RoutingOptionsHelper.MuteSoundRoutingParameter.KEY, RoutingOptionsHelper.AvoidRoadsRoutingParameter.KEY),
-
 		BICYCLE(RoutingOptionsHelper.MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
-
 		PEDESTRIAN(RoutingOptionsHelper.MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES);
 
 		List<String> routingParameters;
