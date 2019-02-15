@@ -712,7 +712,7 @@ class TelegramHelper private constructor() {
 		if (oldMessage == null || (Math.max(message.editDate, message.date) > Math.max(oldMessage.editDate, oldMessage.date))) {
 			message.content = OsmandLocationUtils.parseMessageContent(message, this)
 			usersLocationMessages[message.id] = message
-			oldMessage?.also {
+			oldMessage?.let {
 				usersLocationMessages.remove(it.id)
 			}
 		}
