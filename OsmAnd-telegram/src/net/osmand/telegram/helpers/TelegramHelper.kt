@@ -574,7 +574,7 @@ class TelegramHelper private constructor() {
 	fun scanChatsHistory() {
 		log.debug("scanChatsHistory: chatList: ${chatList.size}")
 		chatList.forEach {
-			scanChatHistory(it.chatId, 0, 0, 100)
+			scanChatHistory(it.chatId, 0, 0, 100, mutableListOf<TdApi.Message>())
 		}
 	}
 
@@ -583,9 +583,9 @@ class TelegramHelper private constructor() {
 		fromMessageId: Long,
 		offset: Int,
 		limit: Int,
-		onlyLocal: Boolean = false
+		locations: MutableList<TdApi.Message>
 	) {
-		client?.send(TdApi.GetChatHistory(chatId, fromMessageId, offset, limit, onlyLocal)) { obj ->
+		client?.send(TdApi.GetChatHistory(chatId, fromMessageId, offset, limit, false)) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
 					val error = obj as TdApi.Error
@@ -597,16 +597,30 @@ class TelegramHelper private constructor() {
 					val messages = (obj as TdApi.Messages).messages
 					log.debug("scanChatHistory: chatId: $chatId fromMessageId: $fromMessageId size: ${messages.size}")
 					if (messages.isNotEmpty()) {
-						messages.forEach {
-							addNewMessage(it)
-						}
+						locations.addAll(messages.filter { it.isAppropriate() && !it.isOutgoing })
 						val lastMessage = messages.last()
 						val currentTime = System.currentTimeMillis() / 1000
-						if (currentTime-Math.max(lastMessage.date, lastMessage.editDate) < MAX_LOCATION_MESSAGE_HISTORY_SCAN_SEC) {
-							scanChatHistory(chatId, lastMessage.id, 0, 100)
+						if (currentTime - Math.max(lastMessage.date, lastMessage.editDate) < MAX_LOCATION_MESSAGE_HISTORY_SCAN_SEC) {
+							scanChatHistory(chatId, lastMessage.id, 0, 100, locations)
 							log.debug("scanChatHistory searchMessageId: ${lastMessage.id}")
 						} else {
 							log.debug("scanChatHistory finishForChat: $chatId")
+							if (locations.isNotEmpty()) {
+								locations.sortBy { message -> OsmandLocationUtils.getLastUpdatedTime(message) }
+								updateLastMessage(locations.last())
+								incomingMessagesListeners.forEach {
+									it.onReceiveChatLocationMessages(chatId, *locations.toTypedArray())
+								}
+							}
+						}
+					} else {
+						log.debug("scanChatHistory finishForChat: $chatId")
+						if (locations.isNotEmpty()) {
+							locations.sortBy { message -> OsmandLocationUtils.getLastUpdatedTime(message) }
+							updateLastMessage(locations.last())
+							incomingMessagesListeners.forEach {
+								it.onReceiveChatLocationMessages(chatId, *locations.toTypedArray())
+							}
 						}
 					}
 				}
@@ -674,16 +688,7 @@ class TelegramHelper private constructor() {
 			if (message.isOutgoing && !fromBot && !viaBot) {
 				return
 			}
-			removeOldMessages(message, fromBot, viaBot)
-			val oldMessage = usersLocationMessages.values.firstOrNull {
-				OsmandLocationUtils.getSenderMessageId(it) == OsmandLocationUtils.getSenderMessageId(message) && it.chatId == message.chatId
-						&& OsmandLocationUtils.getOsmAndBotDeviceName(it) == OsmandLocationUtils.getOsmAndBotDeviceName(message)
-			}
-			val hasNewerMessage = oldMessage != null && (Math.max(message.editDate, message.date) < Math.max(oldMessage.editDate, oldMessage.date))
-			if (!hasNewerMessage) {
-				message.content = OsmandLocationUtils.parseMessageContent(message, this)
-				usersLocationMessages[message.id] = message
-			}
+			updateLastMessage(message)
 			if (message.isOutgoing) {
 				if (fromBot||viaBot) {
 					outgoingMessagesListeners.forEach {
@@ -698,24 +703,17 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun removeOldMessages(newMessage: TdApi.Message, fromBot: Boolean, viaBot: Boolean) {
-		val iterator = usersLocationMessages.entries.iterator()
-		while (iterator.hasNext()) {
-			val message = iterator.next().value
-			if (newMessage.chatId == message.chatId) {
-				val sameSender = OsmandLocationUtils.getSenderMessageId(newMessage) == OsmandLocationUtils.getSenderMessageId(message)
-				val viaSameBot = newMessage.viaBotUserId == message.viaBotUserId
-				if (fromBot || viaBot) {
-					if ((fromBot && sameSender) || (viaBot && viaSameBot)) {
-						val newDeviceName = OsmandLocationUtils.getOsmAndBotDeviceName(newMessage)
-						val contDeviceName = OsmandLocationUtils.getOsmAndBotDeviceName(newMessage)
-						if (newDeviceName == contDeviceName) {
-							iterator.remove()
-						}
-					}
-				} else if (sameSender && Math.max(newMessage.editDate, newMessage.date) >= Math.max(message.editDate, message.date)) {
-					iterator.remove()
-				}
+	private fun updateLastMessage(message: TdApi.Message) {
+		val oldMessage = usersLocationMessages.values.firstOrNull {
+			OsmandLocationUtils.getSenderMessageId(it) == OsmandLocationUtils.getSenderMessageId(message)
+					&& it.chatId == message.chatId && message.viaBotUserId == message.viaBotUserId
+					&& OsmandLocationUtils.getOsmAndBotDeviceName(it) == OsmandLocationUtils.getOsmAndBotDeviceName(message)
+		}
+		if (oldMessage == null || (Math.max(message.editDate, message.date) > Math.max(oldMessage.editDate, oldMessage.date))) {
+			message.content = OsmandLocationUtils.parseMessageContent(message, this)
+			usersLocationMessages[message.id] = message
+			oldMessage?.also {
+				usersLocationMessages.remove(it.id)
 			}
 		}
 	}
