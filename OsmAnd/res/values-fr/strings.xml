@@ -1896,7 +1896,7 @@ Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="osm_editors_ranking">Classement des éditeurs OSM</string>
     <string name="osm_live_email_desc">Requis pour vous fournir des informations sur les contributions.</string>
     <string name="osm_live_user_public_name">Nom affiché</string>
-    <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les compte-rendus</string>
+    <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les rapports</string>
     <string name="osm_live_support_region">Région supportée</string>
     <string name="osm_live_enter_user_name">Veuillez indiquer votre nom public</string>
     <string name="shared_string_move_up">Déplacer ↑</string>
