@@ -18,7 +18,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private var bufferedMessages = emptyList<BufferMessage>()
 
-	private var lastLocationPoints = mutableMapOf<LocationHistoryPoint, LatLon>()
+	private var lastLocationPoints = mutableListOf<LocationMessage>()
 
 	private val dbHelper: SQLiteHelper
 
@@ -85,30 +85,39 @@ class LocationMessages(val app: TelegramApplication) {
 	}
 
 	fun addNewLocationMessage(message: TdApi.Message) {
-		log.debug("addNewLocationMessage ${message.id}")
+		log.debug("try addNewLocationMessage ${message.id}")
 		val type = OsmandLocationUtils.getMessageType(message)
+		val senderId = OsmandLocationUtils.getSenderMessageId(message)
 		val content = OsmandLocationUtils.parseMessageContent(message, app.telegramHelper)
-		val deviceName = if (content is OsmandLocationUtils.MessageOsmAndBotLocation) content.deviceName else ""
-		val newItem = LocationHistoryPoint(OsmandLocationUtils.getSenderMessageId(message), message.chatId, type, deviceName)
-		val previousMessageLatLon = lastLocationPoints[newItem]
-		val locationMessage = OsmandLocationUtils.createLocationMessage(message, content, previousMessageLatLon)
-		if (locationMessage != null) {
-			dbHelper.addLocationMessage(locationMessage)
-			lastLocationPoints[newItem] = LatLon(locationMessage.lat, locationMessage.lon)
+		if (content != null) {
+			val deviceName = if (content is OsmandLocationUtils.MessageOsmAndBotLocation) content.deviceName else ""
+			val previousLocationMessage = lastLocationPoints.sortedBy { it.time }.firstOrNull {
+				it.userId == senderId && it.chatId == message.chatId && it.deviceName == deviceName && it.type == type
+			}
+			if (previousLocationMessage == null || content.lastUpdated * 1000L > previousLocationMessage.time) {
+				log.debug("addNewLocationMessage passed ${message.id}")
+				val previousMessageLatLon = if (previousLocationMessage != null) LatLon(previousLocationMessage.lat, previousLocationMessage.lon) else null
+				val locationMessage = OsmandLocationUtils.createLocationMessage(message, content, previousMessageLatLon)
+				if (locationMessage != null) {
+					dbHelper.addLocationMessage(locationMessage)
+					lastLocationPoints.remove(previousLocationMessage)
+					lastLocationPoints.add(locationMessage)
+				}
+			}
 		}
 	}
 
 	fun addMyLocationMessage(loc: Location) {
 		log.debug("addMyLocationMessage")
 		val currentUserId = app.telegramHelper.getCurrentUserId()
-		val newItem = LocationHistoryPoint(currentUserId, 0, LocationMessages.TYPE_MY_LOCATION, "")
-		val previousMessageLatLon = lastLocationPoints[newItem]
-		val distance = if (previousMessageLatLon != null) { MapUtils.getDistance(previousMessageLatLon, loc.latitude, loc.longitude) } else 0.0
+		val previousLocationMessage = lastLocationPoints.sortedBy { it.time }.firstOrNull { it.userId == currentUserId && it.type == TYPE_MY_LOCATION }
+		val distance = if (previousLocationMessage != null) MapUtils.getDistance(previousLocationMessage.lat, previousLocationMessage.lon, loc.latitude, loc.longitude)  else 0.0
 		val message = LocationMessages.LocationMessage(currentUserId, 0, loc.latitude, loc.longitude, loc.altitude,
 			loc.speed.toDouble(), loc.accuracy.toDouble(), loc.bearing.toDouble(), loc.time, TYPE_MY_LOCATION, 0, distance, "")
 
 		dbHelper.addLocationMessage(message)
-		lastLocationPoints[newItem] = LatLon(message.lat, message.lon)
+		lastLocationPoints.remove(previousLocationMessage)
+		lastLocationPoints.add(message)
 	}
 
 	fun clearBufferedMessages() {
@@ -291,21 +300,14 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun getLastMessages(): MutableMap<LocationHistoryPoint, LatLon> {
-			val res = mutableMapOf<LocationHistoryPoint, LatLon>()
-			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT_HISTORY_POINTS GROUP BY $COL_USER_ID, $COL_CHAT_ID, $COL_DEVICE_NAME, $COL_TYPE", null)?.apply {
+		internal fun getLastMessages(): MutableList<LocationMessage> {
+			val res = arrayListOf<LocationMessage>()
+			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT_LAST_LOCATIONS GROUP BY $COL_USER_ID, $COL_CHAT_ID, $COL_DEVICE_NAME, $COL_TYPE", null)?.apply {
 				if (moveToFirst()) {
 					do {
-						val userId = getInt(0)
-						val chatId = getLong(1)
-						val lat = getDouble(2)
-						val lon = getDouble(3)
-						val time = getLong(4)
-						val type = getInt(5)
-						val deviceName = getString(6)
-						val locationHistoryPoint = LocationHistoryPoint(userId, chatId, type, deviceName)
-						res[locationHistoryPoint] = LatLon(lat, lon)
-						log.debug("$locationHistoryPoint time: $time coords: $lat, $lon")
+						val locationMessage = readLocationMessage(this@apply)
+						res.add(locationMessage)
+						log.debug("add last location message - $locationMessage")
 					} while (moveToNext())
 				}
 				close()
@@ -403,8 +405,8 @@ class LocationMessages(val app: TelegramApplication) {
 			private const val TIMELINE_TABLE_SELECT =
 				"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_ALTITUDE, $COL_SPEED, $COL_HDOP, $COL_BEARING, $COL_TIME, $COL_TYPE, $COL_MESSAGE_ID, $COL_DISTANCE_FROM_PREV, $COL_DEVICE_NAME FROM $TIMELINE_TABLE_NAME"
 
-			private const val TIMELINE_TABLE_SELECT_HISTORY_POINTS =
-					"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_TIME, $COL_TYPE, $COL_DEVICE_NAME, MAX($COL_TIME) FROM $TIMELINE_TABLE_NAME"
+			private const val TIMELINE_TABLE_SELECT_LAST_LOCATIONS =
+					"SELECT $COL_USER_ID, $COL_CHAT_ID, $COL_LAT, $COL_LON, $COL_ALTITUDE, $COL_SPEED, $COL_HDOP, $COL_BEARING, $COL_TIME, $COL_TYPE, $COL_MESSAGE_ID, $COL_DISTANCE_FROM_PREV, $COL_DEVICE_NAME, MAX($COL_TIME) FROM $TIMELINE_TABLE_NAME"
 
 			private const val TIMELINE_TABLE_CLEAR = "DELETE FROM $TIMELINE_TABLE_NAME"
 
@@ -504,36 +506,6 @@ class LocationMessages(val app: TelegramApplication) {
 			}
 		}
 	}
-
-	data class LocationHistoryPoint(
-		val userId: Int,
-		val chatId: Long,
-		val type: Int,
-		val deviceName: String
-	) {
-
-		override fun equals(other: Any?): Boolean {
-			if (other == null) {
-				return false
-			}
-			if (other !is LocationHistoryPoint) {
-				return false
-			}
-			val o = other as LocationHistoryPoint?
-			return this.userId == o!!.userId && this.chatId == o.chatId && this.type == o.type && this.deviceName == o.deviceName
-		}
-
-		override fun hashCode(): Int {
-			val prime = 31
-			var result = 1
-			result = prime * result + userId.hashCode()
-			result = prime * result + chatId.hashCode()
-			result = prime * result + type.hashCode()
-			result = prime * result + deviceName.hashCode()
-			return result
-		}
-	}
-
 
 	companion object {
 
