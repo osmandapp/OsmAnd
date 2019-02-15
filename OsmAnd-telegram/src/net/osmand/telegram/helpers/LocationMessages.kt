@@ -91,8 +91,8 @@ class LocationMessages(val app: TelegramApplication) {
 		val content = OsmandLocationUtils.parseMessageContent(message, app.telegramHelper)
 		if (content != null) {
 			val deviceName = if (content is OsmandLocationUtils.MessageOsmAndBotLocation) content.deviceName else ""
-			val previousLocationMessage= lastLocationPoints.sortedBy { it.time }.firstOrNull {
-				it.userId == senderId && it.chatId == message.chatId && it.type == type && it.deviceName == deviceName
+			val previousLocationMessage = lastLocationPoints.sortedBy { it.time }.firstOrNull {
+				it.userId == senderId && it.chatId == message.chatId && it.deviceName == deviceName && it.type == type
 			}
 			if (previousLocationMessage == null || content.lastUpdated * 1000L > previousLocationMessage.time) {
 				log.debug("addNewLocationMessage passed ${message.id}")

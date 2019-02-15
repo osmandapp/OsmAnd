@@ -605,25 +605,23 @@ class TelegramHelper private constructor() {
 							log.debug("scanChatHistory searchMessageId: ${lastMessage.id}")
 						} else {
 							log.debug("scanChatHistory finishForChat: $chatId")
-							if (locations.isNotEmpty()) {
-								locations.sortBy { message -> OsmandLocationUtils.getLastUpdatedTime(message) }
-								updateLastMessage(locations.last())
-								incomingMessagesListeners.forEach {
-									it.onReceiveChatLocationMessages(chatId, *locations.toTypedArray())
-								}
-							}
+							processScannedLocationsForChat(chatId, locations)
 						}
 					} else {
 						log.debug("scanChatHistory finishForChat: $chatId")
-						if (locations.isNotEmpty()) {
-							locations.sortBy { message -> OsmandLocationUtils.getLastUpdatedTime(message) }
-							updateLastMessage(locations.last())
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatId, *locations.toTypedArray())
-							}
-						}
+						processScannedLocationsForChat(chatId, locations)
 					}
 				}
+			}
+		}
+	}
+
+	private fun processScannedLocationsForChat(chatId: Long, locations: MutableList<TdApi.Message>) {
+		if (locations.isNotEmpty()) {
+			locations.sortBy { message -> OsmandLocationUtils.getLastUpdatedTime(message) }
+			updateLastMessage(locations.last())
+			incomingMessagesListeners.forEach {
+				it.onReceiveChatLocationMessages(chatId, *locations.toTypedArray())
 			}
 		}
 	}
