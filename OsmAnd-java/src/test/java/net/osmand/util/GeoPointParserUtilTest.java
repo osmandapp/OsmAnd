@@ -11,7 +11,7 @@ import org.junit.Test;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 public class GeoPointParserUtilTest {
-	
+
 	@Test
 	public void testGeoPointUrlDecode() {
 		// bug in get scheme getSchemeSpecificPart()
@@ -19,14 +19,14 @@ public class GeoPointParserUtilTest {
 		GeoParsedPoint test = GeoPointParserUtil.parse("geo:0,0?q=86HJV99P%2B29");
 		Assert.assertEquals(test.getQuery(), "86HJV99P+29");
 	}
-	
+
 	@Test
 	public void testGoogleMaps() {
 		// https://www.google.com/maps?daddr=Bahnhofplatz+3,+7000+Chur@46.853582,9.529903
 		GeoParsedPoint actual = GeoPointParserUtil.parse(
 				"https://www.google.com/maps?daddr=Bahnhofplatz+3,+7000+Chur");
 		assertGeoPoint(actual, new GeoParsedPoint("Bahnhofplatz 3, 7000 Chur"));
-		
+
 		actual = GeoPointParserUtil.parse(
 				"https://www.google.com/maps?daddr=Bahnhofplatz+3,+7000+Chur@46.853582,9.529903");
 		System.out.println(actual);
@@ -97,8 +97,8 @@ public class GeoPointParserUtilTest {
 			System.out.println(" Passed!");
 		}
 
-		
-		
+
+
 		// geo:34,-106
 		url = "geo:" + ilat + "," + ilon;
 		System.out.println("url: " + url);
@@ -111,7 +111,7 @@ public class GeoPointParserUtilTest {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
-		
+
 		// geo:34.99393,-106.61568
 		url = "geo:" + dlat + "," + dlon;
 		System.out.println("url: " + url);
@@ -271,12 +271,12 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, -Math.abs(dlon)));
 
-		url = "http://maps.google.com/maps?f=d&saddr=" + dlat +"," +dlon +"&daddr=" +dlat +"," +dlon+"&hl=en"; 
+		url = "http://maps.google.com/maps?f=d&saddr=" + dlat +"," +dlon +"&daddr=" +dlat +"," +dlon+"&hl=en";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
-		
-		url = "http://maps.google.com/maps?f=d&saddr=My+Location&daddr=" +dlat +"," +dlon+"&hl=en"; 
+
+		url = "http://maps.google.com/maps?f=d&saddr=My+Location&daddr=" +dlat +"," +dlon+"&hl=en";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
@@ -407,7 +407,7 @@ public class GeoPointParserUtilTest {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
-		
+
 		// https://maps.google.com/maps?q=loc:-21.8835112,-47.7838932 (Name)
 		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (Name)" ;
 		System.out.println("url: " + url);
@@ -843,7 +843,7 @@ public class GeoPointParserUtilTest {
 	}
 
 
-	
 
-	
+
+
 }

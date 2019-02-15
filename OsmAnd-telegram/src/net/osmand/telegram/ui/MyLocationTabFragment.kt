@@ -603,6 +603,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 
 			holder.title?.text = title
+			holder.icon?.setOnClickListener {
+				app.forceUpdateMyLocation()
+			}
 			if (holder is ChatViewHolder) {
 				holder.description?.visibility = View.GONE
 				if (live) {
