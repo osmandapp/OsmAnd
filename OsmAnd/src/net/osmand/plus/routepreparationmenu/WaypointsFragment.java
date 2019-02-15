@@ -378,17 +378,11 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	@Override
 	public void onWindowVisibilityChanged(int visibility) {
-
 	}
 
 	@Override
 	public void deleteWaypoint(int position) {
 		deleteSwipeItem(position);
-	}
-
-	@Override
-	public void exchangeWaypoints(int pos1, int pos2) {
-
 	}
 
 	@SuppressWarnings("unchecked")
