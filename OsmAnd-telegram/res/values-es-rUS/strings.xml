@@ -190,12 +190,12 @@
     <string name="points_size">%1$d puntos</string>
     <string name="shared_string_date">Fecha</string>
     <string name="shared_string_collected">Recolectados</string>
-    <string name="gps_points">Puntos de GPS</string>
+    <string name="gps_points">Puntos GPS</string>
     <string name="shared_string_sent">Enviado</string>
     <string name="please_update_osmand">Actualiza OsmAnd para ver datos en el mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_telegram">Telegram</string>
-    <string name="privacy_policy_use_telegram">Utilizamos Telegram (aplicación de mensajería) para conectar a las personas y facilitar la comunicación con ellas.</string>
+    <string name="privacy_policy_use_telegram">Telegram (la aplicación de mensajería) se utiliza para conectarse y comunicarse con las personas.</string>
     <string name="privacy_policy_telegram_client">La plataforma abierta de Telegram y «OsmAnd Tracker» es uno de los clientes. Los contactos pueden utilizar cualquier otro cliente de Telegram.</string>
     <string name="privacy_policy_agree">Al pulsar en continuar, acepta la Políticas de Privacidad de Telegram y de OsmAnd.</string>
     <string name="shared_string_accept">Aceptar</string>

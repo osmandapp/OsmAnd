@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="send_location_as">Enviar localização como</string>
+<resources>
+    <string name="send_location_as">Enviar localização como</string>
     <string name="send_location_as_descr">Escolha como as mensagens com sua localização serão exibidas.</string>
     <string name="shared_string_map">Mapa</string>
     <string name="shared_string_text">Texto</string>
@@ -171,7 +172,9 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">seg</string>
-    <string name="welcome_descr"><b>Compartilhamento de local OsmAnd</b> permite que você compartilhe sua localização e veja a dos outros no OsmAnd.<br/><br/>O aplicativo usa a API Telegram e você precisa de uma conta Telegram.</string>
+    <string name="welcome_descr">
+        <b>Compartilhamento de local OsmAnd</b> permite que você compartilhe sua localização e veja a dos outros no OsmAnd.<br/>
+        <br/>O aplicativo usa a API Telegram e você precisa de uma conta Telegram.</string>
     <string name="my_location">Minha localização</string>
     <string name="live_now">Ao vivo agora</string>
     <string name="monitoring_is_enabled">Monitoramento está ativado</string>
@@ -188,8 +191,20 @@
     <string name="points_size">"%1$d pontos "</string>
     <string name="shared_string_date">Data</string>
     <string name="shared_string_collected">Coletado</string>
-    <string name="gps_points">Pontos de Gps</string>
+    <string name="gps_points">Pontos de GPS</string>
     <string name="shared_string_sent">"Enviar "</string>
     <string name="please_update_osmand">Por favor, atualize o OsmAnd para ver os dados no mapa</string>
     <string name="shared_string_update">"Atualizar "</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="privacy_policy_use_telegram">Telegrama (o aplicativo de mensagens) é usado para se conectar e se comunicar com as pessoas.</string>
+    <string name="privacy_policy_telegram_client">Telegram é uma plataforma aberta e OsmAnd Tracker é um dos clientes. Seus contatos podem usar qualquer outro cliente Telegram.</string>
+    <string name="privacy_policy_agree">Ao clicar em continuar, você concorda com a Política de Privacidade da Telegram e a Política de Privacidade da OsmAnd.</string>
+    <string name="shared_string_accept">Aceitar</string>
+    <string name="telegram_privacy_policy">Política de privacidade do Telegram</string>
+    <string name="osmand_privacy_policy">"Política de privacidade do OsmAnd "</string>
+    <string name="how_it_works">Como funciona</string>
+    <string name="received_gps_points">Pontos GPX recebidos: %1$s</string>
+    <string name="shared_string_appearance">Aparência</string>
+    <string name="show_gps_points">Mostrar pontos de GPS</string>
+    <string name="show_gps_points_descr">Mostrar quantidade de pontos de GPS coletados e enviados.</string>
 </resources>

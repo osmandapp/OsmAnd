@@ -195,4 +195,6 @@
     <string name="shared_string_collected">Gesammelt</string>
     <string name="gps_points">GPS-Punkte</string>
     <string name="shared_string_sent">Gesendet</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="privacy_policy_use_telegram">Telegram (die Messaging-App) wird verwendet, um sich mit Menschen zu verbinden und mit ihnen zu kommunizieren.</string>
 </resources>

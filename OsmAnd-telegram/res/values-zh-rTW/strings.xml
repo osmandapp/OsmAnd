@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="send_location_as">傳送位置為</string>
+<resources>
+    <string name="send_location_as">傳送位置為</string>
     <string name="send_location_as_descr">選擇您所在位置怎樣的訊息外觀。</string>
     <string name="shared_string_map">地圖</string>
     <string name="shared_string_text">文字</string>
@@ -172,7 +173,9 @@
     <string name="shared_string_hour_short">時</string>
     <string name="shared_string_minute_short">分</string>
     <string name="shared_string_second_short">秒</string>
-    <string name="welcome_descr"><b>OsmAnd 位置共用</b>可以讓您共用您的位置，並在 OsmAnd 中看到其他人的位置。<br/><br/>該應用程式使用電報 API，你需要一個 Telegram 帳戶。</string>
+    <string name="welcome_descr">
+        <b>OsmAnd 位置共用</b>可以讓您共用您的位置，並在 OsmAnd 中看到其他人的位置。<br/>
+        <br/>該應用程式使用電報 API，你需要一個 Telegram 帳戶。</string>
     <string name="my_location">我的位置</string>
     <string name="live_now">即時狀況</string>
     <string name="monitoring_is_enabled">監視已啟用</string>
@@ -185,4 +188,24 @@
     <string name="start_date">開始日期</string>
     <string name="timeline_description">啟用監視以在背景蒐集移動資料。</string>
     <string name="timeline">時間軸</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="privacy_policy_use_telegram">Telegram（即時通訊應用程式）是用於與人們連線與溝通。</string>
+    <string name="privacy_policy_telegram_client">Telegram 開放平臺，而 OsmAnd 是其中一個客戶。您的聯絡人可以使用其他任何 Telegram 客戶端。</string>
+    <string name="privacy_policy_agree">點選繼續就代表您同意 Telegram 隱私權政策與 OsmAnd 隱私權政策。</string>
+    <string name="shared_string_accept">接受</string>
+    <string name="telegram_privacy_policy">Telegram 隱私權政策</string>
+    <string name="osmand_privacy_policy">OsmAnd 隱私權政策</string>
+    <string name="how_it_works">如何運作</string>
+    <string name="received_gps_points">"已收到 GPX 點：%1$s "</string>
+    <string name="shared_string_appearance">外觀</string>
+    <string name="show_gps_points">顯示 GPS 點</string>
+    <string name="show_gps_points_descr">顯示蒐集到與發送的 GPS 點數量。</string>
+    <string name="please_update_osmand">請更新 OsmAnd 以在地圖上檢視資料</string>
+    <string name="shared_string_update">更新</string>
+    <string name="gps_points_in_buffer">傳送（%1$d 在緩衝區中）</string>
+    <string name="points_size">%1$d 點</string>
+    <string name="shared_string_date">日期</string>
+    <string name="shared_string_collected">已蒐集</string>
+    <string name="gps_points">GPS 點</string>
+    <string name="shared_string_sent">傳送</string>
 </resources>
