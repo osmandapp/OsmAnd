@@ -1,2 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="privacy_policy_use_telegram">A Telegram (üzenetküldő alkalmazás) a másokkal való összekapcsolódásra és kommunikációra használható.</string>
+    <string name="privacy_policy_telegram_client">A Telegram egy nyílt platform, amelynek egyik ügyfele az OsmAnd Tracker. Partnerei bármelyik másik Telegram kliensprogramot is használhatják.</string>
+    <string name="privacy_policy_agree">A továbbra kattintva elfogadja a Telegram és az OsmAnd adatvédelmi irányelveit.</string>
+    <string name="shared_string_accept">Elfogadás</string>
+    <string name="telegram_privacy_policy">Telegram adatvédelmi irányelvei</string>
+    <string name="osmand_privacy_policy">OsmAnd adatvédelmi irányelvei</string>
+    <string name="how_it_works">Hogyan működik\?</string>
+    <string name="received_gps_points">Kapott GPX-pontok: %1$s</string>
+    <string name="shared_string_appearance">Megjelenés</string>
+    <string name="show_gps_points">GPS-pontok megjelenítése</string>
+    <string name="show_gps_points_descr">Gyűjtött és küldött GPS-pontok mennyiségének megjelenítése.</string>
+    <string name="please_update_osmand">Az adatok térképen való megtekintéséhez kérjük, frissítse az OsmAndot.</string>
+    <string name="shared_string_update">Frissítés</string>
+    <string name="gps_points_in_buffer">elküldve (%1$d a pufferben)</string>
+    <string name="points_size">%1$d pont</string>
+    <string name="shared_string_date">Dátum</string>
+    <string name="shared_string_collected">Gyűjtve</string>
+    <string name="gps_points">GPS-pont</string>
+    <string name="shared_string_sent">Elküldve</string>
+    <string name="monitoring_is_enabled">Figyelemmel kísérés engedélyezve</string>
+    <string name="monitoring_is_disabled">Figyelemmel kísérés letiltva</string>
+    <string name="time_on_the_move">Mozgással töltött idő</string>
+    <string name="average_altitude">Átlagos magasság</string>
+    <string name="average_speed">Átlagsebesség</string>
+    <string name="open_in_osmand">Megnyitás az OsmAndban</string>
+    <string name="end_date">Záró dátum</string>
+    <string name="start_date">Kezdő dátum</string>
+    <string name="timeline_description">Figyelemmel kísérés engedélyezése a mozgási adatok háttérben történő gyűjtéséért.</string>
+    <string name="send_location_as">Helyzet elküldése mint</string>
+    <string name="send_location_as_descr">Válassza ki, hogyan nézzenek ki a helyzetét tartalmazó üzenetek.</string>
+    <string name="shared_string_map">Térkép</string>
+    <string name="shared_string_text">Szöveg</string>
+    <string name="map_and_text">Térkép és szöveg</string>
+    <string name="last_update_from_telegram">Utolsó frissítés a Telegramból</string>
+    <string name="enter_another_device_name">Válasszon egy olyan nevet, amelyet még nem használt</string>
+    <string name="device_added_successfully">%1$s hozzáadva.</string>
+    <string name="shared_string_add">Hozzáadás</string>
+    <string name="error_adding_new_device">Új eszköz hozzáadása sikertelen</string>
+    <string name="enter_device_name_description">Az új eszköz neve legfeljebb 200 karakter hosszú lehet.</string>
+    <string name="device_name_is_too_long">Túl hosszú az eszköz neve</string>
+    <string name="device_name_cannot_be_empty">Az eszköz nevének helye nem lehet üres</string>
+    <string name="device_name">Eszköz neve</string>
+    <string name="shared_string_hide">Elrejtés</string>
+    <string name="share_location_as_description_second_line">Az eszköz azonosítóját létrehozhatja és megtekintheti telegram ügyfélszoftverrel a(z) %1$s chatbotot használva. %2$s</string>
+</resources>
