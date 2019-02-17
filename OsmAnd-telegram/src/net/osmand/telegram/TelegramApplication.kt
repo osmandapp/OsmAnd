@@ -47,7 +47,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 				if (connected) {
 					osmandAidlHelper.setNavDrawerItems(
 						applicationContext.packageName,
-						listOf(getString(R.string.app_name)),
+						listOf(getString(R.string.app_name_short_online)),
 						listOf("osmand_telegram://main_activity"),
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
@@ -86,6 +86,11 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		settings.stopSharingLocationToChats()
 		shareLocationHelper.stopSharingLocation()
 		telegramHelper.stopSendingLiveLocationMessages(settings.getChatsShareInfo())
+	}
+
+	fun stopMonitoring() {
+		settings.monitoringEnabled = false
+		stopUserLocationService()
 	}
 
 	fun isAnyOsmAndInstalled() = TelegramSettings.AppConnect.getInstalledApps(this).isNotEmpty()

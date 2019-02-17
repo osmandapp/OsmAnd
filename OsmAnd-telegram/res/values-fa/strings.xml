@@ -11,7 +11,7 @@
 	<string name="successfully_sent_and_updated">با موفقیت ارسال و به‌روز شد</string>
 	<string name="waiting_for_response_from_telegram">در انتظار پاسخ از تلگرام</string>
 	<string name="searching_for_gps">در حال موقعیت‌یابی…</string>
-	<string name="battery_optimization_description">بهینه‌سازی باتری را برای OsmAnd Telegram غیرفعال کنید تا هنگامی که در پس‌زمینه کار می‌کند ناگهان بسته نشود.</string>
+	<string name="battery_optimization_description">بهینه‌سازی باتری را برای OsmAnd Tracker غیرفعال کنید تا هنگامی که در پس‌زمینه کار می‌کند ناگهان بسته نشود.</string>
 	<string name="go_to_settings">برو به تنظیمات</string>
 	<string name="shared_string_later">بعداً</string>
 	<string name="not_sent_yet">هنوز ارسال نشده</string>

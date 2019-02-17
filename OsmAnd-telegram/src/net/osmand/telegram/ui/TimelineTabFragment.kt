@@ -44,6 +44,7 @@ class TimelineTabFragment : Fragment() {
 
 	private lateinit var dateBtn: TextView
 	private lateinit var mainView: View
+	private lateinit var switcher: Switch
 
 	private var start = 0L
 	private var end = 0L
@@ -69,7 +70,7 @@ class TimelineTabFragment : Fragment() {
 			adapter = this@TimelineTabFragment.adapter
 		}
 
-		val switcher = mainView.findViewById<Switch>(R.id.monitoring_switcher)
+		switcher = mainView.findViewById<Switch>(R.id.monitoring_switcher)
 		val monitoringTv = mainView.findViewById<TextView>(R.id.monitoring_title)
 		switcher.isChecked = settings.monitoringEnabled
 		monitoringTv.setText(if (settings.monitoringEnabled) R.string.monitoring_is_enabled else R.string.monitoring_is_disabled)
@@ -110,6 +111,16 @@ class TimelineTabFragment : Fragment() {
 
 	override fun onPause() {
 		super.onPause()
+		updateEnable = false
+	}
+
+	fun tabOpened() {
+		updateEnable = true
+		switcher.isChecked = settings.monitoringEnabled
+		updateList()
+	}
+
+	fun tabClosed() {
 		updateEnable = false
 	}
 
