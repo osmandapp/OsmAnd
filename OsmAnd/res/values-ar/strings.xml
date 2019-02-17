@@ -2097,9 +2097,9 @@
     <string name="quick_action_add_poi">إضافة POI</string>
     <string name="quick_action_map_style">تغيير نمط الخريطة</string>
     <string name="quick_action_map_style_switch">تم تغيير نمط الخريطة إلى \"%s\".</string>
-    <string name="quick_action_take_audio_note">أخذ ملاحظة صوتية</string>
-    <string name="quick_action_take_video_note">أخذ ملاحظة بالفيديو</string>
-    <string name="quick_action_take_photo_note">أخذ ملاحظة بالصورة</string>
+    <string name="quick_action_take_audio_note">ملاحظة صوتية جديدة</string>
+    <string name="quick_action_take_video_note">ملاحظة فيديو جديدة</string>
+    <string name="quick_action_take_photo_note">ملاحظة بالصورة جديدة</string>
     <string name="quick_action_navigation_voice">تشغيل/إيقاف الصوت</string>
     <string name="quick_action_navigation_voice_off">الصوت معطل</string>
     <string name="quick_action_navigation_voice_on">الصوت مشغل</string>
@@ -2142,7 +2142,7 @@
     <string name="quick_action_gpx_category_descr">حدد فئة اختيارية.</string>
     <string name="quick_action_poi_list">قائمة POI</string>
     <string name="quick_action_map_style_action">إضافة نمط خريطة</string>
-    <string name="quick_action_empty_param_error">يجب ألا تكون الإعدادات فارغة</string>
+    <string name="quick_action_empty_param_error">ملء كافة الحقول</string>
     <string name="quick_action_map_styles">أنماط الخريطة</string>
     <string name="quick_action_map_overlay">تغيير واجهة الخريطة السطحية</string>
     <string name="quick_action_map_source">تغيير مصدر الخريطة</string>
@@ -2159,7 +2159,7 @@
     <string name="quick_action_map_underlay_title">الأغشية التحتية للخريطة</string>
     <string name="quick_action_map_underlay_action">أضف غشاءا تحتيا</string>
     <string name="quick_action_showhide_poi_descr">النقر على زر الإجراء سيقوم بإظهار أو إخفاء النقاط المهمة على الخريطة.</string>
-    <string name="quick_action_sh_poi_descr">يمكنك إضافة فئة أو أكثر لنقاط الإهتمام و القيام بعرضها على الخريطة.</string>
+    <string name="quick_action_sh_poi_descr">إضافة فئة أو أكثر لنقاط الإهتمام و القيام بعرضها على الخريطة.</string>
     <string name="quick_action_map_underlay_switch">تم تغيير الغشاء السفلي للخريطة إلى \"%s\".</string>
     <string name="navigate_point_olc">رمز التَّمَوْضُع المفتوح</string>
     <string name="navigate_point_olc_info_invalid">خطآ فيي الرمز المفتوح للتَّمَوْضُع
@@ -2169,7 +2169,7 @@
     <string name="auto_split_recording_title">تقسيم التسجيلات آليا إلى أجزاء بعد كل فراغ</string>
     <string name="navigate_point_olc_info_short">تقصير رمز التموضع المفتوح يُرجى تقديم رمزٍ كامل</string>
     <string name="quick_action_duplicate">إسم الإجراء السريع مكرر</string>
-    <string name="quick_action_bug_descr">سوف تكون تتمة هذه الرسالة تلقائيةً في المجال المخصص للتعليق.</string>
+    <string name="quick_action_bug_descr">يتم تضمين هذه الرسالة في مجال التعليق.</string>
     <string name="add_new_folder">أضف ملفا جديدا</string>
     <string name="track_points_category_name">النقاط البارزة على هذا الطريق</string>
     <string name="max_speed">السرعة القصوى</string>
@@ -2333,7 +2333,7 @@
 \n• رفع مسارات GPX إلى OSM مباشرة من التطبيق 
 \n• إضافة النقاط المهمة ورفعها مباشرة إلى OSM (أو في وقت لاحق في حالة كنت بدون اتصال)
 \n• تسجيل اختياري للرحلة في الخلفية (في حين كون الجهاز في وضع النوم) 
-\n•OsmAnd ذو المصدر المفتوح، وجاري تطويره . يمكن للجميع أن يساهم بالإبلاغ عن الأخطاء، تحسين الترجمات أو برمجة ميزات جديدة. هذا المشروع خاضع للتحسين المستمر بشتى أشكال تفاعل المطورين والمستخدمين. التقدم المحرز في المشروع يعتمد أيضا على المساهمات المالية لتمويل البرمجة واختبار التحديثات الجديدة.</string>
+\nOsmAnd ذو المصدر المفتوح، وجاري تطويره . يمكن للجميع أن يساهم بالإبلاغ عن الأخطاء، تحسين الترجمات أو برمجة ميزات جديدة. هذا المشروع خاضع للتحسين المستمر بشتى أشكال تفاعل المطورين والمستخدمين. التقدم المحرز في المشروع يعتمد أيضا على المساهمات المالية لتمويل البرمجة واختبار التحديثات الجديدة.</string>
     <string name="save_poi_too_many_uppercase">الاسم يحتوي على الكثير من الأحرف الكبيرة . هل تريد الاستمرار؟</string>
     <string name="quick_action_duplicates">اسم الإجراء السريع المحدد قيد الاستخدام، لقد تم تغييره إلى %1$s لتجنب التكرار.</string>
     <string name="quick_action_page_list_descr">النقر على زر الإجراء سوف يوجهك خلال القائمة أدناه.</string>
@@ -2368,7 +2368,7 @@
     <string name="quick_action_start_stop_navigation_descr">اضغط هذا الزر لبدء أو إنهاء الملاحة.</string>
     <string name="live_monitoring_max_interval_to_send">الوقت الإضافي المخزن المؤقت للتتبع على الإنترنت</string>
     <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للحفاظ على المواقع وإرسالها دون اتصال</string>
-    <string name="mappilary_no_internet_desc">أنت بحاجة إلى إنترنت لعرض الصور من Mapillary.</string>
+    <string name="mappilary_no_internet_desc">تحتاج أن تكون متصلا بالإنترنت لعرض صور من mapillary.</string>
     <string name="retry">اعد المحاولة</string>
     <string name="measurement_tool_action_bar">تصفح الخريطة واضف نقاط</string>
     <string name="measurement_tool">قياس المسافة</string>
@@ -2394,7 +2394,7 @@
     <string name="add_route_points">إضافة نقاط مسار</string>
     <string name="add_line">إضافة خط</string>
     <string name="empty_state_my_tracks">إضافة ملفات GPX</string>
-    <string name="empty_state_my_tracks_desc">تسجيل أو استيراد مسارات للعرض.</string>
+    <string name="empty_state_my_tracks_desc">استيراد ملفات GPX، أو سجل المسارات.</string>
     <string name="empty_state_favourites">إضافة المفضلات</string>
     <string name="empty_state_favourites_desc">إضافة المفضلة على الخريطة أو استيرادها من ملف.</string>
     <string name="import_track">استيراد مسار</string>
@@ -2557,7 +2557,7 @@
     <string name="will_open_tomorrow_at">سيفتح أبوابه غدًا على</string>
     <string name="what_is_here">ما يوجد هنا :</string>
     <string name="lang_lo">اللاوسية</string>
-    <string name="touring_view_renderer">نظرة السياحة الكبيرة (بالتبايُن و التفاصيل)</string>
+    <string name="touring_view_renderer">عرض خريطة السياحة</string>
     <string name="copy_location_name">نسخ إسم النقطة</string>
     <string name="toast_empty_name_error">ليس للمكان أي إسم</string>
     <string name="tunnel_warning">على مقربة مِن نفق</string>
@@ -2805,4 +2805,5 @@
     <string name="route_steepness_stat_container">الانحدار</string>
     <string name="run_full_osmand_msg">كنت تستخدم {0} الخريطة وهي مدعومة من osmand.هل تريد من osmand إطلاق النسخة الكاملة؟</string>
     <string name="run_full_osmand_header">تشغيل osmand؟</string>
+    <string name="swap_start_and_destination">أسحب لبدء الإتجاهات</string>
 </resources>
