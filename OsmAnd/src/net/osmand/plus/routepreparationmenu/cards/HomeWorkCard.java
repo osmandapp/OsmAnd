@@ -27,27 +27,52 @@ public class HomeWorkCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
-		TargetPoint homePoint = targetPointsHelper.getHomePoint();
-		TargetPoint workPoint = targetPointsHelper.getWorkPoint();
+		final TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+		final TargetPoint homePoint = targetPointsHelper.getHomePoint();
+		final TargetPoint workPoint = targetPointsHelper.getWorkPoint();
 
 		TextView homeDescr = (TextView) view.findViewById(R.id.home_button_descr);
-		TextView workDescr = (TextView) view.findViewById(R.id.work_button_descr);
+		final TextView workDescr = (TextView) view.findViewById(R.id.work_button_descr);
 		homeDescr.setText(homePoint != null ? homePoint.getPointDescription(mapActivity).getName() :
 				mapActivity.getString(R.string.shared_string_add));
 		workDescr.setText(workPoint != null ? workPoint.getPointDescription(mapActivity).getName() :
 				mapActivity.getString(R.string.shared_string_add));
 
-		view.findViewById(R.id.home_button).setOnClickListener(new View.OnClickListener() {
+		View homeButton = view.findViewById(R.id.home_button);
+		homeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openAddPointDialog(mapActivity, true);
+				if (homePoint == null) {
+					openAddPointDialog(mapActivity, true);
+				} else {
+					targetPointsHelper.navigateToPoint(homePoint.point, true, -1, homePoint.getOriginalPointDescription());
+				}
 			}
 		});
-		view.findViewById(R.id.work_button).setOnClickListener(new View.OnClickListener() {
+		homeButton.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				openAddPointDialog(mapActivity, true);
+				return true;
+			}
+		});
+
+		View workButton = view.findViewById(R.id.work_button);
+		workButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (workPoint == null) {
+					openAddPointDialog(mapActivity, false);
+				} else {
+					targetPointsHelper.navigateToPoint(workPoint.point, true, -1, workPoint.getOriginalPointDescription());
+				}
+			}
+		});
+		workButton.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
 				openAddPointDialog(mapActivity, false);
+				return true;
 			}
 		});
 	}

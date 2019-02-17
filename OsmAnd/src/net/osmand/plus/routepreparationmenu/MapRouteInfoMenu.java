@@ -152,11 +152,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	private int getInitialMenuState() {
-		if (!portraitMode) {
-			return MenuState.FULL_SCREEN;
-		} else {
-			return getInitialMenuStatePortrait();
-		}
+		return MenuState.FULL_SCREEN;
 	}
 
 	public OnDismissListener getOnDismissListener() {
@@ -191,10 +187,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					targets.navigateToPoint(latlon, true, targets.getIntermediatePoints().size());
 					break;
 				case HOME:
-					targets.setHomePoint(TargetPoint.create(latlon, new PointDescription(PointDescription.POINT_TYPE_LOCATION, "")));
+					targets.setHomePoint(latlon, null);
 					break;
 				case WORK:
-					targets.setWorkPoint(TargetPoint.create(latlon, new PointDescription(PointDescription.POINT_TYPE_LOCATION, "")));
+					targets.setWorkPoint(latlon, null);
 					break;
 			}
 			show();
@@ -312,8 +308,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			fragmentRef.get().hideRouteCalculationProgressBar();
 			fragmentRef.get().updateControlButtons();
 			fragmentRef.get().updateInfo();
-			if (currentMenuState == MenuState.HEADER_ONLY) {
+			if (routingHelper.isPublicTransportMode()) {
 				fragmentRef.get().openMenuHalfScreen();
+			} else {
+				fragmentRef.get().openMenuHeaderOnly();
 			}
 		}
 	}
@@ -1078,10 +1076,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				targets.navigateToPoint(l, true, targets.getIntermediatePoints().size(), pd);
 				break;
 			case HOME:
-				targets.setHomePoint(TargetPoint.create(l, pd));
+				targets.setHomePoint(l, pd);
 				break;
 			case WORK:
-				targets.setWorkPoint(TargetPoint.create(l, pd));
+				targets.setWorkPoint(l, pd);
 				break;
 		}
 		updateMenu();
@@ -1120,13 +1118,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					targets.navigateToPoint(point, true, targets.getIntermediatePoints().size(), m.getPointDescription(mapActivity));
 					break;
 				case HOME:
-					targets.setHomePoint(TargetPoint.create(point, m.getPointDescription(mapActivity)));
+					targets.setHomePoint(point, m.getPointDescription(mapActivity));
 					break;
 				case WORK:
-					targets.setWorkPoint(TargetPoint.create(point, m.getPointDescription(mapActivity)));
+					targets.setWorkPoint(point, m.getPointDescription(mapActivity));
 					break;
 			}
-			updateFromIcon();
+			updateMenu();
 		} else {
 			MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
 			selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);

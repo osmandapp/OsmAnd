@@ -154,10 +154,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription());
 				break;
 			case HOME:
-				targetPointsHelper.setHomePoint(TargetPointsHelper.TargetPoint.create(ll, point.getPointDescription()));
+				targetPointsHelper.setHomePoint(ll, point.getPointDescription());
 				break;
 			case WORK:
-				targetPointsHelper.setWorkPoint(TargetPointsHelper.TargetPoint.create(ll, point.getPointDescription()));
+				targetPointsHelper.setWorkPoint(ll, point.getPointDescription());
 				break;
 		}
 		MapRouteInfoMenu routeMenu = getMapRouteInfoMenu();

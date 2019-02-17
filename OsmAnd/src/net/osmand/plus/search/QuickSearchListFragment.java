@@ -301,28 +301,21 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			QuickSearchType searchType = dialogFragment.getSearchType();
-			switch (searchType) {
-				case REGULAR: {
-					app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
-					MapActivity.launchMapActivityMoveToTop(mapActivity);
-					dialogFragment.reloadHistory();
-					break;
-				}
-				case START_POINT:
-				case DESTINATION:
-				case DESTINATION_AND_START:
-				case INTERMEDIATE:
-				case HOME_POINT:
-				case WORK_POINT: {
-					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
-							pointDescription != null ? pointDescription.getName() : null,
-							latitude, longitude, searchType);
-					break;
-				}
-			}
 			if (searchType.isTargetPoint()) {
+				mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
+						pointDescription != null ? pointDescription.getName() : null,
+						latitude, longitude, searchType);
+
 				dialogFragment.dismiss();
-				mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
+				if (searchType == QuickSearchType.HOME_POINT || searchType == QuickSearchType.WORK_POINT) {
+					mapActivity.getMapLayers().getMapControlsLayer().showDialog();
+				} else {
+					mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
+				}
+			} else {
+				app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
+				MapActivity.launchMapActivityMoveToTop(mapActivity);
+				dialogFragment.reloadHistory();
 			}
 		}
 	}

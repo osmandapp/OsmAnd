@@ -211,11 +211,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 										break;
 									case HOME:
 										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.setHomePoint(TargetPoint.create(ll, new PointDescription(POINT_TYPE_MY_LOCATION, "")));
+										targetPointsHelper.setHomePoint(ll, null);
 										break;
 									case WORK:
 										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.setWorkPoint(TargetPoint.create(ll, new PointDescription(POINT_TYPE_MY_LOCATION, "")));
+										targetPointsHelper.setWorkPoint(ll, null);
 										break;
 								}
 							}
