@@ -1894,6 +1894,9 @@ public class OsmandSettings {
 	public final static String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
+	public final static String MY_LOC_POINT_LAT = "my_loc_point_lat";
+	public final static String MY_LOC_POINT_LON = "my_loc_point_lon";
+	public final static String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
 	public final static String HOME_POINT_LAT = "home_point_lat";
 	public final static String HOME_POINT_LON = "home_point_lon";
@@ -1988,6 +1991,34 @@ public class OsmandSettings {
 				settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""), getPointToNavigate());
 	}
 
+	public LatLon getPointToNavigateBackup() {
+		float lat = settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LAT_BACKUP, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LON_BACKUP, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public LatLon getPointToStartBackup() {
+		float lat = settingsAPI.getFloat(globalPreferences, START_POINT_LAT_BACKUP, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, START_POINT_LON_BACKUP, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public PointDescription getStartPointDescriptionBackup() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION_BACKUP, ""), getPointToStart());
+	}
+
+	public PointDescription getPointNavigateDescriptionBackup() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION_BACKUP, ""), getPointToNavigate());
+	}
+
 	public LatLon getHomePoint() {
 		float lat = settingsAPI.getFloat(globalPreferences, HOME_POINT_LAT, 0);
 		float lon = settingsAPI.getFloat(globalPreferences, HOME_POINT_LON, 0);
@@ -2024,6 +2055,30 @@ public class OsmandSettings {
 	public void setWorkPoint(double latitude, double longitude, PointDescription p) {
 		settingsAPI.edit(globalPreferences).putFloat(WORK_POINT_LAT, (float) latitude).putFloat(WORK_POINT_LON, (float) longitude).commit();
 		settingsAPI.edit(globalPreferences).putString(WORK_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
+	}
+
+	public LatLon getMyLocationToStart() {
+		float lat = settingsAPI.getFloat(globalPreferences, MY_LOC_POINT_LAT, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, MY_LOC_POINT_LON, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public PointDescription getMyLocationToStartDescription() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, MY_LOC_POINT_DESCRIPTION, ""), getMyLocationToStart());
+	}
+
+	public void setMyLocationToStart(double latitude, double longitude, PointDescription p) {
+		settingsAPI.edit(globalPreferences).putFloat(MY_LOC_POINT_LAT, (float) latitude).putFloat(MY_LOC_POINT_LON, (float) longitude).commit();
+		settingsAPI.edit(globalPreferences).putString(MY_LOC_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
+	}
+
+	public void clearMyLocationToStart() {
+		settingsAPI.edit(globalPreferences).remove(MY_LOC_POINT_LAT).remove(MY_LOC_POINT_LON).
+				remove(MY_LOC_POINT_DESCRIPTION).commit();
 	}
 
 	public int isRouteToPointNavigateAndClear() {

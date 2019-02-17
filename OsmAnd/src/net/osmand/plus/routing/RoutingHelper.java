@@ -279,6 +279,10 @@ public class RoutingHelper {
 	}
 
 	public void updateLocation(Location currentLocation) {
+		if (settings.getPointToStart() == null && settings.getMyLocationToStart() == null && currentLocation != null) {
+			app.getTargetPointsHelper().setMyLocationPoint(
+					new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()), false, null);
+		}
 		if(isFollowingMode() || (settings.getPointToStart() == null && isRoutePlanningMode) ||
 				app.getLocationProvider().getLocationSimulation().isRouteAnimating()) {
 			setCurrentLocation(currentLocation, false);

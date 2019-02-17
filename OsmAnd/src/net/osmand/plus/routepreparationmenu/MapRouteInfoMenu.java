@@ -50,6 +50,7 @@ import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
+import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -379,6 +380,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		} else {
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
+
+			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+			TargetPoint startBackup = targetPointsHelper.getPointToStartBackup();
+			if (startBackup == null) {
+				startBackup = targetPointsHelper.getMyLocationToStart();
+			}
+			TargetPoint destinationBackup = targetPointsHelper.getPointToNavigateBackup();
+			if (startBackup != null && destinationBackup != null) {
+				PreviousRouteCard previousRouteCard = new PreviousRouteCard(mapActivity);
+				menuCards.add(previousRouteCard);
+			}
 		}
 		setupCards();
 	}

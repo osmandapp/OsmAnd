@@ -9,9 +9,15 @@
 	<LinearLayout
 		android:id="@+id/card_divider"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
 
-		<include layout="@layout/list_item_divider" />
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="8dp"/>
+
+		<include layout="@layout/card_top_divider"/>
+
 	</LinearLayout>
 
 	<LinearLayout
@@ -145,7 +151,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/list_content_padding">
+		android:layout_height="14dp">
 
 		<ImageView
 			android:id="@+id/bottom_shadow"

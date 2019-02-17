@@ -33,9 +33,9 @@ public class HomeWorkCard extends BaseCard {
 
 		TextView homeDescr = (TextView) view.findViewById(R.id.home_button_descr);
 		final TextView workDescr = (TextView) view.findViewById(R.id.work_button_descr);
-		homeDescr.setText(homePoint != null ? homePoint.getPointDescription(mapActivity).getName() :
+		homeDescr.setText(homePoint != null ? homePoint.getPointDescription(mapActivity).getSimpleName(mapActivity, false) :
 				mapActivity.getString(R.string.shared_string_add));
-		workDescr.setText(workPoint != null ? workPoint.getPointDescription(mapActivity).getName() :
+		workDescr.setText(workPoint != null ? workPoint.getPointDescription(mapActivity).getSimpleName(mapActivity, false) :
 				mapActivity.getString(R.string.shared_string_add));
 
 		View homeButton = view.findViewById(R.id.home_button);
