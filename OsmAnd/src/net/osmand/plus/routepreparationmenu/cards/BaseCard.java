@@ -32,7 +32,14 @@ public abstract class BaseCard {
 
 	public abstract int getCardLayoutId();
 
-	public abstract void update();
+	public void update() {
+		if (view != null) {
+			updateContent();
+			applyDayNightMode();
+		}
+	}
+
+	protected abstract void updateContent();
 
 	public View build(Context ctx) {
 		view = LayoutInflater.from(ctx).inflate(getCardLayoutId(), null);

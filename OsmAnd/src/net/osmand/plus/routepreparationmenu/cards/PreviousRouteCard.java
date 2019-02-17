@@ -14,7 +14,7 @@ public class PreviousRouteCard extends BaseCard {
 	}
 
 	@Override
-	public void update() {
+	protected void updateContent() {
 
 	}
 

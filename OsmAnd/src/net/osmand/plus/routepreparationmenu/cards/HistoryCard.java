@@ -14,7 +14,7 @@ public class HistoryCard extends BaseCard {
 	}
 
 	@Override
-	public void update() {
+	protected void updateContent() {
 
 	}
 

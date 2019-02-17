@@ -12,9 +12,9 @@ public class TracksCard extends BaseCard {
 	public int getCardLayoutId() {
 		return 0;
 	}
-
+	
 	@Override
-	public void update() {
+	protected void updateContent() {
 
 	}
 

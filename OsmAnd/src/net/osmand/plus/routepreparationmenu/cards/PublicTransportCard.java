@@ -52,31 +52,27 @@ public class PublicTransportCard extends BaseCard {
 	}
 
 	@Override
-	public void update() {
-		if (view != null) {
-			view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+	protected void updateContent() {
+		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 
-			List<TransportRouteResultSegment> segments = routeResult.getSegments();
-			createRouteBadges(segments);
+		List<TransportRouteResultSegment> segments = routeResult.getSegments();
+		createRouteBadges(segments);
 
-			TextView fromLine = (TextView) view.findViewById(R.id.from_line);
-			TextView wayLine = (TextView) view.findViewById(R.id.way_line);
+		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
+		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
 
-			fromLine.setText(getFirstLineDescrSpan());
-			wayLine.setText(getSecondLineDescrSpan());
+		fromLine.setText(getFirstLineDescrSpan());
+		wayLine.setText(getSecondLineDescrSpan());
 
-			view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					app.getTransportRoutingHelper().setCurrentRoute(routeId);
-					getMapActivity().refreshMap();
-				}
-			});
-			view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
-			view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
-
-			applyDayNightMode();
-		}
+		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				app.getTransportRoutingHelper().setCurrentRoute(routeId);
+				getMapActivity().refreshMap();
+			}
+		});
+		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
 	}
 
 	public int getRouteId() {
@@ -87,6 +83,7 @@ public class PublicTransportCard extends BaseCard {
 		this.secondButtonVisible = secondButtonVisible;
 	}
 
+	@Override
 	protected void applyDayNightMode() {
 		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
 		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
