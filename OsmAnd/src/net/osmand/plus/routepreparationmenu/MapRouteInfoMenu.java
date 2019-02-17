@@ -1103,8 +1103,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public void selectMapMarker(final int index, final PointType pointType) {
-		if (index != -1) {
-			MapMarker m = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().get(index);
+		List<MapMarker> mapMarkers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
+		if (index != -1 && mapMarkers.size() > index) {
+			MapMarker m = mapMarkers.get(index);
 			LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
 			TargetPointsHelper targets = getTargets();
 			switch (pointType) {
