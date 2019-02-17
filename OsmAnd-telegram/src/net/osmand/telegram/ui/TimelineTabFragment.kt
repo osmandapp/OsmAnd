@@ -115,14 +115,11 @@ class TimelineTabFragment : Fragment() {
 	}
 
 	fun tabOpened() {
-		updateEnable = true
 		switcher.isChecked = settings.monitoringEnabled
 		updateList()
 	}
 
-	fun tabClosed() {
-		updateEnable = false
-	}
+	fun tabClosed() {}
 
 	private fun selectDate() {
 		val dateFromDialog =

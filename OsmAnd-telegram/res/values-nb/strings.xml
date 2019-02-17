@@ -185,7 +185,6 @@
     <string name="open_in_osmand">Åpne i OsmAnd</string>
     <string name="end_date">Sluttdato</string>
     <string name="start_date">Startdato</string>
-    <string name="timeline_description">Skru på oppsyn for å samle bevegelsesdata i bakgrunnen.</string>
     <string name="timeline">Tidslinje</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_telegram_client">Telegram åpen plattform, og OsmAnd-sporeren er én av kundene. Dine kontakter kan bruke enhver annen Telegram-klient.</string>

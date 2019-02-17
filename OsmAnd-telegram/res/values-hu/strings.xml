@@ -28,7 +28,6 @@
     <string name="open_in_osmand">Megnyitás az OsmAndban</string>
     <string name="end_date">Záró dátum</string>
     <string name="start_date">Kezdő dátum</string>
-    <string name="timeline_description">Figyelemmel kísérés engedélyezése a mozgási adatok háttérben történő gyűjtéséért.</string>
     <string name="send_location_as">Helyzet elküldése mint</string>
     <string name="send_location_as_descr">Válassza ki, hogyan nézzenek ki a helyzetét tartalmazó üzenetek.</string>
     <string name="shared_string_map">Térkép</string>

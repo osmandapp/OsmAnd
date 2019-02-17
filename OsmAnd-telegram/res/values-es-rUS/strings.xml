@@ -184,7 +184,6 @@
     <string name="open_in_osmand">Abrir en OsmAnd</string>
     <string name="end_date">Fecha de finalización</string>
     <string name="start_date">Fecha de inicio</string>
-    <string name="timeline_description">Activar la monitorización para recopilar datos de movimiento en segundo plano.</string>
     <string name="timeline">Línea de tiempo</string>
     <string name="gps_points_in_buffer">enviado (%1$d en búfer)</string>
     <string name="points_size">%1$d puntos</string>

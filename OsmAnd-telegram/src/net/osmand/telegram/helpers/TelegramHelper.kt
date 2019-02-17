@@ -619,7 +619,9 @@ class TelegramHelper private constructor() {
 	private fun processScannedLocationsForChat(chatId: Long, locations: MutableList<TdApi.Message>) {
 		if (locations.isNotEmpty()) {
 			locations.sortBy { message -> OsmandLocationUtils.getLastUpdatedTime(message) }
-			updateLastMessage(locations.last())
+			locations.forEach {
+				updateLastMessage(it)
+			}
 			incomingMessagesListeners.forEach {
 				it.onReceiveChatLocationMessages(chatId, *locations.toTypedArray())
 			}
@@ -709,10 +711,10 @@ class TelegramHelper private constructor() {
 		}
 		if (oldMessage == null || (Math.max(message.editDate, message.date) > Math.max(oldMessage.editDate, oldMessage.date))) {
 			message.content = OsmandLocationUtils.parseMessageContent(message, this)
-			usersLocationMessages[message.id] = message
 			oldMessage?.let {
 				usersLocationMessages.remove(it.id)
 			}
+			usersLocationMessages[message.id] = message
 		}
 	}
 
@@ -876,6 +878,7 @@ class TelegramHelper private constructor() {
 				log.debug("handleMapLocationMessageUpdate - ERROR $obj")
 				val error = obj as TdApi.Error
 				needRefreshActiveLiveLocationMessages = true
+				shareInfo.pendingMapMessage = false
 				if (error.code != IGNORED_ERROR_CODE) {
 					shareInfo.hasSharingError = true
 					outgoingMessagesListeners.forEach {
@@ -921,6 +924,7 @@ class TelegramHelper private constructor() {
 			TdApi.Error.CONSTRUCTOR -> {
 				log.debug("handleTextLocationMessageUpdate - ERROR")
 				val error = obj as TdApi.Error
+				shareInfo.pendingMapMessage = false
 				if (error.code != IGNORED_ERROR_CODE) {
 					shareInfo.hasSharingError = true
 					outgoingMessagesListeners.forEach {

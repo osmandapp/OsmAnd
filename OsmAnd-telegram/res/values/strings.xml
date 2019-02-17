@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="shared_string_ok">OK</string>
+    <string name="timeline_available_for_free_now">Timeline is a feature available now for free.</string>
+    <string name="disable_monitoring">Disable monitoring</string>
+    <string name="location_recording_enabled">Location recording enabled</string>
+    <string name="timeline_description">Enable monitoring to save all locations in history.</string>
+    <string name="app_name_short_online">Online Tracker</string>
+    <string name="app_name_short">OsmAnd Tracker</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (the messaging app) is used to to connect to and communicate with people.</string>
     <string name="privacy_policy_telegram_client">Telegram open platform and OsmAnd Tracker is one of the customers. Your contacts can use any other Telegram client.</string>
@@ -28,7 +35,6 @@
     <string name="open_in_osmand">Open in OsmAnd</string>
     <string name="end_date">End date</string>
     <string name="start_date">Start date</string>
-    <string name="timeline_description">Enable monitoring to collect movement data in the background.</string>
     <string name="send_location_as">Send location as</string>
     <string name="send_location_as_descr">Choose how messages with your location will look like.</string>
     <string name="shared_string_map">Map</string>

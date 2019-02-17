@@ -185,7 +185,6 @@
     <string name="open_in_osmand">In OsmAnd öffnen</string>
     <string name="end_date">Endzeit</string>
     <string name="start_date">Startzeit</string>
-    <string name="timeline_description">Überwachung aktivieren, um Bewegungsdaten im Hintergrund zu erfassen.</string>
     <string name="timeline">Zeitachse</string>
     <string name="please_update_osmand">Bitte aktualisieren Sie OsmAnd, um die Daten auf der Karte zu sehen</string>
     <string name="shared_string_update">Aktualisieren</string>
