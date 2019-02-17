@@ -642,7 +642,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					Iterator<PoiUIFilter> it = poiFilters.iterator();
 					while (it.hasNext()) {
 						final PoiUIFilter poiUIFilter = it.next();
-						final LinearLayout container = createToolbarSubOptionView(true, poiUIFilter.getName(), R.drawable.ic_action_remove_dark, !it.hasNext(), new View.OnClickListener() {
+						final View container = createToolbarSubOptionView(true, poiUIFilter.getName(), R.drawable.ic_action_remove_dark, !it.hasNext(), new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
 								app.getPoiFilters().removeSelectedPoiFilter(poiUIFilter);
@@ -657,7 +657,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				if (traffic) {
 					final LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
 					item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
-					final LinearLayout container = createToolbarSubOptionView(true, app.getString(R.string.way_alarms), R.drawable.ic_action_remove_dark, true, new View.OnClickListener() {
+					final View container = createToolbarSubOptionView(true, app.getString(R.string.way_alarms), R.drawable.ic_action_remove_dark, true, new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							app.getWaypointHelper().enableWaypointType(WaypointHelper.ALARMS, false);
@@ -671,7 +671,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				if (fav) {
 					final LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
 					item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
-					final LinearLayout container = createToolbarSubOptionView(true, app.getString(R.string.favourites), R.drawable.ic_action_remove_dark, true, new View.OnClickListener() {
+					final View container = createToolbarSubOptionView(true, app.getString(R.string.favourites), R.drawable.ic_action_remove_dark, true, new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							app.getWaypointHelper().enableWaypointType(WaypointHelper.FAVORITES, false);
@@ -700,7 +700,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				}
 				for (int i = 0; i < avoidedParameters.size(); i++) {
 					final GeneralRouter.RoutingParameter routingParameter = avoidedParameters.get(i);
-					final LinearLayout container = createToolbarSubOptionView(false, SettingsBaseActivity.getRoutingStringPropertyName(app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark, i == avoidedParameters.size() - 1, new View.OnClickListener() {
+					final View container = createToolbarSubOptionView(false, SettingsBaseActivity.getRoutingStringPropertyName(app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark, i == avoidedParameters.size() - 1, new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							OsmandSettings.CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
@@ -730,7 +730,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				Iterator<RouteDataObject> it = impassableRoads.values().iterator();
 				while (it.hasNext()) {
 					final RouteDataObject routeDataObject = it.next();
-					final LinearLayout container = createToolbarSubOptionView(false, avoidSpecificRoads.getText(routeDataObject), R.drawable.ic_action_remove_dark, !it.hasNext(), new View.OnClickListener() {
+					final View container = createToolbarSubOptionView(false, avoidSpecificRoads.getText(routeDataObject), R.drawable.ic_action_remove_dark, !it.hasNext(), new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							if (routeDataObject != null) {
@@ -859,8 +859,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		return item;
 	}
 
-	private LinearLayout createToolbarSubOptionView(boolean hideTextLine, String title, @DrawableRes int iconId, boolean lastItem, View.OnClickListener listener) {
-		final LinearLayout container = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.route_options_container, null);
+	private View createToolbarSubOptionView(boolean hideTextLine, String title, @DrawableRes int iconId, boolean lastItem, View.OnClickListener listener) {
+		final View container = mapActivity.getLayoutInflater().inflate(R.layout.route_options_container, null);
 		final TextView routeOptionTV = (TextView) container.findViewById(R.id.route_removable_option_title);
 		final ImageView routeOptionImageView = (ImageView) container.findViewById(R.id.removable_option_icon);
 
