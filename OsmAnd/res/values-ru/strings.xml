@@ -2905,4 +2905,5 @@
     <string name="add_work">Добавить работу</string>
     <string name="work_button">Работа</string>
     <string name="route_smoothness_stat_container">Ровность</string>
+    <string name="previous_route">Предыдущий маршрут</string>
 </resources>
