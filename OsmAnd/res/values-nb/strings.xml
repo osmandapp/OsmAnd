@@ -2917,4 +2917,5 @@
     <string name="add_home">Legg til bosted</string>
     <string name="add_work">Legg til arbeidssted</string>
     <string name="work_button">Arbeid</string>
+    <string name="previous_route">Forrige rute</string>
 </resources>
