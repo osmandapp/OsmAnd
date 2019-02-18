@@ -152,7 +152,7 @@ public class BinaryMapAddressReaderAdapter {
 			switch (tag) {
 			case 0:
 				if (region.enName == null || region.enName.length() == 0) {
-					region.enName = region.name == null ? "" : TransliterationHelper.getInstance().transliterateText(region.name);
+					region.enName = region.name == null ? "" : TransliterationHelper.getInstance().transliterate(region.name);
 				}
 				return;
 			case OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER:

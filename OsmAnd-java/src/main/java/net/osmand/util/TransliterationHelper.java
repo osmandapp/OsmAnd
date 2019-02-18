@@ -19,11 +19,12 @@ public class TransliterationHelper {
 
 	private static String country = DEFAULT;
 
-	private Tokenizer tokenizer;
+	private static Tokenizer tokenizer;
 
-	private Map<String, String> katakanaMap = new HashMap<>();
+	private static Map<String, String> katakanaMap = new HashMap<>();
 
-	private TransliterationHelper(){}
+	private TransliterationHelper() {
+	}
 
 	static {
 		try {
@@ -45,8 +46,8 @@ public class TransliterationHelper {
 		return country;
 	}
 
-	public String transliterateText(String text) {
-		if(tokenizer==null){
+	public static String transliterate(String text) {
+		if (tokenizer == null) {
 			tokenizer = new Tokenizer();
 		}
 		switch (country) {
@@ -58,12 +59,11 @@ public class TransliterationHelper {
 		return text;
 	}
 
-	private String japanese2Romaji(String input) {
+	private static String japanese2Romaji(String text) {
 
 		boolean capitalizeWords = true;
 
-
-		List<Token> tokens = tokenizer.tokenize(input);
+		List<Token> tokens = tokenizer.tokenize(text);
 
 		StringBuilder builder = new StringBuilder();
 		if (katakanaMap.isEmpty()) {
@@ -94,8 +94,7 @@ public class TransliterationHelper {
 							builder.append(romaji.substring(1));
 						} else {
 							if (token.getSurface()
-								.equals(token.getPronunciation()))
-							{
+								.equals(token.getPronunciation())) {
 								romaji = romaji.toUpperCase();
 							}
 							builder.append(romaji);
@@ -107,7 +106,7 @@ public class TransliterationHelper {
 		return builder.toString();
 	}
 
-	private String convertKanaToRomaji(String s) {
+	private static String convertKanaToRomaji(String s) {
 		StringBuilder t = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
 			if (i <= s.length() - 2) {
@@ -132,7 +131,7 @@ public class TransliterationHelper {
 		return t.toString();
 	}
 
-	private void initKanaMap(){
+	private static void initKanaMap() {
 		katakanaMap.put("ア", "a");
 		katakanaMap.put("イ", "i");
 		katakanaMap.put("ウ", "u");

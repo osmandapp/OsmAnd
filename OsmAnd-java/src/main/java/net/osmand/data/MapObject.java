@@ -184,7 +184,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 						return nm;
 					}
 					if (transliterate) {
-						return TransliterationHelper.getInstance().transliterateText(getName());
+						return TransliterationHelper.getInstance().transliterate(getName());
 //						return Junidecode.unidecode(getName());
 					}
 				}
@@ -197,7 +197,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (!Algorithms.isEmpty(enName)) {
 			return this.enName;
 		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
-			return TransliterationHelper.getInstance().transliterateText(getName());
+			return TransliterationHelper.getInstance().transliterate(getName());
 //			return Junidecode.unidecode(getName());
 		}
 		return ""; //$NON-NLS-1$

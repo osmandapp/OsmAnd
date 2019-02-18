@@ -137,7 +137,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 								a.setId(Long.parseLong(parser.getAttributeValue("", "place_id"))); //$NON-NLS-1$ //$NON-NLS-2$
 								String name = parser.getAttributeValue("", "display_name"); //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
-								a.setEnName(TransliterationHelper.getInstance().transliterateText(getName()));
+								a.setEnName(TransliterationHelper.getInstance().transliterate(getName()));
 								a.setSubType(parser.getAttributeValue("", "type")); //$NON-NLS-1$//$NON-NLS-2$
 								PoiType pt = poiTypes.getPoiTypeByKey(a.getSubType());
 								a.setType(pt != null ? pt.getCategory() : poiTypes.getOtherPoiCategory());
@@ -153,7 +153,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 							String name = parser.getText();
 							if (name != null) {
 								a.setName(name);
-								a.setEnName(TransliterationHelper.getInstance().transliterateText(getName()));
+								a.setEnName(TransliterationHelper.getInstance().transliterate(getName()));
 							}
 						}
 					}

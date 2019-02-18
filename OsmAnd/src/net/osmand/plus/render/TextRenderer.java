@@ -241,7 +241,7 @@ public class TextRenderer {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
 				if (preferredLocale.length() > 0) {
-					text.text = TransliterationHelper.getInstance().transliterateText(text.text);
+					text.text = TransliterationHelper.getInstance().transliterate(text.text);
 				}
 
 
