@@ -194,7 +194,7 @@
     <string name="please_update_osmand">נא לעדכן את OsmAnd כדי לצפות בנתונים במפה</string>
     <string name="shared_string_update">עדכון</string>
     <string name="shared_string_telegram">טלגרם</string>
-    <string name="privacy_policy_use_telegram">אנו משתמשים בטלגרם (יישומון התכתבות) כדי להתחבר לאנשים ולהקל עליך לתקשר אתם.</string>
+    <string name="privacy_policy_use_telegram">טלגרם (יישומון ההתכתבות) משמש תשתית כדי להתחבר ולתקשר עם אנשים.</string>
     <string name="privacy_policy_telegram_client">הפלטפורמה הפתוחה של טלגרם והעוקב של OsmAnd נמנים מבין לקוחותינו. אנשי הקשר שלך יכולים להשתמש בכל לקוח טלגרם שיבחרו.</string>
     <string name="privacy_policy_agree">לחיצה על המשך מהווה את הסכמתך למדיניות הפרטיות של טלגרם ולמדיניות הפרטיות של OsmAnd.</string>
     <string name="shared_string_accept">קבלה</string>
@@ -205,4 +205,5 @@
     <string name="shared_string_appearance">מראה</string>
     <string name="show_gps_points">הצגת נקודות GPS</string>
     <string name="show_gps_points_descr">הצגת כמות נקודות ה־GPS שנאספו ונשלחו.</string>
+    <string name="timeline_description">ניתן להפעיל מעקב כדי לאסוף נתוני תנועה ברקע.</string>
 </resources>

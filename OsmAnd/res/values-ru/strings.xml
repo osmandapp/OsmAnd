@@ -2901,4 +2901,8 @@
     <string name="route_surface_stat_container">Поверхность</string>
     <string name="route_class_stat_container">Класс</string>
     <string name="route_steepness_stat_container">Крутизна</string>
+    <string name="add_home">Добавить дом</string>
+    <string name="add_work">Добавить работу</string>
+    <string name="work_button">Работа</string>
+    <string name="route_smoothness_stat_container">Ровность</string>
 </resources>
