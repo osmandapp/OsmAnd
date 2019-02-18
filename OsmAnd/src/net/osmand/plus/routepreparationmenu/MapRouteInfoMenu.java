@@ -310,11 +310,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			fragmentRef.get().hideRouteCalculationProgressBar();
 			fragmentRef.get().updateControlButtons();
 			fragmentRef.get().updateInfo();
-			if (routingHelper.isPublicTransportMode()) {
-				fragmentRef.get().openMenuHalfScreen();
-			} else {
-				fragmentRef.get().openMenuHeaderOnly();
-			}
+			fragmentRef.get().openMenuHalfScreen();
 		}
 	}
 
