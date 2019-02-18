@@ -203,4 +203,13 @@
     <string name="shared_string_collected">Innsamlet</string>
     <string name="gps_points">GPS-punkter</string>
     <string name="shared_string_sent">Sendt</string>
+    <string name="shared_string_ok">OK</string>
+    <string name="timeline_available_for_free_now">Tidslinjefunksjonen er nå gratis.</string>
+    <string name="disable_monitoring">Skru av overvåkning</string>
+    <string name="location_recording_enabled">Plasseringsregistrering påskrudd</string>
+    <string name="app_name_short_online">Nettbasert sporer</string>
+    <string name="app_name_short">OsmAnd-sporer</string>
+    <string name="privacy_policy_use_telegram">Telegram (meldingsprogrammet) brukes til å snakke med folk.</string>
+    <string name="osmand_privacy_policy">OsmAnd-personvernspraksis</string>
+    <string name="please_update_osmand">Oppdater OsmAnd for å vise data på kartet</string>
 </resources>
