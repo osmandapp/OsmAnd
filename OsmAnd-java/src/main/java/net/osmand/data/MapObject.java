@@ -1,15 +1,10 @@
 package net.osmand.data;
 
 
-import static java.awt.SystemColor.text;
-import static net.osmand.util.CustomTransliterationHelper.isCharFromCJK;
-import static net.osmand.util.CustomTransliterationHelper.japanese2Romaji;
-
-import java.awt.SystemColor;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.util.Algorithms;
-import net.sf.junidecode.Junidecode;
+import net.osmand.util.TransliterationHelper;
 
 import org.json.JSONObject;
 
@@ -189,8 +184,8 @@ public abstract class MapObject implements Comparable<MapObject> {
 						return nm;
 					}
 					if (transliterate) {
-
-						return Junidecode.unidecode(getName());
+						return TransliterationHelper.getInstance().transliterateText(getName());
+//						return Junidecode.unidecode(getName());
 					}
 				}
 			}
@@ -199,16 +194,11 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 
 	public String getEnName(boolean transliterate) {
-		System.out.println("Get name");
 		if (!Algorithms.isEmpty(enName)) {
 			return this.enName;
 		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
-			if (isCharFromCJK(getName().charAt(0))) {
-				return japanese2Romaji(getName());
-			} else {
-				return Junidecode.unidecode(getName());
-			}
-
+			return TransliterationHelper.getInstance().transliterateText(getName());
+//			return Junidecode.unidecode(getName());
 		}
 		return ""; //$NON-NLS-1$
 	}

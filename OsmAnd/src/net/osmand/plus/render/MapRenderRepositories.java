@@ -1,6 +1,8 @@
 package net.osmand.plus.render;
 
 
+import static net.osmand.util.TransliterationHelper.setActiveMapLanguage;
+
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
@@ -56,6 +58,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
+import net.osmand.util.TransliterationHelper;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
@@ -303,8 +306,14 @@ public class MapRenderRepositories {
 		boolean useLive = context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get();
 		for (String mapName : files.keySet()) {
 			BinaryMapIndexReader fr = files.get(mapName);
-			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) || 
+			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) ||
 					fr.containsRouteData(leftX, topY, rightX, bottomY, zoom))) {
+
+				if(!Algorithms.isEmpty(fr.getCountryName())) {
+					log.debug("country: " +fr.getCountryName());
+					setTransliterationMethod(fr.getCountryName());
+				}
+
 				if (!nativeFiles.contains(mapName)) {
 					long time = System.currentTimeMillis();
 					nativeFiles.add(mapName);
@@ -541,6 +550,8 @@ public class MapRenderRepositories {
 				log.debug("Search failed " + c.getRegionNames(), e); //$NON-NLS-1$
 			}
 			if(res.size() > 0) {
+				log.debug("Country name:" + c.getCountryName());
+				setTransliterationMethod(c.getCountryName());
 				if(basemap) {
 					renderedState |= 1;
 				} else {
@@ -586,6 +597,20 @@ public class MapRenderRepositories {
 			}
 		}
 		return mi;
+	}
+
+	private void setTransliterationMethod(String countryName) {
+		if(TransliterationHelper.getActiveMapLanguage()!=1001) {
+			switch (countryName) {
+				case "Japan": {
+					setActiveMapLanguage(TransliterationHelper.JAPANESE);
+					break;
+				}
+				default:
+					setActiveMapLanguage(TransliterationHelper.DEFAULT);
+					break;
+			}
+		}
 	}
 
 	private void validateLatLonBox(QuadRect box) {

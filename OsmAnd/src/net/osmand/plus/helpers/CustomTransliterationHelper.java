@@ -14,7 +14,6 @@ public class CustomTransliterationHelper {
 
 		Tokenizer tokenizer = new Tokenizer();
 		List<Token> tokens = tokenizer.tokenize(input);
-
 		StringBuffer buffer = new StringBuffer();
 		KanaToRomaji kanaToRomaji = new KanaToRomaji();
 		String lastTokenToMerge = "";

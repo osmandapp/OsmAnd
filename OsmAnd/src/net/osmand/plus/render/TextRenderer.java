@@ -1,7 +1,5 @@
 package net.osmand.plus.render;
 
-import static net.osmand.plus.helpers.CustomTransliterationHelper.isCharFromCJK;
-import static net.osmand.plus.helpers.CustomTransliterationHelper.japanese2Romaji;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.procedure.TIntObjectProcedure;
@@ -16,12 +14,11 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
-import net.osmand.plus.helpers.CustomTransliterationHelper;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-import net.sf.junidecode.Junidecode;
+import net.osmand.util.TransliterationHelper;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -243,15 +240,8 @@ public class TextRenderer {
 		for (int i = 0; i < size; i++) {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
-
 				if (preferredLocale.length() > 0) {
-//					LOG.debug("text before transliteration: " + text.text);
-					if (isCharFromCJK(text.text.charAt(0))) {
-						text.text = japanese2Romaji(text.text);
-//						LOG.debug("text after transliteration: " + text.text);
-					} else {
-						text.text = Junidecode.unidecode(text.text);
-					}
+					text.text = TransliterationHelper.getInstance().transliterateText(text.text);
 				}
 
 
