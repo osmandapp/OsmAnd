@@ -8,7 +8,7 @@
     <string name="app_name_short_online">Online Tracker</string>
     <string name="app_name_short">OsmAnd Tracker</string>
     <string name="shared_string_telegram">Telegram</string>
-    <string name="privacy_policy_use_telegram">Telegram (the messaging app) is used to to connect to and communicate with people.</string>
+    <string name="privacy_policy_use_telegram">Telegram (the messaging app) is used to connect and communicate with people.</string>
     <string name="privacy_policy_telegram_client">Telegram open platform and OsmAnd Tracker is one of the customers. Your contacts can use any other Telegram client.</string>
     <string name="privacy_policy_agree">By clicking continue you agree to the Telegram Privacy Policy and the OsmAnd Privacy Policy.</string>
     <string name="shared_string_accept">Accept</string>
@@ -29,10 +29,10 @@
     <string name="shared_string_sent">Sent</string>
     <string name="monitoring_is_enabled">Monitoring is enabled</string>
     <string name="monitoring_is_disabled">Monitoring is disabled</string>
-    <string name="time_on_the_move">time on the move</string>
+    <string name="time_on_the_move">Moving time</string>
     <string name="average_altitude">Average altitude</string>
     <string name="average_speed">Average speed</string>
-    <string name="open_in_osmand">Open in OsmAnd</string>
+    <string name="open_in_osmand">Show in OsmAnd</string>
     <string name="end_date">End date</string>
     <string name="start_date">Start date</string>
     <string name="send_location_as">Send location as</string>
@@ -100,8 +100,8 @@
     <string name="logout_no_internet_msg">Connect to the Internet to properly log out of Telegram.</string>
     <string name="shared_string_close">Close</string>
     <string name="disconnect_from_telegram_desc">To revoke location sharing access. Open Telegram, go to Settings → Privacy and Security → Sessions, and terminate the OsmAnd Telegram session.</string>
-    <string name="disconnect_from_telegram">How to turn off OsmAnd Location Sharing from Telegram</string>
-    <string name="logout_help_desc">How to turn off OsmAnd Location Sharing from Telegram</string>
+    <string name="disconnect_from_telegram">How to turn off OsmAnd Tracker from Telegram</string>
+    <string name="logout_help_desc">How to turn off OsmAnd Tracker from Telegram</string>
     <string name="connected_account">Connected account</string>
     <string name="shared_string_account">Account</string>
     <string name="in_time">in %1$s</string>
@@ -208,7 +208,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sec</string>
-    <string name="welcome_descr"><![CDATA[<b>OsmAnd Location Sharing</b> lets you share your location and see that of others in the OsmAnd.<br/><br/>The app uses Telegram API and you need a Telegram account.]]></string>
+    <string name="welcome_descr"><![CDATA[<b>OsmAnd Tracker</b> lets you share your location and see that of others in the OsmAnd.<br/><br/>The app uses Telegram API and you need a Telegram account.]]></string>
     <string name="my_location">My location</string>
     <string name="live_now">Live now</string>
     <string name="timeline">Timeline</string>
