@@ -14,12 +14,14 @@ public class TransliterationHelper {
 	private static TransliterationHelper instance;
 
 	public final static Log LOG = PlatformUtil.getLog(TransliterationHelper.class);
-	public final static int DEFAULT = 1000;
-	public final static int JAPANESE = 1001;
+	public final static String DEFAULT = "default";
+	public final static String JAPAN = "Japan";
 
-	private static int activeMapLanguage = DEFAULT;
+	private static String country = DEFAULT;
 
-	private Map<String, String> kanaMap = new HashMap<>();
+	private Tokenizer tokenizer;
+
+	private Map<String, String> katakanaMap = new HashMap<>();
 
 	private TransliterationHelper(){}
 
@@ -35,19 +37,22 @@ public class TransliterationHelper {
 		return instance;
 	}
 
-	public static void setActiveMapLanguage(int activeMapLanguage) {
-		TransliterationHelper.activeMapLanguage = activeMapLanguage;
+	public static void setCountry(String countryName) {
+		TransliterationHelper.country = countryName;
 	}
 
-	public static int getActiveMapLanguage() {
-		return activeMapLanguage;
+	public static String getCountry() {
+		return country;
 	}
 
 	public String transliterateText(String text) {
-		switch (activeMapLanguage) {
+		if(tokenizer==null){
+			tokenizer = new Tokenizer();
+		}
+		switch (country) {
 			case DEFAULT:
 				return Junidecode.unidecode(text);
-			case JAPANESE:
+			case JAPAN:
 				return japanese2Romaji(text);
 		}
 		return text;
@@ -57,14 +62,13 @@ public class TransliterationHelper {
 
 		boolean capitalizeWords = true;
 
-		Tokenizer tokenizer = new Tokenizer();
+
 		List<Token> tokens = tokenizer.tokenize(input);
 
 		StringBuilder builder = new StringBuilder();
-		if (kanaMap.isEmpty()) {
+		if (katakanaMap.isEmpty()) {
 			initKanaMap();
 		}
-		String lastTokenToMerge = "";
 		for (Token token : tokens) {
 			String type = token.getAllFeaturesArray()[1];
 
@@ -84,20 +88,13 @@ public class TransliterationHelper {
 						builder.append(token.getSurface());
 					} else {
 						String romaji = convertKanaToRomaji(token.getAllFeaturesArray()[8]);
-						if (lastFeature.endsWith("ッ")) {
-							lastTokenToMerge = lastFeature;
-							continue;
-						} else {
-							lastTokenToMerge = "";
-						}
 
 						if (capitalizeWords) {
 							builder.append(romaji.substring(0, 1).toUpperCase());
 							builder.append(romaji.substring(1));
 						} else {
-							// Convert foreign katakana words to uppercase
 							if (token.getSurface()
-								.equals(token.getPronunciation())) // detect katakana
+								.equals(token.getPronunciation()))
 							{
 								romaji = romaji.toUpperCase();
 							}
@@ -114,19 +111,19 @@ public class TransliterationHelper {
 		StringBuilder t = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
 			if (i <= s.length() - 2) {
-				if (kanaMap.containsKey(s.substring(i, i + 2))) {
-					t.append(kanaMap.get(s.substring(i, i + 2)));
+				if (katakanaMap.containsKey(s.substring(i, i + 2))) {
+					t.append(katakanaMap.get(s.substring(i, i + 2)));
 					i++;
-				} else if (kanaMap.containsKey(s.substring(i, i + 1))) {
-					t.append(kanaMap.get(s.substring(i, i + 1)));
+				} else if (katakanaMap.containsKey(s.substring(i, i + 1))) {
+					t.append(katakanaMap.get(s.substring(i, i + 1)));
 				} else if (s.charAt(i) == 'ッ') {
-					t.append(kanaMap.get(s.substring(i + 1, i + 2)).charAt(0));
+					t.append(katakanaMap.get(s.substring(i + 1, i + 2)).charAt(0));
 				} else {
 					t.append(s.charAt(i));
 				}
 			} else {
-				if (kanaMap.containsKey(s.substring(i, i + 1))) {
-					t.append(kanaMap.get(s.substring(i, i + 1)));
+				if (katakanaMap.containsKey(s.substring(i, i + 1))) {
+					t.append(katakanaMap.get(s.substring(i, i + 1)));
 				} else {
 					t.append(s.charAt(i));
 				}
@@ -136,113 +133,113 @@ public class TransliterationHelper {
 	}
 
 	private void initKanaMap(){
-		kanaMap.put("ア", "a");
-		kanaMap.put("イ", "i");
-		kanaMap.put("ウ", "u");
-		kanaMap.put("エ", "e");
-		kanaMap.put("オ", "o");
-		kanaMap.put("カ", "ka");
-		kanaMap.put("キ", "ki");
-		kanaMap.put("ク", "ku");
-		kanaMap.put("ケ", "ke");
-		kanaMap.put("コ", "ko");
-		kanaMap.put("サ", "sa");
-		kanaMap.put("シ", "shi");
-		kanaMap.put("ス", "su");
-		kanaMap.put("セ", "se");
-		kanaMap.put("ソ", "so");
-		kanaMap.put("タ", "ta");
-		kanaMap.put("チ", "chi");
-		kanaMap.put("ツ", "tsu");
-		kanaMap.put("テ", "te");
-		kanaMap.put("ト", "to");
-		kanaMap.put("ナ", "na");
-		kanaMap.put("ニ", "ni");
-		kanaMap.put("ヌ", "nu");
-		kanaMap.put("ネ", "ne");
-		kanaMap.put("ノ", "no");
-		kanaMap.put("ハ", "ha");
-		kanaMap.put("ヒ", "hi");
-		kanaMap.put("フ", "fu");
-		kanaMap.put("ヘ", "he");
-		kanaMap.put("ホ", "ho");
-		kanaMap.put("マ", "ma");
-		kanaMap.put("ミ", "mi");
-		kanaMap.put("ム", "mu");
-		kanaMap.put("メ", "me");
-		kanaMap.put("モ", "mo");
-		kanaMap.put("ヤ", "ya");
-		kanaMap.put("ユ", "yu");
-		kanaMap.put("ヨ", "yo");
-		kanaMap.put("ラ", "ra");
-		kanaMap.put("リ", "ri");
-		kanaMap.put("ル", "ru");
-		kanaMap.put("レ", "re");
-		kanaMap.put("ロ", "ro");
-		kanaMap.put("ワ", "wa");
-		kanaMap.put("ヲ", "wo");
-		kanaMap.put("ン", "n");
-		kanaMap.put("ガ", "ga");
-		kanaMap.put("ギ", "gi");
-		kanaMap.put("グ", "gu");
-		kanaMap.put("ゲ", "ge");
-		kanaMap.put("ゴ", "go");
-		kanaMap.put("ザ", "za");
-		kanaMap.put("ジ", "ji");
-		kanaMap.put("ズ", "zu");
-		kanaMap.put("ゼ", "ze");
-		kanaMap.put("ゾ", "zo");
-		kanaMap.put("ダ", "da");
-		kanaMap.put("ヂ", "ji");
-		kanaMap.put("ヅ", "zu");
-		kanaMap.put("デ", "de");
-		kanaMap.put("ド", "do");
-		kanaMap.put("バ", "ba");
-		kanaMap.put("ビ", "bi");
-		kanaMap.put("ブ", "bu");
-		kanaMap.put("ベ", "be");
-		kanaMap.put("ボ", "bo");
-		kanaMap.put("パ", "pa");
-		kanaMap.put("ピ", "pi");
-		kanaMap.put("プ", "pu");
-		kanaMap.put("ペ", "pe");
-		kanaMap.put("ポ", "po");
-		kanaMap.put("キャ", "kya");
-		kanaMap.put("キュ", "kyu");
-		kanaMap.put("キョ", "kyo");
-		kanaMap.put("シャ", "sha");
-		kanaMap.put("シュ", "shu");
-		kanaMap.put("ショ", "sho");
-		kanaMap.put("チャ", "cha");
-		kanaMap.put("チュ", "chu");
-		kanaMap.put("チョ", "cho");
-		kanaMap.put("ニャ", "nya");
-		kanaMap.put("ニュ", "nyu");
-		kanaMap.put("ニョ", "nyo");
-		kanaMap.put("ヒャ", "hya");
-		kanaMap.put("ヒュ", "hyu");
-		kanaMap.put("ヒョ", "hyo");
-		kanaMap.put("リャ", "rya");
-		kanaMap.put("リュ", "ryu");
-		kanaMap.put("リョ", "ryo");
-		kanaMap.put("ギャ", "gya");
-		kanaMap.put("ギュ", "gyu");
-		kanaMap.put("ギョ", "gyo");
-		kanaMap.put("ジャ", "ja");
-		kanaMap.put("ジュ", "ju");
-		kanaMap.put("ジョ", "jo");
-		kanaMap.put("ティ", "ti");
-		kanaMap.put("ディ", "di");
-		kanaMap.put("ツィ", "tsi");
-		kanaMap.put("ヂャ", "dya");
-		kanaMap.put("ヂュ", "dyu");
-		kanaMap.put("ヂョ", "dyo");
-		kanaMap.put("ビャ", "bya");
-		kanaMap.put("ビュ", "byu");
-		kanaMap.put("ビョ", "byo");
-		kanaMap.put("ピャ", "pya");
-		kanaMap.put("ピュ", "pyu");
-		kanaMap.put("ピョ", "pyo");
-		kanaMap.put("ー", "-");
+		katakanaMap.put("ア", "a");
+		katakanaMap.put("イ", "i");
+		katakanaMap.put("ウ", "u");
+		katakanaMap.put("エ", "e");
+		katakanaMap.put("オ", "o");
+		katakanaMap.put("カ", "ka");
+		katakanaMap.put("キ", "ki");
+		katakanaMap.put("ク", "ku");
+		katakanaMap.put("ケ", "ke");
+		katakanaMap.put("コ", "ko");
+		katakanaMap.put("サ", "sa");
+		katakanaMap.put("シ", "shi");
+		katakanaMap.put("ス", "su");
+		katakanaMap.put("セ", "se");
+		katakanaMap.put("ソ", "so");
+		katakanaMap.put("タ", "ta");
+		katakanaMap.put("チ", "chi");
+		katakanaMap.put("ツ", "tsu");
+		katakanaMap.put("テ", "te");
+		katakanaMap.put("ト", "to");
+		katakanaMap.put("ナ", "na");
+		katakanaMap.put("ニ", "ni");
+		katakanaMap.put("ヌ", "nu");
+		katakanaMap.put("ネ", "ne");
+		katakanaMap.put("ノ", "no");
+		katakanaMap.put("ハ", "ha");
+		katakanaMap.put("ヒ", "hi");
+		katakanaMap.put("フ", "fu");
+		katakanaMap.put("ヘ", "he");
+		katakanaMap.put("ホ", "ho");
+		katakanaMap.put("マ", "ma");
+		katakanaMap.put("ミ", "mi");
+		katakanaMap.put("ム", "mu");
+		katakanaMap.put("メ", "me");
+		katakanaMap.put("モ", "mo");
+		katakanaMap.put("ヤ", "ya");
+		katakanaMap.put("ユ", "yu");
+		katakanaMap.put("ヨ", "yo");
+		katakanaMap.put("ラ", "ra");
+		katakanaMap.put("リ", "ri");
+		katakanaMap.put("ル", "ru");
+		katakanaMap.put("レ", "re");
+		katakanaMap.put("ロ", "ro");
+		katakanaMap.put("ワ", "wa");
+		katakanaMap.put("ヲ", "wo");
+		katakanaMap.put("ン", "n");
+		katakanaMap.put("ガ", "ga");
+		katakanaMap.put("ギ", "gi");
+		katakanaMap.put("グ", "gu");
+		katakanaMap.put("ゲ", "ge");
+		katakanaMap.put("ゴ", "go");
+		katakanaMap.put("ザ", "za");
+		katakanaMap.put("ジ", "ji");
+		katakanaMap.put("ズ", "zu");
+		katakanaMap.put("ゼ", "ze");
+		katakanaMap.put("ゾ", "zo");
+		katakanaMap.put("ダ", "da");
+		katakanaMap.put("ヂ", "ji");
+		katakanaMap.put("ヅ", "zu");
+		katakanaMap.put("デ", "de");
+		katakanaMap.put("ド", "do");
+		katakanaMap.put("バ", "ba");
+		katakanaMap.put("ビ", "bi");
+		katakanaMap.put("ブ", "bu");
+		katakanaMap.put("ベ", "be");
+		katakanaMap.put("ボ", "bo");
+		katakanaMap.put("パ", "pa");
+		katakanaMap.put("ピ", "pi");
+		katakanaMap.put("プ", "pu");
+		katakanaMap.put("ペ", "pe");
+		katakanaMap.put("ポ", "po");
+		katakanaMap.put("キャ", "kya");
+		katakanaMap.put("キュ", "kyu");
+		katakanaMap.put("キョ", "kyo");
+		katakanaMap.put("シャ", "sha");
+		katakanaMap.put("シュ", "shu");
+		katakanaMap.put("ショ", "sho");
+		katakanaMap.put("チャ", "cha");
+		katakanaMap.put("チュ", "chu");
+		katakanaMap.put("チョ", "cho");
+		katakanaMap.put("ニャ", "nya");
+		katakanaMap.put("ニュ", "nyu");
+		katakanaMap.put("ニョ", "nyo");
+		katakanaMap.put("ヒャ", "hya");
+		katakanaMap.put("ヒュ", "hyu");
+		katakanaMap.put("ヒョ", "hyo");
+		katakanaMap.put("リャ", "rya");
+		katakanaMap.put("リュ", "ryu");
+		katakanaMap.put("リョ", "ryo");
+		katakanaMap.put("ギャ", "gya");
+		katakanaMap.put("ギュ", "gyu");
+		katakanaMap.put("ギョ", "gyo");
+		katakanaMap.put("ジャ", "ja");
+		katakanaMap.put("ジュ", "ju");
+		katakanaMap.put("ジョ", "jo");
+		katakanaMap.put("ティ", "ti");
+		katakanaMap.put("ディ", "di");
+		katakanaMap.put("ツィ", "tsi");
+		katakanaMap.put("ヂャ", "dya");
+		katakanaMap.put("ヂュ", "dyu");
+		katakanaMap.put("ヂョ", "dyo");
+		katakanaMap.put("ビャ", "bya");
+		katakanaMap.put("ビュ", "byu");
+		katakanaMap.put("ビョ", "byo");
+		katakanaMap.put("ピャ", "pya");
+		katakanaMap.put("ピュ", "pyu");
+		katakanaMap.put("ピョ", "pyo");
+		katakanaMap.put("ー", "-");
 	}
 }

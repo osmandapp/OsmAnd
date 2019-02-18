@@ -1,7 +1,7 @@
 package net.osmand.plus.render;
 
 
-import static net.osmand.util.TransliterationHelper.setActiveMapLanguage;
+import static net.osmand.util.TransliterationHelper.setCountry;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.TLongList;
@@ -308,12 +308,9 @@ public class MapRenderRepositories {
 			BinaryMapIndexReader fr = files.get(mapName);
 			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) ||
 					fr.containsRouteData(leftX, topY, rightX, bottomY, zoom))) {
-
 				if(!Algorithms.isEmpty(fr.getCountryName())) {
-					log.debug("country: " +fr.getCountryName());
-					setTransliterationMethod(fr.getCountryName());
+					setCountryForTransliterationMethod(fr.getCountryName());
 				}
-
 				if (!nativeFiles.contains(mapName)) {
 					long time = System.currentTimeMillis();
 					nativeFiles.add(mapName);
@@ -551,7 +548,7 @@ public class MapRenderRepositories {
 			}
 			if(res.size() > 0) {
 				log.debug("Country name:" + c.getCountryName());
-				setTransliterationMethod(c.getCountryName());
+				setCountryForTransliterationMethod(c.getCountryName());
 				if(basemap) {
 					renderedState |= 1;
 				} else {
@@ -599,15 +596,15 @@ public class MapRenderRepositories {
 		return mi;
 	}
 
-	private void setTransliterationMethod(String countryName) {
-		if(TransliterationHelper.getActiveMapLanguage()!=1001) {
+	private void setCountryForTransliterationMethod(String countryName) {
+		if(!countryName.equals(TransliterationHelper.getCountry())) {
 			switch (countryName) {
 				case "Japan": {
-					setActiveMapLanguage(TransliterationHelper.JAPANESE);
+					setCountry(countryName);
 					break;
 				}
 				default:
-					setActiveMapLanguage(TransliterationHelper.DEFAULT);
+					setCountry(TransliterationHelper.DEFAULT);
 					break;
 			}
 		}
