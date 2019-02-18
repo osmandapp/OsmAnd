@@ -1049,20 +1049,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				TargetPointsHelper targetPointsHelper = getTargets();
 				TargetPoint startPoint = targetPointsHelper.getPointToStart();
 				TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
-
-				if (startPoint == null) {
-					Location loc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
-					if (loc != null) {
-						startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-								new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
-										mapActivity.getString(R.string.shared_string_my_location)));
+				if (endPoint == null) {
+					app.showShortToastMessage(R.string.add_destination_query);
+				} else {
+					if (startPoint == null) {
+						Location loc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+						if (loc != null) {
+							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
+											mapActivity.getString(R.string.shared_string_my_location)));
+						}
 					}
-				}
-
-				if (startPoint != null && endPoint != null) {
-					targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
-					targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
-					targetPointsHelper.updateRouteAndRefresh(true);
+					if (startPoint != null) {
+						targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
+						targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
+						targetPointsHelper.updateRouteAndRefresh(true);
+					}
 				}
 			}
 		});

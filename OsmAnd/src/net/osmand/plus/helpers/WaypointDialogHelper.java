@@ -242,19 +242,23 @@ public class WaypointDialogHelper {
 	public static void switchStartAndFinish(TargetPointsHelper targetPointsHelper, TargetPoint finish,
 											 Activity ctx, TargetPoint start, OsmandApplication app,
 											 WaypointDialogHelper helper) {
-		targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
-				finish.getLongitude()), false, finish.getPointDescription(ctx));
-		if (start == null) {
-			Location loc = app.getLocationProvider().getLastKnownLocation();
-			if (loc != null) {
-				targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
-						loc.getLongitude()), true, -1);
-			}
+		if (finish == null) {
+			app.showShortToastMessage(R.string.add_destination_query);
 		} else {
-			targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
-					start.getLongitude()), true, -1, start.getPointDescription(ctx));
+			targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
+					finish.getLongitude()), false, finish.getPointDescription(ctx));
+			if (start == null) {
+				Location loc = app.getLocationProvider().getLastKnownLocation();
+				if (loc != null) {
+					targetPointsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
+							loc.getLongitude()), true, -1);
+				}
+			} else {
+				targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(),
+						start.getLongitude()), true, -1, start.getPointDescription(ctx));
+			}
+			updateControls(ctx, helper);
 		}
-		updateControls(ctx, helper);
 	}
 
 	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
