@@ -2909,4 +2909,5 @@
     <string name="add_home">הוספת בית</string>
     <string name="add_work">הוספת עבודה</string>
     <string name="work_button">עבודה</string>
+    <string name="previous_route">נתיב קודם</string>
 </resources>
