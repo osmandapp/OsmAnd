@@ -2894,4 +2894,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_home">Ajouter domicile</string>
     <string name="add_work">Ajouter travail</string>
     <string name="work_button">Travail</string>
+    <string name="previous_route">Itinéraire précédent</string>
 </resources>
