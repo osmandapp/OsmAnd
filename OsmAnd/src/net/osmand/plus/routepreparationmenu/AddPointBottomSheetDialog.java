@@ -87,7 +87,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				createSwitchStartAndEndItem();
 				break;
 			case TARGET:
-				createMyLocItem();
 				createSelectOnTheMapItem();
 				createFavouritesItem();
 				createMarkersItem();

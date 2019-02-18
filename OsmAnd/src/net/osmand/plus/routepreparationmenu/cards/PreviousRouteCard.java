@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -47,8 +48,18 @@ public class PreviousRouteCard extends BaseCard {
 		}
 		startTitle.setText(startText.toString());
 		TargetPoint destinationPoint = targetPointsHelper.getPointToNavigateBackup();
-		destinationTitle.setText(destinationPoint != null ?
-				destinationPoint.getPointDescription(mapActivity).getSimpleName(mapActivity, false) : "");
+		String destinationName = "";
+		if (destinationPoint != null) {
+			PointDescription description = destinationPoint.getOriginalPointDescription();
+			if (description != null && !Algorithms.isEmpty(description.getName()) &&
+					!description.getName().equals(mapActivity.getString(R.string.no_address_found))) {
+				destinationName = description.getName();
+			} else {
+				destinationName = PointDescription.getLocationName(mapActivity,
+						destinationPoint.point.getLatitude(), destinationPoint.point.getLongitude(), true).replace('\n', ' ');
+			}
+		}
+		destinationTitle.setText(destinationName);
 		View homeButton = view.findViewById(R.id.card_button);
 		homeButton.setOnClickListener(new View.OnClickListener() {
 			@Override

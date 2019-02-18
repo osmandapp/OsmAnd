@@ -92,6 +92,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private boolean selectFromMapTouch;
 	private PointType selectFromMapPointType;
+	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
 
 	private boolean showMenu = false;
 	private MapActivity mapActivity;
@@ -194,7 +195,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					targets.setWorkPoint(latlon, null);
 					break;
 			}
-			show();
+			show(selectFromMapMenuState);
 			if (selectFromMapPointType == PointType.INTERMEDIATE && targets.checkPointToNavigateShort()) {
 				WaypointsFragment.showInstance(mapActivity);
 			}
@@ -1071,6 +1072,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	public void selectOnScreen(PointType pointType) {
 		selectFromMapTouch = true;
 		selectFromMapPointType = pointType;
+		selectFromMapMenuState = currentMenuState;
 		hide();
 	}
 
@@ -1347,8 +1349,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	}
 
 	public void show() {
+		show(getInitialMenuState());
+	}
+
+	public void show(int menuState) {
 		if (!visible) {
-			currentMenuState = getInitialMenuState();
+			currentMenuState = menuState;
 			visible = true;
 			switched = mapControlsLayer.switchToRoutePlanningLayout();
 			boolean refreshMap = !switched;
