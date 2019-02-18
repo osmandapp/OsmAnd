@@ -1,7 +1,7 @@
 package net.osmand.plus.measurementtool.command;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 public class AddPointCommand extends MeasurementModeCommand {

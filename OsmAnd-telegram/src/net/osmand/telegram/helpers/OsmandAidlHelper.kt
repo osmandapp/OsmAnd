@@ -75,6 +75,12 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		fun onSearchComplete(resultSet: List<SearchResult>)
 	}
 
+	private var gpxBitmapCreatedListener: GpxBitmapCreatedListener? = null
+
+	interface GpxBitmapCreatedListener {
+		fun onGpxBitmapCreated(bitmap: AGpxBitmap)
+	}
+
 	private val mIOsmAndAidlCallback = object : IOsmAndAidlCallback.Stub() {
 
 		@Throws(RemoteException::class)
@@ -90,10 +96,24 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				mUpdatesListener!!.update()
 			}
 		}
+
+		override fun onAppInitialized() {
+
+		}
+
+		override fun onGpxBitmapCreated(bitmap: AGpxBitmap) {
+			if (gpxBitmapCreatedListener != null) {
+				gpxBitmapCreatedListener!!.onGpxBitmapCreated(bitmap)
+			}
+		}
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
 		this.mSearchCompleteListener = mSearchCompleteListener
+	}
+
+	fun setGpxBitmapCreatedListener(gpxBitmapCreatedListener: GpxBitmapCreatedListener) {
+		this.gpxBitmapCreatedListener = gpxBitmapCreatedListener
 	}
 
 	private var mUpdatesListener: UpdatesListener? = null
@@ -106,6 +126,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		this.mUpdatesListener = mUpdatesListener
 	}
 
+	fun updatesCallbackRegistered() = osmandCallbackId > 0
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -180,6 +201,15 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		} else {
 			bound = false
 			initialized = true
+		}
+	}
+
+	fun execOsmandApi(action: (() -> Unit)) {
+		if (!isOsmandConnected() && isOsmandBound()) {
+			connectOsmand()
+		}
+		if (isOsmandConnected()) {
+			action.invoke()
 		}
 	}
 
@@ -1052,7 +1082,23 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun unregisterFromUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandCallbackId)
+				val unregistered = mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandCallbackId)
+				if (unregistered) {
+					osmandCallbackId = 0
+				}
+				return unregistered
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
+
+	fun getBitmapForGpx(gpxUri: Uri, density: Float, widthPixels: Int, heightPixels: Int, color: Int): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				app.grantUriPermission(app.settings.appToConnectPackage, gpxUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+				return mIOsmAndAidlInterface!!.getBitmapForGpx(CreateGpxBitmapParams(gpxUri, density, widthPixels, heightPixels, color), mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

@@ -48,7 +48,7 @@ class SharingStatusBottomSheet : DialogFragment() {
 			val sharingStatus = items[i] as TelegramSettings.SharingStatus
 			inflater.inflate(R.layout.item_with_three_text_lines, itemsCont, false).apply {
 				val sharingStatusType = sharingStatus.statusType
-				val time = sharingStatus.locationTime
+				val time = sharingStatus.locationTime * 1000
 
 				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getIcon(sharingStatusType.iconId, sharingStatusType.iconColorRes))
 				findViewById<TextView>(R.id.title).text = sharingStatus.getTitle(app)
@@ -74,6 +74,9 @@ class SharingStatusBottomSheet : DialogFragment() {
 					if (sharingStatusType.canResendLocation) {
 						if (i == 0) {
 							setOnClickListener {
+								app.shareLocationHelper.checkNetworkType()
+								app.settings.prepareForSharingNewMessages(sharingStatus.chatsIds)
+								app.shareLocationHelper.checkAndSendBufferMessages()
 								app.forceUpdateMyLocation()
 								dismiss()
 							}

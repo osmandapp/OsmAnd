@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
@@ -9,20 +10,21 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -35,7 +37,6 @@ import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
-import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.TrackPointFragment;
@@ -156,56 +157,11 @@ public class TrackActivity extends TabActivity {
 	}
 
 	public QuadRect getRect() {
-		double left = 0, right = 0;
-		double top = 0, bottom = 0;
 		if (getGpx() != null) {
-			for (Track track : getGpx().tracks) {
-				for (TrkSegment segment : track.segments) {
-					for (WptPt p : segment.points) {
-						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
-						}
-					}
-				}
-			}
-			for (WptPt p : getGpx().getPoints()) {
-				if (left == 0 && right == 0) {
-					left = p.getLongitude();
-					right = p.getLongitude();
-					top = p.getLatitude();
-					bottom = p.getLatitude();
-				} else {
-					left = Math.min(left, p.getLongitude());
-					right = Math.max(right, p.getLongitude());
-					top = Math.max(top, p.getLatitude());
-					bottom = Math.min(bottom, p.getLatitude());
-				}
-			}
-			for (GPXUtilities.Route route : getGpx().routes) {
-				for (WptPt p : route.points) {
-					if (left == 0 && right == 0) {
-						left = p.getLongitude();
-						right = p.getLongitude();
-						top = p.getLatitude();
-						bottom = p.getLatitude();
-					} else {
-						left = Math.min(left, p.getLongitude());
-						right = Math.max(right, p.getLongitude());
-						top = Math.max(top, p.getLatitude());
-						bottom = Math.min(bottom, p.getLatitude());
-					}
-				}
-			}
+			return getGpx().getRect();
+		} else {
+			return new QuadRect(0, 0, 0, 0);
 		}
-		return new QuadRect(left, top, right, bottom);
 	}
 
 	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
@@ -383,8 +339,11 @@ public class TrackActivity extends TabActivity {
 		setGpx(gpxFile);
 		setGpxDataItem(file != null ? app.getGpxDatabase().getItem(file) : null);
 
-		if (gpxFile != null) {
-			trackBitmapDrawer = new TrackBitmapDrawer(this, gpxFile, getGpxDataItem(), getRect());
+		WindowManager mgr = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		if (gpxFile != null && mgr != null) {
+			DisplayMetrics dm = new DisplayMetrics();
+			mgr.getDefaultDisplay().getMetrics(dm);
+			trackBitmapDrawer = new TrackBitmapDrawer(app, gpxFile, getGpxDataItem(), getRect(), dm.density, dm.widthPixels, AndroidUtils.dpToPx(app, 152f));
 		}
 
 		for (WeakReference<Fragment> f : fragList) {
@@ -493,7 +452,7 @@ public class TrackActivity extends TabActivity {
 				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 					result = selectedGpxFile.getGpxFile();
 				} else {
-					result = GPXUtilities.loadGPXFile(app, file);
+					result = GPXUtilities.loadGPXFile(file);
 				}
 			}
 			if (result != null) {

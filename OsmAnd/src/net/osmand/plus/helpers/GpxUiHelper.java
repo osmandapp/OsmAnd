@@ -57,22 +57,24 @@ import com.github.mikephil.charting.utils.MPPointF;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.Elevation;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Speed;
-import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.Elevation;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.Speed;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
@@ -82,6 +84,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -99,6 +102,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
@@ -941,9 +945,9 @@ public class GpxUiHelper {
 				}
 				for (String fname : filename) {
 					final File f = new File(dir, fname);
-					GPXFile res = GPXUtilities.loadGPXFile(activity.getApplication(), f);
-					if (res.warning != null && res.warning.length() > 0) {
-						w += res.warning + "\n";
+					GPXFile res = GPXUtilities.loadGPXFile(f);
+					if (res.error != null && res.error.getMessage().length() > 0) {
+						w += res.error.getMessage() + "\n";
 					}
 					result[k++] = res;
 				}
@@ -966,17 +970,19 @@ public class GpxUiHelper {
 
 	public static void setupGPXChart(OsmandApplication ctx, LineChart mChart, int yLabelsCount) {
 		OsmandSettings settings = ctx.getSettings();
-		boolean light = settings.isLightContent();
+		setupGPXChart(mChart, yLabelsCount, 24f, 16f, settings.isLightContent(), true);
+	}
 
+	public static void setupGPXChart(LineChart mChart, int yLabelsCount, float topOffset, float bottomOffset, boolean light, boolean useGesturesAndScale) {
 		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 			mChart.setHardwareAccelerationEnabled(false);
 		} else {
 			mChart.setHardwareAccelerationEnabled(true);
 		}
-		mChart.setTouchEnabled(true);
-		mChart.setDragEnabled(true);
-		mChart.setScaleEnabled(true);
-		mChart.setPinchZoom(true);
+		mChart.setTouchEnabled(useGesturesAndScale);
+		mChart.setDragEnabled(useGesturesAndScale);
+		mChart.setScaleEnabled(useGesturesAndScale);
+		mChart.setPinchZoom(useGesturesAndScale);
 		mChart.setScaleYEnabled(false);
 		mChart.setAutoScaleMinMaxEnabled(true);
 		mChart.setDrawBorders(false);
@@ -985,8 +991,8 @@ public class GpxUiHelper {
 		mChart.setMinOffset(0f);
 		mChart.setDragDecelerationEnabled(false);
 
-		mChart.setExtraTopOffset(24f);
-		mChart.setExtraBottomOffset(16f);
+		mChart.setExtraTopOffset(topOffset);
+		mChart.setExtraBottomOffset(bottomOffset);
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
@@ -1860,6 +1866,41 @@ public class GpxUiHelper {
 			return offset;
 		}
 	}
+
+
+	public static GPXFile makeGpxFromRoute(RouteCalculationResult route, OsmandApplication app) {
+		double lastHeight = HEIGHT_UNDEFINED;
+		GPXFile gpx = new GPXUtilities.GPXFile(Version.getFullVersion(app));
+		List<Location> locations = route.getRouteLocations();
+		if (locations != null) {
+			GPXUtilities.Track track = new GPXUtilities.Track();
+			GPXUtilities.TrkSegment seg = new GPXUtilities.TrkSegment();
+			for (Location l : locations) {
+				GPXUtilities.WptPt point = new GPXUtilities.WptPt();
+				point.lat = l.getLatitude();
+				point.lon = l.getLongitude();
+				if (l.hasAltitude()) {
+					gpx.hasAltitude = true;
+					float h = (float) l.getAltitude();
+					point.ele = h;
+					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
+						for (GPXUtilities.WptPt pt : seg.points) {
+							if (Double.isNaN(pt.ele)) {
+								pt.ele = h;
+							}
+						}
+					}
+					lastHeight = h;
+				}
+				seg.points.add(point);
+			}
+			track.segments.add(seg);
+			gpx.tracks.add(track);
+		}
+		return gpx;
+	}
+
+
 
 	public static class GPXInfo {
 		private String fileName;

@@ -187,7 +187,11 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 
 			@SuppressLint("MissingPermission")
 			override fun onGpsStatusChanged(event: Int) {
-				gpsStatus = service.getGpsStatus(gpsStatus)
+				try {
+					gpsStatus = service.getGpsStatus(gpsStatus)
+				} catch (e: Exception) {
+					e.printStackTrace()
+				}
 				updateGPSInfo(gpsStatus)
 				updateLocation(lastKnownLocation)
 			}

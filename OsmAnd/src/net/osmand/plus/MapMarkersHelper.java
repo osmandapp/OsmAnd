@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
@@ -15,8 +16,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -1019,7 +1020,7 @@ public class MapMarkersHelper {
 		while (fout.exists()) {
 			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
 		}
-		GPXFile file = new GPXFile();
+		GPXFile file = new GPXFile(Version.getFullVersion(ctx));
 		for (MapMarker marker : mapMarkers) {
 			WptPt wpt = new WptPt();
 			wpt.lat = marker.getLatitude();
@@ -1028,7 +1029,7 @@ public class MapMarkersHelper {
 			wpt.name = marker.getOnlyName();
 			file.addPoint(wpt);
 		}
-		GPXUtilities.writeGpxFile(fout, file, ctx);
+		GPXUtilities.writeGpxFile(fout, file);
 		return fout.getAbsolutePath();
 	}
 

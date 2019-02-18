@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_shop">Obchod</string>
 	<string name="poi_emergency">Núdzová situácia/Záchrana</string>
 	<string name="poi_transportation">Doprava</string>
@@ -159,7 +159,7 @@
 	<string name="poi_halt">Železničná zastávka</string>
 	<string name="poi_bus_station">Autobusová stanica</string>
 	<string name="poi_subway_entrance">Vchod do metra</string>
-	<string name="poi_subway_station">Stanica metra</string>
+	<string name="poi_subway_station">Áno</string>
 	<string name="poi_railway_buffer_stop">Železničná zarážka</string>
 	<string name="poi_taxi">Stanovište taxíkov</string>
 
@@ -957,7 +957,7 @@
 	<string name="poi_recycling_plastic_bags">Plastové tašky</string>
 	<string name="poi_recycling_hazardous_waste">Nebezpečný odpad</string>
 	<string name="poi_recycling_mobile_phones">Mobily</string>
-	<string name="poi_recycling_hydrargyrum">Hydrargyrum</string>
+	<string name="poi_recycling_hydrargyrum">Ortuť</string>
 	<string name="poi_recycling_computers">Počítače</string>
 	<string name="poi_recycling_tyres">Pneumatiky</string>
 	<string name="poi_recycling_tv_monitor">Obrazovky</string>
@@ -988,7 +988,7 @@
 	<string name="poi_recycling_bicycles">Bicykle</string>
 
 	<string name="poi_monitoring_station">Meracia stanica</string>
-	<string name="poi_capital">Hlavné mesto</string>
+	<string name="poi_capital">Áno</string>
 	<string name="poi_shower">Sprcha</string>
 	<string name="poi_animal_shelter_bird">Vtáky</string>
 
@@ -1564,7 +1564,7 @@
 	<string name="poi_drive_through_no">Prejazd autom: nie</string>
 
 	<string name="poi_brewery_additional">Názov pivovaru</string>
-	<string name="poi_microbrewery_yes">Minipivovar</string>
+	<string name="poi_microbrewery_yes">Áno</string>
 	<string name="poi_microbrewery_no">Žiadny minipivovar</string>
 
 	<string name="poi_takeaway_yes">Jedlo so sebou</string>
@@ -3024,7 +3024,7 @@
 	<string name="poi_cuisine_crepe">Palacinky</string>
 	<string name="poi_cuisine_breakfast">Raňajky</string>
 	<string name="poi_cuisine_beef_bowl">Gyudon</string>
-	<string name="poi_cuisine_steak">Steak</string>
+	<string name="poi_cuisine_steak">Stejk</string>
 	<string name="poi_cuisine_tapas">Tapas</string>
 	<string name="poi_cuisine_gastropub">Gastrokrčma</string>
 	<string name="poi_cuisine_heuriger">Heuriger</string>
@@ -3558,7 +3558,7 @@
 	<string name="poi_climbing_orientation_w">Smerovanie steny: Z</string>
 	<string name="poi_climbing_orientation_nw">Smerovanie steny: SZ</string>
 	<string name="poi_socket_chademo_yes">CHAdeMO</string>
-	<string name="poi_socket_tesla_standard_yes">Tesla standard</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla štandard</string>
 	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
 	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
 	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
@@ -3577,7 +3577,47 @@
 
 	<string name="poi_shoe_repair">Oprava obuvi</string>
 
-	<string name="poi_bulk_purchase_yes">Množstevný predaj: áno</string>
-	<string name="poi_bulk_purchase_only">Množstevný predaj: výhradne</string>
-
-	</resources>
+	<string name="poi_bulk_purchase_yes">Áno</string>
+	<string name="poi_bulk_purchase_only">Výhradne</string>
+    <string name="poi_books_type">Knihy</string>
+    <string name="poi_craft_confectionery">Výroba sladkostí</string>
+    <string name="poi_shop_wholesale">Veľkoobchod</string>
+    <string name="poi_laboratory">Zdravotnícke laboratórium</string>
+    <string name="poi_blood_donation">Darovanie krvi</string>
+    <string name="poi_books_comic">Komiksy</string>
+    <string name="poi_books_antiquarian">Starožitné</string>
+    <string name="poi_books_religion">Náboženské</string>
+    <string name="poi_books_academic">Odborné</string>
+    <string name="poi_books_children">Detské</string>
+    <string name="poi_atoll">Atol</string>
+    <string name="poi_childcare">Starostlivosť o deti</string>
+    <string name="poi_denotation_natural_monument">Prírodný monument</string>
+    <string name="poi_denotation">Výbuch</string>
+    <string name="poi_car_pooling">Miesto na spolujazdu autom</string>
+    <string name="poi_atm">Bankomat</string>
+    <string name="poi_pile">Hromada</string>
+    <string name="poi_seamark_clearance_height">Povolená výška</string>
+    <string name="poi_seamark_clearance_height_closed">Povolená výška (zatvorené)</string>
+    <string name="poi_seamark_clearance_height_open">Povolená výška (otvorené)</string>
+    <string name="poi_seamark_clearance_width">Povolená šírka</string>
+    <string name="poi_kent_carriage_gap">Bariéra pre vozy</string>
+    <string name="poi_health_specialty_acupuncture_yes">Akupunktúra</string>
+    <string name="poi_health_specialty_homeopathy_yes">Homeopatia</string>
+    <string name="poi_health_specialty_traditional_chinese_medicine_yes">Tradičná čínska medicína</string>
+    <string name="poi_health_specialty_reiki_yes">Reiki</string>
+    <string name="poi_health_specialty_herbalism_yes">Bylinkárstvo</string>
+    <string name="poi_bicycle_parking_tree">\"Strom\" na bicykle</string>
+    <string name="poi_tower_construction_lattice">Konštrukcia: mriežka</string>
+    <string name="poi_tower_construction_freestanding">Konštrukcia: voľne stojaca</string>
+    <string name="poi_tower_construction_dish">Konštrukcia: Parabola</string>
+    <string name="poi_tower_construction_dome">Konštrukcia: kupola</string>
+    <string name="poi_tower_construction_concealed">Konštrukcia: Skrytá/maskovaná</string>
+    <string name="poi_gorge">Tiesňava</string>
+    <string name="poi_mountain_area">Horská oblasť</string>
+    <string name="poi_surface_tartan">Tartan</string>
+    <string name="poi_agrarian">Poľnohospodárske potreby</string>
+    <string name="poi_service_vehicle_muffler_yes">Tlmiče zvuku</string>
+    <string name="poi_service_vehicle_alignment_yes">Geometria kolies</string>
+    <string name="poi_outcrop">Odkryté geologické vrstvy</string>
+    <string name="poi_license_classes">Skupiny vodičského oprávnenia</string>
+</resources>

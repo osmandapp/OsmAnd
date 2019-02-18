@@ -1894,6 +1894,16 @@ public class OsmandSettings {
 	public final static String START_POINT_DESCRIPTION_BACKUP = "start_point_description_backup"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS_BACKUP = "intermediate_points_backup"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS_DESCRIPTION_BACKUP = "intermediate_points_description_backup"; //$NON-NLS-1$
+	public final static String MY_LOC_POINT_LAT = "my_loc_point_lat";
+	public final static String MY_LOC_POINT_LON = "my_loc_point_lon";
+	public final static String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
+
+	public final static String HOME_POINT_LAT = "home_point_lat";
+	public final static String HOME_POINT_LON = "home_point_lon";
+	public final static String HOME_POINT_DESCRIPTION = "home_point_description";
+	public final static String WORK_POINT_LAT = "work_point_lat";
+	public final static String WORK_POINT_LON = "work_point_lon";
+	public final static String WORK_POINT_DESCRIPTION = "work_point_description";
 
 	private static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	private static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
@@ -1962,7 +1972,6 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 
-
 	public LatLon getPointToStart() {
 		float lat = settingsAPI.getFloat(globalPreferences, START_POINT_LAT, 0);
 		float lon = settingsAPI.getFloat(globalPreferences, START_POINT_LON, 0);
@@ -1973,15 +1982,104 @@ public class OsmandSettings {
 	}
 
 	public PointDescription getStartPointDescription() {
-		return
-				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""), getPointToStart());
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""), getPointToStart());
 	}
 
 	public PointDescription getPointNavigateDescription() {
-		return
-				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""), getPointToNavigate());
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""), getPointToNavigate());
 	}
 
+	public LatLon getPointToNavigateBackup() {
+		float lat = settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LAT_BACKUP, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, POINT_NAVIGATE_LON_BACKUP, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public LatLon getPointToStartBackup() {
+		float lat = settingsAPI.getFloat(globalPreferences, START_POINT_LAT_BACKUP, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, START_POINT_LON_BACKUP, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public PointDescription getStartPointDescriptionBackup() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION_BACKUP, ""), getPointToStart());
+	}
+
+	public PointDescription getPointNavigateDescriptionBackup() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION_BACKUP, ""), getPointToNavigate());
+	}
+
+	public LatLon getHomePoint() {
+		float lat = settingsAPI.getFloat(globalPreferences, HOME_POINT_LAT, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, HOME_POINT_LON, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public PointDescription getHomePointDescription() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, HOME_POINT_DESCRIPTION, ""), getHomePoint());
+	}
+
+	public LatLon getWorkPoint() {
+		float lat = settingsAPI.getFloat(globalPreferences, WORK_POINT_LAT, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, WORK_POINT_LON, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public PointDescription getWorkPointDescription() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, WORK_POINT_DESCRIPTION, ""), getWorkPoint());
+	}
+
+	public void setHomePoint(double latitude, double longitude, PointDescription p) {
+		settingsAPI.edit(globalPreferences).putFloat(HOME_POINT_LAT, (float) latitude).putFloat(HOME_POINT_LON, (float) longitude).commit();
+		settingsAPI.edit(globalPreferences).putString(HOME_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
+	}
+
+	public void setWorkPoint(double latitude, double longitude, PointDescription p) {
+		settingsAPI.edit(globalPreferences).putFloat(WORK_POINT_LAT, (float) latitude).putFloat(WORK_POINT_LON, (float) longitude).commit();
+		settingsAPI.edit(globalPreferences).putString(WORK_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
+	}
+
+	public LatLon getMyLocationToStart() {
+		float lat = settingsAPI.getFloat(globalPreferences, MY_LOC_POINT_LAT, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, MY_LOC_POINT_LON, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public PointDescription getMyLocationToStartDescription() {
+		return PointDescription.deserializeFromString(
+				settingsAPI.getString(globalPreferences, MY_LOC_POINT_DESCRIPTION, ""), getMyLocationToStart());
+	}
+
+	public void setMyLocationToStart(double latitude, double longitude, PointDescription p) {
+		settingsAPI.edit(globalPreferences).putFloat(MY_LOC_POINT_LAT, (float) latitude).putFloat(MY_LOC_POINT_LON, (float) longitude).commit();
+		settingsAPI.edit(globalPreferences).putString(MY_LOC_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
+	}
+
+	public void clearMyLocationToStart() {
+		settingsAPI.edit(globalPreferences).remove(MY_LOC_POINT_LAT).remove(MY_LOC_POINT_LON).
+				remove(MY_LOC_POINT_DESCRIPTION).commit();
+	}
 
 	public int isRouteToPointNavigateAndClear() {
 		int vl = settingsAPI.getInt(globalPreferences, POINT_NAVIGATE_ROUTE, 0);

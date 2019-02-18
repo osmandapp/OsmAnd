@@ -274,6 +274,7 @@ public class Amenity extends MapObject {
 				Algorithms.objectEquals(getLocation(), thatObj.getLocation()) &&
 				Algorithms.objectEquals(this.subType, thatObj.subType) &&
 				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo) &&
+				Algorithms.objectEquals(this.getName(), thatObj.getName()) &&
 				Algorithms.objectEquals(this.getNamesMap(true), thatObj.getNamesMap(true))) {
 			return true;
 		}

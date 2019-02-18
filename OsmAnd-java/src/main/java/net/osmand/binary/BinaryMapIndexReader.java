@@ -2078,14 +2078,14 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressSearch = false;
 	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = true;
+	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = true;
 	
-	private static int sleft = MapUtils.get31TileNumberX(4.7495);
-	private static int sright = MapUtils.get31TileNumberX(4.8608);
-	private static int stop = MapUtils.get31TileNumberY(52.3395);
-	private static int sbottom = MapUtils.get31TileNumberY(52.2589);
+	private static int sleft = MapUtils.get31TileNumberX(27.55079);
+	private static int sright = MapUtils.get31TileNumberX(27.55317);
+	private static int stop = MapUtils.get31TileNumberY(53.89378);
+	private static int sbottom = MapUtils.get31TileNumberY(53.89276);
 	private static int szoom = 15;
 
 	private static void println(String s) {
@@ -2094,7 +2094,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") + "/Map.obf");
+		fl = new File(System.getProperty("maps") + "/Belarus_europe_2.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2284,6 +2284,9 @@ public class BinaryMapIndexReader {
 				println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 						+ route.getAvgBothDistance());
 				StringBuilder b = new StringBuilder();
+				if(route.getForwardWays() == null) {
+					continue;
+				}
 				for(Way w : route.getForwardWays()) {
 					b.append(w.getNodes()).append(" ");
 				}

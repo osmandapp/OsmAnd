@@ -14,6 +14,7 @@ import net.osmand.util.Algorithms
 
 private const val GROUP_NAME = "share_location"
 private const val DISABLE_SHARING_ACTION = "disable_sharing_action"
+private const val DISABLE_MONITORING_ACTION = "disable_monitoring_action"
 
 class LocationNotification(app: TelegramApplication) : TelegramNotification(app, GROUP_NAME) {
 
@@ -23,6 +24,11 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 				app.stopSharingLocation()
 			}
 		}, IntentFilter(DISABLE_SHARING_ACTION))
+		app.registerReceiver(object : BroadcastReceiver() {
+			override fun onReceive(context: Context?, intent: Intent?) {
+				app.stopMonitoring()
+			}
+		}, IntentFilter(DISABLE_MONITORING_ACTION))
 	}
 
 	override val type: TelegramNotification.NotificationType
@@ -66,10 +72,17 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 				PendingIntent.FLAG_UPDATE_CURRENT
 			)
 		} else {
-			notificationTitle = app.getString(R.string.show_users_on_map)
+			notificationTitle = app.getString(R.string.location_recording_enabled)
 			notificationText = app.getString(R.string.active_chats) + ": " + app.settings.getShowOnMapChatsCount()
 			color = 0
-			icon = R.drawable.ic_action_view
+			icon = R.drawable.ic_action_timeline
+			actionTextId = R.string.disable_monitoring
+			actionIntent = PendingIntent.getBroadcast(
+				app,
+				0,
+				Intent(DISABLE_MONITORING_ACTION),
+				PendingIntent.FLAG_UPDATE_CURRENT
+			)
 		}
 
 		return createBuilder(wearable)
@@ -77,6 +90,6 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 				.setStyle(NotificationCompat.BigTextStyle().bigText(notificationText))
 	}
 
-	private fun isShowingChatsNotificationEnabled() = !app.showLocationHelper.isUseOsmandCallback()
-			&& app.isOsmAndInstalled() && app.settings.hasAnyChatToShowOnMap()
+	private fun isShowingChatsNotificationEnabled() = (!app.showLocationHelper.isUseOsmandCallback() || app.settings.monitoringEnabled)
+			&& app.isAnyOsmAndInstalled() && app.settings.hasAnyChatToShowOnMap()
 }

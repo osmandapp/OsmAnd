@@ -1,5 +1,7 @@
 package net.osmand.plus.transport;
 
+import android.util.Pair;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -9,7 +11,9 @@ import net.osmand.plus.R;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransportStopRoute {
 	public TransportStop refStop;
@@ -21,6 +25,7 @@ public class TransportStopRoute {
 	public boolean showWholeRoute;
 	private int cachedColor;
 	private boolean cachedNight;
+	private Map<Pair<String, Boolean>, Integer> cachedRouteColors = new HashMap<>();
 
 	public String getDescription(OsmandApplication ctx, boolean useDistance) {
 		if (useDistance && distance > 0) {
@@ -66,7 +71,29 @@ public class TransportStopRoute {
 				}
 			}
 		}
+		return cachedColor;
+	}
 
+	public int getRouteColor(OsmandApplication ctx, boolean nightMode) {
+		Integer cachedColor = null;
+		if (route != null) {
+			Pair<String, Boolean> key = new Pair<>(route.getType(), nightMode);
+			cachedColor = cachedRouteColors.get(key);
+			if (cachedColor == null) {
+				RenderingRulesStorage rrs = ctx.getRendererRegistry().getCurrentSelectedRenderer();
+				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+				req.setStringFilter(rrs.PROPS.R_TAG, "pt_line");
+				req.setStringFilter(rrs.PROPS.R_VALUE, route.getType());
+				if (req.searchRenderingAttribute("publicTransportLine")) {
+					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
+				}
+				cachedRouteColors.put(key, cachedColor);
+			}
+		}
+		if (cachedColor == null || cachedColor == 0) {
+			cachedColor = getColor(ctx, nightMode);
+		}
 		return cachedColor;
 	}
 

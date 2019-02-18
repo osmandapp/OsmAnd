@@ -2,7 +2,7 @@ package net.osmand.plus.views;
 
 import android.os.AsyncTask;
 
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;

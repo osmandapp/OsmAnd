@@ -3872,4 +3872,20 @@
 
 	<string name="poi_atoll">Атолл</string>
 
+	<string name="poi_toll_gantry">Рамка оплаты</string>
+
+	<string name="poi_childcare">Уход за детьми</string>
+
+	<string name="poi_denotation">Значение</string>
+	<string name="poi_denotation_natural_monument">Памятник природы</string>
+	<string name="poi_denotation_landmark">Ориентир</string>
+
+	<string name="poi_park_ride">Перехватывающая парковка</string>
+	<string name="poi_park_ride_yes">Да</string>
+	<string name="poi_park_ride_train">Поезд</string>
+	<string name="poi_park_ride_bus">Автобус</string>
+	<string name="poi_park_ride_metro">Метро</string>
+	<string name="poi_park_ride_tram">Трамвай</string>
+	<string name="poi_park_ride_ferry">Паром</string>
+
 </resources>

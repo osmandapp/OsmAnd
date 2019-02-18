@@ -40,7 +40,8 @@
 				android:layout_marginEnd="@dimen/content_padding_standard"
 				android:layout_marginRight="@dimen/content_padding_standard"
 				android:layout_weight="1"
-				android:orientation="vertical">
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/content_padding_half">
 
 				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/title"
@@ -55,40 +56,79 @@
 					tools:text="Share location"/>
 
 				<LinearLayout
-					android:id="@+id/group_container"
+					android:id="@+id/details_container"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:gravity="center_vertical"
-					android:visibility="gone"
-					tools:visibility="visible">
+					android:paddingBottom="2dp"
+					android:gravity="center_vertical">
 
-					<ImageView
-						android:id="@+id/group_icon"
-						android:layout_width="@dimen/list_item_icon_size_small"
-						android:layout_height="@dimen/list_item_icon_size_small"
-						android:layout_gravity="bottom"
-						android:layout_marginEnd="@dimen/content_padding_small"
-						android:layout_marginRight="@dimen/content_padding_small"
-						tools:src="@drawable/img_group_picture" />
-
-					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/group_title"
+					<LinearLayout
+						android:id="@+id/distance_and_points_container"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:ellipsize="end"
-						android:maxLines="1"
-						android:textColor="?attr/android:textColorSecondary"
-						android:textSize="@dimen/list_item_description_text_size"
-						app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height"
-						app:typeface="@string/font_roboto_regular"
-						tools:text="@string/shared_string_group" />
+						android:orientation="horizontal"
+						android:visibility="gone"
+						tools:visibility="visible">
+
+						<ImageView
+							android:id="@+id/distance_icon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="bottom"
+							android:layout_marginEnd="@dimen/content_padding_small"
+							android:layout_marginRight="@dimen/content_padding_small"
+							tools:src="@drawable/ic_action_distance_16dp"
+							tools:tint="@color/icon_light" />
+
+						<net.osmand.telegram.ui.views.TextViewEx
+							android:id="@+id/distance_and_points_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:maxLines="1"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/list_item_description_text_size"
+							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
+							app:typeface="@string/font_roboto_regular"
+							tools:text="213 m" />
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/group_container"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:visibility="gone"
+						tools:visibility="visible">
+
+						<ImageView
+							android:id="@+id/group_icon"
+							android:layout_width="@dimen/list_item_icon_size_small"
+							android:layout_height="@dimen/list_item_icon_size_small"
+							android:layout_gravity="bottom"
+							android:layout_marginEnd="@dimen/content_padding_small"
+							android:layout_marginRight="@dimen/content_padding_small"
+							tools:src="@drawable/img_group_picture" />
+
+						<net.osmand.telegram.ui.views.TextViewEx
+							android:id="@+id/group_title"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:ellipsize="end"
+							android:maxLines="1"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/list_item_description_text_size"
+							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
+							app:typeface="@string/font_roboto_regular"
+							tools:text="@string/shared_string_group" />
+
+					</LinearLayout>
 
 				</LinearLayout>
 
 				<LinearLayout
+					android:id="@+id/location_with_descr_container"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:paddingBottom="@dimen/content_padding_half">
+					android:layout_height="wrap_content">
 
 					<LinearLayout
 						android:id="@+id/location_view_container"
@@ -114,7 +154,7 @@
 							android:layout_height="wrap_content"
 							android:maxLines="1"
 							android:textSize="@dimen/list_item_description_text_size"
-							app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height_small"
+							app:firstBaselineToTopHeight="18dp"
 							app:typeface="@string/font_roboto_medium"
 							tools:text="213 m"
 							tools:textColor="@color/ctrl_active_light"/>
@@ -128,7 +168,7 @@
 							android:textColor="?attr/android:textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
 							android:visibility="visible"
-							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right" />
+							app:firstBaselineToTopHeight="18dp" />
 
 					</LinearLayout>
 
@@ -141,9 +181,31 @@
 						android:maxLines="1"
 						android:textColor="?attr/android:textColorSecondary"
 						android:textSize="@dimen/list_item_description_text_size"
-						app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
+						app:firstBaselineToTopHeight="18dp"
 						app:typeface="@string/font_roboto_regular"
 						tools:text="Live: 1 • All: 36"/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/received_gps_points_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:visibility="gone"
+					tools:visibility="visible">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/received_gps_points_description"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?attr/android:textColorSecondary"
+						android:textSize="@dimen/list_item_description_text_size"
+						app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
+						app:typeface="@string/font_roboto_regular"
+						tools:text="@string/received_gps_points" />
 
 				</LinearLayout>
 

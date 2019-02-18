@@ -103,6 +103,9 @@
 
 		<attr name="text_rounded_bg_regular" format="reference" />
 		<attr name="text_rounded_bg_active" format="reference" />
+
+		<attr name="menu_bottom_sheet_icon_color" format="reference" />
+		<attr name="route_info_control_icon_color" format="reference" />
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

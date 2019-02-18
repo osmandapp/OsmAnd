@@ -28,7 +28,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndConstants;
@@ -48,8 +48,6 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import gnu.trove.list.array.TIntArrayList;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
@@ -93,8 +91,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float textSize;
 	private int verticalOffset;
 
-	private TIntArrayList tx = new TIntArrayList();
-	private TIntArrayList ty = new TIntArrayList();
+	private List<Float> tx = new ArrayList<>();
+	private List<Float> ty = new ArrayList<>();
 	private Path linePath = new Path();
 
 	private LatLon fingerLocation;
@@ -233,7 +231,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		OsmandSettings settings = map.getMyApplication().getSettings();
+		OsmandApplication app = map.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_MAP_MARKERS.get()) {
 			return;
 		}
@@ -244,47 +243,46 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			myLoc.setLatitude(fingerLocation.getLatitude());
 			myLoc.setLongitude(fingerLocation.getLongitude());
 		} else {
-			myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		}
-		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (route != null && route.points.size() > 0) {
-			planRouteAttrs.updatePaints(view, nightMode, tileBox);
-			route.renders.clear();
-			route.renders.add(new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2));
-			route.drawRenderers(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
+			planRouteAttrs.updatePaints(app, nightMode, tileBox);
+			new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
+					drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
 			textAttrs.paint.setTextSize(textSize);
 			textAttrs.paint2.setTextSize(textSize);
 
-			lineAttrs.updatePaints(view, nightMode, tileBox);
-			textAttrs.updatePaints(view, nightMode, tileBox);
+			lineAttrs.updatePaints(app, nightMode, tileBox);
+			textAttrs.updatePaints(app, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
 
 			textPaint.set(textAttrs.paint);
 
 			boolean drawMarkerName = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
 
-			int locX;
-			int locY;
+			float locX;
+			float locY;
 			if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()
 					&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(myLoc)
 					&& !map.getMapViewTrackingUtilities().isMovingToMyLocation()) {
-				locX = (int) tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
-				locY = (int) tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+				locX = tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
+				locY = tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
 			} else {
-				locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
-				locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+				locX = tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+				locY = tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
 			}
 			int[] colors = MapMarker.getColors(map);
 			for (int i = 0; i < activeMapMarkers.size() && i < displayedWidgets; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
-				int markerX = (int) tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
-				int markerY = (int) tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
+				float markerX = tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
+				float markerY = tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
 
 				linePath.reset();
 				tx.clear();

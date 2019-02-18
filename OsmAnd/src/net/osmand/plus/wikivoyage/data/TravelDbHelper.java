@@ -12,8 +12,8 @@ import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -615,7 +615,7 @@ public class TravelDbHelper {
 		res.aggregatedPartOf = cursor.getString(11);
 		try {
 			String gpxContent = Algorithms.gzipToString(cursor.getBlob(6));
-			res.gpxFile = GPXUtilities.loadGPXFile(application, new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+			res.gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
@@ -639,7 +639,7 @@ public class TravelDbHelper {
 		final GPXFile gpx = article.getGpxFile();
 		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
 		if (!file.exists()) {
-			GPXUtilities.writeGpxFile(file, gpx, application);
+			GPXUtilities.writeGpxFile(file, gpx);
 		}
 		return file;
 	}

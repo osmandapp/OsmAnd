@@ -125,6 +125,7 @@
 			android:background="@android:color/transparent">
 
 			<ScrollView
+				android:id="@+id/scroll_view"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:fillViewport="true">
@@ -349,6 +350,125 @@
 								android:textColor="@color/app_bar_title_light"
 								android:textSize="@dimen/descr_text_size"
 								tools:text="@string/get_telegram_after_creating_account" />
+
+						</LinearLayout>
+
+						<LinearLayout
+							android:id="@+id/privacy_policy_layout"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="vertical"
+							android:paddingBottom="@dimen/content_padding_standard"
+							android:visibility="gone"
+							tools:visibility="gone">
+
+							<TextView
+								android:id="@+id/privacy_policy_telegram_descr"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginLeft="@dimen/content_padding_standard"
+								android:layout_marginTop="@dimen/dialog_description_margin"
+								android:layout_marginRight="@dimen/content_padding_standard"
+								android:layout_marginBottom="@dimen/content_padding_standard"
+								android:letterSpacing="@dimen/text_description_letter_spacing"
+								android:lineSpacingMultiplier="@dimen/text_description_line_spacing_multiplier"
+								android:text="@string/privacy_policy_telegram_client"
+								android:textColor="@color/app_bar_title_light"
+								android:textSize="@dimen/descr_text_size" />
+
+							<TextView
+								android:id="@+id/privacy_policy_agree"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginLeft="@dimen/content_padding_standard"
+								android:layout_marginTop="@dimen/dialog_description_margin"
+								android:layout_marginRight="@dimen/content_padding_standard"
+								android:layout_marginBottom="@dimen/content_padding_standard"
+								android:letterSpacing="@dimen/text_description_letter_spacing"
+								android:lineSpacingMultiplier="@dimen/text_description_line_spacing_multiplier"
+								android:text="@string/privacy_policy_agree"
+								android:textColor="@color/app_bar_title_light"
+								android:textSize="@dimen/descr_text_size"
+								android:textStyle="bold" />
+
+							<LinearLayout
+								android:id="@+id/telegram_privacy_policy_btn"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginBottom="@dimen/content_padding_half"
+								android:background="@drawable/btn_border_bg"
+								android:gravity="center_vertical"
+								android:visibility="visible">
+
+								<net.osmand.telegram.ui.views.TextViewEx
+									android:id="@+id/telegram_privacy_policy_title"
+									android:layout_width="0dp"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="@dimen/content_padding_standard"
+									android:layout_marginTop="10dp"
+									android:layout_marginRight="@dimen/content_padding_standard"
+									android:layout_marginBottom="10dp"
+									android:layout_weight="1"
+									android:ellipsize="end"
+									android:gravity="center_vertical"
+									android:letterSpacing="@dimen/text_description_letter_spacing"
+									android:text="@string/do_not_have_telegram"
+									android:textColor="@color/text_bold_highlight"
+									android:textSize="@dimen/hint_text_size"
+									android:textStyle="bold" />
+
+
+								<ImageView
+									android:id="@+id/telegram_privacy_policy_icon"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginEnd="@dimen/content_padding_standard"
+									android:layout_marginRight="@dimen/content_padding_standard"
+									android:contentDescription="@string/do_not_have_telegram"
+									android:scaleType="centerInside"
+									tools:src="@drawable/ic_arrow_forward"
+									tools:tint="@color/text_bold_highlight" />
+
+							</LinearLayout>
+
+							<LinearLayout
+								android:id="@+id/osmand_privacy_policy_btn"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginBottom="@dimen/content_padding_half"
+								android:background="@drawable/btn_border_bg"
+								android:gravity="center_vertical"
+								android:visibility="visible">
+
+								<net.osmand.telegram.ui.views.TextViewEx
+									android:id="@+id/osmand_privacy_policy_title"
+									android:layout_width="0dp"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="@dimen/content_padding_standard"
+									android:layout_marginTop="10dp"
+									android:layout_marginRight="@dimen/content_padding_standard"
+									android:layout_marginBottom="10dp"
+									android:layout_weight="1"
+									android:ellipsize="end"
+									android:gravity="center_vertical"
+									android:letterSpacing="@dimen/text_description_letter_spacing"
+									android:text="@string/do_not_have_telegram"
+									android:textColor="@color/text_bold_highlight"
+									android:textSize="@dimen/hint_text_size"
+									android:textStyle="bold" />
+
+								<ImageView
+									android:id="@+id/osmand_privacy_policy_icon"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginEnd="@dimen/content_padding_standard"
+									android:layout_marginRight="@dimen/content_padding_standard"
+									android:contentDescription="@string/do_not_have_telegram"
+									android:scaleType="centerInside"
+									tools:src="@drawable/ic_arrow_forward"
+									tools:tint="@color/text_bold_highlight"  />
+
+							</LinearLayout>
 
 						</LinearLayout>
 

@@ -74,9 +74,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			itemsContainer.setVisibility(View.VISIBLE);
 		}
 
-		for (BaseBottomSheetItem item : items) {
-			item.inflate(app, itemsContainer, nightMode);
-		}
+		inflateMenuItems();
 
 		int bottomDividerColorId = getBottomDividerColorId();
 		if (bottomDividerColorId != DEFAULT_VALUE) {
@@ -90,24 +88,29 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				dismiss();
 			}
 		});
-		((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
+		if (hideButtonsContainer()) {
+			mainView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
+			mainView.findViewById(R.id.buttons_container).setVisibility(View.GONE);
+		} else {
+			((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
 
-		int rightBottomButtonTextId = getRightBottomButtonTextId();
-		if (rightBottomButtonTextId != DEFAULT_VALUE) {
-			View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
-			buttonsDivider.setVisibility(View.VISIBLE);
-			if (bottomDividerColorId != DEFAULT_VALUE) {
-				buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
-			}
-			View rightButton = mainView.findViewById(R.id.right_bottom_button);
-			rightButton.setVisibility(View.VISIBLE);
-			rightButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onRightBottomButtonClick();
+			int rightBottomButtonTextId = getRightBottomButtonTextId();
+			if (rightBottomButtonTextId != DEFAULT_VALUE) {
+				View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
+				buttonsDivider.setVisibility(View.VISIBLE);
+				if (bottomDividerColorId != DEFAULT_VALUE) {
+					buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
 				}
-			});
-			((TextView) rightButton.findViewById(R.id.right_bottom_button_text)).setText(rightBottomButtonTextId);
+				View rightButton = mainView.findViewById(R.id.right_bottom_button);
+				rightButton.setVisibility(View.VISIBLE);
+				rightButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onRightBottomButtonClick();
+					}
+				});
+				((TextView) rightButton.findViewById(R.id.right_bottom_button_text)).setText(rightBottomButtonTextId);
+			}
 		}
 
 		setupHeightAndBackground(mainView);
@@ -143,6 +146,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	public abstract void createMenuItems(Bundle savedInstanceState);
 
+	protected void inflateMenuItems(){
+		OsmandApplication app = getMyApplication();
+		for (BaseBottomSheetItem item : items) {
+			item.inflate(app, itemsContainer, nightMode);
+		}
+	}
+
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
@@ -174,7 +184,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			public void onGlobalLayout() {
 				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
-					contentView.getLayoutParams().height = contentHeight;
+					if (useScrollableItemsContainer()) {
+						contentView.getLayoutParams().height = contentHeight;
+					} else {
+						contentView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+					}
 					contentView.requestLayout();
 				}
 
@@ -182,6 +196,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
 					mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
+					if (!showTopShadow) {
+						mainView.setPadding(0, 0, 0, 0);
+					}
 				} else {
 					mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
 				}
@@ -213,6 +230,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected boolean useScrollableItemsContainer() {
 		return true;
+	}
+
+	protected boolean hideButtonsContainer() {
+		return false;
 	}
 
 	@ColorRes

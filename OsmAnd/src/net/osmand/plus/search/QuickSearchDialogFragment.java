@@ -60,9 +60,9 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -70,6 +70,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -207,7 +208,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		START_POINT,
 		DESTINATION,
 		DESTINATION_AND_START,
-		INTERMEDIATE
+		INTERMEDIATE,
+		HOME_POINT,
+		WORK_POINT;
+
+		public boolean isTargetPoint() {
+			return this != QuickSearchType.REGULAR;
+		}
 	}
 
 	@Override
@@ -383,7 +390,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							SearchWord word = searchPhrase.getLastSelectedWord();
 							if (word != null) {
-								if (isSelectingTargetPoint() && word.getLocation() != null) {
+								if (searchType.isTargetPoint() && word.getLocation() != null) {
 									if (mainSearchFragment != null) {
 										mainSearchFragment.showResult(word.getResult());
 									}
@@ -700,13 +707,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		return dialog;
 	}
 
-	public boolean isSelectingTargetPoint() {
-		return searchType == QuickSearchType.START_POINT
-				|| searchType == QuickSearchType.DESTINATION
-				|| searchType == QuickSearchType.DESTINATION_AND_START
-				|| searchType == QuickSearchType.INTERMEDIATE;
-	}
-
 	public void saveCustomFilter() {
 		final OsmandApplication app = getMyApplication();
 		final PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
@@ -870,7 +870,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
 		} else if (searchEditText.getText().length() > 0) {
-			if (isSelectingTargetPoint()) {
+			if (searchType.isTargetPoint()) {
 				if (word != null && word.getResult() != null) {
 					buttonToolbarText.setText(app.getString(R.string.shared_string_select).toUpperCase() + " " + word.getResult().localeName.toUpperCase());
 				} else {
@@ -1091,7 +1091,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchWord lastWord = searchUICore.getPhrase().getLastSelectedWord();
 			boolean buttonToolbarVisible = (isOnlineSearch() && !isTextEmpty())
 					|| !searchUICore.getSearchSettings().isCustomSearch();
-			if (isSelectingTargetPoint() && (lastWord == null || lastWord.getLocation() == null)) {
+			if (searchType.isTargetPoint() && (lastWord == null || lastWord.getLocation() == null)) {
 				buttonToolbarVisible = false;
 			}
 			buttonToolbarView.setVisibility(buttonToolbarVisible ? View.VISIBLE : View.GONE);
@@ -1861,7 +1861,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (!buttonToolbarVisible) {
 			if (lastWord == null) {
 				buttonToolbarVisible = true;
-			} else if (isSelectingTargetPoint() && lastWord.getLocation() != null) {
+			} else if (searchType.isTargetPoint() && lastWord.getLocation() != null) {
 				buttonToolbarVisible = true;
 			}
 		}
@@ -2123,7 +2123,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
 				@Override
 				protected GPXFile doInBackground(Void... params) {
-					GPXFile gpx = new GPXFile();
+					GPXFile gpx = new GPXFile(Version.getFullVersion(getMyApplication()));
 					for (HistoryEntry h : historyEntries) {
 						WptPt pt = new WptPt();
 						pt.lat = h.getLat();
@@ -2151,11 +2151,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						dir.mkdir();
 					}
 					File dst = new File(dir, "History.gpx");
-					GPXUtilities.writeGpxFile(dst, gpxFile, app);
+					GPXUtilities.writeGpxFile(dst, gpxFile);
 
 					final Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, app));
+					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
 					sendIntent.setType("text/plain");

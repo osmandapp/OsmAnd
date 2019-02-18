@@ -55,9 +55,9 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -65,6 +65,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -136,7 +137,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		
 		lightTheme = app.getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-		newGpxFile = new GPXFile();
+		newGpxFile = new GPXFile(Version.getFullVersion(app));
 		savingTrackHelper = app.getSavingTrackHelper();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 	}
@@ -357,7 +358,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		setupSideOfTheWorldBtns(R.id.lat_side_of_the_world_btn, R.id.lon_side_of_the_world_btn);
 
-		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.route_info_divider_light : R.color.route_info_divider_dark);
+		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.ctx_menu_buttons_divider_light : R.color.ctx_menu_buttons_divider_dark);
 		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
 
 		ImageView pointNameKeyboardBtn = (ImageView) mainView.findViewById(R.id.point_name_keyboard_btn);
@@ -1499,10 +1500,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					while (fout.exists()) {
 						fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
 					}
-					GPXUtilities.writeGpxFile(fout, gpx, app);
+					GPXUtilities.writeGpxFile(fout, gpx);
 				}
 			} else {
-				GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
+				GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
 			}
 			return null;
 		}

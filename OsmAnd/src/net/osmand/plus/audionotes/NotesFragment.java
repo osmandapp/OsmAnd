@@ -29,12 +29,13 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.NotesSortByMode;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -487,7 +488,7 @@ public class NotesFragment extends OsmAndListFragment {
 	private File generateGPXForRecordings(Set<Recording> selected) {
 		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
-		GPXFile file = new GPXFile();
+		GPXFile file = new GPXFile(Version.getFullVersion(getMyApplication()));
 		for (Recording r : getRecordingsForGpx(selected)) {
 			if (r != SHARE_LOCATION_FILE) {
 				String desc = r.getDescriptionName(r.getFileName());
@@ -505,7 +506,7 @@ public class NotesFragment extends OsmAndListFragment {
 				getMyApplication().getSelectedGpxHelper().addPoint(wpt, file);
 			}
 		}
-		GPXUtilities.writeGpxFile(tmpFile, file, getMyApplication());
+		GPXUtilities.writeGpxFile(tmpFile, file);
 		return tmpFile;
 	}
 

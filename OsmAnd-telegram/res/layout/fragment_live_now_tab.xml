@@ -129,13 +129,20 @@
 			android:visibility="gone"
 			app:typeface="@string/font_roboto_regular" />
 
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/recycler_view"
+		<android.support.v4.widget.SwipeRefreshLayout
+			android:id="@+id/swipe_refresh"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:clipToPadding="false"
-			android:paddingBottom="@dimen/list_item_content_margin"
-			android:scrollbars="vertical"/>
+			android:layout_height="match_parent">
+
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/recycler_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clipToPadding="false"
+				android:paddingBottom="@dimen/list_item_content_margin"
+				android:scrollbars="vertical" />
+
+		</android.support.v4.widget.SwipeRefreshLayout>
 
 		<net.osmand.telegram.ui.views.TextViewEx
 			android:id="@+id/open_osmand_btn"

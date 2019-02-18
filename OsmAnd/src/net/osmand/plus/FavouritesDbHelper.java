@@ -4,11 +4,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -46,7 +48,7 @@ public class FavouritesDbHelper {
 	private List<FavoriteGroup> favoriteGroups = new ArrayList<FavouritesDbHelper.FavoriteGroup>();
 	private Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<String, FavouritesDbHelper.FavoriteGroup>();
 	private final OsmandApplication context;
-	protected static final String HIDDEN = "HIDDEN";
+	protected static final String HIDDEN = "hidden";
 	private static final String DELIMETER = "__";
 
 	private Set<FavoritesListener> listeners = new HashSet<>();
@@ -351,12 +353,12 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	public String exportFavorites() {
+	public Exception exportFavorites() {
 		return saveExternalFile(null);
 	}
 
 
-	private String saveExternalFile(Set<String> deleted) {
+	private Exception saveExternalFile(Set<String> deleted) {
 		Map<String, FavouritePoint> all = new LinkedHashMap<String, FavouritePoint>();
 		loadGPXFile(getExternalFile(), all);
 		List<FavouritePoint> favoritePoints = new ArrayList<FavouritePoint>(cachedFavoritePoints);
@@ -420,9 +422,9 @@ public class FavouritesDbHelper {
 		return firstModified;
 	}
 
-	public String saveFile(List<FavouritePoint> favoritePoints, File f) {
+	public Exception saveFile(List<FavouritePoint> favoritePoints, File f) {
 		GPXFile gpx = asGpxFile(favoritePoints);
-		return GPXUtilities.writeGpxFile(f, gpx, context);
+		return GPXUtilities.writeGpxFile(f, gpx);
 	}
 
 
@@ -431,7 +433,7 @@ public class FavouritesDbHelper {
 	}
 
 	private GPXFile asGpxFile(List<FavouritePoint> favoritePoints) {
-		GPXFile gpx = new GPXFile();
+		GPXFile gpx = new GPXFile(Version.getFullVersion(context));
 		for (FavouritePoint p : favoritePoints) {
 			WptPt pt = new WptPt();
 			pt.lat = p.getLatitude();
@@ -606,8 +608,8 @@ public class FavouritesDbHelper {
 		if (!file.exists()) {
 			return false;
 		}
-		GPXFile res = GPXUtilities.loadGPXFile(context, file);
-		if (res.warning != null) {
+		GPXFile res = GPXUtilities.loadGPXFile(file);
+		if (res.error != null) {
 			return false;
 		}
 		for (WptPt p : res.getPoints()) {

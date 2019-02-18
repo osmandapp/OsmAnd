@@ -10,6 +10,34 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="previous_route">Previous route</string>
+	<string name="add_home">Add home</string>
+	<string name="add_work">Add work</string>
+	<string name="work_button">Work</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Сapacity</string>
+    <string name="shared_string_width">Width</string>
+    <string name="shared_string_height">Height</string>
+    <string name="swap_start_and_destination">Swap start and destination</string>
+    <string name="add_destination_point">Add destination</string>
+    <string name="add_intermediate_point">Add intermediate</string>
+    <string name="add_start_point">Add Start point</string>
+    <string name="intermediate_waypoint">Intermediate point: %1$s</string>
+    <string name="waypoints">Waypoints: %1$s</string>
+    <string name="transfers">transfers: %1$s</string>
+    <string name="on_foot">on foot: %1$s</string>
+    <string name="route_way">Way: %1$s</string>
+    <string name="points_of_interests">Points of interests(POI)</string>
+    <string name="waiting_for_route_calculation">Waiting for route calculation</string>
+    <string name="app_mode_public_transport">Public transport</string>
+    <string name="avoid_roads_descr">Select road on the map or from the list below that you want to avoid during navigation:</string>
+    <string name="show_along_the_route">Show along the route</string>
+    <string name="simulate_navigation">Simulate navigation</string>
+    <string name="choose_track_file_to_follow">Choose track file to follow</string>
+    <string name="voice_announcements">Voice announcements</string>
+    <string name="intermediate_destinations">Intermediate destinations: %1$s</string>
+    <string name="arrive_at_time">Arrive at %1$s</string>
     <string name="osm_live_subscriptions">Subscriptions</string>
     <string name="powered_by_osmand">Powered by OsmAnd</string>
     <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
@@ -2969,6 +2997,10 @@
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
     <string name="test_voice_desrc">Tap a button and listen to the corresponding voice prompt to identify missing or faulty prompts.</string>
+    <string name="route_class_stat_container">Class</string>
+    <string name="route_surface_stat_container">Surface</string>
+    <string name="route_smoothness_stat_container">Smoothness</string>
+    <string name="route_steepness_stat_container">Steepness</string>
     <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
 </resources>

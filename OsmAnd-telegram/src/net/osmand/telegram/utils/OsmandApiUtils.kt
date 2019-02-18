@@ -11,6 +11,7 @@ import org.json.JSONObject
 const val BASE_URL = "https://live.osmand.net"
 
 const val BASE_SHARING_URL = "http://osmand.net/go"
+const val GEO_IP_URL = "https://osmand.net/api/geo-ip"
 
 object OsmandApiUtils {
 
@@ -41,6 +42,10 @@ object OsmandApiUtils {
 		if (json != null) {
 			AndroidNetworkUtils.sendRequestAsync(app, "$BASE_URL/device/new", json.toString(), "add Device", true, true, listener)
 		}
+	}
+
+	fun getLocationByIp(app: TelegramApplication, listener: AndroidNetworkUtils.OnRequestResultListener) {
+		AndroidNetworkUtils.sendRequestAsync(app, GEO_IP_URL, null, "get location by IP", false, false, listener)
 	}
 
 	fun parseDeviceBot(deviceJSON: JSONObject): TelegramSettings.DeviceBot? {

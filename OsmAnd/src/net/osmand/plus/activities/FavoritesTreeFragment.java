@@ -32,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -63,11 +62,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.logging.Log;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
-	public final static Log log = PlatformUtil.getLog(FavoritesTreeFragment.class);
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
 	// public static final int IMPORT_ID = 1;
@@ -625,9 +622,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		} else if (!tosave.getParentFile().exists()) {
 			Toast.makeText(getActivity(), R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 		} else {
-			final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>() {
+			final AsyncTask<Void, Void, Exception > exportTask = new AsyncTask<Void, Void, Exception >() {
 				@Override
-				protected String doInBackground(Void... params) {
+				protected Exception doInBackground(Void... params) {
 					return helper.exportFavorites();
 				}
 
@@ -637,7 +634,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				}
 
 				@Override
-				protected void onPostExecute(String warning) {
+				protected void onPostExecute(Exception  warning) {
 					hideProgressBar();
 					if (warning == null) {
 						Toast.makeText(
@@ -645,7 +642,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 								MessageFormat.format(getString(R.string.fav_saved_sucessfully),
 										tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
 					} else {
-						Toast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), warning.getMessage(), Toast.LENGTH_LONG).show();
 					}
 				}
 			};

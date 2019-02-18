@@ -10,14 +10,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.Route;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Route;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -235,7 +236,10 @@ public class RouteProvider {
 			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
 			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 			if (!file.isPointsEmpty()) {
-				wpt = new ArrayList<LocationPoint>(file.getPoints());
+				wpt = new ArrayList<LocationPoint>(file.getPoints().size());
+				for(WptPt w : file.getPoints()) {
+					wpt.add(new WptLocationPoint(w));
+				}
 			}
 			if (file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)) {
 				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
@@ -648,6 +652,9 @@ public class RouteProvider {
 				&& precalculated == null;
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
+		ctx.publicTransport = params.inPublicTransportMode;
+		ctx.startTransportStop = params.startTransportStop;
+		ctx.targetTransportStop = params.targetTransportStop;
 		if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
 			int currentRoute = params.previousToRecalculate.getCurrentRoute();
 			List<RouteSegmentResult> originalRoute = params.previousToRecalculate.getOriginalRoute();
@@ -945,7 +952,7 @@ public class RouteProvider {
 		List<RouteDirectionInfo> directionInfo = srcRoute.getImmutableAllDirections();
 		int currentDirectionInfo = srcRoute.currentDirectionInfo;
 
-		GPXFile gpx = new GPXFile();
+		GPXFile gpx = new GPXFile(Version.getFullVersion(ctx));
 		gpx.author = OSMAND_ROUTER;
 		Track track = new Track();
 		track.name = name;
@@ -1173,8 +1180,7 @@ public class RouteProvider {
 				return new RouteCalculationResult(gpxMessage);
 			}
 
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(
-					ctx, new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
 
 			for (Track track : gpxFile.tracks) {
 				for (TrkSegment ts : track.segments) {

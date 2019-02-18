@@ -3,6 +3,7 @@ package net.osmand.telegram.ui
 import android.animation.*
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -13,13 +14,17 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
 import net.osmand.telegram.ADDITIONAL_ACTIVE_TIME_VALUES_SEC
 import net.osmand.telegram.R
+import net.osmand.telegram.SHARE_TYPE_MAP
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
@@ -159,14 +164,14 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			if (Build.VERSION.SDK_INT >= 16) {
 				layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 			}
-			AndroidUtils.addStatusBarPadding19v(context!!, this)
+			AndroidUtils.addStatusBarPadding19v(app, this)
 			title = findViewById(R.id.title)
 			description = findViewById(R.id.description)
 		}
 
 		searchBoxBg = GradientDrawable().apply {
 			shape = GradientDrawable.RECTANGLE
-			setColor(ContextCompat.getColor(context!!, R.color.screen_bg_light))
+			setColor(ContextCompat.getColor(app, R.color.screen_bg_light))
 			cornerRadius = (searchBoxHeight / 2).toFloat()
 		}
 
@@ -231,7 +236,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	override fun onResume() {
 		super.onResume()
 		updateCurrentUserPhoto()
-		telegramHelper.getActiveLiveLocationMessages(null)
 		updateContent()
 		updateEnable = true
 		startHandler()
@@ -599,12 +603,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 
 			holder.title?.text = title
-			holder.icon?.setOnClickListener {
-				app.forceUpdateMyLocation()
-				val curUser = telegramHelper.getCurrentUser()
-				val text = "${curUser?.id}  ${curUser?.firstName} ${curUser?.lastName}"
-				Toast.makeText(app, text, Toast.LENGTH_LONG).show()
-			}
+
 			if (holder is ChatViewHolder) {
 				holder.description?.visibility = View.GONE
 				if (live) {
@@ -664,8 +663,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 				val duration = shareInfo?.userSetLivePeriod
 				if (duration != null && duration > 0) {
-					holder.descriptionDuration?.text =
-							OsmandFormatter.getFormattedDuration(context!!, duration)
+					holder.descriptionDuration?.text = OsmandFormatter.getFormattedDuration(app, duration)
 					holder.description?.apply {
 						visibility = View.VISIBLE
 						text = "${getText(R.string.sharing_time)}:"
@@ -678,7 +676,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					val time =
 						shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE
-					text = "+ ${OsmandFormatter.getFormattedDuration(context!!, time)}"
+					text = "+ ${OsmandFormatter.getFormattedDuration(app, time)}"
 					setOnClickListener {
 						val expireTime = shareInfo?.getChatLiveMessageExpireTime() ?: 0
 						val newLivePeriod = expireTime + (shareInfo?.additionalActiveTime
@@ -703,28 +701,36 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					}
 				}
 
-				holder.stopSharingDescr?.apply {
-					visibility = getStopSharingVisibility(expiresIn)
-					text = getText(R.string.expire_at)
+				holder.sharingExpiresLine?.apply {
+					visibility = if (expiresIn > 0) View.VISIBLE else View.GONE
+					val description = SpannableStringBuilder(getText(R.string.expire_at))
+					val start = description.length
+					description.append(" ${OsmandFormatter.getFormattedTime(expiresIn * 1000)} ")
+					description.setSpan(StyleSpan(Typeface.BOLD), start, description.length, 0)
+					description.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), start, description.length, 0)
+					description.append((getString(R.string.in_time, OsmandFormatter.getFormattedDuration(app, expiresIn, true))))
+					text = description
 				}
 
-				holder.stopSharingFirstPart?.apply {
-					visibility = getStopSharingVisibility(expiresIn)
-					text = OsmandFormatter.getFormattedTime(expiresIn * 1000)
-				}
-
-				holder.stopSharingSecondPart?.apply {
-					visibility = getStopSharingVisibility(expiresIn)
-					text = "(${getString(
-						R.string.in_time,
-						OsmandFormatter.getFormattedDuration(context!!, expiresIn, true)
-					)})"
+				holder.gpsPointsLine?.apply {
+					visibility = if (app.settings.showGpsPoints && shareInfo != null) View.VISIBLE else View.GONE
+					if (shareInfo != null) {
+						val description = SpannableStringBuilder("${getText(R.string.gps_points)}:")
+						val bufferedPoints = if (app.settings.shareTypeValue == SHARE_TYPE_MAP) {
+							shareInfo.pendingTdLibMap + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_MAP)
+						} else {
+							shareInfo.pendingTdLibText + app.locationMessages.getBufferedMessagesCountForChat(shareInfo.chatId, LocationMessages.TYPE_TEXT)
+						}
+						val start = description.length
+						description.append(" ${shareInfo.sentMessages} ")
+						description.setSpan(StyleSpan(Typeface.BOLD), start, description.length, 0)
+						description.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), start, description.length, 0)
+						description.append(getString(R.string.gps_points_in_buffer, bufferedPoints))
+						text = description
+					}
 				}
 			}
 		}
-
-		private fun getStopSharingVisibility(expiresIn: Long) =
-			if (expiresIn > 0) View.VISIBLE else View.INVISIBLE
 
 		private fun removeItem(chat: TdApi.Object) {
 			items.remove(chat)
@@ -754,9 +760,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		inner class SharingChatViewHolder(val view: View) : BaseViewHolder(view) {
 			val descriptionDuration: TextView? = view.findViewById(R.id.duration)
 			val switcher: Switch? = view.findViewById(R.id.switcher)
-			val stopSharingDescr: TextView? = view.findViewById(R.id.stop_in)
-			val stopSharingFirstPart: TextView? = view.findViewById(R.id.ending_in_first_part)
-			val stopSharingSecondPart: TextView? = view.findViewById(R.id.ending_in_second_part)
+			val sharingExpiresLine: TextView? = view.findViewById(R.id.expires_line)
+			val gpsPointsLine: TextView? = view.findViewById(R.id.gps_points_line)
 		}
 	}
 

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.aidl.OsmandAidlApi;
@@ -55,7 +56,9 @@ import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -105,6 +108,7 @@ public class OsmandApplication extends MultiDexApplication {
 	PoiFiltersHelper poiFilters;
 	MapPoiTypes poiTypes;
 	RoutingHelper routingHelper;
+	TransportRoutingHelper transportRoutingHelper;
 	FavouritesDbHelper favorites;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
@@ -116,6 +120,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MapMarkersHelper mapMarkersHelper;
 	MapMarkersDbHelper mapMarkersDbHelper;
 	WaypointHelper waypointHelper;
+	RoutingOptionsHelper routingOptionsHelper;
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidSpecificRoads avoidSpecificRoads;
 	BRouterServiceConnection bRouterServiceConnection;
@@ -165,6 +170,8 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
+
+		Algorithms.removeAllFiles(this.getAppPath(IndexConstants.TEMP_DIR));
 
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -400,6 +407,14 @@ public class OsmandApplication extends MultiDexApplication {
 		return routingHelper;
 	}
 
+	public TransportRoutingHelper getTransportRoutingHelper() {
+		return transportRoutingHelper;
+	}
+
+	public RoutingOptionsHelper getRoutingOptionsHelper() {
+		return routingOptionsHelper;
+	}
+
 	public GeocodingLookupService getGeocodingLookupService() {
 		return geocodingLookupService;
 	}
@@ -435,13 +450,13 @@ public class OsmandApplication extends MultiDexApplication {
 				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(final View v) {
-						RoutePreferencesMenu.selectVoiceGuidance((MapActivity) uiContext, new CallbackWithObject<String>() {
+						routingOptionsHelper.selectVoiceGuidance((MapActivity) uiContext, new CallbackWithObject<String>() {
 							@Override
 							public boolean processResult(String result) {
 								boolean acceptableValue = !RoutePreferencesMenu.MORE_VALUE.equals(firstSelectedVoiceProvider);
 								if (acceptableValue) {
 									((TextView) v.findViewById(R.id.selectText))
-											.setText(RoutePreferencesMenu.getVoiceProviderName(uiContext, result));
+											.setText(routingOptionsHelper.getVoiceProviderName(uiContext, result));
 									firstSelectedVoiceProvider = result;
 								}
 								return acceptableValue;
@@ -459,7 +474,7 @@ public class OsmandApplication extends MultiDexApplication {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
-							RoutePreferencesMenu.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider);
+							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider);
 						}
 					}
 				});

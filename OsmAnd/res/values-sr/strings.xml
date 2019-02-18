@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">О програму</string>
@@ -3036,4 +3036,12 @@
     <string name="osm_live_payment_contribute_descr">Део прихода иде уређивачима OpenStreetMap-а.</string>
     <string name="osm_live_subscriptions">Претплате</string>
     <string name="mapillary_menu_title_pano">Прикажи само слике од 360°</string>
-    </resources>
+    <string name="shared_string_launch">Покрени</string>
+    <string name="lang_gn_py">Гварани</string>
+    <string name="quick_action_switch_day_night_descr">Кликтањем овог акционог дугмета се мења дневни и ноћни режим у OsmAnd-у</string>
+    <string name="quick_action_switch_day_mode">Дневни режим</string>
+    <string name="quick_action_switch_night_mode">Ноћни режим</string>
+    <string name="quick_action_day_night_switch_mode">Мењај дневни/ноћни режим</string>
+    <string name="run_full_osmand_msg">Користите карту {0} коју је омогућио OsmAnd. Да ли желите да покренете OsmAnd пуну верзију\?</string>
+    <string name="run_full_osmand_header">Покрени OsmAnd\?</string>
+</resources>

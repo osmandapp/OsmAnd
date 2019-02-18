@@ -8,8 +8,9 @@
 	android:orientation="vertical"
 	tools:context=".ui.MainActivity">
 
-	<FrameLayout
+	<android.support.design.widget.CoordinatorLayout
 		android:layout_width="match_parent"
+		android:id="@+id/coordinator"
 		android:layout_height="0dp"
 		android:layout_weight="1">
 
@@ -25,7 +26,7 @@
 			android:scaleType="fitXY"
 			android:src="?attr/bottom_nav_shadow"/>
 
-	</FrameLayout>
+	</android.support.design.widget.CoordinatorLayout>
 
 	<LinearLayout
 		android:id="@+id/buttons_bar"

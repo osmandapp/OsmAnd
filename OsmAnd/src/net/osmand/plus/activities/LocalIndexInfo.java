@@ -2,7 +2,7 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 
-import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import android.os.Parcel;

@@ -15,19 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,46 +57,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	}
 	
 	public void setupView() {
-		if(getMyApplication().getWaypointHelper().isRouteCalculated()) {
-			setupWaypoints();
-		} else {
-			setupTargets();
-		}
-	}
-
-	private void setupWaypoints() {
-		View mainView = getView();
-		WaypointHelper wh = getMyApplication().getWaypointHelper();
-		List<LocationPointWrapper> allPoints = wh.getAllPoints();
-		if (allPoints.size() == 0) {
-			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
-			return;
-		} else {
-			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
-		}		
-		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.shared_string_waypoints));
-		((Button) mainView.findViewById(R.id.show_all)).setText(getString(R.string.shared_string_show_all));
-		((Button) mainView.findViewById(R.id.show_all)).setVisibility(View.VISIBLE);
-		((Button) mainView.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				dashboard.setDashboardVisibility(true, DashboardType.WAYPOINTS, AndroidUtils.getCenterViewCoordinates(v));
-			}
-		});
-		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
-		favorites.removeAllViews();
-		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
-		for(int i = 0; i < 3 && i < allPoints.size(); i++) {
-			LocationPointWrapper ps = allPoints.get(i);
-			View dv = getActivity().getLayoutInflater().inflate(R.layout.divider, null);
-			favorites.addView(dv);
-			View v = WaypointDialogHelper.updateWaypointItemView(false, null, getMyApplication(),
-					getActivity(), null, null, ps, null, !getMyApplication().getSettings().isLightContent(), true);
-			favorites.addView(v);
-
-		}
-		this.distances = distances;
+		setupTargets();
 	}
 
 	public void setupTargets() {

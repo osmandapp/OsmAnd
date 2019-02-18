@@ -20,7 +20,7 @@
 	<string name="connecting_to_the_internet">Зʼєднання із інтернетом</string>
 	<string name="background_work_description">Змініть налаштування оптимізації батареї, для стабільної трансляції позиціювання.</string>
 	<string name="background_work">Робота у фоні</string>
-	<string name="battery_optimization_description">Вимкніть оптимізацію батареї для OsmAnd Telegram, аби додаток не вимикався у фоновому режимі.</string>
+	<string name="battery_optimization_description">Вимкніть оптимізацію батареї для OsmAnd Tracker, аби додаток не вимикався у фоновому режимі.</string>
 	<string name="sharing_in_background">Трансляція у фоновому режимі</string>
 	<string name="go_to_settings">Перейти до налаштувань</string>
 	<string name="shared_string_later">Пізніше</string>
@@ -38,8 +38,8 @@
 	<string name="add_device">Додати пристрій</string>
 	<string name="share_location_as">Поділитися позицією як</string>
 	<string name="live_now_description">Контакти та групи, які транслюють свою позицію Вам.</string>
-	<string name="logout_from_osmand_telegram_descr">Ви впевнені, що бажаєте вийти з OsmAnd Telegram\? Оскільки не зможете транслювати свою позицію чи бачити позицію інших.</string>
-	<string name="logout_from_osmand_telegram">Вийти з OsmAnd Telegram\?</string>
+	<string name="logout_from_osmand_telegram_descr">Ви впевнені, що бажаєте вийти з OsmAnd Tracker\? Оскільки не зможете транслювати свою позицію чи бачити позицію інших.</string>
+	<string name="logout_from_osmand_telegram">Вийти з OsmAnd Tracker\?</string>
 	<string name="shared_string_name">Імʼя</string>
 	<string name="by_distance">За відстанню</string>
 	<string name="by_name">За імʼям</string>
@@ -63,7 +63,7 @@
 	<string name="connected_account">Повʼязаний обліковий запис</string>
 	<string name="shared_string_account">Обліковий запис</string>
 	<string name="in_time">через %1$s</string>
-	<string name="osmand_connect_desc">Оберіть версію OsmAnd, яку OsmAnd Telegram буде використовувати для показу позицій на карті.</string>
+	<string name="osmand_connect_desc">Оберіть версію OsmAnd, яку OsmAnd Tracker буде використовувати для показу позицій на карті.</string>
 	<string name="osmand_connect">Підключення OsmAnd</string>
 	<string name="location_history_desc">Приховайте контакти, які не рухалися на протязі визначеного проміжку часу.</string>
 	<string name="location_history">Історія позицій</string>
@@ -95,7 +95,7 @@
 	<string name="my_location_search_hint">Пошук: Група або контакт</string>
 	<string name="start_location_sharing">Транслювати позицію</string>
 	<string name="show_on_map">Показати на карті</string>
-	<string name="app_name">OsmAnd Telegram</string>
+	<string name="app_name">OsmAnd Online GPS Tracker</string>
 	<string name="phone_number_title">Номер телефону</string>
 	<string name="phone_number_descr">Номер телефону у міжнародному форматі</string>
 	<string name="shared_string_password">Пароль</string>
@@ -117,7 +117,7 @@
 	<string name="no_location_permission">Додаток не має дозволу до отримання даних позиціювання.</string>
 	<string name="gps_not_available">Будь ласка, увімкніть «Позиціювання» у системних налаштуваннях</string>
 	<string name="osmand_service">Фоновий режим</string>
-	<string name="osmand_service_descr">OsmAnd працює у фоновому режимі з вимкненим екраном.</string>
+	<string name="osmand_service_descr">OsmAnd Tracker працює у фоновому режимі з вимкненим екраном.</string>
 	<string name="shared_string_distance">Відстань</string>
 	<string name="share_location">Поділитися позицією</string>
 	<string name="sharing_location">Трансляція позиції</string>

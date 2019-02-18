@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,8 +28,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
@@ -38,27 +48,32 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteStatistics;
+import net.osmand.router.RouteStatistics.Incline;
+import net.osmand.router.RouteStatistics.RouteSegmentAttribute;
+import net.osmand.router.RouteStatistics.Statistics;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -70,8 +85,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class ShowRouteInfoDialogFragment extends DialogFragment {
 
@@ -82,10 +97,9 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private ListView listView;
 	private RouteInfoAdapter adapter;
 	private GPXFile gpx;
-	private OrderedLineDataSet elevationDataSet;
 	private OrderedLineDataSet slopeDataSet;
+	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
-	private boolean hasHeights;
 
 	public ShowRouteInfoDialogFragment() {
 	}
@@ -186,53 +200,131 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		makeGpx();
-		if (hasHeights) {
+		if (gpx.hasAltitude) {
 			View headerView = inflater.inflate(R.layout.route_info_header, null);
 			buildHeader(headerView);
 			listView.addHeaderView(headerView);
 		}
 
+		if (slopeDataSet != null) {
+			List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues());
+
+			RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(helper.getRoute().getOriginalRoute());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_class_stat_chart,
+					R.id.route_class_stat_items, routeStatistics.getRouteClassStatistic());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_surface_stat_chart,
+					R.id.route_surface_stat_items, routeStatistics.getRouteSurfaceStatistic());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_smoothness_stat_chart,
+					R.id.route_smoothness_stat_items, routeStatistics.getRouteSmoothnessStatistic());
+			buildChartAndAttachLegend(app, view, inflater, R.id.route_steepness_stat_chart,
+					R.id.route_steepness_stat_items, routeStatistics.getRouteSteepnessStatistic(inclines));
+		}
 		return view;
 	}
 
-	private void makeGpx() {
-		double lastHeight = HEIGHT_UNDEFINED;
-		gpx = new GPXFile();
-		List<Location> locations = helper.getRoute().getRouteLocations();
-		if (locations != null) {
-			Track track = new Track();
-			TrkSegment seg = new TrkSegment();
-			for (Location l : locations) {
-				WptPt point = new WptPt();
-				point.lat = l.getLatitude();
-				point.lon = l.getLongitude();
-				if (l.hasAltitude()) {
-					if (!hasHeights) {
-						hasHeights = true;
-					}
-					float h = (float) l.getAltitude();
-					point.ele = h;
-					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
-						for (WptPt pt : seg.points) {
-							if (Double.isNaN(pt.ele)) {
-								pt.ele = h;
-							}
-						}
-					}
-					lastHeight = h;
-				}
-				seg.points.add(point);
-			}
-			track.segments.add(seg);
-			gpx.tracks.add(track);
+	private List<Incline> createInclinesAndAdd100MetersWith0Incline(List<Entry> entries) {
+		int size = entries.size();
+		List<Incline> inclines = new ArrayList<>();
+		for (Entry entry : entries) {
+			Incline incline = new Incline(entry.getY(), entry.getX() * 1000);
+			inclines.add(incline);
 
-			String groupName = getMyApplication().getString(R.string.current_route);
-			GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
-			if (group != null && group.getModifiableList().size() > 0) {
-				gpxItem = group.getModifiableList().get(0);
-				if (gpxItem != null) {
-					gpxItem.route = true;
+		}
+		for (int i = 0; i < 10; i++) {
+			float distance = i * 5;
+			inclines.add(i, new Incline(0f, distance));
+		}
+		float lastDistance = slopeDataSet.getEntryForIndex(size - 1).getX();
+		for (int i = 1; i <= 10; i++) {
+			float distance = lastDistance * 1000f + i * 5f;
+			inclines.add(new Incline(0f, distance));
+		}
+		return inclines;
+	}
+
+	private int getColorFromStyle(String colorAttrName) {
+		RenderingRulesStorage rrs = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+		boolean nightMode = false;
+		req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+		if (req.searchRenderingAttribute(colorAttrName)) {
+			return req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+		}
+		return 0;
+	}
+
+	private <E> void buildStatisticChart(View view, int chartId, Statistics<E> routeStatistics) {
+		List<RouteSegmentAttribute<E>> segments = routeStatistics.getElements();
+		HorizontalBarChart hbc = view.findViewById(chartId);
+		List<BarEntry> entries = new ArrayList<>();
+		float[] stacks = new float[segments.size()];
+		int[] colors = new int[segments.size()];
+		for (int i = 0; i < stacks.length; i++) {
+			RouteSegmentAttribute segment = segments.get(i);
+			stacks[i] = segment.getDistance();
+			colors[i] = getColorFromStyle(segment.getColorAttrName());
+		}
+		entries.add(new BarEntry(0, stacks));
+		BarDataSet barDataSet = new BarDataSet(entries, "");
+		barDataSet.setColors(colors);
+		BarData data = new BarData(barDataSet);
+		data.setDrawValues(false);
+		hbc.setData(data);
+		hbc.setDrawBorders(false);
+		hbc.setTouchEnabled(false);
+		hbc.disableScroll();
+		hbc.getLegend().setEnabled(false);
+		hbc.getDescription().setEnabled(false);
+		XAxis xAxis = hbc.getXAxis();
+		xAxis.setEnabled(false);
+		YAxis leftYAxis = hbc.getAxisLeft();
+		YAxis rightYAxis = hbc.getAxisRight();
+		rightYAxis.setDrawLabels(true);
+		rightYAxis.setGranularity(1f);
+		rightYAxis.setValueFormatter(new IAxisValueFormatter() {
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				if (value > 100) {
+					return String.valueOf(value);
 				}
+				return "";
+			}
+		});
+		rightYAxis.setDrawGridLines(false);
+		leftYAxis.setDrawLabels(false);
+		leftYAxis.setEnabled(false);
+		hbc.invalidate();
+	}
+
+	private <E> void attachLegend(OsmandApplication app, LayoutInflater inflater, ViewGroup container, Statistics<E> routeStatistics) {
+		Map<E, RouteSegmentAttribute<E>> partition = routeStatistics.getPartition();
+		for (E key : partition.keySet()) {
+			RouteSegmentAttribute<E> segment = partition.get(key);
+			View view = inflater.inflate(R.layout.route_info_stat_item, container, false);
+			TextView textView = view.findViewById(R.id.route_stat_item_text);
+			String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistance(), getMyApplication());
+			textView.setText(String.format("%s - %s", key, formattedDistance));
+			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle,getColorFromStyle(segment.getColorAttrName()));
+			ImageView imageView = view.findViewById(R.id.route_stat_item_image);
+			imageView.setImageDrawable(circle);
+			container.addView(view);
+		}
+	}
+
+	private void buildChartAndAttachLegend(OsmandApplication app, View view, LayoutInflater inflater, int chartId, int containerId, Statistics routeStatistics) {
+		ViewGroup container = view.findViewById(containerId);
+		buildStatisticChart(view, chartId, routeStatistics);
+		attachLegend(app, inflater, container, routeStatistics);
+	}
+
+	private void makeGpx() {
+		gpx = GpxUiHelper.makeGpxFromRoute(helper.getRoute(), getMyApplication());
+		String groupName = getMyApplication().getString(R.string.current_route);
+		GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
+		if (group != null && group.getModifiableList().size() > 0) {
+			gpxItem = group.getModifiableList().get(0);
+			if (gpxItem != null) {
+				gpxItem.route = true;
 			}
 		}
 	}
@@ -452,7 +544,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				File dst = new File(dir, "route.gpx");
 				try {
 					FileWriter fw = new FileWriter(dst);
-					GPXUtilities.writeGpx(fw, gpx, getMyApplication());
+					GPXUtilities.writeGpx(fw, gpx);
 					fw.close();
 					final Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);

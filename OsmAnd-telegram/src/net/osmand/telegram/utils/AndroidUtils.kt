@@ -17,6 +17,7 @@ import android.os.Build
 import android.support.annotation.AttrRes
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
@@ -27,6 +28,7 @@ import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import net.osmand.telegram.R
 import java.io.File
 
@@ -134,6 +136,12 @@ object AndroidUtils {
 
 	fun getPopupMenuHeight(ctx: Context): Int {
 		return ctx.resources.getDimensionPixelSize(R.dimen.list_popup_window_height)
+	}
+
+	fun setSnackbarTextColor(snackbar: Snackbar, @ColorRes colorId: Int) {
+		val view = snackbar.view
+		val tv = view.findViewById(android.support.design.R.id.snackbar_action) as TextView
+		tv.setTextColor(ContextCompat.getColor(view.context, colorId))
 	}
 
 	fun createPressedColorStateList(

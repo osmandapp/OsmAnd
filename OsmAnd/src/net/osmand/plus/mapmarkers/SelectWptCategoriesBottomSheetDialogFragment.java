@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
@@ -171,7 +171,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 			if (selectedGpx != null && selectedGpx.getGpxFile() != null) {
 				return selectedGpx.getGpxFile();
 			}
-			return GPXUtilities.loadGPXFile(app, new File(filePath));
+			return GPXUtilities.loadGPXFile(new File(filePath));
 		}
 		return null;
 	}

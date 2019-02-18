@@ -82,7 +82,7 @@
 <string name="poi_toys">اسباب بازی فروشی</string>
 <string name="poi_trade">باربری</string>
 <string name="poi_vacuum_cleaner">فروشگاه جاروبرقی</string>
-<string name="poi_variety_store">فروشگاه کوچک</string>
+<string name="poi_variety_store">فروشگاه متنوع و ارزان</string>
 <string name="poi_video">کلوب فیلم</string>
 <string name="poi_window_blind">در و پنجره سازی</string>
 <string name="poi_department_store">فروشگاه چندمنظوره</string>
@@ -291,14 +291,14 @@
 <string name="poi_ngo">NGO</string>
 <string name="poi_townhall">شهرداری</string>
 <string name="poi_employment_agency">کاریابی</string>
-<string name="poi_research">مرکز تحقیقاتی</string>
+<string name="poi_research">دفتر تحقیقاتی</string>
 <string name="poi_it">دفتر فناوری اطلاعات</string>
 <string name="poi_newspaper">دفتر روزنامه</string>
-<string name="poi_architect">مرکز معماری</string>
+<string name="poi_architect">دفتر معماری</string>
 <string name="poi_advertising_agency">آژانس تبلیغاتی</string>
 <string name="poi_educational_institution">موسسه آموزشی</string>
 <string name="poi_studio">استودیو</string>
-<string name="poi_bookmaker">ناشرکتاب</string>
+<string name="poi_bookmaker">دلال شرط‌بندی</string>
 
 <string name="poi_stadium">ورزشگاه</string>
 <string name="poi_sports_centre">مرکز ورزشی</string>
@@ -816,7 +816,7 @@
 	<string name="poi_landuse">کاربری زمین</string>
 	<string name="poi_education">آموزش</string>
 	<string name="poi_healthcare">سلامت</string>
-	<string name="poi_office">اداره</string>
+	<string name="poi_office">دفتر</string>
 	<string name="poi_tourism">گردشگری</string>
 	<string name="poi_sightseeing">دیدنی‌ها</string>
 	<string name="poi_accomodation">محل اسکان</string>
@@ -1370,4 +1370,8 @@
     <string name="poi_language_school">آموزشگاه زبان</string>
     <string name="poi_charging_station_output">خروجی ایستگاه شارژ</string>
     <string name="poi_charging_station_filter">ایستگاه شارژ</string>
+    <string name="poi_office_religion">دفتر مذهبی</string>
+    <string name="poi_military_office">دفتر نظامی</string>
+    <string name="poi_publisher">دفتر نشر</string>
+    <string name="poi_public_bookcase">قفسه کتاب عمومی</string>
 </resources>

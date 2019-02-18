@@ -24,6 +24,7 @@
 	<dimen name="dialog_welcome_title_top_margin">89dp</dimen>
 
 	<dimen name="list_header_height">48dp</dimen>
+	<dimen name="list_header_with_descr_height">42dp</dimen>
 
 	<dimen name="list_item_height">56dp</dimen>
 	<dimen name="list_item_height_min">48dp</dimen>
@@ -52,6 +53,9 @@
 	<dimen name="my_location_text_sides_margin">32dp</dimen>
 	<dimen name="my_location_user_icon_size">60dp</dimen>
 
+	<dimen name="timeline_user_icon_size">56dp</dimen>
+	<dimen name="timeline_time_buttons_height">50dp</dimen>
+
 	<dimen name="disable_sharing_image_height">132dp</dimen>
 	<dimen name="disable_sharing_icon_top_margin">30dp</dimen>
 
@@ -79,7 +83,7 @@
 	<dimen name="hint_text_size">14sp</dimen>
 
 	<dimen name="list_item_title_text_size">16sp</dimen>
-	<dimen name="list_item_description_text_size">12sp</dimen>
+	<dimen name="list_item_description_text_size">13sp</dimen>
 
 	<dimen name="text_button_text_size">15sp</dimen>
 

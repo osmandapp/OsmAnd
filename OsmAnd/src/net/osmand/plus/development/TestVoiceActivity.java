@@ -17,31 +17,18 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
-import net.osmand.plus.voice.JSCommandBuilder;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.plus.routing.VoiceRouter;
-import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-
-import alice.tuprolog.Struct;
-import alice.tuprolog.Term;
-
-import static net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.getVoiceFiles;
 
 
 /**
@@ -91,7 +78,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	private void selectVoice(final LinearLayout ll) {
 		String[] entries;
 		final String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles(this);
+		Set<String> voiceFiles = getMyApplication().getRoutingOptionsHelper().getVoiceFiles(this);
 		entries = new String[voiceFiles.size() ];
 		entrieValues = new String[voiceFiles.size() ];
 		int k = 0;

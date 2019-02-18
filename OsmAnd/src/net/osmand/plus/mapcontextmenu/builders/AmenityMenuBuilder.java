@@ -21,15 +21,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
+import net.osmand.plus.*;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -42,7 +42,9 @@ import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
+import org.apache.commons.logging.Log;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -59,13 +61,17 @@ import java.util.Map;
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private static final String WIKI_LINK = ".wikipedia.org/w";
-
+	public final static Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+	private final static DecimalFormat DF = new DecimalFormat("#.##");
+	private OsmandSettings.MetricsConstants metricSystem;
 	private final Amenity amenity;
+
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
 		setShowNearestWiki(true, amenity.getId());
+		metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
 	}
 
 	@Override
@@ -521,6 +527,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			}
 
+			String[] formattedPrefixAndText = getFormattedPrefixAndText(key, textPrefix, vl);
+			textPrefix = formattedPrefixAndText[0];
+			vl = formattedPrefixAndText[1];
+
 			boolean matchWidthDivider = !isDescription && isWiki;
 			AmenityInfoRow row;
 			if (isDescription) {
@@ -672,6 +682,62 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		} catch (NumberFormatException e) {
 			return value;
 		}
+	}
+
+	private String[] getFormattedPrefixAndText(String key, String prefix, String value) {
+		DF.setRoundingMode(RoundingMode.CEILING);
+		String formattedValue = "";
+		String formattedPrefix = "";
+		switch (key) {
+			case "width":
+			case "height":
+				if (key.equals("width")) {
+					formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_width);
+				} else {
+					formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_height);
+				}
+			case "depth":
+			case "seamark_height":
+				double valueAsDouble = Double.valueOf(value);
+				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
+					formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
+							+ " " + mapActivity.getResources().getString(R.string.foot);
+				} else if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
+					formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER))
+							+ " " + mapActivity.getResources().getString(R.string.yard);
+				} else {
+					formattedValue = value + " " + mapActivity.getResources().getString(R.string.m);
+				}
+				break;
+			case "distance":
+				float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
+				if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
+					formattedValue = value + " " + mapActivity.getResources().getString(R.string.km);
+				} else {
+					formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters, mapActivity.getMyApplication());
+				}
+				formattedPrefix =  formatPrefix(prefix, mapActivity.getResources().getString(R.string.distance));
+				break;
+			case "capacity":
+				formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
+				break;
+			case "maxweight":
+				formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
+				break;
+			case "students":
+			case "spots":
+			case "seats":
+				formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
+				break;
+			default:
+				formattedValue = value;
+				formattedPrefix = prefix;
+		}
+		return new String[]{formattedPrefix, formattedValue};
+	}
+
+	private String formatPrefix(String prefix, String units) {
+		return (!prefix.isEmpty()) ? (prefix + ", " + units): units;
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="poi_fuel_avia_type"/>
 	<string name="poi_payment_type">支付类别</string>
 	<string name="poi_clothes_type">类型</string>
@@ -26,4 +26,29 @@
 	<string name="poi_user_defined_other">用户自定义</string>
 
 	<string name="poi_hazard_flood">洪水灾害</string>
-	</resources>
+    <string name="poi_cannabis">大麻商店</string>
+    <string name="poi_socket_cee_blue_output_low">低</string>
+    <string name="poi_socket_schuko_output_high">中</string>
+    <string name="poi_socket_schuko_output_medium">高</string>
+    <string name="poi_adult_gaming_centre">成人游戏中心</string>
+    <string name="poi_service_vehicle_air_conditioning_yes">空调</string>
+    <string name="poi_service_vehicle_insurance_yes">保险</string>
+    <string name="poi_glacier_type_remnant">遗迹</string>
+    <string name="poi_hazard_avalanche">雪崩灾害</string>
+    <string name="poi_hazard_slippery_road">湿滑道路</string>
+    <string name="poi_substation_industrial">工业</string>
+    <string name="poi_blood_donation">献血</string>
+    <string name="poi_denotation_landmark">地标</string>
+    <string name="poi_car_rental">车辆租赁</string>
+    <string name="poi_toilets">洗手间</string>
+    <string name="poi_shower">淋浴</string>
+    <string name="poi_smoking_area">吸烟区</string>
+    <string name="poi_internet_cafe">网咖</string>
+    <string name="poi_bank">银行</string>
+    <string name="poi_bitcoin_yes">比特币支付</string>
+    <string name="poi_volcano">火山</string>
+    <string name="poi_crater">火山口</string>
+    <string name="poi_glacier">冰山</string>
+    <string name="poi_waterfall">瀑布</string>
+    <string name="poi_river">河流</string>
+</resources>

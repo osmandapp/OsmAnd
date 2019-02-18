@@ -44,7 +44,7 @@
 			android:layout_height="wrap_content"
 			android:textColor="?android:attr/textColorSecondary"
 			android:textSize="@dimen/list_item_description_text_size"
-			app:firstBaselineToTopHeight="20sp"
+			app:firstBaselineToTopHeight="14sp"
 			app:lastBaselineToBottomHeight="16sp"
 			app:typeface="@string/font_roboto_regular"
 			tools:text="Some long description"/>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="last_update_from_telegram">Ultimo aggiornamento da Telegram</string>
 	<string name="enter_another_device_name">Scegli un nome che non hai ancora usato</string>
 	<string name="device_added_successfully">%1$s aggiunto.</string>
@@ -21,7 +21,7 @@
 	<string name="connecting_to_the_internet">Collegamento a Internet</string>
 	<string name="background_work_description">Cambia le impostazioni di ottimizzazione della batteria per stabilizzare la condivisione della posizione.</string>
 	<string name="background_work">Funzionamento in secondo piano</string>
-	<string name="battery_optimization_description">Disattiva l\'ottimizzazione della batteria per OsmAnd Telegram in modo che non venga chiuso improvvisamente quando è in secondo piano.</string>
+	<string name="battery_optimization_description">Disattiva l\'ottimizzazione della batteria per OsmAnd Tracker in modo che non venga chiuso improvvisamente quando è in secondo piano.</string>
 	<string name="sharing_in_background">Condivisione in secondo piano</string>
 	<string name="go_to_settings">Vai alle impostazioni</string>
 	<string name="shared_string_later">Più tardi</string>
@@ -39,7 +39,7 @@
 	<string name="add_device">Aggiungi dispositivo</string>
 	<string name="share_location_as">Condividi posizione come</string>
 	<string name="live_now_description">Contatti e gruppi che condividono la posizione con te.</string>
-	<string name="logout_from_osmand_telegram">Disconnettersi da OsmAnd Telegram\?</string>
+	<string name="logout_from_osmand_telegram">Disconnettersi da OsmAnd Tracker\?</string>
 	<string name="shared_string_name">Nome</string>
 	<string name="by_distance">Per distanza</string>
 	<string name="by_name">Per nome</string>
@@ -63,7 +63,7 @@
 	<string name="connected_account">Account connesso</string>
 	<string name="shared_string_account">Account</string>
 	<string name="in_time">in %1$s</string>
-	<string name="osmand_connect_desc">Scegli la versione di OsmAnd che OsmAnd Telegram userà per mostrare le posizioni.</string>
+	<string name="osmand_connect_desc">Scegli la versione di OsmAnd che OsmAnd Tracker userà per mostrare le posizioni.</string>
 	<string name="location_history_desc">Nascondi i contatti che non si sono spostati per un certo periodo di tempo.</string>
 	<string name="location_history">Cronologia delle posizioni</string>
 	<string name="stale_location_desc">L\'ultima volta in cui un contatto si è spostato.</string>
@@ -100,7 +100,7 @@
 	<string name="my_location_search_hint">Cerca: gruppo o contatto</string>
 	<string name="start_location_sharing">Condividi la posizione</string>
 	<string name="show_on_map">Mostra sulla mappa</string>
-	<string name="app_name">OsmAnd Telegram</string>
+	<string name="app_name">OsmAnd Online GPS Tracker</string>
 	<string name="phone_number_title">Numero di telefono</string>
 	<string name="phone_number_descr">Numero di telefono nel formato internazionale</string>
 	<string name="shared_string_password">Password</string>
@@ -123,11 +123,11 @@
 	<string name="gps_not_available">Si prega di attivare la \"posizione\" nelle impostazioni di sistema</string>
 	<string name="location_service_no_gps_available">Seleziona uno dei provider della posizione per condividerla.</string>
 	<string name="osmand_service">In secondo piano</string>
-	<string name="osmand_service_descr">OsmAnd Telegram funziona in secondo piano quando lo schermo è spento.</string>
+	<string name="osmand_service_descr">OsmAnd Tracker funziona in secondo piano quando lo schermo è spento.</string>
 	<string name="shared_string_distance">Distanza</string>
 	<string name="share_location">Condividi la posizione</string>
 	<string name="sharing_location">Condivisione della posizione</string>
-	<string name="process_service">Servizio di OsmAnd Telegram</string>
+	<string name="process_service">Servizio di OsmAnd Tracker</string>
 	<string name="osmand_logo">Logo di OsmAnd</string>
 	<string name="install_osmand_dialog_message">Devi installare prima la versione gratis o a pagamento di OsmAnd</string>
 	<string name="install_osmand">Installa OsmAnd</string>
@@ -163,8 +163,8 @@
 	<string name="live_now">Ora in diretta</string>
 
 
-<string name="logout_from_osmand_telegram_descr">Sei sicuro di volerti disconnettere da OsmAnd Telegram, cosicché non potrai condividere la posizione o vedere quella di altri\?</string>
-	<string name="osmand_connect">OsmAnd connect</string>
+<string name="logout_from_osmand_telegram_descr">Sei sicuro di volerti disconnettere da OsmAnd Tracker, cosicché non potrai condividere la posizione o vedere quella di altri\?</string>
+	<string name="osmand_connect">Connessione OsmAnd</string>
 	<string name="set_visible_time_for_all">Imposta un orario visibile a tutti</string>
 	<string name="visible_time_for_all">Orario visibile a tutti</string>
 	<string name="min_km">min/km</string>
@@ -172,4 +172,18 @@
 	<string name="m_s">m/s</string>
 	<string name="km_h">km/h</string>
 	<string name="mile_per_hour">mi/h</string>
-	</resources>
+    <string name="monitoring_is_enabled">Monitoraggio abilitato</string>
+    <string name="monitoring_is_disabled">Monitoraggio disabilitato</string>
+    <string name="time_on_the_move">tempo in movimento</string>
+    <string name="average_altitude">Altitudine media</string>
+    <string name="average_speed">Velocità media</string>
+    <string name="open_in_osmand">Apri in OsmAnd</string>
+    <string name="end_date">Data di fine</string>
+    <string name="start_date">Data d\'inizio</string>
+    <string name="send_location_as">Invia la localizzazione come</string>
+    <string name="send_location_as_descr">Scegli l\'aspetto dei messaggi con la tua localizzazione.</string>
+    <string name="shared_string_map">Mappa</string>
+    <string name="shared_string_text">Testo</string>
+    <string name="map_and_text">Mappa e testo</string>
+    <string name="timeline">Cronologia</string>
+</resources>

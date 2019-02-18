@@ -107,7 +107,8 @@
 		<LinearLayout
 			android:id="@+id/show_on_map_row"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/list_item_height_big"
+			android:layout_height="wrap_content"
+			android:minHeight="60dp"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
 			android:paddingLeft="@dimen/content_padding_standard"
@@ -116,7 +117,7 @@
 			<LinearLayout
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="top"
 				android:layout_marginEnd="@dimen/content_padding_standard"
 				android:layout_marginRight="@dimen/content_padding_standard"
 				android:layout_weight="1"
@@ -127,49 +128,33 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
-					android:layout_marginEnd="@dimen/content_padding_standard"
-					android:layout_marginRight="@dimen/content_padding_standard"
 					android:text="@string/turn_off_location_sharing"
 					android:textColor="?attr/ctrl_active_color"
 					android:textSize="@dimen/hint_text_size"
+					app:firstBaselineToTopHeight="24sp"
 					app:typeface="@string/font_roboto_medium" />
 
-				<LinearLayout
-					android:layout_width="match_parent"
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/expires_line"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:orientation="horizontal">
+					android:layout_gravity="center_vertical"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/hint_text_size"
+					app:typeface="@string/font_roboto_regular"
+					app:lastBaselineToBottomHeight="10sp"
+					tools:text="@string/expire_at" />
 
-					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/stop_in"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:textColor="?android:attr/textColorSecondary"
-						android:textSize="@dimen/hint_text_size"
-						app:typeface="@string/font_roboto_regular"
-						tools:text="@string/expire_at" />
-
-					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/ending_in_first_part"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:layout_marginLeft="4dp"
-						android:layout_marginRight="4dp"
-						android:textColor="?android:attr/textColorPrimary"
-						android:textSize="@dimen/hint_text_size"
-						app:typeface="@string/font_roboto_mono_bold" />
-
-					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/ending_in_second_part"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:textColor="?android:attr/textColorSecondary"
-						android:textSize="@dimen/hint_text_size"
-						app:typeface="@string/font_roboto_regular" />
-
-				</LinearLayout>
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/gps_points_line"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:text="@string/gps_points"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/hint_text_size"
+					app:lastBaselineToBottomHeight="16sp"
+					app:typeface="@string/font_roboto_regular" />
 
 			</LinearLayout>
 

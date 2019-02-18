@@ -41,4 +41,6 @@
 	<color name="sharing_status_icon_error">#ee5622</color>
 	<color name="sharing_status_icon_success">#78cc5c</color>
 
+	<color name="text_bold_highlight">#5959FF</color>
+
 </resources>

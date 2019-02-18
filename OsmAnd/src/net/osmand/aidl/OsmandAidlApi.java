@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,10 +25,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.copyfile.CopyFileParams;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
+import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
@@ -52,9 +56,9 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
@@ -69,6 +73,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
@@ -104,8 +109,15 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidl.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-
 
 public class OsmandAidlApi {
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
@@ -622,7 +634,7 @@ public class OsmandAidlApi {
 					if (intent.getStringExtra(AIDL_DATA) != null) {
 						String gpxStr = intent.getStringExtra(AIDL_DATA);
 						if (!Algorithms.isEmpty(gpxStr)) {
-							gpx = GPXUtilities.loadGPXFile(mapActivity, new ByteArrayInputStream(gpxStr.getBytes()));
+							gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
 						}
 					} else if (intent.getParcelableExtra(AIDL_URI) != null) {
 						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -636,7 +648,7 @@ public class OsmandAidlApi {
 							}
 							if (gpxParcelDescriptor != null) {
 								FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-								gpx = GPXUtilities.loadGPXFile(mapActivity, new FileInputStream(fileDescriptor));
+								gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 							}
 						}
 					}
@@ -1187,12 +1199,12 @@ public class OsmandAidlApi {
 
 					@Override
 					protected GPXFile doInBackground(File... files) {
-						return GPXUtilities.loadGPXFile(app, files[0]);
+						return GPXUtilities.loadGPXFile(files[0]);
 					}
 
 					@Override
 					protected void onPostExecute(GPXFile gpx) {
-						if (gpx.warning == null) {
+						if (gpx.error == null) {
 							selectedGpx.setGpxFile(gpx);
 							refreshMap();
 						}
@@ -1208,12 +1220,12 @@ public class OsmandAidlApi {
 
 				@Override
 				protected GPXFile doInBackground(File... files) {
-					return GPXUtilities.loadGPXFile(app, files[0]);
+					return GPXUtilities.loadGPXFile(files[0]);
 				}
 
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
-					if (gpx.warning == null) {
+					if (gpx.error == null) {
 						helper.selectGpxFile(gpx, true, false);
 						refreshMap();
 					}
@@ -1316,12 +1328,12 @@ public class OsmandAidlApi {
 
 				@Override
 				protected GPXFile doInBackground(File... files) {
-					return GPXUtilities.loadGPXFile(app, files[0]);
+					return GPXUtilities.loadGPXFile(files[0]);
 				}
 
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
-					if (gpx.warning == null) {
+					if (gpx.error == null) {
 						app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 						refreshMap();
 					}
@@ -1657,7 +1669,6 @@ public class OsmandAidlApi {
 				@Override
 				public void onFinish(AppInitializer init) {
 					try {
-						LOG.debug("AIDL App registerForOsmandInitialization");
 						callback.onAppInitialized();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -1672,8 +1683,8 @@ public class OsmandAidlApi {
 
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
+			clearNavDrawerItems(appPackage);
 			if (items.isEmpty()) {
-				clearNavDrawerItems(appPackage);
 				return true;
 			}
 			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
@@ -1739,7 +1750,7 @@ public class OsmandAidlApi {
 	private void clearNavDrawerItems(String appPackage) {
 		try {
 			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
-			allItems.put(appPackage, null);
+			allItems.put(appPackage, new JSONArray());
 			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -1907,7 +1918,190 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
 
+	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+		if (gpxUri == null || callback == null) {
+			return false;
+		}
+		final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawer.TrackBitmapDrawerListener() {
+			@Override
+			public void onTrackBitmapDrawing() {
+			}
 
+			@Override
+			public void onTrackBitmapDrawn() {
+			}
+
+			@Override
+			public boolean isTrackBitmapSelectionSupported() {
+				return false;
+			}
+
+			@Override
+			public void drawTrackBitmap(Bitmap bitmap) {
+				callback.onGpxBitmapCreatedComplete(new AGpxBitmap(bitmap));
+			}
+		};
+
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+				}
+			});
+		} else {
+			createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+		}
+		return true;
+	}
+
+	private void createGpxBitmapFromUri(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final TrackBitmapDrawer.TrackBitmapDrawerListener drawerListener) {
+		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, new CallbackWithObject<GPXFile>() {
+			@Override
+			public boolean processResult(GPXFile result) {
+				TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, null, result.getRect(), density, widthPixels, heightPixels);
+				trackBitmapDrawer.addListener(drawerListener);
+				trackBitmapDrawer.setDrawEnabled(true);
+				trackBitmapDrawer.setTrackColor(color);
+				trackBitmapDrawer.initAndDraw();
+				return false;
+			}
+		});
+		gpxAsyncLoaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
+
+	private class FileCopyInfo {
+		long startTime;
+		long lastAccessTime;
+		FileOutputStream fileOutputStream;
+
+		FileCopyInfo(long startTime, long lastAccessTime, FileOutputStream fileOutputStream) {
+			this.startTime = startTime;
+			this.lastAccessTime = lastAccessTime;
+			this.fileOutputStream = fileOutputStream;
+		}
+	}
+
+	int copyFile(final CopyFileParams params) {
+		if (Algorithms.isEmpty(params.getFileName()) || params.getFilePartData() == null) {
+			return COPY_FILE_PARAMS_ERROR;
+		}
+		if (params.getFilePartData().length > COPY_FILE_PART_SIZE_LIMIT) {
+			return COPY_FILE_PART_SIZE_LIMIT_ERROR;
+		}
+		if (params.getFileName().endsWith(IndexConstants.SQLITE_EXT)) {
+			return copyFileImpl(params, IndexConstants.TILES_INDEX_DIR);
+		} else {
+			return COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+		}
+	}
+
+	private int copyFileImpl(CopyFileParams params, String destinationDir) {
+		File file = app.getAppPath(IndexConstants.TEMP_DIR + params.getFileName());
+		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+		if (!tempDir.exists()) {
+			tempDir.mkdirs();
+		}
+		String fileName = params.getFileName();
+		File destFile = app.getAppPath(destinationDir + fileName);
+		long currentTime = System.currentTimeMillis();
+		try {
+			FileCopyInfo info = copyFilesCache.get(fileName);
+			if (info == null) {
+				FileOutputStream fos = new FileOutputStream(file, true);
+				copyFilesCache.put(fileName,
+						new FileCopyInfo(params.getStartTime(), currentTime, fos));
+				if (params.isDone()) {
+					if (!finishFileCopy(params, file, fos, fileName, destFile)) {
+						return COPY_FILE_IO_ERROR;
+					}
+				} else {
+					fos.write(params.getFilePartData());
+				}
+			} else {
+				if (info.startTime != params.getStartTime()) {
+					if (currentTime - info.lastAccessTime < COPY_FILE_MAX_LOCK_TIME_MS) {
+						return COPY_FILE_WRITE_LOCK_ERROR;
+					} else {
+						file.delete();
+						copyFilesCache.remove(fileName);
+						return copyFileImpl(params, destinationDir);
+					}
+				}
+				FileOutputStream fos = info.fileOutputStream;
+				info.lastAccessTime = currentTime;
+				if (params.isDone()) {
+					if (!finishFileCopy(params, file, fos, fileName, destFile)) {
+						return COPY_FILE_IO_ERROR;
+					}
+				} else {
+					fos.write(params.getFilePartData());
+				}
+			}
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+			return COPY_FILE_IO_ERROR;
+		}
+		return OK_RESPONSE;
+	}
+
+	private boolean finishFileCopy(CopyFileParams params, File file, FileOutputStream fos, String fileName, File destFile) throws IOException {
+		boolean res = true;
+		byte[] data = params.getFilePartData();
+		if (data.length > 0) {
+			fos.write(data);
+		}
+		if (destFile.exists() && !destFile.delete()) {
+			res = false;
+		}
+		if (res && !file.renameTo(destFile)) {
+			file.delete();
+			res = false;
+		}
+		copyFilesCache.remove(fileName);
+		return res;
+	}
+
+	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+
+		private final OsmandApplication app;
+		private final CallbackWithObject<GPXFile> callback;
+		private final Uri gpxUri;
+
+		GpxAsyncLoaderTask(@NonNull OsmandApplication app, @NonNull Uri gpxUri, final CallbackWithObject<GPXFile> callback) {
+			this.app = app;
+			this.gpxUri = gpxUri;
+			this.callback = callback;
+		}
+
+		@Override
+		protected void onPostExecute(GPXFile gpxFile) {
+			if (gpxFile.error == null && callback != null) {
+				callback.processResult(gpxFile);
+			}
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... voids) {
+			ParcelFileDescriptor gpxParcelDescriptor = null;
+			try {
+				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			if (gpxParcelDescriptor != null) {
+				final FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+				return GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
+			}
+			return null;
+		}
+	}
 
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
@@ -1978,6 +2172,10 @@ public class OsmandAidlApi {
 
 	public interface SearchCompleteCallback {
 		void onSearchComplete(List<SearchResult> resultSet);
+	}
+
+	public interface GpxBitmapCreatedCallback {
+		void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap);
 	}
 
 	public interface OsmandAppInitCallback {

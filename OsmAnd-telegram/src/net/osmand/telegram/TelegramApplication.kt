@@ -24,8 +24,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	lateinit var notificationHelper: NotificationHelper private set
 	lateinit var osmandAidlHelper: OsmandAidlHelper private set
 	lateinit var locationProvider: TelegramLocationProvider private set
-	lateinit var messagesDbHelper: MessagesDbHelper private set
-	lateinit var savingTracksDbHelper: SavingTracksDbHelper private set
+	lateinit var locationMessages: LocationMessages private set
 
 	var telegramService: TelegramService? = null
 
@@ -48,7 +47,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 				if (connected) {
 					osmandAidlHelper.setNavDrawerItems(
 						applicationContext.packageName,
-						listOf(getString(R.string.app_name)),
+						listOf(getString(R.string.app_name_short_online)),
 						listOf("osmand_telegram://main_activity"),
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
@@ -68,11 +67,13 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		showLocationHelper = ShowLocationHelper(this)
 		notificationHelper = NotificationHelper(this)
 		locationProvider = TelegramLocationProvider(this)
-		messagesDbHelper = MessagesDbHelper(this)
-		savingTracksDbHelper = SavingTracksDbHelper(this)
+		locationMessages = LocationMessages(this)
 
 		if (settings.hasAnyChatToShareLocation() && AndroidUtils.isLocationPermissionAvailable(this)) {
 			shareLocationHelper.startSharingLocation()
+		}
+		if (settings.monitoringEnabled) {
+			showLocationHelper.startShowingLocation()
 		}
 	}
 
@@ -87,6 +88,15 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.stopSendingLiveLocationMessages(settings.getChatsShareInfo())
 	}
 
+	fun stopMonitoring() {
+		settings.monitoringEnabled = false
+		stopUserLocationService()
+	}
+
+	fun isAnyOsmAndInstalled() = TelegramSettings.AppConnect.getInstalledApps(this).isNotEmpty()
+
+	fun isOsmAndChosen() = settings.appToConnectPackage.isNotEmpty()
+
 	fun isOsmAndInstalled() = AndroidUtils.isAppInstalled(this, settings.appToConnectPackage)
 
 	val isWifiConnected: Boolean
@@ -94,6 +104,13 @@ class TelegramApplication : Application(), OsmandHelperListener {
 			val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 			val ni = mgr.activeNetworkInfo
 			return ni != null && ni.type == ConnectivityManager.TYPE_WIFI
+		}
+
+	val isMobileConnected: Boolean
+		get() {
+			val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+			val ni = mgr.activeNetworkInfo
+			return ni != null && ni.type == ConnectivityManager.TYPE_MOBILE
 		}
 
 	private val isInternetConnected: Boolean

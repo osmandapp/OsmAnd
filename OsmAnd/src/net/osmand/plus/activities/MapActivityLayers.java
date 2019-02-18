@@ -19,8 +19,8 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -307,6 +307,9 @@ public class MapActivityLayers {
 							ContextMenuItem item = listAdapter.getItem(i);
 								PoiUIFilter filter = list.get(i);
 							if (item.getSelected()) {
+								if (filter.isStandardFilter()) {
+									filter.setFilterByName(null);
+								}
 								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
 							} else {
 								getApplication().getPoiFilters().removeSelectedPoiFilter(filter);
@@ -372,6 +375,9 @@ public class MapActivityLayers {
 					}
 					activity.showQuickSearch(ShowQuickSearchMode.NEW, true);
 				} else {
+					if (pf.isStandardFilter()) {
+						pf.setFilterByName(null);
+					}
 					getApplication().getPoiFilters().clearSelectedPoiFilters();
 					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
 					mapView.refreshMap();

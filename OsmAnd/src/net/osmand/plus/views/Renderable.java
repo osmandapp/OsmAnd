@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.GPXUtilities.WptPt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +46,7 @@ public class Renderable {
         protected abstract void startCuller(double newZoom);
 
         protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {}
+
 
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
