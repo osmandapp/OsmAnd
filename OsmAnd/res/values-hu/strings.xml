@@ -1374,7 +1374,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="lock_screen_request_explanation">Az %1$s számára engedély szükséges a képernyő kikapcsolásához energiatakarékossági célból.</string>
     <string name="shared_string_never">Soha</string>
     <string name="error_avoid_specific_road">Nem található kerülőút</string>
-    <string name="home_button">Kezdőlap</string>
+    <string name="home_button">Otthon</string>
     <string name="map_update">Frissítés érhető el %1$s térképhez</string>
     <string name="search_for">Keresés</string>
     <string name="shared_string_show_all">Összes megjelenítése</string>
@@ -2794,7 +2794,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="points_of_interests">Érdekes helyek (POI)</string>
     <string name="waiting_for_route_calculation">Várakozás az útvonal kiszámítására</string>
     <string name="app_mode_public_transport">Tömegközlekedés</string>
-    <string name="avoid_roads_descr">Válaszd egy utat a térképen vagy a lenti listából, amelyet el akarsz kerülni navigáció során:</string>
+    <string name="avoid_roads_descr">Válassz egy utat a térképen vagy a lenti listából, amelyet el akarsz kerülni navigáció során:</string>
     <string name="show_along_the_route">Megjelenítés az útvonal mellett</string>
     <string name="simulate_navigation">Navigáció szimulálása</string>
     <string name="choose_track_file_to_follow">Válaszd ki a követendő nyomvonalfájlt</string>
@@ -2876,9 +2876,11 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="quick_action_day_night_switch_mode">Váltás a Nappali/Éjszakai mód között</string>
     <string name="run_full_osmand_msg">A(z) {0} térképet használod, amelyet az OsmAnd biztosít. Elindítod az OsmAnd teljes verzióját\?</string>
     <string name="run_full_osmand_header">Elindítod az OsmAndot\?</string>
-    <string name="add_work">Munka hozzáadása</string>
-    <string name="work_button">Munka</string>
+    <string name="add_work">Munkahely hozzáadása</string>
+    <string name="work_button">Munkahely</string>
     <string name="route_surface_stat_container">Burkolat</string>
     <string name="route_smoothness_stat_container">Simaság</string>
     <string name="route_steepness_stat_container">Lejtés</string>
+    <string name="previous_route">Előző útvonal</string>
+    <string name="add_home">Otthon hozzáadása</string>
 </resources>
