@@ -194,7 +194,7 @@
     <string name="please_update_osmand">Pro praghere agiorna OsmAnd pro bìdere sos datos in sa mapa</string>
     <string name="shared_string_update">Agiorna</string>
     <string name="shared_string_telegram">Telegram</string>
-    <string name="privacy_policy_use_telegram">Impreamus Telegram (s\'aplicatzione pro sos messàgios) pro cunnètere sa gente e fàghere in modu chi comunicare cun issos ti siat prus fàtzile.</string>
+    <string name="privacy_policy_use_telegram">Telegram (s\'aplicatzione pro sos messàgios) benit impreadu pro cunnètere e fàghere comunicare sa gente.</string>
     <string name="privacy_policy_telegram_client">Telegram est una prataforma aberta e OsmAnd Tracker est unu de sos comporadores. Sos cuntatos tuos podent impreare cale si siat aplicatzione cliente Telegram.</string>
     <string name="privacy_policy_agree">Incarchende \"sighi\" atzetas sa Polìtica de Riservadesa de Telegram e cussa de OsmAnd.</string>
     <string name="shared_string_accept">Atzeta</string>
@@ -205,4 +205,11 @@
     <string name="shared_string_appearance">Aparèntzia</string>
     <string name="show_gps_points">Ammustra sos puntos GPS</string>
     <string name="show_gps_points_descr">Ammustra sa cantidade de puntos GPS collidos e imbiados.</string>
+    <string name="shared_string_ok">AB</string>
+    <string name="timeline_available_for_free_now">Sa lìnia temporale como est una funztionalidade disponìbile de badas.</string>
+    <string name="disable_monitoring">Disabìlita su monitoràgiu</string>
+    <string name="location_recording_enabled">Registratzione de sa positzione abilitada</string>
+    <string name="timeline_description">Abìlita su monitoràgiu pro sarvare totu sas positziones in sa cronologia.</string>
+    <string name="app_name_short_online">Arrastadore in lìnia</string>
+    <string name="app_name_short">Arrastadore de OsmAnd</string>
 </resources>
