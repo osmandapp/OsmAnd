@@ -89,10 +89,8 @@ dependencies {
 	implementation 'org.apache.commons:commons-compress:1.17'
 	implementation 'com.moparisthebest:junidecode:0.1.1'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
-//	implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
+	implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'net.sf.kxml:kxml2:2.1.8'
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
-	implementation files('libs/kuromoji-core-1.0-SNAPSHOT.jar')
-	implementation files('libs/kuromoji-ipadic-1.0-SNAPSHOT.jar')
 }
 
