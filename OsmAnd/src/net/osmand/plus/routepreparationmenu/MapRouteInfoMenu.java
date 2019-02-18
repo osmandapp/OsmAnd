@@ -497,6 +497,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					ApplicationMode next = selected.iterator().next();
 					updateApplicationMode(am, next);
 				}
+				updateFinishPointView();
 				updateOptionsButtons();
 			}
 		};
@@ -975,31 +976,36 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		});
 
 		final FrameLayout toButton = (FrameLayout) mainView.findViewById(R.id.to_button);
-		final LinearLayout toButtonContainer = (LinearLayout) mainView.findViewById(R.id.to_button_container);
-
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, toButton, nightMode, R.drawable.btn_border_rounded_light, R.drawable.btn_border_rounded_dark);
-			AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
+		if (routingHelper.isPublicTransportMode()) {
+			toButton.setVisibility(View.GONE);
 		} else {
-			AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
-		}
-		ImageView toButtonImageView = (ImageView) mainView.findViewById(R.id.to_button_image_view);
+			toButton.setVisibility(View.VISIBLE);
 
-		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			final LinearLayout toButtonContainer = (LinearLayout) mainView.findViewById(R.id.to_button_container);
 
-			normal = AndroidUtils.createPressedStateListDrawable(normal, active);
-		}
-
-		toButtonImageView.setImageDrawable(normal);
-		toButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				openAddPointDialog(PointType.INTERMEDIATE);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				AndroidUtils.setBackground(app, toButton, nightMode, R.drawable.btn_border_rounded_light, R.drawable.btn_border_rounded_dark);
+				AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
+			} else {
+				AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
 			}
-		});
+			ImageView toButtonImageView = (ImageView) mainView.findViewById(R.id.to_button_image_view);
 
+			Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+			if (Build.VERSION.SDK_INT >= 21) {
+				Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+
+				normal = AndroidUtils.createPressedStateListDrawable(normal, active);
+			}
+
+			toButtonImageView.setImageDrawable(normal);
+			toButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					openAddPointDialog(PointType.INTERMEDIATE);
+				}
+			});
+		}
 		updateToIcon(mainView);
 	}
 
