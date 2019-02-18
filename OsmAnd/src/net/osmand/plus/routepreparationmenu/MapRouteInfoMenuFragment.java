@@ -51,7 +51,6 @@ import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import java.util.List;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	public static final String TAG = "MapRouteInfoMenuFragment";
@@ -83,7 +82,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	private int shadowHeight;
 	private int screenHeight;
 	private int viewHeight;
-	private int topShadowMargin;
 
 	@Nullable
 	private MapActivity getMapActivity() {
@@ -111,10 +109,9 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		processScreenHeight(container);
 
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		topShadowMargin = AndroidUtils.dpToPx(mapActivity, 9f);
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-		shadowHeight = AndroidUtils.dpToPx(mapActivity, SHADOW_HEIGHT_TOP_DP);
+		shadowHeight = AndroidUtils.getStatusBarHeight(mapActivity);
 		topScreenPosY = addStatusBarHeightIfNeeded(0);
 		minHalfY = viewHeight - (int) (viewHeight * .75f);
 
@@ -130,6 +127,9 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		modesLayoutListContainer = view.findViewById(R.id.modes_layout_list_container);
 		modesLayout = view.findViewById(R.id.modes_layout);
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+
+		View topShadowView = mainView.findViewById(R.id.top_shadow);
+		topShadowView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, shadowHeight));
 
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -147,15 +147,21 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		buildBottomView();
 
 		if (!portrait) {
+			topShadowView.setVisibility(View.GONE);
+			view.findViewById(R.id.app_modes_fold_container).setVisibility(View.GONE);
+
 			final TypedValue typedValueAttr = new TypedValue();
 			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 			mainView.setBackgroundResource(typedValueAttr.resourceId);
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.WRAP_CONTENT);
-
+			int widthNoShadow = AndroidUtils.dpToPx(mapActivity, 345f);
+			modesLayoutToolbar.setLayoutParams(new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT));
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
 			params.gravity = Gravity.BOTTOM;
 			view.findViewById(R.id.control_buttons).setLayoutParams(params);
+			View appModesView = view.findViewById(R.id.app_modes);
+			appModesView.setPadding(0, 0, appModesView.getPaddingRight(), 0);
 		}
 
 		runLayoutListener();
@@ -363,7 +369,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		if (view != null) {
-			if (menu != null && (getViewY() <= topShadowMargin || !portrait)) {
+			if (menu != null && (getViewY() <= 0 || !portrait)) {
 				if (Build.VERSION.SDK_INT >= 23) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
@@ -397,7 +403,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			return;
 		}
 		int y = getViewY();
-		if (y < topShadowMargin || !portrait) {
+		if (y < 0 || !portrait) {
 			ViewGroup parent = (ViewGroup) modesLayout.getParent();
 			if (parent != null && parent != modesLayoutToolbarContainer) {
 				parent.removeView(modesLayout);
@@ -426,12 +432,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private int getFullScreenTopPosY() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			return topShadowMargin;
-		} else {
-			return 0;
-		}
+		return 0;
 	}
 
 	private int addStatusBarHeightIfNeeded(int res) {
@@ -899,7 +900,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		boolean landscapeLayout = !portraitMode;
 		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (!landscapeLayout) {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);
+			View menuView = view.findViewById(R.id.route_menu_top_shadow_all);
+			AndroidUtils.setBackground(ctx, menuView, nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
 		} else {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.route_info_menu_bg_left_light, R.drawable.route_info_menu_bg_left_dark);
 		}
