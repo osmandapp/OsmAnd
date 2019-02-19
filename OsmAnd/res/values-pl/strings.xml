@@ -351,7 +351,7 @@
     <string name="transport_stops_to_pass">przystanków do przejechania</string>
     <string name="transport_route_distance">Długość rozkładu jazdy</string>
     <string name="transport">Transport publiczny</string>
-    <string name="shared_string_ok">Zatwierdź</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="show_transport_over_map_description">Wyświetla na mapie przystanki transportu publicznego.</string>
     <string name="show_transport_over_map">Pokaż przystanki</string>
     <string name="hello">Aplikacja do nawigacji satelitarnej OsmAnd</string>
