@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="switch_to_raster_map_to_see">Off-line vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v \'Nastavení\' (\'Stáhnout mapy\'), nebo se přepněte na modul \'Online mapy\'.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
     <string name="gpx_visibility_txt">Viditelnost</string>
@@ -115,7 +114,6 @@
     <string name="user_name">Vaše OSM uživatelské jméno</string>
     <string name="open_street_map_login_descr">Vaše uživatelské jméno na openstreetmap.org.</string>
     <string name="user_password">Heslo</string>
-    
     <string name="osmand_service">Služba na pozadí</string>
     <string name="osmand_service_descr">OsmAnd poběží na pozadí i při vypnuté obrazovce.</string>
     <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
@@ -127,7 +125,6 @@
     <string name="init_native_library">Probíhá inicializace Android native library…</string>
     <string name="choose_auto_follow_route">Automatické centrování</string>
     <string name="choose_auto_follow_route_descr">Zadejte interval pro automatický návrat mapy na vaši pozici.</string>
-    
     <string name="auto_follow_route_navigation">Automatické sledování pozice</string>
     <string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
     <string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
@@ -160,7 +157,6 @@
     <string name="search_position_address">Adresy…</string>
     <string name="search_position_favorites">Oblíbených…</string>
     <string name="search_position_undefined">Nedefinováno</string>
-    
     <string name="search_position_map_view">Současný střed mapy</string>
     <string name="select_search_position">Počáteční bod:</string>
     <string name="context_menu_item_search">Hledat v okolí</string>
@@ -194,7 +190,6 @@
     <string name="local_index_action_do">Chystáte se %1$s %2$s položek. Jste si jisti?</string>
     <string name="local_index_mi_restore">Obnovit</string>
     <string name="local_index_mi_backup">Zálohovat</string>
-    
     <string name="shared_string_download">Stáhnout</string>
     <string name="local_index_poi_data">Data POI</string>
     <string name="local_index_address_data">Addresy</string>
@@ -319,8 +314,6 @@
     <string name="add_waypoint_dialog_added">GPX bod na trase \'\'{0}\'\' byl přidán</string>
     <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
     <string name="context_menu_item_add_waypoint">Přidat bod na GPX trasu</string>
-    
-    
     <string name="osmand_routing_experimental">Off-line navigace je experimentální a funguje jen pro větší vzdálenosti než 20 km. Navigace je dočasně přepnuta na on-line CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
     <string name="application_dir">Adresář pro data</string>
@@ -369,13 +362,11 @@
     <string name="transport_search_again">Znovu hledat dopravu</string>
     <string name="voice">Nahrávka hlasu</string>
     <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
-    
     <string name="gpx_files_not_found">Žádné GPX soubory nebyly nalezeny v adresáři tracks</string>
     <string name="layer_gpx_layer">GPX trasa…</string>
     <string name="error_reading_gpx">Chyba při načítání dat GPX</string>
     <string name="vector_data">Vektorové off-line mapy</string>
     <string name="transport_context_menu">Hledat dopravu ze zastávky</string>
-    
     <string name="poi_context_menu_modify">Upravit POI</string>
     <string name="poi_context_menu_delete">Smazat POI</string>
     <string name="rotate_map_compass_opt">Směr kompasu</string>
@@ -394,13 +385,11 @@
     <string name="none_region_found">Na paměťové kartě nejsou žádná off-line data pro oblasti. Zkuste nějaké stáhnout z Internetu.</string>
     <string name="poi_namefinder_query_empty">Psaním hledejte POI</string>
     <string name="any_poi">Jakýkoli</string>
-    
     <string name="thanks_yandex_traffic">Děkujeme Yandexu za dopravní informace.</string>
     <string name="layer_yandex_traffic">Yandex doprava</string>
     <string name="layer_route">Cesta</string>
     <string name="shared_string_favorites">Oblíbené</string>
     <string name="layer_osm_bugs">OSM Poznámky (on-line)</string>
-    
     <string name="layer_poi">Vrstva POI…</string>
     <string name="layer_map">Zdroj map…</string>
     <string name="menu_layers">Mapová data</string>
@@ -615,9 +604,7 @@
     <string name="search_address_building">Budova</string>
     <string name="search_address_building_option">Budova</string>
     <string name="search_address_street_option">Protínající ulice</string>
-    
     <string name="context_menu_item_update_map">Aktualizovat mapu</string>
-    
     <string name="context_menu_item_create_poi">Vytvořit POI</string>
     <string name="shared_string_yes">Ano</string>
     <string name="shared_string_cancel">Zrušit</string>
@@ -631,21 +618,10 @@
     <string name="favourites_context_menu_delete">Smazat oblíbené</string>
     <string name="favourites_remove_dialog_msg">Opravdu odstranit oblíbené místo \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Oblíbené místo {0} bylo vymazáno.</string>
-    
-    
-    
-    
     <string name="osb_comment_dialog_message">Hlášení</string>
     <string name="osb_comment_dialog_author">Jméno autora</string>
-    
-    
     <string name="osb_comment_dialog_success">Komentář přidán</string>
     <string name="osb_comment_dialog_error">Nepodařilo se přidat komentář</string>
-    
-    
-    
-    
-    
     <string name="poi_edit_title">Upravit POI</string>
     <string name="poi_create_title">Vytvořit POI</string>
     <string name="poi_error_poi_not_found">Uzel nelze nalézt nebo vybavení sestává z několika uzlů, které ještě nejsou podporovány.</string>
@@ -812,7 +788,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="filterpoi_activity">Vytvořit filtr pro POI</string>
     <string name="select_navigation_mode">Vyberte způsob dopravy</string>
     <string name="day_night_info">Denní/noční info</string>
-    
     <string name="map_widget_renderer">Styl mapy</string>
     <string name="avoid_motorway">Vyhnout se dálnicím</string>
     <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace.</string>
@@ -891,7 +866,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="no_buildings_found">Nenalezeny žádné budovy.</string>
     <string name="search_villages_and_postcodes">Hledat obec/PSČ</string>
     <string name="route_descr_lat_lon">%1$.3f šířky, %2$.3f délky</string>
-    
     <string name="map_widget_max_speed">Rychlostní omezení</string>
     <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic (administrativní úrovně 5-9).</string>
@@ -1053,7 +1027,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="new_directions_point_dialog">Mezicíle jsou již nastaveny.</string>
     <string name="context_menu_item_directions_to">Navigovat sem</string>
     <string name="context_menu_item_directions_from">Navigovat odsud</string>
-    
     <string name="speak_title">Hlásit…</string>
     <string name="speak_descr">Konfigurace hlášení názvů ulic, dopravních upozornění, radarů, rychlostních omezení.</string>
     <string name="speak_street_names">Názvy ulic (TTS)</string>
@@ -1085,7 +1058,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="auto_zoom_farthest">Na velkou vzdálenost</string>
     <string name="auto_zoom_close">Na malou vzdálenost</string>
     <string name="auto_zoom_far">Na střední vzdálenost</string>
-    
     <string name="local_index_tile_data_zooms">Stažené přiblížení: %1$s</string>
     <string name="local_index_tile_data_name">Data dlaždic: %1$s</string>
     <string name="edit_tilesource_successfully">Zdroj dlaždic %1$s byl uložen</string>
@@ -1115,8 +1087,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="route_info">Informace o trase</string>
     <string name="routing_attr_prefer_motorway_name">Upřednostňovat dálnice</string>
     <string name="routing_attr_prefer_motorway_description">Upřednostňovat dálnice.</string>
-    
-    
     <string name="routing_attr_avoid_toll_name">Vyhnout se placeným silnicím</string>
     <string name="routing_attr_avoid_toll_description">Vyhnout se placeným silnicím.</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnout se nezpevněným cestám</string>
@@ -1198,67 +1168,16 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="misc_pref_title">Různé</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
-    
-    
-    
-    
-    
-    
-    
     <string name="use_points_as_intermediates">Vypočítat trasu mezi body</string>
-    
-    
     <string name="rendering_value_pink_name">růžová</string>
-    
     <string name="rendering_value_brown_name">hnědá</string>
-    
-    
-    
-    
     <string name="osmo_edit_color">Zobrazit barvu</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="int_days">dnů</string>
     <string name="osmo_connect_menu">Připojit</string>
-    
     <string name="osmo_group_description">Popis</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="hours_ago">hodin dozadu</string>
     <string name="minutes_ago">minut dozadu</string>
     <string name="seconds_ago">sekund dozadu</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="interrupt_music_descr">Hlasové pokyny nesníží jen hlasitost, ale pozastaví hudbu.</string>
     <string name="interrupt_music">Pozastavit hudbu</string>
     <string name="share_route_as_gpx">Sdílet trasu jako GPX soubor</string>
@@ -1272,27 +1191,10 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_share">Sdílet</string>
     <string name="share_fav_subject">Oblíbené body sdílené přes OsmAnd</string>
     <string name="navigation_intent_invalid">Neplatný formát: %s</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="gpx_file_is_empty">Prázdná GPX trasa</string>
     <string name="shared_string_tracks">Všechny trasy</string>
     <string name="shared_string_my_favorites">Moje oblíbené</string>
     <string name="shared_string_my_places">Moje místa</string>
-    
-    
-    
-    
-    
     <string name="loading_smth">Načítání %1$s…</string>
     <string name="map_widget_plain_time">Aktuální čas</string>
     <string name="delay_navigation_start">Spustit navigaci automaticky</string>
@@ -1323,28 +1225,19 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="save_as_favorites_points">Uložit jako skupinu oblíbených</string>
     <string name="select_destination_and_intermediate_points">Vybrat cíle</string>
     <string name="layer_amenity_label">Překryvné popisky bodů</string>
-    <string name="create_poi_link_to_osm_doc"><u>On-line OSM</u> klasifikace map s obrázky.</string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>On-line OSM</u> klasifikace map s obrázky.</string>
     <string name="show_zoom_buttons_navigation_descr">Zobrazit tlačítka lupy během navigace.</string>
     <string name="show_zoom_buttons_navigation">Zobrazit tlačítka lupy</string>
     <string name="sort_by_distance">Třídit podle vzdálenosti</string>
     <string name="sort_by_name">Třídit podle jména</string>
     <string name="local_index_select_gpx_file">Vybrat k zobrazení</string>
-    
-    
-    
-    
-    
-    
     <string name="no_index_file_to_download">Nic ke stažení nebylo nalezeno, prosím zkontrolujte své připojení k Internetu.</string>
     <string name="none_selected_gpx">Nebyl vybrán žádný GPX soubor. Podržením vyberte jednu z dostupných tras.</string>
     <string name="rendering_attr_hideBuildings_name">Budovy</string>
     <string name="rendering_attr_hideText_name">Text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Lesy a křoviny</string>
     <string name="rendering_attr_showSurfaces_name">Zobrazit povrch cesty</string>
-    
-    
-    
-    
     <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
     <string name="forward">Vpřed</string>
     <string name="home">Domovská stránka</string>
@@ -1370,13 +1263,9 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_hideAccess_name">Omezení přístupu</string>
     <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu a mýtné</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
-    
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
     <string name="pause_navigation">Pozastavit navigaci</string>
     <string name="continue_navigation">Pokračování v navigaci</string>
-    
-    
-    
     <string name="rendering_attr_coloredBuildings_name">Barvy budov podle typu</string>
     <string name="lang_sw">Svahilština (Kiswahili)</string>
     <string name="lang_he">Hebrejština</string>
@@ -1416,7 +1305,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_all">Všechny</string>
     <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
     <string name="shared_string_waypoints">Body na trase</string>
-    
     <string name="way_alarms">Dopravní varování</string>
     <string name="speak_favorites">Blízké oblíbené body</string>
     <string name="speak_poi">Blízké body zájmu POI</string>
@@ -1441,8 +1329,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="fav_point_emoticons_message">Název oblíbeného bodu byl změněn na %1$s, protože není možné ukládat do souboru řetězce s emotikony.</string>
     <string name="speed_limit_exceed">Tolerance překročení rychlosti</string>
     <string name="speed_limit_exceed_message">Zvolte toleranci překročení povolené rychlosti, po které uslyšíte hlasové varování.</string>
-    
-    
     <string name="anonymous_user_hint">Anonymní uživatel nemůže: 
 \n- Vytvářet skupiny; 
 \n- Synchronizovat skupiny a zařízení se serverem; 
@@ -1470,13 +1356,9 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_category_hide">Skrýt</string>
     <string name="wake_on_voice">Zapnout obrazovku</string>
     <string name="wake_on_voice_descr">Zapnout obrazovku zařízení (pokud je vypnuta) když se blíží odbočka.</string>
-    
-    
     <string name="lock_screen_request_explanation">%1$s potřebuje tato oprávnění pro vypnutí obrazovky při režimu šetření energie.</string>
     <string name="shared_string_never">Nikdy</string>
     <string name="home_button">Domovská obrazovka</string>
-    
-    
     <string name="map_update">K dispozici aktualizace pro %1$s map</string>
     <string name="search_for">Hledat</string>
     <string name="shared_string_show_all">Zobrazit vše</string>
@@ -1606,7 +1488,6 @@ Délka %2$s</string>
     <string name="current_route">Současná trasa</string>
     <string name="osm_changes_added_to_local_edits">OSM změny přidány do lokální změnové sady</string>
     <string name="mark_to_delete">Označit pro smazání</string>
-    
     <string name="welcome_select_region">Pro správné zobrazení dopravních značek a předpisů vyberte prosím svoji dopravní oblast:</string>
     <string name="welcome_text">OsmAnd poskytuje celosvětové prohlížení map a off-line navigaci.</string>
     <string name="confirm_usage_speed_cameras">V mnoha zemích (Německo, Francie, Itálie a dalších) je použití varování před rychlostními kamerami zakázané zákonem. OsmAnd nepřebírá žádnou zodpovědnost, pokud porušíte zákon. Prosím označte Ano pouze v případě, pokud máte oprávnění používat tuto funkci.</string>
@@ -1654,13 +1535,11 @@ Délka %2$s</string>
     <string name="storage_directory">Úložiště map</string>
     <string name="shared_string_copy">Kopírovat</string>
     <string name="rendering_attr_hideHouseNumbers_name">Popisná čísla domů</string>
-    
     <string name="routing_attr_avoid_borders_description">Nepřekračovat hranice do jiné země.</string>
     <string name="routing_attr_height_name">Výškové omezení</string>
     <string name="routing_attr_height_description">Zadejte výšku vozidla, která musí být povolena na cestách.</string>
     <string name="use_fast_recalculation">Inteligentní přepočítávání trasy</string>
     <string name="use_fast_recalculation_desc">Pro dlouhé cesty přepočítat pouze počáteční úsek trasy.</string>
-    
     <string name="shared_string_logoff">Odhlásit</string>
     <string name="shared_string_import2osmand">Importovat do OsmAnd</string>
     <string name="read_full_article">Přečíst celý článek (on-line)</string>
@@ -1862,13 +1741,11 @@ Délka %2$s</string>
     <string name="feedback">Anketa</string>
     <string name="contact_us">Kontakt</string>
     <string name="osm_edit_created_poi">Vytvořen OSM POI</string>
-    
     <string name="map_legend">Legenda mapy</string>
     <string name="shared_string_update">Aktualizovat</string>
     <string name="shared_string_upload">Odeslat</string>
     <string name="rendering_attr_hideProposed_name">Plánované objekty</string>
-
-<string name="whats_new">Novinky ve</string>
+    <string name="whats_new">Novinky ve</string>
     <string name="share_osm_edits_subject">Úpravy OSM sdílené pomocí OsmAnd</string>
     <string name="lang_nds">Dolnoněmčina</string>
     <string name="lang_mk">Makedonština</string>
@@ -1880,7 +1757,6 @@ Délka %2$s</string>
     <string name="access_from_map_description">Tlačítko menu zobrazí domovskou obrazovku místo menu</string>
     <string name="access_from_map">Přístup z mapy</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
-    
     <string name="osm_save_offline">Uložit off-line</string>
     <string name="osm_edit_modified_poi">Upravený OSM POI</string>
     <string name="osm_edit_deleted_poi">Smazaný OSM POI</string>
@@ -1888,18 +1764,17 @@ Délka %2$s</string>
     <string name="osm_edit_reopened_note">Znovuotevřená OSM poznámka</string>
     <string name="osm_edit_commented_note">Komentovaná OSM poznámka</string>
     <string name="osm_edit_removed_note">Smazaná OSM poznámka</string>
-	<string name="osm_edit_created_note">Vytvořená OSM poznámka</string>
-	<string name="osn_bug_name">OSM poznámka</string>
-	<string name="osn_add_dialog_title">Vytvořit poznámku</string>
-	<string name="osn_comment_dialog_title">Přidat komentář</string>
-	<string name="osn_reopen_dialog_title">Znovuotevřít poznámku</string>
-	<string name="osn_close_dialog_title">Uzavřít poznámku</string>
-	<string name="osn_add_dialog_success">Poznámka vytvořena</string>
-	<string name="osn_add_dialog_error">Chyba: Poznámka nebyla vytvořena</string>
-	<string name="osn_close_dialog_success">Poznámka uzavřena</string>
-	<string name="osn_close_dialog_error">Chyba: Poznámka nebyla uzavřena</string>
-	<string name="shared_string_commit">Odeslat</string>
-	
+    <string name="osm_edit_created_note">Vytvořená OSM poznámka</string>
+    <string name="osn_bug_name">OSM poznámka</string>
+    <string name="osn_add_dialog_title">Vytvořit poznámku</string>
+    <string name="osn_comment_dialog_title">Přidat komentář</string>
+    <string name="osn_reopen_dialog_title">Znovuotevřít poznámku</string>
+    <string name="osn_close_dialog_title">Uzavřít poznámku</string>
+    <string name="osn_add_dialog_success">Poznámka vytvořena</string>
+    <string name="osn_add_dialog_error">Chyba: Poznámka nebyla vytvořena</string>
+    <string name="osn_close_dialog_success">Poznámka uzavřena</string>
+    <string name="osn_close_dialog_error">Chyba: Poznámka nebyla uzavřena</string>
+    <string name="shared_string_commit">Odeslat</string>
     <string name="context_menu_item_delete_waypoint">Odstranit bod GPX?</string>
     <string name="context_menu_item_edit_waypoint">Upravit bod GPX</string>
     <string name="shared_string_location">Poloha</string>
@@ -1907,16 +1782,15 @@ Délka %2$s</string>
     <string name="rendering_attr_currentTrackWidth_description">Šířka GPX</string>
     <string name="rendering_attr_roadStyle_description">Styl cesty</string>
     <string name="poi_dialog_reopen">Znovuotevřít</string>
-	<string name="poi_context_menu_modify_osm_change">Upravit změnu OSM</string>
+    <string name="poi_context_menu_modify_osm_change">Upravit změnu OSM</string>
     <string name="use_dashboard_btn">Použít domovskou obrazovku</string>
     <string name="use_drawer_btn">Použít menu</string>
     <string name="dashboard_or_drawer_title">Domovská obrazovka nebo menu</string>
     <string name="dashboard_or_drawer_description">Na výběr je možnost ovládání aplikace přes flexibilní domovskou obrazovku nebo statické menu. Svůj výběr můžete kdykoliv změnit v nastavení domovské obrazovky.</string>
-<string name="routing_attr_avoid_stairs_name">Vyhnout se schodům</string>
-	<string name="routing_attr_avoid_stairs_description">Vyhnout se schodům.</string>
-	<string name="routing_attr_avoid_borders_name">Vyhnout se hraničním přechodům</string>
-	
-	<string name="shared_string_near">Nedaleko</string>
+    <string name="routing_attr_avoid_stairs_name">Vyhnout se schodům</string>
+    <string name="routing_attr_avoid_stairs_description">Vyhnout se schodům.</string>
+    <string name="routing_attr_avoid_borders_name">Vyhnout se hraničním přechodům</string>
+    <string name="shared_string_near">Nedaleko</string>
     <string name="shared_string_hide">Skrýt</string>
     <string name="av_video_quality_low">Nejnižší kvalita</string>
     <string name="av_video_quality_high">Nejvyšší kvalita</string>
@@ -1927,7 +1801,7 @@ Délka %2$s</string>
     <string name="av_audio_bitrate">Bitrate zvuku</string>
     <string name="av_audio_bitrate_descr">Zvolte bitrate zvuku.</string>
     <string name="no_address_found">Adresa nezjištěna</string>
-	<string name="looking_up_address">Vyhledávání adres</string>
+    <string name="looking_up_address">Vyhledávání adres</string>
     <string name="route_distance">Vzdálenost:</string>
     <string name="route_duration">Čas:</string>
     <string name="rendering_attr_horseRoutes_name">Stezka pro koně</string>
@@ -1939,7 +1813,7 @@ Délka %2$s</string>
     <string name="live_update">Okamžité aktualizace</string>
     <string name="update_now">Aktualizovat nyní</string>
     <string name="missing_write_external_storage_permission">OsmAnd nemá oprávnění používat paměťovou kartu</string>
-<string name="item_removed">Položka odstraněna</string>
+    <string name="item_removed">Položka odstraněna</string>
     <string name="n_items_removed">vymazaných položek</string>
     <string name="shared_string_undo_all">Vrátit vše</string>
     <string name="shared_string_type">Typ</string>
@@ -1968,7 +1842,7 @@ Délka %2$s</string>
     <string name="morning">Ráno</string>
     <string name="night">V noci</string>
     <string name="select_month_and_country">Vyberte měsíc a krajinu</string>
-<string name="shared_string_remove">Odstranit</string>
+    <string name="shared_string_remove">Odstranit</string>
     <string name="rendering_attr_hideIcons_name">Ikony POI</string>
     <string name="shared_string_select">Zvolit</string>
     <string name="road_blocked">Cesta je zablokovaná</string>
@@ -1979,7 +1853,7 @@ Délka %2$s</string>
     <string name="number_of_contributors">Počet přispěvatelů</string>
     <string name="number_of_edits">Počet úprav</string>
     <string name="reports_for">Report za</string>
-<string name="rendering_attr_hideUnderground_name">Podzemní objekty</string>
+    <string name="rendering_attr_hideUnderground_name">Podzemní objekty</string>
     <string name="shared_string_email_address">E-mail</string>
     <string name="show_polygons">Zobrazit polygony</string>
     <string name="find_parking">Najít parkování</string>
@@ -2027,9 +1901,7 @@ Délka %2$s</string>
     <string name="osm_live_region_desc">Část vašeho příspěvku bude zaslána uživatelům OSM, kteří upravují mapu ve zvolené oblasti.</string>
     <string name="osm_live_subscription_settings">Nastavení předplatného</string>
     <string name="osm_live_ask_for_purchase">Nejprve prosím zakupte předplatné OsmAnd Live</string>
-
     <string name="osm_live_header">Předplatné umožní hodinové aktualizace pro všechny mapy světa. Část příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna. Pokud máte rádi OsmAnd a OSM, chcete je podpořit a být podporováni, toto je výborný způsob, jak to udělat.</string>
-    
     <string name="download_files_question_space_with_temp">Stáhnout {0} soubor(ů)?
  V úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
  (Aktuálně je k dispozici {2} MB.)</string>
@@ -2051,7 +1923,7 @@ Délka %2$s</string>
     <string name="rendering_attr_showMtbRoutes_name">Zobrazit trasy pro horská kola</string>
     <string name="storage_permission_restart_is_required">Aplikace nyní smí zapisovat na externí úložiště, ale je potřeba její restart.</string>
     <string name="file_name_containes_illegal_char">Název souboru obsahuje nepovolené znaky</string>
-<string name="access_no_destination">Cíl není nastaven</string>
+    <string name="access_no_destination">Cíl není nastaven</string>
     <string name="map_widget_magnetic_bearing">Magnetické směrování</string>
     <string name="map_widget_bearing">Relativní směrování</string>
     <string name="access_disable_offroute_recalc">Nepřepočítávat trasu, pokud se od ní odchýlíte</string>
@@ -2092,7 +1964,7 @@ Délka %2$s</string>
     <!-- string name="lat_lon_pattern">Šíř: %1$.5f Dél: %2$.5f</string -->
     <string name="access_direction_audio_feedback">Zvukové směry</string>
     <string name="use_osm_live_routing_description">Povolit navigaci pro OsmAnd Live changes.</string>
-	<string name="change_markers_position">Změnit umístění značky</string>
+    <string name="change_markers_position">Změnit umístění značky</string>
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pro změnu umístění značky</string>
     <string name="lang_hu_formal">Maďarština (formální)</string>
     <string name="current_track">Současná trasa</string>
@@ -2101,15 +1973,15 @@ Délka %2$s</string>
     <string name="lang_be_by">Běloruština (latinka)</string>
     <string name="lang_kn">Kannadština</string>
     <string name="app_mode_bus">Autobus</string>
- 	<string name="app_mode_train">Vlak</string>
+    <string name="app_mode_train">Vlak</string>
     <string name="lang_ast">Asturština</string>
     <string name="coords_format">Formát souřadnic</string>
     <string name="coords_format_descr">Formát pro zeměpisné souřadnice.</string>
-  	<string name="shared_string_from">od</string>
+    <string name="shared_string_from">od</string>
     <string name="city_type_district">Okres</string>
     <string name="city_type_neighbourhood">Okolí</string>
     <string name="map_widget_search">Hledat</string>
-	<string name="shared_string_is_open_24_7">Otevřeno non-stop</string>
+    <string name="shared_string_is_open_24_7">Otevřeno non-stop</string>
     <string name="storage_directory_card">Paměťová karta</string>
     <string name="postcode">Poštovní směrovací číslo</string>
     <string name="search_categories">Kategorie</string>
@@ -2117,7 +1989,6 @@ Délka %2$s</string>
     <string name="confirmation_to_delete_history_items">Odstranit vybrané položky z \'Historie\'?</string>
     <string name="show_something_on_map">Zobrazit %1$s na mapě</string>
     <string name="dist_away_from_my_location">Hledat do vzdálenosti %1$s</string>
-    
     <string name="share_history_subject">sdílené pomocí OsmAnd</string>
     <string name="coords_search">Hledání souřadnic</string>
     <string name="advanced_coords_search">Rozšířené hledání souřadnic</string>
@@ -2147,7 +2018,6 @@ Délka %2$s</string>
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
     <string name="get_started">Začít</string>
-    
     <string name="osm_live_payment_desc">Předplatné je strháváno měsíčně. Můžete jej kdykoliv zrušit přes Google Play.</string>
     <string name="donation_to_osm">Příspěvek komunitě OpenStreetMap</string>
     <string name="donation_to_osm_desc">Část peněz z Vašeho příspěvku je zaslána přímo uživatelům, kteří provádějí změny v databázi OpenStreetMap. Cena předplatného pro Vás však zůstává stejná.</string>
@@ -2163,9 +2033,6 @@ Délka %2$s</string>
     <string name="gpx_no_tracks_title_folder">Do složky můžete také přidat GPX soubory</string>
     <string name="gpx_add_track">Přidat další…</string>
     <string name="gpx_appearance">Vzhled</string>
-    
-    
-    
     <string name="trip_rec_notification_settings">Povolit rychlé spuštění záznamu</string>
     <string name="trip_rec_notification_settings_desc">Zobrazit systémové oznámení, které umožňuje spustit nahrávání.</string>
     <string name="shared_string_notifications">Oznámení</string>
@@ -2216,8 +2083,6 @@ Délka %2$s</string>
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Hledat město nebo oblast</string>
     <string name="show_legacy_search_desc">Přidat starší hledání do úvodního panelu.</string>
-    
-    
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
@@ -2230,7 +2095,6 @@ Délka %2$s</string>
     <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skrýt vodu</string>
     <string name="configure_screen_quick_action">Rychlá akce</string>
-
     <string name="quick_action_item_action">Akce %d</string>
     <string name="quick_action_item_screen">Obrazovka %d</string>
     <string name="quick_action_add_marker">Přidat mapovou značku</string>
@@ -2300,8 +2164,8 @@ Délka %2$s</string>
     <string name="quick_action_map_source_switch">Zdroj mapy se změnil na \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Změnit polohu tlačítka</string>
     <string name="quick_action_btn_tutorial_descr">Podržení a potáhnutí tlačítka změní jeho umístění na obrazovce.</string>
-	<string name="shared_string_action_name">Název akce</string>
-<string name="navigate_point_olc_info_invalid">Neplatný OLC
+    <string name="shared_string_action_name">Název akce</string>
+    <string name="navigate_point_olc_info_invalid">Neplatný OLC
 </string>
     <string name="navigate_point_olc_info_short">Krátké OLC
 Prosím uveďte úplný kód</string>
@@ -2311,13 +2175,12 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_switch">Překryvná mapa se změnila na \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Mapa podkladu se změnila na \"%s\".</string>
     <string name="auto_split_recording_title">Při pauze automaticky rozdělovat nahrávky</string>
-	<string name="auto_split_recording_descr">Začít nový úsek po 6minutové pauze, novou trasu po 2hodinové pauze nebo nový soubor po delší pauze, pokud se změnilo datum.</string>
+    <string name="auto_split_recording_descr">Začít nový úsek po 6minutové pauze, novou trasu po 2hodinové pauze nebo nový soubor po delší pauze, pokud se změnilo datum.</string>
     <string name="quick_action_interim_dialog">Zobrazit dočasné okno</string>
     <string name="quick_action_page_list_descr">Aktivace tlačítka akce posune seznam na další stranu.</string>
     <string name="rendering_attr_depthContours_description">Zobrazit hloubkové vrstevnice a body.</string>
     <string name="rendering_attr_depthContours_name">Námořní hloubkové vrstevnice</string>
-	
-	<string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="route_altitude">Stoupání trasy</string>
     <string name="altitude_descent">Klesání</string>
     <string name="altitude_ascent">Stoupání</string>
@@ -2325,14 +2188,9 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="average_altitude">Průměrná výška</string>
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Celková vzdálenost</string>
-    
-    
     <string name="routing_attr_height_obstacles_name">Použít údaje o nadmořské výšce</string>
     <string name="routing_attr_height_obstacles_description">Zohlednit převýšení terénu (data od SRTM, ASTER a EU-DEM).</string>
-
     <string name="routing_attr_driving_style_name">Styl jízdy</string>
-    
-    
     <string name="select_gpx_folder">Vyberte složku pro soubor GPX</string>
     <string name="file_can_not_be_moved">Soubor nemůže být přesunut.</string>
     <string name="shared_string_move">Přesunout</string>
@@ -2450,7 +2308,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="mapillary_descr">On-line fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
     <string name="plugin_mapillary_descr">Fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
     <string name="mapillary_widget">Nástroj Mapillary</string>
-    
     <string name="map_widget_ruler_control">Kruhové pravítko</string>
     <string name="shared_string_reset">Resetovat</string>
     <string name="shared_string_reload">Znovu načíst</string>
@@ -2472,14 +2329,12 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="ascent_descent">Stoupání/Klesání</string>
     <string name="moving_time">Čas pohybu</string>
     <string name="max_min">Max/Min</string>
-    
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Pozastavit/pokračovat v navigaci</string>
     <string name="quick_action_resume_pause_navigation_descr">Stiskněte toto tlačítko na pozastavení, nebo pokračování navigace.</string>
     <string name="quick_action_show_navigation_finish_dialog">Zobrazit zprávu \"Navigace ukončena\"</string>
     <string name="quick_action_start_stop_navigation">Spustit/ukončit navigaci</string>
     <string name="quick_action_start_stop_navigation_descr">Stiskněte toto tlačítko pro spuštění, nebo zastavení navigace.</string>
-    
     <string name="rendering_value_translucent_pink_name">Průhledná růžová</string>
     <string name="none_point_error">Prosím přidejte alespoň jeden bod.</string>
     <string name="enter_gpx_name">Název souboru GPX:</string>
@@ -2490,14 +2345,11 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zadejte čas pro podržení pozic k odeslání, pokud není připojení</string>
     <string name="mappilary_no_internet_desc">Pro zobrazení fotografií z Mapillary potřebujete internetové připojení.</string>
     <string name="retry">Zkusit znovu</string>
-    
     <string name="add_waypoint">Přidat trasový bod</string>
     <string name="save_gpx_waypoint">Uložit trasový bod GPX</string>
     <string name="save_route_point">Uložit bod trasy</string>
     <string name="waypoint_one">Trasový bod 1</string>
     <string name="route_point_one">Bod trasy 1</string>
-
-    
     <string name="line">Čára</string>
     <string name="save_as_route_point">Uložit jako body trasy</string>
     <string name="save_as_line">Uložit jako čáru</string>
@@ -2519,11 +2371,9 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="import_track_desc">Soubor %$1s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
     <string name="add_segment_to_the_track">Přidat do GPX souboru</string>
-<string name="move_all_to_history">Přesunout vše do historie</string>
-    
+    <string name="move_all_to_history">Přesunout vše do historie</string>
     <string name="show_direction">Indikace vzdálenosti</string>
     <string name="sort_by">Seřadit podle</string>
-    
     <string name="do_not_use_animations">Bez animací</string>
     <string name="do_not_use_animations_descr">Zakáže animace v aplikaci.</string>
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
@@ -2541,8 +2391,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="yesterday">Včera</string>
     <string name="last_seven_days">Posledních 7 dní</string>
     <string name="this_year">Tento rok</string>
-    
-    
     <string name="use_location">Použít umístění</string>
     <string name="add_location_as_first_point_descr">Přidat svou polohu jako startovní bod do plánu ideální trasy.</string>
     <string name="my_location">Moje poloha</string>
@@ -2577,23 +2425,21 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="context_menu_item_modify_note">Upravit poznámku OSM</string>
     <string name="make_round_trip_descr">Přidat počáteční bod také jako cíl pro vytvoření okruhu.</string>
     <string name="make_round_trip">Vytvořit okružní trasu</string>
-    
     <string name="import_gpx_file_description">Může být importováno jako Oblíbené nebo jako GPX soubor.</string>
     <string name="import_as_gpx">Importovat jako soubor GPX</string>
     <string name="import_as_favorites">Importovat jako Oblíbené</string>
     <string name="import_file">Importovat soubor</string>
-	<string name="wrong_input">Chybný vstup</string>
-	<string name="enter_new_name">Zadejte nový název</string>
-	<string name="shared_string_back">Zpět</string>
-	<string name="shared_string_view">Zobrazit</string>
-	<string name="waypoints_added_to_map_markers">Body trasy přidané k mapovým značkám</string>
-	<string name="wrong_format">Chybný formát</string>
+    <string name="wrong_input">Chybný vstup</string>
+    <string name="enter_new_name">Zadejte nový název</string>
+    <string name="shared_string_back">Zpět</string>
+    <string name="shared_string_view">Zobrazit</string>
+    <string name="waypoints_added_to_map_markers">Body trasy přidané k mapovým značkám</string>
+    <string name="wrong_format">Chybný formát</string>
     <string name="shared_string_road">Cesta</string>
     <string name="show_map">Zobrazit mapu</string>
     <string name="route_is_calculated">Trasa vypočítána</string>
     <string name="round_trip">Okružní trasa</string>
     <string name="plan_route_no_markers_toast">Pro použití této funkce musíte přidat alespoň jednu značku .</string>
-    
     <string name="rendering_value_darkyellow_name">Tmavě žlutá</string>
     <string name="empty_state_osm_edits">Vytvořit nebo upravit OSM objekty</string>
     <string name="looking_for_tracks_with_waypoints">Hledání stop s trasovými body</string>
@@ -2626,7 +2472,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="rename_marker">Přejmenovat značku</string>
     <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu přepne ovládací tlačítka a nástroje.</string>
     <string name="tap_on_map_to_hide_interface">Režim celé obrazovky</string>
-    
     <string name="mark_passed">Označit prošlé</string>
     <string name="empty_state_osm_edits_descr">Vytvořit nebo upravit OSM POI, otevřít nebo okomentovat OSM poznámky a přispět zaznamenanými GPX soubory.</string>
     <string name="shared_string_deleted">Odstraněné</string>
@@ -2663,9 +2508,8 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Zimní</string>
     <string name="touring_view_renderer">Cestovní</string>
     <string name="nautical_renderer">Plavební</string>
-<string name="will_open_tomorrow_at">Otevírá zítra v</string>
+    <string name="will_open_tomorrow_at">Otevírá zítra v</string>
     <string name="shared_string_marker">Značka</string>
-    
     <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
     <string name="lang_lo">Laosky</string>
     <string name="show_closed_notes">Zobrazit zavřené poznámky</string>
@@ -2691,7 +2535,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="toast_empty_name_error">Bezejmenné místo</string>
     <string name="tunnel_warning">Blíží se tunel</string>
     <string name="show_tunnels">Tunely</string>
-<string name="make_as_start_point">Nastavit toto jako počáteční bod</string>
+    <string name="make_as_start_point">Nastavit toto jako počáteční bod</string>
     <string name="osm_recipients_label">Příjemci OSM</string>
     <string name="total_donations">Celkem přispěno</string>
     <string name="day_off_label">zavřeno</string>
@@ -2699,16 +2543,16 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="enter_lon">Zadejte zeměpisnou délku</string>
     <string name="enter_lat">Zadejte zeměpisnou šířku</string>
     <string name="enter_lat_and_lon">Zadejte zeměpisnou šířku a délku</string>
-	<string name="dd_mm_ss_format">DD°MM′SS″</string>
-	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="dd_ddddd_format">DD.DDDDD°</string>
-	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
-	<string name="east_abbreviation">V</string>
-	<string name="west_abbreviation">Z</string>
-	<string name="south_abbreviation">J</string>
-	<string name="north_abbreviation">S</string>
-	<string name="optional_point_name">Volitelný název bodu</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_dddddd_format">DD.DDDDDD°</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
+    <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="east_abbreviation">V</string>
+    <string name="west_abbreviation">Z</string>
+    <string name="south_abbreviation">J</string>
+    <string name="north_abbreviation">S</string>
+    <string name="optional_point_name">Volitelný název bodu</string>
     <string name="transport_nearby_routes_within">Nejbližší trasy v okruhu</string>
     <string name="transport_nearby_routes">V okruhu</string>
     <string name="distance_farthest">Vzdálenost: nejvzdálenější jako první</string>
@@ -2806,12 +2650,13 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n• Volitelný záznam výletu do lokálního souboru GPS nebo do online služby
 \n• Zobrazení rychlosti a nadmořské výšky
 \n• Zobrazení vrstevnic a stínování kopců (pomocí pluginů)</string>
-    <string name="osmand_plus_extended_description_part7">Přispívejte přímo do OSM
-\n• Hlaste chyby v datech
-\n• Nahrávejte GPX trasy do OSM přímo z aplikace
-\n• Přidávejte body zájmu a rovnou je nahrávejte do OSM (nebo později, pokud jste zrovna offline)
-\n• Záznam trasy funguje také na pozadí (když je zařízení v režimu spánku)
-\nOsmAnd je aktivně vyvíjený open-source software. Do aplikace může každý přispět hlášením chyb, vylepšováním překladů nebo programováním nových funkcí. Projekt je také závislý na finančních příspěvcích pro programování a testování nových funkcí.</string>
+    <string name="osmand_plus_extended_description_part7">Přispívejte přímo do OSM 
+\n• Hlaste chyby v datech 
+\n• Nahrávejte GPX trasy do OSM přímo z aplikace 
+\n• Přidávejte body zájmu a rovnou je nahrávejte do OSM (nebo později, pokud jste zrovna offline) 
+\n• Záznam trasy funguje také na pozadí (když je zařízení v režimu spánku) 
+\nOsmAnd je aktivně vyvíjený open-source software. Do aplikace může každý přispět hlášením chyb, vylepšováním překladů nebo programováním nových funkcí. Projekt je také závislý na finančních příspěvcích pro programování a testování nových funkcí.
+\n</string>
     <string name="osmand_plus_extended_description_part8">Přibližné pokrytí a kvalita map: • Západní Evropa: **** • Východní Evropa: *** • Rusko: *** • Severní Amerika: *** • Jižní Amerika: ** • Asie: ** • Japonsko &amp; Korea: *** • Střední Východ: ** • Afrika: ** • Antarktida: * Mapy většiny států na zeměkouli jsou dostupné ke stažení! Od Afghánistánu po Zimbabwe, od Austrálie po USA, Argentinu, Brazílii, Kanadu, Francii, Německo, Mexiko, Spojené království, Španělsko, …</string>
     <string name="group_deleted">Skupina smazána</string>
     <string name="clear_all_intermediates">Smazat všechny mezicíle</string>
@@ -2827,14 +2672,10 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="in_app_purchase_desc_ex">Po zakoupení bude pro vás trvale k dispozici.</string>
     <string name="purchase_unlim_title">Koupit - %1$s</string>
     <string name="purchase_subscription_title">Předplatit - %1$s</string>
-
     <string name="wikivoyage_offline">Wikivoyage v režimu offline</string>
-    
     <string name="unlimited_downloads">Neomezené stahování</string>
     <string name="wikipedia_offline">Wikipedie v režimu offline</string>
-    
     <string name="unlock_all_features">Odemknout všechny funkce OsmAnd</string>
-
     <string name="purchase_dialog_title">Vyberte si předplatné</string>
     <string name="purchase_dialog_travel_description">Chcete-li dostávat offline články o cestování, je třeba koupit jednu z následujících položek:</string>
     <string name="purchase_dialog_subtitle">Vyberte vhodnou položku:</string>
@@ -2864,17 +2705,18 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_restart">Restartovat aplikaci</string>
     <string name="show_images">Zobrazit obrázky</string>
     <string name="purchase_cancelled_dialog_descr">Obnovte předplatné, abyste nadále mohli využívat všechny funkce:</string>
-
     <string name="maps_you_need_descr">Na základě článků, které jste uložili, vám doporučujeme stáhnout následující mapy:</string>
     <string name="maps_you_need">Potřebné mapy</string>
     <string name="osmand_team">OsmAnd tým</string>
     <string name="popular_destinations">Oblíbené cíle</string>
     <string name="update_is_available">Je dostupná aktualizace</string>
-	<string name="download_file">Stáhnout soubor</string>
+    <string name="download_file">Stáhnout soubor</string>
     <string name="start_editing">Začít s úpravami</string>
     <string name="get_unlimited_access">Získejte neomezený přístup</string>
-    <string name="monthly_map_updates">Aktualizace map: <b>každý měsíc</b></string>
-    <string name="daily_map_updates">Aktualizace map: <b>každou hodinu</b></string>
+    <string name="monthly_map_updates">Aktualizace map: <b>každý měsíc</b>
+    </string>
+    <string name="daily_map_updates">Aktualizace map: <b>každou hodinu</b>
+    </string>
     <string name="download_wikipedia_description">Stáhnout články Wikipedie pro %1$s a číst je v režimu offline.</string>
     <string name="download_wikipedia_label">Stahování dat z Wikipedie</string>
     <string name="open_in_browser_wiki">Otevřít článek online</string>
@@ -2883,7 +2725,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="wiki_article_search_text">Hledání příslušného wiki článku</string>
     <string name="wiki_article_not_found">Článek nebyl nalezen</string>
     <string name="how_to_open_wiki_title">Jak otevřít články Wikipedie?</string>
-<string name="hide_full_description">Skrýt plný popis</string>
+    <string name="hide_full_description">Skrýt plný popis</string>
     <string name="show_full_description">Zobrazit plný popis</string>
     <string name="release_3_0">• Nové: Podpora pro celosvětové cestovní průvodce. Odkazovaná místa jsou propojené s mapou. Úvodní data z Wikivoyage.
 \n 
@@ -2917,7 +2759,9 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n</string>
     <string name="commiting_way">Odesílání cesty…</string>
     <string name="increase_search_radius_to">Zvětšit okruh hledání na %1$s</string>
-    <string name="send_search_query_description">Bude odeslán váš dotaz pro vyhledávání: <b>\"%1$s\"</b> a také vaše poloha. <br/><br/> Nedochází k žádnému shromažďování osobních údajů. Zaslaná data slouží pouze k vylepšení vyhledávacího algoritmu.<br/></string>
+    <string name="send_search_query_description">Bude odeslán váš dotaz pro vyhledávání: <b>\"%1$s\"</b> a také vaše poloha. <br/>
+        <br/> Nedochází k žádnému shromažďování osobních údajů. Zaslaná data slouží pouze k vylepšení vyhledávacího algoritmu.<br/>
+    </string>
     <string name="send_search_query">Odeslat data?</string>
     <string name="shared_string_world">Celý svět</string>
     <string name="point_deleted">Bod %1$s byl smazán</string>
@@ -2938,13 +2782,13 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="paid_app">Placená aplikace</string>
     <string name="paid_plugin">Placený modul</string>
     <string name="travel_card_update_descr">Jsou dostupná nová data Wikivoyage, aktualizujte je na nejnovější verzi.</string>
-	<string name="wikivoyage_travel_guide">Turistický průvodce Wikivoyage</string>
+    <string name="wikivoyage_travel_guide">Turistický průvodce Wikivoyage</string>
     <string name="wikivoyage_travel_guide_descr">Průvodce Wikivoyage Vám ukáže nejzajímavější místa planety, přímo v aplikaci OsmAnd a bez nutnosti připojení k internetu.</string>
     <string name="shared_string_gpx_files">Soubory GPX</string>
     <string name="access_intermediate_arrival_time">Čas příjezdu do mezicíle</string>
     <string name="map_widget_intermediate_time">Do průjezdního bodu</string>
     <string name="test_voice_desrc">Klepněte na tlačítko pro vyslechnutí odpovídajícího hlasového pokynu, aby jste zjistili chybné nebo chybějící pokyny.</string>
-<string name="nautical_render_descr">Plavební navigační styl. Klíčové vlastnosti: Bóje, majáky, plavební cesty, mořské cesty a značky, přístavy, námořní služby, plavební hloubka.</string>
+    <string name="nautical_render_descr">Plavební navigační styl. Klíčové vlastnosti: Bóje, majáky, plavební cesty, mořské cesty a značky, přístavy, námořní služby, plavební hloubka.</string>
     <string name="ski_map_render_descr">Zimní režim. Klíčové vlastnosti: Vykresluje sjezdovky, lyžařské vleky a další praktické objekty pro lyžaře a snowboardisty. Nedůležité objekty jsou na mapě méně výrazné.</string>
     <string name="welcome_to_open_beta">Vítejte v otevřené beta verzi</string>
     <string name="light_rs_render_descr">Jednoduchý a kontrastní styl pro automobilovou navigaci. Příjemný na oči v nočním režimu. Klíčové vlastnosti: Vrstevnice, kontrastní oranžové silnice, druhořadé objekty jsou méně výrazné.</string>
@@ -2953,7 +2797,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="touring_view_render_descr">Vysoce detailní styl pro účely cestování. Obsahuje všechna nastavení z výchozího stylu a navíc zobrazuje maximum detailů, především všechny silnice, cesty a jiné způsoby cestování. Jasně rozlišuje různé typy cest, podobně jako mnohé cestovní atlasy. Vysoce kontrastní schéma pro venkovní použití, denní a noční režim.</string>
     <string name="default_render_descr">Obecný styl. Zjednodušené vykreslování v hustě osídlených městech. Klíčové vlastnosti: vrstevnice, trasy, kvalita povrchu cest, omezení přístupu, čísla cest, značení dle SAC, objekty pro vodní sporty.</string>
     <string name="travel_card_download_descr">Stáhněte si cestovní průvodce Wikivoyage a prohlížejte články o místech po celém světě bez připojení na internet.</string>
-	<string name="start_editing_card_image_text">Bezplatný cestovní průvodce, který může upravovat každý.</string>
+    <string name="start_editing_card_image_text">Bezplatný cestovní průvodce, který může upravovat každý.</string>
     <string name="welcome_to_open_beta_description">Cestovní průvodci jsou nyní založené na Wikivoyage. Všechny jejich funkce můžete otestovat zdarma během beta testování. Poté budou zpřístupněny předplatitelům služby OsmAnd Live a uživatelům OsmAnd+.</string>
     <string name="start_editing_card_description">Můžete (a měli byste) upravovat libovolný článek na Wikivoyage. Sdílejte znalosti, zkušenosti, talent a svoji pozornost</string>
     <string name="ask_for_location_permission">Aby mohla aplikace OsmAnd pokračovat, udělte jí prosím oprávnění pro přístup k poloze.</string>
@@ -2982,7 +2826,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / měsíc</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / měsíc</string>
     <string name="osm_live_payment_discount_descr">Ušetříte %1$s!</string>
-	<string name="osm_live_payment_current_subscription">Vaše aktuální předplatné</string>
+    <string name="osm_live_payment_current_subscription">Vaše aktuální předplatné</string>
     <string name="osm_live_payment_renews_monthly">Obnovuje se měsíčně</string>
     <string name="osm_live_payment_renews_quarterly">Obnovuje se čtvrtletně</string>
     <string name="osm_live_payment_renews_annually">Obnovuje se ročně</string>
@@ -3024,4 +2868,13 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="voice_announcements">Hlasová oznámení</string>
     <string name="intermediate_destinations">Mezicíle: %1$s</string>
     <string name="arrive_at_time">Příjezd v %1$s</string>
+    <string name="add_destination_query">Nejdříve prosím zadejte cíl</string>
+    <string name="previous_route">Předchozí trasa</string>
+    <string name="add_home">Přidat domov</string>
+    <string name="add_work">Přidat práci</string>
+    <string name="work_button">Práce</string>
+    <string name="route_class_stat_container">Třída</string>
+    <string name="route_surface_stat_container">Povrch</string>
+    <string name="route_smoothness_stat_container">Hladkost povrchu</string>
+    <string name="route_steepness_stat_container">Strmost</string>
 </resources>
