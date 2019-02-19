@@ -82,24 +82,25 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 			OsmandSettings settings = activity.getMyApplication().getSettings();
 			List<Pair<String, String>> sources = loadListFromParams();
+			if(sources.size()>0) {
+				boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
+				if (showBottomSheetStyles) {
+					showChooseDialog(activity.getSupportFragmentManager());
+					return;
+				}
 
-			boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
-			if (showBottomSheetStyles) {
-				showChooseDialog(activity.getSupportFragmentManager());
-				return;
-			}
-			
-			Pair<String, String> currentSource = new Pair<>(
+				Pair<String, String> currentSource = new Pair<>(
 					settings.MAP_UNDERLAY.get(),
 					settings.MAP_UNDERLAY.get());
 
-			Pair<String, String> nextSource = sources.get(0);
-			int index = sources.indexOf(currentSource);
+				Pair<String, String> nextSource = sources.get(0);
+				int index = sources.indexOf(currentSource);
 
-			if (index >= 0 && index + 1 < sources.size()) {
-				nextSource = sources.get(index + 1);
+				if (index >= 0 && index + 1 < sources.size()) {
+					nextSource = sources.get(index + 1);
+				}
+				executeWithParams(activity, nextSource.first);
 			}
-			executeWithParams(activity, nextSource.first);
 		}
 	}
 
@@ -196,8 +197,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public boolean fillParams(View root, MapActivity activity) {
-		super.fillParams(root, activity);
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return true;
+		return super.fillParams(root, activity);
 	}
 }
