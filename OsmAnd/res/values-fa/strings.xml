@@ -2959,4 +2959,6 @@
     <string name="add_home">افزودن خانه</string>
     <string name="add_work">افزودن محل کار</string>
     <string name="work_button">محل کار</string>
+    <string name="add_destination_query">لطفاً ابتدا مقصد را اضافه کنید</string>
+    <string name="previous_route">مسیر قبلی</string>
 </resources>
