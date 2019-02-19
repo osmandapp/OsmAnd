@@ -2928,4 +2928,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_home">Afegeix casa meva</string>
     <string name="add_work">Afegeix feina</string>
     <string name="work_button">Feina</string>
+    <string name="previous_route">Ruta anterior</string>
 </resources>

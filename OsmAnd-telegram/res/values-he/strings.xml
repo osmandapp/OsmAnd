@@ -205,5 +205,11 @@
     <string name="shared_string_appearance">מראה</string>
     <string name="show_gps_points">הצגת נקודות GPS</string>
     <string name="show_gps_points_descr">הצגת כמות נקודות ה־GPS שנאספו ונשלחו.</string>
-    <string name="timeline_description">ניתן להפעיל מעקב כדי לאסוף נתוני תנועה ברקע.</string>
+    <string name="timeline_description">ניתן להפעיל מעקב כדי לשמור את כל המיקומים להיסטוריה.</string>
+    <string name="shared_string_ok">אישור</string>
+    <string name="timeline_available_for_free_now">ציר הזמן היא תכונה שמעתה זמינה בחינם.</string>
+    <string name="disable_monitoring">השבתת מעקב</string>
+    <string name="location_recording_enabled">הופעלה הקלטת מיקום</string>
+    <string name="app_name_short_online">עוקב בזמן אמת</string>
+    <string name="app_name_short">עוקב OsmAnd</string>
 </resources>

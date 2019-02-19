@@ -2919,4 +2919,5 @@ Lon %2$s</string>
     <string name="add_home">Añadir como «Casa»</string>
     <string name="add_work">Añadir como «Trabajo»</string>
     <string name="work_button">Trabajo</string>
+    <string name="previous_route">Ruta anterior</string>
 </resources>

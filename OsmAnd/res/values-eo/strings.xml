@@ -2902,4 +2902,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_home">Aldoni hejmon</string>
     <string name="add_work">Aldoni laborejon</string>
     <string name="work_button">Laborejo</string>
+    <string name="previous_route">Antaŭa kurso</string>
 </resources>

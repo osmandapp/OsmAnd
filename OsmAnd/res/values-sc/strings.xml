@@ -1120,7 +1120,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="transport_stops_to_pass">firmadas da colare</string>
     <string name="transport_route_distance">Distàntzia àndala</string>
     <string name="transport">Trasportu pùblicu</string>
-    <string name="shared_string_ok">Atzeta</string>
+    <string name="shared_string_ok">AB</string>
     <string name="show_transport_over_map_description">Ammustra sas firmadas de su trasportu pùblicu in sa mapa.</string>
     <string name="show_transport_over_map">Ammustra sas firmadas de su trasportu pùblicu</string>
     <string name="hello">Aplicatzione de nàvigu OsmAnd</string>
@@ -2905,4 +2905,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="add_home">Annanghe sa domo</string>
     <string name="add_work">Annanghe su logu de traballu</string>
     <string name="work_button">Traballu</string>
+    <string name="previous_route">Àndala anteposta</string>
 </resources>
