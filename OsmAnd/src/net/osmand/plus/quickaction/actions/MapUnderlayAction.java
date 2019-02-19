@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
-
 	public static final int TYPE = 16;
 
 	private final static String KEY_UNDERLAYS = "underlays";
@@ -89,12 +88,18 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 					return;
 				}
 
-				Pair<String, String> currentSource = new Pair<>(
-					settings.MAP_UNDERLAY.get(),
-					settings.MAP_UNDERLAY.get());
+				int index = -1;
+				final String currentSource = settings.MAP_UNDERLAY.get() == null ? KEY_NO_UNDERLAY
+					: settings.MAP_UNDERLAY.get();
+
+				for (int idx = 0; idx < sources.size(); idx++) {
+					if (sources.get(idx).first.equals(currentSource)) {
+						index = idx;
+						break;
+					}
+				}
 
 				Pair<String, String> nextSource = sources.get(0);
-				int index = sources.indexOf(currentSource);
 
 				if (index >= 0 && index + 1 < sources.size()) {
 					nextSource = sources.get(index + 1);

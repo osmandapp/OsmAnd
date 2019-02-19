@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
-
 	public static final int TYPE = 15;
 
 	private final static String KEY_OVERLAYS = "overlays";
@@ -91,12 +90,18 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 					return;
 				}
 
-				Pair<String, String> currentSource = new Pair<>(
-						settings.MAP_OVERLAY.get(),
-						settings.MAP_OVERLAY.get());
+				int index = -1;
+				final String currentSource = settings.MAP_OVERLAY.get() == null ? KEY_NO_OVERLAY
+					: settings.MAP_OVERLAY.get();
+
+				for (int idx = 0; idx < sources.size(); idx++) {
+					if (sources.get(idx).first.equals(currentSource)) {
+						index = idx;
+						break;
+					}
+				}
 
 				Pair<String, String> nextSource = sources.get(0);
-				int index = sources.indexOf(currentSource);
 
 				if (index >= 0 && index + 1 < sources.size()) {
 					nextSource = sources.get(index + 1);
