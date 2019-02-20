@@ -786,6 +786,12 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	public void updateLayout() {
+		if (menu != null) {
+			runLayoutListener();
+		}
+	}
+
 	public void updateFromIcon() {
 		if (menu != null) {
 			menu.updateFromIcon(mainView);

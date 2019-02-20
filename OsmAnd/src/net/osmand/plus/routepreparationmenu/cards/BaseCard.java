@@ -24,6 +24,12 @@ public abstract class BaseCard {
 	boolean showBottomShadow;
 	protected boolean nightMode;
 
+	private CardListener listener;
+
+	public interface CardListener {
+		void onCardLayoutNeeded();
+	}
+
 	public BaseCard(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
@@ -36,6 +42,21 @@ public abstract class BaseCard {
 		if (view != null) {
 			updateContent();
 			applyDayNightMode();
+		}
+	}
+
+	public CardListener getListener() {
+		return listener;
+	}
+
+	public void setListener(CardListener listener) {
+		this.listener = listener;
+	}
+
+	public void setLayoutNeeded() {
+		CardListener listener = this.listener;
+		if (listener != null) {
+			listener.onCardLayoutNeeded();
 		}
 	}
 

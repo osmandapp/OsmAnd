@@ -71,6 +71,7 @@ public class PreviousRouteCard extends BaseCard {
 
 	@Override
 	protected void applyDayNightMode() {
+		AndroidUtils.setTextSecondaryColor(app, (TextView) view.findViewById(R.id.prev_route_card_title), nightMode);
 		AndroidUtils.setTextSecondaryColor(app, (TextView) view.findViewById(R.id.start_title), nightMode);
 		AndroidUtils.setTextPrimaryColor(app, (TextView) view.findViewById(R.id.destination_title), nightMode);
 		Drawable img = app.getUIUtilities().getIcon(R.drawable.ic_action_previous_route, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);

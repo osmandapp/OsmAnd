@@ -458,62 +458,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void enterRoutePlanningMode(final LatLon from, final PointDescription fromName) {
-		final boolean useIntermediatePointsByDefault = true;
-		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
-				.getSelectedGPXFiles();
-		final List<GPXFile> gpxFiles = new ArrayList<>();
-		for (SelectedGpxFile gs : selectedGPXFiles) {
-			if (!gs.isShowCurrentTrack() && !gs.notShowNavigationDialog) {
-				if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkPt()) {
-					gpxFiles.add(gs.getGpxFile());
-				}
-			}
-		}
-
-		if (gpxFiles.size() > 0) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
-			if (gpxFiles.size() == 1) {
-				bld.setMessage(R.string.use_displayed_track_for_navigation);
-				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						enterRoutePlanningModeGivenGpx(gpxFiles.get(0), from, fromName, useIntermediatePointsByDefault, true);
-					}
-				});
-			} else {
-				bld.setTitle(R.string.navigation_over_track);
-				ArrayAdapter<GPXFile> adapter = new ArrayAdapter<GPXFile>(mapActivity, R.layout.drawer_list_item, gpxFiles) {
-					@Override
-					public View getView(int position, View convertView, ViewGroup parent) {
-						if (convertView == null) {
-							convertView = mapActivity.getLayoutInflater().inflate(R.layout.drawer_list_item, null);
-						}
-						String path = getItem(position).path;
-						String name = path.substring(path.lastIndexOf("/") + 1, path.length());
-						((TextView) convertView.findViewById(R.id.title)).setText(name);
-						convertView.findViewById(R.id.icon).setVisibility(View.GONE);
-						convertView.findViewById(R.id.toggle_item).setVisibility(View.GONE);
-						return convertView;
-					}
-				};
-				bld.setAdapter(adapter, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						enterRoutePlanningModeGivenGpx(gpxFiles.get(i), from, fromName, useIntermediatePointsByDefault, true);
-					}
-				});
-			}
-
-			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					enterRoutePlanningModeGivenGpx(null, from, fromName, useIntermediatePointsByDefault, true);
-				}
-			});
-			bld.show();
-		} else {
-			enterRoutePlanningModeGivenGpx(null, from, fromName, useIntermediatePointsByDefault, true);
-		}
+		enterRoutePlanningModeGivenGpx(null, from, fromName, true, true);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,

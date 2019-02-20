@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -31,6 +31,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -49,10 +50,12 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -72,7 +75,7 @@ import java.util.Set;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
-public class MapRouteInfoMenu implements IRouteInformationListener {
+public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -334,6 +337,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			fragmentRef.get().updateInfo();
 	}
 
+	public void updateLayout() {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().updateLayout();
+	}
+
 	public void updateFromIcon() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null)
@@ -362,7 +371,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		menuCards.clear();
 
 		if (isBasicRouteCalculated()) {
-			GPXUtilities.GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), mapActivity.getMyApplication());
+			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), mapActivity.getMyApplication());
 			if (gpx != null) {
 				menuCards.add(new SimpleRouteCard(mapActivity, gpx));
 			}
@@ -388,6 +397,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				PreviousRouteCard previousRouteCard = new PreviousRouteCard(mapActivity);
 				menuCards.add(previousRouteCard);
 			}
+
+			List<SelectedGpxFile> selectedGPXFiles =
+					mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+			final List<GPXFile> gpxFiles = new ArrayList<>();
+			for (SelectedGpxFile gs : selectedGPXFiles) {
+				if (!gs.isShowCurrentTrack()) {
+					if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkPt()) {
+						gpxFiles.add(gs.getGpxFile());
+					}
+				}
+			}
+			if (gpxFiles.size() > 0) {
+				TracksCard tracksCard = new TracksCard(mapActivity, gpxFiles);
+				tracksCard.setListener(this);
+				menuCards.add(tracksCard);
+			}
 		}
 		setupCards();
 	}
@@ -395,6 +420,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private void setupCards() {
 		LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
 		build(cardsContainer);
+	}
+
+	@Override
+	public void onCardLayoutNeeded() {
+		updateLayout();
 	}
 
 	public boolean isRouteCalculated() {
@@ -1391,6 +1421,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			visible = false;
 		}
 		routingHelper.removeListener(this);
+		removeTargetPointListener();
 	}
 
 	public void setShowMenu() {
