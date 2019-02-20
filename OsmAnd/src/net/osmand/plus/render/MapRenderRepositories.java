@@ -321,6 +321,8 @@ public class MapRenderRepositories {
 		}
 		if (containsJapanMapData) {
 			TransliterationHelper.setCountryName("Japan");
+		} else {
+			TransliterationHelper.setCountryName("");
 		}
 
 
@@ -600,6 +602,8 @@ public class MapRenderRepositories {
 		}
 		if (containsJapanMapData) {
 			TransliterationHelper.setCountryName("Japan");
+		} else {
+			TransliterationHelper.setCountryName("");
 		}
 
 		return mi;
