@@ -83,7 +83,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 			OsmandSettings settings = activity.getMyApplication().getSettings();
 			List<Pair<String, String>> sources = loadListFromParams();
 
-			if(sources.size()>0) {
+			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
 					showChooseDialog(activity.getSupportFragmentManager());
