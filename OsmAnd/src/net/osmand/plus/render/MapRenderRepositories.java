@@ -1,8 +1,5 @@
 package net.osmand.plus.render;
 
-
-import static net.osmand.util.TransliterationHelper.setCountryName;
-
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
@@ -303,7 +300,7 @@ public class MapRenderRepositories {
 		if(library == null) {
 			return;
 		}
-		String countryInView = "";
+		boolean containsJapanMapData = false;
 		boolean useLive = context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get();
 		for (String mapName : files.keySet()) {
 			BinaryMapIndexReader fr = files.get(mapName);
@@ -318,11 +315,14 @@ public class MapRenderRepositories {
 					log.debug("Native resource " + mapName + " initialized " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				if (fr.getCountryName().equals("Japan")) {
-					countryInView = fr.getCountryName();
+					containsJapanMapData = true;
 				}
 			}
 		}
-		setCountryName(countryInView);
+		if (containsJapanMapData) {
+			TransliterationHelper.setCountryName("Japan");
+		}
+
 
 	}
 	
@@ -539,7 +539,7 @@ public class MapRenderRepositories {
 		}
 		MapIndex mi = null;
 		searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
-		String countryInView = "";
+		boolean containsJapanMapData = false;
 		for (BinaryMapIndexReader c : files.values()) {
 			boolean basemap = c.isBasemap();
 			searchRequest.clearSearchResults();
@@ -557,7 +557,7 @@ public class MapRenderRepositories {
 					renderedState |= 2;
 				}
 				if (c.getCountryName().equals("Japan")) {
-					countryInView = c.getCountryName();
+					containsJapanMapData = true;
 				}
 			}
 			for (BinaryMapDataObject r : res) {
@@ -598,7 +598,10 @@ public class MapRenderRepositories {
 				land[0] = true;
 			}
 		}
-		setCountryName(countryInView);
+		if (containsJapanMapData) {
+			TransliterationHelper.setCountryName("Japan");
+		}
+
 		return mi;
 	}
 

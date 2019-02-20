@@ -13,8 +13,6 @@ import org.apache.commons.logging.Log;
 
 public class TransliterationHelper {
 
-	private static TransliterationHelper instance;
-
 	public final static Log LOG = PlatformUtil.getLog(TransliterationHelper.class);
 	public final static String DEFAULT = "default";
 	public final static String JAPAN = "Japan";
