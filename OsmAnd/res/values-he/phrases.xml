@@ -428,7 +428,7 @@
     <string name="poi_railway_platform">רציף רכבת</string>
     <string name="poi_halt">תחנת רכבת</string>
     <string name="poi_subway_entrance">כניסה לרכבת תחתית</string>
-    <string name="poi_subway_station">תחנת רכבת תחתית</string>
+    <string name="poi_subway_station">כן</string>
     <string name="poi_taxi">עמדת מוניות</string>
     <string name="poi_aerodrome">נמל תעופה</string>
     <string name="poi_runway">מסלול ריצה</string>
@@ -563,7 +563,7 @@
     <string name="poi_customs">מכס</string>
     <string name="poi_country">מדינה</string>
     <string name="poi_city">עיר</string>
-    <string name="poi_capital">עיר בירה</string>
+    <string name="poi_capital">כן</string>
     <string name="poi_town">עיירה</string>
     <string name="poi_village">כפר</string>
     <string name="poi_hamlet">כפריר</string>
@@ -2098,4 +2098,10 @@
     <string name="poi_observatory_type_gravitational">כבידתי</string>
     <string name="poi_blood_donation">תרומת דם</string>
     <string name="poi_park_ride_ferry">מעבורת</string>
+    <string name="poi_bulk_purchase">רכישה בכמות גדולה</string>
+    <string name="poi_substation_type">סוג</string>
+    <string name="poi_books_type">ספרים</string>
+    <string name="poi_park_ride">חנה וסע</string>
+    <string name="poi_theme_park">פארק שעשועים</string>
+    <string name="poi_denomination_assemblies_of_god">קהילות השם</string>
 </resources>
