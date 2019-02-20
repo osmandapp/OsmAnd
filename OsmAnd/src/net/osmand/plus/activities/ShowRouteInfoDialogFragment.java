@@ -70,6 +70,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatistics;
 import net.osmand.router.RouteStatistics.Incline;
 import net.osmand.router.RouteStatistics.RouteSegmentAttribute;
@@ -209,15 +210,18 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		if (slopeDataSet != null) {
 			List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues());
 
-			RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(helper.getRoute().getOriginalRoute());
-			buildChartAndAttachLegend(app, view, inflater, R.id.route_class_stat_chart,
-					R.id.route_class_stat_items, routeStatistics.getRouteClassStatistic());
-			buildChartAndAttachLegend(app, view, inflater, R.id.route_surface_stat_chart,
-					R.id.route_surface_stat_items, routeStatistics.getRouteSurfaceStatistic());
-			buildChartAndAttachLegend(app, view, inflater, R.id.route_smoothness_stat_chart,
-					R.id.route_smoothness_stat_items, routeStatistics.getRouteSmoothnessStatistic());
-			buildChartAndAttachLegend(app, view, inflater, R.id.route_steepness_stat_chart,
-					R.id.route_steepness_stat_items, routeStatistics.getRouteSteepnessStatistic(inclines));
+			List<RouteSegmentResult> route = helper.getRoute().getOriginalRoute();
+			if (route != null) {
+				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route);
+				buildChartAndAttachLegend(app, view, inflater, R.id.route_class_stat_chart,
+						R.id.route_class_stat_items, routeStatistics.getRouteClassStatistic());
+				buildChartAndAttachLegend(app, view, inflater, R.id.route_surface_stat_chart,
+						R.id.route_surface_stat_items, routeStatistics.getRouteSurfaceStatistic());
+				buildChartAndAttachLegend(app, view, inflater, R.id.route_smoothness_stat_chart,
+						R.id.route_smoothness_stat_items, routeStatistics.getRouteSmoothnessStatistic());
+				buildChartAndAttachLegend(app, view, inflater, R.id.route_steepness_stat_chart,
+						R.id.route_steepness_stat_items, routeStatistics.getRouteSteepnessStatistic(inclines));
+			}
 		}
 		return view;
 	}
