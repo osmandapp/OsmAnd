@@ -435,7 +435,7 @@ public class BinaryMapTransportReaderAdapter {
 			dataObject.setEnName(stringTable.get(dataObject.getEnName(false).charAt(0)));
 		}
 		if(dataObject.getName().length() > 0 && dataObject.getName("en").length() == 0){
-			dataObject.setEnName(TransliterationHelper.getInstance().transliterate(dataObject.getName()));
+			dataObject.setEnName(TransliterationHelper.transliterate(dataObject.getName()));
 		}
 		if(dataObject.getOperator() != null && dataObject.getOperator().length() > 0){
 			dataObject.setOperator(stringTable.get(dataObject.getOperator().charAt(0)));
@@ -547,7 +547,7 @@ public class BinaryMapTransportReaderAdapter {
 			case 0:
 				dataObject.setReferencesToRoutes(req.cacheTypes.toArray());
 				if(dataObject.getName("en").length() == 0){
-					dataObject.setEnName(TransliterationHelper.getInstance().transliterate(dataObject.getName()));
+					dataObject.setEnName(TransliterationHelper.transliterate(dataObject.getName()));
 				}
 				return dataObject;
 			case OsmandOdb.TransportStop.ROUTES_FIELD_NUMBER :
@@ -611,7 +611,7 @@ public class BinaryMapTransportReaderAdapter {
 			switch (tag) {
 				case 0:
 					if (dataObject.getName("en").length() == 0) {
-						dataObject.setEnName(TransliterationHelper.getInstance().transliterate(dataObject.getName()));
+						dataObject.setEnName(TransliterationHelper.transliterate(dataObject.getName()));
 					}
 					if (x != 0 || y != 0) {
 						dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);

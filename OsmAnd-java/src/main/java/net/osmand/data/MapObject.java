@@ -28,8 +28,6 @@ public abstract class MapObject implements Comparable<MapObject> {
 	
 	public static final byte WAY_MODULO_REMAINDER = 1;
 
-	private int obfCountryLang = 0;
-
 
 	protected String name = null;
 	protected String enName = null;
@@ -184,8 +182,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 						return nm;
 					}
 					if (transliterate) {
-						return TransliterationHelper.getInstance().transliterate(getName());
-//						return Junidecode.unidecode(getName());
+						return TransliterationHelper.transliterate(getName());
 					}
 				}
 			}
@@ -197,8 +194,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (!Algorithms.isEmpty(enName)) {
 			return this.enName;
 		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
-			return TransliterationHelper.getInstance().transliterate(getName());
-//			return Junidecode.unidecode(getName());
+			return TransliterationHelper.transliterate(getName());
 		}
 		return ""; //$NON-NLS-1$
 	}

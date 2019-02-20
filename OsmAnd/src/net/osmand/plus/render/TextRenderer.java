@@ -241,10 +241,8 @@ public class TextRenderer {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
 				if (preferredLocale.length() > 0) {
-					text.text = TransliterationHelper.getInstance().transliterate(text.text);
+					text.text = TransliterationHelper.transliterate(text.text);
 				}
-
-
 
 				// sest text size before finding intersection (it is used there)
 				float textSize = text.textSize * rc.textScale ;

@@ -308,8 +308,8 @@ public class MapRenderRepositories {
 			BinaryMapIndexReader fr = files.get(mapName);
 			if (fr != null && (fr.containsMapData(leftX, topY, rightX, bottomY, zoom) ||
 					fr.containsRouteData(leftX, topY, rightX, bottomY, zoom))) {
-				if(!Algorithms.isEmpty(fr.getCountryName())) {
-					setCountryForTransliterationMethod(fr.getCountryName());
+				if (!Algorithms.isEmpty(fr.getCountryName())) {
+					TransliterationHelper.setCountry(fr.getCountryName());
 				}
 				if (!nativeFiles.contains(mapName)) {
 					long time = System.currentTimeMillis();
@@ -546,9 +546,8 @@ public class MapRenderRepositories {
 				res = new ArrayList<BinaryMapDataObject>();
 				log.debug("Search failed " + c.getRegionNames(), e); //$NON-NLS-1$
 			}
-			if(res.size() > 0) {
-				log.debug("Country name:" + c.getCountryName());
-				setCountryForTransliterationMethod(c.getCountryName());
+			if (res.size() > 0) {
+				TransliterationHelper.setCountry(c.getCountryName());
 				if(basemap) {
 					renderedState |= 1;
 				} else {
@@ -594,20 +593,6 @@ public class MapRenderRepositories {
 			}
 		}
 		return mi;
-	}
-
-	private void setCountryForTransliterationMethod(String countryName) {
-		if(!countryName.equals(TransliterationHelper.getCountry())) {
-			switch (countryName) {
-				case "Japan": {
-					setCountry(countryName);
-					break;
-				}
-				default:
-					setCountry(TransliterationHelper.DEFAULT);
-					break;
-			}
-		}
 	}
 
 	private void validateLatLonBox(QuadRect box) {

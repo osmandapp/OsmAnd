@@ -261,7 +261,7 @@ public class RouteDataObject {
 			}
 			String nmDef = names.get(region.nameTypeRule);
 			if(transliterate && nmDef != null && nmDef.length() > 0) {
-				return TransliterationHelper.getInstance().transliterate(nmDef);
+				return TransliterationHelper.transliterate(nmDef);
 			}
 			return nmDef;
 		}
@@ -295,7 +295,7 @@ public class RouteDataObject {
 			}
 			String refDefault = names.get(region.refTypeRule);
 			if(transliterate && refDefault != null && refDefault.length() > 0) {
-				return TransliterationHelper.getInstance().transliterate(refDefault);
+				return TransliterationHelper.transliterate(refDefault);
 			}
 			return refDefault;
 		}
@@ -358,13 +358,13 @@ public class RouteDataObject {
 				int k = kt[i];
 				if(region.routeEncodingRules.size() > k) {
 					if(!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.getInstance().transliterate(names.get(k)) : names.get(k));
+						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
 					}
 					if(destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.getInstance().transliterate(names.get(k)) : names.get(k));
+						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
 					}
 					if(!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef1 + ((transliterate) ? TransliterationHelper.getInstance().transliterate(names.get(k)) : names.get(k));
+						return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k));
 					}
 					if(destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
@@ -372,7 +372,7 @@ public class RouteDataObject {
 				}
 			}
 			if(destinationDefault != null) {
-				return destRef1 + ((transliterate) ? TransliterationHelper.getInstance().transliterate(destinationDefault) : destinationDefault);
+				return destRef1 + ((transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault);
 			}
 		}
 		return "".equals(destRef) ? null : destRef;

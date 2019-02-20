@@ -39,7 +39,17 @@ public class TransliterationHelper {
 	}
 
 	public static void setCountry(String countryName) {
-		TransliterationHelper.country = countryName;
+		if (!countryName.equals(country)) {
+			switch (countryName) {
+				case "Japan": {
+					country = JAPAN;
+					break;
+				}
+				default:
+					country = DEFAULT;
+					break;
+			}
+		}
 	}
 
 	public static String getCountry() {

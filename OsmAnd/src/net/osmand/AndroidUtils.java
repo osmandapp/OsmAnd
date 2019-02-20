@@ -43,7 +43,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import java.lang.Character.UnicodeBlock;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 
@@ -525,14 +524,5 @@ public class AndroidUtils {
 		}
 		return result;
 	}
-
-	public static boolean checkIfKana(String string) {
-		boolean isKana = false;
-		for (char c : string.toCharArray()) {
-			isKana = UnicodeBlock.of(c) == UnicodeBlock.KATAKANA;
-		}
-		return isKana;
-	}
-
 
 }

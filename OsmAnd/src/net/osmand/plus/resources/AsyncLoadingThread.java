@@ -45,11 +45,9 @@ public class AsyncLoadingThread extends Thread {
 					if (req instanceof TileLoadDownloadRequest) {
 						TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
 						tileLoaded |= resourceManger.hasRequestedTile(r);
-
 					} else if (req instanceof MapLoadRequest) {
 						if (!mapLoaded) {
 							MapLoadRequest r = (MapLoadRequest) req;
-
 							resourceManger.getRenderer().loadMap(r.tileBox, resourceManger.getMapTileDownloader());
 							mapLoaded = !resourceManger.getRenderer().wasInterrupted();
 							if (r.mapLoadedListener != null) {
