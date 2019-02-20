@@ -82,18 +82,15 @@ dependencies {
 	testImplementation 'junit:junit:4.12'
 	testImplementation 'com.google.code.gson:gson:2.8.2'
 	testImplementation 'org.hamcrest:hamcrest-core:1.3'
-
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
-	implementation group: 'org.json', name: 'json', version: '20171018' 
+	implementation group: 'org.json', name: 'json', version: '20171018'
 	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
 	implementation 'org.beanshell:bsh-core:2.0b4'
 	implementation 'org.apache.commons:commons-compress:1.17'
 	implementation 'com.moparisthebest:junidecode:0.1.1'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
-
+	implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'net.sf.kxml:kxml2:2.1.8'
-	
-
-	implementation fileTree(dir: "libs", include: ["*.jar"])
+	implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 

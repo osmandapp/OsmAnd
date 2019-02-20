@@ -1,5 +1,6 @@
 package net.osmand.plus.render;
 
+
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.procedure.TIntObjectProcedure;
 
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
@@ -16,7 +18,7 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-import net.sf.junidecode.Junidecode;
+import net.osmand.util.TransliterationHelper;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -29,6 +31,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import org.apache.commons.logging.Log;
 
 public class TextRenderer {
 
@@ -236,7 +239,7 @@ public class TextRenderer {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
 				if (preferredLocale.length() > 0) {
-					text.text = Junidecode.unidecode(text.text);
+					text.text = TransliterationHelper.transliterate(text.text);
 				}
 
 				// sest text size before finding intersection (it is used there)

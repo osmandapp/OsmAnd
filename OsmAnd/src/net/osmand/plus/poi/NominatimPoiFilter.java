@@ -18,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.sf.junidecode.Junidecode;
+import net.osmand.util.TransliterationHelper;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -137,7 +137,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 								a.setId(Long.parseLong(parser.getAttributeValue("", "place_id"))); //$NON-NLS-1$ //$NON-NLS-2$
 								String name = parser.getAttributeValue("", "display_name"); //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
-								a.setEnName(Junidecode.unidecode(name));
+								a.setEnName(TransliterationHelper.transliterate(getName()));
 								a.setSubType(parser.getAttributeValue("", "type")); //$NON-NLS-1$//$NON-NLS-2$
 								PoiType pt = poiTypes.getPoiTypeByKey(a.getSubType());
 								a.setType(pt != null ? pt.getCategory() : poiTypes.getOtherPoiCategory());
@@ -153,7 +153,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 							String name = parser.getText();
 							if (name != null) {
 								a.setName(name);
-								a.setEnName(Junidecode.unidecode(name));
+								a.setEnName(TransliterationHelper.transliterate(getName()));
 							}
 						}
 					}
