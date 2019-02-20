@@ -1,10 +1,12 @@
 package net.osmand.util;
 
-import com.atilika.kuromoji.ipadic.Token;
-import com.atilika.kuromoji.ipadic.Tokenizer;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.atilika.kuromoji.ipadic.Token;
+import com.atilika.kuromoji.ipadic.Tokenizer;
 import net.osmand.PlatformUtil;
 import net.sf.junidecode.Junidecode;
 import org.apache.commons.logging.Log;
@@ -17,7 +19,7 @@ public class TransliterationHelper {
 	public final static String DEFAULT = "default";
 	public final static String JAPAN = "Japan";
 
-	private static String country = DEFAULT;
+	private static String countryName = DEFAULT;
 
 	private static Tokenizer tokenizer;
 
@@ -26,41 +28,26 @@ public class TransliterationHelper {
 	private TransliterationHelper() {
 	}
 
-	static {
-		try {
-			instance = new TransliterationHelper();
-		} catch (Exception e) {
-			LOG.debug(e.getMessage(), e);
-		}
-	}
-
-	public static TransliterationHelper getInstance() {
-		return instance;
-	}
-
-	public static void setCountry(String countryName) {
-		if (!countryName.equals(country)) {
+	public static void setCountryName(String countryName) {
+		if (!countryName.equals(TransliterationHelper.countryName)) {
 			switch (countryName) {
 				case "Japan": {
-					country = JAPAN;
+					TransliterationHelper.countryName = JAPAN;
 					break;
 				}
 				default:
-					country = DEFAULT;
+					TransliterationHelper.countryName = DEFAULT;
 					break;
 			}
 		}
 	}
 
-	public static String getCountry() {
-		return country;
+	public static String getCountryName() {
+		return countryName;
 	}
 
 	public static String transliterate(String text) {
-		if (tokenizer == null) {
-			tokenizer = new Tokenizer();
-		}
-		switch (country) {
+		switch (countryName) {
 			case DEFAULT:
 				return Junidecode.unidecode(text);
 			case JAPAN:
@@ -70,6 +57,10 @@ public class TransliterationHelper {
 	}
 
 	private static String japanese2Romaji(String text) {
+
+		if (tokenizer == null) {
+			tokenizer = new Tokenizer();
+		}
 
 		boolean capitalizeWords = true;
 

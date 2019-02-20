@@ -35,8 +35,6 @@ import org.apache.commons.logging.Log;
 
 public class TextRenderer {
 
-	public final static Log LOG = PlatformUtil.getLog(TextRenderer.class);
-
 	private Paint paintText;
 	private final Context context;
 	private Paint paintIcon;

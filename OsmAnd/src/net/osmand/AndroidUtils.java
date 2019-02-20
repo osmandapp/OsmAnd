@@ -524,5 +524,4 @@ public class AndroidUtils {
 		}
 		return result;
 	}
-
 }
