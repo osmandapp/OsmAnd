@@ -587,7 +587,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void deleteSwipeItem(int position) {
-		if (swipeDismissListener != null) {
+		if (swipeDismissListener != null && position < listView.getCount()) {
 			swipeDismissListener.delete(position);
 		}
 	}
