@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="tracks_on_map">Tracks on the map</string>
     <string name="quick_action_show_hide_gpx_tracks">Show/Hide GPX Tracks</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tapping this action button shows or hides selected GPX tracks on map</string>
     <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>

@@ -28,7 +28,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Postcode;
 import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
-import net.sf.junidecode.Junidecode;
+import net.osmand.util.TransliterationHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -152,7 +152,7 @@ public class BinaryMapAddressReaderAdapter {
 			switch (tag) {
 			case 0:
 				if (region.enName == null || region.enName.length() == 0) {
-					region.enName = region.name == null ? "" : Junidecode.unidecode(region.name);
+					region.enName = region.name == null ? "" : TransliterationHelper.transliterate(region.name);
 				}
 				return;
 			case OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER:

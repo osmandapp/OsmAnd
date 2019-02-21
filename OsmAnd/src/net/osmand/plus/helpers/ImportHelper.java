@@ -23,6 +23,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Toast;
 
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -99,16 +100,20 @@ public class ImportHelper {
 	}
 
 	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
-		final String name = getNameFromContentUri(contentUri);
-		final boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
+		String name = getNameFromContentUri(contentUri);
+		boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubdir && name != null) {
-			if (name.endsWith(GPX_SUFFIX)) {
+			String nameLC = name.toLowerCase();
+			if (nameLC.endsWith(GPX_SUFFIX)) {
+				name = name.substring(0, name.length() - 4) + GPX_SUFFIX;
 				handleGpxImport(contentUri, name, true, useImportDir);
 				return true;
-			} else if (name.endsWith(KML_SUFFIX)) {
+			} else if (nameLC.endsWith(KML_SUFFIX)) {
+				name = name.substring(0, name.length() - 4) + KML_SUFFIX;
 				handleKmlImport(contentUri, name, true, useImportDir);
 				return true;
-			} else if (name.endsWith(KMZ_SUFFIX)) {
+			} else if (nameLC.endsWith(KMZ_SUFFIX)) {
+				name = name.substring(0, name.length() - 4) + KMZ_SUFFIX;
 				handleKmzImport(contentUri, name, true, useImportDir);
 				return true;
 			}
@@ -609,11 +614,12 @@ public class ImportHelper {
 			//noinspection ResultOfMethodCallIgnored
 			importDir.mkdirs();
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
-				final GPXUtilities.WptPt pt = gpxFile.findPointToShow();
+				final WptPt pt = gpxFile.findPointToShow();
 				final File toWrite = getFileToSave(fileName, importDir, pt);
 				Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
 				if(e == null) {
 					gpxFile.path = toWrite.getAbsolutePath();
+					app.getGpxDatabase().remove(new File(gpxFile.path));
 					warning = null;
 				} else {
 					warning = app.getString(R.string.error_reading_gpx);
@@ -626,7 +632,7 @@ public class ImportHelper {
 		return warning;
 	}
 
-	private File getFileToSave(final String fileName, final File importDir, final GPXUtilities.WptPt pt) {
+	private File getFileToSave(final String fileName, final File importDir, final WptPt pt) {
 		final StringBuilder builder = new StringBuilder(fileName);
 		if ("".equals(fileName)) {
 			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_SUFFIX); //$NON-NLS-1$
@@ -678,7 +684,7 @@ public class ImportHelper {
 	private void showGpxOnMap(final GPXFile result) {
 		if (mapView != null && getMapActivity() != null) {
 			app.getSelectedGpxHelper().setGpxFileToDisplay(result);
-			final GPXUtilities.WptPt moveTo = result.findPointToShow();
+			final WptPt moveTo = result.findPointToShow();
 			if (moveTo != null) {
 				mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
 			}
@@ -736,9 +742,9 @@ public class ImportHelper {
 		}
 	}
 
-	private List<FavouritePoint> asFavourites(final List<GPXUtilities.WptPt> wptPts, String fileName, boolean forceImportFavourites) {
+	private List<FavouritePoint> asFavourites(final List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
 		final List<FavouritePoint> favourites = new ArrayList<>();
-		for (GPXUtilities.WptPt p : wptPts) {
+		for (WptPt p : wptPts) {
 			if (p.name != null) {
 				final String fpCat;
 				if (p.category == null) {

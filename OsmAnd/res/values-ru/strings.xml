@@ -1603,7 +1603,7 @@
     <string name="wake_on_voice_descr">Включать экран устройства (если он выключен) при приближении к повороту.</string>
     <string name="map_update">Карты доступные для обновления: %1$s</string>
     <string name="coordinates">Координаты</string>
-    <string name="home_button">Домой</string>
+    <string name="home_button">Дом</string>
     <string name="search_for">Поиск</string>
     <string name="everything_up_to_date">Все файлы обновлены</string>
     <string name="use_opengl_render">Использовать OpenGL для рендеринга</string>
@@ -2906,4 +2906,5 @@
     <string name="work_button">Работа</string>
     <string name="route_smoothness_stat_container">Ровность</string>
     <string name="previous_route">Предыдущий маршрут</string>
+    <string name="add_destination_query">Сначала добавьте пункт назначения</string>
 </resources>

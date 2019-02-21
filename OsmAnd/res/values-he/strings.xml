@@ -2910,4 +2910,5 @@
     <string name="add_work">הוספת עבודה</string>
     <string name="work_button">עבודה</string>
     <string name="previous_route">נתיב קודם</string>
+    <string name="add_destination_query">נא להוסיף יעד תחילה</string>
 </resources>

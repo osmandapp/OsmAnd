@@ -4,7 +4,7 @@ package net.osmand.data;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.util.Algorithms;
-import net.sf.junidecode.Junidecode;
+import net.osmand.util.TransliterationHelper;
 
 import org.json.JSONObject;
 
@@ -182,7 +182,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 						return nm;
 					}
 					if (transliterate) {
-						return Junidecode.unidecode(getName());
+						return TransliterationHelper.transliterate(getName());
 					}
 				}
 			}
@@ -194,7 +194,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (!Algorithms.isEmpty(enName)) {
 			return this.enName;
 		} else if (!Algorithms.isEmpty(getName()) && transliterate) {
-			return Junidecode.unidecode(getName());
+			return TransliterationHelper.transliterate(getName());
 		}
 		return ""; //$NON-NLS-1$
 	}

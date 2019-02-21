@@ -273,12 +273,8 @@ public class GpxUiHelper {
 		//element position in adapter
 		int i = 0;
 		for (GPXInfo gpxInfo : allGpxList) {
-			String s = gpxInfo.getFileName();
-			String fileName = s;
-			if (s.endsWith(".gpx")) {
-				s = s.substring(0, s.length() - ".gpx".length());
-			}
-			s = s.replace('_', ' ');
+			String fileName = gpxInfo.getFileName();
+			String s = getGpxTitle(fileName);
 
 			adapter.addItem(ContextMenuItem.createBuilder(s).setSelected(false)
 					.setIcon(R.drawable.ic_action_polygom_dark).createItem());
@@ -290,6 +286,15 @@ public class GpxUiHelper {
 			i++;
 		}
 		return adapter;
+	}
+
+	public static String getGpxTitle(String fileName) {
+		String s = fileName;
+		if (s.toLowerCase().endsWith(".gpx")) {
+			s = s.substring(0, s.length() - ".gpx".length());
+		}
+		s = s.replace('_', ' ');
+		return s;
 	}
 
 	protected static void updateSelection(List<String> selectedGpxList, boolean showCurrentTrack,
@@ -472,7 +477,7 @@ public class GpxUiHelper {
 
 				final ContextMenuItem item = adapter.getItem(position);
 				GPXInfo info = list.get(position);
-				updateGpxInfoView(v, item, info, getDataItem(info), showCurrentGpx && position == 0, app);
+				updateGpxInfoView(v, item.getTitle(), info, getDataItem(info), showCurrentGpx && position == 0, app);
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -710,9 +715,9 @@ public class GpxUiHelper {
 		return dlg;
 	}
 
-	public static void updateGpxInfoView(View v, ContextMenuItem item, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
+	public static void updateGpxInfoView(View v, String itemTitle, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
-		viewName.setText(item.getTitle().replace("/", " • ").trim());
+		viewName.setText(itemTitle.replace("/", " • ").trim());
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
 		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
@@ -1914,7 +1919,7 @@ public class GpxUiHelper {
 		private long fileSize;
 		private boolean selected;
 
-		GPXInfo(String fileName, long lastModified, long fileSize) {
+		public GPXInfo(String fileName, long lastModified, long fileSize) {
 			this.fileName = fileName;
 			this.lastModified = lastModified;
 			this.fileSize = fileSize;
