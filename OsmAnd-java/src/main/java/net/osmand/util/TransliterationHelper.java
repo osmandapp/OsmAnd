@@ -1,59 +1,41 @@
 package net.osmand.util;
 
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.atilika.kuromoji.ipadic.Token;
-import com.atilika.kuromoji.ipadic.Tokenizer;
 import net.osmand.PlatformUtil;
 import net.sf.junidecode.Junidecode;
+
 import org.apache.commons.logging.Log;
 
 public class TransliterationHelper {
 
 	public final static Log LOG = PlatformUtil.getLog(TransliterationHelper.class);
-	public final static String DEFAULT = "default";
-	public final static String JAPAN = "Japan";
 
-	private static String countryName = DEFAULT;
+	private static boolean japanese;
 
-	private static Tokenizer tokenizer;
-
-	private static Map<String, String> katakanaMap = new HashMap<>();
+	//private static Tokenizer tokenizer;
+	//private static Map<String, String> katakanaMap = new HashMap<>();
 
 	private TransliterationHelper() {
 	}
 
-	public static void setCountryName(String countryName) {
-		if (!countryName.equals(TransliterationHelper.countryName)) {
-			switch (countryName) {
-				case "Japan": {
-					TransliterationHelper.countryName = JAPAN;
-					break;
-				}
-				default:
-					TransliterationHelper.countryName = DEFAULT;
-					break;
-			}
-		}
+	public static boolean isJapanese() {
+		return japanese;
 	}
 
-	public static String getCountryName() {
-		return countryName;
+	public static void setJapanese(boolean japanese) {
+		TransliterationHelper.japanese = japanese;
 	}
 
 	public static String transliterate(String text) {
-		switch (countryName) {
-			case DEFAULT:
-				return Junidecode.unidecode(text);
-			case JAPAN:
-				return japanese2Romaji(text);
+		if (japanese) {
+			// do not transliterate japanese for now
+			//return japanese2Romaji(text);
+			return text;
+		} else {
+			return Junidecode.unidecode(text);
 		}
-		return text;
 	}
 
+	/*
 	private static String japanese2Romaji(String text) {
 
 		if (tokenizer == null) {
@@ -240,4 +222,5 @@ public class TransliterationHelper {
 		katakanaMap.put("ピョ", "pyo");
 		katakanaMap.put("ー", "-");
 	}
+	*/
 }

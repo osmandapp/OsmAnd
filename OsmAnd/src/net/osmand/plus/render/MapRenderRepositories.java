@@ -319,13 +319,7 @@ public class MapRenderRepositories {
 				}
 			}
 		}
-		if (containsJapanMapData) {
-			TransliterationHelper.setCountryName("Japan");
-		} else {
-			TransliterationHelper.setCountryName("");
-		}
-
-
+		TransliterationHelper.setJapanese(containsJapanMapData);
 	}
 	
 	private void readRouteDataAsMapObjects(SearchRequest<BinaryMapDataObject> sr, BinaryMapIndexReader c, 
@@ -552,7 +546,7 @@ public class MapRenderRepositories {
 				res = new ArrayList<BinaryMapDataObject>();
 				log.debug("Search failed " + c.getRegionNames(), e); //$NON-NLS-1$
 			}
-			if(res.size() > 0) {
+			if (res.size() > 0) {
 				if(basemap) {
 					renderedState |= 1;
 				} else {
@@ -600,12 +594,7 @@ public class MapRenderRepositories {
 				land[0] = true;
 			}
 		}
-		if (containsJapanMapData) {
-			TransliterationHelper.setCountryName("Japan");
-		} else {
-			TransliterationHelper.setCountryName("");
-		}
-
+		TransliterationHelper.setJapanese(containsJapanMapData);
 		return mi;
 	}
 
