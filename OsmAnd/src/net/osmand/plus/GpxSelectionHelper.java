@@ -59,6 +59,7 @@ public class GpxSelectionHelper {
 
 	public void restoreSelectedGpxFiles() {
 		if (!selectedGpxFilesBackUp.isEmpty()) {
+			selectedGPXFiles.clear();
 			selectedGPXFiles.addAll(selectedGpxFilesBackUp);
 		}
 	}
@@ -70,7 +71,6 @@ public class GpxSelectionHelper {
 	public boolean isShowingAnyGpxFiles() {
 		return !selectedGPXFiles.isEmpty();
 	}
-
 
 	@NonNull
 	public List<SelectedGpxFile> getSelectedGPXFiles() {

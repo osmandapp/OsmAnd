@@ -10,11 +10,15 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="quick_action_show_hide_gpx_tracks">Show/Hide GPX Tracks</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tapping this action button shows or hides selected GPX tracks on map</string>
+    <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>
+    <string name="quick_action_gpx_tracks_show">Show GPX Tracks</string>
     <string name="add_destination_query">Please add Destination first</string>
     <string name="previous_route">Previous route</string>
-	<string name="add_home">Add home</string>
-	<string name="add_work">Add work</string>
-	<string name="work_button">Work</string>
+	  <string name="add_home">Add home</string>
+	  <string name="add_work">Add work</string>
+	  <string name="work_button">Work</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
     <string name="shared_string_capacity">Сapacity</string>
