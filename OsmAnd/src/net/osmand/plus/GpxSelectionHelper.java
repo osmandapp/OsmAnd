@@ -42,6 +42,7 @@ public class GpxSelectionHelper {
 	private OsmandApplication app;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<>();
+	private List<SelectedGpxFile> selectedGpxFilesBackUp = new java.util.ArrayList<>();
 	private SavingTrackHelper savingTrackHelper;
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
@@ -50,13 +51,26 @@ public class GpxSelectionHelper {
 	}
 
 	public void clearAllGpxFileToShow() {
+		selectedGpxFilesBackUp.clear();
+		selectedGpxFilesBackUp.addAll(selectedGPXFiles);
 		selectedGPXFiles.clear();
 		saveCurrentSelections();
+	}
+
+	public void restoreSelectedGpxFiles() {
+		if (!selectedGpxFilesBackUp.isEmpty()) {
+			selectedGPXFiles.addAll(selectedGpxFilesBackUp);
+		}
+	}
+
+	public boolean isSelectedGpxFilesBackUp() {
+		return !selectedGpxFilesBackUp.isEmpty();
 	}
 
 	public boolean isShowingAnyGpxFiles() {
 		return !selectedGPXFiles.isEmpty();
 	}
+
 
 	@NonNull
 	public List<SelectedGpxFile> getSelectedGPXFiles() {

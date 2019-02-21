@@ -153,6 +153,7 @@ public class ConfigureMapMenu {
 
 		private List<String> getAlreadySelectedGpx() {
 			GpxSelectionHelper selectedGpxHelper = ma.getMyApplication().getSelectedGpxHelper();
+			selectedGpxHelper.restoreSelectedGpxFiles();
 			List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
 			List<String> files = new ArrayList<>();
 			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
@@ -235,7 +236,7 @@ public class ConfigureMapMenu {
 				@Override
 				public void onDismiss(DialogInterface dialog) {
 					OsmandApplication app = ma.getMyApplication();
-					boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
+					boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles() || app.getSelectedGpxHelper().isSelectedGpxFilesBackUp();
 					item.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles());
 					item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
 					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
