@@ -40,22 +40,10 @@ public class ShowHideGpxTracksAction extends QuickAction {
 		} else {
 			selectedGpxHelper.restoreSelectedGpxFiles();
 
-			final OsmandSettings setting = activity.getMyApplication().getSettings();
 			final File dir = activity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
 				@Override
 				public boolean processResult(GPXFile[] result) {
-					for (GPXFile g : result) {
-						if (g.showCurrentTrack) {
-							if (!setting.SAVE_TRACK_TO_GPX.get()
-								&& !setting.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-								Toast.makeText(activity,
-									R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_LONG)
-									.show();
-							}
-							break;
-						}
-					}
 					return true;
 				}
 			};
@@ -64,7 +52,7 @@ public class ShowHideGpxTracksAction extends QuickAction {
 				.getSelectedGPXFiles();
 			List<String> files = new ArrayList<>();
 			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
-				files.add(file.getGpxFile().path);
+				files.add(file.getGpxFile().path.substring(file.getGpxFile().path.lastIndexOf("/")));
 			}
 
 			GpxUiHelper.loadFileInDifferentThread(activity, callbackWithObject, dir,
