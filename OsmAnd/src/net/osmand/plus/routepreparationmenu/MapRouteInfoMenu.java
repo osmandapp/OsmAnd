@@ -51,6 +51,7 @@ import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
@@ -59,10 +60,14 @@ import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.TransportRoutePlanner;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.SearchResult;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -412,6 +417,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				TracksCard tracksCard = new TracksCard(mapActivity, gpxFiles);
 				tracksCard.setListener(this);
 				menuCards.add(tracksCard);
+			}
+
+			SearchResultCollection res = null;
+			try {
+				res = app.getSearchUICore().getCore().shallowSearch(QuickSearchHelper.SearchHistoryAPI.class, "", null);
+			} catch (IOException e) {
+				// ignore
+			}
+			if (res != null) {
+				List<SearchResult> results = res.getCurrentSearchResults();
+				if (results.size() > 0) {
+					HistoryCard historyCard = new HistoryCard(mapActivity, results);
+					historyCard.setListener(this);
+					menuCards.add(historyCard);
+				}
 			}
 		}
 		setupCards();

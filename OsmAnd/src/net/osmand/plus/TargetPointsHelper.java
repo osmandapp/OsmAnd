@@ -311,9 +311,9 @@ public class TargetPointsHelper {
 
 	private void lookupAddressForMyLocationPoint() {
 		if (myLocationToStart != null && myLocationToStart.isSearchingAddress(ctx)
-				&& (myLocationPointRequest == null || !myLocationPointRequest.getLatLon().equals(workPoint.point))) {
+				&& (myLocationPointRequest == null || !myLocationPointRequest.getLatLon().equals(myLocationToStart.point))) {
 			cancelWorkPointAddressRequest();
-			myLocationPointRequest = new AddressLookupRequest(workPoint.point, new GeocodingLookupService.OnAddressLookupResult() {
+			myLocationPointRequest = new AddressLookupRequest(myLocationToStart.point, new GeocodingLookupService.OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
 					myLocationPointRequest = null;
@@ -469,8 +469,8 @@ public class TargetPointsHelper {
 		settings.clearPointToStart();
 		if (clearBackup) {
 			settings.backupTargetPoints();
-			updateMyLocationToStart();
 		}
+		updateMyLocationToStart();
 		pointToNavigate = null;
 		pointToStart = null;
 		intermediatePoints.clear();

@@ -874,14 +874,14 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 
 		private RouteGeometryZoom getGeometryZoom(RotatedTileBox tb) {
-			RouteGeometryZoom zm = zooms.get(tb.getZoom());
-			if(zm == null) {
+			int zoom = tb.getZoom();
+			RouteGeometryZoom zm = zooms.size() > zoom ? zooms.get(zoom) : null;
+			if (zm == null) {
 				zm = new RouteGeometryZoom(locations, tb);
-				zooms.put(tb.getZoom(), zm);
+				zooms.put(zoom, zm);
 			}
 			return zm;
 		}
-		
 		
 		private void drawSegments(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude,
 				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute) {

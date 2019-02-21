@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="show_more">Show more</string>
     <string name="tracks_on_map">Tracks on the map</string>
     <string name="add_destination_query">Please add Destination first</string>
     <string name="previous_route">Previous route</string>

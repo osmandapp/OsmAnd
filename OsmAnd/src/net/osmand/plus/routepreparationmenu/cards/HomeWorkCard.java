@@ -79,16 +79,6 @@ public class HomeWorkCard extends BaseCard {
 
 	@Override
 	protected void applyDayNightMode() {
-		AndroidUtils.setTextPrimaryColor(app, (TextView) view.findViewById(R.id.home_button_title), nightMode);
-		AndroidUtils.setTextPrimaryColor(app, (TextView) view.findViewById(R.id.work_button_title), nightMode);
-		AndroidUtils.setTextSecondaryColor(app, (TextView) view.findViewById(R.id.home_button_descr), nightMode);
-		AndroidUtils.setTextSecondaryColor(app, (TextView) view.findViewById(R.id.work_button_descr), nightMode);
-		Drawable homeImg = app.getUIUtilities().getIcon(R.drawable.ic_action_home_dark, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-		Drawable workImg = app.getUIUtilities().getIcon(R.drawable.ic_action_work, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-		((AppCompatImageView) view.findViewById(R.id.home_img)).setImageDrawable(homeImg);
-		((AppCompatImageView) view.findViewById(R.id.work_img)).setImageDrawable(workImg);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.card_content), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
-		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.buttons_divider), nightMode, R.color.divider_color, R.color.dashboard_divider_dark);
 	}
 
 	private void openAddPointDialog(MapActivity mapActivity, boolean home) {
