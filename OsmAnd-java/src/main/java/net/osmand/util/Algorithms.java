@@ -1,5 +1,7 @@
 package net.osmand.util;
 
+import java.util.Calendar;
+import java.util.TimeZone;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.router.GeneralRouter;
@@ -745,5 +747,12 @@ public class Algorithms {
 		}
 		is.close();
 		return map;
+	}
+
+	public static int getDayTimeInSeconds(long seconds, boolean defaultTimeZone) {
+		Calendar calendar = defaultTimeZone ? Calendar.getInstance(TimeZone.getDefault()) : Calendar.getInstance();
+		calendar.setTimeInMillis(seconds * 1000);
+		int daytime = calendar.get(Calendar.HOUR)*3600 + calendar.get(Calendar.MINUTE)*60 + calendar.get(Calendar.SECOND);
+		return daytime;
 	}
 }

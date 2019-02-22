@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.text.format.DateUtils;
 
+import java.util.TimeZone;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
@@ -72,6 +73,12 @@ public class OsmAndFormatter {
 		} else {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime()) + " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
 		}
+	}
+
+	public static String getFormattedTimeShort(long seconds) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(seconds * 1000);
+		return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
 	}
 
 	public static String getFormattedDate(Context context, long milliseconds) {
