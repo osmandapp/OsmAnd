@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -237,35 +238,30 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 							updateToolbar();
 						}
-
 						break;
 
 					case MotionEvent.ACTION_UP:
 						if (moving) {
 							moving = false;
 							int currentY = getViewY();
-
+							int fullScreenTopPosY = getFullScreenTopPosY();
 							final VelocityTracker velocityTracker = this.velocityTracker;
 							velocityTracker.computeCurrentVelocity(1000, maximumVelocity);
 							int initialVelocity = (int) velocityTracker.getYVelocity();
-
-							if ((Math.abs(initialVelocity) > minimumVelocity)) {
-
+							if ((Math.abs(initialVelocity) > minimumVelocity) && currentY != fullScreenTopPosY) {
 								scroller.abortAnimation();
 								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
-										Math.min(viewHeight - menuFullHeightMax, getFullScreenTopPosY()),
+										Math.min(viewHeight - menuFullHeightMax, fullScreenTopPosY),
 										screenHeight,
 										0, 0);
 								currentY = scroller.getFinalY();
 								scroller.abortAnimation();
-
 								slidingUp = initialVelocity < -2000;
 								slidingDown = initialVelocity > 2000;
 							} else {
 								slidingUp = false;
 								slidingDown = false;
 							}
-
 							changeMenuState(currentY, slidingUp, slidingDown);
 						}
 						recycleVelocityTracker();
@@ -403,7 +399,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			return;
 		}
 		int y = getViewY();
-		if (y < 0 || !portrait) {
+		if (y < getFullScreenTopPosY()) {
 			ViewGroup parent = (ViewGroup) modesLayout.getParent();
 			if (parent != null && parent != modesLayoutToolbarContainer) {
 				parent.removeView(modesLayout);
@@ -432,7 +428,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private int getFullScreenTopPosY() {
-		return 0;
+		return !portrait ? topScreenPosY : 0;
 	}
 
 	private int addStatusBarHeightIfNeeded(int res) {
