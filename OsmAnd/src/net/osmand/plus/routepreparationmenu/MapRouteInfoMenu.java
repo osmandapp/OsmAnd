@@ -992,6 +992,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private void clickRouteCancel() {
 		mapControlsLayer.stopNavigation();
+		setRouteCalculationInProgress(false);
 	}
 
 	private void clickRouteParams() {

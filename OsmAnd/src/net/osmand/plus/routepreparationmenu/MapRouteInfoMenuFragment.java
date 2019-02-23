@@ -367,12 +367,12 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	public int getStatusBarColorId() {
 		if (view != null) {
 			if (menu != null && (getViewY() <= 0 || !portrait)) {
-				if (Build.VERSION.SDK_INT >= 23) {
+				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
 				return nightMode ? R.color.dialog_divider_dark : R.color.dialog_divider_light;
 			} else {
-				if (Build.VERSION.SDK_INT >= 23) {
+				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
 			}
