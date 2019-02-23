@@ -45,23 +45,23 @@ public class WaypointDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private WaypointHelper waypointHelper;
-	private List<WaypointDialogHelperCallbacks> helperCallbacks= new ArrayList<>();
+	private List<WaypointDialogHelperCallback> helperCallbacks= new ArrayList<>();
 
 	private boolean flat;
 	private List<LocationPointWrapper> deletedPoints;
 
-	public interface WaypointDialogHelperCallbacks {
+	public interface WaypointDialogHelperCallback {
 		void reloadAdapter();
 
 		void deleteWaypoint(int position);
 	}
 
-	public void addHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
-		helperCallbacks.add(callbacks);
+	public void addHelperCallback(WaypointDialogHelperCallback callback) {
+		helperCallbacks.add(callback);
 	}
 
-	public void removeHelperCallbacks(WaypointDialogHelperCallbacks callbacks) {
-		helperCallbacks.add(callbacks);
+	public void removeHelperCallback(WaypointDialogHelperCallback callback) {
+		helperCallbacks.remove(callback);
 	}
 
 	public WaypointDialogHelper(MapActivity mapActivity) {
@@ -263,7 +263,7 @@ public class WaypointDialogHelper {
 
 	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
 		if (helper != null && helper.helperCallbacks != null) {
-			for (WaypointDialogHelperCallbacks callback : helper.helperCallbacks) {
+			for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
 				callback.reloadAdapter();
 			}
 		}
@@ -298,7 +298,7 @@ public class WaypointDialogHelper {
 			if (point.type == WaypointHelper.TARGETS && adapter instanceof StableArrayAdapter) {
 				StableArrayAdapter stableAdapter = (StableArrayAdapter) adapter;
 				if (helper != null && !helper.helperCallbacks.isEmpty() && needCallback) {
-					for (WaypointDialogHelperCallbacks callback : helper.helperCallbacks) {
+					for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
 						callback.deleteWaypoint(stableAdapter.getPosition(item));
 					}
 				}
@@ -414,7 +414,7 @@ public class WaypointDialogHelper {
 					targets.reorderAllTargetPoints(intermediates, true);
 				}
 				if (!helper.helperCallbacks.isEmpty()) {
-					for (WaypointDialogHelperCallbacks callback : helper.helperCallbacks) {
+					for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
 						callback.reloadAdapter();
 					}
 				}
