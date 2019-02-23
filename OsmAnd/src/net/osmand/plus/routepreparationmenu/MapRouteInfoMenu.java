@@ -600,16 +600,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		int margin = AndroidUtils.dpToPx(app, 3);
 
 		View startButton = mainView.findViewById(R.id.start_button);
+		TextView startButtonText = (TextView) mainView.findViewById(R.id.start_button_descr);
 		if (isRouteCalculated()) {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
 			int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
-			((TextView) mainView.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
+			startButtonText.setTextColor(ContextCompat.getColor(app, color));
 			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
 		} else {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
 			int color = R.color.description_font_and_bottom_sheet_icons;
-			((TextView) mainView.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
+			startButtonText.setTextColor(ContextCompat.getColor(app, color));
 			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+		}
+		if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
+			startButtonText.setText(R.string.shared_string_continue);
+		} else {
+			startButtonText.setText(R.string.shared_string_control_start);
 		}
 		startButton.setOnClickListener(new View.OnClickListener() {
 			@Override
