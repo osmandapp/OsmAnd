@@ -73,6 +73,7 @@ public class PublicTransportCard extends BaseCard {
 		});
 		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
 		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow ? View.VISIBLE : View.GONE);
 	}
 
 	public int getRouteId() {

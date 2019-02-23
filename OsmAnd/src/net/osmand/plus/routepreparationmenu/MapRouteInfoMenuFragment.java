@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -58,6 +57,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 	private MapRouteInfoMenu menu;
 	private InterceptorLinearLayout mainView;
+	private FrameLayout bottomContainer;
 	private View modesLayoutToolbar;
 	private View modesLayoutToolbarContainer;
 	private View modesLayoutListContainer;
@@ -123,6 +123,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
 		mainView = view.findViewById(R.id.main_view);
+		bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
 		modesLayoutToolbar = view.findViewById(R.id.modes_layout_toolbar);
 		modesLayoutToolbarContainer = view.findViewById(R.id.modes_layout_toolbar_container);
 		modesLayoutListContainer = view.findViewById(R.id.modes_layout_list_container);
@@ -771,6 +772,18 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			return mainView.getWidth();
 		} else {
 			return 0;
+		}
+	}
+
+	public void setBottomShadowVisible(boolean visible) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (visible) {
+				AndroidUtils.setForeground(mapActivity, bottomContainer, nightMode,
+						R.drawable.bg_contextmenu_shadow, R.drawable.bg_contextmenu_shadow);
+			} else {
+				bottomContainer.setForeground(null);
+			}
 		}
 	}
 

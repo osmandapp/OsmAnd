@@ -63,7 +63,7 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.SearchResult;
 
@@ -354,6 +354,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			fragmentRef.get().updateFromIcon();
 	}
 
+	public void setBottomShadowVisible(boolean visible) {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().setBottomShadowVisible(visible);
+	}
+
 	public void build(LinearLayout rootView) {
 		rootView.removeAllViews();
 		for (BaseCard card : menuCards) {
@@ -375,19 +381,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		menuCards.clear();
 
+		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {
 			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), mapActivity.getMyApplication());
 			if (gpx != null) {
 				menuCards.add(new SimpleRouteCard(mapActivity, gpx));
 			}
+			bottomShadowVisible = gpx == null;
 		} else if (isTransportRouteCalculated()) {
-			List<TransportRoutePlanner.TransportRouteResult> routes = transportHelper.getRoutes();
+			List<TransportRouteResult> routes = transportHelper.getRoutes();
 			for (int i = 0; i < routes.size(); i++) {
 				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
 				card.setShowBottomShadow(i == routes.size() - 1);
 				card.setShowTopShadow(i != 0);
 				menuCards.add(card);
 			}
+			bottomShadowVisible = routes.size() == 0;
 		} else {
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
@@ -434,6 +443,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 		}
+		setBottomShadowVisible(bottomShadowVisible);
 		setupCards();
 	}
 
