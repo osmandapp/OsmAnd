@@ -443,7 +443,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	private int getHeaderOnlyTopY() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return viewHeight - menuTitleHeight - AndroidUtils.dpToPx(mapActivity, 48f);
+			return viewHeight - menuTitleHeight - AndroidUtils.dpToPx(mapActivity, 50f);
 		} else {
 			return 0;
 		}

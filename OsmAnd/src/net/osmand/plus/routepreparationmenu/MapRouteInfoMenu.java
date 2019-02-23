@@ -97,6 +97,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private final TransportRoutingHelper transportHelper;
 	private final RoutingOptionsHelper routingOptionsHelper;
 	private GeocodingLookupService geocodingLookupService;
+	private boolean routeCalculationInProgress;
 
 	private boolean selectFromMapTouch;
 	private PointType selectFromMapPointType;
@@ -304,21 +305,36 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
+	private boolean setRouteCalculationInProgress(boolean routeCalculationInProgress) {
+		if (this.routeCalculationInProgress != routeCalculationInProgress) {
+			this.routeCalculationInProgress = routeCalculationInProgress;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void updateRouteCalculationProgress(int progress) {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null && fragmentRef.get().isVisible()) {
-			fragmentRef.get().updateRouteCalculationProgress(progress);
-			fragmentRef.get().updateControlButtons();
+		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+		if (fragmentRef != null && fragment.isVisible()) {
+			if (setRouteCalculationInProgress(true)) {
+				fragment.updateInfo();
+			}
+			fragment.updateRouteCalculationProgress(progress);
+			fragment.updateControlButtons();
 		}
 	}
 
 	public void routeCalculationFinished() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null && fragmentRef.get().isVisible()) {
-			fragmentRef.get().hideRouteCalculationProgressBar();
-			fragmentRef.get().updateControlButtons();
-			fragmentRef.get().updateInfo();
-			fragmentRef.get().openMenuHalfScreen();
+		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+		if (fragmentRef != null && fragment.isVisible()) {
+			setRouteCalculationInProgress(false);
+			fragment.hideRouteCalculationProgressBar();
+			fragment.updateControlButtons();
+			fragment.updateInfo();
+			fragment.openMenuHalfScreen();
 		}
 	}
 
@@ -397,7 +413,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(card);
 			}
 			bottomShadowVisible = routes.size() == 0;
-		} else {
+		} else if (!routeCalculationInProgress) {
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
 
