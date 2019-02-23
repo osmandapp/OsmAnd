@@ -15,6 +15,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.Pair;
 
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -26,7 +27,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.Way;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -837,6 +837,15 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 		}
 
+		public void clearRoute() {
+			if (route != null) {
+				route = null;
+				locations = Collections.emptyList();
+				styleMap = Collections.emptyMap();
+				zooms.clear();
+			}
+		}
+
 		public void updateTransportRoute(RotatedTileBox tb, TransportRouteResult route) {
 			if (tb.getMapDensity() != mapDensity || this.transportRoute != route) {
 				this.transportRoute = route;
@@ -873,6 +882,15 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 		}
 
+		public void clearTransportRoute() {
+			if (transportRoute != null) {
+				transportRoute = null;
+				locations = Collections.emptyList();
+				styleMap = Collections.emptyMap();
+				zooms.clear();
+			}
+		}
+
 		private RouteGeometryZoom getGeometryZoom(RotatedTileBox tb) {
 			int zoom = tb.getZoom();
 			RouteGeometryZoom zm = zooms.size() > zoom ? zooms.get(zoom) : null;
@@ -885,6 +903,9 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		
 		private void drawSegments(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude,
 				double bottomLatitude, double rightLongitude, Location lastProjection, int currentRoute) {
+			if (locations.size() == 0) {
+				return;
+			}
 			RouteGeometryZoom geometryZoom = getGeometryZoom(tb);
 			TByteArrayList simplification = geometryZoom.getSimplifyPoints();
 			List<Double> odistances = geometryZoom.getDistances();
@@ -1016,7 +1037,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			int currentRoute = transportHelper.getCurrentRoute();
 			List<TransportRouteResult> routes = transportHelper.getRoutes();
 			TransportRouteResult route = routes != null && routes.size() > currentRoute ? routes.get(currentRoute) : null;
-			routeGeometry.updateRoute(tb, null);
+			routeGeometry.clearRoute();
 			routeGeometry.updateTransportRoute(tb, route);
 			if (route != null) {
 				LatLon start = transportHelper.getStartLocation();
@@ -1027,7 +1048,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 			}
 		} else {
 			RouteCalculationResult route = helper.getRoute();
-			routeGeometry.updateTransportRoute(tb, null);
+			routeGeometry.clearTransportRoute();
 			routeGeometry.updateRoute(tb, route);
 			routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 					helper.getLastProjection(), route == null ? 0 : route.getCurrentRoute());
