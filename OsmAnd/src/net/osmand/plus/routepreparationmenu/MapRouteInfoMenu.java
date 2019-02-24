@@ -205,9 +205,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					break;
 			}
 			show(selectFromMapMenuState);
-			if (selectFromMapPointType == PointType.INTERMEDIATE && targets.checkPointToNavigateShort()) {
-				WaypointsFragment.showInstance(mapActivity);
-			}
 			return true;
 		}
 		return false;
