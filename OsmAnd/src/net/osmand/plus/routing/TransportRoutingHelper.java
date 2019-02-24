@@ -195,7 +195,7 @@ public class TransportRoutingHelper {
 							updateProgress(params);
 						}
 					} else {
-						if (routes.size() > 0) {
+						if (routes != null && routes.size() > 0) {
 							setCurrentRoute(0);
 						}
 						progressRoute.finish();
