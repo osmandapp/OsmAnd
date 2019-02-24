@@ -38,7 +38,7 @@ public class PreviousRouteCard extends BaseCard {
 		}
 		StringBuilder startText = new StringBuilder(myLocation ? mapActivity.getText(R.string.my_location) : "");
 		if (startPoint != null) {
-			String descr = startPoint.getPointDescription(mapActivity).getSimpleName(mapActivity, false);
+			String descr = getPointName(startPoint);
 			if (!Algorithms.isEmpty(descr)) {
 				if (startText.length() > 0) {
 					startText.append(" — ");
@@ -49,16 +49,7 @@ public class PreviousRouteCard extends BaseCard {
 		startTitle.setText(startText.toString());
 		TargetPoint destinationPoint = targetPointsHelper.getPointToNavigateBackup();
 		String destinationName = "";
-		if (destinationPoint != null) {
-			PointDescription description = destinationPoint.getOriginalPointDescription();
-			if (description != null && !Algorithms.isEmpty(description.getName()) &&
-					!description.getName().equals(mapActivity.getString(R.string.no_address_found))) {
-				destinationName = description.getName();
-			} else {
-				destinationName = PointDescription.getLocationName(mapActivity,
-						destinationPoint.point.getLatitude(), destinationPoint.point.getLongitude(), true).replace('\n', ' ');
-			}
-		}
+		destinationName = getPointName(destinationPoint);
 		destinationTitle.setText(destinationName);
 		View homeButton = view.findViewById(R.id.card_button);
 		homeButton.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +58,21 @@ public class PreviousRouteCard extends BaseCard {
 				targetPointsHelper.restoreTargetPoints(true);
 			}
 		});
+	}
+
+	private String getPointName(TargetPoint targetPoint) {
+		String name = "";
+		if (targetPoint != null) {
+			PointDescription description = targetPoint.getOriginalPointDescription();
+			if (description != null && !Algorithms.isEmpty(description.getName()) &&
+					!description.getName().equals(mapActivity.getString(R.string.no_address_found))) {
+				name = description.getName();
+			} else {
+				name = PointDescription.getLocationName(mapActivity,
+						targetPoint.point.getLatitude(), targetPoint.point.getLongitude(), true).replace('\n', ' ');
+			}
+		}
+		return name;
 	}
 
 	@Override
