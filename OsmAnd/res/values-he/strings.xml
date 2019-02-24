@@ -2911,4 +2911,7 @@
     <string name="work_button">עבודה</string>
     <string name="previous_route">נתיב קודם</string>
     <string name="add_destination_query">נא להוסיף יעד תחילה</string>
+    <string name="shared_string_swap">החלפה</string>
+    <string name="show_more">הצגת עוד</string>
+    <string name="tracks_on_map">עקבות על המפה</string>
 </resources>
