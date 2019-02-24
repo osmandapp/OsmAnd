@@ -263,7 +263,7 @@
     <string name="poi_boutique">Butik</string>
     <string name="poi_camera">Fényképezőgép és objektív</string>
     <string name="poi_carpet">Szőnyegbolt</string>
-    <string name="poi_charity">Adománybolt</string>
+    <string name="poi_charity">Jótékonysági bolt</string>
     <string name="poi_shoes">Cipőbolt</string>
     <string name="poi_computer">Számítástechnikai bolt</string>
     <string name="poi_curtain">Függönybolt</string>
@@ -597,7 +597,7 @@
     <string name="poi_garden_furniture">Kertibútor-bolt</string>
     <string name="poi_gas">Palackozottgáz-bolt</string>
     <string name="poi_herbalist">Gyógynövénybolt</string>
-    <string name="poi_hifi">HiFi-bolt</string>
+    <string name="poi_hifi">Hifi szaküzlet</string>
     <string name="poi_newsagent">Újságárus</string>
     <string name="poi_organic">Bioélelmiszer</string>
     <string name="poi_outdoor">Túrafelszerelés-bolt</string>
@@ -682,14 +682,14 @@
     <string name="poi_vacuum_cleaner">Porszívóbolt</string>
     <string name="poi_video">Videófilmbolt vagy -kölcsönző</string>
     <string name="poi_window_blind">Redőnybolt</string>
-    <string name="poi_electronics">Elektronikai bolt</string>
+    <string name="poi_electronics">Szórakoztató elektronikai bolt</string>
     <string name="poi_atv">Quadkereskedés</string>
     <string name="poi_cosmetics">Kozmetikai bolt</string>
     <string name="poi_sewing">Rövidárubolt</string>
     <string name="poi_watches">Órabolt (karóra)</string>
     <string name="poi_swimming_pool_shop">Uszodatechnika-bolt</string>
-    <string name="poi_games">Játékok</string>
-    <string name="poi_model">Modellbolt</string>
+    <string name="poi_games">Társasjáték</string>
+    <string name="poi_model">Modellezőbolt</string>
     <string name="poi_trophy">Kupák, kitüntetések</string>
     <string name="poi_video_games">Videojáték</string>
     <string name="poi_pyrotechnics">Tűzijátékbolt</string>
@@ -731,7 +731,7 @@
     <string name="poi_capital">igen</string>
     <string name="poi_healthcare_alternative">Alternatív gyógyászat</string>
     <string name="poi_audiologist">Hallásspecialista</string>
-    <string name="poi_optometrist">Optometrikus</string>
+    <string name="poi_optometrist">Szemvizsgálat</string>
     <string name="poi_physiotherapist">Gyógytornász</string>
     <string name="poi_psychotherapist">Pszichoterapeuta</string>
     <string name="poi_healthcare_rehabilitation">Rehabilitáció</string>
@@ -3380,7 +3380,7 @@
     <string name="poi_meadow_perpetual">Típus: állandó</string>
     <string name="poi_meadow_transitional">Típus: átmeneti</string>
     <string name="poi_meadow_pasture">Típus: legelő</string>
-    <string name="poi_frozen_food">Mélyhűtött élelmiszer</string>
+    <string name="poi_frozen_food">Fagyasztott élelmiszer</string>
     <string name="poi_agrarian">Gazdabolt</string>
     <string name="poi_shop_fireplace">Cserépkályha- és kandallóbolt</string>
     <string name="poi_shop_boat">Hajósbolt</string>
@@ -3532,7 +3532,7 @@
     <string name="poi_laboratory">Orvosi labor</string>
     <string name="poi_blood_donation">Véradó állomás</string>
     <string name="poi_books_comic">képregény</string>
-    <string name="poi_books_antiquarian">antikvárium</string>
+    <string name="poi_books_antiquarian">Antikvárium</string>
     <string name="poi_books_religion">vallási</string>
     <string name="poi_books_academic">akadémiai</string>
     <string name="poi_books_children">gyermekkönyv</string>

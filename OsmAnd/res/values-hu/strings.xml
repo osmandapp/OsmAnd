@@ -14,7 +14,7 @@
     <string name="accessibility_mode">Akadálymentesítési mód</string>
     <string name="accessibility_mode_descr">Akadálymentesítési lehetőségek bekapcsolása.</string>
     <string name="shared_string_on">Be</string>
-    <string name="shared_string_off">Ki</string>
+    <string name="shared_string_off">Kikapcsolás</string>
     <string name="accessibility_default">Android rendszerbeállítások szerint</string>
     <string name="backToMenu">Vissza a menübe</string>
     <string name="zoomOut">Kicsinyít</string>
@@ -263,8 +263,8 @@ Ehhez {1} MB helyre van szükség.
     <string name="si_km_m">Kilométer/méter</string>
     <string name="yard">yard</string>
     <string name="foot">láb</string>
-    <string name="mile_per_hour">mf/ó</string>
-    <string name="mile">mi</string>
+    <string name="mile_per_hour">mérföld/óra</string>
+    <string name="mile">mérföld</string>
     <string name="send_location_way_choose_title">Hely megosztásának módja</string>
     <string name="send_location_sms_pattern">Hely : %1$s\n%2$s</string>
     <string name="send_location_email_pattern">A hely megjelenítéséhez kattints a %1$s web linkre vagy az Androidra szánt linkre %2$s</string>
@@ -300,7 +300,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="indexing_transport">Tömegközlekedés indexelése…</string>
     <string name="shared_string_io_error">Be/kimeneti hiba</string>
     <string name="km">km</string>
-    <string name="km_h">km/ó</string>
+    <string name="km_h">km/h</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">A(z) \'\'{0}\'\' térképformátum elavult, nem támogatott</string>
     <string name="poi_filter_car_aid">Autós segítség</string>
@@ -616,7 +616,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="context_menu_item_update_map">Térkép frissítése</string>
     <string name="context_menu_item_create_poi">POI készítés</string>
     <string name="shared_string_yes">Igen</string>
-    <string name="shared_string_cancel">Mégsem</string>
+    <string name="shared_string_cancel">Mégse</string>
     <string name="shared_string_apply">Alkalmaz</string>
     <string name="shared_string_add">Hozzáadás</string>
     <string name="shared_string_no">Nem</string>
@@ -1302,7 +1302,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="av_camera_pic_size_descr">A beépített kamera képmérete.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Jelzett turistautak megjelenítése (OSMC).</string>
     <string name="index_tours">Túrák</string>
-    <string name="shared_string_all">Összes</string>
+    <string name="shared_string_all">Minden</string>
     <string name="shared_string_waypoints">Útpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
     <string name="speak_favorites">Közeli Kedvencek</string>
@@ -1672,7 +1672,7 @@ Hosszúság: %2$s</string>
     <string name="favorite_category_select">Kategória kijelölése</string>
     <string name="default_speed_system_descr">Sebesség mértékegységének megadása.</string>
     <string name="default_speed_system">Sebesség mértékegysége</string>
-    <string name="nm">tm</string>
+    <string name="nm">tengeri mérföld</string>
     <string name="si_nm">Tengeri mérföld</string>
     <string name="si_kmh">Kilométer per óra</string>
     <string name="si_mph">Mérföld per óra</string>
@@ -1681,7 +1681,7 @@ Hosszúság: %2$s</string>
     <string name="si_min_m">Perc per mérföld</string>
     <string name="si_nm_h">Tengeri mérföld per óra (csomó)</string>
     <string name="nm_h">kn</string>
-    <string name="min_mile">perc/mf</string>
+    <string name="min_mile">perc/mérföld</string>
     <string name="min_km">perc/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Útvonalrögzítés</string>
@@ -2385,7 +2385,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="my_location">Saját helyzetem</string>
     <string name="shared_string_finish">Befejezés</string>
     <string name="plan_route">Útvonal tervezése</string>
-    <string name="shared_string_sort">Rendezés</string>
+    <string name="shared_string_sort">Sorba rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="is_saved">mentve</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>

@@ -69,12 +69,12 @@
     <string name="time_on_the_move">זמן בתנועה</string>
     <string name="average_altitude">גובה ממוצע</string>
     <string name="average_speed">מהירות ממוצעת</string>
-    <string name="open_in_osmand">פתיחה ב־OsmAnd</string>
+    <string name="open_in_osmand">הצגה ב־OsmAnd</string>
     <string name="end_date">מועד סיום</string>
     <string name="start_date">מועד התחלה</string>
     <string name="disconnect_from_telegram_desc">כדי לשלול גישה לשיתוף המיקום. יש לפתוח את טלגרם, לגשת להגדרות ← פרטיות ← הפעלות ולסגור את הפעלת הטלגרם של OsmAnd.</string>
-    <string name="disconnect_from_telegram">איך לכבות את שיתוף המיקום של OsmAnd מטלגרם</string>
-    <string name="logout_help_desc">איך לכבות את שיתוף המיקום של OsmAnd מטלגרם</string>
+    <string name="disconnect_from_telegram">איך לכבות את העוקב של OsmAnd מטלגרם</string>
+    <string name="logout_help_desc">איך לכבות את העוקב של OsmAnd מטלגרם</string>
     <string name="connected_account">חשבון מחובר</string>
     <string name="in_time">בעוד %1$s</string>
     <string name="osmand_connect_desc">נא לבחור את גרסת ה־OsmAnd בה יעשה שימוש OsmAnd טלגרם לטובת הצגת מיקומים.</string>
@@ -181,8 +181,8 @@
     <string name="timeline">ציר זמן</string>
     <string name="send_my_location_desc">הגדרת טווח הזמן המזערי לשיתוף מיקום.</string>
     <string name="welcome_descr">
-        <b>שיתוף המקום דרךOsmAnd</b> מאפשר לך לשתף את המיקום ולראות את מיקומם של אחרים ב־OsmAnd.<br/>
-        <br/>היישומון משתמש ב־API ודורש חשבון טלגרם.</string>
+        <b>העוקב של OsmAnd</b> מאפשר לך לשתף את המיקום ולראות את מיקומם של אחרים ב־OsmAnd.<br/>
+        <br/>היישומון משתמש ב־API ולכן נדרש חשבון טלגרם.</string>
     <string name="live_now">חי כעת</string>
     <string name="gps_points_in_buffer">נשלחו (%1$d ממתינות)</string>
     <string name="points_size">%1$d נקודות</string>
@@ -194,9 +194,9 @@
     <string name="please_update_osmand">נא לעדכן את OsmAnd כדי לצפות בנתונים במפה</string>
     <string name="shared_string_update">עדכון</string>
     <string name="shared_string_telegram">טלגרם</string>
-    <string name="privacy_policy_use_telegram">טלגרם (יישומון ההתכתבות) משמש תשתית כדי להתחבר ולתקשר עם אנשים.</string>
-    <string name="privacy_policy_telegram_client">הפלטפורמה הפתוחה של טלגרם והעוקב של OsmAnd נמנים מבין לקוחותינו. אנשי הקשר שלך יכולים להשתמש בכל לקוח טלגרם שיבחרו.</string>
-    <string name="privacy_policy_agree">לחיצה על המשך מהווה את הסכמתך למדיניות הפרטיות של טלגרם ולמדיניות הפרטיות של OsmAnd.</string>
+    <string name="privacy_policy_use_telegram">טלגרם (יישומון ההתכתבות) משמש תשתית להתחברות ולתקשורת עם אנשים.</string>
+    <string name="privacy_policy_telegram_client">העוקב של OsmAnd הוא אחד הלקוחות שמשתמש בפלטפורמה הפתוחה של טלגרם. אנשי הקשר שלך יכולים להשתמש בכל לקוח טלגרם שיבחרו.</string>
+    <string name="privacy_policy_agree">לחיצה על המשך מהווה את הסכמתך לתנאי מדיניות הפרטיות של טלגרם ולתנאי מדיניות הפרטיות של OsmAnd.</string>
     <string name="shared_string_accept">קבלה</string>
     <string name="telegram_privacy_policy">מדיניות הפרטיות של טלגרם</string>
     <string name="osmand_privacy_policy">מדיניות הפרטיות של OsmAnd</string>

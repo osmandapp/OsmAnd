@@ -2921,4 +2921,5 @@ Lon %2$s</string>
     <string name="add_work">Añadir como «Trabajo»</string>
     <string name="work_button">Trabajo</string>
     <string name="previous_route">Ruta anterior</string>
+    <string name="add_destination_query">Primero añada el destino</string>
 </resources>

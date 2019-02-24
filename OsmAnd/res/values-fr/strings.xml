@@ -1845,7 +1845,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="rec_split_storage_size">Taille de l\'espace de stockage</string>
     <string name="rec_split_storage_size_desc">Espace maximum autorisé pour tous les enregistrements.</string>
     <string name="shared_string_type">Type</string>
-    <string name="switch_start_finish">Inverser Départ et Destination</string>
+    <string name="switch_start_finish">Inverser le départ et la destination</string>
     <string name="rendering_attr_hideIcons_name">Icônes des points d\'intérêt</string>
     <string name="number_of_contributors">Nombre de contributeurs</string>
     <string name="number_of_edits">Nombre de modifications</string>
@@ -2655,17 +2655,17 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_notes">Notes OSM</string>
     <string name="tunnel_warning">En approche d\'un tunnel</string>
     <string name="show_tunnels">Tunnels</string>
-    <string name="shared_string_current">Actuel</string>
+    <string name="shared_string_current">Actuelle</string>
     <string name="last_intermediate_dest_description">Ajoute une étape</string>
     <string name="first_intermediate_dest_description">Ajoute comme première étape</string>
     <string name="subsequent_dest_description">Monter et définir comme destination</string>
-    <string name="make_as_start_point">Utiliser comme Point de départ</string>
+    <string name="make_as_start_point">Utiliser comme point de départ</string>
     <string name="map_import_error">Erreur d\'import de la carte</string>
     <string name="map_imported_successfully">Carte importée</string>
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
-    <string name="transport_nearby_routes">Dans</string>
+    <string name="transport_nearby_routes">À moins de</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
     <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
     <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
@@ -2674,7 +2674,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Nom optionnel du point</string>
-    <string name="transport_nearby_routes_within">Itinéraires à proximité dans</string>
+    <string name="transport_nearby_routes_within">Lignes à moins de</string>
     <string name="enter_lon">Saisissez la longitude</string>
     <string name="enter_lat">Saisissez la latitude</string>
     <string name="enter_lat_and_lon">Saisissez la latitude et la longitude</string>
@@ -2895,4 +2895,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_work">Ajouter travail</string>
     <string name="work_button">Travail</string>
     <string name="previous_route">Itinéraire précédent</string>
+    <string name="add_destination_query">Veuillez commencer en ajoutant une Destination</string>
 </resources>
