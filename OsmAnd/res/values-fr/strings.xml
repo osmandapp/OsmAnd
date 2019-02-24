@@ -2896,4 +2896,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="work_button">Travail</string>
     <string name="previous_route">Itinéraire précédent</string>
     <string name="add_destination_query">Veuillez commencer en ajoutant une Destination</string>
+    <string name="shared_string_swap">Permuter</string>
+    <string name="show_more">Afficher plus</string>
+    <string name="tracks_on_map">Traces sur la carte</string>
 </resources>
