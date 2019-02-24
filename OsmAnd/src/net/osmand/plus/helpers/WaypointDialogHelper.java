@@ -243,7 +243,7 @@ public class WaypointDialogHelper {
 											 Activity ctx, TargetPoint start, OsmandApplication app,
 											 WaypointDialogHelper helper) {
 		if (finish == null) {
-			app.showShortToastMessage(R.string.add_destination_query);
+			app.showShortToastMessage(R.string.mark_final_location_first);
 		} else {
 			targetPointsHelper.setStartPoint(new LatLon(finish.getLatitude(),
 					finish.getLongitude()), false, finish.getPointDescription(ctx));
