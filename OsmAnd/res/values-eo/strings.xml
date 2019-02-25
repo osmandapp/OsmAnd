@@ -1464,7 +1464,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="amenity_type_geocache">Geokaŝado</string>
     <string name="amenity_type_healthcare">Kuraco</string>
     <string name="amenity_type_historic">Historiejo</string>
-    <string name="poi_filter_closest_poi">Proksimaj interesejoj</string>
+    <string name="poi_filter_closest_poi">Ĉiuj punktoj</string>
     <string name="daynight_mode_day">Taga</string>
     <string name="daynight_mode_night">Nokta</string>
     <string name="daynight_mode_auto">Sunleviĝa/sunsubira</string>
@@ -2904,4 +2904,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="work_button">Laborejo</string>
     <string name="previous_route">Antaŭa kurso</string>
     <string name="add_destination_query">Bonvolu unue elekti celon</string>
+    <string name="shared_string_swap">Interŝanĝi</string>
+    <string name="show_more">Montri pli</string>
+    <string name="tracks_on_map">Kursoj sur la mapo</string>
 </resources>

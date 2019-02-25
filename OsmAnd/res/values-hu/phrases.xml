@@ -511,7 +511,7 @@
     <string name="poi_bench">Pad</string>
     <string name="poi_water_park">Élményfürdő, strand</string>
     <string name="poi_recreation_ground">Szabadidőpark</string>
-    <string name="poi_village_green">Faluközponti zöldterület (Anglia &amp; Wales)</string>
+    <string name="poi_village_green">Faluközponti zöldterület</string>
     <string name="poi_trail_riding_station">Lovastúra-állomás</string>
     <string name="poi_food_court">Étkezőtér</string>
     <string name="poi_barbecue">Grillezőhely</string>
@@ -1408,7 +1408,7 @@
     <string name="poi_jersey_barrier">Betonelem</string>
     <string name="poi_horse_stile">Lovaskapu</string>
     <string name="poi_kissing_gate">Lengőkapu</string>
-    <string name="poi_leisure_common">Szabadidős tevékenységre használható közös terület (Nagy-Britannia)</string>
+    <string name="poi_leisure_common">Szabadidős tevékenységre használható közös föld (UK)</string>
     <string name="poi_piste_grooming_classic_skating">Klasszikus és szabadsítlus</string>
     <string name="poi_piste_grooming_backcountry">Kezeletlen</string>
     <string name="poi_piste_grooming_scooter">Motoros szán</string>
