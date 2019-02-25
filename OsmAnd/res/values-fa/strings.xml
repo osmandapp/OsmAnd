@@ -2961,4 +2961,6 @@
     <string name="work_button">محل کار</string>
     <string name="add_destination_query">لطفاً ابتدا مقصد را اضافه کنید</string>
     <string name="previous_route">مسیر قبلی</string>
+    <string name="show_more">بیشتر نشان بده</string>
+    <string name="tracks_on_map">ردها روی نقشه</string>
 </resources>
