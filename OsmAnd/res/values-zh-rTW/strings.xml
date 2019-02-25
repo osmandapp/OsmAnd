@@ -2908,4 +2908,7 @@
     <string name="work_button">工作</string>
     <string name="add_destination_query">請先增加目的地</string>
     <string name="previous_route">前一個路線</string>
+    <string name="shared_string_swap">切換</string>
+    <string name="show_more">顯示更多</string>
+    <string name="tracks_on_map">在地圖上追蹤</string>
 </resources>
