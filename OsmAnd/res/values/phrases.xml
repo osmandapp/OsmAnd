@@ -3912,4 +3912,6 @@
 	<string name="poi_park_ride_tram">Tram</string>
 	<string name="poi_park_ride_ferry">Ferry</string>
 
+	<string name="poi_generator_source_biomass">Energy source: biomass</string>
+
 </resources>
