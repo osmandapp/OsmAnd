@@ -39,24 +39,6 @@ public class ShowHideGpxTracksAction extends QuickAction {
 			selectedGpxHelper.clearAllGpxFileToShow();
 		} else {
 			selectedGpxHelper.restoreSelectedGpxFiles();
-
-			final File dir = activity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
-				@Override
-				public boolean processResult(GPXFile[] result) {
-					return true;
-				}
-			};
-			selectedGpxHelper.restoreSelectedGpxFiles();
-			List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = selectedGpxHelper
-				.getSelectedGPXFiles();
-			List<String> files = new ArrayList<>();
-			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
-				files.add(file.getGpxFile().path.substring(file.getGpxFile().path.lastIndexOf("/")));
-			}
-
-			GpxUiHelper.loadFileInDifferentThread(activity, callbackWithObject, dir,
-				files.toArray(new String[files.size()]));
 		}
 	}
 
