@@ -1119,7 +1119,6 @@ public class GpxUiHelper {
 	}
 
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
-
 		final boolean useHours = timeSpan / 3600000 > 0;
 		xAxis.setGranularity(1f);
 		xAxis.setValueFormatter(new IAxisValueFormatter() {
@@ -1142,15 +1141,12 @@ public class GpxUiHelper {
 		return 1f;
 	}
 
-	private static float setupXAxisTimeOfDay(XAxis xAxis) {
+	private static float setupXAxisTimeOfDay(XAxis xAxis, final long startTime) {
 		xAxis.setGranularity(1f);
 		xAxis.setValueFormatter(new IAxisValueFormatter() {
 			@Override
 			public String getFormattedValue(float value, AxisBase axis) {
-
-
-				int seconds = (int)value/1000;
-				LOG.debug(OsmAndFormatter.getFormattedTimeShort(seconds));
+				long seconds = (long) (startTime/1000 + value);
 				return OsmAndFormatter.getFormattedTimeShort(seconds);
 			}
 		});
@@ -1174,7 +1170,11 @@ public class GpxUiHelper {
 		float x;
 		for (Elevation e : elevationData) {
 			i++;
-			x = axisType == GPXDataSetAxisType.TIME ? e.time : e.distance;
+			if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
+				x = e.time;
+			} else {
+				x = e.distance;
+			}
 			if (x > 0) {
 				nextX += x / divX;
 				if (!Float.isNaN(e.elevation)) {
@@ -1225,7 +1225,7 @@ public class GpxUiHelper {
 		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
 			divX = setupXAxisTime(xAxis, analysis.timeSpan);
 		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
-			divX = setupXAxisTimeOfDay(xAxis);
+			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
 		} else {
 			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
 		}
@@ -1311,8 +1311,7 @@ public class GpxUiHelper {
 		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
 			divX = setupXAxisTime(xAxis, analysis.timeSpan);
 		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
-			divX = setupXAxisTimeOfDay(xAxis);
-
+			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
 		} else {
 			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
 		}
@@ -1359,11 +1358,9 @@ public class GpxUiHelper {
 		float x;
 		for (Speed s : speedData) {
 			switch(axisType) {
+				case TIMEOFDAY:
 				case TIME:
 					x = s.time;
-					break;
-				case TIMEOFDAY:
-					x = s.timeOfDay;
 					break;
 				default:
 					x = s.distance;
@@ -1371,16 +1368,13 @@ public class GpxUiHelper {
 			}
 
 			if (x > 0) {
-				if (axisType == GPXDataSetAxisType.TIME && x > 60) {
+				if (axisType == GPXDataSetAxisType.TIME && x > 60 ||
+					axisType == GPXDataSetAxisType.TIMEOFDAY && x > 60) {
 					values.add(new Entry(nextX + 1, 0));
 					values.add(new Entry(nextX + x - 1, 0));
 				}
-//				if (axisType == GPXDataSetAxisType.TIMEOFDAY) {
-//					values.add(new Entry(nextX + 1, 0));
-//					values.add(new Entry(nextX + x - 1, 0));
-//				}
 				nextX += x / divX;
-				LOG.debug("X = " + x + ", divX = " + divX + ", nextX = " + nextX);
+				LOG.debug("X = " + x + ", diX = " + divX + ", nextX = " + nextX);
 				if (Float.isNaN(divSpeed)) {
 					nextY = s.speed * mulSpeed;
 				} else {
@@ -1472,7 +1466,7 @@ public class GpxUiHelper {
 														   @Nullable List<Entry> eleValues,
 														   boolean useRightAxis,
 														   boolean drawFilled) {
-		if (axisType == GPXDataSetAxisType.TIME) {
+		if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
 			return null;
 		}
 		OsmandSettings settings = ctx.getSettings();

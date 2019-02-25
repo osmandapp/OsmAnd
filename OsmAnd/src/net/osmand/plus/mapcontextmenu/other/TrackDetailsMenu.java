@@ -522,14 +522,16 @@ public class TrackDetailsMenu {
 		boolean hasSlopeChart = false;
 		if (analysis.hasElevationData) {
 			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE });
-			if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
+			if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME
+				&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
 				availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SLOPE});
 			}
 		}
 		if (analysis.hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SPEED });
 		}
-		if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
+		if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME
+			&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
 			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE });
 		}
 		if (analysis.hasElevationData && analysis.hasSpeedData) {

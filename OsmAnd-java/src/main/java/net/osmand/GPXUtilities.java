@@ -158,14 +158,12 @@ public class GPXUtilities {
 	public static class Elevation {
 		public float distance;
 		public int time;
-		public int timeOfDay;
 		public float elevation;
 	}
 
 	public static class Speed {
 		public float distance;
 		public int time;
-		public int timeOfDay;
 		public float speed;
 	}
 
@@ -612,7 +610,6 @@ public class GPXUtilities {
 					}
 
 					elevation1.time = timeDiff;
-					elevation1.timeOfDay = Algorithms.getDayTimeInSeconds(point.time, false);
 					elevation1.distance = (j > 0) ? calculations[0] : 0;
 					elevationData.add(elevation1);
 					if (!hasElevationData && !Float.isNaN(elevation1.elevation) && totalDistance > 0) {
@@ -629,7 +626,6 @@ public class GPXUtilities {
 					Speed speed1 = new Speed();
 					speed1.speed = speed;
 					speed1.time = timeDiff;
-					speed1.timeOfDay = Algorithms.getDayTimeInSeconds(point.time, false);
 					speed1.distance = elevation1.distance;
 					speedData.add(speed1);
 					if (!hasSpeedData && speed1.speed > 0 && totalDistance > 0) {
