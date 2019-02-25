@@ -2907,4 +2907,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="work_button">Traballu</string>
     <string name="previous_route">Àndala anteposta</string>
     <string name="add_destination_query">In antis annanghe una destinatzione</string>
+    <string name="shared_string_swap">Cuncàmbia</string>
+    <string name="show_more">Ammustra àteru</string>
+    <string name="tracks_on_map">Rastas in sa mapa</string>
 </resources>
