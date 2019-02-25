@@ -2907,4 +2907,7 @@
     <string name="route_smoothness_stat_container">Ровность</string>
     <string name="previous_route">Предыдущий маршрут</string>
     <string name="add_destination_query">Сначала добавьте пункт назначения</string>
+    <string name="shared_string_swap">Поменять</string>
+    <string name="show_more">Показать больше</string>
+    <string name="tracks_on_map">Треки на карте</string>
 </resources>
