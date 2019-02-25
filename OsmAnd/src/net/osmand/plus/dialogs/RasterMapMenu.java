@@ -2,7 +2,6 @@ package net.osmand.plus.dialogs;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -110,7 +109,7 @@ public class RasterMapMenu {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
+							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback, isChecked);
 							refreshMapComplete(mapActivity);
 						}
 					});
