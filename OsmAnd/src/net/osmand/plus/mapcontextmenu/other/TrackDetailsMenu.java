@@ -261,7 +261,6 @@ public class TrackDetailsMenu {
 						}
 					}
 				}
-
 			} else {
 				float startDistance = startPos * dataSet.getDivX();
 				float endDistance = endPos * dataSet.getDivX();

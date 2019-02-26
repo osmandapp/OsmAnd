@@ -9,9 +9,13 @@
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
---> <string name="time_of_day">Time of day</string>
-    <string name="tracks_on_map">Tracks on the map</string>
+
+-->
+    <string name="time_of_day">Time of day</string>
     <string name="add_destination_query">Please add Destination first</string>
+    <string name="shared_string_swap">Swap</string>
+    <string name="show_more">Show more</string>
+    <string name="tracks_on_map">Tracks on the map</string>
     <string name="previous_route">Previous route</string>
 	<string name="add_home">Add home</string>
 	<string name="add_work">Add work</string>
