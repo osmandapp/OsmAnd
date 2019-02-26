@@ -3556,4 +3556,5 @@
     <string name="poi_park_ride_hov">高承載車輛</string>
     <string name="poi_park_ride_tram">電車</string>
     <string name="poi_park_ride_ferry">渡船</string>
+    <string name="poi_generator_source_biomass">能源：生物能</string>
 </resources>
