@@ -204,7 +204,7 @@
     <string name="telegram_privacy_policy">Telegram-Datenschutzerklärung</string>
     <string name="osmand_privacy_policy">OsmAnd Datenschutzerklärung</string>
     <string name="how_it_works">Wie es funktioniert</string>
-    <string name="received_gps_points">GPX-Punkte erhalten: %1$ s</string>
+    <string name="received_gps_points">GPX-Punkte erhalten: %1$s</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="show_gps_points">GPS-Punkte anzeigen</string>
     <string name="disable_monitoring">Aufzeichnung deaktivieren</string>
