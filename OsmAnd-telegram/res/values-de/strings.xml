@@ -201,7 +201,7 @@
     <string name="app_name_short_online">Online-Tracker</string>
     <string name="app_name_short">OsmAnd Tracker</string>
     <string name="shared_string_accept">Akzeptieren</string>
-    <string name="telegram_privacy_policy">Telegramm Datenschutzerklärung</string>
+    <string name="telegram_privacy_policy">Telegram-Datenschutzerklärung</string>
     <string name="osmand_privacy_policy">OsmAnd Datenschutzerklärung</string>
     <string name="how_it_works">Wie es funktioniert</string>
     <string name="received_gps_points">GPX-Punkte erhalten: %1$ s</string>
@@ -210,4 +210,5 @@
     <string name="disable_monitoring">Aufzeichnung deaktivieren</string>
     <string name="timeline_description">Aufzeichnung aktivieren, um den Standortverlauf zu speichern.</string>
     <string name="show_gps_points_descr">Anzahl gesammelter und gesendeter GPS-Punkte anzeigen.</string>
+    <string name="privacy_policy_agree">Wenn Sie fortfahren, willigen Sie in die Bedingungen der Datenschutzerklärungen von Telegram und OsmAnd ein.</string>
 </resources>
