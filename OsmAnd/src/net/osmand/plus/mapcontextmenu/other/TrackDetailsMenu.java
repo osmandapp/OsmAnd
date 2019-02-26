@@ -583,7 +583,7 @@ public class TrackDetailsMenu {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time));
 			xAxisTitle.setText(app.getString(R.string.shared_string_time));
 		} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
-			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time));
+			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_span));
 			xAxisTitle.setText(app.getString(R.string.time_of_day));
 		} else {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_marker_dark));
