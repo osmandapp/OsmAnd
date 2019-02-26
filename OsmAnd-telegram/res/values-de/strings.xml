@@ -182,7 +182,7 @@
     <string name="time_on_the_move">Zeit in Bewegung</string>
     <string name="average_altitude">Durchschnittliche Höhe</string>
     <string name="average_speed">Durchschnittliche Geschwindigkeit</string>
-    <string name="open_in_osmand">In OsmAnd öffnen</string>
+    <string name="open_in_osmand">In OsmAnd anzeigen</string>
     <string name="end_date">Endzeit</string>
     <string name="start_date">Startzeit</string>
     <string name="timeline">Zeitachse</string>
@@ -207,4 +207,7 @@
     <string name="received_gps_points">GPX-Punkte erhalten: %1$ s</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="show_gps_points">GPS-Punkte anzeigen</string>
+    <string name="disable_monitoring">Aufzeichnung deaktivieren</string>
+    <string name="timeline_description">Aufzeichnung aktivieren, um den Standortverlauf zu speichern.</string>
+    <string name="show_gps_points_descr">Anzahl gesammelter und gesendeter GPS-Punkte anzeigen.</string>
 </resources>
