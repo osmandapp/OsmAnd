@@ -2922,4 +2922,8 @@
     <string name="add_home">Añadir como «Casa»</string>
     <string name="add_work">Añadir como «Trabajo»</string>
     <string name="work_button">Trabajo</string>
+    <string name="add_destination_query">Primero añada el destino</string>
+    <string name="shared_string_swap">Intercambiar</string>
+    <string name="show_more">Ver más</string>
+    <string name="tracks_on_map">Trazas en el mapa</string>
 </resources>

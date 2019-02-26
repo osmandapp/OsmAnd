@@ -179,7 +179,7 @@
     <string name="map_and_text">Kart og tekst</string>
     <string name="monitoring_is_enabled">Oppsyn er påskrudd</string>
     <string name="monitoring_is_disabled">Oppsyn er avskrudd</string>
-    <string name="time_on_the_move">tid i bevegelse</string>
+    <string name="time_on_the_move">Tid i bevegelse</string>
     <string name="average_altitude">Gjennomsnittlig høyde</string>
     <string name="average_speed">Gjennomsnittsfart</string>
     <string name="open_in_osmand">Åpne i OsmAnd</string>
@@ -212,4 +212,5 @@
     <string name="privacy_policy_use_telegram">Telegram (meldingsprogrammet) brukes til å snakke med folk.</string>
     <string name="osmand_privacy_policy">OsmAnd-personvernspraksis</string>
     <string name="please_update_osmand">Oppdater OsmAnd for å vise data på kartet</string>
+    <string name="timeline_description">Skru på oppsyn for å samle bevegelsesdata i historikk.</string>
 </resources>

@@ -57,6 +57,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 	private MapRouteInfoMenu menu;
 	private InterceptorLinearLayout mainView;
+	private FrameLayout bottomContainer;
 	private View modesLayoutToolbar;
 	private View modesLayoutToolbarContainer;
 	private View modesLayoutListContainer;
@@ -122,6 +123,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
 
 		mainView = view.findViewById(R.id.main_view);
+		bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
 		modesLayoutToolbar = view.findViewById(R.id.modes_layout_toolbar);
 		modesLayoutToolbarContainer = view.findViewById(R.id.modes_layout_toolbar_container);
 		modesLayoutListContainer = view.findViewById(R.id.modes_layout_list_container);
@@ -237,35 +239,30 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 							updateToolbar();
 						}
-
 						break;
 
 					case MotionEvent.ACTION_UP:
 						if (moving) {
 							moving = false;
 							int currentY = getViewY();
-
+							int fullScreenTopPosY = getFullScreenTopPosY();
 							final VelocityTracker velocityTracker = this.velocityTracker;
 							velocityTracker.computeCurrentVelocity(1000, maximumVelocity);
 							int initialVelocity = (int) velocityTracker.getYVelocity();
-
-							if ((Math.abs(initialVelocity) > minimumVelocity)) {
-
+							if ((Math.abs(initialVelocity) > minimumVelocity) && currentY != fullScreenTopPosY) {
 								scroller.abortAnimation();
 								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
-										Math.min(viewHeight - menuFullHeightMax, getFullScreenTopPosY()),
+										Math.min(viewHeight - menuFullHeightMax, fullScreenTopPosY),
 										screenHeight,
 										0, 0);
 								currentY = scroller.getFinalY();
 								scroller.abortAnimation();
-
 								slidingUp = initialVelocity < -2000;
 								slidingDown = initialVelocity > 2000;
 							} else {
 								slidingUp = false;
 								slidingDown = false;
 							}
-
 							changeMenuState(currentY, slidingUp, slidingDown);
 						}
 						recycleVelocityTracker();
@@ -370,12 +367,12 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	public int getStatusBarColorId() {
 		if (view != null) {
 			if (menu != null && (getViewY() <= 0 || !portrait)) {
-				if (Build.VERSION.SDK_INT >= 23) {
+				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
 				return nightMode ? R.color.dialog_divider_dark : R.color.dialog_divider_light;
 			} else {
-				if (Build.VERSION.SDK_INT >= 23) {
+				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
 			}
@@ -403,7 +400,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			return;
 		}
 		int y = getViewY();
-		if (y < 0 || !portrait) {
+		if (y < getFullScreenTopPosY()) {
 			ViewGroup parent = (ViewGroup) modesLayout.getParent();
 			if (parent != null && parent != modesLayoutToolbarContainer) {
 				parent.removeView(modesLayout);
@@ -432,7 +429,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	private int getFullScreenTopPosY() {
-		return 0;
+		return !portrait ? topScreenPosY : 0;
 	}
 
 	private int addStatusBarHeightIfNeeded(int res) {
@@ -446,7 +443,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	private int getHeaderOnlyTopY() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return viewHeight - menuTitleHeight - AndroidUtils.dpToPx(mapActivity, 48f);
+			return viewHeight - menuTitleHeight - AndroidUtils.dpToPx(mapActivity, 50f);
 		} else {
 			return 0;
 		}
@@ -775,6 +772,18 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			return mainView.getWidth();
 		} else {
 			return 0;
+		}
+	}
+
+	public void setBottomShadowVisible(boolean visible) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (visible) {
+				AndroidUtils.setForeground(mapActivity, bottomContainer, nightMode,
+						R.drawable.bg_contextmenu_shadow, R.drawable.bg_contextmenu_shadow);
+			} else {
+				bottomContainer.setForeground(null);
+			}
 		}
 	}
 

@@ -705,7 +705,7 @@
     <string name="update_existing">取代</string>
     <string name="only_show">顯示路線</string>
     <string name="follow">開始導航</string>
-    <string name="mark_final_location_first">請先設定目的地</string>
+    <string name="mark_final_location_first">請先選擇目的地</string>
     <string name="get_directions">導引</string>
     <string name="opening_hours">營業時間</string>
     <string name="opening_changeset">正在開啟異動清單…</string>
@@ -2906,4 +2906,9 @@
     <string name="add_home">新增首頁</string>
     <string name="add_work">新增工作</string>
     <string name="work_button">工作</string>
+    <string name="add_destination_query">請先增加目的地</string>
+    <string name="previous_route">前一個路線</string>
+    <string name="shared_string_swap">切換</string>
+    <string name="show_more">顯示更多</string>
+    <string name="tracks_on_map">在地圖上追蹤</string>
 </resources>

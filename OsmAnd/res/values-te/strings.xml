@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="coord_input_add_point">పాయింట్ జోడించండి</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="coord_input_add_point">పాయింట్ జోడించండి</string>
     <string name="shared_string_bookmark">ఇష్టాంశం</string>
     <string name="hide_full_description">పూర్తి వివరణను దాచిపెట్టు</string>
     <string name="show_full_description">పూర్తి వివరణ చూపించు</string>
@@ -8,4 +9,11 @@
     <string name="download_all">అన్ని దింపుకోండి</string>
     <string name="shared_string_restart">అనువర్తనాన్ని పునఃప్రారంభించండి</string>
     <string name="show_images">చిత్రాలను చూపించు</string>
-    </resources>
+    <string name="add_destination_query">ముందు గమ్యస్థానమును తెలుపండి</string>
+    <string name="work_button">పని</string>
+    <string name="shared_string_capacity">సామర్ధ్యం</string>
+    <string name="shared_string_width">వెడల్పు</string>
+    <string name="shared_string_height">ఎత్తు</string>
+    <string name="swap_start_and_destination">గమ్యస్థానము మూలాస్థానమును ఒకదానికి ఒకటి మార్చు</string>
+    <string name="add_destination_point">గమ్యస్థానమును జోడించండి</string>
+</resources>

@@ -48,7 +48,7 @@ public class TransportRoutingHelper {
 
 	private List<TransportRouteResult> routes;
 	private Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments;
-	private int currentRoute;
+	private int currentRoute = -1;
 
 	private LatLon startLocation;
 	private LatLon endLocation;
@@ -174,6 +174,7 @@ public class TransportRoutingHelper {
 		if (progressRoute != null) {
 			progressRoute.start();
 		}
+		setCurrentRoute(-1);
 	}
 
 	private void updateProgress(final TransportRouteCalculationParams params) {
@@ -194,6 +195,9 @@ public class TransportRoutingHelper {
 							updateProgress(params);
 						}
 					} else {
+						if (routes != null && routes.size() > 0) {
+							setCurrentRoute(0);
+						}
 						progressRoute.finish();
 					}
 				}
