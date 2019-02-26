@@ -23,7 +23,7 @@
 		android:id="@+id/card_content"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/bg_color"
+		android:background="?attr/route_info_bg"
 		android:baselineAligned="false"
 		android:gravity="center_vertical"
 		android:orientation="vertical"
@@ -40,7 +40,8 @@
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
-				android:text="@string/previous_route" />
+				android:text="@string/previous_route"
+				android:textColor="?android:attr/textColorSecondary" />
 
 		</LinearLayout>
 
@@ -61,7 +62,7 @@
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
 				android:src="@drawable/ic_action_previous_route"
-				tools:tint="?attr/route_info_control_icon_color" />
+				android:tint="?attr/route_info_control_icon_color" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -74,26 +75,27 @@
 					android:id="@+id/start_title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:textColor="?android:attr/textColorSecondary"
 					android:ellipsize="end"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/home_button"
 					android:textSize="@dimen/default_sub_text_size"
 					tools:ignore="UnusedAttribute"
-					tools:text="My location - 160 Broadway, New York"
-					tools:textColor="?android:attr/textColorSecondary" />
+					tools:text="My location - 160 Broadway, New York" />
 
 				<TextView
 					android:id="@+id/destination_title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:layout_marginTop="5dp"
+					android:textColor="?android:attr/textColorPrimary"
 					android:ellipsize="end"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:textSize="@dimen/default_list_text_size"
 					tools:ignore="UnusedAttribute"
-					tools:text="McDonald's, 1560 Broadway, New York"
-					tools:textColor="?android:attr/textColorPrimary" />
+					tools:text="McDonald's, 1560 Broadway, New York" />
 
 			</LinearLayout>
 

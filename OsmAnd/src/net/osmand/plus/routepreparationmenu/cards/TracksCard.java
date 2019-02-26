@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -83,7 +84,8 @@ public class TracksCard extends BaseCard {
 
 		int i = 0;
 		boolean showLimitExceeds = list.size() > 4;
-		LayoutInflater inflater = mapActivity.getLayoutInflater();
+		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		LayoutInflater inflater = LayoutInflater.from(ctx);
 		for (final GpxItem item : list) {
 			if (showLimitExceeds && i >= 3 && showLimited) {
 				break;
@@ -138,11 +140,5 @@ public class TracksCard extends BaseCard {
 
 	@Override
 	protected void applyDayNightMode() {
-		AndroidUtils.setTextSecondaryColor(app, (TextView) view.findViewById(R.id.gpx_card_title), nightMode);
-		((TextView) view.findViewById(R.id.show_all_title)).setTextColor(mapActivity.getResources().getColor(
-				nightMode ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light));
-		AndroidUtils.setBackground(app, view.findViewById(R.id.card_content), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.divider), nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.divider_list), nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
 	}
 }

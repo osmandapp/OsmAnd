@@ -2919,4 +2919,7 @@
     <string name="work_button">Arbeid</string>
     <string name="previous_route">Forrige rute</string>
     <string name="add_destination_query">Legg til mål først</string>
+    <string name="shared_string_swap">Veksle</string>
+    <string name="show_more">Vis mer</string>
+    <string name="tracks_on_map">Spor på kartet</string>
 </resources>

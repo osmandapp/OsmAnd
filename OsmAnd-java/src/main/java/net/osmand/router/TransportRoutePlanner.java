@@ -157,11 +157,13 @@ public class TransportRoutePlanner {
 	}
 	
 	private void initProgressBar(TransportRoutingContext ctx, LatLon start, LatLon end) {
-		ctx.calculationProgress.distanceFromEnd = 0;
-		ctx.calculationProgress.reverseSegmentQueueSize = 0;
-		ctx.calculationProgress.directSegmentQueueSize = 0;
-		float speed = (float) ctx.cfg.travelSpeed + 1; // assume 
-		ctx.calculationProgress.totalEstimatedDistance = (float) (MapUtils.getDistance(start, end)/ speed);
+		if (ctx.calculationProgress != null) {
+			ctx.calculationProgress.distanceFromEnd = 0;
+			ctx.calculationProgress.reverseSegmentQueueSize = 0;
+			ctx.calculationProgress.directSegmentQueueSize = 0;
+			float speed = (float) ctx.cfg.travelSpeed + 1; // assume
+			ctx.calculationProgress.totalEstimatedDistance = (float) (MapUtils.getDistance(start, end) / speed);
+		}
 	}
 
 	private void updateCalculationProgress(TransportRoutingContext ctx, PriorityQueue<TransportRouteSegment> queue) {

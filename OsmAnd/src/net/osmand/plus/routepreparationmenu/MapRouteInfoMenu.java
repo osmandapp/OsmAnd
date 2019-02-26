@@ -6,7 +6,14 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
+import android.support.transition.AutoTransition;
+import android.support.transition.Scene;
+import android.support.transition.Transition;
+import android.support.transition.TransitionListenerAdapter;
+import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -51,6 +58,7 @@ import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
@@ -59,10 +67,14 @@ import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
+import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.SearchResult;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,6 +88,8 @@ import java.util.Set;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
+
+	private static final int BUTTON_ANIMATION_DELAY = 2000;
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -92,6 +106,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private final TransportRoutingHelper transportHelper;
 	private final RoutingOptionsHelper routingOptionsHelper;
 	private GeocodingLookupService geocodingLookupService;
+	private boolean routeCalculationInProgress;
 
 	private boolean selectFromMapTouch;
 	private PointType selectFromMapPointType;
@@ -100,6 +115,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean showMenu = false;
 	private MapActivity mapActivity;
 	private OsmandApplication app;
+	private Handler animationsHandler;
 	private MapControlsLayer mapControlsLayer;
 	private boolean nightMode;
 	private boolean switched;
@@ -116,6 +132,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private int currentMenuState;
 	private boolean portraitMode;
+
+	private boolean swapButtonCollapsing;
+	private boolean swapButtonCollapsed;
+	private boolean editButtonCollapsing;
+	private boolean editButtonCollapsed;
+	private boolean addButtonCollapsing;
+	private boolean addButtonCollapsed;
+
+	private interface OnButtonCollapsedListener {
+		void onButtonCollapsed(boolean success);
+	}
 
 	public interface OnMarkerSelectListener {
 		void onSelect(int index, PointType pointType);
@@ -136,6 +163,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		this.routingHelper = mapActivity.getRoutingHelper();
 		this.transportHelper = routingHelper.getTransportRoutingHelper();
 		this.routingOptionsHelper = app.getRoutingOptionsHelper();
+		this.animationsHandler = new Handler();
 
 		routingHelper.addListener(this);
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -199,9 +227,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					break;
 			}
 			show(selectFromMapMenuState);
-			if (selectFromMapPointType == PointType.INTERMEDIATE && targets.checkPointToNavigateShort()) {
-				WaypointsFragment.showInstance(mapActivity);
-			}
 			return true;
 		}
 		return false;
@@ -231,6 +256,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			geocodingLookupService.cancel(targetPointRequest);
 			targetPointRequest = null;
 		}
+	}
+
+	private void runButtonAnimation(Runnable animation) {
+		animationsHandler.postDelayed(animation, BUTTON_ANIMATION_DELAY);
+	}
+
+	private void cancelAnimations() {
+		animationsHandler.removeCallbacksAndMessages(null);
 	}
 
 	public void setVisible(boolean visible) {
@@ -299,21 +332,36 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
+	private boolean setRouteCalculationInProgress(boolean routeCalculationInProgress) {
+		if (this.routeCalculationInProgress != routeCalculationInProgress) {
+			this.routeCalculationInProgress = routeCalculationInProgress;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void updateRouteCalculationProgress(int progress) {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null && fragmentRef.get().isVisible()) {
-			fragmentRef.get().updateRouteCalculationProgress(progress);
-			fragmentRef.get().updateControlButtons();
+		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+		if (fragmentRef != null && fragment.isVisible()) {
+			if (setRouteCalculationInProgress(true)) {
+				fragment.updateInfo();
+			}
+			fragment.updateRouteCalculationProgress(progress);
+			fragment.updateControlButtons();
 		}
 	}
 
 	public void routeCalculationFinished() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null && fragmentRef.get().isVisible()) {
-			fragmentRef.get().hideRouteCalculationProgressBar();
-			fragmentRef.get().updateControlButtons();
-			fragmentRef.get().updateInfo();
-			fragmentRef.get().openMenuHalfScreen();
+		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+		if (fragmentRef != null && fragment.isVisible()) {
+			setRouteCalculationInProgress(false);
+			fragment.hideRouteCalculationProgressBar();
+			fragment.updateControlButtons();
+			fragment.updateInfo();
+			fragment.openMenuHalfScreen();
 		}
 	}
 
@@ -349,6 +397,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			fragmentRef.get().updateFromIcon();
 	}
 
+	public void setBottomShadowVisible(boolean visible) {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().setBottomShadowVisible(visible);
+	}
+
 	public void build(LinearLayout rootView) {
 		rootView.removeAllViews();
 		for (BaseCard card : menuCards) {
@@ -370,20 +424,23 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		menuCards.clear();
 
+		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {
 			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), mapActivity.getMyApplication());
 			if (gpx != null) {
 				menuCards.add(new SimpleRouteCard(mapActivity, gpx));
 			}
+			bottomShadowVisible = gpx == null;
 		} else if (isTransportRouteCalculated()) {
-			List<TransportRoutePlanner.TransportRouteResult> routes = transportHelper.getRoutes();
+			List<TransportRouteResult> routes = transportHelper.getRoutes();
 			for (int i = 0; i < routes.size(); i++) {
 				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
 				card.setShowBottomShadow(i == routes.size() - 1);
 				card.setShowTopShadow(i != 0);
 				menuCards.add(card);
 			}
-		} else {
+			bottomShadowVisible = routes.size() == 0;
+		} else if (!routeCalculationInProgress) {
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
 
@@ -413,7 +470,23 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				tracksCard.setListener(this);
 				menuCards.add(tracksCard);
 			}
+
+			SearchResultCollection res = null;
+			try {
+				res = app.getSearchUICore().getCore().shallowSearch(QuickSearchHelper.SearchHistoryAPI.class, "", null);
+			} catch (IOException e) {
+				// ignore
+			}
+			if (res != null) {
+				List<SearchResult> results = res.getCurrentSearchResults();
+				if (results.size() > 0) {
+					HistoryCard historyCard = new HistoryCard(mapActivity, results);
+					historyCard.setListener(this);
+					menuCards.add(historyCard);
+				}
+			}
 		}
+		setBottomShadowVisible(bottomShadowVisible);
 		setupCards();
 	}
 
@@ -580,16 +653,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		int margin = AndroidUtils.dpToPx(app, 3);
 
 		View startButton = mainView.findViewById(R.id.start_button);
+		TextView startButtonText = (TextView) mainView.findViewById(R.id.start_button_descr);
 		if (isRouteCalculated()) {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
 			int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
-			((TextView) mainView.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
+			startButtonText.setTextColor(ContextCompat.getColor(app, color));
 			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
 		} else {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
 			int color = R.color.description_font_and_bottom_sheet_icons;
-			((TextView) mainView.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(app, color));
+			startButtonText.setTextColor(ContextCompat.getColor(app, color));
 			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+		}
+		if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
+			startButtonText.setText(R.string.shared_string_continue);
+		} else {
+			startButtonText.setText(R.string.shared_string_control_start);
 		}
 		startButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -940,6 +1019,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private void clickRouteCancel() {
 		mapControlsLayer.stopNavigation();
+		setRouteCalculationInProgress(false);
+		restoreCollapsedButtons();
 	}
 
 	private void clickRouteParams() {
@@ -989,6 +1070,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			normal = AndroidUtils.createPressedStateListDrawable(normal, active);
 		}
 		viaButtonImageView.setImageDrawable(normal);
+
+		final View textView = mainView.findViewById(R.id.via_button_description);
+		if (!editButtonCollapsing && !editButtonCollapsed &&
+				viaButton.getVisibility() == View.VISIBLE && textView.getVisibility() == View.VISIBLE) {
+			editButtonCollapsing = true;
+			collapseButtonAnimated(R.id.via_button, R.id.via_button_description, new OnButtonCollapsedListener() {
+				@Override
+				public void onButtonCollapsed(boolean success) {
+					editButtonCollapsing = false;
+					editButtonCollapsed = success;
+				}
+			});
+		} else if (editButtonCollapsed) {
+			textView.setVisibility(View.GONE);
+		}
 	}
 
 	private void updateFinishPointView() {
@@ -1031,6 +1127,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					openAddPointDialog(PointType.INTERMEDIATE);
 				}
 			});
+
+			final View textView = mainView.findViewById(R.id.to_button_description);
+			if (!addButtonCollapsing && !addButtonCollapsed &&
+					toButton.getVisibility() == View.VISIBLE && textView.getVisibility() == View.VISIBLE) {
+				addButtonCollapsing = true;
+				collapseButtonAnimated(R.id.to_button, R.id.to_button_description, new OnButtonCollapsedListener() {
+					@Override
+					public void onButtonCollapsed(boolean success) {
+						addButtonCollapsing = false;
+						addButtonCollapsed = success;
+					}
+				});
+			} else if (addButtonCollapsed) {
+				textView.setVisibility(View.GONE);
+			}
 		}
 		updateToIcon(mainView);
 	}
@@ -1076,7 +1187,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				TargetPoint startPoint = targetPointsHelper.getPointToStart();
 				TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
 				if (endPoint == null) {
-					app.showShortToastMessage(R.string.add_destination_query);
+					app.showShortToastMessage(R.string.mark_final_location_first);
 				} else {
 					if (startPoint == null) {
 						Location loc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
@@ -1096,11 +1207,72 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 
 		updateFromIcon(mainView);
+
+		final View textView = mainView.findViewById(R.id.from_button_description);
+		if (!swapButtonCollapsing && !swapButtonCollapsed &&
+				fromButton.getVisibility() == View.VISIBLE && textView.getVisibility() == View.VISIBLE) {
+			swapButtonCollapsing = true;
+			collapseButtonAnimated(R.id.from_button, R.id.from_button_description, new OnButtonCollapsedListener() {
+				@Override
+				public void onButtonCollapsed(boolean success) {
+					swapButtonCollapsing = false;
+					swapButtonCollapsed = success;
+				}
+			});
+		} else if (swapButtonCollapsed) {
+			textView.setVisibility(View.GONE);
+		}
 	}
 
 	public void updateFromIcon(View parentView) {
 		((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
 				getTargets().getPointToStart() == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint));
+	}
+
+	private void collapseButtonAnimated(final int containerRes, final int viewRes, final OnButtonCollapsedListener listener) {
+		runButtonAnimation(new Runnable() {
+			@Override
+			public void run() {
+				boolean started = false;
+				if (visible && mainView != null) {
+					ViewGroup container = (ViewGroup) mainView.findViewById(containerRes);
+					View v = mainView.findViewById(viewRes);
+					if (container != null && v != null && v.getVisibility() == View.VISIBLE) {
+						AutoTransition transition = new AutoTransition();
+						transition.setStartDelay(BUTTON_ANIMATION_DELAY);
+						transition.addListener(new TransitionListenerAdapter() {
+							@Override
+							public void onTransitionEnd(@NonNull Transition transition) {
+								if (listener != null) {
+									listener.onButtonCollapsed(visible);
+								}
+							}
+						});
+						TransitionManager.go(new Scene(container), transition);
+						v.setVisibility(View.GONE);
+						started = true;
+					}
+				}
+				if (!started) {
+					if (listener != null) {
+						listener.onButtonCollapsed(false);
+					}
+				}
+			}
+		});
+	}
+
+	private void restoreCollapsedButtons() {
+		swapButtonCollapsed = false;
+		editButtonCollapsed = false;
+		addButtonCollapsed = false;
+	}
+
+	private void cancelButtonsAnimations() {
+		animationsHandler.removeCallbacksAndMessages(null);
+		swapButtonCollapsing = false;
+		editButtonCollapsing = false;
+		addButtonCollapsing = false;
 	}
 
 	public void selectOnScreen(PointType pointType) {
@@ -1366,6 +1538,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void onDismiss() {
 		visible = false;
+		cancelButtonsAnimations();
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
 		AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), false);
@@ -1414,6 +1587,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void hide() {
+		cancelButtonsAnimations();
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().dismiss();

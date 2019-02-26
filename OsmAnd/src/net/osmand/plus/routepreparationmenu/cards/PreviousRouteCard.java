@@ -38,7 +38,7 @@ public class PreviousRouteCard extends BaseCard {
 		}
 		StringBuilder startText = new StringBuilder(myLocation ? mapActivity.getText(R.string.my_location) : "");
 		if (startPoint != null) {
-			String descr = startPoint.getPointDescription(mapActivity).getSimpleName(mapActivity, false);
+			String descr = getPointName(startPoint);
 			if (!Algorithms.isEmpty(descr)) {
 				if (startText.length() > 0) {
 					startText.append(" — ");
@@ -49,16 +49,7 @@ public class PreviousRouteCard extends BaseCard {
 		startTitle.setText(startText.toString());
 		TargetPoint destinationPoint = targetPointsHelper.getPointToNavigateBackup();
 		String destinationName = "";
-		if (destinationPoint != null) {
-			PointDescription description = destinationPoint.getOriginalPointDescription();
-			if (description != null && !Algorithms.isEmpty(description.getName()) &&
-					!description.getName().equals(mapActivity.getString(R.string.no_address_found))) {
-				destinationName = description.getName();
-			} else {
-				destinationName = PointDescription.getLocationName(mapActivity,
-						destinationPoint.point.getLatitude(), destinationPoint.point.getLongitude(), true).replace('\n', ' ');
-			}
-		}
+		destinationName = getPointName(destinationPoint);
 		destinationTitle.setText(destinationName);
 		View homeButton = view.findViewById(R.id.card_button);
 		homeButton.setOnClickListener(new View.OnClickListener() {
@@ -69,13 +60,22 @@ public class PreviousRouteCard extends BaseCard {
 		});
 	}
 
+	private String getPointName(TargetPoint targetPoint) {
+		String name = "";
+		if (targetPoint != null) {
+			PointDescription description = targetPoint.getOriginalPointDescription();
+			if (description != null && !Algorithms.isEmpty(description.getName()) &&
+					!description.getName().equals(mapActivity.getString(R.string.no_address_found))) {
+				name = description.getName();
+			} else {
+				name = PointDescription.getLocationName(mapActivity,
+						targetPoint.point.getLatitude(), targetPoint.point.getLongitude(), true).replace('\n', ' ');
+			}
+		}
+		return name;
+	}
+
 	@Override
 	protected void applyDayNightMode() {
-		AndroidUtils.setTextSecondaryColor(app, (TextView) view.findViewById(R.id.prev_route_card_title), nightMode);
-		AndroidUtils.setTextSecondaryColor(app, (TextView) view.findViewById(R.id.start_title), nightMode);
-		AndroidUtils.setTextPrimaryColor(app, (TextView) view.findViewById(R.id.destination_title), nightMode);
-		Drawable img = app.getUIUtilities().getIcon(R.drawable.ic_action_previous_route, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-		((AppCompatImageView) view.findViewById(R.id.card_img)).setImageDrawable(img);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.card_content), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
 	}
 }

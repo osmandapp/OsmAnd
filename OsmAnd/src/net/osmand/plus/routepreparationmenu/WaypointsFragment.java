@@ -60,7 +60,7 @@ import java.util.List;
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
 public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
-		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallbacks {
+		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback {
 
 	public static final String TAG = "WaypointsFragment";
 
@@ -329,7 +329,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	public void onResume() {
 		super.onResume();
 		wasDrawerDisabled = mapActivity.isDrawerDisabled();
-		waypointDialogHelper.addHelperCallbacks(this);
+		waypointDialogHelper.addHelperCallback(this);
 		app.getTargetPointsHelper().addListener(onStateChangedListener);
 		if (!wasDrawerDisabled) {
 			mapActivity.disableDrawer();
@@ -341,7 +341,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	public void onPause() {
 		super.onPause();
 		cancelTimer();
-		waypointDialogHelper.removeHelperCallbacks(this);
+		waypointDialogHelper.removeHelperCallback(this);
 		app.getTargetPointsHelper().removeListener(onStateChangedListener);
 		if (!wasDrawerDisabled) {
 			mapActivity.enableDrawer();
