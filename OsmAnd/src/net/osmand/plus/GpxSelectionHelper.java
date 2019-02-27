@@ -35,7 +35,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public class GpxSelectionHelper {
@@ -43,7 +42,7 @@ public class GpxSelectionHelper {
 	private static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
 	private static final String BACKUP = "backup";
-	private static final String BACKUPTIME = "backupTime";
+	private static final String BACKUPMODIFIEDTIME = "backupTime";
 	private static final String COLOR = "color";
 	private static final String SELECTED_BY_USER = "selected_by_user";
 	private OsmandApplication app;
@@ -62,7 +61,7 @@ public class GpxSelectionHelper {
 	public void clearAllGpxFileToShow() {
 		selectedGpxFilesBackUp.clear();
 		for(SelectedGpxFile s : selectedGPXFiles) {
-			selectedGpxFilesBackUp.put(s.gpxFile, System.currentTimeMillis());
+			selectedGpxFilesBackUp.put(s.gpxFile, s.modifiedTime);
 		}
 		selectedGPXFiles.clear();
 		saveCurrentSelections();
@@ -71,16 +70,20 @@ public class GpxSelectionHelper {
 	public void restoreSelectedGpxFiles() {
 		if (!selectedGpxFilesBackUp.isEmpty()) {
 			for(Map.Entry<GPXFile, Long> gpx : selectedGpxFilesBackUp.entrySet()) {
-				File file = new File(gpx.getKey().path);
-				if (file.exists() && !file.isDirectory() && file.lastModified() < gpx.getValue()) {
-					selectGpxFile(gpx.getKey(), true, false);
+				LOG.debug("file path: " + gpx.getKey().path);
+				if (!Algorithms.isEmpty(gpx.getKey().path)) {
+					File file = new File(gpx.getKey().path);
+					if (file.exists() && !file.isDirectory()) {
+						if (file.lastModified() > gpx.getValue()) {
+							GPXUtilities.loadGPXFile(file);
+						}
+						selectGpxFile(gpx.getKey(), true, false);
+					}
 				}
 			}
 			saveCurrentSelections();
 		}
-
 	}
-
 
 	public boolean isShowingAnyGpxFiles() {
 		return !selectedGPXFiles.isEmpty();
@@ -527,7 +530,7 @@ public class GpxSelectionHelper {
 					}
 					obj.put(SELECTED_BY_USER, true);
 					obj.put(BACKUP, true);
-					obj.put(BACKUPTIME, s.getValue());
+					obj.put(BACKUPMODIFIEDTIME, s.getValue());
 					ar.put(obj);
 				} catch (JSONException e) {
 					e.printStackTrace();
