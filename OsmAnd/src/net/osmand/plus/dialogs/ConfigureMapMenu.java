@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.File;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
@@ -160,9 +161,12 @@ public class ConfigureMapMenu {
 			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
 				files.add(file.getGpxFile().path);
 			}
-			List<GPXUtilities.GPXFile> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
-			for(GPXUtilities.GPXFile f : fls) {
-				files.add(f.path);
+			Map<GPXUtilities.GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
+			for(Map.Entry<GPXUtilities.GPXFile, Long> f : fls.entrySet()) {
+				File file = new File(f.getKey().path);
+				if(file.exists() && !file.isDirectory()) {
+					files.add(f.getKey().path);
+				}
 			}
 			return files;
 		}
