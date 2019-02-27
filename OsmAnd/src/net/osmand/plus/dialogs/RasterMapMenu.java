@@ -117,14 +117,13 @@ public class RasterMapMenu {
 					hidePolygonsPref.set(!isChecked);
 					refreshMapComplete(mapActivity);
 				} else if (itemId == R.string.show_transparency_seekbar) {
-					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(
-							isChecked ? currentMapTypeSeekbarMode : LayerTransparencySeekbarMode.OFF);
 					if (isChecked) {
-						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-					} else {
-						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
+						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
+						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference, true);
+					} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
+					{
+						mapLayers.getMapControlsLayer().hideTransparencyBar();
 					}
-					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
 				}
 				return false;
 			}

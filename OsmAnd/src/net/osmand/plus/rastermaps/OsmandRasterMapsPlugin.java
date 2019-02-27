@@ -144,6 +144,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			mapView.removeLayer(underlayLayer);
 			underlayLayer.setMap(null);
 		}
+		if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY &&
+				underlayLayer.getMap() != null) {
+			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_UNDERLAY, true);
+		} else if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
+				overlayLayer.getMap() != null) {
+			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+		}
 		layers.updateMapSource(mapView, settingsToWarnAboutMap);
 	}
 
@@ -565,54 +572,43 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 									@NonNull RasterMapType type,
 									@Nullable OnMapSelectedCallback callback) {
 		OsmandMapTileView mapView = mapActivity.getMapView();
-		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
 		OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
-		ITileSource map;
+
 		boolean isMapSelected;
+		MapTileLayer layer;
 		if (type == RasterMapType.OVERLAY) {
-			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
 			exMapTypePreference = settings.MAP_OVERLAY_PREVIOUS;
-			map = overlayLayer.getMap();
+			layer = overlayLayer;
 		} else {
 			// Underlay expected
-			mapTransparencyPreference = settings.MAP_TRANSPARENCY;
 			mapTypePreference = settings.MAP_UNDERLAY;
 			exMapTypePreference = settings.MAP_UNDERLAY_PREVIOUS;
-			map = underlayLayer.getMap();
+			layer = underlayLayer;
 		}
-
+		MapActivityLayers mapLayers = mapActivity.getMapLayers();
+		ITileSource map = layer.getMap();
+		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
+				OsmandRasterMapsPlugin.RasterMapType.OVERLAY ?
+						OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
 		if (map != null) {
-			isMapSelected = false;
 			mapTypePreference.set(null);
 			if (callback != null) {
 				callback.onMapSelected(false);
 			}
 			updateMapLayers(mapView, null, mapLayers);
-		} else {
-			isMapSelected = !Algorithms.isEmpty(exMapTypePreference.get()); // we can also later extra check if prev map was not empty
-			selectMapOverlayLayer(mapView, mapTypePreference, exMapTypePreference, false, mapActivity, callback);
-		}
-
-		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
-				OsmandRasterMapsPlugin.RasterMapType.OVERLAY ?
-						OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
-		boolean isSeekBarVisible =  RasterMapMenu.isSeekbarVisible(app, type);
-		boolean showSeekbar = isMapSelected && isSeekBarVisible ;
-		boolean hideSeekbar = !isMapSelected && isSeekBarVisible &&
-				seekbarModePref.get() == currentMapTypeSeekbarMode;
-		MapActivityLayers mapLayers = mapActivity.getMapLayers();
-		CommonPreference<LayerTransparencySeekbarMode> seekbarModePref = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE;
-		if (showSeekbar) {
-			mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-			mapActivity.getMapLayers().getMapControlsLayer().setTransparencyBarEnabled(true);
-			if (seekbarModePref.get() == LayerTransparencySeekbarMode.UNDEFINED) {
-				seekbarModePref.set(currentMapTypeSeekbarMode);
+			// hide seekbar
+			if(currentMapTypeSeekbarMode == settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get()) {
+				settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDEFINED);
+				mapLayers.getMapControlsLayer().hideTransparencyBar();
 			}
-		} else if(){
-			mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
-			mapLayers.getMapControlsLayer().setTransparencyBarEnabled(false);
+		} else {
+			settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
+
+			selectMapOverlayLayer(mapView, mapTypePreference, exMapTypePreference, false, mapActivity, callback);
+			showSeekbar = true;
+
 		}
 
 	}
