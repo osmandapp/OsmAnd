@@ -599,7 +599,8 @@ public class Algorithms {
 	public static boolean isInt(String value) {
 		for (int i = 0; i < value.length(); i++) {
 			if (!Character.isDigit(value.charAt(i))) {
-				if ((i == 0 && value.charAt(i) != '-') || (value.length() == 1 && value.charAt(i) == '-') || i > 0 ) {
+				if ((i == 0 && value.charAt(i) != '-') || (value.length() == 1
+					&& value.charAt(i) == '-') || i > 0) {
 					return false;
 				}
 			}
@@ -608,9 +609,27 @@ public class Algorithms {
 	}
 
 	public static boolean isFloat(String value) {
-		return value.matches("[-+]?[0-9]*\\.?[0-9]+");
+		int pointsCount = 0;
+		int length = value.length();
+		for (int i = 0; i < length; i++) {
+			if (!Character.isDigit(value.charAt(i))) {
+				if (length < 2) {
+					return false;
+				}
+				if (!(value.charAt(i) == '-' || value.charAt(i) == '.')) {
+					return false;
+				} else if (value.charAt(i) == '-' && i != 0) {
+					return false;
+				} else if ((value.charAt(i) == '.' && pointsCount >= 1) || (value.charAt(i) == '.'
+					&& i == length - 1)) {
+					return false;
+				} else if (value.charAt(i) == '.') {
+					pointsCount++;
+				}
+			}
+		}
+		return pointsCount == 1;
 	}
-
 
 	public static String formatDuration(int seconds, boolean fullForm) {
 		String sec;
