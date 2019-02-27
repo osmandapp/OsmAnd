@@ -882,7 +882,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_widget_audionotes">Audio poznámky</string>
     <string name="recording_is_recorded">Nahrávání audia/videa. Stiskněte tlačítko Stop pro zastavení.</string>
     <string name="recording_open_external_player">Otevřít externí přehrávač</string>
-    <string name="recording_delete_confirm">Chcete smazat tento záznam?</string>
+    <string name="recording_delete_confirm">Smazat tento záznam\?</string>
     <string name="recording_context_menu_arecord">Nahrát zvukovou poznámku</string>
     <string name="recording_context_menu_vrecord">Nahrát video poznámku</string>
     <string name="recording_can_not_be_played">Záznam nelze přehrát</string>
@@ -902,7 +902,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="av_use_external_recorder">Použít externí záznamník</string>
     <string name="av_settings_descr">Nastavit možnosti zvuku a videa.</string>
     <string name="av_settings">Nastavení zvuku a videa </string>
-    <string name="recording_error">Při nahrávání došlo k chybě </string>
+    <string name="recording_error">Nahrávání selhalo</string>
     <string name="recording_camera_not_available">Kamera není dostupná</string>
     <string name="recording_playing">Probíhá přehrávání zvuku z nahrávky:
 \n%1$s</string>
