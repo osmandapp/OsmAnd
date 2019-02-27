@@ -597,10 +597,11 @@ public class Algorithms {
 	}
 
 	public static boolean isInt(String value) {
-		for (int i = 0; i < value.length(); i++) {
-			if (!Character.isDigit(value.charAt(i))) {
-				if ((i == 0 && value.charAt(i) != '-') || (value.length() == 1
-					&& value.charAt(i) == '-') || i > 0) {
+		int length = value.length();
+		for (int i = 0; i < length; i++) {
+			char ch = value.charAt(i);
+			if (!Character.isDigit(ch)) {
+				if (length == 1 || i > 0 || ch != '-') {
 					return false;
 				}
 			}
@@ -612,18 +613,18 @@ public class Algorithms {
 		int pointsCount = 0;
 		int length = value.length();
 		for (int i = 0; i < length; i++) {
-			if (!Character.isDigit(value.charAt(i))) {
+			char ch = value.charAt(i);
+			if (!Character.isDigit(ch)) {
 				if (length < 2) {
 					return false;
 				}
-				if (!(value.charAt(i) == '-' || value.charAt(i) == '.')) {
+				if (!(ch == '-' || ch == '.')) {
 					return false;
-				} else if (value.charAt(i) == '-' && i != 0) {
+				} else if (ch == '-' && i != 0) {
 					return false;
-				} else if ((value.charAt(i) == '.' && pointsCount >= 1) || (value.charAt(i) == '.'
-					&& i == length - 1)) {
+				} else if ((ch == '.' && pointsCount >= 1) || (ch == '.' && i == length - 1)) {
 					return false;
-				} else if (value.charAt(i) == '.') {
+				} else if (ch == '.') {
 					pointsCount++;
 				}
 			}
