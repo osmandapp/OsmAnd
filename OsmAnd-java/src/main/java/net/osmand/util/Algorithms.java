@@ -596,6 +596,14 @@ public class Algorithms {
 		return false;
 	}
 
+	public static boolean isStringAnInt(String value) {
+		return value.matches("^[0-9]*$");
+	}
+
+	public static boolean isStringAFloat(String value) {
+		return value.matches("[-+]?[0-9]*\\.?[0-9]+");
+	}
+
 
 	public static String formatDuration(int seconds, boolean fullForm) {
 		String sec;
