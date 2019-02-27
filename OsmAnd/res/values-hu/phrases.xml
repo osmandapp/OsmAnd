@@ -2286,13 +2286,13 @@
     <string name="poi_health_specialty_social_paediatrics_yes">Szociális gyermekgyógyászat</string>
     <string name="poi_scout_yes">van</string>
     <string name="poi_scout_no">Cserkésztáborhely nincs</string>
-    <string name="poi_cuisine_steak">Steak</string>
+    <string name="poi_cuisine_steak">Steak (marhaszelet)</string>
     <string name="poi_cuisine_tapas">Tapas</string>
     <string name="poi_cuisine_gastropub">Gasztrokocsma</string>
     <string name="poi_cuisine_heuriger">Újbor</string>
     <string name="poi_cuisine_curry">Curry</string>
     <string name="poi_cuisine_sausage">Kolbász</string>
-    <string name="poi_cuisine_cake">Sütemény</string>
+    <string name="poi_cuisine_cake">Torta</string>
     <string name="poi_cuisine_pasta">Olasz tészta</string>
     <string name="poi_cuisine_juice">Gyümölcslé</string>
     <string name="poi_cuisine_fried_food">Olajban sült étel</string>
@@ -2321,7 +2321,7 @@
     <string name="poi_cuisine_burrito">Burrito</string>
     <string name="poi_cuisine_french">Francia</string>
     <string name="poi_cuisine_greek">Görög</string>
-    <string name="poi_cuisine_thai">Thai</string>
+    <string name="poi_cuisine_thai">Thaiföldi</string>
     <string name="poi_cuisine_international">Nemzetközi</string>
     <string name="poi_cuisine_turkish">Török</string>
     <string name="poi_cuisine_spanish">Spanyol</string>
