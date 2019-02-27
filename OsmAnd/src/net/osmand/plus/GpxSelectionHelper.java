@@ -31,18 +31,20 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 public class GpxSelectionHelper {
 
 	private static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
+	private static final String BACKUP = "backup";
 	private static final String COLOR = "color";
 	private static final String SELECTED_BY_USER = "selected_by_user";
 	private OsmandApplication app;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<>();
-	private List<SelectedGpxFile> selectedGpxFilesBackUp = new java.util.ArrayList<>();
+	private List<GPXFile> selectedGpxFilesBackUp = new java.util.ArrayList<>();
 	private SavingTrackHelper savingTrackHelper;
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
@@ -52,23 +54,23 @@ public class GpxSelectionHelper {
 
 	public void clearAllGpxFileToShow() {
 		selectedGpxFilesBackUp.clear();
-		selectedGpxFilesBackUp.addAll(selectedGPXFiles);
+		for(SelectedGpxFile s : selectedGPXFiles) {
+			selectedGpxFilesBackUp.add(s.gpxFile);
+		}
 		selectedGPXFiles.clear();
 		saveCurrentSelections();
 	}
 
 	public void restoreSelectedGpxFiles() {
 		if (!selectedGpxFilesBackUp.isEmpty()) {
-			selectedGPXFiles.clear();
-			selectedGPXFiles.addAll(selectedGpxFilesBackUp);
+			for(GPXFile gpx : selectedGpxFilesBackUp) {
+				selectGpxFile(gpx, true, false);
+			}
 			saveCurrentSelections();
 		}
 
 	}
 
-	public boolean isSelectedGpxFilesBackUp() {
-		return !selectedGpxFilesBackUp.isEmpty();
-	}
 
 	public boolean isShowingAnyGpxFiles() {
 		return !selectedGPXFiles.isEmpty();
@@ -77,6 +79,10 @@ public class GpxSelectionHelper {
 	@NonNull
 	public List<SelectedGpxFile> getSelectedGPXFiles() {
 		return selectedGPXFiles;
+	}
+
+	public List<GPXFile> getSelectedGpxFilesBackUp() {
+		return selectedGpxFilesBackUp;
 	}
 
 	public String getGpxDescription() {
@@ -455,6 +461,8 @@ public class GpxSelectionHelper {
 						}
 						if (gpx.error != null) {
 							save = true;
+						} else if(obj.has(BACKUP)) {
+							selectedGpxFilesBackUp.add(gpx);
 						} else {
 							selectGpxFile(gpx, true, false, true, selectedByUser, false);
 						}
@@ -490,6 +498,23 @@ public class GpxSelectionHelper {
 						}
 					}
 					obj.put(SELECTED_BY_USER, s.selectedByUser);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				ar.put(obj);
+			}
+		}
+		for (GPXFile s : selectedGpxFilesBackUp) {
+			if (s != null) {
+				try {
+					JSONObject obj = new JSONObject();
+					if(Algorithms.isEmpty(s.path)) {
+						obj.put(CURRENT_TRACK, true);
+					} else {
+						obj.put(FILE, s.path);
+					}
+					obj.put(SELECTED_BY_USER, true);
+					obj.put(BACKUP, true);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
@@ -153,11 +154,15 @@ public class ConfigureMapMenu {
 
 		private List<String> getAlreadySelectedGpx() {
 			GpxSelectionHelper selectedGpxHelper = ma.getMyApplication().getSelectedGpxHelper();
-			selectedGpxHelper.restoreSelectedGpxFiles();
 			List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
+
 			List<String> files = new ArrayList<>();
 			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
 				files.add(file.getGpxFile().path);
+			}
+			List<GPXUtilities.GPXFile> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
+			for(GPXUtilities.GPXFile f : fls) {
+				files.add(f.path);
 			}
 			return files;
 		}
@@ -236,8 +241,8 @@ public class ConfigureMapMenu {
 				@Override
 				public void onDismiss(DialogInterface dialog) {
 					OsmandApplication app = ma.getMyApplication();
-					boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles() || app.getSelectedGpxHelper().isSelectedGpxFilesBackUp();
-					item.setSelected(app.getSelectedGpxHelper().isShowingAnyGpxFiles());
+					boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
+					item.setSelected(selected);
 					item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
 					item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					adapter.notifyDataSetChanged();
