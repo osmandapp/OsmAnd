@@ -22,7 +22,6 @@ import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.SwitchCompat;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -936,11 +935,6 @@ public class GpxUiHelper {
 		}
 	}
 
-	public static void loadFileInDifferentThread(final Activity activity,
-		final CallbackWithObject<GPXFile[]> callbackWithObject, final File dir,
-		final String... filename) {
-		loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, filename);
-	}
 
 	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
 													 final File dir, final GPXFile currentFile, final String... filename) {
@@ -959,7 +953,6 @@ public class GpxUiHelper {
 					final File f = new File(dir, fname);
 					GPXFile res = GPXUtilities.loadGPXFile(f);
 					if (res.error != null && res.error.getMessage().length() > 0) {
-						Log.d("GpxUiHelper", res.error.getMessage() + "\n");
 						w += res.error.getMessage() + "\n";
 					}
 					result[k++] = res;
