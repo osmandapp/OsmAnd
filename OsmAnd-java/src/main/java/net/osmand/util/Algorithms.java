@@ -596,11 +596,18 @@ public class Algorithms {
 		return false;
 	}
 
-	public static boolean isStringAnInt(String value) {
-		return value.matches("^[0-9]*$");
+	public static boolean isInt(String value) {
+		for (int i = 0; i < value.length(); i++) {
+			if (!Character.isDigit(value.charAt(i))) {
+				if ((i == 0 && value.charAt(i) != '-') || (value.length() == 1 && value.charAt(i) == '-') || i > 0 ) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
-	public static boolean isStringAFloat(String value) {
+	public static boolean isFloat(String value) {
 		return value.matches("[-+]?[0-9]*\\.?[0-9]+");
 	}
 

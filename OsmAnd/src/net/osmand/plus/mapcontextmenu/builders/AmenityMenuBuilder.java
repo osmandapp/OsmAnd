@@ -697,7 +697,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			case "depth":
 			case "seamark_height":
-				if(Algorithms.isStringAFloat(value)) {
+				if(Algorithms.isFloat(value)) {
 					double valueAsDouble = Double.valueOf(value);
 					if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
 						formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
@@ -711,7 +711,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 				break;
 			case "distance":
-				if(Algorithms.isStringAFloat(value)) {
+				if(Algorithms.isFloat(value)) {
 					float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
 					if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
 						formattedValue =
@@ -726,20 +726,20 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			case "capacity":
 				if (amenity.getSubType().equals("water_tower") || amenity.getSubType().equals("storage_tank")) {
-					if(Algorithms.isStringAFloat(value)) {
+					if(Algorithms.isFloat(value)) {
 						formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
 					}
 				}
 				break;
 			case "maxweight":
-				if(Algorithms.isStringAnInt(value)) {
+				if(Algorithms.isInt(value)) {
 					formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
 				}
 				break;
 			case "students":
 			case "spots":
 			case "seats":
-				if(Algorithms.isStringAnInt(value)) {
+				if(Algorithms.isInt(value)) {
 					formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
 				}
 				break;
