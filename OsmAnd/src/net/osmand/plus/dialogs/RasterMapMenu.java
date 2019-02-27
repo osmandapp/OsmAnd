@@ -109,7 +109,7 @@ public class RasterMapMenu {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback, isChecked);
+							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
 							refreshMapComplete(mapActivity);
 						}
 					});

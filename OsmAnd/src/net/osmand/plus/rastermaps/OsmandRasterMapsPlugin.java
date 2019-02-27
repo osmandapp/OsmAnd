@@ -284,7 +284,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 										item.setColorRes(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 										adapter.notifyDataSetChanged();
 									}
-								}, isChecked);
+								});
 						return false;
 					case R.string.layer_underlay:
 						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY,
@@ -563,13 +563,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	public void toggleUnderlayState(@NonNull MapActivity mapActivity,
 									@NonNull RasterMapType type,
-									@Nullable OnMapSelectedCallback callback,
-									boolean isChecked) {
+									@Nullable OnMapSelectedCallback callback) {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
 		OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
 		ITileSource map;
+		boolean isMapSelected;
 		if (type == RasterMapType.OVERLAY) {
 			mapTransparencyPreference = settings.MAP_OVERLAY_TRANSPARENCY;
 			mapTypePreference = settings.MAP_OVERLAY;
@@ -582,33 +582,39 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			exMapTypePreference = settings.MAP_UNDERLAY_PREVIOUS;
 			map = underlayLayer.getMap();
 		}
-		boolean isSeekBarVisible =  RasterMapMenu.isSeekbarVisible(app, type);
-		MapActivityLayers mapLayers = mapActivity.getMapLayers();
-		CommonPreference<LayerTransparencySeekbarMode> seekbarModePref = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE;
-		if (isChecked && isSeekBarVisible) {
-			mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-			mapActivity.getMapLayers().getMapControlsLayer().setTransparencyBarEnabled(true);
-			if (seekbarModePref.get() == LayerTransparencySeekbarMode.UNDEFINED) {
-				final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
-					type == OsmandRasterMapsPlugin.RasterMapType.OVERLAY
-						? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY
-						: OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
-				seekbarModePref.set(currentMapTypeSeekbarMode);
-			}
-		} else if (!isChecked || !isSeekBarVisible){
-			mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
-			mapLayers.getMapControlsLayer().setTransparencyBarEnabled(false);
-		}
 
 		if (map != null) {
+			isMapSelected = false;
 			mapTypePreference.set(null);
 			if (callback != null) {
 				callback.onMapSelected(false);
 			}
 			updateMapLayers(mapView, null, mapLayers);
 		} else {
+			isMapSelected = !Algorithms.isEmpty(exMapTypePreference.get()); // we can also later extra check if prev map was not empty
 			selectMapOverlayLayer(mapView, mapTypePreference, exMapTypePreference, false, mapActivity, callback);
 		}
+
+		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
+				OsmandRasterMapsPlugin.RasterMapType.OVERLAY ?
+						OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
+		boolean isSeekBarVisible =  RasterMapMenu.isSeekbarVisible(app, type);
+		boolean showSeekbar = isMapSelected && isSeekBarVisible ;
+		boolean hideSeekbar = !isMapSelected && isSeekBarVisible &&
+				seekbarModePref.get() == currentMapTypeSeekbarMode;
+		MapActivityLayers mapLayers = mapActivity.getMapLayers();
+		CommonPreference<LayerTransparencySeekbarMode> seekbarModePref = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE;
+		if (showSeekbar) {
+			mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+			mapActivity.getMapLayers().getMapControlsLayer().setTransparencyBarEnabled(true);
+			if (seekbarModePref.get() == LayerTransparencySeekbarMode.UNDEFINED) {
+				seekbarModePref.set(currentMapTypeSeekbarMode);
+			}
+		} else if(){
+			mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
+			mapLayers.getMapControlsLayer().setTransparencyBarEnabled(false);
+		}
+
 	}
 
 
