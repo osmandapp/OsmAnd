@@ -2931,4 +2931,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="add_work">Bæta við vinnu</string>
     <string name="work_button">Vinna</string>
     <string name="previous_route">Fyrri leið</string>
+    <string name="add_destination_query">Bættu fyrst við áfangastað</string>
+    <string name="shared_string_swap">Býtta</string>
+    <string name="show_more">Sýna meira</string>
+    <string name="tracks_on_map">Ferlar á kortinu</string>
 </resources>

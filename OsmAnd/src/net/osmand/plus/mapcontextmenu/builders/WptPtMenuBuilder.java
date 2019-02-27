@@ -150,6 +150,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 					public void onClick(View v) {
 						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
 						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
+						mapActivity.getContextMenu().setCenterMarker(true);
 						mapActivity.getContextMenu().show(latLon, pointDescription, point);
 					}
 				});

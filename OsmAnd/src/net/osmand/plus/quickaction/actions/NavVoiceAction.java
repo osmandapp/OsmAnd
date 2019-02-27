@@ -53,6 +53,6 @@ public class NavVoiceAction extends QuickAction {
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
 
-		return application.getSettings().VOICE_MUTE.get();
+		return !application.getSettings().VOICE_MUTE.get();
 	}
 }

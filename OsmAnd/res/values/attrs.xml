@@ -106,6 +106,7 @@
 
 		<attr name="menu_bottom_sheet_icon_color" format="reference" />
 		<attr name="route_info_control_icon_color" format="reference" />
+		<attr name="route_info_bg" format="reference" />
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

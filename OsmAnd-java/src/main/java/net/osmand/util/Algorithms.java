@@ -596,6 +596,41 @@ public class Algorithms {
 		return false;
 	}
 
+	public static boolean isInt(String value) {
+		int length = value.length();
+		for (int i = 0; i < length; i++) {
+			char ch = value.charAt(i);
+			if (!Character.isDigit(ch)) {
+				if (length == 1 || i > 0 || ch != '-') {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public static boolean isFloat(String value) {
+		int pointsCount = 0;
+		int length = value.length();
+		for (int i = 0; i < length; i++) {
+			char ch = value.charAt(i);
+			if (!Character.isDigit(ch)) {
+				if (length < 2) {
+					return false;
+				}
+				if (!(ch == '-' || ch == '.')) {
+					return false;
+				} else if (ch == '-' && i != 0) {
+					return false;
+				} else if ((ch == '.' && pointsCount >= 1) || (ch == '.' && i == length - 1)) {
+					return false;
+				} else if (ch == '.') {
+					pointsCount++;
+				}
+			}
+		}
+		return pointsCount == 1;
+	}
 
 	public static String formatDuration(int seconds, boolean fullForm) {
 		String sec;

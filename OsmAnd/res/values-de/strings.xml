@@ -2922,7 +2922,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="route_surface_stat_container">Oberfläche</string>
     <string name="route_smoothness_stat_container">Oberflächenbeschaffenheit</string>
     <string name="route_steepness_stat_container">Steilheit</string>
-    <string name="add_home">Startseite hinzufügen</string>
+    <string name="add_home">Zu Hause hinzufügen</string>
     <string name="add_work">Arbeit hinzufügen</string>
     <string name="work_button">Arbeit</string>
+    <string name="add_destination_query">Bitte fügen Sie zuerst das Ziel hinzu</string>
+    <string name="previous_route">Vorherige Route</string>
+    <string name="shared_string_swap">Tauschen</string>
+    <string name="show_more">Mehr anzeigen</string>
+    <string name="tracks_on_map">Tracks auf der Karte</string>
 </resources>

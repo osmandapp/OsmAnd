@@ -384,7 +384,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String poiTypeKeyName = "";
 
 			PoiType poiType = amenity.getType().getPoiTypeByKeyName(key);
-
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
 			if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
 				pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
@@ -527,7 +526,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			}
 
-			String[] formattedPrefixAndText = getFormattedPrefixAndText(key, textPrefix, vl);
+			String[] formattedPrefixAndText = getFormattedPrefixAndText(key, textPrefix, vl, amenity);
 			textPrefix = formattedPrefixAndText[0];
 			vl = formattedPrefixAndText[1];
 
@@ -684,7 +683,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 	}
 
-	private String[] getFormattedPrefixAndText(String key, String prefix, String value) {
+	private String[] getFormattedPrefixAndText(String key, String prefix, String value, Amenity amenity) {
 		DF.setRoundingMode(RoundingMode.CEILING);
 		String formattedValue = "";
 		String formattedPrefix = "";
@@ -698,36 +697,51 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			case "depth":
 			case "seamark_height":
-				double valueAsDouble = Double.valueOf(value);
-				if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
-					formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
-							+ " " + mapActivity.getResources().getString(R.string.foot);
-				} else if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
-					formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER))
-							+ " " + mapActivity.getResources().getString(R.string.yard);
-				} else {
-					formattedValue = value + " " + mapActivity.getResources().getString(R.string.m);
+				if(Algorithms.isFloat(value)) {
+					double valueAsDouble = Double.valueOf(value);
+					if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
+						formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER))
+								+ " " + mapActivity.getResources().getString(R.string.foot);
+					} else if (metricSystem == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
+						formattedValue = String.valueOf(DF.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER))
+								+ " " + mapActivity.getResources().getString(R.string.yard);
+					} else {
+						formattedValue = value + " " + mapActivity.getResources().getString(R.string.m);
+					}
 				}
 				break;
 			case "distance":
-				float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
-				if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
-					formattedValue = value + " " + mapActivity.getResources().getString(R.string.km);
-				} else {
-					formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters, mapActivity.getMyApplication());
+				if(Algorithms.isFloat(value)) {
+					float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
+					if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
+						formattedValue =
+							value + " " + mapActivity.getResources().getString(R.string.km);
+					} else {
+						formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters,
+							mapActivity.getMyApplication());
+					}
+					formattedPrefix = formatPrefix(prefix,
+						mapActivity.getResources().getString(R.string.distance));
+					break;
 				}
-				formattedPrefix =  formatPrefix(prefix, mapActivity.getResources().getString(R.string.distance));
-				break;
 			case "capacity":
-				formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
+				if (amenity.getSubType().equals("water_tower") || amenity.getSubType().equals("storage_tank")) {
+					if(Algorithms.isFloat(value)) {
+						formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
+					}
+				}
 				break;
 			case "maxweight":
-				formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
+				if(Algorithms.isInt(value)) {
+					formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
+				}
 				break;
 			case "students":
 			case "spots":
 			case "seats":
-				formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
+				if(Algorithms.isInt(value)) {
+					formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
+				}
 				break;
 			default:
 				formattedValue = value;
