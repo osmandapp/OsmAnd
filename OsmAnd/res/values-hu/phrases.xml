@@ -144,7 +144,7 @@
     <string name="poi_religion_shinto">Sintoista</string>
     <string name="poi_religion_taoist">Taoista</string>
     <string name="poi_monastery">Kolostor</string>
-    <string name="poi_wayside_cross">Útmenti kereszt</string>
+    <string name="poi_wayside_cross">Út menti kereszt</string>
     <string name="poi_information">Információ</string>
     <string name="poi_clock">Óra</string>
     <string name="poi_viewpoint">Kilátóhely</string>
@@ -461,7 +461,7 @@
     <string name="poi_internet_access_service">Internetcsatlakozás: segítenek</string>
     <string name="poi_historic_monastery">Régi kolostor</string>
     <string name="poi_religious">Egyházi terület</string>
-    <string name="poi_wayside_shrine">Útmenti kegyhely</string>
+    <string name="poi_wayside_shrine">Út menti szentély</string>
     <string name="poi_travel_agent">Utazási iroda</string>
     <string name="poi_picnic_table">Piknikezőasztal</string>
     <string name="poi_tomb">Sír</string>
@@ -2197,7 +2197,7 @@
     <string name="poi_historic_civilization_nuragic">Civilizáció: nuraghe (Kr. e. 18. század – Kr. u. 2. század)</string>
     <string name="poi_historic_civilization_etruscan">Civilizáció: etruszk (Kr. e. 12–6. század)</string>
     <string name="poi_historic_civilization_prehistoric">Civilizáció: történelem előtti</string>
-    <string name="poi_historic_civilization_ancient_greek">Civilizáció: ógörög</string>
+    <string name="poi_historic_civilization_ancient_greek">Civilizáció: ókori görög</string>
     <string name="poi_historic_civilization_roman">Civilizáció: római</string>
     <string name="poi_historic_civilization_byzantine">Civilizáció: bizánci (Kr. u. 285–1453)</string>
     <string name="poi_historic_civilization_imperial_chinese">Civilizáció: birodalmi Kína (Kr. u. 221–1911)</string>
