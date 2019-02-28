@@ -146,7 +146,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY &&
 				underlayLayer.getMap() != null) {
-			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_UNDERLAY, true);
+			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY, true);
 		} else if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
 				overlayLayer.getMap() != null) {
 			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
@@ -317,7 +317,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 										hidePolygonsPref.set(hasUnderlayDescription);
 										RasterMapMenu.refreshMapComplete(mapActivity);
 									}
-								}, isChecked);
+								});
 						return false;
 				}
 				return true;
@@ -572,10 +572,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 									@NonNull RasterMapType type,
 									@Nullable OnMapSelectedCallback callback) {
 		OsmandMapTileView mapView = mapActivity.getMapView();
+		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
 		OsmandSettings.CommonPreference<Integer> mapTransparencyPreference;
 
-		boolean isMapSelected;
+		//boolean isMapSelected;
 		MapTileLayer layer;
 		if (type == RasterMapType.OVERLAY) {
 			mapTypePreference = settings.MAP_OVERLAY;
@@ -589,9 +590,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		MapActivityLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
-		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode =
-				OsmandRasterMapsPlugin.RasterMapType.OVERLAY ?
-						OsmandSettings.LayerTransparencySeekbarMode.OVERLAY : OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
+		final OsmandSettings.LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
+			OsmandRasterMapsPlugin.RasterMapType.OVERLAY
+			? OsmandSettings.LayerTransparencySeekbarMode.OVERLAY
+			: OsmandSettings.LayerTransparencySeekbarMode.UNDERLAY;
 		if (map != null) {
 			mapTypePreference.set(null);
 			if (callback != null) {
@@ -605,14 +607,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 		} else {
 			settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
-
 			selectMapOverlayLayer(mapView, mapTypePreference, exMapTypePreference, false, mapActivity, callback);
-			showSeekbar = true;
-
 		}
-
 	}
-
 
 	public enum RasterMapType {
 		OVERLAY,

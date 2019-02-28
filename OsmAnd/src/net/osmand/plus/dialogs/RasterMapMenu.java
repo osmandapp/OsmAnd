@@ -17,12 +17,9 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
-import net.osmand.plus.views.GPXLayer;
-import net.osmand.plus.views.RouteLayer;
 
 public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
-
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
 													   final RasterMapType type) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -122,6 +119,7 @@ public class RasterMapMenu {
 						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference, true);
 					} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
 					{
+						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
 						mapLayers.getMapControlsLayer().hideTransparencyBar();
 					}
 				}
