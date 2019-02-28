@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.content.Context;
 import android.text.format.DateUtils;
 
-import java.util.TimeZone;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;

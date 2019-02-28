@@ -1,7 +1,5 @@
 package net.osmand.util;
 
-import java.util.Calendar;
-import java.util.TimeZone;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.router.GeneralRouter;
