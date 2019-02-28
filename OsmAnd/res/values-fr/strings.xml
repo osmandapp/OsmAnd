@@ -2109,8 +2109,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_take_photo_note">Nouvelle note photo</string>
     <string name="quick_action_add_osm_bug">Ajouter une note OSM</string>
     <string name="quick_action_navigation_voice">Voix Active / Inactive</string>
-    <string name="quick_action_navigation_voice_off">La voix est désactivée</string>
-    <string name="quick_action_navigation_voice_on">La voix est activée</string>
+    <string name="quick_action_navigation_voice_off">Activer la voix</string>
+    <string name="quick_action_navigation_voice_on">Couper la voix</string>
     <string name="quick_action_add_gpx">Ajouter un point GPX</string>
     <string name="quick_action_add_parking">Ajouter un emplacement de stationnement</string>
     <string name="quick_action_new_action">Ajouter une action</string>
