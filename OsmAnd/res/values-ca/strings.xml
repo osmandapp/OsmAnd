@@ -2136,8 +2136,8 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="quick_action_take_photo_note">Nova nota fotogràfica</string>
     <string name="quick_action_add_osm_bug">Afegeix una nota OSM</string>
     <string name="quick_action_navigation_voice">Veu activada/desactivada</string>
-    <string name="quick_action_navigation_voice_off">La veu està desactivada</string>
-    <string name="quick_action_navigation_voice_on">La veu està activada</string>
+    <string name="quick_action_navigation_voice_off">Torna a activar la veu</string>
+    <string name="quick_action_navigation_voice_on">Desactiva la veu</string>
     <string name="quick_action_add_gpx">Afegeix fita GPX</string>
     <string name="quick_action_add_parking">Afegeix lloc d\'aparcament</string>
     <string name="quick_action_new_action">Afegeix acció</string>
@@ -2930,4 +2930,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="work_button">Feina</string>
     <string name="previous_route">Ruta anterior</string>
     <string name="add_destination_query">Comenceu per afegir la destinació</string>
+    <string name="shared_string_swap">Bescanvia</string>
+    <string name="show_more">Mostra\'n més</string>
+    <string name="tracks_on_map">Traces al mapa</string>
 </resources>
