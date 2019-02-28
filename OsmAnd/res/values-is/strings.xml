@@ -1817,8 +1817,8 @@ Punktar</string>
     <string name="quick_action_take_photo_note">Nýr ljósmynda-minnispunktur</string>
     <string name="quick_action_add_osm_bug">Bæta við OSM-minnispunkti</string>
     <string name="quick_action_navigation_voice">Tal af/á</string>
-    <string name="quick_action_navigation_voice_off">Slökkt á tali</string>
-    <string name="quick_action_navigation_voice_on">Kveikt á tali</string>
+    <string name="quick_action_navigation_voice_off">Kveikja á tali</string>
+    <string name="quick_action_navigation_voice_on">Slökkva á tali</string>
     <string name="quick_action_add_gpx">Bæta við GPX-ferilpunkti</string>
     <string name="quick_action_add_parking">Bæta við bílastæði</string>
     <string name="quick_action_new_action">Bæta við aðgerð</string>
