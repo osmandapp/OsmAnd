@@ -2654,7 +2654,7 @@
     <string name="rendering_attr_hidePOILabels_name">Названия POI</string>
     <string name="will_open_tomorrow_at">Откроется завтра в</string>
     <string name="copy_location_name">Копировать название точки/POI</string>
-    <string name="toast_empty_name_error">Место не имеет названия</string>
+    <string name="toast_empty_name_error">Место без названия</string>
     <string name="shared_string_current">Текущий</string>
     <string name="last_intermediate_dest_description">Добавляет промежуточную остановку</string>
     <string name="first_intermediate_dest_description">Добавляет первую остановку</string>
@@ -2757,7 +2757,7 @@
     <string name="download_wikipedia_description">Скачать статьи Википедии для %1$s, чтобы читать их в автономном режиме.</string>
     <string name="download_wikipedia_label">Загрузка данных Википедии</string>
     <string name="open_in_browser_wiki">Открыть статью в Интернете</string>
-    <string name="open_in_browser_wiki_description">Просмотреть эту статью в браузере.</string>
+    <string name="open_in_browser_wiki_description">Просмотреть статью в браузере.</string>
     <string name="download_wiki_region_placeholder">этот регион</string>
     <string name="wiki_article_search_text">Поиск соответствующей статьи в вики</string>
     <string name="wiki_article_not_found">Статья не найдена</string>
