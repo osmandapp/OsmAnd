@@ -1642,8 +1642,8 @@
     <string name="quick_action_take_photo_note">הערת תמונה חדשה</string>
     <string name="quick_action_add_osm_bug">הוספת הערת OSM</string>
     <string name="quick_action_navigation_voice">הנחייה קולית כבויה/פעילה</string>
-    <string name="quick_action_navigation_voice_off">הנחייה קולית כבויה</string>
-    <string name="quick_action_navigation_voice_on">הנחייה קולית פעילה</string>
+    <string name="quick_action_navigation_voice_off">ביטול השתקת הנחייה קולית</string>
+    <string name="quick_action_navigation_voice_on">השתקת הנחייה קולית</string>
     <string name="quick_action_add_gpx">הוספת נקודת דרך GPX</string>
     <string name="quick_action_add_parking">הוספת מקום חנייה</string>
     <string name="quick_action_new_action">הוספת פעולה</string>
