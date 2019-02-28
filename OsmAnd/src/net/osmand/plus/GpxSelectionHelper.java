@@ -3,11 +3,15 @@ package net.osmand.plus;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import net.osmand.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
@@ -68,20 +72,40 @@ public class GpxSelectionHelper {
 	}
 
 	public void restoreSelectedGpxFiles() {
-		if (!selectedGpxFilesBackUp.isEmpty()) {
-			for(Map.Entry<GPXFile, Long> gpx : selectedGpxFilesBackUp.entrySet()) {
-				LOG.debug("file path: " + gpx.getKey().path);
-				if (!Algorithms.isEmpty(gpx.getKey().path)) {
-					File file = new File(gpx.getKey().path);
-					if (file.exists() && !file.isDirectory()) {
-						if (file.lastModified() > gpx.getValue()) {
-							GPXUtilities.loadGPXFile(file);
+		for (Entry<GPXFile, Long> gpxEntry : selectedGpxFilesBackUp.entrySet()) {
+			if (!Algorithms.isEmpty(gpxEntry.getKey().path)) {
+				final File file = new File(gpxEntry.getKey().path);
+				if (file.exists() && !file.isDirectory()) {
+					if (file.lastModified() > gpxEntry.getValue()) {
+						try {
+							GPXFile reloadedFile =  new LoadGpxFileInBackground(file).execute().get();
+							if (reloadedFile != null) {
+								selectGpxFile(reloadedFile, true, false);
+							}
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
 						}
-						selectGpxFile(gpx.getKey(), true, false);
+
+					} else {
+						selectGpxFile(gpxEntry.getKey(), true, false);
 					}
 				}
 			}
 			saveCurrentSelections();
+		}
+	}
+
+	static class LoadGpxFileInBackground extends  AsyncTask<Void, Void, GPXFile> {
+
+		File fileToLoad;
+
+		LoadGpxFileInBackground(File fileToLoad) {
+			this.fileToLoad = fileToLoad;
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... voids) {
+			return GPXUtilities.loadGPXFile(fileToLoad);
 		}
 	}
 
@@ -477,7 +501,7 @@ public class GpxSelectionHelper {
 						if (gpx.error != null) {
 							save = true;
 						} else if(obj.has(BACKUP)) {
-							selectedGpxFilesBackUp.put(gpx, System.currentTimeMillis());
+							selectedGpxFilesBackUp.put(gpx, gpx.modifiedTime);
 						} else {
 							selectGpxFile(gpx, true, false, true, selectedByUser, false);
 						}
