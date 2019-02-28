@@ -2122,8 +2122,8 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="quick_action_take_photo_note">Új fotójegyzet</string>
     <string name="quick_action_add_osm_bug">OSM Jegyzet készítése</string>
     <string name="quick_action_navigation_voice">Hang be/ki</string>
-    <string name="quick_action_navigation_voice_off">Hang kikapcsolva</string>
-    <string name="quick_action_navigation_voice_on">Hang bekapcsolva</string>
+    <string name="quick_action_navigation_voice_off">Hang visszakapcsolása</string>
+    <string name="quick_action_navigation_voice_on">Hang némítása</string>
     <string name="quick_action_add_gpx">GPX útpont készítés</string>
     <string name="quick_action_add_parking">Parkolóhely megjelölés</string>
     <string name="quick_action_new_action">Művelet hozzáadása</string>
@@ -2883,4 +2883,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="route_steepness_stat_container">Lejtés</string>
     <string name="previous_route">Előző útvonal</string>
     <string name="add_home">Otthon hozzáadása</string>
+    <string name="shared_string_swap">Felcserélés</string>
+    <string name="show_more">Továbbiak megjelenítése</string>
+    <string name="tracks_on_map">Nyomvonalak a térképen</string>
+    <string name="route_class_stat_container">Útkategória</string>
 </resources>

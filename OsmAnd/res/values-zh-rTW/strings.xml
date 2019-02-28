@@ -2111,8 +2111,8 @@
     <string name="quick_action_take_photo_note">新增照片註解</string>
     <string name="quick_action_add_osm_bug">增加 OSM 的註解</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
-    <string name="quick_action_navigation_voice_off">聲音為關閉</string>
-    <string name="quick_action_navigation_voice_on">聲音為開啟</string>
+    <string name="quick_action_navigation_voice_off">取消靜音</string>
+    <string name="quick_action_navigation_voice_on">靜音</string>
     <string name="quick_action_add_gpx">增加 GPX 航點</string>
     <string name="quick_action_add_parking">增加停車地點</string>
     <string name="quick_action_add_favorite">增加我的收藏</string>

@@ -2921,7 +2921,7 @@ Lon %2$s</string>
     <string name="work_button">Trabajo</string>
     <string name="previous_route">Ruta anterior</string>
     <string name="add_destination_query">Primero añada el destino</string>
-    <string name="shared_string_swap">Intercambio</string>
+    <string name="shared_string_swap">Intercambiar</string>
     <string name="show_more">Mostrar más</string>
     <string name="tracks_on_map">Trazas en el mapa</string>
 </resources>

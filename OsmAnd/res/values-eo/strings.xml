@@ -2115,8 +2115,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="quick_action_take_photo_note">Nova fota noto</string>
     <string name="quick_action_add_osm_bug">Aldoni OSM-rimarkon</string>
     <string name="quick_action_navigation_voice">Voĉo ek/for</string>
-    <string name="quick_action_navigation_voice_off">Voĉo malaktiva</string>
-    <string name="quick_action_navigation_voice_on">Voĉo aktiva</string>
+    <string name="quick_action_navigation_voice_off">Malsilentigi voĉon</string>
+    <string name="quick_action_navigation_voice_on">Silentigi voĉon</string>
     <string name="quick_action_add_gpx">Aldoni GPX-navigadpunkton</string>
     <string name="quick_action_add_parking">Aldoni parkumejon</string>
     <string name="quick_action_new_action">Aldoni agon</string>
