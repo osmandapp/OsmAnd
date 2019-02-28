@@ -223,31 +223,11 @@ public class TrackDetailsMenu {
 		if (ds != null && ds.size() > 0) {
 			TrkSegment segment = getTrackSegment(chart);
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
+			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float startTime = startPos * 1000;
 				float endTime = endPos * 1000;
 				for (WptPt p : segment.points) {
-					if (p.time - gpxItem.analysis.startTime >= startTime &&
-						p.time - gpxItem.analysis.startTime <= endTime) {
-						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
-						}
-					}
-				}
-			} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
-				float startTime = startPos * 1000;
-				float endTime = endPos * 1000;
-				for (WptPt p : segment.points) {
-					if (p.time - gpxItem.analysis.startTime >= startTime &&
-						p.time - gpxItem.analysis.startTime <= endTime) {
+					if (p.time - gpxItem.analysis.startTime >= startTime && p.time - gpxItem.analysis.startTime <= endTime) {
 						if (left == 0 && right == 0) {
 							left = p.getLongitude();
 							right = p.getLongitude();
