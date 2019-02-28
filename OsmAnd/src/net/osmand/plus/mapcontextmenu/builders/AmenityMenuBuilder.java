@@ -685,8 +685,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private String[] getFormattedPrefixAndText(String key, String prefix, String value, Amenity amenity) {
 		DF.setRoundingMode(RoundingMode.CEILING);
-		String formattedValue = "";
-		String formattedPrefix = "";
+		String formattedValue = value;
+		String formattedPrefix = prefix;
 		switch (key) {
 			case "width":
 			case "height":
@@ -743,9 +743,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
 				}
 				break;
-			default:
-				formattedValue = value;
-				formattedPrefix = prefix;
 		}
 		return new String[]{formattedPrefix, formattedValue};
 	}
