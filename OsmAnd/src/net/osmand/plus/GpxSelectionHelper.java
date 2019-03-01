@@ -8,8 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import net.osmand.GPXUtilities;
@@ -77,19 +75,7 @@ public class GpxSelectionHelper {
 				final File file = new File(gpxEntry.getKey().path);
 				if (file.exists() && !file.isDirectory()) {
 					if (file.lastModified() > gpxEntry.getValue()) {
-						try {
-							new LoadGpxFileInBackground(file, new LoadingListener() {
-								@Override
-								public void onLoadingComplete(GPXFile file) {
-									if (file != null) {
-										selectGpxFile(file, true, false);
-									}
-								}
-							}).execute();
-						} catch (Exception e) {
-							LOG.error(e.getMessage(), e);
-						}
-
+						new GpxFileLoaderTask(file, app).execute();
 					} else {
 						selectGpxFile(gpxEntry.getKey(), true, false);
 					}
@@ -99,14 +85,14 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	static class LoadGpxFileInBackground extends AsyncTask<Void, Void, GPXFile> {
+	private static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
 		File fileToLoad;
-		LoadingListener listener;
+		GpxSelectionHelper helper;
 
-		LoadGpxFileInBackground(File fileToLoad, LoadingListener listener) {
+		GpxFileLoaderTask(File fileToLoad, OsmandApplication app) {
 			this.fileToLoad = fileToLoad;
-			this.listener = listener;
+			this.helper = app.getSelectedGpxHelper();
 		}
 
 		@Override
@@ -116,12 +102,10 @@ public class GpxSelectionHelper {
 
 		@Override
 		protected void onPostExecute(GPXFile gpxFile) {
-			listener.onLoadingComplete(gpxFile);
+			if (gpxFile != null) {
+				helper.selectGpxFile(gpxFile, true, false);
+			}
 		}
-	}
-
-	interface LoadingListener {
-		void onLoadingComplete(GPXFile file);
 	}
 
 	public boolean isShowingAnyGpxFiles() {
