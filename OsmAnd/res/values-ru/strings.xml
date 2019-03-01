@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="intermediate_waypoint">Промежуточная точка: %1$s</string>
-    <string name="waypoints">Путевые точки: %1$s</string>
-    <string name="intermediate_destinations">Промежуточные точки: %1$s</string>
+    <string name="intermediate_waypoint">Промежуточная точка</string>
+    <string name="intermediate_destinations">Промежуточные точки</string>
     <string name="arrive_at_time">Прибытие в %1$s</string>
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
@@ -2878,7 +2877,7 @@
     <string name="add_destination_point">Добавить пункт назначения</string>
     <string name="add_intermediate_point">Добавить промежуточный пункт</string>
     <string name="add_start_point">Добавить пункт отправления</string>
-    <string name="route_way">Путь: %1$s</string>
+    <string name="route_way">Путь</string>
     <string name="points_of_interests">Точки интереса (POI)</string>
     <string name="waiting_for_route_calculation">Ожидание расчета маршрута</string>
     <string name="app_mode_public_transport">Общественный транспорт</string>
@@ -2895,8 +2894,8 @@
     <string name="shared_string_capacity">Объем</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Высота</string>
-    <string name="transfers">трансферы: %1$s</string>
-    <string name="on_foot">пешком: %1$s</string>
+    <string name="transfers">трансферы</string>
+    <string name="on_foot">пешком</string>
     <string name="show_along_the_route">Показывать вдоль маршрута</string>
     <string name="route_surface_stat_container">Поверхность</string>
     <string name="route_class_stat_container">Класс</string>

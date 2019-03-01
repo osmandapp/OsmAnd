@@ -2891,11 +2891,10 @@
     <string name="add_destination_point">Legg til reisemål</string>
     <string name="add_intermediate_point">Legg til mellomliggende</string>
     <string name="add_start_point">Legg til startpunkt</string>
-    <string name="intermediate_waypoint">Mellomliggende punkt: %1$s</string>
-    <string name="waypoints">Rutepunkter: %1$s</string>
-    <string name="transfers">overføringer: %1$s</string>
-    <string name="on_foot">til fots: %1$s</string>
-    <string name="route_way">Vei: %1$s</string>
+    <string name="intermediate_waypoint">Mellomliggende punkt</string>
+    <string name="transfers">overføringer</string>
+    <string name="on_foot">til fots</string>
+    <string name="route_way">Vei</string>
     <string name="points_of_interests">Interessepunkter (POI)</string>
     <string name="waiting_for_route_calculation">Venter på ruteberegning</string>
     <string name="avoid_roads_descr">Velg vei på kartet fra listen nedenfor som du ønsker å unngå under navigering:</string>
@@ -2903,7 +2902,7 @@
     <string name="simulate_navigation">Simuler navigering</string>
     <string name="choose_track_file_to_follow">Velg sporfil å følge</string>
     <string name="voice_announcements">Talemeldinger</string>
-    <string name="intermediate_destinations">Mellomstasjoner: %1$s</string>
+    <string name="intermediate_destinations">Mellomstasjoner</string>
     <string name="arrive_at_time">Ankom klokken %1$s</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>

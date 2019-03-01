@@ -3197,11 +3197,10 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="add_destination_point">Dodaj cilj</string>
     <string name="add_intermediate_point">Dodaj vmesni cilj</string>
     <string name="add_start_point">Dodaj začetno točko</string>
-    <string name="intermediate_waypoint">Vmesna točka: %1$s</string>
-    <string name="waypoints">Vmesne točke: %1$s</string>
-    <string name="transfers">prevozi: %1$s</string>
-    <string name="on_foot">hoja: %1$s</string>
-    <string name="route_way">Pot: %1$s</string>
+    <string name="intermediate_waypoint">Vmesna točka</string>
+    <string name="transfers">prevozi</string>
+    <string name="on_foot">hoja</string>
+    <string name="route_way">Pot</string>
     <string name="points_of_interests">Točke zanimanja (POI)</string>
     <string name="waiting_for_route_calculation">Poteka preračunavanje poti</string>
     <string name="app_mode_public_transport">Javni prevozi</string>
@@ -3210,7 +3209,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="simulate_navigation">Izvedi navidezno navigacijo</string>
     <string name="choose_track_file_to_follow">Izberite datoteko poti za sledenje</string>
     <string name="voice_announcements">Glasovne najave</string>
-    <string name="intermediate_destinations">Vmesni cilji: %1$s</string>
+    <string name="intermediate_destinations">Vmesni cilji</string>
     <string name="arrive_at_time">Prihod ob %1$s</string>
     <string name="powered_by_osmand">S podporo OsmAnd</string>
     <string name="mapillary_menu_title_pano">Pokaži le 360° slike</string>

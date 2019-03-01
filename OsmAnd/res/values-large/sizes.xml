@@ -185,6 +185,10 @@
 	<dimen name="route_info_icon_vertical_padding">9dp</dimen>
 	<dimen name="route_info_settings_buttons_height">48dp</dimen>
 	<dimen name="route_info_app_modes_padding">60dp</dimen>
+	<dimen name="route_info_card_row_min_height">90dp</dimen>
+	<dimen name="route_info_card_item_height">84dp</dimen>
+	<dimen name="route_info_list_text_padding">78dp</dimen>
+	<dimen name="route_info_legend_padding">12dp</dimen>
 
 	<dimen name="multi_selection_header_height">78dp</dimen>
 

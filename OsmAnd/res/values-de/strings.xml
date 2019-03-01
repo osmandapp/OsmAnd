@@ -2898,11 +2898,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_destination_point">Ziel hinzufügen</string>
     <string name="add_intermediate_point">Zwischenpunkt hinzufügen</string>
     <string name="add_start_point">Startpunkt hinzufügen</string>
-    <string name="intermediate_waypoint">Zwischenpunkt: %1$s</string>
-    <string name="waypoints">Wegpunkte: %1$s</string>
-    <string name="transfers">Umstiege: %1$s</string>
-    <string name="on_foot">Zu Fuß: %1$s</string>
-    <string name="route_way">Weg: %1$s</string>
+    <string name="intermediate_waypoint">Zwischenpunkt</string>
+    <string name="transfers">Umstiege</string>
+    <string name="on_foot">Zu Fuß</string>
+    <string name="route_way">Weg</string>
     <string name="points_of_interests">Orte von Interesse(OVI)</string>
     <string name="waiting_for_route_calculation">Warten auf Routenberechung</string>
     <string name="app_mode_public_transport">Öffentlicher Verkehr</string>
@@ -2911,7 +2910,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="simulate_navigation">Navigation simulieren</string>
     <string name="choose_track_file_to_follow">Wähle Track-Datei zum Verfolgen aus</string>
     <string name="voice_announcements">Sprachmeldungen</string>
-    <string name="intermediate_destinations">Zwischenziele: %1$s</string>
+    <string name="intermediate_destinations">Zwischenziele</string>
     <string name="arrive_at_time">Ankunftszeit um %1$s</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>

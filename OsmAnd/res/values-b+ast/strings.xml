@@ -1599,7 +1599,7 @@
     <string name="osm_recipients_label">Beneficiarios d\'OSM</string>
     <string name="points_of_interests">Puntos d\'interés (PdI)</string>
     <string name="waiting_for_route_calculation">Esperando pol cálculu de la ruta</string>
-    <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
+    <string name="intermediate_destinations">Destinos intermedios</string>
     <string name="map_import_error">Fallu na importación del mapa</string>
     <string name="simulate_your_location">Simular la to posición</string>
     <string name="shared_string_disable">Desactivar</string>
@@ -1615,7 +1615,7 @@
     <string name="shared_string_height">Altor</string>
     <string name="swap_start_and_destination">Intercambiar l\'aniciu y destín</string>
     <string name="add_start_point">Amiestu d\'un puntu d\'aniciu</string>
-    <string name="intermediate_waypoint">Puntu intermediu: %1$s</string>
+    <string name="intermediate_waypoint">Puntu intermediu</string>
     <string name="get_osmand_live">Consigui OsmAnd pa desbloquiar toles caratuerístiques: Anovamientos diarios del mapa con descargues ensin llende, tolos plugins de pagu y de baldre, Wikipedia, Wikivoyage y muncho más.</string>
     <string name="maps_you_need_descr">Según los artículos qu\'amestesti a marcadores, aconséyase que baxes los mapes de darréu:</string>
     <string name="popular_destinations">Destinos sonaos</string>
@@ -1688,7 +1688,6 @@
     <string name="trace_rendering_descr">Amuesa\'l rindimientu del renderizáu.</string>
     <string name="planning_trip_item">Planificación d\'un viaxe</string>
     <string name="search_on_the_map_item">Guetes nel mapa</string>
-    <string name="waypoints">Puntos: %1$s</string>
     <string name="download_file">Descarga d\'un ficheru</string>
     <string name="waypoints_removed_from_map_markers">Desaniciáronse los puntos de los marcadores del mapa</string>
     <string name="quick_action_resume_pause_navigation">Posar/siguir cola navegación</string>
