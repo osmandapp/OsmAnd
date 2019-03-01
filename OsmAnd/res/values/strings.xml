@@ -9,7 +9,12 @@
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
+
 -->
+
+
+    <string name="time_of_day">Time of day</string>
+    <string name="add_destination_query">Please add Destination first</string>
     <string name="by_transport_type">By %1$s</string>
     <string name="step_by_step">Step by step</string>
     <string name="road_types">Road types</string>

@@ -186,7 +186,8 @@ public class TrackDetailsMenu {
 		if (ds != null && ds.size() > 0) {
 			TrkSegment segment = getTrackSegment(chart);
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
+			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
+				gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;
 				for (WptPt p : segment.points) {
 					if (p.time - gpxItem.analysis.startTime >= time) {
@@ -222,12 +223,11 @@ public class TrackDetailsMenu {
 		if (ds != null && ds.size() > 0) {
 			TrkSegment segment = getTrackSegment(chart);
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
+			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float startTime = startPos * 1000;
 				float endTime = endPos * 1000;
 				for (WptPt p : segment.points) {
-					if (p.time - gpxItem.analysis.startTime >= startTime &&
-							p.time - gpxItem.analysis.startTime <= endTime) {
+					if (p.time - gpxItem.analysis.startTime >= startTime && p.time - gpxItem.analysis.startTime <= endTime) {
 						if (left == 0 && right == 0) {
 							left = p.getLongitude();
 							right = p.getLongitude();
@@ -501,14 +501,16 @@ public class TrackDetailsMenu {
 		boolean hasSlopeChart = false;
 		if (analysis.hasElevationData) {
 			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE });
-			if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
+			if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME
+				&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
 				availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SLOPE});
 			}
 		}
 		if (analysis.hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SPEED });
 		}
-		if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
+		if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME
+			&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
 			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE });
 		}
 		if (analysis.hasElevationData && analysis.hasSpeedData) {
@@ -541,7 +543,6 @@ public class TrackDetailsMenu {
 								return true;
 							}
 						});
-
 					}
 					optionsMenu.show();
 				}
@@ -560,6 +561,9 @@ public class TrackDetailsMenu {
 		if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time));
 			xAxisTitle.setText(app.getString(R.string.shared_string_time));
+		} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_span));
+			xAxisTitle.setText(app.getString(R.string.time_of_day));
 		} else {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_marker_dark));
 			xAxisTitle.setText(app.getString(R.string.distance));
@@ -570,23 +574,21 @@ public class TrackDetailsMenu {
 				public void onClick(View v) {
 					final PopupMenu optionsMenu = new PopupMenu(mapActivity, v);
 					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					final GPXDataSetAxisType type;
-					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
-						type = GPXDataSetAxisType.DISTANCE;
-					} else {
-						type = GPXDataSetAxisType.TIME;
+					for (final GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
+						MenuItem menuItem = optionsMenu.getMenu()
+							.add(type.getStringId()).setIcon(type.getImageDrawable(app));
+						menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem mItem) {
+
+								gpxItem.chartAxisType = type;
+								gpxItem.chartHighlightPos = -1;
+								gpxItem.chartMatrix = null;
+								update();
+								return true;
+							}
+						});
 					}
-					MenuItem menuItem = optionsMenu.getMenu().add(type.getStringId()).setIcon(type.getImageDrawable(app));
-					menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem mItem) {
-							gpxItem.chartAxisType = type;
-							gpxItem.chartHighlightPos = -1;
-							gpxItem.chartMatrix = null;
-							update();
-							return true;
-						}
-					});
 					optionsMenu.show();
 				}
 			});
