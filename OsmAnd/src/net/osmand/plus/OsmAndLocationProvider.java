@@ -282,10 +282,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public void redownloadAGPS() {
 		try {
 			final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-			service.sendExtraCommand(LocationManager.GPS_PROVIDER,"delete_aiding_data", null);
+			// Issue 6410: Test not forcing cold start here
+			//service.sendExtraCommand(LocationManager.GPS_PROVIDER,"delete_aiding_data", null);
 			Bundle bundle = new Bundle();
-			service.sendExtraCommand("gps", "force_xtra_injection", bundle);
-			service.sendExtraCommand("gps", "force_time_injection", bundle);
+			service.sendExtraCommand(LocationManager.GPS_PROVIDER, "force_xtra_injection", bundle);
+			service.sendExtraCommand(LocationManager.GPS_PROVIDER, "force_time_injection", bundle);
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
 		} catch (Exception e) {
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
