@@ -1592,6 +1592,8 @@ public class GPXUtilities {
 			fis = new FileInputStream(f);
 			GPXFile file = loadGPXFile(fis);
 			file.path = f.getAbsolutePath();
+			file.modifiedTime = f.lastModified();
+
 			try {
 				fis.close();
 			} catch (IOException e) {
