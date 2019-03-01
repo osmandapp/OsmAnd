@@ -15,15 +15,14 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.transport.TransportStopType;
+import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
@@ -69,6 +68,7 @@ public class PublicTransportCard extends BaseCard {
 			public void onClick(View v) {
 				app.getTransportRoutingHelper().setCurrentRoute(routeId);
 				getMapActivity().refreshMap();
+				ShowRouteInfoDialogFragment.showInstance(mapActivity, routeId);
 			}
 		});
 		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
@@ -129,7 +129,7 @@ public class PublicTransportCard extends BaseCard {
 		String firstLine = app.getString(R.string.route_from) + " " + name;
 
 		if (segments.size() > 1) {
-			firstLine += ", " + app.getString(R.string.transfers, (segments.size() - 1));
+			firstLine += ", " + app.getString(R.string.transfers) +": "+(segments.size() - 1);
 		}
 
 		SpannableString firstLineDesc = new SpannableString(firstLine);
@@ -146,9 +146,9 @@ public class PublicTransportCard extends BaseCard {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String travelTime = OsmAndFormatter.getFormattedDuration((int) routeResult.getTravelTime(), app);
 		String walkTime = OsmAndFormatter.getFormattedDuration((int) routeResult.getWalkTime(), app);
-		String walkDistance = OsmAndFormatter.getFormattedDistance((int) routeResult.getTravelDist(), app);
+		String walkDistance = OsmAndFormatter.getFormattedDistance((int) routeResult.getWalkDist(), app);
 
-		String secondLine = app.getString(R.string.route_way, travelTime) + "  •  " + app.getString(R.string.on_foot, walkTime) + "  •  " + walkDistance;
+		String secondLine = app.getString(R.string.route_way) + ": " + travelTime + "  •  " + app.getString(R.string.on_foot) + ": " + walkTime + "  •  " + walkDistance;
 
 		SpannableString secondLineDesc = new SpannableString(secondLine);
 
@@ -172,7 +172,7 @@ public class PublicTransportCard extends BaseCard {
 		Iterator<TransportRouteResultSegment> iterator = segments.iterator();
 		while (iterator.hasNext()) {
 			TransportRouteResultSegment s = iterator.next();
-			if (s.walkDist != 0) {
+			if (s.walkDist > 0) {
 				double walkTime = getWalkTime(s.walkDist, routeResult.getWalkSpeed());
 				if (walkTime > MIN_WALK_TIME) {
 					String walkTimeS = OsmAndFormatter.getFormattedDuration((int) walkTime, app);
@@ -201,7 +201,7 @@ public class PublicTransportCard extends BaseCard {
 		LinearLayout convertView = (LinearLayout) getMapActivity().getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		if (segment != null) {
 			TransportRoute transportRoute = segment.route;
-			TransportStopRoute transportStopRoute = getTransportStopRoute(transportRoute, segment.getStart());
+			TransportStopRoute transportStopRoute = TransportStopRoute.getTransportStopRoute(transportRoute, segment.getStart());
 
 			String routeRef = segment.route.getAdjustedRouteRef();
 			int bgColor = transportStopRoute.getColor(app, nightMode);
@@ -209,7 +209,8 @@ public class PublicTransportCard extends BaseCard {
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
 			ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
 
-			transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_bus_dark, UiUtilities.getContrastColor(app, bgColor, true)));
+			int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
+			transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(app, bgColor, true)));
 			transportStopRouteTextView.setText(routeRef);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();
 			gradientDrawableBg.setColor(bgColor);
@@ -227,11 +228,11 @@ public class PublicTransportCard extends BaseCard {
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
 			ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
 
-			transportStopRouteImageView.setImageDrawable(getActiveIcon(R.drawable.ic_action_pedestrian_dark));
+			transportStopRouteImageView.setImageDrawable(getColoredIcon(R.drawable.ic_action_pedestrian_dark, nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light ));
 			transportStopRouteTextView.setText(walkTime);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();
 			gradientDrawableBg.setColor(bgColor);
-			transportStopRouteTextView.setTextColor(bgColor);
+			transportStopRouteTextView.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.ctx_menu_bottom_view_url_color_dark  : R.color.ctx_menu_bottom_view_url_color_light));
 
 			AndroidUtils.setBackground(app, convertView, nightMode, R.drawable.btn_border_active_light, R.drawable.btn_border_active_dark);
 		}
@@ -242,20 +243,9 @@ public class PublicTransportCard extends BaseCard {
 	private View createArrow() {
 		LinearLayout container = new LinearLayout(app);
 		ImageView arrow = new ImageView(app);
-		arrow.setImageDrawable(getContentIcon(R.drawable.ic_arrow_forward));
+		arrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_forward_16));
 		container.addView(arrow, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, AndroidUtils.dpToPx(app, 28)));
 		return container;
-	}
-
-	private TransportStopRoute getTransportStopRoute(TransportRoute rs, TransportStop s) {
-		TransportStopType type = TransportStopType.findType(rs.getType());
-		TransportStopRoute r = new TransportStopRoute();
-		r.type = type;
-		r.desc = rs.getName();
-		r.route = rs;
-		r.stop = s;
-		r.refStop = s;
-		return r;
 	}
 
 	private double getWalkTime(double walkDist, double walkSpeed) {

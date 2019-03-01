@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="by_transport_type">By %1$s</string>
+    <string name="step_by_step">Step by step</string>
+    <string name="road_types">Road types</string>
+    <string name="exit_at">Exit at</string>
+    <string name="sit_on_the_stop">Sit on the stop</string>
     <string name="shared_string_swap">Swap</string>
     <string name="show_more">Show more</string>
     <string name="tracks_on_map">Tracks on the map</string>
@@ -26,11 +31,10 @@
     <string name="add_destination_point">Add destination</string>
     <string name="add_intermediate_point">Add intermediate</string>
     <string name="add_start_point">Add starting point</string>
-    <string name="intermediate_waypoint">Intermediate point: %1$s</string>
-    <string name="waypoints">Waypoints: %1$s</string>
-    <string name="transfers">Transfers: %1$s</string>
-    <string name="on_foot">On foot: %1$s</string>
-    <string name="route_way">Way: %1$s</string>
+    <string name="intermediate_waypoint">Intermediate point</string>
+    <string name="transfers">Transfers</string>
+    <string name="on_foot">On foot</string>
+    <string name="route_way">Way</string>
     <string name="points_of_interests">Points of interest (POI)</string>
     <string name="waiting_for_route_calculation">Calculating route…</string>
     <string name="app_mode_public_transport">Public transport</string>
@@ -39,7 +43,7 @@
     <string name="simulate_navigation">Simulate navigation</string>
     <string name="choose_track_file_to_follow">Choose track file to follow</string>
     <string name="voice_announcements">Voice announcements</string>
-    <string name="intermediate_destinations">Intermediate destinations: %1$s</string>
+    <string name="intermediate_destinations">Intermediate destinations</string>
     <string name="arrive_at_time">Arrive at %1$s</string>
     <string name="osm_live_subscriptions">Subscriptions</string>
     <string name="powered_by_osmand">By OsmAnd</string>

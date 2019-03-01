@@ -2897,11 +2897,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_destination_point">Dodaj cel trasy</string>
     <string name="add_intermediate_point">Dodaj punkt pośredni</string>
     <string name="add_start_point">Dodaj punkt początkowy</string>
-    <string name="intermediate_waypoint">Punkt pośredni: %1$s</string>
-    <string name="waypoints">Punkty trasy: %1$s</string>
-    <string name="transfers">przesiadki: %1$s</string>
-    <string name="on_foot">pieszo: %1$s</string>
-    <string name="route_way">Trasa: %1$s</string>
+    <string name="intermediate_waypoint">Punkt pośredni</string>
+    <string name="transfers">przesiadki</string>
+    <string name="on_foot">pieszo</string>
+    <string name="route_way">Trasa</string>
     <string name="points_of_interests">Użyteczne miejsca (UM)</string>
     <string name="waiting_for_route_calculation">Oczekiwanie na wyznaczenie trasy</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
@@ -2910,7 +2909,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="simulate_navigation">Symulacja nawigacji</string>
     <string name="choose_track_file_to_follow">Wybierz plik trasy do śledzenia</string>
     <string name="voice_announcements">Komunikaty głosowe</string>
-    <string name="intermediate_destinations">Pośrednie cele podróży: %1$s</string>
+    <string name="intermediate_destinations">Pośrednie cele podróży</string>
     <string name="arrive_at_time">Dotrzesz do celu o %1$s</string>
     <string name="quick_action_switch_day_night_descr">Naciśnięcie przycisku zmieni pomiędzy trybem Dziennym i Nocnym w OsmAndzie</string>
     <string name="quick_action_switch_day_mode">Tryb Dzienny</string>

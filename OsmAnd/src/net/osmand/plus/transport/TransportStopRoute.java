@@ -27,6 +27,17 @@ public class TransportStopRoute {
 	private boolean cachedNight;
 	private Map<Pair<String, Boolean>, Integer> cachedRouteColors = new HashMap<>();
 
+	public static TransportStopRoute getTransportStopRoute(TransportRoute rs, TransportStop s) {
+		TransportStopType type = TransportStopType.findType(rs.getType());
+		TransportStopRoute r = new TransportStopRoute();
+		r.type = type;
+		r.desc = rs.getName();
+		r.route = rs;
+		r.stop = s;
+		r.refStop = s;
+		return r;
+	}
+
 	public String getDescription(OsmandApplication ctx, boolean useDistance) {
 		if (useDistance && distance > 0) {
 			String nm = OsmAndFormatter.getFormattedDistance(distance, ctx);

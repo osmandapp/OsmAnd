@@ -280,6 +280,7 @@
 	<dimen name="route_info_card_row_min_height">60dp</dimen>
 	<dimen name="route_info_card_item_height">56dp</dimen>
 	<dimen name="route_info_list_text_padding">54dp</dimen>
+	<dimen name="route_info_legend_padding">8dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
 

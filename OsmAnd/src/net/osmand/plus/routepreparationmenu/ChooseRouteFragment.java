@@ -2,7 +2,6 @@ package net.osmand.plus.routepreparationmenu;
 
 import android.Manifest;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -28,6 +27,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
@@ -115,9 +115,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 			ImageButton zoomOutButtonView = (ImageButton) view.findViewById(R.id.map_zoom_out_button);
 			myLocButtonView = (ImageButton) view.findViewById(R.id.map_my_location_button);
 			if (portrait) {
-				updateImageButton(zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+				AndroidUtils.updateImageButton(mapActivity, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
 						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-				updateImageButton(zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+				AndroidUtils.updateImageButton(mapActivity,zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
 						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 				zoomInButtonView.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -273,16 +273,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		getMapActivity().changeZoom(-1, System.currentTimeMillis());
 	}
 
-	private void updateImageButton(ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		button.setImageDrawable(getMapActivity().getMyApplication().getUIUtilities().getIcon(night ? iconDarkId : iconLightId));
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			button.setBackground(getMapActivity().getResources().getDrawable(night ? bgDarkId : bgLightId,
-					getMapActivity().getTheme()));
-		} else {
-			button.setBackgroundDrawable(getMapActivity().getResources().getDrawable(night ? bgDarkId : bgLightId));
-		}
-	}
-
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
@@ -304,7 +294,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		try {
 			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, ChooseRouteFragment.TAG)
+					.add(R.id.routeMenuContainer, fragment, ChooseRouteFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {
@@ -355,8 +345,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 			view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(cards.get(position).getRouteId());
-					mapActivity.getMapView().refreshMap(true);
+					if (position < cards.size()) {
+						int routeId = cards.get(position).getRouteId();
+						mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(routeId);
+						mapActivity.getMapView().refreshMap(true);
+						ShowRouteInfoDialogFragment.showInstance(mapActivity, routeId);
+					}
 				}
 			});
 			view.findViewById(R.id.show_button).setOnClickListener(new View.OnClickListener() {

@@ -2894,11 +2894,10 @@
     <string name="add_destination_point">Дадаць пункт прызначэння</string>
     <string name="add_intermediate_point">Дадаць прамежкавы пункт</string>
     <string name="add_start_point">Дадаць пачатковы пункт</string>
-    <string name="intermediate_waypoint">Прамежкавы пункт: %1$s</string>
-    <string name="waypoints">Пункты шляху: %1$s</string>
-    <string name="transfers">трансферы: %1$s</string>
-    <string name="on_foot">пешшу: %1$s</string>
-    <string name="route_way">Шлях: %1$s</string>
+    <string name="intermediate_waypoint">Прамежкавы пункт</string>
+    <string name="transfers">трансферы</string>
+    <string name="on_foot">пешшу</string>
+    <string name="route_way">Шлях</string>
     <string name="points_of_interests">Пункты цікавасцяў (POI)</string>
     <string name="waiting_for_route_calculation">Чаканне падліку маршруту</string>
     <string name="app_mode_public_transport">Грамадскі транспарт</string>
@@ -2907,7 +2906,7 @@
     <string name="simulate_navigation">Сімуляваць навігацыю</string>
     <string name="choose_track_file_to_follow">Абярыце файл следу</string>
     <string name="voice_announcements">Галасавыя апавяшчэнні</string>
-    <string name="intermediate_destinations">Прамежкавыя пункты: %1$s</string>
+    <string name="intermediate_destinations">Прамежкавыя пункты</string>
     <string name="arrive_at_time">Прыбыццё а %1$s</string>
     <string name="quick_action_switch_day_night_descr">Націсканне на кнопку дзеяння пераключае начны і дзённы рэжымы OsmAnd</string>
     <string name="quick_action_switch_day_mode">Дзённы рэжым</string>

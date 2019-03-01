@@ -1,5 +1,6 @@
 package net.osmand.plus.dashboard;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,8 +40,10 @@ public class DashNavigationFragment extends DashBaseFragment {
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
-				ShowRouteInfoDialogFragment.showDialog(getActivity().getSupportFragmentManager());
+				Activity activity = getActivity();
+				if (activity instanceof MapActivity) {
+					ShowRouteInfoDialogFragment.showInstance((MapActivity) activity, -1);
+				}
 			}
 		});
 		return view;
