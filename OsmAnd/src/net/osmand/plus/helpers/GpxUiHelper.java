@@ -1374,7 +1374,6 @@ public class GpxUiHelper {
 					values.add(new Entry(nextX + x - 1, 0));
 				}
 				nextX += x / divX;
-				LOG.debug("X = " + x + ", diX = " + divX + ", nextX = " + nextX);
 				if (Float.isNaN(divSpeed)) {
 					nextY = s.speed * mulSpeed;
 				} else {
