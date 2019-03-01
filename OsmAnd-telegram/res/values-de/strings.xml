@@ -136,8 +136,8 @@
     <string name="disable_all_sharing_desc">Schaltet die Standortfreigabe für alle ausgewählten Chats aus (%1$d).</string>
     <string name="disable_all_sharing">Alle Freigaben deaktivieren</string>
     <string name="disconnect_from_telegram_desc">Um den Zugriff auf die Standortfreigabe zu widerrufen, öffnen Sie Telegram, gehen zu Einstellungen → Datenschutz und Sicherheit → Sitzungen und beenden die OsmAnd Telegram-Sitzung.</string>
-    <string name="disconnect_from_telegram">So deaktivieren Sie OsmAnd Standortfreigabe von Telegram aus</string>
-    <string name="logout_help_desc">So deaktivieren Sie OsmAnd Standortfreigabe von Telegram aus</string>
+    <string name="disconnect_from_telegram">So deaktivieren Sie OsmAnd Tracker von Telegram aus</string>
+    <string name="logout_help_desc">So deaktivieren Sie OsmAnd Tracker von Telegram aus</string>
     <string name="stale_location">Keine Bewegung</string>
     <string name="send_my_location_desc">Legen Sie das Mindestintervall für die Standortfreigabe fest.</string>
     <string name="sharing_time">Freigabezeit</string>
@@ -151,8 +151,8 @@
     <string name="location_service_no_gps_available">Wählen Sie einen der Standortanbieter aus, um Ihren Standort freizugeben.</string>
     <string name="sharing_location">Standort teilen</string>
     <string name="welcome_descr">
-        <b>OsmAnd Standortfreigabe</b> ermöglicht es Ihnen, Ihren Standort zu teilen und den anderer in OsmAnd zu sehen.<br/>
-        <br/>Die App verwendet die API von Telegram und Sie benötigen ein Telegram-Konto.</string>
+        <b>OsmAnd Tracker</b> ermöglicht es Ihnen, Ihren Standort zu teilen und den anderer in OsmAnd zu sehen.<br/>
+        <br/>Die App verwendet die API von Telegram, also benötigen Sie ein Telegram-Konto.</string>
     <string name="enter_another_device_name">Wählen Sie einen Namen, den Sie noch nicht benutzt haben</string>
     <string name="device_added_successfully">%1$s hinzugefügt.</string>
     <string name="shared_string_add">Hinzufügen</string>
@@ -199,7 +199,7 @@
     <string name="shared_string_ok">OK</string>
     <string name="location_recording_enabled">Standortaufzeichnung aktiviert</string>
     <string name="app_name_short_online">Online-Tracker</string>
-    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="app_name_short">OsmAnd-Tracker</string>
     <string name="shared_string_accept">Akzeptieren</string>
     <string name="telegram_privacy_policy">Telegram-Datenschutzerklärung</string>
     <string name="osmand_privacy_policy">OsmAnd Datenschutzerklärung</string>
@@ -211,4 +211,5 @@
     <string name="timeline_description">Aufzeichnung aktivieren, um den Standortverlauf zu speichern.</string>
     <string name="show_gps_points_descr">Anzahl gesammelter und gesendeter GPS-Punkte anzeigen.</string>
     <string name="privacy_policy_agree">Wenn Sie fortfahren, willigen Sie in die Bedingungen der Datenschutzerklärungen von Telegram und OsmAnd ein.</string>
+    <string name="privacy_policy_telegram_client">Osmand Tracker ist eine der Apps die Telegrams offene Plattform nutzt. Ihre Kontake können beliebige andere Telegram-Apps nutzen.</string>
 </resources>
