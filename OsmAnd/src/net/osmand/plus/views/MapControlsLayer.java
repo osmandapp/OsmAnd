@@ -928,41 +928,31 @@ public class MapControlsLayer extends OsmandMapLayer {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
-				setTransparencyBarEnabled(true);
+				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_TRANSPARENCY);
-				setTransparencyBarEnabled(true);
+				showTransparencyBar(settings.MAP_TRANSPARENCY, true);
 			}
 		}
 	}
 
-	public void showTransparencyBar(CommonPreference<Integer> transparenPreference) {
+	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
+									boolean isTransparencyBarEnabled) {
+		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
 		if (MapControlsLayer.transparencySetting != transparenPreference) {
 			MapControlsLayer.transparencySetting = transparenPreference;
-			if (isTransparencyBarEnabled) {
-				transparencyBarLayout.setVisibility(View.VISIBLE);
-			}
+
+		}
+		if (transparenPreference != null && isTransparencyBarEnabled) {
+			transparencyBarLayout.setVisibility(View.VISIBLE);
 			transparencyBar.setProgress(transparenPreference.get());
-		}
-	}
-
-	public void hideTransparencyBar(CommonPreference<Integer> transparentPreference) {
-		if (transparencySetting == transparentPreference) {
+		} else {
 			transparencyBarLayout.setVisibility(View.GONE);
-			transparencySetting = null;
 		}
 	}
 
-	public void setTransparencyBarEnabled(boolean isTransparencyBarEnabled) {
-		this.isTransparencyBarEnabled = isTransparencyBarEnabled;
-		if (transparencySetting != null) {
-			if (isTransparencyBarEnabled) {
-				transparencyBarLayout.setVisibility(View.VISIBLE);
-			} else {
-				transparencyBarLayout.setVisibility(View.GONE);
-			}
-		}
+	public void hideTransparencyBar() {
+		transparencyBarLayout.setVisibility(View.GONE);
+		transparencySetting = null;
 	}
 
 	private class MapHudButton {
