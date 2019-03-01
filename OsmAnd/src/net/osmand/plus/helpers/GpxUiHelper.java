@@ -1683,7 +1683,7 @@ public class GpxUiHelper {
 	public enum GPXDataSetAxisType {
 		DISTANCE(R.string.distance, R.drawable.ic_action_marker_dark),
 		TIME(R.string.shared_string_time, R.drawable.ic_action_time),
-		TIMEOFDAY(R.string.time_of_day, R.drawable.ic_action_time);
+		TIMEOFDAY(R.string.time_of_day, R.drawable.ic_action_time_span);
 
 		private int stringId;
 		private int imageId;
