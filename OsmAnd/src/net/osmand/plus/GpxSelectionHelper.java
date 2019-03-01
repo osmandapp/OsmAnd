@@ -78,10 +78,14 @@ public class GpxSelectionHelper {
 				if (file.exists() && !file.isDirectory()) {
 					if (file.lastModified() > gpxEntry.getValue()) {
 						try {
-							GPXFile reloadedFile =  new LoadGpxFileInBackground(file).execute().get();
-							if (reloadedFile != null) {
-								selectGpxFile(reloadedFile, true, false);
-							}
+							new LoadGpxFileInBackground(file, new LoadingListener() {
+								@Override
+								public void onLoadingComplete(GPXFile file) {
+									if (file != null) {
+										selectGpxFile(file, true, false);
+									}
+								}
+							}).execute();
 						} catch (Exception e) {
 							LOG.error(e.getMessage(), e);
 						}
@@ -95,18 +99,29 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	static class LoadGpxFileInBackground extends  AsyncTask<Void, Void, GPXFile> {
+	static class LoadGpxFileInBackground extends AsyncTask<Void, Void, GPXFile> {
 
 		File fileToLoad;
+		LoadingListener listener;
 
-		LoadGpxFileInBackground(File fileToLoad) {
+		LoadGpxFileInBackground(File fileToLoad, LoadingListener listener) {
 			this.fileToLoad = fileToLoad;
+			this.listener = listener;
 		}
 
 		@Override
 		protected GPXFile doInBackground(Void... voids) {
 			return GPXUtilities.loadGPXFile(fileToLoad);
 		}
+
+		@Override
+		protected void onPostExecute(GPXFile gpxFile) {
+			listener.onLoadingComplete(gpxFile);
+		}
+	}
+
+	interface LoadingListener {
+		void onLoadingComplete(GPXFile file);
 	}
 
 	public boolean isShowingAnyGpxFiles() {
