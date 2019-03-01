@@ -2883,11 +2883,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="add_destination_point">Pridať cieľ</string>
     <string name="add_intermediate_point">Pridať medzicieľ</string>
     <string name="add_start_point">Pridať štartovací bod</string>
-    <string name="intermediate_waypoint">Prechodný bod: %1$s</string>
-    <string name="waypoints">Body na ceste: %1$s</string>
-    <string name="transfers">prestupy: %1$s</string>
-    <string name="on_foot">peši: %1$s</string>
-    <string name="route_way">Cesta: %1$s</string>
+    <string name="intermediate_waypoint">Prechodný bod</string>
+    <string name="transfers">prestupy</string>
+    <string name="on_foot">peši</string>
+    <string name="route_way">Cesta</string>
     <string name="points_of_interests">Body záujmu (POI)</string>
     <string name="waiting_for_route_calculation">Čakám na výpočet trasy</string>
     <string name="app_mode_public_transport">Verejná doprava</string>
@@ -2896,7 +2895,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="simulate_navigation">Simulovať navigáciu</string>
     <string name="choose_track_file_to_follow">Zvoľte súbor trasy, ktorú chcete nasledovať</string>
     <string name="voice_announcements">Hlasové oznámenia</string>
-    <string name="intermediate_destinations">Medziciele: %1$s</string>
+    <string name="intermediate_destinations">Medziciele</string>
     <string name="arrive_at_time">Príjazd o %1$s</string>
     <string name="route_class_stat_container">Trieda</string>
     <string name="route_surface_stat_container">Povrch</string>

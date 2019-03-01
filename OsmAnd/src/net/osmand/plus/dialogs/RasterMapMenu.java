@@ -2,7 +2,6 @@ package net.osmand.plus.dialogs;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -18,12 +17,9 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
-import net.osmand.plus.views.GPXLayer;
-import net.osmand.plus.views.RouteLayer;
 
 public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
-
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
 													   final RasterMapType type) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -118,14 +114,14 @@ public class RasterMapMenu {
 					hidePolygonsPref.set(!isChecked);
 					refreshMapComplete(mapActivity);
 				} else if (itemId == R.string.show_transparency_seekbar) {
-					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(
-							isChecked ? currentMapTypeSeekbarMode : LayerTransparencySeekbarMode.OFF);
 					if (isChecked) {
-						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-					} else {
-						mapLayers.getMapControlsLayer().hideTransparencyBar(mapTransparencyPreference);
+						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
+						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference, true);
+					} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
+					{
+						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
+						mapLayers.getMapControlsLayer().hideTransparencyBar();
 					}
-					mapLayers.getMapControlsLayer().setTransparencyBarEnabled(isChecked);
 				}
 				return false;
 			}

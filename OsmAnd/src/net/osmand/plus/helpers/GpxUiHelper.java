@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -37,12 +38,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
@@ -87,7 +92,9 @@ import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteStatistics;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -938,6 +945,7 @@ public class GpxUiHelper {
 		}
 	}
 
+
 	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
 													 final File dir, final GPXFile currentFile, final String... filename) {
 		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
@@ -1043,7 +1051,7 @@ public class GpxUiHelper {
 		legend.setEnabled(false);
 	}
 
-	private static float setupXAxisDistance(OsmandApplication ctx, XAxis xAxis, float meters) {
+	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, float meters) {
 		OsmandSettings settings = ctx.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float divX;
@@ -1102,8 +1110,8 @@ public class GpxUiHelper {
 		final String formatX = fmt;
 		final String mainUnitX = ctx.getString(mainUnitStr);
 
-		xAxis.setGranularity(granularity);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
+		axisBase.setGranularity(granularity);
+		axisBase.setValueFormatter(new IAxisValueFormatter() {
 
 			@Override
 			public String getFormattedValue(float value, AxisBase axis) {
@@ -1208,6 +1216,114 @@ public class GpxUiHelper {
 		return values;
 	}
 
+	public static void setupHorizontalGPXChart(HorizontalBarChart chart, int yLabelsCount, float topOffset, float bottomOffset, boolean useGesturesAndScale) {
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+			chart.setHardwareAccelerationEnabled(false);
+		} else {
+			chart.setHardwareAccelerationEnabled(true);
+		}
+		chart.setTouchEnabled(useGesturesAndScale);
+		chart.setDragEnabled(useGesturesAndScale);
+		chart.setScaleYEnabled(false);
+		chart.setAutoScaleMinMaxEnabled(true);
+		chart.setDrawBorders(false);
+		chart.getDescription().setEnabled(false);
+		chart.setDragDecelerationEnabled(false);
+
+		chart.setExtraTopOffset(topOffset);
+		chart.setExtraBottomOffset(bottomOffset);
+
+		XAxis xl = chart.getXAxis();
+		xl.setDrawLabels(false);
+		xl.setEnabled(false);
+		xl.setDrawAxisLine(false);
+		xl.setDrawGridLines(false);
+
+		YAxis yl = chart.getAxisLeft();
+		yl.setLabelCount(yLabelsCount);
+		yl.setDrawLabels(false);
+		yl.setEnabled(false);
+		yl.setDrawAxisLine(false);
+		yl.setDrawGridLines(false);
+		yl.setAxisMinimum(0f);
+
+		YAxis yr = chart.getAxisRight();
+		yr.setLabelCount(yLabelsCount);
+		yr.setDrawAxisLine(false);
+		yr.setDrawGridLines(false);
+		yr.setAxisMinimum(0f);
+
+		chart.setFitBars(true);
+
+		Legend l = chart.getLegend();
+		l.setEnabled(false);
+	}
+
+	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
+	                                              @NonNull HorizontalBarChart mChart,
+	                                              @NonNull RouteStatistics.Statistics<E> routeStatistics,
+	                                              @NonNull GPXTrackAnalysis analysis,
+	                                              boolean useRightAxis,
+	                                              boolean nightMode) {
+
+		XAxis xAxis = mChart.getXAxis();
+		xAxis.setEnabled(false);
+
+		YAxis yAxis;
+		if (useRightAxis) {
+			yAxis = mChart.getAxisRight();
+			yAxis.setEnabled(true);
+		} else {
+			yAxis = mChart.getAxisLeft();
+		}
+		float divX = setupAxisDistance(app, yAxis, analysis.totalDistance);
+
+		List<RouteStatistics.RouteSegmentAttribute<E>> segments = routeStatistics.getElements();
+		List<BarEntry> entries = new ArrayList<>();
+		float[] stacks = new float[segments.size()];
+		int[] colors = new int[segments.size()];
+		for (int i = 0; i < stacks.length; i++) {
+			RouteStatistics.RouteSegmentAttribute segment = segments.get(i);
+			stacks[i] = segment.getDistance() / divX;
+			colors[i] = getColorFromRouteSegmentAttribute(app, segment, nightMode);
+		}
+		entries.add(new BarEntry(0, stacks));
+		BarDataSet barDataSet = new BarDataSet(entries, "");
+		barDataSet.setColors(colors);
+		BarData dataSet = new BarData(barDataSet);
+		dataSet.setDrawValues(false);
+
+		mChart.getAxisRight().setAxisMaximum(dataSet.getYMax());
+		mChart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
+
+		return dataSet;
+	}
+
+	public static int getColorFromRouteSegmentAttribute(OsmandApplication app, RouteStatistics.RouteSegmentAttribute segment, boolean nightMode) {
+		String colorAttrName = segment.getColorAttrName();
+		String colorName = segment.getColorName();
+		int color = 0;
+		if (colorName != null) {
+			try {
+				color = Color.parseColor(colorName);
+			} catch (Exception e) {
+			}
+		} else if (colorAttrName != null) {
+			color = GpxUiHelper.getColorFromStyle(app, colorAttrName, nightMode);
+		}
+		return color;
+	}
+
+	public static int getColorFromStyle(OsmandApplication app, String colorAttrName, boolean nightMode) {
+		RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+		req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+		if (req.searchRenderingAttribute(colorAttrName)) {
+			return req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+		}
+		return 0;
+	}
+
 	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication ctx,
 															   @NonNull LineChart mChart,
 															   @NonNull GPXTrackAnalysis analysis,
@@ -1227,7 +1343,7 @@ public class GpxUiHelper {
 		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
 			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
 		} else {
-			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
+			divX = setupAxisDistance(ctx, xAxis, analysis.totalDistance);
 		}
 
 		final String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
@@ -1313,7 +1429,7 @@ public class GpxUiHelper {
 		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
 			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
 		} else {
-			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
+			divX = setupAxisDistance(ctx, xAxis, analysis.totalDistance);
 		}
 
 		OsmandSettings.SpeedConstants sps = settings.SPEED_SYSTEM.get();
@@ -1476,7 +1592,7 @@ public class GpxUiHelper {
 		final float totalDistance = analysis.totalDistance;
 
 		XAxis xAxis = mChart.getXAxis();
-		float divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
+		float divX = setupAxisDistance(ctx, xAxis, analysis.totalDistance);
 
 		final String mainUnitY = "%";
 

@@ -2122,8 +2122,8 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="quick_action_take_photo_note">Új fotójegyzet</string>
     <string name="quick_action_add_osm_bug">OSM Jegyzet készítése</string>
     <string name="quick_action_navigation_voice">Hang be/ki</string>
-    <string name="quick_action_navigation_voice_off">Hang kikapcsolva</string>
-    <string name="quick_action_navigation_voice_on">Hang bekapcsolva</string>
+    <string name="quick_action_navigation_voice_off">Hang visszakapcsolása</string>
+    <string name="quick_action_navigation_voice_on">Hang némítása</string>
     <string name="quick_action_add_gpx">GPX útpont készítés</string>
     <string name="quick_action_add_parking">Parkolóhely megjelölés</string>
     <string name="quick_action_new_action">Művelet hozzáadása</string>
@@ -2786,11 +2786,10 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="add_destination_point">Célpont hozzáadása</string>
     <string name="add_intermediate_point">Köztes célpont hozzáadása</string>
     <string name="add_start_point">Kiindulópont hozzáadása</string>
-    <string name="intermediate_waypoint">"Köztes célpont: %1$s "</string>
-    <string name="waypoints">Útpontok: %1$s</string>
-    <string name="transfers">átszállások: %1$s</string>
-    <string name="on_foot">gyalog: %1$s</string>
-    <string name="route_way">Út: %1$s</string>
+    <string name="intermediate_waypoint">Köztes célpont</string>
+    <string name="transfers">átszállások</string>
+    <string name="on_foot">gyalog</string>
+    <string name="route_way">Út</string>
     <string name="points_of_interests">Érdekes helyek (POI)</string>
     <string name="waiting_for_route_calculation">Várakozás az útvonal kiszámítására</string>
     <string name="app_mode_public_transport">Tömegközlekedés</string>
@@ -2799,7 +2798,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="simulate_navigation">Navigáció szimulálása</string>
     <string name="choose_track_file_to_follow">Válaszd ki a követendő nyomvonalfájlt</string>
     <string name="voice_announcements">Hangbemondások</string>
-    <string name="intermediate_destinations">Köztes célpontok: %1$s</string>
+    <string name="intermediate_destinations">Köztes célpontok</string>
     <string name="arrive_at_time">Érkezés ekkor: %1$s</string>
     <string name="powered_by_osmand">A motorháztető alatt: OsmAnd</string>
     <string name="third_party_application">Harmadik féltől származó alkalmazás</string>
@@ -2883,4 +2882,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="route_steepness_stat_container">Lejtés</string>
     <string name="previous_route">Előző útvonal</string>
     <string name="add_home">Otthon hozzáadása</string>
+    <string name="shared_string_swap">Felcserélés</string>
+    <string name="show_more">Továbbiak megjelenítése</string>
+    <string name="tracks_on_map">Nyomvonalak a térképen</string>
+    <string name="route_class_stat_container">Útkategória</string>
 </resources>

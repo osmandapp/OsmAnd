@@ -2736,11 +2736,10 @@
     <string name="add_destination_point">إضافة وجهة</string>
     <string name="add_intermediate_point">أضف وجهة وسيطة</string>
     <string name="add_start_point">إضافة نقطة البدء</string>
-    <string name="intermediate_waypoint">النقطة المتوسط : %1$s</string>
-    <string name="waypoints">نقاط الطريق: %1$s</string>
-    <string name="transfers">النقل:%1$s</string>
-    <string name="on_foot">سيرا على الأقدام: %1$s</string>
-    <string name="route_way">الطريقة: %1$s</string>
+    <string name="intermediate_waypoint">النقطة المتوسط</string>
+    <string name="transfers">النقل</string>
+    <string name="on_foot">سيرا على الأقدام</string>
+    <string name="route_way">الطريقة</string>
     <string name="points_of_interests">نقطة اهتمام (POI)</string>
     <string name="waiting_for_route_calculation">في انتظار لحساب المسار</string>
     <string name="app_mode_public_transport">النقل العام</string>
@@ -2749,7 +2748,7 @@
     <string name="simulate_navigation">محاكاة الملاحة</string>
     <string name="choose_track_file_to_follow">اختر مسار للمتابعة</string>
     <string name="voice_announcements">إعلان صوتي</string>
-    <string name="intermediate_destinations">الوجهات المتوسطة : %1$s</string>
+    <string name="intermediate_destinations">الوجهات المتوسطة</string>
     <string name="arrive_at_time">الوصول إلى %1$s</string>
     <string name="send_search_query_description">سوف نقوم بإرسال استعلام البحث الخاص بك: <b>\"%1$s\"</b>، وكذالك الموقع الخاص بك. <br/>
         <br/> نحن لا نجمع معلومات شخصية، ونحن فقط بحاجة إلى البحث عن البيانات لتحسين خوارزمية البحث. <br/>

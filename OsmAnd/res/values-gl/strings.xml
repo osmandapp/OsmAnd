@@ -2955,11 +2955,10 @@ Lon %2$s</string>
     <string name="add_destination_point">Engadir destino</string>
     <string name="add_intermediate_point">Engadir punto intermedio</string>
     <string name="add_start_point">Engadir punto inicial</string>
-    <string name="intermediate_waypoint">Punto intermedio: %1$s</string>
-    <string name="waypoints">Puntos de pasaxe: %1$s</string>
-    <string name="transfers">transferencias: %1$s</string>
-    <string name="on_foot">a pé: %1$s</string>
-    <string name="route_way">Vía: %1$s</string>
+    <string name="intermediate_waypoint">Punto intermedio</string>
+    <string name="transfers">transferencias</string>
+    <string name="on_foot">a pé</string>
+    <string name="route_way">Vía</string>
     <string name="points_of_interests">Puntos de interese (PDI)</string>
     <string name="waiting_for_route_calculation">Estase a agardar polo cálculo da rota</string>
     <string name="app_mode_public_transport">Transporte público</string>
@@ -2968,7 +2967,7 @@ Lon %2$s</string>
     <string name="simulate_navigation">Simular navegación</string>
     <string name="choose_track_file_to_follow">Escolle o ficheiro da pista a seguir</string>
     <string name="voice_announcements">Anuncios de voz</string>
-    <string name="intermediate_destinations">Destinos intermedios: %1$s</string>
+    <string name="intermediate_destinations">Destinos intermedios</string>
     <string name="arrive_at_time">Chegada ás %1$s</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="quick_action_switch_day_night_descr">Premendo neste botón de acción, troca entre o modo \"Noite\" e \"Día\" para o OsmAnd</string>

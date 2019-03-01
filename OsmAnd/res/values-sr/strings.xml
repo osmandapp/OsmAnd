@@ -2909,11 +2909,10 @@
     <string name="add_destination_point">Додај одредиште</string>
     <string name="add_intermediate_point">Додај успутну станицу</string>
     <string name="add_start_point">Додај почетну тачку</string>
-    <string name="intermediate_waypoint">"Успутне тачке: %1$s "</string>
-    <string name="waypoints">Пролазне тачке: %1$s</string>
-    <string name="transfers">преседања: %1$s</string>
-    <string name="on_foot">"пешице: %1$s "</string>
-    <string name="route_way">Пут: %1$s</string>
+    <string name="intermediate_waypoint">Успутне тачке</string>
+    <string name="transfers">преседања</string>
+    <string name="on_foot">пешице</string>
+    <string name="route_way">Пут</string>
     <string name="points_of_interests">Тачке од интереса (POI)</string>
     <string name="waiting_for_route_calculation">Чекање на израчунавање пута</string>
     <string name="app_mode_public_transport">Јавни саобраћај</string>
@@ -2922,7 +2921,7 @@
     <string name="simulate_navigation">Симулирај навођење</string>
     <string name="choose_track_file_to_follow">Одаберите фајл путање за праћење</string>
     <string name="voice_announcements">Гласовне најаве</string>
-    <string name="intermediate_destinations">"Успутна одредишта: %1$s "</string>
+    <string name="intermediate_destinations">Успутна одредишта</string>
     <string name="arrive_at_time">"Долазак у %1$s "</string>
     <string name="route_class_stat_container">Класа</string>
     <string name="route_surface_stat_container">Подлога</string>

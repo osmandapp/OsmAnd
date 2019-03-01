@@ -2192,8 +2192,8 @@
     <string name="quick_action_take_photo_note">یادداشت عکسی جدید</string>
     <string name="quick_action_add_osm_bug">افزودن توضیح ویرایشی</string>
     <string name="quick_action_navigation_voice">گفتار روشن/خاموش</string>
-    <string name="quick_action_navigation_voice_off">گفتار خاموش است</string>
-    <string name="quick_action_navigation_voice_on">گفتار روشن است</string>
+    <string name="quick_action_navigation_voice_off">روشن‌کردن گفتار</string>
+    <string name="quick_action_navigation_voice_on">خاموش‌کردن گفتار</string>
     <string name="quick_action_add_parking">افزودن جای پارک</string>
     <string name="quick_action_new_action">افزودن عملیات</string>
     <string name="quick_action_edit_action">اصلاح عملیات</string>
@@ -2932,11 +2932,10 @@
     <string name="add_destination_point">افزودن مقصد</string>
     <string name="add_intermediate_point">افزودن نقطهٔ میانی</string>
     <string name="add_start_point">افزودن نقطهٔ شروع</string>
-    <string name="intermediate_waypoint">نقطهٔ میانی: %1$s</string>
-    <string name="waypoints">نقاط بین‌راهی: %1$s</string>
-    <string name="transfers">انتقال‌ها: %1$s</string>
-    <string name="on_foot">روی پا: %1$s</string>
-    <string name="route_way">راه: %1$s</string>
+    <string name="intermediate_waypoint">نقطهٔ میانی</string>
+    <string name="transfers">انتقال‌ها</string>
+    <string name="on_foot">روی پا</string>
+    <string name="route_way">راه</string>
     <string name="points_of_interests">نقاط پرکاربرد (POI)</string>
     <string name="waiting_for_route_calculation">در انتظار محاسبهٔ مسیر</string>
     <string name="app_mode_public_transport">حمل‌ونقل عمومی</string>
@@ -2945,7 +2944,7 @@
     <string name="simulate_navigation">شبیه‌سازی ناوبری</string>
     <string name="choose_track_file_to_follow">فایل رد را برای دنبال‌کردن انتخاب کنید</string>
     <string name="voice_announcements">پیام‌های گفتاری</string>
-    <string name="intermediate_destinations">مقصدهای میانی: %1$s</string>
+    <string name="intermediate_destinations">مقصدهای میانی</string>
     <string name="arrive_at_time">زمان رسیدن: %1$s</string>
     <string name="cubic_m">مترمکعب</string>
     <string name="metric_ton">تن</string>
@@ -2963,4 +2962,5 @@
     <string name="previous_route">مسیر قبلی</string>
     <string name="show_more">بیشتر نشان بده</string>
     <string name="tracks_on_map">ردها روی نقشه</string>
+    <string name="shared_string_swap">تعویض</string>
 </resources>

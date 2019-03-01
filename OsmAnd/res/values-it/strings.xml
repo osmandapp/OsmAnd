@@ -2875,11 +2875,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="add_destination_point">Aggiungi destinazione</string>
     <string name="add_intermediate_point">Aggiungi punto intermedio</string>
     <string name="add_start_point">Aggiungi punto di partenza</string>
-    <string name="intermediate_waypoint">Punto intermedio: %1$s</string>
-    <string name="waypoints">Punto di passaggio: %1$s</string>
-    <string name="transfers">trasferimenti: %1$s</string>
-    <string name="on_foot">a piedi: %1$s</string>
-    <string name="route_way">Via: %1$s</string>
+    <string name="intermediate_waypoint">Punto intermedio</string>
+    <string name="transfers">trasferimenti</string>
+    <string name="on_foot">a piedi</string>
+    <string name="route_way">Via</string>
     <string name="points_of_interests">Punti d\'interesse(PDI)</string>
     <string name="waiting_for_route_calculation">In attesa del calcolo del percorso</string>
     <string name="app_mode_public_transport">Trasporto pubblico</string>
@@ -2888,7 +2887,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="simulate_navigation">Simula la navigazione</string>
     <string name="choose_track_file_to_follow">"Scegli il file della traccia da seguire "</string>
     <string name="voice_announcements">Annunci vocali</string>
-    <string name="intermediate_destinations">Destinazioni intermedie: %1$s</string>
+    <string name="intermediate_destinations">Destinazioni intermedie</string>
     <string name="arrive_at_time">Arrivo alle %1$s</string>
     <string name="quick_action_switch_day_night_descr">Toccando questo bottone si cambierà fra la modalità Notte e Giorno per OsmAnd</string>
     <string name="quick_action_switch_day_mode">Modalità Giorno</string>

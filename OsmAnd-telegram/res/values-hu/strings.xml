@@ -78,7 +78,7 @@
     <string name="by_name">Név szerint</string>
     <string name="by_group">Csoport szerint</string>
     <string name="shared_string_sort">Sorba rendezés</string>
-    <string name="shared_string_sort_by"></string>
+    <string name="shared_string_sort_by">Rendezés e szerint:</string>
     <string name="choose_osmand_desc">Jelölje ki az OsmAnd azon verzióját, amelyben a partnerek láthatóak lesznek a térképen.</string>
     <string name="choose_osmand">Használandó OsmAnd verzió kijelölése</string>
     <string name="disable_all_sharing_desc">A tartózkodási hely megosztásának kikapcsolása az összes kijelölt chat esetében (%1$d).</string>
@@ -177,4 +177,19 @@
     <string name="my_location">Tartózkodási helyem</string>
     <string name="live_now">Most élőben</string>
     <string name="timeline">Idővonal</string>
+    <string name="initializing">Indítás</string>
+    <string name="searching_for_gps">Pozíció meghatározása…</string>
+    <string name="connecting_to_the_internet">Kapcsolódás az internethez</string>
+    <string name="battery_optimization_description">Az OsmAnd Telegram esetében kapcsolja ki az akkumulátor optimalizálását, nehogy hirtelen kikapcsoljon, miközben a háttérben fut.</string>
+    <string name="sharing_in_background">Megosztás a háttérben</string>
+    <string name="go_to_settings">Beállítások megnyitása</string>
+    <string name="shared_string_later">Később</string>
+    <string name="not_sent_yet">Még nincs elküldve</string>
+    <string name="not_found_yet">Még nem sikerült megtalálni</string>
+    <string name="disconnect_from_telegram_desc">A helymegosztáshoz való hozzáférés visszavonása: nyissa meg a Telegramot, menjen a Beállítások &gt; Adatvédelem és biztonság &gt; Munkamenetek ponthoz, és állítsa le a munkamenetet.</string>
+    <string name="disconnect_from_telegram">Hogyan kapcsoljam le az OsmAnd Trackert a Telegramról\?</string>
+    <string name="logout_help_desc">Hogyan kapcsoljam le az OsmAnd Trackert a Telegramról\?</string>
+    <string name="connected_account">Csatlakoztatott fiók</string>
+    <string name="shared_string_account">Fiók</string>
+    <string name="in_time">ennyi idő múlva: %1$s</string>
 </resources>

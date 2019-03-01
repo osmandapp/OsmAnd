@@ -2829,11 +2829,10 @@ Pôr do Sol: %2$s</string>
     <string name="add_destination_point">Adicionar destino</string>
     <string name="add_intermediate_point">Adicionar intermediário</string>
     <string name="add_start_point">Adicionar ponto inicial</string>
-    <string name="intermediate_waypoint">Ponto intermediário: %1$s</string>
-    <string name="waypoints">Ponto de trajeto: %1$s</string>
-    <string name="transfers">transferências: %1$s</string>
-    <string name="on_foot">a pé: %1$s</string>
-    <string name="route_way">Via: %1$s</string>
+    <string name="intermediate_waypoint">Ponto intermediário</string>
+    <string name="transfers">transferências</string>
+    <string name="on_foot">a pé</string>
+    <string name="route_way">Via</string>
     <string name="points_of_interests">Ponto de interesse (PDI)</string>
     <string name="waiting_for_route_calculation">Esperando por cálculo de rota</string>
     <string name="app_mode_public_transport">Transporte público</string>
@@ -2842,7 +2841,7 @@ Pôr do Sol: %2$s</string>
     <string name="simulate_navigation">Simular navegação</string>
     <string name="choose_track_file_to_follow">Escolha arquivo de trilha para seguir</string>
     <string name="voice_announcements">Avisos por voz</string>
-    <string name="intermediate_destinations">Destinos intermediários: %1$s</string>
+    <string name="intermediate_destinations">Destinos intermediários</string>
     <string name="arrive_at_time">Chegada em %1$s</string>
     <string name="lang_gn_py">Guarani</string>
     <string name="quick_action_switch_day_night_descr">Tocando neste botão de ação, alterne entre os modos Dia e Noite para OsmAnd</string>

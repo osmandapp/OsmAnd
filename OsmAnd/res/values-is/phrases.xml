@@ -3542,4 +3542,5 @@
     <string name="poi_park_ride_hov">Deilibílfar</string>
     <string name="poi_park_ride_tram">Sporvagn</string>
     <string name="poi_park_ride_ferry">Ferja</string>
+    <string name="poi_generator_source_biomass">Orkugjafi: lífmassi</string>
 </resources>

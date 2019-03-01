@@ -1,13 +1,18 @@
 package net.osmand.plus;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import net.osmand.GPXUtilities;
 import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities.GPXFile;
@@ -24,6 +29,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,12 +43,17 @@ public class GpxSelectionHelper {
 
 	private static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
+	private static final String BACKUP = "backup";
+	private static final String BACKUPMODIFIEDTIME = "backupTime";
 	private static final String COLOR = "color";
 	private static final String SELECTED_BY_USER = "selected_by_user";
 	private OsmandApplication app;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<>();
+	private Map<GPXFile, Long> selectedGpxFilesBackUp = new java.util.HashMap<>();
 	private SavingTrackHelper savingTrackHelper;
+	private final static Log LOG = PlatformUtil.getLog(GpxSelectionHelper.class);
+
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication, SavingTrackHelper trackHelper) {
 		this.app = osmandApplication;
@@ -50,8 +61,51 @@ public class GpxSelectionHelper {
 	}
 
 	public void clearAllGpxFileToShow() {
+		selectedGpxFilesBackUp.clear();
+		for(SelectedGpxFile s : selectedGPXFiles) {
+			selectedGpxFilesBackUp.put(s.gpxFile, s.modifiedTime);
+		}
 		selectedGPXFiles.clear();
 		saveCurrentSelections();
+	}
+
+	public void restoreSelectedGpxFiles() {
+		for (Entry<GPXFile, Long> gpxEntry : selectedGpxFilesBackUp.entrySet()) {
+			if (!Algorithms.isEmpty(gpxEntry.getKey().path)) {
+				final File file = new File(gpxEntry.getKey().path);
+				if (file.exists() && !file.isDirectory()) {
+					if (file.lastModified() > gpxEntry.getValue()) {
+						new GpxFileLoaderTask(file, app).execute();
+					} else {
+						selectGpxFile(gpxEntry.getKey(), true, false);
+					}
+				}
+			}
+			saveCurrentSelections();
+		}
+	}
+
+	private static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+
+		File fileToLoad;
+		GpxSelectionHelper helper;
+
+		GpxFileLoaderTask(File fileToLoad, OsmandApplication app) {
+			this.fileToLoad = fileToLoad;
+			this.helper = app.getSelectedGpxHelper();
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... voids) {
+			return GPXUtilities.loadGPXFile(fileToLoad);
+		}
+
+		@Override
+		protected void onPostExecute(GPXFile gpxFile) {
+			if (gpxFile != null) {
+				helper.selectGpxFile(gpxFile, true, false);
+			}
+		}
 	}
 
 	public boolean isShowingAnyGpxFiles() {
@@ -63,6 +117,12 @@ public class GpxSelectionHelper {
 		return selectedGPXFiles;
 	}
 
+	public Map<GPXFile, Long> getSelectedGpxFilesBackUp() {
+		return selectedGpxFilesBackUp;
+	}
+
+
+	@SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
 	public String getGpxDescription() {
 		if (selectedGPXFiles.size() == 1) {
 			GPXFile currentGPX = app.getSavingTrackHelper().getCurrentGpx();
@@ -439,6 +499,8 @@ public class GpxSelectionHelper {
 						}
 						if (gpx.error != null) {
 							save = true;
+						} else if(obj.has(BACKUP)) {
+							selectedGpxFilesBackUp.put(gpx, gpx.modifiedTime);
 						} else {
 							selectGpxFile(gpx, true, false, true, selectedByUser, false);
 						}
@@ -478,6 +540,25 @@ public class GpxSelectionHelper {
 					e.printStackTrace();
 				}
 				ar.put(obj);
+			}
+		}
+		for (Map.Entry<GPXFile, Long> s : selectedGpxFilesBackUp.entrySet()) {
+			if (s != null) {
+				try {
+					JSONObject obj = new JSONObject();
+					if(Algorithms.isEmpty(s.getKey().path)) {
+						obj.put(CURRENT_TRACK, true);
+					} else {
+						obj.put(FILE, s.getKey().path);
+					}
+					obj.put(SELECTED_BY_USER, true);
+					obj.put(BACKUP, true);
+					obj.put(BACKUPMODIFIEDTIME, s.getValue());
+					ar.put(obj);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
 			}
 		}
 		app.getSettings().SELECTED_GPX.set(ar.toString());
