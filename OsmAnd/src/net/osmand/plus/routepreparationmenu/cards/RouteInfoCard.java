@@ -22,17 +22,19 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatistics;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class RouteInfoCard extends BaseCard {
 
-	private MapActivity mapActivity;
 	private RouteStatistics.Statistics routeStatistics;
 	private GPXUtilities.GPXTrackAnalysis analysis;
 
 	public RouteInfoCard(MapActivity mapActivity, RouteStatistics.Statistics routeStatistics, GPXUtilities.GPXTrackAnalysis analysis) {
 		super(mapActivity);
-		this.mapActivity = mapActivity;
 		this.routeStatistics = routeStatistics;
 		this.analysis = analysis;
 	}
@@ -44,28 +46,22 @@ public class RouteInfoCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		updateTitle();
+		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
-		GpxUiHelper.setupHorizontalGPXChart(chart, 5, 10, 10, true);
+		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 10, 10, true, nightMode);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, routeStatistics, analysis, true, nightMode);
 		chart.setData(barData);
 		LinearLayout container = view.findViewById(R.id.route_items);
 		attachLegend(container, routeStatistics);
 	}
 
-	@Override
-	protected void applyDayNightMode() {
-		view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+	private void updateHeader() {
+		TextView title = (TextView) view.findViewById(R.id.info_type_title);
 		TextView details = (TextView) view.findViewById(R.id.info_type_details);
-		details.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
-		TextView title = (TextView) view.findViewById(R.id.info_type_title);
-		AndroidUtils.setTextPrimaryColor(app, title, nightMode);
-	}
-
-	private void updateTitle() {
-		TextView title = (TextView) view.findViewById(R.id.info_type_title);
 		String name = getInfoType();
 		title.setText(name);
+		details.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		AndroidUtils.setTextPrimaryColor(app, title, nightMode);
 	}
 
 	private String getInfoType() {
@@ -88,7 +84,7 @@ public class RouteInfoCard extends BaseCard {
 			RouteStatistics.RouteSegmentAttribute<E> segment = partition.get(key);
 			int color = GpxUiHelper.getColorFromRouteSegmentAttribute(app, segment, nightMode);
 			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color);
-			Spannable text = getSpanLegend(key.toString(), segment);
+			Spannable text = getSpanLegend(key.toString().toLowerCase(), segment);
 
 			TextView legend = new TextView(app);
 			AndroidUtils.setTextPrimaryColor(app, legend, nightMode);

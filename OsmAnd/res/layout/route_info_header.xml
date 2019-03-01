@@ -4,12 +4,12 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:background="?attr/route_info_bg"
 	android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/bg_color"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingTop="8dp"
@@ -40,7 +40,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?attr/routeParameterTitleColor"
+					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/default_list_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="26 km" />
@@ -83,7 +83,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?attr/routeParameterTitleColor"
+					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/default_list_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="20 min" />
@@ -106,7 +106,6 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/bg_color"
 		android:orientation="vertical">
 
 		<com.github.mikephil.charting.charts.LineChart
@@ -120,7 +119,6 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/bg_color"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingBottom="4dp">
@@ -216,7 +214,6 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/bg_color"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingTop="4dp"
@@ -257,7 +254,6 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/bg_color"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingTop="4dp"

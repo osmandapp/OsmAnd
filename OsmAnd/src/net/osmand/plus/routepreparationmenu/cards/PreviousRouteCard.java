@@ -1,11 +1,8 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -26,7 +23,7 @@ public class PreviousRouteCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		final TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		TextView startTitle = (TextView) view.findViewById(R.id.start_title);
 		TextView destinationTitle = (TextView) view.findViewById(R.id.destination_title);
 
@@ -73,9 +70,5 @@ public class PreviousRouteCard extends BaseCard {
 			}
 		}
 		return name;
-	}
-
-	@Override
-	protected void applyDayNightMode() {
 	}
 }

@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/bg_color"
+	android:background="?attr/route_info_bg"
 	android:orientation="vertical">
 
 	<FrameLayout
@@ -22,6 +22,7 @@
 			android:maxLines="1"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
+			android:textColor="?android:attr/textColorPrimary"
 			android:textSize="@dimen/text_button_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:ignore="UnusedAttribute"

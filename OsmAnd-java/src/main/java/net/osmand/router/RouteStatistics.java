@@ -113,102 +113,96 @@ public class RouteStatistics {
         public abstract String getColorName(E attribute);
     }
 
-    private static class RouteSurfaceStatisticComputer extends RouteStatisticComputer<String> {
+    private static class RouteSurfaceStatisticComputer extends RouteStatisticComputer<RoadSurface> {
 
         public RouteSurfaceStatisticComputer(List<RouteSegmentResult> route) {
             super(route, StatisticType.SURFACE);
         }
 
         @Override
-        public String getAttribute(RouteSegmentResult segment) {
+        public RoadSurface getAttribute(RouteSegmentResult segment) {
             String segmentSurface = segment.getSurface();
             if (segmentSurface == null) {
-                return RoadSurface.UNDEFINED.name().toLowerCase();
+                return RoadSurface.UNDEFINED;
             }
             for (RoadSurface roadSurface : RoadSurface.values()) {
                 if (roadSurface.contains(segmentSurface)) {
-                    return roadSurface.name().toLowerCase();
+                    return roadSurface;
                 }
             }
-            return RoadSurface.UNDEFINED.name().toLowerCase();
+            return RoadSurface.UNDEFINED;
         }
 
 	    @Override
-	    public String getColorAttrName(String attribute) {
-		    RoadSurface roadSurface = RoadSurface.valueOf(attribute.toUpperCase());
-		    return roadSurface.getColorAttrName();
+	    public String getColorAttrName(RoadSurface attribute) {
+		    return attribute.getColorAttrName();
 	    }
 
 	    @Override
-	    public String getColorName(String attribute) {
-		    RoadSurface roadSurface = RoadSurface.valueOf(attribute.toUpperCase());
-		    return roadSurface.getColorName();
+	    public String getColorName(RoadSurface attribute) {
+		    return attribute.getColorName();
 	    }
     }
 
-    private static class RouteSmoothnessStatisticComputer extends RouteStatisticComputer<String> {
+    private static class RouteSmoothnessStatisticComputer extends RouteStatisticComputer<RoadSmoothness> {
 
         public RouteSmoothnessStatisticComputer(List<RouteSegmentResult> route) {
             super(route, StatisticType.SMOOTHNESS);
         }
 
         @Override
-        public String getAttribute(RouteSegmentResult segment) {
+        public RoadSmoothness getAttribute(RouteSegmentResult segment) {
             String segmentSmoothness = segment.getSmoothness();
             if (segmentSmoothness == null) {
-                return RoadSmoothness.UNDEFINED.name().toLowerCase();
+                return RoadSmoothness.UNDEFINED;
             }
             for (RoadSmoothness roadSmoothness : RoadSmoothness.values()) {
                 if (roadSmoothness.contains(segmentSmoothness)) {
-                    return roadSmoothness.name().toLowerCase();
+                    return roadSmoothness;
                 }
             }
-            return RoadSmoothness.UNDEFINED.name().toLowerCase();
+            return RoadSmoothness.UNDEFINED;
         }
 
 	    @Override
-	    public String getColorAttrName(String attribute) {
-		    RoadSmoothness roadSmoothness = RoadSmoothness.valueOf(attribute.toUpperCase());
-		    return roadSmoothness.getColorAttrName();
+	    public String getColorAttrName(RoadSmoothness attribute) {
+		    return attribute.getColorAttrName();
 	    }
 
 	    @Override
-	    public String getColorName(String attribute) {
-		    RoadSmoothness roadSmoothness = RoadSmoothness.valueOf(attribute.toUpperCase());
-		    return roadSmoothness.getColorName();
+	    public String getColorName(RoadSmoothness attribute) {
+		    return attribute.getColorName();
 	    }
     }
 
-    private static class RouteClassStatisticComputer extends RouteStatisticComputer<String> {
+    private static class RouteClassStatisticComputer extends RouteStatisticComputer<RoadClass> {
 
         public RouteClassStatisticComputer(List<RouteSegmentResult> route) {
             super(route, StatisticType.CLASS);
         }
 
         @Override
-        public String getAttribute(RouteSegmentResult segment) {
+        public RoadClass getAttribute(RouteSegmentResult segment) {
             String segmentClass = segment.getHighway();
             if (segmentClass == null) {
-                return RoadClass.UNDEFINED.name().toLowerCase();
+                return RoadClass.UNDEFINED;
             }
             for (RoadClass roadClass : RoadClass.values()) {
                 if (roadClass.contains(segmentClass)) {
-                    return roadClass.name().toLowerCase();
+                    return roadClass;
                 }
             }
-            return RoadClass.UNDEFINED.name().toLowerCase();
+            return RoadClass.UNDEFINED;
         }
 
 	    @Override
-	    public String getColorAttrName(String attribute) {
-		    RoadClass roadClass = RoadClass.valueOf(attribute.toUpperCase());
-		    return roadClass.getColorAttrName();
+	    public String getColorAttrName(RoadClass attribute) {
+		    return attribute.getColorAttrName();
 	    }
 
 	    @Override
-	    public String getColorName(String attribute) {
-		    RoadClass roadClass = RoadClass.valueOf(attribute.toUpperCase());
-		    return roadClass.getColorName();
+	    public String getColorName(RoadClass attribute) {
+		    return attribute.getColorName();
 	    }
     }
 
@@ -516,13 +510,11 @@ public class RouteStatistics {
 	}
 
 	public enum RoadSurface {
-		UNDEFINED(null, "#e8e8e8", "undefined"),
-		PAVED(null, "#a7cdf8", "paved"),
-		UNPAVED(null, "#cc9900", "unpaved"),
 		ASPHALT(null, "#6f687e", "asphalt"),
 		CONCRETE(null, "#a7cdf8", "concrete"),
+		UNPAVED(null, "#cc9900", "unpaved"),
+		PAVED(null, "#a7cdf8", "paved"),
 		COMPACTED(null, "#cbcbe8", "compacted"),
-		GRAVEL(null, "#cbcbe8", "gravel"),
 		FINE_GRAVEL(null, "#cbcbe8", "fine_gravel"),
 		PAVING_STONES(null, "#a7cdf8", "paving_stones"),
 		SETT(null, "#a7cdf8", "sett"),
@@ -530,15 +522,17 @@ public class RouteStatistics {
 		PEBBLESTONE("#a7cdf8", "pebblestone"),
 		STONE(null, "#a7cdf8", "stone"),
 		METAL(null, "#a7cdf8", "metal"),
-		GROUND(null, "#cc9900", "ground", "mud"),
-		WOOD(null, "#a7cdf8", "wood"),
 		GRASS_PAVER(null, "#a7bef8", "grass_paver"),
+		WOOD(null, "#a7cdf8", "wood"),
+		GRAVEL(null, "#cbcbe8", "gravel"),
+		GROUND(null, "#cc9900", "ground", "mud"),
+		CLAY(null, "#cc9900", "clay"),
 		GRASS(null, "#1fbe1f", "grass"),
 		SAND(null, "#ffd700", "sand"),
 		SALT(null, "#7eded8", "salt"),
 		SNOW(null, "#9feeef", "snow"),
 		ICE(null, "#9feeef", "ice"),
-		CLAY(null, "#cc9900", "clay");
+		UNDEFINED(null, "#e8e8e8", "undefined");
 
 		final Set<String> surfaces = new TreeSet<>();
 		final String colorAttrName;
@@ -564,7 +558,6 @@ public class RouteStatistics {
 	}
 
 	public enum RoadSmoothness {
-		UNDEFINED("redColor", null, "undefined"),
 		EXCELLENT("orangeColor", null, "excellent"),
 		GOOD("brownColor", null, "good"),
 		INTERMEDIATE("darkyellowColor", null, "intermediate"),
@@ -572,7 +565,8 @@ public class RouteStatistics {
 		VERY_BAD("lightgreenColor", null, "very_bad"),
 		HORRIBLE("greenColor", null, "horrible"),
 		VERY_HORRIBLE("lightblueColor", null, "very_horrible"),
-		IMPASSABLE("blueColor", null, "impassable");
+		IMPASSABLE("blueColor", null, "impassable"),
+		UNDEFINED("redColor", null, "undefined");
 
 		final Set<String> surfaces = new TreeSet<>();
 		final String colorAttrName;

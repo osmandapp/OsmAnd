@@ -1198,7 +1198,8 @@ public class GpxUiHelper {
 		return values;
 	}
 
-	public static void setupHorizontalGPXChart(HorizontalBarChart chart, int yLabelsCount, float topOffset, float bottomOffset, boolean useGesturesAndScale) {
+	public static void setupHorizontalGPXChart(OsmandApplication app, HorizontalBarChart chart, int yLabelsCount,
+	                                           float topOffset, float bottomOffset, boolean useGesturesAndScale, boolean nightMode) {
 		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 			chart.setHardwareAccelerationEnabled(false);
 		} else {
@@ -1234,6 +1235,9 @@ public class GpxUiHelper {
 		yr.setDrawAxisLine(false);
 		yr.setDrawGridLines(false);
 		yr.setAxisMinimum(0f);
+
+		yl.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light));
+		yr.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light));
 
 		chart.setFitBars(true);
 

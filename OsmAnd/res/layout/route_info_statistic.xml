@@ -11,12 +11,14 @@
 		android:id="@+id/dividerToDropDown"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"
 		android:focusable="false" />
 
 	<LinearLayout
 		android:id="@+id/RouteInfoControls"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="?attr/route_info_bg"
 		android:orientation="vertical">
 
 		<LinearLayout

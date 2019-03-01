@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
@@ -123,9 +121,5 @@ public class HistoryCard extends BaseCard {
 		}
 
 		((TextView) view.findViewById(R.id.gpx_card_title)).setText(R.string.shared_string_history);
-	}
-
-	@Override
-	protected void applyDayNightMode() {
 	}
 }

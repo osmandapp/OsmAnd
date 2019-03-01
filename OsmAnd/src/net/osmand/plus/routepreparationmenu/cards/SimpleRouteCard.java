@@ -19,13 +19,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.directionInfo;
 
 public class SimpleRouteCard extends BaseCard {
 
@@ -46,8 +43,6 @@ public class SimpleRouteCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-
-		view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 
 		view.findViewById(R.id.dividerToDropDown).setVisibility(View.VISIBLE);
 		view.findViewById(R.id.route_info_details_card).setVisibility(View.VISIBLE);
@@ -103,11 +98,7 @@ public class SimpleRouteCard extends BaseCard {
 			}
 		});
 
-		buildHeader(view);
-	}
-
-	@Override
-	protected void applyDayNightMode() {
+		view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 		FrameLayout detailsButton = view.findViewById(R.id.details_button);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
@@ -122,6 +113,8 @@ public class SimpleRouteCard extends BaseCard {
 		AndroidUtils.setBackground(app, view.findViewById(R.id.RouteInfoControls), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
 
 		((TextView) view.findViewById(R.id.details_button_descr)).setTextColor(color);
+
+		buildHeader(view);
 	}
 
 	private void buildHeader(View headerView) {

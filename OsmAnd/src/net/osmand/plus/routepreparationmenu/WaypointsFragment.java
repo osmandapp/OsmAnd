@@ -428,9 +428,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			AndroidUtils.setBackground(app, clearButtonDescr, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 
-		AndroidUtils.setBackground(app, view.findViewById(R.id.dividerControlButtons), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(
 				ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.route_info_cancel_button_color_light));
 

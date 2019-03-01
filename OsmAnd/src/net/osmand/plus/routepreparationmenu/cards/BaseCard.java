@@ -46,7 +46,6 @@ public abstract class BaseCard {
 	public void update() {
 		if (view != null) {
 			updateContent();
-			applyDayNightMode();
 		}
 	}
 
@@ -82,8 +81,6 @@ public abstract class BaseCard {
 	public OsmandApplication getMyApplication() {
 		return app;
 	}
-
-	protected abstract void applyDayNightMode();
 
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
