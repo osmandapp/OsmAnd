@@ -1063,7 +1063,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		GeocodingLookupService.AddressLookupRequest addressLookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
 			@Override
 			public void geocodingDone(String address) {
-				if (!TextUtils.isEmpty(address) && !address.equals(currentAddress)) {
+				if (!TextUtils.isEmpty(address) && !address.equals(currentAddress)
+				   && locationTv != null && container != null) {
 					locationTv.setText(address);
 					container.setMinimumHeight(dpToPx(80));
 				}
