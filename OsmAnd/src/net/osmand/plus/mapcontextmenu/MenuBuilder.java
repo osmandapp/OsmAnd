@@ -168,14 +168,14 @@ public class MenuBuilder {
 		private boolean collapsed;
 		private CollapseExpandListener collapseExpandListener;
 
-		public CollapsableView(@NonNull View contenView, @NonNull MenuBuilder menuBuilder,
+		public CollapsableView(@NonNull View contenView, MenuBuilder menuBuilder,
 							   @NonNull OsmandPreference<Boolean> collapsedPref) {
 			this.contenView = contenView;
 			this.menuBuilder = menuBuilder;
 			this.collapsedPref = collapsedPref;
 		}
 
-		public CollapsableView(@NonNull View contenView, @NonNull MenuBuilder menuBuilder, boolean collapsed) {
+		public CollapsableView(@NonNull View contenView, MenuBuilder menuBuilder, boolean collapsed) {
 			this.contenView = contenView;
 			this.collapsed = collapsed;
 			this.menuBuilder = menuBuilder;
@@ -202,7 +202,7 @@ public class MenuBuilder {
 			if (collapseExpandListener != null) {
 				collapseExpandListener.onCollapseExpand(collapsed);
 			}
-			if (menuBuilder.collapseExpandListener != null) {
+			if (menuBuilder != null && menuBuilder.collapseExpandListener != null) {
 				menuBuilder.collapseExpandListener.onCollapseExpand(collapsed);
 			}
 		}
@@ -770,26 +770,8 @@ public class MenuBuilder {
 		}
 	}
 
-	private String adjustRouteRef(String ref) {
-		if (ref != null) {
-			int charPos = ref.lastIndexOf(':');
-			if (charPos != -1) {
-				ref = ref.substring(0, charPos);
-			}
-			if (ref.length() > 4) {
-				ref = ref.substring(0, 4);
-			}
-		}
-		return ref;
-	}
-
 	public int dpToPx(float dp) {
-		Resources r = app.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
+		return AndroidUtils.dpToPx(app, dp);
 	}
 
 	public Drawable getCollapseIcon(boolean collapsed) {
@@ -823,7 +805,7 @@ public class MenuBuilder {
 		transportRect.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
 
 		transportRect.setBackgroundDrawable(shape);
-		transportRect.setText(adjustRouteRef(route.route.getRef()));
+		transportRect.setText(route.route.getAdjustedRouteRef());
 		baseView.addView(transportRect);
 
 		LinearLayout infoView = new LinearLayout(view.getContext());

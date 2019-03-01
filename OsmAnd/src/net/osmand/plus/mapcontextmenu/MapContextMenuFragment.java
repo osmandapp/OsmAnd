@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -484,10 +485,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		zoomInButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_in_button);
 		zoomOutButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_out_button);
 		if (menu.zoomButtonsVisible()) {
-			updateImageButton(zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
-					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-			updateImageButton(zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
-					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+			Context ctx = getContext();
+			if (ctx != null) {
+				AndroidUtils.updateImageButton(ctx, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+				AndroidUtils.updateImageButton(ctx, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+			}
 			zoomInButtonView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

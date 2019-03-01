@@ -56,7 +56,7 @@ public class SimpleRouteCard extends BaseCard {
 		info.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
+				ShowRouteInfoDialogFragment.showInstance(mapActivity, -1);
 			}
 		});
 
@@ -64,42 +64,42 @@ public class SimpleRouteCard extends BaseCard {
 		ImageView durationIcon = (ImageView) view.findViewById(R.id.DurationIcon);
 		View infoDistanceView = view.findViewById(R.id.InfoDistance);
 		View infoDurationView = view.findViewById(R.id.InfoDuration);
-		if (directionInfo >= 0) {
-			infoIcon.setVisibility(View.GONE);
-			durationIcon.setVisibility(View.GONE);
-			infoDistanceView.setVisibility(View.GONE);
-			infoDurationView.setVisibility(View.GONE);
-		} else {
+//		if (directionInfo >= 0) {
+//			infoIcon.setVisibility(View.GONE);
+//			durationIcon.setVisibility(View.GONE);
+//			infoDistanceView.setVisibility(View.GONE);
+//			infoDurationView.setVisibility(View.GONE);
+//		} else {
 			infoIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_route_distance, R.color.route_info_unchecked_mode_icon_color));
 			infoIcon.setVisibility(View.VISIBLE);
 			durationIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_time_span, R.color.route_info_unchecked_mode_icon_color));
 			durationIcon.setVisibility(View.VISIBLE);
 			infoDistanceView.setVisibility(View.VISIBLE);
 			infoDurationView.setVisibility(View.VISIBLE);
-		}
-		if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
-				&& directionInfo < routingHelper.getRouteDirections().size()) {
-			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
-		} else {
+//		}
+//		if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
+//				&& directionInfo < routingHelper.getRouteDirections().size()) {
+//			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
+//		} else {
 			TextView distanceText = (TextView) view.findViewById(R.id.DistanceText);
 			TextView distanceTitle = (TextView) view.findViewById(R.id.DistanceTitle);
 			TextView durationText = (TextView) view.findViewById(R.id.DurationText);
 			TextView durationTitle = (TextView) view.findViewById(R.id.DurationTitle);
 
-			distanceText.setText(OsmAndFormatter.getFormattedDistance(app.getRoutingHelper().getLeftDistance(), app));
+			distanceText.setText(OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app));
 
-			durationText.setText(OsmAndFormatter.getFormattedDuration(app.getRoutingHelper().getLeftTime(), app));
-			durationTitle.setText(app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(app.getRoutingHelper().getLeftTime(), true)));
+			durationText.setText(OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app));
+			durationTitle.setText(app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(routingHelper.getLeftTime(), true)));
 
 			AndroidUtils.setTextPrimaryColor(app, distanceText, nightMode);
 			AndroidUtils.setTextSecondaryColor(app, distanceTitle, nightMode);
 			AndroidUtils.setTextPrimaryColor(app, durationText, nightMode);
 			AndroidUtils.setTextSecondaryColor(app, durationTitle, nightMode);
-		}
+//		}
 		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showDialog(mapActivity.getSupportFragmentManager());
+				ShowRouteInfoDialogFragment.showInstance(mapActivity, -1);
 			}
 		});
 

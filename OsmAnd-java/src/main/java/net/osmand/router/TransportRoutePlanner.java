@@ -301,6 +301,10 @@ public class TransportRoutePlanner {
 			return route.getForwardStops().get(end);
 		}
 
+		public List<TransportStop> getTravelStops() {
+			return route.getForwardStops().subList(start, end);
+		}
+
 		public List<Node> getNodes() {
 			List<Node> nodes = new ArrayList<>();
 			List<Way> ways = getGeometry();
