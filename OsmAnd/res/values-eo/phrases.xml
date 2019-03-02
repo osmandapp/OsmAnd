@@ -2343,7 +2343,7 @@
     <string name="poi_free_flying_site_towing">elteriĝejo (per vindaso)</string>
     <string name="poi_free_flying_site_training">trejnejo</string>
     <string name="poi_free_flying_official_no">oficiala ejo: ne</string>
-    <string name="poi_free_flying_official_yes">Oficiala ejo: jes</string>
+    <string name="poi_free_flying_official_yes">oficiala ejo: jes</string>
     <string name="poi_free_flying_paragliding_yes">glisparaŝutado</string>
     <string name="poi_free_flying_paragliding_no">Glisparaŝutado: ne</string>
     <string name="poi_free_flying_hanggliding_yes">deltaplanado</string>
@@ -2790,7 +2790,7 @@
     <string name="poi_city_capital">Ĉefurbo</string>
     <string name="poi_pharmacy_dispensing">Medikamentoj je preskribo</string>
     <string name="poi_healthcare_alternative_types">Kontraŭmedicino</string>
-    <string name="poi_free_flying_characteristics">Karakterizo de aersportoj</string>
+    <string name="poi_free_flying_characteristics">Karakterizo</string>
     <string name="poi_archaeological_site_type">Speco de arĥeologia ejo</string>
     <string name="poi_star_rating">Steloj</string>
     <string name="poi_religion_type">Religio</string>
@@ -2808,7 +2808,7 @@
     <string name="poi_outdoor_seating">Seĝoj ekstere</string>
     <string name="poi_fee">Pago</string>
     <string name="poi_delivery">Hejmliverado</string>
-    <string name="poi_drive_in">Sen-alaŭtiga servo (aŭtoparko)</string>
+    <string name="poi_drive_in">Sen-elaŭtiga servo (aŭtoparko)</string>
     <string name="poi_drive_through">Sen-elaŭtiga servo (trans-veturo)</string>
     <string name="poi_takeaway">Elportado</string>
     <string name="poi_cocktails">Kokteloj</string>
@@ -3045,7 +3045,7 @@
     <string name="poi_locomotive">Lokomotivo</string>
     <string name="poi_nutrition_supplements">Diet-suplementa vendejo</string>
     <string name="poi_photo_studio">Fotografa studio</string>
-    <string name="poi_free_flying_characteristic">Karakterizo</string>
+    <string name="poi_free_flying_characteristic">Karakterizo de aersportoj</string>
     <string name="poi_emergency_infrastructure">Homhelpa ekipaĵo</string>
     <string name="poi_cliff">Klifo</string>
     <string name="poi_animal_keeping">Stalo</string>
