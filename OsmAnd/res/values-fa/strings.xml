@@ -455,7 +455,7 @@
     <string name="add_as_last_destination_point">افزودن به‌عنوان آخرین مقصد میانی</string>
     <string name="add_as_first_destination_point">افزودن به‌عنوان اولین مقصد میانی</string>
     <string name="intermediate_point_too_far">مقصد میانی %1$s از نزدیک‌ترین جاده خیلی دور است.</string>
-    <string name="arrived_at_intermediate_point">به مقصد میانی خود رسیده‌اید</string>
+    <string name="arrived_at_intermediate_point">به مقصد میانی رسیدید</string>
     <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد میانی</string>
     <string name="add_waypoint_dialog_added">نقطهٔ بین‌راهی GPX، ‏«{0}»، افزوده شد</string>
     <string name="add_waypoint_dialog_title">افزودن نقطهٔ بین‌راهی به مسیر GPX ضبط‌شده</string>
@@ -499,7 +499,7 @@
     <string name="zxing_barcode_scanner_not_found">برنامهٔ اسکنر بارکد ZXing نصب نشده است. در گوگل‌پلی جست‌وجو می‌کنید؟</string>
     <string name="rendering_attr_roadColors_description">یکی از رنگ‌بندی‌های راه را انتخاب کنید:</string>
     <string name="rendering_attr_roadColors_name">رنگ‌بندی راه</string>
-    <string name="enable_plugin_monitoring_services">افزونهٔ «ضبط سفر» را فعال کنید تا بتوانید از سرویس‌های ثبت مکان استفاده کنید (ضبط GPX، ردگیری آنلاین)</string>
+    <string name="enable_plugin_monitoring_services">افزونهٔ «ضبط سفر» را فعال کنید تا بتوانید از سرویس‌های ثبت مکان استفاده کنید (ضبط GPX، ردیابی آنلاین)</string>
     <string name="non_optimal_route_calculation">برای مسافت‌های طولانی شاید بهینه‌ترین مسیر محاسبه نشود</string>
     <string name="gps_not_available">لطفاً GPS را از طریق تنظیمات فعال کنید</string>
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
@@ -2849,14 +2849,14 @@
     <string name="coord_input_save_as_track_descr">%1$s نقطه افزودید. نام فایل را بنویسید و روی «ذخیره» بزنید.</string>
     <string name="point_deleted">نقطهٔ %1$s پاک شد</string>
     <string name="shared_string_world">جهان</string>
-    <string name="send_search_query_description">عبارت جست‌وجوی شما: <b>«%1$s»</b> و همچنین مکانتان را ارسال خواهیم کرد.<br/>
-        <br/> ما اطلاعات خصوصی را جمع‌آوری نمی‌کنیم و داده‌های جست‌وجو را هم فقط به این خاطر نیاز داریم که الگوریتم جست‌وجو را بهتر سازیم.<br/>
+    <string name="send_search_query_description">عبارت جست‌وجوی شما: <b>«%1$s»</b> و همچنین مکان شما را ارسال خواهیم کرد.<br/>
+        <br/> اطلاعات خصوصی جمع‌آوری نمی‌شود، داده‌های جست‌وجو فقط برای بهبود الگوریتم جست‌وجو استفاده می‌شود.<br/>
     </string>
     <string name="search_no_results_description">چیزی پیدا نشد؟
 \nدر این باره با ما صحبت کنید.</string>
     <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>
     <string name="increase_search_radius_to">افزایش شعاع جست‌وجو به %1$s</string>
-    <string name="thank_you_for_feedback">ممنون که نظر دادید</string>
+    <string name="thank_you_for_feedback">ممنون که بازخورد دادید</string>
     <string name="poi_cannot_be_found">گره یا راه پیدا نمی‌شود.</string>
     <string name="search_no_results_feedback">چیزی پیدا نشد؟
 \nنظرتان را به ما بگویید</string>
@@ -2876,20 +2876,20 @@
 \n
 \n"</string>
     <string name="test_voice_desrc">روی یکی از دکمه‌ها بزنید و فرمان گفتاری متناظر با آن را بشنوید تا فرمان‌های مشکل‌دار یا ناموجود را شناسایی کنید.</string>
-    <string name="release_3_2_pre">• حل مشکل از کار افتادن در شروع برنامه که روی برخی دستگاه‌ها رخ داده بود
-\n
-\n• قابلیت جدید برای نشانه‌ها: نمایش نشانه‌هایی که از آن‌ها گذشته‌اید
-\n
-\n• تاریخچهٔ جست‌وجو دسته‌هایی که قبلاً جُسته‌اید را نیز نشان می‌دهد
-\n
-\n• حل مشکل از کار افتادن در شروع برنامه که با نقشه‌های غیرلاتین پیش آمده بود
+    <string name="release_3_2_pre">• حل مشکل از کار افتادن در شروع برنامه که روی برخی دستگاه‌ها رخ داده بود 
 \n 
-\n • بهبودهایی برای مشکل سرعت پرداخت نقشه (map render) روی اندروید ۸٫۰
+\n• قابلیت جدید برای نشانه‌ها: نمایش نشانه‌هایی که از آن‌ها گذشته‌اید 
+\n 
+\n• تاریخچهٔ جست‌وجو دسته‌هایی را که قبلاً جُسته‌اید نشان می‌دهد 
+\n 
+\n• حل مشکل از کار افتادن در شروع برنامه که با نقشه‌های غیرلاتین پیش آمده بود 
+\n 
+\n • بهبودهایی برای مشکل سرعت پرداخت نقشه (map render) روی اندروید ۸٫۰ 
 \n 
 \n • پشتیبانی از ویرایش اشیای چندضلعی (non-amenity) 
 \n 
-\n• اندازه‌گیری مسافت: اضافه‌شدن دکمهٔ اندازه‌گیری به عملیات‌ها در منوی زمینه 
-\n
+\n• اندازه‌گیری مسافت: اضافه‌شدن دکمهٔ «اندازه‌گیری» به عملیات‌ها در منوی زمینه 
+\n 
 \n</string>
     <string name="commiting_way">در حال ثبت راه…</string>
     <string name="ask_for_location_permission">برای ادامه، لطفاً به OsmAnd اجازهٔ دسترسی به موقعیت مکانی را بدهید.</string>
@@ -2903,22 +2903,22 @@
     <string name="edit_map_marker">ویرایش نشانه</string>
     <string name="third_party_application">برنامهٔ شخص ثالث</string>
     <string name="osm_live_plan_pricing">طرح و قیمت</string>
-    <string name="osm_live_payment_monthly_title">پرداخت ماهانه</string>
-    <string name="osm_live_payment_3_months_title">پرداخت سه‌ماهه</string>
-    <string name="osm_live_payment_annual_title">پرداخت سالانه</string>
+    <string name="osm_live_payment_monthly_title">ماهانه</string>
+    <string name="osm_live_payment_3_months_title">سه‌ماهه</string>
+    <string name="osm_live_payment_annual_title">سالانه</string>
     <string name="osm_live_payment_month_cost_descr">%1$s در ماه</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s در ماه</string>
-    <string name="osm_live_payment_discount_descr">%1$s ارزان‌تر!</string>
-    <string name="osm_live_payment_current_subscription">اشتراک کنونی شما</string>
+    <string name="osm_live_payment_discount_descr">%1$s ارزان‌تر.</string>
+    <string name="osm_live_payment_current_subscription">اشتراک کنونی</string>
     <string name="osm_live_payment_renews_monthly">هر ماه تمدید می‌شود</string>
     <string name="osm_live_payment_renews_quarterly">هر سه ماه تمدید می‌شود</string>
     <string name="osm_live_payment_renews_annually">هر سال تمدید می‌شود</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">دورهٔ پرداخت مناسب خود را برگزینید:</string>
-    <string name="osm_live_payment_contribute_descr">بخشی از درآمد به مشارکت‌کنندگان نقشهٔ شهری باز اهدا می‌شود.</string>
+    <string name="osm_live_payment_contribute_descr">بخشی از درآمد به مشارکت‌کنندگان اوپن‌استریت‌مپ اهدا می‌شود.</string>
     <string name="more_transport_on_stop_hint">در این ایستگاه حمل‌ونقل بیشتری وجود دارد.</string>
     <string name="osm_live_subscriptions">اشتراک‌ها</string>
-    <string name="powered_by_osmand">گروه OsmAnd</string>
+    <string name="powered_by_osmand">از OsmAnd</string>
     <string name="mapillary_menu_title_pano">فقط نمایش عکس‌های ۳۶۰ درجه</string>
     <string name="shared_string_launch">راه‌اندازی</string>
     <string name="lang_gn_py">گوارانی</string>
@@ -2937,9 +2937,9 @@
     <string name="on_foot">روی پا</string>
     <string name="route_way">راه</string>
     <string name="points_of_interests">نقاط پرکاربرد (POI)</string>
-    <string name="waiting_for_route_calculation">در انتظار محاسبهٔ مسیر</string>
+    <string name="waiting_for_route_calculation">محاسبهٔ مسیر…</string>
     <string name="app_mode_public_transport">حمل‌ونقل عمومی</string>
-    <string name="avoid_roads_descr">جاده‌ای که می‌خواهید از آن پرهیز کنید را روی نقشه یا از لیست زیر انتخاب کنید:</string>
+    <string name="avoid_roads_descr">جاده‌ای که می‌خواهید از آن بپرهیزید را انتخاب کنید؛ روی نقشه یا از لیست زیر:</string>
     <string name="show_along_the_route">در امتداد مسیر نشان بده</string>
     <string name="simulate_navigation">شبیه‌سازی ناوبری</string>
     <string name="choose_track_file_to_follow">فایل رد را برای دنبال‌کردن انتخاب کنید</string>
@@ -2963,4 +2963,14 @@
     <string name="show_more">بیشتر نشان بده</string>
     <string name="tracks_on_map">ردها روی نقشه</string>
     <string name="shared_string_swap">تعویض</string>
+    <string name="time_of_day">ساعت</string>
+    <string name="by_transport_type">با %1$s</string>
+    <string name="step_by_step">گام‌به‌گام</string>
+    <string name="road_types">انواع جاده</string>
+    <string name="exit_at">خارج شوید در</string>
+    <string name="sit_on_the_stop">در ایستگاه بنشینید</string>
+    <string name="quick_action_show_hide_gpx_tracks">نمایان/پنهان کردن ردهای GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">با لمس این دکمهٔ عملیاتی، ردهای GPX انتخابی را روی نقشه آشکار یا پنهان کنید</string>
+    <string name="quick_action_gpx_tracks_hide">پنهان‌کردن ردهای GPX</string>
+    <string name="quick_action_gpx_tracks_show">آشکارکردن ردهای GPX</string>
 </resources>
