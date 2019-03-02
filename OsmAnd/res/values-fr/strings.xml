@@ -2713,7 +2713,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_travel_book">Sélectionnez un carnet de voyage</string>
     <string name="shared_string_travel_book">Carnet de voyage</string>
     <string name="download_images">Télécharger les images</string>
-    <string name="purchase_dialog_title">Sélectionnez un plan</string>
+    <string name="purchase_dialog_title">Sélectionnez un abonnement</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
     <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, achetez l\'un des éléments suivants :</string>
     <string name="wikivoyage_travel_guide_descr">Guides des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
@@ -2846,12 +2846,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_live_payment_discount_descr">Économisez %1$s.</string>
     <string name="osm_live_payment_current_subscription">Abonnement en cours</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Sélectionnez la fréquence de règlement qui vous convient :</string>
+    <string name="osm_live_payment_header">Sélectionnez la période d\'abonnement qui vous convient :</string>
     <string name="osm_live_payment_contribute_descr">Une partie des revenus est reversée aux contributeurs OpenStreetMap.</string>
-    <string name="osm_live_plan_pricing">Plans et Tarifs</string>
-    <string name="osm_live_payment_renews_monthly">Abonnements mensuels</string>
-    <string name="osm_live_payment_renews_quarterly">Abonnements trimestriels</string>
-    <string name="osm_live_payment_renews_annually">Abonnements annuels</string>
+    <string name="osm_live_plan_pricing">Abonnements &amp; tarifs</string>
+    <string name="osm_live_payment_renews_monthly">Tous les mois</string>
+    <string name="osm_live_payment_renews_quarterly">Tous les trimestres</string>
+    <string name="osm_live_payment_renews_annually">Tous les ans</string>
     <string name="powered_by_osmand">Par OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">N\'afficher que les images à 360°</string>
