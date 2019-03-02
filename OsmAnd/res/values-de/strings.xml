@@ -2902,8 +2902,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="transfers">Umstiege</string>
     <string name="on_foot">Zu Fuß</string>
     <string name="route_way">Weg</string>
-    <string name="points_of_interests">Orte von Interesse(OVI)</string>
-    <string name="waiting_for_route_calculation">Warten auf Routenberechung</string>
+    <string name="points_of_interests">Orte von Interesse (POI)</string>
+    <string name="waiting_for_route_calculation">Route wird berechnet…</string>
     <string name="app_mode_public_transport">Öffentlicher Verkehr</string>
     <string name="avoid_roads_descr">Wähle die Straße aus die während der Navigation vermieden werden soll, von der Karte oder von der Liste unten:</string>
     <string name="show_along_the_route">Entlang der Route anzeigen</string>
@@ -2929,4 +2929,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_swap">Tauschen</string>
     <string name="show_more">Mehr anzeigen</string>
     <string name="tracks_on_map">Tracks auf der Karte</string>
+    <string name="time_of_day">Tageszeit</string>
+    <string name="by_transport_type">Von %1$s</string>
+    <string name="step_by_step">Schritt für Schritt</string>
+    <string name="road_types">Straßentypen</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX Tracks ein-/ausblenden</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Durch Antippen dieser Aktionsschaltfläche werden ausgewählte GPX-Tracks auf der Karte ein- oder ausgeblendet</string>
+    <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
+    <string name="quick_action_gpx_tracks_show">GPX Tracks einblenden</string>
 </resources>
