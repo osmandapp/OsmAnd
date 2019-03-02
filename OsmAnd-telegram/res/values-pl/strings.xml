@@ -184,7 +184,7 @@
     <string name="time_on_the_move">czas w ruchu</string>
     <string name="average_altitude">Średnia wysokość</string>
     <string name="average_speed">Średnia prędkość</string>
-    <string name="open_in_osmand">Otwarte w OsmAnd</string>
+    <string name="open_in_osmand">Pokaż w OsmAnd</string>
     <string name="end_date">Data końcowa</string>
     <string name="start_date">Data rozpoczęcia</string>
     <string name="timeline">Linia czasu</string>
