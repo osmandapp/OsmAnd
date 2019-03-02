@@ -713,7 +713,7 @@ Lon %2$s</string>
     <string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
     <string name="rendering_attr_roadColors_name">Esquema de color del camino</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">Activa el complemento de rastreo para usar el servicio de registro de ubicación (grabación GPX, rastreo en línea)</string>
+    <string name="enable_plugin_monitoring_services">Activa el complemento «Grabación de viaje» para usar los servicios de registro de ubicación (grabación GPX, rastreo en línea)</string>
     <string name="non_optimal_route_calculation">Calcular ruta posiblemente no óptima en largas distancias</string>
     <string name="gps_not_available">Activa el GPS en ajustes</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>
@@ -729,7 +729,7 @@ Lon %2$s</string>
     <string name="new_destination_point_dialog">Ya se estableció el destino:</string>
     <string name="shared_string_target_points">Destinos</string>
     <string name="intermediate_point_too_far">Destino intermedio «%1$s» demasiado lejos del camino.</string>
-    <string name="arrived_at_intermediate_point">Has llegado al destino intermedio</string>
+    <string name="arrived_at_intermediate_point">Destino intermedio alcanzado</string>
     <string name="context_menu_item_intermediate_point">Añadir como destino intermedio</string>
     <string name="map_widget_intermediate_distance">Destino intermedio</string>
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
@@ -2126,8 +2126,8 @@ Lon %2$s</string>
     <string name="quick_action_take_photo_note">Nueva nota fotográfica</string>
     <string name="quick_action_add_osm_bug">Añadir nota de OSM</string>
     <string name="quick_action_navigation_voice">Alternar activación de voz</string>
-    <string name="quick_action_navigation_voice_off">Voz desactivada</string>
-    <string name="quick_action_navigation_voice_on">Voz activada</string>
+    <string name="quick_action_navigation_voice_off">Activar voz</string>
+    <string name="quick_action_navigation_voice_on">Desactivar voz</string>
     <string name="quick_action_add_gpx">Añadir punto GPX</string>
     <string name="quick_action_add_parking">Añadir lugar de estacionamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
@@ -2813,47 +2813,47 @@ Lon %2$s</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
     <string name="send_search_query_description">Enviaremos la consulta de búsqueda: <b>«%1$s»</b>, así como la ubicación.<br/>
-        <br/> No recopilamos información personal, sólo necesitamos datos de búsqueda para mejorar el algoritmo de búsqueda.<br/>
+        <br/> No se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.<br/>
     </string>
     <string name="search_no_results_description">¿Sin resultados?
 \nCuéntanos sobre esto.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     <string name="release_3_1">• Navegación: Corrección en la barra de progreso, intercambio rápido del punto inicial y final de la ruta 
 \n 
-\n • Marcadores del mapa: corregido el des/activar grupos, capacidad para ocultar marcadores del mapa 
+\n • Marcadores del mapa: Corregido el des/activar grupos, capacidad para ocultar marcadores del mapa 
 \n 
 \n • Edición de OSM: Capacidad de edición de etiquetas para objetos que no sean puntos y de vías, corrección de los comentarios vacíos en las notas, copia de seguridad de ediciones 
 \n 
 \n • Mejor análisis de Wikipedia y Wikiviajes, los archivos actualizados ya están disponibles 
 \n 
-\n • Menú contextual: corregido el color de los escudos de transporte en el modo nocturno y los tamaños de menú adicionales 
-\n
-\n • Navegación fluvial: soporte a la navegación fluvial 
+\n • Menú contextual: Corregido el color de los escudos de transporte en el modo nocturno y los tamaños de menú adicionales 
+\n 
+\n • Navegación fluvial: Soporte a la navegación fluvial 
 \n 
 \n • Otras correcciones de errores 
 \n</string>
     <string name="increase_search_radius_to">Aumentar el radio de búsqueda a %1$s</string>
     <string name="commiting_way">Enviando vía…</string>
-    <string name="thank_you_for_feedback">Gracias por su comentario</string>
+    <string name="thank_you_for_feedback">Gracias por sus comentarios</string>
     <string name="poi_cannot_be_found">No se puede encontrar el nodo o la vía.</string>
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDanos tu opinión</string>
     <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar avisos faltantes o defectuosos.</string>
-    <string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía en algunos dispositivos
-\n
-\n • Nueva función de marcadores: muestra los marcadores que ya han sido atravesados.
-\n
+    <string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía en algunos dispositivos 
+\n 
+\n • Nueva función de marcadores: Mostrar los marcadores ya atravesados. 
+\n 
 \n • El historial de búsqueda muestra ahora las categorías buscadas anteriormente 
-\n
+\n 
 \n • Corregido el fallo en el inicio que se producía con los mapas no latinos 
 \n 
 \n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0 
 \n 
 \n • Soporte para la edición de objetos poligonales (no servicios) 
 \n 
-\n • Medir distancia: puedes añadir el botón de «Medir distancia» a las acciones en el menú contextual 
+\n • Medir distancia: Añadir el botón de «Medir distancia» a las acciones en el menú contextual 
 \n</string>
-    <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
+    <string name="ask_for_location_permission">Para continuar, permite a OsmAnd acceder a la ubicación.</string>
     <string name="rendering_value_black_name">Negro</string>
     <string name="more_transport_on_stop_hint">Hay más transportes en esta parada.</string>
     <string name="search_street">Buscar la calle</string>
@@ -2865,12 +2865,12 @@ Lon %2$s</string>
     <string name="edit_map_marker">Editar marcador del mapa</string>
     <string name="third_party_application">Aplicación de terceros</string>
     <string name="osm_live_plan_pricing">Plan y Precios</string>
-    <string name="osm_live_payment_monthly_title">Pago mensual</string>
-    <string name="osm_live_payment_3_months_title">Pago trimestral</string>
-    <string name="osm_live_payment_annual_title">Pago anual</string>
+    <string name="osm_live_payment_monthly_title">Mensual</string>
+    <string name="osm_live_payment_3_months_title">Trimestral</string>
+    <string name="osm_live_payment_annual_title">Anual</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
-    <string name="osm_live_payment_discount_descr">¡Ahorra %1$s!</string>
+    <string name="osm_live_payment_discount_descr">Ahorra %1$s.</string>
     <string name="osm_live_payment_current_subscription">Suscripción actual</string>
     <string name="osm_live_payment_renews_monthly">Renovar mensualmente</string>
     <string name="osm_live_payment_renews_quarterly">Renovar trimestralmente</string>
@@ -2878,7 +2878,7 @@ Lon %2$s</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Elige la frecuencia de pago:</string>
     <string name="osm_live_payment_contribute_descr">Parte de los ingresos se destina a los colaboradores de OpenStreetMap.</string>
-    <string name="powered_by_osmand">Desarrollado por OsmAnd</string>
+    <string name="powered_by_osmand">Por OsmAnd</string>
     <string name="osm_live_subscriptions">Suscripciones</string>
     <string name="mapillary_menu_title_pano">Sólo mostrar imágenes en 360°</string>
     <string name="shared_string_launch">Ejecutar</string>
@@ -2898,9 +2898,9 @@ Lon %2$s</string>
     <string name="on_foot">a pie</string>
     <string name="route_way">Ruta</string>
     <string name="points_of_interests">Puntos de interés (PDI)</string>
-    <string name="waiting_for_route_calculation">Esperando el cálculo de la ruta</string>
+    <string name="waiting_for_route_calculation">Calculando la ruta…</string>
     <string name="app_mode_public_transport">Transporte público</string>
-    <string name="avoid_roads_descr">Marca el camino a evitar durante la navegación, desde el mapa o de la siguiente lista:</string>
+    <string name="avoid_roads_descr">Marca un camino a evitar durante la navegación, desde el mapa o de la siguiente lista:</string>
     <string name="show_along_the_route">Mostrar a lo largo de la ruta</string>
     <string name="simulate_navigation">Simular navegación</string>
     <string name="choose_track_file_to_follow">Elige el archivo de la traza a seguir</string>
@@ -2921,7 +2921,17 @@ Lon %2$s</string>
     <string name="work_button">Trabajo</string>
     <string name="previous_route">Ruta anterior</string>
     <string name="add_destination_query">Primero añada el destino</string>
-    <string name="shared_string_swap">Intercambio</string>
+    <string name="shared_string_swap">Intercambiar</string>
     <string name="show_more">Mostrar más</string>
     <string name="tracks_on_map">Trazas en el mapa</string>
+    <string name="time_of_day">Hora del día</string>
+    <string name="by_transport_type">Por %1$s</string>
+    <string name="step_by_step">Paso a paso</string>
+    <string name="road_types">Tipos de caminos</string>
+    <string name="exit_at">Salida en</string>
+    <string name="sit_on_the_stop">Sentarse en la parada</string>
+    <string name="quick_action_show_hide_gpx_tracks">Alternar vista de trazas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Este botón de acción, muestra u oculta las trazas GPX elegidas en el mapa</string>
+    <string name="quick_action_gpx_tracks_hide">Ocultar trazas GPX</string>
+    <string name="quick_action_gpx_tracks_show">Mostrar trazas GPX</string>
 </resources>
