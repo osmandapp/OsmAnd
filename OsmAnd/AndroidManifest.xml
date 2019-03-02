@@ -744,20 +744,6 @@
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 
 		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
-		
-		<receiver
-			android:name="net.osmand.plus.DeviceAdminRecv"
-			android:label="@string/app_name"
-			android:permission="android.permission.BIND_DEVICE_ADMIN" >
-			<meta-data
-				android:name="android.app.device_admin"
-				android:resource="@xml/device_admin" />
-
-			<intent-filter>
-				<action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
-				<action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
-			</intent-filter>
-		</receiver>
         <activity android:name=".liveupdates.OsmLiveActivity"
             android:label="@string/osm_live"/>
 		<activity android:name=".wikivoyage.explore.WikivoyageExploreActivity">
