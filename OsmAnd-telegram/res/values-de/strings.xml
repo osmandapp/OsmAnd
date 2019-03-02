@@ -212,4 +212,5 @@
     <string name="show_gps_points_descr">Anzahl gesammelter und gesendeter GPS-Punkte anzeigen.</string>
     <string name="privacy_policy_agree">Wenn Sie fortfahren, willigen Sie in die Bedingungen der Datenschutzerklärungen von Telegram und OsmAnd ein.</string>
     <string name="privacy_policy_telegram_client">Osmand Tracker ist eine der Apps die Telegrams offene Plattform nutzt. Ihre Kontake können beliebige andere Telegram-Apps nutzen.</string>
+    <string name="timeline_available_for_free_now">Die Timeline ist eine Funktion, die jetzt kostenlos zur Verfügung steht.</string>
 </resources>
