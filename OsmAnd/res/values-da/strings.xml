@@ -2927,4 +2927,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_home">Tilføj hjem</string>
     <string name="add_work">Tilføj arbejdsplads</string>
     <string name="work_button">Arbejde</string>
+    <string name="time_of_day">Tidspunkt på dagen</string>
+    <string name="by_transport_type">Med %1$s</string>
+    <string name="step_by_step">Trin for trin</string>
+    <string name="road_types">Vejtyper</string>
+    <string name="exit_at">Frakørsel</string>
+    <string name="sit_on_the_stop">Sid ved stoppet</string>
+    <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX spor</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tryk på handlingsknappen viser eller skjuler markerede GPX spor på kortet</string>
+    <string name="quick_action_gpx_tracks_hide">Skjul GPX spor</string>
+    <string name="quick_action_gpx_tracks_show">Vis GPX spor</string>
+    <string name="add_destination_query">Tilføj en destination først</string>
 </resources>

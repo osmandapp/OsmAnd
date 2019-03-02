@@ -2485,7 +2485,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="make_round_trip">Zamknięta trasa</string>
     <string name="fast_coordinates_input">Szybkie wprowadzanie współrzędnych</string>
     <string name="add_location_as_first_point_descr">Dodaj swoje położenie jako punkt początkowy, aby zaplanować idealną trasę.</string>
-    <string name="rendering_value_darkyellow_name">Ciemno żółty</string>
+    <string name="rendering_value_darkyellow_name">Ciemnożółty</string>
     <string name="wrong_input">Nieprawidłowe dane</string>
     <string name="enter_new_name">Wprowadź nową nazwę</string>
     <string name="shared_string_back">Wróć</string>
@@ -2922,4 +2922,15 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_home">Dodaj dom</string>
     <string name="add_work">Dodaj pracę</string>
     <string name="work_button">Praca</string>
+    <string name="time_of_day">Pora dnia</string>
+    <string name="by_transport_type">Używając %1$s</string>
+    <string name="step_by_step">Krok po kroku</string>
+    <string name="road_types">Typy dróg</string>
+    <string name="exit_at">Opuść na</string>
+    <string name="sit_on_the_stop">Usiądź na przystanku</string>
+    <string name="shared_string_swap">Wymień</string>
+    <string name="show_more">Pokaż więcej</string>
+    <string name="tracks_on_map">Ślady na mapie</string>
+    <string name="quick_action_show_hide_gpx_tracks">Pokaż/Ukryj Ślady GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Naciśnięcie przycisku pokaże lub ukryje wybrane ślady GPX na mapie</string>
 </resources>

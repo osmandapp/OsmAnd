@@ -838,7 +838,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="target_point">Étape %1$s</string>
     <string name="shared_string_target_points">Itinéraire</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>
-    <string name="arrived_at_intermediate_point">Vous êtes arrivés à l\'étape intermédiaire</string>
+    <string name="arrived_at_intermediate_point">Étape intermédiaire atteinte</string>
     <string name="context_menu_item_intermediate_point">Ajouter comme étape</string>
     <string name="map_widget_intermediate_distance">Étape</string>
     <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
@@ -857,7 +857,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="intermediate_point">Étape %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
     <string name="map_widget_show_destination_arrow">Direction de la destination</string>
-    <string name="enable_plugin_monitoring_services">Activez le greffon d\'enregistrement d\'itinéraire pour utiliser les services d\'enregistrement de position (journalisation GPX, suivi en ligne)</string>
+    <string name="enable_plugin_monitoring_services">Activez le greffon d\'enregistrement d\'itinéraire pour mémoriser votre position (enregistrement d\'une trace GPX, suivi en ligne)</string>
     <string name="non_optimal_route_calculation">Calcule un itinéraire éventuellement non optimal pour les trajets longues distances</string>
     <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
     <string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
@@ -866,7 +866,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="background_service_is_enabled_question">Le service OsmAnd s\'exécute toujours en tâche de fond. Souhaitez-vous également l\'arrêter ?</string>
     <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif).</string>
     <string name="safe_mode">Mode sûr</string>
-    <string name="native_library_not_running">L\'application s\'exécute en mode sûr (pour désactiver, allez dans Paramètres).</string>
+    <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactivez ce mode dans Paramètres).</string>
     <string name="rendering_attr_showRoadMaps_description">Sélectionnez quand afficher les cartes routières :</string>
     <string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">Routes uniquement</string>
@@ -1790,7 +1790,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="access_from_map">Accès depuis la carte</string>
     <string name="please_specify_poi_type_only_from_list">Indiquez un type pour ce point d\'intérêt ou ignorez.</string>
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
-    <string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
+    <string name="routing_attr_avoid_borders_name">Éviter de franchir des frontières</string>
     <string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
     <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
     <string name="shared_string_near">Proche</string>
@@ -2713,7 +2713,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_travel_book">Sélectionnez un carnet de voyage</string>
     <string name="shared_string_travel_book">Carnet de voyage</string>
     <string name="download_images">Télécharger les images</string>
-    <string name="purchase_dialog_title">Sélectionnez un plan</string>
+    <string name="purchase_dialog_title">Sélectionnez un abonnement</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
     <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, achetez l\'un des éléments suivants :</string>
     <string name="wikivoyage_travel_guide_descr">Guides des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
@@ -2827,7 +2827,7 @@ représentant la zone : %1$s x %2$s</string>
 \n 
 \n• Mesure de distance : ajout de Mesurer dans le menu contextuel des actions</string>
     <string name="commiting_way">Envoi de la direction…</string>
-    <string name="ask_for_location_permission">Afin de continuer, veuillez accorder à OsmAnd l\'autorisation d’utiliser votre position.</string>
+    <string name="ask_for_location_permission">Avant de poursuivre, veuillez accorder à OsmAnd l\'autorisation d’utiliser votre position.</string>
     <string name="rendering_value_black_name">Noir</string>
     <string name="more_transport_on_stop_hint">Il y a d\'autres moyens de transport à cet arrêt.</string>
     <string name="search_street">Rechercher une rue</string>
@@ -2838,21 +2838,21 @@ représentant la zone : %1$s x %2$s</string>
     <string name="markers_remove_dialog_msg">Supprimer la marque \'%s\' \?</string>
     <string name="edit_map_marker">Modifier la marque</string>
     <string name="third_party_application">Application tierce</string>
-    <string name="osm_live_payment_monthly_title">Payer tous les mois</string>
-    <string name="osm_live_payment_3_months_title">Payer tous les 3 mois</string>
-    <string name="osm_live_payment_annual_title">Payer tous les ans</string>
+    <string name="osm_live_payment_monthly_title">Mensuel</string>
+    <string name="osm_live_payment_3_months_title">Trimestriel</string>
+    <string name="osm_live_payment_annual_title">Annuel</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mois</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mois</string>
-    <string name="osm_live_payment_discount_descr">Économisez %1$s !</string>
-    <string name="osm_live_payment_current_subscription">Votre abonnement actuel</string>
+    <string name="osm_live_payment_discount_descr">Économisez %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Abonnement en cours</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Sélectionnez la fréquence de règlement qui vous convient :</string>
+    <string name="osm_live_payment_header">Sélectionnez la période d\'abonnement qui vous convient :</string>
     <string name="osm_live_payment_contribute_descr">Une partie des revenus est reversée aux contributeurs OpenStreetMap.</string>
-    <string name="osm_live_plan_pricing">Plans et Tarifs</string>
-    <string name="osm_live_payment_renews_monthly">Abonnements mensuels</string>
-    <string name="osm_live_payment_renews_quarterly">Abonnements trimestriels</string>
-    <string name="osm_live_payment_renews_annually">Abonnements annuels</string>
-    <string name="powered_by_osmand">Propulsé par OsmAnd</string>
+    <string name="osm_live_plan_pricing">Abonnements &amp; tarifs</string>
+    <string name="osm_live_payment_renews_monthly">Tous les mois</string>
+    <string name="osm_live_payment_renews_quarterly">Tous les trimestres</string>
+    <string name="osm_live_payment_renews_annually">Tous les ans</string>
+    <string name="powered_by_osmand">Par OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">N\'afficher que les images à 360°</string>
     <string name="shared_string_launch">Ouvrir</string>
@@ -2872,9 +2872,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="on_foot">à pied</string>
     <string name="route_way">Mode</string>
     <string name="points_of_interests">Points d\'intérêt (PI)</string>
-    <string name="waiting_for_route_calculation">Calcul de l\'itinéraire en cours</string>
+    <string name="waiting_for_route_calculation">Calcul de l\'itinéraire en cours…</string>
     <string name="app_mode_public_transport">Transports publics</string>
-    <string name="avoid_roads_descr">Sélectionnez la route, sur la carte ou parmi la liste ci-dessous, que vous souhaitez éviter pendant la navigation :</string>
+    <string name="avoid_roads_descr">Sélectionnez la route que vous souhaitez éviter soit sur la carte soit dans la liste ci-dessous :</string>
     <string name="show_along_the_route">Afficher sur l\'itinéraire</string>
     <string name="simulate_navigation">Simuler la navigation</string>
     <string name="choose_track_file_to_follow">Sélectionner un fichier de trace à suivre</string>
@@ -2898,4 +2898,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_swap">Permuter</string>
     <string name="show_more">Afficher plus</string>
     <string name="tracks_on_map">Traces sur la carte</string>
+    <string name="time_of_day">Heure de la journée</string>
+    <string name="by_transport_type">Par %1$s</string>
+    <string name="step_by_step">Pas à pas</string>
+    <string name="road_types">Types de route</string>
+    <string name="exit_at">Sortir à</string>
+    <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces GPX</string>
+    <string name="quick_action_gpx_tracks_hide">Masquer les traces GPX</string>
+    <string name="quick_action_gpx_tracks_show">Afficher les traces GPX</string>
 </resources>

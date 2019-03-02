@@ -3,7 +3,7 @@
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
-    <string name="enable_plugin_monitoring_services">啟用旅程錄製外掛元件，以使用位置日誌服務(GPX 記錄，線上追蹤)</string>
+    <string name="enable_plugin_monitoring_services">啟用「旅程錄製」外掛元件，以使用位置日誌服務（GPX 記錄，線上追蹤）</string>
     <string name="non_optimal_route_calculation">預估過遠的距離，可能不是最佳的路線</string>
     <string name="gps_not_available">請在設定中啟用 GPS</string>
     <string name="map_widget_monitoring_services">日誌記錄服務</string>
@@ -19,7 +19,7 @@
     <string name="new_destination_point_dialog">您已經設定了一個目的地：</string>
     <string name="shared_string_target_points">目的地</string>
     <string name="intermediate_point_too_far">中轉地點 %1$s 離最近的道路太遠。</string>
-    <string name="arrived_at_intermediate_point">您已經抵達您的中轉地點</string>
+    <string name="arrived_at_intermediate_point">已經抵達中轉地點</string>
     <string name="context_menu_item_intermediate_point">新增為中轉地點</string>
     <string name="map_widget_intermediate_distance">中轉地點</string>
     <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
@@ -957,7 +957,7 @@
     <string name="rendering_attr_showRoadMaps_name">僅有道路的地圖</string>
     <string name="safe_mode_description">在安全模式下執行應用程式(使用較慢的 Android 而非原生碼)。</string>
     <string name="safe_mode">安全模式</string>
-    <string name="native_library_not_running">應用程式是在安全模式中執行(在「設定」裡停用)。</string>
+    <string name="native_library_not_running">應用程式是在安全模式中執行（在「設定」裡關閉）。</string>
     <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行。也要中止它嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
@@ -2799,7 +2799,7 @@
     <string name="point_deleted">已刪除標點 %1$s</string>
     <string name="shared_string_world">世界</string>
     <string name="send_search_query_description">我們將送出您的搜尋查詢：<b>\"%1$s\"</b>，以及您的位置。<br/>
-        <br/>我們不會收集個人的資訊，我們只需要搜尋資料以改進搜尋演算法。<br/>
+        <br/>不會蒐集個人自訊，搜尋資料僅會用於改善搜尋演算法。<br/>
     </string>
     <string name="search_no_results_description">沒有結果？
 \n告訴我們這件事。</string>
@@ -2820,26 +2820,26 @@
 \n</string>
     <string name="increase_search_radius_to">將搜尋半徑增加到 %1$s</string>
     <string name="commiting_way">正在提交路線…</string>
-    <string name="thank_you_for_feedback">感謝您的意見反映</string>
+    <string name="thank_you_for_feedback">感謝您的意見回饋</string>
     <string name="poi_cannot_be_found">找不到節點或路線。</string>
     <string name="search_no_results_feedback">沒有搜尋結果？
 \n向我們反映</string>
     <string name="test_voice_desrc">輕點按鈕並聽取相應的語音提示，以確認遺漏或錯誤的提示。</string>
-    <string name="release_3_2_pre">• 修正了在某些裝置上發生的啟動故障
-\n
-\n• 新標記功能：顯示已經過的標記
-\n
-\n• 搜尋歷史記錄現在顯示您之前搜尋過的類別
-\n
+    <string name="release_3_2_pre">• 修正了在某些裝置上發生的啟動故障 
+\n 
+\n• 新標記功能：顯示已經過的標記 
+\n 
+\n• 搜尋歷史記錄現在顯示您之前搜尋過的類別 
+\n 
 \n• 修復了在非拉丁地圖啟動時的崩潰問題 
 \n 
 \n• 改善 Android 8.0 裝置上的繪製速度問題 
 \n 
 \n• 支援多邊形 (非生活環境) 的物件編輯 
 \n 
-\n• 測量距離：在快顯選單中為動作增加了測量按鈕 
+\n• 測量距離：在快顯選單中為動作增加了「測量」按鈕 
 \n</string>
-    <string name="ask_for_location_permission">請準許 OsmAnd 位置以繼續。</string>
+    <string name="ask_for_location_permission">請授予 OsmAnd 位置存取權以繼續。</string>
     <string name="rendering_value_black_name">黑色</string>
     <string name="more_transport_on_stop_hint">在此停靠站有更多的交通工具。</string>
     <string name="search_street">搜尋街道</string>
@@ -2851,20 +2851,20 @@
     <string name="edit_map_marker">編輯地圖標記</string>
     <string name="third_party_application">第三方應用程式</string>
     <string name="osm_live_plan_pricing">計畫與價格</string>
-    <string name="osm_live_payment_monthly_title">月付</string>
-    <string name="osm_live_payment_3_months_title">季付</string>
-    <string name="osm_live_payment_annual_title">年付</string>
+    <string name="osm_live_payment_monthly_title">每月</string>
+    <string name="osm_live_payment_3_months_title">每三個月</string>
+    <string name="osm_live_payment_annual_title">每年</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
-    <string name="osm_live_payment_discount_descr">節省 %1$s！</string>
-    <string name="osm_live_payment_current_subscription">您目前訂閱</string>
+    <string name="osm_live_payment_discount_descr">節省 %1$s。</string>
+    <string name="osm_live_payment_current_subscription">目前的訂閱</string>
     <string name="osm_live_payment_renews_monthly">每月續訂</string>
     <string name="osm_live_payment_renews_quarterly">每季續訂</string>
     <string name="osm_live_payment_renews_annually">每年續訂</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">選擇適合您的付款期：</string>
     <string name="osm_live_payment_contribute_descr">部分收入歸 OpenStreetMap 的貢獻者所有。</string>
-    <string name="powered_by_osmand">Powered by OsmAnd</string>
+    <string name="powered_by_osmand">威力本源 OsmAnd</string>
     <string name="osm_live_subscriptions">訂閱</string>
     <string name="mapillary_menu_title_pano">只顯示 360° 圖片</string>
     <string name="shared_string_launch">啟動</string>
@@ -2885,9 +2885,9 @@
     <string name="on_foot">步行</string>
     <string name="route_way">道路</string>
     <string name="points_of_interests">興趣點 (POI)</string>
-    <string name="waiting_for_route_calculation">等待計算路徑</string>
+    <string name="waiting_for_route_calculation">正在計算路徑……</string>
     <string name="app_mode_public_transport">大眾運輸</string>
-    <string name="avoid_roads_descr">在導航時從地圖上的道路或下面的列表選擇您想要避免的地方：</string>
+    <string name="avoid_roads_descr">選取您想要在導航時避免的道路，可以在地圖上或是從下方的清單中選取：</string>
     <string name="show_along_the_route">在路徑旁顯示</string>
     <string name="simulate_navigation">模擬導航</string>
     <string name="choose_track_file_to_follow">選擇要跟隨的軌跡檔案</string>
@@ -2910,4 +2910,14 @@
     <string name="shared_string_swap">切換</string>
     <string name="show_more">顯示更多</string>
     <string name="tracks_on_map">在地圖上追蹤</string>
+    <string name="time_of_day">一天中的時間</string>
+    <string name="by_transport_type">由 %1$s</string>
+    <string name="step_by_step">按步驟</string>
+    <string name="road_types">道路類型</string>
+    <string name="exit_at">出口於</string>
+    <string name="sit_on_the_stop">坐在站點上</string>
+    <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">點選此動作按鈕在地圖上顯示或隱藏選定的 GPX 軌跡</string>
+    <string name="quick_action_gpx_tracks_hide">隱藏 GPX 軌跡</string>
+    <string name="quick_action_gpx_tracks_show">顯示 GPX 軌跡</string>
 </resources>
