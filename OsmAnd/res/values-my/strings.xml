@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources/>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transport_nearby_routes">အတွင်း</string>
+    <string name="make_as_start_point">ဒီနေရာကိုအစထားမယ်</string>
+    <string name="shared_string_current">ယခု</string>
+    <string name="open_from">ဒီကစပြီးဖွင့်</string>
+    <string name="shared_string_road">လမ်း</string>
+    <string name="shared_string_options">ရွေးချယ်ရန်</string>
+    <string name="road_blocked">လမ်းပိတ်သည်</string>
+    <string name="switch_start_finish">ခရီးအစနဲ့အဆုံးပြောင်းခြင်း</string>
+    <string name="starting_point">အစနေရာ</string>
+    <string name="shared_string_search">ရှာဖွေရန်</string>
+    <string name="shared_string_go">သွားမည်</string>
+    <string name="shared_string_previous">အလျင်က</string>
+    <string name="search_radius_proximity">အတွင်း</string>
+    <string name="cancel_navigation">လမ်းညွှန်ခြင်းရပ်ထား</string>
+    <string name="day_night_info">နေ့/ည ပတ်သက်သောအချက်များ</string>
+    <string name="daynight_mode_auto">နေထွက်/နေဝင်</string>
+    <string name="poi">POI</string>
+</resources>
