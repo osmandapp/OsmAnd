@@ -68,10 +68,6 @@
         <!--
             <CheckBoxPreference android:title="@string/show_zoom_buttons_navigation" android:summary="@string/show_zoom_buttons_navigation_descr" android:key="show_zoom_buttons_navigation" />
         -->
-        <ListPreference
-            android:key="wake_on_voice_int"
-            android:summary="@string/wake_on_voice_descr"
-            android:title="@string/wake_on_voice"/>
         <!--
         <ListPreference
             android:key="delay_to_start_navigation"
