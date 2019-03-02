@@ -2387,7 +2387,7 @@
     <string name="edit_line">تعديل خط</string>
     <string name="add_point_before">إضافة نقطة قبل</string>
     <string name="add_point_after">إضافة نقطة بعد</string>
-    <string name="shared_string_options">خيارات</string>
+    <string name="shared_string_options">الخيارات</string>
     <string name="measurement_tool_snap_to_road_descr">أوسماند سيوصل النقاط بالطرق للملف الشخصي المحدد.</string>
     <string name="measurement_tool_save_as_new_track_descr">يمكنك حفظ النقاط كنقاط مسار أو كخط.</string>
     <string name="choose_navigation_type">اختر بروفايل الملاحة</string>
