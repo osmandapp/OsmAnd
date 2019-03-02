@@ -1028,7 +1028,7 @@ Lon: %2$s</string>
     <string name="rendering_attr_roadColors_description">Elektu skemkoloron de vojoj:</string>
     <string name="rendering_attr_roadColors_name">Skemkoloro de vojoj</string>
     <string name="map_widget_show_destination_arrow">Montri celdirekton</string>
-    <string name="enable_plugin_monitoring_services">Aktivigu la kromprogramo ‘Kurs-registrilo’ por uzi pozici-registradajn servojn (GPX-registrado, enreta kurs-registrado)</string>
+    <string name="enable_plugin_monitoring_services">Aktivigu la kromprogramo “spur-registrilo” por uzi pozici-registradajn servojn (GPX-registrado, enreta kurs-registrado)</string>
     <string name="non_optimal_route_calculation">Kalkuli verŝajne neplejbonajn kursojn por malproksimaj distancoj</string>
     <string name="gps_not_available">Bonvolu aktivigi GPS-on en agordoj</string>
     <string name="map_widget_monitoring_services">Kurso-registradaj servoj</string>
@@ -1044,7 +1044,7 @@ Lon: %2$s</string>
     <string name="new_destination_point_dialog">Vi jam elektis celon:</string>
     <string name="shared_string_target_points">Celoj</string>
     <string name="intermediate_point_too_far">Intercelo %1$s estas tro malproksime al la plej proksima vojo.</string>
-    <string name="arrived_at_intermediate_point">Vi alvenis al la intercelo</string>
+    <string name="arrived_at_intermediate_point">Atingis intercelon</string>
     <string name="context_menu_item_intermediate_point">Aldoni kiel intercelon</string>
     <string name="map_widget_intermediate_distance">Intercelo</string>
     <string name="ending_point_too_far">Celo estas tro malproksime al la plej proksima vojo.</string>
@@ -2795,7 +2795,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="point_deleted">Forigis la punkton %1$s</string>
     <string name="shared_string_world">Mondo</string>
     <string name="send_search_query_description">Ni sendos vian serĉ-peton: <b>“%1$s”</b> kun via pozicio.<br/>
-        <br/>Ni ne kolektas personajn informojn, ni nur bezonas serĉajn datumojn por plibonigi la algoritmon.<br/>
+        <br/>Neniuj personaj informoj estos senditaj, serĉ-datumoj estos uzataj nur por plibonigi la algoritmon.<br/>
     </string>
     <string name="search_no_results_description">Neniuj rezultoj?
 \nSciigu nin pri tio.</string>
@@ -2821,19 +2821,19 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="search_no_results_feedback">Neniuj serĉ-rezultoj?
 \nSciigu nin</string>
     <string name="test_voice_desrc">Premu butonon kaj aŭskultu rilatan voĉan sciigon por identigi mankajn aŭ erarajn sciigojn.</string>
-    <string name="release_3_2_pre">• riparita paneo je starto, kiu okazis ĉe kelkaj aparatoj
-\n
-\n• nova eblo de markoj: montri map-markojn, kiuj estis jam pasigitaj
-\n
-\n• serĉ-historio montras kategoriojn, kiujn vi antaŭe serĉis
-\n
+    <string name="release_3_2_pre">• riparita paneo je starto, kiu okazis ĉe kelkaj aparatoj 
+\n 
+\n• nova eblo de map-markoj: montri jam-pasigitajn markoj
+\n 
+\n• serĉ-historio nun montras antaŭe serĉitajn kategoriojn
+\n 
 \n• riparita paneo je starto, kiu okazis dum vidigi nelatinajn signojn 
 \n 
 \n• plirapidigita bildigado de mapo ĉe Android 8.0 
 \n 
 \n• subteno por redakti plurangulajn objektojn (sed ne por interesejoj) 
 \n 
-\n• mezuri distancon: aldonis ag-butonon al la kunteksta menuo 
+\n• mezuri distancon: aldonis ag-butonon “mezuri” al la kunteksta menuo 
 \n</string>
     <string name="ask_for_location_permission">Permesu al OsmAnd aliron al pozicio por pluigi.</string>
     <string name="rendering_value_black_name">Nigra</string>
@@ -2847,20 +2847,20 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="edit_map_marker">Redakti map-markon</string>
     <string name="third_party_application">Aplikaĵo de ekstera firmao</string>
     <string name="osm_live_plan_pricing">Kotizoj</string>
-    <string name="osm_live_payment_monthly_title">Pagi ĉiumonate</string>
-    <string name="osm_live_payment_3_months_title">Pagi je ĉiu 3 monatoj</string>
-    <string name="osm_live_payment_annual_title">Pagi ĉiujare</string>
+    <string name="osm_live_payment_monthly_title">Ĉiumonate</string>
+    <string name="osm_live_payment_3_months_title">Ĉiu-3-monate</string>
+    <string name="osm_live_payment_annual_title">Ĉiujare</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / monato</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$,2f %2$s / monato</string>
-    <string name="osm_live_payment_discount_descr">Ŝparu %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Via nuna kotizo</string>
+    <string name="osm_live_payment_discount_descr">Ŝparu %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Nuna kotizo</string>
     <string name="osm_live_payment_renews_monthly">Reaboni ĉiumonate</string>
     <string name="osm_live_payment_renews_quarterly">Reaboni ĉiukvaronjare</string>
     <string name="osm_live_payment_renews_annually">Reaboni ĉiujare</string>
     <string name="default_price_currency_format">%1$,2f %2$s</string>
     <string name="osm_live_payment_header">Elektu la plej oportunan pagmanieron por vi:</string>
     <string name="osm_live_payment_contribute_descr">Parto de enspezoj transdoniĝas al OpenStreetMap-kontribuantoj.</string>
-    <string name="powered_by_osmand">Povigata de OsmAnd</string>
+    <string name="powered_by_osmand">De OsmAnd</string>
     <string name="osm_live_subscriptions">Abonoj</string>
     <string name="mapillary_menu_title_pano">Montri nur bildojn 360°</string>
     <string name="shared_string_launch">Lanĉi</string>
@@ -2880,9 +2880,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="on_foot">piede</string>
     <string name="route_way">Vojo</string>
     <string name="points_of_interests">Interesejoj</string>
-    <string name="waiting_for_route_calculation">Atendu ĝis la kurso kalkuliĝos</string>
+    <string name="waiting_for_route_calculation">Kalkulado de kurso…</string>
     <string name="app_mode_public_transport">Transporto publika</string>
-    <string name="avoid_roads_descr">Marku la vojon sur la mapo aŭ elektu ĝin el la jena listo por eviti ĝin dum navigado:</string>
+    <string name="avoid_roads_descr">Elektu vojon por eviti dum navigado, aŭ sur la mapo aŭ el la jena listo:</string>
     <string name="show_along_the_route">Montri laŭlonge de kurso</string>
     <string name="simulate_navigation">Simuli navigadon</string>
     <string name="choose_track_file_to_follow">Elektu dosieron de kurso por sekvi</string>
@@ -2906,4 +2906,14 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_swap">Interŝanĝi</string>
     <string name="show_more">Montri pli</string>
     <string name="tracks_on_map">Kursoj sur la mapo</string>
+    <string name="time_of_day">Tagtempo</string>
+    <string name="by_transport_type">Per %1$s</string>
+    <string name="step_by_step">Paŝon post paŝo</string>
+    <string name="road_types">Specoj de vojoj</string>
+    <string name="exit_at">Eliru ĉe</string>
+    <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
+    <string name="quick_action_show_hide_gpx_tracks">Montri/kaŝi GPX-spurojn</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Frapetu tiun ĉi ag-butonon por montri/kaŝi elektitajn GPX-spurojn sur la mapo.</string>
+    <string name="quick_action_gpx_tracks_hide">Kaŝi GPX-spurojn</string>
+    <string name="quick_action_gpx_tracks_show">Montri GPX-spurojn</string>
 </resources>
