@@ -2913,4 +2913,9 @@
     <string name="shared_string_swap">החלפה</string>
     <string name="show_more">הצגת עוד</string>
     <string name="tracks_on_map">עקבות על המפה</string>
+    <string name="time_of_day">השעה ביום</string>
+    <string name="by_transport_type">עם %1$s</string>
+    <string name="step_by_step">שלב אחר שלב</string>
+    <string name="road_types">סוגי כבישים</string>
+    <string name="exit_at">לצאת ב־</string>
 </resources>
