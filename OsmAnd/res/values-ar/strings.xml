@@ -2027,7 +2027,7 @@
     <string name="osm_live_subscription_desc">يُتيحُ لك الاشتراك على الحصول على تحديثات كل ساعة، يوميا أو أسبوعيا بالإضافة إلى تنزيلات غير محدودة لكافة الخرائط.</string>
     <string name="driving_region_australia">أستراليا</string>
     <string name="lang_kab">قبائلي</string>
-    <string name="shared_string_filters">فلترات</string>
+    <string name="shared_string_filters">عوامل التصفية</string>
     <string name="apply_filters">تطبيق الفلترات</string>
     <string name="save_filter">حفظ الفلتر</string>
     <string name="delete_filter">حذف فلتر</string>
@@ -2196,7 +2196,7 @@
     <string name="select_city">إختر مدينة</string>
     <string name="select_postcode">إختر رمز بريدي</string>
     <string name="nearest_cities">أقرب المدن</string>
-    <string name="type_city_town">اكتب إسم بلدة أو مدينة</string>
+    <string name="type_city_town">نوع المدينة أو البلدة</string>
     <string name="type_postcode">اكتب رمز بريدي</string>
     <string name="nothing_found">لم يتم العثور على أي شيء</string>
     <string name="increase_search_radius">قم بتوسيع دائرة البحث</string>
@@ -2223,7 +2223,7 @@
     <string name="select_gpx_folder">إختر مجلد المسار</string>
     <string name="shared_string_gpx_tracks">المسارات</string>
     <string name="shared_string_time">الزمن</string>
-    <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها :
+    <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها : 
 \n• أوروبا الغربية : **** 
 \n• أوروبا الشرقية : *** 
 \n• روسيا : *** 
@@ -2234,7 +2234,7 @@
 \n• الشرق الأوسط : ** 
 \n• إفريقيا : ** 
 \n• أنتاركتيكا : * 
-\n معظم البلدان في جميع أنحاء العالم متاحة للتنزيل ! من أفغانستان إلى زيمبابوي، من أستراليا إلى الولايات المتحدة الأمريكية. الأرجنتين، البرازيل، كندا، فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، …</string>
+\n معظم البلدان في جميع أنحاء العالم متاحة للتنزيل ! من أفغانستان إلى زيمبابوي، من أستراليا إلى الولايات المتحدة الأمريكية. الأرجنتين، البرازيل، كندا، فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا</string>
     <string name="restart_search">إعادة البحث</string>
     <string name="osmand_extended_description_part7">المساهمة في OSM
 \n • الإبلاغ عن الأخطاء في البيانات
@@ -2331,9 +2331,9 @@
     <string name="osmand_plus_extended_description_part7">المساهمة مباشرة في OSM 
 \n• الابلاغ عن الأخطاء في البرنامج 
 \n• رفع مسارات GPX إلى OSM مباشرة من التطبيق 
-\n• إضافة النقاط المهمة ورفعها مباشرة إلى OSM (أو في وقت لاحق في حالة كنت بدون اتصال)
+\n• إضافة النقاط المهمة ورفعها مباشرة إلى OSM (أو في وقت لاحق في حالة كنت بدون اتصال) 
 \n• تسجيل اختياري للرحلة في الخلفية (في حين كون الجهاز في وضع النوم) 
-\nOsmAnd ذو المصدر المفتوح، وجاري تطويره . يمكن للجميع أن يساهم بالإبلاغ عن الأخطاء، تحسين الترجمات أو برمجة ميزات جديدة. هذا المشروع خاضع للتحسين المستمر بشتى أشكال تفاعل المطورين والمستخدمين. التقدم المحرز في المشروع يعتمد أيضا على المساهمات المالية لتمويل البرمجة واختبار التحديثات الجديدة.</string>
+\nOsmAnd ذو المصدر المفتوح، وجاري تطويره . يمكن للجميع أن يساهم بالإبلاغ عن الأخطاء، تحسين الترجمات أو برمجة ميزات جديدة. هذا المشروع خاضع للتحسين المستمر بشتى أشكال تفاعل المطورين والمستخدمين. التقدم المحرز في المشروع يعتمد أيضا على المساهمات المالية لتمويل البرمجة واختبار التحديثات الجديدة</string>
     <string name="save_poi_too_many_uppercase">الاسم يحتوي على الكثير من الأحرف الكبيرة . هل تريد الاستمرار؟</string>
     <string name="quick_action_duplicates">اسم الإجراء السريع المحدد قيد الاستخدام، لقد تم تغييره إلى %1$s لتجنب التكرار.</string>
     <string name="quick_action_page_list_descr">النقر على زر الإجراء سوف يوجهك خلال القائمة أدناه.</string>
