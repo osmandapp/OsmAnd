@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
@@ -93,7 +92,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.ROUTER_SERVICE, screen, entries, vls);
 		
-		
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
 
 		Integer[] intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
@@ -116,7 +114,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
             keepInformingNames[i] = keepInformingValues[i] + " " + getString(R.string.int_min);
         }
         registerListPreference(settings.KEEP_INFORMING, screen, keepInformingNames, keepInformingValues);
-        
 
 		SpeedConstants[] speedValues = SpeedConstants.values();
 		String[] speedNamesVls = new String[speedValues.length];
@@ -125,14 +122,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		};
 		registerListPreference(settings.SPEED_SYSTEM, screen, speedNamesVls, speedValues);
         
-		// screen power save option:
-		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
-		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
-		screenPowerSaveNames[0] = getString(R.string.shared_string_never);
-		for (int i = 1; i < screenPowerSaveValues.length; i++) {
-			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
-					+ getString(R.string.int_seconds);
-		}
 //         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
 		
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
@@ -218,7 +207,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		entries[k] = getString(R.string.install_more);
 		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
 	}
-
 
 	private void addVoicePrefs(PreferenceGroup cat) {
 		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
