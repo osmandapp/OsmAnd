@@ -2894,8 +2894,8 @@ Lon %2$s</string>
     <string name="add_intermediate_point">Añadir punto intermedio</string>
     <string name="add_start_point">Añadir punto de partida</string>
     <string name="intermediate_waypoint">Punto intermedio</string>
-    <string name="transfers">transferencias</string>
-    <string name="on_foot">a pie</string>
+    <string name="transfers">Transbordos</string>
+    <string name="on_foot">A pie</string>
     <string name="route_way">Ruta</string>
     <string name="points_of_interests">Puntos de interés (PDI)</string>
     <string name="waiting_for_route_calculation">Calculando la ruta…</string>
@@ -2925,11 +2925,11 @@ Lon %2$s</string>
     <string name="show_more">Mostrar más</string>
     <string name="tracks_on_map">Trazas en el mapa</string>
     <string name="time_of_day">Hora del día</string>
-    <string name="by_transport_type">Por %1$s</string>
+    <string name="by_transport_type">En %1$s</string>
     <string name="step_by_step">Paso a paso</string>
     <string name="road_types">Tipos de caminos</string>
-    <string name="exit_at">Salida en</string>
-    <string name="sit_on_the_stop">Sentarse en la parada</string>
+    <string name="exit_at">Bajarse en</string>
+    <string name="sit_on_the_stop">Esperar en la parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Alternar vista de trazas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Este botón de acción, muestra u oculta las trazas GPX elegidas en el mapa</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar trazas GPX</string>
