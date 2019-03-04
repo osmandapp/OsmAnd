@@ -125,6 +125,7 @@ import static net.osmand.plus.download.DownloadActivity.formatMb;
 public class GpxUiHelper {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
+	private static final int DEFAULT_DISTANCE_FOR_SLOPE_DATA = 2_000_000;
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
@@ -1635,6 +1636,9 @@ public class GpxUiHelper {
 		int lastIndex = values.size() - 1;
 
 		double STEP = 5;
+		if (totalDistance > DEFAULT_DISTANCE_FOR_SLOPE_DATA) {
+			STEP = STEP * (totalDistance / DEFAULT_DISTANCE_FOR_SLOPE_DATA);
+		}
 
 		double[] calculatedDist = new double[(int) (totalDistance / STEP) + 1];
 		double[] calculatedH = new double[(int) (totalDistance / STEP) + 1];
