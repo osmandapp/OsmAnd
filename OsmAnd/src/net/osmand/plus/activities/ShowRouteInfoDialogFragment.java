@@ -1067,7 +1067,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 
-	protected void acquireStreetName(LatLon latLon) {
+	protected void updateDestinationStreetName(LatLon latLon) {
 		GeocodingLookupService.AddressLookupRequest addressLookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
 			@Override
 			public void geocodingDone(String address) {
@@ -1238,7 +1238,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 					buildDescriptionView(new SpannableString(destinationStreetStr), llText, 4, 4);
 				}
 			} else {
-				acquireStreetName(location);
+				updateDestinationStreetName(location);
 			}
 		}
 
