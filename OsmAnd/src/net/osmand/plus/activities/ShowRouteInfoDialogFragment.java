@@ -1344,7 +1344,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		container.addView(titleView);
 	}
 
-	private View buildDescriptionView(Spannable description, LinearLayout container, int paddingTop, int paddingBottom) {
+	private void buildDescriptionView(Spannable description, LinearLayout container, int paddingTop, int paddingBottom) {
 		TextViewEx textViewDescription = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams descriptionParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		descriptionParams.setMargins(0, dpToPx(paddingTop), 0, dpToPx(paddingBottom));
@@ -1354,7 +1354,6 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		AndroidUtils.setTextSecondaryColor(app, textViewDescription, nightMode);
 		textViewDescription.setText(description);
 		container.addView(textViewDescription);
-		return textViewDescription;
 	}
 
 	private LinearLayout buildTextContainerView() {
