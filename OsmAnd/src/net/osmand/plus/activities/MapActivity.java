@@ -94,7 +94,6 @@ import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
-import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -194,7 +193,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private ImportHelper importHelper;
-	private WakeLockHelper wakeLockHelper;
 	private boolean intentLocation = false;
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
@@ -316,7 +314,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
 		importHelper = new ImportHelper(this, getMyApplication(), getMapView());
-		wakeLockHelper = new WakeLockHelper(getMyApplication());
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
@@ -541,15 +538,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 	}
 
-	private void changeKeyguardFlags() {
-		if (settings.WAKE_ON_VOICE_INT.get() > 0) {
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
-					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-		} else {
-			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-		}
-	}
-
 	public ImportHelper getImportHelper() {
 		return importHelper;
 	}
@@ -702,8 +690,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
-
-		changeKeyguardFlags();
 
 		applicationModeListener = new StateChangedListener<ApplicationMode>() {
 			@Override
@@ -1241,7 +1227,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onStart() {
 		super.onStart();
 		stopped = false;
-		wakeLockHelper.onStart(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
@@ -1255,7 +1240,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onStop() {
-		wakeLockHelper.onStop(this);
 		getMyApplication().getNotificationHelper().removeNotifications();
 		if(pendingPause) {
 			onPauseActivity();
@@ -1340,7 +1324,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateApplicationModeSettings() {
-		changeKeyguardFlags();
 		updateMapSettings();
 		mapViewTrackingUtilities.updateSettings();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());

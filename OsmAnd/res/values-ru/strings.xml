@@ -2909,4 +2909,7 @@
     <string name="shared_string_swap">Поменять</string>
     <string name="show_more">Показать больше</string>
     <string name="tracks_on_map">Треки на карте</string>
+    <string name="quick_action_show_hide_gpx_tracks">Показать/Скрыть GPX треки</string>
+    <string name="quick_action_gpx_tracks_hide">Скрыть GPX треки</string>
+    <string name="quick_action_gpx_tracks_show">Показать GPX треки</string>
 </resources>

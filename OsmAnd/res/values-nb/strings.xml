@@ -2000,8 +2000,8 @@
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_add_favorite">Legg til favoritt</string>
     <string name="quick_action_navigation_voice">Tale på/av</string>
-    <string name="quick_action_navigation_voice_off">Tale er av</string>
-    <string name="quick_action_navigation_voice_on">Tale er på</string>
+    <string name="quick_action_navigation_voice_off">Slå på tale</string>
+    <string name="quick_action_navigation_voice_on">Slå av tale</string>
     <string name="sorted_by_distance">Sortert etter avstand</string>
     <string name="search_favorites">Søk blandt favoritter</string>
     <string name="configure_screen_quick_action">Hurtighandling</string>
@@ -2921,4 +2921,14 @@
     <string name="shared_string_swap">Veksle</string>
     <string name="show_more">Vis mer</string>
     <string name="tracks_on_map">Spor på kartet</string>
+    <string name="time_of_day">Tid på dagen</string>
+    <string name="by_transport_type">Med %1$s</string>
+    <string name="step_by_step">Steg for steg</string>
+    <string name="road_types">Veityper</string>
+    <string name="exit_at">Ta av på</string>
+    <string name="sit_on_the_stop">Sitt på stoppet</string>
+    <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX-spor</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Å trykke på denne knappen viser eller skjuler valgte GPX-spor på kartet</string>
+    <string name="quick_action_gpx_tracks_hide">Skjul GPX-spor</string>
+    <string name="quick_action_gpx_tracks_show">Vis GPX-spor</string>
 </resources>

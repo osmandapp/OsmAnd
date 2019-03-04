@@ -90,7 +90,7 @@
     <string name="download_roads_only_maps">Reine Straßenkarte</string>
     <string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (durch Verwendung des langsameren Android statt nativem Code).</string>
     <string name="safe_mode">Abgesicherter Modus</string>
-    <string name="native_library_not_running">Die App läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
+    <string name="native_library_not_running">Die App läuft im abgesicherten Modus (abschaltbar in \'Einstellungen\').</string>
     <string name="background_service_is_enabled_question">OsmAnd-Hintergrunddienst läuft noch. Ebenfalls beenden?</string>
     <string name="rendering_attr_roadColors_description">Auswahl eines Straßen-Farbschemas:</string>
     <string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
@@ -948,7 +948,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="poi_filter_accomodation">Unterkunft</string>
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="poi_filter_sightseeing">Sehenswürdigkeiten</string>
-    <string name="arrived_at_intermediate_point">Sie sind an Ihrem Zwischenziel angekommen</string>
+    <string name="arrived_at_intermediate_point">Zwischenziel erreicht</string>
     <string name="context_menu_item_intermediate_point">Als Zwischenziel setzen</string>
     <string name="map_widget_intermediate_distance">Zwischenziel</string>
     <string name="ending_point_too_far">Endpunkt zu weit von der nächsten Straße entfernt.</string>
@@ -1588,7 +1588,7 @@ Lon %2$s</string>
     <string name="shared_string_show_details">Details anzeigen</string>
     <string name="routing_attr_avoid_stairs_name">Treppen vermeiden</string>
     <string name="routing_attr_avoid_stairs_description">Treppen vermeiden</string>
-    <string name="routing_attr_avoid_borders_name">Grenzübertritt vermeiden</string>
+    <string name="routing_attr_avoid_borders_name">Grenzübergänge vermeiden</string>
     <string name="routing_attr_avoid_borders_description">Überquerung von Landesgrenzen vermeiden</string>
     <string name="routing_attr_height_description">Höhe des Fahrzeugs für Routenberechnung angeben.</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
@@ -2132,8 +2132,8 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="quick_action_take_photo_note">Neue Foto-Notiz</string>
     <string name="quick_action_add_osm_bug">OSM-Notiz hinzufügen</string>
     <string name="quick_action_navigation_voice">Sprachausgabe Ein/Aus</string>
-    <string name="quick_action_navigation_voice_off">Sprachausgabe ist aus</string>
-    <string name="quick_action_navigation_voice_on">Sprachausgabe ist an</string>
+    <string name="quick_action_navigation_voice_off">Sprachausgabe aktivieren</string>
+    <string name="quick_action_navigation_voice_on">Sprachausgabe stummschalten</string>
     <string name="quick_action_add_gpx">GPX-Wegpunkt einfügen</string>
     <string name="quick_action_add_parking">Parkposition festlegen</string>
     <string name="quick_action_new_action">Aktion hinzufügen</string>
@@ -2817,7 +2817,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf \"Speichern\".</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
     <string name="send_search_query_description">Es wird Ihre Suchanfrage: <b>\"%1$s\"</b>, sowie Ihr Standort gesendet.<br/>
-        <br/> Wir sammeln keine persönlichen Daten, die Informationen dienen nur der Verbesserung des Suchalgorithmus.<br/>
+        <br/> Keine persönlichen Daten werden gesammelt, Suchdaten werden nur zur Verbesserung des Suchalgorithmus verwendet.<br/>
     </string>
     <string name="search_no_results_description">Keine Ergebnisse?
 \nNehmen Sie Kontakt mit uns auf.</string>
@@ -2837,28 +2837,28 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n • Bootnavigation: Unterstützung für Fahrrinnen
 \n 
 \n • Andere Fehlerbehebungen</string>
-    <string name="thank_you_for_feedback">Danke für Ihre Rückmeldung</string>
+    <string name="thank_you_for_feedback">Danke für Ihr Feedback</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse?
 \nGeben Sie uns eine Rückmeldung</string>
     <string name="commiting_way">Übertrage Weg…</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen.</string>
-    <string name="release_3_2_pre">• Absturz beim Start behoben, der bei manchen Geräten auftrat
-\n
-\n• Neue Funktion für Markierungen: Anzeigen der Markierungen die bereits erreicht wurden
-\n
-\n• Suchverlauf zeigt nun die Kategorien an die Sie zuvor gesucht haben
-\n
-\n• Absturz beim Start von nicht-lateinischen Karten behoben
+    <string name="release_3_2_pre">• Absturz beim Start behoben, der bei manchen Geräten auftrat 
+\n 
+\n• Neue Funktion für Markierungen: Anzeigen bereits passierter Markierungen
+\n 
+\n• Suchverlauf zeigt nun zuvor gesuchte Kategorien 
+\n 
+\n• Absturz beim Start von nicht-lateinischen Karten behoben 
 \n 
 \n• Verbesserte Rendering-Geschwindigkeit auf Android 8.0-Geräten 
 \n 
 \n• Unterstützung für die Bearbeitung von Flächen-POI 
 \n 
-\n• Distanz Messen: Schaltfläche Messen zu Aktionen im Kontextmenü hinzugefügt 
+\n• Distanz Messen: Schaltfläche \"Messen\" zu Aktionen im Kontextmenü hinzugefügt 
 \n 
 \n</string>
-    <string name="ask_for_location_permission">Bitte lassen Sie zu, dass OsmAnd auf den Standort zugreifen darf.</string>
+    <string name="ask_for_location_permission">Bitte gewähren Sie OsmAnd Standortzugriff, um fortzufahren.</string>
     <string name="rendering_value_black_name">Schwarz</string>
     <string name="search_street">Straße suchen</string>
     <string name="start_search_from_city">Zunächst den Ort wählen</string>
@@ -2870,20 +2870,20 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="edit_map_marker">Kartenmarkierung bearbeiten</string>
     <string name="third_party_application">Drittanbieter-App</string>
     <string name="osm_live_plan_pricing">Plan &amp; Preisgestaltung</string>
-    <string name="osm_live_payment_monthly_title">Monatlich bezahlen</string>
-    <string name="osm_live_payment_3_months_title">Alle 3 Monate bezahlen</string>
-    <string name="osm_live_payment_annual_title">Einmal im Jahr bezahlen</string>
+    <string name="osm_live_payment_monthly_title">Monatlich</string>
+    <string name="osm_live_payment_3_months_title">Alle 3 Monate</string>
+    <string name="osm_live_payment_annual_title">Jährlich</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / Monat</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / Monat</string>
-    <string name="osm_live_payment_discount_descr">Sparen Sie %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Ihr aktuelles Abonnement</string>
+    <string name="osm_live_payment_discount_descr">Sparen Sie %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Aktuelles Abonnement</string>
     <string name="osm_live_payment_renews_monthly">Verlängert monatlich</string>
     <string name="osm_live_payment_renews_quarterly">Verlängert vierteljährlich</string>
     <string name="osm_live_payment_renews_annually">Verlängert jährlich</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Wählen Sie den für Sie passenden Zahlungszeitraum aus:</string>
     <string name="osm_live_payment_contribute_descr">Ein Teil der Einnahmen geht an OpenStreetMap-Mitwirkende.</string>
-    <string name="powered_by_osmand">Betrieben von OsmAnd</string>
+    <string name="powered_by_osmand">Von OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">Nur 360°-Bilder anzeigen</string>
     <string name="shared_string_launch">Starten</string>
@@ -2902,10 +2902,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="transfers">Umstiege</string>
     <string name="on_foot">Zu Fuß</string>
     <string name="route_way">Weg</string>
-    <string name="points_of_interests">Orte von Interesse(OVI)</string>
-    <string name="waiting_for_route_calculation">Warten auf Routenberechung</string>
+    <string name="points_of_interests">Orte von Interesse (POI)</string>
+    <string name="waiting_for_route_calculation">Route wird berechnet…</string>
     <string name="app_mode_public_transport">Öffentlicher Verkehr</string>
-    <string name="avoid_roads_descr">Wähle die Straße aus die während der Navigation vermieden werden soll, von der Karte oder von der Liste unten:</string>
+    <string name="avoid_roads_descr">Wählen Sie eine Straße aus die während der Navigation vermieden werden soll, von der Karte oder von der Liste unten:</string>
     <string name="show_along_the_route">Entlang der Route anzeigen</string>
     <string name="simulate_navigation">Navigation simulieren</string>
     <string name="choose_track_file_to_follow">Wähle Track-Datei zum Verfolgen aus</string>
@@ -2929,4 +2929,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_swap">Tauschen</string>
     <string name="show_more">Mehr anzeigen</string>
     <string name="tracks_on_map">Tracks auf der Karte</string>
+    <string name="time_of_day">Tageszeit</string>
+    <string name="by_transport_type">Von %1$s</string>
+    <string name="step_by_step">Schritt für Schritt</string>
+    <string name="road_types">Straßentypen</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX Tracks ein-/ausblenden</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Durch Antippen dieser Aktionsschaltfläche werden ausgewählte GPX-Tracks auf der Karte ein- oder ausgeblendet</string>
+    <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
+    <string name="quick_action_gpx_tracks_show">GPX Tracks einblenden</string>
+    <string name="exit_at">Verlassen bei</string>
+    <string name="sit_on_the_stop">Sitzen an der Haltestelle</string>
 </resources>

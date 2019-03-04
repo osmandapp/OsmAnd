@@ -74,6 +74,12 @@ public class OsmAndFormatter {
 		}
 	}
 
+	public static String getFormattedTimeShort(long seconds) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(seconds * 1000);
+		return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
+	}
+
 	public static String getFormattedDate(Context context, long milliseconds) {
 		return DateUtils.formatDateTime(context, milliseconds, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 	}

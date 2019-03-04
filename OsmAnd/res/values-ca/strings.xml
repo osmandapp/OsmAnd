@@ -740,7 +740,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="target_point">Destinació %1$s</string>
     <string name="shared_string_target_points">Destinacions</string>
     <string name="intermediate_point_too_far">La fita %1$s és massa lluny de la carretera més propera.</string>
-    <string name="arrived_at_intermediate_point">Heu arribat a la vostra destinació intermèdia</string>
+    <string name="arrived_at_intermediate_point">Assolida destinació intermèdia</string>
     <string name="context_menu_item_intermediate_point">Afegeix com una fita</string>
     <string name="map_widget_intermediate_distance">Fita</string>
     <string name="ending_point_too_far">El punt final és massa lluny de la carretera més propera.</string>
@@ -822,7 +822,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
     <string name="no_route">Sense ruta</string>
     <string name="voice_stream_voice_call">Àudio de trucada telefònica (també de interrupció de la música del cotxe)</string>
-    <string name="enable_plugin_monitoring_services">Habilita el connector de monitorització (enregistrament GPX, seguiment en viu) per poder utilitzar els serveis de registre d\'ubicació</string>
+    <string name="enable_plugin_monitoring_services">"Habiliteu el connector \"Enregistrament de ruta\"  per utilitzar els serveis de registre d\'ubicació (enregistrament GPX, seguiment en directe)"</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
     <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar a Google Play?</string>
     <string name="rendering_attr_roadColors_name">Esquema de color de carreteres</string>
@@ -2820,48 +2820,55 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="point_deleted">El punt %1$s s\'ha esborrat</string>
     <string name="shared_string_world">Mundial</string>
     <string name="send_search_query_description">Enviarem la vostra consulta de cerca: <b>\"%1$s\"</b>, així com la vostra ubicació.<br/>
-        <br/> No desem cap informació personal, només volem les dades de la cerca per millorar-ne l\'algorisme.<br/>
+        <br/> No es recull informació personal, només les dades utilitzades en la cerca per millorar-ne l\'algorisme.<br/>
     </string>
     <string name="search_no_results_description">Cap resultat?
 \nParleu-nos-en al respecte.</string>
     <string name="send_search_query">Voleu enviar la consulta de cerca?</string>
     <string name="release_3_1">"• Navegació: Correcció en la barra de progrés, intercanvi ràpid del punt inicial i final de la ruta 
-\n 
+\n
 \n• Marcadors de mapa: Correcció de l\'activació/desactivació de grups, possibilitat d\'amagar marcadors del mapa 
-\n 
+\n
 \n• Edició OSM: Capacitat per editar les etiquetes per objectes no puntuals, correcció de la pèrdua de comentaris a les notes, còpia de seguretat de les edicions 
-\n 
+\n
 \n• Millora la anàlisi de Viquipèdia i Wikiviatge, els fitxers actualitzats ja estan disponibles 
-\n 
+\n
 \n• Menú contextual: Arregla el color dels indicadors de nom de via en el mode nocturn, correcció de la mida del menú addicional 
-\n 
-\n• Nàutica: guiatge pels canals de navegació 
-\n 
+\n
+\n• Nàutica: Guiatge pels canals de navegació 
+\n
 \n• Altres correccions d\'errors  
 \n"</string>
     <string name="increase_search_radius_to">Augmenta el radi de cerca fins %1s</string>
     <string name="commiting_way">Executant via…</string>
-    <string name="thank_you_for_feedback">Gràcies per els comentaris</string>
+    <string name="thank_you_for_feedback">Gràcies per els vostres comentaris</string>
     <string name="poi_cannot_be_found">No es pot trobar el node o la via.</string>
     <string name="search_no_results_feedback">Cap resultat en la cerca?
 \nComenteu-nos-ho</string>
     <string name="test_voice_desrc">Premeu un botó i escolteu la corresponent descripció de veu per identificar les descripcions pendents o errònies.</string>
     <string name="release_3_2_pre">"• S\'ha corregit el bloqueig d\'entrada d\'alguns dispositius 
 \n
-\n • Nova opció dels marcadors: es mostren els marcadors que ja s\'han superat 
+\n 
+\n • Nova opció dels marcadors: Es mostren els marcadors que ja s\'han assolit 
 \n
-\n • L\'historial de cerques ara mostra les categories on s\'han fet les cerques anteriors 
+\n 
+\n • L\'historial de cerques ara mostra les categories cercades anteriorment
 \n
+\n 
 \n • S\'ha corregit el bloqueig d\'entrada si alfabets no llatins als mapes 
 \n
+\n 
 \n • Millora dels problemes de velocitat de renderització a dispositius Android 8.0 
 \n
+\n 
 \n • Suport a l\'edició d\'objectes poligonals (fora de serveis) 
 \n
-\n • Mesura de distàncies: s\'ha afegit el botó Mesura dins Accions en el menú contextual  
+\n 
+\n • Mesura de distàncies: S\'ha afegit el botó \"Mesura\" dins Accions en el menú contextual  
 \n
+\n 
 \n "</string>
-    <string name="ask_for_location_permission">Per continuar cal que doneu a OsmAnd accés a la ubicació.</string>
+    <string name="ask_for_location_permission">Cal que doneu a OsmAnd accés a la ubicació per continuar.</string>
     <string name="rendering_value_black_name">Negre</string>
     <string name="search_street">Cerca un carrer</string>
     <string name="start_search_from_city">Seleccioneu primer la ciutat</string>
@@ -2873,20 +2880,20 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="edit_map_marker">Edita el marcador de mapa</string>
     <string name="third_party_application">Aplicació de tercers</string>
     <string name="osm_live_plan_pricing">Opcions i preus</string>
-    <string name="osm_live_payment_monthly_title">Pagament mensual</string>
-    <string name="osm_live_payment_3_months_title">Pagament trimestral</string>
-    <string name="osm_live_payment_annual_title">Pagament anual</string>
+    <string name="osm_live_payment_monthly_title">Mensualment</string>
+    <string name="osm_live_payment_3_months_title">Trimestralment</string>
+    <string name="osm_live_payment_annual_title">Anualment</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
-    <string name="osm_live_payment_discount_descr">Desa %1$s!</string>
-    <string name="osm_live_payment_current_subscription">La vostra subscripció actual</string>
+    <string name="osm_live_payment_discount_descr">Desa %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Subscripció actual</string>
     <string name="osm_live_payment_renews_monthly">Renovació mensual</string>
     <string name="osm_live_payment_renews_quarterly">Renovació trimestral</string>
     <string name="osm_live_payment_renews_annually">Renovació anual</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Seleccioneu el període de pagament que us convingui:</string>
     <string name="osm_live_payment_contribute_descr">Una part dels ingressos és pels col·laboradors d\'OpenStreetMap.</string>
-    <string name="powered_by_osmand">Recolzat en OsmAnd</string>
+    <string name="powered_by_osmand">Per OsmAnd</string>
     <string name="osm_live_subscriptions">Subscripcions</string>
     <string name="mapillary_menu_title_pano">Només mostra imatges de 360º</string>
     <string name="shared_string_launch">Arrenca</string>
@@ -2900,15 +2907,15 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="swap_start_and_destination">Bescanvia sortida i arribada</string>
     <string name="add_destination_point">Afegeix destinació</string>
     <string name="add_intermediate_point">Afegeix punt intermedi</string>
-    <string name="add_start_point">Afegeix punt d\'Inici</string>
+    <string name="add_start_point">Afegeix el punt inicial</string>
     <string name="intermediate_waypoint">Punt intermedi</string>
     <string name="transfers">transferències</string>
     <string name="on_foot">a peu</string>
     <string name="route_way">Via</string>
-    <string name="points_of_interests">Punts d\'interès(PDI)</string>
-    <string name="waiting_for_route_calculation">Esperant el càlcul de la ruta</string>
+    <string name="points_of_interests">Punts d\'interès (PDI)</string>
+    <string name="waiting_for_route_calculation">Calculant la ruta…</string>
     <string name="app_mode_public_transport">Transport públic</string>
-    <string name="avoid_roads_descr">Seleccioneu la carretera del mapa o de la llista de sota que volgueu evitar en la navegació:</string>
+    <string name="avoid_roads_descr">Seleccioneu una carretera que volgueu evitar en la navegació, tant des del mapa com des de la llista de sota:</string>
     <string name="show_along_the_route">Mostra al llarg de la ruta</string>
     <string name="simulate_navigation">Simula la navegació</string>
     <string name="choose_track_file_to_follow">Seleccioneu l\'arxiu de la traça a seguir</string>
@@ -2932,4 +2939,13 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_swap">Bescanvia</string>
     <string name="show_more">Mostra\'n més</string>
     <string name="tracks_on_map">Traces al mapa</string>
+    <string name="time_of_day">Hora del dia</string>
+    <string name="by_transport_type">Per %1$s</string>
+    <string name="step_by_step">Pas a pas</string>
+    <string name="road_types">Tipus de carretera</string>
+    <string name="exit_at">Sortida a</string>
+    <string name="quick_action_show_hide_gpx_tracks">"Mostra/amaga traces GPX "</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Prement aquest botó d\'acció es mostren o s\'amaguen al mapa les traces GPX</string>
+    <string name="quick_action_gpx_tracks_hide">Amaga les traces GPX</string>
+    <string name="quick_action_gpx_tracks_show">Mostra les traces GPX</string>
 </resources>

@@ -936,15 +936,5 @@ public class VoiceRouter {
 	}
 
 	public void notifyOnVoiceMessage() {
-		if (settings.WAKE_ON_VOICE_INT.get() > 0) {
-			router.getApplication().runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					for (VoiceMessageListener lnt : voiceMessageListeners.keySet()) {
-						lnt.onVoiceMessage();
-					}
-				}
-			});
-		}
 	}
 }

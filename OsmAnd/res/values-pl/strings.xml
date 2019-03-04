@@ -871,7 +871,7 @@
     <string name="map_widget_show_destination_arrow">Kierunek do celu</string>
     <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
     <string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
-    <string name="enable_plugin_monitoring_services">Włącz wtyczkę nagrywania Podróży, aby skorzystać z usług rejestrowania pozycji (rejestrowanie GPX, śledzenie online)</string>
+    <string name="enable_plugin_monitoring_services">Włącz wtyczkę \"Nagrywanie Podróży\", aby skorzystać z usług rejestrowania pozycji (rejestrowanie GPX, śledzenie online)</string>
     <string name="no_buildings_found">Nie odnaleziono budynków.</string>
     <string name="search_villages_and_postcodes">Szukaj więcej wsi/kodów pocztowych</string>
     <string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
@@ -2127,8 +2127,8 @@ Długość %2$s</string>
     <string name="quick_action_take_photo_note">Nowa notatka fotograficzna</string>
     <string name="quick_action_add_osm_bug">Dodaj uwagę OSM</string>
     <string name="quick_action_navigation_voice">Przełącz wyciszenie dźwięku</string>
-    <string name="quick_action_navigation_voice_off">Dźwięk wyciszony</string>
-    <string name="quick_action_navigation_voice_on">Dźwięk aktywny</string>
+    <string name="quick_action_navigation_voice_off">Włącz Dźwięk</string>
+    <string name="quick_action_navigation_voice_on">Wycisz Dźwięk</string>
     <string name="quick_action_add_parking">Dodaj położenie parkowania</string>
     <string name="quick_action_new_action">Dodaj czynność</string>
     <string name="quick_action_edit_action">Modyfikowanie czynności</string>
@@ -2485,7 +2485,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="make_round_trip">Zamknięta trasa</string>
     <string name="fast_coordinates_input">Szybkie wprowadzanie współrzędnych</string>
     <string name="add_location_as_first_point_descr">Dodaj swoje położenie jako punkt początkowy, aby zaplanować idealną trasę.</string>
-    <string name="rendering_value_darkyellow_name">Ciemno żółty</string>
+    <string name="rendering_value_darkyellow_name">Ciemnożółty</string>
     <string name="wrong_input">Nieprawidłowe dane</string>
     <string name="enter_new_name">Wprowadź nową nazwę</string>
     <string name="shared_string_back">Wróć</string>
@@ -2779,7 +2779,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n</string>
     <string name="increase_search_radius_to">Zwiększ promień wyszukiwania do %1$s</string>
     <string name="send_search_query_description">Zostaną wysłane informacje o zapytaniu: <b>„%1$s”</b> i położeniu.<br/>
-        <br/> Informacje osobiste nie są gromadzone. Potrzebne są tylko dane wyszukiwania do poprawienia algorytmu wyszukiwania.<br/>
+        <br/> Informacje osobiste nie są gromadzone, dane wyszukiwania są używane tylko do poprawienia algorytmu wyszukiwania.<br/>
     </string>
     <string name="search_no_results_description">Brak wyników?
 \nPowiedz nam o tym.</string>
@@ -2845,9 +2845,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="ask_for_location_permission">Proszę przyznać uprawnienia udostępniania położenia, aby kontynuować.</string>
     <string name="release_3_2_pre">• Naprawiono awarię podczas uruchamiania, która wystąpiła na niektórych urządzeniach 
 \n 
-\n• Nowa funkcja Markery: wyświetlaj znaczniki, które już przeszły 
+\n• Nowa funkcja Markery: wyświetlaj minięte znaczniki
 \n 
-\n• Historia wyszukiwania pokazuje teraz kategorie, które wcześniej wyszukiwałeś 
+\n• Historia wyszukiwania pokazuje teraz wcześniej wyszukiwane kategorie
 \n 
 \n• Naprawiono awarię podczas uruchamiania, która miała miejsce w przypadku map innych niż łacińskie 
 \n 
@@ -2855,7 +2855,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n 
 \n• Obsługa edycji obiektów wielokątnych (nieoryginalnych) 
 \n 
-\n• Pomiar odległości: dodaj przycisk pomiaru do akcji w menu kontekstowym
+\n• Pomiar odległości: dodaj przycisk pomiaru do akcji w menu kontekstowym 
 \n</string>
     <string name="rendering_value_black_name">Czarny</string>
     <string name="shared_string_restore">Przywróć</string>
@@ -2868,13 +2868,13 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="start_search_from_city">Najpierw wybierz miasto</string>
     <string name="keep_passed_markers_descr">Znaczniki dodane jako grupa ulubionych lub punkty trasy GPX oznaczone jako przekazane pozostaną na mapie. Jeśli grupa nie jest aktywna, znaczniki znikną z mapy.</string>
     <string name="osm_live_plan_pricing">Plan i ceny</string>
-    <string name="osm_live_payment_monthly_title">Płać co miesiąc</string>
-    <string name="osm_live_payment_3_months_title">Zapłać raz na 3 miesiące</string>
-    <string name="osm_live_payment_annual_title">Zapłać raz w roku</string>
+    <string name="osm_live_payment_monthly_title">Co miesiąc</string>
+    <string name="osm_live_payment_3_months_title">Raz na 3 miesiące</string>
+    <string name="osm_live_payment_annual_title">Raz w roku</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / miesiąc</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / miesiąc</string>
-    <string name="osm_live_payment_discount_descr">Zapisz %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Twoja aktualna subskrypcja</string>
+    <string name="osm_live_payment_discount_descr">Zapisz %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Aktualna subskrypcja</string>
     <string name="osm_live_payment_renews_monthly">Odnawia się co miesiąc</string>
     <string name="osm_live_payment_renews_quarterly">Odnawia się co kwartał</string>
     <string name="osm_live_payment_renews_annually">Odnawia się co roku</string>
@@ -2902,9 +2902,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="on_foot">pieszo</string>
     <string name="route_way">Trasa</string>
     <string name="points_of_interests">Użyteczne miejsca (UM)</string>
-    <string name="waiting_for_route_calculation">Oczekiwanie na wyznaczenie trasy</string>
+    <string name="waiting_for_route_calculation">Wyznaczanie trasy…</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
-    <string name="avoid_roads_descr">Wybierz, na mapie lub z listy poniżej, drogę, którą chcesz unikać podczas nawigacji:</string>
+    <string name="avoid_roads_descr">Wybierz drogę, którą chcesz unikać podczas nawigacji na mapie lub z listy poniżej:</string>
     <string name="show_along_the_route">Pokaż na trasie</string>
     <string name="simulate_navigation">Symulacja nawigacji</string>
     <string name="choose_track_file_to_follow">Wybierz plik trasy do śledzenia</string>
@@ -2922,4 +2922,19 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_home">Dodaj dom</string>
     <string name="add_work">Dodaj pracę</string>
     <string name="work_button">Praca</string>
+    <string name="time_of_day">Pora dnia</string>
+    <string name="by_transport_type">Używając %1$s</string>
+    <string name="step_by_step">Krok po kroku</string>
+    <string name="road_types">Typy dróg</string>
+    <string name="exit_at">Opuść na</string>
+    <string name="sit_on_the_stop">Usiądź na przystanku</string>
+    <string name="shared_string_swap">Wymień</string>
+    <string name="show_more">Pokaż więcej</string>
+    <string name="tracks_on_map">Ślady na mapie</string>
+    <string name="quick_action_show_hide_gpx_tracks">Pokaż/Ukryj Ślady GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Naciśnięcie przycisku pokaże lub ukryje wybrane ślady GPX na mapie</string>
+    <string name="quick_action_gpx_tracks_hide">Ukryj Ślady GPX</string>
+    <string name="quick_action_gpx_tracks_show">Pokaż Ślady GPX</string>
+    <string name="add_destination_query">Proszę najpierw dodać Cel</string>
+    <string name="previous_route">Poprzednia trasa</string>
 </resources>

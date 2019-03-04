@@ -800,12 +800,12 @@ Pôr do Sol: %2$s</string>
     <string name="search_villages_and_postcodes">Pesquisar mais povoados/código postal</string>
     <string name="rendering_attr_showRoadMaps_description">Selecionar quando exibir somente vias no mapa:</string>
     <string name="safe_mode">Modo seguro</string>
-    <string name="native_library_not_running">O aplicativo está em modo seguro (desative nas \'configurações\').</string>
+    <string name="native_library_not_running">O aplicativo está em modo seguro (desligue-o nas \'configurações\').</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
     <string name="rendering_attr_roadColors_description">Selecionar um esquema de cores das vias:</string>
     <string name="rendering_attr_roadColors_name">Esquema de cores das vias</string>
     <string name="map_widget_show_destination_arrow">Mostrar a direção do destino</string>
-    <string name="enable_plugin_monitoring_services">Ativar plugin de gravação de viagem para usar serviços de registro de posição (registro GPX, rastreamento on-line)</string>
+    <string name="enable_plugin_monitoring_services">Ativar plugin de \"gravação de viagem\" para usar serviços de registro de posição (registro GPX, rastreamento on-line)</string>
     <string name="non_optimal_route_calculation">Calcular rota possivelmente não ideal em longas distâncias</string>
     <string name="gps_not_available">Por favor, ative o GPS nas configurações</string>
     <string name="map_widget_monitoring_services">Serviços de registro</string>
@@ -820,7 +820,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_target_points">Destinos</string>
     <string name="show_warnings_descr">Configurar avisos de tráfego (limites de velocidade, paradas obrigatórias, lombadas, túneis), radares e faixas de rolamento.</string>
     <string name="intermediate_point_too_far">Destino intermediário %1$s está muito longe da via mais próxima.</string>
-    <string name="arrived_at_intermediate_point">Você chegou no seu destino intermediário</string>
+    <string name="arrived_at_intermediate_point">Destino intermediário alcançado</string>
     <string name="context_menu_item_intermediate_point">Adicionar como destino intermediário</string>
     <string name="ending_point_too_far">Destino muito longe da via mais próxima.</string>
     <string name="add_tag">Adicionar etiqueta</string>
@@ -2389,7 +2389,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_add_osm_bug">Adicionar Nota OSM</string>
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
     <string name="quick_action_navigation_voice_off">Voz desligada</string>
-    <string name="quick_action_navigation_voice_on">Voz ligada</string>
+    <string name="quick_action_navigation_voice_on">"Silenciar voz "</string>
     <string name="quick_action_add_gpx">Adicionar ponto de passagem GPX</string>
     <string name="quick_action_add_parking">Marcar estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
@@ -2755,14 +2755,14 @@ Pôr do Sol: %2$s</string>
 \nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
     <string name="shared_string_world">Mundo</string>
-    <string name="thank_you_for_feedback">Obrigado por comentar</string>
+    <string name="thank_you_for_feedback">Obrigado por seus comentários</string>
     <string name="poi_cannot_be_found">Nó ou caminho não pode ser encontrado.</string>
     <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
 \nMande-nos o seu comentário</string>
     <string name="commiting_way">Enviando caminho…</string>
     <string name="increase_search_radius_to">Aumentar raio de pesquisa para %1$s</string>
     <string name="send_search_query">Enviar consulta de pesquisa?</string>
-    <string name="ask_for_location_permission">Por favor, dê permissão ao OsmAnd para ver a sua localização para continuar.</string>
+    <string name="ask_for_location_permission">Por favor, conceda acesso à localização OsmAnd para continuar.</string>
     <string name="markers_remove_dialog_msg">Apagar marcador de mapa \'%s\'\?</string>
     <string name="edit_map_marker">Editar marcador de mapa</string>
     <string name="third_party_application">Aplicativo de terceiros</string>
@@ -2773,34 +2773,34 @@ Pôr do Sol: %2$s</string>
     <string name="more_transport_on_stop_hint">Esta parada tem outros meios de transporte.</string>
     <string name="keep_passed_markers">Manter os marcadores visitados no mapa</string>
     <string name="keep_passed_markers_descr">Marcadores adicionados como grupo de Favoritos ou pontos de passagem GPX marcados como Visitado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
-    <string name="release_3_2_pre">• Corrigida a falha na inicialização que ocorria em alguns dispositivos.
-\n
-\n• Novo recurso de Marcadores: apresenta os marcadores que já foram percorridos.
-\n
-\n• Histórico de pesquisa agora mostra as categorias que você pesquisou anteriormente.
-\n
-\n• Corrigida a falha na inicialização que ocorria com os mapas não-latinos.
-\n
-\n• Reduz problemas com a velocidade de processamento nos dispositivos Android 8.0.
-\n
-\n• Suporte para edição de objetos poligonais (exceto utilidades).
-\n
-\n• Medição de distância: adiciona botão Medição em Ações no menu de contexto.
-\n
+    <string name="release_3_2_pre">• Corrigida a falha na inicialização que ocorria em alguns dispositivos. 
+\n 
+\n• Novo recurso de Marcadores: apresenta os marcadores que já foram percorridos. 
+\n 
+\n• Histórico de pesquisa agora mostra as categorias que você pesquisou anteriormente. 
+\n 
+\n• Corrigida a falha na inicialização que ocorria com os mapas não-latinos. 
+\n 
+\n• Reduz problemas com a velocidade de processamento nos dispositivos Android 8.0. 
+\n 
+\n• Suporte para edição de objetos poligonais (exceto utilidades). 
+\n 
+\n• Medição de distância: adiciona botão \"Medição\" em Ações no menu de contexto. 
+\n 
 \n</string>
     <string name="test_voice_desrc">Toque num botão e ouça a correspondente voz de comando para identificar os comandos faltantes ou com falha.</string>
     <string name="osm_live_plan_pricing">Planos</string>
-    <string name="osm_live_payment_monthly_title">Pague mensalmente</string>
-    <string name="osm_live_payment_3_months_title">Pague 3 meses</string>
-    <string name="osm_live_payment_annual_title">Pague 1 ano</string>
+    <string name="osm_live_payment_monthly_title">Mensal</string>
+    <string name="osm_live_payment_3_months_title">A cada três meses</string>
+    <string name="osm_live_payment_annual_title">Anualmente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s ao mês</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s ao mês</string>
-    <string name="osm_live_payment_discount_descr">Menos %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Sua assinatura atual</string>
+    <string name="osm_live_payment_discount_descr">Menos %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Assinatura atual</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
     <string name="osm_live_payment_renews_quarterly">Renova trimestralmente</string>
-    <string name="powered_by_osmand">Distribuído por OsmAnd</string>
+    <string name="powered_by_osmand">Por OsmAnd</string>
     <string name="default_price_currency_format">%1$,2f %2$s</string>
     <string name="osm_live_payment_header">Selecione o período de pagamento conveniente para você:</string>
     <string name="osm_live_payment_contribute_descr">Parte da renda vai para os contribuidores do OpenStreetMap.</string>
@@ -2819,7 +2819,7 @@ Pôr do Sol: %2$s</string>
 \n• Outras correções de bugs
 \n</string>
     <string name="send_search_query_description">Enviaremos a sua pesquisa: <b>\"%1$s\"</b>, bem como a sua localização.<br/>
-        <br/> Não coletamos informação pessoal, só precisamos dos dados da pesquisa para melhorar o algorítimo de pesquisa.<br/>
+        <br/> Nenhuma informação pessoal é coletada, os dados de pesquisa são usados apenas para melhorar o algoritmo de pesquisa.<br/>
     </string>
     <string name="osm_live_subscriptions">Assinaturas</string>
     <string name="mapillary_menu_title_pano">Exibir só imagens 360°</string>
@@ -2828,15 +2828,15 @@ Pôr do Sol: %2$s</string>
     <string name="swap_start_and_destination">Trocar início e destino</string>
     <string name="add_destination_point">Adicionar destino</string>
     <string name="add_intermediate_point">Adicionar intermediário</string>
-    <string name="add_start_point">Adicionar ponto inicial</string>
+    <string name="add_start_point">Adicionar ponto de partida</string>
     <string name="intermediate_waypoint">Ponto intermediário</string>
     <string name="transfers">transferências</string>
     <string name="on_foot">a pé</string>
     <string name="route_way">Via</string>
-    <string name="points_of_interests">Ponto de interesse (PDI)</string>
-    <string name="waiting_for_route_calculation">Esperando por cálculo de rota</string>
+    <string name="points_of_interests">Pontos de interesse (PDI)</string>
+    <string name="waiting_for_route_calculation">Calculando rota…</string>
     <string name="app_mode_public_transport">Transporte público</string>
-    <string name="avoid_roads_descr">Selecione ruas no mapa ou da lista abaixo que você deseja evitar durante a navegação:</string>
+    <string name="avoid_roads_descr">Selecione uma estrada que você deseja evitar durante a navegação, no mapa ou na lista abaixo:</string>
     <string name="show_along_the_route">Mostrar ao longo da rota</string>
     <string name="simulate_navigation">Simular navegação</string>
     <string name="choose_track_file_to_follow">Escolha arquivo de trilha para seguir</string>
@@ -2866,4 +2866,14 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_swap">Troca</string>
     <string name="show_more">Mostrar mais</string>
     <string name="tracks_on_map">Faixas no mapa</string>
+    <string name="time_of_day">Hora do dia</string>
+    <string name="by_transport_type">Por %1$s</string>
+    <string name="step_by_step">Passo a passo</string>
+    <string name="road_types">Tipos de estrada</string>
+    <string name="exit_at">Sair na</string>
+    <string name="sit_on_the_stop">Sente-se na parada</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar/Ocultar faixas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tocar neste botão de ação mostra ou oculta faixas GPX selecionadas no mapa</string>
+    <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
+    <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
 </resources>
