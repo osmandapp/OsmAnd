@@ -106,6 +106,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -151,6 +152,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 	private int routeId;
 	private String destinationStreetStr = "";
+	private boolean paused;
 
 	private OsmandApplication app;
 	private RoutingHelper routingHelper;
@@ -414,7 +416,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && view != null) {
+		if (mapActivity != null) {
 			LinearLayout cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
 			cardsContainer.removeAllViews();
 			if (routeId != -1) {
@@ -1068,12 +1070,14 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 
 	protected void updateDestinationStreetName(LatLon latLon) {
+		final WeakReference<ShowRouteInfoDialogFragment> fragmentRef = new WeakReference<>(ShowRouteInfoDialogFragment.this);
 		GeocodingLookupService.AddressLookupRequest addressLookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
 			@Override
 			public void geocodingDone(String address) {
-				if (!TextUtils.isEmpty(address)) {
-					destinationStreetStr = address;
-					updateCards();
+				ShowRouteInfoDialogFragment fragment = fragmentRef.get();
+				if (!TextUtils.isEmpty(address) && fragment != null && !fragment.paused) {
+					fragment.destinationStreetStr = address;
+					fragment.updateCards();
 				}
 			}
 		}, null);
@@ -1874,7 +1878,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
+		paused = false;
 		ViewParent parent = view.getParent();
 		if (parent != null && containerLayoutListener != null) {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
@@ -1892,6 +1896,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+		paused = true;
 		if (view != null) {
 			ViewParent parent = view.getParent();
 			if (parent != null && containerLayoutListener != null) {
