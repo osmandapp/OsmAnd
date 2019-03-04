@@ -1620,6 +1620,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		icon.setImageDrawable(drawable);
 
 		label.setText(model.getDescriptionRoutePart());
+		AndroidUtils.setTextPrimaryColor(app, label, nightMode);
 		if (model.distance > 0) {
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, app));
 			timeLabel.setText(getTimeDescription(model));

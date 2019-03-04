@@ -129,7 +129,7 @@ public class RouteStatisticCard extends BaseCard {
 
 	private void buildHeader(GPXUtilities.GPXTrackAnalysis analysis) {
 		final LineChart mChart = (LineChart) view.findViewById(R.id.chart);
-		GpxUiHelper.setupGPXChart(app, mChart, 4);
+		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
 		mChart.setOnTouchListener(onTouchListener);
 
 		if (analysis.hasElevationData) {
