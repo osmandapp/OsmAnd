@@ -174,7 +174,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setupHeightAndBackground(final View mainView) {
 		final Activity activity = getActivity();
-
+		if (activity == null) {
+			return;
+		}
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
 		final int contentHeight = getContentHeight(screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(activity));

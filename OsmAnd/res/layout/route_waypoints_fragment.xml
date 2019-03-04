@@ -188,7 +188,7 @@
 		<include
 			layout="@layout/route_info_menu_control_buttons"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="@dimen/route_info_list_item_height"
 			android:layout_gravity="bottom" />
 
 	</LinearLayout>
