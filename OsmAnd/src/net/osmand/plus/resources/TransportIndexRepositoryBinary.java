@@ -89,5 +89,8 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		return resource.getShallowReader().transportStopBelongsTo(stop);
 	}
 
-
+	@Override
+	public boolean isUseForPublicTransport() {
+		return resource.isUseForPublicTransport();
+	}
 }

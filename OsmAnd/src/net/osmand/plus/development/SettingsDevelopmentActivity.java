@@ -75,6 +75,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.use_osm_live_routing,
 				R.string.use_osm_live_routing_description));
 
+		navigation.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT,
+				R.string.use_osm_live_public_transport,
+				R.string.use_osm_live_public_transport_description));
+
 		pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();

@@ -1,11 +1,10 @@
 package net.osmand.plus.resources;
 
-import java.util.Collection;
-import java.util.List;
-
 import net.osmand.ResultMatcher;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+
+import java.util.List;
 
 public interface TransportIndexRepository {
 	
@@ -19,6 +18,6 @@ public interface TransportIndexRepository {
 			int limit, List<TransportStop> stops, ResultMatcher<TransportStop> matcher);
 	
 	public List<TransportRoute> getRouteForStop(TransportStop stop);
-		
-	
+
+	public boolean isUseForPublicTransport();
 }

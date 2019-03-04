@@ -36,6 +36,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
+
 public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
@@ -274,14 +277,20 @@ public class AmenityMenuController extends MenuController {
 			boolean useEnglishNames = app.getSettings().usingEnglishNames();
 			boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
 
+			TLongArrayList addedTransportStops = new TLongArrayList();
 			for (TransportIndexRepository t : reps) {
 				ArrayList<TransportStop> ls = new ArrayList<>();
 				QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
 						isSubwayEntrance ? 400 : 150);
 				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 				for (TransportStop tstop : ls) {
-					addRoutes(useEnglishNames, t, tstop,
-							(int) MapUtils.getDistance(tstop.getLocation(), amenity.getLocation()), isSubwayEntrance);
+					if (!addedTransportStops.contains(tstop.getId())) {
+						addedTransportStops.add(tstop.getId());
+						if (!tstop.isDeleted()) {
+							addRoutes(useEnglishNames, t, tstop,
+									(int) MapUtils.getDistance(tstop.getLocation(), amenity.getLocation()), isSubwayEntrance);
+						}
+					}
 				}
 			}
 			Collections.sort(routes, new Comparator<TransportStopRoute>() {

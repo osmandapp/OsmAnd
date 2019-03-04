@@ -1,6 +1,7 @@
 package net.osmand.osm.edit;
 
 import net.osmand.data.LatLon;
+import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -37,5 +38,9 @@ public class Node extends Entity implements Serializable {
 				", longitude=" + getLongitude() +
 				", tags=" + getTags() +
 				'}';
+	}
+
+	public boolean compareNode(Node thatObj) {
+		return this.compareEntity(thatObj);
 	}
 }

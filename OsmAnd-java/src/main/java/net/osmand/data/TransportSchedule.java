@@ -20,4 +20,14 @@ public class TransportSchedule {
 	public int[] getAvgWaitIntervals() {
 		return avgWaitIntervals.toArray();
 	}
+
+	public boolean compareSchedule(TransportSchedule thatObj) {
+		if (this == thatObj) {
+			return true;
+		} else {
+			return tripIntervals.equals(thatObj.tripIntervals) &&
+					avgStopIntervals.equals(thatObj.avgStopIntervals) &&
+					avgWaitIntervals.equals(thatObj.avgWaitIntervals);
+		}
+	}
 }

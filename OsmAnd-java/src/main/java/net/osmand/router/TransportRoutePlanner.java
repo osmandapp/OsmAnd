@@ -676,13 +676,24 @@ public class TransportRoutePlanner {
 				sr.clearSearchResults();
 				allPoints.clear();
 				allPointsLoad.clear();
-				
+
+				List<TransportStop> existingStops = null;
 				List<TransportStop> stops = r.searchTransportIndex(sr);
 				for(TransportStop s : stops) {
 					if(!loadedTransportStops.contains(s.getId())) {
 						loadedTransportStops.put(s.getId(), s);
-						allPoints.addAll(s.getReferencesToRoutes());
+						if (!s.isDeleted()) {
+							allPoints.addAll(s.getReferencesToRoutes());
+						}
+					} else {
+						if (existingStops == null) {
+							existingStops = new ArrayList<>();
+						}
+						existingStops.add(s);
 					}
+				}
+				if (existingStops != null && existingStops.size() > 0) {
+					stops.removeAll(existingStops);
 				}
 				
 				if(allPoints.size() > 0) {
@@ -713,6 +724,9 @@ public class TransportRoutePlanner {
 		private void loadTransportSegments(TIntObjectHashMap<TransportRoute> routes, BinaryMapIndexReader r,
 				List<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
 			for(TransportStop s : stops) {
+				if (s.isDeleted()) {
+					continue;
+				}
 				for (int ref : s.getReferencesToRoutes()) {
 					TransportRoute route = routes.get(ref);
 					if (route != null) {
@@ -736,7 +750,6 @@ public class TransportRoutePlanner {
 						} else {
 							System.err.println("Routing error: missing stop in route");
 						}
-						
 					}
 				}
 			}

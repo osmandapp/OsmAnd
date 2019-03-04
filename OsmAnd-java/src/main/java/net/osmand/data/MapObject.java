@@ -9,6 +9,7 @@ import net.osmand.util.TransliterationHelper;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -27,7 +28,6 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public static final byte NON_AMENITY_ID_RIGHT_SHIFT = 7;
 	
 	public static final byte WAY_MODULO_REMAINDER = 1;
-
 
 	protected String name = null;
 	protected String enName = null;
@@ -256,6 +256,17 @@ public abstract class MapObject implements Comparable<MapObject> {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public boolean compareObject(MapObject thatObj) {
+		if (this == thatObj) {
+			return true;
+		} else {
+			return this.id.longValue() == thatObj.id.longValue() &&
+					Algorithms.objectEquals(getLocation(), thatObj.getLocation()) &&
+					Algorithms.objectEquals(this.getName(), thatObj.getName()) &&
+					Algorithms.objectEquals(this.getNamesMap(true), thatObj.getNamesMap(true));
+		}
 	}
 
 	public static class MapObjectComparator implements Comparator<MapObject> {
