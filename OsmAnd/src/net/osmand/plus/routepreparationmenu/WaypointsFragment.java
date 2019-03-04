@@ -428,9 +428,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			AndroidUtils.setBackground(app, clearButtonDescr, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 
-		AndroidUtils.setBackground(app, view.findViewById(R.id.dividerControlButtons), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(
 				ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.route_info_cancel_button_color_light));
 
@@ -593,10 +590,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void updateTitle() {
-		final TextViewEx title = (TextViewEx) view.findViewById(R.id.title);
-		int pointsSize = app.getTargetPointsHelper().getAllPoints().size();
-		String text = getString(R.string.shared_string_waypoints) + ": " + (pointsSize != 0 ? pointsSize : 1);
-		title.setText(text);
+		if (isAdded()) {
+			final TextViewEx title = (TextViewEx) view.findViewById(R.id.title);
+			int pointsSize = app.getTargetPointsHelper().getAllPoints().size();
+			String text = getString(R.string.shared_string_waypoints) + ": " + (pointsSize != 0 ? pointsSize : 1);
+			title.setText(text);
+		}
 	}
 
 	private void applyPointsChanges() {

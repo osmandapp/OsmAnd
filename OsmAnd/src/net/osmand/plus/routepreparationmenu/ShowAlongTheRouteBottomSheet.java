@@ -546,7 +546,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		@Override
 		protected void onPostExecute(Void aVoid) {
 			ShowAlongTheRouteBottomSheet fragment = fragmentRef.get();
-			if (fragment != null) {
+			if (fragment != null && fragment.isAdded()) {
 				fragment.updateAdapter();
 			}
 		}

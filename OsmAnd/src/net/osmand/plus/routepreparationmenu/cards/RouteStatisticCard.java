@@ -16,7 +16,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
@@ -32,7 +31,6 @@ import java.util.List;
 
 public class RouteStatisticCard extends BaseCard {
 
-	private MapActivity mapActivity;
 	private GPXFile gpx;
 	private GpxSelectionHelper.GpxDisplayItem gpxItem;
 	private GpxUiHelper.OrderedLineDataSet slopeDataSet;
@@ -41,7 +39,6 @@ public class RouteStatisticCard extends BaseCard {
 
 	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx, View.OnTouchListener onTouchListener) {
 		super(mapActivity);
-		this.mapActivity = mapActivity;
 		this.gpx = gpx;
 		this.onTouchListener = onTouchListener;
 		makeGpxDisplayItem();
@@ -54,11 +51,8 @@ public class RouteStatisticCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-
-		view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
-
 		OsmandApplication app = getMyApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
 
 		((ImageView) view.findViewById(R.id.distance_icon)).setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_route_distance));
 		((ImageView) view.findViewById(R.id.time_icon)).setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_time_span));
@@ -68,12 +62,11 @@ public class RouteStatisticCard extends BaseCard {
 		int hours = time / (60 * 60);
 		int minutes = (time / 60) % 60;
 		TextView distanceTv = (TextView) view.findViewById(R.id.distance);
-		AndroidUtils.setTextSecondaryColor(app, distanceTv, nightMode);
 		String text = OsmAndFormatter.getFormattedDistance(dist, app);
 		SpannableStringBuilder distanceStr = new SpannableStringBuilder(text);
 		int spaceIndex = text.indexOf(" ");
 		if (spaceIndex != -1) {
-			distanceStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), 0, spaceIndex, 0);
+			distanceStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, 0);
 		}
 		distanceTv.setText(distanceStr);
 		SpannableStringBuilder timeStr = new SpannableStringBuilder();
@@ -85,10 +78,9 @@ public class RouteStatisticCard extends BaseCard {
 		}
 		spaceIndex = timeStr.toString().lastIndexOf(" ");
 		if (spaceIndex != -1) {
-			timeStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.primary_text_light)), 0, spaceIndex, 0);
+			timeStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, 0);
 		}
 		TextView timeTv = (TextView) view.findViewById(R.id.time);
-		AndroidUtils.setTextSecondaryColor(app, timeTv, nightMode);
 		timeTv.setText(timeStr);
 
 		TextView arriveTimeTv = (TextView) view.findViewById(R.id.time_desc);
@@ -116,10 +108,6 @@ public class RouteStatisticCard extends BaseCard {
 		((ImageView) view.findViewById(R.id.ascent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_ascent));
 	}
 
-	@Override
-	protected void applyDayNightMode() {
-	}
-
 	public GpxUiHelper.OrderedLineDataSet getSlopeDataSet() {
 		return slopeDataSet;
 	}
@@ -141,7 +129,7 @@ public class RouteStatisticCard extends BaseCard {
 
 	private void buildHeader(GPXUtilities.GPXTrackAnalysis analysis) {
 		final LineChart mChart = (LineChart) view.findViewById(R.id.chart);
-		GpxUiHelper.setupGPXChart(app, mChart, 4);
+		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
 		mChart.setOnTouchListener(onTouchListener);
 
 		if (analysis.hasElevationData) {

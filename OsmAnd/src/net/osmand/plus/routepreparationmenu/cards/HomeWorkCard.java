@@ -1,12 +1,9 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -75,10 +72,6 @@ public class HomeWorkCard extends BaseCard {
 				return true;
 			}
 		});
-	}
-
-	@Override
-	protected void applyDayNightMode() {
 	}
 
 	private void openAddPointDialog(MapActivity mapActivity, boolean home) {

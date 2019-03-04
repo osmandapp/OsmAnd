@@ -1357,7 +1357,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, pointType.name());
 		AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 		fragment.setArguments(args);
-		fragment.setUsedOnMap(false);
 		fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 	}
 

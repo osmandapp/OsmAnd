@@ -52,8 +52,6 @@ public class PublicTransportCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
-
 		List<TransportRouteResultSegment> segments = routeResult.getSegments();
 		createRouteBadges(segments);
 
@@ -71,26 +69,6 @@ public class PublicTransportCard extends BaseCard {
 				ShowRouteInfoDialogFragment.showInstance(mapActivity, routeId);
 			}
 		});
-		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow ? View.VISIBLE : View.GONE);
-	}
-
-	public int getRouteId() {
-		return routeId;
-	}
-
-	public void setSecondButtonVisible(boolean secondButtonVisible) {
-		this.secondButtonVisible = secondButtonVisible;
-	}
-
-	@Override
-	protected void applyDayNightMode() {
-		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
-		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
-		AndroidUtils.setTextSecondaryColor(app, fromLine, nightMode);
-		AndroidUtils.setTextSecondaryColor(app, wayLine, nightMode);
-
 		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
 		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
 
@@ -117,10 +95,17 @@ public class PublicTransportCard extends BaseCard {
 		} else {
 			showButton.setVisibility(View.GONE);
 		}
+		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow ? View.VISIBLE : View.GONE);
+	}
 
-		AndroidUtils.setBackground(app, view, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.top_divider), nightMode, R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.routes_info_container), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
+	public int getRouteId() {
+		return routeId;
+	}
+
+	public void setSecondButtonVisible(boolean secondButtonVisible) {
+		this.secondButtonVisible = secondButtonVisible;
 	}
 
 	private SpannableString getFirstLineDescrSpan() {

@@ -932,8 +932,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), nightMode,
 				R.drawable.route_info_trans_gradient_left_light, R.drawable.route_info_trans_gradient_left_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.dividerControlButtons), nightMode,
-				R.color.divider_light, R.color.divider_dark);
 
 		int color = ContextCompat.getColor(ctx, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 
