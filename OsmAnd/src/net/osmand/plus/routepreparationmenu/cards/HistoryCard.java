@@ -13,6 +13,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.search.core.SearchResult;
@@ -71,10 +72,14 @@ public class HistoryCard extends BaseCard {
 			} else {
 				subtitleView.setVisibility(View.GONE);
 			}
-			Drawable image = null;
-			int iconId = QuickSearchListItem.getHistoryIconId(app, (HistoryEntry) searchResult.object);
-			if (iconId > 0) {
+			Drawable image;
+			final HistoryEntry entry = (HistoryEntry) searchResult.object;
+			int iconId = QuickSearchListItem.getHistoryIconId(app, entry);
+			try {
 				image = app.getUIUtilities().getIcon(iconId, nightMode ?
+						R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+			} catch (Exception e) {
+				image = app.getUIUtilities().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()), nightMode ?
 						R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 			}
 			ImageView img = (ImageView) v.findViewById(R.id.imageView);
@@ -93,8 +98,7 @@ public class HistoryCard extends BaseCard {
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
-					app.getTargetPointsHelper().navigateToPoint(searchResult.location, true, -1, historyEntry.getName());
+					app.getTargetPointsHelper().navigateToPoint(searchResult.location, true, -1, entry.getName());
 				}
 			});
 			items.addView(v);
