@@ -457,13 +457,13 @@
     <string name="rendering_attr_showRoadMaps_name">Mapas só de estradas</string>
     <string name="safe_mode_description">Executa-lo aplicativo no modo seguro (empregando o código máis lento do Android no canto do nativo).</string>
     <string name="safe_mode">Modo seguro</string>
-    <string name="native_library_not_running">O aplicativo está a ser executada no modo seguro (desactíveo nos \"Axustes\").</string>
+    <string name="native_library_not_running">O aplicativo está a ser executada no modo seguro (desactivar nos \"Axustes\").</string>
     <string name="close_changeset">Fecha-lo conxunto de trocos</string>
     <string name="zxing_barcode_scanner_not_found">O dixitalizador do códigos de barras ZXing non está instalado. Quéreo procurar na Google Play\?</string>
     <string name="rendering_attr_roadColors_description">Escoller un esquema de cores das estradas:</string>
     <string name="rendering_attr_roadColors_name">Esquema de cores de estrada</string>
     <string name="map_widget_show_destination_arrow">Amosar en que dirección está o destino</string>
-    <string name="enable_plugin_monitoring_services">Permitir que o engadido da gravación de viaxes empregue os servizos de rexistro da posición (rexistro do GPX, seguemento na rede)</string>
+    <string name="enable_plugin_monitoring_services">Permitir que o engadido da \"Gravación de viaxes\" empregue os servizos de rexistro da posición (rexistro do GPX, seguemento na rede)</string>
     <string name="non_optimal_route_calculation">Calcular rota posíbelmente non óptima nas distancias longas</string>
     <string name="gps_not_available">Active o GPS na configuración</string>
     <string name="map_widget_monitoring_services">Servizos de rexistro</string>
@@ -479,7 +479,7 @@
     <string name="new_destination_point_dialog">Xa existe un destino:</string>
     <string name="shared_string_target_points">Destinos</string>
     <string name="intermediate_point_too_far">O destino intermedio %1$s está demasiado lonxe da estrada máis preta.</string>
-    <string name="arrived_at_intermediate_point">Chegou ó destino intermedio</string>
+    <string name="arrived_at_intermediate_point">Destino intermedio acadado</string>
     <string name="context_menu_item_intermediate_point">Engadir un destino intermedio</string>
     <string name="map_widget_intermediate_distance">Destino intermedio</string>
     <string name="ending_point_too_far">O derradeiro punto está moi lonxe da estrada máis preta.</string>
@@ -2491,8 +2491,8 @@ Lon %2$s</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="keep_passed_markers">Manter no mapa as marcaxes desbotadas</string>
     <string name="more_transport_on_stop_hint">Hai máis transportes nesta paraxe.</string>
-    <string name="ask_for_location_permission">Para proseguer, debe permiti-la ubicación ó OsmAnd.</string>
-    <string name="thank_you_for_feedback">Grazas polo seu comentario</string>
+    <string name="ask_for_location_permission">Para proseguer, permite acceder á ubicación ó OsmAnd.</string>
+    <string name="thank_you_for_feedback">Grazas polos seus comentarios</string>
     <string name="poi_cannot_be_found">O nó ou camiño non pode ser atopado.</string>
     <string name="search_no_results_feedback">Sen resultados da procura\? Mándenos as súas opinións</string>
     <string name="commiting_way">Estase a envíar camiño…</string>
@@ -2530,31 +2530,31 @@ Lon %2$s</string>
     <string name="import_track_desc">O ficheiro %1$s non contén puntos de pasaxe, queres importalo coma unha pista\?</string>
     <string name="copy_location_name">Copiar nome do punto/PDI</string>
     <string name="keep_passed_markers_descr">As marcaxes engadidas coma un grupo de Favoritos ou puntos de rota GPX desbotados ficarán no mapa. Se o grupo non está dispoñíbel, as marcaxes agocharanse do mapa.</string>
-    <string name="release_3_2_pre">• Corrixido o erro no inicio que se producía nalgúns dispositivos
-\n
-\n • Nova función das marcaxes: amosa as marcaxes que xa foran atravesadas.
-\n
+    <string name="release_3_2_pre">• Corrixido o erro no inicio que se producía nalgúns dispositivos 
+\n 
+\n • Nova función das marcaxes: amosa as marcaxes que xa foran atravesadas. 
+\n 
 \n • No historial da procura amosa agora as categorías procuradas anteriormente 
-\n
+\n 
 \n • Corrixido o fallo no inicio que se producía cos mapas non latinos 
 \n 
 \n • Mellora nos problemas da velocidade do renderizado nos dispositivos Android 8.0 
 \n 
 \n • Suporte para a edición de obxectos poligonais (non servizos) 
 \n 
-\n • Medir distancia: podes engadi-lo botón de «Medir distancia» ás accións no menú contextual 
+\n • Medir distancia: Engadi-lo botón de «Medir distancia» ás accións no menú contextual 
 \n</string>
     <string name="release_3_1">• Navigación: Corrección na barra do progreso, intercambio axiña do punto inicial e final da rota 
 \n 
-\n • Marcaxes do mapa: corrixido o des/activar grupos, capacidade para agochar marcaxes do mapa 
+\n • Marcaxes do mapa: Corrixido o des/activar grupos, capacidade para agochar marcaxes do mapa 
 \n 
 \n • Edición do OSM: Capacidade de edición das etiquetas para obxectos que non sexan puntos e vías, corrección dos comentarios baleiros nas notas, copia de seguridade das edicións 
 \n 
 \n • Mellor análise da Wikipedia e Wikiviaxes, os ficheiros actualizados xa están dispoñíbeis 
 \n 
-\n • Menú contextual: corrixida a cor dos escudos do transporte no modo noite e os tamaños do menú adicionais 
+\n • Menú contextual: Corrixida a cor dos escudos do transporte no modo noite e os tamaños do menú adicionais 
 \n 
-\n • Navigación fluvial: suporte á navegación fluvial 
+\n • Navigación fluvial: Suporte á navegación fluvial 
 \n 
 \n • Outras correccións de erros 
 \n</string>
@@ -2742,8 +2742,8 @@ Lon %2$s</string>
     <string name="number_of_rows_in_dash">Número de filas no taboleiro %1$s</string>
     <string name="save_poi_too_many_uppercase">O nome contén demasiadas maiúsculas. Proseguer\?</string>
     <string name="quick_action_navigation_voice">Activar ou desactivar voz</string>
-    <string name="quick_action_navigation_voice_off">Voz desactivada</string>
-    <string name="quick_action_navigation_voice_on">Voz activada</string>
+    <string name="quick_action_navigation_voice_off">Activar a voz</string>
+    <string name="quick_action_navigation_voice_on">Desactivar a voz</string>
     <string name="quick_action_add_gpx">Engadir punto de pasaxe GPX</string>
     <string name="quick_favorites_name_preset">Nome predefinido</string>
     <string name="quick_action_add_gpx_descr">Premendo neste botón de acción, engade un punto de pasaxe GPX no centro da pantalla.</string>
@@ -2927,20 +2927,20 @@ Lon %2$s</string>
 \n
 \n Máis países darredor do globo están dispoñíbeis para baixar! Dende Afganistán a Zimbabue, dende Australia a Estados Unidos. A Arxentina, Brasil, Canadá, Francia, Alemaña, México, Reino Unido, España, … "</string>
     <string name="osm_live_plan_pricing">Plans e prezos</string>
-    <string name="osm_live_payment_monthly_title">Pagamento mensual</string>
-    <string name="osm_live_payment_3_months_title">Pagamento trimestral</string>
-    <string name="osm_live_payment_annual_title">Pagamento anual</string>
+    <string name="osm_live_payment_monthly_title">Mensual</string>
+    <string name="osm_live_payment_3_months_title">Trimestral</string>
+    <string name="osm_live_payment_annual_title">Anual</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mes</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mes</string>
-    <string name="osm_live_payment_discount_descr">Aforra un %1$s!</string>
-    <string name="osm_live_payment_current_subscription">A súa subscrición actual</string>
+    <string name="osm_live_payment_discount_descr">Aforra un %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Subscrición actual</string>
     <string name="osm_live_payment_renews_monthly">Renovación mensual</string>
     <string name="osm_live_payment_renews_quarterly">Renovación trimestral</string>
     <string name="osm_live_payment_renews_annually">Renovación anual</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Escolle o período de pagamento convinte para ti:</string>
     <string name="osm_live_payment_contribute_descr">Un anaco dos ingresos vai ós contribuíntes do OpenStreetMap.</string>
-    <string name="powered_by_osmand">Desenvolvido polo OsmAnd</string>
+    <string name="powered_by_osmand">Polo OsmAnd</string>
     <string name="osm_live_subscriptions">Subscricións</string>
     <string name="mapillary_menu_title_pano">Amosar só imaxes 360°</string>
     <string name="shared_string_launch">Executar</string>
@@ -2954,15 +2954,15 @@ Lon %2$s</string>
     <string name="swap_start_and_destination">Trocar inicio e destino</string>
     <string name="add_destination_point">Engadir destino</string>
     <string name="add_intermediate_point">Engadir punto intermedio</string>
-    <string name="add_start_point">Engadir punto inicial</string>
+    <string name="add_start_point">Engadir punto de partida</string>
     <string name="intermediate_waypoint">Punto intermedio</string>
     <string name="transfers">transferencias</string>
     <string name="on_foot">a pé</string>
     <string name="route_way">Vía</string>
     <string name="points_of_interests">Puntos de interese (PDI)</string>
-    <string name="waiting_for_route_calculation">Estase a agardar polo cálculo da rota</string>
+    <string name="waiting_for_route_calculation">Estase a calcula-la rota…</string>
     <string name="app_mode_public_transport">Transporte público</string>
-    <string name="avoid_roads_descr">Escolle a estrada a evitar durante a navegación, dende o mapa ou da seguinte listaxe:</string>
+    <string name="avoid_roads_descr">Escolle unha estrada a evitar durante a navigación, dende o mapa ou da seguinte listaxe:</string>
     <string name="show_along_the_route">Amosar ó longo da rota</string>
     <string name="simulate_navigation">Simular navegación</string>
     <string name="choose_track_file_to_follow">Escolle o ficheiro da pista a seguir</string>
@@ -2983,4 +2983,17 @@ Lon %2$s</string>
     <string name="route_surface_stat_container">Superficie</string>
     <string name="route_smoothness_stat_container">Suavidade</string>
     <string name="route_steepness_stat_container">Pendente</string>
+    <string name="time_of_day">Hora do día</string>
+    <string name="by_transport_type">En %1$s</string>
+    <string name="step_by_step">Paseniño</string>
+    <string name="road_types">Tipos de estrada</string>
+    <string name="exit_at">Saír en</string>
+    <string name="sit_on_the_stop">Agardar na paraxe</string>
+    <string name="shared_string_swap">Trocar</string>
+    <string name="show_more">Amosar máis</string>
+    <string name="tracks_on_map">Pistas no mapa</string>
+    <string name="quick_action_show_hide_gpx_tracks">Amosar/Agochar pistas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Premendo neste botón de acción, amosa ou agocha as pistas GPX escollidas no mapa</string>
+    <string name="quick_action_gpx_tracks_hide">Agochar pistas GPX</string>
+    <string name="quick_action_gpx_tracks_show">Amosar pistas GPX</string>
 </resources>
