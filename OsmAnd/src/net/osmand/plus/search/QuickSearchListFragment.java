@@ -307,11 +307,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						latitude, longitude, searchType);
 
 				dialogFragment.dismiss();
-				if (searchType == QuickSearchType.HOME_POINT || searchType == QuickSearchType.WORK_POINT) {
-					mapActivity.getMapLayers().getMapControlsLayer().showDialog();
-				} else {
-					mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
-				}
+				mapActivity.getMapLayers().getMapControlsLayer().showDialog();
 			} else {
 				app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);
