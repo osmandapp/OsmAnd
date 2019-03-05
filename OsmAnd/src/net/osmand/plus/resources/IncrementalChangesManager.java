@@ -64,7 +64,7 @@ public class IncrementalChangesManager {
 		return files;
 	}
 
-	public void indexMainMap(File f, long dateCreated) {
+	public synchronized void indexMainMap(File f, long dateCreated) {
 		String nm = Algorithms.getFileNameWithoutExtension(f).toLowerCase();
 		RegionUpdateFiles regionUpdateFiles = regions.get(nm);
 		if(regionUpdateFiles == null) {
@@ -111,7 +111,7 @@ public class IncrementalChangesManager {
 		}
 	}
 	
-	public boolean index(File f, long dateCreated, BinaryMapIndexReader mapReader) {
+	public synchronized boolean index(File f, long dateCreated, BinaryMapIndexReader mapReader) {
 		String index = Algorithms.getFileNameWithoutExtension(f).toLowerCase();
 		if(index.length() <= 9 || index.charAt(index.length() - 9) != '_'){
 			return false;
