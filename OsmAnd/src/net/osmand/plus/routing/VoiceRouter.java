@@ -644,6 +644,11 @@ public class VoiceRouter {
 				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English TTS voice
 				pn = pn.replace("Dr.", "Dr ");   // Avoid pause many English TTS voices introduce after period
 			}
+			if ((player != null) && (player.getLanguage().equals("de"))) {
+				if (pn.startsWith("St ")) {
+					pn = pn.replace("St ", "S T "); // German Staatsstrasse, abbreviated St, often mispronounced
+				}
+			}
 		}
 		return pn;
 	}
