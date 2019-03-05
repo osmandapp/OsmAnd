@@ -12,12 +12,13 @@
 
 -->
     <string name="release_3_3">
-        • Redesigned Direction menu\n\n
-        • Navigation on public transport, support of all kinds of transport: Metro, Buses, Tram and so on\n\n 
+        • Redesigned Direction menu: Home and Work buttons, last route info, list of active GPX and markers, list of search history\n\n
+        • Additional info in the Route details: road types, surface, steepness, smoothness\n\n 
+        • Public transport navigation, support of all kinds of transportation: Metro, Bus, Tram and so on.\n\n 
         • Quick action for Show/Hide tracks, Day/Night mode switches\n\n
-        • Fixing of flooded territories in Germany, South Africa, Quebec\n\n
-        • Additional support for import of KML and KMZ\n\n
-        • Fix crashes at some public transport stops\n\n
+        • Fixed flooded territories in Germany, South Africa, Quebec\n\n
+        • Additional support for KML and KMZ import\n\n
+        • Fixed crashes on opening some public transport stops\n\n
     </string>
     <string name="use_osm_live_public_transport_description">Enable public transport for OsmAnd Live changes.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live public transport</string>
