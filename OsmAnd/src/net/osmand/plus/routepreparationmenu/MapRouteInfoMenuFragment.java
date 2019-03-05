@@ -84,6 +84,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	private int screenHeight;
 	private int viewHeight;
 
+	private boolean paused;
+
 	@Nullable
 	private MapActivity getMapActivity() {
 		FragmentActivity activity = getActivity();
@@ -322,6 +324,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		paused = false;
 		if (menu == null) {
 			dismiss();
 		}
@@ -343,6 +346,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+		paused = true;
 		if (view != null) {
 			ViewParent parent = view.getParent();
 			if (parent != null && containerLayoutListener != null) {
@@ -378,6 +382,10 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			}
 		}
 		return -1;
+	}
+
+	public boolean isPaused() {
+		return paused;
 	}
 
 	private void buildBottomView() {
@@ -777,7 +785,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 	public void setBottomShadowVisible(boolean visible) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && bottomContainer != null) {
 			if (visible) {
 				AndroidUtils.setForeground(mapActivity, bottomContainer, nightMode,
 						R.drawable.bg_contextmenu_shadow, R.drawable.bg_contextmenu_shadow);

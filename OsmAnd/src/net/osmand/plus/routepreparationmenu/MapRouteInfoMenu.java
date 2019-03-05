@@ -1379,7 +1379,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public WeakReference<MapRouteInfoMenuFragment> findMenuFragment() {
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapRouteInfoMenuFragment.TAG);
-		if (fragment != null && !fragment.isDetached()) {
+		if (fragment instanceof MapRouteInfoMenuFragment && !((MapRouteInfoMenuFragment) fragment).isPaused()) {
 			return new WeakReference<>((MapRouteInfoMenuFragment) fragment);
 		} else {
 			return null;
