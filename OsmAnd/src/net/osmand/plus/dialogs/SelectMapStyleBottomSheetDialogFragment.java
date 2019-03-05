@@ -92,6 +92,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 								? R.string.hide_full_description : R.string.show_full_description));
 						descrItem.setDescriptionMaxLines(descriptionExpanded
 								? Integer.MAX_VALUE : COLLAPSED_DESCRIPTION_LINES);
+						setupHeightAndBackground(getView());
 					}
 				})
 				.setDescription(RendererRegistry.getRendererDescription(context, selectedStyle))
@@ -150,7 +151,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	protected boolean useScrollableItemsContainer() {
-		return false;
+		return true;
 	}
 
 	@Nullable
