@@ -262,6 +262,9 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (this == thatObj) {
 			return true;
 		} else {
+			if(this.id == null || thatObj.id == null) {
+				return false;
+			}
 			return this.id.longValue() == thatObj.id.longValue() &&
 					Algorithms.objectEquals(getLocation(), thatObj.getLocation()) &&
 					Algorithms.objectEquals(this.getName(), thatObj.getName()) &&
