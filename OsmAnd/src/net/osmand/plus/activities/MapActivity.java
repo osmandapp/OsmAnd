@@ -727,7 +727,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		OsmandPlugin.onMapActivityResume(this);
 
-		final Intent intent = getIntent();
+		Intent intent = getIntent();
 		if (intent != null) {
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
 				if (intent.getData() != null) {
