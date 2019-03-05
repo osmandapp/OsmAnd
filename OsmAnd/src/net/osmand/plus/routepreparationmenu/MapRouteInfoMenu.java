@@ -1124,7 +1124,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			toButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					openAddPointDialog(PointType.INTERMEDIATE);
+					openAddPointDialog(app.getTargetPointsHelper().getPointToNavigate() == null ? PointType.TARGET : PointType.INTERMEDIATE);
 				}
 			});
 
