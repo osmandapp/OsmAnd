@@ -26,7 +26,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class TransportRoutePlanner {
 	
-
+	private static final boolean MEASURE_TIME = false;
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
 		ctx.startCalcTime = System.currentTimeMillis();
@@ -47,6 +47,7 @@ public class TransportRoutePlanner {
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
+			long beginMs = MEASURE_TIME ? System.currentTimeMillis() : 0;
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
 			}
@@ -60,6 +61,7 @@ public class TransportRoutePlanner {
 			}
 			ctx.visitedRoutesCount++;
 			ctx.visitedSegments.put(segment.getId(), segment);
+			
 			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges) {
 				continue;
 			}
@@ -89,6 +91,9 @@ public class TransportRoutePlanner {
 					travelTime += interval * 10;
 				} else {
 					travelTime += ctx.cfg.stopTime + segmentDist / ctx.cfg.travelSpeed;
+				}
+				if(travelDist > finishTime + ctx.cfg.finishTimeSeconds) {
+					break;
 				}
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
@@ -148,6 +153,13 @@ public class TransportRoutePlanner {
 			
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				throw new InterruptedException("Route calculation interrupted");
+			}
+			if (MEASURE_TIME) {
+				long time = System.currentTimeMillis() - beginMs;
+				if (time > 10) {
+					System.out.println(String.format("%d ms ref - %s id - %d", time, segment.road.getRef(),
+							segment.road.getId()));
+				}
 			}
 			updateCalculationProgress(ctx, queue);
 			
@@ -748,7 +760,10 @@ public class TransportRoutePlanner {
 								lst.add(segment);
 							}
 						} else {
-							System.err.println("Routing error: missing stop in route");
+							// MapUtils.getDistance(s.getLocation(), route.getForwardStops().get(158).getLocation());
+							System.err.println(
+									String.format("Routing error: missing stop '%s' in route '%s' id: %d",
+											s.toString(), route.getRef(), route.getId() / 2));
 						}
 					}
 				}

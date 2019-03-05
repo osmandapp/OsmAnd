@@ -22,7 +22,7 @@ public class TransportRoute extends MapObject {
 	private String color;
 	private List<Way> forwardWays;
 	private TransportSchedule schedule;
-	public static final double SAME_STOP = 25;
+	public static final double SAME_STOP = 40;
 	
 	public TransportRoute() {
 	}
