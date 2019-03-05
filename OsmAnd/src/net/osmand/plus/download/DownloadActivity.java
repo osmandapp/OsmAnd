@@ -438,7 +438,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			freeVersionBanner.setVisibility(View.VISIBLE);
 			downloadsLeftProgressBar.setMax(DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
 			freeVersionDescriptionTextView.setText(ctx.getString(R.string.free_version_message,
-					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
+					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS +"" ));
 
 			LinearLayout marksLinearLayout = (LinearLayout) freeVersionBanner.findViewById(R.id.marksLinearLayout);
 			Space spaceView = new Space(ctx);
