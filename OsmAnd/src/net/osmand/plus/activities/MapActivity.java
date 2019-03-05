@@ -730,7 +730,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		final Intent intent = getIntent();
 		if (intent != null) {
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-				getIntent().setAction("");
 				if (intent.getData() != null) {
 					final Uri data = intent.getData();
 					final String scheme = data.getScheme();
