@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class TransportRoute extends MapObject {
 	private TransportSchedule schedule;
 	public static final double SAME_STOP = 25;
 	
-	public TransportRoute(){
+	public TransportRoute() {
 	}
 	
 	public TransportSchedule getSchedule() {
@@ -31,7 +32,7 @@ public class TransportRoute extends MapObject {
 	}
 	
 	public TransportSchedule getOrCreateSchedule() {
-		if(schedule == null) {
+		if (schedule == null) {
 			schedule = new TransportSchedule();
 		}
 		return schedule;
@@ -220,5 +221,36 @@ public class TransportRoute extends MapObject {
 			}
 		}
 		return ref;
+	}
+
+	public boolean compareRoute(TransportRoute thatObj) {
+		if (this.compareObject(thatObj) &&
+				Algorithms.objectEquals(this.ref, thatObj.ref) &&
+				Algorithms.objectEquals(this.operator, thatObj.operator) &&
+				Algorithms.objectEquals(this.type, thatObj.type) &&
+				Algorithms.objectEquals(this.color, thatObj.color) &&
+				this.getDistance() == thatObj.getDistance() &&
+				((this.schedule == null && thatObj.schedule == null) ||
+						(this.schedule != null && thatObj.schedule != null && this.schedule.compareSchedule(thatObj.schedule))) &&
+				this.forwardStops.size() == thatObj.forwardStops.size() &&
+				((this.forwardWays == null && thatObj.forwardWays == null) ||
+						(this.forwardWays != null && thatObj.forwardWays != null && this.forwardWays.size() == thatObj.forwardWays.size()))) {
+
+			for (int i = 0; i < this.forwardStops.size(); i++) {
+				if (!this.forwardStops.get(i).compareStop(thatObj.forwardStops.get(i))) {
+					return false;
+				}
+			}
+			if (this.forwardWays != null) {
+				for (int i = 0; i < this.forwardWays.size(); i++) {
+					if (!this.forwardWays.get(i).compareWay(thatObj.forwardWays.get(i))) {
+						return false;
+					}
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

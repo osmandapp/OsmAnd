@@ -74,6 +74,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
 import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_STOPS_RADIUS_METERS;
@@ -906,11 +907,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		List<TransportIndexRepository> reps =
 				activity.getMyApplication().getResourceManager().searchTransportRepositories(latitude, longitude);
 
+		TLongArrayList addedTransportStops = new TLongArrayList();
 		for (TransportIndexRepository t : reps) {
 			ArrayList<TransportStop> ls = new ArrayList<>();
 			QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, SHOW_STOPS_RADIUS_METERS);
 			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
-			transportStops.addAll(ls);
+			for (TransportStop tstop : ls) {
+				if (!addedTransportStops.contains(tstop.getId())) {
+					addedTransportStops.add(tstop.getId());
+					if (!tstop.isDeleted()) {
+						transportStops.add(tstop);
+					}
+				}
+			}
 		}
 		return transportStops;
 	}

@@ -68,6 +68,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import gnu.trove.list.array.TLongArrayList;
+
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.assetMapping;
 
 /**
@@ -117,6 +119,7 @@ public class ResourceManager {
 		private File filename;
 		private List<BinaryMapIndexReader> readers = new ArrayList<>(BinaryMapReaderResourceType.values().length);
 		private boolean useForRouting;
+		private boolean useForPublicTransport;
 		public BinaryMapReaderResource(File f, BinaryMapIndexReader initialReader) {
 			this.filename = f;
 			this.initialReader = initialReader;
@@ -179,6 +182,14 @@ public class ResourceManager {
 		
 		public boolean isUseForRouting() {
 			return useForRouting;
+		}
+
+		public boolean isUseForPublicTransport() {
+			return useForPublicTransport;
+		}
+
+		public void setUseForPublicTransport(boolean useForPublicTransport) {
+			this.useForPublicTransport = useForPublicTransport;
 		}
 	}
 	
@@ -709,6 +720,10 @@ public class ResourceManager {
 							context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get())) {
 						resource.setUseForRouting(true);
 					}
+					if (mapReader.hasTransportData() && (!f.getParentFile().equals(liveDir) ||
+							context.getSettings().USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT.get())) {
+						resource.setUseForPublicTransport(true);
+					}
 					if (mapReader.containsPoiData()) {
 						try {
 							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
@@ -922,7 +937,7 @@ public class ResourceManager {
 	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
 		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
 		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.checkContains(latitude,longitude)) {
+			if (index.checkContains(latitude,longitude) && index.isUseForPublicTransport()) {
 				repos.add(index);
 			}
 		}
@@ -934,14 +949,24 @@ public class ResourceManager {
 		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
 		List<TransportStop> stops = new ArrayList<>();
 		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude) && index.isUseForPublicTransport()) {
 				repos.add(index);
 			}
 		}
-		if(!repos.isEmpty()){
+		if (!repos.isEmpty()){
+			TLongArrayList addedTransportStops = new TLongArrayList();
 			for (TransportIndexRepository repository : repos) {
-				repository.searchTransportStops(topLatitude, leftLongitude, bottomLatitude, rightLongitude, 
-						-1, stops, matcher);
+				List<TransportStop> ls = new ArrayList<>();
+				repository.searchTransportStops(topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+						-1, ls, matcher);
+				for (TransportStop tstop : ls) {
+					if (!addedTransportStops.contains(tstop.getId())) {
+						addedTransportStops.add(tstop.getId());
+						if (!tstop.isDeleted()) {
+							stops.add(tstop);
+						}
+					}
+				}
 			}
 		}
 		return stops;
@@ -1016,7 +1041,7 @@ public class ResourceManager {
 	public BinaryMapIndexReader[] getTransportRoutingMapFiles() {
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for(BinaryMapReaderResource r : fileReaders.values()) {
-			if(r.isUseForRouting()) {
+			if(r.isUseForPublicTransport()) {
 				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.TRANSPORT_ROUTING);
 				if (reader != null) {
 					readers.add(reader);

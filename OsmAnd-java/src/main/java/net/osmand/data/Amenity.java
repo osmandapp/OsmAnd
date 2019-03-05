@@ -266,19 +266,12 @@ public class Amenity extends MapObject {
 	public void setOpeningHours(String openingHours) {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
 	}
-	
 
 	public boolean comparePoi(Amenity thatObj) {
-		if (this.id.longValue() == thatObj.id.longValue() &&
-				Algorithms.objectEquals(this.type.getKeyName(), thatObj.type.getKeyName()) && 
-				Algorithms.objectEquals(getLocation(), thatObj.getLocation()) &&
+		return this.compareObject(thatObj) &&
+				Algorithms.objectEquals(this.type.getKeyName(), thatObj.type.getKeyName()) &&
 				Algorithms.objectEquals(this.subType, thatObj.subType) &&
-				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo) &&
-				Algorithms.objectEquals(this.getName(), thatObj.getName()) &&
-				Algorithms.objectEquals(this.getNamesMap(true), thatObj.getNamesMap(true))) {
-			return true;
-		}
-		return false;
+				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo);
 	}
 	
 	@Override

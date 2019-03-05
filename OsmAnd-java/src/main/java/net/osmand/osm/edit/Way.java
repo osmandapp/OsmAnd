@@ -1,14 +1,15 @@
 package net.osmand.osm.edit;
 
-import gnu.trove.list.array.TLongArrayList;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
+import gnu.trove.list.array.TLongArrayList;
 
 public class Way extends Entity {
 
@@ -194,6 +195,24 @@ public class Way extends Entity {
 		}
 		if (nodeIds != null) {
 			nodeIds.reverse();
+		}
+	}
+
+	public boolean compareWay(Way thatObj) {
+		if (this.compareEntity(thatObj) &&
+				Algorithms.objectEquals(this.nodeIds, thatObj.nodeIds) &&
+				((this.nodes == null && thatObj.nodes == null) || (this.nodes != null && thatObj.nodes != null && this.nodes.size() == thatObj.nodes.size()))) {
+
+			if (this.nodes != null) {
+				for (int i = 0; i < this.nodes.size(); i++) {
+					if (!this.nodes.get(i).compareNode(thatObj.nodes.get(i))) {
+						return false;
+					}
+				}
+			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

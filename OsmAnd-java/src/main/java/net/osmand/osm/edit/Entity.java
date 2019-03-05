@@ -328,4 +328,14 @@ public abstract class Entity implements Serializable {
 		return tags;
 	}
 
+	public boolean compareEntity(Entity thatObj) {
+		if (this == thatObj) {
+			return true;
+		} else {
+			return this.id == thatObj.id &&
+					Math.abs(latitude - thatObj.latitude) < 0.00001 &&
+					Math.abs(longitude - thatObj.longitude) < 0.00001 &&
+					Algorithms.objectEquals(this.tags, thatObj.tags);
+		}
+	}
 }

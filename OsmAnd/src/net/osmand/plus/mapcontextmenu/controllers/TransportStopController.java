@@ -24,6 +24,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import gnu.trove.list.array.TLongArrayList;
+
 public class TransportStopController extends MenuController {
 
 	public static final int SHOW_STOPS_RADIUS_METERS = 150;
@@ -120,6 +122,7 @@ public class TransportStopController extends MenuController {
 
 			boolean useEnglishNames = mapActivity.getMyApplication().getSettings().usingEnglishNames();
 
+			TLongArrayList addedTransportStops = new TLongArrayList();
 			for (TransportIndexRepository t : reps) {
 				if (t.acceptTransportStop(transportStop)) {
 					boolean empty = transportStop.getReferencesToRoutes() == null || transportStop.getReferencesToRoutes().length == 0;
@@ -130,9 +133,12 @@ public class TransportStopController extends MenuController {
 					QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), SHOW_STOPS_RADIUS_METERS);
 					t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 					for (TransportStop tstop : ls) {
-						if (tstop.getId().longValue() != transportStop.getId().longValue() || empty) {
-							addRoutes(routes, useEnglishNames, t, tstop, transportStop,
-									(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+						if (!addedTransportStops.contains(tstop.getId())) {
+							addedTransportStops.add(tstop.getId());
+							if (!tstop.isDeleted() && (tstop.getId().longValue() != transportStop.getId().longValue() || empty)) {
+								addRoutes(routes, useEnglishNames, t, tstop, transportStop,
+										(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+							}
 						}
 					}
 				}
