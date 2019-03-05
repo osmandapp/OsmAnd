@@ -376,11 +376,12 @@ project.logger.warn("Analytics enabled for free version: $analytics")
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	if (analytics) {
-		implementation 'com.google.firebase:firebase-core:12.0.1'
-		implementation 'com.google.firebase:firebase-messaging:12.0.1'
-		implementation 'com.google.firebase:firebase-iid:12.0.1'
-		implementation 'com.google.firebase:firebase-config:12.0.1'
-		implementation 'com.facebook.android:facebook-android-sdk:4.31.0'	
+	// Analytics is totally removed to stay free from 3rd party collecting users data
+//		implementation 'com.google.firebase:firebase-core:12.0.1'
+//		implementation 'com.google.firebase:firebase-messaging:12.0.1'
+//		implementation 'com.google.firebase:firebase-iid:12.0.1'
+//		implementation 'com.google.firebase:firebase-config:12.0.1'
+//		implementation 'com.facebook.android:facebook-android-sdk:4.31.0'	
 	}
 	implementation 'com.android.support:multidex:1.0.1'
 	implementation 'com.android.support:gridlayout-v7:27.1.1'
