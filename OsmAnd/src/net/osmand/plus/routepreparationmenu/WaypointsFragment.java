@@ -38,12 +38,14 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.DynamicListViewCallbacks;
 import net.osmand.plus.views.controls.StableArrayAdapter;
@@ -103,7 +105,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 		view = inflater.inflate(R.layout.route_waypoints_fragment, parent, false);
 		if (view == null) {
-			return view;
+			return null;
 		}
 		AndroidUtils.addStatusBarPadding21v(app, view);
 
@@ -137,10 +139,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 						hasActivePoints = true;
 					} else {
 						Object item = items.get(0);
-						if (item instanceof WaypointHelper.LocationPointWrapper) {
-							WaypointHelper.LocationPointWrapper w = (WaypointHelper.LocationPointWrapper) item;
-							if (w.getPoint() instanceof TargetPointsHelper.TargetPoint) {
-								hasActivePoints = !((TargetPointsHelper.TargetPoint) w.point).start;
+						if (item instanceof LocationPointWrapper) {
+							LocationPointWrapper w = (LocationPointWrapper) item;
+							if (w.getPoint() instanceof TargetPoint) {
+								hasActivePoints = !((TargetPoint) w.point).start;
 							}
 						} else {
 							hasActivePoints = true;
@@ -186,10 +188,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 					public boolean canDismiss(int position) {
 						List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
 						Object obj = listAdapter.getItem(position);
-						if (obj instanceof WaypointHelper.LocationPointWrapper) {
-							WaypointHelper.LocationPointWrapper w = (WaypointHelper.LocationPointWrapper) obj;
-							if (w.getPoint() instanceof TargetPointsHelper.TargetPoint) {
-								return !((TargetPointsHelper.TargetPoint) w.getPoint()).start;
+						if (obj instanceof LocationPointWrapper) {
+							LocationPointWrapper w = (LocationPointWrapper) obj;
+							if (w.getPoint() instanceof TargetPoint) {
+								return !((TargetPoint) w.getPoint()).start;
 							}
 						}
 						return activeObjects.contains(obj);
@@ -256,10 +258,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 					private boolean isContainsOnlyStart(List<Object> items) {
 						if (items.size() == 1) {
 							Object item = items.get(0);
-							if (item instanceof WaypointHelper.LocationPointWrapper) {
-								WaypointHelper.LocationPointWrapper w = (WaypointHelper.LocationPointWrapper) item;
-								if (w.getPoint() instanceof TargetPointsHelper.TargetPoint) {
-									return ((TargetPointsHelper.TargetPoint) w.getPoint()).start;
+							if (item instanceof LocationPointWrapper) {
+								LocationPointWrapper w = (LocationPointWrapper) item;
+								if (w.getPoint() instanceof TargetPoint) {
+									return ((TargetPoint) w.getPoint()).start;
 								}
 							}
 						}
@@ -304,10 +306,15 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		});
 
 		View cancelButton = view.findViewById(R.id.cancel_button);
+		TextViewEx cancelTitle = (TextViewEx) view.findViewById(R.id.cancel_button_descr);
+		cancelTitle.setText(R.string.shared_string_undo);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				cancelTimer();
+				reloadAdapter();
+				updateRouteCalculationProgress(0);
+				updateTitle();
 			}
 		});
 
@@ -438,7 +445,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
-		mapActivity.getMyApplication().getWaypointHelper().removeVisibleLocationPoint(new ArrayList<WaypointHelper.LocationPointWrapper>());
+		mapActivity.getMyApplication().getWaypointHelper().removeVisibleLocationPoint(new ArrayList<LocationPointWrapper>());
 
 		listAdapter.setNotifyOnChange(false);
 		listAdapter.clear();
@@ -457,8 +464,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		return new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
-				if (listAdapter.getItem(item) instanceof WaypointHelper.LocationPointWrapper) {
-					WaypointHelper.LocationPointWrapper ps = (WaypointHelper.LocationPointWrapper) listAdapter.getItem(item);
+				if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
+					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
 					if (ps != null) {
 						showOnMap(app, ctx, ps.getPoint(), false);
 					}
@@ -469,7 +476,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	public StableArrayAdapter getWaypointsDrawerAdapter(
-			final boolean edit, final List<WaypointHelper.LocationPointWrapper> deletedPoints,
+			final boolean edit, final List<LocationPointWrapper> deletedPoints,
 			final MapActivity ctx, final int[] running, final boolean flat, final boolean nightMode) {
 
 		List<Object> points = waypointDialogHelper.getTargetPoints();
@@ -483,8 +490,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 				View v = convertView;
 				Object obj = getItem(position);
-				if (obj instanceof WaypointHelper.LocationPointWrapper) {
-					WaypointHelper.LocationPointWrapper point = (WaypointHelper.LocationPointWrapper) obj;
+				if (obj instanceof LocationPointWrapper) {
+					LocationPointWrapper point = (LocationPointWrapper) obj;
 					v = updateWaypointItemView(edit, deletedPoints, app, ctx, waypointDialogHelper, v, point, this, nightMode, flat, position);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 				}
@@ -493,10 +500,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		};
 
 		for (Object p : points) {
-			if (p instanceof WaypointHelper.LocationPointWrapper) {
-				WaypointHelper.LocationPointWrapper w = (WaypointHelper.LocationPointWrapper) p;
+			if (p instanceof LocationPointWrapper) {
+				LocationPointWrapper w = (LocationPointWrapper) p;
 				if (w.type == WaypointHelper.TARGETS) {
-					final TargetPointsHelper.TargetPoint t = (TargetPointsHelper.TargetPoint) w.point;
+					final TargetPoint t = (TargetPoint) w.point;
 					if (t.getOriginalPointDescription() != null
 							&& t.getOriginalPointDescription().isSearchingAddress(mapActivity)) {
 						GeocodingLookupService.AddressLookupRequest lookupRequest
@@ -556,7 +563,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void updateListAdapter() {
-		List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<>();
+		List<LocationPointWrapper> deletedPoints = new ArrayList<>();
 		listView.setEmptyView(null);
 		StableArrayAdapter listAdapter = getWaypointsDrawerAdapter(true, deletedPoints, mapActivity, running, false, nightMode);
 		AdapterView.OnItemClickListener listener = getDrawerItemClickListener(mapActivity, running, listAdapter);
@@ -606,15 +613,15 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				if (app == null || !isVisible()) {
 					return;
 				}
-				List<TargetPointsHelper.TargetPoint> allTargets = new ArrayList<>();
-				TargetPointsHelper.TargetPoint start = null;
+				List<TargetPoint> allTargets = new ArrayList<>();
+				TargetPoint start = null;
 				List<Object> items = listAdapter.getActiveObjects();
 				if (items != null) {
 					for (Object obj : items) {
-						if (obj instanceof WaypointHelper.LocationPointWrapper) {
-							WaypointHelper.LocationPointWrapper p = (WaypointHelper.LocationPointWrapper) obj;
-							if (p.getPoint() instanceof TargetPointsHelper.TargetPoint) {
-								TargetPointsHelper.TargetPoint t = (TargetPointsHelper.TargetPoint) p.getPoint();
+						if (obj instanceof LocationPointWrapper) {
+							LocationPointWrapper p = (LocationPointWrapper) obj;
+							if (p.getPoint() instanceof TargetPoint) {
+								TargetPoint t = (TargetPoint) p.getPoint();
 								if (t.start) {
 									start = t;
 								} else {
@@ -631,7 +638,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 				if (start != null) {
 					int startInd = allTargets.indexOf(start);
-					TargetPointsHelper.TargetPoint first = allTargets.remove(0);
+					TargetPoint first = allTargets.remove(0);
 					if (startInd != 0) {
 						start.start = false;
 						start.intermediate = startInd != allTargets.size() - 1;
@@ -673,10 +680,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			cTimer.cancel();
 	}
 
-	private static View updateWaypointItemView(final boolean edit, final List<WaypointHelper.LocationPointWrapper> deletedPoints,
+	private static View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
 	                                           final OsmandApplication app, final Activity ctx,
 	                                           final WaypointDialogHelper helper, View v,
-	                                           final WaypointHelper.LocationPointWrapper point,
+	                                           final LocationPointWrapper point,
 	                                           final ArrayAdapter adapter, final boolean nightMode,
 	                                           final boolean flat, final int position) {
 		if (v == null || v.findViewById(R.id.info_close) == null) {
@@ -694,7 +701,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		} else {
 			boolean targets = point.type == WaypointHelper.TARGETS;
 			boolean notFlatTargets = targets && !flat;
-			boolean startPoint = notFlatTargets && ((TargetPointsHelper.TargetPoint) point.point).start;
+			boolean startPoint = notFlatTargets && ((TargetPoint) point.point).start;
 			final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 			boolean canRemove = !targets || !targetPointsHelper.getIntermediatePoints().isEmpty();
 			int iconResId = nightMode ? R.color.marker_circle_button_color_dark : R.color.ctx_menu_title_color_dark;
@@ -747,7 +754,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private static void updatePointInfoView(final OsmandApplication app, final Activity activity,
-	                                        View localView, final WaypointHelper.LocationPointWrapper ps,
+	                                        View localView, final LocationPointWrapper ps,
 	                                        final boolean mapCenter, final boolean nightMode,
 	                                        final boolean edit, final boolean topBar) {
 		WaypointHelper wh = app.getWaypointHelper();
@@ -768,7 +775,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(activity, app, nightMode));
 		int dist = -1;
-		boolean startPoint = ps.type == WaypointHelper.TARGETS && ((TargetPointsHelper.TargetPoint) ps.point).start;
+		boolean startPoint = ps.type == WaypointHelper.TARGETS && ((TargetPoint) ps.point).start;
 		if (!startPoint) {
 			if (!wh.isRouteCalculated()) {
 				if (activity instanceof MapActivity) {
@@ -830,7 +837,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			AndroidUtils.setTextSecondaryColor(activity, descText, nightMode);
 			switch (ps.type) {
 				case WaypointHelper.TARGETS:
-					TargetPointsHelper.TargetPoint targetPoint = (TargetPointsHelper.TargetPoint) ps.point;
+					TargetPoint targetPoint = (TargetPoint) ps.point;
 					if (targetPoint.start) {
 						pointDescription = activity.getResources().getString(R.string.starting_point);
 					} else {
@@ -856,7 +863,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 	}
 
-	private static PointDescription getPointDescription(Context ctx, TargetPointsHelper.TargetPoint point) {
+	private static PointDescription getPointDescription(Context ctx, TargetPoint point) {
 		if (!point.intermediate) {
 			return new PointDescription(PointDescription.POINT_TYPE_TARGET, ctx.getString(R.string.route_descr_destination) + ":",
 					point.getOnlyName());
