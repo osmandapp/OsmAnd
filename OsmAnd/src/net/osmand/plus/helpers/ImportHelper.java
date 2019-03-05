@@ -38,6 +38,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -58,7 +59,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -558,7 +558,7 @@ public class ImportHelper {
 				if (save) {
 					new SaveAsyncTask(result, name, useImportDir).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				} else {
-					showGpxOnMap(result);
+					showGpxInDetailsActivity(result);
 				}
 				if (gpxImportCompleteListener != null) {
 					gpxImportCompleteListener.onComplete(true);
@@ -665,12 +665,12 @@ public class ImportHelper {
 
 		@Override
 		protected void onPostExecute(final String warning) {
-			final String msg = warning == null ? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), result.path) : warning;
-			Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
-
-			showGpxOnMap(result);
+			if(Algorithms.isEmpty(warning)) {
+				showGpxInDetailsActivity(result);
+			} else {
+				Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
+			}
 		}
-
 	}
 
 	private MapActivity getMapActivity() {
@@ -678,6 +678,15 @@ public class ImportHelper {
 			return (MapActivity) activity;
 		} else {
 			return null;
+		}
+	}
+
+	private void showGpxInDetailsActivity(final GPXFile gpxFile) {
+		if (gpxFile.path != null) {
+			Intent newIntent = new Intent(activity, app.getAppCustomization().getTrackActivity());
+			newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxFile.path);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			activity.startActivity(newIntent);
 		}
 	}
 
