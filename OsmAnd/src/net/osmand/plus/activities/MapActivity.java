@@ -36,7 +36,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,8 +98,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
@@ -109,10 +106,11 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
-import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
@@ -730,15 +728,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		final Intent intent = getIntent();
 		if (intent != null) {
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-				if (intent.getData() != null) {
-					final Uri data = intent.getData();
+				final Uri data = intent.getData();
+				if (data != null) {
 					final String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
-						importHelper.handleFileImport(data, new File(data.getPath()).getName(), true);
-						setIntent(null);
+						final String path = data.getPath();
+						if (path != null) {
+							importHelper.handleFileImport(data, new File(path).getName(), true);
+						}
+						clearIntent(intent);
 					} else if ("content".equals(scheme)) {
 						importHelper.handleContentImport(data, true);
-						setIntent(null);
+						clearIntent(intent);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						parseNavigationIntent(data);
 					} else if ("osmand.api".equals(scheme)) {
@@ -850,6 +851,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			}
 		}
+	}
+
+	private void clearIntent(Intent intent) {
+		intent.setAction(null);
+		intent.setData(null);
 	}
 
 	public void updateStatusBarColor() {
@@ -1053,7 +1059,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					getString(R.string.navigation_intent_invalid, schemeSpecificPart),
 					Toast.LENGTH_LONG).show(); //$NON-NLS-1$
 		}
-		setIntent(null);
+		clearIntent(getIntent());
 	}
 
 	public void readLocationToShow() {
