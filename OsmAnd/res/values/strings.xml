@@ -12,11 +12,11 @@
 
 -->
     <string name="release_3_3">
-        • Redesigned Direction menu: Home and Work buttons, last route info, list of active GPX and markers, list of search history\n\n
-        • Additional info in the Route details: road types, surface, steepness, smoothness\n\n 
-        • Public transport navigation, support of all kinds of transportation: Metro, Bus, Tram and so on.\n\n 
-        • Quick action for Show/Hide tracks, Day/Night mode switches\n\n
-        • Fixed flooded territories in Germany, South Africa, Quebec\n\n
+        • New \'Directions\' screen: Displays Home and Work destination buttons, \'previous route\' shortcut, list of active GPX tracks and markers, search history\n\n
+        • Additional info under \'Route details\': road types, surface, steepness, smoothness\n\n
+        • Public transport navigation supporting all kinds of transportation: metro, bus, tram, etc.\n\n
+        • New Quick action for show/hide tracks and day/night modes\n\n
+        • Fixed areas displayed as flooded in Germany, South Africa, Quebec\n\n
         • Additional support for KML and KMZ import\n\n
         • Fixed crashes on opening some public transport stops\n\n
     </string>
