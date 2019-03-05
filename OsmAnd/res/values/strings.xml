@@ -11,6 +11,14 @@
 	Thx - Hardy
 
 -->
+    <string name="release_3_3">
+        • Redesigned Direction menu\n\n
+        • Navigation on public transport, support of all kinds of transport: Metro, Buses, Tram and so on\n\n 
+        • Quick action for Show/Hide tracks, Day/Night mode switches\n\n
+        • Fixing of flooded territories in Germany, South Africa, Quebec\n\n
+        • Additional support for import of KML and KMZ\n\n
+        • Fix crashes at some public transport stops\n\n
+    </string>
     <string name="use_osm_live_public_transport_description">Enable public transport for OsmAnd Live changes.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live public transport</string>
     <string name="time_of_day">Time of day</string>
