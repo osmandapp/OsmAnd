@@ -65,7 +65,7 @@ public class GpxSelectionHelper {
 		for(SelectedGpxFile s : selectedGPXFiles) {
 			selectedGpxFilesBackUp.put(s.gpxFile, s.modifiedTime);
 		}
-		selectedGPXFiles.clear();
+		selectedGPXFiles = new ArrayList<>();
 		saveCurrentSelections();
 	}
 
@@ -507,7 +507,9 @@ public class GpxSelectionHelper {
 					} else if (obj.has(CURRENT_TRACK)) {
 						SelectedGpxFile file = savingTrackHelper.getCurrentTrack();
 						file.selectedByUser = selectedByUser;
-						selectedGPXFiles.add(file);
+						List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
+						newSelectedGPXFiles.add(file);
+						selectedGPXFiles = newSelectedGPXFiles;
 					}
 				}
 				processSplit();
@@ -586,11 +588,13 @@ public class GpxSelectionHelper {
 			}
 		}
 		if (displayed != show) {
+			List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
 			if (show) {
-				selectedGPXFiles.add(sf);
+				newSelectedGPXFiles.add(sf);
 			} else {
-				selectedGPXFiles.remove(sf);
+				newSelectedGPXFiles.remove(sf);
 			}
+			selectedGPXFiles = newSelectedGPXFiles;
 		}
 		if (syncGroup) {
 			syncGpxWithMarkers(gpx);
