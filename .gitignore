@@ -16,6 +16,7 @@ OsmAndCore_*.aar
 *.iml
 .settings
 .idea
+.project
 out/
 
 # Android Studio
