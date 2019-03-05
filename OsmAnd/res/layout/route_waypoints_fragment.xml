@@ -48,7 +48,7 @@
 					android:layout_weight="1"
 					android:ellipsize="end"
 					android:maxLines="1"
-					android:text="@string/shared_string_waypoints"
+					android:text="@string/shared_string_target_points"
 					android:textAppearance="@style/TextAppearance.ListItemCategoryTitle" />
 
 			</LinearLayout>
