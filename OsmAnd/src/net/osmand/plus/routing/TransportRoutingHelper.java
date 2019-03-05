@@ -405,7 +405,6 @@ public class TransportRoutingHelper {
 
 				@Override
 				public void start() {
-
 				}
 
 				@Override
@@ -419,7 +418,6 @@ public class TransportRoutingHelper {
 
 				@Override
 				public void requestPrivateAccessRouting() {
-
 				}
 
 				@Override
@@ -428,6 +426,10 @@ public class TransportRoutingHelper {
 						walkingSegmentsCalculated = true;
 					} else {
 						updateProgress(0);
+						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
+						if (walkingRouteParams != null) {
+							routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
+						}
 					}
 				}
 			};
@@ -435,12 +437,6 @@ public class TransportRoutingHelper {
 				@Override
 				public void onRouteCalculated(RouteCalculationResult route) {
 					RouteRecalculationThread.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);
-					if (!walkingSegmentsToCalculate.isEmpty()) {
-						RouteCalculationParams walkingRouteParams = getWalkingRouteParams();
-						if (walkingRouteParams != null) {
-							routingHelper.startRouteCalculationThread(walkingRouteParams, true, true);
-						}
-					}
 				}
 			};
 
