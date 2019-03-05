@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -118,9 +119,15 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			if (hasUnderlay) {
 				settings.MAP_UNDERLAY.set(params);
 				settings.MAP_UNDERLAY_PREVIOUS.set(params);
+				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY) {
+					activity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY, true);
+				}
 			} else {
 				settings.MAP_UNDERLAY.set(null);
+				activity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
 				settings.MAP_UNDERLAY_PREVIOUS.set(null);
+
+
 			}
 			final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
 					activity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");

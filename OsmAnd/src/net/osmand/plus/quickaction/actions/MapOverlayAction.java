@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -120,8 +121,12 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 			if (hasOverlay) {
 				settings.MAP_OVERLAY.set(params);
 				settings.MAP_OVERLAY_PREVIOUS.set(params);
+				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == OsmandSettings.LayerTransparencySeekbarMode.OVERLAY) {
+					activity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+				}
 			} else {
 				settings.MAP_OVERLAY.set(null);
+				activity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
 				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
 			plugin.updateMapLayers(activity.getMapView(), settings.MAP_OVERLAY, activity.getMapLayers());
