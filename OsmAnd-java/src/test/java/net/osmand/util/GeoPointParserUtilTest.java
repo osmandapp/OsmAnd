@@ -269,7 +269,7 @@ public class GeoPointParserUtilTest {
 		url = "http://maps.google.com/maps?q=N" + dlat + ",W" + Math.abs(dlon);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(dlat, -Math.abs(dlon)));
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
 
 		url = "http://maps.google.com/maps?f=d&saddr=" + dlat +"," +dlon +"&daddr=" +dlat +"," +dlon+"&hl=en";
 		System.out.println("url: " + url);
