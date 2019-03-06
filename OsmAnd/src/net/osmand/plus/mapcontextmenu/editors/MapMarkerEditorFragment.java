@@ -25,7 +25,8 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		editor = getMapActivity().getContextMenu().getMapMarkerEditor();
+		MapActivity mapActivity = getMapActivity();
+		editor = mapActivity != null ? mapActivity.getContextMenu().getMapMarkerEditor() : null;
 	}
 
 	@Override
@@ -132,10 +133,12 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 
 	public static void showInstance(MapActivity mapActivity) {
 		MapMarkerEditor editor = mapActivity.getContextMenu().getMapMarkerEditor();
-		MapMarkerEditorFragment fragment = new MapMarkerEditorFragment();
-		mapActivity.getSupportFragmentManager().beginTransaction()
-				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-				.addToBackStack(null)
-				.commitAllowingStateLoss();
+		if (editor != null) {
+			MapMarkerEditorFragment fragment = new MapMarkerEditorFragment();
+			mapActivity.getSupportFragmentManager().beginTransaction()
+					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
+		}
 	}
 }

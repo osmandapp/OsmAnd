@@ -19,6 +19,7 @@ import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -110,8 +111,11 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	private void addFavorite(MapActivity mapActivity, LatLon latLon, String title, boolean autoFill) {
-		mapActivity.getContextMenu().getFavoritePointEditor().add(latLon, title, "",
-				getParams().get(KEY_CATEGORY_NAME), Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)), autoFill);
+		FavoritePointEditor favoritePointEditor = mapActivity.getContextMenu().getFavoritePointEditor();
+		if (favoritePointEditor != null) {
+			favoritePointEditor.add(latLon, title, "", getParams().get(KEY_CATEGORY_NAME),
+					Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)), autoFill);
+		}
 	}
 
 	@Override

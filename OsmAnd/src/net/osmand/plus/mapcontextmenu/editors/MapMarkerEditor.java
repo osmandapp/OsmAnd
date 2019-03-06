@@ -9,7 +9,7 @@ public class MapMarkerEditor extends PointEditor {
 
 	private MapMarker marker;
 
-	public MapMarkerEditor(MapActivity mapActivity) {
+	public MapMarkerEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 	}
 
@@ -25,6 +25,7 @@ public class MapMarkerEditor extends PointEditor {
 	public void edit(@NonNull MapMarker marker) {
 		this.marker = marker;
 		isNew = false;
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapMarkerEditorFragment.showInstance(mapActivity);
 		}

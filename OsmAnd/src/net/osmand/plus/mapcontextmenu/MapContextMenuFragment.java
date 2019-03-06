@@ -68,7 +68,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
@@ -154,10 +153,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return null;
+		}
+
 		processScreenHeight(container);
 
-		menu = getMapActivity().getContextMenu();
-		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
+		menu = mapActivity.getContextMenu();
+		OsmandApplication app = mapActivity.getMyApplication();
+		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
@@ -171,7 +176,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (!menu.isActive()) {
 			return view;
 		}
-		AndroidUtils.addStatusBarPadding21v(getMapActivity(), view);
+		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 
 		nightMode = menu.isNightMode();
 		mainView = view.findViewById(R.id.context_menu_main);
@@ -197,7 +202,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 		updateVisibility(topButtonContainer, 0);
 
-		map = getMapActivity().getMapView();
+		map = mapActivity.getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 		customMapCenter = menu.getMapCenter() != null;
 		if (!customMapCenter) {
@@ -291,7 +296,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		if (menu.isLandscapeLayout()) {
 			final TypedValue typedValueAttr = new TypedValue();
-			getMapActivity().getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 			mainView.setBackgroundResource(typedValueAttr.resourceId);
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(menu.getLandscapeWidthPx(),
 					ViewGroup.LayoutParams.MATCH_PARENT));
@@ -457,7 +462,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		};
 
 		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
-		AndroidUtils.setBackground(getMapActivity(), topShadowAllView, nightMode, R.drawable.bg_map_context_menu_light,
+		AndroidUtils.setBackground(mapActivity, topShadowAllView, nightMode, R.drawable.bg_map_context_menu_light,
 				R.drawable.bg_map_context_menu_dark);
 
 		((InterceptorLinearLayout) mainView).setListener(slideTouchListener);
@@ -465,19 +470,19 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		buildHeader();
 
-		((TextView) view.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(getContext(),
+		((TextView) view.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
 		View menuLine2 = view.findViewById(R.id.context_menu_line2);
 		if (menuLine2 != null) {
-			((TextView) menuLine2).setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
+			((TextView) menuLine2).setTextColor(ContextCompat.getColor(mapActivity, R.color.ctx_menu_subtitle_color));
 		}
-		((TextView) view.findViewById(R.id.distance)).setTextColor(ContextCompat.getColor(getContext(),
+		((TextView) view.findViewById(R.id.distance)).setTextColor(ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light));
 
-		AndroidUtils.setTextSecondaryColor(getMapActivity(),
+		AndroidUtils.setTextSecondaryColor(mapActivity,
 				(TextView) view.findViewById(R.id.title_button_right_text), nightMode);
 
-		AndroidUtils.setTextSecondaryColor(getMapActivity(),
+		AndroidUtils.setTextSecondaryColor(mapActivity,
 				(TextView) view.findViewById(R.id.progressTitle), nightMode);
 
 		// Zoom buttons
@@ -647,26 +652,33 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return view;
 	}
 
+	@Nullable
 	private TransportStopRouteAdapter createTransportStopRouteAdapter(List<TransportStopRoute> routes, boolean needMoreItem) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return null;
+		}
 		List<Object> items = new ArrayList<Object>(routes);
 		if (needMoreItem) {
 			items.add(TRANSPORT_BADGE_MORE_ITEM);
 		}
-		final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(getMyApplication(), items, nightMode);
+		final TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(app, items, nightMode);
 		adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
 			@Override
 			public void onClick(int position) {
 				Object object = adapter.getItem(position);
-				if (object != null) {
+				MapActivity mapActivity = getMapActivity();
+				if (object != null && mapActivity != null) {
+					OsmandApplication app = mapActivity.getMyApplication();
 					if (object instanceof TransportStopRoute) {
 						TransportStopRoute route = (TransportStopRoute) object;
 						PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-								route.getDescription(getMapActivity().getMyApplication(), false));
+								route.getDescription(app, false));
 						menu.show(menu.getLatLon(), pd, route);
-						TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+						TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
 						stopsLayer.setRoute(route);
-						int cz = route.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-						getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+						int cz = route.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
+						mapActivity.changeZoom(cz - mapActivity.getMapView().getZoom());
 					} else if (object instanceof String) {
 						if (object.equals(TRANSPORT_BADGE_MORE_ITEM)) {
 							if (menu.isLandscapeLayout()) {
@@ -804,19 +816,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateImageButton(ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		button.setImageDrawable(getMapActivity().getMyApplication().getUIUtilities().getIcon(night ? iconDarkId : iconLightId));
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			button.setBackground(getMapActivity().getResources().getDrawable(night ? bgDarkId : bgLightId,
-					getMapActivity().getTheme()));
-		} else {
-			button.setBackgroundDrawable(getMapActivity().getResources().getDrawable(night ? bgDarkId : bgLightId));
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			button.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getIcon(night ? iconDarkId : iconLightId));
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				button.setBackground(mapActivity.getResources().getDrawable(night ? bgDarkId : bgLightId,
+						mapActivity.getTheme()));
+			} else {
+				button.setBackgroundDrawable(mapActivity.getResources().getDrawable(night ? bgDarkId : bgLightId));
+			}
 		}
 	}
 
 	private void processScreenHeight(ViewParent parent) {
 		View container = (View) parent;
-		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
-		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
+		screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(container.getContext());
+		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(container.getContext());
 	}
 
 	public void openMenuFullScreen() {
@@ -919,17 +934,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	public void doZoomIn() {
-		if (map.isZooming() && map.hasCustomMapRatio()) {
-			getMapActivity().changeZoom(2, System.currentTimeMillis());
-		} else {
-			setCustomMapRatio();
-			getMapActivity().changeZoom(1, System.currentTimeMillis());
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (map.isZooming() && map.hasCustomMapRatio()) {
+				mapActivity.changeZoom(2, System.currentTimeMillis());
+			} else {
+				setCustomMapRatio();
+				mapActivity.changeZoom(1, System.currentTimeMillis());
+			}
 		}
 	}
 
 	public void doZoomOut() {
-		setCustomMapRatio();
-		getMapActivity().changeZoom(-1, System.currentTimeMillis());
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			setCustomMapRatio();
+			mapActivity.changeZoom(-1, System.currentTimeMillis());
+		}
 	}
 
 	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
@@ -1028,7 +1049,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void enableDisableButtons(View buttonView, TextView button, boolean enabled) {
 		if (enabled) {
-			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), nightMode,
+			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(buttonView.getContext(), nightMode,
 					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
@@ -1036,7 +1057,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			button.setTextColor(buttonColorStateList);
 		} else {
 			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_disabled_bg_dark : R.drawable.context_menu_controller_disabled_bg_light);
-			button.setTextColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light));
+			button.setTextColor(ContextCompat.getColor(buttonView.getContext(), nightMode ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light));
 		}
 		button.setEnabled(enabled);
 	}
@@ -1230,37 +1251,42 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			dismissMenu();
 			return;
 		}
-		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
-		getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
-		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-		wasDrawerDisabled = getMapActivity().isDrawerDisabled();
-		if (!wasDrawerDisabled) {
-			getMapActivity().disableDrawer();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			updateLocationViewCache = mapActivity.getMyApplication().getUIUtilities().getUpdateLocationViewCache();
+			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);
+			mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+			wasDrawerDisabled = mapActivity.isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				mapActivity.disableDrawer();
+			}
+			ViewParent parent = view.getParent();
+			if (parent != null && containerLayoutListener != null) {
+				((View) parent).addOnLayoutChangeListener(containerLayoutListener);
+			}
+			menu.updateControlsVisibility(true);
+			menu.onFragmentResume();
+			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 		}
-		ViewParent parent = view.getParent();
-		if (parent != null && containerLayoutListener != null) {
-			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
-		}
-		menu.updateControlsVisibility(true);
-		menu.onFragmentResume();
-		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 	}
 
 	@Override
 	public void onPause() {
-
 		if (view != null) {
 			restoreCustomMapRatio();
 			ViewParent parent = view.getParent();
 			if (parent != null && containerLayoutListener != null) {
 				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
 			}
-			getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
-			getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-			if (!wasDrawerDisabled) {
-				getMapActivity().enableDrawer();
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getMapViewTrackingUtilities().setContextMenu(null);
+				mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+				if (!wasDrawerDisabled) {
+					mapActivity.enableDrawer();
+				}
+				menu.updateControlsVisibility(false);
 			}
-			menu.updateControlsVisibility(false);
 		}
 		super.onPause();
 	}
@@ -1603,7 +1629,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				int colorId = menu.getAdditionalInfoColor();
 				int additionalInfoIconRes = menu.getAdditionalInfoIconRes();
 				if (colorId != 0) {
-					additionalInfoTextView.setTextColor(ContextCompat.getColor(getContext(), colorId));
+					additionalInfoTextView.setTextColor(ContextCompat.getColor(additionalInfoTextView.getContext(), colorId));
 					if (additionalInfoIconRes != 0) {
 						Drawable additionalIcon = getIcon(additionalInfoIconRes, colorId);
 						additionalInfoImageView.setImageDrawable(additionalIcon);
@@ -1671,7 +1697,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (app != null && activity != null && view != null) {
 			TextView distanceText = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
-			getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
+			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
 		}
 	}
 
@@ -1763,16 +1789,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			default:
 				break;
 		}
-		if (!menu.isLandscapeLayout()) {
-			getMapActivity().updateStatusBarColor();
+		MapActivity mapActivity = getMapActivity();
+		if (!menu.isLandscapeLayout() && mapActivity != null) {
+			mapActivity.updateStatusBarColor();
 		}
 		return posY;
 	}
 
 	private int addStatusBarHeightIfNeeded(int res) {
-		if (Build.VERSION.SDK_INT >= 21) {
+		MapActivity mapActivity = getMapActivity();
+		if (Build.VERSION.SDK_INT >= 21 && mapActivity != null) {
 			// One pixel is needed to fill a thin gap between the status bar and the fragment.
-			return res + AndroidUtils.getStatusBarHeight(getActivity()) - 1;
+			return res + AndroidUtils.getStatusBarHeight(mapActivity) - 1;
 		}
 		return res;
 	}
@@ -1935,6 +1963,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
+	@Nullable
 	public OsmandApplication getMyApplication() {
 		if (getActivity() == null) {
 			return null;
@@ -1946,7 +1975,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 									   final boolean centered) {
 		try {
 
-			if (menu.getLatLon() == null || mapActivity.isActivityDestroyed()) {
+			if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
 				return false;
 			}
 
@@ -2015,17 +2044,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
+	@Nullable
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
 
 	private int dpToPx(float dp) {
-		Resources r = getActivity().getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null ? AndroidUtils.dpToPx(mapActivity, dp) : (int) dp;
 	}
 
 	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {

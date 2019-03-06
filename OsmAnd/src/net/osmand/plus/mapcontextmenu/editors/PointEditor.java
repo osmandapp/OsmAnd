@@ -32,6 +32,11 @@ public abstract class PointEditor {
 		this.mapActivity = mapActivity;
 	}
 
+	@Nullable
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
 	public boolean isNew() {
 		return isNew;
 	}
@@ -71,6 +76,7 @@ public abstract class PointEditor {
 	public abstract String getFragmentTag();
 
 	public void hide() {
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
 			if (fragment != null)
@@ -79,6 +85,7 @@ public abstract class PointEditor {
 	}
 
 	public void setCategory(String name, int color) {
+		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
 			if (fragment != null) {

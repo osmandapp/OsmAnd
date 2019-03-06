@@ -1,12 +1,14 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import android.support.annotation.NonNull;
+
 import net.osmand.plus.activities.MapActivity;
 
 public class RtePtEditor extends WptPtEditor {
 
 	public static final String TAG = "RtePtEditorFragment";
 
-	public RtePtEditor(MapActivity mapActivity) {
+	public RtePtEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 	}
 
@@ -17,11 +19,17 @@ public class RtePtEditor extends WptPtEditor {
 
 	@Override
 	public void showEditorFragment() {
-		RtePtEditorFragment.showInstance(mapActivity);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RtePtEditorFragment.showInstance(mapActivity);
+		}
 	}
 
 	@Override
 	public void showEditorFragment(boolean skipDialog) {
-		RtePtEditorFragment.showInstance(mapActivity, skipDialog);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RtePtEditorFragment.showInstance(mapActivity, skipDialog);
+		}
 	}
 }

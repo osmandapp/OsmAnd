@@ -34,8 +34,10 @@ public abstract class MenuTitleController {
 
 	public abstract PointDescription getPointDescription();
 
+	@Nullable
 	public abstract Object getObject();
 
+	@Nullable
 	public abstract MenuController getMenuController();
 
 	@Nullable

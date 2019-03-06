@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import android.support.annotation.NonNull;
+
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
@@ -12,7 +14,7 @@ public class FavoritePointEditor extends PointEditor {
 
 	public static final String TAG = "FavoritePointEditorFragment";
 
-	public FavoritePointEditor(MapActivity mapActivity) {
+	public FavoritePointEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 	}
 
@@ -26,7 +28,8 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	public void add(LatLon latLon, String title, String originObjectName) {
-		if (latLon == null) {
+		MapActivity mapActivity = getMapActivity();
+		if (latLon == null || mapActivity == null) {
 			return;
 		}
 		isNew = true;
@@ -41,7 +44,8 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, boolean autoFill) {
-		if (latLon == null) {
+		MapActivity mapActivity = getMapActivity();
+		if (latLon == null || mapActivity == null) {
 			return;
 		}
 		isNew = true;
@@ -63,7 +67,8 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	public void edit(FavouritePoint favorite) {
-		if (favorite == null) {
+		MapActivity mapActivity = getMapActivity();
+		if (favorite == null || mapActivity == null) {
 			return;
 		}
 		isNew = false;

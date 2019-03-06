@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import android.support.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.GPXUtilities.GPXFile;
@@ -17,7 +19,7 @@ public class WptPtEditor extends PointEditor {
 
 	public static final String TAG = "WptPtEditorFragment";
 
-	public WptPtEditor(MapActivity mapActivity) {
+	public WptPtEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 	}
 
@@ -59,7 +61,8 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title) {
-		if (latLon == null) {
+		MapActivity mapActivity = getMapActivity();
+		if (latLon == null || mapActivity == null) {
 			return;
 		}
 		isNew = true;
@@ -76,7 +79,8 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
-		if (latLon == null) {
+		MapActivity mapActivity = getMapActivity();
+		if (latLon == null || mapActivity == null) {
 			return;
 		}
 		isNew = true;
@@ -86,13 +90,12 @@ public class WptPtEditor extends PointEditor {
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		gpxSelected = selectedGpxFile != null;
 
-		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
+		WptPt wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 
 		wpt.name = title;
 
 		if (categoryName != null && !categoryName.isEmpty()) {
-
 			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication()
 					.getFavorites()
 					.getGroup(categoryName);
@@ -107,12 +110,14 @@ public class WptPtEditor extends PointEditor {
 		} else categoryName = "";
 
 		wpt.category = categoryName;
+		this.wpt = wpt;
 
 		showEditorFragment(skipDialog);
 	}
 
-	public void edit(WptPt wpt) {
-		if (wpt == null) {
+	public void edit(@NonNull WptPt wpt) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
 			return;
 		}
 		isNew = false;
@@ -127,10 +132,16 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	public void showEditorFragment() {
-		WptPtEditorFragment.showInstance(mapActivity);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			WptPtEditorFragment.showInstance(mapActivity);
+		}
 	}
 
 	public void showEditorFragment(boolean skipDialog) {
-		WptPtEditorFragment.showInstance(mapActivity, skipDialog);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			WptPtEditorFragment.showInstance(mapActivity, skipDialog);
+		}
 	}
 }
