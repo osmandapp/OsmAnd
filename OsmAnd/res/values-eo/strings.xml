@@ -749,9 +749,6 @@ Lon: %2$s</string>
     <string name="int_days">tagoj</string>
     <string name="osmo_connect_menu">Konekti</string>
     <string name="osmo_group_description">Priskribo</string>
-    <string name="hours_ago">horoj antaŭe</string>
-    <string name="minutes_ago">minutoj antaŭe</string>
-    <string name="seconds_ago">sekundoj antaŭe</string>
     <string name="use_points_as_intermediates">Prikalkuli kurson inter punktojn</string>
     <string name="always_center_position_on_map">Ĉiam montri centrigitan pozicion</string>
     <string name="localization_pref_title">Loko</string>

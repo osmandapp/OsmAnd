@@ -925,9 +925,6 @@
 \nPunkter</string>
     <string name="gpx_selection_track">%1$s
 \nSpor %2$s</string>
-    <string name="hours_ago">timer siden</string>
-    <string name="minutes_ago">minutter siden</string>
-    <string name="seconds_ago">sekunder siden</string>
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til det nye stedet…</string>
     <string name="copying_osmand_files">Kopierer OsmAnd-datafiler…</string>
     <string name="route_descr_destination">Reisemål</string>

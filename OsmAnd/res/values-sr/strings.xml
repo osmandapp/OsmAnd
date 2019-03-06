@@ -745,9 +745,6 @@
     <string name="int_days">дана</string>
     <string name="osmo_connect_menu">Повежи се</string>
     <string name="osmo_group_description">Опис</string>
-    <string name="hours_ago">пре часова</string>
-    <string name="minutes_ago">пре минут</string>
-    <string name="seconds_ago">пре секунде</string>
     <string name="use_points_as_intermediates">Рачунај пут између тачака</string>
     <string name="always_center_position_on_map">Увек приказуј положај у средини</string>
     <string name="voice_pref_title">Глас</string>

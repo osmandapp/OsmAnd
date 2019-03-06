@@ -1406,9 +1406,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
 
     
     <string name="osmo_edit_color">Rodoma spalva</string>
-    <string name="hours_ago">valandų senumo</string>
-    <string name="minutes_ago">minučių senumo</string>
-    <string name="seconds_ago">sekundžių senumo</string>
     <string name="gpx_info_subtracks">Maršruto dalys: %1$s </string>
     <string name="gpx_info_waypoints">Tarpiniai taškai: %1$s </string>
     <string name="gpx_info_distance">Atstumas: %1$s (%2$s taškai/-ų) </string>

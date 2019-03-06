@@ -1266,22 +1266,8 @@
     
     <string name="int_days">днів</string>
     <string name="osmo_group_description">Опис</string>
-    
-    
-    
-    
-    <string name="hours_ago">годин тому</string>
-    <string name="minutes_ago">хвилин тому</string>
-    <string name="seconds_ago">секунд тому</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     <string name="gpx_file_is_empty">Порожній GPX-файл</string>
     
     <string name="shared_string_tracks">Треки</string>

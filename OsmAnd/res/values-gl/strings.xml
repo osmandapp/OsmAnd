@@ -140,9 +140,6 @@
     <string name="int_days">días</string>
     <string name="osmo_connect_menu">Conectar</string>
     <string name="osmo_group_description">Descrición</string>
-    <string name="hours_ago">horas atrás</string>
-    <string name="minutes_ago">minutos atrás</string>
-    <string name="seconds_ago">segundos atrás</string>
     <string name="use_points_as_intermediates">Calcula-la rota entre puntos</string>
     <string name="always_center_position_on_map">Amosar posición sempre no centro</string>
     <string name="voice_pref_title">Voz</string>

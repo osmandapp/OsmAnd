@@ -1158,9 +1158,6 @@
     <string name="arrival_distance_descr">您希望到達預告要有多快告知？</string>
     <string name="share_fav_subject">經由 OsmAnd 分享我的收藏</string>
     <string name="use_points_as_intermediates">預估兩點之間的路線</string>
-    <string name="hours_ago">小時前</string>
-    <string name="minutes_ago">分鐘前</string>
-    <string name="seconds_ago">秒前</string>
     <string name="int_days">天</string>
     <string name="osmo_connect_menu">連接</string>
     <string name="osmo_group_description">敘述</string>

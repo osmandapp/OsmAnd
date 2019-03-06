@@ -1215,9 +1215,6 @@
     <string name="int_days">zile</string>
     <string name="osmo_connect_menu">Conectare</string>
     <string name="osmo_group_description">Descriere</string>
-    <string name="hours_ago">ore în urmă</string>
-    <string name="minutes_ago">minute în urmă</string>
-    <string name="seconds_ago">secunde în urmă</string>
     <string name="always_center_position_on_map">Arată întotdeauna poziția în centru</string>
     <string name="voice_pref_title">Voce</string>
     <string name="misc_pref_title">Diverse</string>

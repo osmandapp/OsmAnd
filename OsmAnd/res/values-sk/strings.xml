@@ -1153,9 +1153,6 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="arrival_distance_descr">Ako skoro má byť oznámený príjazd do cieľa?</string>
     <string name="share_fav_subject">Obľúbené body zdieľané cez OsmAnd</string>
     <string name="use_points_as_intermediates">Vypočítať trasu medzi bodmi</string>
-    <string name="hours_ago">hodín dozadu</string>
-    <string name="minutes_ago">minút dozadu</string>
-    <string name="seconds_ago">sekúnd dozadu</string>
     <string name="import_file_favourites">Uložiť údaje ako súbor GPX alebo importovať body cesty do \"Obľúbených\"?</string>
     <string name="rendering_value_pink_name">Ružová</string>
     <string name="rendering_value_brown_name">Hnedá</string>

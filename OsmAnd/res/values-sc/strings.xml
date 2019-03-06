@@ -457,9 +457,6 @@
     <string name="int_days">dies</string>
     <string name="osmo_connect_menu">Connete</string>
     <string name="osmo_group_description">Descritzione</string>
-    <string name="hours_ago">oras àchede</string>
-    <string name="minutes_ago">minutos àchede</string>
-    <string name="seconds_ago">secundos àchede</string>
     <string name="use_points_as_intermediates">Càlcula s’àndala intre sos puntos</string>
     <string name="lang_fa">Persianu</string>
     <string name="route_descr_destination">Destinatzione</string>

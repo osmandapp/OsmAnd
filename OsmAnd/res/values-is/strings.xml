@@ -318,9 +318,6 @@
     <string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Tengjast</string>
     <string name="osmo_group_description">Lýsing</string>
-    <string name="hours_ago">klukkustundum síðan</string>
-    <string name="minutes_ago">mín síðan</string>
-    <string name="seconds_ago">sek síðan</string>
     <string name="voice_pref_title">Tal</string>
     <string name="misc_pref_title">Ýmislegt</string>
     <string name="localization_pref_title">Staðfærsla</string>

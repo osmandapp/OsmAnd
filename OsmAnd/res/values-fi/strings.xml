@@ -1542,24 +1542,8 @@ Jälki %2$s</string>
     <string name="osmo_connect_menu">Yhdistä</string>
     
     <string name="osmo_group_description">Kuvaus</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">tuntia sitten</string>
-    <string name="minutes_ago">minuuttia sitten</string>
-    <string name="seconds_ago">sekuntia sitten</string>
-    
-    
-    
-    
-    
-    
+
+
     <string name="use_points_as_intermediates">Laske reitti pisteiden välille</string>
     
     

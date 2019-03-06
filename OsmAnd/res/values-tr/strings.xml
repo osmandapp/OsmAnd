@@ -1738,28 +1738,8 @@
     <string name="index_item_nation_addresses">Ülke adresleri</string>
     <string name="index_item_world_altitude_correction">Dünya rakım düzeltme</string>
     <string name="index_item_world_seamarks">Dünya deniz işaretleri</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">saatler önce</string>
-    <string name="minutes_ago">Dakkika önce</string>
-    <string name="seconds_ago">Saniye önce</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     <string name="select_destination_and_intermediate_points">Varış noktaları seçin</string>
     <string name="layer_amenity_label"/>
     <string name="loading_smth">%1$s yükleniyor …</string>

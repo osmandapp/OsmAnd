@@ -1398,25 +1398,8 @@
         
     
 	<string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
-	<string name="hours_ago">시간 전</string>
-    <string name="minutes_ago">분 전</string>
-    <string name="seconds_ago">초 전</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     <string name="use_points_as_intermediates">포인트 사이의 경로를 계산</string>
     
     

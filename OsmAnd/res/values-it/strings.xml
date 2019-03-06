@@ -1152,9 +1152,6 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="arrival_distance_descr">Quanto prima vuoi l\'annuncio dell\'arrivo?</string>
     <string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
     <string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
-    <string name="hours_ago">ore fa</string>
-    <string name="minutes_ago">minuti fa</string>
-    <string name="seconds_ago">secondi fa</string>
     <string name="int_days">giorni</string>
     <string name="osmo_connect_menu">Connetti</string>
     <string name="osmo_group_description">Descrizione</string>

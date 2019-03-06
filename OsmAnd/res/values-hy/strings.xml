@@ -1285,26 +1285,8 @@
     <string name="osmo_connect_menu">Միացում</string>
     
     <string name="osmo_group_description">Նկարագրություն</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">ժամ առաջ</string>
-    <string name="minutes_ago">րոպե առաջ</string>
-    <string name="seconds_ago">վար․ առաջ</string>
-    
-    
-    
-    
-    
-    
-    
+
+
     <string name="use_points_as_intermediates">Հաշվեք երթուղին կետերի միջև</string>
     
     

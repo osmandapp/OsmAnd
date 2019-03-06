@@ -1241,9 +1241,6 @@
     <string name="int_days">días</string>
     <string name="osmo_connect_menu">Conectar</string>
     <string name="osmo_group_description">Descripción</string>
-    <string name="hours_ago">horas antes</string>
-    <string name="minutes_ago">minutos antes</string>
-    <string name="seconds_ago">segundos antes</string>
     <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de referencia a «Favoritos»?</string>
     <string name="shared_string_my_favorites">Favoritos</string>
     <string name="shared_string_my_places">Mis sitios</string>

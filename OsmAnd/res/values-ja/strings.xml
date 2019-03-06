@@ -1228,9 +1228,6 @@ POIの更新は利用できません</string>
     <string name="int_days">日</string>
     <string name="osmo_connect_menu">接続</string>
     <string name="osmo_group_description">解説</string>
-    <string name="hours_ago">時間前</string>
-    <string name="minutes_ago">分前</string>
-    <string name="seconds_ago">秒前</string>
     <string name="use_points_as_intermediates">地点間のルートを計算</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
     <string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>

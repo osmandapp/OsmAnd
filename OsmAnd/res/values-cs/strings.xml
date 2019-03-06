@@ -1176,9 +1176,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="int_days">dnů</string>
     <string name="osmo_connect_menu">Připojit</string>
     <string name="osmo_group_description">Popis</string>
-    <string name="hours_ago">hodin dozadu</string>
-    <string name="minutes_ago">minut dozadu</string>
-    <string name="seconds_ago">sekund dozadu</string>
     <string name="interrupt_music_descr">Hlasové pokyny nesníží jen hlasitost, ale pozastaví hudbu.</string>
     <string name="interrupt_music">Pozastavit hudbu</string>
     <string name="share_route_as_gpx">Sdílet trasu jako GPX soubor</string>
