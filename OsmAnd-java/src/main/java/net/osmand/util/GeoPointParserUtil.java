@@ -646,9 +646,9 @@ public class GeoPointParserUtil {
 
 		private static double parseLon(String lonString) {
 			if (lonString.startsWith("E")) {
-				return -Double.valueOf(lonString.substring(1));
-			} else if (lonString.startsWith("W")) {
 				return Double.valueOf(lonString.substring(1));
+			} else if (lonString.startsWith("W")) {
+				return -Double.valueOf(lonString.substring(1));
 			}
 			return Double.valueOf(lonString);
 		}
