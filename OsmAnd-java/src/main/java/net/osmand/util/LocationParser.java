@@ -199,7 +199,7 @@ public class LocationParser {
 		Double prevDouble = null;
 		for (int i = begin; i <= end; i++) {
 			Object o = i == end ? "" : all.get(i);
-			if(o.equals("S") || o.equals("W"))  {
+			if(o.equals("S") || o.equals("W") || o.equals(-0.0))  {
 				neg = !neg;
 			}
 			if (prevDouble != null) {
