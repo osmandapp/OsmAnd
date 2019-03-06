@@ -265,11 +265,11 @@ public class GeoPointParserUtilTest {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://maps.google.com/maps?q=N34.939,E-106
-		url = "http://maps.google.com/maps?q=N" + dlat + ",E" + Math.abs(dlon);
+		// http://maps.google.com/maps?q=N34.939,W106
+		url = "http://maps.google.com/maps?q=N" + dlat + ",W" + Math.abs(dlon);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(dlat, Math.abs(dlon)));
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, -Math.abs(dlon)));
 
 		url = "http://maps.google.com/maps?f=d&saddr=" + dlat +"," +dlon +"&daddr=" +dlat +"," +dlon+"&hl=en";
 		System.out.println("url: " + url);
