@@ -630,21 +630,25 @@ public class VoiceRouter {
 		return  speakablePointName == null ? "" : speakablePointName;
 	}
 
-	public static String getSpeakablePointName(String pn) {
+	private static String getSpeakablePointName(String pn) {
 		// Replace characters which may produce unwanted TTS sounds:
+		String pl = "";
+		if (player != null) {
+			pl = player.getLanguage();
+		}
 		if (pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
-			pn = pn.replace(";", ", "); // Trailing blank prevents punctuation being pronounced. Replace by comma for better intonation.
-			pn = pn.replace("/", ", "); // Slash is actually pronounced by many TTS engines, ceeating an awkward voice prompt, better replace by comma.
-			if ((player != null) && (!player.getLanguage().equals("de"))) {
-				pn = pn.replace("\u00df", "ss"); // Helps non-German TTS voices to pronounce German Straße (=street)
+			pn = pn.replace(";", ", ");   // Trailing blank prevents punctuation being pronounced. Replace by comma for better intonation.
+			pn = pn.replace("/", ", ");   // Slash is actually pronounced by many TTS engines, creating an awkward voice prompt, better replace by comma.
+			if (!pl.startsWith("de")) {
+				pn = pn.replace("\u00df", "ss");    // Helps non-German TTS voices to pronounce German Straße (=street)
 			}
-			if ((player != null) && (player.getLanguage().startsWith("en"))) {
-				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English TTS voice
-				pn = pn.replace("Dr.", "Dr ");   // Avoid pause many English TTS voices introduce after period
+			if (pl.startsWith("en")) {
+				pn = pn.replace("SR", "S R");       // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English TTS voice
+				pn = pn.replace("Dr.", "Dr ");      // Avoid pause many English TTS voices introduce after period
 			}
-			if ((player != null) && (player.getLanguage().equals("de"))) {
+			if (pl.startsWith("de")) {
 				if (pn.startsWith("St ")) {
 					pn = pn.replace("St ", "S T "); // German Staatsstrasse, abbreviated St, often mispronounced
 				}
