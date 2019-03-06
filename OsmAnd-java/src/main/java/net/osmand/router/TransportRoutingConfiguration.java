@@ -48,6 +48,7 @@ public class TransportRoutingConfiguration {
 			walkChangeRadius =  router.getIntAttribute("walkChangeRadius", walkRadius);
 			ZOOM_TO_LOAD_TILES =  router.getIntAttribute("zoomToLoadTiles", ZOOM_TO_LOAD_TILES);
 			maxNumberOfChanges =  router.getIntAttribute("maxNumberOfChanges", maxNumberOfChanges);
+			maxRouteTime =  router.getIntAttribute("maxRouteTime", maxRouteTime);
 			finishTimeSeconds =  router.getIntAttribute("delayForAlternativesRoutes", finishTimeSeconds);
 			
 			travelSpeed =  router.getFloatAttribute("defaultTravelSpeed", (float) travelSpeed);
