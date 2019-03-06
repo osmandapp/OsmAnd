@@ -1904,9 +1904,6 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="navigate_point_northing">Iparrera</string>
     <string name="navigate_point_easting">Ekialdera</string>
     <string name="gpx_split_interval">Tartea erdibitu</string>
-    <string name="hours_ago">ordu lehenago</string>
-    <string name="minutes_ago">minutu lehenago</string>
-    <string name="seconds_ago">segundo lehenago</string>
     <string name="lang_en_gb">Ingelesa (Erresuma Batua)</string>
     <string name="lang_be_by">Bielorrusiera (Latinoa)</string>
     <string name="lang_hu_formal">Hungariera (formala)</string>

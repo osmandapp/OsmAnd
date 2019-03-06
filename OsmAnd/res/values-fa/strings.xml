@@ -1225,9 +1225,6 @@
     <string name="arrival_distance_descr">چه‌زمانی پیام رسیدن به مقصد اعلام شود؟</string>
     <string name="shared_string_share">اشتراک‌گذاری</string>
     <string name="share_fav_subject">نقاط برگزیده به‌وسیلهٔ OsmAnd به‌اشتراک گذاشته شد</string>
-    <string name="hours_ago">ساعت قبل</string>
-    <string name="minutes_ago">دقیقه قبل</string>
-    <string name="seconds_ago">ثانیه قبل</string>
     <string name="use_points_as_intermediates">محاسبهٔ مسیر بین نقاط</string>
     <string name="rendering_value_pink_name">صورتی</string>
     <string name="rendering_value_brown_name">قهوه‌ای</string>

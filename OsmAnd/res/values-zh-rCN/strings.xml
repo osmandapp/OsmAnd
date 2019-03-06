@@ -1997,25 +1997,8 @@
     <string name="osmo_connect_menu">连接</string>
     
     <string name="osmo_group_description">描述</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">小时前</string>
-    <string name="minutes_ago">分钟前</string>
-    <string name="seconds_ago">秒前</string>
-    
-    
-    
-    
-    
-    
-    
+
+
     <string name="use_points_as_intermediates">计算两点之间的路线</string>
     
     

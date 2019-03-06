@@ -1072,9 +1072,6 @@
     <string name="int_days">dias</string>
     <string name="osmo_connect_menu">Conectar</string>
     <string name="osmo_group_description">Descrição</string>
-    <string name="hours_ago">horas atras</string>
-    <string name="minutes_ago">minutos atras</string>
-    <string name="seconds_ago">segundos atras</string>
     <string name="use_points_as_intermediates">Calcular rota entre pontos</string>
     <string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>

@@ -1236,9 +1236,6 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="int_days">nap</string>
     <string name="osmo_connect_menu">Kapcsolódás</string>
     <string name="osmo_group_description">Leírás</string>
-    <string name="hours_ago">órával ezelőtt</string>
-    <string name="minutes_ago">perce</string>
-    <string name="seconds_ago">másodperce</string>
     <string name="use_points_as_intermediates">Útvonal tervezése pontok között</string>
     <string name="import_file_favourites">Mented az adatokat GPX fájlként, vagy importálod az útpontokat a „Kedvencek”-be?</string>
     <string name="shared_string_share">Megosztás</string>

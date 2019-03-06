@@ -645,14 +645,9 @@
     <string name="sort_by_distance"/>
     <string name="sort_by_name"/>
     <string name="gpx_selection_points"/>
-    
-    
-    
-    <string name="hours_ago"/>
-    <string name="minutes_ago"/>
-    <string name="seconds_ago"/>
-    
-    <string name="index_item_world_altitude_correction">Coreición de l\'altitú mundial</string>
+
+
+	<string name="index_item_world_altitude_correction">Coreición de l\'altitú mundial</string>
     <string name="routing_attr_weight_name"/>
     <string name="routing_attr_height_name"/>
     <string name="app_mode_truck">Camión</string>

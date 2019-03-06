@@ -284,13 +284,8 @@
     <string name="loading_smth">%1$s... വന്ന് കൊണ്ടിരിക്കുന്നു…</string>
     <string name="gpx_info_distance">"ദൂരം   %1$s (%2$s points )"</string>
     <string name="gpx_info_maximum_speed">പരമാവധി വേഗത: %1$s</string>
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">"മണിക്കുറുകള്‍ക്ക് മുമ്പ് "</string>
+
+
     <string name="index_item_world_bitcoin_payments">ബിറ്റ്കോയിന്‍</string>
     <string name="lang_zh">"ചൈനീസ് ഭാക്ഷ "</string>
     <string name="lang_bg">ബള്‍ഗേറിയന്‍ ഭാക്ഷ</string>
@@ -1117,7 +1112,6 @@
     <string name="gpx_info_avg_altitude">ശരാശരി ഉയരം: %1$s</string>
     <string name="gpx_info_diff_altitude">" ഉയര വ്യത്യാസം: %1$s"</string>
     <string name="gpx_info_asc_altitude">ഇറക്കം/കയറ്റം:%1$s</string>
-    <string name="minutes_ago">"മിനു. മുമ്പ് "</string>
     <string name="map_widget_map_rendering">വരച്ച് കാണിക്കുന്ന രീതി</string>
     <string name="map_widget_fps_info">"എഫ്പിഎസ്  ഡീബഗ് വിവരങ്ങള്‍"</string>
     <string name="clear_intermediate_points">"ഇടലക്ഷ്യസ്ഥാനങ്ങള്‍ കളയുക "</string>
@@ -1280,7 +1274,6 @@
     <string name="rendering_attr_showCycleRoutes_name">സൈക്കിള്‍ റൂട്ടുകള്‍ കാണിക്കുക</string>
     <string name="show_zoom_buttons_navigation_descr">വഴികാട്ടിയില്‍ സൂം ബട്ടണുകള്‍ കാണിക്കുക</string>
     <string name="select_destination_and_intermediate_points">ലക്ഷ്യസ്ഥാനങ്ങള്‍ തെരഞ്ഞെടുക്കുക</string>
-    <string name="seconds_ago">"സെകന്റ്. മുമ്പ് "</string>
     <string name="localization_pref_title">"പ്രാദേശികവല്‍കരണം "</string>
     <string name="lang_af">ആഫ്രിക്കന്‍ ഭാഷ</string>
     <string name="lang_eu">ബാസ്ക്യു</string>

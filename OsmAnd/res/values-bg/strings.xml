@@ -1599,24 +1599,8 @@
     <string name="osmo_connect_menu">Свързване</string>
     
     <string name="osmo_group_description">Описание</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">часа по-рано</string>
-    <string name="minutes_ago">минути по-рано</string>
-    <string name="seconds_ago">секунди по-рано</string>
-    
-    
-    
-    
+
+
     <string name="av_camera_pic_size_descr">Изберете размер на снимката за вградената камера</string>
     <string name="shared_string_wikipedia">Уикипедия</string>
     <string name="local_indexes_cat_wiki">Уикипедия</string>

@@ -1231,15 +1231,8 @@
     <string name="osmo_edit_color">Boja prikaza</string>
     
     <string name="osmo_group_description">Opis</string>
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">sati prije</string>
-    <string name="minutes_ago">minuta prije</string>
-    <string name="seconds_ago">sekunda prije</string>
+
+
     <string name="text_size_descr">Postavi veličinu teksta na karti.</string>
     <string name="text_size">Veličina teksta</string>
     <string name="save_track_interval_globally">Interval bilježenja</string>

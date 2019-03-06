@@ -1120,9 +1120,6 @@ Nyttjat utrymme är {1} MB.
     <string name="keep_informing_descr">Läs upp navigationsinstruktioner med regelbundna intervall.</string>
     <string name="keep_informing">Upprepa navigationsinstruktioner</string>
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
-    <string name="hours_ago">timmar sedan</string>
-    <string name="minutes_ago">minuter sedan</string>
-    <string name="seconds_ago">sekunder sedan</string>
     <string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Anslut</string>
     <string name="osmo_group_description">Beskrivning</string>

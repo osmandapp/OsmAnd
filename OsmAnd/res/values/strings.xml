@@ -1486,9 +1486,6 @@
     <string name="osmo_connect_menu">Connect</string>
     <string name="osmo_group_description">Description</string>
     <string name="int_days">days</string>
-    <string name="hours_ago">hours ago</string>
-    <string name="minutes_ago">min ago</string>
-    <string name="seconds_ago">sec ago</string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="always_center_position_on_map">Display position always in center</string>
     <string name="voice_pref_title">Voice</string>

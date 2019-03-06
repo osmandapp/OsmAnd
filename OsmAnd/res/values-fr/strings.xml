@@ -1191,9 +1191,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_share">Partager</string>
     <string name="share_fav_subject">Favoris partagés grâce à OsmAnd</string>
     <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
-    <string name="hours_ago">heures avant</string>
-    <string name="minutes_ago">minutes avant</string>
-    <string name="seconds_ago">secondes avant</string>
     <string name="int_days">jours</string>
     <string name="osmo_connect_menu">Connecter</string>
     <string name="osmo_group_description">Description</string>

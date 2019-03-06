@@ -1203,9 +1203,6 @@
     <string name="shared_string_share">Udostępnij</string>
     <string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
     <string name="use_points_as_intermediates">Wyznacz trasę pomiędzy punktami</string>
-    <string name="hours_ago">godzin temu</string>
-    <string name="minutes_ago">minut temu</string>
-    <string name="seconds_ago">sekund temu</string>
     <string name="rendering_value_pink_name">Różowy</string>
     <string name="rendering_value_brown_name">Brązowy</string>
     <string name="osmo_edit_color">Kolor</string>

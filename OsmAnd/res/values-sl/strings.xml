@@ -1470,11 +1470,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="route_descr_destination">Cilj</string>
     
     <string name="use_points_as_intermediates">Izračun poti med točkami</string>
-    
-    <string name="seconds_ago">sekund nazaj</string>
-    <string name="minutes_ago">minut nazaj</string>
-    <string name="hours_ago">ur nazaj</string>
-    
+
     <string name="none_selected_gpx">Ni izbranih datotek GPX. Datoteke je mogoče izbrati z zadržanim pritiskom na imenu sledi.</string>
     <string name="gpx_split_interval">Interval za razdelitev</string>
     

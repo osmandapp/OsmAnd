@@ -1434,9 +1434,6 @@
     <string name="arrival_distance_descr">Как скоро следует сообщать о прибытии?</string>
     <string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
     <string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
-    <string name="hours_ago">часов назад</string>
-    <string name="minutes_ago">минут назад</string>
-    <string name="seconds_ago">секунд назад</string>
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
     <string name="osmo_group_description">Описание</string>
     <string name="int_days">дней</string>

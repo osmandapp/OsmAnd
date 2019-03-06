@@ -292,7 +292,6 @@
     <string name="proxy_host_title">Servidor Proxy</string>
     <string name="enable_proxy_descr">Configurar o proxy HTTP para todas as solicitações de rede.</string>
     <string name="enable_proxy_title">Ativar proxy HTTP</string>
-    <string name="minutes_ago">minutos atrás</string>
     <string name="print_route">Imprimir rota</string>
     <string name="fav_point_dublicate">Nome de favorito duplicado</string>
     <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
@@ -443,8 +442,6 @@
     <string name="int_days">dias</string>
     <string name="osmo_connect_menu">Conectar</string>
     <string name="osmo_group_description">Descrição</string>
-    <string name="hours_ago">horas atrás</string>
-    <string name="seconds_ago">segundos atrás</string>
     <string name="use_points_as_intermediates">Calcular a rota entre pontos</string>
     <string name="always_center_position_on_map">Sempre centralizar a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>

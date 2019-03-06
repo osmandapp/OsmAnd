@@ -1355,25 +1355,8 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     
     
 	<string name="share_fav_subject">Via OsmAnd gedeelde favorieten</string>
-	<string name="hours_ago">uur geleden</string>
-    <string name="minutes_ago">minuten geleden</string>
-    <string name="seconds_ago">seconden geleden</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     <string name="use_points_as_intermediates">Bereken route tussen punten</string>
     
     

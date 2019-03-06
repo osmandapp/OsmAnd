@@ -287,9 +287,6 @@ Lon %2$s</string>
     <string name="gpx_file_is_empty">Archivo GPX vacío</string>
     <string name="gpx_selection_track">%1$s
 \nTraza %2$s</string>
-    <string name="hours_ago">horas antes</string>
-    <string name="minutes_ago">minutos antes</string>
-    <string name="seconds_ago">segundos antes</string>
     <string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
     <string name="always_center_position_on_map">Mostrar ubicación en el centro</string>
     <string name="voice_pref_title">Voz</string>

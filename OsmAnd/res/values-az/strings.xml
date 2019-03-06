@@ -354,14 +354,8 @@
     <string name="int_days">gün</string>
     <string name="osmo_connect_menu">Qoşul</string>
     <string name="osmo_group_description">Açıqlama</string>
-    
-    
-    
-    <string name="hours_ago">saat əvvəl</string>
-    <string name="minutes_ago">dəqiqə əvvəl</string>
-    <string name="seconds_ago">saniyə əvvəl</string>
-    
-    
+
+
     <string name="voice_pref_title">Səs</string>
     <string name="misc_pref_title">Müxtəlif</string>
     <string name="lang_zh">Çincə</string>

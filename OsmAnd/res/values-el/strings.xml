@@ -1234,15 +1234,8 @@
 	<string name="rendering_value_pink_name">ροζ</string>
 	
 	<string name="rendering_value_brown_name">καφέ</string>
-	
-	
-	
-	
-	
-    <string name="hours_ago">ώρες πριν</string>
-    <string name="minutes_ago">λεπτά πριν</string>
-    <string name="seconds_ago">δευτερόλεπτα πριν</string>
-    
+
+
     <string name="local_index_select_gpx_file">Επιλέξτε για εμφάνιση</string>
     <string name="show_zoom_buttons_navigation_descr">Εμφάνιση πλήκτρων εστίασης κατά την πλοήγηση.</string>
     <string name="show_zoom_buttons_navigation">Εμφάνιση κουμπιών ζουμ</string>

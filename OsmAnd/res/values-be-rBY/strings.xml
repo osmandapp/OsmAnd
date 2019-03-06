@@ -280,35 +280,8 @@ Punktaŭ maršrutu %2$s</string>
     <string name="osmo_connect_menu">Padklučycca</string>
     
     <string name="osmo_group_description">Apіsańnie</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">hadzіn tamu</string>
-    <string name="minutes_ago">chvіlin tamu</string>
-    <string name="seconds_ago">sekund tamu</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     <string name="use_points_as_intermediates">Različyć maršrut pamіž punktamі</string>
     
         

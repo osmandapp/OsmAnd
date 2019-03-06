@@ -1384,40 +1384,11 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="osmo_connect_menu">Pieslēgties</string>
     
     <string name="osmo_group_description">Apraksts</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <string name="hours_ago">stundas atpakaļ</string>
-    <string name="minutes_ago">minūtes atpakaļ</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	<string name="import_file_favourites">Saglabāt datus GPX failā vai importēt izlasē?</string>
-	
-	<string name="seconds_ago">sekundes atpakaļ</string>
-    
-	<string name="rendering_value_pink_name">rozā</string>
+
+
+    <string name="import_file_favourites">Saglabāt datus GPX failā vai importēt izlasē?</string>
+
+    <string name="rendering_value_pink_name">rozā</string>
 	
 	<string name="rendering_value_brown_name">brūns</string>
 	

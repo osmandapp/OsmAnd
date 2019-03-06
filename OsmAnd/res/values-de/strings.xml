@@ -1249,9 +1249,6 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
     <string name="rendering_attr_showCycleRoutes_name">Fahrrad-Routen anzeigen</string>
-    <string name="hours_ago">Stunden her</string>
-    <string name="minutes_ago">Minuten her</string>
-    <string name="seconds_ago">Sekunden her</string>
     <string name="map_preferred_locale_descr">Bevorzugte Sprache für Beschriftungen auf der Karte (ist diese nicht verfügbar, wird auf Englisch oder lokale Namen gewechselt).</string>
     <string name="map_preferred_locale">Bevorzugte Sprache für Kartenbeschriftung</string>
     <string name="local_map_names">Lokale Namen</string>

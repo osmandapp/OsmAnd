@@ -1163,9 +1163,6 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="arrival_distance_descr">Hvornår skal ankomst meddeles?</string>
     <string name="share_fav_subject">Favoritter delt via Osmand</string>
     <string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
-    <string name="hours_ago">timer siden</string>
-    <string name="minutes_ago">minutter siden</string>
-    <string name="seconds_ago">sekunder siden</string>
     <string name="int_days">dage</string>
     <string name="osmo_connect_menu">Forbind</string>
     <string name="osmo_group_description">Beskrivelse</string>

@@ -823,9 +823,6 @@
 \nاضغط مطولا للعرض على الخريطة"</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
-    <string name="hours_ago">ساعة</string>
-    <string name="minutes_ago">دقيقة</string>
-    <string name="seconds_ago">ثانية</string>
     <string name="always_center_position_on_map">اظهر الموقع في الوسط دائما</string>
     <string name="localization_pref_title">التوطين</string>
     <string name="lang_hr">الكرواتية</string>
