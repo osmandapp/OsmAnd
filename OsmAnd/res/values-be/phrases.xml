@@ -1361,7 +1361,7 @@
     <string name="poi_aerialway_bubble_yes">Шкленне</string>
     <string name="poi_payment_coins_yes">Манеты</string>
     <string name="poi_payment_coins_no">Манеты не прымаюцца</string>
-    <string name="poi_payment_coins_0.5">Манеты па $ 0.5</string>
+    <string name="poi_payment_coins_0_5">Манеты па $ 0.5</string>
     <string name="poi_payment_coins_50c12">Манеты па 50c, 1€ і 2€</string>
     <string name="poi_payment_telephone_cards_yes">Тэлефонныя карткі</string>
     <string name="poi_payment_telephone_cards_no">Тэлефонныя карткі не прымаюцца</string>

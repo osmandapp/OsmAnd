@@ -1761,7 +1761,7 @@
 	<string name="poi_summit_cross">Хрест на вершині: є</string>
 
 	<string name="poi_medical_system_mongolian_yes">Традиційна монгольська</string>
-	<string name="poi_payment_coins_0.5">Монети по $0,5</string>
+	<string name="poi_payment_coins_0_5">Монети по $0,5</string>
 	<string name="poi_prison_camp">Колишній тюремний табір</string>
 	<string name="poi_medical_system_tibetan_yes">Традиційна тибетська</string>
 	<string name="poi_payment_coins_50c12">Монети по 50c, 1€ й 2€</string>

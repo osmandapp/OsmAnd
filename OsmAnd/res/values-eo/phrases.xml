@@ -1321,7 +1321,7 @@
     <string name="poi_love_hotel">Amor-hotelo</string>
     <string name="poi_payment_coins_yes">moneroj</string>
     <string name="poi_payment_coins_no">Moneroj malakceptataj</string>
-    <string name="poi_payment_coins_0.5">moneroj $0,5</string>
+    <string name="poi_payment_coins_0_5">moneroj $0,5</string>
     <string name="poi_payment_coins_50c12">moneroj €0,5, €1 kaj €2</string>
     <string name="poi_payment_telephone_cards_yes">telefonkartoj</string>
     <string name="poi_payment_telephone_cards_no">Telefonkartoj malakceptataj</string>

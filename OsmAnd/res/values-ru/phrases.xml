@@ -1312,7 +1312,7 @@
 
 	<string name="poi_payment_coins_yes">Монеты</string>
 	<string name="poi_payment_coins_no">Монеты не принимаются</string>
-	<string name="poi_payment_coins_0.5">Монеты по $0.5</string>
+	<string name="poi_payment_coins_0_5">Монеты по $0.5</string>
 	<string name="poi_payment_coins_50c12">Монеты по 50c, 1€ и 2€</string>
 	<string name="poi_payment_telephone_cards_yes">Телефонные карты</string>
 	<string name="poi_payment_telephone_cards_no">Телефонные карты не принимаются</string>

@@ -1317,7 +1317,7 @@
     <string name="poi_love_hotel">情侶賓館</string>
     <string name="poi_payment_coins_yes">接受硬幣</string>
     <string name="poi_payment_coins_no">不接受硬幣</string>
-    <string name="poi_payment_coins_0.5">接受 0.5 美元的硬幣</string>
+    <string name="poi_payment_coins_0_5">接受 0.5 美元的硬幣</string>
     <string name="poi_payment_coins_50c12">接受 50 分、1 歐元和 2 歐元硬幣</string>
     <string name="poi_payment_telephone_cards_yes">接受電話卡</string>
     <string name="poi_payment_telephone_cards_no">不接受電話卡</string>
