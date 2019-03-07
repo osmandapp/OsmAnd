@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -61,18 +60,18 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Speed;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.IndexConstants;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -98,6 +97,8 @@ import net.osmand.router.RouteStatistics;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.MessageFormat;
@@ -108,7 +109,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.logging.Log;
 
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
@@ -1268,8 +1268,7 @@ public class GpxUiHelper {
 	                                              @NonNull HorizontalBarChart mChart,
 	                                              @NonNull RouteStatistics.Statistics<E> routeStatistics,
 	                                              @NonNull GPXTrackAnalysis analysis,
-	                                              boolean useRightAxis,
-	                                              boolean nightMode) {
+	                                              boolean useRightAxis) {
 
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setEnabled(false);
@@ -1290,7 +1289,7 @@ public class GpxUiHelper {
 		for (int i = 0; i < stacks.length; i++) {
 			RouteStatistics.RouteSegmentAttribute segment = segments.get(i);
 			stacks[i] = segment.getDistance() / divX;
-			colors[i] = getColorFromRouteSegmentAttribute(app, segment, nightMode);
+			colors[i] = segment.getColor();
 		}
 		entries.add(new BarEntry(0, stacks));
 		BarDataSet barDataSet = new BarDataSet(entries, "");
@@ -1302,31 +1301,6 @@ public class GpxUiHelper {
 		mChart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
 
 		return dataSet;
-	}
-
-	public static int getColorFromRouteSegmentAttribute(OsmandApplication app, RouteStatistics.RouteSegmentAttribute segment, boolean nightMode) {
-		String colorAttrName = segment.getColorAttrName();
-		String colorName = segment.getColorName();
-		int color = 0;
-		if (colorName != null) {
-			try {
-				color = Color.parseColor(colorName);
-			} catch (Exception e) {
-			}
-		} else if (colorAttrName != null) {
-			color = GpxUiHelper.getColorFromStyle(app, colorAttrName, nightMode);
-		}
-		return color;
-	}
-
-	public static int getColorFromStyle(OsmandApplication app, String colorAttrName, boolean nightMode) {
-		RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
-		RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-		req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-		if (req.searchRenderingAttribute(colorAttrName)) {
-			return req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
-		}
-		return 0;
 	}
 
 	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication ctx,
