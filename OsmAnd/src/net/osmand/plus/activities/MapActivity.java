@@ -163,6 +163,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
+	private static MapRouteInfoMenu mapRouteInfoMenu = new MapRouteInfoMenu();
 	private static Intent prevActivityIntent = null;
 
 	private List<ActivityResultListener> activityResultListeners = new ArrayList<>();
@@ -225,6 +226,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		landscapeLayout = !portraitMode && !largeDevice;
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 		mapContextMenu.setMapActivity(this);
+		mapRouteInfoMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
@@ -445,10 +447,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void updateProgress(int progress) {
-				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateRouteCalculationProgress(progress);
+				mapRouteInfoMenu.updateRouteCalculationProgress(progress);
 				dashboardOnMap.updateRouteCalculationProgress(progress);
 				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-					if (MapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
+					if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
 						pb.setVisibility(View.GONE);
 						return;
 					}
@@ -494,7 +496,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void finish() {
-				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().routeCalculationFinished();
+				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
 			}
@@ -1117,9 +1119,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					TrackDetailsMenu trackDetailsMenu = mapLayers.getMapControlsLayer().getTrackDetailsMenu();
 					trackDetailsMenu.setGpxItem((GpxDisplayItem) toShow);
 					trackDetailsMenu.show();
-				} else if (MapRouteInfoMenu.isVisible()) {
+				} else if (mapRouteInfoMenu.isVisible()) {
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
-					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
+					mapRouteInfoMenu.updateMenu();
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
 				} else if (toShow instanceof QuadRect) {
 					QuadRect qr = (QuadRect) toShow;
@@ -1258,6 +1260,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onDestroy() {
 		super.onDestroy();
 		mapContextMenu.setMapActivity(null);
+		mapRouteInfoMenu.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
 		FailSafeFuntions.quitRouteRestoreDialog();
@@ -1581,6 +1584,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapContextMenu;
 	}
 
+	@NonNull
+	public MapRouteInfoMenu getMapRouteInfoMenu() {
+		return mapRouteInfoMenu;
+	}
+
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
 		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
@@ -1768,8 +1776,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		MapRouteInfoMenu routeInfoMenu = mapLayers.getMapControlsLayer().getMapRouteInfoMenu();
-		if (routeInfoMenu.isSelectFromMapTouch()) {
+		if (mapRouteInfoMenu.isSelectFromMapTouch()) {
 			return;
 		}
 
@@ -1801,7 +1808,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				int tileBoxWidthPx = 0;
 				int tileBoxHeightPx = 0;
 
-				WeakReference<MapRouteInfoMenuFragment> fragmentRef = routeInfoMenu.findMenuFragment();
+				WeakReference<MapRouteInfoMenuFragment> fragmentRef = mapRouteInfoMenu.findMenuFragment();
 				if (fragmentRef != null) {
 					MapRouteInfoMenuFragment f = fragmentRef.get();
 					if (landscapeLayout) {

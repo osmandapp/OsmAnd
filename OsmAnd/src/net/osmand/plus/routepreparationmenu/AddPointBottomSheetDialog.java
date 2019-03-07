@@ -235,7 +235,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					public void onClick(View v) {
 						MapActivity mapActivity = (MapActivity) getActivity();
 						if (mapActivity != null) {
-							MapRouteInfoMenu menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+							MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
 							menu.selectOnScreen(pointType);
 						}
 						dismiss();
@@ -300,7 +300,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			public void onClick(View v) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					MapRouteInfoMenu menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+					MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
 					menu.selectMapMarker(-1, pointType);
 					dismiss();
 				}
@@ -311,7 +311,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			public void onClick(View v) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					MapRouteInfoMenu menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+					MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
 					menu.selectMapMarker(0, pointType);
 					dismiss();
 				}

@@ -755,6 +755,7 @@ public class RouteInfoWidgetsFactory {
 	public static class LanesControl {
 		private MapViewTrackingUtilities trackingUtilities;
 		private OsmAndLocationProvider locationProvider;
+		private MapRouteInfoMenu mapRouteInfoMenu;
 		private RoutingHelper rh;
 		private OsmandSettings settings;
 		private ImageView lanesView;
@@ -776,6 +777,7 @@ public class RouteInfoWidgetsFactory {
 			trackingUtilities = map.getMapViewTrackingUtilities();
 			locationProvider = map.getMyApplication().getLocationProvider();
 			settings = map.getMyApplication().getSettings();
+			mapRouteInfoMenu = map.getMapRouteInfoMenu();
 			rh = map.getMyApplication().getRoutingHelper();
 			app = map.getMyApplication();
 		}
@@ -817,7 +819,7 @@ public class RouteInfoWidgetsFactory {
 					}
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
-					if (di >= 0 && MapRouteInfoMenu.isVisible()
+					if (di >= 0 && mapRouteInfoMenu.isVisible()
 							&& di < rh.getRouteDirections().size()) {
 						RouteDirectionInfo next = rh.getRouteDirections().get(di);
 						if (next != null) {

@@ -113,7 +113,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
-		menu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+		menu = mapActivity.getMapRouteInfoMenu();
 		shadowHeight = AndroidUtils.getStatusBarHeight(mapActivity);
 		topScreenPosY = addStatusBarHeightIfNeeded(0);
 		minHalfY = viewHeight - (int) (viewHeight * .75f);
