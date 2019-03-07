@@ -460,9 +460,9 @@
 \n
 \nДолго удерживайте для настроек"</string>
     <string name="local_index_installed">Загружено</string>
-    <string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
-    <string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
-    <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
+    <string name="local_index_items_backuped">%1$d из %2$d объект(ов) успешно архивированы.</string>
+    <string name="local_index_items_deleted">%1$d из %2$d объект(ов) успешно удалены.</string>
+    <string name="local_index_items_restored">%1$d из %2$d объект(ов) успешно активированы.</string>
     <string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>
     <string name="local_index_action_do">Вы собираетесь %1$s %2$s объектов. Вы уверены?</string>
     <string name="local_index_descr_title">Управление картами.</string>
@@ -884,7 +884,7 @@
     <string name="favourites_context_menu_edit">Редактировать точку</string>
     <string name="favourites_context_menu_delete">Удалить точку</string>
     <string name="favourites_remove_dialog_msg">Удалить точку \"%s\" из избранных\?</string>
-    <string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
+    <string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из избранных.</string>
     <string name="osb_comment_dialog_success">Комментарий добавлен</string>
     <string name="osb_comment_dialog_error">Не удалось добавить комментарий</string>
     <string name="osb_comment_dialog_message">Комментарий</string>
@@ -1280,7 +1280,7 @@
     <string name="keep_intermediate_points">Оставить промежуточные пункты</string>
     <string name="route_to">К:</string>
     <string name="route_via">Через:</string>
-    <string name="route_from">Из:</string>
+    <string name="route_from">От:</string>
     <string name="new_directions_point_dialog">У вас уже установлены промежуточные пункты.</string>
     <string name="speak_street_names">Названия улиц (TTS)</string>
     <string name="speak_title">Объявлять…</string>
@@ -2382,7 +2382,7 @@
     <string name="order_by">Критерий сортировки:</string>
     <string name="marker_show_distance_descr">Выберите способ указания расстояния и направления до маркеров на экране карты:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Смена ориентации карты</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Выберите ниже скорость, при которой переключается ориентация карты с \"По направлению движения\" на \"По направлению компаса\".</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Выберите скорость, при которой переключается ориентация карты с \"По направлению движения\" на \"По направлению компаса\".</string>
     <string name="all_markers_moved_to_history">Все маркеры перемещены в историю</string>
     <string name="marker_moved_to_history">Маркер перемещен в историю</string>
     <string name="marker_moved_to_active">Маркер перемещен в действующие</string>
@@ -2596,12 +2596,13 @@
 \n• Возможность записи путешествие в локальный файл GPX или Интернет-сервис 
 \n• Возможность отображения скорости и высоты 
 \n• Отображение контурных линий и затенения высот (через дополнительный плагин)</string>
-    <string name="osmand_plus_extended_description_part7">Непосредственный вклад в OSM
-\n• Сообщения об ошибках в данных
-\n• Загрузка GPX треков в OSM непосредственно из приложения
-\n• Добавление точек интереса (POI) и непосредственная загрузка их в OSM (или позже, если в автономном режиме)
-\n• Возможность записи путешествие в фоновом режиме (в то время, как устройство находится в спящем режиме)
-\nOsmAnd - открытое программное обеспечение в активной разработке. Каждый может внести вклад сообщая об ошибках, улучшая перевод или разрабатывая новые возможности. Проект находится в состоянии постоянного совершенствования форм взаимодействия разработчиков и пользователей. Ход проекта зависит также от финансовых взносов для обеспечения продолжения кодирования и тестирования новой функциональности.</string>
+    <string name="osmand_plus_extended_description_part7">Непосредственный вклад в OSM 
+\n • Сообщения об ошибках в данных 
+\n • Загрузка GPX треков в OSM непосредственно из приложения 
+\n • Добавление точек интереса (POI) и непосредственная загрузка их в OSM (или позже, если в автономном режиме) 
+\n • Возможность записи путешествие в фоновом режиме (в то время, как устройство находится в спящем режиме) 
+\n OsmAnd это активно развивающееся программное обеспечение с открытым исходным кодом. Каждый может внести свой вклад в приложение, сообщая об ошибках, улучшая переводы или кодируя новые функции. Кроме того, проект опирается на финансовые взносы для финансирования разработки и тестирования новых функциональных возможностей.
+\n</string>
     <string name="empty_state_osm_edits">Создать или изменить OSM объекты</string>
     <string name="empty_state_osm_edits_descr">Создавайте или изменяйте OSM POI, открывайте или комментируйте заметки OSM, а также отправляйте записанные файлы GPX.</string>
     <string name="shared_string_deleted">Удалено</string>
@@ -2748,7 +2749,7 @@
     <string name="download_file">Скачать файл</string>
     <string name="start_editing_card_image_text">Свободный всемирный путеводитель, который может редактировать каждый.</string>
     <string name="welcome_to_open_beta_description">В настоящее время путеводители основаны на Викигиде. Проверьте бесплатно все функции во время открытого бета-тестирования. Впоследствии путеводители будут доступны подписчикам OsmAnd Unlimited и владельцам OsmAnd+.</string>
-    <string name="start_editing_card_description">Вы можете отредактировать любую статью Викигида, этот проект написан такими же волонтерами как и вы. Нам нужны ваши знания, ваш опыт, ваш талант и ваше внимание</string>
+    <string name="start_editing_card_description">Вы можете изменять любую статью Викигида, более того, ваше участие в нашем проекте всячески приветствуется! Делитесь знаниями, опытом, талантами и своим вниманием.</string>
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>
@@ -2894,7 +2895,7 @@
     <string name="shared_string_capacity">Объем</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Высота</string>
-    <string name="transfers">трансферы</string>
+    <string name="transfers">пересадки</string>
     <string name="on_foot">пешком</string>
     <string name="show_along_the_route">Показывать вдоль маршрута</string>
     <string name="route_surface_stat_container">Поверхность</string>
@@ -2916,4 +2917,7 @@
     <string name="step_by_step">Шаг за шагом</string>
     <string name="road_types">Типы дорог</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Нажатие на кнопку действия отобразит или скроет выбранные GPX треки на карте</string>
+    <string name="by_transport_type">На %1$s</string>
+    <string name="exit_at">Выход на</string>
+    <string name="sit_on_the_stop">Посадка на остановке</string>
 </resources>
