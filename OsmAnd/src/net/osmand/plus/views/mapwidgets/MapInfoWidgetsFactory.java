@@ -894,7 +894,7 @@ public class MapInfoWidgetsFactory {
 					}
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
-					if (di >= 0 && MapRouteInfoMenu.isVisible() &&
+					if (di >= 0 && map.getMapRouteInfoMenu().isVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
 						showNextTurn = true;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);

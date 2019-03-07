@@ -130,10 +130,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
 	}
 
-	public MapRouteInfoMenu getMapRouteInfoMenu() {
-		return mapRouteInfoMenu;
-	}
-
 	public TrackDetailsMenu getTrackDetailsMenu() {
 		return trackDetailsMenu;
 	}
@@ -300,7 +296,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initRouteControls() {
-		mapRouteInfoMenu = new MapRouteInfoMenu(mapActivity, this);
+		mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 		trackDetailsMenu = new TrackDetailsMenu(mapActivity);
 	}
 
@@ -759,7 +755,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean routeDialogOpened = MapRouteInfoMenu.isVisible();
+		boolean routeDialogOpened = mapRouteInfoMenu.isVisible();
 		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
 		boolean contextMenuOpened = !mapActivity.getContextMenu().shouldShowTopControls();
 		boolean showRouteCalculationControls = routePlanningMode ||

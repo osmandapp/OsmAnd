@@ -1516,8 +1516,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 						false,
 						gpxItem);
 
-				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-				if (MapRouteInfoMenu.isVisible()) {
+				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapRouteInfoMenu();
+				if (mapRouteInfoMenu.isVisible()) {
 					// We arrived here by the route info menu.
 					// First, we close it and then show the details.
 					mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {

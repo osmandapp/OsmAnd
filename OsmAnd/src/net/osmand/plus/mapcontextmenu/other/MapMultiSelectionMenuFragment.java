@@ -174,7 +174,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (MapRouteInfoMenu.isVisible()) {
+		if (menu.getMapActivity().getMapRouteInfoMenu().isVisible()) {
 			dismissMenu();
 			return;
 		}

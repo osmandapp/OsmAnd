@@ -251,7 +251,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 						if (activeObjects.isEmpty() || isContainsOnlyStart(activeObjects)) {
 							mapActivity.getMapActions().stopNavigationWithoutConfirm();
 							mapActivity.getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, true);
-							mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
+							mapActivity.getMapRouteInfoMenu().hide();
 						}
 					}
 

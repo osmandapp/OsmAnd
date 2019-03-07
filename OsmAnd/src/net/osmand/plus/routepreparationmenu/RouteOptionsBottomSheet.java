@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.GPXUtilities;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -342,9 +342,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateMenu() {
-		final MapRouteInfoMenu mapRouteInfoMenu = getMapActivity().getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-		if (mapRouteInfoMenu != null) {
-			mapRouteInfoMenu.updateMenu();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
 	}
 

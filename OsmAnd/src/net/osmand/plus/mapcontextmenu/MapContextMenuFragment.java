@@ -56,7 +56,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -1247,11 +1246,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!menu.isActive() || MapRouteInfoMenu.isVisible()) {
+		MapActivity mapActivity = getMapActivity();
+		if (!menu.isActive() || (mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible())) {
 			dismissMenu();
 			return;
 		}
-		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			updateLocationViewCache = mapActivity.getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);

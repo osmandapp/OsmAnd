@@ -234,7 +234,7 @@ public class WaypointDialogHelper {
 
 	private static void updateRouteInfoMenu(Activity ctx) {
 		if (ctx instanceof MapActivity) {
-			((MapActivity) ctx).getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
+			((MapActivity) ctx).getMapRouteInfoMenu().updateMenu();
 		}
 	}
 

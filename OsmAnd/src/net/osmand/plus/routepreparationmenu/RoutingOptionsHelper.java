@@ -98,7 +98,7 @@ public class RoutingOptionsHelper {
 
 	public void selectRestrictedRoads(final MapActivity mapActivity) {
 		mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-		mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
+		mapActivity.getMapRouteInfoMenu().hide();
 		mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity);
 	}
 
