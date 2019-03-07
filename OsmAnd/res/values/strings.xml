@@ -19,6 +19,7 @@
         • Fixed areas displayed as flooded in Germany, South Africa, Quebec\n\n
         • Additional support for KML and KMZ import\n\n
         • Fixed crashes on opening some public transport stops\n\n
+        • Removed Facebook and Firebase analytics from the free version (OsmAnd+ doesn't include it)\n\n
     </string>
     <string name="use_osm_live_public_transport_description">Enable public transport for OsmAnd Live changes.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live public transport</string>
