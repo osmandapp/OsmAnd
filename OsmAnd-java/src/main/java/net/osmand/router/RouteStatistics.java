@@ -437,7 +437,7 @@ public class RouteStatistics {
 
         @Override
         public String toString() {
-            return String.format("%d-%d", Math.round(getLowerBoundary()), Math.round(getUpperBoundary()));
+            return String.format("%d%% - %d%%", Math.round(getLowerBoundary()), Math.round(getUpperBoundary()));
         }
     }
 
