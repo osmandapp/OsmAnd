@@ -1403,7 +1403,7 @@
     <string name="poi_rooms">Zimmer</string>
     <string name="poi_payment_coins_yes">Münzen</string>
     <string name="poi_payment_coins_no">Münzen nicht akzeptiert</string>
-    <string name="poi_payment_coins_0.5">$0,50 Münzen</string>
+    <string name="poi_payment_coins_0_5">$0,50 Münzen</string>
     <string name="poi_payment_coins_50c12">50c, 1€ und 2€ Münzen</string>
     <string name="poi_payment_telephone_cards_yes">Telefonkarten</string>
     <string name="poi_payment_telephone_cards_no">Telefonkarten nicht akzeptiert</string>

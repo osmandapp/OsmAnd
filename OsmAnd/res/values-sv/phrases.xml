@@ -1471,7 +1471,7 @@
     <string name="poi_love_hotel">Kärlekshotell</string>
     <string name="poi_payment_coins_yes">Mynt</string>
     <string name="poi_payment_coins_no">Mynt ej accepterat</string>
-    <string name="poi_payment_coins_0.5">$0,5 mynt</string>
+    <string name="poi_payment_coins_0_5">$0,5 mynt</string>
     <string name="poi_payment_coins_50c12">50c, 1€ och 2€ mynt</string>
     <string name="poi_payment_telephone_cards_yes">Telefonkort</string>
     <string name="poi_payment_telephone_cards_no">Telefonkort accepteras inte</string>

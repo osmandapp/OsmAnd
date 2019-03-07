@@ -1504,7 +1504,7 @@
 
 	<string name="poi_payment_coins_yes">Monētas</string>
 	<string name="poi_payment_coins_no">Monētas nepieņem</string>
-	<string name="poi_payment_coins_0.5">$0.5 monētas</string>
+	<string name="poi_payment_coins_0_5">$0.5 monētas</string>
 	<string name="poi_payment_coins_50c12">50c, 1€ un 2€ monētas</string>
 	<string name="poi_payment_telephone_cards_yes">Telefona kartes</string>
 	<string name="poi_payment_telephone_cards_no">Telefona kartes nepieņem</string>

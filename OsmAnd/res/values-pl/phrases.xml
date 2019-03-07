@@ -1570,7 +1570,7 @@
     <string name="poi_rooms">Pokoje</string>
     <string name="poi_payment_coins_yes">Monety</string>
     <string name="poi_payment_coins_no">Monety nieakceptowane</string>
-    <string name="poi_payment_coins_0.5">Monety 0,5$</string>
+    <string name="poi_payment_coins_0_5">Monety 0,5$</string>
     <string name="poi_payment_coins_50c12">Monety 50c, 1€, 2€</string>
     <string name="poi_payment_telephone_cards_yes">Karty telefoniczne</string>
     <string name="poi_payment_telephone_cards_no">Karty telefoniczne nieakceptowane</string>

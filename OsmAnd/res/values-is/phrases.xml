@@ -2196,7 +2196,7 @@
     <string name="poi_aerialway_duration">Meðal-ferðatími, mínútur</string>
     <string name="poi_payment_coins_yes">Mynt</string>
     <string name="poi_payment_coins_no">Ekki tekið við mynt</string>
-    <string name="poi_payment_coins_0.5">$0.5 mynt</string>
+    <string name="poi_payment_coins_0_5">$0.5 mynt</string>
     <string name="poi_payment_coins_50c12">50c, 1€, og 2€ mynt</string>
     <string name="poi_payment_electronic_purses_yes">Rafbuddur</string>
     <string name="poi_payment_electronic_purses_no">Ekki tekið við rafbuddum</string>

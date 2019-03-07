@@ -1399,7 +1399,7 @@
 	<string name="poi_stars_5">5 ( ലക്ഷുറി )</string>
 	<string name="poi_stars_5s">"5 എസ് (സുപീരിയര്‍  ലക്ഷുറി )"</string>
 	<string name="poi_payment_coins_yes">നാണയങ്ങള്‍ സ്വീകരിക്കും</string>
-	<string name="poi_payment_coins_0.5">$0.5 നാണയം സ്വീകരിക്കും</string>
+	<string name="poi_payment_coins_0_5">$0.5 നാണയം സ്വീകരിക്കും</string>
 	<string name="poi_payment_coins_50c12">"50c, 1€, and 2€  നാണയം സ്വീകരിക്കും"</string>
 	<string name="poi_payment_telephone_cards_yes">ടെലിഫോണ്‍ കാര്‍ഡ്സ് സ്വീകാര്യം</string>
 	<string name="poi_payment_telephone_cards_no">ടെലിഫോണ്‍ കാര്‍ഡ്സ് സ്വീകാര്യമല്ല</string>

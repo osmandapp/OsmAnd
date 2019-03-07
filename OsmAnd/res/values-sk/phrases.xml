@@ -1380,7 +1380,7 @@
 
 	<string name="poi_payment_coins_yes">Mince</string>
 	<string name="poi_payment_coins_no">Neprijíma mince</string>
-	<string name="poi_payment_coins_0.5">Mince 1/2USD</string>
+	<string name="poi_payment_coins_0_5">Mince 1/2USD</string>
 	<string name="poi_payment_coins_50c12">Mince 50c, 1€, a 2€</string>
 	<string name="poi_payment_telephone_cards_yes">Telefónne karty</string>
 	<string name="poi_payment_telephone_cards_no">Neprijíma telefónne karty</string>

@@ -1317,7 +1317,7 @@
     <string name="poi_love_hotel">Motel</string>
     <string name="poi_payment_coins_yes">Moedas</string>
     <string name="poi_payment_coins_no">Não aceita moedas</string>
-    <string name="poi_payment_coins_0.5">Moedas de $0,5</string>
+    <string name="poi_payment_coins_0_5">Moedas de $0,5</string>
     <string name="poi_payment_coins_50c12">Moedas de 50c, $1 e $2</string>
     <string name="poi_payment_telephone_cards_yes">Cartão telefônico</string>
     <string name="poi_payment_telephone_cards_no">Não aceita cartão telefônico</string>

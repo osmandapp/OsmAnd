@@ -1433,7 +1433,7 @@
 
 	<string name="poi_payment_coins_yes">Muntstukken</string>
 	<string name="poi_payment_coins_no">Betaling met munten niet mogelijk</string>
-	<string name="poi_payment_coins_0.5">€ 0,50-munten</string>
+	<string name="poi_payment_coins_0_5">€ 0,50-munten</string>
 	<string name="poi_payment_coins_50c12">€ 0.50, € 1, en € 2 munten</string>
 	<string name="poi_payment_telephone_cards_yes">Telefoonkaarten</string>
 	<string name="poi_payment_telephone_cards_no">Telefoonkaarten niet mogelijk</string>

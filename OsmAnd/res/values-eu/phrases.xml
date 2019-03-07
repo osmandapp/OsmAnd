@@ -792,7 +792,7 @@
 	<string name="poi_payment_coins_yes">Txanponak</string>
 	<string name="poi_payment_coins_no">Ez dira txanponak onartzen</string>
 	<string name="poi_payment_terminal">Ordainketa terminala</string>
-	<string name="poi_payment_coins_0.5">0,5$-eko txanponak</string>
+	<string name="poi_payment_coins_0_5">0,5$-eko txanponak</string>
 	<string name="poi_payment_coins_50c12">50c, 1€, eta 2€-ko txanponak</string>
 	<string name="poi_payment_telephone_cards_yes">Telefono txartelak</string>
 	<string name="poi_payment_telephone_cards_no">Ez dira telefono txartelak onartzen</string>

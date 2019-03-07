@@ -1627,7 +1627,7 @@
     <string name="poi_love_hotel">Albergu de s’amore</string>
     <string name="poi_payment_coins_yes">Monedas</string>
     <string name="poi_payment_coins_no">No atzetat monedas</string>
-    <string name="poi_payment_coins_0.5">Monedas de $0.5</string>
+    <string name="poi_payment_coins_0_5">Monedas de $0.5</string>
     <string name="poi_payment_coins_50c12">Monedas de 50 cent, 1€ e 2€</string>
     <string name="poi_payment_telephone_cards_yes">Ischedas telefònicas</string>
     <string name="poi_payment_telephone_cards_no">No atzetat cartas telefònicas</string>
