@@ -1183,6 +1183,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
+		OsmandApplication app = mapActivity.getMyApplication();
 		String via = generateViaDescription();
 		View viaLayout = mainView.findViewById(R.id.ViaLayout);
 		View viaLayoutDivider = mainView.findViewById(R.id.viaLayoutDivider);
@@ -1451,7 +1452,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void cancelButtonsAnimations() {
-		animationsHandler.removeCallbacksAndMessages(null);
+		Handler animationsHandler = getAnimationsHandler();
+		if (animationsHandler != null) {
+			animationsHandler.removeCallbacksAndMessages(null);
+		}
 		swapButtonCollapsing = false;
 		editButtonCollapsing = false;
 		addButtonCollapsing = false;
@@ -1617,8 +1621,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public String generateViaDescription() {
-		OsmandApplication app = getApp();
-		if (app != null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			List<TargetPoint> points = targets.getIntermediatePointsNavigation();
 			if (points.size() == 0) {
@@ -1704,8 +1709,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void setupToText(View view) {
-		OsmandApplication app = getApp();
-		if (app != null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
 			final TextView toText = ((TextView) view.findViewById(R.id.toText));
 			final TargetPointsHelper targets = app.getTargetPointsHelper();
 			TargetPoint finish = targets.getPointToNavigate();
