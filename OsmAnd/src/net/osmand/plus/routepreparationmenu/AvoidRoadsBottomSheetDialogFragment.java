@@ -50,6 +50,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private static final String AVOID_ROADS_TYPES_KEY = "avoid_roads_types";
 	private static final String AVOID_ROADS_OBJECTS_KEY = "avoid_roads_objects";
 
+	private RoutingOptionsHelper routingOptionsHelper;
+
 	private HashMap<String, Boolean> routingParametersMap;
 	private List<LatLon> removedImpassableRoads;
 	private LinearLayout stylesContainer;
@@ -62,6 +64,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		if (app == null) {
 			return;
 		}
+		routingOptionsHelper = app.getRoutingOptionsHelper();
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(AVOID_ROADS_TYPES_KEY)) {
 				routingParametersMap = (HashMap<String, Boolean>) savedInstanceState.getSerializable(AVOID_ROADS_TYPES_KEY);
@@ -200,7 +203,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		for (Map.Entry<String, Boolean> entry : routingParametersMap.entrySet()) {
 			final String parameterId = entry.getKey();
 			boolean selected = entry.getValue();
-			GeneralRouter.RoutingParameter parameter = app.getRoutingOptionsHelper().getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
+			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
 			String defValue = "";
 			if (parameter != null) {
 				defValue = parameter.getName();
@@ -266,7 +269,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 		for (Map.Entry<String, Boolean> entry : routingParametersMap.entrySet()) {
 			String parameterId = entry.getKey();
-			GeneralRouter.RoutingParameter parameter = app.getRoutingOptionsHelper().getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
+			GeneralRouter.RoutingParameter parameter = routingOptionsHelper.getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
 			if (parameter != null) {
 				boolean checked = entry.getValue();
 				OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
@@ -298,7 +301,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	@NonNull
 	private HashMap<String, Boolean> generateStylesMap(OsmandApplication app) {
 		HashMap<String, Boolean> res = new HashMap<>();
-		List<GeneralRouter.RoutingParameter> avoidParameters = app.getRoutingOptionsHelper().getAvoidRoutingPrefsForAppMode(app.getRoutingHelper().getAppMode());
+		List<GeneralRouter.RoutingParameter> avoidParameters = routingOptionsHelper.getAvoidRoutingPrefsForAppMode(app.getRoutingHelper().getAppMode());
 
 		for (GeneralRouter.RoutingParameter parameter : avoidParameters) {
 			OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
