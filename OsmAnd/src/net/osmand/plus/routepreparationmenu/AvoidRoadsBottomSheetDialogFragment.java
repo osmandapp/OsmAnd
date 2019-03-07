@@ -193,14 +193,19 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void populateImpassableRoadsTypes() {
-		Context context = getContext();
-		if (context == null) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
 			return;
 		}
 		for (Map.Entry<String, Boolean> entry : routingParametersMap.entrySet()) {
 			final String parameterId = entry.getKey();
 			boolean selected = entry.getValue();
-			String parameterName = SettingsBaseActivity.getRoutingStringPropertyName(context, parameterId, "");
+			GeneralRouter.RoutingParameter parameter = app.getRoutingOptionsHelper().getRoutingPrefsForAppModeById(app.getRoutingHelper().getAppMode(), parameterId);
+			String defValue = "";
+			if (parameter != null) {
+				defValue = parameter.getName();
+			}
+			String parameterName = SettingsBaseActivity.getRoutingStringPropertyName(app, parameterId, defValue);
 
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
