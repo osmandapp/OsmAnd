@@ -1288,7 +1288,7 @@
     <string name="poi_training_language">آموزش: زبان</string>
     <string name="poi_language_school">آموزشگاه زبان</string>
     <string name="poi_charging_station_output">خروجی ایستگاه شارژ</string>
-    <string name="poi_charging_station_filter">ایستگاه شارژ</string>
+    <string name="poi_charging_station">ایستگاه شارژ</string>
     <string name="poi_office_religion">دفتر مذهبی</string>
     <string name="poi_military_office">دفتر نظامی</string>
     <string name="poi_publisher">دفتر نشر</string>

@@ -1189,7 +1189,7 @@
     <string name="poi_payment_ep_moneo_yes">Moneo</string>
     <string name="poi_diet_kosher_only">Kun kosher</string>
     <string name="poi_diet_kosher_yes">Kosher</string>
-    <string name="poi_charging_station_filter">Ladestasjon</string>
+    <string name="poi_charging_station">Ladestasjon</string>
     <string name="poi_nat_name">Nasjonalt navn</string>
     <string name="poi_reg_name">Regionalt navn</string>
     <string name="poi_payment_mastercard_no">MasterCard er ikke akseptert</string>

@@ -2004,7 +2004,7 @@
 	<string name="poi_parking_fee_no">Parkowanski popłatk: ně</string>
 	<string name="poi_parking_fee">Parkowanski popłatk</string>
 
-	<string name="poi_charging_station_filter">nabiwanska stacija</string>
+	<string name="poi_charging_station">nabiwanska stacija</string>
 
 <string name="poi_location_underground">městno: podzemske</string>
 	<string name="poi_location_underwater">městno: pod wodu</string>

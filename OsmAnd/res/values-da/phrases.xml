@@ -3337,7 +3337,7 @@
     <string name="poi_map_size_site">Kortdækning: sted</string>
     <string name="poi_map_size_city">Kortdækning: by</string>
     <string name="poi_map_size_region">Kortdækning: region</string>
-    <string name="poi_charging_station_filter">Ladestation</string>
+    <string name="poi_charging_station">Ladestation</string>
     <string name="poi_depot">Depot</string>
     <string name="poi_letter_box">Brevkasse</string>
     <string name="poi_post_street">Gade</string>

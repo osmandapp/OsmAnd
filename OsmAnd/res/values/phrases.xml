@@ -3652,7 +3652,7 @@
 	<string name="poi_map_size_city">Map size: city</string>
 	<string name="poi_map_size_region">Map size: region</string>
 
-	<string name="poi_charging_station_filter">Charging station</string>
+	<string name="poi_charging_station">Charging station</string>
 
 	<string name="poi_depot">Depot</string>
 

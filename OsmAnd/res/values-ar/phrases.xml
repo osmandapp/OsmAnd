@@ -1485,7 +1485,7 @@
     <string name="poi_survey_point">نقطة دراسة استقصائية</string>
     <string name="poi_parking_fee">رسوم الموقف</string>
     <string name="poi_map_type_street">نوع الخريطة: شارع</string>
-    <string name="poi_charging_station_filter">محطة شحن</string>
+    <string name="poi_charging_station">محطة شحن</string>
     <string name="poi_post_street">شارع</string>
     <string name="poi_post_housenumber">رقم المنزل</string>
     <string name="poi_post_flats">شقة</string>

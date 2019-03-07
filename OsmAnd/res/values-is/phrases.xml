@@ -2482,7 +2482,7 @@
     <string name="poi_water_supply_borehole">Borhola</string>
     <string name="poi_water_supply_water_tank">Vatnstankur</string>
     <string name="poi_water_supply_bottled_water">Flöskuvatn</string>
-    <string name="poi_charging_station_filter">Hleðslustöð</string>
+    <string name="poi_charging_station">Hleðslustöð</string>
     <string name="poi_depot">Lager</string>
     <string name="poi_health_specialty_emergency_medicine_yes">Slysa- og bráðalækningar</string>
     <string name="poi_health_specialty_emergency_medicine_no">Heilsutengt sérsvið: slysa- og bráðalækningar: nei</string>

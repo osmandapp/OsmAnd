@@ -3642,7 +3642,7 @@
 	<string name="poi_map_size_city">Охват карты: город</string>
 	<string name="poi_map_size_region">Охват карты: регион</string>
 
-	<string name="poi_charging_station_filter">Зарядная станция</string>
+	<string name="poi_charging_station">Зарядная станция</string>
 
 <string name="poi_additional_type">Дополнительный</string>
 	<string name="poi_highway_crossing_type">Тип</string>

@@ -3328,7 +3328,7 @@
     <string name="poi_map_size_site">Rozmiar mapy: lokalna</string>
     <string name="poi_map_size_city">Rozmiar mapy: miasto</string>
     <string name="poi_map_size_region">Rozmiar mapy: region</string>
-    <string name="poi_charging_station_filter">Stacja ładowania</string>
+    <string name="poi_charging_station">Stacja ładowania</string>
     <string name="poi_letter_box">Skrzynka na listy</string>
     <string name="poi_post_street">Ulica</string>
     <string name="poi_post_housenumber">Numer budynku</string>

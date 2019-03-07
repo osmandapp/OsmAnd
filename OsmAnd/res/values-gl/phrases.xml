@@ -2717,7 +2717,7 @@
     <string name="poi_map_size_site">Tamaño do mapa: lugar</string>
     <string name="poi_map_size_city">Tamaño do mapa: cidade</string>
     <string name="poi_map_size_region">Tamaño do mapa: rexión</string>
-    <string name="poi_charging_station_filter">Estación de carrega</string>
+    <string name="poi_charging_station">Estación de carrega</string>
     <string name="poi_depot">Depósito</string>
     <string name="poi_letter_box">Caixa das postais</string>
     <string name="poi_post_street">Rúa</string>

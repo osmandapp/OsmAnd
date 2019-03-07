@@ -2912,7 +2912,7 @@
     <string name="poi_map_size_site">Cobertura do mapa: local</string>
     <string name="poi_map_size_city">Cobertura do mapa: cidade</string>
     <string name="poi_map_size_region">Cobertura do mapa: região</string>
-    <string name="poi_charging_station_filter">Eletroposto</string>
+    <string name="poi_charging_station">Eletroposto</string>
     <string name="poi_depot">Depósito</string>
     <string name="poi_letter_box">Caixa postal</string>
     <string name="poi_post_street">Rua</string>

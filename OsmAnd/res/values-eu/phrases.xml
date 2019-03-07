@@ -2623,7 +2623,7 @@
 	<string name="poi_map_size_city">Mapa mota: hiria</string>
 	<string name="poi_map_size_region">Mapa mota: eskualdea</string>
 
-	<string name="poi_charging_station_filter">Kargatze-estazioa</string>
+	<string name="poi_charging_station">Kargatze-estazioa</string>
 
 	<string name="poi_letter_box">Buzoia</string>
 	<string name="poi_post_street">Kalea</string>

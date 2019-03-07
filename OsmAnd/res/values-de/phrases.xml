@@ -3329,7 +3329,7 @@
     <string name="poi_map_type_street">Kartentyp: Straße</string>
     <string name="poi_map_type_scheme">Kartentyp: Übersicht</string>
     <string name="poi_map_type_toposcope">Kartentyp: Toposkop</string>
-    <string name="poi_charging_station_filter">Ladestation</string>
+    <string name="poi_charging_station">Ladestation</string>
     <string name="poi_depot">Lager</string>
     <string name="poi_map_size_site">Kartengröße: Platz</string>
     <string name="poi_map_size_city">Kartengröße: Stadt</string>

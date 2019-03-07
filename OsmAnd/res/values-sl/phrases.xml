@@ -432,7 +432,7 @@
 	<string name="poi_fire_hydrant_position">Položaj</string>
 	<string name="poi_parking_type">Vrsta</string>
 	<string name="poi_electricity_combined_charging">Polnilna postaja</string>
-	<string name="poi_charging_station_filter">Polnilne postaje</string>
+	<string name="poi_charging_station">Polnilne postaje</string>
 
 	<string name="poi_tactile_paving">Taktilni tlak</string>
 	<string name="poi_service_general">Storitev</string>

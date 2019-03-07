@@ -2730,7 +2730,7 @@
 	<string name="poi_gambling_betting">Wedden</string>
 	<string name="poi_gambling_bingo">Bingo</string>
 
-	<string name="poi_charging_station_filter">Oplaadpunt</string>
+	<string name="poi_charging_station">Oplaadpunt</string>
 
 	<string name="poi_checkpoint_type_electronic">Electronisch</string>
 	<string name="poi_course">Koers</string>

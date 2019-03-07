@@ -851,7 +851,7 @@
     <string name="poi_map_size_site">גודל המפה: אתר</string>
     <string name="poi_map_size_city">גודל המפה: עיר</string>
     <string name="poi_map_size_region">גודל המפה: אזור</string>
-    <string name="poi_charging_station_filter">תחנת טעינה</string>
+    <string name="poi_charging_station">תחנת טעינה</string>
     <string name="poi_cuisine_deli">מעדנייה</string>
     <string name="poi_cuisine_salad">סלט</string>
     <string name="poi_cuisine_frozen_yogurt">פרוזן יוגורט</string>

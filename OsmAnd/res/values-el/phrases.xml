@@ -3640,7 +3640,7 @@
 	<string name="poi_map_size_city">Μέγεθος χάρτη: πόλη</string>
 	<string name="poi_map_size_region">Μέγεθος χάρτη: περιοχή</string>
 
-	<string name="poi_charging_station_filter">Σταθμός φόρτισης</string>
+	<string name="poi_charging_station">Σταθμός φόρτισης</string>
 
 	<string name="poi_depot">Αμαξοστάσιο</string>
 

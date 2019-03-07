@@ -3322,7 +3322,7 @@
     <string name="poi_map_size_site">Grando de mapo: loka</string>
     <string name="poi_map_size_city">Grando de mapo: urba</string>
     <string name="poi_map_size_region">Grando de mapo: regiona</string>
-    <string name="poi_charging_station_filter">Ŝargostacio</string>
+    <string name="poi_charging_station">Ŝargostacio</string>
     <string name="poi_depot">Aŭtobusejo/tramejo</string>
     <string name="poi_letter_box">Leterkesto</string>
     <string name="poi_post_street">Strato</string>
