@@ -2388,8 +2388,8 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_take_photo_note">Nova nota de foto</string>
     <string name="quick_action_add_osm_bug">Adicionar Nota OSM</string>
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
-    <string name="quick_action_navigation_voice_off">Voz desligada</string>
-    <string name="quick_action_navigation_voice_on">"Silenciar voz "</string>
+    <string name="quick_action_navigation_voice_off">Ligar voz</string>
+    <string name="quick_action_navigation_voice_on">Silenciar voz</string>
     <string name="quick_action_add_gpx">Adicionar ponto de passagem GPX</string>
     <string name="quick_action_add_parking">Marcar estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
@@ -2804,19 +2804,19 @@ Pôr do Sol: %2$s</string>
     <string name="default_price_currency_format">%1$,2f %2$s</string>
     <string name="osm_live_payment_header">Selecione o período de pagamento conveniente para você:</string>
     <string name="osm_live_payment_contribute_descr">Parte da renda vai para os contribuidores do OpenStreetMap.</string>
-    <string name="release_3_1">• Navegação: corrige barra de progresso, inversão rápida de início e fim de rota
-\n
-\n• Marcadores de mapa: corrige ligar/desligar grupos, habilidade para ocultar os marcadores do mapa
-\n
-\n• Edição OSM: habilidade para editar etiquetas de objetos não pontuais e caminhos, corrige falta de comentários em notas, backup de edições
-\n
-\n• Melhora análise da Wikipédia e Wikivoyage, arquivos atualizados já estão disponíveis
-\n
-\n• Menu de contexto: corrige a cor de escudos de rodovias no modo noite, corrige tamanhos adicionais de menu
-\n
-\n• Navegação a barco: suporte para o canal navegável
-\n
-\n• Outras correções de bugs
+    <string name="release_3_1">• Navegação: Corrige barra de progresso, inversão rápida de início e fim de rota 
+\n 
+\n• Marcadores de mapa: Corrige ligar/desligar grupos, habilidade para ocultar os marcadores do mapa 
+\n 
+\n• Edição OSM: Habilidade para editar etiquetas de objetos não pontuais e caminhos, corrige falta de comentários em notas, backup de edições 
+\n 
+\n• Melhora análise da Wikipédia e Wikivoyage, arquivos atualizados já estão disponíveis 
+\n 
+\n• Menu de contexto: Corrige a cor de escudos de rodovias no modo noite, corrige tamanhos adicionais de menu 
+\n 
+\n• Navegação a barco: Suporte para o canal navegável 
+\n 
+\n• Outras correções de bugs 
 \n</string>
     <string name="send_search_query_description">Enviaremos a sua pesquisa: <b>\"%1$s\"</b>, bem como a sua localização.<br/>
         <br/> Nenhuma informação pessoal é coletada, os dados de pesquisa são usados apenas para melhorar o algoritmo de pesquisa.<br/>
