@@ -411,9 +411,6 @@ public class MapActivityActions implements DialogProvider {
 
 	public void enterDirectionsFromPoint(final double latitude, final double longitude) {
 		mapActivity.getContextMenu().hide();
-		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
-			setFirstMapMarkerAsTarget();
-		}
 		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			enterRoutePlanningMode(new LatLon(latitude, longitude),
 					mapActivity.getContextMenu().getPointDescription());
@@ -1072,20 +1069,5 @@ public class MapActivityActions implements DialogProvider {
 	private void restoreOsmand(){
 		getMyApplication().getAppCustomization().restoreOsmand();
 		mapActivity.closeDrawer();
-	}
-
-
-	public void setFirstMapMarkerAsTarget() {
-		if (getMyApplication().getMapMarkersHelper().getMapMarkers().size() > 0) {
-			MapMarkersHelper.MapMarker marker = getMyApplication().getMapMarkersHelper().getMapMarkers().get(0);
-			PointDescription pointDescription = marker.getOriginalPointDescription();
-			if (pointDescription.isLocation()
-					&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
-				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
-			}
-			TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-			targets.navigateToPoint(new LatLon(marker.getLatitude(), marker.getLongitude()),
-					true, targets.getIntermediatePoints().size() + 1, pointDescription);
-		}
 	}
 }

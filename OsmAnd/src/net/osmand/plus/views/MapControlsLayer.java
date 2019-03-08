@@ -413,11 +413,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			if (!hasTargets) {
-				if (getTargets().getPointToNavigate() == null) {
-					mapActivity.getMapActions().setFirstMapMarkerAsTarget();
-				}
-			}
 			TargetPoint start = getTargets().getPointToStart();
 			if (start != null) {
 				mapActivity.getMapActions().enterRoutePlanningMode(
