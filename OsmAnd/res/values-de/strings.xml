@@ -2934,6 +2934,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Durch Antippen dieser Aktionsschaltfläche werden ausgewählte GPX-Tracks auf der Karte ein- oder ausgeblendet</string>
     <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
     <string name="quick_action_gpx_tracks_show">GPX Tracks einblenden</string>
-    <string name="exit_at">Verlassen bei</string>
+    <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
 </resources>
