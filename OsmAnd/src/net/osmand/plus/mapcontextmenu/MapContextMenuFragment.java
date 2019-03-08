@@ -788,7 +788,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		int menuState = menu.getCurrentMenuState();
 		final boolean showShowHideButton = menuState == MenuState.HALF_SCREEN || (!menu.isLandscapeLayout() && menuState == MenuState.FULL_SCREEN);
 		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
-		detailsButton.setText(showShowHideButton ? R.string.shared_string_collapse : R.string.description);
+		detailsButton.setText(showShowHideButton ? R.string.shared_string_collapse : R.string.rendering_category_details);
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
