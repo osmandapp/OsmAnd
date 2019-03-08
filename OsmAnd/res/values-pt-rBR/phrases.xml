@@ -172,7 +172,7 @@
     <string name="poi_vehicle_inspection">Inspeção veicular</string>
     <string name="poi_car_wash">Lavagem de carro</string>
     <string name="poi_fuel">Posto de combustível;Posto de abastecimento;Posto de gasolina;Bomba de gasolina</string>
-    <string name="poi_fuel_diesel">Diesel</string>
+    <string name="poi_fuel_diesel">Óleo diesel</string>
     <string name="poi_fuel_gtl_diesel">Diesel GPL</string>
     <string name="poi_fuel_hgv_diesel">Diesel de veículos pesados</string>
     <string name="poi_fuel_biodiesel">Biodiesel</string>
