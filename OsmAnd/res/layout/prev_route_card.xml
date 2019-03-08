@@ -31,7 +31,10 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/route_info_list_item_height"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/route_info_list_item_height"
+			android:paddingTop="@dimen/list_header_padding"
+			android:paddingBottom="@dimen/list_header_padding"
 			android:gravity="center_vertical">
 
 			<TextView
@@ -41,6 +44,7 @@
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:text="@string/previous_route"
+				android:textSize="@dimen/default_desc_text_size"
 				android:textColor="?android:attr/textColorSecondary" />
 
 		</LinearLayout>
@@ -48,7 +52,10 @@
 		<LinearLayout
 			android:id="@+id/card_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/route_info_card_item_height"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/route_info_card_item_height"
+			android:paddingTop="@dimen/list_header_padding"
+			android:paddingBottom="@dimen/list_header_padding"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical"
 			android:orientation="horizontal">

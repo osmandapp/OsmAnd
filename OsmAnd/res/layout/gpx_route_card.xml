@@ -32,7 +32,10 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/route_info_list_item_height"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/route_info_list_item_height"
+			android:paddingTop="@dimen/list_header_padding"
+			android:paddingBottom="@dimen/list_header_padding"
 			android:gravity="center_vertical">
 
 			<TextView
@@ -42,6 +45,7 @@
 				android:layout_marginStart="@dimen/list_content_padding"
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
 				tools:text="Tracks on the map - 10" />
 
 		</LinearLayout>
@@ -55,7 +59,8 @@
 		<FrameLayout
 			android:id="@+id/show_all_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/route_info_list_item_height"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/route_info_list_item_height"
 			android:background="?attr/selectableItemBackground"
 			android:orientation="vertical">
 
@@ -73,6 +78,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
+				android:paddingTop="@dimen/list_header_padding"
+				android:paddingBottom="@dimen/list_header_padding"
 				android:layout_marginStart="@dimen/route_info_list_text_padding"
 				android:layout_marginLeft="@dimen/route_info_list_text_padding"
 				android:textColor="?attr/color_dialog_buttons"
