@@ -647,7 +647,7 @@
     <string name="rotate_map_none_opt">Не вращать (север сверху)</string>
     <string name="rotate_map_to_bearing_descr">Выберите способ вращения карты.</string>
     <string name="rotate_map_to_bearing">Ориентация карты</string>
-    <string name="show_route">Показать маршрут</string>
+    <string name="show_route">Детали маршрута</string>
     <string name="fav_imported_sucessfully">Избранные точки успешно импортированы</string>
     <string name="fav_file_to_load_not_found">Файл GPX, содержащий избранные точки, не был найден в {0}</string>
     <string name="fav_saved_sucessfully">Избранные точки сохранены в {0}</string>
@@ -1633,7 +1633,7 @@
     <string name="traffic_warning_pedestrian">Пешеходный переход</string>
     <string name="speak_pedestrian">Пешеходные переходы</string>
     <string name="navigation_over_track">Начать навигацию по треку?</string>
-    <string name="avoid_roads_msg">Вы можете выбрать альтернативный маршрут, выбрав дороги, которые стоит избегать</string>
+    <string name="avoid_roads_msg">Запуск альтернативного маршрута, путем выбора дорог, которых стоит избегать</string>
     <string name="save_track_to_gpx_globally_headline">Запись трека по требованию</string>
     <string name="proxy_pref_title">Прокси-сервер</string>
     <string name="proxy_pref_descr">Настройка Интернет соединения через прокси-сервер.</string>
@@ -2865,7 +2865,7 @@
     <string name="osm_live_payment_header">Выберите удобный для вас период оплаты:</string>
     <string name="osm_live_payment_contribute_descr">Часть доходов поступает участникам OpenStreetMap.</string>
     <string name="osm_live_subscriptions">Подписки</string>
-    <string name="powered_by_osmand">Работает на OsmAnd</string>
+    <string name="powered_by_osmand">На OsmAnd</string>
     <string name="mapillary_menu_title_pano">Только панорамы 360°</string>
     <string name="shared_string_launch">Запуск</string>
     <string name="lang_gn_py">Гуарани</string>
@@ -2917,4 +2917,21 @@
     <string name="by_transport_type">На %1$s</string>
     <string name="exit_at">Выход на</string>
     <string name="sit_on_the_stop">Посадка на остановке</string>
+    <string name="release_3_3">• Новый экран \"Маршруты\" отображает: кнопки пунктов назначения \"Дом\" и \"Работа\", ярлык \"Предыдущий маршрут\", список активных GPX треков и маркеров, историю поиска.
+\n
+\n• Дополнительная информация в разделе \"Детали маршрута\": типы дорог, поверхность, крутизна, ровность.
+\n
+\n• Навигация на общественном транспорте поддерживает все виды транспорта: метро, автобус, трамвай и др.
+\n
+\n• Новые быстрые действия для показа/скрытия треков и дневного/ночного режимов.
+\n
+\n• Исправлены области, отображаемые как затопленные в Германии, Южной Африке, Квебеке.
+\n
+\n• Дополнительная поддержка импорта KML и KMZ.
+\n
+\n• Исправлены падения при открытии некоторых остановок общественного транспорта.
+\n
+\n• Удалена аналитика Facebook и Firebase из бесплатной версии (OsmAnd+ ее не включает).</string>
+    <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учетом автообновлений OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Общественный транспорт OsmAnd Live</string>
 </resources>
