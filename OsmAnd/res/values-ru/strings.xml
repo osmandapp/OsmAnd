@@ -2726,7 +2726,7 @@
     <string name="purchase_dialog_travel_description">Приобретите один из следующих планов, чтобы получить оффлайн путеводитель:</string>
     <string name="purchase_dialog_subtitle">Выберите подходящий пункт:</string>
     <string name="in_app_purchase">Покупка в приложении</string>
-    <string name="in_app_purchase_desc">Разовый платеж.</string>
+    <string name="in_app_purchase_desc">Разовый платеж</string>
     <string name="purchase_unlim_title">Купить - %1$s</string>
     <string name="purchase_subscription_title">Подписаться - %1$s</string>
     <string name="wikivoyage_offline">Викигид в автономном режиме</string>
@@ -2883,7 +2883,7 @@
     <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
     <string name="voice_announcements">Голосовые объявления</string>
-    <string name="quick_action_switch_day_night_descr">Нажатие на кнопку действия переключает дневной и ночной режимы для OsmAnd.</string>
+    <string name="quick_action_switch_day_night_descr">Нажатие на кнопку действия переключает между дневным и ночным режимами для OsmAnd</string>
     <string name="quick_action_switch_day_mode">Дневной режим</string>
     <string name="quick_action_switch_night_mode">Ночной режим</string>
     <string name="quick_action_day_night_switch_mode">Переключить дневной/ночной режим</string>
