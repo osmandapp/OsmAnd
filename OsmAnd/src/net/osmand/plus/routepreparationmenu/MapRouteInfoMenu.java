@@ -97,6 +97,7 @@ import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
 
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
+	public static final int DEFAULT_MENU_STATE = 0;
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -113,6 +114,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
 
 	private boolean showMenu = false;
+	private int showMenuState = DEFAULT_MENU_STATE;
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -311,8 +313,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void setVisible(boolean visible) {
 		if (visible) {
 			if (showMenu) {
-				show();
+				show(showMenuState);
 				showMenu = false;
+				showMenuState = DEFAULT_MENU_STATE;
 			}
 		} else {
 			hide();
@@ -1776,6 +1779,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void show(int menuState) {
+		if (menuState == DEFAULT_MENU_STATE) {
+			menuState = getInitialMenuState();
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (!isVisible() && mapActivity != null) {
 			currentMenuState = menuState;
@@ -1815,8 +1821,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		removeTargetPointListener();
 	}
 
-	public void setShowMenu() {
+	public void setShowMenu(int menuState) {
 		showMenu = true;
+		showMenuState = menuState;
 	}
 
 	public enum PermanentAppModeOptions {

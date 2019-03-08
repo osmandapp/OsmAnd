@@ -52,6 +52,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MenuState;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -328,8 +329,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapRouteInfoMenu.showHideMenu();
 	}
 
-	public void showDialog() {
-		mapRouteInfoMenu.setShowMenu();
+	public void showRouteInfoMenu() {
+		mapRouteInfoMenu.setShowMenu(MapRouteInfoMenu.DEFAULT_MENU_STATE);
+	}
+
+	public void showRouteInfoMenu(int menuState) {
+		mapRouteInfoMenu.setShowMenu(menuState);
 	}
 
 	private void initControls() {
@@ -464,11 +469,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 						if (defaultVls[0] == 0) {
 							targets.removeAllWayPoints(false, true);
 							targets.navigateToPoint(latLon, true, -1, pointDescription);
-							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 							menu.close();
 						} else {
 							targets.navigateToPoint(latLon, true, -1, pointDescription);
-							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 							menu.close();
 						}
 					}
@@ -483,13 +488,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean hasPointToStart = settings.restorePointToStart();
 		targets.navigateToPoint(latLon, true, -1, pointDescription);
 		if (!hasPointToStart) {
-			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 		} else {
 			TargetPoint start = targets.getPointToStart();
 			if (start != null) {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true, MenuState.HEADER_ONLY);
 			} else {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 			}
 		}
 	}
