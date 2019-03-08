@@ -2309,7 +2309,7 @@
     <string name="open_mapillary">بازکردن مپیلاری</string>
     <string name="shared_string_install">نصب</string>
     <string name="improve_coverage_mapillary">با مَپیلاری پوشش تصویری را بهتر کنید</string>
-    <string name="improve_coverage_install_mapillary_desc">برای اضافه‌کردن یک یا چند عکس به این نقطه از نقشه برنامهٔ Mapillary را نصب کنید.</string>
+    <string name="improve_coverage_install_mapillary_desc">برنامهٔ Mapillary را نصب کنید و یک یا چند عکس به این نقطه از نقشه اضافه کنید.</string>
     <string name="online_photos">تصاویر آنلاین</string>
     <string name="shared_string_add_photos">افزودن تصویر</string>
     <string name="no_photos_descr">برای این مکان تصویری نداریم.</string>
