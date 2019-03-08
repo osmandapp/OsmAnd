@@ -642,7 +642,7 @@
                     android:gravity="start|center_vertical"
                     android:paddingLeft="@dimen/context_menu_padding_margin_default"
                     android:paddingRight="@dimen/context_menu_padding_margin_default"
-                    android:text="@string/description"
+                    android:text="@string/rendering_category_details"
                     android:textAllCaps="true"
                     android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_medium"
