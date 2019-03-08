@@ -2874,7 +2874,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="on_foot">pěšky</string>
     <string name="route_way">Cesta</string>
     <string name="points_of_interests">Body zájmu (POI)</string>
-    <string name="waiting_for_route_calculation">Výpočítávání trasy…</string>
+    <string name="waiting_for_route_calculation">Vypočítávání trasy…</string>
     <string name="app_mode_public_transport">Veřejná doprava</string>
     <string name="avoid_roads_descr">Vyberte cestu na mapě nebo ze seznamu níže, které se chcete během navigace vyhnout:</string>
     <string name="show_along_the_route">Ukázat podél trasy</string>
@@ -2899,7 +2899,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="road_types">Typy silnic</string>
     <string name="exit_at">Výjezd na</string>
     <string name="shared_string_swap">Vyměnit</string>
-    <string name="quick_action_show_hide_gpx_tracks">Zobrazit/Skrýt GPX Trasy</string>
+    <string name="quick_action_show_hide_gpx_tracks">Zobrazit/skrýt GPX trasy</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Klepnutím na toto tlačítko akce se zobrazí nebo skryjí vybrané GPX trasy na mapě</string>
     <string name="quick_action_gpx_tracks_hide">Skrýt GPX trasy</string>
     <string name="quick_action_gpx_tracks_show">Zobrazit GPX trasy</string>
