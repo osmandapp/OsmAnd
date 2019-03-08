@@ -68,6 +68,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
+import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
@@ -490,6 +491,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 			bottomShadowVisible = routes.size() == 0;
 		} else if (!routeCalculationInProgress) {
+			// Home/work card
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
 
@@ -504,6 +506,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(previousRouteCard);
 			}
 
+			// Gpx card
 			List<SelectedGpxFile> selectedGPXFiles =
 					app.getSelectedGpxHelper().getSelectedGPXFiles();
 			final List<GPXFile> gpxFiles = new ArrayList<>();
@@ -520,6 +523,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(tracksCard);
 			}
 
+			// Map markers card
+			List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+			if (mapMarkers.size() > 0) {
+				MapMarkersCard mapMarkersCard = new MapMarkersCard(mapActivity, mapMarkers);
+				menuCards.add(mapMarkersCard);
+			}
+
+			// History card
 			SearchResultCollection res = null;
 			try {
 				res = app.getSearchUICore().getCore().shallowSearch(QuickSearchHelper.SearchHistoryAPI.class, "", null);
