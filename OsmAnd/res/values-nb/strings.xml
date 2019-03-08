@@ -2928,4 +2928,23 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">Å trykke på denne knappen viser eller skjuler valgte GPX-spor på kartet</string>
     <string name="quick_action_gpx_tracks_hide">Skjul GPX-spor</string>
     <string name="quick_action_gpx_tracks_show">Vis GPX-spor</string>
+    <string name="release_3_3">• Ny \'Anvisninger\'-skjerm: Viser hjem og arbeid som målknapper, snarvei til \"tidligere rute\", liste over aktive GPX-spor og markører, søkehistorikk
+\n
+\n • Ytterligere info under \"Rutedetaljer\": Veitype, -dekke, bratthet, jevnhet
+\n
+\n • Offentlig transportnavigasjon med støtte for alle typer transport: Undergrunn, buss, trikk osv.
+\n
+\n • Ny rask handling for skjuling/visning av spor og dag/natt- modus
+\n
+\n • Fiks for områder som tidligere vistes som flomrammede i Tyskland, Sør-Afraika, Québec
+\n
+\n • Ytterligere støtte for KML og MKZ -import
+\n
+\n • Fikset kræsj ved åpning av noen offentlige transportstopp
+\n
+\n • Fjernet Facebook of Firebase-overvåkning fra gratisversjonen (OsmAnd+ har det ikke)
+\n
+\n</string>
+    <string name="use_osm_live_public_transport_description">Skru på offentlig transport i OsmAnd Live-endringer.</string>
+    <string name="use_osm_live_public_transport">Offentlig transport i OsmAnd Live</string>
 </resources>
