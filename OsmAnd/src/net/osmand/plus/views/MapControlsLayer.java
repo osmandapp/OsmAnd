@@ -325,8 +325,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapActivity.getMapActions().stopNavigationWithoutConfirm();
 	}
 
-	public void showRouteInfoControlDialog() {
-		mapRouteInfoMenu.showHideMenu();
+	public void showRouteInfoControlDialog(int menuState) {
+		mapRouteInfoMenu.showHideMenu(menuState);
 	}
 
 	public void showRouteInfoMenu() {
@@ -421,7 +421,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 			}
 		} else {
-			showRouteInfoControlDialog();
+			showRouteInfoControlDialog(MenuState.HEADER_ONLY);
 		}
 		hasTargets = false;
 	}

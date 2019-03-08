@@ -366,12 +366,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return false;
 	}
 
-	public void showHideMenu() {
+	public void showHideMenu(int menuState) {
 		intermediateRequestsLatLon.clear();
 		if (isVisible()) {
 			hide();
 		} else {
-			show();
+			show(menuState);
 		}
 	}
 
