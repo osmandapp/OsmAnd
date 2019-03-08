@@ -499,7 +499,7 @@
     <string name="zxing_barcode_scanner_not_found">برنامهٔ اسکنر بارکد ZXing نصب نشده است. در گوگل‌پلی جست‌وجو می‌کنید؟</string>
     <string name="rendering_attr_roadColors_description">یکی از رنگ‌بندی‌های راه را انتخاب کنید:</string>
     <string name="rendering_attr_roadColors_name">رنگ‌بندی راه</string>
-    <string name="enable_plugin_monitoring_services">افزونهٔ «ضبط سفر» را فعال کنید تا بتوانید از سرویس‌های ثبت مکان استفاده کنید (ضبط GPX، ردیابی آنلاین)</string>
+    <string name="enable_plugin_monitoring_services">افزونهٔ «ضبط سفر» را فعال کنید تا بتوانید از خدمات ثبت موقعیت مکانی استفاده کنید (ضبط GPX، ردیابی آنلاین)</string>
     <string name="non_optimal_route_calculation">برای مسافت‌های طولانی شاید بهینه‌ترین مسیر محاسبه نشود</string>
     <string name="gps_not_available">لطفاً GPS را از طریق تنظیمات فعال کنید</string>
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
@@ -632,8 +632,8 @@
     <string name="navigate_point_format">قالب</string>
     <string name="basemap_was_selected_to_download">نقشهٔ پایه انتخاب شد که دانلود شود تا برنامه راه بیفتد.</string>
     <string name="select_index_file_to_download">چیزی پیدا نشد. اگر نمی‌توانید منطقهٔ خود را پیدا کنید، خودتان آن را بسازید (https://osmand.net را ببینید).</string>
-    <string name="local_indexes_cat_tile">نقشه‌های کاشی‌کاشی آنلاین و ذخیره‌شده</string>
-    <string name="map_online_data">نقشه‌های کاشی‌کاشی و آنلاین</string>
+    <string name="local_indexes_cat_tile">نقشه‌های کاشی‌وار آنلاین و ذخیره‌شده</string>
+    <string name="map_online_data">نقشه‌های کاشی‌وار و آنلاین</string>
     <string name="map_online_data_descr">از نقشه‌های آنلاین استفاده کنید (کاشی‌های نقشه را دانلود و روی کارت حافظه ذخیره کنید).</string>
     <string name="shared_string_online_maps">نقشه‌های آنلاین</string>
     <string name="online_map_settings_descr">منبع کاشی‌های آنلاین یا ذخیره‌شدهٔ نقشه را تنظیم کنید.</string>
@@ -977,7 +977,7 @@
 \n- میزان‌کردن نقشه در جهت قطب‌نما یا در جهت حرکت؛ 
 \n- راهنمای خط عبوری، نمایش محدودیت سرعت، راهنمای گفتاری انسانی یا ماشینی</string>
     <string name="asap">دراسرع‌وقت</string>
-    <string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاینِ کاشی‌کاشی (tile map) یا شطرنجی (raster map) دسترسی پیدا می‌کنید؛ از قبیل کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک)، تصاویر ماهواره‌ای، لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی، لایه‌های سایه‌روشن و... . 
+    <string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین دسترسی پیدا می‌کنید (اصطلاحاً tile یا raster)؛ مانند کاشی‌های پیش‌فرض اوپن‌استریت‌مپ (مانند مَپنیک)، تصاویر ماهواره‌ای، لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی، لایه‌های سایه‌روشن و... . 
 \n 
 \nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ پایه و هم به‌عنوان لایهٔ رویی یا زیری برای لایهٔ پایه (مثلاً نقشه‌های آفلاین OsmAnd) قابل‌تنظیم هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
 \n 
@@ -1027,7 +1027,7 @@
     <string name="overlay_transparency">شفافیت لایهٔ رویی</string>
     <string name="map_transparency_descr">شفافیت نقشهٔ پایه را تغییر دهید.</string>
     <string name="map_transparency">شفافیت نقشهٔ پایه</string>
-    <string name="select_tile_source_to_install">نقشه‌ها(ی کاشی‌کاشی) را برای نصب یا به‌روزرسانی انتخاب کنید.</string>
+    <string name="select_tile_source_to_install">نقشه‌ها(ی کاشی‌وار) را برای نصب یا به‌روزرسانی انتخاب کنید.</string>
     <string name="level_to_switch_vector_raster">کمترین سطح زوم بُرداری</string>
     <string name="search_offline_geo_error">نشانی جغرافیایی \'%s\' قابل‌تجزیه نیست.</string>
     <string name="search_osm_offline">جست‌وجو با مختصات جغرافیایی</string>
@@ -1150,7 +1150,7 @@
     <string name="routing_attr_weight_description">وزن مجاز خودرو در راه‌ها را مشخص کنید.</string>
     <string name="select_gpx">انتخاب فایل GPX…</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
-    <string name="shared_string_select_on_map">انتخاب از روی نقشه</string>
+    <string name="shared_string_select_on_map">انتخاب روی نقشه</string>
     <string name="shared_string_favorite">نقطهٔ برگزیده</string>
     <string name="route_preferences">ترجیحات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
@@ -1213,7 +1213,7 @@
     <string name="voice_pref_title">گفتار</string>
     <string name="misc_pref_title">متفرقه</string>
     <string name="localization_pref_title">بومی‌سازی</string>
-    <string name="interrupt_music_descr">هنگام بیان پیام‌های گفتاری، پخش موسیقی را نگه دار، نه اینکه فقط آهسته شود.</string>
+    <string name="interrupt_music_descr">هنگام پخش پیام‌های گفتاری، پخش موسیقی را نگه دار، نه اینکه فقط آهسته شود.</string>
     <string name="interrupt_music">مکث موسیقی</string>
     <string name="share_route_as_gpx">اشتراک‌گذاری مسیر در قالب فایل GPX</string>
     <string name="share_route_subject">مسیر از طریق OsmAnd به‌اشتراک گذاشته شد</string>
@@ -1708,7 +1708,7 @@
     <string name="access_direction_audio_feedback">راهنمای صوتی</string>
     <string name="access_direction_audio_feedback_descr">بیان‌کردن جهت مقصد با پیام صوتی.</string>
     <string name="access_direction_haptic_feedback">راهنمای لمسی</string>
-    <string name="access_direction_haptic_feedback_descr">بیان‌کردن جهت مقصد با لرزاندن.</string>
+    <string name="access_direction_haptic_feedback_descr">بیان‌کردن جهت مقصد با لرزش.</string>
     <string name="use_osm_live_routing_description">مسیریابی از روی به‌روزرسانی‌های پویا فعال شود.</string>
     <string name="use_osm_live_routing">مسیریابی از روی داده‌های به‌روزرسانی پویا</string>
     <string name="access_no_destination">مقصد تنظیم نشده</string>
@@ -2853,7 +2853,7 @@
 \nدر این باره با ما صحبت کنید.</string>
     <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>
     <string name="increase_search_radius_to">افزایش شعاع جست‌وجو به %1$s</string>
-    <string name="thank_you_for_feedback">ممنون که بازخورد دادید</string>
+    <string name="thank_you_for_feedback">سپاسگزاریم که نظر دادید</string>
     <string name="poi_cannot_be_found">گره یا راه پیدا نمی‌شود.</string>
     <string name="search_no_results_feedback">چیزی پیدا نشد؟
 \nنظرتان را به ما بگویید</string>
@@ -2925,18 +2925,18 @@
     <string name="quick_action_switch_day_mode">حالت روز</string>
     <string name="quick_action_switch_night_mode">حالت شب</string>
     <string name="quick_action_day_night_switch_mode">تعویض حالت شب/روز</string>
-    <string name="swap_start_and_destination">تعویض مبدأ با مقصد</string>
+    <string name="swap_start_and_destination">تعویض مبدأ و مقصد</string>
     <string name="add_destination_point">افزودن مقصد</string>
     <string name="add_intermediate_point">افزودن نقطهٔ میانی</string>
     <string name="add_start_point">افزودن نقطهٔ شروع</string>
     <string name="intermediate_waypoint">نقطهٔ میانی</string>
     <string name="transfers">انتقال‌ها</string>
-    <string name="on_foot">روی پا</string>
-    <string name="route_way">راه</string>
+    <string name="on_foot">پیاده</string>
+    <string name="route_way">طول مسیر</string>
     <string name="points_of_interests">نقاط پرکاربرد (POI)</string>
     <string name="waiting_for_route_calculation">محاسبهٔ مسیر…</string>
     <string name="app_mode_public_transport">حمل‌ونقل عمومی</string>
-    <string name="avoid_roads_descr">جاده‌ای که می‌خواهید از آن بپرهیزید را انتخاب کنید؛ روی نقشه یا از لیست زیر:</string>
+    <string name="avoid_roads_descr">جاده‌ای که می‌خواهید در طی ناوبری از آن بپرهیزید را روی نقشه یا از لیست زیر انتخاب کنید:</string>
     <string name="show_along_the_route">در امتداد مسیر نشان بده</string>
     <string name="simulate_navigation">شبیه‌سازی ناوبری</string>
     <string name="choose_track_file_to_follow">فایل رد را برای دنبال‌کردن انتخاب کنید</string>
@@ -2947,7 +2947,7 @@
     <string name="metric_ton">تن</string>
     <string name="shared_string_capacity">ظرفیت</string>
     <string name="shared_string_width">عرض</string>
-    <string name="shared_string_height">طول</string>
+    <string name="shared_string_height">ارتفاع</string>
     <string name="route_class_stat_container">رده</string>
     <string name="route_surface_stat_container">سطح</string>
     <string name="route_smoothness_stat_container">همواری</string>
@@ -2963,10 +2963,10 @@
     <string name="time_of_day">ساعت</string>
     <string name="by_transport_type">با %1$s</string>
     <string name="step_by_step">گام‌به‌گام</string>
-    <string name="road_types">انواع جاده</string>
-    <string name="exit_at">خارج شوید در</string>
-    <string name="sit_on_the_stop">در ایستگاه بنشینید</string>
-    <string name="quick_action_show_hide_gpx_tracks">نمایان/پنهان کردن ردهای GPX</string>
+    <string name="road_types">نوع جاده‌ها</string>
+    <string name="exit_at">ایستگاه پیاده‌شدن</string>
+    <string name="sit_on_the_stop">ایستگاه سوارشدن</string>
+    <string name="quick_action_show_hide_gpx_tracks">آشکار/پنهان کردن ردهای GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">با لمس این دکمهٔ عملیاتی، ردهای GPX انتخابی را روی نقشه آشکار یا پنهان کنید</string>
     <string name="quick_action_gpx_tracks_hide">پنهان‌کردن ردهای GPX</string>
     <string name="quick_action_gpx_tracks_show">آشکارکردن ردهای GPX</string>

@@ -3557,7 +3557,7 @@
     <string name="poi_park_ride_train">Zug</string>
     <string name="poi_park_ride_bus">Bus</string>
     <string name="poi_park_ride_metro">U-Bahn</string>
-    <string name="poi_park_ride_hov">Stark ausgelastete Fahrzeuge</string>
+    <string name="poi_park_ride_hov">Fahrgemeinschaft</string>
     <string name="poi_park_ride_tram">Straßenbahn</string>
     <string name="poi_park_ride_ferry">Fähre</string>
     <string name="poi_generator_source_biomass">Energiequelle: Biomasse</string>

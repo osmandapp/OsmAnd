@@ -2883,4 +2883,12 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="show_more">Továbbiak megjelenítése</string>
     <string name="tracks_on_map">Nyomvonalak a térképen</string>
     <string name="route_class_stat_container">Útkategória</string>
+    <string name="step_by_step">Lépésről lépésre</string>
+    <string name="road_types">Úttípusok</string>
+    <string name="exit_at">Hajts le</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX nyomvonalak megjelenítése/elrejtése</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">A műveletgombra koppintás elrejti vagy megjeleníti a GPX nyomvonalakat a térképen</string>
+    <string name="quick_action_gpx_tracks_hide">GPX nyomvonalak elrejtése</string>
+    <string name="quick_action_gpx_tracks_show">GPX nyomvonalak megjelenítése</string>
+    <string name="add_destination_query">Először jelölj ki egy célpontot</string>
 </resources>
