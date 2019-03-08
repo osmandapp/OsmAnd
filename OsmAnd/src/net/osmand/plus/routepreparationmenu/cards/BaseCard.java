@@ -29,7 +29,8 @@ public abstract class BaseCard {
 	private CardListener listener;
 
 	public interface CardListener {
-		void onCardLayoutNeeded();
+		void onCardLayoutNeeded(@NonNull BaseCard card);
+		void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex);
 	}
 
 	public BaseCard(@NonNull MapActivity mapActivity) {
@@ -61,7 +62,7 @@ public abstract class BaseCard {
 	public void setLayoutNeeded() {
 		CardListener listener = this.listener;
 		if (listener != null) {
-			listener.onCardLayoutNeeded();
+			listener.onCardLayoutNeeded(this);
 		}
 	}
 

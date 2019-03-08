@@ -862,6 +862,23 @@ public class OsmandSettings {
 		}
 	};
 
+	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>("last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
+		{
+			makeGlobal();
+		}
+
+		@Override
+		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
+			return ApplicationMode.valueOfStringKey(key, defaultValue);
+		}
+
+		@Override
+		protected boolean setValue(Object prefs, ApplicationMode val) {
+			return settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
+		}
+	};
+
 	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(
 			"first_map_is_downloaded", false);
 

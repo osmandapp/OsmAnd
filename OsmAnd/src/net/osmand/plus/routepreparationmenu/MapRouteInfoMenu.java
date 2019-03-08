@@ -495,6 +495,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
 
+			// Previous route card
 			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 			TargetPoint startBackup = targetPointsHelper.getPointToStartBackup();
 			if (startBackup == null) {
@@ -503,6 +504,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			TargetPoint destinationBackup = targetPointsHelper.getPointToNavigateBackup();
 			if (startBackup != null && destinationBackup != null) {
 				PreviousRouteCard previousRouteCard = new PreviousRouteCard(mapActivity);
+				previousRouteCard.setListener(this);
 				menuCards.add(previousRouteCard);
 			}
 
@@ -559,8 +561,27 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	@Override
-	public void onCardLayoutNeeded() {
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
 		updateLayout();
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		OsmandApplication app = getApp();
+		if (app != null) {
+			if (card instanceof PreviousRouteCard) {
+				ApplicationMode lastAppMode = app.getSettings().LAST_ROUTE_APPLICATION_MODE.get();
+				ApplicationMode currentAppMode = app.getRoutingHelper().getAppMode();
+				if (lastAppMode == ApplicationMode.DEFAULT) {
+					lastAppMode = currentAppMode;
+				}
+				updateApplicationMode(currentAppMode, lastAppMode);
+				updateFinishPointView();
+				updateOptionsButtons();
+
+				app.getTargetPointsHelper().restoreTargetPoints(true);
+			}
+		}
 	}
 
 	public boolean isRouteCalculated() {
@@ -667,7 +688,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private void updateApplicationModes() {
 		MapActivity mapActivity = getMapActivity();
-		View mainView = getMainView();
+		final View mainView = getMainView();
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
@@ -679,12 +700,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (selected.size() > 0) {
-					ApplicationMode next = selected.iterator().next();
-					updateApplicationMode(am, next);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					if (selected.size() > 0) {
+						OsmandApplication app = mapActivity.getMyApplication();
+						ApplicationMode next = selected.iterator().next();
+						if (app.getRoutingHelper().isRouteCalculated()) {
+							app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(next);
+						}
+						updateApplicationMode(am, next);
+					}
+					updateFinishPointView();
+					updateOptionsButtons();
 				}
-				updateFinishPointView();
-				updateOptionsButtons();
 			}
 		};
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(mapActivity.getMyApplication()));
