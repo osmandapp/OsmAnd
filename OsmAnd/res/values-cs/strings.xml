@@ -1356,7 +1356,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="wake_on_voice_descr">Zapnout obrazovku zařízení (pokud je vypnuta) když se blíží odbočka.</string>
     <string name="lock_screen_request_explanation">%1$s potřebuje tato oprávnění pro vypnutí obrazovky při režimu šetření energie.</string>
     <string name="shared_string_never">Nikdy</string>
-    <string name="home_button">Domovská obrazovka</string>
+    <string name="home_button">Domov</string>
     <string name="map_update">K dispozici aktualizace pro %1$s map</string>
     <string name="search_for">Hledat</string>
     <string name="shared_string_show_all">Zobrazit vše</string>
