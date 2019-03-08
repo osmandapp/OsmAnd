@@ -7,7 +7,7 @@
     <string name="routing_attr_no_new_routing_name">Evitar regras de roteamento da v1.9</string>
     <string name="navigate_point_northing">Norte (N)</string>
     <string name="navigate_point_easting">Leste (E)</string>
-    <string name="home_button">Início</string>
+    <string name="home_button">Casa</string>
     <string name="first_time_msg">Obrigado por usar o OsmAnd. Faça o download de dados regionais para uso off-line via \'Configurações\' → \'Gerenciar arquivos de mapa\' para visualizar mapas, localizar endereços, procurar POIs, encontrar transporte público e muito mais.</string>
     <string name="favorite_home_category">Casa</string>
     <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
@@ -2908,10 +2908,28 @@ Pôr do Sol: %2$s</string>
     <string name="by_transport_type">Por %1$s</string>
     <string name="step_by_step">Passo a passo</string>
     <string name="road_types">Tipos de estrada</string>
-    <string name="exit_at">Sair na</string>
-    <string name="sit_on_the_stop">Sente-se na parada</string>
+    <string name="exit_at">Desembarque em</string>
+    <string name="sit_on_the_stop">Embarque na parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Mostrar/Ocultar faixas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tocar neste botão de ação mostra ou oculta faixas GPX selecionadas no mapa</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
+    <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa
+\n
+\n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade
+\n
+\n - Navegação de transporte público que suporta todos os tipos de transporte: metro, ônibus, bonde/VLT, etc.
+\n
+\n - Nova Ação Rápida para mostrar/ocultar faixas e modos dia/noite
+\n
+\n - Áreas fixas exibidas como inundadas na Alemanha, África do Sul, Quebec
+\n
+\n - Suporte adicional para importação de KML e KMZ
+\n
+\n - Colisões fixas na abertura de algumas paragens de transportes públicos
+\n
+\n - Removido Facebook e Firebase Analytics da versão gratuita (OsmAnd+ não inclui)
+\n</string>
+    <string name="use_osm_live_public_transport_description">Habilitar o transporte público para alterações do OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transporte público OsmAnd Live</string>
 </resources>
