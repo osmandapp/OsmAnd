@@ -112,6 +112,7 @@
 	<string name="poi_books_type">Books</string>
 	<string name="poi_denotation">Denotation</string>
 	<string name="poi_park_ride">Park and ride</string>
+	<string name="poi_rtsa_scale_filter">Difficulty category</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3915,5 +3916,20 @@
 	<string name="poi_park_ride_ferry">Ferry</string>
 
 	<string name="poi_generator_source_biomass">Energy source: biomass</string>
+
+	<string name="poi_rtsa_scale_nc">н/к</string>
+	<string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+	<string name="poi_rtsa_scale_1a">1А</string>
+	<string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+	<string name="poi_rtsa_scale_1b">1Б</string>
+	<string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
+	<string name="poi_rtsa_scale_2a">2А</string>
+	<string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+	<string name="poi_rtsa_scale_2b">2Б</string>
+	<string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
+	<string name="poi_rtsa_scale_3a">3А</string>
+	<string name="poi_rtsa_scale_3a_asterisk">3А*</string>
+	<string name="poi_rtsa_scale_3b">3Б</string>
+	<string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
 
 </resources>
