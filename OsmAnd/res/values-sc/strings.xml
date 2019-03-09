@@ -1298,7 +1298,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="navigation_intent_invalid">Formatu non bàlidu: %s</string>
     <string name="show_more_map_detail">Ammustra prus minujas in sa mapa</string>
     <string name="show_more_map_detail_descr">Ammustra carchi minuja de sas mapas vetoriales (istradas etc.) fintzas a sos livellos de ismanniamentu prus bassos.</string>
-    <string name="show_route">Minujas àndala</string>
+    <string name="show_route">Minujas de s\'àndala</string>
     <string name="use_high_res_maps_descr">Non allonghiare (ne inghelare) sos tasseddos de sa mapa in sos dispositivos a carchesa arta.</string>
     <string name="background_router_service_descr">Arrastat sa positzione tua cando s’ischermu est istudadu.</string>
     <string name="off_router_service_no_gps_available">Su servìtziu de nàvigu de isfundu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
@@ -2916,4 +2916,23 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Incarchende custu butone pro s\'atzione at a ammustrare o cuare sas rastas ischertadas in sa mapa</string>
     <string name="quick_action_gpx_tracks_hide">Istichi sas rastas GPX</string>
     <string name="quick_action_gpx_tracks_show">Ammustra sas rastas GPX</string>
+    <string name="release_3_3">• Ischermada \'Diretziones\' noa: Ammustrat sos butones de destinatzione pro sa domo e su logu de traballu, s\'incurtzada \'àndala imbeniente\', sa lista de rastas GPX e de marcadores ativos e sa cronologia de sas chircas
+\n
+\n • Informatziones agiuntivas in suta de \'Minujas de s\'àndala\': casta de carreras, superfìtzies, ratesa, uniformidade
+\n
+\n • Nàvigu cun su trasportu pùblicu chi suportat cada genia de trasportu: metropolitana, postale, tram, etz.
+\n
+\n • Butone de atzione nou pro ammustrare/istichire rastas e modalidades die/note
+\n
+\n • Àreas fissadas ammustradas comente inundadas in Germània, Àfrica de su Sud, Quebec
+\n
+\n • Suportu agiuntivu pro s\'importatzione de KML e KMZ
+\n
+\n • Errore de istudada a s\'abertura de carchi firmada de trasportu pùblicu curretu
+\n
+\n • Anàlisi de Facebook e Firebase bogadas dae sa versione lìbera (OsmAnd+ non las incluet)
+\n
+\n</string>
+    <string name="use_osm_live_public_transport_description">Abìlita su trasportu pùblicu pro sas modìficas de OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Trasportu pùblicu in OsmAnd Live</string>
 </resources>

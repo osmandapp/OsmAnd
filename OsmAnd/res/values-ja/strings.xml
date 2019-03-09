@@ -638,7 +638,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">記録</string>
+    <string name="shared_string_control_start">開始</string>
     <string name="map_widget_av_notes">音声/動画メモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -670,13 +670,13 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showRoadMaps_name">道路のみのマップ</string>
     <string name="safe_mode_description">セーフモード(ネイティブコードの代わりに遅いが互換性の高いAndroid用コード)でアプリケーションを実行します</string>
     <string name="safe_mode">セーフモード</string>
-    <string name="native_library_not_running">アプリケーションは、セーフモードで実行されています(設定で無効にできます)。</string>
+    <string name="native_library_not_running">アプリケーションは、セーフモードで実行されています。(設定から切り替え可能)</string>
     <string name="background_service_is_enabled_question">OsmAnd機能の一部がバックグラウンドで動作しています。停止しますか？</string>
     <string name="zxing_barcode_scanner_not_found">QRコードスキャナー(ZXing Barcode Scanner／ZXing Team)がインストールされていません。Google Playで検索しますか？</string>
     <string name="rendering_attr_roadColors_description">道路の配色を選択します:</string>
     <string name="rendering_attr_roadColors_name">道路の配色</string>
     <string name="map_widget_show_destination_arrow">目的地の方向を表示</string>
-    <string name="enable_plugin_monitoring_services">位置記録サービスを(GPXログ、オンライン追跡)を使用する為に旅行記録プラグインを有効化</string>
+    <string name="enable_plugin_monitoring_services">位置記録サービスを(GPXログ、オンライン追跡)を使用する為に\"旅行記録プラグイン\"を有効化</string>
     <string name="non_optimal_route_calculation">長距離向けに非最適化ルートで計算</string>
     <string name="gps_not_available">設定でGPSを有効にしてください</string>
     <string name="map_widget_monitoring_services">ログ保存サービス</string>
@@ -1377,7 +1377,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_busRoutes_name">バスでのルート</string>
     <string name="rendering_category_hide">マップの簡略化</string>
     <string name="rendering_category_routes">経路の追加描写</string>
-    <string name="rendering_category_details">詳細の追加描写</string>
+    <string name="rendering_category_details">詳細</string>
     <string name="rendering_category_transport">交通機関の追加描写</string>
     <string name="rendering_category_others">他のマップ要素に関する設定</string>
     <string name="map_widget_appearance_rem">その他機能</string>
@@ -1858,7 +1858,8 @@ POIの更新は利用できません</string>
     <string name="osm_live_not_active">非アクティブ</string>
     <string name="osm_live_enter_email">有効な電子メールアドレスを入力してください</string>
     <string name="osm_live_enter_user_name">パブリック名を入力してください</string>
-    <string name="osm_live_thanks">ライブ更新を購読いただきありがとうございます!</string>
+    <string name="osm_live_thanks">OsmAndを支援いただきありがとうございます！
+\nすべての新機能を有効にするには、OsmAndの再起動が必要です。</string>
     <string name="osm_live_region_desc">あなたの寄付の一部がその地域のOSM更新に貢献したユーザーへ還元されます</string>
     <string name="select_map_marker">マップマーカーの選択</string>
     <string name="map_markers_other">その他のマーカー</string>
@@ -1944,12 +1945,10 @@ POIの更新は利用できません</string>
     <string name="file_name_containes_illegal_char">ファイル名に使用できない文字が含まれています</string>
     <string name="number_of_recipients">受信者数</string>
     <string name="osm_live_subscription">OsmAnd Liveのサブスクリプション</string>
-    <string name="osm_live_subscribe_btn">購読</string>
-    <string name="osm_live_subscription_settings">購読設定</string>
-    <string name="osm_live_ask_for_purchase">最初にOsmAnd Liveの購読手続きをしてください</string>
-    <string name="osm_live_header">この購読により世界中のマップを時間毎更新することが可能です。
-購読収入の一部はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。
-OsmAndとOSMをサポートする方法として現状最適な方法であると思われます。</string>
+    <string name="osm_live_subscribe_btn">サブスクリプション(利用契約)する</string>
+    <string name="osm_live_subscription_settings">サブスクリプションの設定</string>
+    <string name="osm_live_ask_for_purchase">最初にOsmAnd Liveのサブスクリプション(定期有料契約)手続きをしてください</string>
+    <string name="osm_live_header">このサブスクリプション(定期有料契約)により世界中のマップを時間毎更新することが可能です。 サブスクリプション収入の一部はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。 あなたがOsmAndとOSMを愛用し、サポートを受けたり支援を行いたいと思うのであれば、サブスクリプションはそのための最適解です。</string>
     <string name="no_address_found">登録住所外</string>
     <string name="number_of_contributors">貢献者数</string>
     <string name="number_of_edits">編集数</string>
@@ -2055,9 +2054,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="delete_filter">フィルターの削除</string>
     <string name="new_filter">新しいフィルター</string>
     <string name="new_filter_desc">新しいフィルターの名前を入力してください、作成したフィルターは[カテゴリー]タブに追加されます。</string>
-    <string name="osm_live_payment_desc">購読(サブスクリプション)には月毎に料金が必要になります。購読の停止はGoogle Playからいつでも行うことができます。</string>
+    <string name="osm_live_payment_desc">サブスクリプションには月額料金がかかります。キャンセルはGoogle Playにていつでも可能です。</string>
     <string name="donation_to_osm">OpenStreetMap のコミュニティに寄付</string>
-    <string name="donation_to_osm_desc">あなたの寄付金の一部は、OSMユーザー(OpenStreetMapの更新に貢献した人達)に送られます。購読(サブスクリプション)の値段は変わりません。</string>
+    <string name="donation_to_osm_desc">寄付金の一部は、OSMユーザー(OpenStreetMapの更新に貢献した人達)に送られます。サブスクリプション(定期有料契約)の値段は変わりません。</string>
     <string name="osm_live_subscription_desc">サブスクリプションにより、毎時、毎日、毎週更新されたマップの利用と、世界中のマップを無制限にダウンロードすることが可能になります。</string>
     <string name="get_it">入手する</string>
     <string name="si_mi_meters">マイル/メートル</string>
@@ -2149,8 +2148,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_take_photo_note">写真メモを取る</string>
     <string name="quick_action_add_osm_bug">OSM注記を追加</string>
     <string name="quick_action_navigation_voice">音声のon/off</string>
-    <string name="quick_action_navigation_voice_off">音声はoffです</string>
-    <string name="quick_action_navigation_voice_on">音声はonです</string>
+    <string name="quick_action_navigation_voice_off">音声のミュートを解除</string>
+    <string name="quick_action_navigation_voice_on">音声をミュート</string>
     <string name="quick_action_add_gpx">GPX経由地点を追加</string>
     <string name="quick_action_add_parking">駐車場所を追加</string>
     <string name="quick_action_new_action">アクションを追加</string>
@@ -2238,13 +2237,13 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_add_destination">目的地を追加</string>
     <string name="quick_action_replace_destination">目的地を置き換え</string>
     <string name="quick_action_add_first_intermediate">最初の中間地点を追加</string>
-    <string name="quick_action_add_destination_desc">アクションボタンをタップすると、画面中央アイコンを目的地として追加します。それ以前にセットした目的地は最後に寄る中間地点として置き換わります。</string>
+    <string name="quick_action_add_destination_desc">アクションボタンをタップすると、画面中央アイコンを目的地として追加します。それ以前にセットした目的地は最後に寄る経由地点として置き換わります。</string>
     <string name="quick_action_replace_destination_desc">アクションボタンをタップすると、画面中央アイコンの地点を新しい目的地として置き換えます。</string>
-    <string name="quick_action_add_first_intermediate_desc">アクションボタンをタップすると、画面中央アイコンの地点を最初の中間地点として追加します。</string>
+    <string name="quick_action_add_first_intermediate_desc">アクションボタンをタップすると、画面中央アイコンの地点を最初の経由地点として追加します。</string>
     <string name="no_overlay">オーバーレイ無し</string>
     <string name="no_underlay">アンダーレイ無し</string>
     <string name="subscribe_email_error">エラー</string>
-    <string name="subscribe_email_desc">メーリングリストをご購読いただけると、アプリの割引やさらに３つのマップをダウンロード可能になります！</string>
+    <string name="subscribe_email_desc">メーリングリストをご購読いただけると、アプリの割引やさらに3つのマップをダウンロード可能になります！</string>
     <string name="depth_contour_descr">点と等深線による海底地形図がマップに表示されます。</string>
     <string name="sea_depth_thanks">海洋等深線データを購入していただき、ありがとうございます</string>
     <string name="index_item_depth_contours_osmand_ext">海洋等深線データ</string>
@@ -2285,19 +2284,19 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="coords_search">座標検索</string>
     <string name="advanced_coords_search">高度な座標検索</string>
     <string name="lang_ber">ベルベル諸語</string>
-    <string name="route_is_too_long_v2">現在の経路は計算するには長すぎるようです。10分以内に結果が出なければ中間に目的地(経由地点)を追加してください。</string>
+    <string name="route_is_too_long_v2">現在の経路は計算するには長すぎるようです。10分以内に結果が出なければ出発地点と目的地の間にいくつかの経由地点を追加してください。</string>
     <string name="osmand_extended_description_part1">" OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOpenStreetMap(OSM)データ』を使用した、地図＆ナビゲーションアプリです。
 \n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。 "</string>
-    <string name="osmand_extended_description_part2">"GPSナビゲーション
-\n • オフライン(海外の場合はローミング料金が不要に)、またはオンライン(高速)モードのいずれかを選択できます
-\n • ターンバイターン形式の音声案内が、道中のあなたを案内します(録音された音声とリアルタイムで合成される音声を選択できます）
-\n • 予定のルートから大きく外れるとルートが再検索されます
-\n • 車線案内、道路名、到着予定時刻が道中の助けになります
-\n • 旅行をより安全にするために、昼/夜モードが自動的に切り替わります
-\n • 速度制限の表示選択の他に、それを超えた場合に警告を表示するように選択できます
-\n • 移動速度に伴ったマップのズームを行えます
-\n • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます
-\n • 旅程上の中間経由地点をサポートします。
+    <string name="osmand_extended_description_part2">"GPSナビゲーション 
+\n • オフライン(海外の場合はローミング料金が不要に)、またはオンライン(高速)モードのいずれかを選択できます 
+\n • ターンバイターン形式の音声案内が、道中のあなたを案内します(録音された音声とリアルタイムで合成される音声を選択できます） 
+\n • 予定のルートから大きく外れるとルートが再検索されます 
+\n • 車線案内、道路名、到着予定時刻が道中の助けになります 
+\n • 旅行をより安全にするために、昼/夜モードが自動的に切り替わります 
+\n • 速度制限の表示選択の他に、それを超えた場合に警告を表示するように選択できます 
+\n • 移動速度に伴ったマップのズームを行えます 
+\n • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます 
+\n • 旅程上の経由地点をサポートします。 
 \n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています "</string>
     <string name="osmand_extended_description_part3">"
  マップ機能
@@ -2481,7 +2480,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="mapillary_menu_edit_text_hint">ユーザー名を入力</string>
     <string name="mapillary_menu_descr_username">指定のユーザーに追加された画像だけを表示します</string>
     <string name="mapillary_menu_title_username">ユーザー名</string>
-    <string name="mapillary_menu_filter_description">投稿者と日付で投稿された画像をフィルタリングできます。
+    <string name="mapillary_menu_filter_description">投稿者別、日付別、または種類別に投稿された画像をフィルタリングできます。 
 \nマップが一定値以上に拡大された場合のみフィルタは適用されます。</string>
     <string name="distance_moving">距離補正済み</string>
     <string name="shared_string_reset">リセット</string>
@@ -2667,7 +2666,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="clear_all_intermediates">中間経由地点を全て消去</string>
     <string name="add_waypoint">経由地点を追加</string>
     <string name="show_tunnels">トンネル</string>
-    <string name="touring_view_render_descr">ツーリングを対象とした高詳細のマップスタイルで、デフォルトスタイルの全オプションが有効となっています。すべての道路、通路、その他の道、異なる道路タイプ間の視覚的区別を可能にし、道以外も可能な限り詳細を表示しており、ツーリング用地図帳を思い起こさせる見た目となっています。アウトドアでの利用や昼夜モードもハイコントラストで対応しています。</string>
+    <string name="touring_view_render_descr">ツーリングを対象とした高詳細のマップスタイルで、デフォルトスタイルの全オプションが有効となっています。すべての道路、通路、その他の道、異なる道路種別間の視覚的区別を可能にし、道以外も可能な限り詳細を表示しており、ツーリング用地図帳を思い起こさせる見た目となっています。アウトドアでの利用や昼夜モードもハイコントラストで対応しています。</string>
     <string name="default_render_descr">標準的な汎用スタイルです。人口密集地の場合描写の簡素化がなされます。主な機能としては等高線、ルート、路面品質、通行制限、道路標識、SACスケールの通路描写をサポートし、急流下りなどのウォータースポーツにも使用できます。</string>
     <string name="open_wikipedia_link_online">Wikipediaをオンライン参照</string>
     <string name="open_wikipedia_link_online_description">このリンクを開くとウェブブラウザで閲覧することができます。</string>
@@ -2712,7 +2711,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="index_item_world_wikivoyage">Wikivoyageの全世界記事</string>
     <string name="mappilary_no_internet_desc">Mapillaryに登録されているストリート写真を見るためにはインターネットに接続する必要があります。</string>
     <string name="download_wikipedia_description">%1$sに関するWikipediaの記事をダウンロードしてオフラインで読むことができます。</string>
-    <string name="thank_you_for_feedback">フィードバックに感謝いたします</string>
+    <string name="thank_you_for_feedback">あなたからのフィードバックに感謝いたします</string>
     <string name="poi_cannot_be_found">ノードまたは通じる道が見つかりませんでした。</string>
     <string name="search_no_results_feedback">検索結果が出ませんでしたか？
 \nよければフィードバックをお願いします</string>
@@ -2734,7 +2733,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="increase_search_radius_to">検索半径を%1$sに増やす</string>
     <string name="send_search_query_description">
         <b>\"%1$s\"</b>とあなたの現在地を検索クエリとして送信します。<br/>
-        <br/>我々は検索アルゴリズムを改善するために検索データを必要としており個人情報の収集を目的とはしていません。<br/>
+        <br/>個人情報は収集されず、検索データは検索アルゴリズムを改善するためにのみ使用されます。<br/>
     </string>
     <string name="shared_string_world">世界規模</string>
     <string name="point_deleted">%1$s地点を削除しました</string>
@@ -2809,19 +2808,19 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="osm_notes">OSMメモ</string>
     <string name="will_open_tomorrow_at">明日開く</string>
     <string name="shared_string_without_name">名無し</string>
-    <string name="release_3_2_pre">• 一部の機種で起動時にクラッシュしていた問題を修正
-\n
-\n• マーカーの新機能:通過済みマーカーの表示
-\n
-\n• 検索履歴は以前選択したカテゴリが表示される仕様へ変更
-\n
+    <string name="release_3_2_pre">• 一部の機種で起動時にクラッシュしていた問題を修正 
+\n 
+\n• マーカーの新機能:通過済みマーカーの表示 
+\n 
+\n• 検索履歴は以前選択したカテゴリが表示される仕様へ変更 
+\n 
 \n• 非ラテン文字を使用したマップを開いた場合にクラッシュしていた問題を修正 
 \n 
 \n• Android 8.0デバイスでのレンダリング速度を改善 
 \n 
 \n• ポリゴン(トイレや給水所など公共施設を除く)オブジェクトの編集をサポート 
-\n
-\n• 距離測定:コンテキストメニューに距離測定ボタンを追加
+\n 
+\n• 距離測定:コンテキストメニューに\"距離測定\"ボタンを追加 
 \n</string>
     <string name="what_is_here">要項:</string>
     <string name="parked_at">駐車した場所</string>
@@ -2874,11 +2873,11 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="edit_map_marker">マップマーカーの編集</string>
     <string name="third_party_application">サードパーティーアプリ</string>
     <string name="search_street">指定エリアの道路を検索</string>
-    <string name="start_search_from_city">市街から検索を始める</string>
+    <string name="start_search_from_city">最初に都市を選択</string>
     <string name="keep_passed_markers_descr">GPX経由地点のマーカーで通過済みのマーカーをグループとしてお気に入りに追加します。それらグループマーカーはアクティブにはならずマップ上から削除されます。</string>
     <string name="keep_passed_markers">通過済みマーカーをマップ上に保持</string>
     <string name="more_transport_on_stop_hint">この乗降場(停留所)では複数の交通機関へ乗り入れが可能です。</string>
-    <string name="ask_for_location_permission">現在地特定のためにOsmAndに『位置情報(現在地、GPS)』のアクセス許可を与えて下さい。</string>
+    <string name="ask_for_location_permission">続行するには、OsmAndに位置情報の取得を許可してください。</string>
     <string name="route_stops_before">%1$s前に止まる</string>
     <string name="rendering_value_black_name">黒</string>
     <string name="wiki_article_search_text">対応するwiki記事から検索</string>
@@ -2887,4 +2886,85 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="test_voice_desrc">ボタンをタップし対応する音声案内を実際に聞いてみて、欠落しているか間違っている文字列や案内用語を特定します。</string>
     <string name="shared_string_restore">通過前に戻す</string>
     <string name="map_widget_intermediate_time">中間経由地点までの移動時間</string>
+    <string name="release_3_3">• 新しい案内画面の採用: 事前に設定した自宅と職場をワンタップで目的地とするボタンの追加、「前回のルート」ショートカット、アクティブなGPX経路とマーカーのリスト、検索履歴など
+\n
+\n• 道路種別、路面素材、勾配、滑らかさの各種情報をルートの詳細下に各種情報に追加 
+\n
+\n• 地下鉄、バス、路面電車など、あらゆる種類の交通機関を使用する場合のナビゲーションをサポート
+\n
+\n• 経路の表示/非表示および表示モードで昼/夜を切り替えられるクイックアクションの追加
+\n
+\n• ドイツ、南アフリカ、ケベックで浸水したと表示されていたエリアの修正
+\n
+\n• KMLおよびKMZ形式のインポートを可能に
+\n
+\n• いくつかの公共交通機関の停留所を開く際のクラッシュを修正
+\n
+\n• 無料版からFacebookとFirebaseの分析を削除 (有料版のOsmAnd+は変更ありません)</string>
+    <string name="use_osm_live_public_transport_description">OsmAnd Live更新用の交通公共機関を有効にします。</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live 公共交通機関機能の使用</string>
+    <string name="time_of_day">時刻</string>
+    <string name="by_transport_type">%1$s を利用</string>
+    <string name="road_types">道路種別</string>
+    <string name="shared_string_swap">入れ替え</string>
+    <string name="show_more">詳細を見る</string>
+    <string name="tracks_on_map">マップ上の経路</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX経路の表示/非表示</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">このボタンをタップすることで、マップ上GPX経路の表示と非表示を切り替えます</string>
+    <string name="quick_action_gpx_tracks_hide">GPX経路の非表示</string>
+    <string name="quick_action_gpx_tracks_show">GPX経路の表示</string>
+    <string name="add_destination_query">まず最初に目的地を指定して下さい</string>
+    <string name="previous_route">前回のルート</string>
+    <string name="cubic_m">立方メートル</string>
+    <string name="metric_ton">トン</string>
+    <string name="shared_string_capacity">容量</string>
+    <string name="shared_string_width">幅</string>
+    <string name="shared_string_height">高さ</string>
+    <string name="swap_start_and_destination">出発地点と目的地を入れ替える</string>
+    <string name="add_destination_point">目的地の追加</string>
+    <string name="add_intermediate_point">経由地点の追加</string>
+    <string name="add_start_point">出発地点の追加</string>
+    <string name="intermediate_waypoint">経由地点</string>
+    <string name="transfers">乗り換え</string>
+    <string name="on_foot">徒歩</string>
+    <string name="points_of_interests">関心地点、把握しておきたい各種施設(POI)</string>
+    <string name="waiting_for_route_calculation">ルートの計算中…</string>
+    <string name="app_mode_public_transport">公共交通機関</string>
+    <string name="avoid_roads_descr">マップ上または下のリストから、ナビゲーション中に避けたい道路を選択します:</string>
+    <string name="show_along_the_route">ルート案内中に表示する項目の選択</string>
+    <string name="simulate_navigation">ナビのシミュレーション</string>
+    <string name="choose_track_file_to_follow">追跡用の経路ファイルの選択</string>
+    <string name="voice_announcements">音声案内を使用</string>
+    <string name="intermediate_destinations">経由地点</string>
+    <string name="arrive_at_time">到着予想時刻 %1$s</string>
+    <string name="osm_live_subscriptions">サブスクリプション</string>
+    <string name="powered_by_osmand">By OsmAnd</string>
+    <string name="osm_live_plan_pricing">プランと料金</string>
+    <string name="osm_live_payment_monthly_title">月間</string>
+    <string name="osm_live_payment_3_months_title">3ヶ月間</string>
+    <string name="osm_live_payment_annual_title">年間</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
+    <string name="osm_live_payment_discount_descr">保存 %1$s.</string>
+    <string name="osm_live_payment_current_subscription">現在のサブスクリプション契約</string>
+    <string name="osm_live_payment_renews_monthly">毎月更新</string>
+    <string name="osm_live_payment_renews_quarterly">四半期(3ヶ月)ごとに更新</string>
+    <string name="osm_live_payment_renews_annually">毎年更新</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="osm_live_payment_header">お好みの支払い期間を選択してください:</string>
+    <string name="osm_live_payment_contribute_descr">サブスクリプション収入の一部はOpenStreetMapの貢献者に還元されます。</string>
+    <string name="mapillary_menu_title_pano">360°イメージのみ表示</string>
+    <string name="osm_recipient_stat">編集 %1$s, 合計 %2$s mBTC</string>
+    <string name="shared_string_launch">起動</string>
+    <string name="lang_gn_py">グアラニー語</string>
+    <string name="quick_action_switch_day_night_descr">このアクションボタンをタップするとOsmAndマップ表示の昼/夜モードを切り替えます</string>
+    <string name="quick_action_switch_day_mode">昼モード</string>
+    <string name="quick_action_switch_night_mode">夜モード</string>
+    <string name="quick_action_day_night_switch_mode">昼/夜モードの切り替え</string>
+    <string name="favorite_autofill_toast_text">" は、以下の名前で保存されます:"</string>
+    <string name="route_surface_stat_container">路面</string>
+    <string name="route_smoothness_stat_container">滑らかさ</string>
+    <string name="route_steepness_stat_container">勾配</string>
+    <string name="run_full_osmand_msg">あなたは今 OsmAndで動くマップを使用しています。{0} OsmAndのフルバージョンを起動しますか？</string>
+    <string name="run_full_osmand_header">OsmAndを起動しますか？</string>
 </resources>

@@ -2786,8 +2786,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et cliquez sur Enregistrer.</string>
     <string name="point_deleted">Point %1$s supprimé</string>
     <string name="shared_string_world">Monde</string>
-    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : <b>\"%1$s\"</b>, ainsi que votre position.<br/>
-        <br/>Nous ne collectons aucune donnée personnelle. Nous utiliserons ces informations seulement pour améliorer notre algorithme de recherche.<br/>
+    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : <b>\"%1$s\"</b> ainsi que votre position.<br/>
+        <br/>Aucune donnée personnelle ne sera envoyée. Ces informations seront utilisées afin d\'améliorer l\'algorithme de recherche.<br/>
     </string>
     <string name="search_no_results_description">Aucun résultat ?
 \nSignalez-le nous.</string>
@@ -2903,4 +2903,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces GPX</string>
     <string name="quick_action_gpx_tracks_hide">Masquer les traces GPX</string>
     <string name="quick_action_gpx_tracks_show">Afficher les traces GPX</string>
+    <string name="use_osm_live_public_transport_description">Activer les modifications de transports publics en temps réel avec OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transports publics OsmAnd Live</string>
+    <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Appuyez sur ce bouton pour afficher / masquer les traces GPX sélectionnées</string>
 </resources>

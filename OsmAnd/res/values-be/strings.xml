@@ -1903,7 +1903,7 @@
     <string name="clear_active_markers_q">Выдаліць усе актыўныя адзнакі\?</string>
     <string name="clear_markers_history_q">Ачысціць гісторыю адзнак мапы\?</string>
     <string name="active_markers">Актыўныя адзнакі</string>
-    <string name="map_markers">Адмеціны мапы</string>
+    <string name="map_markers">Адзнакі мапы</string>
     <string name="map_marker">Адмеціна мапы</string>
     <string name="consider_turning_polygons_off">Рэкамендуецца выключыць адмалёўку палігонаў.</string>
     <string name="osm_live_subscription">Падпіска OsmAnd Live</string>
@@ -2546,7 +2546,7 @@
     <string name="marker_save_as_track">Захаваць як GPX-файл</string>
     <string name="move_to_history">Перамясціць у гісторыю</string>
     <string name="group_will_be_removed_after_restart">Групы ўжо не будзе пасля наступнага перазапуску дадатка.</string>
-    <string name="shared_string_markers">Адмеціны</string>
+    <string name="shared_string_markers">Адзнакі</string>
     <string name="coordinates_format">Фармат каардынат</string>
     <string name="use_system_keyboard">Выкарыстоўваць сістэмную клавіятуру</string>
     <string name="fast_coordinates_input_descr">Абраць фармат уводу каардынат. Вы заўсёды можаце змяніць яго, націснуўшы \"Параметры\".</string>
@@ -2595,7 +2595,7 @@
     <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку адзнакі.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
     <string name="empty_state_markers_groups_desc">Імпартаваць групы ўлюбёных ці пункты шляху як адзнакі.</string>
-    <string name="empty_state_markers_history_desc">Адмеціны, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
+    <string name="empty_state_markers_history_desc">Адзнакі, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
     <string name="show_guide_line_descr">Паказвае лініі накірунку ад вашага становішча да актыўнай адзнакі.</string>
     <string name="show_arrows_descr">Паказвае адну ці дзьве стрэлкі, якія паказваюць накірунак да актыўных адзнак.</string>
     <string name="distance_indication_descr">Абярыце, як адлюстроўваць адлегласць да актыўных адзнак.</string>
@@ -2793,9 +2793,9 @@
 \n 
 \n • Вікіпедыя: новы выгляд, актыўныя спасылкі, падтрымка выяў 
 \n 
-\n • Open Track UI: падтрымка груп пунктаў шляху
+\n • Open Track UI: падтрымка груп пунктаў шляху 
 \n 
-\n • Адмеціны мапы: імпарт абраных груп з GPX-файлаў, увод каардынат, новы выгляд 
+\n • Адзнакі мапы: імпарт абраных груп з GPX-файлаў, увод каардынат, новы выгляд 
 \n 
 \n • Падпіска OsmAnd Live цяпер падтрымлівае ўсе функцыі OsmAnd 
 \n 
@@ -2923,7 +2923,7 @@
     <string name="step_by_step">Крок за крокам</string>
     <string name="road_types">Тыпы дарог</string>
     <string name="exit_at">Выхад на</string>
-    <string name="sit_on_the_stop">Сядзьце на прыпынку</string>
+    <string name="sit_on_the_stop">Пасадка на прыпынку</string>
     <string name="shared_string_swap">Памяняць</string>
     <string name="show_more">Паказаць больш</string>
     <string name="tracks_on_map">Сляды на мапе</string>
@@ -2931,4 +2931,6 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">Націск на кнопку дзеяння пакажа ці схавае абраныя GPX-сляды на мапе</string>
     <string name="quick_action_gpx_tracks_hide">Схаваць GPX-сляды</string>
     <string name="quick_action_gpx_tracks_show">Паказаць GPX-сляды</string>
+    <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Грамадскі транспарт OsmAnd Live</string>
 </resources>

@@ -39,8 +39,8 @@
     <string name="logout_no_internet_msg">Opret forbindelse til Internettet for at logge ud af Telegram.</string>
     <string name="shared_string_close">Luk</string>
     <string name="disconnect_from_telegram_desc">"Sådan tilbagekaldes adgang til placeringsdeling. Åbn Telegram, gå til Settings - Privacy and Security - Sessions og afslut OsmAnd Telegram session. "</string>
-    <string name="disconnect_from_telegram">Hvordan afbrydes OsmAnd placeringsdeling fra Telegram</string>
-    <string name="logout_help_desc">Hvordan afbrydes OsmAnd placeringsdeling fra Telegram</string>
+    <string name="disconnect_from_telegram">Sådan afbrydes OsmAnd Tracker fra Telegram</string>
+    <string name="logout_help_desc">Sådan afbrydes OsmAnd Tracker fra Telegram</string>
     <string name="connected_account">Tilsluttet konto</string>
     <string name="shared_string_account">Konto</string>
     <string name="in_time">i %1$s</string>
@@ -142,8 +142,8 @@
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>
     <string name="welcome_descr">
-        <b>OsmAnd placeringsdeling</b> giver mulighed for at dele placering og se placering af andre i OsmAnd.<br/>
-        <br/>Programmet bruger Telegram API og skal bruge en Telegram konto.</string>
+        <b>OsmAnd Tracker</b> giver mulighed for at dele placering og se placering af andre i OsmAnd.<br/>
+        <br/>Programmet bruger Telegram API, så der skal bruges en Telegram konto.</string>
     <string name="my_location">Placering</string>
     <string name="last_updated_location">Sidste ajourførte placering:</string>
     <string name="successfully_sent_and_updated">Sendt korrekt og opdateret</string>
@@ -179,7 +179,7 @@
     <string name="map_and_text">Kort og tekst</string>
     <string name="average_altitude">Gennemsnitshøjde</string>
     <string name="average_speed">Gennemsnitshastighed</string>
-    <string name="open_in_osmand">Åbn i OsmAnd</string>
+    <string name="open_in_osmand">Vis i OsmAnd</string>
     <string name="end_date">Slutdato</string>
     <string name="start_date">Startdato</string>
     <string name="timeline">Tidslinje</string>
@@ -193,7 +193,7 @@
     <string name="shared_string_sent">Sendt</string>
     <string name="monitoring_is_enabled">Overvågning er aktiveret</string>
     <string name="monitoring_is_disabled">Overvågning er deaktiveret</string>
-    <string name="time_on_the_move">tid i bevægelse</string>
+    <string name="time_on_the_move">Tid i bevægelse</string>
     <string name="shared_string_ok">OK</string>
     <string name="timeline_available_for_free_now">Tidslinjefunktionen er nu gratis.</string>
     <string name="disable_monitoring">Deaktiver overvågning</string>
@@ -203,7 +203,7 @@
     <string name="app_name_short">OsmAnd Tracker</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (besked app) bruges til at forbinde og kommunikere med mennesker.</string>
-    <string name="privacy_policy_telegram_client">OsmAnd tracker er en af de klienter, der bruger den åbne Telegram platform. Kontaktpersoner kan bruge enhver anden Telegram klient.</string>
+    <string name="privacy_policy_telegram_client">OsmAnd Tracker er en af de klienter, der bruger den åbne Telegram platform. Kontaktpersoner kan bruge enhver anden Telegram klient.</string>
     <string name="privacy_policy_agree">Ved at klikke på fortsæt accepteres betingelserne i Telegram Privacy Policy og OsmAnd Privacy Policy.</string>
     <string name="shared_string_accept">Accepter</string>
     <string name="telegram_privacy_policy">Telegram privatlivspolitik</string>

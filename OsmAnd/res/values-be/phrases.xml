@@ -3558,4 +3558,6 @@
     <string name="poi_park_ride">Перахопліваючая паркоўка</string>
     <string name="poi_park_ride_hov">Аўта з некалькімі пасажырамі</string>
     <string name="poi_generator_source_biomass">Крыніца энергіі: біямаса</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">Радыятэрапія</string>
+    <string name="poi_hazard">Небяспека</string>
 </resources>

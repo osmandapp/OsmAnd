@@ -172,7 +172,7 @@
     <string name="poi_vehicle_inspection">Inspeção veicular</string>
     <string name="poi_car_wash">Lavagem de carro</string>
     <string name="poi_fuel">Posto de combustível;Posto de abastecimento;Posto de gasolina;Bomba de gasolina</string>
-    <string name="poi_fuel_diesel">Óleo diesel</string>
+    <string name="poi_fuel_diesel">Diesel</string>
     <string name="poi_fuel_gtl_diesel">Diesel GPL</string>
     <string name="poi_fuel_hgv_diesel">Diesel de veículos pesados</string>
     <string name="poi_fuel_biodiesel">Biodiesel</string>
@@ -1223,7 +1223,7 @@
     <string name="poi_traffic_signals_sound_yes">Sim</string>
     <string name="poi_traffic_signals_sound_no">Não</string>
     <string name="poi_traffic_signals_sound_walk">Só quando permitido atravessar</string>
-    <string name="poi_ford_stepping_stones">Pedras de passagem</string>
+    <string name="poi_ford_stepping_stones">Poldras (pedras de passagem)</string>
     <string name="poi_toll_hgv_yes">Pedágio para veículos pesados</string>
     <string name="poi_rescue_station">Estação de resgate</string>
     <string name="poi_services">Área de serviço</string>
@@ -3558,4 +3558,6 @@
     <string name="poi_park_ride_tram">Bonde</string>
     <string name="poi_park_ride_ferry">Balsa</string>
     <string name="poi_generator_source_biomass">Fonte de energia: biomassa</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
+    <string name="poi_hazard">Perigo</string>
 </resources>

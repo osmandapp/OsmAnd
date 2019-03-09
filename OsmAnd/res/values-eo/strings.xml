@@ -1064,7 +1064,7 @@ Lon: %2$s</string>
     <string name="use_compass_navigation_descr">Uzi kompason nur kiam neniu direkto estas trovita.</string>
     <string name="avoid_motorway">Eviti aŭtovojojn</string>
     <string name="auto_zoom_map">Aŭtomate skali mapon</string>
-    <string name="auto_zoom_map_descr">Skali mapon depende de via rapido (ĝis kiam mapo estas samtempigita kun aktuala pozicio).</string>
+    <string name="auto_zoom_map_descr">Skali mapon depende de via rapido (kiam mapo estas samtempigita kun aktuala pozicio).</string>
     <string name="snap_to_road_descr">Proksimumigi pozicion al vojo dum navigado.</string>
     <string name="snap_to_road">Proksimumigi al vojo</string>
     <string name="interrupt_music">Paŭzigi muzikon</string>
@@ -2913,4 +2913,22 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Frapetu tiun ĉi ag-butonon por montri/kaŝi elektitajn GPX-spurojn sur la mapo.</string>
     <string name="quick_action_gpx_tracks_hide">Kaŝi GPX-spurojn</string>
     <string name="quick_action_gpx_tracks_show">Montri GPX-spurojn</string>
+    <string name="release_3_3">• nova ekrano “navigi”: butonoj por navigi al hejmo aŭ laborejo, butono “antaŭa kurso”, listo de aktivaj GPX-spuroj kaj map-markoj, serĉ-historio
+\n
+\n • pliaj informoj ĉe “detaloj pri kurso”: specoj de vojoj, pavimo, klineco, glateco
+\n
+\n • publik-transporta navigado subtenanta ĉiuj transportilojn: aŭtobuson, tramon, metroon, ktp
+\n
+\n • novaj butonoj de rapida ago: montri/kaŝi spurojn kaj baskuli inter taga/nokta reĝimo
+\n
+\n • riparis eraron pri montri areojn kiel superakvitajn (rilata al Germanujo, Sud-Afriko, Kebekio)
+\n
+\n • subteno enporti KML kaj KMZ
+\n
+\n • riparis eraron dum malfermi iujn haltejojn publik-transportajn
+\n
+\n • forigis analizilojn Facebook kaj Firebase el la senpaga version (OsmAnd+ ne havis ilin)
+\n</string>
+    <string name="use_osm_live_public_transport_description">Aktivigi publikan transporton por ŝanĝoj OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Publika transporto OsmAnd Live</string>
 </resources>

@@ -2930,4 +2930,22 @@ Lon %2$s</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Este botón de acción, muestra u oculta las trazas GPX elegidas en el mapa</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar trazas GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar trazas GPX</string>
+    <string name="release_3_3">• Nueva pantalla «Direcciones»: Muestra los botones de destino «Casa» y «Trabajo», el atajo de la «ruta anterior», la lista de trazas, marcadores GPX activos y el historial de búsqueda.
+\n
+\n • Información adicional en «Detalles de la ruta»: Tipos de caminos, superficie, pendiente y suavidad
+\n
+\n • Soporte en la navegación de transporte público: Metro, autobús, tranvía, etc.
+\n
+\n • Nuevas acciones rápidas: «Mostrar/ocultar trazas» y «Modo diurno/nocturno»
+\n
+\n • Áreas fijas mostradas como inundadas en Alemania, Sudáfrica y Quebec
+\n
+\n • Soporte adicional para la importación de KML y KMZ
+\n
+\n • Corregidos los fallos en la apertura de algunas paradas de transporte público
+\n
+\n • Quitado el análisis de Facebook y Firebase de la versión gratuita (OsmAnd+ no lo incluye)
+\n</string>
+    <string name="use_osm_live_public_transport_description">Activar el transporte público para los cambios de OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transporte público en OsmAnd Live</string>
 </resources>
