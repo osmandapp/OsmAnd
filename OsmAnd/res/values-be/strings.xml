@@ -1159,7 +1159,6 @@
     <string name="use_points_as_intermediates">Разлічыць маршрут паміж пунктамі</string>
     <string name="int_days">дзён</string>
     <string name="osmo_connect_menu">Злучэнне</string>
-    <string name="osmo_group_description">Апісанне</string>
     <string name="import_file_favourites">Захаваць даныя як GPX-файл альбо імпартаваць пункты ва ўлюбёныя\?</string>
     <string name="rendering_value_pink_name">Ружовы</string>
     <string name="rendering_value_brown_name">Карычневы</string>
@@ -1376,7 +1375,6 @@
     <string name="gps_status">Стан GPS</string>
     <string name="parking_place">Парковачнае месца</string>
     <string name="remove_the_tag">ВЫДАЛІЦЬ ПАЗНАКУ</string>
-    <string name="plugin_description_title">Апісанне</string>
     <string name="edit_group">Рэдагаваць групу</string>
     <string name="plugin_install_needs_network">Каб усталяваць гэтую ўбудову неабходна злучыцца з інтэрнэтам.</string>
     <string name="get_plugin">Атрымаць</string>
@@ -1656,7 +1654,6 @@
     <string name="closing_at">Зачыняецца а</string>
     <string name="tab_title_advanced">Пашыранае</string>
     <string name="contact_info">Кантакты</string>
-    <string name="description">Апісанне</string>
     <string name="add_opening_hours">Дадаць гадзіны працы</string>
     <string name="poi_dialog_poi_type">Тып POI</string>
     <string name="please_specify_poi_type">Калі ласка, вызначце тып POI.</string>

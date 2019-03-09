@@ -1193,7 +1193,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
     <string name="int_days">jours</string>
     <string name="osmo_connect_menu">Connecter</string>
-    <string name="osmo_group_description">Description</string>
     <string name="import_file_favourites">Enregistrer les données comme fichier GPX ou transformer les étapes en Favoris ?</string>
     <string name="rendering_value_pink_name">Rose</string>
     <string name="rendering_value_brown_name">Brun</string>
@@ -1418,7 +1417,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="remove_the_tag">Supprimer l\'emplacement</string>
     <string name="shared_string_disabled">Désactivé</string>
     <string name="shared_string_enabled">Activé</string>
-    <string name="plugin_description_title">Description</string>
     <string name="edit_group">Modifier le groupe</string>
     <string name="plugin_install_needs_network">Vous devez être connecté à Internet pour installer ce greffon.</string>
     <string name="shared_string_enable">Activer</string>
@@ -1638,7 +1636,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="next_proceed">Suivant</string>
     <string name="opening_at">Ouverture à</string>
     <string name="closing_at">Fermeture à</string>
-    <string name="description">Description</string>
     <string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
     <string name="poi_dialog_poi_type">Type de point d\'intérêt</string>
     <string name="av_locations">Positions</string>

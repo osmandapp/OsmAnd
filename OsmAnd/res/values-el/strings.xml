@@ -1253,36 +1253,9 @@
     
     <string name="gpx_selection_route_points">"%1$s\nΣημεία διαδρομής  %2$s"</string>
     <string name="gpx_selection_points">%1$s\nΣημεία</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
     <string name="osmo_edit_color">Χρώμα εμφάνισης</string>
-    
-    
-    
-    
-    
-    
-    
 	<string name="int_days">ημέρες</string>
     <string name="osmo_connect_menu">Σύνδεση</string>
-    <string name="osmo_group_description">Περιγραφή</string>
-    
-    
-    
     <string name="gpx_split_interval">Διάστημα διαχωρισμού</string>
     <string name="select_destination_and_intermediate_points">Επιλέξτε προορισμούς</string>
     <string name="shared_string_waypoint">Σημείο διαδρομής</string>
@@ -1294,18 +1267,6 @@
     <string name="gpx_selection_track">%1$s
 \nΊχνος %2$s</string>
     <string name="gpx_file_is_empty">Εκκένωση αρχείου GPX</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="use_points_as_intermediates">Υπολογισμός διαδρομής μεταξύ σημείων</string>
     <string name="always_center_position_on_map">Εμφάνιση της θέσης πάντα στο κέντρο</string>
     <string name="voice_pref_title">Φωνή</string>
@@ -2767,7 +2728,6 @@
     <string name="av_camera_focus_macro">Κατάσταση μακροεστίασης (κοντινής)</string>
     <string name="av_camera_pic_size">Μέγεθος εικόνας κάμερας</string>
     <string name="av_camera_pic_size_descr">Επιλέξτε το εσωτερικό μέγεθος εικόνας κάμερας.</string>
-    <string name="plugin_description_title">Περιγραφή</string>
     <string name="plugin_install_needs_network">Χρειάζεται να συνδεθείτε με το διαδίκτυο για να εγκαταστήσετε αυτό το πρόσθετο.</string>
     <string name="get_plugin">Λήψη</string>
     <string name="use_fast_recalculation">Επανυπολογισμός έξυπνης διαδρομής</string>
@@ -2797,7 +2757,6 @@
     <string name="opening_at">Άνοιγμα στις</string>
     <string name="closing_at">Κλείσιμο στις</string>
     <string name="contact_info">Πληροφορίες επαφής</string>
-    <string name="description">Περιγραφή</string>
     <string name="add_opening_hours">Προσθήκη ωρών λειτουργίας</string>
     <string name="poi_dialog_poi_type">Τύπος ΣΕ</string>
     <string name="number_of_rows_in_dash">Αριθμός γραμμών σε παύλες %1$s</string>

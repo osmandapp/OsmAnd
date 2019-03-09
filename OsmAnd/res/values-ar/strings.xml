@@ -869,7 +869,6 @@
     <string name="application_dir">مجلد تخزين البيانات</string>
     <string name="osmand_net_previously_installed">سيدعم جميع البيانات دون اتصال في التطبيق المثبت القديمة بواحدة جديدة، ولكن يجب تصديرها من التطبيق القديمة المفضلة نقطة وثم استيرادها في واحدة جديدة.</string>
     <string name="gps_status_app_not_found">تطبيق حالة GPS غير مثبّت. هل تريد البحث عنه في المتجر؟</string>
-    <string name="plugin_description_title">الوصف</string>
     <string name="application_dir_change_warning3">هل ترغب أن يقوم OsmAnd بنسخ بياناته أيضا إلى المسار الجديد؟</string>
     <string name="specified_directiory_not_writeable">لم يمكن إنشاء الخرائط في المجلد المحدد</string>
     <string name="copying_osmand_file_failed">فشل نسخ الملفات</string>
@@ -1197,7 +1196,6 @@
     <string name="osmo_edit_color">لون العرض</string>
     <string name="int_days">أيام</string>
     <string name="osmo_connect_menu">اتصال</string>
-    <string name="osmo_group_description">وصف</string>
     <string name="use_points_as_intermediates">حساب الطريق بين النقاط</string>
     <string name="voice_pref_title">صوت</string>
     <string name="misc_pref_title">متنوع</string>
@@ -1511,7 +1509,6 @@
     <string name="tab_title_advanced">متقدم</string>
     <string name="building_number">رقم المبنى</string>
     <string name="contact_info">معلومات للإتصال</string>
-    <string name="description">الوصف</string>
     <string name="add_opening_hours">إضافة ساعات العمل</string>
     <string name="working_days">أيام العمل</string>
     <string name="recent_places">الأماكن الأخيرة</string>

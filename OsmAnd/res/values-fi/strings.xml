@@ -883,8 +883,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="edit_group">Muokkaa ryhmää</string>
     <string name="show_gpx">Näytä GPX</string>
 	<string name="favourites">Suosikit</string>
-	<string name="description">Kuvaus</string>
-	
 	<string name="closing_at">Sulkeutuu</string>
 	<string name="opening_at">Avautuu</string>
     <string name="no_updates_available">Päivityksiä ei saatavilla</string>
@@ -1523,33 +1521,10 @@ Pisteet</string>
     <string name="gpx_selection_track">%1$s 
 Jälki %2$s</string>
     <string name="gpx_file_is_empty">GPX jälki on tyhjä/puuttuu</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="osmo_edit_color">Näyttöväri</string>
-    
-    
-    
-    
-    
     <string name="int_days">päiviä</string>
     <string name="osmo_connect_menu">Yhdistä</string>
-    
-    <string name="osmo_group_description">Kuvaus</string>
-
-
     <string name="use_points_as_intermediates">Laske reitti pisteiden välille</string>
-    
-    
-    
-    
-    
     <string name="voice_pref_title">Ääni</string>
     <string name="misc_pref_title">Sekalaista</string>
     <string name="localization_pref_title">Käännös</string>
@@ -1712,13 +1687,11 @@ Jälki %2$s</string>
     <string name="favourites_context_menu_add">Lisää suosikki</string>
     <string name="poi_action_delete">poista</string>
     <string name="poi_dialog_reopen">Avaa uudelleen</string>
-    <string name="plugin_description_title">Kuvaus</string>
     <string name="do_you_like_osmand">Pidätkö OsmAnd sovellutuksesta?</string>
     <string name="delete_change">Poista muutos</string>
     <string name="try_again">Yritä uudelleen</string>
     <string name="error_message_pattern">Virhe: {0}</string>
     <string name="dahboard_options_dialog_title">Konfiguroi hallintapaneeli</string>
-
     <string name="shared_string_card_was_hidden">Kortti oli piilotettu</string>
     <string name="shared_string_undo">PALAUTA</string>
     <string name="shared_string_skip">Ohita</string>

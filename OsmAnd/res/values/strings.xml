@@ -93,7 +93,7 @@
     <string name="thank_you_for_feedback">Thank you for your feedback</string>
     <string name="poi_cannot_be_found">Node or way cannot be found.</string>
     <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
-    <string name="release_3_2_pre">
+    <!-- string name="release_3_2_pre">
     • Fixed crash on startup that occurred on some devices\n\n
     • New Markers feature: Display already traversed markers\n\n 
     • Search history now shows previously searched categories\n\n
@@ -101,8 +101,8 @@
     • Improve rendering speed issues on Android 8.0 devices\n\n
     • Support for polygon (non-amenity) objects editing\n\n
     • Measure distance: Add \"Measure\" button to Actions in the context menu\n\n
-    </string>
-    <string name="release_3_1">
+    </string -->
+    <!-- string name="release_3_1">
     • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
     • Map markers: Fix turning on/off groups, ability to hide markers from the map\n\n
     • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
@@ -110,7 +110,7 @@
     • Context menu: Fix transport shields color in the night mode, fix additional menu sizes\n\n
     • Boat navigation: Support for waterway fairway\n\n
     • Other bugfixes\n\n
-    </string>
+    </string -->
     <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
@@ -265,13 +265,13 @@
     <string name="additional_actions">Additional actions</string>
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
-    <string name="release_3_0">
+    <!-- string name="release_3_0">
 • New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
 • Wikipedia: New look, active links, images now supported\n\n
 • Open Track UI: Support for waypoint groups\n\n
 • Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
 • OsmAnd Live subscription now supports all OsmAnd features\n\n
-    </string>
+    </string -->
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>

@@ -1175,7 +1175,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_edit_color">Zobrazit barvu</string>
     <string name="int_days">dnů</string>
     <string name="osmo_connect_menu">Připojit</string>
-    <string name="osmo_group_description">Popis</string>
     <string name="interrupt_music_descr">Hlasové pokyny nesníží jen hlasitost, ale pozastaví hudbu.</string>
     <string name="interrupt_music">Pozastavit hudbu</string>
     <string name="share_route_as_gpx">Sdílet trasu jako GPX soubor</string>
@@ -1414,7 +1413,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="remove_the_tag">ODSTRANIT ZNAČKU</string>
     <string name="shared_string_disabled">Zakázán</string>
     <string name="shared_string_enabled">Povolen</string>
-    <string name="plugin_description_title">Popisek</string>
     <string name="edit_group">Upravit skupinu</string>
     <string name="nautical_maps_missing">Pro zobrazování plavebních map je třeba stáhnout speciální mapu</string>
     <string name="world_ski_missing">Pro zobrazování lyžařských map je třeba stáhnout speciální mapu</string>
@@ -1587,7 +1585,6 @@ Délka %2$s</string>
     <string name="working_days">Pracovní dny</string>
     <string name="please_specify_poi_type">Vyberte prosím typ POI.</string>
     <string name="add_opening_hours">Přidat otevírací dobu</string>
-    <string name="description">Popis</string>
     <string name="contact_info">Kontaktní informace</string>
     <string name="do_you_like_osmand">Máte rádi OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">Záleží nám na vašem názoru, zpětná vazba je pro nás důležitá.</string>

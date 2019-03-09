@@ -1231,7 +1231,6 @@
     <string name="osmo_edit_color">رنگ نمایش</string>
     <string name="int_days">روز</string>
     <string name="osmo_connect_menu">اتصال</string>
-    <string name="osmo_group_description">شرح</string>
     <string name="import_file_favourites">آیا داده‌ها را به‌صورت فایل GPX ذخیره می‌کنید یا نقاط بین‌راهی را به برگزیده‌ها وارد می‌کنید؟</string>
     <string name="gpx_file_is_empty">فایل GPX خالی</string>
     <string name="shared_string_tracks">مسیرها</string>
@@ -1466,7 +1465,6 @@
     <string name="proxy_port_descr">شمارهٔ درگاه پروکسی را تنظیم کنید (مثلاً 8118).</string>
     <string name="proxy_host_descr">نام میزبان پروکسی را تنظیم کنید (مثلاً 127.0.0.1).</string>
     <string name="plugin_install_needs_network">برای نصب این افزونه به اینترنت وصل شوید.</string>
-    <string name="plugin_description_title">توضیحات</string>
     <string name="shared_string_disable">غیرفعال‌کردن</string>
     <string name="shared_string_enable">فعال‌کردن</string>
     <string name="shared_string_enabled">فعال</string>
@@ -2111,7 +2109,6 @@
     <string name="building_number">پلاک ساختمان</string>
     <string name="next_proceed">بعدی</string>
     <string name="contact_info">اطلاعات تماس</string>
-    <string name="description">توضیحات</string>
     <string name="add_opening_hours">افزودن ساعت کاری</string>
     <string name="poi_dialog_poi_type">نوع POI</string>
     <string name="please_specify_poi_type">لطفاً نوع POI را مشخص کنید.</string>

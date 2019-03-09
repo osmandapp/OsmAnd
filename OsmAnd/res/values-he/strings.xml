@@ -1176,7 +1176,6 @@
     <string name="osmo_edit_color">צבע תצוגה</string>
     <string name="int_days">ימים</string>
     <string name="osmo_connect_menu">התחברות</string>
-    <string name="osmo_group_description">תיאור</string>
     <string name="use_points_as_intermediates">חישוב מסלול בין נקודות</string>
     <string name="always_center_position_on_map">המיקום הוא תמיד במרכז התצוגה</string>
     <string name="voice_pref_title">קול</string>
@@ -2185,7 +2184,6 @@
     <string name="av_camera_pic_size">גודל תמונת המצלמה</string>
     <string name="av_camera_pic_size_descr">בחירת גודל התמונה של המצלמה הפנימית.</string>
     <string name="navigation_intent_invalid">תבנית שגויה: %s</string>
-    <string name="plugin_description_title">תיאור</string>
     <string name="plugin_install_needs_network">כדי להתקין את התוסף הזה צריך חיבור לאינטרנט.</string>
     <string name="get_plugin">קבלה</string>
     <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
@@ -2216,7 +2214,6 @@
     <string name="opening_at">פתיחה ב־</string>
     <string name="closing_at">סגירה ב־</string>
     <string name="contact_info">פרטי קשר</string>
-    <string name="description">תיאור</string>
     <string name="add_opening_hours">הוספת שעות פתיחה</string>
     <string name="poi_dialog_poi_type">סוג נקודת עניין</string>
     <string name="number_of_rows_in_dash">מספר שורות בלוח הבקרה %1$s</string>

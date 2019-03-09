@@ -1227,7 +1227,6 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_subwayMode_name">地下鉄路線</string>
     <string name="int_days">日</string>
     <string name="osmo_connect_menu">接続</string>
-    <string name="osmo_group_description">解説</string>
     <string name="use_points_as_intermediates">地点間のルートを計算</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
     <string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>
@@ -1527,7 +1526,6 @@ POIの更新は利用できません</string>
     <string name="nautical_maps_missing">航海マップを表示するためには専用のオフラインマップのダウンロードが必要です</string>
     <string name="edit_group">グループ編集</string>
     <string name="shared_string_release">リリース</string>
-    <string name="plugin_description_title">説明</string>
     <string name="plugin_install_needs_network">このプラグインのインストールには、インターネット接続が必要です。</string>
     <string name="get_plugin">取得</string>
     <string name="osm_changes_added_to_local_edits">OSMへの変更をストレージ内変更候補に追加しました</string>
@@ -1673,7 +1671,6 @@ POIの更新は利用できません</string>
     <string name="opening_at">営業開始時間</string>
     <string name="closing_at">営業終了時間</string>
     <string name="contact_info">連絡先</string>
-    <string name="description">詳細</string>
     <string name="add_opening_hours">開店時間を追記</string>
     <string name="poi_dialog_poi_type">POIの種類</string>
     <string name="number_of_rows_in_dash">ダッシュボードでの表示数： %1$s</string>

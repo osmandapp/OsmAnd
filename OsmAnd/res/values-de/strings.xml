@@ -1310,7 +1310,6 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="rendering_value_pink_name">Rosa</string>
     <string name="rendering_value_brown_name">Braun</string>
     <string name="osmo_connect_menu">Verbinden</string>
-    <string name="osmo_group_description">Beschreibung</string>
     <string name="osmo_edit_color">Darstellungsfarbe</string>
     <string name="gpx_file_is_empty">GPX-Datei ist leer</string>
     <string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
@@ -1464,7 +1463,6 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="shared_string_enabled">Aktiviert</string>
     <string name="shared_string_enable">Aktivieren</string>
     <string name="shared_string_disable">Deaktivieren</string>
-    <string name="plugin_description_title">Beschreibung</string>
     <string name="plugin_install_needs_network">Die Installation dieses Moduls benötigt eine Internetverbindung.</string>
     <string name="edit_group">Gruppe bearbeiten</string>
     <string name="free">Frei %1$s </string>
@@ -1691,7 +1689,6 @@ Lon %2$s</string>
     <string name="favourites_context_menu_add">Favorit hinzufügen</string>
     <string name="poi_action_delete">löschen</string>
     <string name="show_on_start">Beim Start anzeigen</string>
-    <string name="description">Beschreibung</string>
     <string name="add_opening_hours">Öffnungszeiten hinzufügen</string>
     <string name="please_specify_poi_type">Bitte Art des POI angeben.</string>
     <string name="working_days">Werktage</string>

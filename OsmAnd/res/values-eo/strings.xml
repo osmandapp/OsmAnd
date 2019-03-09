@@ -748,7 +748,6 @@ Lon: %2$s</string>
     <string name="osmo_edit_color">Vidiga koloro</string>
     <string name="int_days">tagoj</string>
     <string name="osmo_connect_menu">Konekti</string>
-    <string name="osmo_group_description">Priskribo</string>
     <string name="use_points_as_intermediates">Prikalkuli kurson inter punktojn</string>
     <string name="always_center_position_on_map">Ĉiam montri centrigitan pozicion</string>
     <string name="localization_pref_title">Loko</string>
@@ -1644,7 +1643,6 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="search_address_building_option">Domo</string>
     <string name="search_address_street_option">Intersekca strato</string>
     <string name="context_menu_item_update_map">Ĝisdatigi mapon</string>
-    <string name="plugin_description_title">Priskribo</string>
     <string name="buy">Aĉeti</string>
     <string name="plugins_menu_group">Kromprogramoj</string>
     <string name="faq_item">Oftaj demandoj</string>
@@ -1886,7 +1884,6 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="opening_at">Malfermita de antaŭ</string>
     <string name="closing_at">Fermita de antaŭ</string>
     <string name="contact_info">Kontaktaj informoj</string>
-    <string name="description">Priskribo</string>
     <string name="add_opening_hours">Aldoni horojn de malfermo</string>
     <string name="poi_dialog_poi_type">Speco de interesejo</string>
     <string name="number_of_rows_in_dash">Nombro da linioj sur ĉefekrano %1$s</string>

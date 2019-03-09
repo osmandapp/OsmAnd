@@ -1253,47 +1253,10 @@
     <string name="gpx_selection_track">%1$s
 \nՏրակ %2$s</string>
     <string name="gpx_file_is_empty">GPX ֆայլը դատարկ է</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="osmo_edit_color">Պիտակի գույնը</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="int_days">օրեր</string>
     <string name="osmo_connect_menu">Միացում</string>
-    
-    <string name="osmo_group_description">Նկարագրություն</string>
-
-
     <string name="use_points_as_intermediates">Հաշվեք երթուղին կետերի միջև</string>
-    
-    
-    
-    
-    
-    
     <string name="always_center_position_on_map">Ցուցադրել դիրքը էկրանի կենտրոնում</string>
     <string name="voice_pref_title">Ձայն</string>
     <string name="misc_pref_title">Այլ</string>
@@ -2314,7 +2277,6 @@
     <string name="av_camera_pic_size">Լուսանկարի չափը</string>
     <string name="av_camera_pic_size_descr">Ընտրեք ներքին տեսախցիկի պատկերի չափը:</string>
     <string name="navigation_intent_invalid">Սխալ ձևաչափ՝ %s</string>
-    <string name="plugin_description_title">Նկարագրություն</string>
     <string name="plugin_install_needs_network">Անհրաժեշտ է ինտերնետ կապ այս plugin-ը տեղադրելու համար:</string>
     <string name="get_plugin">Ստանալ</string>
     <string name="use_fast_recalculation">Երթուղու խելացի վերահաշվարկ</string>
@@ -2345,7 +2307,6 @@
     <string name="opening_at">Բացումը</string>
     <string name="closing_at">Փակվում է</string>
     <string name="contact_info">Կոնտակտային տվյալներ</string>
-    <string name="description">Նկարագրություն</string>
     <string name="add_opening_hours">Ավելացնել աշխատանքային ժամեր</string>
     <string name="poi_dialog_poi_type">POI տեսակը</string>
     <string name="number_of_rows_in_dash">Մեկ էջի տողերի թիվը %1$s</string>
@@ -2358,7 +2319,6 @@
     <string name="show_gpx">Ցույց տալ GPX տվյալները</string>
     <string name="count_of_lines">Տողերի քանակը</string>
     <string name="are_you_sure">Վստա՞հ եք?</string>
-    
     <string name="show_view_angle">Ցուցադրել դիտարկման ուղղությունը</string>
     <string name="map_tile_source_descr">Ընտրեք առցանց կամ պահված քարտեզի աղբյուրը:</string>
     <string name="unsaved_changes_will_be_lost">Ցանկացած չպահպնված փոփոխություն կկորցնեք: Շարունակել?</string>

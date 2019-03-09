@@ -139,7 +139,6 @@
     <string name="osmo_edit_color">Cor da pantalla</string>
     <string name="int_days">días</string>
     <string name="osmo_connect_menu">Conectar</string>
-    <string name="osmo_group_description">Descrición</string>
     <string name="use_points_as_intermediates">Calcula-la rota entre puntos</string>
     <string name="always_center_position_on_map">Amosar posición sempre no centro</string>
     <string name="voice_pref_title">Voz</string>
@@ -1599,7 +1598,6 @@ Lon %2$s</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
     <string name="shared_string_release">Publicada</string>
-    <string name="plugin_description_title">Descrición</string>
     <string name="plugin_install_needs_network">Precisa dunha conexión á Internet para instalar este engadido.</string>
     <string name="get_plugin">Obter</string>
     <string name="use_fast_recalculation_desc">Nas viaxes longas, recalcula só o anaco inicial da rota.</string>
@@ -1622,7 +1620,6 @@ Lon %2$s</string>
     <string name="building_number">Número do edificio</string>
     <string name="next_proceed">Seguinte</string>
     <string name="contact_info">información de contacto</string>
-    <string name="description">Descrición</string>
     <string name="poi_dialog_poi_type">Tipo do PDI</string>
     <string name="please_specify_poi_type">Indique o tipo de PDI.</string>
     <string name="shared_string_deselect">Desbota-la selección</string>

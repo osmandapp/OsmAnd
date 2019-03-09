@@ -456,7 +456,6 @@
     <string name="osmo_edit_color">Colore visualizzau</string>
     <string name="int_days">dies</string>
     <string name="osmo_connect_menu">Connete</string>
-    <string name="osmo_group_description">Descritzione</string>
     <string name="use_points_as_intermediates">Càlcula s’àndala intre sos puntos</string>
     <string name="lang_fa">Persianu</string>
     <string name="route_descr_destination">Destinatzione</string>
@@ -1422,7 +1421,6 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="remove_the_tag">BOGA SU TAG</string>
     <string name="shared_string_disabled">Disabilitadu</string>
     <string name="shared_string_enabled">Abilitadu</string>
-    <string name="plugin_description_title">Descritzione</string>
     <string name="edit_group">Modìfica su grupu</string>
     <string name="shared_string_enable">Abìlita</string>
     <string name="shared_string_disable">Disabìlita</string>
@@ -1648,7 +1646,6 @@ Lon %2$s</string>
     <string name="av_locations_descr">Documentu GPX cun notas locales.</string>
     <string name="av_locations">Localidades</string>
     <string name="contact_info">Informatziones de cuntatu</string>
-    <string name="description">Descritzione</string>
     <string name="add_opening_hours">Annanghe s’oràriu de abertura</string>
     <string name="poi_dialog_poi_type">Casta de PDI</string>
     <string name="please_specify_poi_type">Dislinda casta de PDI.</string>

@@ -1160,7 +1160,6 @@
     <string name="use_points_as_intermediates">預估兩點之間的路線</string>
     <string name="int_days">天</string>
     <string name="osmo_connect_menu">連接</string>
-    <string name="osmo_group_description">敘述</string>
     <string name="import_file_favourites">將資料儲存為 GPX 檔案或將航點匯入到「我的收藏」？</string>
     <string name="rendering_value_pink_name">粉紅色</string>
     <string name="rendering_value_brown_name">棕色</string>
@@ -1378,7 +1377,6 @@
     <string name="remove_the_tag">移除標記</string>
     <string name="shared_string_disabled">已停用</string>
     <string name="shared_string_enabled">已啟用</string>
-    <string name="plugin_description_title">內容說明</string>
     <string name="edit_group">編輯群組</string>
     <string name="shared_string_enable">啟用</string>
     <string name="shared_string_disable">停用</string>
@@ -1649,7 +1647,6 @@
     <string name="av_locations_descr">GPX 檔案加上地點附註。</string>
     <string name="av_locations">地點</string>
     <string name="contact_info">連絡資訊</string>
-    <string name="description">記述</string>
     <string name="add_opening_hours">增加營業時間</string>
     <string name="poi_dialog_poi_type">POI 類型</string>
     <string name="number_of_rows_in_dash">在長劃 %1$s 的行數</string>

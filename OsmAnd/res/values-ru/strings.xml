@@ -1435,7 +1435,6 @@
     <string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
     <string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
-    <string name="osmo_group_description">Описание</string>
     <string name="int_days">дней</string>
     <string name="osmo_connect_menu">Соединение</string>
     <string name="import_file_favourites">Сохранить данные как файл GPX или импортировать путевые точки в избранные\?</string>
@@ -1652,7 +1651,6 @@
     <string name="shared_string_gpx_points">Точки</string>
     <string name="parking_place">Место для парковки</string>
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
-    <string name="plugin_description_title">Описание</string>
     <string name="edit_group">Редактировать группу</string>
     <string name="plugin_install_needs_network">Вам необходимо Интернет соединение для установки этого плагина.</string>
     <string name="shared_string_enable">Включить</string>
@@ -1904,7 +1902,6 @@
     <string name="opening_at">Открытие в</string>
     <string name="closing_at">Закрытие в</string>
     <string name="contact_info">Контактная информация</string>
-    <string name="description">Описание</string>
     <string name="add_opening_hours">Добавить часы работы</string>
     <string name="poi_dialog_poi_type">Тип POI</string>
     <string name="number_of_rows_in_dash">Количество строк на странице %1$s</string>

@@ -1195,7 +1195,6 @@ Lorratza %2$s</string>
     <string name="osmo_edit_color">Erakutsi kolorea</string>
     <string name="int_days">egunak</string>
     <string name="osmo_connect_menu">Konektatu</string>
-    <string name="osmo_group_description">Deskribapena</string>
     <string name="voice_pref_title">Ahotsa</string>
     <string name="misc_pref_title">Denetarik</string>
     <string name="localization_pref_title">Kokapena</string>
@@ -1924,7 +1923,6 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="favourites_context_menu_add">Gehitu gogokoa</string>
     <string name="poi_action_delete">ezabatu</string>
     <string name="poi_dialog_reopen">Berrireki</string>
-    <string name="plugin_description_title">Deskripzioa</string>
     <string name="get_plugin">Eskuratu</string>
     <string name="do_you_like_osmand">OsmAnd gogoko duzu?</string>
     <string name="we_really_care_about_your_opinion">Zure iritziak arduratzen gaitu eta zure iruzkinei garrantzia ematen diegu.</string>
@@ -1951,7 +1949,6 @@ mapak eta nabigazioa</string>
     <string name="opening_at">Irekiera ordua</string>
     <string name="closing_at">Itxiera ordua</string>
     <string name="contact_info">Kontaktu informazioa</string>
-    <string name="description">Deskripzioa</string>
     <string name="add_opening_hours">Gehitu irekiera orduak</string>
     <string name="poi_dialog_poi_type">POI mota</string>
     <string name="number_of_rows_in_dash">Paneleko errenkada kopurua %1$s</string>

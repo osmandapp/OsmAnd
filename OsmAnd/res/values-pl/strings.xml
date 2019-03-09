@@ -1208,7 +1208,6 @@
     <string name="osmo_edit_color">Kolor</string>
     <string name="int_days">dni</string>
     <string name="osmo_connect_menu">Połącz</string>
-    <string name="osmo_group_description">Opis</string>
     <string name="import_file_favourites">Zapisać dane jako plik GPX czy zaimportować je do \"Ulubionych\"?</string>
     <string name="gpx_file_is_empty">Pusty plik GPX</string>
     <string name="shared_string_tracks">Ślady</string>
@@ -1439,7 +1438,6 @@
     <string name="enable_proxy_title">Włączenie proxy HTTP</string>
     <string name="proxy_host_title">Host proxy</string>
     <string name="proxy_port_title">Port proxy</string>
-    <string name="plugin_description_title">Opis</string>
     <string name="plugin_install_needs_network">Musisz być połączony z Internetem, aby zainstalować tę wtyczkę.</string>
     <string name="osmand_parking_overdue">czas przekroczony</string>
     <string name="action_create">Utworzenie</string>
@@ -1652,7 +1650,6 @@ Długość %2$s</string>
     <string name="offline_maps_and_navigation">Mapy offline\ni nawigacja</string>
     <string name="please_specify_poi_type">Proszę określić rodzaj użytecznego miejsca.</string>
     <string name="number_of_rows_in_dash">Ilość wierszy na ekranie głównym %1$s</string>
-    <string name="description">Opis</string>
     <string name="poi_dialog_poi_type">Rodzaj użytecznego miejsca</string>
     <string name="poi_action_delete">usuń</string>
     <string name="building_number">Numer budynku</string>

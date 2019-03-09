@@ -1257,50 +1257,16 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Виберіть наявний…</string>
     <string name="maps_define_edit">Визначити/змінити…</string>
-	
-	
     <string name="base_world_map">основна мапа світу</string>
-	
-    
     <string name="map_magnifier">Масштаб</string>
-    
     <string name="int_days">днів</string>
-    <string name="osmo_group_description">Опис</string>
-
-
     <string name="gpx_file_is_empty">Порожній GPX-файл</string>
-    
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_my_favorites">Закладки</string>
     <string name="shared_string_my_places">Місця</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
 	<string name="rendering_value_pink_name">рожевий</string>
-	
 	<string name="rendering_value_brown_name">Коричневий</string>
-	
-	
-	
-	
-	
-    
     <string name="osmo_edit_color">Колір</string>
-    
     <string name="keep_navigation_service">Продовжувати</string>
 	<string name="stop_navigation_service">Зупинити</string>
 	<string name="enable_sleep_mode">Ввімкнути фоновий режим GPS</string>
@@ -1750,8 +1716,6 @@
 	<string name="shared_string_enabled">Увімкнено</string>
 	<string name="shared_string_enable">Ввімкнути</string>
 	<string name="shared_string_disable">Вимкнути</string>
-	<string name="plugin_description_title">Опис</string>
-	
 	<string name="plugin_install_needs_network">Для встановлення цього втулку вам потрібне з’єднання з Інтернет.</string>
 	<string name="get_plugin">Отримати</string>
 	<string name="plugin_nautical_descr">Цей втулок збагачує програму OsmAnd морськими мапами для човнів, вітрильного спорту та інших видів водних видів спорту.
@@ -2040,7 +2004,6 @@
     <string name="try_again">Спробуйте ще раз</string>
     <string name="error_message_pattern">Помилка: {0}</string>
     <string name="dahboard_options_dialog_title">Налатування домашньої сторінки</string>
-
     <string name="shared_string_card_was_hidden">Картку було приховано</string>
     <string name="shared_string_undo">Відмінити</string>
     <string name="shared_string_skip">Пропустити</string>
@@ -2052,7 +2015,6 @@
     <string name="building_number">Номер будинку</string>
     <string name="next_proceed">Наступний</string>
     <string name="contact_info">Контактна інформація</string>
-    <string name="description">Опис</string>
     <string name="add_opening_hours">Додати години роботи</string>
     <string name="poi_dialog_poi_type">Тип POI</string>
     <string name="please_specify_poi_type">Будь ласка, вкажіть тип POI.</string>

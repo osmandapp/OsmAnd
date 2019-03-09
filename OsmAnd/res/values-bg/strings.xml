@@ -9,20 +9,15 @@
     <string name="route_to">За:</string>
     <string name="route_via">През:</string>
     <string name="route_from">От:</string>
-
-
     <string name="speak_speed_limit">Ограничения на скоростта</string>
     <string name="speak_cameras">Камери за скорост</string>
     <string name="speak_traffic_warnings">Предупреждения за трафика</string>
-
-
     <string name="app_mode_default">Карта</string>
     <string name="settings_preset">Текущ профил</string>
     <string name="settings_preset_descr">Изгледът на картата и настройките за навигация се запомнят за всеки потребителски профил. Настройте своя профил по подразбиране тук.</string>
     <string name="destination_point">Крайна цел %1$s</string>
     <string name="context_menu_item_destination_point">Направи крайна цел</string>
     <string name="please_select_address">Първо изберете град или улица</string>
-
     <string name="search_street_in_neighborhood_cities">Търси улицата в съседни градове</string>
     <string name="intermediate_items_sort_return">Междинните точки са подредени с цел оптимизиране на пътя до крайната цел.</string>
     <string name="intermediate_items_sort_by_distance">Сортиране врата-до-врата</string>
@@ -1332,17 +1327,13 @@
     <string name="rendering_attr_busRoutes_name">Автобусни линии</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Маршрути на влакове</string>
     <string name="rendering_attr_trolleybusRoutes_name">Тролейбусни линии</string>
-
     <string name="rendering_attr_shareTaxiRoutes_name">Линии на маршрутки</string>
     <string name="search_radius_proximity">В близост до</string>
-    
-    
     <string name="specified_directiory_not_writeable">Картите не могат да бъдат създадени в посочената папка</string>
     <string name="storage_directory_external">Външно съхраняване</string>
     <string name="copying_osmand_file_failed">Копирането на файловете се провали</string>
     <string name="plugin_install_needs_network">За да инсталирате добавката трябва да сте свързани към интернет.</string>
     <string name="navigation_intent_invalid">Невалиден формат: %s</string>
-    <string name="plugin_description_title">Описание</string>
     <string name="av_camera_pic_size">Размер на картината на камерата</string>
     <string name="shared_string_selected">Избрани</string>
     <string name="shared_string_selected_lowercase">избрани</string>
@@ -1560,47 +1551,17 @@
     <string name="no_index_file_to_download">Списъкът за сваляне не е намерен, моля проверете Вашата интернет връзка.</string>
     <string name="gpx_selection_points">%1$s
 \nТочки</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="rendering_value_brown_name">кафяв</string>
-
-    
-
-    
-
-    
     <string name="osmo_edit_color">Цвят на показване</string>
-    
-    
-    
     <string name="rendering_value_disabled_name">Спрян</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Оцветяване спрямо обхвата</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Оцветяване съобразно OSMC</string>
-    
     <string name="shared_string_logoff">Излизане</string>
     <string name="osm_changes_added_to_local_edits">Промените в OSM бяха добавени към списъка с промени</string>
     <string name="save_as_favorites_points">Запиши като група от любими места</string>
-    
     <string name="int_days">дни</string>
     <string name="osm_edit_context_menu_delete">Изтриване на OSM редакцията</string>
-    
-    
-    
-    
-    
     <string name="osmo_connect_menu">Свързване</string>
-    
-    <string name="osmo_group_description">Описание</string>
-
-
     <string name="av_camera_pic_size_descr">Изберете размер на снимката за вградената камера</string>
     <string name="shared_string_wikipedia">Уикипедия</string>
     <string name="local_indexes_cat_wiki">Уикипедия</string>
@@ -1715,8 +1676,6 @@
     <string name="lang_zh_tw">Китайски (традиционен)</string>
     <string name="error_message_pattern">Грешка: {0}</string>
     <string name="app_name_osmand">OsmAnd</string>
-
-    <string name="description">Описание</string>
     <string name="poi_dialog_poi_type">Тип POI</string>
     <string name="working_days">Работни дни</string>
     <string name="favourites">Любими</string>
@@ -1729,7 +1688,6 @@
     <string name="shared_string_update">Актуализация</string>
     <string name="shared_string_upload">Качване</string>
     <string name="osm_edit_created_poi">Създаден OSM POI</string>
-
     <string name="world_map_download_descr">Световната базова карта (покриваща целия свят в при малък мащаб) липсва или е остаряла. Моля, помислите за изтеглянето й .</string>
     <string name="shared_string_qr_code">QR код</string>
     <string name="map_downloaded">Картата е изтеглена</string>

@@ -1340,85 +1340,19 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	<string name="share_route_as_gpx">Deel route als GPX-bestand</string>
 	<string name="share_route_subject">Route gedeeld via OsmAnd</string>
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
-
-    
-    
-    
-    
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
 	<string name="arrival_distance">Aankondigen van de bestemming</string>
     <string name="arrival_distance_descr">Wanneer melden dat de bestemming bereikt is?</string>
-    
-        
-    
-    
 	<string name="share_fav_subject">Via OsmAnd gedeelde favorieten</string>
-
-
     <string name="use_points_as_intermediates">Bereken route tussen punten</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
     <string name="int_days">dagen</string>
     <string name="osmo_connect_menu">Verbinden</string>
-    
-    <string name="osmo_group_description">Beschrijving</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	<string name="import_file_favourites">Gegevens als GPX-bestand opslaan of importeren naar favorieten?</string>
-	
-	
 	<string name="rendering_value_pink_name">Roze</string>
-	
 	<string name="rendering_value_brown_name">Bruin</string>
-	
-	
-	
-	
-	
-    
     <string name="osmo_edit_color">Weergavekleur</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
-	
-    
-    
-    
-    
-    
-    
-    
     <string name="gpx_file_is_empty">GPX-track is leeg</string>
     <string name="gpx_info_subtracks">Track-segmenten: %1$s</string>
 	<string name="gpx_info_distance">Afstand: %1$s (%2$s punten) </string>
@@ -1434,11 +1368,9 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="gpx_selection_segment_title">Deel</string>
     <string name="gpx_selection_number_of_points"> %1$s punten</string>
     <string name="gpx_selection_point">Punt %1$s</string>
-    
     <string name="gpx_selection_route_points">%1$s \nRoutepunten %2$s</string>
     <string name="gpx_selection_points">%1$s \npunten</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
-    
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
     <string name="loading_smth">Laad %1$s…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
@@ -1650,9 +1582,6 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="proxy_pref_descr">Stel een proxy voor Internetcommunicatie in</string>
     <string name="settings_privacy">Privacy</string>
     <string name="shared_string_gpx_points">Punten</string>
-    
-    
-    
 	<string name="navigation_over_track">Navigatie langs GPX-track starten?</string>
 	<string name="avoid_roads_msg">Je kan een alternatieve route vinden door aan te geven welke wegen niet gebruikt mogen worden</string>
     <string name="save_track_to_gpx_globally_headline">GPX-tracks opnemen op aanvraag</string>
@@ -1662,8 +1591,6 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	<string name="proxy_host_descr">Stel de hostname van je proxy in (bv. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy-poort</string>
 	<string name="proxy_port_descr">Stel het poortnummer van je proxy in (bv. 8118)</string>
-<string name="plugin_description_title">Omschrijving</string>
-	
 <string name="edit_group">Bewerk groep</string>
     <string name="plugin_install_needs_network">Om deze plugin te installeren is een internetverbinding nodig.</string>
 <string name="plugin_nautical_name">Nautische kaartweergave</string>
@@ -2010,7 +1937,6 @@ Lengtegraad:\t\t%2$s</string>
 	<string name="opening_at">Open van</string>
 	<string name="closing_at">Sluit om</string>
 	<string name="contact_info">Contact</string>
-	<string name="description">Omschrijving</string>
 	<string name="add_opening_hours">Openingstijden toevoegen</string>
 	<string name="poi_dialog_poi_type">POI type</string>
 	<string name="number_of_rows_in_dash">Aantal regels %1$s</string>

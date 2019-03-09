@@ -25,7 +25,6 @@
 	<string name="saved_at_time"/>
 	<string name="working_days">Díes llaborables</string>
 	<string name="contact_info"/>
-	<string name="description">Descripción</string>
 	<string name="next_proceed">Siguiente</string>
 	<string name="shared_string_skip">Saltar</string>
 	<string name="app_name_osmand">OsmAnd</string>
@@ -309,27 +308,7 @@
     <string name="gpx_info_avg_altitude">Altitú media: %1$s</string>
     <string name="gpx_info_diff_altitude"/>
     <string name="gpx_info_asc_altitude">Descendente/ascendente: %1$s</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="int_days">díes</string>
-    
-    <string name="osmo_group_description">Descripción</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title"/>
     <string name="lang_zh">Chinu</string>
@@ -506,7 +485,6 @@
     <string name="osmand_service_descr"/>
     <string name="background_router_service_descr"/>
     <string name="app_description">Aplicación de navegación</string>
-    <string name="plugin_description_title">Descripción</string>
     <string name="faq_item_description">Entrugues frecuentes</string>
     <string name="route_stops_before"/>
     <string name="number_of_edits">Númberu d\'ediciones</string>

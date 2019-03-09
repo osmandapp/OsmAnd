@@ -1235,7 +1235,6 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_my_places">Saját helyek</string>
     <string name="int_days">nap</string>
     <string name="osmo_connect_menu">Kapcsolódás</string>
-    <string name="osmo_group_description">Leírás</string>
     <string name="use_points_as_intermediates">Útvonal tervezése pontok között</string>
     <string name="import_file_favourites">Mented az adatokat GPX fájlként, vagy importálod az útpontokat a „Kedvencek”-be?</string>
     <string name="shared_string_share">Megosztás</string>
@@ -1425,7 +1424,6 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="proxy_port_descr">Állítsd be a proxy szervered portszámát (pl. 8118).</string>
     <string name="shared_string_disabled">Letiltva</string>
     <string name="shared_string_enabled">Engedélyezve</string>
-    <string name="plugin_description_title">Leírás</string>
     <string name="edit_group">Csoport szerkesztése</string>
     <string name="remove_the_tag">CÍMKE ELTÁVOLÍTÁSA</string>
     <string name="version_settings_descr">Napi összeállítások letöltése.</string>
@@ -1651,7 +1649,6 @@ Hosszúság: %2$s</string>
     <string name="opening_at">Nyitás</string>
     <string name="closing_at">Zárás</string>
     <string name="contact_info">Elérhetőségek</string>
-    <string name="description">Leírás</string>
     <string name="add_opening_hours">Nyitva tartás hozzáadása</string>
     <string name="poi_dialog_poi_type">POI típus</string>
     <string name="number_of_rows_in_dash">Sorok száma a kezdőlapon %1$s</string>

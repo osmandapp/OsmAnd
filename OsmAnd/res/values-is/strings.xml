@@ -317,7 +317,6 @@
     <string name="gpx_selection_point">Punktur %1$s</string>
     <string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Tengjast</string>
-    <string name="osmo_group_description">Lýsing</string>
     <string name="voice_pref_title">Tal</string>
     <string name="misc_pref_title">Ýmislegt</string>
     <string name="localization_pref_title">Staðfærsla</string>
@@ -660,7 +659,6 @@
     <string name="edit_filter_save_as_menu_item">Vista sem</string>
     <string name="edit_filter_delete_dialog_title">Eyða valinni síu?</string>
     <string name="email">tölvupóstur</string>
-    <string name="plugin_description_title">Lýsing</string>
     <string name="get_plugin">Sækja</string>
     <string name="failed_to_upload">Gat ekki sent inn</string>
     <string name="try_again">Reyndu aftur</string>
@@ -673,7 +671,6 @@
     <string name="next_proceed">Næsta</string>
     <string name="opening_at">Opnar kl.</string>
     <string name="closing_at">Lokar kl.</string>
-    <string name="description">Lýsing</string>
     <string name="add_opening_hours">Bæta við opnunartímum</string>
     <string name="working_days">Vinnudagar</string>
     <string name="favourites">Eftirlæti</string>

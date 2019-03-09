@@ -1165,7 +1165,6 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
     <string name="int_days">dage</string>
     <string name="osmo_connect_menu">Forbind</string>
-    <string name="osmo_group_description">Beskrivelse</string>
     <string name="import_file_favourites">Gem data som en GPX-fil eller importer rutepunkter til \'Favoritter\'?</string>
     <string name="rendering_value_pink_name">Lyserød</string>
     <string name="rendering_value_brown_name">Brun</string>
@@ -1382,7 +1381,6 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="gps_status">GPS status</string>
     <string name="parking_place">Parkeringsplads</string>
     <string name="remove_the_tag">FJERN MÆRKET</string>
-    <string name="plugin_description_title">Beskrivelse</string>
     <string name="edit_group">Rediger gruppe</string>
     <string name="plugin_install_needs_network">Internetforbindelse behøves for at installere udvidelsen.</string>
     <string name="get_plugin">Hent</string>
@@ -1667,7 +1665,6 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="av_locations">Placeringer</string>
     <string name="tab_title_basic">Grundlæggende</string>
     <string name="contact_info">Kontaktoplysninger</string>
-    <string name="description">Beskrivelse</string>
     <string name="add_opening_hours">Tilføj åbningstider</string>
     <string name="poi_dialog_poi_type">IP type</string>
     <string name="number_of_rows_in_dash">Antal rækker %1$s</string>

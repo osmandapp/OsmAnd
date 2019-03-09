@@ -343,19 +343,8 @@
     <string name="gpx_info_start_time">Başlama vaxtı: %1$tF, %1$tT</string>
     <string name="gpx_info_end_time">Bitmə vaxtı: %1$tF, %1$tT</string>
     <string name="gpx_info_maximum_speed">Maksimum sürət: %1$s</string>
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="int_days">gün</string>
     <string name="osmo_connect_menu">Qoşul</string>
-    <string name="osmo_group_description">Açıqlama</string>
-
-
     <string name="voice_pref_title">Səs</string>
     <string name="misc_pref_title">Müxtəlif</string>
     <string name="lang_zh">Çincə</string>
@@ -711,7 +700,6 @@
     <string name="edit_filter_delete_message">{0} filtri silindi</string>
     <string name="edit_filter_create_message">{0} filtri yaradıldı</string>
     <string name="email">e-poçt</string>
-    <string name="plugin_description_title">Açıqlama</string>
     <string name="get_plugin">Əldə et</string>
     <string name="do_you_like_osmand">OsmAnd-ı bəyəndiniz?</string>
     <string name="failed_to_upload">Yükləmə uğursuz oldu</string>
@@ -725,7 +713,6 @@
     <string name="opening_at">Açılır:</string>
     <string name="closing_at">Bağlanır:</string>
     <string name="contact_info">Əlaqə məlumatları</string>
-    <string name="description">Açıqlama</string>
     <string name="add_opening_hours">İş saatları əlavə et</string>
     <string name="poi_dialog_poi_type">POI növü</string>
     <string name="working_days">İş günləri</string>

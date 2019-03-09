@@ -1160,7 +1160,6 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="gpx_file_is_empty">Prázdny súbor GPX</string>
     <string name="int_days">dní</string>
     <string name="osmo_connect_menu">Pripojiť</string>
-    <string name="osmo_group_description">Popis</string>
     <string name="loading_smth">Načítava sa %1$s…</string>
     <string name="map_widget_plain_time">Aktuálny čas</string>
     <string name="shared_string_waypoint">Prechodný bod</string>
@@ -1370,7 +1369,6 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
     <string name="gps_status">Stav GPS</string>
     <string name="edit_group">Upraviť skupinu</string>
-    <string name="plugin_description_title">Popis</string>
     <string name="plugin_install_needs_network">Pre nainštalovanie tohto zásuvného modulu musíte byť pripojený na Internet.</string>
     <string name="get_plugin">Získať</string>
     <string name="plugin_ski_name">Lyžiarsky mapový pohľad</string>
@@ -1652,7 +1650,6 @@ Dĺžka %2$s</string>
     <string name="opening_at">Otvára o</string>
     <string name="closing_at">Zatvára o</string>
     <string name="contact_info">Kontaktné údaje</string>
-    <string name="description">Popis</string>
     <string name="add_opening_hours">Pridať otváracie hodiny</string>
     <string name="poi_dialog_poi_type">Typ bodu záujmu</string>
     <string name="number_of_rows_in_dash">Počet riadkov v bloku %1$s</string>

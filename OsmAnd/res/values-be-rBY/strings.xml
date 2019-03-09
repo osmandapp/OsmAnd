@@ -206,7 +206,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="osmo_edit_color">Vybar koleru</string>
     <string name="int_days">dzion</string>
     <string name="osmo_connect_menu">Padklučycca</string>
-    <string name="osmo_group_description">Apіsańnie</string>
     <string name="use_points_as_intermediates">Različyć maršrut pamіž punktamі</string>
     <string name="always_center_position_on_map">Pakazvać stanovіšča zaŭsiody ŭ centry</string>
     <string name="voice_pref_title">Hołas</string>
@@ -1872,7 +1871,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="favourites_context_menu_add">Dadać upadabanaje</string>
     <string name="poi_action_delete">vydalić</string>
     <string name="poi_dialog_reopen">Pieraadkryć</string>
-    <string name="plugin_description_title">Apіsańnie</string>
     <string name="plugin_install_needs_network">Vam nieabchodna padlučennie da Internetu, kab ustaliavać hety dadatak.</string>
     <string name="get_plugin">Atrymać</string>
     <string name="use_fast_recalculation">Razumny pieraraźlik maršrutu</string>
@@ -1902,7 +1900,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="opening_at">Adčyniajecca ŭ</string>
     <string name="closing_at">Začyniajecca ŭ</string>
     <string name="contact_info">Kantakty</string>
-    <string name="description">Apіsańnie</string>
     <string name="add_opening_hours">Dadać hadzіny pracy</string>
     <string name="poi_dialog_poi_type">Typ POI</string>
     <string name="number_of_rows_in_dash">Kolkaść radkoŭ na hałoŭnym ekranie %1$s</string>

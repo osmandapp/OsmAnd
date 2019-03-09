@@ -778,7 +778,6 @@
     <string name="gpx_file_is_empty">காலியான ஜிஎக்ஸ்எக்ஸ் கோப்பு</string>
     <string name="osmo_edit_color">வண்ணம் காட்டவும்</string>
     <string name="osmo_connect_menu">இணைக்கவும்</string>
-    <string name="osmo_group_description">விளக்கம்</string>
     <string name="int_days">நாட்களில்</string>
     <string name="use_points_as_intermediates">புள்ளிகளுக்கு இடையில் வழியைக் கணக்கிடுங்கள்</string>
     <string name="always_center_position_on_map">நிலையை எப்போதும் நடுவில் காண்பி</string>
