@@ -700,19 +700,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
+				//MapActivity mapActivity = getMapActivity();
+				//if (mapActivity != null) {
 					if (selected.size() > 0) {
-						OsmandApplication app = mapActivity.getMyApplication();
+				//		OsmandApplication app = mapActivity.getMyApplication();
 						ApplicationMode next = selected.iterator().next();
-						if (app.getRoutingHelper().isRouteCalculated()) {
-							app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(next);
-						}
+				//		if (app.getRoutingHelper().isRouteCalculated()) {
+				//			app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(next);
+				//		}
 						updateApplicationMode(am, next);
 					}
 					updateFinishPointView();
 					updateOptionsButtons();
-				}
+				//}
 			}
 		};
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(mapActivity.getMyApplication()));
