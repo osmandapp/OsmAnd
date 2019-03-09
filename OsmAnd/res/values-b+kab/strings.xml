@@ -285,7 +285,7 @@
     <string name="street_name">Isem n webrid</string>
     <string name="phone">Tiliγri</string>
     <string name="map_widget_renderer">Aγanib n tkarḍa</string>
-    <string name="gpx_description_txt">Asnummel</string>
+    <string name="shared_string_description">Asnummel</string>
     <string name="user_password">Awal-ik uffir n OSM</string>
     <string name="city_type_hamlet">Aḥriq</string>
     <string name="amenity_type_tourism">Tamerrit</string>

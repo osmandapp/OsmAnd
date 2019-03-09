@@ -281,7 +281,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' → \'Administrer kortfiler\' eller skift til \'Onlinekort\' udvidelsen.</string>
     <string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
     <string name="gpx_visibility_txt">Synlighed</string>
-    <string name="gpx_description_txt">Beskrivelse</string>
+    <string name="shared_string_description">Beskrivelse</string>
     <string name="validate_gpx_upload_name_pwd">Angiv OSM brugernavn og kodeord til at overføre GPX-filer.</string>
     <string name="support_new_features">Støt nye funktioner</string>
     <string name="support_new_features_descr">Doner for at få nye funktioner i programmet.</string>

@@ -96,7 +96,7 @@
     <string name="send_files_to_osm">Odoslať GPX súbory do OSM?</string>
     <string name="gpx_visibility_txt">Viditeľnosť</string>
     <string name="gpx_tags_txt">Tagy</string>
-    <string name="gpx_description_txt">Popis</string>
+    <string name="shared_string_description">Popis</string>
     <string name="validate_gpx_upload_name_pwd">Prosím zadajte vaše používateľské meno a heslo v OSM pre nahratie GPX súborov.</string>
     <string name="default_buttons_support">Podpora</string>
     <string name="support_new_features">Podporiť nové funkcie</string>

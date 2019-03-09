@@ -4,7 +4,7 @@
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
     <string name="gpx_visibility_txt">Viditelnost</string>
     <string name="gpx_tags_txt">Tagy</string>
-    <string name="gpx_description_txt">Popis</string>
+    <string name="shared_string_description">Popis</string>
     <string name="validate_gpx_upload_name_pwd">Prosím zadejte uživatelské jméno a heslo pro přístup do OSM, aby bylo možné nahrát soubory GPX.</string>
     <string name="default_buttons_support">Podpora</string>
     <string name="support_new_features">Sponzoring nových funkcí</string>

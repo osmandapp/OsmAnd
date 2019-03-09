@@ -1339,7 +1339,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="shared_string_waypoint">Wegpunkt</string>
     <string name="gpx_visibility_txt">Sichtbarkeit</string>
     <string name="gpx_tags_txt">Tags</string>
-    <string name="gpx_description_txt">Beschreibung</string>
+    <string name="shared_string_description">Beschreibung</string>
     <string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der GPX-Taste oder unter \'Einstellungen\' → \'Streckenaufzeichnung\' aktivieren.</string>
     <string name="shared_string_gpx_route">GPX-Route</string>
     <string name="gpx_option_reverse_route">GPX-Route umkehren</string>

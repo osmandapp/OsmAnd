@@ -423,7 +423,7 @@
     <string name="send_files_to_osm">Bidali GPX fitxategiak OSMra?</string>
     <string name="gpx_visibility_txt">Ikuserraztasuna</string>
     <string name="gpx_tags_txt">Etiketak</string>
-    <string name="gpx_description_txt">Deskribapena</string>
+    <string name="shared_string_description">Deskribapena</string>
     <string name="validate_gpx_upload_name_pwd">Zehaztu zure OSMeko erabiltzaile eta pasahitza GPX fitxategiak igotzeko.</string>
     <string name="default_buttons_support">Lagundu</string>
     <string name="support_new_features">Ezaugarri berriekin lagundu</string>

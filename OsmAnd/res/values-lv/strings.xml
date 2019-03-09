@@ -16,7 +16,7 @@
   <string name="send_files_to_osm">Sūtīt GPX failus uz OSM?</string>
   <string name="gpx_visibility_txt">Redzamība</string>
   <string name="gpx_tags_txt">Iezīmes</string>
-  <string name="gpx_description_txt">Apraksts</string>
+  <string name="shared_string_description">Apraksts</string>
   <string name="validate_gpx_upload_name_pwd">Lūdzu norādiet OSM lietotāja vārdu un paroli, kuru lietot, augšupielādējot GPX failus.</string>
   <string name="default_buttons_support">Atbalsts</string>
   <string name="support_new_features">Atbalstiet jaunas iespējas</string>

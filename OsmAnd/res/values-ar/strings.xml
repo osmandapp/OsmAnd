@@ -138,7 +138,7 @@
     <string name="send_files_to_osm">إرسال ملفات GPX إلى OSM؟</string>
     <string name="gpx_visibility_txt">الوضوح</string>
     <string name="gpx_tags_txt">وسوم</string>
-    <string name="gpx_description_txt">الوصف</string>
+    <string name="shared_string_description">الوصف</string>
     <string name="validate_gpx_upload_name_pwd">يرجى تحديد اسم المستخدم وكلمة المرور لموقع OSM لرفع ملفات GPX.</string>
     <string name="default_buttons_support">الدعم</string>
     <string name="support_new_features">دعم الميزات الجديدة</string>

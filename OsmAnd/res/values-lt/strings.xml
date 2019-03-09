@@ -100,7 +100,7 @@ Tiek vieta, tiek laikas yra matomi OsmAnd valdymo skydelyje bei skydelyje žemė
     <string name="send_files_to_osm">Siųsti GPX failus į OSM?</string>
     <string name="gpx_visibility_txt">Matomumas</string>
     <string name="gpx_tags_txt">Etiketės</string>
-    <string name="gpx_description_txt">Aprašymas</string>
+    <string name="shared_string_description">Aprašymas</string>
     <string name="validate_gpx_upload_name_pwd">Nurodykite savo OSM vartotojo vardą ir slaptažodį GPX failų persiuntimui.</string>
     <string name="default_buttons_support">Parama</string>
     <string name="support_new_features">Paremti naują funkcionalumą</string>

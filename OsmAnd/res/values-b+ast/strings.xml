@@ -497,7 +497,7 @@
     <string name="show_zoom_buttons_navigation_descr"/>
     <string name="osmand_parking_position_description">L\'allugamientu del vehículu aparcáu. %1$s</string>
     <string name="navpoint_search_desc">Coordenaes</string>
-    <string name="gpx_description_txt">Descripción</string>
+    <string name="shared_string_description">Descripción</string>
     <string name="support_new_features_descr">Dona pa ver les carauterístiques nueves implementaes na aplicación.</string>
     <string name="prefs_plugins_descr">Los plugins activen axustes y funcionalidaes avanzaos.</string>
     <string name="accessibility_mode_descr">Activa les carauterístiques pa usuarios discapacitaos.</string>

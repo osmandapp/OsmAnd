@@ -478,7 +478,7 @@
     <string name="prefs_plugins">Viðbætur</string>
     <string name="gpx_visibility_txt">Sýnileiki</string>
     <string name="gpx_tags_txt">Merki</string>
-    <string name="gpx_description_txt">Lýsing</string>
+    <string name="shared_string_description">Lýsing</string>
     <string name="default_buttons_support">Stuðningur</string>
     <string name="info_button">Upplýsingar</string>
     <string name="backToMenu">Aftur í valmynd</string>

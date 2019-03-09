@@ -492,7 +492,7 @@
     <string name="index_settings_descr">Oflayn xəritə fayllarını cihazınıza endirin və idarə edin.</string>
     <string name="send_files_to_osm">GPX faylları OSM-a göndərilsin?</string>
     <string name="gpx_tags_txt">İşarələr</string>
-    <string name="gpx_description_txt">Açıqlama</string>
+    <string name="shared_string_description">Açıqlama</string>
     <string name="default_buttons_support">Dəstək</string>
     <string name="info_button">Məlumat</string>
     <string name="backToMenu">Menyuya qayıt</string>

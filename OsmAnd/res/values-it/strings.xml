@@ -579,7 +579,7 @@ La memoria utilizzata è  {1} MB.
     <string name="send_files_to_osm">Inviare i file GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilità</string>
     <string name="gpx_tags_txt">Etichette</string>
-    <string name="gpx_description_txt">Descrizione</string>
+    <string name="shared_string_description">Descrizione</string>
     <string name="validate_gpx_upload_name_pwd">Imposta il tuo nome utente e password OSM per caricare i file GPX.</string>
     <string name="default_buttons_support">Sostieni</string>
     <string name="support_new_features">Sostieni nuove caratteristiche</string>

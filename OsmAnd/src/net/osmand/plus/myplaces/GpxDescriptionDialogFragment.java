@@ -33,7 +33,7 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back);
 		topBar.setNavigationIcon(back);
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		topBar.setTitle(R.string.description);
+		topBar.setTitle(R.string.shared_string_description);
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTabBackground)));
 		topBar.setTitleTextColor(ContextCompat.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTextColor)));
 		topBar.setNavigationOnClickListener(new View.OnClickListener() {

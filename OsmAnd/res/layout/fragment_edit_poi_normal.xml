@@ -85,7 +85,7 @@
             style="@style/create_poi_text_field"
             android:layout_width="match_parent"
             android:layout_below="@id/webSiteEditText"
-            android:hint="@string/description"
+            android:hint="@string/shared_string_description"
             android:inputType="textMultiLine"/>
 
         <net.osmand.plus.widgets.TextViewEx

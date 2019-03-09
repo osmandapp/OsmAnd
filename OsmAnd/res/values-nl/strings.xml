@@ -30,7 +30,7 @@
   <string name="send_files_to_osm">GPX-bestanden naar OpenStreetMap sturen?</string>
   <string name="gpx_visibility_txt">Zichtbaarheid</string>
   <string name="gpx_tags_txt">Tags</string>
-  <string name="gpx_description_txt">Beschrijving</string>
+  <string name="shared_string_description">Beschrijving</string>
   <string name="validate_gpx_upload_name_pwd">Geef je OSM-gebruikersnaam en -wachtwoord voor het uploaden van GPX-bestanden.</string>
   <string name="default_buttons_support">Ondersteuning</string>
   <string name="support_new_features">Ondersteun nieuwe functies</string>

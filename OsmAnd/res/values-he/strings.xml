@@ -195,7 +195,7 @@
     <string name="send_files_to_osm">האם לשלוח את קובצי ה־GPX ל־OSM?</string>
     <string name="gpx_visibility_txt">הופעה</string>
     <string name="gpx_tags_txt">תגיות</string>
-    <string name="gpx_description_txt">תיאור</string>
+    <string name="shared_string_description">תיאור</string>
     <string name="validate_gpx_upload_name_pwd">נא לציין את שם המשתמש והססמה שלך ב־OSM כדי להעלות קובצי GPX.</string>
     <string name="default_buttons_support">תמיכה</string>
     <string name="support_new_features">תמיכה בתכונות חדשות</string>

@@ -526,7 +526,7 @@
     <string name="unknown_location">Stejišćo hišće njenamakane</string>
     <string name="confirm_interrupt_download">Sćehnjenje dataje přetorhnyć?</string>
     <string name="local_indexes_cat_map">Standardne karty (wektor)</string>
-    <string name="gpx_description_txt">Wopis</string>
+    <string name="shared_string_description">Wopis</string>
     <string name="default_buttons_support">OsmAnd podpěrać</string>
     <string name="support_new_features">Nowe funkcije podpěrać</string>
     <string name="back_to_location">Wróćo k stejišću</string>

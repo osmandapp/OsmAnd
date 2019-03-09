@@ -1229,7 +1229,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
     <string name="gpx_visibility_txt">Videbleco</string>
-    <string name="gpx_description_txt">Priskribo</string>
+    <string name="shared_string_description">Priskribo</string>
     <string name="validate_gpx_upload_name_pwd">Bonvolu enmeti vian uzantnomon kaj pasvorton al OSM por alŝuti GPX-dosierojn.</string>
     <string name="default_buttons_support">Subteni</string>
     <string name="support_new_features">Subteni novajn eblojn</string>

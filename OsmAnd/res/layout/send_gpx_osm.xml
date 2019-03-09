@@ -19,7 +19,7 @@
             android:id="@+id/TextView"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/gpx_description_txt" />
+            android:text="@string/shared_string_description" />
 
         <EditText
             android:id="@+id/memory_size"

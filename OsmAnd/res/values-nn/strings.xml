@@ -82,7 +82,7 @@
     
 	<string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Kopla til</string>
-    <string name="osmo_group_description">Skildring</string>
+    <string name="shared_string_description">Skildring</string>
     
     <string name="lang_zh">Kinesisk</string>
     <string name="lang_pt_br">Portugisisk (Brasil)</string>

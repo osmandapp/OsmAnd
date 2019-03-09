@@ -1349,6 +1349,7 @@
     <string name="rendering_attr_busRoutes_name">Bus routes</string>
     <string name="rendering_category_hide">Hide</string>
     <string name="rendering_category_routes">Routes</string>
+    <!--string name="shared_string_details">Details</string> use rendering_category_details -->
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">Transport</string>
     <string name="rendering_category_others">Other map attributes</string>
@@ -1494,7 +1495,6 @@
     <string name="gpx_file_is_empty">Empty GPX file</string>
     <string name="osmo_edit_color">Display color</string>
     <string name="osmo_connect_menu">Connect</string>
-    <string name="osmo_group_description">Description</string>
     <string name="int_days">days</string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="always_center_position_on_map">Display position always in center</string>
@@ -2182,7 +2182,7 @@
     <string name="send_files_to_osm">Send GPX files to OSM?</string>
     <string name="gpx_visibility_txt">Visibility</string>
     <string name="gpx_tags_txt">Tags</string>
-    <string name="gpx_description_txt">Description</string>
+    <string name="shared_string_description">Description</string>
     <string name="validate_gpx_upload_name_pwd">Please specify your OSM username and password to upload GPX files.</string>
     <string name="default_buttons_support">Support</string>
     <string name="support_new_features">Support new features</string>
@@ -2795,7 +2795,6 @@
     <string name="av_camera_pic_size">Camera Picture Size</string>
     <string name="av_camera_pic_size_descr">Select the internal camera picture size.</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
-    <string name="plugin_description_title">Description</string>
     <string name="plugin_install_needs_network">You need to be connected to the Internet to install this plugin.</string>
     <string name="get_plugin">Get</string>
     <string name="use_fast_recalculation">Smart route recalculation</string>
@@ -2825,7 +2824,6 @@
     <string name="opening_at">Opening at</string>
     <string name="closing_at">Closing at</string>
     <string name="contact_info">Contact info</string>
-    <string name="description">Description</string>
     <string name="add_opening_hours">Add opening hours</string>
     <string name="poi_dialog_poi_type">POI Type</string>
     <string name="number_of_rows_in_dash">Number of rows in dash %1$s</string>

@@ -571,7 +571,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="native_rendering">Izvorno izrisovanje</string>
     <string name="switch_to_raster_map_to_see">Za to mesto krajevni zemljevidi niso na voljo. Prejmete jih lahko v nastavitvah (krajevni podatki) ali preklopite na spletne zemljevide.</string>
     <string name="gpx_tags_txt">Oznake</string>
-    <string name="gpx_description_txt">Opis</string>
+    <string name="shared_string_description">Opis</string>
     <string name="default_buttons_support">Podpora</string>
     <string name="show_ruler_level">Pokaži ravnilo</string>
     <string name="info_button">Podrobnosti</string>

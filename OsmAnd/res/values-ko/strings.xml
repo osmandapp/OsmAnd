@@ -10,7 +10,7 @@
     <string name="send_files_to_osm">GPX 파일을 OSM으로 전송하시겠습니까?</string>
     <string name="gpx_visibility_txt">가시성</string>
     <string name="gpx_tags_txt">태그</string>
-    <string name="gpx_description_txt">설명</string>
+    <string name="shared_string_description">설명</string>
     <string name="validate_gpx_upload_name_pwd">GPX파일을 업로드하려면 OSM 사용자 이름과 패스워드를 입력하십시오.</string>
     
 	<string name="default_buttons_support">지원</string>

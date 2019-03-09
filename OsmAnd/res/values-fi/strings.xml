@@ -93,7 +93,7 @@
 	<string name="email">sähköposti</string>
 
 	<string name="gpx_tags_txt">Avainsanat</string>
-	<string name="gpx_description_txt">Kuvaus</string>
+	<string name="shared_string_description">Kuvaus</string>
 	<string name="validate_gpx_upload_name_pwd">Anna OSM käyttäjänimi ja salasana lähettääksesi GPX-tiedostoja.</string>
     	<string name="default_buttons_support">Tue</string>
 	<string name="support_new_features">Tue uusia ominaisuuksia</string>

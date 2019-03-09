@@ -72,7 +72,7 @@
   <string name="send_files_to_osm">Відправити GPX файли в OSM?</string>
   <string name="gpx_visibility_txt">Видимість</string>
   <string name="gpx_tags_txt">Теги</string>
-  <string name="gpx_description_txt">Опис</string>
+  <string name="shared_string_description">Опис</string>
   <string name="validate_gpx_upload_name_pwd">Для вивантаження GPX-файлів, будь ласка, вкажіть ваше ім\'я користувача і пароль в OSM.</string>
   <string name="default_buttons_support">Підтримка</string>
   <string name="support_new_features">Підтримати розробку нових функцій</string>

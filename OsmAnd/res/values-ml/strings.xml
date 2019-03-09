@@ -138,7 +138,7 @@
     <string name="address_search_desc">വിലാസം തെരയുക</string>
     <string name="navpoint_search_desc">കോര്‍ഡിനേറ്റുകള്‍</string>
     <string name="gpx_visibility_txt">കാഴ്ച</string>
-    <string name="gpx_description_txt">വിവരണം</string>
+    <string name="shared_string_description">വിവരണം</string>
     <string name="zoomOut">ചെറുതാക്കുക</string>
     <string name="zoomIn">വലുതാക്കുക</string>
     <string name="arrival_distance_factor_normally">സാധാരണ</string>

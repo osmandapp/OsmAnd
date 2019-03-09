@@ -829,7 +829,7 @@ POIの更新は利用できません</string>
     <string name="send_files_to_osm">OSMにGPXファイルを送りますか？</string>
     <string name="gpx_visibility_txt">確認可能</string>
     <string name="gpx_tags_txt">タグ</string>
-    <string name="gpx_description_txt">描写</string>
+    <string name="shared_string_description">描写</string>
     <string name="validate_gpx_upload_name_pwd">GPXファイルをアップロードするOSMユーザー名とパスワードを指定してください。</string>
     <string name="default_buttons_support">サポート</string>
     <string name="support_new_features">新機能をサポート</string>

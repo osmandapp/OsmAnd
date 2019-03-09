@@ -762,7 +762,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="send_files_to_osm">Adasłać GPX fajły ŭ OSM?</string>
     <string name="gpx_visibility_txt">Bačnaść</string>
     <string name="gpx_tags_txt">Cetlikі</string>
-    <string name="gpx_description_txt">Apіsańnie</string>
+    <string name="shared_string_description">Apіsańnie</string>
     <string name="validate_gpx_upload_name_pwd">Kali laska, paznačcie imia i paroĺ karystaĺnika OSM, kab adsylać GPX-fajly.</string>
     <string name="default_buttons_support">Padtrymka</string>
     <string name="support_new_features">Padtrymka novych ułaścіvaściaŭ</string>

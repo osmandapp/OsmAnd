@@ -533,7 +533,7 @@
 	<string name="send_files_to_osm">GPX dosyalarını OSM ye gönder?</string>
 	<string name="gpx_visibility_txt">Görünürlük</string>
 	<string name="gpx_tags_txt">Etiketler</string>
-	<string name="gpx_description_txt">Tanım</string>
+	<string name="shared_string_description">Tanım</string>
 	<string name="validate_gpx_upload_name_pwd">OSM kullanıcı adı ve GPX dosyaları yüklemek için şifre belirtin.</string>
     	<string name="support_new_features">Yeni özellikler Destekle</string>
 	<string name="support_new_features_descr">Uygulamada uygulanan yeni özellikleri görmek için bağış yap</string>

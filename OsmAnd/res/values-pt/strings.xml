@@ -421,7 +421,7 @@
     <string name="send_files_to_osm">Enviar ficheiros GPX para o OSM\?</string>
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etiquetas</string>
-    <string name="gpx_description_txt">Descrição</string>
+    <string name="shared_string_description">Descrição</string>
     <string name="validate_gpx_upload_name_pwd">Especifique o nome e palavra-passe de utilizador do OSM para enviar ficheiros de GPX.</string>
     <string name="default_buttons_support">Apoiar</string>
     <string name="support_new_features">Apoiar novas funcionalidades</string>

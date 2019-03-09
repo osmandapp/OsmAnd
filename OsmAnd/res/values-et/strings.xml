@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
-	<string name="description">Kirjeldus</string>
+	<string name="shared_string_description">Kirjeldus</string>
 	<string name="contact_info">Kontakti info</string>
 	
 	<string name="building_number">Hoone Number</string>

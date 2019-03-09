@@ -625,7 +625,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="send_files_to_osm">Inviare sos documentos GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etichetas</string>
-    <string name="gpx_description_txt">Descritzione</string>
+    <string name="shared_string_description">Descritzione</string>
     <string name="validate_gpx_upload_name_pwd">Dislinda su nùmene impreadore tuo e sa crae (password) tua de OSM pro carrigare documentos GPX.</string>
     <string name="default_buttons_support">Sustènne</string>
     <string name="support_new_features">Sustènne caraterìsticas noas</string>

@@ -1705,7 +1705,7 @@
     <string name="send_files_to_osm">Ուղարկել GPX ֆայլերը OSM-ին?</string>
     <string name="gpx_visibility_txt">Տեսանելիություն</string>
     <string name="gpx_tags_txt">Թեգեր(Tags)</string>
-    <string name="gpx_description_txt">Նկարագրություն</string>
+    <string name="shared_string_description">Նկարագրություն</string>
     <string name="validate_gpx_upload_name_pwd">Նշեք Ձեր OSM-ի գրանցման անունը և գաղտնաբառը, GPX ֆայլերը OpenStreetMap վերբեռնելու համար:</string>
     <string name="default_buttons_support">Աջակցում</string>
     <string name="support_new_features">Աջակցել նոր հատկությունների զարգացումը</string>

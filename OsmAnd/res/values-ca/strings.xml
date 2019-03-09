@@ -97,7 +97,7 @@
     <string name="send_files_to_osm">Voleu enviar els fitxers GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilitat</string>
     <string name="gpx_tags_txt">Etiquetes</string>
-    <string name="gpx_description_txt">Descripció</string>
+    <string name="shared_string_description">Descripció</string>
     <string name="validate_gpx_upload_name_pwd">Especifiqueu el vostre nom d\'usuari i la contrasenya d\'OSM per pujar fitxers GPX.</string>
     <string name="default_buttons_support">Suport</string>
     <string name="show_ruler_level">Mostra el regle</string>

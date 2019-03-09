@@ -126,7 +126,7 @@
 	<string name="send_files_to_osm">将GPX文件发送至OSM？</string>
 	<string name="gpx_visibility_txt">能见度</string>
 	<string name="gpx_tags_txt">标签</string>
-	<string name="gpx_description_txt">描述</string>
+	<string name="shared_string_description">描述</string>
 	<string name="validate_gpx_upload_name_pwd">请指定的OSM用户名和密码上传GPX文件。</string>
     	<string name="default_buttons_support">支持</string>
 	<string name="support_new_features">支持新功能</string>
