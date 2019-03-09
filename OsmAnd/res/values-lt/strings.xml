@@ -1320,91 +1320,19 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="share_route_as_gpx">Bendrinti maršruto GPX failą</string>
     <string name="share_route_subject">Maršrutas bendrintas per OsmAnd</string>
     <string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
-    
-    
-    
-    
-    
     <string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais.</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
     <string name="arrival_distance">Pranešimas apie atvykimą</string>
     <string name="arrival_distance_descr">Kada anksti turi būti pranešama apie atvykimą?</string>
-    
-    
-    
-
     <string name="shared_string_share">Bendrinti</string>
     <string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
     <string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
-    
-    
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="int_days">dienos</string>
     <string name="osmo_connect_menu">Prisijungti</string>
-    
-    <string name="xxxxx">Aprašymas</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     <string name="import_file_favourites">Išsaugoti duomenis GPX faile ar importuoti į įsimintas vietas?</string>
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="rendering_value_pink_name">rožinė</string>
-    
     <string name="rendering_value_brown_name">ruda</string>
-    
-    
-    
-    
-
-    
     <string name="osmo_edit_color">Rodoma spalva</string>
     <string name="gpx_info_subtracks">Maršruto dalys: %1$s </string>
     <string name="gpx_info_waypoints">Tarpiniai taškai: %1$s </string>
@@ -1655,10 +1583,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="proxy_pref_descr">Nurodyti proksi serverį.</string>
     <string name="settings_privacy">Privatumas</string>
     <string name="shared_string_gpx_points">Taškai</string>
-
     <string name="shared_string_my_location">Mano dabartinė vieta</string>
-
-
     <string name="navigation_over_track">Pradėti navigaciją keliu?</string>
     <string name="avoid_roads_msg">Galite pasirinkti kitą maršrutą, pažymėdami norimus aplenkti kelius</string>
     <string name="save_track_to_gpx_globally_headline">Privalomas kelio log įrašymas</string>
@@ -1670,8 +1595,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="enable_proxy_descr">"Konfigūruoti  HTTP proksi serverį visoms tinklo užklausoms."</string>
     <string name="shared_string_disabled">Išjungta</string>
     <string name="shared_string_enabled">Įjungta</string>
-    <string name="xxxxx">Aprašymas</string>
-
     <string name="edit_group">Redaguoti grupę</string>
     <string name="plugin_install_needs_network">Prisijunkite prie interneto, jei norite įdiegti šį priedą.</string>
     <string name="shared_string_enable">Įjungti</string>
@@ -1895,8 +1818,6 @@ Ilguma %2$s</string>
     <string name="av_locations">Vietovės</string>
     <string name="building_number">Pastato numeris</string>
     <string name="next_proceed">Toliau</string>
-    
-    <string name="xxxxx">Aprašymas</string>
     <string name="add_opening_hours">Pridėti darbo valandas</string>
     <string name="poi_dialog_poi_type">LV tipas</string>
     <string name="opening_at">Darbo pradžia</string>
