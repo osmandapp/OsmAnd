@@ -2936,4 +2936,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_gpx_tracks_show">GPX Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
+    <string name="use_osm_live_public_transport_description">Öffentliche Verkehrsmittel für Änderungen an OsmAnd Live aktivieren.</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
 </resources>
