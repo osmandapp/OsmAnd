@@ -115,7 +115,7 @@
     <string name="route_updated_loc_found">בהמתנה למיקום לצורך חישוב הנתיב</string>
     <string name="osmand_parking_hours">שעות</string>
     <string name="osmand_parking_minutes">דקות</string>
-    <string name="osmand_parking_position_description_add_time">הרכב חונה במיקום:</string>
+    <string name="osmand_parking_position_description_add_time">הרכב חונה במיקום</string>
     <string name="select_animate_speedup">בחירת מהירות הדמיית הנתיב</string>
     <string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של Android:‏ %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
     <string name="global_app_allocated_memory">הזיכרון המוקצה</string>
@@ -2919,4 +2919,6 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה את מסלולי ה־GPX הנבחרים במפה</string>
     <string name="quick_action_gpx_tracks_hide">הסתרת מסלולי GPX</string>
     <string name="quick_action_gpx_tracks_show">הצגת מסלולי GPX</string>
+    <string name="use_osm_live_public_transport_description">הפעלת תחבורה ציבורית לשינויים ב־OsmAnd החי.</string>
+    <string name="use_osm_live_public_transport">OsmAnd חי תחבורה ציבורית</string>
 </resources>

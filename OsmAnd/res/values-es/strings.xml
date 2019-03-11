@@ -1131,7 +1131,7 @@
     <string name="map_widget_map_rendering">Renderizado del mapa</string>
     <string name="app_modes_choose_descr">Perfiles que serán visibles en la aplicación.</string>
     <string name="guidance_preferences_descr">Preferencias de navegación</string>
-    <string name="routing_preferences_descr">Preferencias de navegación</string>
+    <string name="routing_preferences_descr">Preferencias de enrutado</string>
     <string name="speech_rate_descr">Indica la velocidad en el habla sintetizada (TTS).</string>
     <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino…</string>
@@ -2078,7 +2078,7 @@
     <string name="search_map_hint">Buscar ciudad o región</string>
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
-    <string name="gpx_add_track">Añadir GPX</string>
+    <string name="gpx_add_track">Añadir más…</string>
     <string name="gpx_appearance">Aspecto</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="shared_string_continue">Continuar</string>

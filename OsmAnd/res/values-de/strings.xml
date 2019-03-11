@@ -1058,7 +1058,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="download_using_mobile_internet">Keine WLAN-Verbindung. Momentane Internetverbindung zum Herunterladen verwenden?</string>
     <string name="clear_destination">Ziel löschen</string>
     <string name="other_location">Andere</string>
-    <string name="files_limit">In dieser kostenlosen Version können noch %1$d Dateien heruntergeladen werden.</string>
+    <string name="files_limit">%1$d Dateien übrig</string>
     <string name="available_downloads_left">Es können noch %1$d Dateien herunter geladen werden</string>
     <string name="install_paid">Vollversion</string>
     <string name="cancel_navigation">Navigation stoppen</string>
@@ -2871,7 +2871,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / Monat</string>
     <string name="osm_live_payment_discount_descr">Sparen Sie %1$s.</string>
     <string name="osm_live_payment_current_subscription">Aktuelles Abonnement</string>
-    <string name="osm_live_payment_renews_monthly">Verlängert monatlich</string>
+    <string name="osm_live_payment_renews_monthly">Verlängert sich monatlich</string>
     <string name="osm_live_payment_renews_quarterly">Verlängert vierteljährlich</string>
     <string name="osm_live_payment_renews_annually">Verlängert jährlich</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
@@ -2927,10 +2927,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="by_transport_type">Von %1$s</string>
     <string name="step_by_step">Schritt für Schritt</string>
     <string name="road_types">Straßentypen</string>
-    <string name="quick_action_show_hide_gpx_tracks">GPX Tracks ein-/ausblenden</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX-Tracks ein-/ausblenden</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Durch Antippen dieser Aktionsschaltfläche werden ausgewählte GPX-Tracks auf der Karte ein- oder ausgeblendet</string>
     <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
-    <string name="quick_action_gpx_tracks_show">GPX Tracks einblenden</string>
+    <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
+    <string name="use_osm_live_public_transport_description">Öffentliche Verkehrsmittel für Änderungen an OsmAnd Live aktivieren.</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
 </resources>
