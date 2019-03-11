@@ -600,7 +600,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String timeText = OsmAndFormatter.getFormattedTime(startTime, false);
 
-		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop) + ":");
+		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
 		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		SpannableString title = new SpannableString(startStop.getName());
@@ -628,7 +628,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		spannable.append(" • ").append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		SpannableString textType = new SpannableString(getString(R.string.by_transport_type, transportStopRoute.type.name().toLowerCase() + ":"));
+		SpannableString textType = new SpannableString(getString(R.string.by_transport_type, transportStopRoute.type.name().toLowerCase()));
 		buildCollapsableRow(stopsContainer, spannable, textType, true, collapsableView, listener);
 
 		TransportStop endStop = stops.get(stops.size() - 1);
@@ -638,7 +638,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		}
 		String textTime = OsmAndFormatter.getFormattedTime(depTime, false);
 
-		secondaryText = new SpannableString(getString(R.string.exit_at) + ":");
+		secondaryText = new SpannableString(getString(R.string.exit_at));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int spaceIndex = secondaryText.toString().indexOf(" ");
 		if (spaceIndex != -1) {
@@ -826,7 +826,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		SpannableString secondaryText = new SpannableString(getString(R.string.route_descr_destination) + ":");
+		SpannableString secondaryText = new SpannableString(getString(R.string.route_descr_destination));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -986,7 +986,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			routeTypeView.setLayoutParams(routeTypeParams);
 			routeTypeView.setTextSize(16);
 			AndroidUtils.setTextSecondaryColor(app, routeTypeView, nightMode);
-			routeTypeView.setText(getString(R.string.layer_route) + ":");
+			routeTypeView.setText(transportStopRoute.desc);
 			llText.addView(routeTypeView);
 
 			View routeBadge = createRouteBadge(mapActivity, transportStopRoute, nightMode);
