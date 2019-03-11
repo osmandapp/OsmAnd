@@ -529,7 +529,7 @@
     <string name="si_mi_yard">Мили/ярды</string>
     <string name="si_km_m">Километры/метры</string>
     <string name="yard">ярд</string>
-    <string name="foot">фт</string>
+    <string name="foot">фут</string>
     <string name="mile_per_hour">мл/ч</string>
     <string name="mile">мл</string>
     <string name="send_location_way_choose_title">Поделиться, используя</string>
@@ -1928,11 +1928,11 @@
     <string name="default_speed_system_descr">Выберите единицы измерения скорости.</string>
     <string name="default_speed_system">Единицы измерения скорости</string>
     <string name="si_nm">Морские мили</string>
-    <string name="si_kmh">Километр в час</string>
-    <string name="si_mph">Миля в час</string>
-    <string name="si_m_s">Метр в секунду</string>
-    <string name="si_min_km">Минута на километр</string>
-    <string name="si_min_m">Минута на милю</string>
+    <string name="si_kmh">Километров в час</string>
+    <string name="si_mph">Миль в час</string>
+    <string name="si_m_s">Метров в секунду</string>
+    <string name="si_min_km">Минут на километр</string>
+    <string name="si_min_m">Минут на милю</string>
     <string name="si_nm_h">Морская миля в час (узел)</string>
     <string name="min_mile">мин/м</string>
     <string name="min_km">мин/км</string>
@@ -2059,7 +2059,7 @@
     <string name="clear_updates_proposition_message">Загруженные обновления можно удалить и вернуться к первоначальной редакции карты</string>
     <string name="add_time_span">Добавить временной интервал</string>
     <string name="road_blocked">Дорога перекрыта</string>
-    <string name="nm">нм</string>
+    <string name="nm">nmi</string>
     <string name="nm_h">уз</string>
     <string name="downloads_left_template">Осталось %1$s загрузок</string>
     <string name="donations">Пожертвования</string>
