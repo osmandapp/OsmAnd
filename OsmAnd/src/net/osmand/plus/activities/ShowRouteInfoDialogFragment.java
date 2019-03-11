@@ -86,7 +86,6 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -627,28 +626,44 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		if (stops.size() > 2) {
 			collapsableView = getCollapsableTransportStopRoutesView(app, transportStopRoute, stops.subList(1, stops.size() - 1));
 		}
-		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
-		int startIndex = spannable.length();
-		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spannable.append(OsmAndFormatter.getFormattedDuration(segment.getArrivalTime(), app));
-		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		startIndex = spannable.length();
-		spannable.append(" • ");
-		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		SpannableStringBuilder spannable = new SpannableStringBuilder();
+		int startIndex;
+		int arrivalTime = segment.getArrivalTime();
+		if (arrivalTime > 0) {
+			spannable.append("~");
+			startIndex = spannable.length();
+			spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spannable.append(OsmAndFormatter.getFormattedDuration(arrivalTime, app));
+			spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		} else {
+			arrivalTime = 0;
+		}
 		startIndex = spannable.length();
 		if (stops.size() > 2) {
+			if (spannable.length() > 0) {
+				startIndex = spannable.length();
+				spannable.append(" • ");
+				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
+			startIndex = spannable.length();
 			spannable.append(String.valueOf(stops.size())).append(" ").append(getString(R.string.transport_stops));
+			spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
-		spannable.append(" • ").append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app));
+		if (spannable.length() > 0) {
+			startIndex = spannable.length();
+			spannable.append(" • ");
+			spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
+		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		SpannableString textType = new SpannableString(getString(R.string.by_transport_type, transportStopRoute.type.name().toLowerCase()));
 		buildCollapsableRow(stopsContainer, spannable, textType, true, collapsableView, null);
 
 		final TransportStop endStop = stops.get(stops.size() - 1);
-		long depTime = segment.depTime + segment.getArrivalTime();
+		long depTime = segment.depTime + arrivalTime;
 		if (depTime <= 0) {
-			depTime = startTime + segment.getArrivalTime();
+			depTime = startTime + arrivalTime;
 		}
 		String textTime = OsmAndFormatter.getFormattedTime(depTime, false);
 
@@ -703,7 +718,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			final TransportRouteResultSegment segment = segments.get(i);
 			final TransportRouteResultSegment nextSegment = segments.size() > i + 1 ? segments.get(i + 1) : null;
 			long walkTime = (long) getWalkTime(segment.walkDist, routeResult.getWalkSpeed());
-
+			if (walkTime < 60) {
+				walkTime = 60;
+			}
 			if (i == 0) {
 				buildStartItem(parent, startPoint, startTime, segment, routeResult.getWalkSpeed());
 				startTime += walkTime;
@@ -759,6 +776,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	private Spannable getWalkTitle(double finishWalkDist, double walkTime) {
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		SpannableStringBuilder title = new SpannableStringBuilder("~");
 		int startIndex = title.length();
@@ -804,6 +824,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		buildRowDivider(infoContainer, true);
 
 		long walkTime = (long) getWalkTime(segment.walkDist, walkSpeed);
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
 		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.on_foot)));
 		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
@@ -868,7 +891,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		buildRowDivider(infoContainer, true);
 
 		long walkTime = (long) getWalkTime(segment.walkDist, walkSpeed);
-
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
 		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
 		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = spannable.length();
@@ -900,7 +925,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, imagesContainer, new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showLocationOnMap(destination != null ? destination.point : null);
+				showLocationOnMap(destination.point);
 			}
 		});
 
@@ -1228,7 +1253,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	@Nullable
 	private QuadRect getWalkingSegmentRect(@NonNull RouteCalculationResult result) {
 		double left = 0, right = 0;
-		double top = 0, bottom = 0;;
+		double top = 0, bottom = 0;
 		for (Location p : result.getRouteLocations()) {
 			if (left == 0 && right == 0) {
 				left = p.getLongitude();
@@ -1480,7 +1505,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				}
 			});
 		}
-		return new CollapsableView(view, null, false);
+		return new CollapsableView(view, null, true);
 	}
 
 	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed) {
