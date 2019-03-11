@@ -3549,7 +3549,7 @@
     <string name="poi_denotation">Denotação</string>
     <string name="poi_denotation_natural_monument">Monumento natural</string>
     <string name="poi_denotation_landmark">Ponto de referência</string>
-    <string name="poi_park_ride">Parque de estacionamento dissuasor</string>
+    <string name="poi_park_ride">Estacionamento integrado</string>
     <string name="poi_park_ride_yes">Sim</string>
     <string name="poi_park_ride_train">Trem</string>
     <string name="poi_park_ride_bus">Ônibus</string>
@@ -3560,4 +3560,5 @@
     <string name="poi_generator_source_biomass">Fonte de energia: biomassa</string>
     <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Perigo</string>
+    <string name="poi_rtsa_scale_filter">Categoria de dificuldade</string>
 </resources>
