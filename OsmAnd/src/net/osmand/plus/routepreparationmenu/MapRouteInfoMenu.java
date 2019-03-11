@@ -801,7 +801,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		View cancelButton = mainView.findViewById(R.id.cancel_button);
 		TextView cancelButtonText = (TextView) mainView.findViewById(R.id.cancel_button_descr);
-		if (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
+		if (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated() || isTransportRouteCalculated()) {
 			cancelButtonText.setText(R.string.shared_string_dismiss);
 		} else {
 			cancelButtonText.setText(R.string.shared_string_cancel);
