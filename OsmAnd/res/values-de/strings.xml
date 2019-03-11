@@ -15,8 +15,8 @@
     <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
     <string name="shared_string_import2osmand">Nach OsmAnd importieren</string>
     <string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes.</string>
-    <string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
-    <string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Routenführung zu beginnen.</string>
+    <string name="delay_to_start_navigation">Zielführung beginnen nach…</string>
+    <string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Zielführung zu beginnen.</string>
     <string name="simulate_your_location">Standort simulieren</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-Mapper-Assistent</string>
     <string name="traffic_warning_speed_limit">Tempolimit</string>
@@ -710,7 +710,7 @@
     <string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
     <string name="update_existing">Ersetzen</string>
     <string name="only_show">Route nur anzeigen</string>
-    <string name="follow">Navigation starten</string>
+    <string name="follow">Zielführung starten</string>
     <string name="recalculate_route_to_your_location">Nutzerprofil:</string>
     <string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
     <string name="get_directions">Navigation</string>
@@ -1402,7 +1402,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="rendering_attr_busRoutes_name">Buslinien</string>
     <string name="rendering_category_hide">Ausblenden</string>
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
-    <string name="home_button">Startseite</string>
+    <string name="home_button">Zu Hause</string>
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     <string name="shared_string_show_all">Alle anzeigen</string>

@@ -1120,7 +1120,7 @@
     <string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d change(s) to OSM. Are you sure?</string>
     <string name="confirmation_to_clear_history">Clear history?</string>
     <string name="delay_to_start_navigation_descr">Specify wait time to remain on the route planning screen.</string>
-    <string name="delay_to_start_navigation">Start turn-by-turn navigation after…</string>
+    <string name="delay_to_start_navigation">Start turn-by-turn guidance after…</string>
     <string name="shared_string_go">Go</string>
     <string name="osmand_parking_overdue">overdue</string>
     <string name="action_create">Action create</string>
@@ -2661,7 +2661,7 @@
     <string name="fav_points_not_exist">No Favorite points exist</string>
     <string name="update_existing">Replace</string>
     <string name="only_show">Display route</string>
-    <string name="follow">Start navigation</string>
+    <string name="follow">Start guidance</string>
     <string name="mark_final_location_first">Please select destination first</string>
     <string name="get_directions">Directions</string>
     <string name="opening_hours">Opening hours</string>
