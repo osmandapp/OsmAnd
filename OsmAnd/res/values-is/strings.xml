@@ -702,7 +702,7 @@
     <string name="last_update">Síðasta uppfærsla: %s</string>
     <string name="update_time">Uppfærslutími</string>
     <string name="updates_size">Stærð uppfærslu</string>
-    <string name="hourly">Hverja klst.</string>
+    <string name="hourly">Á klukkustundar fresti</string>
     <string name="daily">Daglega</string>
     <string name="weekly">Vikulega</string>
     <string name="morning">Morgunn</string>
@@ -2530,7 +2530,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n
 \n• Val á milli heildargagna svæðis eða einungis vegakerfis (dæmi: öll gögn fyrir Japan eru 700 MB en 200 MB fyrir vegakerfið eingöngu)</string>
     <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum fyrir GPX-skráningu á kortinu).</string>
-    <string name="will_open_tomorrow_at">Opnar á morgun kl.</string>
+    <string name="will_open_tomorrow_at">Opnar á morgun klukkan</string>
     <string name="animate_my_location_desc">Virkja hreyfingu við hliðrun staðsetningar minnar á meðan leiðsögn stendur.</string>
     <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur, en það þarf að endurræsa forritið handvirkt til að geta nýtt sér það.</string>
     <string name="show_transparency_seekbar">Birta gegnsæis-sleða</string>
@@ -2721,7 +2721,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_read">Lesið</string>
     <string name="shared_string_contents">Efni</string>
     <string name="download_maps_travel">Ferðaleiðbeiningar</string>
-    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="shared_string_wikivoyage">Wikiferðir</string>
     <string name="article_removed">Grein fjarlægð</string>
     <string name="index_item_world_wikivoyage">Greinar um víða veröld af Wikivoyage</string>
     <string name="shared_string_dont">Ekki</string>
@@ -2933,9 +2933,27 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="step_by_step">Skref fyrir skref</string>
     <string name="road_types">Gerðir vega</string>
     <string name="exit_at">Fara útaf við</string>
-    <string name="sit_on_the_stop">Bíða við stöðvunina</string>
+    <string name="sit_on_the_stop">Fara um borð við stöðvunina</string>
     <string name="quick_action_show_hide_gpx_tracks">Birta/Fela GPX-ferla</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela GPX-ferla á kortinu</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela valda GPX-ferla á kortinu</string>
     <string name="quick_action_gpx_tracks_hide">Fela GPX-ferla</string>
     <string name="quick_action_gpx_tracks_show">Birta GPX-ferla</string>
+    <string name="release_3_3">• Nýr skjár fyrir \'Leiðir\': Birtir leiðarhnappa fyrir \'Heim\' og \'Vinna\', flýtileið á fyrri leið, listi yfir virka GPX-ferla og merki, leitarferill
+\n
+\n • Viðbótarupplýsingar undir \'Nánar um leið\': gerð vegar, yfirborð, bratti, áferð
+\n
+\n • Leiðsögn fyrir allar gerðir almenningssamgangna: neðanjarðarlestir, strætó, sporvagnar, o.s.frv.
+\n
+\n • Ný flýtiaðgerð til að birta/fela leiðir og fyrir dags-/næturham
+\n
+\n • Ákveðin svæði sýnd sem flóðasvæði í Þýskalandi, Suður-Afríku, Quebec
+\n
+\n • Viðbótarstuðningur við innflutning KML og KMZ
+\n
+\n • Lagfært hrun við opnun ýmissa biðstöðva
+\n
+\n • Fjarlæging greiningarvinnslu Facebook og Firebase úr frjálsu/ókeypis útgáfunni (OsmAnd+ innifelur þetta ekki)
+\n</string>
+    <string name="use_osm_live_public_transport_description">Virkja breytingar á almenningssamgöngum í OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Almenningssamgöngur OsmAnd Live</string>
 </resources>
