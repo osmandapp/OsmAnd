@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -214,23 +217,25 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom());
+		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom(),
+			view.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get(),
+			view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get());
 		if (hsh != cachedHash) {
 			cachedHash = hsh;
 			cachedColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_track);
 			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
-				CommonPreference<String> p = view.getSettings().getCustomRenderProperty("currentTrackColor");
+				CommonPreference<String> p = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
 				if (p != null && p.isSet()) {
-					RenderingRuleProperty ctColor = rrs.PROPS.get("currentTrackColor");
+					RenderingRuleProperty ctColor = rrs.PROPS.get(CURRENT_TRACK_COLOR_ATTR);
 					if (ctColor != null) {
 						req.setStringFilter(ctColor, p.get());
 					}
 				}
-				CommonPreference<String> p2 = view.getSettings().getCustomRenderProperty("currentTrackWidth");
+				CommonPreference<String> p2 = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
 				if (p2 != null && p2.isSet()) {
-					RenderingRuleProperty ctWidth = rrs.PROPS.get("currentTrackWidth");
+					RenderingRuleProperty ctWidth = rrs.PROPS.get(CURRENT_TRACK_WIDTH_ATTR);
 					if (ctWidth != null) {
 						req.setStringFilter(ctWidth, p2.get());
 					}
