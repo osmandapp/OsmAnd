@@ -800,6 +800,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 
 		View cancelButton = mainView.findViewById(R.id.cancel_button);
+		TextView cancelButtonText = (TextView) mainView.findViewById(R.id.cancel_button_descr);
+		if (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
+			cancelButtonText.setText(R.string.shared_string_dismiss);
+		} else {
+			cancelButtonText.setText(R.string.shared_string_cancel);
+		}
 		AndroidUtils.setBackground(app, cancelButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		cancelButton.setOnClickListener(new OnClickListener() {
 			@Override
