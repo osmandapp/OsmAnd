@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -505,7 +506,7 @@ public class InAppPurchaseHelper {
 					parameters.put("visibleName", hideUserName ? "" : userName);
 					parameters.put("preferredCountry", countryDownloadName);
 					parameters.put("email", email);
-
+					addUserInfo(parameters);
 					return AndroidNetworkUtils.sendRequest(ctx,
 							"https://osmand.net/subscription/register",
 							parameters, "Requesting userId...", true, true);
@@ -618,9 +619,7 @@ public class InAppPurchaseHelper {
 			try {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("androidPackage", ctx.getPackageName());
-				parameters.put("version", Version.getFullVersion(ctx));
-				parameters.put("lang", ctx.getLanguage() + "");
-
+				addUserInfo(parameters);
 				return AndroidNetworkUtils.sendRequest(ctx,
 						"https://osmand.net/api/subscriptions/active",
 						parameters, "Requesting active subscriptions...", false, false);
@@ -669,6 +668,19 @@ public class InAppPurchaseHelper {
 					return true;
 				}
 			});
+		}
+	}
+
+	@SuppressLint("HardwareIds")
+	private void addUserInfo(Map<String, String> parameters) {
+		parameters.put("version", Version.getFullVersion(ctx));
+		parameters.put("lang", ctx.getLanguage() + "");
+		parameters.put("nd", ctx.getAppInitializer().getFirstInstalledDays() + "");
+		parameters.put("ns", ctx.getAppInitializer().getNumberOfStarts() + "");
+		try {
+			parameters.put("aid", Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID));
+		} catch (Exception e) {
+			// ignore
 		}
 	}
 
@@ -789,6 +801,7 @@ public class InAppPurchaseHelper {
 				parameters.put("purchaseToken", purchase.getToken());
 				parameters.put("email", email);
 				parameters.put("token", token);
+				addUserInfo(parameters);
 				requests.add(new AndroidNetworkUtils.Request(url, parameters, userOperation, true, true));
 			}
 			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnRequestResultListener() {
