@@ -31,7 +31,7 @@
     <string name="sit_on_the_stop">Board at stop</string>
     <string name="shared_string_swap">Swap</string>
     <string name="show_more">Show more</string>
-    <string name="tracks_on_map">Tracks on the map</string>
+    <string name="tracks_on_map">Displayed tracks</string>
     <string name="quick_action_show_hide_gpx_tracks">Show/Hide GPX Tracks</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tapping this action button shows or hides selected GPX tracks on the map</string>
     <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>

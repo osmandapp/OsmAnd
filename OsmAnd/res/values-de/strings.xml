@@ -2922,7 +2922,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="previous_route">Vorherige Route</string>
     <string name="shared_string_swap">Tauschen</string>
     <string name="show_more">Mehr anzeigen</string>
-    <string name="tracks_on_map">Tracks auf der Karte</string>
+    <string name="tracks_on_map">Angezeigte Tracks</string>
     <string name="time_of_day">Tageszeit</string>
     <string name="by_transport_type">Von %1$s</string>
     <string name="step_by_step">Schritt für Schritt</string>
