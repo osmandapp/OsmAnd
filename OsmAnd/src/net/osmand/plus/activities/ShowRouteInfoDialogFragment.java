@@ -39,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -100,6 +101,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatistics;
 import net.osmand.router.RouteStatistics.Incline;
 import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -189,7 +191,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		toolbar.setNavigationOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
@@ -214,20 +216,20 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 		AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
 				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-		zoomInButtonView.setOnClickListener(new View.OnClickListener() {
+		zoomInButtonView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				doZoomIn();
 			}
 		});
-		zoomOutButtonView.setOnClickListener(new View.OnClickListener() {
+		zoomOutButtonView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				doZoomOut();
 			}
 		});
 
-		myLocButtonView.setOnClickListener(new View.OnClickListener() {
+		myLocButtonView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
@@ -420,9 +422,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			LinearLayout cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
 			cardsContainer.removeAllViews();
 			if (routeId != -1) {
-				List<TransportRoutePlanner.TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
+				List<TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
 				if (routes != null && routes.size() > routeId) {
-					TransportRoutePlanner.TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(routeId);
+					TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(routeId);
 					PublicTransportCard card = new PublicTransportCard(mapActivity, routeResult, routeId);
 					menuCards.add(card);
 					cardsContainer.addView(card.build(mapActivity));
@@ -451,14 +453,14 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		List<RouteDirectionInfo> routeDirections = routingHelper.getRouteDirections();
 		for (int i = 0; i < routeDirections.size(); i++) {
 			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
-			View.OnClickListener onClickListener = createRouteDirectionInfoViewClickListener(i, routeDirectionInfo);
+			OnClickListener onClickListener = createRouteDirectionInfoViewClickListener(i, routeDirectionInfo);
 			View view = getRouteDirectionView(i, cardsContainer, routeDirectionInfo, routeDirections, onClickListener);
 			cardsContainer.addView(view);
 		}
 	}
 
-	private View.OnClickListener createRouteDirectionInfoViewClickListener(final int directionInfoIndex, final RouteDirectionInfo routeDirectionInfo) {
-		return new View.OnClickListener() {
+	private OnClickListener createRouteDirectionInfoViewClickListener(final int directionInfoIndex, final RouteDirectionInfo routeDirectionInfo) {
+		return new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Location loc = routingHelper.getLocationFromRouteDirection(routeDirectionInfo);
@@ -573,7 +575,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				!nightMode ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
 	}
 
-	private void buildSegmentItem(View view, TransportRoutePlanner.TransportRouteResultSegment segment, long startTime, View.OnClickListener listener) {
+	private void buildSegmentItem(View view, TransportRoutePlanner.TransportRouteResultSegment segment, long startTime, OnClickListener listener) {
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
 		TransportStop startStop = stops.get(0);
@@ -670,7 +672,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		return infoContainer;
 	}
 
-	private void buildTransportRouteRow(ViewGroup parent, TransportRoutePlanner.TransportRouteResult routeResult, View.OnClickListener listener, boolean showDivider) {
+	private void buildTransportRouteRow(ViewGroup parent, TransportRouteResult routeResult, OnClickListener listener, boolean showDivider) {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		TargetPointsHelper.TargetPoint startPoint = targetPointsHelper.getPointToStart();
@@ -742,7 +744,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		return title;
 	}
 
-	private void buildStartItem(View view, TargetPointsHelper.TargetPoint start, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, View.OnClickListener listener) {
+	private void buildStartItem(View view, TargetPointsHelper.TargetPoint start, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, OnClickListener listener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer();
@@ -793,7 +795,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		container.addView(walkLineImage);
 	}
 
-	private void buildDestinationItem(View view, TargetPointsHelper.TargetPoint destination, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, View.OnClickListener listener) {
+	private void buildDestinationItem(View view, TargetPointsHelper.TargetPoint destination, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, OnClickListener listener) {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
@@ -840,7 +842,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void buildCollapsableRow(final View view, final Spannable title, Spannable secondaryText, boolean collapsable,
-	                                final MenuBuilder.CollapsableView collapsableView, View.OnClickListener onClickListener) {
+	                                final MenuBuilder.CollapsableView collapsableView, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -886,7 +888,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContenView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
-			ll.setOnClickListener(new View.OnClickListener() {
+			ll.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					LinearLayout contentView = (LinearLayout) collapsableView.getContenView();
@@ -917,7 +919,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void buildStartStopRow(final View view, Drawable icon, String timeText, TransportStopRoute transportStopRoute,
-	                              final Spannable title, Spannable secondaryText, View.OnClickListener onClickListener) {
+	                              final Spannable title, Spannable secondaryText, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -1003,7 +1005,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	public void buildEndStopRow(final View view, Drawable icon, String timeText, final Spannable title, Spannable secondaryText, View.OnClickListener onClickListener) {
+	public void buildEndStopRow(final View view, Drawable icon, String timeText, final Spannable title, Spannable secondaryText, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1085,7 +1087,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		app.getGeocodingLookupService().lookupAddress(addressLookupRequest);
 	}
 
-	public void buildWalkRow(final View view, final Spannable title, View.OnClickListener onClickListener, LinearLayout imagesContainer) {
+	public void buildWalkRow(final View view, final Spannable title, OnClickListener onClickListener, LinearLayout imagesContainer) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1132,7 +1134,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	public void buildStartRow(final View view, Drawable icon, String timeText, final Spannable title, View.OnClickListener onClickListener, LinearLayout imagesContainer) {
+	public void buildStartRow(final View view, Drawable icon, String timeText, final Spannable title, OnClickListener onClickListener, LinearLayout imagesContainer) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1195,7 +1197,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void buildDestinationRow(final View view, String timeText, final Spannable title, Spannable secondaryText,
-	                                LatLon location, View.OnClickListener onClickListener, LinearLayout imagesContainer) {
+	                                LatLon location, OnClickListener onClickListener, LinearLayout imagesContainer) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1267,7 +1269,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	private void buildIntermediateRow(final View view, Drawable icon, final Spannable title, View.OnClickListener onClickListener) {
+	private void buildIntermediateRow(final View view, Drawable icon, final Spannable title, OnClickListener onClickListener) {
 
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1540,7 +1542,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		UiUtilities iconsCache = app.getUIUtilities();
 		ImageButton printRoute = (ImageButton) view.findViewById(R.id.print_route);
 		printRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gprint_dark));
-		printRoute.setOnClickListener(new View.OnClickListener() {
+		printRoute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				print();
@@ -1549,7 +1551,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 		ImageButton saveRoute = (ImageButton) view.findViewById(R.id.save_as_gpx);
 		saveRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gsave_dark));
-		saveRoute.setOnClickListener(new View.OnClickListener() {
+		saveRoute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MapActivityActions.createSaveDirections(getActivity(), routingHelper).show();
@@ -1558,7 +1560,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 		ImageButton shareRoute = (ImageButton) view.findViewById(R.id.share_as_gpx);
 		shareRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
-		shareRoute.setOnClickListener(new View.OnClickListener() {
+		shareRoute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
@@ -1602,7 +1604,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public View getRouteDirectionView(int position, ViewGroup parent, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo, View.OnClickListener onClickListener) {
+	public View getRouteDirectionView(int position, ViewGroup parent, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
