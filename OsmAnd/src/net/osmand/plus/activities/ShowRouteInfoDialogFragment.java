@@ -75,6 +75,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -100,8 +101,8 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatistics;
 import net.osmand.router.RouteStatistics.Incline;
-import net.osmand.router.TransportRoutePlanner;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -575,7 +576,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				!nightMode ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
 	}
 
-	private void buildSegmentItem(View view, TransportRoutePlanner.TransportRouteResultSegment segment, long startTime, OnClickListener listener) {
+	private void buildSegmentItem(View view, TransportRouteResultSegment segment, long startTime, OnClickListener listener) {
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
 		TransportStop startStop = stops.get(0);
@@ -675,15 +676,15 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	private void buildTransportRouteRow(ViewGroup parent, TransportRouteResult routeResult, OnClickListener listener, boolean showDivider) {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		TargetPointsHelper.TargetPoint startPoint = targetPointsHelper.getPointToStart();
-		TargetPointsHelper.TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
+		TargetPoint startPoint = targetPointsHelper.getPointToStart();
+		TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
 		long startTime = System.currentTimeMillis() / 1000;
 
-		List<TransportRoutePlanner.TransportRouteResultSegment> segments = routeResult.getSegments();
+		List<TransportRouteResultSegment> segments = routeResult.getSegments();
 		boolean previousWalkItemUsed = false;
 
 		for (int i = 0; i < segments.size(); i++) {
-			TransportRoutePlanner.TransportRouteResultSegment segment = segments.get(i);
+			TransportRouteResultSegment segment = segments.get(i);
 			long walkTime = (long) getWalkTime(segment.walkDist, routeResult.getWalkSpeed());
 
 			if (i == 0) {
@@ -711,7 +712,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				walkTime = (long) getWalkTime(finishWalkDist, routeResult.getWalkSpeed());
 				startTime += walkTime;
 				if (i < segments.size() - 1) {
-					TransportRoutePlanner.TransportRouteResultSegment nextSegment = segments.get(i + 1);
+					TransportRouteResultSegment nextSegment = segments.get(i + 1);
 					if (nextSegment.walkDist > 0) {
 						finishWalkDist += nextSegment.walkDist;
 						walkTime += getWalkTime(nextSegment.walkDist, routeResult.getWalkSpeed());
@@ -744,7 +745,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		return title;
 	}
 
-	private void buildStartItem(View view, TargetPointsHelper.TargetPoint start, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, OnClickListener listener) {
+	private void buildStartItem(View view, TargetPoint start, long startTime, TransportRouteResultSegment segment, double walkSpeed, OnClickListener listener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer();
@@ -795,7 +796,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		container.addView(walkLineImage);
 	}
 
-	private void buildDestinationItem(View view, TargetPointsHelper.TargetPoint destination, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, OnClickListener listener) {
+	private void buildDestinationItem(View view, TargetPoint destination, long startTime, TransportRouteResultSegment segment, double walkSpeed, OnClickListener listener) {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
