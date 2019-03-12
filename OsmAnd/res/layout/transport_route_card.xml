@@ -107,8 +107,7 @@
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_weight="1"
-				android:orientation="horizontal"
-				android:visibility="gone">
+				android:orientation="horizontal">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/show_button_descr"

@@ -487,6 +487,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
 				card.setShowBottomShadow(i == routes.size() - 1);
 				card.setShowTopShadow(i != 0);
+				card.setListener(this);
 				menuCards.add(card);
 			}
 			bottomShadowVisible = routes.size() == 0;
@@ -580,6 +581,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				updateOptionsButtons();
 
 				app.getTargetPointsHelper().restoreTargetPoints(true);
+			} else if (card instanceof PublicTransportCard) {
+				if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
+					setupCards();
+					openMenuHeaderOnly();
+				}
 			}
 		}
 	}

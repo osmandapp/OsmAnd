@@ -67,7 +67,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.osm.edit.Node;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -868,7 +867,17 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	public void showWalkingRouteOnMap(TransportRouteResultSegment startSegment, TransportRouteResultSegment endSegment) {
 		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(startSegment, endSegment);
 		if (walkingRouteSegment != null) {
-			QuadRect rect = getWalkingSegmentRect(walkingRouteSegment);
+			QuadRect rect = walkingRouteSegment.getLocationsRect();
+			if (rect != null) {
+				openMenuHeaderOnly();
+				fitRectOnMap(rect, null, true);
+			}
+		}
+	}
+
+	public void showRouteOnMap(TransportRouteResult result) {
+		if (result != null) {
+			QuadRect rect = app.getTransportRoutingHelper().getTransportRouteRect(result);
 			if (rect != null) {
 				openMenuHeaderOnly();
 				fitRectOnMap(rect, null, true);
@@ -1236,52 +1245,11 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	@Nullable
-	private QuadRect getTransportSegmentRect(@NonNull TransportRouteResultSegment segment) {
-		double left = 0, right = 0;
-		double top = 0, bottom = 0;
-		List<Node> nodes = segment.getNodes();
-		for (Node n : nodes) {
-			if (left == 0 && right == 0) {
-				left = n.getLongitude();
-				right = n.getLongitude();
-				top = n.getLatitude();
-				bottom = n.getLatitude();
-			} else {
-				left = Math.min(left, n.getLongitude());
-				right = Math.max(right, n.getLongitude());
-				top = Math.max(top, n.getLatitude());
-				bottom = Math.min(bottom, n.getLatitude());
-			}
-		}
-		return left == 0 && right == 0 ? null : new QuadRect(left, top, right, bottom);
-	}
-
-	@Nullable
-	private QuadRect getWalkingSegmentRect(@NonNull RouteCalculationResult result) {
-		double left = 0, right = 0;
-		double top = 0, bottom = 0;
-		for (Location p : result.getRouteLocations()) {
-			if (left == 0 && right == 0) {
-				left = p.getLongitude();
-				right = p.getLongitude();
-				top = p.getLatitude();
-				bottom = p.getLatitude();
-			} else {
-				left = Math.min(left, p.getLongitude());
-				right = Math.max(right, p.getLongitude());
-				top = Math.max(top, p.getLatitude());
-				bottom = Math.min(bottom, p.getLatitude());
-			}
-		}
-		return left == 0 && right == 0 ? null : new QuadRect(left, top, right, bottom);
-	}
-
 	private void showOnMap(@NonNull LatLon latLon) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int currentZoom = mapActivity.getMapView().getZoom();
-			mapActivity.getMapView().getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), Math.max(13, currentZoom), true);
+			mapActivity.getMapView().getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), Math.max(15, currentZoom), true);
 		}
 	}
 

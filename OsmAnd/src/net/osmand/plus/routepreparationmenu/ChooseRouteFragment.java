@@ -19,28 +19,27 @@ import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.edit.Node;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseRouteFragment extends BaseOsmAndFragment {
+public class ChooseRouteFragment extends BaseOsmAndFragment implements CardListener {
 
 	public static final String TAG = "ChooseRouteFragment";
 
@@ -50,6 +49,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 	private View view;
 	private LockableViewPager viewPager;
 	private ImageButton myLocButtonView;
+	private List<PublicTransportCard> routeCards = new ArrayList<>();
 
 	private boolean portrait;
 	private boolean nightMode;
@@ -58,21 +58,21 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		mapActivity = (MapActivity) getActivity();
+		mapActivity = (MapActivity) requireActivity();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		map = getMapActivity().getMapView();
-		List<TransportRouteResult> routes = getMyApplication().getTransportRoutingHelper().getRoutes();
+		OsmandApplication app = mapActivity.getMyApplication();
+		List<TransportRouteResult> routes = app.getTransportRoutingHelper().getRoutes();
 		if (routes != null && !routes.isEmpty()) {
 			view = inflater.inflate(R.layout.fragment_show_all_routes, null);
 			viewPager = view.findViewById(R.id.pager);
 
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 
-			final List<PublicTransportCard> routeCards = new ArrayList<>();
 			for (int i = 0; i < routes.size(); i++) {
 				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
-				card.setSecondButtonVisible(true);
+				card.setListener(this);
 				card.setShowTopShadow(false);
 				card.setShowBottomShadow(false);
 				routeCards.add(card);
@@ -91,11 +91,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 				public void onPageSelected(int position) {
 					mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(routeCards.get(position).getRouteId());
 					mapActivity.refreshMap();
+					for (PublicTransportCard card : routeCards) {
+						card.update();
+					}
 				}
 			});
 
 			if (!portrait) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(getMyApplication(), 200f));
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(app, 200f));
 				params.gravity = Gravity.BOTTOM;
 				viewPager.setLayoutParams(params);
 			}
@@ -154,43 +157,20 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 	}
 
 	private void adjustMapPosition() {
-		RoutingHelper rh = mapActivity.getRoutingHelper();
-		OsmandApplication app = mapActivity.getMyApplication();
-		TransportRoutingHelper transportRoutingHelper = rh.getTransportRoutingHelper();
-		if (getMapActivity().getMapView() != null) {
-			Location lt = rh.getLastProjection();
-			if (lt == null) {
-				lt = app.getTargetPointsHelper().getPointToStartLocation();
-			}
-			if (lt != null) {
-				double left = lt.getLongitude(), right = lt.getLongitude();
-				double top = lt.getLatitude(), bottom = lt.getLatitude();
-				List<Location> list = rh.getCurrentCalculatedRoute();
-				for (Location l : list) {
-					left = Math.min(left, l.getLongitude());
-					right = Math.max(right, l.getLongitude());
-					top = Math.max(top, l.getLatitude());
-					bottom = Math.min(bottom, l.getLatitude());
-				}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandMapTileView mapView = mapActivity.getMapView();
+			if (mapView != null) {
+				RoutingHelper rh = mapActivity.getRoutingHelper();
+				OsmandApplication app = mapActivity.getMyApplication();
+				TransportRoutingHelper transportRoutingHelper = rh.getTransportRoutingHelper();
+
+				QuadRect rect = null;
 				TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
 				if (result != null) {
-					for (TransportRouteResultSegment segment : result.getSegments()) {
-						for (Node n : segment.getNodes()) {
-							left = Math.min(left, n.getLongitude());
-							right = Math.max(right, n.getLongitude());
-							top = Math.max(top, n.getLatitude());
-							bottom = Math.min(bottom, n.getLatitude());
-						}
-					}
+					rect = transportRoutingHelper.getTransportRouteRect(result);
 				}
-				List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for (TargetPointsHelper.TargetPoint l : targetPoints) {
-					left = Math.min(left, l.getLongitude());
-					right = Math.max(right, l.getLongitude());
-					top = Math.max(top, l.getLatitude());
-					bottom = Math.min(bottom, l.getLatitude());
-				}
-				RotatedTileBox tb = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
 				int tileBoxWidthPx = 0;
 				int tileBoxHeightPx = 0;
 
@@ -200,7 +180,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 					int fHeight = viewPager.getHeight() + AndroidUtils.getStatusBarHeight(app);
 					tileBoxHeightPx = tb.getPixHeight() - fHeight;
 				}
-				getMapActivity().getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+				if (rect != null) {
+					mapView.fitRectToMap(rect.left, rect.right, rect.top, rect.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+				}
 			}
 		}
 	}
@@ -302,6 +284,21 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		if (card instanceof PublicTransportCard) {
+			if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
+				for (PublicTransportCard transportCard : routeCards) {
+					transportCard.update();
+				}
+			}
+		}
+	}
+
 	private class ViewsPagerAdapter extends PagerAdapter {
 
 		private List<PublicTransportCard> cards;
@@ -338,29 +335,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment {
 		@NonNull
 		@Override
 		public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-
 			View view = createPageView(position);
 			view.setBackgroundDrawable(null);
 			view.setBackgroundResource(R.drawable.route_cards_topsides_light);
-			view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (position < cards.size()) {
-						int routeId = cards.get(position).getRouteId();
-						mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(routeId);
-						mapActivity.getMapView().refreshMap(true);
-						ShowRouteInfoDialogFragment.showInstance(mapActivity, routeId);
-					}
-				}
-			});
-			view.findViewById(R.id.show_button).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					adjustMapPosition();
-				}
-			});
 			container.addView(view, 0);
-
 			return view;
 		}
 
