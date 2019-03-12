@@ -680,7 +680,7 @@
     <string name="back_right">hacia atrás a la derecha</string>
     <string name="back">hacia atrás</string>
     <string name="back_left">hacia atrás a la izquierda</string>
-    <string name="left">a la izquierda</string>
+    <string name="left">restante(s)</string>
     <string name="front_left">hacia atrás a la izquierda</string>
     <string name="oclock">en punto</string>
     <string name="towards">hacia</string>
@@ -1304,7 +1304,7 @@
     <string name="local_map_names">Nombres locales</string>
     <string name="lang_sw">Suajili</string>
     <string name="lang_he">Hebreo</string>
-    <string name="forward">Siguiente</string>
+    <string name="forward">de frente</string>
     <string name="home">Panel de control</string>
     <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico, si la grabación GPX está activada.</string>
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
