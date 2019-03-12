@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="transfers_size">%1$d transfers</string>
     <string name="rendering_attr_surface_unpaved_name">Unpaved</string>
     <string name="rendering_attr_surface_sand_name">Sand</string>
     <string name="rendering_attr_surface_grass_name">Grass</string>

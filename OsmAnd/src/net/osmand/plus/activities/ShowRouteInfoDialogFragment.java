@@ -1013,6 +1013,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
 						collapsableView.setCollapsed(false);
 					}
+					doAfterMenuStateChange(0, 0);
 				}
 			});
 			if (collapsableView.isCollapsed()) {

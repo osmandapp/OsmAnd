@@ -26,6 +26,7 @@ import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
+import net.osmand.util.Algorithms;
 
 import java.util.Iterator;
 import java.util.List;
@@ -127,10 +128,10 @@ public class PublicTransportCard extends BaseCard {
 	private SpannableString getFirstLineDescrSpan() {
 		List<TransportRouteResultSegment> segments = routeResult.getSegments();
 		String name = segments.get(0).getStart().getName();
-		String firstLine = app.getString(R.string.route_from) + " " + name;
+		String firstLine = Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_from)) + " " + name;
 
 		if (segments.size() > 1) {
-			firstLine += ", " + app.getString(R.string.transfers) + ": " + (segments.size() - 1);
+			firstLine += "  •  " + app.getString(R.string.transfers_size, (segments.size() - 1));
 		}
 
 		SpannableString firstLineDesc = new SpannableString(firstLine);
@@ -149,19 +150,21 @@ public class PublicTransportCard extends BaseCard {
 		String walkTime = OsmAndFormatter.getFormattedDuration((int) routeResult.getWalkTime(), app);
 		String walkDistance = OsmAndFormatter.getFormattedDistance((int) routeResult.getWalkDist(), app);
 
-		String secondLine = app.getString(R.string.route_way) + ": " + travelTime + "  •  " + app.getString(R.string.on_foot) + ": " + walkTime + "  •  " + walkDistance;
+		String secondLine = travelTime + "  •  " + app.getString(R.string.on_foot) + " " + walkTime + ", " + walkDistance;
 
 		SpannableString secondLineDesc = new SpannableString(secondLine);
 
+		int startTravelTime = secondLine.indexOf(travelTime);
 		secondLineDesc.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)),
-				secondLine.indexOf(travelTime), secondLine.indexOf(travelTime) + travelTime.length(), 0);
+				startTravelTime, startTravelTime + travelTime.length(), 0);
 		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface),
-				secondLine.indexOf(travelTime), secondLine.indexOf(travelTime) + travelTime.length(), 0);
+				startTravelTime, startTravelTime + travelTime.length(), 0);
 
+		int startWalkTime = secondLine.lastIndexOf(walkTime);
 		secondLineDesc.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)),
-				secondLine.indexOf(walkTime), secondLine.indexOf(walkTime) + walkTime.length(), 0);
+				startWalkTime, startWalkTime + walkTime.length(), 0);
 		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface),
-				secondLine.indexOf(walkTime), secondLine.indexOf(walkTime) + walkTime.length(), 0);
+				startWalkTime, startWalkTime + walkTime.length(), 0);
 
 		return secondLineDesc;
 	}
