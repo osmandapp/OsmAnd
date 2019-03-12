@@ -1930,7 +1930,7 @@
     <string name="si_m_s">Метров в секунду</string>
     <string name="si_min_km">Минут на километр</string>
     <string name="si_min_m">Минут на милю</string>
-    <string name="si_nm_h">Морская миля в час (узел)</string>
+    <string name="si_nm_h">Морских миль в час (узлов)</string>
     <string name="min_mile">мин/м</string>
     <string name="min_km">мин/км</string>
     <string name="m_s">м/с</string>

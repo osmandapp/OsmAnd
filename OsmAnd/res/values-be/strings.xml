@@ -44,7 +44,7 @@
     <string name="context_menu_item_directions_to">Маршрут да</string>
     <string name="context_menu_item_directions_from">Маршрут адсюль</string>
     <string name="route_descr_map_location">Мапа: </string>
-    <string name="route_descr_lat_lon">%1$.3f шыр., %2$.3f даў.</string>
+    <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
     <string name="route_to">Да:</string>
     <string name="route_via">Праз:</string>
     <string name="route_from">З:</string>
@@ -2458,8 +2458,8 @@
     <string name="of">%1$d з %2$d</string>
     <string name="ascent_descent">Пад\'ём/Cпуск</string>
     <string name="moving_time">Час руху</string>
-    <string name="max_min">Макс./Мін.</string>
-    <string name="min_max">Мін./Макс.</string>
+    <string name="max_min">Макс/Мін</string>
+    <string name="min_max">Мін/Макс</string>
     <string name="rendering_value_translucent_pink_name">Паўпразрысты ружовы</string>
     <string name="measurement_tool_action_bar">Прагляд мапы і даданне пунктаў</string>
     <string name="measurement_tool">Вымяраць адлегласць</string>
@@ -2930,4 +2930,21 @@
     <string name="quick_action_gpx_tracks_show">Паказаць GPX-сляды</string>
     <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Грамадскі транспарт OsmAnd Live</string>
+    <string name="release_3_3">• Новы экран «Напрамкі»: адлюстроўвае кнопкі напрамкаў дахаты і на працу, скарот «папярэдні маршрут», спіс актыўных GPX-слядоў і адзнак, гісторыю пошуку
+\n
+\n • Дадатковыя звесткі пад «Дэталі маршруту»: тыпы дарог, пакрыццё, пакатасць, гладкасць
+\n
+\n • Навігацыя грамадскага транспарту падтрымлівае ўсе тыпы: метро, аўтобус, трамвай і іншыя
+\n
+\n • Новыя хуткія дзеянні для паказу/схову слядоў і рэжымаў дзень/ноч
+\n
+\n • Выпраўленыя вобласці, якія выглядалі як затопленыя, у Германіі, Паўднёваё Афрыцы, Квебеку
+\n
+\n • Дадатковая падтрымка для KML- і KMZ-імпарту
+\n
+\n • Выпраўлена падзенне пры адкрыцці некаторых прыпынкаў грамадскага транспарту
+\n
+\n • Выдалена аналітыка Facebook і Firebase са свабоднай версіі (OsmAnd+ не ўключае яе)
+\n
+\n</string>
 </resources>

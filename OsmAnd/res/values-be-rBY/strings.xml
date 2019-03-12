@@ -366,7 +366,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="context_menu_item_directions_to">Maršrut da</string>
     <string name="context_menu_item_directions_from">Maršrut adsiul</string>
     <string name="route_descr_map_location">Mapa:</string>
-    <string name="route_descr_lat_lon">%1$.3f šyr., %2$.3f daŭ.</string>
+    <string name="route_descr_lat_lon">Š %1$.3f D %2$.3f</string>
     <string name="route_descr_destination">Punkt pryznačeńnia</string>
     <string name="route_to">Da:</string>
     <string name="route_via">Praz:</string>
@@ -2453,8 +2453,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Pad\'jom/Cpusk</string>
     <string name="moving_time">Čas ruchu</string>
-    <string name="max_min">Maks./Min.</string>
-    <string name="min_max">Min./Maks.</string>
+    <string name="max_min">Maks/Min</string>
+    <string name="min_max">Min/Maks</string>
     <string name="rendering_value_translucent_pink_name">Paŭprazrysty ružovy</string>
     <string name="measurement_tool">Vymiarać adlehłaść</string>
     <string name="quick_action_resume_pause_navigation">Prypynić/adnavić navihacyju</string>
@@ -2904,7 +2904,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="step_by_step">Krok za krokam</string>
     <string name="road_types">Typy daroh</string>
     <string name="exit_at">Vychad na</string>
-    <string name="sit_on_the_stop">Siadźcie na prypynku</string>
+    <string name="sit_on_the_stop">Pasadka na prypynku</string>
     <string name="shared_string_swap">Pamianiać</string>
     <string name="show_more">Pakazać boĺš</string>
     <string name="tracks_on_map">Sliady na mapie</string>
@@ -2921,4 +2921,22 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="route_surface_stat_container">Pavierchnia</string>
     <string name="route_smoothness_stat_container">Hladkasć</string>
     <string name="route_steepness_stat_container">Pakatasć</string>
+    <string name="release_3_3">• Novy ekran «Napramki»: adliustroŭvaje knopki napramkaŭ dachaty i na pracu, skarot «papiaredni maršrut», spis aktyŭnych GPX-sliadoŭ i adznak, historyju pošuku
+\n
+\n • Dadatkovyja zviestki pad «Detali maršrutu»: typy daroh, pakryccio, pakatasć, hladkasć
+\n
+\n • Navihacyja hramadskaha transpartu padtrymlivaje ŭsie typy: mietro, aŭtobus, tramvaj i inšyja
+\n
+\n • Novyja chutkija dziejanni dlia pakazu/schovu sliadoŭ i režymaŭ dzień/noč
+\n
+\n • Vypraŭlienyja voblasci, jakija vyhliadali jak zatoplienyja, u Hiermanii, Paŭdniovajo Afrycy, Kviebieku
+\n
+\n • Dadatkovaja padtrymka dlia KML- i KMZ-impartu
+\n
+\n • Vypraŭliena padziennie pry adkrycci niekatorych prypynkaŭ hramadskaha transpartu
+\n
+\n • Vydaliena analityka Facebook i Firebase sa svabodnaj viersii (OsmAnd+ nie ŭkliučaje jaje)
+\n</string>
+    <string name="use_osm_live_public_transport_description">Ukliučyć hramadski transpart dlia zmien OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Hramadski transpart OsmAnd Live</string>
 </resources>

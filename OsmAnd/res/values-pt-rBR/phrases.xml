@@ -3549,7 +3549,7 @@
     <string name="poi_denotation">Denotação</string>
     <string name="poi_denotation_natural_monument">Monumento natural</string>
     <string name="poi_denotation_landmark">Ponto de referência</string>
-    <string name="poi_park_ride">Parque de estacionamento dissuasor</string>
+    <string name="poi_park_ride">Estacionamento integrado</string>
     <string name="poi_park_ride_yes">Sim</string>
     <string name="poi_park_ride_train">Trem</string>
     <string name="poi_park_ride_bus">Ônibus</string>
@@ -3560,4 +3560,19 @@
     <string name="poi_generator_source_biomass">Fonte de energia: biomassa</string>
     <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Perigo</string>
+    <string name="poi_rtsa_scale_filter">Categoria de dificuldade</string>
+    <string name="poi_rtsa_scale_nc">н/к</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+    <string name="poi_rtsa_scale_1a">1А</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1b">1B</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
+    <string name="poi_rtsa_scale_2a">2А</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+    <string name="poi_rtsa_scale_2b">2B</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
+    <string name="poi_rtsa_scale_3a">3А</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
+    <string name="poi_rtsa_scale_3b">3B</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
 </resources>
