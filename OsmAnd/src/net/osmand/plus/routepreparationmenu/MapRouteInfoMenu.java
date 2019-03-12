@@ -1243,7 +1243,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			viaLayoutDivider.setVisibility(View.VISIBLE);
 			((TextView) mainView.findViewById(R.id.ViaView)).setText(via);
 			((TextView) mainView.findViewById(R.id.ViaSubView)).setText(mapActivity.getString(R.string.intermediate_destinations) + " (" +
-					mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size()) + ")";
+					mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() + ")");
 		}
 		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
 
