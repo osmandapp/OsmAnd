@@ -23,7 +23,6 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.ProgressBar;
@@ -33,6 +32,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -335,6 +335,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			updateInfo();
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			if (!wasDrawerDisabled) {
@@ -841,11 +842,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		textViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
 		textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
 		textViewExProgress.invalidate();
-		ImageViewExProgress imageViewExProgress = (ImageViewExProgress) view.findViewById(R.id.start_icon);
-		imageViewExProgress.percent = progress / 100f;
-		imageViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
-		imageViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
-		imageViewExProgress.invalidate();
 	}
 
 	public void hideRouteCalculationProgressBar() {
@@ -874,14 +870,16 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			textViewExProgress.color1 = ContextCompat.getColor(mapActivity, nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light);
 			textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
 
-			ImageViewExProgress imageViewExProgress = (ImageViewExProgress) view.findViewById(R.id.start_icon);
-			imageViewExProgress.color1 = ContextCompat.getColor(mapActivity, nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light);
-			imageViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
-			((ImageView) view.findViewById(R.id.start_icon)).setImageResource(R.drawable.ic_action_start_navigation);
+			boolean publicTransportMode = app.getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
 			if (menu.isRouteCalculated()) {
-				AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
+				if (publicTransportMode) {
+					AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+					textViewExProgress.color1 = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.route_info_cancel_button_color_light);
+				} else {
+					AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
+					textViewExProgress.color1 = ContextCompat.getColor(mapActivity, nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light);
+				}
 				textViewExProgress.percent = 1;
-				imageViewExProgress.percent = 1;
 			}
 		}
 	}
@@ -935,6 +933,8 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
 				R.color.divider_light, R.color.divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
+				R.color.divider_light, R.color.divider_dark);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), nightMode,
 				R.color.divider_light, R.color.divider_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), nightMode,
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);

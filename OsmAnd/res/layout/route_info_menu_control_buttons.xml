@@ -30,6 +30,11 @@
 
 	</FrameLayout>
 
+	<View
+		android:id="@+id/controls_divider"
+		android:layout_width="1dp"
+		android:layout_height="match_parent" />
+
 	<FrameLayout
 		android:id="@+id/start_button"
 		android:layout_width="0dp"
@@ -47,14 +52,6 @@
 			tools:progress="60"
 			tools:progressDrawable="?attr/size_progress_bar" />
 
-		<net.osmand.plus.widgets.ImageViewExProgress
-			android:id="@+id/start_icon"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:padding="@dimen/route_info_icon_padding_left"
-			android:scaleType="fitStart"
-			tools:src="@drawable/ic_action_start_navigation" />
-
 		<net.osmand.plus.widgets.TextViewExProgress
 			android:id="@+id/start_button_descr"
 			android:layout_width="match_parent"
@@ -62,13 +59,15 @@
 			android:background="?attr/selectableItemBackground"
 			android:ellipsize="end"
 			android:gravity="center"
+			android:layout_gravity="center"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:maxLines="1"
-			android:paddingLeft="16dp"
-			android:paddingRight="16dp"
+			android:paddingLeft="@dimen/route_info_icon_padding_left"
+			android:paddingRight="@dimen/route_info_icon_padding_left"
 			android:text="@string/shared_string_control_start"
 			android:textSize="@dimen/text_button_text_size"
 			osmand:typeface="@string/font_roboto_medium"
+			tools:drawableLeft="@drawable/ic_action_start_navigation"
 			tools:ignore="UnusedAttribute" />
 
 	</FrameLayout>

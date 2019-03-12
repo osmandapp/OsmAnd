@@ -777,18 +777,24 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextView startButtonText = (TextView) mainView.findViewById(R.id.start_button_descr);
+		boolean publicTransportMode = routingHelper.getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
+		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
 		if (isRouteCalculated()) {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
 			int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
 			startButtonText.setTextColor(ContextCompat.getColor(app, color));
-			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+			Drawable icon = app.getUIUtilities().getIcon(iconId, color);
+			startButtonText.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 		} else {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
 			int color = R.color.description_font_and_bottom_sheet_icons;
 			startButtonText.setTextColor(ContextCompat.getColor(app, color));
-			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+			Drawable icon = app.getUIUtilities().getIcon(iconId, color);
+			startButtonText.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 		}
-		if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
+		if (publicTransportMode) {
+			startButtonText.setText(R.string.shared_string_show_on_map);
+		} else if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
 			startButtonText.setText(R.string.shared_string_continue);
 		} else {
 			startButtonText.setText(R.string.shared_string_control_start);

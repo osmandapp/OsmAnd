@@ -543,11 +543,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		textViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
 		textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
 		textViewExProgress.invalidate();
-		ImageViewExProgress imageViewExProgress = (ImageViewExProgress) view.findViewById(R.id.start_icon);
-		imageViewExProgress.percent = progress / 100f;
-		imageViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
-		imageViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
-		imageViewExProgress.invalidate();
 	}
 
 	public void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb) {
