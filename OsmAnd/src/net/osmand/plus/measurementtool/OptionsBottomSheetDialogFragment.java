@@ -54,7 +54,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		items.add(new DividerHalfItem(getContext()));
 
-		if (addLineMode) {
+		if (addLineMode && !snapToRoadEnabled) {
 			BaseBottomSheetItem saveAsNewSegmentItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
 					.setTitle(getString(R.string.shared_string_save))

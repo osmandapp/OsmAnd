@@ -42,7 +42,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				if (activity instanceof MapActivity) {
-					ShowRouteInfoDialogFragment.showInstance((MapActivity) activity, -1);
+					ShowRouteInfoDialogFragment.showInstance((MapActivity) activity);
 				}
 			}
 		});
