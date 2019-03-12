@@ -126,8 +126,11 @@ public class PublicTransportCard extends BaseCard {
 	}
 
 	private SpannableString getFirstLineDescrSpan() {
+		String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		boolean transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+
 		List<TransportRouteResultSegment> segments = routeResult.getSegments();
-		String name = segments.get(0).getStart().getName();
+		String name = segments.get(0).getStart().getName(preferredMapLang, transliterateNames);
 		String firstLine = Algorithms.capitalizeFirstLetter(app.getString(R.string.shared_string_from)) + " " + name;
 
 		if (segments.size() > 1) {

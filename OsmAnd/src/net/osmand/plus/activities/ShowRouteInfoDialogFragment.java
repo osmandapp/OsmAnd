@@ -170,12 +170,18 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	private GpxSelectionHelper.GpxDisplayItem gpxItem;
 	private List<BaseCard> menuCards = new ArrayList<>();
 
+	private String preferredMapLang;
+	private boolean transliterateNames;
+
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		app = getMyApplication();
 		final MapActivity mapActivity = requireMapActivity();
 		routingHelper = app.getRoutingHelper();
+
+		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
 		view = inflater.inflate(R.layout.route_info_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
@@ -617,7 +623,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
 		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		SpannableString title = new SpannableString(startStop.getName());
+		SpannableString title = new SpannableString(startStop.getName(preferredMapLang, transliterateNames));
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -679,7 +685,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		if (spaceIndex != -1) {
 			secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
-		title = new SpannableString(endStop.getName());
+		title = new SpannableString(endStop.getName(preferredMapLang, transliterateNames));
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -1100,7 +1106,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			routeTypeView.setLayoutParams(routeTypeParams);
 			routeTypeView.setTextSize(16);
 			AndroidUtils.setTextSecondaryColor(app, routeTypeView, nightMode);
-			routeTypeView.setText(transportStopRoute.desc);
+			routeTypeView.setText(transportStopRoute.getDescription(app));
 			llText.addView(routeTypeView);
 
 			View routeBadge = createRouteBadge(mapActivity, transportStopRoute, nightMode);
@@ -1474,7 +1480,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		Drawable icon = getContentIcon(drawableResId);
 		for (int i = 0; i < stops.size(); i++) {
 			final TransportStop stop = stops.get(i);
-			buildIntermediateRow(view, icon, new SpannableString(stop.getName()), new OnClickListener() {
+			buildIntermediateRow(view, icon, new SpannableString(stop.getName(preferredMapLang, transliterateNames)), new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					showLocationOnMap(stop.getLocation());

@@ -49,6 +49,16 @@ public class TransportStopRoute {
 		return desc;
 	}
 
+	// TODO: [Hot fix] - Move changes to upper method later
+	public String getDescription(OsmandApplication ctx) {
+		String preferredMapLang = ctx.getSettings().MAP_PREFERRED_LOCALE.get();
+		boolean transliterateNames = ctx.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		if (route != null) {
+			return route.getName(preferredMapLang, transliterateNames);
+		}
+		return "";
+	}
+
 	public int calculateZoom(int startPosition, RotatedTileBox currentRotatedTileBox) {
 		RotatedTileBox cp = currentRotatedTileBox.copy();
 		boolean notContains = true;
