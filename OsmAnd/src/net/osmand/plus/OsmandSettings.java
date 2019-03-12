@@ -16,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.util.Pair;
 
+import java.util.HashSet;
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -2965,5 +2966,8 @@ public class OsmandSettings {
 			this.name = name;
 		}
 	}
+
+	public Set<Integer> gpxTabOpenedGroups = new HashSet<>();
+	public int gpxTabGroupsCount = 0;
 
 }

@@ -36,6 +36,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
@@ -127,6 +128,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private View footerView;
 	private boolean importing = false;
 	private View emptyView;
+	private Set<Integer> openedGroups;
+	private int oldGroupsCount;
 
 	@Override
 	public void onAttach(Context activity) {
@@ -139,6 +142,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		asyncLoader = new LoadGpxTask();
 		selectedGpxHelper = ((OsmandApplication) activity.getApplicationContext()).getSelectedGpxHelper();
 		allGpxAdapter = new GpxIndexesAdapter(getActivity());
+		openedGroups = new HashSet<>();
 		setAdapter(allGpxAdapter);
 	}
 
@@ -180,6 +184,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		openedGroups.clear();
+
+		if (getActivity() != null) {
+			openedGroups.addAll(((FavoritesActivity) getActivity()).getMyApplication().getSettings().gpxTabOpenedGroups);
+			oldGroupsCount = (((FavoritesActivity) getActivity()).getMyApplication().getSettings().gpxTabGroupsCount);
+		} else {
+			oldGroupsCount = 0;
+		}
 
 		if (!importing) {
 			if (asyncLoader == null || asyncLoader.getResult() == null) {
@@ -201,6 +213,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+		if (getActivity() != null && getActivity() instanceof FavoritesActivity) {
+			((FavoritesActivity) getActivity()).getMyApplication().getSettings().gpxTabOpenedGroups.addAll(openedGroups);
+			((FavoritesActivity) getActivity()).getMyApplication().getSettings().gpxTabGroupsCount = allGpxAdapter.getGroupCount();
+		}
+
 		updateEnable = false;
 		if (operationTask != null) {
 			operationTask.cancel(true);
@@ -374,6 +391,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 
+		listView.setOnGroupClickListener(new OnGroupClickListener() {
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+				if (openedGroups.contains(groupPosition)) {
+					openedGroups.remove((Integer)groupPosition);
+				} else {
+					openedGroups.add(groupPosition);
+				}
+				return false;
+			}
+		});
+
 		return v;
 	}
 
@@ -383,6 +412,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		listView.setBackgroundColor(getResources().getColor(
 				app.getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
 						: R.color.ctx_menu_info_view_bg_dark));
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+
 	}
 
 	public void createCurrentTrackView() {
@@ -915,9 +950,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				((OsmandActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
 			listView.setEmptyView(emptyView);
-			if (allGpxAdapter.getGroupCount() > 0 &&
-					allGpxAdapter.isShowingSelection()) {
+			if (allGpxAdapter.getGroupCount() > 0 && allGpxAdapter.isShowingSelection()) {
 				getExpandableListView().expandGroup(0);
+			}
+
+			if (!Algorithms.isEmpty(openedGroups) && allGpxAdapter.getGroupCount() == oldGroupsCount) {
+				for (Integer pos : openedGroups) {
+					getExpandableListView().expandGroup(pos);
+				}
 			}
 		}
 
