@@ -11,6 +11,49 @@
 	Thx - Hardy
 
 -->
+    <string name="rendering_attr_surface_unpaved_name">Unpaved</string>
+    <string name="rendering_attr_surface_sand_name">Sand</string>
+    <string name="rendering_attr_surface_grass_name">Grass</string>
+    <string name="rendering_attr_surface_grass_paver_name">Grass paver</string>
+    <string name="rendering_attr_surface_ground_name">Ground</string>
+    <string name="rendering_attr_surface_dirt_name">Dirt</string>
+    <string name="rendering_attr_surface_mud_name">Mud</string>
+    <string name="rendering_attr_surface_ice_name">Ice</string>
+    <string name="rendering_attr_surface_salt_name">Salt</string>
+    <string name="rendering_attr_surface_snow_name">Snow</string>
+    <string name="rendering_attr_surface_asphalt_name">Asphalt</string>
+    <string name="rendering_attr_surface_paved_name">Paved</string>
+    <string name="rendering_attr_surface_concrete_name">Concrete</string>
+    <string name="rendering_attr_surface_sett_name">Sett</string>
+    <string name="rendering_attr_surface_cobblestone_name">Cobblestone</string>
+    <string name="rendering_attr_surface_paving_stones_name">Paving stones</string>
+    <string name="rendering_attr_surface_pebblestone_name">Pebblestone</string>
+    <string name="rendering_attr_surface_stone_name">Stone</string>
+    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_wood_name">Wood</string>
+    <string name="rendering_attr_surface_gravel_name">Gravel</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Fine gravel</string>
+    <string name="rendering_attr_surface_compacted_name">Compacted</string>
+    <string name="rendering_attr_smoothness_excellent_name">Excellent</string>
+    <string name="rendering_attr_smoothness_good_name">Good</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Intermediate</string>
+    <string name="rendering_attr_smoothness_bad_name">Bad</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Very bad</string>
+    <string name="rendering_attr_smoothness_horrible_name">Horrible</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Very horrible</string>
+    <string name="rendering_attr_smoothness_impassable_name">Impassable</string>
+    <string name="rendering_attr_highway_class_motorway_name">Motorway</string>
+    <string name="rendering_attr_highway_class_state_road_name">State road</string>
+    <string name="rendering_attr_highway_class_road_name">Road</string>
+    <string name="rendering_attr_highway_class_street_name">Street</string>
+    <string name="rendering_attr_highway_class_service_name">Service</string>
+    <string name="rendering_attr_highway_class_footway_name">Footway</string>
+    <string name="rendering_attr_highway_class_track_name">Track</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Bridleway</string>
+    <string name="rendering_attr_highway_class_steps_name">Steps</string>
+    <string name="rendering_attr_highway_class_path_name">Path</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Cycleway</string>
+    <string name="rendering_attr_undefined_name">Undefined</string>
     <string name="release_3_3">
         • New \'Directions\' screen: Displays Home and Work destination buttons, \'previous route\' shortcut, list of active GPX tracks and markers, search history\n\n
         • Additional info under \'Route details\': road types, surface, steepness, smoothness\n\n
