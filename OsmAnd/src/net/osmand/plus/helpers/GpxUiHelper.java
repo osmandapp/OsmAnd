@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -92,7 +91,6 @@ import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatistics;
 import net.osmand.util.Algorithms;
@@ -1268,8 +1266,7 @@ public class GpxUiHelper {
 	                                              @NonNull HorizontalBarChart mChart,
 	                                              @NonNull RouteStatistics.Statistics<E> routeStatistics,
 	                                              @NonNull GPXTrackAnalysis analysis,
-	                                              boolean useRightAxis,
-	                                              boolean nightMode) {
+	                                              boolean useRightAxis) {
 
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setEnabled(false);
@@ -1290,7 +1287,7 @@ public class GpxUiHelper {
 		for (int i = 0; i < stacks.length; i++) {
 			RouteStatistics.RouteSegmentAttribute segment = segments.get(i);
 			stacks[i] = segment.getDistance() / divX;
-			colors[i] = getColorFromRouteSegmentAttribute(app, segment, nightMode);
+			colors[i] = segment.getColor();
 		}
 		entries.add(new BarEntry(0, stacks));
 		BarDataSet barDataSet = new BarDataSet(entries, "");
@@ -1302,31 +1299,6 @@ public class GpxUiHelper {
 		mChart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
 
 		return dataSet;
-	}
-
-	public static int getColorFromRouteSegmentAttribute(OsmandApplication app, RouteStatistics.RouteSegmentAttribute segment, boolean nightMode) {
-		String colorAttrName = segment.getColorAttrName();
-		String colorName = segment.getColorName();
-		int color = 0;
-		if (colorName != null) {
-			try {
-				color = Color.parseColor(colorName);
-			} catch (Exception e) {
-			}
-		} else if (colorAttrName != null) {
-			color = GpxUiHelper.getColorFromStyle(app, colorAttrName, nightMode);
-		}
-		return color;
-	}
-
-	public static int getColorFromStyle(OsmandApplication app, String colorAttrName, boolean nightMode) {
-		RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
-		RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-		req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-		if (req.searchRenderingAttribute(colorAttrName)) {
-			return req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
-		}
-		return 0;
 	}
 
 	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication ctx,

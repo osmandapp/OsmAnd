@@ -18,15 +18,12 @@ import net.osmand.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatistics;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class RouteInfoCard extends BaseCard {
 
@@ -49,7 +46,7 @@ public class RouteInfoCard extends BaseCard {
 		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 10, 10, true, nightMode);
-		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, routeStatistics, analysis, true, nightMode);
+		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, routeStatistics, analysis, true);
 		chart.setData(barData);
 		LinearLayout container = view.findViewById(R.id.route_items);
 		attachLegend(container, routeStatistics);
@@ -82,9 +79,11 @@ public class RouteInfoCard extends BaseCard {
 		Map<E, RouteStatistics.RouteSegmentAttribute<E>> partition = routeStatistics.getPartition();
 		for (E key : partition.keySet()) {
 			RouteStatistics.RouteSegmentAttribute<E> segment = partition.get(key);
-			int color = GpxUiHelper.getColorFromRouteSegmentAttribute(app, segment, nightMode);
+			int color = segment.getColor();
 			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color);
-			Spannable text = getSpanLegend(key.toString().toLowerCase(), segment);
+			String propertyName = segment.getPropertyName();
+			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
+			Spannable text = getSpanLegend(name, segment);
 
 			TextView legend = new TextView(app);
 			AndroidUtils.setTextPrimaryColor(app, legend, nightMode);

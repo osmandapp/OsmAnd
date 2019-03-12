@@ -600,7 +600,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		if (isAdded()) {
 			final TextViewEx title = (TextViewEx) view.findViewById(R.id.title);
 			int pointsSize = app.getTargetPointsHelper().getAllPoints().size();
-			String text = getString(R.string.shared_string_target_points) + ": " + (pointsSize != 0 ? pointsSize : 1);
+			String text = getString(R.string.shared_string_target_points) + " (" + (pointsSize != 0 ? pointsSize : 1) + ")";
 			title.setText(text);
 		}
 	}

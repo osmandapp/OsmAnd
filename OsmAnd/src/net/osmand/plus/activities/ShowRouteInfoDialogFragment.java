@@ -102,6 +102,7 @@ import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatistics;
 import net.osmand.router.RouteStatistics.Incline;
@@ -508,7 +509,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			elevationDataSet = statisticCard.getElevationDataSet();
 			List<RouteSegmentResult> route = routingHelper.getRoute().getOriginalRoute();
 			if (route != null) {
-				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route);
+				RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+				RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
+				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer,defaultRender, nightMode);
 				GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteClassStatistic(), analysis);

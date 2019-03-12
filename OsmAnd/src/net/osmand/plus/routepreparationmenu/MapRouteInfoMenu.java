@@ -800,6 +800,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 
 		View cancelButton = mainView.findViewById(R.id.cancel_button);
+		TextView cancelButtonText = (TextView) mainView.findViewById(R.id.cancel_button_descr);
+		if (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated() || isTransportRouteCalculated()) {
+			cancelButtonText.setText(R.string.shared_string_dismiss);
+		} else {
+			cancelButtonText.setText(R.string.shared_string_cancel);
+		}
 		AndroidUtils.setBackground(app, cancelButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		cancelButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1236,8 +1242,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			viaLayout.setVisibility(View.VISIBLE);
 			viaLayoutDivider.setVisibility(View.VISIBLE);
 			((TextView) mainView.findViewById(R.id.ViaView)).setText(via);
-			((TextView) mainView.findViewById(R.id.ViaSubView)).setText(mapActivity.getString(R.string.intermediate_destinations) + ": " +
-					mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size());
+			((TextView) mainView.findViewById(R.id.ViaSubView)).setText(mapActivity.getString(R.string.intermediate_destinations) + " (" +
+					mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() + ")");
 		}
 		FrameLayout viaButton = (FrameLayout) mainView.findViewById(R.id.via_button);
 
