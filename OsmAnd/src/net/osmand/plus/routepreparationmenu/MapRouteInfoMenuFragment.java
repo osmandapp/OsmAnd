@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.ApplicationMode;
@@ -37,16 +38,18 @@ import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.widgets.ImageViewExProgress;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 
@@ -335,7 +338,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			updateInfo();
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			if (!wasDrawerDisabled) {
@@ -726,52 +728,48 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRoutePlanningMode() && mapActivity.getMapView() != null) {
-			Location lt = rh.getLastProjection();
-			if (lt == null) {
-				lt = app.getTargetPointsHelper().getPointToStartLocation();
-			}
-			if (lt != null) {
-				double left = lt.getLongitude(), right = lt.getLongitude();
-				double top = lt.getLatitude(), bottom = lt.getLatitude();
-				List<Location> list = rh.getCurrentCalculatedRoute();
-				for (Location l : list) {
-					left = Math.min(left, l.getLongitude());
-					right = Math.max(right, l.getLongitude());
-					top = Math.max(top, l.getLatitude());
-					bottom = Math.min(bottom, l.getLatitude());
-				}
-				if (menu.isTransportRouteCalculated()) {
-					TransportRouteResult result = app.getTransportRoutingHelper().getCurrentRouteResult();
-					if (result != null) {
-						for (TransportRouteResultSegment segment : result.getSegments()) {
-							for (Node n : segment.getNodes()) {
-								left = Math.min(left, n.getLongitude());
-								right = Math.max(right, n.getLongitude());
-								top = Math.max(top, n.getLatitude());
-								bottom = Math.min(bottom, n.getLatitude());
-							}
-						}
+			QuadRect r = new QuadRect(0, 0, 0, 0);
+			if (menu.isTransportRouteCalculated()) {
+				TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+				TransportRouteResult result = transportRoutingHelper.getCurrentRouteResult();
+				if (result != null) {
+					QuadRect transportRouteRect = transportRoutingHelper.getTransportRouteRect(result);
+					if (transportRouteRect != null) {
+						r = transportRouteRect;
 					}
 				}
-				List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for (TargetPointsHelper.TargetPoint l : targetPoints) {
-					left = Math.min(left, l.getLongitude());
-					right = Math.max(right, l.getLongitude());
-					top = Math.max(top, l.getLatitude());
-					bottom = Math.min(bottom, l.getLatitude());
+			} else if (rh.isRouteCalculated()) {
+				Location lt = rh.getLastProjection();
+				if (lt == null) {
+					lt = app.getTargetPointsHelper().getPointToStartLocation();
 				}
-
-				RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
-				int tileBoxWidthPx = 0;
-				int tileBoxHeightPx = 0;
-
-				if (!portrait) {
-					tileBoxWidthPx = tb.getPixWidth() - getWidth();
-				} else {
-					int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(app);
-					tileBoxHeightPx = tb.getPixHeight() - fHeight;
+				if (lt == null) {
+					lt = app.getLocationProvider().getLastKnownLocation();
 				}
-				mapActivity.getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+				if (lt != null) {
+					MapUtils.insetLatLonRect(r, lt.getLatitude(), lt.getLongitude());
+				}
+				List<Location> list = rh.getCurrentCalculatedRoute();
+				for (Location l : list) {
+					MapUtils.insetLatLonRect(r, l.getLatitude(), l.getLongitude());
+				}
+				List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+				for (TargetPoint l : targetPoints) {
+					MapUtils.insetLatLonRect(r, l.getLatitude(), l.getLongitude());
+				}
+			}
+			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+
+			if (!portrait) {
+				tileBoxWidthPx = tb.getPixWidth() - getWidth();
+			} else {
+				int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(app);
+				tileBoxHeightPx = tb.getPixHeight() - fHeight;
+			}
+			if (r.left != 0 && r.right != 0) {
+				mapActivity.getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
 			}
 		}
 	}

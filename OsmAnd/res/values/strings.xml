@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="transfers_size">%1$d transfers</string>
     <string name="add_start_and_end_points">Add start and end points</string>
     <string name="route_add_start_point">Add start point</string>
     <string name="route_descr_select_start_point">Select start point</string>

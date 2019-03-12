@@ -1,6 +1,7 @@
 package net.osmand.plus.routing;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -8,6 +9,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -512,7 +514,26 @@ public class RouteCalculationResult {
 			sum += originalDirections.get(i).getExpectedTime();
 		}
 	}
-	
+
+	@Nullable
+	public QuadRect getLocationsRect() {
+		double left = 0, right = 0;
+		double top = 0, bottom = 0;
+		for (Location p : locations) {
+			if (left == 0 && right == 0) {
+				left = p.getLongitude();
+				right = p.getLongitude();
+				top = p.getLatitude();
+				bottom = p.getLatitude();
+			} else {
+				left = Math.min(left, p.getLongitude());
+				right = Math.max(right, p.getLongitude());
+				top = Math.max(top, p.getLatitude());
+				bottom = Math.min(bottom, p.getLatitude());
+			}
+		}
+		return left == 0 && right == 0 ? null : new QuadRect(left, top, right, bottom);
+	}
 	
 	public static String toString(TurnType type, Context ctx, boolean shortName) {
 		if(type.isRoundAbout()){
