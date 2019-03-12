@@ -68,8 +68,8 @@ Lon %2$s</string>
     <string name="shared_string_off">No</string>
     <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_disabled">Desactivado</string>
-    <string name="shared_string_selected">Seleccionado</string>
-    <string name="shared_string_selected_lowercase">seleccionado</string>
+    <string name="shared_string_selected">Marcado(s)</string>
+    <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="shared_string_never">Nunca</string>
     <string name="shared_string_and">y</string>
     <string name="shared_string_or">o</string>
@@ -478,7 +478,7 @@ Lon %2$s</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
     <string name="no_index_file_to_download">No se encontraron descargas, comprueba tu conexión a Internet.</string>
     <string name="select_index_file_to_download">Nada encontrado. Si no encuentras tu región, puedes hacerla tú mismo (Ver https://osmand.net).</string>
-    <string name="none_selected_gpx">Sin archivos GPX seleccionados. Mantén pulsado para elegir uno.</string>
+    <string name="none_selected_gpx">Sin archivos GPX marcados. Mantén pulsado para elegir uno.</string>
     <string name="gpx_split_interval">Intervalo de división</string>
     <string name="save_as_favorites_points">Guardar como grupo de Favoritos</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
@@ -1134,7 +1134,7 @@ Lon %2$s</string>
     <string name="trace_rendering">Información de depuración de visualización</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de visualización.</string>
     <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
-    <string name="internet_connection_required_for_online_route">Seleccionado un servicio de navegación en línea, pero no hay conexión a Internet.</string>
+    <string name="internet_connection_required_for_online_route">Se eligió un servicio de navegación en línea, pero no hay conexión a Internet.</string>
     <string name="tts_language_not_supported_title">Idioma no soportado</string>
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) de Android. ¿Buscar otro motor TTS en la tienda de aplicaciones? Si no, se usará el idioma TTS predefinido.</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
@@ -1252,7 +1252,7 @@ Lon %2$s</string>
     <string name="daynight_descr">Elige el motivo de cambio entre el modo nocturno y diurno.</string>
     <string name="daynight">Modo diurno/nocturno</string>
     <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
-    <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
+    <string name="items_were_selected">{0} elemento(s) marcado(s)</string>
     <string name="filter_existing_indexes">Descargados</string>
     <string name="fast_route_mode">Ruta más rápida</string>
     <string name="fast_route_mode_descr">Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible.</string>
@@ -1850,7 +1850,7 @@ Lon %2$s</string>
     <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="night">Por la noche</string>
-    <string name="shared_string_not_selected">No seleccionado</string>
+    <string name="shared_string_not_selected">No marcado(s)</string>
     <string name="select_month_and_country">Elige mes y país</string>
     <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
