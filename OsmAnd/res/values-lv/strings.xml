@@ -16,7 +16,7 @@
   <string name="send_files_to_osm">Sūtīt GPX failus uz OSM?</string>
   <string name="gpx_visibility_txt">Redzamība</string>
   <string name="gpx_tags_txt">Iezīmes</string>
-  <string name="gpx_description_txt">Apraksts</string>
+  <string name="shared_string_description">Apraksts</string>
   <string name="validate_gpx_upload_name_pwd">Lūdzu norādiet OSM lietotāja vārdu un paroli, kuru lietot, augšupielādējot GPX failus.</string>
   <string name="default_buttons_support">Atbalsts</string>
   <string name="support_new_features">Atbalstiet jaunas iespējas</string>
@@ -1361,66 +1361,18 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	<string name="navigation_intent_invalid">Nepareizs formāts: %s</string>
 <string name="interrupt_music_descr">Pilnībā nopauzēt mūziku paziņojumu brīžos</string>
 	<string name="share_route_as_gpx">Koplietot maršrutu kā GPX failu</string>
-	
-        
-    
-    
     <string name="shared_string_share">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota ar OsmAnd</string>
 	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
     <string name="int_days">Dienas</string>
     <string name="osmo_connect_menu">Pieslēgties</string>
-    
-    <string name="osmo_group_description">Apraksts</string>
-
-
     <string name="import_file_favourites">Saglabāt datus GPX failā vai importēt izlasē?</string>
-
     <string name="rendering_value_pink_name">rozā</string>
-	
 	<string name="rendering_value_brown_name">brūns</string>
-	
-	
-	
-	
-	
-    
     <string name="osmo_edit_color">Ekrāna krāsa</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
-	
-    
-    
-    
-    
-    
-    
     <string name="shared_string_tracks">Visi treki</string>
     <string name="shared_string_my_favorites">Mana izlase</string>
     <string name="shared_string_my_places">Izlase</string>
-    
     <string name="gpx_file_is_empty">Gpx treks ir tukšs</string>
     <string name="loading_smth">Ielādē %1$s…</string>
     <string name="map_widget_plain_time">Tekošais laiks</string>
@@ -1729,7 +1681,6 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	<string name="voices">Balss vadība</string>
 	<string name="av_camera_pic_size">Fotokameras bildes izmērs</string>
 	<string name="av_camera_pic_size_descr">Norādīt iebūvētās fotokameras bildes lielumu</string>
-    <string name="plugin_description_title">Apraksts</string>
 	<string name="plugin_install_needs_network">Lai instalētu spraudni, ir vajadzīgs interneta savienojums.</string>
 	<string name="get_plugin">Iegūt</string>
 <string name="rendering_attr_pisteGrooming_name">Sniega tīrīšana</string>
@@ -2063,7 +2014,6 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="opening_at">Atvērt</string>
     <string name="closing_at">Aizvērt</string>
     <string name="contact_info">kontaktinformācija</string>
-    <string name="description">Apraksts</string>
     <string name="add_opening_hours">Pievienot darba stundas</string>
     <string name="poi_dialog_poi_type">POI tips</string>
     <string name="number_of_rows_in_dash">Rindu skaits lapā %1$s</string>

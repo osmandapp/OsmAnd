@@ -71,12 +71,12 @@
     <string name="step_by_step">Step by step</string>
     <string name="road_types">Road types</string>
     <string name="exit_at">Exit at</string>
-    <string name="sit_on_the_stop">Sit on the stop</string>
+    <string name="sit_on_the_stop">Board at stop</string>
     <string name="shared_string_swap">Swap</string>
     <string name="show_more">Show more</string>
-    <string name="tracks_on_map">Tracks on the map</string>
+    <string name="tracks_on_map">Displayed tracks</string>
     <string name="quick_action_show_hide_gpx_tracks">Show/Hide GPX Tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Tapping this action button shows or hides selected GPX tracks on map</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tapping this action button shows or hides selected GPX tracks on the map</string>
     <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>
     <string name="quick_action_gpx_tracks_show">Show GPX Tracks</string>
     <string name="add_destination_query">Please add Destination first</string>
@@ -136,7 +136,7 @@
     <string name="thank_you_for_feedback">Thank you for your feedback</string>
     <string name="poi_cannot_be_found">Node or way cannot be found.</string>
     <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
-    <string name="release_3_2_pre">
+    <!-- string name="release_3_2_pre">
     • Fixed crash on startup that occurred on some devices\n\n
     • New Markers feature: Display already traversed markers\n\n 
     • Search history now shows previously searched categories\n\n
@@ -144,8 +144,8 @@
     • Improve rendering speed issues on Android 8.0 devices\n\n
     • Support for polygon (non-amenity) objects editing\n\n
     • Measure distance: Add \"Measure\" button to Actions in the context menu\n\n
-    </string>
-    <string name="release_3_1">
+    </string -->
+    <!-- string name="release_3_1">
     • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
     • Map markers: Fix turning on/off groups, ability to hide markers from the map\n\n
     • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
@@ -153,7 +153,7 @@
     • Context menu: Fix transport shields color in the night mode, fix additional menu sizes\n\n
     • Boat navigation: Support for waterway fairway\n\n
     • Other bugfixes\n\n
-    </string>
+    </string -->
     <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
@@ -308,13 +308,13 @@
     <string name="additional_actions">Additional actions</string>
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
-    <string name="release_3_0">
+    <!-- string name="release_3_0">
 • New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
 • Wikipedia: New look, active links, images now supported\n\n
 • Open Track UI: Support for waypoint groups\n\n
 • Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
 • OsmAnd Live subscription now supports all OsmAnd features\n\n
-    </string>
+    </string -->
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
@@ -1163,7 +1163,7 @@
     <string name="local_osm_changes_upload_all_confirm">You are going to upload %1$d change(s) to OSM. Are you sure?</string>
     <string name="confirmation_to_clear_history">Clear history?</string>
     <string name="delay_to_start_navigation_descr">Specify wait time to remain on the route planning screen.</string>
-    <string name="delay_to_start_navigation">Start turn-by-turn navigation after…</string>
+    <string name="delay_to_start_navigation">Start turn-by-turn guidance after…</string>
     <string name="shared_string_go">Go</string>
     <string name="osmand_parking_overdue">overdue</string>
     <string name="action_create">Action create</string>
@@ -1392,6 +1392,7 @@
     <string name="rendering_attr_busRoutes_name">Bus routes</string>
     <string name="rendering_category_hide">Hide</string>
     <string name="rendering_category_routes">Routes</string>
+    <!--string name="shared_string_details">Details</string> use rendering_category_details -->
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">Transport</string>
     <string name="rendering_category_others">Other map attributes</string>
@@ -1537,7 +1538,6 @@
     <string name="gpx_file_is_empty">Empty GPX file</string>
     <string name="osmo_edit_color">Display color</string>
     <string name="osmo_connect_menu">Connect</string>
-    <string name="osmo_group_description">Description</string>
     <string name="int_days">days</string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="always_center_position_on_map">Display position always in center</string>
@@ -2225,7 +2225,7 @@
     <string name="send_files_to_osm">Send GPX files to OSM?</string>
     <string name="gpx_visibility_txt">Visibility</string>
     <string name="gpx_tags_txt">Tags</string>
-    <string name="gpx_description_txt">Description</string>
+    <string name="shared_string_description">Description</string>
     <string name="validate_gpx_upload_name_pwd">Please specify your OSM username and password to upload GPX files.</string>
     <string name="default_buttons_support">Support</string>
     <string name="support_new_features">Support new features</string>
@@ -2704,7 +2704,7 @@
     <string name="fav_points_not_exist">No Favorite points exist</string>
     <string name="update_existing">Replace</string>
     <string name="only_show">Display route</string>
-    <string name="follow">Start navigation</string>
+    <string name="follow">Start guidance</string>
     <string name="mark_final_location_first">Please select destination first</string>
     <string name="get_directions">Directions</string>
     <string name="opening_hours">Opening hours</string>
@@ -2838,7 +2838,6 @@
     <string name="av_camera_pic_size">Camera Picture Size</string>
     <string name="av_camera_pic_size_descr">Select the internal camera picture size.</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
-    <string name="plugin_description_title">Description</string>
     <string name="plugin_install_needs_network">You need to be connected to the Internet to install this plugin.</string>
     <string name="get_plugin">Get</string>
     <string name="use_fast_recalculation">Smart route recalculation</string>
@@ -2868,7 +2867,6 @@
     <string name="opening_at">Opening at</string>
     <string name="closing_at">Closing at</string>
     <string name="contact_info">Contact info</string>
-    <string name="description">Description</string>
     <string name="add_opening_hours">Add opening hours</string>
     <string name="poi_dialog_poi_type">POI Type</string>
     <string name="number_of_rows_in_dash">Number of rows in dash %1$s</string>

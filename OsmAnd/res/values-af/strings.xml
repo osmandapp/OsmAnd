@@ -106,7 +106,7 @@
   <string name="send_files_to_osm">Stuur GPX lêers na OSM?</string>
   <string name="gpx_visibility_txt">Sigbaarheid</string>
   <string name="gpx_tags_txt">Naamplaatjies</string>
-  <string name="gpx_description_txt">Beskrywing</string>
+  <string name="shared_string_description">Beskrywing</string>
   <string name="validate_gpx_upload_name_pwd">Spesifiseer asseblief die OSM gebruiker naam en wagwoord om GPX lêers op te laai.</string>
   <string name="default_buttons_support">Ondersteuning</string>
   <string name="support_new_features">Ondersteun nuwe funksies</string>

@@ -23,7 +23,8 @@
 	<LinearLayout
 		android:id="@+id/card_content"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/route_info_card_row_min_height"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/route_info_card_row_min_height"
 		android:background="?attr/route_info_bg"
 		android:baselineAligned="false"
 		android:gravity="center_vertical"
@@ -32,8 +33,10 @@
 		<LinearLayout
 			android:id="@+id/home_button"
 			android:layout_width="0dp"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:layout_weight="1"
+			android:paddingTop="@dimen/list_header_padding"
+			android:paddingBottom="@dimen/list_header_padding"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical"
 			android:orientation="horizontal">
@@ -88,14 +91,18 @@
 		<View
 			android:id="@+id/buttons_divider"
 			android:layout_width="1dp"
-			android:layout_height="36dp"
+			android:layout_height="match_parent"
+			android:layout_marginTop="12dp"
+			android:layout_marginBottom="12dp"
 			android:background="?attr/divider_color" />
 
 		<LinearLayout
 			android:id="@+id/work_button"
 			android:layout_width="0dp"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:layout_weight="1"
+			android:paddingTop="@dimen/list_header_padding"
+			android:paddingBottom="@dimen/list_header_padding"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical"
 			android:orientation="horizontal">

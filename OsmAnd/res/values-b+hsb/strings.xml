@@ -274,17 +274,10 @@
     <string name="rendering_attr_hideWoodScrubs_name">Lěsy a kěrki</string>
     <string name="rendering_attr_moreDetailed_name">Wjace detailow</string>
     <string name="rendering_attr_lessDetailed_name">Mjenje detailow</string>
-    
     <string name="sort_by_name">Po mjenje sortěrować</string>
     <string name="gpx_info_average_speed">Přerězna spěšnosć: %1$s</string>
     <string name="gpx_info_maximum_speed">Maksimalna spěšnosć: %1$s</string>
     <string name="gpx_info_avg_altitude">Přerězna wysokosć: %1$s</string>
-    
-    
-    <string name="osmo_group_description">Wopis</string>
-    
-    
-    
     <string name="always_center_position_on_map">Stejišćo přeco w srjedźišću pokazać</string>
     <string name="voice_pref_title">Zwuk</string>
     <string name="misc_pref_title">Wšelake</string>
@@ -526,7 +519,7 @@
     <string name="unknown_location">Stejišćo hišće njenamakane</string>
     <string name="confirm_interrupt_download">Sćehnjenje dataje přetorhnyć?</string>
     <string name="local_indexes_cat_map">Standardne karty (wektor)</string>
-    <string name="gpx_description_txt">Wopis</string>
+    <string name="shared_string_description">Wopis</string>
     <string name="default_buttons_support">OsmAnd podpěrać</string>
     <string name="support_new_features">Nowe funkcije podpěrać</string>
     <string name="back_to_location">Wróćo k stejišću</string>
@@ -853,7 +846,6 @@
     <string name="email">mejlka</string>
     <string name="av_camera_focus_auto">Awtofokus</string>
     <string name="navigation_intent_invalid">Njepłaćiwy format: %s</string>
-    <string name="plugin_description_title">Wopisanje</string>
     <string name="plugin_install_needs_network">Trjebaš zwisk z internetom za instalowanje tutoho plugina.</string>
     <string name="do_you_like_osmand">Lubi so ći OsmAnd?</string>
     <string name="rate_this_app">Pohódnóć tutu app</string>
@@ -870,7 +862,6 @@
     <string name="opening_at">wočini w</string>
     <string name="closing_at">začini w</string>
     <string name="contact_info">Contact info</string>
-    <string name="description">Wopis</string>
     <string name="recent_places">Njedawne městna</string>
     <string name="favourites">Fawority</string>
     <string name="saved_at_time">Składowane pod: %1$s</string>

@@ -46,7 +46,7 @@
   <string name="send_files_to_osm">გავუგზავნო GPX ფაილები OSM-ს?</string>
   <string name="gpx_visibility_txt">ხილვადობა</string>
   <string name="gpx_tags_txt">ჭდეები</string>
-  <string name="gpx_description_txt">აღწერა</string>
+  <string name="shared_string_description">აღწერა</string>
   <string name="validate_gpx_upload_name_pwd">შეიყვანეთ OSM მომხმარებელი და პაროლი GPX ფაილების ასატვირთად.</string>
   <string name="default_buttons_support">მხარდაჭერა</string>
   <string name="support_new_features">ახალი თვისებების მხარდაჭერა</string>

@@ -10,7 +10,7 @@
     <string name="send_files_to_osm">GPX 파일을 OSM으로 전송하시겠습니까?</string>
     <string name="gpx_visibility_txt">가시성</string>
     <string name="gpx_tags_txt">태그</string>
-    <string name="gpx_description_txt">설명</string>
+    <string name="shared_string_description">설명</string>
     <string name="validate_gpx_upload_name_pwd">GPX파일을 업로드하려면 OSM 사용자 이름과 패스워드를 입력하십시오.</string>
     
 	<string name="default_buttons_support">지원</string>
@@ -1372,19 +1372,8 @@
     <string name="localization_pref_title">현지화</string>
     <string name="osmand_srtm_long_description_1000_chars">"이 플러그인은 등고선 오버레이와 음영레이어 모두 제공합니다. OsmAnd 오프라인 지도의 상단에 표시 할 수 있습니다. 이 기능은  운동선수, 하이커, 트레커등 음영에 관심이 있는 사람들이 즐겨 사용할 것이다.
 \n↵\n↵\n(70도 북쪽과 남쪽 70도 사이의) 글로벌 데이터는  SRTM (Shuttle Radar Topography Mission:셔틀 레이더 지형 미션)과 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer:고급 우주선 열 방출 및 반사 복사계)에 의한 측정을 기반으로 합니다, 테라 온보드 영상 측정, NASA의 지구 관찰 시스템의 주력 위성 . ASTER는 NASA, 일본 경제 산업성(METI), 일본 우주 시스템 (J-spacesystems) 사이의 협력적인 노력의 결과입니다.\n\n\n이 플러그인은 OsmAnd 의 오프라인 지도에 표시할 수 있는 등고선을 제공합니다. (북쪽으로 70도 남쪽으로 70도 사이 ) 글로벌 데이터는 SRTM (셔틀 레이더 지형 미션 :Shuttle Radar Topography Mission) 과 ASTER (고급화된 Spaceborne 열 방출 및 반사 복사계 테라 온보드영상 기기 : Advanced Spaceborne Thermal Emission and Reflection Radiometer) NASA 의 주력 위성에 의한 측정을 기반으로 합니다. 지구 관측 시스템의 ASTER 는 NASA , 일본의 경제 산업성(METI ), 일본 우주 시스템 (J- spacesystems )의 장관 사이의 협력한 노력의 결실입니다. "</string>
-    
     <string name="interrupt_music_descr">음성안내를 할 때 음악을 중지</string>
 	<string name="interrupt_music">음악 중지</string>
-	
-		
-	
-	
-	
-	
-    
-    
-    
-    
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
@@ -1393,76 +1382,15 @@
     <string name="keep_informing_descr">정기적인 간격으로 운행 명령을 다시 알리기</string>
     <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
-
-    
-        
-    
 	<string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
-
-
     <string name="use_points_as_intermediates">포인트 사이의 경로를 계산</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
     <string name="int_days">하루</string>
     <string name="osmo_connect_menu">연결</string>
-    
-    <string name="osmo_group_description">설명</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	<string name="import_file_favourites">장소를 GPX 파일로 저장 할까요? 또는 즐겨찾기로 가져오기 할까요?</string>
-	
-	
 	<string name="rendering_value_pink_name">분홍</string>
-	
 	<string name="rendering_value_brown_name">갈색</string>
-	
-	
-	
-	
-	
-    
     <string name="osmo_edit_color">디스플레이 색상</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
-	
-    
-    
-    
-    
     <string name="gpx_file_is_empty">GPX 경로가 비어있습니다</string>
-    
-    
     <string name="gpx_info_subtracks">"하위 트랙 : %1$s "</string>
 	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
 	<string name="gpx_info_start_time">시작 시간: %1$tF,  %1$tR </string>
@@ -1476,12 +1404,10 @@
     <string name="gpx_selection_segment_title">구간</string>
     <string name="gpx_selection_number_of_points"> %1$s 포인트</string>
     <string name="gpx_selection_point">포인트 %1$s</string>
-    
     <string name="gpx_selection_route_points">%1$s
 \n 경로 포인트 %2$s</string>
     <string name="gpx_selection_points">%1$s\n 포인트</string>
     <string name="gpx_selection_track">%1$s\n GPX경로 %2$s</string>
-    
     <string name="loading_smth">%1$s 불러오는 중…</string>
     <string name="map_widget_plain_time">현재 시간</string>
     <string name="shared_string_waypoint">경유지</string>
@@ -1496,24 +1422,11 @@
     <string name="show_zoom_buttons_navigation_descr">운행하는 동안 줌 버튼 표시</string>
     <string name="show_zoom_buttons_navigation">줌 버튼 표시</string>
     <string name="none_selected_gpx">선택한 GPX 파일 없음. 이용 가능한 GPX 파일을 선택하려면 누르고 있어요.</string>
-    
     <string name="local_index_select_gpx_file">선택하여 표시</string>
     <string name="sort_by_distance">거리로 정렬</string>
     <string name="sort_by_name">이름으로 정렬</string>
-    
     <string name="route_descr_destination">도착지</string>
     <string name="no_index_file_to_download">다운로드 되지 않았습니다, 인터넷 연결을 확인하세요.</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="rendering_attr_hideBuildings_name">건물 숨기기</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">비 차량 고속도로 숨기기</string>
     <string name="rendering_attr_hideText_name">텍스트 숨기기</string>
@@ -1702,13 +1615,9 @@
 	<string name="version_settings_descr">야간 빌드를 다운로드</string>
     <string name="version_settings">빌드</string>
     <string name="shared_string_gpx_points">장소</string>
-    
-    
     <string name="gps_status">GPS status 앱</string>
     <string name="parking_place">주차장</string>
     <string name="remove_the_tag">태그를 제거</string>
-<string name="plugin_description_title">설명</string>
-	
 <string name="edit_group">그룹 편집</string>
     <string name="plugin_install_needs_network">이 플러그인을 설치 하려면 인터넷에 연결을 해야 합니다.</string>
 	<string name="get_plugin">가져오기</string>
@@ -1992,10 +1901,7 @@
 	<string name="next_proceed">다음</string>
 	<string name="opening_at">~ 열기</string>
 	<string name="closing_at">에 닫기</string>
-	
-	
 	<string name="contact_info">연락처 정보</string>
-	<string name="description">설명</string>
 	<string name="add_opening_hours">오프닝 시간 추가</string>
 	<string name="poi_dialog_poi_type">POI 유형</string>
 	<string name="number_of_rows_in_dash">대시 %1$s에 있는 행의 수</string>

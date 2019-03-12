@@ -579,7 +579,7 @@ La memoria utilizzata è  {1} MB.
     <string name="send_files_to_osm">Inviare i file GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilità</string>
     <string name="gpx_tags_txt">Etichette</string>
-    <string name="gpx_description_txt">Descrizione</string>
+    <string name="shared_string_description">Descrizione</string>
     <string name="validate_gpx_upload_name_pwd">Imposta il tuo nome utente e password OSM per caricare i file GPX.</string>
     <string name="default_buttons_support">Sostieni</string>
     <string name="support_new_features">Sostieni nuove caratteristiche</string>
@@ -1154,7 +1154,6 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
     <string name="int_days">giorni</string>
     <string name="osmo_connect_menu">Connetti</string>
-    <string name="osmo_group_description">Descrizione</string>
     <string name="import_file_favourites">Salvare i punti come file GPX o importare i punti intermedi nei \'Favoriti\'\?</string>
     <string name="rendering_value_pink_name">Rosa</string>
     <string name="rendering_value_brown_name">Marrone</string>
@@ -1366,7 +1365,6 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="gps_status">Stato GPS</string>
     <string name="parking_place">Parcheggio (singolo)</string>
     <string name="remove_the_tag">RIMUOVI IL TAG</string>
-    <string name="plugin_description_title">Descrizione</string>
     <string name="edit_group">Modifica il gruppo</string>
     <string name="plugin_install_needs_network">Per installare questo componente aggiuntivo è necessaria la connessione a internet.</string>
     <string name="get_plugin">Ottieni</string>
@@ -1648,7 +1646,6 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="av_locations_descr">File GPX con note locali.</string>
     <string name="av_locations">Posizioni</string>
     <string name="contact_info">Informazioni di contatto</string>
-    <string name="description">Descrizione</string>
     <string name="add_opening_hours">Aggiungi orari di apertura</string>
     <string name="poi_dialog_poi_type">Tipo di PDI</string>
     <string name="number_of_rows_in_dash">Numero di righe del cruscotto %1$s</string>

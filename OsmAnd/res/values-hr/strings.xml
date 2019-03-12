@@ -242,7 +242,7 @@
 	
 	<string name="gpx_visibility_txt">Vidljivost</string>
 	<string name="gpx_tags_txt">Oznake</string>
-	<string name="gpx_description_txt">Opis</string>
+	<string name="shared_string_description">Opis</string>
 	<string name="validate_gpx_upload_name_pwd">Navedite OSM korisničko ime i lozinku za upload GPX datoteke.</string>
     	<string name="default_buttons_support">Podrška</string>
 	<string name="support_new_features">Podrži nove značajke</string>
@@ -1217,22 +1217,9 @@
 \nTočke rute %2$s</string>
     <string name="gpx_selection_points">%1$s
 \nTočke</string>
-    
-    
-	
 	<string name="rendering_value_pink_name">roza</string>
-	
 	<string name="rendering_value_brown_name">smeđa</string>
-	
-	
-	
-	
-	
     <string name="osmo_edit_color">Boja prikaza</string>
-    
-    <string name="osmo_group_description">Opis</string>
-
-
     <string name="text_size_descr">Postavi veličinu teksta na karti.</string>
     <string name="text_size">Veličina teksta</string>
     <string name="save_track_interval_globally">Interval bilježenja</string>
@@ -1240,7 +1227,6 @@
 	<string name="wake_on_voice">Uključi zaslon</string>
     <string name="wake_on_voice_descr">Uključiti zaslon telefona (ako je isključen) kada se približavate skretanju</string>
     <string name="shared_string_never">Nikad</string>
-    
     <string name="impassable_road">Izbjegavaj ceste…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Željezničke rute</string>
     <string name="rendering_attr_tramRoutes_name">Tramvajske rute</string>

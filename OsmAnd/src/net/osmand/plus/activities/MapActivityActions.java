@@ -14,14 +14,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -41,7 +39,6 @@ import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -61,6 +58,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -413,9 +411,6 @@ public class MapActivityActions implements DialogProvider {
 
 	public void enterDirectionsFromPoint(final double latitude, final double longitude) {
 		mapActivity.getContextMenu().hide();
-		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
-			setFirstMapMarkerAsTarget();
-		}
 		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			enterRoutePlanningMode(new LatLon(latitude, longitude),
 					mapActivity.getContextMenu().getPointDescription());
@@ -462,7 +457,12 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showDialog) {
+											   boolean useIntermediatePointsByDefault, boolean showMenu) {
+		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+	}
+
+	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
+											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -484,8 +484,8 @@ public class MapActivityActions implements DialogProvider {
 
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
-		if (showDialog) {
-			mapActivity.getMapLayers().getMapControlsLayer().showDialog();
+		if (showMenu) {
+			mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu(menuState);
 		}
 		if (targets.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long_v2);
@@ -514,7 +514,7 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
 		if (showDialog) {
-			mapActivity.getMapLayers().getMapControlsLayer().showDialog();
+			mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu();
 		}
 		if (targets.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long_v2);
@@ -1069,20 +1069,5 @@ public class MapActivityActions implements DialogProvider {
 	private void restoreOsmand(){
 		getMyApplication().getAppCustomization().restoreOsmand();
 		mapActivity.closeDrawer();
-	}
-
-
-	public void setFirstMapMarkerAsTarget() {
-		if (getMyApplication().getMapMarkersHelper().getMapMarkers().size() > 0) {
-			MapMarkersHelper.MapMarker marker = getMyApplication().getMapMarkersHelper().getMapMarkers().get(0);
-			PointDescription pointDescription = marker.getOriginalPointDescription();
-			if (pointDescription.isLocation()
-					&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
-				pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
-			}
-			TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-			targets.navigateToPoint(new LatLon(marker.getLatitude(), marker.getLongitude()),
-					true, targets.getIntermediatePoints().size() + 1, pointDescription);
-		}
 	}
 }

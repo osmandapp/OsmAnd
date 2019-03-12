@@ -943,6 +943,7 @@ public class RoutingHelper {
 
 	public void recalculateRouteDueToSettingsChange() {
 		clearCurrentRoute(finalLocation, intermediatePoints);
+		getSettings().LAST_ROUTE_APPLICATION_MODE.set(getAppMode());
 		if (isPublicTransportMode()) {
 			Location start = lastFixedLocation;
 			LatLon finish = finalLocation;
@@ -997,6 +998,7 @@ public class RoutingHelper {
 	public void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
 		synchronized (this) {
 			final Thread prevRunningJob = currentRunningJob;
+			getSettings().LAST_ROUTE_APPLICATION_MODE.set(getAppMode());
 			RouteRecalculationThread newThread = new RouteRecalculationThread(
 					"Calculating route", params, paramsChanged); //$NON-NLS-1$
 			currentRunningJob = newThread;

@@ -743,6 +743,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
 				}
 				break;
+			case "wikipedia":
+				formattedPrefix = app.getString(R.string.shared_string_wikipedia);
 		}
 		return new String[]{formattedPrefix, formattedValue};
 	}

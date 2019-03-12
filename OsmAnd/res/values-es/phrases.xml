@@ -1319,7 +1319,7 @@
     <string name="poi_internet_access_no">Conexión a Internet: no</string>
     <string name="poi_payment_coins_yes">Monedas</string>
     <string name="poi_payment_coins_no">No acepta monedas</string>
-    <string name="poi_payment_coins_0.5">Monedas de 50c</string>
+    <string name="poi_payment_coins_0_5">Monedas de 50c</string>
     <string name="poi_payment_coins_50c12">Monedas de 50c, 1€ y 2€</string>
     <string name="poi_payment_telephone_cards_yes">Tarjetas de teléfono</string>
     <string name="poi_payment_telephone_cards_no">No acepta tarjetas de teléfono</string>
@@ -3559,4 +3559,6 @@
     <string name="poi_park_ride_tram">Tranvía</string>
     <string name="poi_park_ride_ferry">Transbordador</string>
     <string name="poi_generator_source_biomass">Fuente de energía: biomasa</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
+    <string name="poi_hazard">Advertencia de peligro</string>
 </resources>

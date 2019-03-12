@@ -52,6 +52,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MenuState;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -128,10 +129,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
 		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
-	}
-
-	public MapRouteInfoMenu getMapRouteInfoMenu() {
-		return mapRouteInfoMenu;
 	}
 
 	public TrackDetailsMenu getTrackDetailsMenu() {
@@ -300,7 +297,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initRouteControls() {
-		mapRouteInfoMenu = new MapRouteInfoMenu(mapActivity, this);
+		mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 		trackDetailsMenu = new TrackDetailsMenu(mapActivity);
 	}
 
@@ -328,12 +325,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapActivity.getMapActions().stopNavigationWithoutConfirm();
 	}
 
-	public void showRouteInfoControlDialog() {
-		mapRouteInfoMenu.showHideMenu();
+	public void showRouteInfoControlDialog(int menuState) {
+		mapRouteInfoMenu.showHideMenu(menuState);
 	}
 
-	public void showDialog() {
-		mapRouteInfoMenu.setShowMenu();
+	public void showRouteInfoMenu() {
+		mapRouteInfoMenu.setShowMenu(MapRouteInfoMenu.DEFAULT_MENU_STATE);
+	}
+
+	public void showRouteInfoMenu(int menuState) {
+		mapRouteInfoMenu.setShowMenu(menuState);
 	}
 
 	private void initControls() {
@@ -412,11 +413,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			if (!hasTargets) {
-				if (getTargets().getPointToNavigate() == null) {
-					mapActivity.getMapActions().setFirstMapMarkerAsTarget();
-				}
-			}
 			TargetPoint start = getTargets().getPointToStart();
 			if (start != null) {
 				mapActivity.getMapActions().enterRoutePlanningMode(
@@ -425,7 +421,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 			}
 		} else {
-			showRouteInfoControlDialog();
+			showRouteInfoControlDialog(MenuState.HEADER_ONLY);
 		}
 		hasTargets = false;
 	}
@@ -468,11 +464,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 						if (defaultVls[0] == 0) {
 							targets.removeAllWayPoints(false, true);
 							targets.navigateToPoint(latLon, true, -1, pointDescription);
-							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 							menu.close();
 						} else {
 							targets.navigateToPoint(latLon, true, -1, pointDescription);
-							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 							menu.close();
 						}
 					}
@@ -487,13 +483,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean hasPointToStart = settings.restorePointToStart();
 		targets.navigateToPoint(latLon, true, -1, pointDescription);
 		if (!hasPointToStart) {
-			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 		} else {
 			TargetPoint start = targets.getPointToStart();
 			if (start != null) {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true, MenuState.HEADER_ONLY);
 			} else {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 			}
 		}
 	}
@@ -759,7 +755,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean routeDialogOpened = MapRouteInfoMenu.isVisible();
+		boolean routeDialogOpened = mapRouteInfoMenu.isVisible();
 		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
 		boolean contextMenuOpened = !mapActivity.getContextMenu().shouldShowTopControls();
 		boolean showRouteCalculationControls = routePlanningMode ||

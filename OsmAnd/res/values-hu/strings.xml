@@ -3,7 +3,7 @@
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
-    <string name="gpx_description_txt">Leírás</string>
+    <string name="shared_string_description">Leírás</string>
     <string name="validate_gpx_upload_name_pwd">GPX fájl feltöltéséhez kérlek add meg az OSM-es felhasználóneved és jelszavad.</string>
     <string name="default_buttons_support">Támogatás</string>
     <string name="support_new_features">Új funkciók támogatása</string>
@@ -865,7 +865,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="intermediate_point">%1$s köztes célpont</string>
     <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
     <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
-    <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online útvonalrögzítés) használatához engedélyed az Útvonalrögzítés bővítményt</string>
+    <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online útvonalrögzítés) használatához engedélyed az „Útvonalrögzítés” bővítményt</string>
     <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal kiszámítása nagyobb távolságokra</string>
     <string name="rendering_attr_roadColors_description">Útszínséma kiválasztása:</string>
     <string name="rendering_attr_roadColors_name">Útszín sémája</string>
@@ -874,7 +874,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="background_service_is_enabled_question">Az OsmAnd háttérszolgáltatása még fut. Azt is leállítod?</string>
     <string name="safe_mode_description">Alkalmazás futtatása csökkentett módban (a lassabb Android-kódot használata a natív kód helyett).</string>
     <string name="safe_mode">Csökkentett mód</string>
-    <string name="native_library_not_running">Az alkalmazás csökkentett módban fut (letilthatod a „Beállítások”-ban).</string>
+    <string name="native_library_not_running">Az alkalmazás csökkentett módban fut (kikapcsolhatod a „Beállítások”-ban).</string>
     <string name="rendering_attr_showRoadMaps_description">Válaszd ki, mikor jelenjenek meg a csak-út térképek:</string>
     <string name="rendering_attr_showRoadMaps_name">Csak-út térképek</string>
     <string name="download_roads_only_item">Csak utak</string>
@@ -1235,7 +1235,6 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_my_places">Saját helyek</string>
     <string name="int_days">nap</string>
     <string name="osmo_connect_menu">Kapcsolódás</string>
-    <string name="osmo_group_description">Leírás</string>
     <string name="use_points_as_intermediates">Útvonal tervezése pontok között</string>
     <string name="import_file_favourites">Mented az adatokat GPX fájlként, vagy importálod az útpontokat a „Kedvencek”-be?</string>
     <string name="shared_string_share">Megosztás</string>
@@ -1425,7 +1424,6 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="proxy_port_descr">Állítsd be a proxy szervered portszámát (pl. 8118).</string>
     <string name="shared_string_disabled">Letiltva</string>
     <string name="shared_string_enabled">Engedélyezve</string>
-    <string name="plugin_description_title">Leírás</string>
     <string name="edit_group">Csoport szerkesztése</string>
     <string name="remove_the_tag">CÍMKE ELTÁVOLÍTÁSA</string>
     <string name="version_settings_descr">Napi összeállítások letöltése.</string>
@@ -1651,7 +1649,6 @@ Hosszúság: %2$s</string>
     <string name="opening_at">Nyitás</string>
     <string name="closing_at">Zárás</string>
     <string name="contact_info">Elérhetőségek</string>
-    <string name="description">Leírás</string>
     <string name="add_opening_hours">Nyitva tartás hozzáadása</string>
     <string name="poi_dialog_poi_type">POI típus</string>
     <string name="number_of_rows_in_dash">Sorok száma a kezdőlapon %1$s</string>
@@ -1810,7 +1807,7 @@ Hosszúság: %2$s</string>
     <string name="av_audio_bitrate_descr">Hang bitmélységének kiválasztása.</string>
     <string name="routing_attr_avoid_stairs_name">Lépcsők elkerülése</string>
     <string name="routing_attr_avoid_stairs_description">Lépcsők elkerülése</string>
-    <string name="routing_attr_avoid_borders_name">Határátlépés elkerülése</string>
+    <string name="routing_attr_avoid_borders_name">Határátlépések elkerülése</string>
     <string name="rendering_attr_horseRoutes_name">Lovaglóutak</string>
     <string name="no_address_found">Ismeretlen cím</string>
     <string name="looking_up_address">Cím keresése</string>
@@ -2715,13 +2712,13 @@ Kérlek adj meg egy teljes kódot</string>
 \n • Bővítményen keresztül bekapcsolhatóak a szintvonalak és a domborzatárnyékolás</string>
     <string name="osm_live_subscriptions">Előfizetések</string>
     <string name="osm_live_plan_pricing">Csomagok és árak</string>
-    <string name="osm_live_payment_monthly_title">Fizetés havonta</string>
-    <string name="osm_live_payment_3_months_title">Fizetés három havonta</string>
-    <string name="osm_live_payment_annual_title">Fizetés évente egyszer</string>
+    <string name="osm_live_payment_monthly_title">Havonta</string>
+    <string name="osm_live_payment_3_months_title">Három havonta</string>
+    <string name="osm_live_payment_annual_title">Évente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / hó</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / hó</string>
-    <string name="osm_live_payment_discount_descr">Takaríts meg ennyit: %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Jelenlegi előfizetéseid</string>
+    <string name="osm_live_payment_discount_descr">Takaríts meg ennyit: %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Jelenlegi előfizetés</string>
     <string name="osm_live_payment_renews_monthly">Havonta megújul</string>
     <string name="osm_live_payment_renews_quarterly">Negyedévente megújul</string>
     <string name="osm_live_payment_renews_annually">Évente megújul</string>
@@ -2735,21 +2732,21 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_restore">Visszaállítás</string>
     <string name="keep_passed_markers">Elhagyott jelölők megtartása a térképen</string>
     <string name="ask_for_location_permission">A folytatáshoz kérlek engedélyezd a helymeghatározást az OsmAnd számára.</string>
-    <string name="thank_you_for_feedback">Köszönjük a visszajelzést</string>
-    <string name="release_3_2_pre">• Pár eszközt érintő indításkori összeomlás javítása
-\n
-\n • Új térképjelölők lehetőség: a már elhagyott jelölők térképen tartása
-\n
-\n • A keresési előzmények a korábban keresett kategóriákat is megjeleníti
-\n
-\n • A nem latin betűs térképek okozta indításkori összeomlás javítása
-\n
-\n • Térkép megjelentési sebesség javítása Android 8.0 eszközön
-\n
-\n • Sokszögkén ábrázolt objektumok (nem szolgáltatás) szerkesztése
-\n
-\n • Távolságmérés: Mérés gomb hozzáadva Műveletekhez a helyi menüben
-\n
+    <string name="thank_you_for_feedback">Köszönjük a visszajelzésed</string>
+    <string name="release_3_2_pre">• Pár eszközt érintő indításkori összeomlás javítása 
+\n 
+\n • Új térképjelölők lehetőség: a már elhagyott jelölők térképen tartása 
+\n 
+\n • A keresési előzmények a korábban keresett kategóriákat is megjeleníti 
+\n 
+\n • A nem latin betűs térképek okozta indításkori összeomlás javítása 
+\n 
+\n • Térkép megjelentési sebesség javítása Android 8.0 eszközön 
+\n 
+\n • Sokszögkén ábrázolt objektumok (nem szolgáltatás) szerkesztése 
+\n 
+\n • Távolságmérés: „mérés” gomb hozzáadva Műveletekhez a helyi menüben 
+\n 
 \n</string>
     <string name="release_3_1">• Navigáció: folyamatjelző sáv javítása, az út kezdő és célpontjának gyors felcserélése
 \n
@@ -2788,7 +2785,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="on_foot">gyalog</string>
     <string name="route_way">Út</string>
     <string name="points_of_interests">Érdekes helyek (POI)</string>
-    <string name="waiting_for_route_calculation">Várakozás az útvonal kiszámítására</string>
+    <string name="waiting_for_route_calculation">Útvonal tervezése…</string>
     <string name="app_mode_public_transport">Tömegközlekedés</string>
     <string name="avoid_roads_descr">Válassz egy utat a térképen vagy a lenti listából, amelyet el akarsz kerülni navigáció során:</string>
     <string name="show_along_the_route">Megjelenítés az útvonal mellett</string>
@@ -2800,7 +2797,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="powered_by_osmand">A motorháztető alatt: OsmAnd</string>
     <string name="third_party_application">Harmadik féltől származó alkalmazás</string>
     <string name="send_search_query_description">Elküldjük a keresésed: <b>„%1$s”</b>, valamint a tartózkodási helyed.<br/>
-        <br/> Nem gyűjtünk személyes információt, csak a keresési adatokra van szükségünk a keresőalgoritmus tökéletesítéséhez.<br/>
+        <br/> Nem gyűjtünk személyes adatokat, a keresési adatokat csak a kereső algoritmus fejlesztéséhez használjuk.<br/>
     </string>
     <string name="transport_nearby_routes">Ezen belül:</string>
     <string name="shared_string_launch">Indítás</string>
@@ -2883,4 +2880,34 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="show_more">Továbbiak megjelenítése</string>
     <string name="tracks_on_map">Nyomvonalak a térképen</string>
     <string name="route_class_stat_container">Útkategória</string>
+    <string name="step_by_step">Lépésről lépésre</string>
+    <string name="road_types">Úttípusok</string>
+    <string name="exit_at">Hajts le</string>
+    <string name="quick_action_show_hide_gpx_tracks">GPX nyomvonalak megjelenítése/elrejtése</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">A műveletgombra koppintás elrejti vagy megjeleníti a GPX nyomvonalakat a térképen</string>
+    <string name="quick_action_gpx_tracks_hide">GPX nyomvonalak elrejtése</string>
+    <string name="quick_action_gpx_tracks_show">GPX nyomvonalak megjelenítése</string>
+    <string name="add_destination_query">Először jelölj ki egy célpontot</string>
+    <string name="release_3_3">"• Új \'Navigáció\' képernyő:  Új gomb az Otthon és Munkahely célpontokhoz, \'előző útvonal\' gyors gomb, az aktív GPX útvonalak és jelölők listája, keresési előzmények
+\n
+\n • Több információ az \'Útvonal adataiban\': úttípus, útburkolat, meredekség, simaság
+\n
+\n • Útvonaltervező tömegközlekedéshez az összes közlekedési móddal: metró, busz, villamos, stb.
+\n
+\n • Új gyors művelet gombok a nyomvonalak megjelenítés/elrejtésére, nappal/éjjel módváltásra
+\n
+\n • Javítva az elárasztottnak látszó területek Németországban, Dél-Afrikában, Québecben 
+\n
+\n • Továbbfejlesztett KML és KMZ import
+\n
+\n • Összeomlás javítása pár tömegközlekedési megálló megnyitásakor
+\n
+\n • Facebook és Firebase analitika eltávolítva az ingyenes verzióból (az OsmAnd+ eddig sem tartalmazta)
+\n
+\n"</string>
+    <string name="use_osm_live_public_transport_description">Tömegközlekedés engedélyezése OsmAnd Live frissítésekkel.</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live tömegközlekedés</string>
+    <string name="time_of_day">Napszak</string>
+    <string name="by_transport_type">Ezzel: %1$s</string>
+    <string name="sit_on_the_stop">Megálló tábla</string>
 </resources>

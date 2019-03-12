@@ -193,7 +193,7 @@
     <string name="send_files_to_osm">Trimiteți fișierele GPX la OSM?</string>
     <string name="gpx_visibility_txt">Vizibilitate</string>
     <string name="gpx_tags_txt">Tag-uri</string>
-    <string name="gpx_description_txt">Descriere</string>
+    <string name="shared_string_description">Descriere</string>
     <string name="validate_gpx_upload_name_pwd">Vă rog să specificați numele de utilizator și parola OSM pentru încărcarea fișierelor GPX.</string>
     <string name="default_buttons_support">Susțineri</string>
     <string name="support_new_features">Susțineți noi funcționalități</string>
@@ -1214,7 +1214,6 @@
     <string name="proxy_host_descr">Configurează gazda proxy-ului (de ex. 127.0.0.1)</string>
     <string name="int_days">zile</string>
     <string name="osmo_connect_menu">Conectare</string>
-    <string name="osmo_group_description">Descriere</string>
     <string name="always_center_position_on_map">Arată întotdeauna poziția în centru</string>
     <string name="voice_pref_title">Voce</string>
     <string name="misc_pref_title">Diverse</string>
@@ -2061,7 +2060,6 @@
     <string name="favourites_context_menu_add">Adauga Favorite</string>
     <string name="poi_action_delete">șterge</string>
     <string name="poi_dialog_reopen">Redeschide</string>
-    <string name="plugin_description_title">Descriere</string>
     <string name="plugin_install_needs_network">Trebuie să vă conectați la Internet pentru a instala acest plugin.</string>
     <string name="get_plugin">Obțineți</string>
     <string name="use_fast_recalculation">Re-calcularea rutei inteligente</string>
@@ -2086,7 +2084,6 @@
     <string name="opening_at">Deschide la</string>
     <string name="closing_at">Se închide la</string>
     <string name="contact_info">Informații de contact</string>
-    <string name="description">Descriere</string>
     <string name="add_opening_hours">Adaugă orar</string>
     <string name="poi_dialog_poi_type">Tip POI</string>
     <string name="working_days">Zile lucrătoare</string>

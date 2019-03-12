@@ -41,7 +41,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
-			android:text="@string/osmo_group_description"/>
+			android:text="@string/shared_string_description"/>
 
 		<EditText
 			android:id="@+id/description"

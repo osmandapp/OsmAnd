@@ -641,7 +641,7 @@
     <string name="send_files_to_osm">¿Enviar archivos GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilidad</string>
     <string name="gpx_tags_txt">Etiquetas</string>
-    <string name="gpx_description_txt">Descripción</string>
+    <string name="shared_string_description">Descripción</string>
     <string name="validate_gpx_upload_name_pwd">Indica el usuario y contraseña de OSM para subir archivos GPX.</string>
     <string name="default_buttons_support">Soporte</string>
     <string name="support_new_features">Soporte de nuevas características</string>
@@ -1131,7 +1131,7 @@
     <string name="map_widget_map_rendering">Renderizado del mapa</string>
     <string name="app_modes_choose_descr">Perfiles que serán visibles en la aplicación.</string>
     <string name="guidance_preferences_descr">Preferencias de navegación</string>
-    <string name="routing_preferences_descr">Preferencias de navegación</string>
+    <string name="routing_preferences_descr">Preferencias de enrutado</string>
     <string name="speech_rate_descr">Indica la velocidad en el habla sintetizada (TTS).</string>
     <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino…</string>
@@ -1240,7 +1240,6 @@
     <string name="osmo_edit_color">Mostrar color</string>
     <string name="int_days">días</string>
     <string name="osmo_connect_menu">Conectar</string>
-    <string name="osmo_group_description">Descripción</string>
     <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de referencia a «Favoritos»?</string>
     <string name="shared_string_my_favorites">Favoritos</string>
     <string name="shared_string_my_places">Mis sitios</string>
@@ -1464,7 +1463,6 @@
     <string name="remove_the_tag">QUITAR ETIQUETA</string>
     <string name="shared_string_disabled">Desactivado</string>
     <string name="shared_string_enabled">Activado</string>
-    <string name="plugin_description_title">Descripción</string>
     <string name="edit_group">Editar grupo</string>
     <string name="plugin_install_needs_network">Debe conectarse a Internet para instalar este complemento.</string>
     <string name="plugin_ski_name">Vista invernal</string>
@@ -1691,7 +1689,6 @@
     <string name="av_locations_descr">Archivo GPX con notas de ubicaciones.</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="contact_info">Información de contacto</string>
-    <string name="description">Descripción</string>
     <string name="add_opening_hours">Añadir horario de atención</string>
     <string name="poi_dialog_poi_type">Tipo de PDI</string>
     <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
@@ -2081,7 +2078,7 @@
     <string name="search_map_hint">Buscar ciudad o región</string>
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
-    <string name="gpx_add_track">Añadir GPX</string>
+    <string name="gpx_add_track">Añadir más…</string>
     <string name="gpx_appearance">Aspecto</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="shared_string_continue">Continuar</string>
@@ -2970,4 +2967,22 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">Este botón de acción, muestra u oculta las trazas GPX elegidas en el mapa</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar trazas GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar trazas GPX</string>
+    <string name="release_3_3">• Nueva pantalla «Direcciones»: Muestra los botones de destino «Casa» y «Trabajo», el atajo de la «ruta anterior», la lista de trazas, marcadores GPX activos y el historial de búsqueda.
+\n
+\n • Información adicional en «Detalles de la ruta»: Tipos de caminos, superficie, pendiente y suavidad
+\n
+\n • Soporte en la navegación de transporte público: Metro, autobús, tranvía, etc.
+\n
+\n • Nuevas acciones rápidas: «Mostrar/ocultar trazas» y «Modo diurno/nocturno»
+\n
+\n • Áreas fijas mostradas como inundadas en Alemania, Sudáfrica y Quebec
+\n
+\n • Soporte adicional para la importación de KML y KMZ
+\n
+\n • Corregidos los fallos en la apertura de algunas paradas de transporte público
+\n
+\n • Quitado el análisis de Facebook y Firebase de la versión gratuita (OsmAnd+ no lo incluye)
+\n</string>
+    <string name="use_osm_live_public_transport_description">Activar el transporte público para los cambios de OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transporte público en OsmAnd Live</string>
 </resources>

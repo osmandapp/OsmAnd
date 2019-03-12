@@ -307,7 +307,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						latitude, longitude, searchType);
 
 				dialogFragment.dismiss();
-				mapActivity.getMapLayers().getMapControlsLayer().showDialog();
+				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu();
 			} else {
 				app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);

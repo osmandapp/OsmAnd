@@ -1317,7 +1317,7 @@
     <string name="poi_love_hotel">情侶賓館</string>
     <string name="poi_payment_coins_yes">接受硬幣</string>
     <string name="poi_payment_coins_no">不接受硬幣</string>
-    <string name="poi_payment_coins_0.5">接受 0.5 美元的硬幣</string>
+    <string name="poi_payment_coins_0_5">接受 0.5 美元的硬幣</string>
     <string name="poi_payment_coins_50c12">接受 50 分、1 歐元和 2 歐元硬幣</string>
     <string name="poi_payment_telephone_cards_yes">接受電話卡</string>
     <string name="poi_payment_telephone_cards_no">不接受電話卡</string>
@@ -3557,4 +3557,6 @@
     <string name="poi_park_ride_tram">電車</string>
     <string name="poi_park_ride_ferry">渡船</string>
     <string name="poi_generator_source_biomass">能源：生物能</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">放射治療</string>
+    <string name="poi_hazard">危險</string>
 </resources>

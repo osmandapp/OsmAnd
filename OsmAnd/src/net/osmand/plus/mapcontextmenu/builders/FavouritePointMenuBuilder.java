@@ -137,7 +137,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 		textPrefixView.setMinLines(1);
 		textPrefixView.setMaxLines(1);
-		textPrefixView.setText(app.getResources().getString(R.string.description));
+		textPrefixView.setText(app.getResources().getString(R.string.shared_string_description));
 		llText.addView(textPrefixView);
 
 		TextView textView = new TextView(view.getContext());

@@ -7,7 +7,7 @@
     <string name="routing_attr_no_new_routing_name">Evitar regras de roteamento da v1.9</string>
     <string name="navigate_point_northing">Norte (N)</string>
     <string name="navigate_point_easting">Leste (E)</string>
-    <string name="home_button">Início</string>
+    <string name="home_button">Casa</string>
     <string name="first_time_msg">Obrigado por usar o OsmAnd. Faça o download de dados regionais para uso off-line via \'Configurações\' → \'Gerenciar arquivos de mapa\' para visualizar mapas, localizar endereços, procurar POIs, encontrar transporte público e muito mais.</string>
     <string name="favorite_home_category">Casa</string>
     <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
@@ -441,7 +441,6 @@
     <string name="osmo_edit_color">Mostrar cor</string>
     <string name="int_days">dias</string>
     <string name="osmo_connect_menu">Conectar</string>
-    <string name="osmo_group_description">Descrição</string>
     <string name="use_points_as_intermediates">Calcular a rota entre pontos</string>
     <string name="always_center_position_on_map">Sempre centralizar a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
@@ -588,7 +587,28 @@
     <string name="snap_to_road_descr">Ajustar posição às vias próximas durante a navegação.</string>
     <string name="snap_to_road">Ajustar com a via</string>
     <string name="osmand_short_description_80_chars">OsmAnd é um aplicativo de navegação de código aberto para mapas off-line e on-line</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd (Direções de Navegação Automatizada para OSM)\nOsmAnd é um aplicativo de navegação de código aberto com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados de mapas (mapas vetoriais ou quadrículas) podem ser armazenados na memória do aparelho para uso off-line. OsmAnd também oferece funcionalidade de roteamento online e offline, incluindo orientação por voz curva a curva.\n\nAlgumas das principais características:\n - Completa funcionalidade offline (armazenar mapas vetoriais ou quadrículas no armazenamento do aparelho)\n - Mapas vetoriais offline compactos para todo o mundo disponível\n - Baixar mapas de país ou região diretamente do app\n - Sobreposição de várias camadas do mapa, como trilhas GPX ou navegação, pontos de interesse, favoritos, linhas de contorno, paradas de transporte público, mapas adicionais com transparência personalizável - Pesquisa off-line de endereços e lugares (POIs)\n - Roteamento off-line para distâncias curtas (experimental)\n - Modos para carro, bicicleta e pedestres com: mudança automatizada de visão dia/noite; opcional zoom dependente da velocidade; alinhamento de mapa de acordo com a bússola ou a direção do movimento; opcional orientação de faixas, exibição de limite de velocidade, gravação e vozes TTS\n\nLimitações nesta versão gratuita do OsmAnd:\n - número limitado de transferências de mapas\n - sem acesso off-line a POIs da Wikipédia\n\nOsmAnd é ativamente desenvolvido e nosso projeto e seus progressos se baseiam em contribuir economicamente para financiar o desenvolvimento e testar novas funcionalidades. Por favor, considere comprar OsmAnd+, financiar específicos recursos novos ou fazer uma doação geral em osmand.net. "</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (Direções de Navegação Automatizada do OSM)
+\n
+\n OsmAnd é um aplicativo de navegação de código aberto com acesso a uma grande variedade de dados globais do OpenStreetMap (OSM). Todos os dados do mapa (mapas vetoriais ou de quadrículas) podem ser armazenados no cartão de memória do telefone para uso offline. A funcionalidade de roteamento off-line e on-line também é oferecida, incluindo orientação de voz curva-a-curva.
+\n
+\n Algumas das principais características:
+\n - Funcionalidade offline completa (armazenar mapas vetoriais ou de quadrículas baixadas no armazenamento do dispositivo)
+\n - Mapas vetoriais offline compactos para todo o mundo disponíveis
+\n - Download de mapas de países ou regiões diretamente do aplicativo
+\n - Sobreposição de várias camadas de mapas possíveis, como trilhas GPX ou navegação, Pontos de Interesse, Favoritos, curvas de nível, paradas de transporte público, mapas adicionais com transparência personalizável
+\n - Pesquisa offline de endereços e locais (POIs)
+\n - Encaminhamento off-line para distâncias médias
+\n - Modos de carro, bicicleta e pedestre com os opcionais:
+\n - Mudança automática de visualização dia/noite
+\n - Zoom do mapa conforme velocidade
+\n - Alinhamento do mapa de acordo com a bússola ou a direção do movimento
+\n - Guia de faixa de rodagem, indicação do limite de velocidade, vozes gravadas e TTS
+\n
+\n Limitações desta versão gratuita do OsmAnd:
+\n - Número de downloads de mapas limitado
+\n - Sem acesso offline a POIs da Wikipedia
+\n
+\n OsmAnd está sendo desenvolvido ativamente e o nosso projeto e seu progresso contínuo depende de contribuições financeiras para o desenvolvimento e teste de novas funcionalidades. Por favor, considere adquirir OsmAnd+, ou financiar novas funcionalidades específicas ou fazer uma doação geral em https://osmand.net.</string>
     <string name="day_night_info_description">Nascer do Sol: %1$s
 Pôr do Sol: %2$s</string>
     <string name="avoid_unpaved">Evitar vias não pavimentadas</string>
@@ -908,7 +928,7 @@ Pôr do Sol: %2$s</string>
     <string name="send_files_to_osm">Enviar arquivos GPX para o OSM?</string>
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etiquetas</string>
-    <string name="gpx_description_txt">Descrição</string>
+    <string name="shared_string_description">Descrição</string>
     <string name="validate_gpx_upload_name_pwd">Especificar seu nome e senha de usuário do OSM para enviar arquivos GPX.</string>
     <string name="default_buttons_support">Apoiar</string>
     <string name="support_new_features_descr">Doar para ver novos recursos implementados neste aplicativo.</string>
@@ -1013,7 +1033,27 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_service">Modo em segundo plano</string>
     <string name="osmand_service_descr">OsmAnd é executado em segundo plano com a tela desligada.</string>
     <string name="arrival_distance_factor_late">Atrasado</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (Direções de Navegação Automatizada para OSM)\n OsmAnd+ é aplicativo de navegação de código aberto com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados de mapa (vetores ou quadrículas) podem ser armazenados na memória do seu aparelho para uso off-line. OsmAnd também oferece a funcionalidade de roteamento on-line e off-line, incluindo orientação por voz curva a curva. OsmAnd+ é a versão paga do aplicativo, ao comprá-lo você ajuda o projeto, financiando o desenvolvimento de novas funcionalidades e recebe as últimas atualizações.\n\nAlgumas das principais características:\n- completa funcionalidade offline (armazena mapas vetorizados baixados ou quadrículas no armazenamento do aparelho)\n- mapas vetoriais off-line compactos e disponíveis para o mundo inteiro\n- transferência ilimitada de mapas por país ou região diretamente do app\n- recurso Wikipédia off-line (transferir POIs da Wikipédia), ótimo para passeios turísticos\n- possível sobreposição de várias camadas de mapa, como trilhas GPX, pontos de interesse, favoritos, curvas de nível e mapas adicionais com transparência personalizável\n- pesquisa off-line de endereços e lugares (POIs)\n- roteamento off-line para distâncias curtas (experimental)\n- modos carro, bicicleta e a pé com:\n- opcional mudança automática do modo dia/noite\n- opcional zoom dinâmico de acordo com a velocidade\n- opcional, alinhar o mapa de acordo com a bússola ou o seu sentido de movimento\n- opcional orientação de faixa, exibição do limite de velocidade, vozes gravadas e TTS "</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direções de Navegação Automatizada do OSM)
+\n
+\n OsmAnd+ é um aplicativo de navegação de código aberto com acesso a uma grande variedade de dados globais do OpenStreetMap (OSM). Todos os dados do mapa (mapas vetoriais ou de quadrículas) podem ser armazenados no cartão de memória do telefone para uso offline. A funcionalidade de roteamento off-line e on-line também é oferecida, incluindo orientação de voz curva-a-curva.
+\n
+\n OsmAnd+ é a versão paga do aplicativo, ao comprá-lo você apoia o projeto, financia o desenvolvimento de novas funcionalidades e recebe as últimas atualizações.
+\n
+\n Algumas das principais características:
+\n - Funcionalidade offline completa (armazenar mapas vetoriais ou de quadrículas no armazenamento do dispositivo)
+\n - Mapas vetoriais offline compactos para todo o mundo disponíveis
+\n - Download ilimitado de mapas de países ou regiões diretamente do aplicativo
+\n - Recurso Wikipedia offline (download de POIs da Wikipedia), ótimo para passeios turísticos
+\n - Sobreposição de várias camadas de mapas possíveis, como trilhas GPX ou navegação, Pontos de Interesse, Favoritos, curvas de nível, paradas de transporte público, mapas adicionais com transparência personalizável
+\n
+\n - Pesquisa offline de endereços e locais (POIs)
+\n - Encaminhamento off-line para distâncias médias
+\n - Modos de carro, bicicleta e pedestre com os opcionais:
+\n - Mudança automática de visualização dia/noite
+\n - Zoom do mapa conforme velocidade
+\n - Alinhamento do mapa de acordo com a bússola ou a direção do movimento
+\n - Guia de faixa de rodagem, indicação do limite de velocidade, vozes gravadas e TTS
+\n</string>
     <string name="init_native_library">Iniciando a biblioteca nativa…</string>
     <string name="download_files_not_enough_space">Não há espaço livre suficiente para baixar %1$s MB (disponível: %2$s).</string>
     <string name="download_files_question_space">Baixar {0} arquivo(s)? Espaço de armazenamento utilizado é {1} MB. (Espaço disponível é {2} MB.)</string>
@@ -1504,7 +1544,6 @@ Pôr do Sol: %2$s</string>
     <string name="av_camera_pic_size">Tamanho da foto</string>
     <string name="av_camera_pic_size_descr">Selecionar tamanho de imagem da foto.</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
-    <string name="plugin_description_title">Descrição</string>
     <string name="plugin_install_needs_network">Você precisa estar conectado à Internet para instalar este plugin.</string>
     <string name="get_plugin">Obter</string>
     <string name="shared_string_logoff">Desconectar</string>
@@ -1615,7 +1654,6 @@ Pôr do Sol: %2$s</string>
     <string name="av_locations_descr">Arquivo GPX com notas de posição.</string>
     <string name="av_locations">Posições</string>
     <string name="contact_info">Informações de contato</string>
-    <string name="description">Descrição</string>
     <string name="add_opening_hours">Adicionar horário de funcionamento</string>
     <string name="poi_dialog_poi_type">Tipo de POI</string>
     <string name="number_of_rows_in_dash">Número de linhas no traço de %1$s</string>
@@ -2385,8 +2423,8 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_take_photo_note">Nova nota de foto</string>
     <string name="quick_action_add_osm_bug">Adicionar Nota OSM</string>
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
-    <string name="quick_action_navigation_voice_off">Voz desligada</string>
-    <string name="quick_action_navigation_voice_on">"Silenciar voz "</string>
+    <string name="quick_action_navigation_voice_off">Ligar voz</string>
+    <string name="quick_action_navigation_voice_on">Silenciar voz</string>
     <string name="quick_action_add_gpx">Adicionar ponto de passagem GPX</string>
     <string name="quick_action_add_parking">Marcar estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
@@ -2514,19 +2552,19 @@ Pôr do Sol: %2$s</string>
 \n• Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes
 \n• Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
-    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
-\n• Europa Ocidental: ****
-\n• Europa Oriental: ***
-\n• Rússia: ***
-\n• América do Norte: ***
-\n• América do Sul: **
-\n• Ásia: **
-\n• Japão e Coreia: ***
-\n• Oriente Médio: **
-\n• África: **
-\n• Antártida: *
-\nA maioria dos países ao redor do globo disponível como downloads! 
-\nDo Afeganistão ao Zimbabue, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha, …</string>
+    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: 
+\n• Europa Ocidental: **** 
+\n• Europa Oriental: *** 
+\n• Rússia: *** 
+\n• América do Norte: *** 
+\n• América do Sul: ** 
+\n• Ásia: ** 
+\n• Japão e Coreia: *** 
+\n• Oriente Médio: ** 
+\n• África: ** 
+\n• Antártida: * 
+\nA maioria dos países ao redor do globo disponível para baixar! 
+\nDo Afeganistão ao Zimbábue, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha, …</string>
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar/Ocultar notas OSM no mapa.</string>
@@ -2738,17 +2776,17 @@ Pôr do Sol: %2$s</string>
 \n• Mantém seus lugares mais importantes em \'Favoritos\'
 \n• Permite-lhe escolher como exibir nomes no mapa: em inglês, local ou escrita fonética
 \n• Exibe mapas on-line especializados, vista de satélite (do Bing), camadas diferentes como trilhas GPX de navegação/turismo e camadas adicionais com transparência personalizável</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) é um aplicativo de mapa e navegação com acesso a dados do OpenStreetMap (OSM) livre, em todo o mundo e alta qualidade.
-\nDesfrute da navegação visual ou por voz, exibindo POIs (pontos de interesse), criando e gerenciando trilhas GPX, usando informação de altitude e curvas de nível, escolher entre modos dirigir, andar de bicicleta e pedestres, editar o OSM e muito mais.
-\n
-\nOsmAnd+ é a versão paga do app. Ao comprá-lo, você apoiar o projeto, financia o desenvolvimento de novas funcionalidades e recebe as últimas atualizações.
-\n
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres de todo o mundo em alta qualidade do OpenStreetMap (OSM). 
+\nPoderá usar a navegação visual ou por voz, ver POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar informação de altitude e curvas de nível, escolher entre modos dirigir, andar de bicicleta e pedestres, editar o OSM e muito mais. 
+\n 
+\nOsmAnd+ é a versão paga do app. Ao comprá-lo, você apoia o projeto, financia o desenvolvimento de novas funcionalidades e recebe as últimas atualizações. 
+\n 
 \nAlgumas das principais características:</string>
-    <string name="osmand_plus_extended_description_part7">Contribuia diretamente para o OSM
-\n• Avisar erros dados
-\n• Fazer upload de trilhas GPX para o OSM diretamente do app
-\n• Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se off-line)
-\n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
+    <string name="osmand_plus_extended_description_part7">Contribua diretamente para o OSM 
+\n• Avisar erros de dados 
+\n• Fazer upload de trilhas GPX para o OSM diretamente do app 
+\n• Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se offline) 
+\n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep) 
 \nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
     <string name="shared_string_world">Mundo</string>
@@ -2801,19 +2839,19 @@ Pôr do Sol: %2$s</string>
     <string name="default_price_currency_format">%1$,2f %2$s</string>
     <string name="osm_live_payment_header">Selecione o período de pagamento conveniente para você:</string>
     <string name="osm_live_payment_contribute_descr">Parte da renda vai para os contribuidores do OpenStreetMap.</string>
-    <string name="release_3_1">• Navegação: corrige barra de progresso, inversão rápida de início e fim de rota
-\n
-\n• Marcadores de mapa: corrige ligar/desligar grupos, habilidade para ocultar os marcadores do mapa
-\n
-\n• Edição OSM: habilidade para editar etiquetas de objetos não pontuais e caminhos, corrige falta de comentários em notas, backup de edições
-\n
-\n• Melhora análise da Wikipédia e Wikivoyage, arquivos atualizados já estão disponíveis
-\n
-\n• Menu de contexto: corrige a cor de escudos de rodovias no modo noite, corrige tamanhos adicionais de menu
-\n
-\n• Navegação a barco: suporte para o canal navegável
-\n
-\n• Outras correções de bugs
+    <string name="release_3_1">• Navegação: Corrige barra de progresso, inversão rápida de início e fim de rota 
+\n 
+\n• Marcadores de mapa: Corrige ligar/desligar grupos, habilidade para ocultar os marcadores do mapa 
+\n 
+\n• Edição OSM: Habilidade para editar etiquetas de objetos não pontuais e caminhos, corrige falta de comentários em notas, backup de edições 
+\n 
+\n• Melhora análise da Wikipédia e Wikivoyage, arquivos atualizados já estão disponíveis 
+\n 
+\n• Menu de contexto: Corrige a cor de escudos de rodovias no modo noite, corrige tamanhos adicionais de menu 
+\n 
+\n• Navegação a barco: Suporte para o canal navegável 
+\n 
+\n• Outras correções de bugs 
 \n</string>
     <string name="send_search_query_description">Enviaremos a sua pesquisa: <b>\"%1$s\"</b>, bem como a sua localização.<br/>
         <br/> Nenhuma informação pessoal é coletada, os dados de pesquisa são usados apenas para melhorar o algoritmo de pesquisa.<br/>
@@ -2822,7 +2860,7 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_menu_title_pano">Exibir só imagens 360°</string>
     <string name="shared_string_launch">Iniciar</string>
     <string name="run_full_osmand_header">Iniciar OsmAnd\?</string>
-    <string name="swap_start_and_destination">Trocar início e destino</string>
+    <string name="swap_start_and_destination">Inverter partida e destino</string>
     <string name="add_destination_point">Adicionar destino</string>
     <string name="add_intermediate_point">Adicionar intermediário</string>
     <string name="add_start_point">Adicionar ponto de partida</string>
@@ -2860,17 +2898,35 @@ Pôr do Sol: %2$s</string>
     <string name="add_home">Adicionar casa</string>
     <string name="add_work">Adicionar trabalho</string>
     <string name="work_button">Trabalho</string>
-    <string name="shared_string_swap">Troca</string>
+    <string name="shared_string_swap">Inverter</string>
     <string name="show_more">Mostrar mais</string>
     <string name="tracks_on_map">Faixas no mapa</string>
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
     <string name="step_by_step">Passo a passo</string>
     <string name="road_types">Tipos de estrada</string>
-    <string name="exit_at">Sair na</string>
-    <string name="sit_on_the_stop">Sente-se na parada</string>
+    <string name="exit_at">Desembarque em</string>
+    <string name="sit_on_the_stop">Embarque na parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Mostrar/Ocultar faixas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tocar neste botão de ação mostra ou oculta faixas GPX selecionadas no mapa</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
+    <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa
+\n
+\n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade
+\n
+\n - Navegação de transporte público que suporta todos os tipos de transporte: metro, ônibus, bonde/VLT, etc.
+\n
+\n - Nova Ação Rápida para mostrar/ocultar faixas e modos dia/noite
+\n
+\n - Áreas fixas exibidas como inundadas na Alemanha, África do Sul, Quebec
+\n
+\n - Suporte adicional para importação de KML e KMZ
+\n
+\n - Colisões fixas na abertura de algumas paragens de transportes públicos
+\n
+\n - Removido Facebook e Firebase Analytics da versão gratuita (OsmAnd+ não inclui)
+\n</string>
+    <string name="use_osm_live_public_transport_description">Habilitar o transporte público para alterações do OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transporte público OsmAnd Live</string>
 </resources>

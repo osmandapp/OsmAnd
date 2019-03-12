@@ -359,7 +359,7 @@
     <string name="poi_aerialway_magic_carpet">Ŝtuparlifto skiada</string>
     <string name="poi_aerialway_pylon">Kablovoja fosto</string>
     <string name="poi_motorway_junction">Elveturejo el aŭtovojo</string>
-    <string name="poi_turning_circle">Ejo por ĝirado U-forma</string>
+    <string name="poi_turning_circle">Loko por turniĝi malantaŭen</string>
     <string name="poi_standpipe">Hidranto senprema</string>
     <string name="poi_water_tower">Akvoturo</string>
     <string name="poi_water_works">Akvotrinkebligejo</string>
@@ -1321,7 +1321,7 @@
     <string name="poi_love_hotel">Amor-hotelo</string>
     <string name="poi_payment_coins_yes">moneroj</string>
     <string name="poi_payment_coins_no">Moneroj malakceptataj</string>
-    <string name="poi_payment_coins_0.5">moneroj $0,5</string>
+    <string name="poi_payment_coins_0_5">moneroj $0,5</string>
     <string name="poi_payment_coins_50c12">moneroj €0,5, €1 kaj €2</string>
     <string name="poi_payment_telephone_cards_yes">telefonkartoj</string>
     <string name="poi_payment_telephone_cards_no">Telefonkartoj malakceptataj</string>
@@ -3551,4 +3551,6 @@
     <string name="poi_park_ride_tram">tramo</string>
     <string name="poi_park_ride_ferry">pramo</string>
     <string name="poi_generator_source_biomass">Energifonto: biomaso</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">per-radiad-kuracado (radioterapio)</string>
+    <string name="poi_hazard">Danĝerejo</string>
 </resources>

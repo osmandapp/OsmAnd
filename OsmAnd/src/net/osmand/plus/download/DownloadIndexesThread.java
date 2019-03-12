@@ -20,6 +20,8 @@ import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
+
+import net.osmand.AndroidNetworkUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
@@ -43,8 +45,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -528,6 +532,7 @@ public class DownloadIndexesThread {
 						}
 						setTag(item);
 						boolean result = downloadFile(item, filesToReindex, forceWifi);
+						checkDownload(item);
 						success = result || success;
 						if (result) {
 							if (DownloadActivityType.isCountedInDownloads(item)) {
@@ -669,5 +674,12 @@ public class DownloadIndexesThread {
 			currentDownloadingItemProgress = getProgressPercentage();
 			downloadInProgress();
 		}
+	}
+
+	private void checkDownload(IndexItem item) {
+		Map<String, String> params = new HashMap<>();
+		params.put("file_name", item.fileName);
+		params.put("file_size", item.size);
+		AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/check_download", params, "Check download", false, false, null);
 	}
 }

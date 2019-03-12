@@ -619,7 +619,7 @@ public class ExternalApiHelper {
 		}
 		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, from, fromDesc, true, false);
 		if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
-			mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().show();
+			mapActivity.getMapRouteInfoMenu().show();
 		} else {
 			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
 				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());

@@ -571,7 +571,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="native_rendering">Izvorno izrisovanje</string>
     <string name="switch_to_raster_map_to_see">Za to mesto krajevni zemljevidi niso na voljo. Prejmete jih lahko v nastavitvah (krajevni podatki) ali preklopite na spletne zemljevide.</string>
     <string name="gpx_tags_txt">Oznake</string>
-    <string name="gpx_description_txt">Opis</string>
+    <string name="shared_string_description">Opis</string>
     <string name="default_buttons_support">Podpora</string>
     <string name="show_ruler_level">Pokaži ravnilo</string>
     <string name="info_button">Podrobnosti</string>
@@ -1349,68 +1349,15 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="share_route_as_gpx">Objavi pot kot datoteko GPX</string>
     <string name="share_route_subject">Objavi pot preko spletišča OsmAnd</string>
     <string name="navigation_intent_invalid">Neveljaven zapis: %s</string>
-
-    
-    
-    
-    
     <string name="keep_informing_never">Samo ročno (pritisnite na puščico)</string>
     <string name="keep_informing_descr">Ponovno najavi obvestila navigacije v rednih časovnih razmikih.</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
-    
     <string name="arrival_distance_descr">Kako hitro naj se najavi napovedan čas prihoda?</string>
     <string name="arrival_distance">Najava prihoda</string>
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="rendering_value_pink_name">Rožnata</string>
-    
     <string name="rendering_value_brown_name">Rjava</string>
-    
-    
-    
-    
-
-    
     <string name="osmo_edit_color">Barva oznake točke:</string>
-    
-    
-    
-    
-    
-    
-    
     <string name="int_days">dni</string>
-    <string name="osmo_group_description">Opis</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="osmo_connect_menu">Poveži</string>
     <string name="gpx_info_distance">Razdalja: %1$s (%2$s točk) </string>
     <string name="gpx_info_start_time">Čas začetka: %1$tF,  %1$tT </string>
@@ -1424,26 +1371,14 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="gpx_timespan">Časovni razpon: %1$s</string>
     <string name="gpx_selection_number_of_points"> %1$s točk</string>
     <string name="gpx_selection_point">Točka %1$s</string>
-
     <string name="gpx_selection_points">%1$s \nTočk</string>
     <string name="gpx_file_is_empty">Datoteka GPX je brez podatkov</string>
-
     <string name="shared_string_tracks">Shranjene sledi</string>
     <string name="shared_string_my_places">Shranjene točke</string>
-
-    
-    
-    
-    
-    
-
-    
-    
     <string name="gpx_timemoving">Čas premikanja: %1$s</string>
     <string name="local_index_select_gpx_file">Izberite za prikaz</string>
     <string name="sort_by_distance">Razvrsti po razdalji</string>
     <string name="sort_by_name">Razvrsti po imenu</string>
-
     <string name="show_zoom_buttons_navigation_descr">Med navigacijo pokaži gumbe za približanje zemljevida.</string>
     <string name="show_zoom_buttons_navigation">Pokaži gumbe za približanje zemljevida</string>
     <string name="save_as_favorites_points">Shrani kot skupino priljubljenih</string>
@@ -1706,8 +1641,6 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="edit_group">Urejanje skupine</string>
     <string name="shared_string_enable">Omogoči</string>
     <string name="shared_string_disable">Onemogoči</string>
-    <string name="plugin_description_title">Opis</string>
-
     <string name="plugin_install_needs_network">Za namestitev tega vstavka je zahtevana internetna povezava.</string>
     <string name="get_plugin">Pridobi</string>
     <string name="rendering_attr_pisteRoutes_name">Smučišča</string>
@@ -1934,10 +1867,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="poi_action_delete">izbriši</string>
     <string name="tab_title_basic">Osnovno</string>
     <string name="tab_title_advanced">Napredno</string>
-
-    
     <string name="contact_info">Podatki stika</string>
-    <string name="description">Opis</string>
     <string name="add_opening_hours">Dodaj odpiralni čas</string>
     <string name="poi_dialog_poi_type">Vrsta točke POI</string>
     <string name="number_of_rows_in_dash">Število vrstic v %1$s</string>

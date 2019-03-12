@@ -744,7 +744,6 @@
     <string name="osmo_edit_color">Боја приказа</string>
     <string name="int_days">дана</string>
     <string name="osmo_connect_menu">Повежи се</string>
-    <string name="osmo_group_description">Опис</string>
     <string name="use_points_as_intermediates">Рачунај пут између тачака</string>
     <string name="always_center_position_on_map">Увек приказуј положај у средини</string>
     <string name="voice_pref_title">Глас</string>
@@ -1738,7 +1737,7 @@
     <string name="plugins_screen">Додаци</string>
     <string name="prefs_plugins">Додаци</string>
     <string name="gpx_visibility_txt">Видљивост</string>
-    <string name="gpx_description_txt">Опис</string>
+    <string name="shared_string_description">Опис</string>
     <string name="default_buttons_support">Подршка</string>
     <string name="support_new_features_descr">Донирајте да бисте видели нове функционалности у апликацији.</string>
     <string name="info_button">Информације</string>
@@ -2173,7 +2172,6 @@
     <string name="av_camera_focus_hiperfocal">Хиперфокални фокус</string>
     <string name="av_camera_focus_edof">Продужена дубина поља (EDOF)</string>
     <string name="navigation_intent_invalid">Неисправни формат: %s</string>
-    <string name="plugin_description_title">Опис</string>
     <string name="plugin_install_needs_network">Морате имати интернет да бисте инсталирали овај додатак.</string>
     <string name="get_plugin">Преузми</string>
     <string name="use_fast_recalculation">Пмаетно прерачунавање пута</string>
@@ -2199,7 +2197,6 @@
     <string name="opening_at">Отвара се у</string>
     <string name="closing_at">Затвара се у</string>
     <string name="contact_info">Контакт информације</string>
-    <string name="description">Опис</string>
     <string name="add_opening_hours">Додај времена отварања</string>
     <string name="poi_dialog_poi_type">Тип тачке од интереса</string>
     <string name="please_specify_poi_type">Молимо назначите тип тачке од интереса.</string>

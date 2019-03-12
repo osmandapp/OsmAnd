@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -28,10 +29,11 @@ public abstract class BaseCard {
 	private CardListener listener;
 
 	public interface CardListener {
-		void onCardLayoutNeeded();
+		void onCardLayoutNeeded(@NonNull BaseCard card);
+		void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex);
 	}
 
-	public BaseCard(MapActivity mapActivity) {
+	public BaseCard(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
@@ -60,7 +62,7 @@ public abstract class BaseCard {
 	public void setLayoutNeeded() {
 		CardListener listener = this.listener;
 		if (listener != null) {
-			listener.onCardLayoutNeeded();
+			listener.onCardLayoutNeeded(this);
 		}
 	}
 

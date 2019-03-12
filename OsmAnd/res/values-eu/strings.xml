@@ -423,7 +423,7 @@
     <string name="send_files_to_osm">Bidali GPX fitxategiak OSMra?</string>
     <string name="gpx_visibility_txt">Ikuserraztasuna</string>
     <string name="gpx_tags_txt">Etiketak</string>
-    <string name="gpx_description_txt">Deskribapena</string>
+    <string name="shared_string_description">Deskribapena</string>
     <string name="validate_gpx_upload_name_pwd">Zehaztu zure OSMeko erabiltzaile eta pasahitza GPX fitxategiak igotzeko.</string>
     <string name="default_buttons_support">Lagundu</string>
     <string name="support_new_features">Ezaugarri berriekin lagundu</string>
@@ -1195,7 +1195,6 @@ Lorratza %2$s</string>
     <string name="osmo_edit_color">Erakutsi kolorea</string>
     <string name="int_days">egunak</string>
     <string name="osmo_connect_menu">Konektatu</string>
-    <string name="osmo_group_description">Deskribapena</string>
     <string name="voice_pref_title">Ahotsa</string>
     <string name="misc_pref_title">Denetarik</string>
     <string name="localization_pref_title">Kokapena</string>
@@ -1924,7 +1923,6 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="favourites_context_menu_add">Gehitu gogokoa</string>
     <string name="poi_action_delete">ezabatu</string>
     <string name="poi_dialog_reopen">Berrireki</string>
-    <string name="plugin_description_title">Deskripzioa</string>
     <string name="get_plugin">Eskuratu</string>
     <string name="do_you_like_osmand">OsmAnd gogoko duzu?</string>
     <string name="we_really_care_about_your_opinion">Zure iritziak arduratzen gaitu eta zure iruzkinei garrantzia ematen diegu.</string>
@@ -1951,7 +1949,6 @@ mapak eta nabigazioa</string>
     <string name="opening_at">Irekiera ordua</string>
     <string name="closing_at">Itxiera ordua</string>
     <string name="contact_info">Kontaktu informazioa</string>
-    <string name="description">Deskripzioa</string>
     <string name="add_opening_hours">Gehitu irekiera orduak</string>
     <string name="poi_dialog_poi_type">POI mota</string>
     <string name="number_of_rows_in_dash">Paneleko errenkada kopurua %1$s</string>
@@ -2811,12 +2808,12 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_world">Mundua</string>
     <string name="increase_search_radius_to">Handitu bilaketa-erradioa %1$s-ra</string>
     <string name="send_search_query_description">Zure bilaketa <b>\"%1$s\"</b> eta kokapena bidaliko dugu. <br/>
-        <br/>Ez dugu informazio pertsonala bilduko, bilaketa datuak algoritmoa hobetzeko biltzen ditugu.<br/>
+        <br/>Ez da informazio pertsonala biltzen, bilaketen datuak algoritmoa hobetzeko biltzen ditugu.<br/>
     </string>
     <string name="search_no_results_description">Emaitzarik ez?
 \nEman iezaguzu horren berri.</string>
     <string name="send_search_query">Bilaketa-kontsulta bidali?</string>
-    <string name="thank_you_for_feedback">Eskerrik asko iruzkinagatik</string>
+    <string name="thank_you_for_feedback">Eskerrik asko zure iruzkinagatik</string>
     <string name="poi_cannot_be_found">Nodoa edo bidea ezin izan da aurkitu.</string>
     <string name="search_no_results_feedback">Bilaketaren emaitzarik ez?
 \nEgin iruzkin bat</string>
@@ -2863,20 +2860,20 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="edit_map_marker">Editatu mapa-markatzailea</string>
     <string name="third_party_application">Hirugarrengoen aplikazioa</string>
     <string name="osm_live_plan_pricing">Plana eta prezioak</string>
-    <string name="osm_live_payment_monthly_title">Ordaindu hilabetero</string>
-    <string name="osm_live_payment_3_months_title">Ordaindu 3 hilero behin</string>
-    <string name="osm_live_payment_annual_title">Ordaindu urtero</string>
+    <string name="osm_live_payment_monthly_title">Hilabetero</string>
+    <string name="osm_live_payment_3_months_title">3 hilero behin</string>
+    <string name="osm_live_payment_annual_title">Urtero</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / hilero</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / hilero</string>
-    <string name="osm_live_payment_discount_descr">Gorde %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Zure oraingo harpidetza</string>
+    <string name="osm_live_payment_discount_descr">Gorde %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Oraingo harpidetza</string>
     <string name="osm_live_payment_renews_monthly">Hilero berritzen da</string>
     <string name="osm_live_payment_renews_quarterly">Hiru hilero berritzen da</string>
     <string name="osm_live_payment_renews_annually">Urtero berritzen da</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Hautatu ondo datorkizun ordainketa epea:</string>
     <string name="osm_live_payment_contribute_descr">Diru-sarreren parte bat OpenStreetMap-eko parte-hartzaileei doakie.</string>
-    <string name="powered_by_osmand">OsmAnd-ek bultzatua</string>
+    <string name="powered_by_osmand">Egilea: OsmAnd</string>
     <string name="osm_live_subscriptions">Harpidetzak</string>
     <string name="mapillary_menu_title_pano">Erakutsi 360º argazkiak besterik ez</string>
     <string name="shared_string_launch">Abiatu</string>
@@ -2905,7 +2902,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_capacity">Edukiera</string>
     <string name="shared_string_width">Zabalera</string>
     <string name="shared_string_height">Altuera</string>
-    <string name="waiting_for_route_calculation">Ibilbidea kalkulatu bitartean zain</string>
+    <string name="waiting_for_route_calculation">Ibilbidea kalkulatzen…</string>
     <string name="show_along_the_route">Erakutsi ibilbidean zehar</string>
     <string name="choose_track_file_to_follow">Hautatu lorratz fitxategia jarraitzeko</string>
     <string name="route_class_stat_container">Klasea</string>
@@ -2917,4 +2914,16 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="work_button">Lana</string>
     <string name="avoid_roads_descr">Hautatu saihestu nahi duzun bidea mapan edo beheko zerrendan:</string>
     <string name="quick_action_switch_day_night_descr">Ekintza botoi hau sakatzean OsmAnd-ek egun eta gau moduen artean txandakatuko du</string>
+    <string name="use_osm_live_public_transport_description">Gaitu garraio publikoa OsmAnd Live aldaketetan.</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live garraio publikoa</string>
+    <string name="time_of_day">Eguneko ordua</string>
+    <string name="by_transport_type">Egilea: %1$s</string>
+    <string name="step_by_step">Urratsez urrats</string>
+    <string name="road_types">Bide motak</string>
+    <string name="exit_at">Irten hemen</string>
+    <string name="sit_on_the_stop">Muntatu honako geltokian</string>
+    <string name="shared_string_swap">Aldatu</string>
+    <string name="show_more">Erakutsi gehiago</string>
+    <string name="tracks_on_map">Mapako lorratzak</string>
+    <string name="quick_action_show_hide_gpx_tracks">Erakutsi/ezkutatu GPX lorratzak</string>
 </resources>

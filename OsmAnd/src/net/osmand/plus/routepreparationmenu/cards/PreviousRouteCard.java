@@ -48,11 +48,14 @@ public class PreviousRouteCard extends BaseCard {
 		String destinationName = "";
 		destinationName = getPointName(destinationPoint);
 		destinationTitle.setText(destinationName);
-		View homeButton = view.findViewById(R.id.card_button);
-		homeButton.setOnClickListener(new View.OnClickListener() {
+		View button = view.findViewById(R.id.card_button);
+		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				targetPointsHelper.restoreTargetPoints(true);
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardButtonPressed(PreviousRouteCard.this, 0);
+				}
 			}
 		});
 	}

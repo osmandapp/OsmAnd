@@ -456,7 +456,6 @@
     <string name="osmo_edit_color">Colore visualizzau</string>
     <string name="int_days">dies</string>
     <string name="osmo_connect_menu">Connete</string>
-    <string name="osmo_group_description">Descritzione</string>
     <string name="use_points_as_intermediates">Càlcula s’àndala intre sos puntos</string>
     <string name="lang_fa">Persianu</string>
     <string name="route_descr_destination">Destinatzione</string>
@@ -625,7 +624,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="send_files_to_osm">Inviare sos documentos GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etichetas</string>
-    <string name="gpx_description_txt">Descritzione</string>
+    <string name="shared_string_description">Descritzione</string>
     <string name="validate_gpx_upload_name_pwd">Dislinda su nùmene impreadore tuo e sa crae (password) tua de OSM pro carrigare documentos GPX.</string>
     <string name="default_buttons_support">Sustènne</string>
     <string name="support_new_features">Sustènne caraterìsticas noas</string>
@@ -1298,7 +1297,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="navigation_intent_invalid">Formatu non bàlidu: %s</string>
     <string name="show_more_map_detail">Ammustra prus minujas in sa mapa</string>
     <string name="show_more_map_detail_descr">Ammustra carchi minuja de sas mapas vetoriales (istradas etc.) fintzas a sos livellos de ismanniamentu prus bassos.</string>
-    <string name="show_route">Minujas àndala</string>
+    <string name="show_route">Minujas de s\'àndala</string>
     <string name="use_high_res_maps_descr">Non allonghiare (ne inghelare) sos tasseddos de sa mapa in sos dispositivos a carchesa arta.</string>
     <string name="background_router_service_descr">Arrastat sa positzione tua cando s’ischermu est istudadu.</string>
     <string name="off_router_service_no_gps_available">Su servìtziu de nàvigu de isfundu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
@@ -1422,7 +1421,6 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="remove_the_tag">BOGA SU TAG</string>
     <string name="shared_string_disabled">Disabilitadu</string>
     <string name="shared_string_enabled">Abilitadu</string>
-    <string name="plugin_description_title">Descritzione</string>
     <string name="edit_group">Modìfica su grupu</string>
     <string name="shared_string_enable">Abìlita</string>
     <string name="shared_string_disable">Disabìlita</string>
@@ -1648,7 +1646,6 @@ Lon %2$s</string>
     <string name="av_locations_descr">Documentu GPX cun notas locales.</string>
     <string name="av_locations">Localidades</string>
     <string name="contact_info">Informatziones de cuntatu</string>
-    <string name="description">Descritzione</string>
     <string name="add_opening_hours">Annanghe s’oràriu de abertura</string>
     <string name="poi_dialog_poi_type">Casta de PDI</string>
     <string name="please_specify_poi_type">Dislinda casta de PDI.</string>
@@ -2916,4 +2913,23 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Incarchende custu butone pro s\'atzione at a ammustrare o cuare sas rastas ischertadas in sa mapa</string>
     <string name="quick_action_gpx_tracks_hide">Istichi sas rastas GPX</string>
     <string name="quick_action_gpx_tracks_show">Ammustra sas rastas GPX</string>
+    <string name="release_3_3">• Ischermada \'Diretziones\' noa: Ammustrat sos butones de destinatzione pro sa domo e su logu de traballu, s\'incurtzada \'àndala imbeniente\', sa lista de rastas GPX e de marcadores ativos e sa cronologia de sas chircas
+\n
+\n • Informatziones agiuntivas in suta de \'Minujas de s\'àndala\': casta de carreras, superfìtzies, ratesa, uniformidade
+\n
+\n • Nàvigu cun su trasportu pùblicu chi suportat cada genia de trasportu: metropolitana, postale, tram, etz.
+\n
+\n • Butone de atzione nou pro ammustrare/istichire rastas e modalidades die/note
+\n
+\n • Àreas fissadas ammustradas comente inundadas in Germània, Àfrica de su Sud, Quebec
+\n
+\n • Suportu agiuntivu pro s\'importatzione de KML e KMZ
+\n
+\n • Errore de istudada a s\'abertura de carchi firmada de trasportu pùblicu curretu
+\n
+\n • Anàlisi de Facebook e Firebase bogadas dae sa versione lìbera (OsmAnd+ non las incluet)
+\n
+\n</string>
+    <string name="use_osm_live_public_transport_description">Abìlita su trasportu pùblicu pro sas modìficas de OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Trasportu pùblicu in OsmAnd Live</string>
 </resources>

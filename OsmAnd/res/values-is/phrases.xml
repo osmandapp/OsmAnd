@@ -1930,7 +1930,7 @@
     <string name="poi_religion_sikh">Sikhismi</string>
     <string name="poi_religion_buddhist">Búddismi</string>
     <string name="poi_religion_hindu">Hindúismi</string>
-    <string name="poi_religion_shinto">Shinto</string>
+    <string name="poi_religion_shinto">Shintóismi</string>
     <string name="poi_religion_taoist">Taóismi</string>
     <string name="poi_religion_voodoo">Vúdú</string>
     <string name="poi_religion_multifaith">Fjöltrúar</string>
@@ -1962,7 +1962,7 @@
     <string name="poi_denomination_latter_day_saints">Síðari-daga-heilögu</string>
     <string name="poi_denomination_shingon_shu">Shingon búddismi</string>
     <string name="poi_denomination_maronite">Maronítar</string>
-    <string name="poi_denomination_mahayana">Mahayana</string>
+    <string name="poi_denomination_mahayana">Mahayana-búddismi</string>
     <string name="poi_religious">Helgistaður</string>
     <string name="poi_wayside_cross">Vegakross</string>
     <string name="poi_wayside_shrine">Vegaskrín</string>
@@ -2196,7 +2196,7 @@
     <string name="poi_aerialway_duration">Meðal-ferðatími, mínútur</string>
     <string name="poi_payment_coins_yes">Mynt</string>
     <string name="poi_payment_coins_no">Ekki tekið við mynt</string>
-    <string name="poi_payment_coins_0.5">$0.5 mynt</string>
+    <string name="poi_payment_coins_0_5">$0.5 mynt</string>
     <string name="poi_payment_coins_50c12">50c, 1€, og 2€ mynt</string>
     <string name="poi_payment_electronic_purses_yes">Rafbuddur</string>
     <string name="poi_payment_electronic_purses_no">Ekki tekið við rafbuddum</string>
@@ -2206,7 +2206,7 @@
     <string name="poi_payment_dkv_no">Ekki tekið við DKV</string>
     <string name="poi_payment_uta_yes">UTA</string>
     <string name="poi_payment_uta_no">Ekki tekið við UTA-kortum</string>
-    <string name="poi_payment_efectivo_yes">Efectivo</string>
+    <string name="poi_payment_efectivo_yes">Reiðufé</string>
     <string name="poi_payment_efectivo_no">Ekki tekið við Efectivo</string>
     <string name="poi_payment_girocard_yes">Girocard</string>
     <string name="poi_payment_girocard_no">Ekki tekið við Girocard</string>
@@ -3543,4 +3543,6 @@
     <string name="poi_park_ride_tram">Sporvagn</string>
     <string name="poi_park_ride_ferry">Ferja</string>
     <string name="poi_generator_source_biomass">Orkugjafi: lífmassi</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">Geislameðferð</string>
+    <string name="poi_hazard">Lífshætta</string>
 </resources>

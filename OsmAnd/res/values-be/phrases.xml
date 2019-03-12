@@ -1361,7 +1361,7 @@
     <string name="poi_aerialway_bubble_yes">Шкленне</string>
     <string name="poi_payment_coins_yes">Манеты</string>
     <string name="poi_payment_coins_no">Манеты не прымаюцца</string>
-    <string name="poi_payment_coins_0.5">Манеты па $ 0.5</string>
+    <string name="poi_payment_coins_0_5">Манеты па $ 0.5</string>
     <string name="poi_payment_coins_50c12">Манеты па 50c, 1€ і 2€</string>
     <string name="poi_payment_telephone_cards_yes">Тэлефонныя карткі</string>
     <string name="poi_payment_telephone_cards_no">Тэлефонныя карткі не прымаюцца</string>
@@ -3555,4 +3555,9 @@
     <string name="poi_park_ride_metro">Метрапалітэн</string>
     <string name="poi_park_ride_tram">Трамвай</string>
     <string name="poi_park_ride_ferry">Паром</string>
+    <string name="poi_park_ride">Перахопліваючая паркоўка</string>
+    <string name="poi_park_ride_hov">Аўта з некалькімі пасажырамі</string>
+    <string name="poi_generator_source_biomass">Крыніца энергіі: біямаса</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">Радыятэрапія</string>
+    <string name="poi_hazard">Небяспека</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="rendering_value_car_name">Takeṛṛust</string>
-    
-    
     <string name="rendering_value_bicycle_name">Azlalam</string>
     <string name="rendering_value_pedestrian_name">Amsebrid</string>
     <string name="shared_string_from">sγur</string>
@@ -278,22 +276,19 @@
     <string name="rendering_category_details">Talqayt</string>
     <string name="rendering_category_transport">Amesni</string>
     <string name="text_size">Tiddi n waḍris</string>
-    <string name="osmo_group_description">Asnummel</string>
     <string name="speak_street_names">Ismawen n iberdan (TTS)</string>
     <string name="context_menu_item_directions_to">Iwellihen γer</string>
     <string name="context_menu_item_directions_from">Tinilwin seg</string>
     <string name="street_name">Isem n webrid</string>
     <string name="phone">Tiliγri</string>
     <string name="map_widget_renderer">Aγanib n tkarḍa</string>
-    <string name="gpx_description_txt">Asnummel</string>
+    <string name="shared_string_description">Asnummel</string>
     <string name="user_password">Awal-ik uffir n OSM</string>
     <string name="city_type_hamlet">Aḥriq</string>
     <string name="amenity_type_tourism">Tamerrit</string>
     <string name="amenity_type_transportation">Amesni</string>
     <string name="transport_Routes">Iberdan</string>
     <string name="transport">Amesni</string>
-    <string name="plugin_description_title">Asnummel</string>
-    <string name="description">Asnummel</string>
     <string name="enter_new_name">Jerred ism ajdid</string>
 	<string name="shared_string_back">Uγal</string>
 	<string name="shared_string_view">Sken</string>

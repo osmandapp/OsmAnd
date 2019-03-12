@@ -140,7 +140,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-					mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().hide();
+					mapActivity.getMapRouteInfoMenu().hide();
 					app.getAvoidSpecificRoads().selectFromMap(mapActivity);
 					Fragment fragment = getTargetFragment();
 					if (fragment != null) {
@@ -289,10 +289,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			final MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-			if (mapRouteInfoMenu != null) {
-				mapRouteInfoMenu.updateMenu();
-			}
+			final MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+			mapRouteInfoMenu.updateMenu();
 		}
 
 		dismiss();

@@ -188,7 +188,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		Activity activity = getActivity();
 		if (activity instanceof MapActivity) {
 			MapActivity map = ((MapActivity) activity);
-			return map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+			return map.getMapRouteInfoMenu();
 		} else {
 			return null;
 		}

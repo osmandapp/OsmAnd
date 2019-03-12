@@ -92,14 +92,12 @@
     <string name="index_tours">ടൂര്‍സ്</string>
     <string name="shared_string_all">എല്ലാം</string>
     <string name="shared_string_waypoints">വഴിത്തിരിവുകള്‍</string>
-    
     <string name="rendering_value_car_name">കാര്‍</string>
     <string name="rendering_value_bicycle_name">സൈക്കിള്‍</string>
     <string name="rendering_value_pedestrian_name">കാല്‍നടയാത്രക്കാരന്‍</string>
     <string name="forward">മുന്നോട്ട്</string>
     <string name="home">ഡാഷ്ബോര്‍ഡ്</string>
     <string name="rendering_attr_hideText_name">ടെക്സ്റ്റ്</string>
-    <string name="osmo_group_description">വിവരണം</string>
     <string name="misc_pref_title">പലവക</string>
     <string name="lang_en_gb">ഇംഗ്ലീഷ് (യുണിറ്റഡ് കിങ്ഡം)</string>
     <string name="lang_ar">അറബിഭാക്ഷ</string>
@@ -138,7 +136,7 @@
     <string name="address_search_desc">വിലാസം തെരയുക</string>
     <string name="navpoint_search_desc">കോര്‍ഡിനേറ്റുകള്‍</string>
     <string name="gpx_visibility_txt">കാഴ്ച</string>
-    <string name="gpx_description_txt">വിവരണം</string>
+    <string name="shared_string_description">വിവരണം</string>
     <string name="zoomOut">ചെറുതാക്കുക</string>
     <string name="zoomIn">വലുതാക്കുക</string>
     <string name="arrival_distance_factor_normally">സാധാരണ</string>
@@ -196,10 +194,8 @@
     <string name="search_address_building_option">കെട്ടിടം</string>
     <string name="poi_dialog_opening_hours">പ്രവേശനം</string>
     <string name="filter_current_poiButton">ഫില്‍റ്റര്‍</string>
-    <string name="plugin_description_title">വിവരണം</string>
     <string name="tab_title_advanced">അഡ്വാന്‍സ്ഡ്</string>
     <string name="next_proceed">അടുത്തത്</string>
-    <string name="description">വിവരണം</string>
     <string name="favourites">ഇഷ്ടമുളളവ</string>
     <string name="skip_map_downloading">ഭൂപടങ്ങള്‍ ഡൗണ്‍ലോഡ് ചെയ്യുന്നത് ഒഴിവാക്കുക</string>
     <string name="shared_string_change">"മാറ്റുക "</string>

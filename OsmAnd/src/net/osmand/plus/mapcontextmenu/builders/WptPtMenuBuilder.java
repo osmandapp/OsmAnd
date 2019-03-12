@@ -78,7 +78,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				@Override
 				public void onClick(View v) {
 					POIMapLayer.showDescriptionDialog(row.getContext(), app, wpt.desc,
-							row.getResources().getString(R.string.description));
+							row.getResources().getString(R.string.shared_string_description));
 				}
 			});
 		}

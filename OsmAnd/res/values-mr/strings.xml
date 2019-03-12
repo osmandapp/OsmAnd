@@ -14,7 +14,7 @@
   <string name="play_commands_of_currently_selected_voice">निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
   <string name="test_voice_prompts">आवाज तपासा</string>
   <string name="send_files_to_osm">जिपीएक्स फाइल्स ओएसएम ला पाठवायच्या का?</string>
-  <string name="gpx_description_txt">वर्णन</string>
+  <string name="shared_string_description">वर्णन</string>
   <string name="validate_gpx_upload_name_pwd">जीपीएक्स फाइल्स अपलोड करण्यासाठी ओएसएम युजरनेम आणि पासवर्ड सांगा.</string>
   <string name="default_buttons_support">सहाय्य</string>
   <string name="support_new_features">नविन वैशिठ्यासाठी सहाय्य करा</string>

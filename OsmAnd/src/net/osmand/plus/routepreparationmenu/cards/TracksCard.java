@@ -135,6 +135,6 @@ public class TracksCard extends BaseCard {
 		}
 
 		((TextView) view.findViewById(R.id.gpx_card_title)).setText(
-				String.format("%s — %d", app.getString(R.string.tracks_on_map), list.size()));
+				String.format("%s (%d)", app.getString(R.string.tracks_on_map), list.size()));
 	}
 }

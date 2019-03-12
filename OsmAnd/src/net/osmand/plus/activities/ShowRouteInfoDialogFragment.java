@@ -39,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -62,8 +63,11 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -74,6 +78,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -81,13 +86,14 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.RouteInfoCard;
 import net.osmand.plus.routepreparationmenu.cards.RouteStatisticCard;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -100,7 +106,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatistics;
 import net.osmand.router.RouteStatistics.Incline;
-import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -132,6 +139,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	private View.OnLayoutChangeListener containerLayoutListener;
 	private View zoomButtonsView;
 	private ImageButton myLocButtonView;
+	private Toolbar toolbar;
 
 	private boolean portrait;
 	private boolean nightMode;
@@ -188,10 +196,10 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		currentMenuState = getInitialMenuState();
 
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		toolbar.setNavigationOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
@@ -216,20 +224,20 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 		AndroidUtils.updateImageButton(app, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
 				R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-		zoomInButtonView.setOnClickListener(new View.OnClickListener() {
+		zoomInButtonView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				doZoomIn();
 			}
 		});
-		zoomOutButtonView.setOnClickListener(new View.OnClickListener() {
+		zoomOutButtonView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				doZoomOut();
 			}
 		});
 
-		myLocButtonView.setOnClickListener(new View.OnClickListener() {
+		myLocButtonView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
@@ -422,14 +430,14 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			LinearLayout cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
 			cardsContainer.removeAllViews();
 			if (routeId != -1) {
-				List<TransportRoutePlanner.TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
+				List<TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
 				if (routes != null && routes.size() > routeId) {
-					TransportRoutePlanner.TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(routeId);
+					TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(routeId);
 					PublicTransportCard card = new PublicTransportCard(mapActivity, routeResult, routeId);
 					menuCards.add(card);
 					cardsContainer.addView(card.build(mapActivity));
 					buildRowDivider(cardsContainer, false);
-					buildTransportRouteRow(cardsContainer, routeResult, null, true);
+					buildTransportRouteRow(cardsContainer, routeResult, true);
 					buildRowDivider(cardsContainer, false);
 				}
 			} else {
@@ -453,14 +461,14 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		List<RouteDirectionInfo> routeDirections = routingHelper.getRouteDirections();
 		for (int i = 0; i < routeDirections.size(); i++) {
 			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
-			View.OnClickListener onClickListener = createRouteDirectionInfoViewClickListener(i, routeDirectionInfo);
+			OnClickListener onClickListener = createRouteDirectionInfoViewClickListener(i, routeDirectionInfo);
 			View view = getRouteDirectionView(i, cardsContainer, routeDirectionInfo, routeDirections, onClickListener);
 			cardsContainer.addView(view);
 		}
 	}
 
-	private View.OnClickListener createRouteDirectionInfoViewClickListener(final int directionInfoIndex, final RouteDirectionInfo routeDirectionInfo) {
-		return new View.OnClickListener() {
+	private OnClickListener createRouteDirectionInfoViewClickListener(final int directionInfoIndex, final RouteDirectionInfo routeDirectionInfo) {
+		return new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Location loc = routingHelper.getLocationFromRouteDirection(routeDirectionInfo);
@@ -576,10 +584,10 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				!nightMode ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
 	}
 
-	private void buildSegmentItem(View view, TransportRoutePlanner.TransportRouteResultSegment segment, long startTime, View.OnClickListener listener) {
+	private void buildSegmentItem(View view, TransportRouteResultSegment segment, long startTime) {
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
-		TransportStop startStop = stops.get(0);
+		final TransportStop startStop = stops.get(0);
 		TransportStopRoute transportStopRoute = TransportStopRoute.getTransportStopRoute(transportRoute, startStop);
 
 		FrameLayout baseContainer = new FrameLayout(view.getContext());
@@ -603,45 +611,66 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String timeText = OsmAndFormatter.getFormattedTime(startTime, false);
 
-		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop) + ":");
+		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
 		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		SpannableString title = new SpannableString(startStop.getName());
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildStartStopRow(stopsContainer, icon, timeText, transportStopRoute, title, secondaryText, listener);
+		buildStartStopRow(stopsContainer, icon, timeText, transportStopRoute, title, secondaryText, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showLocationOnMap(startStop.getLocation());
+			}
+		});
 
-		MenuBuilder.CollapsableView collapsableView = null;
+		CollapsableView collapsableView = null;
 		if (stops.size() > 2) {
 			collapsableView = getCollapsableTransportStopRoutesView(app, transportStopRoute, stops.subList(1, stops.size() - 1));
 		}
-		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
-		int startIndex = spannable.length();
-		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spannable.append(OsmAndFormatter.getFormattedDuration(segment.getArrivalTime(), app));
-		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		startIndex = spannable.length();
-		spannable.append(" • ");
-		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		SpannableStringBuilder spannable = new SpannableStringBuilder();
+		int startIndex;
+		int arrivalTime = segment.getArrivalTime();
+		if (arrivalTime > 0) {
+			spannable.append("~");
+			startIndex = spannable.length();
+			spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spannable.append(OsmAndFormatter.getFormattedDuration(arrivalTime, app));
+			spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		} else {
+			arrivalTime = 0;
+		}
 		startIndex = spannable.length();
 		if (stops.size() > 2) {
+			if (spannable.length() > 0) {
+				startIndex = spannable.length();
+				spannable.append(" • ");
+				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
+			startIndex = spannable.length();
 			spannable.append(String.valueOf(stops.size())).append(" ").append(getString(R.string.transport_stops));
+			spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
-		spannable.append(" • ").append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app));
+		if (spannable.length() > 0) {
+			startIndex = spannable.length();
+			spannable.append(" • ");
+			spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
+		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		SpannableString textType = new SpannableString(getString(R.string.by_transport_type, transportStopRoute.type.name().toLowerCase() + ":"));
-		buildCollapsableRow(stopsContainer, spannable, textType, true, collapsableView, listener);
+		SpannableString textType = new SpannableString(getString(R.string.by_transport_type, transportStopRoute.type.name().toLowerCase()));
+		buildCollapsableRow(stopsContainer, spannable, textType, true, collapsableView, null);
 
-		TransportStop endStop = stops.get(stops.size() - 1);
-		long depTime = segment.depTime + segment.getArrivalTime();
+		final TransportStop endStop = stops.get(stops.size() - 1);
+		long depTime = segment.depTime + arrivalTime;
 		if (depTime <= 0) {
-			depTime = startTime + segment.getArrivalTime();
+			depTime = startTime + arrivalTime;
 		}
 		String textTime = OsmAndFormatter.getFormattedTime(depTime, false);
 
-		secondaryText = new SpannableString(getString(R.string.exit_at) + ":");
+		secondaryText = new SpannableString(getString(R.string.exit_at));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int spaceIndex = secondaryText.toString().indexOf(" ");
 		if (spaceIndex != -1) {
@@ -651,7 +680,12 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildEndStopRow(stopsContainer, icon, textTime, title, secondaryText, listener);
+		buildEndStopRow(stopsContainer, icon, textTime, title, secondaryText, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showLocationOnMap(endStop.getLocation());
+			}
+		});
 
 		((ViewGroup) view).addView(baseContainer);
 	}
@@ -673,22 +707,25 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		return infoContainer;
 	}
 
-	private void buildTransportRouteRow(ViewGroup parent, TransportRoutePlanner.TransportRouteResult routeResult, View.OnClickListener listener, boolean showDivider) {
+	private void buildTransportRouteRow(ViewGroup parent, TransportRouteResult routeResult, boolean showDivider) {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		TargetPointsHelper.TargetPoint startPoint = targetPointsHelper.getPointToStart();
-		TargetPointsHelper.TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
+		TargetPoint startPoint = targetPointsHelper.getPointToStart();
+		TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
 		long startTime = System.currentTimeMillis() / 1000;
 
-		List<TransportRoutePlanner.TransportRouteResultSegment> segments = routeResult.getSegments();
+		List<TransportRouteResultSegment> segments = routeResult.getSegments();
 		boolean previousWalkItemUsed = false;
 
 		for (int i = 0; i < segments.size(); i++) {
-			TransportRoutePlanner.TransportRouteResultSegment segment = segments.get(i);
+			final TransportRouteResultSegment segment = segments.get(i);
+			final TransportRouteResultSegment nextSegment = segments.size() > i + 1 ? segments.get(i + 1) : null;
 			long walkTime = (long) getWalkTime(segment.walkDist, routeResult.getWalkSpeed());
-
+			if (walkTime < 60) {
+				walkTime = 60;
+			}
 			if (i == 0) {
-				buildStartItem(parent, startPoint, startTime, segment, routeResult.getWalkSpeed(), listener);
+				buildStartItem(parent, startPoint, startTime, segment, routeResult.getWalkSpeed());
 				startTime += walkTime;
 			} else if (segment.walkDist > 0 && !previousWalkItemUsed) {
 				SpannableStringBuilder spannable = new SpannableStringBuilder("~");
@@ -698,21 +735,25 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				spannable.append(getString(R.string.on_foot)).append(" ").append(", ").append(OsmAndFormatter.getFormattedDistance((float) segment.walkDist, app));
 
-				buildWalkRow(parent, spannable, listener, null);
+				buildWalkRow(parent, spannable, null, new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showWalkingRouteOnMap(segment, nextSegment);
+					}
+				});
 				buildRowDivider(parent, true);
 				startTime += walkTime;
 			}
 
-			buildSegmentItem(parent, segment, startTime, listener);
+			buildSegmentItem(parent, segment, startTime);
 
 			double finishWalkDist = routeResult.getFinishWalkDist();
 			if (i == segments.size() - 1) {
-				buildDestinationItem(parent, endPoint, startTime, segment, routeResult.getWalkSpeed(), listener);
+				buildDestinationItem(parent, endPoint, startTime, segment, routeResult.getWalkSpeed());
 			} else if (finishWalkDist > 0) {
 				walkTime = (long) getWalkTime(finishWalkDist, routeResult.getWalkSpeed());
 				startTime += walkTime;
-				if (i < segments.size() - 1) {
-					TransportRoutePlanner.TransportRouteResultSegment nextSegment = segments.get(i + 1);
+				if (nextSegment != null) {
 					if (nextSegment.walkDist > 0) {
 						finishWalkDist += nextSegment.walkDist;
 						walkTime += getWalkTime(nextSegment.walkDist, routeResult.getWalkSpeed());
@@ -724,7 +765,12 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				buildRowDivider(parent, true);
 
 				Spannable title = getWalkTitle(finishWalkDist, walkTime);
-				buildWalkRow(parent, title, listener, null);
+				buildWalkRow(parent, title, null, new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showWalkingRouteOnMap(segment, nextSegment);
+					}
+				});
 			}
 			if (showDivider && i != segments.size() - 1) {
 				buildRowDivider(parent, true);
@@ -733,6 +779,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	private Spannable getWalkTitle(double finishWalkDist, double walkTime) {
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		SpannableStringBuilder title = new SpannableStringBuilder("~");
 		int startIndex = title.length();
@@ -745,7 +794,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		return title;
 	}
 
-	private void buildStartItem(View view, TargetPointsHelper.TargetPoint start, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, View.OnClickListener listener) {
+	private void buildStartItem(View view, final TargetPoint start, long startTime,
+								final TransportRouteResultSegment segment, double walkSpeed) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer();
@@ -767,11 +817,19 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		int drawableId = start == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint;
 		Drawable icon = app.getUIUtilities().getIcon(drawableId);
 
-		buildStartRow(infoContainer, icon, text, startTitle, listener, imagesContainer);
+		buildStartRow(infoContainer, icon, text, startTitle, imagesContainer, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showLocationOnMap(start != null ? start.point : null);
+			}
+		});
 		addWalkRouteIcon(imagesContainer);
 		buildRowDivider(infoContainer, true);
 
 		long walkTime = (long) getWalkTime(segment.walkDist, walkSpeed);
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
 		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.on_foot)));
 		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
@@ -781,10 +839,37 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) segment.walkDist, app));
 		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildWalkRow(infoContainer, title, listener, imagesContainer);
+		buildWalkRow(infoContainer, title, imagesContainer, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showWalkingRouteOnMap(null, segment);
+			}
+		});
 		buildRowDivider(infoContainer, true);
 
 		((ViewGroup) view).addView(baseItemView);
+	}
+
+	public void showLocationOnMap(LatLon latLon) {
+		OsmandSettings settings = app.getSettings();
+		if (latLon == null) {
+			latLon = settings.isLastKnownMapLocation() ? settings.getLastKnownMapLocation() : null;
+		}
+		if (latLon != null) {
+			openMenuHeaderOnly();
+			showOnMap(latLon);
+		}
+	}
+
+	public void showWalkingRouteOnMap(TransportRouteResultSegment startSegment, TransportRouteResultSegment endSegment) {
+		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(startSegment, endSegment);
+		if (walkingRouteSegment != null) {
+			QuadRect rect = getWalkingSegmentRect(walkingRouteSegment);
+			if (rect != null) {
+				openMenuHeaderOnly();
+				fitRectOnMap(rect, null, true);
+			}
+		}
 	}
 
 	private void addWalkRouteIcon(LinearLayout container) {
@@ -796,7 +881,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		container.addView(walkLineImage);
 	}
 
-	private void buildDestinationItem(View view, TargetPointsHelper.TargetPoint destination, long startTime, TransportRoutePlanner.TransportRouteResultSegment segment, double walkSpeed, View.OnClickListener listener) {
+	private void buildDestinationItem(View view, final TargetPoint destination, long startTime, final TransportRouteResultSegment segment, double walkSpeed) {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
@@ -809,7 +894,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		buildRowDivider(infoContainer, true);
 
 		long walkTime = (long) getWalkTime(segment.walkDist, walkSpeed);
-
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
 		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
 		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = spannable.length();
@@ -819,7 +906,12 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		spannable.append(getString(R.string.on_foot)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) segment.walkDist, app));
 		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildWalkRow(infoContainer, spannable, listener, imagesContainer);
+		buildWalkRow(infoContainer, spannable, imagesContainer, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showWalkingRouteOnMap(segment, null);
+			}
+		});
 		buildRowDivider(infoContainer, true);
 		addWalkRouteIcon(imagesContainer);
 
@@ -829,11 +921,16 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		SpannableString secondaryText = new SpannableString(getString(R.string.route_descr_destination) + ":");
+		SpannableString secondaryText = new SpannableString(getString(R.string.route_descr_destination));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, listener, imagesContainer);
+		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, imagesContainer, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showLocationOnMap(destination.point);
+			}
+		});
 
 		((ViewGroup) view).addView(baseItemView);
 	}
@@ -843,7 +940,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void buildCollapsableRow(final View view, final Spannable title, Spannable secondaryText, boolean collapsable,
-	                                final MenuBuilder.CollapsableView collapsableView, View.OnClickListener onClickListener) {
+	                                final CollapsableView collapsableView, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -889,7 +986,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContenView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
-			ll.setOnClickListener(new View.OnClickListener() {
+			ll.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					LinearLayout contentView = (LinearLayout) collapsableView.getContenView();
@@ -920,7 +1017,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void buildStartStopRow(final View view, Drawable icon, String timeText, TransportStopRoute transportStopRoute,
-	                              final Spannable title, Spannable secondaryText, View.OnClickListener onClickListener) {
+	                              final Spannable title, Spannable secondaryText, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -989,7 +1086,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			routeTypeView.setLayoutParams(routeTypeParams);
 			routeTypeView.setTextSize(16);
 			AndroidUtils.setTextSecondaryColor(app, routeTypeView, nightMode);
-			routeTypeView.setText(getString(R.string.layer_route) + ":");
+			routeTypeView.setText(transportStopRoute.desc);
 			llText.addView(routeTypeView);
 
 			View routeBadge = createRouteBadge(mapActivity, transportStopRoute, nightMode);
@@ -1006,7 +1103,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	public void buildEndStopRow(final View view, Drawable icon, String timeText, final Spannable title, Spannable secondaryText, View.OnClickListener onClickListener) {
+	public void buildEndStopRow(final View view, Drawable icon, String timeText, final Spannable title, Spannable secondaryText, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1088,7 +1185,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		app.getGeocodingLookupService().lookupAddress(addressLookupRequest);
 	}
 
-	public void buildWalkRow(final View view, final Spannable title, View.OnClickListener onClickListener, LinearLayout imagesContainer) {
+	public void buildWalkRow(final View view, final Spannable title, LinearLayout imagesContainer, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1135,7 +1232,86 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	public void buildStartRow(final View view, Drawable icon, String timeText, final Spannable title, View.OnClickListener onClickListener, LinearLayout imagesContainer) {
+	@Nullable
+	private QuadRect getTransportSegmentRect(@NonNull TransportRouteResultSegment segment) {
+		double left = 0, right = 0;
+		double top = 0, bottom = 0;
+		List<Node> nodes = segment.getNodes();
+		for (Node n : nodes) {
+			if (left == 0 && right == 0) {
+				left = n.getLongitude();
+				right = n.getLongitude();
+				top = n.getLatitude();
+				bottom = n.getLatitude();
+			} else {
+				left = Math.min(left, n.getLongitude());
+				right = Math.max(right, n.getLongitude());
+				top = Math.max(top, n.getLatitude());
+				bottom = Math.min(bottom, n.getLatitude());
+			}
+		}
+		return left == 0 && right == 0 ? null : new QuadRect(left, top, right, bottom);
+	}
+
+	@Nullable
+	private QuadRect getWalkingSegmentRect(@NonNull RouteCalculationResult result) {
+		double left = 0, right = 0;
+		double top = 0, bottom = 0;
+		for (Location p : result.getRouteLocations()) {
+			if (left == 0 && right == 0) {
+				left = p.getLongitude();
+				right = p.getLongitude();
+				top = p.getLatitude();
+				bottom = p.getLatitude();
+			} else {
+				left = Math.min(left, p.getLongitude());
+				right = Math.max(right, p.getLongitude());
+				top = Math.max(top, p.getLatitude());
+				bottom = Math.min(bottom, p.getLatitude());
+			}
+		}
+		return left == 0 && right == 0 ? null : new QuadRect(left, top, right, bottom);
+	}
+
+	private void showOnMap(@NonNull LatLon latLon) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int currentZoom = mapActivity.getMapView().getZoom();
+			mapActivity.getMapView().getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), Math.max(13, currentZoom), true);
+		}
+	}
+
+	private void fitRectOnMap(QuadRect rect, LatLon location, boolean forceFit) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			if (!portrait) {
+				tileBoxWidthPx = tb.getPixWidth() - view.getWidth();
+			} else {
+				tileBoxHeightPx = getHeaderOnlyTopY();
+			}
+			if (tileBoxHeightPx > 0) {
+				int topMarginPx = toolbar.getHeight();
+				if (forceFit) {
+					mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
+							tileBoxWidthPx, tileBoxHeightPx, topMarginPx);
+				} else if (location != null &&
+						!mapActivity.getMapView().getTileBox(tileBoxWidthPx, tileBoxHeightPx, topMarginPx).containsLatLon(location)) {
+					boolean animating = mapActivity.getMapView().getAnimatedDraggingThread().isAnimating();
+					mapActivity.getMapView().fitLocationToMap(location.getLatitude(), location.getLongitude(),
+							mapActivity.getMapView().getZoom(), tileBoxWidthPx, tileBoxHeightPx, topMarginPx, !animating);
+				} else {
+					mapActivity.refreshMap();
+				}
+			}
+		}
+	}
+
+	public void buildStartRow(final View view, Drawable icon, String timeText, final Spannable title, LinearLayout imagesContainer, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1198,7 +1374,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void buildDestinationRow(final View view, String timeText, final Spannable title, Spannable secondaryText,
-	                                LatLon location, View.OnClickListener onClickListener, LinearLayout imagesContainer) {
+	                                LatLon location, LinearLayout imagesContainer, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1270,7 +1446,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	private void buildIntermediateRow(final View view, Drawable icon, final Spannable title, View.OnClickListener onClickListener) {
+	private void buildIntermediateRow(final View view, Drawable icon, final Spannable title, OnClickListener onClickListener) {
 
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1319,14 +1495,20 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	private MenuBuilder.CollapsableView getCollapsableTransportStopRoutesView(final Context context, TransportStopRoute transportStopRoute, List<TransportStop> stops) {
+	private CollapsableView getCollapsableTransportStopRoutesView(final Context context, TransportStopRoute transportStopRoute, final List<TransportStop> stops) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, false);
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 		for (int i = 0; i < stops.size(); i++) {
-			buildIntermediateRow(view, icon, new SpannableString(stops.get(i).getName()), null);
+			final TransportStop stop = stops.get(i);
+			buildIntermediateRow(view, icon, new SpannableString(stop.getName()), new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showLocationOnMap(stop.getLocation());
+				}
+			});
 		}
-		return new MenuBuilder.CollapsableView(view, null, false);
+		return new CollapsableView(view, null, true);
 	}
 
 	protected LinearLayout buildCollapsableContentView(Context context, boolean collapsed) {
@@ -1519,8 +1701,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 						false,
 						gpxItem);
 
-				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-				if (MapRouteInfoMenu.isVisible()) {
+				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapRouteInfoMenu();
+				if (mapRouteInfoMenu.isVisible()) {
 					// We arrived here by the route info menu.
 					// First, we close it and then show the details.
 					mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {
@@ -1543,7 +1725,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		UiUtilities iconsCache = app.getUIUtilities();
 		ImageButton printRoute = (ImageButton) view.findViewById(R.id.print_route);
 		printRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gprint_dark));
-		printRoute.setOnClickListener(new View.OnClickListener() {
+		printRoute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				print();
@@ -1552,7 +1734,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 		ImageButton saveRoute = (ImageButton) view.findViewById(R.id.save_as_gpx);
 		saveRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gsave_dark));
-		saveRoute.setOnClickListener(new View.OnClickListener() {
+		saveRoute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MapActivityActions.createSaveDirections(getActivity(), routingHelper).show();
@@ -1561,7 +1743,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 		ImageButton shareRoute = (ImageButton) view.findViewById(R.id.share_as_gpx);
 		shareRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
-		shareRoute.setOnClickListener(new View.OnClickListener() {
+		shareRoute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
@@ -1605,7 +1787,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public View getRouteDirectionView(int position, ViewGroup parent, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo, View.OnClickListener onClickListener) {
+	public View getRouteDirectionView(int position, ViewGroup parent, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
@@ -1996,6 +2178,22 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				return getFullScreenTopPosY();
 			default:
 				return 0;
+		}
+	}
+
+	public void openMenuFullScreen() {
+		changeMenuState(getMenuStatePosY(FULL_SCREEN), false, false);
+	}
+
+	public void openMenuHeaderOnly() {
+		if (portrait) {
+			changeMenuState(getMenuStatePosY(HEADER_ONLY), false, false);
+		}
+	}
+
+	public void openMenuHalfScreen() {
+		if (portrait) {
+			changeMenuState(getMenuStatePosY(HALF_SCREEN), false, false);
 		}
 	}
 

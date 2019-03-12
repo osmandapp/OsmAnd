@@ -126,7 +126,7 @@
 	<string name="send_files_to_osm">将GPX文件发送至OSM？</string>
 	<string name="gpx_visibility_txt">能见度</string>
 	<string name="gpx_tags_txt">标签</string>
-	<string name="gpx_description_txt">描述</string>
+	<string name="shared_string_description">描述</string>
 	<string name="validate_gpx_upload_name_pwd">请指定的OSM用户名和密码上传GPX文件。</string>
     	<string name="default_buttons_support">支持</string>
 	<string name="support_new_features">支持新功能</string>
@@ -1965,47 +1965,10 @@
     <string name="gpx_selection_track">%1$s 
 \n轨迹 %2$s</string>
     <string name="gpx_file_is_empty">GPX 轨迹为空</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="osmo_edit_color">显示颜色</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="int_days">天</string>
     <string name="osmo_connect_menu">连接</string>
-    
-    <string name="osmo_group_description">描述</string>
-
-
     <string name="use_points_as_intermediates">计算两点之间的路线</string>
-    
-    
-    
-    
-    
-    
     <string name="always_center_position_on_map">总是在中心显示位置</string>
     <string name="misc_pref_title">杂项</string>
     <string name="localization_pref_title">本地化</string>
@@ -2346,7 +2309,6 @@
     <string name="av_camera_pic_size">相机图片大小</string>
     <string name="av_camera_pic_size_descr">选择内部相机图片大小</string>
     <string name="navigation_intent_invalid">格式无效: %s</string>
-    <string name="plugin_description_title">描述</string>
     <string name="plugin_install_needs_network">你需要互联网连接来安装这个插件。</string>
     <string name="get_plugin">获取</string>
     <string name="use_fast_recalculation">路线智能重新规划</string>
@@ -2376,7 +2338,6 @@
     <string name="opening_at">开业时间</string>
     <string name="closing_at">结束营业于</string>
     <string name="contact_info">联系信息</string>
-    <string name="description">描述</string>
     <string name="add_opening_hours">添加营业时间</string>
     <string name="poi_dialog_poi_type">POI 类型</string>
     <string name="number_of_rows_in_dash">破折号 %1$s 中的行数</string>

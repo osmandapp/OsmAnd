@@ -840,12 +840,29 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
 
-	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference("available_application_modes", "car,bicycle,pedestrian,").makeGlobal().cache();
+	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference("available_application_modes", "car,bicycle,pedestrian,public_transport,").makeGlobal().cache();
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference("last_fav_category", "").makeGlobal();
 
 
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>("default_application_mode_string", ApplicationMode.DEFAULT) {
+		{
+			makeGlobal();
+		}
+
+		@Override
+		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
+			return ApplicationMode.valueOfStringKey(key, defaultValue);
+		}
+
+		@Override
+		protected boolean setValue(Object prefs, ApplicationMode val) {
+			return settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
+		}
+	};
+
+	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>("last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
 		{
 			makeGlobal();
 		}

@@ -79,7 +79,7 @@
     <string name="distance_measurement_finish_subtrack">Пачаць новы падслед</string>
     <string name="distance_measurement_clear_route">Выдаліць ўсе пункты</string>
     <string name="distance_measurement_load_gpx">Адкрыць існы GPX-файл</string>
-    <string name="wait_current_task_finished">Калі ласка, пачакайце пакуль бягучая задача не будзе завершаная</string>
+    <string name="wait_current_task_finished">Калі ласка, пачакайце пакуль дзейная задача не будзе завершаная</string>
     <string name="use_kalman_filter_compass_descr">Зніжае шум паказанняў компасу, але дадае інэрцыю.</string>
     <string name="use_kalman_filter_compass">Выкарыстоўваць фільтр Калмана</string>
     <string name="use_magnetic_sensor_descr">Выкарыстоўваць для працы компаса магнітны датчык замест датчыка арыентацыі.</string>
@@ -186,14 +186,14 @@
     <string name="rendering_attr_showRoadMaps_name">Мапы толькі дарог</string>
     <string name="safe_mode_description">Працаваць у бяспечным рэжыме (трохі павольней, але без уласных бібліятэк).</string>
     <string name="safe_mode">Бяспечны рэжым</string>
-    <string name="native_library_not_running">Дадатак працуе ў бяспечным рэжыме (выключыць яго можна ў «Наладах»).</string>
+    <string name="native_library_not_running">Дадатак працуе ў бяспечным рэжыме (адключыць ў «Наладах»).</string>
     <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Спыніць яго?</string>
     <string name="close_changeset">Закрыць набор змен</string>
     <string name="zxing_barcode_scanner_not_found">Дадатак «ZXing Barcode Scanner» не ўсталяваны. Знайсці ў Google Play\?</string>
     <string name="rendering_attr_roadColors_description">Абярыце схему колераў дарог:</string>
     <string name="rendering_attr_roadColors_name">Схема колераў дарог</string>
     <string name="map_widget_show_destination_arrow">Паказваць напрамак да месца прызначэння</string>
-    <string name="enable_plugin_monitoring_services">Дазволіць убудове запісу падарожжа выкарыстоўваць сэрвісы запісу следу (запіс GPX, адсочванне праз сетку)</string>
+    <string name="enable_plugin_monitoring_services">Дазволіць убудове «Запісу падарожжа» выкарыстоўваць сэрвісы запісу следу (запіс GPX, адсочванне праз сетку)</string>
     <string name="non_optimal_route_calculation">Разлічваць прыблізны шлях на вялікія адлегласці</string>
     <string name="gps_not_available">Калі ласка, уключыце GPS у наладах</string>
     <string name="map_widget_monitoring_services">Сэрвісы адсочвання</string>
@@ -209,7 +209,7 @@
     <string name="new_destination_point_dialog">Вы ўжо абралі пункт прызначэння:</string>
     <string name="shared_string_target_points">Пункты прызначэння</string>
     <string name="intermediate_point_too_far">Прамежкавы пункт прызначэння %1$s занадта далёка ад бліжэйшай дарогі.</string>
-    <string name="arrived_at_intermediate_point">Вы дасягнулі прамежкавага пункта</string>
+    <string name="arrived_at_intermediate_point">Дасягнуты прамежкавы пункт</string>
     <string name="context_menu_item_intermediate_point">Дадаць прамежкавым пунктам прызначэння</string>
     <string name="map_widget_intermediate_distance">Прамежкавы пункт прызначэння</string>
     <string name="ending_point_too_far">Канцавы пункт занадта далёка ад бліжэйшай дарогі.</string>
@@ -231,7 +231,7 @@
     <string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак.</string>
     <string name="use_compass_navigation">Выкарыстоўваць компас</string>
     <string name="avoid_motorway">Пазбягаць аўтамагістраляў</string>
-    <string name="auto_zoom_map_descr">Узровень павелічэння згодна вашай хуткасці (калі мапа сінхранізуецца з бягучым становішчам).</string>
+    <string name="auto_zoom_map_descr">Узровень павелічэння згодна вашай хуткасці (калі мапа сінхранізуецца з цяперашнім становішчам).</string>
     <string name="auto_zoom_map">Аўтаматычнае памяншэнне/павелічэнне</string>
     <string name="snap_to_road_descr">Прывязвацца да дарог падчас навігацыі.</string>
     <string name="snap_to_road">Прывязвацца да дарог</string>
@@ -422,7 +422,7 @@
     <string name="send_files_to_osm">Адаслаць GPX-файлы ў OSM\?</string>
     <string name="gpx_visibility_txt">Бачнасць</string>
     <string name="gpx_tags_txt">Пазнакі</string>
-    <string name="gpx_description_txt">Апісанне</string>
+    <string name="shared_string_description">Апісанне</string>
     <string name="validate_gpx_upload_name_pwd">Калі ласка, пазначце імя і пароль карыстальніка OSM, каб адсылаць GPX-файлы.</string>
     <string name="default_buttons_support">Падтрымка</string>
     <string name="support_new_features">Падтрымка новых магчымасцяў</string>
@@ -496,7 +496,7 @@
     <string name="live_monitoring_url_descr">Задайце вэб-адрас з наступнымі параметрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Вэб-адрас для сеціўнага сачэння</string>
     <string name="gpx_monitoring_disabled_warn">Запісвайце след выкарыстоўваючы GPX-віджэт ці пункт меню \"Запіс падарожжа\".</string>
-    <string name="show_current_gpx_title">Паказаць бягучы след</string>
+    <string name="show_current_gpx_title">Паказаць дзейны след</string>
     <string name="free_version_message">Вы можаце спампаваць ці абнавіць %1$s мапаў.</string>
     <string name="free_version_title">Бясплатная версія</string>
     <string name="poi_context_menu_showdescription">Паказваць апісанні POI.</string>
@@ -569,7 +569,7 @@
     <string name="search_position_address">Адрас…</string>
     <string name="search_position_favorites">Улюбёныя…</string>
     <string name="search_position_undefined">Нявызначана</string>
-    <string name="search_position_map_view">Бягучы цэнтр мапы</string>
+    <string name="search_position_map_view">Цяперашні цэнтр мапы</string>
     <string name="select_search_position">Пачатак:</string>
     <string name="context_menu_item_search">Шукаць навокал</string>
     <string name="route_successfully_saved_at">Маршрут захаваны як \'%1$s\'.</string>
@@ -624,7 +624,7 @@
     <string name="tts_missing_language_data_title">Даныя адсутнічаюць</string>
     <string name="tts_missing_language_data">Перайсці ў краму, каб спампаваць абраную мову\?</string>
     <string name="gpx_option_reverse_route">Развярнуць накірунак GPX</string>
-    <string name="gpx_option_destination_point">Выкарыстоўваць бягучы пункт прызначэння</string>
+    <string name="gpx_option_destination_point">Выкарыстоўваць дзейны пункт прызначэння</string>
     <string name="gpx_option_from_start_point">Прайсці ўвесь шлях</string>
     <string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лакальныя вектарныя мапы.
 \n\t
@@ -834,7 +834,7 @@
     <string name="first_time_continue">Далей</string>
     <string name="first_time_download">Спампаваць рэгіёны</string>
     <string name="search_poi_location">Чаканне сігналу…</string>
-    <string name="search_near_map">Шукаць побач з бягучым цэнтрам мапы</string>
+    <string name="search_near_map">Шукаць побач з дзейным цэнтрам мапы</string>
     <string name="search_nearby">Шукаць паблізу</string>
     <string name="map_orientation_default">Як у прылады</string>
     <string name="map_orientation_portrait">Вертыкальная</string>
@@ -930,8 +930,8 @@
     <string name="data_settings">Даныя</string>
     <string name="osm_settings">Рэдагаванне OSM</string>
     <string name="additional_settings">Дадатковыя налады</string>
-    <string name="save_current_track_descr">Захаваць бягучы след зараз жа як GPX-файл.</string>
-    <string name="save_current_track">Захаваць бягучы след</string>
+    <string name="save_current_track_descr">Захаваць дзейны след зараз жа як GPX-файл.</string>
+    <string name="save_current_track">Захаваць дзейны след</string>
     <string name="save_track_interval">Інтэрвал захавання падчас навігацыі</string>
     <string name="save_track_interval_descr">Абраць інтэрвал захоўвання пунктаў следу падчас навігацыі.</string>
     <string name="save_track_to_gpx_descrp">GPX-след аўтаматычна захаваны ў каталог слядоў падчас навігацыі.</string>
@@ -1159,7 +1159,6 @@
     <string name="use_points_as_intermediates">Разлічыць маршрут паміж пунктамі</string>
     <string name="int_days">дзён</string>
     <string name="osmo_connect_menu">Злучэнне</string>
-    <string name="osmo_group_description">Апісанне</string>
     <string name="import_file_favourites">Захаваць даныя як GPX-файл альбо імпартаваць пункты ва ўлюбёныя\?</string>
     <string name="rendering_value_pink_name">Ружовы</string>
     <string name="rendering_value_brown_name">Карычневы</string>
@@ -1186,7 +1185,7 @@
     <string name="gpx_split_interval">Інтэрвал нарэзкі</string>
     <string name="gpx_info_asc_altitude">Пад’ём/спад: %1$s</string>
     <string name="loading_smth">Загрузка %1$s…</string>
-    <string name="map_widget_plain_time">Бягучы час</string>
+    <string name="map_widget_plain_time">Цяперашні час</string>
     <string name="shared_string_waypoint">Пункт шляху</string>
     <string name="selected_gpx_info_show">"
 \n
@@ -1295,7 +1294,7 @@
     <string name="print_route">Паказаць маршрут</string>
     <string name="fav_point_dublicate">Дубляванне назвы ўлюбёнага пункту</string>
     <string name="fav_point_dublicate_message">Улюбёнае з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухілення дублявання назваў.</string>
-    <string name="local_index_description">Націсніце на любы элемент спіса для прагляду больш падрабязнай інфармацыі, доўга ўтрымлівайце, каб змясціць у архіў ці выдаліць. Бягучыя даныя прылады (%1$s вольна):</string>
+    <string name="local_index_description">Націсніце на любы элемент спіса для прагляду больш падрабязнай інфармацыі, доўга ўтрымлівайце, каб змясціць у архіў ці выдаліць. Дзейныя даныя прылады (%1$s вольна):</string>
     <string name="anonymous_user">Ананімны карыстальнік</string>
     <string name="logged_as">Вы ўвайшлі як %1$s</string>
     <string name="anonymous_user_hint">Ананімнаму карыстальніку недаступныя: 
@@ -1376,7 +1375,6 @@
     <string name="gps_status">Стан GPS</string>
     <string name="parking_place">Парковачнае месца</string>
     <string name="remove_the_tag">ВЫДАЛІЦЬ ПАЗНАКУ</string>
-    <string name="plugin_description_title">Апісанне</string>
     <string name="edit_group">Рэдагаваць групу</string>
     <string name="plugin_install_needs_network">Каб усталяваць гэтую ўбудову неабходна злучыцца з інтэрнэтам.</string>
     <string name="get_plugin">Атрымаць</string>
@@ -1503,7 +1501,7 @@
     <string name="plugin_ski_descr">Убудова для OsmAnd дае вам доступ да даных аб гарналыжных трасах, маршрутах для бегавых лыж, альпійскіх спусках, фунікулёрах і гарналыжных пад\'ёмніках. Маршруты і спускі пазначаюцца рознымі колерамі ў залежнасці ад іх складанасці і намаляваныя з выкарыстаннем адмысловага «зімовага» стылю мапы, адметнага тым, што выкарыстоўваюцца «снежныя» колеры зімовага пейзажу. 
 \n 
 \nУ выпадку актывацыі гэтага выгляду, стыль мапы змяняецца на «Winter and ski», паказваючы ўсё дэталі пейзажу так, як яны выглядаюць зімой. Такі (зімовы) выгляд можа быць скасаваны альбо шляхам дэактывацыі тут, альбо калі вы зменіце «Стыль мапы» у меню «Налада мапы» на пажаданы выгляд.</string>
-    <string name="current_route">Бягучы маршрут</string>
+    <string name="current_route">Дзейны маршрут</string>
     <string name="osm_changes_added_to_local_edits">Змены OSM дададзеныя ў лакальны набор змен</string>
     <string name="mark_to_delete">Пазначыць для выдалення</string>
     <string name="welmode_download_maps">Спампаваць мапы</string>
@@ -1656,7 +1654,6 @@
     <string name="closing_at">Зачыняецца а</string>
     <string name="tab_title_advanced">Пашыранае</string>
     <string name="contact_info">Кантакты</string>
-    <string name="description">Апісанне</string>
     <string name="add_opening_hours">Дадаць гадзіны працы</string>
     <string name="poi_dialog_poi_type">Тып POI</string>
     <string name="please_specify_poi_type">Калі ласка, вызначце тып POI.</string>
@@ -1800,7 +1797,7 @@
     <string name="context_menu_item_edit_waypoint">Рэдагаваць пункт шляху GPX</string>
     <string name="routing_attr_avoid_stairs_name">Пазбягаць лесвіц</string>
     <string name="routing_attr_avoid_stairs_description">Пазбягаць лесвіц</string>
-    <string name="routing_attr_avoid_borders_name">Пазбягаць перасячэння мяжы</string>
+    <string name="routing_attr_avoid_borders_name">Пазбягаць перасячэння меж</string>
     <string name="use_dashboard_btn">Выкарыстоўваць панэль кіравання</string>
     <string name="dashboard_or_drawer_title">Панэль кіравання ці меню</string>
     <string name="please_specify_poi_type_only_from_list">Калі ласка, ўвядзіце правільны тып POI або мініце яго.</string>
@@ -1903,7 +1900,7 @@
     <string name="clear_active_markers_q">Выдаліць усе актыўныя адзнакі\?</string>
     <string name="clear_markers_history_q">Ачысціць гісторыю адзнак мапы\?</string>
     <string name="active_markers">Актыўныя адзнакі</string>
-    <string name="map_markers">Адмеціны мапы</string>
+    <string name="map_markers">Адзнакі мапы</string>
     <string name="map_marker">Адмеціна мапы</string>
     <string name="consider_turning_polygons_off">Рэкамендуецца выключыць адмалёўку палігонаў.</string>
     <string name="osm_live_subscription">Падпіска OsmAnd Live</string>
@@ -1982,7 +1979,7 @@
     <string name="lang_be_by">"Беларуская (Лацінка) "</string>
     <string name="lang_es_us">Іспанская (ЗША)</string>
     <string name="lang_en_gb">Англійская (Вялікабрытанія)</string>
-    <string name="current_track">Бягучы след</string>
+    <string name="current_track">Дзейны след</string>
     <string name="lang_kn">Канада (Індыя)</string>
     <string name="use_osm_live_routing_description">Уключыць навігацыю для змен OsmAnd Live.</string>
     <string name="lang_ast">Астурыйская</string>
@@ -2154,8 +2151,8 @@
     <string name="quick_action_take_audio_note">Новая гукавая нататка</string>
     <string name="quick_action_take_video_note">Новая відэанататка</string>
     <string name="quick_action_take_photo_note">Новая фотанататка</string>
-    <string name="quick_action_navigation_voice_off">Голас прыглушаны</string>
-    <string name="quick_action_navigation_voice_on">Голас уключаны</string>
+    <string name="quick_action_navigation_voice_off">Уключыць Голас</string>
+    <string name="quick_action_navigation_voice_on">Прыглушыць Голас</string>
     <string name="rendering_attr_depthContours_description">Паказваць контуры і пункты глыбіні.</string>
     <string name="rendering_attr_depthContours_name">Контуры марскіх глыбінь</string>
     <string name="shared_string_slope">Ухіл</string>
@@ -2546,7 +2543,7 @@
     <string name="marker_save_as_track">Захаваць як GPX-файл</string>
     <string name="move_to_history">Перамясціць у гісторыю</string>
     <string name="group_will_be_removed_after_restart">Групы ўжо не будзе пасля наступнага перазапуску дадатка.</string>
-    <string name="shared_string_markers">Адмеціны</string>
+    <string name="shared_string_markers">Адзнакі</string>
     <string name="coordinates_format">Фармат каардынат</string>
     <string name="use_system_keyboard">Выкарыстоўваць сістэмную клавіятуру</string>
     <string name="fast_coordinates_input_descr">Абраць фармат уводу каардынат. Вы заўсёды можаце змяніць яго, націснуўшы \"Параметры\".</string>
@@ -2595,7 +2592,7 @@
     <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку адзнакі.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
     <string name="empty_state_markers_groups_desc">Імпартаваць групы ўлюбёных ці пункты шляху як адзнакі.</string>
-    <string name="empty_state_markers_history_desc">Адмеціны, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
+    <string name="empty_state_markers_history_desc">Адзнакі, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
     <string name="show_guide_line_descr">Паказвае лініі накірунку ад вашага становішча да актыўнай адзнакі.</string>
     <string name="show_arrows_descr">Паказвае адну ці дзьве стрэлкі, якія паказваюць накірунак да актыўных адзнак.</string>
     <string name="distance_indication_descr">Абярыце, як адлюстроўваць адлегласць да актыўных адзнак.</string>
@@ -2793,9 +2790,9 @@
 \n 
 \n • Вікіпедыя: новы выгляд, актыўныя спасылкі, падтрымка выяў 
 \n 
-\n • Open Track UI: падтрымка груп пунктаў шляху
+\n • Open Track UI: падтрымка груп пунктаў шляху 
 \n 
-\n • Адмеціны мапы: імпарт абраных груп з GPX-файлаў, увод каардынат, новы выгляд 
+\n • Адзнакі мапы: імпарт абраных груп з GPX-файлаў, увод каардынат, новы выгляд 
 \n 
 \n • Падпіска OsmAnd Live цяпер падтрымлівае ўсе функцыі OsmAnd 
 \n 
@@ -2808,13 +2805,13 @@
     <string name="point_deleted">Пункт %1$s выдалены</string>
     <string name="shared_string_world">Свет</string>
     <string name="send_search_query_description">Мы адправім ваш пашуковы запыт <b>«%1$s»</b>, а таксама вашае месцазнаходжанне. <br/>
-        <br/> Мы не збіраем асабістыя звесткі, нам патрэбныя толькі даныя пошуку, каб палепшыць алгарытм.<br/>
+        <br/> Збіраюцца толькі неперасанальныя даныя, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.<br/>
     </string>
     <string name="search_no_results_description">Няма вынікаў?
 \nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
     <string name="increase_search_radius_to">Павялічыць радыус пошуку да %1$s</string>
-    <string name="thank_you_for_feedback">Дзякуй за водгук</string>
+    <string name="thank_you_for_feedback">Дзякуй за Ваш водгук</string>
     <string name="poi_cannot_be_found">Вузел ці шлях не знойдзены.</string>
     <string name="search_no_results_feedback">Нічога не знойдзена\? 
 \nПакінце водгук</string>
@@ -2835,7 +2832,7 @@
 \n • Выпраўленне іншых хібаў 
 \n 
 \n</string>
-    <string name="markers_remove_dialog_msg">Выдаліць адзнаку мапы \"%s\"\?</string>
+    <string name="markers_remove_dialog_msg">Выдаліць адзнаку мапы «%s»\?</string>
     <string name="edit_map_marker">Рэдагаваць адзнаку мапы</string>
     <string name="third_party_application">Асобны дадатак</string>
     <string name="search_street">Пошук вуліцы</string>
@@ -2844,10 +2841,10 @@
     <string name="keep_passed_markers_descr">Адзнакі, дададзеныя як група улюблёных ці пройдзеных маршрутных GPX-пунктаў, застануцца на мапе. Калі група неактыўная, адзнакі знікнуць з мапы.</string>
     <string name="keep_passed_markers">Пакінуць пройдзеныя адзнакі на мапе</string>
     <string name="more_transport_on_stop_hint">На гэтым прыпынку спыняецца больш грамадскага транспарту.</string>
-    <string name="ask_for_location_permission">Калі ласка, дайце OsmAnd дазвол на вызначэнне месцазнаходжання.</string>
+    <string name="ask_for_location_permission">Калі ласка, дайце OsmAnd дазвол на месцазнаходжанне для працягу.</string>
     <string name="release_3_2_pre">• Выпраўлена хіба пры запуску, што ўзнікала на некаторых прыладах 
 \n 
-\n • Новыя функцыі адзнак: паказваюцца пройдзенныя 
+\n • Новыя функцыі адзнак: паказваюцца ўжо пройдзенныя адзнакі
 \n 
 \n • Гісторыя пошуку зараз паказвае катэгорыі, што вы шукалі раней 
 \n 
@@ -2857,18 +2854,18 @@
 \n 
 \n • Падтрымка рэдагавання шматвугольных (нязручных) аб\'ектаў 
 \n 
-\n • Вымярэнне дыстанцый: дададзена кнопка \"Вымярэнне\" ў \"Дзеянні\" кантэкстнага меню 
+\n • Вымярэнне дыстанцый: дададзена кнопка «Вымярэнне» ў «Дзеянні» кантэкстнага меню 
 \n 
 \n</string>
     <string name="rendering_value_black_name">Чорны</string>
     <string name="osm_live_plan_pricing">План і цэны</string>
-    <string name="osm_live_payment_monthly_title">Аплачваць штомесяц</string>
-    <string name="osm_live_payment_3_months_title">Аплачваць раз на 3 месяцы</string>
-    <string name="osm_live_payment_annual_title">Аплачваць штогод</string>
+    <string name="osm_live_payment_monthly_title">Штомесячна</string>
+    <string name="osm_live_payment_3_months_title">Раз на тры месяцы</string>
+    <string name="osm_live_payment_annual_title">Штогод</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / месяц</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / месяц</string>
-    <string name="osm_live_payment_discount_descr">Эканомія %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Ваша бягучая падпіска</string>
+    <string name="osm_live_payment_discount_descr">Ашчада %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Дзейная падпіска</string>
     <string name="osm_live_payment_renews_monthly">Абнаўляецца штомесяц</string>
     <string name="osm_live_payment_renews_quarterly">Абнаўляецца штоквартал</string>
     <string name="osm_live_payment_renews_annually">Абнаўляецца штогод</string>
@@ -2896,9 +2893,9 @@
     <string name="on_foot">пешшу</string>
     <string name="route_way">Шлях</string>
     <string name="points_of_interests">Пункты цікавасцяў (POI)</string>
-    <string name="waiting_for_route_calculation">Чаканне падліку маршруту</string>
+    <string name="waiting_for_route_calculation">Падлік маршруту…</string>
     <string name="app_mode_public_transport">Грамадскі транспарт</string>
-    <string name="avoid_roads_descr">Абярыце на мапе альбо са спіса ніжэй дарогу, якой хочаце пазбягаць падчас навігацыі:</string>
+    <string name="avoid_roads_descr">Абярыце дарогу, якой хочаце пазбягаць падчас навігацыі, або на мапе, або са спіса ніжэй:</string>
     <string name="show_along_the_route">Паказваць уздоўж маршруту</string>
     <string name="simulate_navigation">Сімуляваць навігацыю</string>
     <string name="choose_track_file_to_follow">Абярыце файл следу</string>
@@ -2918,4 +2915,19 @@
     <string name="add_home">Дадаць дом</string>
     <string name="add_work">Дадаць працу</string>
     <string name="work_button">Праца</string>
+    <string name="time_of_day">Час сутак</string>
+    <string name="by_transport_type">Ужыта %1$s</string>
+    <string name="step_by_step">Крок за крокам</string>
+    <string name="road_types">Тыпы дарог</string>
+    <string name="exit_at">Выхад на</string>
+    <string name="sit_on_the_stop">Пасадка на прыпынку</string>
+    <string name="shared_string_swap">Памяняць</string>
+    <string name="show_more">Паказаць больш</string>
+    <string name="tracks_on_map">Сляды на мапе</string>
+    <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць GPX-сляды</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Націск на кнопку дзеяння пакажа ці схавае абраныя GPX-сляды на мапе</string>
+    <string name="quick_action_gpx_tracks_hide">Схаваць GPX-сляды</string>
+    <string name="quick_action_gpx_tracks_show">Паказаць GPX-сляды</string>
+    <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Грамадскі транспарт OsmAnd Live</string>
 </resources>

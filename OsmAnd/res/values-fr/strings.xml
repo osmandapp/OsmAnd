@@ -615,7 +615,7 @@
     <string name="send_files_to_osm">Envoyer les traces GPX à OSM ?</string>
     <string name="gpx_visibility_txt">Visibilité</string>
     <string name="gpx_tags_txt">Libellés</string>
-    <string name="gpx_description_txt">Description</string>
+    <string name="shared_string_description">Description</string>
     <string name="validate_gpx_upload_name_pwd">Veuillez renseigner le compte et le mot de passe OSM pour envoyer les fichiers GPX.</string>
     <string name="default_buttons_support">Soutien</string>
     <string name="support_new_features">Soutenir le développement</string>
@@ -1193,7 +1193,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
     <string name="int_days">jours</string>
     <string name="osmo_connect_menu">Connecter</string>
-    <string name="osmo_group_description">Description</string>
     <string name="import_file_favourites">Enregistrer les données comme fichier GPX ou transformer les étapes en Favoris ?</string>
     <string name="rendering_value_pink_name">Rose</string>
     <string name="rendering_value_brown_name">Brun</string>
@@ -1418,7 +1417,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="remove_the_tag">Supprimer l\'emplacement</string>
     <string name="shared_string_disabled">Désactivé</string>
     <string name="shared_string_enabled">Activé</string>
-    <string name="plugin_description_title">Description</string>
     <string name="edit_group">Modifier le groupe</string>
     <string name="plugin_install_needs_network">Vous devez être connecté à Internet pour installer ce greffon.</string>
     <string name="shared_string_enable">Activer</string>
@@ -1638,7 +1636,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="next_proceed">Suivant</string>
     <string name="opening_at">Ouverture à</string>
     <string name="closing_at">Fermeture à</string>
-    <string name="description">Description</string>
     <string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
     <string name="poi_dialog_poi_type">Type de point d\'intérêt</string>
     <string name="av_locations">Positions</string>
@@ -2786,8 +2783,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et cliquez sur Enregistrer.</string>
     <string name="point_deleted">Point %1$s supprimé</string>
     <string name="shared_string_world">Monde</string>
-    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : <b>\"%1$s\"</b>, ainsi que votre position.<br/>
-        <br/>Nous ne collectons aucune donnée personnelle. Nous utiliserons ces informations seulement pour améliorer notre algorithme de recherche.<br/>
+    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : <b>\"%1$s\"</b> ainsi que votre position.<br/>
+        <br/>Aucune donnée personnelle ne sera envoyée. Ces informations seront utilisées afin d\'améliorer l\'algorithme de recherche.<br/>
     </string>
     <string name="search_no_results_description">Aucun résultat ?
 \nSignalez-le nous.</string>
@@ -2903,4 +2900,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_show_hide_gpx_tracks">Afficher / masquer les traces GPX</string>
     <string name="quick_action_gpx_tracks_hide">Masquer les traces GPX</string>
     <string name="quick_action_gpx_tracks_show">Afficher les traces GPX</string>
+    <string name="use_osm_live_public_transport_description">Activer les modifications de transports publics en temps réel avec OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transports publics OsmAnd Live</string>
+    <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Appuyez sur ce bouton pour afficher / masquer les traces GPX sélectionnées</string>
 </resources>

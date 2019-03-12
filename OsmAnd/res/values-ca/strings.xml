@@ -97,7 +97,7 @@
     <string name="send_files_to_osm">Voleu enviar els fitxers GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilitat</string>
     <string name="gpx_tags_txt">Etiquetes</string>
-    <string name="gpx_description_txt">Descripció</string>
+    <string name="shared_string_description">Descripció</string>
     <string name="validate_gpx_upload_name_pwd">Especifiqueu el vostre nom d\'usuari i la contrasenya d\'OSM per pujar fitxers GPX.</string>
     <string name="default_buttons_support">Suport</string>
     <string name="show_ruler_level">Mostra el regle</string>
@@ -1220,7 +1220,6 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
     <string name="int_days">dies</string>
     <string name="osmo_connect_menu">Connecta</string>
-    <string name="osmo_group_description">Descripció</string>
     <string name="import_file_favourites">Voleu desar les dades com un fitxer GPX o voleu importar les fites a \'Preferits\'?</string>
     <string name="rendering_value_pink_name">rosa</string>
     <string name="rendering_value_brown_name">Marró</string>
@@ -1447,7 +1446,6 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="remove_the_tag">Treure l\'etiqueta</string>
     <string name="shared_string_disabled">Desactivat</string>
     <string name="shared_string_enabled">Activat</string>
-    <string name="plugin_description_title">Descripció</string>
     <string name="edit_group">Edició del grup</string>
     <string name="plugin_install_needs_network">Per instal·lar aquest connector us cal una connexió a internet.</string>
     <string name="plugin_ski_name">Vista mapa d\'esquí</string>
@@ -1672,7 +1670,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="av_locations">Ubicacions</string>
     <string name="av_locations_descr">Fitxer GPX amb posicions comentades.</string>
     <string name="contact_info">Informació de contacte</string>
-    <string name="description">Descripció</string>
     <string name="add_opening_hours">Afegeix l\'horari de servei</string>
     <string name="poi_dialog_poi_type">Tipus de PDI</string>
     <string name="please_specify_poi_type">Especifiqueu el tipus de PDI.</string>
@@ -2945,4 +2942,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Prement aquest botó d\'acció es mostren o s\'amaguen al mapa les traces GPX</string>
     <string name="quick_action_gpx_tracks_hide">Amaga les traces GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostra les traces GPX</string>
+    <string name="sit_on_the_stop">Espereu a la parada</string>
 </resources>

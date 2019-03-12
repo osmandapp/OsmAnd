@@ -127,7 +127,7 @@
     <string name="send_files_to_osm">Skicka GPX-filer till OSM?</string>
     <string name="gpx_visibility_txt">Synlighet</string>
     <string name="gpx_tags_txt">Taggar</string>
-    <string name="gpx_description_txt">Beskrivning</string>
+    <string name="shared_string_description">Beskrivning</string>
     <string name="validate_gpx_upload_name_pwd">Vänligen ange ditt OSM-användarnamn och lösenord för att ladda upp GPX-filer.</string>
     <string name="accessibility_mode">Tillgänglighetsläge</string>
     <string name="accessibility_mode_descr">Sätter på tillgänglighetsfunktioner.</string>
@@ -1122,7 +1122,6 @@ Nyttjat utrymme är {1} MB.
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
     <string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Anslut</string>
-    <string name="osmo_group_description">Beskrivning</string>
     <string name="rendering_value_pink_name">skär</string>
     <string name="rendering_value_brown_name">brun</string>
     <string name="osmo_edit_color">Visningsfärg</string>
@@ -1344,7 +1343,6 @@ Nyttjat utrymme är {1} MB.
     <string name="shared_string_gpx_points">Punkter</string>
     <string name="shared_string_disabled">Inaktiverad</string>
     <string name="shared_string_enabled">Aktiverad</string>
-    <string name="plugin_description_title">Beskrivning</string>
     <string name="edit_group">Redigera grupp</string>
     <string name="plugin_install_needs_network">En Internetuppkoppling krävs för att installera denna modul.</string>
     <string name="shared_string_enable">Aktivera</string>
@@ -1603,7 +1601,6 @@ Long %2$s</string>
     <string name="av_locations_descr">GPX-fil med anteckningar om platser.</string>
     <string name="poi_dialog_poi_type">Typ av POI</string>
     <string name="add_opening_hours">Lägg till öppettider</string>
-    <string name="description">Beskrivning</string>
     <string name="contact_info">Kontaktinformation</string>
     <string name="dahboard_options_dialog_title">Konfigurera panelen</string>
     <string name="commit_poi">Skicka in POI</string>

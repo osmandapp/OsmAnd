@@ -137,7 +137,7 @@
     <string name="poi_tram_stop">ایستگاه تراموا</string>
     <string name="poi_public_transport_station">پایانه حمل و نقل عمومی</string>
     <string name="poi_bus_station">پایانه اتوبوس</string>
-    <string name="poi_railway_station">ایستگاه راه آهن</string>
+    <string name="poi_railway_station">پایانه راه آهن</string>
     <string name="poi_railway_platform">سکوی راه آهن</string>
     <string name="poi_halt">ایستگاه راه آهن</string>
     <string name="poi_subway_entrance">ورودی مترو</string>
@@ -1250,7 +1250,7 @@
     <string name="poi_payment_terminal">کارت‌خوان</string>
     <string name="poi_payment_coins_yes">سکه</string>
     <string name="poi_payment_coins_no">سکه پذیرفته نیست</string>
-    <string name="poi_payment_coins_0.5">سکه‌های 0.5$</string>
+    <string name="poi_payment_coins_0_5">سکه‌های 0.5$</string>
     <string name="poi_payment_coins_50c12">سکه‌های 50c،‏ 1€ و 2€</string>
     <string name="poi_payment_credit_cards_yes">کارت اعتباری</string>
     <string name="poi_payment_credit_cards_no">کارت اعتباری پذیرفته نیست</string>
@@ -1293,4 +1293,6 @@
     <string name="poi_military_office">دفتر نظامی</string>
     <string name="poi_publisher">دفتر نشر</string>
     <string name="poi_public_bookcase">قفسه کتاب عمومی</string>
+    <string name="poi_fire_hydrant_position_street">خیابان</string>
+    <string name="poi_post_street">خیابان</string>
 </resources>

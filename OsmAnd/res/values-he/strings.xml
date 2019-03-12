@@ -7,7 +7,7 @@
     <string name="rendering_attr_roadColors_description">בחירת ערכת צבעי דרך:</string>
     <string name="rendering_attr_roadColors_name">ערכת צבעי דרך</string>
     <string name="map_widget_show_destination_arrow">הצגת הכיוון ליעד</string>
-    <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף מעקב הטיול כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום GPX)</string>
+    <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף „מעקב הטיול” כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום GPX)</string>
     <string name="non_optimal_route_calculation">יש לחשב מסלול בלתי יעיל למרחקים ארוכים</string>
     <string name="gps_not_available">נא להפעיל את רכיב האיכון (GPS) בהגדרות</string>
     <string name="map_widget_monitoring_services">שירותי רישום</string>
@@ -23,7 +23,7 @@
     <string name="new_destination_point_dialog">כבר הגדרת יעד:</string>
     <string name="shared_string_target_points">יעדים</string>
     <string name="intermediate_point_too_far">יעד הביניים %1$s רחוק מדי מהדרך הקרוב אליו.</string>
-    <string name="arrived_at_intermediate_point">הגעת ליעד הביניים שלך</string>
+    <string name="arrived_at_intermediate_point">הגעת ליעד ביניים</string>
     <string name="context_menu_item_intermediate_point">הוספה כיעד ביניים</string>
     <string name="map_widget_intermediate_distance">יעד ביניים</string>
     <string name="ending_point_too_far">נקודת הסיום רחוקה מדי מהדרך הקרובה אליה.</string>
@@ -115,7 +115,7 @@
     <string name="route_updated_loc_found">בהמתנה למיקום לצורך חישוב הנתיב</string>
     <string name="osmand_parking_hours">שעות</string>
     <string name="osmand_parking_minutes">דקות</string>
-    <string name="osmand_parking_position_description_add_time">הרכב חונה במיקום:</string>
+    <string name="osmand_parking_position_description_add_time">הרכב חונה במיקום</string>
     <string name="select_animate_speedup">בחירת מהירות הדמיית הנתיב</string>
     <string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של Android:‏ %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
     <string name="global_app_allocated_memory">הזיכרון המוקצה</string>
@@ -195,7 +195,7 @@
     <string name="send_files_to_osm">האם לשלוח את קובצי ה־GPX ל־OSM?</string>
     <string name="gpx_visibility_txt">הופעה</string>
     <string name="gpx_tags_txt">תגיות</string>
-    <string name="gpx_description_txt">תיאור</string>
+    <string name="shared_string_description">תיאור</string>
     <string name="validate_gpx_upload_name_pwd">נא לציין את שם המשתמש והססמה שלך ב־OSM כדי להעלות קובצי GPX.</string>
     <string name="default_buttons_support">תמיכה</string>
     <string name="support_new_features">תמיכה בתכונות חדשות</string>
@@ -495,7 +495,7 @@
     <string name="version_index_is_not_supported">גרסת האינדקס „{0}“ אינה נתמכת</string>
     <string name="safe_mode_description">הפעלת היישום במצב בטוח (על ידי שימוש בקוד Android אטי יותר במקום בקוד טבעי).</string>
     <string name="safe_mode">מצב בטוח</string>
-    <string name="native_library_not_running">היישום פועל כעת במצב בטוח (ניתן להשבית זאת ב‚הגדרות’).</string>
+    <string name="native_library_not_running">היישום פועל כעת במצב בטוח (ניתן לכבות זאת ב‚הגדרות’).</string>
     <string name="background_service_is_enabled_question">שירות הרקע של OsmAnd עדיין פעיל. לעצור גם אותו?</string>
     <string name="osmand_routing_experimental">ניווט בלתי מקוון ב־OsmAnd הנו תכונה ניסיונית שאינה פועלת למרחקים של למעלה מ־20 ק״מ.
 \n
@@ -1176,7 +1176,6 @@
     <string name="osmo_edit_color">צבע תצוגה</string>
     <string name="int_days">ימים</string>
     <string name="osmo_connect_menu">התחברות</string>
-    <string name="osmo_group_description">תיאור</string>
     <string name="use_points_as_intermediates">חישוב מסלול בין נקודות</string>
     <string name="always_center_position_on_map">המיקום הוא תמיד במרכז התצוגה</string>
     <string name="voice_pref_title">קול</string>
@@ -2185,7 +2184,6 @@
     <string name="av_camera_pic_size">גודל תמונת המצלמה</string>
     <string name="av_camera_pic_size_descr">בחירת גודל התמונה של המצלמה הפנימית.</string>
     <string name="navigation_intent_invalid">תבנית שגויה: %s</string>
-    <string name="plugin_description_title">תיאור</string>
     <string name="plugin_install_needs_network">כדי להתקין את התוסף הזה צריך חיבור לאינטרנט.</string>
     <string name="get_plugin">קבלה</string>
     <string name="use_fast_recalculation">חישוב חכם לנתיב מחדש</string>
@@ -2216,7 +2214,6 @@
     <string name="opening_at">פתיחה ב־</string>
     <string name="closing_at">סגירה ב־</string>
     <string name="contact_info">פרטי קשר</string>
-    <string name="description">תיאור</string>
     <string name="add_opening_hours">הוספת שעות פתיחה</string>
     <string name="poi_dialog_poi_type">סוג נקודת עניין</string>
     <string name="number_of_rows_in_dash">מספר שורות בלוח הבקרה %1$s</string>
@@ -2803,8 +2800,8 @@
     <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד שם קובץ וללחוץ על ‚שמירה’.</string>
     <string name="point_deleted">הנקודה %1$s נמחקה</string>
     <string name="shared_string_world">עולם</string>
-    <string name="send_search_query_description">אנו נשלח את שאילתת החיפוש שלך: <b>\"%1$s\"</b>, לרבות המקום שלך.<br/>
-        <br/> איננו אוספים פרטים אישיים, אנחנו רק צריכים נתוני חיפושים כדי לשפר את אלגוריתם החיפוש.<br/>
+    <string name="send_search_query_description">אנו נשלח את שאילתת החיפוש שלך: <b>”%1$s„</b>, לרבות המקום שלך.<br/>
+        <br/> לא נאספים פרטים אישיים, נתוני חיפושים משמשים לטובת שיפור אלגוריתם החיפוש.<br/>
     </string>
     <string name="search_no_results_description">אין תוצאות?
 \nנשמח לקבל דיווח על כך.</string>
@@ -2823,26 +2820,26 @@
 \n
 \n • תיקון תקלות נוספות
 \n</string>
-    <string name="thank_you_for_feedback">תודה לך על המשוב</string>
+    <string name="thank_you_for_feedback">תודה לך על המשוב שלך</string>
     <string name="poi_cannot_be_found">לא ניתן למצוא את הצומת או הדרך.</string>
     <string name="search_no_results_feedback">אין תוצאות חיפוש?
 \nנשמח לקבל משוב</string>
     <string name="test_voice_desrc">יש ללחוץ על הכפתור ולהאזין להנחיה הקולית כדי לזהות הנחיות חסרות או שגויות.</string>
-    <string name="release_3_2_pre">"• תוקנה קריסה בהפעלה שקרתה בחלק מהמכשירים
-\n
-\n • תכונת סמנים חדשה: הצגת הסמנים שכבר נחצו
-\n
-\n • היסטוריית החיפוש מציגה כעת את הקטגוריות אחריהן חיפשת בעבר
-\n
+    <string name="release_3_2_pre">"• תוקנה קריסה בהפעלה שקרתה בחלק מהמכשירים 
+\n 
+\n • תכונת סמנים חדשה: הצגת הסמנים שכבר נחצו 
+\n 
+\n • היסטוריית החיפוש מציגה כעת את הקטגוריות אחריהן חיפשת בעבר 
+\n 
 \n • תוקנה קריסה בהפעלה שקרתה עקב מפות עם סוגי כתב שאינם לטיניים 
-\n
+\n 
 \n • שיפור מהירות העיבוד במכשירי Android  בגרסה 8.0 
-\n
+\n 
 \n • תמיכה בעריכת עצמים מצולעים (שאינם מבני קהילה) 
-\n
-\n • מדידת מרחק: הוספת כפתור מדידה לפעולות בתפריט ההקשר 
+\n 
+\n • מדידת מרחק: הוספת כפתור „מדידה” לפעולות בתפריט ההקשר 
 \n"</string>
-    <string name="ask_for_location_permission">נא לאפשר ל־OsmAnd לגשת למיקום כדי להמשיך.</string>
+    <string name="ask_for_location_permission">נא להעניק ל־OsmAnd גישה למיקום כדי להמשיך.</string>
     <string name="rendering_value_black_name">שחור</string>
     <string name="more_transport_on_stop_hint">יש תחבורה נוספת בתחנה הזו.</string>
     <string name="search_street">חיפוש רחוב</string>
@@ -2852,22 +2849,22 @@
     <string name="keep_passed_markers">להשאיר סמנים שעברת בהם על המפה</string>
     <string name="markers_remove_dialog_msg">למחוק את סמן המפה ‚%s’\?</string>
     <string name="edit_map_marker">עריכת סמן מפה</string>
-    <string name="third_party_application">יישום צד שלישי</string>
+    <string name="third_party_application">יישומון צד שלישי</string>
     <string name="osm_live_plan_pricing">תכנית ומחיר</string>
-    <string name="osm_live_payment_monthly_title">תשלום חודשי</string>
-    <string name="osm_live_payment_3_months_title">תשלום אחת ל־3 חודשים</string>
-    <string name="osm_live_payment_annual_title">תשלום אחת לשנה</string>
+    <string name="osm_live_payment_monthly_title">חודשי</string>
+    <string name="osm_live_payment_3_months_title">כל 3 חודשים</string>
+    <string name="osm_live_payment_annual_title">שנתית</string>
     <string name="osm_live_payment_month_cost_descr">%1$s לחודש</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s לחודש</string>
-    <string name="osm_live_payment_discount_descr">חיסכון של %1$s!</string>
-    <string name="osm_live_payment_current_subscription">המינוי הנוכחי שלך</string>
+    <string name="osm_live_payment_discount_descr">חיסכון של %1$s.</string>
+    <string name="osm_live_payment_current_subscription">המינוי הנוכחי</string>
     <string name="osm_live_payment_renews_monthly">מתחדש חודשית</string>
     <string name="osm_live_payment_renews_quarterly">מתחדש רבעונית</string>
     <string name="osm_live_payment_renews_annually">מתחדש שנתית</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">נא לבחור את מחזור התשלום המועדף עליך:</string>
     <string name="osm_live_payment_contribute_descr">חלק מההכנסות נתרמות לטובת מתנדבי OpenStreetMap.</string>
-    <string name="powered_by_osmand">מופעל על ידי OsmAnd</string>
+    <string name="powered_by_osmand">על ידי OsmAnd</string>
     <string name="osm_live_subscriptions">מינויים</string>
     <string name="mapillary_menu_title_pano">הצגת תמונות 360° בלבד</string>
     <string name="shared_string_launch">הפעלה</string>
@@ -2883,9 +2880,9 @@
     <string name="on_foot">ברגל</string>
     <string name="route_way">דרך</string>
     <string name="points_of_interests">נקודות עניין (נ״ע)</string>
-    <string name="waiting_for_route_calculation">בהמתנה לחישוב מסלול</string>
+    <string name="waiting_for_route_calculation">המסלול מחושב…</string>
     <string name="app_mode_public_transport">תחבורה ציבורית</string>
-    <string name="avoid_roads_descr">נא לבחור סוג דרך במפה או מהרשימה שלהלן שברצונך להימנע ממנה במהלך ניווט:</string>
+    <string name="avoid_roads_descr">נא לבחור דרך להימנע ממנה במהלך ניווט, אפשר במפה או ברשימה שלהלן:</string>
     <string name="show_along_the_route">הצגה לאורך המסלול</string>
     <string name="simulate_navigation">הדמיית ניווט</string>
     <string name="choose_track_file_to_follow">נא לבחור קובץ מסלול להצגה</string>
@@ -2918,4 +2915,10 @@
     <string name="step_by_step">שלב אחר שלב</string>
     <string name="road_types">סוגי כבישים</string>
     <string name="exit_at">לצאת ב־</string>
+    <string name="quick_action_show_hide_gpx_tracks">הצגה/הסתרה של מסלולי GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה את מסלולי ה־GPX הנבחרים במפה</string>
+    <string name="quick_action_gpx_tracks_hide">הסתרת מסלולי GPX</string>
+    <string name="quick_action_gpx_tracks_show">הצגת מסלולי GPX</string>
+    <string name="use_osm_live_public_transport_description">הפעלת תחבורה ציבורית לשינויים ב־OsmAnd החי.</string>
+    <string name="use_osm_live_public_transport">OsmAnd חי תחבורה ציבורית</string>
 </resources>

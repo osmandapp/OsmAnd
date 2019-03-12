@@ -1318,7 +1318,7 @@
     <string name="poi_love_hotel">Kærlighedshotel</string>
     <string name="poi_payment_coins_yes">Mønter</string>
     <string name="poi_payment_coins_no">Mønter accepteres ikke</string>
-    <string name="poi_payment_coins_0.5">$0,5 mønter</string>
+    <string name="poi_payment_coins_0_5">$0,5 mønter</string>
     <string name="poi_payment_coins_50c12">50c, 1€, og 2€ mønter</string>
     <string name="poi_payment_telephone_cards_yes">Telefonkort</string>
     <string name="poi_payment_telephone_cards_no">Telefonkort accepteres ikke</string>
@@ -3564,4 +3564,6 @@
     <string name="poi_park_ride_ferry">Færge</string>
     <string name="poi_denotation">Betegnelse</string>
     <string name="poi_generator_source_biomass">Energikilde: biomasse</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">Strålebehandling</string>
+    <string name="poi_hazard">Fare</string>
 </resources>

@@ -314,7 +314,7 @@ public class TransportRoutePlanner {
 		}
 
 		public List<TransportStop> getTravelStops() {
-			return route.getForwardStops().subList(start, end);
+			return route.getForwardStops().subList(start, end + 1);
 		}
 
 		public List<Node> getNodes() {

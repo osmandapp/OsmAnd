@@ -48,7 +48,7 @@
     <string name="show_gpx">GPXê nîşan bide</string>
     <string name="working_days">Rojên Karê</string>
     <string name="poi_dialog_poi_type">Cureya POIyê</string>
-    <string name="description">Danasîn</string>
+    <string name="shared_string_description">Danasîn</string>
     <string name="next_proceed">Dû re</string>
     <string name="shared_string_sound">Deng</string>
     <string name="osb_author_dialog_password">Şîfreya OSMê (ne mecbûrî ye)</string>
@@ -82,7 +82,6 @@
     <string name="shared_string_undo">Betal bike</string>
     <string name="error_message_pattern">Xeta: {0}</string>
     <string name="do_you_like_osmand">Ma we ji OsmAndê hez kir?</string>
-    <string name="plugin_description_title">Daxuyanî</string>
     <string name="email">e-peyam</string>
     <string name="edit_filter_save_as_menu_item">Bi awayekî cuda qeyd bike</string>
     <string name="shared_string_remove">Helîne</string>

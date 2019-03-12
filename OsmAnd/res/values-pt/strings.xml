@@ -421,7 +421,7 @@
     <string name="send_files_to_osm">Enviar ficheiros GPX para o OSM\?</string>
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etiquetas</string>
-    <string name="gpx_description_txt">Descrição</string>
+    <string name="shared_string_description">Descrição</string>
     <string name="validate_gpx_upload_name_pwd">Especifique o nome e palavra-passe de utilizador do OSM para enviar ficheiros de GPX.</string>
     <string name="default_buttons_support">Apoiar</string>
     <string name="support_new_features">Apoiar novas funcionalidades</string>
@@ -1071,7 +1071,6 @@
     <string name="speech_rate">Velocidade de fala</string>
     <string name="int_days">dias</string>
     <string name="osmo_connect_menu">Conectar</string>
-    <string name="osmo_group_description">Descrição</string>
     <string name="use_points_as_intermediates">Calcular rota entre pontos</string>
     <string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
@@ -2655,7 +2654,6 @@
     <string name="poi_dialog_reopen">Reabrir</string>
     <string name="av_camera_pic_size">Tamanho da foto</string>
     <string name="av_camera_pic_size_descr">Selecionar tamanho de imagem da foto</string>
-    <string name="plugin_description_title">Descrição</string>
     <string name="get_plugin">Obter</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
     <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas</string>
@@ -2684,7 +2682,6 @@
     <string name="opening_at">Abre às</string>
     <string name="closing_at">Fecha às</string>
     <string name="contact_info">Informações de contato</string>
-    <string name="description">Descrição</string>
     <string name="add_opening_hours">Adicionar horário de funcionamento</string>
     <string name="poi_dialog_poi_type">Tipo de POI</string>
     <string name="number_of_rows_in_dash">Número de linhas no traço de %1$s</string>
