@@ -390,15 +390,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void doRoute(boolean hasTargets) {
 		this.hasTargets = hasTargets;
-		if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-			onNavigationClick();
-		} else if (!ActivityCompat.shouldShowRequestPermissionRationale(mapActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-			app.showToastMessage(R.string.ask_for_location_permission);
-		} else {
-			ActivityCompat.requestPermissions(mapActivity,
-					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-					REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION);
-		}
+		onNavigationClick();
 	}
 
 	public void doNavigate() {

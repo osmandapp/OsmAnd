@@ -42,6 +42,7 @@ import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -1412,21 +1413,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 					TargetPoint startPoint = targetPointsHelper.getPointToStart();
 					TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
-					if (endPoint == null) {
+					Location loc = app.getLocationProvider().getLastKnownLocation();
+					if (loc == null && startPoint == null && endPoint == null) {
+						app.showShortToastMessage(R.string.add_start_and_end_points);
+					} else if (endPoint == null) {
 						app.showShortToastMessage(R.string.mark_final_location_first);
 					} else {
-						if (startPoint == null) {
-							Location loc = app.getLocationProvider().getLastKnownLocation();
-							if (loc != null) {
-								startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-										new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
-												mapActivity.getString(R.string.shared_string_my_location)));
-							}
+						if (startPoint == null && loc != null) {
+							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
 						}
 						if (startPoint != null) {
 							targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
 							targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
 							targetPointsHelper.updateRouteAndRefresh(true);
+						} else {
+							app.showShortToastMessage(R.string.route_add_start_point);
 						}
 					}
 				}
@@ -1751,7 +1753,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (start != null) {
 				fromText.setText(name);
 			} else {
-				fromText.setText(R.string.shared_string_my_location);
+				if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+					fromText.setText(R.string.shared_string_my_location);
+				} else {
+					fromText.setText(R.string.route_descr_select_start_point);
+				}
 			}
 		}
 	}

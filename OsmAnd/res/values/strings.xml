@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="add_start_and_end_points">Add start and end points</string>
+    <string name="route_add_start_point">Add start point</string>
+    <string name="route_descr_select_start_point">Select start point</string>
     <string name="rendering_attr_surface_unpaved_name">Unpaved</string>
     <string name="rendering_attr_surface_sand_name">Sand</string>
     <string name="rendering_attr_surface_grass_name">Grass</string>
