@@ -8,7 +8,8 @@ public class NewGpxData {
 	public enum ActionType {
 		ADD_SEGMENT,
 		ADD_ROUTE_POINTS,
-		EDIT_SEGMENT
+		EDIT_SEGMENT,
+		OVERWRITE_SEGMENT
 	}
 
 	private GPXUtilities.GPXFile gpxFile;
