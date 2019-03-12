@@ -3000,4 +3000,25 @@
     <string name="poi_animal_shelter_fish">魚類</string>
     <string name="poi_route_subway_ref">地下鉄(Subway)</string>
     <string name="poi_health_specialty_radiotheraphy_yes">放射線治療(Radiotheraphy)</string>
+    <string name="poi_rtsa_scale_filter">難易度カテゴリ</string>
+    <string name="poi_lock_basin">荷役用ドック</string>
+    <string name="poi_provided_for_infant_yes">1歳未満の乳児:可</string>
+    <string name="poi_provided_for_infant_no">1歳未満の乳児:不可</string>
+    <string name="poi_provided_for_toddler_yes">1～3歳の幼児:可</string>
+    <string name="poi_provided_for_toddler_no">1～3歳の幼児:不可</string>
+    <string name="poi_provided_for_child_yes">4～11歳の子供:可</string>
+    <string name="poi_provided_for_child_no">4～11歳の子供:不可</string>
+    <string name="poi_provided_for_adult_yes">20歳以上の大人:可</string>
+    <string name="poi_provided_for_adult_no">20歳以上の大人:不可</string>
+    <string name="poi_provided_for_woman_yes">大人の女性:可</string>
+    <string name="poi_provided_for_woman_no">大人の女性:不可</string>
+    <string name="poi_provided_for_senior_yes">60歳以上:可</string>
+    <string name="poi_provided_for_senior_no">60歳以上:不可</string>
+    <string name="poi_provided_for_girl_yes">20歳未満の女性:可</string>
+    <string name="poi_provided_for_girl_no">20歳未満の女性:不可</string>
+    <string name="poi_provided_for_man_yes">大人の男性:可</string>
+    <string name="poi_provided_for_man_no">大人の男性:不可</string>
+    <string name="poi_provided_for_boy_yes">20歳未満の男性:可</string>
+    <string name="poi_provided_for_boy_no">20歳未満の男性:不可</string>
+    <string name="poi_capacity_beds">ベッド定員</string>
 </resources>
