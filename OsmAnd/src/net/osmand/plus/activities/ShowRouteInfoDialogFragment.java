@@ -130,7 +130,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = "ShowRouteInfoDialogFragment";
 
-	private static final String ROUTE_ID_KEY = "route_id_key";
+	private static final String TRANSPORT_ROUTE_ID_KEY = "route_id_key";
 
 	private InterceptorLinearLayout mainView;
 	private View view;
@@ -158,7 +158,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	private int shadowHeight;
 	private int zoomButtonsHeight;
 
-	private int routeId;
+	private int transportRouteId = -1;
 	private String destinationStreetStr = "";
 	private boolean paused;
 
@@ -182,7 +182,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 		Bundle args = getArguments();
 		if (args != null) {
-			routeId = args.getInt(ROUTE_ID_KEY);
+			transportRouteId = args.getInt(TRANSPORT_ROUTE_ID_KEY);
 		}
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		topShadowMargin = AndroidUtils.dpToPx(mapActivity, 9f);
@@ -422,16 +422,20 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	public boolean isPublicTransportInfo() {
+		return transportRouteId != -1;
+	}
+
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			LinearLayout cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
 			cardsContainer.removeAllViews();
-			if (routeId != -1) {
+			if (transportRouteId != -1) {
 				List<TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
-				if (routes != null && routes.size() > routeId) {
-					TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(routeId);
-					PublicTransportCard card = new PublicTransportCard(mapActivity, routeResult, routeId);
+				if (routes != null && routes.size() > transportRouteId) {
+					TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(transportRouteId);
+					PublicTransportCard card = new PublicTransportCard(mapActivity, routeResult, transportRouteId);
 					menuCards.add(card);
 					cardsContainer.addView(card.build(mapActivity));
 					buildRowDivider(cardsContainer, false);
@@ -1720,6 +1724,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 
 	private void buildMenuButtons() {
 		UiUtilities iconsCache = app.getUIUtilities();
+		boolean publicTransportInfo = isPublicTransportInfo();
+
 		ImageButton printRoute = (ImageButton) view.findViewById(R.id.print_route);
 		printRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gprint_dark));
 		printRoute.setOnClickListener(new OnClickListener() {
@@ -1728,15 +1734,24 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				print();
 			}
 		});
+		if (publicTransportInfo) {
+			printRoute.setVisibility(View.GONE);
+		}
 
 		ImageButton saveRoute = (ImageButton) view.findViewById(R.id.save_as_gpx);
 		saveRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gsave_dark));
 		saveRoute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapActivityActions.createSaveDirections(getActivity(), routingHelper).show();
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					MapActivityActions.createSaveDirections(activity, routingHelper).show();
+				}
 			}
 		});
+		if (publicTransportInfo) {
+			saveRoute.setVisibility(View.GONE);
+		}
 
 		ImageButton shareRoute = (ImageButton) view.findViewById(R.id.share_as_gpx);
 		shareRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark));
@@ -1772,6 +1787,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
+		if (publicTransportInfo) {
+			shareRoute.setVisibility(View.GONE);
+		}
 	}
 
 	public class CumulativeInfo {
@@ -2018,10 +2036,14 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		return HEADER_ONLY | HALF_SCREEN | FULL_SCREEN;
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity, int routeId) {
+	public static boolean showInstance(final MapActivity mapActivity) {
+		return showInstance(mapActivity, -1);
+	}
+
+	public static boolean showInstance(final MapActivity mapActivity, int transportRouteId) {
 		try {
 			Bundle args = new Bundle();
-			args.putInt(ROUTE_ID_KEY, routeId);
+			args.putInt(TRANSPORT_ROUTE_ID_KEY, transportRouteId);
 
 			ShowRouteInfoDialogFragment fragment = new ShowRouteInfoDialogFragment();
 			fragment.setArguments(args);

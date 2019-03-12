@@ -51,7 +51,7 @@ public class SimpleRouteCard extends BaseCard {
 		info.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showInstance(mapActivity, -1);
+				ShowRouteInfoDialogFragment.showInstance(mapActivity);
 			}
 		});
 
@@ -94,7 +94,7 @@ public class SimpleRouteCard extends BaseCard {
 		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showInstance(mapActivity, -1);
+				ShowRouteInfoDialogFragment.showInstance(mapActivity);
 			}
 		});
 
