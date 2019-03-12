@@ -3553,4 +3553,19 @@
     <string name="poi_generator_source_biomass">Energifonto: biomaso</string>
     <string name="poi_health_specialty_radiotheraphy_yes">per-radiad-kuracado (radioterapio)</string>
     <string name="poi_hazard">Danĝerejo</string>
+    <string name="poi_rtsa_scale_filter">Malfacilo de montpasejo (RTSA-skalo)</string>
+    <string name="poi_rtsa_scale_nc">н/к (sen malfacilo)</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к* (sen malfacilo, ebla danĝero)</string>
+    <string name="poi_rtsa_scale_1a">1А</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1b">1Б</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
+    <string name="poi_rtsa_scale_2a">2А</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+    <string name="poi_rtsa_scale_2b">2Б</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
+    <string name="poi_rtsa_scale_3a">3А</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
+    <string name="poi_rtsa_scale_3b">3Б</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
 </resources>
