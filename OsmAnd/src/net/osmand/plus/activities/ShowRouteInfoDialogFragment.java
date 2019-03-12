@@ -115,7 +115,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -506,8 +505,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			elevationDataSet = statisticCard.getElevationDataSet();
 			List<RouteSegmentResult> route = routingHelper.getRoute().getOriginalRoute();
 			if (route != null) {
-				RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
-				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route,rrs,nightMode);
+				RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+				RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
+				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer,defaultRender, nightMode);
 				GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteClassStatistic(), analysis);

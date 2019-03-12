@@ -13,37 +13,39 @@ public class RouteStatistics {
 	private static final String UNDEFINED_ATTR = "undefined";
 
 	private final List<RouteSegmentResult> route;
-	private final RenderingRulesStorage rrs;
+	private final RenderingRulesStorage currentRenderer;
+	private final RenderingRulesStorage defaultRenderer;
 
 	private final boolean nightMode;
 
-	private RouteStatistics(List<RouteSegmentResult> route, RenderingRulesStorage rrs, boolean nightMode) {
+	private RouteStatistics(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer, boolean nightMode) {
 		this.route = route;
-		this.rrs = rrs;
+		this.currentRenderer = currentRenderer;
+		this.defaultRenderer = defaultRenderer;
 		this.nightMode = nightMode;
 	}
 
-	public static RouteStatistics newRouteStatistic(List<RouteSegmentResult> route, RenderingRulesStorage rrs, boolean nightMode) {
-		return new RouteStatistics(route, rrs, nightMode);
+	public static RouteStatistics newRouteStatistic(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer, boolean nightMode) {
+		return new RouteStatistics(route, currentRenderer, defaultRenderer, nightMode);
 	}
 
 	public Statistics getRouteSurfaceStatistic() {
-		RouteStatisticComputer statisticComputer = new RouteSurfaceStatisticComputer(route, rrs, nightMode);
+		RouteStatisticComputer statisticComputer = new RouteSurfaceStatisticComputer(route, currentRenderer, defaultRenderer, nightMode);
 		return statisticComputer.computeStatistic();
 	}
 
 	public Statistics getRouteSmoothnessStatistic() {
-		RouteStatisticComputer statisticComputer = new RouteSmoothnessStatisticComputer(route, rrs, nightMode);
+		RouteStatisticComputer statisticComputer = new RouteSmoothnessStatisticComputer(route, currentRenderer, defaultRenderer, nightMode);
 		return statisticComputer.computeStatistic();
 	}
 
 	public Statistics getRouteClassStatistic() {
-		RouteStatisticComputer statisticComputer = new RouteClassStatisticComputer(route, rrs, nightMode);
+		RouteStatisticComputer statisticComputer = new RouteClassStatisticComputer(route, currentRenderer, defaultRenderer, nightMode);
 		return statisticComputer.computeStatistic();
 	}
 
 	public Statistics getRouteSteepnessStatistic(List<Incline> inclines) {
-		RouteStatisticComputer statisticComputer = new RouteSteepnessStatisticComputer(inclines, rrs, nightMode);
+		RouteStatisticComputer statisticComputer = new RouteSteepnessStatisticComputer(inclines, currentRenderer, defaultRenderer, nightMode);
 		return statisticComputer.computeStatistic();
 	}
 
@@ -53,12 +55,14 @@ public class RouteStatistics {
 		private final List<RouteSegmentResult> route;
 		private final StatisticType type;
 
-		protected final RenderingRulesStorage rrs;
+		protected final RenderingRulesStorage currentRenderer;
+		protected final RenderingRulesStorage defaultRenderer;
 		protected final boolean nightMode;
 
-		public RouteStatisticComputer(RenderingRulesStorage rrs, List<RouteSegmentResult> route, StatisticType type, boolean nightMode) {
+		public RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer, List<RouteSegmentResult> route, StatisticType type, boolean nightMode) {
 			this.route = route;
-			this.rrs = rrs;
+			this.currentRenderer = currentRenderer;
+			this.defaultRenderer = defaultRenderer;
 			this.type = type;
 			this.nightMode = nightMode;
 		}
@@ -117,11 +121,25 @@ public class RouteStatistics {
 			return new Statistics<>(routeAttributes, partition, totalDistance, type);
 		}
 
+		public int getColor(E attribute) {
+			int color = 0;
+			RenderingRuleSearchRequest currentRequest = new RenderingRuleSearchRequest(currentRenderer);
+			if (searchRenderingAttribute(currentRenderer, currentRequest, attribute)) {
+				color = currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE);
+			} else {
+				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderer);
+				if (searchRenderingAttribute(defaultRenderer, defaultRequest, attribute)) {
+					color = defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE);
+				}
+			}
+			return color;
+		}
+
 		public abstract E getAttribute(RouteSegmentResult segment);
 
-		public abstract int getColor(E attribute);
-
 		public abstract String getPropertyName(E attribute);
+
+		protected abstract boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, E attribute);
 	}
 
 	private static class RouteSurfaceStatisticComputer extends RouteStatisticComputer<String> {
@@ -129,8 +147,8 @@ public class RouteStatistics {
 		private static final String SURFACE_ATTR = "surface";
 		private static final String SURFACE_COLOR_ATTR = "surfaceColor";
 
-		public RouteSurfaceStatisticComputer(List<RouteSegmentResult> route, RenderingRulesStorage rrs, boolean nightMode) {
-			super(rrs, route, StatisticType.SURFACE, nightMode);
+		public RouteSurfaceStatisticComputer(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer, boolean nightMode) {
+			super(currentRenderer, defaultRenderer, route, StatisticType.SURFACE, nightMode);
 		}
 
 		@Override
@@ -139,21 +157,16 @@ public class RouteStatistics {
 			if (segmentSurface == null) {
 				return UNDEFINED_ATTR;
 			}
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			if (searchRenderingAttribute(req, segmentSurface)) {
+			RenderingRuleSearchRequest currentRequest = new RenderingRuleSearchRequest(currentRenderer);
+			if (searchRenderingAttribute(currentRenderer, currentRequest, segmentSurface)) {
 				return segmentSurface;
+			} else {
+				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderer);
+				if (searchRenderingAttribute(defaultRenderer, defaultRequest, segmentSurface)) {
+					return segmentSurface;
+				}
 			}
 			return UNDEFINED_ATTR;
-		}
-
-		@Override
-		public int getColor(String attribute) {
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			int color = 0;
-			if (searchRenderingAttribute(req, attribute)) {
-				color = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
-			}
-			return color;
 		}
 
 		@Override
@@ -161,7 +174,8 @@ public class RouteStatistics {
 			return attribute;
 		}
 
-		private boolean searchRenderingAttribute(RenderingRuleSearchRequest req, String attribute) {
+		@Override
+		public boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, String attribute) {
 			String additional = SURFACE_ATTR + "=" + attribute;
 			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
 			req.setStringFilter(rrs.PROPS.R_ATTR_STRING_VALUE, SURFACE_ATTR + "_" + attribute);
@@ -175,8 +189,8 @@ public class RouteStatistics {
 		private static final String SMOOTHNESS_ATTR = "smoothness";
 		private static final String SMOOTHNESS_COLOR_ATTR = "smoothnessColor";
 
-		public RouteSmoothnessStatisticComputer(List<RouteSegmentResult> route, RenderingRulesStorage rrs, boolean nightMode) {
-			super(rrs, route, StatisticType.SMOOTHNESS, nightMode);
+		public RouteSmoothnessStatisticComputer(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer, boolean nightMode) {
+			super(currentRenderer, defaultRenderer, route, StatisticType.SMOOTHNESS, nightMode);
 		}
 
 		@Override
@@ -185,21 +199,16 @@ public class RouteStatistics {
 			if (segmentSmoothness == null) {
 				return UNDEFINED_ATTR;
 			}
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			if (searchRenderingAttribute(req, segmentSmoothness)) {
+			RenderingRuleSearchRequest currentRequest = new RenderingRuleSearchRequest(currentRenderer);
+			if (searchRenderingAttribute(currentRenderer, currentRequest, segmentSmoothness)) {
 				return segmentSmoothness;
+			} else {
+				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderer);
+				if (searchRenderingAttribute(defaultRenderer, defaultRequest, segmentSmoothness)) {
+					return segmentSmoothness;
+				}
 			}
 			return UNDEFINED_ATTR;
-		}
-
-		@Override
-		public int getColor(String attribute) {
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			int color = 0;
-			if (searchRenderingAttribute(req, attribute)) {
-				color = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
-			}
-			return color;
 		}
 
 		@Override
@@ -207,7 +216,8 @@ public class RouteStatistics {
 			return attribute;
 		}
 
-		private boolean searchRenderingAttribute(RenderingRuleSearchRequest req, String attribute) {
+		@Override
+		public boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, String attribute) {
 			String additional = SMOOTHNESS_ATTR + "=" + attribute;
 			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
 			req.setStringFilter(rrs.PROPS.R_ATTR_STRING_VALUE, SMOOTHNESS_ATTR + "_" + attribute);
@@ -221,8 +231,8 @@ public class RouteStatistics {
 		private static final String HIGHWAY_ATTR = "highway";
 		private static final String ROAD_CLASS_COLOR_ATTR = "roadClassColor";
 
-		public RouteClassStatisticComputer(List<RouteSegmentResult> route, RenderingRulesStorage rrs, boolean nightMode) {
-			super(rrs, route, StatisticType.CLASS, nightMode);
+		public RouteClassStatisticComputer(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer, boolean nightMode) {
+			super(currentRenderer, defaultRenderer, route, StatisticType.CLASS, nightMode);
 		}
 
 		@Override
@@ -231,43 +241,57 @@ public class RouteStatistics {
 			if (segmentClass == null) {
 				return UNDEFINED_ATTR;
 			}
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			String type = null;
-			if (searchRenderingAttribute(req, segmentClass)) {
-				type = req.getStringPropertyValue(rrs.PROPS.R_ATTR_STRING_VALUE);
-				if (req.searchRenderingAttribute(type)) {
-					type = req.getStringPropertyValue(rrs.PROPS.R_ATTR_STRING_VALUE);
-				}
-			}
+			String type = getAttributeType(segmentClass);
 			return type != null ? type : UNDEFINED_ATTR;
 		}
 
 		@Override
 		public int getColor(String attribute) {
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 			int color = 0;
-			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-			if (req.searchRenderingAttribute(attribute)) {
-				color = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+			RenderingRuleSearchRequest currentRequest = new RenderingRuleSearchRequest(currentRenderer);
+			if (currentRequest.searchRenderingAttribute(attribute)) {
+				color = currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE);
+			} else {
+				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderer);
+				if (defaultRequest.searchRenderingAttribute(attribute)) {
+					color = defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE);
+				}
 			}
 			return color;
 		}
 
 		@Override
 		public String getPropertyName(String attribute) {
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			String type = "";
-			if (searchRenderingAttribute(req, attribute)) {
-				type = req.getStringPropertyValue(rrs.PROPS.R_ATTR_STRING_VALUE);
-			}
+			String type = getAttributeType(attribute);
 			return type != null ? type : attribute;
 		}
 
-		private boolean searchRenderingAttribute(RenderingRuleSearchRequest req, String attribute) {
+		@Override
+		public boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, String attribute) {
 			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
 			req.setStringFilter(rrs.PROPS.R_TAG, HIGHWAY_ATTR);
 			req.setStringFilter(rrs.PROPS.R_VALUE, attribute);
 			return req.searchRenderingAttribute(ROAD_CLASS_COLOR_ATTR);
+		}
+
+		private String getAttributeType(String attribute) {
+			String type = null;
+			RenderingRuleSearchRequest currentRequest = new RenderingRuleSearchRequest(currentRenderer);
+			if (searchRenderingAttribute(currentRenderer, currentRequest, attribute)) {
+				type = currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
+				if (currentRequest.searchRenderingAttribute(type)) {
+					type = currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
+				}
+			} else {
+				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderer);
+				if (searchRenderingAttribute(defaultRenderer, defaultRequest, attribute)) {
+					type = defaultRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
+					if (defaultRequest.searchRenderingAttribute(type)) {
+						type = defaultRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
+					}
+				}
+			}
+			return type;
 		}
 	}
 
@@ -278,8 +302,8 @@ public class RouteStatistics {
 
 		private final List<Incline> inclines;
 
-		public RouteSteepnessStatisticComputer(List<Incline> inclines, RenderingRulesStorage rrs, boolean nightMode) {
-			super(rrs, null, StatisticType.STEEPNESS, nightMode);
+		public RouteSteepnessStatisticComputer(List<Incline> inclines, RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer, boolean nightMode) {
+			super(currentRenderer, defaultRenderer, null, StatisticType.STEEPNESS, nightMode);
 			this.inclines = inclines;
 		}
 
@@ -320,32 +344,29 @@ public class RouteStatistics {
 		}
 
 		@Override
-		public int getColor(Boundaries attribute) {
-			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-			int index = -1;
-			for (int i = 1; i < Boundaries.NUM; i++) {
-				int val = Boundaries.BOUNDARIES_ARRAY[i];
-				if (val == (int) attribute.lowerBoundary) {
-					index = i;
-					break;
-				}
+		public String getPropertyName(Boundaries attribute) {
+			int lowerBoundary = Math.round(attribute.getLowerBoundary());
+			int upperBoundary = Math.round(attribute.getUpperBoundary());
+			if (lowerBoundary > Boundaries.MIN_INCLINE) {
+				lowerBoundary++;
 			}
-			if (searchRenderingAttribute(req, index)) {
-				return req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
-			}
-			return 0;
+			return String.format("%d%% ... %d%%", lowerBoundary, upperBoundary);
 		}
 
 		@Override
-		public String getPropertyName(Boundaries attribute) {
-			return attribute.toString();
-		}
-
-		private boolean searchRenderingAttribute(RenderingRuleSearchRequest req, int attribute) {
+		public boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, Boundaries attribute) {
+			int lowerBoundary = Math.round(attribute.getLowerBoundary());
+			int upperBoundary = Math.round(attribute.getUpperBoundary());
+			StringBuilder range = new StringBuilder();
+			if (lowerBoundary > Boundaries.MIN_INCLINE) {
+				lowerBoundary++;
+			}
+			range.append(lowerBoundary);
+			range.append(upperBoundary < 0 ? "_" : "-");
+			range.append(upperBoundary);
+			String additional = STEEPNESS_ATTR + "=" + range;
 			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-			req.setStringFilter(rrs.PROPS.R_TAG, STEEPNESS_ATTR);
-			req.setIntFilter(rrs.PROPS.R_ATTR_INT_VALUE, attribute);
+			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
 			return req.searchRenderingAttribute(STEEPNESS_COLOR_ATTR);
 		}
 	}
@@ -526,7 +547,7 @@ public class RouteStatistics {
 
 		@Override
 		public String toString() {
-			return String.format("%d%% - %d%%", Math.round(getLowerBoundary()), Math.round(getUpperBoundary()));
+			return String.format("%d%% ... %d%%", Math.round(getLowerBoundary()), Math.round(getUpperBoundary()));
 		}
 	}
 
