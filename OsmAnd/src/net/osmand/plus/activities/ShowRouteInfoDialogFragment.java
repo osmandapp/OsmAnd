@@ -669,7 +669,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		SpannableString textType = new SpannableString(getString(R.string.by_transport_type, transportStopRoute.type.name().toLowerCase()));
+		String type = getString(transportStopRoute.getTypeStrRes()).toLowerCase();
+		SpannableString textType = new SpannableString(getString(R.string.by_transport_type, type));
 		buildCollapsableRow(stopsContainer, spannable, textType, true, collapsableView, null);
 
 		final TransportStop endStop = stops.get(stops.size() - 1);

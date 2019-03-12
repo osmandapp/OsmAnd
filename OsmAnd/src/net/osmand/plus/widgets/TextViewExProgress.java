@@ -2,7 +2,9 @@ package net.osmand.plus.widgets;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 public class TextViewExProgress extends TextViewEx {
@@ -30,6 +32,15 @@ public class TextViewExProgress extends TextViewEx {
 	public void draw(Canvas canvas) {
 		canvas.save();
 		setTextColor(color1);
+		Drawable[] icons = getCompoundDrawables();
+		for (int i = 0; i < icons.length; i++) {
+			Drawable drawable = icons[i];
+			if (drawable != null) {
+				drawable.setColorFilter(color1, PorterDuff.Mode.SRC_ATOP);
+				icons[i] = drawable;
+			}
+		}
+		setCompoundDrawables(icons[0], icons[1], icons[2], icons[3]);
 		int width = getWidth();
 		int widthP = (int) (width * percent);
 		int height = getHeight();
@@ -39,6 +50,14 @@ public class TextViewExProgress extends TextViewEx {
 
 		canvas.save();
 		setTextColor(color2);
+		for (int i = 0; i < icons.length; i++) {
+			Drawable drawable = icons[i];
+			if (drawable != null) {
+				drawable.setColorFilter(color2, PorterDuff.Mode.SRC_ATOP);
+				icons[i] = drawable;
+			}
+		}
+		setCompoundDrawables(icons[0], icons[1], icons[2], icons[3]);
 		int width2 = getWidth();
 		int widthP2 = (int) (width2 * percent);
 		int height2 = getHeight();

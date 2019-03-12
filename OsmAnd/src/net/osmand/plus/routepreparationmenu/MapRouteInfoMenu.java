@@ -42,6 +42,7 @@ import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -782,18 +783,24 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextView startButtonText = (TextView) mainView.findViewById(R.id.start_button_descr);
+		boolean publicTransportMode = routingHelper.getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
+		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
 		if (isRouteCalculated()) {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
 			int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
 			startButtonText.setTextColor(ContextCompat.getColor(app, color));
-			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+			Drawable icon = app.getUIUtilities().getIcon(iconId, color);
+			startButtonText.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 		} else {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
 			int color = R.color.description_font_and_bottom_sheet_icons;
 			startButtonText.setTextColor(ContextCompat.getColor(app, color));
-			((ImageView) mainView.findViewById(R.id.start_icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, color));
+			Drawable icon = app.getUIUtilities().getIcon(iconId, color);
+			startButtonText.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 		}
-		if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
+		if (publicTransportMode) {
+			startButtonText.setText(R.string.shared_string_show_on_map);
+		} else if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
 			startButtonText.setText(R.string.shared_string_continue);
 		} else {
 			startButtonText.setText(R.string.shared_string_control_start);
@@ -1418,21 +1425,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 					TargetPoint startPoint = targetPointsHelper.getPointToStart();
 					TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
-					if (endPoint == null) {
+					Location loc = app.getLocationProvider().getLastKnownLocation();
+					if (loc == null && startPoint == null && endPoint == null) {
+						app.showShortToastMessage(R.string.add_start_and_end_points);
+					} else if (endPoint == null) {
 						app.showShortToastMessage(R.string.mark_final_location_first);
 					} else {
-						if (startPoint == null) {
-							Location loc = app.getLocationProvider().getLastKnownLocation();
-							if (loc != null) {
-								startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-										new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
-												mapActivity.getString(R.string.shared_string_my_location)));
-							}
+						if (startPoint == null && loc != null) {
+							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location)));
 						}
 						if (startPoint != null) {
 							targetPointsHelper.navigateToPoint(startPoint.point, false, -1, startPoint.getPointDescription(mapActivity));
 							targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
 							targetPointsHelper.updateRouteAndRefresh(true);
+						} else {
+							app.showShortToastMessage(R.string.route_add_start_point);
 						}
 					}
 				}
@@ -1757,7 +1765,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (start != null) {
 				fromText.setText(name);
 			} else {
-				fromText.setText(R.string.shared_string_my_location);
+				if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+					fromText.setText(R.string.shared_string_my_location);
+				} else {
+					fromText.setText(R.string.route_descr_select_start_point);
+				}
 			}
 		}
 	}
