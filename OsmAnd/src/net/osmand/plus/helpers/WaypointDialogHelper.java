@@ -484,7 +484,7 @@ public class WaypointDialogHelper {
 			final BaseBottomSheetItem[] addWaypointItem = new BaseBottomSheetItem[1];
 			addWaypointItem[0] = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_plus))
-					.setTitle(getString(R.string.add_waypoint))
+					.setTitle(getString(R.string.add_intermediate_point))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
