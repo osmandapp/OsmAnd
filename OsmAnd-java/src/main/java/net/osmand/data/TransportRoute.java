@@ -1,17 +1,16 @@
 package net.osmand.data;
 
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class TransportRoute extends MapObject {
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
@@ -53,52 +52,61 @@ public class TransportRoute extends MapObject {
 		// combine as many ways as possible
 		while (changed) {
 			changed = false;
-			Iterator<Way> it = forwardWays.iterator();
-			while (it.hasNext() && !changed) {
+			for(int k = 0; k < forwardWays.size(); ) {
 				// scan to merge with the next segment
+				Way first = forwardWays.get(k);
 				double d = SAME_STOP;
-				Way w = it.next();
-				Way toCombine = null;
-				boolean reverseOriginal = false;
-				boolean reverseCombine = false;
-				for (int i = 0; i < forwardWays.size(); i++) {
-					Way combine = forwardWays.get(i);
-					if (combine == w) {
-						continue;
-					}
-					double distAttachAfter = MapUtils.getDistance(w.getFirstNode().getLatLon(), combine.getLastNode().getLatLon());
-					double distReverseAttachAfter = MapUtils.getDistance(w.getLastNode().getLatLon(), combine.getLastNode()
-							.getLatLon());
-					double distAttachAfterReverse = MapUtils.getDistance(w.getFirstNode().getLatLon(), combine.getFirstNode().getLatLon());
+				boolean reverseSecond = false;
+				boolean reverseFirst = false;
+				int secondInd = -1;
+				for (int i = k + 1; i < forwardWays.size(); i++) {
+					Way w = forwardWays.get(i);
+					double distAttachAfter = MapUtils.getDistance(first.getLastNode().getLatLon(), w.getFirstNode().getLatLon());
+					double distReverseAttach = MapUtils.getDistance(first.getLastNode().getLatLon(), w.getLastNode().getLatLon());
+					double distAttachAfterReverse = MapUtils.getDistance(first.getFirstNode().getLatLon(), w.getFirstNode().getLatLon());
+					double distReverseAttachReverse = MapUtils.getDistance(first.getFirstNode().getLatLon(), w.getLastNode().getLatLon());
 					if (distAttachAfter < d) {
-						toCombine = combine;
-						reverseOriginal = false;
-						reverseCombine = false;
+						reverseSecond = false;
+						reverseFirst = false;
 						d = distAttachAfter;
-					} else if (distReverseAttachAfter < d) {
-						toCombine = combine;
-						reverseOriginal = true;
-						reverseCombine = false;
-						d = distReverseAttachAfter;
-					} else if (distAttachAfterReverse < d) {
-						toCombine = combine;
-						reverseOriginal = false;
-						reverseCombine = true;
+						secondInd = i; 
+					}
+					if (distReverseAttach < d) {
+						reverseSecond = true;
+						reverseFirst = false;
+						d = distReverseAttach;
+						secondInd = i;
+					}
+					if (distAttachAfterReverse < d) {
+						reverseSecond = false;
+						reverseFirst = true;
 						d = distAttachAfterReverse;
+						secondInd = i;
+					}
+					if (distReverseAttachReverse < d) {
+						reverseSecond = true;
+						reverseFirst = true;
+						d = distReverseAttachReverse;
+						secondInd = i;
+					}
+					if (d == 0) {
+						break;
 					}
 				}
-				if (toCombine != null) {
-					if(reverseCombine) {
-						toCombine.reverseNodes();
+				if (secondInd != -1) {
+					Way second = forwardWays.remove(secondInd);
+					if(reverseFirst) {
+						first.reverseNodes();
 					}
-					if(reverseOriginal) {
-						w.reverseNodes();
+					if(reverseSecond) {
+						second.reverseNodes();
 					}
-					for (int i = 1; i < w.getNodes().size(); i++) {
-						toCombine.addNode(w.getNodes().get(i));
+					for (int i = 1; i < second.getNodes().size(); i++) {
+						first.addNode(second.getNodes().get(i));
 					}
-					it.remove();
 					changed = true;
+				} else {
+					k++;
 				}
 			}
 		}
