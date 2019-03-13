@@ -273,6 +273,8 @@ public class TransportRoutePlanner {
 	
 	
 	public static class TransportRouteResultSegment {
+		private static final boolean DISPLAY_FULL_SEGMENT_ROUTE = false;
+		private static final int DISPLAY_SEGMENT_IND = 0;
 		public final TransportRoute route;
 		public final int start;
 		public final int end;
@@ -329,6 +331,13 @@ public class TransportRoutePlanner {
 		public List<Way> getGeometry() {
 			List<Way> list = new ArrayList<Way>();
 			route.mergeForwardWays();
+			if(DISPLAY_FULL_SEGMENT_ROUTE) {
+				System.out.println("TOTAL SEGMENTS: " + route.getForwardWays().size());
+				if(route.getForwardWays().size() > DISPLAY_SEGMENT_IND) {
+					return Collections.singletonList(route.getForwardWays().get(DISPLAY_SEGMENT_IND));
+				}
+				return route.getForwardWays();				
+			}
 			List<Way> fw = route.getForwardWays();
 			double minStart = 150;
 			double minEnd = 150;
