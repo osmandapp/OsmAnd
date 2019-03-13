@@ -288,7 +288,7 @@
     <string name="daynight_descr">Elige el motivo de cambio entre el modo nocturno y diurno.</string>
     <string name="daynight">Modo diurno/nocturno</string>
     <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
-    <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
+    <string name="items_were_selected">{0} elemento(s) marcado(s)</string>
     <string name="filter_existing_indexes">Descargados</string>
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_refresh">Actualizar</string>
@@ -463,7 +463,7 @@
     <string name="fav_points_not_exist">Sin puntos de Favoritos</string>
     <string name="update_existing">Reemplazar</string>
     <string name="only_show">Mostrar ruta</string>
-    <string name="follow">Seguir navegación</string>
+    <string name="follow">Iniciar la guía</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
     <string name="mark_final_location_first">Elige primero el destino</string>
     <string name="get_directions">Indicaciones</string>
@@ -680,7 +680,7 @@
     <string name="back_right">hacia atrás a la derecha</string>
     <string name="back">hacia atrás</string>
     <string name="back_left">hacia atrás a la izquierda</string>
-    <string name="left">restante(s)</string>
+    <string name="left">a la izquierda</string>
     <string name="front_left">hacia atrás a la izquierda</string>
     <string name="oclock">en punto</string>
     <string name="towards">hacia</string>
@@ -1257,7 +1257,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver en el mapa</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
-    <string name="shared_string_selected_lowercase">seleccionado</string>
+    <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="gpx_split_interval">Intervalo de división</string>
     <string name="gpx_info_subtracks">Subtrazas: %1$s</string>
     <string name="gpx_info_waypoints">Puntos de referencia: %1$s</string>
@@ -1304,7 +1304,7 @@
     <string name="local_map_names">Nombres locales</string>
     <string name="lang_sw">Suajili</string>
     <string name="lang_he">Hebreo</string>
-    <string name="forward">de frente</string>
+    <string name="forward">Siguiente</string>
     <string name="home">Panel de control</string>
     <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico, si la grabación GPX está activada.</string>
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
@@ -1508,7 +1508,7 @@
     <string name="rename_failed">Fallo al renombrar.</string>
     <string name="shared_string_currently_recording_track">Grabando traza actual</string>
     <string name="back_to_map">Volver al mapa</string>
-    <string name="shared_string_selected">Seleccionado</string>
+    <string name="shared_string_selected">Marcado(s)</string>
     <string name="track_segments">Segmentos de la traza</string>
     <string name="track_points">Puntos de la traza</string>
     <string name="action_create">Acción crear</string>
@@ -1539,7 +1539,7 @@
     <string name="route_points">Puntos de la ruta</string>
     <string name="shared_string_release">Liberado</string>
     <string name="osmand_parking_overdue">vencido</string>
-    <string name="delay_to_start_navigation">Iniciar navegación giro-a-giro luego de…</string>
+    <string name="delay_to_start_navigation">Iniciar la guía de giro-a-giro luego de…</string>
     <string name="shared_string_go">Ir</string>
     <string name="delay_to_start_navigation_descr">Indica el tiempo de espera para permanecer en la pantalla de planificación de ruta.</string>
     <string name="local_osm_changes_upload_all_confirm">¿Subir %1$d cambio(s) a OSM?</string>
@@ -1879,7 +1879,7 @@
     <string name="weekly">Cada semana</string>
     <string name="morning">Por la mañana</string>
     <string name="night">Por la noche</string>
-    <string name="shared_string_not_selected">No seleccionado</string>
+    <string name="shared_string_not_selected">No marcado(s)</string>
     <string name="select_month_and_country">Elige mes y país</string>
     <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto de partida</string>
@@ -2765,7 +2765,7 @@
     <string name="wikivoyage_download_pics_descr">Las imágenes del artículo pueden descargarse para su uso sin conexión. 
 \nSiempre disponible en «Explorar» → «Opciones».</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
-    <string name="select_travel_book">Seleccionar un libro de viaje</string>
+    <string name="select_travel_book">Marcar un libro de viaje</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
     <string name="download_images">Descargar imágenes</string>
     <string name="purchase_dialog_title">Elegir plan</string>
@@ -2956,7 +2956,7 @@
     <string name="add_destination_query">Primero añada el destino</string>
     <string name="shared_string_swap">Intercambiar</string>
     <string name="show_more">Mostrar más</string>
-    <string name="tracks_on_map">Trazas en el mapa</string>
+    <string name="tracks_on_map">Trazas mostradas</string>
     <string name="time_of_day">Hora del día</string>
     <string name="by_transport_type">En %1$s</string>
     <string name="step_by_step">Paso a paso</string>
@@ -2985,4 +2985,51 @@
 \n</string>
     <string name="use_osm_live_public_transport_description">Activar el transporte público para los cambios de OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público en OsmAnd Live</string>
+    <string name="transfers_size">%1$d transbordo(s)</string>
+    <string name="add_start_and_end_points">Añadir puntos de inicio y final</string>
+    <string name="route_add_start_point">Añadir punto de inicio</string>
+    <string name="route_descr_select_start_point">Marca el punto de inicio</string>
+    <string name="rendering_attr_surface_unpaved_name">Sin pavimento</string>
+    <string name="rendering_attr_surface_sand_name">Arena</string>
+    <string name="rendering_attr_surface_grass_name">Césped</string>
+    <string name="rendering_attr_surface_grass_paver_name">Césped pavimentado</string>
+    <string name="rendering_attr_surface_ground_name">Tierra (natural)</string>
+    <string name="rendering_attr_surface_dirt_name">Tierra (lodosa)</string>
+    <string name="rendering_attr_surface_mud_name">Lodazal</string>
+    <string name="rendering_attr_surface_ice_name">Hielo</string>
+    <string name="rendering_attr_surface_salt_name">Sal</string>
+    <string name="rendering_attr_surface_snow_name">Nieve</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalto</string>
+    <string name="rendering_attr_surface_paved_name">Pavimento</string>
+    <string name="rendering_attr_surface_concrete_name">Hormigón</string>
+    <string name="rendering_attr_surface_sett_name">Adoquín</string>
+    <string name="rendering_attr_surface_cobblestone_name">Empedrado (adoquín)</string>
+    <string name="rendering_attr_surface_paving_stones_name">Pavimento intertrabado / Adoquín prefabricado</string>
+    <string name="rendering_attr_surface_pebblestone_name">Canto rodado</string>
+    <string name="rendering_attr_surface_stone_name">Piedra</string>
+    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_wood_name">Madera</string>
+    <string name="rendering_attr_surface_gravel_name">Grava</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Grava fina</string>
+    <string name="rendering_attr_surface_compacted_name">Compactado</string>
+    <string name="rendering_attr_smoothness_excellent_name">Excelente</string>
+    <string name="rendering_attr_smoothness_good_name">Bueno</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Intermedio</string>
+    <string name="rendering_attr_smoothness_bad_name">Malo</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Muy malo</string>
+    <string name="rendering_attr_smoothness_horrible_name">Horrible</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Muy horrible</string>
+    <string name="rendering_attr_smoothness_impassable_name">Intransitable</string>
+    <string name="rendering_attr_highway_class_motorway_name">Autopista</string>
+    <string name="rendering_attr_highway_class_state_road_name">Carretera estatal</string>
+    <string name="rendering_attr_highway_class_road_name">Carretera</string>
+    <string name="rendering_attr_highway_class_street_name">Calle</string>
+    <string name="rendering_attr_highway_class_service_name">Servicio</string>
+    <string name="rendering_attr_highway_class_footway_name">Acera</string>
+    <string name="rendering_attr_highway_class_track_name">Camino rural</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Camino ecuestre</string>
+    <string name="rendering_attr_highway_class_steps_name">Escalera</string>
+    <string name="rendering_attr_highway_class_path_name">Sendero</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Ciclovía / Bicisenda</string>
+    <string name="rendering_attr_undefined_name">Indefinido</string>
 </resources>
