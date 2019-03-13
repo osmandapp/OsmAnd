@@ -2966,4 +2966,14 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Caminho</string>
     <string name="rendering_attr_highway_class_cycleway_name">Ciclovia</string>
     <string name="rendering_attr_undefined_name">Não definido</string>
+    <string name="transfers_size">%1$d transferências</string>
+    <string name="add_start_and_end_points">Adicionar pontos inicial e final</string>
+    <string name="route_add_start_point">Adicionar ponto inicial</string>
+    <string name="route_descr_select_start_point">Selecionar o ponto inicial</string>
+    <string name="rendering_attr_surface_grass_paver_name">Pavimentadora de grama</string>
+    <string name="rendering_attr_surface_ground_name">Chão</string>
+    <string name="rendering_attr_surface_dirt_name">Terra (lamacenta)</string>
+    <string name="rendering_attr_surface_mud_name">Lama</string>
+    <string name="rendering_attr_surface_salt_name">Sal</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
 </resources>
