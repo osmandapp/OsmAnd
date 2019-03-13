@@ -74,6 +74,7 @@ import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
+import net.osmand.plus.routepreparationmenu.cards.WarningCard;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
@@ -492,7 +493,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(card);
 			}
 			bottomShadowVisible = routes.size() == 0;
-		} else if (!routeCalculationInProgress) {
+		} else if (routeCalculationInProgress) {
+			WarningCard warningCard = new WarningCard(mapActivity);
+			menuCards.add(warningCard);
+		} else {
 			// Home/work card
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
