@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
+import net.osmand.plus.routepreparationmenu.ShowRouteInfoDialogFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.routing.RoutingHelper;
 

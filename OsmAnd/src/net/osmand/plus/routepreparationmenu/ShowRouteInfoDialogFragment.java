@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.routepreparationmenu;
 
 import android.Manifest;
 import android.animation.Animator;
@@ -79,6 +79,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.activities.PrintDialogActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -87,7 +90,6 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.RouteInfoCard;
