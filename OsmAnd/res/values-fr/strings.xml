@@ -2951,4 +2951,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_surface_paving_stones_name">Pavés réguliers</string>
     <string name="rendering_attr_surface_pebblestone_name">Galets</string>
     <string name="rendering_attr_surface_compacted_name">Compacté</string>
+    <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les routes, visitez notre blog.</string>
+    <string name="public_transport_warning_title">Les itinéraires en transport public sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
+    <string name="add_intermediate">Ajouter un point intermédiaire</string>
 </resources>
