@@ -68,7 +68,7 @@ Lon %2$s</string>
     <string name="shared_string_off">No</string>
     <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_disabled">Desactivado</string>
-    <string name="shared_string_selected">Marcado(s)</string>
+    <string name="shared_string_selected">Seleccionado</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="shared_string_never">Nunca</string>
     <string name="shared_string_and">y</string>
@@ -2992,4 +2992,7 @@ Lon %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Sendero</string>
     <string name="rendering_attr_highway_class_cycleway_name">Ciclovía / Bicisenda</string>
     <string name="rendering_attr_undefined_name">Indefinido</string>
+    <string name="public_transport_warning_descr_blog">Conozca más sobre cómo OsmAnd calcula las rutas en nuestro blog.</string>
+    <string name="public_transport_warning_title">Las rutas de transporte público se encuentran ahora en la fase de pruebas beta, por lo que pueden producirse errores e imprecisiones.</string>
+    <string name="add_intermediate">Añadir punto intermedio</string>
 </resources>
