@@ -1950,7 +1950,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_disable_offroute_recalc_descr">Ne pas calculer de nouvel itinéraire lorsque vous quittez l\'itinéraire prévu.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Ne pas calculer de nouvel itinéraire lorsque vous faites demi-tour.</string>
     <string name="access_disable_wrong_direction_recalc">Ne pas recalculer l\'itinéraire lors d\'un demi-tour</string>
-    <string name="use_osm_live_routing_description">Activer la navigation pour les changements à OsmAnd Live.</string>
+    <string name="use_osm_live_routing_description">Activer la navigation avec les données OsmAnd Live.</string>
     <string name="use_osm_live_routing">Navigation OsmAnd Live</string>
     <string name="follow_us">Suivez-nous</string>
     <!-- string name="lat_lon_pattern">Lat. : %1$.5f Lon. : %2$.5f</string -->
