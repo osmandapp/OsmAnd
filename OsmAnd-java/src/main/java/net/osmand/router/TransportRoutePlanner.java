@@ -46,6 +46,7 @@ public class TransportRoutePlanner {
 			queue.add(r);
 		}
 		double finishTime = ctx.cfg.maxRouteTime;
+		double maxTravelTimeCmpToWalk = MapUtils.getDistance(start, end) / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
@@ -67,7 +68,8 @@ public class TransportRoutePlanner {
 			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges) {
 				continue;
 			}
-			if (segment.distFromStart > finishTime + ctx.cfg.finishTimeSeconds) {
+			if (segment.distFromStart > finishTime + ctx.cfg.finishTimeSeconds || 
+					segment.distFromStart > maxTravelTimeCmpToWalk) {
 				break;
 			}
 			long segmentId = segment.getId();
@@ -148,7 +150,8 @@ public class TransportRoutePlanner {
 				if (finishTime > finish.distFromStart) {
 					finishTime = finish.distFromStart;
 				}
-				if(finish.distFromStart < finishTime + ctx.cfg.finishTimeSeconds) {
+				if(finish.distFromStart < finishTime + ctx.cfg.finishTimeSeconds && 
+						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 				}
 			}
