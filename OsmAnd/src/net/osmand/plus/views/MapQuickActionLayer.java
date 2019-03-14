@@ -420,8 +420,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public void onActionSelected(QuickAction action) {
-        setLayerState(false);
         QuickActionFactory.produceAction(action).execute(mapActivity);
+        setLayerState(false);
     }
 
     public PointF getMovableCenterPoint(RotatedTileBox tb) {
