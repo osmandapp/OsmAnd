@@ -1669,7 +1669,7 @@
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
-    <string name="route_is_too_long_v2">Please add intermediate destinations if no path is found for this long route within 10 mins.</string>
+    <string name="route_is_too_long_v2">Long distance: Please add intermediate destinations if no route is found within 10 minutes.</string>
     <string name="auto_zoom_none">No auto zoom</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
@@ -1967,8 +1967,8 @@
     </string>
     <string name="osmand_extended_description_part5">
         Cycling\n
-        • Find cycling paths on the map\n
-        • GPS navigation in cycling mode builds your route using cycling paths\n
+        • Find cycle paths on the map\n
+        • GPS navigation in cycling mode builds your route using cycle paths\n
         • See your speed and altitude\n
         • GPX recording option enables you to record your trip and share it\n
         • Via an additional plugin you can enable contour lines and hillshading
