@@ -383,6 +383,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				clearSelectedObject(object);
 				return false;
 			}
+			menuController = getMenuController();
 		} else {
 			menuController.update(pointDescription, object);
 		}

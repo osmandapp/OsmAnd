@@ -189,6 +189,7 @@
 	<dimen name="route_info_card_item_height">84dp</dimen>
 	<dimen name="route_info_list_text_padding">78dp</dimen>
 	<dimen name="route_info_legend_padding">12dp</dimen>
+	<dimen name="route_info_warning_padding">27dp</dimen>
 
 	<dimen name="multi_selection_header_height">78dp</dimen>
 
