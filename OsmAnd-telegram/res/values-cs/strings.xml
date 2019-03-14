@@ -14,4 +14,5 @@
     <string name="si_km_m">Kilometry/metry</string>
     <string name="si_nm">Námořní míle</string>
     <string name="si_mi_meters">Míle/metry</string>
+    <string name="nm">nmi</string>
 </resources>
