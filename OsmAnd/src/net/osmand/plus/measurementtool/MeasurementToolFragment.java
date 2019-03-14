@@ -414,8 +414,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (editingCtx.getPointsCount() > 0) {
-					if (newGpxData != null && newGpxData.getActionType()
-						== NewGpxData.ActionType.EDIT_SEGMENT && editingCtx.isInSnapToRoadMode()) {
+					if (newGpxData != null && newGpxData.getActionType() == NewGpxData.ActionType.EDIT_SEGMENT
+						&& editingCtx.isInSnapToRoadMode()) {
 						if (mapActivity != null && measurementLayer != null) {
 							if (editingCtx.getPointsCount() > 0) {
 								openSaveAsNewTrackMenu(mapActivity);
