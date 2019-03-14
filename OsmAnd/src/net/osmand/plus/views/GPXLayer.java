@@ -100,7 +100,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Paint paintTextIcon;
 
 	private OsmandRenderer osmandRenderer;
-	private int hsh;
+
 	private GPXFile gpx;
 
 	private ContextMenuLayer contextMenuLayer;
@@ -111,12 +111,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@ColorInt
 	private int grayColor;
 
+	private CommonPreference<String> currentTrackColorPref;
+	private CommonPreference<String> currentTrackWidthPref;
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
+		currentTrackColorPref = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+		currentTrackWidthPref = view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
 		initUI();
 	}
 
@@ -217,9 +222,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom(),
-			view.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get(),
-			view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get());
+		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom(),
+			currentTrackColorPref.get(), currentTrackWidthPref.get());
 		if (hsh != cachedHash) {
 			cachedHash = hsh;
 			cachedColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_track);
