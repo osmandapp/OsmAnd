@@ -100,7 +100,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Paint paintTextIcon;
 
 	private OsmandRenderer osmandRenderer;
-
+	private int hsh;
 	private GPXFile gpx;
 
 	private ContextMenuLayer contextMenuLayer;
@@ -217,7 +217,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int updatePaints(int color, boolean routePoints, boolean currentTrack, DrawSettings nightMode, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom(),
+		hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity(), tileBox.getZoom(),
 			view.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get(),
 			view.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get());
 		if (hsh != cachedHash) {
