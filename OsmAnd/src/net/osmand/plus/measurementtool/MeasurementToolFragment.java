@@ -414,7 +414,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (editingCtx.getPointsCount() > 0) {
-					addToGpx(mapActivity);
+					if (newGpxData != null && newGpxData.getActionType() == NewGpxData.ActionType.EDIT_SEGMENT
+						&& editingCtx.isInSnapToRoadMode()) {
+						if (mapActivity != null && measurementLayer != null) {
+							if (editingCtx.getPointsCount() > 0) {
+								openSaveAsNewTrackMenu(mapActivity);
+							} else {
+								Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+							}
+						}
+					} else {
+						addToGpx(mapActivity);
+					}
 				} else {
 					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 				}
@@ -588,6 +599,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				if (mapActivity != null && measurementLayer != null) {
 					if (editingCtx.getPointsCount() > 0) {
 						showAddToTrackDialog(mapActivity);
+					} else {
+						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+
+			@Override
+			public void overwriteOldTrackOnClick() {
+				if (mapActivity != null && measurementLayer != null) {
+					if (editingCtx.getPointsCount() > 0) {
+						overwriteGpx(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 					}
@@ -1116,6 +1138,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		saveExistingGpx(gpx, showOnMap, actionType, true);
 	}
 
+	private void overwriteGpx(MapActivity mapActivity) {
+		GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
+		SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
+		boolean showOnMap = selectedGpxFile != null;
+		ActionType actionType = ActionType.OVERWRITE_SEGMENT;
+		saveExistingGpx(gpx, showOnMap, actionType, true);
+	}
+
 	private void saveAsGpx(final SaveType saveType) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -1296,6 +1326,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 									TrkSegment segment = new TrkSegment();
 									segment.points.addAll(points);
 									gpx.replaceSegment(editingCtx.getNewGpxData().getTrkSegment(), segment);
+									break;
+								case OVERWRITE_SEGMENT:
+									List<WptPt> snappedPoints = new ArrayList<>();
+									snappedPoints.addAll(before.points);
+									snappedPoints.addAll(after.points);
+									TrkSegment segment1 = new TrkSegment();
+									segment1.points.addAll(snappedPoints);
+									gpx.replaceSegment(editingCtx.getNewGpxData().getTrkSegment(), segment1);
 									break;
 							}
 						} else {
