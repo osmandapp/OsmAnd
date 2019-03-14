@@ -688,7 +688,7 @@
     <string name="fav_points_not_exist">לא קיימות נקודות מועדפות</string>
     <string name="update_existing">החלפה</string>
     <string name="only_show">להציג בלבד</string>
-    <string name="follow">לעקוב</string>
+    <string name="follow">התחלת הנחייה</string>
     <string name="mark_final_location_first">נא לבחור את היעד תחילה</string>
     <string name="get_directions">הכוונה</string>
     <string name="opening_hours">שעות הפתיחה</string>
@@ -2442,7 +2442,7 @@
     <string name="select_waypoints_category_description">ניתן להוסיף את כל נקודות הדרך של המסלול או לבחור בקטגוריות נפרדות.</string>
     <string name="shared_string_total">סך הכול</string>
     <string name="rendering_attr_whiteWaterSports_name">ספורט מים אתגרי</string>
-    <string name="delay_to_start_navigation">התחלת ניווט מונחה לאחר…</string>
+    <string name="delay_to_start_navigation">התחלת ניווט צעד אחד צעד לאחר…</string>
     <string name="osmand_parking_overdue">תפוגה</string>
     <string name="nautical_renderer">ימי</string>
     <string name="use_two_digits_longitude">שתי ספרות לציון קו אורך</string>
@@ -2909,7 +2909,7 @@
     <string name="add_destination_query">נא להוסיף יעד תחילה</string>
     <string name="shared_string_swap">החלפה</string>
     <string name="show_more">הצגת עוד</string>
-    <string name="tracks_on_map">עקבות על המפה</string>
+    <string name="tracks_on_map">עקבות מוצגים</string>
     <string name="time_of_day">השעה ביום</string>
     <string name="by_transport_type">עם %1$s</string>
     <string name="step_by_step">שלב אחר שלב</string>
@@ -2921,4 +2921,27 @@
     <string name="quick_action_gpx_tracks_show">הצגת מסלולי GPX</string>
     <string name="use_osm_live_public_transport_description">הפעלת תחבורה ציבורית לשינויים ב־OsmAnd החי.</string>
     <string name="use_osm_live_public_transport">OsmAnd חי תחבורה ציבורית</string>
+    <string name="transfers_size">%1$d העברות</string>
+    <string name="add_start_and_end_points">הוספת נקודות התחלה וסיום</string>
+    <string name="route_add_start_point">הוספת נקודת התחלה</string>
+    <string name="route_descr_select_start_point">בחירת נקודת התחלה</string>
+    <string name="rendering_attr_surface_unpaved_name">בלתי סלול</string>
+    <string name="rendering_attr_surface_sand_name">חול</string>
+    <string name="rendering_attr_surface_grass_name">דשא</string>
+    <string name="rendering_attr_surface_grass_paver_name">אבן דשא</string>
+    <string name="rendering_attr_surface_ground_name">קרקע</string>
+    <string name="rendering_attr_surface_mud_name">בוץ</string>
+    <string name="rendering_attr_surface_ice_name">קרח</string>
+    <string name="rendering_attr_surface_salt_name">מלח</string>
+    <string name="rendering_attr_surface_snow_name">שלג</string>
+    <string name="rendering_attr_surface_asphalt_name">אספלט</string>
+    <string name="rendering_attr_surface_paved_name">סלול</string>
+    <string name="rendering_attr_surface_concrete_name">בטון</string>
+    <string name="rendering_attr_surface_paving_stones_name">אבני ריצוף</string>
+    <string name="rendering_attr_surface_pebblestone_name">חלוקי נחל</string>
+    <string name="rendering_attr_surface_stone_name">אבן</string>
+    <string name="rendering_attr_surface_metal_name">מתכת</string>
+    <string name="rendering_attr_surface_wood_name">עץ</string>
+    <string name="rendering_attr_surface_gravel_name">חצץ</string>
+    <string name="rendering_attr_surface_fine_gravel_name">שומשום</string>
 </resources>
