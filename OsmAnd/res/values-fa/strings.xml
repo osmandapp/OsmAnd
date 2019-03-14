@@ -1872,7 +1872,7 @@
     <string name="rendering_value_light_brown_name">قهوه‌ای روشن</string>
     <string name="rendering_value_dark_brown_name">قهوه‌ای تیره</string>
     <string name="rendering_attr_contourColorScheme_name">رنگ‌بندی منحنی‌های تراز</string>
-    <string name="rendering_attr_surfaceIntegrity_name">سلامت سطح جاده</string>
+    <string name="rendering_attr_surfaceIntegrity_name">یکپارچگی سطح جاده‌ها</string>
     <string name="search_hint">نام شهر، نشانی یا نام POI را بنویسید</string>
     <string name="edit_filter">ویرایش دسته‌ها</string>
     <string name="subcategories">زیردسته‌ها</string>
@@ -2997,6 +2997,26 @@
     <string name="rendering_attr_surface_asphalt_name">آسفالت</string>
     <string name="rendering_attr_surface_paved_name">روسازی‌شده</string>
     <string name="rendering_attr_surface_concrete_name">بتن</string>
-    <string name="rendering_attr_surface_sett_name">سنگفرش سنگی</string>
-    <string name="rendering_attr_surface_cobblestone_name">قلوه‌سنگ</string>
+    <string name="rendering_attr_surface_sett_name">سنگفرش کوبیک</string>
+    <string name="rendering_attr_surface_cobblestone_name">سنگفرش سنگی</string>
+    <string name="rendering_attr_surface_grass_name">چمن</string>
+    <string name="rendering_attr_surface_grass_paver_name">کفپوش چمن‌دار</string>
+    <string name="rendering_attr_surface_paving_stones_name">سنگفرش</string>
+    <string name="rendering_attr_surface_pebblestone_name">ریگ</string>
+    <string name="rendering_attr_surface_stone_name">سنگ</string>
+    <string name="rendering_attr_surface_metal_name">فلز</string>
+    <string name="rendering_attr_surface_wood_name">چوب</string>
+    <string name="rendering_attr_surface_gravel_name">شن</string>
+    <string name="rendering_attr_surface_fine_gravel_name">شن ریز</string>
+    <string name="rendering_attr_surface_compacted_name">فشرده</string>
+    <string name="rendering_attr_smoothness_excellent_name">عالی</string>
+    <string name="rendering_attr_smoothness_good_name">خوب</string>
+    <string name="rendering_attr_smoothness_intermediate_name">متوسط</string>
+    <string name="rendering_attr_smoothness_bad_name">بد</string>
+    <string name="rendering_attr_smoothness_very_bad_name">خیلی بد</string>
+    <string name="rendering_attr_smoothness_horrible_name">افتضاح</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">خیلی افتضاح</string>
+    <string name="rendering_attr_smoothness_impassable_name">غیرقابل‌عبور</string>
+    <string name="rendering_attr_highway_class_motorway_name">آزادراه</string>
+    <string name="rendering_attr_highway_class_street_name">خیابان</string>
 </resources>
