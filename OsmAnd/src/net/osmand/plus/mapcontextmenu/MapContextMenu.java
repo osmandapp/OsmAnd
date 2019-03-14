@@ -378,19 +378,21 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (menuController != null) {
 				menuController.setMapContextMenu(null);
 			}
-			menuController = acquireMenuController(restorePrevious);
-			if (menuController == null) {
+			if (!acquireMenuController(restorePrevious)) {
 				active = false;
 				clearSelectedObject(object);
 				return false;
 			}
+			menuController = getMenuController();
 		} else {
 			menuController.update(pointDescription, object);
 		}
 		initTitle();
 
-		menuController.clearPlainMenuItems();
-		menuController.addPlainMenuItems(typeStr, getPointDescription(), getLatLon());
+		if (menuController != null) {
+			menuController.clearPlainMenuItems();
+			menuController.addPlainMenuItems(typeStr, getPointDescription(), getLatLon());
+		}
 
 		if (mapPosition != 0) {
 			mapActivity.getMapView().setMapPosition(0);
@@ -679,7 +681,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	private MenuController acquireMenuController(boolean restorePrevious) {
+	private boolean acquireMenuController(boolean restorePrevious) {
 		MapContextMenuData menuData = null;
 		MenuController menuController = getMenuController();
 		LatLon latLon = getLatLon();
@@ -709,9 +711,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (!(menuController instanceof MapDataMenuController)) {
 				menuController.requestMapDownloadInfo(latLon);
 			}
-			return menuController;
+			return true;
 		} else {
-			return null;
+			return false;
 		}
 	}
 
