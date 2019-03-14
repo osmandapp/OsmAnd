@@ -3545,4 +3545,19 @@
     <string name="poi_generator_source_biomass">Orkugjafi: lífmassi</string>
     <string name="poi_health_specialty_radiotheraphy_yes">Geislameðferð</string>
     <string name="poi_hazard">Lífshætta</string>
+    <string name="poi_rtsa_scale_filter">Erfiðleikastig</string>
+    <string name="poi_rtsa_scale_nc">н/к</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+    <string name="poi_rtsa_scale_1a">1А</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1b">1B</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
+    <string name="poi_rtsa_scale_2a">2А</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+    <string name="poi_rtsa_scale_2b">2B</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
+    <string name="poi_rtsa_scale_3a">3A</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3A*</string>
+    <string name="poi_rtsa_scale_3b">3B</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
 </resources>
