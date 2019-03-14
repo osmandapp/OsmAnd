@@ -2947,4 +2947,41 @@
 \n • Выдалена аналітыка Facebook і Firebase са свабоднай версіі (OsmAnd+ не ўключае яе)
 \n
 \n</string>
+    <string name="transfers_size">%1$d перасадак</string>
+    <string name="add_start_and_end_points">Дадаць пачатковы пункт і пункт прызначэння</string>
+    <string name="route_add_start_point">Дадаць пачатковы пункт</string>
+    <string name="route_descr_select_start_point">Абраць пачатковы пункт</string>
+    <string name="rendering_attr_surface_unpaved_name">Без пакрыцця</string>
+    <string name="rendering_attr_surface_sand_name">Пясок</string>
+    <string name="rendering_attr_surface_grass_name">Трава</string>
+    <string name="rendering_attr_surface_ground_name">Глеба</string>
+    <string name="rendering_attr_surface_dirt_name">Бруд</string>
+    <string name="rendering_attr_surface_mud_name">Іл</string>
+    <string name="rendering_attr_surface_ice_name">Лёд</string>
+    <string name="rendering_attr_surface_salt_name">Соль</string>
+    <string name="rendering_attr_surface_snow_name">Снег</string>
+    <string name="rendering_attr_surface_asphalt_name">Асфальт</string>
+    <string name="rendering_attr_surface_paved_name">Брукаваная</string>
+    <string name="rendering_attr_surface_concrete_name">Бетон</string>
+    <string name="rendering_attr_surface_sett_name">Брук</string>
+    <string name="rendering_attr_surface_cobblestone_name">Брукавец</string>
+    <string name="rendering_attr_surface_paving_stones_name">Плітка</string>
+    <string name="rendering_attr_surface_pebblestone_name">Галька</string>
+    <string name="rendering_attr_surface_stone_name">Камень</string>
+    <string name="rendering_attr_surface_metal_name">Метал</string>
+    <string name="rendering_attr_surface_wood_name">Дрэва</string>
+    <string name="rendering_attr_surface_gravel_name">Жвір</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Шматпластовы жвір</string>
+    <string name="rendering_attr_surface_compacted_name">Утрамбавана</string>
+    <string name="rendering_attr_smoothness_excellent_name">Выдатная</string>
+    <string name="rendering_attr_smoothness_good_name">Добрая</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Сярэдняя</string>
+    <string name="rendering_attr_smoothness_bad_name">Дрэнная</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Вельмі дрэнная</string>
+    <string name="rendering_attr_smoothness_horrible_name">Жудасная</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Вельмі жудасная</string>
+    <string name="rendering_attr_smoothness_impassable_name">Непраходная</string>
+    <string name="rendering_attr_highway_class_motorway_name">Аўтастрада</string>
+    <string name="rendering_attr_highway_class_road_name">Дарога</string>
+    <string name="rendering_attr_highway_class_street_name">Вуліца</string>
 </resources>

@@ -2949,4 +2949,35 @@ Repræsenterer område: %1$s x %2$s</string>
 \n  • Fjernet Facebook og Firebase analytics fra den gratis version (OsmAnd + indeholder dem ikke)</string>
     <string name="use_osm_live_public_transport_description">Aktiver offentlig transport for OsmAnd Live ændringer.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live offentlig transport</string>
+    <string name="add_start_and_end_points">Tilføj start- og slutpunkter</string>
+    <string name="route_add_start_point">Tilføj startpunkt</string>
+    <string name="route_descr_select_start_point">Vælg startpunkt</string>
+    <string name="rendering_attr_surface_sand_name">Sand</string>
+    <string name="rendering_attr_surface_grass_name">Græs</string>
+    <string name="rendering_attr_surface_grass_paver_name">Befæstet græs</string>
+    <string name="rendering_attr_surface_mud_name">Mudder</string>
+    <string name="rendering_attr_surface_ice_name">is</string>
+    <string name="rendering_attr_surface_salt_name">Salt</string>
+    <string name="rendering_attr_surface_snow_name">Sne</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalt</string>
+    <string name="rendering_attr_surface_concrete_name">Beton</string>
+    <string name="rendering_attr_surface_stone_name">Sten</string>
+    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_wood_name">Træ</string>
+    <string name="rendering_attr_surface_gravel_name">Grus</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Fint grus</string>
+    <string name="rendering_attr_surface_compacted_name">Komprimeret</string>
+    <string name="rendering_attr_smoothness_good_name">God</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Mellem</string>
+    <string name="rendering_attr_smoothness_bad_name">Dårlig</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Meget dårlig</string>
+    <string name="rendering_attr_highway_class_motorway_name">Motorvej</string>
+    <string name="rendering_attr_highway_class_road_name">Vej</string>
+    <string name="rendering_attr_highway_class_street_name">Gade</string>
+    <string name="rendering_attr_highway_class_footway_name">Fortov</string>
+    <string name="rendering_attr_highway_class_track_name">Spor</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Ridesti</string>
+    <string name="rendering_attr_highway_class_path_name">Sti</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Cykelsti</string>
+    <string name="rendering_attr_undefined_name">Ikke defineret</string>
 </resources>
