@@ -12,7 +12,7 @@
 
 -->
     <string name="public_transport_warning_descr_blog">Learn more about how OsmAnd calculates routes in our blog.</string>
-    <string name="public_transport_warning_title">Public transport routes are now in the beta testing phase, so errors and inaccuracies may occur.</string>
+    <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, errors and inaccuracies may occur.</string>
     <string name="add_intermediate">Add intermediate point</string>
     <string name="transfers_size">%1$d transfers</string>
     <string name="add_start_and_end_points">Add start and end points</string>
