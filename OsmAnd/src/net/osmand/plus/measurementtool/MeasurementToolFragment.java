@@ -414,7 +414,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (editingCtx.getPointsCount() > 0) {
-					addToGpx(mapActivity);
+					if (newGpxData!=null && newGpxData.getActionType()
+						== NewGpxData.ActionType.EDIT_SEGMENT && editingCtx.isInSnapToRoadMode()) {
+						if (mapActivity != null && measurementLayer != null) {
+							if (editingCtx.getPointsCount() > 0) {
+								openSaveAsNewTrackMenu(mapActivity);
+							} else {
+								Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+							}
+						}
+					} else {
+						addToGpx(mapActivity);
+					}
 				} else {
 					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 				}
