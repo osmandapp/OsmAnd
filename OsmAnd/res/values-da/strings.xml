@@ -2956,7 +2956,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_surface_grass_name">Græs</string>
     <string name="rendering_attr_surface_grass_paver_name">Befæstet græs</string>
     <string name="rendering_attr_surface_mud_name">Mudder</string>
-    <string name="rendering_attr_surface_ice_name">is</string>
+    <string name="rendering_attr_surface_ice_name">Is</string>
     <string name="rendering_attr_surface_salt_name">Salt</string>
     <string name="rendering_attr_surface_snow_name">Sne</string>
     <string name="rendering_attr_surface_asphalt_name">Asfalt</string>
