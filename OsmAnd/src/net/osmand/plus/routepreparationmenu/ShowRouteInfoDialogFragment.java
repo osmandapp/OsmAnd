@@ -90,6 +90,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.RouteInfoCard;
@@ -103,6 +104,7 @@ import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatistics;
@@ -518,7 +520,12 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			if (route != null) {
 				RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 				RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
-				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer,defaultRender, nightMode);
+
+				MapRenderRepositories maps = app.getResourceManager().getRenderer();
+				RenderingRuleSearchRequest currentSearchRequest = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
+				RenderingRuleSearchRequest defaultSearchRequest = maps.getSearchRequestWithAppliedCustomRules(defaultRender, nightMode);
+
+				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
 				GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteClassStatistic(), analysis);
