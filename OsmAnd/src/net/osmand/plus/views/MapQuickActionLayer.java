@@ -44,6 +44,7 @@ import net.osmand.plus.quickaction.QuickActionsWidget;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import net.osmand.plus.quickaction.actions.DayNightModeAction;
 
 import static net.osmand.plus.views.ContextMenuLayer.VIBRATE_SHORT;
 
@@ -420,8 +421,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public void onActionSelected(QuickAction action) {
-        setLayerState(false);
-        QuickActionFactory.produceAction(action).execute(mapActivity);
+    	if (action instanceof DayNightModeAction) {
+			setLayerState(false);
+    		QuickActionFactory.produceAction(action).execute(mapActivity);
+		} else {
+			QuickActionFactory.produceAction(action).execute(mapActivity);
+			setLayerState(false);
+		}
     }
 
     public PointF getMovableCenterPoint(RotatedTileBox tb) {

@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 
--->
+--> <string name="shared_string_mode">mode</string>
     <string name="public_transport_warning_descr_blog">Learn more about how OsmAnd calculates routes in our blog.</string>
     <string name="public_transport_warning_title">Public transport routes are now in the beta testing phase, so errors and inaccuracies may occur.</string>
     <string name="add_intermediate">Add intermediate point</string>
