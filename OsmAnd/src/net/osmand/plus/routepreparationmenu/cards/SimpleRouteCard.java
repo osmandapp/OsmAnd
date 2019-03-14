@@ -17,7 +17,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
+import net.osmand.plus.routepreparationmenu.ShowRouteInfoDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
 

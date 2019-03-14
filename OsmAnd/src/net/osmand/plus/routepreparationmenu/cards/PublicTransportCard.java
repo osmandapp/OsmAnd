@@ -19,7 +19,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
+import net.osmand.plus.routepreparationmenu.ShowRouteInfoDialogFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.widgets.FlowLayout;
