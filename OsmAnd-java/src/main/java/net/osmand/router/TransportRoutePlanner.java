@@ -696,7 +696,7 @@ public class TransportRoutePlanner {
 			int by = (sy + d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 			for(int x = lx; x <= rx; x++) {
 				for(int y = ty; y <= by; y++) {
-					int tileId = x << (cfg.ZOOM_TO_LOAD_TILES + 1) + y;
+					long tileId = (((long)x) << (cfg.ZOOM_TO_LOAD_TILES + 1)) + y;
 					List<TransportRouteSegment> list = quadTree.get(tileId);
 					if(list == null) {
 						list = loadTile(x, y);
