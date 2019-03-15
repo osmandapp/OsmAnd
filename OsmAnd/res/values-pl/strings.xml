@@ -2941,4 +2941,62 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_surface_compacted_name">Ubita</string>
     <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
+    <string name="public_transport_warning_title">Nawigacja transportem publicznym jest obecnie w fazie beta-testów, mogą pojawić się błędy i nieścisłości.</string>
+    <string name="add_intermediate">Dodaj punkt pośredni</string>
+    <string name="transfers_size">%1$d transfery</string>
+    <string name="add_start_and_end_points">Dodaj punkty początkowe i końcowe</string>
+    <string name="rendering_attr_surface_grass_paver_name">Bruk z trawą</string>
+    <string name="rendering_attr_surface_ground_name">Ziemia</string>
+    <string name="rendering_attr_surface_dirt_name">Ziemia</string>
+    <string name="rendering_attr_surface_mud_name">Błoto</string>
+    <string name="rendering_attr_surface_ice_name">Lód</string>
+    <string name="rendering_attr_surface_salt_name">Sól</string>
+    <string name="rendering_attr_surface_snow_name">Śnieg</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalt</string>
+    <string name="rendering_attr_surface_paved_name">Utwardzone</string>
+    <string name="rendering_attr_surface_concrete_name">Beton</string>
+    <string name="rendering_attr_surface_sett_name">Bruk</string>
+    <string name="rendering_attr_surface_cobblestone_name">Kamień brukowy</string>
+    <string name="rendering_attr_surface_paving_stones_name">Kostka brukowa</string>
+    <string name="rendering_attr_surface_stone_name">Kamień</string>
+    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_wood_name">Drewno</string>
+    <string name="rendering_attr_surface_gravel_name">Żwir</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Drobny żwir</string>
+    <string name="rendering_attr_smoothness_excellent_name">Wyśmienita</string>
+    <string name="rendering_attr_smoothness_good_name">Dobra</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Średnia</string>
+    <string name="rendering_attr_smoothness_bad_name">Zła</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Bardzo zła</string>
+    <string name="rendering_attr_smoothness_horrible_name">Okropna</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Bardzo okropna</string>
+    <string name="rendering_attr_smoothness_impassable_name">Nieprzejezdna</string>
+    <string name="rendering_attr_highway_class_motorway_name">Autostrada</string>
+    <string name="rendering_attr_highway_class_state_road_name">Droga krajowa</string>
+    <string name="rendering_attr_highway_class_road_name">Droga</string>
+    <string name="rendering_attr_highway_class_street_name">Ulica</string>
+    <string name="rendering_attr_highway_class_service_name">Serwisowa</string>
+    <string name="rendering_attr_highway_class_footway_name">Chodnik</string>
+    <string name="rendering_attr_highway_class_track_name">Ścieżka</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Droga dla koni</string>
+    <string name="rendering_attr_highway_class_steps_name">Schody</string>
+    <string name="rendering_attr_highway_class_path_name">Ścieżka</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Droga rowerowa</string>
+    <string name="rendering_attr_undefined_name">Niezdefiniowane</string>
+    <string name="release_3_3">• Nowy ekran \"Kierunki\": Pokazuje przyciski kierunku domu i pracy, skrót do \"poprzednich tras\", listę aktywnych śladów GPX i znaczników, historię wyszukiwania
+\n
+\n • Dodatkowe informacje w \"Szczegółach drogi\": typy dróg, nawierzchnia, stromość, gładkość
+\n
+\n • Nawigacja transportu publicznego wspiera wszystkie typy transportu: metro, autobusy, tramwaje itp.
+\n
+\n • Nowe Szybkie czynności dla pokazywania/ukrywania tras i trybu dzień/noc
+\n
+\n • Naprawione obszary wyświetlane jako zalane w Niemczech, Południowej Afryce, Quebec
+\n
+\n • Dodatkowe wpieranie importów z KML i KMZ
+\n
+\n • Naprawione awarie przy otwieraniu niektórych przystanków transportu publicznego
+\n
+\n • Usunięcie Facebooka i analiz Firebase z darmowej wersji (OsmAnd+ tego nie zawiera)
+\n</string>
 </resources>
