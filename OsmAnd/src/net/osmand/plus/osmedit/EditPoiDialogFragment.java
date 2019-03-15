@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -108,7 +109,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private View view;
 
 	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(Context activity) {
 		super.onAttach(activity);
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (getSettings().OFFLINE_EDITION.get()
@@ -400,7 +401,14 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void trySave() {
-		if (TextUtils.isEmpty(poiTypeEditText.getText())) {
+		String tagWithExceedingValue = isTextLengthInRange();
+		if (!Algorithms.isEmpty(tagWithExceedingValue)){
+			ValueExceedLimitDialogFragment f = new ValueExceedLimitDialogFragment();
+			Bundle args = new Bundle();
+			args.putString("tag", tagWithExceedingValue);
+			f.setArguments(args);
+			f.show(getChildFragmentManager(), "exceedDialog");
+		} else if (TextUtils.isEmpty(poiTypeEditText.getText())) {
 			HashSet<String> tagsCopy = new HashSet<>();
 			tagsCopy.addAll(editPoiData.getTagValues().keySet());
 			if (Algorithms.isEmpty(editPoiData.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()))) {
@@ -422,10 +430,20 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		} else if (editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 		} else if (editPoiData.getPoiTypeDefined() == null) {
-			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type_only_from_list));
+			poiTypeEditText.setError(
+				getResources().getString(R.string.please_specify_poi_type_only_from_list));
 		} else {
 			save();
 		}
+	}
+
+	private String isTextLengthInRange() {
+		for (String s: editPoiData.getChangedTags()) {
+			if (editPoiData.getTag(s).length() > 255) {
+				return s;
+			}
+		}
+		return "";
 	}
 
 	private boolean testTooManyCapitalLetters(String name) {
@@ -885,6 +903,23 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 						}
 					})
 					.setNegativeButton(R.string.shared_string_cancel, null);
+			return builder.create();
+		}
+	}
+
+	public static class ValueExceedLimitDialogFragment extends DialogFragment {
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			String msg = getString(R.string.save_poi_value_exceed_length);
+			String fieldTag = getArguments().getString("tag", "");
+			if(!Algorithms.isEmpty(fieldTag)) {
+				msg = String.format(msg, fieldTag);
+			}
+			builder.setTitle(String.format(getResources().getString(R.string.save_poi_value_exceed_length_title), fieldTag))
+				.setMessage(msg)
+				.setNegativeButton(R.string.shared_string_ok, null);
 			return builder.create();
 		}
 	}
