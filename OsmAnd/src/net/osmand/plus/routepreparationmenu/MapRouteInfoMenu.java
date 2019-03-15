@@ -77,6 +77,7 @@ import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routepreparationmenu.cards.WarningCard;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -465,6 +466,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		mainView = main;
 		OsmandApplication app = mapActivity.getMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 
 		updateStartPointView();
 		updateWaypointsView();
@@ -484,9 +486,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 			bottomShadowVisible = gpx == null;
 		} else if (isTransportRouteCalculated()) {
-			List<TransportRouteResult> routes = app.getTransportRoutingHelper().getRoutes();
+			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+			List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
 			for (int i = 0; i < routes.size(); i++) {
-				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
+				PublicTransportCard card = new PublicTransportCard(mapActivity, transportRoutingHelper.getStartLocation(),
+						transportRoutingHelper.getEndLocation(), routes.get(i), i);
 				card.setShowBottomShadow(i == routes.size() - 1);
 				card.setShowTopShadow(i != 0);
 				card.setListener(this);
@@ -502,7 +506,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			menuCards.add(homeWorkCard);
 
 			// Previous route card
-			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 			TargetPoint startBackup = targetPointsHelper.getPointToStartBackup();
 			if (startBackup == null) {
 				startBackup = targetPointsHelper.getMyLocationToStart();

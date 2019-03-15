@@ -41,7 +41,6 @@ public class DayNightModeAction extends QuickAction {
 				.inflate(R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text))
 				.setText(R.string.quick_action_switch_day_night_descr);
-
 		parent.addView(view);
 	}
 
@@ -61,6 +60,5 @@ public class DayNightModeAction extends QuickAction {
 		} else {
 			return String.format(application.getString(R.string.quick_action_day_night_mode), DayNightMode.DAY.toHumanString(application));
 		}
-
 	}
 }

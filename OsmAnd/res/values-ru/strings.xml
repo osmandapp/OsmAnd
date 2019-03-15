@@ -2898,7 +2898,7 @@
     <string name="add_home">Добавить дом</string>
     <string name="add_work">Добавить работу</string>
     <string name="work_button">Работа</string>
-    <string name="route_smoothness_stat_container">Ровность</string>
+    <string name="route_smoothness_stat_container">Проходимость</string>
     <string name="previous_route">Предыдущий маршрут</string>
     <string name="add_destination_query">Сначала добавьте пункт назначения</string>
     <string name="shared_string_swap">Поменять</string>
@@ -2914,21 +2914,63 @@
     <string name="by_transport_type">На %1$s</string>
     <string name="exit_at">Выход на</string>
     <string name="sit_on_the_stop">Посадка на остановке</string>
-    <string name="release_3_3">• Новый экран \"Маршруты\" отображает: кнопки пунктов назначения \"Дом\" и \"Работа\", ярлык \"Предыдущий маршрут\", список активных GPX треков и маркеров, историю поиска.
-\n
-\n• Дополнительная информация в разделе \"Детали маршрута\": типы дорог, поверхность, крутизна, ровность.
-\n
-\n• Навигация на общественном транспорте поддерживает все виды транспорта: метро, автобус, трамвай и др.
-\n
-\n• Новые быстрые действия для показа/скрытия треков и дневного/ночного режимов.
-\n
-\n• Исправлены области, отображаемые как затопленные в Германии, Южной Африке, Квебеке.
-\n
-\n• Дополнительная поддержка импорта KML и KMZ.
-\n
-\n• Исправлены падения при открытии некоторых остановок общественного транспорта.
-\n
+    <string name="release_3_3">• Новый экран \"Маршруты\" отображает: кнопки пунктов назначения \"Дом\" и \"Работа\", ярлык \"Предыдущий маршрут\", список активных GPX треков и маркеров, историю поиска. 
+\n 
+\n• Дополнительная информация в разделе \"Детали маршрута\": типы дорог, поверхность, крутизна, проходимость. 
+\n 
+\n• Навигация на общественном транспорте поддерживает все виды транспорта: метро, автобус, трамвай и др. 
+\n 
+\n• Новые быстрые действия для показа/скрытия треков и дневного/ночного режимов. 
+\n 
+\n• Исправлены области, отображаемые как затопленные в Германии, Южной Африке, Квебеке. 
+\n 
+\n• Дополнительная поддержка импорта KML и KMZ. 
+\n 
+\n• Исправлены падения при открытии некоторых остановок общественного транспорта. 
+\n 
 \n• Удалена аналитика Facebook и Firebase из бесплатной версии (OsmAnd+ ее не включает).</string>
     <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учетом автообновлений OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Общественный транспорт OsmAnd Live</string>
+    <string name="transfers_size">%1$d пересадки</string>
+    <string name="rendering_attr_surface_unpaved_name">Грунтовая</string>
+    <string name="rendering_attr_surface_sand_name">Песок</string>
+    <string name="rendering_attr_surface_grass_name">Трава</string>
+    <string name="rendering_attr_surface_ground_name">Земля</string>
+    <string name="rendering_attr_surface_dirt_name">Грязь</string>
+    <string name="rendering_attr_surface_mud_name">Ил</string>
+    <string name="rendering_attr_surface_ice_name">Лед</string>
+    <string name="rendering_attr_surface_salt_name">Соль</string>
+    <string name="rendering_attr_surface_snow_name">Снег</string>
+    <string name="rendering_attr_surface_asphalt_name">Асфальт</string>
+    <string name="rendering_attr_surface_paved_name">Твердая</string>
+    <string name="rendering_attr_surface_concrete_name">Бетон</string>
+    <string name="rendering_attr_surface_sett_name">Брусчатка</string>
+    <string name="rendering_attr_surface_cobblestone_name">Булыжник</string>
+    <string name="rendering_attr_surface_paving_stones_name">Тротуарная плитка</string>
+    <string name="rendering_attr_surface_pebblestone_name">Галька</string>
+    <string name="rendering_attr_surface_stone_name">Камень</string>
+    <string name="rendering_attr_surface_metal_name">Металл</string>
+    <string name="rendering_attr_surface_wood_name">Дерево</string>
+    <string name="rendering_attr_surface_gravel_name">Гравий</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Многослойный гравий</string>
+    <string name="rendering_attr_surface_compacted_name">Утрамбованная</string>
+    <string name="rendering_attr_smoothness_excellent_name">Отличная</string>
+    <string name="rendering_attr_smoothness_good_name">Хорошая</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Средняя</string>
+    <string name="rendering_attr_smoothness_bad_name">Плохая</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Очень плохая</string>
+    <string name="rendering_attr_smoothness_horrible_name">Ужасная</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Очень ужасная</string>
+    <string name="rendering_attr_smoothness_impassable_name">Непроходимая</string>
+    <string name="rendering_attr_highway_class_motorway_name">Автомагистраль</string>
+    <string name="rendering_attr_highway_class_road_name">Дорога</string>
+    <string name="rendering_attr_highway_class_street_name">Улица</string>
+    <string name="rendering_attr_highway_class_service_name">Проезд</string>
+    <string name="rendering_attr_highway_class_footway_name">Тротуар</string>
+    <string name="rendering_attr_highway_class_track_name">Сельскохозяйственная</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Конная</string>
+    <string name="rendering_attr_highway_class_steps_name">Лестница</string>
+    <string name="rendering_attr_highway_class_path_name">Тропа</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Велодорожка</string>
+    <string name="rendering_attr_undefined_name">Неопределённая</string>
 </resources>

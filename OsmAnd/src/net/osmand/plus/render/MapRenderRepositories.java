@@ -641,44 +641,7 @@ public class MapRenderRepositories {
 			boolean nightMode = app.getDaynightHelper().isNightMode();
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-			RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
-			renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
-			for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-				if (customProp.isBoolean()) {
-					if(customProp.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
-						renderingReq.setBooleanFilter(customProp, true);
-					} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
-						renderingReq.setBooleanFilter(customProp, false);
-					} else {
-						CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
-						renderingReq.setBooleanFilter(customProp, pref.get());
-					}
-				} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
-					if (customProp.isString()) {
-						renderingReq.setStringFilter(customProp, "");
-					} else {
-						renderingReq.setIntFilter(customProp, 0);
-					}
-				} else {
-					CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
-					String res = settings.get();
-					if (!Algorithms.isEmpty(res)) {
-						if (customProp.isString()) {
-							renderingReq.setStringFilter(customProp, res);
-						} else {
-							try {
-								renderingReq.setIntFilter(customProp, Integer.parseInt(res));
-							} catch (NumberFormatException e) {
-								e.printStackTrace();
-							}
-						}
-					} else {
-						if (customProp.isString()) {
-							renderingReq.setStringFilter(customProp, "");
-						}
-					}
-				}
-			}
+			RenderingRuleSearchRequest renderingReq = getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			renderingReq.saveState();
 			NativeOsmandLibrary nativeLib = !prefs.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
 
@@ -878,6 +841,49 @@ public class MapRenderRepositories {
 			}
 		}
 
+	}
+
+	public RenderingRuleSearchRequest getSearchRequestWithAppliedCustomRules(RenderingRulesStorage storage, boolean nightMode) {
+		// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
+		RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
+		renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
+		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
+			if (customProp.isBoolean()) {
+				if(customProp.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
+					renderingReq.setBooleanFilter(customProp, true);
+				} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
+					renderingReq.setBooleanFilter(customProp, false);
+				} else {
+					CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
+					renderingReq.setBooleanFilter(customProp, pref.get());
+				}
+			} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
+				if (customProp.isString()) {
+					renderingReq.setStringFilter(customProp, "");
+				} else {
+					renderingReq.setIntFilter(customProp, 0);
+				}
+			} else {
+				CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
+				String res = settings.get();
+				if (!Algorithms.isEmpty(res)) {
+					if (customProp.isString()) {
+						renderingReq.setStringFilter(customProp, res);
+					} else {
+						try {
+							renderingReq.setIntFilter(customProp, Integer.parseInt(res));
+						} catch (NumberFormatException e) {
+							e.printStackTrace();
+						}
+					}
+				} else {
+					if (customProp.isString()) {
+						renderingReq.setStringFilter(customProp, "");
+					}
+				}
+			}
+		}
+		return renderingReq;
 	}
 
 	public Bitmap getBitmap() {

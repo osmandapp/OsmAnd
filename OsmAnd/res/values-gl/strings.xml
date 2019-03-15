@@ -1226,7 +1226,7 @@
     <string name="fav_points_not_exist">Non hai ningún punto de Favorito</string>
     <string name="update_existing">Substituír</string>
     <string name="only_show">Amosar rota</string>
-    <string name="follow">Start navigation</string>
+    <string name="follow">Comezar guía</string>
     <string name="mark_final_location_first">Escolla primeiro o destino</string>
     <string name="get_directions">Indicacións</string>
     <string name="opening_hours">Horas de apertura</string>
@@ -1662,7 +1662,7 @@ Lon %2$s</string>
     <string name="agps_info">Información de A-GPS</string>
     <string name="agps_data_last_downloaded">Datos de A-GPS baixados por última vez: %1$s</string>
     <string name="delay_to_start_navigation_descr">Indica-lo tempo de agarda durante o que ficar na pantalla de planificación das rotas.</string>
-    <string name="delay_to_start_navigation">Iniciar a navegación paso a paso despois de…</string>
+    <string name="delay_to_start_navigation">Comezar a guía paso a paso após…</string>
     <string name="parking_place_limited">Tempo de aparcamento limitado a</string>
     <string name="plugin_nautical_name">Vista do mapa náutico</string>
     <string name="save_track_to_gpx_globally_headline">Rexistro de pistas baixo petición</string>
@@ -2321,7 +2321,7 @@ Lon %2$s</string>
     <string name="is_saved">foi gardado</string>
     <string name="marker_save_as_track_descr">Exporte as súas marcaxes cara un ficheiro que pode fornecer eiquí:</string>
     <string name="move_to_history">Mover ao historial</string>
-    <string name="group_will_be_removed_after_restart">O grupo será riscado despois de reiniciar.</string>
+    <string name="group_will_be_removed_after_restart">O grupo será riscado após o reinicio.</string>
     <string name="show_guide_line">Amosar liñas direccionais</string>
     <string name="show_arrows_on_the_map">Amosar frechas no mapa</string>
     <string name="remove_from_map_markers">Eliminar das \"Marcaxes do mapa\"</string>
@@ -2361,7 +2361,7 @@ Lon %2$s</string>
     <string name="choose_navigation_type">Elixi-lo perfil da navegación</string>
     <string name="none_point_error">Engada ao menos un punto.</string>
     <string name="enter_gpx_name">Nome do ficheiro GPX:</string>
-    <string name="show_on_map_after_saving">Amosar no mapa despois de gardar</string>
+    <string name="show_on_map_after_saving">Amosar no mapa após o gardado</string>
     <string name="measurement_tool">Medir distancia</string>
     <string name="appearance_on_the_map">Aparencia no mapa</string>
     <string name="add_track_to_markers_descr">Escolla os puntos de pasaxe da pista que quere que OsmAnd engada ás marcaxes.</string>
@@ -2982,12 +2982,76 @@ Lon %2$s</string>
     <string name="step_by_step">Paseniño</string>
     <string name="road_types">Tipos de estrada</string>
     <string name="exit_at">Saír en</string>
-    <string name="sit_on_the_stop">Agardar na paraxe</string>
+    <string name="sit_on_the_stop">Embarcar na paraxe</string>
     <string name="shared_string_swap">Trocar</string>
     <string name="show_more">Amosar máis</string>
-    <string name="tracks_on_map">Pistas no mapa</string>
+    <string name="tracks_on_map">Pistas amosadas</string>
     <string name="quick_action_show_hide_gpx_tracks">Amosar/Agochar pistas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Premendo neste botón de acción, amosa ou agocha as pistas GPX escollidas no mapa</string>
     <string name="quick_action_gpx_tracks_hide">Agochar pistas GPX</string>
     <string name="quick_action_gpx_tracks_show">Amosar pistas GPX</string>
+    <string name="transfers_size">%1$d transferencias</string>
+    <string name="add_start_and_end_points">Engadir puntos de comezo e fin</string>
+    <string name="route_add_start_point">Engadir punto de comezo</string>
+    <string name="route_descr_select_start_point">Escoller punto de comezo</string>
+    <string name="rendering_attr_surface_unpaved_name">Sen pavimento</string>
+    <string name="rendering_attr_surface_sand_name">Area</string>
+    <string name="rendering_attr_surface_grass_name">Céspede</string>
+    <string name="rendering_attr_surface_grass_paver_name">Pavimento con céspede</string>
+    <string name="rendering_attr_surface_ground_name">Chan natural</string>
+    <string name="rendering_attr_surface_dirt_name">Terra</string>
+    <string name="rendering_attr_surface_mud_name">Lama</string>
+    <string name="rendering_attr_surface_ice_name">Xeo</string>
+    <string name="rendering_attr_surface_salt_name">Sal</string>
+    <string name="rendering_attr_surface_snow_name">Neve</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalto</string>
+    <string name="rendering_attr_surface_paved_name">Pavimentado</string>
+    <string name="rendering_attr_surface_concrete_name">Cimento</string>
+    <string name="rendering_attr_surface_sett_name">Lastra</string>
+    <string name="rendering_attr_surface_cobblestone_name">Empedrado</string>
+    <string name="rendering_attr_surface_paving_stones_name">Pavimento de pedra</string>
+    <string name="rendering_attr_surface_pebblestone_name">Pedregullo</string>
+    <string name="rendering_attr_surface_stone_name">Pedra</string>
+    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_wood_name">Madeira</string>
+    <string name="rendering_attr_surface_gravel_name">Cascallo</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Cascallo fino</string>
+    <string name="rendering_attr_surface_compacted_name">Compactado</string>
+    <string name="rendering_attr_smoothness_excellent_name">Excelente</string>
+    <string name="rendering_attr_smoothness_good_name">Boa</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Intermedio</string>
+    <string name="rendering_attr_smoothness_bad_name">Mala</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Moi mala</string>
+    <string name="rendering_attr_smoothness_horrible_name">Horríbel</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Moi horríbel</string>
+    <string name="rendering_attr_smoothness_impassable_name">Intransitábel</string>
+    <string name="rendering_attr_highway_class_motorway_name">Autoestrada</string>
+    <string name="rendering_attr_highway_class_state_road_name">Estrada nacional</string>
+    <string name="rendering_attr_highway_class_road_name">Estrada</string>
+    <string name="rendering_attr_highway_class_street_name">Rúa</string>
+    <string name="rendering_attr_highway_class_service_name">Vía de servizo</string>
+    <string name="rendering_attr_highway_class_footway_name">Senda peonil</string>
+    <string name="rendering_attr_highway_class_track_name">Pista</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Pista de cabalos</string>
+    <string name="rendering_attr_highway_class_steps_name">Escadas</string>
+    <string name="rendering_attr_highway_class_path_name">Camiño</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Senda ciclista</string>
+    <string name="rendering_attr_undefined_name">Sen definir</string>
+    <string name="release_3_3">"• Nova lapela «Direccións»: Amosa os botóns de destino «Casa» e «Traballo», o atallo da «rota anterior», a listaxe de pistas, marcaxes GPX activos e o historial de procura. 
+\n 
+\n • Información adicional en «Detalles da rota»: Tipos de camiños, superficie, pendente e suavidade
+\n 
+\n • Suporte na navigación de transporte público: Metro, bus, tranvía, etc. 
+\n 
+\n • Novas accións axiñas: «Amosar/agochar pistas» e «Modo día/noite» 
+\n 
+\n • Áreas fixas amosadas coma inundadas en Alemaña, Suráfrica e Quebec 
+\n 
+\n • Suporte adicional para a importación de KML e KMZ 
+\n 
+\n • Corrixidos os erros na apertura de algunhas paraxes de transporte público 
+\n 
+\n • Eliminada a análise do Facebook e Firebase da versión de balde (o OsmAnd+ non o inclúe) "</string>
+    <string name="use_osm_live_public_transport_description">Activar o transporte público para as mudanzas do OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transporte público no OsmAnd Live</string>
 </resources>

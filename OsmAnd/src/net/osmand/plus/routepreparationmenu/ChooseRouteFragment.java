@@ -63,7 +63,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements CardListe
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		map = getMapActivity().getMapView();
 		OsmandApplication app = mapActivity.getMyApplication();
-		List<TransportRouteResult> routes = app.getTransportRoutingHelper().getRoutes();
+		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+		List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
 		if (routes != null && !routes.isEmpty()) {
 			view = inflater.inflate(R.layout.fragment_show_all_routes, null);
 			viewPager = view.findViewById(R.id.pager);
@@ -71,7 +72,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements CardListe
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 
 			for (int i = 0; i < routes.size(); i++) {
-				PublicTransportCard card = new PublicTransportCard(mapActivity, routes.get(i), i);
+				PublicTransportCard card = new PublicTransportCard(mapActivity, transportRoutingHelper.getStartLocation(),
+						transportRoutingHelper.getEndLocation(), routes.get(i), i);
 				card.setListener(this);
 				card.setShowTopShadow(false);
 				card.setShowBottomShadow(false);

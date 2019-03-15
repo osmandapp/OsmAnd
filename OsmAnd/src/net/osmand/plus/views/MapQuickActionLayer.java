@@ -201,11 +201,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 		return quickActionsWidget.getVisibility() == View.VISIBLE;
 	}
 
-	/**
-	 * @param showWidget
-	 * @return true, if state was changed
-	 */
-	public boolean setLayerState(boolean showWidget) {
+    /**
+     * @param showWidget
+     * @return true, if state was changed
+     */
+    public boolean setLayerState(boolean showWidget) {
 		prevWidgetState = showWidget;
 		if (isWidgetVisible() == showWidget)    // check if state change is needed
 		    return false;
@@ -229,8 +229,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 		    quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
 		}
 
-		return true;
-	}
+        return true;
+    }
 
     private void animateWidget(final boolean show) {
         AnimatorSet set = new AnimatorSet();
