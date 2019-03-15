@@ -736,7 +736,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 				spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
 				spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				startIndex = spannable.length();
-				spannable.append(getString(R.string.on_foot)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
+				spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
 				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 				buildRowDivider(view, true);
@@ -829,7 +829,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 			walkTime = 60;
 		}
 		startTime[0] += walkTime;
-		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.on_foot)));
+		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.shared_string_walk)));
 		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
 		title.append(" ").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
@@ -926,7 +926,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = spannable.length();
-		spannable.append(getString(R.string.on_foot)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
+		spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
 		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, spannable, imagesContainer, new OnClickListener() {

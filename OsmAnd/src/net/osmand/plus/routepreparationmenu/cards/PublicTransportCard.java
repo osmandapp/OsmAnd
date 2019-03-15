@@ -174,15 +174,20 @@ public class PublicTransportCard extends BaseCard {
 	private SpannableString getSecondLineDescrSpan(List<TransportRouteResultSegment> segments) {
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 		Typeface typeface = FontCache.getRobotoMedium(app);
-		String travelTimeStr = OsmAndFormatter.getFormattedDuration((int) routeResult.getTravelTime(), app);
 		int walkTimeReal = transportRoutingHelper.getWalkingTime(segments);
 		int walkTimePT = (int) routeResult.getWalkTime();
-		String walkTimeStr = OsmAndFormatter.getFormattedDuration(walkTimeReal > 0 ? walkTimeReal : walkTimePT, app);
+		int walkTime = walkTimeReal > 0 ? walkTimeReal : walkTimePT;
+		String walkTimeStr = OsmAndFormatter.getFormattedDuration(walkTime, app);
 		int walkDistanceReal = transportRoutingHelper.getWalkingDistance(segments);
 		int walkDistancePT = (int) routeResult.getWalkDist();
-		String walkDistanceStr = OsmAndFormatter.getFormattedDistance(walkDistanceReal > 0 ? walkDistanceReal : walkDistancePT, app);
+		int walkDistance = walkDistanceReal > 0 ? walkDistanceReal : walkDistancePT;
+		String walkDistanceStr = OsmAndFormatter.getFormattedDistance(walkDistance, app);
+		int travelTime = (int) routeResult.getTravelTime() + walkTime;
+		String travelTimeStr = OsmAndFormatter.getFormattedDuration(travelTime, app);
+		int travelDist = (int) routeResult.getTravelDist() + walkDistance;
+		String travelDistStr = OsmAndFormatter.getFormattedDistance(travelDist, app);
 
-		String secondLine = travelTimeStr + "  •  " + app.getString(R.string.on_foot) + " " + walkTimeStr + ", " + walkDistanceStr;
+		String secondLine = travelTimeStr + ", " + travelDistStr + "  •  " + app.getString(R.string.shared_string_walk) + " " + walkTimeStr + ", " + walkDistanceStr;
 
 		SpannableString secondLineDesc = new SpannableString(secondLine);
 
