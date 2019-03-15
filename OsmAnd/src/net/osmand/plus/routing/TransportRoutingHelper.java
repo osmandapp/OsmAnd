@@ -158,6 +158,7 @@ public class TransportRoutingHelper {
 	private void startRouteCalculationThread(TransportRouteCalculationParams params) {
 		synchronized (this) {
 			final Thread prevRunningJob = currentRunningJob;
+			app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(routingHelper.getAppMode());
 			RouteRecalculationThread newThread =
 					new RouteRecalculationThread("Calculating public transport route", params);
 			currentRunningJob = newThread;

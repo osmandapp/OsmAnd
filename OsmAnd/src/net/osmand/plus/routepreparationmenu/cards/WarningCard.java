@@ -23,7 +23,7 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 public class WarningCard extends BaseCard {
 
-	public static final String OSMAND_BLOG_LINK = "https://osmand.net/blog";
+	public static final String OSMAND_BLOG_LINK = "https://osmand.net/blog/guideline-pt";
 
 	public WarningCard(MapActivity mapActivity) {
 		super(mapActivity);

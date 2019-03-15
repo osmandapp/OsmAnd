@@ -1,16 +1,9 @@
 package net.osmand.router;
 
-import net.osmand.Location;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportSchedule;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.MapUtils;
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,10 +14,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportSchedule;
+import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.MapUtils;
 
 public class TransportRoutePlanner {
 	
@@ -38,6 +37,9 @@ public class TransportRoutePlanner {
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for(TransportRouteSegment s : endStops) {
 			endSegments.put(s.getId(), s);
+		}
+		if(startStops.size() == 0) {
+			return Collections.emptyList();
 		}
 		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(), new SegmentsComparator(ctx));
 		for(TransportRouteSegment r : startStops){
@@ -96,11 +98,12 @@ public class TransportRoutePlanner {
 				} else {
 					travelTime += ctx.cfg.stopTime + segmentDist / ctx.cfg.travelSpeed;
 				}
-				if(travelDist > finishTime + ctx.cfg.finishTimeSeconds) {
+				if(segment.distFromStart + travelTime > finishTime + ctx.cfg.finishTimeSeconds) {
 					break;
 				}
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
+				ctx.visitedStops++;
 				for (TransportRouteSegment sgm : sgms) {
 					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 						return null;
@@ -108,31 +111,31 @@ public class TransportRoutePlanner {
 					if (segment.wasVisited(sgm)) {
 						continue;
 					}
-					TransportRouteSegment rrs = new TransportRouteSegment(sgm);
-					rrs.parentRoute = segment;
-					rrs.parentStop = ind;
-					rrs.walkDist = MapUtils.getDistance(rrs.getLocation(), stop.getLocation());
-					rrs.parentTravelTime = travelTime;
-					rrs.parentTravelDist = travelDist;
-					double walkTime = rrs.walkDist / ctx.cfg.walkSpeed
+					TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
+					nextSegment.parentRoute = segment;
+					nextSegment.parentStop = ind;
+					nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
+					nextSegment.parentTravelTime = travelTime;
+					nextSegment.parentTravelDist = travelDist;
+					double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed
 							+ (ctx.cfg.getChangeTime());
-					rrs.distFromStart = segment.distFromStart + travelTime + walkTime;
+					nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 					if(ctx.cfg.useSchedule) {
 						int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
-						if(tm >= rrs.distFromStart) {
-							rrs.distFromStart = tm;
-							queue.add(rrs);
+						if(tm >= nextSegment.distFromStart) {
+							nextSegment.distFromStart = tm;
+							queue.add(nextSegment);
 						}
 					} else {
-						queue.add(rrs);
+						queue.add(nextSegment);
 					}
 				}
-				TransportRouteSegment f = endSegments.get(segmentId);
+				TransportRouteSegment finalSegment = endSegments.get(segmentId);
 				double distToEnd = MapUtils.getDistance(stop.getLocation(), end);
-				if (f != null && distToEnd < ctx.cfg.walkRadius) {
+				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius) {
 					if (finish == null || minDist > distToEnd) {
 						minDist = distToEnd;
-						finish = new TransportRouteSegment(f);
+						finish = new TransportRouteSegment(finalSegment);
 						finish.parentRoute = segment;
 						finish.parentStop = ind;
 						finish.walkDist = distToEnd;
@@ -198,9 +201,11 @@ public class TransportRoutePlanner {
 	private List<TransportRouteResult> prepareResults(TransportRoutingContext ctx, List<TransportRouteSegment> results) {
 		Collections.sort(results, new SegmentsComparator(ctx));
 		List<TransportRouteResult> lst = new ArrayList<TransportRouteResult>();
-		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d routes, loaded %d tiles (%d ms read, %d ms total),",
-				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedRoutesCount, 
-				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000)));
+		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d routes / %d stops, loaded %d tiles (%d ms read, %d ms total), loaded ways %d (%d wrong)",
+				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), 
+				ctx.visitedRoutesCount, ctx.visitedStops, 
+				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000),
+				ctx.loadedWays, ctx.wrongLoadedWays));
 		for(TransportRouteSegment res : results) {
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
@@ -214,9 +219,15 @@ public class TransportRoutePlanner {
 					return null;
 				}
 				if (p.parentRoute != null) {
-					TransportRouteResultSegment sg = new TransportRouteResultSegment(p.parentRoute.road, 
-							p.parentRoute.segStart, p.parentStop, p.parentRoute.walkDist, 
-							p.departureTime);
+					TransportRouteResultSegment sg = new TransportRouteResultSegment();
+					sg.route = p.parentRoute.road;
+					sg.start = p.parentRoute.segStart;
+					sg.end = p.parentStop;
+					sg.walkDist = p.parentRoute.walkDist;
+					sg.walkTime = sg.walkDist / ctx.cfg.walkSpeed;
+					sg.depTime = p.departureTime;
+					sg.travelInaccurateDist = p.parentTravelDist;
+					sg.travelTime = p.parentTravelTime;
 					route.segments.add(0, sg);
 				}
 				p = p.parentRoute;
@@ -278,20 +289,19 @@ public class TransportRoutePlanner {
 	
 	
 	public static class TransportRouteResultSegment {
+		
 		private static final boolean DISPLAY_FULL_SEGMENT_ROUTE = false;
 		private static final int DISPLAY_SEGMENT_IND = 0;
-		public final TransportRoute route;
-		public final int start;
-		public final int end;
-		public final double walkDist ;
-		public final int depTime;
+		public TransportRoute route;
+		public double walkTime;
+		public double travelInaccurateDist;
+		public double travelTime;
+		public int start;
+		public int end;
+		public double walkDist ;
+		public int depTime;
 		
-		public TransportRouteResultSegment(TransportRoute route, int start, int end, double walkDist, int depTime) {
-			this.route = route;
-			this.start = start;
-			this.end = end;
-			this.walkDist = walkDist;
-			this.depTime = depTime;
+		public TransportRouteResultSegment() {
 		}
 		
 		public int getArrivalTime() {
@@ -534,9 +544,9 @@ public class TransportRoutePlanner {
 		private static final int SHIFT_DEPTIME = 14; // assume less than 1024 stops
 		
 		TransportRouteSegment parentRoute = null;
-		int parentStop;
-		double parentTravelTime; // travel time
-		double parentTravelDist; // inaccurate
+		int parentStop; // last stop to exit for parent route
+		double parentTravelTime; // travel time for parent route
+		double parentTravelDist; // travel distance for parent route (inaccurate) 
 		// walk distance to start route location (or finish in case last segment)
 		double walkDist = 0;
 		
@@ -643,6 +653,7 @@ public class TransportRoutePlanner {
 		// stats
 		public long startCalcTime;
 		public int visitedRoutesCount;
+		public int visitedStops;
 		public int wrongLoadedWays;
 		public int loadedWays;
 		public long loadTime;

@@ -43,7 +43,10 @@ public class TransportRoute extends MapObject {
 	}
 	
 	public List<Way> getForwardWays() {
-		return forwardWays == null ? Collections.emptyList() : forwardWays;
+		if(forwardWays == null) {
+			return Collections.emptyList();
+		}
+		return forwardWays;
 	}
 	
 	

@@ -943,7 +943,6 @@ public class RoutingHelper {
 
 	public void recalculateRouteDueToSettingsChange() {
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		getSettings().LAST_ROUTE_APPLICATION_MODE.set(getAppMode());
 		if (isPublicTransportMode()) {
 			Location start = lastFixedLocation;
 			LatLon finish = finalLocation;
