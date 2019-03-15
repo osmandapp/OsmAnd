@@ -66,6 +66,16 @@ android {
 		warningsAsErrors false
 	}
 
+	bundle {
+		language {
+			// Specifies that the app bundle should not support
+			// configuration APKs for language resources. These
+			// resources are instead packaged with each base and
+			// dynamic feature APK.
+			enableSplit = false
+		}
+	}
+
 	// related to kuromoji
 	//packagingOptions {
 	//	exclude '/META-INF/CONTRIBUTORS.md'
