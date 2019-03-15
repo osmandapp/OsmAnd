@@ -2301,7 +2301,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_from_zoom_level">Wyświetlanie od stopnia przybliżenia</string>
     <string name="routing_attr_allow_private_name">Uwzględnianie prywatnych obszarów</string>
     <string name="routing_attr_allow_private_description">Zezwala na dostęp do prywatnych obszarów.</string>
-    <string name="route_is_too_long_v2">Proszę dodać punkty pośrednie, jeżeli nie otrzymasz wyniku dla tej długiej trasy w ciągu 10 minut.</string>
+    <string name="route_is_too_long_v2">Duża odległość: Proszę dodać punkty pośrednie, jeżeli nie otrzymasz wyniku w ciągu 10 minut.</string>
     <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Kontynuować?</string>
     <string name="shared_string_plugin">Wtyczka</string>
     <string name="srtm_menu_download_descr">Pobierz mapę \"Poziomice\" do użycia dla tego obszaru.</string>
@@ -2867,7 +2867,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osm_live_payment_annual_title">Raz w roku</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / miesiąc</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / miesiąc</string>
-    <string name="osm_live_payment_discount_descr">Zapisz %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Oszczędź %1$s.</string>
     <string name="osm_live_payment_current_subscription">Aktualna subskrypcja</string>
     <string name="osm_live_payment_renews_monthly">Odnawia się co miesiąc</string>
     <string name="osm_live_payment_renews_quarterly">Odnawia się co kwartał</string>
@@ -2924,11 +2924,21 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="sit_on_the_stop">Usiądź na przystanku</string>
     <string name="shared_string_swap">Wymień</string>
     <string name="show_more">Pokaż więcej</string>
-    <string name="tracks_on_map">Ślady na mapie</string>
+    <string name="tracks_on_map">Ślady wyświetlane</string>
     <string name="quick_action_show_hide_gpx_tracks">Pokaż/Ukryj Ślady GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Naciśnięcie przycisku pokaże lub ukryje wybrane ślady GPX na mapie</string>
     <string name="quick_action_gpx_tracks_hide">Ukryj Ślady GPX</string>
     <string name="quick_action_gpx_tracks_show">Pokaż Ślady GPX</string>
     <string name="add_destination_query">Proszę najpierw dodać Cel</string>
     <string name="previous_route">Poprzednia trasa</string>
+    <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wylicza trasy.</string>
+    <string name="route_add_start_point">Dodaj punkt rozpoczęcia</string>
+    <string name="route_descr_select_start_point">Wybierz punkt rozpoczęcia</string>
+    <string name="rendering_attr_surface_unpaved_name">Nieutwardzona</string>
+    <string name="rendering_attr_surface_sand_name">Piach</string>
+    <string name="rendering_attr_surface_grass_name">Trawa</string>
+    <string name="rendering_attr_surface_pebblestone_name">Tłuczeń żwirowy</string>
+    <string name="rendering_attr_surface_compacted_name">Ubita</string>
+    <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
 </resources>
