@@ -74,6 +74,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private boolean isLayerOn;
 
     private boolean nightMode;
+    private boolean prevWidgetState;
 
     public MapQuickActionLayer(MapActivity activity, ContextMenuLayer contextMenuLayer) {
         this.mapActivity = activity;
@@ -205,6 +206,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
      * @return true, if state was changed
      */
     public boolean setLayerState(boolean showWidget) {
+		prevWidgetState = showWidget;
         if (isWidgetVisible() == showWidget)    // check if state change is needed
             return false;
 
@@ -373,14 +375,14 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
-		boolean nightMode = settings != null && settings.isNightMode();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         if (isInMovingMarkerMode()) {
             canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
             contextMarker.draw(canvas);
         }
 		if (this.nightMode != nightMode) {
 			this.nightMode = nightMode;
-			updateQuickActionButton(isWidgetVisible());
+			updateQuickActionButton(prevWidgetState);
 		}
         setupQuickActionBtnVisibility();
     }
@@ -421,13 +423,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public void onActionSelected(QuickAction action) {
-    	if (action instanceof DayNightModeAction) {
-			setLayerState(false);
-    		QuickActionFactory.produceAction(action).execute(mapActivity);
-		} else {
-			QuickActionFactory.produceAction(action).execute(mapActivity);
-			setLayerState(false);
-		}
+        QuickActionFactory.produceAction(action).execute(mapActivity);
+        setLayerState(false);
     }
 
     public PointF getMovableCenterPoint(RotatedTileBox tb) {

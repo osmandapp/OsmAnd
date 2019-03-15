@@ -57,9 +57,9 @@ public class DayNightModeAction extends QuickAction {
 	@Override
 	public String getActionText(OsmandApplication application) {
 		if (application.getSettings().DAYNIGHT_MODE.get() == DayNightMode.DAY) {
-			return DayNightMode.NIGHT.toHumanString(application) + " " + application.getString(R.string.shared_string_mode);
+			return String.format("%s mode", DayNightMode.NIGHT.toHumanString(application));
 		} else {
-			return DayNightMode.DAY.toHumanString(application) + " " + application.getString(R.string.shared_string_mode);
+			return String.format("%s mode", DayNightMode.DAY.toHumanString(application));
 		}
 
 	}
