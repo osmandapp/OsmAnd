@@ -1662,12 +1662,17 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 	}
 
 	private List<Incline> createInclinesAndAdd100MetersWith0Incline(List<Entry> entries) {
+		float minIncline = 0;
+		float maxIncline = 0;
 		int size = entries.size();
 		List<Incline> inclines = new ArrayList<>();
 		for (Entry entry : entries) {
-			Incline incline = new Incline(entry.getY(), entry.getX() * 1000);
-			inclines.add(incline);
+			float inclineValue = entry.getY();
+			maxIncline = Math.max(inclineValue, maxIncline);
+			minIncline = Math.min(inclineValue, minIncline);
 
+			Incline incline = new Incline(inclineValue, entry.getX() * 1000);
+			inclines.add(incline);
 		}
 		for (int i = 0; i < 10; i++) {
 			float distance = i * 5;
@@ -1677,6 +1682,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		for (int i = 1; i <= 10; i++) {
 			float distance = lastDistance * 1000f + i * 5f;
 			inclines.add(new Incline(0f, distance));
+		}
+		for (Incline incline : inclines) {
+			incline.computeBoundaries(minIncline, maxIncline);
 		}
 		return inclines;
 	}

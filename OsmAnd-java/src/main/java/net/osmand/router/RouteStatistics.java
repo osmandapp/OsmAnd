@@ -1,7 +1,10 @@
 package net.osmand.router;
 
+import net.osmand.PlatformUtil;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,8 @@ import java.util.TreeMap;
 
 public class RouteStatistics {
 
-	private static final String UNDEFINED_ATTR = "undefined";
+	public static final String UNDEFINED_ATTR = "undefined";
+	private static final Log log = PlatformUtil.getLog(RouteStatistics.class);
 
 	private final List<RouteSegmentResult> route;
 	private final RenderingRulesStorage currentRenderer;
@@ -354,7 +358,7 @@ public class RouteStatistics {
 		public String getPropertyName(Boundaries attribute) {
 			int lowerBoundary = Math.round(attribute.getLowerBoundary());
 			int upperBoundary = Math.round(attribute.getUpperBoundary());
-			if (lowerBoundary > Boundaries.MIN_INCLINE) {
+			if (lowerBoundary >= Boundaries.MIN_DIVIDED_INCLINE) {
 				lowerBoundary++;
 			}
 			return String.format("%d%% ... %d%%", lowerBoundary, upperBoundary);
@@ -365,8 +369,14 @@ public class RouteStatistics {
 			int lowerBoundary = Math.round(attribute.getLowerBoundary());
 			int upperBoundary = Math.round(attribute.getUpperBoundary());
 			StringBuilder range = new StringBuilder();
-			if (lowerBoundary > Boundaries.MIN_INCLINE) {
+			if (lowerBoundary >= Boundaries.MIN_DIVIDED_INCLINE) {
 				lowerBoundary++;
+			}
+			if (lowerBoundary < Boundaries.MIN_DIVIDED_INCLINE) {
+				lowerBoundary = Boundaries.MIN_INCLINE;
+			}
+			if (upperBoundary > Boundaries.MAX_DIVIDED_INCLINE) {
+				upperBoundary = Boundaries.MAX_INCLINE;
 			}
 			range.append(lowerBoundary);
 			range.append(upperBoundary < 0 ? "_" : "-");
@@ -446,14 +456,17 @@ public class RouteStatistics {
 
 	public static class Incline {
 
-		private float inclineValue;
+		private final float inclineValue;
 		private final float distance;
-		private final Boundaries boundaries;
+		private Boundaries boundaries;
 
 		public Incline(float inclineValue, float distance) {
 			this.inclineValue = inclineValue;
 			this.distance = distance;
-			this.boundaries = Boundaries.newBoundariesFor(inclineValue);
+		}
+
+		public void computeBoundaries(float minIncline, float maxIncline) {
+			this.boundaries = Boundaries.newBoundariesFor(inclineValue, minIncline, maxIncline);
 		}
 
 		public float getValue() {
@@ -505,16 +518,24 @@ public class RouteStatistics {
 			this.lowerBoundary = lowerBoundary;
 		}
 
-		public static Boundaries newBoundariesFor(float incline) {
+		public static Boundaries newBoundariesFor(float incline, float minIncline, float maxIncline) {
+			int maxRoundedIncline = Math.round(maxIncline);
+			int minRoundedIncline = Math.round(minIncline);
 			if (incline > MAX_INCLINE) {
-				return new Boundaries(MAX_INCLINE, MAX_INCLINE - STEP);
+				return new Boundaries(MAX_INCLINE, MAX_DIVIDED_INCLINE);
 			}
 			if (incline < MIN_INCLINE) {
-				return new Boundaries(MIN_INCLINE + STEP, MIN_INCLINE);
+				return new Boundaries(MIN_DIVIDED_INCLINE, MIN_INCLINE);
 			}
 			for (int i = 1; i < NUM; i++) {
 				if (incline >= BOUNDARIES_ARRAY[i - 1] && incline < BOUNDARIES_ARRAY[i]) {
-					return new Boundaries(BOUNDARIES_ARRAY[i], BOUNDARIES_ARRAY[i - 1]);
+					if (i == 1) {
+						return new Boundaries(BOUNDARIES_ARRAY[i], minRoundedIncline);
+					} else if (i == NUM - 1) {
+						return new Boundaries(maxRoundedIncline, BOUNDARIES_ARRAY[i - 1]);
+					} else {
+						return new Boundaries(BOUNDARIES_ARRAY[i], BOUNDARIES_ARRAY[i - 1]);
+					}
 				}
 			}
 			return null;
