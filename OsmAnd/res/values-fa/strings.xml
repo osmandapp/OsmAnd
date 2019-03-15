@@ -342,7 +342,7 @@
     <string name="search_position_current_location_found">موقعیت من (پیدا‌شده)</string>
     <string name="search_position_address">نشانی…</string>
     <string name="search_position_favorites">نقاط برگزیده…</string>
-    <string name="search_position_undefined">تعریف‌نشده</string>
+    <string name="search_position_undefined">نامشخص</string>
     <string name="delete_confirmation_msg">آیا %1$s حذف شود؟</string>
     <string name="city_type_suburb">حومه</string>
     <string name="city_type_hamlet">دهکده</string>
@@ -3019,4 +3019,18 @@
     <string name="rendering_attr_smoothness_impassable_name">غیرقابل‌عبور</string>
     <string name="rendering_attr_highway_class_motorway_name">آزادراه</string>
     <string name="rendering_attr_highway_class_street_name">خیابان</string>
+    <string name="public_transport_warning_descr_blog">برای آشنایی با روش محاسبهٔ مسیر در OsmAnd وبلاگ ما را ببینید.</string>
+    <string name="public_transport_warning_title">هم‌اکنون مسیرهای ارائه‌شده برای حمل‌ونقل عمومی در فاز آزمایشی است و ممکن است خطاها و نقایصی داشته باشد.</string>
+    <string name="add_intermediate">افزودن نقطهٔ میانی</string>
+    <string name="rendering_attr_surface_sand_name">ماسه</string>
+    <string name="rendering_attr_surface_ground_name">زمین</string>
+    <string name="rendering_attr_highway_class_road_name">جاده</string>
+    <string name="rendering_attr_highway_class_service_name">خدماتی</string>
+    <string name="rendering_attr_highway_class_footway_name">راه پیاده</string>
+    <string name="rendering_attr_highway_class_track_name">رد</string>
+    <string name="rendering_attr_highway_class_bridleway_name">راه اسب‌رو</string>
+    <string name="rendering_attr_highway_class_steps_name">پلکان</string>
+    <string name="rendering_attr_highway_class_path_name">راهچه</string>
+    <string name="rendering_attr_highway_class_cycleway_name">راه دوچرخه</string>
+    <string name="rendering_attr_undefined_name">نامشخص</string>
 </resources>

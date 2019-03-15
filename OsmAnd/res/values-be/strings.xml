@@ -894,7 +894,7 @@
     <string name="fav_points_not_exist">Улюбёныя месцы адсутнічаюць</string>
     <string name="update_existing">Замяніць</string>
     <string name="only_show">Паказаць маршрут</string>
-    <string name="follow">Пачаць навігацыю</string>
+    <string name="follow">Пачаць кіраванне</string>
     <string name="mark_final_location_first">Спачатку абярыце пункт прызначэння</string>
     <string name="get_directions">Навігацыя</string>
     <string name="opening_hours">Гадзіны працы</string>
@@ -1495,7 +1495,7 @@
     <string name="shared_string_my_favorites">Улюбёныя</string>
     <string name="confirmation_to_clear_history">Ачысціць гісторыю\?</string>
     <string name="delay_to_start_navigation_descr">Задайце час затрымкі на экране планавання маршруту.</string>
-    <string name="delay_to_start_navigation">Пачаць пакрокавую навігацыю праз…</string>
+    <string name="delay_to_start_navigation">Пачаць пакрокавае кіраванне праз…</string>
     <string name="shared_string_go">Рушым</string>
     <string name="local_osm_changes_upload_all_confirm">Вы збіраецеся адаслаць %1$d змен у OSM. Вы ўпэўнены\?</string>
     <string name="plugin_ski_descr">Убудова для OsmAnd дае вам доступ да даных аб гарналыжных трасах, маршрутах для бегавых лыж, альпійскіх спусках, фунікулёрах і гарналыжных пад\'ёмніках. Маршруты і спускі пазначаюцца рознымі колерамі ў залежнасці ад іх складанасці і намаляваныя з выкарыстаннем адмысловага «зімовага» стылю мапы, адметнага тым, што выкарыстоўваюцца «снежныя» колеры зімовага пейзажу. 
@@ -2923,7 +2923,7 @@
     <string name="sit_on_the_stop">Пасадка на прыпынку</string>
     <string name="shared_string_swap">Памяняць</string>
     <string name="show_more">Паказаць больш</string>
-    <string name="tracks_on_map">Сляды на мапе</string>
+    <string name="tracks_on_map">Адлюстроўваемыя сляды</string>
     <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць GPX-сляды</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Націск на кнопку дзеяння пакажа ці схавае абраныя GPX-сляды на мапе</string>
     <string name="quick_action_gpx_tracks_hide">Схаваць GPX-сляды</string>
@@ -2984,4 +2984,7 @@
     <string name="rendering_attr_highway_class_motorway_name">Аўтастрада</string>
     <string name="rendering_attr_highway_class_road_name">Дарога</string>
     <string name="rendering_attr_highway_class_street_name">Вуліца</string>
+    <string name="rendering_attr_highway_class_footway_name">Ходнік</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Роварная дарожка</string>
+    <string name="rendering_attr_undefined_name">Нявызначана</string>
 </resources>

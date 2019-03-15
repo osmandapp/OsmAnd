@@ -987,7 +987,7 @@
     <string name="poi_surface_paved">سطح: روسازی‌شده</string>
     <string name="poi_surface_asphalt">سطح: آسفالت</string>
     <string name="poi_surface_concrete">سطح: بتن</string>
-    <string name="poi_surface_sett">سطح: سنگفرش سنگی</string>
+    <string name="poi_surface_sett">سطح: سنگفرش کوبیک</string>
     <string name="poi_surface_cobblestone">سطح: قلوه‌سنگ</string>
     <string name="poi_surface_paving_stones">سطح: سنگ‌فرش</string>
     <string name="poi_surface_pebblestone">سطح: ریگ</string>
@@ -1295,4 +1295,5 @@
     <string name="poi_public_bookcase">قفسه کتاب عمومی</string>
     <string name="poi_fire_hydrant_position_street">خیابان</string>
     <string name="poi_post_street">خیابان</string>
+    <string name="poi_surface_fine_gravel">سطح: شن ریز</string>
 </resources>
