@@ -2963,7 +2963,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport_description">Activa les modificacions del transport públic amb OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport públic a OsmAnd Live</string>
     <string name="public_transport_warning_descr_blog">Teniu més informació sobre com OsmAnd calcula les rutes al nostre blog.</string>
-    <string name="public_transport_warning_title">El càlcul de rutes amb transport públic està en fase de proves beta, essent possibles errors i defectes.</string>
+    <string name="public_transport_warning_title">La navegació amb transport públic ara està en proves beta, essent possibles errors i defectes.</string>
     <string name="add_intermediate">Afegeix un punt intermedi</string>
     <string name="transfers_size">%1$d trasllats</string>
     <string name="add_start_and_end_points">Afegeix punts inicial i final</string>
