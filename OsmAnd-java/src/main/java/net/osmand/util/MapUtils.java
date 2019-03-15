@@ -112,6 +112,7 @@ public class MapUtils {
 	}
 
 
+	
 	/**
 	 * Gets distance in meters
 	 */
