@@ -38,6 +38,9 @@ public class TransportRoutePlanner {
 		for(TransportRouteSegment s : endStops) {
 			endSegments.put(s.getId(), s);
 		}
+		if(startStops.size() == 0) {
+			return Collections.emptyList();
+		}
 		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(), new SegmentsComparator(ctx));
 		for(TransportRouteSegment r : startStops){
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
