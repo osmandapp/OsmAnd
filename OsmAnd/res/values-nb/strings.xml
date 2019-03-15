@@ -2991,4 +2991,7 @@
     <string name="rendering_attr_highway_class_path_name">Sti</string>
     <string name="rendering_attr_highway_class_cycleway_name">Sykkelvei</string>
     <string name="rendering_attr_undefined_name">Udefinert</string>
+    <string name="public_transport_warning_descr_blog">Lær mer om hvordan OsmAnd kaklulerer ruter i bloggen vår.</string>
+    <string name="public_transport_warning_title">Offentlige transportruter er nå i betatestingsstadie, så feil og unøyaktigheter kan forefinnes.</string>
+    <string name="add_intermediate">Legg til mellomliggende punkt</string>
 </resources>
