@@ -201,36 +201,36 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 		return quickActionsWidget.getVisibility() == View.VISIBLE;
 	}
 
-    /**
-     * @param showWidget
-     * @return true, if state was changed
-     */
-    public boolean setLayerState(boolean showWidget) {
+	/**
+	 * @param showWidget
+	 * @return true, if state was changed
+	 */
+	public boolean setLayerState(boolean showWidget) {
 		prevWidgetState = showWidget;
-        if (isWidgetVisible() == showWidget)    // check if state change is needed
-            return false;
+		if (isWidgetVisible() == showWidget)    // check if state change is needed
+		    return false;
 
 		updateQuickActionButton(showWidget);
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-            quickActionsWidget.setVisibility(!showWidget ? View.GONE : View.VISIBLE);
-        } else {
+		    quickActionsWidget.setVisibility(!showWidget ? View.GONE : View.VISIBLE);
+		} else {
 		    animateWidget(showWidget);
-        }
-        mapActivity.updateStatusBarColor();
+		}
+		mapActivity.updateStatusBarColor();
 
-        if (!showWidget) {
-            quitMovingMarker();
-            quickActionRegistry.setUpdatesListener(null);
-            quickActionsWidget.setSelectionListener(null);
-        } else {
-            enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
-            quickActionsWidget.setActions(quickActionRegistry.getFilteredQuickActions());
-            quickActionRegistry.setUpdatesListener(MapQuickActionLayer.this);
-            quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
-        }
+		if (!showWidget) {
+		    quitMovingMarker();
+		    quickActionRegistry.setUpdatesListener(null);
+		    quickActionsWidget.setSelectionListener(null);
+		} else {
+		    enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
+		    quickActionsWidget.setActions(quickActionRegistry.getFilteredQuickActions());
+		    quickActionRegistry.setUpdatesListener(MapQuickActionLayer.this);
+		    quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
+		}
 
-        return true;
-    }
+		return true;
+	}
 
     private void animateWidget(final boolean show) {
         AnimatorSet set = new AnimatorSet();
@@ -376,15 +376,15 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-        if (isInMovingMarkerMode()) {
-            canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
-            contextMarker.draw(canvas);
-        }
+		if (isInMovingMarkerMode()) {
+			canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
+			contextMarker.draw(canvas);
+		}
 		if (this.nightMode != nightMode) {
 			this.nightMode = nightMode;
 			updateQuickActionButton(prevWidgetState);
 		}
-        setupQuickActionBtnVisibility();
+		setupQuickActionBtnVisibility();
     }
 
     private void setupQuickActionBtnVisibility() {
