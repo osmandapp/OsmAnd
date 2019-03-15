@@ -25,7 +25,6 @@ import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -64,8 +63,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements CardListe
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		map = getMapActivity().getMapView();
 		OsmandApplication app = mapActivity.getMyApplication();
-		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		List<TransportRouteResult> routes = app.getTransportRoutingHelper().getRoutes();
+		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+		List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
 		if (routes != null && !routes.isEmpty()) {
 			view = inflater.inflate(R.layout.fragment_show_all_routes, null);
 			viewPager = view.findViewById(R.id.pager);
@@ -73,8 +72,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements CardListe
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 
 			for (int i = 0; i < routes.size(); i++) {
-				PublicTransportCard card = new PublicTransportCard(mapActivity, targetPointsHelper.getPointToStart(),
-						targetPointsHelper.getPointToNavigate(), routes.get(i), i);
+				PublicTransportCard card = new PublicTransportCard(mapActivity, transportRoutingHelper.getStartLocation(),
+						transportRoutingHelper.getEndLocation(), routes.get(i), i);
 				card.setListener(this);
 				card.setShowTopShadow(false);
 				card.setShowBottomShadow(false);

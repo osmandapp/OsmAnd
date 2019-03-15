@@ -20,7 +20,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -43,8 +42,8 @@ public class PublicTransportCard extends BaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int SHOW_BUTTON_INDEX = 1;
 
-	private TargetPoint startPoint;
-	private TargetPoint endPoint;
+	private LatLon startLocation;
+	private LatLon endLocation;
 	private TransportRouteResult routeResult;
 	private PublicTransportCardListener transportCardListener;
 
@@ -56,10 +55,10 @@ public class PublicTransportCard extends BaseCard {
 		void onPublicTransportCardBadgePressed(@NonNull PublicTransportCard card, @NonNull LatLon start, @NonNull LatLon end);
 	}
 
-	public PublicTransportCard(MapActivity mapActivity, TargetPoint startPoint, TargetPoint endPoint, TransportRouteResult routeResult, int routeId) {
+	public PublicTransportCard(MapActivity mapActivity, LatLon startLocation, LatLon endLocation, TransportRouteResult routeResult, int routeId) {
 		super(mapActivity);
-		this.startPoint = startPoint;
-		this.endPoint = endPoint;
+		this.startLocation = startLocation;
+		this.endLocation = endLocation;
 		this.routeResult = routeResult;
 		this.routeId = routeId;
 	}
@@ -218,11 +217,11 @@ public class PublicTransportCard extends BaseCard {
 				double walkTime = getWalkTime(s.walkDist, routeResult.getWalkSpeed());
 				if (walkTime > MIN_WALK_TIME) {
 					LatLon start;
-					LatLon end = s.getEnd().getLocation();
+					LatLon end = s.getStart().getLocation();
 					if (prevSegment != null) {
-						start = prevSegment.getStart().getLocation();
+						start = prevSegment.getEnd().getLocation();
 					} else {
-						start = this.startPoint.point;
+						start = this.startLocation;
 					}
 					routesBadges.addView(createWalkRouteBadge(walkTime, start, end), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
 					routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
@@ -245,7 +244,7 @@ public class PublicTransportCard extends BaseCard {
 						double walkTime = getWalkTime(finishWalkDist, routeResult.getWalkSpeed());
 						if (walkTime > MIN_WALK_TIME) {
 							LatLon start = s.getEnd().getLocation();
-							LatLon end = this.endPoint.point;
+							LatLon end = this.endLocation;
 							routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
 							routesBadges.addView(createWalkRouteBadge(walkTime, start, end));
 						}
