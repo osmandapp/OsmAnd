@@ -36,7 +36,6 @@ import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GeocodingLookupService;
@@ -73,18 +72,16 @@ import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
 import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard.PublicTransportCardListener;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routepreparationmenu.cards.WarningCard;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.SearchResult;
 
@@ -489,10 +486,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 			bottomShadowVisible = gpx == null;
 		} else if (isTransportRouteCalculated()) {
-			List<TransportRouteResult> routes = app.getTransportRoutingHelper().getRoutes();
+			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+			List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
 			for (int i = 0; i < routes.size(); i++) {
-				PublicTransportCard card = new PublicTransportCard(mapActivity, targetPointsHelper.getPointToStart(),
-						targetPointsHelper.getPointToNavigate(), routes.get(i), i);
+				PublicTransportCard card = new PublicTransportCard(mapActivity, transportRoutingHelper.getStartLocation(),
+						transportRoutingHelper.getEndLocation(), routes.get(i), i);
 				card.setShowBottomShadow(i == routes.size() - 1);
 				card.setShowTopShadow(i != 0);
 				card.setListener(this);

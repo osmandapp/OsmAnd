@@ -99,6 +99,7 @@ import net.osmand.plus.routepreparationmenu.cards.RouteStatisticCard;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
@@ -446,9 +447,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 				List<TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
 				if (routes != null && routes.size() > transportRouteId) {
 					TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(transportRouteId);
-					TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-					PublicTransportCard card = new PublicTransportCard(mapActivity, targetPointsHelper.getPointToStart(),
-							targetPointsHelper.getPointToNavigate(), routeResult, transportRouteId);
+					TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+					PublicTransportCard card = new PublicTransportCard(mapActivity, transportRoutingHelper.getStartLocation(),
+							transportRoutingHelper.getEndLocation(), routeResult, transportRouteId);
 					card.setTransportCardListener(this);
 					menuCards.add(card);
 					cardsContainer.addView(card.build(mapActivity));
