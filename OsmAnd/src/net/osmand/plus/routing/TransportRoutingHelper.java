@@ -105,7 +105,10 @@ public class TransportRoutingHelper {
 
 	@Nullable
 	public RouteCalculationResult getWalkingRouteSegment(TransportRouteResultSegment s1, TransportRouteResultSegment s2) {
-		return walkingRouteSegments.get(new Pair<>(s1, s2));
+		if (walkingRouteSegments != null) {
+			return walkingRouteSegments.get(new Pair<>(s1, s2));
+		}
+		return null;
 	}
 
 	public void setCurrentRoute(int currentRoute) {
