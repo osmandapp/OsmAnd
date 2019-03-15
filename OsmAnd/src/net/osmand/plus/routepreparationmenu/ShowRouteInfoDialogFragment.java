@@ -90,19 +90,23 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard.PublicTransportCardListener;
 import net.osmand.plus.routepreparationmenu.cards.RouteInfoCard;
 import net.osmand.plus.routepreparationmenu.cards.RouteStatisticCard;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatistics;
@@ -128,7 +132,7 @@ import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MenuState.FU
 import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MenuState.HALF_SCREEN;
 import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MenuState.HEADER_ONLY;
 
-public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
+public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements PublicTransportCardListener {
 
 	public static final String TAG = "ShowRouteInfoDialogFragment";
 
@@ -443,7 +447,10 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				List<TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
 				if (routes != null && routes.size() > transportRouteId) {
 					TransportRouteResult routeResult = routingHelper.getTransportRoutingHelper().getRoutes().get(transportRouteId);
-					PublicTransportCard card = new PublicTransportCard(mapActivity, routeResult, transportRouteId);
+					TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
+					PublicTransportCard card = new PublicTransportCard(mapActivity, transportRoutingHelper.getStartLocation(),
+							transportRoutingHelper.getEndLocation(), routeResult, transportRouteId);
+					card.setTransportCardListener(this);
 					menuCards.add(card);
 					cardsContainer.addView(card.build(mapActivity));
 					buildRowDivider(cardsContainer, false);
@@ -518,7 +525,12 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			if (route != null) {
 				RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 				RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
-				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer,defaultRender, nightMode);
+
+				MapRenderRepositories maps = app.getResourceManager().getRenderer();
+				RenderingRuleSearchRequest currentSearchRequest = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
+				RenderingRuleSearchRequest defaultSearchRequest = maps.getSearchRequestWithAppliedCustomRules(defaultRender, nightMode);
+
+				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
 				GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteClassStatistic(), analysis);
@@ -595,7 +607,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 				!nightMode ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
 	}
 
-	private void buildSegmentItem(View view, TransportRouteResultSegment segment, long startTime) {
+	private void buildSegmentItem(View view, final TransportRouteResultSegment segment, long startTime) {
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
 		final TransportStop startStop = stops.get(0);
@@ -629,10 +641,17 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildStartStopRow(stopsContainer, icon, timeText, transportStopRoute, title, secondaryText, new OnClickListener() {
+		buildStartStopRow(stopsContainer, icon, timeText, title, secondaryText, new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				showLocationOnMap(startStop.getLocation());
+			}
+		});
+
+		buildTransportStopRouteRow(stopsContainer, transportStopRoute, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showRouteSegmentOnMap(segment);
 			}
 		});
 
@@ -873,14 +892,26 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public void showWalkingRouteOnMap(TransportRouteResultSegment startSegment, TransportRouteResultSegment endSegment) {
+	public void showRouteOnMap(@NonNull RouteCalculationResult result) {
+		QuadRect rect = result.getLocationsRect();
+		if (rect != null) {
+			openMenuHeaderOnly();
+			fitRectOnMap(rect);
+		}
+	}
+
+	public void showWalkingRouteOnMap(@Nullable TransportRouteResultSegment startSegment, @Nullable TransportRouteResultSegment endSegment) {
 		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(startSegment, endSegment);
 		if (walkingRouteSegment != null) {
-			QuadRect rect = walkingRouteSegment.getLocationsRect();
-			if (rect != null) {
-				openMenuHeaderOnly();
-				fitRectOnMap(rect, null, true);
-			}
+			showRouteOnMap(walkingRouteSegment);
+		}
+	}
+
+	public void showRouteSegmentOnMap(@NonNull TransportRouteResultSegment segment) {
+		QuadRect rect = segment.getSegmentRect();
+		if (rect != null) {
+			openMenuHeaderOnly();
+			fitRectOnMap(rect);
 		}
 	}
 
@@ -889,7 +920,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			QuadRect rect = app.getTransportRoutingHelper().getTransportRouteRect(result);
 			if (rect != null) {
 				openMenuHeaderOnly();
-				fitRectOnMap(rect, null, true);
+				fitRectOnMap(rect);
 			}
 		}
 	}
@@ -1039,8 +1070,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		((LinearLayout) view).addView(baseItemView);
 	}
 
-	public void buildStartStopRow(final View view, Drawable icon, String timeText, TransportStopRoute transportStopRoute,
-	                              final Spannable title, Spannable secondaryText, OnClickListener onClickListener) {
+	public void buildStartStopRow(final View view, Drawable icon, String timeText, final Spannable title,
+								  Spannable secondaryText, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -1102,22 +1133,57 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			baseItemView.addView(timeView);
 		}
 
-		if (transportStopRoute != null) {
-			TextView routeTypeView = new TextView(view.getContext());
-			LinearLayout.LayoutParams routeTypeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			routeTypeParams.setMargins(0, dpToPx(4), 0, 0);
-			routeTypeView.setLayoutParams(routeTypeParams);
-			routeTypeView.setTextSize(16);
-			AndroidUtils.setTextSecondaryColor(app, routeTypeView, nightMode);
-			routeTypeView.setText(transportStopRoute.getDescription(app));
-			llText.addView(routeTypeView);
-
-			View routeBadge = createRouteBadge(mapActivity, transportStopRoute, nightMode);
-			LinearLayout.LayoutParams routeBadgeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			routeBadgeParams.setMargins(0, dpToPx(6), 0, dpToPx(8));
-			routeBadge.setLayoutParams(routeBadgeParams);
-			llText.addView(routeBadge);
+		if (onClickListener != null) {
+			ll.setOnClickListener(onClickListener);
 		}
+
+		((LinearLayout) view).addView(baseItemView);
+	}
+
+	public void buildTransportStopRouteRow(final View view, @NonNull TransportStopRoute transportStopRoute,
+										   OnClickListener onClickListener) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		final String routeDescription = transportStopRoute.getDescription(app);
+		FrameLayout baseItemView = new FrameLayout(view.getContext());
+		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		baseItemView.setLayoutParams(baseViewLayoutParams);
+
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.VERTICAL);
+		baseView.setLayoutParams(baseViewLayoutParams);
+		baseView.setGravity(Gravity.END);
+		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		baseItemView.addView(baseView);
+
+		LinearLayout ll = buildHorizontalContainerView(36, new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				copyToClipboard(routeDescription, view.getContext());
+				return true;
+			}
+		});
+		baseView.addView(ll);
+
+		LinearLayout llText = buildTextContainerView();
+		ll.addView(llText);
+
+		TextView routeTypeView = new TextView(view.getContext());
+		LinearLayout.LayoutParams routeTypeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		routeTypeParams.setMargins(0, dpToPx(4), 0, 0);
+		routeTypeView.setLayoutParams(routeTypeParams);
+		routeTypeView.setTextSize(16);
+		AndroidUtils.setTextSecondaryColor(app, routeTypeView, nightMode);
+		routeTypeView.setText(routeDescription);
+		llText.addView(routeTypeView);
+
+		View routeBadge = createRouteBadge(mapActivity, transportStopRoute, nightMode);
+		LinearLayout.LayoutParams routeBadgeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		routeBadgeParams.setMargins(0, dpToPx(6), 0, dpToPx(8));
+		routeBadge.setLayoutParams(routeBadgeParams);
+		llText.addView(routeBadge);
 
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
@@ -1263,7 +1329,17 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void fitRectOnMap(QuadRect rect, LatLon location, boolean forceFit) {
+	private void showOnMap(@NonNull LatLon start, @NonNull LatLon end) {
+		double left = Math.min(start.getLongitude(), end.getLongitude());
+		double right = Math.max(start.getLongitude(), end.getLongitude());
+		double top = Math.max(start.getLatitude(), end.getLatitude());
+		double bottom = Math.min(start.getLatitude(), end.getLatitude());
+		QuadRect rect = new QuadRect(left, top, right, bottom);
+		openMenuHeaderOnly();
+		fitRectOnMap(rect);
+	}
+
+	private void fitRectOnMap(QuadRect rect) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
@@ -1278,17 +1354,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 			}
 			if (tileBoxHeightPx > 0) {
 				int topMarginPx = toolbar.getHeight();
-				if (forceFit) {
-					mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
-							tileBoxWidthPx, tileBoxHeightPx, topMarginPx);
-				} else if (location != null &&
-						!mapActivity.getMapView().getTileBox(tileBoxWidthPx, tileBoxHeightPx, topMarginPx).containsLatLon(location)) {
-					boolean animating = mapActivity.getMapView().getAnimatedDraggingThread().isAnimating();
-					mapActivity.getMapView().fitLocationToMap(location.getLatitude(), location.getLongitude(),
-							mapActivity.getMapView().getZoom(), tileBoxWidthPx, tileBoxHeightPx, topMarginPx, !animating);
-				} else {
-					mapActivity.refreshMap();
-				}
+				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
+						tileBoxWidthPx, tileBoxHeightPx, topMarginPx);
 			}
 		}
 	}
@@ -1771,6 +1838,21 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 		if (publicTransportInfo) {
 			shareRoute.setVisibility(View.GONE);
 		}
+	}
+
+	@Override
+	public void onPublicTransportCardBadgePressed(@NonNull PublicTransportCard card, @NonNull TransportRouteResultSegment segment) {
+		showRouteSegmentOnMap(segment);
+	}
+
+	@Override
+	public void onPublicTransportCardBadgePressed(@NonNull PublicTransportCard card, @NonNull RouteCalculationResult result) {
+		showRouteOnMap(result);
+	}
+
+	@Override
+	public void onPublicTransportCardBadgePressed(@NonNull PublicTransportCard card, @NonNull LatLon start, @NonNull LatLon end) {
+		showOnMap(start, end);
 	}
 
 	public class CumulativeInfo {
@@ -2399,7 +2481,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment {
 	}
 
 	private void doLayoutMenu() {
-		final int posY = getPosY(getViewY(), false, getCurrentMenuState());
+		final int posY = getPosY(initLayout ? CURRENT_Y_UNDEFINED : getViewY(), false, getCurrentMenuState());
 		setViewY(posY, true, !initLayout);
 		updateMainViewLayout(posY);
 	}

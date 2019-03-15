@@ -1724,7 +1724,7 @@ Lon %2$s</string>
     <string name="favorite_category_select">Kategorie auswählen</string>
     <string name="default_speed_system_descr">Geschwindigkeitseinheit festlegen.</string>
     <string name="default_speed_system">Geschwindigkeitseinheit</string>
-    <string name="nm">kn</string>
+    <string name="nm">sm</string>
     <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>

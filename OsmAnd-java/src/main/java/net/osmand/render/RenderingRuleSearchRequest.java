@@ -35,6 +35,19 @@ public class RenderingRuleSearchRequest {
 		saveState();
 	}
 
+	public RenderingRuleSearchRequest(RenderingRuleSearchRequest renderingRuleSearchRequest) {
+		this.storage = renderingRuleSearchRequest.storage;
+		this.props = renderingRuleSearchRequest.props;
+		this.values = new int[renderingRuleSearchRequest.values.length];
+		this.fvalues = new float[renderingRuleSearchRequest.fvalues.length];
+		this.object = renderingRuleSearchRequest.object;
+		this.searchResult = renderingRuleSearchRequest.searchResult;
+		this.ALL = renderingRuleSearchRequest.ALL;
+		System.arraycopy(renderingRuleSearchRequest.values, 0, values, 0, renderingRuleSearchRequest.values.length);
+		System.arraycopy(renderingRuleSearchRequest.fvalues, 0, fvalues, 0, renderingRuleSearchRequest.fvalues.length);
+		saveState();
+	}
+
 	public void setStringFilter(RenderingRuleProperty p, String filter) {
 		assert p.isInputProperty();
 		values[p.getId()] = storage.getDictionaryValue(filter);

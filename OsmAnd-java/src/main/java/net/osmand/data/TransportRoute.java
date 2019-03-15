@@ -43,14 +43,14 @@ public class TransportRoute extends MapObject {
 	}
 	
 	public List<Way> getForwardWays() {
-		return forwardWays;
+		return forwardWays == null ? Collections.emptyList() : forwardWays;
 	}
 	
 	
 	public void mergeForwardWays() {
 		boolean changed = true;
 		// combine as many ways as possible
-		while (changed) {
+		while (changed && forwardWays != null) {
 			changed = false;
 			for(int k = 0; k < forwardWays.size(); ) {
 				// scan to merge with the next segment
@@ -113,7 +113,7 @@ public class TransportRoute extends MapObject {
 		if (forwardStops.size() > 0) {
 			// resort ways to stops order 
 			final Map<Way, int[]> orderWays = new HashMap<Way, int[]>();
-			for (Way w : forwardWays) {
+			for (Way w : getForwardWays()) {
 				int[] pair = new int[] { 0, 0 };
 				Node firstNode = w.getFirstNode();
 				TransportStop st = forwardStops.get(0);

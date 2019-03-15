@@ -1,8 +1,10 @@
 package net.osmand.router;
 
+import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
@@ -44,6 +46,7 @@ public class TransportRoutePlanner {
 			queue.add(r);
 		}
 		double finishTime = ctx.cfg.maxRouteTime;
+		double maxTravelTimeCmpToWalk = MapUtils.getDistance(start, end) / ctx.cfg.walkSpeed - ctx.cfg.changeTime / 2;
 		List<TransportRouteSegment> results = new ArrayList<TransportRouteSegment>();
 		initProgressBar(ctx, start, end);
 		while (!queue.isEmpty()) {
@@ -65,7 +68,8 @@ public class TransportRoutePlanner {
 			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges) {
 				continue;
 			}
-			if (segment.distFromStart > finishTime + ctx.cfg.finishTimeSeconds) {
+			if (segment.distFromStart > finishTime + ctx.cfg.finishTimeSeconds || 
+					segment.distFromStart > maxTravelTimeCmpToWalk) {
 				break;
 			}
 			long segmentId = segment.getId();
@@ -146,7 +150,8 @@ public class TransportRoutePlanner {
 				if (finishTime > finish.distFromStart) {
 					finishTime = finish.distFromStart;
 				}
-				if(finish.distFromStart < finishTime + ctx.cfg.finishTimeSeconds) {
+				if(finish.distFromStart < finishTime + ctx.cfg.finishTimeSeconds && 
+						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 				}
 			}
@@ -317,6 +322,25 @@ public class TransportRoutePlanner {
 
 		public List<TransportStop> getTravelStops() {
 			return route.getForwardStops().subList(start, end + 1);
+		}
+
+		public QuadRect getSegmentRect() {
+			double left = 0, right = 0;
+			double top = 0, bottom = 0;
+			for (Node n : getNodes()) {
+				if (left == 0 && right == 0) {
+					left = n.getLongitude();
+					right = n.getLongitude();
+					top = n.getLatitude();
+					bottom = n.getLatitude();
+				} else {
+					left = Math.min(left, n.getLongitude());
+					right = Math.max(right, n.getLongitude());
+					top = Math.max(top, n.getLatitude());
+					bottom = Math.min(bottom, n.getLatitude());
+				}
+			}
+			return left == 0 && right == 0 ? null : new QuadRect(left, top, right, bottom);
 		}
 
 		public List<Node> getNodes() {
