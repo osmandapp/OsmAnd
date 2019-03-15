@@ -46,7 +46,7 @@
     <string name="local_osm_changes_upload_all_confirm">Você enviará %1$d alterações ao OSM. Tem certeza?</string>
     <string name="confirmation_to_clear_history">Limpar o histórico\?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota.</string>
-    <string name="delay_to_start_navigation">Iniciar navegação curva a curva depois de…</string>
+    <string name="delay_to_start_navigation">Iniciar orientação de curva a curva depois de…</string>
     <string name="shared_string_go">Ir</string>
     <string name="osmand_parking_overdue">vencido</string>
     <string name="action_create">Criar ação</string>
@@ -786,7 +786,7 @@ Pôr do Sol: %2$s</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
     <string name="only_show">Exibir rota</string>
-    <string name="follow">Iniciar navegação</string>
+    <string name="follow">Iniciar orientação</string>
     <string name="get_directions">Direções</string>
     <string name="local_indexes_cat_srtm">Curvas de nível</string>
     <string name="index_srtm_ele">Curvas de nível</string>
@@ -2457,7 +2457,7 @@ Pôr do Sol: %2$s</string>
 \nPor favor, forneça um código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo válido 
 \nRepresenta área: %1$s x %2$s</string>
-    <string name="route_is_too_long_v2">Por favor, adicione destinos intermediários se nenhum caminho for encontrado para esta rota longa em 10 minutos.</string>
+    <string name="route_is_too_long_v2">Longa distância: adicione destinos intermediários se nenhuma rota for encontrada em 10 minutos.</string>
     <string name="osmand_extended_description_part5">Ciclismo
 \n • Encontre caminhos de bicicleta no mapa
 \n • Navegação por GPS no modo ciclismo constrói a sua rota utilizando caminhos de bicicleta
@@ -2900,7 +2900,7 @@ Pôr do Sol: %2$s</string>
     <string name="work_button">Trabalho</string>
     <string name="shared_string_swap">Inverter</string>
     <string name="show_more">Mostrar mais</string>
-    <string name="tracks_on_map">Trilhas na tela</string>
+    <string name="tracks_on_map">Trilhas exibidas</string>
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
     <string name="step_by_step">Passo a passo</string>
@@ -2977,6 +2977,6 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_surface_salt_name">Sal</string>
     <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
     <string name="public_transport_warning_descr_blog">Saiba mais sobre como OsmAnd calcula as rotas em nosso blog.</string>
-    <string name="public_transport_warning_title">As rotas de transporte público estão agora em fase de testes beta, portanto erros e imprecisões podem ocorrer.</string>
+    <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, erros e imprecisões podem ocorrer.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
 </resources>
