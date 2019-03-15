@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 
--->
+--> <string name="save_poi_value_exceed_length">Value of tag \"%s\" cannot exceed 255 chars. \nPlease edit it before continue.</string>
+    <string name="save_poi_value_exceed_length_title">Length of \"%s\" value</string>
     <string name="public_transport_warning_descr_blog">Learn more about how OsmAnd calculates routes in our blog.</string>
     <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, errors and inaccuracies may occur.</string>
     <string name="add_intermediate">Add intermediate point</string>
