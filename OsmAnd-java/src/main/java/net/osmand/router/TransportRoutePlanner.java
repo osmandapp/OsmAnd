@@ -38,6 +38,9 @@ public class TransportRoutePlanner {
 		for(TransportRouteSegment s : endStops) {
 			endSegments.put(s.getId(), s);
 		}
+		if(startStops.size() == 0) {
+			return Collections.emptyList();
+		}
 		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(), new SegmentsComparator(ctx));
 		for(TransportRouteSegment r : startStops){
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
@@ -100,6 +103,7 @@ public class TransportRoutePlanner {
 				}
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
+				ctx.visitedStops++;
 				for (TransportRouteSegment sgm : sgms) {
 					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 						return null;
@@ -197,9 +201,11 @@ public class TransportRoutePlanner {
 	private List<TransportRouteResult> prepareResults(TransportRoutingContext ctx, List<TransportRouteSegment> results) {
 		Collections.sort(results, new SegmentsComparator(ctx));
 		List<TransportRouteResult> lst = new ArrayList<TransportRouteResult>();
-		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d routes, loaded %d tiles (%d ms read, %d ms total),",
-				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedRoutesCount, 
-				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000)));
+		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d routes / %d stops, loaded %d tiles (%d ms read, %d ms total), loaded ways %d (%d wrong)",
+				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), 
+				ctx.visitedRoutesCount, ctx.visitedStops, 
+				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000),
+				ctx.loadedWays, ctx.wrongLoadedWays));
 		for(TransportRouteSegment res : results) {
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
@@ -651,6 +657,7 @@ public class TransportRoutePlanner {
 		// stats
 		public long startCalcTime;
 		public int visitedRoutesCount;
+		public int visitedStops;
 		public int wrongLoadedWays;
 		public int loadedWays;
 		public long loadTime;
