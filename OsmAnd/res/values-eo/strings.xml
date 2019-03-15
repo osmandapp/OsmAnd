@@ -2928,4 +2928,11 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n</string>
     <string name="use_osm_live_public_transport_description">Aktivigi publikan transporton por ŝanĝoj OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Publika transporto OsmAnd Live</string>
+    <string name="public_transport_warning_descr_blog">Legu pli pri kiel OsmAnd kalkulas kursojn ĉe nia taglibro (angle aŭ ruse).</string>
+    <string name="public_transport_warning_title">Navigado per la publika transporto nun estas en beta-testado, eraroj kaj malprecizoj povas okazi.</string>
+    <string name="add_intermediate">Aldoni intercelon</string>
+    <string name="transfers_size">%1$d transveturiliĝoj</string>
+    <string name="add_start_and_end_points">Aldoni komencan kaj finan punktojn</string>
+    <string name="route_add_start_point">Aldoni komencpunkton</string>
+    <string name="route_descr_select_start_point">Elektu komencpunkton</string>
 </resources>
