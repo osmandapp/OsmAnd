@@ -3,7 +3,6 @@ package net.osmand.router;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -368,8 +367,7 @@ public class RouteStatistics {
 			StringBuilder range = new StringBuilder();
 			if (lowerBoundary >= Boundaries.MIN_DIVIDED_INCLINE) {
 				lowerBoundary++;
-			}
-			if (lowerBoundary < Boundaries.MIN_DIVIDED_INCLINE) {
+			} else {
 				lowerBoundary = Boundaries.MIN_INCLINE;
 			}
 			if (upperBoundary > Boundaries.MAX_DIVIDED_INCLINE) {
