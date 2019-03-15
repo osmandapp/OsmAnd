@@ -121,7 +121,7 @@
     <string name="osmand_parking_position_description_add_time">ساعت پارک‌کردن خودرو</string>
     <string name="global_app_allocated_memory">حافظهٔ اختصاص‌یافته</string>
     <string name="native_app_allocated_memory">حافظهٔ کل سیستم</string>
-    <string name="starting_point_too_far">نقطهٔ شروع از نزدیک‌ترین جاده خیلی دور است.</string>
+    <string name="starting_point_too_far">مبدأ از نزدیک‌ترین جاده خیلی دور است.</string>
     <string name="osmand_parking_event">خودرو را از پارکینگ بردارید</string>
     <string name="osmand_parking_warning">هشدار</string>
     <string name="osmand_parking_warning_text">برای برداشتن خودرو از پارکینگ یک یادآور به تقویم افزوده شده است. تا زمانی که خودتان پاکش نکنید همان‌جا خواهد ماند.</string>
@@ -154,7 +154,7 @@
     <string name="offline_navigation_not_available">مسیریابی آفلاین OsmAnd موقتاً در دسترس نیست.</string>
     <string name="left_side_navigation">رانندگی از چپ</string>
     <string name="left_side_navigation_descr">برای کشورهایی که از سمت چپ جاده می‌رانند.</string>
-    <string name="unknown_from_location">نقطهٔ شروع هنوز مشخص نیست</string>
+    <string name="unknown_from_location">مبدأ هنوز مشخص نیست</string>
     <string name="unknown_location">موقعیت هنوز مشخص نیست</string>
     <string name="modify_transparency">تغییر شفافیت (0 - شفاف، 255 - مات)</string>
     <string name="confirm_interrupt_download">دانلود فایل را لغو می‌کنید؟</string>
@@ -294,7 +294,7 @@
     <string name="fav_points_not_exist">هیچ نقطهٔ برگزیده‌ای وجود ندارد</string>
     <string name="update_existing">جایگزین‌کردن</string>
     <string name="only_show">مسیر را نشان بده</string>
-    <string name="follow">شروع ناوبری</string>
+    <string name="follow">شروع هدایت</string>
     <string name="mark_final_location_first">لطفاً ابتدا مقصد را انتخاب کنید</string>
     <string name="get_directions">مسیریابی</string>
     <string name="opening_hours">ساعات کاری</string>
@@ -1242,7 +1242,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nبرای نمایش بر روی نقشه انگشت خود را چند لحظه بر روی صفحه نگه دارید"</string>
-    <string name="delay_navigation_start">راهنمایی پیچ تا پیچ به‌صورت خودکار شروع شود</string>
+    <string name="delay_navigation_start">راهنمایی پیچ به پیچ به‌صورت خودکار شروع شود</string>
     <string name="shared_string_selected_lowercase">انتخاب</string>
     <string name="gpx_split_interval">بازهٔ تقسیم</string>
     <string name="gpx_info_subtracks">زیرمسیرها: %1$s</string>
@@ -1507,7 +1507,7 @@
     <string name="local_osm_changes_upload_all_confirm">آیا از بارگذاری این %1$d تغییر در OSM مطمئن هستید؟</string>
     <string name="confirmation_to_clear_history">سوابق را پاک می‌کنید؟</string>
     <string name="delay_to_start_navigation_descr">مدت‌زمان ماندن در صفحهٔ طراحی مسیر تا شروع ناوبری را مشخص کنید.</string>
-    <string name="delay_to_start_navigation">ناوبری پیچ تا پیچ را با این تأخیر شروع کن…</string>
+    <string name="delay_to_start_navigation">آغاز راهنمایی پیچ به پیچ پس از…</string>
     <string name="shared_string_go">برو</string>
     <string name="osmand_parking_overdue">تأخیر دارید</string>
     <string name="general_settings_2">تنظیمات کلی</string>
@@ -1681,7 +1681,7 @@
     <string name="replace_favorite_confirmation">آیا این نقطهٔ جدید را جایگزین «%1$s» می‌کنید؟</string>
     <string name="rendering_attr_hideOverground_name">اشیای روی زمین</string>
     <string name="shared_string_change">تغییر</string>
-    <string name="get_started">شروع کن</string>
+    <string name="get_started">شروع</string>
     <string name="route_stops_before">%1$s ایستگاه قبلی</string>
     <string name="coords_search">جست‌وجوی مختصات</string>
     <string name="advanced_coords_search">جست‌وجوی پیشرفتهٔ مختصات</string>
@@ -1891,7 +1891,7 @@
     <string name="measurement_tool">اندازه‌گیری مسافت</string>
     <string name="quick_action_resume_pause_navigation">مکث/ادامهٔ ناوبری</string>
     <string name="quick_action_show_navigation_finish_dialog">پیغام پایان‌یافتن ناوبری را نشان بده</string>
-    <string name="quick_action_start_stop_navigation">شروع/اتمام ناوبری</string>
+    <string name="quick_action_start_stop_navigation">شروع/پایان ناوبری</string>
     <string name="shared_string_reset">تنظیم مجدد</string>
     <string name="shared_string_reload">بارگیری مجدد</string>
     <string name="remove_from_map_markers">از نشانه‌های نقشه حذف شود</string>
@@ -1944,7 +1944,7 @@
     <string name="clear_updates_proposition_message">به‌روزرسانی‌های دانلودشده را حذف کنید تا به نسخهٔ اولیهٔ نقشه برگردید</string>
     <string name="road_blocked">جاده مسدود است</string>
     <string name="shared_string_select">انتخاب</string>
-    <string name="switch_start_finish">عوض‌کردن مبدأ با مقصد</string>
+    <string name="switch_start_finish">تعویض مبدأ و مقصد</string>
     <string name="rendering_attr_hideIcons_name">آیکون POIها</string>
     <string name="item_removed">حذف شد</string>
     <string name="n_items_removed">حذف شدند</string>
@@ -2249,7 +2249,7 @@
     <string name="empty_state_favourites">افزودن نقاط برگزیده</string>
     <string name="empty_state_favourites_desc">نقاط موردعلاقه‌تان را روی نقشه علامت بزنید یا آن‌ها را از یک فایل وارد کنید.</string>
     <string name="move_point">جابه‌جاکردن نقطه</string>
-    <string name="make_round_trip_descr">نقطهٔ شروع را به‌عنوان مقصد هم در نظر بگیر.</string>
+    <string name="make_round_trip_descr">مبدأ را به‌عنوان مقصد هم در نظر بگیر.</string>
     <string name="make_round_trip">ایجاد سفر رفت‌وبرگشتی</string>
     <string name="coordinates_format">قالب مختصات</string>
     <string name="use_system_keyboard">صفحه‌کلید سیستم</string>
@@ -2257,7 +2257,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_name">پرهیز از گُدارها و راه‌های یخی</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">از راه‌های یخی و گُدارها پرهیز شود.</string>
     <string name="use_location">استفاده از موقعیت</string>
-    <string name="add_location_as_first_point_descr">برای طراحی یک مسیر کامل موقعیتتان را به‌عنوان نقطهٔ شروع اضافه کنید.</string>
+    <string name="add_location_as_first_point_descr">برای طراحی یک مسیر کامل، موقعیت خود را به‌عنوان مبدأ اضافه کنید.</string>
     <string name="my_location">موقعیت من</string>
     <string name="shared_string_finish">پایان</string>
     <string name="plan_route">طراحی مسیر</string>
@@ -2705,7 +2705,7 @@
     <string name="subsequent_dest_description">مقصد بالا می‌رود و مقصد جدیدی ایجاد می‌شود</string>
     <string name="map_import_error">خطای واردکردن نقشه</string>
     <string name="map_imported_successfully">نقشه وارد شد</string>
-    <string name="make_as_start_point">انتخاب به‌عنوان نقطهٔ آغازین</string>
+    <string name="make_as_start_point">انتخاب به‌عنوان مبدأ</string>
     <string name="enter_the_file_name">نام فایل را بنویسید.</string>
     <string name="enter_lon">ورود طول جغرافیایی</string>
     <string name="enter_lat">ورود عرض جغرافیایی</string>
@@ -2925,7 +2925,7 @@
     <string name="swap_start_and_destination">تعویض مبدأ و مقصد</string>
     <string name="add_destination_point">افزودن مقصد</string>
     <string name="add_intermediate_point">افزودن نقطهٔ میانی</string>
-    <string name="add_start_point">افزودن نقطهٔ شروع</string>
+    <string name="add_start_point">افزودن مبدأ</string>
     <string name="intermediate_waypoint">نقطهٔ میانی</string>
     <string name="transfers">انتقال‌ها</string>
     <string name="on_foot">پیاده</string>
@@ -2955,7 +2955,7 @@
     <string name="add_destination_query">لطفاً ابتدا مقصد را اضافه کنید</string>
     <string name="previous_route">مسیر قبلی</string>
     <string name="show_more">بیشتر نشان بده</string>
-    <string name="tracks_on_map">ردها روی نقشه</string>
+    <string name="tracks_on_map">ردهای نمایان</string>
     <string name="shared_string_swap">تعویض</string>
     <string name="time_of_day">ساعت</string>
     <string name="by_transport_type">با %1$s</string>
@@ -2984,4 +2984,19 @@
 \n • حذف آمارگیرهای Facebook و Firebase از نسخهٔ رایگان (OsmAnd+‎ آن را ندارد)</string>
     <string name="use_osm_live_public_transport_description">حمل‌ونقل عمومی با استفاده از به‌روزرسانی‌های OsmAnd Live فعال شود.</string>
     <string name="use_osm_live_public_transport">حمل‌ونقل عمومی با OsmAnd Live</string>
+    <string name="transfers_size">%1$d انتقال</string>
+    <string name="add_start_and_end_points">افزودن نقاط مبدأ و مقصد</string>
+    <string name="route_add_start_point">افزودن مبدأ</string>
+    <string name="route_descr_select_start_point">انتخاب نقطهٔ شروع</string>
+    <string name="rendering_attr_surface_unpaved_name">روسازی‌نشده</string>
+    <string name="rendering_attr_surface_dirt_name">خاک</string>
+    <string name="rendering_attr_surface_mud_name">گِل</string>
+    <string name="rendering_attr_surface_ice_name">یخ</string>
+    <string name="rendering_attr_surface_salt_name">نمک</string>
+    <string name="rendering_attr_surface_snow_name">برف</string>
+    <string name="rendering_attr_surface_asphalt_name">آسفالت</string>
+    <string name="rendering_attr_surface_paved_name">روسازی‌شده</string>
+    <string name="rendering_attr_surface_concrete_name">بتن</string>
+    <string name="rendering_attr_surface_sett_name">سنگفرش سنگی</string>
+    <string name="rendering_attr_surface_cobblestone_name">قلوه‌سنگ</string>
 </resources>

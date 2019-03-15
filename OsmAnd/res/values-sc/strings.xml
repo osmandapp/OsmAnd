@@ -67,10 +67,10 @@
     <string name="route_info">Informatziones pro s’àndala</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
     <string name="routing_attr_prefer_motorway_description">Preferre sas autostradas</string>
-    <string name="routing_attr_avoid_toll_name">Istransi sas istradas a pagamentu</string>
-    <string name="routing_attr_avoid_toll_description">Istransi sas istradas a pagamentu</string>
-    <string name="routing_attr_avoid_unpaved_name">Istransi sas istradas non apamentadas</string>
-    <string name="routing_attr_avoid_unpaved_description">Istransi sas istradas non apamentadas.</string>
+    <string name="routing_attr_avoid_toll_name">Istransi sos caminos a pagamentu</string>
+    <string name="routing_attr_avoid_toll_description">Istransi sos caminos a pagamentu</string>
+    <string name="routing_attr_avoid_unpaved_name">Istransi sos caminos non apamentados</string>
+    <string name="routing_attr_avoid_unpaved_description">Istransi sos caminos non apamentados.</string>
     <string name="routing_attr_avoid_ferries_name">Istransi sos naviles</string>
     <string name="routing_attr_avoid_ferries_description">Istransi sos naviles</string>
     <string name="routing_attr_avoid_motorway_name">Istransi sas autostradas</string>
@@ -140,8 +140,8 @@
     <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e àteras.</string>
     <string name="driving_region_japan">Giapone</string>
     <string name="speak_title">Annuntzia…</string>
-    <string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sas istradas, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s’autovelox, sos lìmites de lestresa.</string>
-    <string name="speak_street_names">Nùmenes de sas istradas (TTS)</string>
+    <string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sos caminos, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s’autovelox, sos lìmites de lestresa.</string>
+    <string name="speak_street_names">Nùmenes de sos caminos (TTS)</string>
     <string name="speak_speed_limit">Lìmites de lestresa</string>
     <string name="speak_cameras">Autovelox</string>
     <string name="speak_traffic_warnings">Avisos de tràfficu</string>
@@ -161,8 +161,8 @@
     <string name="settings_preset_descr">Issèbera unu profilu de impreu cun impostatziones pessonalizadas pro sa mapa e su nàvigu.</string>
     <string name="destination_point">Destinatzione %1$s</string>
     <string name="context_menu_item_destination_point">Imposta comente destinatzione</string>
-    <string name="please_select_address">Issèbera in antis sa tzitade o s’istrada</string>
-    <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas tzitades prus a curtzu</string>
+    <string name="please_select_address">Issèbera in antis sa tzitade o su caminu</string>
+    <string name="search_street_in_neighborhood_cities">Chirca sos caminos in sas tzitades prus a curtzu</string>
     <string name="intermediate_items_sort_return">Òrdine otimizadu pro sas tapas intermèdias de s’andala dae sa positzione atuale a sa destinatzione.</string>
     <string name="intermediate_items_sort_by_distance">Cusserta ghenna a ghenna</string>
     <string name="local_osm_changes_backup_successful">Documentu de modìfica OSM %1$s creadu</string>
@@ -201,7 +201,7 @@
     <string name="cancel_navigation">Firma su nàvigu</string>
     <string name="clear_destination">Iscantzella sa destinatzione</string>
     <string name="download_using_mobile_internet">Non ses connessu a su WiFi. Boles sighire a iscarrigare impreende sa connessione a ìnternet atuale?</string>
-    <string name="street_name">Nùmene istrada</string>
+    <string name="street_name">Nùmene de su caminu</string>
     <string name="hno">Nùmeru tzivicu</string>
     <string name="website">Situ web</string>
     <string name="phone">Telèfonu</string>
@@ -290,10 +290,10 @@
 \nSos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora in subra de Terra, su satèllite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de cooperatzione intre NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giapone, e su sistema ispatziale giaponesu (J-spacesystems).</string>
     <string name="srtm_plugin_name">Curvas de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
-    <string name="download_roads_only_item">Petzi istradas</string>
+    <string name="download_roads_only_item">Caminos ebbia</string>
     <string name="download_srtm_maps">Curvas de livellu</string>
     <string name="download_regular_maps">Mapas regulares</string>
-    <string name="download_roads_only_maps">Mapas cun petzi istradas</string>
+    <string name="download_roads_only_maps">Mapas cun caminos ebbia</string>
     <string name="rendering_attr_noAdminboundaries_name">Làcanas</string>
     <string name="rendering_attr_noAdminboundaries_description">Cua sas làcanas regionales (livellos amministrativos 5–9).</string>
     <string name="map_widget_max_speed">Lìmite de lestresa</string>
@@ -304,16 +304,16 @@
     <string name="voice_stream_voice_call">Àudio mutidas bogales (firmat fintzas sa mùsica)</string>
     <string name="voice_stream_notification">Àudio notìficas</string>
     <string name="voice_stream_music">Àudio media/mùsica</string>
-    <string name="rendering_attr_showRoadMaps_description">Issèbera cando ammustrare mapas cun petzi sas istradas:</string>
-    <string name="rendering_attr_showRoadMaps_name">Mapas cun petzi istradas</string>
+    <string name="rendering_attr_showRoadMaps_description">Issèbera cando ammustrare mapas cun sos caminos ebbia:</string>
+    <string name="rendering_attr_showRoadMaps_name">Mapas cun caminos ebbia</string>
     <string name="safe_mode_description">Allue s’aplicatzione in modalidade segura (impreende Android, prus lentu, imbetzes de su còdighe nativu).</string>
     <string name="safe_mode">Modalidade segura</string>
     <string name="native_library_not_running">S’aplicatzione est traballende in modalidade segura (la podes istudade in sas \'Impostatziones\').</string>
     <string name="background_service_is_enabled_question">Su servitziu OsmAnd de isfundu est galu in esecutzione. Boles firmare fintzas custu?</string>
     <string name="close_changeset">Serra sas modìficas</string>
     <string name="zxing_barcode_scanner_not_found">S’aplicatzione ZXing Barcode Scanner non est installada. La boles chircare in su Market?</string>
-    <string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sas istradas:</string>
-    <string name="rendering_attr_roadColors_name">Ischema de colores de sas istradas</string>
+    <string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sos caminos:</string>
+    <string name="rendering_attr_roadColors_name">Ischema de colores de sos caminos</string>
     <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
     <string name="enable_plugin_monitoring_services">"Abìlita s’estensione de registratzione biàgios pro impreare sos servìtzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
     <string name="non_optimal_route_calculation">Càlcula un’àndala, s’in casu mai fintzas non primorosa, pro sas distantzias longas</string>
@@ -330,11 +330,11 @@
     <string name="replace_destination_point">Remplasa sa destinatzione</string>
     <string name="new_destination_point_dialog">Tenes giai una destinatzione impostada:</string>
     <string name="shared_string_target_points">Itineràriu</string>
-    <string name="intermediate_point_too_far">Sa tapa %1$s est tropu indedda dae s’istrada prus a curtzu.</string>
+    <string name="intermediate_point_too_far">Sa tapa %1$s est tropu indedda dae su caminu prus a curtzu.</string>
     <string name="arrived_at_intermediate_point">Ses arribadu a sa tapa intermèdia</string>
     <string name="context_menu_item_intermediate_point">Annanghe·la comente tapa intermèdia</string>
     <string name="map_widget_intermediate_distance">Tapa intermèdia</string>
-    <string name="ending_point_too_far">Puntu finale tropu indedda dae s’istrada prus a curtzu.</string>
+    <string name="ending_point_too_far">Puntu finale tropu indedda dae su caminu prus a curtzu.</string>
     <string name="add_tag">Annanghe etichetta</string>
     <string name="btn_advanced_mode">Modalidade avantzada…</string>
     <string name="poi_filter_parking">Parchezu</string>
@@ -355,8 +355,8 @@
     <string name="avoid_motorway">Istense sas autostradas</string>
     <string name="auto_zoom_map_descr">Ismanniamentu mapa relativu a sa lestresa (si sa mapa est sincronizzata cun sa positzione currente).</string>
     <string name="auto_zoom_map">Ismanniamentu automàticu mapa</string>
-    <string name="snap_to_road_descr">Arrea sa positzione in subra de sas istradas durante su nàvigu.</string>
-    <string name="snap_to_road">Arrea in subra de sas istradas</string>
+    <string name="snap_to_road_descr">Arrea sa positzione in subra de sos caminos durante su nàvigu.</string>
+    <string name="snap_to_road">Arrea in subra de sos caminos</string>
     <string name="interrupt_music_descr">Sos annùntzios vocales ponent sa mùsica in pàusa, imbetzes de li andare petzi in subra.</string>
     <string name="interrupt_music">Firma sa mùsica</string>
     <string name="osmand_play_title_30_chars">OsmAnd Mapas &amp; Nàvigu</string>
@@ -392,7 +392,7 @@
     <string name="gpx_monitoring_stop">Firma sa registratzione GPX</string>
     <string name="gpx_start_new_segment">Inghitza unu segmentu nou</string>
     <string name="rendering_attr_hideBuildings_name">Edifìtzios</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Istradas non carràbiles</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Caminos non carràbiles</string>
     <string name="rendering_attr_hideText_name">Testu</string>
     <string name="rendering_attr_hideWoodScrubs_name">Padentes e buschedos</string>
     <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae s\'ismanniamentu 15</string>
@@ -400,8 +400,8 @@
     <string name="rendering_attr_lessDetailed_name">Minujas de mancu</string>
     <string name="rendering_attr_hideAccess_name">Restritziones de atzessu</string>
     <string name="rendering_attr_showAccess_name">Ammustra restritziones de atzessu e pedàgios</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sas istradas</string>
-    <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sas istradas</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sos caminos</string>
+    <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sos caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Ammustra sas àndalas pro bitzicleta</string>
     <string name="no_index_file_to_download">Nudda de iscarrigare, pro praghere còmpida sa connessione ìnternet.</string>
     <string name="select_index_file_to_download">No est istadu agatadu nudda. Si no agatades sa zona vostra la podies ingendrare bois (bie https://osmand.net).</string>
@@ -462,10 +462,10 @@
     <string name="map_widget_renderer">Istile de sa mapa</string>
     <string name="layer_map_appearance">Cunfigura s’ischermu</string>
     <string name="show_lanes">Corsias</string>
-    <string name="avoid_unpaved">Instransi sas istradas no asfaltadas</string>
+    <string name="avoid_unpaved">Instransi sos caminos no asfaltados</string>
     <string name="avoid_ferries">Istransi sos traghetos</string>
     <string name="avoid_in_routing_title">Istransi…</string>
-    <string name="avoid_in_routing_descr">Istransi pro es. sas istradas a pagamentu, isterradas, traghetos.</string>
+    <string name="avoid_in_routing_descr">Istransi pro es. sos caminos a pagamentu, sos isterrados, sos traghetos.</string>
     <string name="map_widget_fluorescent">Camineras fluorescentes</string>
     <string name="map_widget_show_ruler">Righellu</string>
     <string name="map_widget_view_direction">Diretzione de sa visuale</string>
@@ -530,7 +530,7 @@
     <string name="update_poi_is_not_available_for_zoom">Ismanniende podes agiornare sos PDI</string>
     <string name="map_widget_vector_attributes">Caraterìsticas de su disinnu</string>
     <string name="screen_is_locked">Incarca s’icona de su luchete pro isblocare s’ischermu</string>
-    <string name="map_widget_top_text">Nùmene de s’istrada</string>
+    <string name="map_widget_top_text">Nùmene de su caminu</string>
     <string name="map_widget_config">Cunfigura s’ischermu</string>
     <string name="map_widget_back_to_loc">In ue so</string>
     <string name="map_widget_lock_screen">Arrea s’ischermu</string>
@@ -552,7 +552,7 @@
     <string name="bg_service_interval">Imposta s’intervallu de ischidada:</string>
     <string name="show_cameras">Autovelox</string>
     <string name="show_traffic_warnings">Lìmites de lestresa</string>
-    <string name="avoid_toll_roads">Istransi sas istradas a pedàgiu</string>
+    <string name="avoid_toll_roads">Istransi sos caminos a pedàgiu</string>
     <string name="continue_follow_previous_route_auto">S\'ùrtimu nàvigu no est istadu acabbadu. Sighire cun cussu? (%1$s segundos)</string>
     <string name="route_updated_loc_found">Isetende sa positzione pro calculare s\'àndala</string>
     <string name="osmand_parking_hours">Oras</string>
@@ -564,7 +564,7 @@
     <string name="native_app_allocated_memory_descr">Memòria nativa totale allocada dae s’aplicu %1$s MB (Dalvik %2$s MB, àteru %3$s MB).
 Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memòria nativa locale</string>
-    <string name="starting_point_too_far">Puntu de mòida tropu distante dae s’istrada prus a curtzu.</string>
+    <string name="starting_point_too_far">Puntu de mòida tropu distante dae su caminu prus a curtzu.</string>
     <string name="shared_location">Positzione cumpartzida</string>
     <string name="osmand_parking_event">Piga sa màchina dae su parchègiu</string>
     <string name="osmand_parking_warning">Atentzione</string>
@@ -1126,7 +1126,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="update_poi_no_offline_poi_index">Non sunt disponìbiles datos non in lìnia de sos PDI de cust\'àrea</string>
     <string name="context_menu_item_update_map_confirm">Agiornare sos datos locales dae Ìnternet?</string>
     <string name="search_history_city">Tzitade: {0}</string>
-    <string name="search_history_street">Istrada: {0}, {1}</string>
+    <string name="search_history_street">Carrera: {0}, {1}</string>
     <string name="search_history_int_streets">Rugrada: {0} x {1} in {2}</string>
     <string name="search_history_building">Edifìtzios: {0}, {1}, {2}</string>
     <string name="favorite">Preferidu</string>
@@ -1138,7 +1138,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="searching">Chirca…</string>
     <string name="searching_address">Chirca indiritzu…</string>
     <string name="search_osm_nominatim">Chirca indiritzu cun OSM Nominatim</string>
-    <string name="hint_search_online">Chirca in lìnia: nùmeru tzìvicu, istrada, tzitade</string>
+    <string name="hint_search_online">Chirca in lìnia: nùmeru tzìvicu, carrera, tzitade</string>
     <string name="search_offline_address">Chene lìnia</string>
     <string name="search_online_address">Ìnternet</string>
     <string name="max_level_download_tile">Max ismanniamentu in lìnia</string>
@@ -1158,7 +1158,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="fav_points_not_exist">Non bi sunt preferidos</string>
     <string name="update_existing">Remplasa</string>
     <string name="only_show">Ammustra àndala</string>
-    <string name="follow">Avia nàvigu</string>
+    <string name="follow">Incumintza cun sa ghia</string>
     <string name="mark_final_location_first">Ischerta in antis una destinatzione</string>
     <string name="get_directions">Indicatziones</string>
     <string name="opening_hours">Oràrios pro abèrrere</string>
@@ -1166,9 +1166,9 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="closing_changeset">Serradura modìficas…</string>
     <string name="commiting_node">Imbiende su nodu…</string>
     <string name="converting_names">Cunvertende nùmenes locales/nùmenes inglesos…</string>
-    <string name="loading_streets_buildings">Carrigamentu istradas/edifìtzios…</string>
+    <string name="loading_streets_buildings">Carrigamentu carreras/edifìtzios…</string>
     <string name="loading_postcodes">Carrigamentu CAP…</string>
-    <string name="loading_streets">Carrigamentu istradas…</string>
+    <string name="loading_streets">Carrigamentu carreras…</string>
     <string name="loading_cities">Carrigamentu tzitades…</string>
     <string name="error_occurred_saving_gpx">Impossìbile sarvare su documentu GPX</string>
     <string name="error_calculating_route">Impossìbile calculare s\'àndala</string>
@@ -1207,7 +1207,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="app_settings">Impostatziones aplicatzione</string>
     <string name="search_address">Chirca indiritzu</string>
     <string name="choose_building">Issèbera nùmeru tzìvicu</string>
-    <string name="choose_street">Issèbera s’istrada</string>
+    <string name="choose_street">Issèbera sa carrera</string>
     <string name="choose_city">Issèbera sa tzitade o su cap</string>
     <string name="ChooseCountry">Issèbera s’istadu</string>
     <string name="map_view_3d_descr">Abìlita sa bisura 3D de sa mapa.</string>
@@ -1227,7 +1227,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="search_activity">Chirca</string>
     <string name="searchpoi_activity">Issèbera PDI</string>
     <string name="search_POI_level_btn">Agàtane àteros</string>
-    <string name="incremental_search_street">Chirca istrada in manera incrementale</string>
+    <string name="incremental_search_street">Chirca de sa carrera in manera incrementale</string>
     <string name="incremental_search_building">Chirca indiritzu in manera incrementale</string>
     <string name="choose_available_region">Chirca sa regione dae sa lista</string>
     <string name="choose_intersected_street">Chirca rucrada</string>
@@ -1247,7 +1247,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="search_address_top_text">Ischerta s’indiritzu</string>
     <string name="search_address_region">Regione</string>
     <string name="search_address_city">Tzitade</string>
-    <string name="search_address_street">Istrada</string>
+    <string name="search_address_street">Carrera</string>
     <string name="search_address_building">Tzìvicu</string>
     <string name="search_address_building_option">Tzìvicu</string>
     <string name="search_address_street_option">Rucrada</string>
@@ -1296,7 +1296,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="av_camera_pic_size_descr">Ischerta sas dimensiones de sas fotografias de sa fotocàmera interna.</string>
     <string name="navigation_intent_invalid">Formatu non bàlidu: %s</string>
     <string name="show_more_map_detail">Ammustra prus minujas in sa mapa</string>
-    <string name="show_more_map_detail_descr">Ammustra carchi minuja de sas mapas vetoriales (istradas etc.) fintzas a sos livellos de ismanniamentu prus bassos.</string>
+    <string name="show_more_map_detail_descr">Ammustra carchi minuja de sas mapas vetoriales (caminos etc.) fintzas a sos livellos de ismanniamentu prus bassos.</string>
     <string name="show_route">Minujas de s\'àndala</string>
     <string name="use_high_res_maps_descr">Non allonghiare (ne inghelare) sos tasseddos de sa mapa in sos dispositivos a carchesa arta.</string>
     <string name="background_router_service_descr">Arrastat sa positzione tua cando s’ischermu est istudadu.</string>
@@ -1308,8 +1308,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_all">Totus</string>
     <string name="index_tours">Itineràrios</string>
     <string name="record_plugin_description">Custa estensione ativat sa funtzionalidade de registratzione de sas rastas tuas carchende su pursante in s’ischermu de sa mapa e ammustrat sas impostatziones pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreende unu servìtziu web. 
-\n
-\nSas rastas registradas podent èssere cumpartzidas cun sos amigos tuos o èssere impreadas pro cuntribuire a OSM. Sos atletas podent impreare sas rastas pro compidare sos allenamentos issoro. Carchi anàlisi de base podet èssere fata deretamente in OsmAnd, comente tempus de giru, lestresa mèdia etc., e sas rastas podent, est craru, èssere analizadas fintzas prus a tardu cun ainas estèrnas de anàlisi.</string>
+\n 
+\nSas rastas registradas podent èssere cumpartzidas cun sos amigos tuos o èssere impreadas pro cuntribuire a OSM. Sos atletas podent impreare sas rastas pro compidare sos allenamentos issoro. Carchi anàlisi de base podet èssere fata deretamente in OsmAnd, comente tempus de giru, lestresa mèdia etc., e sas rastas podent, est craru, èssere analizadas fintzas prus a tardu cun ainas de anàlisi estèrnas.</string>
     <string name="record_plugin_name">Registratzione biàgios</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1359,7 +1359,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="rendering_attr_tramTrainRoutes_name">Àndalas tram e trenu</string>
     <string name="wake_on_voice">Allughe s’ischermu</string>
     <string name="wake_on_voice_descr">Allughe s’ischermu cando b\'est una bortada a curtzu.</string>
-    <string name="impassable_road">Istransi istradas…</string>
+    <string name="impassable_road">Istransi caminos…</string>
     <string name="rendering_category_hide">Cua</string>
     <string name="shared_string_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s tenet bisòngiu de custa autorizatzione pro istudare s’ischermu pro sa funtzionalidade de rispàrmiu energèticu.</string>
@@ -1387,11 +1387,11 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="dash_download_msg">As iscarrigadu %1$s mapas</string>
     <string name="dash_download_new_one">Iscàrriga una mapa noa</string>
     <string name="dash_download_manage">Amministra</string>
-    <string name="rendering_attr_roadStyle_name">Istile disinnu de sas istradas</string>
+    <string name="rendering_attr_roadStyle_name">Istile disinnu de sos caminos</string>
     <string name="rendering_value_default_name">Predefinidu</string>
     <string name="rendering_value_orange_name">Arantzu</string>
-    <string name="rendering_value_germanRoadAtlas_name">Atlante de sas istradas tedescas</string>
-    <string name="rendering_value_americanRoadAtlas_name">Atlante de sas istradas americanas</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlante de sos caminos tedescos</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlante de sos caminos americanos</string>
     <string name="routing_attr_no_new_routing_name">No impreare su càlculu de s’àndala v1.9</string>
     <string name="routing_attr_no_new_routing_description">No impreare su càlculu de s’àndala v1.9.</string>
     <string name="traffic_warning_railways">Atraessamentu de sa ferrovia</string>
@@ -1400,7 +1400,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="show_pedestrian_warnings">Atraessamentos pedonales</string>
     <string name="speak_pedestrian">Atraessamentos pedonales</string>
     <string name="navigation_over_track">Incumentzare su nàvigu in sa rasta?</string>
-    <string name="avoid_roads_msg">Càmbia s’àndala ischertende sas istradas de istransire</string>
+    <string name="avoid_roads_msg">Càmbia s’àndala ischertende sos caminos de istransire</string>
     <string name="save_track_to_gpx_globally_headline">Registratzione de sa rasta a segus de rechesta</string>
     <string name="settings_privacy">Privadesa</string>
     <string name="enable_proxy_title">Abìlita unu proxy HTTP</string>
@@ -1434,7 +1434,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="free">Lìbera %1$s</string>
     <string name="device_memory">Memòria dispositivu</string>
     <string name="rendering_attr_pisteRoutes_name">Pistas de iscì</string>
-    <string name="roads_only">Istradas ebbia</string>
+    <string name="roads_only">Caminos ebbia</string>
     <string name="watch">Relògiu</string>
     <string name="notes">Notas</string>
     <string name="online_map">Mapa in lìnia</string>
@@ -1449,11 +1449,11 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="plugin_ski_descr">Custa estensione pro OsmAnd ti frunit sas minujas de sas pistas de iscì, de fundu, alpinas e de àtera casta, de sas funivias e de sas isciovias. Sas camineras e sas pistas sunt coloradas pro dificultade, e ammustradas in unu istile de mapa particulare, \'Ierru\', chi s\'assimigiat a unu paesaggiu coloradu dae sa neve de s\'ierru. 
 \n
 \nAlluende custa vista s’istile mapa at a divènnere \'Ierru e iscì\', ammustrende totu sas caraterìsticas de s’iscenàriu in sas cunditziones de s’ierru. Custa vista podet èssere furriada istudende·la inoghe torra o cambiende s’\'Istile mapa\' in \'Cunfigura mapa\'.</string>
-    <string name="plugin_touringview_descr">Alluende custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas. 
+    <string name="plugin_touringview_descr">Allughende custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas. 
 \n 
-\nCusta vista frunit, pro cada livellu de ismanniamentu (zoom), su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu). 
+\nCusta vista frunit, pro cada livellu de ismanniamentu (zoom), su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sos caminos e de sas àndalas e sinnos de orientamentu). 
 \n 
-\nRapresentat fintzas totu sas castas de istradas in manera crara tramite colores diferentes, agiudende meda, pro nàrrere, sos chi ghiant veìculos mannos meda. 
+\nRapresentat fintzas totu sas castas de caminos in manera crara impreende colores diferentes, agiudende meda, pro nàrrere, sos chi ghiant veìculos mannos meda. 
 \n 
 \nE frunit optziones ispetziales de nàvigu, comente sa visualizatzione de sas àndalas pro sas bitzicletas e s\'alpinismu. 
 \n 
@@ -1500,7 +1500,7 @@ Lon %2$s</string>
     <string name="osmand_parking_overdue">Iscadidu</string>
     <string name="delay_to_start_navigation_descr">Dislinda su tempus de permanèntzia in s\'ischermu de pianificatzione de s\'àndala, in antis de su cumintzu de su nàvigu.</string>
     <string name="shared_string_go">Bae</string>
-    <string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala…</string>
+    <string name="delay_to_start_navigation">Incumintza sa ghia passu-pro-passu a pustis de…</string>
     <string name="confirmation_to_clear_history">Iscantzellare s’istòria?</string>
     <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìfica(s) in OSM. Seguru ses?</string>
     <string name="osm_changes_added_to_local_edits">Mòdificas OSM annantas a sas modìficas locales</string>
@@ -1535,12 +1535,12 @@ Lon %2$s</string>
     <string name="application_dir_change_warning3">Cheres copiare in sa destinatzione noa fintzas sos documentos de sos datos de OsmAnd?</string>
     <string name="storage_directory_internal_app">Memòria interna de s\'aplicatzione</string>
     <string name="rendering_value__name">Predefinidu</string>
-    <string name="rendering_value_highContrastRoads_name">Istradas a cuntrastu artu</string>
+    <string name="rendering_value_highContrastRoads_name">Caminos a cuntrastu artu</string>
     <string name="storage_directory_multiuser">Memòria multi-impreadore</string>
     <string name="storage_directory">Memòria de sas mapas</string>
     <string name="rendering_attr_hideHouseNumbers_name">Nùmeros de sas domos</string>
     <string name="routing_attr_height_name">Lìmite de artària</string>
-    <string name="routing_attr_height_description">Dislinda s’artària de su veìculu permitida pro sas istradas.</string>
+    <string name="routing_attr_height_description">Dislinda s’artària de su veìculu permìtida pro sos caminos.</string>
     <string name="routing_attr_avoid_borders_description">Non rugrare sas fronteras intre sos istados</string>
     <string name="use_fast_recalculation">Recàlculu intelligente de s’àndala</string>
     <string name="use_fast_recalculation_desc">Pro biàgios longos, torra a calculare petzi su cantu initziale de s’àndala.</string>
@@ -1667,7 +1667,7 @@ Lon %2$s</string>
     <string name="favourites_edit_dialog_title">Informatziones de su preferidu</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="favourites_context_menu_add">Annanghe unu preferidu</string>
-    <string name="roads">Istradas</string>
+    <string name="roads">Caminos</string>
     <string name="shared_string_trip_recording">Registratzione biàgiu</string>
     <string name="shared_string_navigation">Nàvigu</string>
     <string name="osmand_running_in_background">Esègui in isfondu</string>
@@ -1704,7 +1704,7 @@ Lon %2$s</string>
     <string name="favorite_category_dublicate_message">Pro praghere imprea unu nùmene de categoria chi no esistat giai.</string>
     <string name="favorite_category_name">Nùmene de sa categoria</string>
     <string name="favorite_category_add_new_title">Annanghe una categoria noa</string>
-    <string name="confirm_download_roadmaps">Sa mapa cun petzi sas istradas non serbit, proite tenes giai cussa istandard (intrea). La cheres iscarrigare su matessi?</string>
+    <string name="confirm_download_roadmaps">Sa mapa cun sos caminos ebbia non serbit, proite tenes giai cussa istandard (intrea). La cheres iscarrigare su matessi\?</string>
     <string name="value_downloaded_of_max">%1$.1f dae %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Agiorna totu (%1$s MB)</string>
@@ -1781,7 +1781,7 @@ Lon %2$s</string>
     <string name="osm_save_offline">Sarva in sa memòria (impreu chene lìnia)</string>
     <string name="rendering_attr_currentTrackColor_description">Colore GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largària GPX</string>
-    <string name="rendering_attr_roadStyle_description">Istile pro sas istradas</string>
+    <string name="rendering_attr_roadStyle_description">Istile pro sos caminos</string>
     <string name="dashboard_or_drawer_title">Pannellu o menù de controllu</string>
     <string name="dashboard_or_drawer_description">Podes isseberare sa comente gestire s\'aplicatzione, dae su pannellu de controllu flessìbile o dae su menù istàticu. As a pòdere semper cambiare s’issèbera tua in sas impostatziones de su pannellu.</string>
     <string name="use_dashboard_btn">Imprea su pannellu de controllu</string>
@@ -1817,7 +1817,7 @@ Lon %2$s</string>
     <string name="no_microphone_permission">S’aplicatzione no est autorizada a impreare su micròfonu.</string>
     <string name="select_voice_provider">Ischerta sa boghe de ghia</string>
     <string name="select_voice_provider_descr">Ischerta o iscàrriga sa boghe de ghia pro sa limba tua.</string>
-    <string name="impassable_road_desc">Ischerta sas istradas chi cheres istransire durante su nàvigu.</string>
+    <string name="impassable_road_desc">Ischerta sos caminos chi cheres istransire durante su nàvigu.</string>
     <string name="shared_string_sound">Sonu</string>
     <string name="live_updates">Agiornamentos in tempus reale</string>
     <string name="available_maps">Mapas disponìbiles</string>
@@ -1918,7 +1918,7 @@ Lon %2$s</string>
     <string name="shared_string_move_up">Moe ↑</string>
     <string name="shared_string_move_down">Moe ↓</string>
     <string name="finish_navigation">Concrui su nàvigu</string>
-    <string name="avoid_road">Istransi s\'istrada</string>
+    <string name="avoid_road">Istransi su caminu</string>
     <string name="storage_directory_shared">Memòria cumpartzida</string>
     <string name="full_report">Raportu cumpridu</string>
     <string name="open_street_map_login_and_pass">Nùmene impreadore e crae de OpenStreetMap</string>
@@ -1952,7 +1952,7 @@ Lon %2$s</string>
     <string name="access_no_destination">Destinatzione non definida</string>
     <string name="map_widget_magnetic_bearing">Bùssola magnètica</string>
     <string name="map_widget_bearing">Bùssola relativa</string>
-    <string name="access_disable_offroute_recalc">Non torrare a calculare s\'àndala si ses essidu dae s\'istrada</string>
+    <string name="access_disable_offroute_recalc">Non torrare a calculare s\'àndala si ses essidu dae su caminu</string>
     <string name="access_disable_offroute_recalc_descr">Perunu ricàlculu automàticu de s\'àndala cando nde ses essidu.</string>
     <string name="access_disable_wrong_direction_recalc">Non cambiare s\'àndala si sa diretzione est isballiada</string>
     <string name="access_disable_wrong_direction_recalc_descr">Perunu ricàlculu automàticu de s\'àndala si ti ses moende in sa diretzione isballiada.</string>
@@ -2066,7 +2066,7 @@ Lon %2$s</string>
     <string name="rendering_value_light_brown_name">Castàngiu craru</string>
     <string name="rendering_value_dark_brown_name">Castàngiu iscuru</string>
     <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sas curvas de livellu</string>
-    <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale istradale</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale de su caminu</string>
     <string name="trip_rec_notification_settings">Abìlita sa registratzione biàgios lestra</string>
     <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de incumintzare a registrare su biàgiu.</string>
     <string name="shared_string_notifications">Notìficas</string>
@@ -2186,7 +2186,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_height_obstacles_name">Imprea sos datos de s\'artària</string>
     <string name="routing_attr_height_obstacles_description">Fatore pro s\'artària de su terrinu (dae datos SRTM, ASTER e EU-DEM).</string>
     <string name="routing_attr_driving_style_name">Istile de ghia</string>
-    <string name="route_altitude">Artària de s\'istrada</string>
+    <string name="route_altitude">Artària de su caminu</string>
     <string name="altitude_descent">Falada</string>
     <string name="altitude_ascent">Artziada</string>
     <string name="altitude_range">Intervallu de artària</string>
@@ -2219,7 +2219,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Terrinu in paris</string>
     <string name="routing_attr_driving_style_speed_name">Àndalas prus curtzas</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
-    <string name="routing_attr_driving_style_safety_name">Privilègia sas istradas segundàrias</string>
+    <string name="routing_attr_driving_style_safety_name">Privilègia sos caminos segundàrios</string>
     <string name="routing_attr_relief_smoothness_factor_name">Ischerta su valore de variatzione de s\'artària</string>
     <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione a pagamentu de OsmAnd.</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
@@ -2308,8 +2308,8 @@ Pro praghere iscrie su còdighe intreu</string>
 \n• Datos OSM disponìbiles pro istadu o regione 
 \n• PDI Wikipedia, ispantosos pro su turismu • Iscarrigamentos de badas illimitados, diretamente dae s\'aplicatzione 
 \n• Mapas vetoriales cumpatas agiornadas a su mancu una borta a su mese 
-\n
-\n• Issèbera intra sos datos intreos pro sas regiones o petzi sos de sas istradas (esèmpiu: totu su Giapone est 700 MB, sas istradas ebbia sunt 200 MB)</string>
+\n 
+\n• Issèbera intra sos datos intreos pro sas regiones o petzi sos de sos caminos (esèmpiu: totu su Giapone est 700 MB, sos caminos ebbia sunt 200 MB)</string>
     <string name="osmand_plus_extended_description_part5">Funtzionalidades pro sa seguresa 
 \n• Muda automàtica optzionale de sa vista die/note 
 \n• Visulaizatzione automàtica de su lìmite de lestresa, cun avisos cando lu barigas 
@@ -2374,7 +2374,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="type_postcode">Iscrie su còdighe postale</string>
     <string name="select_postcode">Issèbera su còdighe postale</string>
     <string name="type_address">Iscrie s\'indiritzu</string>
-    <string name="select_street">Ischerta sas istradas</string>
+    <string name="select_street">Ischerta sos caminos</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="shared_string_overview">Vista generale</string>
     <string name="animate_my_location">Ànima sa positzione mea</string>
@@ -2383,7 +2383,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="change_color">Càmbia colore</string>
     <string name="edit_name">Acontza su nùmene</string>
     <string name="save_poi_too_many_uppercase">In su nùmene bi sunt tropas lìteras maiùscolas. Boles sighire?</string>
-    <string name="route_is_too_long_v2">Pro praghere annanghe carchi destinatzione intermèdia si in 10 minutos s\'àndala no at a èssere pronta pro custu tratu longu de istrada.</string>
+    <string name="route_is_too_long_v2">Pro praghere annanghe carchi destinatzione intermèdia si in 10 minutos s\'àndala no at a èssere pronta pro custu tratu longu de caminu.</string>
     <string name="display_zoom_level">Livellu ismmaniamentu ischermu: %1$s</string>
     <string name="srtm_color_scheme">Ischema de colores</string>
     <string name="show_from_zoom_level">Ammustra dae su livellu de ismanniamentu</string>
@@ -2405,14 +2405,14 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="increase_search_radius">Ismànnia su raju de chirca</string>
     <string name="nothing_found">Nudda de agatadu</string>
     <string name="nothing_found_descr">Muda sos critèrios de chirca o a ismànnia su raju de chirca.</string>
-    <string name="private_access_routing_req">Sa destinatzione tua est positzionada in un\'àrea cun atzessu privadu. Cheres abilitare s\'atzessu a sas istradas privadas pro custu biàgiu?</string>
+    <string name="private_access_routing_req">Sa destinatzione tua est positzionada in un\'àrea cun atzessu privadu. Cheres abilitare s\'atzessu a sos caminos privados pro custu biàgiu\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget pro Mapillary</string>
     <string name="mapillary_widget_descr">Permitit de contribuire in manera lestra e fàtzile a Mapillary.</string>
-    <string name="mapillary_descr">Fotografias a livellu de sas istradas in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
+    <string name="mapillary_descr">Fotografias a livellu de sos caminos in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
     <string name="shared_string_add_photos">Annanghe fotografias</string>
-    <string name="mapillary_action_descr">Contribui cun sas vistas tuas a livellu de s\'istrada pro mèdiu de Mapillary.</string>
-    <string name="plugin_mapillary_descr">Fotografias a livellu de s\'istrada pro totus. Iscoberi logos, collàbora, catura su mundu.</string>
+    <string name="mapillary_action_descr">Contribui cun sas vistas tuas a livellu de su caminu pro mèdiu de Mapillary.</string>
+    <string name="plugin_mapillary_descr">Fotografias a livellu de su caminu pro totus. Iscoberi logos, collàbora, catura su mundu.</string>
     <string name="online_photos">Fotografias in lìnia</string>
     <string name="no_photos_descr">Non tenimus fotografias pro custu logu.</string>
     <string name="open_mapillary">Aberi Mapillary</string>
@@ -2521,8 +2521,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="use_system_keyboard">Imprea su tecladu de sistema</string>
     <string name="fast_coordinates_input_descr">Issèbera su formadu de sas coordinadas. L\'as a pòdere semper cambiare dae sas \'Optziones\'.</string>
     <string name="fast_coordinates_input">Insertada lestra de sas coordinadas</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Istransi sas istradas de astra, sos bados</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Istransi sas istradas de astra e sos bados.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Istransi sos caminos de astra, sos bados</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Istransi sos caminos de astra e sos bados.</string>
     <string name="use_location">Imprea positzione</string>
     <string name="add_location_as_first_point_descr">Annanghe sa positzione tua comente primu puntu pro pranificare un\'àndala perfeta.</string>
     <string name="my_location">Positzione mea</string>
@@ -2540,7 +2540,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="context_menu_item_modify_note">Modìfica sa nota OSM</string>
     <string name="make_round_trip_descr">Annanghe una còpia de su puntu de incumintzu comente destinatzione.</string>
     <string name="make_round_trip">Faghe unu biàgiu tzirculare</string>
-    <string name="shared_string_road">Istrada</string>
+    <string name="shared_string_road">Caminu</string>
     <string name="show_map">Ammustra sa mapa</string>
     <string name="route_is_calculated">Àndala calculada</string>
     <string name="round_trip">Àndala tzirculare</string>
@@ -2769,14 +2769,14 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_full_description">Ammustra sa descritzione intrea</string>
     <string name="nautical_render_descr">Istile pro su nàvigu marìtimu e de sos rios. Caraterìsticas printzipales: pidagnos, faros, bias fluviales, lìnias e edifìtzios nàuticos, portos, servìtzios marìtimos, curvas de livellu marinas.</string>
     <string name="ski_map_render_descr">Istile pro s\'iscì. Caraterìsticas printzipales: pistas de iscì, funivias e àteras istruturas pro s\'iscì in una manera conveniente. Prus pagos ogetos de mapa secondàrios chi distraent.</string>
-    <string name="light_rs_render_descr">Istile simple e cun cuntrastu artu pro su nàvigu in màchina. Gentile pro sos ogros in sa modalidade noturna. Caraterìsticas printzipales: lìnias de livellu, istradas cun cuntrastu artu in colore arantzu, prus pagos ogetos de mapa secondàrios chi distraent.</string>
-    <string name="topo_render_descr">Istile cun cuntrastu artu disinnadu primariamente pro escursionismu o tziclismu. Legibilidade bona un\'illuminatzione esterna cumplessa. Caraterìsticas printzipales: istradas e ogetos naturales in cuntrastu artu, castas diferentes de àndalas, curvas de livellu cun impostatziones avantzadas, prus minujas in sos livellos de ismanniamentu currispondentes chi in s\'istile predefinidu. S\'optzione de integridade de sa superfìtzie ti permitit de distìnghere intre sas istradas cun calidades de sas superfìtzies diferentes. Peruna modalidade noturna.</string>
+    <string name="light_rs_render_descr">Istile simple e cun cuntrastu artu pro su nàvigu in màchina. Gentile pro sos ogros in sa modalidade noturna. Caraterìsticas printzipales: lìnias de livellu, caminos cun cuntrastu artu in colore arantzu, prus pagos ogetos de mapa secondàrios chi distraent.</string>
+    <string name="topo_render_descr">Istile cun cuntrastu artu disinnadu primariamente pro escursionismu o tziclismu. Legibilidade bona un\'illuminatzione esterna cumplessa. Caraterìsticas printzipales: caminos e ogetos naturales in cuntrastu artu, castas diferentes de àndalas, curvas de livellu cun impostatziones avantzadas, prus minujas in sos livellos de ismanniamentu currispondentes chi in s\'istile predefinidu. S\'optzione de integridade de sa superfìtzie ti permitit de distìnghere intre sos caminos cun calidades de sas superfìtzies diferentes. Peruna modalidade noturna.</string>
     <string name="mapnik_render_descr">Istile betzu de renderizatzione simigiante a cussu de \'Mapnik\'. Caraterìsticas printzipales: sos colores sunt simigiantes a s\'istile de \'Mapnik\'.</string>
-    <string name="default_render_descr">Istile de impreu generale. Renderizatzione semplificada pro tènnere mapas prus netas in sas tzitades cun un\'arta densidade de populatzione. Caraterìsticas printzipales: curvas de livellu, àndalas, calidades de sas superfìtzies, restritziones de atzessu, iscudos istradales, rapresentatzione de sas camineras sighende s\'iscala SAC, funtzionalidades pro sos isports de abba durche.</string>
-    <string name="touring_view_render_descr">Istile fatu a sa minuda pro su turismu. Incluit totu sas optziones de configuratzione de s\'istile predefinidu e, in prus: ammustrat totu sas minujas chi est possìbile ammustrare, in particulare totu sas istradas, camineras, e sas àteras maneras de biagiare. Faghet una distintzione crara intre totu sas castas de istrada, in una manera sìmile a medas atlantes pro su turismu. Tenet un\'ischema de colores a cuntrastu artu pro s\'impreu a s\'àera aberta, una modalidade pro sa die e una pro sa note.</string>
+    <string name="default_render_descr">Istile de impreu generale. Renderizatzione semplificada pro tènnere mapas prus netas in sas tzitades cun un\'arta densidade de populatzione. Caraterìsticas printzipales: curvas de livellu, àndalas, calidades de sas superfìtzies, restritziones de atzessu, iscudos de sos caminos, rapresentatzione de sas camineras sighende s\'iscala SAC, funtzionalidades pro sos isports de abba durche.</string>
+    <string name="touring_view_render_descr">Istile fatu a sa minuda pro su turismu. Incluit totu sas optziones de configuratzione de s\'istile predefinidu e, in prus: ammustrat totu sas minujas chi est possìbile ammustrare, in particulare totu sos caminos, sas camineras, e sas àteras maneras de biagiare. Faghet una distintzione crara intre totu sas castas de caminu, in una manera sìmile a medas atlantes pro su turismu. Tenet un\'ischema de colores a cuntrastu artu pro s\'impreu a s\'àera aberta, una modalidade pro sa die e una pro sa note.</string>
     <string name="shared_string_bookmark">Sinnalibru</string>
-    <string name="off_road_render_descr">Adatu pro s\'impreu durante sa ghia foras de sas istradas. Adatu pro s\'impreu cun mapas satellitares birdes comente suta-istratos. Caraterìsticas printzipales: grussesa de sas istradas printzipales minimada, grussesa de sas rastas, sas camineras, de sas pistas tziclàbiles e de sas àteras àndalas ismanniada. Basadu in subra de s\'istile topogràficu.</string>
-    <string name="unirs_render_descr">Modìfica de s\'istile predefinidu pro ismanniare su cuntrastu pro sas istradas pedonales e sas pistas tziclàbiles. Impreat sos colores de sa versione betza de Mapnik.</string>
+    <string name="off_road_render_descr">Adatu pro s\'impreu durante sa ghia foras de sos caminos. Adatu pro s\'impreu cun mapas satellitares birdes comente suta-istratos. Caraterìsticas printzipales: grussesa de sos caminos printzipales minimada, grussesa de sas rastas, sas camineras, de sas pistas tziclàbiles e de sas àteras àndalas ismanniada. Basadu in subra de s\'istile topogràficu.</string>
+    <string name="unirs_render_descr">Modìfica de s\'istile predefinidu pro ismanniare su cuntrastu pro sos caminos pedonales e sas pistas tziclàbiles. Impreat sos colores de sa versione betza de Mapnik.</string>
     <string name="access_intermediate_arrival_time">Ora de arrivu a sa tapa</string>
     <string name="map_widget_intermediate_time">Tempus de arrivu a sa tapa</string>
     <string name="shared_string_gpx_files">Documentos GPX</string>
@@ -2902,7 +2902,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="add_destination_query">In antis annanghe una destinatzione</string>
     <string name="shared_string_swap">Cuncàmbia</string>
     <string name="show_more">Ammustra àteru</string>
-    <string name="tracks_on_map">Rastas in sa mapa</string>
+    <string name="tracks_on_map">Rastas ammustradas</string>
     <string name="time_of_day">Ora de sa die</string>
     <string name="by_transport_type">Tràmite %1$s</string>
     <string name="step_by_step">Passu pro passu</string>
@@ -2932,4 +2932,51 @@ Pro praghere iscrie su còdighe intreu</string>
 \n</string>
     <string name="use_osm_live_public_transport_description">Abìlita su trasportu pùblicu pro sas modìficas de OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Trasportu pùblicu in OsmAnd Live</string>
+    <string name="transfers_size">%1$d tramudòngios</string>
+    <string name="add_start_and_end_points">Annanghe sos puntos de incumintzu e acabu</string>
+    <string name="route_add_start_point">Annaghe su puntu de incumintzu</string>
+    <string name="route_descr_select_start_point">Ischerta su puntu de incumintzu</string>
+    <string name="rendering_attr_surface_unpaved_name">Chene pamentu</string>
+    <string name="rendering_attr_surface_sand_name">Arena</string>
+    <string name="rendering_attr_surface_grass_name">Erba</string>
+    <string name="rendering_attr_surface_grass_paver_name">Pamentadore de erba</string>
+    <string name="rendering_attr_surface_ground_name">Terrinu (naturale)</string>
+    <string name="rendering_attr_surface_dirt_name">Terra</string>
+    <string name="rendering_attr_surface_mud_name">Ludu</string>
+    <string name="rendering_attr_surface_ice_name">Astra</string>
+    <string name="rendering_attr_surface_salt_name">Sale</string>
+    <string name="rendering_attr_surface_snow_name">Nie</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfaltu</string>
+    <string name="rendering_attr_surface_paved_name">Pamentadu</string>
+    <string name="rendering_attr_surface_concrete_name">Tzimentu</string>
+    <string name="rendering_attr_surface_sett_name">Pavè</string>
+    <string name="rendering_attr_surface_cobblestone_name">Impedradu</string>
+    <string name="rendering_attr_surface_paving_stones_name">Impedradu regulare</string>
+    <string name="rendering_attr_surface_pebblestone_name">Perdas de riu</string>
+    <string name="rendering_attr_surface_stone_name">Perda</string>
+    <string name="rendering_attr_surface_metal_name">Metallu</string>
+    <string name="rendering_attr_surface_wood_name">Linna</string>
+    <string name="rendering_attr_surface_gravel_name">Ghiàia</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Ghiàia fina</string>
+    <string name="rendering_attr_surface_compacted_name">Cumpatadu</string>
+    <string name="rendering_attr_smoothness_excellent_name">Primorosa</string>
+    <string name="rendering_attr_smoothness_good_name">Bona</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Intermèdia</string>
+    <string name="rendering_attr_smoothness_bad_name">Mala</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Mala meda</string>
+    <string name="rendering_attr_smoothness_horrible_name">Orrorosa</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Orrorosa a beru</string>
+    <string name="rendering_attr_smoothness_impassable_name">Inatzetàbile</string>
+    <string name="rendering_attr_highway_class_motorway_name">Autostrada</string>
+    <string name="rendering_attr_highway_class_state_road_name">Caminu istatale</string>
+    <string name="rendering_attr_highway_class_road_name">Caminu</string>
+    <string name="rendering_attr_highway_class_street_name">Carrera</string>
+    <string name="rendering_attr_highway_class_service_name">Servìtziu</string>
+    <string name="rendering_attr_highway_class_footway_name">Caminu pro pedones</string>
+    <string name="rendering_attr_highway_class_track_name">Rasta</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Caminu pro caddos</string>
+    <string name="rendering_attr_highway_class_steps_name">Iscalinos</string>
+    <string name="rendering_attr_highway_class_path_name">Caminera</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Pista tziclàbile</string>
+    <string name="rendering_attr_undefined_name">Non dessinidu</string>
 </resources>

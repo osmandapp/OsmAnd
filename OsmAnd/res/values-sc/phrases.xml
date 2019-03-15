@@ -95,7 +95,7 @@
     <string name="poi_city_wall">Murallas de sa tzitade</string>
     <string name="poi_lift_gate">Ponte levatòiu</string>
     <string name="poi_toll_booth">Casellu</string>
-    <string name="poi_traffic_calming_bump">Dossu istradale</string>
+    <string name="poi_traffic_calming_bump">Dossu de su caminu</string>
     <string name="poi_traffic_calming_hump">Dossu longu</string>
     <string name="poi_traffic_calming_chicane">Chicane</string>
     <string name="poi_traffic_signals">Lughe de stop</string>
@@ -603,7 +603,7 @@
     <string name="poi_club">Tzìrculu</string>
     <string name="poi_cafe_and_restaurant">Cafeterias e ristorantes</string>
     <string name="poi_shop_food">Butega alimentare e supermercadu</string>
-    <string name="poi_road_obstacle">Impèigu/ostàculu istradale</string>
+    <string name="poi_road_obstacle">Impèigu/ostàculu in su caminu</string>
     <string name="poi_accomodation">Allògiu</string>
     <string name="poi_smoking_area">Àrea fumatores</string>
     <string name="poi_piste_playground">Pista de iscì pro pitzinneddos</string>
@@ -654,7 +654,7 @@
     <string name="poi_fuel_e20">E20</string>
     <string name="poi_fuel_e85">E85</string>
     <string name="poi_fuel_biogas">Biogàs</string>
-    <string name="poi_junction">Giuntura istradale</string>
+    <string name="poi_junction">Giuntura de su caminu</string>
     <string name="poi_bell_tower">Campanile</string>
     <string name="poi_farmyard">Argiola</string>
     <string name="poi_landuse_railway">Àrea ferroviària</string>
@@ -1208,7 +1208,7 @@
     <string name="poi_pump_no">Chene pompa</string>
     <string name="poi_pump_yes">Eja</string>
     <string name="poi_building">Edifìtziu</string>
-    <string name="poi_information_guidepost">Indicadore istradale</string>
+    <string name="poi_information_guidepost">Indicadore de su caminu</string>
     <string name="poi_information_nature">Natura</string>
     <string name="poi_information_wildlife">Sinnale de informatziones: fàuna agreste</string>
     <string name="poi_information_tactile_model">Modellu tàtile</string>
@@ -2057,7 +2057,7 @@
     <string name="poi_resource_gas">Gas</string>
     <string name="poi_resource_gold">Oro</string>
     <string name="poi_resource_graphite">Grafite</string>
-    <string name="poi_resource_gravel">Ghiaia</string>
+    <string name="poi_resource_gravel">Ghiàia</string>
     <string name="poi_resource_gypsum">Ghisu</string>
     <string name="poi_resource_iron_ore">Minerales ferrosos</string>
     <string name="poi_resource_lead">Prumu</string>
@@ -2134,9 +2134,9 @@
     <string name="poi_shelter_type_field_shelter">Refùgiu de campu (pro animales)</string>
     <string name="poi_shelter_type_sun_shelter">Parasole (meriadòrgiu)</string>
     <string name="poi_tunnel_waterway">Galleria de abba</string>
-    <string name="poi_tunnel_car">Galleria istradale</string>
+    <string name="poi_tunnel_car">Galleria de su caminu</string>
     <string name="poi_tunnel_pedestrian">Galleria pedonale</string>
-    <string name="poi_bridge_car">Ponte istradale</string>
+    <string name="poi_bridge_car">Ponte de su caminu</string>
     <string name="poi_bridge_pedestrian">Ponte pedonale</string>
     <string name="poi_bridge_bicycle">Ponte pro bitzicletas</string>
     <string name="poi_bridge_waterway">Ponte de unu riu</string>
@@ -2450,10 +2450,10 @@
     <string name="poi_network">Retza</string>
     <string name="poi_government_legislative">Istitutzione legislativa</string>
     <string name="poi_visibility_house">Visibilidade: domo</string>
-    <string name="poi_visibility_street">Visibilidade: istrada</string>
+    <string name="poi_visibility_street">Visibilidade: carrera</string>
     <string name="poi_visibility_area">Visibilidade: àrea</string>
     <string name="poi_operational_status">Istadu operativu</string>
-    <string name="poi_post_street">Istrada</string>
+    <string name="poi_post_street">Carrera</string>
     <string name="poi_post_housenumber">Nùmeru tzìvicu</string>
     <string name="poi_payment_centre">Tzentru de pagamentu</string>
     <string name="poi_money_transfer">Tramudòngiu de dinare</string>
@@ -2801,9 +2801,9 @@
     <string name="poi_fire_hydrant_count">Nùmeru de idrantes</string>
     <string name="poi_fire_hydrant_flow_capacity">Capatzidade de flussu de s\'idrante</string>
     <string name="poi_fire_hydrant_position_green">In s\'erba</string>
-    <string name="poi_fire_hydrant_position_lane">In s\'istrada</string>
+    <string name="poi_fire_hydrant_position_lane">In su caminu</string>
     <string name="poi_fire_hydrant_position_parking_lot">In unu parchègiu</string>
-    <string name="poi_fire_hydrant_position_street">In s\'istrada</string>
+    <string name="poi_fire_hydrant_position_street">In sa carrera</string>
     <string name="poi_fire_hydrant_position_underground">Suta terra</string>
     <string name="poi_fire_hydrant_style_wsh">Istile de s\'idrante: wsh</string>
     <string name="poi_fire_hydrant_style_water_source_main">Printzipale</string>
@@ -3187,7 +3187,7 @@
     <string name="poi_motorcycle_type_scooter">Motorinu</string>
     <string name="poi_motorcycle_type_sportbike">Mototzicleta isportiva</string>
     <string name="poi_motorcycle_type_chopper">Chopper</string>
-    <string name="poi_motorcycle_type_offroad">Fora de istrada (Offroad)</string>
+    <string name="poi_motorcycle_type_offroad">Fora de su caminu (Offroad)</string>
     <string name="poi_motorcycle_type_dualsport">Dualsport (Enduro)</string>
     <string name="poi_motorcycle_type_standard">Istandard</string>
     <string name="poi_generator_output_electricity_no">Essida (eletritzidade): nono</string>
@@ -3344,7 +3344,7 @@
     <string name="poi_amperage">Amperàgiu</string>
     <string name="poi_charging_station_output">Essida de s\'istatzione de càrriga</string>
     <string name="poi_map_type_topo">Casta de mapa: topogràfica</string>
-    <string name="poi_map_type_street">Casta de mapa: istrada</string>
+    <string name="poi_map_type_street">Casta de mapa: carrera</string>
     <string name="poi_map_type_scheme">Casta de mapa: ischema</string>
     <string name="poi_map_type_toposcope">Casta de mapa: toposcòpica</string>
     <string name="poi_post_flats">Appartamentu</string>
@@ -3558,4 +3558,19 @@
     <string name="poi_generator_source_biomass">Mitza de energia: biomassa</string>
     <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Perìgulu</string>
+    <string name="poi_rtsa_scale_filter">Categoria de dificultade</string>
+    <string name="poi_rtsa_scale_nc">н/к</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+    <string name="poi_rtsa_scale_1a">1А</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1b">1Б</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
+    <string name="poi_rtsa_scale_2a">2А</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+    <string name="poi_rtsa_scale_2b">2Б</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
+    <string name="poi_rtsa_scale_3a">3А</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
+    <string name="poi_rtsa_scale_3b">3Б</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
 </resources>
