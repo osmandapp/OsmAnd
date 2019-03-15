@@ -2932,7 +2932,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Použitím tohto tlačidla zobrazíte alebo skryjete zvolené stopy GPX na mape</string>
     <string name="quick_action_gpx_tracks_hide">Skryť GPX stopy</string>
     <string name="quick_action_gpx_tracks_show">Zobraziť GPX stopy</string>
-    <string name="transfers_size">%1$d prestup(ov)</string>
+    <string name="transfers_size">%1$d prestup(y)</string>
     <string name="add_start_and_end_points">Pridať počiatočný a koncový bod</string>
     <string name="route_add_start_point">Pridať počiatočný bod</string>
     <string name="route_descr_select_start_point">Zvoliť počiatočný bod</string>
