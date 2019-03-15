@@ -607,7 +607,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 				!nightMode ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
 	}
 
-	private void buildSegmentItem(View view, final TransportRouteResultSegment segment, long startTime) {
+	private void buildSegmentItem(View view, final TransportRouteResultSegment segment,
+								  final TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double changeTime) {
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
 		final TransportStop startStop = stops.get(0);
@@ -632,7 +633,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		Drawable icon = getContentIcon(drawableResId);
 
 		Typeface typeface = FontCache.getRobotoMedium(app);
-		String timeText = OsmAndFormatter.getFormattedTime(startTime, false);
+		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
 		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
 		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -695,11 +696,13 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		buildCollapsableRow(stopsContainer, spannable, textType, true, collapsableView, null);
 
 		final TransportStop endStop = stops.get(stops.size() - 1);
-		long depTime = segment.depTime + arrivalTime;
+		int depTime = segment.depTime + arrivalTime;
 		if (depTime <= 0) {
-			depTime = startTime + arrivalTime;
+			depTime = startTime[0] + arrivalTime;
 		}
-		String textTime = OsmAndFormatter.getFormattedTime(depTime, false);
+		// TODO: fix later for schedule
+		startTime[0] += (int) segment.travelTime + (nextSegment != null ? changeTime / 2 : 0);
+		String textTime = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
 		secondaryText = new SpannableString(getString(R.string.exit_at));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -719,6 +722,33 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		});
 
 		((ViewGroup) view).addView(baseContainer);
+
+		if (nextSegment != null) {
+			double walkDist = (long) getWalkDistance(segment, nextSegment, segment.walkDist);
+			if (walkDist > 0) {
+				int walkTime = (int) getWalkTime(segment, nextSegment, walkDist, walkSpeed);
+				if (walkTime < 60) {
+					walkTime = 60;
+				}
+				spannable = new SpannableStringBuilder("~");
+				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				startIndex = spannable.length();
+				spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
+				spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				startIndex = spannable.length();
+				spannable.append(getString(R.string.on_foot)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
+				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+				buildRowDivider(view, true);
+				buildWalkRow(view, spannable, null, new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showWalkingRouteOnMap(segment, nextSegment);
+					}
+				});
+				startTime[0] += walkTime;
+			}
+		}
 	}
 
 	private View createImagesContainer() {
@@ -739,93 +769,29 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 	}
 
 	private void buildTransportRouteRow(ViewGroup parent, TransportRouteResult routeResult, boolean showDivider) {
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		TargetPoint startPoint = targetPointsHelper.getPointToStart();
 		TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
-		long startTime = System.currentTimeMillis() / 1000;
-
+		int[] startTime = { 0 };
 		List<TransportRouteResultSegment> segments = routeResult.getSegments();
-		boolean previousWalkItemUsed = false;
-
 		for (int i = 0; i < segments.size(); i++) {
+			boolean first = i == 0;
+			boolean last = i == segments.size() - 1;
 			final TransportRouteResultSegment segment = segments.get(i);
-			final TransportRouteResultSegment nextSegment = segments.size() > i + 1 ? segments.get(i + 1) : null;
-			long walkTime = (long) getWalkTime(segment.walkDist, routeResult.getWalkSpeed());
-			if (walkTime < 60) {
-				walkTime = 60;
-			}
-			if (i == 0) {
+			if (first) {
 				buildStartItem(parent, startPoint, startTime, segment, routeResult.getWalkSpeed());
-				startTime += walkTime;
-			} else if (segment.walkDist > 0 && !previousWalkItemUsed) {
-				SpannableStringBuilder spannable = new SpannableStringBuilder("~");
-				int startIndex = spannable.length();
-				spannable.append(OsmAndFormatter.getFormattedDuration((int) walkTime, app)).append(" ");
-				spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				spannable.append(getString(R.string.on_foot)).append(" ").append(", ").append(OsmAndFormatter.getFormattedDistance((float) segment.walkDist, app));
-
-				buildWalkRow(parent, spannable, null, new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						showWalkingRouteOnMap(segment, nextSegment);
-					}
-				});
-				buildRowDivider(parent, true);
-				startTime += walkTime;
 			}
-
-			buildSegmentItem(parent, segment, startTime);
-
-			double finishWalkDist = routeResult.getFinishWalkDist();
-			if (i == segments.size() - 1) {
+			buildSegmentItem(parent, segment, !last ? segments.get(i + 1) : null, startTime, routeResult.getWalkSpeed(), routeResult.getChangeTime());
+			if (last) {
 				buildDestinationItem(parent, endPoint, startTime, segment, routeResult.getWalkSpeed());
-			} else if (finishWalkDist > 0) {
-				walkTime = (long) getWalkTime(finishWalkDist, routeResult.getWalkSpeed());
-				startTime += walkTime;
-				if (nextSegment != null) {
-					if (nextSegment.walkDist > 0) {
-						finishWalkDist += nextSegment.walkDist;
-						walkTime += getWalkTime(nextSegment.walkDist, routeResult.getWalkSpeed());
-						previousWalkItemUsed = true;
-					} else {
-						previousWalkItemUsed = false;
-					}
-				}
-				buildRowDivider(parent, true);
-
-				Spannable title = getWalkTitle(finishWalkDist, walkTime);
-				buildWalkRow(parent, title, null, new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						showWalkingRouteOnMap(segment, nextSegment);
-					}
-				});
 			}
-			if (showDivider && i != segments.size() - 1) {
+			if (showDivider && !last) {
 				buildRowDivider(parent, true);
 			}
 		}
 	}
 
-	private Spannable getWalkTitle(double finishWalkDist, double walkTime) {
-		if (walkTime < 60) {
-			walkTime = 60;
-		}
-		Typeface typeface = FontCache.getRobotoMedium(app);
-		SpannableStringBuilder title = new SpannableStringBuilder("~");
-		int startIndex = title.length();
-		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		title.append(OsmAndFormatter.getFormattedDuration((int) walkTime, app)).append(" ");
-		title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		startIndex = title.length();
-		title.append(getString(R.string.on_foot)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) finishWalkDist, app));
-		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		return title;
-	}
-
-	private void buildStartItem(View view, final TargetPoint start, long startTime,
+	private void buildStartItem(View view, final TargetPoint start, int[] startTime,
 								final TransportRouteResultSegment segment, double walkSpeed) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
@@ -843,7 +809,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 			name = getString(R.string.shared_string_my_location);
 		}
 		Spannable startTitle = new SpannableString(name);
-		String text = OsmAndFormatter.getFormattedTime(startTime, false);
+		String text = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
 		int drawableId = start == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint;
 		Drawable icon = app.getUIUtilities().getIcon(drawableId);
@@ -857,17 +823,19 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		addWalkRouteIcon(imagesContainer);
 		buildRowDivider(infoContainer, true);
 
-		long walkTime = (long) getWalkTime(segment.walkDist, walkSpeed);
+		double walkDist = (long) getWalkDistance(null, segment, segment.walkDist);
+		int walkTime = (int) getWalkTime(null, segment, walkDist, walkSpeed);
 		if (walkTime < 60) {
 			walkTime = 60;
 		}
+		startTime[0] += walkTime;
 		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.on_foot)));
 		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
-		title.append(" ").append(OsmAndFormatter.getFormattedDuration((int) walkTime, app));
+		title.append(" ").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
 		title.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = title.length();
-		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) segment.walkDist, app));
+		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
 		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, title, imagesContainer, new OnClickListener() {
@@ -882,9 +850,9 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 	}
 
 	public void showLocationOnMap(LatLon latLon) {
-		OsmandSettings settings = app.getSettings();
-		if (latLon == null) {
-			latLon = settings.isLastKnownMapLocation() ? settings.getLastKnownMapLocation() : null;
+		Location lastLocation = app.getLocationProvider().getLastKnownLocation();
+		if (latLon == null && lastLocation != null) {
+			latLon = new LatLon(lastLocation.getLatitude(), lastLocation.getLongitude());
 		}
 		if (latLon != null) {
 			openMenuHeaderOnly();
@@ -934,7 +902,8 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		container.addView(walkLineImage);
 	}
 
-	private void buildDestinationItem(View view, final TargetPoint destination, long startTime, final TransportRouteResultSegment segment, double walkSpeed) {
+	private void buildDestinationItem(View view, final TargetPoint destination, int[] startTime,
+									  final TransportRouteResultSegment segment, double walkSpeed) {
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
@@ -946,17 +915,18 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 
 		buildRowDivider(infoContainer, true);
 
-		long walkTime = (long) getWalkTime(segment.walkDist, walkSpeed);
+		double walkDist = (long) getWalkDistance(segment, null, segment.walkDist);
+		int walkTime = (int) getWalkTime(segment, null, walkDist, walkSpeed);
 		if (walkTime < 60) {
 			walkTime = 60;
 		}
 		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
 		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = spannable.length();
-		spannable.append(OsmAndFormatter.getFormattedDuration((int) walkTime, app)).append(" ");
+		spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = spannable.length();
-		spannable.append(getString(R.string.on_foot)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) segment.walkDist, app));
+		spannable.append(getString(R.string.on_foot)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
 		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, spannable, imagesContainer, new OnClickListener() {
@@ -968,7 +938,7 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		buildRowDivider(infoContainer, true);
 		addWalkRouteIcon(imagesContainer);
 
-		String timeStr = OsmAndFormatter.getFormattedTime(startTime + walkTime, false);
+		String timeStr = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0] + walkTime);
 		String name = getRoutePointDescription(destination.point, destination.getOnlyName());
 		SpannableString title = new SpannableString(name);
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1650,8 +1620,22 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 		return "";
 	}
 
-	private double getWalkTime(double walkDist, double walkSpeed) {
-		return walkDist / walkSpeed;
+	private double getWalkTime(@Nullable TransportRouteResultSegment segment,
+							   @Nullable TransportRouteResultSegment nextSegment, double walkDistPT, double walkSpeedPT) {
+		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(segment, nextSegment);
+		if (walkingRouteSegment != null) {
+			return walkingRouteSegment.getRoutingTime();
+		}
+		return walkDistPT / walkSpeedPT;
+	}
+
+	private double getWalkDistance(@Nullable TransportRouteResultSegment segment,
+								   @Nullable TransportRouteResultSegment nextSegment, double walkDistPT) {
+		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(segment, nextSegment);
+		if (walkingRouteSegment != null) {
+			return walkingRouteSegment.getWholeDistance();
+		}
+		return walkDistPT;
 	}
 
 	public void buildRowDivider(View view, boolean needMargin) {

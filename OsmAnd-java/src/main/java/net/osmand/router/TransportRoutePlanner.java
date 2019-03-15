@@ -489,7 +489,11 @@ public class TransportRoutePlanner {
 		public double getWalkTime() {
 			return getWalkDist() / cfg.walkSpeed;
 		}
-		
+
+		public double getChangeTime() {
+			return cfg.getChangeTime();
+		}
+
 		public int getChanges() {
 			return segments.size() - 1;
 		}

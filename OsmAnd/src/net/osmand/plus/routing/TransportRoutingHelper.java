@@ -111,6 +111,50 @@ public class TransportRoutingHelper {
 		return null;
 	}
 
+	public int getWalkingTime(@NonNull List<TransportRouteResultSegment> segments) {
+		int res = 0;
+		Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = this.walkingRouteSegments;
+		if (walkingRouteSegments != null) {
+			TransportRouteResultSegment prevSegment = null;
+			for (TransportRouteResultSegment segment : segments) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(prevSegment, segment);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getRoutingTime();
+				}
+				prevSegment = segment;
+			}
+			if (segments.size() > 0) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(segments.get(segments.size() - 1), null);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getRoutingTime();
+				}
+			}
+		}
+		return res;
+	}
+
+	public int getWalkingDistance(@NonNull List<TransportRouteResultSegment> segments) {
+		int res = 0;
+		Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = this.walkingRouteSegments;
+		if (walkingRouteSegments != null) {
+			TransportRouteResultSegment prevSegment = null;
+			for (TransportRouteResultSegment segment : segments) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(prevSegment, segment);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getWholeDistance();
+				}
+				prevSegment = segment;
+			}
+			if (segments.size() > 0) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(segments.get(segments.size() - 1), null);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getWholeDistance();
+				}
+			}
+		}
+		return res;
+	}
+
 	public void setCurrentRoute(int currentRoute) {
 		this.currentRoute = currentRoute;
 	}
