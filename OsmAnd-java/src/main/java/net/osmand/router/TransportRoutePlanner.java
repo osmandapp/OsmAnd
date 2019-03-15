@@ -95,7 +95,7 @@ public class TransportRoutePlanner {
 				} else {
 					travelTime += ctx.cfg.stopTime + segmentDist / ctx.cfg.travelSpeed;
 				}
-				if(travelTime > finishTime + ctx.cfg.finishTimeSeconds) {
+				if(segment.distFromStart + travelTime > finishTime + ctx.cfg.finishTimeSeconds) {
 					break;
 				}
 				sgms.clear();
@@ -107,31 +107,31 @@ public class TransportRoutePlanner {
 					if (segment.wasVisited(sgm)) {
 						continue;
 					}
-					TransportRouteSegment rrs = new TransportRouteSegment(sgm);
-					rrs.parentRoute = segment;
-					rrs.parentStop = ind;
-					rrs.walkDist = MapUtils.getDistance(rrs.getLocation(), stop.getLocation());
-					rrs.parentTravelTime = travelTime;
-					rrs.parentTravelDist = travelDist;
-					double walkTime = rrs.walkDist / ctx.cfg.walkSpeed
+					TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
+					nextSegment.parentRoute = segment;
+					nextSegment.parentStop = ind;
+					nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
+					nextSegment.parentTravelTime = travelTime;
+					nextSegment.parentTravelDist = travelDist;
+					double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed
 							+ (ctx.cfg.getChangeTime());
-					rrs.distFromStart = segment.distFromStart + travelTime + walkTime;
+					nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 					if(ctx.cfg.useSchedule) {
 						int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
-						if(tm >= rrs.distFromStart) {
-							rrs.distFromStart = tm;
-							queue.add(rrs);
+						if(tm >= nextSegment.distFromStart) {
+							nextSegment.distFromStart = tm;
+							queue.add(nextSegment);
 						}
 					} else {
-						queue.add(rrs);
+						queue.add(nextSegment);
 					}
 				}
-				TransportRouteSegment f = endSegments.get(segmentId);
+				TransportRouteSegment finalSegment = endSegments.get(segmentId);
 				double distToEnd = MapUtils.getDistance(stop.getLocation(), end);
-				if (f != null && distToEnd < ctx.cfg.walkRadius) {
+				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius) {
 					if (finish == null || minDist > distToEnd) {
 						minDist = distToEnd;
-						finish = new TransportRouteSegment(f);
+						finish = new TransportRouteSegment(finalSegment);
 						finish.parentRoute = segment;
 						finish.parentStop = ind;
 						finish.walkDist = distToEnd;
@@ -213,9 +213,15 @@ public class TransportRoutePlanner {
 					return null;
 				}
 				if (p.parentRoute != null) {
-					TransportRouteResultSegment sg = new TransportRouteResultSegment(p.parentRoute.road, 
-							p.parentRoute.segStart, p.parentStop, p.parentRoute.walkDist, 
-							p.departureTime);
+					TransportRouteResultSegment sg = new TransportRouteResultSegment();
+					sg.route = p.parentRoute.road;
+					sg.start = p.parentRoute.segStart;
+					sg.end = p.parentStop;
+					sg.walkDist = p.parentRoute.walkDist;
+					sg.walkTime = sg.walkDist / ctx.cfg.walkSpeed;
+					sg.depTime = p.departureTime;
+					sg.travelInaccurateDist = p.parentTravelDist;
+					sg.travelTime = p.parentTravelTime;
 					route.segments.add(0, sg);
 				}
 				p = p.parentRoute;
@@ -277,20 +283,19 @@ public class TransportRoutePlanner {
 	
 	
 	public static class TransportRouteResultSegment {
+		
 		private static final boolean DISPLAY_FULL_SEGMENT_ROUTE = false;
 		private static final int DISPLAY_SEGMENT_IND = 0;
-		public final TransportRoute route;
-		public final int start;
-		public final int end;
-		public final double walkDist ;
-		public final int depTime;
+		public TransportRoute route;
+		public double walkTime;
+		public double travelInaccurateDist;
+		public double travelTime;
+		public int start;
+		public int end;
+		public double walkDist ;
+		public int depTime;
 		
-		public TransportRouteResultSegment(TransportRoute route, int start, int end, double walkDist, int depTime) {
-			this.route = route;
-			this.start = start;
-			this.end = end;
-			this.walkDist = walkDist;
-			this.depTime = depTime;
+		public TransportRouteResultSegment() {
 		}
 		
 		public int getArrivalTime() {
@@ -533,9 +538,9 @@ public class TransportRoutePlanner {
 		private static final int SHIFT_DEPTIME = 14; // assume less than 1024 stops
 		
 		TransportRouteSegment parentRoute = null;
-		int parentStop;
-		double parentTravelTime; // travel time
-		double parentTravelDist; // inaccurate
+		int parentStop; // last stop to exit for parent route
+		double parentTravelTime; // travel time for parent route
+		double parentTravelDist; // travel distance for parent route (inaccurate) 
 		// walk distance to start route location (or finish in case last segment)
 		double walkDist = 0;
 		
