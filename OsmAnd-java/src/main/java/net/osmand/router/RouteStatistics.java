@@ -1,10 +1,8 @@
 package net.osmand.router;
 
-import net.osmand.PlatformUtil;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 
-import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.TreeMap;
 public class RouteStatistics {
 
 	public static final String UNDEFINED_ATTR = "undefined";
-	private static final Log log = PlatformUtil.getLog(RouteStatistics.class);
 
 	private final List<RouteSegmentResult> route;
 	private final RenderingRulesStorage currentRenderer;
