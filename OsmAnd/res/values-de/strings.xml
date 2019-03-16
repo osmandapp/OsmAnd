@@ -1402,7 +1402,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="rendering_attr_busRoutes_name">Buslinien</string>
     <string name="rendering_category_hide">Ausblenden</string>
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
-    <string name="home_button">Zu Hause</string>
+    <string name="home_button">Zuhause</string>
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     <string name="shared_string_show_all">Alle anzeigen</string>
@@ -2915,7 +2915,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="route_surface_stat_container">Oberfläche</string>
     <string name="route_smoothness_stat_container">Oberflächenbeschaffenheit</string>
     <string name="route_steepness_stat_container">Steilheit</string>
-    <string name="add_home">Zu Hause hinzufügen</string>
+    <string name="add_home">Zuhause hinzufügen</string>
     <string name="add_work">Arbeit hinzufügen</string>
     <string name="work_button">Arbeit</string>
     <string name="add_destination_query">Bitte fügen Sie zuerst das Ziel hinzu</string>
@@ -2960,7 +2960,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_surface_paving_stones_name">Pflastersteine</string>
     <string name="rendering_attr_surface_pebblestone_name">Kieselsteine</string>
     <string name="rendering_attr_surface_stone_name">Stein</string>
-    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_metal_name">Metall</string>
     <string name="rendering_attr_surface_wood_name">Holz</string>
     <string name="rendering_attr_surface_gravel_name">Schotter</string>
     <string name="rendering_attr_surface_fine_gravel_name">Feiner Kies</string>
