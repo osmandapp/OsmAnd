@@ -141,7 +141,7 @@
     <string name="poi_railway_platform">سکوی راه آهن</string>
     <string name="poi_halt">ایستگاه راه آهن</string>
     <string name="poi_subway_entrance">ورودی مترو</string>
-    <string name="poi_subway_station">ایستگاه مترو</string>
+    <string name="poi_subway_station">بله</string>
     <string name="poi_taxi">تاکسی</string>
     <string name="poi_aerodrome">فرودگاه</string>
     <string name="poi_helipad">جایگاه هلیکوپتر</string>
@@ -1298,4 +1298,6 @@
     <string name="poi_surface_fine_gravel">سطح: شن ریز</string>
     <string name="poi_surface_stone">سطح: سنگ</string>
     <string name="poi_surface_grass_paver">سطح: کفپوش چمن‌دار</string>
+    <string name="poi_route_light_rail_ref">قطار سبک</string>
+    <string name="poi_park_ride_metro">مترو</string>
 </resources>
