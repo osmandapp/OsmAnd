@@ -429,7 +429,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu vi certe volas alŝuti %1$d ŝanĝo(j)n al OSM?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi navigadon turnon-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -1743,7 +1743,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="fav_points_not_exist">Neniuj ekzistaj ŝatataj ejoj</string>
     <string name="update_existing">Anstataŭigi</string>
     <string name="only_show">Montri kurson</string>
-    <string name="follow">Ekigi navigadon</string>
+    <string name="follow">Ekigi gvidadon</string>
     <string name="mark_final_location_first">Bonvolu unue elekti celon</string>
     <string name="opening_hours">Malfermaj horoj</string>
     <string name="opening_changeset">Malfermado de ŝanĝaro…</string>
@@ -2255,7 +2255,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osmand_extended_description_part4">Skiado 
 \n La kromprogramo de OsmAnd “skiada map-vido” ebligas al vi vidigi skivojojn kun ilia facileco kaj aliajn taŭgajn informojn, kiel lokojn de skiliftoj kaj aliajn ejojn.</string>
     <string name="osmand_extended_description_part5">Biciklado 
-\n • Trovi biciklajn vojojn sur la mapo 
+\n • Vidigi biciklajn vojojn sur la mapo 
 \n • GPS-navigado en biciklada reĝimo kalkulas kursojn uzante biciklajn vojojn 
 \n • Montri viajn rapidon kaj altitudon 
 \n • Registri GPX-spurojn de via vojaĝo kaj diskonigi ilin 
@@ -2387,7 +2387,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_allow_private_name">Permesi privatan aliron</string>
     <string name="routing_attr_allow_private_description">Permesi aliron al privataj areoj.</string>
     <string name="display_zoom_level">Vidigi de skal-nivelo: %1$s</string>
-    <string name="route_is_too_long_v2">Bonvolu aldoni intercelojn, se neniu rezulto estos trovita post 10 minutoj.</string>
+    <string name="route_is_too_long_v2">Longa distanco: bonvolu aldoni intercelojn, se neniu rezulto estos trovita post 10 minutoj.</string>
     <string name="save_poi_too_many_uppercase">La nomo enhavas tro multe da grandaj literoj? Ĉu pluigi?</string>
     <string name="srtm_menu_download_descr">Elŝutu la mapon “nivelkurboj” por vidigi nivelkurbojn por tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
@@ -2899,7 +2899,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_destination_query">Bonvolu unue elekti celon</string>
     <string name="shared_string_swap">Interŝanĝi</string>
     <string name="show_more">Montri pli</string>
-    <string name="tracks_on_map">Kursoj sur la mapo</string>
+    <string name="tracks_on_map">Montrataj kursoj</string>
     <string name="time_of_day">Tagtempo</string>
     <string name="by_transport_type">Per %1$s</string>
     <string name="step_by_step">Paŝon post paŝo</string>
@@ -2935,4 +2935,47 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_start_and_end_points">Aldoni komencan kaj finan punktojn</string>
     <string name="route_add_start_point">Aldoni komencpunkton</string>
     <string name="route_descr_select_start_point">Elektu komencpunkton</string>
+    <string name="rendering_attr_surface_unpaved_name">Malfirma</string>
+    <string name="rendering_attr_surface_sand_name">Sablo</string>
+    <string name="rendering_attr_surface_grass_name">Herbo</string>
+    <string name="rendering_attr_surface_grass_paver_name">Herb-krado</string>
+    <string name="rendering_attr_surface_ground_name">Grundo</string>
+    <string name="rendering_attr_surface_dirt_name">Grundo malebena</string>
+    <string name="rendering_attr_surface_mud_name">Koto</string>
+    <string name="rendering_attr_surface_ice_name">Glacio</string>
+    <string name="rendering_attr_surface_salt_name">Salo</string>
+    <string name="rendering_attr_surface_snow_name">Neĝo</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalto</string>
+    <string name="rendering_attr_surface_paved_name">Firma</string>
+    <string name="rendering_attr_surface_concrete_name">Betono</string>
+    <string name="rendering_attr_surface_sett_name">Kvadrataj ŝtonoj</string>
+    <string name="rendering_attr_surface_cobblestone_name">Rulŝtonaj kaheloj</string>
+    <string name="rendering_attr_surface_paving_stones_name">Trotuaraj platoj</string>
+    <string name="rendering_attr_surface_pebblestone_name">Rulŝtonaĵo</string>
+    <string name="rendering_attr_surface_stone_name">Ŝtonoj</string>
+    <string name="rendering_attr_surface_metal_name">Metalo</string>
+    <string name="rendering_attr_surface_wood_name">Ligno</string>
+    <string name="rendering_attr_surface_gravel_name">Gruzo</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Eta gruzo</string>
+    <string name="rendering_attr_surface_compacted_name">Ebenbatita gruzo</string>
+    <string name="rendering_attr_smoothness_excellent_name">Bonega</string>
+    <string name="rendering_attr_smoothness_good_name">Bona</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Meza</string>
+    <string name="rendering_attr_smoothness_bad_name">Malbona</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Tre malbona</string>
+    <string name="rendering_attr_smoothness_horrible_name">Malbonega</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Tre malbonega</string>
+    <string name="rendering_attr_smoothness_impassable_name">Netraveturebla</string>
+    <string name="rendering_attr_highway_class_motorway_name">Aŭtovojoj</string>
+    <string name="rendering_attr_highway_class_state_road_name">Ŝtatvojoj</string>
+    <string name="rendering_attr_highway_class_road_name">Vojoj</string>
+    <string name="rendering_attr_highway_class_street_name">Stratoj</string>
+    <string name="rendering_attr_highway_class_service_name">Aliraj</string>
+    <string name="rendering_attr_highway_class_footway_name">Trotuaroj</string>
+    <string name="rendering_attr_highway_class_track_name">Kampaj</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Ĉevalvojoj</string>
+    <string name="rendering_attr_highway_class_steps_name">Ŝtuparoj</string>
+    <string name="rendering_attr_highway_class_path_name">Vojetoj</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Biciklvojoj</string>
+    <string name="rendering_attr_undefined_name">Nedifinitaj</string>
 </resources>
