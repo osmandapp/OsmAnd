@@ -200,7 +200,10 @@
     <string name="map_widget_left">Panel esquierdu</string>
     <string name="configure_map"/>
     <string name="anonymous_user">Usuariu anónimu</string>
-    <string name="anonymous_user_hint"/>
+    <string name="anonymous_user_hint">Un usuariu anónimu nun pue:
+\n- Crear grupos
+\n- Sincronizar grupos y preseos col sirvidor
+\n- Xestionar grupos y preseos nun panel personal nel sitiu web</string>
     <string name="logged_as"/>
     <string name="text_size">Tamañu de la tipografía</string>
     <string name="traffic_warning_speed_limit">Llende de velocidá</string>
@@ -989,7 +992,7 @@
     <string name="favourites_group"/>
     <string name="add_group"/>
     <string name="add_group_descr"/>
-    <string name="empty_state_markers_active"/>
+    <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
     <string name="empty_state_markers_active_desc"/>
     <string name="empty_state_markers_groups">Importación de grupos</string>
     <string name="empty_state_markers_groups_desc"/>
@@ -1281,7 +1284,7 @@
     <string name="north_west">noroeste</string>
     <string name="north_north_west">nornoroeste</string>
     <string name="oclock">en puntu</string>
-    <string name="accuracy">Precisión</string>
+    <string name="accuracy">precisión</string>
     <string name="altitude">Altitú</string>
     <string name="i_am_here">Toi equí</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -1448,8 +1451,8 @@
     <string name="configure_screen_quick_action">Aición rápida</string>
     <string name="quick_action_map_style_switch">L\'estilu del mapa camudó a «%s».</string>
     <string name="quick_action_take_audio_note">Nota d\'audiu nueva</string>
-    <string name="quick_action_navigation_voice_off">La voz ta desactivada</string>
-    <string name="quick_action_navigation_voice_on">La voz ta activada</string>
+    <string name="quick_action_navigation_voice_off">Desinlenciar la voz</string>
+    <string name="quick_action_navigation_voice_on">Silenciar la voz</string>
     <string name="quick_actions_delete_text">¿De xuru que quies desaniciar l\'aición «%s»\?</string>
     <string name="quick_action_take_audio_note_descr">Tocar esti botón d\'aición amiesta una nota d\'audiu metanes de la pantalla.</string>
     <string name="quick_action_add_osm_bug_descr">Tocar esti botón d\'aición amiesta una nota d\'OSM metanes de la pantalla.</string>
@@ -1662,4 +1665,5 @@
     <string name="route_descr_select_start_point">Esbilla\'l puntu d\'aniciu</string>
     <string name="shared_string_swap">Intercambiar</string>
     <string name="animate_route">Aniciar una simulación</string>
+    <string name="add_start_and_end_points">Amiesta los puntos d\'aniciu y fin</string>
 </resources>
