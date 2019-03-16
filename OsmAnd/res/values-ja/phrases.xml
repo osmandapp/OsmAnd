@@ -3102,4 +3102,16 @@
     <string name="poi_public_bookcase_type_shelf">デザイン:本棚</string>
     <string name="poi_animal_keeping_type_paddock">デザイン:下見所、空きスペース</string>
     <string name="poi_animal_keeping_type_open_stable">デザイン:空き厩舎</string>
+    <string name="poi_tower_construction_lattice">建築形状:鋼鉄格子型</string>
+    <string name="poi_tower_construction_freestanding">建築形状:自立型</string>
+    <string name="poi_tower_construction_dish">建築形状:パラボラ型</string>
+    <string name="poi_tower_construction_dome">建築形状:ドーム隠蔽型</string>
+    <string name="poi_tower_construction_concealed">建築形状:偽装型</string>
+    <string name="poi_drink_wine_yes">ワイン:有り</string>
+    <string name="poi_drink_wine_retail">ワイン:小売店</string>
+    <string name="poi_drink_wine_served">ワイン:店内提供</string>
+    <string name="poi_resort_kids_camp">子供向けキャンプ</string>
+    <string name="poi_music_school">音楽学校</string>
+    <string name="poi_language_school">外国語学校</string>
+    <string name="poi_life_ring">救命浮環(浮き輪)</string>
 </resources>
