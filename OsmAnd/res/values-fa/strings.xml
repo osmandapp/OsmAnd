@@ -876,7 +876,7 @@
     <string name="layer_yandex_traffic">ترافیک Yandex</string>
     <string name="layer_route">مسیر</string>
     <string name="shared_string_favorites">نقاط برگزیده</string>
-    <string name="layer_osm_bugs">توضیحات ویرایشی OSM (آنلاین)</string>
+    <string name="layer_osm_bugs">یادداشت‌های OSM (آنلاین)</string>
     <string name="shared_string_refresh">تازه‌سازی</string>
     <string name="items_were_selected">{0} مورد انتخاب شد</string>
     <string name="daynight_descr">تغییر وضعیت به حالت روز/شب بر چه اساسی انجام شود.</string>
@@ -983,12 +983,13 @@
 \n 
 \nنقشه‌ها مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند. همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ داده‌های OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
     <string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به‌کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهت‌دار و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
-    <string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح مکان‌های پرکاربرد (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن توضیحات ویرایشی. در مورد توضیحات ویرایشی اینجا را ملاحظه کنید: 
-\nhttps://wiki.openstreetmap.org/wiki/Fa:Notes 
-\n
+    <string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح مکان‌های پرکاربرد (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن یادداشت‌های OSMای. 
+\nدربارهٔ یادداشت‌های OSM: 
+\nhttps://wiki.osm.org/wiki/Fa:Notes 
+\n 
 \nجامعهٔ OSM در راستای پیشبرد پروژهٔ نقشه‌کشی تلاش می‌کند؛ برای ایجاد نقشه‌ای که آزادانه در اختیار همه باشد. برای اطلاع از جزئیات بیشتر به وبسایت آن مراجعه کنید: 
 \nhttps://openstreetmap.org 
-\n
+\n 
 \nشما هم می‌توانید مستقیماً از طریق برنامهٔ OsmAnd در تکمیل نقشه مشارکت کنید. برای این منظور لازم است اطلاعات عضویت در سایت OSM را در برنامه وارد کنید.</string>
     <string name="play_commands_of_currently_selected_voice">گفتاری را انتخاب کنید و با پخش پیام‌ها، آن را امتحان کنید.</string>
     <string name="native_rendering">رندر بومی</string>
@@ -1916,7 +1917,7 @@
     <string name="show_transparency_seekbar">نوار تنظیم شفافیت را نشان بده</string>
     <string name="download_files_error_not_enough_space">فضای ذخیره‌سازی ناکافی است! 
 \n{3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم است. فضای موجود فقط {2} مگابایت است.</string>
-    <string name="upload_osm_note">آپلود توضیح ویرایشی OSM</string>
+    <string name="upload_osm_note">آپلود یادداشت OSM</string>
     <string name="map_marker_1st">اولین نشانهٔ نقشه</string>
     <string name="map_marker_2nd">دومین نشانهٔ نقشه</string>
     <string name="shared_string_toolbar">نوار ابزار</string>
@@ -1970,11 +1971,11 @@
     <string name="show_on_start">هنگام شروع نشانش بده</string>
     <string name="copied_to_clipboard">کپی شد</string>
     <string name="osm_edit_deleted_poi">حذف POI</string>
-    <string name="osm_edit_removed_note">بستن توضیح ویرایشی</string>
-    <string name="osn_bug_name">توضیح ویرایشی</string>
+    <string name="osm_edit_removed_note">بستن یادداشت OSM</string>
+    <string name="osn_bug_name">یادداشت OSM</string>
     <string name="osn_add_dialog_title">نوشتن یادداشت</string>
     <string name="osn_comment_dialog_title">افزودن توضیح</string>
-    <string name="osn_reopen_dialog_title">بازگشایی توضیح ویرایشی</string>
+    <string name="osn_reopen_dialog_title">بازگشایی یادداشت</string>
     <string name="osn_close_dialog_title">بستن یادداشت</string>
     <string name="osn_add_dialog_success">یادداشت ایجاد شد</string>
     <string name="osn_add_dialog_error">ایجاد یادداشت ناموفق بود</string>
@@ -2184,7 +2185,7 @@
     <string name="quick_action_take_audio_note">یادداشت صوتی جدید</string>
     <string name="quick_action_take_video_note">یادداشت ویدئویی جدید</string>
     <string name="quick_action_take_photo_note">یادداشت عکسی جدید</string>
-    <string name="quick_action_add_osm_bug">افزودن توضیح ویرایشی</string>
+    <string name="quick_action_add_osm_bug">افزودن یادداشت OSM</string>
     <string name="quick_action_navigation_voice">گفتار روشن/خاموش</string>
     <string name="quick_action_navigation_voice_off">روشن‌کردن گفتار</string>
     <string name="quick_action_navigation_voice_on">خاموش‌کردن گفتار</string>
@@ -2200,7 +2201,7 @@
     <string name="quick_action_take_audio_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت صوتی در مرکز صفحه ایجاد می‌شود.</string>
     <string name="quick_action_take_video_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت ویدئویی در مرکز صفحه ایجاد می‌شود.</string>
     <string name="quick_action_take_photo_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت تصویری در مرکز صفحه ایجاد می‌شود.</string>
-    <string name="quick_action_add_osm_bug_descr">با لمس این دکمهٔ عملیاتی یک توضیح ویرایشی OSM در مرکز صفحه ایجاد می‌شود.</string>
+    <string name="quick_action_add_osm_bug_descr">با لمس این دکمهٔ عملیاتی یک یادداشت OSM در مرکز صفحه ایجاد می‌شود.</string>
     <string name="quick_action_add_poi_descr">با لمس این دکمهٔ عملیاتی یک مکان POI در مرکز صفحه ایجاد می‌شود.</string>
     <string name="quick_action_navigation_voice_descr">با لمس این دکمهٔ عملیاتی، راهنمای گفتاری در زمان ناوبری فعال یا غیرفعال می‌شود.</string>
     <string name="quick_action_add_parking_descr">با لمس این دکمهٔ عملیاتی یک جای پارک در مرکز صفحه علامت‌گذاری می‌شود.</string>
@@ -2319,10 +2320,10 @@
     <string name="private_access_routing_req">مقصد شما در ناحیه‌ای با دسترسی خصوصی قرار دارد. برای این سفر دسترسی به مسیرهای خصوصی مجاز شود؟</string>
     <string name="restart_search">شروع مجدد جست‌وجو</string>
     <string name="nothing_found">"چیزی پیدا نشد "</string>
-    <string name="quick_action_showhide_osmbugs_title">آشکار/پنهان‌کردن توضیحات ویرایشی</string>
-    <string name="quick_action_osmbugs_show">نشان‌دادن توضیحات ویرایشی</string>
-    <string name="quick_action_osmbugs_hide">پنهان‌کردن توضیحات ویرایشی</string>
-    <string name="quick_action_showhide_osmbugs_descr">با لمس این دکمهٔ عملیاتی، توضیحات ویرایشی OSM را روی نقشه آشکار یا پنهان کنید.</string>
+    <string name="quick_action_showhide_osmbugs_title">آشکار/پنهان‌کردن یادداشت‌های OSM</string>
+    <string name="quick_action_osmbugs_show">نشان‌دادن یادداشت‌های OSM</string>
+    <string name="quick_action_osmbugs_hide">پنهان‌کردن یادداشت‌های OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">با لمس این دکمهٔ عملیاتی، یادداشت‌های OSM را روی نقشه آشکار یا پنهان کنید.</string>
     <string name="sorted_by_distance">مرتب‌شده بر اساس مسافت</string>
     <string name="search_favorites">جست‌وجو در نقاط برگزیده</string>
     <string name="hillshade_menu_download_descr">نقشهٔ سایه‌روشن را برای این منطقه دانلود کنید تا سایه‌روشن پستی‌بلندی‌ها را ببینید.</string>
@@ -2352,7 +2353,7 @@
     <string name="route_points_category_name">نقاطی که در این مسیر بر سر راهتان است</string>
     <string name="shared_string_time_moving">مدت حرکت</string>
     <string name="auto_split_recording_descr">بعد از ۶ دقیقه وقفه، بخش جدید شروع می‌شود. بعد از ۲ ساعت وقفه، رد جدید شروع می‌شود. بعد از وقفهٔ طولانی‌تر در صورتی که تاریخ تغییر کند فایل جدید ایجاد می‌شود.</string>
-    <string name="upload_osm_note_description">توضیحات ویرایشی‌تان را به‌صورت ناشناس یا با نام کاربری‌تان در سایت OpenStreetMap.org آپلود کنید.</string>
+    <string name="upload_osm_note_description">یادداشت‌های OSM خود را به‌صورت ناشناس یا با نام کاربری‌تان در سایت OpenStreetMap.org، آپلود کنید.</string>
     <string name="route_roundabout_short">خروجی %1$d را بگیرید و بروید</string>
     <string name="trip_rec_notification_settings_desc">در نوار اعلان دستگاه یک اعلان نشان می‌دهد که بتوانید ضبط سفر را شروع کنید.</string>
     <string name="save_track_min_speed_descr">فیلتر: کمترین سرعتی که یک نقطه باید داشته باشد تا ثبت شود.</string>
@@ -2368,7 +2369,7 @@
     <string name="shared_string_sound">صدا</string>
     <string name="show_on_start_description">اگر خاموش باشد، مستقیماً صفحهٔ نقشه را برایتان می‌آورد.</string>
     <string name="osm_edit_modified_poi">اصلاح POI</string>
-    <string name="osm_edit_commented_note">توضیح ویرایشیِ دارای نظر</string>
+    <string name="osm_edit_commented_note">یادداشت OSM دارای نظر</string>
     <string name="lang_mk">مقدونی</string>
     <string name="lang_fy">فریسی غربی</string>
     <string name="lang_als">آلبانیایی (تُسک)</string>
@@ -2389,7 +2390,7 @@
     <string name="shared_string_action_template">عملیات {0}</string>
     <string name="osn_modify_dialog_error">ویرایش یادداشت ناموفق بود</string>
     <string name="osn_modify_dialog_title">اصلاح یادداشت</string>
-    <string name="context_menu_item_modify_note">اصلاح توضیح ویرایشی</string>
+    <string name="context_menu_item_modify_note">اصلاح یادداشت OSM</string>
     <string name="marker_save_as_track">ذخیره در قالب فایل GPX</string>
     <string name="show_arrows_on_the_map">فلش‌ها را روی نقشه نشان بده</string>
     <string name="show_passed">ردشده‌ها را نشان بده</string>
@@ -2402,9 +2403,9 @@
     <string name="gpx_no_tracks_title">هنوز فایل GPXای ندارید</string>
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید فایل‌های GPX را در این پوشه قرار دهید</string>
     <string name="rec_split_title">استفاده از تقسیمگر ضبط‌کننده</string>
-    <string name="context_menu_item_open_note">ایجاد توضیح ویرایشی OSM</string>
-    <string name="osm_edit_reopened_note">توضیح ویرایشی بازگشوده</string>
-    <string name="osm_edit_created_note">ایجاد توضیح ویرایشی</string>
+    <string name="context_menu_item_open_note">ایجاد یادداشت OSM</string>
+    <string name="osm_edit_reopened_note">یادداشت OSM بازگشوده</string>
+    <string name="osm_edit_created_note">ایجاد یادداشت OSM</string>
     <string name="rendering_attr_hideProposed_name">مکان‌های در حد پیشنهاد</string>
     <string name="osm_edit_created_poi">ایجاد POI</string>
     <string name="logged_as">واردشده با عنوان %1$s</string>
@@ -2633,7 +2634,7 @@
     <string name="shared_string_more_without_dots">بیشتر</string>
     <string name="looking_for_tracks_with_waypoints">در حال جست‌وجوی ردهای دارای نقطهٔ بین‌راهی</string>
     <string name="empty_state_osm_edits">اشیای OSM را بسازید یا ویرایش کنید</string>
-    <string name="empty_state_osm_edits_descr">نقاط پرکاربرد (POI) را اضافه یا ویرایش کنید، توضیح ویرایشی اضافه کنید یا روی آن‌ها نظر بدهید و فایل‌های GPX ضبط‌شده را آپلود کنید.</string>
+    <string name="empty_state_osm_edits_descr">نقاط پرکاربرد (POI) را اضافه یا ویرایش کنید، یادداشت‌های OSMای اضافه کنید یا روی آن‌ها نظر بدهید و فایل‌های GPX ضبط‌شده را آپلود کنید.</string>
     <string name="shared_string_deleted">حذف شد</string>
     <string name="shared_string_edited">ویرایش شد</string>
     <string name="shared_string_added">افزوده شد</string>
@@ -2686,16 +2687,16 @@
     <string name="day_off_label">تعطیل</string>
     <string name="copy_location_name">کپی‌کردن نام نقطه/POI</string>
     <string name="toast_empty_name_error">مکان بی‌نام</string>
-    <string name="show_closed_notes">دیدن توضیحات ویرایشی بسته‌شده</string>
-    <string name="switch_osm_notes_visibility_desc">پنهان/آشکارکردن توضیحات ویرایشی.</string>
+    <string name="show_closed_notes">دیدن یادداشت‌های بسته</string>
+    <string name="switch_osm_notes_visibility_desc">پنهان/آشکارکردن یادداشت‌های OSM.</string>
     <string name="gpx_file_desc">جی‌پی‌ایکس - مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
     <string name="osc_file_desc">اُاِس‌سی - مناسب برای استفاده در OpenStreetMap.</string>
     <string name="shared_string_gpx_file">فایل GPX</string>
     <string name="osc_file">فایل OSC</string>
     <string name="choose_file_type">انتخاب قالب فایل</string>
-    <string name="osm_edits_export_desc">نوع خروجی را انتخاب کنید: توضیحات ویرایشی، POI یا هر دو.</string>
+    <string name="osm_edits_export_desc">نوع خروجی را انتخاب کنید: یادداشت‌های OSM،‏ POI یا هر دو.</string>
     <string name="all_data">همهٔ داده‌ها</string>
-    <string name="osm_notes">توضیحات ویرایشی OSM</string>
+    <string name="osm_notes">یادداشت‌های OSM</string>
     <string name="tunnel_warning">تونل</string>
     <string name="show_tunnels">تونل‌ها</string>
     <string name="shared_string_current">کنونی</string>
@@ -2831,7 +2832,7 @@
 \nویژگی‌های اصلی: ضخامت کمتر برای راه‌های اصلی. ضخامت بیشتر برای trackها،‏ pathها، مسیرهای دوچرخه و سایر مسیرها. بر پایهٔ سبک Topo است.</string>
     <string name="access_intermediate_arrival_time">زمان رسیدن به میانی</string>
     <string name="map_widget_intermediate_time">مدت تا میانی</string>
-    <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک پیشفرض برای ایجاد پادنمایی بیشتر برای راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
+    <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک پیشفرض برای ایجاد پادنمایی بیشتر در راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
     <string name="shared_string_gpx_files">فایل‌های GPX</string>
     <string name="get_osmand_live">‏‏OsmAnd Live را تهیه کنید تا همهٔ این قابلیت‌ها باز شود: به‌روزآوری روزانهٔ نقشه و دانلودهای نامحدود، همهٔ افزونه‌های رایگان و پولی، ویکی‌پدیا، ویکی‌سفر و...</string>
     <string name="quick_action_edit_actions">ویرایش عملیات</string>
