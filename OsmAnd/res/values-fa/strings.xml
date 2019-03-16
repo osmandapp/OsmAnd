@@ -659,7 +659,7 @@
     <string name="animate_route_off">پایان شبیه‌سازی</string>
     <string name="animate_route">شروع شبیه‌سازی</string>
     <string name="where_am_i">من کجا هستم؟</string>
-    <string name="transport_stops">ایستگاه‌ها</string>
+    <string name="transport_stops">ایستگاه</string>
     <string name="transport_stops_to_pass">ایستگاه‌های مسیر</string>
     <string name="show_transport_over_map_description">ایستگاه‌های حمل‌ونقل عمومی را روی نقشه نشان بده.</string>
     <string name="show_transport_over_map">نشان‌دادن ایستگاه‌های حمل‌ونقل</string>
@@ -1525,7 +1525,7 @@
 \nطول %2$s</string>
     <string name="tips_and_tricks_descr">پرسش‌های رایج، تغییرات اخیر و سایر موارد.</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_selected">انتخاب شده</string>
+    <string name="shared_string_selected">انتخاب‌شده</string>
     <string name="shared_string_deselect">پاک‌کردن انتخاب‌ها</string>
     <string name="shared_string_deselect_all">پاک‌کردن همهٔ انتخاب‌ها</string>
     <string name="shared_string_unexpected_error">خطای غیرمنتظره</string>
@@ -2722,7 +2722,7 @@
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">نام نقطه (اختیاری)</string>
     <string name="transport_nearby_routes_within">مسیرهای نزدیک تا</string>
-    <string name="transport_nearby_routes">در کمتر از</string>
+    <string name="transport_nearby_routes">تا</string>
     <string name="group_deleted">گروه حذف شد</string>
     <string name="rendering_attr_whiteWaterSports_name">ورزش‌‌های آب‌های خروشان</string>
     <string name="clear_all_intermediates">پاک‌کردن همهٔ نقاط میانی</string>
@@ -2960,8 +2960,8 @@
     <string name="by_transport_type">با %1$s</string>
     <string name="step_by_step">گام به گام</string>
     <string name="road_types">نوع جاده‌ها</string>
-    <string name="exit_at">ایستگاه پیاده‌شدن</string>
-    <string name="sit_on_the_stop">ایستگاه سوارشدن</string>
+    <string name="exit_at">خروج در</string>
+    <string name="sit_on_the_stop">سوارشوید در ایستگاه</string>
     <string name="quick_action_show_hide_gpx_tracks">آشکار/پنهان کردن ردهای GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">با لمس این دکمهٔ عملیاتی، ردهای GPX انتخابی را روی نقشه آشکار یا پنهان کنید</string>
     <string name="quick_action_gpx_tracks_hide">پنهان‌کردن ردهای GPX</string>
