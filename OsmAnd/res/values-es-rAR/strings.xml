@@ -179,7 +179,7 @@ Lon %2$s</string>
     <string name="no_internet_connection">Imposible descargar, comprueba la conexión a Internet.</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="use_opengl_render">Usar renderizado OpenGL</string>
-    <string name="home_button">Inicio</string>
+    <string name="home_button">Casa</string>
     <string name="search_for">Buscador</string>
     <string name="coordinates">Coordenadas</string>
     <string name="rendering_attr_subwayMode_name">Rutas de subte</string>
@@ -1100,7 +1100,7 @@ Lon %2$s</string>
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles de zoom inferiores.</string>
     <string name="favourites_delete_multiple_succesful">Puntos favoritos borrados.</string>
     <string name="favorite_delete_multiple">¿Borrar %1$d Favoritos y %2$d grupos de Favoritos?</string>
-    <string name="favorite_home_category">Inicio</string>
+    <string name="favorite_home_category">Casa</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
     <string name="shared_string_others">Otros</string>
