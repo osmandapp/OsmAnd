@@ -107,8 +107,8 @@
     <string name="storage_directory_external">Almacenamientu esternu</string>
     <string name="storage_directory_multiuser">Almacenamientu multiusuariu</string>
     <string name="storage_directory_default">Memoria interna</string>
-    <string name="application_dir"/>
-    <string name="storage_directory"/>
+    <string name="application_dir">Carpeta del almacenamientu de datos</string>
+    <string name="storage_directory">Almacenamientu de mapes</string>
     <string name="agps_info">Información d\'A-GPS</string>
     <string name="shared_string_places">Llugares</string>
     <string name="confirm_usage_speed_cameras"/>
@@ -371,7 +371,7 @@
     <string name="local_osm_changes_delete_all_confirm">Vas desaniciar %1$d cambeos d\'OSM, ¿De xuru\?</string>
     <string name="animate_routing_route_not_calculated">Calcula la ruta primero</string>
     <string name="about_version">Versión:</string>
-    <string name="shared_string_about"/>
+    <string name="shared_string_about">Tocante a</string>
     <string name="about_settings_descr">Información de la versión, llicencies y miembros del proyeutu</string>
     <string name="local_index_tile_data_zooms">Zooms baxaos: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximu: %1$s</string>
@@ -1001,7 +1001,7 @@
     <string name="show_guide_line_descr"/>
     <string name="show_arrows_descr">Amuesa una o dos fleches qu\'indiquen la direición a los marcadores activos.</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="thank_you_for_feedback"/>
+    <string name="thank_you_for_feedback">Gracies polos comentarios</string>
     <string name="search_street"/>
     <string name="start_search_from_city"/>
     <string name="shared_string_restore">Restaurar</string>
@@ -1666,4 +1666,8 @@
     <string name="shared_string_swap">Intercambiar</string>
     <string name="animate_route">Aniciar una simulación</string>
     <string name="add_start_and_end_points">Amiesta los puntos d\'aniciu y fin</string>
+    <string name="app_mode_public_transport">Tresporte públicu</string>
+    <string name="choose_navigation_type">Esbilla d\'un perfil de navegación</string>
+    <string name="storage_directory_manual">Especificar a mano</string>
+    <string name="safe_mode_description">Executa l\'aplicación nel mou seguru (usando\'l códigu lentu d\'Android en cuentes del nativu).</string>
 </resources>
