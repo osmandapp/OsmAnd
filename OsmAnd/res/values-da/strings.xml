@@ -2982,6 +2982,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_undefined_name">Ikke defineret</string>
     <string name="public_transport_warning_descr_blog">Læs mere om hvordan OsmAnd beregner ruter på vores blog.</string>
     <string name="public_transport_warning_title">Offentlig transportruter er nu i beta testfasen, så fejl og unøjagtigheder kan forekomme.</string>
-    <string name="add_intermediate">Tilføje mellemliggende punkt</string>
+    <string name="add_intermediate">Tilføj mellemliggende punkt</string>
     <string name="transfers_size">%1$d overførsler</string>
+    <string name="shared_string_walk">Gang</string>
+    <string name="save_poi_value_exceed_length_title">Længden af \"%s\" værdien</string>
 </resources>
