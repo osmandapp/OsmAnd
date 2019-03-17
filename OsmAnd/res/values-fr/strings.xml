@@ -2315,7 +2315,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="display_zoom_level">Niveau de zoom de l\'affichage : %1$s</string>
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
-    <string name="route_is_too_long_v2">Longue distance. Merci d\'ajouter des destinations intermédiaires si cet itinéraire n\'est pas calculé dans 10 minutes.</string>
+    <string name="route_is_too_long_v2">Pour les longues distances et si l\'itinéraire n\'est pas calculé dans 10 minutes, ajoutez des destinations intermédiaires.</string>
     <string name="srtm_menu_download_descr">Téléchargez les \"courbes de niveaux\" de cette région.</string>
     <string name="shared_string_plugin">Greffon</string>
     <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon \"Courbes de niveaux\"</string>
@@ -2954,4 +2954,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les routes, visitez notre blog.</string>
     <string name="public_transport_warning_title">Les itinéraires en transports publics sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter un point intermédiaire</string>
+    <string name="shared_string_walk">Marche</string>
+    <string name="save_poi_value_exceed_length">L\'étiquette \"%s\" est limitée à 255 caractères.
+\nVeuillez la modifier avant de poursuivre.</string>
+    <string name="save_poi_value_exceed_length_title">Taille de \"%s\"</string>
 </resources>
