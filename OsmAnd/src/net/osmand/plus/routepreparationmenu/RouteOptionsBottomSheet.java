@@ -350,12 +350,16 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
 		List<String> routingParameters = new ArrayList<>();
-		if (applicationMode.equals(ApplicationMode.CAR)) {
+		if (applicationMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			routingParameters = AppModeOptions.CAR.routingParameters;
-		} else if (applicationMode.equals(ApplicationMode.BICYCLE)) {
+		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			routingParameters = AppModeOptions.BICYCLE.routingParameters;
-		} else if (applicationMode.equals(ApplicationMode.PEDESTRIAN)) {
+		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			routingParameters = AppModeOptions.PEDESTRIAN.routingParameters;
+		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+			routingParameters = AppModeOptions.PUBLIC_TRANSPORT.routingParameters;
+		} else {
+			routingParameters = AppModeOptions.OTHER.routingParameters;
 		}
 
 		return routingOptionsHelper.getRoutingParameters(applicationMode, routingParameters);
@@ -468,6 +472,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				GeneralRouter.USE_HEIGHT_OBSTACLES,
 				DividerItem.KEY,
 				AvoidRoadsTypesRoutingParameter.KEY,
+				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				OtherSettingsRoutingParameter.KEY,
+				RouteSimulationItem.KEY),
+
+		PUBLIC_TRANSPORT(// MuteSoundRoutingParameter.KEY,
+				// DividerItem.KEY,
+				AvoidRoadsTypesRoutingParameter.KEY,
+				// ShowAlongTheRouteItem.KEY,
+				// DividerItem.KEY,
+				OtherSettingsRoutingParameter.KEY),
+
+		OTHER(MuteSoundRoutingParameter.KEY,
+				DividerItem.KEY,
+				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
