@@ -60,7 +60,7 @@
     <string name="shared_string_close">Закрити</string>
     <string name="disconnect_from_telegram_desc">Скасування дозволу до трансляції позиції. Відкрийте Telegram, перейдіть до пункту Налаштування → Конфіденційність та безпека → Активні сесії, та завершіть сеанс OsmAnd Telegram.</string>
     <string name="disconnect_from_telegram">Як вимкнути відслідковування OsmAnd з Telegram</string>
-    <string name="logout_help_desc">Як вимкнути OsmAnd трансляцію позиції з Telegram</string>
+    <string name="logout_help_desc">Як відключити OsmAnd трекер від Telegram</string>
     <string name="connected_account">Повʼязаний обліковий запис</string>
     <string name="shared_string_account">Обліковий запис</string>
     <string name="in_time">через %1$s</string>
@@ -188,4 +188,18 @@
     <string name="process_service">Сервіс OsmAnd Telegram</string>
     <string name="osmand_logo">OsmAnd логотип</string>
     <string name="live_now">Активно зараз</string>
+    <string name="location_recording_enabled">Запис позиціювання увімкнуто</string>
+    <string name="timeline_description">Увімкніть моніторинг, аби зберігати позиціювання в історії.</string>
+    <string name="app_name_short">OsmAnd трекер</string>
+    <string name="privacy_policy_use_telegram">Telegram (менеджер повідомлень) використовується для зв\'язку та спілкування між людьми.</string>
+    <string name="privacy_policy_telegram_client">OsmAnd трекер є одним із клієнтів, який використовує відкриту платформу Telegram. Ваші контакти можуть використовувати будь-який інший клієнт Telegram.</string>
+    <string name="privacy_policy_agree">Натиснувши продовжити, Ви погоджуєтесь з умовами політики конфіденційності Telegram та OsmAnd.</string>
+    <string name="telegram_privacy_policy">Політика конфіденційності Telegram</string>
+    <string name="osmand_privacy_policy">Політика конфіденційності OsmAnd</string>
+    <string name="shared_string_appearance">Зовнішній вигляд</string>
+    <string name="gps_points_in_buffer">надіслано (%1$d в буфері)</string>
+    <string name="monitoring_is_enabled">Моніторинг увімкнуто</string>
+    <string name="monitoring_is_disabled">Моніторинг вимкнуто</string>
+    <string name="shared_string_live">Активні</string>
+    <string name="timeline">Хронологія</string>
 </resources>
