@@ -48,6 +48,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	public static final int OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE = 1;
 
 	private static final String AVOID_ROADS_TYPES_KEY = "avoid_roads_types";
+	private static final String HIDE_IMPASSABLE_ROADS_KEY = "hide_impassable_roads";
 	private static final String AVOID_ROADS_OBJECTS_KEY = "avoid_roads_objects";
 
 	private RoutingOptionsHelper routingOptionsHelper;
@@ -55,6 +56,14 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private HashMap<String, Boolean> routingParametersMap;
 	private List<LatLon> removedImpassableRoads;
 	private LinearLayout stylesContainer;
+	private boolean hideImpassableRoads;
+
+	public AvoidRoadsBottomSheetDialogFragment() {
+	}
+
+	public AvoidRoadsBottomSheetDialogFragment(boolean hideImpassableRoads) {
+		this.hideImpassableRoads = hideImpassableRoads;
+	}
 
 	List<BottomSheetItemWithCompoundButton> compoundButtons = new ArrayList<>();
 
@@ -68,6 +77,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(AVOID_ROADS_TYPES_KEY)) {
 				routingParametersMap = (HashMap<String, Boolean>) savedInstanceState.getSerializable(AVOID_ROADS_TYPES_KEY);
+			}
+			if (savedInstanceState.containsKey(HIDE_IMPASSABLE_ROADS_KEY)) {
+				hideImpassableRoads = true;
 			}
 			if (savedInstanceState.containsKey(AVOID_ROADS_OBJECTS_KEY)) {
 				removedImpassableRoads = (List<LatLon>) savedInstanceState.getSerializable(AVOID_ROADS_OBJECTS_KEY);
@@ -101,7 +113,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		items.add(titleItem);
 
 		final SimpleBottomSheetItem descriptionItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setTitle(getString(R.string.avoid_roads_descr))
+				.setTitle(
+						!hideImpassableRoads ? getString(R.string.avoid_roads_descr) : getString(R.string.avoid_pt_types_descr))
 				.setLayoutId(R.layout.bottom_sheet_item_title_long)
 				.create();
 		items.add(descriptionItem);
@@ -119,42 +132,46 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		}
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(stylesContainer).create());
 
-		populateImpassableRoadsObjects();
+		if(!hideImpassableRoads) {
+			populateImpassableRoadsObjects();
 
-		final View buttonView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_btn, null);
-		TextView buttonDescription = (TextView) buttonView.findViewById(R.id.button_descr);
-		buttonDescription.setText(R.string.shared_string_select_on_map);
-		buttonDescription.setTextColor(getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+			final View buttonView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_btn, null);
+			TextView buttonDescription = (TextView) buttonView.findViewById(R.id.button_descr);
+			buttonDescription.setText(R.string.shared_string_select_on_map);
+			buttonDescription.setTextColor(getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 
-		FrameLayout buttonContainer = buttonView.findViewById(R.id.button_container);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, buttonDescription, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+			FrameLayout buttonContainer = buttonView.findViewById(R.id.button_container);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+				AndroidUtils.setBackground(app, buttonDescription, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			} else {
+				AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+			}
+
+			buttonContainer.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
+						mapActivity.getMapRouteInfoMenu().hide();
+						app.getAvoidSpecificRoads().selectFromMap(mapActivity);
+						Fragment fragment = getTargetFragment();
+						if (fragment != null) {
+							fragment.onActivityResult(getTargetRequestCode(), OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE, null);
+						}
+					}
+					dismiss();
+					}
+			});
+			final SimpleBottomSheetItem buttonItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+					.setCustomView(buttonView)
+					.create();
+			items.add(buttonItem);
+
 		}
 
-		buttonContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-					mapActivity.getMapRouteInfoMenu().hide();
-					app.getAvoidSpecificRoads().selectFromMap(mapActivity);
-					Fragment fragment = getTargetFragment();
-					if (fragment != null) {
-						fragment.onActivityResult(getTargetRequestCode(), OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE, null);
-					}
-				}
-				dismiss();
-			}
-		});
 
-		final SimpleBottomSheetItem buttonItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-				.setCustomView(buttonView)
-				.create();
-		items.add(buttonItem);
 
 		items.add(new SubtitleDividerItem(app));
 
@@ -243,6 +260,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(AVOID_ROADS_TYPES_KEY, routingParametersMap);
 		outState.putSerializable(AVOID_ROADS_OBJECTS_KEY, (Serializable) removedImpassableRoads);
+		if(hideImpassableRoads) {
+			outState.putBoolean(HIDE_IMPASSABLE_ROADS_KEY, true);
+		}
 	}
 
 	@Override

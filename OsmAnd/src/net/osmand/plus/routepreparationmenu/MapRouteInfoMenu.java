@@ -61,7 +61,6 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameterGroup;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
@@ -95,6 +94,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
@@ -971,60 +971,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						}
 					}
 				}
-			} else if (parameter instanceof AvoidRoadsTypesRoutingParameter) {
-				final LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
-				if (item != null) {
-					item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
 
-					List<RoutingParameter> avoidParameters = app.getRoutingOptionsHelper().getAvoidRoutingPrefsForAppMode(applicationMode);
-					final List<RoutingParameter> avoidedParameters = new ArrayList<>();
-					for (int i = 0; i < avoidParameters.size(); i++) {
-						RoutingParameter p = avoidParameters.get(i);
-						CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-						if (preference != null && preference.get()) {
-							avoidedParameters.add(p);
-						}
-					}
-					if (avoidedParameters.isEmpty()) {
-						continue;
-					}
-					for (int i = 0; i < avoidedParameters.size(); i++) {
-						final RoutingParameter routingParameter = avoidedParameters.get(i);
-						final View container = createToolbarSubOptionView(false, SettingsBaseActivity.getRoutingStringPropertyName(app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark, i == avoidedParameters.size() - 1, new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
-								preference.set(false);
-								avoidedParameters.remove(routingParameter);
-								if (avoidedParameters.isEmpty()) {
-									mode.parameters.remove(parameter);
-								}
-								if (mode.parameters.size() > 2) {
-									item.removeView(v);
-								} else {
-									updateOptionsButtons();
-								}
-							}
-						});
-						if (container != null) {
-							item.addView(container, newLp);
-						}
-					}
-					optionsContainer.addView(item, lp);
-				}
-			} else if (parameter instanceof AvoidRoadsRoutingParameter) {
+			} else if (parameter instanceof AvoidRoadsRoutingParameter || parameter instanceof RoutingOptionsHelper.AvoidPTTypesRoutingParameter) {
 				final LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
 				if (item != null) {
+
 					item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
-					AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
-					Map<LatLon, RouteDataObject> impassableRoads = avoidSpecificRoads.getImpassableRoads();
-					if (impassableRoads.isEmpty()) {
-						continue;
+					Map<LatLon, RouteDataObject> impassableRoads = new TreeMap<>();
+					if (parameter instanceof AvoidRoadsRoutingParameter) {
+						impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 					}
 					Iterator<RouteDataObject> it = impassableRoads.values().iterator();
 					while (it.hasNext()) {
 						final RouteDataObject routeDataObject = it.next();
-						final View container = createToolbarSubOptionView(false, avoidSpecificRoads.getText(routeDataObject), R.drawable.ic_action_remove_dark, !it.hasNext(), new OnClickListener() {
+						final View container = createToolbarSubOptionView(false, app.getAvoidSpecificRoads().getText(routeDataObject), R.drawable.ic_action_remove_dark, !it.hasNext(), new OnClickListener() {
 							@Override
 							public void onClick(View v) {
 								MapActivity mapActivity = getMapActivity();
@@ -1053,7 +1013,41 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 							item.addView(container, newLp);
 						}
 					}
-					optionsContainer.addView(item, lp);
+
+					List<RoutingParameter> avoidParameters = app.getRoutingOptionsHelper().getAvoidRoutingPrefsForAppMode(applicationMode);
+					final List<RoutingParameter> avoidedParameters = new ArrayList<>();
+					for (int i = 0; i < avoidParameters.size(); i++) {
+						RoutingParameter p = avoidParameters.get(i);
+						CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
+						if (preference != null && preference.get()) {
+							avoidedParameters.add(p);
+						}
+					}
+					for (int i = 0; i < avoidedParameters.size(); i++) {
+						final RoutingParameter routingParameter = avoidedParameters.get(i);
+						final View container = createToolbarSubOptionView(false, SettingsBaseActivity.getRoutingStringPropertyName(app, routingParameter.getId(), routingParameter.getName()), R.drawable.ic_action_remove_dark, i == avoidedParameters.size() - 1, new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
+								preference.set(false);
+								avoidedParameters.remove(routingParameter);
+								if (avoidedParameters.isEmpty()) {
+									mode.parameters.remove(parameter);
+								}
+								if (mode.parameters.size() > 2) {
+									item.removeView(v);
+								} else {
+									updateOptionsButtons();
+								}
+							}
+						});
+						if (container != null) {
+							item.addView(container, newLp);
+						}
+					}
+					if(avoidedParameters.size() > 0 || impassableRoads.size() > 0) {
+						optionsContainer.addView(item, lp);
+					}
 				}
 			} else if (parameter instanceof LocalRoutingParameterGroup) {
 				final LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) parameter;
