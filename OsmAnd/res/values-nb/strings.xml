@@ -2994,4 +2994,8 @@
     <string name="public_transport_warning_descr_blog">Lær mer om hvordan OsmAnd kaklulerer ruter i bloggen vår.</string>
     <string name="public_transport_warning_title">Offentlige transportnavigasjon er nå i betatestingsstadie, så feil og unøyaktigheter kan forefinnes.</string>
     <string name="add_intermediate">Legg til mellomliggende punkt</string>
+    <string name="shared_string_walk">Gå</string>
+    <string name="save_poi_value_exceed_length">Verdien av taggen \"%s\" kan ikke overstige 255 tegn.
+\nRediger den før du fortsetter.</string>
+    <string name="save_poi_value_exceed_length_title">Lengden på \"%s\"-verdien</string>
 </resources>
