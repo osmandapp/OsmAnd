@@ -123,7 +123,7 @@
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles de zoom inferiores.</string>
     <string name="favourites_delete_multiple_succesful">Puntos favoritos borrados.</string>
     <string name="favorite_delete_multiple">¿Borrar %1$d Favoritos y %2$d grupos de Favoritos?</string>
-    <string name="favorite_home_category">Inicio</string>
+    <string name="favorite_home_category">"Casa "</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Sitios</string>
     <string name="shared_string_others">Otros</string>
@@ -1405,7 +1405,7 @@
     <string name="wake_on_voice_descr">Enciende la pantalla del dispositivo al aproximarse a un giro.</string>
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
     <string name="shared_string_never">Nunca</string>
-    <string name="home_button">Inicio</string>
+    <string name="home_button">Casa</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
     <string name="search_for">Buscador</string>
     <string name="shared_string_show_all">Mostrar todo</string>
@@ -2448,7 +2448,7 @@
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
     <string name="display_zoom_level">Nivel de zoom de pantalla: %1$s</string>
-    <string name="route_is_too_long_v2">Añade destinos intermedios si no se encuentran caminos para esta larga ruta dentro de los 10 minutos.</string>
+    <string name="route_is_too_long_v2">Larga distancia: Añada destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
@@ -3033,6 +3033,6 @@
     <string name="rendering_attr_highway_class_cycleway_name">Ciclovía / Bicisenda</string>
     <string name="rendering_attr_undefined_name">Indefinido</string>
     <string name="public_transport_warning_descr_blog">Conozca más sobre cómo OsmAnd calcula las rutas en nuestro blog.</string>
-    <string name="public_transport_warning_title">Las rutas de transporte público se encuentran ahora en la fase de pruebas beta, por lo que pueden producirse errores e imprecisiones.</string>
+    <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de prueba beta, pueden producirse errores e imprecisiones.</string>
     <string name="add_intermediate">Añadir punto intermedio</string>
 </resources>

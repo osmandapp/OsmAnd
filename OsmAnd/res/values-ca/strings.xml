@@ -449,7 +449,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="data_settings">Dades</string>
     <string name="shared_string_close">Tanca</string>
     <string name="update_existing">Reemplaça</string>
-    <string name="follow">Inicia la navegació</string>
+    <string name="follow">Inicia el guiatge</string>
     <string name="address">Adreça</string>
     <string name="search_online_address">Internet</string>
     <string name="searching">Cercant…</string>
@@ -1482,7 +1482,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="local_osm_changes_upload_all_confirm">"Esteu a punt de pujar %1$d modificacio(ns)  a OSM. N\'esteu segur?"</string>
     <string name="confirmation_to_clear_history">Voleu esborrar l\'historial?</string>
     <string name="delay_to_start_navigation_descr">Indiqueu el temps màxim d\'espera en la pantalla de planificació de la ruta.</string>
-    <string name="delay_to_start_navigation">Inici de navegació gir a gir després de…</string>
+    <string name="delay_to_start_navigation">Inicia el guiatge gir a gir després de…</string>
     <string name="shared_string_go">Vés</string>
     <string name="osmand_parking_overdue">obsolet</string>
     <string name="action_create">Acció de crear</string>
@@ -2270,11 +2270,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n• Enregistreu la vostra o baixeu una traça GPX i seguiu-la</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes segons la seva dificultat i d\'altres informacions addicionals, com ara la ubicació dels ascensors i altres equipaments.</string>
-    <string name="osmand_extended_description_part5">Ciclisme
-\n• Trobeu les vies de ciclisme en el mapa
-\n• La navegació GPS en mode ciclisme genera la vostra ruta utilitzant vies de ciclisme
-\n• Consulteu la vostra velocitat i altitud
-\n• L\'opció d\'enregistrar traces GPX del vostre trajecte us permet també compartir-les
+    <string name="osmand_extended_description_part5">Ciclisme 
+\n• Trobeu vies per ciclistes al mapa 
+\n• La navegació GPS en mode ciclisme us genera la ruta utilitzant vies per ciclistes 
+\n• Consulteu la vostra velocitat i altitud 
+\n• L\'opció d\'enregistrar traces GPX del vostre trajecte us permet també compartir-les 
 \n• Amb un connector addicional podreu activar les corbes de nivell i l\'ombrejat de relleu</string>
     <string name="osmand_extended_description_part6">A peu, fent senderisme, o visitant una ciutat
 \n• El mapa mostra les rutes per vianants i de senderisme
@@ -2408,7 +2408,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="edit_name">Edita el nom</string>
     <string name="save_poi_too_many_uppercase">El nom té masses majúscules. Voleu continuar?</string>
     <string name="display_zoom_level">Nivell d\'escala de visualització: %1$s</string>
-    <string name="route_is_too_long_v2">Afegiu-hi fites intermèdies si no us dona un resultat abans de 10 minuts per aquesta llarga ruta.</string>
+    <string name="route_is_too_long_v2">Rutes llargues: Afegiu fites intermèdies si no es troba cap resultat en 10 minuts.</string>
     <string name="srtm_color_scheme">Combinació de colors</string>
     <string name="show_from_zoom_level">Mostra segons el nivell d\'escala</string>
     <string name="routing_attr_allow_private_name">Permet l\'accés privat</string>
@@ -2932,7 +2932,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_destination_query">Comenceu per afegir la destinació</string>
     <string name="shared_string_swap">Bescanvia</string>
     <string name="show_more">Mostra\'n més</string>
-    <string name="tracks_on_map">Traces al mapa</string>
+    <string name="tracks_on_map">Traces visualitzades</string>
     <string name="time_of_day">Hora del dia</string>
     <string name="by_transport_type">Per %1$s</string>
     <string name="step_by_step">Pas a pas</string>
@@ -2963,7 +2963,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport_description">Activa les modificacions del transport públic amb OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport públic a OsmAnd Live</string>
     <string name="public_transport_warning_descr_blog">Teniu més informació sobre com OsmAnd calcula les rutes al nostre blog.</string>
-    <string name="public_transport_warning_title">El càlcul de rutes amb transport públic està en fase de proves beta, essent possibles errors i defectes.</string>
+    <string name="public_transport_warning_title">La navegació amb transport públic ara està en proves beta, essent possibles errors i defectes.</string>
     <string name="add_intermediate">Afegeix un punt intermedi</string>
     <string name="transfers_size">%1$d trasllats</string>
     <string name="add_start_and_end_points">Afegeix punts inicial i final</string>
@@ -3006,4 +3006,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_steps_name">Escales</string>
     <string name="rendering_attr_highway_class_path_name">Camí</string>
     <string name="rendering_attr_undefined_name">Indefinit</string>
+    <string name="rendering_attr_surface_cobblestone_name">Empedrat</string>
+    <string name="rendering_attr_surface_paving_stones_name">Paviment de pedres</string>
+    <string name="rendering_attr_highway_class_footway_name">Peatonal</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Ruta eqüestre</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Carril bici</string>
 </resources>

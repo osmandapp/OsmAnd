@@ -2383,7 +2383,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="change_color">Càmbia colore</string>
     <string name="edit_name">Acontza su nùmene</string>
     <string name="save_poi_too_many_uppercase">In su nùmene bi sunt tropas lìteras maiùscolas. Boles sighire?</string>
-    <string name="route_is_too_long_v2">Pro praghere annanghe carchi destinatzione intermèdia si in 10 minutos s\'àndala no at a èssere pronta pro custu tratu longu de caminu.</string>
+    <string name="route_is_too_long_v2">Distàntzia longa: Pro praghere annanghe carchi destinatzione intermèdia si in 10 minutos s\'àndala no at a èssere pronta.</string>
     <string name="display_zoom_level">Livellu ismmaniamentu ischermu: %1$s</string>
     <string name="srtm_color_scheme">Ischema de colores</string>
     <string name="show_from_zoom_level">Ammustra dae su livellu de ismanniamentu</string>
@@ -2979,4 +2979,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_attr_highway_class_path_name">Caminera</string>
     <string name="rendering_attr_highway_class_cycleway_name">Pista tziclàbile</string>
     <string name="rendering_attr_undefined_name">Non dessinidu</string>
+    <string name="public_transport_warning_descr_blog">Impara àteru a pitzu de comente OsmAnd calculat s\'àndala in su blog nostru.</string>
+    <string name="public_transport_warning_title">Su nàvigu cun sos trasportos pùblicos, in custu momentu, est in fase de proa beta. Bi diant pòdere èssere errores e impretzisiones.</string>
+    <string name="add_intermediate">Annaghe unu puntu de coladòrgiu</string>
 </resources>

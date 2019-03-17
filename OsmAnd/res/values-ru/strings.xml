@@ -2973,4 +2973,12 @@
     <string name="rendering_attr_highway_class_path_name">Тропа</string>
     <string name="rendering_attr_highway_class_cycleway_name">Велодорожка</string>
     <string name="rendering_attr_undefined_name">Неопределённая</string>
+    <string name="public_transport_warning_descr_blog">Подробнее о том, как OsmAnd рассчитывает маршруты в нашем блоге.</string>
+    <string name="public_transport_warning_title">Навигация на общественном транспорте в настоящее время проходит бета-тестирование, возможны ошибки и неточности.</string>
+    <string name="add_intermediate">Добавить промежуточную точку</string>
+    <string name="add_start_and_end_points">Добавить пункты отправления и назначения</string>
+    <string name="route_add_start_point">Добавить пункт отправления</string>
+    <string name="route_descr_select_start_point">Выберите пункт отправления</string>
+    <string name="rendering_attr_surface_grass_paver_name">Газонная решетка</string>
+    <string name="rendering_attr_highway_class_state_road_name">Федеральная трасса</string>
 </resources>
