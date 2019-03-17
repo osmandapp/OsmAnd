@@ -1,7 +1,6 @@
 package net.osmand.router;
 
 import java.util.BitSet;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -79,7 +78,7 @@ public class TransportRoutingConfiguration {
 	}
 	
 	public TransportRoutingConfiguration(RoutingConfiguration.Builder builder) {
-		this(builder, Collections.emptyMap());
+		this(builder, new TreeMap<String, String>());
 	}
 	
 	public TransportRoutingConfiguration(RoutingConfiguration.Builder builder, Map<String, String> params) {
