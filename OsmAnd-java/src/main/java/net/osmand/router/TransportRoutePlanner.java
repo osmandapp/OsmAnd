@@ -79,6 +79,10 @@ public class TransportRoutePlanner {
 			double minDist = 0;
 			double travelDist = 0;
 			double travelTime = 0;
+			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
+			if(routeTravelSpeed == 0) {
+				continue;
+			}
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			for (int ind = 1 + segment.segStart; ind < segment.getLength(); ind++) {
@@ -96,7 +100,7 @@ public class TransportRoutePlanner {
 					int interval = sc.avgStopIntervals.get(ind - 1);
 					travelTime += interval * 10;
 				} else {
-					travelTime += ctx.cfg.stopTime + segmentDist / ctx.cfg.travelSpeed;
+					travelTime += ctx.cfg.stopTime + segmentDist / routeTravelSpeed;
 				}
 				if(segment.distFromStart + travelTime > finishTime + ctx.cfg.finishTimeSeconds) {
 					break;
@@ -118,7 +122,7 @@ public class TransportRoutePlanner {
 					nextSegment.parentTravelTime = travelTime;
 					nextSegment.parentTravelDist = travelDist;
 					double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed
-							+ (ctx.cfg.getChangeTime());
+							+ ctx.cfg.getChangeTime() + ctx.cfg.getBoardingTime();
 					nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 					if(ctx.cfg.useSchedule) {
 						int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
@@ -181,7 +185,7 @@ public class TransportRoutePlanner {
 			ctx.calculationProgress.distanceFromEnd = 0;
 			ctx.calculationProgress.reverseSegmentQueueSize = 0;
 			ctx.calculationProgress.directSegmentQueueSize = 0;
-			float speed = (float) ctx.cfg.travelSpeed + 1; // assume
+			float speed = (float) ctx.cfg.defaultTravelSpeed + 1; // assume
 			ctx.calculationProgress.totalEstimatedDistance = (float) (MapUtils.getDistance(start, end) / speed);
 		}
 	}
@@ -226,7 +230,7 @@ public class TransportRoutePlanner {
 					sg.walkDist = p.parentRoute.walkDist;
 					sg.walkTime = sg.walkDist / ctx.cfg.walkSpeed;
 					sg.depTime = p.departureTime;
-					sg.travelInaccurateDist = p.parentTravelDist;
+					sg.travelDistApproximate = p.parentTravelDist;
 					sg.travelTime = p.parentTravelTime;
 					route.segments.add(0, sg);
 				}
@@ -294,7 +298,7 @@ public class TransportRoutePlanner {
 		private static final int DISPLAY_SEGMENT_IND = 0;
 		public TransportRoute route;
 		public double walkTime;
-		public double travelInaccurateDist;
+		public double travelDistApproximate;
 		public double travelTime;
 		public int start;
 		public int end;
@@ -320,6 +324,10 @@ public class TransportRoutePlanner {
 				}
 			}
 			return -1;
+		}
+		
+		public double getTravelTime() {
+			return travelTime;
 		}
 		
 		public TransportStop getStart() {
@@ -478,18 +486,21 @@ public class TransportRoutePlanner {
 		}
 		
 		public double getTravelTime() {
-			if(cfg.useSchedule) {
-				int t = 0;
-				for(TransportRouteResultSegment s : segments) {
+			double t = 0;
+			for (TransportRouteResultSegment s : segments) {
+				if (cfg.useSchedule) {
 					TransportSchedule sts = s.route.getSchedule();
 					for (int k = s.start; k < s.end; k++) {
 						t += sts.getAvgStopIntervals()[k] * 10;
 					}
+				} else {
+					if (t > 0) {
+						t += cfg.getBoardingTime();
+					}
+					t += s.getTravelTime();
 				}
-				return t;
 			}
-			return getTravelDist() / cfg.travelSpeed + cfg.stopTime * getStops() + 
-					cfg.getChangeTime() * getChanges();
+			return t;
 		}
 		
 		public double getWalkTime() {
