@@ -90,7 +90,8 @@ public class GeneralRouter implements VehicleRouter {
 		CAR,
 		PEDESTRIAN,
 		BICYCLE,
-		BOAT
+		BOAT,
+		PUBLIC_TRANSPORT
 	}
 
 	
@@ -224,7 +225,7 @@ public class GeneralRouter implements VehicleRouter {
 		return impassableRoads.toArray();
 	}
 	
-	private int registerTagValueAttribute(String tag, String value) {
+	public int registerTagValueAttribute(String tag, String value) {
 		String key = tag +"$"+value;
 		if(universalRules.containsKey(key)) {
 			return universalRules.get(key);
@@ -617,6 +618,14 @@ public class GeneralRouter implements VehicleRouter {
 			return ((Number)o).intValue();
 		}
 		
+		public int evaluateInt(BitSet rawTypes, int defValue) {
+			Object o = evaluate(rawTypes);
+			if(!(o instanceof Number)){
+				return defValue;
+			}
+			return ((Number)o).intValue();
+		}
+		
 		public float evaluateFloat(RouteDataObject ro, float defValue) {
 			Object o = evaluate(ro);
 			if(!(o instanceof Number)) {
@@ -628,6 +637,14 @@ public class GeneralRouter implements VehicleRouter {
 		public float evaluateFloat(RouteRegion region, int[] types, float defValue) {
 			Object o = evaluate(convert(region, types));
 			if(!(o instanceof Number)) {
+				return defValue;
+			}
+			return ((Number)o).floatValue();
+		}
+		
+		public float evaluateFloat(BitSet rawTypes, float defValue) {
+			Object o = evaluate(rawTypes);
+			if(!(o instanceof Number)){
 				return defValue;
 			}
 			return ((Number)o).floatValue();

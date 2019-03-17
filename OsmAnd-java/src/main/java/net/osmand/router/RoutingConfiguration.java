@@ -136,7 +136,7 @@ public class RoutingConfiguration {
 		}
 	}
 
-	private static int parseSilentInt(String t, int v) {
+	public static int parseSilentInt(String t, int v) {
 		if (t == null || t.length() == 0) {
 			return v;
 		}
@@ -144,7 +144,7 @@ public class RoutingConfiguration {
 	}
 
 
-	private static float parseSilentFloat(String t, float v) {
+	public static float parseSilentFloat(String t, float v) {
 		if (t == null || t.length() == 0) {
 			return v;
 		}
@@ -217,8 +217,8 @@ public class RoutingConfiguration {
 			String valueDescriptions = parser.getAttributeValue("", "valueDescriptions");
 			String[] strValues = values.split(",");
 			Double[] vls = new Double[strValues.length];
-			for(int i =0; i< vls.length; i++) {
-				vls[i] =Double.parseDouble(strValues[i].trim());
+			for (int i = 0; i < vls.length; i++) {
+				vls[i] = Double.parseDouble(strValues[i].trim());
 			}
 			currentRouter.registerNumericParameter(id, name, description, vls , 
 					valueDescriptions.split(","));
