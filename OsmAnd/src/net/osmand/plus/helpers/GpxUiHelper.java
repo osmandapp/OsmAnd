@@ -1226,7 +1226,7 @@ public class GpxUiHelper {
 		chart.setDragEnabled(useGesturesAndScale);
 		chart.setScaleYEnabled(false);
 		chart.setAutoScaleMinMaxEnabled(true);
-		chart.setDrawBorders(false);
+		chart.setDrawBorders(true);
 		chart.getDescription().setEnabled(false);
 		chart.setDragDecelerationEnabled(false);
 
@@ -1252,6 +1252,9 @@ public class GpxUiHelper {
 		yr.setDrawAxisLine(false);
 		yr.setDrawGridLines(false);
 		yr.setAxisMinimum(0f);
+		chart.setMinOffset(0);
+		chart.setExtraRightOffset(16);
+		chart.setExtraLeftOffset(16);
 
 		yl.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light));
 		yr.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light));
@@ -1266,7 +1269,8 @@ public class GpxUiHelper {
 	                                              @NonNull HorizontalBarChart mChart,
 	                                              @NonNull RouteStatistics.Statistics<E> routeStatistics,
 	                                              @NonNull GPXTrackAnalysis analysis,
-	                                              boolean useRightAxis) {
+	                                              boolean useRightAxis,
+	                                              boolean nightMode) {
 
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setEnabled(false);
@@ -1292,9 +1296,10 @@ public class GpxUiHelper {
 		entries.add(new BarEntry(0, stacks));
 		BarDataSet barDataSet = new BarDataSet(entries, "");
 		barDataSet.setColors(colors);
+		barDataSet.setBarBorderColor(ContextCompat.getColor(app, nightMode ? R.color.divider_dark : R.color.divider_light));
 		BarData dataSet = new BarData(barDataSet);
 		dataSet.setDrawValues(false);
-
+		dataSet.setBarWidth(1);
 		mChart.getAxisRight().setAxisMaximum(dataSet.getYMax());
 		mChart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
 
