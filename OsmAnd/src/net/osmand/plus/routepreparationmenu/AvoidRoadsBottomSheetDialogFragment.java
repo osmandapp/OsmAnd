@@ -86,7 +86,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 		}
 		if (routingParametersMap == null) {
-			routingParametersMap = generateStylesMap(app);
+			routingParametersMap = getRoutingParametersMap(app);
 		}
 		if (removedImpassableRoads == null) {
 			removedImpassableRoads = new ArrayList<LatLon>();
@@ -95,7 +95,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_toolbar_title, null);
 		TextView textView = (TextView) titleView.findViewById(R.id.title);
-		textView.setText(R.string.impassable_road);
+		textView.setText(!hideImpassableRoads ? R.string.impassable_road : R.string.avoid_pt_types);
 
 		Toolbar toolbar = (Toolbar) titleView.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
@@ -293,7 +293,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			if (parameter != null) {
 				boolean checked = entry.getValue();
 				OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
-				preference.set(checked);
+				preference.setModeValue(app.getRoutingHelper().getAppMode(), checked);
 			}
 		}
 
@@ -317,13 +317,13 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@NonNull
-	private HashMap<String, Boolean> generateStylesMap(OsmandApplication app) {
+	private HashMap<String, Boolean> getRoutingParametersMap(OsmandApplication app) {
 		HashMap<String, Boolean> res = new HashMap<>();
 		List<GeneralRouter.RoutingParameter> avoidParameters = routingOptionsHelper.getAvoidRoutingPrefsForAppMode(app.getRoutingHelper().getAppMode());
 
 		for (GeneralRouter.RoutingParameter parameter : avoidParameters) {
 			OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
-			res.put(parameter.getId(), preference.get());
+			res.put(parameter.getId(), preference.getModeValue(app.getRoutingHelper().getAppMode()));
 		}
 
 		return res;

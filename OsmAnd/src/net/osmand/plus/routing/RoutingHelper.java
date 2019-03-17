@@ -308,6 +308,8 @@ public class RoutingHelper {
 		Location locationProjection = currentLocation;
 		if (isPublicTransportMode() && currentLocation != null && finalLocation != null &&
 				(targetPointsChanged || transportRoutingHelper.getStartLocation() == null)) {
+			lastFixedLocation = currentLocation;
+			lastProjection = locationProjection;
 			transportRoutingHelper.setApplicationMode(mode);
 			transportRoutingHelper.setFinalAndCurrentLocation(finalLocation,
 					new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()));
