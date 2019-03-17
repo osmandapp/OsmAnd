@@ -67,7 +67,7 @@ public class TransportRoutePlanner {
 			ctx.visitedRoutesCount++;
 			ctx.visitedSegments.put(segment.getId(), segment);
 			
-			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges) {
+			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges + 1) {
 				continue;
 			}
 			if (segment.distFromStart > finishTime + ctx.cfg.finishTimeSeconds || 

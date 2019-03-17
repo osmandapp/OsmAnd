@@ -18,7 +18,7 @@ public class TransportRoutingConfiguration {
 	
 	public int walkChangeRadius = 300; 
 	
-	public int maxNumberOfChanges = 4;  
+	public int maxNumberOfChanges = 3;  
 	
 	public int finishTimeSeconds = 1200;
 
