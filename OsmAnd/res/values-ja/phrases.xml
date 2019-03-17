@@ -2035,7 +2035,7 @@
     <string name="poi_office_midwife">助産所・助産院(Midwife office)</string>
     <string name="poi_consulting">コンサルタント事務所(Consulting office)</string>
     <string name="poi_cooperative">協同組合事務所</string>
-    <string name="poi_energy_supplier">電力会社事務所(Energy supplier office)</string>
+    <string name="poi_energy_supplier">電力会社</string>
     <string name="poi_guide">ツアー、登山、ダイビング等のガイド事務所</string>
     <string name="poi_logistics">物流事務所</string>
     <string name="poi_parish">教区事務所</string>
@@ -3114,4 +3114,12 @@
     <string name="poi_music_school">音楽学校</string>
     <string name="poi_language_school">外国語学校</string>
     <string name="poi_life_ring">救命浮環(浮き輪)</string>
+    <string name="poi_zoo_petting_zoo">ふれあい動物園</string>
+    <string name="poi_zoo_wildlife_park">野生動物公園</string>
+    <string name="poi_zoo_enclosure">簡易動物園</string>
+    <string name="poi_zoo_safari_park">サファリパーク</string>
+    <string name="poi_zoo_birds">鳥類園、バードパーク</string>
+    <string name="poi_zoo_aviary">鳥小屋、小規模鳥類園</string>
+    <string name="poi_zoo_falconry">猛禽類園、観光用鷹匠</string>
+    <string name="poi_zoo_reptile">爬虫類園</string>
 </resources>
