@@ -494,9 +494,7 @@ public class TransportRoutePlanner {
 						t += sts.getAvgStopIntervals()[k] * 10;
 					}
 				} else {
-					if (t > 0) {
-						t += cfg.getBoardingTime();
-					}
+					t += cfg.getBoardingTime();
 					t += s.getTravelTime();
 				}
 			}
