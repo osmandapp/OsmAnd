@@ -2457,7 +2457,7 @@ Pôr do Sol: %2$s</string>
 \nPor favor, forneça um código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo válido 
 \nRepresenta área: %1$s x %2$s</string>
-    <string name="route_is_too_long_v2">Longa distância: adicione destinos intermediários se nenhuma rota for encontrada em 10 minutos.</string>
+    <string name="route_is_too_long_v2">Para longas distâncias: adicione destinos intermediários se nenhuma rota for encontrada em 10 minutos.</string>
     <string name="osmand_extended_description_part5">Ciclismo
 \n • Encontre caminhos de bicicleta no mapa
 \n • Navegação por GPS no modo ciclismo constrói a sua rota utilizando caminhos de bicicleta
@@ -2792,7 +2792,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_world">Mundo</string>
     <string name="thank_you_for_feedback">Obrigado por seus comentários</string>
     <string name="poi_cannot_be_found">Nó ou caminho não pode ser encontrado.</string>
-    <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
+    <string name="search_no_results_feedback">Nenhum resultado de pesquisa\?
 \nMande-nos o seu comentário</string>
     <string name="commiting_way">Enviando caminho…</string>
     <string name="increase_search_radius_to">Aumentar raio de pesquisa para %1$s</string>
@@ -2979,4 +2979,8 @@ Pôr do Sol: %2$s</string>
     <string name="public_transport_warning_descr_blog">Saiba mais sobre como OsmAnd calcula as rotas em nosso blog.</string>
     <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, erros e imprecisões podem ocorrer.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
+    <string name="shared_string_walk">Ande</string>
+    <string name="save_poi_value_exceed_length">O valor da etiqueta \"%s\" não pode exceder 255 caracteres. 
+\nFavor editá-la antes de continuar.</string>
+    <string name="save_poi_value_exceed_length_title">Comprimento do valor \"%s\"</string>
 </resources>
