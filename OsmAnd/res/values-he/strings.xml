@@ -2944,4 +2944,7 @@
     <string name="rendering_attr_surface_wood_name">עץ</string>
     <string name="rendering_attr_surface_gravel_name">חצץ</string>
     <string name="rendering_attr_surface_fine_gravel_name">שומשום</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">איום ונורא</string>
+    <string name="rendering_attr_smoothness_impassable_name">אי אפשר לעבור</string>
+    <string name="rendering_attr_highway_class_motorway_name">דרך לממונעים</string>
 </resources>
