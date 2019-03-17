@@ -587,7 +587,7 @@
     <string name="local_openstreetmap_were_uploaded">{0} POI/الملاحظات تم رفعها</string>
     <string name="live_monitoring_url_descr">تحديد عنوان ويب مع بناء جملة المعلمة: اللات = {0}، خط الطول = {1}، والطابع الزمني = {2}، HDOP = {3}، {4 ارتفاع =}، والسرعة = {5}، واضعة = {6}.</string>
     <string name="gpx_monitoring_disabled_warn">سجل المسار عن طريق ويدجت GPX أو عن طريق إعدادات \'تسجيل الرحلة\'.</string>
-    <string name="free_version_message">يمكنك تحميل أو تحديث الخرائط s$%1.</string>
+    <string name="free_version_message">يمكنك تحميل أو تحديث الخرائط %1$s</string>
     <string name="poi_context_menu_showdescription">اظهار وصف POI.</string>
     <string name="index_name_other">خرائط عالمية حسب الموضوع</string>
     <string name="index_name_wiki">في جميع أنحاء العالم ويكيبيديا النقاط المهمة</string>
