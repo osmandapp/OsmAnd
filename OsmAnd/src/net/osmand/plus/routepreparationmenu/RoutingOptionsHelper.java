@@ -355,6 +355,8 @@ public class RoutingOptionsHelper {
 				return new RouteSimulationItem();
 			case ShowAlongTheRouteItem.KEY:
 				return new ShowAlongTheRouteItem();
+			case AvoidPTTypesRoutingParameter.KEY:
+				return new AvoidPTTypesRoutingParameter();
 			case AvoidRoadsRoutingParameter.KEY:
 				return new AvoidRoadsRoutingParameter();
 			case GpxLocalRoutingParameter.KEY:
