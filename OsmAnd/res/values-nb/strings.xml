@@ -263,7 +263,7 @@
     <string name="search_offline_clear_search">Nytt søk</string>
     <string name="map_text_size_descr">Velg tekststørrelsen for navn på kartet.</string>
     <string name="map_text_size">Skriftstørrelse for kart</string>
-    <string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men du er ikke koblet til internett.</string>
+    <string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men du er ikke koblet til Internett.</string>
     <string name="tts_language_not_supported_title">Språk ikke støttet</string>
     <string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte motoren for Android TTS (tekst-til-tale). Vil du se etter en annen TTS-motor i markedet? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
@@ -387,7 +387,7 @@
     <string name="show_transport_over_map">Vis stoppesteder</string>
     <string name="hello">Navigeringsprogrammet OsmAnd</string>
     <string name="context_menu_item_update_poi">Oppdater interessepunkt</string>
-    <string name="context_menu_item_update_map_confirm">Oppdatere lokale data fra internett?</string>
+    <string name="context_menu_item_update_map_confirm">Oppdater lokale data fra Internett\?</string>
     <string name="search_history_city">By: {0}</string>
     <string name="search_history_street">Gate: {0}, {1}</string>
     <string name="search_history_int_streets">Veikryss: {0} x {1} i {2}</string>
@@ -449,7 +449,7 @@
     <string name="map_tile_source_descr">Velg kilden til nettbaserte eller hurtigbufrede kartdeler.</string>
     <string name="map_tile_source">Fliskartkilde</string>
     <string name="map_source">Kartkilde</string>
-    <string name="use_internet">Bruk internett</string>
+    <string name="use_internet">Bruk Internett</string>
     <string name="show_location">Vis din posisjon</string>
     <string name="show_gps_coordinates_text">Vis GPS-koordinater på kartet</string>
     <string name="use_internet_to_download_tile">Last ned manglende kartdeler</string>
@@ -745,7 +745,7 @@
     <string name="install_paid">Fullversjon</string>
     <string name="clear_destination">Slett reisemål</string>
     <string name="street_name">Gatenavn</string>
-    <string name="choose_osmand_theme">Tema</string>
+    <string name="choose_osmand_theme">Drakt</string>
     <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemål (og mellomliggende reisemål)?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
     <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
@@ -855,7 +855,7 @@
     <string name="modify_transparency">Endre gjennomsiktighet (0 - gjennomsiktig, 255 - ugjennomsiktig)</string>
     <string name="gpx_visibility_txt">Synlighet</string>
     <string name="shared_string_description">Beskrivelse</string>
-    <string name="use_transparent_map_theme">Gjennomsiktig tema</string>
+    <string name="use_transparent_map_theme">Gjennomsiktig drakt</string>
     <string name="keep_informing_never">Bare manuelt (trykk pil)</string>
     <string name="local_index_installed">Lokal versjon</string>
     <string name="gpx_option_destination_point">Bruk gjeldende mål</string>
@@ -1040,7 +1040,7 @@
     <string name="shared_string_enabled">Aktivert</string>
     <string name="shared_string_enable">Aktiver</string>
     <string name="shared_string_disable">Deaktiver</string>
-    <string name="plugin_install_needs_network">Du må være koblet til internett for å installere dette programtillegget.</string>
+    <string name="plugin_install_needs_network">Du må være koblet til Internett for å installere dette programtillegget.</string>
     <string name="shared_string_never">Aldri</string>
     <string name="shared_string_none">Ingen</string>
     <string name="shared_string_and">og</string>
@@ -1202,8 +1202,8 @@
     <string name="lang_ht">Haitisk</string>
     <string name="lang_gl">Galisisk</string>
     <string name="lang_et">Estisk</string>
-    <string name="light_theme">Lyst</string>
-    <string name="dark_theme">Mørkt</string>
+    <string name="light_theme">Lys</string>
+    <string name="dark_theme">Mørk</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-farge</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-bredde</string>
     <string name="rendering_value_translucent_red_name">Gjennomskinnelig rød</string>
@@ -2286,7 +2286,7 @@
     <string name="quick_action_add_create_items">Opprett elementer</string>
     <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
-    <string name="mappilary_no_internet_desc">Du må være koblet til internett for å vise bilder fra Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Du må være koblet til Internett for å vise bilder fra Mapillary.</string>
     <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for denne regionen for å se relieffskygger på kartet.</string>
     <string name="hillshade_purchase_header">Kjøp og installer programtillegget for koter for å se relieffskygger på kartet</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
