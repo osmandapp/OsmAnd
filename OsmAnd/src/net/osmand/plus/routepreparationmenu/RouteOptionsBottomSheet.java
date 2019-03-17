@@ -227,7 +227,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View view) {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 						updateMenu();

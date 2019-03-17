@@ -774,7 +774,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
+		final OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final OsmandSettings settings = app.getSettings();
@@ -1019,7 +1019,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					for (int i = 0; i < avoidParameters.size(); i++) {
 						RoutingParameter p = avoidParameters.get(i);
 						CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-						if (preference != null && preference.get()) {
+						if (preference != null && preference.getModeValue(app.getRoutingHelper().getAppMode())) {
 							avoidedParameters.add(p);
 						}
 					}
@@ -1029,7 +1029,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 							@Override
 							public void onClick(View v) {
 								CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
-								preference.set(false);
+								preference.setModeValue(app.getRoutingHelper().getAppMode(), false);
 								avoidedParameters.remove(routingParameter);
 								if (avoidedParameters.isEmpty()) {
 									mode.parameters.remove(parameter);
