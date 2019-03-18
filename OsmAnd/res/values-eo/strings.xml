@@ -536,7 +536,7 @@ Lon: %2$s</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
     <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da pilo aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
-    <string name="home_button">Ĉefekrano</string>
+    <string name="home_button">Hejmo</string>
     <string name="map_update">Ĝisdatigoj disponeblaj por %1$s mapoj</string>
     <string name="search_for">Serĉi</string>
     <string name="coordinates">Koordinatoj</string>
@@ -2984,4 +2984,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="save_poi_value_exceed_length_title">Longo de valoro “%s”</string>
     <string name="avoid_pt_types_descr">Elektu specojn de publik-transportiloj por eviti dum navigado:</string>
     <string name="avoid_pt_types">Eviti transportilojn…</string>
+    <string name="quick_action_day_night_mode">%s reĝimo</string>
 </resources>
