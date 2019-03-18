@@ -2982,4 +2982,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="save_poi_value_exceed_length">Valoro de la etikedo “%s” ne povas troigi 255 signojn.
 \nBonvolu redakti ĝin antaŭ pluigi.</string>
     <string name="save_poi_value_exceed_length_title">Longo de valoro “%s”</string>
+    <string name="avoid_pt_types_descr">Elektu specojn de publik-transportiloj por eviti dum navigado:</string>
+    <string name="avoid_pt_types">Eviti transportilojn…</string>
 </resources>
