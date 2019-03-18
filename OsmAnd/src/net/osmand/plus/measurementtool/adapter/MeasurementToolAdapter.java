@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -25,12 +23,9 @@ import net.osmand.util.MapUtils;
 
 import java.util.Collections;
 import java.util.List;
-import org.apache.commons.logging.Log;
 
 public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.MeasureToolItemVH>
 		implements MeasurementToolItemTouchHelperCallback.ItemTouchHelperAdapter {
-
-	private static final Log LOG = PlatformUtil.getLog(MeasurementToolAdapter.class);
 
 	private final MapActivity mapActivity;
 	private final List<WptPt> points;
@@ -95,7 +90,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!TextUtils.isEmpty(pointDesc)) {
 			holder.descr.setText(pointDesc);
 		} else {
-			String azimuth = "";
+			String azimuth;
 			String text = "";
 			if (pos < 1) {
 				text = mapActivity.getString(R.string.shared_string_control_start);
@@ -111,7 +106,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
 							points.get(i).lat, points.get(i).lon);
 					azimuth = OsmAndFormatter.getFormattedAzimuth(MapUtils.getBearingToPoint(
-						points.get(i-1).lat, points.get(i-1).lon,
+						points.get(i - 1).lat, points.get(i - 1).lon,
 						points.get(i).lat, points.get(i).lon));
 					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + BULLET + azimuth;
 				}

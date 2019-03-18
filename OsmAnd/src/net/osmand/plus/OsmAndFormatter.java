@@ -3,10 +3,8 @@ package net.osmand.plus;
 import android.content.Context;
 import android.text.format.DateUtils;
 
-import net.osmand.Location;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
-import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
