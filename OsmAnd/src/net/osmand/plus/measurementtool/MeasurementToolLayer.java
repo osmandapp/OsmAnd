@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -206,7 +207,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 						WptPt lastPoint = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
 						LatLon centerLatLon = tb.getCenterLatLon();
 						distance = (float) MapUtils.getDistance(lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
-						bearing = MapUtils.getBearingToPoint(lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
+						bearing = getLocationFromLL(lastPoint.lat, lastPoint.lon).bearingTo(getLocationFromLL(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 					}
 					measureDistanceToCenterListener.onMeasure(distance, bearing);
 				}
@@ -411,6 +412,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
+	}
+
+	private Location getLocationFromLL(double lat, double lon) {
+		Location l = new Location("");
+		l.setLatitude(lat);
+		l.setLongitude(lon);
+		return l;
 	}
 
 	interface OnSingleTapListener {

@@ -91,22 +91,28 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			holder.descr.setText(pointDesc);
 		} else {
 			String text = "";
+			Location l1;
+			Location l2;
 			if (pos < 1) {
 				text = mapActivity.getString(R.string.shared_string_control_start);
-				Location l1 = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+
+				mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 				if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
-					text = text + BULLET + OsmAndFormatter
-						.getFormattedAzimuth(MapUtils.getBearingToPoint(l1, points.get(0).lat, points.get(0).lon));
+					l1 = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+					l2 = getLocationFromLL(points.get(0).lat, points.get(0).lon);
+					text = text
+						+ BULLET + OsmAndFormatter.getFormattedDistance(l1.distanceTo(l2), mapActivity.getMyApplication())
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2));
 				}
 				holder.descr.setText(text);
 			} else {
 				float dist = 0;
 				for (int i = 1; i <= pos; i++) {
-					float[] dab = MapUtils.getDistanceAndBearing(points.get(i - 1).lat, points.get(i - 1).lon,
-						points.get(i).lat, points.get(i).lon);
-					dist += dab[0];
+					l1 = getLocationFromLL(points.get(i - 1).lat, points.get(i - 1).lon);
+					l2 = getLocationFromLL(points.get(i).lat, points.get(i).lon);
+					dist += l1.distanceTo(l2);
 					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication())
-						+ BULLET + OsmAndFormatter.getFormattedAzimuth(dab[1]);
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2));
 				}
 				holder.descr.setText(text);
 			}
@@ -141,6 +147,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				listener.onItemClick(holder.getAdapterPosition());
 			}
 		});
+	}
+
+	private Location getLocationFromLL(double lat, double lon) {
+		Location l = new Location("");
+		l.setLatitude(lat);
+		l.setLongitude(lon);
+		return l;
 	}
 
 	@Override
