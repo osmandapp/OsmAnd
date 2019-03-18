@@ -44,7 +44,6 @@ import net.osmand.plus.quickaction.QuickActionsWidget;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import net.osmand.plus.quickaction.actions.DayNightModeAction;
 
 import static net.osmand.plus.views.ContextMenuLayer.VIBRATE_SHORT;
 
@@ -74,7 +73,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private boolean isLayerOn;
 
     private boolean nightMode;
-    private boolean prevWidgetState;
+    private boolean currentWidgetState;
 
     public MapQuickActionLayer(MapActivity activity, ContextMenuLayer contextMenuLayer) {
         this.mapActivity = activity;
@@ -206,7 +205,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 	 * @return true, if state was changed
 	 */
 	public boolean setLayerState(boolean showWidget) {
-		prevWidgetState = showWidget;
+		currentWidgetState = showWidget;
 		if (isWidgetVisible() == showWidget)    // check if state change is needed
 		    return false;
 
@@ -382,7 +381,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 		}
 		if (this.nightMode != nightMode) {
 			this.nightMode = nightMode;
-			updateQuickActionButton(prevWidgetState);
+			updateQuickActionButton(currentWidgetState);
 		}
 		setupQuickActionBtnVisibility();
 	}
