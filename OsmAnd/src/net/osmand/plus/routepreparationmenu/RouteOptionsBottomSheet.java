@@ -32,7 +32,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsTypesRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.GpxLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -91,8 +91,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
 					items.add(createRouteSimulationItem(optionsItem));
 				}
-			} else if (optionsItem instanceof AvoidRoadsTypesRoutingParameter) {
-				items.add(createAvoidRoadsTypesItem(optionsItem));
+			} else if (optionsItem instanceof AvoidPTTypesRoutingParameter) {
+				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
 				items.add(createAvoidRoadsItem(optionsItem));
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
@@ -198,7 +198,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				.create();
 	}
 
-	private BaseBottomSheetItem createAvoidRoadsTypesItem(final LocalRoutingParameter optionsItem) {
+
+	private BaseBottomSheetItem createAvoidRoadsItem(final LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.impassable_road))
@@ -216,16 +217,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				.create();
 	}
 
-	private BaseBottomSheetItem createAvoidRoadsItem(final LocalRoutingParameter optionsItem) {
+
+	private BaseBottomSheetItem createAvoidPTTypesItem(final LocalRoutingParameter optionsItem) {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
-				.setTitle(getString(R.string.impassable_road))
+				.setTitle(getString(R.string.avoid_pt_types))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
+						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 						updateMenu();
@@ -350,12 +352,16 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
 		List<String> routingParameters = new ArrayList<>();
-		if (applicationMode.equals(ApplicationMode.CAR)) {
+		if (applicationMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			routingParameters = AppModeOptions.CAR.routingParameters;
-		} else if (applicationMode.equals(ApplicationMode.BICYCLE)) {
+		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			routingParameters = AppModeOptions.BICYCLE.routingParameters;
-		} else if (applicationMode.equals(ApplicationMode.PEDESTRIAN)) {
+		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			routingParameters = AppModeOptions.PEDESTRIAN.routingParameters;
+		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+			routingParameters = AppModeOptions.PUBLIC_TRANSPORT.routingParameters;
+		} else {
+			routingParameters = AppModeOptions.OTHER.routingParameters;
 		}
 
 		return routingOptionsHelper.getRoutingParameters(applicationMode, routingParameters);
@@ -457,7 +463,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				GeneralRouter.USE_HEIGHT_OBSTACLES,
 				DividerItem.KEY,
 				GeneralRouter.ALLOW_MOTORWAYS,
-				AvoidRoadsTypesRoutingParameter.KEY,
+				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
@@ -467,7 +473,23 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		PEDESTRIAN(MuteSoundRoutingParameter.KEY,
 				GeneralRouter.USE_HEIGHT_OBSTACLES,
 				DividerItem.KEY,
-				AvoidRoadsTypesRoutingParameter.KEY,
+				AvoidRoadsRoutingParameter.KEY,
+				ShowAlongTheRouteItem.KEY,
+				DividerItem.KEY,
+				GpxLocalRoutingParameter.KEY,
+				OtherSettingsRoutingParameter.KEY,
+				RouteSimulationItem.KEY),
+
+		PUBLIC_TRANSPORT(// MuteSoundRoutingParameter.KEY,
+				// DividerItem.KEY,
+				AvoidPTTypesRoutingParameter.KEY,
+				// ShowAlongTheRouteItem.KEY,
+				// DividerItem.KEY,
+				OtherSettingsRoutingParameter.KEY),
+
+		OTHER(MuteSoundRoutingParameter.KEY,
+				DividerItem.KEY,
+				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,

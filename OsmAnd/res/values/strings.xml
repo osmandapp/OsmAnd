@@ -10,9 +10,15 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 
---> <string name="quick_action_day_night_mode">%s mode</string>
+-->
+    <string name="quick_action_day_night_mode">%s mode</string>
+    <string name="avoid_pt_types_descr">Select a public transport types you want to avoid during navigation:</string>
+    <string name="avoid_pt_types">Avoid transport types…</string>
+    <string name="shared_string_walk">Walk</string>
+    <string name="save_poi_value_exceed_length">Value of tag \"%s\" cannot exceed 255 chars. \nPlease edit it before continue.</string>
+    <string name="save_poi_value_exceed_length_title">Length of \"%s\" value</string>
     <string name="public_transport_warning_descr_blog">Learn more about how OsmAnd calculates routes in our blog.</string>
-    <string name="public_transport_warning_title">Public transport routes are now in the beta testing phase, so errors and inaccuracies may occur.</string>
+    <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, errors and inaccuracies may occur.</string>
     <string name="add_intermediate">Add intermediate point</string>
     <string name="transfers_size">%1$d transfers</string>
     <string name="add_start_and_end_points">Add start and end points</string>
@@ -1669,7 +1675,7 @@
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
-    <string name="route_is_too_long_v2">Please add intermediate destinations if no path is found for this long route within 10 mins.</string>
+    <string name="route_is_too_long_v2">Long distance: Please add intermediate destinations if no route is found within 10 minutes.</string>
     <string name="auto_zoom_none">No auto zoom</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
@@ -1967,8 +1973,8 @@
     </string>
     <string name="osmand_extended_description_part5">
         Cycling\n
-        • Find cycling paths on the map\n
-        • GPS navigation in cycling mode builds your route using cycling paths\n
+        • Find cycle paths on the map\n
+        • GPS navigation in cycling mode builds your route using cycle paths\n
         • See your speed and altitude\n
         • GPX recording option enables you to record your trip and share it\n
         • Via an additional plugin you can enable contour lines and hillshading

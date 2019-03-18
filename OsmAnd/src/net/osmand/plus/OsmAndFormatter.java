@@ -60,6 +60,12 @@ public class OsmAndFormatter {
 		return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
 	}
 
+	public static String getFormattedDurationShortMinutes(int seconds) {
+		int hours = seconds / (60 * 60);
+		int minutes = (seconds / 60) % 60;
+		return hours + ":" + (minutes < 10 ? "0" + minutes : minutes);
+	}
+
 	public static String getFormattedTime(long seconds, boolean useCurrentTime) {
 		Calendar calendar = Calendar.getInstance();
 		if (useCurrentTime) {

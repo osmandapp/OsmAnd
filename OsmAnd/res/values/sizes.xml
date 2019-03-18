@@ -282,6 +282,7 @@
 	<dimen name="route_info_list_text_padding">54dp</dimen>
 	<dimen name="route_info_legend_padding">8dp</dimen>
 	<dimen name="route_info_warning_padding">18dp</dimen>
+	<dimen name="route_info_chart_height">52dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
 

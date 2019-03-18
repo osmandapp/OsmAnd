@@ -587,7 +587,7 @@
     <string name="local_openstreetmap_were_uploaded">{0} POI/الملاحظات تم رفعها</string>
     <string name="live_monitoring_url_descr">تحديد عنوان ويب مع بناء جملة المعلمة: اللات = {0}، خط الطول = {1}، والطابع الزمني = {2}، HDOP = {3}، {4 ارتفاع =}، والسرعة = {5}، واضعة = {6}.</string>
     <string name="gpx_monitoring_disabled_warn">سجل المسار عن طريق ويدجت GPX أو عن طريق إعدادات \'تسجيل الرحلة\'.</string>
-    <string name="free_version_message">يمكنك تحميل أو تحديث الخرائط s$%1.</string>
+    <string name="free_version_message">يمكنك تحميل أو تحديث الخرائط %1$s</string>
     <string name="poi_context_menu_showdescription">اظهار وصف POI.</string>
     <string name="index_name_other">خرائط عالمية حسب الموضوع</string>
     <string name="index_name_wiki">في جميع أنحاء العالم ويكيبيديا النقاط المهمة</string>
@@ -2814,4 +2814,37 @@
     <string name="quick_action_gpx_tracks_show">إظهار مسارات GPX</string>
     <string name="add_destination_query">الرجاء إضافة الوجهة أولا</string>
     <string name="previous_route">المسار السابق</string>
+    <string name="add_start_and_end_points">إضافة نقاط بداية ونهاية</string>
+    <string name="route_add_start_point">إضافة نقطة البدء</string>
+    <string name="route_descr_select_start_point">حدد نقطة البداية</string>
+    <string name="rendering_attr_surface_unpaved_name">طريق غير معبد</string>
+    <string name="rendering_attr_surface_sand_name">الرمال</string>
+    <string name="rendering_attr_surface_grass_name">عشب</string>
+    <string name="rendering_attr_surface_grass_paver_name">مرصف العشب</string>
+    <string name="rendering_attr_surface_ground_name">الأرض</string>
+    <string name="rendering_attr_surface_dirt_name">تراب</string>
+    <string name="rendering_attr_surface_mud_name">وحل</string>
+    <string name="rendering_attr_surface_ice_name">جليد</string>
+    <string name="rendering_attr_surface_salt_name">الملح</string>
+    <string name="rendering_attr_surface_snow_name">ثلج</string>
+    <string name="rendering_attr_surface_asphalt_name">الأسفلت</string>
+    <string name="rendering_attr_surface_paved_name">طريق معبد</string>
+    <string name="rendering_attr_surface_concrete_name">خرسانة</string>
+    <string name="rendering_attr_surface_cobblestone_name">حصى تعبيد الطرق</string>
+    <string name="rendering_attr_surface_paving_stones_name">حجارة الرصف</string>
+    <string name="rendering_attr_surface_stone_name">حجر</string>
+    <string name="rendering_attr_surface_metal_name">معدن</string>
+    <string name="rendering_attr_surface_wood_name">الخشب</string>
+    <string name="rendering_attr_surface_gravel_name">الحصى</string>
+    <string name="rendering_attr_surface_fine_gravel_name">حصى دقيق</string>
+    <string name="rendering_attr_surface_compacted_name">مضغوط</string>
+    <string name="rendering_attr_smoothness_excellent_name">ممتاز</string>
+    <string name="rendering_attr_smoothness_good_name">جيد</string>
+    <string name="rendering_attr_smoothness_intermediate_name">متوسط</string>
+    <string name="rendering_attr_smoothness_bad_name">سيئ</string>
+    <string name="rendering_attr_smoothness_very_bad_name">سيء جدًا</string>
+    <string name="rendering_attr_smoothness_horrible_name">فظيع</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">رهيب جداً</string>
+    <string name="rendering_attr_smoothness_impassable_name">غير سالك</string>
+    <string name="rendering_attr_highway_class_motorway_name">الطريق السريع</string>
 </resources>

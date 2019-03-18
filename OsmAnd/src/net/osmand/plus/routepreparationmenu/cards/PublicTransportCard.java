@@ -85,7 +85,7 @@ public class PublicTransportCard extends BaseCard {
 		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
 
 		fromLine.setText(getFirstLineDescrSpan());
-		wayLine.setText(getSecondLineDescrSpan());
+		wayLine.setText(getSecondLineDescrSpan(segments));
 
 		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
 		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
@@ -171,27 +171,37 @@ public class PublicTransportCard extends BaseCard {
 		return firstLineDesc;
 	}
 
-	private SpannableString getSecondLineDescrSpan() {
+	private SpannableString getSecondLineDescrSpan(List<TransportRouteResultSegment> segments) {
+		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 		Typeface typeface = FontCache.getRobotoMedium(app);
-		String travelTime = OsmAndFormatter.getFormattedDuration((int) routeResult.getTravelTime(), app);
-		String walkTime = OsmAndFormatter.getFormattedDuration((int) routeResult.getWalkTime(), app);
-		String walkDistance = OsmAndFormatter.getFormattedDistance((int) routeResult.getWalkDist(), app);
+		int walkTimeReal = transportRoutingHelper.getWalkingTime(segments);
+		int walkTimePT = (int) routeResult.getWalkTime();
+		int walkTime = walkTimeReal > 0 ? walkTimeReal : walkTimePT;
+		String walkTimeStr = OsmAndFormatter.getFormattedDuration(walkTime, app);
+		int walkDistanceReal = transportRoutingHelper.getWalkingDistance(segments);
+		int walkDistancePT = (int) routeResult.getWalkDist();
+		int walkDistance = walkDistanceReal > 0 ? walkDistanceReal : walkDistancePT;
+		String walkDistanceStr = OsmAndFormatter.getFormattedDistance(walkDistance, app);
+		int travelTime = (int) routeResult.getTravelTime() + walkTime;
+		String travelTimeStr = OsmAndFormatter.getFormattedDuration(travelTime, app);
+		int travelDist = (int) routeResult.getTravelDist() + walkDistance;
+		String travelDistStr = OsmAndFormatter.getFormattedDistance(travelDist, app);
 
-		String secondLine = travelTime + "  •  " + app.getString(R.string.on_foot) + " " + walkTime + ", " + walkDistance;
+		String secondLine = travelTimeStr + ", " + travelDistStr + "  •  " + app.getString(R.string.shared_string_walk) + " " + walkTimeStr + ", " + walkDistanceStr;
 
 		SpannableString secondLineDesc = new SpannableString(secondLine);
 
-		int startTravelTime = secondLine.indexOf(travelTime);
+		int startTravelTime = secondLine.indexOf(travelTimeStr);
 		secondLineDesc.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)),
-				startTravelTime, startTravelTime + travelTime.length(), 0);
+				startTravelTime, startTravelTime + travelTimeStr.length(), 0);
 		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface),
-				startTravelTime, startTravelTime + travelTime.length(), 0);
+				startTravelTime, startTravelTime + travelTimeStr.length(), 0);
 
-		int startWalkTime = secondLine.lastIndexOf(walkTime);
+		int startWalkTime = secondLine.lastIndexOf(walkTimeStr);
 		secondLineDesc.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)),
-				startWalkTime, startWalkTime + walkTime.length(), 0);
+				startWalkTime, startWalkTime + walkTimeStr.length(), 0);
 		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface),
-				startWalkTime, startWalkTime + walkTime.length(), 0);
+				startWalkTime, startWalkTime + walkTimeStr.length(), 0);
 
 		return secondLineDesc;
 	}

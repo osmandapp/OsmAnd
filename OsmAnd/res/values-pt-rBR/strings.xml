@@ -2976,4 +2976,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_surface_mud_name">Lama</string>
     <string name="rendering_attr_surface_salt_name">Sal</string>
     <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
+    <string name="public_transport_warning_descr_blog">Saiba mais sobre como OsmAnd calcula as rotas em nosso blog.</string>
+    <string name="public_transport_warning_title">As rotas de transporte público estão agora em fase de testes beta, portanto erros e imprecisões podem ocorrer.</string>
+    <string name="add_intermediate">Adicionar ponto intermediário</string>
 </resources>

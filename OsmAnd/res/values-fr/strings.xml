@@ -1869,7 +1869,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 Cette opération requiert temporairement {3} Mo et {1} Mo seront utilisés de manière permanente.
 Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="download_files_question_space_with_temp">Souhaitez-vous télécharger {0} fichier(s) ? Cette opération requiert temporairement {3} Mo et {1} Mo seront utilisés de manière permanente (actuellement l\'espace disponible est de {2} Mo)</string>
-    <string name="donations">Donations</string>
+    <string name="donations">Dons</string>
     <string name="number_of_recipients">Nombre de destinataires</string>
     <string name="osm_live_subscribe_btn">S\'abonner</string>
     <string name="osm_live_month_cost">Coût mensuel</string>
@@ -1931,7 +1931,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_category_choice">Sélectionnez une catégorie</string>
     <string name="access_hint_enter_name">Saisissez un nom</string>
     <string name="access_hint_enter_category">Saisissez une catégorie</string>
-    <string name="access_hint_enter_description">Saisissez une description</string>
+    <string name="access_hint_enter_description">Saisissez une description.</string>
     <string name="access_collapsed_list">Plier la liste</string>
     <string name="access_expanded_list">Liste dépliée</string>
     <string name="access_empty_list">Vider la liste</string>
@@ -1942,7 +1942,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_smart_autoannounce">Annonces intelligentes</string>
     <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée.</string>
     <string name="access_autoannounce_period">Fréquence des annonces</string>
-    <string name="access_autoannounce_period_descr">Durée minimum entre deux annonces</string>
+    <string name="access_autoannounce_period_descr">Durée minimum entre deux annonces.</string>
     <string name="access_no_destination">Aucune destination définie</string>
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
@@ -1950,7 +1950,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_disable_offroute_recalc_descr">Ne pas calculer de nouvel itinéraire lorsque vous quittez l\'itinéraire prévu.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Ne pas calculer de nouvel itinéraire lorsque vous faites demi-tour.</string>
     <string name="access_disable_wrong_direction_recalc">Ne pas recalculer l\'itinéraire lors d\'un demi-tour</string>
-    <string name="use_osm_live_routing_description">Activer la navigation OsmAnd Live</string>
+    <string name="use_osm_live_routing_description">Activer la navigation avec les données OsmAnd Live.</string>
     <string name="use_osm_live_routing">Navigation OsmAnd Live</string>
     <string name="follow_us">Suivez-nous</string>
     <!-- string name="lat_lon_pattern">Lat. : %1$.5f Lon. : %2$.5f</string -->
@@ -1961,8 +1961,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="change_markers_position">Déplacer la marque</string>
     <string name="lang_es_us">Espagnol (américain)</string>
     <string name="lang_en_gb">Anglais (Royaume-Uni)</string>
-    <string name="access_direction_audio_feedback_descr">Indiquer la direction de la cible par des sons</string>
-    <string name="access_direction_haptic_feedback_descr">Indiquer la direction de la cible par des vibrations</string>
+    <string name="access_direction_audio_feedback_descr">Indiquer la direction de la cible par des sons.</string>
+    <string name="access_direction_haptic_feedback_descr">Indiquer la direction de la cible par des vibrations.</string>
     <string name="access_direction_audio_feedback">Indication de la direction par sons</string>
     <string name="access_direction_haptic_feedback">Indication de la direction par vibrations</string>
     <string name="lang_be_by">Biélorusse (Latin)</string>
@@ -1973,7 +1973,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="lang_kn">Kannada</string>
     <string name="access_shared_string_navigate_up">Monter</string>
     <string name="coords_format">Format des coordonnées</string>
-    <string name="coords_format_descr">Format des coordonnées géographiques</string>
+    <string name="coords_format_descr">Format des coordonnées géographiques.</string>
     <string name="storage_directory_card">Carte mémoire</string>
     <string name="shared_string_is_open_24_7">Ouvert 24/7</string>
     <string name="map_widget_search">Rechercher</string>
@@ -1996,7 +1996,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_change">Modifier</string>
     <string name="get_started">Démarrer</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
-    <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (habituellement plus court)</string>
+    <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (habituellement plus court).</string>
     <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd.</string>
     <string name="no_update_info">Ne pas afficher les nouvelles versions</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
@@ -2311,7 +2311,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="edit_name">Modifier le nom</string>
     <string name="save_poi_too_many_uppercase">Le nom contient beaucoup de majuscules. Souhaitez-vous continuer ?</string>
     <string name="routing_attr_allow_private_name">Autoriser les accès privés</string>
-    <string name="routing_attr_allow_private_description">Autoriser l\'accès aux zones privées</string>
+    <string name="routing_attr_allow_private_description">Autoriser l\'accès aux zones privées.</string>
     <string name="display_zoom_level">Niveau de zoom de l\'affichage : %1$s</string>
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
@@ -2745,7 +2745,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="paid_app">Application payante</string>
     <string name="paid_plugin">Greffon payant</string>
     <string name="popular_destinations">Destinations populaires</string>
-    <string name="welcome_to_open_beta_description">"Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Par la suite, les guides de voyage seront accessibles aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+. "</string>
+    <string name="welcome_to_open_beta_description">"Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Par la suite, les guides de voyage seront accessibles aux abonnés de OsmAnd illimité ainsi qu\'aux propriétaires d\'OsmAnd+. "</string>
     <string name="wiki_article_search_text">Recherche de l\'article Wiki correspondant</string>
     <string name="osmand_team">Équipe OsmAnd</string>
     <string name="maps_you_need_descr">D\'après les articles que vous avez marqué comme favori, nous vous conseillons de télécharger les cartes suivantes :</string>
@@ -2804,8 +2804,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="increase_search_radius_to">Augmenter le rayon de recherche à %1$s</string>
     <string name="thank_you_for_feedback">Merci pour vos retours</string>
     <string name="poi_cannot_be_found">Nœud ou Route introuvable.</string>
-    <string name="search_no_results_feedback">Aucun résultat pour cette recherche ?
-\nSignalez-le nous.</string>
+    <string name="search_no_results_feedback">Aucun résultat pour cette recherche \? 
+\nSignalez-le nous</string>
     <string name="test_voice_desrc">Appuyez sur un bouton pour écoutez l\'annonce vocale correspondante afin d\'identifier les annonces erronées ou manquantes.</string>
     <string name="release_3_2_pre">• Correction du plantage au démarrage survenant pour certains appareils
 \n
@@ -2945,4 +2945,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Chemin</string>
     <string name="rendering_attr_highway_class_cycleway_name">Voie cyclable</string>
     <string name="rendering_attr_undefined_name">Non défini</string>
+    <string name="rendering_attr_surface_grass_paver_name">Mélange d\'herbe et de pavés</string>
+    <string name="rendering_attr_surface_sett_name">Pavés taillés</string>
+    <string name="rendering_attr_surface_cobblestone_name">Pavés</string>
+    <string name="rendering_attr_surface_paving_stones_name">Pavés réguliers</string>
+    <string name="rendering_attr_surface_pebblestone_name">Galets</string>
+    <string name="rendering_attr_surface_compacted_name">Compacté</string>
+    <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les routes, visitez notre blog.</string>
+    <string name="public_transport_warning_title">Les itinéraires en transport public sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
+    <string name="add_intermediate">Ajouter un point intermédiaire</string>
 </resources>

@@ -308,6 +308,9 @@ public class RoutingHelper {
 		Location locationProjection = currentLocation;
 		if (isPublicTransportMode() && currentLocation != null && finalLocation != null &&
 				(targetPointsChanged || transportRoutingHelper.getStartLocation() == null)) {
+			lastFixedLocation = currentLocation;
+			lastProjection = locationProjection;
+			transportRoutingHelper.setApplicationMode(mode);
 			transportRoutingHelper.setFinalAndCurrentLocation(finalLocation,
 					new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()));
 		}
@@ -943,10 +946,10 @@ public class RoutingHelper {
 
 	public void recalculateRouteDueToSettingsChange() {
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		getSettings().LAST_ROUTE_APPLICATION_MODE.set(getAppMode());
 		if (isPublicTransportMode()) {
 			Location start = lastFixedLocation;
 			LatLon finish = finalLocation;
+			transportRoutingHelper.setApplicationMode(mode);
 			if (start != null && finish != null) {
 				transportRoutingHelper.setFinalAndCurrentLocation(finish,
 						new LatLon(start.getLatitude(), start.getLongitude()));

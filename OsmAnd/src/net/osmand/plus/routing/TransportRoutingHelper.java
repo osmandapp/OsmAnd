@@ -14,10 +14,12 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.TransportRoutePlanner;
@@ -35,6 +37,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
@@ -46,6 +49,7 @@ public class TransportRoutingHelper {
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 
 	private OsmandApplication app;
+	private ApplicationMode applicationMode = ApplicationMode.PUBLIC_TRANSPORT;
 	private RoutingHelper routingHelper;
 
 	private List<TransportRouteResult> routes;
@@ -54,7 +58,6 @@ public class TransportRoutingHelper {
 
 	private LatLon startLocation;
 	private LatLon endLocation;
-	private boolean useSchedule;
 
 	private Thread currentRunningJob;
 	private String lastRouteCalcError;
@@ -62,6 +65,7 @@ public class TransportRoutingHelper {
 	private long lastTimeEvaluatedRoute = 0;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
+
 
 	public TransportRoutingHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -79,13 +83,6 @@ public class TransportRoutingHelper {
 		return endLocation;
 	}
 
-	public boolean isUseSchedule() {
-		return useSchedule;
-	}
-
-	public void setUseSchedule(boolean useSchedule) {
-		this.useSchedule = useSchedule;
-	}
 
 	public int getCurrentRoute() {
 		return currentRoute;
@@ -109,6 +106,50 @@ public class TransportRoutingHelper {
 			return walkingRouteSegments.get(new Pair<>(s1, s2));
 		}
 		return null;
+	}
+
+	public int getWalkingTime(@NonNull List<TransportRouteResultSegment> segments) {
+		int res = 0;
+		Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = this.walkingRouteSegments;
+		if (walkingRouteSegments != null) {
+			TransportRouteResultSegment prevSegment = null;
+			for (TransportRouteResultSegment segment : segments) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(prevSegment, segment);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getRoutingTime();
+				}
+				prevSegment = segment;
+			}
+			if (segments.size() > 0) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(segments.get(segments.size() - 1), null);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getRoutingTime();
+				}
+			}
+		}
+		return res;
+	}
+
+	public int getWalkingDistance(@NonNull List<TransportRouteResultSegment> segments) {
+		int res = 0;
+		Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = this.walkingRouteSegments;
+		if (walkingRouteSegments != null) {
+			TransportRouteResultSegment prevSegment = null;
+			for (TransportRouteResultSegment segment : segments) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(prevSegment, segment);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getWholeDistance();
+				}
+				prevSegment = segment;
+			}
+			if (segments.size() > 0) {
+				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(segments.get(segments.size() - 1), null);
+				if (walkingRouteSegment != null) {
+					res += walkingRouteSegment.getWholeDistance();
+				}
+			}
+		}
+		return res;
 	}
 
 	public void setCurrentRoute(int currentRoute) {
@@ -144,7 +185,7 @@ public class TransportRoutingHelper {
 		TransportRouteCalculationParams params = new TransportRouteCalculationParams();
 		params.start = start;
 		params.end = end;
-		params.useSchedule = useSchedule;
+		params.mode = applicationMode;
 		params.type = RouteService.OSMAND;
 		params.ctx = app;
 		params.calculationProgress = new RouteCalculationProgress();
@@ -158,6 +199,7 @@ public class TransportRoutingHelper {
 	private void startRouteCalculationThread(TransportRouteCalculationParams params) {
 		synchronized (this) {
 			final Thread prevRunningJob = currentRunningJob;
+			app.getSettings().LAST_ROUTE_APPLICATION_MODE.set(routingHelper.getAppMode());
 			RouteRecalculationThread newThread =
 					new RouteRecalculationThread("Calculating public transport route", params);
 			currentRunningJob = newThread;
@@ -315,6 +357,10 @@ public class TransportRoutingHelper {
 		return r.left == 0 && r.right == 0 ? null : r;
 	}
 
+	public void setApplicationMode(ApplicationMode applicationMode) {
+		this.applicationMode = applicationMode;
+	}
+
 	public interface TransportRouteCalculationProgressCallback {
 
 		void start();
@@ -330,8 +376,9 @@ public class TransportRoutingHelper {
 		public LatLon end;
 
 		public OsmandApplication ctx;
+		public ApplicationMode mode;
 		public RouteService type;
-		public boolean useSchedule;
+		public Map<String, String> params = new TreeMap<>();
 		public RouteCalculationProgress calculationProgress;
 		public TransportRouteCalculationResultListener resultListener;
 
@@ -397,9 +444,24 @@ public class TransportRoutingHelper {
 		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException, InterruptedException {
 			RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
-
-			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(config);
-			cfg.useSchedule = params.useSchedule;
+			params.params.clear();
+			OsmandSettings settings = params.ctx.getSettings();
+			for(Map.Entry<String, GeneralRouter.RoutingParameter> e : config.getRouter(params.mode.getStringKey()).getParameters().entrySet()){
+				String key = e.getKey();
+				GeneralRouter.RoutingParameter pr = e.getValue();
+				String vl;
+				if(pr.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
+					OsmandSettings.CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key, pr.getDefaultBoolean());
+					Boolean bool = pref.getModeValue(params.mode);
+					vl = bool ? "true" : null;
+				} else {
+					vl = settings.getCustomRoutingProperty(key, "").getModeValue(params.mode);
+				}
+				if(vl != null && vl.length() > 0) {
+					params.params.put(key, vl);
+				}
+			}
+			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(config, params.params);
 			TransportRoutePlanner planner = new TransportRoutePlanner();
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, files);
 			ctx.calculationProgress =  params.calculationProgress;

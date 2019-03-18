@@ -355,8 +355,8 @@ public class RoutingOptionsHelper {
 				return new RouteSimulationItem();
 			case ShowAlongTheRouteItem.KEY:
 				return new ShowAlongTheRouteItem();
-			case AvoidRoadsTypesRoutingParameter.KEY:
-				return new AvoidRoadsTypesRoutingParameter();
+			case AvoidPTTypesRoutingParameter.KEY:
+				return new AvoidPTTypesRoutingParameter();
 			case AvoidRoadsRoutingParameter.KEY:
 				return new AvoidRoadsRoutingParameter();
 			case GpxLocalRoutingParameter.KEY:
@@ -781,11 +781,11 @@ public class RoutingOptionsHelper {
 		}
 	}
 
-	public static class AvoidRoadsTypesRoutingParameter extends LocalRoutingParameter {
+	public static class AvoidPTTypesRoutingParameter extends LocalRoutingParameter {
 
-		public static final String KEY = "AvoidRoadsTypesRoutingParameter";
+		public static final String KEY = "AvoidPTTypesRoutingParameter";
 
-		public AvoidRoadsTypesRoutingParameter() {
+		public AvoidPTTypesRoutingParameter() {
 			super(null);
 		}
 
@@ -795,14 +795,15 @@ public class RoutingOptionsHelper {
 
 		@Override
 		public int getActiveIconId() {
-			return R.drawable.ic_action_road_works_dark;
+			return R.drawable.ic_action_bus_dark;
 		}
 
 		@Override
 		public int getDisabledIconId() {
-			return R.drawable.ic_action_road_works_dark;
+			return R.drawable.ic_action_bus_dark;
 		}
 	}
+
 
 	public static class GpxLocalRoutingParameter extends LocalRoutingParameter {
 
