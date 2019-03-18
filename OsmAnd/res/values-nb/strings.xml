@@ -1332,7 +1332,7 @@
     <string name="plugin_settings">Programtillegg</string>
     <string name="rendering_value_boldOutline_name">Tykke omriss</string>
     <string name="rendering_attr_roadStyle_description">Veistil</string>
-    <string name="routing_attr_avoid_borders_name">Unngå grensepassering</string>
+    <string name="routing_attr_avoid_borders_name">Unngå grensepasseringer</string>
     <string name="routing_attr_height_name">Høydegrense</string>
     <string name="routing_attr_height_description">Spesifiser kjøretøyhøyde som tillates på ruter.</string>
     <string name="rendering_attr_alpineHiking_name">Alpin vandringsskala (SAC)</string>
@@ -2445,7 +2445,7 @@
     <string name="winter_and_ski_renderer">Vinter og ski</string>
     <string name="touring_view_renderer">Turvisning</string>
     <string name="disable_recording_once_app_killed_descrp">Vil sette GPX-logging i pausemodus når programmet avsluttes (via nylig brukte apper). (OsmAnds bakgrunnsindikasjon forsvinner fra Android-varslingslinjen.)</string>
-    <string name="route_is_too_long_v2">Langdistanse: Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
+    <string name="route_is_too_long_v2">For lange distanser: Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
     <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon…\" for å tilordne et notat til det angitte stedet.</string>
     <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
@@ -2992,10 +2992,12 @@
     <string name="rendering_attr_highway_class_cycleway_name">Sykkelvei</string>
     <string name="rendering_attr_undefined_name">Udefinert</string>
     <string name="public_transport_warning_descr_blog">Lær mer om hvordan OsmAnd kaklulerer ruter i bloggen vår.</string>
-    <string name="public_transport_warning_title">Offentlige transportnavigasjon er nå i betatestingsstadie, så feil og unøyaktigheter kan forefinnes.</string>
+    <string name="public_transport_warning_title">Offentlige transportnavigasjon er nå i betatestingsstadie, forvent feil og unøyaktigheter.</string>
     <string name="add_intermediate">Legg til mellomliggende punkt</string>
     <string name="shared_string_walk">Gå</string>
     <string name="save_poi_value_exceed_length">Verdien av taggen \"%s\" kan ikke overstige 255 tegn.
 \nRediger den før du fortsetter.</string>
     <string name="save_poi_value_exceed_length_title">Lengden på \"%s\"-verdien</string>
+    <string name="avoid_pt_types_descr">Velg offentlige transporttyper å unngå for navigasjon:</string>
+    <string name="avoid_pt_types">Unngå transporttyper…</string>
 </resources>
