@@ -2980,7 +2980,9 @@ Pôr do Sol: %2$s</string>
     <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, erros e imprecisões podem ocorrer.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
     <string name="shared_string_walk">Ande</string>
-    <string name="save_poi_value_exceed_length">O valor da etiqueta \"%s\" não pode exceder 255 caracteres. 
-\nFavor editá-la antes de continuar.</string>
+    <string name="save_poi_value_exceed_length">O comprimento máximo da etiqueta \"%s\" é 255 caracteres. 
+\nPor favor, encurte para continuar.</string>
     <string name="save_poi_value_exceed_length_title">Comprimento do valor \"%s\"</string>
+    <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para navegação:</string>
+    <string name="avoid_pt_types">Evite os tipos de transporte…</string>
 </resources>
