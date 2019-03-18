@@ -92,7 +92,7 @@
     <string name="lang_als">Albanska (Tosk)</string>
     <string name="read_more">Lesa meira</string>
     <string name="shared_string_update">Uppfæra</string>
-    <string name="shared_string_upload">Senda</string>
+    <string name="shared_string_upload">Senda inn</string>
     <string name="shared_string_qr_code">QR-kóði</string>
     <string name="go_to_map">Birta kort</string>
     <string name="share_menu_location">Deila staðsetningu</string>
@@ -3007,7 +3007,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_cycleway_name">Hjólastígur</string>
     <string name="rendering_attr_undefined_name">Óskilgreint</string>
     <string name="shared_string_walk">Ganga</string>
-    <string name="save_poi_value_exceed_length">Gildi merkisins \"%s\" má ekki fara yfir 255 stafi. 
+    <string name="save_poi_value_exceed_length">Hámarkslengd merkisins \"%s\" er 255 stafir. 
 \nBreyttu þessu áður en áfram er haldið.</string>
     <string name="save_poi_value_exceed_length_title">Lengd \"%s\" gildisins</string>
+    <string name="avoid_pt_types_descr">Veldu tegundir almenningssamgangna sem á að forðast við leiðsögn:</string>
+    <string name="quick_action_day_night_mode">%s hamur</string>
+    <string name="avoid_pt_types">Forðast tegundir almenningssamgangna…</string>
 </resources>
