@@ -12,6 +12,7 @@
 
 -->
     <string name="avoid_pt_types_descr">Select public transport types to avoid for navigation:</string>
+    <string name="quick_action_day_night_mode">%s mode</string>
     <string name="avoid_pt_types">Avoid transport types…</string>
     <string name="shared_string_walk">Walk</string>
     <string name="save_poi_value_exceed_length">The maximum length of tag \"%s\" is 255 characters. \nPlease shorten to continue.</string>
