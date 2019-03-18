@@ -3000,4 +3000,5 @@
     <string name="save_poi_value_exceed_length_title">Lengden på \"%s\"-verdien</string>
     <string name="avoid_pt_types_descr">Velg offentlige transporttyper å unngå for navigasjon:</string>
     <string name="avoid_pt_types">Unngå transporttyper…</string>
+    <string name="quick_action_day_night_mode">&amp;s-modus</string>
 </resources>
