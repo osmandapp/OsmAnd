@@ -3020,7 +3020,7 @@
     <string name="rendering_attr_highway_class_motorway_name">آزادراه</string>
     <string name="rendering_attr_highway_class_street_name">خیابان</string>
     <string name="public_transport_warning_descr_blog">برای آشنایی با روش محاسبهٔ مسیر در OsmAnd وبلاگ ما را ببینید.</string>
-    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و ممکن است خطاها و نقایصی داشته باشد.</string>
+    <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و بعید نیست که خطاها و نقایصی داشته باشد.</string>
     <string name="add_intermediate">افزودن نقطهٔ میانی</string>
     <string name="rendering_attr_surface_sand_name">ماسه</string>
     <string name="rendering_attr_surface_ground_name">زمین</string>
@@ -3038,4 +3038,6 @@
     <string name="save_poi_value_exceed_length">مقدار تگ «%s» نباید بیش از ۲۵۵ نویسه باشد.
 \nلطفاً پیش از ادامه، آن را اصلاح کنید.</string>
     <string name="save_poi_value_exceed_length_title">طول مقدار «%s»</string>
+    <string name="avoid_pt_types_descr">انواع روش‌های حمل‌ونقل که می‌خواهید در مسیریابی نباشند را انتخاب کنید:</string>
+    <string name="avoid_pt_types">پرهیز از گونه‌های حمل‌ونقل…</string>
 </resources>
