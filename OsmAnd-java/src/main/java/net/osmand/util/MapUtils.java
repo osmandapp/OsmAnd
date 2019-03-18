@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
@@ -118,6 +119,28 @@ public class MapUtils {
 	 */
 	public static double getDistance(LatLon l1, LatLon l2) {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
+	}
+
+
+	public static float getBearingToPoint(double lat1, double lon1, double lat2, double lon2) {
+		Location l1 = new Location("");
+		Location l2 = new Location("");
+		l1.setLatitude(lat1);
+		l1.setLongitude(lon1);
+		l2.setLatitude(lat2);
+		l2.setLongitude(lon2);
+		return getBearingToPoint(l1, l2);
+	}
+
+	public static float getBearingToPoint(Location l1, double lat, double lon) {
+		Location l2 = new Location("");
+		l2.setLatitude(lat);
+		l2.setLongitude(lon);
+		return getBearingToPoint(l1, l2);
+	}
+
+	public static float getBearingToPoint(Location l1, Location l2) {
+		return l1.bearingTo(l2);
 	}
 
 	public static double checkLongitude(double longitude) {

@@ -201,12 +201,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
 				if (measureDistanceToCenterListener != null) {
 					float distance = 0;
+					float bearing = 0;
 					if (editingCtx.getPointsCount() > 0) {
 						WptPt lastPoint = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
 						LatLon centerLatLon = tb.getCenterLatLon();
 						distance = (float) MapUtils.getDistance(lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
+						bearing = MapUtils.getBearingToPoint(lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
 					}
-					measureDistanceToCenterListener.onMeasure(distance);
+					measureDistanceToCenterListener.onMeasure(distance, bearing);
 				}
 			}
 
@@ -423,6 +425,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	interface OnMeasureDistanceToCenter {
-		void onMeasure(float distance);
+		void onMeasure(float distance, float bearing);
 	}
 }

@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -22,15 +25,19 @@ import net.osmand.util.MapUtils;
 
 import java.util.Collections;
 import java.util.List;
+import org.apache.commons.logging.Log;
 
 public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.MeasureToolItemVH>
 		implements MeasurementToolItemTouchHelperCallback.ItemTouchHelperAdapter {
+
+	private static final Log LOG = PlatformUtil.getLog(MeasurementToolAdapter.class);
 
 	private final MapActivity mapActivity;
 	private final List<WptPt> points;
 	private MeasurementAdapterListener listener;
 	private boolean nightMode;
 	private final ActionType actionType;
+	private final static String BULLET = "   •   ";
 
 	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points, ActionType actionType) {
 		this.mapActivity = mapActivity;
@@ -88,15 +95,27 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!TextUtils.isEmpty(pointDesc)) {
 			holder.descr.setText(pointDesc);
 		} else {
+			String azimuth = "";
+			String text = "";
 			if (pos < 1) {
-				holder.descr.setText(mapActivity.getString(R.string.shared_string_control_start));
+				text = mapActivity.getString(R.string.shared_string_control_start);
+				Location l1 = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+				if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
+					azimuth = OsmAndFormatter.getFormattedAzimuth(MapUtils.getBearingToPoint(l1, points.get(0).lat, points.get(0).lon));
+					text = text + BULLET + azimuth;
+				}
+				holder.descr.setText(text);
 			} else {
 				float dist = 0;
 				for (int i = 1; i <= pos; i++) {
 					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
 							points.get(i).lat, points.get(i).lon);
+					azimuth = OsmAndFormatter.getFormattedAzimuth(MapUtils.getBearingToPoint(
+						points.get(i-1).lat, points.get(i-1).lon,
+						points.get(i).lat, points.get(i).lon));
+					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + BULLET + azimuth;
 				}
-				holder.descr.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+				holder.descr.setText(text);
 			}
 		}
 		if (actionType == ActionType.EDIT_SEGMENT) {

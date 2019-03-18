@@ -3,8 +3,10 @@ package net.osmand.plus;
 import android.content.Context;
 import android.text.format.DateUtils;
 
+import net.osmand.Location;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
+import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -165,7 +167,17 @@ public class OsmAndFormatter {
 
 		return df.format(meters / mainUnitInMeters) + " " + app.getString(mainUnitStr);
 	}
-	
+
+	public static String getFormattedAzimuth(float bearing) {
+		int azimuth;
+		if (bearing < 0.0) {
+			azimuth = (int) (360 + bearing);
+		} else {
+			azimuth = (int) bearing;
+		}
+		return azimuth + "°";
+	}
+
 	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
 		return getFormattedDistance(meters, ctx, true);
 	}
