@@ -90,25 +90,23 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!TextUtils.isEmpty(pointDesc)) {
 			holder.descr.setText(pointDesc);
 		} else {
-			String azimuth;
 			String text = "";
 			if (pos < 1) {
 				text = mapActivity.getString(R.string.shared_string_control_start);
 				Location l1 = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 				if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
-					azimuth = OsmAndFormatter.getFormattedAzimuth(MapUtils.getBearingToPoint(l1, points.get(0).lat, points.get(0).lon));
-					text = text + BULLET + azimuth;
+					text = text + BULLET + OsmAndFormatter
+						.getFormattedAzimuth(MapUtils.getBearingToPoint(l1, points.get(0).lat, points.get(0).lon));
 				}
 				holder.descr.setText(text);
 			} else {
 				float dist = 0;
 				for (int i = 1; i <= pos; i++) {
-					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
-							points.get(i).lat, points.get(i).lon);
-					azimuth = OsmAndFormatter.getFormattedAzimuth(MapUtils.getBearingToPoint(
-						points.get(i - 1).lat, points.get(i - 1).lon,
-						points.get(i).lat, points.get(i).lon));
-					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + BULLET + azimuth;
+					float[] dab = MapUtils.getDistanceAndBearing(points.get(i - 1).lat, points.get(i - 1).lon,
+						points.get(i).lat, points.get(i).lon);
+					dist += dab[0];
+					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication())
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(dab[1]);
 				}
 				holder.descr.setText(text);
 			}

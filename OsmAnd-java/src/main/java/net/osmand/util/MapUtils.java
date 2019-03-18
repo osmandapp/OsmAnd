@@ -121,6 +121,16 @@ public class MapUtils {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
 	}
 
+	public static float[] getDistanceAndBearing(double lat1, double lon1, double lat2, double lon2) {
+		float[] db = new float[2];
+		Location l1 = new Location("");
+		Location l2 = new Location("");
+		l1.setLatitude(lat1);
+		l1.setLongitude(lon1);
+		l2.setLatitude(lat2);
+		l2.setLongitude(lon2);
+		return new float[]{l1.distanceTo(l2), l1.bearingTo(l2)};
+	}
 
 	public static float getBearingToPoint(double lat1, double lon1, double lat2, double lon2) {
 		Location l1 = new Location("");
