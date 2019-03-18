@@ -3000,5 +3000,6 @@ Lon %2$s</string>
 \nPara continuar debe acortarla.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
     <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
-    <string name="avoid_pt_types">Evitar los tipos de transporte…</string>
+    <string name="avoid_pt_types">Evitar tipos de transporte…</string>
+    <string name="quick_action_day_night_mode">modo %s</string>
 </resources>
