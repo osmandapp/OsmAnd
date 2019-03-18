@@ -2984,4 +2984,7 @@
     <string name="shared_string_walk">Пешком</string>
     <string name="save_poi_value_exceed_length">Значение тега \"%s\" не может превышать 255 символов.
 \nОтредактируйте его перед продолжением.</string>
+    <string name="avoid_pt_types_descr">Выберите виды общественного транспорта, которые следует избегать при навигации:</string>
+    <string name="avoid_pt_types">Избегать виды транспорта…</string>
+    <string name="save_poi_value_exceed_length_title">Длина значения \"%s\"</string>
 </resources>

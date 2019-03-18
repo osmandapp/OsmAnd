@@ -151,4 +151,9 @@
     <string name="last_available_location">L\'últimu allugamientu disponible</string>
     <string name="sharing_status">Estáu de la compartición</string>
     <string name="set_time_description">Afita\'l tiempu nel que los contautos y grupos esbillaos van ver el to allugamientu en tiempu real.</string>
+    <string name="timeline_available_for_free_now">Agora la carauterística de llinia temporal ta disponible de baldre.</string>
+    <string name="timeline_description">Activa la supervisión pa guardar nel historial tolos allugamientos.</string>
+    <string name="how_it_works">Cómo funciona</string>
+    <string name="show_gps_points">Cómo</string>
+    <string name="shared_string_date">Data</string>
 </resources>

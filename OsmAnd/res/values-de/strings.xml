@@ -749,8 +749,8 @@
     <string name="osm_settings">OSM-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="shared_string_settings">Einstellungen</string>
-    <string name="update_tile">Karte (Kacheln) aktualisieren</string>
-    <string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
+    <string name="update_tile">Karte aktualisieren</string>
+    <string name="reload_tile">Kartenteile aktualisieren</string>
     <string name="mark_point">Ziel</string>
     <string name="shared_string_add_to_favorites">Zu \'Favoriten\' hinzufügen</string>
     <string name="use_english_names_descr">Englische oder einheimische Namen in der Karte verwenden.</string>
@@ -767,7 +767,7 @@
     <string name="show_poi_over_map_description">Zuletzt gewähltes POIs Overlay auf der Karte anzeigen.</string>
     <string name="show_poi_over_map">POI Overlay anzeigen</string>
     <string name="map_tile_source_descr">Online- oder Offline-Quelle für Karte (Kacheln).</string>
-    <string name="map_tile_source">Kartenquelle (Kacheln)</string>
+    <string name="map_tile_source">Kartenquelle</string>
     <string name="map_source">Kartenquelle</string>
     <string name="use_internet">Internet verwenden</string>
     <string name="show_location">Standort anzeigen</string>
@@ -2406,7 +2406,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
     <string name="animate_my_location_desc">Animation beim Schwenken meiner Position während der Navigation aktivieren.</string>
-    <string name="route_is_too_long_v2">Fernreisen: bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten keine Route gefunden wird.</string>
+    <string name="route_is_too_long_v2">Für lange Strecken: Bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten keine Route gefunden wird.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
     <string name="routing_attr_allow_private_name">Privatzugang erlauben</string>
@@ -2936,7 +2936,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport_description">Öffentliche Verkehrsmittel für Änderungen an OsmAnd Live aktivieren.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
     <string name="public_transport_warning_descr_blog">Erfahren Sie mehr darüber, wie OsmAnd Routen berechnet, in unserem Blog.</string>
-    <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, Fehler und Ungenauigkeiten können auftreten.</string>
+    <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, erwarten Sie Fehler und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
     <string name="transfers_size">%1$d überträgt</string>
     <string name="add_start_and_end_points">Start- und Endpunkte hinzufügen</string>
@@ -3002,4 +3002,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n - Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr)
 \n
 \n</string>
+    <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
+    <string name="avoid_pt_types">Vermeiden Sie Verkehrsmittel…</string>
+    <string name="shared_string_walk">Gehen</string>
+    <string name="save_poi_value_exceed_length">Die maximale Länge des Tags \"%s\" beträgt 255 Zeichen. 
+\nBitte kürzen Sie diesen, um fortzufahren.</string>
+    <string name="save_poi_value_exceed_length_title">Länge des \"%s\" Wertes</string>
 </resources>
