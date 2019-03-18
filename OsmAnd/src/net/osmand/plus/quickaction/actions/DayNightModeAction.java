@@ -21,17 +21,10 @@ public class DayNightModeAction extends QuickAction {
 
 	@Override
 	public void execute(MapActivity activity) {
-		switch (activity.getMyApplication().getSettings().DAYNIGHT_MODE.get()){
-			case DAY: {
-				activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.NIGHT);
-				break;
-			}
-			case NIGHT:
-			case AUTO:
-			case SENSOR: {
-				activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.DAY);
-				break;
-			}
+		if (activity.getMyApplication().getDaynightHelper().isNightMode()) {
+			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.DAY);
+		} else {
+			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.NIGHT);
 		}
 	}
 
@@ -47,18 +40,20 @@ public class DayNightModeAction extends QuickAction {
 	@Override
 	public int getIconRes(Context context) {
 		if (context instanceof MapActivity
-			&& !((MapActivity) context).getMyApplication().getDaynightHelper().isNightMode()) {
-			return R.drawable.ic_action_map_night;
+			&& ((MapActivity) context).getMyApplication().getDaynightHelper().isNightMode()) {
+			return R.drawable.ic_action_map_day;
 		}
-		return R.drawable.ic_action_map_day;
+		return R.drawable.ic_action_map_night;
 	}
 
 	@Override
 	public String getActionText(OsmandApplication application) {
-		if (!application.getDaynightHelper().isNightMode()) {
-			return String.format(application.getString(R.string.quick_action_day_night_mode), DayNightMode.NIGHT.toHumanString(application));
+		if (application.getDaynightHelper().isNightMode()) {
+			return String.format(application.getString(R.string.quick_action_day_night_mode),
+				DayNightMode.DAY.toHumanString(application));
 		} else {
-			return String.format(application.getString(R.string.quick_action_day_night_mode), DayNightMode.DAY.toHumanString(application));
+			return String.format(application.getString(R.string.quick_action_day_night_mode),
+				DayNightMode.NIGHT.toHumanString(application));
 		}
 	}
 }
