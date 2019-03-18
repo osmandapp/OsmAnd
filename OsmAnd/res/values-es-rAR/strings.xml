@@ -2405,7 +2405,7 @@ Lon %2$s</string>
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
     <string name="display_zoom_level">Nivel de zoom de pantalla: %1$s</string>
-    <string name="route_is_too_long_v2">Larga distancia: Añada destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
+    <string name="route_is_too_long_v2">Para largas distancias: Añade destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
     <string name="srtm_menu_download_descr">Descarga el mapa de «Curvas de nivel» para usarlas en esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
     <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
@@ -2995,4 +2995,8 @@ Lon %2$s</string>
     <string name="public_transport_warning_descr_blog">Conozca más sobre cómo OsmAnd calcula las rutas en nuestro blog.</string>
     <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de prueba beta, pueden producirse errores e imprecisiones.</string>
     <string name="add_intermediate">Añadir punto intermedio</string>
+    <string name="shared_string_walk">A pie</string>
+    <string name="save_poi_value_exceed_length">El valor de la etiqueta «%s» no puede exceder los 255 caracteres.
+\nPor favor, edítelo antes de continuar.</string>
+    <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
 </resources>

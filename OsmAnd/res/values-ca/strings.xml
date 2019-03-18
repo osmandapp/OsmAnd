@@ -2408,7 +2408,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="edit_name">Edita el nom</string>
     <string name="save_poi_too_many_uppercase">El nom té masses majúscules. Voleu continuar?</string>
     <string name="display_zoom_level">Nivell d\'escala de visualització: %1$s</string>
-    <string name="route_is_too_long_v2">Rutes llargues: Afegiu fites intermèdies si no es troba cap resultat en 10 minuts.</string>
+    <string name="route_is_too_long_v2">En rutes llargues: Afegiu fites intermèdies si no es troba cap resultat en 10 minuts.</string>
     <string name="srtm_color_scheme">Combinació de colors</string>
     <string name="show_from_zoom_level">Mostra segons el nivell d\'escala</string>
     <string name="routing_attr_allow_private_name">Permet l\'accés privat</string>
@@ -3011,4 +3011,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_footway_name">Peatonal</string>
     <string name="rendering_attr_highway_class_bridleway_name">Ruta eqüestre</string>
     <string name="rendering_attr_highway_class_cycleway_name">Carril bici</string>
+    <string name="shared_string_walk">Caminada</string>
+    <string name="save_poi_value_exceed_length">El valor de l\'etiqueta \"%s\" no pot superar els 255 caràcters. 
+\nEditeu-lo abans de continuar.</string>
+    <string name="save_poi_value_exceed_length_title">Longitud del valor de \"%s\"</string>
+    <string name="rendering_attr_surface_dirt_name">Pols</string>
 </resources>
