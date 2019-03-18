@@ -2960,4 +2960,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="save_poi_value_exceed_length_title">Taille de \"%s\"</string>
     <string name="avoid_pt_types_descr">Sélectionnez les types de transports publics à éviter lors de la navigation :</string>
     <string name="avoid_pt_types">Éviter des types de transports …</string>
+    <string name="quick_action_day_night_mode">Mode %s</string>
+    <string name="release_3_3">• Nouvel écran d\'indication des Directions : Boutons Domicile et Travail, Raccourci vers la route précédente, Liste des marqueurs actifs et des traces GPX actives, Recherche dans l\'historique
+\n• Informations supplémentaires dans \'Détails de la route\' : Type de route, Surface, Pente ...
+\n• Navigation avec les transports publics : métro, bus, tram ...
+\n• Nouvelles actions rapides pour afficher / masquer les traces et le mode jour / nuit
+\n• Correction de zones indiquées comme inondées en Allemagne, Afrique du Sud et au Québec
+\n• Prise en charge des imports KML et KMZ
+\n• Correction des plantages sur les arrêts de transports publics
+\n• Pour la version gratuite : retrait des analyses Facebook et Firebase (c\'était déjà le cas pour OsmAnd+).</string>
 </resources>
