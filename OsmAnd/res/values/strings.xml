@@ -3080,4 +3080,7 @@
     <string name="route_steepness_stat_container">Steepness</string>
     <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
+    <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
+    <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
+
 </resources>
