@@ -1901,7 +1901,10 @@ public class ShowRouteInfoDialogFragment extends BaseOsmAndFragment implements P
 
 	public CumulativeInfo getRouteDirectionCumulativeInfo(int position, List<RouteDirectionInfo> routeDirections) {
 		CumulativeInfo cumulativeInfo = new CumulativeInfo();
-		for (int i = position; i < routeDirections.size(); i++) {
+		if (position >= routeDirections.size()) {
+			return cumulativeInfo;
+		}
+		for (int i = 0; i < position; i++) {
 			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
 			cumulativeInfo.time += routeDirectionInfo.getExpectedTime();
 			cumulativeInfo.distance += routeDirectionInfo.distance;
