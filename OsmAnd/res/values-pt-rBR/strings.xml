@@ -2985,4 +2985,5 @@ Pôr do Sol: %2$s</string>
     <string name="save_poi_value_exceed_length_title">Comprimento do valor \"%s\"</string>
     <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para navegação:</string>
     <string name="avoid_pt_types">Evite os tipos de transporte…</string>
+    <string name="quick_action_day_night_mode">Modo %s</string>
 </resources>
