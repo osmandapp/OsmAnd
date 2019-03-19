@@ -165,7 +165,17 @@ public class OsmAndFormatter {
 
 		return df.format(meters / mainUnitInMeters) + " " + app.getString(mainUnitStr);
 	}
-	
+
+	public static String getFormattedAzimuth(float bearing) {
+		int azimuth;
+		if (bearing < 0.0) {
+			azimuth = (int) (360 + bearing);
+		} else {
+			azimuth = (int) bearing;
+		}
+		return azimuth + "°";
+	}
+
 	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
 		return getFormattedDistance(meters, ctx, true);
 	}
