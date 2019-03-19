@@ -206,8 +206,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					if (editingCtx.getPointsCount() > 0) {
 						WptPt lastPoint = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
 						LatLon centerLatLon = tb.getCenterLatLon();
-						distance = (float) MapUtils.getDistance(lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
-						bearing = getLocationFromLL(lastPoint.lat, lastPoint.lon).bearingTo(getLocationFromLL(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+						distance = (float) MapUtils.getDistance(
+							lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
+						bearing = getLocationFromLL(lastPoint.lat, lastPoint.lon)
+							.bearingTo(getLocationFromLL(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 					}
 					measureDistanceToCenterListener.onMeasure(distance, bearing);
 				}

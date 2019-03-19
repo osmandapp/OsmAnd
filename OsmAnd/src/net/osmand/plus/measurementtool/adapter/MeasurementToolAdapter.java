@@ -95,8 +95,6 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			Location l2;
 			if (pos < 1) {
 				text = mapActivity.getString(R.string.shared_string_control_start);
-
-				mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 				if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
 					l1 = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 					l2 = getLocationFromLL(points.get(0).lat, points.get(0).lon);
