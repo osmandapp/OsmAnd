@@ -715,10 +715,10 @@
     <string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
     <string name="get_directions">Navigation</string>
     <string name="opening_hours">Öffnungszeiten</string>
-    <string name="opening_changeset">Öffne Änderungssatz…</string>
-    <string name="closing_changeset">Schließe Änderungssatz…</string>
+    <string name="opening_changeset">Änderungssatz öffnen…</string>
+    <string name="closing_changeset">Änderungssatz schließen…</string>
     <string name="commiting_node">Übertrage Knoten…</string>
-    <string name="loading_poi_obj">POI wird geladen…</string>
+    <string name="loading_poi_obj">Lade POI…</string>
     <string name="auth_failed">Autorisierung fehlgeschlagen</string>
     <string name="failed_op">fehlgeschlagen</string>
     <string name="converting_names">Lokale/Englische Namen werden konvertiert…</string>
@@ -3008,4 +3008,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="save_poi_value_exceed_length">Die maximale Länge des Tags \"%s\" beträgt 255 Zeichen. 
 \nBitte kürzen Sie diesen, um fortzufahren.</string>
     <string name="save_poi_value_exceed_length_title">Länge des \"%s\" Wertes</string>
+    <string name="quick_action_day_night_mode">%s Modus</string>
 </resources>
