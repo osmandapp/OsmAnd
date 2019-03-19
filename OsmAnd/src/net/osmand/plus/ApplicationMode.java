@@ -39,6 +39,9 @@ public class ApplicationMode {
 	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().nauticalLocation().
 			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).reg();
 
+	public static final ApplicationMode SKI = create(R.string.app_mode_ski, "ski").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
+			icon(R.drawable.ic_plugin_skimaps, R.drawable.ic_plugin_skimaps).reg();
+
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
 
@@ -57,9 +60,9 @@ public class ApplicationMode {
 			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
 
 	static {
-		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, TRAIN};
-		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, TRAIN};
-		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN};
+		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, SKI, AIRCRAFT, PUBLIC_TRANSPORT, TRAIN};
+		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, SKI, AIRCRAFT, PUBLIC_TRANSPORT, TRAIN};
+		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, SKI};
 		ApplicationMode[] pedestrian = new ApplicationMode[]{PEDESTRIAN};
 		ApplicationMode[] pedestrianBicycle = new ApplicationMode[]{PEDESTRIAN, BICYCLE};
 

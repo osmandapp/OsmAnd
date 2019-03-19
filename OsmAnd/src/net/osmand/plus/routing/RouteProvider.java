@@ -693,6 +693,8 @@ public class RouteProvider {
 			p = GeneralRouterProfile.CAR;
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
 			p = GeneralRouterProfile.BOAT;
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.SKI)) {
+			p = GeneralRouterProfile.SKI;
 		} else {
 			return null;
 		}
