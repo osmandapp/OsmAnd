@@ -854,7 +854,7 @@
     <string name="poi_nwn_ref">Nodo de red nacional de senderismo</string>
     <string name="poi_rwn_ref">Nodo de red regional de senderismo</string>
     <string name="poi_lwn_ref">Nodo de red local de senderismo</string>
-    <string name="poi_opening_hours">Horario de atención;Horario de apertura</string>
+    <string name="poi_opening_hours">Horario de atención</string>
     <string name="poi_collection_times">Horario de recolección</string>
     <string name="poi_description">Descripción</string>
     <string name="poi_phone">Teléfono</string>
