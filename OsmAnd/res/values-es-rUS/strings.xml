@@ -203,7 +203,7 @@ Lon %2$s</string>
     <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="text_size">Tamaño del texto</string>
-    <string name="traffic_warning_speed_limit">Límite de velocidad</string>
+    <string name="traffic_warning_speed_limit">Límites de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
     <string name="traffic_warning_payment">Cabina de peaje</string>
     <string name="traffic_warning_stop">Señal de alto</string>
@@ -2994,10 +2994,12 @@ Lon %2$s</string>
     <string name="rendering_attr_highway_class_cycleway_name">Ciclovía / Bicisenda</string>
     <string name="rendering_attr_undefined_name">Indefinido</string>
     <string name="public_transport_warning_descr_blog">Conozca más sobre cómo OsmAnd calcula las rutas en nuestro blog.</string>
-    <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de prueba beta, pueden producirse errores e imprecisiones.</string>
+    <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de pruebas beta, se esperan errores e imprecisiones.</string>
     <string name="add_intermediate">Añadir punto intermedio</string>
     <string name="shared_string_walk">A pie</string>
-    <string name="save_poi_value_exceed_length">El valor de la etiqueta «%s» no puede exceder los 255 caracteres.
-\nPor favor, edítelo antes de continuar.</string>
+    <string name="save_poi_value_exceed_length">La longitud máxima de la etiqueta «%s» es de 255 caracteres.
+\nPara continuar debe acortarla.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
+    <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
+    <string name="avoid_pt_types">Evitar los tipos de transporte…</string>
 </resources>

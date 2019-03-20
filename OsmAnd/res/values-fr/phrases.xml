@@ -3213,4 +3213,12 @@
     <string name="poi_cannabis">Boutique de cannabis</string>
     <string name="poi_denotation">Dénotation</string>
     <string name="poi_rtsa_scale_filter">Catégorie de difficulté</string>
+    <string name="poi_health_specialty_radiotheraphy_yes">Radiothérapie</string>
+    <string name="poi_nuclear_explosion_series">Série d\'explosions</string>
+    <string name="poi_health_person_type_paramedic">Rôle du personnel de santé : paramédical</string>
+    <string name="poi_health_person_type_physician">Rôle du personnel de santé : médecin</string>
+    <string name="poi_health_person_type_podologist">Rôle du personnel de santé : podologue</string>
+    <string name="poi_health_person_type_psychologist">Rôle du personnel de santé : psychologue</string>
+    <string name="poi_health_person_type_therapist">Rôle du personnel de santé : thérapeute</string>
+    <string name="poi_health_person_type_technician">Rôle du personnel de santé : technicien</string>
 </resources>

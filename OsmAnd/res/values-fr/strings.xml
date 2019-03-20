@@ -2958,4 +2958,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="save_poi_value_exceed_length">L\'étiquette \"%s\" est limitée à 255 caractères.
 \nVeuillez la modifier avant de poursuivre.</string>
     <string name="save_poi_value_exceed_length_title">Taille de \"%s\"</string>
+    <string name="avoid_pt_types_descr">Sélectionnez les types de transports publics à éviter lors de la navigation :</string>
+    <string name="avoid_pt_types">Éviter des types de transports …</string>
 </resources>
