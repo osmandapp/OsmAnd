@@ -15,6 +15,7 @@
     <string name="shared_string_milliradians">Milliradians</string>
     <string name="angular_measeurement">Angular measurement units</string>
     <string name="angular_measeurement_descr">Change what azimuth is measured in.</string>
+    <string name="quick_action_day_night_mode">%s mode</string>
     <string name="avoid_pt_types_descr">Select a public transport types you want to avoid during navigation:</string>
     <string name="avoid_pt_types">Avoid transport types…</string>
     <string name="shared_string_walk">Walk</string>

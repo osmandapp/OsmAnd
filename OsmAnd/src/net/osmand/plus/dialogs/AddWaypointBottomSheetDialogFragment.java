@@ -63,11 +63,6 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						TargetPoint start = targetPointsHelper.getPointToStart();
-						if (start != null) {
-							targetPointsHelper.navigateToPoint(new LatLon(start.getLatitude(), start.getLongitude()),
-									false, 0, start.getOriginalPointDescription());
-						}
 						targetPointsHelper.setStartPoint(latLon, true, name);
 						dismiss();
 					}

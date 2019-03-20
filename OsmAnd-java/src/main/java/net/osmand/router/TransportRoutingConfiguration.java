@@ -92,7 +92,7 @@ public class TransportRoutingConfiguration {
 			maxRouteTime =  router.getIntAttribute("maxRouteTime", maxRouteTime);
 			finishTimeSeconds =  router.getIntAttribute("delayForAlternativesRoutes", finishTimeSeconds);
 			String mn = params.get("max_num_changes");
-			maxNumberOfChanges = RoutingConfiguration.parseSilentInt(mn, maxNumberOfChanges);
+			maxNumberOfChanges = (int) RoutingConfiguration.parseSilentFloat(mn, maxNumberOfChanges);
 			
 			walkSpeed = router.getFloatAttribute("minDefaultSpeed", this.walkSpeed * 3.6f) / 3.6f;
 			defaultTravelSpeed = router.getFloatAttribute("maxDefaultSpeed", this.defaultTravelSpeed * 3.6f) / 3.6f;
