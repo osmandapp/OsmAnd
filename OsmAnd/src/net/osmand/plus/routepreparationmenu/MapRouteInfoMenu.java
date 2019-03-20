@@ -406,12 +406,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (app != null && fragmentRef != null && fragment.isVisible()) {
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 			if (setRouteCalculationInProgress(routeCalculating)) {
-				if (!routeCalculationInProgress) {
-					fragment.hideRouteCalculationProgressBar();
-				}
 				fragment.updateControlButtons();
 				fragment.updateInfo();
-				fragment.openMenuHalfScreen();
+				if (!routeCalculationInProgress) {
+					fragment.hideRouteCalculationProgressBar();
+					fragment.openMenuHalfScreen();
+				}
 			}
 		}
 	}
@@ -705,6 +705,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			routingHelper.setAppMode(next);
 			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false);
 			routingHelper.recalculateRouteDueToSettingsChange();
+			updateMenu();
 		}
 	}
 
