@@ -391,10 +391,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
-			setRouteCalculationInProgress(true);
-			fragment.updateRouteCalculationProgress(0);
-			fragment.updateControlButtons();
-			fragment.updateInfo();
+			if (setRouteCalculationInProgress(true)) {
+				fragment.updateRouteCalculationProgress(0);
+				fragment.updateControlButtons();
+				fragment.updateInfo();
+			} else {
+				fragment.updateCards();
+			}
 		}
 	}
 
@@ -481,8 +484,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		mainView = main;
 		OsmandApplication app = mapActivity.getMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		RoutingHelper routingHelper = app.getRoutingHelper();
 
 		updateStartPointView();
 		updateWaypointsView();
@@ -491,6 +492,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateApplicationModes();
 		updateApplicationModesOptions();
 		updateOptionsButtons();
+
+		updateCards();
+	}
+
+	public void updateCards() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+
+		OsmandApplication app = mapActivity.getMyApplication();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		RoutingHelper routingHelper = app.getRoutingHelper();
 
 		menuCards.clear();
 
