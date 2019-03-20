@@ -405,11 +405,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OsmandApplication app = getApp();
 		if (app != null && fragmentRef != null && fragment.isVisible()) {
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
-			setRouteCalculationInProgress(routeCalculating);
-			fragment.hideRouteCalculationProgressBar();
-			fragment.updateControlButtons();
-			fragment.updateInfo();
-			if (!menuCards.isEmpty() && currentMenuState == MenuState.HEADER_ONLY) {
+			if (setRouteCalculationInProgress(routeCalculating)) {
+				if (!routeCalculationInProgress) {
+					fragment.hideRouteCalculationProgressBar();
+				}
+				fragment.updateControlButtons();
+				fragment.updateInfo();
 				fragment.openMenuHalfScreen();
 			}
 		}
