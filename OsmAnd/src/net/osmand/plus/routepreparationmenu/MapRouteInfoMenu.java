@@ -705,15 +705,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			routingHelper.setAppMode(next);
 			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false);
 			routingHelper.recalculateRouteDueToSettingsChange();
-
-			WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-			MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
-			if (fragmentRef != null && fragment.isVisible()) {
-				fragment.updateInfo();
-				if (!menuCards.isEmpty() && currentMenuState == MenuState.HEADER_ONLY) {
-					fragment.openMenuHalfScreen();
-				}
-			}
 		}
 	}
 
