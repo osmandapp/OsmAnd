@@ -387,15 +387,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
+	public void routeCalculationStarted() {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+		if (fragmentRef != null && fragment.isVisible()) {
+			setRouteCalculationInProgress(true);
+			fragment.updateRouteCalculationProgress(0);
+			fragment.updateControlButtons();
+			fragment.updateInfo();
+		}
+	}
+
 	public void updateRouteCalculationProgress(int progress) {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
-			if (setRouteCalculationInProgress(true)) {
-				fragment.updateInfo();
-			}
 			fragment.updateRouteCalculationProgress(progress);
-			fragment.updateControlButtons();
 		}
 	}
 
@@ -705,9 +712,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			routingHelper.setAppMode(next);
 			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false);
 			routingHelper.recalculateRouteDueToSettingsChange();
-			if (setRouteCalculationInProgress(true) || mode != next) {
-				updateMenu();
-			}
 		}
 	}
 

@@ -443,6 +443,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void start() {
 				setupRouteCalculationProgressBar(pb);
+				mapRouteInfoMenu.routeCalculationStarted();
 			}
 
 			@Override
