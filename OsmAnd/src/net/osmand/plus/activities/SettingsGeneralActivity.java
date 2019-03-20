@@ -38,6 +38,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.AngularConstants;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
@@ -208,6 +209,13 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		entries[3] = PointDescription.formatToHumanString(this, PointDescription.UTM_FORMAT);
 		entries[4] = PointDescription.formatToHumanString(this, PointDescription.OLC_FORMAT);
 		registerListPreference(settings.COORDINATES_FORMAT, screen, entries, cvls);
+
+		AngularConstants[] ac = AngularConstants.values();
+		entries = new String[ac.length];
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = ac[i].toHumanString(getMyApplication());
+		}
+		registerListPreference(settings.ANGULAR_UNITS, screen, entries, ac);
 
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		// Hardy maintenance 2016-05-29:

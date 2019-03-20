@@ -100,7 +100,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 					l2 = getLocationFromLL(points.get(0).lat, points.get(0).lon);
 					text = text
 						+ BULLET + OsmAndFormatter.getFormattedDistance(l1.distanceTo(l2), mapActivity.getMyApplication())
-						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2));
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), mapActivity.getMyApplication());
 				}
 				holder.descr.setText(text);
 			} else {
@@ -110,7 +110,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 					l2 = getLocationFromLL(points.get(i).lat, points.get(i).lon);
 					dist += l1.distanceTo(l2);
 					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication())
-						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2));
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), mapActivity.getMyApplication());
 				}
 				holder.descr.setText(text);
 			}

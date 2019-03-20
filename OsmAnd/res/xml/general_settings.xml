@@ -9,6 +9,7 @@
 		<!-- ListPreference android:key="map_preferred_locale" android:title="@string/map_preferred_locale" android:summary="@string/map_preferred_locale_descr"></ListPreference -->
 		<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 		<ListPreference android:key="coordinates_format" android:title="@string/coords_format" android:summary="@string/coords_format_descr"></ListPreference>
+		<ListPreference android:key="angular_measurement" android:title="@string/angular_measeurement" android:summary="@string/angular_measeurement_descr"></ListPreference>
 
 	</PreferenceCategory>
 
