@@ -40,7 +40,7 @@ public class ApplicationMode {
 			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).reg();
 
 	public static final ApplicationMode SKI = create(R.string.app_mode_ski, "ski").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
-			icon(R.drawable.ic_plugin_skimaps, R.drawable.ic_plugin_skimaps).reg();
+			icon(R.drawable.map_action_ski_dark, R.drawable.ic_action_ski_dark).reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
