@@ -362,8 +362,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			@Override
 			public void onMeasure(float distance, float bearing) {
 				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
-				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing);
-				distanceToCenterTv.setText(" – " + distStr + " • " + azimuthStr);
+				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
+				distanceToCenterTv.setText(String.format(" – %s • %s", distStr, azimuthStr));
 			}
 		});
 
