@@ -111,7 +111,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible = false;
 	private boolean routeCalculationInProgress;
-	private boolean appModeChanged;
 
 	private boolean selectFromMapTouch;
 	private PointType selectFromMapPointType;
@@ -413,7 +412,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (!menuCards.isEmpty() && currentMenuState == MenuState.HEADER_ONLY) {
 				fragment.openMenuHalfScreen();
 			}
-			appModeChanged = false;
 		}
 	}
 
@@ -509,7 +507,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				WarningCard warningCard = new WarningCard(mapActivity);
 				menuCards.add(warningCard);
 			}
-		} else if (!appModeChanged) {
+		} else {
 			// Home/work card
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
 			menuCards.add(homeWorkCard);
@@ -697,7 +695,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			appModeChanged = true;
 			OsmandApplication app = mapActivity.getMyApplication();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			OsmandPreference<ApplicationMode> appMode = app.getSettings().APPLICATION_MODE;
