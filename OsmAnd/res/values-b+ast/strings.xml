@@ -684,7 +684,7 @@
 \nComéntanoslo</string>
     <string name="increase_search_radius_to">Aumentar el radiu de gueta hasta %1$s</string>
     <string name="send_search_query_description">Vamos unviar la consulta <b>«%1$s»</b> amás del to allugamientu. <br/>
-        <br/>Nun recoyemos información personal, namái precisamos estos datos p\'ameyorar l\'algoritmu de gueta.<br/>
+        <br/>Nun recoyemos la información personal, namái precisamos estos datos p\'ameyorar l\'algoritmu de gueta.<br/>
     </string>
     <string name="send_search_query">¿Unviar la consulta de gueta\?</string>
     <string name="shared_string_world">Mundu</string>
@@ -1285,7 +1285,7 @@
     <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PdI cercanos</string>
     <string name="routing_attr_avoid_unpaved_name">Evitar carreteres ensin pavimentar</string>
-    <string name="routing_attr_avoid_motorway_name">Autopistes</string>
+    <string name="routing_attr_avoid_motorway_name">Evitar autopistes</string>
     <string name="snap_to_road_descr">Axusta la posición a los caminos na navegación.</string>
     <string name="snap_to_road">Axustar a la carretera</string>
     <string name="keep_informing_never">Namái a mano (toca na flecha)</string>
@@ -1341,4 +1341,36 @@
     <string name="safe_mode_description">Executa l\'aplicación nel mou seguru (usando\'l códigu lentu d\'Android en cuentes del nativu).</string>
     <string name="continue_follow_previous_route_auto">¿Siguir cola navegación anterior ensin finar\? (%1$s segundos)</string>
     <string name="animate_route">Aniciar una simulación</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfaltu</string>
+    <string name="rendering_attr_surface_concrete_name">Formigón</string>
+    <string name="rendering_attr_surface_gravel_name">Grava</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Grava fino</string>
+    <string name="step_by_step">Pasu a pasu</string>
+    <string name="start_search_from_city">Esbillar primero la ciudá</string>
+    <string name="modify_the_search_query">Modifica la consulta de gueta.</string>
+    <string name="type_city_town">Teclexa una ciudá o villa</string>
+    <string name="apply_filters">Aplicar peñeres</string>
+    <string name="map_marker">Marcador del mapa</string>
+    <string name="map_widget_plain_time">Tiempu actual</string>
+    <string name="routing_attr_weight_name">Llende de pesu</string>
+    <string name="routing_attr_height_name">Llende d\'altor</string>
+    <string name="route_is_too_long_v2">Pa distancies llargues, amiesta destinos intermedios si en 10 minutos nun s\'alcuentra denguna ruta.</string>
+    <string name="speak_cameras">Radares</string>
+    <string name="show_cameras">Radares</string>
+    <string name="route_roundabout">Na retonda cueyi la salida %1$d y sigui</string>
+    <string name="route_kl">Siguir pela esquierda y vete per</string>
+    <string name="route_kr">Sigui pela drecha y vete per</string>
+    <string name="towards">pa</string>
+    <string name="voice_stream_notification">Audiu d\'avisos</string>
+    <string name="downloading_build">Baxando la compilación…</string>
+    <string name="no_fav_to_save">Nun hai puntos favoritos pa guardar</string>
+    <string name="route_tr">Xira a la drecha y sigui</string>
+    <string name="route_tshr">Xira fuerte a la drecha y sigui</string>
+    <string name="route_tslr">Xira llixeramente a la drecha y sigui per</string>
+    <string name="route_tl">Xira a la esquierda y sigui</string>
+    <string name="route_tshl">Xira fuerte a la esquierda y sigui</string>
+    <string name="route_tsll">Xira llixeramente a la esquierda y sigui per</string>
+    <string name="route_head">De frente</string>
+    <string name="app_mode_pedestrian">Andadura</string>
+    <string name="route_surface_stat_container">Superficie</string>
 </resources>
