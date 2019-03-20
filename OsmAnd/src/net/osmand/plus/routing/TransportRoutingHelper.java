@@ -63,6 +63,7 @@ public class TransportRoutingHelper {
 	private String lastRouteCalcError;
 	private String lastRouteCalcErrorShort;
 	private long lastTimeEvaluatedRoute = 0;
+	private boolean waitingNextJob;
 
 	private TransportRouteCalculationProgressCallback progressRoute;
 
@@ -253,7 +254,7 @@ public class TransportRoutingHelper {
 	}
 
 	public boolean isRouteBeingCalculated() {
-		return currentRunningJob instanceof RouteRecalculationThread;
+		return currentRunningJob instanceof RouteRecalculationThread || waitingNextJob;
 	}
 
 	private void setNewRoute(final List<TransportRouteResult> res) {
@@ -584,6 +585,7 @@ public class TransportRoutingHelper {
 		public void run() {
 			synchronized (TransportRoutingHelper.this) {
 				currentRunningJob = this;
+				waitingNextJob = prevRunningJob != null;
 			}
 			if (prevRunningJob != null) {
 				while (prevRunningJob.isAlive()) {
@@ -595,6 +597,7 @@ public class TransportRoutingHelper {
 				}
 				synchronized (TransportRoutingHelper.this) {
 					currentRunningJob = this;
+					waitingNextJob = false;
 				}
 			}
 
