@@ -1670,6 +1670,7 @@
     <string name="app_mode_hiking">Hiking</string>
     <string name="app_mode_motorcycle">Motorcycle</string>
     <string name="app_mode_boat">Boat</string>
+    <string name="app_mode_ski">Ski</string>
     <string name="app_mode_aircraft">Aircraft</string>
     <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d OSM changes. Are you sure?</string>
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
