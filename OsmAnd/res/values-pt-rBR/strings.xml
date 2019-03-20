@@ -2977,7 +2977,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_surface_salt_name">Sal</string>
     <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
     <string name="public_transport_warning_descr_blog">Saiba mais sobre como OsmAnd calcula as rotas em nosso blog.</string>
-    <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, erros e imprecisões podem ocorrer.</string>
+    <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espera erros e imprecisões.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
     <string name="shared_string_walk">Ande</string>
     <string name="save_poi_value_exceed_length">O comprimento máximo da etiqueta \"%s\" é 255 caracteres. 
