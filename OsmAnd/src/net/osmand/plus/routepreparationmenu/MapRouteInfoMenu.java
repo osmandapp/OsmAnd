@@ -402,7 +402,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
+			if (setRouteCalculationInProgress(true)) {
+				fragment.updateInfo();
+			}
 			fragment.updateRouteCalculationProgress(progress);
+			fragment.updateControlButtons();
 		}
 	}
 
