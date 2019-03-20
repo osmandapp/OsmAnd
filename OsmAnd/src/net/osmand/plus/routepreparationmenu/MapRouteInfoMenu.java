@@ -705,7 +705,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			routingHelper.setAppMode(next);
 			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false);
 			routingHelper.recalculateRouteDueToSettingsChange();
-			setRouteCalculationInProgress(true);
 
 			WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 			MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
