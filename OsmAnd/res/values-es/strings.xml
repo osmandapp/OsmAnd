@@ -3042,4 +3042,6 @@
 \nPara continuar debe acortarla.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
     <string name="quick_action_day_night_mode">modo %s</string>
+    <string name="routing_attr_avoid_sett_name">Evitar el empedrado y adoquín</string>
+    <string name="routing_attr_avoid_sett_description">Evita las calles empedradas y adoquinadas</string>
 </resources>
