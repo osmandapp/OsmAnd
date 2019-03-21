@@ -443,6 +443,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void start() {
 				setupRouteCalculationProgressBar(pb);
+				mapRouteInfoMenu.routeCalculationStarted();
 			}
 
 			@Override
@@ -1499,8 +1500,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						if (zoom != null) {
 							z = Integer.parseInt(zoom);
 						}
-						settings.setMapLocationToShow(lt, ln, z, new PointDescription(
-								PointDescription.POINT_TYPE_MARKER, getString(R.string.shared_location)));
+						settings.setMapLocationToShow(lt, ln, z, new PointDescription(lt, ln));
 					} catch (NumberFormatException e) {
 						LOG.error("error", e);
 					}

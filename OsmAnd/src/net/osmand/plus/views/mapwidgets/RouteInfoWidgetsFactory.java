@@ -681,7 +681,7 @@ public class RouteInfoWidgetsFactory {
 				if (degreesChanged(cachedDegrees, b) || modeChanged) {
 					cachedDegrees = b;
 					if (b != -1000) {
-						setText(String.valueOf(b) + "°" + (relative ? "" : " M"), null);
+						setText(OsmAndFormatter.getFormattedAzimuth(b, getOsmandApplication()) + (relative ? "" : " M"), null);
 					} else {
 						setText(null, null);
 					}

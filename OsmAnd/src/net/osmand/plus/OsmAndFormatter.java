@@ -9,6 +9,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandSettings.AngularConstants;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -165,7 +166,23 @@ public class OsmAndFormatter {
 
 		return df.format(meters / mainUnitInMeters) + " " + app.getString(mainUnitStr);
 	}
-	
+
+	public static String getFormattedAzimuth(float bearing, OsmandApplication app) {
+		int azimuth;
+		if (bearing < 0.0) {
+			azimuth = (int) (360 + bearing);
+		} else {
+			azimuth = (int) bearing;
+		}
+
+		if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.MILLIRADS) {
+			return (int) (azimuth * 17.4533) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
+		} else {
+			return azimuth + AngularConstants.DEGREES.getUnitSymbol();
+		}
+
+	}
+
 	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
 		return getFormattedDistance(meters, ctx, true);
 	}

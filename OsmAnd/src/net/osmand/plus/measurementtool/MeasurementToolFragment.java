@@ -360,9 +360,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 		measurementLayer.setOnMeasureDistanceToCenterListener(new MeasurementToolLayer.OnMeasureDistanceToCenter() {
 			@Override
-			public void onMeasure(float distance) {
+			public void onMeasure(float distance, float bearing) {
 				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
-				distanceToCenterTv.setText(" – " + distStr);
+				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
+				distanceToCenterTv.setText(String.format(" – %s • %s", distStr, azimuthStr));
 			}
 		});
 

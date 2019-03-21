@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -31,6 +32,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	private MeasurementAdapterListener listener;
 	private boolean nightMode;
 	private final ActionType actionType;
+	private final static String BULLET = "   •   ";
 
 	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points, ActionType actionType) {
 		this.mapActivity = mapActivity;
@@ -88,15 +90,29 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!TextUtils.isEmpty(pointDesc)) {
 			holder.descr.setText(pointDesc);
 		} else {
+			String text = "";
+			Location l1;
+			Location l2;
 			if (pos < 1) {
-				holder.descr.setText(mapActivity.getString(R.string.shared_string_control_start));
+				text = mapActivity.getString(R.string.shared_string_control_start);
+				if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
+					l1 = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+					l2 = getLocationFromLL(points.get(0).lat, points.get(0).lon);
+					text = text
+						+ BULLET + OsmAndFormatter.getFormattedDistance(l1.distanceTo(l2), mapActivity.getMyApplication())
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), mapActivity.getMyApplication());
+				}
+				holder.descr.setText(text);
 			} else {
 				float dist = 0;
 				for (int i = 1; i <= pos; i++) {
-					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
-							points.get(i).lat, points.get(i).lon);
+					l1 = getLocationFromLL(points.get(i - 1).lat, points.get(i - 1).lon);
+					l2 = getLocationFromLL(points.get(i).lat, points.get(i).lon);
+					dist += l1.distanceTo(l2);
+					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication())
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), mapActivity.getMyApplication());
 				}
-				holder.descr.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+				holder.descr.setText(text);
 			}
 		}
 		if (actionType == ActionType.EDIT_SEGMENT) {
@@ -129,6 +145,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				listener.onItemClick(holder.getAdapterPosition());
 			}
 		});
+	}
+
+	private Location getLocationFromLL(double lat, double lon) {
+		Location l = new Location("");
+		l.setLatitude(lat);
+		l.setLongitude(lon);
+		return l;
 	}
 
 	@Override

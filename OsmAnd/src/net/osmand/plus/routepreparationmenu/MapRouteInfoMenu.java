@@ -382,6 +382,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
+	public void routeCalculationStarted() {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+		if (fragmentRef != null && fragment.isVisible()) {
+			setRouteCalculationInProgress(true);
+			fragment.updateRouteCalculationProgress(0);
+			fragment.updateControlButtons();
+			fragment.updateInfo();
+		}
+	}
+
 	public void updateRouteCalculationProgress(int progress) {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
@@ -397,12 +408,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void routeCalculationFinished() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
-		if (fragmentRef != null && fragment.isVisible()) {
-			setRouteCalculationInProgress(false);
-			fragment.hideRouteCalculationProgressBar();
-			fragment.updateControlButtons();
-			fragment.updateInfo();
-			fragment.openMenuHalfScreen();
+		OsmandApplication app = getApp();
+		if (app != null && fragmentRef != null && fragment.isVisible()) {
+			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
+			if (setRouteCalculationInProgress(routeCalculating)) {
+				fragment.updateControlButtons();
+				fragment.updateInfo();
+				if (!routeCalculationInProgress) {
+					fragment.hideRouteCalculationProgressBar();
+					fragment.openMenuHalfScreen();
+				}
+			}
 		}
 	}
 
@@ -460,7 +476,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		mainView = main;
 		OsmandApplication app = mapActivity.getMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 
 		updateStartPointView();
 		updateWaypointsView();
@@ -470,11 +485,26 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateApplicationModesOptions();
 		updateOptionsButtons();
 
+		updateCards();
+	}
+
+	private void updateCards() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+
+		OsmandApplication app = mapActivity.getMyApplication();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+
 		menuCards.clear();
 
 		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {
-			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
+			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
 			if (gpx != null) {
 				SimpleRouteCard simpleRouteCard = new SimpleRouteCard(mapActivity, gpx);
 				simpleRouteCard.setListener(this);
@@ -494,8 +524,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 			bottomShadowVisible = routes.size() == 0;
 		} else if (routeCalculationInProgress) {
-			WarningCard warningCard = new WarningCard(mapActivity);
-			menuCards.add(warningCard);
+			if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() || routingHelper.isPublicTransportMode()) {
+				// WarningCard card
+				WarningCard warningCard = new WarningCard(mapActivity);
+				menuCards.add(warningCard);
+			}
 		} else {
 			// Home/work card
 			HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);

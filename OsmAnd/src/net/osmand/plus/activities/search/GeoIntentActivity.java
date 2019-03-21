@@ -137,21 +137,19 @@ public class GeoIntentActivity extends OsmandListActivity {
 					}
 					settings.setMapLocationToShow(p.getLatitude(), p.getLongitude(),
 							settings.getLastKnownMapZoom(), pd); //$NON-NLS-1$
-					MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
 				} else {
 					Uri uri = intent.getData();
 					String searchString = p != null && p.isGeoAddress() ? p.getQuery() : uri.toString();
 					settings.setSearchRequestToShow(searchString);
-					MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
 				}
+				MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
+				GeoIntentActivity.this.finish();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
 	}
-
-
 
 	@Override
 	protected void onStop() {

@@ -64,6 +64,7 @@ public class RoutingHelper {
 	private String lastRouteCalcErrorShort;
 	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
+	private boolean waitingNextJob;
 
 	private ApplicationMode mode;
 	private OsmandSettings settings;
@@ -872,6 +873,7 @@ public class RoutingHelper {
 		public void run() {
 			synchronized (RoutingHelper.this) {
 				currentRunningJob = this;
+				waitingNextJob = prevRunningJob != null;
 			}
 			if(prevRunningJob != null) {
 				while(prevRunningJob.isAlive()){
@@ -883,6 +885,7 @@ public class RoutingHelper {
 				}
 				synchronized (RoutingHelper.this) {
 					currentRunningJob = this;
+					waitingNextJob = false;
 				}
 			}
 			lastRouteCalcError = null;
@@ -1086,8 +1089,8 @@ public class RoutingHelper {
 		return mode == ApplicationMode.PUBLIC_TRANSPORT;
 	}
 
-	public boolean isRouteBeingCalculated(){
-		return currentRunningJob instanceof RouteRecalculationThread;
+	public boolean isRouteBeingCalculated() {
+		return currentRunningJob instanceof RouteRecalculationThread || waitingNextJob;
 	}
 
 	private void showMessage(final String msg){
