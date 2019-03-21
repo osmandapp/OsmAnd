@@ -1511,13 +1511,4 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		final int timeInSeconds = model.getExpectedTime();
 		return Algorithms.formatDuration(timeInSeconds, app.accessibilityEnabled());
 	}
-
-	public static boolean showInstance(@NonNull MapActivity mapActivity) {
-		try {
-			ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager());
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
-	}
 }

@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -62,6 +63,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	public static final String TAG = "ChooseRouteFragment";
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
+	public static final String ROUTE_INFO_STATE_KEY = "route_info_state_key";
 
 	@Nullable
 	private LockableViewPager viewPager;
@@ -80,6 +82,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private boolean wasDrawerDisabled;
 
 	private boolean publicTransportMode;
+	private int routeInfoMenuState = -1;
 
 	@Nullable
 	@Override
@@ -94,11 +97,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		Bundle args = getArguments();
 		if (args != null) {
 			routeIndex = args.getInt(ROUTE_INDEX_KEY);
+			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
 		}
 		if (routes != null && !routes.isEmpty()) {
 			publicTransportMode = true;
 		}
-		View view = inflater.inflate(R.layout.fragment_show_all_routes, null);
+		ContextThemeWrapper context =
+				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		View view = LayoutInflater.from(context).inflate(R.layout.fragment_show_all_routes, null);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		solidToolbarView = view.findViewById(R.id.toolbar_layout);
 		solidToolbarHeight = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
@@ -209,6 +215,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+				if (routeInfoMenuState != -1) {
+					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu(routeInfoMenuState);
+				}
 			}
 		} catch (Exception e) {
 			// ignore
@@ -331,7 +340,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildMenuButtons(@NonNull View view) {
-		OsmandApplication app = requireMyApplication();
 		View backButton = view.findViewById(R.id.back_button);
 		View backButtonFlow = view.findViewById(R.id.back_button_flow);
 		OnClickListener backOnClick = new OnClickListener() {
@@ -343,7 +351,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		backButton.setOnClickListener(backOnClick);
 		backButtonFlow.setOnClickListener(backOnClick);
 
-		int buttonsVisible = 3;
 		OnClickListener printOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -354,11 +361,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		View printRouteFlow = view.findViewById(R.id.print_route_flow);
 		printRoute.setOnClickListener(printOnClick);
 		printRouteFlow.setOnClickListener(printOnClick);
-		if (publicTransportMode) {
-			printRoute.setVisibility(View.GONE);
-			printRouteFlow.setVisibility(View.GONE);
-			buttonsVisible--;
-		}
 
 		View saveRoute = view.findViewById(R.id.save_as_gpx);
 		View saveRouteFlow = view.findViewById(R.id.save_as_gpx_flow);
@@ -374,11 +376,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		};
 		saveRoute.setOnClickListener(saveOnClick);
 		saveRouteFlow.setOnClickListener(saveOnClick);
-		if (publicTransportMode) {
-			saveRoute.setVisibility(View.GONE);
-			saveRouteFlow.setVisibility(View.GONE);
-			buttonsVisible--;
-		}
 
 		View shareRoute = view.findViewById(R.id.share_as_gpx);
 		View shareRouteFlow = view.findViewById(R.id.share_as_gpx_flow);
@@ -419,13 +416,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		};
 		shareRoute.setOnClickListener(shareOnClick);
 		shareRouteFlow.setOnClickListener(shareOnClick);
+
 		if (publicTransportMode) {
-			shareRoute.setVisibility(View.GONE);
-			shareRouteFlow.setVisibility(View.GONE);
-			buttonsVisible--;
-		}
-		if (buttonsVisible == 0) {
+			view.findViewById(R.id.toolbar_options).setVisibility(View.GONE);
 			view.findViewById(R.id.toolbar_options_flow).setVisibility(View.GONE);
+			view.findViewById(R.id.toolbar_options_flow_bg).setVisibility(View.GONE);
 		}
 	}
 
@@ -681,6 +676,22 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			Bundle args = new Bundle();
 			args.putInt(ROUTE_INDEX_KEY, routeIndex);
+			fragment.setArguments(args);
+			fragmentManager.beginTransaction()
+					.add(R.id.routeMenuContainer, fragment, TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int routeInfoState) {
+		try {
+			ChooseRouteFragment fragment = new ChooseRouteFragment();
+			Bundle args = new Bundle();
+			args.putInt(ROUTE_INDEX_KEY, routeIndex);
+			args.putInt(ROUTE_INFO_STATE_KEY, routeInfoState);
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
