@@ -930,6 +930,17 @@ public class OsmandSettings {
 		;
 	}.makeGlobal();
 
+	//public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeGlobal();
+
+	public final OsmandPreference<AngularConstants> ANGULAR_UNITS = new EnumIntPreference<AngularConstants>(
+		"angular_measurement", AngularConstants.DEGREES, AngularConstants.values()) {
+		@Override
+		protected AngularConstants getValue(Object prefs, AngularConstants defaultValue) {
+			return super.getValue(prefs, defaultValue);
+		}
+	}.makeGlobal();
+
+
 
 	public final OsmandPreference<SpeedConstants> SPEED_SYSTEM = new EnumIntPreference<SpeedConstants>(
 			"default_speed_system", SpeedConstants.KILOMETERS_PER_HOUR, SpeedConstants.values()) {
@@ -2896,6 +2907,27 @@ public class OsmandSettings {
 
 		public String toTTSString() {
 			return ttsString;
+		}
+
+	}
+
+	public enum AngularConstants {
+		DEGREES(R.string.shared_string_degrees, "°"),
+		MILLIRADS(R.string.shared_string_milliradians, "mil");
+
+		private final int key;
+		private final String unit;
+		
+		AngularConstants(int key, String unit) {
+			this.key = key;
+			this.unit = unit;
+		}
+
+		public String toHumanString(Context ctx) {
+			return ctx.getString(key);
+		}
+		public String getUnitSymbol() {
+			return unit;
 		}
 
 	}

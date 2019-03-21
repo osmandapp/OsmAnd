@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -201,12 +202,16 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
 				if (measureDistanceToCenterListener != null) {
 					float distance = 0;
+					float bearing = 0;
 					if (editingCtx.getPointsCount() > 0) {
 						WptPt lastPoint = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
 						LatLon centerLatLon = tb.getCenterLatLon();
-						distance = (float) MapUtils.getDistance(lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
+						distance = (float) MapUtils.getDistance(
+							lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
+						bearing = getLocationFromLL(lastPoint.lat, lastPoint.lon)
+							.bearingTo(getLocationFromLL(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 					}
-					measureDistanceToCenterListener.onMeasure(distance);
+					measureDistanceToCenterListener.onMeasure(distance, bearing);
 				}
 			}
 
@@ -411,6 +416,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return false;
 	}
 
+	private Location getLocationFromLL(double lat, double lon) {
+		Location l = new Location("");
+		l.setLatitude(lat);
+		l.setLongitude(lon);
+		return l;
+	}
+
 	interface OnSingleTapListener {
 
 		void onAddPoint();
@@ -423,6 +435,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	interface OnMeasureDistanceToCenter {
-		void onMeasure(float distance);
+		void onMeasure(float distance, float bearing);
 	}
 }
