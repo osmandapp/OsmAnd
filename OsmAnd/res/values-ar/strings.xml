@@ -781,7 +781,7 @@
     <string name="indexing_transport">جاري فهرسة وسائل النقل…</string>
     <string name="shared_string_io_error">حدث خطا</string>
     <string name="km">كيلومتر</string>
-    <string name="km_h">كيلومتر/ساعة</string>
+    <string name="km_h">كم/س</string>
     <string name="m">متر</string>
     <string name="old_map_index_is_not_supported">انتقدت خريطة تنسيق البيانات \'\' {0} \'\' غير معتمد</string>
     <string name="poi_filter_closest_poi">أقرب POI</string>
@@ -2847,4 +2847,10 @@
     <string name="rendering_attr_smoothness_very_horrible_name">رهيب جداً</string>
     <string name="rendering_attr_smoothness_impassable_name">غير سالك</string>
     <string name="rendering_attr_highway_class_motorway_name">الطريق السريع</string>
+    <string name="avoid_pt_types_descr">حدد أنواع وسائل النقل العامة لتفاديها للملاحة:</string>
+    <string name="quick_action_day_night_mode">%s نمط</string>
+    <string name="avoid_pt_types">تجنب أنواع النقل …</string>
+    <string name="shared_string_walk">مشي</string>
+    <string name="save_poi_value_exceed_length">الحد الأقصى لطول العلامة \"%s\"  هو 255 حرفًا.
+\nيرجى اختصار للمتابعة.</string>
 </resources>

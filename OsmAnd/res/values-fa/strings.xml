@@ -2415,8 +2415,8 @@
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
     <string name="quick_action_page_list_descr">با هر بار لمس این دکمهٔ عملیاتی، یکی از موارد موجود در لیست زیر را فعال می‌کنید.</string>
     <string name="quick_action_map_style_action">افزودن یک سبک نقشه</string>
-    <string name="empty_state_my_tracks">فایل‌های GPX اضافه کنید</string>
-    <string name="empty_state_my_tracks_desc">فایل‌های GPX را وارد کنید یا رد خود را ضبط کنید.</string>
+    <string name="empty_state_my_tracks">فایل GPX اضافه کنید</string>
+    <string name="empty_state_my_tracks_desc">فایل GPX وارد کنید یا رد خود را ضبط کنید.</string>
     <string name="import_track">واردکردن فایل GPX</string>
     <string name="fast_coordinates_input">ورود فوری مختصات</string>
     <string name="show_guide_line">نمایش خطوط جهت‌دار</string>
@@ -3040,4 +3040,5 @@
     <string name="save_poi_value_exceed_length_title">طول مقدار «%s»</string>
     <string name="avoid_pt_types_descr">انواع روش‌های حمل‌ونقل که می‌خواهید در مسیریابی نباشند را انتخاب کنید:</string>
     <string name="avoid_pt_types">پرهیز از گونه‌های حمل‌ونقل…</string>
+    <string name="quick_action_day_night_mode">حالت %s</string>
 </resources>

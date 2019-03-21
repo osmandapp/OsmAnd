@@ -1374,7 +1374,7 @@
     <string name="rendering_category_hide">Ukrywanie</string>
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
     <string name="shared_string_never">Nigdy</string>
-    <string name="home_button">Ekran początkowy</string>
+    <string name="home_button">Dom</string>
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
     <string name="search_for">Wyszukiwanie</string>
     <string name="shared_string_show_all">Wyświetl wszystko</string>
