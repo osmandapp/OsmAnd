@@ -3041,4 +3041,6 @@
     <string name="avoid_pt_types_descr">انواع روش‌های حمل‌ونقل که می‌خواهید در مسیریابی نباشند را انتخاب کنید:</string>
     <string name="avoid_pt_types">پرهیز از گونه‌های حمل‌ونقل…</string>
     <string name="quick_action_day_night_mode">حالت %s</string>
+    <string name="routing_attr_avoid_sett_name">پرهیز از کفپوش‌های سنگی cobblestone و sett</string>
+    <string name="routing_attr_avoid_sett_description">از کفپوش‌های cobblestone (کفپوش سنگی) و sett (سنگفرش کوبیک) پرهیز شود.</string>
 </resources>
