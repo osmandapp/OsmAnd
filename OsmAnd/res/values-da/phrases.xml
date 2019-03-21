@@ -3516,7 +3516,7 @@
     <string name="poi_hazard_slippery_road">Glat vejbane</string>
     <string name="poi_hazard_flood">Oversvømmelsesfare</string>
     <string name="poi_hazard_minefield">Minefelt</string>
-    <string name="poi_car_pooling">Samkørsel sted</string>
+    <string name="poi_car_pooling">Samkørselssted</string>
     <string name="poi_ruins">Ruiner</string>
     <string name="poi_license_classes">Licensklasser</string>
     <string name="poi_hill">Bakke</string>
@@ -3526,13 +3526,13 @@
     <string name="poi_substation_type">Type</string>
     <string name="poi_bulk_purchase_yes">Ja</string>
     <string name="poi_bulk_purchase_only">Kun</string>
-    <string name="poi_pipeline_substation">Rørledningsstation</string>
+    <string name="poi_pipeline_substation">Rørledningsunderstation</string>
     <string name="poi_substation_transmission">Transmission</string>
     <string name="poi_substation_distribution">Distribution</string>
     <string name="poi_substation_minor_distribution">Mindre distribution</string>
     <string name="poi_substation_industrial">Industriel</string>
     <string name="poi_substation_transition">Overgang</string>
-    <string name="poi_substation_traction">Trækkraft</string>
+    <string name="poi_substation_traction">Banestrøm</string>
     <string name="poi_substation_converter">Konverter</string>
     <string name="poi_substation_compensation">Kompensation</string>
     <string name="poi_substation_compression">Komprimering</string>
@@ -3553,7 +3553,7 @@
     <string name="poi_books_children">Børn</string>
     <string name="poi_atoll">Atoll</string>
     <string name="poi_childcare">Børnepasning</string>
-    <string name="poi_denotation_natural_monument">Naturlig monument</string>
+    <string name="poi_denotation_natural_monument">Naturmonument</string>
     <string name="poi_denotation_landmark">Vartegn</string>
     <string name="poi_park_ride">Parker &amp; rejs</string>
     <string name="poi_park_ride_yes">Ja</string>
@@ -3566,4 +3566,21 @@
     <string name="poi_generator_source_biomass">Energikilde: biomasse</string>
     <string name="poi_health_specialty_radiotheraphy_yes">Strålebehandling</string>
     <string name="poi_hazard">Fare</string>
+    <string name="poi_rtsa_scale_filter">Sværhedsgrad</string>
+    <string name="poi_toll_gantry">Vejafgift anlæg</string>
+    <string name="poi_park_ride_hov">Samkørsel (HOV)</string>
+    <string name="poi_rtsa_scale_nc">н/к</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+    <string name="poi_rtsa_scale_1a">1А</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1b">1Б</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
+    <string name="poi_rtsa_scale_2a">2А</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+    <string name="poi_rtsa_scale_2b">2Б</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
+    <string name="poi_rtsa_scale_3a">3А</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
+    <string name="poi_rtsa_scale_3b">3Б</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
 </resources>
