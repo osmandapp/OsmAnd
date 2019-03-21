@@ -54,8 +54,8 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
@@ -102,12 +102,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
-
-	public static class MenuState {
-		public static final int HEADER_ONLY = 1;
-		public static final int HALF_SCREEN = 2;
-		public static final int FULL_SCREEN = 4;
-	}
 
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible = false;
@@ -482,7 +476,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (isBasicRouteCalculated()) {
 			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
 			if (gpx != null) {
-				menuCards.add(new SimpleRouteCard(mapActivity, gpx));
+				SimpleRouteCard simpleRouteCard = new SimpleRouteCard(mapActivity, gpx);
+				simpleRouteCard.setListener(this);
+				menuCards.add(simpleRouteCard);
 			}
 			bottomShadowVisible = gpx == null;
 		} else if (isTransportRouteCalculated()) {
@@ -575,9 +571,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (card instanceof SimpleRouteCard) {
+				hide();
+				RouteDetailsFragment.showInstance(mapActivity);
+			}
+		}
+	}
+
+	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-		OsmandApplication app = getApp();
-		if (app != null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
 			if (card instanceof PreviousRouteCard) {
 				ApplicationMode lastAppMode = app.getSettings().LAST_ROUTE_APPLICATION_MODE.get();
 				ApplicationMode currentAppMode = app.getRoutingHelper().getAppMode();
@@ -590,10 +598,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				app.getTargetPointsHelper().restoreTargetPoints(true);
 			} else if (card instanceof PublicTransportCard) {
-				if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
+				if (buttonIndex == PublicTransportCard.DETAILS_BUTTON_INDEX) {
+					hide();
+					ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager(), ((PublicTransportCard) card).getRouteId());
+				} else if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
 					setupCards();
 					openMenuHeaderOnly();
 				}
+			} else if (card instanceof SimpleRouteCard) {
+				hide();
+				RouteDetailsFragment.showInstance(mapActivity);
 			}
 		}
 	}
@@ -1208,11 +1222,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void clickRouteGo() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
 			if (mapActivity.getPointToNavigate() != null) {
 				hide();
 			}
-			if (isTransportRouteCalculated()) {
-				ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager());
+			if (app.getRoutingHelper().isPublicTransportMode()) {
+				if (isTransportRouteCalculated()) {
+					ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager(), app.getTransportRoutingHelper().getCurrentRoute());
+				}
 			} else {
 				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
 			}

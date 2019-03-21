@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.ShowRouteInfoDialogFragment;
+import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.routing.RoutingHelper;
 
@@ -42,7 +42,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				if (activity instanceof MapActivity) {
-					ShowRouteInfoDialogFragment.showInstance((MapActivity) activity);
+					RouteDetailsFragment.showInstance((MapActivity) activity);
 				}
 			}
 		});

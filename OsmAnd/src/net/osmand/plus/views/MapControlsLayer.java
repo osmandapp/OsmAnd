@@ -52,7 +52,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MenuState;
+import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -1174,8 +1174,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private boolean isInChoosingRoutesMode() {
-		RoutingHelper rh = mapActivity.getRoutingHelper();
-		return rh.isPublicTransportMode() && rh.getTransportRoutingHelper().getRoutes() != null && MapRouteInfoMenu.chooseRoutesVisible;
+		return MapRouteInfoMenu.chooseRoutesVisible;
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

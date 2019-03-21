@@ -22,8 +22,10 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ContextMenuFragment;
+import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.routepreparationmenu.ShowRouteInfoDialogFragment;
+import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -103,7 +105,10 @@ public class PublicTransportCard extends BaseCard {
 			public void onClick(View v) {
 				app.getTransportRoutingHelper().setCurrentRoute(routeId);
 				getMapActivity().refreshMap();
-				ShowRouteInfoDialogFragment.showInstance(mapActivity, routeId);
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardButtonPressed(PublicTransportCard.this, DETAILS_BUTTON_INDEX);
+				}
 			}
 		});
 
@@ -138,7 +143,7 @@ public class PublicTransportCard extends BaseCard {
 
 		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
 		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow && showDivider ? View.VISIBLE : View.GONE);
 	}
 
 	public int getRouteId() {

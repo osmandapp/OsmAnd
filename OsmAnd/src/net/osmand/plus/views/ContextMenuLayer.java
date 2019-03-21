@@ -59,6 +59,7 @@ import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.TransportIndexRepository;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
@@ -814,6 +815,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean disableSingleTap() {
+		if (activity.getMapRouteInfoMenu().isVisible() || MapRouteInfoMenu.chooseRoutesVisible) {
+			return true;
+		}
 		boolean res = false;
 		for (OsmandMapLayer lt : view.getLayers()) {
 			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
@@ -827,7 +831,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean disableLongPressOnMap() {
-		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode) {
+		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode ||
+				activity.getMapRouteInfoMenu().isVisible() || MapRouteInfoMenu.chooseRoutesVisible) {
 			return true;
 		}
 		boolean res = false;

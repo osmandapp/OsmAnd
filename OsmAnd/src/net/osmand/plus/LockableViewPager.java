@@ -4,9 +4,12 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 
 public class LockableViewPager extends ViewPager {
-	private boolean swipeLocked;
+	private static final int POS_Y_UNLOCKED = -1;
+	private static final int POS_Y_LOCKED = Integer.MAX_VALUE;
+	private int swipeLockedPosY = POS_Y_UNLOCKED;
 
 	public LockableViewPager(Context context) {
 		super(context);
@@ -17,25 +20,29 @@ public class LockableViewPager extends ViewPager {
 	}
 
 	public boolean getSwipeLocked() {
-		return swipeLocked;
+		return swipeLockedPosY != POS_Y_UNLOCKED;
 	}
 
 	public void setSwipeLocked(boolean swipeLocked) {
-		this.swipeLocked = swipeLocked;
+		this.swipeLockedPosY = swipeLocked ? POS_Y_LOCKED : POS_Y_UNLOCKED;
+	}
+
+	public void setSwipeLockedPosY(int posY) {
+		this.swipeLockedPosY = posY;
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		return !swipeLocked && super.onTouchEvent(event);
+		return (swipeLockedPosY == POS_Y_UNLOCKED || swipeLockedPosY < event.getY()) && super.onTouchEvent(event);
 	}
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent event) {
-		return !swipeLocked && super.onInterceptTouchEvent(event);
+		return (swipeLockedPosY == POS_Y_UNLOCKED || swipeLockedPosY < event.getY()) && super.onInterceptTouchEvent(event);
 	}
 
 	@Override
 	public boolean canScrollHorizontally(int direction) {
-		return !swipeLocked && super.canScrollHorizontally(direction);
+		return swipeLockedPosY != POS_Y_LOCKED && super.canScrollHorizontally(direction);
 	}
 }
