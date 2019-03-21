@@ -21,67 +21,74 @@
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="@dimen/dashboard_map_toolbar"
 		android:orientation="horizontal">
 
 		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="start|center_vertical"
-			android:background="?attr/flow_toolbar_bg"
-			android:gravity="center"
-			android:orientation="horizontal">
+			android:background="?attr/flow_toolbar_bg" />
 
-			<android.support.v7.widget.AppCompatImageView
-				android:id="@+id/back_button_flow"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:background="?attr/selectableItemBackgroundBorderless"
-				android:contentDescription="@string/shared_string_back"
-				android:src="@drawable/ic_arrow_back"
-				android:tint="?attr/primary_icon_color" />
-
-		</LinearLayout>
+		<android.support.v7.widget.AppCompatImageButton
+			android:id="@+id/back_button_flow"
+			android:layout_width="@dimen/route_info_toolbar_button_size"
+			android:layout_height="@dimen/route_info_toolbar_button_size"
+			android:background="@drawable/btn_circle_transparent_full"
+			android:contentDescription="@string/shared_string_back"
+			android:src="@drawable/ic_arrow_back"
+			android:layout_marginTop="8dp"
+			android:layout_marginLeft="8dp"
+			android:tint="?attr/primary_icon_color" />
 
 		<LinearLayout
-			android:id="@+id/toolbar_options_flow"
-			android:layout_width="wrap_content"
+			android:id="@+id/toolbar_options_flow_bg"
+			android:layout_width="144dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="end|center_vertical"
 			android:background="?attr/flow_toolbar_bg"
 			android:gravity="center"
 			android:orientation="horizontal"
 			android:paddingLeft="20dp"
-			android:paddingRight="20dp">
+			android:paddingRight="20dp" />
 
-			<android.support.v7.widget.AppCompatImageView
+		<LinearLayout
+			android:id="@+id/toolbar_options_flow"
+			android:layout_width="144dp"
+			android:layout_height="@dimen/dashboard_map_toolbar"
+			android:layout_gravity="end|center_vertical"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingLeft="12dp"
+			android:paddingRight="12dp">
+
+			<android.support.v7.widget.AppCompatImageButton
 				android:id="@+id/print_route_flow"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
-				android:background="?attr/selectableItemBackgroundBorderless"
+				android:layout_width="@dimen/route_info_toolbar_button_size"
+				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/print_route"
+				android:scaleType="center"
 				android:src="@drawable/ic_action_gprint_dark"
 				android:tint="?attr/primary_icon_color" />
 
-			<android.support.v7.widget.AppCompatImageView
+			<android.support.v7.widget.AppCompatImageButton
 				android:id="@+id/save_as_gpx_flow"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:background="?attr/selectableItemBackgroundBorderless"
+				android:layout_width="@dimen/route_info_toolbar_button_size"
+				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/shared_string_save_as_gpx"
+				android:scaleType="center"
 				android:src="@drawable/ic_action_gsave_dark"
 				android:tint="?attr/primary_icon_color" />
 
-			<android.support.v7.widget.AppCompatImageView
+			<android.support.v7.widget.AppCompatImageButton
 				android:id="@+id/share_as_gpx_flow"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:background="?attr/selectableItemBackgroundBorderless"
+				android:layout_width="@dimen/route_info_toolbar_button_size"
+				android:layout_height="@dimen/route_info_toolbar_button_size"
+				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/share_route_as_gpx"
+				android:scaleType="center"
 				android:src="@drawable/ic_action_gshare_dark"
 				android:tint="?attr/primary_icon_color" />
 
@@ -105,16 +112,25 @@
 			android:gravity="center_vertical"
 			android:orientation="horizontal">
 
-			<android.support.v7.widget.AppCompatImageView
-				android:id="@+id/back_button"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
-				android:background="?attr/selectableItemBackgroundBorderless"
-				android:contentDescription="@string/shared_string_close"
-				android:src="@drawable/ic_arrow_back"
-				android:tint="?attr/primary_icon_color" />
+			<LinearLayout
+				android:layout_width="@dimen/dashboard_map_toolbar"
+				android:layout_height="@dimen/dashboard_map_toolbar"
+				android:layout_gravity="start|center_vertical"
+				android:gravity="center">
+
+				<android.support.v7.widget.AppCompatImageView
+					android:id="@+id/back_button"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/shared_string_close"
+					android:scaleType="center"
+					android:src="@drawable/ic_arrow_back"
+					android:tint="?attr/primary_icon_color" />
+
+			</LinearLayout>
 
 			<LinearLayout
 				android:layout_width="0dp"
@@ -139,34 +155,48 @@
 
 			</LinearLayout>
 
-			<android.support.v7.widget.AppCompatImageButton
-				android:id="@+id/print_route"
-				style="@style/Widget.AppCompat.ActionButton"
-				android:layout_width="44dp"
-				android:layout_height="48dp"
-				android:contentDescription="@string/print_route"
-				android:src="@drawable/ic_action_gprint_dark"
-				android:tint="?attr/primary_icon_color" />
+			<LinearLayout
+				android:id="@+id/toolbar_options"
+				android:layout_width="144dp"
+				android:layout_height="@dimen/dashboard_map_toolbar"
+				android:layout_gravity="end|center_vertical"
+				android:gravity="center_vertical"
+				android:orientation="horizontal"
+				android:paddingLeft="12dp"
+				android:paddingRight="12dp"
+				android:visibility="visible">
 
-			<android.support.v7.widget.AppCompatImageButton
-				android:id="@+id/save_as_gpx"
-				style="@style/Widget.AppCompat.ActionButton"
-				android:layout_width="44dp"
-				android:layout_height="48dp"
-				android:contentDescription="@string/shared_string_save_as_gpx"
-				android:src="@drawable/ic_action_gsave_dark"
-				android:tint="?attr/primary_icon_color" />
+				<android.support.v7.widget.AppCompatImageView
+					android:id="@+id/print_route"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/print_route"
+					android:scaleType="center"
+					android:src="@drawable/ic_action_gprint_dark"
+					android:tint="?attr/primary_icon_color" />
 
-			<android.support.v7.widget.AppCompatImageButton
-				android:id="@+id/share_as_gpx"
-				style="@style/Widget.AppCompat.ActionButton"
-				android:layout_width="44dp"
-				android:layout_height="48dp"
-				android:layout_marginEnd="@dimen/content_padding_small"
-				android:layout_marginRight="@dimen/content_padding_small"
-				android:contentDescription="@string/share_route_as_gpx"
-				android:src="@drawable/ic_action_gshare_dark"
-				android:tint="?attr/primary_icon_color" />
+				<android.support.v7.widget.AppCompatImageView
+					android:id="@+id/save_as_gpx"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/shared_string_save_as_gpx"
+					android:scaleType="center"
+					android:src="@drawable/ic_action_gsave_dark"
+					android:tint="?attr/primary_icon_color" />
+
+				<android.support.v7.widget.AppCompatImageView
+					android:id="@+id/share_as_gpx"
+					android:layout_width="@dimen/route_info_toolbar_button_size"
+					android:layout_height="@dimen/route_info_toolbar_button_size"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/share_route_as_gpx"
+					android:scaleType="center"
+					android:src="@drawable/ic_action_gshare_dark"
+					android:tint="?attr/primary_icon_color" />
+
+			</LinearLayout>
 
 		</LinearLayout>
 

@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -171,7 +172,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
-		view = inflater.inflate(getMainLayoutId(), container, false);
+		ContextThemeWrapper context =
+				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		view = LayoutInflater.from(context).inflate(getMainLayoutId(), container, false);
 		currentMenuState = getInitialMenuState();
 		Bundle args = getArguments();
 		if (args != null) {
