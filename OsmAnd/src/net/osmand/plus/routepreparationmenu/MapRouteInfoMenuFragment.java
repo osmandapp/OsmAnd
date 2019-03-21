@@ -32,12 +32,10 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.edit.Node;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -46,7 +44,6 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
-import net.osmand.plus.widgets.ImageViewExProgress;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.util.MapUtils;
@@ -630,12 +627,18 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 						boolean canceled = false;
 
 						@Override
+						public void onAnimationStart(Animator animation) {
+							moving = true;
+						}
+
+						@Override
 						public void onAnimationCancel(Animator animation) {
 							canceled = true;
 						}
 
 						@Override
 						public void onAnimationEnd(Animator animation) {
+							moving = false;
 							if (!canceled) {
 								if (needCloseMenu) {
 									menu.hide();
@@ -798,7 +801,9 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		if (menu != null) {
 			menu.updateInfo(view);
 			applyDayNightMode();
-			runLayoutListener();
+			if (!moving) {
+				runLayoutListener();
+			}
 		}
 	}
 
@@ -836,9 +841,6 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
 		textViewExProgress.percent = progress / 100f;
-		int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
-		textViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
-		textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
 		textViewExProgress.invalidate();
 	}
 
