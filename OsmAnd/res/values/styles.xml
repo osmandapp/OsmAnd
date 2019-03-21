@@ -239,6 +239,7 @@
         <item name="route_info_control_icon_color">@color/route_info_control_icon_color_light</item>
         <item name="route_info_bg">@color/route_info_bg_light</item>
 
+        <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -463,6 +464,8 @@
         <item name="menu_bottom_sheet_icon_color">@color/ctx_menu_info_text_dark</item>
         <item name="route_info_control_icon_color">@color/route_info_control_icon_color_dark</item>
         <item name="route_info_bg">@color/route_info_bg_dark</item>
+
+        <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

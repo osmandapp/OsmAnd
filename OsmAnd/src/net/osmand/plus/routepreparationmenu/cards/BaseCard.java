@@ -24,12 +24,14 @@ public abstract class BaseCard {
 
 	boolean showTopShadow;
 	boolean showBottomShadow;
+	boolean showDivider = true;
 	protected boolean nightMode;
 
 	private CardListener listener;
 
 	public interface CardListener {
 		void onCardLayoutNeeded(@NonNull BaseCard card);
+		void onCardPressed(@NonNull BaseCard card);
 		void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex);
 	}
 
@@ -111,5 +113,13 @@ public abstract class BaseCard {
 
 	public void setShowBottomShadow(boolean showBottomShadow) {
 		this.showBottomShadow = showBottomShadow;
+	}
+
+	public boolean isShowDivider() {
+		return showDivider;
+	}
+
+	public void setShowDivider(boolean showDivider) {
+		this.showDivider = showDivider;
 	}
 }

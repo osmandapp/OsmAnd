@@ -39,6 +39,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.routing.RoutingHelper;
@@ -458,18 +459,18 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public void openMenuFullScreen() {
-		changeMenuState(getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN), false, false);
+		changeMenuState(getMenuStatePosY(MenuState.FULL_SCREEN), false, false);
 	}
 
 	public void openMenuHeaderOnly() {
 		if (portrait) {
-			changeMenuState(getMenuStatePosY(MapRouteInfoMenu.MenuState.HEADER_ONLY), false, false);
+			changeMenuState(getMenuStatePosY(MenuState.HEADER_ONLY), false, false);
 		}
 	}
 
 	public void openMenuHalfScreen() {
 		if (portrait) {
-			changeMenuState(getMenuStatePosY(MapRouteInfoMenu.MenuState.HALF_SCREEN), false, false);
+			changeMenuState(getMenuStatePosY(MenuState.HALF_SCREEN), false, false);
 		}
 	}
 
@@ -478,11 +479,11 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			return topScreenPosY;
 		}
 		switch (menuState) {
-			case MapRouteInfoMenu.MenuState.HEADER_ONLY:
+			case MenuState.HEADER_ONLY:
 				return getHeaderOnlyTopY();
-			case MapRouteInfoMenu.MenuState.HALF_SCREEN:
+			case MenuState.HALF_SCREEN:
 				return minHalfY;
-			case MapRouteInfoMenu.MenuState.FULL_SCREEN:
+			case MenuState.FULL_SCREEN:
 				return getFullScreenTopPosY();
 			default:
 				return 0;
@@ -494,21 +495,21 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 		int currentMenuState = menu.getCurrentMenuState();
 		if (portrait) {
-			int headerDist = Math.abs(currentY - getMenuStatePosY(MapRouteInfoMenu.MenuState.HEADER_ONLY));
-			int halfDist = Math.abs(currentY - getMenuStatePosY(MapRouteInfoMenu.MenuState.HALF_SCREEN));
-			int fullDist = Math.abs(currentY - getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN));
+			int headerDist = Math.abs(currentY - getMenuStatePosY(MenuState.HEADER_ONLY));
+			int halfDist = Math.abs(currentY - getMenuStatePosY(MenuState.HALF_SCREEN));
+			int fullDist = Math.abs(currentY - getMenuStatePosY(MenuState.FULL_SCREEN));
 			int newState;
 			if (headerDist < halfDist && headerDist < fullDist) {
-				newState = MapRouteInfoMenu.MenuState.HEADER_ONLY;
+				newState = MenuState.HEADER_ONLY;
 			} else if (halfDist < headerDist && halfDist < fullDist) {
-				newState = MapRouteInfoMenu.MenuState.HALF_SCREEN;
+				newState = MenuState.HALF_SCREEN;
 			} else {
-				newState = MapRouteInfoMenu.MenuState.FULL_SCREEN;
+				newState = MenuState.FULL_SCREEN;
 			}
 
-			if (slidingDown && currentMenuState == MapRouteInfoMenu.MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
+			if (slidingDown && currentMenuState == MenuState.FULL_SCREEN && getViewY() < getFullScreenTopPosY()) {
 				slidingDown = false;
-				newState = MapRouteInfoMenu.MenuState.FULL_SCREEN;
+				newState = MenuState.FULL_SCREEN;
 			}
 			if (menuBottomViewHeight > 0 && slidingUp) {
 				while (menu.getCurrentMenuState() != newState) {
@@ -517,7 +518,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 					}
 				}
 			} else if (slidingDown) {
-				if (currentMenuState == MapRouteInfoMenu.MenuState.HEADER_ONLY) {
+				if (currentMenuState == MenuState.HEADER_ONLY) {
 					needCloseMenu = true;
 				} else {
 					while (menu.getCurrentMenuState() != newState) {
@@ -544,7 +545,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 			}
 		}
 		int newMenuState = menu.getCurrentMenuState();
-		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MapRouteInfoMenu.MenuState.FULL_SCREEN;
+		boolean needMapAdjust = currentMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
 		applyPosY(currentY, needCloseMenu, needMapAdjust, currentMenuState, newMenuState, 0);
 	}
@@ -564,20 +565,20 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 
 		int posY = 0;
 		switch (destinationState) {
-			case MapRouteInfoMenu.MenuState.HEADER_ONLY:
-				posY = getMenuStatePosY(MapRouteInfoMenu.MenuState.HEADER_ONLY);
+			case MenuState.HEADER_ONLY:
+				posY = getMenuStatePosY(MenuState.HEADER_ONLY);
 				break;
-			case MapRouteInfoMenu.MenuState.HALF_SCREEN:
-				posY = getMenuStatePosY(MapRouteInfoMenu.MenuState.HALF_SCREEN);
+			case MenuState.HALF_SCREEN:
+				posY = getMenuStatePosY(MenuState.HALF_SCREEN);
 				break;
-			case MapRouteInfoMenu.MenuState.FULL_SCREEN:
+			case MenuState.FULL_SCREEN:
 				if (currentY != CURRENT_Y_UNDEFINED) {
 					int maxPosY = viewHeight - menuFullHeightMax;
-					int minPosY = getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN);
+					int minPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
 					if (maxPosY > minPosY) {
 						maxPosY = minPosY;
 					}
-					if (currentY > minPosY || previousState != MapRouteInfoMenu.MenuState.FULL_SCREEN) {
+					if (currentY > minPosY || previousState != MenuState.FULL_SCREEN) {
 						posY = minPosY;
 					} else if (currentY < maxPosY) {
 						posY = maxPosY;
@@ -585,7 +586,7 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 						posY = currentY;
 					}
 				} else {
-					posY = getMenuStatePosY(MapRouteInfoMenu.MenuState.FULL_SCREEN);
+					posY = getMenuStatePosY(MenuState.FULL_SCREEN);
 				}
 				break;
 			default:

@@ -17,7 +17,6 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.ShowRouteInfoDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
 
@@ -51,7 +50,10 @@ public class SimpleRouteCard extends BaseCard {
 		info.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showInstance(mapActivity);
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardPressed(SimpleRouteCard.this);
+				}
 			}
 		});
 
@@ -94,7 +96,10 @@ public class SimpleRouteCard extends BaseCard {
 		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ShowRouteInfoDialogFragment.showInstance(mapActivity);
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardButtonPressed(SimpleRouteCard.this, 0);
+				}
 			}
 		});
 
