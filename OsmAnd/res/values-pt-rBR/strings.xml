@@ -2957,7 +2957,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_smoothness_impassable_name">Intransitável</string>
     <string name="rendering_attr_highway_class_motorway_name">Autoestrada/Via expressa</string>
     <string name="rendering_attr_highway_class_state_road_name">Rodovia</string>
-    <string name="rendering_attr_highway_class_road_name">Estrada/Avenida</string>
+    <string name="rendering_attr_highway_class_road_name">Avenida/Estrada</string>
     <string name="rendering_attr_highway_class_street_name">Rua</string>
     <string name="rendering_attr_highway_class_service_name">Via de serviço</string>
     <string name="rendering_attr_highway_class_footway_name">Passeio</string>
@@ -2977,7 +2977,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_surface_salt_name">Sal</string>
     <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
     <string name="public_transport_warning_descr_blog">Saiba mais sobre como OsmAnd calcula as rotas em nosso blog.</string>
-    <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espera erros e imprecisões.</string>
+    <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espere erros e imprecisões.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
     <string name="shared_string_walk">Ande</string>
     <string name="save_poi_value_exceed_length">O comprimento máximo da etiqueta \"%s\" é 255 caracteres. 
@@ -2986,4 +2986,6 @@ Pôr do Sol: %2$s</string>
     <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para navegação:</string>
     <string name="avoid_pt_types">Evite os tipos de transporte…</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
+    <string name="routing_attr_avoid_sett_name">Evitar pavimento de pedras irregulares e paralelepípedo</string>
+    <string name="routing_attr_avoid_sett_description">Evitar pavimento de pedras irregulares e paralelepípedo</string>
 </resources>
