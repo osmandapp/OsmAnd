@@ -19,7 +19,7 @@
     <string name="add_device">Tilføj enhed</string>
     <string name="share_location_as">Del placering som</string>
     <string name="live_now_description">Kontakter og grupper som der deles placering med.</string>
-    <string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ud af OsmAnd Tracker, så du ikke kan dele din placering eller se placeringen af andre\?</string>
+    <string name="logout_from_osmand_telegram_descr">"Bekræft logge ud af OsmAnd Tracker, så kan der ikke deles  placering eller se placeringen af andre\?"</string>
     <string name="logout_from_osmand_telegram">Log ud af OsmAnd Telegram\?</string>
     <string name="shared_string_name">Navn</string>
     <string name="by_distance">Efter afstand</string>
@@ -69,7 +69,7 @@
     <string name="do_not_have_telegram">Har ikke Telegram konto</string>
     <string name="enter_phone_number">Indtast telefonnummer</string>
     <string name="enter_authentication_code">Indtast autentificeringskode</string>
-    <string name="set_visible_time_for_all">Sæt synlige tid for alle</string>
+    <string name="set_visible_time_for_all">Sæt synlig tid for alle</string>
     <string name="hours_and_minutes_format">%1$d t %2$d m</string>
     <string name="minutes_format">%1$d m</string>
     <string name="hours_format">%1$d t</string>
@@ -100,7 +100,7 @@
     <string name="shared_string_settings">Indstillinger</string>
     <string name="no_location_permission">Mangler tilladelse til at bruge placeringsdata.</string>
     <string name="gps_not_available">Tænd for \"Placering\" i systemindstillinger</string>
-    <string name="location_service_no_gps_available">Vælg en af placeringsudbyderne til at dele placering.</string>
+    <string name="location_service_no_gps_available">Vælg en af placeringsudbyderne for at dele placering.</string>
     <string name="osmand_service">Baggrundstilstand</string>
     <string name="osmand_service_descr">OsmAnd Tracker kører i baggrunden med skærmen slukket.</string>
     <string name="shared_string_distance">Afstand</string>
@@ -170,7 +170,7 @@
     <string name="logging_out">Logger ud</string>
     <string name="closing">Lukker</string>
     <string name="gps_network_not_enabled">Tænd for \"Placering\"\?</string>
-    <string name="live_now">Live now</string>
+    <string name="live_now">Live nu</string>
     <string name="last_update_from_telegram">Sidste opdatering fra Telegram</string>
     <string name="send_location_as">Send placering som</string>
     <string name="send_location_as_descr">Vælg hvordan beskeder med placering skal se ud.</string>

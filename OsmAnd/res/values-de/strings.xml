@@ -2985,22 +2985,22 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Pfad</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
     <string name="rendering_attr_undefined_name">Nicht definiert</string>
-    <string name="release_3_3">- Neuer Bildschirm \"Richtungen\": Zeigt die Knöpfe der Ziele Zuhause und Arbeit, die Verknüpfung \"Vorherige Route\", die Liste der aktiven GPX-Strecken und -Marker, den Suchverlauf.
-\n
-\n - Weitere Informationen unter \'Routendetails\': Straßentypen, Oberfläche, Steilheit, Glätte, Bequemlichkeit, etc.
-\n
-\n - Navigation im öffentlichen Verkehr mit Unterstützung aller Arten von Verkehrsmitteln: U-Bahn, Bus, Straßenbahn, etc.
-\n
-\n - Neue Schnellaktion für Titel anzeigen/verbergen und Tag/Nacht-Modi
-\n
-\n - Feste Gebiete, die in Deutschland, Südafrika, Quebec und anderen Ländern als überflutet angezeigt werden
-\n
-\n - Zusätzliche Unterstützung für den KML- und KMZ-Import
-\n
-\n - Fehler beim Öffnen einiger Haltestellen des öffentlichen Verkehrs behoben
-\n
-\n - Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr)
-\n
+    <string name="release_3_3">• Neuer Bildschirm \"Richtungen\": Zeigt die Knöpfe der Ziele Zuhause und Arbeit, die Verknüpfung \"Vorherige Route\", die Liste der aktiven GPX-Strecken und -Marker, den Suchverlauf. 
+\n 
+\n• Weitere Informationen unter \'Routendetails\': Straßentypen, Oberfläche, Steilheit, Glätte, Bequemlichkeit, etc. 
+\n 
+\n• Navigation im öffentlichen Verkehr mit Unterstützung aller Arten von Verkehrsmitteln: U-Bahn, Bus, Straßenbahn, etc. 
+\n 
+\n• Neue Schnellaktion für Titel anzeigen/verbergen und Tag/Nacht-Modi 
+\n 
+\n• Fix: Gebiete, die in Deutschland, Südafrika, Quebec und anderen Ländern als überflutet angezeigt wurden 
+\n 
+\n• Zusätzliche Unterstützung für den KML- und KMZ-Import 
+\n 
+\n• Fehler beim Öffnen einiger Haltestellen des öffentlichen Verkehrs behoben 
+\n 
+\n• Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr) 
+\n 
 \n</string>
     <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
     <string name="avoid_pt_types">Vermeiden Sie Verkehrsmittel…</string>
@@ -3009,4 +3009,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \nBitte kürzen Sie diesen, um fortzufahren.</string>
     <string name="save_poi_value_exceed_length_title">Länge des \"%s\" Wertes</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
+    <string name="routing_attr_avoid_sett_name">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_description">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
 </resources>

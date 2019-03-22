@@ -2988,4 +2988,6 @@
     <string name="avoid_pt_types">Избегать виды транспорта…</string>
     <string name="save_poi_value_exceed_length_title">Длина значения \"%s\"</string>
     <string name="quick_action_day_night_mode">%s режим</string>
+    <string name="routing_attr_avoid_sett_name">Избегать булыжники и брусчатку</string>
+    <string name="routing_attr_avoid_sett_description">Избегать булыжники и брусчатку</string>
 </resources>

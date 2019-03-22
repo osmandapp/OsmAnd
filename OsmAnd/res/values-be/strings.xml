@@ -1901,7 +1901,7 @@
     <string name="clear_markers_history_q">Ачысціць гісторыю адзнак мапы\?</string>
     <string name="active_markers">Актыўныя адзнакі</string>
     <string name="map_markers">Адзнакі мапы</string>
-    <string name="map_marker">Адмеціна мапы</string>
+    <string name="map_marker">Адзнака мапы</string>
     <string name="consider_turning_polygons_off">Рэкамендуецца выключыць адмалёўку палігонаў.</string>
     <string name="osm_live_subscription">Падпіска OsmAnd Live</string>
     <string name="osm_live_active">Актыўны</string>
@@ -2315,7 +2315,7 @@
     <string name="srtm_menu_download_descr">Спампаваць мапу «Contour Line» для выкарыстання ў гэтым рэгіёне.</string>
     <string name="show_from_zoom_level">Паказваць ад узроўня маштабавання</string>
     <string name="display_zoom_level">Узровень маштабавання паказу: %1$s</string>
-    <string name="route_is_too_long_v2">Калі ласка, дадайце прамежкавыя пункты, калі разлік не завяршыўся цягам 10 хвілін.</string>
+    <string name="route_is_too_long_v2">Для вялікіх адлегласцяў: калі ласка, дадайце прамежкавыя пункты, калі разлік не завяршыўся цягам 10 хвілін.</string>
     <string name="osmand_extended_description_part4">Лыжня 
 \nУбудова лыжных мап для OsmAnd дазваляе бачыць лыжныя трасы з узроўнем складанасці і некаторай дадатковай інфармацыяй: размяшчэнне пад\'ёмнікаў і іншых аб\'ектаў.</string>
     <string name="save_poi_too_many_uppercase">Назва змяшчае занадта шмат вялікіх літар. Працягнуць\?</string>
@@ -2512,8 +2512,8 @@
     <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з «Напрамку руху» на «Па компасе».</string>
     <string name="all_markers_moved_to_history">Усе адзнакі перамешчаныя ў гісторыю</string>
-    <string name="marker_moved_to_history">Адмеціна мапы перамешчаная ў гісторыю</string>
-    <string name="marker_moved_to_active">Адмеціна мапы стала актыўнай</string>
+    <string name="marker_moved_to_history">Адзнака мапы перамешчаная ў гісторыю</string>
+    <string name="marker_moved_to_active">Адзнака мапы стала актыўнай</string>
     <string name="shared_string_list">Спіс</string>
     <string name="shared_string_groups">Групы</string>
     <string name="passed">Апошняе выкарыстанне: %1$s</string>
@@ -2606,7 +2606,7 @@
     <string name="empty_state_osm_edits">"Стварыць альбо змяніць аб’екты OSM "</string>
     <string name="shared_string_deleted">Выдалена</string>
     <string name="shared_string_edited">Адрэдагавана</string>
-    <string name="marker_activated">Адмеціна %s актываваная.</string>
+    <string name="marker_activated">Адзнака %s актываваная.</string>
     <string name="notes_by_date">Нататкі па даце</string>
     <string name="by_date">Па даце</string>
     <string name="by_type">Па тыпу</string>
@@ -2628,7 +2628,7 @@
     <string name="av_locations_selected_desc">GPX-файл з каардынатамі і данымі абраных нататак.</string>
     <string name="av_locations_all_desc">GPX-файл з каардынатамі і данымі ўсіх нататак.</string>
     <string name="shared_string_actions">Дзеянні</string>
-    <string name="shared_string_marker">Адмеціна</string>
+    <string name="shared_string_marker">Адзнака</string>
     <string name="osm_recipient_stat">Змен %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-атрымальнікі</string>
     <string name="total_donations">Агулам ахвяраванняў</string>
@@ -2987,4 +2987,23 @@
     <string name="rendering_attr_highway_class_footway_name">Ходнік</string>
     <string name="rendering_attr_highway_class_cycleway_name">Роварная дарожка</string>
     <string name="rendering_attr_undefined_name">Нявызначана</string>
+    <string name="avoid_pt_types_descr">Абярыце тыпы грамадскага транспарту, што патрэбна пазбягаць падчас навігацыі:</string>
+    <string name="quick_action_day_night_mode">%s рэжым</string>
+    <string name="avoid_pt_types">Пазбягаць тыпы транспарту…</string>
+    <string name="shared_string_walk">Пешшу</string>
+    <string name="save_poi_value_exceed_length">Максімальная даўжыня пазнакі \"%s\" - 255 сімвалаў. 
+\nКалі ласка, скараціце, каб працягнуць.</string>
+    <string name="save_poi_value_exceed_length_title">Даўжыня значэння \"%s\"</string>
+    <string name="public_transport_warning_descr_blog">Даведацца падрабязней, як OsmAnd разлічвае маршруты, можна ў нашым блогу.</string>
+    <string name="public_transport_warning_title">Навігацыя ў грамадскім транспарце на дадзены момант тэставая, таму могуць узнікаць памылкі.</string>
+    <string name="add_intermediate">Дадаць прамежкавы пункт</string>
+    <string name="rendering_attr_surface_grass_paver_name">Газонныя краты</string>
+    <string name="rendering_attr_highway_class_state_road_name">Федэральная шаша</string>
+    <string name="rendering_attr_highway_class_service_name">Сэрвіс</string>
+    <string name="rendering_attr_highway_class_track_name">Грунтовая дарога</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Для коней</string>
+    <string name="rendering_attr_highway_class_steps_name">Прыступкі</string>
+    <string name="rendering_attr_highway_class_path_name">Сцежка</string>
+    <string name="routing_attr_avoid_sett_name">Пазбягаць брукаваных дарог</string>
+    <string name="routing_attr_avoid_sett_description">Пазбягаць брукаваных дарог</string>
 </resources>
