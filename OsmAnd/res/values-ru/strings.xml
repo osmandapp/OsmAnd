@@ -2990,4 +2990,7 @@
     <string name="quick_action_day_night_mode">%s режим</string>
     <string name="routing_attr_avoid_sett_name">Избегать булыжники и брусчатку</string>
     <string name="routing_attr_avoid_sett_description">Избегать булыжники и брусчатку</string>
+    <string name="shared_string_milliradians">Миллирадианы</string>
+    <string name="angular_measeurement">Угловые единицы измерения</string>
+    <string name="angular_measeurement_descr">Изменить, в чем измеряется азимут.</string>
 </resources>
