@@ -144,8 +144,8 @@
     <string name="context_menu_item_delete_parking_point">حذف نشانهٔ جای پارک</string>
     <string name="gpxup_public">عمومی</string>
     <string name="gpxup_private">خصوصی</string>
-    <string name="route_kl">سمت چپ بمانید و بروید</string>
-    <string name="route_kr">سمت راست بمانید و بروید</string>
+    <string name="route_kl">به چپ برانید و بروید</string>
+    <string name="route_kr">به راست برانید و بروید</string>
     <string name="rendering_attr_hmRendered_name">نشان‌دادن جزئیات بیشتری از نقشه</string>
     <string name="address_search_desc">جست‌وجوی نشانی</string>
     <string name="navpoint_search_desc">مختصات</string>
@@ -374,7 +374,7 @@
     <string name="left">به سمت چپ</string>
     <string name="front_left">چپ-جلو</string>
     <string name="oclock">ساعت</string>
-    <string name="towards">به سمت</string>
+    <string name="towards">به طرف</string>
     <string name="accuracy">دقت</string>
     <string name="altitude">ارتفاع</string>
     <string name="i_am_here">من اینجا هستم</string>
@@ -1711,8 +1711,8 @@
     <string name="use_osm_live_routing_description">مسیریابی با استفاده از به‌روزرسانی‌های OsmAnd Live فعال شود.</string>
     <string name="use_osm_live_routing">مسیریابی با OsmAnd Live</string>
     <string name="access_no_destination">مقصد تنظیم نشده</string>
-    <string name="map_widget_magnetic_bearing">سمت مغناطیسی</string>
-    <string name="map_widget_bearing">سمت نسبی</string>
+    <string name="map_widget_magnetic_bearing">سویهٔ مغناطیسی</string>
+    <string name="map_widget_bearing">سویهٔ نسبی</string>
     <string name="access_disable_offroute_recalc">با خارج‌شدن از مسیر، مسیر تازه‌ای پیدا نکن</string>
     <string name="access_disable_offroute_recalc_descr">اگر از مسیر خارج شوید مسیریابی تازه‌ای انجام نمی‌شود.</string>
     <string name="access_disable_wrong_direction_recalc">با حرکت خلاف جهت، مسیر تازه پیدا نکن</string>
@@ -3043,4 +3043,8 @@
     <string name="quick_action_day_night_mode">حالت %s</string>
     <string name="routing_attr_avoid_sett_name">پرهیز از کفپوش‌های سنگی cobblestone و sett</string>
     <string name="routing_attr_avoid_sett_description">از کفپوش‌های cobblestone (کفپوش سنگی) و sett (سنگفرش کوبیک) پرهیز شود.</string>
+    <string name="shared_string_degrees">درجه</string>
+    <string name="shared_string_milliradians">میلی‌رادیان</string>
+    <string name="angular_measeurement">واحد‌های اندازه‌گیری زاویه</string>
+    <string name="angular_measeurement_descr">واحد اندازه‌گیری سمت (azimuth) را مشخص کنید.</string>
 </resources>
