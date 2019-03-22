@@ -2969,4 +2969,8 @@ représentant la zone : %1$s x %2$s</string>
 \n• Prise en charge des imports KML et KMZ
 \n• Correction des plantages sur les arrêts de transports publics
 \n• Pour la version gratuite : retrait des analyses Facebook et Firebase (c\'était déjà le cas pour OsmAnd+).</string>
+    <string name="shared_string_degrees">Degrés</string>
+    <string name="shared_string_milliradians">Millièmes angulaires</string>
+    <string name="angular_measeurement">Unités de mesure d\'angle</string>
+    <string name="angular_measeurement_descr">Modifier l\'unité de mesure de l\'azimut.</string>
 </resources>
