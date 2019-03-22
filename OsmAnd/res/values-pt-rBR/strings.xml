@@ -2988,4 +2988,8 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
     <string name="routing_attr_avoid_sett_name">Evitar pavimento de pedras irregulares e paralelepípedo</string>
     <string name="routing_attr_avoid_sett_description">Evitar pavimento de pedras irregulares e paralelepípedo</string>
+    <string name="shared_string_degrees">Graus</string>
+    <string name="shared_string_milliradians">Milirradianos</string>
+    <string name="angular_measeurement">Unidades de medição angular</string>
+    <string name="angular_measeurement_descr">Mude em que o azimute é medido.</string>
 </resources>
