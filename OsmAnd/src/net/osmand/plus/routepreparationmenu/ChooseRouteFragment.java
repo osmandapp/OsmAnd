@@ -64,6 +64,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public static final String TAG = "ChooseRouteFragment";
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
 	public static final String ROUTE_INFO_STATE_KEY = "route_info_state_key";
+	public static final String INITIAL_MENU_STATE_KEY = "initial_menu_state_key";
 
 	@Nullable
 	private LockableViewPager viewPager;
@@ -94,10 +95,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 		List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
 		int routeIndex = 0;
+		int initialMenuState = MenuState.HEADER_ONLY;
 		Bundle args = getArguments();
 		if (args != null) {
 			routeIndex = args.getInt(ROUTE_INDEX_KEY);
 			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
+			initialMenuState = args.getInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 		}
 		if (routes != null && !routes.isEmpty()) {
 			publicTransportMode = true;
@@ -112,7 +115,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		this.viewPager = viewPager;
 		viewPager.setClipToPadding(false);
 		//viewPager.setPageMargin(-60);
-		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1);
+		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1, initialMenuState);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -575,9 +578,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (viewPager != null) {
 			int currentItem = viewPager.getCurrentItem();
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
-			if (routeDetailsFragments.size() > currentItem) {
-				WeakReference<RouteDetailsFragment> ref = routeDetailsFragments.get(currentItem);
-				return ref.get();
+			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
+				RouteDetailsFragment f = ref.get();
+				if (f != null && f.getRouteId() == currentItem) {
+					return f;
+				}
 			}
 		}
 		return null;
@@ -646,9 +651,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			int i = 0;
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
 			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
-				boolean current = i == currentItem;
 				RouteDetailsFragment f = ref.get();
 				if (f != null) {
+					boolean current = f.getRouteId() == currentItem;
 					if (!current && f.getCurrentMenuState() != menuState) {
 						f.openMenuScreen(menuState, false);
 					}
@@ -686,12 +691,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int routeInfoState) {
+	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex,
+									 int routeInfoState, int initialMenuState) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			Bundle args = new Bundle();
 			args.putInt(ROUTE_INDEX_KEY, routeIndex);
 			args.putInt(ROUTE_INFO_STATE_KEY, routeInfoState);
+			args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
@@ -704,10 +711,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	public class RoutesPagerAdapter extends FragmentPagerAdapter {
 		private int routesCount;
+		private int initialMenuState;
 
-		RoutesPagerAdapter(FragmentManager fm, int routesCount) {
+		RoutesPagerAdapter(FragmentManager fm, int routesCount, int initialMenuState) {
 			super(fm);
 			this.routesCount = routesCount;
+			this.initialMenuState = initialMenuState;
 		}
 
 		@Override
@@ -718,7 +727,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		@Override
 		public Fragment getItem(int position) {
 			Bundle args = new Bundle();
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
+			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
 			args.putInt(RouteDetailsFragment.ROUTE_ID_KEY, position);
 			return Fragment.instantiate(ChooseRouteFragment.this.getContext(), RouteDetailsFragment.class.getName(), args);
 		}
