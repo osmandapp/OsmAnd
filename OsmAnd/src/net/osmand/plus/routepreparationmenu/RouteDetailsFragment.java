@@ -126,6 +126,11 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	@Override
+	public int getToolbarHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
+	}
+
+	@Override
 	public boolean isSingleFragment() {
 		return false;
 	}

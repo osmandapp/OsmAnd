@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import net.osmand.AndroidUtils;
@@ -109,10 +110,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		View view = LayoutInflater.from(context).inflate(R.layout.fragment_show_all_routes, null);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
-		solidToolbarView = view.findViewById(R.id.toolbar_layout);
+		View solidToolbarView = view.findViewById(R.id.toolbar_layout);
+		this.solidToolbarView = solidToolbarView;
 		solidToolbarHeight = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		LockableViewPager viewPager = view.findViewById(R.id.pager);
 		this.viewPager = viewPager;
+		if (!portrait) {
+			initialMenuState = MenuState.FULL_SCREEN;
+			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.WRAP_CONTENT));
+			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
+		}
 		viewPager.setClipToPadding(false);
 		//viewPager.setPageMargin(-60);
 		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1, initialMenuState);
@@ -168,7 +175,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
-			updateControlsVisibility(false);
+			updateControlsVisibility(false, false);
 		}
 	}
 
@@ -180,7 +187,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
-			updateControlsVisibility(true);
+			updateControlsVisibility(true, routeInfoMenuState != -1);
 		}
 	}
 
@@ -213,7 +220,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
 	}
 
-	private void dismiss() {
+	public void dismiss() {
 		try {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
@@ -422,6 +429,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		if (publicTransportMode) {
 			view.findViewById(R.id.toolbar_options).setVisibility(View.GONE);
+		}
+		if (publicTransportMode || !portrait) {
 			view.findViewById(R.id.toolbar_options_flow).setVisibility(View.GONE);
 			view.findViewById(R.id.toolbar_options_flow_bg).setVisibility(View.GONE);
 		}
@@ -622,13 +631,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	public void updateControlsVisibility(boolean visible) {
+	public void updateControlsVisibility(boolean visible, boolean openingRouteInfo) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
 			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
 			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
-			mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+			if (!openingRouteInfo) {
+				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+				if (!portrait) {
+					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
+				}
+			}
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(visibility);
 			mapActivity.refreshMap();
 		}

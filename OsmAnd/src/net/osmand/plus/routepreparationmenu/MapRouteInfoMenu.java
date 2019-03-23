@@ -1902,6 +1902,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			boolean refreshMap = !switched;
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			if (!portrait) {
+				currentMenuState = MenuState.FULL_SCREEN;
 				mapActivity.getMapView().setMapPositionX(1);
 				refreshMap = true;
 			}
@@ -1932,6 +1933,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			app.getRoutingHelper().removeListener(this);
 		}
 		removeTargetPointListener();
+	}
+
+	public boolean needShowMenu() {
+		return showMenu;
 	}
 
 	public void setShowMenu(int menuState) {

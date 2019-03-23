@@ -106,6 +106,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -592,14 +593,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				return;
 			}
 		}
-		if (getPlanRouteFragment() != null) {
-			if (getPlanRouteFragment().quit(true)) {
+		PlanRouteFragment planRouteFragment = getPlanRouteFragment();
+		if (planRouteFragment != null) {
+			if (planRouteFragment.quit(true)) {
 				MapMarkersDialogFragment.showInstance(this);
 			}
 			return;
 		}
-		if (getMeasurementToolFragment() != null) {
-			getMeasurementToolFragment().quit(true);
+		MeasurementToolFragment measurementToolFragment = getMeasurementToolFragment();
+		if (measurementToolFragment != null) {
+			measurementToolFragment.quit(true);
+			return;
+		}
+		ChooseRouteFragment chooseRouteFragment = getChooseRouteFragment();
+		if (chooseRouteFragment != null) {
+			chooseRouteFragment.dismiss();
 			return;
 		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
@@ -629,7 +637,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 
 		super.onBackPressed();
-
 	}
 
 	private void quitAddGpxPointMode() {
@@ -2005,6 +2012,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public MeasurementToolFragment getMeasurementToolFragment() {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(MeasurementToolFragment.TAG);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (MeasurementToolFragment) fragment : null;
+	}
+
+	public ChooseRouteFragment getChooseRouteFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(ChooseRouteFragment.TAG);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (ChooseRouteFragment) fragment : null;
 	}
 
 	public boolean isTopToolbarActive() {
