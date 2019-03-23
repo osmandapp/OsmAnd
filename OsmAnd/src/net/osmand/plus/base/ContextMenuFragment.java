@@ -17,7 +17,6 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
 import android.util.TypedValue;
 import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -74,6 +73,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 	private int minHalfY;
 	private int topScreenPosY;
+	private int topPadding;
 	private int menuFullHeightMax;
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
@@ -82,7 +82,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private int topShadowMargin;
 	private int currentMenuState;
 	private int shadowHeight;
-	private int toolbarHeight;
 	private int statusBarHeight;
 
 	private String preferredMapLang;
@@ -106,6 +105,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	public abstract int getBottomScrollViewId();
 
 	public abstract int getHeaderViewHeight();
+
+	public abstract int getToolbarHeight();
 
 	public boolean isSingleFragment() {
 		return true;
@@ -192,30 +193,25 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		shadowHeight = AndroidUtils.dpToPx(mapActivity, SHADOW_HEIGHT_TOP_DP);
 		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
 
-		toolbarHeight = app.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
-
 		mainView = view.findViewById(getMainViewId());
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
-		processScreenHeight(container);
-
-		minHalfY = viewHeight - (int) (viewHeight * .75f);
 
 		LockableScrollView bottomScrollView = (LockableScrollView) view.findViewById(getBottomScrollViewId());
 		bottomScrollView.setScrollingEnabled(false);
 		AndroidUtils.setBackground(app, bottomScrollView, nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
-
 		AndroidUtils.setBackground(app, mainView, nightMode, R.drawable.bg_map_context_menu_light, R.drawable.bg_map_context_menu_dark);
 
 		if (!portrait) {
+			topPadding = getToolbarHeight() - topScreenPosY;
+			bottomScrollView.setPadding(0, topPadding, 0, 0);
 			final TypedValue typedValueAttr = new TypedValue();
 			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 			mainView.setBackgroundResource(typedValueAttr.resourceId);
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
-
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.WRAP_CONTENT);
-			params.gravity = Gravity.BOTTOM;
 		}
+
+		processScreenHeight(container);
+		minHalfY = viewHeight - (int) (viewHeight * .75f);
 
 		final GestureDetector swipeDetector = new GestureDetector(app, new HorizontalSwipeConfirm(true));
 
@@ -293,16 +289,14 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						if (moving) {
 							moving = false;
 							int currentY = getViewY();
-
+							int fullScreenTopPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
 							final VelocityTracker velocityTracker = this.velocityTracker;
 							velocityTracker.computeCurrentVelocity(1000, maximumVelocity);
 							int initialVelocity = (int) velocityTracker.getYVelocity();
-
-							if ((Math.abs(initialVelocity) > minimumVelocity)) {
-
+							if ((Math.abs(initialVelocity) > minimumVelocity) && currentY != fullScreenTopPosY) {
 								scroller.abortAnimation();
 								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
-										Math.min(viewHeight - menuFullHeightMax, getFullScreenTopPosY()),
+										Math.min(viewHeight - menuFullHeightMax, fullScreenTopPosY),
 										screenHeight,
 										0, 0);
 								currentY = scroller.getFinalY();
@@ -480,7 +474,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			screenHeight = container.getHeight() + statusBarHeight;
-			viewHeight = screenHeight - statusBarHeight;
+			viewHeight = screenHeight - statusBarHeight - topPadding;
 			minHalfY = viewHeight - (int) (viewHeight * .75f);
 		}
 	}
@@ -488,7 +482,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private int getFullScreenTopPosY() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			int res = topShadowMargin + toolbarHeight;
+			int res = topShadowMargin + getToolbarHeight();
 			if (Build.VERSION.SDK_INT >= 21 && !isSingleFragment()) {
 				res -= statusBarHeight;
 			}
@@ -833,15 +827,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
-
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			if (!portrait) {
 				tileBoxWidthPx = tb.getPixWidth() - view.getWidth();
 			} else {
 				tileBoxHeightPx = getHeaderOnlyTopY();
 			}
-			if (tileBoxHeightPx > 0) {
-				int topMarginPx = toolbarHeight;
+			if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
+				int topMarginPx = getToolbarHeight();
 				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
 						tileBoxWidthPx, tileBoxHeightPx, topMarginPx);
 			}

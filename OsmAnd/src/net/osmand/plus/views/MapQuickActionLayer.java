@@ -40,6 +40,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -388,6 +389,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     private void setupQuickActionBtnVisibility() {
         MapContextMenu contextMenu = mapActivity.getContextMenu();
+        MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
         MapMultiSelectionMenu multiSelectionMenu = contextMenu.getMultiSelectionMenu();
         WeakReference<MapContextMenuFragment> contextMenuMenuFragmentRef = contextMenu.findMenuFragment();
         MapContextMenuFragment contextMenuMenuFragment = contextMenuMenuFragmentRef != null ? contextMenuMenuFragmentRef.get() : null;
@@ -397,6 +399,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 				contextMenuLayer.isInGpxDetailsMode() ||
 				measurementToolLayer.isInMeasurementMode() ||
                 mapMarkersLayer.isInPlanRouteMode() ||
+                mapRouteInfoMenu.isVisible() ||
+                MapRouteInfoMenu.chooseRoutesVisible ||
                 contextMenu.isVisible() && contextMenuMenuFragment != null && !contextMenuMenuFragment.isRemoving() ||
                 contextMenu.isVisible() && contextMenuMenuFragment != null && contextMenuMenuFragment.isAdded() ||
                 multiSelectionMenu.isVisible() && multiMenuFragment != null && multiMenuFragment.isAdded() ||

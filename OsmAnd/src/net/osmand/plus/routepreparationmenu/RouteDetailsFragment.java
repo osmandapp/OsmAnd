@@ -126,8 +126,17 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	@Override
+	public int getToolbarHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
+	}
+
+	@Override
 	public boolean isSingleFragment() {
 		return false;
+	}
+
+	public int getRouteId() {
+		return routeId;
 	}
 
 	@Override
@@ -292,7 +301,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	private void buildSegmentItem(View view, final TransportRouteResultSegment segment,
-								  final TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double changeTime) {
+								  final TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double boardingTime) {
 		OsmandApplication app = requireMyApplication();
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
@@ -318,6 +327,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		Drawable icon = getContentIcon(drawableResId);
 
 		Typeface typeface = FontCache.getRobotoMedium(app);
+		startTime[0] += (int) boardingTime;
 		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
 		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
@@ -386,7 +396,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			depTime = startTime[0] + arrivalTime;
 		}
 		// TODO: fix later for schedule
-		startTime[0] += (int) segment.travelTime + (nextSegment != null ? changeTime / 2 : 0);
+		startTime[0] += (int) segment.getTravelTime();
 		String textTime = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
 		secondaryText = new SpannableString(getString(R.string.exit_at));
@@ -467,7 +477,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			if (first) {
 				buildStartItem(parent, startPoint, startTime, segment, routeResult.getWalkSpeed());
 			}
-			buildSegmentItem(parent, segment, !last ? segments.get(i + 1) : null, startTime, routeResult.getWalkSpeed(), routeResult.getChangeTime());
+			buildSegmentItem(parent, segment, !last ? segments.get(i + 1) : null, startTime, routeResult.getWalkSpeed(), routeResult.getBoardingTime());
 			if (last) {
 				buildDestinationItem(parent, endPoint, startTime, segment, routeResult.getWalkSpeed());
 			}

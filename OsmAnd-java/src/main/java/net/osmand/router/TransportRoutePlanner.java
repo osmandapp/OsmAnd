@@ -509,6 +509,10 @@ public class TransportRoutePlanner {
 			return cfg.getChangeTime();
 		}
 
+		public double getBoardingTime() {
+			return cfg.getBoardingTime();
+		}
+
 		public int getChanges() {
 			return segments.size() - 1;
 		}

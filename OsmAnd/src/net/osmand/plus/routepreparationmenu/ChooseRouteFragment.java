@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import net.osmand.AndroidUtils;
@@ -64,6 +65,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public static final String TAG = "ChooseRouteFragment";
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
 	public static final String ROUTE_INFO_STATE_KEY = "route_info_state_key";
+	public static final String INITIAL_MENU_STATE_KEY = "initial_menu_state_key";
 
 	@Nullable
 	private LockableViewPager viewPager;
@@ -94,10 +96,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 		List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
 		int routeIndex = 0;
+		int initialMenuState = MenuState.HEADER_ONLY;
 		Bundle args = getArguments();
 		if (args != null) {
 			routeIndex = args.getInt(ROUTE_INDEX_KEY);
 			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
+			initialMenuState = args.getInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 		}
 		if (routes != null && !routes.isEmpty()) {
 			publicTransportMode = true;
@@ -106,13 +110,19 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		View view = LayoutInflater.from(context).inflate(R.layout.fragment_show_all_routes, null);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
-		solidToolbarView = view.findViewById(R.id.toolbar_layout);
+		View solidToolbarView = view.findViewById(R.id.toolbar_layout);
+		this.solidToolbarView = solidToolbarView;
 		solidToolbarHeight = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		LockableViewPager viewPager = view.findViewById(R.id.pager);
 		this.viewPager = viewPager;
+		if (!portrait) {
+			initialMenuState = MenuState.FULL_SCREEN;
+			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.WRAP_CONTENT));
+			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
+		}
 		viewPager.setClipToPadding(false);
 		//viewPager.setPageMargin(-60);
-		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1);
+		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1, initialMenuState);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -165,7 +175,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
-			updateControlsVisibility(false);
+			updateControlsVisibility(false, false);
 		}
 	}
 
@@ -177,7 +187,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
-			updateControlsVisibility(true);
+			updateControlsVisibility(true, routeInfoMenuState != -1);
 		}
 	}
 
@@ -210,7 +220,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
 	}
 
-	private void dismiss() {
+	public void dismiss() {
 		try {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
@@ -419,6 +429,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		if (publicTransportMode) {
 			view.findViewById(R.id.toolbar_options).setVisibility(View.GONE);
+		}
+		if (publicTransportMode || !portrait) {
 			view.findViewById(R.id.toolbar_options_flow).setVisibility(View.GONE);
 			view.findViewById(R.id.toolbar_options_flow_bg).setVisibility(View.GONE);
 		}
@@ -575,9 +587,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (viewPager != null) {
 			int currentItem = viewPager.getCurrentItem();
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
-			if (routeDetailsFragments.size() > currentItem) {
-				WeakReference<RouteDetailsFragment> ref = routeDetailsFragments.get(currentItem);
-				return ref.get();
+			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
+				RouteDetailsFragment f = ref.get();
+				if (f != null && f.getRouteId() == currentItem) {
+					return f;
+				}
 			}
 		}
 		return null;
@@ -617,13 +631,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	public void updateControlsVisibility(boolean visible) {
+	public void updateControlsVisibility(boolean visible, boolean openingRouteInfo) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
 			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
 			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
-			mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+			if (!openingRouteInfo) {
+				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+				if (!portrait) {
+					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
+				}
+			}
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(visibility);
 			mapActivity.refreshMap();
 		}
@@ -646,9 +665,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			int i = 0;
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
 			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
-				boolean current = i == currentItem;
 				RouteDetailsFragment f = ref.get();
 				if (f != null) {
+					boolean current = f.getRouteId() == currentItem;
 					if (!current && f.getCurrentMenuState() != menuState) {
 						f.openMenuScreen(menuState, false);
 					}
@@ -686,12 +705,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int routeInfoState) {
+	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex,
+									 int routeInfoState, int initialMenuState) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			Bundle args = new Bundle();
 			args.putInt(ROUTE_INDEX_KEY, routeIndex);
 			args.putInt(ROUTE_INFO_STATE_KEY, routeInfoState);
+			args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
@@ -704,10 +725,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	public class RoutesPagerAdapter extends FragmentPagerAdapter {
 		private int routesCount;
+		private int initialMenuState;
 
-		RoutesPagerAdapter(FragmentManager fm, int routesCount) {
+		RoutesPagerAdapter(FragmentManager fm, int routesCount, int initialMenuState) {
 			super(fm);
 			this.routesCount = routesCount;
+			this.initialMenuState = initialMenuState;
 		}
 
 		@Override
@@ -718,7 +741,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		@Override
 		public Fragment getItem(int position) {
 			Bundle args = new Bundle();
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
+			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
 			args.putInt(RouteDetailsFragment.ROUTE_ID_KEY, position);
 			return Fragment.instantiate(ChooseRouteFragment.this.getContext(), RouteDetailsFragment.class.getName(), args);
 		}
