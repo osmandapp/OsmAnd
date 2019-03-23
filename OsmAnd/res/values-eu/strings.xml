@@ -2312,7 +2312,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="change_color">Aldatu kolorea</string>
     <string name="edit_name">Editatu izena</string>
     <string name="animate_my_location">Animatu nire kokalekua</string>
-    <string name="route_is_too_long_v2">Distantzia luzea: Sortu tarteko helburuak ez bada ibilbide bat aurkitu 10 minututan.</string>
+    <string name="route_is_too_long_v2">Distantzia luzeetan: Sortu tarteko helburuak ez bada ibilbide bat aurkitu 10 minututan.</string>
     <string name="shared_string_add_photos">Gehitu argazkiak</string>
     <string name="shared_string_reset">Leheneratu</string>
     <string name="shared_string_reload">Birkargatu</string>
@@ -2967,4 +2967,18 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_gpx_tracks_show">Erakutsi GPS lorratzak</string>
     <string name="add_destination_query">Gehitu helburua aurretik</string>
     <string name="previous_route">Aurreko ibilbidea</string>
+    <string name="shared_string_degrees">Graduak</string>
+    <string name="avoid_pt_types_descr">Hautatu nabigazioan ekidin beharreko garraio publikoak:</string>
+    <string name="quick_action_day_night_mode">% modua</string>
+    <string name="avoid_pt_types">Ekidin garraio motak…</string>
+    <string name="shared_string_walk">Ibili</string>
+    <string name="save_poi_value_exceed_length">\"%s\" etiketaren gehieneko luzera 255 karaktere da.
+\nLaburtu jarraitzeko.</string>
+    <string name="save_poi_value_exceed_length_title">\"%s\" balioaren luzera</string>
+    <string name="public_transport_warning_descr_blog">Ikasi gehiago ibilbideak kalkulatzeko moduari buruz OsmAnd blogean.</string>
+    <string name="public_transport_warning_title">Garraio publikoem bidezko nabigazioa beta egoeran dago, akatsak eta zehaztasun gabeziak egon daitezke.</string>
+    <string name="rendering_attr_surface_compacted_name">Trinkotua</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Zaldi-bidea</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Bizikletentzako bidea</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Ekintza botoi hau sakatzeak mapan GPX lorratzak erakutsi edo ezkutatzen ditu</string>
 </resources>
