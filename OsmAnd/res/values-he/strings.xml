@@ -2948,7 +2948,7 @@
     <string name="rendering_attr_smoothness_impassable_name">אי אפשר לעבור</string>
     <string name="rendering_attr_highway_class_motorway_name">דרך לממונעים</string>
     <string name="avoid_pt_types_descr">נא לבחור סוגי תחבורה ציבורית להימנע מהם בתכנון מסלול:</string>
-    <string name="avoid_pt_types">התעלמות מסוגי תחבורה ציבורית…</string>
+    <string name="avoid_pt_types">הימנעות מסוגי תחבורה ציבורית…</string>
     <string name="shared_string_walk">הליכה</string>
     <string name="save_poi_value_exceed_length">האורך המרבי לתגית „%s” הוא 255 תווים. 
 \nנא לקצר כדי להמשיך.</string>
@@ -2995,4 +2995,10 @@
 \n
 \n"</string>
     <string name="quick_action_day_night_mode">מצב %s</string>
+    <string name="shared_string_degrees">מעלות</string>
+    <string name="shared_string_milliradians">מילי־רדיאנים</string>
+    <string name="angular_measeurement">יחידות מידה זוויתיות</string>
+    <string name="angular_measeurement_descr">החלפת יחידת המידה לאזימוט.</string>
+    <string name="routing_attr_avoid_sett_name">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
+    <string name="routing_attr_avoid_sett_description">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
 </resources>
