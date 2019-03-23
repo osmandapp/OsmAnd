@@ -2989,4 +2989,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="save_poi_value_exceed_length">Sa longària màssima de s\'eticheta \"%s\" est de 255 caràteres. 
 \nPro praghere incurtza·la pro sighire.</string>
     <string name="save_poi_value_exceed_length_title">Longària de su valore \"%s\"</string>
+    <string name="shared_string_degrees">Grados</string>
+    <string name="shared_string_milliradians">Millèsimos angulares (radiantes)</string>
+    <string name="angular_measeurement">Unidades de medida angulare</string>
+    <string name="angular_measeurement_descr">Càmbia comente benit medidu s\'àzimut.</string>
+    <string name="routing_attr_avoid_sett_name">Istransi s\'impredadu e su pavè</string>
+    <string name="routing_attr_avoid_sett_description">Istransi s\'impredadu e su pavè</string>
 </resources>
