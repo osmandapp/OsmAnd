@@ -2390,7 +2390,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_name">Povoliť súkromný prístup</string>
     <string name="routing_attr_allow_private_description">Povoliť prístup do súkromných oblastí.</string>
     <string name="display_zoom_level">Priblíženie zobrazenia: %1$s</string>
-    <string name="route_is_too_long_v2">Veľká vzdialenosť: Ak sa nenájde výsledok do 10 minút, vložte prosím tranzitné ciele.</string>
+    <string name="route_is_too_long_v2">Pre veľké vzdialenosti: Ak sa nenájde výsledok do 10 minút, vložte prosím tranzitné ciele.</string>
     <string name="save_poi_too_many_uppercase">Názov obsahuje príliš veľa veľkých písmen. Pokračovať?</string>
     <string name="hillshade_menu_download_descr">Pre zobrazenie tieňovaných svahov na mape, stiahnite prekrývaciu mapu tieňovaných svahov.</string>
     <string name="hillshade_purchase_header">Pre zobrazenie tieňovaných svahov na mape musíte zakúpiť a nainštalovať zásuvný modul \"Vrstevnice\"</string>
@@ -2982,4 +2982,17 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="public_transport_warning_descr_blog">Na našom blogu zistíte viac o tom, ako OsmAnd počíta trasu.</string>
     <string name="public_transport_warning_title">Navigácia pomocou hromadnej dopravy je zatiaľ v testovaní, môžu sa vyskytnúť chyby a nepresnosti.</string>
     <string name="add_intermediate">Pridať prechodný bod</string>
+    <string name="shared_string_degrees">Stupne</string>
+    <string name="shared_string_milliradians">Miliradiány</string>
+    <string name="angular_measeurement">Merné jednotky pre uhly</string>
+    <string name="angular_measeurement_descr">Zmení jednotku na meranie azimutu.</string>
+    <string name="avoid_pt_types_descr">Vyberte typy verejnej dopravy, ktorej sa má navigácia vyhnúť:</string>
+    <string name="quick_action_day_night_mode">%s režim</string>
+    <string name="avoid_pt_types">Vyhnúť sa spôsobom dopravy…</string>
+    <string name="shared_string_walk">Chôdza</string>
+    <string name="save_poi_value_exceed_length">Maximálna dĺžka značky \"%s\" je 255 znakov. 
+\nPre pokračovanie musíte skrátiť text.</string>
+    <string name="save_poi_value_exceed_length_title">Dĺžka hodnoty \"%s\"</string>
+    <string name="routing_attr_avoid_sett_name">Vyhnúť sa dlažobným kameňom</string>
+    <string name="routing_attr_avoid_sett_description">Vyhnúť sa nerovným dlažobným kameňom a kockám</string>
 </resources>
