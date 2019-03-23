@@ -2851,7 +2851,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="welcome_to_open_beta_description">Popotniški vodniki so zasnovani po vsebinah Wikivoyage. Storitev je na voljo brezplačno med preizkušanjem delovanja različice beta. Po tem obdobju bodo vodniki na voljo le uporabnikom paketov OsmAnd Neomejeno in OsmAnd+.</string>
     <string name="start_editing_card_description">Vsakdo lahko (in tudi zaželeno je) ureja prispevke na WikiVoyage. Skupno znanje, izkušnje in mnenja povečajo kakovost vsebine.</string>
     <string name="welcome_to_open_beta">Dobrodošli v različici Open beta</string>
-    <string name="wikivoyage_travel_guide_descr">Vodniki po najbolj zanimivih krajih sveta, prikazani znotraj OsmAnd, vendar brez potrebe po povezavi z internetom.</string>
+    <string name="wikivoyage_travel_guide_descr">Krajevno shranjeni vodniki po najbolj zanimivih krajih sveta, prikazani v programu OsmAnd, tudi na mestih, kjer ni povezave z internetom.</string>
     <string name="contour_lines_hillshade_maps">Zemljevidi reliefa in senčenje površine</string>
     <string name="unlock_all_features">Odkleni vse zmožnosti programa OsmAnd</string>
     <string name="purchase_dialog_travel_description">Naročilo na katerokoli od navedenih možnosti omogoči dostop do popotniškega vodnika:</string>
@@ -2982,4 +2982,17 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="route_surface_stat_container">Površina</string>
     <string name="route_smoothness_stat_container">Gladkost</string>
     <string name="route_steepness_stat_container">Naklon</string>
+    <string name="shared_string_degrees">Stopinje</string>
+    <string name="shared_string_milliradians">Miliradiani</string>
+    <string name="angular_measeurement">Kotne merske enote</string>
+    <string name="angular_measeurement_descr">Spreminjanje merila azimuta.</string>
+    <string name="avoid_pt_types_descr">Izbor vrst javnega transporta za izogibanje:</string>
+    <string name="quick_action_day_night_mode">Način %s</string>
+    <string name="avoid_pt_types">Izogibanje vrstam transporta …</string>
+    <string name="shared_string_walk">Pešačenje</string>
+    <string name="save_poi_value_exceed_length">Najdaljša dovoljena dolžina oznake »%s« je 255 znakov.
+\nPred nadaljevanjem je treba ime oznake skrajšati.</string>
+    <string name="save_poi_value_exceed_length_title">Dolžina vrednosti »%s«</string>
+    <string name="routing_attr_avoid_sett_name">Izogni se tlakovcem vseh vrst</string>
+    <string name="routing_attr_avoid_sett_description">Izogni se tlakovcem vseh vrst</string>
 </resources>
