@@ -3005,4 +3005,8 @@ Lon %2$s</string>
     <string name="quick_action_day_night_mode">modo %s</string>
     <string name="routing_attr_avoid_sett_name">Evitar el empedrado y adoquín</string>
     <string name="routing_attr_avoid_sett_description">Evita las calles empedradas y adoquinadas</string>
+    <string name="shared_string_degrees">Grados</string>
+    <string name="shared_string_milliradians">Mil angular</string>
+    <string name="angular_measeurement">Unidades de medición angular</string>
+    <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
 </resources>
