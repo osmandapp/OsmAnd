@@ -25,6 +25,7 @@ public abstract class BaseCard {
 	boolean showTopShadow;
 	boolean showBottomShadow;
 	boolean showDivider = true;
+	boolean transparentBackground;
 	protected boolean nightMode;
 
 	private CardListener listener;
@@ -121,5 +122,13 @@ public abstract class BaseCard {
 
 	public void setShowDivider(boolean showDivider) {
 		this.showDivider = showDivider;
+	}
+
+	public boolean isTransparentBackground() {
+		return transparentBackground;
+	}
+
+	public void setTransparentBackground(boolean transparentBackground) {
+		this.transparentBackground = transparentBackground;
 	}
 }

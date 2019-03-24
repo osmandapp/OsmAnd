@@ -73,6 +73,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 	private int minHalfY;
 	private int topScreenPosY;
+	private int topToolbarPosY;
+	private int bottomToolbarPosY;
 	private int topPadding;
 	private int menuFullHeightMax;
 	private int menuBottomViewHeight;
@@ -164,6 +166,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		this.listener = listener;
 	}
 
+	public boolean isPortrait() {
+		return portrait;
+	}
+
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -190,8 +196,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		topShadowMargin = AndroidUtils.dpToPx(mapActivity, 9f);
 		statusBarHeight = AndroidUtils.getStatusBarHeight(mapActivity);
 
-		shadowHeight = AndroidUtils.dpToPx(mapActivity, SHADOW_HEIGHT_TOP_DP);
+		shadowHeight = portrait ? AndroidUtils.dpToPx(mapActivity, SHADOW_HEIGHT_TOP_DP) : 0;
 		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
+		topToolbarPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
+		bottomToolbarPosY = topToolbarPosY + getToolbarHeight();
 
 		mainView = view.findViewById(getMainViewId());
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -202,12 +210,18 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		AndroidUtils.setBackground(app, mainView, nightMode, R.drawable.bg_map_context_menu_light, R.drawable.bg_map_context_menu_dark);
 
 		if (!portrait) {
-			topPadding = getToolbarHeight() - topScreenPosY;
+			currentMenuState = MenuState.FULL_SCREEN;
+			if (isSingleFragment()) {
+				topPadding = getToolbarHeight() - topScreenPosY;
+				final TypedValue typedValueAttr = new TypedValue();
+				mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+				mainView.setBackgroundResource(typedValueAttr.resourceId);
+				mainView.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
+			} else {
+				topPadding = getToolbarHeight() + topShadowMargin;
+				mainView.setLayoutParams(new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.MATCH_PARENT));
+			}
 			bottomScrollView.setPadding(0, topPadding, 0, 0);
-			final TypedValue typedValueAttr = new TypedValue();
-			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
-			mainView.setBackgroundResource(typedValueAttr.resourceId);
-			mainView.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 
 		processScreenHeight(container);
@@ -296,7 +310,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 							if ((Math.abs(initialVelocity) > minimumVelocity) && currentY != fullScreenTopPosY) {
 								scroller.abortAnimation();
 								scroller.fling(0, currentY, 0, initialVelocity, 0, 0,
-										Math.min(viewHeight - menuFullHeightMax, fullScreenTopPosY),
+										Math.min(getMinY(), fullScreenTopPosY),
 										screenHeight,
 										0, 0);
 								currentY = scroller.getFinalY();
@@ -361,6 +375,52 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		};
 
 		return view;
+	}
+
+	public float getToolbarAlpha(int y) {
+		float a = 0;
+		if (portrait) {
+			if (y < bottomToolbarPosY) {
+				a = 1f - (y - topToolbarPosY) * (1f / (bottomToolbarPosY - topToolbarPosY));
+			}
+			if (a < 0) {
+				a = 0;
+			} else if (a > 1) {
+				a = 1;
+			}
+		}
+		return a;
+	}
+
+	public void updateToolbarVisibility(View view) {
+		updateToolbarVisibility(view, getViewY());
+	}
+
+	public void updateToolbarVisibility(View view, int y) {
+		float a = getToolbarAlpha(y);
+		updateVisibility(view, a);
+	}
+
+	public void updateVisibility(View v, float alpha) {
+		boolean visible = alpha > 0;
+		v.setAlpha(alpha);
+		if (visible && v.getVisibility() != View.VISIBLE) {
+			v.setVisibility(View.VISIBLE);
+		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+			v.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	public void updateVisibility(View v, boolean visible) {
+		if (visible && v.getVisibility() != View.VISIBLE) {
+			v.setVisibility(View.VISIBLE);
+		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+			v.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	public int getMinY() {
+		return viewHeight - menuFullHeightMax - (portrait ? getToolbarHeight() : 0);
 	}
 
 	private int addStatusBarHeightIfNeeded(int res) {
@@ -461,7 +521,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return (int) mainView.getY();
 	}
 
-	private void setViewY(int y, boolean animated, boolean adjustMapPos) {
+	protected void setViewY(int y, boolean animated, boolean adjustMapPos) {
 		mainView.setY(y);
 		ContextMenuFragmentListener listener = this.listener;
 		if (listener != null) {
@@ -505,7 +565,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private int getMenuStatePosY(int menuState) {
+	public int getMenuStatePosY(int menuState) {
 		if (!portrait) {
 			return topScreenPosY;
 		}
@@ -543,7 +603,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void changeMenuState(int currentY, boolean slidingUp, boolean slidingDown, boolean animated) {
+	protected void changeMenuState(int currentY, boolean slidingUp, boolean slidingDown, boolean animated) {
 		boolean needCloseMenu = false;
 
 		int currentMenuState = getCurrentMenuState();
@@ -629,7 +689,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 				break;
 			case MenuState.FULL_SCREEN:
 				if (currentY != CURRENT_Y_UNDEFINED) {
-					int maxPosY = viewHeight - menuFullHeightMax;
+					int maxPosY = getMinY();
 					int minPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
 					if (maxPosY > minPosY) {
 						maxPosY = minPosY;
@@ -662,14 +722,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
-						   final int previousMenuState, final int newMenuState, int dZoom, boolean animated) {
+	protected void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
+							 final int previousMenuState, final int newMenuState, int dZoom, final boolean animated) {
 		final int posY = getPosY(currentY, needCloseMenu, previousMenuState);
 		if (getViewY() != posY || dZoom != 0) {
 			if (posY < getViewY()) {
 				updateMainViewLayout(posY);
 			}
-
 			if (animated) {
 				mainView.animate().y(posY)
 						.setDuration(ANIMATION_DURATION)
@@ -708,7 +767,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 					}
 				}
 			}
-
 			ContextMenuFragmentListener listener = this.listener;
 			if (listener != null) {
 				listener.onContextMenuYPosChanged(this, posY, true);

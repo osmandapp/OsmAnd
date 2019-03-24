@@ -1,6 +1,8 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -17,10 +19,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
@@ -118,10 +122,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (!portrait) {
 			initialMenuState = MenuState.FULL_SCREEN;
 			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.WRAP_CONTENT));
+			solidToolbarView.setVisibility(View.VISIBLE);
+			final TypedValue typedValueAttr = new TypedValue();
+			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+			view.findViewById(R.id.pager_container).setBackgroundResource(typedValueAttr.resourceId);
 			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 		viewPager.setClipToPadding(false);
-		//viewPager.setPageMargin(-60);
 		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1, initialMenuState);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
@@ -608,14 +615,32 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	public void updateToolbars(@NonNull ContextMenuFragment fragment, int y) {
-		MapActivity mapActivity = getMapActivity();
+	public void updateToolbars(@NonNull final ContextMenuFragment fragment, int y, boolean animated) {
+		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			View solidToolbarView = this.solidToolbarView;
-			if (solidToolbarView != null) {
-				solidToolbarView.setVisibility(y - fragment.getTopShadowMargin() <= solidToolbarHeight ? View.VISIBLE : View.GONE);
+			final View solidToolbarView = this.solidToolbarView;
+			if (solidToolbarView != null && portrait) {
+				if (animated) {
+					final float toolbarAlpha = fragment.getToolbarAlpha(y);
+					if (toolbarAlpha > 0) {
+						fragment.updateVisibility(solidToolbarView, true);
+					}
+					solidToolbarView.animate().alpha(toolbarAlpha)
+							.setDuration(ContextMenuFragment.ANIMATION_DURATION)
+							.setInterpolator(new DecelerateInterpolator())
+							.setListener(new AnimatorListenerAdapter() {
+								@Override
+								public void onAnimationEnd(Animator animation) {
+									fragment.updateVisibility(solidToolbarView, toolbarAlpha);
+									mapActivity.updateStatusBarColor();
+								}
+							})
+							.start();
+				} else {
+					fragment.updateToolbarVisibility(solidToolbarView, y);
+					mapActivity.updateStatusBarColor();
+				}
 			}
-			mapActivity.updateStatusBarColor();
 		}
 	}
 
@@ -651,7 +676,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	@Override
 	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
 		if (fragment == getCurrentFragment()) {
-			updateToolbars(fragment, y);
+			updateToolbars(fragment, y, animated);
 			updateZoomButtonsPos(fragment, y, animated);
 			updateViewPager(fragment.getViewY());
 		}
@@ -662,7 +687,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		LockableViewPager viewPager = this.viewPager;
 		if (viewPager != null) {
 			int currentItem = viewPager.getCurrentItem();
-			int i = 0;
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
 			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
 				RouteDetailsFragment f = ref.get();
@@ -676,7 +700,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						updateViewPager(fragment.getViewY());
 					}
 				}
-				i++;
 			}
 		}
 	}
