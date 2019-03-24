@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="osm_live_subscriptions">சந்தாக்கள்
+<resources>
+    <string name="osm_live_subscriptions">சந்தாக்கள்
 \n</string>
     <string name="powered_by_osmand">osm மூலம் இயக்கப்படுகிறது</string>
     <string name="osm_live_plan_pricing">திட்டம் &amp; விலை</string>
@@ -34,7 +35,6 @@
     <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: <b>1\"%1$s\"</b>2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.<br/>3<br/>"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல் 
 \n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."<br/>5</string>
     <string name="shared_string_world">உலகம்</string>
-
     <string name="point_deleted">புள்ளி %1$s நீக்கப்பட்டது</string>
     <string name="coord_input_add_point">புள்ளியே சேர்க்க</string>
     <string name="coord_input_save_as_track">பாதை எனச் சேமி</string>
@@ -1113,7 +1113,8 @@
     <string name="install_more">மேலும் நிறுவவும் …</string>
     <string name="level_to_switch_vector_raster_descr">இந்த நிலைக்கு அப்பால் எதற்கும் ராஸ்டர் வரைபடங்களைப் பயன்படுத்துங்கள்.</string>
     <string name="level_to_switch_vector_raster">குறைந்தபட்ச வெக்டார் ஜூம் நிலை</string>
-    <string name="create_poi_link_to_osm_doc"><u>ஆன்லைன் OSM</u>படங்களுடன் வரைபட வகைப்பாடு.</string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>ஆன்லைன் OSM</u>படங்களுடன் வரைபட வகைப்பாடு.</string>
     <string name="error_doing_search">ஆஃப்லைன் தேடலைச் செயல்படுத்த முடியவில்லை.</string>
     <string name="search_offline_geo_error">புவி நோக்கத்தை \'%s\' ஐப் பாகுபடுத்த முடியவில்லை.</string>
     <string name="search_osm_offline">புவி இருப்பிடத்தைத் தேடு</string>
@@ -1259,7 +1260,7 @@
     <string name="accessibility_mode_descr">பலவீனமான பயனர்களுக்கான அம்சங்களை மாற்றியமைக்கிறது.</string>
     <string name="accessibility_default">Android அமைப்பின் அமைப்பு படி</string>
     <string name="backToMenu">மெனுவிற்குத் திரும்புக</string>
-    <string name="zoomOut"></string>
+    <string name="zoomOut"/>
     <string name="zoomIn">பெரிதாக்கு</string>
     <string name="zoomIs">"பெரிதாக்கும் அளவு "</string>
     <string name="north">வடக்கு</string>
@@ -1392,4 +1393,11 @@
     <string name="show_arrows_descr">"செய்யளில் உள்ள அடையாளங்களுக்கான திசையை குறிக்கும்  ஒன்று அல்லது இரண்டு அம்புகளை காட்டு."</string>
     <string name="distance_indication_descr">செய்யலிள் உள்ள குறியீடுகளை எவ்வாறு காட்ட வேண்டும் என்பதைத் தேர்வுசெய்யவும்.</string>
     <string name="active_markers_descr">காண்பிப்பதற்காக எத்தனை திசையில் குறிகாட்டிகள் தேவை என்பதைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="shared_string_degrees">அளவு</string>
+    <string name="shared_string_milliradians">மில்லிரடினஸ்</string>
+    <string name="angular_measeurement">கோண அளவீடு அலகுகள்</string>
+    <string name="angular_measeurement_descr">என்ன அசிம்மை அளவிடப்படுகிறது என்பதை மாற்றுக</string>
+    <string name="avoid_pt_types_descr">வழிசெலுத்தலைத் தவிர்ப்பதற்கு பொதுப் போக்குவரத்து வகைகளைத் தேர்ந்தெடுக்கவும்:</string>
+    <string name="quick_action_day_night_mode">%s விதம்</string>
+    <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
 </resources>
