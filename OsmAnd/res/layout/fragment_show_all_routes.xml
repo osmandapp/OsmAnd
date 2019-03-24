@@ -7,6 +7,7 @@
 	android:background="@color/color_transparent">
 
 	<LinearLayout
+		android:id="@+id/pager_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"

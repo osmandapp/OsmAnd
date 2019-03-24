@@ -25,6 +25,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,9 +95,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		CardListener {
 
 	public static final String ROUTE_ID_KEY = "route_id_key";
+	private static final float PAGE_MARGIN = 5f;
 
 	private int routeId = -1;
 	private String destinationStreetStr = "";
+	private int pageMarginPx;
+	private int toolbarHeightPx;
 
 	private GPXFile gpx;
 	private OrderedLineDataSet slopeDataSet;
@@ -127,7 +132,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public int getToolbarHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
+		return toolbarHeightPx;
 	}
 
 	@Override
@@ -142,11 +147,17 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		if (args != null) {
+			routeId = args.getInt(ROUTE_ID_KEY);
+		}
+		pageMarginPx = dpToPx(PAGE_MARGIN);
+		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
+
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			Bundle args = getArguments();
-			if (args != null) {
-				routeId = args.getInt(ROUTE_ID_KEY);
+			if (isPortrait()) {
+				view.findViewById(getBottomScrollViewId()).setBackgroundDrawable(null);
 			}
 			updateCards(view);
 			runLayoutListener();
@@ -157,6 +168,96 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	@Nullable
 	public PublicTransportCard getTransportCard() {
 		return transportCard;
+	}
+
+	@Override
+	protected void changeMenuState(int currentY, boolean slidingUp, boolean slidingDown, boolean animated) {
+		super.changeMenuState(currentY, slidingUp, slidingDown, animated);
+		View mainView = getMainView();
+		if (mainView != null && isPortrait()) {
+			final LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+			final FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
+			final int currentMenuState = getCurrentMenuState();
+			if (animated) {
+				final int marginStart = layoutParams.leftMargin;
+				final int marginEnd = currentMenuState == MenuState.HEADER_ONLY ? pageMarginPx : 0;
+				if (marginStart != marginEnd) {
+					Animation a = new Animation() {
+						@Override
+						protected void applyTransformation(float interpolatedTime, Transformation t) {
+							int margin = marginStart + (int) ((marginEnd - marginStart) * interpolatedTime);
+							layoutParams.setMargins(margin, 0, margin, 0);
+							cardsContainer.setLayoutParams(layoutParams);
+						}
+					};
+					a.setAnimationListener(new Animation.AnimationListener() {
+						@Override
+						public void onAnimationStart(Animation animation) {
+						}
+
+						@Override
+						public void onAnimationEnd(Animation animation) {
+							updateCardsLayout();
+						}
+
+						@Override
+						public void onAnimationRepeat(Animation animation) {
+						}
+					});
+					a.setDuration(ANIMATION_DURATION);
+					cardsContainer.startAnimation(a);
+				}
+			} else {
+				updateCardsLayout();
+			}
+		}
+	}
+
+	private void updateCardsLayout() {
+		View mainView = getMainView();
+		if (mainView != null) {
+			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
+			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
+				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
+				mainView.setBackgroundDrawable(null);
+			} else {
+				layoutParams.setMargins(0, 0, 0, 0);
+				cardsContainer.setBackgroundDrawable(null);
+				AndroidUtils.setBackground(mainView.getContext(), mainView, isNightMode(), R.drawable.bg_map_context_menu_light, R.drawable.bg_map_context_menu_dark);
+			}
+			cardsContainer.setLayoutParams(layoutParams);
+		}
+	}
+
+	@Override
+	protected void setViewY(int y, boolean animated, boolean adjustMapPos) {
+		super.setViewY(y, animated, adjustMapPos);
+		View mainView = getMainView();
+		if (mainView != null && isPortrait()) {
+			int headerOnlyY = getMenuStatePosY(MenuState.HEADER_ONLY);
+			int halfScreenY = getMenuStatePosY(MenuState.HALF_SCREEN);
+			float margin = 0;
+			if (y > headerOnlyY) {
+				margin = PAGE_MARGIN;
+			} else if (y > halfScreenY) {
+				margin = PAGE_MARGIN * (1f - (float)(headerOnlyY - y) / (headerOnlyY - halfScreenY));
+			}
+			int marginPx = dpToPx(margin);
+			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
+			if (layoutParams.leftMargin != marginPx) {
+				layoutParams.setMargins(marginPx, 0, marginPx, 0);
+			}
+			if (y > halfScreenY) {
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
+				mainView.setBackgroundDrawable(null);
+			} else {
+				cardsContainer.setBackgroundDrawable(null);
+				AndroidUtils.setBackground(mainView.getContext(),mainView, isNightMode(), R.drawable.bg_map_context_menu_light, R.drawable.bg_map_context_menu_dark);
+			}
+		}
 	}
 
 	private void updateCards(@NonNull View view) {
@@ -176,6 +277,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 					card.setShowTopShadow(false);
 					card.setShowBottomShadow(false);
 					card.setShowDivider(false);
+					card.setTransparentBackground(true);
 					card.setTransportCardListener(this);
 					card.setListener(this);
 					transportCard = card;
