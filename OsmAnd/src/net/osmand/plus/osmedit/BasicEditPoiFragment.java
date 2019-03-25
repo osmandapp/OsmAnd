@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
+
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,6 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputFilter.LengthFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -46,7 +51,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 	private EditText webSiteEditText;
 	private EditText descriptionEditText;
 	OpeningHoursAdapter mOpeningHoursAdapter;
-	
+
 	private boolean basicTagsInitialized = false;
 
 	@Nullable
@@ -78,6 +83,9 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 		openingHoursImageView.setImageDrawable(
 				getPaintedContentIcon(R.drawable.ic_action_time, iconColor));
 
+		InputFilter[] lengthLimit = new InputFilter[] {
+			new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
+		};
 		streetEditText = (EditText) view.findViewById(R.id.streetEditText);
 		houseNumberEditText = (EditText) view.findViewById(R.id.houseNumberEditText);
 		phoneEditText = (EditText) view.findViewById(R.id.phoneEditText);
@@ -88,6 +96,11 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 		addTextWatcher(OSMSettings.OSMTagKey.PHONE.getValue(), phoneEditText);
 		addTextWatcher(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(), houseNumberEditText);
 		addTextWatcher(OSMSettings.OSMTagKey.DESCRIPTION.getValue(), descriptionEditText);
+		streetEditText.setFilters(lengthLimit);
+		houseNumberEditText.setFilters(lengthLimit);
+		phoneEditText.setFilters(lengthLimit);
+		webSiteEditText.setFilters(lengthLimit);
+		descriptionEditText.setFilters(lengthLimit);
 		Button addOpeningHoursButton = (Button) view.findViewById(R.id.addOpeningHoursButton);
 		addOpeningHoursButton.setOnClickListener(new View.OnClickListener() {
 			@Override
