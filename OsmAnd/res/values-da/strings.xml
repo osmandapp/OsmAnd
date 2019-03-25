@@ -3008,4 +3008,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_steps_name">Trin</string>
     <string name="routing_attr_avoid_sett_name">Undgå brosten og natursten</string>
     <string name="routing_attr_avoid_sett_description">Undgå brosten og natursten</string>
+    <string name="shared_string_degrees">Grader</string>
+    <string name="shared_string_milliradians">Milliradianer</string>
+    <string name="angular_measeurement">Enhed for vinkelmåling</string>
+    <string name="angular_measeurement_descr">Ændr hvad azimuth er måles i.</string>
 </resources>

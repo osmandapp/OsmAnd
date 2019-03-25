@@ -2895,16 +2895,16 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="transfers">przesiadki</string>
     <string name="on_foot">pieszo</string>
     <string name="route_way">Trasa</string>
-    <string name="points_of_interests">Użyteczne miejsca (UM)</string>
+    <string name="points_of_interests">Użyteczne miejsca</string>
     <string name="waiting_for_route_calculation">Wyznaczanie trasy…</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
-    <string name="avoid_roads_descr">Wybierz drogę, którą chcesz unikać podczas nawigacji na mapie lub z listy poniżej:</string>
+    <string name="avoid_roads_descr">Proszę wybrać na mapie lub z poniższej listy, drogę omijaną podczas nawigacji:</string>
     <string name="show_along_the_route">Pokaż na trasie</string>
     <string name="simulate_navigation">Symulacja nawigacji</string>
     <string name="choose_track_file_to_follow">Wybierz plik trasy do śledzenia</string>
     <string name="voice_announcements">Komunikaty głosowe</string>
     <string name="intermediate_destinations">Pośrednie cele podróży</string>
-    <string name="arrive_at_time">Dotrzesz do celu o %1$s</string>
+    <string name="arrive_at_time">Dotarcie do celu o %1$s</string>
     <string name="quick_action_switch_day_night_descr">Naciśnięcie przycisku zmieni pomiędzy trybem Dziennym i Nocnym w OsmAndzie</string>
     <string name="quick_action_switch_day_mode">Tryb Dzienny</string>
     <string name="quick_action_switch_night_mode">Tryb Nocny</string>
@@ -2925,15 +2925,15 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_swap">Wymień</string>
     <string name="show_more">Pokaż więcej</string>
     <string name="tracks_on_map">Ślady wyświetlane</string>
-    <string name="quick_action_show_hide_gpx_tracks">Pokaż/Ukryj Ślady GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Przełącz widoczność śladów GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Naciśnięcie przycisku pokaże lub ukryje wybrane ślady GPX na mapie</string>
-    <string name="quick_action_gpx_tracks_hide">Ukryj Ślady GPX</string>
-    <string name="quick_action_gpx_tracks_show">Pokaż Ślady GPX</string>
-    <string name="add_destination_query">Proszę najpierw dodać Cel</string>
+    <string name="quick_action_gpx_tracks_hide">Ukryj ślady GPX</string>
+    <string name="quick_action_gpx_tracks_show">Wyświetl ślady GPX</string>
+    <string name="add_destination_query">Proszę najpierw dodać cel</string>
     <string name="previous_route">Poprzednia trasa</string>
     <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wylicza trasy.</string>
-    <string name="route_add_start_point">Dodaj punkt rozpoczęcia</string>
-    <string name="route_descr_select_start_point">Wybierz punkt rozpoczęcia</string>
+    <string name="route_add_start_point">Dodawanie punktu początkowego</string>
+    <string name="route_descr_select_start_point">Wybierz punkt początkowy</string>
     <string name="rendering_attr_surface_unpaved_name">Nieutwardzona</string>
     <string name="rendering_attr_surface_sand_name">Piach</string>
     <string name="rendering_attr_surface_grass_name">Trawa</string>
@@ -2942,7 +2942,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
     <string name="public_transport_warning_title">Nawigacja transportem publicznym jest obecnie w fazie beta-testów, mogą pojawić się błędy i nieścisłości.</string>
-    <string name="add_intermediate">Dodaj punkt pośredni</string>
+    <string name="add_intermediate">Dodawanie punktu pośredniego</string>
     <string name="transfers_size">%1$d transfery</string>
     <string name="add_start_and_end_points">Dodaj punkty początkowe i końcowe</string>
     <string name="rendering_attr_surface_grass_paver_name">Bruk z trawą</string>
@@ -2999,4 +2999,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n
 \n • Usunięcie Facebooka i analiz Firebase z darmowej wersji (OsmAnd+ tego nie zawiera)
 \n</string>
+    <string name="shared_string_degrees">Stopnie</string>
+    <string name="shared_string_milliradians">Miliradiany</string>
+    <string name="quick_action_day_night_mode">Tryb %s</string>
 </resources>

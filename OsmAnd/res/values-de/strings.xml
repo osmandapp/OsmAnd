@@ -3011,4 +3011,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
     <string name="routing_attr_avoid_sett_name">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
     <string name="routing_attr_avoid_sett_description">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
+    <string name="shared_string_degrees">Grad</string>
+    <string name="shared_string_milliradians">Milliradians</string>
+    <string name="angular_measeurement">Winkel-Maßeinheiten</string>
+    <string name="angular_measeurement_descr">Ändern, in welchem Azimut gemessen wird.</string>
 </resources>

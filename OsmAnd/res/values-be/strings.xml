@@ -3006,4 +3006,8 @@
     <string name="rendering_attr_highway_class_path_name">Сцежка</string>
     <string name="routing_attr_avoid_sett_name">Пазбягаць брукаваных дарог</string>
     <string name="routing_attr_avoid_sett_description">Пазбягаць брукаваных дарог</string>
+    <string name="shared_string_degrees">Градусы</string>
+    <string name="shared_string_milliradians">Мілірадыяны</string>
+    <string name="angular_measeurement">Адзінкі вымярэння вуглоў</string>
+    <string name="angular_measeurement_descr">Змяніць адзінкі вымярэння азімуту.</string>
 </resources>
