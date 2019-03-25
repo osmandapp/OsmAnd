@@ -638,7 +638,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">開始</string>
+    <string name="shared_string_control_start">実行</string>
     <string name="map_widget_av_notes">音声/動画メモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -1389,7 +1389,7 @@ POIの更新は利用できません</string>
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- ウェブサイト上の個別ダッシュボードでのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
     <string name="logged_as">%1$sとしてログインしました</string>
-    <string name="home_button">ホーム画面</string>
+    <string name="home_button">自宅</string>
     <string name="map_update">%1$s個のマップが更新可能</string>
     <string name="search_for">検索</string>
     <string name="shared_string_show_all">全て表示</string>
@@ -1515,7 +1515,7 @@ POIの更新は利用できません</string>
     <string name="share_note">メモを共有</string>
     <string name="location_on_map">位置:\n緯度 %1$s\n経度 %2$s</string>
     <string name="watch">表示</string>
-    <string name="notes">メモ全部</string>
+    <string name="notes">記録したメモ</string>
     <string name="online_map">オンラインマップ</string>
     <string name="roads_only">道路のみ</string>
     <string name="rendering_attr_pisteRoutes_name">スキー場</string>
@@ -2598,7 +2598,7 @@ POIの更新は利用できません</string>
     <string name="one_tap_active_descr">コンテキストメニューを開かずにマップ上のマーカーをタップするだけで1番目のマーカーとしてアクティブ化させます。</string>
     <string name="one_tap_active">ワンタップアクティブ</string>
     <string name="empty_state_av_notes">場所に関するメモをつけよう！</string>
-    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから、音声、動画、写真を使った注釈をマップ上のどの場所にでもつけることができます。</string>
+    <string name="empty_state_av_notes_desc">ウィジェットやコンテキストメニューから、音声、動画、写真を使ったメモなどの注釈をマップ上のどの場所にでもつけることができます。</string>
     <string name="by_date">日付別</string>
     <string name="by_type">種類別</string>
     <string name="digits_quantity">小数点以下の桁数</string>
@@ -2774,8 +2774,8 @@ POIの更新は利用できません</string>
     <string name="shared_string_total">トータル</string>
     <string name="group_deleted">グループを削除しました</string>
     <string name="rendering_attr_whiteWaterSports_name">リバースポーツ(川遊び、リバーアクティビティ)</string>
-    <string name="distance_farthest">距離:最も遠い</string>
-    <string name="distance_nearest">距離:最も近い</string>
+    <string name="distance_farthest">距離:遠い順</string>
+    <string name="distance_nearest">距離:近い順</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
@@ -2942,7 +2942,7 @@ POIの更新は利用できません</string>
     <string name="osm_live_payment_annual_title">年間</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
-    <string name="osm_live_payment_discount_descr">保存 %1$s.</string>
+    <string name="osm_live_payment_discount_descr">%1$s割引</string>
     <string name="osm_live_payment_current_subscription">現在のサブスクリプション契約</string>
     <string name="osm_live_payment_renews_monthly">毎月更新</string>
     <string name="osm_live_payment_renews_quarterly">四半期(3ヶ月)ごとに更新</string>
@@ -2964,4 +2964,13 @@ POIの更新は利用できません</string>
     <string name="route_steepness_stat_container">勾配</string>
     <string name="run_full_osmand_msg">あなたは今 OsmAndで動くマップを使用しています。{0} OsmAndのフルバージョンを起動しますか？</string>
     <string name="run_full_osmand_header">OsmAndを起動しますか？</string>
+    <string name="add_intermediate">経由地点を追加する</string>
+    <string name="rendering_attr_surface_paved_name">舗装有り</string>
+    <string name="rendering_attr_highway_class_state_road_name">国道</string>
+    <string name="rendering_attr_highway_class_road_name">その他道路</string>
+    <string name="rendering_attr_highway_class_service_name">アクセス道路、特定施設用道路</string>
+    <string name="rendering_attr_undefined_name">OSMに情報なし</string>
+    <string name="step_by_step">道順</string>
+    <string name="add_work">職場の追加</string>
+    <string name="work_button">職場</string>
 </resources>
