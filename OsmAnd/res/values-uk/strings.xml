@@ -657,7 +657,7 @@
     <string name="context_menu_item_update_map">Оновити мапу</string>
     <string name="context_menu_item_create_poi">Додати POI</string>
     <string name="shared_string_yes">Так</string>
-    <string name="shared_string_cancel">Скасувати</string>
+    <string name="shared_string_cancel">Відміна</string>
     <string name="shared_string_apply">Застосувати</string>
     <string name="shared_string_add">Додати</string>
     <string name="shared_string_no">Ні</string>
@@ -1218,7 +1218,7 @@
     <string name="keep_and_add_destination_point">Додати наступним пунктом призначення</string>
     <string name="select_gpx">Виберіть GPX…</string>
     <string name="route_descr_select_destination">Виберіть пункт призначення</string>
-    <string name="shared_string_select_on_map">Виберіть на мапі</string>
+    <string name="shared_string_select_on_map">Вибрати на мапі</string>
     <string name="shared_string_favorite">Закладки</string>
     <string name="route_preferences">Уподобання маршруту</string>
     <string name="route_info">Інформація про маршрут</string>
@@ -1325,7 +1325,7 @@
     <string name="confirm_every_run">Завжди питати</string>
     <string name="save_global_track_interval_descr">Виберіть інтервал для запису треку (включається через віджет запису GPX на мапі).</string>
     <string name="save_global_track_interval">Загальний інтервал запису треку</string>
-    <string name="home_button">До початку</string>
+    <string name="home_button">Дім</string>
     <string name="map_update">Наявні оновлення для %1$s мап</string>
     <string name="search_for">Шукати</string>
     <string name="shared_string_show_all">Показати усе</string>
@@ -1377,7 +1377,7 @@
     <string name="rendering_attr_pisteGrooming_name">Тип лижні</string>
     <string name="routing_attr_no_new_routing_name">Не використовувати маршрутизацію версії 1.9</string>
     <string name="navigate_point_northing">Північної широти</string>
-    <string name="shared_string_dismiss">Не надсилати</string>
+    <string name="shared_string_dismiss">Скасувати</string>
     <string name="shared_string_audio">Аудіо</string>
     <string name="share_note">Поділитись нотаткою</string>
     <string name="notes">Нотатки</string>
