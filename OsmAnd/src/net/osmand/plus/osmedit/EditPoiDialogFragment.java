@@ -48,6 +48,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Map.Entry;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -107,6 +108,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private OpenstreetmapUtil mOpenstreetmapUtil;
 	private TextInputLayout poiTypeTextInputLayout;
 	private View view;
+
+	public static final int AMENITY_TEXT_LENGTH= 255;
 
 	@Override
 	public void onAttach(Context activity) {
@@ -438,9 +441,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private String isTextLengthInRange() {
-		for (String s: editPoiData.getChangedTags()) {
-			if (editPoiData.getTag(s).length() > 255) {
-				return s;
+		for (Entry<String, String> s: editPoiData.getTagValues().entrySet()) {
+			if (s.getValue().length() > AMENITY_TEXT_LENGTH) {
+				return s.getKey();
 			}
 		}
 		return "";
