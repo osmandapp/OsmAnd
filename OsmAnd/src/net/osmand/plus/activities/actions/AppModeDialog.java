@@ -86,12 +86,12 @@ public class AppModeDialog {
 			final boolean checked = selected.contains(mode);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
 			if (checked) {
-				iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), nightMode ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
+				iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), nightMode ? R.color.active_buttons_and_links_dark : R.color.route_info_checked_mode_icon_color_light));
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
 				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
 			} else {
 				if (useMapTheme) {
-					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), R.color.route_info_unchecked_mode_icon_color));
+					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), R.color.description_font_and_bottom_sheet_icons));
 					iv.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getSmallIconDark()));
@@ -200,7 +200,7 @@ public class AppModeDialog {
 		int metricsY = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		View tb = layoutInflater.inflate(layoutId, null);
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-		iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), isNightMode(ctx, useMapTheme) ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
+		iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), isNightMode(ctx, useMapTheme) ? R.color.active_buttons_and_links_dark : R.color.route_info_checked_mode_icon_color_light));
 		iv.setContentDescription(mode.toHumanString(ctx));
 //		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.app_mode_icon_color), null, null);
 		LayoutParams lp = new LinearLayout.LayoutParams(metricsX, metricsY);

@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -67,32 +66,26 @@ public class SimpleRouteCard extends BaseCard {
 //			infoDistanceView.setVisibility(View.GONE);
 //			infoDurationView.setVisibility(View.GONE);
 //		} else {
-			infoIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_route_distance, R.color.route_info_unchecked_mode_icon_color));
-			infoIcon.setVisibility(View.VISIBLE);
-			durationIcon.setImageDrawable(getColoredIcon(R.drawable.ic_action_time_span, R.color.route_info_unchecked_mode_icon_color));
-			durationIcon.setVisibility(View.VISIBLE);
-			infoDistanceView.setVisibility(View.VISIBLE);
-			infoDurationView.setVisibility(View.VISIBLE);
+		infoIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_route_distance));
+		infoIcon.setVisibility(View.VISIBLE);
+		durationIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_time_span));
+		durationIcon.setVisibility(View.VISIBLE);
+		infoDistanceView.setVisibility(View.VISIBLE);
+		infoDurationView.setVisibility(View.VISIBLE);
 //		}
 //		if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
 //				&& directionInfo < routingHelper.getRouteDirections().size()) {
 //			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
 //		} else {
-			TextView distanceText = (TextView) view.findViewById(R.id.DistanceText);
-			TextView distanceTitle = (TextView) view.findViewById(R.id.DistanceTitle);
-			TextView durationText = (TextView) view.findViewById(R.id.DurationText);
-			TextView durationTitle = (TextView) view.findViewById(R.id.DurationTitle);
+		TextView distanceText = (TextView) view.findViewById(R.id.DistanceText);
+		TextView distanceTitle = (TextView) view.findViewById(R.id.DistanceTitle);
+		TextView durationText = (TextView) view.findViewById(R.id.DurationText);
+		TextView durationTitle = (TextView) view.findViewById(R.id.DurationTitle);
 
-			distanceText.setText(OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app));
+		distanceText.setText(OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app));
+		durationText.setText(OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app));
+		durationTitle.setText(app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(routingHelper.getLeftTime(), true)));
 
-			durationText.setText(OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app));
-			durationTitle.setText(app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(routingHelper.getLeftTime(), true)));
-
-			AndroidUtils.setTextPrimaryColor(app, distanceText, nightMode);
-			AndroidUtils.setTextSecondaryColor(app, distanceTitle, nightMode);
-			AndroidUtils.setTextPrimaryColor(app, durationText, nightMode);
-			AndroidUtils.setTextSecondaryColor(app, durationTitle, nightMode);
-//		}
 		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -103,7 +96,6 @@ public class SimpleRouteCard extends BaseCard {
 			}
 		});
 
-		view.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
 		FrameLayout detailsButton = view.findViewById(R.id.details_button);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
@@ -111,13 +103,6 @@ public class SimpleRouteCard extends BaseCard {
 		} else {
 			AndroidUtils.setBackground(app, view.findViewById(R.id.details_button_descr), nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
-		int color = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.dividerToDropDown), nightMode, R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.info_divider), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.route_info_details_card), nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
-		AndroidUtils.setBackground(app, view.findViewById(R.id.RouteInfoControls), nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
-
-		((TextView) view.findViewById(R.id.details_button_descr)).setTextColor(color);
 
 		buildHeader(view);
 	}

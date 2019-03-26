@@ -17,6 +17,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="?attr/selectableItemBackground"
+			android:textColor="?attr/active_color_basic"
 			android:ellipsize="end"
 			android:gravity="center"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
@@ -33,7 +34,9 @@
 	<View
 		android:id="@+id/controls_divider"
 		android:layout_width="1dp"
-		android:layout_height="match_parent" />
+		android:layout_height="match_parent"
+		android:background="?attr/divider_color_basic"
+		android:visibility="gone"/>
 
 	<FrameLayout
 		android:id="@+id/start_button"

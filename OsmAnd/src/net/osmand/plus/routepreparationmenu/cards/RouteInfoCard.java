@@ -63,11 +63,8 @@ public class RouteInfoCard extends BaseCard {
 
 	private void updateHeader() {
 		TextView title = (TextView) view.findViewById(R.id.info_type_title);
-		TextView details = (TextView) view.findViewById(R.id.info_type_details);
 		String name = getInfoType();
 		title.setText(name);
-		details.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
-		AndroidUtils.setTextPrimaryColor(app, title, nightMode);
 	}
 
 	private String getInfoType() {
@@ -97,7 +94,7 @@ public class RouteInfoCard extends BaseCard {
 			Spannable text = getSpanLegend(name, segment);
 
 			TextView legend = new TextView(app);
-			AndroidUtils.setTextPrimaryColor(app, legend, nightMode);
+			legend.setTextColor(getMainFontColor());
 			legend.setTextSize(15);
 			legend.setGravity(Gravity.CENTER_VERTICAL);
 			legend.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 16));
@@ -137,8 +134,9 @@ public class RouteInfoCard extends BaseCard {
 		title = Algorithms.capitalizeFirstLetter(title);
 		SpannableStringBuilder spannable = new SpannableStringBuilder(title);
 		spannable.append(": ");
-		spannable.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		int startIndex = spannable.length();
 		spannable.append(formattedDistance);
+		spannable.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		return spannable;
 	}

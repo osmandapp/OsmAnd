@@ -23,7 +23,7 @@
 		android:id="@+id/card_content"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/route_info_bg"
+		android:background="?attr/card_and_list_background_basic"
 		android:baselineAligned="false"
 		android:gravity="center_vertical"
 		android:orientation="vertical"
@@ -45,7 +45,7 @@
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:text="@string/previous_route"
 				android:textSize="@dimen/default_desc_text_size"
-				android:textColor="?android:attr/textColorSecondary" />
+				android:textColor="@color/description_font_and_bottom_sheet_icons" />
 
 		</LinearLayout>
 
@@ -69,7 +69,7 @@
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
 				android:src="@drawable/ic_action_previous_route"
-				android:tint="?attr/route_info_control_icon_color" />
+				android:tint="@color/description_font_and_bottom_sheet_icons" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -82,8 +82,7 @@
 					android:id="@+id/start_title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textColor="?android:attr/textColorSecondary"
-					android:ellipsize="end"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"					android:ellipsize="end"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/home_button"
@@ -96,7 +95,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="5dp"
-					android:textColor="?android:attr/textColorPrimary"
+					android:textColor="?attr/main_font_color_basic"
 					android:ellipsize="end"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"

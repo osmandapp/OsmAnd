@@ -240,6 +240,10 @@
         <item name="route_info_bg">@color/route_info_bg_light</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_light</item>
+        <item name="divider_color_basic">@color/divider_light</item>
+        <item name="main_font_color_basic">@color/main_font_light</item>
+        <item name="active_color_basic">@color/active_buttons_and_links_light</item>
+        <item name="card_and_list_background_basic">@color/card_and_list_background_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -466,6 +470,10 @@
         <item name="route_info_bg">@color/route_info_bg_dark</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_dark</item>
+		<item name="divider_color_basic">@color/divider_dark</item>
+		<item name="main_font_color_basic">@color/main_font_dark</item>
+		<item name="active_color_basic">@color/active_buttons_and_links_dark</item>
+		<item name="card_and_list_background_basic">@color/card_and_list_background_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

@@ -1,11 +1,13 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
+import net.osmand.plus.views.DirectionDrawable;
 
 import java.util.List;
 
@@ -71,6 +74,11 @@ public class MapMarkersCard extends BaseCard {
 		List<MapMarker> markers = getMarkers();
 		int i = 0;
 		boolean showLimitExceeds = markers.size() > 4;
+
+		int mainFontColor = getMainFontColor();
+		int descriptionColor = getSecondaryColor();
+		int activeColor = getActiveColor();
+
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
 		for (final MapMarker marker : markers) {
@@ -81,6 +89,16 @@ public class MapMarkersCard extends BaseCard {
 			MapMarkerDialogHelper.updateMapMarkerInfo(ctx, v, loc, heading, useCenter, nightMode, screenOrientation, marker);
 			final View remove = v.findViewById(R.id.info_close);
 			remove.setVisibility(View.GONE);
+
+			((TextView) v.findViewById(R.id.waypoint_dist)).setTextColor(activeColor);
+			((TextView) v.findViewById(R.id.waypoint_text)).setTextColor(mainFontColor);
+			((TextView) v.findViewById(R.id.date_group_text)).setTextColor(descriptionColor);
+
+			ImageView arrow = (ImageView) v.findViewById(R.id.direction);
+			Drawable arrowIcon = arrow.getDrawable();
+			if (arrowIcon instanceof DirectionDrawable) {
+				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			}
 
 			v.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
 			v.setMinimumHeight(minCardHeight);
@@ -97,7 +115,7 @@ public class MapMarkersCard extends BaseCard {
 				LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(ctx, 1f));
 				p.setMargins(listTextPadding, 0, 0, 0);
 				div.setLayoutParams(p);
-				AndroidUtils.setBackgroundColor(ctx, div, nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				AndroidUtils.setBackgroundColor(ctx, div, nightMode, R.color.divider_light, R.color.divider_dark);
 				div.setVisibility(View.VISIBLE);
 				root.addView(div);
 			}

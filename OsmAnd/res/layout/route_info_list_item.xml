@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:background="?attr/bg_color"
+              android:background="?attr/selectableItemBackground"
               android:orientation="vertical">
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/color_distance"
+                android:textColor="?attr/active_color_basic"
                 android:textSize="@dimen/default_sub_text_size"
                 android:textStyle="bold"
                 tools:text="631 m"/>
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/color_distance"
+                android:textColor="?attr/active_color_basic"
                 android:textSize="@dimen/default_sub_text_size"
                 android:textStyle="bold"
                 tools:text="0:50"/>
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/color_distance"
+                android:textColor="?attr/active_color_basic"
                 android:textSize="@dimen/default_sub_text_size"
                 android:textStyle="bold"
                 tools:text="@string/app_version"/>
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="@dimen/default_sub_text_size"
-                android:textColor="@color/color_distance"
+                android:textColor="?attr/active_color_basic"
                 android:textStyle="bold"
                 tools:text="@string/app_version"/>
         </LinearLayout>
@@ -88,6 +88,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="@dimen/default_desc_text_size"
+            android:textColor="?attr/main_font_color_basic"
             tools:text="Head Dmytrivska Street"
             android:text=""/>
 
@@ -97,6 +98,6 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
+        android:background="?attr/divider_color_basic"/>
 
 </LinearLayout>
