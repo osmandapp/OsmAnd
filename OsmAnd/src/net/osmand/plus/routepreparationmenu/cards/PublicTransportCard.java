@@ -22,10 +22,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -98,8 +95,7 @@ public class PublicTransportCard extends BaseCard {
 		} else {
 			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
-		int color = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-		detailsButtonDescr.setTextColor(color);
+		int color = getActiveColor();
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -115,7 +111,7 @@ public class PublicTransportCard extends BaseCard {
 		FrameLayout showButton = (FrameLayout) view.findViewById(R.id.show_button);
 		TextView showButtonDescr = (TextView) view.findViewById(R.id.show_button_descr);
 		if (isCurrentRoute()) {
-			color = ContextCompat.getColor(app, R.color.color_white);
+			color = ContextCompat.getColor(app, R.color.card_and_list_background_light);
 			AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_active_light, R.drawable.btn_active_dark);
 			showButtonDescr.setText(R.string.shared_string_selected);
 			showButton.setOnClickListener(null);
@@ -171,10 +167,8 @@ public class PublicTransportCard extends BaseCard {
 
 		SpannableString firstLineDesc = new SpannableString(firstLine);
 		Typeface typeface = FontCache.getRobotoMedium(app);
-		firstLineDesc.setSpan(new CustomTypefaceSpan(typeface),
-				firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
-		firstLineDesc.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)),
-				firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
+		firstLineDesc.setSpan(new CustomTypefaceSpan(typeface), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
+		firstLineDesc.setSpan(new ForegroundColorSpan(getMainFontColor()), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
 
 		return firstLineDesc;
 	}
@@ -199,17 +193,14 @@ public class PublicTransportCard extends BaseCard {
 
 		SpannableString secondLineDesc = new SpannableString(secondLine);
 
+		int mainFontColor = getMainFontColor();
 		int startTravelTime = secondLine.indexOf(travelTimeStr);
-		secondLineDesc.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)),
-				startTravelTime, startTravelTime + travelTimeStr.length(), 0);
-		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface),
-				startTravelTime, startTravelTime + travelTimeStr.length(), 0);
+		secondLineDesc.setSpan(new ForegroundColorSpan(mainFontColor), startTravelTime, startTravelTime + travelTimeStr.length(), 0);
+		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface), startTravelTime, startTravelTime + travelTimeStr.length(), 0);
 
 		int startWalkTime = secondLine.lastIndexOf(walkTimeStr);
-		secondLineDesc.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)),
-				startWalkTime, startWalkTime + walkTimeStr.length(), 0);
-		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface),
-				startWalkTime, startWalkTime + walkTimeStr.length(), 0);
+		secondLineDesc.setSpan(new ForegroundColorSpan(mainFontColor), startWalkTime, startWalkTime + walkTimeStr.length(), 0);
+		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface), startWalkTime, startWalkTime + walkTimeStr.length(), 0);
 
 		return secondLineDesc;
 	}
@@ -317,16 +308,16 @@ public class PublicTransportCard extends BaseCard {
 
 	private View createWalkRouteBadge(double walkTime, @Nullable final LatLon start, @Nullable final LatLon end) {
 		LinearLayout bageView = (LinearLayout) getMapActivity().getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
-		int bgColor = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		int activeColor = getActiveColor();
 
 		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
 		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
 
-		transportStopRouteImageView.setImageDrawable(getColoredIcon(R.drawable.ic_action_pedestrian_dark, nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light));
+		transportStopRouteImageView.setImageDrawable(getActiveIcon(R.drawable.ic_action_pedestrian_dark));
 		transportStopRouteTextView.setText(OsmAndFormatter.getFormattedDuration((int) walkTime, app));
 		GradientDrawable gradientDrawableBg = (GradientDrawable) bageView.getBackground();
-		gradientDrawableBg.setColor(bgColor);
-		transportStopRouteTextView.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light));
+		gradientDrawableBg.setColor(activeColor);
+		transportStopRouteTextView.setTextColor(activeColor);
 
 		AndroidUtils.setBackground(app, bageView, nightMode, R.drawable.btn_border_active_light, R.drawable.btn_border_active_dark);
 

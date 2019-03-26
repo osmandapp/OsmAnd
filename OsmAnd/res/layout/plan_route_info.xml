@@ -136,6 +136,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:layout_marginBottom="3dp"
 							android:text="@string/route_from"
+							android:textColor="@color/description_font_and_bottom_sheet_icons"
 							android:textSize="@dimen/default_sub_text_size" />
 
 						<TextView
@@ -146,7 +147,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?android:textColorPrimary"
+							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="My position" />
 
@@ -182,10 +183,10 @@
 								android:letterSpacing="@dimen/text_button_letter_spacing"
 								android:maxLines="1"
 								android:text="@string/shared_string_swap"
+								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
 								osmand:typeface="@string/font_roboto_medium"
-								tools:ignore="UnusedAttribute"
-								tools:textColor="?attr/wikivoyage_active_color" />
+								tools:ignore="UnusedAttribute" />
 
 							<ImageView
 								android:id="@+id/from_button_image_view"
@@ -211,7 +212,7 @@
 					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
 					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
 					android:layout_marginRight="@dimen/route_info_end_divider_margin"
-					android:background="@color/dashboard_divider_dark"
+					android:background="?attr/divider_color_basic"
 					android:focusable="false" />
 
 				<LinearLayout
@@ -251,6 +252,7 @@
 							android:gravity="left"
 							android:singleLine="true"
 							android:text="@string/intermediate_destinations"
+							android:textColor="@color/description_font_and_bottom_sheet_icons"
 							android:textSize="@dimen/default_sub_text_size" />
 
 						<TextView
@@ -261,7 +263,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?android:textColorPrimary"
+							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Intermediate point"/>
 
@@ -297,10 +299,10 @@
 								android:letterSpacing="@dimen/text_button_letter_spacing"
 								android:maxLines="1"
 								android:text="@string/shared_string_edit"
+								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
 								osmand:typeface="@string/font_roboto_medium"
-								tools:ignore="UnusedAttribute"
-								tools:textColor="?attr/wikivoyage_active_color" />
+								tools:ignore="UnusedAttribute" />
 
 							<ImageView
 								android:id="@+id/via_button_image_view"
@@ -326,7 +328,7 @@
 					android:layout_marginLeft="@dimen/route_info_start_divider_margin"
 					android:layout_marginEnd="@dimen/route_info_end_divider_margin"
 					android:layout_marginRight="@dimen/route_info_end_divider_margin"
-					android:background="@color/dashboard_divider_dark"
+					android:background="?attr/divider_color_basic"
 					android:focusable="false" />
 
 				<LinearLayout
@@ -363,6 +365,7 @@
 							android:layout_marginTop="5dp"
 							android:layout_marginBottom="3dp"
 							android:text="@string/route_to"
+							android:textColor="@color/description_font_and_bottom_sheet_icons"
 							android:textSize="@dimen/default_sub_text_size" />
 
 						<TextView
@@ -373,7 +376,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?android:textColorPrimary"
+							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Destination"/>
 
@@ -409,10 +412,10 @@
 								android:letterSpacing="@dimen/text_button_letter_spacing"
 								android:maxLines="1"
 								android:text="@string/shared_string_add"
+								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
 								osmand:typeface="@string/font_roboto_medium"
-								tools:ignore="UnusedAttribute"
-								tools:textColor="?attr/wikivoyage_active_color" />
+								tools:ignore="UnusedAttribute" />
 
 							<ImageView
 								android:id="@+id/to_button_image_view"
@@ -437,8 +440,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
 				android:layout_gravity="bottom"
-				android:focusable="false"
-				tools:background="@color/dashboard_divider_dark" />
+				android:background="?attr/divider_color_basic"
+				android:focusable="false" />
 
 			<FrameLayout
 				android:id="@+id/map_route_options"
@@ -487,10 +490,10 @@
 						android:letterSpacing="@dimen/text_button_letter_spacing"
 						android:maxLines="1"
 						android:text="@string/shared_string_options"
+						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/text_button_text_size"
 						osmand:typeface="@string/font_roboto_medium"
-						tools:ignore="UnusedAttribute"
-						tools:textColor="?attr/wikivoyage_active_color" />
+						tools:ignore="UnusedAttribute" />
 
 					<ImageView
 						android:id="@+id/map_options_route_button_icon"

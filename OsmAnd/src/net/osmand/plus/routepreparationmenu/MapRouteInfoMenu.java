@@ -783,7 +783,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 
 		View ll = mapActivity.getLayoutInflater().inflate(R.layout.mode_toggles, vg);
-		ll.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.route_info_bg_dark : R.color.route_info_bg_light));
+		ll.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
 
 		HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
 		scrollView.setVerticalScrollBarEnabled(false);
@@ -844,7 +844,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			Drawable icon = app.getUIUtilities().getIcon(iconId, color);
 			startButtonText.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 		} else {
-			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.route_info_cancel_button_color_dark);
+			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
 			int color = R.color.description_font_and_bottom_sheet_icons;
 			startButtonText.setTextColor(ContextCompat.getColor(app, color));
 			Drawable icon = app.getUIUtilities().getIcon(iconId, color);

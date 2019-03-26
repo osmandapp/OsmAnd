@@ -12,7 +12,7 @@
 		android:layout_height="1dp"
 		android:layout_marginStart="@dimen/route_info_list_text_padding"
 		android:layout_marginLeft="@dimen/route_info_list_text_padding"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color_basic"
 		android:visibility="gone" />
 
 	<LinearLayout
@@ -47,7 +47,7 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:maxLines="1"
-				android:textColor="?android:textColorPrimary"
+				android:textColor="?attr/main_font_color_basic"
 				android:textSize="@dimen/default_list_text_size"
 				tools:text="Amsterdam" />
 
@@ -72,7 +72,7 @@
 					android:layout_height="wrap_content"
 					android:ellipsize="end"
 					android:maxLines="1"
-					android:textColor="?android:textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_desc_text_size"
 					tools:text="City" />
 

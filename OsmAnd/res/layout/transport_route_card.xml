@@ -20,14 +20,14 @@
 		android:id="@+id/top_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"
+		android:background="?attr/divider_color_basic"
 		android:focusable="false" />
 
 	<LinearLayout
 		android:id="@+id/routes_info_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="?attr/route_info_bg"
+		android:background="?attr/card_and_list_background_basic"
 		android:orientation="vertical"
 		android:paddingLeft="@dimen/route_info_buttons_padding_top_bottom"
 		android:paddingTop="@dimen/content_padding"
@@ -51,7 +51,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:paddingBottom="6dp"
-				android:textColor="?android:attr/textColorSecondary"
+				android:textColor="@color/description_font_and_bottom_sheet_icons"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="@string/route_from" />
@@ -60,7 +60,7 @@
 				android:id="@+id/way_line"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="?android:attr/textColorSecondary"
+				android:textColor="@color/description_font_and_bottom_sheet_icons"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="@string/route_from" />
@@ -92,10 +92,10 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/rendering_category_details"
+					android:textColor="?attr/active_color_basic"
 					android:textSize="@dimen/text_button_text_size"
 					osmand:typeface="@string/font_roboto_medium"
-					tools:ignore="UnusedAttribute"
-					tools:textColor="?attr/wikivoyage_active_color" />
+					tools:ignore="UnusedAttribute" />
 
 			</FrameLayout>
 
@@ -119,10 +119,10 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/shared_string_show_on_map"
+					android:textColor="?attr/active_color_basic"
 					android:textSize="@dimen/text_button_text_size"
 					osmand:typeface="@string/font_roboto_medium"
-					tools:ignore="UnusedAttribute"
-					tools:textColor="?attr/wikivoyage_active_color" />
+					tools:ignore="UnusedAttribute" />
 
 			</FrameLayout>
 

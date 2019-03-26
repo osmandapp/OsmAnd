@@ -6,7 +6,7 @@
     <item>
         <shape>
             <solid
-                android:color="@color/route_info_bg_light" />
+                android:color="@color/card_and_list_background_light" />
         </shape>
     </item>
 </layer-list>

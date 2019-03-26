@@ -3,16 +3,17 @@ package net.osmand.plus.routepreparationmenu;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -225,7 +226,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			} else {
 				layoutParams.setMargins(0, 0, 0, 0);
 				cardsContainer.setBackgroundDrawable(null);
-				AndroidUtils.setBackground(mainView.getContext(), mainView, isNightMode(), R.drawable.bg_map_context_menu_light, R.drawable.bg_map_context_menu_dark);
+				AndroidUtils.setBackground(mainView.getContext(), mainView, isNightMode(), R.drawable.bg_map_route_menu_light, R.drawable.bg_map_route_menu_dark);
 			}
 			cardsContainer.setLayoutParams(layoutParams);
 		}
@@ -255,7 +256,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				mainView.setBackgroundDrawable(null);
 			} else {
 				cardsContainer.setBackgroundDrawable(null);
-				AndroidUtils.setBackground(mainView.getContext(),mainView, isNightMode(), R.drawable.bg_map_context_menu_light, R.drawable.bg_map_context_menu_dark);
+				AndroidUtils.setBackground(mainView.getContext(),mainView, isNightMode(), R.drawable.bg_map_route_menu_light, R.drawable.bg_map_route_menu_dark);
 			}
 		}
 	}
@@ -299,7 +300,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private void createRouteDirections(LinearLayout cardsContainer) {
 		OsmandApplication app = requireMyApplication();
 		TextViewEx routeDirectionsTitle = new TextViewEx(app);
-		AndroidUtils.setTextPrimaryColor(app, routeDirectionsTitle, isNightMode());
+		routeDirectionsTitle.setTextColor(getMainFontColor());
 		routeDirectionsTitle.setTextSize(15);
 		routeDirectionsTitle.setGravity(Gravity.CENTER_VERTICAL);
 		routeDirectionsTitle.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
@@ -311,7 +312,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		for (int i = 0; i < routeDirections.size(); i++) {
 			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
 			OnClickListener onClickListener = createRouteDirectionInfoViewClickListener(i, routeDirectionInfo);
-			View view = getRouteDirectionView(i, cardsContainer, routeDirectionInfo, routeDirections, onClickListener);
+			View view = getRouteDirectionView(i, routeDirectionInfo, routeDirections, onClickListener);
 			cardsContainer.addView(view);
 		}
 	}
@@ -398,8 +399,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	public Drawable getCollapseIcon(boolean collapsed) {
 		OsmandApplication app = requireMyApplication();
-		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up,
-				!isNightMode() ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
+		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.description_font_and_bottom_sheet_icons);
 	}
 
 	private void buildSegmentItem(View view, final TransportRouteResultSegment segment,
@@ -433,7 +433,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
 		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
-		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		SpannableString title = new SpannableString(startStop.getName(getPreferredMapLang(), isTransliterateNames()));
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -463,7 +463,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (arrivalTime > 0) {
 			spannable.append("~");
 			startIndex = spannable.length();
-			spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			spannable.append(OsmAndFormatter.getFormattedDuration(arrivalTime, app));
 			spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		} else {
@@ -474,7 +474,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			if (spannable.length() > 0) {
 				startIndex = spannable.length();
 				spannable.append(" • ");
-				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			startIndex = spannable.length();
 			spannable.append(String.valueOf(stops.size())).append(" ").append(getString(R.string.transport_stops));
@@ -483,7 +483,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (spannable.length() > 0) {
 			startIndex = spannable.length();
 			spannable.append(" • ");
-			spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -505,7 +505,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int spaceIndex = secondaryText.toString().indexOf(" ");
 		if (spaceIndex != -1) {
-			secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		title = new SpannableString(endStop.getName(getPreferredMapLang(), isTransliterateNames()));
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -528,13 +528,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 					walkTime = 60;
 				}
 				spannable = new SpannableStringBuilder("~");
-				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				startIndex = spannable.length();
 				spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
 				spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				startIndex = spannable.length();
 				spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
-				spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 				buildRowDivider(view, true);
 				buildWalkRow(view, spannable, null, new OnClickListener() {
@@ -629,13 +629,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 		startTime[0] += walkTime;
 		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.shared_string_walk)));
-		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
 		title.append(" ").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
 		title.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = title.length();
 		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
-		title.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, title, imagesContainer, new OnClickListener() {
 			@Override
@@ -713,13 +713,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			walkTime = 60;
 		}
 		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
-		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = spannable.length();
 		spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = spannable.length();
 		spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
-		spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.secondary_text_dark : R.color.secondary_text_light)), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, spannable, imagesContainer, new OnClickListener() {
 			@Override
@@ -738,7 +738,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 		SpannableString secondaryText = new SpannableString(getString(R.string.route_descr_destination));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		secondaryText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, isNightMode() ? R.color.primary_text_dark : R.color.primary_text_light)), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, imagesContainer, new OnClickListener() {
 			@Override
@@ -750,9 +750,22 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		((ViewGroup) view).addView(baseItemView);
 	}
 
+	@ColorInt
 	private int getActiveColor() {
 		OsmandApplication app = requireMyApplication();
-		return ContextCompat.getColor(app, !isNightMode() ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		return ContextCompat.getColor(app, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+	}
+
+	@ColorInt
+	protected int getMainFontColor() {
+		OsmandApplication app = requireMyApplication();
+		return ContextCompat.getColor(app, isNightMode() ? R.color.main_font_dark : R.color.main_font_light);
+	}
+
+	@ColorInt
+	protected int getSecondaryColor() {
+		OsmandApplication app = requireMyApplication();
+		return ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
 	}
 
 	public void buildCollapsableRow(@NonNull View view, final Spannable title, Spannable secondaryText, boolean collapsable,
@@ -892,7 +905,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			timeView.setLayoutParams(timeViewParams);
 			timeView.setPadding(0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
-			AndroidUtils.setTextPrimaryColor(app, timeView, isNightMode());
+			timeView.setTextColor(getMainFontColor());
 
 			timeView.setText(timeText);
 			baseItemView.addView(timeView);
@@ -942,7 +955,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		routeTypeParams.setMargins(0, dpToPx(4), 0, 0);
 		routeTypeView.setLayoutParams(routeTypeParams);
 		routeTypeView.setTextSize(16);
-		AndroidUtils.setTextSecondaryColor(app, routeTypeView, isNightMode());
+		routeTypeView.setTextColor(getSecondaryColor());
 		routeTypeView.setText(routeDescription);
 		llText.addView(routeTypeView);
 
@@ -1012,7 +1025,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			timeView.setLayoutParams(timeViewParams);
 			timeView.setPadding(0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
-			AndroidUtils.setTextPrimaryColor(app, timeView, isNightMode());
+			timeView.setTextColor(getMainFontColor());
 
 			timeView.setText(timeText);
 			baseItemView.addView(timeView);
@@ -1065,7 +1078,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		});
 		baseView.addView(ll);
 
-		Drawable icon = getIcon(R.drawable.ic_action_pedestrian_dark, !isNightMode() ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_pedestrian_dark, getActiveColor());
 		ImageView iconView = new ImageView(view.getContext());
 		iconView.setImageDrawable(icon);
 		FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(24), dpToPx(24));
@@ -1141,7 +1154,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			timeView.setLayoutParams(timeViewParams);
 			timeView.setPadding(0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
-			AndroidUtils.setTextPrimaryColor(app, timeView, isNightMode());
+			timeView.setTextColor(getMainFontColor());
 
 			timeView.setText(timeText);
 			baseItemView.addView(timeView);
@@ -1215,7 +1228,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			timeView.setLayoutParams(timeViewParams);
 			timeView.setPadding(0, 0, dpToPx(16), 0);
 			timeView.setTextSize(16);
-			AndroidUtils.setTextPrimaryColor(app, timeView, isNightMode());
+			timeView.setTextColor(getMainFontColor());
 
 			timeView.setText(timeText);
 			baseItemView.addView(timeView);
@@ -1310,7 +1323,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		titleView.setTypeface(FontCache.getRobotoRegular(container.getContext()));
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
-		AndroidUtils.setTextPrimaryColor(app, titleView, isNightMode());
+		titleView.setTextColor(getMainFontColor());
 
 		titleView.setText(title);
 		container.addView(titleView);
@@ -1324,7 +1337,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		textViewDescription.setLayoutParams(descriptionParams);
 		textViewDescription.setTypeface(FontCache.getRobotoRegular(container.getContext()));
 		textViewDescription.setTextSize(14);
-		AndroidUtils.setTextSecondaryColor(app, textViewDescription, isNightMode());
+		textViewDescription.setTextColor(getSecondaryColor());
 		textViewDescription.setText(description);
 		container.addView(textViewDescription);
 	}
@@ -1415,7 +1428,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			llHorLineParams.setMargins(dpToPx(64), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(app.getResources().getColor(!isNightMode() ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
+		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_dark : R.color.divider_light));
 		((LinearLayout) view).addView(horizontalLine);
 	}
 
@@ -1563,14 +1576,14 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
-	public View getRouteDirectionView(int position, ViewGroup parent, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo, OnClickListener onClickListener) {
+	public View getRouteDirectionView(int position, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return null;
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
-		View row = mapActivity.getLayoutInflater().inflate(R.layout.route_info_list_item, parent, false);
-		row.setBackgroundResource(AndroidUtils.resolveAttribute(mapActivity, android.R.attr.selectableItemBackground));
+		ContextThemeWrapper context = new ContextThemeWrapper(mapActivity, isNightMode() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
+		View row = LayoutInflater.from(context).inflate(R.layout.route_info_list_item, null);
 
 		TextView label = (TextView) row.findViewById(R.id.description);
 		TextView distanceLabel = (TextView) row.findViewById(R.id.distance);
@@ -1581,12 +1594,11 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		row.findViewById(R.id.divider).setVisibility(position == directionsInfo.size() - 1 ? View.INVISIBLE : View.VISIBLE);
 
 		TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources(), true);
-		drawable.setColorFilter(new PorterDuffColorFilter(!isNightMode() ? getResources().getColor(R.color.icon_color) : Color.WHITE, PorterDuff.Mode.SRC_ATOP));
+		drawable.setColorFilter(new PorterDuffColorFilter(getActiveColor(), PorterDuff.Mode.SRC_ATOP));
 		drawable.setRouteType(model.getTurnType());
 		icon.setImageDrawable(drawable);
 
 		label.setText(model.getDescriptionRoutePart());
-		AndroidUtils.setTextPrimaryColor(app, label, isNightMode());
 		if (model.distance > 0) {
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, app));
 			timeLabel.setText(getTimeDescription(app, model));

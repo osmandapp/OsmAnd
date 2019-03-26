@@ -1,10 +1,13 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -205,6 +208,9 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			});
 			final AutoCompleteTextView valueEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
+			valueEditText.setFilters(new InputFilter[] {
+				new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
+			});
 			tagEditText.setText(tg);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
