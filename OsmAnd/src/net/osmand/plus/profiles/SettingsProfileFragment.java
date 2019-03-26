@@ -11,11 +11,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
+import net.sf.junidecode.App;
 import org.apache.commons.logging.Log;
 
 public class SettingsProfileFragment extends BaseOsmAndFragment {
@@ -26,8 +30,10 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	private RecyclerView recyclerView;
 	private LinearLayout btn;
 
+	ProfileListener listener = null;
+
 	private List<ApplicationMode> allDefaultModes;
-	private List<ApplicationMode> selectedDefaultModes;
+	private Set<ApplicationMode> selectedDefaultModes;
 	private List<ProfileItem> profilesList;
 
 	@Override
@@ -36,7 +42,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		profilesList = new ArrayList<>();
 		allDefaultModes = ApplicationMode.allPossibleValues();
 		allDefaultModes.remove(ApplicationMode.DEFAULT);
-		selectedDefaultModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
+		selectedDefaultModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		selectedDefaultModes.remove(ApplicationMode.DEFAULT);
 		for (ApplicationMode am : allDefaultModes) {
 			ProfileItem profileItem = new ProfileItem(
@@ -66,7 +72,37 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 				//todo add new profile;
 			}
 		});
-		adapter = new ProfileMenuAdapter(profilesList, getMyApplication());
+		listener = new ProfileListener() {
+			@Override
+			public void changeProfileStatus(ProfileItem item, boolean isSelected) {
+				LOG.debug(item.getTitle() + " - " + isSelected);
+				StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
+				ApplicationMode mode = null;
+				for (ApplicationMode sam : allDefaultModes) {
+					if (sam.toHumanString(getContext()).equals(item.getTitle())) {
+						mode = sam;
+					}
+				}
+
+				if(isSelected && mode != null) {
+					selectedDefaultModes.add(mode);
+				} else if (mode != null) {
+					selectedDefaultModes.remove(mode);
+				}
+
+				for (ApplicationMode sam : selectedDefaultModes) {
+					vls.append(sam.getStringKey()).append(",");
+				}
+				getSettings().AVAILABLE_APP_MODES.set(vls.toString());
+
+			}
+
+			@Override
+			public void editProfile(ProfileItem item) {
+
+			}
+		};
+		adapter = new ProfileMenuAdapter(profilesList, getMyApplication(), listener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
 

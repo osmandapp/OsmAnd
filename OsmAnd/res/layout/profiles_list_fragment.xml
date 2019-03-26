@@ -26,7 +26,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/top_divider"
-    android:clipToPadding="false"/>
+    android:clipToPadding="false"
+    android:paddingBottom="72dp"/>
 
   <LinearLayout
     android:id="@+id/add_profile_btn"

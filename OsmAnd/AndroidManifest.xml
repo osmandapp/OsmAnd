@@ -91,6 +91,7 @@
     android:restoreAnyVersion="true"
     android:theme="@style/OsmandDarkTheme">
 
+
     <meta-data
       android:name="com.google.android.backup.api_key"
       android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A"/>
@@ -1060,12 +1061,10 @@
     <receiver android:name=".liveupdates.LiveUpdatesAlarmReceiver"/>
 
     <activity
+      android:configChanges="keyboardHidden|orientation"
       android:label="Application profiles"
-      android:name=".profiles.SettingsProfileActivity"
-      android:configChanges="keyboardHidden|orientation">
-
+      android:name=".profiles.SettingsProfileActivity">
     </activity>
-
   </application>
 
 </manifest>

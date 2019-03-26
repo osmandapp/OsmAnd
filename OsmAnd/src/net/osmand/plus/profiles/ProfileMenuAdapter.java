@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
@@ -20,10 +21,13 @@ import net.osmand.plus.profiles.SettingsProfileFragment.ProfileItem;
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
 	private List<ProfileItem> items;
+	private ProfileListener listener = null;
 	OsmandApplication app;
 
-	public ProfileMenuAdapter(List<ProfileItem> items, OsmandApplication app) {
+
+	public ProfileMenuAdapter(List<ProfileItem> items, OsmandApplication app, ProfileListener listener) {
 		this.items = items;
+		this.listener = listener;
 		this.app = app;
 	}
 
@@ -36,6 +40,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		notifyDataSetChanged();
 	}
 
+	public void updateItemsList(List<ProfileItem> newList) {
+		items.clear();
+		items.addAll(newList);
+		notifyDataSetChanged();
+	}
+
 	@NonNull
 	@Override
 	public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,8 +55,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull ProfileViewHolder holder, int position) {
-		ProfileItem item = items.get(position);
+	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
+		final ProfileItem item = items.get(position);
 		holder.title.setText(item.getTitle());
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app) ? R.color.main_font_dark : R.color.main_font_light));
 		holder.descr.setText(String.format("Type: %s", item.getDescr()));
@@ -57,13 +67,14 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		holder.aSwitch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//todo change profile state;
+				listener.changeProfileStatus(item, holder.aSwitch.isChecked());
+				PlatformUtil.getLog(ProfileMenuAdapter.class).debug("Is checked: " + holder.aSwitch.isChecked());
 			}
 		});
 		holder.profileOptions.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//todo open profile settings;
+				listener.editProfile(item);
 			}
 		});
 	}
@@ -91,4 +102,10 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			profileOptions = itemView.findViewById(R.id.profile_settings);
 		}
 	}
+
+	public interface ProfileListener {
+		void changeProfileStatus(ProfileItem item, boolean isSelected);
+		void editProfile(ProfileItem item);
+	}
 }
+

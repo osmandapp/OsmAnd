@@ -14,6 +14,7 @@ import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
@@ -22,6 +23,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.profiles.SettingsProfileFragment;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
