@@ -42,49 +42,5 @@ public class SettingsProfileActivity extends OsmandActionBarActivity {
 		super.onResume();
 	}
 
-	public class ProfileItem {
-		private int iconRes;
-		private String title;
-		private String descr;
-		private boolean state;
 
-		public ProfileItem(int iconRes, String title, String descr, boolean state) {
-			this.iconRes = iconRes;
-			this.title = title;
-			this.descr = descr;
-			this.state = state;
-		}
-
-		public int getIconRes() {
-			return iconRes;
-		}
-
-		public void setIconRes(int iconRes) {
-			this.iconRes = iconRes;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle(String title) {
-			this.title = title;
-		}
-
-		public String getDescr() {
-			return descr;
-		}
-
-		public void setDescr(String descr) {
-			this.descr = descr;
-		}
-
-		public boolean getState() {
-			return state;
-		}
-
-		public void setState(boolean state) {
-			this.state = state;
-		}
-	}
 }

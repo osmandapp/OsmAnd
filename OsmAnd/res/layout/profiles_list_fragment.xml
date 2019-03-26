@@ -28,18 +28,37 @@
     android:layout_below="@id/top_divider"
     android:clipToPadding="false"/>
 
-  <android.support.v7.widget.AppCompatButton
+  <LinearLayout
     android:id="@+id/add_profile_btn"
     android:layout_width="wrap_content"
-    android:layout_height="48dp"
+    android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_gravity="bottom|center_horizontal"
     android:background="@drawable/fab_extended_drawable"
-    android:drawableLeft="@drawable/ic_action_plus"
-    android:drawableStart="@drawable/ic_action_plus"
-    android:text="@string/shared_string_add"
-    android:layout_margin="16dp"
-    android:textColor="@color/color_white"/>
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <android.support.v7.widget.AppCompatImageView
+      android:layout_gravity="center_vertical"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_marginLeft="14dp"
+      android:layout_marginStart="14dp"
+      android:src="@drawable/ic_action_plus"/>
+
+    <android.support.v7.widget.AppCompatTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/shared_string_add"
+      android:textColor="@color/color_white"
+      android:layout_marginRight="20dp"
+      android:layout_marginEnd="20dp"
+      />
+
+  </LinearLayout>
 
 </RelativeLayout>

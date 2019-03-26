@@ -14,7 +14,8 @@ import java.util.List;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
-import net.osmand.plus.profiles.SettingsProfileActivity.ProfileItem;
+import net.osmand.plus.profiles.SettingsProfileFragment.ProfileItem;
+
 
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
@@ -47,10 +48,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	public void onBindViewHolder(@NonNull ProfileViewHolder holder, int position) {
 		ProfileItem item = items.get(position);
 		holder.title.setText(item.getTitle());
-		holder.descr.setText(item.getDescr());
+		holder.title.setTextColor(app.getResources().getColor(isNightMode(app) ? R.color.main_font_dark : R.color.main_font_light));
+		holder.descr.setText(String.format("Type: %s", item.getDescr()));
 		Drawable drawable = app.getUIUtilities().getThemedIcon(item.getIconRes());
 		holder.icon.setImageDrawable(drawable);
-		holder.aSwitch.setChecked(item.getState());
+		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getIconRes(), isNightMode(app) ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		holder.aSwitch.setChecked(item.isSelected());
 		holder.aSwitch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -68,6 +71,10 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	@Override
 	public int getItemCount() {
 		return items.size();
+	}
+
+	private static boolean isNightMode(OsmandApplication ctx) {
+		return !ctx.getSettings().isLightContent();
 	}
 
 	class ProfileViewHolder extends RecyclerView.ViewHolder {
