@@ -327,4 +327,9 @@
 
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 	<dimen name="text_button_line_spacing_multiplier" format="float">1.2</dimen>
+
+	<dimen name="setting_profile_item_height">64dp</dimen>
+	<dimen name="setting_profile_image_margin">20dp</dimen>
+	<dimen name="setting_profile_item_switch_margin">18dp</dimen>
+
 </resources>

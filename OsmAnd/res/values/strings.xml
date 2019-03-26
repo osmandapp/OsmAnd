@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-<!--
-	README:
-	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
-	- If you edit a strings.xml file directly, please make sure:
-	   1. To not produce duplicate strings (check by name if a string already exists)
-	   2. Every apostrophe (quote) is preceded by a backslash.
-	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
-	Thx - Hardy
+    <!--
+    README:
+    - The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
+    - If you edit a strings.xml file directly, please make sure:
+       1. To not produce duplicate strings (check by name if a string already exists)
+       2. Every apostrophe (quote) is preceded by a backslash.
+       3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
+    - For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
+    Thx - Hardy
 
--->
+  -->
+    <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
+    <string name="application_profiles">Application profiles</string>
     <string name="shared_string_degrees">Degrees</string>
     <string name="shared_string_milliradians">Milliradians</string>
     <string name="angular_measeurement">Angular measurement units</string>
@@ -133,7 +135,7 @@
     <string name="osm_live_payment_month_cost_descr">%1$s / month</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / month</string>
     <string name="osm_live_payment_discount_descr">Save %1$s.</string>
-	<string name="osm_live_payment_current_subscription">Current subscription</string>
+    <string name="osm_live_payment_current_subscription">Current subscription</string>
     <string name="osm_live_payment_renews_monthly">Renews monthly</string>
     <string name="osm_live_payment_renews_quarterly">Renews quarterly</string>
     <string name="osm_live_payment_renews_annually">Renews annually</string>
@@ -154,23 +156,23 @@
     <string name="poi_cannot_be_found">Node or way cannot be found.</string>
     <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
     <!-- string name="release_3_2_pre">
-    • Fixed crash on startup that occurred on some devices\n\n
-    • New Markers feature: Display already traversed markers\n\n 
-    • Search history now shows previously searched categories\n\n
-    • Fixed crash on startup that occurred with non-latin maps\n\n
-    • Improve rendering speed issues on Android 8.0 devices\n\n
-    • Support for polygon (non-amenity) objects editing\n\n
-    • Measure distance: Add \"Measure\" button to Actions in the context menu\n\n
-    </string -->
+      • Fixed crash on startup that occurred on some devices\n\n
+      • New Markers feature: Display already traversed markers\n\n
+      • Search history now shows previously searched categories\n\n
+      • Fixed crash on startup that occurred with non-latin maps\n\n
+      • Improve rendering speed issues on Android 8.0 devices\n\n
+      • Support for polygon (non-amenity) objects editing\n\n
+      • Measure distance: Add \"Measure\" button to Actions in the context menu\n\n
+      </string -->
     <!-- string name="release_3_1">
-    • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
-    • Map markers: Fix turning on/off groups, ability to hide markers from the map\n\n
-    • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
-    • Improve Wikipedia and Wikivoyage parsing, updated files are already available\n\n
-    • Context menu: Fix transport shields color in the night mode, fix additional menu sizes\n\n
-    • Boat navigation: Support for waterway fairway\n\n
-    • Other bugfixes\n\n
-    </string -->
+      • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
+      • Map markers: Fix turning on/off groups, ability to hide markers from the map\n\n
+      • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
+      • Improve Wikipedia and Wikivoyage parsing, updated files are already available\n\n
+      • Context menu: Fix transport shields color in the night mode, fix additional menu sizes\n\n
+      • Boat navigation: Support for waterway fairway\n\n
+      • Other bugfixes\n\n
+      </string -->
     <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
@@ -215,9 +217,9 @@
     <string name="paid_app">Paid app</string>
     <string name="paid_plugin">Paid plugin</string>
     <string name="travel_card_update_descr">New Wikivoyage data available, update it to enjoy.</string>
-	<string name="travel_card_download_descr">Download Wikivoyage travel guides to view articles about places around the world without a connection to the Internet.</string>
-	<string name="update_is_available">Update available</string>
-	<string name="download_file">Download file</string>
+    <string name="travel_card_download_descr">Download Wikivoyage travel guides to view articles about places around the world without a connection to the Internet.</string>
+    <string name="update_is_available">Update available</string>
+    <string name="download_file">Download file</string>
     <string name="start_editing_card_image_text">The free worldwide travel guide anyone can edit.</string>
     <string name="welcome_to_open_beta_description">Travel guides are currently based on Wikivoyage. Test all features during open beta testing for free. Afterwards, travel guides will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+.</string>
     <string name="start_editing_card_description">You can and should edit any article on Wikivoyage. Share knowledge, experience, talent, and your attention</string>
@@ -277,16 +279,16 @@
     <string name="enter_lon">Enter longitude</string>
     <string name="enter_lat">Enter latitude</string>
     <string name="enter_lat_and_lon">Enter latitude and longitude</string>
-	<string name="dd_mm_ss_format">DD°MM′SS″</string>
-	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="dd_ddddd_format">DD.DDDDD°</string>
-	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
-	<string name="east_abbreviation">E</string>
-	<string name="west_abbreviation">W</string>
-	<string name="south_abbreviation">S</string>
-	<string name="north_abbreviation">N</string>
-	<string name="optional_point_name">Optional point name</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_dddddd_format">DD.DDDDDD°</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
+    <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="east_abbreviation">E</string>
+    <string name="west_abbreviation">W</string>
+    <string name="south_abbreviation">S</string>
+    <string name="north_abbreviation">N</string>
+    <string name="optional_point_name">Optional point name</string>
     <string name="transport_nearby_routes_within">Nearby routes within</string>
     <string name="transport_nearby_routes">Within</string>
     <string name="enter_the_file_name">Type the filename.</string>
@@ -326,12 +328,12 @@
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <!-- string name="release_3_0">
-• New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
-• Wikipedia: New look, active links, images now supported\n\n
-• Open Track UI: Support for waypoint groups\n\n
-• Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
-• OsmAnd Live subscription now supports all OsmAnd features\n\n
-    </string -->
+  • New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
+  • Wikipedia: New look, active links, images now supported\n\n
+  • Open Track UI: Support for waypoint groups\n\n
+  • Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
+  • OsmAnd Live subscription now supports all OsmAnd features\n\n
+      </string -->
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
@@ -384,12 +386,12 @@
     <string name="import_as_gpx">Import as GPX file</string>
     <string name="import_as_favorites">Import as Favorites</string>
     <string name="import_file">Import file</string>
-	<string name="wrong_input">Wrong input</string>
-	<string name="enter_new_name">Enter new name</string>
-	<string name="shared_string_back">Back</string>
-	<string name="shared_string_view">View</string>
-	<string name="waypoints_added_to_map_markers">Waypoints added to map markers</string>
-	<string name="wrong_format">Wrong format</string>
+    <string name="wrong_input">Wrong input</string>
+    <string name="enter_new_name">Enter new name</string>
+    <string name="shared_string_back">Back</string>
+    <string name="shared_string_view">View</string>
+    <string name="waypoints_added_to_map_markers">Waypoints added to map markers</string>
+    <string name="wrong_format">Wrong format</string>
     <string name="shared_string_road">Road</string>
     <string name="show_map">Show map</string>
     <string name="route_is_calculated">Route calculated</string>
@@ -618,41 +620,41 @@
     <string name="rendering_attr_depthContours_description">Show depth contours and points.</string>
     <string name="rendering_attr_depthContours_name">Nautical depth contours</string>
     <!-- string name="release_2_6">
-	\u2022 New feature: Quick action button\n\n
-	\u2022 Improved touch screen gesture response (e.g. concurrent panning and zooming)\n\n
-	\u2022 New map fonts covering more locales\n\n
-	\u2022 Support TTS for regional language variants (and accents)\n\n
-	\u2022 Visibility enhancements in several map styles and Wikipedia\n\n
-	\u2022 Support Open Location Code (OLC)\n\n
-	\u2022 Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes\n\n
-	\u2022 \"Driving style\" setting and logic improvements for bicycle routing\n\n
-	\u2022 Altitude data settings for bicycle routing\n\n
-	\u2022 Several other improvements and bug fixes\n\n
-	and more…
-	</string -->
+    \u2022 New feature: Quick action button\n\n
+    \u2022 Improved touch screen gesture response (e.g. concurrent panning and zooming)\n\n
+    \u2022 New map fonts covering more locales\n\n
+    \u2022 Support TTS for regional language variants (and accents)\n\n
+    \u2022 Visibility enhancements in several map styles and Wikipedia\n\n
+    \u2022 Support Open Location Code (OLC)\n\n
+    \u2022 Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes\n\n
+    \u2022 \"Driving style\" setting and logic improvements for bicycle routing\n\n
+    \u2022 Altitude data settings for bicycle routing\n\n
+    \u2022 Several other improvements and bug fixes\n\n
+    and more…
+    </string -->
     <!-- string name="release_2_7">
-	\u2022 Mapillary plugin with street-level imagery\n\n
-	\u2022 Ruler widget for distance measurement\n\n
-	\u2022 GPX split intervals with detailed info about your track\n\n
-	\u2022 Other improvements and bug fixes\n\n
-	</string -->
+    \u2022 Mapillary plugin with street-level imagery\n\n
+    \u2022 Ruler widget for distance measurement\n\n
+    \u2022 GPX split intervals with detailed info about your track\n\n
+    \u2022 Other improvements and bug fixes\n\n
+    </string -->
     <!-- string name="release_2_8">
-	\u2022 Completely reworked map markers with directional lines and route planning\n\n
-	\u2022 Measure distance tool offering snap to road feature and saving points as track\n\n
-	\u2022 OsmAnd Live: Bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
-	</string -->
+    \u2022 Completely reworked map markers with directional lines and route planning\n\n
+    \u2022 Measure distance tool offering snap to road feature and saving points as track\n\n
+    \u2022 OsmAnd Live: Bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
+    </string -->
     <!-- string name="release_2_9">
-	\u2022 Updated the context menu: Show when the POI opens / closes\n\n
-	\u2022 Transport menu: all available routes are now at the top\n\n
-	\u2022 Wikipedia: added the button to open the original article, updated the appearance of articles\n\n
-	\u2022 Route: added possibility to swap start and end points in one tap\n\n
-	\u2022 Notes: added sorting by type and date\n\n
-	\u2022 OSM edits: Show an icon and a name of the POI category, display completed actions\n\n
-	\u2022 New quick coordinate input screen for quick markers creation\n\n
-    \u2022 Detection of stop signs now considers driving direction\n\n
-	\u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
-	\u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
-	</string -->
+    \u2022 Updated the context menu: Show when the POI opens / closes\n\n
+    \u2022 Transport menu: all available routes are now at the top\n\n
+    \u2022 Wikipedia: added the button to open the original article, updated the appearance of articles\n\n
+    \u2022 Route: added possibility to swap start and end points in one tap\n\n
+    \u2022 Notes: added sorting by type and date\n\n
+    \u2022 OSM edits: Show an icon and a name of the POI category, display completed actions\n\n
+    \u2022 New quick coordinate input screen for quick markers creation\n\n
+      \u2022 Detection of stop signs now considers driving direction\n\n
+    \u2022 New algorithm providing meaningful ascent/descent values for GPX tracks\n\n
+    \u2022 Terrain (ascent) aware hiking time (Naismith\'s rule)\n\n
+    </string -->
     <string name="auto_split_recording_title">Auto-split recordings after gap</string>
     <string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after a longer gap if the date has changed.</string>
     <string name="rendering_attr_contourDensity_description">Contour line density</string>
@@ -687,14 +689,14 @@
     <string name="shared_string_record">Record</string>
     <string name="gpx_logging_no_data">No data</string>
     <!-- string name="release_2_5">
-	\u2022 Tappable icons on the map\n\n
-	\u2022 Powerful POI filter search: Search, e.g. restaurants by cuisine, or campgrounds with specific facilities\n\n
-	\u2022 New Topo Map style for cyclists and hikers\n\n
-	\u2022 Enhanced trip recording\n\n
-	\u2022 Improved navigation notifications (Android Wear)\n\n
-	\u2022 Many other improvements and bug fixes\n\n
-	and more…
-    </string -->
+    \u2022 Tappable icons on the map\n\n
+    \u2022 Powerful POI filter search: Search, e.g. restaurants by cuisine, or campgrounds with specific facilities\n\n
+    \u2022 New Topo Map style for cyclists and hikers\n\n
+    \u2022 Enhanced trip recording\n\n
+    \u2022 Improved navigation notifications (Android Wear)\n\n
+    \u2022 Many other improvements and bug fixes\n\n
+    and more…
+      </string -->
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
     <string name="save_track_min_speed">Logging minimum speed</string>
     <string name="save_track_min_speed_descr">Filter: No logging of points below this speed.</string>
@@ -763,14 +765,14 @@
     <string name="confirmation_to_delete_history_items">Remove selected items from \'History\'?</string>
     <string name="show_something_on_map">Show %1$s on the map</string>
     <!-- string name="release_2_4">
-	\u2022 New very powerful free text search\n\n
-	\u2022 Car audio system / speaker phone integration via Bluetooth\n\n
-	\u2022 Improved route guidance, voice prompting, and turn lane indication\n\n
-	\u2022 Improved transport layer with route rendering\n\n
-	\u2022 Added more locales and now support regional locales\n\n
-	\u2022 Many other improvements and bug fixes\n\n
-	and more…
-    </string -->
+    \u2022 New very powerful free text search\n\n
+    \u2022 Car audio system / speaker phone integration via Bluetooth\n\n
+    \u2022 Improved route guidance, voice prompting, and turn lane indication\n\n
+    \u2022 Improved transport layer with route rendering\n\n
+    \u2022 Added more locales and now support regional locales\n\n
+    \u2022 Many other improvements and bug fixes\n\n
+    and more…
+      </string -->
     <string name="dist_away_from_my_location">Search %1$s away</string>
     <string name="share_history_subject"> shared via OsmAnd</string>
     <string name="search_categories">Categories</string>
@@ -832,16 +834,16 @@
     <string name="no_waypoints_found">No waypoints found</string>
     <string name="anonymous_user_hint">An anonymous user cannot:\n- Create groups;\n- Sync groups and devices with the server;\n- Manage groups and devices in a personal dashboard on the website.</string>
     <string name="report">Report</string>
-    
+
     <string name="storage_permission_restart_is_required">The app is now allowed to write to external storage, but needs to be started again to do so.</string>
     <!-- string name="release_2_3">
-	\u2022 OSM Live. Support map contributors and developers and get hourly map updates. \n\n
-	\u2022 Map markers. A new way to quickly select places on the map.\n\n
-	\u2022 More detailed OSM maps with country specific road shields and lots of new map features.\n\n
-	\u2022 Improved Look and Feel of Route preparation. \n\n
-	\u2022 Many improvements in the map context menu such as contextual address lookup.\n\n
-	and more…
-        </string -->
+    \u2022 OSM Live. Support map contributors and developers and get hourly map updates. \n\n
+    \u2022 Map markers. A new way to quickly select places on the map.\n\n
+    \u2022 More detailed OSM maps with country specific road shields and lots of new map features.\n\n
+    \u2022 Improved Look and Feel of Route preparation. \n\n
+    \u2022 Many improvements in the map context menu such as contextual address lookup.\n\n
+    and more…
+          </string -->
     <string name="shared_string_move_up">Move ↑</string>
     <string name="shared_string_move_down">Move ↓</string>
     <string name="finish_navigation">Finish navigation</string>
@@ -965,16 +967,16 @@
     <string name="show_on_start">Show on start</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <!-- string name="release_2_2">
-	\u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
-	\u2022 Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n
-	\u2022 Configure which and how cards are displayed on the dashboard\n\n
-	\u2022 Bypass the dashboard if you like menu-based app control\n\n
-	\u2022 To download maps, regions can be directly selected by tapping on the world map\n\n
-	\u2022 POI Search now supports more specific queries\n\n
-	\u2022 Improved POI and OSM editing functionality\n\n
-	\u2022 Map data download structure and interface reworked\n\n
-	and more…
-        </string -->
+    \u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
+    \u2022 Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n
+    \u2022 Configure which and how cards are displayed on the dashboard\n\n
+    \u2022 Bypass the dashboard if you like menu-based app control\n\n
+    \u2022 To download maps, regions can be directly selected by tapping on the world map\n\n
+    \u2022 POI Search now supports more specific queries\n\n
+    \u2022 Improved POI and OSM editing functionality\n\n
+    \u2022 Map data download structure and interface reworked\n\n
+    and more…
+          </string -->
     <string name="osm_save_offline">Save offline</string>
     <string name="osm_edit_modified_poi">Modified OSM POI</string>
     <string name="osm_edit_deleted_poi">Deleted OSM POI</string>

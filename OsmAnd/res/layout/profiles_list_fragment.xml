@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?attr/ctx_menu_info_view_bg"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:id="@+id/top_divider"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/appbar"
+    android:orientation="vertical">
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="4dp"/>
+
+    <include layout="@layout/card_top_divider"/>
+
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/profiles_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/top_divider"
+    android:clipToPadding="false"/>
+
+  <android.support.v7.widget.AppCompatButton
+    android:id="@+id/add_profile_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="48dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="bottom|center_horizontal"
+    android:background="@drawable/fab_extended_drawable"
+    android:drawableLeft="@drawable/ic_action_plus"
+    android:drawableStart="@drawable/ic_action_plus"
+    android:text="@string/shared_string_add"
+    android:layout_margin="16dp"
+    android:textColor="@color/color_white"/>
+
+</RelativeLayout>
