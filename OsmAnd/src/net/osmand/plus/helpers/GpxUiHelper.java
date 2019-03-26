@@ -1016,6 +1016,7 @@ public class GpxUiHelper {
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
 
+		int labelsColor = ContextCompat.getColor(mChart.getContext(), R.color.description_font_and_bottom_sheet_icons);
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setDrawAxisLine(false);
 		xAxis.setDrawGridLines(true);
@@ -1023,7 +1024,7 @@ public class GpxUiHelper {
 		xAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_black_grid));
 		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
 		xAxis.setPosition(BOTTOM);
-		xAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+		xAxis.setTextColor(labelsColor);
 
 		YAxis yAxis = mChart.getAxisLeft();
 		yAxis.enableGridDashedLine(10f, 5f, 0f);
@@ -1033,7 +1034,7 @@ public class GpxUiHelper {
 		yAxis.setXOffset(16f);
 		yAxis.setYOffset(-6f);
 		yAxis.setLabelCount(yLabelsCount);
-		yAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+		xAxis.setTextColor(labelsColor);
 
 		yAxis = mChart.getAxisRight();
 		yAxis.enableGridDashedLine(10f, 5f, 0f);
@@ -1043,7 +1044,7 @@ public class GpxUiHelper {
 		yAxis.setXOffset(16f);
 		yAxis.setYOffset(-6f);
 		yAxis.setLabelCount(yLabelsCount);
-		yAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+		xAxis.setTextColor(labelsColor);
 		yAxis.setEnabled(false);
 
 		Legend legend = mChart.getLegend();

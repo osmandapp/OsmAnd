@@ -79,7 +79,7 @@ public class HomeWorkCard extends BaseCard {
 		args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, home ? PointType.HOME.name() : PointType.WORK.name());
 		AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 		fragment.setArguments(args);
-		fragment.setUsedOnMap(false);
+		fragment.setUsedOnMap(true);
 		fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 	}
 }

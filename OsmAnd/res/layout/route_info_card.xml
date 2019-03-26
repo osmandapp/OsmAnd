@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/route_info_bg"
+	android:background="?attr/card_and_list_background_basic"
 	android:orientation="vertical">
 
 	<FrameLayout
@@ -22,7 +22,7 @@
 			android:maxLines="1"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			android:textColor="?android:attr/textColorPrimary"
+			android:textColor="?attr/main_font_color_basic"
 			android:textSize="@dimen/text_button_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:ignore="UnusedAttribute"
@@ -40,6 +40,7 @@
 			android:paddingRight="@dimen/content_padding"
 			android:text="@string/rendering_category_details"
 			android:textSize="@dimen/text_button_text_size"
+			android:textColor="?attr/active_color_basic"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:ignore="UnusedAttribute" />
 
