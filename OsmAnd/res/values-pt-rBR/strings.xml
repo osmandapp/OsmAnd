@@ -998,7 +998,7 @@ Pôr do Sol: %2$s</string>
     <string name="live_monitoring_url">Endereço web de rastreamento on-line</string>
     <string name="gpx_monitoring_disabled_warn">Registro de trilha usando o widget do GPX ou através das configurações de \'Gravação de viagem\'.</string>
     <string name="show_current_gpx_title">Mostrar trilha atual</string>
-    <string name="free_version_message">Você pode fazer o download ou atualizar os mapas de % %1$s.</string>
+    <string name="free_version_message">Você pode fazer o download ou atualizar os mapas de %1$s.</string>
     <string name="free_version_title">Versão gratuita</string>
     <string name="poi_context_menu_showdescription">Mostrar descrição do POI.</string>
     <string name="index_name_north_america">América do Norte</string>
