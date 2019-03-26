@@ -108,6 +108,10 @@
 		<attr name="route_info_control_icon_color" format="reference" />
 		<attr name="route_info_bg" format="reference" />
 		<attr name="flow_toolbar_bg" format="reference" />
+		<attr name="divider_color_basic" format="reference" />
+		<attr name="main_font_color_basic" format="reference" />
+		<attr name="active_color_basic" format="reference" />
+		<attr name="card_and_list_background_basic" format="reference" />
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

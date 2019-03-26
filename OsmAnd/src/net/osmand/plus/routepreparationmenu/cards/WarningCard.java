@@ -49,7 +49,7 @@ public class WarningCard extends BaseCard {
 			ClickableSpan clickableSpan = new ClickableSpan() {
 				@Override
 				public void updateDrawState(@NonNull TextPaint ds) {
-					ds.setColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+					ds.setColor(getActiveColor());
 					ds.setUnderlineText(false);
 				}
 
@@ -72,7 +72,7 @@ public class WarningCard extends BaseCard {
 			ClickableSpan clickableSpan = new ClickableSpan() {
 				@Override
 				public void updateDrawState(@NonNull TextPaint ds) {
-					ds.setColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+					ds.setColor(getActiveColor());
 					ds.setUnderlineText(false);
 				}
 
@@ -96,6 +96,7 @@ public class WarningCard extends BaseCard {
 			args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, PointType.INTERMEDIATE.name());
 			AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 			fragment.setArguments(args);
+			fragment.setUsedOnMap(true);
 			fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 		}
 	}

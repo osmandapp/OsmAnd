@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +83,10 @@ public class TracksCard extends BaseCard {
 		int listContentPadding = app.getResources().getDimensionPixelSize(R.dimen.list_content_padding);
 		int listTextPadding = app.getResources().getDimensionPixelSize(R.dimen.route_info_list_text_padding);
 
+		int mainFontColor = getMainFontColor();
+		int descriptionColor = getSecondaryColor();
+		int dividerColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.divider_dark : R.color.divider_light);
+
 		int i = 0;
 		boolean showLimitExceeds = list.size() > 4;
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
@@ -96,11 +101,17 @@ public class TracksCard extends BaseCard {
 			View div = v.findViewById(R.id.divider);
 			LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(div.getLayoutParams().width, div.getLayoutParams().height);
 			p.setMargins(listTextPadding, 0, 0, 0);
+			div.setBackgroundColor(dividerColor);
 			div.setLayoutParams(p);
 			div.setVisibility(i == 0 ? View.GONE : View.VISIBLE);
 
+			((TextView) v.findViewById(R.id.name)).setTextColor(mainFontColor);
+			((TextView) v.findViewById(R.id.distance)).setTextColor(descriptionColor);
+			((TextView) v.findViewById(R.id.points_count)).setTextColor(descriptionColor);
+			((TextView) v.findViewById(R.id.time)).setTextColor(descriptionColor);
+
 			ImageView img = (ImageView) v.findViewById(R.id.icon);
-			img.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
+			img.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
 			img.setVisibility(View.VISIBLE);
 			LinearLayout container = (LinearLayout) v.findViewById(R.id.container);
 			container.setMinimumHeight(minCardHeight);

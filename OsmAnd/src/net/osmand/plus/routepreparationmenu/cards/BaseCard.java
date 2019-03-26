@@ -92,8 +92,23 @@ public abstract class BaseCard {
 		return ContextCompat.getColor(app, colorId);
 	}
 
+	@ColorInt
+	protected int getActiveColor() {
+		return getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+	}
+
+	@ColorInt
+	protected int getMainFontColor() {
+		return getResolvedColor(nightMode ? R.color.main_font_dark : R.color.main_font_light);
+	}
+
+	@ColorInt
+	protected int getSecondaryColor() {
+		return getResolvedColor(R.color.description_font_and_bottom_sheet_icons);
+	}
+
 	protected Drawable getContentIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.icon_color);
+		return getColoredIcon(icon, R.color.description_font_and_bottom_sheet_icons);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {

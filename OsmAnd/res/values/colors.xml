@@ -456,9 +456,11 @@
 	<color name="wiki_webview_background_dark">#17191a</color>
 
 	<!-- Basic colors -->
-	<color name="app_bar_main_dark">#17191a</color>
+	<color name="app_bar_main_dark">#101112</color>
 	<color name="app_bar_main_light">#ff8800</color>
-	<color name="activity_background_dark">#17191a</color>
+	<color name="status_bar_main_dark">#101112</color>
+	<color name="status_bar_main_light">#E68200</color>
+	<color name="activity_background_dark">#17181a</color>
 	<color name="activity_background_light">#f0f0f0</color>
 	<color name="card_and_list_background_dark">#222526</color>
 	<color name="card_and_list_background_light">#ffffff</color>

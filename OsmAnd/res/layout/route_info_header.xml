@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/route_info_bg"
+	android:background="?attr/card_and_list_background_basic"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -40,7 +40,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_list_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="26 km" />
@@ -51,7 +51,7 @@
 					android:layout_height="wrap_content"
 					android:background="@null"
 					android:text="@string/total_distance"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_sub_text_size" />
 
 			</LinearLayout>
@@ -83,7 +83,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_list_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="20 min" />
@@ -94,7 +94,7 @@
 					android:layout_height="wrap_content"
 					android:background="@null"
 					android:text="@string/shared_string_time"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_sub_text_size" />
 
 			</LinearLayout>
@@ -148,7 +148,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?android:attr/textColorPrimary"
+					android:textColor="?attr/main_font_color_basic"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="40 m" />
@@ -159,7 +159,7 @@
 					android:layout_height="wrap_content"
 					android:background="@null"
 					android:text="@string/average_altitude"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_sub_text_size" />
 
 			</LinearLayout>
@@ -191,7 +191,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?android:attr/textColorPrimary"
+					android:textColor="?attr/main_font_color_basic"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="30m - 53m" />
@@ -202,7 +202,7 @@
 					android:layout_height="wrap_content"
 					android:background="@null"
 					android:text="@string/altitude_range"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_sub_text_size" />
 
 			</LinearLayout>
@@ -230,7 +230,7 @@
 			<View
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/dashboard_divider" />
+				android:background="?attr/divider_color_basic" />
 
 		</LinearLayout>
 
@@ -245,7 +245,7 @@
 			<View
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/dashboard_divider" />
+				android:background="?attr/divider_color_basic" />
 
 		</LinearLayout>
 
@@ -284,7 +284,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?android:attr/textColorPrimary"
+					android:textColor="?attr/main_font_color_basic"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="174" />
@@ -295,7 +295,7 @@
 					android:layout_height="wrap_content"
 					android:background="@null"
 					android:text="@string/altitude_ascent"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_sub_text_size" />
 
 			</LinearLayout>
@@ -327,7 +327,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="@null"
-					android:textColor="?android:attr/textColorPrimary"
+					android:textColor="?attr/main_font_color_basic"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium"
 					tools:text="164" />
@@ -338,7 +338,7 @@
 					android:layout_height="wrap_content"
 					android:background="@null"
 					android:text="@string/altitude_descent"
-					android:textColor="?android:attr/textColorSecondary"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					android:textSize="@dimen/default_sub_text_size" />
 
 			</LinearLayout>
