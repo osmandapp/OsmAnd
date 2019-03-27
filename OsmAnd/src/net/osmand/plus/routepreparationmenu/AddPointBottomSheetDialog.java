@@ -401,7 +401,13 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					Pair<LatLon, PointDescription> pair = getLocationAndDescrFromItem(item, helper);
 					LatLon ll = pair.first;
 					PointDescription name = pair.second;
-					if (ll != null) {
+					if (ll == null) {
+						if (item instanceof PointType) {
+							AddPointBottomSheetDialog.showInstance(mapActivity, (PointType) item);
+						} else {
+							dismiss();
+						}
+					} else {
 						switch (pointType) {
 							case START:
 								helper.setStartPoint(ll, true, name);
@@ -413,8 +419,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								helper.navigateToPoint(ll, true, helper.getIntermediatePoints().size(), name);
 								break;
 						}
-					} else if (item instanceof PointType) {
-						AddPointBottomSheetDialog.showInstance(mapActivity, (PointType) item);
+						dismiss();
 					}
 				}
 			}
