@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -54,6 +53,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	public static final String POINT_TYPE_KEY = "point_type";
 
 	public static final int ADD_FAVOURITE_TO_ROUTE_REQUEST_CODE = 1;
+
+	public static final String FAVOURITES = "favourites";
 
 	private PointType pointType = PointType.START;
 
@@ -350,7 +351,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private void addMainScrollItems(List<Object> items) {
-		items.add(FavouritesDbHelper.FAVOURITES);
+		items.add(FAVOURITES);
 		items.add(PointType.HOME);
 		items.add(PointType.WORK);
 	}
@@ -396,7 +397,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					return;
 				}
 				Object item = items.get(position);
-				if (item.equals(FavouritesDbHelper.FAVOURITES)) {
+				if (item.equals(FAVOURITES)) {
 					openFavouritesDialog();
 				} else {
 					TargetPointsHelper helper = mapActivity.getMyApplication().getTargetPointsHelper();
@@ -440,7 +441,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (item == PointType.HOME) {
 				point = helper.getHomePoint();
 			} else if (item == PointType.WORK) {
-				point = helper.getHomePoint();
+				point = helper.getWorkPoint();
 			}
 			if (point != null) {
 				ll = new LatLon(point.getLatitude(), point.getLongitude());
@@ -522,7 +523,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (holder instanceof FavouritesViewHolder) {
 				Object item = getItem(position);
 				FavouritesViewHolder favouritesViewHolder = (FavouritesViewHolder) holder;
-				if (item.equals(FavouritesDbHelper.FAVOURITES)) {
+				if (item.equals(FAVOURITES)) {
 					favouritesViewHolder.title.setText(R.string.shared_string_favorites);
 					favouritesViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 					favouritesViewHolder.description.setVisibility(View.GONE);

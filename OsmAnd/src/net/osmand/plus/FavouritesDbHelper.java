@@ -43,7 +43,6 @@ public class FavouritesDbHelper {
 	public static final String BACKUP_FOLDER = "backup"; //$NON-NLS-1$
 	public static final int BACKUP_CNT = 20; //$NON-NLS-1$
 	public static final String FILE_TO_BACKUP = "favourites_bak.gpx"; //$NON-NLS-1$
-	public static final String FAVOURITES = "favourites"; //$NON-NLS-1$
 
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<FavouritePoint>();
 	private List<FavoriteGroup> favoriteGroups = new ArrayList<FavouritesDbHelper.FavoriteGroup>();
