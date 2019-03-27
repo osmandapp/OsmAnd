@@ -78,9 +78,9 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"
 				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-				android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
+				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-				android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
+				android:layout_marginStart="@dimen/content_padding"
 				tools:src="@drawable/ic_action_info_dark" />
 
 			<TextView
