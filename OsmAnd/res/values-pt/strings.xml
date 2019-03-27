@@ -1207,7 +1207,7 @@
     <string name="gpx_info_start_time">Hora de início: %1$tF, %1$tT </string>
     <string name="gpx_info_end_time">Hora de fim: %1$tF, %1$tT </string>
     <string name="gpx_info_average_speed">Velocidade média: %1$s </string>
-    <string name="gpx_info_diff_altitude">Intervalo de altitude: %1$ s</string>
+    <string name="gpx_info_diff_altitude">Intervalo de altitude: %1$s</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
