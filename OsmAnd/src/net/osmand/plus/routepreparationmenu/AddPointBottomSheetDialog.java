@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -35,6 +36,7 @@ import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -501,7 +503,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			Activity activity = getActivity();
 			if (activity != null) {
 				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
-				layoutParams.width = AndroidUtils.getScreenWidth(activity) / 2;
+				if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
+					layoutParams.width = AndroidUtils.getScreenWidth(activity) / 2;
+				} else {
+					// 11.5dp is the shadow width
+					layoutParams.width = (getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2) - AndroidUtils.dpToPx(activity, 11.5f);
+				}
 				view.setLayoutParams(layoutParams);
 			}
 			FavouritesViewHolder viewHolder = new FavouritesViewHolder(view);
