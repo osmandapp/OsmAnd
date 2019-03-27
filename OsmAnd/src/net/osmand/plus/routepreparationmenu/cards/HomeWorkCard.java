@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,7 +39,7 @@ public class HomeWorkCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				if (homePoint == null) {
-					openAddPointDialog(mapActivity, true);
+					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
 				} else {
 					targetPointsHelper.navigateToPoint(homePoint.point, true, -1, homePoint.getOriginalPointDescription());
 				}
@@ -49,7 +48,7 @@ public class HomeWorkCard extends BaseCard {
 		homeButton.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				openAddPointDialog(mapActivity, true);
+				AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
 				return true;
 			}
 		});
@@ -59,7 +58,7 @@ public class HomeWorkCard extends BaseCard {
 			@Override
 			public void onClick(View v) {
 				if (workPoint == null) {
-					openAddPointDialog(mapActivity, false);
+					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
 				} else {
 					targetPointsHelper.navigateToPoint(workPoint.point, true, -1, workPoint.getOriginalPointDescription());
 				}
@@ -68,18 +67,9 @@ public class HomeWorkCard extends BaseCard {
 		workButton.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				openAddPointDialog(mapActivity, false);
+				AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
 				return true;
 			}
 		});
-	}
-
-	private void openAddPointDialog(MapActivity mapActivity, boolean home) {
-		Bundle args = new Bundle();
-		args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, home ? PointType.HOME.name() : PointType.WORK.name());
-		AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(true);
-		fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 	}
 }

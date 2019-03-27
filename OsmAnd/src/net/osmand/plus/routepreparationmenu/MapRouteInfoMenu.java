@@ -5,7 +5,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -1248,6 +1247,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			container.findViewById(R.id.title_divider).setVisibility(View.GONE);
 		}
 		routeOptionTV.setText(title);
+		routeOptionTV.setTextColor(ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons));
 		routeOptionImageView.setImageDrawable(app.getUIUtilities().getIcon(iconId, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 		container.setOnClickListener(listener);
 
@@ -1369,7 +1369,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		toLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openAddPointDialog(PointType.TARGET);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.TARGET);
+				}
 			}
 		});
 
@@ -1400,9 +1403,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			toButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					OsmandApplication app = getApp();
-					if (app != null) {
-						openAddPointDialog(app.getTargetPointsHelper().getPointToNavigate() == null ? PointType.TARGET : PointType.INTERMEDIATE);
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						AddPointBottomSheetDialog.showInstance(mapActivity, mapActivity.getMyApplication().getTargetPointsHelper().getPointToNavigate() == null ? PointType.TARGET : PointType.INTERMEDIATE);
 					}
 				}
 			});
@@ -1443,7 +1446,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		fromLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openAddPointDialog(PointType.START);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.START);
+				}
 			}
 		});
 
@@ -1656,17 +1662,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				MapMarkerSelectionFragment selectionFragment = MapMarkerSelectionFragment.newInstance(pointType);
 				selectionFragment.show(mapActivity.getSupportFragmentManager(), MapMarkerSelectionFragment.TAG);
 			}
-		}
-	}
-
-	private void openAddPointDialog(PointType pointType) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			Bundle args = new Bundle();
-			args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, pointType.name());
-			AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
-			fragment.setArguments(args);
-			fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 		}
 	}
 
