@@ -86,6 +86,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private boolean portrait;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
+	private int currentMenuState;
 
 	private boolean publicTransportMode;
 	private int routeInfoMenuState = -1;
@@ -107,8 +108,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
 			initialMenuState = args.getInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 		}
+		int routesCount = 1;
 		if (routes != null && !routes.isEmpty()) {
 			publicTransportMode = true;
+			routesCount = routes.size();
 		}
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
@@ -129,9 +132,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 		viewPager.setClipToPadding(false);
-		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1, initialMenuState);
+		currentMenuState = initialMenuState;
+		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), routesCount);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
+		viewPager.setOffscreenPageLimit(routesCount);
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			public void onPageScrollStateChanged(int state) {
 			}
@@ -150,7 +155,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						if (f != null) {
 							PublicTransportCard card = f.getTransportCard();
 							if (card != null) {
-								card.update();
+								card.updateButtons();
+							}
+							if (f == getCurrentFragment()) {
+								updateZoomButtonsPos(f, f.getViewY(), true);
 							}
 						}
 					}
@@ -647,7 +655,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
 		View zoomButtonsView = this.zoomButtonsView;
 		if (zoomButtonsView != null) {
-			int zoomY = y - getZoomButtonsHeight() - fragment.getTopShadowMargin();
+			int zoomY = y - getZoomButtonsHeight();
 			if (animated) {
 				fragment.animateView(zoomButtonsView, zoomY);
 			} else {
@@ -660,6 +668,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
+			mapActivity.findViewById(R.id.map_top_bar).setVisibility(visibility);
 			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
 			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
 			if (!openingRouteInfo) {
@@ -668,13 +677,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
 				}
 			}
-			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(visibility);
 			mapActivity.refreshMap();
 		}
 	}
 
 	@Override
-	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
 		if (fragment == getCurrentFragment()) {
 			updateToolbars(fragment, y, animated);
 			updateZoomButtonsPos(fragment, y, animated);
@@ -685,17 +693,17 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	@Override
 	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState) {
 		LockableViewPager viewPager = this.viewPager;
-		if (viewPager != null) {
-			int currentItem = viewPager.getCurrentItem();
+		RouteDetailsFragment current = getCurrentFragment();
+		if (viewPager != null && current != null && fragment == current) {
+			currentMenuState = menuState;
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
 			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
 				RouteDetailsFragment f = ref.get();
 				if (f != null) {
-					boolean current = f.getRouteId() == currentItem;
-					if (!current && f.getCurrentMenuState() != menuState) {
+					if (f != current && f.getCurrentMenuState() != menuState) {
 						f.openMenuScreen(menuState, false);
 					}
-					if (current) {
+					if (f == current) {
 						updateZoomButtonsVisibility(menuState);
 						updateViewPager(fragment.getViewY());
 					}
@@ -748,12 +756,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	public class RoutesPagerAdapter extends FragmentPagerAdapter {
 		private int routesCount;
-		private int initialMenuState;
 
-		RoutesPagerAdapter(FragmentManager fm, int routesCount, int initialMenuState) {
+		RoutesPagerAdapter(FragmentManager fm, int routesCount) {
 			super(fm);
 			this.routesCount = routesCount;
-			this.initialMenuState = initialMenuState;
 		}
 
 		@Override
@@ -764,7 +770,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		@Override
 		public Fragment getItem(int position) {
 			Bundle args = new Bundle();
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
+			args.putInt(ContextMenuFragment.MENU_STATE_KEY, currentMenuState);
 			args.putInt(RouteDetailsFragment.ROUTE_ID_KEY, position);
 			return Fragment.instantiate(ChooseRouteFragment.this.getContext(), RouteDetailsFragment.class.getName(), args);
 		}
