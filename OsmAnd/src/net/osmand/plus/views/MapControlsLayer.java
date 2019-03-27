@@ -48,6 +48,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -728,9 +729,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateControls(tileBox, nightMode);
 	}
 
+	public boolean isPotrait() {
+		return AndroidUiHelper.isOrientationPortrait(mapActivity);
+	}
+
 	@SuppressWarnings("deprecation")
 	private void updateControls(@NonNull RotatedTileBox tileBox, DrawSettings drawSettings) {
 		boolean isNight = drawSettings != null && drawSettings.isNightMode();
+		boolean portrait = isPotrait();
 		int shadw = isNight ? Color.TRANSPARENT : Color.WHITE;
 		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
 		if (shadowColor != shadw) {
@@ -769,8 +775,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showButtons);
 		menuControl.updateVisibility(showButtons);
 
-		mapZoomIn.updateVisibility(!routeDialogOpened && !contextMenuOpened && !isInChoosingRoutesMode());
-		mapZoomOut.updateVisibility(!routeDialogOpened && !contextMenuOpened && !isInChoosingRoutesMode());
+		mapZoomIn.updateVisibility(!routeDialogOpened && !contextMenuOpened && (!isInChoosingRoutesMode() || !portrait));
+		mapZoomOut.updateVisibility(!routeDialogOpened && !contextMenuOpened && (!isInChoosingRoutesMode() || !portrait));
 		boolean forceHideCompass = routeDialogOpened || trackDialogOpened
 				|| isInMeasurementToolMode() || isInPlanRouteMode() || contextMenuOpened || isInChoosingRoutesMode();
 		compassHud.forceHideCompass = forceHideCompass;
@@ -844,6 +850,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
+		boolean portrait = isPotrait();
 		Location lastKnownLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 		boolean enabled = lastKnownLocation != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
@@ -862,7 +869,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
-		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode() && !isInChoosingRoutesMode());
+		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInPlanRouteMode() && (!isInChoosingRoutesMode() || !portrait));
 		if (app.accessibilityEnabled()) {
 			backToLocationControl.iv.setClickable(enabled && visible);
 		}

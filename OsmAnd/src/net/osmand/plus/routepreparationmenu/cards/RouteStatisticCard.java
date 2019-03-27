@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Matrix;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -13,17 +14,20 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -32,9 +36,11 @@ import java.util.List;
 public class RouteStatisticCard extends BaseCard {
 
 	private GPXFile gpx;
-	private GpxSelectionHelper.GpxDisplayItem gpxItem;
-	private GpxUiHelper.OrderedLineDataSet slopeDataSet;
-	private GpxUiHelper.OrderedLineDataSet elevationDataSet;
+	private GpxDisplayItem gpxItem;
+	@Nullable
+	private OrderedLineDataSet slopeDataSet;
+	@Nullable
+	private OrderedLineDataSet elevationDataSet;
 	private View.OnTouchListener onTouchListener;
 
 	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx, View.OnTouchListener onTouchListener) {
@@ -87,7 +93,7 @@ public class RouteStatisticCard extends BaseCard {
 		String arriveStr = app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(time, true));
 		arriveTimeTv.setText(arriveStr);
 
-		GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 		buildHeader(analysis);
 
@@ -106,13 +112,19 @@ public class RouteStatisticCard extends BaseCard {
 		((ImageView) view.findViewById(R.id.range_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
 		((ImageView) view.findViewById(R.id.descent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_descent));
 		((ImageView) view.findViewById(R.id.ascent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_ascent));
+
+		if (isTransparentBackground()) {
+			view.setBackgroundDrawable(null);
+		}
 	}
 
-	public GpxUiHelper.OrderedLineDataSet getSlopeDataSet() {
+	@Nullable
+	public OrderedLineDataSet getSlopeDataSet() {
 		return slopeDataSet;
 	}
 
-	public GpxUiHelper.OrderedLineDataSet getElevationDataSet() {
+	@Nullable
+	public OrderedLineDataSet getElevationDataSet() {
 		return elevationDataSet;
 	}
 
@@ -127,23 +139,27 @@ public class RouteStatisticCard extends BaseCard {
 		}
 	}
 
-	private void buildHeader(GPXUtilities.GPXTrackAnalysis analysis) {
+	private void buildHeader(GPXTrackAnalysis analysis) {
 		final LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
 		mChart.setOnTouchListener(onTouchListener);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
-			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true);
+			OrderedLineDataSet slopeDataSet = null;
+			OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
+					GPXDataSetAxisType.DISTANCE, false, true);
 			if (elevationDataSet != null) {
 				dataSets.add(elevationDataSet);
+				slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
 			}
-			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
 			}
+			this.elevationDataSet = elevationDataSet;
+			this.slopeDataSet = slopeDataSet;
+
 			LineData data = new LineData(dataSets);
 			mChart.setData(data);
 
@@ -152,7 +168,7 @@ public class RouteStatisticCard extends BaseCard {
 				float highlightDrawX = -1;
 
 				@Override
-				public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+				public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
 					if (mChart.getHighlighted() != null && mChart.getHighlighted().length > 0) {
 						highlightDrawX = mChart.getHighlighted()[0].getDrawX();
 					} else {
@@ -161,7 +177,7 @@ public class RouteStatisticCard extends BaseCard {
 				}
 
 				@Override
-				public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+				public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 					gpxItem.chartMatrix = new Matrix(mChart.getViewPortHandler().getMatrixTouch());
 					Highlight[] highlights = mChart.getHighlighted();
 					if (highlights != null && highlights.length > 0) {

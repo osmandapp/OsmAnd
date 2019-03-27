@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<dimen name="contex_menu_top_shadow_height">16dp</dimen>
 	<dimen name="dialog_button_ex_height">60dp</dimen>
 	<dimen name="dialog_button_ex_min_width">72dp</dimen>
 	<dimen name="dialog_button_ex_max_width">120dp</dimen>

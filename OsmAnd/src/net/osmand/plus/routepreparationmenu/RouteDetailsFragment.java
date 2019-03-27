@@ -26,8 +26,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -102,9 +100,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private String destinationStreetStr = "";
 	private int pageMarginPx;
 	private int toolbarHeightPx;
+	private int landscapeWidthPx;
 
 	private GPXFile gpx;
+	@Nullable
 	private OrderedLineDataSet slopeDataSet;
+	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
 	private List<BaseCard> menuCards = new ArrayList<>();
@@ -117,18 +118,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	@Override
-	public int getMainViewId() {
-		return R.id.main_view;
-	}
-
-	@Override
-	public int getBottomScrollViewId() {
-		return R.id.route_menu_bottom_scroll;
-	}
-
-	@Override
 	public int getHeaderViewHeight() {
 		return !menuCards.isEmpty() ? menuCards.get(0).getViewHeight() : 0;
+	}
+
+	@Override
+	public boolean isHeaderViewDetached() {
+		return false;
 	}
 
 	@Override
@@ -139,6 +135,11 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	@Override
 	public boolean isSingleFragment() {
 		return false;
+	}
+
+	@Override
+	public int getLandscapeWidth() {
+		return landscapeWidthPx;
 	}
 
 	public int getRouteId() {
@@ -154,16 +155,26 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 		pageMarginPx = dpToPx(PAGE_MARGIN);
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
+		landscapeWidthPx = dpToPx(345f);
 
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			if (isPortrait()) {
 				view.findViewById(getBottomScrollViewId()).setBackgroundDrawable(null);
 			}
-			updateCards(view);
+			updateCards();
 			runLayoutListener();
 		}
 		return view;
+	}
+
+	@Override
+	public int getShadowHeight() {
+		int res = super.getShadowHeight();
+		if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
+			res += pageMarginPx;
+		}
+		return res;
 	}
 
 	@Nullable
@@ -176,7 +187,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		super.changeMenuState(currentY, slidingUp, slidingDown, animated);
 		View mainView = getMainView();
 		if (mainView != null && isPortrait()) {
-			final LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+			updateCardsLayout();
+			/*
+			LinearLayout cardsContainer = getCardsContainer();
 			final FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
 			final int currentMenuState = getCurrentMenuState();
 			if (animated) {
@@ -186,6 +199,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 					Animation a = new Animation() {
 						@Override
 						protected void applyTransformation(float interpolatedTime, Transformation t) {
+							LinearLayout cardsContainer = getCardsContainer();
 							int margin = marginStart + (int) ((marginEnd - marginStart) * interpolatedTime);
 							layoutParams.setMargins(margin, 0, margin, 0);
 							cardsContainer.setLayoutParams(layoutParams);
@@ -211,22 +225,27 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			} else {
 				updateCardsLayout();
 			}
+			*/
 		}
 	}
 
 	private void updateCardsLayout() {
 		View mainView = getMainView();
 		if (mainView != null) {
-			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
+			LinearLayout cardsContainer = getCardsContainer();
+			View topShadow = getTopShadow();
+			FrameLayout bottomContainer = getBottomContainer();
 			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
+				topShadow.setVisibility(View.INVISIBLE);
+				bottomContainer.setBackgroundDrawable(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
-				mainView.setBackgroundDrawable(null);
 			} else {
 				layoutParams.setMargins(0, 0, 0, 0);
-				cardsContainer.setBackgroundDrawable(null);
-				AndroidUtils.setBackground(mainView.getContext(), mainView, isNightMode(), R.drawable.bg_map_route_menu_light, R.drawable.bg_map_route_menu_dark);
+				topShadow.setVisibility(View.VISIBLE);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
 			}
 			cardsContainer.setLayoutParams(layoutParams);
 		}
@@ -237,36 +256,40 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		super.setViewY(y, animated, adjustMapPos);
 		View mainView = getMainView();
 		if (mainView != null && isPortrait()) {
+			LinearLayout cardsContainer = getCardsContainer();
+			View topShadow = getTopShadow();
+			FrameLayout bottomContainer = getBottomContainer();
 			int headerOnlyY = getMenuStatePosY(MenuState.HEADER_ONLY);
 			int halfScreenY = getMenuStatePosY(MenuState.HALF_SCREEN);
 			float margin = 0;
 			if (y > headerOnlyY) {
 				margin = PAGE_MARGIN;
 			} else if (y > halfScreenY) {
-				margin = PAGE_MARGIN * (1f - (float)(headerOnlyY - y) / (headerOnlyY - halfScreenY));
+				margin = PAGE_MARGIN;//* (1f - (float)(headerOnlyY - y) / (headerOnlyY - halfScreenY));
 			}
 			int marginPx = dpToPx(margin);
-			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
 			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
 			if (layoutParams.leftMargin != marginPx) {
 				layoutParams.setMargins(marginPx, 0, marginPx, 0);
 			}
 			if (y > halfScreenY) {
+				topShadow.setVisibility(View.INVISIBLE);
+				bottomContainer.setBackgroundDrawable(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
-				mainView.setBackgroundDrawable(null);
 			} else {
-				cardsContainer.setBackgroundDrawable(null);
-				AndroidUtils.setBackground(mainView.getContext(),mainView, isNightMode(), R.drawable.bg_map_route_menu_light, R.drawable.bg_map_route_menu_dark);
+				topShadow.setVisibility(View.VISIBLE);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
 			}
 		}
 	}
 
-	private void updateCards(@NonNull View view) {
+	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			RoutingHelper routingHelper = app.getRoutingHelper();
-			LinearLayout cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
+			LinearLayout cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 			if (routeId != -1) {
 				List<TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
@@ -355,6 +378,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 					return false;
 				}
 			});
+			statisticCard.setTransparentBackground(true);
 			menuCards.add(statisticCard);
 			cardsContainer.addView(statisticCard.build(mapActivity));
 			buildRowDivider(cardsContainer, false);
@@ -1046,10 +1070,10 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			@Override
 			public void geocodingDone(String address) {
 				RouteDetailsFragment fragment = fragmentRef.get();
-				View view = getView();
-				if (!TextUtils.isEmpty(address) && fragment != null && !fragment.isPaused() && view != null) {
+				if (!TextUtils.isEmpty(address) && fragment != null && !fragment.isPaused()) {
 					fragment.destinationStreetStr = address;
-					fragment.updateCards(view);
+					fragment.updateCards();
+					doAfterMenuStateChange(0, 0);
 				}
 			}
 		}, null);
@@ -1449,10 +1473,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			float distance = i * 5;
 			inclines.add(i, new Incline(0f, distance));
 		}
-		float lastDistance = slopeDataSet.getEntryForIndex(size - 1).getX();
-		for (int i = 1; i <= 10; i++) {
-			float distance = lastDistance * 1000f + i * 5f;
-			inclines.add(new Incline(0f, distance));
+		if (slopeDataSet != null) {
+			float lastDistance = slopeDataSet.getEntryForIndex(size - 1).getX();
+			for (int i = 1; i <= 10; i++) {
+				float distance = lastDistance * 1000f + i * 5f;
+				inclines.add(new Incline(0f, distance));
+			}
 		}
 		for (Incline incline : inclines) {
 			incline.computeBoundaries(minIncline, maxIncline);
@@ -1474,7 +1500,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	void openDetails() {
-		if (gpxItem != null) {
+		if (gpxItem != null && elevationDataSet != null) {
 			OsmandApplication app = requireMyApplication();
 			LatLon location = null;
 			WptPt wpt = null;

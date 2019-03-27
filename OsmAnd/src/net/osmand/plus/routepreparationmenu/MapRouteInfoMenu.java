@@ -78,6 +78,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
+import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
@@ -135,7 +136,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	@Nullable
 	private View mainView;
 
-	private int currentMenuState;
 	private boolean portraitMode;
 
 	private boolean swapButtonCollapsing;
@@ -162,7 +162,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public MapRouteInfoMenu() {
-		currentMenuState = getInitialMenuState();
 		onMarkerSelectListener = new OnMarkerSelectListener() {
 			@Override
 			public void onSelect(int index, PointType pointType) {
@@ -209,7 +208,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return animationsHandler;
 	}
 
-	private int getInitialMenuState() {
+	public int getInitialMenuState() {
 		return MenuState.FULL_SCREEN;
 	}
 
@@ -321,7 +320,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public int getCurrentMenuState() {
-		return currentMenuState;
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			return fragmentRef.get().getCurrentMenuState();
+		}
+		return 0;
 	}
 
 	public int getSupportedMenuStates() {
@@ -338,30 +341,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	public boolean slideUp() {
-		int v = currentMenuState;
-		for (int i = 0; i < 2; i++) {
-			v = v << 1;
-			if ((v & getSupportedMenuStates()) != 0) {
-				currentMenuState = v;
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean slideDown() {
-		int v = currentMenuState;
-		for (int i = 0; i < 2; i++) {
-			v = v >> 1;
-			if ((v & getSupportedMenuStates()) != 0) {
-				currentMenuState = v;
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public void showHideMenu(int menuState) {
@@ -672,7 +651,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		View mainView = getMainView();
 		if (mainView != null) {
 			AppCompatImageView foldButtonView = (AppCompatImageView) mainView.findViewById(R.id.fold_button);
-			foldButtonView.setImageResource(currentMenuState == MenuState.HEADER_ONLY ?
+			foldButtonView.setImageResource(getCurrentMenuState() == MenuState.HEADER_ONLY ?
 					R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down);
 			foldButtonView.setOnClickListener(new OnClickListener() {
 				@Override
@@ -691,7 +670,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void expandCollapse() {
-		if (currentMenuState == MenuState.HEADER_ONLY) {
+		if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 			openMenuFullScreen();
 		} else {
 			openMenuHeaderOnly();
@@ -834,22 +813,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		int margin = AndroidUtils.dpToPx(app, 3);
 
 		View startButton = mainView.findViewById(R.id.start_button);
-		TextView startButtonText = (TextView) mainView.findViewById(R.id.start_button_descr);
+		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
 		boolean publicTransportMode = routingHelper.getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
+		int color;
 		if (isRouteCalculated()) {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
-			int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
-			startButtonText.setTextColor(ContextCompat.getColor(app, color));
-			Drawable icon = app.getUIUtilities().getIcon(iconId, color);
-			startButtonText.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+			color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
 		} else {
 			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
-			int color = R.color.description_font_and_bottom_sheet_icons;
-			startButtonText.setTextColor(ContextCompat.getColor(app, color));
-			Drawable icon = app.getUIUtilities().getIcon(iconId, color);
-			startButtonText.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+			color = R.color.description_font_and_bottom_sheet_icons;
 		}
+		startButtonText.color2 = ContextCompat.getColor(app, color);
+		startButtonText.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(iconId, color), null, null, null);
 		if (publicTransportMode) {
 			startButtonText.setText(R.string.shared_string_show_on_map);
 		} else if (routingHelper.isFollowingMode() || routingHelper.isPauseNavigation()) {
@@ -1576,7 +1552,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void selectOnScreen(PointType pointType) {
 		selectFromMapTouch = true;
 		selectFromMapPointType = pointType;
-		selectFromMapMenuState = currentMenuState;
+		selectFromMapMenuState = getCurrentMenuState();
 		hide();
 	}
 
@@ -1897,12 +1873,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (!isVisible() && mapActivity != null) {
-			currentMenuState = menuState;
+			int initialMenuState = menuState;
 			switched = mapActivity.getMapLayers().getMapControlsLayer().switchToRoutePlanningLayout();
 			boolean refreshMap = !switched;
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			if (!portrait) {
-				currentMenuState = MenuState.FULL_SCREEN;
+				initialMenuState = MenuState.FULL_SCREEN;
 				mapActivity.getMapView().setMapPositionX(1);
 				refreshMap = true;
 			}
@@ -1911,7 +1887,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				mapActivity.refreshMap();
 			}
 
-			MapRouteInfoMenuFragment.showInstance(mapActivity);
+			MapRouteInfoMenuFragment.showInstance(mapActivity, initialMenuState);
 
 			if (!AndroidUiHelper.isXLargeDevice(mapActivity)) {
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), false);
