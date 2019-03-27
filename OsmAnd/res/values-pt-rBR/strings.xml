@@ -2911,21 +2911,21 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tocar neste botão de ação mostra ou oculta faixas GPX selecionadas no mapa</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
-    <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa
-\n
-\n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade
-\n
-\n - Navegação de transporte público que suporta todos os tipos de transporte: metro, ônibus, bonde/VLT, etc.
-\n
-\n - Nova Ação Rápida para mostrar/ocultar faixas e modos dia/noite
-\n
-\n - Áreas fixas exibidas como inundadas na Alemanha, África do Sul, Quebec
-\n
-\n - Suporte adicional para importação de KML e KMZ
-\n
-\n - Colisões fixas na abertura de algumas paragens de transportes públicos
-\n
-\n - Removido Facebook e Firebase Analytics da versão gratuita (OsmAnd+ não inclui)
+    <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa 
+\n 
+\n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade 
+\n 
+\n - Navegação de transporte público que suporta todos os tipos de transporte: metro, ônibus, bonde/VLT, etc. 
+\n 
+\n - Nova Ação Rápida para mostrar/ocultar faixas e modos dia/noite 
+\n 
+\n - Correção de áreas aparecendo como inundadas na Alemanha, África do Sul, Quebec 
+\n 
+\n - Suporte adicional para importação de KML e KMZ 
+\n 
+\n - Correção de falha na abertura de algumas paradas de transporte público 
+\n 
+\n - Remoção do Facebook e Firebase Analytics da versão gratuita (OsmAnd+ não inclui) 
 \n</string>
     <string name="use_osm_live_public_transport_description">Habilitar o transporte público para alterações do OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público OsmAnd Live</string>

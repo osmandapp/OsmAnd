@@ -305,7 +305,7 @@
     <string name="recording_context_menu_arecord">خذ ملاحظة صوتية</string>
     <string name="recording_context_menu_vrecord">خذ ملاحظة فيديو</string>
     <string name="layer_recordings">طبقة التسجيل</string>
-    <string name="recording_description">تسجيل %1$s %3$s %2$s</string>
+    <string name="recording_description">يتم تسجيل %1$s %3$s %2$s</string>
     <string name="map_widget_av_notes">ملاحظات الصوت/الفيديو</string>
     <string name="audionotes_plugin_description">هاته الأداة توفر وظائف لتدوين الملاحظات الصوتية /المصورة/الفيديو خلال الرحلة، سواء باستخدام زر على شاشة الخريطة، أو مباشرة من القائمة لأي موقع على الخريطة.</string>
     <string name="audionotes_plugin_name">ملاحظات صوتية / مصورة</string>
@@ -359,7 +359,7 @@
     <string name="auto_zoom_map">تكبير الخريطة تلقائيًا</string>
     <string name="snap_to_road_descr">ألصق الموقع إلى الشوارع أثناء الملاحة.</string>
     <string name="snap_to_road">الالتصاق بالطريق</string>
-    <string name="osmand_play_title_30_chars">خرائط OsmAnd وملاحة</string>
+    <string name="osmand_play_title_30_chars">خرائط OsmAnd والتنقل</string>
     <string name="osmand_short_description_80_chars">برنامج عرض الخرائط العالمية والملاحة باستخدام خرائط الشوارع المفتوحة OSM أثناء الاتصال بالانترنت أو من دونه</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ للخرائط و الملاحة</string>
     <string name="osmand_plus_short_description_80_chars">برنامج عرض الخرائط العالمية والملاحة باستخدام خرائط الشوارع المفتوحة OSM أثناء الاتصال بالانترنت أو من دونه</string>
@@ -472,11 +472,11 @@
     <string name="index_name_africa">إفريقيا</string>
     <string name="index_name_asia">آسيا</string>
     <string name="index_name_oceania">أستراليا و أوقيانوسيا</string>
-    <string name="routing_settings">الملاحة</string>
-    <string name="routing_settings_descr">حدد خيارات الملاحة.</string>
+    <string name="routing_settings">التنقل</string>
+    <string name="routing_settings_descr">حدد خيارات التنقل.</string>
     <string name="index_settings">إدارة بيانات الخرائط</string>
     <string name="general_settings">عام</string>
-    <string name="general_settings_descr">ضبط العرض والإعدادات العامة للتطبيق.</string>
+    <string name="general_settings_descr">ضبط الشاشة والإعدادات العامة للتطبيق.</string>
     <string name="open_street_map_login_descr">مطلوب لرفع التعديلات إلى openstreetmap.org.</string>
     <string name="local_openstreetmap_uploading">جاري الرفع…</string>
     <string name="local_openstreetmap_uploadall">رفع الكل</string>
@@ -512,7 +512,7 @@
     <string name="rendering_attr_contourLines_description">اعرض درجة التّكبير (يتطلب البيانات المحيطية):</string>
     <string name="back_left">الأيسر الخلفي</string>
     <string name="left">إلى اليسار</string>
-    <string name="front_left">الأيسر الأمامي</string>
+    <string name="front_left">يساراً الى الامام</string>
     <string name="towards">نحو</string>
     <string name="no_info">لا توجد بيانات</string>
     <string name="direction_style_sidewise">جانب واحد (8 قطاعات)</string>
@@ -522,7 +522,7 @@
     <string name="i_am_here">أنا هنا</string>
     <string name="index_name_voice">الحزم الصوتية (مسجلة، ميزات محدودة)</string>
     <string name="index_name_tts_voice">الحزم الصوتية (صوت آلي، مفضلة)</string>
-    <string name="profile_settings">إعدادات التشكيل الجانبي المحددة</string>
+    <string name="profile_settings">إعدادات ملف شخصي مخصصة</string>
     <string name="zoom_by_trackball_descr">غيّر نمط تكبير الخريطة بواسطة حركات كرة التّتبع الأفقية.</string>
     <string name="zoom_by_trackball">استخدم كرة التّتبع للتّحكم في التّكبير</string>
     <string name="use_fluorescent_overlays">تراكب فلوري</string>
@@ -587,7 +587,7 @@
     <string name="local_openstreetmap_were_uploaded">{0} POI/الملاحظات تم رفعها</string>
     <string name="live_monitoring_url_descr">تحديد عنوان ويب مع بناء جملة المعلمة: اللات = {0}، خط الطول = {1}، والطابع الزمني = {2}، HDOP = {3}، {4 ارتفاع =}، والسرعة = {5}، واضعة = {6}.</string>
     <string name="gpx_monitoring_disabled_warn">سجل المسار عن طريق ويدجت GPX أو عن طريق إعدادات \'تسجيل الرحلة\'.</string>
-    <string name="free_version_message">يمكنك تحميل أو تحديث الخرائط %1$s</string>
+    <string name="free_version_message">"يمكنك تحميل أو تحديث  %1$s  الخرائط."</string>
     <string name="poi_context_menu_showdescription">اظهار وصف POI.</string>
     <string name="index_name_other">خرائط عالمية حسب الموضوع</string>
     <string name="index_name_wiki">في جميع أنحاء العالم ويكيبيديا النقاط المهمة</string>
@@ -597,25 +597,25 @@
     <string name="global_settings">الاعداد\ات العالمية</string>
     <string name="global_app_settings">اعدادات التطبيق العامة</string>
     <string name="user_name">اسم مستخدم OSM الخاص بك</string>
-    <string name="user_password">كلمة OSM الخاصة بك</string>
-    <string name="osmand_service">حالة وضع السكون</string>
-    <string name="osmand_service_descr">تشغيل أوسماند OSMAnd في الخلفية بينما الشاشة مُطفأة.</string>
-    <string name="download_files_not_enough_space">ليس هناك مساحة حرة كافية لتنزيل %1$s م.ب. (المساحة الحرة: %2$s).</string>
+    <string name="user_password">كلمة مرور OSM الخاصة بك</string>
+    <string name="osmand_service">وضع الخلفية</string>
+    <string name="osmand_service_descr">OSMAnd يشتغل في الخلفية بينما الشاشة مُطفأة.</string>
+    <string name="download_files_not_enough_space">ليس هناك مساحة كافية لتنزيل %1$s م.ب. (المساحة الحرة: %2$s).</string>
     <string name="download_files_question_space">تنزيل {0} ملف ؟
  مساحة التخزين المستخدمة هي {1} مب.
 (المساحة المتوفرة هي {2} مب.)</string>
     <string name="use_transparent_map_theme">السمة الشفافة</string>
     <string name="native_library_not_supported">المكتبات الأصيلة غير مدعومة على هذا الجهاز.</string>
-    <string name="init_native_library">تهيئة المكتبة الأصيلة…</string>
-    <string name="choose_auto_follow_route">إعرض رؤية الخريطة في المنتصف تلقائيا</string>
+    <string name="init_native_library">جاري تهيئة المكتبة الأصيلة…</string>
+    <string name="choose_auto_follow_route">عرض الخريطة في المنتصف تلقائيا</string>
     <string name="choose_auto_follow_route_descr">المدة اللازمة ليتزامن عرض الخريطة مع الموقع الحالي.</string>
-    <string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
-    <string name="auto_follow_route_navigation_descr">التوسيط التلقائي لعرض الخريطة فقط أثناء الملاحة.</string>
-    <string name="auto_follow_location_enabled">توسيط تلقائي للخريطة المستخدمة.</string>
+    <string name="auto_follow_route_navigation">التنقل التلقائي في المركز فقط</string>
+    <string name="auto_follow_route_navigation_descr">عرض مركز الخريطة التلقائي فقط أثناء التنقل.</string>
+    <string name="auto_follow_location_enabled">يتم عرض توسيط الخريطة التلقائي.</string>
     <string name="pref_vector_rendering">خيارات محددةناقلات العارض</string>
     <string name="pref_overlay">غطاء/بطانة</string>
     <string name="pref_raster_map">اعدادات مصدر الخريطة</string>
-    <string name="pref_vector_map">اعدادات الخريطة المتجهة</string>
+    <string name="pref_vector_map">اعدادات خريطة فيكتور</string>
     <string name="delete_confirmation_msg">حذف %1$s؟</string>
     <string name="city_type_suburb">ضاحية</string>
     <string name="city_type_hamlet">قرية</string>
@@ -626,12 +626,12 @@
     <string name="animate_route">ابدا المحاكاة</string>
     <string name="file_can_not_be_renamed">لا يمكن اعادة تسمية الملف.</string>
     <string name="file_with_name_already_exists">يوجد بالفعل ملف بهذا الاسم.</string>
-    <string name="shared_string_gpx_route">الطريق GPX</string>
-    <string name="poi_query_by_name_matches_categories">وجد عدة تصنيفات POI توافق الاستعلام:</string>
+    <string name="shared_string_gpx_route">طريق GPX</string>
+    <string name="poi_query_by_name_matches_categories">يوجد عدة تصنيفات POI المطابقة للاستعلام:</string>
     <string name="data_to_search_poi_not_available">البيانات المحلية لبحث POI غير موجودة.</string>
     <string name="poi_filter_by_name">بحث بالاسم</string>
     <string name="old_poi_file_should_be_deleted">ملف بيانات POI \'%1$s\' لا لزوم له ويمكن حذفه.</string>
-    <string name="update_poi_file_not_found">لم يتم العثور على الملف المحلي للمحافظة على تغييرات البوي POI وتعذر إنشاءه.</string>
+    <string name="update_poi_file_not_found">لم يتم العثور على الملف المحلي للمحافظة على تغييرات POI وتعذر إنشاءه.</string>
     <string name="button_upgrade_osmandplus">ترقية الى OsmAnd+</string>
     <string name="map_version_changed_info">تحميل نسخة جديدة من التطبيق لتكون قادر على استخدام ملفات الخريطة الجديدة.</string>
     <string name="shared_string_rename">تغيير الإسم</string>
@@ -739,7 +739,7 @@
     <string name="incomplete_locale">ناقص</string>
     <string name="shared_string_next">التالي</string>
     <string name="shared_string_previous">السابق</string>
-    <string name="unit_of_length_descr">تغيير وحدات الطول.</string>
+    <string name="unit_of_length_descr">تغيير وحدات قياس المسافة.</string>
     <string name="unit_of_length">وحدات الطول</string>
     <string name="si_mi_feet">أميال/أقدام</string>
     <string name="si_mi_yard">ميل/ ياردة</string>
@@ -918,7 +918,7 @@
     <string name="routing_settings_2">إعدادات الملاحة</string>
     <string name="general_settings_2">إعدادات عامة</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">موافق</string>
+    <string name="shared_string_ok">حسناً</string>
     <string name="shared_string_dismiss">انصراف</string>
     <string name="shared_string_do_not_use">لا تستخدم</string>
     <string name="shared_string_enable">تفعيل</string>
@@ -1132,7 +1132,7 @@
     <string name="osm_changes_added_to_local_edits">تم إضافة تعديلات OSM إلى التغييرات المحلية</string>
     <string name="local_osm_changes_upload_all_confirm">ستقوم برفع %1$d تغيير إلى الموقع. هل أنت متأكد؟</string>
     <string name="delay_to_start_navigation_descr">تحديد وقت الانتظار للبقاء في شاشة تخطيط الطريق.</string>
-    <string name="delay_to_start_navigation">ابدأ الملاحة دوران بدوران بعد…</string>
+    <string name="delay_to_start_navigation">بدء التوجيه المفصل بعد…</string>
     <string name="action_create">إنشاء إجراء</string>
     <string name="action_modify">تعديل إجراء</string>
     <string name="action_delete">حذف إجراء</string>
@@ -1239,8 +1239,8 @@
     <string name="arrival_distance_factor_late">متأخر</string>
     <string name="arrival_distance_factor_at_last">في الأمتار الأخيرة</string>
     <string name="index_name_netherlands">أوربا - هولندا</string>
-    <string name="keep_informing">إعادة تعليمات الملاحة</string>
-    <string name="shared_string_release">تم</string>
+    <string name="keep_informing">إعادة تعليمات التنقل</string>
+    <string name="shared_string_release">تم النشر</string>
     <string name="get_plugin">تحميل</string>
     <string name="plugin_install_needs_network">أنت بحاجة لأن تكون متصلاً بإنترنت لتثبيت هذا البرنامج المساعد.</string>
     <string name="navigation_intent_invalid">صيغة خاطئة: %s</string>
@@ -1250,7 +1250,7 @@
     <string name="saving_gpx_tracks">حفظ ملف GPX…</string>
     <string name="search_POI_level_btn">ابحث عن المزيد</string>
     <string name="failed_op">فشل</string>
-    <string name="follow">بدء الملاحة</string>
+    <string name="follow">بدء التوجيه</string>
     <string name="only_show">عرض الطريق</string>
     <string name="address">عنوان</string>
     <string name="router_service">خدمة الملاحة</string>
@@ -1877,7 +1877,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">اوفرلاي رمز تسلق الجبال</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم مسارات وفقا لآثار OSMC.</string>
     <string name="local_index_description">انقر على أي عنصر موجود لمعرفة المزيد من التفاصيل، انقر مطولا للتعطيل أو الحذف. البيانات الحالية في الجهاز (%1$s متاحة):</string>
-    <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة.</string>
+    <string name="keep_informing_descr">إعادة إعلان تعليمات التنقل في فترات منتظمة.</string>
     <string name="shared_string_others">آخرى</string>
     <string name="local_index_action_do">أنت على وشك %1$s %2$s عنصر. تواصل؟</string>
     <string name="amenity_type_geocache">البيانات الجغرافية المؤقتة</string>
@@ -1998,7 +1998,7 @@
     <string name="skip_map_downloading_desc">ليس لديك أي خريطة محلية مثبتة. يمكنك اختيار خريطة من اللائحة أو تنزيل خرائط لاحقاً عبر \'القائمة - %1$s\'.</string>
     <string name="search_another_country">حدد منطقة أخرى</string>
     <string name="search_map">البحث عن الخرائط جارٍ …</string>
-    <string name="first_usage_wizard_desc">دع تطبيق أواسام آند يحدد موقعك ويقترح عليك تنزيل خرائط لتلك المنطقة.</string>
+    <string name="first_usage_wizard_desc">دع تطبيق OsmAnd يحدد موقعك ويقترح عليك تنزيل خرائط لتلك المنطقة.</string>
     <string name="location_not_found">الموقع غير موجود</string>
     <string name="no_inet_connection">لا يوجد اتصال بالشبكة</string>
     <string name="no_inet_connection_desc_map">مطلوب لتنزيل الخرائط.</string>
@@ -2207,7 +2207,7 @@
     <string name="subscribe_email_error">خطأ</string>
     <string name="nautical_maps">الخرائط البحرية</string>
     <string name="fonts_header">خطوط الخريطة</string>
-    <string name="right_side_navigation">القيادة على اليمين</string>
+    <string name="right_side_navigation">القيادة بالجهة اليمنى</string>
     <string name="driving_region_automatic">آلي</string>
     <string name="parking_options">خيارات مواقف السيارات</string>
     <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند.</string>
@@ -2275,7 +2275,7 @@
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
     <string name="srtm_menu_download_descr">تحميل خريطة الخط الكنتوري لهذه المنطقة.</string>
     <string name="show_from_zoom_level">عرض من مستوى التكبير/التصغير</string>
-    <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
+    <string name="display_zoom_level">مستوى تكبير الشاشة: %1$s</string>
     <string name="animate_my_location">قم بتحريك موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة الخطوط الكنتورية على الخريطة، أنت بحاجة لشراء وتثبيت البرنامج المساعد \'للخطوط الكنتورية\'</string>
     <string name="animate_my_location_desc">تفعيل حركة تعديل مجال رؤية الخريطة بالنسبة لموقعي أثناء الملاحة.</string>
@@ -2307,17 +2307,57 @@
     <string name="rendering_attr_depthContours_description">اظهار نقاط ومعالم العمق.</string>
     <string name="auto_split_recording_descr">بدء جزء جديد بعد فجوة 6 دقائق، مسار جديد بعد فجوة 2سا، أو ملف جديد بعد الانقطاع لفجوة أطول إذا تغير التاريخ.</string>
     <string name="shared_string_paused">متوقف مؤقتاً</string>
-    <string name="route_is_too_long_v2">الرجاء إضافة الوجهات المتوسطة إن لم يتم العثور على أية نتيجة في غضون 10 دقائق.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (اOSM توجيهات الملاحة الآلية) تطبيق خريطة وملاحة مع امكانية الوصول إلى بيانات (OSM) مجاناً وفي جميع أنحاء العالم، وبجودة عالية. استمتع بمستكشف بالصوت والصورة، وعرض POI (نقاط الاهتمام)، إنشاء وإدارة مسارات GPX، استخدام عرض وعلو بيانات الخطوط الكنتورية (عن طريق البرنامج المساعد)، اختيار بين نمط القيادة، ركوب الدراجات وطرق المشاة، التعديل على الموقع وغيرها.</string>
-    <string name="osmand_extended_description_part2">الملاحة GPS • يمكنك أن تختار بين وضع دون اتصال (لا رسوم تجوال عندما تكون في الخارج) أو بالإنترنت (أسرع) • التوجيه الصوتي انعطاف بانعطاف يقودك طوال الطريق (مسجل أو مدرج) 
-\n • يتم اعادة توجيه الطريق كلما انحرفت عنه • سيساعدك كل من التوجيه، أسماء الشوارع، والوقت المقدر للوصول على طول الطريق • لجعل رحلتك أكثر أماناً، يبدل وضع النهار/الليل تلقائياً • يمكنك اختيار إظهار حدود السرعة والتحذير إذا حدث تجاوز • ضبط تكبير/تصغير الخريطة حسب السرعة • يمكنك البحث عن الوجهات بعنوان، حسب النوع (مثال: موقف سيارة، مطعم، فندق، محطة بنزين، متحف)، أو حسب الإحداثيات الجغرافية • يدعم النقاط الوسيطة وسط مسار الرحلة • يمكنك تسجيل مسار GPX الخاص بك أو رفعه ومتابعته</string>
+    <string name="route_is_too_long_v2">للمسافات الطويلة: الرجاء إضافة وجهات متوسطة إن لم يتم العثور على طريق خلال 10 دقائق.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (توجيهات OSM للتنقل الآلية) تطبيق خريطة وتنقل مع امكانية الوصول إلى بيانات (OSM) مجاناً وفي جميع أنحاء العالم، وبجودة عالية. استمتع بمستكشف بالصوت والصورة، وعرض POI (نقاط الاهتمام)، إنشاء وإدارة مسارات GPX، استخدام عرض ارتفاع بيانات الخطوط الكنتورية (عن طريق المكون)، اختيار بين نمط القيادة، ركوب الدراجات والمشاة، التعديل على الموقع وغيرها.</string>
+    <string name="osmand_extended_description_part2">التنقل عبر GPS
+\n• يمكنك أن تختار بين وضع دون اتصال (لا رسوم تجوال عندما تكون في الخارج) أو بالإنترنت (أسرع)
+\n• التوجيه الصوتي بالتفصيل يوجهك طوال الطريق (مسجل أو مدرج) 
+\n• يتم اعادة توجيهيك للطريق كلما انحرفت عنه
+\n• سيساعدك كل من الموجه، أسماء الشوارع، والوقت المقدر للوصول طوال الطريق
+\n• لجعل رحلتك أكثر أماناً، يتم تبديل وضع النهار/الليل تلقائياً
+\n• يمكنك اختيار إظهار حدود السرعة والتحذير إذا حدث تجاوز
+\n• ضبط تكبير/تصغير الخريطة حسب السرعة
+\n• يمكنك البحث عن الوجهات بعنوان، حسب النوع (مثال: موقف سيارة، مطعم، فندق، محطة بنزين، متحف)، أو حسب الإحداثيات الجغرافية
+\n• يدعم النقاط الوسيطة وسط مسار الرحلة
+\n• يمكنك تسجيل مسار GPX الخاص بك أو رفعه ومتابعته</string>
     <string name="osmand_extended_description_part3">خريطة • \"عرض النقاط POI\" (نقطة اهتمام) من حولك • ضبط الخريطة اتجاه الحركة أو (البوصلة) • اظهار مكانك الحالي وما يقابلك • مشاركة موقعك حتى يبسنى لأصدقاء ايجادك • الاحتفاظ بأهم الأماكن في المفضلة • يسمح لك باختيار كيفية عرض الأسماء على الخريطة: باللغة الإنجليزية، اللغة المحلية أو حسب الإملاء الصوتي • اظهار نمط خريطة انترنت متخصص ، صورة قمر صناعي (Bing)، اظهار طبقات خريطة متراكبة مختلفة كالسياحة/مسارات GPX للملاحة وطبقات إضافية مع شفافية قابلة للتعديل</string>
     <string name="osmand_extended_description_part4">البرنامج المساعد لخرائط Skiing OsmAnd للتزلج يمكنك من مشاهدة مسارات التزلج مع مستوى من التعقيد وبعض المعلومات الإضافية، كمواقع المصاعد والمرافق الأخرى.</string>
-    <string name="osmand_extended_description_part5">"ركوب الدراجات الهوائية • يمكنك أن تجد مسارات الدراجات الهوائية على الخريطة • الملاحة في وضع ركوب الدراجات تقترح مسارات دراجات هوائية • يمكنك مشاهدة سرعةك وعلوك • تسجيل GPX يتيح لك تسجيل رحلتك ومشاركتها مع الغير • عن طريق برنامج مساعد اضافي يمكنك  عرض الخطوط الكنتورية والتضاريس"</string>
-    <string name="osmand_extended_description_part6">مشي، تنزه، جولة في مدينة • الخريطة تظهر لك ممرات مشي وتنزه • ويكيبيديا بلغتك المفضلة ستخبرك الكثير أثناء جولتك • مواقف نقل عام (حافلة ،ترامواي ،قطار)، بما في ذلك أسماء خطوط النقل تساعدك على التجول في مدينة جديدة • التجول بمساعدة الـGPS يساعد على تحديد طريق وجهتك باستعمال ممرات مشي • يمكنك تسجيل ورفع مسارات GPX ومتابعتها ومشاركنها</string>
-    <string name="osmand_extended_description_part8">Osmand تطبيق بمصدر مفتوح، وجاري تطويره بنشاط. يمكن للجميع أن يساهم بالإبلاغ عن الأخطاء، تحسين الترجمة أو تطوير ميزات جديدة. هذا المشروع في تحسين مستمر عبر جميع أشكال تفاعل المطورين والمستخدمين. التقدم المحرز في المشروع يعتمد أيضا على المساهمات المالية لتمويل التطوير واختبار الميزات جديدة. التغطية التقريبية للخريطة وجودتها: • أوروبا الغربية: * * * • أوروبا الشرقية: * * * • روسيا: * * * • أمريكا الشمالية: * * * • أمريكا الجنوبية: * * • آسيا: * * • اليابان وكوريا آند: * * * • الشرق الأوسط: * * • أفريقيا: * * • أنتاركتيكا: * معظم البلدان في جميع أنحاء العالم متاحة للتحميل! احصل على الملاح موثوق بها في بلدك - سواءا في فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، هولندا، الولايات المتحدة الأمريكية، روسيا، البرازيل أو أي دولة أخرى.</string>
+    <string name="osmand_extended_description_part5">"ركوب الدراجات الهوائية
+\n• العثور على مسار دراجات على الخريطة
+\n• التنقل في وضع ركوب الدراجات تقترح لك مسار دراجات
+\n• يمكنك مشاهدة سرعتك والارتفاه الذي انت به
+\n• خيار  تسجيل GPX يتيح لك تسجيل رحلتك ومشاركتها
+\n• عبر مكون اضافي يمكنك  عرض الخطوط الكنتورية والتضاريس"</string>
+    <string name="osmand_extended_description_part6">المشي، التنزه، جولة في المدينة
+\n• الخريطة تظهر لك ممرات المشي والتنزه
+\n• ويكيبيديا سيخبرك الكثير اثناء جولتك وبلغتك المفضلة
+\n• مواقف نقل عام (حافلة ،ترام ،قطار)، بما في ذلك اسماء خطوط النقل ويساعدك على التجول في مدينة جديدة
+\n• التجول عبر الـGPS وفي وضع المشاة يحدد طريقك باستعمال ممرات المشي
+\n
+\n• يمكنك تسجيل ورفع مسارات الـGPX ومتابعتها ومشاركتها
+\n</string>
+    <string name="osmand_extended_description_part8">Osmand تطبيق بمصدر مفتوح ويتم تطويره بنشاط. يمكن للجميع أن يساهم بالإبلاغ عن الأخطاء، تحسين الترجمة أو تطوير ميزات جديدة. هذا المشروع في تحسين مستمر عبر جميع أشكال تفاعل المطورين والمستخدمين. التقدم المحرز في المشروع يعتمد أيضا على المساهمات المالية لتمويل التطوير واختبار الميزات جديدة.
+\nالتغطية التقريبية للخريطة وجودتها:
+\n• أوروبا الغربية: * * *
+\n• أوروبا الشرقية: * * *
+\n• روسيا: * * *
+\n• أمريكا الشمالية: * * *
+\n• أمريكا الجنوبية: * *
+\n• آسيا: * *
+\n• اليابان وكوريا: * * *
+\n• الشرق الأوسط: * *
+\n• أفريقيا: * *
+\n• أنتاركتيكا: * 
+\nمعظم البلدان في جميع أنحاء العالم متاحة للتحميل!
+\nاحصل على برنامج تنقل موثوق به في بلدك - سواءاً في فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، هولندا، الولايات المتحدة الأمريكية، روسيا، البرازيل أو أي دولة أخرى.</string>
     <string name="osmand_plus_extended_description_part1">"+OsmAnd (توجيهات OSM للملاحة الآلية) تطبيق خريطة وملاحة مع امكانية الوصول إلى بيانات الموقع (OSM) مجاناً وفي جميع أنحاء العالم، وبجودة عالية. استمتع بالملاحة بصوت  والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور وعلو الخطوط الكنتورية، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير. +OsmAnd هو إصدار للتطبيق مدفوع الأجر. قبل شرائه، ادعم المشروع، مول تطوير الميزات الجديدة واحصل على آخر التحديثات. بعض الميزات الرئيسية:"</string>
-    <string name="osmand_plus_extended_description_part2">الملاحة • يعمل على الانترنت (سريع) أو في وضع غير متصل (لا رسوم تجوال خارج الوطن) • توجيه صوتي انعطاف بانعطاف (الأصوات المسجلة أو مدرجة) • توجيه مسار اختياري، عرض اسم الشارع، والوقت المقدر للوصول • يدعم نقاط وسيطة خلال مسارك • إعادة تلقائية للتوجيه كلما انحرفت عن الطريق • البحث عن الأماكن حسب العنوان، النوع (مثل: مطعم، فندق، محطة وقود، متحف)، أو حسب الإحداثيات الجغرافية</string>
+    <string name="osmand_plus_extended_description_part2">الملاحة
+\n• يعمل على الانترنت (سريع) أو في وضع غير متصل (لا رسوم تجوال خارج الوطن)
+\n• توجيه صوتي بالتفصيل (الأصوات المسجلة أو مدرجة)
+\n• موجه مسار اختياري، عرض اسم الشارع، والوقت المقدر للوصول
+\n• يدعم نقاط وسيطة خلال مسارك
+\n• إعادة تلقائية للتوجيه كلما انحرفت عن الطريق
+\n• البحث عن الأماكن حسب العنوان، النوع (مثل: مطعم، فندق، محطة وقود، متحف)، أو حسب الإحداثيات الجغرافية</string>
     <string name="osmand_plus_extended_description_part3">"عرض الخريطة • عرض موقعك والتوجيه  • محاذاة اختيارية للصورة وفق البوصلة أو توجيه الحركة • حفظ أهم أماكنك المفضلة • عرض النقاط المهمة من حولك (POI) • عرض متخصص لبيانات خرائط على الإنترنت، الرؤية من الأقمار الصناعية (من Bing) وتراكب طبقات خرائط مختلفة كالسياحة ومسارات GPX للملاحة وطبقات إضافية مع شفافية قابلة للتعديل • عرض اختياري لأسماء الأماكن باللغة الإنكليزية، اللغة المحلية، أو عبر الإملاء الصوتي"</string>
     <string name="osmand_plus_extended_description_part4">استخدام OSM وبيانات ويكيبيديا • جودة معلومات من أفضل المشاريع التعاونية العالمية • بيانات OSM متاحة لكل بلد أو منطقة • POI ويكيبيديا، الأفضل لمشاهدة المعالم السياحية • التنزيلات مجانية غير محدودة، مباشرة من التطبيق • خرائط فيكتور مدمجة تحدث مرة واحدة في شهر على الأقل • اختر بين بيانات منطقة كاملة أو شبكة الطرق فقط (مثال: سعة اليابان 700 MB في حين 200 MB لشبكة الطرق فقط)</string>
     <string name="osmand_plus_extended_description_part5">"ميزات الأمان • عرض اختياري لوضع النهار/اليل • عرض اختياري للحد الأقصى للسرعة، مع التذكير إذا حصل تجاوز • تكبير/تصغيير اختياري حسب السرعة   • مشاركة موقعك حتى يتمكن لأصدقاءك ايجادك"</string>
@@ -2422,7 +2462,7 @@
     <string name="remove_from_map_markers">إزالة من علامات الخريطة</string>
     <string name="descendingly">تنازلي</string>
     <string name="ascendingly">تصاعدي</string>
-    <string name="date_added">أضيف التاريخ</string>
+    <string name="date_added">تم اضافة التاريخ</string>
     <string name="order_by">ترتيب حسب:</string>
     <string name="marker_show_distance_descr">حدد كيفية الإشارة إلى المسافة والاتجاه لعلامات الخريطة على شاشة الخريطة:</string>
     <string name="use_location">استخدم الموقع</string>
@@ -2461,7 +2501,7 @@
     <string name="shared_string_view">عرض</string>
     <string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى علامات الخريطة</string>
     <string name="wrong_input">إدخال خاطئ</string>
-    <string name="import_gpx_file_description">يمكن استيرادها كنقاط مفضلة، أو كملف مسار.</string>
+    <string name="import_gpx_file_description">يمكن استيرادها كنقاط مفضلة، أو كملف GPX.</string>
     <string name="import_as_gpx">استيراد كملف GPX</string>
     <string name="import_as_favorites">استيراد كمفضلة</string>
     <string name="import_file">استيراد ملف</string>
@@ -2536,7 +2576,7 @@
     <string name="south_abbreviation">ج</string>
     <string name="north_abbreviation">ش</string>
     <string name="optional_point_name">الإسم الإختياري للنقطة</string>
-    <string name="transport_nearby_routes_within">المسارات القريبة في غضون</string>
+    <string name="transport_nearby_routes_within">الطرق القريبة التي في الداخل</string>
     <string name="enter_the_file_name">أدخل إسم الملف.</string>
     <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
     <string name="map_imported_successfully">تمت عملية استيراد الخريطة</string>
@@ -2640,7 +2680,7 @@
     <string name="third_party_application">تطبيق من طرف ثالث</string>
     <string name="keep_passed_markers_descr">العلامات المضافة كمجموعة مفضلة أو نقاط طريق GPX ستظل على الخريطة. اذا كانت المجموعة غير نشطة، العلامات سوف تختفي من الخريطة.</string>
     <string name="keep_passed_markers">إبقاء العلامات المتجاوزة على الخريطة</string>
-    <string name="more_transport_on_stop_hint">هناك المزيد من النقل في هذا الموقف.</string>
+    <string name="more_transport_on_stop_hint">هناك المزيد من وسائل النقل في هذا الموقف.</string>
     <string name="ask_for_location_permission">يرجى إعطاء إذن تحديد الموقع للتطبيق لكي يواصل.</string>
     <string name="thank_you_for_feedback">شكرا على الرد</string>
     <string name="poi_cannot_be_found">النقطة أو الطريق غير موجود.</string>
@@ -2667,14 +2707,14 @@
     <string name="start_editing_card_image_text">دليل السفر العالمي المجانا الذي بامكان أي شخص التعديل عليه.</string>
     <string name="day_off_label">معطّل</string>
     <string name="unirs_render_descr">تعديل النمط الافتراضي لزيادة تباين المشاة و طرق الدراجات .يستخدم Legasy Mapnik colors .</string>
-    <string name="commiting_way">تعديل طريق…</string>
+    <string name="commiting_way">طريق الزامية…</string>
     <string name="wikivoyage_travel_guide_descr">أدلة إلى الأماكن الأكثر أهمية في العالم، في أوسماند بدون الحاجة إلى اتصال انترنت.</string>
     <string name="in_app_purchase">شراء بداخل التطبيق</string>
     <string name="in_app_purchase_desc">دفع مرة واحدة</string>
     <string name="in_app_purchase_desc_ex">عند الشراء مرة واحدة سيكون متاحًا لك إلى الأبد.</string>
     <string name="unlock_all_features">فتح كل ميزات أوسماند</string>
     <string name="purchase_dialog_title">اختيار خطة</string>
-    <string name="purchase_dialog_travel_description">اشترِ واحدًا من الآتي للحصول على وظائف دليل سفر بدون نت:</string>
+    <string name="purchase_dialog_travel_description">اشترِ واحدًا من الآتي للحصول على وظيفة دليل السفر بدون نت:</string>
     <string name="purchase_dialog_subtitle">اختر العنصر المناسب:</string>
     <string name="shared_string_dont">لا تفعل</string>
     <string name="shared_string_do">افعل</string>
@@ -2718,7 +2758,7 @@
 \n• قارب الملاحة: دعم الممر المائي الممر
 \n
 \n• إصلاحات الأخطاء الأخرى</string>
-    <string name="start_editing_card_description">يمكنك وتحرير أي مقال على Wikivoyage. تبادل المعرفة والخبرة والموهبة واهتمامك</string>
+    <string name="start_editing_card_description">يمكنك تحرير أي مقالة على Wikivoyage. تبادل المعرفة والخبرة والموهبة واهتمامكم</string>
     <string name="cubic_m">m³</string>
     <string name="add_home">اضف المنزل</string>
     <string name="add_work">إضافة العمل</string>
@@ -2803,13 +2843,13 @@
     <string name="by_transport_type">بواسطة %1$s</string>
     <string name="step_by_step">خطوة بخطوة</string>
     <string name="road_types">أنواع الطرق</string>
-    <string name="exit_at">اخرج عند</string>
-    <string name="sit_on_the_stop">توقف عند مكان التوقف</string>
+    <string name="exit_at">خروج عند</string>
+    <string name="sit_on_the_stop">ابقى عند لوحة التوقف</string>
     <string name="shared_string_swap">تبديل</string>
     <string name="show_more">إظهار المزيد</string>
-    <string name="tracks_on_map">المسارات على الخريطة</string>
-    <string name="quick_action_show_hide_gpx_tracks">إظهار/إخفاء مسارات GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">النقر على هذا الزر العمل يظهر أو يخفي مسارات GPX المحددة على الخريطة</string>
+    <string name="tracks_on_map">المسارات المعروضة</string>
+    <string name="quick_action_show_hide_gpx_tracks">إظهار/إخفاء المسارات</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">النقر على هذا الزر يعمل على اظهار أو اخفاء مسارات GPX المحددة على الخريطة</string>
     <string name="quick_action_gpx_tracks_hide">إخفاء مسارات GPX</string>
     <string name="quick_action_gpx_tracks_show">إظهار مسارات GPX</string>
     <string name="add_destination_query">الرجاء إضافة الوجهة أولا</string>
@@ -2847,10 +2887,51 @@
     <string name="rendering_attr_smoothness_very_horrible_name">رهيب جداً</string>
     <string name="rendering_attr_smoothness_impassable_name">غير سالك</string>
     <string name="rendering_attr_highway_class_motorway_name">الطريق السريع</string>
-    <string name="avoid_pt_types_descr">حدد أنواع وسائل النقل العامة لتفاديها للملاحة:</string>
-    <string name="quick_action_day_night_mode">%s نمط</string>
-    <string name="avoid_pt_types">تجنب أنواع النقل …</string>
-    <string name="shared_string_walk">مشي</string>
+    <string name="avoid_pt_types_descr">حدد أنواع وسائل النقل العامة لتفاديها للتنقل:</string>
+    <string name="quick_action_day_night_mode">%s وضع</string>
+    <string name="avoid_pt_types">تجنب أنواع النقل…</string>
+    <string name="shared_string_walk">المشي</string>
     <string name="save_poi_value_exceed_length">الحد الأقصى لطول العلامة \"%s\"  هو 255 حرفًا.
-\nيرجى اختصار للمتابعة.</string>
+\nيرجى الاختصار للمتابعة.</string>
+    <string name="shared_string_degrees">درجات</string>
+    <string name="shared_string_milliradians">مللي راديان</string>
+    <string name="angular_measeurement">وحدات القياس الزاوي</string>
+    <string name="angular_measeurement_descr">تغيير قياس زاوية الازيموث.</string>
+    <string name="save_poi_value_exceed_length_title">طول \"%s\" قيمة</string>
+    <string name="public_transport_warning_descr_blog">تعرف على المزيد حول كيفية حساب OsmAnd للطرق في مدونتنا.</string>
+    <string name="public_transport_warning_title">يخضع التنقل في وسائل النقل العام حاليًا للاختبار التجريبي ، ويتوقع الأخطاء .</string>
+    <string name="add_intermediate">إضافة نقطة وسيطة</string>
+    <string name="transfers_size">%1$d تحويلات</string>
+    <string name="rendering_attr_surface_sett_name">ضبط</string>
+    <string name="rendering_attr_surface_pebblestone_name">حصاة حصبة</string>
+    <string name="rendering_attr_highway_class_state_road_name">طريق دولي</string>
+    <string name="rendering_attr_highway_class_road_name">طريق</string>
+    <string name="rendering_attr_highway_class_street_name">شارع</string>
+    <string name="rendering_attr_highway_class_service_name">خدمة</string>
+    <string name="rendering_attr_highway_class_footway_name">طريق للمشاة</string>
+    <string name="rendering_attr_highway_class_track_name">مسار</string>
+    <string name="rendering_attr_highway_class_bridleway_name">طريق أحصنة</string>
+    <string name="rendering_attr_highway_class_steps_name">خطوات</string>
+    <string name="rendering_attr_highway_class_path_name">مسار</string>
+    <string name="rendering_attr_highway_class_cycleway_name">طريق الدراجات</string>
+    <string name="rendering_attr_undefined_name">غير محدد</string>
+    <string name="release_3_3">" • شاشة اتجاهات جديدة تعرض أزرار وجهة المنزل والعمل ، واختصار المسار السابق ، وقائمة مسارات وعلامات GPX النشطة ، وسجل البحث.
+\n
+\n  • معلومات إضافية تحت تفاصيل الطريق: أنواع الطرق ، السطح ، الانحدار ، النعومة.
+\n
+\n  • التنقل في وسائل النقل العام التي تدعم جميع أنواع النقل: المترو والحافلات والترام ، إلخ.
+\n
+\n  • إجراء سريع جديد لعرض/إخفاء المسارات وأنماط النهار/الليل.
+\n
+\n  • المناطق الثابتة المعروضة كما غمرت المياه في ألمانيا وجنوب أفريقيا وكيبيك.
+\n
+\n  • دعم إضافي لاستيراد KML و KMZ .
+\n
+\n • تعطل ثابت عند فتح بعض محطات النقل العام.
+\n
+\n  • تمت إزالة تحليلات Facebook و Firebase من الإصدار المجاني (لا يتضمنها OsmAnd+)"</string>
+    <string name="use_osm_live_public_transport_description">تمكين النقل العام لتغييرات OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live وسائل النقل العام</string>
+    <string name="routing_attr_avoid_sett_name">تجنب الحصى والطرق المرصوفة</string>
+    <string name="routing_attr_avoid_sett_description">تجنب الحصى والطرق المرصوفة</string>
 </resources>

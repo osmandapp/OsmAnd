@@ -3023,4 +3023,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Mil·liradiants</string>
     <string name="angular_measeurement">Unitats de mesura angular</string>
     <string name="angular_measeurement_descr">Canvia la unitat de mesura de l\'azimut.</string>
+    <string name="routing_attr_avoid_sett_name">Evita els empedrats i els llambordins</string>
+    <string name="routing_attr_avoid_sett_description">Evita els empedrats i els llambordins</string>
 </resources>

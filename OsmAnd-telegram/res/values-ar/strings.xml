@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="km_h">كم/س</string>
+    <string name="shared_string_ok">حسناً</string>
+    <string name="timeline_available_for_free_now">الجدول الزمني ميزة متوفرة الآن مجانا.</string>
+    <string name="disable_monitoring">تعطيل العرض</string>
+    <string name="location_recording_enabled">تسجيل الموقع ممكن</string>
+    <string name="timeline_description">تمكين العرض لتوفير جميع المواقع في السجل.</string>
+    <string name="app_name_short_online">المتتبع عبر النت</string>
+    <string name="app_name_short">متتبعOsmAnd</string>
+    <string name="shared_string_telegram">تيليجرام</string>
+    <string name="privacy_policy_use_telegram">يستخدم تيليجرام (تطبيق المراسلة) للاتصال والتواصل مع الأشخاص.</string>
+    <string name="shared_string_later">لاحقا</string>
+    <string name="osmand_service">وضع الخلفية</string>
+    <string name="nm_h">م.بح/س</string>
+    <string name="si_nm_h">ميل بحري في الساعة (عقدة)</string>
 </resources>
