@@ -69,11 +69,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	}
 
 	@Override
-	public int getLandscapeWidth() {
-		return getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
-	}
-
-	@Override
 	public int getToolbarHeight() {
 		return 0;
 	}
@@ -136,7 +131,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 			if (!isPortrait()) {
 				view.findViewById(R.id.app_modes_fold_container).setVisibility(View.GONE);
-				int widthNoShadow = AndroidUtils.dpToPx(mapActivity, 345f);
+				int widthNoShadow = getLandscapeNoShadowWidth();
 				modesLayoutToolbar.setLayoutParams(new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT));
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
 				params.gravity = Gravity.BOTTOM;
