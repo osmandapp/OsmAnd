@@ -826,7 +826,7 @@
     <string name="poi_denomination_church_of_england">Church of England</string>
     <string name="poi_denomination_episcopal">Episzkopális</string>
     <string name="poi_denomination_shia">Síita</string>
-    <string name="poi_denomination_greek_catholic">Görög katolikus</string>
+    <string name="poi_denomination_greek_catholic">Görögkatolikus</string>
     <string name="poi_denomination_tibetan">Tibeti</string>
     <string name="poi_denomination_salvation_army">Üdvhadsereg</string>
     <string name="poi_denomination_bulgarian_orthodox">Bolgár ortodox</string>
@@ -3552,4 +3552,19 @@
     <string name="poi_generator_source_biomass">Energiaforrás: biomassza</string>
     <string name="poi_health_specialty_radiotheraphy_yes">Sugárkezelés</string>
     <string name="poi_hazard">Veszély</string>
+    <string name="poi_rtsa_scale_filter">Nehézségi fok (az Orosz Túrasportszövetség skáláján)</string>
+    <string name="poi_rtsa_scale_nc">н/к</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+    <string name="poi_rtsa_scale_1a">1А</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1b">1Б</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
+    <string name="poi_rtsa_scale_2a">2А</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+    <string name="poi_rtsa_scale_2b">2Б</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
+    <string name="poi_rtsa_scale_3a">3А</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
+    <string name="poi_rtsa_scale_3b">3Б</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
 </resources>

@@ -2979,4 +2979,8 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n "</string>
     <string name="routing_attr_avoid_sett_name">Vyhnout se kostkám</string>
     <string name="routing_attr_avoid_sett_description">Vyhnout se kočičím hlavám a dlažebním kostkám</string>
+    <string name="shared_string_degrees">Stupně</string>
+    <string name="shared_string_milliradians">Miliradiány</string>
+    <string name="angular_measeurement">Úhlové měrné jednotky</string>
+    <string name="angular_measeurement_descr">Změní jednotku měření azimutu.</string>
 </resources>
