@@ -62,7 +62,7 @@
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
 							android:src="@drawable/ic_action_arrow_down"
-							android:tint="?attr/primary_icon_color" />
+							android:tint="@color/description_font_and_bottom_sheet_icons" />
 
 					</LinearLayout>
 
