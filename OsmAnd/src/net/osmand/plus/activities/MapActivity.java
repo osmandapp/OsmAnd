@@ -1818,7 +1818,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				WeakReference<MapRouteInfoMenuFragment> fragmentRef = mapRouteInfoMenu.findMenuFragment();
 				if (fragmentRef != null) {
 					MapRouteInfoMenuFragment f = fragmentRef.get();
-					if (landscapeLayout) {
+					if (!f.isPortrait()) {
 						tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
 					} else {
 						tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
