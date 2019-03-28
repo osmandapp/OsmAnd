@@ -100,7 +100,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private String destinationStreetStr = "";
 	private int pageMarginPx;
 	private int toolbarHeightPx;
-	private int landscapeWidthPx;
 
 	private GPXFile gpx;
 	@Nullable
@@ -137,11 +136,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		return false;
 	}
 
-	@Override
-	public int getLandscapeWidth() {
-		return landscapeWidthPx;
-	}
-
 	public int getRouteId() {
 		return routeId;
 	}
@@ -155,7 +149,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 		pageMarginPx = dpToPx(PAGE_MARGIN);
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
-		landscapeWidthPx = dpToPx(345f);
 
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {

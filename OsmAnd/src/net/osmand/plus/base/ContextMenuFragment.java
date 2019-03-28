@@ -141,6 +141,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 	}
 
+	public int getLandscapeNoShadowWidth() {
+		return getLandscapeWidth() - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
+	}
+
 	public abstract int getToolbarHeight();
 
 	public boolean isSingleFragment() {
@@ -266,8 +270,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 				final TypedValue typedValueAttr = new TypedValue();
 				mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 				mainView.setBackgroundResource(typedValueAttr.resourceId);
+				mainView.setLayoutParams(new FrameLayout.LayoutParams(getLandscapeWidth(), ViewGroup.LayoutParams.MATCH_PARENT));
+			} else {
+				mainView.setLayoutParams(new FrameLayout.LayoutParams(getLandscapeNoShadowWidth(), ViewGroup.LayoutParams.MATCH_PARENT));
 			}
-			mainView.setLayoutParams(new FrameLayout.LayoutParams(getLandscapeWidth(), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 
 		processScreenHeight(container);
