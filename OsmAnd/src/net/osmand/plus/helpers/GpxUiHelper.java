@@ -1257,8 +1257,9 @@ public class GpxUiHelper {
 		chart.setExtraRightOffset(16);
 		chart.setExtraLeftOffset(16);
 
-		yl.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light));
-		yr.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light));
+		int mainFontColor = ContextCompat.getColor(app, nightMode ? R.color.main_font_dark : R.color.main_font_light);
+		yl.setTextColor(mainFontColor);
+		yr.setTextColor(mainFontColor);
 
 		chart.setFitBars(true);
 
