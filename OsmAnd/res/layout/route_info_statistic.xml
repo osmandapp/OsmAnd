@@ -75,9 +75,9 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="left"
+							android:text="@string/distance"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
-							android:textSize="@dimen/default_sub_text_size"
-							tools:text="@string/route_distance" />
+							android:textSize="@dimen/default_sub_text_size" />
 
 					</LinearLayout>
 
