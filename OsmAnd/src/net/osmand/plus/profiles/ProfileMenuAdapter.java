@@ -68,7 +68,6 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			@Override
 			public void onClick(View v) {
 				listener.changeProfileStatus(item, holder.aSwitch.isChecked());
-				PlatformUtil.getLog(ProfileMenuAdapter.class).debug("Is checked: " + holder.aSwitch.isChecked());
 			}
 		});
 		holder.profileOptions.setOnClickListener(new OnClickListener() {

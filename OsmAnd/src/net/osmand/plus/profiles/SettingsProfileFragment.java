@@ -1,5 +1,6 @@
 package net.osmand.plus.profiles;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -42,6 +43,10 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		profilesList = new ArrayList<>();
 		allDefaultModes = ApplicationMode.allPossibleValues();
 		allDefaultModes.remove(ApplicationMode.DEFAULT);
+		allDefaultModes.remove(ApplicationMode.AIRCRAFT);
+		allDefaultModes.remove(ApplicationMode.MOTORCYCLE);
+		allDefaultModes.remove(ApplicationMode.HIKING);
+		allDefaultModes.remove(ApplicationMode.TRAIN);
 		selectedDefaultModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		selectedDefaultModes.remove(ApplicationMode.DEFAULT);
 		for (ApplicationMode am : allDefaultModes) {
@@ -99,7 +104,9 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void editProfile(ProfileItem item) {
-
+				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
+				intent.putExtra("profile_name", item.title);
+				startActivity(intent);
 			}
 		};
 		adapter = new ProfileMenuAdapter(profilesList, getMyApplication(), listener);

@@ -8,14 +8,9 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 
 public class SettingsProfileActivity extends OsmandActionBarActivity {
 
-	private OsmandApplication app;
-
-
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		app = getMyApplication();
-		app.applyTheme(this);
+		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_fragment_layout);
 		if (savedInstanceState == null) {

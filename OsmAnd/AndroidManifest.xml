@@ -1063,8 +1063,14 @@
     <activity
       android:configChanges="keyboardHidden|orientation"
       android:label="Application profiles"
-      android:name=".profiles.SettingsProfileActivity">
-    </activity>
+      android:name=".profiles.SettingsProfileActivity"/>
+
+
+    <activity android:name=".profiles.SelectedProfileActivity"
+        android:label="Application profiles"
+        />
+
+
   </application>
 
 </manifest>

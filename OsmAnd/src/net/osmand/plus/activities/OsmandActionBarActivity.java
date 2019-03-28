@@ -17,38 +17,38 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
 	protected boolean haveHomeButton = true;
 
-    //should be called after set content view
-    protected void setupHomeButton(){
-        Drawable back = ((OsmandApplication)getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back, R.color.color_white);
-        final ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null) {
-            supportActionBar.setHomeButtonEnabled(true);
-            supportActionBar.setDisplayHomeAsUpEnabled(true);
-            supportActionBar.setHomeAsUpIndicator(back);
-        }
-    }
+	//should be called after set content view
+	protected void setupHomeButton() {
+		Drawable back = ((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back, R.color.color_white);
+		final ActionBar supportActionBar = getSupportActionBar();
+		if (supportActionBar != null) {
+			supportActionBar.setHomeButtonEnabled(true);
+			supportActionBar.setDisplayHomeAsUpEnabled(true);
+			supportActionBar.setHomeAsUpIndicator(back);
+		}
+	}
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
+	@Override
+	public void setContentView(int layoutResID) {
+		super.setContentView(layoutResID);
 		if (haveHomeButton) {
 			setupHomeButton();
 		}
-    }
+	}
 
-    @Override
-    public void setContentView(View view) {
-        super.setContentView(view);
+	@Override
+	public void setContentView(View view) {
+		super.setContentView(view);
 		if (haveHomeButton) {
 			setupHomeButton();
 		}
-    }
+	}
 
-    @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-        super.setContentView(view, params);
+	@Override
+	public void setContentView(View view, ViewGroup.LayoutParams params) {
+		super.setContentView(view, params);
 		if (haveHomeButton) {
 			setupHomeButton();
 		}
-    }
+	}
 }
