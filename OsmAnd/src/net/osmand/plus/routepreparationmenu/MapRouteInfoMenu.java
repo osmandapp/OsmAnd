@@ -1069,9 +1069,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						if (routeDataObject != null) {
 							app.getAvoidSpecificRoads().removeImpassableRoad(routeDataObject);
 						}
-						if (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
-							routingHelper.recalculateRouteDueToSettingsChange();
-						}
+						routingHelper.recalculateRouteDueToSettingsChange();
 						if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
 							mode.parameters.remove(parameter);
 						}
@@ -1104,10 +1102,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 					preference.setModeValue(app.getRoutingHelper().getAppMode(), false);
 					avoidedParameters.remove(routingParameter);
-					RoutingHelper routingHelper = app.getRoutingHelper();
-					if (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
-						routingHelper.recalculateRouteDueToSettingsChange();
-					}
+					app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 					if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && avoidedParameters.isEmpty()) {
 						mode.parameters.remove(parameter);
 					}
