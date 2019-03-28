@@ -154,6 +154,10 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (view != null) {
 			if (isPortrait()) {
 				view.findViewById(getBottomScrollViewId()).setBackgroundDrawable(null);
+				LinearLayout cardsContainer = getCardsContainer();
+				FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
+				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
+				cardsContainer.setLayoutParams(layoutParams);
 			}
 			updateCards();
 			runLayoutListener();
@@ -181,44 +185,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		View mainView = getMainView();
 		if (mainView != null && isPortrait()) {
 			updateCardsLayout();
-			/*
-			LinearLayout cardsContainer = getCardsContainer();
-			final FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
-			final int currentMenuState = getCurrentMenuState();
-			if (animated) {
-				final int marginStart = layoutParams.leftMargin;
-				final int marginEnd = currentMenuState == MenuState.HEADER_ONLY ? pageMarginPx : 0;
-				if (marginStart != marginEnd) {
-					Animation a = new Animation() {
-						@Override
-						protected void applyTransformation(float interpolatedTime, Transformation t) {
-							LinearLayout cardsContainer = getCardsContainer();
-							int margin = marginStart + (int) ((marginEnd - marginStart) * interpolatedTime);
-							layoutParams.setMargins(margin, 0, margin, 0);
-							cardsContainer.setLayoutParams(layoutParams);
-						}
-					};
-					a.setAnimationListener(new Animation.AnimationListener() {
-						@Override
-						public void onAnimationStart(Animation animation) {
-						}
-
-						@Override
-						public void onAnimationEnd(Animation animation) {
-							updateCardsLayout();
-						}
-
-						@Override
-						public void onAnimationRepeat(Animation animation) {
-						}
-					});
-					a.setDuration(ANIMATION_DURATION);
-					cardsContainer.startAnimation(a);
-				}
-			} else {
-				updateCardsLayout();
-			}
-			*/
 		}
 	}
 
@@ -228,19 +194,15 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			LinearLayout cardsContainer = getCardsContainer();
 			View topShadow = getTopShadow();
 			FrameLayout bottomContainer = getBottomContainer();
-			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
-				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
 				topShadow.setVisibility(View.INVISIBLE);
 				bottomContainer.setBackgroundDrawable(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
-				layoutParams.setMargins(0, 0, 0, 0);
 				topShadow.setVisibility(View.VISIBLE);
 				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
 			}
-			cardsContainer.setLayoutParams(layoutParams);
 		}
 	}
 
@@ -252,19 +214,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			LinearLayout cardsContainer = getCardsContainer();
 			View topShadow = getTopShadow();
 			FrameLayout bottomContainer = getBottomContainer();
-			int headerOnlyY = getMenuStatePosY(MenuState.HEADER_ONLY);
 			int halfScreenY = getMenuStatePosY(MenuState.HALF_SCREEN);
-			float margin = 0;
-			if (y > headerOnlyY) {
-				margin = PAGE_MARGIN;
-			} else if (y > halfScreenY) {
-				margin = PAGE_MARGIN;//* (1f - (float)(headerOnlyY - y) / (headerOnlyY - halfScreenY));
-			}
-			int marginPx = dpToPx(margin);
-			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
-			if (layoutParams.leftMargin != marginPx) {
-				layoutParams.setMargins(marginPx, 0, marginPx, 0);
-			}
 			if (y > halfScreenY) {
 				topShadow.setVisibility(View.INVISIBLE);
 				bottomContainer.setBackgroundDrawable(null);
