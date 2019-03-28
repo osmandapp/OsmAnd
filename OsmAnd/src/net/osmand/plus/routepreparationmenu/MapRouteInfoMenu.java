@@ -1684,10 +1684,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = routeInfoMenu.findMenuFragment();
 		if (fragmentRef != null) {
 			MapRouteInfoMenuFragment f = fragmentRef.get();
-			if (mapActivity.isLandscapeLayout()) {
-				tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
-			} else {
-				tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
+			if (f != null) {
+				if (!f.isPortrait()) {
+					tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
+				} else {
+					tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
+				}
 			}
 		}
 		mapActivity.getMapView().fitLocationToMap(latitude, longitude, mapActivity.getMapView().getZoom(),
