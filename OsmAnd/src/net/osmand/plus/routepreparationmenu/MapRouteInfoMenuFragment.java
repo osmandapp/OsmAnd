@@ -452,15 +452,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			return;
 		}
 
-		boolean portraitMode = AndroidUiHelper.isOrientationPortrait(ctx);
-		boolean landscapeLayout = !portraitMode;
 		boolean nightMode = isNightMode();
-		if (!landscapeLayout) {
-			View menuView = view.findViewById(R.id.route_menu_top_shadow_all);
-			AndroidUtils.setBackground(ctx, menuView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		} else {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.route_info_menu_bg_left_light, R.drawable.route_info_menu_bg_left_dark);
-		}
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), nightMode,
 				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
