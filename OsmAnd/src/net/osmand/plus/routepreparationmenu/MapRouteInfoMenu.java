@@ -1856,6 +1856,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch) {
 				mapActivity.getMapActions().stopNavigationWithoutConfirm();
 			}
+			mapActivity.updateStatusBarColor();
 		}
 		if (onDismissListener != null) {
 			onDismissListener.onDismiss(null);

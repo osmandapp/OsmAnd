@@ -225,6 +225,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
@@ -248,8 +249,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		topToolbarPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
 		bottomToolbarPosY = topToolbarPosY + getToolbarHeight();
 
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
 		mainView = view.findViewById(getMainViewId());
 		topShadow = view.findViewById(getTopShadowViewId());
 		cardsContainer = (LinearLayout) view.findViewById(getCardsContainerViewId());
@@ -259,7 +258,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		bottomScrollView.setScrollingEnabled(false);
 		if (getTopViewId() != 0) {
 			View topView = view.findViewById(getTopViewId());
-			AndroidUtils.setBackground(app, topView, nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
+			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		}
 		if (!portrait) {
 			currentMenuState = MenuState.FULL_SCREEN;
