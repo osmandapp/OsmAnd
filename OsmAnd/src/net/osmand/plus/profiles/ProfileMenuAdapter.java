@@ -11,36 +11,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
-import net.osmand.plus.profiles.SettingsProfileFragment.ProfileItem;
 
 
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
-	private List<ProfileItem> items;
+	private List<AppProfile> items;
 	private ProfileListener listener = null;
 	OsmandApplication app;
 
 
-	public ProfileMenuAdapter(List<ProfileItem> items, OsmandApplication app, ProfileListener listener) {
+	public ProfileMenuAdapter(List<AppProfile> items, OsmandApplication app, ProfileListener listener) {
 		this.items = items;
 		this.listener = listener;
 		this.app = app;
 	}
 
-	public List<ProfileItem> getItems() {
+	public List<AppProfile> getItems() {
 		return items;
 	}
 
-	public void addItem(ProfileItem profileItem) {
+	public void addItem(AppProfile profileItem) {
 		items.add(profileItem);
 		notifyDataSetChanged();
 	}
 
-	public void updateItemsList(List<ProfileItem> newList) {
+	public void updateItemsList(List<AppProfile> newList) {
 		items.clear();
 		items.addAll(newList);
 		notifyDataSetChanged();
@@ -56,12 +54,11 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 	@Override
 	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
-		final ProfileItem item = items.get(position);
+		final AppProfile item = items.get(position);
 		holder.title.setText(item.getTitle());
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app) ? R.color.main_font_dark : R.color.main_font_light));
-		holder.descr.setText(String.format("Type: %s", item.getDescr()));
+		holder.descr.setText(String.format("Type: %s", item.getNavType()));
 		Drawable drawable = app.getUIUtilities().getThemedIcon(item.getIconRes());
-		holder.icon.setImageDrawable(drawable);
 		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getIconRes(), isNightMode(app) ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 		holder.aSwitch.setChecked(item.isSelected());
 		holder.aSwitch.setOnClickListener(new OnClickListener() {
@@ -103,8 +100,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	public interface ProfileListener {
-		void changeProfileStatus(ProfileItem item, boolean isSelected);
-		void editProfile(ProfileItem item);
+		void changeProfileStatus(AppProfile item, boolean isSelected);
+		void editProfile(AppProfile item);
 	}
 }
 

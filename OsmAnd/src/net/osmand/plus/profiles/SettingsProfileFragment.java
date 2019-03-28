@@ -20,7 +20,6 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
-import net.sf.junidecode.App;
 import org.apache.commons.logging.Log;
 
 public class SettingsProfileFragment extends BaseOsmAndFragment {
@@ -29,13 +28,13 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 	private ProfileMenuAdapter adapter;
 	private RecyclerView recyclerView;
-	private LinearLayout btn;
+	private LinearLayout addProfileBtn;
 
 	ProfileListener listener = null;
 
 	private List<ApplicationMode> allDefaultModes;
 	private Set<ApplicationMode> selectedDefaultModes;
-	private List<ProfileItem> profilesList;
+	private List<AppProfile> profilesList;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		selectedDefaultModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		selectedDefaultModes.remove(ApplicationMode.DEFAULT);
 		for (ApplicationMode am : allDefaultModes) {
-			ProfileItem profileItem = new ProfileItem(
+			AppProfile profileItem = new AppProfile(
 				am.getSmallIconDark(),
 				am.toHumanStringCtx(getMyApplication().getApplicationContext()),
 				am.toHumanStringCtx(getMyApplication().getApplicationContext()),
@@ -60,8 +59,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 			profilesList.add(profileItem);
 		}
-
-
 	}
 
 	@Nullable
@@ -70,8 +67,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		@Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.profiles_list_fragment, container, false);
 		recyclerView = view.findViewById(R.id.profiles_list);
-		btn = view.findViewById(R.id.add_profile_btn);
-		btn.setOnClickListener(new OnClickListener() {
+		addProfileBtn = view.findViewById(R.id.add_profile_btn);
+		addProfileBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//todo add new profile;
@@ -79,7 +76,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		});
 		listener = new ProfileListener() {
 			@Override
-			public void changeProfileStatus(ProfileItem item, boolean isSelected) {
+			public void changeProfileStatus(AppProfile item, boolean isSelected) {
 				LOG.debug(item.getTitle() + " - " + isSelected);
 				StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
 				ApplicationMode mode = null;
@@ -103,9 +100,9 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 
 			@Override
-			public void editProfile(ProfileItem item) {
+			public void editProfile(AppProfile item) {
 				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
-				intent.putExtra("profile_name", item.title);
+				intent.putExtra("profile", item);
 				startActivity(intent);
 			}
 		};
@@ -117,58 +114,5 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
-	public class ProfileItem {
-		private int iconRes;
-		private String title;
-		private String descr;
-		private boolean isSelected;
-		private boolean isAppDefault;
 
-		public ProfileItem(int iconRes, String title, String descr, boolean isAppDefault) {
-			this.iconRes = iconRes;
-			this.title = title;
-			this.descr = descr;
-			this.isAppDefault = isAppDefault;
-		}
-
-		public int getIconRes() {
-			return iconRes;
-		}
-
-		public void setIconRes(int iconRes) {
-			this.iconRes = iconRes;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle(String title) {
-			this.title = title;
-		}
-
-		public String getDescr() {
-			return descr;
-		}
-
-		public void setDescr(String descr) {
-			this.descr = descr;
-		}
-
-		public boolean isSelected() {
-			return isSelected;
-		}
-
-		public void setSelected(boolean isSelected) {
-			this.isSelected = isSelected;
-		}
-
-		public boolean isAppDefault() {
-			return isAppDefault;
-		}
-
-		public void setAppDefault(boolean appDefault) {
-			isAppDefault = appDefault;
-		}
-	}
 }

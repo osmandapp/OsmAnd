@@ -455,6 +455,9 @@
 	<color name="wiki_webview_background_light">#ffffff</color>
 	<color name="wiki_webview_background_dark">#17191a</color>
 
+	<color name="text_field_box_dark">#424242</color>
+	<color name="text_field_box_light">#eeeeee</color>
+
 	<!-- Basic colors -->
 	<color name="app_bar_main_dark">#101112</color>
 	<color name="app_bar_main_light">#ff8800</color>
@@ -475,5 +478,6 @@
 	<color name="active_buttons_and_links_dark">#d28521</color>
 	<color name="active_buttons_and_links_trans_light">#66237bff</color>
 	<color name="active_buttons_and_links_trans_dark">#66d28521</color>
+
 
 </resources>
