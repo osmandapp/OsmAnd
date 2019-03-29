@@ -2,7 +2,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Matrix;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
@@ -72,7 +71,7 @@ public class RouteStatisticCard extends BaseCard {
 		SpannableStringBuilder distanceStr = new SpannableStringBuilder(text);
 		int spaceIndex = text.indexOf(" ");
 		if (spaceIndex != -1) {
-			distanceStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, 0);
+			distanceStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
 		}
 		distanceTv.setText(distanceStr);
 		SpannableStringBuilder timeStr = new SpannableStringBuilder();
@@ -84,7 +83,7 @@ public class RouteStatisticCard extends BaseCard {
 		}
 		spaceIndex = timeStr.toString().lastIndexOf(" ");
 		if (spaceIndex != -1) {
-			timeStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, 0);
+			timeStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
 		}
 		TextView timeTv = (TextView) view.findViewById(R.id.time);
 		timeTv.setText(timeStr);
