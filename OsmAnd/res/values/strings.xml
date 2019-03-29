@@ -11,7 +11,19 @@
 	Thx - Hardy
 
 -->
-     <string name="release_3_3_7">
+    <string name="routing_attr_avoid_tram_name">Avoid trams</string>
+    <string name="routing_attr_avoid_tram_description">Avoid trams</string>
+    <string name="routing_attr_avoid_bus_name">Avoid buses</string>
+    <string name="routing_attr_avoid_bus_description">Avoid buses and trolleybuses</string>
+    <string name="routing_attr_avoid_share_taxi_name">Avoid share taxi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Avoid share taxi</string>
+    <string name="routing_attr_avoid_train_name">Avoid trains</string>
+    <string name="routing_attr_avoid_train_description">Avoid trains</string>
+    <string name="routing_attr_avoid_subway_name">Avoid subways</string>
+    <string name="routing_attr_avoid_subway_description">Avoid subways and lightweight rail transport</string>
+    <string name="routing_attr_avoid_ferry_name">Avoid ferries</string>
+    <string name="routing_attr_avoid_ferry_description">Avoid ferries</string>
+    <string name="release_3_3_7">
         • Display the time between transfers in public transport\n\n
         • Corrected UI for the Route Details\n\n
         • Fixed dark theme in the Direction menu and Route Details\n\n
