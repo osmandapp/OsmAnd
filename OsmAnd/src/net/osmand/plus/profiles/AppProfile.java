@@ -8,13 +8,12 @@ public class AppProfile implements Parcelable {
 	private String title;
 	private String navType;
 	private boolean isSelected;
-	private boolean isAppDefault;
 
-	public AppProfile(int iconRes, String title, String descr, boolean isAppDefault) {
+
+	public AppProfile(int iconRes, String title, String descr) {
 		this.iconRes = iconRes;
 		this.title = title;
 		this.navType = descr;
-		this.isAppDefault = isAppDefault;
 	}
 
 
@@ -51,20 +50,12 @@ public class AppProfile implements Parcelable {
 		this.isSelected = isSelected;
 	}
 
-	public boolean isAppDefault() {
-		return isAppDefault;
-	}
-
-	public void setAppDefault(boolean appDefault) {
-		isAppDefault = appDefault;
-	}
 
 	protected AppProfile(Parcel in) {
 		iconRes = in.readInt();
 		title = in.readString();
 		navType = in.readString();
 		isSelected = in.readByte() != 0;
-		isAppDefault = in.readByte() != 0;
 	}
 
 	public static final Creator<AppProfile> CREATOR = new Creator<AppProfile>() {
@@ -90,8 +81,8 @@ public class AppProfile implements Parcelable {
 		dest.writeString(title);
 		dest.writeString(navType);
 		dest.writeByte((byte) (isSelected ? 1 : 0));
-		dest.writeByte((byte) (isAppDefault ? 1 : 0));
 	}
+
 
 
 }

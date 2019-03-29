@@ -1,5 +1,6 @@
 package net.osmand.plus.profiles;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,26 +40,46 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Context ctx = getMyApplication().getApplicationContext();
 		profilesList = new ArrayList<>();
 		allDefaultModes = ApplicationMode.allPossibleValues();
 		allDefaultModes.remove(ApplicationMode.DEFAULT);
 		allDefaultModes.remove(ApplicationMode.AIRCRAFT);
-		allDefaultModes.remove(ApplicationMode.MOTORCYCLE);
 		allDefaultModes.remove(ApplicationMode.HIKING);
 		allDefaultModes.remove(ApplicationMode.TRAIN);
 		selectedDefaultModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		selectedDefaultModes.remove(ApplicationMode.DEFAULT);
 		for (ApplicationMode am : allDefaultModes) {
+
 			AppProfile profileItem = new AppProfile(
 				am.getSmallIconDark(),
 				am.toHumanStringCtx(getMyApplication().getApplicationContext()),
-				am.toHumanStringCtx(getMyApplication().getApplicationContext()),
-				true);
+				getNavType(am, ctx));
 			if (selectedDefaultModes.contains(am)) {
 				profileItem.setSelected(true);
 			}
 			profilesList.add(profileItem);
 		}
+	}
+
+	private String getNavType(ApplicationMode am, Context ctx) {
+		if (am.getParent() != null) {
+			return getNavType(am.getParent(), ctx);
+		} else {
+			switch(am.getStringKey()) {
+				case "car":
+					return ctx.getResources().getString(R.string.rendering_value_car_name);
+				case "bicycle":
+					return ctx.getResources().getString(R.string.rendering_value_bicycle_name);
+				case "pedestrian":
+					return ctx.getResources().getString(R.string.rendering_value_pedestrian_name);
+				case "public_transport":
+					return ctx.getResources().getString(R.string.app_mode_public_transport);
+				case "boat":
+					return ctx.getResources().getString(R.string.app_mode_boat);
+			}
+		}
+		return "";
 	}
 
 	@Nullable

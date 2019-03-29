@@ -77,22 +77,27 @@
             android:id="@+id/profile_name_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+
             tools:text="@string/lorem_ipsum"/>
 
         </net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
       </LinearLayout>
 
-
-      <net.osmand.plus.widgets.OsmandTextFieldBoxes
-        android:id="@+id/navigation_type_otfb"
+      <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/list_content_padding"
         android:layout_marginStart="@dimen/list_content_padding"
         android:layout_marginEnd="@dimen/list_content_padding"
         android:layout_marginLeft="@dimen/list_content_padding"
-        android:layout_marginRight="@dimen/list_content_padding"
+        android:layout_marginRight="@dimen/list_content_padding">
+      <net.osmand.plus.widgets.OsmandTextFieldBoxes
+        android:id="@+id/navigation_type_otfb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         app:labelText="Type">
 
         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -102,9 +107,20 @@
           android:drawableEnd="@drawable/ic_action_arrow_drop_down"
           android:drawableRight="@drawable/ic_action_arrow_drop_down"
           android:textSize="@dimen/default_list_text_size"
-          tools:text="Car"/>
+          android:maxLines="1"
+          tools:text="Car"
+          android:focusable="false"/>
 
       </net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+        <FrameLayout
+          android:id="@+id/select_nav_type_btn"
+          android:clickable="true"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:focusable="true"/>
+
+      </FrameLayout>
 
       <TextView
         android:layout_width="match_parent"

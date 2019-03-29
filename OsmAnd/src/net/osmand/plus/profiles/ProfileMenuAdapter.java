@@ -20,7 +20,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 	private List<AppProfile> items;
 	private ProfileListener listener = null;
-	OsmandApplication app;
+	private final OsmandApplication app;
 
 
 	public ProfileMenuAdapter(List<AppProfile> items, OsmandApplication app, ProfileListener listener) {
@@ -58,7 +58,6 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		holder.title.setText(item.getTitle());
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app) ? R.color.main_font_dark : R.color.main_font_light));
 		holder.descr.setText(String.format("Type: %s", item.getNavType()));
-		Drawable drawable = app.getUIUtilities().getThemedIcon(item.getIconRes());
 		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getIconRes(), isNightMode(app) ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
 		holder.aSwitch.setChecked(item.isSelected());
 		holder.aSwitch.setOnClickListener(new OnClickListener() {
