@@ -286,6 +286,8 @@
 	<dimen name="route_info_warning_padding">18dp</dimen>
 	<dimen name="route_info_chart_height">52dp</dimen>
 	<dimen name="route_info_toolbar_button_size">40dp</dimen>
+	<dimen name="route_info_control_buttons_height">48dp</dimen>
+	<dimen name="route_info_button_bg_line_radius">18dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
 
