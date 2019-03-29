@@ -53,7 +53,7 @@ public class WarningCard extends BaseCard {
 
 				@Override
 				public void onClick(@NonNull View widget) {
-					WikipediaDialogFragment.showFullArticle(app, Uri.parse(OSMAND_BLOG_LINK), nightMode);
+					WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(OSMAND_BLOG_LINK), nightMode);
 				}
 			};
 			int startIndex = text.lastIndexOf(" ");
