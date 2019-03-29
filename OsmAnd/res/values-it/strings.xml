@@ -415,7 +415,7 @@ La memoria utilizzata è  {1} MB.
     <string name="fav_points_not_exist">Non esiste alcun preferito</string>
     <string name="update_existing">Sostituisci</string>
     <string name="only_show">Mostra percorso</string>
-    <string name="follow">Avvia navigazione</string>
+    <string name="follow">Avvia indicazioni</string>
     <string name="recalculate_route_to_your_location">Seleziona il mezzo di trasporto:</string>
     <string name="mark_final_location_first">Selezionare una destinazione prima</string>
     <string name="get_directions">Indicazioni</string>
@@ -2891,7 +2891,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_day_night_switch_mode">Cambia modalità giorno/notte</string>
     <string name="route_class_stat_container">Tipo</string>
     <string name="route_surface_stat_container">Superficie</string>
-    <string name="route_smoothness_stat_container">Ruvidezza</string>
+    <string name="route_smoothness_stat_container">Levigatezza</string>
     <string name="route_steepness_stat_container">Ripidezza</string>
     <string name="run_full_osmand_msg">Stai utilizzando la mappa {0} che è sviluppata da OsmAnd. Vuoi lanciare la versione completa di OsmAnd\?</string>
     <string name="run_full_osmand_header">Lanciare OsmAnd\?</string>
@@ -2957,7 +2957,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport">Trasporto pubblico OsmAnd Live</string>
     <string name="time_of_day">Ore diurne</string>
     <string name="work_button">Lavoro</string>
-    <string name="rendering_attr_surface_cobblestone_name">Bolognini</string>
+    <string name="rendering_attr_surface_cobblestone_name">Ciottoli</string>
     <string name="rendering_attr_surface_pebblestone_name">Ciottoli</string>
     <string name="rendering_attr_surface_gravel_name">Pietrisco</string>
     <string name="rendering_attr_surface_fine_gravel_name">Pietrisco fine</string>
