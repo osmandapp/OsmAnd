@@ -198,8 +198,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 			}
 		}
 	}
@@ -219,8 +219,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.route_info_bg_light, R.color.route_info_bg_dark);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 			}
 		}
 	}
