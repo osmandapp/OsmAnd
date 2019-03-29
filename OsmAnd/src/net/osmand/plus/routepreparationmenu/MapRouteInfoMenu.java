@@ -1363,7 +1363,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			AndroidUtils.setBackground(app, viaButton, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
 			AndroidUtils.setBackground(app, viaButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
 		} else {
-			AndroidUtils.setBackground(app, viaButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
+			AndroidUtils.setBackground(app, viaButtonContainer, nightMode, R.drawable.btn_trans_rounded_light, R.drawable.btn_trans_rounded_dark);
 		}
 		ImageView viaButtonImageView = (ImageView) mainView.findViewById(R.id.via_button_image_view);
 
@@ -1423,7 +1423,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				AndroidUtils.setBackground(app, toButton, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
 				AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
 			} else {
-				AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
+				AndroidUtils.setBackground(app, toButtonContainer, nightMode, R.drawable.btn_trans_rounded_light, R.drawable.btn_trans_rounded_dark);
 			}
 			ImageView toButtonImageView = (ImageView) mainView.findViewById(R.id.to_button_image_view);
 
@@ -1495,7 +1495,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			AndroidUtils.setBackground(app, fromButton, nightMode, R.drawable.btn_rounded_light, R.drawable.btn_rounded_dark);
 			AndroidUtils.setBackground(app, fromButtonContainer, nightMode, R.drawable.ripple_rounded_light, R.drawable.ripple_rounded_dark);
 		} else {
-			AndroidUtils.setBackground(app, fromButtonContainer, nightMode, R.drawable.btn_border_trans_rounded_light, R.drawable.btn_border_trans_rounded_dark);
+			AndroidUtils.setBackground(app, fromButtonContainer, nightMode, R.drawable.btn_trans_rounded_light, R.drawable.btn_trans_rounded_dark);
 		}
 
 		ImageView swapDirectionView = (ImageView) mainView.findViewById(R.id.from_button_image_view);
