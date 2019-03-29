@@ -455,7 +455,7 @@
 	<color name="wiki_webview_background_light">#ffffff</color>
 	<color name="wiki_webview_background_dark">#17191a</color>
 
-	<color name="text_field_box_dark">#424242</color>
+	<color name="text_field_box_dark">#3F474B</color>
 	<color name="text_field_box_light">#eeeeee</color>
 
 	<!-- Basic colors -->

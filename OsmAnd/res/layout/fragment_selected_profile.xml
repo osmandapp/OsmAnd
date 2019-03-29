@@ -6,7 +6,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/map_widget_light_pressed">
+  >
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/cardview_light_background"
+      android:background="?attr/bg_color"
       android:orientation="vertical"
 
       >
@@ -114,7 +114,7 @@
         android:layout_marginEnd="@dimen/list_content_padding"
         android:layout_marginLeft="@dimen/list_content_padding"
         android:layout_marginRight="@dimen/list_content_padding"
-        android:text="Вы можете добавить модифированную версию routing.xml в osmand/files/routing."/>
+        android:text="You can add own modified version of routing.xml to ..osmand/files/routing/"/>
 
     </LinearLayout>
 
@@ -134,7 +134,7 @@
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/cardview_light_background"
+      android:background="?attr/bg_color"
       android:orientation="vertical">
 
       <TextView
@@ -147,7 +147,7 @@
         android:layout_marginLeft="@dimen/list_content_padding"
         android:layout_marginRight="@dimen/list_content_padding"
         android:text="Setup Profile"
-        android:textColor="@color/main_font_light"
+        android:textColor="?attr/main_font_color_basic"
         android:textSize="@dimen/default_list_text_size"/>
 
       <TextView
@@ -174,7 +174,8 @@
           android:layout_height="24dp"
           android:layout_marginStart="@dimen/list_content_padding"
           android:layout_marginLeft="@dimen/list_content_padding"
-          android:src="@drawable/ic_action_layers_dark"/>
+          android:src="@drawable/ic_action_layers_dark"
+          android:tint="?attr/primary_icon_color"/>
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -190,7 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Configure map"
-            android:textColor="@color/main_font_light"
+            android:textColor="?attr/main_font_color_basic"
             android:textSize="@dimen/default_list_text_size"/>
 
           <TextView
@@ -221,7 +222,8 @@
           android:layout_height="24dp"
           android:layout_marginStart="@dimen/list_content_padding"
           android:layout_marginLeft="@dimen/list_content_padding"
-          android:src="@drawable/ic_configure_screen_dark"/>
+          android:src="@drawable/ic_configure_screen_dark"
+          android:tint="?attr/primary_icon_color"/>
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -237,7 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Configure screen"
-            android:textColor="@color/main_font_light"
+            android:textColor="?attr/main_font_color_basic"
             android:textSize="@dimen/default_list_text_size"/>
 
           <TextView
@@ -270,7 +272,8 @@
           android:layout_height="24dp"
           android:layout_marginStart="@dimen/list_content_padding"
           android:layout_marginLeft="@dimen/list_content_padding"
-          android:src="@drawable/ic_action_start_navigation"/>
+          android:src="@drawable/ic_action_start_navigation"
+          android:tint="?attr/primary_icon_color"/>
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -286,7 +289,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Navigation settings"
-            android:textColor="@color/main_font_light"
+            android:textColor="?attr/main_font_color_basic"
             android:textSize="@dimen/default_list_text_size"/>
 
           <TextView
@@ -319,7 +322,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:orientation="horizontal"
-    android:background="@color/cardview_light_background">
+    android:background="?attr/bg_color">
 
     <Button
       android:layout_width="0dp"
