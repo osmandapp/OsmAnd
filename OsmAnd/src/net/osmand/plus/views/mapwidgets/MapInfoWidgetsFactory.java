@@ -937,7 +937,7 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls()) {
+			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);

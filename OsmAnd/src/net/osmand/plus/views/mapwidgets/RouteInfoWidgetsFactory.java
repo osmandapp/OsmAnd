@@ -831,7 +831,7 @@ public class RouteInfoWidgetsFactory {
 					}
 				}
 			}
-			visible = loclanes != null && loclanes.length > 0;
+			visible = loclanes != null && loclanes.length > 0 && !MapRouteInfoMenu.chooseRoutesVisible;
 			if (visible) {
 				if (!Arrays.equals(lanesDrawable.lanes, loclanes) || 
 						(locimminent == 0) != lanesDrawable.imminent) {
