@@ -1,8 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
@@ -12,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Spannable;
@@ -856,8 +853,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 			imageViewLayoutParams.setMargins(dpToPx(14), dpToPx(8), dpToPx(22), 0);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light);
+			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -976,8 +973,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 			imageViewLayoutParams.setMargins(dpToPx(14), dpToPx(8), dpToPx(22), 0);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light);
+			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -1246,8 +1243,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 			imageViewLayoutParams.setMargins(dpToPx(17), 0, dpToPx(25), 0);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light_small);
+			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -1330,9 +1327,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setMinimumHeight(dpToPx(minHeight));
-		ll.setPadding(dpToPx(64), 0, dpToPx(16), 0);
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(context, android.R.attr.selectableItemBackground));
+		ll.setPadding(dpToPx(64f), 0, dpToPx(16f), 0);
 		ll.setOnLongClickListener(onLongClickListener);
 		return ll;
 	}
