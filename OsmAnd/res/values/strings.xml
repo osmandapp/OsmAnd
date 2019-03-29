@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+     <string name="release_3_3_7">
+        • Display the time between transfers in public transport\n\n
+        • Corrected UI for the Route Details\n\n
+        • Fixed dark theme in the Direction menu and Route Details\n\n
+        • Display azimuth in Measure Distance\n\n
+    </string>
     <string name="shared_string_degrees">Degrees</string>
     <string name="shared_string_milliradians">Milliradians</string>
     <string name="angular_measeurement">Angular measurement units</string>
