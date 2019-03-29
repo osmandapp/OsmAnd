@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +34,13 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		MapActivity mapActivity = getMapActivity();
-
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getTrackDetailsMenu();
-		View view = inflater.inflate(R.layout.track_details, container, false);
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		ContextThemeWrapper context =
+				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		View view = LayoutInflater.from(context).inflate(R.layout.track_details, container, false);
+		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
+			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		}
 		if (menu == null || menu.getGpxItem() == null) {
 			return view;
@@ -50,7 +53,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			if (menu.getGpxItem().group != null) {
 				topBarTitle.setText(menu.getGpxItem().group.getGpxName());
 			} else {
-				topBarTitle.setText(mapActivity.getString(R.string.rendering_category_details));
+				topBarTitle.setText(R.string.rendering_category_details);
 			}
 		}
 
@@ -60,7 +63,10 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			backButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					getActivity().onBackPressed();
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						activity.onBackPressed();
+					}
 				}
 			});
 		}
@@ -179,7 +185,6 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 		if (backButton != null) {
 			backButton.setImageDrawable(getIcon(R.drawable.ic_arrow_back, R.color.color_white));
 		}
-
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {
