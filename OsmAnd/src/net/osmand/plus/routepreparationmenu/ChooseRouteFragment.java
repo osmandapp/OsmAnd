@@ -31,10 +31,14 @@ import android.widget.ImageButton;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -90,6 +94,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private boolean publicTransportMode;
 	private int routeInfoMenuState = -1;
+	private boolean openingAnalyseOnMap = false;
 
 	@Nullable
 	@Override
@@ -236,12 +241,26 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
 	}
 
+	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {
+		openingAnalyseOnMap = true;
+		OsmandApplication app = requireMyApplication();
+		final OsmandSettings settings = app.getSettings();
+		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+				settings.getLastKnownMapZoom(),
+				new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+				false,
+				gpxItem);
+
+		dismiss();
+		MapActivity.launchMapActivityMoveToTop(getMapActivity());
+	}
+
 	public void dismiss() {
 		try {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-				if (routeInfoMenuState != -1) {
+				if (routeInfoMenuState != -1 && !openingAnalyseOnMap) {
 					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog(routeInfoMenuState);
 				}
 			}
