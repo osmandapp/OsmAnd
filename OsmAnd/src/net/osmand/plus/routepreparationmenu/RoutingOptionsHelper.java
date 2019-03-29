@@ -474,6 +474,13 @@ public class RoutingOptionsHelper {
 	}
 
 	private static void updateRoutingParameterIcons(LocalRoutingParameter rp) {
+		if (rp instanceof LocalRoutingParameterGroup) {
+			LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) rp;
+			if (group.groupName.equals(DRIVING_STYLE)) {
+				rp.activeIconId = R.drawable.ic_action_bicycle_dark;
+				rp.disabledIconId = R.drawable.ic_action_bicycle_dark;
+			}
+		}
 		if (rp.routingParameter == null) {
 			return;
 		}

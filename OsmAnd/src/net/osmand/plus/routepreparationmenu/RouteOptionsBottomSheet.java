@@ -284,16 +284,15 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (parameter != null) {
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			BottomSheetItemWithCompoundButton.Builder builder = new BottomSheetItemWithCompoundButton.Builder();
+			int iconId = -1;
 			if (parameter.routingParameter != null || parameter instanceof RoutingOptionsHelper.OtherLocalRoutingParameter) {
 				builder.setTitle(parameter.getText(mapActivity));
-				int iconId = parameter.isSelected(settings) ? parameter.getActiveIconId() : parameter.getDisabledIconId();
-				if (iconId != -1) {
-					builder.setIcon(getContentIcon(iconId));
-				}
+				iconId = parameter.isSelected(settings) ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 			}
 			if (parameter instanceof LocalRoutingParameterGroup) {
 				final LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) parameter;
 				LocalRoutingParameter selected = group.getSelected(settings);
+				iconId = selected != null ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 				if (selected != null) {
 					builder.setTitle(group.getText(mapActivity));
 					builder.setDescription(selected.getText(mapActivity));
@@ -337,6 +336,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						updateMenu();
 					}
 				});
+			}
+			if (iconId != -1) {
+				builder.setIcon(getContentIcon(iconId));
 			}
 			item[0] = builder.create();
 			items.add(item[0]);
