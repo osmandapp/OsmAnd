@@ -255,10 +255,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 	@Override
 	protected void calculateLayout(View view) {
-		super.calculateLayout(view);
 		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
 				+ view.findViewById(R.id.control_buttons).getHeight()
 				- view.findViewById(R.id.buttons_shadow).getHeight();
+		super.calculateLayout(view);
 	}
 
 	private void adjustMapPosition(int y) {

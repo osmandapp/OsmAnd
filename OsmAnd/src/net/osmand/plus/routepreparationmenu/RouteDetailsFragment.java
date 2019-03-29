@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Spannable;
@@ -319,6 +320,11 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 						mainView.requestDisallowInterceptTouchEvent(true);
 					}
 					return false;
+				}
+			}, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openDetails();
 				}
 			});
 			statisticCard.setTransparentBackground(true);
@@ -1444,7 +1450,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	void openDetails() {
 		if (gpxItem != null && elevationDataSet != null) {
-			OsmandApplication app = requireMyApplication();
 			LatLon location = null;
 			WptPt wpt = null;
 			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
@@ -1473,33 +1478,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				gpxItem.locationOnMap = gpxItem.locationStart;
 			}
 
-			final MapActivity activity = (MapActivity) getActivity();
-			if (activity != null) {
-				dismiss();
-
-				final OsmandSettings settings = app.getSettings();
-				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-						false,
-						gpxItem);
-
-				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapRouteInfoMenu();
-				if (mapRouteInfoMenu.isVisible()) {
-					// We arrived here by the route info menu.
-					// First, we close it and then show the details.
-					mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							mapRouteInfoMenu.setOnDismissListener(null);
-							MapActivity.launchMapActivityMoveToTop(activity);
-						}
-					});
-					mapRouteInfoMenu.hide();
-				} else {
-					// We arrived here by the dashboard.
-					MapActivity.launchMapActivityMoveToTop(activity);
-				}
+			ChooseRouteFragment parent = (ChooseRouteFragment) getParentFragment();
+			if (parent != null) {
+				parent.analyseOnMap(location, gpxItem);
 			}
 		}
 	}

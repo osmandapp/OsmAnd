@@ -1,11 +1,15 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Matrix;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +20,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
@@ -40,12 +45,15 @@ public class RouteStatisticCard extends BaseCard {
 	private OrderedLineDataSet slopeDataSet;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
-	private View.OnTouchListener onTouchListener;
+	private OnTouchListener onTouchListener;
+	private OnClickListener onAnalyseClickListener;
 
-	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx, View.OnTouchListener onTouchListener) {
+	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx, OnTouchListener onTouchListener,
+							  OnClickListener onAnalyseClickListener) {
 		super(mapActivity);
 		this.gpx = gpx;
 		this.onTouchListener = onTouchListener;
+		this.onAnalyseClickListener = onAnalyseClickListener;
 		makeGpxDisplayItem();
 	}
 
@@ -115,6 +123,17 @@ public class RouteStatisticCard extends BaseCard {
 		if (isTransparentBackground()) {
 			view.setBackgroundDrawable(null);
 		}
+
+		FrameLayout analyseButton = (FrameLayout) view.findViewById(R.id.analyse_button);
+		TextView analyseButtonDescr = (TextView) view.findViewById(R.id.analyse_button_descr);
+
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+			AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		} else {
+			AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+		}
+		analyseButton.setOnClickListener(onAnalyseClickListener);
 	}
 
 	@Nullable

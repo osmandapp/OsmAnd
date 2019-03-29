@@ -288,7 +288,7 @@ public class TrackDetailsMenu {
 				tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
 			}
 		}
-		if (tileBoxHeightPx > 0) {
+		if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
 			if (forceFit) {
 				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
 						tileBoxWidthPx, tileBoxHeightPx, topMarginPx);
