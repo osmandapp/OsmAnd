@@ -2837,7 +2837,7 @@
     <string name="ask_for_location_permission">Innvilg OsmAnd tilgang til plassering for å fortsette.</string>
     <string name="rendering_value_black_name">Svart</string>
     <string name="more_transport_on_stop_hint">Det er flere ruter på dette stoppestedet.</string>
-    <string name="markers_remove_dialog_msg">Slett kartmarkør \"%s\"\?</string>
+    <string name="markers_remove_dialog_msg">Slett kartmarkøren \"%s\"\?</string>
     <string name="edit_map_marker">Rediger kartmarkør</string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Gatesøk</string>
@@ -3007,4 +3007,25 @@
     <string name="angular_measeurement_descr">Endre hva asimut måles i.</string>
     <string name="routing_attr_avoid_sett_name">Unngå rustikk brostein og brostein</string>
     <string name="routing_attr_avoid_sett_description">Unngå rustikk brostein og brostein</string>
+    <string name="routing_attr_avoid_tram_name">Unngå trikk</string>
+    <string name="routing_attr_avoid_tram_description">Unngå trikk</string>
+    <string name="routing_attr_avoid_bus_name">Unngå buss</string>
+    <string name="routing_attr_avoid_bus_description">Unngå buss og trolleybuss</string>
+    <string name="routing_attr_avoid_share_taxi_name">Unngå delingsdrosje</string>
+    <string name="routing_attr_avoid_share_taxi_description">Unngå delingsdrosje</string>
+    <string name="routing_attr_avoid_train_name">Unngå tog</string>
+    <string name="routing_attr_avoid_train_description">Unngå tog</string>
+    <string name="routing_attr_avoid_subway_name">Unngå tunnelbane</string>
+    <string name="routing_attr_avoid_subway_description">Unngå tunnelbane og lett bane</string>
+    <string name="routing_attr_avoid_ferry_name">Unngå ferger</string>
+    <string name="routing_attr_avoid_ferry_description">Unngå ferger</string>
+    <string name="release_3_3_7">• Vis tiden mellom overganger i offentlig transport
+\n
+\n • Fikset grensesnitt for rutedetaljer
+\n
+\n • Fikset mørk drakt i anvisningsmeny og rutedetaljer
+\n
+\n • Visning av asimut i måling av distanse
+\n
+\n</string>
 </resources>
