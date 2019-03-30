@@ -68,7 +68,7 @@ Lon %2$s</string>
     <string name="shared_string_off">No</string>
     <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_disabled">Desactivado</string>
-    <string name="shared_string_selected">Marcado(s)</string>
+    <string name="shared_string_selected">Marcado</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="shared_string_never">Nunca</string>
     <string name="shared_string_and">y</string>
@@ -206,7 +206,7 @@ Lon %2$s</string>
     <string name="traffic_warning_speed_limit">Límites de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
     <string name="traffic_warning_payment">Cabina de peaje</string>
-    <string name="traffic_warning_stop">Señal de alto</string>
+    <string name="traffic_warning_stop">Señal de detención</string>
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="traffic_warning">Aviso de tráfico</string>
@@ -493,7 +493,7 @@ Lon %2$s</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="use_displayed_track_for_navigation">¿Usar la traza mostrada para la navegación?</string>
     <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
-    <string name="routing_attr_avoid_ferries_description">Evita usar ferris</string>
+    <string name="routing_attr_avoid_ferries_description">Evita usar ferris o transbordadores</string>
     <string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat), no es posible descargar ni actualizar los mapas en la carpeta de almacenamiento antigua (%s). ¿Copiar todos los archivos de OsmAnd a la nueva ubicación de almacenamiento? 
 \n Nota 1: Los archivos antiguos permanecerán intactos (pero pueden ser borrados manualmente). 
 \n Nota 2: En la nueva ubicación de almacenamiento será imposible compartir archivos entre OsmAnd y OsmAnd+.</string>
@@ -561,7 +561,7 @@ Lon %2$s</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en «Ajustes»</string>
     <string name="clear_intermediate_points">Limpiar destinos intermedios</string>
     <string name="keep_intermediate_points">Mantener destinos intermedios</string>
-    <string name="new_directions_point_dialog">Ya definió destinos intermedios.</string>
+    <string name="new_directions_point_dialog">Ya se definieron destinos intermedios.</string>
     <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
     <string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_descr_map_location">Mapa:</string>
@@ -711,7 +711,7 @@ Lon %2$s</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
     <string name="enable_plugin_monitoring_services">Activa el complemento «Grabación de viaje» para usar los servicios de registro de ubicación (grabación GPX, rastreo en línea)</string>
     <string name="non_optimal_route_calculation">Calcular ruta posiblemente no óptima en largas distancias</string>
-    <string name="gps_not_available">Activa el GPS en ajustes</string>
+    <string name="gps_not_available">Activa el GPS en los ajustes</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>
     <string name="no_route">Sin ruta</string>
     <string name="delete_target_point">Quitar destino</string>
@@ -3009,4 +3009,24 @@ Lon %2$s</string>
     <string name="shared_string_milliradians">Mil angular</string>
     <string name="angular_measeurement">Unidades de medición angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
+    <string name="routing_attr_avoid_tram_name">Evitar los tranvías</string>
+    <string name="routing_attr_avoid_tram_description">Evita usar los tranvías</string>
+    <string name="routing_attr_avoid_bus_name">Evitar los autobuses</string>
+    <string name="routing_attr_avoid_bus_description">Evita usar los autobuses y trolebuses</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evitar los taxis colectivos</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evita usar los taxis colectivos</string>
+    <string name="routing_attr_avoid_train_name">Evitar los trenes</string>
+    <string name="routing_attr_avoid_train_description">Evita usar los trenes</string>
+    <string name="routing_attr_avoid_subway_name">Evitar subterráneos</string>
+    <string name="routing_attr_avoid_subway_description">Evita usar los subterráneos y trenes ligeros</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar ferris/transbordadores</string>
+    <string name="routing_attr_avoid_ferry_description">Evita usar ferris o transbordadores</string>
+    <string name="release_3_3_7">• Mostrar el tiempo entre transbordos en transporte público
+\n
+\n • Interfaz de usuario corregida para «Detalles de la ruta»
+\n
+\n • Tema oscuro solucionado en el menú «Dirección» y «Detalles de la ruta»
+\n
+\n • Visualización de medida «azimut» en «Medir distancia»
+\n</string>
 </resources>
