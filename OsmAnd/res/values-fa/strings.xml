@@ -1139,11 +1139,11 @@
     <string name="calculate_osmand_route_gpx">مسیریابی آفلاین OsmAnd</string>
     <string name="routing_attr_prefer_motorway_name">ترجیح آزادراه‌ها</string>
     <string name="routing_attr_prefer_motorway_description">آزادراه‌ها را ترجیح می‌دهم</string>
-    <string name="routing_attr_avoid_toll_name">پرهیز از مسیرهای عوارضی‌دار</string>
-    <string name="routing_attr_avoid_toll_description">از مسیرهای دارای عوارضی پرهیز شود</string>
+    <string name="routing_attr_avoid_toll_name">پرهیز از جاده‌های عوارضی‌دار</string>
+    <string name="routing_attr_avoid_toll_description">از جاده‌های دارای عوارضی پرهیز شود</string>
     <string name="routing_attr_avoid_unpaved_name">پرهیز از مسیرهای خاکی</string>
     <string name="routing_attr_avoid_unpaved_description">از راه‌های روسازی‌نشده پرهیز شود.</string>
-    <string name="routing_attr_avoid_ferries_name">پرهیز از فرابَرها</string>
+    <string name="routing_attr_avoid_ferries_name">پرهیز از فرابَر</string>
     <string name="routing_attr_avoid_ferries_description">از فرابَرها (ferries) پرهیز شود</string>
     <string name="routing_attr_avoid_motorway_name">پرهیز از آزادراه‌ها</string>
     <string name="routing_attr_avoid_motorway_description">از آزادراه‌ها پرهیز شود</string>
@@ -2377,7 +2377,7 @@
     <string name="srtm_plugin_disabled">منحنی‌های تراز غیرفعال شد</string>
     <string name="av_locations">مکان‌ها</string>
     <string name="routing_attr_avoid_shuttle_train_name">پرهیز از قطار خطی</string>
-    <string name="routing_attr_avoid_shuttle_train_description">از قطارهای خطی پرهیز کن</string>
+    <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی پرهیز شود</string>
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">لبهٔ برجسته</string>
     <string name="lang_ceb">سِبوانو</string>
@@ -3039,7 +3039,7 @@
 \nلطفاً پیش از ادامه، آن را اصلاح کنید.</string>
     <string name="save_poi_value_exceed_length_title">طول مقدار «%s»</string>
     <string name="avoid_pt_types_descr">انواع روش‌های حمل‌ونقل که می‌خواهید در مسیریابی نباشند را انتخاب کنید:</string>
-    <string name="avoid_pt_types">پرهیز از گونه‌های حمل‌ونقل…</string>
+    <string name="avoid_pt_types">پرهیز از روش‌های حمل‌ونقل…</string>
     <string name="quick_action_day_night_mode">حالت %s</string>
     <string name="routing_attr_avoid_sett_name">پرهیز از کفپوش‌های سنگی cobblestone و sett</string>
     <string name="routing_attr_avoid_sett_description">از کفپوش‌های cobblestone (کفپوش سنگی) و sett (سنگفرش کوبیک) پرهیز شود</string>
@@ -3047,4 +3047,24 @@
     <string name="shared_string_milliradians">میلی‌رادیان</string>
     <string name="angular_measeurement">واحد‌های اندازه‌گیری زاویه</string>
     <string name="angular_measeurement_descr">واحد اندازه‌گیری سمت (azimuth) را مشخص کنید.</string>
+    <string name="routing_attr_avoid_tram_name">پرهیز از تراموا</string>
+    <string name="routing_attr_avoid_tram_description">از تراموا پرهیز شود</string>
+    <string name="routing_attr_avoid_bus_name">پرهیز از اتوبوس</string>
+    <string name="routing_attr_avoid_bus_description">از اتوبوس و اتوبوس برقی پرهیز شود</string>
+    <string name="routing_attr_avoid_share_taxi_name">پرهیز از تاکسی اشتراکی</string>
+    <string name="routing_attr_avoid_share_taxi_description">از تاکسی اشتراکی پرهیز شود</string>
+    <string name="routing_attr_avoid_train_name">پرهیز از قطار</string>
+    <string name="routing_attr_avoid_train_description">از قطار پرهیز شود</string>
+    <string name="routing_attr_avoid_subway_name">پرهیز از مترو</string>
+    <string name="routing_attr_avoid_subway_description">از مترو پرهیز شود</string>
+    <string name="routing_attr_avoid_ferry_name">پرهیز از فرابر</string>
+    <string name="routing_attr_avoid_ferry_description">از فرابر پرهیز شود</string>
+    <string name="release_3_3_7">• نمایش زمان بین انتقال‌ها در حمل‌ونقل عمومی
+\n
+\n • اصلاح رابط کاربری جزئيات مسیر
+\n
+\n • اصلاح پوستهٔ تیره برای منوی مسیریابی و جزئیات مسیر
+\n
+\n • نمایش سمت (azimuth) در اندازه‌گیری مسافت
+\n</string>
 </resources>

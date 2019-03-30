@@ -2994,4 +2994,25 @@
     <string name="angular_measeurement">Угловые единицы измерения</string>
     <string name="angular_measeurement_descr">Изменить, в чем измеряется азимут.</string>
     <string name="shared_string_degrees">Градусы</string>
+    <string name="routing_attr_avoid_tram_name">Избегать трамваев</string>
+    <string name="routing_attr_avoid_tram_description">Избегать трамваев</string>
+    <string name="routing_attr_avoid_bus_name">Избегать автобусов</string>
+    <string name="routing_attr_avoid_bus_description">Избегать автобусов и троллейбусов</string>
+    <string name="routing_attr_avoid_share_taxi_name">Избегать маршрутное такси</string>
+    <string name="routing_attr_avoid_share_taxi_description">Избегать маршрутное такси</string>
+    <string name="routing_attr_avoid_train_name">Избегать поездов</string>
+    <string name="routing_attr_avoid_train_description">Избегать поездов</string>
+    <string name="routing_attr_avoid_subway_name">Избегать метро</string>
+    <string name="routing_attr_avoid_subway_description">Избегать метро и легкорельсового транспорта</string>
+    <string name="routing_attr_avoid_ferry_name">Избегать паромов</string>
+    <string name="routing_attr_avoid_ferry_description">Избегать паромов</string>
+    <string name="release_3_3_7">• Отображение времени между пересадками в общественном транспорте
+\n
+\n• Исправлен пользовательский интерфейс для деталей маршрута
+\n
+\n• Исправлена темная тема в меню \"Маршрут\" и \"Информация о маршруте\"
+\n
+\n• Отображение азимута в инструменте \"Измерить расстояние\"
+\n
+\n</string>
 </resources>

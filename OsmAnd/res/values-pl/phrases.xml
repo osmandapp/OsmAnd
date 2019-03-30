@@ -1999,7 +1999,7 @@
     <string name="poi_bridge_movable_retractable">Most ruchowy: wsuwany</string>
     <string name="poi_surface_ground">Nawierzchnia: ziemia</string>
     <string name="poi_route_bus_ref">Autobus</string>
-    <string name="poi_route_share_taxi_ref">Taksówka</string>
+    <string name="poi_route_share_taxi_ref">Taksówka zbiorowa</string>
     <string name="poi_route_trolleybus_ref">Trolejbus</string>
     <string name="poi_route_tram_ref">Tramwaj</string>
     <string name="poi_route_train_ref">Pociąg</string>

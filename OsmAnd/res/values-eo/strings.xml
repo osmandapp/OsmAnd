@@ -2991,4 +2991,24 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="angular_measeurement_descr">Elekti mezurunuon por azimuto.</string>
     <string name="routing_attr_avoid_sett_name">Eviti malglatan ŝtonpavimon</string>
     <string name="routing_attr_avoid_sett_description">Eviti rulŝtonajn kahelojn kaj kvadratajn ŝtonojn</string>
+    <string name="routing_attr_avoid_tram_name">Eviti tramojn</string>
+    <string name="routing_attr_avoid_tram_description">Eviti tramojn</string>
+    <string name="routing_attr_avoid_bus_name">Eviti aŭtobusojn</string>
+    <string name="routing_attr_avoid_bus_description">Eviti aŭtobusojn kaj trolebusojn</string>
+    <string name="routing_attr_avoid_share_taxi_name">Eviti komunajn taksiojn</string>
+    <string name="routing_attr_avoid_share_taxi_description">Eviti komunajn taksiojn (aŭtobusetojn)</string>
+    <string name="routing_attr_avoid_train_name">Eviti trajnojn</string>
+    <string name="routing_attr_avoid_train_description">Eviti vagonarojn</string>
+    <string name="routing_attr_avoid_subway_name">Eviti metroojn</string>
+    <string name="routing_attr_avoid_subway_description">Eviti subterajn vagonarojn kaj fervojon malpezan</string>
+    <string name="routing_attr_avoid_ferry_name">Eviti pramojn</string>
+    <string name="routing_attr_avoid_ferry_description">Eviti pramojn</string>
+    <string name="release_3_3_7">• montri tempon inter transveturiliĝojn de publika transporto
+\n
+\n• korektita uzant‑fasado por detaloj pri kurso
+\n
+\n• malhela etoso: riparita menuo “navigi” kaj detaloj pri kurso
+\n
+\n• montri azimuton ĉe distanc‑mezurilo
+\n</string>
 </resources>

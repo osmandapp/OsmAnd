@@ -2992,4 +2992,24 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_milliradians">Milirradianos</string>
     <string name="angular_measeurement">Unidades de medição angular</string>
     <string name="angular_measeurement_descr">Mude em que o azimute é medido.</string>
+    <string name="routing_attr_avoid_tram_name">Evitar bondes</string>
+    <string name="routing_attr_avoid_tram_description">Evitar de usar bondes</string>
+    <string name="routing_attr_avoid_bus_name">Evitar ônibus</string>
+    <string name="routing_attr_avoid_bus_description">Evitar de usar ônibus e trólebus</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evitar táxi coletivo</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evitar de usar táxi coletivo</string>
+    <string name="routing_attr_avoid_train_name">Evitar trens</string>
+    <string name="routing_attr_avoid_train_description">Evitar de usar trens</string>
+    <string name="routing_attr_avoid_subway_name">Evitar metrô</string>
+    <string name="routing_attr_avoid_subway_description">Evitar de usar metrôs e transporte ferroviário leve</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar balsas</string>
+    <string name="routing_attr_avoid_ferry_description">Evitar de usar balsas</string>
+    <string name="release_3_3_7">• Exibição do tempo entre transferências em transporte público
+\n
+\n  • Interface do usuário corrigida para os detalhes da rota
+\n
+\n  • Tema escuro corrigido no menu Direção e Detalhes da rota
+\n
+\n  • Exibição do azimute na distância medida
+\n</string>
 </resources>
