@@ -2995,4 +2995,24 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="save_poi_value_exceed_length_title">Dĺžka hodnoty \"%s\"</string>
     <string name="routing_attr_avoid_sett_name">Vyhnúť sa dlažobným kameňom</string>
     <string name="routing_attr_avoid_sett_description">Vyhnúť sa nerovným dlažobným kameňom a kockám</string>
+    <string name="routing_attr_avoid_tram_name">Vyhnúť sa električkám</string>
+    <string name="routing_attr_avoid_tram_description">Vyhnúť sa električkám</string>
+    <string name="routing_attr_avoid_bus_name">Vyhnúť sa autobusom</string>
+    <string name="routing_attr_avoid_bus_description">Vyhnúť sa autobusom a trolejbusom</string>
+    <string name="routing_attr_avoid_share_taxi_name">Vyhnúť sa zdieľaným taxíkom</string>
+    <string name="routing_attr_avoid_share_taxi_description">Vyhnúť sa zdieľaným taxíkom</string>
+    <string name="routing_attr_avoid_train_name">Vyhnúť sa vlakom</string>
+    <string name="routing_attr_avoid_train_description">Vyhnúť sa vlakom</string>
+    <string name="routing_attr_avoid_subway_name">Vyhnúť sa metru</string>
+    <string name="routing_attr_avoid_subway_description">Vyhnúť sa metru a ľahkej železnici</string>
+    <string name="routing_attr_avoid_ferry_name">Vyhnúť sa trajektom</string>
+    <string name="routing_attr_avoid_ferry_description">Vyhnúť sa trajektom</string>
+    <string name="release_3_3_7">• Zobrazovanie času na prestup medzi hromadnou dopravou
+\n
+\n • Upravené rozhranie detailov trasy
+\n
+\n • Opravená tmavá téma v menu pokynov a detailov trasy
+\n
+\n • Zobrazenie azimutu v meraní vzdialenosti
+\n</string>
 </resources>
