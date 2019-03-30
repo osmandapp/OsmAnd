@@ -325,7 +325,7 @@
     <string name="poi_boat_rental_type">סירות להשכרה</string>
     <string name="poi_emergency_infrastructure">תשתית חירום</string>
     <string name="poi_greengrocer">חנות טבע</string>
-    <string name="poi_confectionery">ממתקים</string>
+    <string name="poi_confectionery">חנות ממתקים</string>
     <string name="poi_free_flying">דיוטי פרי</string>
     <string name="poi_glaziery">זגגות</string>
     <string name="poi_hardware">אספקה טכנית</string>
@@ -1081,7 +1081,7 @@
     <string name="poi_drive_through_yes">יש</string>
     <string name="poi_drive_through_no">דלפק הגשה לרכב: אין</string>
     <string name="poi_brewery_additional">שם מבשלה</string>
-    <string name="poi_microbrewery_yes">מבשלת בוטיק</string>
+    <string name="poi_microbrewery_yes">כן</string>
     <string name="poi_microbrewery_no">אין מבשלות בוטיק</string>
     <string name="poi_takeaway_filter_yes">יש</string>
     <string name="poi_takeaway_yes">איסוף עצמי</string>
