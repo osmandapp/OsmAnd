@@ -3015,4 +3015,25 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkel-Maßeinheiten</string>
     <string name="angular_measeurement_descr">Ändern, in welchem Azimut gemessen wird.</string>
+    <string name="routing_attr_avoid_tram_name">Straßenbahnen meiden</string>
+    <string name="routing_attr_avoid_tram_description">Straßenbahnen meiden</string>
+    <string name="routing_attr_avoid_bus_name">Busse meiden</string>
+    <string name="routing_attr_avoid_bus_description">Busse und Trolleybusse meiden</string>
+    <string name="routing_attr_avoid_share_taxi_name">Sammeltaxi meiden</string>
+    <string name="routing_attr_avoid_share_taxi_description">Sammeltaxi meiden</string>
+    <string name="routing_attr_avoid_train_name">Züge meiden</string>
+    <string name="routing_attr_avoid_train_description">Züge meiden</string>
+    <string name="routing_attr_avoid_subway_name">U-Bahnen meiden</string>
+    <string name="routing_attr_avoid_subway_description">U-Bahnen und leichten Schienenverkehr meiden</string>
+    <string name="routing_attr_avoid_ferry_name">Fähren meiden</string>
+    <string name="routing_attr_avoid_ferry_description">Fähren meiden</string>
+    <string name="release_3_3_7">- Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln
+\n
+\n - Korrigierte Benutzeroberfläche für die Routendetails korrigiert
+\n
+\n - Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert.
+\n
+\n - Azimut in der Maßeinheit Distanz anzeigen
+\n
+\n</string>
 </resources>
