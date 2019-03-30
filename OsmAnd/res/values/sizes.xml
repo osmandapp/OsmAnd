@@ -331,4 +331,9 @@
 
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 	<dimen name="text_button_line_spacing_multiplier" format="float">1.2</dimen>
+
+	<dimen name="pages_item_size">4dp</dimen>
+	<dimen name="pages_item_padding">3dp</dimen>
+	<dimen name="pages_item_margin">4dp</dimen>
+
 </resources>

@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -86,11 +88,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private View zoomButtonsView;
 	@Nullable
 	private ImageButton myLocButtonView;
+	@Nullable
+	private ViewGroup pagesView;
 
 	private boolean portrait;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
 	private int currentMenuState;
+	private int routesCount;
 
 	private boolean publicTransportMode;
 	private int routeInfoMenuState = -1;
@@ -113,7 +118,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
 			initialMenuState = args.getInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 		}
-		int routesCount = 1;
+		routesCount = 1;
 		if (routes != null && !routes.isEmpty()) {
 			publicTransportMode = true;
 			routesCount = routes.size();
@@ -152,9 +157,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 			public void onPageSelected(int position) {
 				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
+				View view = getView();
+				if (mapActivity != null && view != null) {
 					mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(position);
 					mapActivity.refreshMap();
+					buildPagesControl(view);
 					List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = ChooseRouteFragment.this.routeDetailsFragments;
 					for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
 						RouteDetailsFragment f = ref.get();
@@ -165,12 +172,15 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 							}
 							if (f == getCurrentFragment()) {
 								updateZoomButtonsPos(f, f.getViewY(), true);
+								updatePagesViewPos(f, f.getViewY(), true);
 							}
 						}
 					}
 				}
 			}
 		});
+		this.pagesView = (ViewGroup) view.findViewById(R.id.pages_control);
+		buildPagesControl(view);
 		buildZoomButtons(view);
 		buildMenuButtons(view);
 		return view;
@@ -266,6 +276,41 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			}
 		} catch (Exception e) {
 			// ignore
+		}
+	}
+
+	private void buildPagesControl(@NonNull View view) {
+		ViewGroup pagesView = this.pagesView;
+		if (pagesView != null) {
+			pagesView.removeAllViews();
+			LockableViewPager viewPager = this.viewPager;
+			if (portrait && routesCount > 1 && viewPager != null) {
+				int itemSize = getResources().getDimensionPixelSize(R.dimen.pages_item_size);
+				int itemMargin = getResources().getDimensionPixelSize(R.dimen.pages_item_margin);
+				int itemPadding = getResources().getDimensionPixelSize(R.dimen.pages_item_padding);
+				for (int i = 0; i < routesCount; i++) {
+					boolean active = i == viewPager.getCurrentItem();
+					Context ctx = view.getContext();
+					View itemView = new View(ctx);
+					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(itemSize, itemSize);
+					AndroidUtils.setBackground(ctx, itemView, nightMode,
+							active ? R.drawable.pages_active_light : R.drawable.pages_inactive_light,
+							active ? R.drawable.pages_active_dark : R.drawable.pages_inactive_dark);
+					if (i == 0) {
+						layoutParams.setMargins(itemMargin, 0, itemPadding, 0);
+					} else if (i == routesCount - 1) {
+						layoutParams.setMargins(0, 0, itemMargin, 0);
+					} else {
+						layoutParams.setMargins(0, 0, itemPadding, 0);
+					}
+					itemView.setLayoutParams(layoutParams);
+					pagesView.addView(itemView);
+				}
+				pagesView.requestLayout();
+				pagesView.setVisibility(View.VISIBLE);
+			} else {
+				pagesView.setVisibility(View.GONE);
+			}
 		}
 	}
 
@@ -377,6 +422,26 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				}
 			}
 		}
+	}
+
+	private void updatePagesViewVisibility(int menuState) {
+		View pagesView = this.pagesView;
+		if (pagesView != null) {
+			if (menuState != MenuState.FULL_SCREEN) {
+				if (pagesView.getVisibility() != View.VISIBLE) {
+					pagesView.setVisibility(View.VISIBLE);
+				}
+			} else {
+				if (pagesView.getVisibility() == View.VISIBLE) {
+					pagesView.setVisibility(View.INVISIBLE);
+				}
+			}
+		}
+	}
+
+	private int getPagesViewHeight() {
+		ViewGroup pagesView = this.pagesView;
+		return pagesView != null ? pagesView.getHeight() : 0;
 	}
 
 	private int getZoomButtonsHeight() {
@@ -672,10 +737,24 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
+	public void updatePagesViewPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+		ViewGroup pagesView = this.pagesView;
+		if (pagesView != null) {
+			int pagesY = y - getPagesViewHeight() + fragment.getShadowHeight() +
+					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(pagesView.getContext()) : 0);
+			if (animated) {
+				fragment.animateView(pagesView, pagesY);
+			} else {
+				pagesView.setY(pagesY);
+			}
+		}
+	}
+
 	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
 		View zoomButtonsView = this.zoomButtonsView;
 		if (zoomButtonsView != null) {
-			int zoomY = y - getZoomButtonsHeight();
+			int zoomY = y - getZoomButtonsHeight() +
+					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(zoomButtonsView.getContext()) : 0);
 			if (animated) {
 				fragment.animateView(zoomButtonsView, zoomY);
 			} else {
@@ -704,6 +783,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
 		if (fragment == getCurrentFragment()) {
 			updateToolbars(fragment, y, animated);
+			updatePagesViewPos(fragment, y, animated);
 			updateZoomButtonsPos(fragment, y, animated);
 			updateViewPager(fragment.getViewY());
 		}
@@ -723,6 +803,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						f.openMenuScreen(menuState, false);
 					}
 					if (f == current) {
+						updatePagesViewVisibility(menuState);
 						updateZoomButtonsVisibility(menuState);
 						updateViewPager(fragment.getViewY());
 					}
