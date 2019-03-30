@@ -600,7 +600,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int height = getMenuStatePosY(getCurrentMenuState());
-			return viewHeight - height - AndroidUtils.getStatusBarHeight(mapActivity);
+			return viewHeight - height - statusBarHeight;
 		} else {
 			return 0;
 		}

@@ -113,6 +113,7 @@
 		<attr name="active_color_basic" format="reference" />
 		<attr name="card_and_list_background_basic" format="reference" />
 		<attr name="activity_background_basic" format="reference" />
+		<attr name="pages_bg" format="reference"/>
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
