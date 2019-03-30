@@ -3001,4 +3001,24 @@
     <string name="angular_measeurement_descr">החלפת יחידת המידה לאזימוט.</string>
     <string name="routing_attr_avoid_sett_name">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
     <string name="routing_attr_avoid_sett_description">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
+    <string name="routing_attr_avoid_tram_name">הימנעות מחשמליות</string>
+    <string name="routing_attr_avoid_tram_description">הימנעות מחשמליות</string>
+    <string name="routing_attr_avoid_bus_name">הימנעות מאוטובוסים</string>
+    <string name="routing_attr_avoid_bus_description">הימנעות מאוטובוסים ומטרוליבוסים</string>
+    <string name="routing_attr_avoid_share_taxi_name">הימנעות ממוניות שירות</string>
+    <string name="routing_attr_avoid_share_taxi_description">הימנעות ממוניות שירות</string>
+    <string name="routing_attr_avoid_train_name">הימנעות מרכבות</string>
+    <string name="routing_attr_avoid_train_description">הימנעות מרכבות</string>
+    <string name="routing_attr_avoid_subway_name">הימנעות מרכבות תחתיות</string>
+    <string name="routing_attr_avoid_subway_description">הימנעות מרכבות תחתיות ומרכבות קלות</string>
+    <string name="routing_attr_avoid_ferry_name">הימנעות ממעבורות</string>
+    <string name="routing_attr_avoid_ferry_description">הימנעות ממעבורות</string>
+    <string name="release_3_3_7">• הצגת הזמן בין ההחלפות בתחבורה הציבורית
+\n
+\n • מנשק המשתמש תוקן עבור פרטי המסלול
+\n
+\n • תוקנה ערכת העיצוב הכהה בתפריט הכיוון ובפרטי המסלול
+\n
+\n • הצגת אזימוט במדידת מרחק
+\n</string>
 </resources>
