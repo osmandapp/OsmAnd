@@ -2994,4 +2994,25 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="add_work">Aggiungi lavoro</string>
     <string name="routing_attr_avoid_sett_name">Evita ciottoli e sampietrini</string>
     <string name="routing_attr_avoid_sett_description">Evita strade con ciottoli o sampietrini</string>
+    <string name="routing_attr_avoid_tram_name">Evita i tram</string>
+    <string name="routing_attr_avoid_tram_description">Evita i tram</string>
+    <string name="routing_attr_avoid_bus_name">Evita gli autobus</string>
+    <string name="routing_attr_avoid_bus_description">Evita gli autobus e i filobus</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evita i taxi condivisi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evita i taxi condivisi</string>
+    <string name="routing_attr_avoid_train_name">Evita i treni</string>
+    <string name="routing_attr_avoid_train_description">Evita i treni</string>
+    <string name="routing_attr_avoid_subway_name">Evita le metro</string>
+    <string name="routing_attr_avoid_subway_description">Evita la metro e la metrotranvia</string>
+    <string name="routing_attr_avoid_ferry_name">Evita i traghetti</string>
+    <string name="routing_attr_avoid_ferry_description">Evita i traghetti</string>
+    <string name="release_3_3_7">"• Visualizza il tempo tra i trasferimenti del trasporto pubblico
+\n
+\n•  Corretta la visualizzazione dei dettagli dell’itinerario
+\n
+\n• Corretto il tema scuro nel menù Indicazioni e nei dettagli dell’itinerario
+\n
+\n• Visualizza l’azimut nella misura della distanza.
+\n
+\n"</string>
 </resources>
