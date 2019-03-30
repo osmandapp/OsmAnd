@@ -2233,7 +2233,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Krótsze trasy</string>
     <string name="routing_attr_driving_style_balance_name">Zrównoważony</string>
     <string name="routing_attr_driving_style_safety_name">Preferuj drogi poboczne</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Wybierz gładkość cieniowanie rzeźby terenu</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Wybierz zmienność wysokości n.p.m.</string>
     <string name="do_not_send_anonymous_app_usage">Nie wysyłaj anonimowych statystyk użytkowania</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiera informacje o tym, z których części aplikacji korzysta użytkownik. Twoja lokalizacja nie jest nigdy wysyłana, tak jak teksty wpisywane w aplikacji i szczegóły dotyczące przeglądanych, wyszukiwanych i pobieranych obszarów.</string>
     <string name="do_not_show_startup_messages">Nie wyświetlaj komunikatów startowych</string>

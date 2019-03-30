@@ -2993,4 +2993,5 @@
     <string name="shared_string_milliradians">Миллирадианы</string>
     <string name="angular_measeurement">Угловые единицы измерения</string>
     <string name="angular_measeurement_descr">Изменить, в чем измеряется азимут.</string>
+    <string name="shared_string_degrees">Градусы</string>
 </resources>

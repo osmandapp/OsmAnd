@@ -2221,7 +2221,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_driving_style_speed_name">Pli mallongaj vojoj</string>
     <string name="routing_attr_driving_style_balance_name">Ekvilibra</string>
     <string name="routing_attr_driving_style_safety_name">Preferi flankajn vojojn</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Elekti nivel-ombruman glatecon</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Elekti variecon de altitudo</string>
     <string name="full_version_thanks">Dankon al ci por aĉeti la pagan version de OsmAnd!</string>
     <string name="parking_options">Parkumadaj agordoj</string>
     <string name="do_not_send_anonymous_app_usage">Ne sendi anoniman statistikon pri uzado</string>
