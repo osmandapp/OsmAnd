@@ -3933,5 +3933,6 @@
 	<string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
 
 	<string name="poi_flare">Gas flare;Flare stack</string>
+	<string name="poi_change_delete">Deleted object</string>
 
 </resources>
