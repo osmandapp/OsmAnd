@@ -1044,7 +1044,7 @@ Lon: %2$s</string>
     <string name="context_menu_item_intermediate_point">Aldoni kiel intercelon</string>
     <string name="map_widget_intermediate_distance">Intercelo</string>
     <string name="ending_point_too_far">Celo estas tro malproksime al la plej proksima vojo.</string>
-    <string name="add_tag">Aldoni markon</string>
+    <string name="add_tag">Aldoni etikedon</string>
     <string name="btn_advanced_mode">Sperta reĝimo…</string>
     <string name="poi_filter_parking">Parkumejo</string>
     <string name="poi_filter_emergency">Vivsavo</string>
