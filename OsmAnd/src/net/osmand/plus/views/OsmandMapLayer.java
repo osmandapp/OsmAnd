@@ -586,7 +586,7 @@ public abstract class OsmandMapLayer {
 		Amenity res = null;
 		for (Amenity amenity : amenities) {
 			Long amenityId = amenity.getId() >> 1;
-			if (amenityId == id) {
+			if (amenityId == id && !amenity.isClosed()) {
 				res = amenity;
 				break;
 			}
@@ -594,7 +594,7 @@ public abstract class OsmandMapLayer {
 		if (res == null && names != null && names.size() > 0) {
 			for (Amenity amenity : amenities) {
 				for (String name : names) {
-					if (name.equals(amenity.getName())) {
+					if (name.equals(amenity.getName()) && !amenity.isClosed()) {
 						res = amenity;
 						break;
 					}
