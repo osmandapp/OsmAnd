@@ -207,7 +207,7 @@
     <string name="use_displayed_track_for_navigation">Desexa empregar a pista amosada para a navegación\?</string>
     <string name="keep_and_add_destination_point">Engadir coma seguinte destino</string>
     <string name="select_gpx">Elixir GPX…</string>
-    <string name="route_descr_select_destination">Elixir destino</string>
+    <string name="route_descr_select_destination">Escoller destino</string>
     <string name="shared_string_select_on_map">Seleccionar no mapa</string>
     <string name="shared_string_favorite">Favorito</string>
     <string name="route_preferences">Preferencias da rota</string>
@@ -3061,4 +3061,32 @@ Lon %2$s</string>
     <string name="public_transport_warning_descr_blog">Coñece máis acerca de que xeito o OsmAnd calcula as rotas no noso blogue.</string>
     <string name="public_transport_warning_title">A navigación en transporte público atópase agora en fase de proba beta, poden xerarse erros e imprecisións.</string>
     <string name="add_intermediate">Engadir punto intermedio</string>
+    <string name="routing_attr_avoid_tram_name">Evitar tranvías</string>
+    <string name="routing_attr_avoid_tram_description">Evitar tranvías</string>
+    <string name="routing_attr_avoid_bus_name">Evitar tranvías</string>
+    <string name="routing_attr_avoid_bus_description">Evitar buses e trolebuses</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evitar taxis compartillados</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evitar taxis compartillados</string>
+    <string name="routing_attr_avoid_train_name">Evitar trens</string>
+    <string name="routing_attr_avoid_train_description">Evitar trens</string>
+    <string name="routing_attr_avoid_subway_name">Evitar metros</string>
+    <string name="routing_attr_avoid_subway_description">Evitar metros e tranvías/metros lixeiros</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar ferris</string>
+    <string name="routing_attr_avoid_ferry_description">Evitar ferris</string>
+    <string name="release_3_3_7">• Amosar o tempo entre transbordos no transporte público
+\n
+\n • Interface de usuario corrixida para «Detalles da rota»
+\n
+\n • Tema escuro solucionado no menú «Dirección» e «Detalles da rota»
+\n
+\n • Visualización de medida «azimut» en «Medir distancia»</string>
+    <string name="shared_string_degrees">Graos</string>
+    <string name="shared_string_milliradians">Milirradiáns</string>
+    <string name="angular_measeurement">Unidades de medición angular</string>
+    <string name="angular_measeurement_descr">Mudar o \"azimuth\" no que se mide.</string>
+    <string name="avoid_pt_types_descr">Escolle os tipos de transporte público a evitar para a navigación:</string>
+    <string name="quick_action_day_night_mode">Modo %s</string>
+    <string name="avoid_pt_types">Evitar tipos de transporte…</string>
+    <string name="routing_attr_avoid_sett_name">Evitar o pavemento empedrado e lastros</string>
+    <string name="routing_attr_avoid_sett_description">Evita as rúas empedradas e con lastros</string>
 </resources>
