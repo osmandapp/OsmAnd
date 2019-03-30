@@ -2882,7 +2882,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="route_class_stat_container">Útkategória</string>
     <string name="step_by_step">Lépésről lépésre</string>
     <string name="road_types">Úttípusok</string>
-    <string name="exit_at">Hajts le</string>
+    <string name="exit_at">Szállj le</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX nyomvonalak megjelenítése/elrejtése</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">A műveletgombra koppintás elrejti vagy megjeleníti a GPX nyomvonalakat a térképen</string>
     <string name="quick_action_gpx_tracks_hide">GPX nyomvonalak elrejtése</string>
@@ -2910,4 +2910,23 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="time_of_day">Napszak</string>
     <string name="by_transport_type">Ezzel: %1$s</string>
     <string name="sit_on_the_stop">Megálló tábla</string>
+    <string name="routing_attr_avoid_tram_name">Villamos elkerülése</string>
+    <string name="routing_attr_avoid_tram_description">Villamos elkerülése</string>
+    <string name="routing_attr_avoid_bus_name">Busz elkerülése</string>
+    <string name="routing_attr_avoid_bus_description">Busz és trolibusz elkerülése</string>
+    <string name="routing_attr_avoid_share_taxi_name">Iránytaxi elkerülése</string>
+    <string name="routing_attr_avoid_share_taxi_description">Iránytaxi elkerülése</string>
+    <string name="routing_attr_avoid_train_name">Vonat elkerülése</string>
+    <string name="routing_attr_avoid_train_description">Vonat elkerülése</string>
+    <string name="routing_attr_avoid_subway_name">Metró elkerülése</string>
+    <string name="routing_attr_avoid_subway_description">Metró és kombínó elkerülése</string>
+    <string name="routing_attr_avoid_ferry_name">Komp elkerülése</string>
+    <string name="routing_attr_avoid_ferry_description">Komp elkerülése</string>
+    <string name="avoid_pt_types_descr">Jelöld ki a navigáció során elkerülendő közlekedési módokat:</string>
+    <string name="avoid_pt_types">Közlekedési módok elkerülése…</string>
+    <string name="shared_string_walk">Séta</string>
+    <string name="public_transport_warning_descr_blog">Tudj meg többet az OsmAnd útvonalszámításáról a blogunkon.</string>
+    <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
+    <string name="add_intermediate">Köztes pont megadása</string>
+    <string name="transfers_size">%1$d átszállás</string>
 </resources>
