@@ -3003,14 +3003,14 @@
     <string name="routing_attr_avoid_train_name">Избегать поездов</string>
     <string name="routing_attr_avoid_train_description">Избегать поездов</string>
     <string name="routing_attr_avoid_subway_name">Избегать метро</string>
-    <string name="routing_attr_avoid_subway_description">Избегать метро и легкорельсового транспорта</string>
+    <string name="routing_attr_avoid_subway_description">Избегать метро и легкорельсовый транспорт</string>
     <string name="routing_attr_avoid_ferry_name">Избегать паромов</string>
     <string name="routing_attr_avoid_ferry_description">Избегать паромов</string>
     <string name="release_3_3_7">• Отображение времени между пересадками в общественном транспорте
 \n
-\n• Исправлен пользовательский интерфейс для деталей маршрута
+\n• Исправлен пользовательский интерфейс для \"Детали маршрута\"
 \n
-\n• Исправлена темная тема в меню \"Маршрут\" и \"Информация о маршруте\"
+\n• Исправлена темная тема в меню \"Маршрут\" и \"Детали маршрута\"
 \n
 \n• Отображение азимута в инструменте \"Измерить расстояние\"
 \n
