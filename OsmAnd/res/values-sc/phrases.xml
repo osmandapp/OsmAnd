@@ -3574,4 +3574,5 @@
     <string name="poi_rtsa_scale_3b">3Б</string>
     <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
     <string name="poi_flare">Frama de gas;Tortza de brusiadura</string>
+    <string name="poi_change_delete">Ogetu iscantzelladu</string>
 </resources>
