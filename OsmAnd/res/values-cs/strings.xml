@@ -2983,4 +2983,23 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Miliradiány</string>
     <string name="angular_measeurement">Úhlové měrné jednotky</string>
     <string name="angular_measeurement_descr">Změní jednotku měření azimutu.</string>
+    <string name="routing_attr_avoid_tram_name">Vyhnout se tramvajím</string>
+    <string name="routing_attr_avoid_tram_description">Vyhnout se tramvajím</string>
+    <string name="routing_attr_avoid_bus_name">Vyhnout se autobusům</string>
+    <string name="routing_attr_avoid_bus_description">Vyhnout se autobusům a trolejbusům</string>
+    <string name="routing_attr_avoid_share_taxi_name">Vyhnout se sdíleným taxi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Vyhnout se sdíleným taxi</string>
+    <string name="routing_attr_avoid_train_name">Vyhnout se vlakům</string>
+    <string name="routing_attr_avoid_train_description">Vyhnout se vlakům</string>
+    <string name="routing_attr_avoid_subway_name">Vyhnout se metru</string>
+    <string name="routing_attr_avoid_subway_description">Vyhnout se metru a lehké železniční dopravě</string>
+    <string name="routing_attr_avoid_ferry_name">Vyhnout se trajektům</string>
+    <string name="routing_attr_avoid_ferry_description">Vyhnout se trajektům</string>
+    <string name="release_3_3_7">• Zobrazování času na přestup mezi hromadnou dopravou
+\n
+\n • Upravené rozhraní detailů trasy
+\n
+\n • Opravené tmavé téma v menu pokynů a detailů trasy
+\n
+\n • Zobrazení azimutu v měření vzdálenosti</string>
 </resources>
