@@ -39,7 +39,7 @@
     <string name="poi_bedding">پنبه زنی</string>
     <string name="poi_dive">تجهیزات غواصی</string>
     <string name="poi_doityourself">فروشگاه بهسازی خانه</string>
-    <string name="poi_erotic">لوازم پزشکی</string>
+    <string name="poi_erotic"></string>
     <string name="poi_fishing">لوازم ماهیگیری</string>
     <string name="poi_florist">گلفروشی</string>
     <string name="poi_frame">قاب سازی</string>
@@ -599,7 +599,7 @@
     <string name="poi_topmark"/>
     <string name="poi_seamark_rock">سنگ دریایی</string>
     <string name="poi_seamark_wreck">کشتی شکسته دریایی</string>
-    <string name="poi_military">منطقه نظامی</string>
+    <string name="poi_military">نظامی</string>
     <string name="poi_military_airfield">فرودگاه نظامی</string>
     <string name="poi_military_bunker">پناهگاه نظامی</string>
     <string name="poi_military_barracks">سربازخانه</string>
