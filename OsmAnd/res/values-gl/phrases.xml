@@ -3569,4 +3569,5 @@
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Chama de gas;Queimadura de facho</string>
+    <string name="poi_change_delete">Obxecto eliminado</string>
 </resources>
