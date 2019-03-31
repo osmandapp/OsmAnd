@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="city_type_district">ജില്ല</string>
+<resources>
+    <string name="city_type_district">ജില്ല</string>
     <string name="city_type_neighbourhood">സമീപദേശം</string>
     <string name="map_widget_search">തെരച്ചില്‍</string>
-	<string name="app_mode_bus">ബസ്</string>
- 	<string name="app_mode_train">ട്രെയിന്‍</string>
+    <string name="app_mode_bus">ബസ്</string>
+    <string name="app_mode_train">ട്രെയിന്‍</string>
     <string name="access_widget_expand">വികസിപ്പിക്കുക</string>
     <string name="rendering_value_thin_name">കട്ടികുറഞ്ഞ</string>
     <string name="rendering_value_medium_name">ഇടത്തരം</string>
@@ -152,7 +153,6 @@
     <string name="city_type_village">ഗ്രാമം</string>
     <string name="city_type_town">പട്ടണം</string>
     <string name="city_type_city">നഗരം</string>
-
     <string name="favorite_home_category">പൂമുഖം</string>
     <string name="shared_string_others">"മറ്റുള്ളവ "</string>
     <string name="shared_string_name">പേര‍്</string>
@@ -207,7 +207,6 @@
     <string name="map_mode">മാപ് രീതി</string>
     <string name="number_of_gpx_files_selected_pattern">"%s ജിപിഎക്സ് ഫയലുകള്‍ തിരഞ്ഞെടുത്തിരിക്കുന്നു "</string>
     <string name="no_waypoints_found">"വഴിത്തിരിവുകളൊന്നും കണ്ടെത്താനായില്ല "</string>
-    
     <string name="osm_editors_ranking">ഓ എസ് എം എഡിറ്ററുഡെ റാങ്കിങ്ങ്</string>
     <string name="osm_live_month_cost_desc">മാസവരി.</string>
     <string name="select_map_marker">മാപ് മാര്‍ക്കര്‍ തിരഞ്ഞെടുക്കുക</string>
@@ -256,7 +255,7 @@
     <string name="shared_string_currently_recording_track">"നിലവില്‍ റിക്കോഡ് ചെയ്യുന്ന പാത "</string>
     <string name="track_segments">വഴി കഷണം (ട്രാക്ക് സെഗ്.)</string>
     <string name="shared_string_online_maps">ഓണ്‍ലൈന്‍ ഭൂപടങ്ങള്‍</string>
-	<string name="srtm_paid_version_title">കോണ്ടൂര്‍ ലൈനുകളുടെ പ്ളഗ് ഇന്‍</string>
+    <string name="srtm_paid_version_title">കോണ്ടൂര്‍ ലൈനുകളുടെ പ്ളഗ് ഇന്‍</string>
     <string name="edit_group">"ഗ്രൂപ്പ് എഡിറ്റ് ചെയ്യുക "</string>
     <string name="version_settings_descr">നൈറ്റിലി ബില്‍ഡ് വേര്‍ഷന്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക</string>
     <string name="rendering_attr_streetLighting_name">"തെരുവിളക്ക് "</string>
@@ -280,8 +279,6 @@
     <string name="loading_smth">%1$s... വന്ന് കൊണ്ടിരിക്കുന്നു…</string>
     <string name="gpx_info_distance">"ദൂരം   %1$s (%2$s points )"</string>
     <string name="gpx_info_maximum_speed">പരമാവധി വേഗത: %1$s</string>
-
-
     <string name="index_item_world_bitcoin_payments">ബിറ്റ്കോയിന്‍</string>
     <string name="lang_zh">"ചൈനീസ് ഭാക്ഷ "</string>
     <string name="lang_bg">ബള്‍ഗേറിയന്‍ ഭാക്ഷ</string>
@@ -458,7 +455,6 @@
     <string name="av_settings">"ഓഡിയോസജ്ജീകരണങ്ങള്‍ "</string>
     <string name="add_as_last_destination_point">"അവസാനത്തെ  ഇട-ലക്ഷ്യസ്ഥാനമായി ചേര്‍ക്കുക"</string>
     <string name="add_as_first_destination_point">അദ്യത്തെ ഇട-ലക്ഷ്യസ്ഥാനമായി ചേര്‍ക്കുക</string>
-
     <string name="arrived_at_intermediate_point">"നിങ്ങള്‍  ഇട-ലക്ഷ്യസ്ഥാനത്തെത്തിയിരിക്കുന്നു"</string>
     <string name="add_tag">"ടാഗ് ചേര്‍ക്കുക "</string>
     <string name="avoid_motorway">അതിവേഗപാതകള്‍ ഒഴിവാക്കുക</string>
@@ -565,7 +561,7 @@
     <string name="shared_string_favorite">താല്‍പര്യമുള്ളവ</string>
     <string name="track_points">പാത ബിന്ദുക്കള്‍</string>
     <string name="srtm_plugin_name">"കോണ്ടൂര്‍ ലൈനുകള്‍ "</string>
-	<string name="debugging_and_development">ഓഎസ്എം ആന്റ് വികസനം</string>
+    <string name="debugging_and_development">ഓഎസ്എം ആന്റ് വികസനം</string>
     <string name="days_behind">പിമ്പിലുള്ള ദിവസങ്ങള്‍</string>
     <string name="free">"ഫ്രീ  %1$s "</string>
     <string name="device_memory">ഉപകരണ മെമ്മറി</string>
@@ -591,8 +587,6 @@
     <string name="calculate_osmand_route_without_internet">ഇന്റര്‍നെറ്റ് ഇല്ലാതെ റൂട്ട് കക്ഷണം കണ്ട്പിടിക്കുക (ഓഎസ്എം ആന്റ്)</string>
     <string name="routing_attr_prefer_motorway_name">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
     <string name="routing_attr_prefer_motorway_description">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
-    
-    
     <string name="routing_attr_avoid_toll_name">ടോള്‍ റോഡുകള്‍ ഒഴിവാക്കുക</string>
     <string name="routing_attr_avoid_toll_description">ടോള്‍ റോഡുകള്‍ ഒഴിവാക്കുക</string>
     <string name="routing_attr_avoid_unpaved_name">" ടാര്‍ ചെയ്യാത്ത(പാകാത്ത) റോഡുകള്‍ ഒഴിവാക്കുക "</string>
@@ -665,14 +659,13 @@
     <string name="bg_service_screen_lock_toast">"സ്ക്രീന്‍ പൂട്ടിയിരിക്കുന്നു "</string>
     <string name="route_updated_loc_found">തല്‍സ്ഥാനം കണ്ട് പിടിച്ച് കഴിഞ്ഞാല്‍ റൂട്ട് കണ്ട്പിടിക്കുന്നാതായിരിക്കും</string>
     <string name="global_app_allocated_memory">അലോക്കേറ്റഡ് മെമ്മറി</string>
-	<string name="route_kl">ഇടത് വശം ചേര്‍ന്ന് പോവുക</string>
+    <string name="route_kl">ഇടത് വശം ചേര്‍ന്ന് പോവുക</string>
     <string name="transport_search_desc">"പൊതു ഗതാഗത സംവിധാനം തെരയുക "</string>
     <string name="left_side_navigation">ലെഫ്ട് ഹാന്റ് ഡ്രൈവിങ്ങ്</string>
     <string name="left_side_navigation_descr">"ലെഫ്റ്റ് ഹാന്റ് ഡ്രൈവിങ്ങ് ഉള്ള രാജ്യങ്ങളില്‍ ഇത് തെരഞ്ഞെടുക്കുക "</string>
     <string name="unknown_from_location">"പ്രാരംഭ സ്ഥലം ഇതുവരെ  ഉറപ്പിച്ചിട്ടില്ല "</string>
     <string name="unknown_location">"തല്‍സ്ഥലം അറിയില്ല "</string>
     <string name="back_to_location">തല്‍സ്ഥാനത്തെക്ക് തിരിച്ച് പോവുക</string>
-
     <string name="backToMenu">മെനുവിലോട്ട് തിരിച്ച് പോവുക</string>
     <string name="zoomIs">സൂം നിലപ്പ്</string>
     <string name="east_north_east">"കിഴക്ക് - വടക്ക് - കിഴക്ക് "</string>
@@ -806,17 +799,11 @@
     <string name="shared_string_from">ഫ്രം</string>
     <string name="coords_format">കോഓര്‍ഡിനേറ്റ് രൂപഘടന</string>
     <string name="coords_format_descr">ഭൂമിശാസ്ത്ര കോഓര്‍ഡിനേറ്റുകളുടെ ഘടന</string>
-  	<string name="move_marker_bottom_sheet_title">മാര്‍ക്കറിന്റെ സ്ഥാനം മാറ്റാനായി ഭൂപടം നീക്കുക</string>
+    <string name="move_marker_bottom_sheet_title">മാര്‍ക്കറിന്റെ സ്ഥാനം മാറ്റാനായി ഭൂപടം നീക്കുക</string>
     <string name="use_osm_live_routing_description">"വഴികാട്ടി ഓ എസ് എം  ലൈവ് മാറ്റങ്ങള്‍ക്കനുസൃതമായി സജ്ജീകരിക്കുക"</string>
-	<string name="use_osm_live_routing">"ഓ എസ് എം  ലൈവ് നാവിഗേഷന്‍"</string>
+    <string name="use_osm_live_routing">"ഓ എസ് എം  ലൈവ് നാവിഗേഷന്‍"</string>
     <string name="rendering_value_bold_name">കട്ടികൂടിയ</string>
     <string name="no_map_markers_found">"ഭൂപടത്തില്‍ നിന്നും മാപ് മാര്‍ക്കേര്‍സ് ചേര്‍ക്കുക "</string>
-    
-    
-    
-    
-    
-    
     <string name="shared_string_move_up">മുകളിലോട്ട് കയറ്റുക ↑</string>
     <string name="shared_string_move_down">താഴോട്ട് ഇറക്കുക ↓</string>
     <string name="finish_navigation">"വഴികാട്ടി നിര്‍ത്തുക "</string>
@@ -870,7 +857,6 @@
     <string name="osb_comment_dialog_error">"വിവരണം(കമന്റ്) ചേര്‍ക്കാന്‍ സാധിച്ചില്ല "</string>
     <string name="osb_comment_dialog_success">വിവരണം(കമന്റ്) ചേര്‍ത്തിരിക്കുന്നു</string>
     <string name="shared_string_commit">ഉറപ്പിക്കുക (കമ്മിറ്റ്)</string>
-
     <string name="context_menu_item_edit_waypoint">ജിപിഎക്സ് പാതബിന്ദുക്കള്‍ ക്രമീകരിക്കുക(എഡിറ്റ്)</string>
     <string name="share_osm_edits_subject">ഓഎസ്എംആന്ഡ് വഴി പങ്ക് വെച്ച ഓഎസ്എം എഡിറ്റുകള്‍</string>
     <string name="lang_nds">ലോ ജര്‍മന്‍ ഭാഷ</string>
@@ -929,13 +915,12 @@
     <string name="shared_string_show_details">വിശദാംശങ്ങള്‍ കാണിക്കുക</string>
     <string name="shared_string_places">സ്ഥലങ്ങള്‍</string>
     <string name="record_plugin_name">സഞ്ചാരം രേഖപെടുത്തുന്നു</string>
-	<string name="roads_only">വഴികൾ മാത്രമുള്ളത്</string>
+    <string name="roads_only">വഴികൾ മാത്രമുള്ളത്</string>
     <string name="show_pedestrian_warnings">സീബ്രക്രോസിങ്ങ്</string>
     <string name="rendering_category_hide">മറയ്ക്കുക</string>
     <string name="rendering_category_transport">ഗതാഗത സംവിധാനം</string>
     <string name="way_alarms">ഗതാഗത മുന്നറിയിപ്പു്</string>
     <string name="monitoring_settings">സഞ്ചാരം രേഖപെടുത്തുന്നു</string>
-    
     <string name="install_paid">"പൂര്‍ണ്ണമായ പതുപ്പ് "</string>
     <string name="prefer_motorways">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
     <string name="prefer_in_routing_descr">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
@@ -950,7 +935,6 @@
     <string name="context_menu_item_share_location">"സ്ഥാനം പങ്ക് വെക്കുക "</string>
     <string name="amenity_type_transportation">ഗതാഗത സംവിധാനം</string>
     <string name="context_menu_item_update_map">"ഭൂപടം  പരിഷ്ക്കരിക്കുക"</string>
-
     <string name="default_buttons_commit">ഉറപ്പിക്കുക (കമ്മിറ്റ്)</string>
     <string name="later">"പിന്നീട് "</string>
     <string name="plugins_menu_group">പ്ളഗ്-ഇനുകള്‍</string>
@@ -988,7 +972,6 @@
     <string name="background_service_is_enabled_question">ഓഎസ്എംആന്ഡ് ബാക്ക്ഗ്രൗണ്ട് സേവനങ്ങള്‍ പ്രവര്‍ത്തിച്ചു കൊണ്ടിരിക്കുന്നു. അതും സ്ടോപ് ചെയ്യണോ?</string>
     <string name="voice_provider_descr">വഴികാട്ടിക്കായി ശബ്ദ മാര്‍ഗനിര്‍ദേശം തെരഞ്ഞെടുക്കുക</string>
     <string name="voice_provider">"ശബ്ദ മാര്‍ഗനിര്‍ദേശം "</string>
-
     <string name="show_zoom_buttons_navigation">സൂം ബട്ടണുകള്‍ കാണിക്കുക</string>
     <string name="delay_navigation_start">തന്നെ ടേണ്-ബൈ-ടേണ്‍ നിര്‍ദേശങ്ങള്‍ ആരംഭിക്കുക</string>
     <string name="use_points_as_intermediates">"ബിന്ദുക്കള്‍ക്കിടയില്‍ റൂട്ട് കണ്ട്പിടിക്കുക "</string>
@@ -1055,7 +1038,6 @@
 വഴികാട്ടിയും</string>
     <string name="downloading_number_of_files">" %1$d ഫയല്‍  ഡൗണ്‍ലോഡ് ചെയ്തു കൊണ്ടിരിക്കുന്നു"</string>
     <string name="application_dir_description">എവിടെയാണ് ഭൂപടങ്ങളും മറ്റ് വിവരങ്ങളും സംഭരിക്കേണ്ടത് എന്ന് തെരഞ്ഞെടുക്കുക.</string>
-
     <string name="techical_articles_item">സാങ്കേതിക ലേഖനങ്ങള്‍</string>
     <string name="versions_item">പതിപ്പുകള്‍</string>
     <string name="weekly">വാരം</string>
@@ -1149,7 +1131,8 @@
     <string name="map_underlay_descr">കീഴ്-ഭൂപടം തെരഞ്ഞെടുക്കുക</string>
     <string name="map_overlay">മേലെ ഭൂപടം</string>
     <string name="map_overlay_descr">മേലെയുള്ള ഭൂപടം തെരഞ്ഞെടുക്കുക</string>
-    <string name="create_poi_link_to_osm_doc"><u>ഓണ്‍ലൈന്‍ ഓഎസ്എം </u> ഭൂപടങ്ങള്‍ ചിത്രങ്ങളോടെ തരംതിരിച്ചത്</string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>ഓണ്‍ലൈന്‍ ഓഎസ്എം </u> ഭൂപടങ്ങള്‍ ചിത്രങ്ങളോടെ തരംതിരിച്ചത്</string>
     <string name="foot">അടി</string>
     <string name="mile">മൈ.</string>
     <string name="context_menu_item_add_waypoint">ജിപിഎക്സ് പാതയില്‍ പാതബിന്ദു ചേര്‍ക്കുക</string>
@@ -1158,7 +1141,6 @@
     <string name="continuous_rendering">തുടര്‍ച്ചയായി വരച്ച് കാണിക്കുക</string>
     <string name="context_menu_item_search_transport">"പൊതു ഗതാഗത സംവിധാനം തെരയുക "</string>
     <string name="no_vector_map_loaded">"വെക്ടര്‍ ഭൂപടങ്ങള്‍ കയറ്റാനായില്ല "</string>
-    
     <string name="no_fav_to_save">"സമ്ഭരിക്കാനായി താല്‍പര്യമുള്ള ബിന്ദുക്കളില്ല "</string>
     <string name="menu_layers">ഭൂപടപാളികള്‍</string>
     <string name="context_menu_item_search_poi">"സ്ഥലങ്ങള്‍  (POI) തിരയുക"</string>
@@ -1183,7 +1165,6 @@
     <string name="context_menu_item_create_poi">"പി ഓ ഐക്ക്  രുപം നല്‍കുക"</string>
     <string name="navigation_intent_invalid">തെറ്റായ ഘടന: %s</string>
     <string name="dahboard_options_dialog_title">ഡാഷ്ബോര്‍ഡ് സജ്ജീകരിക്കുക</string>
-
     <string name="commit_poi">പിഓഐ ഉറപ്പിക്കുക (കമ്മിറ്റ്)</string>
     <string name="contact_info">സമ്പര്‍ക്ക വിവരം</string>
     <string name="confirm_download_roadmaps">നിങ്ങളുടെ കയ്യില്‍ പൂര്‍ണ്ണമായ ഭൂപടമുണ്ടല്ലോ, റോഡ് മാത്രമുള്ള ഭൂപടം ഡൗണ്‍ലോഡ് ചെയ്യണോ?</string>
@@ -1253,7 +1234,6 @@
     <string name="rendering_value_highContrastRoads_name">കൂടിയ നിറവ്യത്യാസമുള്ള റോഡുകള്‍</string>
     <string name="rendering_value_americanRoadAtlas_name">അമേരിക്കന്‍ റോഡ് അറ്റ്-ലസ്</string>
     <string name="rendering_attr_transportStops_name">സ്ടോപ്പുകള്‍ (ട്രാന്‍സ്പോര്‍ട്ട്)</string>
-
     <string name="rendering_attr_tramTrainRoutes_name">ട്രാം &amp; ട്രെയിന്‍ റൂട്ടുകള്‍</string>
     <string name="rendering_attr_subwayMode_name">"സബ് വേ  റൂട്ടുകള്‍"</string>
     <string name="rendering_attr_trainLightrailRoutes_name">ട്രെയിന്‍ റൂട്ടുകള്‍</string>
@@ -1264,7 +1244,6 @@
     <string name="search_radius_proximity">"അകത്ത് "</string>
     <string name="anonymous_user">"പേരുവയ്‌ക്കാത്ത ഉപയോക്താവ് "</string>
     <string name="text_size_descr">ഭൂപടത്തിലെ അക്ഷരവലിപ്പം ക്രമീകരിക്കുക.</string>
-    
     <string name="live_monitoring_m_descr">ജിപിഎക്സ് റിക്കോഡിങ്ങ് സജീവമാക്കിയാല്‍ പാതവിവരങ്ങള്‍ നിര്‍ദ്ദിഷ്‌ട വെബ് സേവനത്തിന് അയക്കും.</string>
     <string name="rendering_attr_showSurfaceGrade_name">പാതയുടെ നിലവാരം കാണിക്കുക</string>
     <string name="rendering_attr_showCycleRoutes_name">സൈക്കിള്‍ റൂട്ടുകള്‍ കാണിക്കുക</string>
@@ -1364,11 +1343,8 @@
     <string name="search_on_the_map_item">"ഭൂപടത്തില്‍ തിരയുന്നു "</string>
     <string name="updates_size">" പരിഷ്ക്കരണത്തിന്റെ വലിപ്പം"</string>
     <string name="select_month_and_country">മാസവും രാജ്യവും തെരഞ്ഞെടുക്കുക</string>
-    
-    
     <string name="shared_string_pause">താല്‍ക്കാലികമായുള്ള നിര്‍ത്തല്‍</string>
     <string name="show_transparency_seekbar">സീക്ക്ബാര്‍ സുതാര്യമായി കാണിക്കുക</string>
-    
     <string name="rendering_attr_hmRendered_name">"കൂടുതല്‍  ഭൂപടവിവരങ്ങള്‍ കാണിക്കുക"</string>
     <string name="search_address_top_text">വിലാസം തെരഞ്ഞെടുക്കുക</string>
     <string name="trip_rec_notification_settings">"പെട്ടന്ന്   റിക്കോര്‍ഡ് ചെയ്യുന്നത് സജ്ജീകരിക്കുക "</string>
@@ -1388,8 +1364,6 @@
     <string name="search_my_location">എന്റെ സ്ഥാനം തെരയുക</string>
     <string name="route_stops_before">%1$s മുമ്പായ് നിര്‍ത്തുക</string>
     <string name="report">സംഭവക്കുറിപ്പ്‌</string>
-    
-    
     <string name="rec_split">റിക്കോഡിങ്ങ് സ്പ്ളിറ്റ് ചെയ്യുക</string>
     <string name="rec_split_storage_size">സംഭരണ വലിപ്പം</string>
     <string name="lang_als">അല്‍ബേനിയന്‍(ടോസ്ക്)</string>
@@ -1408,7 +1382,6 @@
     <string name="remove_the_tag">"ടാഗ് ഒഴിവാക്കുക "</string>
     <string name="navigate_point_easting">കിഴക്കോട്ട്</string>
     <string name="rendering_attr_busRoutes_name">ബസ് റൂട്ടുകള്‍</string>
-    
     <string name="save_global_track_interval">സാധാരണ റിക്കോഡിങ്ങിന്റെ ഇടവേള</string>
     <string name="save_track_to_gpx_globally">"ജിപിഎക്സ് ഫയലിലോട്ട്  പാത റിക്കോഡ് ചെയ്യുക"</string>
     <string name="save_current_track">ഇപ്പോഴത്തെ ട്രാക്ക് സംഭരിക്കുക</string>
@@ -1419,25 +1392,8 @@
     <string name="rendering_attr_hideWoodScrubs_name">മരങ്ങളും കുറ്റിച്ചെടികളും</string>
     <string name="rendering_attr_buildings15zoom_name">കെട്ടിടങ്ങള്‍ സൂം 15-ല്‍</string>
     <string name="rendering_attr_hideAccess_name">പ്രവേഷന തടസം</string>
-    
-    
-    
-    
-    
-    
     <string name="osmo_edit_color">പ്രദര്‍ശനനിറം</string>
-    
-    
     <string name="int_days">ദിവസങ്ങള്‍</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <string name="index_item_world_altitude_correction">"ലോക ഉയരവ്യത്യാസതിരുത്തലുകള്‍ "</string>
     <string name="index_item_world_seamarks">ലോകകടലടയാളങ്ങള്‍</string>
     <string name="index_item_world_ski">ലോക സ്കി ഭൂപടങ്ങള്‍</string>
@@ -1478,7 +1434,6 @@
     <string name="route_descr_map_location">"ഭൂപടം: "</string>
     <string name="route_descr_lat_lon">"അക്ഷാംശം %1$.3f, രേഖാംശം  %2$.3f"</string>
     <string name="route_from">പ്രാരംഭസ്ഥാനം:</string>
-
     <string name="intermediate_points_change_order">തിരിച്ചിടുക</string>
     <string name="intermediate_point">"  ഇട-ലക്ഷ്യസ്ഥാനം %1$s"</string>
     <string name="interrupt_music">പാട്ടുകള്‍ പാടുന്നത് താല്‍ക്കാലികമായി നിര്‍ത്തുക</string>
@@ -1516,9 +1471,9 @@
     <string name="osn_bug_name">"ഓഎസ്എം കുറിപ്പ് "</string>
     <string name="lang_hsb">സോര്‍ബിയന്‍(അപ്പര്‍)</string>
     <string name="plugin_touringview_name">ടൂറിങ്ങ് ഭൂപടവിന്യാസം</string>
-	<string name="plugin_nautical_name">കപ്പലോട്ട ഭൂപട വിന്യാസം</string>
-	<string name="plugin_ski_name">സ്കീ ഭൂപടവിന്യാസം</string>
-	<string name="parking_place">പാര്‍ക്ക് ചെയ്ത സ്ഥലം</string>
+    <string name="plugin_nautical_name">കപ്പലോട്ട ഭൂപട വിന്യാസം</string>
+    <string name="plugin_ski_name">സ്കീ ഭൂപടവിന്യാസം</string>
+    <string name="parking_place">പാര്‍ക്ക് ചെയ്ത സ്ഥലം</string>
     <string name="lock_screen_request_explanation">" സ്ക്രീന്‍ ഓഫ് ചെയ്ത് പവര്‍ ഉപയോഗം കുറക്കാന്‍ %1$s ന് ഈ അനുമതി വേണം."</string>
     <string name="none_selected_gpx">ജിപിഎക്സ് ഫയലുകളൊന്നും തെരഞ്ഞെടുത്തിട്ടില്ല. തെരഞ്ഞെടുക്കാനായി ലഭ്യമായ പാതയില്‍ ഞെക്കിപിടിക്കുക.</string>
     <string name="layer_amenity_label">ബിന്ദുവിന്റെ പേരുചീട്ട്</string>
@@ -1585,7 +1540,6 @@
     <string name="live_update">"തത്സമയ പരിഷ്കരണങ്ങള്‍ "</string>
     <string name="last_update">" അവസാന പരിഷ്ക്കരണം : %s"</string>
     <string name="last_map_change">ഭൂപടത്തിലെ അവസാന മാറ്റം: %s</string>
-    
     <string name="gpx_logging_no_data">"വിവരങ്ങളൊന്നുമില്ല "</string>
     <string name="christmas_poi">ക്രിസ്മസ് താല്‍പര്യബിന്ദുക്ക</string>
     <string name="christmas_desc">ക്രിസ്മസ് - പുതുവര്‍ഷം അടുത്തെത്തിയാല്‍ , നിങ്ങള്‍ക്ക് ക്രിസ്മസ് തല്‍പര്യബിന്ദുക്കള്‍ കാണിക്കാം: ക്രിസ്മസ് ട്രീസ്, ചന്തകള്, തുടങ്ങിയവ.</string>
@@ -1593,7 +1547,6 @@
     <string name="rendering_value_dark_brown_name">ഇരുണ്ട തവിട്ടുനിറം</string>
     <string name="first_usage_greeting">ഇന്റര്‍നെറ്റ് ഇല്ലാതെ തന്നെ മാര്‍ഗദിശയും, പുതിയ സ്ഥലങ്ങളും കണ്ടെത്തുക</string>
     <string name="access_map_linked_to_location">സ്ഥാനത്തോട് ബന്ധപ്പെട്ട ഭൂപടം</string>
-    
     <string name="clear_updates_proposition_message">നിങ്ങള്‍ക്ക് ഡൗണ്‍ലോഡ് ചെയ്ത പരിഷ്കാരങ്ങള്‍ നീക്കി ആദ്യ ഭൂപടത്തിലോട്ട് തിരിച്ച് പോവാം</string>
     <string name="add_time_span">കാലയളവ് ചേര്‍ക്കുക</string>
     <string name="welcome_select_region">ട്രാഫിക് സൈനുകളും നിയമങ്ങളും ശരിയായ് പാലിക്കാന്‍ ഡ്രൈവിങ്ങ് റീജിയന്‍ തെരഞ്ഞെടുക്കുക:</string>
@@ -1602,7 +1555,7 @@
     <string name="shared_string_on">ഓണ്‍</string>
     <string name="shared_string_or">"അല്ലെങ്കില്‍ "</string>
     <string name="osmand_parking_plugin_name">പാര്‍ക്കിങ്ങ് സ്ഥാനം</string>
-	<string name="osmand_parking_plugin_description">"പാര്‍ക്കിങ്ങ് സ്ഥാന അനുബന്ധം എവിടെയാണ് കാര്‍ പാര്‍ക്ക് ചെയ്തത് എന്നും എത്രസമയം കൂടി ലഭ്യമാണ്(സമയപരിമിതമെങ്കില്‍) ഓര്‍മിപ്പിക്കുന്നു.
+    <string name="osmand_parking_plugin_description">"പാര്‍ക്കിങ്ങ് സ്ഥാന അനുബന്ധം എവിടെയാണ് കാര്‍ പാര്‍ക്ക് ചെയ്തത് എന്നും എത്രസമയം കൂടി ലഭ്യമാണ്(സമയപരിമിതമെങ്കില്‍) ഓര്‍മിപ്പിക്കുന്നു.
 
 പാര്‍ക്കിങ്ങ് സ്ഥലവും സമയവും ഓഎസ്എംആന്ഡിന്റെ ഡാഷ്ബോഡിലും ഭൂപത്തിലും കാണാവുന്നതാണ്. കൂടാതെ ആന്ഡ്രോയിഡ് കലണ്ടറിലൊരു  ഓര്‍മ്മക്കത്ത് ചേര്‍ക്കാവുന്നതാണ്."</string>
     <string name="osm_settings">ഓഎസ്എം തിരുത്തലുകള്‍</string>
@@ -1619,12 +1572,6 @@
     <string name="rendering_attr_lessDetailed_name">കുറച്ച് വിവരങ്ങള്‍</string>
     <string name="shared_string_waypoint">പാതബിന്ദു(വേപോയിന്റ്)</string>
     <string name="gpx_file_is_empty">"ജിപിഎക്സ്  ഫയല്‍ ശൂന്യമാണ്"</string>
-    
-    
-    
-    
-    
-    
     <string name="index_item_nation_addresses">രാജ്യമെമ്പാടുമുള്ള വിലാസങ്ങള്‍</string>
     <string name="index_item_world_basemap">"ലോക വിഹഗ ഭൂപടം  "</string>
     <string name="use_displayed_track_for_navigation">കാണിച്ചിരിക്കുന്ന പാത വഴികാട്ടിക്കായ് ഉപയോഗിക്കണോ?</string>
@@ -1646,7 +1593,6 @@
     <string name="rendering_attr_roadColors_name">റോഡ് നിറക്കൂട്ട്</string>
     <string name="intermediate_point_too_far">ഇടലക്ഷ്യസ്ഥാനം %1$s അടുത്തുള്ള പാതയില്‍ നിന്നും വളരെ അകലെയാണ്.</string>
     <string name="use_compass_navigation_descr">മറ്റ് വിധത്തില്‍ ദിശ കണ്ട്പിടിക്കാനായില്ലെങ്കില്‍ വടക്കുനോക്കി ഉപയോഗിക്കുക</string>
-    
     <string name="global_app_allocated_memory_descr">"അനുവദിച്ചിരിക്കുന്ന മെമ്മറി  %1$s MB (ആന്ഡ്രോയിഡ് പരിധി  %2$s MB, ഡാല്വിക്  %3$s MB)."</string>
     <string name="osmand_parking_warning_text">നിങ്ങളുടെ കാര്‍ എടുക്കാനുള്ള ഒരു അറിയിപ്പ്‌ കലണ്ടറില്‍ ചേര്‍ത്തിരിക്കുന്നു. അത് നിങ്ങള്‍ നീക്കം ചെയ്യുന്നത് വരെ അവിടെയുണ്ടാകും.</string>
     <string name="osmand_parking_time_limit_title">പാര്‍ക്ക് ചെയ്യാവുന്ന സമയ പരിധി ചൂണ്ടിക്കാണിക്കുക</string>
@@ -1705,13 +1651,12 @@
     <string name="show_free_version_banner_description">"നിങ്ങളുടെ പണം മുടക്കി വാങ്ങിയ  ആപ്പാണെങ്കിലും,സൗജന്യ പതിപ്പിന്റെ അറിയിപ്പുകള്‍ കാണാം"</string>
     <string name="value_downloaded_of_max">"%1$.1f യുടെ  %2$.1f MB"</string>
     <string name="free_downloads_used_description">"മിച്ചമുള്ള  സൗജന്യ ഡൗണ്‍ലോഡുകള്‍"</string>
-
     <string name="features_menu_group">" സവിശേഷതകള്‍ "</string>
     <string name="first_usage_item_description">എങ്ങിനെയാണ് ഭൂപടം ഡൗണ്‍ലോഡ് ചെയ്യുന്നത്, അടിസ്ഥാന സജ്ജീകരണങ്ങള്‍ ചെയ്യുന്നത്</string>
     <string name="feedback">പ്രതികരണം</string>
     <string name="hourly">പ്രതിമണിക്കൂര്‍</string>
     <string name="file_name_containes_illegal_char">ഫയലിന്റെ പേരില്‍ നിയമാനുസൃതമല്ലാത്ത അക്ഷരങ്ങള്‍ ഉണ്ട്</string>
-<string name="shared_string_two">"രണ്ട് "</string>
+    <string name="shared_string_two">"രണ്ട് "</string>
     <string name="shared_string_one">"ഒന്ന് "</string>
     <string name="digits_quantity">ദശാംഷസ്ഥാനങ്ങളൂടെ എണ്ണം</string>
     <string name="show_number_pad">നമ്പര്‍പാഡ് കാണിക്കു</string>
@@ -1720,15 +1665,14 @@
     <string name="coordinate_input_accuracy">%1$d അക്കങ്ങള്‍</string>
     <string name="go_to_next_field">"അടുത്ത ഫീല്‍ഡ് "</string>
     <string name="rename_marker">"അടയാളത്തിന്റെ പേരുമാറ്റുക "</string>
-    
     <string name="mark_passed">"പൂര്‍ണമായതായി അടയാളപ്പെടുത്തുക "</string>
     <string name="import_as_gpx">"ജിപിഎക്സ് ഫയല്‍ ആയി എടുക്കുക "</string>
     <string name="import_file">"ഫയല്‍ എടുക്കുക "</string>
-	<string name="wrong_input">"തെറ്റായ ഇന്‍പുട്ട് "</string>
-	<string name="enter_new_name">"പുതിയ പേര്  ചേര്‍ക്കുക "</string>
-	<string name="shared_string_view">"കാണുക "</string>
-	<string name="waypoints_added_to_map_markers">പാതബിന്ദുക്കള്‍ ഭൂപട അടയാളങ്ങളില്‍ ചേര്‍ത്തു</string>
-	<string name="wrong_format">"തെറ്റായ ഫോര്‍മാറ്റ് "</string>
+    <string name="wrong_input">"തെറ്റായ ഇന്‍പുട്ട് "</string>
+    <string name="enter_new_name">"പുതിയ പേര്  ചേര്‍ക്കുക "</string>
+    <string name="shared_string_view">"കാണുക "</string>
+    <string name="waypoints_added_to_map_markers">പാതബിന്ദുക്കള്‍ ഭൂപട അടയാളങ്ങളില്‍ ചേര്‍ത്തു</string>
+    <string name="wrong_format">"തെറ്റായ ഫോര്‍മാറ്റ് "</string>
     <string name="shared_string_road">"വഴി "</string>
     <string name="show_map">"ഭൂപടം കാണിക്കുക "</string>
     <string name="route_is_calculated">"വഴി കണ്ട്പിടിച്ചു "</string>
@@ -1821,7 +1765,7 @@
     <string name="shared_string_right">വലത്</string>
     <string name="shared_string_left">ഇടത്</string>
     <string name="shared_string_back">പിന്നോട്ട്</string>
-	<string name="shared_string_sort">ക്രമീകരിക്കുക</string>
+    <string name="shared_string_sort">ക്രമീകരിക്കുക</string>
     <string name="yesterday">ഇന്നലെ</string>
     <string name="move_all_to_history">എല്ലാം ചരിത്ര്മാക്കുക</string>
     <string name="add_point_before">"മുന്‍ ബിന്ദുവായ്  ചേര്‍ക്കുക "</string>
@@ -1859,7 +1803,7 @@
     <string name="osm_live_payment_month_cost_descr">"പ്റതിമാസം  %1$s"</string>
     <string name="osm_live_payment_month_cost_descr_ex">"പ്റതിമാസം %1$.2f %2$s "</string>
     <string name="osm_live_payment_discount_descr">%1$s ലാഭിക്കുക !</string>
-	<string name="osm_live_payment_current_subscription">"നിങ്ങളൂടെ നിലവിലെ വരിസംഖ്യ "</string>
+    <string name="osm_live_payment_current_subscription">"നിങ്ങളൂടെ നിലവിലെ വരിസംഖ്യ "</string>
     <string name="osm_live_payment_renews_monthly">മാസത്തിലൊരിക്കൽ ആവര്‍ത്തിക്കുക</string>
     <string name="osm_live_payment_renews_quarterly">മൂന്നുമാസത്തിലൊരിക്കൽ ആവര്‍ത്തിക്കുക</string>
     <string name="osm_live_payment_renews_annually">"വര്‍ഷത്തിലൊരിക്കല്‍ ആവര്‍ത്തിക്കുക "</string>
@@ -1898,7 +1842,9 @@
 \n"</string>
     <string name="commiting_way">വഴി ഉള്‍പെടുത്തുക…</string>
     <string name="increase_search_radius_to">"തിരച്ചില്‍  വൃത്തം  %1$s ലേക്ക് കൂട്ടുക "</string>
-    <string name="send_search_query_description">"ഞങ്ങള്‍ നിങ്ങളൂടെ ചോദ്യം:  "<b>\"%1$s\"</b> , നിങ്ങളൂടെ സ്ഥാനം എന്നിവ അയക്കും. <br/><br/> ഞങ്ങള്‍ നിങ്ങളൂടെ പേര്‍സണല്‍ ആയിട്ടുള്ള ഒരു വിവരവും ശേഖരിക്കുന്നില്ല , തെരച്ചില്‍ വിവരങ്ങള്‍ , സേര്‍ച്ച് അല്‍ഗോരിതം നന്നാക്കാനായ് മാത്രമാണ് ഉപയോഗിക്കുന്നത്.<br/></string>
+    <string name="send_search_query_description">"ഞങ്ങള്‍ നിങ്ങളൂടെ ചോദ്യം:  "<b>\"%1$s\"</b> , നിങ്ങളൂടെ സ്ഥാനം എന്നിവ അയക്കും. <br/>
+        <br/> ഞങ്ങള്‍ നിങ്ങളൂടെ പേര്‍സണല്‍ ആയിട്ടുള്ള ഒരു വിവരവും ശേഖരിക്കുന്നില്ല , തെരച്ചില്‍ വിവരങ്ങള്‍ , സേര്‍ച്ച് അല്‍ഗോരിതം നന്നാക്കാനായ് മാത്രമാണ് ഉപയോഗിക്കുന്നത്.<br/>
+    </string>
     <string name="send_search_query">തെരച്ചില്‍ ചോദ്യം അയക്കട്ടെ\?</string>
     <string name="shared_string_world">ലോകം</string>
     <string name="point_deleted">"%1$s പോയിന്റ് മായിച്ചിരിക്കുന്നു "</string>
@@ -1922,18 +1868,18 @@
     <string name="osmand_team">"ഓഎസ്എം ആന്റ്  ടീം"</string>
     <string name="popular_destinations">ജനപ്രിയ ലക്ഷ്യസ്ഥാനങ്ങള്‍</string>
     <string name="travel_card_update_descr">"പുതുക്കിയ വിക്കിവോയേജ്  വിവരങ്ങള്‍ ലഭ്യമാണ്,അപ്ഡേറ്റ് ചെയ്യുക  "</string>
-	<string name="travel_card_download_descr">"ലോകത്തെ വിവിധ സ്ഥലങ്ങളെക്കുറിച്ചുള്ള ലേഖനങ്ങള്‍ ഇന്റെര്‍നെറ്റ് ഇല്ലാതെ കാണാന്‍ വിക്കിവൊയേജ് യാത്രസഹായികള്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക "</string>
-	<string name="update_is_available">പുതിയ പതിപ്പ് ലഭ്യമാണ്</string>
-	<string name="download_file">"ഫയല്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക "</string>
+    <string name="travel_card_download_descr">"ലോകത്തെ വിവിധ സ്ഥലങ്ങളെക്കുറിച്ചുള്ള ലേഖനങ്ങള്‍ ഇന്റെര്‍നെറ്റ് ഇല്ലാതെ കാണാന്‍ വിക്കിവൊയേജ് യാത്രസഹായികള്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക "</string>
+    <string name="update_is_available">പുതിയ പതിപ്പ് ലഭ്യമാണ്</string>
+    <string name="download_file">"ഫയല്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക "</string>
     <string name="start_editing">"എഡിറ്റിങ്ങ് ആരംഭിക്കുക "</string>
     <string name="shared_string_only_with_wifi">വൈ-ഫൈ യിൽ മാത്രം</string>
     <string name="shared_string_wifi_only">വൈ-ഫൈ യിൽ മാത്രം</string>
     <string name="shared_string_contents">ഉള്ളടക്കം</string>
     <string name="east_abbreviation">കിഴക്ക് (E)</string>
-	<string name="west_abbreviation">പടിഞ്ഞാറ് (W)</string>
-	<string name="south_abbreviation">തെക്ക് (S)</string>
-	<string name="north_abbreviation">വടക്ക് (N)</string>
-	<string name="transport_nearby_routes">"അകത്ത് "</string>
+    <string name="west_abbreviation">പടിഞ്ഞാറ് (W)</string>
+    <string name="south_abbreviation">തെക്ക് (S)</string>
+    <string name="north_abbreviation">വടക്ക് (N)</string>
+    <string name="transport_nearby_routes">"അകത്ത് "</string>
     <string name="will_open_tomorrow_at">"നാളെ തുറക്കുന്ന സമയം "</string>
     <string name="parked_at">"പാര്‍ക്ക് ചെയ്ത സമയം "</string>
     <string name="without_time_limit">"സമയപരിധിയില്ലാത്തത്  "</string>
@@ -2083,4 +2029,5 @@
     <string name="gpxup_identifiable">"തിരിച്ചറിയാവുന്ന "</string>
     <string name="gpxup_trackable">"പിന്തുടരാവുന്ന "</string>
     <string name="route_roundabout">"റൗണ്ടാന: %1$d പുറത്തേക്കുള്ള വഴി എടുത്ത് പോവുക "</string>
+    <string name="routing_attr_avoid_bus_name">ബസുകൾ ഒഴിവാക്കുക</string>
 </resources>
