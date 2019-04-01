@@ -9,12 +9,15 @@
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/route_info_card_details_margin"
+		android:paddingBottom="@dimen/route_info_card_details_margin">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/info_type_title"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
 			android:ellipsize="end"
 			android:gravity="center"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
@@ -30,10 +33,8 @@
 		<LinearLayout
 			android:id="@+id/info_type_details_button"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:layout_gravity="end"
-			android:layout_marginTop="@dimen/route_info_card_details_margin"
-			android:layout_marginBottom="@dimen/route_info_card_details_margin"
 			android:background="?attr/selectableItemBackground"
 			android:orientation="horizontal"
 			android:paddingStart="@dimen/bottom_sheet_content_margin_small"
