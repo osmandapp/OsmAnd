@@ -426,7 +426,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private void updatePagesViewVisibility(int menuState) {
 		View pagesView = this.pagesView;
-		if (pagesView != null) {
+		if (portrait && routesCount > 1 && pagesView != null) {
 			if (menuState != MenuState.FULL_SCREEN) {
 				if (pagesView.getVisibility() != View.VISIBLE) {
 					pagesView.setVisibility(View.VISIBLE);
