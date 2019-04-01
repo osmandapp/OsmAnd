@@ -179,7 +179,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-		final int contentHeight = getContentHeight(screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(activity));
+		final int contentHeight = getContentHeight(screenHeight - statusBarHeight);
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
