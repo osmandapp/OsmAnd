@@ -284,10 +284,12 @@
 	<dimen name="route_info_list_text_padding">54dp</dimen>
 	<dimen name="route_info_legend_padding">8dp</dimen>
 	<dimen name="route_info_warning_padding">18dp</dimen>
-	<dimen name="route_info_chart_height">52dp</dimen>
+	<dimen name="route_info_chart_height">71dp</dimen>
 	<dimen name="route_info_toolbar_button_size">40dp</dimen>
 	<dimen name="route_info_control_buttons_height">48dp</dimen>
 	<dimen name="route_info_button_bg_line_radius">18dp</dimen>
+	<dimen name="route_info_card_details_margin">9dp</dimen>
+	<dimen name="route_info_legend_item_size">40dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
 
