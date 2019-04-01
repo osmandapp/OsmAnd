@@ -363,6 +363,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private void createRouteCard(LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
 		OsmandApplication app = requireMyApplication();
 		menuCards.add(routeInfoCard);
+		routeInfoCard.setListener(this);
 		cardsContainer.addView(routeInfoCard.build(app));
 		buildRowDivider(cardsContainer, false);
 	}
@@ -1499,6 +1500,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+		runLayoutListener();
 	}
 
 	@Override

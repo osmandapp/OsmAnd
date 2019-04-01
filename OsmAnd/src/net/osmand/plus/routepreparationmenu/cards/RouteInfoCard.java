@@ -1,19 +1,20 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
-import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -39,6 +40,8 @@ public class RouteInfoCard extends BaseCard {
 	private Statistics routeStatistics;
 	private GPXUtilities.GPXTrackAnalysis analysis;
 
+	private boolean showLegend;
+
 	public RouteInfoCard(MapActivity mapActivity, Statistics routeStatistics, GPXUtilities.GPXTrackAnalysis analysis) {
 		super(mapActivity);
 		this.routeStatistics = routeStatistics;
@@ -54,11 +57,28 @@ public class RouteInfoCard extends BaseCard {
 	protected void updateContent() {
 		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
-		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 10, 10, true, nightMode);
+		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 9, 24, true, nightMode);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, routeStatistics, analysis, true, nightMode);
 		chart.setData(barData);
-		LinearLayout container = view.findViewById(R.id.route_items);
-		attachLegend(container, routeStatistics);
+		final LinearLayout container = (LinearLayout) view.findViewById(R.id.route_items);
+		container.removeAllViews();
+		if (showLegend) {
+			attachLegend(container, routeStatistics);
+		}
+		final ImageView iconViewCollapse = (ImageView) view.findViewById(R.id.up_down_icon);
+		iconViewCollapse.setImageDrawable(getCollapseIcon(!showLegend));
+		view.findViewById(R.id.info_type_details_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showLegend = !showLegend;
+				updateContent();
+				setLayoutNeeded();
+			}
+		});
+	}
+
+	private Drawable getCollapseIcon(boolean collapsed) {
+		return collapsed ? getContentIcon(R.drawable.ic_action_arrow_down) : getActiveIcon(R.drawable.ic_action_arrow_up);
 	}
 
 	private void updateHeader() {
@@ -85,24 +105,21 @@ public class RouteInfoCard extends BaseCard {
 		Map<E, RouteSegmentAttribute<E>> partition = routeStatistics.getPartition();
 		List<E> list = new ArrayList<E>(partition.keySet());
 		sortRouteSegmentAttributes(list);
+		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		LayoutInflater inflater = LayoutInflater.from(ctx);
 		for (E key : list) {
 			RouteSegmentAttribute<E> segment = partition.get(key);
-			int color = segment.getColor();
-			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color);
+			View view = inflater.inflate(R.layout.route_details_legend, container, false);
+			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segment.getColor());
+			ImageView legendIcon = (ImageView) view.findViewById(R.id.legend_icon_color);
+			legendIcon.setImageDrawable(circle);
 			String propertyName = segment.getPropertyName();
 			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
 			Spannable text = getSpanLegend(name, segment);
-
-			TextView legend = new TextView(app);
-			legend.setTextColor(getMainFontColor());
-			legend.setTextSize(15);
-			legend.setGravity(Gravity.CENTER_VERTICAL);
-			legend.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 16));
-			legend.setPadding(AndroidUtils.dpToPx(app, 16), AndroidUtils.dpToPx(app, 4), AndroidUtils.dpToPx(app, 16), AndroidUtils.dpToPx(app, 4));
-			legend.setCompoundDrawablesWithIntrinsicBounds(circle, null, null, null);
+			TextView legend = (TextView) view.findViewById(R.id.legend_text);
 			legend.setText(text);
 
-			container.addView(legend);
+			container.addView(view);
 		}
 	}
 
