@@ -1747,7 +1747,7 @@ Lon %2$s</string>
     <string name="shared_string_upload">Càrriga</string>
     <string name="shared_string_update">Agiorna</string>
     <string name="read_more">Leghe àteru</string>
-    <string name="whats_new">Ite b\'est de nou in</string>
+    <string name="whats_new">Ite b\'at de nou in sa</string>
     <string name="rendering_attr_hideProposed_name">Ogetos propostos</string>
     <string name="lang_nds">Bassu-tedescu</string>
     <string name="lang_mk">Matzèdone</string>
@@ -2613,7 +2613,7 @@ Pro praghere iscrie su còdighe intreu</string>
 \n • S\'abbonamentu a OsmAnd Live como incluet totu sas funtzionalidades de OsmAnd 
 \n 
 \n</string>
-    <string name="what_is_here">Ite b\'est inoghe:</string>
+    <string name="what_is_here">Ite b\'at inoghe:</string>
     <string name="parked_at">parchegiadu in</string>
     <string name="pick_up_till">Piga intre</string>
     <string name="without_time_limit">Chene lìmite de tempus</string>
