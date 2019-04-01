@@ -3010,4 +3010,26 @@
     <string name="shared_string_milliradians">Мілірадыяны</string>
     <string name="angular_measeurement">Адзінкі вымярэння вуглоў</string>
     <string name="angular_measeurement_descr">Змяніць адзінкі вымярэння азімуту.</string>
+    <string name="routing_attr_avoid_tram_name">Пазбягаць трамваяў</string>
+    <string name="routing_attr_avoid_tram_description">Пазбягаць трамваяў</string>
+    <string name="routing_attr_avoid_bus_name">Пазбягаць аўтобусаў</string>
+    <string name="routing_attr_avoid_bus_description">Пазбягаць аўтобусаў і тралейбусаў</string>
+    <string name="routing_attr_avoid_share_taxi_name">Пазбягаць маршрутных таксі</string>
+    <string name="routing_attr_avoid_share_taxi_description">Пазбягаць маршрутных таксі</string>
+    <string name="routing_attr_avoid_train_name">Пазбягаць цягнікоў</string>
+    <string name="routing_attr_avoid_train_description">Пазбягаць цягнікоў</string>
+    <string name="routing_attr_avoid_subway_name">Пазбягаць метро</string>
+    <string name="routing_attr_avoid_subway_description">Пазбягаць метро і лёгкарэйкавага транспарту</string>
+    <string name="routing_attr_avoid_ferry_name">Пазбягаць паромаў</string>
+    <string name="routing_attr_avoid_ferry_description">Пазбягаць паромаў</string>
+    <string name="release_3_3_7">• Адлюстраванне часу паміж перасадкамі ў грамадскім транспарцн
+\n
+\n • Выпраўлены інтэрфейс \"Падрабязнасці маршруту\"
+\n
+\n • Выпраўлена цёмная тэма для \"Маршрут\" і 
+\n\"Падрабязнасці маршруту\"
+\n
+\n • Пры вымярэнні адлегласці будзе адлюстроўвацца азімут
+\n
+\n</string>
 </resources>
