@@ -39,7 +39,7 @@ import static net.osmand.router.RouteStatistics.UNDEFINED_ATTR;
 
 public class RouteInfoCard extends BaseCard {
 
-	private static final int MINIMUM_CONTRAST_RATE = 3;
+	private static final int MINIMUM_CONTRAST_RATIO = 3;
 
 	private Statistics routeStatistics;
 	private GPXUtilities.GPXTrackAnalysis analysis;
@@ -119,7 +119,7 @@ public class RouteInfoCard extends BaseCard {
 			ImageView legendIcon = (ImageView) view.findViewById(R.id.legend_icon_color);
 			legendIcon.setImageDrawable(circle);
 			double contrastRatio = ColorUtils.calculateContrast(segmentColor, ContextCompat.getColor(app, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
-			if (contrastRatio < MINIMUM_CONTRAST_RATE) {
+			if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
 				legendIcon.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
 			}
 			String propertyName = segment.getPropertyName();
