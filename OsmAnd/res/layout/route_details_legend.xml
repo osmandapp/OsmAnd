@@ -17,7 +17,9 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/ic_action_circle" />
+		tools:background="@drawable/circle_contour_bg_light"
+		tools:src="@drawable/ic_action_circle"
+		tools:tint="?attr/active_color_basic" />
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/legend_text"
