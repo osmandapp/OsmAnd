@@ -55,16 +55,12 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		listener = new NavTypeDialogListener() {
 			@Override
 			public void selectedNavType(int pos) {
-//				for (int i = 0; i < routingProfiles.size(); i++) {
-//					if (i == pos) {
-//						routingProfiles.get(i).setSelected(true);
-//					} else {
-//						routingProfiles.get(i).setSelected(false);
-//					}
-//				}
-//				adapter.updateData(routingProfiles);
-			}
+				for (int i = 0; i < routingProfiles.size(); i++) {
+					routingProfiles.get(i).setSelected(false);
+				}
+				routingProfiles.get(pos).setSelected(true);
 
+			}
 		};
 		recyclerView = view.findViewById(R.id.menu_list_view);
 		adapter = new NavTypeAdapter(getContext(), routingProfiles, isNightMode(getMyApplication()), listener);
@@ -122,9 +118,9 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 					listener.selectedNavType(pos);
 					for (int i = 0; i < routingProfiles.size(); i++) {
 						if (!routingProfiles.get(i).equals(item)) {
-							routingProfiles.get(i).setSelected(false);
-						} else {
 							routingProfiles.get(i).setSelected(true);
+						} else {
+							routingProfiles.get(i).setSelected(false);
 						}
 						notifyItemChanged(i);
 					}
