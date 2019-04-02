@@ -1,6 +1,8 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -36,6 +38,8 @@ import java.util.Map;
 import static net.osmand.router.RouteStatistics.UNDEFINED_ATTR;
 
 public class RouteInfoCard extends BaseCard {
+
+	private static final int MINIMUM_CONTRAST_RATE = 3;
 
 	private Statistics routeStatistics;
 	private GPXUtilities.GPXTrackAnalysis analysis;
@@ -103,16 +107,21 @@ public class RouteInfoCard extends BaseCard {
 
 	private <E> void attachLegend(ViewGroup container, Statistics<E> routeStatistics) {
 		Map<E, RouteSegmentAttribute<E>> partition = routeStatistics.getPartition();
-		List<E> list = new ArrayList<E>(partition.keySet());
+		List<Map.Entry<E, RouteSegmentAttribute<E>>> list = new ArrayList<>(partition.entrySet());
 		sortRouteSegmentAttributes(list);
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
-		for (E key : list) {
-			RouteSegmentAttribute<E> segment = partition.get(key);
+		for (Map.Entry<E, RouteSegmentAttribute<E>> entry : list) {
+			RouteSegmentAttribute<E> segment = entry.getValue();
 			View view = inflater.inflate(R.layout.route_details_legend, container, false);
-			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segment.getColor());
+			int segmentColor = segment.getColor();
+			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segmentColor);
 			ImageView legendIcon = (ImageView) view.findViewById(R.id.legend_icon_color);
 			legendIcon.setImageDrawable(circle);
+			double contrastRatio = ColorUtils.calculateContrast(segmentColor, ContextCompat.getColor(app, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
+			if (contrastRatio < MINIMUM_CONTRAST_RATE) {
+				legendIcon.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
+			}
 			String propertyName = segment.getPropertyName();
 			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
 			Spannable text = getSpanLegend(name, segment);
@@ -123,23 +132,24 @@ public class RouteInfoCard extends BaseCard {
 		}
 	}
 
-	private <E> void sortRouteSegmentAttributes(List<E> list) {
-		Collections.sort(list, new Comparator<E>() {
+	private <E> void sortRouteSegmentAttributes(List<Map.Entry<E, RouteSegmentAttribute<E>>> list) {
+		Collections.sort(list, new Comparator<Map.Entry<E, RouteSegmentAttribute<E>>>() {
 			@Override
-			public int compare(E o1, E o2) {
-				if (o1 instanceof String && o2 instanceof String) {
-					String name1 = (String) o1;
-					String name2 = (String) o2;
+			public int compare(Map.Entry<E, RouteSegmentAttribute<E>> o1, Map.Entry<E, RouteSegmentAttribute<E>> o2) {
+				Object key1 = o1.getKey();
+				Object key2 = o2.getKey();
+				if (key1 instanceof String && key2 instanceof String) {
+					float distance1 = o1.getValue().getDistance();
+					float distance2 = o2.getValue().getDistance();
 
-					if (name1.equalsIgnoreCase(UNDEFINED_ATTR)) {
+					if (((String) key1).equalsIgnoreCase(UNDEFINED_ATTR) || distance1 < distance2) {
 						return 1;
 					}
-					if (name2.equalsIgnoreCase(UNDEFINED_ATTR)) {
+					if (((String) key2).equalsIgnoreCase(UNDEFINED_ATTR) || distance1 > distance2) {
 						return -1;
 					}
-					return name1.compareTo(name2);
-				} else if (o1 instanceof Boundaries && o2 instanceof Boundaries) {
-					return ((Boundaries) o1).compareTo((Boundaries) o2);
+				} else if (key1 instanceof Boundaries && key2 instanceof Boundaries) {
+					return ((Boundaries) key1).compareTo((Boundaries) key2);
 				}
 				return 0;
 			}

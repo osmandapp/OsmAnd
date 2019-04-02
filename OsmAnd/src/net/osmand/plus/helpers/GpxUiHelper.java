@@ -1262,6 +1262,7 @@ public class GpxUiHelper {
 		yr.setTextColor(mainFontColor);
 
 		chart.setFitBars(true);
+		chart.setBorderColor(ContextCompat.getColor(app, nightMode ? R.color.divider_dark : R.color.divider_light));
 
 		Legend l = chart.getLegend();
 		l.setEnabled(false);
@@ -1298,7 +1299,6 @@ public class GpxUiHelper {
 		entries.add(new BarEntry(0, stacks));
 		BarDataSet barDataSet = new BarDataSet(entries, "");
 		barDataSet.setColors(colors);
-		barDataSet.setBarBorderColor(ContextCompat.getColor(app, nightMode ? R.color.divider_dark : R.color.divider_light));
 		BarData dataSet = new BarData(barDataSet);
 		dataSet.setDrawValues(false);
 		dataSet.setBarWidth(1);
