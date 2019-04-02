@@ -31,10 +31,12 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.LocationParser;
+import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -54,6 +56,7 @@ import gnu.trove.list.array.TIntArrayList;
 public class SearchCoreFactory {
 
 	public static final int MAX_DEFAULT_SEARCH_RADIUS = 7;
+	public static final int SEARCH_MAX_PRIORITY = Integer.MAX_VALUE;
 
 	//////////////// CONSTANTS //////////
 	public static final int SEARCH_REGION_API_PRIORITY = 300;
@@ -1220,6 +1223,10 @@ public class SearchCoreFactory {
 
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 
+		private int olcPhraseHash;
+		private ParsedOpenLocationCode cachedParsedCode;
+		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
+
 		public SearchLocationAndUrlAPI() {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
 		}
@@ -1286,32 +1293,69 @@ public class SearchCoreFactory {
 			return new LatLon(lat, 0);
 		}
 
-		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
+		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			String lw = phrase.getUnknownSearchPhrase();
-			LatLon searchLocation = phrase.getLastTokenLocation();
-			LatLon l = LocationParser.parseLocation(lw, searchLocation);
-			if (l != null) {
-				if (phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
-					SearchResult sp = new SearchResult(phrase);
-					sp.priority = SEARCH_LOCATION_PRIORITY;
-					sp.object = sp.location = l;
-					sp.localeName = ((float) sp.location.getLatitude()) + ", " + ((float) sp.location.getLongitude());
-					sp.objectType = ObjectType.LOCATION;
-					sp.wordsSpan = lw;
-					resultMatcher.publish(sp);
+			// Detect OLC
+			ParsedOpenLocationCode parsedCode = cachedParsedCode;
+			if (parsedCode != null) {
+				LatLon latLon = parsedCode.getLatLon();
+				// do we have local code with locality
+				if (latLon == null && !parsedCode.isFull() && !Algorithms.isEmpty(parsedCode.getPlaceName())) {
+					List<SearchResult> requestResults = resultMatcher.getRequestResults();
+					if (requestResults.size() > 0) {
+						LatLon searchLocation = null;
+						for (SearchResult sr : requestResults) {
+							switch (sr.objectType) {
+								case POI:
+									Amenity a = (Amenity) sr.object;
+									if (citySubTypes.contains(a.getSubType())) {
+										searchLocation = sr.location;
+									}
+									break;
+								case CITY:
+								case VILLAGE:
+									searchLocation = sr.location;
+									break;
+							}
+							if (searchLocation != null) {
+								break;
+							}
+						}
+						if (searchLocation != null) {
+							latLon = parsedCode.recover(searchLocation);
+						}
+					}
 				}
-			} else if (phrase.isNoSelectedType()) {
-				LatLon ll = parsePartialLocation(lw);
-				if (ll != null && phrase.isSearchTypeAllowed(ObjectType.PARTIAL_LOCATION)) {
-					SearchResult sp = new SearchResult(phrase);
-					sp.priority = SEARCH_LOCATION_PRIORITY;
+				if (latLon != null) {
+					publishLocation(phrase, resultMatcher, lw, latLon);
+				}
+			} else {
+				LatLon l = LocationParser.parseLocation(lw);
+				if (l != null && phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
+					publishLocation(phrase, resultMatcher, lw, l);
+				} else if (l == null && phrase.isNoSelectedType() && phrase.isSearchTypeAllowed(ObjectType.PARTIAL_LOCATION)) {
+					LatLon ll = parsePartialLocation(lw);
+					if (ll != null) {
+						SearchResult sp = new SearchResult(phrase);
+						sp.priority = SEARCH_LOCATION_PRIORITY;
 
-					sp.object = sp.location = ll;
-					sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
-					sp.objectType = ObjectType.PARTIAL_LOCATION;
-					resultMatcher.publish(sp);
+						sp.object = sp.location = ll;
+						sp.localeName = ((float) sp.location.getLatitude()) + ", <input> ";
+						sp.objectType = ObjectType.PARTIAL_LOCATION;
+						resultMatcher.publish(sp);
+					}
 				}
 			}
+		}
+
+		private void publishLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher, String lw, LatLon l) {
+			SearchResult sp = new SearchResult(phrase);
+			sp.priority = SEARCH_LOCATION_PRIORITY;
+			sp.object = sp.location = l;
+			sp.localeName = ((float) sp.location.getLatitude()) + ", " + ((float) sp.location.getLongitude());
+			sp.objectType = ObjectType.LOCATION;
+			sp.wordsSpan = lw;
+			resultMatcher.publish(sp);
 		}
 
 		private boolean parseUrl(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
@@ -1339,7 +1383,12 @@ public class SearchCoreFactory {
 			if (!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
 				return -1;
 			}
-			return SEARCH_LOCATION_PRIORITY;
+			int olcPhraseHash = p.getUnknownSearchPhrase().hashCode();
+			if (this.olcPhraseHash != olcPhraseHash) {
+				this.olcPhraseHash = olcPhraseHash;
+				cachedParsedCode = LocationParser.parseOpenLocationCode(p.getUnknownSearchPhrase());
+			}
+			return cachedParsedCode == null ? SEARCH_LOCATION_PRIORITY : SEARCH_MAX_PRIORITY;
 		}
 	}
 }
