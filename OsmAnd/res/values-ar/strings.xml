@@ -957,7 +957,7 @@
     <string name="layer_map">مصدر الخريطة…</string>
     <string name="map_source">مصدر الخريطة</string>
     <string name="layer_amenity_label">التسميات الفوقية للنقاط</string>
-    <string name="layer_gpx_layer">ملفات GPX…</string>
+    <string name="layer_gpx_layer">المسارات المسجلة</string>
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">تفاصيل</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
@@ -1039,8 +1039,8 @@
     <string name="rendering_attr_transportStops_name">مواقف المواصلات</string>
     <string name="navigate_point_zone">منطقة</string>
     <string name="download_tab_downloads">كافة التنزيلات</string>
-    <string name="download_tab_updates">تحديثات</string>
-    <string name="download_tab_local">محلي</string>
+    <string name="download_tab_updates">التحديثات</string>
+    <string name="download_tab_local">على الهاتف</string>
     <string name="no_internet_connection">عملية التنزيل غير ممكنة، رجاءا تحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
     <string name="use_opengl_render">استخدام OpenGL للتقديم</string>
@@ -1600,7 +1600,7 @@
 \nللعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هاته الأداة مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">العلامات المفعلة</string>
-    <string name="map_markers">علامات خرائطية</string>
+    <string name="map_markers">العلامات</string>
     <string name="routing_attr_avoid_borders_name">تجنب عبور الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل.</string>
     <string name="search_categories">فئات</string>
@@ -2934,4 +2934,10 @@
     <string name="use_osm_live_public_transport">OsmAnd Live وسائل النقل العام</string>
     <string name="routing_attr_avoid_sett_name">تجنب الحصى والطرق المرصوفة</string>
     <string name="routing_attr_avoid_sett_description">تجنب الحصى والطرق المرصوفة</string>
+    <string name="routing_attr_avoid_train_name">تجنب القطارات</string>
+    <string name="routing_attr_avoid_train_description">تجنب القطارات</string>
+    <string name="routing_attr_avoid_subway_name">تجنب مترو الانفاق</string>
+    <string name="routing_attr_avoid_subway_description">تجنب مترو الانفاق والنقل بالسكك الحديدية خفيفة الوزن</string>
+    <string name="routing_attr_avoid_ferry_name">تجنب العبارات</string>
+    <string name="routing_attr_avoid_ferry_description">تجنب العبارات</string>
 </resources>
