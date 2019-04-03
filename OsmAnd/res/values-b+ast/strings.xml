@@ -766,7 +766,7 @@
     <string name="analyze_on_map">Analizar nel mapa</string>
     <string name="search_map_hint">Guetar una ciudá o rexón</string>
     <string name="trip_rec_notification_settings">Activar l\'aniciu rápidu de les grabaciones</string>
-    <string name="trip_rec_notification_settings_desc">Amuesa una avisu que permite aniciar la grabación d\'un viaxe.</string>
+    <string name="trip_rec_notification_settings_desc">Amuesa un avisu que permite aniciar la grabación d\'un viaxe.</string>
     <string name="custom_search">Gueta personalizada</string>
     <string name="shared_string_filters">Peñeres</string>
     <string name="save_filter">Guardar la peñera</string>
@@ -1373,4 +1373,19 @@
     <string name="route_head">De frente</string>
     <string name="app_mode_pedestrian">Andadura</string>
     <string name="route_surface_stat_container">Superficie</string>
+    <string name="angular_measeurement">Unidaes de midida angular</string>
+    <string name="angular_measeurement_descr">Camuda en qué se mide l\'acimut.</string>
+    <string name="previous_route">Ruta anterior</string>
+    <string name="on_foot">A pie</string>
+    <string name="shared_string_contents">Conteníu</string>
+    <string name="favourites_group">Estaya Favoritos</string>
+    <string name="hide_passed">Anubrir lo que se pasó</string>
+    <string name="add_point_before">Amestar un puntu enantes</string>
+    <string name="add_point_after">Amestar un puntu dempués</string>
+    <string name="routing_attr_allow_private_name">Permitir l\'accesu priváu</string>
+    <string name="access_direction_audio_feedback">Direiciones per audiu</string>
+    <string name="osmand_parking_plugin_name">Posición d\'aparcaderu</string>
+    <string name="osmand_parking_plugin_description">El plugin de posición d\'aparcaderu déxate rexistrar ónde s\'aparcó\'l coche y cuántu tiempu queda (si hai llende de tiempu).
+\nL\'allugamientu y el tiempu son visibles nel panel d\'OsmAnd amás de nun widget na pantalla del mapa. Pue amestase una alarma al calendariu d\'Android como recordatoriu.</string>
+    <string name="localization_pref_title">Traducción</string>
 </resources>

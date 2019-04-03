@@ -743,7 +743,7 @@
     <string name="unit_of_length">وحدات الطول</string>
     <string name="si_mi_feet">أميال/أقدام</string>
     <string name="si_mi_yard">ميل/ ياردة</string>
-    <string name="si_km_m">كيلومتر/متر</string>
+    <string name="si_km_m">كم/م</string>
     <string name="yard">ياردة</string>
     <string name="foot">قدم</string>
     <string name="mile_per_hour">ميل ساعة</string>
@@ -898,7 +898,7 @@
     <string name="watch">شاهد</string>
     <string name="routing_attr_no_new_routing_name">قواعد توجيه No v1.9</string>
     <string name="navigate_point_northing">نحو الشمال</string>
-    <string name="home_button">الصفحة الرئيسية</string>
+    <string name="home_button">المنزل</string>
     <string name="agps_data_last_downloaded">آخر ما تحميله من بيانات A-GPS: %1$s</string>
     <string name="welcome_text">OsmAnd يوفر تصفح خرائط عالمي بدون اتصال، وكذلك ملاحة عالمية بدون اتصال.</string>
     <string name="welcome_header">أهلا</string>

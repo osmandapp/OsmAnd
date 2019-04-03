@@ -14,4 +14,5 @@
     <string name="osmand_service">وضع الخلفية</string>
     <string name="nm_h">م.بح/س</string>
     <string name="si_nm_h">ميل بحري في الساعة (عقدة)</string>
+    <string name="si_km_m">كم/م</string>
 </resources>
