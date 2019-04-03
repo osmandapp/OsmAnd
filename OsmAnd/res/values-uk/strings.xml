@@ -2957,4 +2957,25 @@
     <string name="rendering_attr_highway_class_steps_name">Сходи</string>
     <string name="waiting_for_route_calculation">Розрахунок маршруту…</string>
     <string name="shared_string_description">Опис</string>
+    <string name="routing_attr_avoid_tram_name">Уникати трамваїв</string>
+    <string name="routing_attr_avoid_tram_description">Уникати трамваїв</string>
+    <string name="routing_attr_avoid_bus_name">Уникати автобусів</string>
+    <string name="routing_attr_avoid_bus_description">Уникати автобусів і тролейбусів</string>
+    <string name="routing_attr_avoid_share_taxi_name">Уникати маршрутних таксі</string>
+    <string name="routing_attr_avoid_share_taxi_description">Уникати маршрутних таксі</string>
+    <string name="routing_attr_avoid_train_name">Уникати потягів</string>
+    <string name="routing_attr_avoid_train_description">Уникати потягів</string>
+    <string name="routing_attr_avoid_subway_name">Уникати метро</string>
+    <string name="routing_attr_avoid_subway_description">Уникати метро та легкого рейкового траспорту</string>
+    <string name="routing_attr_avoid_ferry_name">Уникати поромних переправ</string>
+    <string name="routing_attr_avoid_ferry_description">Уникати поромних переправ</string>
+    <string name="release_3_3_7">• Відображення часу між пересадками у громадському транспорті
+\n
+\n• Виправлений зовнішній вигляд \"Деталей маршруту\"
+\n
+\n• Виправлена темна тема в меню \"Напрямок\" та \"Деталі маршруту\"
+\n
+\n• Відображення азимуту в інструменті \"Вимірювання відстані\"
+\n</string>
+    <string name="shared_string_degrees">Градуси</string>
 </resources>
