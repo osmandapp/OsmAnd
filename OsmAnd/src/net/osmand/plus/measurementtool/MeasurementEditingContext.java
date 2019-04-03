@@ -316,14 +316,17 @@ public class MeasurementEditingContext {
 			public void onRouteCalculated(RouteCalculationResult route) {
 				List<Location> locations = route.getRouteLocations();
 				ArrayList<WptPt> pts = new ArrayList<>(locations.size());
+				double prevAltitude = Double.NaN;
 				for (Location loc : locations) {
-					if(!loc.hasAltitude()){
-						continue;
-					}
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
 					pt.lon = loc.getLongitude();
-					pt.ele = loc.getAltitude();
+					if (loc.hasAltitude()) {
+						prevAltitude = loc.getAltitude();
+						pt.ele = prevAltitude;
+					} else if (!Double.isNaN(prevAltitude)) {
+						pt.ele = prevAltitude;
+					}
 					pts.add(pt);
 				}
 				calculatedPairs++;
