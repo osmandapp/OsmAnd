@@ -82,6 +82,9 @@ public class LocationParser {
 		}
 	}
 
+	public static boolean isValidOLC(String code) {
+		return OpenLocationCode.isValidCode(code);
+	}
 	public static ParsedOpenLocationCode parseOpenLocationCode(String locPhrase) {
 		ParsedOpenLocationCode parsedCode = new ParsedOpenLocationCode(locPhrase.trim());
 		return !parsedCode.isValidCode() ? null : parsedCode;
