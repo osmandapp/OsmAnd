@@ -60,18 +60,18 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.Elevation;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Speed;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.IndexConstants;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -96,6 +96,8 @@ import net.osmand.router.RouteStatistics;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.MessageFormat;
@@ -106,7 +108,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.logging.Log;
 
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
@@ -123,7 +124,7 @@ import static net.osmand.plus.download.DownloadActivity.formatMb;
 public class GpxUiHelper {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
-	private static final int DEFAULT_DISTANCE_FOR_SLOPE_DATA = 2000000;
+	private static final int MAX_CHART_DATA_ITEMS = 10000;
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
@@ -1619,8 +1620,9 @@ public class GpxUiHelper {
 		int lastIndex = values.size() - 1;
 
 		double STEP = 5;
-		if (totalDistance > DEFAULT_DISTANCE_FOR_SLOPE_DATA) {
-			STEP = STEP * (totalDistance / DEFAULT_DISTANCE_FOR_SLOPE_DATA);
+		int l = 10;
+		while (l > 0 && totalDistance / STEP > MAX_CHART_DATA_ITEMS) {
+			STEP = Math.max(STEP, totalDistance / (values.size() * l--));
 		}
 
 		double[] calculatedDist = new double[(int) (totalDistance / STEP) + 1];
@@ -1630,15 +1632,15 @@ public class GpxUiHelper {
 			if (k > 0) {
 				calculatedDist[k] = calculatedDist[k - 1] + STEP;
 			}
-			while(nextW < lastIndex && calculatedDist[k] > values.get(nextW).getX()) {
-				nextW ++;
+			while (nextW < lastIndex && calculatedDist[k] > values.get(nextW).getX()) {
+				nextW++;
 			}
 			double pd = nextW == 0 ? 0 : values.get(nextW - 1).getX();
 			double ph = nextW == 0 ? values.get(0).getY() : values.get(nextW - 1).getY();
 			calculatedH[k] = ph + (values.get(nextW).getY() - ph) / (values.get(nextW).getX() - pd) * (calculatedDist[k] - pd);
 		}
 
-		double SLOPE_PROXIMITY = 100;
+		double SLOPE_PROXIMITY = Math.max(100, STEP * 2);
 
 		if (totalDistance - SLOPE_PROXIMITY < 0) {
 			if (useRightAxis) {
