@@ -592,7 +592,7 @@
     <string name="use_system_keyboard">Usar el tecláu del sistema</string>
     <string name="fast_coordinates_input_descr">Escueyi\'l formatu d\'introducción de coordenaes. Siempres vas poder camudalu tocando n\'«Opciones».</string>
     <string name="fast_coordinates_input">Introducción rápida de coordenaes</string>
-    <string name="add_location_as_first_point_descr">Amiesta la to posición como puntu d\'aniciu pa planiar la ruta perfeuta.</string>
+    <string name="add_location_as_first_point_descr">Amiesta la to posición como puntu d\'aniciu pa planificar la ruta perfeuta.</string>
     <string name="my_location">La mio posición</string>
     <string name="shared_string_finish">Finar</string>
     <string name="coordinate_input">Introducción de coordenaes</string>
@@ -1388,4 +1388,5 @@
     <string name="osmand_parking_plugin_description">El plugin de posición d\'aparcaderu déxate rexistrar ónde s\'aparcó\'l coche y cuántu tiempu queda (si hai llende de tiempu).
 \nL\'allugamientu y el tiempu son visibles nel panel d\'OsmAnd amás de nun widget na pantalla del mapa. Pue amestase una alarma al calendariu d\'Android como recordatoriu.</string>
     <string name="localization_pref_title">Traducción</string>
+    <string name="plan_route">Planificar una ruta</string>
 </resources>

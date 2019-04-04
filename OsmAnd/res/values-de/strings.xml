@@ -3027,13 +3027,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">U-Bahnen und leichten Schienenverkehr meiden</string>
     <string name="routing_attr_avoid_ferry_name">Fähren meiden</string>
     <string name="routing_attr_avoid_ferry_description">Fähren meiden</string>
-    <string name="release_3_3_7">- Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln
+    <string name="release_3_3_7">• Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln
 \n
-\n - Korrigierte Benutzeroberfläche für die Routendetails korrigiert
+\n• Korrigierte Benutzeroberfläche für die Routendetails korrigiert
 \n
-\n - Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert.
+\n• Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert.
 \n
-\n - Azimut in der Maßeinheit Distanz anzeigen
+\n• Azimut in der Maßeinheit Distanz anzeigen
 \n
 \n</string>
 </resources>
