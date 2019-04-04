@@ -645,7 +645,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 		private OsmandApplication app;
 		private WeakReference<QuickSearchCoordinatesFragment> weakFragment;
-		private final List<String> citySubTypes = Arrays.asList("city", "town");
+		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
 
 		private final LatLon searchLocation;
 		private final String region;
