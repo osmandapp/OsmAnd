@@ -42,6 +42,8 @@ import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.ANavigationUpdateParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -75,6 +77,7 @@ import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -83,6 +86,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -191,6 +195,9 @@ public class OsmandAidlApi {
 
 	private boolean mapActivityActive = false;
 
+	private Map<Long, IOsmAndAidlCallback> callbacks;
+	private long updateCallbackId = 0;
+
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
 		loadConnectedApps();
@@ -236,6 +243,12 @@ public class OsmandAidlApi {
 			}
 		}
 		receivers = new TreeMap<>();
+	}
+
+
+	public static boolean isAidlSubscribedForUpdates() {
+//		return !callbacks.isEmpty();
+		return true;
 	}
 
 	public boolean isUpdateAllowed() {
@@ -1918,6 +1931,57 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
 
+	public long registerForNavigationUpdates(ANavigationUpdateParams params, IOsmAndAidlCallback callback) {
+		if (params.isSubscribeToUpdates()) {
+			updateCallbackId++;
+			callbacks.put(updateCallbackId, callback);
+			startNavigationalUpdates(updateCallbackId);
+			return updateCallbackId;
+		} else {
+			callbacks.remove(params.getCallbackId());
+			return -1;
+		}
+	}
+
+	public NavUpdateListener navUpdateListener = null;
+
+	public boolean isActiveListeners() {
+		return callbacks.size() > 0;
+	}
+
+	private void startNavigationalUpdates(final long updateCallbackId) {
+		final ADirectionInfo directionInfo = new ADirectionInfo(-1, -1, false);
+		final NextDirectionInfo baseNdi = new NextDirectionInfo();
+		navUpdateListener = new NavUpdateListener() {
+			@Override
+			public void onNavUpdate() {
+				RoutingHelper rh = app.getRoutingHelper();
+				if (callbacks.containsKey(updateCallbackId)) {
+					if (rh.isDeviatedFromRoute()) {
+						directionInfo.setTurnType(TurnType.OFFR);
+						directionInfo.setDistanceTo((int) rh.getRouteDeviation());
+					} else {
+						NextDirectionInfo ndi = rh.getNextRouteDirectionInfo(baseNdi, true);
+						if (ndi != null && ndi.distanceTo > 0 && ndi.directionInfo != null) {
+							directionInfo.setDistanceTo(ndi.distanceTo);
+							directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
+						}
+					}
+					try {
+						callbacks.get(updateCallbackId).updateNavigationInfo(directionInfo);
+					} catch (Exception e) {
+						LOG.debug(e.getMessage(), e);
+					}
+				}
+			}
+		};
+	}
+
+	public interface NavUpdateListener {
+		void onNavUpdate();
+	}
+
+
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
@@ -2103,6 +2167,8 @@ public class OsmandAidlApi {
 		}
 	}
 
+
+
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
@@ -2179,6 +2245,12 @@ public class OsmandAidlApi {
 	}
 
 	public interface OsmandAppInitCallback {
-    void onAppInitialized();
-  }
+		void onAppInitialized();
+	}
+
+	public interface DirectionsUpdateCallback {
+		void onDirectionsUpdate(ADirectionInfo directionInfo);
+	}
+
+
 }

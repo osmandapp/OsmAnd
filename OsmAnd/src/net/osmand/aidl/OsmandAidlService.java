@@ -11,6 +11,7 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.OsmandAidlApi.DirectionsUpdateCallback;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
@@ -50,6 +51,8 @@ import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.ANavigationUpdateParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
@@ -68,6 +71,8 @@ import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidl.copyfile.CopyFileParams;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -987,6 +992,21 @@ public class OsmandAidlService extends Service {
 					return CANNOT_ACCESS_API_ERROR;
 				}
 				return api.copyFile(copyFileParams);
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public long registerForNavigationUpdates(ANavigationUpdateParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForNavUpdates");
+				if (api != null) {
+					return api.registerForNavigationUpdates(params, callback);
+				} else {
+					return -1;
+				}
 			} catch (Exception e) {
 				handleException(e);
 				return UNKNOWN_API_ERROR;

@@ -502,6 +502,9 @@ public class RoutingHelper {
 				route.updateCurrentRoute(newCurrentRoute + 1);
 				currentRoute = newCurrentRoute + 1;
 				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
+				if (app.getAidlApi().isActiveListeners() && app.getAidlApi().navUpdateListener != null) {
+					app.getAidlApi().navUpdateListener.onNavUpdate();
+				}
 			} else {
 				break;
 			}
