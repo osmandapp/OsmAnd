@@ -13,6 +13,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.Pair;
 
 import net.osmand.GPXUtilities.WptPt;
@@ -39,6 +40,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
+import net.osmand.router.TransportRoutePlanner;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.MapUtils;
@@ -412,7 +414,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private static class GeometryWalkWayStyle extends GeometryWayStyle {
 
-		public GeometryWalkWayStyle(GeometryWayContext context) {
+		GeometryWalkWayStyle(GeometryWayContext context) {
 			super(context);
 		}
 
@@ -449,7 +451,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private static class GeometryAnchorWayStyle extends GeometryWayStyle {
 
-		public GeometryAnchorWayStyle(GeometryWayContext context) {
+		GeometryAnchorWayStyle(GeometryWayContext context) {
 			super(context);
 		}
 
@@ -481,7 +483,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private static class GeometrySolidWayStyle extends GeometryWayStyle {
 
-		public GeometrySolidWayStyle(GeometryWayContext context, Integer color) {
+		GeometrySolidWayStyle(GeometryWayContext context, Integer color) {
 			super(context, color);
 		}
 
@@ -502,13 +504,22 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		}
 	}
 
+	private static class TransportStopsWayStyle extends GeometryTransportWayStyle {
+		TransportStopsWayStyle(GeometryWayContext context, TransportRouteResultSegment segment) {
+			super(context, segment);
+			OsmandApplication app = (OsmandApplication) getCtx().getApplicationContext();
+			this.color = ContextCompat.getColor(app, R.color.icon_color);
+			this.pointColor = UiUtilities.getContrastColor(app, color, true);
+		}
+	}
+
 	private static class GeometryTransportWayStyle extends GeometryWayStyle {
 
 		private TransportRouteResultSegment segment;
 		private Bitmap stopBitmap;
-		private Integer pointColor;
+		protected Integer pointColor;
 
-		public GeometryTransportWayStyle(GeometryWayContext context, TransportRouteResultSegment segment) {
+		GeometryTransportWayStyle(GeometryWayContext context, TransportRouteResultSegment segment) {
 			super(context);
 			this.segment = segment;
 
@@ -1213,7 +1224,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 				addRouteWalk(prev, s, p, floc, res, styles);
 				List<Way> geometry = s.getGeometry();
 				res.addAll(geometry);
-				addStyle(s, geometry.size(), styles);
+				addStyle(s, geometry, styles);
 				p = s.getEnd().getLocation();
 				prev = s;
 			}
@@ -1226,32 +1237,35 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		final RouteCalculationResult walkingRouteSegment = transportHelper.getWalkingRouteSegment(s1, s2);
 		if (walkingRouteSegment != null && walkingRouteSegment.getRouteLocations().size() > 0) {
 			final List<Location> routeLocations = walkingRouteSegment.getRouteLocations();
-			Way way = new Way(-1);
+			Way way = new Way(TransportRoutePlanner.GEOMETRY_WAY_ID);
 			way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format(Locale.US, "Walk %d m", walkingRouteSegment.getWholeDistance()));
 			for (Location l : routeLocations) {
 				way.addNode(new Node(l.getLatitude(), l.getLongitude(), -1));
 			}
 			res.add(way);
-			addStyle(null, 1, styles);
+			addStyle(null, Collections.singletonList(way), styles);
 		} else {
 			double dist = MapUtils.getDistance(start, end);
-			Way way = new Way(-1);
+			Way way = new Way(TransportRoutePlanner.GEOMETRY_WAY_ID);
 			way.putTag(OSMSettings.OSMTagKey.NAME.getValue(), String.format(Locale.US, "Walk %.1f m", dist));
 			way.addNode(new Node(start.getLatitude(), start.getLongitude(), -1));
 			way.addNode(new Node(end.getLatitude(), end.getLongitude(), -1));
 			res.add(way);
-			addStyle(null, 1, styles);
+			addStyle(null, Collections.singletonList(way), styles);
 		}
 	}
 
-	private void addStyle(TransportRouteResultSegment segment, int count, List<GeometryWayStyle> styles) {
+	private void addStyle(TransportRouteResultSegment segment, List<Way> geometry, List<GeometryWayStyle> styles) {
 		GeometryWayStyle style;
+		Way w = geometry.get(0);
 		if (segment == null || segment.route == null) {
 			style = new GeometryWalkWayStyle(wayContext);
-		} else {
+		} else if (w.getId() == TransportRoutePlanner.GEOMETRY_WAY_ID) {
 			style = new GeometryTransportWayStyle(wayContext, segment);
+		} else {
+			style = new TransportStopsWayStyle(wayContext, segment);
 		}
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < geometry.size(); i++) {
 			styles.add(style);
 		}
 	}

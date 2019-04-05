@@ -28,6 +28,8 @@ import net.osmand.util.MapUtils;
 public class TransportRoutePlanner {
 	
 	private static final boolean MEASURE_TIME = false;
+	public static final long GEOMETRY_WAY_ID = -1;
+	public static final long STOPS_WAY_ID = -2;
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
 		ctx.startCalcTime = System.currentTimeMillis();
@@ -402,14 +404,16 @@ public class TransportRoutePlanner {
 					} 
 				}
 			}
-			Way way = new Way(-1);
+			Way way;
 			if (res.isEmpty() || endInd == -1) {
+				way = new Way(STOPS_WAY_ID);
 				for (int i = start; i <= end; i++) {
 					LatLon l = getStop(i).getLocation();
 					Node n = new Node(l.getLatitude(), l.getLongitude(), -1);
 					way.addNode(n);
 				}
 			} else {
+				way = new Way(GEOMETRY_WAY_ID);
 				for(int k = 0; k < res.size() && k < endInd; k++) {
 					way.addNode(res.get(k));
 				}
