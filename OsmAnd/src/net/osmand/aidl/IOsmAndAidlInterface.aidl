@@ -104,25 +104,102 @@ interface IOsmAndAidlInterface {
     boolean removeMapLayer(in RemoveMapLayerParams params);
     boolean updateMapLayer(in UpdateMapLayerParams params);
 
-	boolean importGpx(in ImportGpxParams params);
-	boolean showGpx(in ShowGpxParams params);
-	boolean hideGpx(in HideGpxParams params);
-	boolean getActiveGpx(out List<ASelectedGpxFile> files);
+    boolean importGpx(in ImportGpxParams params);
+    boolean showGpx(in ShowGpxParams params);
+    boolean hideGpx(in HideGpxParams params);
+    boolean getActiveGpx(out List<ASelectedGpxFile> files);
 
-	boolean setMapLocation(in SetMapLocationParams params);
+    boolean setMapLocation(in SetMapLocationParams params);
     boolean calculateRoute(in CalculateRouteParams params);
 
+      /**
+       * Refresh the map (UI)
+       */
     boolean refreshMap();
 
+      /**
+       * Add favorite group with given params.
+       *
+       * @param name    - group name.
+       * @param color   - group color. Can be one of: "red", "orange", "yellow",
+       *                "lightgreen", "green", "lightblue", "blue", "purple", "pink", "brown".
+       * @param visible - group visibility.
+       */
     boolean addFavoriteGroup(in AddFavoriteGroupParams params);
+
+    	/**
+    	 * Update favorite group with given params.
+    	 *
+    	 * @param namePrev    - group name (current).
+    	 * @param colorPrev   - group color (current).
+    	 * @param visiblePrev - group visibility (current).
+    	 * @param nameNew     - group name (new).
+    	 * @param colorNew    - group color (new).
+    	 * @param visibleNew  - group visibility (new).
+    	 */
     boolean removeFavoriteGroup(in RemoveFavoriteGroupParams params);
+
+    	/**
+    	 * Remove favorite group with given name.
+    	 *
+    	 * @param name - name of favorite group.
+    	 */
     boolean updateFavoriteGroup(in UpdateFavoriteGroupParams params);
 
+    	/**
+    	 * Add favorite at given location with given params.
+    	 *
+    	 * @param lat         - latitude.
+    	 * @param lon         - longitude.
+    	 * @param name        - name of favorite item.
+    	 * @param description - description of favorite item.
+    	 * @param category    - category of favorite item.
+    	 * @param color       - color of favorite item. Can be one of: "red", "orange", "yellow",
+    	 *                    "lightgreen", "green", "lightblue", "blue", "purple", "pink", "brown".
+    	 * @param visible     - should favorite item be visible after creation.
+    	 */
     boolean addFavorite(in AddFavoriteParams params);
+
+    	/**
+    	 * Update favorite at given location with given params.
+    	 *
+    	 * @param latPrev        - latitude (current favorite).
+    	 * @param lonPrev        - longitude (current favorite).
+    	 * @param namePrev       - name of favorite item (current favorite).
+    	 * @param categoryPrev   - category of favorite item (current favorite).
+    	 * @param latNew         - latitude (new favorite).
+    	 * @param lonNew         - longitude (new favorite).
+    	 * @param nameNew        - name of favorite item (new favorite).
+    	 * @param descriptionNew - description of favorite item (new favorite).
+    	 * @param categoryNew    - category of favorite item (new favorite). Use only to create a new category,
+    	 *                       not to update an existing one. If you want to  update an existing category,
+    	 *                       use the {@link #updateFavoriteGroup(String, String, boolean, String, String, boolean)} method.
+    	 * @param colorNew       - color of new category. Can be one of: "red", "orange", "yellow",
+    	 *                       "lightgreen", "green", "lightblue", "blue", "purple", "pink", "brown".
+    	 * @param visibleNew     - should new category be visible after creation.
+    	 */
     boolean removeFavorite(in RemoveFavoriteParams params);
+
+      /**
+       * Remove favorite at given location with given params.
+       *
+       * @param lat      - latitude.
+       * @param lon      - longitude.
+       * @param name     - name of favorite item.
+       * @param category - category of favorite item.
+       */
     boolean updateFavorite(in UpdateFavoriteParams params);
 
+      /**
+       * Add map marker at given location.
+       *
+       * @param lat  - latitude.
+       * @param lon  - longitude.
+       * @param name - name.
+       */
     boolean startGpxRecording(in StartGpxRecordingParams params);
+
+
     boolean stopGpxRecording(in StopGpxRecordingParams params);
 
     boolean takePhotoNote(in TakePhotoNoteParams params);
