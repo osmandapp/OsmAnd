@@ -2595,7 +2595,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osm_recipient_stat">%1$s edycji, w sumie %2$s mBTC</string>
     <string name="distance_farthest">Odległość: najpierw najdalsze</string>
     <string name="distance_nearest">Odległość: najpierw najbliższe</string>
-    <string name="day_off_label">poza</string>
+    <string name="day_off_label">zamknięte</string>
     <string name="osm_edits_export_desc">Wybierz rodzaj eksportu: uwagi OSM, POI lub oba.</string>
     <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj OSM POI, otwórz lub skomentuj notatki OSM, oraz udostępniaj nagrane pliki GPX.</string>
     <string name="empty_state_markers_groups_desc">Importuj ulubione grupy lub punkty trasy jako znaczniki.</string>
