@@ -453,7 +453,7 @@
     <string name="rendering_attr_showRoadMaps_name">Mapas só de estradas</string>
     <string name="safe_mode_description">Executa-lo aplicativo no modo seguro (empregando o código máis lento do Android no canto do nativo).</string>
     <string name="safe_mode">Modo seguro</string>
-    <string name="native_library_not_running">O aplicativo está a ser executada no modo seguro (desactivar nos \"Axustes\").</string>
+    <string name="native_library_not_running">A aplicación está a ser executada no modo seguro (desactivar nos \"Axustes\").</string>
     <string name="close_changeset">Fecha-lo conxunto de trocos</string>
     <string name="zxing_barcode_scanner_not_found">O dixitalizador do códigos de barras ZXing non está instalado. Quéreo procurar na Google Play\?</string>
     <string name="rendering_attr_roadColors_description">Escoller un esquema de cores das estradas:</string>
@@ -690,7 +690,7 @@
     <string name="offline_navigation_not_available">A navegación sen conexión de OsmAnd non está dispoñíbel temporalmente.</string>
     <string name="left_side_navigation">Condución pola esquerda</string>
     <string name="left_side_navigation_descr">Para os países nos que se conduza pola esquerda da estrada.</string>
-    <string name="local_index_description">Prema en calquera elemento existente para ollar máis detalles, manteña premido para desactivar ou eliminar. Datos actualmente no dispositivo (%1$s libre):</string>
+    <string name="local_index_description">Preme en calquera elemento existente para ollar máis detalles, mantén premido para desactivar ou eliminar. Datos actualmente no dispositivo (%1$s libre):</string>
     <string name="unknown_from_location">Punto de partida aínda non determinado</string>
     <string name="unknown_location">A ubicación é aínda descoñecida</string>
     <string name="modify_transparency">Modificar a transparencia (0 - transparente, 255 - opaco)</string>
@@ -738,7 +738,7 @@
     <string name="shared_string_help">Axuda</string>
     <string name="accessibility_mode">Modo de accesibilidade</string>
     <string name="accessibility_mode_descr">Activa as funcionalidades para usuarios con discapacidade.</string>
-    <string name="shared_string_on">Activar</string>
+    <string name="shared_string_on">Activado</string>
     <string name="shared_string_off">Non</string>
     <string name="accessibility_default">Segundo os axustes do sistema Android</string>
     <string name="backToMenu">Voltar ó menú</string>
@@ -2075,12 +2075,12 @@ Lon %2$s</string>
     <string name="open_street_map_login_and_pass">Nome do usuario e contrasinal do OpenStreetMap</string>
     <string name="donations">Doazóns</string>
     <string name="number_of_recipients">Número de destinatarios</string>
-    <string name="osm_editors_ranking">Graduación dos editores de OSM</string>
+    <string name="osm_editors_ranking">Escolma dos editores do OSM</string>
     <string name="osm_live_subscription">Subscrición do OsmAnd ao Vivo</string>
     <string name="osm_live_email_desc">Precísase disto para fornecer información sobre as contribucións.</string>
-    <string name="osm_live_thanks">Grazas por apoiar ó OsmAnd!
-\n
-\nPara activares tódalas características novas, debes reinicia-lo OsmAnd.</string>
+    <string name="osm_live_thanks">Grazas por apoiar ó OsmAnd! 
+\n 
+\nPara activares tódalas funcións novas, tes que reinicia-lo OsmAnd.</string>
     <string name="osm_live_region_desc">Parte da súa doazón será enviada ós usuarios do OSM que fagan mudanzas do mapa desa rexión.</string>
     <string name="osm_live_ask_for_purchase">Merque primeiro unha subscrición ó OsmAnd ao Vivo</string>
     <string name="osm_live_header">Esta subscrición permite actualizacións cada hora para tódolos mapas do mundo. Un anaco dos ingresos voltan á comunidade do OSM e págase por cada contribución ó OSM. Se che gosta o OsmAnd, o OSM e queres apoialos e ser apoiado por eles, esta é un perfecto xeito de facelo.</string>
@@ -2214,13 +2214,13 @@ Lon %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Chairo</string>
     <string name="routing_attr_driving_style_speed_name">Rotas máis curtas</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
-    <string name="routing_attr_driving_style_safety_name">Prefirir camiños secudarios</string>
+    <string name="routing_attr_driving_style_safety_name">Prefirir camiños secundarios</string>
     <string name="relief_smoothness_factor_descr">Terreo prefirido: chairo ou inclinado.</string>
     <string name="shared_string_slope">Costa</string>
     <string name="add_new_folder">Engadir un cartafol novo</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminado(s).</string>
     <string name="points_delete_multiple">Vai eliminar %1$d punto(s). Confírmao?</string>
-    <string name="track_points_category_name">Puntos da rota, puntos de interese, características nomeadas</string>
+    <string name="track_points_category_name">Puntos da rota, puntos de interese, funcións nomeadas</string>
     <string name="route_points_category_name">Viraxes a pasar nesta rota</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="average_speed">Velocidade media</string>
@@ -2572,7 +2572,7 @@ Lon %2$s</string>
     <string name="topo_render_descr">Estilo do contraste deseñado de xeito principal para andainas, sendeirismo e ciclismo na natureza. Boa lexibilidade con iluminación exterior complexa. Trazos principais: Contraste dos camiños e obxectos naturais, distintos tipos de roteiros, curvas do nivel con axustes avanzados, maior detalle nos niveis de achegamento correspondentes que no estilo predefinido. A opción da integridade da superficie deixa destingui-la calidade da superficie do camiño. Sen modo noite.</string>
     <string name="mapnik_render_descr">Antigo estilo predefinido do Mapnik. Trazos principais: as cores son semellantes ó estilo do Mapnik.</string>
     <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Inclúe tódalas opcións da configuración do estilo predefinido, ademais: Amosa tanto detalle coma sexa posíbel, no particular tódolos camiños, sendeiros e outros xeitos de viaxe. Unha clara destinción visual entre tódolos tipos de estradas, que lembra a moitos atlas de roteiros turísticos. Esquema de cor de alto contraste para emprego nos exteriores, modo día e noite.</string>
-    <string name="default_render_descr">Estilo de emprego xeral. Ollada limpa e sinxela para cidades densamente poboadas. Trazos principais: Curvas do nivel, percorridos, calidade da superficie, restriccións do acceso, escudos da estrada, visualización dos caminos segundo a escala SAC, características de deportes de auga.</string>
+    <string name="default_render_descr">Estilo de emprego xeral. Ollada limpa e sinxela para cidades densamente poboadas. Trazos principais: Curvas do nivel, percorridos, calidade da superficie, restricións do acceso, sinais da estrada, visualización dos camiños segundo a escala SAC, funcións de deportes de auga.</string>
     <string name="open_wikipedia_link_online">Abrir ligazón da Wikipedia en liña</string>
     <string name="open_wikipedia_link_online_description">A ligazón abrirase nun navigador web.</string>
     <string name="how_to_open_link">De que xeito abri-la ligazón\?</string>
@@ -3055,7 +3055,7 @@ Lon %2$s</string>
     <string name="use_osm_live_public_transport_description">Activar o transporte público para as mudanzas do OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transporte público no OsmAnd Live</string>
     <string name="shared_string_walk">A pé</string>
-    <string name="save_poi_value_exceed_length">El valor da etiqueta \"%s\" non pode superar os 255 caracteres.
+    <string name="save_poi_value_exceed_length">O valor da etiqueta \"%s\" non pode superar os 255 caracteres. 
 \nPor favor, edítao antes de continuar.</string>
     <string name="save_poi_value_exceed_length_title">Lonxitude do valor de \"%s\"</string>
     <string name="public_transport_warning_descr_blog">Coñece máis acerca de que xeito o OsmAnd calcula as rotas no noso blogue.</string>
