@@ -386,14 +386,14 @@
     <string name="sd_mounted_ro">Tarjeta de memoria en sólo lectura. 
 \nAhora, sólo es posible ver el mapa precargado y no pueden descargarse nuevas áreas.</string>
     <string name="unzipping_file">Descomprimiendo archivo…</string>
-    <string name="route_tr">Gire a la derecha en</string>
-    <string name="route_tshr">Gire fuerte a la derecha en</string>
-    <string name="route_tslr">Gire leve a la derecha en</string>
-    <string name="route_tl">Gire a la izquierda en</string>
-    <string name="route_tshl">Gire fuerte a la izquierda en</string>
-    <string name="route_tsll">Gire leve a la izquierda en</string>
-    <string name="route_tu">Gire en U en</string>
-    <string name="route_head">Inicia en</string>
+    <string name="route_tr">Gira a la derecha en</string>
+    <string name="route_tshr">Gira fuerte a la derecha en</string>
+    <string name="route_tslr">Gira leve a la derecha en</string>
+    <string name="route_tl">Gira a la izquierda en</string>
+    <string name="route_tshl">Gira fuerte a la izquierda en</string>
+    <string name="route_tsll">Gira leve a la izquierda en</string>
+    <string name="route_tu">Cambia de sentido en</string>
+    <string name="route_head">Inicio</string>
     <string name="first_time_continue">Después</string>
     <string name="first_time_download">Descargar regiones</string>
     <string name="first_time_msg">Gracias por usar OsmAnd. Descarga datos regionales sin conexión a través de «Ajustes → Gestionar mapas» para ver los mapas, ubicar direcciones, buscar PDI, encontrar transporte público y más.</string>
@@ -485,7 +485,7 @@
     <string name="error_calculating_route_occured">No se pudo calcular la ruta</string>
     <string name="empty_route_calculated">La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
-    <string name="arrived_at_destination">Ha llegado al destino</string>
+    <string name="arrived_at_destination">Has llegado al destino</string>
     <string name="invalid_locations">Coordenadas inválidas</string>
     <string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
     <string name="shared_string_close">Cerrar</string>
@@ -714,8 +714,8 @@
     <string name="rendering_attr_hmRendered_description">Aumentar detalle que se muestra en el mapa.</string>
     <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
     <string name="route_roundabout">Rotonda: Tome la %1$dª salida hacia</string>
-    <string name="route_kl">Manténgase a la izquierda y continúa por</string>
-    <string name="route_kr">Manténgase a la derecha y continúe por</string>
+    <string name="route_kl">Mantente a la izquierda y continúa por</string>
+    <string name="route_kr">Mantente a la derecha y continúa por</string>
     <string name="asap">Lo antes posible</string>
     <string name="gpxup_public">Público</string>
     <string name="gpxup_identifiable">Identificable</string>
