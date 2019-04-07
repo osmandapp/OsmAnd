@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.view.ContextThemeWrapper;
@@ -25,16 +26,23 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 
 	private TrackDetailsMenu menu;
 	private View mainView;
+	private boolean paused = true;
 
+	@Nullable
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
+	}
+
+	@NonNull
+	private MapActivity requireMapActivity() {
+		return (MapActivity) requireMyActivity();
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		MapActivity mapActivity = getMapActivity();
-		menu = mapActivity.getMapLayers().getMapControlsLayer().getTrackDetailsMenu();
+		MapActivity mapActivity = requireMapActivity();
+		menu = mapActivity.getTrackDetailsMenu();
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
@@ -74,7 +82,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					dismiss();
+					menu.hide();
 				}
 			});
 		}
@@ -107,7 +115,16 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 		super.onResume();
 		if (menu == null || menu.getGpxItem() == null) {
 			dismiss();
+		} else {
+			menu.onShow();
 		}
+		paused = false;
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		paused = true;
 	}
 
 	@Override
@@ -121,6 +138,10 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return R.color.status_bar_transparent_gradient;
+	}
+
+	public boolean isPaused() {
+		return paused;
 	}
 
 	public int getHeight() {
@@ -164,26 +185,28 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 
 	public void applyDayNightMode() {
 		MapActivity ctx = getMapActivity();
-		boolean portraitMode = AndroidUiHelper.isOrientationPortrait(ctx);
-		boolean landscapeLayout = !portraitMode;
-		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		if (!landscapeLayout) {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
-		} else {
-			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
-		}
+		if (ctx != null) {
+			boolean portraitMode = AndroidUiHelper.isOrientationPortrait(ctx);
+			boolean landscapeLayout = !portraitMode;
+			boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			if (!landscapeLayout) {
+				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+			} else {
+				AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
+			}
 
-		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.y_axis_title), nightMode);
-		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.x_axis_title), nightMode);
+			AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.y_axis_title), nightMode);
+			AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.x_axis_title), nightMode);
 
-		ImageView yAxisArrow = (ImageView) mainView.findViewById(R.id.y_axis_arrow);
-		ImageView xAxisArrow = (ImageView) mainView.findViewById(R.id.x_axis_arrow);
-		yAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
-		xAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
+			ImageView yAxisArrow = (ImageView) mainView.findViewById(R.id.y_axis_arrow);
+			ImageView xAxisArrow = (ImageView) mainView.findViewById(R.id.x_axis_arrow);
+			yAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
+			xAxisArrow.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_drop_down));
 
-		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
-		if (backButton != null) {
-			backButton.setImageDrawable(getIcon(R.drawable.ic_arrow_back, R.color.color_white));
+			ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
+			if (backButton != null) {
+				backButton.setImageDrawable(getIcon(R.drawable.ic_arrow_back, R.color.color_white));
+			}
 		}
 	}
 

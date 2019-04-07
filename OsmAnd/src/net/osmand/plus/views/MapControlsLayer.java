@@ -46,14 +46,13 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
@@ -101,7 +100,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private OsmandSettings settings;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
-	private TrackDetailsMenu trackDetailsMenu;
 	private MapHudButton backToLocationControl;
 	private MapHudButton menuControl;
 	private MapHudButton compassHud;
@@ -130,10 +128,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
 		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
-	}
-
-	public TrackDetailsMenu getTrackDetailsMenu() {
-		return trackDetailsMenu;
 	}
 
 	@Override
@@ -299,7 +293,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initRouteControls() {
 		mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
-		trackDetailsMenu = new TrackDetailsMenu(mapActivity);
 	}
 
 	public void setControlsClickable(boolean clickable) {
@@ -753,7 +746,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
+		boolean trackDialogOpened = mapActivity.getTrackDetailsMenu().isVisible();
 		boolean contextMenuOpened = !mapActivity.getContextMenu().shouldShowTopControls();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
