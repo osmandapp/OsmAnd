@@ -3583,4 +3583,6 @@
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Llamarada de gas;Quemado en antorcha</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
+    <string name="poi_change_delete">Objeto borrado</string>
 </resources>
