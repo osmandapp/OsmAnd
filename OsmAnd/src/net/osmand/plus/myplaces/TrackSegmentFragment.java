@@ -1168,12 +1168,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				gpxItem.locationOnMap = gpxItem.locationStart;
 			}
 
-			GPXFile gpx = getGpx();
-			GPXFile groupGpx = gpxItem.group.getGpx();
-			if (gpx != null && groupGpx != null) {
-				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpx.path) == null;
-				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
-			}
 			final OsmandSettings settings = app.getSettings();
 			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 					settings.getLastKnownMapZoom(),

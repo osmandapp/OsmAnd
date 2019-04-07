@@ -165,6 +165,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
 	private static MapRouteInfoMenu mapRouteInfoMenu = new MapRouteInfoMenu();
+	private static TrackDetailsMenu trackDetailsMenu = new TrackDetailsMenu();
 	private static Intent prevActivityIntent = null;
 
 	private List<ActivityResultListener> activityResultListeners = new ArrayList<>();
@@ -228,6 +229,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
+		trackDetailsMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
@@ -345,8 +347,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (removeFragment(PlanRouteFragment.TAG)) {
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
-		if (TrackDetailsMenu.isVisible()) {
-			mapLayers.getMapControlsLayer().getTrackDetailsMenu().hide();
+		if (trackDetailsMenu.isVisible()) {
+			trackDetailsMenu.dismiss();
 		}
 		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		removeFragment(AdditionalActionsBottomSheetDialogFragment.TAG);
@@ -587,8 +589,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
-		if (TrackDetailsMenu.isVisible()) {
-			getMapLayers().getMapControlsLayer().getTrackDetailsMenu().hide();
+		if (trackDetailsMenu.isVisible()) {
+			trackDetailsMenu.hide();
 			if (prevActivityIntent == null) {
 				return;
 			}
@@ -1094,6 +1096,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				dashboardOnMap.hideDashboard();
 			}
 		}
+		if (trackDetailsMenu.isVisible()) {
+			trackDetailsMenu.show();
+		}
 		if (searchRequestToShow != null) {
 			showQuickSearch(searchRequestToShow);
 		}
@@ -1124,7 +1129,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				//mapContextMenu.setMapZoom(settings.getMapZoomToShow());
 				mapContextMenu.setMapZoom(tb.getZoom());
 				if (toShow instanceof GpxDisplayItem) {
-					TrackDetailsMenu trackDetailsMenu = mapLayers.getMapControlsLayer().getTrackDetailsMenu();
 					trackDetailsMenu.setGpxItem((GpxDisplayItem) toShow);
 					trackDetailsMenu.show();
 				} else if (mapRouteInfoMenu.isVisible()) {
@@ -1269,6 +1273,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onDestroy();
 		mapContextMenu.setMapActivity(null);
 		mapRouteInfoMenu.setMapActivity(null);
+		trackDetailsMenu.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
 		FailSafeFuntions.quitRouteRestoreDialog();
@@ -1594,6 +1599,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@NonNull
 	public MapRouteInfoMenu getMapRouteInfoMenu() {
 		return mapRouteInfoMenu;
+	}
+
+	@NonNull
+	public TrackDetailsMenu getTrackDetailsMenu() {
+		return trackDetailsMenu;
 	}
 
 	public void openDrawer() {

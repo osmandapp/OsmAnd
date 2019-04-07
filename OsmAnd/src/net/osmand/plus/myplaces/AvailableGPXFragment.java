@@ -1367,10 +1367,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (list.size() > 0) {
 					gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
 				}
-				if (gpxItem.group.getGpx() != null) {
-					gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpxInfo.file.getAbsolutePath()) == null;
-					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
-				}
 				final OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
 						settings.getLastKnownMapZoom(),
