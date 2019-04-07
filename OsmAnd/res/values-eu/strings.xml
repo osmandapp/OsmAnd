@@ -2981,4 +2981,32 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_bridleway_name">Zaldi-bidea</string>
     <string name="rendering_attr_highway_class_cycleway_name">Bizikletentzako bidea</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Ekintza botoi hau sakatzeak mapan GPX lorratzak erakutsi edo ezkutatzen ditu</string>
+    <string name="routing_attr_avoid_tram_name">Ekidin tranbiak</string>
+    <string name="routing_attr_avoid_tram_description">Ekidin tranbiak</string>
+    <string name="routing_attr_avoid_bus_name">Ekidin autobusak</string>
+    <string name="routing_attr_avoid_bus_description">Ekidin autobusak eta trolebusak</string>
+    <string name="routing_attr_avoid_share_taxi_name">Ekidin taxi partekatuak</string>
+    <string name="routing_attr_avoid_share_taxi_description">Ekidin taxi partekatuak</string>
+    <string name="routing_attr_avoid_train_name">Ekidin trenak</string>
+    <string name="routing_attr_avoid_train_description">Ekidin trenak</string>
+    <string name="routing_attr_avoid_subway_name">Ekidin metroak</string>
+    <string name="routing_attr_avoid_subway_description">Ekidin metroak eta tren arinak</string>
+    <string name="routing_attr_avoid_ferry_name">Ekidin ferriak</string>
+    <string name="routing_attr_avoid_ferry_description">Ekidin ferriak</string>
+    <string name="release_3_3_7">"• Garraio publikoetan  transferentzien arteko denbora erakusten da
+\n
+\n • Interfaze zuzendua ibilbidearen xehetasunetan
+\n
+\n • Itxura iluna zuzendua, norabide menuan eta ibilbidearen xehetasunetan
+\n
+\n • Distantziaren neurketan azimuth erakusten da
+\n
+\n"</string>
+    <string name="rendering_attr_surface_unpaved_name">Zolatu gabea</string>
+    <string name="rendering_attr_surface_grass_paver_name">Belar zolatua</string>
+    <string name="rendering_attr_surface_paved_name">Zolatua</string>
+    <string name="rendering_attr_surface_sett_name">Galtzada-harria</string>
+    <string name="rendering_attr_surface_cobblestone_name">Galtzadarria</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Legarra</string>
+    <string name="routing_attr_avoid_sett_name"></string>
 </resources>
