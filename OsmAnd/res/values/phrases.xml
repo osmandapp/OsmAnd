@@ -2610,7 +2610,7 @@
 	<string name="poi_health_specialty_urology_yes">Urology</string>
 	<string name="poi_health_specialty_surgery_yes">General surgery</string>
 	<string name="poi_health_specialty_radiology_yes">Radiology</string>
-	<string name="poi_health_specialty_radiotheraphy_yes">Radiotheraphy</string>
+	<string name="poi_health_specialty_radiotherapy_yes">Radiotherapy</string>
 	<string name="poi_health_specialty_psychiatry_yes">Psychiatry</string>
 	<string name="poi_health_specialty_neurology_yes">Neurology</string>
 	<string name="poi_health_specialty_dermatovenereology_yes">Dermato-venereology</string>
