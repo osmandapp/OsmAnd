@@ -1263,7 +1263,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.chooseRoutesVisible) {
+			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
 				dismissMenu();
 				return;
 			}

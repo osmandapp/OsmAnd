@@ -157,6 +157,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	public void onPause() {
 		super.onPause();
 		setUpdateEnable(false);
+		if (actionMode != null) {
+			actionMode.finish();
+		}
 		if (optionsMenu != null) {
 			optionsMenu.close();
 		}
@@ -1004,7 +1007,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					public void onClick(View v) {
 						List<GpxDisplayItem> items = itemGroups.get(group);
 						if (ch.isChecked()) {
-							if (groupPosition == 0) {
+							if (groupPosition == 0 && groups.size() > 1) {
 								setTrackPointsSelection(true);
 							} else {
 								setGroupSelection(items, groupPosition, true);
@@ -1027,7 +1030,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		}
 
 		private void setTrackPointsSelection(boolean select) {
-			if (groups.size() > 1) {
+			if (!groups.isEmpty()) {
 				setGroupSelection(null, 0, select);
 				for (int i = 1; i < groups.size(); i++) {
 					GpxDisplayGroup g = groups.get(i);

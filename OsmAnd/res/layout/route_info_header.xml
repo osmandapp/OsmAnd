@@ -121,6 +121,7 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/altitude_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:baselineAligned="false"
@@ -220,6 +221,7 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/slope_info_divider"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:baselineAligned="false"
@@ -264,6 +266,7 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/slope_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:baselineAligned="false"

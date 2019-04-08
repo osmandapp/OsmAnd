@@ -469,6 +469,8 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				R.color.divider_light, R.color.divider_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
 				R.color.divider_light, R.color.divider_dark);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), nightMode,
+				R.color.divider_light, R.color.divider_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), nightMode,
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), nightMode,
