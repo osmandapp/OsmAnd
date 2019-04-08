@@ -233,7 +233,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="day_night_info_description">Sol ixent: %1$s 
 \nOcàs: %2$s</string>
     <string name="map_widget_vector_attributes">Atributs de renderització</string>
-    <string name="map_widget_renderer">Estil de renderització</string>
+    <string name="map_widget_renderer">Estil del mapa</string>
     <string name="map_widget_mini_route">Minimapa de ruta</string>
     <string name="select_animate_speedup">Selecciona l\'acceleració de la ruta animada</string>
     <string name="select_navigation_mode">Seleccioneu el mitjà de transport</string>
@@ -654,7 +654,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="trace_rendering_descr">Mostra el rendiment de la renderització.</string>
     <string name="context_menu_item_add_waypoint">Afegeix una fita GPX</string>
     <string name="poi_filter_namefinder">Cercador de noms en línia</string>
-    <string name="continuous_rendering_descr">Mostra la renderització contínua en lloc d\'una imatge de cop.</string>
+    <string name="continuous_rendering_descr">Mostra una renderització contínua en comptes d\'una imatge de cop.</string>
     <string name="uploading_data">Penjant les dades…</string>
     <string name="search_nothing_found">No s\'ha trobat res</string>
     <string name="list_index_files_was_not_loaded">No s\'ha pogut buscar la llista de regions de https://osmand.net.</string>
@@ -728,7 +728,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
 \n 
 \nEls mapes de tessel·les es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús fora de línia (cal copiar-los manualment al directori de l\'OsmAnd) com una base de dades SQLite construïda per diferents eines de preparació de mapes de tercers."</string>
     <string name="choose_audio_stream_descr">Escolliu el canal d\'àudio on reproduir el guiat per veu.</string>
-    <string name="renderers">Renderització dels vectors</string>
+    <string name="renderers">Renderització vectorial</string>
     <string name="add_tag">Afegeix una etiqueta</string>
     <string name="poi_filter_entertainment">Entreteniment</string>
     <string name="context_menu_item_first_intermediate_point">Afegeix com la primera fita</string>
@@ -1395,7 +1395,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="map_update">Actualitzacions disponibles de %1$s mapes</string>
     <string name="error_avoid_specific_road">No s\'ha trobat cap circumval·lació</string>
     <string name="use_opengl_render">Utilitza la renderització OpenGL</string>
-    <string name="use_opengl_render_descr">Utilitza renderització OpenGL accelerada per maquinari (pot consumir més bateria o no funcionar en aparells antics).</string>
+    <string name="use_opengl_render_descr">Utilitza renderització OpenGL accelerada per maquinari (podria consumir més bateria o no funcionar en aparells antics).</string>
     <string name="everything_up_to_date">Tots els fitxers estan al dia</string>
     <string name="shared_string_dismiss">Descarta</string>
     <string name="no_internet_connection">No s\'ha pogut baixar, verifiqueu la vostra connexió a Internet.</string>
@@ -2372,7 +2372,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n• Mostra variants especials disponibles en línia, imatges de satèl·lit (de Bing), superposicions variades com traces de GPX turístiques/rutes i capes addicionals amb una transparència que es pot ajustar
 \n• Com opció, mostra els noms dels llocs en anglès, llengua local o ortografia fonètica</string>
     <string name="select_street">Selecciona el carrer</string>
-    <string name="shared_string_in_name">inclou %1$s</string>
+    <string name="shared_string_in_name">dins %@</string>
     <string name="type_address">Indiqueu l\'adreça</string>
     <string name="osmand_plus_extended_description_part4">Utilitza les dades d\'OSM i de la Viquipèdia
 \n• Informació de qualitat dels millors projectes col·laboratius del món
