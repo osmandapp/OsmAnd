@@ -25,6 +25,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import java.util.HashMap;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -195,7 +196,7 @@ public class OsmandAidlApi {
 
 	private boolean mapActivityActive = false;
 
-	private Map<Long, IOsmAndAidlCallback> callbacks;
+	private Map<Long, IOsmAndAidlCallback> callbacks = new HashMap<>();
 	private long updateCallbackId = 0;
 
 	public OsmandAidlApi(OsmandApplication app) {
@@ -243,12 +244,6 @@ public class OsmandAidlApi {
 			}
 		}
 		receivers = new TreeMap<>();
-	}
-
-
-	public static boolean isAidlSubscribedForUpdates() {
-//		return !callbacks.isEmpty();
-		return true;
 	}
 
 	public boolean isUpdateAllowed() {
