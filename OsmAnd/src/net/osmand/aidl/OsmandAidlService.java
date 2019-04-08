@@ -11,7 +11,6 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.OsmandAidlApi.DirectionsUpdateCallback;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
