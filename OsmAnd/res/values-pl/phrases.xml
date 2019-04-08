@@ -3560,4 +3560,6 @@
     <string name="poi_rtsa_scale_filter">Kategoria trudności</string>
     <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Zagrożenie</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
+    <string name="poi_change_delete">Usunięty obiekt</string>
 </resources>
