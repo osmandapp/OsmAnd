@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -1930,10 +1931,13 @@ public class OsmandAidlApi {
 		if (params.isSubscribeToUpdates()) {
 			updateCallbackId++;
 			callbacks.put(updateCallbackId, callback);
-			startNavigationalUpdates(updateCallbackId);
+			startNavigationalUpdates();
 			return updateCallbackId;
 		} else {
 			callbacks.remove(params.getCallbackId());
+			if (callbacks.size() == 0) {
+				navUpdateListener = null;
+			}
 			return -1;
 		}
 	}
@@ -1944,14 +1948,14 @@ public class OsmandAidlApi {
 		return callbacks.size() > 0;
 	}
 
-	private void startNavigationalUpdates(final long updateCallbackId) {
+	private void startNavigationalUpdates() {
 		final ADirectionInfo directionInfo = new ADirectionInfo(-1, -1, false);
 		final NextDirectionInfo baseNdi = new NextDirectionInfo();
-		navUpdateListener = new NavUpdateListener() {
-			@Override
-			public void onNavUpdate() {
-				RoutingHelper rh = app.getRoutingHelper();
-				if (callbacks.containsKey(updateCallbackId)) {
+		if (navUpdateListener == null) {
+			navUpdateListener = new NavUpdateListener() {
+				@Override
+				public void onNavUpdate() {
+					RoutingHelper rh = app.getRoutingHelper();
 					if (rh.isDeviatedFromRoute()) {
 						directionInfo.setTurnType(TurnType.OFFR);
 						directionInfo.setDistanceTo((int) rh.getRouteDeviation());
@@ -1962,14 +1966,16 @@ public class OsmandAidlApi {
 							directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
 						}
 					}
-					try {
-						callbacks.get(updateCallbackId).updateNavigationInfo(directionInfo);
-					} catch (Exception e) {
-						LOG.debug(e.getMessage(), e);
+					for (Entry<Long, IOsmAndAidlCallback> cb : callbacks.entrySet()) {
+						try {
+							cb.getValue().updateNavigationInfo(directionInfo);
+						} catch (Exception e) {
+							LOG.debug(e.getMessage(), e);
+						}
 					}
 				}
-			}
-		};
+			};
+		}
 	}
 
 	public interface NavUpdateListener {
