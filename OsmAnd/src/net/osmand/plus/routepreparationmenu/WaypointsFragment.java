@@ -357,10 +357,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	@Override
 	public void onPause() {
 		super.onPause();
+		cancelTimer();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapRouteInfoMenu.waypointsVisible = false;
-			cancelTimer();
 			mapActivity.getDashboard().getWaypointDialogHelper().removeHelperCallback(this);
 			mapActivity.getMyApplication().getTargetPointsHelper().removeListener(onStateChangedListener);
 			if (!wasDrawerDisabled) {
