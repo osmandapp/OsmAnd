@@ -291,9 +291,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_previous">Enrere</string>
     <string name="unit_of_length_descr">Canvia com es mesura la distància.</string>
     <string name="unit_of_length">Unitats de longitud</string>
-    <string name="si_mi_feet">Milles/peus</string>
+    <string name="si_mi_feet">Milles/peu</string>
     <string name="si_mi_yard">Milles/iardes</string>
-    <string name="si_km_m">Quilòmetres/metres</string>
+    <string name="si_km_m">Kilòmetres/metres</string>
     <string name="send_location_sms_pattern">Ubicació: %1$s\n%2$s</string>
     <string name="send_location">Envia la ubicació</string>
     <string name="context_menu_item_share_location">Comparteix la ubicació</string>
@@ -495,9 +495,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="tiles_to_download_estimated_size">Per al nivell de zoom {0} es baixaran {1} tessel·les ({2} MB)</string>
     <string name="shared_string_ok">D\'acord</string>
     <string name="shared_string_no_thanks">No, gràcies</string>
-    <string name="yard">iardes</string>
+    <string name="yard">yd</string>
     <string name="mile_per_hour">mph</string>
-    <string name="mile">milles</string>
+    <string name="mile">mi</string>
     <string name="poi_filter_closest_poi">PDI més propers</string>
     <string name="poi_context_menu_website">Mostra el lloc web del PDI</string>
     <string name="phone">Telèfon</string>
@@ -587,7 +587,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="map_underlay_descr">Escolliu el mapa de fons.</string>
     <string name="map_overlay_descr">Escolliu el mapa superposat.</string>
     <string name="preferred_locale_descr">Seleccioneu la llengua de visualització (s\'actualitzarà quan reinicieu l\'OsmAnd).</string>
-    <string name="foot">peu</string>
+    <string name="foot">ft</string>
     <string name="km">km</string>
     <string name="poi_filter_food_shop">Alimentació</string>
     <string name="osmand_net_previously_installed">Totes les dades locals de l\'antiga aplicació instal·lada seran compatibles amb la nova, però els llocs Preferits s\'han d\'exportar primer des de l\'antiga aplicació i després importar-se a la nova.</string>
@@ -1215,7 +1215,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="keep_informing">Repeteix les instruccions de navegació</string>
     <string name="navigation_intent_invalid">Format no vàlid: %s</string>
     <string name="route_descr_destination">Destí</string>
-    <string name="shared_string_share">Compartir</string>
+    <string name="shared_string_share">Comparteix</string>
     <string name="share_fav_subject">Preferits compartits via OsmAnd</string>
     <string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
     <string name="int_days">dies</string>
@@ -1328,7 +1328,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="speak_favorites">Preferits propers</string>
     <string name="speak_poi">PDI propers</string>
     <string name="index_tours">Itineraris</string>
-    <string name="shared_string_all">Totes</string>
+    <string name="shared_string_all">Tot</string>
     <string name="record_plugin_description">"Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre la pantalla del mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament. 
 \n 
 \nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc.,  i, per descomptat, es poden analitzar amb eines especialitzades de tercers."</string>
@@ -1698,12 +1698,12 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="favorite_category_select">Selecciona categoria</string>
     <string name="default_speed_system_descr">Definiu la unitat de velocitat.</string>
     <string name="default_speed_system">Unitats de velocitat</string>
-    <string name="nm">nmi</string>
-    <string name="si_nm">Milles marines</string>
-    <string name="si_kmh">Quilòmetres per hora</string>
+    <string name="nm">NM</string>
+    <string name="si_nm">Milles nàutiques</string>
+    <string name="si_kmh">Kilòmetres per hora</string>
     <string name="si_mph">Milles per hora</string>
     <string name="si_m_s">Metres per segon</string>
-    <string name="si_min_km">Minuts per quilòmetre</string>
+    <string name="si_min_km">Minuts per kilòmetre</string>
     <string name="si_min_m">Minuts per milla</string>
     <string name="si_nm_h">Milles marines per hora (nusos)</string>
     <string name="nm_h">nusos</string>
@@ -1877,7 +1877,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_attr_hideUnderground_name">Elements soterrats</string>
     <string name="data_is_not_available">No es disposa de dades</string>
     <string name="shared_string_read_more">Llegeix més</string>
-    <string name="shared_string_status">Estatus</string>
+    <string name="shared_string_status">Estat</string>
     <string name="shared_string_save_changes">Desa els canvis</string>
     <string name="shared_string_email_address">Adreça de correu electrònic</string>
     <string name="show_polygons">Mostra els polígons</string>
