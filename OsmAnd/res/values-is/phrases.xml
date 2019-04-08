@@ -3562,4 +3562,5 @@
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Gaslogi;Gasbrennarar</string>
     <string name="poi_change_delete">Eytt atriði</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Geislameðferð</string>
 </resources>
