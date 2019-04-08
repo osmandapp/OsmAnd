@@ -2938,7 +2938,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="public_transport_warning_descr_blog">Erfahren Sie mehr darüber, wie OsmAnd Routen berechnet, in unserem Blog.</string>
     <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, erwarten Sie Fehler und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
-    <string name="transfers_size">%1$d überträgt</string>
+    <string name="transfers_size">%1$d Umstieg(e)</string>
     <string name="add_start_and_end_points">Start- und Endpunkte hinzufügen</string>
     <string name="route_add_start_point">Startpunkt hinzufügen</string>
     <string name="route_descr_select_start_point">Startpunkt auswählen</string>
