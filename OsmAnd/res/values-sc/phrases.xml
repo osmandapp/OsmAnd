@@ -3575,4 +3575,5 @@
     <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
     <string name="poi_flare">Frama de gas;Tortza de brusiadura</string>
     <string name="poi_change_delete">Ogetu iscantzelladu</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
 </resources>
