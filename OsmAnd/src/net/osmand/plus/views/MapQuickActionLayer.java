@@ -401,6 +401,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                 mapMarkersLayer.isInPlanRouteMode() ||
                 mapRouteInfoMenu.isVisible() ||
                 MapRouteInfoMenu.chooseRoutesVisible ||
+                MapRouteInfoMenu.waypointsVisible ||
                 contextMenu.isVisible() && contextMenuMenuFragment != null && !contextMenuMenuFragment.isRemoving() ||
                 contextMenu.isVisible() && contextMenuMenuFragment != null && contextMenuMenuFragment.isAdded() ||
                 multiSelectionMenu.isVisible() && multiMenuFragment != null && multiMenuFragment.isAdded() ||

@@ -109,6 +109,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible = false;
+	public static boolean waypointsVisible = false;
+
 	private boolean routeCalculationInProgress;
 
 	private boolean selectFromMapTouch;
@@ -1350,7 +1352,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null && mapActivity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
-					WaypointsFragment.showInstance(mapActivity);
+					hide();
+					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), getCurrentMenuState());
 				}
 			}
 		});

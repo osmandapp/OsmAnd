@@ -100,40 +100,49 @@ public class RouteStatisticCard extends BaseCard {
 		String arriveStr = app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(time, true));
 		arriveTimeTv.setText(arriveStr);
 
-		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-
-		buildHeader(analysis);
-
-		((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
-
-		String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-		String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-		((TextView) view.findViewById(R.id.range_text)).setText(min + " - " + max);
-
-		String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-		String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-		((TextView) view.findViewById(R.id.descent_text)).setText(desc);
-		((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
-
-		((ImageView) view.findViewById(R.id.average_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
-		((ImageView) view.findViewById(R.id.range_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
-		((ImageView) view.findViewById(R.id.descent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_descent));
-		((ImageView) view.findViewById(R.id.ascent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_ascent));
+		buildSlopeInfo();
 
 		if (isTransparentBackground()) {
 			view.setBackgroundDrawable(null);
 		}
+	}
 
-		FrameLayout analyseButton = (FrameLayout) view.findViewById(R.id.analyse_button);
-		TextView analyseButtonDescr = (TextView) view.findViewById(R.id.analyse_button_descr);
+	private void buildSlopeInfo() {
+		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+		buildHeader(analysis);
+		if (analysis.hasElevationData) {
+			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+
+			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+			String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+			((TextView) view.findViewById(R.id.range_text)).setText(min + " - " + max);
+
+			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+			((TextView) view.findViewById(R.id.descent_text)).setText(desc);
+			((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
+
+			((ImageView) view.findViewById(R.id.average_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
+			((ImageView) view.findViewById(R.id.range_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
+			((ImageView) view.findViewById(R.id.descent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_descent));
+			((ImageView) view.findViewById(R.id.ascent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_ascent));
+
+			TextView analyseButtonDescr = (TextView) view.findViewById(R.id.analyse_button_descr);
+
+			FrameLayout analyseButton = (FrameLayout) view.findViewById(R.id.analyse_button);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+				AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			} else {
+				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+			}
+			analyseButton.setOnClickListener(onAnalyseClickListener);
 		}
-		analyseButton.setOnClickListener(onAnalyseClickListener);
+		view.findViewById(R.id.altitude_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.slope_info_divider).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.slope_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.buttons_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
 	}
 
 	@Nullable

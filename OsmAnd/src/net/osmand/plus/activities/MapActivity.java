@@ -1606,6 +1606,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return trackDetailsMenu;
 	}
 
+	public void hideContextAndRouteInfoMenues() {
+		mapContextMenu.hideMenues();
+		mapRouteInfoMenu.hide();
+	}
+
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
 		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
