@@ -1345,6 +1345,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OsmandPlugin.onMapActivityPause(this);
 	}
 
+	public void updateControlsVisibility(boolean visible, boolean openingRouteInfoDialog) {
+		int visibility = visible ? View.VISIBLE : View.GONE;
+		findViewById(R.id.map_center_info).setVisibility(visibility);
+		findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
+		if (!openingRouteInfoDialog) {
+			findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+			if (isLandscapeLayout()) {
+				getMapView().setMapPositionX(visible ? 0 : 1);
+			}
+		}
+		refreshMap();
+	}
+
 	public void updateApplicationModeSettings() {
 		updateMapSettings();
 		mapViewTrackingUtilities.updateSettings();

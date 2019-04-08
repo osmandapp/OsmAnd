@@ -109,6 +109,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible = false;
+	public static boolean waypointsVisible = false;
+
 	private boolean routeCalculationInProgress;
 
 	private boolean selectFromMapTouch;
