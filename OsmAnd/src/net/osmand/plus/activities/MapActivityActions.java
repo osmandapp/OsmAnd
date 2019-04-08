@@ -889,7 +889,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void openIntermediatePointsDialog() {
-		mapActivity.hideContextAndRouteInfoMenus();
+		mapActivity.hideContextAndRouteInfoMenues();
 		WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager());
 	}
 

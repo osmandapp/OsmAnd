@@ -350,7 +350,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				mapActivity.disableDrawer();
 			}
 			updateRouteCalculationProgress(0);
-			mapActivity.updateControlsVisibility(false, false);
+			updateControlsVisibility(false, false);
 		}
 	}
 
@@ -366,7 +366,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
-			mapActivity.updateControlsVisibility(true, routeInfoMenuState != -1);
+			updateControlsVisibility(true, routeInfoMenuState != -1);
 		}
 	}
 
@@ -554,6 +554,22 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 
 		return listAdapter;
+	}
+
+	public void updateControlsVisibility(boolean visible, boolean openingRouteInfo) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int visibility = visible ? View.VISIBLE : View.GONE;
+			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
+			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
+			if (!openingRouteInfo) {
+				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+				if (!portrait) {
+					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
+				}
+			}
+			mapActivity.refreshMap();
+		}
 	}
 
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {

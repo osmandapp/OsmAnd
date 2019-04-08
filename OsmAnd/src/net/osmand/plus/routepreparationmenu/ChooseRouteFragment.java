@@ -206,7 +206,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
-			mapActivity.updateControlsVisibility(false, false);
+			updateControlsVisibility(false, false);
 		}
 	}
 
@@ -218,7 +218,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
-			mapActivity.updateControlsVisibility(true, routeInfoMenuState != -1);
+			updateControlsVisibility(true, routeInfoMenuState != -1);
 		}
 	}
 
@@ -760,6 +760,22 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			} else {
 				zoomButtonsView.setY(zoomY);
 			}
+		}
+	}
+
+	public void updateControlsVisibility(boolean visible, boolean openingRouteInfo) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int visibility = visible ? View.VISIBLE : View.GONE;
+			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
+			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
+			if (!openingRouteInfo) {
+				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+				if (!portrait) {
+					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
+				}
+			}
+			mapActivity.refreshMap();
 		}
 	}
 
