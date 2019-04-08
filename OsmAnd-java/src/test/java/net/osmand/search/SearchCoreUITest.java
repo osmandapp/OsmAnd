@@ -222,7 +222,7 @@ public class SearchCoreUITest {
 		});
 		if (files != null) {
 			for (File f : files) {
-				//testSearchImpl(f);
+				testSearchImpl(f);
 			}
 		}
 	}
