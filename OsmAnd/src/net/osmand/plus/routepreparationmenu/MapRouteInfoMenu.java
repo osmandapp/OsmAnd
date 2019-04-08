@@ -1350,7 +1350,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			public void onClick(View v) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null && mapActivity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
-					WaypointsFragment.showInstance(mapActivity);
+					hide();
+					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), getCurrentMenuState(), MenuState.HEADER_ONLY);
 				}
 			}
 		});

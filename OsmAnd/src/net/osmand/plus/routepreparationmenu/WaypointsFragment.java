@@ -41,6 +41,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment;
@@ -59,6 +60,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
+import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.INITIAL_MENU_STATE_KEY;
+import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ROUTE_INFO_STATE_KEY;
 
 public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
 		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback {
@@ -88,6 +91,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
 
+	private int routeInfoMenuState = -1;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,7 +112,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			return null;
 		}
 		AndroidUtils.addStatusBarPadding21v(app, view);
-
+		Bundle args = getArguments();
+		if (args != null) {
+			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
+		}
 		mainView = view.findViewById(R.id.main_view);
 
 		listView = (DynamicListView) view.findViewById(R.id.dash_list_view);
@@ -434,6 +442,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			AndroidUtils.setBackground(app, clearButtonDescr, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 		AndroidUtils.setBackground(app, view.findViewById(R.id.cancel_button), nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+		AndroidUtils.setBackground(app, view.findViewById(R.id.controls_divider), nightMode, R.color.divider_light, R.color.divider_dark);
 
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.start_button_descr)).setText(getText(R.string.shared_string_apply));
@@ -864,15 +873,21 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity) {
-		try {
-			mapActivity.getContextMenu().hideMenues();
+	public static boolean showInstance(FragmentManager fragmentManager) {
+		return WaypointsFragment.showInstance(fragmentManager, -1, ContextMenuFragment.MenuState.HEADER_ONLY);
+	}
 
+	public static boolean showInstance(FragmentManager fragmentManager, int routeInfoState, int initialMenuState) {
+		try {
 			WaypointsFragment fragment = new WaypointsFragment();
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
+
+			Bundle args = new Bundle();
+			args.putInt(ROUTE_INFO_STATE_KEY, routeInfoState);
+			args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
+			fragment.setArguments(args);
+
+			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
-					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 
 			return true;
@@ -883,14 +898,16 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG,
-						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
-				//
+		try {
+			MapActivity mapActivity = (MapActivity) getActivity();
+			if (mapActivity != null) {
+				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+				if (routeInfoMenuState != -1) {
+					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog(routeInfoMenuState);
+				}
 			}
+		} catch (Exception e) {
+			//
 		}
 	}
 }

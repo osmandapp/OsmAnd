@@ -1003,7 +1003,8 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							WaypointsFragment.showInstance(map);
+							map.hideContextAndRouteInfoMenus();
+							WaypointsFragment.showInstance(map.getSupportFragmentManager());
 						}
 					});
 					remove.setOnClickListener(new OnClickListener() {
