@@ -7,7 +7,7 @@ public class ADirectionInfo implements Parcelable {
 
 	private int distanceTo; //distance to next turn
 	private int turnType; //turn type
-	private boolean isLeftSide; //is movement leftsided
+	private boolean isLeftSide; //is movement left-sided
 
 	public ADirectionInfo(int distanceTo, int turnType, boolean isLeftSide) {
 		this.distanceTo = distanceTo;

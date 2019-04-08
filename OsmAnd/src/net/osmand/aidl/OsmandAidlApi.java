@@ -1981,7 +1981,6 @@ public class OsmandAidlApi {
 		void onNavUpdate();
 	}
 
-
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
@@ -2247,10 +2246,5 @@ public class OsmandAidlApi {
 	public interface OsmandAppInitCallback {
 		void onAppInitialized();
 	}
-
-	public interface DirectionsUpdateCallback {
-		void onDirectionsUpdate(ADirectionInfo directionInfo);
-	}
-
 
 }
