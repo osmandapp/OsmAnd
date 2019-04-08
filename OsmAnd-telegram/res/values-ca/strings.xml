@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="shared_string_ok">D\'acord</string>
+    <string name="timeline_available_for_free_now">La línia temporal és ara una opció gratuita.</string>
+    <string name="disable_monitoring">Desactiva el seguiment</string>
+    <string name="location_recording_enabled">L\'enregistrament de localització està activat</string>
+    <string name="timeline_description">Activeu el seguiment per desar totes les fites a l\'historial.</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="privacy_policy_use_telegram">Telegram (l\'aplicació de missatgeria) s\'utilitza per connectar i comunicar amb la gent.</string>
+    <string name="please_update_osmand">Actualitzeu OsmAnd per veure les dades al mapa</string>
+    <string name="device_added_successfully">S\'ha afegit %1$s.</string>
+    <string name="battery_optimization_description">Desactiveu l\'optimització de bateria per OsmAnd Telegram perquè no s\'aturi sobtadament quan quedi en procés de fons.</string>
+    <string name="go_to_settings">Ves a la configuració</string>
+    <string name="choose_osmand_desc">Seleccioneu la versió d\'OsmAnd on els contactes es situaran al mapa.</string>
+    <string name="choose_osmand">Seleccioneu la versió d\'OsmAnd a utilitzar</string>
+    <string name="disable_all_sharing_desc">Desactiva compartir la ubicació a tots els xats seleccionats (%1$d).</string>
+    <string name="disable_all_sharing">Desactiva compartir res</string>
+    <string name="turn_off_all">Desactiva-ho tot</string>
+    <string name="time_ago">ja fa</string>
+    <string name="last_response">Darrera resposta</string>
+    <string name="logout_no_internet_msg">Connecteu a Internet per sortir correctament de Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Per aturar l\'accés a compartir la posició. Obriu Telegram, aneu a Configuració → Seguretat i Privacitat→ Sessions, i tanqueu la sessió d\'OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram">Com aturar des de Telegram l\'enregistrador OsmAnd</string>
+    <string name="logout_help_desc">Com aturar des de Telegram l\'enregistrador OsmAnd</string>
+    <string name="in_time">dins %@</string>
+    <string name="osmand_connect_desc">Seleccioneu la versió d\'OsmAnd que OsmAnd Telegram utilitzarà per mostrar la posició.</string>
+    <string name="osmand_connect">Connecta a OsmAnd</string>
+    <string name="location_history_desc">Amaga els contactes quiets més d\'un temps determinat.</string>
+    <string name="stale_location">Aturat</string>
+    <string name="send_my_location_desc">Indiqueu la variació mínima per compartir la posició.</string>
+    <string name="stop_sharing_all">La compartició està activada (atureu-la)</string>
+    <string name="turn_off_location_sharing">Atura la compartició de posició</string>
+    <string name="get_telegram_title">Registre de Telegram</string>
+    <string name="get_telegram_account_first">Us cal un compte Telegram per compartir la posició.</string>
+    <string name="get_telegram_description_continue">Instal·leu Telegram i activeu-ne un compte.</string>
+    <string name="get_telegram_after_creating_account">Llavors podreu utilitzar aquesta aplicació.</string>
+    <string name="shared_string_off">Inactiva</string>
+    <string name="already_registered_in_telegram">Us cal un compte registrat de Telegram i un número de telèfon</string>
+    <string name="set_visible_time_for_all">Indiqueu l\'horari de visibilitat per tothom</string>
+    <string name="visible_time_for_all">Horari de visibilitat per tothom</string>
+    <string name="set_time_description">Indiqueu l\'horari on els grups i contactes seleccionats podran veure la vostra posició en directe.</string>
+    <string name="set_time">Estableix horari</string>
+    <string name="location_sharing_description">Seleccioneu els grups i contactes amb qui voleu compartir la vostra posició.</string>
+    <string name="my_location_search_hint">Cerca: Grup o contacte</string>
+    <string name="authentication_code_descr">Telegram us ha enviat un codi perquè OsmAnd pugui entrar en el vostre compte.</string>
+    <string name="closing">S\'està tancant</string>
+</resources>
