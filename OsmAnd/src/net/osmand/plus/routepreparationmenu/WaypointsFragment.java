@@ -40,7 +40,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment;
@@ -59,7 +58,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.INITIAL_MENU_STATE_KEY;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ROUTE_INFO_STATE_KEY;
 
 public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
@@ -933,16 +931,15 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
-		return WaypointsFragment.showInstance(fragmentManager, -1, ContextMenuFragment.MenuState.HEADER_ONLY);
+		return WaypointsFragment.showInstance(fragmentManager, -1);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, int routeInfoState, int initialMenuState) {
+	public static boolean showInstance(FragmentManager fragmentManager, int routeInfoState) {
 		try {
 			WaypointsFragment fragment = new WaypointsFragment();
 
 			Bundle args = new Bundle();
 			args.putInt(ROUTE_INFO_STATE_KEY, routeInfoState);
-			args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 			fragment.setArguments(args);
 
 			fragmentManager.beginTransaction()

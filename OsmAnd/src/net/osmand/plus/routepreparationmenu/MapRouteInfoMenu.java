@@ -1353,7 +1353,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null && mapActivity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
 					hide();
-					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), getCurrentMenuState(), MenuState.HEADER_ONLY);
+					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), getCurrentMenuState());
 				}
 			}
 		});
