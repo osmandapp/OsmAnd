@@ -2091,7 +2091,7 @@
     <string name="poi_surveillance_outdoor">Térfigyelés: kültéri</string>
     <string name="poi_surveillance_public">Térfigyelés: nyilvános</string>
     <string name="poi_clothes_women">Női</string>
-    <string name="poi_clothes_underwear">Fehérnemű</string>
+    <string name="poi_clothes_underwear">Alsónemű</string>
     <string name="poi_clothes_men">Férfi</string>
     <string name="poi_clothes_wedding">Esküvői</string>
     <string name="poi_clothes_sports">Sportruházat</string>
@@ -2102,13 +2102,13 @@
     <string name="poi_clothes_fur">Szőrme</string>
     <string name="poi_clothes_leather">Bőr</string>
     <string name="poi_clothes_costumes">Kosztüm</string>
-    <string name="poi_clothes_traditional">Hagyományos</string>
+    <string name="poi_clothes_traditional">Népviselet, tradicionális ruházat</string>
     <string name="poi_clothes_suits">Öltöny</string>
     <string name="poi_clothes_maternity">Kismama</string>
     <string name="poi_clothes_vintage">Vintázs, klasszikus</string>
     <string name="poi_clothes_oversize">Túlméretes</string>
-    <string name="poi_clothes_schoolwear">Iskolaruházat</string>
-    <string name="poi_clothes_swimwear">Úszóruházat</string>
+    <string name="poi_clothes_schoolwear">Iskolai viselet</string>
+    <string name="poi_clothes_swimwear">Fürdőruha</string>
     <string name="poi_clothes_socks">Zokni</string>
     <string name="poi_clothes_shirts">Ing</string>
     <string name="poi_clothes_dance">Tánc</string>
@@ -3569,4 +3569,7 @@
     <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
     <string name="poi_flare">Gázfáklya</string>
     <string name="poi_change_delete">Törölt objektum</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Sugárkezelés</string>
+    <string name="poi_substation_inspection_gauge">Ellenőrző mérőműszer</string>
+    <string name="poi_substation_field_gathering">Kutakból jövő anyag gyűjtőhelye</string>
 </resources>
