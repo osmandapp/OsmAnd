@@ -19,7 +19,7 @@ public class SelectedProfileActivity extends OsmandActionBarActivity {
 		Intent intent = getIntent();
 		if (intent.getExtras() != null) {
 			if (getSupportActionBar() != null) {
-				getSupportActionBar().setTitle(((AppProfile) intent.getParcelableExtra("profile")).getTitle());
+//				getSupportActionBar().setTitle(((AppProfile) intent.getParcelableExtra("profile")).getTitle());
 				getSupportActionBar().setElevation(5.0f);
 			}
 		}

@@ -2,12 +2,20 @@ package net.osmand.plus.profiles;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import net.osmand.plus.ApplicationMode;
 
 public class AppProfile implements Parcelable {
 	private int iconRes;
 	private String title;
 	private String navType;
+
 	private boolean isSelected;
+
+	private String prefKey;
+	private float defSpeed;
+	private int distForTurn;
+	private int arrivalDistance;
+	private int offRouteDistance;
 
 
 	public AppProfile(int iconRes, String title, String descr) {
@@ -15,7 +23,6 @@ public class AppProfile implements Parcelable {
 		this.title = title;
 		this.navType = descr;
 	}
-
 
 
 	public int getIconRes() {

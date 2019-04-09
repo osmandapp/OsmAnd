@@ -19,7 +19,7 @@ public class ApplicationMode {
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 	/*
-	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat")
+	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport")
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
 			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
@@ -57,8 +57,8 @@ public class ApplicationMode {
 			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
 
 	static {
-		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, TRAIN};
-		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, TRAIN};
+		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, PUBLIC_TRANSPORT};
+		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, PUBLIC_TRANSPORT};
 		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN};
 		ApplicationMode[] pedestrian = new ApplicationMode[]{PEDESTRIAN};
 		ApplicationMode[] pedestrianBicycle = new ApplicationMode[]{PEDESTRIAN, BICYCLE};
@@ -99,6 +99,7 @@ public class ApplicationMode {
 		regWidgetVisibility("monitoring_services", none);
 		regWidgetVisibility("bgService", none);
 	}
+
 
 
 	private static class ApplicationModeBuilder {
@@ -189,6 +190,10 @@ public class ApplicationMode {
 		ApplicationModeBuilder builder = new ApplicationModeBuilder();
 		builder.applicationMode = new ApplicationMode(key, stringKey);
 		return builder;
+	}
+
+	public static ApplicationModeBuilder createCustomMode(int key, String stringKey) {
+		return create(key, stringKey);
 	}
 
 	private ApplicationMode(int key, String stringKey) {

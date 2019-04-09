@@ -13,13 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import java.util.EnumSet;
 import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import org.apache.commons.logging.Log;
 
 public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment {

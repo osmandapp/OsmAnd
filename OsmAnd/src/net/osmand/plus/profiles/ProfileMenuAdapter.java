@@ -10,35 +10,40 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
+import net.sf.junidecode.App;
 
 
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
-	private List<AppProfile> items;
+	private List<ApplicationMode> items;
+	private Set<ApplicationMode> selectedItems;
 	private ProfileListener listener = null;
 	private final OsmandApplication app;
 
-
-	public ProfileMenuAdapter(List<AppProfile> items, OsmandApplication app, ProfileListener listener) {
+	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems, OsmandApplication app, ProfileListener listener) {
 		this.items = items;
 		this.listener = listener;
 		this.app = app;
+		this.selectedItems = selectedItems;
 	}
 
-	public List<AppProfile> getItems() {
+	public List<ApplicationMode> getItems() {
 		return items;
 	}
 
-	public void addItem(AppProfile profileItem) {
+	public void addItem(ApplicationMode profileItem) {
 		items.add(profileItem);
 		notifyDataSetChanged();
 	}
 
-	public void updateItemsList(List<AppProfile> newList) {
+	public void updateItemsList(List<ApplicationMode> newList) {
 		items.clear();
 		items.addAll(newList);
 		notifyDataSetChanged();
@@ -54,12 +59,17 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 	@Override
 	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
-		final AppProfile item = items.get(position);
-		holder.title.setText(item.getTitle());
+		final ApplicationMode item = items.get(position);
+		if (item.getParent() != null) {
+			holder.descr.setText(String.format("Type: %s", item.getParent().getStringKey()));
+		} else {
+			holder.title.setText(app.getResources().getString(item.getStringResource()));
+			holder.descr.setText(String.format("Type: %s", item.getStringKey()));
+		}
+
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app) ? R.color.main_font_dark : R.color.main_font_light));
-		holder.descr.setText(String.format("Type: %s", item.getNavType()));
-		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getIconRes(), isNightMode(app) ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
-		holder.aSwitch.setChecked(item.isSelected());
+		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app) ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		holder.aSwitch.setChecked(selectedItems.contains(item));
 		holder.aSwitch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -99,8 +109,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	public interface ProfileListener {
-		void changeProfileStatus(AppProfile item, boolean isSelected);
-		void editProfile(AppProfile item);
+		void changeProfileStatus(ApplicationMode item, boolean isSelected);
+		void editProfile(ApplicationMode item);
 	}
 }
 
