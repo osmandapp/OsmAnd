@@ -79,6 +79,9 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 		view.findViewById<TextView>(R.id.secondary_btn).apply {
 			text = getString(R.string.shared_string_back)
 			setOnClickListener {
+				targetFragment?.also {
+					it.onActivityResult(targetRequestCode, LOCATION_SHARING_CANCELED_CODE, null)
+				}
 				dismiss()
 			}
 		}
@@ -357,6 +360,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 					userLivePeriods[itemId]?.also { text = formatLivePeriod(it) }
 				}
 			}
+			holder.topShadowDivider?.visibility = View.GONE
 			holder.bottomShadow?.visibility = View.GONE
 			holder.itemView.setOnClickListener {
 				selectDuration(itemId, isChat)
@@ -373,6 +377,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)
 			val description: TextView? = view.findViewById(R.id.description)
 			val textInArea: TextView? = view.findViewById(R.id.text_in_area)
+			val topShadowDivider: View? = view.findViewById(R.id.top_divider)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 		}
 	}
@@ -380,6 +385,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 	companion object {
 
 		const val LOCATION_SHARED_REQUEST_CODE = 0
+		const val LOCATION_SHARING_CANCELED_CODE = 1
 
 		private const val TAG = "SetTimeDialogFragment"
 		private const val CHATS_KEY = "chats_key"

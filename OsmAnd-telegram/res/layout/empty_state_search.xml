@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center_horizontal"
+	android:orientation="vertical">
+
+	<FrameLayout
+		android:id="@+id/empty_state_image_container"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/my_location_image_height"
+		android:layout_marginBottom="16dp"
+		android:foreground="@drawable/gradient_both_sides_light">
+
+		<ImageView
+			android:id="@+id/empty_state_background"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="center"
+			android:src="@drawable/img_my_location_roadbg" />
+
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="@dimen/content_padding_standard">
+
+			<ImageView
+				android:id="@+id/empty_state_placeholder"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/img_my_location_user" />
+
+			<ImageView
+				android:id="@+id/empty_state_user_icon"
+				android:layout_width="@dimen/my_location_user_icon_size"
+				android:layout_height="@dimen/my_location_user_icon_size"
+				android:layout_gravity="center"
+				android:src="@drawable/img_user_placeholder" />
+
+		</FrameLayout>
+
+	</FrameLayout>
+
+	<net.osmand.telegram.ui.views.TextViewEx
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:background="@null"
+		android:text="@string/search_contacts"
+		android:textColor="?android:attr/textColorSecondary"
+		android:textSize="20sp"
+		osmand:typeface="@string/font_roboto_medium" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="68dp"
+		android:layout_marginRight="68dp"
+		android:background="@null"
+		android:gravity="center"
+		android:text="@string/search_contacts_descr"
+		android:textColor="?android:attr/textColorSecondary"
+		android:textSize="18sp" />
+
+</LinearLayout>

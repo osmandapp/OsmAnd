@@ -7,6 +7,10 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
+	<include
+		android:id="@+id/top_divider"
+		layout="@layout/list_item_divider"/>
+
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
