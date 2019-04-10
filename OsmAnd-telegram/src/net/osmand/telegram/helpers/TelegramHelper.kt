@@ -35,7 +35,7 @@ class TelegramHelper private constructor() {
 		private const val IGNORED_ERROR_CODE = 406
 		private const val MESSAGE_CANNOT_BE_EDITED_ERROR_CODE = 5
 
-		private const val MAX_SEARCH_ITEMS = 100
+		private const val MAX_SEARCH_ITEMS = Int.MAX_VALUE
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
