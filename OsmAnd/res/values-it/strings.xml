@@ -2988,7 +2988,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="by_transport_type">In %1$s</string>
     <string name="exit_at">Scendi a</string>
     <string name="sit_on_the_stop">Sali alla fermata</string>
-    <string name="shared_string_swap">Cambia</string>
+    <string name="shared_string_swap">Inverti</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Questo pulsante mostra o nasconde le tracce GPX selezionate sulla mappa</string>
     <string name="add_destination_query">Inserire prima una destinazione</string>
     <string name="add_work">Aggiungi lavoro</string>

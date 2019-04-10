@@ -1359,7 +1359,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="wake_on_voice_descr">Allumer l\'écran (si éteint) à l\'approche d\'une bifurcation.</string>
     <string name="lock_screen_request_explanation">%1$s a besoin de cette permission pour éteindre l\'écran en mode économie d\'énergie.</string>
     <string name="shared_string_never">Jamais</string>
-    <string name="home_button">Accueil</string>
+    <string name="home_button">Domicile</string>
     <string name="search_for">Rechercher</string>
     <string name="shared_string_show_all">AFFICHER TOUT</string>
     <string name="coordinates">Coordonnées</string>

@@ -2548,4 +2548,23 @@
     <string name="total_donations">捐赠总计</string>
     <string name="winter_and_ski_renderer">冬季与滑雪</string>
     <string name="toast_empty_name_error">未命名位置</string>
+    <string name="routing_attr_avoid_share_taxi_name">避免共享出租车</string>
+    <string name="routing_attr_avoid_share_taxi_description">避免共享出租车</string>
+    <string name="routing_attr_avoid_train_name">避免火车</string>
+    <string name="routing_attr_avoid_train_description">避免火车</string>
+    <string name="routing_attr_avoid_subway_description">避免地铁和轻轨交通</string>
+    <string name="routing_attr_avoid_ferry_name">避免轮渡</string>
+    <string name="routing_attr_avoid_ferry_description">避免轮渡</string>
+    <string name="shared_string_degrees">度</string>
+    <string name="shared_string_milliradians">毫弧度</string>
+    <string name="avoid_pt_types_descr">选择导航时要避免的公共交通类型：</string>
+    <string name="shared_string_walk">步行</string>
+    <string name="save_poi_value_exceed_length">标签“%s”的最大长度是255个字符。
+\n请先进行缩短再继续。</string>
+    <string name="save_poi_value_exceed_length_title">“%”值的长度</string>
+    <string name="public_transport_warning_descr_blog">在我们的博客上了解更多与 OsmAnd 路线计算相关的信息。</string>
+    <string name="public_transport_warning_title">公共交通导航目前处于测试阶段，可能出现错误和信息不准确。</string>
+    <string name="add_intermediate">添加中继点</string>
+    <string name="route_add_start_point">添加起始点</string>
+    <string name="route_descr_select_start_point">选择起始点</string>
 </resources>

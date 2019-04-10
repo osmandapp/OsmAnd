@@ -129,7 +129,7 @@
     <string name="poi_user_defined_other">Визначено користувачем</string>
     <string name="poi_shop_food">Продуктовий магазин і супермаркет</string>
     <string name="poi_road_obstacle">Дорожні перешкоди</string>
-    <string name="poi_filling_station">АЗС</string>
+    <string name="poi_filling_station">Заправна станція</string>
     <string name="poi_personal_transport">Особистий транспорт</string>
     <string name="poi_public_transport">Громадський транспорт</string>
     <string name="poi_air_transport">Авіаційний транспорт</string>
@@ -3565,4 +3565,5 @@
     <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
     <string name="poi_flare">Газовий факел</string>
     <string name="poi_change_delete">Видалений об\'єкт</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Променева терапія</string>
 </resources>

@@ -2346,7 +2346,7 @@
     <string name="poi_site_type_hut_circle">Círculo de cabana</string>
     <string name="poi_fortification_type_ring_ditch">Tipo de fortificação: vala circular</string>
     <string name="poi_fitness_centre">Academia</string>
-    <string name="poi_fitness">Fitness</string>
+    <string name="poi_fitness">Exercício físico</string>
     <string name="poi_billiards">Bilhar</string>
     <string name="poi_water_heater_yes">Aquecedor de água: sim</string>
     <string name="poi_water_heater_no">Aquecedor de água: não</string>
@@ -3577,4 +3577,5 @@
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Explosão de gás;Queimador de gás</string>
     <string name="poi_change_delete">Objeto excluído</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
 </resources>
