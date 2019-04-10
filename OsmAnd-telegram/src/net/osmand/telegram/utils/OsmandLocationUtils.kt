@@ -169,7 +169,10 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun parseTextLocation(text: TdApi.FormattedText, botLocation: Boolean): MessageLocation {
+	fun parseTextLocation(text: TdApi.FormattedText, botLocation: Boolean): MessageLocation? {
+		if (botLocation && !text.text.startsWith(DEVICE_PREFIX) || !botLocation && !text.text.startsWith(USER_TEXT_LOCATION_TITLE)) {
+			return null
+		}
 		val res = if (botLocation) MessageOsmAndBotLocation() else MessageUserLocation()
 		res.type = LocationMessages.TYPE_TEXT
 		var locationNA = false
