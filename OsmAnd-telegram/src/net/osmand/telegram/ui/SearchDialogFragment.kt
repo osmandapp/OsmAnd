@@ -213,42 +213,23 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 	private fun updateList() {
 		val items: MutableList<TdApi.Object> = mutableListOf()
+		val chats: MutableList<TdApi.Chat> = mutableListOf()
+		val publicChats: MutableList<TdApi.Chat> = mutableListOf()
+		val users: MutableList<TdApi.User> = mutableListOf()
 		val currentUserId = telegramHelper.getCurrentUserId()
 
-		val chats: MutableList<TdApi.Chat> = getChats(currentUserId)
-		items.addAll(chats)
-
-		val users: MutableList<TdApi.User> = getContacts(currentUserId, chats)
-		items.addAll(sortUsers(users))
-
-		items.addAll(getChats(currentUserId, chats))
-
-		adapter.items = items
-	}
-
-	private fun getChats(
-		currentUserId: Int,
-		addedChats: List<TdApi.Chat>? = null
-	): MutableList<TdApi.Chat> {
-		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		searchedChatsIds.forEach {
 			val chat = telegramHelper.getChat(it)
 			if (chat != null) {
-				if (!telegramHelper.isChannel(chat)
-					&& telegramHelper.getUserIdFromChatType(chat.type) != currentUserId
-					&& (addedChats == null || (!addedChats.contains(chat)))
-				) {
+				if (!telegramHelper.isChannel(chat) && telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
 					chats.add(chat)
 				}
 			} else {
 				telegramHelper.requestChat(it)
 			}
 		}
-		return chats
-	}
+		items.addAll(chats)
 
-	private fun getContacts(currentUserId: Int, chats: List<TdApi.Chat>): MutableList<TdApi.User> {
-		val users: MutableList<TdApi.User> = mutableListOf()
 		searchedContactsIds.forEach { userId ->
 			val user = telegramHelper.getUser(userId)
 			if (user != null) {
@@ -258,7 +239,22 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 				telegramHelper.requestUser(userId)
 			}
 		}
-		return users
+		items.addAll(sortUsers(users))
+
+		searchedPublicChatsIds.forEach {
+			val chat = telegramHelper.getChat(it)
+			if (chat != null) {
+				if (!telegramHelper.isChannel(chat) && !chats.contains(chat)
+					&& telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
+					publicChats.add(chat)
+				}
+			} else {
+				telegramHelper.requestChat(it)
+			}
+		}
+		items.addAll(publicChats)
+
+		adapter.items = items
 	}
 
 	private fun sortUsers(list: MutableList<TdApi.User>): MutableList<TdApi.User> {
@@ -507,8 +503,6 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	companion object {
 
 		const val TAG = "SearchDialogFragment"
-
-		private val SEARCH_ITEM = 1
 
 		fun showInstance(fm: FragmentManager, target: Fragment?): Boolean {
 			return try {
