@@ -274,12 +274,18 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 
 	private fun updateList() {
 		val items: MutableList<TdApi.Object> = mutableListOf()
-		telegramHelper.getChatList().filter { chatLivePeriods.keys.contains(it.chatId) }
-			.forEach { orderedChat ->
-				telegramHelper.getChat(orderedChat.chatId)?.also { items.add(it) }
+		chatLivePeriods.keys.forEach {
+			val chat = telegramHelper.getChat(it)
+			if (chat != null) {
+				items.add(chat)
 			}
-		telegramHelper.getContacts().values.filter { userLivePeriods.keys.contains(it.id.toLong()) }
-			.forEach { user -> items.add(user) }
+		}
+		userLivePeriods.keys.forEach {
+			val user = telegramHelper.getUser(it.toInt())
+			if (user != null) {
+				items.add(user)
+			}
+		}
 		adapter.items = items
 	}
 
