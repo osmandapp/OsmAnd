@@ -26,10 +26,11 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	List<RoutingProfile> routingProfiles;
 	NavTypeDialogListener listener;
+	NavTypeDialogListener listListener;
 	RecyclerView recyclerView;
 	NavTypeAdapter adapter;
 
-	public void setListener(NavTypeDialogListener listener) {
+	public void setNavTypeListener(NavTypeDialogListener listener) {
 		this.listener = listener;
 	}
 
@@ -50,18 +51,14 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				dismiss();
 			}
 		});
-		listener = new NavTypeDialogListener() {
+		listListener = new NavTypeDialogListener() {
 			@Override
 			public void selectedNavType(int pos) {
-				for (int i = 0; i < routingProfiles.size(); i++) {
-					routingProfiles.get(i).setSelected(false);
-				}
-				routingProfiles.get(pos).setSelected(true);
-
+				listener.selectedNavType(pos);
 			}
 		};
 		recyclerView = view.findViewById(R.id.menu_list_view);
-		adapter = new NavTypeAdapter(getContext(), routingProfiles, isNightMode(getMyApplication()), listener);
+		adapter = new NavTypeAdapter(routingProfiles, isNightMode(getMyApplication()), listListener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
 
@@ -73,14 +70,13 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	}
 
 	class NavTypeAdapter extends RecyclerView.Adapter<ItemViewHolder> {
-		private final Context context;
 		private final List<RoutingProfile> items;
 		private final boolean isNightMode;
 		private NavTypeDialogListener listener;
+		private int previousSelection;
 
-		public NavTypeAdapter(@NonNull Context context, @NonNull List<RoutingProfile> objects,
+		public NavTypeAdapter(@NonNull List<RoutingProfile> objects,
 			@NonNull boolean isNightMode, NavTypeDialogListener listener) {
-			this.context = context;
 			this.items = objects;
 			this.isNightMode = isNightMode;
 			this.listener = listener;
@@ -99,8 +95,7 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
-			final int pos = position;
+		public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position) {
 			final RoutingProfile item = items.get(position);
 			holder.title.setText(item.getName());
 			holder.descr.setText(item.getOrigin());
@@ -108,20 +103,22 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 					? R.color.active_buttons_and_links_dark
 					: R.color.active_buttons_and_links_light));
 			if(item.isSelected()) {
-				holder.radioButton.setEnabled(true);
+				holder.radioButton.setChecked(true);
+				previousSelection = position;
+			} else {
+				holder.radioButton.setChecked(false);
 			}
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					listener.selectedNavType(pos);
-					for (int i = 0; i < routingProfiles.size(); i++) {
-						if (!routingProfiles.get(i).equals(item)) {
-							routingProfiles.get(i).setSelected(true);
-						} else {
-							routingProfiles.get(i).setSelected(false);
-						}
-						notifyItemChanged(i);
-					}
+					listener.selectedNavType(position);
+					holder.radioButton.setChecked(true);
+					items.get(position).setSelected(true);
+					items.get(previousSelection).setSelected(false);
+					notifyItemChanged(previousSelection);
+
+					previousSelection = position;
+
 				}
 			});
 		}
@@ -149,6 +146,9 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	interface NavTypeDialogListener {
 		void selectedNavType(int pos);
+	}
+	interface IconIdListener {
+		void selecedIconId(int iconRes);
 	}
 
 }

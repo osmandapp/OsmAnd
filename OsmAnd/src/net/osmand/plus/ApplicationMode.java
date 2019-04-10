@@ -406,7 +406,7 @@ public class ApplicationMode {
 
 	private final int key;
 	private final String stringKey;
-
+	private String userName;
 	private ApplicationMode parent;
 	private int mapIconId = R.drawable.map_world_globe_dark;
 	private int smallIconDark = R.drawable.ic_world_globe_dark;

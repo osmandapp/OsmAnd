@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.view.MenuItem;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 
@@ -15,11 +16,12 @@ public class SelectedProfileActivity extends OsmandActionBarActivity {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_fragment_layout);
-
 		Intent intent = getIntent();
 		if (intent.getExtras() != null) {
+			String stringKey = intent.getStringExtra("stringKey");
+			String title = stringKey == null ? "New Profile" : stringKey.toUpperCase(); //todo need normal title
 			if (getSupportActionBar() != null) {
-//				getSupportActionBar().setTitle(((AppProfile) intent.getParcelableExtra("profile")).getTitle());
+				getSupportActionBar().setTitle(title);
 				getSupportActionBar().setElevation(5.0f);
 			}
 		}

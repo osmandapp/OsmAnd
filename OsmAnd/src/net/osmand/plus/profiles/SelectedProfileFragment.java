@@ -14,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.NavTypeBottomSheetDialogFragment.NavTypeDialogListener;
+import net.osmand.plus.profiles.NavTypeBottomSheetDialogFragment.IconIdListener;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import org.apache.commons.logging.Log;
@@ -27,20 +29,24 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 
 	private static final Log LOG = PlatformUtil.getLog(SelectedProfileFragment.class);
 
-	AppProfile profile = null;
-	ArrayList<RoutingProfile> routings;
+	ApplicationMode profile = null;
+	ArrayList<RoutingProfile> routingProfiles;
 	OsmandApplication app;
 
+	boolean isDataChanged = false;
+
 	private NavTypeDialogListener navTypeDialogListener = null;
+	private IconIdListener iconIdListener = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		if (getArguments() != null) {
-			profile = getArguments().getParcelable("profile");
+			String modeName = getArguments().getString("stringKey");
+			profile = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.CAR);
 		}
-		routings = getRoutingProfiles();
+		routingProfiles = getRoutingProfiles();
 	}
 
 	@Nullable
@@ -63,7 +69,7 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn
 			.getBackground();
 
-		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.getIconRes(),
+		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.getSmallIconDark(),
 			isNightMode ? R.color.active_buttons_and_links_dark
 				: R.color.active_buttons_and_links_light));
 
@@ -79,16 +85,24 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 				.setColor(app.getResources().getColor(R.color.text_field_box_light));
 		}
 
+		navTypeDialogListener = new NavTypeDialogListener() {
+			@Override
+			public void selectedNavType(int pos) {
+				navTypeEt.setText(routingProfiles.get(pos).getName());
+			}
+		};
+
 		select_nav_type_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				final NavTypeBottomSheetDialogFragment fragment = new NavTypeBottomSheetDialogFragment();
-
+				fragment.setNavTypeListener(navTypeDialogListener);
 				Bundle bundle = new Bundle();
-				bundle.putParcelableArrayList("routing_profiles", routings);
+				bundle.putParcelableArrayList("routing_profiles", routingProfiles);
 				fragment.setArguments(bundle);
-				getActivity().getSupportFragmentManager().beginTransaction().add(fragment, "tag")
+				getActivity().getSupportFragmentManager().beginTransaction().add(fragment, "select_nav_type")
 					.commitAllowingStateLoss();
+
 
 //				navTypeEt.setText("Car");
 //				navTypeEt.setCursorVisible(false);

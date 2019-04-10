@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+
+    -->
+    <string name="osmand_default_routing">OsmAnd routing</string>
+    <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
+    <string name="application_profiles">Application profiles</string>
     <string name="routing_attr_avoid_tram_name">Avoid trams</string>
     <string name="routing_attr_avoid_tram_description">Avoid trams</string>
     <string name="routing_attr_avoid_bus_name">Avoid buses</string>

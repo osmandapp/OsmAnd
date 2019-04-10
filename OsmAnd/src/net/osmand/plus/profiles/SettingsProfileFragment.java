@@ -1,6 +1,7 @@
 package net.osmand.plus.profiles;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -108,9 +109,9 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void editProfile(ApplicationMode item) {
-//				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
-//				intent.putExtra("profile", item);
-//				startActivity(intent);
+				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
+				intent.putExtra("stringKey", item.getStringKey());
+				startActivity(intent);
 			}
 		};
 		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), listener);
