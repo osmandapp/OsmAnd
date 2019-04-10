@@ -57,6 +57,23 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	public static final String FAVOURITES = "favourites";
 
 	private PointType pointType = PointType.START;
+	private DialogListener listener;
+
+	public interface DialogListener {
+		void onSelectOnMap(AddPointBottomSheetDialog dialog);
+	}
+
+	public DialogListener getListener() {
+		return listener;
+	}
+
+	public void setListener(DialogListener listener) {
+		this.listener = listener;
+	}
+
+	public PointType getPointType() {
+		return pointType;
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -249,6 +266,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						if (mapActivity != null) {
 							MapRouteInfoMenu menu = mapActivity.getMapRouteInfoMenu();
 							menu.selectOnScreen(pointType);
+							DialogListener listener = getListener();
+							if (listener != null) {
+								listener.onSelectOnMap(AddPointBottomSheetDialog.this);
+							}
 						}
 						dismiss();
 					}
