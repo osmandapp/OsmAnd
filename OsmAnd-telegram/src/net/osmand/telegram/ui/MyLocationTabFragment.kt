@@ -130,6 +130,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					appBarCollapsed = collapsed
 					adjustText()
 					adjustAppbar()
+					adjustSearchBox()
 					optionsBtn.visibility = if (collapsed) View.VISIBLE else View.GONE
 				}
 			})
@@ -183,7 +184,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				setBackgroundDrawable(searchBoxBg)
 			}
 			findViewById<View>(R.id.search_button).setOnClickListener {
-				Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
+				activity.supportFragmentManager?.also { SearchDialogFragment.showInstance(it, this@MyLocationTabFragment) }
 			}
 			findViewById<ImageView>(R.id.search_icon)
 				.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_search_dark))
@@ -635,6 +636,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						}
 					}
 				}
+				holder.topShadowDivider?.visibility = View.GONE
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 				holder.itemView.setOnClickListener {
 					if (live) {
@@ -754,6 +756,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		inner class ChatViewHolder(val view: View) : BaseViewHolder(view) {
 			val checkBox: CheckBox? = view.findViewById(R.id.check_box)
+			val topShadowDivider: View? = view.findViewById(R.id.top_divider)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 		}
 
