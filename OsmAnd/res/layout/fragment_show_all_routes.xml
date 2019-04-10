@@ -35,11 +35,11 @@
 			android:id="@+id/back_button_flow"
 			android:layout_width="@dimen/route_info_toolbar_button_size"
 			android:layout_height="@dimen/route_info_toolbar_button_size"
+			android:layout_marginLeft="8dp"
+			android:layout_marginTop="8dp"
 			android:background="@drawable/btn_circle_transparent_full"
 			android:contentDescription="@string/shared_string_back"
 			android:src="@drawable/ic_arrow_back"
-			android:layout_marginTop="8dp"
-			android:layout_marginLeft="8dp"
 			android:tint="?attr/primary_icon_color" />
 
 		<LinearLayout
@@ -207,6 +207,31 @@
 			android:layout_gravity="top"
 			android:scaleType="fitXY"
 			android:src="@drawable/bg_contextmenu_shadow" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/pages_control"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp"
+		android:background="?attr/pages_bg"
+		android:gravity="center">
+
+		<View
+			android:layout_width="@dimen/pages_item_size"
+			android:layout_height="@dimen/pages_item_size"
+			android:layout_marginLeft="@dimen/pages_item_margin"
+			android:layout_marginRight="@dimen/pages_item_padding"
+			android:background="@drawable/pages_active_dark" />
+
+		<View
+			android:layout_width="@dimen/pages_item_size"
+			android:layout_height="@dimen/pages_item_size"
+			android:layout_marginRight="@dimen/pages_item_margin"
+			android:background="@drawable/pages_inactive_dark" />
+
 
 	</LinearLayout>
 

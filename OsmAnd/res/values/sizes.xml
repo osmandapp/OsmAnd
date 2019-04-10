@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<dimen name="contex_menu_top_shadow_height">16dp</dimen>
 	<dimen name="dialog_button_ex_height">60dp</dimen>
 	<dimen name="dialog_button_ex_min_width">72dp</dimen>
 	<dimen name="dialog_button_ex_max_width">120dp</dimen>
@@ -35,6 +36,7 @@
 	<dimen name="dashboard_land_width">360dp</dimen>
     <dimen name="dashboard_map_toolbar">56dp</dimen>
 	<dimen name="dash_parking_height">78dp</dimen>
+	<dimen name="dashboard_land_shadow_width">15dp</dimen>
 
     <dimen name="subHeaderPadding">2dp</dimen>
     <dimen name="subHeaderMarginLeft">15dp</dimen>
@@ -283,8 +285,12 @@
 	<dimen name="route_info_list_text_padding">54dp</dimen>
 	<dimen name="route_info_legend_padding">8dp</dimen>
 	<dimen name="route_info_warning_padding">18dp</dimen>
-	<dimen name="route_info_chart_height">52dp</dimen>
+	<dimen name="route_info_chart_height">71dp</dimen>
 	<dimen name="route_info_toolbar_button_size">40dp</dimen>
+	<dimen name="route_info_control_buttons_height">48dp</dimen>
+	<dimen name="route_info_button_bg_line_radius">18dp</dimen>
+	<dimen name="route_info_card_details_margin">9dp</dimen>
+	<dimen name="route_info_legend_item_size">40dp</dimen>
 
 	<dimen name="multi_selection_header_height">52dp</dimen>
 
@@ -328,6 +334,11 @@
 
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 	<dimen name="text_button_line_spacing_multiplier" format="float">1.2</dimen>
+
+	<dimen name="pages_item_size">4dp</dimen>
+	<dimen name="pages_item_padding">3dp</dimen>
+	<dimen name="pages_item_margin">4dp</dimen>
+
 
 	<dimen name="setting_profile_item_height">64dp</dimen>
 	<dimen name="setting_profile_image_margin">20dp</dimen>

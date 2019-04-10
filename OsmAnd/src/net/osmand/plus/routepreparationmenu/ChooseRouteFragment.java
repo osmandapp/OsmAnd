@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -27,14 +28,19 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -82,13 +88,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private View zoomButtonsView;
 	@Nullable
 	private ImageButton myLocButtonView;
+	@Nullable
+	private ViewGroup pagesView;
 
 	private boolean portrait;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
+	private int currentMenuState;
+	private int routesCount;
 
 	private boolean publicTransportMode;
 	private int routeInfoMenuState = -1;
+	private boolean openingAnalyseOnMap = false;
 
 	@Nullable
 	@Override
@@ -107,8 +118,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
 			initialMenuState = args.getInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 		}
+		routesCount = 1;
 		if (routes != null && !routes.isEmpty()) {
 			publicTransportMode = true;
+			routesCount = routes.size();
 		}
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
@@ -121,7 +134,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		this.viewPager = viewPager;
 		if (!portrait) {
 			initialMenuState = MenuState.FULL_SCREEN;
-			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.WRAP_CONTENT));
+			int width = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width) - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
+			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
 			solidToolbarView.setVisibility(View.VISIBLE);
 			final TypedValue typedValueAttr = new TypedValue();
 			mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
@@ -129,9 +143,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 		viewPager.setClipToPadding(false);
-		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), publicTransportMode ? routes.size() : 1, initialMenuState);
+		currentMenuState = initialMenuState;
+		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), routesCount);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
+		viewPager.setOffscreenPageLimit(routesCount);
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			public void onPageScrollStateChanged(int state) {
 			}
@@ -141,22 +157,30 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 			public void onPageSelected(int position) {
 				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
+				View view = getView();
+				if (mapActivity != null && view != null) {
 					mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(position);
 					mapActivity.refreshMap();
+					buildPagesControl(view);
 					List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = ChooseRouteFragment.this.routeDetailsFragments;
 					for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
 						RouteDetailsFragment f = ref.get();
 						if (f != null) {
 							PublicTransportCard card = f.getTransportCard();
 							if (card != null) {
-								card.update();
+								card.updateButtons();
+							}
+							if (f == getCurrentFragment()) {
+								updateZoomButtonsPos(f, f.getViewY(), true);
+								updatePagesViewPos(f, f.getViewY(), true);
 							}
 						}
 					}
 				}
 			}
 		});
+		this.pagesView = (ViewGroup) view.findViewById(R.id.pages_control);
+		buildPagesControl(view);
 		buildZoomButtons(view);
 		buildMenuButtons(view);
 		return view;
@@ -227,17 +251,66 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
 	}
 
+	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {
+		openingAnalyseOnMap = true;
+		OsmandApplication app = requireMyApplication();
+		final OsmandSettings settings = app.getSettings();
+		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+				settings.getLastKnownMapZoom(),
+				new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+				false,
+				gpxItem);
+
+		dismiss();
+		MapActivity.launchMapActivityMoveToTop(getMapActivity());
+	}
+
 	public void dismiss() {
 		try {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-				if (routeInfoMenuState != -1) {
-					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu(routeInfoMenuState);
+				if (routeInfoMenuState != -1 && !openingAnalyseOnMap) {
+					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog(routeInfoMenuState);
 				}
 			}
 		} catch (Exception e) {
 			// ignore
+		}
+	}
+
+	private void buildPagesControl(@NonNull View view) {
+		ViewGroup pagesView = this.pagesView;
+		if (pagesView != null) {
+			pagesView.removeAllViews();
+			LockableViewPager viewPager = this.viewPager;
+			if (portrait && routesCount > 1 && viewPager != null) {
+				int itemSize = getResources().getDimensionPixelSize(R.dimen.pages_item_size);
+				int itemMargin = getResources().getDimensionPixelSize(R.dimen.pages_item_margin);
+				int itemPadding = getResources().getDimensionPixelSize(R.dimen.pages_item_padding);
+				for (int i = 0; i < routesCount; i++) {
+					boolean active = i == viewPager.getCurrentItem();
+					Context ctx = view.getContext();
+					View itemView = new View(ctx);
+					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(itemSize, itemSize);
+					AndroidUtils.setBackground(ctx, itemView, nightMode,
+							active ? R.drawable.pages_active_light : R.drawable.pages_inactive_light,
+							active ? R.drawable.pages_active_dark : R.drawable.pages_inactive_dark);
+					if (i == 0) {
+						layoutParams.setMargins(itemMargin, 0, itemPadding, 0);
+					} else if (i == routesCount - 1) {
+						layoutParams.setMargins(0, 0, itemMargin, 0);
+					} else {
+						layoutParams.setMargins(0, 0, itemPadding, 0);
+					}
+					itemView.setLayoutParams(layoutParams);
+					pagesView.addView(itemView);
+				}
+				pagesView.requestLayout();
+				pagesView.setVisibility(View.VISIBLE);
+			} else {
+				pagesView.setVisibility(View.GONE);
+			}
 		}
 	}
 
@@ -349,6 +422,26 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				}
 			}
 		}
+	}
+
+	private void updatePagesViewVisibility(int menuState) {
+		View pagesView = this.pagesView;
+		if (portrait && routesCount > 1 && pagesView != null) {
+			if (menuState != MenuState.FULL_SCREEN) {
+				if (pagesView.getVisibility() != View.VISIBLE) {
+					pagesView.setVisibility(View.VISIBLE);
+				}
+			} else {
+				if (pagesView.getVisibility() == View.VISIBLE) {
+					pagesView.setVisibility(View.INVISIBLE);
+				}
+			}
+		}
+	}
+
+	private int getPagesViewHeight() {
+		ViewGroup pagesView = this.pagesView;
+		return pagesView != null ? pagesView.getHeight() : 0;
 	}
 
 	private int getZoomButtonsHeight() {
@@ -644,10 +737,24 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
+	public void updatePagesViewPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+		ViewGroup pagesView = this.pagesView;
+		if (pagesView != null) {
+			int pagesY = y - getPagesViewHeight() + fragment.getShadowHeight() +
+					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(pagesView.getContext()) : 0);
+			if (animated) {
+				fragment.animateView(pagesView, pagesY);
+			} else {
+				pagesView.setY(pagesY);
+			}
+		}
+	}
+
 	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
 		View zoomButtonsView = this.zoomButtonsView;
 		if (zoomButtonsView != null) {
-			int zoomY = y - getZoomButtonsHeight() - fragment.getTopShadowMargin();
+			int zoomY = y - getZoomButtonsHeight() +
+					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(zoomButtonsView.getContext()) : 0);
 			if (animated) {
 				fragment.animateView(zoomButtonsView, zoomY);
 			} else {
@@ -668,15 +775,15 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
 				}
 			}
-			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(visibility);
 			mapActivity.refreshMap();
 		}
 	}
 
 	@Override
-	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
 		if (fragment == getCurrentFragment()) {
 			updateToolbars(fragment, y, animated);
+			updatePagesViewPos(fragment, y, animated);
 			updateZoomButtonsPos(fragment, y, animated);
 			updateViewPager(fragment.getViewY());
 		}
@@ -685,17 +792,18 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	@Override
 	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState) {
 		LockableViewPager viewPager = this.viewPager;
-		if (viewPager != null) {
-			int currentItem = viewPager.getCurrentItem();
+		RouteDetailsFragment current = getCurrentFragment();
+		if (viewPager != null && current != null && fragment == current) {
+			currentMenuState = menuState;
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
 			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
 				RouteDetailsFragment f = ref.get();
 				if (f != null) {
-					boolean current = f.getRouteId() == currentItem;
-					if (!current && f.getCurrentMenuState() != menuState) {
+					if (f != current && f.getCurrentMenuState() != menuState) {
 						f.openMenuScreen(menuState, false);
 					}
-					if (current) {
+					if (f == current) {
+						updatePagesViewVisibility(menuState);
 						updateZoomButtonsVisibility(menuState);
 						updateViewPager(fragment.getViewY());
 					}
@@ -748,12 +856,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	public class RoutesPagerAdapter extends FragmentPagerAdapter {
 		private int routesCount;
-		private int initialMenuState;
 
-		RoutesPagerAdapter(FragmentManager fm, int routesCount, int initialMenuState) {
+		RoutesPagerAdapter(FragmentManager fm, int routesCount) {
 			super(fm);
 			this.routesCount = routesCount;
-			this.initialMenuState = initialMenuState;
 		}
 
 		@Override
@@ -764,7 +870,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		@Override
 		public Fragment getItem(int position) {
 			Bundle args = new Bundle();
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
+			args.putInt(ContextMenuFragment.MENU_STATE_KEY, currentMenuState);
 			args.putInt(RouteDetailsFragment.ROUTE_ID_KEY, position);
 			return Fragment.instantiate(ChooseRouteFragment.this.getContext(), RouteDetailsFragment.class.getName(), args);
 		}

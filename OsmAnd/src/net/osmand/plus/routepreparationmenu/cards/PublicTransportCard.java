@@ -86,6 +86,18 @@ public class PublicTransportCard extends BaseCard {
 		fromLine.setText(getFirstLineDescrSpan());
 		wayLine.setText(getSecondLineDescrSpan(segments));
 
+		updateButtons();
+
+		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow && showDivider ? View.VISIBLE : View.GONE);
+		if (transparentBackground) {
+			view.findViewById(R.id.routes_info_container).setBackgroundDrawable(null);
+		}
+	}
+
+	public void updateButtons() {
+		int color = getActiveColor();
 		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
 		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
 
@@ -95,7 +107,6 @@ public class PublicTransportCard extends BaseCard {
 		} else {
 			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
-		int color = getActiveColor();
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -107,7 +118,6 @@ public class PublicTransportCard extends BaseCard {
 				}
 			}
 		});
-
 		FrameLayout showButton = (FrameLayout) view.findViewById(R.id.show_button);
 		TextView showButtonDescr = (TextView) view.findViewById(R.id.show_button_descr);
 		if (isCurrentRoute()) {
@@ -136,13 +146,6 @@ public class PublicTransportCard extends BaseCard {
 			});
 		}
 		showButtonDescr.setTextColor(color);
-
-		view.findViewById(R.id.bottom_shadow).setVisibility(showBottomShadow ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.card_divider).setVisibility(showTopShadow ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.top_divider).setVisibility(!showTopShadow && showDivider ? View.VISIBLE : View.GONE);
-		if (transparentBackground) {
-			view.findViewById(R.id.routes_info_container).setBackgroundDrawable(null);
-		}
 	}
 
 	public int getRouteId() {

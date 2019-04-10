@@ -244,6 +244,8 @@
         <item name="main_font_color_basic">@color/main_font_light</item>
         <item name="active_color_basic">@color/active_buttons_and_links_light</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_light</item>
+        <item name="activity_background_basic">@color/activity_background_light</item>
+        <item name="pages_bg">@drawable/pages_bg_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -474,6 +476,8 @@
         <item name="main_font_color_basic">@color/main_font_dark</item>
         <item name="active_color_basic">@color/active_buttons_and_links_dark</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_dark</item>
+        <item name="activity_background_basic">@color/activity_background_dark</item>
+        <item name="pages_bg">@drawable/pages_bg_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

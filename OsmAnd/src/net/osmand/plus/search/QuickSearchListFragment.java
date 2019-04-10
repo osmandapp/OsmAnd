@@ -11,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import net.osmand.GPXUtilities;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
@@ -36,7 +34,6 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +43,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	private QuickSearchListAdapter listAdapter;
 	private boolean touching;
 	private boolean scrolling;
+	private boolean showResult;
 
 	enum SearchListFragmentType {
 		HISTORY,
@@ -101,49 +99,14 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 						showResult(sr);
 					} else {
-						if ((sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE)
-								&& sr.file != null && sr.object instanceof City) {
-							City c = (City) sr.object;
-							if (isCityEmpty(c, sr)) {
-								showResult(sr);
-								return;
-							}
+						if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE) {
+							showResult = true;
 						}
 						dialogFragment.completeQueryWithObject(sr);
 					}
 				}
 			}
 		}
-	}
-
-	public boolean isCityEmpty(City c, SearchResult sr) {
-		final boolean isEmpty[] = new boolean[1];
-		isEmpty[0] = true;
-		if (c.getStreets().isEmpty()) {
-			ResultMatcher<Street> resultMatcher = new ResultMatcher<Street>() {
-				boolean isCancelled = false;
-
-				@Override
-				public boolean publish(Street object) {
-					isCancelled = true;
-					isEmpty[0] = false;
-					return false;
-				}
-
-				@Override
-				public boolean isCancelled() {
-					return isCancelled;
-				}
-			};
-			try {
-				sr.file.preloadStreets(c, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			isEmpty[0] = false;
-		}
-		return isEmpty[0];
 	}
 
 	@Override
@@ -196,7 +159,12 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		dialogFragment.onSearchListFragmentResume(this);
 	}
 
+	public boolean isShowResult() {
+		return showResult;
+	}
+
 	public void showResult(SearchResult searchResult) {
+		showResult = false;
 		if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();

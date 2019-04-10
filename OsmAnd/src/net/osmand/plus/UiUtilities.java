@@ -80,7 +80,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getThemedIcon(@DrawableRes int id) {
-		return getDrawable(id, app.getSettings().isLightContent() ? R.color.icon_color : 0);
+		return getDrawable(id, R.color.description_font_and_bottom_sheet_icons);
 	}
 
 	public Drawable getIcon(@DrawableRes int id) {

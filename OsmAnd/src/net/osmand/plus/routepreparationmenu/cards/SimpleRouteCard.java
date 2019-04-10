@@ -17,6 +17,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class SimpleRouteCard extends BaseCard {
 
 	private MapActivity mapActivity;
 	private GPXFile gpx;
+	private LineData data;
 
 	public SimpleRouteCard(MapActivity mapActivity, GPXFile gpx) {
 		super(mapActivity);
@@ -112,21 +114,25 @@ public class SimpleRouteCard extends BaseCard {
 		final GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 		GpxUiHelper.setupGPXChart(mChart, 4, 4f, 4f, !nightMode, false);
-		GpxUiHelper.OrderedLineDataSet elevationDataSet;
-		GpxUiHelper.OrderedLineDataSet slopeDataSet;
 		if (analysis.hasElevationData) {
-			List<ILineDataSet> dataSets = new ArrayList<>();
-			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true);
-			if (elevationDataSet != null) {
-				dataSets.add(elevationDataSet);
+			LineData data = this.data;
+			if (data == null) {
+				List<ILineDataSet> dataSets = new ArrayList<>();
+				OrderedLineDataSet slopeDataSet = null;
+				OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
+						GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true);
+				if (elevationDataSet != null) {
+					dataSets.add(elevationDataSet);
+					slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+							GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
+				}
+				if (slopeDataSet != null) {
+					dataSets.add(slopeDataSet);
+				}
+				data = new LineData(dataSets);
+				this.data = data;
 			}
-			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
-			if (slopeDataSet != null) {
-				dataSets.add(slopeDataSet);
-			}
-			mChart.setData(new LineData(dataSets));
+			mChart.setData(data);
 			mChart.setVisibility(View.VISIBLE);
 		} else {
 			mChart.setVisibility(View.GONE);

@@ -12,24 +12,13 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<FrameLayout
-			android:id="@+id/top_shadow"
-			android:layout_width="match_parent"
-			android:layout_height="16dp">
-
-			<ImageView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_gravity="bottom"
-				android:scaleType="fitXY"
-				android:src="@drawable/bg_shadow_onmap" />
-
-		</FrameLayout>
+		<include layout="@layout/context_menu_top_shadow" />
 
 		<LinearLayout
 			android:id="@+id/route_menu_top_shadow_all"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:background="?attr/card_and_list_background_basic"
 			android:orientation="vertical">
 
 			<FrameLayout
@@ -41,6 +30,7 @@
 					android:id="@+id/modes_layout"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
+					android:background="?attr/card_and_list_background_basic"
 					tools:ignore="UselessParent">
 
 					<LinearLayout
@@ -60,6 +50,7 @@
 						android:id="@+id/app_modes_fold_container"
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
+						android:background="@color/color_transparent"
 						android:layout_gravity="start"
 						android:orientation="horizontal">
 
@@ -71,7 +62,7 @@
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
 							android:paddingRight="@dimen/route_info_icon_padding_right"
 							android:src="@drawable/ic_action_arrow_down"
-							android:tint="?attr/primary_icon_color" />
+							android:tint="@color/description_font_and_bottom_sheet_icons" />
 
 					</LinearLayout>
 
@@ -79,6 +70,7 @@
 						android:id="@+id/app_modes_options_container"
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
+						android:background="@color/color_transparent"
 						android:layout_gravity="end">
 
 						<ImageView
@@ -156,12 +148,12 @@
 					<FrameLayout
 						android:id="@+id/from_button"
 						android:layout_width="wrap_content"
-						android:layout_height="@dimen/route_info_buttons_height"
+						android:layout_height="wrap_content"
 						android:layout_marginLeft="@dimen/context_menu_padding_margin_medium"
 						android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
 						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
-						tools:background="@drawable/btn_border_rounded_dark">
+						tools:background="@drawable/btn_rounded_dark">
 
 						<LinearLayout
 							android:id="@+id/from_button_container"
@@ -186,12 +178,13 @@
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
 								osmand:typeface="@string/font_roboto_medium"
+								android:visibility="gone"
 								tools:ignore="UnusedAttribute" />
 
 							<ImageView
 								android:id="@+id/from_button_image_view"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
+								android:layout_width="@dimen/standard_icon_size"
+								android:layout_height="@dimen/standard_icon_size"
 								android:layout_marginLeft="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
@@ -265,7 +258,7 @@
 							android:singleLine="true"
 							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"
-							tools:text="Intermediate point"/>
+							tools:text="Intermediate point" />
 
 					</LinearLayout>
 
@@ -277,7 +270,7 @@
 						android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
 						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
-						tools:background="@drawable/btn_border_rounded_dark">
+						tools:background="@drawable/btn_rounded_dark">
 
 						<LinearLayout
 							android:id="@+id/via_button_container"
@@ -306,8 +299,8 @@
 
 							<ImageView
 								android:id="@+id/via_button_image_view"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
+								android:layout_width="@dimen/standard_icon_size"
+								android:layout_height="@dimen/standard_icon_size"
 								android:layout_marginLeft="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
@@ -378,7 +371,7 @@
 							android:singleLine="true"
 							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"
-							tools:text="Destination"/>
+							tools:text="Destination" />
 
 					</LinearLayout>
 
@@ -390,7 +383,7 @@
 						android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 						android:layout_marginRight="@dimen/context_menu_padding_margin_medium"
 						android:layout_marginBottom="@dimen/route_info_icon_vertical_padding"
-						tools:background="@drawable/btn_border_rounded_dark">
+						tools:background="@drawable/btn_rounded_dark">
 
 						<LinearLayout
 							android:id="@+id/to_button_container"
@@ -419,8 +412,8 @@
 
 							<ImageView
 								android:id="@+id/to_button_image_view"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
+								android:layout_width="@dimen/standard_icon_size"
+								android:layout_height="@dimen/standard_icon_size"
 								android:layout_marginLeft="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginTop="@dimen/route_info_icon_vertical_padding"
 								android:layout_marginRight="@dimen/route_info_icon_vertical_padding"
@@ -527,22 +520,22 @@
 			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:foregroundGravity="top|fill_horizontal"
-			android:foreground="@drawable/bg_contextmenu_shadow">
+			android:foreground="@drawable/bg_contextmenu_shadow"
+			android:foregroundGravity="top|fill_horizontal">
 
 			<net.osmand.plus.LockableScrollView
 				android:id="@+id/route_menu_bottom_scroll"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				tools:background="?attr/ctx_menu_info_view_bg">
+				android:background="?attr/activity_background_basic">
 
 				<LinearLayout
 					android:id="@+id/route_menu_cards_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:background="?attr/activity_background_basic"
 					android:orientation="vertical"
-					android:paddingBottom="60dp"
-					tools:background="?attr/ctx_menu_info_view_bg">
+					android:paddingBottom="30dp">
 
 				</LinearLayout>
 
@@ -582,6 +575,7 @@
 		android:orientation="vertical">
 
 		<ImageView
+			android:id="@+id/buttons_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="10dp"
 			android:layout_gravity="bottom"
@@ -590,7 +584,7 @@
 		<include
 			layout="@layout/route_info_menu_control_buttons"
 			android:layout_width="match_parent"
-			android:layout_height="48dp"
+			android:layout_height="@dimen/route_info_control_buttons_height"
 			android:layout_gravity="bottom" />
 
 	</LinearLayout>

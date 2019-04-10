@@ -3,7 +3,7 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="48dp"
+	android:layout_height="@dimen/route_info_control_buttons_height"
 	android:orientation="horizontal">
 
 	<FrameLayout
@@ -36,7 +36,7 @@
 		android:layout_width="1dp"
 		android:layout_height="match_parent"
 		android:background="?attr/divider_color_basic"
-		android:visibility="gone"/>
+		android:visibility="visible"/>
 
 	<FrameLayout
 		android:id="@+id/start_button"

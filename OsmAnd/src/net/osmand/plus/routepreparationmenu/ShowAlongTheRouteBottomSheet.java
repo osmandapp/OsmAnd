@@ -460,6 +460,17 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		}
 	}
 
+	private MapActivity getMapActivity() {
+		return (MapActivity) getActivity();
+	}
+
+	private void updateMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
+	}
+
 	protected void selectDifferentRadius(final int type) {
 		int length = WaypointHelper.SEARCH_RADIUS_VALUES.length;
 		String[] names = new String[length];
@@ -548,6 +559,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			ShowAlongTheRouteBottomSheet fragment = fragmentRef.get();
 			if (fragment != null && fragment.isAdded()) {
 				fragment.updateAdapter();
+				fragment.updateMenu();
 			}
 		}
 	}

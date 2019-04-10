@@ -28,6 +28,8 @@ import net.osmand.util.MapUtils;
 public class TransportRoutePlanner {
 	
 	private static final boolean MEASURE_TIME = false;
+	public static final long GEOMETRY_WAY_ID = -1;
+	public static final long STOPS_WAY_ID = -2;
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
 		ctx.startCalcTime = System.currentTimeMillis();
@@ -371,11 +373,11 @@ public class TransportRoutePlanner {
 		}
 
 		public List<Way> getGeometry() {
-			List<Way> list = new ArrayList<Way>();
+			List<Way> list = new ArrayList<>();
 			route.mergeForwardWays();
-			if(DISPLAY_FULL_SEGMENT_ROUTE) {
+			if (DISPLAY_FULL_SEGMENT_ROUTE) {
 				System.out.println("TOTAL SEGMENTS: " + route.getForwardWays().size());
-				if(route.getForwardWays().size() > DISPLAY_SEGMENT_IND) {
+				if (route.getForwardWays().size() > DISPLAY_SEGMENT_IND) {
 					return Collections.singletonList(route.getForwardWays().get(DISPLAY_SEGMENT_IND));
 				}
 				return route.getForwardWays();				
@@ -386,38 +388,38 @@ public class TransportRoutePlanner {
 			LatLon str = getStart().getLocation();
 			LatLon en = getEnd().getLocation();
 			int endInd = -1;
-			List<Node> res = new ArrayList<Node>();
-			for(int i = 0;  i < fw.size() ; i++) {
+			List<Node> res = new ArrayList<>();
+			for (int i = 0;  i < fw.size() ; i++) {
 				List<Node> nodes = fw.get(i).getNodes();
-				for(int j = 0; j < nodes.size(); j++) {
+				for (int j = 0; j < nodes.size(); j++) {
 					Node n = nodes.get(j);
-					if(MapUtils.getDistance(str, n.getLatitude(), n.getLongitude()) < minStart) {
+					if (MapUtils.getDistance(str, n.getLatitude(), n.getLongitude()) < minStart) {
 						minStart = MapUtils.getDistance(str, n.getLatitude(), n.getLongitude());
 						res.clear();
 					}
 					res.add(n);
-					if(MapUtils.getDistance(en, n.getLatitude(), n.getLongitude()) < minEnd) {
+					if (MapUtils.getDistance(en, n.getLatitude(), n.getLongitude()) < minEnd) {
 						endInd = res.size();
 						minEnd = MapUtils.getDistance(en, n.getLatitude(), n.getLongitude());
 					} 
 				}
 			}
-			Way way = new Way(-1);
-			if (res.isEmpty()) {
+			Way way;
+			if (res.isEmpty() || endInd == -1) {
+				way = new Way(STOPS_WAY_ID);
 				for (int i = start; i <= end; i++) {
 					LatLon l = getStop(i).getLocation();
 					Node n = new Node(l.getLatitude(), l.getLongitude(), -1);
 					way.addNode(n);
 				}
-				list.add(way);
 			} else {
-				for(int k = 0; k < res.size()  && k < endInd; k++) {
+				way = new Way(GEOMETRY_WAY_ID);
+				for(int k = 0; k < res.size() && k < endInd; k++) {
 					way.addNode(res.get(k));
 				}
 			}
 			list.add(way);
 			return list;
-			
 		}
 		
 		public double getTravelDist() {

@@ -2,9 +2,7 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -55,7 +53,7 @@ public class WarningCard extends BaseCard {
 
 				@Override
 				public void onClick(@NonNull View widget) {
-					WikipediaDialogFragment.showFullArticle(app, Uri.parse(OSMAND_BLOG_LINK), nightMode);
+					WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(OSMAND_BLOG_LINK), nightMode);
 				}
 			};
 			int startIndex = text.lastIndexOf(" ");
@@ -78,7 +76,7 @@ public class WarningCard extends BaseCard {
 
 				@Override
 				public void onClick(@NonNull View widget) {
-					openAddPointDialog();
+					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.INTERMEDIATE);
 				}
 			};
 			text.setSpan(clickableSpan, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -86,18 +84,6 @@ public class WarningCard extends BaseCard {
 			warningDescr.setMovementMethod(LinkMovementMethod.getInstance());
 			warningDescr.setTextSize(15);
 			warningDescr.setText(text);
-		}
-	}
-
-	private void openAddPointDialog() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			Bundle args = new Bundle();
-			args.putString(AddPointBottomSheetDialog.POINT_TYPE_KEY, PointType.INTERMEDIATE.name());
-			AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(true);
-			fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 		}
 	}
 }

@@ -5,7 +5,6 @@
 	android:id="@+id/route_info_details_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/card_and_list_background_basic"
 	android:orientation="vertical">
 
 	<View
@@ -19,6 +18,7 @@
 		android:id="@+id/RouteInfoControls"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="?attr/card_and_list_background_basic"
 		android:orientation="vertical">
 
 		<LinearLayout
@@ -33,13 +33,14 @@
 				android:layout_height="wrap_content"
 				android:minHeight="@dimen/route_info_list_item_height"
 				android:orientation="horizontal"
-				android:paddingBottom="@dimen/route_info_details_padding"
-				android:paddingTop="@dimen/route_info_details_padding">
+				android:paddingTop="@dimen/route_info_details_padding"
+				android:paddingBottom="@dimen/route_info_details_padding">
 
 				<LinearLayout
 					android:layout_width="0dp"
-					android:layout_height="36dp"
+					android:layout_height="wrap_content"
 					android:layout_weight="1"
+					android:minHeight="36dp"
 					android:orientation="horizontal"
 					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
 					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
@@ -66,14 +67,15 @@
 							android:gravity="left"
 							android:singleLine="true"
 							android:textColor="?attr/main_font_color_basic"
-							android:textSize="@dimen/default_list_text_size" />
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="10 km" />
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/DistanceTitle"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="left"
-							android:text="@string/route_distance"
+							android:text="@string/distance"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
 							android:textSize="@dimen/default_sub_text_size" />
 
@@ -90,8 +92,9 @@
 
 				<LinearLayout
 					android:layout_width="0dp"
-					android:layout_height="36dp"
+					android:layout_height="wrap_content"
 					android:layout_weight="1"
+					android:minHeight="36dp"
 					android:orientation="horizontal"
 					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
 					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
@@ -118,16 +121,17 @@
 							android:gravity="left"
 							android:singleLine="true"
 							android:textColor="?attr/main_font_color_basic"
-							android:textSize="@dimen/default_list_text_size" />
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="5 min" />
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/DurationTitle"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="left"
-							android:text="@string/arrive_at_time"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
-							android:textSize="@dimen/default_sub_text_size" />
+							android:textSize="@dimen/default_sub_text_size"
+							tools:text="@string/arrive_at_time" />
 
 					</LinearLayout>
 
@@ -146,18 +150,18 @@
 		<FrameLayout
 			android:id="@+id/details_button"
 			android:layout_width="match_parent"
-			android:layout_height="36dp"
+			android:layout_height="@dimen/route_info_buttons_height"
 			android:layout_gravity="center_vertical"
-			android:layout_marginBottom="@dimen/route_info_details_padding"
 			android:layout_marginLeft="@dimen/route_info_buttons_padding_top_bottom"
-			android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
 			android:layout_marginTop="@dimen/route_info_details_padding"
+			android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
+			android:layout_marginBottom="@dimen/route_info_details_padding"
 			android:orientation="horizontal">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/details_button_descr"
 				android:layout_width="match_parent"
-				android:layout_height="36dp"
+				android:layout_height="match_parent"
 				android:layout_gravity="center"
 				android:ellipsize="end"
 				android:gravity="center"

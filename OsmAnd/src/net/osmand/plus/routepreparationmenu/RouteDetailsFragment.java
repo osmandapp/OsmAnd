@@ -1,10 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -13,7 +9,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.view.ContextThemeWrapper;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -26,8 +21,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,6 +62,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard.PublicTransportCardListener;
+import net.osmand.plus.routepreparationmenu.cards.RouteDirectionsCard;
 import net.osmand.plus.routepreparationmenu.cards.RouteInfoCard;
 import net.osmand.plus.routepreparationmenu.cards.RouteStatisticCard;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -76,7 +70,6 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -104,7 +97,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private int toolbarHeightPx;
 
 	private GPXFile gpx;
+	@Nullable
 	private OrderedLineDataSet slopeDataSet;
+	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
 	private List<BaseCard> menuCards = new ArrayList<>();
@@ -117,18 +112,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	@Override
-	public int getMainViewId() {
-		return R.id.main_view;
-	}
-
-	@Override
-	public int getBottomScrollViewId() {
-		return R.id.route_menu_bottom_scroll;
-	}
-
-	@Override
 	public int getHeaderViewHeight() {
 		return !menuCards.isEmpty() ? menuCards.get(0).getViewHeight() : 0;
+	}
+
+	@Override
+	public boolean isHeaderViewDetached() {
+		return false;
 	}
 
 	@Override
@@ -159,11 +149,24 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (view != null) {
 			if (isPortrait()) {
 				view.findViewById(getBottomScrollViewId()).setBackgroundDrawable(null);
+				LinearLayout cardsContainer = getCardsContainer();
+				FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
+				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
+				cardsContainer.setLayoutParams(layoutParams);
 			}
-			updateCards(view);
+			updateCards();
 			runLayoutListener();
 		}
 		return view;
+	}
+
+	@Override
+	public int getShadowHeight() {
+		int res = super.getShadowHeight();
+		if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
+			res += pageMarginPx;
+		}
+		return res;
 	}
 
 	@Nullable
@@ -176,59 +179,25 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		super.changeMenuState(currentY, slidingUp, slidingDown, animated);
 		View mainView = getMainView();
 		if (mainView != null && isPortrait()) {
-			final LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
-			final FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
-			final int currentMenuState = getCurrentMenuState();
-			if (animated) {
-				final int marginStart = layoutParams.leftMargin;
-				final int marginEnd = currentMenuState == MenuState.HEADER_ONLY ? pageMarginPx : 0;
-				if (marginStart != marginEnd) {
-					Animation a = new Animation() {
-						@Override
-						protected void applyTransformation(float interpolatedTime, Transformation t) {
-							int margin = marginStart + (int) ((marginEnd - marginStart) * interpolatedTime);
-							layoutParams.setMargins(margin, 0, margin, 0);
-							cardsContainer.setLayoutParams(layoutParams);
-						}
-					};
-					a.setAnimationListener(new Animation.AnimationListener() {
-						@Override
-						public void onAnimationStart(Animation animation) {
-						}
-
-						@Override
-						public void onAnimationEnd(Animation animation) {
-							updateCardsLayout();
-						}
-
-						@Override
-						public void onAnimationRepeat(Animation animation) {
-						}
-					});
-					a.setDuration(ANIMATION_DURATION);
-					cardsContainer.startAnimation(a);
-				}
-			} else {
-				updateCardsLayout();
-			}
+			updateCardsLayout();
 		}
 	}
 
 	private void updateCardsLayout() {
 		View mainView = getMainView();
 		if (mainView != null) {
-			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
-			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
+			LinearLayout cardsContainer = getCardsContainer();
+			View topShadow = getTopShadow();
+			FrameLayout bottomContainer = getBottomContainer();
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
-				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
+				topShadow.setVisibility(View.INVISIBLE);
+				bottomContainer.setBackgroundDrawable(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
-				mainView.setBackgroundDrawable(null);
 			} else {
-				layoutParams.setMargins(0, 0, 0, 0);
-				cardsContainer.setBackgroundDrawable(null);
-				AndroidUtils.setBackground(mainView.getContext(), mainView, isNightMode(), R.drawable.bg_map_route_menu_light, R.drawable.bg_map_route_menu_dark);
+				topShadow.setVisibility(View.VISIBLE);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 			}
-			cardsContainer.setLayoutParams(layoutParams);
 		}
 	}
 
@@ -237,36 +206,28 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		super.setViewY(y, animated, adjustMapPos);
 		View mainView = getMainView();
 		if (mainView != null && isPortrait()) {
-			int headerOnlyY = getMenuStatePosY(MenuState.HEADER_ONLY);
+			LinearLayout cardsContainer = getCardsContainer();
+			View topShadow = getTopShadow();
+			FrameLayout bottomContainer = getBottomContainer();
 			int halfScreenY = getMenuStatePosY(MenuState.HALF_SCREEN);
-			float margin = 0;
-			if (y > headerOnlyY) {
-				margin = PAGE_MARGIN;
-			} else if (y > halfScreenY) {
-				margin = PAGE_MARGIN * (1f - (float)(headerOnlyY - y) / (headerOnlyY - halfScreenY));
-			}
-			int marginPx = dpToPx(margin);
-			LinearLayout cardsContainer = (LinearLayout) mainView.findViewById(R.id.route_menu_cards_container);
-			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
-			if (layoutParams.leftMargin != marginPx) {
-				layoutParams.setMargins(marginPx, 0, marginPx, 0);
-			}
 			if (y > halfScreenY) {
+				topShadow.setVisibility(View.INVISIBLE);
+				bottomContainer.setBackgroundDrawable(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
-				mainView.setBackgroundDrawable(null);
 			} else {
-				cardsContainer.setBackgroundDrawable(null);
-				AndroidUtils.setBackground(mainView.getContext(),mainView, isNightMode(), R.drawable.bg_map_route_menu_light, R.drawable.bg_map_route_menu_dark);
+				topShadow.setVisibility(View.VISIBLE);
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 			}
 		}
 	}
 
-	private void updateCards(@NonNull View view) {
+	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			RoutingHelper routingHelper = app.getRoutingHelper();
-			LinearLayout cardsContainer = (LinearLayout) view.findViewById(R.id.route_menu_cards_container);
+			LinearLayout cardsContainer = getCardsContainer();
 			cardsContainer.removeAllViews();
 			if (routeId != -1) {
 				List<TransportRouteResult> routes = routingHelper.getTransportRoutingHelper().getRoutes();
@@ -291,51 +252,10 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 					transportCard = null;
 					makeGpx();
 					createRouteStatisticCards(cardsContainer);
-					createRouteDirections(cardsContainer);
+					createRouteDirectionsCard(cardsContainer);
 				}
 			}
 		}
-	}
-
-	private void createRouteDirections(LinearLayout cardsContainer) {
-		OsmandApplication app = requireMyApplication();
-		TextViewEx routeDirectionsTitle = new TextViewEx(app);
-		routeDirectionsTitle.setTextColor(getMainFontColor());
-		routeDirectionsTitle.setTextSize(15);
-		routeDirectionsTitle.setGravity(Gravity.CENTER_VERTICAL);
-		routeDirectionsTitle.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
-		routeDirectionsTitle.setText(R.string.step_by_step);
-		routeDirectionsTitle.setTypeface(FontCache.getRobotoMedium(app));
-		cardsContainer.addView(routeDirectionsTitle);
-
-		List<RouteDirectionInfo> routeDirections = app.getRoutingHelper().getRouteDirections();
-		for (int i = 0; i < routeDirections.size(); i++) {
-			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
-			OnClickListener onClickListener = createRouteDirectionInfoViewClickListener(i, routeDirectionInfo);
-			View view = getRouteDirectionView(i, routeDirectionInfo, routeDirections, onClickListener);
-			cardsContainer.addView(view);
-		}
-	}
-
-	private OnClickListener createRouteDirectionInfoViewClickListener(final int directionInfoIndex, final RouteDirectionInfo routeDirectionInfo) {
-		return new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				OsmandApplication app = requireMyApplication();
-				Location loc = app.getRoutingHelper().getLocationFromRouteDirection(routeDirectionInfo);
-				if (loc != null) {
-					MapRouteInfoMenu.directionInfo = directionInfoIndex;
-					OsmandSettings settings = app.getSettings();
-					settings.setMapLocationToShow(loc.getLatitude(), loc.getLongitude(),
-							Math.max(13, settings.getLastKnownMapZoom()),
-							new PointDescription(PointDescription.POINT_TYPE_MARKER,
-									routeDirectionInfo.getDescriptionRoutePart() + " " + getTimeDescription(app, routeDirectionInfo)),
-							false, null);
-					MapActivity.launchMapActivityMoveToTop(getActivity());
-					dismiss();
-				}
-			}
-		};
 	}
 
 	private void createRouteStatisticCards(LinearLayout cardsContainer) {
@@ -344,22 +264,28 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			return;
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
-		if (gpx.hasAltitude) {
-			RouteStatisticCard statisticCard = new RouteStatisticCard(mapActivity, gpx, new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					InterceptorLinearLayout mainView = getMainView();
-					if (mainView != null) {
-						mainView.requestDisallowInterceptTouchEvent(true);
-					}
-					return false;
+		RouteStatisticCard statisticCard = new RouteStatisticCard(mapActivity, gpx, new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				InterceptorLinearLayout mainView = getMainView();
+				if (mainView != null) {
+					mainView.requestDisallowInterceptTouchEvent(true);
 				}
-			});
-			menuCards.add(statisticCard);
-			cardsContainer.addView(statisticCard.build(mapActivity));
-			buildRowDivider(cardsContainer, false);
-			slopeDataSet = statisticCard.getSlopeDataSet();
-			elevationDataSet = statisticCard.getElevationDataSet();
+				return false;
+			}
+		}, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openDetails();
+			}
+		});
+		statisticCard.setTransparentBackground(true);
+		menuCards.add(statisticCard);
+		cardsContainer.addView(statisticCard.build(mapActivity));
+		buildRowDivider(cardsContainer, false);
+		slopeDataSet = statisticCard.getSlopeDataSet();
+		elevationDataSet = statisticCard.getElevationDataSet();
+		if (gpx.hasAltitude) {
 			List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
 			if (route != null) {
 				RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
@@ -390,9 +316,23 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
+	private void createRouteDirectionsCard(LinearLayout cardsContainer) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		RouteDirectionsCard directionsCard = new RouteDirectionsCard(mapActivity);
+		directionsCard.setTransparentBackground(true);
+		directionsCard.setListener(this);
+		menuCards.add(directionsCard);
+		cardsContainer.addView(directionsCard.build(mapActivity));
+		buildRowDivider(cardsContainer, false);
+	}
+
 	private void createRouteCard(LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
 		OsmandApplication app = requireMyApplication();
 		menuCards.add(routeInfoCard);
+		routeInfoCard.setListener(this);
 		cardsContainer.addView(routeInfoCard.build(app));
 		buildRowDivider(cardsContainer, false);
 	}
@@ -403,7 +343,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	private void buildSegmentItem(View view, final TransportRouteResultSegment segment,
-								  final TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double boardingTime) {
+	                              final TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double boardingTime) {
 		OsmandApplication app = requireMyApplication();
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
@@ -883,8 +823,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 			imageViewLayoutParams.setMargins(dpToPx(14), dpToPx(8), dpToPx(22), 0);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light);
+			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -1003,8 +943,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 			imageViewLayoutParams.setMargins(dpToPx(14), dpToPx(8), dpToPx(22), 0);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light);
+			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -1046,10 +986,10 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			@Override
 			public void geocodingDone(String address) {
 				RouteDetailsFragment fragment = fragmentRef.get();
-				View view = getView();
-				if (!TextUtils.isEmpty(address) && fragment != null && !fragment.isPaused() && view != null) {
+				if (!TextUtils.isEmpty(address) && fragment != null && !fragment.isPaused()) {
 					fragment.destinationStreetStr = address;
-					fragment.updateCards(view);
+					fragment.updateCards();
+					doAfterMenuStateChange(0, 0);
 				}
 			}
 		}, null);
@@ -1273,8 +1213,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
 			imageViewLayoutParams.setMargins(dpToPx(17), 0, dpToPx(25), 0);
-			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			iconView.setBackgroundResource(R.drawable.border_round_solid_light_small);
+			iconView.setPadding(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
 			baseItemView.addView(iconView);
 		}
 
@@ -1357,9 +1297,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setMinimumHeight(dpToPx(minHeight));
-		ll.setPadding(dpToPx(64), 0, dpToPx(16), 0);
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(context, android.R.attr.selectableItemBackground));
+		ll.setPadding(dpToPx(64f), 0, dpToPx(16f), 0);
 		ll.setOnLongClickListener(onLongClickListener);
 		return ll;
 	}
@@ -1449,10 +1389,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			float distance = i * 5;
 			inclines.add(i, new Incline(0f, distance));
 		}
-		float lastDistance = slopeDataSet.getEntryForIndex(size - 1).getX();
-		for (int i = 1; i <= 10; i++) {
-			float distance = lastDistance * 1000f + i * 5f;
-			inclines.add(new Incline(0f, distance));
+		if (slopeDataSet != null) {
+			float lastDistance = slopeDataSet.getEntryForIndex(size - 1).getX();
+			for (int i = 1; i <= 10; i++) {
+				float distance = lastDistance * 1000f + i * 5f;
+				inclines.add(new Incline(0f, distance));
+			}
 		}
 		for (Incline incline : inclines) {
 			incline.computeBoundaries(minIncline, maxIncline);
@@ -1474,8 +1416,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	void openDetails() {
-		if (gpxItem != null) {
-			OsmandApplication app = requireMyApplication();
+		if (gpxItem != null && elevationDataSet != null) {
 			LatLon location = null;
 			WptPt wpt = null;
 			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
@@ -1504,33 +1445,33 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				gpxItem.locationOnMap = gpxItem.locationStart;
 			}
 
-			final MapActivity activity = (MapActivity) getActivity();
-			if (activity != null) {
+			ChooseRouteFragment parent = (ChooseRouteFragment) getParentFragment();
+			if (parent != null) {
+				parent.analyseOnMap(location, gpxItem);
+			}
+		}
+	}
+
+	private void showDirectionsInfo(int directionInfoIndex) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		RoutingHelper helper = mapActivity.getRoutingHelper();
+		List<RouteDirectionInfo> routeDirections = helper.getRouteDirections();
+		if (routeDirections.size() > directionInfoIndex) {
+			RouteDirectionInfo routeDirectionInfo = routeDirections.get(directionInfoIndex);
+			Location loc = helper.getLocationFromRouteDirection(routeDirectionInfo);
+			if (loc != null) {
+				MapRouteInfoMenu.directionInfo = directionInfoIndex;
+				OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+				settings.setMapLocationToShow(loc.getLatitude(), loc.getLongitude(),
+						Math.max(13, settings.getLastKnownMapZoom()),
+						new PointDescription(PointDescription.POINT_TYPE_MARKER,
+								routeDirectionInfo.getDescriptionRoutePart() + " " + getTimeDescription(mapActivity.getMyApplication(), routeDirectionInfo)),
+						false, null);
+				MapActivity.launchMapActivityMoveToTop(mapActivity);
 				dismiss();
-
-				final OsmandSettings settings = app.getSettings();
-				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-						false,
-						gpxItem);
-
-				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapRouteInfoMenu();
-				if (mapRouteInfoMenu.isVisible()) {
-					// We arrived here by the route info menu.
-					// First, we close it and then show the details.
-					mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							mapRouteInfoMenu.setOnDismissListener(null);
-							MapActivity.launchMapActivityMoveToTop(activity);
-						}
-					});
-					mapRouteInfoMenu.hide();
-				} else {
-					// We arrived here by the dashboard.
-					MapActivity.launchMapActivityMoveToTop(activity);
-				}
 			}
 		}
 	}
@@ -1552,6 +1493,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+		runLayoutListener();
 	}
 
 	@Override
@@ -1563,6 +1505,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 		if (card instanceof PublicTransportCard && buttonIndex == 0) {
 			openMenuFullScreen();
+		} else if (card instanceof RouteDirectionsCard && buttonIndex >= 0) {
+			showDirectionsInfo(buttonIndex);
 		}
 	}
 
@@ -1574,48 +1518,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			distance = 0;
 			time = 0;
 		}
-	}
-
-	public View getRouteDirectionView(int position, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo, OnClickListener onClickListener) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return null;
-		}
-		OsmandApplication app = mapActivity.getMyApplication();
-		ContextThemeWrapper context = new ContextThemeWrapper(mapActivity, isNightMode() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
-		View row = LayoutInflater.from(context).inflate(R.layout.route_info_list_item, null);
-
-		TextView label = (TextView) row.findViewById(R.id.description);
-		TextView distanceLabel = (TextView) row.findViewById(R.id.distance);
-		TextView timeLabel = (TextView) row.findViewById(R.id.time);
-		TextView cumulativeDistanceLabel = (TextView) row.findViewById(R.id.cumulative_distance);
-		TextView cumulativeTimeLabel = (TextView) row.findViewById(R.id.cumulative_time);
-		ImageView icon = (ImageView) row.findViewById(R.id.direction);
-		row.findViewById(R.id.divider).setVisibility(position == directionsInfo.size() - 1 ? View.INVISIBLE : View.VISIBLE);
-
-		TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources(), true);
-		drawable.setColorFilter(new PorterDuffColorFilter(getActiveColor(), PorterDuff.Mode.SRC_ATOP));
-		drawable.setRouteType(model.getTurnType());
-		icon.setImageDrawable(drawable);
-
-		label.setText(model.getDescriptionRoutePart());
-		if (model.distance > 0) {
-			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, app));
-			timeLabel.setText(getTimeDescription(app, model));
-			row.setContentDescription(label.getText() + " " + timeLabel.getText());
-		} else {
-			if (Algorithms.isEmpty(label.getText().toString())) {
-				label.setText(getString((position != directionsInfo.size() - 1) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination));
-			}
-			distanceLabel.setText("");
-			timeLabel.setText("");
-			row.setContentDescription("");
-		}
-		CumulativeInfo cumulativeInfo = getRouteDirectionCumulativeInfo(position, directionsInfo);
-		cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, app));
-		cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time, app.accessibilityEnabled()));
-		row.setOnClickListener(onClickListener);
-		return row;
 	}
 
 	public static CumulativeInfo getRouteDirectionCumulativeInfo(int position, List<RouteDirectionInfo> routeDirections) {

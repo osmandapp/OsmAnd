@@ -916,6 +916,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean searchFinished(SearchPhrase phrase) {
+				SearchWord lastSelectedWord = phrase.getLastSelectedWord();
+				if (mainSearchFragment != null && mainSearchFragment.isShowResult() &&
+						isResultEmpty() && lastSelectedWord != null) {
+					mainSearchFragment.showResult(lastSelectedWord.getResult());
+				}
 				return true;
 			}
 		};

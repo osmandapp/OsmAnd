@@ -1,11 +1,15 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Matrix;
-import android.support.v4.content.ContextCompat;
+import android.os.Build;
+import android.support.annotation.Nullable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,17 +17,21 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
-import net.osmand.GPXUtilities;
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -32,15 +40,20 @@ import java.util.List;
 public class RouteStatisticCard extends BaseCard {
 
 	private GPXFile gpx;
-	private GpxSelectionHelper.GpxDisplayItem gpxItem;
-	private GpxUiHelper.OrderedLineDataSet slopeDataSet;
-	private GpxUiHelper.OrderedLineDataSet elevationDataSet;
-	private View.OnTouchListener onTouchListener;
+	private GpxDisplayItem gpxItem;
+	@Nullable
+	private OrderedLineDataSet slopeDataSet;
+	@Nullable
+	private OrderedLineDataSet elevationDataSet;
+	private OnTouchListener onTouchListener;
+	private OnClickListener onAnalyseClickListener;
 
-	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx, View.OnTouchListener onTouchListener) {
+	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx, OnTouchListener onTouchListener,
+							  OnClickListener onAnalyseClickListener) {
 		super(mapActivity);
 		this.gpx = gpx;
 		this.onTouchListener = onTouchListener;
+		this.onAnalyseClickListener = onAnalyseClickListener;
 		makeGpxDisplayItem();
 	}
 
@@ -66,7 +79,7 @@ public class RouteStatisticCard extends BaseCard {
 		SpannableStringBuilder distanceStr = new SpannableStringBuilder(text);
 		int spaceIndex = text.indexOf(" ");
 		if (spaceIndex != -1) {
-			distanceStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, 0);
+			distanceStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
 		}
 		distanceTv.setText(distanceStr);
 		SpannableStringBuilder timeStr = new SpannableStringBuilder();
@@ -78,7 +91,7 @@ public class RouteStatisticCard extends BaseCard {
 		}
 		spaceIndex = timeStr.toString().lastIndexOf(" ");
 		if (spaceIndex != -1) {
-			timeStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, nightMode ? R.color.primary_text_dark : R.color.primary_text_light)), 0, spaceIndex, 0);
+			timeStr.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
 		}
 		TextView timeTv = (TextView) view.findViewById(R.id.time);
 		timeTv.setText(timeStr);
@@ -87,32 +100,58 @@ public class RouteStatisticCard extends BaseCard {
 		String arriveStr = app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(time, true));
 		arriveTimeTv.setText(arriveStr);
 
-		GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+		buildSlopeInfo();
 
-		buildHeader(analysis);
-
-		((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
-
-		String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-		String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-		((TextView) view.findViewById(R.id.range_text)).setText(min + " - " + max);
-
-		String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-		String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-		((TextView) view.findViewById(R.id.descent_text)).setText(desc);
-		((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
-
-		((ImageView) view.findViewById(R.id.average_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
-		((ImageView) view.findViewById(R.id.range_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
-		((ImageView) view.findViewById(R.id.descent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_descent));
-		((ImageView) view.findViewById(R.id.ascent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_ascent));
+		if (isTransparentBackground()) {
+			view.setBackgroundDrawable(null);
+		}
 	}
 
-	public GpxUiHelper.OrderedLineDataSet getSlopeDataSet() {
+	private void buildSlopeInfo() {
+		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+
+		buildHeader(analysis);
+		if (analysis.hasElevationData) {
+			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+
+			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+			String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+			((TextView) view.findViewById(R.id.range_text)).setText(min + " - " + max);
+
+			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+			((TextView) view.findViewById(R.id.descent_text)).setText(desc);
+			((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
+
+			((ImageView) view.findViewById(R.id.average_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
+			((ImageView) view.findViewById(R.id.range_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_average));
+			((ImageView) view.findViewById(R.id.descent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_descent));
+			((ImageView) view.findViewById(R.id.ascent_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_altitude_ascent));
+
+			TextView analyseButtonDescr = (TextView) view.findViewById(R.id.analyse_button_descr);
+
+			FrameLayout analyseButton = (FrameLayout) view.findViewById(R.id.analyse_button);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+				AndroidUtils.setBackground(app, analyseButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			} else {
+				AndroidUtils.setBackground(app, analyseButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+			}
+			analyseButton.setOnClickListener(onAnalyseClickListener);
+		}
+		view.findViewById(R.id.altitude_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.slope_info_divider).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.slope_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.buttons_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+	}
+
+	@Nullable
+	public OrderedLineDataSet getSlopeDataSet() {
 		return slopeDataSet;
 	}
 
-	public GpxUiHelper.OrderedLineDataSet getElevationDataSet() {
+	@Nullable
+	public OrderedLineDataSet getElevationDataSet() {
 		return elevationDataSet;
 	}
 
@@ -127,23 +166,27 @@ public class RouteStatisticCard extends BaseCard {
 		}
 	}
 
-	private void buildHeader(GPXUtilities.GPXTrackAnalysis analysis) {
+	private void buildHeader(GPXTrackAnalysis analysis) {
 		final LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
 		mChart.setOnTouchListener(onTouchListener);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
-			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, false, true);
+			OrderedLineDataSet slopeDataSet = null;
+			OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
+					GPXDataSetAxisType.DISTANCE, false, true);
 			if (elevationDataSet != null) {
 				dataSets.add(elevationDataSet);
+				slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+						GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
 			}
-			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
-					GpxUiHelper.GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
 			}
+			this.elevationDataSet = elevationDataSet;
+			this.slopeDataSet = slopeDataSet;
+
 			LineData data = new LineData(dataSets);
 			mChart.setData(data);
 
@@ -152,7 +195,7 @@ public class RouteStatisticCard extends BaseCard {
 				float highlightDrawX = -1;
 
 				@Override
-				public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+				public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
 					if (mChart.getHighlighted() != null && mChart.getHighlighted().length > 0) {
 						highlightDrawX = mChart.getHighlighted()[0].getDrawX();
 					} else {
@@ -161,7 +204,7 @@ public class RouteStatisticCard extends BaseCard {
 				}
 
 				@Override
-				public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+				public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 					gpxItem.chartMatrix = new Matrix(mChart.getViewPortHandler().getMatrixTouch());
 					Highlight[] highlights = mChart.getHighlighted();
 					if (highlights != null && highlights.length > 0) {

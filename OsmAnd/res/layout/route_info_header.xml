@@ -9,7 +9,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingTop="8dp"
@@ -20,6 +20,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
 			<ImageView
@@ -32,6 +33,7 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="18dp"
 				android:layout_marginLeft="18dp"
 				android:orientation="vertical">
 
@@ -63,6 +65,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
 			<ImageView
@@ -75,6 +78,7 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="18dp"
 				android:layout_marginLeft="18dp"
 				android:orientation="vertical">
 
@@ -105,7 +109,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
 		<com.github.mikephil.charting.charts.LineChart
@@ -117,8 +121,9 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/altitude_container"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingBottom="4dp">
@@ -128,6 +133,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
 			<ImageView
@@ -140,6 +146,7 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="18dp"
 				android:layout_marginLeft="18dp"
 				android:orientation="vertical">
 
@@ -171,6 +178,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
 			<ImageView
@@ -183,6 +191,7 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="18dp"
 				android:layout_marginLeft="18dp"
 				android:orientation="vertical">
 
@@ -212,8 +221,9 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/slope_info_divider"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingTop="4dp"
@@ -224,7 +234,9 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="16dp"
 			android:paddingLeft="16dp"
+			android:paddingEnd="8dp"
 			android:paddingRight="8dp">
 
 			<View
@@ -239,7 +251,9 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="8dp"
 			android:paddingLeft="8dp"
+			android:paddingEnd="16dp"
 			android:paddingRight="16dp">
 
 			<View
@@ -252,8 +266,9 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/slope_container"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:baselineAligned="false"
 		android:orientation="horizontal"
 		android:paddingTop="4dp"
@@ -264,6 +279,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
 			<ImageView
@@ -276,6 +292,7 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="18dp"
 				android:layout_marginLeft="18dp"
 				android:orientation="vertical">
 
@@ -307,6 +324,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:orientation="horizontal"
+			android:paddingStart="16dp"
 			android:paddingLeft="16dp">
 
 			<ImageView
@@ -319,6 +337,7 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginStart="18dp"
 				android:layout_marginLeft="18dp"
 				android:orientation="vertical">
 
@@ -344,6 +363,42 @@
 			</LinearLayout>
 
 		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/buttons_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/route_info_buttons_padding_top_bottom"
+		android:layout_marginTop="@dimen/route_info_details_padding"
+		android:layout_marginRight="@dimen/route_info_buttons_padding_top_bottom"
+		android:layout_marginBottom="@dimen/route_info_details_padding"
+		android:visibility="visible">
+
+		<FrameLayout
+			android:id="@+id/analyse_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/analyse_button_descr"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/route_info_buttons_height"
+				android:layout_gravity="center"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:letterSpacing="@dimen/text_button_letter_spacing"
+				android:maxLines="1"
+				android:text="@string/analyze_on_map"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/text_button_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:ignore="UnusedAttribute" />
+
+		</FrameLayout>
 
 	</LinearLayout>
 

@@ -1,6 +1,7 @@
 package net.osmand.util;
 
 import com.google.openlocationcode.OpenLocationCode;
+import com.google.openlocationcode.OpenLocationCode.CodeArea;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
@@ -10,20 +11,87 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationParser {
-	public static LatLon parseLocation(String locPhrase, LatLon searchLocation) {
-		locPhrase = locPhrase.trim();
-		// detect OLC first
-		// avoid throwing exceptions by carefully checking exceptions
-		if (locPhrase.length() > 0 && OpenLocationCode.isValidCode(locPhrase)) {
-			OpenLocationCode olc = new OpenLocationCode(locPhrase);
-			if (olc.isFull()) {
-				OpenLocationCode.CodeArea codeArea = olc.decode();
-				return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
-			} else if (olc.isShort() && searchLocation != null) {
-				OpenLocationCode.CodeArea codeArea = olc.recover(searchLocation.getLatitude(), searchLocation.getLongitude()).decode();
-				return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
+
+	public static class ParsedOpenLocationCode {
+		private String text;
+		private String code;
+		private boolean full;
+		private String placeName;
+
+		private OpenLocationCode olc;
+		private LatLon latLon;
+
+		private ParsedOpenLocationCode(String text) {
+			this.text = text;
+			parse();
+		}
+
+		private void parse() {
+			if (!Algorithms.isEmpty(text)) {
+				String[] split = text.split(" ");
+				if (split.length > 0) {
+					code = split[0];
+					try {
+						olc = new OpenLocationCode(code);
+						full = olc.isFull();
+						if (full) {
+							CodeArea codeArea = olc.decode();
+							latLon = new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
+						} else {
+							if (split.length > 1) {
+								placeName = text.substring(code.length() + 1);
+							}
+						}
+					} catch (IllegalArgumentException e) {
+						code = null;
+					}
+				}
 			}
 		}
+
+		public LatLon recover(LatLon searchLocation) {
+			if (olc != null) {
+				CodeArea codeArea = olc.recover(searchLocation.getLatitude(), searchLocation.getLongitude()).decode();
+				latLon = new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
+			}
+			return latLon;
+		}
+
+		boolean isValidCode() {
+			return !Algorithms.isEmpty(code);
+		}
+
+		public String getText() {
+			return text;
+		}
+
+		public String getCode() {
+			return code;
+		}
+
+		public boolean isFull() {
+			return full;
+		}
+
+		public String getPlaceName() {
+			return placeName;
+		}
+
+		public LatLon getLatLon() {
+			return latLon;
+		}
+	}
+
+	public static boolean isValidOLC(String code) {
+		return OpenLocationCode.isValidCode(code);
+	}
+	public static ParsedOpenLocationCode parseOpenLocationCode(String locPhrase) {
+		ParsedOpenLocationCode parsedCode = new ParsedOpenLocationCode(locPhrase.trim());
+		return !parsedCode.isValidCode() ? null : parsedCode;
+	}
+
+	public static LatLon parseLocation(String locPhrase) {
+		locPhrase = locPhrase.trim();
 		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");

@@ -46,6 +46,7 @@
 
 	<dimen name="map_widget_icon_margin">3dp</dimen>
 
+	<dimen name="standard_icon_size">36dp</dimen>
 
 	<!-- ContextMenu -->
 	<dimen name="context_menu_top_shadow_h">30dp</dimen>
@@ -190,7 +191,11 @@
 	<dimen name="route_info_list_text_padding">78dp</dimen>
 	<dimen name="route_info_legend_padding">12dp</dimen>
 	<dimen name="route_info_warning_padding">27dp</dimen>
-	<dimen name="route_info_chart_height">78dp</dimen>
+	<dimen name="route_info_chart_height">106dp</dimen>
+	<dimen name="route_info_control_buttons_height">72dp</dimen>
+	<dimen name="route_info_button_bg_line_radius">27dp</dimen>
+	<dimen name="route_info_card_details_margin">13dp</dimen>
+	<dimen name="route_info_legend_item_size">60dp</dimen>
 
 	<dimen name="multi_selection_header_height">78dp</dimen>
 

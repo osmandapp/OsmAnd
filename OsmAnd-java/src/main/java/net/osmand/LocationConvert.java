@@ -1,12 +1,7 @@
 package net.osmand;
 
-import com.google.openlocationcode.OpenLocationCode;
-
-import net.osmand.data.LatLon;
-
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.IllegalFormatException;
 import java.util.Locale;
 import java.util.StringTokenizer;
 

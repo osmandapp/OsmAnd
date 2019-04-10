@@ -302,11 +302,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			avoidSpecificRoads.removeImpassableRoad(routeLocation);
 		}
 
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
-			routingHelper.recalculateRouteDueToSettingsChange();
-		}
-
+		app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			final MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();

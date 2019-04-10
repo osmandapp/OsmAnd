@@ -29,6 +29,7 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.Toast;
 
@@ -46,7 +47,6 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
@@ -57,11 +57,16 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public static final int ANIMATION_DURATION = 200;
+	public static final float MIDDLE_STATE_KOEF = .75f;
 	public static final String MENU_STATE_KEY = "menu_state_key";
 
 	private InterceptorLinearLayout mainView;
 	private View view;
 	private OnLayoutChangeListener containerLayoutListener;
+	private View topShadow;
+	private LinearLayout cardsContainer;
+	private FrameLayout bottomContainer;
+	private LockableScrollView bottomScrollView;
 
 	private boolean portrait;
 	private boolean nightMode;
@@ -75,13 +80,11 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private int topScreenPosY;
 	private int topToolbarPosY;
 	private int bottomToolbarPosY;
-	private int topPadding;
 	private int menuFullHeightMax;
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
 	private int screenHeight;
 	private int viewHeight;
-	private int topShadowMargin;
 	private int currentMenuState;
 	private int shadowHeight;
 	private int statusBarHeight;
@@ -92,7 +95,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private ContextMenuFragmentListener listener;
 
 	public interface ContextMenuFragmentListener {
-		void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean animated);
+		void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated);
 		void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState);
 		void onContextMenuDismiss(@NonNull ContextMenuFragment fragment);
 	}
@@ -101,12 +104,46 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	public abstract int getMainLayoutId();
 
 	@IdRes
-	public abstract int getMainViewId();
+	public int getMainViewId() {
+		return R.id.main_view;
+	}
 
 	@IdRes
-	public abstract int getBottomScrollViewId();
+	public int getTopShadowViewId() {
+		return R.id.context_menu_top_shadow;
+	}
+
+	@IdRes
+	public int getBottomContainerViewId() {
+		return R.id.bottom_container;
+	}
+
+	@IdRes
+	public int getCardsContainerViewId() {
+		return R.id.route_menu_cards_container;
+	}
+
+	@IdRes
+	public int getBottomScrollViewId() {
+		return R.id.route_menu_bottom_scroll;
+	}
+
+	@IdRes
+	public int getTopViewId() {
+		return 0;
+	}
 
 	public abstract int getHeaderViewHeight();
+
+	public abstract boolean isHeaderViewDetached();
+
+	public int getLandscapeWidth() {
+		return getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
+	}
+
+	public int getLandscapeNoShadowWidth() {
+		return getLandscapeWidth() - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
+	}
 
 	public abstract int getToolbarHeight();
 
@@ -170,12 +207,29 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return portrait;
 	}
 
+	public View getTopShadow() {
+		return topShadow;
+	}
+
+	public LinearLayout getCardsContainer() {
+		return cardsContainer;
+	}
+
+	public FrameLayout getBottomContainer() {
+		return bottomContainer;
+	}
+
+	public LockableScrollView getBottomScrollView() {
+		return bottomScrollView;
+	}
+
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
@@ -193,39 +247,37 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		topShadowMargin = AndroidUtils.dpToPx(mapActivity, 9f);
 		statusBarHeight = AndroidUtils.getStatusBarHeight(mapActivity);
-
-		shadowHeight = portrait ? AndroidUtils.dpToPx(mapActivity, SHADOW_HEIGHT_TOP_DP) : 0;
-		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
+		shadowHeight = getResources().getDimensionPixelSize(R.dimen.contex_menu_top_shadow_height);
+		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight) + getToolbarHeight();
 		topToolbarPosY = getMenuStatePosY(MenuState.FULL_SCREEN);
 		bottomToolbarPosY = topToolbarPosY + getToolbarHeight();
 
 		mainView = view.findViewById(getMainViewId());
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		topShadow = view.findViewById(getTopShadowViewId());
+		cardsContainer = (LinearLayout) view.findViewById(getCardsContainerViewId());
+		bottomContainer = (FrameLayout) view.findViewById(getBottomContainerViewId());
+		bottomScrollView = (LockableScrollView) view.findViewById(getBottomScrollViewId());
 
-		LockableScrollView bottomScrollView = (LockableScrollView) view.findViewById(getBottomScrollViewId());
 		bottomScrollView.setScrollingEnabled(false);
-		AndroidUtils.setBackground(app, bottomScrollView, nightMode, R.color.route_info_bg_light, R.color.route_info_bg_dark);
-		AndroidUtils.setBackground(app, mainView, nightMode, R.drawable.bg_map_context_menu_light, R.drawable.bg_map_context_menu_dark);
-
+		if (getTopViewId() != 0) {
+			View topView = view.findViewById(getTopViewId());
+			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+		}
 		if (!portrait) {
 			currentMenuState = MenuState.FULL_SCREEN;
 			if (isSingleFragment()) {
-				topPadding = getToolbarHeight() - topScreenPosY;
 				final TypedValue typedValueAttr = new TypedValue();
 				mapActivity.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 				mainView.setBackgroundResource(typedValueAttr.resourceId);
-				mainView.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
+				mainView.setLayoutParams(new FrameLayout.LayoutParams(getLandscapeWidth(), ViewGroup.LayoutParams.MATCH_PARENT));
 			} else {
-				topPadding = getToolbarHeight() + topShadowMargin;
-				mainView.setLayoutParams(new FrameLayout.LayoutParams(AndroidUtils.dpToPx(mapActivity, 345f), ViewGroup.LayoutParams.MATCH_PARENT));
+				mainView.setLayoutParams(new FrameLayout.LayoutParams(getLandscapeNoShadowWidth(), ViewGroup.LayoutParams.MATCH_PARENT));
 			}
-			bottomScrollView.setPadding(0, topPadding, 0, 0);
 		}
 
 		processScreenHeight(container);
-		minHalfY = viewHeight - (int) (viewHeight * .75f);
+		minHalfY = viewHeight - (int) (viewHeight * MIDDLE_STATE_KOEF);
 
 		final GestureDetector swipeDetector = new GestureDetector(app, new HorizontalSwipeConfirm(true));
 
@@ -426,15 +478,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private int addStatusBarHeightIfNeeded(int res) {
 		MapActivity mapActivity = getMapActivity();
 		if (Build.VERSION.SDK_INT >= 21 && mapActivity != null) {
-			return res + (isSingleFragment() ? statusBarHeight : -statusBarHeight);
-		}
-		return res;
-	}
-
-	public int getTopShadowMargin() {
-		int res = topShadowMargin;
-		if (Build.VERSION.SDK_INT >= 21 && !isSingleFragment()) {
-			res -= statusBarHeight;
+			return res + (isSingleFragment() ? statusBarHeight : 0);
 		}
 		return res;
 	}
@@ -525,7 +569,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		mainView.setY(y);
 		ContextMenuFragmentListener listener = this.listener;
 		if (listener != null) {
-			listener.onContextMenuYPosChanged(this, y, false);
+			listener.onContextMenuYPosChanged(this, y, adjustMapPos, false);
 		}
 	}
 
@@ -534,27 +578,50 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			screenHeight = container.getHeight() + statusBarHeight;
-			viewHeight = screenHeight - statusBarHeight - topPadding;
-			minHalfY = viewHeight - (int) (viewHeight * .75f);
+			viewHeight = screenHeight - statusBarHeight;
+			minHalfY = viewHeight - (int) (viewHeight * MIDDLE_STATE_KOEF);
 		}
 	}
 
-	private int getFullScreenTopPosY() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			int res = topShadowMargin + getToolbarHeight();
-			if (Build.VERSION.SDK_INT >= 21 && !isSingleFragment()) {
-				res -= statusBarHeight;
-			}
-			return res;
+	public boolean isMoving() {
+		return moving;
+	}
+
+	public int getWidth() {
+		InterceptorLinearLayout mainView = getMainView();
+		if (mainView != null) {
+			return mainView.getWidth();
 		} else {
 			return 0;
 		}
 	}
 
-	private int getHeaderOnlyTopY() {
+	public int getHeight() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			int height = getMenuStatePosY(getCurrentMenuState());
+			return viewHeight - height - statusBarHeight;
+		} else {
+			return 0;
+		}
+	}
+
+	public int getViewHeight() {
+		return viewHeight;
+	}
+
+	public int getShadowHeight() {
+		return shadowHeight;
+	}
+
+	public int getFullScreenTopPosY() {
+		return topScreenPosY;
+	}
+
+	public int getHeaderOnlyTopY() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int shadowHeight = getShadowHeight();
 			if (getHeaderViewHeight() > 0) {
 				return viewHeight - getHeaderViewHeight() - shadowHeight;
 			} else {
@@ -566,9 +633,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	}
 
 	public int getMenuStatePosY(int menuState) {
-		if (!portrait) {
-			return topScreenPosY;
-		}
 		switch (menuState) {
 			case MenuState.HEADER_ONLY:
 				return getHeaderOnlyTopY();
@@ -712,7 +776,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return posY;
 	}
 
-	private void updateMainViewLayout(int posY) {
+	protected void updateMainViewLayout(int posY) {
 		MapActivity mapActivity = getMapActivity();
 		if (view != null && mapActivity != null) {
 			ViewGroup.LayoutParams lp = mainView.getLayoutParams();
@@ -722,7 +786,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	protected void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
+	protected int applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
 							 final int previousMenuState, final int newMenuState, int dZoom, final boolean animated) {
 		final int posY = getPosY(currentY, needCloseMenu, previousMenuState);
 		if (getViewY() != posY || dZoom != 0) {
@@ -769,9 +833,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			}
 			ContextMenuFragmentListener listener = this.listener;
 			if (listener != null) {
-				listener.onContextMenuYPosChanged(this, posY, true);
+				listener.onContextMenuYPosChanged(this, posY, needMapAdjust, true);
 			}
 		}
+		return posY;
 	}
 
 	public void animateView(@NonNull View view, int y) {
@@ -803,10 +868,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						if (getActivity() == null) {
 							return;
 						}
-						menuFullHeight = mainView.getHeight();
-						menuBottomViewHeight = menuFullHeight;
-
-						menuFullHeightMax = view.findViewById(R.id.route_menu_cards_container).getHeight();
+						calculateLayout(view);
 
 						if (!moving) {
 							doLayoutMenu();
@@ -821,6 +883,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 				}
 			});
 		}
+	}
+
+	protected void calculateLayout(View view) {
+		menuFullHeight = mainView.getHeight();
+		menuBottomViewHeight = menuFullHeight;
+		menuFullHeightMax = view.findViewById(R.id.route_menu_cards_container).getHeight() +
+				(isHeaderViewDetached() ? getHeaderViewHeight() : 0);
 	}
 
 	private void doLayoutMenu() {
@@ -888,7 +957,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 			if (!portrait) {
 				tileBoxWidthPx = tb.getPixWidth() - view.getWidth();
 			} else {
-				tileBoxHeightPx = getHeaderOnlyTopY();
+				tileBoxHeightPx = getHeaderOnlyTopY() - getShadowHeight();
 			}
 			if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
 				int topMarginPx = getToolbarHeight();

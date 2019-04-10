@@ -937,7 +937,7 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls()) {
+			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowTopControls() || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);
@@ -1003,7 +1003,8 @@ public class MapInfoWidgetsFactory {
 					all.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							WaypointsFragment.showInstance(map);
+							map.hideContextAndRouteInfoMenues();
+							WaypointsFragment.showInstance(map.getSupportFragmentManager());
 						}
 					});
 					remove.setOnClickListener(new OnClickListener() {

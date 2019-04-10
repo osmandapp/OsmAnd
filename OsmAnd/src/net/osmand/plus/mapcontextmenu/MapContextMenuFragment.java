@@ -937,10 +937,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void doZoomIn() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (map.isZooming() && map.hasCustomMapRatio()) {
+			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
+			boolean containsLatLon = tb.containsLatLon(menu.getLatLon());
+			if (!containsLatLon) {
+				restoreCustomMapRatio();
+			}
+			if (map.isZooming() && (map.hasCustomMapRatio() || !containsLatLon)) {
 				mapActivity.changeZoom(2, System.currentTimeMillis());
 			} else {
-				setCustomMapRatio();
+				if (containsLatLon) {
+					setCustomMapRatio();
+				}
 				mapActivity.changeZoom(1, System.currentTimeMillis());
 			}
 		}
@@ -949,7 +956,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void doZoomOut() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			setCustomMapRatio();
+			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
+			boolean containsLatLon = tb.containsLatLon(menu.getLatLon());
+			if (containsLatLon) {
+				setCustomMapRatio();
+			} else {
+				restoreCustomMapRatio();
+			}
 			mapActivity.changeZoom(-1, System.currentTimeMillis());
 		}
 	}
@@ -1250,7 +1263,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.chooseRoutesVisible) {
+			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
 				dismissMenu();
 				return;
 			}

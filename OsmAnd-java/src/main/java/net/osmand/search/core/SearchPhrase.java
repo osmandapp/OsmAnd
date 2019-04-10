@@ -11,6 +11,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -782,7 +783,7 @@ public class SearchPhrase {
 			searchWords.add(0, getUnknownSearchWord());
 			Collections.sort(searchWords, commonWordsComparator);
 			for (String s : searchWords) {
-				if (s.length() > 0 && !Character.isDigit(s.charAt(0))) {
+				if (s.length() > 0 && !Character.isDigit(s.charAt(0)) && !LocationParser.isValidOLC(s)) {
 					return s;
 				}
 			}
