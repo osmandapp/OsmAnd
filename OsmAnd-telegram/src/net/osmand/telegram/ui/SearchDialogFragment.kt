@@ -31,7 +31,6 @@ import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.telegram.utils.UiUtils
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
-import java.util.concurrent.ConcurrentLinkedQueue
 
 class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearchListener,
 	TelegramLocationListener, TelegramCompassListener {
@@ -47,9 +46,9 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	private lateinit var searchBox: EditText
 	private lateinit var buttonsBar: LinearLayout
 
-	private val searchedChatsIds = ConcurrentLinkedQueue<Long>()
-	private val searchedPublicChatsIds = ConcurrentLinkedQueue<Long>()
-	private val searchedContactsIds = ConcurrentLinkedQueue<Int>()
+	private var searchedChatsIds = mutableSetOf<Long>()
+	private var searchedPublicChatsIds = mutableSetOf<Long>()
+	private var searchedContactsIds = mutableSetOf<Int>()
 
 	private val selectedChats = HashSet<Long>()
 	private val selectedUsers = HashSet<Long>()
@@ -270,9 +269,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	override fun onSearchContactsFinished(obj: TdApi.Users) {
 		log.debug("searchContactsFinished $obj")
 		val ids = obj.userIds
-		searchedContactsIds.clear()
 		if (ids.isNotEmpty()) {
-			searchedContactsIds.addAll(ids.toList())
+			searchedContactsIds = ids.toMutableSet()
 			app.runInUIThread { updateList() }
 		}
 	}
@@ -280,9 +278,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	override fun onSearchChatsFinished(obj: TdApi.Chats) {
 		log.debug("searchChatsFinished $obj")
 		val ids = obj.chatIds
-		searchedChatsIds.clear()
 		if (ids.isNotEmpty()) {
-			searchedChatsIds.addAll(ids.toList())
+			searchedChatsIds = ids.toMutableSet()
 			app.runInUIThread { updateList() }
 		}
 	}
@@ -290,9 +287,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	override fun onSearchPublicChatsFinished(obj: TdApi.Chats) {
 		log.debug("onSearchPublicChatsFinished $obj")
 		val ids = obj.chatIds
-		searchedPublicChatsIds.clear()
 		if (ids.isNotEmpty()) {
-			searchedPublicChatsIds.addAll(ids.toList())
+			searchedPublicChatsIds = ids.toMutableSet()
 			app.runInUIThread { updateList() }
 		}
 	}
