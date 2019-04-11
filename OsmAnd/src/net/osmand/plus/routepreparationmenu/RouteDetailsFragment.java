@@ -174,11 +174,11 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		return transportCard;
 	}
 
+
 	@Override
-	protected void changeMenuState(int currentY, boolean slidingUp, boolean slidingDown, boolean animated) {
-		super.changeMenuState(currentY, slidingUp, slidingDown, animated);
-		View mainView = getMainView();
-		if (mainView != null && isPortrait()) {
+	protected void updateMainViewLayout(int posY) {
+		super.updateMainViewLayout(posY);
+		if (isPortrait()) {
 			updateCardsLayout();
 		}
 	}
@@ -209,8 +209,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			LinearLayout cardsContainer = getCardsContainer();
 			View topShadow = getTopShadow();
 			FrameLayout bottomContainer = getBottomContainer();
-			int halfScreenY = getMenuStatePosY(MenuState.HALF_SCREEN);
-			if (y > halfScreenY) {
+			int top = Math.max(getMenuStatePosY(MenuState.HALF_SCREEN), getViewHeight() - getMenuFullHeightMax());
+			if (y > top) {
 				topShadow.setVisibility(View.INVISIBLE);
 				bottomContainer.setBackgroundDrawable(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
