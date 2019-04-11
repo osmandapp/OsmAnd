@@ -215,4 +215,8 @@
     <string name="show_gps_points">Pokaż punkty GPS</string>
     <string name="show_gps_points_descr">Pokaż ilość zebranych i wysłanych punktów GPS.</string>
     <string name="gps_points_in_buffer">przesłano (%1$d w buforze)</string>
+    <string name="search_contacts">Wyszukiwanie kontaktów</string>
+    <string name="search_contacts_descr">Przeszukaj wszystkie swoje grupy i kontakty.</string>
+    <string name="type_contact_or_group_name">Wpisz nazwę kontaktu lub grupy</string>
+    <string name="shared_string_search">Szukaj</string>
 </resources>
