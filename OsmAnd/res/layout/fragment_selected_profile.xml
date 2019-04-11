@@ -42,7 +42,6 @@
           android:layout_marginLeft="@dimen/list_content_padding"
           android:clickable="true"
           android:focusable="true"
-
           android:gravity="center"
           android:orientation="vertical"
           app:layout_constraintStart_toStartOf="parent"
@@ -350,6 +349,7 @@
     android:background="?attr/bg_color">
 
     <Button
+      android:id="@+id/cancel_button"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="1"
@@ -365,6 +365,7 @@
       android:textColor="@color/map_widget_blue"/>
 
     <Button
+      android:id="@+id/save_profile_btn"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="1"

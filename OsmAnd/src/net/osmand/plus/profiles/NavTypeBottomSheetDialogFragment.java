@@ -1,6 +1,5 @@
 package net.osmand.plus.profiles;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +9,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -24,11 +24,11 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	private static final Log LOG = PlatformUtil.getLog(NavTypeBottomSheetDialogFragment.class);
 
-	List<RoutingProfile> routingProfiles;
-	NavTypeDialogListener listener;
-	NavTypeDialogListener listListener;
-	RecyclerView recyclerView;
-	NavTypeAdapter adapter;
+	private List<RoutingProfile> routingProfiles;
+	private NavTypeDialogListener listener;
+	private NavTypeDialogListener listListener;
+	private RecyclerView recyclerView;
+	private NavTypeAdapter adapter;
 
 	public void setNavTypeListener(NavTypeDialogListener listener) {
 		this.listener = listener;
@@ -36,15 +36,19 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+		Bundle savedInstanceState) {
 
 		Bundle args = getArguments();
 		if (args != null) {
 			routingProfiles = args.getParcelableArrayList("routing_profiles");
 		}
 
-		final int themeRes = getMyApplication().getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_nav_type_fragment, null);
+		final int themeRes = getMyApplication().getSettings().isLightContent()
+			? R.style.OsmandLightTheme
+			: R.style.OsmandDarkTheme;
+		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
+			R.layout.bottom_sheet_select_type_fragment, null);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -55,12 +59,21 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			@Override
 			public void selectedNavType(int pos) {
 				listener.selectedNavType(pos);
+				dismiss();
 			}
 		};
 		recyclerView = view.findViewById(R.id.menu_list_view);
-		adapter = new NavTypeAdapter(routingProfiles, isNightMode(getMyApplication()), listListener);
+		adapter = new NavTypeAdapter(routingProfiles, isNightMode(getMyApplication()),
+			listListener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
+		Button cancelBtn = view.findViewById(R.id.cancel_selection);
+		cancelBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
 
 		return view;
 	}
@@ -70,6 +83,7 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	}
 
 	class NavTypeAdapter extends RecyclerView.Adapter<ItemViewHolder> {
+
 		private final List<RoutingProfile> items;
 		private final boolean isNightMode;
 		private NavTypeDialogListener listener;
@@ -91,18 +105,20 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		@NonNull
 		@Override
 		public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			return new ItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, parent, false));
+			return new ItemViewHolder(LayoutInflater.from(parent.getContext())
+				.inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, parent, false));
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position) {
+		public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
+			final int pos = position;
 			final RoutingProfile item = items.get(position);
 			holder.title.setText(item.getName());
 			holder.descr.setText(item.getOrigin());
 			holder.icon.setImageDrawable(getIcon(item.getIconRes(), isNightMode
-					? R.color.active_buttons_and_links_dark
-					: R.color.active_buttons_and_links_light));
-			if(item.isSelected()) {
+				? R.color.active_buttons_and_links_dark
+				: R.color.active_buttons_and_links_light));
+			if (item.isSelected()) {
 				holder.radioButton.setChecked(true);
 				previousSelection = position;
 			} else {
@@ -111,14 +127,12 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					listener.selectedNavType(position);
+					listener.selectedNavType(pos);
 					holder.radioButton.setChecked(true);
-					items.get(position).setSelected(true);
+					items.get(pos).setSelected(true);
 					items.get(previousSelection).setSelected(false);
 					notifyItemChanged(previousSelection);
-
-					previousSelection = position;
-
+					previousSelection = pos;
 				}
 			});
 		}
@@ -128,7 +142,6 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			return items.size();
 		}
 	}
-
 
 	class ItemViewHolder extends RecyclerView.ViewHolder {
 		TextView title, descr;
@@ -145,10 +158,9 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	}
 
 	interface NavTypeDialogListener {
+
 		void selectedNavType(int pos);
 	}
-	interface IconIdListener {
-		void selecedIconId(int iconRes);
-	}
+
 
 }

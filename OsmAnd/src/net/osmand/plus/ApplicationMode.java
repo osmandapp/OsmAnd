@@ -36,12 +36,12 @@ public class ApplicationMode {
 	public static final ApplicationMode PUBLIC_TRANSPORT = create(R.string.app_mode_public_transport, "public_transport").
 			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark).reg();
 
-	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().nauticalLocation().
+	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).nauticalLocation().
 			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
-
+//---------------------------------------------------------------------------------------------------------------
 	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
 			icon(R.drawable.map_action_trekking_dark, R.drawable.ic_action_trekking_dark).reg();
 
@@ -102,7 +102,7 @@ public class ApplicationMode {
 
 
 
-	private static class ApplicationModeBuilder {
+	public static class ApplicationModeBuilder {
 
 
 		private ApplicationMode applicationMode;
@@ -192,8 +192,8 @@ public class ApplicationMode {
 		return builder;
 	}
 
-	public static ApplicationModeBuilder createCustomMode(int key, String stringKey) {
-		return create(key, stringKey);
+	public static ApplicationModeBuilder createCustomMode(String userProfileTitle, String stringKey) {
+		return create(-1, stringKey);
 	}
 
 	private ApplicationMode(int key, String stringKey) {
@@ -400,13 +400,29 @@ public class ApplicationMode {
 		return offRouteDistance;
 	}
 
+	public void setUserProfileTitle(String userProfileTitle) {
+		this.userProfileTitle = userProfileTitle;
+	}
+
+	public void setMapIconId(int mapIconId) {
+		this.mapIconId = mapIconId;
+	}
+
+	public void setSmallIconDark(int smallIconDark) {
+		this.smallIconDark = smallIconDark;
+	}
+
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
 		return this == mode || getParent() == mode;
 	}
 
+	public String getUserProfileTitle() {
+		return userProfileTitle;
+	}
+
 	private final int key;
 	private final String stringKey;
-	private String userName;
+	private String userProfileTitle = "";
 	private ApplicationMode parent;
 	private int mapIconId = R.drawable.map_world_globe_dark;
 	private int smallIconDark = R.drawable.ic_world_globe_dark;
