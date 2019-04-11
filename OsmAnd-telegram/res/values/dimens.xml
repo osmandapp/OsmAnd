@@ -60,6 +60,7 @@
 	<dimen name="disable_sharing_icon_top_margin">30dp</dimen>
 
 	<dimen name="search_box_height">48dp</dimen>
+	<dimen name="empty_state_descr_margin">68dp</dimen>
 
 	<dimen name="buttons_bottom_bar_height">56dp</dimen>
 
