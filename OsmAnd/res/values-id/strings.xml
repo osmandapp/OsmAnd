@@ -464,4 +464,6 @@
     <string name="routing_attr_avoid_train_description">Hindari kereta api</string>
     <string name="routing_attr_avoid_ferry_name">Hindari feri</string>
     <string name="routing_attr_avoid_ferry_description">Hindari feri</string>
+    <string name="increase_search_radius_to">Tingkatkan rentang pencarian hingga %1$s</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Hindari jalan beku dan arungan sungai.</string>
 </resources>

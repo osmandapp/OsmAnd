@@ -212,4 +212,8 @@
     <string name="timeline_description">Abìlita su monitoràgiu pro sarvare totu sas positziones in sa cronologia.</string>
     <string name="app_name_short_online">Arrastadore in lìnia</string>
     <string name="app_name_short">Arrastadore de OsmAnd</string>
+    <string name="search_contacts">Chirca cuntatos</string>
+    <string name="search_contacts_descr">Chirca intre totu sos grupos e sos cuntatos tuos.</string>
+    <string name="type_contact_or_group_name">Iscrie su nùmene de unu cuntatu o de unu grupu</string>
+    <string name="shared_string_search">Chirca</string>
 </resources>

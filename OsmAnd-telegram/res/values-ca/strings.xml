@@ -203,4 +203,18 @@
     <string name="my_location">La meva ubicació</string>
     <string name="live_now">En directe</string>
     <string name="timeline">Cronologia</string>
+    <string name="search_contacts">Cerca contactes</string>
+    <string name="search_contacts_descr">Cerca per tots els grups i contactes.</string>
+    <string name="type_contact_or_group_name">Escriviu un nom de contacte o de grup</string>
+    <string name="shared_string_search">Cerca</string>
+    <string name="osmand_service_descr">OsmAnd Telegram s\'executa en procés de fons amb la pantalla tancada.</string>
+    <string name="sharing_location">S\'està compartint la ubicació</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="nm_h">nusos</string>
+    <string name="mile_per_hour">mph</string>
+    <string name="shared_string_second_short">seg</string>
+    <string name="welcome_descr">
+        <b>OsmAnd Tracker</b> us permet compartir la vostra posició i veure la dels altres a OsmAnd.<br/>
+        <br/>L\'aplicació utilitza l\'API de Telegram, per tant us cal un compte de Telegram.</string>
 </resources>

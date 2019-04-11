@@ -212,4 +212,8 @@
     <string name="location_recording_enabled">הופעלה הקלטת מיקום</string>
     <string name="app_name_short_online">עוקב בזמן אמת</string>
     <string name="app_name_short">עוקב OsmAnd</string>
+    <string name="search_contacts">חיפוש באנשי קשר</string>
+    <string name="search_contacts_descr">חיפוש בין כל הקבוצות ואנשי הקשר שלך.</string>
+    <string name="type_contact_or_group_name">נא להקליד שם איש קשר או קבוצה</string>
+    <string name="shared_string_search">חיפוש</string>
 </resources>
