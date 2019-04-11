@@ -1531,7 +1531,7 @@ Długość %2$s</string>
     <string name="shared_string_address">Adres</string>
     <string name="shared_string_show_description">Wyświetl opis.</string>
     <string name="shared_string_places">Miejsca</string>
-    <string name="shared_string_search">Wyszukaj</string>
+    <string name="shared_string_search">Szukaj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asystent mapowania OSM</string>
     <string name="shared_string_manage">Zarządzaj</string>
     <string name="shared_string_edit">Edytuj</string>
