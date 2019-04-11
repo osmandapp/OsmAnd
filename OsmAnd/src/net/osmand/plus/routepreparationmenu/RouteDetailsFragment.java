@@ -161,6 +161,24 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && isPortrait()) {
+			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && isPortrait()) {
+			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.VISIBLE);
+		}
+		super.onPause();
+	}
+
+	@Override
 	public int getShadowHeight() {
 		int res = super.getShadowHeight();
 		if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
