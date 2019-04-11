@@ -2269,7 +2269,7 @@
     <string name="animate_routing_route_not_calculated">נא לחשב את הנתיב תחילה</string>
     <string name="animate_routing_route">הדמיה באמצעות נתיב מחושב</string>
     <string name="animate_routing_gpx">הדמיה באמצעות מסלול GPX</string>
-    <string name="route_is_too_long_v2">נא להוסיף נקודות ביניים אם לא מופיעות תוצאות למסלול הארוך הזה ב־10 הדקות הקרובות.</string>
+    <string name="route_is_too_long_v2">למרחקים ארוכים: נא להוסיף נקודות ביניים אם לא נמצא מסלול תוך 10 דקות.</string>
     <string name="auto_zoom_close">קרוב מאוד</string>
     <string name="auto_zoom_far">טווח בינוני</string>
     <string name="auto_zoom_farthest">טווח ארוך</string>
@@ -2944,4 +2944,81 @@
     <string name="rendering_attr_surface_wood_name">עץ</string>
     <string name="rendering_attr_surface_gravel_name">חצץ</string>
     <string name="rendering_attr_surface_fine_gravel_name">שומשום</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">איומה ונוראה</string>
+    <string name="rendering_attr_smoothness_impassable_name">אי אפשר לעבור</string>
+    <string name="rendering_attr_highway_class_motorway_name">דרך לממונעים</string>
+    <string name="avoid_pt_types_descr">נא לבחור סוגי תחבורה ציבורית להימנע מהם בתכנון מסלול:</string>
+    <string name="avoid_pt_types">הימנעות מסוגי תחבורה ציבורית…</string>
+    <string name="shared_string_walk">הליכה</string>
+    <string name="save_poi_value_exceed_length">האורך המרבי לתגית „%s” הוא 255 תווים. 
+\nנא לקצר כדי להמשיך.</string>
+    <string name="save_poi_value_exceed_length_title">אורך הערך „%s”</string>
+    <string name="public_transport_warning_descr_blog">מידע נוסף על האופן בו OsmAnd מחשב מסלולים בבלוג שלנו.</string>
+    <string name="public_transport_warning_title">ניווט עם תחבורה ציבורית נמצא כרגע בשלבי ניסוי, עלולים להופיע שגיאות ואי־דיוקים.</string>
+    <string name="add_intermediate">הוספת נקודת ביניים</string>
+    <string name="rendering_attr_surface_dirt_name">עפר</string>
+    <string name="rendering_attr_surface_sett_name">אבנים משתלבות</string>
+    <string name="rendering_attr_surface_cobblestone_name">ריצוף חלוקי נחל</string>
+    <string name="rendering_attr_surface_compacted_name">דחוס</string>
+    <string name="rendering_attr_smoothness_excellent_name">מעולה</string>
+    <string name="rendering_attr_smoothness_good_name">טובה</string>
+    <string name="rendering_attr_smoothness_intermediate_name">בינונית</string>
+    <string name="rendering_attr_smoothness_bad_name">גרועה</string>
+    <string name="rendering_attr_smoothness_very_bad_name">גרועה מאוד</string>
+    <string name="rendering_attr_smoothness_horrible_name">איומה</string>
+    <string name="rendering_attr_highway_class_state_road_name">כביש בין מדינתי</string>
+    <string name="rendering_attr_highway_class_road_name">כביש</string>
+    <string name="rendering_attr_highway_class_street_name">רחוב</string>
+    <string name="rendering_attr_highway_class_service_name">שירות</string>
+    <string name="rendering_attr_highway_class_footway_name">מדרכה</string>
+    <string name="rendering_attr_highway_class_track_name">מסלול</string>
+    <string name="rendering_attr_highway_class_bridleway_name">דרך לסוסים</string>
+    <string name="rendering_attr_highway_class_steps_name">מדרגות</string>
+    <string name="rendering_attr_highway_class_path_name">נתיב</string>
+    <string name="rendering_attr_highway_class_cycleway_name">דרך לאופניים</string>
+    <string name="rendering_attr_undefined_name">ללא הגדרה</string>
+    <string name="release_3_3">"• מסך ‚הכוונה’ חדש: מציג כפתורי יעדי בית ועבודה, קיצור דרך ‚מסלול קודם’, רשימה של מסלולי וסמני  GPX, היסטוריית חיפוש
+\n
+\n • ניתן למצוא מידע נוסף תחת ‚פרטי מסלול’: סוגי כבישים, משטח, תלילות, חלקלקות
+\n
+\n • ניווט עם תחבורה ציבורית תומך בכל אמצעי התחבורה הציבורית: רכבת תחתית, אוטובוס, חשמלית וכו׳.
+\n
+\n • פעולה מהירה חדשה להצגה/הסתרה של מסלולים ומצבי יום/לילה.
+\n
+\n • אזורים קבועים מסומנים כמוצפים בגרמניה, דרום אפריקה וקוויבק
+\n
+\n • תמיכה נוספת בייבוא של KML ו־KMZ
+\n
+\n • תוקנו קריסות בפתיחה של תחנות תחבורה ציבורית כלשהן
+\n
+\n • הוסרו ניתוח התנהגות לקוח של פייסבוק ו־Firebase בגרסה החופשית של OsmAnd‏ (אין את זה ב־OsmAnd+‎)
+\n
+\n"</string>
+    <string name="quick_action_day_night_mode">מצב %s</string>
+    <string name="shared_string_degrees">מעלות</string>
+    <string name="shared_string_milliradians">מילי־רדיאנים</string>
+    <string name="angular_measeurement">יחידות מידה זוויתיות</string>
+    <string name="angular_measeurement_descr">החלפת יחידת המידה לאזימוט.</string>
+    <string name="routing_attr_avoid_sett_name">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
+    <string name="routing_attr_avoid_sett_description">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
+    <string name="routing_attr_avoid_tram_name">הימנעות מחשמליות</string>
+    <string name="routing_attr_avoid_tram_description">הימנעות מחשמליות</string>
+    <string name="routing_attr_avoid_bus_name">הימנעות מאוטובוסים</string>
+    <string name="routing_attr_avoid_bus_description">הימנעות מאוטובוסים ומטרוליבוסים</string>
+    <string name="routing_attr_avoid_share_taxi_name">הימנעות ממוניות שירות</string>
+    <string name="routing_attr_avoid_share_taxi_description">הימנעות ממוניות שירות</string>
+    <string name="routing_attr_avoid_train_name">הימנעות מרכבות</string>
+    <string name="routing_attr_avoid_train_description">הימנעות מרכבות</string>
+    <string name="routing_attr_avoid_subway_name">הימנעות מרכבות תחתיות</string>
+    <string name="routing_attr_avoid_subway_description">הימנעות מרכבות תחתיות ומרכבות קלות</string>
+    <string name="routing_attr_avoid_ferry_name">הימנעות ממעבורות</string>
+    <string name="routing_attr_avoid_ferry_description">הימנעות ממעבורות</string>
+    <string name="release_3_3_7">• הצגת הזמן בין ההחלפות בתחבורה הציבורית
+\n
+\n • מנשק המשתמש תוקן עבור פרטי המסלול
+\n
+\n • תוקנה ערכת העיצוב הכהה בתפריט הכיוון ובפרטי המסלול
+\n
+\n • הצגת אזימוט במדידת מרחק
+\n</string>
 </resources>

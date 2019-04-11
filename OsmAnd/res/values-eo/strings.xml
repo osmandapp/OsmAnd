@@ -429,7 +429,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu vi certe volas alŝuti %1$d ŝanĝo(j)n al OSM?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi navigadon turnon-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -536,7 +536,7 @@ Lon: %2$s</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
     <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da pilo aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
-    <string name="home_button">Ĉefekrano</string>
+    <string name="home_button">Hejmo</string>
     <string name="map_update">Ĝisdatigoj disponeblaj por %1$s mapoj</string>
     <string name="search_for">Serĉi</string>
     <string name="coordinates">Koordinatoj</string>
@@ -1044,7 +1044,7 @@ Lon: %2$s</string>
     <string name="context_menu_item_intermediate_point">Aldoni kiel intercelon</string>
     <string name="map_widget_intermediate_distance">Intercelo</string>
     <string name="ending_point_too_far">Celo estas tro malproksime al la plej proksima vojo.</string>
-    <string name="add_tag">Aldoni markon</string>
+    <string name="add_tag">Aldoni etikedon</string>
     <string name="btn_advanced_mode">Sperta reĝimo…</string>
     <string name="poi_filter_parking">Parkumejo</string>
     <string name="poi_filter_emergency">Vivsavo</string>
@@ -1743,7 +1743,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="fav_points_not_exist">Neniuj ekzistaj ŝatataj ejoj</string>
     <string name="update_existing">Anstataŭigi</string>
     <string name="only_show">Montri kurson</string>
-    <string name="follow">Ekigi navigadon</string>
+    <string name="follow">Ekigi gvidadon</string>
     <string name="mark_final_location_first">Bonvolu unue elekti celon</string>
     <string name="opening_hours">Malfermaj horoj</string>
     <string name="opening_changeset">Malfermado de ŝanĝaro…</string>
@@ -2221,7 +2221,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_driving_style_speed_name">Pli mallongaj vojoj</string>
     <string name="routing_attr_driving_style_balance_name">Ekvilibra</string>
     <string name="routing_attr_driving_style_safety_name">Preferi flankajn vojojn</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Elekti nivel-ombruman glatecon</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Elekti variecon de altitudo</string>
     <string name="full_version_thanks">Dankon al ci por aĉeti la pagan version de OsmAnd!</string>
     <string name="parking_options">Parkumadaj agordoj</string>
     <string name="do_not_send_anonymous_app_usage">Ne sendi anoniman statistikon pri uzado</string>
@@ -2255,7 +2255,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osmand_extended_description_part4">Skiado 
 \n La kromprogramo de OsmAnd “skiada map-vido” ebligas al vi vidigi skivojojn kun ilia facileco kaj aliajn taŭgajn informojn, kiel lokojn de skiliftoj kaj aliajn ejojn.</string>
     <string name="osmand_extended_description_part5">Biciklado 
-\n • Trovi biciklajn vojojn sur la mapo 
+\n • Vidigi biciklajn vojojn sur la mapo 
 \n • GPS-navigado en biciklada reĝimo kalkulas kursojn uzante biciklajn vojojn 
 \n • Montri viajn rapidon kaj altitudon 
 \n • Registri GPX-spurojn de via vojaĝo kaj diskonigi ilin 
@@ -2387,7 +2387,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_allow_private_name">Permesi privatan aliron</string>
     <string name="routing_attr_allow_private_description">Permesi aliron al privataj areoj.</string>
     <string name="display_zoom_level">Vidigi de skal-nivelo: %1$s</string>
-    <string name="route_is_too_long_v2">Bonvolu aldoni intercelojn, se neniu rezulto estos trovita post 10 minutoj.</string>
+    <string name="route_is_too_long_v2">Por longaj distancoj: bonvolu aldoni intercelojn, se neniu rezulto estos trovita post 10 minutoj.</string>
     <string name="save_poi_too_many_uppercase">La nomo enhavas tro multe da grandaj literoj? Ĉu pluigi?</string>
     <string name="srtm_menu_download_descr">Elŝutu la mapon “nivelkurboj” por vidigi nivelkurbojn por tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
@@ -2899,7 +2899,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_destination_query">Bonvolu unue elekti celon</string>
     <string name="shared_string_swap">Interŝanĝi</string>
     <string name="show_more">Montri pli</string>
-    <string name="tracks_on_map">Kursoj sur la mapo</string>
+    <string name="tracks_on_map">Montrataj kursoj</string>
     <string name="time_of_day">Tagtempo</string>
     <string name="by_transport_type">Per %1$s</string>
     <string name="step_by_step">Paŝon post paŝo</string>
@@ -2928,4 +2928,87 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n</string>
     <string name="use_osm_live_public_transport_description">Aktivigi publikan transporton por ŝanĝoj OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Publika transporto OsmAnd Live</string>
+    <string name="public_transport_warning_descr_blog">Legu pli pri kiel OsmAnd kalkulas kursojn ĉe nia taglibro (angle aŭ ruse).</string>
+    <string name="public_transport_warning_title">Navigado per la publika transporto nun estas en beta-testado, eraroj kaj malprecizoj povas okazi.</string>
+    <string name="add_intermediate">Aldoni intercelon</string>
+    <string name="transfers_size">%1$d transveturiliĝoj</string>
+    <string name="add_start_and_end_points">Aldoni komencan kaj finan punktojn</string>
+    <string name="route_add_start_point">Aldoni komencpunkton</string>
+    <string name="route_descr_select_start_point">Elektu komencpunkton</string>
+    <string name="rendering_attr_surface_unpaved_name">Malfirma</string>
+    <string name="rendering_attr_surface_sand_name">Sablo</string>
+    <string name="rendering_attr_surface_grass_name">Herbo</string>
+    <string name="rendering_attr_surface_grass_paver_name">Herb-krado</string>
+    <string name="rendering_attr_surface_ground_name">Grundo</string>
+    <string name="rendering_attr_surface_dirt_name">Grundo malebena</string>
+    <string name="rendering_attr_surface_mud_name">Koto</string>
+    <string name="rendering_attr_surface_ice_name">Glacio</string>
+    <string name="rendering_attr_surface_salt_name">Salo</string>
+    <string name="rendering_attr_surface_snow_name">Neĝo</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalto</string>
+    <string name="rendering_attr_surface_paved_name">Firma</string>
+    <string name="rendering_attr_surface_concrete_name">Betono</string>
+    <string name="rendering_attr_surface_sett_name">Kvadrataj ŝtonoj</string>
+    <string name="rendering_attr_surface_cobblestone_name">Rulŝtonaj kaheloj</string>
+    <string name="rendering_attr_surface_paving_stones_name">Trotuaraj platoj</string>
+    <string name="rendering_attr_surface_pebblestone_name">Rulŝtonaĵo</string>
+    <string name="rendering_attr_surface_stone_name">Ŝtonoj</string>
+    <string name="rendering_attr_surface_metal_name">Metalo</string>
+    <string name="rendering_attr_surface_wood_name">Ligno</string>
+    <string name="rendering_attr_surface_gravel_name">Gruzo</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Eta gruzo</string>
+    <string name="rendering_attr_surface_compacted_name">Ebenbatita gruzo</string>
+    <string name="rendering_attr_smoothness_excellent_name">Bonega</string>
+    <string name="rendering_attr_smoothness_good_name">Bona</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Meza</string>
+    <string name="rendering_attr_smoothness_bad_name">Malbona</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Tre malbona</string>
+    <string name="rendering_attr_smoothness_horrible_name">Malbonega</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Tre malbonega</string>
+    <string name="rendering_attr_smoothness_impassable_name">Netraveturebla</string>
+    <string name="rendering_attr_highway_class_motorway_name">Aŭtovojoj</string>
+    <string name="rendering_attr_highway_class_state_road_name">Ŝtatvojoj</string>
+    <string name="rendering_attr_highway_class_road_name">Vojoj</string>
+    <string name="rendering_attr_highway_class_street_name">Stratoj</string>
+    <string name="rendering_attr_highway_class_service_name">Aliraj</string>
+    <string name="rendering_attr_highway_class_footway_name">Trotuaroj</string>
+    <string name="rendering_attr_highway_class_track_name">Kampaj</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Ĉevalvojoj</string>
+    <string name="rendering_attr_highway_class_steps_name">Ŝtuparoj</string>
+    <string name="rendering_attr_highway_class_path_name">Vojetoj</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Biciklvojoj</string>
+    <string name="rendering_attr_undefined_name">Nedifinitaj</string>
+    <string name="shared_string_walk">Iru</string>
+    <string name="save_poi_value_exceed_length">Valoro de la etikedo “%s” ne povas troigi 255 signojn.
+\nBonvolu redakti ĝin antaŭ pluigi.</string>
+    <string name="save_poi_value_exceed_length_title">Longo de valoro “%s”</string>
+    <string name="avoid_pt_types_descr">Elektu specojn de publik-transportiloj por eviti dum navigado:</string>
+    <string name="avoid_pt_types">Eviti transportilojn…</string>
+    <string name="quick_action_day_night_mode">%s reĝimo</string>
+    <string name="shared_string_degrees">Gradoj</string>
+    <string name="shared_string_milliradians">Miliradianoj</string>
+    <string name="angular_measeurement">Mezurunuo de anguloj</string>
+    <string name="angular_measeurement_descr">Elekti mezurunuon por azimuto.</string>
+    <string name="routing_attr_avoid_sett_name">Eviti malglatan ŝtonpavimon</string>
+    <string name="routing_attr_avoid_sett_description">Eviti rulŝtonajn kahelojn kaj kvadratajn ŝtonojn</string>
+    <string name="routing_attr_avoid_tram_name">Eviti tramojn</string>
+    <string name="routing_attr_avoid_tram_description">Eviti tramojn</string>
+    <string name="routing_attr_avoid_bus_name">Eviti aŭtobusojn</string>
+    <string name="routing_attr_avoid_bus_description">Eviti aŭtobusojn kaj trolebusojn</string>
+    <string name="routing_attr_avoid_share_taxi_name">Eviti komunajn taksiojn</string>
+    <string name="routing_attr_avoid_share_taxi_description">Eviti komunajn taksiojn (aŭtobusetojn)</string>
+    <string name="routing_attr_avoid_train_name">Eviti trajnojn</string>
+    <string name="routing_attr_avoid_train_description">Eviti vagonarojn</string>
+    <string name="routing_attr_avoid_subway_name">Eviti metroojn</string>
+    <string name="routing_attr_avoid_subway_description">Eviti subterajn vagonarojn kaj fervojon malpezan</string>
+    <string name="routing_attr_avoid_ferry_name">Eviti pramojn</string>
+    <string name="routing_attr_avoid_ferry_description">Eviti pramojn</string>
+    <string name="release_3_3_7">• montri tempon inter transveturiliĝojn de publika transporto
+\n
+\n• korektita uzant‑fasado por detaloj pri kurso
+\n
+\n• malhela etoso: riparita menuo “navigi” kaj detaloj pri kurso
+\n
+\n• montri azimuton ĉe distanc‑mezurilo
+\n</string>
 </resources>

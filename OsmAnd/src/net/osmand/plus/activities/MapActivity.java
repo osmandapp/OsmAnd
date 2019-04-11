@@ -542,6 +542,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
 
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
+		pb.setIndeterminate(getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT);
+		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 	}
 
 	public ImportHelper getImportHelper() {

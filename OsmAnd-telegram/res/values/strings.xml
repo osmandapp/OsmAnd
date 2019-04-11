@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="search_contacts">Search contacts</string>
+    <string name="search_contacts_descr">Search across all of your groups and contacts.</string>
+    <string name="type_contact_or_group_name">Type contact or group name</string>
+    <string name="shared_string_search">Search</string>
     <string name="shared_string_ok">OK</string>
     <string name="timeline_available_for_free_now">Timeline is a feature available now for free.</string>
     <string name="disable_monitoring">Disable monitoring</string>

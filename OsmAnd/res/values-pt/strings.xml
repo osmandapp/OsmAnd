@@ -479,7 +479,7 @@
     <string name="accessibility_preferences_descr">Preferências relacionadas com a acessibilidade</string>
     <string name="shared_string_accessibility">Acessibilidade</string>
     <string name="use_fluorescent_overlays">Sobreposições Fluorescentes</string>
-    <string name="use_fluorescent_overlays_descr">Use cores fluorescentes para exibir faixas e rotas</string>
+    <string name="use_fluorescent_overlays_descr">Use cores fluorescentes para exibir trajectos e rotas.</string>
     <string name="offline_edition">Edição offline</string>
     <string name="offline_edition_descr">Usar sempre edição offline</string>
     <string name="update_poi_does_not_change_indexes">As alterações são apenas armazenadas na memória local. Para serem introduzidas nos mapas tem que ir a \"Editar Offline\" -&gt; \"Enviar\".</string>
@@ -1090,7 +1090,7 @@
     <string name="lang_hy">Armênio</string>
     <string name="calculate_osmand_route_without_internet">Cálculo off-line do segmento de rota OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeira e último segmeto de rota</string>
-    <string name="use_displayed_track_for_navigation">Usar a faixa indicada para a navegação\?</string>
+    <string name="use_displayed_track_for_navigation">Usar o trajecto indicado para a navegação\?</string>
     <string name="keep_and_add_destination_point">Adicionar como destino posterior</string>
     <string name="select_gpx">Selecione GPX …</string>
     <string name="route_descr_select_destination">Selecionar destino</string>
@@ -1207,7 +1207,7 @@
     <string name="gpx_info_start_time">Hora de início: %1$tF, %1$tT </string>
     <string name="gpx_info_end_time">Hora de fim: %1$tF, %1$tT </string>
     <string name="gpx_info_average_speed">Velocidade média: %1$s </string>
-    <string name="gpx_info_diff_altitude">Faixa de altitude : %1$s</string>
+    <string name="gpx_info_diff_altitude">Intervalo de altitude: %1$s</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
@@ -1225,7 +1225,7 @@
     <string name="sleep_mode_stop_dialog">Parar o modo de fundo do GPS\?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Sempre perguntar</string>
-    <string name="save_global_track_interval_descr">Escolher o intervalo de log para a gravação de faixa geral (ativado através do widget de gravação GPX no mapa).</string>
+    <string name="save_global_track_interval_descr">Escolher o intervalo de log para a gravação de trajecto geral (ativado através do widget de gravação GPX no mapa).</string>
     <string name="save_global_track_interval">Intervalo de log geral</string>
     <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
     <string name="save_track_to_gpx_globally">Salvar trilha GPX</string>
@@ -1251,9 +1251,9 @@
     <string name="rendering_value_orange_name">Laranja</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de vias alemãs</string>
     <string name="traffic_warning_railways">Cruzamento de ferrovia</string>
-    <string name="traffic_warning_pedestrian">Cruzamento de faixa de pedestre</string>
+    <string name="traffic_warning_pedestrian">Cruzamento de trajecto de pedestre</string>
     <string name="show_railway_warnings">Passagens de nível</string>
-    <string name="show_pedestrian_warnings">Faixas de pedestre</string>
+    <string name="show_pedestrian_warnings">Trajecto de pedestre</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas de vias americanas</string>
     <string name="routing_attr_no_new_routing_name">Evitar regras de roteamento da v1.9</string>
     <string name="remove_the_tag">REMOVA A TAG</string>
@@ -1337,7 +1337,7 @@
     <string name="local_osm_changes_upload_all_confirm">Você enviará %1$d mudanças ao OSM. Tem certeza\?</string>
     <string name="confirmation_to_clear_history">Limpar histórico\?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer no ecrã de planejamento de rota.</string>
-    <string name="delay_to_start_navigation">Iniciar navegação curva a curva depois de…</string>
+    <string name="delay_to_start_navigation">Iniciar orientação curva a curva depois de…</string>
     <string name="osmand_parking_overdue">atrasado</string>
     <string name="action_create">Criar ação</string>
     <string name="action_modify">Modificar ação</string>
@@ -1507,7 +1507,7 @@
     <string name="gps_wake_up_timer">Intervalo para sinal de GPS</string>
     <string name="favourites_edit_dialog_title">Informação de Favorito</string>
     <string name="simulate_your_location_stop_descr">Parar de simular a sua posição.</string>
-    <string name="simulate_your_location_descr">Simule a sua posição utilizando uma rota calculada ou uma faixa GPX gravada.</string>
+    <string name="simulate_your_location_descr">Simule a sua posição utilizando uma rota calculada ou uma trajecto GPX gravado.</string>
     <string name="looking_up_address">Procurar endereço</string>
     <string name="av_locations_descr">Ficheiro GPX com anotações de posições.</string>
     <string name="av_locations">Localizações</string>
@@ -1759,7 +1759,7 @@
     <string name="show_free_version_banner">Mostrar propaganda da versão gratuita</string>
     <string name="downloads_left_template">Falta descarregar %1$s</string>
     <string name="roads">Estradas</string>
-    <string name="current_track">Faixa atual</string>
+    <string name="current_track">Trajecto atual</string>
     <string name="map_widget_battery">Nível de bateria</string>
     <string name="change_markers_position">Alterar posição do marcador</string>
     <string name="move_marker_bottom_sheet_title">Mover o mapa para alterar a posição do marcador</string>
@@ -2091,7 +2091,7 @@
     <string name="commiting_way">Cometendo caminho…</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
     <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: <b>\"%1$s\"</b>, bem como sua localização.<br/>
-        <br/> Nós não coletamos informações pessoais, nós só precisamos dados de pesquisa para melhorar o algoritmo de busca.<br/>
+        <br/> Nenhuma informação pessoal é recolhida, os dados de pesquisa só servem para melhorar o algoritmo de busca.<br/>
     </string>
     <string name="send_search_query">Enviar a consulta de pesquisa?</string>
     <string name="shared_string_world">Mundo</string>
@@ -2107,7 +2107,7 @@
     <string name="shared_string_bookmark">Marcador</string>
     <string name="hide_full_description">Esconder descrição completa</string>
     <string name="show_full_description">Mostrar a descrição completa</string>
-    <string name="thank_you_for_feedback">Obrigado pelo feedback</string>
+    <string name="thank_you_for_feedback">Obrigado pelo seu feedback</string>
     <string name="release_3_2_pre">• A falha na inicialização que ocorreu em alguns dispositivos corrigida
 \n
 \n• Novos Marcadores de recurso: apresentar os marcadores que já foi percorrida
@@ -2128,19 +2128,19 @@
     <string name="keep_passed_markers_descr">Marcadores adicionados como um grupo de favoritos ou ponto de rota GPX marcados Passado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
     <string name="keep_passed_markers">Manter marcadores passados no mapa</string>
     <string name="more_transport_on_stop_hint">Há mais transportes nesta parada.</string>
-    <string name="ask_for_location_permission">Por favor, dê OsmAnd permissão para localização para continuar.</string>
+    <string name="ask_for_location_permission">Por favor, dê OsmAnd a permissão para localização para continuar.</string>
     <string name="markers_remove_dialog_msg">Apagar o marcador de mapa \'%s\'\?</string>
     <string name="edit_map_marker">Editar marcador de mapa</string>
-    <string name="third_party_application">Aplicativo de terceiros</string>
+    <string name="third_party_application">App de terceiros</string>
     <string name="start_search_from_city">Iniciar pesquisa a partir da cidade</string>
     <string name="osm_live_plan_pricing">Plano e preços</string>
-    <string name="osm_live_payment_monthly_title">Pagar mensalmente</string>
-    <string name="osm_live_payment_3_months_title">Pagar uma vez em 3 meses</string>
-    <string name="osm_live_payment_annual_title">Pagar uma vez por ano</string>
+    <string name="osm_live_payment_monthly_title">Mensalmente</string>
+    <string name="osm_live_payment_3_months_title">A cada três meses</string>
+    <string name="osm_live_payment_annual_title">Anualmente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mês</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mês</string>
-    <string name="osm_live_payment_discount_descr">Poupe %1$s!</string>
-    <string name="osm_live_payment_current_subscription">A sua subscrição actual</string>
+    <string name="osm_live_payment_discount_descr">Poupe %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Assinatura atual</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
     <string name="osm_live_payment_renews_quarterly">Renova trimestral</string>
     <string name="osm_live_payment_renews_annually">Renova anualmente</string>
@@ -2240,7 +2240,7 @@
     <string name="shared_string_travel_guides">Guias de viagem</string>
     <string name="waypoints_removed_from_map_markers">ponto de rota removidos de marcadores de mapa</string>
     <string name="nothing_found_in_radius">Não foi possível encontrar nada:</string>
-    <string name="select_waypoints_category_description">Adicionar todos os da faixa de pontos de rota ou selecionar categorias separadas.</string>
+    <string name="select_waypoints_category_description">Adicionar todos os pontos de rota do trajecto ou selecionar categorias separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Limpar todos os pontos intermediários</string>
     <string name="group_deleted">Grupo apagado</string>
@@ -2587,7 +2587,7 @@
     <string name="osmand_plus_extended_description_part2">Navegação 
 \n• Funciona on-line (rápido) ou off-line (sem custo de roaming quando estiver no exterior) 
 \n• Orientação por voz passo-a-passo (vozes gravadas e sintetizadas) 
-\n• Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada 
+\n• Orientação de trajectos opcionais, exibição do nome da rua e tempo estimado de chegada 
 \n• Suporta pontos intermediários do seu itinerário 
 \n• Correção de rota automático sempre que você sair da rota 
 \n• Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
@@ -2814,7 +2814,7 @@
     <string name="wiki_article_not_found">Artigo não encontrado</string>
     <string name="how_to_open_wiki_title">Como se abre artigos da Wikipedia\?</string>
     <string name="test_voice_desrc">Toque num botão e ouça a correspondente voz de comando para identificar os comandos faltantes ou com falha.</string>
-    <string name="powered_by_osmand">Powered by OsmAnd</string>
+    <string name="powered_by_osmand">Por OsmAnd</string>
     <string name="navigate_point_olc">Código de localização aberto</string>
     <string name="osm_live_subscriptions">Assinaturas</string>
     <string name="mapillary_menu_title_pano">Exibir apenas imagens de 360°</string>
@@ -2840,13 +2840,137 @@
     <string name="on_foot">a pé</string>
     <string name="route_way">Caminho</string>
     <string name="points_of_interests">Pontos de interesse (POI)</string>
-    <string name="waiting_for_route_calculation">Aguardando o cálculo da rota</string>
+    <string name="waiting_for_route_calculation">Calculando a rota…</string>
     <string name="app_mode_public_transport">Transporte público</string>
-    <string name="avoid_roads_descr">Seleccione uma estrada no mapa ou na lista abaixo que pretende evitar durante a navegação:</string>
+    <string name="avoid_roads_descr">Seleccione uma estrada que pretende evitar durante a navegação, ou no mapa ou na lista abaixo:</string>
     <string name="show_along_the_route">Mostrar ao longo da rota</string>
     <string name="simulate_navigation">Simular navegação</string>
     <string name="choose_track_file_to_follow">Escolha o ficheiro de caminho a seguir</string>
     <string name="voice_announcements">Anúncios de voz</string>
     <string name="intermediate_destinations">Destinos intermediários</string>
     <string name="arrive_at_time">Chegar às %1$s</string>
+    <string name="shared_string_degrees">Graus</string>
+    <string name="angular_measeurement">Unidades de medida angular</string>
+    <string name="angular_measeurement_descr">Mudar em que o azimute é medido.</string>
+    <string name="avoid_pt_types_descr">Selecione quais tipos de transporte público evitar para a navegação:</string>
+    <string name="quick_action_day_night_mode">Modo %s</string>
+    <string name="avoid_pt_types">Evitar tipos de transporte…</string>
+    <string name="shared_string_walk">Andar</string>
+    <string name="save_poi_value_exceed_length">O comprimento máximo do tag \"%s\" é de 255 caracteres.
+\nPor favor, encurte para continuar.</string>
+    <string name="save_poi_value_exceed_length_title">Comprimento do valor de \"%s</string>
+    <string name="public_transport_warning_descr_blog">Saiba mais sobre como OsmAnd calcula as rotas em nosso blog.</string>
+    <string name="public_transport_warning_title">A navegação em transportes públicos está atualmente em testes beta, espere erros e imprecisões.</string>
+    <string name="add_intermediate">Adicionar ponto intermediário</string>
+    <string name="transfers_size">%1$d transferências</string>
+    <string name="add_start_and_end_points">Adicionar pontos de início e fim</string>
+    <string name="route_add_start_point">Adicionar ponto de partida</string>
+    <string name="route_descr_select_start_point">Selecione o ponto de partida</string>
+    <string name="rendering_attr_surface_unpaved_name">Não pavimentado</string>
+    <string name="rendering_attr_surface_sand_name">Areia</string>
+    <string name="rendering_attr_surface_grass_name">Relva</string>
+    <string name="rendering_attr_surface_grass_paver_name">Pavimentadora de relva</string>
+    <string name="rendering_attr_surface_ground_name">Solo</string>
+    <string name="rendering_attr_surface_dirt_name">Terra</string>
+    <string name="rendering_attr_surface_mud_name">Lama</string>
+    <string name="rendering_attr_surface_ice_name">Gelo</string>
+    <string name="rendering_attr_surface_salt_name">Sal</string>
+    <string name="rendering_attr_surface_snow_name">Neve</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalto</string>
+    <string name="rendering_attr_surface_paved_name">Pavimentada</string>
+    <string name="rendering_attr_surface_concrete_name">Betão</string>
+    <string name="rendering_attr_surface_cobblestone_name">Pedregulho</string>
+    <string name="rendering_attr_surface_paving_stones_name">Pedras de pavimentação</string>
+    <string name="rendering_attr_surface_stone_name">Pedra</string>
+    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_wood_name">Madeira</string>
+    <string name="rendering_attr_surface_gravel_name">Cascalho</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Cascalho fino</string>
+    <string name="rendering_attr_surface_compacted_name">Compactado</string>
+    <string name="rendering_attr_smoothness_excellent_name">Excelente</string>
+    <string name="rendering_attr_smoothness_good_name">Bom</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Intermediário</string>
+    <string name="rendering_attr_smoothness_bad_name">Mau</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Muito ruim</string>
+    <string name="rendering_attr_smoothness_horrible_name">Horrível</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Muito horrível</string>
+    <string name="rendering_attr_smoothness_impassable_name">Intransitável</string>
+    <string name="rendering_attr_highway_class_motorway_name">Autoestrada</string>
+    <string name="rendering_attr_highway_class_state_road_name">Estrada estadual</string>
+    <string name="rendering_attr_highway_class_road_name">Estrada</string>
+    <string name="rendering_attr_highway_class_street_name">Rua</string>
+    <string name="rendering_attr_highway_class_service_name">Serviço</string>
+    <string name="rendering_attr_highway_class_footway_name">Passarela</string>
+    <string name="rendering_attr_highway_class_track_name">Trilha</string>
+    <string name="rendering_attr_highway_class_steps_name">Passos</string>
+    <string name="rendering_attr_highway_class_path_name">Caminho</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Ciclovia</string>
+    <string name="rendering_attr_undefined_name">Indefinido</string>
+    <string name="release_3_3">- Novo ecrã \'Direções\': apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de trajectos e marcadores GPX activos, histórico de pesquisa
+\n
+\n - Informação adicional em \"Detalhes da rota\": tipos de estrada, superfície, declive, suavidade
+\n
+\n - Navegação de transporte público que suporta todos os tipos de transporte: metro, autocarro, eléctrico, etc.
+\n
+\n - Nova acção rápida para mostrar/ocultar trajectos e modos dia/noite
+\n
+\n - Áreas fixas exibidas como inundadas na Alemanha, África do Sul, Quebec
+\n
+\n - Suporte adicional para importação de KML e KMZ
+\n
+\n - Quebras fixas na abertura de algumas paragens de transportes públicos
+\n
+\n - Facebook e Firebase Analytics removidas da versão gratuita (OsmAnd+ não inclui)
+\n
+\n</string>
+    <string name="use_osm_live_public_transport_description">Ativar transportes públicos para as mudanças do OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live transportes públicos</string>
+    <string name="time_of_day">Hora do dia</string>
+    <string name="by_transport_type">Por %1$s</string>
+    <string name="step_by_step">Passo a passo</string>
+    <string name="road_types">Tipos de estrada</string>
+    <string name="exit_at">Sair em</string>
+    <string name="shared_string_swap">Trocar</string>
+    <string name="show_more">Mostrar mais</string>
+    <string name="tracks_on_map">Trajectos exibidas</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trajectos GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tocar neste botão de acção mostra ou oculta trajectos GPX seleccionados no mapa</string>
+    <string name="quick_action_gpx_tracks_hide">Esconder trajectos GPX</string>
+    <string name="routing_attr_avoid_tram_name">Evitar eléctricos</string>
+    <string name="routing_attr_avoid_tram_description">Evitar eléctricos</string>
+    <string name="routing_attr_avoid_bus_name">Evitar autocarros</string>
+    <string name="routing_attr_avoid_bus_description">Evitar autocarros e tróleis</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evitar o compartilhamento de táxi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evitar o compartilhamento de táxi</string>
+    <string name="routing_attr_avoid_train_name">Evitar comboios</string>
+    <string name="routing_attr_avoid_train_description">Evitar comboios</string>
+    <string name="routing_attr_avoid_subway_name">Evitar metros</string>
+    <string name="routing_attr_avoid_subway_description">Evitar metros e transportes ferroviários leves</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar balsas</string>
+    <string name="routing_attr_avoid_ferry_description">Evitar balsas</string>
+    <string name="release_3_3_7">- Exibir o tempo entre transferências no transporte público
+\n
+\n - UI corrigida para os detalhes da rota
+\n
+\n - O tema escuro no menu Direção e Detalhes da Rota corrigido
+\n
+\n - Exibir azimute na distância de medição
+\n
+\n</string>
+    <string name="shared_string_milliradians">Milirradianos</string>
+    <string name="rendering_attr_surface_sett_name">Paralelepípedo</string>
+    <string name="rendering_attr_surface_pebblestone_name">Paralelepípedo</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Estrada para cavaleiros</string>
+    <string name="quick_action_gpx_tracks_show">Mostrar trajectos GPX</string>
+    <string name="add_destination_query">Por favor primeiro adicione o destino</string>
+    <string name="previous_route">Rota anterior</string>
+    <string name="add_home">Adicionar casa</string>
+    <string name="add_work">Adicionar trabalho</string>
+    <string name="work_button">Trabalho</string>
+    <string name="route_class_stat_container">Classe</string>
+    <string name="route_surface_stat_container">Superfície</string>
+    <string name="route_smoothness_stat_container">Lisura</string>
+    <string name="route_steepness_stat_container">Inclinação</string>
+    <string name="routing_attr_avoid_sett_name">Evitar paralelepípedo</string>
+    <string name="routing_attr_avoid_sett_description">Evitar paralelepípedo</string>
 </resources>

@@ -49,6 +49,8 @@ import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.DynamicListViewCallbacks;
 import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
+import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.DismissCallbacks;
+import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.util.Algorithms;
@@ -58,12 +60,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ROUTE_INFO_STATE_KEY;
 
 public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
-		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback {
+		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {
 
 	public static final String TAG = "WaypointsFragment";
+	public static final String USE_ROUTE_INFO_MENU_KEY = "use_route_info_menu_key";
 
 	private View view;
 	private View mainView;
@@ -83,11 +85,11 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
 
-	private int routeInfoMenuState = -1;
+	private boolean useRouteInfoMenu;
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, final Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
@@ -99,7 +101,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		Bundle args = getArguments();
 		if (args != null) {
-			routeInfoMenuState = args.getInt(ROUTE_INFO_STATE_KEY, -1);
+			useRouteInfoMenu = args.getBoolean(USE_ROUTE_INFO_MENU_KEY, false);
 		}
 		mainView = view.findViewById(R.id.main_view);
 
@@ -174,95 +176,44 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		swipeDismissListener = new SwipeDismissListViewTouchListener(
 				mapActivity,
 				listView,
-				new SwipeDismissListViewTouchListener.DismissCallbacks() {
+				new DismissCallbacks() {
 
 					@Override
 					public boolean canDismiss(int position) {
-						List<Object> activeObjects = ((StableArrayAdapter) listAdapter).getActiveObjects();
-						Object obj = listAdapter.getItem(position);
-						if (obj instanceof LocationPointWrapper) {
-							LocationPointWrapper w = (LocationPointWrapper) obj;
-							if (w.getPoint() instanceof TargetPoint) {
-								return !((TargetPoint) w.getPoint()).start;
+						StableArrayAdapter stableAdapter = listAdapter;
+						if (stableAdapter != null) {
+							List<Object> activeObjects = stableAdapter.getActiveObjects();
+							Object obj = stableAdapter.getItem(position);
+							if (obj instanceof LocationPointWrapper) {
+								LocationPointWrapper w = (LocationPointWrapper) obj;
+								if (w.getPoint() instanceof TargetPoint) {
+									return !((TargetPoint) w.getPoint()).start;
+								}
 							}
+							return activeObjects.contains(obj);
 						}
-						return activeObjects.contains(obj);
+						return false;
 					}
 
 					@Override
-					public SwipeDismissListViewTouchListener.Undoable onDismiss(final int position) {
-						final Object item;
-						final StableArrayAdapter stableAdapter;
-						final int activeObjPos;
-						stableAdapter = (StableArrayAdapter) listAdapter;
-						item = stableAdapter.getItem(position);
-
-						stableAdapter.setNotifyOnChange(false);
-						stableAdapter.remove(item);
-						stableAdapter.getObjects().remove(item);
-						activeObjPos = stableAdapter.getActiveObjects().indexOf(item);
-						stableAdapter.getActiveObjects().remove(item);
-						stableAdapter.refreshData();
-						stableAdapter.notifyDataSetChanged();
-
-						return new SwipeDismissListViewTouchListener.Undoable() {
-							@Override
-							public void undo() {
-								if (item != null) {
-									stableAdapter.setNotifyOnChange(false);
-									stableAdapter.insert(item, position);
-									stableAdapter.getObjects().add(position, item);
-									stableAdapter.getActiveObjects().add(activeObjPos, item);
-									stableAdapter.refreshData();
-									applyPointsChanges();
-									updateTitle();
-								}
-							}
-
-							@Override
-							public String getTitle() {
-								MapActivity mapActivity = getMapActivity();
-								if (mapActivity != null) {
-									List<Object> activeObjects;
-									if ((mapActivity.getRoutingHelper().isRoutePlanningMode() || mapActivity.getRoutingHelper().isFollowingMode())
-											&& item != null
-											&& ((activeObjects = stableAdapter.getActiveObjects()).isEmpty() || isContainsOnlyStart(activeObjects))) {
-										return mapActivity.getResources().getString(R.string.cancel_navigation);
-									}
-								}
-								return null;
-							}
-						};
+					public Undoable onDismiss(final int position) {
+						StableArrayAdapter stableAdapter = listAdapter;
+						if (stableAdapter != null) {
+							Object item = stableAdapter.getItem(position);
+							stableAdapter.setNotifyOnChange(false);
+							stableAdapter.remove(item);
+							stableAdapter.getObjects().remove(item);
+							stableAdapter.getActiveObjects().remove(item);
+							stableAdapter.refreshData();
+							stableAdapter.notifyDataSetChanged();
+						}
+						cancelTimer();
+						startTimer();
+						return null;
 					}
 
 					@Override
 					public void onHidePopup() {
-						MapActivity mapActivity = getMapActivity();
-						if (mapActivity != null) {
-							StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
-							stableAdapter.refreshData();
-							applyPointsChanges();
-							updateTitle();
-							List<Object> activeObjects = stableAdapter.getActiveObjects();
-							if (activeObjects.isEmpty() || isContainsOnlyStart(activeObjects)) {
-								mapActivity.getMapActions().stopNavigationWithoutConfirm();
-								mapActivity.getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, true);
-								mapActivity.getMapRouteInfoMenu().hide();
-							}
-						}
-					}
-
-					private boolean isContainsOnlyStart(List<Object> items) {
-						if (items.size() == 1) {
-							Object item = items.get(0);
-							if (item instanceof LocationPointWrapper) {
-								LocationPointWrapper w = (LocationPointWrapper) item;
-								if (w.getPoint() instanceof TargetPoint) {
-									return ((TargetPoint) w.getPoint()).start;
-								}
-							}
-						}
-						return false;
 					}
 				});
 
@@ -277,6 +228,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 					AddPointBottomSheetDialog fragment = new AddPointBottomSheetDialog();
 					fragment.setArguments(args);
 					fragment.setUsedOnMap(true);
+					fragment.setListener(WaypointsFragment.this);
 					fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 				}
 			}
@@ -364,8 +316,14 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
-			updateControlsVisibility(true, routeInfoMenuState != -1);
+			updateControlsVisibility(true, useRouteInfoMenu);
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		outState.putBoolean(USE_ROUTE_INFO_MENU_KEY, useRouteInfoMenu);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -385,8 +343,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	@Override
 	public void reloadAdapter() {
-		if (listAdapter != null) {
-			StableArrayAdapter stableAdapter = (StableArrayAdapter) listAdapter;
+		StableArrayAdapter stableAdapter = listAdapter;
+		if (stableAdapter != null) {
 			reloadListAdapter(stableAdapter);
 			setDynamicListItems(listView, stableAdapter);
 		}
@@ -737,7 +695,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			cTimer.cancel();
 	}
 
-	private static View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
+	private View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
 	                                           final MapActivity mapActivity, View v,
 	                                           final LocationPointWrapper point,
 	                                           final ArrayAdapter adapter, final boolean nightMode,
@@ -931,15 +889,15 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
-		return WaypointsFragment.showInstance(fragmentManager, -1);
+		return WaypointsFragment.showInstance(fragmentManager, false);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, int routeInfoState) {
+	public static boolean showInstance(FragmentManager fragmentManager, boolean useRouteInfoMenu) {
 		try {
 			WaypointsFragment fragment = new WaypointsFragment();
 
 			Bundle args = new Bundle();
-			args.putInt(ROUTE_INFO_STATE_KEY, routeInfoState);
+			args.putBoolean(USE_ROUTE_INFO_MENU_KEY, useRouteInfoMenu);
 			fragment.setArguments(args);
 
 			fragmentManager.beginTransaction()
@@ -958,12 +916,22 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			MapActivity mapActivity = (MapActivity) getActivity();
 			if (mapActivity != null) {
 				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-				if (routeInfoMenuState != -1) {
-					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog(routeInfoMenuState);
+				if (useRouteInfoMenu) {
+					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 				}
 			}
 		} catch (Exception e) {
 			//
+		}
+	}
+
+	@Override
+	public void onSelectOnMap(AddPointBottomSheetDialog dialog) {
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().selectOnScreen(dialog.getPointType(), true);
+			useRouteInfoMenu = false;
+			dismiss();
 		}
 	}
 }

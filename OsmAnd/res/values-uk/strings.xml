@@ -551,7 +551,7 @@
     <string name="fav_points_not_exist">Точки Закладок відсутні</string>
     <string name="update_existing">Замінити</string>
     <string name="only_show">Показати маршрут</string>
-    <string name="follow">Стартувати</string>
+    <string name="follow">Почати супровід</string>
     <string name="recalculate_route_to_your_location">Режим пересування:</string>
     <string name="mark_final_location_first">Вкажіть пункт призначення</string>
     <string name="get_directions">Маршрут</string>
@@ -1510,7 +1510,7 @@
     <string name="current_route">Поточний маршрут</string>
     <string name="osm_changes_added_to_local_edits">Зміни OSM додані до локального набору змін</string>
     <string name="mark_to_delete">Позначити для вилучення</string>
-    <string name="delay_to_start_navigation">Розпочати навігацію після…</string>
+    <string name="delay_to_start_navigation">Почати покрокове ведення після…</string>
     <string name="shared_string_go">Вирушаємо</string>
     <string name="shared_string_do_not_use">Не використовувати</string>
     <string name="shared_string_address">Адреса</string>
@@ -2297,7 +2297,7 @@
     <string name="relief_smoothness_factor_descr">Переважний рельєф: рівнинний або гористий.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Вибрати пересіченість місцевості</string>
     <string name="shared_string_paused">Призупинено</string>
-    <string name="route_is_too_long_v2">Додайте проміжні пункти призначення, якщо протягом 10 хвилин не буде прокладено жодного шляху для маршруту такої довжини.</string>
+    <string name="route_is_too_long_v2">Для великих відстаней: Додайте проміжні пункти призначення, якщо протягом 10 хвилин не буде знайдено жодного маршруту.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) — застосунок для мап і навігації з доступом до безкоштовних глобальних високоякісних даних OpenStreetMap (OSM).
 \n
 \nНасолоджуйтесь голосовою та візуальною навігацією, переглядом цікавих точок (англ. POI), створенням та керуванням GPX-треками, показом контурних ліній та даних про висоту (за допомогою зовнішнього втулка), вибором між режимами автомобіліста, велосипедиста й пішохода, редагуванням OSM та ще багато чим іншим.</string>
@@ -2818,7 +2818,7 @@
     <string name="how_to_open_wiki_title">Як відкрити статті Вікіпедії?</string>
     <string name="thank_you_for_feedback">Дякуємо за Ваш відгук</string>
     <string name="poi_cannot_be_found">Вузол або шлях не може бути знайдено.</string>
-    <string name="search_no_results_feedback">Немає результатів пошуку?
+    <string name="search_no_results_feedback">Немає результатів пошуку\?
 \nНадішліть нам відгук</string>
     <string name="commiting_way">Створюється шлях…</string>
     <string name="test_voice_desrc">Натисніть кнопку та прослуховуйте відповідну голосову підказку, щоб визначити відсутні або хибні підказки.</string>
@@ -2870,21 +2870,21 @@
     <string name="sit_on_the_stop">Посадка на зупинці</string>
     <string name="shared_string_swap">Поміняти</string>
     <string name="show_more">Показати більше</string>
-    <string name="tracks_on_map">Треки на карті</string>
-    <string name="quick_action_show_hide_gpx_tracks">Показати/Приховати GPX треки</string>
-    <string name="quick_action_gpx_tracks_hide">Приховати GPX треки</string>
-    <string name="quick_action_gpx_tracks_show">Показати GPX треки</string>
+    <string name="tracks_on_map">Показані треки</string>
+    <string name="quick_action_show_hide_gpx_tracks">Показати/Приховати GPX-треки</string>
+    <string name="quick_action_gpx_tracks_hide">Приховати GPX-треки</string>
+    <string name="quick_action_gpx_tracks_show">Показати GPX-треки</string>
     <string name="add_destination_query">Спершу додайте пункт призначення</string>
     <string name="previous_route">Попередній маршрут</string>
-    <string name="add_home">Додати будинок</string>
-    <string name="add_work">Додати роботу</string>
+    <string name="add_home">Додати \"Дім\"</string>
+    <string name="add_work">Додати \"Роботу\"</string>
     <string name="work_button">Робота</string>
     <string name="cubic_m">м³</string>
     <string name="metric_ton">т</string>
     <string name="shared_string_capacity">Об\'єм</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висота</string>
-    <string name="swap_start_and_destination">Поміняти місцями пункти призначення та відправлення</string>
+    <string name="swap_start_and_destination">Поміняти місцями пункти відправлення та призначення</string>
     <string name="add_destination_point">Додати пункт призначення</string>
     <string name="add_intermediate_point">Додати проміжний пункт</string>
     <string name="add_start_point">Додати пункт відправлення</string>
@@ -2893,9 +2893,9 @@
     <string name="on_foot">Пішки</string>
     <string name="route_way">Шлях</string>
     <string name="app_mode_public_transport">Громадський транспорт</string>
-    <string name="simulate_navigation">Моделювати навігацію</string>
-    <string name="voice_announcements">Голосові об\'яви</string>
-    <string name="intermediate_destinations">Проміжні пункти</string>
+    <string name="simulate_navigation">Симулювати навігацію</string>
+    <string name="voice_announcements">Голосові оголошення</string>
+    <string name="intermediate_destinations">Проміжні пункти призначення</string>
     <string name="arrive_at_time">Прибуття о %1$s</string>
     <string name="osm_live_subscriptions">Підписки</string>
     <string name="mapillary_menu_title_pano">Відображати лише панорами 360°</string>
@@ -2909,4 +2909,114 @@
     <string name="route_smoothness_stat_container">Рівність</string>
     <string name="route_steepness_stat_container">Крутість</string>
     <string name="run_full_osmand_header">Запустити OsmAnd\?</string>
+    <string name="shared_string_walk">Пішки</string>
+    <string name="save_poi_value_exceed_length">Довжина тегу \"%s\" не може перевищувати 255 символів.
+\nСкоротіть його, щоб продовжити.</string>
+    <string name="public_transport_warning_descr_blog">Детальніше про те, як OsmAnd розраховує маршрути, читайте в нашому блозі.</string>
+    <string name="public_transport_warning_title">Навігація громадським транспортом на даний час проходить тестування, можливі помилки та неточності.</string>
+    <string name="add_intermediate">Додати проміжну точку</string>
+    <string name="transfers_size">%1$d пересадки</string>
+    <string name="add_start_and_end_points">Додати точку початку та призначення</string>
+    <string name="route_add_start_point">Додати точку початку</string>
+    <string name="route_descr_select_start_point">Оберіть точку початку</string>
+    <string name="rendering_attr_surface_unpaved_name">Ґрунтова</string>
+    <string name="rendering_attr_surface_sand_name">Пісок</string>
+    <string name="rendering_attr_surface_grass_name">Трава</string>
+    <string name="rendering_attr_surface_grass_paver_name">Газонна решітка</string>
+    <string name="rendering_attr_surface_ground_name">Земля</string>
+    <string name="rendering_attr_surface_dirt_name">Бруд</string>
+    <string name="rendering_attr_surface_mud_name">Мул</string>
+    <string name="rendering_attr_surface_ice_name">Лід</string>
+    <string name="rendering_attr_surface_salt_name">Сіль</string>
+    <string name="rendering_attr_surface_snow_name">Сніг</string>
+    <string name="rendering_attr_surface_asphalt_name">Асфальт</string>
+    <string name="rendering_attr_surface_paved_name">Тверда</string>
+    <string name="rendering_attr_surface_concrete_name">Бетон</string>
+    <string name="rendering_attr_surface_sett_name">Бруківка</string>
+    <string name="rendering_attr_surface_paving_stones_name">Тротуарна плитка</string>
+    <string name="rendering_attr_surface_pebblestone_name">Галька</string>
+    <string name="rendering_attr_surface_stone_name">Камінь</string>
+    <string name="rendering_attr_surface_metal_name">Метал</string>
+    <string name="rendering_attr_surface_wood_name">Дерево</string>
+    <string name="rendering_attr_surface_gravel_name">Гравій</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Багатошаровий гравій</string>
+    <string name="rendering_attr_surface_compacted_name">Втрамбована</string>
+    <string name="rendering_attr_smoothness_excellent_name">Чудова</string>
+    <string name="rendering_attr_smoothness_good_name">Хороша</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Середня</string>
+    <string name="rendering_attr_smoothness_bad_name">Погана</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Дуже погана</string>
+    <string name="rendering_attr_smoothness_horrible_name">Жахлива</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Дуже жахлива</string>
+    <string name="rendering_attr_smoothness_impassable_name">Непрохідна</string>
+    <string name="rendering_attr_highway_class_motorway_name">Автомагістраль</string>
+    <string name="rendering_attr_highway_class_road_name">Дорога</string>
+    <string name="rendering_attr_highway_class_street_name">Вулиця</string>
+    <string name="rendering_attr_highway_class_service_name">Проїзд</string>
+    <string name="rendering_attr_highway_class_footway_name">Тротуар</string>
+    <string name="rendering_attr_highway_class_steps_name">Сходи</string>
+    <string name="waiting_for_route_calculation">Розрахунок маршруту…</string>
+    <string name="shared_string_description">Опис</string>
+    <string name="routing_attr_avoid_tram_name">Уникати трамваїв</string>
+    <string name="routing_attr_avoid_tram_description">Уникати трамваїв</string>
+    <string name="routing_attr_avoid_bus_name">Уникати автобусів</string>
+    <string name="routing_attr_avoid_bus_description">Уникати автобусів і тролейбусів</string>
+    <string name="routing_attr_avoid_share_taxi_name">Уникати маршрутних таксі</string>
+    <string name="routing_attr_avoid_share_taxi_description">Уникати маршрутних таксі</string>
+    <string name="routing_attr_avoid_train_name">Уникати потягів</string>
+    <string name="routing_attr_avoid_train_description">Уникати потягів</string>
+    <string name="routing_attr_avoid_subway_name">Уникати метро</string>
+    <string name="routing_attr_avoid_subway_description">Уникати метро та легкого рейкового траспорту</string>
+    <string name="routing_attr_avoid_ferry_name">Уникати поромних переправ</string>
+    <string name="routing_attr_avoid_ferry_description">Уникати поромних переправ</string>
+    <string name="release_3_3_7">• Відображення часу між пересадками у громадському транспорті
+\n
+\n• Виправлений зовнішній вигляд \"Деталей маршруту\"
+\n
+\n• Виправлена темна тема в меню \"Напрямок\" та \"Деталі маршруту\"
+\n
+\n• Відображення азимуту в інструменті \"Вимірювання відстані\"
+\n</string>
+    <string name="shared_string_degrees">Градуси</string>
+    <string name="shared_string_milliradians">Мілірадіани</string>
+    <string name="angular_measeurement">Одиниці вимірювання кутів</string>
+    <string name="angular_measeurement_descr">Змінити одиниці вимірювання азимуту.</string>
+    <string name="avoid_pt_types_descr">Оберіть види громадського транспорту, яких треба уникати при навігації:</string>
+    <string name="quick_action_day_night_mode">%s режим</string>
+    <string name="avoid_pt_types">Уникати види транспорту…</string>
+    <string name="save_poi_value_exceed_length_title">Довжина значення \"%s\"</string>
+    <string name="rendering_attr_surface_cobblestone_name">Мостова</string>
+    <string name="rendering_attr_highway_class_state_road_name">Державна дорога</string>
+    <string name="rendering_attr_highway_class_track_name">Сільськогосподарська</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Кінна</string>
+    <string name="rendering_attr_highway_class_path_name">Стежка</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Велодоріжка</string>
+    <string name="rendering_attr_undefined_name">Невизначена</string>
+    <string name="release_3_3">• Новий екран \"Напрямки\": Відображає кнопки пунктів призначення \"Дім\" і \"Робота\", ярлик \"Попередній маршрут\", список активних GPX-треків і позначок, історію пошуку
+\n
+\n• Додаткова інформація у \"Деталях маршруту\": типи доріг, поверхня, крутизна, гладкість
+\n
+\n• Навігація громадським транспортом з підтримкою усіх видів транспорту: метро, автобус, трамвай тощо
+\n
+\n• Нова Швидка дія для приховування/відображення треків і денного/нічного режимів
+\n
+\n• Виправлено відображення районів, що відображалися затопленими, у Німеччині, Південній Африці, Квебеку
+\n
+\n• Додаткова підтримка імпорту KML і KMZ
+\n
+\n• Виправлено падіння додатку при виборі деяких зупинок громадського транспорту
+\n
+\n• Видалено аналітику Facebook і Firebase з безкоштовної версії (OsmAnd+ не містить її)
+\n</string>
+    <string name="time_of_day">Час доби</string>
+    <string name="by_transport_type">На %1$s</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Натискання на цю кнопку дії покаже або сховає обрані GPX-треки на мапі</string>
+    <string name="points_of_interests">Цікаві місця (POI)</string>
+    <string name="avoid_roads_descr">Оберіть дорогу, яку ви хочете уникати при навігації, або на мапі, або зі списку нижче:</string>
+    <string name="show_along_the_route">Показувати поруч з маршрутом</string>
+    <string name="choose_track_file_to_follow">Оберіть файл треку для слідування</string>
+    <string name="quick_action_switch_day_night_descr">Натискання на цю кнопку дії перемикає денний і нічний режими у OsmAnd</string>
+    <string name="run_full_osmand_msg">Ви використовуєте {0} мапу, надану OsmAnd. Хочете запустити повну версію OsmAnd\?</string>
+    <string name="routing_attr_avoid_sett_name">Уникати мостові та бруківку</string>
+    <string name="routing_attr_avoid_sett_description">Уникати мостові та бруківку</string>
 </resources>

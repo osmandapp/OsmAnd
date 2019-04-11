@@ -121,11 +121,11 @@
     <string name="quick_action_add_category">Добавить категорию</string>
     <string name="quick_action_add_create_items">Действия</string>
     <string name="quick_action_fav_name_descr">Если оставить это поле пустым, то оно будет автоматически заполнено адресом или названием места.</string>
-    <string name="quick_action_bug_descr">Это сообщение будет отправлено как комментарий.</string>
+    <string name="quick_action_bug_descr">Это сообщение будет добавлено в комментарий.</string>
     <string name="quick_action_category_descr">Выберите категорию для сохранения в ней избранной точки.</string>
     <string name="quick_action_gpx_category_descr">Выберите категорию (опционально).</string>
     <string name="quick_action_poi_list">Список категорий</string>
-    <string name="quick_action_sh_poi_descr">Вы можете добавить одну или несколько категорий POI для отображения на карте.</string>
+    <string name="quick_action_sh_poi_descr">Добавить одну или несколько категорий POI для отображения на карте.</string>
     <string name="quick_action_page_list_descr">Нажатие на кнопку действия позволит циклически переключать элементы данного списка.</string>
     <string name="quick_action_empty_param_error">Заполните все параметры</string>
     <string name="quick_action_map_overlay">Сменить карту покрытия</string>
@@ -717,7 +717,7 @@
     <string name="map_orientation_landscape">Ландшафт</string>
     <string name="map_screen_orientation">Ориентация экрана</string>
     <string name="map_screen_orientation_descr">Выберите ориентацию экрана.</string>
-    <string name="opening_hours_not_supported">Формат времени работы не поддерживается для редактирования</string>
+    <string name="opening_hours_not_supported">Формат часов работы не может быть изменен</string>
     <string name="add_new_rule">Новое правило</string>
     <string name="transport_Routes">Маршруты</string>
     <string name="transport_Stop">Остановка</string>
@@ -2265,8 +2265,8 @@
     <string name="shared_string_action_name">Название действия</string>
     <string name="lang_sr_latn">Сербский (латиница)</string>
     <string name="quick_action_navigation_voice">Голос вкл/выкл</string>
-    <string name="quick_action_navigation_voice_off">Голос выключен</string>
-    <string name="quick_action_navigation_voice_on">Голос включен</string>
+    <string name="quick_action_navigation_voice_off">Включить голос</string>
+    <string name="quick_action_navigation_voice_on">Выключить голос</string>
     <string name="file_can_not_be_moved">Файл не может быть перемещен.</string>
     <string name="sea_depth_thanks">Благодарим вас за покупку контуров морских глубин</string>
     <string name="shared_string_add_photos">Добавить фотографии</string>
@@ -2973,4 +2973,46 @@
     <string name="rendering_attr_highway_class_path_name">Тропа</string>
     <string name="rendering_attr_highway_class_cycleway_name">Велодорожка</string>
     <string name="rendering_attr_undefined_name">Неопределённая</string>
+    <string name="public_transport_warning_descr_blog">Подробнее о том, как OsmAnd рассчитывает маршруты в нашем блоге.</string>
+    <string name="public_transport_warning_title">Навигация на общественном транспорте в настоящее время проходит бета-тестирование, возможны ошибки и неточности.</string>
+    <string name="add_intermediate">Добавить промежуточную точку</string>
+    <string name="add_start_and_end_points">Добавить пункты отправления и назначения</string>
+    <string name="route_add_start_point">Добавить пункт отправления</string>
+    <string name="route_descr_select_start_point">Выберите пункт отправления</string>
+    <string name="rendering_attr_surface_grass_paver_name">Газонная решетка</string>
+    <string name="rendering_attr_highway_class_state_road_name">Федеральная трасса</string>
+    <string name="shared_string_walk">Пешком</string>
+    <string name="save_poi_value_exceed_length">Значение тега \"%s\" не может превышать 255 символов.
+\nОтредактируйте его перед продолжением.</string>
+    <string name="avoid_pt_types_descr">Выберите виды общественного транспорта, которые следует избегать при навигации:</string>
+    <string name="avoid_pt_types">Избегать виды транспорта…</string>
+    <string name="save_poi_value_exceed_length_title">Длина значения \"%s\"</string>
+    <string name="quick_action_day_night_mode">%s режим</string>
+    <string name="routing_attr_avoid_sett_name">Избегать булыжники и брусчатку</string>
+    <string name="routing_attr_avoid_sett_description">Избегать булыжники и брусчатку</string>
+    <string name="shared_string_milliradians">Миллирадианы</string>
+    <string name="angular_measeurement">Угловые единицы измерения</string>
+    <string name="angular_measeurement_descr">Изменить, в чем измеряется азимут.</string>
+    <string name="shared_string_degrees">Градусы</string>
+    <string name="routing_attr_avoid_tram_name">Избегать трамваев</string>
+    <string name="routing_attr_avoid_tram_description">Избегать трамваев</string>
+    <string name="routing_attr_avoid_bus_name">Избегать автобусов</string>
+    <string name="routing_attr_avoid_bus_description">Избегать автобусов и троллейбусов</string>
+    <string name="routing_attr_avoid_share_taxi_name">Избегать маршрутное такси</string>
+    <string name="routing_attr_avoid_share_taxi_description">Избегать маршрутное такси</string>
+    <string name="routing_attr_avoid_train_name">Избегать поездов</string>
+    <string name="routing_attr_avoid_train_description">Избегать поездов</string>
+    <string name="routing_attr_avoid_subway_name">Избегать метро</string>
+    <string name="routing_attr_avoid_subway_description">Избегать метро и легкорельсовый транспорт</string>
+    <string name="routing_attr_avoid_ferry_name">Избегать паромов</string>
+    <string name="routing_attr_avoid_ferry_description">Избегать паромов</string>
+    <string name="release_3_3_7">• Отображение времени между пересадками в общественном транспорте
+\n
+\n• Исправлен пользовательский интерфейс для \"Детали маршрута\"
+\n
+\n• Исправлена темная тема в меню \"Маршрут\" и \"Детали маршрута\"
+\n
+\n• Отображение азимута в инструменте \"Измерить расстояние\"
+\n
+\n</string>
 </resources>

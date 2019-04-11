@@ -715,10 +715,10 @@
     <string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
     <string name="get_directions">Navigation</string>
     <string name="opening_hours">Öffnungszeiten</string>
-    <string name="opening_changeset">Öffne Änderungssatz…</string>
-    <string name="closing_changeset">Schließe Änderungssatz…</string>
+    <string name="opening_changeset">Änderungssatz öffnen…</string>
+    <string name="closing_changeset">Änderungssatz schließen…</string>
     <string name="commiting_node">Übertrage Knoten…</string>
-    <string name="loading_poi_obj">POI wird geladen…</string>
+    <string name="loading_poi_obj">Lade POI…</string>
     <string name="auth_failed">Autorisierung fehlgeschlagen</string>
     <string name="failed_op">fehlgeschlagen</string>
     <string name="converting_names">Lokale/Englische Namen werden konvertiert…</string>
@@ -749,8 +749,8 @@
     <string name="osm_settings">OSM-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="shared_string_settings">Einstellungen</string>
-    <string name="update_tile">Karte (Kacheln) aktualisieren</string>
-    <string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
+    <string name="update_tile">Karte aktualisieren</string>
+    <string name="reload_tile">Kartenteile aktualisieren</string>
     <string name="mark_point">Ziel</string>
     <string name="shared_string_add_to_favorites">Zu \'Favoriten\' hinzufügen</string>
     <string name="use_english_names_descr">Englische oder einheimische Namen in der Karte verwenden.</string>
@@ -767,7 +767,7 @@
     <string name="show_poi_over_map_description">Zuletzt gewähltes POIs Overlay auf der Karte anzeigen.</string>
     <string name="show_poi_over_map">POI Overlay anzeigen</string>
     <string name="map_tile_source_descr">Online- oder Offline-Quelle für Karte (Kacheln).</string>
-    <string name="map_tile_source">Kartenquelle (Kacheln)</string>
+    <string name="map_tile_source">Kartenquelle</string>
     <string name="map_source">Kartenquelle</string>
     <string name="use_internet">Internet verwenden</string>
     <string name="show_location">Standort anzeigen</string>
@@ -1402,7 +1402,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="rendering_attr_busRoutes_name">Buslinien</string>
     <string name="rendering_category_hide">Ausblenden</string>
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
-    <string name="home_button">Zu Hause</string>
+    <string name="home_button">Zuhause</string>
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     <string name="shared_string_show_all">Alle anzeigen</string>
@@ -2406,7 +2406,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
     <string name="animate_my_location_desc">Animation beim Schwenken meiner Position während der Navigation aktivieren.</string>
-    <string name="route_is_too_long_v2">Bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten für diese lange Route kein Ergebnis gefunden wird.</string>
+    <string name="route_is_too_long_v2">Für lange Strecken: Bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten keine Route gefunden wird.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
     <string name="routing_attr_allow_private_name">Privatzugang erlauben</string>
@@ -2903,20 +2903,20 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="show_along_the_route">Entlang der Route anzeigen</string>
     <string name="simulate_navigation">Navigation simulieren</string>
     <string name="choose_track_file_to_follow">Wähle Track-Datei zum Verfolgen aus</string>
-    <string name="voice_announcements">Sprachmeldungen</string>
+    <string name="voice_announcements">Sprachanweisungen</string>
     <string name="intermediate_destinations">Zwischenziele</string>
-    <string name="arrive_at_time">Ankunftszeit um %1$s</string>
+    <string name="arrive_at_time">Ankunft um %1$s</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
     <string name="shared_string_capacity">Kapazität</string>
     <string name="shared_string_width">Breite</string>
     <string name="shared_string_height">Höhe</string>
-    <string name="route_class_stat_container">Klasse</string>
+    <string name="route_class_stat_container">Typ</string>
     <string name="route_surface_stat_container">Oberfläche</string>
     <string name="route_smoothness_stat_container">Oberflächenbeschaffenheit</string>
     <string name="route_steepness_stat_container">Steilheit</string>
-    <string name="add_home">Zu Hause hinzufügen</string>
-    <string name="add_work">Arbeit hinzufügen</string>
+    <string name="add_home">Zuhause hinzufügen</string>
+    <string name="add_work">Arbeitsadresse hinzufügen</string>
     <string name="work_button">Arbeit</string>
     <string name="add_destination_query">Bitte fügen Sie zuerst das Ziel hinzu</string>
     <string name="previous_route">Vorherige Route</string>
@@ -2936,9 +2936,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport_description">Öffentliche Verkehrsmittel für Änderungen an OsmAnd Live aktivieren.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
     <string name="public_transport_warning_descr_blog">Erfahren Sie mehr darüber, wie OsmAnd Routen berechnet, in unserem Blog.</string>
-    <string name="public_transport_warning_title">Öffentliche Verkehrsrouten sind jetzt in der Beta-Testphase, so dass Fehler und Ungenauigkeiten auftreten können.</string>
+    <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, erwarten Sie Fehler und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
-    <string name="transfers_size">%1$d überträgt</string>
+    <string name="transfers_size">%1$d Umstieg(e)</string>
     <string name="add_start_and_end_points">Start- und Endpunkte hinzufügen</string>
     <string name="route_add_start_point">Startpunkt hinzufügen</string>
     <string name="route_descr_select_start_point">Startpunkt auswählen</string>
@@ -2960,7 +2960,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_surface_paving_stones_name">Pflastersteine</string>
     <string name="rendering_attr_surface_pebblestone_name">Kieselsteine</string>
     <string name="rendering_attr_surface_stone_name">Stein</string>
-    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_metal_name">Metall</string>
     <string name="rendering_attr_surface_wood_name">Holz</string>
     <string name="rendering_attr_surface_gravel_name">Schotter</string>
     <string name="rendering_attr_surface_fine_gravel_name">Feiner Kies</string>
@@ -2985,4 +2985,55 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Pfad</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
     <string name="rendering_attr_undefined_name">Nicht definiert</string>
+    <string name="release_3_3">• Neuer Bildschirm \"Richtungen\": Zeigt die Knöpfe der Ziele Zuhause und Arbeit, die Verknüpfung \"Vorherige Route\", die Liste der aktiven GPX-Strecken und -Marker, den Suchverlauf. 
+\n 
+\n• Weitere Informationen unter \'Routendetails\': Straßentypen, Oberfläche, Steilheit, Glätte, Bequemlichkeit, etc. 
+\n 
+\n• Navigation im öffentlichen Verkehr mit Unterstützung aller Arten von Verkehrsmitteln: U-Bahn, Bus, Straßenbahn, etc. 
+\n 
+\n• Neue Schnellaktion für Titel anzeigen/verbergen und Tag/Nacht-Modi 
+\n 
+\n• Fix: Gebiete, die in Deutschland, Südafrika, Quebec und anderen Ländern als überflutet angezeigt wurden 
+\n 
+\n• Zusätzliche Unterstützung für den KML- und KMZ-Import 
+\n 
+\n• Fehler beim Öffnen einiger Haltestellen des öffentlichen Verkehrs behoben 
+\n 
+\n• Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr) 
+\n 
+\n</string>
+    <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
+    <string name="avoid_pt_types">Vermeiden Sie Verkehrsmittel…</string>
+    <string name="shared_string_walk">Gehen</string>
+    <string name="save_poi_value_exceed_length">Die maximale Länge des Tags \"%s\" beträgt 255 Zeichen. 
+\nBitte kürzen Sie diesen, um fortzufahren.</string>
+    <string name="save_poi_value_exceed_length_title">Länge des \"%s\" Wertes</string>
+    <string name="quick_action_day_night_mode">%s Modus</string>
+    <string name="routing_attr_avoid_sett_name">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_description">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
+    <string name="shared_string_degrees">Grad</string>
+    <string name="shared_string_milliradians">Milliradiant</string>
+    <string name="angular_measeurement">Winkel-Maßeinheiten</string>
+    <string name="angular_measeurement_descr">Ändern, in welchem Azimut gemessen wird.</string>
+    <string name="routing_attr_avoid_tram_name">Straßenbahnen meiden</string>
+    <string name="routing_attr_avoid_tram_description">Straßenbahnen meiden</string>
+    <string name="routing_attr_avoid_bus_name">Busse meiden</string>
+    <string name="routing_attr_avoid_bus_description">Busse und Trolleybusse meiden</string>
+    <string name="routing_attr_avoid_share_taxi_name">Sammeltaxi meiden</string>
+    <string name="routing_attr_avoid_share_taxi_description">Sammeltaxi meiden</string>
+    <string name="routing_attr_avoid_train_name">Züge meiden</string>
+    <string name="routing_attr_avoid_train_description">Züge meiden</string>
+    <string name="routing_attr_avoid_subway_name">U-Bahnen meiden</string>
+    <string name="routing_attr_avoid_subway_description">U-Bahnen und leichten Schienenverkehr meiden</string>
+    <string name="routing_attr_avoid_ferry_name">Fähren meiden</string>
+    <string name="routing_attr_avoid_ferry_description">Fähren meiden</string>
+    <string name="release_3_3_7">• Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln
+\n
+\n• Korrigierte Benutzeroberfläche für die Routendetails korrigiert
+\n
+\n• Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert.
+\n
+\n• Azimut in der Maßeinheit Distanz anzeigen
+\n
+\n</string>
 </resources>

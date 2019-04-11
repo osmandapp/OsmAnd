@@ -1359,7 +1359,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="wake_on_voice_descr">Allumer l\'écran (si éteint) à l\'approche d\'une bifurcation.</string>
     <string name="lock_screen_request_explanation">%1$s a besoin de cette permission pour éteindre l\'écran en mode économie d\'énergie.</string>
     <string name="shared_string_never">Jamais</string>
-    <string name="home_button">Accueil</string>
+    <string name="home_button">Domicile</string>
     <string name="search_for">Rechercher</string>
     <string name="shared_string_show_all">AFFICHER TOUT</string>
     <string name="coordinates">Coordonnées</string>
@@ -2315,7 +2315,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="display_zoom_level">Niveau de zoom de l\'affichage : %1$s</string>
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
-    <string name="route_is_too_long_v2">Merci d\'ajouter des étapes si cet itinéraire n\'est pas calculé sous 10 minutes.</string>
+    <string name="route_is_too_long_v2">Pour les longues distances et si l\'itinéraire n\'est pas calculé dans 10 minutes, ajoutez des destinations intermédiaires.</string>
     <string name="srtm_menu_download_descr">Téléchargez les \"courbes de niveaux\" de cette région.</string>
     <string name="shared_string_plugin">Greffon</string>
     <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon \"Courbes de niveaux\"</string>
@@ -2952,6 +2952,45 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_surface_pebblestone_name">Galets</string>
     <string name="rendering_attr_surface_compacted_name">Compacté</string>
     <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les routes, visitez notre blog.</string>
-    <string name="public_transport_warning_title">Les itinéraires en transport public sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
+    <string name="public_transport_warning_title">Les itinéraires en transports publics sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter un point intermédiaire</string>
+    <string name="shared_string_walk">Marche</string>
+    <string name="save_poi_value_exceed_length">L\'étiquette \"%s\" est limitée à 255 caractères.
+\nVeuillez la modifier avant de poursuivre.</string>
+    <string name="save_poi_value_exceed_length_title">Taille de \"%s\"</string>
+    <string name="avoid_pt_types_descr">Sélectionnez les types de transports publics à éviter lors de la navigation :</string>
+    <string name="avoid_pt_types">Éviter des types de transports …</string>
+    <string name="quick_action_day_night_mode">Mode %s</string>
+    <string name="release_3_3">• Nouvel écran d\'indication des Directions : Boutons Domicile et Travail, Raccourci vers la route précédente, Liste des marqueurs actifs et des traces GPX actives, Recherche dans l\'historique
+\n• Informations supplémentaires dans \'Détails de la route\' : Type de route, Surface, Pente ...
+\n• Navigation avec les transports publics : métro, bus, tram ...
+\n• Nouvelles actions rapides pour afficher / masquer les traces et le mode jour / nuit
+\n• Correction de zones indiquées comme inondées en Allemagne, Afrique du Sud et au Québec
+\n• Prise en charge des imports KML et KMZ
+\n• Correction des plantages sur les arrêts de transports publics
+\n• Pour la version gratuite : retrait des analyses Facebook et Firebase (c\'était déjà le cas pour OsmAnd+).</string>
+    <string name="shared_string_degrees">Degrés</string>
+    <string name="shared_string_milliradians">Millièmes angulaires</string>
+    <string name="angular_measeurement">Unités de mesure d\'angle</string>
+    <string name="angular_measeurement_descr">Modifier l\'unité de mesure de l\'azimut.</string>
+    <string name="routing_attr_avoid_tram_name">Éviter le tramway</string>
+    <string name="routing_attr_avoid_tram_description">Éviter le tramway</string>
+    <string name="routing_attr_avoid_bus_name">Éviter le bus</string>
+    <string name="routing_attr_avoid_share_taxi_name">Éviter le taxi partagé</string>
+    <string name="routing_attr_avoid_share_taxi_description">Éviter le taxi partagé</string>
+    <string name="routing_attr_avoid_train_name">Éviter le train</string>
+    <string name="routing_attr_avoid_train_description">Éviter le train</string>
+    <string name="routing_attr_avoid_subway_name">Éviter le métro</string>
+    <string name="routing_attr_avoid_subway_description">Éviter le métro et les transports ferrés</string>
+    <string name="routing_attr_avoid_ferry_name">Éviter le ferry</string>
+    <string name="routing_attr_avoid_ferry_description">Éviter le ferry</string>
+    <string name="release_3_3_7">• Affichage du temps d\'attente lors des correspondances
+\n
+\n • Correction d\'affichage pour les détails de l\'itinéraire
+\n
+\n • Correction du thème sombre lors de l\'affichage du menu et des détails de l\'itinéraire
+\n
+\n • Affichage de l’azimut lors de la mesure de distance.
+\n
+\n</string>
 </resources>

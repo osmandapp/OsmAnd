@@ -92,7 +92,7 @@
     <string name="lang_als">Albanska (Tosk)</string>
     <string name="read_more">Lesa meira</string>
     <string name="shared_string_update">Uppfæra</string>
-    <string name="shared_string_upload">Senda</string>
+    <string name="shared_string_upload">Senda inn</string>
     <string name="shared_string_qr_code">QR-kóði</string>
     <string name="go_to_map">Birta kort</string>
     <string name="share_menu_location">Deila staðsetningu</string>
@@ -2376,7 +2376,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_descr">Ýttu lengi og dragðu hnappinn til á skjánum til að breyta staðsetningu hans.</string>
     <string name="new_filter_desc">Settu inn heiti fyrir nýju síuna, þessu verður bætt við á Flokkar-flipann þinn.</string>
     <string name="speed_limit_exceed_message">Veldu þolvik hraðatakmarkana, ef þú ert þetta mikið fyrir ofan verður lesin aðvörun.</string>
-    <string name="route_is_too_long_v2">Þessi leið gæti verið of löng til að reikna hana. Bættu við áfangastöðum inn í leiðina ef ekkert finnst innan 10 mínútna.</string>
+    <string name="route_is_too_long_v2">"Fyrir langar leiðir: Bættu  milliáfangastöðum inn í leiðina ef ekkert finnst innan 10 mínútna."</string>
     <string name="what_is_here">Það sem er hér:</string>
     <string name="context_menu_read_full_article">Lesa óstytta grein</string>
     <string name="context_menu_read_article">Lesa grein</string>
@@ -2957,7 +2957,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport_description">Virkja breytingar á almenningssamgöngum í OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Almenningssamgöngur OsmAnd Live</string>
     <string name="public_transport_warning_descr_blog">Lærðu meira á blogginu okkar um hvernig OsmAnd reiknar leiðir.</string>
-    <string name="public_transport_warning_title">Leiðir almenningssamgangna eru nú í lokaprófunum, þannig að búast má við einhverjum villum og ónákvæmni.</string>
+    <string name="public_transport_warning_title">Leiðsögn fyrir almenningssamgöngur er nú í lokaprófunum, þannig að búast má við einhverjum villum og ónákvæmni.</string>
     <string name="add_intermediate">Bæta við millipunkti</string>
     <string name="transfers_size">%1$d millifærslur</string>
     <string name="add_start_and_end_points">Bæta við upphafs- og endapunktum</string>
@@ -3006,4 +3006,38 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Stígur</string>
     <string name="rendering_attr_highway_class_cycleway_name">Hjólastígur</string>
     <string name="rendering_attr_undefined_name">Óskilgreint</string>
+    <string name="shared_string_walk">Ganga</string>
+    <string name="save_poi_value_exceed_length">Hámarkslengd merkisins \"%s\" er 255 stafir. 
+\nBreyttu þessu áður en áfram er haldið.</string>
+    <string name="save_poi_value_exceed_length_title">Lengd \"%s\" gildisins</string>
+    <string name="avoid_pt_types_descr">Veldu tegundir almenningssamgangna sem á að forðast við leiðsögn:</string>
+    <string name="quick_action_day_night_mode">%s hamur</string>
+    <string name="avoid_pt_types">Forðast tegundir almenningssamgangna…</string>
+    <string name="routing_attr_avoid_sett_name">Forðast götusteina og steinlögn</string>
+    <string name="routing_attr_avoid_sett_description">Forðast götusteina og steinlögn</string>
+    <string name="shared_string_degrees">Gráður</string>
+    <string name="shared_string_milliradians">Millíradíanar</string>
+    <string name="angular_measeurement">Mælieiningar horna</string>
+    <string name="angular_measeurement_descr">Breyttu í hvaða einingum áttarhorn (hæð) er mælt.</string>
+    <string name="routing_attr_avoid_tram_name">Forðast sporvagna</string>
+    <string name="routing_attr_avoid_tram_description">Forðast sporvagna</string>
+    <string name="routing_attr_avoid_bus_name">Forðast strætisvagna</string>
+    <string name="routing_attr_avoid_bus_description">Forðast venjulega og rafknúna strætisvagna</string>
+    <string name="routing_attr_avoid_share_taxi_name">Forðast deilileigubíla</string>
+    <string name="routing_attr_avoid_share_taxi_description">Forðast deilileigubíla</string>
+    <string name="routing_attr_avoid_train_name">Forðast járnbrautalestir</string>
+    <string name="routing_attr_avoid_train_description">Forðast járnbrautalestir</string>
+    <string name="routing_attr_avoid_subway_name">Forðast neðanjarðarlestir</string>
+    <string name="routing_attr_avoid_subway_description">Forðast neðanjarðarlestir og léttlestasamgöngur</string>
+    <string name="routing_attr_avoid_ferry_name">Forðast ferjur</string>
+    <string name="routing_attr_avoid_ferry_description">Forðast ferjur</string>
+    <string name="release_3_3_7">• Birting á biðtíma í almenningssamgöngum
+\n
+\n • Leiðrétting viðmóts \'Nánar um leið\'
+\n
+\n • Ýmsar lagfæringar á dökku þema
+\n
+\n • Birting áttarhorns við mælingu vegalengda
+\n
+\n</string>
 </resources>

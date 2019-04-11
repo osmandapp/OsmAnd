@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="average_altitude">Altitú media</string>
+<resources>
+    <string name="average_altitude">Altitú media</string>
     <string name="average_speed">Velocidá media</string>
     <string name="shared_string_map">Mapa</string>
     <string name="shared_string_add">Amestar</string>
@@ -81,8 +82,8 @@
     <string name="turn_off_all">Desactivar too</string>
     <string name="shared_string_group">Grupu</string>
     <string name="disconnect_from_telegram_desc">Pa revocar l\'accesu a la compartición del allugamientu. Abri Telegram, vete a Axustes → Privacidá y seguranza → Sesiones y zarra la sesión d\'OsmAnd Tracker.</string>
-    <string name="disconnect_from_telegram">Cómo desactivar la compartición del allugamientu con OsmAnd dende Telegram</string>
-    <string name="logout_help_desc">Cómo desactivar la compartición del allugamientu con OsmAnd dende Telegram</string>
+    <string name="disconnect_from_telegram">Cómo desactivar el rastrexador d\'OsmAnd dende Telegram</string>
+    <string name="logout_help_desc">Cómo desactivar el rastrexador d\'OsmAnd dende Telegram</string>
     <string name="connected_account">Cuenta coneutada</string>
     <string name="shared_string_account">Cuenta</string>
     <string name="in_time">en %1$s</string>
@@ -142,11 +143,17 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">m</string>
     <string name="shared_string_second_short">s</string>
-    <string name="welcome_descr">La <b>compartición del allugamientu con OsmAnd</b> déxate compartir el to allugamientu y ver el d\'otros n\'OsmAnd.<br/><br/>L\'aplicación usa l\'API de Telegram y vas precisar una cuenta de Telegram.</string>
+    <string name="welcome_descr">El <b>rastrexador d\'OsmAnd</b> déxate compartir el to allugamientu y ver el d\'otros n\'OsmAnd.<br/>
+        <br/>L\'aplicación usa l\'API de Telegram y vas precisar una cuenta de Telegram.</string>
     <string name="my_location">El mio allugamientu</string>
     <string name="live_now">En direuto</string>
     <string name="timeline">Llinia temporal</string>
     <string name="last_available_location">L\'últimu allugamientu disponible</string>
     <string name="sharing_status">Estáu de la compartición</string>
     <string name="set_time_description">Afita\'l tiempu nel que los contautos y grupos esbillaos van ver el to allugamientu en tiempu real.</string>
+    <string name="timeline_available_for_free_now">Agora la carauterística de llinia temporal ta disponible de baldre.</string>
+    <string name="timeline_description">Activa la supervisión pa guardar nel historial tolos allugamientos.</string>
+    <string name="how_it_works">Cómo funciona</string>
+    <string name="show_gps_points">Cómo</string>
+    <string name="shared_string_date">Data</string>
 </resources>

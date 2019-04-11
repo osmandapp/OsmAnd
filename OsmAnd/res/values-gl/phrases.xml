@@ -239,7 +239,7 @@
     <string name="poi_clock">Reloxo</string>
     <string name="poi_travel_agent">Axencia de viaxes</string>
     <string name="poi_camp_site">Cámping</string>
-    <string name="poi_caravan_site">Cámping de caravanas</string>
+    <string name="poi_caravan_site">Lugar para caravanas</string>
     <string name="poi_picnic_site">Área de merendeiro</string>
     <string name="poi_spring">Fonte</string>
     <string name="poi_hot_spring">Augas termais</string>
@@ -965,7 +965,7 @@
     <string name="poi_stars_5s">5S (Luxoso superior)</string>
     <string name="poi_stars_6">Estrelas: 6</string>
     <string name="poi_stars_7">Estrelas: 7</string>
-    <string name="poi_rooms">Cuartos</string>
+    <string name="poi_rooms">Habitacións</string>
     <string name="poi_payment_coins_yes">Moedas</string>
     <string name="poi_payment_coins_no">Non se admiten moedas</string>
     <string name="poi_payment_coins_50c12">Moedas de 50c, 1€ e 2€</string>
@@ -2370,7 +2370,7 @@
     <string name="poi_elevator_yes">Con elevadoiro</string>
     <string name="poi_elevator_no">Sen elevadoiro</string>
     <string name="poi_technical_monument">Monumento técnico</string>
-    <string name="poi_office_camping">Oficina do campamento</string>
+    <string name="poi_office_camping">Oficina do cámping</string>
     <string name="poi_model_aerodrome">Aeródromo a escala</string>
     <string name="poi_guide">Oficina do guía</string>
     <string name="poi_quango">ONG case autónoma</string>
@@ -3568,4 +3568,6 @@
     <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
+    <string name="poi_flare">Chama de gas;Queimadura de facho</string>
+    <string name="poi_change_delete">Obxecto eliminado</string>
 </resources>

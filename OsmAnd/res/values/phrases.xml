@@ -121,7 +121,7 @@
 	<string name="poi_emergency_infrastructure">Emergency infrastructure</string>
 	<string name="poi_transportation">Transportation</string>
 	<string name="poi_road_obstacle">Road obstacle</string>
-	<string name="poi_filling_station">Gas station</string>
+	<string name="poi_filling_station">Filling station</string>
 	<string name="poi_personal_transport">Personal transport</string>
 	<string name="poi_public_transport">Public transport</string>
 	<string name="poi_air_transport">Air transport</string>
@@ -2610,7 +2610,7 @@
 	<string name="poi_health_specialty_urology_yes">Urology</string>
 	<string name="poi_health_specialty_surgery_yes">General surgery</string>
 	<string name="poi_health_specialty_radiology_yes">Radiology</string>
-	<string name="poi_health_specialty_radiotheraphy_yes">Radiotheraphy</string>
+	<string name="poi_health_specialty_radiotherapy_yes">Radiotherapy</string>
 	<string name="poi_health_specialty_psychiatry_yes">Psychiatry</string>
 	<string name="poi_health_specialty_neurology_yes">Neurology</string>
 	<string name="poi_health_specialty_dermatovenereology_yes">Dermato-venereology</string>

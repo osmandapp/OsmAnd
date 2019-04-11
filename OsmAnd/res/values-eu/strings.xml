@@ -188,14 +188,14 @@
     <string name="rendering_attr_showRoadMaps_name">Errepideak-bakarrik mapak</string>
     <string name="safe_mode_description">Exekutatu aplikazioa modu seguruan (geldoagoa den Android kodea erabiliz kode natiboaren ordez).</string>
     <string name="safe_mode">Modu seguroa</string>
-    <string name="native_library_not_running">Aplikazioa modu seguruan ari da (ezgaitu Ezarpenetan).</string>
+    <string name="native_library_not_running">Aplikazioa modu seguruan ari da (desaktibatu ezarpenetan).</string>
     <string name="background_service_is_enabled_question">OsmAnd bigarren planoko zerbitzua oraindik martxan. Gelditu hura ere?</string>
     <string name="close_changeset">Itxi aldaketa multzoa</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikazioa ez dago instalatua. Google Playn bilatu nahi duzu?</string>
     <string name="rendering_attr_roadColors_description">Aukeratu errepideentzako kolore paleta:</string>
     <string name="rendering_attr_roadColors_name">Errepideentzako kolore paleta</string>
     <string name="map_widget_show_destination_arrow">Erakutsi helmugara noranzkoa</string>
-    <string name="enable_plugin_monitoring_services">Gaitu bidai grabaketa gehigarria kokapen erregistro zerbitzuak erabiltzeko (GPX grabaketak, sare bidezko jarraipena)</string>
+    <string name="enable_plugin_monitoring_services">Gaitu \"bidai grabaketa\" gehigarria kokapen erregistro zerbitzuak erabiltzeko (GPX grabaketak, sare bidezko jarraipena)</string>
     <string name="non_optimal_route_calculation">Kalkulatu distantzia luzeetan hoberena izan ez daitekeen ibilbidea</string>
     <string name="gps_not_available">Mesedez gaitu GPSa ezarpenetan</string>
     <string name="map_widget_monitoring_services">Jarraipen zerbitzuak</string>
@@ -211,7 +211,7 @@
     <string name="new_destination_point_dialog">Baduzu dagoeneko helmuga ezarria:</string>
     <string name="shared_string_target_points">Helburuak</string>
     <string name="intermediate_point_too_far">%1$s tarteko helburua urrutiegi dago gertuen dagoen bidetik.</string>
-    <string name="arrived_at_intermediate_point">Zure erdibideko helburura heldu zara</string>
+    <string name="arrived_at_intermediate_point">erdibideko helburura helduta</string>
     <string name="context_menu_item_intermediate_point">Gehitu erdibideko helburu gisa</string>
     <string name="map_widget_intermediate_distance">Erdibideko helburua</string>
     <string name="ending_point_too_far">Bukaera puntua errepide gertuenetik urrutiegi dago.</string>
@@ -915,7 +915,7 @@ Biltegiratzean {1} MB erabiliko dira.
     <string name="fav_points_not_exist">Ez dago gogoko punturik</string>
     <string name="update_existing">Ordezkatu</string>
     <string name="only_show">Bistaratu ibilbidea</string>
-    <string name="follow">Hasi nabigazioa</string>
+    <string name="follow">Hasi jarraibideak</string>
     <string name="mark_final_location_first">Mesedez aukeratu lehenbizi helmuga</string>
     <string name="get_directions">Jarraibideak</string>
     <string name="opening_hours">Irekitze orduak</string>
@@ -1836,7 +1836,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_az">Azerbaijanera</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
-    <string name="delay_to_start_navigation">Hasi biraz-birako nabigazioa hau eta gero…</string>
+    <string name="delay_to_start_navigation">Hasi biraz-birako jarraibideak hau eta gero…</string>
     <string name="delay_navigation_start">Hasi biraz-birako gidaritza automatikoki</string>
     <string name="watch">Ikusi</string>
     <string name="search_radius_proximity">Erradioa</string>
@@ -2128,8 +2128,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_take_photo_note">Argazki-oharra berria</string>
     <string name="quick_action_add_osm_bug">Gehitu OSM oharra</string>
     <string name="quick_action_navigation_voice">Ahotsa bai/ez</string>
-    <string name="quick_action_navigation_voice_off">Ahotsa itzalita dago</string>
-    <string name="quick_action_navigation_voice_on">Ahotsa piztuta dago</string>
+    <string name="quick_action_navigation_voice_off">Desmututu ahotsa</string>
+    <string name="quick_action_navigation_voice_on">Mututu ahotsa</string>
     <string name="quick_action_add_gpx">Gehitu GPX bide-puntua</string>
     <string name="quick_action_add_parking">Gehitu aparkalekua</string>
     <string name="quick_action_new_action">Gehitu ekintza</string>
@@ -2312,7 +2312,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="change_color">Aldatu kolorea</string>
     <string name="edit_name">Editatu izena</string>
     <string name="animate_my_location">Animatu nire kokalekua</string>
-    <string name="route_is_too_long_v2">Sortu tarteko helburuak ez baduzu ibilbide luze honentzat emaitza bat lortu 10 minututan.</string>
+    <string name="route_is_too_long_v2">Distantzia luzeetan: Sortu tarteko helburuak ez bada ibilbide bat aurkitu 10 minututan.</string>
     <string name="shared_string_add_photos">Gehitu argazkiak</string>
     <string name="shared_string_reset">Leheneratu</string>
     <string name="shared_string_reload">Birkargatu</string>
@@ -2924,6 +2924,89 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="sit_on_the_stop">Muntatu honako geltokian</string>
     <string name="shared_string_swap">Aldatu</string>
     <string name="show_more">Erakutsi gehiago</string>
-    <string name="tracks_on_map">Mapako lorratzak</string>
+    <string name="tracks_on_map">Bistaratutako lorratzak</string>
     <string name="quick_action_show_hide_gpx_tracks">Erakutsi/ezkutatu GPX lorratzak</string>
+    <string name="add_intermediate">Gehitu tarteko puntua</string>
+    <string name="transfers_size">%1$d transferentzia</string>
+    <string name="add_start_and_end_points">Gehitu hasiera eta amaiera puntuak</string>
+    <string name="route_add_start_point">Gehitu hasiera puntua</string>
+    <string name="route_descr_select_start_point">Hautatu hasiera puntua</string>
+    <string name="rendering_attr_surface_sand_name">Area</string>
+    <string name="rendering_attr_surface_grass_name">Belarra</string>
+    <string name="rendering_attr_surface_ground_name">Lurra</string>
+    <string name="rendering_attr_surface_dirt_name">Basa</string>
+    <string name="rendering_attr_surface_mud_name">Lokatza</string>
+    <string name="rendering_attr_surface_ice_name">Izotza</string>
+    <string name="rendering_attr_surface_salt_name">Gatza</string>
+    <string name="rendering_attr_surface_snow_name">Elurra</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfaltoa</string>
+    <string name="rendering_attr_surface_concrete_name">Hormigoia</string>
+    <string name="rendering_attr_surface_paving_stones_name">Zoladura harriak</string>
+    <string name="rendering_attr_surface_stone_name">Harria</string>
+    <string name="rendering_attr_surface_metal_name">Metala</string>
+    <string name="rendering_attr_surface_wood_name">Egurra</string>
+    <string name="rendering_attr_smoothness_excellent_name">Bikaina</string>
+    <string name="rendering_attr_smoothness_good_name">Ona</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Tartekoa</string>
+    <string name="rendering_attr_smoothness_bad_name">Txarra</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Oso txarra</string>
+    <string name="rendering_attr_smoothness_horrible_name">Latza</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Oso latza</string>
+    <string name="rendering_attr_smoothness_impassable_name">Gurutzatu ezina</string>
+    <string name="rendering_attr_highway_class_motorway_name">"Autobidea "</string>
+    <string name="rendering_attr_highway_class_state_road_name">Errepide estatala</string>
+    <string name="rendering_attr_highway_class_road_name">Errepidea</string>
+    <string name="rendering_attr_highway_class_street_name">Kalea</string>
+    <string name="rendering_attr_highway_class_service_name">Zerbitzua</string>
+    <string name="rendering_attr_highway_class_footway_name">Espaloia</string>
+    <string name="rendering_attr_highway_class_track_name">Pista</string>
+    <string name="rendering_attr_highway_class_steps_name">Eskailera</string>
+    <string name="rendering_attr_highway_class_path_name">Bidea</string>
+    <string name="rendering_attr_undefined_name">Zehaztu gabea</string>
+    <string name="quick_action_gpx_tracks_hide">Ezkutatu GPS lorratzak</string>
+    <string name="quick_action_gpx_tracks_show">Erakutsi GPS lorratzak</string>
+    <string name="add_destination_query">Gehitu helburua aurretik</string>
+    <string name="previous_route">Aurreko ibilbidea</string>
+    <string name="shared_string_degrees">Graduak</string>
+    <string name="avoid_pt_types_descr">Hautatu nabigazioan ekidin beharreko garraio publikoak:</string>
+    <string name="quick_action_day_night_mode">% modua</string>
+    <string name="avoid_pt_types">Ekidin garraio motak…</string>
+    <string name="shared_string_walk">Ibili</string>
+    <string name="save_poi_value_exceed_length">\"%s\" etiketaren gehieneko luzera 255 karaktere da.
+\nLaburtu jarraitzeko.</string>
+    <string name="save_poi_value_exceed_length_title">\"%s\" balioaren luzera</string>
+    <string name="public_transport_warning_descr_blog">Ikasi gehiago ibilbideak kalkulatzeko moduari buruz OsmAnd blogean.</string>
+    <string name="public_transport_warning_title">Garraio publikoem bidezko nabigazioa beta egoeran dago, akatsak eta zehaztasun gabeziak egon daitezke.</string>
+    <string name="rendering_attr_surface_compacted_name">Trinkotua</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Zaldi-bidea</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Bizikletentzako bidea</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Ekintza botoi hau sakatzeak mapan GPX lorratzak erakutsi edo ezkutatzen ditu</string>
+    <string name="routing_attr_avoid_tram_name">Ekidin tranbiak</string>
+    <string name="routing_attr_avoid_tram_description">Ekidin tranbiak</string>
+    <string name="routing_attr_avoid_bus_name">Ekidin autobusak</string>
+    <string name="routing_attr_avoid_bus_description">Ekidin autobusak eta trolebusak</string>
+    <string name="routing_attr_avoid_share_taxi_name">Ekidin taxi partekatuak</string>
+    <string name="routing_attr_avoid_share_taxi_description">Ekidin taxi partekatuak</string>
+    <string name="routing_attr_avoid_train_name">Ekidin trenak</string>
+    <string name="routing_attr_avoid_train_description">Ekidin trenak</string>
+    <string name="routing_attr_avoid_subway_name">Ekidin metroak</string>
+    <string name="routing_attr_avoid_subway_description">Ekidin metroak eta tren arinak</string>
+    <string name="routing_attr_avoid_ferry_name">Ekidin ferriak</string>
+    <string name="routing_attr_avoid_ferry_description">Ekidin ferriak</string>
+    <string name="release_3_3_7">"• Garraio publikoetan  transferentzien arteko denbora erakusten da
+\n
+\n • Interfaze zuzendua ibilbidearen xehetasunetan
+\n
+\n • Itxura iluna zuzendua, norabide menuan eta ibilbidearen xehetasunetan
+\n
+\n • Distantziaren neurketan azimuth erakusten da
+\n
+\n"</string>
+    <string name="rendering_attr_surface_unpaved_name">Zolatu gabea</string>
+    <string name="rendering_attr_surface_grass_paver_name">Belar zolatua</string>
+    <string name="rendering_attr_surface_paved_name">Zolatua</string>
+    <string name="rendering_attr_surface_sett_name">Galtzada-harria</string>
+    <string name="rendering_attr_surface_cobblestone_name">Galtzadarria</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Legarra</string>
+    <string name="routing_attr_avoid_sett_name"></string>
 </resources>

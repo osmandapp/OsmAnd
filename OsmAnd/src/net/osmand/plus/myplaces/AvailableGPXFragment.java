@@ -1112,10 +1112,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 							selectedItems.remove(child);
 						}
 						updateSelectionMode(actionMode);
+						// Issue 6187: Sync checkbox status between Visible group and rest of list
+						allGpxAdapter.notifyDataSetInvalidated();
 					}
 				});
 				icon.setVisibility(View.GONE);
-				options.setVisibility(View.GONE);
+				//INVISIBLE instead of GONE avoids lines breaking differently in selection mode
+				options.setVisibility(View.INVISIBLE);
 			} else {
 				icon.setVisibility(View.VISIBLE);
 				options.setVisibility(View.VISIBLE);
@@ -1123,7 +1126,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			final CompoundButton checkItem = (CompoundButton) v.findViewById(R.id.toggle_item);
 			if (isSelectedGroup(groupPosition)) {
-				v.findViewById(R.id.check_item).setVisibility(View.VISIBLE);
+				v.findViewById(R.id.check_item).setVisibility(selectionMode? View.INVISIBLE : View.VISIBLE);
 				v.findViewById(R.id.options).setVisibility(View.GONE);
 			} else {
 				v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -1163,7 +1166,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
-			v.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
+			// Issue 6187: Always show visible group, also in selection mode
+			//v.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
+			v.findViewById(R.id.group_divider).setVisibility(View.VISIBLE);
 
 			StringBuilder t = new StringBuilder();
 			String groupName = group.replaceAll("_", " ").replace(".gpx", "");
@@ -1175,7 +1180,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
-				ch.setVisibility(View.VISIBLE);
+				// Issue 6187: No selection box for Visible group header
+				//ch.setVisibility(View.VISIBLE);
+				ch.setVisibility((selectionMode && !(groupPosition == 0 && isShowingSelection()))? View.VISIBLE : View.GONE);
 				ch.setChecked(selectedGroups.contains(groupPosition));
 
 				ch.setOnClickListener(new View.OnClickListener() {
@@ -1228,7 +1235,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		public boolean isShowingSelection() {
-			return selected.size() > 0 && !selectionMode;
+			// Issue 6187: Account for Visible group always being shown
+			//return selected.size() > 0 && !selectionMode;
+			return selected.size() > 0;
 		}
 
 		@Override

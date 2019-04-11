@@ -116,9 +116,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean selectFromMapTouch;
 	private PointType selectFromMapPointType;
 	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
+	private boolean selectFromMapWaypoints;
 
 	private boolean showMenu = false;
 	private int showMenuState = DEFAULT_MENU_STATE;
+	private int lastMenuState = MenuState.HEADER_ONLY;
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -234,8 +236,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		OsmandApplication app = getApp();
-		if (app != null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
 			if (selectFromMapTouch) {
 				LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 				selectFromMapTouch = false;
@@ -257,7 +260,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						targets.setWorkPoint(latlon, null);
 						break;
 				}
-				show(selectFromMapMenuState);
+				if (selectFromMapWaypoints) {
+					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
+				} else {
+					show(selectFromMapMenuState);
+				}
 				return true;
 			}
 		}
@@ -329,7 +336,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (fragmentRef != null) {
 			return fragmentRef.get().getCurrentMenuState();
 		}
-		return 0;
+		return lastMenuState;
 	}
 
 	public int getSupportedMenuStates() {
@@ -346,6 +353,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
+	}
+
+	public void showHideMenu() {
+		showHideMenu(lastMenuState);
 	}
 
 	public void showHideMenu(int menuState) {
@@ -372,7 +383,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (fragmentRef != null && fragment.isVisible()) {
 			setRouteCalculationInProgress(true);
 			fragment.updateRouteCalculationProgress(0);
-			fragment.updateControlButtons();
 			fragment.updateInfo();
 		}
 	}
@@ -385,7 +395,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 			}
 			fragment.updateRouteCalculationProgress(progress);
-			fragment.updateControlButtons();
 		}
 	}
 
@@ -396,7 +405,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (app != null && fragmentRef != null && fragment.isVisible()) {
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 			if (setRouteCalculationInProgress(routeCalculating)) {
-				fragment.updateControlButtons();
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
@@ -593,7 +601,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (card instanceof SimpleRouteCard) {
 				hide();
-				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0, getCurrentMenuState(), MenuState.FULL_SCREEN);
+				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0, true, MenuState.FULL_SCREEN);
 			}
 		}
 	}
@@ -618,7 +626,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (buttonIndex == PublicTransportCard.DETAILS_BUTTON_INDEX) {
 					hide();
 					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
-							((PublicTransportCard) card).getRouteId(), getCurrentMenuState(), MenuState.FULL_SCREEN);
+							((PublicTransportCard) card).getRouteId(), true, MenuState.FULL_SCREEN);
 				} else if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
 					setupCards();
 					openMenuHeaderOnly();
@@ -626,7 +634,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (card instanceof SimpleRouteCard) {
 				hide();
 				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0,
-						getCurrentMenuState(), MenuState.FULL_SCREEN);
+						true, MenuState.FULL_SCREEN);
 			}
 		}
 	}
@@ -859,17 +867,33 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
 		boolean publicTransportMode = helper.getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
+		boolean routeCalculated = isRouteCalculated();
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
-		int color;
-		if (isRouteCalculated()) {
-			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
-			color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+		int color1;
+		int color2;
+		if (publicTransportMode) {
+			if (routeCalculated) {
+				color1 = nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light;
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				color2 = color1;
+			} else {
+				color1 = R.color.description_font_and_bottom_sheet_icons;
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
+				color2 = color1;
+			}
 		} else {
-			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
-			color = R.color.description_font_and_bottom_sheet_icons;
+			color1 = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+			if (routeCalculated) {
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
+				color2 = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+			} else {
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
+				color2 = R.color.description_font_and_bottom_sheet_icons;
+			}
 		}
-		startButtonText.color2 = ContextCompat.getColor(app, color);
-		startButtonText.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(iconId, color), null, null, null);
+		startButtonText.color1 = ContextCompat.getColor(mapActivity, color1);
+		startButtonText.color2 = ContextCompat.getColor(mapActivity, color2);
+		startButtonText.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(iconId, color2), null, null, null);
 		if (publicTransportMode) {
 			startButtonText.setText(R.string.shared_string_show_on_map);
 		} else if (helper.isFollowingMode() || helper.isPauseNavigation()) {
@@ -1301,7 +1325,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (app.getRoutingHelper().isPublicTransportMode()) {
 				if (isTransportRouteCalculated()) {
 					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
-							app.getTransportRoutingHelper().getCurrentRoute(), getCurrentMenuState(), MenuState.HEADER_ONLY);
+							app.getTransportRoutingHelper().getCurrentRoute(), true, MenuState.HEADER_ONLY);
 				}
 			} else {
 				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
@@ -1353,7 +1377,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null && mapActivity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
 					hide();
-					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), getCurrentMenuState());
+					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 				}
 			}
 		});
@@ -1618,9 +1642,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void selectOnScreen(PointType pointType) {
+		selectOnScreen(pointType, getCurrentMenuState(), false);
+	}
+
+	public void selectOnScreen(PointType pointType, boolean waypointsMenu) {
+		selectOnScreen(pointType, getCurrentMenuState(), waypointsMenu);
+	}
+
+	public void selectOnScreen(PointType pointType, int menuState, boolean waypointsMenu) {
 		selectFromMapTouch = true;
 		selectFromMapPointType = pointType;
-		selectFromMapMenuState = getCurrentMenuState();
+		selectFromMapMenuState = menuState;
+		selectFromMapWaypoints = waypointsMenu;
 		hide();
 	}
 
@@ -1901,10 +1934,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void routeWasFinished() {
 	}
 
-	public void onDismiss() {
+	public void onDismiss(int currentMenuState) {
 		cancelButtonsAnimations();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			lastMenuState = currentMenuState;
 			mapActivity.getMapView().setMapPositionX(0);
 			mapActivity.getMapView().refreshMap();
 			AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), false);

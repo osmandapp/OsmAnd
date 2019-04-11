@@ -272,7 +272,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="plugins_screen">Udvidelser</string>
     <string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet,.</string>
     <string name="prefs_plugins">Udvidelser</string>
-    <string name="osm_editing_plugin_description">Udvidelsen giver OsmAnd mulighed for at lave OSM-bidrag såsom at oprette eller ændre OSM-interessepunkter (IP), åbne eller kommentere OSM-noter og bidrage med optagede GPX-filer. OSM er et fælles drevet, globalt kortlægningsprojekt med fri adgang for alle. Se https://openstreetmap.org for nærmere oplysninger. Aktiv deltagelse er værdsat, og bidragene kan ske direkte fra OsmAnd, hvis du angiver dine OSM-legitimationsoplysninger i appen.</string>
+    <string name="osm_editing_plugin_description">Udvidelsen giver OsmAnd mulighed for at lave OSM-bidrag såsom at oprette eller ændre OSM-interessepunkter (IP), åbne eller kommentere OSM-noter og bidrage med optagede GPX-filer. OSM er et fælles drevet, globalt kortlægningsprojekt med fri adgang for alle. Se https://openstreetmap.org for nærmere oplysninger. Aktiv deltagelse er værdsat, og bidragene kan ske direkte fra OsmAnd, hvis du angiver dine OSM-legitimationsoplysninger.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
     <string name="play_commands_of_currently_selected_voice">Vælg en stemme og test den ved at afspille beskeder</string>
     <string name="debugging_and_development">OsmAnd udvikling</string>
@@ -843,7 +843,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="fav_points_not_exist">Der eksisterer ingen Favoritpunkter</string>
     <string name="update_existing">Erstat</string>
     <string name="only_show">Vis rute</string>
-    <string name="follow">Begynd navigation</string>
+    <string name="follow">Start vejledning</string>
     <string name="mark_final_location_first">Vælg først en destination</string>
     <string name="get_directions">Rutevejledning</string>
     <string name="opening_hours">Åbningstider</string>
@@ -1518,7 +1518,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="your_edits">Redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
     <string name="delay_to_start_navigation_descr">Angiv ventetiden til at forblive på skærmen for ruteplanlægning.</string>
-    <string name="delay_to_start_navigation">Start sving-for-sving navigation efter…</string>
+    <string name="delay_to_start_navigation">Start sving-for-sving vejledning efter…</string>
     <string name="shared_string_go">Udfør</string>
     <string name="confirmation_to_clear_history">Ryd historik?</string>
     <string name="local_osm_changes_upload_all_confirm">Overfør %1$d ændringer til OSM?</string>
@@ -2128,8 +2128,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="quick_action_take_photo_note">Ny fotonote</string>
     <string name="quick_action_add_osm_bug">Tilføj OSM-note</string>
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
-    <string name="quick_action_navigation_voice_off">Talevejledning er inaktiv</string>
-    <string name="quick_action_navigation_voice_on">Talevejledning er aktiv</string>
+    <string name="quick_action_navigation_voice_off">Aktiver talevejledning</string>
+    <string name="quick_action_navigation_voice_on">Deaktiver talevejledning</string>
     <string name="quick_action_add_gpx">Tilføj GPX-rutepunkt</string>
     <string name="quick_action_add_parking">Tilføj en parkeringsplads</string>
     <string name="quick_action_new_action">Tilføj genvej</string>
@@ -2405,7 +2405,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
     <string name="save_poi_too_many_uppercase">Navnet indeholder for mange store bogstaver. Fortsæt?</string>
-    <string name="route_is_too_long_v2">Tilføj mellemliggende destinationer, hvis denne lange rute ikke er beregnet efter 10 minutter.</string>
+    <string name="route_is_too_long_v2">"For lange afstande: tilføj  mellemliggende destinationer, hvis ingen rute er beregnet efter 10 minutter."</string>
     <string name="display_zoom_level">Vise zoomniveau: %1$s</string>
     <string name="srtm_color_scheme">Farveskema</string>
     <string name="show_from_zoom_level">Vis fra zoomniveau</string>
@@ -2740,7 +2740,7 @@ Repræsenterer område: %1$s x %2$s</string>
     </string>
     <string name="daily_map_updates">Opdatering af kort: <b>hver time</b>
     </string>
-    <string name="in_app_purchase">Køb i appen</string>
+    <string name="in_app_purchase">Køb i programmet</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
     <string name="purchase_subscription_title">Abonner - %1$s</string>
@@ -2811,7 +2811,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="point_deleted">Punkt %1$s er blevet slettet</string>
     <string name="shared_string_world">Verden</string>
     <string name="send_search_query_description">Send søgestrengen: <b>\"%1$s\"</b> samt lokationen.<br/>
-        <br/>" Der indsamles ikke personlige oplysninger,  data bruges kun til  at forbedre søgealgoritmen."<br/>
+        <br/>Der indsamles ingen personlige oplysninger, søgedata bruges kun til at forbedre søgealgoritmen.<br/>
     </string>
     <string name="search_no_results_description">Ingen resultater?
 \nRapporter det.</string>
@@ -2911,12 +2911,12 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_switch_day_night_descr">Tryk på handlingsknappen skifter mellem dag- og nattilstand</string>
     <string name="route_class_stat_container">Klasse</string>
     <string name="route_surface_stat_container">Overflade</string>
-    <string name="route_smoothness_stat_container">Glathed</string>
+    <string name="route_smoothness_stat_container">Jævnhed</string>
     <string name="route_steepness_stat_container">Stejlhed</string>
-    <string name="run_full_osmand_msg">Der bruges {0} kort leveret af OsmAnd. Kør den fulde version\?</string>
+    <string name="run_full_osmand_msg">Der bruges {0} kort leveret af OsmAnd. Start den fulde version\?</string>
     <string name="shared_string_swap">Byt rundt</string>
     <string name="show_more">Vis mere</string>
-    <string name="tracks_on_map">Spor på kortet</string>
+    <string name="tracks_on_map">Viste spor</string>
     <string name="previous_route">Forrige rute</string>
     <string name="add_home">Tilføj hjem</string>
     <string name="add_work">Tilføj arbejdssted</string>
@@ -2925,8 +2925,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_transport_type">Med %1$s</string>
     <string name="step_by_step">Trin for trin</string>
     <string name="road_types">Vejtyper</string>
-    <string name="exit_at">Frakørsel</string>
-    <string name="sit_on_the_stop">Sid ved stoppet</string>
+    <string name="exit_at">Stå af ved</string>
+    <string name="sit_on_the_stop">Stig på ved stoppested</string>
     <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX spor</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tryk på handlingsknappen viser eller skjuler valgte GPX spor på kortet</string>
     <string name="quick_action_gpx_tracks_hide">Skjul GPX spor</string>
@@ -2982,6 +2982,53 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_undefined_name">Ikke defineret</string>
     <string name="public_transport_warning_descr_blog">Læs mere om hvordan OsmAnd beregner ruter på vores blog.</string>
     <string name="public_transport_warning_title">Offentlig transportruter er nu i beta testfasen, så fejl og unøjagtigheder kan forekomme.</string>
-    <string name="add_intermediate">Tilføje mellemliggende punkt</string>
+    <string name="add_intermediate">Tilføj mellemliggende punkt</string>
     <string name="transfers_size">%1$d overførsler</string>
+    <string name="shared_string_walk">Gang</string>
+    <string name="save_poi_value_exceed_length_title">Længden af \"%s\" værdien</string>
+    <string name="quick_action_day_night_mode">%s tilstand</string>
+    <string name="avoid_pt_types">Undgå transporttyper…</string>
+    <string name="avoid_pt_types_descr">Vælg offentlige transporttyper, der skal undgåes ved navigation:</string>
+    <string name="save_poi_value_exceed_length">Den maksimale længde af tag \"%s\" er 255 tegn. 
+\nForkort for at fortsætte.</string>
+    <string name="rendering_attr_surface_unpaved_name">Ikke befæstet</string>
+    <string name="rendering_attr_surface_ground_name">Jord</string>
+    <string name="rendering_attr_surface_dirt_name">Ubehandlet</string>
+    <string name="rendering_attr_surface_paved_name">Befæstet</string>
+    <string name="rendering_attr_surface_sett_name">Brosten</string>
+    <string name="rendering_attr_surface_cobblestone_name">Natursten</string>
+    <string name="rendering_attr_surface_paving_stones_name">Belægningssten</string>
+    <string name="rendering_attr_surface_pebblestone_name">Ral</string>
+    <string name="rendering_attr_smoothness_excellent_name">Fremragende</string>
+    <string name="rendering_attr_smoothness_horrible_name">Forfærdelig</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Meget forfærdelig</string>
+    <string name="rendering_attr_smoothness_impassable_name">Ikke farbar</string>
+    <string name="rendering_attr_highway_class_state_road_name">Statsvej</string>
+    <string name="rendering_attr_highway_class_service_name">Service</string>
+    <string name="rendering_attr_highway_class_steps_name">Trin</string>
+    <string name="routing_attr_avoid_sett_name">Undgå brosten og natursten</string>
+    <string name="routing_attr_avoid_sett_description">Undgå brosten og natursten</string>
+    <string name="shared_string_degrees">Grader</string>
+    <string name="shared_string_milliradians">Milliradianer</string>
+    <string name="angular_measeurement">Enhed for vinkelmåling</string>
+    <string name="angular_measeurement_descr">Ændre hvad azimuth er måles i.</string>
+    <string name="routing_attr_avoid_tram_name">Undgå sporvogne</string>
+    <string name="routing_attr_avoid_tram_description">Undgå sporvogne</string>
+    <string name="routing_attr_avoid_bus_name">Undgå busser</string>
+    <string name="routing_attr_avoid_bus_description">Undgå busser og trolleybusser</string>
+    <string name="routing_attr_avoid_share_taxi_name">Undgå deletaxi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Undgå deletaxi</string>
+    <string name="routing_attr_avoid_train_name">Undgå tog</string>
+    <string name="routing_attr_avoid_train_description">Undgå tog</string>
+    <string name="routing_attr_avoid_subway_name">Undgå metro</string>
+    <string name="routing_attr_avoid_subway_description">Undgå metro og lettog</string>
+    <string name="routing_attr_avoid_ferry_name">Undgå færger</string>
+    <string name="routing_attr_avoid_ferry_description">Undgå færger</string>
+    <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport
+\n
+\n • Korrigeret brugergrænseflade til ruteoplysningerne
+\n
+\n • Rettet mørkt tema i Retningsmenuen og Rutedetaljer
+\n
+\n • Vis azimut i mål afstand</string>
 </resources>

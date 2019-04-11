@@ -41,8 +41,8 @@
     <string name="shared_string_group">Grupa</string>
     <string name="logout_no_internet_msg">Połącz się z internetem, by właściwie wylogować się z konta Telegramu.</string>
     <string name="shared_string_close">Zamknij</string>
-    <string name="disconnect_from_telegram">Jak wyłączyć Udostępnianie Lokalizacji OsmAnd z Telegramu</string>
-    <string name="logout_help_desc">Jak wyłączyć Udostępnianie Lokalizacji OsmAnd z Telegramu</string>
+    <string name="disconnect_from_telegram">Jak wyłączyć Nadajnik OsmAnd z Telegramu</string>
+    <string name="logout_help_desc">Jak wyłączyć Nadajnik OsmAnd z Telegramu</string>
     <string name="connected_account">Połączone konta</string>
     <string name="shared_string_account">Konto</string>
     <string name="in_time">w %1$s</string>
@@ -144,8 +144,8 @@
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>
     <string name="welcome_descr">
-        <b>Udostępnianie Lokalizacji OsmAnd</b> pozwala Ci udostępniać swoją lokalizację i widzieć ją w OsmAnd.<br/>
-        <br/>Aplikacja używa Telegram API i potrzebujesz konta Telegram.</string>
+        <b>Nadajnik OsmAnd</b> pozwala Ci udostępniać swoją lokalizację i widzieć ją w OsmAnd.<br/>
+        <br/>Aplikacja używa API Telegram, a więc potrzebujesz konta Telegram.</string>
     <string name="my_location">Moja lokalizacja</string>
     <string name="live_now">Na żywo</string>
     <string name="enter_another_device_name">Wybierz nazwę, której jeszcze nie używasz</string>
@@ -200,8 +200,8 @@
     <string name="disable_monitoring">Wyłącz monitorowanie</string>
     <string name="location_recording_enabled">Zapis położenia włączony</string>
     <string name="timeline_description">Włącz monitorowanie, by zapisać wszystkie lokalizacje w historii.</string>
-    <string name="app_name_short_online">Online Tracker</string>
-    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="app_name_short_online">Nadajnik online</string>
+    <string name="app_name_short">Nadajnik OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (aplikacji do wysyłania wiadomości) jest używana do łączenia i komunikowania się z ludźmi.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker to jeden z klientów używających otwartej platformy Telegramu. Twoje kontrakty mogą używać innych klientów Telegramu.</string>
@@ -214,4 +214,5 @@
     <string name="shared_string_appearance">Wygląd</string>
     <string name="show_gps_points">Pokaż punkty GPS</string>
     <string name="show_gps_points_descr">Pokaż ilość zebranych i wysłanych punktów GPS.</string>
+    <string name="gps_points_in_buffer">przesłano (%1$d w buforze)</string>
 </resources>

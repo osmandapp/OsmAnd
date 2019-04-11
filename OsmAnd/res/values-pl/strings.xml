@@ -395,7 +395,7 @@
     <string name="fav_points_not_exist">Brak Ulubionych punktów</string>
     <string name="update_existing">Zamień</string>
     <string name="only_show">Pokaż trasę</string>
-    <string name="follow">Rozpocznij nawigację</string>
+    <string name="follow">Rozpocznij prowadzenie</string>
     <string name="recalculate_route_to_your_location">Środek transportu:</string>
     <string name="mark_final_location_first">Proszę najpierw wskazać cel trasy</string>
     <string name="get_directions">Nawigacja</string>
@@ -1374,7 +1374,7 @@
     <string name="rendering_category_hide">Ukrywanie</string>
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
     <string name="shared_string_never">Nigdy</string>
-    <string name="home_button">Ekran początkowy</string>
+    <string name="home_button">Dom</string>
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
     <string name="search_for">Wyszukiwanie</string>
     <string name="shared_string_show_all">Wyświetl wszystko</string>
@@ -1504,7 +1504,7 @@ Długość %2$s</string>
     <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian do OSM?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
     <string name="delay_to_start_navigation_descr">Określ czas oczekiwania na pozostanie na ekranie planowania trasy.</string>
-    <string name="delay_to_start_navigation">Rozpocznij nawigację zakręt-po-zakręcie za…</string>
+    <string name="delay_to_start_navigation">Rozpocznij nawigację zakręt-po-zakręcie po…</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
     <string name="agps_info">Informacje A-GPS</string>
@@ -2233,7 +2233,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Krótsze trasy</string>
     <string name="routing_attr_driving_style_balance_name">Zrównoważony</string>
     <string name="routing_attr_driving_style_safety_name">Preferuj drogi poboczne</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Wybierz gładkość cieniowanie rzeźby terenu</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Wybierz zmienność wysokości n.p.m.</string>
     <string name="do_not_send_anonymous_app_usage">Nie wysyłaj anonimowych statystyk użytkowania</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiera informacje o tym, z których części aplikacji korzysta użytkownik. Twoja lokalizacja nie jest nigdy wysyłana, tak jak teksty wpisywane w aplikacji i szczegóły dotyczące przeglądanych, wyszukiwanych i pobieranych obszarów.</string>
     <string name="do_not_show_startup_messages">Nie wyświetlaj komunikatów startowych</string>
@@ -2301,7 +2301,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_from_zoom_level">Wyświetlanie od stopnia przybliżenia</string>
     <string name="routing_attr_allow_private_name">Uwzględnianie prywatnych obszarów</string>
     <string name="routing_attr_allow_private_description">Zezwala na dostęp do prywatnych obszarów.</string>
-    <string name="route_is_too_long_v2">Proszę dodać punkty pośrednie, jeżeli nie otrzymasz wyniku dla tej długiej trasy w ciągu 10 minut.</string>
+    <string name="route_is_too_long_v2">Na duże odległości: Dodaj pośrednie cele podróży, jeśli w ciągu 10 minut nie zostanie znaleziona żadna trasa.</string>
     <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Kontynuować?</string>
     <string name="shared_string_plugin">Wtyczka</string>
     <string name="srtm_menu_download_descr">Pobierz mapę \"Poziomice\" do użycia dla tego obszaru.</string>
@@ -2595,7 +2595,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osm_recipient_stat">%1$s edycji, w sumie %2$s mBTC</string>
     <string name="distance_farthest">Odległość: najpierw najdalsze</string>
     <string name="distance_nearest">Odległość: najpierw najbliższe</string>
-    <string name="day_off_label">poza</string>
+    <string name="day_off_label">zamknięte</string>
     <string name="osm_edits_export_desc">Wybierz rodzaj eksportu: uwagi OSM, POI lub oba.</string>
     <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj OSM POI, otwórz lub skomentuj notatki OSM, oraz udostępniaj nagrane pliki GPX.</string>
     <string name="empty_state_markers_groups_desc">Importuj ulubione grupy lub punkty trasy jako znaczniki.</string>
@@ -2673,10 +2673,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osmand_extended_description_part4">Narciarska:
 \n Wtyczka map narciarskich OsmAnd umożliwia oglądanie tras narciarskich o różnym stopniu trudności oraz dodatkowe informacje, takie jak lokalizacje wyciągów i innych obiektów.</string>
     <string name="osmand_extended_description_part5">Rowerowa 
-\n • Znajdź ścieżki rowerowe na mapie
-\n • Nawigacja GPS w trybie rowerowym tworzy trasę używając dróg rowerowych
-\n • Zobacz prędkość i wysokość
-\n • Opcja nagrywania GPX umożliwia nagranie podróży i podzielenie się nią
+\n • Znajdź ścieżki rowerowe na mapie 
+\n • Nawigacja GPS w trybie rowerowym tworzy trasę przy użyciu ścieżek rowerowych 
+\n • Zobacz prędkość i wysokość 
+\n • Opcja nagrywania GPX umożliwia nagranie podróży i podzielenie się nią 
 \n • Za pomocą dodatkowej wtyczki możesz włączyć poziomice i cieniowanie terenu</string>
     <string name="osmand_extended_description_part6">Spacery, wędrówki, zwiedzanie miast 
 \n • Mapa pokazuje ci trasy piesze 
@@ -2867,7 +2867,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osm_live_payment_annual_title">Raz w roku</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / miesiąc</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / miesiąc</string>
-    <string name="osm_live_payment_discount_descr">Zapisz %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Oszczędź %1$s.</string>
     <string name="osm_live_payment_current_subscription">Aktualna subskrypcja</string>
     <string name="osm_live_payment_renews_monthly">Odnawia się co miesiąc</string>
     <string name="osm_live_payment_renews_quarterly">Odnawia się co kwartał</string>
@@ -2895,16 +2895,16 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="transfers">przesiadki</string>
     <string name="on_foot">pieszo</string>
     <string name="route_way">Trasa</string>
-    <string name="points_of_interests">Użyteczne miejsca (UM)</string>
+    <string name="points_of_interests">Użyteczne miejsca</string>
     <string name="waiting_for_route_calculation">Wyznaczanie trasy…</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
-    <string name="avoid_roads_descr">Wybierz drogę, którą chcesz unikać podczas nawigacji na mapie lub z listy poniżej:</string>
+    <string name="avoid_roads_descr">Proszę wybrać na mapie lub z poniższej listy, drogę omijaną podczas nawigacji:</string>
     <string name="show_along_the_route">Pokaż na trasie</string>
     <string name="simulate_navigation">Symulacja nawigacji</string>
     <string name="choose_track_file_to_follow">Wybierz plik trasy do śledzenia</string>
     <string name="voice_announcements">Komunikaty głosowe</string>
     <string name="intermediate_destinations">Pośrednie cele podróży</string>
-    <string name="arrive_at_time">Dotrzesz do celu o %1$s</string>
+    <string name="arrive_at_time">Dotarcie do celu o %1$s</string>
     <string name="quick_action_switch_day_night_descr">Naciśnięcie przycisku zmieni pomiędzy trybem Dziennym i Nocnym w OsmAndzie</string>
     <string name="quick_action_switch_day_mode">Tryb Dzienny</string>
     <string name="quick_action_switch_night_mode">Tryb Nocny</string>
@@ -2921,14 +2921,116 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="step_by_step">Krok po kroku</string>
     <string name="road_types">Typy dróg</string>
     <string name="exit_at">Opuść na</string>
-    <string name="sit_on_the_stop">Usiądź na przystanku</string>
+    <string name="sit_on_the_stop">Tablica na przystanku</string>
     <string name="shared_string_swap">Wymień</string>
     <string name="show_more">Pokaż więcej</string>
-    <string name="tracks_on_map">Ślady na mapie</string>
-    <string name="quick_action_show_hide_gpx_tracks">Pokaż/Ukryj Ślady GPX</string>
+    <string name="tracks_on_map">Wyświetlane ślady</string>
+    <string name="quick_action_show_hide_gpx_tracks">Przełącz widoczność śladów GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Naciśnięcie przycisku pokaże lub ukryje wybrane ślady GPX na mapie</string>
-    <string name="quick_action_gpx_tracks_hide">Ukryj Ślady GPX</string>
-    <string name="quick_action_gpx_tracks_show">Pokaż Ślady GPX</string>
-    <string name="add_destination_query">Proszę najpierw dodać Cel</string>
+    <string name="quick_action_gpx_tracks_hide">Ukryj ślady GPX</string>
+    <string name="quick_action_gpx_tracks_show">Wyświetl ślady GPX</string>
+    <string name="add_destination_query">Proszę najpierw dodać cel</string>
     <string name="previous_route">Poprzednia trasa</string>
+    <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wylicza trasy.</string>
+    <string name="route_add_start_point">Dodawanie punktu początkowego</string>
+    <string name="route_descr_select_start_point">Wybierz punkt początkowy</string>
+    <string name="rendering_attr_surface_unpaved_name">Nieutwardzona</string>
+    <string name="rendering_attr_surface_sand_name">Piach</string>
+    <string name="rendering_attr_surface_grass_name">Trawa</string>
+    <string name="rendering_attr_surface_pebblestone_name">Tłuczeń żwirowy</string>
+    <string name="rendering_attr_surface_compacted_name">Ubita</string>
+    <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
+    <string name="public_transport_warning_title">Nawigacja transportem publicznym jest obecnie w fazie testów beta. Mogą pojawić się błędy i nieścisłości.</string>
+    <string name="add_intermediate">Dodawanie punktu pośredniego</string>
+    <string name="transfers_size">%1$d transfery</string>
+    <string name="add_start_and_end_points">Dodaj punkty początkowe i końcowe</string>
+    <string name="rendering_attr_surface_grass_paver_name">Bruk z trawą</string>
+    <string name="rendering_attr_surface_ground_name">Ziemia</string>
+    <string name="rendering_attr_surface_dirt_name">Ziemia</string>
+    <string name="rendering_attr_surface_mud_name">Błoto</string>
+    <string name="rendering_attr_surface_ice_name">Lód</string>
+    <string name="rendering_attr_surface_salt_name">Sól</string>
+    <string name="rendering_attr_surface_snow_name">Śnieg</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfalt</string>
+    <string name="rendering_attr_surface_paved_name">Utwardzone</string>
+    <string name="rendering_attr_surface_concrete_name">Beton</string>
+    <string name="rendering_attr_surface_sett_name">Bruk</string>
+    <string name="rendering_attr_surface_cobblestone_name">Kamień brukowy</string>
+    <string name="rendering_attr_surface_paving_stones_name">Kostka brukowa</string>
+    <string name="rendering_attr_surface_stone_name">Kamień</string>
+    <string name="rendering_attr_surface_metal_name">Metal</string>
+    <string name="rendering_attr_surface_wood_name">Drewno</string>
+    <string name="rendering_attr_surface_gravel_name">Żwir</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Drobny żwir</string>
+    <string name="rendering_attr_smoothness_excellent_name">Wyśmienita</string>
+    <string name="rendering_attr_smoothness_good_name">Dobra</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Średnia</string>
+    <string name="rendering_attr_smoothness_bad_name">Zła</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Bardzo zła</string>
+    <string name="rendering_attr_smoothness_horrible_name">Okropna</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Bardzo okropna</string>
+    <string name="rendering_attr_smoothness_impassable_name">Nieprzejezdna</string>
+    <string name="rendering_attr_highway_class_motorway_name">Autostrada</string>
+    <string name="rendering_attr_highway_class_state_road_name">Droga krajowa</string>
+    <string name="rendering_attr_highway_class_road_name">Droga</string>
+    <string name="rendering_attr_highway_class_street_name">Ulica</string>
+    <string name="rendering_attr_highway_class_service_name">Dojazdowa</string>
+    <string name="rendering_attr_highway_class_footway_name">Chodnik</string>
+    <string name="rendering_attr_highway_class_track_name">Polna/leśna</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Droga dla koni</string>
+    <string name="rendering_attr_highway_class_steps_name">Schody</string>
+    <string name="rendering_attr_highway_class_path_name">Ścieżka</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Droga rowerowa</string>
+    <string name="rendering_attr_undefined_name">Niezdefiniowane</string>
+    <string name="release_3_3">• Nowy ekran \"Kierunki\": Pokazuje przyciski kierunku domu i pracy, skrót do \"poprzednich tras\", listę aktywnych śladów GPX i znaczników, historię wyszukiwania
+\n
+\n • Dodatkowe informacje w \"Szczegółach drogi\": typy dróg, nawierzchnia, stromość, gładkość
+\n
+\n • Nawigacja transportu publicznego wspiera wszystkie typy transportu: metro, autobusy, tramwaje itp.
+\n
+\n • Nowe Szybkie czynności dla pokazywania/ukrywania tras i trybu dzień/noc
+\n
+\n • Naprawione obszary wyświetlane jako zalane w Niemczech, Południowej Afryce, Quebec
+\n
+\n • Dodatkowe wpieranie importów z KML i KMZ
+\n
+\n • Naprawione awarie przy otwieraniu niektórych przystanków transportu publicznego
+\n
+\n • Usunięcie Facebooka i analiz Firebase z darmowej wersji (OsmAnd+ tego nie zawiera)
+\n</string>
+    <string name="shared_string_degrees">Stopnie</string>
+    <string name="shared_string_milliradians">Miliradiany</string>
+    <string name="quick_action_day_night_mode">Tryb %s</string>
+    <string name="routing_attr_avoid_tram_name">Unikanie tramwajów</string>
+    <string name="routing_attr_avoid_tram_description">Unikanie tramwajów</string>
+    <string name="routing_attr_avoid_bus_name">Unikanie autobusów</string>
+    <string name="routing_attr_avoid_bus_description">Unikanie autobusów i trolejbusów</string>
+    <string name="routing_attr_avoid_train_name">Unikanie pociągów</string>
+    <string name="routing_attr_avoid_train_description">Unikanie pociągów</string>
+    <string name="routing_attr_avoid_subway_name">Unikanie metra</string>
+    <string name="routing_attr_avoid_subway_description">Unikaj metra i lekkiego transportu kolejowego</string>
+    <string name="routing_attr_avoid_ferry_name">Unikanie promów</string>
+    <string name="routing_attr_avoid_ferry_description">Unikanie promów</string>
+    <string name="release_3_3_7">• Wyświetl czas między transferami w transporcie publicznym
+\n
+\n • Poprawiony interfejs użytkownika dla szczegółów trasy
+\n
+\n • Naprawiono ciemny motyw w menu Kierunek i Szczegóły trasy
+\n
+\n • Wyświetl azymut w Pomiar Odległości
+\n
+\n</string>
+    <string name="angular_measeurement">Jednostki pomiaru kątowego</string>
+    <string name="angular_measeurement_descr">Zmiany jakie azymut jest mierzony w.</string>
+    <string name="avoid_pt_types_descr">Wybierz typy transportu publicznego, których chcesz unikać dla nawigacji:</string>
+    <string name="avoid_pt_types">Unikanie rodzaju transportu…</string>
+    <string name="shared_string_walk">Pieszo</string>
+    <string name="save_poi_value_exceed_length">Maksymalna długość znacznika „%s” wynosi 255 znaków.
+\nProszę go skrócić, aby kontynuować.</string>
+    <string name="save_poi_value_exceed_length_title">Długość wartości „%s”</string>
+    <string name="routing_attr_avoid_sett_name">Unikaj bruku i kostki brukowej</string>
+    <string name="routing_attr_avoid_sett_description">Unikaj bruku i kostki brukowej</string>
+    <string name="routing_attr_avoid_share_taxi_name">Unikanie taksówek zbiorowych</string>
+    <string name="routing_attr_avoid_share_taxi_description">Unikanie taksówek zbiorowych</string>
 </resources>

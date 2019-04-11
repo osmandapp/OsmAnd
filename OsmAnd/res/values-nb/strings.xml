@@ -17,7 +17,7 @@
     <string name="new_destination_point_dialog">Du har allerede angitt et reisemål:</string>
     <string name="shared_string_target_points">Reisemål</string>
     <string name="intermediate_point_too_far">Mellomliggende reisemål %1$s er for langt fra den nærmeste veien.</string>
-    <string name="arrived_at_intermediate_point">Du har kommet til ditt mellomliggende reisemål</string>
+    <string name="arrived_at_intermediate_point">Ankommet mellomliggende reisemål</string>
     <string name="context_menu_item_intermediate_point">Legg til som mellomliggende reisemål</string>
     <string name="map_widget_intermediate_distance">Mellomliggende reisemål</string>
     <string name="ending_point_too_far">Sluttpunkt for langt fra nærmeste vei.</string>
@@ -263,7 +263,7 @@
     <string name="search_offline_clear_search">Nytt søk</string>
     <string name="map_text_size_descr">Velg tekststørrelsen for navn på kartet.</string>
     <string name="map_text_size">Skriftstørrelse for kart</string>
-    <string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men du er ikke koblet til internett.</string>
+    <string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men du er ikke koblet til Internett.</string>
     <string name="tts_language_not_supported_title">Språk ikke støttet</string>
     <string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte motoren for Android TTS (tekst-til-tale). Vil du se etter en annen TTS-motor i markedet? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
@@ -387,7 +387,7 @@
     <string name="show_transport_over_map">Vis stoppesteder</string>
     <string name="hello">Navigeringsprogrammet OsmAnd</string>
     <string name="context_menu_item_update_poi">Oppdater interessepunkt</string>
-    <string name="context_menu_item_update_map_confirm">Oppdatere lokale data fra internett?</string>
+    <string name="context_menu_item_update_map_confirm">Oppdater lokale data fra Internett\?</string>
     <string name="search_history_city">By: {0}</string>
     <string name="search_history_street">Gate: {0}, {1}</string>
     <string name="search_history_int_streets">Veikryss: {0} x {1} i {2}</string>
@@ -418,7 +418,7 @@
     <string name="fav_points_not_exist">Ingen favorittpunkter finnes</string>
     <string name="update_existing">Erstatt</string>
     <string name="only_show">Vis rute</string>
-    <string name="follow">Start navigering</string>
+    <string name="follow">Start veiledning</string>
     <string name="mark_final_location_first">Velg reisemål først</string>
     <string name="get_directions">Anvisninger</string>
     <string name="opening_hours">Åpningstider</string>
@@ -449,7 +449,7 @@
     <string name="map_tile_source_descr">Velg kilden til nettbaserte eller hurtigbufrede kartdeler.</string>
     <string name="map_tile_source">Fliskartkilde</string>
     <string name="map_source">Kartkilde</string>
-    <string name="use_internet">Bruk internett</string>
+    <string name="use_internet">Bruk Internett</string>
     <string name="show_location">Vis din posisjon</string>
     <string name="show_gps_coordinates_text">Vis GPS-koordinater på kartet</string>
     <string name="use_internet_to_download_tile">Last ned manglende kartdeler</string>
@@ -745,12 +745,12 @@
     <string name="install_paid">Fullversjon</string>
     <string name="clear_destination">Slett reisemål</string>
     <string name="street_name">Gatenavn</string>
-    <string name="choose_osmand_theme">Tema</string>
+    <string name="choose_osmand_theme">Drakt</string>
     <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemål (og mellomliggende reisemål)?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
     <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
     <string name="safe_mode">Sikker modus</string>
-    <string name="native_library_not_running">Programmet kjører i sikker modus (kan deaktiveres i \'Innstillinger\').</string>
+    <string name="native_library_not_running">Programmet kjører i sikker modus (skru det av i \'Innstillinger\').</string>
     <string name="interrupt_music_descr">Avbryt musikk ved talemeldinger (ikke bare senk volumet).</string>
     <string name="interrupt_music">Avbryt musikk</string>
     <string name="gpxup_public">Offentlig</string>
@@ -855,7 +855,7 @@
     <string name="modify_transparency">Endre gjennomsiktighet (0 - gjennomsiktig, 255 - ugjennomsiktig)</string>
     <string name="gpx_visibility_txt">Synlighet</string>
     <string name="shared_string_description">Beskrivelse</string>
-    <string name="use_transparent_map_theme">Gjennomsiktig tema</string>
+    <string name="use_transparent_map_theme">Gjennomsiktig drakt</string>
     <string name="keep_informing_never">Bare manuelt (trykk pil)</string>
     <string name="local_index_installed">Lokal versjon</string>
     <string name="gpx_option_destination_point">Bruk gjeldende mål</string>
@@ -1040,7 +1040,7 @@
     <string name="shared_string_enabled">Aktivert</string>
     <string name="shared_string_enable">Aktiver</string>
     <string name="shared_string_disable">Deaktiver</string>
-    <string name="plugin_install_needs_network">Du må være koblet til internett for å installere dette programtillegget.</string>
+    <string name="plugin_install_needs_network">Du må være koblet til Internett for å installere dette programtillegget.</string>
     <string name="shared_string_never">Aldri</string>
     <string name="shared_string_none">Ingen</string>
     <string name="shared_string_and">og</string>
@@ -1099,7 +1099,7 @@
     <string name="watch">Se</string>
     <string name="local_osm_changes_upload_all_confirm">Du kommer til å laste opp %1$d endring(er) til OSM. Er du sikker?</string>
     <string name="confirmation_to_clear_history">Tøm historikk?</string>
-    <string name="delay_to_start_navigation">Start trinnvis navigering etter…</string>
+    <string name="delay_to_start_navigation">Start trinnvis veiledning etter…</string>
     <string name="welmode_download_maps">Kartnedlasting</string>
     <string name="welcome_select_region">For å korrekt gjenspeile trafikkskilt og trafikkregler, velg region for kjøringen:</string>
     <string name="welcome_header">Velkommen</string>
@@ -1202,8 +1202,8 @@
     <string name="lang_ht">Haitisk</string>
     <string name="lang_gl">Galisisk</string>
     <string name="lang_et">Estisk</string>
-    <string name="light_theme">Lyst</string>
-    <string name="dark_theme">Mørkt</string>
+    <string name="light_theme">Lys</string>
+    <string name="dark_theme">Mørk</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-farge</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-bredde</string>
     <string name="rendering_value_translucent_red_name">Gjennomskinnelig rød</string>
@@ -1332,7 +1332,7 @@
     <string name="plugin_settings">Programtillegg</string>
     <string name="rendering_value_boldOutline_name">Tykke omriss</string>
     <string name="rendering_attr_roadStyle_description">Veistil</string>
-    <string name="routing_attr_avoid_borders_name">Unngå grensepassering</string>
+    <string name="routing_attr_avoid_borders_name">Unngå grensepasseringer</string>
     <string name="routing_attr_height_name">Høydegrense</string>
     <string name="routing_attr_height_description">Spesifiser kjøretøyhøyde som tillates på ruter.</string>
     <string name="rendering_attr_alpineHiking_name">Alpin vandringsskala (SAC)</string>
@@ -2286,7 +2286,7 @@
     <string name="quick_action_add_create_items">Opprett elementer</string>
     <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
-    <string name="mappilary_no_internet_desc">Du må være koblet til internett for å vise bilder fra Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Du må være koblet til Internett for å vise bilder fra Mapillary.</string>
     <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for denne regionen for å se relieffskygger på kartet.</string>
     <string name="hillshade_purchase_header">Kjøp og installer programtillegget for koter for å se relieffskygger på kartet</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
@@ -2445,7 +2445,7 @@
     <string name="winter_and_ski_renderer">Vinter og ski</string>
     <string name="touring_view_renderer">Turvisning</string>
     <string name="disable_recording_once_app_killed_descrp">Vil sette GPX-logging i pausemodus når programmet avsluttes (via nylig brukte apper). (OsmAnds bakgrunnsindikasjon forsvinner fra Android-varslingslinjen.)</string>
-    <string name="route_is_too_long_v2">Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
+    <string name="route_is_too_long_v2">For lange distanser: Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
     <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon…\" for å tilordne et notat til det angitte stedet.</string>
     <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
@@ -2816,7 +2816,7 @@
 \n</string>
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Vi kommer til å sende inn ditt søk <b>\"%1$s\"</b>, sammen med din plassering.<br/>
-        <br/> Vi samler ikke på personlig informasjon, vi treger bare søkedata for å forbedre søkealgoritmen.<br/>
+        <br/> Ingen personlig informasjon samles inn, søkedata brukes kun for å forbedre søkealgoritmen.<br/>
     </string>
     <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å identifisere manglende eller feilaktige meldinger.</string>
     <string name="release_3_2_pre">• Fikset krasj ved oppstart som skjedde på noen enheter
@@ -2834,10 +2834,10 @@
 \n • Mål avstand: la til Avstand-knapp til handlingslisten i kontekstmenyen
 \n
 \n</string>
-    <string name="ask_for_location_permission">Gi OsmAnd tilgang til plassering for å fortsette.</string>
+    <string name="ask_for_location_permission">Innvilg OsmAnd tilgang til plassering for å fortsette.</string>
     <string name="rendering_value_black_name">Svart</string>
     <string name="more_transport_on_stop_hint">Det er flere ruter på dette stoppestedet.</string>
-    <string name="markers_remove_dialog_msg">Slett kartmarkør \"%s\"\?</string>
+    <string name="markers_remove_dialog_msg">Slett kartmarkøren \"%s\"\?</string>
     <string name="edit_map_marker">Rediger kartmarkør</string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Gatesøk</string>
@@ -2846,20 +2846,20 @@
     <string name="keep_passed_markers_descr">Markører lagt til som favorittgrupper eller GPX-rutepunkter markert som passert vil forbli på kartet. Hvis gruppen ikke er aktiv, vil markørene forsvinne fra kartet.</string>
     <string name="keep_passed_markers">Behold passerte markører på kartet</string>
     <string name="osm_live_plan_pricing">Betalingsplan og pris</string>
-    <string name="osm_live_payment_monthly_title">Betal månedlig</string>
-    <string name="osm_live_payment_3_months_title">Betal hver tredje måned</string>
-    <string name="osm_live_payment_annual_title">Betal årlig</string>
+    <string name="osm_live_payment_monthly_title">Månedlig</string>
+    <string name="osm_live_payment_3_months_title">Hver tredje måned</string>
+    <string name="osm_live_payment_annual_title">Årlig</string>
     <string name="osm_live_payment_month_cost_descr">%1$s per måned</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s per måned</string>
     <string name="osm_live_payment_discount_descr">Lagre %1$s.</string>
-    <string name="osm_live_payment_current_subscription">Ditt nåværende abonnement</string>
+    <string name="osm_live_payment_current_subscription">Nåværende abonnement</string>
     <string name="osm_live_payment_renews_monthly">Fornyes månedlig</string>
     <string name="osm_live_payment_renews_quarterly">Fornyes kvartalsvis</string>
     <string name="osm_live_payment_renews_annually">Fornyes årlig</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Velg betalingsfrekvensen som passer for deg:</string>
     <string name="osm_live_payment_contribute_descr">Deler av inntekten går til OpenStreetMap-bidragsytere.</string>
-    <string name="powered_by_osmand">Muliggjort av OsmAnd</string>
+    <string name="powered_by_osmand">Av OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnementer</string>
     <string name="mapillary_menu_title_pano">Vis kun 360°-bilder</string>
     <string name="release_3_0">• New: Støtte for verdensomspennende reiseguider. Omtalte plasseringer lenkes til på kartet. Initiell data fra Wikivoyage. 
@@ -2890,8 +2890,8 @@
     <string name="on_foot">til fots</string>
     <string name="route_way">Vei</string>
     <string name="points_of_interests">Interessepunkter (POI)</string>
-    <string name="waiting_for_route_calculation">Venter på ruteberegning</string>
-    <string name="avoid_roads_descr">Velg vei på kartet fra listen nedenfor som du ønsker å unngå under navigering:</string>
+    <string name="waiting_for_route_calculation">Kalkulerer rute…</string>
+    <string name="avoid_roads_descr">Velg vei på kartet du ønsker å unngå under navigering, enten på kartet, eller fra listen nedenfor:</string>
     <string name="show_along_the_route">Vis langs ruten</string>
     <string name="simulate_navigation">Simuler navigering</string>
     <string name="choose_track_file_to_follow">Velg sporfil å følge</string>
@@ -2914,7 +2914,7 @@
     <string name="add_destination_query">Legg til mål først</string>
     <string name="shared_string_swap">Veksle</string>
     <string name="show_more">Vis mer</string>
-    <string name="tracks_on_map">Spor på kartet</string>
+    <string name="tracks_on_map">Viste spor</string>
     <string name="time_of_day">Tid på dagen</string>
     <string name="by_transport_type">Med %1$s</string>
     <string name="step_by_step">Steg for steg</string>
@@ -2992,6 +2992,40 @@
     <string name="rendering_attr_highway_class_cycleway_name">Sykkelvei</string>
     <string name="rendering_attr_undefined_name">Udefinert</string>
     <string name="public_transport_warning_descr_blog">Lær mer om hvordan OsmAnd kaklulerer ruter i bloggen vår.</string>
-    <string name="public_transport_warning_title">Offentlige transportruter er nå i betatestingsstadie, så feil og unøyaktigheter kan forefinnes.</string>
+    <string name="public_transport_warning_title">Offentlige transportnavigasjon er nå i betatestingsstadie, forvent feil og unøyaktigheter.</string>
     <string name="add_intermediate">Legg til mellomliggende punkt</string>
+    <string name="shared_string_walk">Gå</string>
+    <string name="save_poi_value_exceed_length">Verdien av taggen \"%s\" kan ikke overstige 255 tegn.
+\nRediger den før du fortsetter.</string>
+    <string name="save_poi_value_exceed_length_title">Lengden på \"%s\"-verdien</string>
+    <string name="avoid_pt_types_descr">Velg offentlige transporttyper å unngå for navigasjon:</string>
+    <string name="avoid_pt_types">Unngå transporttyper…</string>
+    <string name="quick_action_day_night_mode">&amp;s-modus</string>
+    <string name="shared_string_degrees">Grader</string>
+    <string name="shared_string_milliradians">Milliradianer</string>
+    <string name="angular_measeurement">Vinkel-måleenheter</string>
+    <string name="angular_measeurement_descr">Endre hva asimut måles i.</string>
+    <string name="routing_attr_avoid_sett_name">Unngå rustikk brostein og brostein</string>
+    <string name="routing_attr_avoid_sett_description">Unngå rustikk brostein og brostein</string>
+    <string name="routing_attr_avoid_tram_name">Unngå trikk</string>
+    <string name="routing_attr_avoid_tram_description">Unngå trikk</string>
+    <string name="routing_attr_avoid_bus_name">Unngå buss</string>
+    <string name="routing_attr_avoid_bus_description">Unngå buss og trolleybuss</string>
+    <string name="routing_attr_avoid_share_taxi_name">Unngå delingsdrosje</string>
+    <string name="routing_attr_avoid_share_taxi_description">Unngå delingsdrosje</string>
+    <string name="routing_attr_avoid_train_name">Unngå tog</string>
+    <string name="routing_attr_avoid_train_description">Unngå tog</string>
+    <string name="routing_attr_avoid_subway_name">Unngå tunnelbane</string>
+    <string name="routing_attr_avoid_subway_description">Unngå tunnelbane og lett bane</string>
+    <string name="routing_attr_avoid_ferry_name">Unngå ferger</string>
+    <string name="routing_attr_avoid_ferry_description">Unngå ferger</string>
+    <string name="release_3_3_7">• Vis tiden mellom overganger i offentlig transport
+\n
+\n • Fikset grensesnitt for rutedetaljer
+\n
+\n • Fikset mørk drakt i anvisningsmeny og rutedetaljer
+\n
+\n • Visning av asimut i måling av distanse
+\n
+\n</string>
 </resources>

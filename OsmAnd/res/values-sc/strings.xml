@@ -201,7 +201,7 @@
     <string name="cancel_navigation">Firma su nàvigu</string>
     <string name="clear_destination">Iscantzella sa destinatzione</string>
     <string name="download_using_mobile_internet">Non ses connessu a su WiFi. Boles sighire a iscarrigare impreende sa connessione a ìnternet atuale?</string>
-    <string name="street_name">Nùmene de su caminu</string>
+    <string name="street_name">Nùmene de sa carrera</string>
     <string name="hno">Nùmeru tzivicu</string>
     <string name="website">Situ web</string>
     <string name="phone">Telèfonu</string>
@@ -530,7 +530,7 @@
     <string name="update_poi_is_not_available_for_zoom">Ismanniende podes agiornare sos PDI</string>
     <string name="map_widget_vector_attributes">Caraterìsticas de su disinnu</string>
     <string name="screen_is_locked">Incarca s’icona de su luchete pro isblocare s’ischermu</string>
-    <string name="map_widget_top_text">Nùmene de su caminu</string>
+    <string name="map_widget_top_text">Nùmene de sa carrera</string>
     <string name="map_widget_config">Cunfigura s’ischermu</string>
     <string name="map_widget_back_to_loc">In ue so</string>
     <string name="map_widget_lock_screen">Arrea s’ischermu</string>
@@ -1747,7 +1747,7 @@ Lon %2$s</string>
     <string name="shared_string_upload">Càrriga</string>
     <string name="shared_string_update">Agiorna</string>
     <string name="read_more">Leghe àteru</string>
-    <string name="whats_new">Ite b\'est de nou in</string>
+    <string name="whats_new">Ite b\'at de nou in sa</string>
     <string name="rendering_attr_hideProposed_name">Ogetos propostos</string>
     <string name="lang_nds">Bassu-tedescu</string>
     <string name="lang_mk">Matzèdone</string>
@@ -1759,7 +1759,7 @@ Lon %2$s</string>
     <string name="context_menu_item_delete_waypoint">Iscantzellare su puntu de coladòrgiu GPX?</string>
     <string name="context_menu_item_edit_waypoint">Modìfica su puntu de coladòrgiu GPX</string>
     <string name="poi_context_menu_modify_osm_change">Modìfica càmbiu OSM</string>
-    <string name="context_menu_item_open_note">Nota OSM aberta</string>
+    <string name="context_menu_item_open_note">Aberi una nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM torrada a abèrrere</string>
     <string name="osm_edit_commented_note">Nota OSM cummentada</string>
     <string name="osm_edit_removed_note">Nota OSM iscantzellada</string>
@@ -2383,7 +2383,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="change_color">Càmbia colore</string>
     <string name="edit_name">Acontza su nùmene</string>
     <string name="save_poi_too_many_uppercase">In su nùmene bi sunt tropas lìteras maiùscolas. Boles sighire?</string>
-    <string name="route_is_too_long_v2">Pro praghere annanghe carchi destinatzione intermèdia si in 10 minutos s\'àndala no at a èssere pronta pro custu tratu longu de caminu.</string>
+    <string name="route_is_too_long_v2">Pro distàntzias longas: Pro praghere annanghe carchi destinatzione intermèdia si in 10 minutos s\'àndala no at a èssere pronta.</string>
     <string name="display_zoom_level">Livellu ismmaniamentu ischermu: %1$s</string>
     <string name="srtm_color_scheme">Ischema de colores</string>
     <string name="show_from_zoom_level">Ammustra dae su livellu de ismanniamentu</string>
@@ -2613,7 +2613,7 @@ Pro praghere iscrie su còdighe intreu</string>
 \n • S\'abbonamentu a OsmAnd Live como incluet totu sas funtzionalidades de OsmAnd 
 \n 
 \n</string>
-    <string name="what_is_here">Ite b\'est inoghe:</string>
+    <string name="what_is_here">Ite b\'at inoghe:</string>
     <string name="parked_at">parchegiadu in</string>
     <string name="pick_up_till">Piga intre</string>
     <string name="without_time_limit">Chene lìmite de tempus</string>
@@ -2979,4 +2979,41 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_attr_highway_class_path_name">Caminera</string>
     <string name="rendering_attr_highway_class_cycleway_name">Pista tziclàbile</string>
     <string name="rendering_attr_undefined_name">Non dessinidu</string>
+    <string name="public_transport_warning_descr_blog">Impara àteru a pitzu de comente OsmAnd calculat s\'àndala in su blog nostru.</string>
+    <string name="public_transport_warning_title">Su nàvigu cun sos trasportos pùblicos, in custu momentu, est in fase de proa beta. Bi diant pòdere èssere errores e impretzisiones.</string>
+    <string name="add_intermediate">Annaghe unu puntu de coladòrgiu</string>
+    <string name="avoid_pt_types_descr">Issèbera sas castas de trasportu pùblicu de istransire pro su nàvigu:</string>
+    <string name="quick_action_day_night_mode">Modalidade %s</string>
+    <string name="avoid_pt_types">Istransi castas de trasportu…</string>
+    <string name="shared_string_walk">A pede</string>
+    <string name="save_poi_value_exceed_length">Sa longària màssima de s\'eticheta \"%s\" est de 255 caràteres. 
+\nPro praghere incurtza·la pro sighire.</string>
+    <string name="save_poi_value_exceed_length_title">Longària de su valore \"%s\"</string>
+    <string name="shared_string_degrees">Grados</string>
+    <string name="shared_string_milliradians">Millèsimos angulares (radiantes)</string>
+    <string name="angular_measeurement">Unidades de medida angulare</string>
+    <string name="angular_measeurement_descr">Càmbia comente benit medidu s\'àzimut.</string>
+    <string name="routing_attr_avoid_sett_name">Istransi s\'impredadu e su pavè</string>
+    <string name="routing_attr_avoid_sett_description">Istransi s\'impredadu e su pavè</string>
+    <string name="routing_attr_avoid_tram_name">Istransi sos trams</string>
+    <string name="routing_attr_avoid_tram_description">Istransi sos trams</string>
+    <string name="routing_attr_avoid_bus_name">Istransi sos postales</string>
+    <string name="routing_attr_avoid_bus_description">Istransi sos postales e sos postalinos cun filu</string>
+    <string name="routing_attr_avoid_share_taxi_name">Istransi sos taxis cumpartzidos</string>
+    <string name="routing_attr_avoid_share_taxi_description">Istransi sos taxis cumpartzidos</string>
+    <string name="routing_attr_avoid_train_name">Istransi sos trenos</string>
+    <string name="routing_attr_avoid_train_description">Istransi sos trenos</string>
+    <string name="routing_attr_avoid_subway_name">Istransi sas metropolitanas</string>
+    <string name="routing_attr_avoid_subway_description">Istransi sas metropolitanas e sas metrotranvias</string>
+    <string name="routing_attr_avoid_ferry_name">Istransi sos naviles</string>
+    <string name="routing_attr_avoid_ferry_description">Istransi sos naviles</string>
+    <string name="release_3_3_7">• Ammustra su tempus intre sos movimentos in su trasportu pùblicu
+\n
+\n • Interfache pro s\'impreadore pro sas minujas de s\'àndala curreta
+\n
+\n • Tema iscuru in su menù de sas diretziones e in sas minujas de s\'àndala curretu
+\n
+\n • Ammustra s\'azimuth in Medi sa distàntzia
+\n
+\n</string>
 </resources>
