@@ -501,16 +501,17 @@
 
 				</LinearLayout>
 
-				<ProgressBar
+				<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 					android:id="@+id/progress_bar"
-					style="?android:attr/progressBarStyleHorizontal"
 					android:layout_width="match_parent"
 					android:layout_height="2dp"
 					android:layout_gravity="bottom"
 					android:max="100"
 					android:visibility="gone"
-					tools:progress="60"
-					tools:visibility="visible" />
+					osmand:mpb_progressStyle="horizontal"
+					osmand:mpb_useIntrinsicPadding="false"
+					osmand:mpb_setBothDrawables="true"
+					style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
 
 			</FrameLayout>
 

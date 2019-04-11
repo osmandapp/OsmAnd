@@ -383,7 +383,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (fragmentRef != null && fragment.isVisible()) {
 			setRouteCalculationInProgress(true);
 			fragment.updateRouteCalculationProgress(0);
-			fragment.updateControlButtons();
 			fragment.updateInfo();
 		}
 	}
@@ -396,7 +395,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 			}
 			fragment.updateRouteCalculationProgress(progress);
-			fragment.updateControlButtons();
 		}
 	}
 
@@ -407,7 +405,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (app != null && fragmentRef != null && fragment.isVisible()) {
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 			if (setRouteCalculationInProgress(routeCalculating)) {
-				fragment.updateControlButtons();
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
@@ -870,17 +867,33 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
 		boolean publicTransportMode = helper.getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
+		boolean routeCalculated = isRouteCalculated();
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
-		int color;
-		if (isRouteCalculated()) {
-			AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
-			color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+		int color1;
+		int color2;
+		if (publicTransportMode) {
+			if (routeCalculated) {
+				color1 = nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light;
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				color2 = color1;
+			} else {
+				color1 = R.color.description_font_and_bottom_sheet_icons;
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
+				color2 = color1;
+			}
 		} else {
-			AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
-			color = R.color.description_font_and_bottom_sheet_icons;
+			color1 = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+			if (routeCalculated) {
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
+				color2 = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+			} else {
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
+				color2 = R.color.description_font_and_bottom_sheet_icons;
+			}
 		}
-		startButtonText.color2 = ContextCompat.getColor(app, color);
-		startButtonText.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(iconId, color), null, null, null);
+		startButtonText.color1 = ContextCompat.getColor(mapActivity, color1);
+		startButtonText.color2 = ContextCompat.getColor(mapActivity, color2);
+		startButtonText.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(iconId, color2), null, null, null);
 		if (publicTransportMode) {
 			startButtonText.setText(R.string.shared_string_show_on_map);
 		} else if (helper.isFollowingMode() || helper.isPauseNavigation()) {
