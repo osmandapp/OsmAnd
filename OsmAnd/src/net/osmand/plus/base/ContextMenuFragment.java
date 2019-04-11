@@ -176,6 +176,14 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return paused;
 	}
 
+	public int getMenuFullHeightMax() {
+		return menuFullHeightMax;
+	}
+
+	public int getMenuFullHeight() {
+		return menuFullHeight;
+	}
+
 	@Nullable
 	public MapActivity getMapActivity() {
 		FragmentActivity activity = getActivity();
