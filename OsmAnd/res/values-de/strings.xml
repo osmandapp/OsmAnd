@@ -1527,7 +1527,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="agps_info">A-GPS Info</string>
     <string name="shared_string_manage">Verwalten</string>
     <string name="shared_string_edit">Bearbeiten</string>
-    <string name="shared_string_search">Suche</string>
+    <string name="shared_string_search">Suchen</string>
     <string name="shared_string_show_description">Beschreibung anzeigen.</string>
     <string name="shared_string_message">Nachricht</string>
     <string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
