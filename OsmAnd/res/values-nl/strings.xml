@@ -2719,7 +2719,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="show_guide_line_descr">"Toon rechte lijnen van je positie nasr de actieve Markeervlaggetjes. "</string>
     <string name="show_arrows_descr">Toon pijlen richting de actieve Markeervlaggetjes.</string>
     <string name="waypoints_added_to_map_markers">"Routepunten: toegevoegd aan Markeervlaggetjes "</string>
-    <string name="access_intermediate_arrival_time">Aankomsttijd Tussempunt</string>
+    <string name="access_intermediate_arrival_time">Aankomsttijd Tussenpunt</string>
     <string name="map_widget_intermediate_time">Tijd tot Tussenpunt</string>
     <string name="release_3_2_pre">• Crash bij starten opgelost die zich voordeed bij non-latin kaarten
 \n
