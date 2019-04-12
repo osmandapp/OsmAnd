@@ -39,7 +39,7 @@ public class RoutingHelper {
 	private static final float POSITION_TOLERANCE = 60;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
-
+	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
 	private OsmandApplication app;
 	private TransportRoutingHelper transportRoutingHelper;
 
@@ -263,6 +263,10 @@ public class RoutingHelper {
 	public void addListener(IRouteInformationListener l){
 		listeners.add(new WeakReference<>(l));
 		transportRoutingHelper.addListener(l);
+	}
+
+	public void addDataUpdateListener(IRoutingDataUpdateListener listener) {
+		updateListeners.add(new WeakReference<IRoutingDataUpdateListener>(listener));
 	}
 
 	public boolean removeListener(IRouteInformationListener lt){
@@ -502,9 +506,12 @@ public class RoutingHelper {
 				route.updateCurrentRoute(newCurrentRoute + 1);
 				currentRoute = newCurrentRoute + 1;
 				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
-				if (app.getAidlApi().isActiveListeners() && app.getAidlApi().navUpdateListener != null) {
-					app.getAidlApi().navUpdateListener.onNavUpdate();
+				if (!updateListeners.isEmpty()) {
+					for (WeakReference<IRoutingDataUpdateListener> ref : updateListeners) {
+						ref.get().onRoutingDataUpdate();
+					}
 				}
+
 			} else {
 				break;
 			}

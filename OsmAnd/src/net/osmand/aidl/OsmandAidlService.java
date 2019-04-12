@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
+import java.util.concurrent.ConcurrentHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
@@ -50,7 +51,6 @@ import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
-import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.ANavigationUpdateParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
@@ -70,8 +70,6 @@ import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidl.copyfile.CopyFileParams;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -79,7 +77,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.aidl.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
@@ -92,14 +89,32 @@ public class OsmandAidlService extends Service {
 
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
-	private Map<Long, IOsmAndAidlCallback> callbacks;
+	public static final int KEY_ON_SEARCH_COMPLETE = 1;
+	public static final int KEY_ON_UPDATE = 2;
+	public static final int KEY_ON_APP_INIT = 3;
+	public static final int KEY_ON_GPX_BMP_CREATED = 4;
+	public static final int KEY_ON_NAV_DATA_UPDATE = 5;
+
+	private static Map<Long, AidlCallbackParams> callbacks;
 	private Handler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
-	private long updateCallbackId = 0;
+	private static long aidlCallbackId = 0;
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
+	}
+
+	public static void addAidlCallback(IOsmAndAidlCallback callback, long id, long key) {
+		callbacks.put(id, new AidlCallbackParams(callback, key));
+	}
+
+	public static boolean removeAidlCallback (long id){
+		return callbacks.remove(id) != null;
+	}
+
+	public static Map<Long, AidlCallbackParams> getAidlCallbacks() {
+		return callbacks;
 	}
 
 	@Nullable
@@ -720,10 +735,10 @@ public class OsmandAidlService extends Service {
 		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) {
 			try {
 				if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
-					updateCallbackId++;
-					callbacks.put(updateCallbackId, callback);
-					startRemoteUpdates(updateTimeMS, updateCallbackId, callback);
-					return updateCallbackId;
+					aidlCallbackId++;
+					addAidlCallback(callback, aidlCallbackId, KEY_ON_UPDATE);
+					startRemoteUpdates(updateTimeMS, aidlCallbackId, callback);
+					return aidlCallbackId;
 				} else {
 					return MIN_UPDATE_TIME_MS_ERROR;
 				}
@@ -736,7 +751,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean unregisterFromUpdates(long callbackId) {
 			try {
-				return callbacks.remove(callbackId) != null;
+				return removeAidlCallback(callbackId);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1000,9 +1015,18 @@ public class OsmandAidlService extends Service {
 		@Override
 		public long registerForNavigationUpdates(ANavigationUpdateParams params, final IOsmAndAidlCallback callback) {
 			try {
+				aidlCallbackId++;
 				OsmandAidlApi api = getApi("registerForNavUpdates");
-				if (api != null) {
-					return api.registerForNavigationUpdates(params, callback);
+				if (api != null ) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						addAidlCallback(callback, aidlCallbackId, KEY_ON_NAV_DATA_UPDATE);
+					}
+
+					api.registerForNavigationUpdates();
+					return aidlCallbackId;
 				} else {
 					return -1;
 				}
@@ -1012,4 +1036,31 @@ public class OsmandAidlService extends Service {
 			}
 		}
 	};
+
+	private static class AidlCallbackParams {
+		private IOsmAndAidlCallback callback;
+		private long key;
+
+		AidlCallbackParams(IOsmAndAidlCallback callback, long key) {
+			this.callback = callback;
+
+			this.key = key;
+		}
+
+		public IOsmAndAidlCallback getCallback() {
+			return callback;
+		}
+
+		public void setCallback(IOsmAndAidlCallback callback) {
+			this.callback = callback;
+		}
+
+		public long getKey() {
+			return key;
+		}
+
+		public void setKey(long key) {
+			this.key = key;
+		}
+	}
 }

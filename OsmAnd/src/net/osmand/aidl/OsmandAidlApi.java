@@ -79,6 +79,7 @@ import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
@@ -1927,62 +1928,36 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
 
-	public long registerForNavigationUpdates(ANavigationUpdateParams params, IOsmAndAidlCallback callback) {
-		if (params.isSubscribeToUpdates()) {
-			updateCallbackId++;
-			callbacks.put(updateCallbackId, callback);
-			startNavigationalUpdates();
-			return updateCallbackId;
-		} else {
-			callbacks.remove(params.getCallbackId());
-			if (callbacks.size() == 0) {
-				navUpdateListener = null;
-			}
-			return -1;
-		}
-	}
-
-	public NavUpdateListener navUpdateListener = null;
-
-	public boolean isActiveListeners() {
-		return callbacks.size() > 0;
-	}
-
-	private void startNavigationalUpdates() {
+	public void registerForNavigationUpdates() {
 		final ADirectionInfo directionInfo = new ADirectionInfo(-1, -1, false);
 		final NextDirectionInfo baseNdi = new NextDirectionInfo();
-		if (navUpdateListener == null) {
-			navUpdateListener = new NavUpdateListener() {
-				@Override
-				public void onNavUpdate() {
-					RoutingHelper rh = app.getRoutingHelper();
-					if (rh.isDeviatedFromRoute()) {
-						directionInfo.setTurnType(TurnType.OFFR);
-						directionInfo.setDistanceTo((int) rh.getRouteDeviation());
-					} else {
-						NextDirectionInfo ndi = rh.getNextRouteDirectionInfo(baseNdi, true);
-						if (ndi != null && ndi.distanceTo > 0 && ndi.directionInfo != null) {
-							directionInfo.setDistanceTo(ndi.distanceTo);
-							directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
-						}
-					}
-					for (Entry<Long, IOsmAndAidlCallback> cb : callbacks.entrySet()) {
-						try {
-							cb.getValue().updateNavigationInfo(directionInfo);
-						} catch (Exception e) {
-							LOG.debug(e.getMessage(), e);
-						}
+		app.getRoutingHelper().addDataUpdateListener(new IRoutingDataUpdateListener(){
+			@Override
+			public void onRoutingDataUpdate() {
+				RoutingHelper rh = app.getRoutingHelper();
+				if (rh.isDeviatedFromRoute()) {
+					directionInfo.setTurnType(TurnType.OFFR);
+					directionInfo.setDistanceTo((int) rh.getRouteDeviation());
+				} else {
+					NextDirectionInfo ndi = rh.getNextRouteDirectionInfo(baseNdi, true);
+					if (ndi != null && ndi.distanceTo > 0 && ndi.directionInfo != null) {
+						directionInfo.setDistanceTo(ndi.distanceTo);
+						directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
 					}
 				}
-			};
-		}
+				for (Entry<Long, IOsmAndAidlCallback> cb : callbacks.entrySet()) {
+					try {
+						cb.getValue().updateNavigationInfo(directionInfo);
+					} catch (Exception e) {
+						LOG.debug(e.getMessage(), e);
+					}
+				}
+			}
+		});
 	}
 
-	public interface NavUpdateListener {
-		void onNavUpdate();
-	}
-
-	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
+		final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
