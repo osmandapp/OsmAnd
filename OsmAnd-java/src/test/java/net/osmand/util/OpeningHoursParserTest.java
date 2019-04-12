@@ -113,6 +113,9 @@ public class OpeningHoursParserTest {
 		// 0. not properly supported
 		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
 
+	  Locale locale = Locale.getDefault();
+	  try {
+		Locale.setDefault(Locale.forLanguageTag("en-US"));
 		OpeningHours hours = parseOpenedHours("Apr 05-Oct 24: Fr 08:00-16:00");
 		System.out.println(hours);
 		testOpened("26.08.2018 15:00", hours, false);
@@ -166,6 +169,7 @@ public class OpeningHoursParserTest {
 		testOpened("12.10.2018 11:00", hours, true);
 		testOpened("24.08.2018 15:00", hours, false);
 		testOpened("12.04.2019 15:00", hours, true);
+
 
 		// test basic case
 		hours = parseOpenedHours("Mo-Fr 08:30-14:40"); //$NON-NLS-1$
@@ -443,6 +447,10 @@ public class OpeningHoursParserTest {
 		hours = parseOpenedHours("Mo-Fr 10:00-21:00; Sa 12:00-23:00; PH \"Wird auf der Homepage bekannt gegeben.\"");
 		testParsedAndAssembledCorrectly("Mo-Fr 10:00-21:00; Sa 12:00-23:00; PH - Wird auf der Homepage bekannt gegeben.", hours);
 		System.out.println(hours);
+	  } finally {
+		Locale.setDefault(locale);
+	  }
+
 	}
 
 	private static OpeningHours parseOpenedHours(String string) {
