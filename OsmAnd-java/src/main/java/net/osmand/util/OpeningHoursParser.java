@@ -1,8 +1,6 @@
 package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -14,6 +12,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import gnu.trove.list.array.TIntArrayList;
 
 /**
  * Class used to parse opening hours
