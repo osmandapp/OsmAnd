@@ -601,7 +601,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (card instanceof SimpleRouteCard) {
 				hide();
-				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0, true, MenuState.FULL_SCREEN);
+				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0, MenuState.FULL_SCREEN);
 			}
 		}
 	}
@@ -626,15 +626,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (buttonIndex == PublicTransportCard.DETAILS_BUTTON_INDEX) {
 					hide();
 					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
-							((PublicTransportCard) card).getRouteId(), true, MenuState.FULL_SCREEN);
+							((PublicTransportCard) card).getRouteId(), MenuState.FULL_SCREEN);
 				} else if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
 					setupCards();
 					openMenuHeaderOnly();
 				}
 			} else if (card instanceof SimpleRouteCard) {
 				hide();
-				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0,
-						true, MenuState.FULL_SCREEN);
+				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0, MenuState.FULL_SCREEN);
 			}
 		}
 	}
@@ -1325,7 +1324,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (app.getRoutingHelper().isPublicTransportMode()) {
 				if (isTransportRouteCalculated()) {
 					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
-							app.getTransportRoutingHelper().getCurrentRoute(), true, MenuState.HEADER_ONLY);
+							app.getTransportRoutingHelper().getCurrentRoute(), MenuState.HEADER_ONLY);
 				}
 			} else {
 				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
