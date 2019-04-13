@@ -2998,7 +2998,7 @@
     <string name="public_transport_warning_title">Навігацыя ў грамадскім транспарце на дадзены момант тэставая, таму могуць узнікаць памылкі.</string>
     <string name="add_intermediate">Дадаць прамежкавы пункт</string>
     <string name="rendering_attr_surface_grass_paver_name">Газонныя краты</string>
-    <string name="rendering_attr_highway_class_state_road_name">Федэральная шаша</string>
+    <string name="rendering_attr_highway_class_state_road_name">Дзяржаўная дарога</string>
     <string name="rendering_attr_highway_class_service_name">Сэрвіс</string>
     <string name="rendering_attr_highway_class_track_name">Грунтовая дарога</string>
     <string name="rendering_attr_highway_class_bridleway_name">Для коней</string>
