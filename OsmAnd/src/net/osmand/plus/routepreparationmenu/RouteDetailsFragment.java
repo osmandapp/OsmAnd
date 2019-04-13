@@ -317,19 +317,19 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteClassStatistic(), analysis);
-				createRouteCard(cardsContainer, routeClassCard);
+				addRouteCard(cardsContainer, routeClassCard);
 
 				RouteInfoCard routeSurfaceCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSurfaceStatistic(), analysis);
-				createRouteCard(cardsContainer, routeSurfaceCard);
+				addRouteCard(cardsContainer, routeSurfaceCard);
 
 				if (slopeDataSet != null) {
 					List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues());
 					RouteInfoCard routeSteepnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSteepnessStatistic(inclines), analysis);
-					createRouteCard(cardsContainer, routeSteepnessCard);
+					addRouteCard(cardsContainer, routeSteepnessCard);
 				}
 
 				RouteInfoCard routeSmoothnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSmoothnessStatistic(), analysis);
-				createRouteCard(cardsContainer, routeSmoothnessCard);
+				addRouteCard(cardsContainer, routeSmoothnessCard);
 			}
 		}
 	}
@@ -347,7 +347,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		buildRowDivider(cardsContainer, false);
 	}
 
-	private void createRouteCard(LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
+	private void addRouteCard(LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
 		OsmandApplication app = requireMyApplication();
 		menuCards.add(routeInfoCard);
 		routeInfoCard.setListener(this);
