@@ -48,6 +48,10 @@ public abstract class BaseCard {
 		return view != null ? view.getHeight() : 0;
 	}
 
+	public int getTopViewHeight() {
+		return getViewHeight();
+	}
+
 	public void update() {
 		if (view != null) {
 			updateContent();
