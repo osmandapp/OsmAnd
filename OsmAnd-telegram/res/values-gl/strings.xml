@@ -212,4 +212,8 @@
     <string name="shared_string_collected">Recolleitos</string>
     <string name="gps_points">Puntos GPS</string>
     <string name="shared_string_sent">Enviado</string>
+    <string name="search_contacts">Procurar contactos</string>
+    <string name="search_contacts_descr">Procura en tódolos teus grupos e contactos.</string>
+    <string name="type_contact_or_group_name">Escribe o nome do contacto ou do grupo</string>
+    <string name="shared_string_search">Procurar</string>
 </resources>
