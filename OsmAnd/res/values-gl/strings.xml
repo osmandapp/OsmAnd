@@ -333,7 +333,7 @@
     <string name="distance_measurement_finish_subtrack">Iniciar unha subpista nova</string>
     <string name="distance_measurement_clear_route">Limpar tódolos puntos</string>
     <string name="distance_measurement_load_gpx">Abrir un ficheiro GPX existente</string>
-    <string name="wait_current_task_finished">Agarde até que remate a tarefa actual</string>
+    <string name="wait_current_task_finished">Agarda até que remate a tarefa actual</string>
     <string name="use_kalman_filter_compass_descr">Diminúe o ruído nas lecturas do compás mais engade inercia.</string>
     <string name="use_kalman_filter_compass">Empregar o filtro Kalman</string>
     <string name="use_magnetic_sensor_descr">Para a lectura do compás, emprega o sensor magnético no canto do sensor da orientación.</string>
@@ -374,7 +374,7 @@
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos de son/vídeo</string>
     <string name="stop_routing_confirm">Está na certeza de que desexa dete-la navigación\?</string>
-    <string name="clear_dest_confirm">Confirma que desexa limpar o destino (e os destinos intermedios)?</string>
+    <string name="clear_dest_confirm">Confirmas que desexas limpar o destino (e os destinos intermedios)\?</string>
     <string name="precise_routing_mode_descr">Calcular rutas precisas sen interferencias. Aínda está limitado polas distancias e é tardo.</string>
     <string name="precise_routing_mode">Navigación precisa (alfa)</string>
     <string name="recording_context_menu_show">Amosar</string>
@@ -384,7 +384,7 @@
     <string name="dropbox_plugin_description">O engadido do Dropbox permite sincronizar pistas e notas de son/vídeo cunha conta do Dropbox.</string>
     <string name="dropbox_plugin_name">Engadido do Dropbox</string>
     <string name="intermediate_points_change_order">Muda-la orde</string>
-    <string name="srtm_paid_version_msg">Considere a posibilidade de merca-lo engadido das \"Curvas do nivel\" para así contribuíres co desenvolvemento.</string>
+    <string name="srtm_paid_version_msg">Coida a posibilidade de merca-lo engadido das \"Curvas do nivel\" para así contribuíres co desenvolvemento.</string>
     <string name="srtm_paid_version_title">Engadido das curvas do nivel</string>
     <string name="av_def_action_choose">Elixi-la petición</string>
     <string name="av_def_action_video">Gravar vídeo</string>
@@ -461,7 +461,7 @@
     <string name="map_widget_show_destination_arrow">Amosar en que dirección está o destino</string>
     <string name="enable_plugin_monitoring_services">Permitir que o engadido da \"Gravación de viaxes\" empregue os servizos de rexistro da posición (rexistro do GPX, seguemento na rede)</string>
     <string name="non_optimal_route_calculation">Calcular rota posíbelmente non óptima nas distancias longas</string>
-    <string name="gps_not_available">Active o GPS na configuración</string>
+    <string name="gps_not_available">Activa o GPS nos axustes</string>
     <string name="map_widget_monitoring_services">Servizos de rexistro</string>
     <string name="no_route">Sen itinerario</string>
     <string name="delete_target_point">Retirar o destino</string>
@@ -505,47 +505,28 @@
     <string name="interrupt_music">Deter a música</string>
     <string name="osmand_play_title_30_chars">Mapas e navegación OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visualización e navegación móbil de mapas globais para mapas de OSM con e sen conexión</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (Indicacións de navegación automatizadas do OSM) 
-\n
-\n 
+    <string name="osmand_long_description_1000_chars">"OsmAnd (Indicacións de navegación automatizadas do OSM)
 \n
 \n  O OsmAnd é un aplicativo de navegación de código aberto con acceso a unha ampla variedade de datos globais do OpenStreetMap (OSM). Tódolos mapas dos datos (mapas vectoriais ou teselas) poden seren almacenados no cartón de memoria do teléfono móbil para empregalos sen conexión. O OsmAnd tamen fornece a funcionalidade de cálculo de rotas sen conexión, incluíndo a guía por voz paso a paso. 
-\n
-\n 
 \n
 \n  Algunhas das funcións principais: 
 \n
 \n  - Funcionalidade completa sen conexión (os mapas vectoriais ou de teselas baixados almacénanse no cartafol que se escolla) 
-\n
 \n  - Mapas vectoriais compactos sen conexión para todo o mundo 
-\n
 \n  - Pódense baixar mapas de países ou rexións de xeito directo dende o aplicativo 
-\n
 \n  - É posíbel sobrepór varias capas de mapas, coma pistas de GPX ou de navegación, puntos de interese (PDI), favoritos, curvas do nivel, paraxes de transporte público ou mapas adicionais con transparencia regulábel. 
-\n
 \n  - Procura sen conexión dos enderezos e lugares (PDI) 
-\n
 \n  - Cálculo de rotas sen conexión para distancias curtas (experimental) 
 \n
 \n  - Modos para automóbil, bicicleta e peóns, con: 
-\n
 \n  - Vistas de día e noite automatizadas opcionais 
-\n
 \n  - Achegamento opcional do mapa dependendo da velocidade 
-\n
 \n  - Aliñamento opcional do mapa dependendo do compás ou da dirección do movemento 
-\n
 \n  - Guía opcional de faixas ou carrís da estrada, límites de velocidade, voces gravadas e TTS 
 \n
-\n 
-\n
 \n  Limitacións desta versión de balde do OsmAnd: 
-\n
 \n  - O número de mapas a baixar está limitado 
-\n
 \n  - Non hai acceso ós puntos de interese (PDI) da Wikipedia sen conexión 
-\n
-\n 
 \n
 \n  O OsmAnd está a ser desenvolvido activamente e o noso proxecto e o seu progreso futuro depende da contribución financeira para financia-lo desenvolvemento e as probas das funcionalidades novas. Coida a posibilidade de merca-lo OsmAnd+ ou de financiar funcións novas específicas ou de facer unha doazón xeral no osmand.net."</string>
     <string name="osmand_plus_play_title_30_chars">Mapas e navegación de OsmAnd+</string>
@@ -728,7 +709,7 @@
     <string name="gpx_visibility_txt">Visibilidade</string>
     <string name="gpx_tags_txt">Etiquetas</string>
     <string name="shared_string_description">Descrición</string>
-    <string name="validate_gpx_upload_name_pwd">Indique o usuario e o contrasinal do OSM para subir ficheiros GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Indica o usuario e o contrasinal do OSM para subir ficheiros GPX.</string>
     <string name="default_buttons_support">Apoie</string>
     <string name="support_new_features">Apoie funcionalidades novas</string>
     <string name="support_new_features_descr">Doe para ollar funcionalidades novas integradas no aplicativo.</string>
@@ -1253,7 +1234,7 @@
     <string name="shared_string_close">Pechar</string>
     <string name="loading_data">A cargar os datos…</string>
     <string name="reading_indexes">A ler os datos locais…</string>
-    <string name="previous_run_crashed">O OsmAnd fallou catastroficamente na última execución. O ficheiro de rexistro está en {0}. Informe, se pode, deste problema e achegue o ficheiro de rexistro.</string>
+    <string name="previous_run_crashed">O OsmAnd fallou na última execución. O ficheiro de rexistro está en {0}. Informa, se podes, deste problema e achega o ficheiro de rexistro.</string>
     <string name="saving_gpx_tracks">Estase a gardar ficheiro GPX…</string>
     <string name="finished_task">Rematado</string>
     <string name="use_online_routing_descr">Emprega-la Internet para calcula-la rota.</string>
@@ -1597,16 +1578,16 @@ Lon %2$s</string>
     <string name="route_descr_destination">Destino</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="index_name_netherlands">Europa - Países Baixos</string>
-    <string name="shared_string_release">Publicada</string>
+    <string name="shared_string_release">Publicado</string>
     <string name="plugin_install_needs_network">Precisa dunha conexión á Internet para instalar este engadido.</string>
     <string name="get_plugin">Obter</string>
     <string name="use_fast_recalculation_desc">Nas viaxes longas, recalcula só o anaco inicial da rota.</string>
     <string name="do_you_like_osmand">Gosta do OsmAnd?</string>
     <string name="we_really_care_about_your_opinion">A túa opinión interésanos e os teus comentarios son importantes para nós.</string>
     <string name="rate_this_app">Cualificar este aplicativo</string>
-    <string name="rate_this_app_long">Déalle unha puntuación ao OsmAnd en Google Play</string>
+    <string name="rate_this_app_long">Dálle unha valoración ó OsmAnd na Google Play</string>
     <string name="user_hates_app_get_feedback">Díganos o porque.</string>
-    <string name="user_hates_app_get_feedback_long">Díganos o que desexa mudar neste aplicativo.</string>
+    <string name="user_hates_app_get_feedback_long">Díganos o que desexas mudar nesta aplicación.</string>
     <string name="delete_change">Elimina-la mudanza</string>
     <string name="successfully_uploaded_pattern">Subido {0}/{1}</string>
     <string name="try_again">Tentar de novo</string>
@@ -1621,7 +1602,7 @@ Lon %2$s</string>
     <string name="next_proceed">Seguinte</string>
     <string name="contact_info">información de contacto</string>
     <string name="poi_dialog_poi_type">Tipo do PDI</string>
-    <string name="please_specify_poi_type">Indique o tipo de PDI.</string>
+    <string name="please_specify_poi_type">Indica o tipo de PDI.</string>
     <string name="shared_string_deselect">Desbota-la selección</string>
     <string name="shared_string_deselect_all">Desbota-la selección toda</string>
     <string name="osm_edit_context_menu_delete">Eliminar edición do OSM</string>
@@ -1873,8 +1854,8 @@ Lon %2$s</string>
     <string name="osm_live_month_cost_desc">Pagamento mensual</string>
     <string name="osm_live_active">Activo</string>
     <string name="osm_live_not_active">Inactivo</string>
-    <string name="osm_live_enter_email">Insira un enderezo do correo válido</string>
-    <string name="osm_live_enter_user_name">Insira un nome público</string>
+    <string name="osm_live_enter_email">Insire un enderezo do correo válido</string>
+    <string name="osm_live_enter_user_name">Insire un nome público</string>
     <string name="osm_live_subscription_settings">Axustes da subscrición</string>
     <string name="select_map_marker">Escoller marcaxe do mapa</string>
     <string name="map_markers_other">Outras marcaxes</string>
@@ -1891,7 +1872,7 @@ Lon %2$s</string>
     <string name="shared_string_reverse_order">Orde inversa</string>
     <string name="show_map_markers_description">Activa-la funcionalidade das marcaxes do mapa.</string>
     <string name="clear_active_markers_q">Desexa eliminar tódalas marcaxes activas\?</string>
-    <string name="clear_markers_history_q">Desexa limpa-lo historial de marcaxes do mapa\?</string>
+    <string name="clear_markers_history_q">Desexas limpa-lo historial de marcaxes do mapa\?</string>
     <string name="active_markers">Marcaxes activas</string>
     <string name="map_markers">Marcaxes dos mapas</string>
     <string name="map_marker">Marcaxe do mapa</string>
@@ -1916,7 +1897,7 @@ Lon %2$s</string>
     <string name="rendering_value_thin_name">Delgado</string>
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Gordo</string>
-    <string name="no_map_markers_found">Engada marcaxes do mapa a través do mapa</string>
+    <string name="no_map_markers_found">Engade marcaxes do mapa a través do mapa</string>
     <string name="no_waypoints_found">Non se atoparon puntos de pasaxe</string>
     <string name="show_legacy_search">Mostrar as buscas á antiga</string>
     <string name="show_legacy_search_desc">Activar as buscas á antiga na lista de gabetas</string>
@@ -2041,7 +2022,7 @@ Lon %2$s</string>
     <string name="route_stops_before">%1$s paraxes antes</string>
     <string name="access_direction_haptic_feedback_descr">Inseri-lo enderezo do destino mediante vibración.</string>
     <string name="use_osm_live_routing_description">Activa-la navegación por mudanzas do OsmAnd ao Vivo.</string>
-    <string name="access_disable_offroute_recalc">Non recalculares a rota ó saírme da mesma</string>
+    <string name="access_disable_offroute_recalc">Non recalcular a rota ó saírme da mesma</string>
     <string name="access_disable_offroute_recalc_descr">Non recalcula a rota, ó afastarss da mesma.</string>
     <string name="access_disable_wrong_direction_recalc">Non recalculares a rota cando se estea na dirección contraria</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evitar calcular de xeito automático a rota de novo cando se estea a mover na dirección errada.</string>
@@ -2082,7 +2063,7 @@ Lon %2$s</string>
 \n 
 \nPara activares tódalas funcións novas, tes que reinicia-lo OsmAnd.</string>
     <string name="osm_live_region_desc">Parte da súa doazón será enviada ós usuarios do OSM que fagan mudanzas do mapa desa rexión.</string>
-    <string name="osm_live_ask_for_purchase">Merque primeiro unha subscrición ó OsmAnd ao Vivo</string>
+    <string name="osm_live_ask_for_purchase">Merca primeiro unha subscrición ó OsmAnd ao Vivo</string>
     <string name="osm_live_header">Esta subscrición permite actualizacións cada hora para tódolos mapas do mundo. Un anaco dos ingresos voltan á comunidade do OSM e págase por cada contribución ó OSM. Se che gosta o OsmAnd, o OSM e queres apoialos e ser apoiado por eles, esta é un perfecto xeito de facelo.</string>
     <string name="download_files_error_not_enough_space">Non hai espazo dabondo!
 \nO espazo do almacenaxe preciso é de {3} MB de xeito temporal, {1} MB de xeito permanente.
@@ -2279,7 +2260,7 @@ Lon %2$s</string>
     <string name="mapillary_menu_title_username">Nome de usuario</string>
     <string name="mapillary_menu_filter_description">Filtrar imaxes polo usuario, pola data ou polo tipo. Só activado nos primeiros achegamentos.</string>
     <string name="shared_string_permissions">Permisos</string>
-    <string name="import_gpx_failed_descr">O OsmAnd non pode importa-lo ficheiro. Comprobe se o OsmAnd ten permiso para ler o ficheiro neste sitio.</string>
+    <string name="import_gpx_failed_descr">O OsmAnd non pode importa-lo ficheiro. Comproba se o OsmAnd ten permiso para ler o ficheiro neste sitio.</string>
     <string name="distance_moving">Distancia corrixida</string>
     <string name="mapillary_image">Imaxe de Mapillary</string>
     <string name="shared_string_add_photos">Engadir imaxes</string>
@@ -2359,7 +2340,7 @@ Lon %2$s</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd vai conecta-los puntos ós recursos do perfil elixido.</string>
     <string name="measurement_tool_save_as_new_track_descr">Garda-los puntos, xa sexa coma puntos da rota coma unha liña.</string>
     <string name="choose_navigation_type">Elixi-lo perfil da navegación</string>
-    <string name="none_point_error">Engada ao menos un punto.</string>
+    <string name="none_point_error">Engade polo menos un punto.</string>
     <string name="enter_gpx_name">Nome do ficheiro GPX:</string>
     <string name="show_on_map_after_saving">Amosar no mapa após o gardado</string>
     <string name="measurement_tool">Medir distancia</string>
@@ -2435,8 +2416,8 @@ Lon %2$s</string>
     <string name="parked_at">aparcado en</string>
     <string name="pick_up_till">Recoller até ás</string>
     <string name="without_time_limit">Sen límite de tempo</string>
-    <string name="context_menu_read_full_article">Lea o artigo completo</string>
-    <string name="context_menu_read_article">Lea o artigo</string>
+    <string name="context_menu_read_full_article">Ler o artigo completo</string>
+    <string name="context_menu_read_article">Ler o artigo</string>
     <string name="context_menu_points_of_group">Tódolos puntos do grupo</string>
     <string name="open_from">Aberto a partires das</string>
     <string name="open_till">Aberto até as</string>
@@ -2790,24 +2771,15 @@ Lon %2$s</string>
 \n 
 \n • A subscrición do OsmAnd Live, suporta agora tódalas características do OsmAnd "</string>
     <string name="osmand_extended_description_part2">"Navigación GPS 
-\n
 \n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
-\n
 \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 
-\n
 \n • A rota recalcúlase ó saírse da mesma 
-\n
 \n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota 
-\n
 \n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático 
-\n
 \n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo 
-\n
 \n • O achegamento do mapa axústase á velocidade 
 \n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas 
-\n
 \n • Suporta puntos intermedios no itinerario 
-\n
 \n • Grave a súa viaxe ou soba unha pista GPX e séguea "</string>
     <string name="osmand_extended_description_part3">Navigación GPS 
 \n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
