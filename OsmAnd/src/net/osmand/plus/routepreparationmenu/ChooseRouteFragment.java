@@ -51,6 +51,7 @@ import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
+import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -70,7 +71,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener {
+public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
+		RouteDetailsFragmentListener {
 
 	public static final String TAG = "ChooseRouteFragment";
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
@@ -193,6 +195,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			RouteDetailsFragment detailsFragment = (RouteDetailsFragment) childFragment;
 			routeDetailsFragments.add(new WeakReference<>(detailsFragment));
 			detailsFragment.setListener(this);
+			detailsFragment.setRouteDetailsListener(this);
 		}
 	}
 
@@ -858,6 +861,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	@Override
+	public void onNavigationRequested() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			useRouteInfoMenu = false;
+			dismiss();
+			mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
 		}
 	}
 
