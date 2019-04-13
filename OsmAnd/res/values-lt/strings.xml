@@ -2567,4 +2567,103 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="osm_live_payment_discount_descr">Sutaupyk %1$s!</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="start_search_from_city">Pirmiausiai parinkite miestą</string>
+    <string name="routing_attr_avoid_tram_name">Vengti tramvajų</string>
+    <string name="routing_attr_avoid_tram_description">Vengti tramvajų</string>
+    <string name="routing_attr_avoid_bus_name">Vengti autobusų</string>
+    <string name="routing_attr_avoid_bus_description">Vengti autobusų ir troleibusų</string>
+    <string name="routing_attr_avoid_share_taxi_name">Vengti dalinimosi taksi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Vengti dalinimosi taksi</string>
+    <string name="routing_attr_avoid_train_name">Vengti traukinių</string>
+    <string name="routing_attr_avoid_train_description">Vengti traukinių</string>
+    <string name="routing_attr_avoid_subway_name">Vengti metro</string>
+    <string name="routing_attr_avoid_subway_description">Vengti metro ir lengvojo geležinkelio</string>
+    <string name="routing_attr_avoid_ferry_name">Vengti keltų</string>
+    <string name="routing_attr_avoid_ferry_description">Vengti keltų</string>
+    <string name="release_3_3_7">• Rodyti laiką tarp persėdimų viešajame transporte
+\n
+\n • Pataisyta maršruto detalių naudotojo sąsaja
+\n
+\n • Pataisyta nuorodų meniu ir maršruto detalių tamsi tema
+\n
+\n • Atstumo matavime rodyti azimutą
+\n
+\n</string>
+    <string name="shared_string_degrees">Laipsniai</string>
+    <string name="shared_string_milliradians">Miliradianai</string>
+    <string name="angular_measeurement">Kampiniai matavimo vienetai</string>
+    <string name="angular_measeurement_descr">Keisti kuo matuojamas azimutas.</string>
+    <string name="avoid_pt_types_descr">Parinkite kokio viešojo transporto tipo vengti navigacijoje:</string>
+    <string name="quick_action_day_night_mode">%s režimas</string>
+    <string name="avoid_pt_types">Vengti transporto tipų…</string>
+    <string name="shared_string_walk">Pėsčiomis</string>
+    <string name="save_poi_value_exceed_length">Maksimalus žymos „%s“ ilgis yra 255 simboliai.
+\nPrašome sutrumpinti ir tęsti.</string>
+    <string name="save_poi_value_exceed_length_title">„%s“ reikšmės ilgis</string>
+    <string name="public_transport_warning_descr_blog">Daugiau informacijos apie tai, kaip OsmAnd skaičiuoja maršrutus rasite mūsų tinklaraštyje.</string>
+    <string name="public_transport_warning_title">Viešojo transporto navigacija šiuo metu beta testavime, tikėkitės klaidų ir netikslumų.</string>
+    <string name="add_intermediate">Pridėti tarpinį tašką</string>
+    <string name="transfers_size">%1$d persėdimai</string>
+    <string name="add_start_and_end_points">Pridėti pradžios ir pabaigos taškus</string>
+    <string name="route_add_start_point">Pridėti pradžios tašką</string>
+    <string name="route_descr_select_start_point">Parinkite pradžios tašką</string>
+    <string name="rendering_attr_surface_unpaved_name">Negrįstas</string>
+    <string name="rendering_attr_surface_sand_name">Smėlis</string>
+    <string name="rendering_attr_surface_grass_name">Žolė</string>
+    <string name="rendering_attr_surface_grass_paver_name">Žolės danga</string>
+    <string name="rendering_attr_surface_ground_name">Žemė</string>
+    <string name="rendering_attr_surface_dirt_name">Purvas</string>
+    <string name="rendering_attr_surface_mud_name">Tešlynas</string>
+    <string name="rendering_attr_surface_ice_name">Ledas</string>
+    <string name="rendering_attr_surface_salt_name">Druska</string>
+    <string name="rendering_attr_surface_snow_name">Sniegas</string>
+    <string name="rendering_attr_surface_asphalt_name">Asfaltas</string>
+    <string name="rendering_attr_surface_paved_name">Grįstas</string>
+    <string name="rendering_attr_surface_concrete_name">Betonas</string>
+    <string name="rendering_attr_surface_sett_name">Trinkelės</string>
+    <string name="rendering_attr_surface_cobblestone_name">Akmenys</string>
+    <string name="rendering_attr_surface_stone_name">Akmenys</string>
+    <string name="rendering_attr_surface_metal_name">Metalas</string>
+    <string name="rendering_attr_surface_wood_name">Medis</string>
+    <string name="rendering_attr_smoothness_excellent_name">Puiki</string>
+    <string name="rendering_attr_smoothness_good_name">Gera</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Vidutinė</string>
+    <string name="rendering_attr_smoothness_bad_name">Bloga</string>
+    <string name="rendering_attr_smoothness_very_bad_name">Labai bloga</string>
+    <string name="rendering_attr_smoothness_horrible_name">Baisi</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Labai baisi</string>
+    <string name="rendering_attr_smoothness_impassable_name">Nepravažiuojama</string>
+    <string name="rendering_attr_highway_class_motorway_name">Automagistralė</string>
+    <string name="rendering_attr_highway_class_road_name">Kelias</string>
+    <string name="rendering_attr_highway_class_street_name">Gatvė</string>
+    <string name="rendering_attr_highway_class_footway_name">Šaligatvis</string>
+    <string name="rendering_attr_highway_class_track_name">Vėžios</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Arklių kelias</string>
+    <string name="rendering_attr_highway_class_steps_name">Laiptai</string>
+    <string name="rendering_attr_highway_class_path_name">Takas</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Dviračių takas</string>
+    <string name="rendering_attr_undefined_name">Nenurodyta</string>
+    <string name="time_of_day">Dienos metas</string>
+    <string name="road_types">Kelių tipai</string>
+    <string name="show_more">Rodyti daugiau</string>
+    <string name="quick_action_show_hide_gpx_tracks">Rodyti/slėpti GPX pėdsakus</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Paspaudus šį mygtuką žemėlapyje parodomi arba paslepiami GPX pėdsakai</string>
+    <string name="quick_action_gpx_tracks_hide">Slėpti GPX pėdsakus</string>
+    <string name="quick_action_gpx_tracks_show">Rodyti GPX pėdsakus</string>
+    <string name="add_destination_query">Prašome iš pradžių pridėti tikslą</string>
+    <string name="previous_route">Ankstesnis maršrutas</string>
+    <string name="add_home">Pridėti namus</string>
+    <string name="add_work">Pridėti darbą</string>
+    <string name="work_button">Darbas</string>
+    <string name="cubic_m">m³</string>
+    <string name="metric_ton">t</string>
+    <string name="shared_string_capacity">Talpa</string>
+    <string name="shared_string_width">Plotis</string>
+    <string name="shared_string_height">Aukštis</string>
+    <string name="swap_start_and_destination">Sukeisti vietomis pradžią ir tikslą</string>
+    <string name="add_destination_point">Pridėti tikslą</string>
+    <string name="add_intermediate_point">Pridėti tarpinį</string>
+    <string name="add_start_point">Pridėti pradžios tašką</string>
+    <string name="intermediate_waypoint">Tarpinis taškas</string>
+    <string name="on_foot">Pėsčiomis</string>
+    <string name="route_way">Kelias</string>
 </resources>

@@ -2995,4 +2995,25 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="save_poi_value_exceed_length_title">Dolžina vrednosti »%s«</string>
     <string name="routing_attr_avoid_sett_name">Izogni se tlakovcem vseh vrst</string>
     <string name="routing_attr_avoid_sett_description">Izogni se tlakovcem vseh vrst</string>
+    <string name="routing_attr_avoid_tram_name">Izogni se tramvajem</string>
+    <string name="routing_attr_avoid_tram_description">Načrtovanje poti brez potovanja s tramvajem</string>
+    <string name="routing_attr_avoid_bus_name">Izogni se avtobusom</string>
+    <string name="routing_attr_avoid_bus_description">Načrtovanje poti brez potovanja z avtobusom in trolejbusom</string>
+    <string name="routing_attr_avoid_share_taxi_name">Izogni se taksijem</string>
+    <string name="routing_attr_avoid_share_taxi_description">Načrtovanje poti brez potovanja s taksijem</string>
+    <string name="routing_attr_avoid_train_name">Izogni se vlaku</string>
+    <string name="routing_attr_avoid_train_description">Načrtovanje poti brez potovanja z vlakom</string>
+    <string name="routing_attr_avoid_subway_name">Izogni se podzemni železnici</string>
+    <string name="routing_attr_avoid_subway_description">Načrtovanje poti brez potovanja s podzemno železnico</string>
+    <string name="routing_attr_avoid_ferry_name">Izogni se trajektom</string>
+    <string name="routing_attr_avoid_ferry_description">Načrtovanje poti brez potovanja s trajektom</string>
+    <string name="release_3_3_7">• Pokaže čas med prevozi javnega potniškega prometa
+\n
+\n• Popravljen vmesnik za prikaz podrobnosti poti
+\n
+\n• Popravljena je temna tema v meniju smeri in podrobnosti poti
+\n
+\n• Prikaz azimuta pri merjenju razdalje
+\n
+\n</string>
 </resources>
