@@ -620,6 +620,21 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		((ViewGroup) view).addView(baseItemView);
 	}
 
+	public void showRouteOnMap() {
+		OsmandApplication app = requireMyApplication();
+		if (transportCard == null) {
+			RouteCalculationResult route = app.getRoutingHelper().getRoute();
+			if (route != null) {
+				showRouteOnMap(route);
+			}
+		} else {
+			TransportRouteResult route = app.getTransportRoutingHelper().getCurrentRouteResult();
+			if (route != null) {
+				showRouteOnMap(route);
+			}
+		}
+	}
+
 	public void showRouteOnMap(@NonNull RouteCalculationResult result) {
 		QuadRect rect = result.getLocationsRect();
 		if (rect != null) {
@@ -644,14 +659,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
-	public void showRouteOnMap(TransportRouteResult result) {
-		if (result != null) {
-			OsmandApplication app = requireMyApplication();
-			QuadRect rect = app.getTransportRoutingHelper().getTransportRouteRect(result);
-			if (rect != null) {
-				openMenuHeaderOnly();
-				fitRectOnMap(rect);
-			}
+	public void showRouteOnMap(@NonNull TransportRouteResult result) {
+		OsmandApplication app = requireMyApplication();
+		QuadRect rect = app.getTransportRoutingHelper().getTransportRouteRect(result);
+		if (rect != null) {
+			openMenuHeaderOnly();
+			fitRectOnMap(rect);
 		}
 	}
 
