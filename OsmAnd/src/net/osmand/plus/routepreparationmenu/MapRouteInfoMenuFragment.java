@@ -4,8 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,7 +34,7 @@ import net.osmand.util.MapUtils;
 import java.util.List;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment {
-	public static final String TAG = "MapRouteInfoMenuFragment";
+	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
 	@Nullable
 	private MapRouteInfoMenu menu;
@@ -71,11 +69,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	@Override
 	public int getToolbarHeight() {
 		return 0;
-	}
-
-	@Override
-	public boolean isSingleFragment() {
-		return true;
 	}
 
 	@Override
@@ -423,18 +416,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				.add(R.id.routeMenuContainer, this, TAG)
 				.addToBackStack(TAG)
 				.commitAllowingStateLoss();
-	}
-
-	public void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG,
-						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
-				//
-			}
-		}
 	}
 
 	public void applyDayNightMode() {

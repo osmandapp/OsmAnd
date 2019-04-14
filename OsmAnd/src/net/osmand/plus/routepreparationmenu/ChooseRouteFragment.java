@@ -118,6 +118,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		int routeIndex = 0;
 		int initialMenuState = MenuState.HEADER_ONLY;
 		Bundle args = getArguments();
+		if (args == null) {
+			args = savedInstanceState;
+		}
 		if (args != null) {
 			routeIndex = args.getInt(ROUTE_INDEX_KEY);
 			useRouteInfoMenu = args.getBoolean(USE_ROUTE_INFO_MENU_KEY, false);
