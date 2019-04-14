@@ -30,6 +30,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -362,6 +363,31 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			} while (query.moveToNext());
 		}
 		query.close();
+
+		// drop empty tracks
+		List<String> datesToRemove = new ArrayList<>();
+		for (Map.Entry<String, GPXFile> entry : dataTracks.entrySet()) {
+			GPXFile file = entry.getValue();
+			Iterator<Track> it = file.tracks.iterator();
+			while (it.hasNext()) {
+				Track t = it.next();
+				Iterator<TrkSegment> its = t.segments.iterator();
+				while (its.hasNext()) {
+					if (its.next().points.size() == 0) {
+						its.remove();
+					}
+				}
+				if (t.segments.size() == 0) {
+					it.remove();
+				}
+			}
+			if (file.tracks.size() == 0) {
+				datesToRemove.add(entry.getKey());
+			}
+		}
+		for (String date : datesToRemove) {
+			dataTracks.remove(date);
+		}
 	}
 	
 	public void startNewSegment() {
