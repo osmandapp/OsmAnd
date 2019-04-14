@@ -665,6 +665,7 @@ public class SearchCoreFactory {
 				categories = types.getCategories(false);
 			}
 			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
+			List<AbstractPoiType> searchWordTypes = new ArrayList<AbstractPoiType>();
 			NameStringMatcher nm;
 			String unknownSearchPhrase = phrase.getUnknownSearchPhrase();
 			if (phrase.getUnknownSearchWord().length() < unknownSearchPhrase.length()) {
@@ -678,6 +679,7 @@ public class SearchCoreFactory {
 						|| nm.matches(pf.getEnTranslation())
 						|| nm.matches(pf.getSynonyms())) {
 					results.add(pf);
+					searchWordTypes.add(pf);
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
@@ -687,6 +689,7 @@ public class SearchCoreFactory {
 							|| nm.matches(c.getEnTranslation())
 							|| nm.matches(c.getSynonyms()))) {
 						results.add(c);
+						searchWordTypes.add(c);
 					}
 				}
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
@@ -699,6 +702,7 @@ public class SearchCoreFactory {
 								|| nm.matches(pt.getTranslation())
 								|| nm.matches(pt.getSynonyms()))) {
 							results.add(pt);
+							searchWordTypes.add(pt);
 						}
 						List<PoiType> additionals = pt.getPoiAdditionals();
 						if (additionals != null) {
@@ -715,7 +719,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
-			phrase.setUnknownSearchWordPoiTypes(new ArrayList<>(results));
+			phrase.setUnknownSearchWordPoiTypes(searchWordTypes);
 
 			if (resultMatcher != null) {
 				String word = phrase.getUnknownSearchWord();
