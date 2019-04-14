@@ -1705,9 +1705,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void selectMapMarker(final int index, final PointType pointType) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			MapMarker m = null;
 			List<MapMarker> mapMarkers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
 			if (index != -1 && mapMarkers.size() > index) {
-				MapMarker m = mapMarkers.get(index);
+				m = mapMarkers.get(index);
+			}
+			selectMapMarker(m, pointType);
+		}
+	}
+
+	public void selectMapMarker(@Nullable final MapMarker m, @NonNull final PointType pointType) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (m != null) {
 				LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
 				TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 				switch (pointType) {
