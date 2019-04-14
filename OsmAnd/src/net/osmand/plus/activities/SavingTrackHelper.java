@@ -381,7 +381,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					it.remove();
 				}
 			}
-			if (file.tracks.size() == 0) {
+			if (file.isEmpty()) {
 				datesToRemove.add(entry.getKey());
 			}
 		}
