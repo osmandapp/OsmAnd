@@ -1755,7 +1755,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public boolean isVisible() {
-		return findMenuFragment() != null;
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			MapRouteInfoMenuFragment f = fragmentRef.get();
+			if (f != null) {
+				return f.isVisible() && !f.isDismissing();
+			}
+		}
+		return false;
 	}
 
 	public WeakReference<MapRouteInfoMenuFragment> findMenuFragment() {

@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -35,7 +36,7 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routepreparationmenu.WaypointsFragment;
+import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -1005,7 +1006,12 @@ public class MapInfoWidgetsFactory {
 						@Override
 						public void onClick(View view) {
 							map.hideContextAndRouteInfoMenues();
-							WaypointsFragment.showInstance(map.getSupportFragmentManager());
+							ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
+							Bundle args = new Bundle();
+							args.putInt(ShowAlongTheRouteBottomSheet.EXPAND_TYPE_KEY, pnt.type);
+							fragment.setArguments(args);
+							fragment.setUsedOnMap(false);
+							fragment.show(map.getSupportFragmentManager(), ShowAlongTheRouteBottomSheet.TAG);
 						}
 					});
 					remove.setOnClickListener(new OnClickListener() {

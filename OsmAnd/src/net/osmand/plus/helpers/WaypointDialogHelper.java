@@ -29,6 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.WaypointHelper.AmenityLocationPoint;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -326,8 +327,12 @@ public class WaypointDialogHelper {
 		if (!(a instanceof MapActivity)) {
 			return;
 		}
+		Object object = locationPoint;
+		if (locationPoint instanceof AmenityLocationPoint) {
+			object = ((AmenityLocationPoint) locationPoint).a;
+		}
 		app.getSettings().setMapLocationToShow(locationPoint.getLatitude(), locationPoint.getLongitude(),
-				15, locationPoint.getPointDescription(a), false, locationPoint);
+				15, locationPoint.getPointDescription(a), false, object);
 		MapActivity.launchMapActivityMoveToTop(a);
 	}
 
