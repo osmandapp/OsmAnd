@@ -100,6 +100,9 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		Bundle args = getArguments();
+		if (args == null) {
+			args = savedInstanceState;
+		}
 		if (args != null) {
 			useRouteInfoMenu = args.getBoolean(USE_ROUTE_INFO_MENU_KEY, false);
 		}

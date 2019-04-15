@@ -87,7 +87,7 @@
 
             <TextView
                 android:id="@+id/distance_to_center_text_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/measurement_points_text_view"
@@ -96,6 +96,7 @@
                 android:layout_toStartOf="@id/up_down_button"
                 android:textColor="@color/color_distance"
                 android:textSize="@dimen/default_list_text_size"
+                android:maxLines="1"
                 tools:text=" – 700 m"/>
 
             <TextView

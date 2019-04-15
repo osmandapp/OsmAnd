@@ -131,7 +131,7 @@
     <string name="user_name">OSM gebruikersnaam</string>
     <string name="open_street_map_login_descr">Nodig voor OpenStreetMap.org aanmelding</string>
     <string name="user_password">OSM wachtwoord</string>
-    <string name="osmand_service">Achtergrondmodus</string>
+    <string name="osmand_service">Achtergrond modus</string>
     <string name="osmand_service_descr">OsmAnd werkt op de achtergrond als het scherm uit is</string>
     <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
     <string name="download_files_question_space">{0} bestand(en) downloaden? 
@@ -263,10 +263,10 @@ Er is nu {2} MB beschikbaar</string>
     <string name="si_mi_feet">Mijlen/voeten</string>
     <string name="si_mi_yard">Mijlen/yards</string>
     <string name="si_km_m">Kilometers/meters</string>
-    <string name="yard">yd</string>
-    <string name="foot">ft</string>
-    <string name="mile_per_hour">mph</string>
-    <string name="mile">mi</string>
+    <string name="yard">yard</string>
+    <string name="foot">voet</string>
+    <string name="mile_per_hour">mpu</string>
+    <string name="mile">mijl</string>
     <string name="send_location_way_choose_title">Locatie doorgeven met</string>
     <string name="send_location_sms_pattern">Locatie: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Om de locatie te zien: volg de weblink %1$s of android intent link %2$s</string>
@@ -499,7 +499,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="fav_points_not_exist">Er zijn geen favoriete punten</string>
     <string name="update_existing">Vervang</string>
     <string name="only_show">Toon route</string>
-    <string name="follow">Start navigatie</string>
+    <string name="follow">Start route begeleiding</string>
     <string name="recalculate_route_to_your_location">Soort vervoer:</string>
     <string name="mark_final_location_first">Kies eerst een bestemming</string>
     <string name="get_directions">Routebeschrijving</string>
@@ -1251,7 +1251,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="way_alarms">Waarschuwingen</string>
     <string name="speak_favorites">Favorieten in de buurt</string>
     <string name="speak_poi">Interessepunt in de buurt</string>
-    <string name="shared_string_all">Alle</string>
+    <string name="shared_string_all">Alles</string>
     <string name="index_tours">Reizen</string>
     <string name="record_plugin_name">GPX-track opnemen</string>
     <string name="int_hour">u.</string>
@@ -1635,10 +1635,10 @@ Lengtegraad:\t\t%2$s</string>
     <string name="default_speed_system_descr">Eenheid voor de snelheid instellen.</string>
     <string name="default_speed_system">Eenheid van snelheid</string>
     <string name="nm">nmi</string>
-    <string name="si_nm">Zeemijlen</string>
-    <string name="si_kmh">Kilometer per uur</string>
-    <string name="si_mph">Mijl per uur</string>
-    <string name="si_m_s">Meter per seconde</string>
+    <string name="si_nm">Nautische mijlen</string>
+    <string name="si_kmh">Kilometers per uur</string>
+    <string name="si_mph">Mijlen per uur</string>
+    <string name="si_m_s">Meters per seconde</string>
     <string name="si_min_km">Minuten per kilometer</string>
     <string name="si_min_m">Minuten per mijl</string>
     <string name="si_nm_h">Zeemijlen per uur (knopen)</string>
@@ -2293,7 +2293,12 @@ voor Gebied: %1$s x %2$s</string>
  "</string>
     <string name="osmand_extended_description_part3">Kaart • Toon POI (Points Of Interest) • Draai in de bewegingsrichting (of kompasrichting) • Toont uw positie en waar u naar kijkt • Deel uw lokatie met vrienden • Bewaar belangrijke plaatsen in Favorieten • Toon namen in Engelse, lokale, of fonetische schrijfwijze • Toon extra informatie, zoals satellietfoto (van Bing), GPX-sporen, andere kaartstijlen en extra informatielagen</string>
     <string name="osmand_extended_description_part4">Skiën - Met de OsmAnd Ski plugin ziet u pistes met hun moeilijkheidsgraad, en extra informatie zoals liften en andere faciliteiten.</string>
-    <string name="osmand_extended_description_part5">Fietsen • Vind fietspaden op de kaart • Routeberekening met gebruik van fietspaden • Toon snelheid en hoogte • Neem de rit op als GPX-spoor en deel deze • Geef, met een extra plugin, hoogteverschillen weer als hoogtelijnen of reliëfschaduw</string>
+    <string name="osmand_extended_description_part5">Fietsen
+\n• Vind fietspaden op de kaart
+\n• GPS navigatie in fiets modus maakt gebruik van fietspaden
+\n• Bekijk uw snelheid en hoogte
+\n• De GPX opname optie stelt u in staat uw route op te slaan en deze te delen
+\n• Via een extra plugin kunt u hoogteverschillen weergeven als hoogtelijnen of reliëfschaduw</string>
     <string name="osmand_extended_description_part6">Wandelen • De kaart toont voetpaden, bergpaden, routes door parken • Wikipedia vertelt u meer over uw omgeving • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen u te navigeren • Navigatie gebruikt voetpaden • Neem uw weg op als GPX-route of volg een gedownloade route</string>
     <string name="osmand_extended_description_part7">Werk mee aan OpenStreetMap (OSM) • Meld fouten • Upload sporen naar OSM, direct vanuit de app • Voeg POI toe aan de kaart en upload deze</string>
     <string name="osmand_extended_description_part8">OsmAnd is open-source en wordt steeds verder ontwikkeld. Iedereen kan helpen door bugs te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Door deze interactie wordt het steeds beter. De voortgang is mede afhankelijk van betalingen om programmeurs en testers voor nieuwe functies te betalen. 
@@ -2350,7 +2355,12 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_permissions">Rechten</string>
     <string name="import_gpx_failed_descr">OsmAnd kan het bestand niet lezen. Controleer of OsmAnd rechten heeft om het bestand van deze locatie te lezen.</string>
     <string name="distance_moving">Gecorrigeerde afstand</string>
-    <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de vrije, wereldwijde en uitstekende OpenStreetMap (OSM) gegevens gebruikt. Met akoestische en visuele navigatie, bekijk POI (points of interest), maak en beheer GPX-sporen, gebruik hoogtelijnen en hoogtegegevens, kies tussen auto, fiets en wandelen, bewerk OSM en veel meer. OsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, geeft geld voor het maken van nieuwe functies, en krijgt u de nieuwste functies. Een paar belangrijke functies: "</string>
+    <string name="osmand_plus_extended_description_part1">"OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de vrije, wereldwijde en uitstekende OpenStreetMap (OSM) gegevens gebruikt.
+\nMet akoestische en visuele navigatie, bekijk POI (points of interest), maak en beheer GPX-sporen, gebruik hoogtelijnen en hoogtegegevens, kies tussen auto, fiets en wandelen, bewerk OSM en veel meer. 
+\n
+\nOsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, geeft geld voor het maken van nieuwe functies, en krijgt u de nieuwste functies.
+\n
+\nEen paar belangrijke functies: "</string>
     <string name="osmand_plus_extended_description_part2">" Navigatie • werkt online (snel) of offline (zonder roaming-kosten in het buitenalnd) • gesproken stap-voor-stap navigatie (met opgenomen of synthetische stem) • optioneel met rijstrookaanduiding, straatnamen und geschatte aankomsttijd • tussenstops op de route • automatische herberekening bij het verlaten van de route • zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
     <string name="osmand_plus_extended_description_part3">" kaart bekijken • positie en richting tonen • kaart richten volgens kompas of volgens beweging • bewaar plaatsen als favoriet • toon POIs (point of interest) in de buurt • toon specifieke online-kaarten, satellietbeelden (van Bing), overlays zoals GPX-sporen met rit-/routeinformatie und extra kaartlagen met instelbare transparantie • toon plaatsnamen in Engels, de taal van het land of phonetisch weergegeven "</string>
     <string name="osmand_plus_extended_description_part4">" gebruik OSM- en Wikipedia-gegevens • de beste gegevens van de beste wereldwijde projecten • OSM-gegevens per land of regio • Wikipedia-POIs voor sightseeing • onbeperkte gratis downloads vanuit de app • compacte vectorkaarten, tenminste eens per maand bijgewerkt • keuze tussen volledige kaarten of alleen het stratennet (bijv: Japan compleet is 700 MB, de straten maar 200 MB) "</string>
@@ -2719,7 +2729,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="show_guide_line_descr">"Toon rechte lijnen van je positie nasr de actieve Markeervlaggetjes. "</string>
     <string name="show_arrows_descr">Toon pijlen richting de actieve Markeervlaggetjes.</string>
     <string name="waypoints_added_to_map_markers">"Routepunten: toegevoegd aan Markeervlaggetjes "</string>
-    <string name="access_intermediate_arrival_time">Aankomsttijd Tussempunt</string>
+    <string name="access_intermediate_arrival_time">Aankomsttijd Tussenpunt</string>
     <string name="map_widget_intermediate_time">Tijd tot Tussenpunt</string>
     <string name="release_3_2_pre">• Crash bij starten opgelost die zich voordeed bij non-latin kaarten
 \n
@@ -2770,7 +2780,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_avoid_ferry_description">Vermijd veerboten</string>
     <string name="shared_string_degrees">Graden</string>
     <string name="shared_string_milliradians">Milliradialen</string>
-    <string name="angular_measeurement_descr">Wijzig azimuth meet formaat</string>
+    <string name="angular_measeurement_descr">Wijzig azimuth meet formaat.</string>
     <string name="avoid_pt_types_descr">Selecteer de te vermijden openbaar vervoer opties:</string>
     <string name="quick_action_day_night_mode">% modus</string>
     <string name="avoid_pt_types">Vermijd transport types…</string>
@@ -2794,7 +2804,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_attr_surface_asphalt_name">Asfalt</string>
     <string name="rendering_attr_surface_paved_name">Verhard</string>
     <string name="rendering_attr_surface_concrete_name">Beton</string>
-    <string name="rendering_attr_surface_cobblestone_name">Kinderkopjes</string>
+    <string name="rendering_attr_surface_cobblestone_name">Straatkeien</string>
     <string name="rendering_attr_surface_paving_stones_name">Straatstenen</string>
     <string name="rendering_attr_surface_pebblestone_name">Kiezelstenen</string>
     <string name="rendering_attr_surface_stone_name">Steen</string>
@@ -2872,4 +2882,42 @@ voor Gebied: %1$s x %2$s</string>
     <string name="route_steepness_stat_container">Steilte</string>
     <string name="run_full_osmand_msg">U gebruikt {0} kaart geleverd door OsmAnd. Wilt u de \"OsmAnd full\" versie openen\?</string>
     <string name="run_full_osmand_header">Open OsmAnd\?</string>
+    <string name="release_3_3_7">• Toon de overstaptijden in Openbaar Vervoer
+\n
+\n• UI gecorrigeerd voor Route Details
+\n
+\n•Fix: donker thema in het Routebeschijvings menu en in Route Details
+\n
+\n • Toon de azimuth in Afstands Meting
+\n
+\n</string>
+    <string name="angular_measeurement">Hoekmeting eenheden</string>
+    <string name="transfers_size">%1$d keer overstappen</string>
+    <string name="rendering_attr_surface_grass_paver_name">Gras wegoppervlak</string>
+    <string name="rendering_attr_surface_ground_name">Onverhard</string>
+    <string name="rendering_attr_surface_dirt_name">Onverhard</string>
+    <string name="rendering_attr_surface_sett_name">Kasseien</string>
+    <string name="release_3_3">• Nieuw \'Routebeschrijving\' scherm: Toont Thuis en Werk bestemming knoppen, \'vorige route\' snellink, lijst van actieve GPX tracks en markeringen, zoekgeschiedenis
+\n
+\n • Additionele info onder \'Route details\': weg types, wegoppervlak, steilte, wegdek kwaliteit
+\n
+\n • Openbaar vervoer navigatie ondersteunt alle vervoer mogelijkheden: metro, bus, tram, etc.
+\n
+\n • Nieuwe Sneloptie om trackes te tonen/verbergen en schakelen tussen dag/nacht modus
+\n
+\n • Fix: oppervlakken die als \'overstroomd\' getoond werden in Duitsland, Zuid-Afrika, Quebec
+\n
+\n • Additionele ondersteuning voor KML en KMZ import
+\n
+\n • Crashes herstelt bij het openen van sommige openbaar vervoer haltes
+\n
+\n • Facebook en Firebase analytics verwijderd uit de \"free version\" (OsmAnd+ bevat dit niet)
+\n
+\n</string>
+    <string name="by_transport_type">Per %1$s</string>
+    <string name="sit_on_the_stop">Instappen bij halte</string>
+    <string name="transfers">Aantal overstappen</string>
+    <string name="lang_gn_py">Guarani</string>
+    <string name="routing_attr_avoid_sett_name">Vermijd straatkeien en kasseien</string>
+    <string name="routing_attr_avoid_sett_description">Vermijd straatkeien en kasseien</string>
 </resources>

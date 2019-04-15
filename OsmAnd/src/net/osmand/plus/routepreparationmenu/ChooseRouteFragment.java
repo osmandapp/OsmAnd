@@ -51,6 +51,7 @@ import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
+import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -70,13 +71,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener {
+public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
+		RouteDetailsFragmentListener {
 
 	public static final String TAG = "ChooseRouteFragment";
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
 	public static final String ROUTE_INFO_STATE_KEY = "route_info_state_key";
 	public static final String INITIAL_MENU_STATE_KEY = "initial_menu_state_key";
 	public static final String USE_ROUTE_INFO_MENU_KEY = "use_route_info_menu_key";
+	public static final String ADJUST_MAP_KEY = "adjust_map_key";
 
 	@Nullable
 	private LockableViewPager viewPager;
@@ -101,6 +104,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private boolean publicTransportMode;
 	private boolean useRouteInfoMenu;
 	private boolean openingAnalyseOnMap = false;
+	private boolean needAdjustMap;
 
 	@Nullable
 	@Override
@@ -114,9 +118,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		int routeIndex = 0;
 		int initialMenuState = MenuState.HEADER_ONLY;
 		Bundle args = getArguments();
+		if (args == null) {
+			args = savedInstanceState;
+		}
 		if (args != null) {
 			routeIndex = args.getInt(ROUTE_INDEX_KEY);
 			useRouteInfoMenu = args.getBoolean(USE_ROUTE_INFO_MENU_KEY, false);
+			needAdjustMap = args.getBoolean(ADJUST_MAP_KEY, false);
 			initialMenuState = args.getInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 		}
 		routesCount = 1;
@@ -193,6 +201,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			RouteDetailsFragment detailsFragment = (RouteDetailsFragment) childFragment;
 			routeDetailsFragments.add(new WeakReference<>(detailsFragment));
 			detailsFragment.setListener(this);
+			detailsFragment.setRouteDetailsListener(this);
 		}
 	}
 
@@ -813,6 +822,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						updatePagesViewVisibility(menuState);
 						updateZoomButtonsVisibility(menuState);
 						updateViewPager(fragment.getViewY());
+						if (needAdjustMap) {
+							needAdjustMap = false;
+							f.showRouteOnMap();
+						}
 					}
 				}
 			}
@@ -843,14 +856,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex,
-									 boolean useRouteInfoMenu, int initialMenuState) {
+	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			Bundle args = new Bundle();
 			args.putInt(ROUTE_INDEX_KEY, routeIndex);
-			args.putBoolean(USE_ROUTE_INFO_MENU_KEY, useRouteInfoMenu);
+			args.putBoolean(USE_ROUTE_INFO_MENU_KEY, true);
 			args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
+			args.putBoolean(ADJUST_MAP_KEY, initialMenuState != MenuState.FULL_SCREEN);
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
@@ -858,6 +871,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	@Override
+	public void onNavigationRequested() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			useRouteInfoMenu = false;
+			dismiss();
+			mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
 		}
 	}
 

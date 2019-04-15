@@ -213,4 +213,8 @@
     <string name="timeline_description">Ative o monitoramento para salvar todos os locais no histórico.</string>
     <string name="app_name_short_online">Rastreador online</string>
     <string name="app_name_short">Rastreador OsmAnd</string>
+    <string name="search_contacts">Pesquisar contatos</string>
+    <string name="search_contacts_descr">Pesquise em todos os seus grupos e contatos.</string>
+    <string name="type_contact_or_group_name">Digite o nome do contato ou do grupo</string>
+    <string name="shared_string_search">Pesquisar</string>
 </resources>

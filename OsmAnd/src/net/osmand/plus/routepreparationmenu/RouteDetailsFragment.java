@@ -29,8 +29,8 @@ import android.widget.TextView;
 import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -105,6 +105,11 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private List<BaseCard> menuCards = new ArrayList<>();
 	@Nullable
 	private PublicTransportCard transportCard;
+	private RouteDetailsFragmentListener routeDetailsListener;
+
+	public interface RouteDetailsFragmentListener {
+		void onNavigationRequested();
+	}
 
 	@Override
 	public int getMainLayoutId() {
@@ -113,7 +118,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public int getHeaderViewHeight() {
-		return !menuCards.isEmpty() ? menuCards.get(0).getViewHeight() : 0;
+		return !menuCards.isEmpty() ? menuCards.get(0).getTopViewHeight() : 0;
 	}
 
 	@Override
@@ -199,6 +204,14 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (isPortrait()) {
 			updateCardsLayout();
 		}
+	}
+
+	public RouteDetailsFragmentListener getRouteDetailsListener() {
+		return routeDetailsListener;
+	}
+
+	public void setRouteDetailsListener(RouteDetailsFragmentListener routeDetailsListener) {
+		this.routeDetailsListener = routeDetailsListener;
 	}
 
 	private void updateCardsLayout() {
@@ -298,6 +311,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			}
 		});
 		statisticCard.setTransparentBackground(true);
+		statisticCard.setListener(this);
 		menuCards.add(statisticCard);
 		cardsContainer.addView(statisticCard.build(mapActivity));
 		buildRowDivider(cardsContainer, false);
@@ -314,22 +328,22 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				RenderingRuleSearchRequest defaultSearchRequest = maps.getSearchRequestWithAppliedCustomRules(defaultRender, isNightMode());
 
 				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
-				GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+				GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteClassStatistic(), analysis);
-				createRouteCard(cardsContainer, routeClassCard);
+				addRouteCard(cardsContainer, routeClassCard);
 
 				RouteInfoCard routeSurfaceCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSurfaceStatistic(), analysis);
-				createRouteCard(cardsContainer, routeSurfaceCard);
+				addRouteCard(cardsContainer, routeSurfaceCard);
 
 				if (slopeDataSet != null) {
 					List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues());
 					RouteInfoCard routeSteepnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSteepnessStatistic(inclines), analysis);
-					createRouteCard(cardsContainer, routeSteepnessCard);
+					addRouteCard(cardsContainer, routeSteepnessCard);
 				}
 
 				RouteInfoCard routeSmoothnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSmoothnessStatistic(), analysis);
-				createRouteCard(cardsContainer, routeSmoothnessCard);
+				addRouteCard(cardsContainer, routeSmoothnessCard);
 			}
 		}
 	}
@@ -347,7 +361,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		buildRowDivider(cardsContainer, false);
 	}
 
-	private void createRouteCard(LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
+	private void addRouteCard(LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
 		OsmandApplication app = requireMyApplication();
 		menuCards.add(routeInfoCard);
 		routeInfoCard.setListener(this);
@@ -606,6 +620,21 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		((ViewGroup) view).addView(baseItemView);
 	}
 
+	public void showRouteOnMap() {
+		OsmandApplication app = requireMyApplication();
+		if (transportCard == null) {
+			RouteCalculationResult route = app.getRoutingHelper().getRoute();
+			if (route != null) {
+				showRouteOnMap(route);
+			}
+		} else {
+			TransportRouteResult route = app.getTransportRoutingHelper().getCurrentRouteResult();
+			if (route != null) {
+				showRouteOnMap(route);
+			}
+		}
+	}
+
 	public void showRouteOnMap(@NonNull RouteCalculationResult result) {
 		QuadRect rect = result.getLocationsRect();
 		if (rect != null) {
@@ -630,14 +659,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
-	public void showRouteOnMap(TransportRouteResult result) {
-		if (result != null) {
-			OsmandApplication app = requireMyApplication();
-			QuadRect rect = app.getTransportRoutingHelper().getTransportRouteRect(result);
-			if (rect != null) {
-				openMenuHeaderOnly();
-				fitRectOnMap(rect);
-			}
+	public void showRouteOnMap(@NonNull TransportRouteResult result) {
+		OsmandApplication app = requireMyApplication();
+		QuadRect rect = app.getTransportRoutingHelper().getTransportRouteRect(result);
+		if (rect != null) {
+			openMenuHeaderOnly();
+			fitRectOnMap(rect);
 		}
 	}
 
@@ -1525,6 +1552,18 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			openMenuFullScreen();
 		} else if (card instanceof RouteDirectionsCard && buttonIndex >= 0) {
 			showDirectionsInfo(buttonIndex);
+		} else if (card instanceof RouteStatisticCard) {
+			switch (buttonIndex) {
+				case RouteStatisticCard.DETAILS_BUTTON_INDEX:
+					openMenuFullScreen();
+					break;
+				case RouteStatisticCard.START_BUTTON_INDEX:
+					RouteDetailsFragmentListener listener = getRouteDetailsListener();
+					if (listener != null) {
+						listener.onNavigationRequested();
+					}
+					break;
+			}
 		}
 	}
 

@@ -47,6 +47,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	public static final int REQUEST_CODE = 2;
 	public static final int SHOW_CONTENT_ITEM_REQUEST_CODE = 3;
+	public static final String EXPAND_TYPE_KEY = "expand_type_key";
 
 	private OsmandApplication app;
 
@@ -55,6 +56,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private ExpandableListView expListView;
 	private ExpandableListAdapter adapter;
+	private int expandIndex = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		if (ctx == null || args == null) {
 			return;
 		}
+		int expandType = args.getInt(EXPAND_TYPE_KEY, -1);
 
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final View titleView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_toolbar_title, null);
@@ -93,6 +96,16 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 		items.add(titleItem);
 
 		final ContentItem contentItem = getAdapterContentItems();
+		if (expandType != -1) {
+			ArrayList<ContentItem> subItems = contentItem.getSubItems();
+			for (int i = 0; i < subItems.size(); i++) {
+				ContentItem item = subItems.get(i);
+				if (expandType == item.type) {
+					expandIndex = i;
+					break;
+				}
+			}
+		}
 
 		items.add(new SimpleDividerItem(app));
 
@@ -175,6 +188,10 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 	public void onResume() {
 		super.onResume();
 		app.getRoutingHelper().addListener(this);
+		if (expandIndex != -1) {
+			expListView.expandGroup(expandIndex);
+			setupHeightAndBackground(getView());
+		}
 	}
 
 
@@ -225,12 +242,12 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				convertView.findViewById(R.id.waypoint_container).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						WaypointDialogHelper.showOnMap(app, mapActivity, item.point.getPoint(), false);
 						Fragment fragment = getTargetFragment();
 						if (fragment != null) {
 							fragment.onActivityResult(getTargetRequestCode(), SHOW_CONTENT_ITEM_REQUEST_CODE, null);
 						}
 						dismiss();
+						WaypointDialogHelper.showOnMap(app, mapActivity, item.point.getPoint(), false);
 					}
 				});
 

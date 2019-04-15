@@ -130,6 +130,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		if (requestCode == ShowAlongTheRouteBottomSheet.REQUEST_CODE
 				&& resultCode == ShowAlongTheRouteBottomSheet.SHOW_CONTENT_ITEM_REQUEST_CODE) {
+			mapActivity.getMapRouteInfoMenu().hide();
 			dismiss();
 		}
 	}

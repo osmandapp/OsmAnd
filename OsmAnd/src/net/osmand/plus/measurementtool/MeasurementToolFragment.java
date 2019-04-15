@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -363,7 +365,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			public void onMeasure(float distance, float bearing) {
 				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
 				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
-				distanceToCenterTv.setText(String.format(" – %s • %s", distStr, azimuthStr));
+				distanceToCenterTv.setText(String.format(" – %1$s • %2$s", distStr, azimuthStr));
+				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+					distanceToCenterTv, 12, 18, 2, TypedValue.COMPLEX_UNIT_SP
+				);
 			}
 		});
 

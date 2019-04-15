@@ -1300,6 +1300,7 @@ public class GpxUiHelper {
 		entries.add(new BarEntry(0, stacks));
 		BarDataSet barDataSet = new BarDataSet(entries, "");
 		barDataSet.setColors(colors);
+		barDataSet.setHighLightColor(ContextCompat.getColor(app, R.color.color_white));
 		BarData dataSet = new BarData(barDataSet);
 		dataSet.setDrawValues(false);
 		dataSet.setBarWidth(1);

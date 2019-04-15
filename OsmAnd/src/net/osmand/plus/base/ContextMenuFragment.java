@@ -75,6 +75,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private boolean initLayout = true;
 	private boolean wasDrawerDisabled;
 	private boolean paused;
+	private boolean dismissing;
 
 	private int minHalfY;
 	private int topScreenPosY;
@@ -539,6 +540,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		paused = false;
+		dismissing = false;
 		ViewParent parent = view.getParent();
 		if (parent != null && containerLayoutListener != null) {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
@@ -906,7 +908,12 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		updateMainViewLayout(posY);
 	}
 
+	public boolean isDismissing() {
+		return dismissing;
+	}
+
 	public void dismiss() {
+		dismissing = true;
 		if (isSingleFragment()) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

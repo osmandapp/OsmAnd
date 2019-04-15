@@ -213,4 +213,8 @@
     <string name="shared_string_appearance">Выгляд</string>
     <string name="show_gps_points">Паказаць кропкі GPS</string>
     <string name="show_gps_points_descr">Паказваць колькасць сабраных і адпраўленых кропак GPS.</string>
+    <string name="search_contacts">Пошук кантактаў</string>
+    <string name="search_contacts_descr">Шукаць ва ўсіх вашых групах і кантактах.</string>
+    <string name="type_contact_or_group_name">Увядзіце назву групы альбо кантакта</string>
+    <string name="shared_string_search">Пошук</string>
 </resources>

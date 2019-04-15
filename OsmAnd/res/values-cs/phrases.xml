@@ -2356,8 +2356,8 @@
     <string name="poi_boxing">Box</string>
     <string name="poi_official_name">Oficiální název</string>
     <string name="poi_dolphin">Delfín</string>
-    <string name="poi_forestry_compartment">Rozcestník: lesní prostor</string>
-    <string name="poi_forestry_allotment">Rozcestník: lesní parcela</string>
+    <string name="poi_forestry_compartment">Značka: lesní prostor</string>
+    <string name="poi_forestry_allotment">Značka: lesní parcela</string>
     <string name="poi_inscription_n">Nápis: S</string>
     <string name="poi_inscription_nw">Nápis: SZ</string>
     <string name="poi_inscription_w">Nápis: Z</string>

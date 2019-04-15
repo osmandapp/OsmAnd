@@ -2,8 +2,6 @@ package net.osmand.telegram.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -43,7 +41,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 	private lateinit var locationViewCache: UiUtils.UpdateLocationViewCache
 
-	private lateinit var searchBox: EditText
+	private lateinit var searchEditText: EditText
 	private lateinit var buttonsBar: LinearLayout
 
 	private var searchedChatsIds = mutableSetOf<Long>()
@@ -74,7 +72,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 			setNavigationOnClickListener { dismiss() }
 		}
 
-		searchBox = mainView.findViewById<EditText>(R.id.searchEditText).apply {
+		searchEditText = mainView.findViewById<EditText>(R.id.searchEditText).apply {
 			addTextChangedListener(object : TextWatcher {
 
 				override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
@@ -110,13 +108,6 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 				}
 			})
 		}
-
-		val matrix = ColorMatrix()
-		matrix.setSaturation(0f)
-		val filter = ColorMatrixColorFilter(matrix)
-
-		mainView.findViewById<ImageView>(R.id.empty_state_background).colorFilter = filter
-		mainView.findViewById<ImageView>(R.id.empty_state_placeholder).colorFilter = filter
 
 		buttonsBar = mainView.findViewById<LinearLayout>(R.id.buttons_bar).apply {
 			findViewById<TextView>(R.id.primary_btn).apply {
@@ -162,6 +153,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		telegramHelper.addSearchListener(this)
 		locationViewCache = app.uiUtils.getUpdateLocationViewCache()
 		startLocationUpdate()
+		searchEditText.requestFocus()
+		AndroidUtils.softKeyboardDelayed(searchEditText)
 	}
 
 	override fun onPause() {

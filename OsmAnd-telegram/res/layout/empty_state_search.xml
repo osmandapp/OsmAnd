@@ -6,42 +6,13 @@
 	android:gravity="center_horizontal"
 	android:orientation="vertical">
 
-	<FrameLayout
-		android:id="@+id/empty_state_image_container"
+	<ImageView
+		android:id="@+id/empty_state_background_image"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/my_location_image_height"
-		android:layout_marginBottom="16dp"
-		android:foreground="@drawable/gradient_both_sides_light">
-
-		<ImageView
-			android:id="@+id/empty_state_background"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:scaleType="center"
-			android:src="@drawable/img_my_location_roadbg" />
-
-		<FrameLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal"
-			android:layout_marginTop="@dimen/content_padding_standard">
-
-			<ImageView
-				android:id="@+id/empty_state_placeholder"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/img_my_location_user" />
-
-			<ImageView
-				android:id="@+id/empty_state_user_icon"
-				android:layout_width="@dimen/my_location_user_icon_size"
-				android:layout_height="@dimen/my_location_user_icon_size"
-				android:layout_gravity="center"
-				android:src="@drawable/img_user_placeholder" />
-
-		</FrameLayout>
-
-	</FrameLayout>
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding_standard"
+		android:scaleType="center"
+		android:src="@drawable/img_empty_state_search" />
 
 	<net.osmand.telegram.ui.views.TextViewEx
 		android:layout_width="wrap_content"
@@ -56,8 +27,8 @@
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="68dp"
-		android:layout_marginRight="68dp"
+		android:layout_marginLeft="@dimen/empty_state_descr_margin"
+		android:layout_marginRight="@dimen/empty_state_descr_margin"
 		android:background="@null"
 		android:gravity="center"
 		android:text="@string/search_contacts_descr"
