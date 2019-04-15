@@ -45,7 +45,6 @@ import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navigation.ADirectionInfo;
-import net.osmand.aidl.navigation.ANavigationUpdateParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -124,6 +123,7 @@ import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERRO
 import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 public class OsmandAidlApi {
@@ -197,9 +197,6 @@ public class OsmandAidlApi {
 	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 
 	private boolean mapActivityActive = false;
-
-	private Map<Long, IOsmAndAidlCallback> callbacks = new HashMap<>();
-	private long updateCallbackId = 0;
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
@@ -1945,11 +1942,13 @@ public class OsmandAidlApi {
 						directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
 					}
 				}
-				for (Entry<Long, IOsmAndAidlCallback> cb : callbacks.entrySet()) {
-					try {
-						cb.getValue().updateNavigationInfo(directionInfo);
-					} catch (Exception e) {
-						LOG.debug(e.getMessage(), e);
+				for (Entry<Long, OsmandAidlService.AidlCallbackParams> cb : OsmandAidlService.getAidlCallbacks().entrySet()) {
+					if (cb.getValue().getKey() == KEY_ON_NAV_DATA_UPDATE) { //add bitwise check instead
+						try {
+							cb.getValue().getCallback().updateNavigationInfo(directionInfo);
+						} catch (Exception e) {
+							LOG.debug(e.getMessage(), e);
+						}
 					}
 				}
 			}

@@ -1037,7 +1037,7 @@ public class OsmandAidlService extends Service {
 		}
 	};
 
-	private static class AidlCallbackParams {
+	public static class AidlCallbackParams {
 		private IOsmAndAidlCallback callback;
 		private long key;
 
