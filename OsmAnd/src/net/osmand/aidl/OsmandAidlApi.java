@@ -1943,7 +1943,7 @@ public class OsmandAidlApi {
 					}
 				}
 				for (Entry<Long, OsmandAidlService.AidlCallbackParams> cb : OsmandAidlService.getAidlCallbacks().entrySet()) {
-					if (cb.getValue().getKey() == KEY_ON_NAV_DATA_UPDATE) { //add bitwise check instead
+					if ((cb.getValue().getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
 						try {
 							cb.getValue().getCallback().updateNavigationInfo(directionInfo);
 						} catch (Exception e) {

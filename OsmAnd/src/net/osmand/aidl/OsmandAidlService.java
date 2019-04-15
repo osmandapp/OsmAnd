@@ -89,11 +89,8 @@ public class OsmandAidlService extends Service {
 
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
-	public static final int KEY_ON_SEARCH_COMPLETE = 1;
-	public static final int KEY_ON_UPDATE = 2;
-	public static final int KEY_ON_APP_INIT = 3;
-	public static final int KEY_ON_GPX_BMP_CREATED = 4;
-	public static final int KEY_ON_NAV_DATA_UPDATE = 5;
+	public static final int KEY_ON_UPDATE = 1;
+	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
 
 	private static Map<Long, AidlCallbackParams> callbacks;
 	private Handler mHandler = null;
