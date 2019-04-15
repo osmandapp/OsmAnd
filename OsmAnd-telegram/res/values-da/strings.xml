@@ -213,4 +213,8 @@
     <string name="shared_string_appearance">Udseende</string>
     <string name="show_gps_points">Vis GPX-punkter</string>
     <string name="show_gps_points_descr">Vis antallet af indsamlede og sendte GPX-punkter.</string>
+    <string name="search_contacts">Søg efter kontaktpersoner</string>
+    <string name="search_contacts_descr">Søg på tværs af alle grupper og kontaktpersoner.</string>
+    <string name="type_contact_or_group_name">Skriv navnet på kontakt eller gruppe</string>
+    <string name="shared_string_search">Søg</string>
 </resources>
