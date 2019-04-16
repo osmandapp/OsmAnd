@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -45,6 +47,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.dashboard.DashErrorFragment;
+import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
@@ -82,7 +86,7 @@ import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
 public class OsmandApplication extends MultiDexApplication {
-	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
+	public static final String EXCEPTION_PATH = "exception.log"; 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	private static final String SHOW_PLUS_VERSION_INAPP_PARAM = "show_plus_version_inapp";
@@ -618,12 +622,12 @@ public class OsmandApplication extends MultiDexApplication {
 				StringBuilder msg = new StringBuilder();
 				msg.append("Version  ")
 						.append(Version.getFullVersion(OsmandApplication.this))
-						.append("\n") //$NON-NLS-1$
+						.append("\n") 
 						.append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
 				try {
 					PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
 					if (info != null) {
-						msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode); //$NON-NLS-1$ //$NON-NLS-2$
+						msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);  
 					}
 				} catch (Throwable e) {
 				}
@@ -650,7 +654,7 @@ public class OsmandApplication extends MultiDexApplication {
 				defaultHandler.uncaughtException(thread, ex);
 			} catch (Exception e) {
 				// swallow all exceptions
-				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e); //$NON-NLS-1$
+				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e); 
 			}
 
 		}
@@ -1031,5 +1035,33 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
+	}
+
+	public void sendCrashLog() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"crash@osmand.net"}); 
+		File file = getAppPath(OsmandApplication.EXCEPTION_PATH);
+		intent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(this, file));
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		intent.setType("vnd.android.cursor.dir/email"); 
+		intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); 
+		StringBuilder text = new StringBuilder();
+		text.append("\nDevice : ").append(Build.DEVICE); 
+		text.append("\nBrand : ").append(Build.BRAND); 
+		text.append("\nModel : ").append(Build.MODEL); 
+		text.append("\nProduct : ").append(Build.PRODUCT); 
+		text.append("\nBuild : ").append(Build.DISPLAY); 
+		text.append("\nVersion : ").append(Build.VERSION.RELEASE); 
+		text.append("\nApp Version : ").append(Version.getAppName(this)); 
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			if (info != null) {
+				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);  
+			}
+		} catch (PackageManager.NameNotFoundException e) {
+			PlatformUtil.getLog(ErrorBottomSheetDialog.class).error("", e);
+		}
+		intent.putExtra(Intent.EXTRA_TEXT, text.toString());
+		startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
 	}
 }
