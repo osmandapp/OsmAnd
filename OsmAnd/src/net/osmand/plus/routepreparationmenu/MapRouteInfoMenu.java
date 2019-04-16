@@ -2029,17 +2029,4 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		showMenu = true;
 		showMenuState = menuState;
 	}
-
-	public enum PermanentAppModeOptions {
-
-		CAR(MuteSoundRoutingParameter.KEY, AvoidRoadsRoutingParameter.KEY),
-		BICYCLE(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
-		PEDESTRIAN(MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES);
-
-		List<String> routingParameters;
-
-		PermanentAppModeOptions(String... routingParameters) {
-			this.routingParameters = Arrays.asList(routingParameters);
-		}
-	}
 }
