@@ -2993,4 +2993,5 @@ représentant la zone : %1$s x %2$s</string>
 \n • Affichage de l’azimut lors de la mesure de distance.
 \n
 \n</string>
+    <string name="send_log">Envoyer le journal</string>
 </resources>
