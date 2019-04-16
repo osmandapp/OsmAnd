@@ -2,31 +2,21 @@ package net.osmand.plus.profiles;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import net.osmand.plus.routing.RoutingHelper;
 
-public class RoutingProfile implements Parcelable {
+public class RoutingProfile extends BaseProfile {
 
-	private String name;
-	private String origin;
-	private int iconRes;
+	private BaseProfile parent;
 	private boolean isSelected;
 
-	public RoutingProfile(String name, String origin, int iconRes, boolean isSelected) {
-		this.name = name;
-		this.origin = origin;
-		this.iconRes = iconRes;
+	public RoutingProfile(String name, BaseProfile parent, int iconRes, boolean isSelected) {
+		super(name, iconRes);
+		this.parent = parent;
 		this.isSelected = isSelected;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getOrigin() {
-		return origin;
-	}
-
-	public int getIconRes() {
-		return iconRes;
+	public BaseProfile getParent() {
+		return parent;
 	}
 
 	public boolean isSelected() {
@@ -38,9 +28,8 @@ public class RoutingProfile implements Parcelable {
 	}
 
 	protected RoutingProfile(Parcel in) {
-		name = in.readString();
-		origin = in.readString();
-		iconRes = in.readInt();
+		super(in);
+		parent = in.readParcelable(BaseProfile.class.getClassLoader());
 		isSelected = in.readByte() != 0;
 	}
 
@@ -63,9 +52,8 @@ public class RoutingProfile implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(name);
-		dest.writeString(origin);
-		dest.writeInt(iconRes);
+		super.writeToParcel(dest, flags);
+		dest.writeParcelable(parent, flags);
 		dest.writeByte((byte) (isSelected ? 1 : 0));
 	}
 }

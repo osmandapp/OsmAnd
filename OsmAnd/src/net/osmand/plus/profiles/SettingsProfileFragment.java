@@ -76,12 +76,15 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		View view = inflater.inflate(R.layout.profiles_list_fragment, container, false);
 		recyclerView = view.findViewById(R.id.profiles_list);
 		addProfileBtn = view.findViewById(R.id.add_profile_btn);
+
 		addProfileBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//todo add new profile;
+
+
 			}
 		});
+
 		listener = new ProfileListener() {
 			@Override
 			public void changeProfileStatus(ApplicationMode item, boolean isSelected) {
@@ -117,6 +120,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), listener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
+
+
 
 
 		return view;

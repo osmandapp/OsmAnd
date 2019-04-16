@@ -111,7 +111,7 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 
 		navTypeDialogListener = new NavTypeDialogListener() {
 			@Override
-			public void selectedNavType(int pos) {
+			public void onSelectedType(int pos) {
 				selectedRoutingProfile = routingProfiles.get(pos);
 				navTypeEt.setText(selectedRoutingProfile.getName());
 			}
