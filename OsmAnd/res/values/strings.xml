@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="send_log">Send log</string>
     <string name="routing_attr_avoid_tram_name">Avoid trams</string>
     <string name="routing_attr_avoid_tram_description">Avoid trams</string>
     <string name="routing_attr_avoid_bus_name">Avoid buses</string>
