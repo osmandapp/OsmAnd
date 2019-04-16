@@ -3031,4 +3031,5 @@ Repræsenterer område: %1$s x %2$s</string>
 \n • Rettet mørkt tema i Retningsmenuen og Rutedetaljer
 \n
 \n • Vis azimut i mål afstand</string>
+    <string name="send_log">Send log</string>
 </resources>
