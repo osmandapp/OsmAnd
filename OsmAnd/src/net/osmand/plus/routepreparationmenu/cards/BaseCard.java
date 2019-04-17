@@ -6,6 +6,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -44,6 +45,11 @@ public abstract class BaseCard {
 	}
 
 	public abstract int getCardLayoutId();
+
+	@Nullable
+	public View getView() {
+		return view;
+	}
 
 	public int getViewHeight() {
 		return view != null ? view.getHeight() : 0;
