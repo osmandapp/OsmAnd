@@ -51,7 +51,6 @@ public class PerformLiveUpdateAsyncTask
 		final OsmandApplication myApplication = getMyApplication();
 		OsmandSettings.CommonPreference<Long> lastCheckPreference =
 				LiveUpdatesHelper.preferenceLastCheck(localIndexFileName, myApplication.getSettings());
-		LOG.debug(String.format("Last update check for %1s -> %2$d, current check time: %3$d", localIndexFileName, lastCheckPreference.get(), System.currentTimeMillis()));
 		lastCheckPreference.set(System.currentTimeMillis());
 	}
 
@@ -92,7 +91,6 @@ public class PerformLiveUpdateAsyncTask
 							iu.timestamp, iu.sizeText, iu.contentSize,
 							iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
 					itemsToDownload.add(indexItem);
-					LOG.debug(String.format("Filename %1$s -> server timestamp: %2$s, content size: %3$s", iu.fileName, iu.timestamp, iu.contentSize));
 				}
 				DownloadIndexesThread downloadThread = application.getDownloadThread();
 				if (context instanceof DownloadIndexesThread.DownloadEvents) {
