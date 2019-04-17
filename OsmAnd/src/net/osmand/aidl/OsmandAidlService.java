@@ -78,6 +78,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static net.osmand.aidl.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
@@ -97,7 +98,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	private Handler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
-	private long aidlCallbackId = 0;
+	private final AtomicLong aidlCallbackId = new AtomicLong(0);
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -128,7 +129,6 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		super.onCreate();
 		OsmandAidlApi api = getApi("setting_listener");
 		if(api != null) {
-			LOG.debug("aidl api not null!");
 			api.aidlCallbackListener = this;
 		}
 	}
@@ -136,15 +136,27 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		mHandlerThread.quit();
+
 		callbacks.clear();
+		OsmandAidlApi api = getApi("clear_listener");
+		if(api != null) {
+			api.aidlCallbackListener = null;
+		}
+		mHandlerThread.quit();
 	}
 
+	private long getCallbackId() {
+		return aidlCallbackId.get();
+	}
+
+	private long getAndIncrementCallbackId() {
+		return aidlCallbackId.getAndIncrement();
+	}
 
 	@Override
-	public void addAidlCallback(IOsmAndAidlCallback callback, int key) {
-		aidlCallbackId++;
-		callbacks.put(aidlCallbackId, new AidlCallbackParams(callback, key));
+	public long addAidlCallback(IOsmAndAidlCallback callback, int key) {
+		callbacks.put(getAndIncrementCallbackId(), new AidlCallbackParams(callback, key));
+		return getCallbackId();
 	}
 
 	@Override
@@ -748,9 +760,9 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) {
 			try {
 				if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
-					addAidlCallback(callback, KEY_ON_UPDATE);
-					startRemoteUpdates(updateTimeMS, aidlCallbackId, callback);
-					return aidlCallbackId;
+					long id = addAidlCallback(callback, KEY_ON_UPDATE);
+					startRemoteUpdates(updateTimeMS, id, callback);
+					return getCallbackId();
 				} else {
 					return MIN_UPDATE_TIME_MS_ERROR;
 				}
@@ -1034,9 +1046,9 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {
-						addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
-						api.registerForNavigationUpdates(aidlCallbackId);
-						return aidlCallbackId;
+						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
+						api.registerForNavigationUpdates(id);
+						return id;
 					}
 				} else {
 					return -1;
