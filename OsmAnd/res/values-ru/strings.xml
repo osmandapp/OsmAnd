@@ -3015,4 +3015,5 @@
 \n• Отображение азимута в инструменте \"Измерить расстояние\"
 \n
 \n</string>
+    <string name="send_log">Отправить log</string>
 </resources>
