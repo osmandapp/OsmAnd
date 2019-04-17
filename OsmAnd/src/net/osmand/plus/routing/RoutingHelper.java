@@ -29,6 +29,7 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
@@ -38,8 +39,8 @@ public class RoutingHelper {
 
 	private static final float POSITION_TOLERANCE = 60;
 
-	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
-	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
+	private List<WeakReference<IRouteInformationListener>> listeners = new CopyOnWriteArrayList<>();
+	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new CopyOnWriteArrayList<>();
 	private OsmandApplication app;
 	private TransportRoutingHelper transportRoutingHelper;
 
@@ -266,7 +267,20 @@ public class RoutingHelper {
 	}
 
 	public void addDataUpdateListener(IRoutingDataUpdateListener listener) {
-		updateListeners.add(new WeakReference<IRoutingDataUpdateListener>(listener));
+		updateListeners.add(new WeakReference<>(listener));
+	}
+
+	public boolean removeDataUpdateListener(IRoutingDataUpdateListener listener) {
+		Iterator<WeakReference<IRoutingDataUpdateListener>> it = updateListeners.iterator();
+		while(it.hasNext()) {
+			WeakReference<IRoutingDataUpdateListener> wrl = it.next();
+			IRoutingDataUpdateListener l = wrl.get();
+			if(listener == l) {
+				it.remove();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean removeListener(IRouteInformationListener lt){
@@ -274,7 +288,7 @@ public class RoutingHelper {
 		while(it.hasNext()) {
 			WeakReference<IRouteInformationListener> ref = it.next();
 			IRouteInformationListener l = ref.get();
-			if(l == null || lt == l) {
+			if(l == lt) {
 				it.remove();
 				return true;
 			}
@@ -508,7 +522,9 @@ public class RoutingHelper {
 				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
 				if (!updateListeners.isEmpty()) {
 					for (WeakReference<IRoutingDataUpdateListener> ref : updateListeners) {
-						ref.get().onRoutingDataUpdate();
+						if (ref.get() != null) {
+							ref.get().onRoutingDataUpdate();
+						}
 					}
 				}
 

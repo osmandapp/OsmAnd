@@ -127,6 +127,9 @@ import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 public class OsmandAidlApi {
+
+	AidlCallbackListener aidlCallbackListener = null;
+
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
 	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
@@ -1925,10 +1928,12 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
 
-	public void registerForNavigationUpdates() {
+	private Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
+
+	void registerForNavigationUpdates(long id) {
 		final ADirectionInfo directionInfo = new ADirectionInfo(-1, -1, false);
 		final NextDirectionInfo baseNdi = new NextDirectionInfo();
-		app.getRoutingHelper().addDataUpdateListener(new IRoutingDataUpdateListener(){
+		IRoutingDataUpdateListener listener = new IRoutingDataUpdateListener() {
 			@Override
 			public void onRoutingDataUpdate() {
 				RoutingHelper rh = app.getRoutingHelper();
@@ -1942,18 +1947,28 @@ public class OsmandAidlApi {
 						directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
 					}
 				}
-				for (Entry<Long, OsmandAidlService.AidlCallbackParams> cb : OsmandAidlService.getAidlCallbacks().entrySet()) {
-					if ((cb.getValue().getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
-						try {
-							cb.getValue().getCallback().updateNavigationInfo(directionInfo);
-						} catch (Exception e) {
-							LOG.debug(e.getMessage(), e);
+				if (aidlCallbackListener != null) {
+					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
+						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
+							try {
+								cb.getCallback().updateNavigationInfo(directionInfo);
+							} catch (Exception e) {
+								LOG.debug(e.getMessage(), e);
+							}
 						}
 					}
 				}
 			}
-		});
+		};
+		navUpdateCallbacks.put(id, listener);
+		app.getRoutingHelper().addDataUpdateListener(listener);
 	}
+
+	public void unregisterFromUpdates(long id) {
+		app.getRoutingHelper().removeDataUpdateListener(navUpdateCallbacks.get(id));
+		navUpdateCallbacks.remove(id);
+	}
+
 
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
 		final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
@@ -2013,6 +2028,7 @@ public class OsmandAidlApi {
 	}
 
 	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
+
 
 	private class FileCopyInfo {
 		long startTime;
