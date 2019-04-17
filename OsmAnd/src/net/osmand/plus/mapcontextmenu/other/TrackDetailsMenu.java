@@ -363,7 +363,7 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	private void refreshChart(LineChart chart, boolean forceFit) {
+	public void refreshChart(LineChart chart, boolean forceFit) {
 		MapActivity mapActivity = getMapActivity();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity == null || gpxItem == null) {
@@ -724,7 +724,7 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public class TrackChartPoints {
+	public static class TrackChartPoints {
 		private List<WptPt> xAxisPoints;
 		private LatLon highlightedPoint;
 		private int segmentColor;
