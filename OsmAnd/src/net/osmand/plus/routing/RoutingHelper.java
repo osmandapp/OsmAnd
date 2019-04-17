@@ -26,6 +26,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +40,8 @@ public class RoutingHelper {
 
 	private static final float POSITION_TOLERANCE = 60;
 
-	private List<WeakReference<IRouteInformationListener>> listeners = new CopyOnWriteArrayList<>();
-	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new CopyOnWriteArrayList<>();
+	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
+	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
 	private OsmandApplication app;
 	private TransportRoutingHelper transportRoutingHelper;
 
@@ -267,28 +268,25 @@ public class RoutingHelper {
 	}
 
 	public void addDataUpdateListener(IRoutingDataUpdateListener listener) {
-		updateListeners.add(new WeakReference<>(listener));
-	}
-
-	public boolean removeDataUpdateListener(IRoutingDataUpdateListener listener) {
-		Iterator<WeakReference<IRoutingDataUpdateListener>> it = updateListeners.iterator();
-		while(it.hasNext()) {
-			WeakReference<IRoutingDataUpdateListener> wrl = it.next();
-			IRoutingDataUpdateListener l = wrl.get();
-			if(listener == l) {
-				it.remove();
-				return true;
+		List<WeakReference<IRoutingDataUpdateListener>> copy = new ArrayList<>(updateListeners);
+		List<WeakReference<IRoutingDataUpdateListener>> tmp = new ArrayList<>();
+		for (WeakReference<IRoutingDataUpdateListener> ref : copy) {
+			IRoutingDataUpdateListener l = ref.get();
+			if (l != null) {
+				tmp.add(ref);
 			}
 		}
-		return false;
+		tmp.add(new WeakReference<>(listener));
+		updateListeners = tmp;
 	}
+
 
 	public boolean removeListener(IRouteInformationListener lt){
 		Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
 		while(it.hasNext()) {
 			WeakReference<IRouteInformationListener> ref = it.next();
 			IRouteInformationListener l = ref.get();
-			if(l == lt) {
+			if(l == null || lt == l) {
 				it.remove();
 				return true;
 			}
@@ -521,7 +519,8 @@ public class RoutingHelper {
 				currentRoute = newCurrentRoute + 1;
 				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
 				if (!updateListeners.isEmpty()) {
-					for (WeakReference<IRoutingDataUpdateListener> ref : updateListeners) {
+					final ArrayList<WeakReference<IRoutingDataUpdateListener>> tmp = new ArrayList<>(updateListeners);
+					for (WeakReference<IRoutingDataUpdateListener> ref : tmp) {
 						if (ref.get() != null) {
 							ref.get().onRoutingDataUpdate();
 						}
