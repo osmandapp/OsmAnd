@@ -748,7 +748,6 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) {
 			try {
 				if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
-					aidlCallbackId++;
 					addAidlCallback(callback, KEY_ON_UPDATE);
 					startRemoteUpdates(updateTimeMS, aidlCallbackId, callback);
 					return aidlCallbackId;
