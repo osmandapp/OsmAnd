@@ -3019,4 +3019,5 @@
     <string name="run_full_osmand_msg">Ви використовуєте {0} мапу, надану OsmAnd. Хочете запустити повну версію OsmAnd\?</string>
     <string name="routing_attr_avoid_sett_name">Уникати мостові та бруківку</string>
     <string name="routing_attr_avoid_sett_description">Уникати мостові та бруківку</string>
+    <string name="send_log">Надіслати журнал</string>
 </resources>
