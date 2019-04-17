@@ -57,8 +57,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
 
-	private TrackChartPoints trackChartPoints;
-
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		settings = map.getMyApplication().getSettings();
@@ -224,7 +222,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
-		this.trackChartPoints = trackChartPoints;
 		routeLayer.setTrackChartPoints(trackChartPoints);
 	}
 
