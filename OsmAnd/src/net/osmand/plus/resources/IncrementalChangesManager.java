@@ -1,5 +1,7 @@
 package net.osmand.plus.resources;
 
+import android.view.LayoutInflater;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -7,6 +9,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -24,7 +27,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class IncrementalChangesManager {
-
+	private static final Log LOG = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private static final String URL = "https://osmand.net/check_live";
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private ResourceManager resourceManager;
@@ -291,13 +294,14 @@ public class IncrementalChangesManager {
 
 		@Override
 		public String toString() {
-			return "Update " + fileName + " " + sizeText + " MB " + date;
+			return "Update " + fileName + " " + sizeText + " MB " + date + ", timestamp: " + timestamp;
 		}
 	}
 	
 	private List<IncrementalUpdate> getIncrementalUpdates(String file, long timestamp) throws IOException,
 			XmlPullParserException {
 		String url = URL + "?aosmc=true&timestamp=" + timestamp + "&file=" + URLEncoder.encode(file);
+		LOG.debug(String.format("getIncrementalUpdates(): URL => %s", url)); //todo delete
 		HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 		conn.setUseCaches(false);
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
@@ -313,10 +317,12 @@ public class IncrementalChangesManager {
 					dt.sizeText = parser.getAttributeValue("", "size");
 					dt.timestamp = Long.parseLong(parser.getAttributeValue("", "timestamp"));
 					dt.fileName = parser.getAttributeValue("", "name");
+					LOG.debug(String.format("getIncrementalUpdates(): update => %s",  dt.toString())); //todo delete
 					lst.add(dt);
 				}
 			}
 		}
+		LOG.debug(String.format("getIncrementalUpdates(): list size => %s", lst.size())); //todo delete
 		return lst;
 	}
 	
