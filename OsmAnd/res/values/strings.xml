@@ -11,8 +11,7 @@
 	Thx - Hardy
 
 -->
-
-    -->
+    <string name="send_log">Send log</string>
     <string name="osmand_default_routing">OsmAnd routing</string>
     <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
     <string name="application_profiles">Application profiles</string>

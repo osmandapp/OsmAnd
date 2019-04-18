@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
@@ -31,6 +32,7 @@ import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -208,6 +210,26 @@ public class ContextMenuAdapter {
 						}
 					}
 				});
+				File logFile = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+				View sendLogButtonDiv = convertView.findViewById(R.id.sendLogButtonDiv);
+				TextView sendLogButton = (TextView) convertView.findViewById(R.id.sendLogButton);
+				if (logFile.exists()) {
+					Drawable sendLogIcon =
+							app.getUIUtilities().getThemedIcon(R.drawable.ic_crashlog);
+					sendLogButton.setCompoundDrawablesWithIntrinsicBounds(null, sendLogIcon, null, null);
+					sendLogButton.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 8f));
+					sendLogButton.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							app.sendCrashLog();
+						}
+					});
+					sendLogButtonDiv.setVisibility(View.VISIBLE);
+					sendLogButton.setVisibility(View.VISIBLE);
+				} else {
+					sendLogButtonDiv.setVisibility(View.GONE);
+					sendLogButton.setVisibility(View.GONE);
+				}
 				return convertView;
 			}
 

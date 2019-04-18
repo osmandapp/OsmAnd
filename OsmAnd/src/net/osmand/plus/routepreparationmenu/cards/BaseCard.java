@@ -6,6 +6,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public abstract class BaseCard {
 	protected boolean nightMode;
 
 	private CardListener listener;
+	private CardChartListener chartListener;
 
 	public interface CardListener {
 		void onCardLayoutNeeded(@NonNull BaseCard card);
@@ -43,6 +45,11 @@ public abstract class BaseCard {
 	}
 
 	public abstract int getCardLayoutId();
+
+	@Nullable
+	public View getView() {
+		return view;
+	}
 
 	public int getViewHeight() {
 		return view != null ? view.getHeight() : 0;
@@ -64,6 +71,14 @@ public abstract class BaseCard {
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;
+	}
+
+	public CardChartListener getChartListener() {
+		return chartListener;
+	}
+
+	public void setChartListener(CardChartListener chartListener) {
+		this.chartListener = chartListener;
 	}
 
 	public void setLayoutNeeded() {

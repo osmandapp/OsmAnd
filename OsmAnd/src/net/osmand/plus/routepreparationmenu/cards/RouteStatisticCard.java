@@ -12,15 +12,16 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -60,6 +61,16 @@ public class RouteStatisticCard extends BaseCard {
 		this.onTouchListener = onTouchListener;
 		this.onAnalyseClickListener = onAnalyseClickListener;
 		makeGpxDisplayItem();
+	}
+
+	@Nullable
+	public GPXFile getGpx() {
+		return gpx;
+	}
+
+	@Nullable
+	public GpxDisplayItem getGpxItem() {
+		return gpxItem;
 	}
 
 	@Override
@@ -218,6 +229,11 @@ public class RouteStatisticCard extends BaseCard {
 		}
 	}
 
+	@Nullable
+	public LineChart getChart() {
+		return (LineChart) view.findViewById(R.id.chart);
+	}
+
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		final LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
@@ -242,6 +258,24 @@ public class RouteStatisticCard extends BaseCard {
 			LineData data = new LineData(dataSets);
 			mChart.setData(data);
 
+			mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+				@Override
+				public void onValueSelected(Entry e, Highlight h) {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onValueSelected(RouteStatisticCard.this, e, h);
+					}
+				}
+
+				@Override
+				public void onNothingSelected() {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onNothingSelected(RouteStatisticCard.this);
+					}
+				}
+			});
+
 			mChart.setOnChartGestureListener(new OnChartGestureListener() {
 
 				float highlightDrawX = -1;
@@ -252,6 +286,10 @@ public class RouteStatisticCard extends BaseCard {
 						highlightDrawX = mChart.getHighlighted()[0].getDrawX();
 					} else {
 						highlightDrawX = -1;
+					}
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartGestureStart(RouteStatisticCard.this, me, lastPerformedGesture);
 					}
 				}
 
@@ -264,35 +302,64 @@ public class RouteStatisticCard extends BaseCard {
 					} else {
 						gpxItem.chartHighlightPos = -1;
 					}
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartGestureEnd(RouteStatisticCard.this, me, lastPerformedGesture);
+					}
 				}
 
 				@Override
 				public void onChartLongPressed(MotionEvent me) {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartLongPressed(RouteStatisticCard.this, me);
+					}
 				}
 
 				@Override
 				public void onChartDoubleTapped(MotionEvent me) {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartDoubleTapped(RouteStatisticCard.this, me);
+					}
 				}
 
 				@Override
 				public void onChartSingleTapped(MotionEvent me) {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartSingleTapped(RouteStatisticCard.this, me);
+					}
 				}
 
 				@Override
 				public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartFling(RouteStatisticCard.this, me1, me2, velocityX, velocityY);
+					}
 				}
 
 				@Override
 				public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartScale(RouteStatisticCard.this, me, scaleX, scaleY);
+					}
 				}
 
 				@Override
 				public void onChartTranslate(MotionEvent me, float dX, float dY) {
+					Highlight h = null;
 					if (highlightDrawX != -1) {
-						Highlight h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
+						h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
 						if (h != null) {
 							mChart.highlightValue(h);
 						}
+					}
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartTranslate(RouteStatisticCard.this, h, me, dX, dY);
 					}
 				}
 			});

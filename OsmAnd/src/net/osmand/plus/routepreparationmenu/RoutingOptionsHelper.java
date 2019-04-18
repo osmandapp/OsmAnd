@@ -44,6 +44,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -66,9 +67,20 @@ public class RoutingOptionsHelper {
 		app = application;
 		settings = app.getSettings();
 
-		modes.put(ApplicationMode.CAR, new RouteMenuAppModes(ApplicationMode.CAR, getRoutingParameters(ApplicationMode.CAR, MapRouteInfoMenu.PermanentAppModeOptions.CAR.routingParameters)));
-		modes.put(ApplicationMode.BICYCLE, new RouteMenuAppModes(ApplicationMode.BICYCLE, getRoutingParameters(ApplicationMode.BICYCLE, MapRouteInfoMenu.PermanentAppModeOptions.BICYCLE.routingParameters)));
-		modes.put(ApplicationMode.PEDESTRIAN, new RouteMenuAppModes(ApplicationMode.PEDESTRIAN, getRoutingParameters(ApplicationMode.PEDESTRIAN, MapRouteInfoMenu.PermanentAppModeOptions.PEDESTRIAN.routingParameters)));
+		addRouteMenuAppModes(ApplicationMode.CAR, PermanentAppModeOptions.CAR.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.BICYCLE, PermanentAppModeOptions.BICYCLE.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.PEDESTRIAN, PermanentAppModeOptions.PEDESTRIAN.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.PUBLIC_TRANSPORT, PermanentAppModeOptions.PUBLIC_TRANSPORT.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.BOAT, PermanentAppModeOptions.BOAT.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCAFT.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.HIKING, PermanentAppModeOptions.HIKING.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.MOTORCYCLE, PermanentAppModeOptions.MOTORCYCLE.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.TRUCK, PermanentAppModeOptions.TRUCK.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.TRAIN, PermanentAppModeOptions.TRAIN.routingParameters);
+	}
+
+	private void addRouteMenuAppModes(ApplicationMode am, List<String> routingParameters) {
+		modes.put(am, new RouteMenuAppModes(am, getRoutingParameters(am, routingParameters)));
 	}
 
 	public void addNewRouteMenuParameter(ApplicationMode applicationMode, LocalRoutingParameter parameter) {
@@ -949,6 +961,26 @@ public class RoutingOptionsHelper {
 				}
 			}
 			return false;
+		}
+	}
+
+	public enum PermanentAppModeOptions {
+
+		CAR(MuteSoundRoutingParameter.KEY, AvoidRoadsRoutingParameter.KEY),
+		BICYCLE(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		PEDESTRIAN(MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY),
+		BOAT(MuteSoundRoutingParameter.KEY),
+		AIRCAFT(MuteSoundRoutingParameter.KEY),
+		HIKING(MuteSoundRoutingParameter.KEY),
+		MOTORCYCLE(MuteSoundRoutingParameter.KEY),
+		TRUCK(MuteSoundRoutingParameter.KEY),
+		TRAIN(MuteSoundRoutingParameter.KEY);
+
+		List<String> routingParameters;
+
+		PermanentAppModeOptions(String... routingParameters) {
+			this.routingParameters = Arrays.asList(routingParameters);
 		}
 	}
 }

@@ -3031,4 +3031,21 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_surface_compacted_name">砂利や土などの圧縮舗装</string>
     <string name="routing_attr_avoid_sett_name">石畳や敷石の道を避ける</string>
     <string name="routing_attr_avoid_sett_description">移動時に石畳や敷石の道を通らないようにします</string>
+    <string name="rendering_attr_smoothness_excellent_name">ローラーブレードやスケボーができる滑らかさ</string>
+    <string name="rendering_attr_smoothness_good_name">ロードバイクを含め車両全般が走行可能</string>
+    <string name="rendering_attr_smoothness_intermediate_name">シティバイク、スポーツカー、車椅子、スクーター及びオフロードバイクや車も走行可能</string>
+    <string name="rendering_attr_smoothness_bad_name">クロスバイク、普通車、人力車などなら走行可能</string>
+    <string name="rendering_attr_smoothness_very_bad_name">車高の高い車、軽装オフロード車なら走行可能</string>
+    <string name="rendering_attr_smoothness_horrible_name">重装備のオフロード車なら走行可能</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">トラクター、ATV、戦車、MTBなど荒れた道でも問題無いもののみ走行可能</string>
+    <string name="rendering_attr_smoothness_impassable_name">2輪4輪問わず車両は走行不可能</string>
+    <string name="rendering_attr_highway_class_motorway_name">高速道路、自動車専用道路</string>
+    <string name="rendering_attr_highway_class_street_name">街路</string>
+    <string name="rendering_attr_highway_class_footway_name">歩道</string>
+    <string name="rendering_attr_highway_class_track_name">農業用道路、林道</string>
+    <string name="rendering_attr_highway_class_bridleway_name">馬道</string>
+    <string name="rendering_attr_highway_class_steps_name">階段、エスカレーター</string>
+    <string name="rendering_attr_highway_class_path_name">道(自動車以外のもの向け)</string>
+    <string name="rendering_attr_highway_class_cycleway_name">自転車道</string>
+    <string name="add_home">自宅の追加</string>
 </resources>

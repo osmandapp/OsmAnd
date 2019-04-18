@@ -534,7 +534,7 @@
     <string name="speak_speed_limit">Fartsgrense</string>
     <string name="speak_cameras">Fotobokser</string>
     <string name="speak_traffic_warnings">Trafikkvarsler</string>
-    <string name="osb_author_or_password_not_specified">Oppgi OSM brukernavn og passord i \'Innstillinger\'</string>
+    <string name="osb_author_or_password_not_specified">Oppgi OSM-brukernavn og passord i \"Innstillinger\"</string>
     <string name="clear_intermediate_points">Slett mellomliggende reisemål</string>
     <string name="keep_intermediate_points">Behold mellomliggende reisemål</string>
     <string name="new_directions_point_dialog">Mellomliggende reisemål er allerede angitt.</string>
@@ -1486,7 +1486,7 @@
     <string name="use_osm_live_routing">OsmAnd Live-navigering</string>
     <string name="access_no_destination">Reisemål er ikke angitt</string>
     <string name="access_shared_string_navigate_up">Naviger opp</string>
-    <string name="open_street_map_login_and_pass">OpenStreetMap brukernavn og passord</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap-brukernavn og passord</string>
     <string name="osm_live_subscription">OsmAnd Live-abonnement</string>
     <string name="osm_live_hide_user_name">Ikke vis mitt navn i rapporter</string>
     <string name="osm_live_ask_for_purchase">Kjøp først et OsmAnd Live-abonnement</string>

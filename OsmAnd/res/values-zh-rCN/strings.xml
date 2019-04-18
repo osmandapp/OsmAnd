@@ -1160,7 +1160,7 @@
     <string name="settings_privacy">隐私</string>
     <string name="proxy_pref_title">代理</string>
     <string name="voice_pref_title">语音</string>
-    <string name="quick_action_navigation_voice_on">语音已开启</string>
+    <string name="quick_action_navigation_voice_on">语音静音</string>
     <string name="interrupt_music">暂停音乐</string>
     <string name="interrupt_music_descr">在语音提示时完全暂停音乐播放（不仅仅是降低其音量）</string>
     <string name="select_voice_provider_descr">为您的语言选择或下载语音指引</string>
@@ -2242,7 +2242,7 @@
     <string name="quick_action_take_photo_note">设置图片注释</string>
     <string name="quick_action_add_osm_bug">添加 OSM 注解</string>
     <string name="quick_action_navigation_voice">打开关闭声音</string>
-    <string name="quick_action_navigation_voice_off">语音已关闭</string>
+    <string name="quick_action_navigation_voice_off">语音开启</string>
     <string name="quick_action_add_gpx">添加 GPX 地标</string>
     <string name="quick_action_add_parking">添加停车场</string>
     <string name="quick_action_new_action">添加动作</string>
@@ -2263,7 +2263,7 @@
     <string name="quick_action_add_parking_descr">轻触动作按钮将会在屏幕中心的位置增加一个停车场。</string>
     <string name="quick_action_interim_dialog">显示一个临时的对话框</string>
     <string name="favorite_autofill_toast_text">" 保存到 "</string>
-    <string name="favorite_empty_place_name">地點</string>
+    <string name="favorite_empty_place_name">地点</string>
     <string name="quick_action_duplicates">指定的快速动作已经在使用中，已更名为 %1$s，以避免重复。</string>
     <string name="quick_action_duplicate">快速动作名称重复</string>
     <string name="quick_action_showhide_favorites_descr">轻触动作按钮将会在地图上显示或隐收藏夹标点。</string>
@@ -2282,7 +2282,7 @@
     <string name="quick_action_bug_descr">此消息将会自动填写注释字段。</string>
     <string name="quick_action_bug_message">消息</string>
     <string name="quick_action_category_descr">选择要保存收藏夹中的类别</string>
-    <string name="quick_action_gpx_category_descr">选择可选的类别</string>
+    <string name="quick_action_gpx_category_descr">选择一个可选类别。</string>
     <string name="quick_action_poi_list">POI 列表</string>
     <string name="quick_action_sh_poi_descr">您可以添加一个或多个要显示在地图上的 POI 类别。</string>
     <string name="quick_action_page_list_descr">轻触动作按钮会直达下面的清单。</string>
@@ -2567,4 +2567,8 @@
     <string name="add_intermediate">添加中继点</string>
     <string name="route_add_start_point">添加起始点</string>
     <string name="route_descr_select_start_point">选择起始点</string>
+    <string name="quick_action_switch_day_mode">日间模式</string>
+    <string name="quick_action_switch_night_mode">夜间模式</string>
+    <string name="quick_action_day_night_switch_mode">切换日间/夜间模式</string>
+    <string name="download_wiki_region_placeholder">此地区</string>
 </resources>

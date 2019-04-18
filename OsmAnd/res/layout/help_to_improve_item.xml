@@ -32,4 +32,20 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         tools:drawableTop="@drawable/ic_action_message"/>
 
+    <View
+        android:id="@+id/sendLogButtonDiv"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="?attr/divider_color"/>
+
+    <Button
+        android:id="@+id/sendLogButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/send_log"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        tools:drawableTop="@drawable/ic_crashlog"/>
+
 </LinearLayout>

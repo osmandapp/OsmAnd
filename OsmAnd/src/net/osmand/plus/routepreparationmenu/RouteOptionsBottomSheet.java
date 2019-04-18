@@ -31,8 +31,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.GpxLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -46,7 +46,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.GeneralRouter;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -354,7 +353,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
-		List<String> routingParameters = new ArrayList<>();
+		List<String> routingParameters;
 		if (applicationMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			routingParameters = AppModeOptions.CAR.routingParameters;
 		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -483,8 +482,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				OtherSettingsRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
-		PUBLIC_TRANSPORT(// MuteSoundRoutingParameter.KEY,
-				// DividerItem.KEY,
+		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY,
+				DividerItem.KEY,
 				AvoidPTTypesRoutingParameter.KEY,
 				// ShowAlongTheRouteItem.KEY,
 				// DividerItem.KEY,

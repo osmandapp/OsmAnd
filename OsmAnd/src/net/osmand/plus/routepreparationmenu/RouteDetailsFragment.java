@@ -1,5 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -20,13 +21,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.ChartTouchListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -57,9 +63,11 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.CardChartListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard.PublicTransportCardListener;
 import net.osmand.plus.routepreparationmenu.cards.RouteDirectionsCard;
@@ -86,7 +94,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteDetailsFragment extends ContextMenuFragment implements PublicTransportCardListener,
-		CardListener {
+		CardListener, CardChartListener {
 
 	public static final String ROUTE_ID_KEY = "route_id_key";
 	private static final float PAGE_MARGIN = 5f;
@@ -106,6 +114,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	@Nullable
 	private PublicTransportCard transportCard;
 	private RouteDetailsFragmentListener routeDetailsListener;
+	private RouteStatisticCard statisticCard;
+	private List<RouteInfoCard> routeInfoCards = new ArrayList<>();
+	private TrackDetailsMenu trackDetailsMenu;
 
 	public interface RouteDetailsFragmentListener {
 		void onNavigationRequested();
@@ -142,7 +153,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
 			routeId = args.getInt(ROUTE_ID_KEY);
@@ -171,6 +182,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && isPortrait()) {
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.GONE);
+			if (trackDetailsMenu != null) {
+				trackDetailsMenu.setMapActivity(mapActivity);
+			}
 		}
 	}
 
@@ -179,6 +193,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && isPortrait()) {
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.VISIBLE);
+			if (trackDetailsMenu != null) {
+				trackDetailsMenu.setMapActivity(null);
+			}
 		}
 		super.onPause();
 	}
@@ -295,7 +312,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			return;
 		}
 		OsmandApplication app = mapActivity.getMyApplication();
-		RouteStatisticCard statisticCard = new RouteStatisticCard(mapActivity, gpx, new View.OnTouchListener() {
+		statisticCard = new RouteStatisticCard(mapActivity, gpx, new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				InterceptorLinearLayout mainView = getMainView();
@@ -312,6 +329,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		});
 		statisticCard.setTransparentBackground(true);
 		statisticCard.setListener(this);
+		statisticCard.setChartListener(this);
 		menuCards.add(statisticCard);
 		cardsContainer.addView(statisticCard.build(mapActivity));
 		buildRowDivider(cardsContainer, false);
@@ -346,6 +364,16 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				addRouteCard(cardsContainer, routeSmoothnessCard);
 			}
 		}
+		trackDetailsMenu = new TrackDetailsMenu();
+		GpxDisplayItem gpxItem = statisticCard.getGpxItem();
+		if (gpxItem != null) {
+			trackDetailsMenu.setGpxItem(gpxItem);
+		}
+		trackDetailsMenu.setMapActivity(mapActivity);
+		LineChart chart = statisticCard.getChart();
+		if (chart != null) {
+			trackDetailsMenu.refreshChart(chart, true);
+		}
 	}
 
 	private void createRouteDirectionsCard(LinearLayout cardsContainer) {
@@ -361,12 +389,39 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		buildRowDivider(cardsContainer, false);
 	}
 
-	private void addRouteCard(LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
+	private OnTouchListener getChartTouchListener() {
+		return new OnTouchListener() {
+			@SuppressLint("ClickableViewAccessibility")
+			@Override
+			public boolean onTouch(View v, MotionEvent ev) {
+				if (ev.getSource() != 0) {
+					for (RouteInfoCard card : routeInfoCards) {
+						final HorizontalBarChart ch = card.getChart();
+						if (ch != null && v instanceof HorizontalBarChart && ch != v) {
+							final MotionEvent event = MotionEvent.obtainNoHistory(ev);
+							event.setSource(0);
+							ch.dispatchTouchEvent(event);
+						}
+					}
+				}
+				return false;
+			}
+		};
+	}
+
+	@SuppressLint("ClickableViewAccessibility")
+	private void addRouteCard(final LinearLayout cardsContainer, RouteInfoCard routeInfoCard) {
 		OsmandApplication app = requireMyApplication();
 		menuCards.add(routeInfoCard);
 		routeInfoCard.setListener(this);
 		cardsContainer.addView(routeInfoCard.build(app));
 		buildRowDivider(cardsContainer, false);
+
+		routeInfoCards.add(routeInfoCard);
+		HorizontalBarChart chart = routeInfoCard.getChart();
+		if (chart != null) {
+			chart.setOnTouchListener(getChartTouchListener());
+		}
 	}
 
 	public Drawable getCollapseIcon(boolean collapsed) {
@@ -375,7 +430,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	private void buildSegmentItem(View view, final TransportRouteResultSegment segment,
-	                              final TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double boardingTime) {
+								  final TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double boardingTime) {
 		OsmandApplication app = requireMyApplication();
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
@@ -542,7 +597,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		TargetPoint startPoint = targetPointsHelper.getPointToStart();
 		TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
-		int[] startTime = { 0 };
+		int[] startTime = {0};
 		List<TransportRouteResultSegment> segments = routeResult.getSegments();
 		for (int i = 0; i < segments.size(); i++) {
 			boolean first = i == 0;
@@ -754,7 +809,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	public void buildCollapsableRow(@NonNull View view, final Spannable title, Spannable secondaryText, boolean collapsable,
-	                                final CollapsableView collapsableView, OnClickListener onClickListener) {
+									final CollapsableView collapsableView, OnClickListener onClickListener) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1153,7 +1208,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	}
 
 	public void buildDestinationRow(@NonNull View view, String timeText, final Spannable title, Spannable secondaryText,
-	                                LatLon location, LinearLayout imagesContainer, OnClickListener onClickListener) {
+									LatLon location, LinearLayout imagesContainer, OnClickListener onClickListener) {
 		OsmandApplication app = requireMyApplication();
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1543,7 +1598,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
-
 	}
 
 	@Override
@@ -1567,6 +1621,62 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
+	private void refreshChart() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && trackDetailsMenu != null && statisticCard != null) {
+			LineChart chart = statisticCard.getChart();
+			if (chart != null) {
+				trackDetailsMenu.refreshChart(chart, false);
+				mapActivity.refreshMap();
+			}
+		}
+	}
+
+	@Override
+	public void onValueSelected(BaseCard card, Entry e, Highlight h) {
+		refreshChart();
+	}
+
+	@Override
+	public void onNothingSelected(BaseCard card) {
+	}
+
+	@Override
+	public void onChartGestureStart(BaseCard card, MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+	}
+
+	@Override
+	public void onChartGestureEnd(BaseCard card, MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+	}
+
+	@Override
+	public void onChartLongPressed(BaseCard card, MotionEvent me) {
+	}
+
+	@Override
+	public void onChartDoubleTapped(BaseCard card, MotionEvent me) {
+	}
+
+	@Override
+	public void onChartSingleTapped(BaseCard card, MotionEvent me) {
+	}
+
+	@Override
+	public void onChartFling(BaseCard card, MotionEvent me1, MotionEvent me2, float velocityX,
+							 float velocityY) {
+	}
+
+	@Override
+	public void onChartScale(BaseCard card, MotionEvent me, float scaleX, float scaleY) {
+	}
+
+	@Override
+	public void onChartTranslate(BaseCard card, Highlight h, MotionEvent me, float dX, float dY) {
+		if (h != null) {
+			refreshChart();
+		}
+	}
+
 	public static class CumulativeInfo {
 		public int distance;
 		public int time;
@@ -1577,7 +1687,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
-	public static CumulativeInfo getRouteDirectionCumulativeInfo(int position, List<RouteDirectionInfo> routeDirections) {
+	public static CumulativeInfo getRouteDirectionCumulativeInfo(int position, List<
+			RouteDirectionInfo> routeDirections) {
 		CumulativeInfo cumulativeInfo = new CumulativeInfo();
 		if (position >= routeDirections.size()) {
 			return cumulativeInfo;
