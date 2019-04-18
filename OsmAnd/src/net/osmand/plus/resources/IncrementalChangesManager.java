@@ -15,6 +15,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -301,14 +302,17 @@ public class IncrementalChangesManager {
 	private List<IncrementalUpdate> getIncrementalUpdates(String file, long timestamp) throws IOException,
 			XmlPullParserException {
 		String url = URL + "?aosmc=true&timestamp=" + timestamp + "&file=" + URLEncoder.encode(file);
-		LOG.debug(String.format("getIncrementalUpdates(): URL => %s", url)); //todo delete
+
 		HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 		conn.setUseCaches(false);
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
-		parser.setInput(conn.getInputStream(), "UTF-8");
+		InputStream is = conn.getInputStream();
+		parser.setInput(is, "UTF-8");
 		List<IncrementalUpdate> lst = new ArrayList<IncrementalUpdate>();
+		int elements = 0;
 		while (parser.next() != XmlPullParser.END_DOCUMENT) {
 			if (parser.getEventType() == XmlPullParser.START_TAG) {
+				elements ++;
 				if (parser.getName().equals("update")) {
 					IncrementalUpdate dt = new IncrementalUpdate();
 					dt.date = parser.getAttributeValue("", "updateDate");
@@ -317,12 +321,13 @@ public class IncrementalChangesManager {
 					dt.sizeText = parser.getAttributeValue("", "size");
 					dt.timestamp = Long.parseLong(parser.getAttributeValue("", "timestamp"));
 					dt.fileName = parser.getAttributeValue("", "name");
-					LOG.debug(String.format("getIncrementalUpdates(): update => %s",  dt.toString())); //todo delete
 					lst.add(dt);
 				}
 			}
 		}
-		LOG.debug(String.format("getIncrementalUpdates(): list size => %s", lst.size())); //todo delete
+		LOG.debug(String.format("Incremental updates: %s, updates %d (total %d)", url, lst.size(), elements));
+		is.close();
+		conn.disconnect();
 		return lst;
 	}
 	
