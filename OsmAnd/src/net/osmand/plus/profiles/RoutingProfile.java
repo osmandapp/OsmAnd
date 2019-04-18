@@ -1,21 +1,19 @@
 package net.osmand.plus.profiles;
 
 import android.os.Parcel;
-import android.os.Parcelable;
-import net.osmand.plus.routing.RoutingHelper;
 
-public class RoutingProfile extends BaseProfile {
+public class RoutingProfile extends ProfileDataObject {
 
-	private BaseProfile parent;
+	private String parent;
 	private boolean isSelected;
 
-	public RoutingProfile(String name, BaseProfile parent, int iconRes, boolean isSelected) {
-		super(name, iconRes);
+	public RoutingProfile(String name, String parent, int iconRes, boolean isSelected) {
+		super(name, parent, iconRes);
 		this.parent = parent;
 		this.isSelected = isSelected;
 	}
 
-	public BaseProfile getParent() {
+	public String getParent() {
 		return parent;
 	}
 
@@ -29,7 +27,7 @@ public class RoutingProfile extends BaseProfile {
 
 	protected RoutingProfile(Parcel in) {
 		super(in);
-		parent = in.readParcelable(BaseProfile.class.getClassLoader());
+		parent = in.readString();
 		isSelected = in.readByte() != 0;
 	}
 
@@ -53,7 +51,7 @@ public class RoutingProfile extends BaseProfile {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
-		dest.writeParcelable(parent, flags);
+		dest.writeString(parent);
 		dest.writeByte((byte) (isSelected ? 1 : 0));
 	}
 }

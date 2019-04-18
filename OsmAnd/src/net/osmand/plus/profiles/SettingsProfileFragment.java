@@ -1,5 +1,7 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +22,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
 import org.apache.commons.logging.Log;
 
@@ -31,59 +35,27 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	private LinearLayout addProfileBtn;
 
 	ProfileListener listener = null;
+	ProfileTypeDialogListener typeListener = null;
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
+	private ArrayList<BaseProfile> baseProfiles;
 
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Context ctx = getMyApplication().getApplicationContext();
 		allAppModes = ApplicationMode.allPossibleValues();
 		allAppModes.remove(ApplicationMode.DEFAULT);
-		allAppModes.remove(ApplicationMode.AIRCRAFT);
-		allAppModes.remove(ApplicationMode.HIKING);
-		allAppModes.remove(ApplicationMode.TRAIN);
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		availableAppModes.remove(ApplicationMode.DEFAULT);
+		baseProfiles = getBaseProfiles();
 	}
-
-//	private String getNavType(ApplicationMode am, Context ctx) {
-//		if (am.getParent() != null) {
-//			return getNavType(am.getParent(), ctx);
-//		} else {
-//			switch(am.getStringKey()) {
-//				case "car":
-//					return ctx.getResources().getString(R.string.rendering_value_car_name);
-//				case "bicycle":
-//					return ctx.getResources().getString(R.string.rendering_value_bicycle_name);
-//				case "pedestrian":
-//					return ctx.getResources().getString(R.string.rendering_value_pedestrian_name);
-//				case "public_transport":
-//					return ctx.getResources().getString(R.string.app_mode_public_transport);
-//				case "boat":
-//					return ctx.getResources().getString(R.string.app_mode_boat);
-//			}
-//		}
-//		return "";
-//	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 		@Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.profiles_list_fragment, container, false);
-		recyclerView = view.findViewById(R.id.profiles_list);
-		addProfileBtn = view.findViewById(R.id.add_profile_btn);
-
-		addProfileBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-
-			}
-		});
 
 		listener = new ProfileListener() {
 			@Override
@@ -106,26 +78,91 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 				for (ApplicationMode sam : availableAppModes) {
 					vls.append(sam.getStringKey()).append(",");
 				}
-				getSettings().AVAILABLE_APP_MODES.set(vls.toString());
-
+				if (getSettings() != null) {
+					getSettings().AVAILABLE_APP_MODES.set(vls.toString());
+				}
 			}
 
 			@Override
 			public void editProfile(ApplicationMode item) {
 				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
 				intent.putExtra("stringKey", item.getStringKey());
+				intent.putExtra("isNew", false);
 				startActivity(intent);
 			}
 		};
+
+		typeListener = new ProfileTypeDialogListener() {
+			@Override
+			public void onSelectedType(int pos) {
+				LOG.debug("Base profile: " + baseProfiles.get(pos).getName());
+				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
+				intent.putExtra("isNew", true);
+				intent.putExtra("stringKey", baseProfiles.get(pos).getStringKey());
+				startActivity(intent);
+			}
+		};
+
+		View view = inflater.inflate(R.layout.profiles_list_fragment, container, false);
+		recyclerView = view.findViewById(R.id.profiles_list);
+		addProfileBtn = view.findViewById(R.id.add_profile_btn);
+
+		addProfileBtn.setOnClickListener(new OnClickListener() {
+
+
+			@Override
+			public void onClick(View v) {
+				final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
+				dialog.setProfileTypeListener(typeListener);
+				Bundle bundle = new Bundle();
+				bundle.putParcelableArrayList(TYPE_APP_PROFILE, baseProfiles);
+				dialog.setArguments(bundle);
+
+				if (getActivity() != null) {
+					getActivity().getSupportFragmentManager().beginTransaction()
+						.add(dialog, "select_base_type").commitAllowingStateLoss();
+				}
+			}
+		});
+
 		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), listener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
 
-
-
-
 		return view;
 	}
 
+	private ArrayList<BaseProfile> getBaseProfiles() {
+		ArrayList<BaseProfile> profiles = new ArrayList<>();
+		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
+			switch (mode.getStringKey()) {
+				case "car":
+					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.rendering_value_car_name),
+						"Car, Truck, Motorcycle", R.drawable.ic_action_car_dark));
+					break;
+				case "bicycle":
+					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.rendering_value_bicycle_name),
+						"MBT, Moped, Skiing, Horse", R.drawable.map_action_bicycle_dark));
+					break;
+				case "pedestrian":
+					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.rendering_value_pedestrian_name),
+						"Walking, Hiking, Running", R.drawable.map_action_pedestrian_dark));
+					break;
+				case "public_transport":
+					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.app_mode_public_transport),
+						"All PT types", R.drawable.map_action_bus_dark));
+					break;
+				case "boat":
+					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.nautical_renderer),
+						"Ship, Rowing, Sailing", R.drawable.map_action_sail_boat_dark));
+					break;
+				case "aircraft":
+					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.app_mode_aircraft),
+						"Airplane, Gliding", R.drawable.map_action_aircraft));
+					break;
+			}
+		}
+		return profiles;
+	}
 
 }

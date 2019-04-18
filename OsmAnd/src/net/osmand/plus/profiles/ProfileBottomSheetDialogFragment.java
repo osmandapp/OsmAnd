@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import java.util.ArrayList;
 import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -21,17 +22,22 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
-public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	private static final Log LOG = PlatformUtil.getLog(NavTypeBottomSheetDialogFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(ProfileBottomSheetDialogFragment.class);
 
-	private List<RoutingProfile> routingProfiles;
-	private NavTypeDialogListener listener;
-	private NavTypeDialogListener listListener;
+	private List<ProfileDataObject> profiles;
+	private ProfileTypeDialogListener listener;
+	private ProfileTypeDialogListener listListener;
 	private RecyclerView recyclerView;
 	private ProfileTypeAdapter adapter;
 
-	public void setNavTypeListener(NavTypeDialogListener listener) {
+
+	public final static String TYPE_APP_PROFILE = "base_profiles";
+	public final static String TYPE_NAV_PROFILE = "routing_profiles";
+	private String type;
+
+	public void setProfileTypeListener(ProfileTypeDialogListener listener) {
 		this.listener = listener;
 	}
 
@@ -42,7 +48,17 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 		Bundle args = getArguments();
 		if (args != null) {
-			routingProfiles = args.getParcelableArrayList("routing_profiles");
+			if (args.get(TYPE_NAV_PROFILE) != null) {
+				profiles = args.getParcelableArrayList(TYPE_NAV_PROFILE);
+				type = TYPE_NAV_PROFILE;
+			} else if (args.get(TYPE_APP_PROFILE) != null) {
+				profiles = args.getParcelableArrayList(TYPE_APP_PROFILE);
+				type = TYPE_APP_PROFILE;
+			} else {
+				//todo notify on empty list;
+				dismiss();
+			}
+
 		}
 
 		final int themeRes = getMyApplication().getSettings().isLightContent()
@@ -50,13 +66,19 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			: R.style.OsmandDarkTheme;
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 			R.layout.bottom_sheet_select_type_fragment, null);
+		if (type.equals(TYPE_APP_PROFILE)) {
+			TextView fragmentDescription = view.findViewById(R.id.dialog_description_text);
+			fragmentDescription.setVisibility(View.VISIBLE);
+			fragmentDescription.setText(
+				"The new Application Profile should be based on one of the default App Profiles. Selected Profile defines basic settings: setup of Widgets, units of speed and distance. In string below Profile's name, you could learn which Navigation Profiles are suitable for each Application Profile.");
+		}
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
 			}
 		});
-		listListener = new NavTypeDialogListener() {
+		listListener = new ProfileTypeDialogListener() {
 			@Override
 			public void onSelectedType(int pos) {
 				listener.onSelectedType(pos);
@@ -64,7 +86,7 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			}
 		};
 		recyclerView = view.findViewById(R.id.menu_list_view);
-		adapter = new ProfileTypeAdapter(routingProfiles, isNightMode(getMyApplication()),
+		adapter = new ProfileTypeAdapter(profiles, isNightMode(getMyApplication()),
 			listListener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
@@ -85,14 +107,15 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	class ProfileTypeAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
-		private final List<BaseProfile> items;
+		private final List<ProfileDataObject> items;
 		private final boolean isNightMode;
-		private NavTypeDialogListener listener;
+		private ProfileTypeDialogListener listener;
 		private int previousSelection;
 
-		public NavTypeAdapter(@NonNull List<RoutingProfile> objects,
-			@NonNull boolean isNightMode, NavTypeDialogListener listener) {
-			this.items = objects;
+
+		public ProfileTypeAdapter(List<ProfileDataObject> items, boolean isNightMode,
+			ProfileTypeDialogListener listener) {
+			this.items = items;
 			this.isNightMode = isNightMode;
 			this.listener = listener;
 		}
@@ -113,7 +136,7 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		@Override
 		public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
 			final int pos = position;
-			final BaseProfile item = items.get(position);
+			final ProfileDataObject item = items.get(position);
 			holder.title.setText(item.getName());
 
 			holder.icon.setImageDrawable(getIcon(item.getIconRes(), isNightMode
@@ -136,7 +159,7 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			});
 			if (item instanceof RoutingProfile) {
 				holder.descr.setText(Algorithms
-					.capitalizeFirstLetterAndLowercase(((RoutingProfile) item).getParent().getName()));
+					.capitalizeFirstLetterAndLowercase(((RoutingProfile) item).getParent()));
 				if (((RoutingProfile) item).isSelected()) {
 					holder.radioButton.setChecked(true);
 					previousSelection = position;
@@ -168,8 +191,7 @@ public class NavTypeBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		}
 	}
 
-	interface NavTypeDialogListener {
-
+	interface ProfileTypeDialogListener {
 		void onSelectedType(int pos);
 	}
 

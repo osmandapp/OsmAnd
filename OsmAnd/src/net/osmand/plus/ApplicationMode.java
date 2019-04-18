@@ -16,6 +16,7 @@ import java.util.Set;
 public class ApplicationMode {
 	private static Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+	private static List<ApplicationMode> defaultValues = new ArrayList<>();
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 	/*
@@ -42,19 +43,19 @@ public class ApplicationMode {
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
 //---------------------------------------------------------------------------------------------------------------
-	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
-			icon(R.drawable.map_action_trekking_dark, R.drawable.ic_action_trekking_dark).reg();
-
-	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
-			carLocation().parent(CAR).
-			icon(R.drawable.map_action_motorcycle_dark, R.drawable.ic_action_motorcycle_dark).reg();
-
-	public static final ApplicationMode TRUCK = create(R.string.app_mode_truck, "truck").speed(15.3f, 40).
-			carLocation().parent(CAR).
-			icon(R.drawable.map_action_truck_dark, R.drawable.ic_action_truck_dark).reg();
-
-	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
-			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
+//	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
+//			icon(R.drawable.map_action_trekking_dark, R.drawable.ic_action_trekking_dark).reg();
+//
+//	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
+//			carLocation().parent(CAR).
+//			icon(R.drawable.map_action_motorcycle_dark, R.drawable.ic_action_motorcycle_dark).reg();
+//
+//	public static final ApplicationMode TRUCK = create(R.string.app_mode_truck, "truck").speed(15.3f, 40).
+//			carLocation().parent(CAR).
+//			icon(R.drawable.map_action_truck_dark, R.drawable.ic_action_truck_dark).reg();
+//
+//	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
+//			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
 
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, PUBLIC_TRANSPORT};
@@ -108,6 +109,12 @@ public class ApplicationMode {
 		private ApplicationMode applicationMode;
 
 		public ApplicationMode reg() {
+			values.add(applicationMode);
+			defaultValues.add(applicationMode);
+			return applicationMode;
+		}
+
+		public ApplicationMode customReg() {
 			values.add(applicationMode);
 			return applicationMode;
 		}
@@ -234,9 +241,12 @@ public class ApplicationMode {
 	}
 
 	public static List<ApplicationMode> allPossibleValues() {
-		return new ArrayList<ApplicationMode>(values);
+		return new ArrayList<>(values);
 	}
 
+	public static List<ApplicationMode> getDefaultValues() {
+		return new ArrayList<>(defaultValues);
+	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
 	public static Set<ApplicationMode> regWidgetVisibility(String widgetId, ApplicationMode... am) {

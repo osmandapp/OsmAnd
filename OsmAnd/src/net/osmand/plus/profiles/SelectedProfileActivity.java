@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.util.Algorithms;
 
 public class SelectedProfileActivity extends OsmandActionBarActivity {
 
@@ -18,8 +19,11 @@ public class SelectedProfileActivity extends OsmandActionBarActivity {
 		setContentView(R.layout.single_fragment_layout);
 		Intent intent = getIntent();
 		if (intent.getExtras() != null) {
-			String stringKey = intent.getStringExtra("stringKey");
-			String title = stringKey == null ? "New Profile" : stringKey.toUpperCase(); //todo need normal title
+			String title = Algorithms.capitalizeFirstLetterAndLowercase(
+				intent.getStringExtra("stringKey").replace("_", " "));
+			if (intent.getBooleanExtra("isNew", false)) {
+				 title = String.format("%s (new)", title);
+			}
 			if (getSupportActionBar() != null) {
 				getSupportActionBar().setTitle(title);
 				getSupportActionBar().setElevation(5.0f);

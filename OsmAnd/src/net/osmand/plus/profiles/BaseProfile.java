@@ -1,31 +1,23 @@
 package net.osmand.plus.profiles;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-public class BaseProfile implements Parcelable {
+public class BaseProfile extends ProfileDataObject {
 
-	private String name;
-	private String description;
-	private int iconRes;
+	private String stringKey;
 
-	public BaseProfile(String name, int iconRes) {
-		this.name = name;
-		this.name = description;
-		this.iconRes = iconRes;
+	public BaseProfile(String stringKey, String name, String description, int iconRes) {
+		super(name, description, iconRes);
+		this.stringKey = stringKey;
 	}
 
-	public BaseProfile(String name, String description, int iconRes) {
-		this.name = name;
-		this.name = description;
-		this.iconRes = iconRes;
+	public String getStringKey() {
+		return stringKey;
 	}
 
 	protected BaseProfile(Parcel in) {
-		name = in.readString();
-		description = in.readString();
-		iconRes = in.readInt();
-
+		super(in);
+		stringKey = in.readString();
 	}
 
 	public static final Creator<BaseProfile> CREATOR = new Creator<BaseProfile>() {
@@ -40,19 +32,6 @@ public class BaseProfile implements Parcelable {
 		}
 	};
 
-	public String getName() {
-		return name;
-	}
-
-	public int getIconRes() {
-		return iconRes;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-
 	@Override
 	public int describeContents() {
 		return 0;
@@ -60,8 +39,7 @@ public class BaseProfile implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(name);
-		dest.writeString(description);
-		dest.writeInt(iconRes);
+		super.writeToParcel(dest, flags);
+		dest.writeString(stringKey);
 	}
 }

@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
+import net.osmand.util.Algorithms;
 import net.sf.junidecode.App;
 
 
@@ -64,11 +66,15 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.descr.setText(String.format("Type: %s", item.getParent().getStringKey()));
 		} else {
 			holder.title.setText(app.getResources().getString(item.getStringResource()));
-			holder.descr.setText(String.format("Type: %s", item.getStringKey()));
+			holder.descr.setText(String.format("Type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getStringKey().replace("_", " "))));
 		}
 
-		holder.title.setTextColor(app.getResources().getColor(isNightMode(app) ? R.color.main_font_dark : R.color.main_font_light));
-		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app) ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
+			? R.color.main_font_dark
+			: R.color.main_font_light));
+		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app)
+				? R.color.active_buttons_and_links_dark
+				: R.color.active_buttons_and_links_light));
 		holder.aSwitch.setChecked(selectedItems.contains(item));
 		holder.aSwitch.setOnClickListener(new OnClickListener() {
 			@Override

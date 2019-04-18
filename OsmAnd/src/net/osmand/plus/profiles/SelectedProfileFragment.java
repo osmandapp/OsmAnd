@@ -27,7 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.profiles.NavTypeBottomSheetDialogFragment.NavTypeDialogListener;
+import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
 import net.osmand.plus.profiles.SelectIconBottomSheetDialogFragment.IconIdListener;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -44,6 +44,8 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 	public static final String SCREEN_CONFIG = "openScreenConfigMenu";
 	public static final String SELECTED_PROFILE = "editedProfile";
 
+
+
 	ApplicationMode profile = null;
 	ApplicationMode parent = null;
 	ArrayList<RoutingProfile> routingProfiles;
@@ -51,9 +53,10 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 	RoutingProfile selectedRoutingProfile = null;
 	float defSpeed = 0f;
 
-	boolean isDataChanged = false;
+	private boolean isNew = false;
+	private boolean isDataChanged = false;
 
-	private NavTypeDialogListener navTypeDialogListener = null;
+	private ProfileTypeDialogListener profileTypeDialogListener = null;
 	private IconIdListener iconIdListener = null;
 
 	@Override
@@ -61,9 +64,13 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		if (getArguments() != null) {
-			String modeName = getArguments().getString("stringKey");
-			profile = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.CAR);
-			//todo select parent
+			String modeName = getArguments().getString("stringKey", "car");
+			if (!getArguments().getBoolean("isNew", true)) {
+				profile = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.CAR);
+			} else {
+				isNew = true;
+				parent = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.CAR);
+			}
 		}
 		routingProfiles = getRoutingProfiles();
 	}
@@ -92,10 +99,15 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
 		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn
 			.getBackground();
-
-		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.getSmallIconDark(),
-			isNightMode ? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light));
+		if(isNew) {
+			profileIcon.setImageDrawable(app.getUIUtilities().getIcon(parent.getSmallIconDark(),
+				isNightMode ? R.color.active_buttons_and_links_dark
+					: R.color.active_buttons_and_links_light));
+		} else {
+			profileIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.getSmallIconDark(),
+				isNightMode ? R.color.active_buttons_and_links_dark
+					: R.color.active_buttons_and_links_light));
+		}
 
 		if (isNightMode) {
 			profileNameTextBox
@@ -109,7 +121,7 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 				.setColor(app.getResources().getColor(R.color.text_field_box_light));
 		}
 
-		navTypeDialogListener = new NavTypeDialogListener() {
+		profileTypeDialogListener = new ProfileTypeDialogListener() {
 			@Override
 			public void onSelectedType(int pos) {
 				selectedRoutingProfile = routingProfiles.get(pos);
@@ -153,9 +165,8 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				LOG.debug("select icon");
-				final NavTypeBottomSheetDialogFragment fragment = new NavTypeBottomSheetDialogFragment();
-				fragment.setNavTypeListener(navTypeDialogListener);
+				final ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
+				fragment.setProfileTypeListener(profileTypeDialogListener);
 				Bundle bundle = new Bundle();
 				bundle.putParcelableArrayList("routing_profiles", routingProfiles);
 				fragment.setArguments(bundle);
@@ -179,7 +190,6 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		profileIconBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				LOG.debug("select icon");
 				final SelectIconBottomSheetDialogFragment iconSelectDialog = new SelectIconBottomSheetDialogFragment();
 				iconSelectDialog.setIconIdListener(iconIdListener);
 				Bundle bundle = new Bundle();
@@ -319,7 +329,7 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 					break;
 			}
 			routingProfiles
-				.add(new RoutingProfile(name, getString(R.string.osmand_default_routing), iconRes, false));
+				.add(new RoutingProfile(name, getResources().getString(R.string.osmand_default_routing), iconRes, false));
 		}
 		return routingProfiles;
 	}
