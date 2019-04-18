@@ -704,7 +704,7 @@
     <string name="fav_points_not_exist">沒有我的收藏標點存在</string>
     <string name="update_existing">取代</string>
     <string name="only_show">顯示路線</string>
-    <string name="follow">開始導航</string>
+    <string name="follow">開始指引</string>
     <string name="mark_final_location_first">請先選擇目的地</string>
     <string name="get_directions">導引</string>
     <string name="opening_hours">營業時間</string>
@@ -1499,7 +1499,7 @@
     <string name="action_delete">刪除動作</string>
     <string name="osmand_parking_overdue">已過時</string>
     <string name="delay_to_start_navigation_descr">在路線規劃螢幕上，指示剩餘等待時間。</string>
-    <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
+    <string name="delay_to_start_navigation">指引後開始轉向建議…</string>
     <string name="shared_string_go">執行</string>
     <string name="confirmation_to_clear_history">清除過去的記錄嗎？</string>
     <string name="local_osm_changes_upload_all_confirm">您要上傳 %1$d 以更改 OSM。您確定嗎？</string>
@@ -2387,7 +2387,7 @@
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
     <string name="save_poi_too_many_uppercase">名稱中包含太多的大寫字母。要繼續嗎？</string>
-    <string name="route_is_too_long_v2">如果在十分鐘內沒有沒有找到路線，請增加中轉地點。</string>
+    <string name="route_is_too_long_v2">對於較長的距離：如果在10分鐘之內沒有找到路線請新增中轉目的地。</string>
     <string name="display_zoom_level">顯示縮放級別：%1$s</string>
     <string name="srtm_color_scheme">色調配置</string>
     <string name="show_from_zoom_level">由縮放級別來顯示</string>
@@ -2903,15 +2903,119 @@
     <string name="previous_route">前一個路線</string>
     <string name="shared_string_swap">切換</string>
     <string name="show_more">顯示更多</string>
-    <string name="tracks_on_map">在地圖上追蹤</string>
+    <string name="tracks_on_map">顯示軌跡</string>
     <string name="time_of_day">一天中的時間</string>
     <string name="by_transport_type">由 %1$s</string>
     <string name="step_by_step">按步驟</string>
     <string name="road_types">道路類型</string>
     <string name="exit_at">出口於</string>
-    <string name="sit_on_the_stop">坐在站點上</string>
+    <string name="sit_on_the_stop">站點的座位</string>
     <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">點選此動作按鈕在地圖上顯示或隱藏選定的 GPX 軌跡</string>
     <string name="quick_action_gpx_tracks_hide">隱藏 GPX 軌跡</string>
     <string name="quick_action_gpx_tracks_show">顯示 GPX 軌跡</string>
+    <string name="send_log">傳送紀錄檔</string>
+    <string name="routing_attr_avoid_tram_name">避免電車</string>
+    <string name="routing_attr_avoid_tram_description">避免電車</string>
+    <string name="routing_attr_avoid_bus_name">避免巴士</string>
+    <string name="routing_attr_avoid_bus_description">避免巴士與無軌電車</string>
+    <string name="routing_attr_avoid_share_taxi_name">避免共享計程車</string>
+    <string name="routing_attr_avoid_share_taxi_description">避免共享計程車</string>
+    <string name="routing_attr_avoid_train_name">避免火車</string>
+    <string name="routing_attr_avoid_train_description">避免火車</string>
+    <string name="routing_attr_avoid_subway_name">避免捷運</string>
+    <string name="routing_attr_avoid_subway_description">避免捷運與輕軌運輸</string>
+    <string name="routing_attr_avoid_ferry_name">避免渡輪</string>
+    <string name="routing_attr_avoid_ferry_description">避免渡輪</string>
+    <string name="release_3_3_7">• 在大眾運輸工具間轉乘時顯示時間
+\n
+\n • 修正路線詳細資訊的使用者介面
+\n
+\n • 修復在方向選單與路徑詳細資訊中的暗色主題
+\n
+\n • 在測量距離中顯示方位角
+\n
+\n</string>
+    <string name="shared_string_degrees">度</string>
+    <string name="shared_string_milliradians">毫弧度</string>
+    <string name="angular_measeurement">角度測量單位</string>
+    <string name="angular_measeurement_descr">變更測量的方位角。</string>
+    <string name="avoid_pt_types_descr">選取要避免在導航中使用的大眾運輸類型：</string>
+    <string name="quick_action_day_night_mode">%s 模式</string>
+    <string name="avoid_pt_types">避免運輸類型……</string>
+    <string name="shared_string_walk">步行</string>
+    <string name="save_poi_value_exceed_length">標籤「%s」的最大長度為 255 個字元。
+\n請縮短以繼續。</string>
+    <string name="save_poi_value_exceed_length_title">「%s」值的長度</string>
+    <string name="public_transport_warning_descr_blog">在我們的部落格上取得更多關於 OsmAnd 如何計算路徑的資訊。</string>
+    <string name="public_transport_warning_title">大眾運輸導航目前正在測試階段，可能會有錯誤與不準確的地方。</string>
+    <string name="add_intermediate">加入中繼點</string>
+    <string name="transfers_size">%1$d 次轉乘</string>
+    <string name="add_start_and_end_points">新增起始與結束點</string>
+    <string name="route_add_start_point">新增起始點</string>
+    <string name="route_descr_select_start_point">選取起始點</string>
+    <string name="rendering_attr_surface_unpaved_name">無鋪面</string>
+    <string name="rendering_attr_surface_sand_name">沙</string>
+    <string name="rendering_attr_surface_grass_name">草</string>
+    <string name="rendering_attr_surface_grass_paver_name">草與透氣磚鋪面</string>
+    <string name="rendering_attr_surface_ground_name">地面</string>
+    <string name="rendering_attr_surface_dirt_name">土</string>
+    <string name="rendering_attr_surface_mud_name">泥</string>
+    <string name="rendering_attr_surface_ice_name">冰</string>
+    <string name="rendering_attr_surface_salt_name">鹽</string>
+    <string name="rendering_attr_surface_snow_name">雪</string>
+    <string name="rendering_attr_surface_asphalt_name">柏油</string>
+    <string name="rendering_attr_surface_paved_name">有鋪面</string>
+    <string name="rendering_attr_surface_concrete_name">混凝土</string>
+    <string name="rendering_attr_surface_sett_name">枕木</string>
+    <string name="rendering_attr_surface_cobblestone_name">鵝卵石</string>
+    <string name="rendering_attr_surface_paving_stones_name">鋪路石</string>
+    <string name="rendering_attr_surface_pebblestone_name">礫石</string>
+    <string name="rendering_attr_surface_stone_name">石頭</string>
+    <string name="rendering_attr_surface_metal_name">金屬</string>
+    <string name="rendering_attr_surface_wood_name">木頭</string>
+    <string name="rendering_attr_surface_gravel_name">碎石</string>
+    <string name="rendering_attr_surface_fine_gravel_name">細石</string>
+    <string name="rendering_attr_surface_compacted_name">壓實</string>
+    <string name="rendering_attr_smoothness_excellent_name">優秀</string>
+    <string name="rendering_attr_smoothness_good_name">好</string>
+    <string name="rendering_attr_smoothness_intermediate_name">中等</string>
+    <string name="rendering_attr_smoothness_bad_name">差</string>
+    <string name="rendering_attr_smoothness_very_bad_name">非常差</string>
+    <string name="rendering_attr_smoothness_horrible_name">可怕</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">非常可怕</string>
+    <string name="rendering_attr_smoothness_impassable_name">無法通行</string>
+    <string name="rendering_attr_highway_class_motorway_name">高速公路</string>
+    <string name="rendering_attr_highway_class_state_road_name">州級公路</string>
+    <string name="rendering_attr_highway_class_road_name">道路</string>
+    <string name="rendering_attr_highway_class_street_name">街道</string>
+    <string name="rendering_attr_highway_class_service_name">服務</string>
+    <string name="rendering_attr_highway_class_footway_name">人行道</string>
+    <string name="rendering_attr_highway_class_track_name">小徑</string>
+    <string name="rendering_attr_highway_class_bridleway_name">馬道</string>
+    <string name="rendering_attr_highway_class_steps_name">臺階</string>
+    <string name="rendering_attr_highway_class_path_name">路徑</string>
+    <string name="rendering_attr_highway_class_cycleway_name">自行車道</string>
+    <string name="rendering_attr_undefined_name">未定義</string>
+    <string name="release_3_3">• 新的「方向」畫面：顯示家裡與工作目的地按鈕、「前一條路徑」快捷鍵、作用中的 GPX 軌跡與標記清單、搜尋歷史
+\n
+\n • 「路徑詳細資訊」下的額外資訊：道路類型、表面、坡度、平滑度
+\n
+\n • 大眾運輸導航現在支援所有類型的運輸工具：捷運、巴士、電車等等
+\n
+\n • 新的顯示／隱藏軌跡的快速動作與日／夜模式
+\n
+\n • 修復德國、南非與魁北克被顯示為淹沒的區域
+\n
+\n • 對 KML 與 KMZ 匯入的額外支援
+\n
+\n • 在開啟某些大眾運輸站點時當機的問題
+\n
+\n • 從免費版中移除 Facebook 與 Firebase 分析（OsmAnd+ 則從未包含其在內）
+\n
+\n</string>
+    <string name="use_osm_live_public_transport_description">為 OsmAnd Live 變更啟用大眾運輸。</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live 大眾運輸</string>
+    <string name="routing_attr_avoid_sett_name">避免鵝卵石與枕木</string>
+    <string name="routing_attr_avoid_sett_description">避免鵝卵石與枕木</string>
 </resources>
