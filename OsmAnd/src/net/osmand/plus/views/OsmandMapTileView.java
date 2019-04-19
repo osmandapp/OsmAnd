@@ -321,6 +321,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T extends OsmandMapLayer> List<T> getLayersByClass(Class<T> cl) {
+		List<T> layersByClass = new ArrayList<>();
+		for (OsmandMapLayer lr : layers) {
+			if (cl.isInstance(lr)) {
+				layersByClass.add((T) lr);
+			}
+		}
+		return layersByClass;
+	}
+
 	public int getViewHeight() {
 		if (view != null) {
 			return view.getHeight();

@@ -261,6 +261,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return aidlLayer.getPoint(id);
 	}
 
+	public String getLayerId() {
+		return aidlLayer.getId();
+	}
+
 	@Override
 	public LatLon getTextLocation(AMapPoint o) {
 		ALatLon loc = o.getLocation();

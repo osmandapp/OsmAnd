@@ -47,6 +47,10 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.MapAccessibilityActions;
+import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
+import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
+import net.osmand.aidl.map.ALatLon;
+import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -117,6 +121,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
+import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -149,7 +154,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
-		OnRequestPermissionsResultCallback, IRouteInformationListener,
+		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
@@ -1783,6 +1788,31 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onMapMarkersChanged() {
 		refreshMap();
+	}
+
+	@Override
+	public void onAMapPointUpdated(final AMapPoint point, String layerId) {
+		if (canUpdateAMapPointMenu(point, layerId)) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					ALatLon loc = point.getLocation();
+					LatLon latLon = new LatLon(loc.getLatitude(), loc.getLongitude());
+					PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MARKER, point.getFullName());
+					mapContextMenu.update(latLon, pointDescription, point);
+					mapContextMenu.centerMarkerLocation();
+				}
+			});
+		}
+	}
+
+	private boolean canUpdateAMapPointMenu(AMapPoint point, String layerId) {
+		Object object = mapContextMenu.getObject();
+		if (!mapContextMenu.isVisible() || !(object instanceof AMapPoint)) {
+			return false;
+		}
+		AMapPoint oldPoint = (AMapPoint) object;
+		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

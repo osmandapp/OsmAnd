@@ -71,6 +71,10 @@ object TelegramUiHelper {
 						res.latLon = LatLon(content.location.latitude, content.location.longitude)
 					} else if (content is MessageUserLocation) {
 						res.latLon = LatLon(content.lat, content.lon)
+						res.speed = content.speed
+						res.bearing = content.bearing
+						res.altitude = content.altitude
+						res.precision = content.hdop
 					}
 				}
 				if (user != null) {
@@ -140,6 +144,10 @@ object TelegramUiHelper {
 				chatTitle = chat.title
 				name = content.deviceName
 				latLon = LatLon(content.lat, content.lon)
+				speed = content.speed
+				bearing = content.bearing
+				altitude = content.altitude
+				precision = content.hdop
 				placeholderId = R.drawable.img_user_picture
 				lastUpdated = content.lastUpdated
 			}
@@ -158,11 +166,18 @@ object TelegramUiHelper {
 		return LocationItem().apply {
 			chatId = chat.id
 			chatTitle = chat.title
-			name = TelegramUiHelper.getUserName(user)
-			latLon = when (content) {
-				is TdApi.MessageLocation -> LatLon(content.location.latitude, content.location.longitude)
-				is MessageUserLocation -> LatLon(content.lat, content.lon)
-				else -> null
+			name = getUserName(user)
+			when (content) {
+				is TdApi.MessageLocation -> {
+					latLon = LatLon(content.location.latitude, content.location.longitude)
+				}
+				is MessageUserLocation -> {
+					latLon = LatLon(content.lat, content.lon)
+					speed = content.speed
+					bearing = content.bearing
+					altitude = content.altitude
+					precision = content.hdop
+				}
 			}
 			photoPath = helper.getUserPhotoPath(user)
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
@@ -184,6 +199,10 @@ object TelegramUiHelper {
 				chatTitle = chat.title
 				name = content.deviceName
 				latLon = LatLon(content.lat, content.lon)
+				speed = content.speed
+				bearing = content.bearing
+				altitude = content.altitude
+				precision = content.hdop
 				photoPath = chat.photo?.small?.local?.path
 				placeholderId = R.drawable.img_user_picture
 				privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
@@ -205,11 +224,18 @@ object TelegramUiHelper {
 		return ChatItem().apply {
 			chatId = chat.id
 			chatTitle = chat.title
-			name = TelegramUiHelper.getUserName(user)
-			latLon = when (content) {
-				is TdApi.MessageLocation -> LatLon(content.location.latitude, content.location.longitude)
-				is MessageUserLocation -> LatLon(content.lat, content.lon)
-				else -> null
+			name = getUserName(user)
+			when (content) {
+				is TdApi.MessageLocation -> {
+					latLon = LatLon(content.location.latitude, content.location.longitude)
+				}
+				is MessageUserLocation -> {
+					latLon = LatLon(content.lat, content.lon)
+					speed = content.speed
+					bearing = content.bearing
+					altitude = content.altitude
+					precision = content.hdop
+				}
 			}
 			if (helper.isGroup(chat)) {
 				photoPath = helper.getUserPhotoPath(user)
@@ -244,7 +270,7 @@ object TelegramUiHelper {
 				photoPath = user?.profilePhoto?.small?.local?.path
 			}
 			if (user != null) {
-				name = TelegramUiHelper.getUserName(user)
+				name = getUserName(user)
 				userId = user.id
 			}
 			userLocations = userLocation
@@ -263,6 +289,14 @@ object TelegramUiHelper {
 		var name: String = ""
 			internal set
 		var latLon: LatLon? = null
+			internal set
+		var bearing: Double? = null
+			internal set
+		var speed: Double? = null
+			internal set
+		var altitude: Double? = null
+			internal set
+		var precision: Double? = null
 			internal set
 		var photoPath: String? = null
 			internal set
