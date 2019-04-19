@@ -1677,8 +1677,8 @@
     <string name="poi_dojo">Dojo</string>
     <string name="poi_bench_yes">Oui</string>
     <string name="poi_bench_no">Sans banc</string>
-    <string name="poi_bin_yes">Avec panier</string>
-    <string name="poi_bin_no">Sans panier</string>
+    <string name="poi_bin_yes">Avec poubelle</string>
+    <string name="poi_bin_no">Sans poubelle</string>
     <string name="poi_internet_access_type_yes">Avec accès Internet</string>
     <string name="poi_fitness_centre">Salle de sport</string>
     <string name="poi_billiards">Billards</string>
