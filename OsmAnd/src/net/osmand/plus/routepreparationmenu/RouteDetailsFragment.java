@@ -314,11 +314,12 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		OsmandApplication app = mapActivity.getMyApplication();
 		statisticCard = new RouteStatisticCard(mapActivity, gpx, new OnTouchListener() {
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+			public boolean onTouch(View v, MotionEvent ev) {
 				InterceptorLinearLayout mainView = getMainView();
 				if (mainView != null) {
 					mainView.requestDisallowInterceptTouchEvent(true);
 				}
+				dispatchEventToInfoCards(v, ev);
 				return false;
 			}
 		}, new OnClickListener() {
@@ -394,19 +395,31 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			@SuppressLint("ClickableViewAccessibility")
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
-				if (ev.getSource() != 0) {
-					for (RouteInfoCard card : routeInfoCards) {
-						final HorizontalBarChart ch = card.getChart();
-						if (ch != null && v instanceof HorizontalBarChart && ch != v) {
+				if (ev.getSource() != 0 && v instanceof HorizontalBarChart) {
+					if (statisticCard != null) {
+						LineChart ch = statisticCard.getChart();
+						if (ch != null) {
 							final MotionEvent event = MotionEvent.obtainNoHistory(ev);
 							event.setSource(0);
 							ch.dispatchTouchEvent(event);
 						}
 					}
+					dispatchEventToInfoCards(v, ev);
 				}
 				return false;
 			}
 		};
+	}
+
+	private void dispatchEventToInfoCards(View v, MotionEvent ev) {
+		for (RouteInfoCard card : routeInfoCards) {
+			final HorizontalBarChart ch = card.getChart();
+			if (ch != null && ch != v) {
+				final MotionEvent event = MotionEvent.obtainNoHistory(ev);
+				event.setSource(0);
+				ch.dispatchTouchEvent(event);
+			}
+		}
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
