@@ -3033,4 +3033,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Unikaj bruku i kostki brukowej</string>
     <string name="routing_attr_avoid_share_taxi_name">Unikanie taksówek zbiorowych</string>
     <string name="routing_attr_avoid_share_taxi_description">Unikanie taksówek zbiorowych</string>
+    <string name="send_log">Wyślij dziennik</string>
 </resources>
