@@ -261,10 +261,6 @@ public class RoutingHelper {
 		return lastProjection;
 	}
 
-	public void addListener(IRouteInformationListener l){
-		listeners.add(new WeakReference<>(l));
-		transportRoutingHelper.addListener(l);
-	}
 
 	public void addRouteDataListener(IRoutingDataUpdateListener listener) {
 		updateListeners = updateListenersList(new ArrayList<>(updateListeners), listener, true);
@@ -281,7 +277,7 @@ public class RoutingHelper {
 		while (it.hasNext()) {
 			WeakReference<IRoutingDataUpdateListener> ref = it.next();
 			IRoutingDataUpdateListener l = ref.get();
-			if (l == null || (l == listener)) {
+			if (l == null || l == listener) {
 				it.remove();
 			}
 		}
@@ -291,19 +287,33 @@ public class RoutingHelper {
 		return copyList;
 	}
 
-	public boolean removeListener(IRouteInformationListener lt){
-		Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-		while(it.hasNext()) {
+	public void addListener(IRouteInformationListener l){
+		listeners = updateInformationListeners(new ArrayList<>(listeners), l, true);
+		transportRoutingHelper.addListener(l);
+	}
+
+	public void removeListener(IRouteInformationListener lt){
+		listeners = updateInformationListeners(new ArrayList<>(listeners), lt, false);
+	}
+
+	private List<WeakReference<IRouteInformationListener>> updateInformationListeners(
+		List<WeakReference<IRouteInformationListener>> copyList,
+		IRouteInformationListener listener, boolean isNewListener) {
+		Iterator<WeakReference<IRouteInformationListener>> it = copyList.iterator();
+		while (it.hasNext()) {
 			WeakReference<IRouteInformationListener> ref = it.next();
 			IRouteInformationListener l = ref.get();
-			if(l == null || lt == l) {
+			if (l == null || l == listener) {
 				it.remove();
-				return true;
 			}
 		}
-		transportRoutingHelper.removeListener(lt);
-		return false;
+
+		if (isNewListener) {
+			copyList.add(new WeakReference<>(listener));
+		}
+		return copyList;
 	}
+
 
 	public void updateLocation(Location currentLocation) {
 		if (settings.getPointToStart() == null && settings.getMyLocationToStart() == null && currentLocation != null) {
