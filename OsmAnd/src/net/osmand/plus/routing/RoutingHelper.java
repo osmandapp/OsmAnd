@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
@@ -267,31 +266,29 @@ public class RoutingHelper {
 		transportRoutingHelper.addListener(l);
 	}
 
-	public void addDataUpdateListener(IRoutingDataUpdateListener listener) {
-		List<WeakReference<IRoutingDataUpdateListener>> copyList = new ArrayList<>(updateListeners);
-		Iterator<WeakReference<IRoutingDataUpdateListener>> it = copyList.iterator();
-		while (it.hasNext()) {
-			WeakReference<IRoutingDataUpdateListener> ref = it.next();
-			IRoutingDataUpdateListener l = ref.get();
-			if (l == null) {
-				it.remove();
-			}
-		}
-		copyList.add(new WeakReference<>(listener));
-		updateListeners = copyList;
+	public void addRouteDataListener(IRoutingDataUpdateListener listener) {
+		updateListeners = updateListenersList(new ArrayList<>(updateListeners), listener, true);
 	}
 
-	public void removeDataUpdateListener(IRoutingDataUpdateListener listener) {
-		List<WeakReference<IRoutingDataUpdateListener>> copyList = new ArrayList<>(updateListeners);
+	public void removeRouteDataListener(IRoutingDataUpdateListener listener) {
+		updateListeners = updateListenersList(new ArrayList<>(updateListeners), listener, false);
+	}
+
+	private List<WeakReference<IRoutingDataUpdateListener>> updateListenersList(
+		List<WeakReference<IRoutingDataUpdateListener>> copyList,
+		IRoutingDataUpdateListener listener, boolean isNewListener) {
 		Iterator<WeakReference<IRoutingDataUpdateListener>> it = copyList.iterator();
 		while (it.hasNext()) {
 			WeakReference<IRoutingDataUpdateListener> ref = it.next();
 			IRoutingDataUpdateListener l = ref.get();
-			if (l == null || l == listener) {
+			if (l == null || (l == listener)) {
 				it.remove();
 			}
 		}
-		updateListeners = copyList;
+		if (isNewListener) {
+			copyList.add(new WeakReference<>(listener));
+		}
+		return copyList;
 	}
 
 	public boolean removeListener(IRouteInformationListener lt){
@@ -533,16 +530,11 @@ public class RoutingHelper {
 				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
 				if (!updateListeners.isEmpty()) {
 					ArrayList<WeakReference<IRoutingDataUpdateListener>> tmp = new ArrayList<>(updateListeners);
-					Iterator<WeakReference<IRoutingDataUpdateListener>> it = tmp.iterator();
-					while (it.hasNext()) {
-						WeakReference<IRoutingDataUpdateListener> ref = it.next();
+					for (WeakReference<IRoutingDataUpdateListener> ref : tmp) {
 						IRoutingDataUpdateListener l = ref.get();
-						if (l == null) {
-							it.remove();
-						} else {
+						if (l != null) {
 							l.onRoutingDataUpdate();
 						}
-						updateListeners = tmp;
 					}
 				}
 			} else {

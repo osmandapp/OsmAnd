@@ -25,8 +25,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -1961,11 +1959,11 @@ public class OsmandAidlApi {
 			}
 		};
 		navUpdateCallbacks.put(id, listener);
-		app.getRoutingHelper().addDataUpdateListener(listener);
+		app.getRoutingHelper().addRouteDataListener(listener);
 	}
 
 	public void unregisterFromUpdates(long id) {
-		app.getRoutingHelper().removeDataUpdateListener(navUpdateCallbacks.get(id));
+		app.getRoutingHelper().removeRouteDataListener(navUpdateCallbacks.get(id));
 		navUpdateCallbacks.remove(id);
 	}
 
