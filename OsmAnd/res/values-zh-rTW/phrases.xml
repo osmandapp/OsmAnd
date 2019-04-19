@@ -3559,4 +3559,22 @@
     <string name="poi_generator_source_biomass">能源：生物能</string>
     <string name="poi_health_specialty_radiotheraphy_yes">放射治療</string>
     <string name="poi_hazard">危險</string>
+    <string name="poi_rtsa_scale_filter">難度分類</string>
+    <string name="poi_health_specialty_radiotherapy_yes">放射治療</string>
+    <string name="poi_rtsa_scale_nc">н/к</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
+    <string name="poi_rtsa_scale_1a">1А</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
+    <string name="poi_rtsa_scale_1b">1Б</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
+    <string name="poi_rtsa_scale_2a">2А</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
+    <string name="poi_rtsa_scale_2b">2Б</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
+    <string name="poi_rtsa_scale_3a">3А</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
+    <string name="poi_rtsa_scale_3b">3Б</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
+    <string name="poi_flare">燃燒塔</string>
+    <string name="poi_change_delete">已刪除的物件</string>
 </resources>
