@@ -2,7 +2,6 @@ package net.osmand.plus.profiles;
 
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -85,9 +84,14 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void editProfile(ApplicationMode item) {
-				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
+				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 				intent.putExtra("stringKey", item.getStringKey());
 				intent.putExtra("isNew", false);
+				if (!item.getUserProfileTitle().isEmpty()) {
+					intent.putExtra("isUserProfile", true);
+				} else {
+					intent.putExtra("isUserProfile", false);
+				}
 				startActivity(intent);
 			}
 		};
@@ -96,8 +100,9 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onSelectedType(int pos) {
 				LOG.debug("Base profile: " + baseProfiles.get(pos).getName());
-				Intent intent = new Intent(getActivity(), SelectedProfileActivity.class);
+				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 				intent.putExtra("isNew", true);
+				intent.putExtra("isUserProfile", true);
 				intent.putExtra("stringKey", baseProfiles.get(pos).getStringKey());
 				startActivity(intent);
 			}

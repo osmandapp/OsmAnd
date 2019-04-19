@@ -191,6 +191,11 @@ public class ApplicationMode {
 			applicationMode.offRouteDistance = offRouteDistance;
 			return this;
 		}
+
+		public ApplicationModeBuilder userProfileTitle(String userProfileTitle) {
+			applicationMode.userProfileTitle = userProfileTitle;
+			return this;
+		}
 	}
 
 	private static ApplicationModeBuilder create(int key, String stringKey) {
@@ -200,7 +205,7 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationModeBuilder createCustomMode(String userProfileTitle, String stringKey) {
-		return create(-1, stringKey);
+		return create(-1, stringKey).userProfileTitle(userProfileTitle);
 	}
 
 	private ApplicationMode(int key, String stringKey) {
@@ -408,18 +413,6 @@ public class ApplicationMode {
 
 	public int getOffRouteDistance() {
 		return offRouteDistance;
-	}
-
-	public void setUserProfileTitle(String userProfileTitle) {
-		this.userProfileTitle = userProfileTitle;
-	}
-
-	public void setMapIconId(int mapIconId) {
-		this.mapIconId = mapIconId;
-	}
-
-	public void setSmallIconDark(int smallIconDark) {
-		this.smallIconDark = smallIconDark;
 	}
 
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {

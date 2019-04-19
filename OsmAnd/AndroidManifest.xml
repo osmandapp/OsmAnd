@@ -1066,7 +1066,7 @@
       android:name=".profiles.SettingsProfileActivity"/>
 
 
-    <activity android:name=".profiles.SelectedProfileActivity"
+    <activity android:name=".profiles.EditProfileActivity"
         android:label="Application profiles"
         />
 
