@@ -42,6 +42,7 @@ import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -75,6 +76,8 @@ import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.routing.IRoutingDataUpdateListener;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -83,6 +86,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -117,9 +121,13 @@ import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERRO
 import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 public class OsmandAidlApi {
+
+	AidlCallbackListener aidlCallbackListener = null;
+
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
 	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
@@ -1918,7 +1926,50 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
 
-	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	private Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
+
+	void registerForNavigationUpdates(long id) {
+		final ADirectionInfo directionInfo = new ADirectionInfo(-1, -1, false);
+		final NextDirectionInfo baseNdi = new NextDirectionInfo();
+		IRoutingDataUpdateListener listener = new IRoutingDataUpdateListener() {
+			@Override
+			public void onRoutingDataUpdate() {
+				RoutingHelper rh = app.getRoutingHelper();
+				if (rh.isDeviatedFromRoute()) {
+					directionInfo.setTurnType(TurnType.OFFR);
+					directionInfo.setDistanceTo((int) rh.getRouteDeviation());
+				} else {
+					NextDirectionInfo ndi = rh.getNextRouteDirectionInfo(baseNdi, true);
+					if (ndi != null && ndi.distanceTo > 0 && ndi.directionInfo != null) {
+						directionInfo.setDistanceTo(ndi.distanceTo);
+						directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
+					}
+				}
+				if (aidlCallbackListener != null) {
+					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
+						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
+							try {
+								cb.getCallback().updateNavigationInfo(directionInfo);
+							} catch (Exception e) {
+								LOG.debug(e.getMessage(), e);
+							}
+						}
+					}
+				}
+			}
+		};
+		navUpdateCallbacks.put(id, listener);
+		app.getRoutingHelper().addRouteDataListener(listener);
+	}
+
+	public void unregisterFromUpdates(long id) {
+		app.getRoutingHelper().removeRouteDataListener(navUpdateCallbacks.get(id));
+		navUpdateCallbacks.remove(id);
+	}
+
+
+	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
+		final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
@@ -1975,6 +2026,7 @@ public class OsmandAidlApi {
 	}
 
 	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
+
 
 	private class FileCopyInfo {
 		long startTime;
@@ -2103,6 +2155,8 @@ public class OsmandAidlApi {
 		}
 	}
 
+
+
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
@@ -2179,6 +2233,7 @@ public class OsmandAidlApi {
 	}
 
 	public interface OsmandAppInitCallback {
-    void onAppInitialized();
-  }
+		void onAppInitialized();
+	}
+
 }

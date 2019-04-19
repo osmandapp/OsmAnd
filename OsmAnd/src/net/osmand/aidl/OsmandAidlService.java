@@ -10,6 +10,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
@@ -50,6 +52,7 @@ import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidl.navigation.ANavigationUpdateParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
@@ -75,24 +78,27 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static net.osmand.aidl.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
 import static net.osmand.aidl.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.UNKNOWN_API_ERROR;
 
-public class OsmandAidlService extends Service {
+public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
-	private Map<Long, IOsmAndAidlCallback> callbacks;
+	public static final int KEY_ON_UPDATE = 1;
+	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
+
+	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
-	private long updateCallbackId = 0;
+	private final AtomicLong aidlCallbackId = new AtomicLong(0);
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -121,14 +127,52 @@ public class OsmandAidlService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		callbacks = new ConcurrentHashMap<>();
+		OsmandAidlApi api = getApi("setting_listener");
+		if(api != null) {
+			api.aidlCallbackListener = this;
+		}
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		mHandlerThread.quit();
+
 		callbacks.clear();
+		OsmandAidlApi api = getApi("clear_listener");
+		if(api != null) {
+			api.aidlCallbackListener = null;
+		}
+		mHandlerThread.quit();
+	}
+
+	private long getCallbackId() {
+		return aidlCallbackId.get();
+	}
+
+	private long getAndIncrementCallbackId() {
+		return aidlCallbackId.getAndIncrement();
+	}
+
+	@Override
+	public long addAidlCallback(IOsmAndAidlCallback callback, int key) {
+		callbacks.put(getAndIncrementCallbackId(), new AidlCallbackParams(callback, key));
+		return getCallbackId();
+	}
+
+	@Override
+	public boolean removeAidlCallback(long id) {
+		for (Long key : callbacks.keySet()) {
+			if (key == id) {
+				callbacks.remove(id);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Map<Long, AidlCallbackParams> getAidlCallbacks() {
+		return callbacks;
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
@@ -716,10 +760,9 @@ public class OsmandAidlService extends Service {
 		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) {
 			try {
 				if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
-					updateCallbackId++;
-					callbacks.put(updateCallbackId, callback);
-					startRemoteUpdates(updateTimeMS, updateCallbackId, callback);
-					return updateCallbackId;
+					long id = addAidlCallback(callback, KEY_ON_UPDATE);
+					startRemoteUpdates(updateTimeMS, id, callback);
+					return getCallbackId();
 				} else {
 					return MIN_UPDATE_TIME_MS_ERROR;
 				}
@@ -732,7 +775,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean unregisterFromUpdates(long callbackId) {
 			try {
-				return callbacks.remove(callbackId) != null;
+				return removeAidlCallback(callbackId);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -992,5 +1035,58 @@ public class OsmandAidlService extends Service {
 				return UNKNOWN_API_ERROR;
 			}
 		}
+
+		@Override
+		public long registerForNavigationUpdates(ANavigationUpdateParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForNavUpdates");
+				if (api != null ) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromUpdates(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
+						api.registerForNavigationUpdates(id);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
 	};
+
+
+	public static class AidlCallbackParams {
+		private IOsmAndAidlCallback callback;
+		private long key;
+
+		AidlCallbackParams(IOsmAndAidlCallback callback, long key) {
+			this.callback = callback;
+
+			this.key = key;
+		}
+
+		public IOsmAndAidlCallback getCallback() {
+			return callback;
+		}
+
+		public void setCallback(IOsmAndAidlCallback callback) {
+			this.callback = callback;
+		}
+
+		public long getKey() {
+			return key;
+		}
+
+		public void setKey(long key) {
+			this.key = key;
+		}
+	}
+
+
 }
