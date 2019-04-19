@@ -3578,4 +3578,5 @@
     <string name="poi_flare">Explosão de gás;Queimador de gás</string>
     <string name="poi_change_delete">Objeto excluído</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
+    <string name="poi_rescue_box"></string>
 </resources>
