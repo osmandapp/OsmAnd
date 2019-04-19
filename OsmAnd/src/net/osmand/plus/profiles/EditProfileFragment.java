@@ -3,6 +3,7 @@ package net.osmand.plus.profiles;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -19,8 +20,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -31,12 +36,14 @@ import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDial
 import net.osmand.plus.profiles.SelectIconBottomSheetDialogFragment.IconIdListener;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.util.Algorithms;
+import net.sf.junidecode.App;
 import org.apache.commons.logging.Log;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class SelectedProfileFragment extends BaseOsmAndFragment {
+public class EditProfileFragment extends BaseOsmAndFragment {
 
-	private static final Log LOG = PlatformUtil.getLog(SelectedProfileFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(EditProfileFragment.class);
 
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
 	public static final String MAP_CONFIG = "openMapConfigMenu";
@@ -44,16 +51,14 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 	public static final String SCREEN_CONFIG = "openScreenConfigMenu";
 	public static final String SELECTED_PROFILE = "editedProfile";
 
-
-
-	ApplicationMode profile = null;
-	ApplicationMode parent = null;
+	TempApplicationProfile profile = null;
 	ArrayList<RoutingProfile> routingProfiles;
 	OsmandApplication app;
 	RoutingProfile selectedRoutingProfile = null;
 	float defSpeed = 0f;
 
 	private boolean isNew = false;
+	private boolean isUserProfile = false;
 	private boolean isDataChanged = false;
 
 	private ProfileTypeDialogListener profileTypeDialogListener = null;
@@ -65,12 +70,11 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		app = getMyApplication();
 		if (getArguments() != null) {
 			String modeName = getArguments().getString("stringKey", "car");
-			if (!getArguments().getBoolean("isNew", true)) {
-				profile = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.CAR);
-			} else {
-				isNew = true;
-				parent = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.CAR);
-			}
+			isNew = getArguments().getBoolean("isNew", false);
+			isUserProfile = getArguments().getBoolean("isUserProfile", false);
+			profile = new TempApplicationProfile(
+				ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT), isNew);
+			LOG.debug("Name: " + modeName + ",  ");
 		}
 		routingProfiles = getRoutingProfiles();
 	}
@@ -99,44 +103,63 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
 		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn
 			.getBackground();
-		if(isNew) {
-			profileIcon.setImageDrawable(app.getUIUtilities().getIcon(parent.getSmallIconDark(),
-				isNightMode ? R.color.active_buttons_and_links_dark
-					: R.color.active_buttons_and_links_light));
-		} else {
-			profileIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.getSmallIconDark(),
-				isNightMode ? R.color.active_buttons_and_links_dark
-					: R.color.active_buttons_and_links_light));
-		}
+
+
 
 		if (isNightMode) {
-			profileNameTextBox
-				.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
-			navTypeTextBox
-				.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
-			selectIconBtnBackground
-				.setColor(app.getResources().getColor(R.color.text_field_box_dark));
+			profileNameTextBox.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+			navTypeTextBox.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_dark));
 		} else {
-			selectIconBtnBackground
-				.setColor(app.getResources().getColor(R.color.text_field_box_light));
+			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_light));
 		}
+
+		String title = "New Profile";
+		int startIconId = R.drawable.map_world_globe_dark;
+		LOG.debug("isUserProfile = " + isUserProfile);
+		LOG.debug("isNew = " + isNew);
+		if (isUserProfile && !isNew) {
+			title = profile.getUserProfileTitle();
+			profileNameEt.setText(title);
+			startIconId = profile.iconId;
+		} else if (isNew) {
+			title = String.format("%s (new)", getResources().getString(profile.parent.getStringResource()));
+			profileNameEt.setText(title);
+			startIconId = profile.getParent().getSmallIconDark();
+		} else if (profile.getKey() != -1){
+			title = getResources().getString(profile.getKey());
+			profileNameEt.setText(profile.getKey());
+			startIconId = profile.getIconId();
+		}
+
+		profileNameEt.clearFocus();
+
+		if (getActivity() != null && ((EditProfileActivity) getActivity()).getSupportActionBar() != null) {
+			((EditProfileActivity) getActivity()).getSupportActionBar().setTitle(title);
+			((EditProfileActivity) getActivity()).getSupportActionBar().setElevation(5.0f);
+		}
+
+		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId,
+			isNightMode ? R.color.active_buttons_and_links_dark
+				: R.color.active_buttons_and_links_light));
 
 		profileTypeDialogListener = new ProfileTypeDialogListener() {
 			@Override
 			public void onSelectedType(int pos) {
 				selectedRoutingProfile = routingProfiles.get(pos);
 				navTypeEt.setText(selectedRoutingProfile.getName());
+				profile.setRoutingProfile(selectedRoutingProfile);
 			}
 		};
 
 		iconIdListener = new IconIdListener() {
 			@Override
 			public void selectedIconId(int iconRes) {
-				profile.setMapIconId(iconRes);
-				profile.setSmallIconDark(iconRes);
+				profile.setIconId(iconRes);
 				profileIcon.setImageDrawable(app.getUIUtilities().getIcon(iconRes,
 					isNightMode ? R.color.active_buttons_and_links_dark
 						: R.color.active_buttons_and_links_light));
+				profile.setIconId(iconRes);
 			}
 		};
 
@@ -157,6 +180,7 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 					ActionBar actionBar = ((OsmandActionBarActivity) getActivity()).getSupportActionBar();
 					if (actionBar != null) {
 						actionBar.setTitle(s.toString());
+						profile.setUserProfileTitle(s.toString());
 					}
 				}
 			}
@@ -176,13 +200,10 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 						.commitAllowingStateLoss();
 				}
 
-
-//				navTypeEt.setText("Car");
-//				navTypeEt.setCursorVisible(false);
-//				navTypeEt.setTextIsSelectable(false);
-//				navTypeEt.clearFocus();
+				navTypeEt.setCursorVisible(false);
+				navTypeEt.setTextIsSelectable(false);
+				navTypeEt.clearFocus();
 				navTypeEt.requestFocus(ExtendedEditText.FOCUS_UP);
-//				LOG.debug("click on text");
 
 			}
 		});
@@ -193,7 +214,7 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 				final SelectIconBottomSheetDialogFragment iconSelectDialog = new SelectIconBottomSheetDialogFragment();
 				iconSelectDialog.setIconIdListener(iconIdListener);
 				Bundle bundle = new Bundle();
-				bundle.putInt("selectedIcon", profile.getSmallIconDark());
+				bundle.putInt("selectedIcon", profile.getIconId());
 				iconSelectDialog.setArguments(bundle);
 				if (getActivity() != null) {
 					getActivity().getSupportFragmentManager().beginTransaction()
@@ -260,11 +281,8 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String title = profileNameTextBox.getEditText().getText().toString();
-				if (ApplicationMode.allPossibleValues().contains(profile)) {
-					updateProfile();
-				} else {
-					saveNewProfile(title, parent, selectedRoutingProfile, defSpeed);
+				if (saveNewProfile(profile, selectedRoutingProfile)) {
+					getActivity().onBackPressed();
 				}
 			}
 		});
@@ -272,30 +290,56 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
-	private boolean saveNewProfile(
-		String userProfileTitle,
-		ApplicationMode profile,
-		RoutingProfile selectedRoutingProfile,
-		float defSpeed) {
+	private boolean saveNewProfile(TempApplicationProfile profile, RoutingProfile selectedRoutingProfile) {
+		//todo check if profile exists
+		List<ApplicationMode> copyAllModes = new ArrayList<>(ApplicationMode.allPossibleValues());
+		List<ApplicationMode> copyAllAvailableModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
+		Iterator<ApplicationMode> it = copyAllModes.iterator();
+		while (it.hasNext()) {
+			ApplicationMode am = it.next();
+			if (am.getStringKey().equals(profile.stringKey)) {
+				if (ApplicationMode.values(getMyApplication()).contains(am)) {
+					//todo unregister mode from available
+				}
+				it.remove();
+			}
+		}
 
-
-		String customStringKey = profile.getParent().getStringKey() + "_" + userProfileTitle.hashCode();
+		String customStringKey = profile.getParent().getStringKey() + "_" + profile.userProfileTitle.hashCode();
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			if (mode.getStringKey().equals(customStringKey)) {
 				//todo notify user that there is already profile with such name
 				return false;
 			}
 		}
+		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
+			.createCustomMode(profile.userProfileTitle, customStringKey)
+			.parent(profile.parent)
+			.icon(profile.iconId, profile.iconId);
 
+		switch (profile.parent.getStringKey()) {
+			case "car":
+			case "aircraft":
+				builder.carLocation();
+				break;
+			case "bicicle":
+				builder.bicycleLocation();
+				break;
+			case "boat":
+				builder.nauticalLocation();
+				break;
+		}
 
-		ApplicationMode.createCustomMode(userProfileTitle, customStringKey);
+		builder.customReg();
+
 		//todo build profile, save and register:
 
 		return true;
 	}
 
-	private void updateProfile() {
-
+	private boolean updateProfile() {
+		//todo implement update;
+		return false;
 	}
 
 	/**
@@ -332,5 +376,73 @@ public class SelectedProfileFragment extends BaseOsmAndFragment {
 				.add(new RoutingProfile(name, getResources().getString(R.string.osmand_default_routing), iconRes, false));
 		}
 		return routingProfiles;
+	}
+
+
+	private class TempApplicationProfile {
+		int key = -1;
+		String stringKey = "";
+		String userProfileTitle = "";
+		ApplicationMode parent = null;
+		int iconId = R.drawable.map_world_globe_dark;
+		float defaultSpeed = 10f;   //todo use default or what?
+		int minDistanceForTurn = 50; //todo use default or what?
+		RoutingProfile routingProfile = null;
+
+		TempApplicationProfile(ApplicationMode mode, boolean isNew) {
+			if (isNew ) {
+				stringKey = "new_" + mode.getStringKey();
+				parent = mode;
+			} else if (isUserProfile) {
+				stringKey = mode.getStringKey();
+				parent = getParent();
+				iconId = mode.getSmallIconDark();
+				userProfileTitle = mode.getUserProfileTitle();
+			} else {
+				key = mode.getStringResource();
+				stringKey = mode.getStringKey();
+				iconId = mode.getSmallIconDark();
+			}
+		}
+
+		public RoutingProfile getRoutingProfile() {
+			return routingProfile;
+		}
+
+		public ApplicationMode getParent() {
+			return parent;
+		}
+
+		public int getKey() {
+			return key;
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+
+		public String getStringKey() {
+			return stringKey;
+		}
+
+		public String getUserProfileTitle() {
+			return userProfileTitle;
+		}
+
+		public void setStringKey(String stringKey) {
+			this.stringKey = stringKey;
+		}
+
+		public void setUserProfileTitle(String userProfileTitle) {
+			this.userProfileTitle = userProfileTitle;
+		}
+
+		public void setIconId(int iconId) {
+			this.iconId = iconId;
+		}
+
+		public void setRoutingProfile(RoutingProfile routingProfile) {
+			this.routingProfile = routingProfile;
+		}
 	}
 }

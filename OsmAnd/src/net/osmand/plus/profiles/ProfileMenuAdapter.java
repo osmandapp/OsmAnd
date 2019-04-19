@@ -63,7 +63,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
 		final ApplicationMode item = items.get(position);
 		if (item.getParent() != null) {
-			holder.descr.setText(String.format("Type: %s", item.getParent().getStringKey()));
+			holder.title.setText(item.getUserProfileTitle());
+			holder.descr.setText(String.format("Type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getStringKey().replace("_", " "))));
 		} else {
 			holder.title.setText(app.getResources().getString(item.getStringResource()));
 			holder.descr.setText(String.format("Type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getStringKey().replace("_", " "))));

@@ -56,7 +56,7 @@ public class ApplicationMode {
 //
 //	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
 //			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
-
+	String profile = "profile: ";
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, PUBLIC_TRANSPORT};
 		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, PUBLIC_TRANSPORT};
@@ -104,8 +104,6 @@ public class ApplicationMode {
 
 
 	public static class ApplicationModeBuilder {
-
-
 		private ApplicationMode applicationMode;
 
 		public ApplicationMode reg() {
@@ -125,6 +123,29 @@ public class ApplicationMode {
 			return this;
 		}
 
+
+		public ApplicationModeBuilder parent(ApplicationMode parent) {
+			applicationMode.parent = parent;
+			return this;
+		}
+
+		/**
+		 * @param type - id of set of icons for different navigation styles:
+		 *               1 - car, 2 - bicicle, 3 - nautical, any other - default
+		 */
+		public ApplicationModeBuilder setLocationAndBearingIcons(int type) {
+			switch (type) {
+				case 1:
+					return this.carLocation();
+				case 2:
+					return this.bicycleLocation();
+				case 3:
+					return this.nauticalLocation();
+				default:
+					return this.defLocation();
+			}
+		}
+
 		public ApplicationModeBuilder carLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
@@ -134,11 +155,6 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_car_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
-			return this;
-		}
-
-		public ApplicationModeBuilder parent(ApplicationMode parent) {
-			applicationMode.parent = parent;
 			return this;
 		}
 
@@ -191,7 +207,14 @@ public class ApplicationMode {
 			applicationMode.offRouteDistance = offRouteDistance;
 			return this;
 		}
+
+		public ApplicationModeBuilder userProfileTitle(String userProfileTitle) {
+			applicationMode.userProfileTitle = userProfileTitle;
+			return this;
+		}
 	}
+
+
 
 	private static ApplicationModeBuilder create(int key, String stringKey) {
 		ApplicationModeBuilder builder = new ApplicationModeBuilder();
@@ -200,7 +223,7 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationModeBuilder createCustomMode(String userProfileTitle, String stringKey) {
-		return create(-1, stringKey);
+		return create(-1, stringKey).userProfileTitle(userProfileTitle);
 	}
 
 	private ApplicationMode(int key, String stringKey) {
@@ -408,18 +431,6 @@ public class ApplicationMode {
 
 	public int getOffRouteDistance() {
 		return offRouteDistance;
-	}
-
-	public void setUserProfileTitle(String userProfileTitle) {
-		this.userProfileTitle = userProfileTitle;
-	}
-
-	public void setMapIconId(int mapIconId) {
-		this.mapIconId = mapIconId;
-	}
-
-	public void setSmallIconDark(int smallIconDark) {
-		this.smallIconDark = smallIconDark;
 	}
 
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {

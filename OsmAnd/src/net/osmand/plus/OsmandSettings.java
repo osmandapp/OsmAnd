@@ -842,6 +842,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference("available_application_modes", "car,bicycle,pedestrian,public_transport,").makeGlobal().cache();
 
+//	public final OsmandPreference<List<String>> CUSTOM_APP_MODES = new ListStringPreference()
+
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference("last_fav_category", "").makeGlobal();
 
 
