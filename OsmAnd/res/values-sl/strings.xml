@@ -1500,7 +1500,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="agps_info">Podrobnosti A-GPS</string>
     <string name="shared_string_manage">Upravljaj</string>
     <string name="shared_string_edit">Uredi</string>
-    <string name="shared_string_search">Poišči</string>
+    <string name="shared_string_search">Iskanje</string>
     <string name="shared_string_show_description">Pokaži opis.</string>
     <string name="agps_data_last_downloaded">Zadnja osvežitev podatkov A-GPS: %1$s</string>
     <string name="confirm_usage_speed_cameras">V mnogih državah (na primer v Nemčiji, Franciji, Italiji in drugih) je uporaba kamer za merjenje hitrosti prepovedana z zakonom. Razvijalci programa ne sprejemamo odgovornosti za tako rabo. Potrdite uporabo le, če ste res prepričani v svoje ravnanje.</string>
@@ -3016,4 +3016,5 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n• Prikaz azimuta pri merjenju razdalje
 \n
 \n</string>
+    <string name="send_log">Pošlji dnevnik</string>
 </resources>
