@@ -75,6 +75,8 @@ public class RouteInfoCard extends BaseCard {
 		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 9, 24, true, nightMode);
+		chart.setExtraRightOffset(16);
+		chart.setExtraLeftOffset(16);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, routeStatistics, analysis, true, nightMode);
 		chart.setData(barData);
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
