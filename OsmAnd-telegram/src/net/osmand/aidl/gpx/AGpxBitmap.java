@@ -21,10 +21,6 @@ public class AGpxBitmap implements Parcelable {
 		return bitmap;
 	}
 
-	public void setBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
-	}
-
 	public static final Creator<AGpxBitmap> CREATOR = new
 			Creator<AGpxBitmap>() {
 				public AGpxBitmap createFromParcel(Parcel in) {
