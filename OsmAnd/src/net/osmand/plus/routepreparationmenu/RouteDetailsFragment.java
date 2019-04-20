@@ -35,6 +35,8 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.renderer.HorizontalBarChartRenderer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
@@ -120,10 +122,23 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private RouteDetailsFragmentListener routeDetailsListener;
 	private RouteStatisticCard statisticCard;
 	private List<RouteInfoCard> routeInfoCards = new ArrayList<>();
-	private TrackDetailsMenu trackDetailsMenu;
+	private RouteDetailsMenu routeDetailsMenu;
 
 	public interface RouteDetailsFragmentListener {
 		void onNavigationRequested();
+	}
+
+	private class RouteDetailsMenu extends TrackDetailsMenu {
+
+		@Override
+		protected int getFragmentWidth() {
+			return getWidth();
+		}
+
+		@Override
+		protected int getFragmentHeight() {
+			return getMenuFullHeight();
+		}
 	}
 
 	@Override
@@ -186,8 +201,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && isPortrait()) {
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.GONE);
-			if (trackDetailsMenu != null) {
-				trackDetailsMenu.setMapActivity(mapActivity);
+			if (routeDetailsMenu != null) {
+				routeDetailsMenu.setMapActivity(mapActivity);
 			}
 		}
 	}
@@ -197,8 +212,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && isPortrait()) {
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.VISIBLE);
-			if (trackDetailsMenu != null) {
-				trackDetailsMenu.setMapActivity(null);
+			if (routeDetailsMenu != null) {
+				routeDetailsMenu.setMapActivity(null);
 			}
 		}
 		super.onPause();
@@ -376,17 +391,24 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				addRouteCard(cardsContainer, routeSmoothnessCard);
 			}
 		}
-		trackDetailsMenu = new TrackDetailsMenu();
+		routeDetailsMenu = new RouteDetailsMenu();
 		GpxDisplayItem gpxItem = statisticCard.getGpxItem();
 		if (gpxItem != null) {
-			trackDetailsMenu.setGpxItem(gpxItem);
+			routeDetailsMenu.setGpxItem(gpxItem);
 		}
-		trackDetailsMenu.setMapActivity(mapActivity);
+		routeDetailsMenu.setMapActivity(mapActivity);
 		LineChart chart = statisticCard.getChart();
 		if (chart != null) {
 			chart.setExtraRightOffset(16);
 			chart.setExtraLeftOffset(16);
-			trackDetailsMenu.refreshChart(chart, true);
+		}
+	}
+
+	@Override
+	protected void calculateLayout(View view, boolean initLayout) {
+		super.calculateLayout(view, initLayout);
+		if (!initLayout && getCurrentMenuState() != MenuState.FULL_SCREEN) {
+			refreshChart(false);
 		}
 	}
 
@@ -1644,12 +1666,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
-	private void refreshChart() {
+	private void refreshChart(boolean forceFit) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && trackDetailsMenu != null && statisticCard != null) {
+		if (mapActivity != null && routeDetailsMenu != null && statisticCard != null &&
+				!mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
 			LineChart chart = statisticCard.getChart();
 			if (chart != null) {
-				trackDetailsMenu.refreshChart(chart, false);
+				routeDetailsMenu.refreshChart(chart, forceFit);
 				mapActivity.refreshMap();
 			}
 		}
@@ -1670,13 +1693,30 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public void onValueSelected(BaseCard card, Entry e, Highlight h) {
-		refreshChart();
+		refreshChart(false);
 		highlightRouteInfoCharts(h);
 	}
 
 	@Override
 	public void onNothingSelected(BaseCard card) {
 		highlightRouteInfoCharts(null);
+	}
+
+	@Override
+	public void onChartGestureStart(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture) {
+	}
+
+	@Override
+	public void onChartGestureEnd(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture, boolean hasTranslated) {
+		if ((lastPerformedGesture == ChartGesture.DRAG && hasTranslated) ||
+				lastPerformedGesture == ChartGesture.X_ZOOM ||
+				lastPerformedGesture == ChartGesture.Y_ZOOM ||
+				lastPerformedGesture == ChartGesture.PINCH_ZOOM ||
+				lastPerformedGesture == ChartGesture.DOUBLE_TAP ||
+				lastPerformedGesture == ChartGesture.ROTATE) {
+
+			refreshChart(true);
+		}
 	}
 
 	public static class CumulativeInfo {
