@@ -211,4 +211,8 @@
     <string name="si_nm">Морские мили</string>
     <string name="si_mi_meters">Мили/метры</string>
     <string name="timeline">Хронология</string>
+    <string name="search_contacts">Искать контакты</string>
+    <string name="search_contacts_descr">Поиск среди всех ваших групп и контактов.</string>
+    <string name="type_contact_or_group_name">Введите контакт или название группы</string>
+    <string name="shared_string_search">Поиск</string>
 </resources>
