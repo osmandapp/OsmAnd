@@ -36,4 +36,6 @@ interface IOsmAndAidlCallback {
      *  @return directionInfo - update on distance to next turn and turns type.
      */
     void updateNavigationInfo(in ADirectionInfo directionInfo);
+
+    void onContextMenuButtonClicked(in int buttonId, String pointId, String layerId);
 }

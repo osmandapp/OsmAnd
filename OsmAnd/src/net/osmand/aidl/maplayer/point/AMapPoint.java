@@ -20,17 +20,19 @@ public class AMapPoint implements Parcelable {
 	private String shortName;
 	private String fullName;
 	private String typeName;
+	private String layerId;
 	private int color;
 	private ALatLon location;
 	private List<String> details = new ArrayList<>();
 	private Map<String, String> params = new HashMap<>();
 
-	public AMapPoint(String id, String shortName, String fullName, String typeName, int color,
-					 ALatLon location, List<String> details, Map<String, String> params) {
+	public AMapPoint(String id, String shortName, String fullName, String typeName,  String layerId,
+	                 int color, ALatLon location, List<String> details, Map<String, String> params) {
 		this.id = id;
 		this.shortName = shortName;
 		this.fullName = fullName;
 		this.typeName = typeName;
+		this.layerId = layerId;
 		this.color = color;
 		this.location = location;
 		if (details != null) {
@@ -72,6 +74,10 @@ public class AMapPoint implements Parcelable {
 		return typeName;
 	}
 
+	public String getLayerId() {
+		return layerId;
+	}
+
 	public int getColor() {
 		return color;
 	}
@@ -93,6 +99,7 @@ public class AMapPoint implements Parcelable {
 		out.writeString(shortName);
 		out.writeString(fullName);
 		out.writeString(typeName);
+		out.writeString(layerId);
 		out.writeInt(color);
 		out.writeParcelable(location, flags);
 		out.writeStringList(details);
@@ -104,6 +111,7 @@ public class AMapPoint implements Parcelable {
 		shortName = in.readString();
 		fullName = in.readString();
 		typeName = in.readString();
+		layerId = in.readString();
 		color = in.readInt();
 		location = in.readParcelable(ALatLon.class.getClassLoader());
 		in.readStringList(details);

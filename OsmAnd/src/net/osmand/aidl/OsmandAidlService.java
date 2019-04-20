@@ -10,13 +10,15 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
-import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
+import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
+import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
 import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.favorite.AddFavoriteParams;
@@ -93,6 +95,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 	public static final int KEY_ON_UPDATE = 1;
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
+	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
 
 	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
@@ -360,7 +363,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean updateMapPoint(UpdateMapPointParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapPoint");
-				return params != null && api != null && api.putMapPoint(params.getLayerId(), params.getPoint());
+				return params != null && api != null && api.updateMapPoint(params.getLayerId(), params.getPoint(), params.isUpdateOpenedMenuAndMap());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1058,8 +1061,58 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				return UNKNOWN_API_ERROR;
 			}
 		}
-	};
 
+		@Override
+		public long addContextMenuButtons(ContextMenuButtonsParams params, final IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("addContextMenuButtons");
+				if (api != null && params != null) {
+					long callbackId = params.getCallbackId();
+					if (callbackId == -1 || !callbacks.containsKey(callbackId)) {
+						callbackId = addAidlCallback(callback, KEY_ON_CONTEXT_MENU_BUTTONS_CLICK);
+						params.setCallbackId(callbackId);
+					}
+					boolean buttonsAdded = api.addContextMenuButtons(params, callbackId);
+					return buttonsAdded ? callbackId : -1;
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public boolean removeContextMenuButtons(RemoveContextMenuButtonsParams params) {
+			try {
+				OsmandAidlApi api = getApi("removeContextMenuButtons");
+				if (params != null && api != null) {
+					long callbackId = params.getCallbackId();
+					removeAidlCallback(callbackId);
+					return api.removeContextMenuButtons(params.getParamsId(), callbackId);
+				}
+				return false;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean updateContextMenuButtons(UpdateContextMenuButtonsParams params) {
+			try {
+				OsmandAidlApi api = getApi("updateContextMenuButtons");
+				if (params != null && api != null) {
+					ContextMenuButtonsParams buttonsParams = params.getContextMenuButtonsParams();
+					return api.updateContextMenuButtons(buttonsParams, buttonsParams.getCallbackId());
+				}
+				return false;
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+	};
 
 	public static class AidlCallbackParams {
 		private IOsmAndAidlCallback callback;
