@@ -338,14 +338,13 @@ public class TrackDetailsMenu {
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 
-			TrackDetailsMenuFragment fragment = getMenuFragment();
-			if (fragment != null) {
-				boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-				if (!portrait) {
-					tileBoxWidthPx = tb.getPixWidth() - fragment.getWidth();
-				} else {
-					tileBoxHeightPx = tb.getPixHeight() - fragment.getHeight();
-				}
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			if (!portrait) {
+				int width = getFragmentWidth();
+				tileBoxWidthPx = width != -1 ? tb.getPixWidth() - width : 0;
+			} else {
+				int height = getFragmentHeight();
+				tileBoxHeightPx = height != -1 ? tb.getPixHeight() - height : 0;
 			}
 			if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
 				if (forceFit) {
@@ -361,6 +360,22 @@ public class TrackDetailsMenu {
 				}
 			}
 		}
+	}
+
+	protected int getFragmentWidth() {
+		TrackDetailsMenuFragment fragment = getMenuFragment();
+		if (fragment != null) {
+			return fragment.getWidth();
+		}
+		return -1;
+	}
+
+	protected int getFragmentHeight() {
+		TrackDetailsMenuFragment fragment = getMenuFragment();
+		if (fragment != null) {
+			return fragment.getHeight();
+		}
+		return -1;
 	}
 
 	public void refreshChart(LineChart chart, boolean forceFit) {

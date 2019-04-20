@@ -1,7 +1,11 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import android.view.MotionEvent;
+
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 
 public interface CardChartListener {
 	/**
@@ -17,4 +21,8 @@ public interface CardChartListener {
 	 * Called when nothing has been selected or an "un-select" has been made.
 	 */
 	void onNothingSelected(BaseCard card);
+
+	void onChartGestureStart(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture);
+
+	void onChartGestureEnd(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture, boolean hasTranslated);
 }

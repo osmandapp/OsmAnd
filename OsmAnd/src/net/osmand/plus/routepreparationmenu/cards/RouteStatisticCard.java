@@ -278,15 +278,20 @@ public class RouteStatisticCard extends BaseCard {
 			});
 
 			mChart.setOnChartGestureListener(new OnChartGestureListener() {
-
+				boolean hasTranslated = false;
 				float highlightDrawX = -1;
 
 				@Override
 				public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+					hasTranslated = false;
 					if (mChart.getHighlighted() != null && mChart.getHighlighted().length > 0) {
 						highlightDrawX = mChart.getHighlighted()[0].getDrawX();
 					} else {
 						highlightDrawX = -1;
+					}
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartGestureStart(RouteStatisticCard.this, me, lastPerformedGesture);
 					}
 				}
 
@@ -298,6 +303,10 @@ public class RouteStatisticCard extends BaseCard {
 						gpxItem.chartHighlightPos = highlights[0].getX();
 					} else {
 						gpxItem.chartHighlightPos = -1;
+					}
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartGestureEnd(RouteStatisticCard.this, me, lastPerformedGesture, hasTranslated);
 					}
 				}
 
@@ -323,6 +332,7 @@ public class RouteStatisticCard extends BaseCard {
 
 				@Override
 				public void onChartTranslate(MotionEvent me, float dX, float dY) {
+					hasTranslated = true;
 					if (highlightDrawX != -1) {
 						Highlight h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
 						if (h != null) {
