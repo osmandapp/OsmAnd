@@ -22,6 +22,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.MPPointD;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -287,10 +288,6 @@ public class RouteStatisticCard extends BaseCard {
 					} else {
 						highlightDrawX = -1;
 					}
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartGestureStart(RouteStatisticCard.this, me, lastPerformedGesture);
-					}
 				}
 
 				@Override
@@ -302,64 +299,43 @@ public class RouteStatisticCard extends BaseCard {
 					} else {
 						gpxItem.chartHighlightPos = -1;
 					}
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartGestureEnd(RouteStatisticCard.this, me, lastPerformedGesture);
-					}
 				}
 
 				@Override
 				public void onChartLongPressed(MotionEvent me) {
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartLongPressed(RouteStatisticCard.this, me);
-					}
 				}
 
 				@Override
 				public void onChartDoubleTapped(MotionEvent me) {
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartDoubleTapped(RouteStatisticCard.this, me);
-					}
 				}
 
 				@Override
 				public void onChartSingleTapped(MotionEvent me) {
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartSingleTapped(RouteStatisticCard.this, me);
-					}
 				}
 
 				@Override
 				public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartFling(RouteStatisticCard.this, me1, me2, velocityX, velocityY);
-					}
 				}
 
 				@Override
 				public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartScale(RouteStatisticCard.this, me, scaleX, scaleY);
-					}
 				}
 
 				@Override
 				public void onChartTranslate(MotionEvent me, float dX, float dY) {
-					Highlight h = null;
 					if (highlightDrawX != -1) {
-						h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
+						Highlight h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
 						if (h != null) {
-							mChart.highlightValue(h);
+							/*
+							ILineDataSet set = mChart.getLineData().getDataSetByIndex(h.getDataSetIndex());
+							if (set != null && set.isHighlightEnabled()) {
+								Entry e = set.getEntryForXValue(h.getX(), h.getY());
+								MPPointD pix = mChart.getTransformer(set.getAxisDependency()).getPixelForValues(e.getX(), e.getY());
+								h.setDraw((float) pix.x, (float) pix.y);
+							}
+							*/
+							mChart.highlightValue(h, true);
 						}
-					}
-					CardChartListener chartListener = getChartListener();
-					if (chartListener != null) {
-						chartListener.onChartTranslate(RouteStatisticCard.this, h, me, dX, dY);
 					}
 				}
 			});
