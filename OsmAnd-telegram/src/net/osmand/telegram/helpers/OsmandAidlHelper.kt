@@ -106,6 +106,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				gpxBitmapCreatedListener!!.onGpxBitmapCreated(bitmap)
 			}
 		}
+
+		override fun updateNavigationInfo(directionInfo: ADirectionInfo?) {
+
+		}
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
@@ -939,10 +943,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 
-	fun navigateSearch(startName: String, startLat: Double, startLon: Double, searchQuery: String, profile: String, force: Boolean): Boolean {
+	fun navigateSearch(startName: String, startLat: Double, startLon: Double, searchQuery: String, searchLat: Double, searchLon: Double, profile: String, force: Boolean): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.navigateSearch(NavigateSearchParams(startName, startLat, startLon, searchQuery, profile, force))
+				return mIOsmAndAidlInterface!!.navigateSearch(NavigateSearchParams(startName, startLat, startLon, searchQuery, searchLat, searchLon, profile, force))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
