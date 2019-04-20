@@ -212,4 +212,8 @@
     <string name="shared_string_appearance">Aspecto</string>
     <string name="show_gps_points">Mostrar puntos GPS</string>
     <string name="show_gps_points_descr">Muestra la cantidad de puntos GPS recibidos y enviados.</string>
+    <string name="search_contacts">Buscar contactos</string>
+    <string name="search_contacts_descr">Buscar en todos tus grupos y contactos.</string>
+    <string name="type_contact_or_group_name">Escriba el nombre del contacto o grupo</string>
+    <string name="shared_string_search">Buscar</string>
 </resources>
