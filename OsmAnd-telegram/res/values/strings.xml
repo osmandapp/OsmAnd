@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="direction">Direction</string>
+    <string name="precision">Precision</string>
+    <string name="altitude">Altitude</string>
+    <string name="bearing">Bearing</string>
     <string name="search_contacts">Search contacts</string>
     <string name="search_contacts_descr">Search across all of your groups and contacts.</string>
     <string name="type_contact_or_group_name">Type contact or group name</string>

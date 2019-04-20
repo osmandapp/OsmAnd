@@ -14,7 +14,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -1083,6 +1085,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TitleButtonController bottomTitleButtonController = menu.getBottomTitleButtonController();
 			TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
 			TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
+			List<Pair<TitleButtonController, TitleButtonController>> additionalButtonsControllers = menu.getAdditionalButtonsControllers();
 			TitleProgressController titleProgressController = menu.getTitleProgressController();
 
 			// Title buttons
@@ -1195,6 +1198,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				rightDownloadButtonView.setVisibility(View.INVISIBLE);
 			}
 
+			final LinearLayout additionalButtonsContainer = (LinearLayout) view.findViewById(R.id.additional_buttons_container);
+			if (additionalButtonsControllers != null && !additionalButtonsControllers.isEmpty()) {
+				additionalButtonsContainer.removeAllViews();
+				for (Pair<TitleButtonController, TitleButtonController> buttonControllers : additionalButtonsControllers) {
+					attachButtonsRow(additionalButtonsContainer, buttonControllers.first, buttonControllers.second);
+				}
+				additionalButtonsContainer.setVisibility(View.VISIBLE);
+			} else {
+				additionalButtonsContainer.setVisibility(View.GONE);
+			}
+
 			// Progress bar
 			final View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 			if (titleProgressController != null) {
@@ -1219,6 +1233,46 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				titleProgressContainer.setVisibility(View.GONE);
 			}
 			updateAdditionalInfoVisibility();
+		}
+	}
+
+	private void attachButtonsRow(ViewGroup container, final TitleButtonController leftButtonController, final TitleButtonController rightButtonController) {
+		ContextThemeWrapper ctx = new ContextThemeWrapper(getMapActivity(), !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		LayoutInflater inflater = LayoutInflater.from(ctx);
+		View view = inflater.inflate(R.layout.context_menu_buttons, container, false);
+
+		// Left button
+		final View leftButtonView = view.findViewById(R.id.additional_button_left_view);
+		final TextView leftButton = (TextView) view.findViewById(R.id.additional_button_left);
+		fillButtonInfo(leftButtonController, leftButtonView, leftButton);
+
+		// Right button
+		final View rightButtonView = view.findViewById(R.id.additional_button_right_view);
+		final TextView rightButton = (TextView) view.findViewById(R.id.additional_button_right);
+		fillButtonInfo(rightButtonController, rightButtonView, rightButton);
+
+		container.addView(view);
+	}
+
+	private void fillButtonInfo(final TitleButtonController buttonController, View buttonView, TextView buttonText) {
+		if (buttonController != null) {
+			enableDisableButtons(buttonView, buttonText, buttonController.enabled);
+			buttonText.setText(buttonController.caption);
+			buttonView.setVisibility(buttonController.visible ? View.VISIBLE : View.INVISIBLE);
+
+			Drawable leftIcon = buttonController.getLeftIcon();
+			Drawable rightIcon = buttonController.getRightIcon();
+			buttonText.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
+			buttonText.setCompoundDrawablePadding(dpToPx(8f));
+			((LinearLayout) buttonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
+			buttonView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					buttonController.buttonPressed();
+				}
+			});
+		} else {
+			buttonView.setVisibility(View.INVISIBLE);
 		}
 	}
 
@@ -1479,6 +1533,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								titleBottomButtonHeight = titleBottomButtonContainer.getMeasuredHeight();
 							}
 
+							int additionalButtonsHeight = 0;
+							View additionalButtonsContainer = view.findViewById(R.id.additional_buttons_container);
+							if (additionalButtonsContainer.getVisibility() == View.VISIBLE) {
+								additionalButtonsHeight = additionalButtonsContainer.getMeasuredHeight();
+							}
+
 							int titleProgressHeight = 0;
 							View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 							if (titleProgressContainer.getVisibility() == View.VISIBLE) {
@@ -1493,12 +1553,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								}
 								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight
 										+ titleButtonHeight + downloadButtonsHeight
-										+ titleBottomButtonHeight + titleProgressHeight + line3Height;
+										+ titleBottomButtonHeight + additionalButtonsHeight + titleProgressHeight + line3Height;
 								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight
 										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
 								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight
-										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - titleProgressHeight-line3Height;
+										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - additionalButtonsHeight - titleProgressHeight-line3Height;
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
 								menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight()

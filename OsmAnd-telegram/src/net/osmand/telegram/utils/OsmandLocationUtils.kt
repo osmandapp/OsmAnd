@@ -29,6 +29,7 @@ object OsmandLocationUtils {
 	const val SHARING_LINK = "https://play.google.com/store/apps/details?id=net.osmand.telegram"
 
 	const val ALTITUDE_PREFIX = "Altitude: "
+	const val BEARING_PREFIX = "Bearing: "
 	const val SPEED_PREFIX = "Speed: "
 	const val HDOP_PREFIX = "Horizontal precision: "
 
