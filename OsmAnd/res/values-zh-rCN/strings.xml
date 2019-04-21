@@ -876,14 +876,14 @@
     <string name="shared_string_remove">移除</string>
     <string name="shared_string_read_more">阅读更多</string>
     <string name="add_time_span">增加时间跨度</string>
-    <string name="road_blocked">道路堵塞</string>
+    <string name="road_blocked">道路被阻塞</string>
     <string name="shared_string_select">选择</string>
     <string name="rendering_attr_hideIcons_name">隐藏 POI 图标</string>
     <string name="item_removed">项目已移除</string>
     <string name="n_items_removed">项目已移除</string>
     <string name="shared_string_undo_all">全部撤销</string>
     <string name="shared_string_type">类型</string>
-    <string name="starting_point">起始标点</string>
+    <string name="starting_point">起始点</string>
     <string name="shared_string_not_selected">未选取</string>
     <string name="rec_split_storage_size">存储大小</string>
     <string name="available_maps">可用地图</string>
@@ -1300,8 +1300,8 @@
     <string name="profile_settings">选择设置对应场景</string>
     <string name="routing_attr_allow_private_name">允许私有访问</string>
     <string name="routing_attr_weight_name">重量限制</string>
-    <string name="routing_attr_avoid_stairs_name">避开阶梯</string>
-    <string name="routing_attr_avoid_stairs_description">避开阶梯</string>
+    <string name="routing_attr_avoid_stairs_name">避免阶梯</string>
+    <string name="routing_attr_avoid_stairs_description">避免阶梯</string>
     <string name="routing_attr_avoid_borders_name">避开边界穿越</string>
     <string name="routing_attr_avoid_borders_description">避免穿越边境线进入其它国家</string>
     <string name="routing_attr_weight_description">指定路线上允许的车辆重量</string>
