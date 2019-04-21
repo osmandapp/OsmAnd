@@ -1839,7 +1839,7 @@ Dĺžka %2$s</string>
     <string name="last_map_change">Posledná zmena mapy: %s</string>
     <string name="hourly">Každú hodinu</string>
     <string name="daily">Každý deň</string>
-    <string name="weekly">Raz za týždeň</string>
+    <string name="weekly">Každý týždeň</string>
     <string name="morning">Ráno</string>
     <string name="night">V noci</string>
     <string name="shared_string_type">Typ</string>
@@ -1857,7 +1857,7 @@ Dĺžka %2$s</string>
     <string name="rendering_attr_hideIcons_name">Ikony bodov záujmu (POI)</string>
     <string name="number_of_contributors">Počet prispievateľov</string>
     <string name="number_of_edits">Počet zmien</string>
-    <string name="reports_for">Výkaz pre</string>
+    <string name="reports_for">Prehľad za</string>
     <string name="data_is_not_available">Údaje nie sú k dispozícii</string>
     <string name="shared_string_status">Stav</string>
     <string name="shared_string_save_changes">Uložiť zmeny</string>
@@ -1895,12 +1895,12 @@ Dĺžka %2$s</string>
     <string name="number_of_recipients">Počet príjemcov</string>
     <string name="osm_user_stat">Počet úprav %1$s, pozícia %2$s, celkový počet úprav %3$s</string>
     <string name="osm_editors_ranking">Pozícia medzi editormi OSM</string>
-    <string name="osm_live_subscription">Predplatné v OsmAnd Live</string>
+    <string name="osm_live_subscription">Predplatné OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Registrovať</string>
     <string name="osm_live_email_desc">Potrebné pre poskytnutie Vám informácií o príspevkoch.</string>
     <string name="osm_live_user_public_name">Verejné meno</string>
-    <string name="osm_live_hide_user_name">Nezobrazovať moje meno v hláseniach</string>
-    <string name="osm_live_support_region">Región podpory</string>
+    <string name="osm_live_hide_user_name">Nezobrazovať moje meno v prehľadoch</string>
+    <string name="osm_live_support_region">Podporovaný región</string>
     <string name="osm_live_month_cost">Mesačná cena</string>
     <string name="osm_live_month_cost_desc">Mesačná platba</string>
     <string name="osm_live_active">Aktívne</string>
@@ -1924,9 +1924,9 @@ Dĺžka %2$s</string>
     <string name="shared_string_move_down">Posunúť ↓</string>
     <string name="no_map_markers_found">Prosím pridajte mapové značky pomocou mapy</string>
     <string name="no_waypoints_found">Nenašli sa žiadne body cesty</string>
-    <string name="report">Hlásenie</string>
+    <string name="report">Prehľad</string>
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska, ale je potrebný reštart aplikácie.</string>
-    <string name="full_report">Plné hlásenie</string>
+    <string name="full_report">Podrobný prehľad</string>
     <string name="open_street_map_login_and_pass">Meno a heslo pre OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
     <string name="rendering_value_thin_name">Tenké</string>
@@ -3015,4 +3015,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n
 \n • Zobrazenie azimutu v meraní vzdialenosti
 \n</string>
+    <string name="send_log">Odoslať záznam</string>
 </resources>
