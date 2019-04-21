@@ -3577,4 +3577,6 @@
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Palnik gazowy</string>
+    <string name="poi_climbing_crag_filter">Wspinaczka na skały</string>
+    <string name="poi_climbing_crag">Tak</string>
 </resources>
