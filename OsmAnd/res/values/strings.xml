@@ -190,7 +190,6 @@
     • Boat navigation: Support for waterway fairway\n\n
     • Other bugfixes\n\n
     </string -->
-    <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
         No personal info is collected, search data is only used to improve the search algorithm.<br/>]]></string>
