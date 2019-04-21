@@ -3008,5 +3008,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_surface_sett_name">Galtzada-harria</string>
     <string name="rendering_attr_surface_cobblestone_name">Galtzadarria</string>
     <string name="rendering_attr_surface_fine_gravel_name">Legarra</string>
-    <string name="routing_attr_avoid_sett_name"></string>
+    <string name="routing_attr_avoid_sett_name"/>
+    <string name="send_log">Bidali egunkaria</string>
 </resources>
