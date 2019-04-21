@@ -216,4 +216,6 @@
     <string name="search_contacts_descr">Chirca intre totu sos grupos e sos cuntatos tuos.</string>
     <string name="type_contact_or_group_name">Iscrie su nùmene de unu cuntatu o de unu grupu</string>
     <string name="shared_string_search">Chirca</string>
+    <string name="precision">Pretzisione</string>
+    <string name="altitude">Artària</string>
 </resources>
