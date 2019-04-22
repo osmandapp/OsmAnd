@@ -199,6 +199,10 @@ public class RotatedTileBox {
 		return tile;
 	}
 
+	public double getPixDensity() {
+		final double dist = getDistance(0, getPixHeight() / 2, getPixWidth(), getPixHeight() / 2);
+		return getPixWidth() / dist;
+	}
 
 	public int getPixWidth() {
 		return pixWidth;

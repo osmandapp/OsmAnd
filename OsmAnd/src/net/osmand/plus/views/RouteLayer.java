@@ -16,7 +16,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Pair;
 
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -225,18 +224,26 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
+		List<LatLon> xAxisPoints = trackChartPoints.getXAxisPoints();
 		float r = 3 * tileBox.getDensity();
+		float density = (float) Math.ceil(tileBox.getDensity());
+		float outerRadius = r + 2 * density;
+		float innerRadius = r + density;
+		QuadRect prevPointRect = null;
 		for (int i = 0; i < xAxisPoints.size(); i++) {
-			WptPt axisPoint = xAxisPoints.get(i);
+			LatLon axisPoint = xAxisPoints.get(i);
 			if (axisPoint.getLatitude() >= latLonBounds.bottom
 					&& axisPoint.getLatitude() <= latLonBounds.top
 					&& axisPoint.getLongitude() >= latLonBounds.left
 					&& axisPoint.getLongitude() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
 				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-				canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
-				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
+				QuadRect pointRect = new QuadRect(x - outerRadius, y - outerRadius, x + outerRadius, y + outerRadius);
+				if (prevPointRect == null || !QuadRect.intersects(prevPointRect, pointRect)) {
+					canvas.drawCircle(x, y, outerRadius, paintGridOuterCircle);
+					canvas.drawCircle(x, y, innerRadius, paintGridCircle);
+					prevPointRect = pointRect;
+				}
 			}
 		}
 	}
