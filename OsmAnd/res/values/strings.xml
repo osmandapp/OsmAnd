@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and it could be faster than by public transport</string>
     <string name="public_transport_no_route_title">Unfortunately, OsmAnd could not find a route suitable for your settings.</string>
     <string name="public_transport_try_ped">Try the pedestrian navigation.</string>
     <string name="public_transport_try_change_settings">Try changing the settings.</string>
