@@ -375,8 +375,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void updateDistance(RotatedTileBox tb) {
-		final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
-		double pixDensity = tb.getPixWidth() / dist;
+		double pixDensity = tb.getPixDensity();
 		roundedDist = OsmAndFormatter.calculateRoundedDist(maxRadiusInDp / pixDensity, app);
 		radius = (int) (pixDensity * roundedDist);
 		updateText();
