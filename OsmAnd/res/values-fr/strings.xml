@@ -1310,7 +1310,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
-    <string name="rendering_attr_publicTransportMode_name">Lignes de bus, trolleybus, et navettes</string>
+    <string name="rendering_attr_publicTransportMode_name">Lignes de bus, trolleybus et navettes</string>
     <string name="save_track_to_gpx_globally">Enregistrer l\'itinéraire dans un fichier GPX</string>
     <string name="save_track_to_gpx_globally_descr">L\'enregistrement des positions dans un fichier GPX peut être activé ou désactivé depuis le gadget de la carte</string>
     <string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
@@ -1350,7 +1350,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
     <string name="rendering_attr_trolleybusRoutes_name">Lignes de trolleybus</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Itinéraires de chemin de fer</string>
-    <string name="rendering_attr_tramRoutes_name">Voies de tram</string>
+    <string name="rendering_attr_tramRoutes_name">Lignes de tram</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxis</string>
     <string name="rendering_attr_tramTrainRoutes_name">Lignes de tram et train</string>
     <string name="impassable_road">Éviter les routes…</string>
