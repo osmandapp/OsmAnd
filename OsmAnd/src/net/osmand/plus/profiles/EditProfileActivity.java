@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import net.osmand.plus.R;
@@ -17,34 +20,34 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_fragment_layout);
-//		Intent intent = getIntent();
-//		if (intent.getExtras() != null) {
-//			String title = "";
-//			if (intent.getBooleanExtra("isUserProfile", false)) {
-//
-//			} else if (intent.getBooleanExtra("isNew", false)) {
-//				title = String.format("%s (new)", intent.getStringExtra("stringKey").replace("_", " "));
-//			} else {
-//				title = Algorithms.capitalizeFirstLetterAndLowercase(
-//					intent.getStringExtra("stringKey").replace("_", " "));
-//			}
-//
-//			if (getSupportActionBar() != null) {
-//				getSupportActionBar().setTitle(title);
-//				getSupportActionBar().setElevation(5.0f);
-//			}
-//		}
 
         if (savedInstanceState == null) {
             EditProfileFragment editProfileFragment = new EditProfileFragment();
 	        editProfileFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().add(android.R.id.content,
-	            editProfileFragment).commit();
+	            editProfileFragment, "editProfileFragment").commit();
         }
 	}
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		MenuItem m = menu.add(0, 0, 0, R.string.action_delete).setIcon(R.drawable.ic_action_delete_dark);
+		MenuItemCompat.setShowAsAction(m, MenuItem.SHOW_AS_ACTION_ALWAYS);
+		super.onCreateOptionsMenu(menu);
+		return true;
+	}
+
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+
+
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+
+
 		int itemId = item.getItemId();
 		switch (itemId) {
 			case android.R.id.home:

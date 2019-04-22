@@ -2,6 +2,13 @@ package net.osmand.plus;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 
 import java.util.ArrayList;
@@ -11,9 +18,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import net.osmand.util.Algorithms;
+import net.sf.junidecode.App;
+import org.apache.commons.logging.Log;
 
 
 public class ApplicationMode {
+
+	private static final Log LOG = PlatformUtil.getLog(ApplicationMode.class);
 	private static Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 	private static List<ApplicationMode> defaultValues = new ArrayList<>();
@@ -42,6 +54,8 @@ public class ApplicationMode {
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
+
+
 //---------------------------------------------------------------------------------------------------------------
 //	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
 //			icon(R.drawable.map_action_trekking_dark, R.drawable.ic_action_trekking_dark).reg();
@@ -134,6 +148,7 @@ public class ApplicationMode {
 		 *               1 - car, 2 - bicicle, 3 - nautical, any other - default
 		 */
 		public ApplicationModeBuilder setLocationAndBearingIcons(int type) {
+			applicationMode.mapIconsSetId = type;
 			switch (type) {
 				case 1:
 					return this.carLocation();
@@ -209,7 +224,7 @@ public class ApplicationMode {
 		}
 
 		public ApplicationModeBuilder userProfileTitle(String userProfileTitle) {
-			applicationMode.userProfileTitle = userProfileTitle;
+			applicationMode.userProfileName = userProfileTitle;
 			return this;
 		}
 	}
@@ -401,11 +416,20 @@ public class ApplicationMode {
 	}
 
 	public String toHumanString(Context ctx) {
-		return ctx.getString(key);
+		if (Algorithms.isEmpty(userProfileName)) {
+			return ctx.getString(key);
+		} else {
+			return userProfileName;
+		}
+
 	}
 
 	public String toHumanStringCtx(Context ctx) {
-		return ctx.getString(key);
+		if (Algorithms.isEmpty(userProfileName)) {
+			return ctx.getString(key);
+		} else {
+			return userProfileName;
+		}
 	}
 
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
@@ -437,28 +461,73 @@ public class ApplicationMode {
 		return this == mode || getParent() == mode;
 	}
 
-	public String getUserProfileTitle() {
-		return userProfileTitle;
+	public int getMapIconsSetId() {
+		return mapIconsSetId;
 	}
 
-	private final int key;
-	private final String stringKey;
-	private String userProfileTitle = "";
-	private ApplicationMode parent;
-	private int mapIconId = R.drawable.map_world_globe_dark;
-	private int smallIconDark = R.drawable.ic_world_globe_dark;
-	private float defaultSpeed = 10f;
-	private int minDistanceForTurn = 50;
-	private int arrivalDistance = 90;
-	private int offRouteDistance = 350;
-	private int bearingIconDay = R.drawable.map_pedestrian_bearing;
-	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
-	private int headingIconDay = R.drawable.map_pedestrian_location_view_angle;
-	private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
-	private int locationIconDay = R.drawable.map_pedestrian_location;
-	private int locationIconNight = R.drawable.map_pedestrian_location_night;
-	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
-	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+	public String getUserProfileName() {
+		return userProfileName;
+	}
+
+	@Expose private final int key;
+	@Expose private final String stringKey;
+	@Expose private String userProfileName = "";
+	@Expose private int mapIconsSetId = 0;
+	@Expose private ApplicationMode parent;
+	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
+	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
+	@Expose private float defaultSpeed = 10f;
+	@Expose private int minDistanceForTurn = 50;
+	@Expose private int arrivalDistance = 90;
+	@Expose private int offRouteDistance = 350;
+	@Expose private int bearingIconDay = R.drawable.map_pedestrian_bearing;
+	@Expose private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+	@Expose private int headingIconDay = R.drawable.map_pedestrian_location_view_angle;
+	@Expose private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
+	@Expose private int locationIconDay = R.drawable.map_pedestrian_location;
+	@Expose private int locationIconNight = R.drawable.map_pedestrian_location_night;
+	@Expose private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+	@Expose private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 	private static StateChangedListener<String> listener;
 	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
+
+
+	public void saveCustomProfileToSettings(OsmandSettings settings){
+		List<ApplicationMode> customModes = new ArrayList<>();
+		for (ApplicationMode mode : values) {
+			if (mode.parent != null) {
+				customModes.add(mode);
+			}
+		}
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String profiles = gson.toJson(customModes);
+		settings.CUSTOM_APP_PROFILES.set(profiles);
+	}
+
+
+
+	public static boolean initCustomProfiles(OsmandSettings settings){
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		Type t = new TypeToken<ArrayList<ApplicationMode>>() {}.getType();
+		List<ApplicationMode> customProfiles = gson.fromJson(settings.CUSTOM_APP_PROFILES.get(), t);
+
+		if (!Algorithms.isEmpty(customProfiles)) {
+			for (ApplicationMode m : customProfiles) {
+				if (!values.contains(m)) {
+					values.add(m);
+					if (m.getParent() != null) {
+						LOG.debug("parent: " + m.getParent().getStringKey());
+					} else {
+						LOG.debug("parent: propal!!!!!111 " );
+					}
+
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+
+
 }

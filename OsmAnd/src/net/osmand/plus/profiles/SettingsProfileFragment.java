@@ -59,7 +59,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		listener = new ProfileListener() {
 			@Override
 			public void changeProfileStatus(ApplicationMode item, boolean isSelected) {
-				LOG.debug(getString(item.getStringResource()) + " - " + isSelected);
+				//LOG.debug(getString(item.getStringResource()) + " - " + isSelected);
 				StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
 				ApplicationMode mode = null;
 				for (ApplicationMode sam : allAppModes) {
@@ -87,10 +87,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 				intent.putExtra("stringKey", item.getStringKey());
 				intent.putExtra("isNew", false);
-				if (!item.getUserProfileTitle().isEmpty()) {
+				if (!item.getUserProfileName().isEmpty()) {
 					intent.putExtra("isUserProfile", true);
-				} else {
-					intent.putExtra("isUserProfile", false);
 				}
 				startActivity(intent);
 			}

@@ -1,6 +1,5 @@
 package net.osmand.plus.profiles;
 
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -10,16 +9,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
 import net.osmand.util.Algorithms;
-import net.sf.junidecode.App;
 
 
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
@@ -63,7 +59,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
 		final ApplicationMode item = items.get(position);
 		if (item.getParent() != null) {
-			holder.title.setText(item.getUserProfileTitle());
+			holder.title.setText(item.getUserProfileName());
 			holder.descr.setText(String.format("Type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getStringKey().replace("_", " "))));
 		} else {
 			holder.title.setText(app.getResources().getString(item.getStringResource()));

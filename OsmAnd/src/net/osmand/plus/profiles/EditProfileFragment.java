@@ -3,14 +3,17 @@ package net.osmand.plus.profiles;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -23,9 +26,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -36,8 +37,6 @@ import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDial
 import net.osmand.plus.profiles.SelectIconBottomSheetDialogFragment.IconIdListener;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
-import net.osmand.util.Algorithms;
-import net.sf.junidecode.App;
 import org.apache.commons.logging.Log;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
@@ -72,8 +71,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			String modeName = getArguments().getString("stringKey", "car");
 			isNew = getArguments().getBoolean("isNew", false);
 			isUserProfile = getArguments().getBoolean("isUserProfile", false);
+
 			profile = new TempApplicationProfile(
-				ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT), isNew);
+				ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT), isNew, isUserProfile);
+
 			LOG.debug("Name: " + modeName + ",  ");
 		}
 		routingProfiles = getRoutingProfiles();
@@ -291,9 +292,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	private boolean saveNewProfile(TempApplicationProfile profile, RoutingProfile selectedRoutingProfile) {
-		//todo check if profile exists
+
+		if (isUserProfile && !isNew) {
+			return updateProfile();
+		}
+
 		List<ApplicationMode> copyAllModes = new ArrayList<>(ApplicationMode.allPossibleValues());
-		List<ApplicationMode> copyAllAvailableModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
+//		List<ApplicationMode> copyAllAvailableModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
 		Iterator<ApplicationMode> it = copyAllModes.iterator();
 		while (it.hasNext()) {
 			ApplicationMode am = it.next();
@@ -304,14 +309,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				it.remove();
 			}
 		}
-
-		String customStringKey = profile.getParent().getStringKey() + "_" + profile.userProfileTitle.hashCode();
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			if (mode.getStringKey().equals(customStringKey)) {
-				//todo notify user that there is already profile with such name
-				return false;
-			}
+		String customStringKey = profile.stringKey;
+		if (isNew && profile.getParent() != null) {
+			customStringKey = profile.getParent().getStringKey() + "_" + profile.userProfileTitle.hashCode();
 		}
+
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 			.createCustomMode(profile.userProfileTitle, customStringKey)
 			.parent(profile.parent)
@@ -320,17 +322,18 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		switch (profile.parent.getStringKey()) {
 			case "car":
 			case "aircraft":
-				builder.carLocation();
+				builder.setLocationAndBearingIcons(1);
 				break;
-			case "bicicle":
-				builder.bicycleLocation();
+			case "bicycle":
+				builder.setLocationAndBearingIcons(2);
 				break;
 			case "boat":
-				builder.nauticalLocation();
+				builder.setLocationAndBearingIcons(3);
 				break;
 		}
 
-		builder.customReg();
+		ApplicationMode customMode = builder.customReg();
+		customMode.saveCustomProfileToSettings(getSettings());
 
 		//todo build profile, save and register:
 
@@ -381,7 +384,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	private class TempApplicationProfile {
 		int key = -1;
-		String stringKey = "";
+		String stringKey;
 		String userProfileTitle = "";
 		ApplicationMode parent = null;
 		int iconId = R.drawable.map_world_globe_dark;
@@ -389,20 +392,21 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		int minDistanceForTurn = 50; //todo use default or what?
 		RoutingProfile routingProfile = null;
 
-		TempApplicationProfile(ApplicationMode mode, boolean isNew) {
+		TempApplicationProfile(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
 			if (isNew ) {
 				stringKey = "new_" + mode.getStringKey();
 				parent = mode;
 			} else if (isUserProfile) {
 				stringKey = mode.getStringKey();
-				parent = getParent();
+				parent = mode.getParent();
 				iconId = mode.getSmallIconDark();
-				userProfileTitle = mode.getUserProfileTitle();
+				userProfileTitle = mode.getUserProfileName();
 			} else {
 				key = mode.getStringResource();
 				stringKey = mode.getStringKey();
 				iconId = mode.getSmallIconDark();
 			}
+			LOG.debug("Parent: " + getParent());
 		}
 
 		public RoutingProfile getRoutingProfile() {

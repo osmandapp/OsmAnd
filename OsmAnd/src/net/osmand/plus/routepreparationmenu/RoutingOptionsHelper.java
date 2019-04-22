@@ -72,7 +72,7 @@ public class RoutingOptionsHelper {
 		addRouteMenuAppModes(ApplicationMode.PEDESTRIAN, PermanentAppModeOptions.PEDESTRIAN.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.PUBLIC_TRANSPORT, PermanentAppModeOptions.PUBLIC_TRANSPORT.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.BOAT, PermanentAppModeOptions.BOAT.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCAFT.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCRAFT.routingParameters);
 //		addRouteMenuAppModes(ApplicationMode.HIKING, PermanentAppModeOptions.HIKING.routingParameters);
 //		addRouteMenuAppModes(ApplicationMode.MOTORCYCLE, PermanentAppModeOptions.MOTORCYCLE.routingParameters);
 //		addRouteMenuAppModes(ApplicationMode.TRUCK, PermanentAppModeOptions.TRUCK.routingParameters);
@@ -971,11 +971,11 @@ public class RoutingOptionsHelper {
 		PEDESTRIAN(MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES),
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY),
 		BOAT(MuteSoundRoutingParameter.KEY),
-		AIRCAFT(MuteSoundRoutingParameter.KEY),
-		HIKING(MuteSoundRoutingParameter.KEY),
-		MOTORCYCLE(MuteSoundRoutingParameter.KEY),
-		TRUCK(MuteSoundRoutingParameter.KEY),
-		TRAIN(MuteSoundRoutingParameter.KEY);
+		AIRCRAFT(MuteSoundRoutingParameter.KEY);
+//		HIKING(MuteSoundRoutingParameter.KEY),
+//		MOTORCYCLE(MuteSoundRoutingParameter.KEY),
+//		TRUCK(MuteSoundRoutingParameter.KEY),
+//		TRAIN(MuteSoundRoutingParameter.KEY);
 
 		List<String> routingParameters;
 

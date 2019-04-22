@@ -2745,6 +2745,9 @@ public class OsmandSettings {
 					RateUsBottomSheetDialog.RateUsState.INITIAL_STATE, RateUsBottomSheetDialog.RateUsState.values())
 					.makeGlobal();
 
+	public final CommonPreference<String> CUSTOM_APP_PROFILES = new StringPreference(
+		"custom_profiles", "").makeGlobal().cache();
+
 
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto, R.drawable.ic_action_map_sunst),
