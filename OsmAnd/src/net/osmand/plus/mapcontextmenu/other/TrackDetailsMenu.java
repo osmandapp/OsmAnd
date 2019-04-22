@@ -147,7 +147,7 @@ public class TrackDetailsMenu {
 		if (mapActivity != null && gpxItem != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			GPXFile groupGpx = gpxItem.group.getGpx();
-			if (groupGpx != null) {
+			if (groupGpx != null && !gpxItem.route) {
 				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.path) == null;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
