@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="public_transport_no_route_title">Unfortunately, OsmAnd could not find a route suitable for your settings.</string>
+    <string name="public_transport_try_ped">Try the pedestrian navigation.</string>
+    <string name="public_transport_try_change_settings">Try changing the settings.</string>
+    <string name="public_transport_calc_pedestrian">Calculate pedestrian route</string>
+    <string name="public_transport_type">Transport type</string>
     <string name="send_log">Send log</string>
     <string name="routing_attr_avoid_tram_name">Avoid trams</string>
     <string name="routing_attr_avoid_tram_description">Avoid trams</string>
