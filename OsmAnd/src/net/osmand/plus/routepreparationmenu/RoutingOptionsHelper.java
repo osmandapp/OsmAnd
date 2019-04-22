@@ -969,7 +969,7 @@ public class RoutingOptionsHelper {
 		CAR(MuteSoundRoutingParameter.KEY, AvoidRoadsRoutingParameter.KEY),
 		BICYCLE(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
 		PEDESTRIAN(MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES),
-		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY),
+		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY, AvoidPTTypesRoutingParameter.KEY),
 		BOAT(MuteSoundRoutingParameter.KEY),
 		AIRCAFT(MuteSoundRoutingParameter.KEY),
 		HIKING(MuteSoundRoutingParameter.KEY),
