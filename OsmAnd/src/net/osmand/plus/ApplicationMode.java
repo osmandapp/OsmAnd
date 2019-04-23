@@ -8,6 +8,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 
@@ -416,7 +418,7 @@ public class ApplicationMode {
 	}
 
 	public String toHumanString(Context ctx) {
-		if (Algorithms.isEmpty(userProfileName)) {
+		if (Algorithms.isEmpty(userProfileName) && key != -1) {
 			return ctx.getString(key);
 		} else {
 			return userProfileName;
@@ -471,7 +473,7 @@ public class ApplicationMode {
 
 	@Expose private final int key;
 	@Expose private final String stringKey;
-	@Expose private String userProfileName = "";
+	@Expose private String userProfileName;
 	@Expose private int mapIconsSetId = 0;
 	@Expose private ApplicationMode parent;
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
@@ -491,8 +493,7 @@ public class ApplicationMode {
 	private static StateChangedListener<String> listener;
 	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
 
-
-	public void saveCustomProfileToSettings(OsmandSettings settings){
+	public static void saveCustomModeToSettings(OsmandSettings settings){
 		List<ApplicationMode> customModes = new ArrayList<>();
 		for (ApplicationMode mode : values) {
 			if (mode.parent != null) {
@@ -504,9 +505,7 @@ public class ApplicationMode {
 		settings.CUSTOM_APP_PROFILES.set(profiles);
 	}
 
-
-
-	public static boolean initCustomProfiles(OsmandSettings settings){
+	public static void initCustomModes(OsmandSettings settings){
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		Type t = new TypeToken<ArrayList<ApplicationMode>>() {}.getType();
 		List<ApplicationMode> customProfiles = gson.fromJson(settings.CUSTOM_APP_PROFILES.get(), t);
@@ -515,17 +514,20 @@ public class ApplicationMode {
 			for (ApplicationMode m : customProfiles) {
 				if (!values.contains(m)) {
 					values.add(m);
-					if (m.getParent() != null) {
-						LOG.debug("parent: " + m.getParent().getStringKey());
-					} else {
-						LOG.debug("parent: propal!!!!!111 " );
-					}
-
 				}
 			}
-			return true;
 		}
-		return false;
+	}
+
+	public static void deleteCustomMode(String userModeTitle, OsmandApplication app) {
+		Iterator<ApplicationMode> it = values.iterator();
+		while (it.hasNext()) {
+			ApplicationMode m = it.next();
+			if (m.userProfileName == userModeTitle) {
+				it.remove();
+			}
+		}
+		ApplicationMode.saveCustomModeToSettings(app.getSettings());
 	}
 
 

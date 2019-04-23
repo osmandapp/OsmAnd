@@ -1,19 +1,19 @@
 package net.osmand.plus.profiles;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -24,10 +24,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -37,6 +40,7 @@ import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDial
 import net.osmand.plus.profiles.SelectIconBottomSheetDialogFragment.IconIdListener;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.sf.junidecode.App;
 import org.apache.commons.logging.Log;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
@@ -297,18 +301,38 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			return updateProfile();
 		}
 
-		List<ApplicationMode> copyAllModes = new ArrayList<>(ApplicationMode.allPossibleValues());
-//		List<ApplicationMode> copyAllAvailableModes = new ArrayList<>(ApplicationMode.values(getMyApplication()));
-		Iterator<ApplicationMode> it = copyAllModes.iterator();
-		while (it.hasNext()) {
-			ApplicationMode am = it.next();
-			if (am.getStringKey().equals(profile.stringKey)) {
-				if (ApplicationMode.values(getMyApplication()).contains(am)) {
-					//todo unregister mode from available
+		if (profile.getUserProfileTitle().isEmpty()) {
+			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+			bld.setTitle("Enter Profile Name");
+			bld.setMessage("Profile name shouldn't be empty!");
+			bld.setNegativeButton(R.string.shared_string_dismiss, null);
+			bld.show();
+			bld.setOnDismissListener(new OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					//todo focus name textview
 				}
-				it.remove();
+			});
+			return false;
+		}
+
+		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
+			if (m.getUserProfileName()!=null && m.getUserProfileName().equals(profile.getUserProfileTitle())) {
+				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+				bld.setTitle("Duplicate Name");
+				bld.setMessage("There is already profile with such name");
+				bld.setNegativeButton(R.string.shared_string_dismiss, null);
+				bld.show();
+				bld.setOnDismissListener(new OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						//todo focus name textview
+					}
+				});
+				return false;
 			}
 		}
+
 		String customStringKey = profile.stringKey;
 		if (isNew && profile.getParent() != null) {
 			customStringKey = profile.getParent().getStringKey() + "_" + profile.userProfileTitle.hashCode();
@@ -332,11 +356,18 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				break;
 		}
 
-		ApplicationMode customMode = builder.customReg();
-		customMode.saveCustomProfileToSettings(getSettings());
+		ApplicationMode mode = builder.customReg();
+		ApplicationMode.saveCustomModeToSettings(getSettings());
 
-		//todo build profile, save and register:
-
+		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
+		Set<ApplicationMode> availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
+		availableAppModes.add(mode);
+		for (ApplicationMode sam : availableAppModes) {
+			vls.append(sam.getStringKey()).append(",");
+		}
+		if (getSettings() != null) {
+			getSettings().AVAILABLE_APP_MODES.set(vls.toString());
+		}
 		return true;
 	}
 
@@ -345,8 +376,27 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return false;
 	}
 
+	void onDeleteProfileClick() {
+		if (getActivity()!=null) {
+			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+			bld.setTitle("Delete Profile");
+			bld.setMessage(String.format("Are you sure you want to delete %s profile", profile.userProfileTitle));
+			bld.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					ApplicationMode.deleteCustomMode(profile.getUserProfileTitle(), getMyApplication());
+					if (getActivity() != null) {
+						getActivity().onBackPressed();
+					}
+				}
+			});
+			bld.setNegativeButton(R.string.shared_string_dismiss, null);
+			bld.show();
+		}
+	}
+
 	/**
-	 * For now there are only default nav profiles todo: add profiles from custom routing xml-s
+	 * For now there are only default nav profiles placeholders todo: add profiles from custom routing xml-s
 	 */
 	private ArrayList<RoutingProfile> getRoutingProfiles() {
 		ArrayList<RoutingProfile> routingProfiles = new ArrayList<>();
@@ -449,4 +499,5 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			this.routingProfile = routingProfile;
 		}
 	}
+
 }

@@ -63,7 +63,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.descr.setText(String.format("Type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getStringKey().replace("_", " "))));
 		} else {
 			holder.title.setText(app.getResources().getString(item.getStringResource()));
-			holder.descr.setText(String.format("Type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getStringKey().replace("_", " "))));
+			holder.descr.setText(String.format("Base Profile, type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getStringKey().replace("_", " "))));
 		}
 
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
@@ -79,12 +79,18 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 				listener.changeProfileStatus(item, holder.aSwitch.isChecked());
 			}
 		});
-		holder.profileOptions.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.editProfile(item);
-			}
-		});
+
+		if (item.getParent() != null) {
+			holder.profileOptions.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					listener.editProfile(item);
+				}
+			});
+		} else {
+			holder.profileOptions.setVisibility(View.INVISIBLE);
+		}
+
 	}
 
 	@Override
