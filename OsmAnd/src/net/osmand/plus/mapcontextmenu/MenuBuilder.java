@@ -796,6 +796,7 @@ public class MenuBuilder {
 		transportRect.setTypeface(FontCache.getRobotoMedium(view.getContext()));
 		transportRect.setTextColor(Color.WHITE);
 		transportRect.setTextSize(10);
+		transportRect.setMaxLines(1);
 
 		GradientDrawable shape = new GradientDrawable();
 		shape.setShape(GradientDrawable.RECTANGLE);
@@ -805,7 +806,7 @@ public class MenuBuilder {
 		transportRect.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
 
 		transportRect.setBackgroundDrawable(shape);
-		transportRect.setText(route.route.getAdjustedRouteRef());
+		transportRect.setText(route.route.getAdjustedRouteRef(true));
 		baseView.addView(transportRect);
 
 		LinearLayout infoView = new LinearLayout(view.getContext());
