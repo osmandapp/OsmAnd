@@ -272,7 +272,7 @@ public class PublicTransportCard extends BaseCard {
 		TransportRoute transportRoute = segment.route;
 		TransportStopRoute transportStopRoute = TransportStopRoute.getTransportStopRoute(transportRoute, segment.getStart());
 
-		String routeRef = segment.route.getAdjustedRouteRef();
+		String routeRef = segment.route.getAdjustedRouteRef(true);
 		int bgColor = transportStopRoute.getColor(app, nightMode);
 
 		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
