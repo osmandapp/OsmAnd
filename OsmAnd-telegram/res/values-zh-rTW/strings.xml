@@ -218,4 +218,8 @@
     <string name="search_contacts_descr">搜尋您所有的群組與聯絡人。</string>
     <string name="type_contact_or_group_name">輸入聯絡人或群組名稱</string>
     <string name="shared_string_search">搜尋</string>
+    <string name="direction">方向</string>
+    <string name="precision">精確</string>
+    <string name="altitude">高度</string>
+    <string name="bearing">方位</string>
 </resources>
