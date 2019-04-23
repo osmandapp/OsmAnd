@@ -1393,14 +1393,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (!transportBadgesCreated) {
 			List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
 			List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
-			int localColumnsPerRow = getRoutesBadgesColumnsPerRow(null);
 			int maxLocalRows = 0;
-			if (localTransportStopRoutes != null) {
+			if (localTransportStopRoutes != null && !localTransportStopRoutes.isEmpty()) {
 				List<TransportStopRoute> localFilteredTransportStopRoutes = filterTransportRoutes(localTransportStopRoutes);
+				int minBadgeWidth = getMinBadgeWidth(localFilteredTransportStopRoutes);
+				int localColumnsPerRow = getRoutesBadgesColumnsPerRow(null, minBadgeWidth);
 				maxLocalRows = (int) Math.round(Math.ceil((double) localFilteredTransportStopRoutes.size() / localColumnsPerRow));
+				localTransportStopRoutesGrid.setColumnWidth(minBadgeWidth);
 				updateLocalRoutesBadges(localFilteredTransportStopRoutes, localColumnsPerRow);
 			}
-			if (nearbyTransportStopRoutes != null) {
+			if (nearbyTransportStopRoutes != null && !nearbyTransportStopRoutes.isEmpty()) {
 				updateNearbyRoutesBadges(maxLocalRows, filterNearbyTransportRoutes(nearbyTransportStopRoutes, localTransportStopRoutes));
 			}
 			transportBadgesCreated = true;
@@ -1434,7 +1436,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			String nearInDistance = getString(R.string.transport_nearby_routes) + " "
 					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication()) + ":";
 			nearbyRoutesWithinTv.setText(nearInDistance);
-			int nearbyColumnsPerRow = getRoutesBadgesColumnsPerRow(nearInDistance);
+			int minBadgeWidth = getMinBadgeWidth(nearbyTransportStopRoutes);
+			int nearbyColumnsPerRow = getRoutesBadgesColumnsPerRow(nearInDistance, minBadgeWidth);
 			int maxNearbyRows = Math.min(3, 6 - maxLocalRows);
 			int nearbyMaxItems = maxNearbyRows * nearbyColumnsPerRow - 1;
 			TransportStopRouteAdapter adapter;
@@ -1443,6 +1446,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				adapter = createTransportStopRouteAdapter(nearbyTransportStopRoutes, false);
 			}
+			nearbyTransportStopRoutesGrid.setColumnWidth(minBadgeWidth);
 			nearbyTransportStopRoutesGrid.setAdapter(adapter);
 			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);
 			nearbyRoutesLayout.setVisibility(View.VISIBLE);
@@ -1451,9 +1455,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
-	private int getRoutesBadgesColumnsPerRow(@Nullable String nearInDistance) {
+	private int getRoutesBadgesColumnsPerRow(@Nullable String nearInDistance, int minBadgeWidth) {
 		try {
-			double badgeWidth = getResources().getDimension(R.dimen.context_menu_transport_grid_item_width);
 			double gridSpacing = getResources().getDimension(R.dimen.context_menu_transport_grid_spacing);
 			double gridPadding = getResources().getDimension(R.dimen.context_menu_padding_margin_default);
 			int availableSpace;
@@ -1464,9 +1467,29 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				double paddingTv = getResources().getDimension(R.dimen.context_menu_padding_margin_small);
 				availableSpace = (int) (routesBadgesContainer.getWidth() - gridPadding * 2 - paddingTv - textWidth);
 			}
-			return (int) ((availableSpace + gridSpacing) / (badgeWidth + gridSpacing));
+			return (int) ((availableSpace + gridSpacing) / (minBadgeWidth + gridSpacing));
 		} catch (Resources.NotFoundException e) {
 			return -1;
+		}
+	}
+
+	private int getMinBadgeWidth(List<TransportStopRoute> transportStopRoutes) {
+		try {
+			int minBadgeWidth = getResources().getDimensionPixelSize(R.dimen.context_menu_transport_grid_item_width);
+			int textPadding = getResources().getDimensionPixelSize(R.dimen.context_menu_subtitle_margin);
+			float textSizeSmall = getResources().getDimensionPixelSize(R.dimen.default_sub_text_size_small);
+
+			for (TransportStopRoute transportStopRoute : transportStopRoutes) {
+				String routeRef = transportStopRoute.route.getAdjustedRouteRef(false);
+				int textWidth = AndroidUtils.getTextWidth(textSizeSmall, routeRef) + textPadding * 2;
+				if (textWidth > minBadgeWidth) {
+					minBadgeWidth = textWidth;
+				}
+			}
+
+			return minBadgeWidth;
+		} catch (Resources.NotFoundException e) {
+			return dpToPx(32);
 		}
 	}
 	
