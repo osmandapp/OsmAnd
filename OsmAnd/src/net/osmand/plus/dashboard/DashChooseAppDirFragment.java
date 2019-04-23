@@ -1,6 +1,7 @@
 package net.osmand.plus.dashboard;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -26,7 +28,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.IndexConstants;
 import net.osmand.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -58,7 +59,8 @@ public class DashChooseAppDirFragment {
 		MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 		private View copyMapsBtn;
 		private ImageView editBtn;
-		private View confirmBtn;
+		private View dontCopyMapsBtn;
+		private View cancelBtn;
 		private boolean mapsCopied = false;
 		private TextView warningReadonly;
 		private int type = -1;
@@ -110,20 +112,6 @@ public class DashChooseAppDirFragment {
 			}
 			locationDesc.setText(selectedFile.getAbsolutePath() + " \u2022 " + getFreeSpace(selectedFile));
 			boolean copyFiles = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath()) && !mapsCopied;
-			if (copyFiles) {
-				copyFiles = false;
-				File[] lf = currentAppFile.listFiles();
-				if (lf != null) {
-					for (File f : lf) {
-						if (f != null) {
-							if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-								copyFiles = true;
-								break;
-							}
-						}
-					}
-				}
-			}
 			warningReadonly.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
 			if (copyFiles) {
 				if (!OsmandSettings.isWritable(currentAppFile)) {
@@ -135,6 +123,7 @@ public class DashChooseAppDirFragment {
 			}
 
 			copyMapsBtn.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
+			dontCopyMapsBtn.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
 		}
 
 		public View initView(LayoutInflater inflater, ViewGroup container,
@@ -159,7 +148,8 @@ public class DashChooseAppDirFragment {
 			}
 			editBtn = (ImageView) view.findViewById(R.id.edit_icon);
 			copyMapsBtn = view.findViewById(R.id.copy_maps);
-			confirmBtn = view.findViewById(R.id.confirm);
+			dontCopyMapsBtn = view.findViewById(R.id.dont_copy_maps);
+			cancelBtn = view.findViewById(R.id.cancel);
 			addListeners();
 			processPermissionGranted();
 			updateView();
@@ -320,8 +310,50 @@ public class DashChooseAppDirFragment {
 			copyMapsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(final View v) {
-					MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, currentAppFile,
-							selectedFile) {
+					@SuppressLint("StaticFieldLeak")
+					MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, currentAppFile, selectedFile) {
+
+						private MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
+
+						@NonNull
+						private String getFormattedSize(long sizeBytes) {
+							int size = (int) ((sizeBytes + 512) >> 10);
+							if (size >= 0) {
+								if (size > 100) {
+									return formatMb.format(new Object[]{(float) size / (1 << 10)});
+								} else {
+									return size + " kB";
+								}
+							}
+							return "";
+						}
+
+						private void showResultsDialog() {
+							StringBuilder sb = new StringBuilder();
+							int moved = getMovedCount();
+							int copied = getCopiedCount();
+							int failed = getFailedCount();
+							sb.append(activity.getString(R.string.files_moved, moved, getFormattedSize(getMovedSize()))).append("\n");
+							if (copied > 0) {
+								sb.append(activity.getString(R.string.files_copied, copied, getFormattedSize(getCopiedSize()))).append("\n");
+							}
+							if (failed > 0) {
+								sb.append(activity.getString(R.string.files_failed, failed, getFormattedSize(getFailedSize()))).append("\n");
+							}
+							if (copied > 0 || failed > 0) {
+								int count = copied + failed;
+								sb.append(activity.getString(R.string.files_present, count, getFormattedSize(getCopiedSize() + getFailedSize()), selectedFile.getAbsolutePath()));
+							}
+							AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+							bld.setMessage(sb.toString());
+							bld.setPositiveButton(R.string.shared_string_restart, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									getConfirmListener(true).onClick(v);
+								}
+							});
+							bld.show();
+						}
 
 						@Override
 						protected void onPostExecute(Boolean result) {
@@ -330,8 +362,13 @@ public class DashChooseAppDirFragment {
 								mapsCopied = true;
 								getMyApplication().getResourceManager().resetStoreDirectory();
 								// immediately proceed with change (to not loose where maps are currently located)
-								getConfirmListener().onClick(v);
+								if (getCopiedCount() > 0 || getFailedCount() > 0) {
+									showResultsDialog();
+								} else {
+									getConfirmListener(false).onClick(v);
+								}
 							} else {
+								showResultsDialog();
 								Toast.makeText(activity, R.string.copying_osmand_file_failed,
 										Toast.LENGTH_SHORT).show();
 								updateView();
@@ -342,11 +379,18 @@ public class DashChooseAppDirFragment {
 					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 			});
-			confirmBtn.setOnClickListener(getConfirmListener());
-
+			dontCopyMapsBtn.setOnClickListener(getConfirmListener(false));
+			cancelBtn.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (dlg != null) {
+						dlg.dismiss();
+					}
+				}
+			});
 		}
 
-		public OnClickListener getConfirmListener() {
+		public OnClickListener getConfirmListener(final boolean silentRestart) {
 			return new View.OnClickListener() {
 
 				@Override
@@ -363,13 +407,16 @@ public class DashChooseAppDirFragment {
 							((FragmentActivity) activity).getSupportFragmentManager().beginTransaction()
 									.remove(fragment).commit();
 						}
-						getMyApplication().restartApp(activity);
+						if (silentRestart) {
+							android.os.Process.killProcess(android.os.Process.myPid());
+						} else {
+							getMyApplication().restartApp(activity);
+						}
 					} else {
 						Toast.makeText(activity, R.string.specified_directiory_not_writeable,
 								Toast.LENGTH_LONG).show();
 					}
-					
-					if(dlg != null) {
+					if (dlg != null) {
 						dlg.dismiss();
 					}
 				}
@@ -440,6 +487,12 @@ public class DashChooseAppDirFragment {
 		private File from;
 		protected ProgressImplementation progress;
 		private Runnable runOnSuccess;
+		private int movedCount;
+		private long movedSize;
+		private int copiedCount;
+		private long copiedSize;
+		private int failedCount;
+		private long failedSize;
 
 		public MoveFilesToDifferentDirectory(Context ctx, File from, File to) {
 			this.ctx = ctx;
@@ -450,9 +503,36 @@ public class DashChooseAppDirFragment {
 		public void setRunOnSuccess(Runnable runOnSuccess) {
 			this.runOnSuccess = runOnSuccess;
 		}
-		
+
+		public int getMovedCount() {
+			return movedCount;
+		}
+
+		public int getCopiedCount() {
+			return copiedCount;
+		}
+
+		public int getFailedCount() {
+			return failedCount;
+		}
+
+		public long getMovedSize() {
+			return movedSize;
+		}
+
+		public long getCopiedSize() {
+			return copiedSize;
+		}
+
+		public long getFailedSize() {
+			return failedSize;
+		}
+
 		@Override
 		protected void onPreExecute() {
+			movedCount = 0;
+			copiedCount = 0;
+			failedCount = 0;
 			progress = ProgressImplementation.createProgressDialog(
 					ctx, ctx.getString(R.string.copying_osmand_files),
 					ctx.getString(R.string.copying_osmand_files_descr, to.getPath()),
@@ -493,12 +573,15 @@ public class DashChooseAppDirFragment {
 				}
 				f.delete();
 			} else if (f.isFile()) {
-				if(t.exists()) {
+				if (t.exists()) {
 					Algorithms.removeAllFiles(t);
 				}
 				boolean rnm = false;
+				long fileSize = f.length();
 				try {
 					rnm = f.renameTo(t);
+					movedCount++;
+					movedSize += fileSize;
 				} catch(RuntimeException e) {
 				}
 				if (!rnm) {
@@ -507,6 +590,11 @@ public class DashChooseAppDirFragment {
 					try {
 						progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), (int) (f.length() / 1024));
 						Algorithms.streamCopy(fin, fout, progress, 1024);
+						copiedCount++;
+						copiedSize += fileSize;
+					} catch (IOException e) {
+						failedCount++;
+						failedSize += fileSize;
 					} finally {
 						fin.close();
 						fout.close();
