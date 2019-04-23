@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+    <string name="files_moved">Moved %1$d files (%2$s).</string>
+    <string name="files_copied">Copied %1$d files (%2$s).</string>
+    <string name="files_failed">Failed to copy %1$d files (%2$s).</string>
+    <string name="files_present">%1$d files (%2$s) are present at previous location \'%3$s\'.</string>
+    <string name="move_maps">Move maps</string>
+    <string name="dont_move_maps">Don\'t move</string>
     <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and it could be faster than by public transport</string>
     <string name="public_transport_no_route_title">Unfortunately, OsmAnd could not find a route suitable for your settings.</string>
     <string name="public_transport_try_ped">Try the pedestrian navigation.</string>
@@ -1169,9 +1175,9 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Color by OSMC hiking symbol</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
-    <string name="application_dir_change_warning3">Copy OsmAnd data files to the new destination?</string>
+    <string name="application_dir_change_warning3">Move OsmAnd data files to the new destination?</string>
     <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
-    <string name="copying_osmand_file_failed">Copying files failed</string>
+    <string name="copying_osmand_file_failed">Moving files failed</string>
     <string name="storage_directory_external">External storage</string>
     <string name="storage_directory_multiuser">Multiuser storage</string>
     <string name="storage_directory_internal_app">Internal app memory</string>
