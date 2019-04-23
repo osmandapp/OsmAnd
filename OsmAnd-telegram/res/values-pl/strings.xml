@@ -219,4 +219,7 @@
     <string name="search_contacts_descr">Przeszukaj wszystkie swoje grupy i kontakty.</string>
     <string name="type_contact_or_group_name">Wpisz nazwę kontaktu lub grupy</string>
     <string name="shared_string_search">Szukaj</string>
+    <string name="direction">Kierunek</string>
+    <string name="precision">Precyzja</string>
+    <string name="altitude">Wysokość</string>
 </resources>
