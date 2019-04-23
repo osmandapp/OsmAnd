@@ -268,7 +268,7 @@
     <string name="oclock">點鐘</string>
     <string name="towards">向</string>
     <string name="accuracy">精確性</string>
-    <string name="altitude">海拔高度</string>
+    <string name="altitude">高度</string>
     <string name="no_info">沒有數據</string>
     <string name="direction_style_sidewise">橫向 (8 個扇區)</string>
     <string name="direction_style_clockwise">順時鐘 (12 個扇區)</string>
