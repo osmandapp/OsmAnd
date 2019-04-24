@@ -38,7 +38,7 @@
     <string name="shared_string_group">Gruppe</string>
     <string name="logout_no_internet_msg">Opret forbindelse til Internettet for at logge ud af Telegram.</string>
     <string name="shared_string_close">Luk</string>
-    <string name="disconnect_from_telegram_desc">"Sådan tilbagekaldes adgang til placeringsdeling. Åbn Telegram, gå til Settings - Privacy and Security - Sessions og afslut OsmAnd Telegram session. "</string>
+    <string name="disconnect_from_telegram_desc">Sådan tilbagekaldes adgang til placeringsdeling. Åbn Telegram, gå til Settings - Privacy and Security - Sessions og afslut OsmAnd Telegram session.</string>
     <string name="disconnect_from_telegram">Sådan afbrydes OsmAnd Tracker fra Telegram</string>
     <string name="logout_help_desc">Sådan afbrydes OsmAnd Tracker fra Telegram</string>
     <string name="connected_account">Tilsluttet konto</string>
