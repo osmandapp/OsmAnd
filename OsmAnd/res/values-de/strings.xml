@@ -1513,9 +1513,9 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="shared_string_selected_lowercase">ausgewählt</string>
     <string name="shared_string_is_open">Jetzt offen</string>
     <string name="rendering_attr_hideHouseNumbers_name">Hausnummern</string>
-    <string name="application_dir_change_warning3">OsmAnd-Daten an den neuen Ort kopieren?</string>
+    <string name="application_dir_change_warning3">OsmAnd-Dateien an den neuen Ort verschieben\?</string>
     <string name="specified_directiory_not_writeable">Karten konnten im angegebenen Verzeichnis nicht erstellt werden</string>
-    <string name="copying_osmand_file_failed">Das Kopieren der Dateien ist fehlgeschlagen!</string>
+    <string name="copying_osmand_file_failed">Das Verschieben von Dateien ist fehlgeschlagen</string>
     <string name="storage_directory_external">Externer Speicher</string>
     <string name="storage_directory_multiuser">Mehrbenutzer-Speicher</string>
     <string name="storage_directory_internal_app">Interner App-speicher</string>
@@ -3043,4 +3043,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Versuchen Sie, die Einstellungen zu ändern.</string>
     <string name="public_transport_calc_pedestrian">Fußgängerroute berechnen</string>
     <string name="public_transport_type">Transportart</string>
+    <string name="files_moved">%1$d Dateien verschoben (%2$s).</string>
+    <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort \'%3$s\' vorhanden.</string>
+    <string name="move_maps">Karten verschieben</string>
+    <string name="dont_move_maps">Nicht bewegen</string>
+    <string name="public_transport_ped_route_title">Die Route beträgt ca. %1$s und könnte zu Fuß schneller sein als mit öffentlichen Verkehrsmitteln</string>
+    <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
 </resources>
