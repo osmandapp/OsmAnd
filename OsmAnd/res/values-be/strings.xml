@@ -1538,7 +1538,7 @@
     <string name="rendering_value__name">Прадвызначана</string>
     <string name="rendering_value_highContrastRoads_name">Высокая кантрастнасць дарог</string>
     <string name="specified_directiory_not_writeable">Немагчыма стварыць мапы ў вызначаным каталозе</string>
-    <string name="copying_osmand_file_failed">Скапіяваць файлы не атрымалася</string>
+    <string name="copying_osmand_file_failed">Перамясціць файлы не атрымалася</string>
     <string name="storage_directory_internal_app">Унутраная памяць дадатка</string>
     <string name="storage_directory_manual">Вызначана ўласнаручна</string>
     <string name="storage_directory_default">Унутраная памяць</string>
@@ -1546,7 +1546,7 @@
     <string name="storage_directory_external">Вонкавы носьбіт інфармацыі</string>
     <string name="storage_directory">Захоўванне мапы</string>
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
-    <string name="application_dir_change_warning3">Скапіяваць файлы даных OsmAnd у новае месца\?</string>
+    <string name="application_dir_change_warning3">Перамясціць файлы даных OsmAnd у новае месца\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Нумары дамоў</string>
     <string name="routing_attr_avoid_borders_description">Пазбягаць перасячэння нацыянальных межаў</string>
     <string name="routing_attr_height_name">Абмежаванне па вышыні</string>
