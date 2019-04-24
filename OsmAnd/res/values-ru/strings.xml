@@ -3016,4 +3016,9 @@
 \n
 \n</string>
     <string name="send_log">Отправить log</string>
+    <string name="public_transport_no_route_title">К сожалению OsmAnd не смог найти подходящий для вас маршрут.</string>
+    <string name="public_transport_try_ped">Попробуйте пешеходную навигацию.</string>
+    <string name="public_transport_try_change_settings">Попробуйте изменить настройки.</string>
+    <string name="public_transport_calc_pedestrian">Рассчитать пешеходный маршрут</string>
+    <string name="public_transport_type">Тип транспорта</string>
 </resources>
