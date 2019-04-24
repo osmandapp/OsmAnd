@@ -3022,4 +3022,10 @@
 \n • הצגת אזימוט במדידת מרחק
 \n</string>
     <string name="send_log">שליחת יומן</string>
+    <string name="files_moved">הועברו %1$d קבצים (%2$s).</string>
+    <string name="files_copied">הועתקו %1$d קבצים (%2$s).</string>
+    <string name="files_failed">העתקתם של %1$d קבצים נכשלה (%2$s).</string>
+    <string name="files_present">%1$d קבצים (%2$s) נמצאים במיקום הקודם ‚%3$s’.</string>
+    <string name="move_maps">להעביר מפות</string>
+    <string name="dont_move_maps">לא להעביר</string>
 </resources>
