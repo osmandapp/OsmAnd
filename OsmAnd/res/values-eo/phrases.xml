@@ -1069,8 +1069,8 @@
     <string name="poi_fee_no">ne</string>
     <string name="poi_drinking_water_yes">jes</string>
     <string name="poi_drinking_water_no">ne</string>
-    <string name="poi_supervised_yes">gardata</string>
-    <string name="poi_supervised_no">negardata</string>
+    <string name="poi_supervised_yes">Gardata</string>
+    <string name="poi_supervised_no">Negardata</string>
     <string name="poi_seasonal_yes">jes</string>
     <string name="poi_seasonal_no">ne</string>
     <string name="poi_seasonal_dry_season">seka sezono</string>
@@ -1079,9 +1079,9 @@
     <string name="poi_seasonal_summer">somero</string>
     <string name="poi_seasonal_autumn">aŭtuno</string>
     <string name="poi_seasonal_winter">vintro</string>
-    <string name="poi_crossing_traffic_signals">Trafiklumoj</string>
-    <string name="poi_crossing_uncontrolled">Sen trafiklumoj</string>
-    <string name="poi_crossing_unmarked">Nemarkita</string>
+    <string name="poi_crossing_traffic_signals">kun trafiklumoj</string>
+    <string name="poi_crossing_uncontrolled">sen trafiklumoj</string>
+    <string name="poi_crossing_unmarked">nemarkita</string>
     <string name="poi_start_date">Ekestis je</string>
     <string name="poi_wheelchair_yes">jes</string>
     <string name="poi_wheelchair_no">ne</string>
@@ -1294,7 +1294,7 @@
     <string name="poi_aerialway_duration">Mezuma vojaĝ-tempo (en minutoj)</string>
     <string name="poi_aerialway_bubble_yes">Tegmenteto</string>
     <string name="poi_aerialway_bubble_no">Sen tegmenteto</string>
-    <string name="poi_aerialway_heating_yes">Jes</string>
+    <string name="poi_aerialway_heating_yes">jes</string>
     <string name="poi_aerialway_heating_no">Sen hejtado</string>
     <string name="poi_aerialway_bicycle_yes">jes</string>
     <string name="poi_aerialway_bicycle_no">Bicikloj: malpermesataj</string>
@@ -2086,8 +2086,8 @@
     <string name="poi_historic_civilization_cycladic">Civilizo: Ciklada kulturo</string>
     <string name="poi_historic_civilization_minoan">Civilizo: Minoa kulturo</string>
     <string name="poi_historic_civilization_tiahuanacota">Civilizo: Tiahuanaco-kulturo</string>
-    <string name="poi_animal_training_dog">Hundoj</string>
-    <string name="poi_animal_training_horse">Ĉevaloj</string>
+    <string name="poi_animal_training_dog">hundoj</string>
+    <string name="poi_animal_training_horse">ĉevaloj</string>
     <string name="poi_horse_yes">Ĉevaloj permesataj</string>
     <string name="poi_horse_no">Ĉevaloj malpermesataj</string>
     <string name="poi_animal_yes">Bestoj permesitaj</string>
@@ -2755,8 +2755,8 @@
     <string name="poi_payment_type">Pagmaniero</string>
     <string name="poi_additional_type">Aldona</string>
     <string name="poi_shop_craft">Materialoj-por-metio-vendejo</string>
-    <string name="poi_service_bicycle_charging_yes">Ŝargo: jes</string>
-    <string name="poi_service_bicycle_charging_no">Ŝargo: ne</string>
+    <string name="poi_service_bicycle_charging_yes">ŝargo</string>
+    <string name="poi_service_bicycle_charging_no">ŝargo: ne</string>
     <string name="poi_fuel_avia_type">Brulaĵ-tipo (avia)</string>
     <string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
     <string name="poi_internet_access_type">Interret-aliro</string>
@@ -2769,7 +2769,7 @@
     <string name="poi_fire_hydrant_water_source">Fonto de akvo</string>
     <string name="poi_payment_toll_type">Pagmaniero</string>
     <string name="poi_traffic_signals_sound">Sono</string>
-    <string name="poi_highway_crossing_type">Speco</string>
+    <string name="poi_highway_crossing_type">Speco de stratpasejo</string>
     <string name="poi_tactile_paving">Reliefo por blinduloj</string>
     <string name="poi_service_general">Servo</string>
     <string name="poi_brushless">Senbrosa</string>
@@ -2779,7 +2779,7 @@
     <string name="poi_covered">Kovrita</string>
     <string name="poi_subway_station_filter">Metroa stacio</string>
     <string name="poi_ferry_terminal_cargo">Portaĵo de</string>
-    <string name="poi_bicycle_parking_type">Speco</string>
+    <string name="poi_bicycle_parking_type">Speco de bicikl‑parkumejo</string>
     <string name="poi_aerialway_bicycle">Transportado de bicikloj</string>
     <string name="poi_aerialway_heating">Hejtado</string>
     <string name="poi_pump">Pumpilo</string>
@@ -2814,9 +2814,9 @@
     <string name="poi_cocktails">Kokteloj</string>
     <string name="poi_microbrewery">Metia bierfarejeto</string>
     <string name="poi_beauty_salon_service">Servo</string>
-    <string name="poi_recycling_type">Speco</string>
+    <string name="poi_recycling_type">Speco de recikligejo</string>
     <string name="poi_recycling_accepted_waste">Akceptataj ruboj</string>
-    <string name="poi_shelter_type">Speco</string>
+    <string name="poi_shelter_type">Speco de ŝirmejo</string>
     <string name="poi_fireplace">Kameno</string>
     <string name="poi_seasonal">Sezona</string>
     <string name="poi_water_characteristic">Akvospeco</string>
@@ -3167,7 +3167,7 @@
     <string name="poi_boat_jetski_rental_no">Akvoskoteroj: ne</string>
     <string name="poi_boat_sailboat_rental_yes">Velboatoj: jes</string>
     <string name="poi_boat_sailboat_rental_no">Velboatoj: ne</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Remboatoj :jes</string>
+    <string name="poi_boat_dinghy_rental_rental_yes">Remboatoj: jes</string>
     <string name="poi_boat_dinghy_rental_rental_no">Remboatoj: ne</string>
     <string name="poi_boat_kayak_rental_rental_yes">Kajakoj: jes</string>
     <string name="poi_boat_kayak_rental_rental_no">Kajakoj: ne</string>
@@ -3539,7 +3539,7 @@
     <string name="poi_atoll">Atolo</string>
     <string name="poi_toll_gantry">Telekontrolo de vojimposto</string>
     <string name="poi_childcare">Infan/bebo‑vartejo</string>
-    <string name="poi_denotation">Signifo</string>
+    <string name="poi_denotation">Signifo de arbo</string>
     <string name="poi_denotation_natural_monument">natura monumento</string>
     <string name="poi_denotation_landmark">orientiĝa punkto</string>
     <string name="poi_park_ride">Parkumu kaj veturu (P+R)</string>

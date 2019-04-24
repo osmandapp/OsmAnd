@@ -1310,7 +1310,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
-    <string name="rendering_attr_publicTransportMode_name">Lignes de bus, tramways, et navettes</string>
+    <string name="rendering_attr_publicTransportMode_name">Lignes de bus, trolleybus et navettes</string>
     <string name="save_track_to_gpx_globally">Enregistrer l\'itinéraire dans un fichier GPX</string>
     <string name="save_track_to_gpx_globally_descr">L\'enregistrement des positions dans un fichier GPX peut être activé ou désactivé depuis le gadget de la carte</string>
     <string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
@@ -1348,11 +1348,11 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="search_radius_proximity">Dans</string>
     <string name="rendering_category_routes">Itinéraires</string>
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Lignes de tramway</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Lignes de trolleybus</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Itinéraires de chemin de fer</string>
-    <string name="rendering_attr_tramRoutes_name">Voies de tramway</string>
+    <string name="rendering_attr_tramRoutes_name">Lignes de tram</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxis</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Lignes de tramway et train</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Lignes de tram et train</string>
     <string name="impassable_road">Éviter les routes…</string>
     <string name="rendering_category_hide">Masquer</string>
     <string name="wake_on_voice">Allumer l\'écran</string>
@@ -2069,7 +2069,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="gpx_add_track">Autre trace GPX …</string>
     <string name="gpx_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
-    <string name="translit_name_if_miss">Transformer si le nom %1$s est absent</string>
+    <string name="translit_name_if_miss">Translittérer si le nom %1$s est absent</string>
     <string name="route_calculation">Calcul de l\'itinéraire</string>
     <string name="upload_poi">Télécharger les points d\'intérêt</string>
     <string name="route_roundabout_short">Prenez la sortie %1$d</string>
@@ -2973,8 +2973,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_milliradians">Millièmes angulaires</string>
     <string name="angular_measeurement">Unités de mesure d\'angle</string>
     <string name="angular_measeurement_descr">Modifier l\'unité de mesure de l\'azimut.</string>
-    <string name="routing_attr_avoid_tram_name">Éviter le tramway</string>
-    <string name="routing_attr_avoid_tram_description">Éviter le tramway</string>
+    <string name="routing_attr_avoid_tram_name">Éviter le tram</string>
+    <string name="routing_attr_avoid_tram_description">Éviter le tram</string>
     <string name="routing_attr_avoid_bus_name">Éviter le bus</string>
     <string name="routing_attr_avoid_share_taxi_name">Éviter le taxi partagé</string>
     <string name="routing_attr_avoid_share_taxi_description">Éviter le taxi partagé</string>
@@ -2994,4 +2994,7 @@ représentant la zone : %1$s x %2$s</string>
 \n
 \n</string>
     <string name="send_log">Envoyer le journal</string>
+    <string name="routing_attr_avoid_bus_description">Éviter le bus et le trolleybus</string>
+    <string name="routing_attr_avoid_sett_name">Éviter les pavés</string>
+    <string name="routing_attr_avoid_sett_description">Éviter les pavés</string>
 </resources>

@@ -217,4 +217,8 @@
     <string name="welcome_descr">
         <b>OsmAnd Tracker</b> us permet compartir la vostra posició i veure la dels altres a OsmAnd.<br/>
         <br/>L\'aplicació utilitza l\'API de Telegram, per tant us cal un compte de Telegram.</string>
+    <string name="direction">Adreça</string>
+    <string name="precision">Precisió</string>
+    <string name="altitude">Altitud</string>
+    <string name="bearing">Trajectòria</string>
 </resources>

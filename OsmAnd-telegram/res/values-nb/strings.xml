@@ -217,4 +217,8 @@
     <string name="search_contacts_descr">Søk gjennom alle dine grupper og kontakter.</string>
     <string name="type_contact_or_group_name">Skriv kontakt- eller gruppenavn</string>
     <string name="shared_string_search">Søk</string>
+    <string name="direction">Retning</string>
+    <string name="precision">Nøyaktighet</string>
+    <string name="altitude">Høyde</string>
+    <string name="bearing">Kurs</string>
 </resources>

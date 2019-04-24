@@ -712,7 +712,7 @@
     <string name="show_more_map_detail_descr">برخی جزئیات نقشهٔ بُرداری (جاده‌ها و...) را در زوم‌های کمتر نشان می‌دهد.</string>
     <string name="favourites_delete_multiple_succesful">نقطه‌های برگزیده حذف شد.</string>
     <string name="favorite_delete_multiple">آیا از حذف %1$d نقطهٔ برگزیده و %2$d گروه مطمئن هستید؟</string>
-    <string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا نمایی از سراسر جهان با امکان بزرگ‌نمایی اندک داشته باشید.</string>
+    <string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا نمایی از سراسر جهان با بزرگ‌نمایی کم داشته باشید.</string>
     <string name="local_index_installed">نسخهٔ محلی</string>
     <string name="installing_new_resources">بازکردن داده‌های جدید…</string>
     <string name="internet_connection_required_for_online_route">یکی از سرویس‌های مسیریابی آنلاین را انتخاب کرده‌اید اما به اینترنت متصل نیستید.</string>
@@ -2787,14 +2787,14 @@
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
     <string name="welcome_to_open_beta">به ارزیابی همگانی نسخهٔ بتا خوش آمدید</string>
     <string name="contour_lines_hillshade_maps">نقشه‌های منحنی تراز و سایه‌روشن</string>
-    <string name="download_wikipedia_description">با پرداخت %1$s مقاله‌های ویکی‌سفر را دانلود کنید تا آن‌ها را آفلاین بخوانید.</string>
+    <string name="download_wikipedia_description">مقاله‌های ویکی‌سفر %1$s را دانلود کنید تا آن‌ها را آفلاین بخوانید.</string>
     <string name="download_wikipedia_label">دریافت داده‌های ویکی‌پدیا</string>
     <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
     <string name="open_in_browser_wiki_description">این مقاله را در مرورگر اینترنت مشاهده کنید.</string>
     <string name="download_wiki_region_placeholder">این منطقه</string>
     <string name="wiki_article_search_text">جست‌وجو به‌دنبال مقالهٔ همخوان از ویکی</string>
     <string name="wiki_article_not_found">مقاله پیدا نشد</string>
-    <string name="how_to_open_wiki_title">چگونه مقاله‌های ویکی‌پدیا را باز کنیم؟</string>
+    <string name="how_to_open_wiki_title">مقاله‌های ویکی‌پدیا چگونه باز شوند؟</string>
     <string name="popular_destinations">مقصدهای محبوب</string>
     <string name="osmand_team">تیم OsmAnd</string>
     <string name="maps_you_need_descr">بر اساس مقالاتی که نشانک زده‌اید، پیشنهاد می‌کنیم این نقشه‌ها را دانلود کنید:</string>
