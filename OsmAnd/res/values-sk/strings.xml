@@ -1532,7 +1532,7 @@ Dĺžka %2$s</string>
     <string name="rendering_value__name">Predvolené</string>
     <string name="rendering_value_highContrastRoads_name">Vysoko kontrastné cesty</string>
     <string name="specified_directiory_not_writeable">V zadanom priečinku nemohli byť vytvorené mapy</string>
-    <string name="copying_osmand_file_failed">Kopírovanie súborov zlyhalo</string>
+    <string name="copying_osmand_file_failed">Presúvanie súborov zlyhalo</string>
     <string name="storage_directory_external">Externé úložisko</string>
     <string name="storage_directory_multiuser">Úložisko pre viacerých používateľov</string>
     <string name="storage_directory_internal_app">Interná pamäť aplikácie</string>
@@ -1540,7 +1540,7 @@ Dĺžka %2$s</string>
     <string name="storage_directory_default">Interná pamäť</string>
     <string name="storage_directory">Úložisko máp</string>
     <string name="shared_string_copy">Kopírovať</string>
-    <string name="application_dir_change_warning3">Skopírovať údaje OsmAnd do nového cieľa?</string>
+    <string name="application_dir_change_warning3">Presunúť údaje OsmAnd do nového cieľa\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Čísla domov</string>
     <string name="routing_attr_avoid_borders_description">Vyhnúť sa prekročeniu hraníc krajín</string>
     <string name="routing_attr_height_name">Výškový limit</string>
@@ -3016,4 +3016,16 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n • Zobrazenie azimutu v meraní vzdialenosti
 \n</string>
     <string name="send_log">Odoslať záznam</string>
+    <string name="files_moved">%1$d súborov presunutých (%2$s).</string>
+    <string name="files_copied">%1$d súborov skopírovaných (%2$s).</string>
+    <string name="files_failed">Nepodarilo sa skopírovať %1$d súborov (%2$s).</string>
+    <string name="files_present">%1$d súborov (%2$s) sa nachádza v pôvodnom umiestnení \'%3$s\'.</string>
+    <string name="move_maps">Presunúť mapy</string>
+    <string name="dont_move_maps">Nepresúvať</string>
+    <string name="public_transport_ped_route_title">Trasa peši je približne %1$s a mohla by byť rýchlejšia ako hromadnou dopravou</string>
+    <string name="public_transport_no_route_title">Žiaľ, OsmAnd nemohol nájsť vhodnú trasu pri vašich nastaveniach.</string>
+    <string name="public_transport_try_ped">Skúste navigáciu pre peších.</string>
+    <string name="public_transport_try_change_settings">Skúste zmeniť nastavenia.</string>
+    <string name="public_transport_calc_pedestrian">Vypočítať pešiu trasu</string>
+    <string name="public_transport_type">Spôsob dopravy</string>
 </resources>
