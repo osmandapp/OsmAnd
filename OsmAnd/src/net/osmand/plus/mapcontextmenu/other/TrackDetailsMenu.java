@@ -213,10 +213,12 @@ public class TrackDetailsMenu {
 		updateView(main);
 	}
 
-	private TrkSegment getTrackSegment(LineChart chart) {
+	@Nullable
+	private TrkSegment getTrackSegment(@NonNull LineChart chart) {
 		TrkSegment segment = this.segment;
 		if (segment == null) {
-			List<ILineDataSet> ds = chart.getLineData().getDataSets();
+			LineData lineData = chart.getLineData();
+			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 			GpxDisplayItem gpxItem = getGpxItem();
 			if (ds != null && ds.size() > 0 && gpxItem != null) {
 				for (GPXUtilities.Track t : gpxItem.group.getGpx().tracks) {
@@ -236,12 +238,17 @@ public class TrackDetailsMenu {
 		return segment;
 	}
 
+	@Nullable
 	private LatLon getLocationAtPos(LineChart chart, float pos) {
 		LatLon latLon = null;
-		List<ILineDataSet> ds = chart.getLineData().getDataSets();
+		LineData lineData = chart.getLineData();
+		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (ds != null && ds.size() > 0 && gpxItem != null) {
 			TrkSegment segment = getTrackSegment(chart);
+			if (segment == null) {
+				return null;
+			}
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
@@ -295,52 +302,55 @@ public class TrackDetailsMenu {
 	private QuadRect getRect(LineChart chart, float startPos, float endPos) {
 		double left = 0, right = 0;
 		double top = 0, bottom = 0;
-		List<ILineDataSet> ds = chart.getLineData().getDataSets();
+		LineData lineData = chart.getLineData();
+		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (ds != null && ds.size() > 0 && gpxItem != null) {
 			TrkSegment segment = getTrackSegment(chart);
-			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
-				float startTime = startPos * 1000;
-				float endTime = endPos * 1000;
-				for (WptPt p : segment.points) {
-					if (p.time - gpxItem.analysis.startTime >= startTime && p.time - gpxItem.analysis.startTime <= endTime) {
-						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
+			if (segment != null) {
+				OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+				if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+					float startTime = startPos * 1000;
+					float endTime = endPos * 1000;
+					for (WptPt p : segment.points) {
+						if (p.time - gpxItem.analysis.startTime >= startTime && p.time - gpxItem.analysis.startTime <= endTime) {
+							if (left == 0 && right == 0) {
+								left = p.getLongitude();
+								right = p.getLongitude();
+								top = p.getLatitude();
+								bottom = p.getLatitude();
+							} else {
+								left = Math.min(left, p.getLongitude());
+								right = Math.max(right, p.getLongitude());
+								top = Math.max(top, p.getLatitude());
+								bottom = Math.min(bottom, p.getLatitude());
+							}
 						}
 					}
-				}
-			} else {
-				float startDistance = startPos * dataSet.getDivX();
-				float endDistance = endPos * dataSet.getDivX();
-				double previousSplitDistance = 0;
-				for (int i = 0; i < segment.points.size(); i++) {
-					WptPt currentPoint = segment.points.get(i);
-					if (i != 0) {
-						WptPt previousPoint = segment.points.get(i - 1);
-						if (currentPoint.distance < previousPoint.distance) {
-							previousSplitDistance += previousPoint.distance;
+				} else {
+					float startDistance = startPos * dataSet.getDivX();
+					float endDistance = endPos * dataSet.getDivX();
+					double previousSplitDistance = 0;
+					for (int i = 0; i < segment.points.size(); i++) {
+						WptPt currentPoint = segment.points.get(i);
+						if (i != 0) {
+							WptPt previousPoint = segment.points.get(i - 1);
+							if (currentPoint.distance < previousPoint.distance) {
+								previousSplitDistance += previousPoint.distance;
+							}
 						}
-					}
-					if (previousSplitDistance + currentPoint.distance >= startDistance && previousSplitDistance + currentPoint.distance <= endDistance) {
-						if (left == 0 && right == 0) {
-							left = currentPoint.getLongitude();
-							right = currentPoint.getLongitude();
-							top = currentPoint.getLatitude();
-							bottom = currentPoint.getLatitude();
-						} else {
-							left = Math.min(left, currentPoint.getLongitude());
-							right = Math.max(right, currentPoint.getLongitude());
-							top = Math.max(top, currentPoint.getLatitude());
-							bottom = Math.min(bottom, currentPoint.getLatitude());
+						if (previousSplitDistance + currentPoint.distance >= startDistance && previousSplitDistance + currentPoint.distance <= endDistance) {
+							if (left == 0 && right == 0) {
+								left = currentPoint.getLongitude();
+								right = currentPoint.getLongitude();
+								top = currentPoint.getLatitude();
+								bottom = currentPoint.getLatitude();
+							} else {
+								left = Math.min(left, currentPoint.getLongitude());
+								right = Math.max(right, currentPoint.getLongitude());
+								top = Math.max(top, currentPoint.getLatitude());
+								bottom = Math.min(bottom, currentPoint.getLatitude());
+							}
 						}
 					}
 				}
@@ -352,7 +362,7 @@ public class TrackDetailsMenu {
 	private void fitTrackOnMap(LineChart chart, LatLon location, boolean forceFit) {
 		QuadRect rect = getRect(chart, chart.getLowestVisibleX(), chart.getHighestVisibleX());
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && rect.left != 0 && rect.right != 0) {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
@@ -454,17 +464,19 @@ public class TrackDetailsMenu {
 
 	private List<LatLon> getXAxisPoints(LineChart chart) {
 		float[] entries = chart.getXAxis().mEntries;
-		float maxXValue = chart.getLineData().getXMax();
-		if (entries.length >= 2) {
+		LineData lineData = chart.getLineData();
+		float maxXValue = lineData != null ? lineData.getXMax() : -1;
+		if (entries.length >= 2 && lineData != null) {
 			float interval = entries[1] - entries[0];
 			if (interval > 0) {
-				xAxisPoints = new ArrayList<>();
+				List<LatLon> xAxisPoints = new ArrayList<>();
 				float currentPointEntry = interval;
 				while (currentPointEntry < maxXValue) {
 					LatLon location = getLocationAtPos(chart, currentPointEntry);
 					xAxisPoints.add(location);
 					currentPointEntry += interval;
 				}
+				this.xAxisPoints = xAxisPoints;
 			}
 		}
 		return xAxisPoints;
