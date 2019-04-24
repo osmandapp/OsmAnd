@@ -3032,4 +3032,16 @@ Repræsenterer område: %1$s x %2$s</string>
 \n
 \n • Vis azimut i mål afstand</string>
     <string name="send_log">Send log</string>
+    <string name="files_moved">Flyttede %1$d filer (%2$s).</string>
+    <string name="files_copied">Kopieret %1$d filer (%2$s).</string>
+    <string name="files_failed">Kunne ikke kopiere %1$d filer (%2$s).</string>
+    <string name="files_present">%1$d filer (%2$s) er til stede på tidligere placering \'%3$s\'.</string>
+    <string name="move_maps">Flyt kort</string>
+    <string name="dont_move_maps">Flyt ikke</string>
+    <string name="public_transport_ped_route_title">Ruten til fods er ca %1$s og den kunne være hurtigere end offentlig transport</string>
+    <string name="public_transport_no_route_title">Kunne desværre ikke finde en rute, der passer til indstillingerne.</string>
+    <string name="public_transport_try_ped">Prøv fodgængernavigationen.</string>
+    <string name="public_transport_try_change_settings">Prøv at ændre indstillinger.</string>
+    <string name="public_transport_calc_pedestrian">Beregn fodgængerruten</string>
+    <string name="public_transport_type">Transporttype</string>
 </resources>
