@@ -11,6 +11,18 @@
 	Thx - Hardy
 
 -->
+    <string name="files_moved">Moved %1$d files (%2$s).</string>
+    <string name="files_copied">Copied %1$d files (%2$s).</string>
+    <string name="files_failed">Failed to copy %1$d files (%2$s).</string>
+    <string name="files_present">%1$d files (%2$s) are present at previous location \'%3$s\'.</string>
+    <string name="move_maps">Move maps</string>
+    <string name="dont_move_maps">Don\'t move</string>
+    <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and it could be faster than by public transport</string>
+    <string name="public_transport_no_route_title">Unfortunately, OsmAnd could not find a route suitable for your settings.</string>
+    <string name="public_transport_try_ped">Try the pedestrian navigation.</string>
+    <string name="public_transport_try_change_settings">Try changing the settings.</string>
+    <string name="public_transport_calc_pedestrian">Calculate pedestrian route</string>
+    <string name="public_transport_type">Transport type</string>
     <string name="send_log">Send log</string>
     <string name="osmand_default_routing">OsmAnd routing</string>
     <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
@@ -193,7 +205,6 @@
     • Boat navigation: Support for waterway fairway\n\n
     • Other bugfixes\n\n
     </string -->
-    <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
         No personal info is collected, search data is only used to improve the search algorithm.<br/>]]></string>
@@ -1167,9 +1178,9 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Color by OSMC hiking symbol</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
-    <string name="application_dir_change_warning3">Copy OsmAnd data files to the new destination?</string>
+    <string name="application_dir_change_warning3">Move OsmAnd data files to the new destination?</string>
     <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
-    <string name="copying_osmand_file_failed">Copying files failed</string>
+    <string name="copying_osmand_file_failed">Moving files failed</string>
     <string name="storage_directory_external">External storage</string>
     <string name="storage_directory_multiuser">Multiuser storage</string>
     <string name="storage_directory_internal_app">Internal app memory</string>

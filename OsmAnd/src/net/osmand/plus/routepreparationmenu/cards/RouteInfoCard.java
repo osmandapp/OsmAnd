@@ -27,7 +27,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.router.RouteStatistics;
 import net.osmand.router.RouteStatistics.Boundaries;
 import net.osmand.router.RouteStatistics.RouteSegmentAttribute;
 import net.osmand.router.RouteStatistics.Statistics;
@@ -76,6 +75,8 @@ public class RouteInfoCard extends BaseCard {
 		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 9, 24, true, nightMode);
+		chart.setExtraRightOffset(16);
+		chart.setExtraLeftOffset(16);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, routeStatistics, analysis, true, nightMode);
 		chart.setData(barData);
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -83,7 +84,7 @@ public class RouteInfoCard extends BaseCard {
 			public void onValueSelected(Entry e, Highlight h) {
 				List<RouteSegmentAttribute<E>> elems = routeStatistics.getElements();
 				int i = h.getStackIndex();
-				if (elems.size() > i) {
+				if (i >= 0 && elems.size() > i) {
 					selectedPropertyName = elems.get(i).getPropertyName();
 					if (showLegend) {
 						updateLegend(routeStatistics);

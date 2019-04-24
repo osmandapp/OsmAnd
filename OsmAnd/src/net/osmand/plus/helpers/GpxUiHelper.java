@@ -1255,8 +1255,6 @@ public class GpxUiHelper {
 		yr.setDrawGridLines(false);
 		yr.setAxisMinimum(0f);
 		chart.setMinOffset(0);
-		chart.setExtraRightOffset(16);
-		chart.setExtraLeftOffset(16);
 
 		int mainFontColor = ContextCompat.getColor(app, nightMode ? R.color.main_font_dark : R.color.main_font_light);
 		yl.setTextColor(mainFontColor);
@@ -1300,7 +1298,7 @@ public class GpxUiHelper {
 		entries.add(new BarEntry(0, stacks));
 		BarDataSet barDataSet = new BarDataSet(entries, "");
 		barDataSet.setColors(colors);
-		barDataSet.setHighLightColor(ContextCompat.getColor(app, R.color.color_white));
+		barDataSet.setHighLightColor(!nightMode ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 		BarData dataSet = new BarData(barDataSet);
 		dataSet.setDrawValues(false);
 		dataSet.setBarWidth(1);

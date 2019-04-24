@@ -1189,8 +1189,7 @@ public class RouteInfoWidgetsFactory {
 				cacheRulerTileX = tb.getCenterTileX();
 				cacheRulerTileY = tb.getCenterTileY();
 				cacheMapDensity = mapDensity.get();
-				final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
-				double pixDensity = tb.getPixWidth() / dist;
+				double pixDensity = tb.getPixDensity();
 				double roundedDist = OsmAndFormatter.calculateRoundedDist(maxWidth / 
 						pixDensity, view.getApplication());
 

@@ -3036,4 +3036,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n• Azimut in der Maßeinheit Distanz anzeigen
 \n
 \n</string>
+    <string name="send_log">Sendeprotokoll</string>
 </resources>

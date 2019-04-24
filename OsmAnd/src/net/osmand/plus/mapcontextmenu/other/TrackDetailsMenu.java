@@ -61,7 +61,7 @@ public class TrackDetailsMenu {
 	@Nullable
 	private TrackChartPoints trackChartPoints;
 	@Nullable
-	private List<WptPt> xAxisPoints;
+	private List<LatLon> xAxisPoints;
 	private int topMarginPx;
 	private boolean visible;
 	private boolean hidding;
@@ -147,7 +147,7 @@ public class TrackDetailsMenu {
 		if (mapActivity != null && gpxItem != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			GPXFile groupGpx = gpxItem.group.getGpx();
-			if (groupGpx != null) {
+			if (groupGpx != null && !gpxItem.route) {
 				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.path) == null;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
@@ -236,8 +236,8 @@ public class TrackDetailsMenu {
 		return segment;
 	}
 
-	private WptPt getPoint(LineChart chart, float pos) {
-		WptPt wpt = null;
+	private LatLon getLocationAtPos(LineChart chart, float pos) {
+		LatLon latLon = null;
 		List<ILineDataSet> ds = chart.getLineData().getDataSets();
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (ds != null && ds.size() > 0 && gpxItem != null) {
@@ -246,31 +246,50 @@ public class TrackDetailsMenu {
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;
-				for (WptPt p : segment.points) {
-					if (p.time - gpxItem.analysis.startTime >= time) {
-						wpt = p;
+				WptPt previousPoint = null;
+				for (WptPt currentPoint : segment.points) {
+					long totalTime = currentPoint.time - gpxItem.analysis.startTime;
+					if (totalTime >= time) {
+						if (previousPoint != null) {
+							double percent = 1 - (totalTime - time) / (currentPoint.time - previousPoint.time);
+							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
+							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
+							latLon = new LatLon(previousPoint.lat + dLat, previousPoint.lon + dLon);
+						} else {
+							latLon = new LatLon(currentPoint.lat, currentPoint.lon);
+						}
 						break;
 					}
+					previousPoint = currentPoint;
 				}
 			} else {
 				float distance = pos * dataSet.getDivX();
 				double previousSplitDistance = 0;
+				WptPt previousPoint = null;
 				for (int i = 0; i < segment.points.size(); i++) {
 					WptPt currentPoint = segment.points.get(i);
-					if (i != 0) {
-						WptPt previousPoint = segment.points.get(i - 1);
+					if (previousPoint != null) {
 						if (currentPoint.distance < previousPoint.distance) {
 							previousSplitDistance += previousPoint.distance;
 						}
 					}
-					if (previousSplitDistance + currentPoint.distance >= distance) {
-						wpt = currentPoint;
+					double totalDistance = previousSplitDistance + currentPoint.distance;
+					if (totalDistance >= distance) {
+						if (previousPoint != null) {
+							double percent = 1 - (totalDistance - distance) / (currentPoint.distance - previousPoint.distance);
+							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
+							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
+							latLon = new LatLon(previousPoint.lat + dLat, previousPoint.lon + dLon);
+						} else {
+							latLon = new LatLon(currentPoint.lat, currentPoint.lon);
+						}
 						break;
 					}
+					previousPoint = currentPoint;
 				}
 			}
 		}
-		return wpt;
+		return latLon;
 	}
 
 	private QuadRect getRect(LineChart chart, float startPos, float endPos) {
@@ -338,14 +357,13 @@ public class TrackDetailsMenu {
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 
-			TrackDetailsMenuFragment fragment = getMenuFragment();
-			if (fragment != null) {
-				boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-				if (!portrait) {
-					tileBoxWidthPx = tb.getPixWidth() - fragment.getWidth();
-				} else {
-					tileBoxHeightPx = tb.getPixHeight() - fragment.getHeight();
-				}
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			if (!portrait) {
+				int width = getFragmentWidth();
+				tileBoxWidthPx = width != -1 ? tb.getPixWidth() - width : 0;
+			} else {
+				int height = getFragmentHeight();
+				tileBoxHeightPx = height != -1 ? tb.getPixHeight() - height : 0;
 			}
 			if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
 				if (forceFit) {
@@ -361,6 +379,22 @@ public class TrackDetailsMenu {
 				}
 			}
 		}
+	}
+
+	protected int getFragmentWidth() {
+		TrackDetailsMenuFragment fragment = getMenuFragment();
+		if (fragment != null) {
+			return fragment.getWidth();
+		}
+		return -1;
+	}
+
+	protected int getFragmentHeight() {
+		TrackDetailsMenuFragment fragment = getMenuFragment();
+		if (fragment != null) {
+			return fragment.getHeight();
+		}
+		return -1;
 	}
 
 	public void refreshChart(LineChart chart, boolean forceFit) {
@@ -402,9 +436,8 @@ public class TrackDetailsMenu {
 			} else {
 				gpxItem.chartHighlightPos = highlights[0].getX();
 			}
-			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
-			if (wpt != null) {
-				location = new LatLon(wpt.lat, wpt.lon);
+			location = getLocationAtPos(chart, gpxItem.chartHighlightPos);
+			if (location != null) {
 				trackChartPoints.setHighlightedPoint(location);
 			}
 		} else {
@@ -419,7 +452,7 @@ public class TrackDetailsMenu {
 		fitTrackOnMap(chart, location, forceFit);
 	}
 
-	private List<WptPt> getXAxisPoints(LineChart chart) {
+	private List<LatLon> getXAxisPoints(LineChart chart) {
 		float[] entries = chart.getXAxis().mEntries;
 		float maxXValue = chart.getLineData().getXMax();
 		if (entries.length >= 2) {
@@ -428,8 +461,8 @@ public class TrackDetailsMenu {
 				xAxisPoints = new ArrayList<>();
 				float currentPointEntry = interval;
 				while (currentPointEntry < maxXValue) {
-					WptPt pointToAdd = getPoint(chart, currentPointEntry);
-					xAxisPoints.add(pointToAdd);
+					LatLon location = getLocationAtPos(chart, currentPointEntry);
+					xAxisPoints.add(location);
 					currentPointEntry += interval;
 				}
 			}
@@ -725,12 +758,12 @@ public class TrackDetailsMenu {
 	}
 
 	public static class TrackChartPoints {
-		private List<WptPt> xAxisPoints;
+		private List<LatLon> xAxisPoints;
 		private LatLon highlightedPoint;
 		private int segmentColor;
 		private GPXFile gpx;
 
-		public List<WptPt> getXAxisPoints() {
+		public List<LatLon> getXAxisPoints() {
 			return xAxisPoints;
 		}
 
@@ -746,7 +779,7 @@ public class TrackDetailsMenu {
 			return gpx;
 		}
 
-		public void setXAxisPoints(List<WptPt> xAxisPoints) {
+		public void setXAxisPoints(List<LatLon> xAxisPoints) {
 			this.xAxisPoints = xAxisPoints;
 		}
 

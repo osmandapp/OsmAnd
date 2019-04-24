@@ -98,21 +98,31 @@
             android:layout_height="1dp"
             android:layout_weight="1"/>
 
-        <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/copy_maps"
-            style="@style/DashboardGeneralButton"
-            android:gravity="center"
-            android:text="@string/shared_string_copy"
-            osmand:textAllCapsCompat="true"
-            osmand:typeface="@string/font_roboto_medium"/>
+     
 
         <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/confirm"
+            android:id="@+id/cancel"
             style="@style/DashboardGeneralButton"
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="@string/shared_string_continue"
+            android:text="@string/shared_string_cancel"
+            osmand:textAllCapsCompat="true"
+            osmand:typeface="@string/font_roboto_medium"/>
+
+        <net.osmand.plus.widgets.ButtonEx
+            android:id="@+id/dont_copy_maps"
+            style="@style/DashboardGeneralButton"
+            android:gravity="center"
+            android:text="@string/dont_move_maps"
+            osmand:textAllCapsCompat="true"
+            osmand:typeface="@string/font_roboto_medium"/>
+      
+         <net.osmand.plus.widgets.ButtonEx
+            android:id="@+id/copy_maps"
+            style="@style/DashboardGeneralButton"
+            android:gravity="center"
+            android:text="@string/move_maps"
             osmand:textAllCapsCompat="true"
             osmand:typeface="@string/font_roboto_medium"/>
     </LinearLayout>

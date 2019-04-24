@@ -3576,4 +3576,7 @@
     <string name="poi_flare">Frama de gas;Tortza de brusiadura</string>
     <string name="poi_change_delete">Ogetu iscantzelladu</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
+    <string name="poi_climbing_crag_filter">Falèsia</string>
+    <string name="poi_rescue_box">Iscàtula de sarvatàgiu</string>
+    <string name="poi_climbing_crag">Eja</string>
 </resources>

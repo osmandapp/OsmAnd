@@ -18,4 +18,19 @@ public interface OsmandAidlConstants {
 	int COPY_FILE_WRITE_LOCK_ERROR = -1003;
 	int COPY_FILE_IO_ERROR = -1004;
 	int COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR = -1005;
+
+	int TURN_TYPE_C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
+	int TURN_TYPE_TL = 2; // turn left //$NON-NLS-1$
+	int TURN_TYPE_TSLL = 3; // turn slightly left //$NON-NLS-1$
+	int TURN_TYPE_TSHL = 4; // turn sharply left //$NON-NLS-1$
+	int TURN_TYPE_TR = 5; // turn right //$NON-NLS-1$
+	int TURN_TYPE_TSLR = 6; // turn slightly right //$NON-NLS-1$
+	int TURN_TYPE_TSHR = 7; // turn sharply right //$NON-NLS-1$
+	int TURN_TYPE_KL = 8; // keep left //$NON-NLS-1$
+	int TURN_TYPE_KR = 9; // keep right//$NON-NLS-1$
+	int TURN_TYPE_TU = 10; // U-turn //$NON-NLS-1$
+	int TURN_TYPE_TRU = 11; // Right U-turn //$NON-NLS-1$
+	int TURN_TYPE_OFFR = 12; // Off route //$NON-NLS-1$
+	int TURN_TYPE_RNDB = 13; // Roundabout
+	int TURN_TYPE_RNLB = 14; // Roundabout left
 }

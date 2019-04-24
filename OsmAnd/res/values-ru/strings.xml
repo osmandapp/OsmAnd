@@ -1221,7 +1221,7 @@
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
     <string name="use_kalman_filter_compass_descr">Уменьшает \"шум\" компаса, но добавляет инерцию.</string>
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
-    <string name="cancel_navigation">Прекратить навигацию</string>
+    <string name="cancel_navigation">Остановить навигацию</string>
     <string name="use_magnetic_sensor">Использовать датчик магнитного поля</string>
     <string name="delete_point">Удалить точку</string>
     <string name="plugin_distance_point_time">время</string>
@@ -2049,7 +2049,7 @@
     <string name="rec_split">Разбиение на клипы</string>
     <string name="rec_split_title">Использовать разбиение на клипы</string>
     <string name="rec_split_desc">Циклическая перезапись клипов при превышении заданного объема хранилища.</string>
-    <string name="switch_start_finish">Поменять местами пункт отправления и пункт назначения</string>
+    <string name="switch_start_finish">Обратить пункты старта и назначения</string>
     <string name="shared_string_remove">Удалить</string>
     <string name="rendering_attr_hideUnderground_name">Подземные объекты</string>
     <string name="data_is_not_available">Данные недоступны</string>
@@ -2335,7 +2335,7 @@
     <string name="edit_line">Редактировать линию</string>
     <string name="add_point_before">Добавить точку перед</string>
     <string name="add_point_after">Добавить точку после</string>
-    <string name="shared_string_options">Параметры</string>
+    <string name="shared_string_options">Опции</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
@@ -2670,7 +2670,7 @@
     <string name="map_import_error">Ошибка импорта карты</string>
     <string name="map_imported_successfully">Карта импортирована</string>
     <string name="transport_nearby_routes_within">Маршруты рядом с</string>
-    <string name="transport_nearby_routes">Рядом</string>
+    <string name="transport_nearby_routes">В пределах</string>
     <string name="enter_lon">Введите долготу</string>
     <string name="enter_lat">Введите широту</string>
     <string name="enter_lat_and_lon">Введите широту и долготу</string>
@@ -2903,7 +2903,7 @@
     <string name="add_destination_query">Сначала добавьте пункт назначения</string>
     <string name="shared_string_swap">Поменять</string>
     <string name="show_more">Показать больше</string>
-    <string name="tracks_on_map">Треки на карте</string>
+    <string name="tracks_on_map">Отображаемые треки</string>
     <string name="quick_action_show_hide_gpx_tracks">Показать/скрыть GPX треки</string>
     <string name="quick_action_gpx_tracks_hide">Скрыть GPX треки</string>
     <string name="quick_action_gpx_tracks_show">Показать GPX треки</string>
@@ -3015,4 +3015,5 @@
 \n• Отображение азимута в инструменте \"Измерить расстояние\"
 \n
 \n</string>
+    <string name="send_log">Отправить log</string>
 </resources>
