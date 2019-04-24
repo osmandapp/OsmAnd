@@ -1461,7 +1461,7 @@ Lorratza %2$s</string>
     <string name="shared_string_logoff">Itxi saioa</string>
     <string name="rendering_attr_hideHouseNumbers_name">Etxeen zenbakiak</string>
     <string name="specified_directiory_not_writeable">Ezin izan dira mapak zehaztutako direktorioan sortu</string>
-    <string name="copying_osmand_file_failed">Fitxategiak kopiatzeak huts egin du</string>
+    <string name="copying_osmand_file_failed">Fitxategiak lekuz aldatzean huts egin du</string>
     <string name="storage_directory_external">Kanpo biltegiratzea</string>
     <string name="storage_directory_internal_app">Barne aplikazio memoria</string>
     <string name="storage_directory_manual">Eskuz zehaztuta</string>
@@ -1717,7 +1717,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="disable_recording_once_app_killed">Eragotzi bigarren planoko egunkaria</string>
     <string name="disable_recording_once_app_killed_descrp">GPX erregistroa geldiaraziko du aplikazioa hiltzean (azken aplikazioak pantailaren bidez). (OsmAnd bigarren planoan dabilela adierazten duen ikonoa Android jakinarazpen barratik desagertuko da)</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC bidezidor kirol sinboloen araberako koloreztatzea</string>
-    <string name="application_dir_change_warning3">Kopiatu OsmAnd-en datu fitxategiak xede berrira ?</string>
+    <string name="application_dir_change_warning3">Eraman OsmAnd-en datu fitxategiak xede berrira \?</string>
     <string name="storage_directory_multiuser">Erabiltzaile anitzeko biltegiratzea</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kartografia laguntzailea</string>
     <string name="welcome_select_region">Trafiko seinaleak eta arauak ongi adierazteko, mesedez hautatu zure gidatze eremua:</string>
