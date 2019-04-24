@@ -3037,4 +3037,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="send_log">Sendeprotokoll</string>
+    <string name="files_copied">Kopierte %1$d Dateien (%2$s).</string>
+    <string name="files_failed">Es konnten keine %1$d Dateien (%2$s) kopiert werden.</string>
+    <string name="public_transport_try_ped">Probieren Sie die Fußgängernavigation aus.</string>
+    <string name="public_transport_try_change_settings">Versuchen Sie, die Einstellungen zu ändern.</string>
+    <string name="public_transport_calc_pedestrian">Fußgängerroute berechnen</string>
+    <string name="public_transport_type">Transportart</string>
 </resources>
