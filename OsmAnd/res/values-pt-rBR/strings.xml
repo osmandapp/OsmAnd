@@ -12,9 +12,9 @@
     <string name="favorite_home_category">Casa</string>
     <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
-    <string name="application_dir_change_warning3">Copiar arquivos de dados OsmAnd para o novo destino\?</string>
+    <string name="application_dir_change_warning3">Mover arquivos de dados OsmAnd para o novo destino\?</string>
     <string name="specified_directiory_not_writeable">Mapas não podem ser criados no diretório especificado</string>
-    <string name="copying_osmand_file_failed">A cópia de arquivos falhou</string>
+    <string name="copying_osmand_file_failed">Falha ao mover os arquivos</string>
     <string name="storage_directory_external">Armazenamento externo</string>
     <string name="storage_directory_multiuser">Armazenamento multiusuário</string>
     <string name="storage_directory_internal_app">Memória interna do aplicativo</string>
@@ -1646,7 +1646,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evitar trem de conexão</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
-    <string name="tab_title_advanced">Estendido</string>
+    <string name="tab_title_advanced">Avançado</string>
     <string name="building_number">Número de edifício</string>
     <string name="next_proceed">Próximo</string>
     <string name="opening_at">Abre às</string>
@@ -3013,4 +3013,16 @@ Pôr do Sol: %2$s</string>
 \n  • Exibição do azimute na distância medida
 \n</string>
     <string name="send_log">Enviar log</string>
+    <string name="files_moved">Arquivos %1$d movidos (%2$s).</string>
+    <string name="files_copied">Arquivos %1$d copiados (%2$s).</string>
+    <string name="files_failed">Falha ao copiar %1$d arquivos (%2$s).</string>
+    <string name="files_present">"%1$d  arquivos (%2$s) estão presentes no local anterior \'%3$s\'."</string>
+    <string name="move_maps">Mover mapas</string>
+    <string name="dont_move_maps">Não Mover</string>
+    <string name="public_transport_ped_route_title">A rota a pé é de aproximadamente %1$s e pode ser mais rápida do que por transporte público</string>
+    <string name="public_transport_no_route_title">Infelizmente, OsmAnd não conseguiu encontrar uma rota adequada para suas configurações.</string>
+    <string name="public_transport_try_ped">Experimente a navegação a pé.</string>
+    <string name="public_transport_try_change_settings">Tente alterar as configurações.</string>
+    <string name="public_transport_calc_pedestrian">Calcular rota a pé</string>
+    <string name="public_transport_type">Tipo de transporte</string>
 </resources>
