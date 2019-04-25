@@ -18,6 +18,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import net.osmand.plus.profiles.RoutingProfile;
+import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 import net.sf.junidecode.App;
 import org.apache.commons.logging.Log;
@@ -225,6 +228,11 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder userProfileTitle(String userProfileTitle) {
 			applicationMode.userProfileName = userProfileTitle;
+			return this;
+		}
+
+		public ApplicationModeBuilder assignRoutingProfile(GeneralRouter.GeneralRouterProfile profile) {
+			applicationMode.assignedRoutingProfile = profile;
 			return this;
 		}
 	}
@@ -461,6 +469,10 @@ public class ApplicationMode {
 		return this == mode || getParent() == mode;
 	}
 
+	public GeneralRouter.GeneralRouterProfile getAssignedRouteingProfile() {
+		return assignedRoutingProfile;
+	}
+
 	public int getMapIconsSetId() {
 		return mapIconsSetId;
 	}
@@ -488,6 +500,7 @@ public class ApplicationMode {
 	@Expose private int locationIconNight = R.drawable.map_pedestrian_location_night;
 	@Expose private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 	@Expose private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+	@Expose private GeneralRouter.GeneralRouterProfile assignedRoutingProfile = null;
 	private static StateChangedListener<String> listener;
 	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
 
