@@ -217,4 +217,7 @@
     <string name="search_contacts_descr">Шукаць ва ўсіх вашых групах і кантактах.</string>
     <string name="type_contact_or_group_name">Увядзіце назву групы альбо кантакта</string>
     <string name="shared_string_search">Пошук</string>
+    <string name="direction">Накірунак</string>
+    <string name="precision">Дакладнасць</string>
+    <string name="altitude">Вышыня над узроўнем мора</string>
 </resources>
