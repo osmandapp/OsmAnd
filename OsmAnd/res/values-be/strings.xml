@@ -464,7 +464,7 @@
     <string name="oclock">гадзін</string>
     <string name="towards">у кірунку</string>
     <string name="accuracy">Дакладнасць</string>
-    <string name="altitude">Вышыня</string>
+    <string name="altitude">Вышыня над узроўнем мора</string>
     <string name="no_info">Інфармацыя адсутнічае</string>
     <string name="direction_style_sidewise">Па накірункам свету (8 сектараў)</string>
     <string name="direction_style_clockwise">Па стрэлцы гадзінніка (12 сектараў)</string>
@@ -3033,4 +3033,16 @@
 \n
 \n</string>
     <string name="send_log">Адправіць журнал</string>
+    <string name="files_moved">Перамешчана %1$d файлаў (%2$s).</string>
+    <string name="files_copied">Скапіявана %1$d файлаў (%2$s).</string>
+    <string name="files_failed">Не атрымалася скапіяваць %1$d файлаў (%2$s).</string>
+    <string name="files_present">%1$d файлаў (%2$s) знаходзіцца ў папярэднім месцы \'%3$s\'.</string>
+    <string name="move_maps">Перамясціць мапы</string>
+    <string name="dont_move_maps">Не перамяшчаць</string>
+    <string name="public_transport_ped_route_title">Маршрут пешшу складае %1$s, дайсці можна хутчэй, чым рухацца на грамадскім транспарце</string>
+    <string name="public_transport_no_route_title">На жаль, OsmAnd не змог знайсці маршрут па вашых наладах.</string>
+    <string name="public_transport_try_ped">Паспрабуйце пешаходную навігацыю.</string>
+    <string name="public_transport_try_change_settings">Паспрабуйце змяніць налады.</string>
+    <string name="public_transport_calc_pedestrian">Падлічыць пешаходны маршрут</string>
+    <string name="public_transport_type">Тып транспарту</string>
 </resources>
