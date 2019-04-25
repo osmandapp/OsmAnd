@@ -1532,7 +1532,7 @@ Hosszúság: %2$s</string>
     <string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépelj az összes kereséséhez</string>
     <string name="specified_directiory_not_writeable">A térképeket nem sikerült létrehozni a megadott könyvtárban</string>
-    <string name="copying_osmand_file_failed">A fájlok másolása sikertelen</string>
+    <string name="copying_osmand_file_failed">A fájlok áthelyezése sikertelen</string>
     <string name="storage_directory_external">Külső tároló</string>
     <string name="storage_directory_multiuser">Többfelhasználós tároló</string>
     <string name="storage_directory_internal_app">Belső alkalmazás-memória</string>
@@ -1543,7 +1543,7 @@ Hosszúság: %2$s</string>
     <string name="rendering_value__name">Alapértelmezett</string>
     <string name="rendering_value_highContrastRoads_name">Nagy kontrasztú utak</string>
     <string name="index_name_netherlands">Európa – Hollandia</string>
-    <string name="application_dir_change_warning3">Az OsmAnd adatfájljait másoljuk az új helyre?</string>
+    <string name="application_dir_change_warning3">Az OsmAnd adatfájljait áthelyezzük az új helyre\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
     <string name="routing_attr_avoid_borders_description">Országhatár átlépésének elkerülése</string>
     <string name="routing_attr_height_name">Magasságkorlátozás</string>
@@ -2985,4 +2985,26 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="rendering_attr_undefined_name">Meghatározatlan</string>
     <string name="routing_attr_avoid_sett_name">Macskakő és kavicsburkolat elkerülése</string>
     <string name="routing_attr_avoid_sett_description">Macskakő és kavicsburkolat elkerülése</string>
+    <string name="files_moved">%1$d fájl áthelyezve (%2$s).</string>
+    <string name="files_copied">%1$d fájl átmásolva (%2$s).</string>
+    <string name="files_failed">%1$d fájl másolása nem sikerült (%2$s).</string>
+    <string name="files_present">%1$d fájl (%2$s) megtalálható az előző helyen: \'%3$s\'.</string>
+    <string name="move_maps">Térképek áthelyezése</string>
+    <string name="dont_move_maps">Ne mozogjon</string>
+    <string name="public_transport_ped_route_title">Az út gyalogosan körülbelül %1$s, vagyis valószínűleg gyorsabb, mint tömegközlekedéssel.</string>
+    <string name="public_transport_no_route_title">Az OsmAnd sajnos nem talál a beállításoknak megfelelő útvonalat.</string>
+    <string name="public_transport_try_ped">Próbálja meg a gyalogos navigációt.</string>
+    <string name="public_transport_try_change_settings">Próbálja meg módosítani a beállításokat.</string>
+    <string name="public_transport_calc_pedestrian">Gyalogos útvonal kiszámítása</string>
+    <string name="public_transport_type">Közlekedési mód</string>
+    <string name="send_log">Napló küldése</string>
+    <string name="release_3_3_7">• A tömegközlekedési átszállási idők megjelenítése
+\n
+\n • Javított felhasználói felület az útvonal részleteivel
+\n
+\n • Javított sötét téma az Irányok menüben és az Útvonal részleteinél
+\n
+\n • A távolságmérésnél a tájolás megjelenítése
+\n
+\n</string>
 </resources>
