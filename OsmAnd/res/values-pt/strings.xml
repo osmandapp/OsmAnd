@@ -1310,9 +1310,9 @@
     <string name="plugin_install_needs_network">Você precisa estar conectado à Internet para instalar este complemento.</string>
     <string name="welcome_select_region">Para refletir corretamente seus sinais e regras de trânsito, por favor, selecione a região que você dirige:</string>
     <string name="rendering_attr_hideHouseNumbers_name">Números da casa</string>
-    <string name="application_dir_change_warning3">Copiar os ficheiros de dados OsmAnd para o novo destino\?</string>
+    <string name="application_dir_change_warning3">Mover os ficheiros de dados OsmAnd para o novo destino\?</string>
     <string name="specified_directiory_not_writeable">Mapas não podem ser criados no diretório especificado</string>
-    <string name="copying_osmand_file_failed">A cópia de ficheiros falhou</string>
+    <string name="copying_osmand_file_failed">Mover ficheiros falhou</string>
     <string name="storage_directory_external">Armazenamento externo</string>
     <string name="storage_directory_multiuser">Armazenamento multiusuário</string>
     <string name="storage_directory_manual">Especificado manualmente</string>
@@ -3010,4 +3010,16 @@
     <string name="routing_attr_avoid_sett_description">Evitar paralelepípedo</string>
     <string name="send_log">Enviar log</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
+    <string name="files_moved">%1$d ficheiros movidos (%2$s).</string>
+    <string name="files_copied">%1$d ficheiros copiados (%2$s).</string>
+    <string name="files_failed">Não foi possível copiar %1$d ficheiros (%2$s).</string>
+    <string name="files_present">%1$d ficheiros (%2$s) estão presentes na localização anterior \'%3$s\'.</string>
+    <string name="move_maps">Mover mapas</string>
+    <string name="dont_move_maps">Não mover</string>
+    <string name="public_transport_ped_route_title">A rota a pé é de aproximadamente %1$s e pode ser mais rápida do que o transporte público</string>
+    <string name="public_transport_no_route_title">Infelizmente, OsmAnd não conseguiu encontrar uma rota adequada para sua configuração.</string>
+    <string name="public_transport_try_ped">Tente a navegação pedestre.</string>
+    <string name="public_transport_try_change_settings">Tente alterar a configuração.</string>
+    <string name="public_transport_calc_pedestrian">Calcular a rota pedestre</string>
+    <string name="public_transport_type">Tipo de transporte</string>
 </resources>

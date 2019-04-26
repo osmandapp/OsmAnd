@@ -217,4 +217,8 @@
     <string name="search_contacts_descr">Pesquise em todos os seus grupos e contatos.</string>
     <string name="type_contact_or_group_name">Digite o nome do contato ou do grupo</string>
     <string name="shared_string_search">Pesquisar</string>
+    <string name="direction">Direção</string>
+    <string name="precision">Precisão</string>
+    <string name="altitude">Altitude</string>
+    <string name="bearing">Rolamento</string>
 </resources>

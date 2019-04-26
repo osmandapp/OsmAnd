@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
-    <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
+    <string name="copying_osmand_file_failed">Fallo al mover archivos</string>
     <string name="storage_directory_external">Almacenamiento externo</string>
     <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
     <string name="specified_directiory_not_writeable">No se pueden crear mapas en el directorio indicado</string>
@@ -30,7 +30,7 @@
     <string name="mark_to_delete">Marcar para borrar</string>
     <string name="local_osm_changes_upload_all_confirm">¿Subir %1$d cambio(s) a OSM?</string>
     <string name="confirmation_to_clear_history">¿Limpiar el historial?</string>
-    <string name="application_dir_change_warning3">¿Copiar los archivos de datos de OsmAnd al nuevo destino?</string>
+    <string name="application_dir_change_warning3">¿Mover los archivos de datos de OsmAnd al nuevo destino\?</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_places">Lugares</string>
     <string name="delay_to_start_navigation_descr">Indica el tiempo de espera para permanecer en la pantalla de planificación de ruta.</string>
@@ -3003,19 +3003,19 @@ Lon %2$s</string>
     <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="quick_action_day_night_mode">modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Evitar el empedrado y adoquín</string>
+    <string name="routing_attr_avoid_sett_name">Evitar el empedrado y adoquinado</string>
     <string name="routing_attr_avoid_sett_description">Evita las calles empedradas y adoquinadas</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Mil angular</string>
     <string name="angular_measeurement">Unidades de medición angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
-    <string name="routing_attr_avoid_tram_name">Evitar los tranvías</string>
+    <string name="routing_attr_avoid_tram_name">Evitar tranvías</string>
     <string name="routing_attr_avoid_tram_description">Evita usar los tranvías</string>
-    <string name="routing_attr_avoid_bus_name">Evitar los autobuses</string>
+    <string name="routing_attr_avoid_bus_name">Evitar autobuses</string>
     <string name="routing_attr_avoid_bus_description">Evita usar los autobuses y trolebuses</string>
-    <string name="routing_attr_avoid_share_taxi_name">Evitar los taxis colectivos</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evitar taxis colectivos</string>
     <string name="routing_attr_avoid_share_taxi_description">Evita usar los taxis colectivos</string>
-    <string name="routing_attr_avoid_train_name">Evitar los trenes</string>
+    <string name="routing_attr_avoid_train_name">Evitar trenes</string>
     <string name="routing_attr_avoid_train_description">Evita usar los trenes</string>
     <string name="routing_attr_avoid_subway_name">Evitar subterráneos</string>
     <string name="routing_attr_avoid_subway_description">Evita usar los subterráneos y trenes ligeros</string>
@@ -3030,4 +3030,16 @@ Lon %2$s</string>
 \n • Visualización de medida «azimut» en «Medir distancia»
 \n</string>
     <string name="send_log">Enviar registro del problema</string>
+    <string name="files_moved">Se movieron %1$d archivos (%2$s).</string>
+    <string name="files_copied">Se copiaron %1$d archivos (%2$s).</string>
+    <string name="files_failed">Error al copiar %1$d archivo(s) (%2$s).</string>
+    <string name="files_present">Existen %1$d archivo(s) (%2$s) en la ubicación anterior «%3$s».</string>
+    <string name="move_maps">Mover mapas</string>
+    <string name="dont_move_maps">No mover</string>
+    <string name="public_transport_ped_route_title">La ruta a pie es de aproximadamente %1$s y podría ser más rápida que en transporte público</string>
+    <string name="public_transport_no_route_title">Por desgracia, OsmAnd no pudo encontrar una ruta adecuada para sus ajustes.</string>
+    <string name="public_transport_try_ped">Prueba la navegación a pie.</string>
+    <string name="public_transport_try_change_settings">Intenta cambiar los ajustes.</string>
+    <string name="public_transport_calc_pedestrian">Calcular la ruta a pie</string>
+    <string name="public_transport_type">Tipo de transporte</string>
 </resources>

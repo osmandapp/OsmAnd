@@ -1527,12 +1527,12 @@ Lon %2$s</string>
     <string name="index_name_netherlands">Europa - Olanda</string>
     <string name="search_poi_category_hint">Iscrie pro chircare totu</string>
     <string name="specified_directiory_not_writeable">Sas mapas non podent èssere creadas in sa cartella dislindada</string>
-    <string name="copying_osmand_file_failed">Còpia de sos documentos fallida</string>
+    <string name="copying_osmand_file_failed">Tramudòngiu de sos documentos fallidu</string>
     <string name="storage_directory_external">Memòria esterna</string>
     <string name="storage_directory_manual">Dislindada manualmente</string>
     <string name="storage_directory_default">Memòria interna</string>
     <string name="shared_string_copy">Còpia</string>
-    <string name="application_dir_change_warning3">Cheres copiare in sa destinatzione noa fintzas sos documentos de sos datos de OsmAnd?</string>
+    <string name="application_dir_change_warning3">Cheres tramudare in sa destinatzione noa fintzas sos documentos de sos datos de OsmAnd\?</string>
     <string name="storage_directory_internal_app">Memòria interna de s\'aplicatzione</string>
     <string name="rendering_value__name">Predefinidu</string>
     <string name="rendering_value_highContrastRoads_name">Caminos a cuntrastu artu</string>
@@ -3017,4 +3017,16 @@ Pro praghere iscrie su còdighe intreu</string>
 \n
 \n</string>
     <string name="send_log">Imbia su registru</string>
+    <string name="files_moved">%1$d documentos tramudados (%2$s).</string>
+    <string name="files_copied">%1$d documentos copiados (%2$s).</string>
+    <string name="files_failed">Còpia de %1$d documentos fallida (%2$s).</string>
+    <string name="files_present">%1$d documentos (%2$s) sunt presentes in sa positzione anteposta \'%3$s\'.</string>
+    <string name="move_maps">Tràmuda sas mapas</string>
+    <string name="dont_move_maps">Non tràmudes</string>
+    <string name="public_transport_ped_route_title">Cust\'àndala a pede est pagu prus o mancu de %1$s e diat pòdere èssere prus lestra de su trasportu pùblicu</string>
+    <string name="public_transport_no_route_title">A dolu mannu OsmAnd no at pòtiu agatare un\'àndala adata a sas impostatziones tuas.</string>
+    <string name="public_transport_try_ped">Proa su nàvigu a pede.</string>
+    <string name="public_transport_try_change_settings">Proa a cambiare sas impostatziones.</string>
+    <string name="public_transport_calc_pedestrian">Càlcula un\'àndala a pede</string>
+    <string name="public_transport_type">Casta de trasportu</string>
 </resources>

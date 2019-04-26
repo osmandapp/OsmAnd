@@ -1536,9 +1536,9 @@ Długość %2$s</string>
     <string name="shared_string_manage">Zarządzaj</string>
     <string name="shared_string_edit">Edytuj</string>
     <string name="filter_poi_hint">Filtruj po nazwie</string>
-    <string name="application_dir_change_warning3">Skopiować pliki danych OsmAnd do nowego miejsca docelowego?</string>
+    <string name="application_dir_change_warning3">Przenieść pliki danych OsmAnd do nowego miejsca docelowego\?</string>
     <string name="specified_directiory_not_writeable">Nie można zapisać map we wskazanym katalogu</string>
-    <string name="copying_osmand_file_failed">Nie udało się skopiować plików</string>
+    <string name="copying_osmand_file_failed">Przenoszenie plików nie powiodło się</string>
     <string name="storage_directory_external">Pamięć zewnętrzna</string>
     <string name="storage_directory_default">Pamięć wewnętrzna</string>
     <string name="shared_string_copy">Skopiuj</string>
@@ -3034,4 +3034,16 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_avoid_share_taxi_name">Unikanie taksówek zbiorowych</string>
     <string name="routing_attr_avoid_share_taxi_description">Unikanie taksówek zbiorowych</string>
     <string name="send_log">Wyślij dziennik</string>
+    <string name="files_moved">Przeniesiono %1$d plików (%2$s).</string>
+    <string name="files_copied">Skopiowano %1$d plików (%2$s).</string>
+    <string name="files_failed">"Nie udało się skopiować %1$d plików  (%2$s)."</string>
+    <string name="files_present">%1$d pliki (%2$s) są obecne w poprzedniej lokalizacji \'%3$s\'.</string>
+    <string name="move_maps">Przenieś mapy</string>
+    <string name="dont_move_maps">Nie przenoś</string>
+    <string name="public_transport_ped_route_title">Trasa pieszo wynosi około %1$s i może być szybsza niż transportem publicznym</string>
+    <string name="public_transport_no_route_title">Niestety OsmAnd nie mógł znaleźć trasy odpowiedniej dla Twoich ustawień.</string>
+    <string name="public_transport_try_ped">Wypróbuj nawigację pieszą.</string>
+    <string name="public_transport_try_change_settings">Spróbuj zmienić ustawienia.</string>
+    <string name="public_transport_calc_pedestrian">Oblicz trasę pieszą</string>
+    <string name="public_transport_type">Typ transportu</string>
 </resources>

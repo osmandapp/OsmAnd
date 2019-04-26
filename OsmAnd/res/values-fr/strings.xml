@@ -1524,7 +1524,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="rendering_value__name">Par défaut</string>
     <string name="rendering_value_highContrastRoads_name">Routes avec fort contraste</string>
     <string name="specified_directiory_not_writeable">Impossible de créer les cartes dans le dossier spécifié</string>
-    <string name="copying_osmand_file_failed">Échec lors de la copie des fichiers</string>
+    <string name="copying_osmand_file_failed">Échec lors du déplacement des fichiers</string>
     <string name="storage_directory_external">Stockage externe</string>
     <string name="storage_directory_multiuser">Stockage multi-utilisateurs</string>
     <string name="storage_directory_internal_app">Mémoire interne de l\'application</string>
@@ -1532,7 +1532,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="storage_directory_default">Mémoire interne</string>
     <string name="storage_directory">Stockage de la carte</string>
     <string name="shared_string_copy">Copier</string>
-    <string name="application_dir_change_warning3">Copier les fichiers vers la nouvelle destination ?</string>
+    <string name="application_dir_change_warning3">Déplacer les fichiers de données vers la nouvelle destination \?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numérotation des bâtiments</string>
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières</string>
     <string name="routing_attr_height_name">Limite de hauteur</string>
@@ -2997,4 +2997,16 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_avoid_bus_description">Éviter le bus et le trolleybus</string>
     <string name="routing_attr_avoid_sett_name">Éviter les pavés</string>
     <string name="routing_attr_avoid_sett_description">Éviter les pavés</string>
+    <string name="files_moved">%1$d fichiers déplacés (%2$s).</string>
+    <string name="files_copied">%1$d fichiers copiés (%2$s).</string>
+    <string name="files_failed">Impossible de copier %1$d fichiers (%2$s).</string>
+    <string name="files_present">%1$d fichiers (%2$s) sont présents à l\'emplacement précédent \'%3$s\'.</string>
+    <string name="move_maps">Déplacer les cartes</string>
+    <string name="dont_move_maps">Ne pas déplacer</string>
+    <string name="public_transport_ped_route_title">L\'itinéraire piéton est approximativement de %1$s et peut-être plus rapide qu\'en transport public.</string>
+    <string name="public_transport_no_route_title">Malheureusement OsmAnd n\'a pas trouvé d\'itinéraire avec les paramètres courants.</string>
+    <string name="public_transport_try_ped">Essayez l\'itinéraire piéton.</string>
+    <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
+    <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
+    <string name="public_transport_type">Type de transport</string>
 </resources>
