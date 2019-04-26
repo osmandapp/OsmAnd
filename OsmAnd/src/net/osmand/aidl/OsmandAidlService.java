@@ -158,8 +158,9 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 	@Override
 	public long addAidlCallback(IOsmAndAidlCallback callback, int key) {
-		callbacks.put(getAndIncrementCallbackId(), new AidlCallbackParams(callback, key));
-		return getCallbackId();
+		long id = getAndIncrementCallbackId();
+		callbacks.put(id, new AidlCallbackParams(callback, key));
+		return id;
 	}
 
 	@Override
@@ -765,7 +766,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
 					long id = addAidlCallback(callback, KEY_ON_UPDATE);
 					startRemoteUpdates(updateTimeMS, id, callback);
-					return getCallbackId();
+					return id;
 				} else {
 					return MIN_UPDATE_TIME_MS_ERROR;
 				}
