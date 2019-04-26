@@ -1,5 +1,5 @@
 apply plugin: 'java'
-    
+apply plugin: 'maven-publish'
     
 configurations {
 	android
@@ -77,6 +77,14 @@ artifacts {
 	android androidJar
 }
 
+publishing {
+    publications {
+        maven(MavenPublication) {
+			artifactId "osmand-base"
+            from components.java
+        }
+    }
+}
 
 dependencies {
 	testImplementation 'junit:junit:4.12'
