@@ -106,6 +106,27 @@ object AndroidUtils {
 		}
 	}
 
+	fun getNavBarHeight(ctx: Context): Int {
+		if (!hasNavBar(ctx)) {
+			return 0
+		}
+		val landscape = ctx.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+		val isSmartphone = ctx.resources.configuration.smallestScreenWidthDp < 600
+		if (isSmartphone && landscape) {
+			return 0
+		}
+		val name = if (landscape) "navigation_bar_height_landscape" else "navigation_bar_height"
+		val id = ctx.resources.getIdentifier(name, "dimen", "android")
+		return if (id > 0) {
+			ctx.resources.getDimensionPixelSize(id)
+		} else 0
+	}
+
+	fun hasNavBar(ctx: Context): Boolean {
+		val id = ctx.resources.getIdentifier("config_showNavigationBar", "bool", "android")
+		return id > 0 && ctx.resources.getBoolean(id)
+	}
+
 	fun enterToTransparentFullScreen(activity: Activity) {
 		if (Build.VERSION.SDK_INT >= 23) {
 			val window = activity.window
