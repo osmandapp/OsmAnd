@@ -3020,4 +3020,9 @@
     <string name="routing_attr_avoid_sett_name">Уникати мостові та бруківку</string>
     <string name="routing_attr_avoid_sett_description">Уникати мостові та бруківку</string>
     <string name="send_log">Надіслати журнал</string>
+    <string name="files_moved">Переміщено %1$d файлів (%2$s).</string>
+    <string name="files_copied">Скопійовано %1$d файлів (%2$s).</string>
+    <string name="files_failed">Невдача при копіюванні %1$d файлів (%2$s).</string>
+    <string name="files_present">%1$d файлів (%2$s) присутні в попередній локації \'%3$s\'.</string>
+    <string name="move_maps">Перемістити мапи</string>
 </resources>
