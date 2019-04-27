@@ -3018,7 +3018,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_avoid_tram_name">Straßenbahnen meiden</string>
     <string name="routing_attr_avoid_tram_description">Straßenbahnen meiden</string>
     <string name="routing_attr_avoid_bus_name">Busse meiden</string>
-    <string name="routing_attr_avoid_bus_description">Busse und Trolleybusse meiden</string>
+    <string name="routing_attr_avoid_bus_description">Busse und Oberleitungsbusse meiden</string>
     <string name="routing_attr_avoid_share_taxi_name">Sammeltaxi meiden</string>
     <string name="routing_attr_avoid_share_taxi_description">Sammeltaxi meiden</string>
     <string name="routing_attr_avoid_train_name">Züge meiden</string>
@@ -3027,16 +3027,16 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">U-Bahnen und leichten Schienenverkehr meiden</string>
     <string name="routing_attr_avoid_ferry_name">Fähren meiden</string>
     <string name="routing_attr_avoid_ferry_description">Fähren meiden</string>
-    <string name="release_3_3_7">• Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln
-\n
-\n• Korrigierte Benutzeroberfläche für die Routendetails korrigiert
-\n
-\n• Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert.
-\n
+    <string name="release_3_3_7">• Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln 
+\n 
+\n• Korrigierte Benutzeroberfläche für die Routendetails
+\n 
+\n• Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert. 
+\n 
 \n• Azimut in der Maßeinheit Distanz anzeigen
 \n
 \n</string>
-    <string name="send_log">Sendeprotokoll</string>
+    <string name="send_log">Log senden</string>
     <string name="files_copied">Kopierte %1$d Dateien (%2$s).</string>
     <string name="files_failed">Es konnten keine %1$d Dateien (%2$s) kopiert werden.</string>
     <string name="public_transport_try_ped">Probieren Sie die Fußgängernavigation aus.</string>
