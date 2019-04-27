@@ -433,7 +433,7 @@
     <string name="poi_seafood">Fischgeschäft</string>
     <string name="poi_anchor_berth">Ankerplatz</string>
     <string name="poi_anchorage">Ankerplatz</string>
-    <string name="poi_beacon">Bake (Seezeichen)</string>
+    <string name="poi_beacon">Bake</string>
     <string name="poi_beacon_cardinal">Untiefenbake (Kardinal)</string>
     <string name="poi_beacon_lateral">Fahrrinnenbake (Lateral)</string>
     <string name="poi_beacon_safe_water">Mitte-Fahrwasser-Bake</string>
@@ -3202,7 +3202,7 @@
     <string name="poi_gorge">Schlucht</string>
     <string name="poi_couloir">Felsschlucht</string>
     <string name="poi_mountain_area">Berggebiet</string>
-    <string name="poi_surface_clay">Sand</string>
+    <string name="poi_surface_clay">Asche</string>
     <string name="poi_surface_tartan">Tartan</string>
     <string name="poi_surface_artificial_turf">Kunstrasen</string>
     <string name="poi_surface_decoturf">Zierrasen</string>
@@ -3534,7 +3534,7 @@
     <string name="poi_substation_valve">Ventil</string>
     <string name="poi_substation_valve_group">Ventilgruppe</string>
     <string name="poi_substation_field_gathering">Feldleitung</string>
-    <string name="poi_pipeline_substation">Pipeline-Umspannwerk</string>
+    <string name="poi_pipeline_substation">Pipeline-Verteiler</string>
     <string name="poi_substation_inspection_gauge">Kontrollmanometer</string>
     <string name="poi_craft_confectionery">Süßwarenproduktion</string>
     <string name="poi_shop_wholesale">Großhandel</string>
