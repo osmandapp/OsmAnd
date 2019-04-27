@@ -145,7 +145,7 @@
     <string name="turn_off_location_sharing">Standortfreigabe ausschalten</string>
     <string name="shared_string_bot">Bot</string>
     <string name="set_visible_time_for_all">Für alle sichtbare Zeit einstellen</string>
-    <string name="set_time_description">Zeit einstellen, zu der Ihren Kontakten und Gruppen Ihr Standorts in Echtzeit angezeigt wird.</string>
+    <string name="set_time_description">Stellen Sie die Zeit ein, zu der Ihren ausgewählten Kontakten und Gruppen Ihr Standort in Echtzeit angezeigt wird.</string>
     <string name="location_sharing_description">Kontakte und Gruppen wählen, denen Sie Ihren Standort freigeben möchten.</string>
     <string name="start_location_sharing">Standort freigeben</string>
     <string name="location_service_no_gps_available">Wählen Sie einen der Standortanbieter aus, um Ihren Standort freizugeben.</string>
