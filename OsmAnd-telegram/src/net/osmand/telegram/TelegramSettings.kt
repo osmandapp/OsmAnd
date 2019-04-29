@@ -85,6 +85,9 @@ private const val MONITORING_ENABLED = "monitoring_enabled"
 
 private const val SHOW_GPS_POINTS = "show_gps_points"
 
+private const val PROXY_ENABLED = "proxy_enabled"
+private const val PROXY_PREFERENCES_KEY = "proxy_preferences"
+
 private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
 private const val WAITING_TDLIB_TIME = 30 // 2 seconds
 
@@ -101,6 +104,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
 	var currentSharingMode = ""
+		private set
+
+	var currentProxyPref: ProxyPref = ProxySOCKS5Pref(-1, "", -1, "", "")
 		private set
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
@@ -124,9 +130,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	var showGpsPoints = false
 
+	var proxyEnabled = false
+
 	init {
 		updatePrefs()
 		read()
+		applyProxyPref()
 	}
 
 	fun hasAnyChatToShareLocation() = shareChatsInfo.isNotEmpty()
@@ -200,6 +209,30 @@ class TelegramSettings(private val app: TelegramApplication) {
 			prepareForSharingNewMessages()
 		}
 		currentSharingMode = sharingMode
+	}
+
+	fun updateCurrentProxyPref(proxyPref: ProxyPref, proxyEnabled: Boolean) {
+		this.proxyEnabled = proxyEnabled
+		currentProxyPref = proxyPref
+		applyProxyPref()
+	}
+
+	fun updateProxySetting(enable: Boolean) {
+		this.proxyEnabled = enable
+		if (enable) {
+			app.telegramHelper.enableProxy(currentProxyPref.id)
+		} else {
+			app.telegramHelper.disableProxy()
+		}
+	}
+
+	fun applyProxyPref() {
+		val proxyId = currentProxyPref.id
+		if (proxyId != -1) {
+			app.telegramHelper.editProxyPref(currentProxyPref, proxyEnabled)
+		} else {
+			app.telegramHelper.addProxyPref(currentProxyPref, proxyEnabled)
+		}
 	}
 
 	fun prepareForSharingNewMessages() {
@@ -536,6 +569,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putBoolean(SHOW_GPS_POINTS, showGpsPoints)
 
+		edit.putBoolean(PROXY_ENABLED, proxyEnabled)
+
 		val jArray = convertShareChatsInfoToJson()
 		if (jArray != null) {
 			edit.putString(SHARE_CHATS_INFO_KEY, jArray.toString())
@@ -544,6 +579,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val jsonObject = convertShareDevicesToJson()
 		if (jsonObject != null) {
 			edit.putString(SHARE_DEVICES_KEY, jsonObject.toString())
+		}
+
+		val jsonObjectProxy = convertProxyPrefToJson()
+		if (jsonObjectProxy != null) {
+			edit.putString(PROXY_PREFERENCES_KEY, jsonObjectProxy.toString())
 		}
 
 		edit.apply()
@@ -597,7 +637,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		monitoringEnabled = prefs.getBoolean(MONITORING_ENABLED,false)
 
-		showGpsPoints = prefs.getBoolean(SHOW_GPS_POINTS,false)
+		showGpsPoints = prefs.getBoolean(SHOW_GPS_POINTS, false)
+
+		proxyEnabled = prefs.getBoolean(PROXY_ENABLED, false)
+		try {
+			parseProxyPreferences(JSONObject(prefs.getString(PROXY_PREFERENCES_KEY, "")))
+		} catch (e: JSONException) {
+			e.printStackTrace()
+		}
 	}
 
 	private fun convertShareDevicesToJson():JSONObject?{
@@ -615,6 +662,27 @@ class TelegramSettings(private val app: TelegramApplication) {
 				jArray.put(obj)
 			}
 			jsonObject.put(SHARE_DEVICES_KEY, jArray)
+		} catch (e: JSONException) {
+			e.printStackTrace()
+			null
+		}
+	}
+
+	private fun convertProxyPrefToJson(): JSONObject? {
+		return try {
+			val proxyPref = currentProxyPref
+			JSONObject().apply {
+				put(ProxyPref.PROXY_ID, proxyPref.id)
+				put(ProxyPref.TYPE_ID, proxyPref.type)
+				put(ProxyPref.SERVER_ID, proxyPref.server)
+				put(ProxyPref.PORT_ID, proxyPref.port)
+				if (proxyPref is ProxyMTProtoPref) {
+					put(ProxyMTProtoPref.KEY_ID, proxyPref.key)
+				} else if (proxyPref is ProxySOCKS5Pref) {
+					put(ProxySOCKS5Pref.LOGIN_ID, proxyPref.login)
+					put(ProxySOCKS5Pref.PASSWORD_ID, proxyPref.password)
+				}
+			}
 		} catch (e: JSONException) {
 			e.printStackTrace()
 			null
@@ -675,6 +743,28 @@ class TelegramSettings(private val app: TelegramApplication) {
 				sentMessages = obj.optInt(ShareChatInfo.SENT_MESSAGES_KEY)
 			}
 			shareChatsInfo[shareInfo.chatId] = shareInfo
+		}
+	}
+
+	private fun parseProxyPreferences(jsonObject: JSONObject) {
+		val proxyId = jsonObject.optInt(ProxyPref.PROXY_ID)
+		val typeString = jsonObject.optString(ProxyPref.TYPE_ID)
+		val server = jsonObject.optString(ProxyPref.SERVER_ID)
+		val port = jsonObject.optInt(ProxyPref.PORT_ID)
+		val proxyPref = when {
+			ProxyType.valueOf(typeString) == ProxyType.MTPROTO -> {
+				val key = jsonObject.optString(ProxyMTProtoPref.KEY_ID)
+				ProxyMTProtoPref(proxyId, server, port, key)
+			}
+			ProxyType.valueOf(typeString) == ProxyType.SOCKS5 -> {
+				val login = jsonObject.optString(ProxySOCKS5Pref.LOGIN_ID)
+				val password = jsonObject.optString(ProxySOCKS5Pref.PASSWORD_ID)
+				ProxySOCKS5Pref(proxyId, server, port, login, password)
+			}
+			else -> null
+		}
+		if (proxyPref != null) {
+			currentProxyPref = proxyPref
 		}
 	}
 
@@ -923,6 +1013,45 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val DEVICE_NAME = "deviceName"
 			internal const val EXTERNAL_ID = "externalId"
 			internal const val DATA = "data"
+		}
+	}
+
+	enum class ProxyType {
+		MTPROTO, SOCKS5
+	}
+
+	abstract class ProxyPref(
+		var id: Int,
+		var type: ProxyType,
+		open var server: String,
+		open var port: Int
+	) {
+		companion object {
+			internal const val PROXY_ID = "proxyId"
+			internal const val TYPE_ID = "type"
+			internal const val SERVER_ID = "serverId"
+			internal const val PORT_ID = "portId"
+		}
+	}
+
+	class ProxyMTProtoPref(id: Int, server: String, port: Int, var key: String) :
+		ProxyPref(id, ProxyType.MTPROTO, server, port) {
+		companion object {
+			internal const val KEY_ID = "key"
+		}
+	}
+
+	class ProxySOCKS5Pref(
+		id: Int,
+		server: String,
+		port: Int,
+		var login: String,
+		var password: String
+	) :
+		ProxyPref(id, ProxyType.SOCKS5, server, port) {
+		companion object {
+			internal const val LOGIN_ID = "login"
+			internal const val PASSWORD_ID = "password"
 		}
 	}
 

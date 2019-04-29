@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fitsSystemWindows="true"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<android.support.design.widget.AppBarLayout
+			android:id="@+id/app_bar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/card_bg_color">
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/action_bar_height">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:text="@string/proxy_settings"
+					android:textColor="@color/app_bar_title_light"
+					android:textSize="@dimen/title_text_size"
+					app:typeface="@string/font_roboto_mono_bold" />
+
+			</android.support.v7.widget.Toolbar>
+
+			<View
+				android:layout_width="wrap_content"
+				android:layout_height="1dp"
+				android:layout_marginStart="@dimen/content_padding_standard"
+				android:layout_marginLeft="@dimen/content_padding_standard"
+				android:background="?attr/card_divider_color" />
+
+			<LinearLayout
+				android:id="@+id/enable_proxy_btn"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/selectableItemBackground"
+				android:minHeight="50dp"
+				android:orientation="horizontal"
+				tools:background="@color/card_bg_light">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/title"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_vertical"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/shared_string_enable"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:typeface="@string/font_roboto_regular" />
+
+				<Switch
+					android:id="@+id/switcher"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard" />
+
+			</LinearLayout>
+
+		</android.support.design.widget.AppBarLayout>
+
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/list_view_bottom_padding_big">
+
+				<include layout="@layout/list_item_divider" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/card_bg_color"
+					android:orientation="vertical">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="@dimen/list_header_height"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:maxLines="1"
+						android:paddingLeft="@dimen/content_padding_standard"
+						android:paddingRight="@dimen/content_padding_standard"
+						android:text="@string/proxy_type"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/list_item_title_text_size"
+						app:typeface="@string/font_roboto_medium" />
+
+					<LinearLayout
+						android:id="@+id/proxy_type_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical" />
+
+				</LinearLayout>
+
+				<include layout="@layout/list_item_divider" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/card_bg_color"
+					android:orientation="vertical">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="@dimen/list_header_height"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:maxLines="1"
+						android:paddingLeft="@dimen/content_padding_standard"
+						android:paddingRight="@dimen/content_padding_standard"
+						android:text="@string/shared_string_connection"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/list_item_title_text_size"
+						app:typeface="@string/font_roboto_medium" />
+
+					<LinearLayout
+						android:id="@+id/connection_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:paddingLeft="@dimen/content_padding_standard"
+						android:paddingRight="@dimen/content_padding_standard"
+						android:paddingBottom="@dimen/content_padding_standard">
+
+						<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+							android:layout_width="match_parent"
+							android:layout_height="@dimen/list_item_height"
+							android:layout_marginBottom="@dimen/content_padding_standard"
+							app:hasClearButton="true"
+							app:labelText="@string/proxy_server">
+
+							<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+								android:id="@+id/server_edit_text"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:inputType="text" />
+
+						</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+						<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+							android:layout_width="match_parent"
+							android:layout_height="@dimen/list_item_height"
+							app:hasClearButton="true"
+							app:labelText="@string/proxy_port">
+
+							<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+								android:id="@+id/port_edit_text"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:inputType="numberDecimal" />
+
+						</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/proxy_sosks5_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<include layout="@layout/list_item_divider" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="?attr/card_bg_color"
+						android:orientation="vertical">
+
+						<net.osmand.telegram.ui.views.TextViewEx
+							android:layout_width="match_parent"
+							android:layout_height="@dimen/list_header_height"
+							android:ellipsize="end"
+							android:gravity="center_vertical"
+							android:maxLines="1"
+							android:paddingLeft="@dimen/content_padding_standard"
+							android:paddingRight="@dimen/content_padding_standard"
+							android:text="@string/proxy_credentials"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/list_item_title_text_size"
+							app:typeface="@string/font_roboto_medium" />
+
+						<LinearLayout
+							android:id="@+id/credentials_container"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="vertical"
+							android:paddingLeft="@dimen/content_padding_standard"
+							android:paddingRight="@dimen/content_padding_standard"
+							android:paddingBottom="@dimen/content_padding_standard">
+
+							<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+								android:layout_width="match_parent"
+								android:layout_height="@dimen/list_item_height"
+								android:layout_marginBottom="@dimen/content_padding_standard"
+								app:hasClearButton="true"
+								app:labelText="@string/proxy_username">
+
+								<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+									android:id="@+id/username_text"
+									android:layout_width="match_parent"
+									android:layout_height="wrap_content"
+									android:inputType="text" />
+
+							</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+							<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+								android:layout_width="match_parent"
+								android:layout_height="@dimen/list_item_height"
+								app:hasClearButton="true"
+								app:labelText="@string/proxy_password">
+
+								<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+									android:id="@+id/password_text"
+									android:layout_width="match_parent"
+									android:layout_height="wrap_content"
+									android:inputType="textPassword" />
+
+							</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+						</LinearLayout>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/proxy_mtproto_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<include layout="@layout/list_item_divider" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="?attr/card_bg_color"
+						android:orientation="vertical">
+
+						<net.osmand.telegram.ui.views.TextViewEx
+							android:layout_width="match_parent"
+							android:layout_height="@dimen/list_header_height"
+							android:ellipsize="end"
+							android:gravity="center_vertical"
+							android:maxLines="1"
+							android:paddingLeft="@dimen/content_padding_standard"
+							android:paddingRight="@dimen/content_padding_standard"
+							android:text="@string/proxy_credentials"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/list_item_title_text_size"
+							app:typeface="@string/font_roboto_medium" />
+
+						<LinearLayout
+							android:id="@+id/mtproto_container"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="vertical"
+							android:paddingLeft="@dimen/content_padding_standard"
+							android:paddingRight="@dimen/content_padding_standard"
+							android:paddingBottom="@dimen/content_padding_standard">
+
+							<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+								android:layout_width="match_parent"
+								android:layout_height="@dimen/list_item_height"
+								android:layout_marginBottom="@dimen/content_padding_standard"
+								app:hasClearButton="true"
+								app:labelText="@string/proxy_key">
+
+								<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+									android:id="@+id/key_text"
+									android:layout_width="match_parent"
+									android:layout_height="wrap_content"
+									android:inputType="text" />
+
+							</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+						</LinearLayout>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+				<include layout="@layout/card_bottom_divider" />
+
+			</LinearLayout>
+
+		</ScrollView>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/save_button_Container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
+		<android.support.v7.widget.AppCompatImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="fitXY"
+			android:src="?attr/bottom_nav_shadow" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/proxy_save_button_height"
+			android:layout_gravity="bottom"
+			android:background="?attr/card_bg_color"
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingTop="@dimen/image_button_padding"
+			android:paddingRight="@dimen/content_padding_standard"
+			android:paddingBottom="@dimen/image_button_padding">
+
+			<include layout="@layout/primary_btn" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</FrameLayout>
