@@ -92,6 +92,32 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			container.addView(this)
 		}
 
+		container = mainView.findViewById<ViewGroup>(R.id.proxy_settings_container)
+		inflater.inflate(R.layout.item_with_descr_and_right_switch, container, false).apply {
+			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_proxy))
+			findViewById<ImageView>(R.id.icon_right).apply {
+				visibility = View.VISIBLE
+				setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_additional_option))
+				setOnClickListener {
+					activity?.supportFragmentManager?.also { ProxySettingsDialogFragment.showInstance(it, this@SettingsDialogFragment) }
+				}
+			}
+			findViewById<TextView>(R.id.title).text = getText(R.string.proxy)
+			val description = findViewById<TextView>(R.id.description).apply {
+				text = if (settings.proxyEnabled) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
+			}
+			val switcher = findViewById<Switch>(R.id.switcher).apply {
+				isChecked = app.settings.proxyEnabled
+			}
+			setOnClickListener {
+				val checked = !app.settings.proxyEnabled
+				switcher.isChecked = checked
+				settings.updateProxySetting(checked)
+				description.text = if (checked) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
+			}
+			container.addView(this)
+		}
+
 		shareAsDescription = mainView.findViewById<TextView>(R.id.share_as_description).apply {
 			text = getText(R.string.share_location_as_description)
 			setOnClickListener {
@@ -212,6 +238,12 @@ class SettingsDialogFragment : BaseDialogFragment() {
 							Toast.makeText(app, getString(R.string.device_added_successfully, device.deviceName), Toast.LENGTH_SHORT).show()
 						}
 					}
+				}
+			}
+			ProxySettingsDialogFragment.PROXY_PREFERENCES_UPDATED_REQUEST_CODE -> {
+				view?.findViewById<ViewGroup>(R.id.proxy_settings_container)?.apply {
+					findViewById<TextView>(R.id.description)?.text = if (settings.proxyEnabled) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
+					findViewById<Switch>(R.id.switcher)?.isChecked = app.settings.proxyEnabled
 				}
 			}
 		}

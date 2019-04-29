@@ -44,6 +44,7 @@
 	<dimen name="list_item_baseline_to_top_height_big">28dp</dimen>
 
 	<dimen name="list_view_bottom_padding">52dp</dimen>
+	<dimen name="list_view_bottom_padding_big">140dp</dimen>
 
 	<dimen name="card_divider_bottom_margin">6dp</dimen>
 
@@ -72,6 +73,8 @@
 	<dimen name="bottom_sheet_peek_height">300dp</dimen>
 	
 	<dimen name="list_popup_window_height">300dp</dimen>
+
+	<dimen name="proxy_save_button_height">60dp</dimen>
 
 	<!-- Text sizes -->
 
