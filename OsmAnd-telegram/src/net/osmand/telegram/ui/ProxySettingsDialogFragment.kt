@@ -107,7 +107,6 @@ class ProxySettingsDialogFragment : BaseDialogFragment() {
 					text = getString(R.string.shared_string_save)
 					setOnClickListener {
 						saveChanges()
-						updateSaveButtonVisibility(false)
 						targetFragment?.also { target ->
 							target.onActivityResult(targetRequestCode, PROXY_PREFERENCES_UPDATED_REQUEST_CODE, null)
 						}
