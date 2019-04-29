@@ -66,7 +66,7 @@ class ProxySettingsDialogFragment : BaseDialogFragment() {
 				val checked = !proxyEnableSwitcher.isChecked
 				proxyEnableSwitcher.isChecked = checked
 				title.text = if (checked) getText(R.string.shared_string_disable) else getText(R.string.shared_string_enable)
-				updateSaveButtonVisibility(checked == settings.proxyEnabled)
+				updateSaveButtonVisibility(true)
 			}
 		}
 
