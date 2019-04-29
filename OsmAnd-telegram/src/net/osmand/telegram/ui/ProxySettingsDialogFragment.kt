@@ -190,7 +190,7 @@ class ProxySettingsDialogFragment : BaseDialogFragment() {
 				selectedProxyType = proxyTypeTag
 				updateSelectedProxyType()
 				updateEditingMode()
-				updateSaveButtonVisibility(true)
+				updateSaveButtonVisibility(selectedProxyType != settings.currentProxyPref.type && portEditText.text.isNotEmpty() && serverEditText.text.isNotEmpty())
 			}
 			this.tag = proxyTypeTag
 			container.addView(this)
