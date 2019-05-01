@@ -75,12 +75,12 @@
     <string name="poi_bag">Sak-vendejo</string>
     <string name="poi_bathroom_furnishing">Lavĉambr-akcesoraĵa vendejo</string>
     <string name="poi_bed">Litaĵ-vendejo</string>
-    <string name="poi_boutique">Galanteriejo</string>
+    <string name="poi_boutique">Mod‑butiko</string>
     <string name="poi_camera">Fotiloj-k-lensoj vendejo</string>
     <string name="poi_carpet">Tapiŝ-vendejo</string>
     <string name="poi_chemist">Purigaĵ-vendejo</string>
     <string name="poi_charity">Almoza vendejo</string>
-    <string name="poi_clothes">Vest-vendejo</string>
+    <string name="poi_clothes">Vest‑vendejo</string>
     <string name="poi_clothes_children">infanaj</string>
     <string name="poi_shoes">Ŝu-vendejo</string>
     <string name="poi_candles">Kandel-vendejo</string>
@@ -124,7 +124,7 @@
     <string name="poi_doityourself">Memfaradil-vendejo</string>
     <string name="poi_doors">Pord-vendejo</string>
     <string name="poi_erotic">Seksumil-vendejo</string>
-    <string name="poi_fashion">Mod-butiko</string>
+    <string name="poi_fashion">Vest‑vendejo</string>
     <string name="poi_fishing">Fiŝkaptil-vendejo</string>
     <string name="poi_florist">Florvendejo</string>
     <string name="poi_frame">Kadroj-de-pentraĵoj-vendejo</string>
@@ -923,7 +923,7 @@
     <string name="poi_strait">Markolo</string>
     <string name="poi_anchorage">Rodo (regiono)</string>
     <string name="poi_anchor_berth">Rodo (preciza ankrejo)</string>
-    <string name="poi_beacon">Buo fiksa</string>
+    <string name="poi_beacon">Signalilo</string>
     <string name="poi_beacon_cardinal">Buo fiksa: ĉefa (mondflanka)</string>
     <string name="poi_beacon_lateral">Buo fiksa: flanka (latera)</string>
     <string name="poi_beacon_safe_water">Buo fiksa: sekurakva</string>
