@@ -1307,7 +1307,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="impassable_road">Blokkeer wegen…</string>
     <string name="rendering_category_hide">Verberg</string>
     <string name="lock_screen_request_explanation">%1$s heeft toestemming nodig om het scherm uit te kunnen schakelen (als onderdeel van de stroombesparende functie).</string>
-    <string name="home_button">Beginscherm</string>
+    <string name="home_button">Thuis</string>
     <string name="search_for">Zoek naar</string>
     <string name="coordinates">Coördinaten</string>
     <string name="map_update">Updates beschikbaar voor %1$s kaart(en)</string>
@@ -2920,4 +2920,5 @@ voor Gebied: %1$s x %2$s</string>
     <string name="lang_gn_py">Guarani</string>
     <string name="routing_attr_avoid_sett_name">Vermijd straatkeien en kasseien</string>
     <string name="routing_attr_avoid_sett_description">Vermijd straatkeien en kasseien</string>
+    <string name="routing_attr_avoid_tram_name">Vermijd trams</string>
 </resources>

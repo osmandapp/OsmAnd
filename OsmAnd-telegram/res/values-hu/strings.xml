@@ -216,4 +216,8 @@
     <string name="active_chats">Aktív csevegések</string>
     <string name="shared_string_authorization">Engedélyezés</string>
     <string name="shared_string_authorization_descr">Kérjük, nemzetközi formátumban adja meg a Telegramhoz használt telefonszámát</string>
+    <string name="direction">Irány</string>
+    <string name="precision">Pontosság</string>
+    <string name="altitude">Magasság</string>
+    <string name="bearing">Tájolás</string>
 </resources>

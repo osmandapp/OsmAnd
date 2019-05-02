@@ -71,12 +71,16 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
+import net.osmand.plus.routepreparationmenu.cards.LongDistanceWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
+import net.osmand.plus.routepreparationmenu.cards.PedestrianRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportBetaWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
-import net.osmand.plus.routepreparationmenu.cards.WarningCard;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -87,11 +91,11 @@ import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.SearchResult;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -100,12 +104,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
-
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
 
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
+	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
 
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible = false;
@@ -378,10 +381,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void routeCalculationStarted() {
+		setRouteCalculationInProgress(true);
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
-			setRouteCalculationInProgress(true);
 			fragment.updateRouteCalculationProgress(0);
 			fragment.updateInfo();
 		}
@@ -506,20 +509,54 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else if (isTransportRouteCalculated()) {
 			TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
 			List<TransportRouteResult> routes = transportRoutingHelper.getRoutes();
-			for (int i = 0; i < routes.size(); i++) {
-				PublicTransportCard card = new PublicTransportCard(mapActivity, transportRoutingHelper.getStartLocation(),
-						transportRoutingHelper.getEndLocation(), routes.get(i), i);
-				card.setShowBottomShadow(i == routes.size() - 1);
-				card.setShowTopShadow(i != 0);
-				card.setListener(this);
-				menuCards.add(card);
+			if (routes != null && routes.size() > 0) {
+				TransportRouteResult route = routes.get(0);
+				int walkTimeReal = transportRoutingHelper.getWalkingTime(route.getSegments());
+				int walkTimePT = (int) route.getWalkTime();
+				int walkTime = walkTimeReal > 0 ? walkTimeReal : walkTimePT;
+				int travelTime = (int) route.getTravelTime() + walkTime;
+				LatLon startLocation = transportRoutingHelper.getStartLocation();
+				LatLon endLocation = transportRoutingHelper.getEndLocation();
+				int approxPedestrianTime = (int) MapUtils.getDistance(startLocation, endLocation);
+				boolean showPedestrianCard = approxPedestrianTime < travelTime + 60 && approxPedestrianTime < MAX_PEDESTRIAN_ROUTE_DURATION;
+				for (int i = 0; i < routes.size(); i++) {
+					route = routes.get(i);
+					PublicTransportCard card = new PublicTransportCard(mapActivity, startLocation, endLocation, route, i);
+					card.setShowBottomShadow(i == routes.size() - 1 && !showPedestrianCard);
+					card.setShowTopShadow(i != 0);
+					card.setListener(this);
+					menuCards.add(card);
+				}
+				if (showPedestrianCard) {
+					PedestrianRouteCard pedestrianRouteCard = new PedestrianRouteCard(mapActivity, approxPedestrianTime);
+					pedestrianRouteCard.setListener(this);
+					menuCards.add(pedestrianRouteCard);
+				}
+				bottomShadowVisible = routes.size() == 0;
+			} else {
+				RouteMenuAppModes mode = app.getRoutingOptionsHelper().modes.get(routingHelper.getAppMode());
+				boolean avoidPTTypesCustomized = false;
+				for (LocalRoutingParameter parameter : mode.parameters) {
+					if (parameter instanceof AvoidPTTypesRoutingParameter) {
+						avoidPTTypesCustomized = true;
+						break;
+					}
+				}
+				if (avoidPTTypesCustomized) {
+					PublicTransportNotFoundSettingsWarningCard warningCard = new PublicTransportNotFoundSettingsWarningCard(mapActivity);
+					warningCard.setListener(this);
+					menuCards.add(warningCard);
+				} else {
+					PublicTransportNotFoundWarningCard warningCard = new PublicTransportNotFoundWarningCard(mapActivity);
+					warningCard.setListener(this);
+					menuCards.add(warningCard);
+				}
 			}
-			bottomShadowVisible = routes.size() == 0;
 		} else if (routeCalculationInProgress) {
-			if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() || routingHelper.isPublicTransportMode()) {
-				// WarningCard card
-				WarningCard warningCard = new WarningCard(mapActivity);
-				menuCards.add(warningCard);
+			if (app.getRoutingHelper().isPublicTransportMode()) {
+				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
+			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate()) {
+				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
 		} else {
 			// Home/work card
@@ -634,6 +671,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			} else if (card instanceof SimpleRouteCard) {
 				hide();
 				ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), 0, MenuState.FULL_SCREEN);
+			} else if (card instanceof PublicTransportNotFoundWarningCard) {
+				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
+			} else if (card instanceof PublicTransportNotFoundSettingsWarningCard) {
+				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
+				avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
+			} else if (card instanceof PedestrianRouteCard) {
+				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
 			}
 		}
 	}
@@ -646,6 +690,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		OsmandApplication app = getApp();
 		if (app != null) {
 			return app.getRoutingHelper().isPublicTransportMode() && app.getTransportRoutingHelper().getRoutes() != null;
+		}
+		return false;
+	}
+
+	public boolean hasTransportRoutes() {
+		OsmandApplication app = getApp();
+		if (app != null) {
+			List<TransportRouteResult> routes = app.getTransportRoutingHelper().getRoutes();
+			return routes != null && routes.size() > 0;
 		}
 		return false;
 	}
@@ -871,7 +924,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		int color1;
 		int color2;
 		if (publicTransportMode) {
-			if (routeCalculated) {
+			if (routeCalculated && hasTransportRoutes()) {
 				color1 = nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light;
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 				color2 = color1;
@@ -1318,15 +1371,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			if (mapActivity.getPointToNavigate() != null) {
-				hide();
-			}
 			if (app.getRoutingHelper().isPublicTransportMode()) {
-				if (isTransportRouteCalculated()) {
+				if (isTransportRouteCalculated() && hasTransportRoutes()) {
+					if (mapActivity.getPointToNavigate() != null) {
+						hide();
+					}
 					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
 							app.getTransportRoutingHelper().getCurrentRoute(), MenuState.HEADER_ONLY);
 				}
 			} else {
+				if (mapActivity.getPointToNavigate() != null) {
+					hide();
+				}
 				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
 			}
 		}

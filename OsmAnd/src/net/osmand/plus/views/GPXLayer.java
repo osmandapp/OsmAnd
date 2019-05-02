@@ -1,8 +1,5 @@
 package net.osmand.plus.views;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -24,16 +21,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Pair;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -59,6 +56,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		ContextMenuLayer.IMoveObjectProvider, MapTextProvider<WptPt> {
@@ -449,10 +449,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
         paintGridCircle.setAlpha(255);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		float r = 3 * tileBox.getDensity();
-		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
+		List<LatLon> xAxisPoints = trackChartPoints.getXAxisPoints();
 		if (xAxisPoints != null) {
+			float density = (float) Math.ceil(tileBox.getDensity());
+			float outerRadius = r + 2 * density;
+			float innerRadius = r + density;
+			QuadRect prevPointRect = null;
 			for (int i = 0; i < xAxisPoints.size(); i++) {
-				WptPt axisPoint = xAxisPoints.get(i);
+				LatLon axisPoint = xAxisPoints.get(i);
 				if (axisPoint != null) {
 					if (axisPoint.getLatitude() >= latLonBounds.bottom
 							&& axisPoint.getLatitude() <= latLonBounds.top
@@ -460,8 +464,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							&& axisPoint.getLongitude() <= latLonBounds.right) {
 						float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
 						float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-						canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
-						canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
+						QuadRect pointRect = new QuadRect(x - outerRadius, y - outerRadius, x + outerRadius, y + outerRadius);
+						if (prevPointRect == null || !QuadRect.intersects(prevPointRect, pointRect)) {
+							canvas.drawCircle(x, y, outerRadius, paintGridOuterCircle);
+							canvas.drawCircle(x, y, innerRadius, paintGridCircle);
+							prevPointRect = pointRect;
+						}
 					}
 				}
 			}

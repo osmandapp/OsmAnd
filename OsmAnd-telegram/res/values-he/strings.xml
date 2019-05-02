@@ -216,4 +216,8 @@
     <string name="search_contacts_descr">חיפוש בין כל הקבוצות ואנשי הקשר שלך.</string>
     <string name="type_contact_or_group_name">נא להקליד שם איש קשר או קבוצה</string>
     <string name="shared_string_search">חיפוש</string>
+    <string name="direction">כיוון</string>
+    <string name="precision">דיוק</string>
+    <string name="altitude">גובה</string>
+    <string name="bearing">תכווין</string>
 </resources>

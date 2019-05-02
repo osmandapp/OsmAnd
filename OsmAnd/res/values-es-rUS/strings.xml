@@ -3029,4 +3029,5 @@ Lon %2$s</string>
 \n
 \n • Visualización de medida «azimut» en «Medir distancia»
 \n</string>
+    <string name="send_log">Enviar registro del problema</string>
 </resources>

@@ -2,6 +2,7 @@ package net.osmand.plus.routepreparationmenu;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -28,11 +29,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
+import com.github.mikephil.charting.renderer.HorizontalBarChartRenderer;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -116,10 +121,23 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	private RouteDetailsFragmentListener routeDetailsListener;
 	private RouteStatisticCard statisticCard;
 	private List<RouteInfoCard> routeInfoCards = new ArrayList<>();
-	private TrackDetailsMenu trackDetailsMenu;
+	private RouteDetailsMenu routeDetailsMenu;
 
 	public interface RouteDetailsFragmentListener {
 		void onNavigationRequested();
+	}
+
+	private class RouteDetailsMenu extends TrackDetailsMenu {
+
+		@Override
+		protected int getFragmentWidth() {
+			return getWidth();
+		}
+
+		@Override
+		protected int getFragmentHeight() {
+			return getMenuFullHeight();
+		}
 	}
 
 	@Override
@@ -182,8 +200,8 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && isPortrait()) {
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.GONE);
-			if (trackDetailsMenu != null) {
-				trackDetailsMenu.setMapActivity(mapActivity);
+			if (routeDetailsMenu != null) {
+				routeDetailsMenu.setMapActivity(mapActivity);
 			}
 		}
 	}
@@ -193,8 +211,9 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && isPortrait()) {
 			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.VISIBLE);
-			if (trackDetailsMenu != null) {
-				trackDetailsMenu.setMapActivity(null);
+			if (routeDetailsMenu != null) {
+				routeDetailsMenu.setMapActivity(null);
+				mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 			}
 		}
 		super.onPause();
@@ -314,10 +333,18 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		OsmandApplication app = mapActivity.getMyApplication();
 		statisticCard = new RouteStatisticCard(mapActivity, gpx, new OnTouchListener() {
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+			public boolean onTouch(View v, MotionEvent ev) {
 				InterceptorLinearLayout mainView = getMainView();
 				if (mainView != null) {
 					mainView.requestDisallowInterceptTouchEvent(true);
+				}
+				for (RouteInfoCard card : routeInfoCards) {
+					final HorizontalBarChart ch = card.getChart();
+					if (ch != null) {
+						final MotionEvent event = MotionEvent.obtainNoHistory(ev);
+						event.setSource(0);
+						ch.dispatchTouchEvent(event);
+					}
 				}
 				return false;
 			}
@@ -364,15 +391,24 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				addRouteCard(cardsContainer, routeSmoothnessCard);
 			}
 		}
-		trackDetailsMenu = new TrackDetailsMenu();
+		routeDetailsMenu = new RouteDetailsMenu();
 		GpxDisplayItem gpxItem = statisticCard.getGpxItem();
 		if (gpxItem != null) {
-			trackDetailsMenu.setGpxItem(gpxItem);
+			routeDetailsMenu.setGpxItem(gpxItem);
 		}
-		trackDetailsMenu.setMapActivity(mapActivity);
+		routeDetailsMenu.setMapActivity(mapActivity);
 		LineChart chart = statisticCard.getChart();
 		if (chart != null) {
-			trackDetailsMenu.refreshChart(chart, true);
+			chart.setExtraRightOffset(16);
+			chart.setExtraLeftOffset(16);
+		}
+	}
+
+	@Override
+	protected void calculateLayout(View view, boolean initLayout) {
+		super.calculateLayout(view, initLayout);
+		if (!initLayout && getCurrentMenuState() != MenuState.FULL_SCREEN) {
+			refreshChart(false);
 		}
 	}
 
@@ -394,15 +430,16 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			@SuppressLint("ClickableViewAccessibility")
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
-				if (ev.getSource() != 0) {
-					for (RouteInfoCard card : routeInfoCards) {
-						final HorizontalBarChart ch = card.getChart();
-						if (ch != null && v instanceof HorizontalBarChart && ch != v) {
+				if (ev.getSource() != 0 && v instanceof HorizontalBarChart) {
+					if (statisticCard != null) {
+						LineChart ch = statisticCard.getChart();
+						if (ch != null) {
 							final MotionEvent event = MotionEvent.obtainNoHistory(ev);
 							event.setSource(0);
 							ch.dispatchTouchEvent(event);
 						}
 					}
+					return true;
 				}
 				return false;
 			}
@@ -420,6 +457,14 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		routeInfoCards.add(routeInfoCard);
 		HorizontalBarChart chart = routeInfoCard.getChart();
 		if (chart != null) {
+			LineChart mainChart = statisticCard.getChart();
+			if (mainChart != null) {
+				chart.getAxisRight().setAxisMinimum(mainChart.getXChartMin());
+				chart.getAxisRight().setAxisMaximum(mainChart.getXChartMax());
+			}
+			chart.setRenderer(new CustomBarChartRenderer(chart, chart.getAnimator(), chart.getViewPortHandler(), AndroidUtils.dpToPx(app, 1f) / 2f));
+			chart.setHighlightPerDragEnabled(false);
+			chart.setHighlightPerTapEnabled(false);
 			chart.setOnTouchListener(getChartTouchListener());
 		}
 	}
@@ -1408,7 +1453,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		OsmandApplication app = mapActivity.getMyApplication();
 		LinearLayout convertView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		if (transportStopRoute != null) {
-			String routeRef = transportStopRoute.route.getAdjustedRouteRef();
+			String routeRef = transportStopRoute.route.getAdjustedRouteRef(true);
 			int bgColor = transportStopRoute.getColor(app, isNightMode());
 
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
@@ -1621,59 +1666,56 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
-	private void refreshChart() {
+	private void refreshChart(boolean forceFit) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && trackDetailsMenu != null && statisticCard != null) {
+		if (mapActivity != null && routeDetailsMenu != null && statisticCard != null &&
+				!mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
 			LineChart chart = statisticCard.getChart();
 			if (chart != null) {
-				trackDetailsMenu.refreshChart(chart, false);
+				routeDetailsMenu.refreshChart(chart, forceFit);
 				mapActivity.refreshMap();
+			}
+		}
+	}
+
+	private void highlightRouteInfoCharts(@Nullable Highlight h) {
+		for (RouteInfoCard rc : routeInfoCards) {
+			HorizontalBarChart chart = rc.getChart();
+			if (chart != null) {
+				Highlight bh = h != null ? chart.getHighlighter().getHighlight(1, h.getXPx()) : null;
+				if (bh != null) {
+					bh.setDraw(h.getXPx(), 0);
+				}
+				chart.highlightValue(bh, true);
 			}
 		}
 	}
 
 	@Override
 	public void onValueSelected(BaseCard card, Entry e, Highlight h) {
-		refreshChart();
+		refreshChart(false);
+		highlightRouteInfoCharts(h);
 	}
 
 	@Override
 	public void onNothingSelected(BaseCard card) {
+		highlightRouteInfoCharts(null);
 	}
 
 	@Override
-	public void onChartGestureStart(BaseCard card, MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+	public void onChartGestureStart(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture) {
 	}
 
 	@Override
-	public void onChartGestureEnd(BaseCard card, MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-	}
+	public void onChartGestureEnd(BaseCard card, MotionEvent me, ChartGesture lastPerformedGesture, boolean hasTranslated) {
+		if ((lastPerformedGesture == ChartGesture.DRAG && hasTranslated) ||
+				lastPerformedGesture == ChartGesture.X_ZOOM ||
+				lastPerformedGesture == ChartGesture.Y_ZOOM ||
+				lastPerformedGesture == ChartGesture.PINCH_ZOOM ||
+				lastPerformedGesture == ChartGesture.DOUBLE_TAP ||
+				lastPerformedGesture == ChartGesture.ROTATE) {
 
-	@Override
-	public void onChartLongPressed(BaseCard card, MotionEvent me) {
-	}
-
-	@Override
-	public void onChartDoubleTapped(BaseCard card, MotionEvent me) {
-	}
-
-	@Override
-	public void onChartSingleTapped(BaseCard card, MotionEvent me) {
-	}
-
-	@Override
-	public void onChartFling(BaseCard card, MotionEvent me1, MotionEvent me2, float velocityX,
-							 float velocityY) {
-	}
-
-	@Override
-	public void onChartScale(BaseCard card, MotionEvent me, float scaleX, float scaleY) {
-	}
-
-	@Override
-	public void onChartTranslate(BaseCard card, Highlight h, MotionEvent me, float dX, float dY) {
-		if (h != null) {
-			refreshChart();
+			refreshChart(true);
 		}
 	}
 
@@ -1704,5 +1746,21 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	public static String getTimeDescription(OsmandApplication app, RouteDirectionInfo model) {
 		final int timeInSeconds = model.getExpectedTime();
 		return Algorithms.formatDuration(timeInSeconds, app.accessibilityEnabled());
+	}
+
+	private static class CustomBarChartRenderer extends HorizontalBarChartRenderer {
+
+		private float highlightHalfWidth;
+
+		CustomBarChartRenderer(BarDataProvider chart, ChartAnimator animator, ViewPortHandler viewPortHandler, float highlightHalfWidth) {
+			super(chart, animator, viewPortHandler);
+			this.highlightHalfWidth = highlightHalfWidth;
+		}
+
+		@Override
+		protected void setHighlightDrawPos(Highlight high, RectF bar) {
+			bar.left = high.getDrawX() - highlightHalfWidth;
+			bar.right = high.getDrawX() + highlightHalfWidth;
+		}
 	}
 }

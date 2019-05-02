@@ -9,14 +9,20 @@ public class NavigateSearchParams implements Parcelable {
 	private double startLat;
 	private double startLon;
 	private String searchQuery;
+	private double searchLat;
+	private double searchLon;
 	private String profile;
 	private boolean force;
 
-	public NavigateSearchParams(String startName, double startLat, double startLon, String searchQuery, String profile, boolean force) {
+	public NavigateSearchParams(String startName, double startLat, double startLon,
+								String searchQuery, double searchLat, double searchLon,
+								String profile, boolean force) {
 		this.startName = startName;
 		this.startLat = startLat;
 		this.startLon = startLon;
 		this.searchQuery = searchQuery;
+		this.searchLat = searchLat;
+		this.searchLon = searchLon;
 		this.profile = profile;
 		this.force = force;
 	}
@@ -53,6 +59,14 @@ public class NavigateSearchParams implements Parcelable {
 		return searchQuery;
 	}
 
+	public double getSearchLat() {
+		return searchLat;
+	}
+
+	public double getSearchLon() {
+		return searchLon;
+	}
+
 	public String getProfile() {
 		return profile;
 	}
@@ -69,6 +83,8 @@ public class NavigateSearchParams implements Parcelable {
 		out.writeString(searchQuery);
 		out.writeString(profile);
 		out.writeByte((byte) (force ? 1 : 0));
+		out.writeDouble(searchLat);
+		out.writeDouble(searchLon);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -78,6 +94,8 @@ public class NavigateSearchParams implements Parcelable {
 		searchQuery = in.readString();
 		profile = in.readString();
 		force = in.readByte() != 0;
+		searchLat = in.readDouble();
+		searchLon = in.readDouble();
 	}
 
 	@Override

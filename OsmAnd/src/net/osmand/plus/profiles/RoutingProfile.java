@@ -2,10 +2,13 @@ package net.osmand.plus.profiles;
 
 import android.os.Parcel;
 
+import net.osmand.router.GeneralRouter;
+
 public class RoutingProfile extends ProfileDataObject {
 
 	private String parent;
 	private boolean isSelected;
+	private String routerProfile;
 
 	public RoutingProfile(String name, String parent, int iconRes, boolean isSelected) {
 		super(name, parent, iconRes);

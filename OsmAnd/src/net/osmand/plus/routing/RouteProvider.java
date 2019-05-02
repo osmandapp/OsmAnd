@@ -685,7 +685,10 @@ public class RouteProvider {
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
 			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		GeneralRouterProfile p ;
-		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+		if (params.mode.getAssignedRouteingProfile() != null ) {
+			//todo get assigned routing profile from ApplicationMode. Maybe assign routing profiles to default modes?
+			p = params.mode.getAssignedRouteingProfile();
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			p = GeneralRouterProfile.BICYCLE;
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			p = GeneralRouterProfile.PEDESTRIAN;

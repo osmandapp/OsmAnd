@@ -245,7 +245,7 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Embarcación</string>
     <string name="app_mode_aircraft">Aeronave</string>
-    <string name="local_osm_changes_delete_all_confirm">Está a piques de eliminar %1$d mudanzas no OSM. Confírmao\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Estás a piques de eliminar %1$d mudanzas no OSM. Tes a certeza de querer facelo\?</string>
     <string name="shared_string_delete_all">Eliminar todo</string>
     <string name="animate_routing_route_not_calculated">Calcula-la rota primeiro</string>
     <string name="animate_routing_route">"Simular empregando a rota calculada "</string>
@@ -373,8 +373,8 @@
     <string name="download_hillshade_maps">Sombreado</string>
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos de son/vídeo</string>
-    <string name="stop_routing_confirm">Está na certeza de que desexa dete-la navigación\?</string>
-    <string name="clear_dest_confirm">Confirmas que desexas limpar o destino (e os destinos intermedios)\?</string>
+    <string name="stop_routing_confirm">Tes a certeza de querer dete-la navigación\?</string>
+    <string name="clear_dest_confirm">Tes a certeza de querer limpar o destino (e os destinos intermedios)\?</string>
     <string name="precise_routing_mode_descr">Calcular rutas precisas sen interferencias. Aínda está limitado polas distancias e é tardo.</string>
     <string name="precise_routing_mode">Navigación precisa (alfa)</string>
     <string name="recording_context_menu_show">Amosar</string>
@@ -882,7 +882,7 @@
     <string name="show_more_map_detail">Amosar máis detalles dos mapas</string>
     <string name="show_more_map_detail_descr">Amosar algún detalle dos mapas vectoriais (estradas, etc.) xa a niveis inferiores.</string>
     <string name="favourites_delete_multiple_succesful">Puntos favoritos eliminados.</string>
-    <string name="favorite_delete_multiple">Está a piques de eliminar %1$d Favoritos e %2$d grupos de Favoritos. Confírmao\?</string>
+    <string name="favorite_delete_multiple">Estás a piques de eliminar %1$d Favoritos e %2$d grupos de Favoritos. Tes a certeza de querer facelo\?</string>
     <string name="favorite_home_category">Casa</string>
     <string name="favorite_friends_category">Amizades</string>
     <string name="favorite_places_category">Lugares</string>
@@ -1508,8 +1508,8 @@
     <string name="welcome_header">Reciba a benvida</string>
     <string name="current_route">Rota actual</string>
     <string name="mark_to_delete">Marcar para eliminar</string>
-    <string name="local_recordings_delete_all_confirm">Está a piques de eliminar %1$d notas. Confírmao?</string>
-    <string name="local_osm_changes_upload_all_confirm">Está a piques de enviar %1$d mudanza(s) ó OSM. Confírmao\?</string>
+    <string name="local_recordings_delete_all_confirm">Estás a piques de eliminar %1$d notas. Tes a certeza de querer facelo\?</string>
+    <string name="local_osm_changes_upload_all_confirm">Estás a piques de enviar %1$d mudanza(s) ó OSM. Tes a certeza de querer facelo\?</string>
     <string name="confirmation_to_clear_history">Limpa-lo historial\?</string>
     <string name="shared_string_go">Ir</string>
     <string name="osm_edits">Edicións do OSM</string>
@@ -1699,7 +1699,7 @@ Lon %2$s</string>
     <string name="poi_deleted_localy">O punto de interese (PDI) será eliminado unha vez enviadas as mudanzas</string>
     <string name="show_gpx">Amosar datos GPX</string>
     <string name="count_of_lines">Número de liñas</string>
-    <string name="are_you_sure">Confírmao?</string>
+    <string name="are_you_sure">Tes a certeza de querer facelo\?</string>
     <string name="unsaved_changes_will_be_lost">Vanse perde-las mudanzas non gardadas. Proseguer\?</string>
     <string name="downloads_left_template">Fican %1$s baixadas</string>
     <string name="roads">Estradas</string>
@@ -1972,7 +1972,7 @@ Lon %2$s</string>
     <string name="no_update_info">Non mostrar as actualizacións</string>
     <string name="update_all_maps_now">Desexa actualizar tódolos mapas agora\?</string>
     <string name="clear_tile_data">Limpar tódalas teselas</string>
-    <string name="replace_favorite_confirmation">Confirma que desexa substituí-lo favorito \"%1$s\"\?</string>
+    <string name="replace_favorite_confirmation">Tes a certeza de querer substituí-lo favorito \"%1$s\"\?</string>
     <string name="coords_search">Procura de coordenadas</string>
     <string name="advanced_coords_search">Procura avanzada por coordenadas</string>
     <string name="back_to_search">Voltar á procura</string>
@@ -2113,7 +2113,7 @@ Lon %2$s</string>
     <string name="quick_action_add_favorite">Engadir ós Favorito</string>
     <string name="dialog_add_action_title">Engadir unha acción</string>
     <string name="quick_actions_delete">Eliminar a acción</string>
-    <string name="quick_actions_delete_text">Confirma que desexa eliminar a acción «%s»?</string>
+    <string name="quick_actions_delete_text">Tes a certeza de querer eliminar a acción \"%s\"\?</string>
     <string name="quick_favorites_show_favorites_dialog">Amosar diálogo dos Favoritos</string>
     <string name="quick_action_add_marker_descr">Ó premer no botón de acción engádese unha marcaxe do mapa na posición central da pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Ó premer neste botón de acción engádese unha nota de son na posición central da pantalla.</string>
@@ -2200,7 +2200,7 @@ Lon %2$s</string>
     <string name="shared_string_slope">Costa</string>
     <string name="add_new_folder">Engadir un cartafol novo</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminado(s).</string>
-    <string name="points_delete_multiple">Vai eliminar %1$d punto(s). Confírmao?</string>
+    <string name="points_delete_multiple">Vas eliminar %1$d punto(s). Tes a certeza de querer facelo\?</string>
     <string name="track_points_category_name">Puntos da rota, puntos de interese, funcións nomeadas</string>
     <string name="route_points_category_name">Viraxes a pasar nesta rota</string>
     <string name="max_speed">Velocidade máxima</string>
@@ -3061,4 +3061,5 @@ Lon %2$s</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="routing_attr_avoid_sett_name">Evitar o pavemento empedrado e lastros</string>
     <string name="routing_attr_avoid_sett_description">Evita as rúas empedradas e con lastros</string>
+    <string name="send_log">Enviar rexistro (log)</string>
 </resources>

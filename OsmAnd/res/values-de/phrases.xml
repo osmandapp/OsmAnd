@@ -1902,7 +1902,7 @@
     <string name="poi_shelter_type_building">Gebäude</string>
     <string name="poi_shelter_type_basic_hut">Grundhütte</string>
     <string name="poi_shelter_type_wildlife_hide">Tierschutz</string>
-    <string name="poi_shelter_type_rock_shelter">Steinschlagschutz</string>
+    <string name="poi_shelter_type_rock_shelter">Felsüberhang</string>
     <string name="poi_shelter_type_sun_shelter">Sonnenschutz</string>
     <string name="poi_shelter_type_field_shelter">Feldhütte</string>
     <string name="poi_shelter_type_tent">Unterstand-Typ: Zelt</string>
@@ -3581,4 +3581,7 @@
     <string name="poi_flare">Gasfackel/Fackel</string>
     <string name="poi_change_delete">Gelöschtes Objekt</string>
     <string name="poi_health_specialty_radiotherapy_yes">Strahlentherapie</string>
+    <string name="poi_climbing_crag_filter">Kletterfelsen</string>
+    <string name="poi_rescue_box">Rettungskasten</string>
+    <string name="poi_climbing_crag">Ja</string>
 </resources>

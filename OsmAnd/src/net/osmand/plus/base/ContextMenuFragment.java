@@ -878,7 +878,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						if (getActivity() == null) {
 							return;
 						}
-						calculateLayout(view);
+						calculateLayout(view, initLayout);
 
 						if (!moving) {
 							doLayoutMenu();
@@ -895,7 +895,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	protected void calculateLayout(View view) {
+	protected void calculateLayout(View view, boolean initLayout) {
 		menuFullHeight = mainView.getHeight();
 		menuBottomViewHeight = menuFullHeight;
 		menuFullHeightMax = view.findViewById(R.id.route_menu_cards_container).getHeight() +
