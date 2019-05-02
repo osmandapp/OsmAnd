@@ -19,7 +19,7 @@
     <string name="add_device">Tilføj enhed</string>
     <string name="share_location_as">Del placering som</string>
     <string name="live_now_description">Kontakter og grupper som der deles placering med.</string>
-    <string name="logout_from_osmand_telegram_descr">"Bekræft logge ud af OsmAnd Tracker, så kan der ikke deles  placering eller se placeringen af andre\?"</string>
+    <string name="logout_from_osmand_telegram_descr">"Bekræft log af OsmAnd Tracker,  der kan ikke deles  placering eller se placering af andre\?"</string>
     <string name="logout_from_osmand_telegram">Log ud af OsmAnd Telegram\?</string>
     <string name="shared_string_name">Navn</string>
     <string name="by_distance">Efter afstand</string>
@@ -220,4 +220,19 @@
     <string name="direction">Retning</string>
     <string name="altitude">Højde</string>
     <string name="bearing">Kurs</string>
+    <string name="proxy_key">Nøgle</string>
+    <string name="proxy_password">Adgangskode</string>
+    <string name="proxy_username">Brugernavn</string>
+    <string name="proxy_credentials">Legitimationsoplysninger</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Server</string>
+    <string name="shared_string_connection">Forbindelse</string>
+    <string name="shared_string_enable">Aktiver</string>
+    <string name="proxy_type">Proxytype</string>
+    <string name="proxy_connected">Forbundet</string>
+    <string name="proxy_disconnected">Afbrudt</string>
+    <string name="proxy_settings">Proxy-indstillinger</string>
+    <string name="proxy">Proxy</string>
+    <string name="privacy">Privatliv</string>
+    <string name="precision">Præcision</string>
 </resources>
