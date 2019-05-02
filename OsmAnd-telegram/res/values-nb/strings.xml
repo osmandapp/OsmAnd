@@ -187,7 +187,7 @@
     <string name="start_date">Startdato</string>
     <string name="timeline">Tidslinje</string>
     <string name="shared_string_telegram">Telegram</string>
-    <string name="privacy_policy_telegram_client">OsmAnd-sporeren er én av kundene som bruker Telegram. Dine kontakter kan bruke enhver annen Telegram-klient.</string>
+    <string name="privacy_policy_telegram_client">OsmAnd-sporeren er én av klientene som bruker Telegram. Dine kontakter kan bruke enhver annen Telegram-klient.</string>
     <string name="privacy_policy_agree">Ved å klikke \"Fortsett\" samtykker du til vilkårene i Telegram-personvernspraksisen, og OsmAnd-personvernspraksisen.</string>
     <string name="shared_string_accept">Godta</string>
     <string name="telegram_privacy_policy">Telegram-personvernspraksis</string>
@@ -221,4 +221,18 @@
     <string name="precision">Nøyaktighet</string>
     <string name="altitude">Høyde</string>
     <string name="bearing">Kurs</string>
+    <string name="proxy_key">Nøkkel</string>
+    <string name="proxy_password">Passord</string>
+    <string name="proxy_username">Brukernavn</string>
+    <string name="proxy_credentials">Identitetsdetaljer</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Tjener</string>
+    <string name="shared_string_connection">Forbindelse</string>
+    <string name="shared_string_enable">Skru på</string>
+    <string name="proxy_type">Mellomtjenertype</string>
+    <string name="proxy_connected">Tilkoblet</string>
+    <string name="proxy_disconnected">Frakoblet</string>
+    <string name="proxy_settings">Mellomtjener-innstillinger</string>
+    <string name="proxy">Mellomtjener</string>
+    <string name="privacy">Personvern</string>
 </resources>
