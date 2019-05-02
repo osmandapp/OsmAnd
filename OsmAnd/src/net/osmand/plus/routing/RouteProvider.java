@@ -685,9 +685,10 @@ public class RouteProvider {
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
 			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		GeneralRouterProfile p ;
-		if (params.mode.getAssignedRouteingProfile() != null ) {
-			//todo get assigned routing profile from ApplicationMode. Maybe assign routing profiles to default modes?
-			p = params.mode.getAssignedRouteingProfile();
+
+		if (params.mode.getRoutingProfile() != null ) {
+			//todo get assigned routing profile from ApplicationMode
+			p = GeneralRouterProfile.CUSTOM;
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			p = GeneralRouterProfile.BICYCLE;
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
@@ -699,7 +700,8 @@ public class RouteProvider {
 		} else {
 			return null;
 		}
-		
+		log.debug("General Router Profile:" + p.name());
+
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
 			String key = e.getKey();
@@ -727,8 +729,8 @@ public class RouteProvider {
 		// make visible
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
-		
-		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ? 
+		String name = p == GeneralRouterProfile.CUSTOM ? params.mode.getRoutingProfile() : p.name().toLowerCase();
+		RoutingConfiguration cf = config.build(name, params.start.hasBearing() ?
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
 		return cf;

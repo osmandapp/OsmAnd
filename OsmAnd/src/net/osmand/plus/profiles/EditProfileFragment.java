@@ -1,6 +1,5 @@
 package net.osmand.plus.profiles;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
@@ -23,14 +22,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -39,8 +37,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
 import net.osmand.plus.profiles.SelectIconBottomSheetDialogFragment.IconIdListener;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
-import net.sf.junidecode.App;
+import net.osmand.router.GeneralRouter;
+import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
@@ -55,6 +53,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	public static final String SELECTED_PROFILE = "editedProfile";
 
 	TempApplicationProfile profile = null;
+	ApplicationMode mode = null;
 	ArrayList<RoutingProfile> routingProfiles;
 	OsmandApplication app;
 	RoutingProfile selectedRoutingProfile = null;
@@ -75,11 +74,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			String modeName = getArguments().getString("stringKey", "car");
 			isNew = getArguments().getBoolean("isNew", false);
 			isUserProfile = getArguments().getBoolean("isUserProfile", false);
-
-			profile = new TempApplicationProfile(
-				ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT), isNew, isUserProfile);
-
-			LOG.debug("Name: " + modeName + ",  ");
+			mode = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT);
+			profile = new TempApplicationProfile(mode, isNew, isUserProfile);
 		}
 		routingProfiles = getRoutingProfiles();
 	}
@@ -109,8 +105,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn
 			.getBackground();
 
-
-
 		if (isNightMode) {
 			profileNameTextBox.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
 			navTypeTextBox.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
@@ -121,21 +115,60 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		String title = "New Profile";
 		int startIconId = R.drawable.map_world_globe_dark;
-		LOG.debug("isUserProfile = " + isUserProfile);
-		LOG.debug("isNew = " + isNew);
+
 		if (isUserProfile && !isNew) {
 			title = profile.getUserProfileTitle();
 			profileNameEt.setText(title);
 			startIconId = profile.iconId;
 		} else if (isNew) {
-			title = String.format("%s (new)", getResources().getString(profile.parent.getStringResource()));
+			title = String.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
 			profileNameEt.setText(title);
+			profileNameEt.selectAll();
 			startIconId = profile.getParent().getSmallIconDark();
+			profile.setIconId(startIconId);
 		} else if (profile.getKey() != -1){
 			title = getResources().getString(profile.getKey());
 			profileNameEt.setText(profile.getKey());
 			startIconId = profile.getIconId();
 		}
+
+		profile.setUserProfileTitle(title);
+
+		if (!Algorithms.isEmpty(mode.getRoutingProfile())) {
+			for (RoutingProfile r : routingProfiles) {
+				if (mode.getRoutingProfile().equals(r.getStringKey())) {
+					profile.setRoutingProfile(r);
+					r.setSelected(true);
+					navTypeEt.setText(r.getName());
+					navTypeEt.clearFocus();
+				}
+			}
+		} else {
+			for (RoutingProfile rp : routingProfiles) {
+				if (profile.getStringKey().equals(rp.getStringKey())) {
+					switch (rp.getStringKey()) {
+						case "car":
+							navTypeEt.setText(R.string.rendering_value_car_name);
+							break;
+						case "pedestrian":
+							navTypeEt.setText(R.string.rendering_value_pedestrian_name);
+							break;
+						case "bicycle":
+							navTypeEt.setText(R.string.rendering_value_bicycle_name);
+							break;
+						case "public_transport":
+							navTypeEt.setText(R.string.app_mode_public_transport);
+							break;
+						case "boat":
+							navTypeEt.setText(R.string.app_mode_boat);
+							break;
+					}
+				}
+			}
+			navTypeEt.clearFocus();
+		}
+
+
 
 		profileNameEt.clearFocus();
 
@@ -292,6 +325,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
+
 		return view;
 	}
 
@@ -356,6 +390,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				break;
 		}
 
+		if (profile.getRoutingProfile() != null) {
+			builder.setRoutingProfile(profile.getRoutingProfile().getStringKey());
+		}
+
 		ApplicationMode mode = builder.customReg();
 		ApplicationMode.saveCustomModeToSettings(getSettings());
 
@@ -395,39 +433,43 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	/**
-	 * For now there are only default nav profiles placeholders todo: add profiles from custom routing xml-s
-	 */
 	private ArrayList<RoutingProfile> getRoutingProfiles() {
 		ArrayList<RoutingProfile> routingProfiles = new ArrayList<>();
-		for (GeneralRouterProfile navProfileName : GeneralRouterProfile.values()) {
-			String name = "";
-			int iconRes = -1;
-			switch (navProfileName) {
-				case CAR:
+		Map<String, GeneralRouter> routingProfilesNames = getMyApplication().getDefaultRoutingConfig().getAllRoutes();
+		for (Entry<String, GeneralRouter> e: routingProfilesNames.entrySet()) {
+			String name;
+			String description = getResources().getString(R.string.osmand_default_routing);
+			int iconRes;
+			switch (e.getKey()) {
+				case "car":
 					iconRes = R.drawable.ic_action_car_dark;
 					name = getString(R.string.rendering_value_car_name);
 					break;
-				case PEDESTRIAN:
+				case "pedestrian":
 					iconRes = R.drawable.map_action_pedestrian_dark;
 					name = getString(R.string.rendering_value_pedestrian_name);
 					break;
-				case BICYCLE:
+				case "bicycle":
 					iconRes = R.drawable.map_action_bicycle_dark;
 					name = getString(R.string.rendering_value_bicycle_name);
 					break;
-				case PUBLIC_TRANSPORT:
+				case "public_transport":
 					iconRes = R.drawable.map_action_bus_dark;
 					name = getString(R.string.app_mode_public_transport);
 					break;
-				case BOAT:
+				case "boat":
 					iconRes = R.drawable.map_action_sail_boat_dark;
 					name = getString(R.string.app_mode_boat);
 					break;
+				default:
+					iconRes = R.drawable.ic_action_world_globe;
+					name = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey().replace("_", " "));
+					description = "Custom profile from profile.xml";
+					break;
 			}
-			routingProfiles
-				.add(new RoutingProfile(name, getResources().getString(R.string.osmand_default_routing), iconRes, false));
+			routingProfiles.add(new RoutingProfile(e.getKey(), name,  description, iconRes, false));
 		}
+
 		return routingProfiles;
 	}
 
@@ -438,8 +480,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		String userProfileTitle = "";
 		ApplicationMode parent = null;
 		int iconId = R.drawable.map_world_globe_dark;
-		float defaultSpeed = 10f;   //todo use default or what?
-		int minDistanceForTurn = 50; //todo use default or what?
 		RoutingProfile routingProfile = null;
 
 		TempApplicationProfile(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
@@ -456,7 +496,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				stringKey = mode.getStringKey();
 				iconId = mode.getSmallIconDark();
 			}
-			LOG.debug("Parent: " + getParent());
 		}
 
 		public RoutingProfile getRoutingProfile() {

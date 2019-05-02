@@ -2,22 +2,16 @@ package net.osmand.plus.profiles;
 
 import android.os.Parcel;
 
-import net.osmand.router.GeneralRouter;
 
 public class RoutingProfile extends ProfileDataObject {
 
-	private String parent;
+	private String stringKey;
 	private boolean isSelected;
-	private String routerProfile;
 
-	public RoutingProfile(String name, String parent, int iconRes, boolean isSelected) {
-		super(name, parent, iconRes);
-		this.parent = parent;
+	public RoutingProfile(String stringKey, String name, String descr,  int iconRes, boolean isSelected) {
+		super(name, descr, iconRes);
+		this.stringKey = stringKey;
 		this.isSelected = isSelected;
-	}
-
-	public String getParent() {
-		return parent;
 	}
 
 	public boolean isSelected() {
@@ -28,9 +22,13 @@ public class RoutingProfile extends ProfileDataObject {
 		isSelected = selected;
 	}
 
+	public String getStringKey() {
+		return stringKey;
+	}
+
 	protected RoutingProfile(Parcel in) {
 		super(in);
-		parent = in.readString();
+		stringKey = in.readString();
 		isSelected = in.readByte() != 0;
 	}
 
@@ -54,7 +52,7 @@ public class RoutingProfile extends ProfileDataObject {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
-		dest.writeString(parent);
+		dest.writeString(stringKey);
 		dest.writeByte((byte) (isSelected ? 1 : 0));
 	}
 }

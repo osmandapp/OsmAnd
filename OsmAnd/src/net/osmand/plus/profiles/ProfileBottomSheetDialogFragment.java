@@ -159,7 +159,7 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			});
 			if (item instanceof RoutingProfile) {
 				holder.descr.setText(Algorithms
-					.capitalizeFirstLetterAndLowercase(((RoutingProfile) item).getParent()));
+					.capitalizeFirstLetterAndLowercase(((RoutingProfile) item).getDescription()));
 				if (((RoutingProfile) item).isSelected()) {
 					holder.radioButton.setChecked(true);
 					previousSelection = position;

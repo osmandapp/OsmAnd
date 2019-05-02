@@ -8,6 +8,7 @@ import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -19,6 +20,8 @@ import java.util.Map;
 import java.util.Stack;
 
 public class RoutingConfiguration {
+
+	private static final Log LOG = PlatformUtil.getLog(RoutingConfiguration.class);
 	
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
 	public final float DEVIATION_RADIUS = 3000;
@@ -129,6 +132,10 @@ public class RoutingConfiguration {
 		public GeneralRouter getRouter(String applicationMode) {
 			return routers.get(applicationMode);
 			
+		}
+
+		public Map<String, GeneralRouter> getAllRoutes() {
+			return routers;
 		}
 
 		public void removeImpassableRoad(RouteDataObject obj) {
