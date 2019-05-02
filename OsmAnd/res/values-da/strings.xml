@@ -1547,7 +1547,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_highContrastRoads_name">Veje med høj kontrast</string>
     <string name="specified_directiory_not_writeable">Kunne ikke oprettes kort i det angivne bibliotek</string>
-    <string name="copying_osmand_file_failed">Kopiering af filer mislykkedes</string>
+    <string name="copying_osmand_file_failed">Flytning af filer mislykkedes</string>
     <string name="storage_directory_external">Ekstern lager</string>
     <string name="storage_directory_multiuser">Flerbruger lager</string>
     <string name="storage_directory_internal_app">Intern programhukommelse</string>
@@ -1555,7 +1555,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="storage_directory_default">Internhukommelse</string>
     <string name="storage_directory">Kortlagring</string>
     <string name="shared_string_copy">Kopier</string>
-    <string name="application_dir_change_warning3">Kopier datafilerne til den nye placering?</string>
+    <string name="application_dir_change_warning3">Flyt datafilerne til den nye placering\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
