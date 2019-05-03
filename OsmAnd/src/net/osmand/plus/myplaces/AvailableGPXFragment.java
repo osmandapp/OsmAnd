@@ -44,6 +44,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
@@ -51,21 +56,16 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -1614,9 +1614,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					processGPXFolder(gpxFile, sub);
 				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
 					GpxDataItem item = processedDataFiles.get(gpxFile);
+					GPXTrackAnalysis itemAnalysis = item != null ? item.getAnalysis() : null;
 					if (item == null
 							|| item.getFileLastModifiedTime() != gpxFile.lastModified()
-							|| item.getAnalysis().wptCategoryNames == null) {
+							|| itemAnalysis == null
+							|| itemAnalysis.wptCategoryNames == null) {
 						GPXFile f = GPXUtilities.loadGPXFile(gpxFile);
 						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
 						if (item == null) {
