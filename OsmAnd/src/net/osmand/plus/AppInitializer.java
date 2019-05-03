@@ -552,7 +552,7 @@ public class AppInitializer implements IProgress {
 	public net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
 		long tm = System.currentTimeMillis();
 		try {
-			File routingXml = app.getAppPath(IndexConstants.ROUTING_XML_FILE);
+			File routingXml = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR + IndexConstants.ROUTING_XML_FILE);
 			if (routingXml.exists() && routingXml.canRead()) {
 				try {
 					return RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
@@ -569,9 +569,6 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
-
-
-
 
 	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
 															final ApplicationMode applicationMode,
