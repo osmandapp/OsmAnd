@@ -405,7 +405,7 @@
     <string name="poi_camera">Cámaras e lentes</string>
     <string name="poi_fashion">Tenda de moda</string>
     <string name="poi_music">Tenda de música</string>
-    <string name="poi_optician">Optometría</string>
+    <string name="poi_optician">Óptica</string>
     <string name="poi_tyres">Tenda de rodas</string>
     <string name="poi_watches">Reloxaría</string>
     <string name="poi_games">Xogos</string>
@@ -770,7 +770,7 @@
     <string name="poi_greengrocer">Froitaría</string>
     <string name="poi_confectionery">Dozaría ou confeitaría</string>
     <string name="poi_pastry">Confeitaría</string>
-    <string name="poi_vending_machine">Máquina vendedora</string>
+    <string name="poi_vending_machine">Máquina expendedora</string>
     <string name="poi_baby_goods">Produtos de bebés</string>
     <string name="poi_furnace">Tenda de calefacción</string>
     <string name="poi_garden_furniture">Mobiliario do xardín</string>
@@ -1087,7 +1087,7 @@
     <string name="poi_shop_yes">Tenda xeral</string>
     <string name="poi_hearing_aids">Aparellos auditivos</string>
     <string name="poi_herbalist">Herboristaría</string>
-    <string name="poi_hifi">Tenda de alta fidelidade</string>
+    <string name="poi_hifi">Tenda de equipos de audio</string>
     <string name="poi_houseware">Tenda de artigos domésticos</string>
     <string name="poi_outdoor">Tenda de actividades ó ar libre</string>
     <string name="poi_ship_chandler">Fornecedor de navíos</string>
@@ -3571,4 +3571,6 @@
     <string name="poi_flare">Chama de gas;Queimadura de facho</string>
     <string name="poi_change_delete">Obxecto eliminado</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
+    <string name="poi_climbing_crag_filter">Penedo de escalada</string>
+    <string name="poi_climbing_crag">Si</string>
 </resources>
