@@ -34,18 +34,42 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+
+        <net.osmand.plus.widgets.OsmandTextFieldBoxes
+          android:id="@+id/profile_name_otfb"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/list_content_padding"
+          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginStart="@dimen/list_content_padding"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginRight="@dimen/list_content_padding"
+          android:layout_weight="1"
+          app:labelText="Name">
+
+          <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/profile_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+
+            tools:text="@string/lorem_ipsum"/>
+
+        </net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+
         <LinearLayout
           android:id="@+id/profile_icon_layout"
           android:layout_width="68dp"
           android:layout_height="68dp"
-          android:layout_marginStart="@dimen/list_content_padding"
-          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginRight="@dimen/list_content_padding"
           android:clickable="true"
           android:focusable="true"
           android:gravity="center"
           android:orientation="vertical"
           >
-
 
           <TextView
             android:id="@+id/select_icon_btn_txt"
@@ -63,28 +87,6 @@
             />
 
         </LinearLayout>
-
-        <net.osmand.plus.widgets.OsmandTextFieldBoxes
-          android:id="@+id/profile_name_otfb"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="@dimen/list_content_padding"
-          android:layout_marginBottom="@dimen/list_content_padding"
-          android:layout_marginStart="@dimen/list_content_padding"
-          android:layout_marginEnd="@dimen/list_content_padding"
-          android:layout_marginLeft="@dimen/list_content_padding"
-          android:layout_marginRight="@dimen/list_content_padding"
-          app:labelText="Name">
-
-          <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-            android:id="@+id/profile_name_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-
-            tools:text="@string/lorem_ipsum"/>
-
-        </net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
       </LinearLayout>
 
@@ -341,6 +343,7 @@
   </ScrollView>
 
   <LinearLayout
+    android:id="@+id/buttons_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"

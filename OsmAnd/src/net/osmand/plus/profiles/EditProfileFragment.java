@@ -3,6 +3,7 @@ package net.osmand.plus.profiles;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -66,18 +68,19 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private ProfileTypeDialogListener profileTypeDialogListener = null;
 	private IconIdListener iconIdListener = null;
 
-	ImageView profileIcon;
-	LinearLayout profileIconBtn;
-	ExtendedEditText profileNameEt;
-	OsmandTextFieldBoxes profileNameTextBox;
-	ExtendedEditText navTypeEt;
-	OsmandTextFieldBoxes navTypeTextBox;
-	FrameLayout selectNavTypeBtn;
-	Button cancelBtn;
-	Button saveButton;
-	View mapConfigBtn;
-	View screenConfigBtn;
-	View navConfigBtn;
+	private ImageView profileIcon;
+	private LinearLayout profileIconBtn;
+	private ExtendedEditText profileNameEt;
+	private OsmandTextFieldBoxes profileNameTextBox;
+	private ExtendedEditText navTypeEt;
+	private OsmandTextFieldBoxes navTypeTextBox;
+	private FrameLayout selectNavTypeBtn;
+	private Button cancelBtn;
+	private Button saveButton;
+	private View mapConfigBtn;
+	private View screenConfigBtn;
+	private View navConfigBtn;
+	private LinearLayout buttonsLayout;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,7 +102,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		@Nullable Bundle savedInstanceState) {
 		final boolean isNightMode = !app.getSettings().isLightContent();
 
-		View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
+		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
 
 		profileIcon = view.findViewById(R.id.select_icon_btn_img);
 		profileIconBtn = view.findViewById(R.id.profile_icon_layout);
@@ -113,6 +116,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		mapConfigBtn = view.findViewById(R.id.map_config_btn);
 		screenConfigBtn = view.findViewById(R.id.screen_config_btn);
 		navConfigBtn = view.findViewById(R.id.nav_settings_btn);
+		buttonsLayout = view.findViewById(R.id.buttons_layout);
+
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
 		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
@@ -341,6 +346,21 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				if (saveNewProfile()) {
 					getActivity().onBackPressed();
+				}
+			}
+		});
+
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				Rect r = new Rect();
+				view.getWindowVisibleDisplayFrame(r);
+				int screenHeight = view.getRootView().getHeight();
+				int keypadHeight = screenHeight - r.bottom;
+				if (keypadHeight > screenHeight * 0.15) {
+					buttonsLayout.setVisibility(View.GONE);
+				} else {
+					buttonsLayout.setVisibility(View.VISIBLE);
 				}
 			}
 		});
