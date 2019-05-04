@@ -220,4 +220,18 @@
     <string name="precision">דיוק</string>
     <string name="altitude">גובה</string>
     <string name="bearing">תכווין</string>
+    <string name="proxy_key">מפתח</string>
+    <string name="proxy_password">ססמה</string>
+    <string name="proxy_username">שם משתמש</string>
+    <string name="proxy_credentials">פרטי גישה</string>
+    <string name="proxy_port">פתחה</string>
+    <string name="proxy_server">שרת</string>
+    <string name="shared_string_connection">חיבור</string>
+    <string name="shared_string_enable">הפעלה</string>
+    <string name="proxy_type">סוג מתווך</string>
+    <string name="proxy_connected">מחובר</string>
+    <string name="proxy_disconnected">מנותק</string>
+    <string name="proxy_settings">הגדרות מתווך</string>
+    <string name="proxy">מתווך</string>
+    <string name="privacy">פרטיות</string>
 </resources>

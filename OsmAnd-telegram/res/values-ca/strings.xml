@@ -221,4 +221,18 @@
     <string name="precision">Precisió</string>
     <string name="altitude">Altitud</string>
     <string name="bearing">Trajectòria</string>
+    <string name="proxy_key">Clau</string>
+    <string name="proxy_password">Contrasenya</string>
+    <string name="proxy_username">Nom d\'usuari</string>
+    <string name="proxy_credentials">Credencials</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Servidor</string>
+    <string name="shared_string_connection">Connexió</string>
+    <string name="shared_string_enable">Activa</string>
+    <string name="proxy_type">Tipus de servidor intermediari</string>
+    <string name="proxy_connected">Connectat</string>
+    <string name="proxy_disconnected">Desconnectat</string>
+    <string name="proxy_settings">Configuració del servidor intermediari</string>
+    <string name="proxy">Servidor intermediari</string>
+    <string name="privacy">Privacitat</string>
 </resources>

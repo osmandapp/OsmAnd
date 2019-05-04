@@ -1330,4 +1330,12 @@
     <string name="poi_beauty_salon_nails">Manikyr</string>
     <string name="poi_atm">Minibank</string>
     <string name="poi_rapids">Stryk</string>
+    <string name="poi_tableware">Bestikkbutikk</string>
+    <string name="poi_recycling_animal_waste">Animalsk avfall</string>
+    <string name="poi_waste_basket">Søppelkurv</string>
+    <string name="poi_orchard">Nyttevekstbeplantning</string>
+    <string name="poi_reservoir">Reservoar</string>
+    <string name="poi_college">Høyskole</string>
+    <string name="poi_bailiff">Fogd</string>
+    <string name="poi_tax_inspection">Skattekontor</string>
 </resources>

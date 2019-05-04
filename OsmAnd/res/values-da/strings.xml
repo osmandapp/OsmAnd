@@ -3024,13 +3024,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">Undgå metro og lettog</string>
     <string name="routing_attr_avoid_ferry_name">Undgå færger</string>
     <string name="routing_attr_avoid_ferry_description">Undgå færger</string>
-    <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport
+    <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport 
+\n 
+\n • Korrigeret brugergrænseflade til ruteoplysningerne 
+\n 
+\n • Rettet mørkt tema i Retningsmenuen og Rutedetaljer 
+\n 
+\n • Vis azimut i Mål afstand
 \n
-\n • Korrigeret brugergrænseflade til ruteoplysningerne
-\n
-\n • Rettet mørkt tema i Retningsmenuen og Rutedetaljer
-\n
-\n • Vis azimut i mål afstand</string>
+\n</string>
     <string name="send_log">Send log</string>
     <string name="files_moved">Flyttede %1$d filer (%2$s).</string>
     <string name="files_copied">Kopieret %1$d filer (%2$s).</string>

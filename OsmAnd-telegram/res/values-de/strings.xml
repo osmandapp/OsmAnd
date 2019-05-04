@@ -221,4 +221,18 @@
     <string name="precision">Genauigkeit</string>
     <string name="altitude">Höhe</string>
     <string name="bearing">Peilung</string>
+    <string name="proxy_key">Schlüssel</string>
+    <string name="proxy_password">Passwort</string>
+    <string name="proxy_username">Benutzername</string>
+    <string name="proxy_credentials">Anmeldeinformationen</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Server</string>
+    <string name="shared_string_connection">Verbindung</string>
+    <string name="shared_string_enable">Aktivieren</string>
+    <string name="proxy_type">Proxy-Typ</string>
+    <string name="proxy_connected">Verbunden</string>
+    <string name="proxy_disconnected">Getrennt</string>
+    <string name="proxy_settings">Proxy-Einstellungen</string>
+    <string name="proxy">Proxy</string>
+    <string name="privacy">Datenschutz</string>
 </resources>

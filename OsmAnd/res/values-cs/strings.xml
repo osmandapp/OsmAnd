@@ -662,7 +662,7 @@
 \nVšechny tyto mapy mohou být použity jako hlavní (základní) mapa na obrazovce OsmAnd nebo jako překryvná popř. podkladová mapa k jiné základní mapě (např. standardní OsmAnd off-line mapě). Pro zlepšení viditelnosti podkladových map je možné vypnout některé objekty z vektorových map OsmAnd, přes menu \'Nastavení mapy\'.
 \n
 \nDlaždicové mapy můžete získat přímo z on-line zdrojů nebo si je můžete připravit pro off-line použití (zkopírovat ručně do datového adresáře OsmAnd) jako SQLite databázi, která může být vytvořena mnoha programy pro přípravu map.</string>
-    <string name="osmand_background_plugin_description">Zobrazení nastavení pro zapnutí záznamu trasy a navigace na pozadí s pravidelným probouzením GPS zařízení (s vypnutou obrazovkou).</string>
+    <string name="osmand_background_plugin_description">Zobrazí nastavení pro zapnutí záznamu trasy a navigace na pozadí s pravidelným probouzením GPS zařízení (s vypnutou obrazovkou).</string>
     <string name="osmand_accessibility_description">Tento modul zobrazí nastavení pro speciální funkce ulehčení přístupu přímo v OsmAnd. Například je možné měnit rychlost TTS hlasu, použít trackball na přibližování nebo například použít hlasové předčítání pro oznamování polohy.</string>
     <string name="osmand_development_plugin_description">Tento modul zobrazí nastavení vývojových a ladících funkcí, jako jsou simulace navigace, informace o rychlosti vykreslování nebo hlasová oznámení. Tato nastavení jsou určené pro vývojáře a nejsou potřebné pro běžné použití.</string>
     <string name="plugins_screen">Správce modulů</string>
@@ -2873,7 +2873,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="points_of_interests">Body zájmu (POI)</string>
     <string name="waiting_for_route_calculation">Vypočítávání trasy…</string>
     <string name="app_mode_public_transport">Veřejná doprava</string>
-    <string name="avoid_roads_descr">Vyberte cestu na mapě nebo ze seznamu níže, které se chcete během navigace vyhnout:</string>
+    <string name="avoid_roads_descr">Vyberte na mapě nebo ze seznamu níže cestu, které se chcete během navigace vyhnout:</string>
     <string name="show_along_the_route">Ukázat podél trasy</string>
     <string name="simulate_navigation">Simulovat navigaci</string>
     <string name="choose_track_file_to_follow">Vyberte soubor s trasou, kterou chcete následovat</string>

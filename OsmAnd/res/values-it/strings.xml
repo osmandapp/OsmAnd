@@ -2206,7 +2206,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Punti cancellati.</string>
     <string name="points_delete_multiple">Stai cancellando %1$d punto(i). Confermi?</string>
     <string name="route_points_category_name">Svolte di questo percorso</string>
-    <string name="track_points_category_name">Punti di passaggio, punti di interesse, caratteristiche notevoli</string>
+    <string name="track_points_category_name">Punti di passaggio, punti di interesse, caratteristiche con un nome</string>
     <string name="shared_string_gpx_track">Traccia</string>
     <string name="max_speed">Velocità massima</string>
     <string name="add_new_folder">Aggiungi una nuova cartella</string>
@@ -3015,4 +3015,17 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n• Visualizza l’azimut nella misura della distanza.
 \n
 \n</string>
+    <string name="files_moved">Spostato %1$d files (%2$s).</string>
+    <string name="files_copied">Copiati %1$d files (%2$s).</string>
+    <string name="files_failed">Fallita la copia di %1$d files (%2$s).</string>
+    <string name="files_present">%1$d files (%2$s) sono presenti nella precedente posizione \'%3$s\'.</string>
+    <string name="move_maps">Sposta le mappe</string>
+    <string name="dont_move_maps">Non spostare</string>
+    <string name="public_transport_ped_route_title">Il percorso a piedi è %1$s e poterebbe essere più veloce di quello con i mezzi pubblici</string>
+    <string name="public_transport_no_route_title">Sfortunatamente, OsmAnd non può trovare un percorso adatto alle tue impostazioni.</string>
+    <string name="public_transport_try_ped">Prova la navigazione per pedoni.</string>
+    <string name="public_transport_try_change_settings">Prova cambiando le impostazioni.</string>
+    <string name="public_transport_calc_pedestrian">Calcola un percorso per pedoni</string>
+    <string name="public_transport_type">Modalità di trasporto</string>
+    <string name="send_log">Invia il registro</string>
 </resources>
