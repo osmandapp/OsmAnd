@@ -2404,7 +2404,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_osmbugs_show">Zobraziť OSM poznámky</string>
     <string name="quick_action_osmbugs_hide">Skryť OSM poznámky</string>
     <string name="quick_action_showhide_osmbugs_descr">Aktivovaním tohto tlačidla akcie sa zobrazia alebo skryjú OSM Poznámky na mape.</string>
-    <string name="private_access_routing_req">Váš cieľ je v oblasti so súkromným prístupom. Povoliť vstúp na súkromné cesty pre tento výlet?</string>
+    <string name="private_access_routing_req">Váš cieľ je v oblasti so súkromným prístupom. Povoliť vstup na súkromné cesty pre tento výlet\?</string>
     <string name="restart_search">Znovu začať hľadanie</string>
     <string name="increase_search_radius">Zväčšiť okruh hľadania</string>
     <string name="nothing_found">Nič sa nenašlo</string>
