@@ -1,10 +1,15 @@
 package net.osmand.plus;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.PowerManager.WakeLock;
+import android.os.SystemClock;
 
 public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 	@Override
@@ -19,6 +24,26 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 		lock.acquire();
 		// request location updates
 		final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
+
+		//Unless setRepeating was used, manually re-schedule service to the next measurement point in the future
+		if (Build.VERSION.SDK_INT >= 23) {
+			// Avoid drift
+			while ((service.getNextManualWakeup() - SystemClock.elapsedRealtime()) < 0) {
+				service.setNextManualWakeup(service.getNextManualWakeup() + service.getServiceOffInterval());
+			}
+			AlarmManager alarmManager = (AlarmManager) service.getSystemService(Context.ALARM_SERVICE);
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, new Intent(context, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+			alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, service.getNextManualWakeup(), pendingIntent);
+		} else if (Build.VERSION.SDK_INT >= 19) {
+			// Avoid drift
+			while ((service.getNextManualWakeup() - SystemClock.elapsedRealtime()) < 0) {
+				service.setNextManualWakeup(service.getNextManualWakeup() + service.getServiceOffInterval());
+			}
+			AlarmManager alarmManager = (AlarmManager) service.getSystemService(Context.ALARM_SERVICE);
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, new Intent(context, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+			alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, service.getNextManualWakeup(), pendingIntent);
+		}
+
 		try {
 			locationManager.requestLocationUpdates(service.getServiceOffProvider(), 0, 0, service);
 			if (service.getServiceOffInterval() > service.getServiceError()) {
