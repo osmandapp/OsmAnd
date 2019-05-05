@@ -22,8 +22,6 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 		}
 		//
 		lock.acquire();
-		// request location updates
-		final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
 
 		//Unless setRepeating was used, manually re-schedule service to the next measurement point in the future
 		if (Build.VERSION.SDK_INT >= 23) {
@@ -44,6 +42,8 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 			alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, service.getNextManualWakeup(), pendingIntent);
 		}
 
+		// request location updates
+		final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
 		try {
 			locationManager.requestLocationUpdates(service.getServiceOffProvider(), 0, 0, service);
 			if (service.getServiceOffInterval() > service.getServiceError()) {
