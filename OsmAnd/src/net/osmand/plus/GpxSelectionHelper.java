@@ -69,6 +69,12 @@ public class GpxSelectionHelper {
 		saveCurrentSelections();
 	}
 
+	public void clearAllGpxFilesWithoutBackup() {
+		selectedGpxFilesBackUp.clear();
+		selectedGPXFiles = new ArrayList<>();
+		saveCurrentSelections();
+	}
+
 	public void restoreSelectedGpxFiles() {
 		for (Entry<GPXFile, Long> gpxEntry : selectedGpxFilesBackUp.entrySet()) {
 			if (!Algorithms.isEmpty(gpxEntry.getKey().path)) {
