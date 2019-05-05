@@ -220,4 +220,18 @@
     <string name="precision">Precisión</string>
     <string name="altitude">Altitud</string>
     <string name="bearing">Rumbo</string>
+    <string name="proxy_key">Clave</string>
+    <string name="proxy_password">Contraseña</string>
+    <string name="proxy_username">Nombre de usuario</string>
+    <string name="proxy_credentials">Credenciales</string>
+    <string name="proxy_port">Puerto</string>
+    <string name="proxy_server">Servidor</string>
+    <string name="shared_string_connection">Conexión</string>
+    <string name="shared_string_enable">Activar</string>
+    <string name="proxy_type">Tipo de proxy</string>
+    <string name="proxy_connected">Conectado</string>
+    <string name="proxy_disconnected">Desconectado</string>
+    <string name="proxy_settings">Ajustes del proxy</string>
+    <string name="proxy">Proxy</string>
+    <string name="privacy">Privacidad</string>
 </resources>

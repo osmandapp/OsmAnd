@@ -219,4 +219,19 @@
     <string name="precision">Pretzisione</string>
     <string name="altitude">Artària</string>
     <string name="direction">Diretzione</string>
+    <string name="proxy_key">Crae servidore</string>
+    <string name="proxy_password">Crae de intrada</string>
+    <string name="proxy_username">Nùmene impreadore</string>
+    <string name="proxy_credentials">Credentziales</string>
+    <string name="proxy_port">Ghenna</string>
+    <string name="proxy_server">Servidore</string>
+    <string name="shared_string_connection">Connessione</string>
+    <string name="shared_string_enable">Abìlita</string>
+    <string name="proxy_type">Casta de servidore intermediàriu</string>
+    <string name="proxy_connected">Connessu</string>
+    <string name="proxy_disconnected">Disconnessu</string>
+    <string name="proxy_settings">Impostatziones de su servidore intermediàriu</string>
+    <string name="proxy">Servidore intermediàriu (proxy)</string>
+    <string name="privacy">Privadesa</string>
+    <string name="bearing">Andamentu</string>
 </resources>
