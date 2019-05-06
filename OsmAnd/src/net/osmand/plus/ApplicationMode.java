@@ -470,10 +470,6 @@ public class ApplicationMode {
 		return routingProfile;
 	}
 
-	public int getMapIconsSetId() {
-		return mapIconsSetId;
-	}
-
 	public String getUserProfileName() {
 		return userProfileName;
 	}
