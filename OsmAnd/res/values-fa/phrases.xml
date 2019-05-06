@@ -39,7 +39,7 @@
     <string name="poi_bedding">پنبه زنی</string>
     <string name="poi_dive">تجهیزات غواصی</string>
     <string name="poi_doityourself">فروشگاه بهسازی خانه</string>
-    <string name="poi_erotic"></string>
+    <string name="poi_erotic"/>
     <string name="poi_fishing">لوازم ماهیگیری</string>
     <string name="poi_florist">گلفروشی</string>
     <string name="poi_frame">قاب سازی</string>
@@ -77,7 +77,7 @@
     <string name="poi_ticket">فروشگاه بلیط</string>
     <string name="poi_tobacco">دخانیات</string>
     <string name="poi_toys">اسباب بازی فروشی</string>
-    <string name="poi_trade">باربری</string>
+    <string name="poi_trade"></string>
     <string name="poi_vacuum_cleaner">فروشگاه جاروبرقی</string>
     <string name="poi_variety_store">فروشگاه متنوع و ارزان</string>
     <string name="poi_video">کلوب فیلم</string>
@@ -1347,4 +1347,5 @@
     <string name="poi_park_ride_hov">خودروی پرسرنشین</string>
     <string name="poi_park_ride_tram">تراموا</string>
     <string name="poi_park_ride_ferry">فرابر</string>
+    <string name="poi_logistics">دفتر باربری</string>
 </resources>
