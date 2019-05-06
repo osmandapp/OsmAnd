@@ -55,7 +55,7 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 		if (Build.VERSION.SDK_INT >= 19) {
 			NavigationService service = ((OsmandApplication) context.getApplicationContext()).getNavigationService();
 			// Avoid drift
-			while ((service.getNextManualWakeup() - SystemClock.elapsedRealtime()) < 0) {
+			while ((service.getNextManualWakeup() - SystemClock.elapsedRealtime()) < 500) {
 				service.setNextManualWakeup(service.getNextManualWakeup() + service.getServiceOffInterval());
 			}
 			AlarmManager alarmManager = (AlarmManager) service.getSystemService(Context.ALARM_SERVICE);
