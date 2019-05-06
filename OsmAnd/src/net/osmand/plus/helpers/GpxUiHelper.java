@@ -613,7 +613,7 @@ public class GpxUiHelper {
 					//clear all previously selected files before adding new one
 					OsmandApplication app = (OsmandApplication) activity.getApplication();
 					if (app != null && app.getSelectedGpxHelper() != null) {
-						app.getSelectedGpxHelper().clearAllGpxFilesWithoutBackup();
+						app.getSelectedGpxHelper().clearAllGpxFileToShow();
 					}
 					if (app != null && showCurrentGpx && adapter.getItem(0).getSelected()) {
 						currentGPX = app.getSavingTrackHelper().getCurrentGpx();

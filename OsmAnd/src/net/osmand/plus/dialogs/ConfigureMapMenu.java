@@ -161,15 +161,18 @@ public class ConfigureMapMenu {
 			for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
 				files.add(file.getGpxFile().path);
 			}
-			Map<GPXUtilities.GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
-			for(Map.Entry<GPXUtilities.GPXFile, Long> f : fls.entrySet()) {
-				if(!Algorithms.isEmpty(f.getKey().path)) {
-					File file = new File(f.getKey().path);
-					if(file.exists() && !file.isDirectory()) {
-						files.add(f.getKey().path);
+			if (selectedGpxFiles.isEmpty()) {
+				Map<GPXUtilities.GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
+				for(Map.Entry<GPXUtilities.GPXFile, Long> f : fls.entrySet()) {
+					if(!Algorithms.isEmpty(f.getKey().path)) {
+						File file = new File(f.getKey().path);
+						if(file.exists() && !file.isDirectory()) {
+							files.add(f.getKey().path);
+						}
 					}
 				}
 			}
+
 			return files;
 		}
 
