@@ -1529,9 +1529,9 @@
 \n 
 \nУ разі активації цього виду, стиль мапи змінюється на „Winter and ski“, показуючи усі деталі пейзажу так, як вони виглядають взимку. Цей (зимовий) вид може бути де-активований тут, або якщо ви поміняєте „Стиль мапи“ в меню „Налаштування мапи“ на бажаний вид.</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номери будинків</string>
-    <string name="application_dir_change_warning3">Скопіювати файли даних OsmAnd в нове місце?</string>
+    <string name="application_dir_change_warning3">Перемістити файли даних OsmAnd в нове місце\?</string>
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
-    <string name="copying_osmand_file_failed">Не вдалося скопіювати файли</string>
+    <string name="copying_osmand_file_failed">Не вдалося перемістити файли</string>
     <string name="storage_directory_external">Зовнішнє сховище</string>
     <string name="storage_directory_multiuser">Толочне сховище</string>
     <string name="storage_directory_internal_app">Внутрішня пам’ять застосунку</string>
@@ -3025,4 +3025,11 @@
     <string name="files_failed">Невдача при копіюванні %1$d файлів (%2$s).</string>
     <string name="files_present">%1$d файлів (%2$s) присутні в попередній локації \'%3$s\'.</string>
     <string name="move_maps">Перемістити мапи</string>
+    <string name="dont_move_maps">Не переміщувати мапи</string>
+    <string name="public_transport_ped_route_title">Пішохідний маршрут займе приблизно %1$s і він може виявитися швидшим за громадський транспорт</string>
+    <string name="public_transport_no_route_title">На жаль, OsmAnd не зміг підібрати маршрут, що відповідав би вашим налаштуванням.</string>
+    <string name="public_transport_try_ped">Спробуйте пішохідну навігацію.</string>
+    <string name="public_transport_try_change_settings">Спробуйте змінити налаштування.</string>
+    <string name="public_transport_calc_pedestrian">Розрахувати пішохідний маршрут</string>
+    <string name="public_transport_type">Тип транспорту</string>
 </resources>
