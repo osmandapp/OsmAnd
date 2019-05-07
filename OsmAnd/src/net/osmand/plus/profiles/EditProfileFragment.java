@@ -145,13 +145,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			title = profile.getUserProfileTitle();
 			profileNameEt.setText(title);
 			startIconId = profile.iconId;
-
 		} else if (isNew) {
 			isDataChanged = true;
 			title = String
 				.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
-//			profileNameEt.setText(title);
-			//profileNameEt.selectAll();
 			startIconId = profile.getParent().getSmallIconDark();
 			profile.setIconId(startIconId);
 		} else if (profile.getKey() != -1) {
