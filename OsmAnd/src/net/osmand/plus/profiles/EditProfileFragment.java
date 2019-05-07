@@ -81,6 +81,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private View screenConfigBtn;
 	private View navConfigBtn;
 	private LinearLayout buttonsLayout;
+	private FrameLayout clickBlockLayout;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,6 +118,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		screenConfigBtn = view.findViewById(R.id.screen_config_btn);
 		navConfigBtn = view.findViewById(R.id.nav_settings_btn);
 		buttonsLayout = view.findViewById(R.id.buttons_layout);
+		clickBlockLayout = view.findViewById(R.id.click_block_layout);
 
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
@@ -143,6 +145,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			title = profile.getUserProfileTitle();
 			profileNameEt.setText(title);
 			startIconId = profile.iconId;
+
 		} else if (isNew) {
 			isDataChanged = true;
 			title = String
@@ -155,6 +158,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			title = getResources().getString(profile.getKey());
 			profileNameEt.setText(profile.getKey());
 			startIconId = profile.getIconId();
+			clickBlockLayout.setClickable(true);
 		}
 
 		profile.setUserProfileTitle(title);
@@ -254,22 +258,23 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
-				fragment.setProfileTypeListener(profileTypeDialogListener);
-				Bundle bundle = new Bundle();
-				bundle.putParcelableArrayList("routing_profiles", routingProfiles);
-				fragment.setArguments(bundle);
-				if (getActivity() != null) {
-					getActivity().getSupportFragmentManager().beginTransaction()
-						.add(fragment, "select_nav_type")
-						.commitAllowingStateLoss();
+				if(isNew || isUserProfile) {
+					final ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
+					fragment.setProfileTypeListener(profileTypeDialogListener);
+					Bundle bundle = new Bundle();
+					bundle.putParcelableArrayList("routing_profiles", routingProfiles);
+					fragment.setArguments(bundle);
+					if (getActivity() != null) {
+						getActivity().getSupportFragmentManager().beginTransaction()
+							.add(fragment, "select_nav_type")
+							.commitAllowingStateLoss();
+					}
+
+					navTypeEt.setCursorVisible(false);
+					navTypeEt.setTextIsSelectable(false);
+					navTypeEt.clearFocus();
+					navTypeEt.requestFocus(ExtendedEditText.FOCUS_UP);
 				}
-
-				navTypeEt.setCursorVisible(false);
-				navTypeEt.setTextIsSelectable(false);
-				navTypeEt.clearFocus();
-				navTypeEt.requestFocus(ExtendedEditText.FOCUS_UP);
-
 			}
 		});
 
@@ -348,10 +353,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				saveNewProfile();
-//				if (saveNewProfile()) {
-//					getActivity().onBackPressed();
-//				}
+				if (saveNewProfile()) {
+					getActivity().onBackPressed();
+				}
 			}
 		});
 
@@ -369,6 +373,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
+
+		if (!isUserProfile && !isNew) {
+			profileNameEt.setFocusable(false);
+			navTypeEt.setFocusable(false);
+		}
 
 		return view;
 	}
@@ -472,6 +481,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (getSettings() != null) {
 			getSettings().AVAILABLE_APP_MODES.set(vls.toString());
 		}
+		isDataChanged = false;
 		return true;
 	}
 

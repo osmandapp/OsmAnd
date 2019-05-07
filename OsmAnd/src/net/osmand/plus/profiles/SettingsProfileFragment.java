@@ -86,7 +86,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 				intent.putExtra("stringKey", item.getStringKey());
 				intent.putExtra("isNew", false);
-				if (!item.getUserProfileName().isEmpty()) {
+				if (item.getUserProfileName() != null && !item.getUserProfileName().isEmpty()) {
 					intent.putExtra("isUserProfile", true);
 				}
 				startActivity(intent);

@@ -60,10 +60,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		final ApplicationMode item = items.get(position);
 		if (item.getParent() != null) {
 			holder.title.setText(item.getUserProfileName());
-			holder.descr.setText(String.format("Type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getStringKey().replace("_", " "))));
+			holder.descr.setText(String.format("Type: %s",
+				Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getStringKey().replace("_", " "))));
 		} else {
 			holder.title.setText(app.getResources().getString(item.getStringResource()));
-			holder.descr.setText(String.format("Base Profile, type: %s", Algorithms.capitalizeFirstLetterAndLowercase(item.getStringKey().replace("_", " "))));
+			holder.descr.setText(String.format("Base Profile, type: %s",
+				Algorithms.capitalizeFirstLetterAndLowercase(item.getStringKey().replace("_", " "))));
 		}
 
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
@@ -80,16 +82,16 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			}
 		});
 
-		if (item.getParent() != null) {
+//		if (item.getParent() != null) {
 			holder.profileOptions.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					listener.editProfile(item);
 				}
 			});
-		} else {
-			holder.profileOptions.setVisibility(View.INVISIBLE);
-		}
+//		} else {
+//			holder.profileOptions.setVisibility(View.INVISIBLE);
+//		}
 
 	}
 
