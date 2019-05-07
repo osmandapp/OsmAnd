@@ -46,7 +46,7 @@
           android:layout_marginLeft="@dimen/list_content_padding"
           android:layout_marginRight="@dimen/list_content_padding"
           android:layout_weight="1"
-          app:labelText="Name">
+          app:labelText="Profile Name">
 
           <studio.carbonylgroup.textfieldboxes.ExtendedEditText
             android:id="@+id/profile_name_et"
@@ -103,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        app:labelText="Type">
+        app:labelText="Navigation Type">
 
         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
           android:id="@+id/navigation_type_et"

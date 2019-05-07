@@ -147,8 +147,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			isDataChanged = true;
 			title = String
 				.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
-			profileNameEt.setText(title);
-			profileNameEt.selectAll();
+//			profileNameEt.setText(title);
+			//profileNameEt.selectAll();
 			startIconId = profile.getParent().getSmallIconDark();
 			profile.setIconId(startIconId);
 		} else if (profile.getKey() != -1) {
@@ -296,6 +296,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				if (isDataChanged) {
 					needSaveDialog();
 				} else {
+
+					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
 					i.putExtra(SELECTED_PROFILE, profile.getStringKey());
@@ -310,6 +312,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				if (isDataChanged) {
 					needSaveDialog();
 				} else {
+					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
 					i.putExtra(SELECTED_PROFILE, profile.getStringKey());
@@ -324,6 +327,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				if (isDataChanged) {
 					needSaveDialog();
 				} else {
+					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), SettingsNavigationActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, NAV_CONFIG);
 					i.putExtra(SELECTED_PROFILE, profile.getStringKey());
@@ -344,9 +348,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (saveNewProfile()) {
-					getActivity().onBackPressed();
-				}
+				saveNewProfile();
+//				if (saveNewProfile()) {
+//					getActivity().onBackPressed();
+//				}
 			}
 		});
 
@@ -455,6 +460,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		ApplicationMode mode = builder.customReg();
 		ApplicationMode.saveCustomModeToSettings(getSettings());
+		this.mode = mode;
 
 		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
 		Set<ApplicationMode> availableAppModes = new LinkedHashSet<>(
