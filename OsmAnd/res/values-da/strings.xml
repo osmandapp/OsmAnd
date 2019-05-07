@@ -2675,7 +2675,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
-    <string name="show_tunnels">"Tunneler "</string>
+    <string name="show_tunnels">Tunneler</string>
     <string name="shared_string_current">Nuværende</string>
     <string name="last_intermediate_dest_description">Tilføjer et mellemliggende stop</string>
     <string name="first_intermediate_dest_description">Tilføjer første stop</string>
