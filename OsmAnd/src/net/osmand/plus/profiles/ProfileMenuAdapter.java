@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.List;
 import java.util.Set;
@@ -71,27 +72,38 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
 			? R.color.main_font_dark
 			: R.color.main_font_light));
-		holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app)
+		if (selectedItems.contains(item)) {
+			holder.aSwitch.setChecked(true);
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app)
 				? R.color.active_buttons_and_links_dark
 				: R.color.active_buttons_and_links_light));
-		holder.aSwitch.setChecked(selectedItems.contains(item));
+		} else {
+			holder.aSwitch.setChecked(false);
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), R.color.icon_color));
+		}
+
 		holder.aSwitch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				listener.changeProfileStatus(item, holder.aSwitch.isChecked());
+				if (selectedItems.contains(item)) {
+					holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app)
+						? R.color.active_buttons_and_links_dark
+						: R.color.active_buttons_and_links_light));
+				} else {
+					holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), R.color.icon_color));
+				}
 			}
 		});
 
-//		if (item.getParent() != null) {
-			holder.profileOptions.setOnClickListener(new OnClickListener() {
+
+		holder.profileOptions.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					listener.editProfile(item);
 				}
 			});
-//		} else {
-//			holder.profileOptions.setVisibility(View.INVISIBLE);
-//		}
+
 
 	}
 
@@ -107,7 +119,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	class ProfileViewHolder extends RecyclerView.ViewHolder {
 		TextView title, descr;
 		SwitchCompat aSwitch;
-		ImageView icon, profileOptions;
+		ImageView icon;
+		LinearLayout profileOptions;
 
 		ProfileViewHolder(View itemView) {
 			super(itemView);

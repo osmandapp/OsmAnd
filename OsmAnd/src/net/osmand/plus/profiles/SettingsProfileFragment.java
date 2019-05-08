@@ -2,6 +2,7 @@ package net.osmand.plus.profiles;
 
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -48,7 +49,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		allAppModes.remove(ApplicationMode.DEFAULT);
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		availableAppModes.remove(ApplicationMode.DEFAULT);
-		baseProfiles = getBaseProfiles();
+		baseProfiles = getBaseProfiles(getMyActivity());
 	}
 
 	@Nullable
@@ -143,34 +144,33 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		adapter.updateItemsList(allAppModes);
 	}
 
-	private ArrayList<BaseProfile> getBaseProfiles() {
+	private ArrayList<BaseProfile> getBaseProfiles(Context ctx) {
 		ArrayList<BaseProfile> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
-			switch (mode.getStringKey()) {
-				case "car":
-					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.rendering_value_car_name),
-						"Car, Truck, Motorcycle", R.drawable.ic_action_car_dark));
-					break;
-				case "bicycle":
-					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.rendering_value_bicycle_name),
-						"MBT, Moped, Skiing, Horse", R.drawable.map_action_bicycle_dark));
-					break;
-				case "pedestrian":
-					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.rendering_value_pedestrian_name),
-						"Walking, Hiking, Running", R.drawable.map_action_pedestrian_dark));
-					break;
-				case "public_transport":
-					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.app_mode_public_transport),
-						"All PT types", R.drawable.map_action_bus_dark));
-					break;
-				case "boat":
-					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.nautical_renderer),
-						"Ship, Rowing, Sailing", R.drawable.map_action_sail_boat_dark));
-					break;
-				case "aircraft":
-					profiles.add(new BaseProfile(mode.getStringKey(), getString(R.string.app_mode_aircraft),
-						"Airplane, Gliding", R.drawable.map_action_aircraft));
-					break;
+			if (mode != ApplicationMode.DEFAULT) {
+				String descr = "";
+				switch (mode.getStringKey()) {
+					case "car":
+						descr = "Car, Truck, Motorcycle";
+						break;
+					case "bicycle":
+						descr = "MBT, Moped, Skiing, Horse";
+						break;
+					case "pedestrian":
+						descr = "Walking, Hiking, Running";
+						break;
+					case "public_transport":
+						descr = "All PT types";
+						break;
+					case "boat":
+						descr = "Ship, Rowing, Sailing";
+						break;
+					case "aircraft":
+						descr = "Airplane, Gliding";
+						break;
+				}
+				profiles.add(new BaseProfile(mode.getStringKey(), mode.toHumanString(ctx), descr,
+					mode.getSmallIconDark(), false));
 			}
 		}
 		return profiles;

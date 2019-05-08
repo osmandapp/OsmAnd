@@ -8,11 +8,13 @@ public class ProfileDataObject implements Parcelable {
 	private String name;
 	private String description;
 	private int iconRes;
+	private boolean isSelected;
 
-	public ProfileDataObject(String name, String description, int iconRes) {
+	public ProfileDataObject(String name, String description, int iconRes, boolean isSelected) {
 		this.name = name;
 		this.iconRes = iconRes;
 		this.description = description;
+		this.isSelected = isSelected;
 	}
 
 	protected ProfileDataObject(Parcel in) {
@@ -20,6 +22,7 @@ public class ProfileDataObject implements Parcelable {
 		description = in.readString();
 		iconRes = in.readInt();
 	}
+
 
 	public static final Creator<ProfileDataObject> CREATOR = new Creator<ProfileDataObject>() {
 		@Override
@@ -45,6 +48,14 @@ public class ProfileDataObject implements Parcelable {
 		return description;
 	}
 
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean selected) {
+		isSelected = selected;
+	}
+
 	@Override
 	public int describeContents() {
 		return 0;
@@ -55,5 +66,6 @@ public class ProfileDataObject implements Parcelable {
 		dest.writeString(name);
 		dest.writeString(description);
 		dest.writeInt(iconRes);
+		dest.writeByte((byte) (isSelected ? 1 : 0));
 	}
 }

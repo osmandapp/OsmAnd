@@ -135,13 +135,20 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 		@Override
 		public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
-			final int pos = position;
+			final int pos = holder.getAdapterPosition();
 			final ProfileDataObject item = items.get(position);
 			holder.title.setText(item.getName());
-
+			if (item.isSelected()) {
 			holder.icon.setImageDrawable(getIcon(item.getIconRes(), isNightMode
 				? R.color.active_buttons_and_links_dark
 				: R.color.active_buttons_and_links_light));
+			} else {
+				holder.icon.setImageDrawable(getIcon(item.getIconRes(), R.color.icon_color));
+			}
+
+
+
+
 
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -159,7 +166,7 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			});
 			if (item instanceof RoutingProfile) {
 				holder.descr.setText(Algorithms
-					.capitalizeFirstLetterAndLowercase(((RoutingProfile) item).getDescription()));
+					.capitalizeFirstLetterAndLowercase(item.getDescription()));
 				if (((RoutingProfile) item).isSelected()) {
 					holder.radioButton.setChecked(true);
 					previousSelection = position;

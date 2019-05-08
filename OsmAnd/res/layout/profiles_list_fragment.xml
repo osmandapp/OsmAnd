@@ -6,26 +6,11 @@
   android:background="?attr/ctx_menu_info_view_bg"
   android:orientation="vertical">
 
-  <LinearLayout
-    android:id="@+id/top_divider"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/appbar"
-    android:orientation="vertical">
-
-    <View
-      android:layout_width="match_parent"
-      android:layout_height="4dp"/>
-
-    <include layout="@layout/card_top_divider"/>
-
-  </LinearLayout>
-
   <android.support.v7.widget.RecyclerView
     android:id="@+id/profiles_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/top_divider"
+
     android:clipToPadding="false"
     android:paddingBottom="72dp"/>
 

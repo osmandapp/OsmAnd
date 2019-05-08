@@ -6,8 +6,8 @@ public class BaseProfile extends ProfileDataObject {
 
 	private String stringKey;
 
-	public BaseProfile(String stringKey, String name, String description, int iconRes) {
-		super(name, description, iconRes);
+	public BaseProfile(String stringKey, String name, String description, int iconRes, boolean isSelected) {
+		super(name, description, iconRes, isSelected);
 		this.stringKey = stringKey;
 	}
 

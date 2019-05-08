@@ -6,20 +6,10 @@ import android.os.Parcel;
 public class RoutingProfile extends ProfileDataObject {
 
 	private String stringKey;
-	private boolean isSelected;
 
 	public RoutingProfile(String stringKey, String name, String descr,  int iconRes, boolean isSelected) {
-		super(name, descr, iconRes);
+		super(name, descr, iconRes, isSelected);
 		this.stringKey = stringKey;
-		this.isSelected = isSelected;
-	}
-
-	public boolean isSelected() {
-		return isSelected;
-	}
-
-	public void setSelected(boolean selected) {
-		isSelected = selected;
 	}
 
 	public String getStringKey() {
@@ -29,7 +19,6 @@ public class RoutingProfile extends ProfileDataObject {
 	protected RoutingProfile(Parcel in) {
 		super(in);
 		stringKey = in.readString();
-		isSelected = in.readByte() != 0;
 	}
 
 	public static final Creator<RoutingProfile> CREATOR = new Creator<RoutingProfile>() {
@@ -53,6 +42,5 @@ public class RoutingProfile extends ProfileDataObject {
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(stringKey);
-		dest.writeByte((byte) (isSelected ? 1 : 0));
 	}
 }

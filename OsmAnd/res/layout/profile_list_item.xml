@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/profile_settings"
   android:layout_width="match_parent"
   android:layout_height="@dimen/setting_profile_item_height"
   android:background="?attr/selectableItemBackground"
@@ -20,7 +21,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/divider"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/settings_divider"/>
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -36,7 +40,6 @@
 
         <TextView
           android:id="@+id/profile_title"
-          android:textStyle="bold"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textColor="@color/main_font_dark"
@@ -58,13 +61,12 @@
         android:orientation="horizontal">
 
         <ImageView
-          android:id="@+id/profile_settings"
+
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:src="@drawable/ic_action_additional_option"
           android:tint="?attr/primary_icon_color"
           android:layout_gravity="center_vertical"
-          android:clickable="true"
           android:padding="@dimen/setting_profile_item_switch_margin"/>
 
         <android.support.v7.widget.SwitchCompat
