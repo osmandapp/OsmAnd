@@ -11,9 +11,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 
+import java.util.concurrent.Executors;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -549,23 +551,38 @@ public class AppInitializer implements IProgress {
 	}
 
 
+	@SuppressLint("StaticFieldLeak")
 	public net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
 		long tm = System.currentTimeMillis();
 		try {
-			File routingXml = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR + IndexConstants.ROUTING_XML_FILE);
-			if (routingXml.exists() && routingXml.canRead()) {
-				try {
-					return RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
-				} catch (XmlPullParserException | IOException e) {
-					throw new IllegalStateException(e);
-				}
-			} else {
-				return RoutingConfiguration.getDefault();
+			final File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+			if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
+				new AsyncTask<Void, Void, Void>() {
+					@Override
+					protected Void doInBackground(Void... voids) {
+						File[] fl = routingFolder.listFiles();
+						for (File f : fl) {
+							if (f.isFile() && f.canRead()) {
+								try {
+									RoutingConfiguration.parseFromInputStream(
+										new FileInputStream(f), new RoutingConfiguration.Builder());
+								} catch (XmlPullParserException | IOException e) {
+									throw new IllegalStateException(e);
+								}
+							}
+						}
+						return null;
+					}
+				}.executeOnExecutor(Executors.newSingleThreadExecutor(), (Void) null);
+
 			}
+
+			return RoutingConfiguration.getDefault();
+
 		} finally {
 			long te = System.currentTimeMillis();
 			if(te - tm > 30) {
-				System.err.println("Defalt routing config init took " + (te - tm) + " ms");
+				System.err.println("Default routing config init took " + (te - tm) + " ms");
 			}
 		}
 	}

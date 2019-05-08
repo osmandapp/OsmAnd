@@ -53,10 +53,10 @@ public class RoutingConfiguration {
 
 	public static class Builder {
 		// Design time storage
-		private String defaultRouter = "";
-		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
-		private Map<String, String> attributes = new LinkedHashMap<String, String>();
-		private HashMap<Long, Location> impassableRoadLocations = new HashMap<Long, Location>();
+		private static String defaultRouter = "";
+		private static Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
+		private static Map<String, String> attributes = new LinkedHashMap<String, String>();
+		private static HashMap<Long, Location> impassableRoadLocations = new HashMap<Long, Location>();
 
 		// Example
 //		{
@@ -164,17 +164,24 @@ public class RoutingConfiguration {
 	public static RoutingConfiguration.Builder getDefault() {
 		if (DEFAULT == null) {
 			try {
-				DEFAULT = parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"));
+				DEFAULT = parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"),
+					new RoutingConfiguration.Builder());
 			} catch (Exception e) {
 				throw new IllegalStateException(e);
 			}
 		}
 		return DEFAULT;
 	}
-	
-	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
+
+	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is, RoutingConfiguration.Builder config, String filename) throws IOException, XmlPullParserException {
+
+		//todo add file name to profile description.
+		return parseFromInputStream(is, config);
+	}
+
+	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is, RoutingConfiguration.Builder config) throws IOException, XmlPullParserException {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
-		final RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();
+//		final RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();
 		GeneralRouter currentRouter = null;
 		RouteDataObjectAttribute currentAttribute = null;
 		String preType = null;
@@ -185,7 +192,7 @@ public class RoutingConfiguration {
 			if (tok == XmlPullParser.START_TAG) {
 				String name = parser.getName();
 				if ("osmand_routing_config".equals(name)) {
-					config.defaultRouter = parser.getAttributeValue("", "defaultProfile");
+					Builder.defaultRouter = parser.getAttributeValue("", "defaultProfile");
 				} else if ("routingProfile".equals(name)) {
 					currentRouter = parseRoutingProfile(parser, config);
 				} else if ("attribute".equals(name)) {
@@ -313,7 +320,7 @@ public class RoutingConfiguration {
 		GeneralRouterProfile c = Algorithms.parseEnumValue(GeneralRouterProfile.values(), 
 				parser.getAttributeValue("", "baseProfile"), GeneralRouterProfile.CAR);
 		GeneralRouter currentRouter = new GeneralRouter(c, attrs);
-		config.routers.put(currentSelectedRouter, currentRouter);
+		Builder.routers.put(currentSelectedRouter, currentRouter);
 		return currentRouter;
 	}
 
@@ -322,7 +329,7 @@ public class RoutingConfiguration {
 			currentRouter.addAttribute(parser.getAttributeValue("", "name"), 
 					parser.getAttributeValue("", "value"));
 		} else {
-			config.attributes.put(parser.getAttributeValue("", "name"), 
+			Builder.attributes.put(parser.getAttributeValue("", "name"),
 					parser.getAttributeValue("", "value"));
 		}
 	}
