@@ -340,9 +340,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 					modes.add(a);
 				}
 			}
-			updateModeButton(settings.APPLICATION_MODE.get());
 
-			//--------------------------
 			getTypeButton().setVisibility(View.VISIBLE);
 			getTypeButton().setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -395,7 +393,8 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		    getMyApplication().getSettings().isLightContent()
 			    ? R.color.active_buttons_and_links_light
 			    : R.color.active_buttons_and_links_dark));
-
+	    settings.APPLICATION_MODE.set(mode);
+	    updateAllSettings();
     }
 
 	@Override
