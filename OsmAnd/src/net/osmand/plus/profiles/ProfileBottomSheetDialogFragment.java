@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import java.util.ArrayList;
 import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -31,6 +30,8 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	private ProfileTypeDialogListener listListener;
 	private RecyclerView recyclerView;
 	private ProfileTypeAdapter adapter;
+	private TextView titleTV;
+	private TextView fragmentDescriptionTV;
 
 
 	public final static String TYPE_APP_PROFILE = "base_profiles";
@@ -66,11 +67,17 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			: R.style.OsmandDarkTheme;
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 			R.layout.bottom_sheet_select_type_fragment, null);
+
+		titleTV = view.findViewById(R.id.dialog_title);
+		fragmentDescriptionTV = view.findViewById(R.id.dialog_description_text);
+
 		if (type.equals(TYPE_APP_PROFILE)) {
-			TextView fragmentDescription = view.findViewById(R.id.dialog_description_text);
-			fragmentDescription.setVisibility(View.VISIBLE);
-			fragmentDescription.setText(
+			titleTV.setText("Select base profile");
+			fragmentDescriptionTV.setVisibility(View.VISIBLE);
+			fragmentDescriptionTV.setText(
 				"The new Application Profile should be based on one of the default App Profiles. Selected Profile defines basic settings: setup of Widgets, units of speed and distance. In string below Profile's name, you could learn which Navigation Profiles are suitable for each Application Profile.");
+		} else if (type.equals(TYPE_NAV_PROFILE)) {
+			titleTV.setText("Select navigation type");
 		}
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -146,10 +153,6 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				holder.icon.setImageDrawable(getIcon(item.getIconRes(), R.color.icon_color));
 			}
 
-
-
-
-
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -159,15 +162,15 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 					previousSelection = pos;
 
 					if (item instanceof RoutingProfile) {
-						((RoutingProfile) items.get(pos)).setSelected(true);
-						((RoutingProfile) items.get(previousSelection)).setSelected(false);
+						items.get(pos).setSelected(true);
+						items.get(previousSelection).setSelected(false);
 					}
 				}
 			});
 			if (item instanceof RoutingProfile) {
 				holder.descr.setText(Algorithms
 					.capitalizeFirstLetterAndLowercase(item.getDescription()));
-				if (((RoutingProfile) item).isSelected()) {
+				if (item.isSelected()) {
 					holder.radioButton.setChecked(true);
 					previousSelection = position;
 				} else {
