@@ -1,16 +1,14 @@
 package net.osmand.plus.firstusage;
 
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
@@ -18,6 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 
 public class FirstUsageWelcomeFragment extends Fragment {
 	public static final String TAG = "FirstUsageWelcomeFragment";
+	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
 	public static boolean SHOW = true;
 	@Nullable
 	@Override
@@ -50,5 +49,13 @@ public class FirstUsageWelcomeFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		((MapActivity)getActivity()).enableDrawer();
+	}
+
+	public void closeWelcomeFragment() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().beginTransaction()
+					.remove(FirstUsageWelcomeFragment.this).commit();
+		}
 	}
 }
