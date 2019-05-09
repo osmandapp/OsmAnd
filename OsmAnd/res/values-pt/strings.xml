@@ -1341,7 +1341,7 @@
     <string name="storage_directory_internal_app">Memória interna do aplicativo</string>
     <string name="shared_string_go">Ir</string>
     <string name="routing_settings_2">Configurações de navegação</string>
-    <string name="general_settings_2">"Configurações gerais  "</string>
+    <string name="general_settings_2">Configurações gerais</string>
     <string name="version_settings_descr">Descarregar compilações noturnas.</string>
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="dash_download_manage">Gerenciador</string>
