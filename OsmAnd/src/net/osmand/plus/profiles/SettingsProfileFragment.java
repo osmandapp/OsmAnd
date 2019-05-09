@@ -144,7 +144,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		adapter.updateItemsList(allAppModes);
 	}
 
-	private ArrayList<BaseProfile> getBaseProfiles(Context ctx) {
+	static ArrayList<BaseProfile> getBaseProfiles(Context ctx) {
 		ArrayList<BaseProfile> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
 			if (mode != ApplicationMode.DEFAULT) {

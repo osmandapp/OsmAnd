@@ -57,40 +57,49 @@
             android:orientation="vertical">
 
             <TextView
-              android:id="@+id/mode_title"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:ellipsize="end"
               android:maxLines="1"
               android:textAppearance="@style/TextAppearance.ListItemTitle"
               android:textColor="?attr/main_font_color_basic"
-              tools:text="Item Title"/>
+              android:text="Base Profile"/>
 
             <TextView
-              android:id="@+id/mode_subtitle"
+              android:id="@+id/mode_title"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:ellipsize="end"
               android:maxLines="1"
+              android:textSize="16sp"
               tools:text="Item additional desription"/>
 
           </LinearLayout>
+
           <ImageView
             android:id="@+id/type_down_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:layout_gravity="center_vertical"
+            android:tint="@color/settings_divider"
             android:src="@drawable/ic_action_arrow_drop_down"/>
 
         </LinearLayout>
 
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_content_padding">
+
         <ImageView
-          android:id="@+id/bottom_shadow3"
+          android:id="@+id/bottom_shadow"
           android:layout_width="match_parent"
           android:layout_height="5dp"
           android:scaleType="fitXY"
           android:src="@drawable/bg_shadow_list_bottom"/>
+
       </LinearLayout>
 
       <LinearLayout
@@ -157,9 +166,7 @@
                 android:id="@+id/select_icon_btn_img"
                 android:layout_width="@dimen/standard_icon_size"
                 android:layout_height="@dimen/standard_icon_size"
-                tools:src="@drawable/ic_action_car_dark"
-
-                />
+                tools:src="@drawable/ic_action_car_dark"/>
 
             </LinearLayout>
 
