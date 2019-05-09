@@ -382,7 +382,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				addRouteCard(cardsContainer, routeSurfaceCard);
 
 				if (slopeDataSet != null) {
-					List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues());
+					List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues(), slopeDataSet.getDivX());
 					RouteInfoCard routeSteepnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSteepnessStatistic(inclines), analysis);
 					addRouteCard(cardsContainer, routeSteepnessCard);
 				}
@@ -1517,7 +1517,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		((LinearLayout) view).addView(horizontalLine);
 	}
 
-	private List<Incline> createInclinesAndAdd100MetersWith0Incline(List<Entry> entries) {
+	private List<Incline> createInclinesAndAdd100MetersWith0Incline(List<Entry> entries, float divX) {
 		float minIncline = 0;
 		float maxIncline = 0;
 		int size = entries.size();
@@ -1527,7 +1527,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			maxIncline = Math.max(inclineValue, maxIncline);
 			minIncline = Math.min(inclineValue, minIncline);
 
-			Incline incline = new Incline(inclineValue, entry.getX() * 1000);
+			Incline incline = new Incline(inclineValue, entry.getX() * divX);
 			inclines.add(incline);
 		}
 		for (int i = 0; i < 10; i++) {
@@ -1537,7 +1537,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (slopeDataSet != null) {
 			float lastDistance = slopeDataSet.getEntryForIndex(size - 1).getX();
 			for (int i = 1; i <= 10; i++) {
-				float distance = lastDistance * 1000f + i * 5f;
+				float distance = lastDistance * divX + i * 5f;
 				inclines.add(new Incline(0f, distance));
 			}
 		}
