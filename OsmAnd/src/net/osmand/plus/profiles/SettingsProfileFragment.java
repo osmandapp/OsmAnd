@@ -120,7 +120,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 				Bundle bundle = new Bundle();
 				bundle.putParcelableArrayList(TYPE_APP_PROFILE, baseProfiles);
 				dialog.setArguments(bundle);
-
 				if (getActivity() != null) {
 					getActivity().getSupportFragmentManager().beginTransaction()
 						.add(dialog, "select_base_type").commitAllowingStateLoss();

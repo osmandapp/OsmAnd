@@ -146,11 +146,11 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			final ProfileDataObject item = items.get(position);
 			holder.title.setText(item.getName());
 			if (item.isSelected()) {
-			holder.icon.setImageDrawable(getIcon(item.getIconRes(), isNightMode
-				? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light));
-			} else {
-				holder.icon.setImageDrawable(getIcon(item.getIconRes(), R.color.icon_color));
+				holder.icon.setImageDrawable(getIcon(item.getIconRes(), isNightMode
+					? R.color.active_buttons_and_links_dark
+					: R.color.active_buttons_and_links_light));
+				} else {
+					holder.icon.setImageDrawable(getIcon(item.getIconRes(), R.color.icon_color));
 			}
 
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -167,18 +167,15 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 					}
 				}
 			});
-			if (item instanceof RoutingProfile) {
-				holder.descr.setText(Algorithms
-					.capitalizeFirstLetterAndLowercase(item.getDescription()));
-				if (item.isSelected()) {
-					holder.radioButton.setChecked(true);
-					previousSelection = position;
-				} else {
-					holder.radioButton.setChecked(false);
-				}
+
+			holder.descr.setText(item.getDescription());
+			if (item.isSelected()) {
+				holder.radioButton.setChecked(true);
+				previousSelection = position;
 			} else {
-				holder.descr.setText(item.getDescription());
+				holder.radioButton.setChecked(false);
 			}
+
 		}
 
 		@Override

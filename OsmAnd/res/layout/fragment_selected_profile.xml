@@ -4,13 +4,15 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:background="?attr/ctx_menu_info_view_bg"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   >
   <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="top">
+    android:layout_gravity="top"
+    android:layout_marginBottom="@dimen/setting_profile_item_height">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -62,7 +64,6 @@
               android:ellipsize="end"
               android:maxLines="1"
               android:textAppearance="@style/TextAppearance.ListItemTitle"
-              android:textColor="?attr/main_font_color_basic"
               android:text="Base Profile"/>
 
             <TextView
@@ -72,12 +73,13 @@
               android:ellipsize="end"
               android:maxLines="1"
               android:textSize="16sp"
+              android:textColor="?attr/main_font_color_basic"
               tools:text="Item additional desription"/>
 
           </LinearLayout>
 
           <ImageView
-            android:id="@+id/type_down_arrow"
+            android:id="@+id/type_down_arrow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -89,16 +91,28 @@
 
       </LinearLayout>
 
+
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_content_padding">
+        android:layout_height="wrap_content"
+        android:background="?attr/ctx_menu_info_view_bg"
+        android:orientation="vertical">
 
         <ImageView
-          android:id="@+id/bottom_shadow"
           android:layout_width="match_parent"
-          android:layout_height="5dp"
+          android:layout_height="wrap_content"
           android:scaleType="fitXY"
           android:src="@drawable/bg_shadow_list_bottom"/>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scaleType="fitXY"
+          android:src="@drawable/bg_shadow_list_top"/>
 
       </LinearLayout>
 
@@ -171,6 +185,7 @@
             </LinearLayout>
 
           </LinearLayout>
+
           <FrameLayout
             android:id="@+id/click_block_layout"
             android:layout_width="match_parent"
@@ -187,6 +202,16 @@
           android:layout_marginEnd="@dimen/list_content_padding"
           android:layout_marginLeft="@dimen/list_content_padding"
           android:layout_marginRight="@dimen/list_content_padding">
+
+          <ImageView
+            android:id="@+id/type_down_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:paddingRight="@dimen/content_padding"
+            android:tint="@color/settings_divider"
+            android:src="@drawable/ic_action_arrow_drop_down"/>
+
           <net.osmand.plus.widgets.OsmandTextFieldBoxes
             android:id="@+id/navigation_type_otfb"
             android:layout_width="match_parent"
@@ -230,16 +255,29 @@
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_content_padding">
+        android:layout_height="wrap_content"
+        android:background="?attr/ctx_menu_info_view_bg"
+        android:orientation="vertical">
 
         <ImageView
-          android:id="@+id/bottom_shadow1"
           android:layout_width="match_parent"
-          android:layout_height="5dp"
+          android:layout_height="wrap_content"
           android:scaleType="fitXY"
           android:src="@drawable/bg_shadow_list_bottom"/>
 
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scaleType="fitXY"
+          android:src="@drawable/bg_shadow_list_top"/>
+
       </LinearLayout>
+
+
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -412,17 +450,11 @@
         </LinearLayout>
       </LinearLayout>
 
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/list_content_padding">
 
-        <ImageView
-          android:id="@+id/bottom_shadow2"
-          android:layout_width="match_parent"
-          android:layout_height="5dp"
-          android:scaleType="fitXY"
-          android:src="@drawable/bg_shadow_list_bottom"/>
-      </LinearLayout>
+
+      <include layout="@layout/list_shadow_footer"/>
+
+
 
       <FrameLayout
         android:layout_width="match_parent"

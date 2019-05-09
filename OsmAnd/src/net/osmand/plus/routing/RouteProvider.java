@@ -687,7 +687,6 @@ public class RouteProvider {
 		GeneralRouterProfile p ;
 
 		if (params.mode.getRoutingProfile() != null ) {
-			//todo get assigned routing profile from ApplicationMode
 			p = GeneralRouterProfile.CUSTOM;
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			p = GeneralRouterProfile.BICYCLE;

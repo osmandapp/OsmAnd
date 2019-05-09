@@ -2,6 +2,7 @@ package net.osmand.plus.profiles;
 
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
@@ -63,7 +64,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	ArrayList<RoutingProfile> routingProfiles;
 	OsmandApplication app;
 	RoutingProfile selectedRoutingProfile = null;
-	float defSpeed = 0f;
 
 	private boolean isNew = false;
 	private boolean isUserProfile = false;
@@ -250,8 +250,16 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onSelectedType(int pos) {
 				isDataChanged = true;
+				for (int i = 0; i < routingProfiles.size(); i++) {
+					if (i == pos) {
+						routingProfiles.get(i).setSelected(true);
+					} else {
+						routingProfiles.get(i).setSelected(false);
+					}
+				}
 				selectedRoutingProfile = routingProfiles.get(pos);
 				navTypeEt.setText(selectedRoutingProfile.getName());
+				LOG.debug(routingProfiles);
 				profile.setRoutingProfile(selectedRoutingProfile);
 			}
 		};
@@ -299,8 +307,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					fragment.setArguments(bundle);
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
-							.add(fragment, "select_nav_type")
-							.commitAllowingStateLoss();
+							.add(fragment, "select_nav_type").commitAllowingStateLoss();
 					}
 
 					navTypeEt.setCursorVisible(false);
@@ -333,8 +340,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				if (isDataChanged) {
 					needSaveDialog();
-				} else {
-
+				} else if (getSettings() != null) {
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
@@ -349,7 +355,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				if (isDataChanged) {
 					needSaveDialog();
-				} else {
+				} else if (getSettings() != null) {
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
@@ -364,7 +370,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				if (isDataChanged) {
 					needSaveDialog();
-				} else {
+				} else if (getSettings() != null) {
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), SettingsNavigationActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, NAV_CONFIG);
@@ -425,16 +431,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void needSaveDialog() {
-		if (getActivity() != null) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-			bld.setTitle("Save Changes");
-			bld.setMessage("You need to save changes to Profile before proceed");
-			bld.setNegativeButton(R.string.shared_string_ok, null);
-			bld.show();
-		}
-	}
-
 	private boolean saveNewProfile() {
 
 		if (isUserProfile && !isNew) {
@@ -442,27 +438,20 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 
 		if (profile.getRoutingProfile() == null && getActivity() != null) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-			bld.setTitle("Select Routing Type");
-			bld.setMessage("You need to select Routing Type to create New Application Profile");
-			bld.setNegativeButton(R.string.shared_string_dismiss, null);
-			bld.show();
+			showSaveWarningDialog(
+				"Select Routing Type",
+				"You need to select Routing Type to create New Application Profile",
+				getActivity());
 			return false;
-		} else if (profile.getUserProfileTitle().isEmpty() && getActivity() != null) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-			bld.setTitle("Enter Profile Name");
-			bld.setMessage("Profile name shouldn't be empty!");
-			bld.setNegativeButton(R.string.shared_string_dismiss,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						navTypeEt.requestFocus();
-					}
-				});
-			bld.show();
+		} else if (getActivity() != null && profile.getUserProfileTitle().isEmpty()
+			|| profile.getUserProfileTitle().replace(" ", "").length() < 1) {
+			showSaveWarningDialog(
+				"Enter Profile Name",
+				"Profile name shouldn't be empty!",
+				getActivity()
+			);
 			return false;
 		}
-
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
 			if (m.getUserProfileName() != null && m.getUserProfileName().equals(profile.getUserProfileTitle())
 				&& getActivity() != null) {
@@ -528,6 +517,24 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return true;
 	}
 
+	private void needSaveDialog() {
+		if (getActivity() != null) {
+			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+			bld.setTitle("Save Changes");
+			bld.setMessage("You need to save changes to Profile before proceed");
+			bld.setNegativeButton(R.string.shared_string_ok, null);
+			bld.show();
+		}
+	}
+
+	private void showSaveWarningDialog(String title, String message, Activity activity) {
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+		bld.setTitle(title);
+		bld.setMessage(message);
+		bld.setNegativeButton(R.string.shared_string_dismiss, null);
+		bld.show();
+	}
+
 	void onDeleteProfileClick() {
 		if (getActivity() != null) {
 			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
@@ -552,8 +559,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	private ArrayList<RoutingProfile> getRoutingProfiles() {
 		ArrayList<RoutingProfile> routingProfiles = new ArrayList<>();
-		Map<String, GeneralRouter> routingProfilesNames = getMyApplication()
-			.getDefaultRoutingConfig().getAllRoutes();
+		Map<String, GeneralRouter> routingProfilesNames = getMyApplication().getDefaultRoutingConfig().getAllRoutes();
 		for (Entry<String, GeneralRouter> e : routingProfilesNames.entrySet()) {
 			String name;
 			String description = getResources().getString(R.string.osmand_default_routing);
@@ -579,6 +585,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					iconRes = R.drawable.map_action_sail_boat_dark;
 					name = getString(R.string.app_mode_boat);
 					break;
+				case "geocoding":
+					iconRes = R.drawable.ic_action_world_globe;
+					name = "Geocoding";
+					break;
 				default:
 					iconRes = R.drawable.ic_action_world_globe;
 					name = Algorithms
@@ -586,10 +596,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					description = "Custom profile"; //todo add filename
 					break;
 			}
-
 			routingProfiles.add(new RoutingProfile(e.getKey(), name, description, iconRes, false));
 		}
-
 		return routingProfiles;
 	}
 

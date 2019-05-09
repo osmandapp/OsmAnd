@@ -30,6 +30,8 @@ public class SelectIconBottomSheetDialogFragment extends BottomSheetDialogFragme
 	private IconIdListener listListener;
 	private RecyclerView recyclerView;
 	private IconIdAdapter adapter;
+	private TextView title;
+
 
 	public void setIconIdListener(IconIdListener listener) {
 		this.listener = listener;
@@ -75,9 +77,12 @@ public class SelectIconBottomSheetDialogFragment extends BottomSheetDialogFragme
 			}
 		};
 		recyclerView = view.findViewById(R.id.menu_list_view);
+		title = view.findViewById(R.id.dialog_title);
+		title.setText("Select icon");
 		adapter = new IconIdAdapter(icons, isNightMode(getMyApplication()), listListener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
+
 
 		Button cancelBtn = view.findViewById(R.id.cancel_selection);
 		cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,15 +124,18 @@ public class SelectIconBottomSheetDialogFragment extends BottomSheetDialogFragme
 			final int pos = position;
 			final IconResWithDescr item = items.get(position);
 			holder.title.setText(item.getTitleId());
-			holder.icon.setImageDrawable(getIcon(item.getResId(), isNightMode
-				? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light));
-			if(item.isSelected()) {
+			if (item.isSelected) {
+				holder.icon.setImageDrawable(getIcon(item.getResId(), isNightMode
+					? R.color.active_buttons_and_links_dark
+					: R.color.active_buttons_and_links_light));
 				holder.radioButton.setChecked(true);
 				previousSelection = position;
 			} else {
 				holder.radioButton.setChecked(false);
+				holder.icon.setImageDrawable(getIcon(item.getResId(), R.color.icon_color));
 			}
+
+
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
