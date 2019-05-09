@@ -111,7 +111,7 @@ public class NavigationService extends Service implements LocationListener {
 		} else {
 			// Issue #3604
 			final OsmandApplication app = (OsmandApplication) getApplication();
-			if ((usedBy == 2) && !(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) && (serviceOffInterval == 0)) {
+			if ((usedBy == 2) && (app.navigationServiceGpsInterval(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get()) != 0) && (serviceOffInterval == 0)) {
 				serviceOffInterval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
 				// From onStartCommand:
 				serviceError = serviceOffInterval / 5;
