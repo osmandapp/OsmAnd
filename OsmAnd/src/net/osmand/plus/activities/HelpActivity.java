@@ -102,6 +102,8 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		contextMenuAdapter.addItem(createCategory(R.string.follow_us));
 		contextMenuAdapter.addItem(createSocialItem(R.string.twitter, R.string.twitter_address,
 				R.drawable.ic_action_social_twitter));
+	        contextMenuAdapter.addItem(createSocialItem(R.string.reddit, R.string.reddit_address,
+				R.drawable.ic_action_social_reddit));
 		contextMenuAdapter.addItem(createSocialItem(R.string.facebook, R.string.facebook_address,
 				R.drawable.ic_action_social_facebook));
 		contextMenuAdapter.addItem(createSocialItem(R.string.vk, R.string.vk_address,
