@@ -1525,7 +1525,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="filter_poi_hint">Filtra per nome</string>
     <string name="search_poi_category_hint">Scrivi per cercare</string>
     <string name="index_name_netherlands">Europa - Paesi Bassi</string>
-    <string name="copying_osmand_file_failed">Copia dei file fallita</string>
+    <string name="copying_osmand_file_failed">Spostamento dei file fallita</string>
     <string name="storage_directory_external">Memoria esterna</string>
     <string name="application_dir_change_warning3">Copiare i file dei dati OsmAnd nella nuova destinazione\?</string>
     <string name="specified_directiory_not_writeable">Le mappe non possono essere create nella destinazione specificata</string>
@@ -3021,8 +3021,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="files_present">%1$d files (%2$s) sono presenti nella precedente posizione \'%3$s\'.</string>
     <string name="move_maps">Sposta le mappe</string>
     <string name="dont_move_maps">Non spostare</string>
-    <string name="public_transport_ped_route_title">Il percorso a piedi è %1$s e poterebbe essere più veloce di quello con i mezzi pubblici</string>
-    <string name="public_transport_no_route_title">Sfortunatamente, OsmAnd non può trovare un percorso adatto alle tue impostazioni.</string>
+    <string name="public_transport_ped_route_title">Il percorso a piedi è circa %1$s e poterebbe essere più veloce di quello con i mezzi pubblici</string>
+    <string name="public_transport_no_route_title">Sfortunatamente, OsmAnd non può individuare un percorso compatibile alle tue impostazioni.</string>
     <string name="public_transport_try_ped">Prova la navigazione per pedoni.</string>
     <string name="public_transport_try_change_settings">Prova cambiando le impostazioni.</string>
     <string name="public_transport_calc_pedestrian">Calcola un percorso per pedoni</string>
