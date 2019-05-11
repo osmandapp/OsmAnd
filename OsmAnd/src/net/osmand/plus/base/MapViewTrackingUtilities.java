@@ -337,7 +337,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void backToLocationImpl() {
-		backToLocationImpl(15, false);
+		backToLocationImpl(15, true);
 	}
 
 	public void backToLocationImpl(int zoom, boolean forceZoom) {
@@ -372,7 +372,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			public void run() {
 				if (mapView != null && !isMapLinkedToLocation() && contextMenu == null) {
 					app.showToastMessage(R.string.auto_follow_location_enabled);
-					backToLocationImpl();
+					backToLocationImpl(15, false);
 				}
 			}
 		}, delay * 1000);
