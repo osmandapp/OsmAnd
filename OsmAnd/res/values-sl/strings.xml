@@ -1484,9 +1484,9 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="osmand_parking_overdue">prekoračen čas</string>
     <string name="shared_string_places">Kraji</string>
     <string name="watch">Poglej</string>
-    <string name="application_dir_change_warning3">Ali želite kopirati podatkovne datoteke na novo ciljno mesto\?</string>
+    <string name="application_dir_change_warning3">Ali želite premakniti podatkovne datoteke na novo ciljno mesto\?</string>
     <string name="specified_directiory_not_writeable">V navedeno mapo ni mogoče shraniti zemljevidov.</string>
-    <string name="copying_osmand_file_failed">Kopiranje datotek je spodletelo.</string>
+    <string name="copying_osmand_file_failed">Premikanje datotek je spodletelo.</string>
     <string name="storage_directory_external">Zunanje mesto za shranjevanje</string>
     <string name="storage_directory_multiuser">Shranjevanje za različne uporabnike</string>
     <string name="storage_directory_internal_app">Notranji pomnilnik programa</string>
@@ -2984,7 +2984,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="route_steepness_stat_container">Naklon</string>
     <string name="shared_string_degrees">Stopinje</string>
     <string name="shared_string_milliradians">Miliradiani</string>
-    <string name="angular_measeurement">Kotne merske enote</string>
+    <string name="angular_measeurement">Kotne enote</string>
     <string name="angular_measeurement_descr">Spreminjanje merila azimuta.</string>
     <string name="avoid_pt_types_descr">Izbor vrst javnega transporta za izogibanje:</string>
     <string name="quick_action_day_night_mode">Način %s</string>
@@ -3017,4 +3017,13 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="send_log">Pošlji dnevnik</string>
+    <string name="files_moved">Premaknjenih je %1$d datotek (%2$s).</string>
+    <string name="files_copied">Kopiranih je %1$d datotek (%2$s).</string>
+    <string name="files_failed">Kopiranje %1$d datotek je spodletelo (%2$s).</string>
+    <string name="move_maps">Premakni zemljevide</string>
+    <string name="dont_move_maps">Ne premakni</string>
+    <string name="public_transport_try_ped">Preizkusite navigacijo za pešačenje.</string>
+    <string name="public_transport_try_change_settings">Poskusite spreminjati nastavitve.</string>
+    <string name="public_transport_calc_pedestrian">Izračunaj pot za pešačenje</string>
+    <string name="public_transport_type">Vrsta transporta</string>
 </resources>
