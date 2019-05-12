@@ -852,8 +852,8 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public int navigationServiceGpsInterval(int interval) {
 		// Issue 5632 Workaround: Keep GPS always on for SDKs where repeated AlarmManager scheduling is unreliable
-		// Use for >= 23 for now, although manufacturer-dependent devices may be affected starting from 19
-		if ((Build.VERSION.SDK_INT >= 23) && (getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 5 * 60000)) {
+		// Use  > 19 for now, but the issue may even exist for some =19 devices already
+		if ((Build.VERSION.SDK_INT > 19) && (getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 5 * 60000)) {
 			return 0;
 		}
 		// Default: Save battery power by turning off GPS between measurements
