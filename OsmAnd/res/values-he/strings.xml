@@ -2997,7 +2997,7 @@
     <string name="quick_action_day_night_mode">מצב %s</string>
     <string name="shared_string_degrees">מעלות</string>
     <string name="shared_string_milliradians">מילי־רדיאנים</string>
-    <string name="angular_measeurement">יחידות מידה זוויתיות</string>
+    <string name="angular_measeurement">יחידה זוויתית</string>
     <string name="angular_measeurement_descr">החלפת יחידת המידה לאזימוט.</string>
     <string name="routing_attr_avoid_sett_name">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
     <string name="routing_attr_avoid_sett_description">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
