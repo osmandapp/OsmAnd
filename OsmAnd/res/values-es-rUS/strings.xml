@@ -1775,7 +1775,7 @@ Lon %2$s</string>
     <string name="context_menu_item_open_note">Abrir nota de OSM</string>
     <string name="osm_edit_reopened_note">Nota de OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota de OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota de OSM borrada</string>
+    <string name="osm_edit_removed_note">Nota de OSM resuelta</string>
     <string name="osm_edit_created_note">Nota de OSM creada</string>
     <string name="osn_bug_name">Nota de OSM</string>
     <string name="osn_add_dialog_title">Crear nota</string>
@@ -3007,7 +3007,7 @@ Lon %2$s</string>
     <string name="routing_attr_avoid_sett_description">Evita las calles empedradas y adoquinadas</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Mil angular</string>
-    <string name="angular_measeurement">Unidades de medición angular</string>
+    <string name="angular_measeurement">Unidad angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Evitar tranvías</string>
     <string name="routing_attr_avoid_tram_description">Evita usar los tranvías</string>
