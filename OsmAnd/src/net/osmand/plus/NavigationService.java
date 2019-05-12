@@ -125,6 +125,7 @@ public class NavigationService extends Service implements LocationListener {
 				if (Build.VERSION.SDK_INT >= 23) {
 					alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
 				} else if (Build.VERSION.SDK_INT >= 19) {
+					// setRepeating() became inexact starting with SDK 19
 					alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
 				} else {
 					alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
@@ -180,6 +181,7 @@ public class NavigationService extends Service implements LocationListener {
 			if (Build.VERSION.SDK_INT >= 23) {
 				alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
 			} else if (Build.VERSION.SDK_INT >= 19) {
+				// setRepeating() became inexact starting with SDK 19
 				alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
 			} else {
 				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);

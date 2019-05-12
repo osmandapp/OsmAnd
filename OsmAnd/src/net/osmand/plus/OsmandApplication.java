@@ -851,7 +851,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 
 	public int navigationServiceGpsInterval(int interval) {
-		// Issue 5632 Workaround: Keep GPS always on for SDKs with unreliable repeated AlarmManger scheduling in doze mode
+		// Issue 5632 Workaround: Keep GPS always on for SDKs where repeated AlarmManager scheduling is unreliable
 		if ((Build.VERSION.SDK_INT >= 19) && (getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 5 * 60000)) {
 			return 0;
 		}
