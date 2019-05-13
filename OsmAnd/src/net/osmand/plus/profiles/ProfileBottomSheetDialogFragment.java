@@ -120,17 +120,11 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		private int previousSelection;
 
 
-		public ProfileTypeAdapter(List<ProfileDataObject> items, boolean isNightMode,
+		ProfileTypeAdapter(List<ProfileDataObject> items, boolean isNightMode,
 			ProfileTypeDialogListener listener) {
 			this.items = items;
 			this.isNightMode = isNightMode;
 			this.listener = listener;
-		}
-
-		public void updateData(List<RoutingProfile> newItems) {
-			items.clear();
-			items.addAll(newItems);
-			notifyDataSetChanged();
 		}
 
 		@NonNull
@@ -168,7 +162,18 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				}
 			});
 
-			holder.descr.setText(item.getDescription());
+			if(item instanceof RoutingProfile) {
+				if (((RoutingProfile) item).getFileName() != null) {
+					holder.descr
+						.setText(String.format("From %s", ((RoutingProfile) item).getFileName()));
+				} else {
+					holder.descr
+						.setText(getResources().getString(R.string.osmand_default_routing));
+				}
+			} else {
+				holder.descr.setText(item.getDescription());
+			}
+
 			if (item.isSelected()) {
 				holder.radioButton.setChecked(true);
 				previousSelection = position;

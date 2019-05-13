@@ -6,10 +6,12 @@ import android.os.Parcel;
 public class RoutingProfile extends ProfileDataObject {
 
 	private String stringKey;
+	private String fileName;
 
-	public RoutingProfile(String stringKey, String name, String descr,  int iconRes, boolean isSelected) {
+	public RoutingProfile(String stringKey, String name, String descr,  int iconRes, boolean isSelected, String fileName) {
 		super(name, descr, iconRes, isSelected);
 		this.stringKey = stringKey;
+		this.fileName = fileName;
 	}
 
 	public String getStringKey() {
@@ -19,6 +21,11 @@ public class RoutingProfile extends ProfileDataObject {
 	protected RoutingProfile(Parcel in) {
 		super(in);
 		stringKey = in.readString();
+		fileName = in.readString();
+	}
+
+	public String getFileName() {
+		return fileName;
 	}
 
 	public static final Creator<RoutingProfile> CREATOR = new Creator<RoutingProfile>() {
@@ -42,5 +49,6 @@ public class RoutingProfile extends ProfileDataObject {
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(stringKey);
+		dest.writeString(fileName);
 	}
 }

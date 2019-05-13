@@ -558,11 +558,12 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	private ArrayList<RoutingProfile> getRoutingProfiles() {
-		ArrayList<RoutingProfile> routingProfiles = new ArrayList<>();
-		Map<String, GeneralRouter> routingProfilesNames = getMyApplication().getDefaultRoutingConfig().getAllRoutes();
-		for (Entry<String, GeneralRouter> e : routingProfilesNames.entrySet()) {
+		ArrayList<RoutingProfile> profilesObjects = new ArrayList<>();
+		Map<String, GeneralRouter> inputProfiles = getMyApplication().getDefaultRoutingConfig().getAllRoutes();
+		for (Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
 			String name;
-			String description = getResources().getString(R.string.osmand_default_routing);
+//			String description = getResources().getString(R.string.osmand_default_routing);
+			String description = "";
 			int iconRes;
 			switch (e.getKey()) {
 				case "car":
@@ -596,9 +597,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					description = "Custom profile"; //todo add filename
 					break;
 			}
-			routingProfiles.add(new RoutingProfile(e.getKey(), name, description, iconRes, false));
+			profilesObjects.add(new RoutingProfile(e.getKey(), name, description, iconRes, false, e.getValue().getFilename()));
 		}
-		return routingProfiles;
+		return profilesObjects;
 	}
 
 

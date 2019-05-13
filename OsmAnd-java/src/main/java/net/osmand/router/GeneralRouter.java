@@ -44,7 +44,7 @@ public class GeneralRouter implements VehicleRouter {
 	private boolean shortestRoute;
 	private boolean heightObstacles;
 	private boolean allowPrivate;
-	private String filename;
+	private String filename = null;
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
