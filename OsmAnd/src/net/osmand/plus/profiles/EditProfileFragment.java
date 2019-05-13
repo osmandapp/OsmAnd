@@ -1,5 +1,6 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
 import android.app.Activity;
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -89,6 +91,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private LinearLayout typeSelectionBtn;
 	private ImageView baseModeIcon;
 	private TextView baseModeTitle;
+	private ScrollView scrollContainer;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,6 +132,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		typeSelectionBtn = view.findViewById(R.id.type_selection_button);
 		baseModeIcon = view.findViewById(R.id.mode_icon);
 		baseModeTitle = view.findViewById(R.id.mode_title);
+		scrollContainer = view.findViewById(R.id.scroll_view_container);
 
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
@@ -155,6 +159,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			title = profile.getUserProfileTitle();
 			profileNameEt.setText(title);
 			startIconId = profile.iconId;
+			isDataChanged = false;
 		} else if (isNew) {
 			isDataChanged = true;
 			title = String.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
@@ -341,6 +346,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				if (isDataChanged) {
 					needSaveDialog();
 				} else if (getSettings() != null) {
+					activateMode(mode);
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
@@ -356,6 +362,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				if (isDataChanged) {
 					needSaveDialog();
 				} else if (getSettings() != null) {
+					activateMode(mode);
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
@@ -371,8 +378,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				if (isDataChanged) {
 					needSaveDialog();
 				} else if (getSettings() != null) {
+					activateMode(mode);
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), SettingsNavigationActivity.class);
+					i.putExtra(INTENT_SKIP_DIALOG, true);
 					i.putExtra(OPEN_CONFIG_ON_MAP, NAV_CONFIG);
 					i.putExtra(SELECTED_PROFILE, profile.getStringKey());
 					startActivity(i);
@@ -401,14 +410,19 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
+				int marginShow = 66;
+				int marginHide = 2;
+				float d = getResources().getDisplayMetrics().density;
 				Rect r = new Rect();
 				view.getWindowVisibleDisplayFrame(r);
 				int screenHeight = view.getRootView().getHeight();
 				int keypadHeight = screenHeight - r.bottom;
 				if (keypadHeight > screenHeight * 0.15) {
 					buttonsLayout.setVisibility(View.GONE);
+					setMargins(scrollContainer, 0, 0, 0, (int) (marginHide * d));
 				} else {
 					buttonsLayout.setVisibility(View.VISIBLE);
+					setMargins(scrollContainer, 0, 0, 0, (int) (marginShow * d));
 				}
 			}
 		});
@@ -421,13 +435,35 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	void activateMode(ApplicationMode mode) {
+		if (!ApplicationMode.values(app).contains(mode)) {
+			StringBuilder s = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
+			for (ApplicationMode am : ApplicationMode.values(app)) {
+				s.append(am.getStringKey()).append(",");
+			}
+			s.append(mode.getStringKey()).append(",");
+			if (getSettings() != null) {
+				getSettings().AVAILABLE_APP_MODES.set(s.toString());
+			}
+		}
+
+	}
+
 	private void setupBaseProfileView(String stringKey) {
 		for(ApplicationMode am : ApplicationMode.getDefaultValues()) {
 			if (am.getStringKey().equals(stringKey)) {
 				baseModeIcon.setImageDrawable(app.getUIUtilities().getIcon(am.getSmallIconDark(), R.color.icon_color));
 				baseModeTitle.setText(Algorithms.capitalizeFirstLetter(am.toHumanString(app)));
-				isDataChanged = true;
+				isDataChanged = false;
 			}
+		}
+	}
+
+	private void setMargins(View v, int l, int t, int r, int b) {
+		if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+			p.setMargins(l, t, r, b);
+			v.requestLayout();
 		}
 	}
 
@@ -562,7 +598,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		Map<String, GeneralRouter> inputProfiles = getMyApplication().getDefaultRoutingConfig().getAllRoutes();
 		for (Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
 			String name;
-//			String description = getResources().getString(R.string.osmand_default_routing);
 			String description = "";
 			int iconRes;
 			switch (e.getKey()) {
@@ -594,7 +629,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					iconRes = R.drawable.ic_action_world_globe;
 					name = Algorithms
 						.capitalizeFirstLetterAndLowercase(e.getKey().replace("_", " "));
-					description = "Custom profile"; //todo add filename
+					description = "Custom profile";
 					break;
 			}
 			profilesObjects.add(new RoutingProfile(e.getKey(), name, description, iconRes, false, e.getValue().getFilename()));
