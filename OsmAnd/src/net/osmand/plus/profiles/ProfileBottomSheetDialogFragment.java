@@ -158,13 +158,13 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				public void onClick(View v) {
 					listener.onSelectedType(pos);
 					holder.radioButton.setChecked(true);
-					notifyItemChanged(previousSelection);
-					previousSelection = pos;
 
 					if (item instanceof RoutingProfile) {
 						items.get(pos).setSelected(true);
 						items.get(previousSelection).setSelected(false);
 					}
+					notifyItemChanged(previousSelection);
+					previousSelection = pos;
 				}
 			});
 

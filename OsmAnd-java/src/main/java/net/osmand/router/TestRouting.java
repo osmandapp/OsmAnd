@@ -85,7 +85,7 @@ public class TestRouting {
 			if (routingXmlFile == null || routingXmlFile.equals("routing.xml")) {
 				p.configBuilder = RoutingConfiguration.getDefault();
 			} else {
-				p.configBuilder = RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXmlFile), new RoutingConfiguration.Builder());
+				p.configBuilder = RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXmlFile));
 			}
 
 			return p;

@@ -22,6 +22,7 @@ import java.util.Stack;
 public class RoutingConfiguration {
 
 	private static final Log LOG = PlatformUtil.getLog(RoutingConfiguration.class);
+
 	
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
 	public final float DEVIATION_RADIUS = 3000;
@@ -54,9 +55,9 @@ public class RoutingConfiguration {
 	public static class Builder {
 		// Design time storage
 		private static String defaultRouter = "";
-		private static Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
-		private static Map<String, String> attributes = new LinkedHashMap<String, String>();
-		private static HashMap<Long, Location> impassableRoadLocations = new HashMap<Long, Location>();
+		private static Map<String, GeneralRouter> routers = new LinkedHashMap<>();
+		private static Map<String, String> attributes = new LinkedHashMap<>();
+		private static HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
 
 		// Example
 //		{
@@ -164,8 +165,7 @@ public class RoutingConfiguration {
 	public static RoutingConfiguration.Builder getDefault() {
 		if (DEFAULT == null) {
 			try {
-				DEFAULT = parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"),
-					new RoutingConfiguration.Builder());
+				DEFAULT = parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"));
 			} catch (Exception e) {
 				throw new IllegalStateException(e);
 			}
@@ -173,15 +173,14 @@ public class RoutingConfiguration {
 		return DEFAULT;
 	}
 
-	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is, RoutingConfiguration.Builder config, String filename) throws IOException, XmlPullParserException {
+	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
 
-		//todo add file name to profile description.
-		return parseFromInputStream(is, config);
+		return parseFromInputStream(is, null);
 	}
 
-	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is, RoutingConfiguration.Builder config) throws IOException, XmlPullParserException {
+	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is, String filename) throws IOException, XmlPullParserException {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
-//		final RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();
+		RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();
 		GeneralRouter currentRouter = null;
 		RouteDataObjectAttribute currentAttribute = null;
 		String preType = null;
@@ -194,7 +193,7 @@ public class RoutingConfiguration {
 				if ("osmand_routing_config".equals(name)) {
 					Builder.defaultRouter = parser.getAttributeValue("", "defaultProfile");
 				} else if ("routingProfile".equals(name)) {
-					currentRouter = parseRoutingProfile(parser, config);
+					currentRouter = parseRoutingProfile(parser, config, filename);
 				} else if ("attribute".equals(name)) {
 					parseAttribute(parser, config, currentRouter);
 				} else if ("parameter".equals(name)) {
@@ -311,7 +310,7 @@ public class RoutingConfiguration {
 
 	
 
-	private static GeneralRouter parseRoutingProfile(XmlPullParser parser, final RoutingConfiguration.Builder config) {
+	private static GeneralRouter parseRoutingProfile(XmlPullParser parser, final RoutingConfiguration.Builder config, String filename) {
 		String currentSelectedRouter = parser.getAttributeValue("", "name");
 		Map<String, String> attrs = new LinkedHashMap<String, String>();
 		for(int i=0; i< parser.getAttributeCount(); i++) {
@@ -320,6 +319,9 @@ public class RoutingConfiguration {
 		GeneralRouterProfile c = Algorithms.parseEnumValue(GeneralRouterProfile.values(), 
 				parser.getAttributeValue("", "baseProfile"), GeneralRouterProfile.CAR);
 		GeneralRouter currentRouter = new GeneralRouter(c, attrs);
+		if (filename != null) {
+			currentRouter.setFilename(filename);
+		}
 		Builder.routers.put(currentSelectedRouter, currentRouter);
 		return currentRouter;
 	}

@@ -552,32 +552,31 @@ public class AppInitializer implements IProgress {
 
 
 	@SuppressLint("StaticFieldLeak")
-	public net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
+	net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
 		long tm = System.currentTimeMillis();
 		try {
-			final File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-			if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
-				new AsyncTask<Void, Void, Void>() {
-					@Override
-					protected Void doInBackground(Void... voids) {
+			new AsyncTask<Void, Void, Void>() {
+				@Override
+				protected Void doInBackground(Void... voids) {
+					RoutingConfiguration.getDefault();
+					final File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+					if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
 						File[] fl = routingFolder.listFiles();
 						for (File f : fl) {
 							if (f.isFile() && f.canRead()) {
 								try {
-									RoutingConfiguration.parseFromInputStream(
-										new FileInputStream(f), new RoutingConfiguration.Builder());
+									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName());
 								} catch (XmlPullParserException | IOException e) {
 									throw new IllegalStateException(e);
 								}
 							}
 						}
-						return null;
 					}
-				}.executeOnExecutor(Executors.newSingleThreadExecutor(), (Void) null);
+					return null;
+				}
+			}.executeOnExecutor(Executors.newSingleThreadExecutor(), (Void) null);
 
-			}
-
-			return RoutingConfiguration.getDefault();
+			return new RoutingConfiguration.Builder();
 
 		} finally {
 			long te = System.currentTimeMillis();

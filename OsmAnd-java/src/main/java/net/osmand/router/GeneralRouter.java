@@ -44,6 +44,7 @@ public class GeneralRouter implements VehicleRouter {
 	private boolean shortestRoute;
 	private boolean heightObstacles;
 	private boolean allowPrivate;
+	private String filename;
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
@@ -120,7 +121,15 @@ public class GeneralRouter implements VehicleRouter {
 		ruleToValue = new ArrayList<Object>();
 		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
 	}
-	
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
