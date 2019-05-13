@@ -3013,7 +3013,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
     <string name="shared_string_degrees">Grad</string>
     <string name="shared_string_milliradians">Milliradiant</string>
-    <string name="angular_measeurement">Winkel-Maßeinheiten</string>
+    <string name="angular_measeurement">Winkeleinheit</string>
     <string name="angular_measeurement_descr">Ändern, in welchem Azimut gemessen wird.</string>
     <string name="routing_attr_avoid_tram_name">Straßenbahnen meiden</string>
     <string name="routing_attr_avoid_tram_description">Straßenbahnen meiden</string>

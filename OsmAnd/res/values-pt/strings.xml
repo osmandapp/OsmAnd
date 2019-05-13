@@ -2905,7 +2905,7 @@
     <string name="intermediate_destinations">Destinos intermediários</string>
     <string name="arrive_at_time">Chega às %1$s</string>
     <string name="shared_string_degrees">Graus</string>
-    <string name="angular_measeurement">Unidades de medida angular</string>
+    <string name="angular_measeurement">Unidade angular</string>
     <string name="angular_measeurement_descr">Mudar em que o azimute é medido.</string>
     <string name="avoid_pt_types_descr">Selecione quais tipos de transporte público evitar para a navegação:</string>
     <string name="quick_action_day_night_mode">Modo %s</string>

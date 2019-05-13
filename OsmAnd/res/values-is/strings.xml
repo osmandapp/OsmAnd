@@ -3017,7 +3017,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Forðast götusteina og steinlögn</string>
     <string name="shared_string_degrees">Gráður</string>
     <string name="shared_string_milliradians">Millíradíanar</string>
-    <string name="angular_measeurement">Mælieiningar horna</string>
+    <string name="angular_measeurement">Mælieining horna</string>
     <string name="angular_measeurement_descr">Breyttu í hvaða einingum áttarhorn (hæð) er mælt.</string>
     <string name="routing_attr_avoid_tram_name">Forðast sporvagna</string>
     <string name="routing_attr_avoid_tram_description">Forðast sporvagna</string>
