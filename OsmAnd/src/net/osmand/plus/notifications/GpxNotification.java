@@ -136,6 +136,7 @@ public class GpxNotification extends OsmandNotification {
 				lastBuiltNoData = true;
 			}
 		}
+		notificationText = notificationText + "  (" + app.getSavingTrackHelper().getTrkPoints() + ")";
 
 		if ((wasNoDataDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
 			return null;
