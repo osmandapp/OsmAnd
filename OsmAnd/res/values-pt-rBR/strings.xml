@@ -1481,7 +1481,7 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_bicycle">Bicicleta</string>
     <string name="app_mode_pedestrian">A pé</string>
     <string name="position_on_map_center">Centro</string>
-    <string name="position_on_map_bottom">Embaixo</string>
+    <string name="position_on_map_bottom">Em baixo</string>
     <string name="navigate_point_top_text">Insira a latitude e longitude no formato selecionado (G - graus, M - minutos, S - segundos)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
