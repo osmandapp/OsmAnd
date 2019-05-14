@@ -108,6 +108,11 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		return view;
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+	}
+
 	private static boolean isNightMode(OsmandApplication ctx) {
 		return !ctx.getSettings().isLightContent();
 	}
@@ -135,8 +140,7 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
-			final int pos = holder.getAdapterPosition();
+		public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position) {
 			final ProfileDataObject item = items.get(position);
 			holder.title.setText(item.getName());
 			if (item.isSelected()) {
@@ -150,15 +154,15 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					listener.onSelectedType(pos);
+					listener.onSelectedType(position);
 					holder.radioButton.setChecked(true);
 
 					if (item instanceof RoutingProfile) {
-						items.get(pos).setSelected(true);
+						items.get(position).setSelected(true);
 						items.get(previousSelection).setSelected(false);
 					}
 					notifyItemChanged(previousSelection);
-					previousSelection = pos;
+					previousSelection = position;
 				}
 			});
 

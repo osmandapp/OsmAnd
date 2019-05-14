@@ -67,7 +67,12 @@
           android:src="@drawable/ic_action_additional_option"
           android:tint="?attr/primary_icon_color"
           android:layout_gravity="center_vertical"
-          android:padding="@dimen/setting_profile_item_switch_margin"/>
+          android:paddingLeft="@dimen/setting_profile_item_switch_margin"
+          android:paddingRight="10dp"
+          android:paddingBottom="@dimen/setting_profile_item_switch_margin"
+          android:paddingTop="@dimen/setting_profile_item_switch_margin"
+          android:paddingStart="@dimen/setting_profile_item_switch_margin"
+          android:paddingEnd="10dp"/>
 
         <android.support.v7.widget.SwitchCompat
           android:id="@+id/profile_switch"
@@ -76,8 +81,10 @@
           android:layout_gravity="center_vertical|end"
           android:paddingRight="16dp"
           android:paddingEnd="16dp"
-          android:paddingLeft="4dp"
-          android:paddingStart="4dp"
+          android:paddingTop="@dimen/setting_profile_item_switch_margin"
+          android:paddingBottom="@dimen/setting_profile_item_switch_margin"
+          android:paddingLeft="16dp"
+          android:paddingStart="16dp"
           android:background="@null"
           android:clickable="false"
           android:focusable="false"

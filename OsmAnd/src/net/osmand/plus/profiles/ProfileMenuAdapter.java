@@ -95,16 +95,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 				}
 			}
 		});
-
-
 		holder.profileOptions.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					listener.editProfile(item);
 				}
 			});
-
-
 	}
 
 	@Override

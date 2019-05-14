@@ -1,11 +1,9 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.activities.SettingsBaseActivity.getRoutingStringPropertyDescription;
 import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
@@ -25,8 +23,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.ViewTreeObserver.OnScrollChangedListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -45,7 +41,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
@@ -101,7 +96,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private Button cancelBtnSV;
 	private Button saveButtonSV;
 
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -112,6 +106,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			isUserProfile = getArguments().getBoolean("isUserProfile", false);
 			mode = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT);
 			profile = new TempApplicationProfile(mode, isNew, isUserProfile);
+
 		}
 		routingProfiles = getRoutingProfiles();
 	}
@@ -172,6 +167,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			profileNameEt.setText(title);
 			startIconId = profile.iconId;
 			isDataChanged = false;
+
 		} else if (isNew) {
 			isDataChanged = true;
 			title = String
@@ -321,6 +317,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					if (actionBar != null) {
 						actionBar.setTitle(s.toString());
 						profile.setUserProfileTitle(s.toString());
+						LOG.debug("Typed name: " + s);
 					}
 				}
 			}
@@ -435,6 +432,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (saveNewProfile()) {
+					activateMode(mode);
 					getActivity().onBackPressed();
 				}
 			}
@@ -444,6 +442,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (saveNewProfile()) {
+					activateMode(mode);
 					getActivity().onBackPressed();
 				}
 			}
@@ -527,10 +526,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	private boolean saveNewProfile() {
 
-		if (isUserProfile && !isNew) {
-			ApplicationMode.deleteCustomMode(profile.getUserProfileTitle(), getMyApplication());
-		}
-
 		if (profile.getRoutingProfile() == null && getActivity() != null) {
 			showSaveWarningDialog(
 				"Select Routing Type",
@@ -546,24 +541,33 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			);
 			return false;
 		}
-		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.getUserProfileName() != null && m.getUserProfileName()
-				.equals(profile.getUserProfileTitle())
-				&& getActivity() != null) {
-				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setTitle("Duplicate Name");
-				bld.setMessage("There is already profile with such name");
-				bld.setNegativeButton(R.string.shared_string_dismiss, null);
-				bld.show();
-				bld.setOnDismissListener(new OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						profileNameEt.requestFocus();
 
+		//check for duplicates
+
+		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
+			if (m.getUserProfileName() != null && getActivity() != null) {
+				if (m.getUserProfileName().equals(profile.getUserProfileTitle())) {
+					if (isNew || !Algorithms.isEmpty(mode.getUserProfileName()) && !mode.getUserProfileName().equals(profile.getUserProfileTitle())) {
+						AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+						bld.setTitle("Duplicate Name");
+						bld.setMessage("There is already profile with such name");
+						bld.setNegativeButton(R.string.shared_string_dismiss, null);
+						bld.show();
+						bld.setOnDismissListener(new OnDismissListener() {
+							@Override
+							public void onDismiss(DialogInterface dialog) {
+								profileNameEt.requestFocus();
+
+							}
+						});
+						return false;
 					}
-				});
-				return false;
+				}
 			}
+		}
+
+		if (isUserProfile && !isNew) {
+			ApplicationMode.deleteCustomMode(mode.getUserProfileName(), getMyApplication());
 		}
 
 		String customStringKey = profile.stringKey;

@@ -527,7 +527,7 @@ public class ApplicationMode {
 		Iterator<ApplicationMode> it = values.iterator();
 		while (it.hasNext()) {
 			ApplicationMode m = it.next();
-			if (m.userProfileName == userModeTitle) {
+			if (m.userProfileName != null && m.userProfileName.equals(userModeTitle)) {
 				it.remove();
 			}
 		}
