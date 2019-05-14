@@ -1,5 +1,6 @@
 package net.osmand.plus.profiles;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -7,6 +8,8 @@ import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 

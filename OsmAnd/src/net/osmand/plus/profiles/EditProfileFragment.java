@@ -1,9 +1,11 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.activities.SettingsBaseActivity.getRoutingStringPropertyDescription;
 import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
@@ -23,12 +25,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.ViewTreeObserver.OnScrollChangedListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -92,6 +97,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private ImageView baseModeIcon;
 	private TextView baseModeTitle;
 	private ScrollView scrollContainer;
+	private LinearLayout buttonsLayoutSV;
+	private Button cancelBtnSV;
+	private Button saveButtonSV;
+
+
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -133,6 +143,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		baseModeIcon = view.findViewById(R.id.mode_icon);
 		baseModeTitle = view.findViewById(R.id.mode_title);
 		scrollContainer = view.findViewById(R.id.scroll_view_container);
+		buttonsLayoutSV = view.findViewById(R.id.buttons_layout_sv);
+		cancelBtnSV = view.findViewById(R.id.save_profile_btn_sv);
+		saveButtonSV = view.findViewById(R.id.cancel_button_sv);
 
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
@@ -247,9 +260,16 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			((EditProfileActivity) getActivity()).getSupportActionBar().setElevation(5.0f);
 		}
 
-		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId,
-			isNightMode ? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light));
+		int iconColor;
+		if (!isUserProfile) {
+			iconColor = R.color.icon_color;
+		} else {
+			iconColor = isNightMode
+				? R.color.active_buttons_and_links_dark
+				: R.color.active_buttons_and_links_light;
+		}
+
+		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId, iconColor));
 
 		profileTypeDialogListener = new ProfileTypeDialogListener() {
 			@Override
@@ -336,7 +356,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 						.add(iconSelectDialog, "select_icon")
 						.commitAllowingStateLoss();
 				}
-
 			}
 		});
 
@@ -398,7 +417,25 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
+		cancelBtnSV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (getActivity() != null) {
+					getActivity().onBackPressed();
+				}
+			}
+		});
+
 		saveButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (saveNewProfile()) {
+					getActivity().onBackPressed();
+				}
+			}
+		});
+
+		saveButtonSV.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (saveNewProfile()) {
@@ -412,6 +449,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			public void onGlobalLayout() {
 				int marginShow = 66;
 				int marginHide = 2;
+
 				float d = getResources().getDisplayMetrics().density;
 				Rect r = new Rect();
 				view.getWindowVisibleDisplayFrame(r);
@@ -419,20 +457,35 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				int keypadHeight = screenHeight - r.bottom;
 				if (keypadHeight > screenHeight * 0.15) {
 					buttonsLayout.setVisibility(View.GONE);
+					buttonsLayoutSV.setVisibility(View.VISIBLE);
 					setMargins(scrollContainer, 0, 0, 0, (int) (marginHide * d));
 				} else {
+					buttonsLayoutSV.setVisibility(View.GONE);
 					buttonsLayout.setVisibility(View.VISIBLE);
 					setMargins(scrollContainer, 0, 0, 0, (int) (marginShow * d));
 				}
 			}
 		});
 
+		return view;
+	}
+
+
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		if (!isUserProfile && !isNew) {
 			profileNameEt.setFocusable(false);
 			navTypeEt.setFocusable(false);
 		}
 
-		return view;
+		if (isNew) {
+			profileNameEt.requestFocus();
+		} else {
+			scrollContainer.requestFocus();
+		}
+
 	}
 
 	void activateMode(ApplicationMode mode) {
@@ -573,23 +626,28 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	void onDeleteProfileClick() {
 		if (getActivity() != null) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-			bld.setTitle("Delete Profile");
-			bld.setMessage(String
-				.format("Are you sure you want to delete %s profile", profile.userProfileTitle));
-			bld.setPositiveButton(R.string.shared_string_delete,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						ApplicationMode
-							.deleteCustomMode(profile.getUserProfileTitle(), getMyApplication());
-						if (getActivity() != null) {
-							getActivity().onBackPressed();
+			if (isUserProfile) {
+				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+				bld.setTitle("Delete Profile");
+				bld.setMessage(String
+					.format("Are you sure you want to delete %s profile", profile.userProfileTitle));
+				bld.setPositiveButton(R.string.shared_string_delete,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							ApplicationMode
+								.deleteCustomMode(profile.getUserProfileTitle(), getMyApplication());
+							if (getActivity() != null) {
+								getActivity().onBackPressed();
+							}
 						}
-					}
-				});
-			bld.setNegativeButton(R.string.shared_string_dismiss, null);
-			bld.show();
+					});
+				bld.setNegativeButton(R.string.shared_string_dismiss, null);
+				bld.show();
+			} else {
+				Toast.makeText(getActivity(), "You cannot delete OsmAnd base profiles", Toast.LENGTH_SHORT).show();
+			}
+
 		}
 	}
 

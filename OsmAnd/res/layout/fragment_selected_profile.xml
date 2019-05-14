@@ -13,6 +13,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="top"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:layout_marginBottom="@dimen/setting_profile_item_height">
 
     <LinearLayout
@@ -64,7 +66,6 @@
               android:layout_height="wrap_content"
               android:ellipsize="end"
               android:maxLines="1"
-              android:textAppearance="@style/TextAppearance.ListItemTitle"
               android:text="Base Profile"/>
 
             <TextView
@@ -73,7 +74,7 @@
               android:layout_height="wrap_content"
               android:ellipsize="end"
               android:maxLines="1"
-              android:textSize="16sp"
+              android:textSize="18sp"
               android:textColor="?attr/main_font_color_basic"
               tools:text="Item additional desription"/>
 
@@ -137,7 +138,7 @@
             <net.osmand.plus.widgets.OsmandTextFieldBoxes
               android:id="@+id/profile_name_otfb"
               android:layout_width="0dp"
-              android:layout_height="wrap_content"
+              android:layout_height="60dp"
               android:layout_weight="1"
               android:layout_marginTop="@dimen/list_content_padding"
               android:layout_marginBottom="@dimen/list_content_padding"
@@ -160,8 +161,8 @@
 
             <LinearLayout
               android:id="@+id/profile_icon_layout"
-              android:layout_width="68dp"
-              android:layout_height="68dp"
+              android:layout_width="60dp"
+              android:layout_height="60dp"
               android:layout_marginEnd="@dimen/list_content_padding"
               android:layout_marginRight="@dimen/list_content_padding"
               android:clickable="true"
@@ -174,7 +175,8 @@
                 android:id="@+id/select_icon_btn_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
+                android:textSize="12sp"
+                android:paddingBottom="2dp"
                 android:text="Icon"/>
 
               <ImageView
@@ -198,7 +200,7 @@
         <FrameLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginBottom="8dp"
           android:layout_marginStart="@dimen/list_content_padding"
           android:layout_marginEnd="@dimen/list_content_padding"
           android:layout_marginLeft="@dimen/list_content_padding"
@@ -216,7 +218,7 @@
           <net.osmand.plus.widgets.OsmandTextFieldBoxes
             android:id="@+id/navigation_type_otfb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
 
             app:labelText="Navigation Type">
 
@@ -228,7 +230,7 @@
               android:drawableRight="@drawable/ic_action_arrow_drop_down"
               android:focusable="false"
               android:maxLines="1"
-              android:textSize="@dimen/default_list_text_size"
+
               tools:text="Car"/>
 
           </net.osmand.plus.widgets.OsmandTextFieldBoxes>
@@ -245,7 +247,7 @@
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginBottom="12dp"
           android:layout_marginStart="@dimen/list_content_padding"
           android:layout_marginEnd="@dimen/list_content_padding"
           android:layout_marginLeft="@dimen/list_content_padding"
@@ -314,6 +316,7 @@
           android:id="@+id/map_config_btn"
           android:layout_width="match_parent"
           android:layout_height="65dp"
+          android:background="?android:attr/selectableItemBackground"
           android:gravity="center_vertical"
           android:orientation="horizontal">
 
@@ -356,12 +359,13 @@
           android:layout_height="1dp"
           android:layout_marginStart="64dp"
           android:layout_marginLeft="64dp"
-          android:background="?android:attr/listDivider"/>
+          android:background="@color/divider_light"/>
 
         <LinearLayout
           android:id="@+id/screen_config_btn"
           android:layout_width="match_parent"
           android:layout_height="64dp"
+          android:background="?android:attr/selectableItemBackground"
           android:gravity="center_vertical"
           android:orientation="horizontal">
 
@@ -405,7 +409,7 @@
           android:layout_height="1dp"
           android:layout_marginStart="64dp"
           android:layout_marginLeft="64dp"
-          android:background="?android:attr/listDivider"
+          android:background="@color/divider_light"
           />
 
         <LinearLayout
@@ -413,6 +417,7 @@
           android:layout_width="match_parent"
           android:layout_height="64dp"
           android:gravity="center_vertical"
+          android:background="?android:attr/selectableItemBackground"
           android:orientation="horizontal">
 
           <ImageView
@@ -421,7 +426,7 @@
             android:layout_height="24dp"
             android:layout_marginStart="@dimen/list_content_padding"
             android:layout_marginLeft="@dimen/list_content_padding"
-            android:src="@drawable/ic_action_start_navigation"
+            android:src="@drawable/ic_action_gdirections_dark"
             android:tint="?attr/primary_icon_color"/>
 
           <LinearLayout
@@ -456,7 +461,48 @@
       <include layout="@layout/list_shadow_footer"/>
 
 
+      <LinearLayout
+        android:id="@+id/buttons_layout_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?attr/bg_color"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
+        <Button
+          android:id="@+id/cancel_button_sv"
+          android:layout_width="0dp"
+          android:layout_height="42dp"
+          android:layout_weight="1"
+          android:layout_marginTop="@dimen/list_content_padding"
+          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginStart="@dimen/list_content_padding"
+          android:layout_marginEnd="8dp"
+          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginRight="8dp"
+          android:background="@drawable/btn_round_profile_gray"
+          android:text="@string/shared_string_cancel"
+          android:textAllCaps="false"
+          android:textColor="@color/map_widget_blue"/>
+
+        <Button
+          android:id="@+id/save_profile_btn_sv"
+          android:layout_width="0dp"
+          android:layout_height="42dp"
+          android:layout_weight="1"
+          android:layout_marginTop="@dimen/list_content_padding"
+          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="@dimen/list_content_padding"
+          android:background="@drawable/btn_round_profile_blue"
+          android:text="@string/shared_string_save"
+          android:textAllCaps="false"
+          android:textColor="@color/color_white"/>
+
+      </LinearLayout>
 
     </LinearLayout>
 
@@ -473,7 +519,7 @@
     <Button
       android:id="@+id/cancel_button"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
+      android:layout_height="42dp"
       android:layout_weight="1"
       android:layout_marginTop="@dimen/list_content_padding"
       android:layout_marginBottom="@dimen/list_content_padding"
@@ -481,7 +527,7 @@
       android:layout_marginEnd="8dp"
       android:layout_marginLeft="@dimen/list_content_padding"
       android:layout_marginRight="8dp"
-      android:background="@drawable/btn_right_round"
+      android:background="@drawable/btn_round_profile_gray"
       android:text="@string/shared_string_cancel"
       android:textAllCaps="false"
       android:textColor="@color/map_widget_blue"/>
@@ -489,7 +535,7 @@
     <Button
       android:id="@+id/save_profile_btn"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
+      android:layout_height="42dp"
       android:layout_weight="1"
       android:layout_marginTop="@dimen/list_content_padding"
       android:layout_marginBottom="@dimen/list_content_padding"
@@ -497,7 +543,7 @@
       android:layout_marginEnd="@dimen/list_content_padding"
       android:layout_marginLeft="8dp"
       android:layout_marginRight="@dimen/list_content_padding"
-      android:background="@drawable/btn_round_blue"
+      android:background="@drawable/btn_round_profile_blue"
       android:text="@string/shared_string_save"
       android:textAllCaps="false"
       android:textColor="@color/color_white"/>

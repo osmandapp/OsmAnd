@@ -481,6 +481,7 @@
 	<color name="active_buttons_and_links_trans_light">#66237bff</color>
 	<color name="active_buttons_and_links_trans_dark">#66d28521</color>
 	<color name="settings_divider">#dcdcdc</color>
-
+	<color name="profile_button_gray">#EFEFEF</color>
+	<color name="profile_button_gray_pressed">#ababab</color>
 
 </resources>
