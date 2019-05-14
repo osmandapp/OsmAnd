@@ -102,7 +102,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private Button saveButtonSV;
 
 
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -175,7 +174,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			isDataChanged = false;
 		} else if (isNew) {
 			isDataChanged = true;
-			title = String.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
+			title = String
+				.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
 			startIconId = profile.getParent().getSmallIconDark();
 			profile.setIconId(startIconId);
 		} else if (profile.getKey() != -1) {
@@ -188,9 +188,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		profile.setUserProfileTitle(title);
 		if (profile.parent != null) {
 			setupBaseProfileView(profile.parent.getStringKey());
-		} else if (profile.getKey() != -1){
+		} else if (profile.getKey() != -1) {
 			baseModeTitle.setText(profile.getKey());
-			baseModeIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.getIconId(), R.color.icon_color));
+			baseModeIcon.setImageDrawable(
+				app.getUIUtilities().getIcon(profile.getIconId(), R.color.icon_color));
 		}
 		typeSelectionBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -203,11 +204,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 							String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
 								.get(pos).getStringKey();
 							setupBaseProfileView(key);
-							profile.parent = ApplicationMode.valueOfStringKey(key, ApplicationMode.DEFAULT);
+							profile.parent = ApplicationMode
+								.valueOfStringKey(key, ApplicationMode.DEFAULT);
 						}
 					});
 					Bundle bundle = new Bundle();
-					bundle.putParcelableArrayList(TYPE_APP_PROFILE, SettingsProfileFragment.getBaseProfiles(getMyApplication()));
+					bundle.putParcelableArrayList(TYPE_APP_PROFILE,
+						SettingsProfileFragment.getBaseProfiles(getMyApplication()));
 					dialog.setArguments(bundle);
 
 					if (getActivity() != null) {
@@ -303,10 +306,12 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		profileNameEt.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) { }
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
@@ -324,7 +329,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(isNew || isUserProfile) {
+				if (isNew || isUserProfile) {
 					final ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
 					fragment.setProfileTypeListener(profileTypeDialogListener);
 					Bundle bundle = new Bundle();
@@ -471,7 +476,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 
-
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -503,9 +507,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupBaseProfileView(String stringKey) {
-		for(ApplicationMode am : ApplicationMode.getDefaultValues()) {
+		for (ApplicationMode am : ApplicationMode.getDefaultValues()) {
 			if (am.getStringKey().equals(stringKey)) {
-				baseModeIcon.setImageDrawable(app.getUIUtilities().getIcon(am.getSmallIconDark(), R.color.icon_color));
+				baseModeIcon.setImageDrawable(
+					app.getUIUtilities().getIcon(am.getSmallIconDark(), R.color.icon_color));
 				baseModeTitle.setText(Algorithms.capitalizeFirstLetter(am.toHumanString(app)));
 				isDataChanged = false;
 			}
@@ -542,7 +547,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			return false;
 		}
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.getUserProfileName() != null && m.getUserProfileName().equals(profile.getUserProfileTitle())
+			if (m.getUserProfileName() != null && m.getUserProfileName()
+				.equals(profile.getUserProfileTitle())
 				&& getActivity() != null) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
 				bld.setTitle("Duplicate Name");
@@ -630,13 +636,15 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
 				bld.setTitle("Delete Profile");
 				bld.setMessage(String
-					.format("Are you sure you want to delete %s profile", profile.userProfileTitle));
+					.format("Are you sure you want to delete %s profile",
+						profile.userProfileTitle));
 				bld.setPositiveButton(R.string.shared_string_delete,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							ApplicationMode
-								.deleteCustomMode(profile.getUserProfileTitle(), getMyApplication());
+								.deleteCustomMode(profile.getUserProfileTitle(),
+									getMyApplication());
 							if (getActivity() != null) {
 								getActivity().onBackPressed();
 							}
@@ -645,7 +653,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				bld.setNegativeButton(R.string.shared_string_dismiss, null);
 				bld.show();
 			} else {
-				Toast.makeText(getActivity(), "You cannot delete OsmAnd base profiles", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "You cannot delete OsmAnd base profiles",
+					Toast.LENGTH_SHORT).show();
 			}
 
 		}
@@ -653,44 +662,44 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	private ArrayList<RoutingProfile> getRoutingProfiles() {
 		ArrayList<RoutingProfile> profilesObjects = new ArrayList<>();
-		Map<String, GeneralRouter> inputProfiles = getMyApplication().getDefaultRoutingConfig().getAllRoutes();
+		Map<String, GeneralRouter> inputProfiles = getMyApplication().getDefaultRoutingConfig()
+			.getAllRoutes();
 		for (Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
-			String name;
-			String description = "";
-			int iconRes;
-			switch (e.getKey()) {
-				case "car":
-					iconRes = R.drawable.ic_action_car_dark;
-					name = getString(R.string.rendering_value_car_name);
-					break;
-				case "pedestrian":
-					iconRes = R.drawable.map_action_pedestrian_dark;
-					name = getString(R.string.rendering_value_pedestrian_name);
-					break;
-				case "bicycle":
-					iconRes = R.drawable.map_action_bicycle_dark;
-					name = getString(R.string.rendering_value_bicycle_name);
-					break;
-				case "public_transport":
-					iconRes = R.drawable.map_action_bus_dark;
-					name = getString(R.string.app_mode_public_transport);
-					break;
-				case "boat":
-					iconRes = R.drawable.map_action_sail_boat_dark;
-					name = getString(R.string.app_mode_boat);
-					break;
-				case "geocoding":
-					iconRes = R.drawable.ic_action_world_globe;
-					name = "Geocoding";
-					break;
-				default:
-					iconRes = R.drawable.ic_action_world_globe;
-					name = Algorithms
-						.capitalizeFirstLetterAndLowercase(e.getKey().replace("_", " "));
-					description = "Custom profile";
-					break;
+			int iconRes = R.drawable.ic_action_world_globe;
+			String name = e.getValue().getProfileName();
+			String description = "Custom profile";
+
+			if (e.getValue().getFilename() == null) {
+				switch (e.getValue().getProfileName()) {
+					case "car":
+						iconRes = R.drawable.ic_action_car_dark;
+						name = getString(R.string.rendering_value_car_name);
+						break;
+					case "pedestrian":
+						iconRes = R.drawable.map_action_pedestrian_dark;
+						name = getString(R.string.rendering_value_pedestrian_name);
+						break;
+					case "bicycle":
+						iconRes = R.drawable.map_action_bicycle_dark;
+						name = getString(R.string.rendering_value_bicycle_name);
+						break;
+					case "public_transport":
+						iconRes = R.drawable.map_action_bus_dark;
+						name = getString(R.string.app_mode_public_transport);
+						break;
+					case "boat":
+						iconRes = R.drawable.map_action_sail_boat_dark;
+						name = getString(R.string.app_mode_boat);
+						break;
+					case "geocoding":
+						iconRes = R.drawable.ic_action_world_globe;
+						name = "Geocoding";
+						break;
+				}
 			}
-			profilesObjects.add(new RoutingProfile(e.getKey(), name, description, iconRes, false, e.getValue().getFilename()));
+
+			profilesObjects.add(new RoutingProfile(e.getKey(), name, description, iconRes, false,
+				e.getValue().getFilename()));
 		}
 		return profilesObjects;
 	}

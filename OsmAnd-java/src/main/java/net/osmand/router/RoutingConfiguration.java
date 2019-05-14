@@ -308,7 +308,7 @@ public class RoutingConfiguration {
 		}
 	}
 
-	
+	private static int count = 0;
 
 	private static GeneralRouter parseRoutingProfile(XmlPullParser parser, final RoutingConfiguration.Builder config, String filename) {
 		String currentSelectedRouter = parser.getAttributeValue("", "name");
@@ -319,8 +319,13 @@ public class RoutingConfiguration {
 		GeneralRouterProfile c = Algorithms.parseEnumValue(GeneralRouterProfile.values(), 
 				parser.getAttributeValue("", "baseProfile"), GeneralRouterProfile.CAR);
 		GeneralRouter currentRouter = new GeneralRouter(c, attrs);
+		currentRouter.setProfileName(currentSelectedRouter);
 		if (filename != null) {
 			currentRouter.setFilename(filename);
+		}
+		if (Builder.routers.containsKey(currentSelectedRouter)) {
+			count++;
+			currentSelectedRouter = currentSelectedRouter + currentRouter.hashCode();
 		}
 		Builder.routers.put(currentSelectedRouter, currentRouter);
 		return currentRouter;
