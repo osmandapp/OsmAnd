@@ -138,8 +138,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		baseModeTitle = view.findViewById(R.id.mode_title);
 		scrollContainer = view.findViewById(R.id.scroll_view_container);
 		buttonsLayoutSV = view.findViewById(R.id.buttons_layout_sv);
-		cancelBtnSV = view.findViewById(R.id.save_profile_btn_sv);
-		saveButtonSV = view.findViewById(R.id.cancel_button_sv);
+		cancelBtnSV = view.findViewById(R.id.cancel_button_sv);
+		saveButtonSV = view.findViewById(R.id.save_profile_btn_sv);
 
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
@@ -216,7 +216,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
-
 		if (!Algorithms.isEmpty(mode.getRoutingProfile())) {
 			for (RoutingProfile r : routingProfiles) {
 				if (mode.getRoutingProfile().equals(r.getStringKey())) {
@@ -250,7 +249,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 			navTypeEt.clearFocus();
 		}
-
 		profileNameEt.clearFocus();
 
 		if (getActivity() != null
@@ -525,14 +523,15 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	private boolean saveNewProfile() {
-
-		if (profile.getRoutingProfile() == null && getActivity() != null) {
+		if (profile.getRoutingProfile() == null) {
 			showSaveWarningDialog(
 				"Select Routing Type",
 				"You need to select Routing Type to create New Application Profile",
 				getActivity());
 			return false;
-		} else if (getActivity() != null && profile.getUserProfileTitle().isEmpty()
+		}
+
+		if (profile.getUserProfileTitle().isEmpty()
 			|| profile.getUserProfileTitle().replace(" ", "").length() < 1) {
 			showSaveWarningDialog(
 				"Enter Profile Name",
@@ -577,7 +576,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
-			.createCustomMode(profile.userProfileTitle, customStringKey)
+			.createCustomMode(profile.userProfileTitle.trim(), customStringKey)
 			.parent(profile.parent)
 			.icon(profile.iconId, profile.iconId);
 
