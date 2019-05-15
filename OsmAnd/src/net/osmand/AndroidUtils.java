@@ -298,6 +298,12 @@ public class AndroidUtils {
 		tv.setTextColor(ContextCompat.getColor(view.getContext(), colorId));
 	}
 
+	public static void setSnackbarTextMaxLines(Snackbar snackbar, int maxLines) {
+		View view = snackbar.getView();
+		TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+		tv.setMaxLines(maxLines);
+	}
+
 	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {

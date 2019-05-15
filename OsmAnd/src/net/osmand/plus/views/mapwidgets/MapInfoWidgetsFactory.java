@@ -1056,7 +1056,7 @@ public class MapInfoWidgetsFactory {
 					if (lastKnownLocation != null) {
 						String coordinates = latitudeText.getText().toString();
 						if (lonCoordinatesContainer.getVisibility() == View.VISIBLE) {
-							coordinates += "," + longitudeText.getText().toString();
+							coordinates += ", " + longitudeText.getText().toString();
 						}
 						copyToClipboard(coordinates);
 					}
@@ -1132,7 +1132,7 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private void showShareSnackbar(@NonNull final String text, @NonNull final Context ctx) {
-			Snackbar snackbar = Snackbar.make(map.getLayout(), R.string.coordinates_copy_to_clipboard, Snackbar.LENGTH_LONG)
+			Snackbar snackbar = Snackbar.make(map.getLayout(), ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text, Snackbar.LENGTH_LONG)
 					.setAction(R.string.shared_string_share, new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
@@ -1144,6 +1144,7 @@ public class MapInfoWidgetsFactory {
 						}
 					});
 			AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+			AndroidUtils.setSnackbarTextMaxLines(snackbar, 5);
 			snackbar.show();
 		}
 
