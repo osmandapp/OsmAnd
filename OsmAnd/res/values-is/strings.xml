@@ -803,8 +803,8 @@
     <string name="lang_ms">Malasíska</string>
     <string name="shared_string_import2osmand">Flytja inn í OsmAnd</string>
     <string name="read_full_article">Lesa alla greinina (á netinu)</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Litur fer eftir netveitu</string>
-    <string name="copying_osmand_file_failed">Afritun skráa mistókst</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Litur fer eftir leiðakerfi</string>
+    <string name="copying_osmand_file_failed">Færsla skráa mistókst</string>
     <string name="storage_directory_external">Ytri gagnageymsla</string>
     <string name="storage_directory_multiuser">Fjölnotendageymsla</string>
     <string name="storage_directory_internal_app">Innra minni forrita</string>
@@ -1929,7 +1929,7 @@ Punktar</string>
     <string name="restart_is_required">Til að breytingarnar verði að fullu virkar, þarf að endurræsa forritið handvirkt.</string>
     <string name="lang_ber">Berberska</string>
     <string name="gps_network_not_enabled">Staðsetningarþjónustan er ekki virk. Viltu kveikja á henni?</string>
-    <string name="application_dir_change_warning3">Afrita OsmAnd-gagnaskrárnar sínar á nýja áfangastaðinn?</string>
+    <string name="application_dir_change_warning3">Færa OsmAnd-gagnaskrárnar á nýja áfangastaðinn\?</string>
     <string name="action_create">Aðgerðin útbúa</string>
     <string name="action_modify">Aðgerðin breyta</string>
     <string name="action_delete">Aðgerðin eyða</string>
@@ -3017,7 +3017,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Forðast götusteina og steinlögn</string>
     <string name="shared_string_degrees">Gráður</string>
     <string name="shared_string_milliradians">Millíradíanar</string>
-    <string name="angular_measeurement">Mælieiningar horna</string>
+    <string name="angular_measeurement">Mælieining horna</string>
     <string name="angular_measeurement_descr">Breyttu í hvaða einingum áttarhorn (hæð) er mælt.</string>
     <string name="routing_attr_avoid_tram_name">Forðast sporvagna</string>
     <string name="routing_attr_avoid_tram_description">Forðast sporvagna</string>
@@ -3041,4 +3041,16 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="send_log">Senda atvikaskrá</string>
+    <string name="files_moved">Færði %1$d skrár (%2$s).</string>
+    <string name="files_copied">Afritaði %1$d skrár (%2$s).</string>
+    <string name="files_failed">Mistókst að afrita %1$d skrár (%2$s).</string>
+    <string name="files_present">%1$d skrár (%2$s) eru til staðar á fyrri staðsetningunni \'%3$s\'.</string>
+    <string name="move_maps">Flytja kort</string>
+    <string name="dont_move_maps">Ekki flytja</string>
+    <string name="public_transport_ped_route_title">Leiðin er um það bil %1$s fótgangandi og gæti verið fljótfarnari þannig heldur en með almenningssamgöngum</string>
+    <string name="public_transport_no_route_title">Því miður gat OsmAnd ekki fundið hentuga leið miðað við stillingarnar þínar.</string>
+    <string name="public_transport_try_ped">Prófaðu leiðsögn fyrir fótgangandi.</string>
+    <string name="public_transport_try_change_settings">Prófaðu að breyta stillingunum.</string>
+    <string name="public_transport_calc_pedestrian">Reikna leið fyrir fótgangandi</string>
+    <string name="public_transport_type">Tegund samgangna</string>
 </resources>

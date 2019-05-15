@@ -683,6 +683,80 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun disableProxy() {
+		client?.send(TdApi.DisableProxy()) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Ok.CONSTRUCTOR -> {
+				}
+			}
+		}
+	}
+
+	fun enableProxy(proxyId: Int) {
+		client?.send(TdApi.EnableProxy(proxyId)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Ok.CONSTRUCTOR -> {
+				}
+			}
+		}
+	}
+
+	fun addProxyPref(proxyPref: TelegramSettings.ProxyPref, enable: Boolean) {
+		val proxyType: TdApi.ProxyType? = when (proxyPref) {
+			is TelegramSettings.ProxyMTProtoPref -> TdApi.ProxyTypeMtproto(proxyPref.key)
+			is TelegramSettings.ProxySOCKS5Pref -> TdApi.ProxyTypeSocks5(proxyPref.login, proxyPref.password)
+			else -> null
+		}
+		client?.send(TdApi.AddProxy(proxyPref.server, proxyPref.port, enable, proxyType)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Proxy.CONSTRUCTOR -> {
+					val proxy = (obj as TdApi.Proxy)
+					proxyPref.id = proxy.id
+				}
+			}
+		}
+	}
+
+	fun editProxyPref(proxyPref: TelegramSettings.ProxyPref, enable: Boolean) {
+		val proxyType: TdApi.ProxyType? = when (proxyPref) {
+			is TelegramSettings.ProxyMTProtoPref -> TdApi.ProxyTypeMtproto(proxyPref.key)
+			is TelegramSettings.ProxySOCKS5Pref -> TdApi.ProxyTypeSocks5(proxyPref.login, proxyPref.password)
+			else -> null
+		}
+		client?.send(TdApi.EditProxy(proxyPref.id, proxyPref.server, proxyPref.port, enable, proxyType)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Proxy.CONSTRUCTOR -> {
+					val proxy = (obj as TdApi.Proxy)
+					proxyPref.id = proxy.id
+				}
+			}
+		}
+	}
+
 	fun createPrivateChatWithUser(
 		userId: Int,
 		shareInfo: TelegramSettings.ShareChatInfo,

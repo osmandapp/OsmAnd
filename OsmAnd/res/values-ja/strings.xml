@@ -2680,7 +2680,7 @@ POIの更新は利用できません</string>
     <string name="travel_card_download_descr">Wikivoyageの旅行ガイドを事前にダウンロードすれば、インターネット接続なしで世界各地の観光場所を知ることができます。</string>
     <string name="start_editing_card_image_text">誰でも自由に編集できる世界規模の旅行ガイドです。</string>
     <string name="welcome_to_open_beta_description">『旅行ガイド』はWikivoyageをベースとした機能です。オープンβ時に限り無料で全ての機能を利用できます。旅行ガイドは将来的にOsmAndのサブスクライブ登録者や、OsmAnd+の利用者に提供される予定です。</string>
-    <string name="start_editing_card_description">あなたもWikivoyageの記事を編集できます。場所に関する知識、旅先での経験、魅力あるスポットはもちろん注意事項なども共有できます</string>
+    <string name="start_editing_card_description">あなたもWikivoyageの記事を編集できます。場所に関する知識、旅先での経験、魅力あるスポットはもちろん注意事項なども共有できます。</string>
     <string name="start_editing">編集を開始</string>
     <string name="get_unlimited_access">制限のないアクセス権の取得</string>
     <string name="wikivoyage_travel_guide">旅行ガイド</string>

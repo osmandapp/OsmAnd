@@ -848,7 +848,23 @@ public class OsmandApplication extends MultiDexApplication {
 			return 0;
 		}
 	}
-	
+
+
+	public int navigationServiceGpsInterval(int interval) {
+		// Issue 5632 Workaround: Keep GPS always on instead of using AlarmManager, as API>=19 restricts repeated AlarmManager reception
+		// Maybe do not apply to API=19 devices, many still behave acceptably (often restriction not worse than 1/min)
+		if ((Build.VERSION.SDK_INT > 19) && (getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 5 * 60000)) {
+			return 0;
+		}
+		// Default: Save battery power by turning off GPS between measurements
+		if (interval >= 30000) {
+			return interval;
+		// GPS continuous
+		} else {
+			return 0;
+		}
+	}
+
 
 	public void startNavigationService(int intent, int interval) {
 		final Intent serviceIntent = new Intent(this, NavigationService.class);

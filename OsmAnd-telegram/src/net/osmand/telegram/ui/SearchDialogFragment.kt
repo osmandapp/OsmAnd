@@ -2,9 +2,11 @@ package net.osmand.telegram.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
@@ -64,14 +66,14 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	): View {
 		val mainView = inflater.inflate(R.layout.fragment_search_dialog, parent)
 
-		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
-		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
-
 		mainView.findViewById<Toolbar>(R.id.toolbar).apply {
 			navigationIcon = uiUtils.getThemedIcon(R.drawable.ic_arrow_back)
 			setNavigationOnClickListener { dismiss() }
 		}
-
+		val window = dialog.window
+		if (window != null && Build.VERSION.SDK_INT >= 21) {
+			window.statusBarColor = ContextCompat.getColor(app, R.color.card_bg_light)
+		}
 		searchEditText = mainView.findViewById<EditText>(R.id.searchEditText).apply {
 			addTextChangedListener(object : TextWatcher {
 
@@ -104,7 +106,11 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 			addOnScrollListener(object : RecyclerView.OnScrollListener() {
 				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
-					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+					val scrolling = newState != RecyclerView.SCROLL_STATE_IDLE
+					locationUiUpdateAllowed = !scrolling
+					if (scrolling) {
+						hideKeyboard()
+					}
 				}
 			})
 		}
@@ -125,6 +131,13 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		}
 
 		return mainView
+	}
+
+	private fun hideKeyboard() {
+		val mainActivity = activity
+		if (mainActivity != null && searchEditText.hasFocus()) {
+			AndroidUtils.hideSoftKeyboard(mainActivity, searchEditText)
+		}
 	}
 
 	private fun clearSearchedItems() {
@@ -200,7 +213,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 	private fun updateLocationUi() {
 		if (locationUiUpdateAllowed) {
-			app.runInUIThread { updateList() }
+			app.runInUIThread { adapter.notifyDataSetChanged() }
 		}
 	}
 
@@ -211,9 +224,28 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		val users: MutableList<TdApi.User> = mutableListOf()
 		val currentUserId = telegramHelper.getCurrentUserId()
 
-		searchedChatsIds.forEach {
+		selectedChats.forEach {
 			val chat = telegramHelper.getChat(it)
 			if (chat != null) {
+				if (!telegramHelper.isChannel(chat) && telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
+					items.add(chat)
+				}
+			} else {
+				telegramHelper.requestChat(it)
+			}
+		}
+		selectedUsers.forEach {
+			val user = telegramHelper.getUser(it.toInt())
+			if (user != null) {
+				if (user.id != currentUserId)
+					items.add(user)
+			} else {
+				telegramHelper.requestUser(it.toInt())
+			}
+		}
+		searchedChatsIds.forEach {
+			val chat = telegramHelper.getChat(it)
+			if (chat != null && !selectedChats.contains(it)) {
 				if (!telegramHelper.isChannel(chat) && telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
 					chats.add(chat)
 				}
@@ -225,7 +257,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 		searchedContactsIds.forEach { userId ->
 			val user = telegramHelper.getUser(userId)
-			if (user != null) {
+			if (user != null && !selectedUsers.contains(userId.toLong())) {
 				if (user.id != currentUserId && !chats.any { telegramHelper.getUserIdFromChatType(it.type) == user.id })
 					users.add(user)
 			} else {
@@ -236,9 +268,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 		searchedPublicChatsIds.forEach {
 			val chat = telegramHelper.getChat(it)
-			if (chat != null) {
-				if (!telegramHelper.isChannel(chat) && !chats.contains(chat)
-					&& telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
+			if (chat != null && !selectedChats.contains(it) && !searchedChatsIds.contains(it)) {
+				if (!telegramHelper.isChannel(chat) && telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
 					publicChats.add(chat)
 				}
 			} else {
@@ -369,6 +400,9 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 							selectedChats.remove(itemId)
 						} else {
 							selectedUsers.remove(itemId)
+						}
+						if (!(searchedChatsIds.contains(itemId) || searchedPublicChatsIds.contains(itemId) || searchedContactsIds.contains(itemId.toInt()))) {
+							updateList()
 						}
 					}
 					switchButtonsVisibility(selectedChats.isNotEmpty() || selectedUsers.isNotEmpty())

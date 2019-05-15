@@ -47,7 +47,7 @@
     </string>
     <string name="shared_string_degrees">Degrees</string>
     <string name="shared_string_milliradians">Milliradians</string>
-    <string name="angular_measeurement">Angular measurement units</string>
+    <string name="angular_measeurement">Angular unit</string>
     <string name="angular_measeurement_descr">Change what azimuth is measured in.</string>
     <string name="avoid_pt_types_descr">Select public transport types to avoid for navigation:</string>
     <string name="quick_action_day_night_mode">%s mode</string>

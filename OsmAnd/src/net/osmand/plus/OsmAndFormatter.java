@@ -168,12 +168,13 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedAzimuth(float bearing, OsmandApplication app) {
-		int azimuth;
-		if (bearing < 0.0) {
-			azimuth = (int) (360 + bearing);
-		} else {
-			azimuth = (int) bearing;
+		while(bearing < -180.0) {
+			bearing += 360;
 		}
+		while(bearing > 360.0) {
+			bearing -= 360;
+		}
+		int azimuth = (int) bearing;
 
 		if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.MILLIRADS) {
 			return (int) (azimuth * 17.4533) + " " + AngularConstants.MILLIRADS.getUnitSymbol();

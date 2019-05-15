@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.Toolbar
 import android.text.SpannableStringBuilder
@@ -39,14 +40,14 @@ class SettingsDialogFragment : BaseDialogFragment() {
 	): View {
 		val mainView = inflater.inflate(R.layout.fragement_settings_dialog, parent)
 
-		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
-		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
-
 		mainView.findViewById<Toolbar>(R.id.toolbar).apply {
 			navigationIcon = uiUtils.getThemedIcon(R.drawable.ic_arrow_back)
 			setNavigationOnClickListener { dismiss() }
 		}
-
+		val window = dialog.window
+		if (window != null && Build.VERSION.SDK_INT >= 21) {
+			window.statusBarColor = ContextCompat.getColor(app, R.color.card_bg_light)
+		}
 		var container = mainView.findViewById<ViewGroup>(R.id.gps_and_loc_container)
 		for (pref in settings.gpsAndLocPrefs) {
 			inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
@@ -87,6 +88,32 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				val checked = !app.settings.showGpsPoints
 				app.settings.showGpsPoints = checked
 				switcher.isChecked = checked
+			}
+			container.addView(this)
+		}
+
+		container = mainView.findViewById<ViewGroup>(R.id.proxy_settings_container)
+		inflater.inflate(R.layout.item_with_descr_and_right_switch, container, false).apply {
+			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_proxy))
+			findViewById<ImageView>(R.id.icon_right).apply {
+				visibility = View.VISIBLE
+				setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_additional_option))
+				setOnClickListener {
+					activity?.supportFragmentManager?.also { ProxySettingsDialogFragment.showInstance(it, this@SettingsDialogFragment) }
+				}
+			}
+			findViewById<TextView>(R.id.title).text = getText(R.string.proxy)
+			val description = findViewById<TextView>(R.id.description).apply {
+				text = if (settings.proxyEnabled) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
+			}
+			val switcher = findViewById<Switch>(R.id.switcher).apply {
+				isChecked = app.settings.proxyEnabled
+			}
+			setOnClickListener {
+				val checked = !app.settings.proxyEnabled
+				switcher.isChecked = checked
+				settings.updateProxySetting(checked)
+				description.text = if (checked) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
 			}
 			container.addView(this)
 		}
@@ -211,6 +238,12 @@ class SettingsDialogFragment : BaseDialogFragment() {
 							Toast.makeText(app, getString(R.string.device_added_successfully, device.deviceName), Toast.LENGTH_SHORT).show()
 						}
 					}
+				}
+			}
+			ProxySettingsDialogFragment.PROXY_PREFERENCES_UPDATED_REQUEST_CODE -> {
+				view?.findViewById<ViewGroup>(R.id.proxy_settings_container)?.apply {
+					findViewById<TextView>(R.id.description)?.text = if (settings.proxyEnabled) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
+					findViewById<Switch>(R.id.switcher)?.isChecked = app.settings.proxyEnabled
 				}
 			}
 		}

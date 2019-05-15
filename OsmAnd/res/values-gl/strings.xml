@@ -339,8 +339,8 @@
     <string name="use_magnetic_sensor_descr">Para a lectura do compás, emprega o sensor magnético no canto do sensor da orientación.</string>
     <string name="use_magnetic_sensor">Empregar o sensor magnético</string>
     <string name="other_location">Outra</string>
-    <string name="files_limit">Fican %1$d ficheiros</string>
-    <string name="available_downloads_left">Aínda fican %1$d ficheiros para baixar</string>
+    <string name="files_limit">Quedan %1$d ficheiros</string>
+    <string name="available_downloads_left">Aínda quedan %1$d ficheiros para baixar</string>
     <string name="install_paid">Versión completa</string>
     <string name="cancel_route">Rexeitar rota</string>
     <string name="cancel_navigation">Para-la navigación</string>
@@ -474,11 +474,11 @@
     <string name="replace_destination_point">Substituí-lo destino</string>
     <string name="new_destination_point_dialog">Xa existe un destino:</string>
     <string name="shared_string_target_points">Destinos</string>
-    <string name="intermediate_point_too_far">O destino intermedio %1$s está demasiado lonxe da estrada máis preta.</string>
+    <string name="intermediate_point_too_far">O destino intermedio %1$s está demasiado lonxe da estrada máis próxima.</string>
     <string name="arrived_at_intermediate_point">Destino intermedio acadado</string>
     <string name="context_menu_item_intermediate_point">Engadir un destino intermedio</string>
     <string name="map_widget_intermediate_distance">Destino intermedio</string>
-    <string name="ending_point_too_far">O derradeiro punto está moi lonxe da estrada máis preta.</string>
+    <string name="ending_point_too_far">O derradeiro punto está moi lonxe da estrada máis próxima.</string>
     <string name="add_tag">Engadir unha etiqueta</string>
     <string name="btn_advanced_mode">Modo avanzado…</string>
     <string name="poi_filter_parking">Aparcamento</string>
@@ -620,7 +620,7 @@
     <string name="native_app_allocated_memory_descr">A memoria nativa total empregada polo aplicativo é %1$s MB (Dalvik %2$s MB, outros %3$s MB).
 \nMemoria proporcional %4$s MB (O límite do Android é %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memoria nativa total</string>
-    <string name="starting_point_too_far">O punto de comezo está demasiado lonxe da estrada máis preta.</string>
+    <string name="starting_point_too_far">O punto de comezo está demasiado lonxe da estrada máis próxima.</string>
     <string name="shared_location">Localización partillada ou compartida</string>
     <string name="osmand_parking_event">Recolle-lo automóbil de onde está aparcado</string>
     <string name="osmand_parking_warning">Aviso</string>
@@ -961,7 +961,7 @@
     <string name="incomplete_locale">incompleto</string>
     <string name="shared_string_next">Seguinte</string>
     <string name="shared_string_previous">Anterior</string>
-    <string name="unit_of_length_descr">Muda a distancia da medición.</string>
+    <string name="unit_of_length_descr">Muda en que unidades se mide a distancia.</string>
     <string name="unit_of_length">Unidades da lonxitude</string>
     <string name="si_mi_feet">Millas/pés</string>
     <string name="si_mi_yard">Millas/iardas</string>
@@ -1482,9 +1482,9 @@
     <string name="shared_string_show_details">Amosar detalles</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
     <string name="rendering_attr_hideHouseNumbers_name">Números dos edificios</string>
-    <string name="application_dir_change_warning3">Desexas que o OsmAnd copie tamén os teus ficheiros de datos ó novo destino\?</string>
+    <string name="application_dir_change_warning3">Desexas mover os ficheiros de datos de OsmAnd ó novo destino\?</string>
     <string name="specified_directiory_not_writeable">Non foi posíbel crear os mapas no directorio indicado</string>
-    <string name="copying_osmand_file_failed">Fallou o copiado dos ficheiros</string>
+    <string name="copying_osmand_file_failed">Non se puideron mover os ficheiros</string>
     <string name="storage_directory_external">Almacenaxe externo</string>
     <string name="storage_directory_multiuser">Almacenaxe multiusuario</string>
     <string name="storage_directory_internal_app">Memoria interna do aplicativo</string>
@@ -1701,7 +1701,7 @@ Lon %2$s</string>
     <string name="count_of_lines">Número de liñas</string>
     <string name="are_you_sure">Tes a certeza de querer facelo\?</string>
     <string name="unsaved_changes_will_be_lost">Vanse perde-las mudanzas non gardadas. Proseguer\?</string>
-    <string name="downloads_left_template">Fican %1$s baixadas</string>
+    <string name="downloads_left_template">Quedan %1$s baixadas</string>
     <string name="roads">Estradas</string>
     <string name="downloading_number_of_files">Estase a baixar - ficheiro %1$d</string>
     <string name="buy">Mercar</string>
@@ -2390,7 +2390,7 @@ Lon %2$s</string>
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Nome do punto opcional</string>
-    <string name="transport_nearby_routes_within">Liñas pretas a menos dos</string>
+    <string name="transport_nearby_routes_within">Liñas próximas a menos dos</string>
     <string name="transport_nearby_routes">Preto dos</string>
     <string name="enter_the_file_name">Insire o nome do ficheiro.</string>
     <string name="map_import_error">Erro de importación de mapa</string>
@@ -3045,13 +3045,15 @@ Lon %2$s</string>
     <string name="routing_attr_avoid_subway_description">Evitar metros e tranvías/metros lixeiros</string>
     <string name="routing_attr_avoid_ferry_name">Evitar ferris</string>
     <string name="routing_attr_avoid_ferry_description">Evitar ferris</string>
-    <string name="release_3_3_7">• Amosar o tempo entre transbordos no transporte público
+    <string name="release_3_3_7">• Amosar o tempo entre transbordos no transporte público 
+\n 
+\n • Interface de usuario corrixida para «Detalles da rota» 
+\n 
+\n • Tema escuro solucionado no menú «Dirección» e «Detalles da rota» 
+\n 
+\n • Visualización de medida «azimut» en «Medir distancia»
 \n
-\n • Interface de usuario corrixida para «Detalles da rota»
-\n
-\n • Tema escuro solucionado no menú «Dirección» e «Detalles da rota»
-\n
-\n • Visualización de medida «azimut» en «Medir distancia»</string>
+\n</string>
     <string name="shared_string_degrees">Graos</string>
     <string name="shared_string_milliradians">Milirradiáns</string>
     <string name="angular_measeurement">Unidades de medición angular</string>
@@ -3062,4 +3064,16 @@ Lon %2$s</string>
     <string name="routing_attr_avoid_sett_name">Evitar o pavemento empedrado e lastros</string>
     <string name="routing_attr_avoid_sett_description">Evita as rúas empedradas e con lastros</string>
     <string name="send_log">Enviar rexistro (log)</string>
+    <string name="files_moved">%1$d ficheiros movidos (%2$s).</string>
+    <string name="files_copied">%1$d ficheiros copiados (%2$s).</string>
+    <string name="files_failed">Non se puideron copiar %1$d ficheiros (%2$s).</string>
+    <string name="files_present">%1$d ficheiros (%2$s) están presentes na localización anterior \"%3$s\".</string>
+    <string name="move_maps">Mover mapas</string>
+    <string name="dont_move_maps">Non mover</string>
+    <string name="public_transport_ped_route_title">A ruta a pé é de aproximadamente %1$s e pode que sexa máis rápida que no transporte público</string>
+    <string name="public_transport_no_route_title">Por desgraza, OsmAnd non puido atopar unha ruta adecuada para a túa configuración.</string>
+    <string name="public_transport_try_ped">Inténtao coa navegación a pé.</string>
+    <string name="public_transport_try_change_settings">Proba a cambiar os axustes.</string>
+    <string name="public_transport_calc_pedestrian">Calcular a ruta a pé</string>
+    <string name="public_transport_type">Tipo de transporte</string>
 </resources>

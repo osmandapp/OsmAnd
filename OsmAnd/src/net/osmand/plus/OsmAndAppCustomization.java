@@ -308,7 +308,7 @@ public class OsmAndAppCustomization {
 		if (params.getNewState() == 0) {
 			for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
 				if (plugin.getId().equals(params.getPluginId())) {
-					plugin.setActive(false);
+					OsmandPlugin.enablePlugin(null, app, plugin, false);
 				}
 			}
 			return true;
@@ -317,7 +317,7 @@ public class OsmAndAppCustomization {
 		if (params.getNewState() == 1) {
 			for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
 				if (plugin.getId().equals(params.getPluginId())) {
-					plugin.setActive(true);
+					OsmandPlugin.enablePlugin(null, app, plugin, true);
 				}
 			}
 			return true;

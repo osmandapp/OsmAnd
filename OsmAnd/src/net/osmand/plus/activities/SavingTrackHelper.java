@@ -71,6 +71,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private long duration = 0;
 	private SelectedGpxFile currentTrack;
 	private int points;
+	private int trkPoints = 0;
 	
 	public SavingTrackHelper(OsmandApplication ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -250,6 +251,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		distance = 0;
 		points = 0;
 		duration = 0;
+		trkPoints = 0;
 		ctx.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.getModifiablePointsToDisplay().clear();
@@ -457,6 +459,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		lastTimeUpdated = time;
 		WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop);
 		addTrackPoint(pt, newSegment, time);
+		trkPoints++;
 	}
 	
 	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
@@ -632,6 +635,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		distance = analysis.totalDistance;
 		points = analysis.wptPoints;
 		duration = analysis.timeSpan;
+		trkPoints = analysis.points;
 	}
 
 	private void prepareCurrentTrackForRecording() {
@@ -666,6 +670,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return points;
 	}
 	
+	public int getTrkPoints() {
+		return trkPoints;
+	}
+
 	public long getLastTimeUpdated() {
 		return lastTimeUpdated;
 	}

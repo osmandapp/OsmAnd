@@ -1038,7 +1038,7 @@
     <string name="osm_settings_descr">Spesifiser innstillinger for OpenStreetMap.org (OSM) som er nødvendige for bidrag til OSM.</string>
     <string name="shared_string_disabled">Deaktivert</string>
     <string name="shared_string_enabled">Aktivert</string>
-    <string name="shared_string_enable">Aktiver</string>
+    <string name="shared_string_enable">Skru på</string>
     <string name="shared_string_disable">Deaktiver</string>
     <string name="plugin_install_needs_network">Du må være koblet til Internett for å installere dette programtillegget.</string>
     <string name="shared_string_never">Aldri</string>
@@ -1127,9 +1127,9 @@
     <string name="download_type_to_filter">Filtrer</string>
     <string name="get_plugin">Hent</string>
     <string name="shared_string_is_open">Åpen nå</string>
-    <string name="application_dir_change_warning3">Kopiere OsmAnd-datafiler til det nye målet?</string>
+    <string name="application_dir_change_warning3">Flytt OsmAnd-datafiler til det nye målet\?</string>
     <string name="specified_directiory_not_writeable">Kart kunne ikke opprettes i angitte mappe</string>
-    <string name="copying_osmand_file_failed">Kopiering av filer mislyktes</string>
+    <string name="copying_osmand_file_failed">Flytting av filer mislyktes</string>
     <string name="storage_directory_external">Ekstern lagring</string>
     <string name="storage_directory_multiuser">Flerbruker-lagring</string>
     <string name="storage_directory_internal_app">Internt programminne</string>
@@ -2471,7 +2471,7 @@
     <string name="osm_notes">OSM-notater</string>
     <string name="tunnel_warning">Tunnel foran</string>
     <string name="show_tunnels">Tunneler</string>
-    <string name="enable_plugin_monitoring_services">Aktiver turopptakstillegget for å bruke posisjonloggingstjenester (GPX-logging, nettbasert sporing)</string>
+    <string name="enable_plugin_monitoring_services">Aktiver tillegget \"Turopptak\" for å bruke posisjonloggingstjenester (GPX-logging, nettbasert sporing)</string>
     <string name="non_optimal_route_calculation">Beregn mulig ikke-optimal rute over lange avstander</string>
     <string name="vector_data_missing">Last ned (\'nettfrakoblede\') data for å kunne bruke kart nettfrakoblet.</string>
     <string name="create_poi_link_to_osm_doc">
@@ -3029,4 +3029,16 @@
 \n
 \n</string>
     <string name="send_log">Send logg</string>
+    <string name="files_moved">Flyttet %1$d filer (%2$s).</string>
+    <string name="files_copied">Kopierte %1$d filer (%2$s).</string>
+    <string name="files_failed">Klarte ikke å kopiere %1$d filer (%2$s).</string>
+    <string name="files_present">%1$d filer (%2$s) finnes på forrige plassering \'%3$s\'.</string>
+    <string name="move_maps">Flytt kart</string>
+    <string name="dont_move_maps">Ikke flytt</string>
+    <string name="public_transport_ped_route_title">Ruten til fots er omtrent %1$s og kan framskyndes av offentlig transport</string>
+    <string name="public_transport_no_route_title">OsmAnd fant ikke en rute som passet med innstillingene dine.</string>
+    <string name="public_transport_try_ped">Prøv fotgjengernavigasjonen.</string>
+    <string name="public_transport_try_change_settings">Prøv å endre innstillingene.</string>
+    <string name="public_transport_calc_pedestrian">Regn ut rute til fots</string>
+    <string name="public_transport_type">Transporttype</string>
 </resources>

@@ -1352,7 +1352,7 @@
     <string name="arrival_distance_factor_at_last">در چند متر آخر</string>
     <string name="av_camera_pic_size">اندازهٔ عکس دوربین</string>
     <string name="av_camera_pic_size_descr">اندازهٔ عکس دوربین داخلی را انتخاب کنید.</string>
-    <string name="rename_failed">تغییر نام انجام نشد.</string>
+    <string name="rename_failed">تغییر نام ناموفق بود.</string>
     <string name="days_behind">روز قبل</string>
     <string name="shared_string_currently_recording_track">ردّ در حال ضبط</string>
     <string name="back_to_map">برگشتن به نقشه</string>
@@ -1476,9 +1476,9 @@
     <string name="speed_limit_exceed_message">محدودهٔ حداکثر سرعت را انتخاب کنید؛ با گذشتن از این مقدار، آوای هشدار پخش می‌شود.</string>
     <string name="fav_point_emoticons_message">نام نقطهٔ برگزیده به %1$s تغییر کرد تا ذخیره‌سازی آن به‌همراه شکلک‌ها در فایل تسهیل شود.</string>
     <string name="rendering_attr_hideHouseNumbers_name">پلاک خانه‌ها</string>
-    <string name="application_dir_change_warning3">فایل‌های دادهٔ OsmAnd به مکان جدید کپی شود؟</string>
+    <string name="application_dir_change_warning3">فایل‌های دادهٔ OsmAnd به مکان جدید منتقل شود؟</string>
     <string name="specified_directiory_not_writeable">نمی‌توان نقشه‌ها را در پوشهٔ موردنظر ایجاد کرد</string>
-    <string name="copying_osmand_file_failed">کپی‌کردن فایل‌ها ناموفق بود</string>
+    <string name="copying_osmand_file_failed">انتقال فایل‌ها ناموفق بود</string>
     <string name="storage_directory_external">ذخیره‌گاه خارجی</string>
     <string name="storage_directory_multiuser">ذخیره‌گاه چندکاربره</string>
     <string name="storage_directory_internal_app">حافظهٔ داخلی برنامه</string>
@@ -2093,7 +2093,7 @@
     <string name="rate_this_app_long">لطفاً در فروشگاه Play به OsmAnd امتیاز بدهید</string>
     <string name="user_hates_app_get_feedback">لطفاً علتش به ما بگویید.</string>
     <string name="user_hates_app_get_feedback_long">دوست دارید این برنامه چه تغییری بکند؟ لطفاً به ما بگویید.</string>
-    <string name="failed_to_upload">آپلود نشد</string>
+    <string name="failed_to_upload">آپلود ناموفق بود</string>
     <string name="delete_change">حذف تغییر</string>
     <string name="successfully_uploaded_pattern">{0} مورد از {1} مورد آپلود شد</string>
     <string name="try_again">تلاش مجدد</string>
@@ -3067,4 +3067,17 @@
 \n
 \n • نمایش سمت (azimuth) در اندازه‌گیری مسافت
 \n</string>
+    <string name="files_moved">%1$d فایل منتقل شد (%2$s).</string>
+    <string name="files_copied">%1$d فایل کپی شد (%2$s).</string>
+    <string name="files_failed">کپی %1$d فایل (%2$s) ناموفق بود.</string>
+    <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد: \'%3$s\'</string>
+    <string name="move_maps">نقشه‌ها را منتقل کن</string>
+    <string name="dont_move_maps">منتقل نکن</string>
+    <string name="public_transport_ped_route_title">مسیر پیاده حدود %1$s است و به‌نظر می‌رسد سریع‌تر از حمل‌ونقل عمومی باشد</string>
+    <string name="public_transport_no_route_title">متأسفانه OsmAnd نتوانست مسیری متناسب با تنظیمات شما بیابد.</string>
+    <string name="public_transport_try_ped">ناوبری پیاده را امتحان کنید.</string>
+    <string name="public_transport_try_change_settings">با تنظیمات دیگر امتحان کنید.</string>
+    <string name="public_transport_calc_pedestrian">محاسبهٔ مسیر پیاده</string>
+    <string name="public_transport_type">نوع حمل‌ونقل</string>
+    <string name="send_log">ارسال گزارش</string>
 </resources>

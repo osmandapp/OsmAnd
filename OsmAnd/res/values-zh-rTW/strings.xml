@@ -1528,9 +1528,9 @@
     <string name="index_name_netherlands">歐洲 - 荷蘭</string>
     <string name="rendering_value__name">預設</string>
     <string name="rendering_value_highContrastRoads_name">高對比道路</string>
-    <string name="application_dir_change_warning3">您想要 OsmAnd 將資料檔案複製到新的目的地嗎？</string>
+    <string name="application_dir_change_warning3">您想要 OsmAnd 將資料檔案移動到新的目的地嗎？</string>
     <string name="specified_directiory_not_writeable">在指定的目錄不能建立地圖</string>
-    <string name="copying_osmand_file_failed">複製檔案時失敗</string>
+    <string name="copying_osmand_file_failed">移動檔案時失敗</string>
     <string name="storage_directory_external">外部存儲器</string>
     <string name="storage_directory_multiuser">多使用者存儲器</string>
     <string name="storage_directory_internal_app">內部程式記憶體</string>
@@ -3018,4 +3018,16 @@
     <string name="use_osm_live_public_transport">OsmAnd Live 大眾運輸</string>
     <string name="routing_attr_avoid_sett_name">避免鵝卵石與枕木</string>
     <string name="routing_attr_avoid_sett_description">避免鵝卵石與枕木</string>
+    <string name="files_moved">已移動 %1$d 個檔案 (%2$s)。</string>
+    <string name="files_copied">已複製 %1$d 個檔案 (%2$s)。</string>
+    <string name="files_failed">複製 %1$d 個檔案失敗 (%2$s)。</string>
+    <string name="files_present">%1$d 個檔案 (%2$s) 出現在先前的位置 \'%3$s\'。</string>
+    <string name="move_maps">移動地圖</string>
+    <string name="dont_move_maps">不要移動</string>
+    <string name="public_transport_ped_route_title">步行路線約 %1$s，可能比大眾運輸還快</string>
+    <string name="public_transport_no_route_title">不幸的是，OsmAnd 找不到適合您設定的路線。</string>
+    <string name="public_transport_try_ped">嘗試行人導航。</string>
+    <string name="public_transport_try_change_settings">嘗試變更設定。</string>
+    <string name="public_transport_calc_pedestrian">計算行人路線</string>
+    <string name="public_transport_type">運輸類型</string>
 </resources>

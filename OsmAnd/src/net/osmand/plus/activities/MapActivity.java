@@ -48,7 +48,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
-import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.core.android.AtlasMapRendererView;
@@ -123,7 +122,6 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
-import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -746,6 +744,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		OsmandPlugin.onMapActivityResume(this);
 
+		boolean showOsmAndWelcomeScreen = true;
 		final Intent intent = getIntent();
 		if (intent != null) {
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
@@ -774,6 +773,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						}
 					}
 				}
+			}
+			if (intent.hasExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN)) {
+				showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
 			}
 			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
 				Bundle openMapMarkersGroupsExtra = intent.getBundleExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
@@ -825,8 +827,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 
-		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
-				|| !app.getResourceManager().isAnyMapInstalled()) && FirstUsageWelcomeFragment.SHOW;
+		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
+				&& FirstUsageWelcomeFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get() && showOsmAndWelcomeScreen;
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
@@ -862,7 +864,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			OsmLiveCancelledDialog.showInstance(getSupportFragmentManager());
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
-
+		if (isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
+			FirstUsageWelcomeFragment welcomeFragment = getFirstUsageWelcomeFragment();
+			if (welcomeFragment != null) {
+				welcomeFragment.closeWelcomeFragment();
+			}
+			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+			if (wizardFragment != null) {
+				wizardFragment.closeWizard();
+			}
+		}
 		if (SecondSplashScreenFragment.SHOW) {
 			SecondSplashScreenFragment.SHOW = false;
 			SecondSplashScreenFragment.VISIBLE = true;
@@ -1684,6 +1695,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			closeDrawer();
 		} else {
 			openDrawer();
+		}
+	}
+
+	public FirstUsageWelcomeFragment getFirstUsageWelcomeFragment() {
+		FirstUsageWelcomeFragment welcomeFragment = (FirstUsageWelcomeFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWelcomeFragment.TAG);
+		if (welcomeFragment != null && !welcomeFragment.isDetached()) {
+			return welcomeFragment;
+		} else {
+			return null;
 		}
 	}
 

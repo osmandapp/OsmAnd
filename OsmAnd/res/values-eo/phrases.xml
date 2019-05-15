@@ -75,12 +75,12 @@
     <string name="poi_bag">Sak-vendejo</string>
     <string name="poi_bathroom_furnishing">Lavĉambr-akcesoraĵa vendejo</string>
     <string name="poi_bed">Litaĵ-vendejo</string>
-    <string name="poi_boutique">Galanteriejo</string>
+    <string name="poi_boutique">Mod‑butiko</string>
     <string name="poi_camera">Fotiloj-k-lensoj vendejo</string>
     <string name="poi_carpet">Tapiŝ-vendejo</string>
     <string name="poi_chemist">Purigaĵ-vendejo</string>
     <string name="poi_charity">Almoza vendejo</string>
-    <string name="poi_clothes">Vest-vendejo</string>
+    <string name="poi_clothes">Vest‑vendejo</string>
     <string name="poi_clothes_children">infanaj</string>
     <string name="poi_shoes">Ŝu-vendejo</string>
     <string name="poi_candles">Kandel-vendejo</string>
@@ -124,7 +124,7 @@
     <string name="poi_doityourself">Memfaradil-vendejo</string>
     <string name="poi_doors">Pord-vendejo</string>
     <string name="poi_erotic">Seksumil-vendejo</string>
-    <string name="poi_fashion">Mod-butiko</string>
+    <string name="poi_fashion">Vest‑vendejo</string>
     <string name="poi_fishing">Fiŝkaptil-vendejo</string>
     <string name="poi_florist">Florvendejo</string>
     <string name="poi_frame">Kadroj-de-pentraĵoj-vendejo</string>
@@ -344,7 +344,7 @@
     <string name="poi_geyser">Gejsero</string>
     <string name="poi_club_linux">Linuksa klubejo</string>
     <string name="poi_glacier">Glaciejo</string>
-    <string name="poi_stone">Roko</string>
+    <string name="poi_stone">Ŝtonego</string>
     <string name="poi_aerialway_station">Kablovoja stacio</string>
     <string name="poi_aerialway_cable_car">Telfero unu-vagoneta (ir-reira)</string>
     <string name="poi_aerialway_chair_lift">Telfero seĝa</string>
@@ -829,7 +829,7 @@
     <string name="poi_food_court">Manĝobazaro</string>
     <string name="poi_drinking_water">Trinkakvejo</string>
     <string name="poi_barbecue">Rostilo</string>
-    <string name="poi_craft_agricultural_engines">Oficejo de isto de agrokulturaj maŝinoj</string>
+    <string name="poi_craft_agricultural_engines">Laborejo de agrokulturaj maŝinoj</string>
     <string name="poi_craft_basket_maker">Korb-laborejo</string>
     <string name="poi_craft_beekeeper">Abelistejo</string>
     <string name="poi_craft_blacksmith">Forĝejo</string>
@@ -923,7 +923,7 @@
     <string name="poi_strait">Markolo</string>
     <string name="poi_anchorage">Rodo (regiono)</string>
     <string name="poi_anchor_berth">Rodo (preciza ankrejo)</string>
-    <string name="poi_beacon">Buo fiksa</string>
+    <string name="poi_beacon">Signalilo</string>
     <string name="poi_beacon_cardinal">Buo fiksa: ĉefa (mondflanka)</string>
     <string name="poi_beacon_lateral">Buo fiksa: flanka (latera)</string>
     <string name="poi_beacon_safe_water">Buo fiksa: sekurakva</string>
@@ -2195,11 +2195,11 @@
     <string name="poi_bridge_ref">Referenco de ponto</string>
     <string name="poi_tunnel_ref">Referenco de tunelo</string>
     <string name="poi_ref">Referenco</string>
-    <string name="poi_cargo_passengers">Pasaĝeroj</string>
-    <string name="poi_cargo_vehicle">Veturiloj</string>
-    <string name="poi_cargo_bicycle">Bicikloj</string>
-    <string name="poi_cargo_container">Transportujoj</string>
-    <string name="poi_cargo_hgv">Kamionoj</string>
+    <string name="poi_cargo_passengers">pasaĝeroj</string>
+    <string name="poi_cargo_vehicle">veturiloj</string>
+    <string name="poi_cargo_bicycle">bicikloj</string>
+    <string name="poi_cargo_container">transportujoj</string>
+    <string name="poi_cargo_hgv">kamionoj</string>
     <string name="poi_wiki_lang_als">Vikipedio Alemana</string>
     <string name="poi_wiki_lang_az">Vikipedio Azerbajĝana</string>
     <string name="poi_wiki_lang_bn">Vikipedio Bengala</string>
@@ -2413,7 +2413,7 @@
     <string name="poi_health_service_support_no">San-servo: apogo psika: ne</string>
     <string name="poi_health_service_test_yes">San-servo: testoj: jes</string>
     <string name="poi_health_service_test_no">San-servo: testoj: ne</string>
-    <string name="poi_health_facility_type_office">San-servejo: kabineto de kuracisto</string>
+    <string name="poi_health_facility_type_office">Kabineto de kuracisto</string>
     <string name="poi_health_facility_type_field_hospital">San-servejo: kampa malsanulejo</string>
     <string name="poi_fire_hydrant_diameter">Diametro de hidranto</string>
     <string name="poi_fire_hydrant_pressure">Premo de hidranto</string>
@@ -2573,13 +2573,13 @@
     <string name="poi_aquaculture_fish">Akvokulturo: fiŝoj</string>
     <string name="poi_aquaculture_mussels">Akvokulturo: moluskoj</string>
     <string name="poi_mdf">Telefon-diskonektig-stacio</string>
-    <string name="poi_diplomatic_consulate">Konsulejo</string>
-    <string name="poi_diplomatic_consulate_general">Konsulejo ĝenerala</string>
-    <string name="poi_diplomatic_honorary_consulate">Konsulejo honora</string>
-    <string name="poi_diplomatic_permanent_mission">Oficejo de misio diplomatia</string>
-    <string name="poi_diplomatic_delegation">Oficejo de delegitaro (EU)</string>
-    <string name="poi_diplomatic_ambassadors_residence">Ambasadestrejo</string>
-    <string name="poi_diplomatic_high_commission">Oficejo de alta komisaro</string>
+    <string name="poi_diplomatic_consulate">konsulejo</string>
+    <string name="poi_diplomatic_consulate_general">konsulejo ĝenerala</string>
+    <string name="poi_diplomatic_honorary_consulate">konsulejo honora</string>
+    <string name="poi_diplomatic_permanent_mission">oficejo de misio diplomatia</string>
+    <string name="poi_diplomatic_delegation">oficejo de delegitaro (EU)</string>
+    <string name="poi_diplomatic_ambassadors_residence">ambasadestrejo</string>
+    <string name="poi_diplomatic_high_commission">oficejo de alta komisaro</string>
     <string name="poi_diaper_table_count">Tabloj por tra-vindotuk-ado</string>
     <string name="poi_fire_operator">Administranto kontraŭfajrega</string>
     <string name="poi_toilets_disposal_flush">Necesej-speco: akvoŝpruca</string>
@@ -2778,7 +2778,7 @@
     <string name="poi_parking_type">Speco de parkumejo</string>
     <string name="poi_covered">Kovrita</string>
     <string name="poi_subway_station_filter">Metroa stacio</string>
-    <string name="poi_ferry_terminal_cargo">Portaĵo de</string>
+    <string name="poi_ferry_terminal_cargo">Transporto de</string>
     <string name="poi_bicycle_parking_type">Speco de bicikl‑parkumejo</string>
     <string name="poi_aerialway_bicycle">Transportado de bicikloj</string>
     <string name="poi_aerialway_heating">Hejtado</string>
@@ -2786,7 +2786,7 @@
     <string name="poi_observatory_designation">Apliko</string>
     <string name="poi_telescope_type">Speco</string>
     <string name="poi_animal_training_type">Dresado de</string>
-    <string name="poi_embassy_type">Speco</string>
+    <string name="poi_embassy_type">Speco de diplomata oficejo</string>
     <string name="poi_city_capital">Ĉefurbo</string>
     <string name="poi_pharmacy_dispensing">Medikamentoj je preskribo</string>
     <string name="poi_healthcare_alternative_types">Kontraŭmedicino</string>
@@ -3323,7 +3323,7 @@
     <string name="poi_map_size_city">Grando de mapo: urba</string>
     <string name="poi_map_size_region">Grando de mapo: regiona</string>
     <string name="poi_charging_station">Ŝargostacio</string>
-    <string name="poi_depot">Aŭtobusejo/tramejo</string>
+    <string name="poi_depot">Remizo</string>
     <string name="poi_letter_box">Leterkesto</string>
     <string name="poi_post_street">Strato</string>
     <string name="poi_post_housenumber">Numero de domo</string>
@@ -3574,4 +3574,5 @@
     <string name="poi_climbing_crag_filter">Areo de grimpado</string>
     <string name="poi_rescue_box">Tujhelpilo (ensovaĝe)</string>
     <string name="poi_climbing_crag">jes</string>
+    <string name="reddit">Reddit</string>
 </resources>

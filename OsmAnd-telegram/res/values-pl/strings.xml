@@ -222,4 +222,19 @@
     <string name="direction">Kierunek</string>
     <string name="precision">Precyzja</string>
     <string name="altitude">Wysokość</string>
+    <string name="proxy_key">Klucz</string>
+    <string name="proxy_password">Hasło</string>
+    <string name="proxy_username">Nazwa użytkownika</string>
+    <string name="proxy_credentials">Poświadczenia</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Serwer</string>
+    <string name="shared_string_connection">Połączenia</string>
+    <string name="shared_string_enable">Włącz</string>
+    <string name="proxy_type">Typ serwera proxy</string>
+    <string name="proxy_connected">Podłączony</string>
+    <string name="proxy_disconnected">Odłączony</string>
+    <string name="proxy_settings">Ustawienia proxy</string>
+    <string name="proxy">Serwer proxy</string>
+    <string name="privacy">Prywatność</string>
+    <string name="bearing">Kierunek</string>
 </resources>

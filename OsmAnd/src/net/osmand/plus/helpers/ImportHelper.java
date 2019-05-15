@@ -23,6 +23,8 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Toast;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -32,8 +34,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -50,6 +51,8 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -65,7 +68,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
-import org.apache.commons.logging.Log;
 
 /**
  * @author Koen Rabaey
@@ -616,10 +618,21 @@ public class ImportHelper {
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
 				final WptPt pt = gpxFile.findPointToShow();
 				final File toWrite = getFileToSave(fileName, importDir, pt);
+				boolean destinationExists = toWrite.exists();
 				Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
-				if(e == null) {
+				if (e == null) {
 					gpxFile.path = toWrite.getAbsolutePath();
-					app.getGpxDatabase().remove(new File(gpxFile.path));
+					File file = new File(gpxFile.path);
+					if (!destinationExists) {
+						GPXDatabase.GpxDataItem item = new GPXDatabase.GpxDataItem(file, gpxFile.getColor(0));
+						app.getGpxDatabase().add(item);
+					} else {
+						GPXDatabase.GpxDataItem item = app.getGpxDatabase().getItem(file);
+						if (item != null) {
+							app.getGpxDatabase().clearAnalysis(item);
+						}
+					}
+
 					warning = null;
 				} else {
 					warning = app.getString(R.string.error_reading_gpx);

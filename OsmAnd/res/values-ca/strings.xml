@@ -709,7 +709,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="poi_filter_public_transport">Transport públic</string>
     <string name="poi_filter_emergency">Emergències</string>
     <string name="poi_filter_restaurants">Restaurants</string>
-    <string name="osm_editing_plugin_description">"Amb aquest connector d\'OsmAnd es pot fer contribucions a OSM com la creació o modificació de PDIs d\'OSM,  obrir o comentar anotacions OSM o contribuir amb fitxers GPX registrats. OSM és un projecte de cartografia global, de domini públic i gestionat per una comunitat. Per més detalls dirigiu-vos a  https://openstreetmap.org. La participació activa és d\'agrair i aquestes contribucions es poden directament des OsmAnd, si heu indicat les vostres credencials personals d\'OSM a l\'aplicació."</string>
+    <string name="osm_editing_plugin_description">"Amb aquest connector d\'OsmAnd es poden fer contribucions a OSM com la creació o modificació de PDIs d\'OSM,  obrir o comentar anotacions OSM o contribuir amb fitxers GPX enregistrats. OSM és un projecte gestionat per una comunitat, de domini públic i de cartografia global,. Per més detalls dirigiu-vos a  https://openstreetmap.org. La participació activa s\'agraeix i aquestes contribucions es poden fer directament des OsmAnd, si heu indicat les vostres credencials personals d\'OSM a l\'aplicació."</string>
     <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TTS (text a veu) d\'Android instal·lat. Voleu buscar altres motors TTS a la botiga d\'aplicacions? Altrament s\'usarà la llengua del TTS per defecte.</string>
     <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
     <string name="old_map_index_is_not_supported">Format de mapa «{0}» obsolet, no s\'admet</string>
@@ -1551,9 +1551,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="index_name_netherlands">Europa - Països Baixos</string>
     <string name="rendering_value__name">Per defecte</string>
     <string name="rendering_value_highContrastRoads_name">Vies més contrastades</string>
-    <string name="application_dir_change_warning3">Voleu copiar els fitxers de dades OsmAnd a la nova destinació?</string>
+    <string name="application_dir_change_warning3">Voleu moure els fitxers de dades OsmAnd a la nova destinació\?</string>
     <string name="specified_directiory_not_writeable">Creació de mapes al directori indicat fallida</string>
-    <string name="copying_osmand_file_failed">Error en copiar fitxers</string>
+    <string name="copying_osmand_file_failed">Error en moure els fitxers</string>
     <string name="storage_directory_external">Emmagatzematge exterior</string>
     <string name="storage_directory_multiuser">Emmagatzematge multiusuari</string>
     <string name="storage_directory_internal_app">Memòria interna de l\'aplicació</string>
@@ -3021,7 +3021,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
     <string name="shared_string_degrees">Graus</string>
     <string name="shared_string_milliradians">Mil·liradiants</string>
-    <string name="angular_measeurement">Unitats de mesura angular</string>
+    <string name="angular_measeurement">Unitat angular</string>
     <string name="angular_measeurement_descr">Canvia la unitat de mesura de l\'azimut.</string>
     <string name="routing_attr_avoid_sett_name">Evita els empedrats i els llambordins</string>
     <string name="routing_attr_avoid_sett_description">Evita els empedrats i els llambordins</string>
@@ -3046,4 +3046,16 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n• Mostra l\'azimut en la mesura de la distància
 \n</string>
     <string name="send_log">Envia el registre</string>
+    <string name="files_moved">S\'han mogut %1$d arxius (%2$s).</string>
+    <string name="files_copied">S\'han copiat %1$d arxius (%2$s).</string>
+    <string name="files_failed">No ha pogut copiar %1$d arxius (%2$s).</string>
+    <string name="files_present">Ja hi ha %1$d arxius (%2$s) a la localització prèvia \'%3$s\'.</string>
+    <string name="move_maps">Mou els mapes</string>
+    <string name="dont_move_maps">No moguis</string>
+    <string name="public_transport_ped_route_title">La ruta a peu triga aproximadament %1$s i podria ser més ràpida utilitzant transport públic</string>
+    <string name="public_transport_no_route_title">Per desgràcia, OsmAnd no ha pogut trobar una ruta adient amb els vostres paràmetres.</string>
+    <string name="public_transport_try_ped">Proveu la navegació per vianants.</string>
+    <string name="public_transport_try_change_settings">Proveu a canviar els paràmetres.</string>
+    <string name="public_transport_calc_pedestrian">Calcula la ruta per vianants</string>
+    <string name="public_transport_type">Tipus de transport</string>
 </resources>

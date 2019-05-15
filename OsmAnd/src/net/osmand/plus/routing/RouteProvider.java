@@ -75,8 +75,6 @@ public class RouteProvider {
 
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
-		//ORS("OpenRouteService"), // disable ors due to no public rest service (testing2015 doesn't seem stable)
-		OSRM("OSRM (only car)"),
 		BROUTER("BRouter (offline)"),
 		STRAIGHT("Straight line");
 
@@ -312,8 +310,8 @@ public class RouteProvider {
 					res = findBROUTERRoute(params);
 //				} else if (params.type == RouteService.ORS) {
 //					res = findORSRoute(params);
-				} else if (params.type == RouteService.OSRM) {
-					res = findOSRMRoute(params);
+//				} else if (params.type == RouteService.OSRM) {
+//					res = findOSRMRoute(params);
 				} else if (params.type == RouteService.STRAIGHT){
 					res = findStraightRoute(params);
 				}
@@ -329,8 +327,6 @@ public class RouteProvider {
 			} catch (ParserConfigurationException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (SAXException e) {
-				log.error("Failed to find route ", e); //$NON-NLS-1$
-			} catch (JSONException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
