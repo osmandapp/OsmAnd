@@ -2331,18 +2331,19 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se eksterrete) 
 \n • Malnepre registri kurson ankaŭ en fona reĝimo (kiam la aparato dormetas) 
 \n OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donaj por fondi kodumadon kaj testi novajn funkciojn.</string>
-    <string name="osmand_plus_extended_description_part8">Proksimuma map-atingo kaj kvalito: 
-\n • Okcidenta Eŭropo: **** 
-\n • Orienta Eŭropo: *** 
-\n • Rusujo: *** 
-\n • Nordameriko: *** 
-\n • Sudameriko: ** 
-\n • Azio: ** 
-\n • Japanujo kaj Koreujo: *** 
-\n • Proksim-Oriento: ** 
-\n • Afriko: ** 
-\n • Antarkto: * 
-\nMapoj de preskaŭ ĉiuj de landoj de la mondo estas elŝuteblaj! De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…</string>
+    <string name="osmand_plus_extended_description_part8">Proksimuma map-atingo kaj kvalito:
+\n • Okcidenta Eŭropo: ****
+\n • Orienta Eŭropo: ***
+\n • Rusujo: ***
+\n • Nordameriko: ***
+\n • Sudameriko: **
+\n • Azio: **
+\n • Japanujo kaj Koreujo: ***
+\n • Proksim-Oriento: **
+\n • Afriko: **
+\n • Antarkto: *
+\nMapoj de preskaŭ ĉiuj de landoj de la mondo estas elŝuteblaj! De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…
+\n</string>
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
     <string name="shared_string_visible">Videbla</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
