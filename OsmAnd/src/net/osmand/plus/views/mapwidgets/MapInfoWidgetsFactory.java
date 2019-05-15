@@ -1078,6 +1078,7 @@ public class MapInfoWidgetsFactory {
 					if (f == PointDescription.UTM_FORMAT) {
 						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
 						AndroidUiHelper.updateVisibility(coordinatesDivider, false);
+						AndroidUiHelper.updateVisibility(latitudeIcon, true);
 						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_utm_night : R.drawable.widget_coordinates_utm_day));
 						UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
 						String utmLocation = pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " " + ((long) pnt.northing);
@@ -1085,6 +1086,7 @@ public class MapInfoWidgetsFactory {
 					} else if (f == PointDescription.OLC_FORMAT) {
 						AndroidUiHelper.updateVisibility(lonCoordinatesContainer, false);
 						AndroidUiHelper.updateVisibility(coordinatesDivider, false);
+						AndroidUiHelper.updateVisibility(latitudeIcon, true);
 						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_utm_night : R.drawable.widget_coordinates_utm_day));
 						String olcLocation;
 						try {
