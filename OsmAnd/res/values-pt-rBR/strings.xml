@@ -2552,19 +2552,20 @@ Pôr do Sol: %2$s</string>
 \n• Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes
 \n• Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
-    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: 
-\n• Europa Ocidental: **** 
-\n• Europa Oriental: *** 
-\n• Rússia: *** 
-\n• América do Norte: *** 
-\n• América do Sul: ** 
-\n• Ásia: ** 
-\n• Japão e Coreia: *** 
-\n• Oriente Médio: ** 
-\n• África: ** 
-\n• Antártida: * 
-\nA maioria dos países ao redor do globo disponível para baixar! 
-\nDo Afeganistão ao Zimbábue, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha, …</string>
+    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
+\n• Europa Ocidental: ****
+\n• Europa Oriental: ***
+\n• Rússia: ***
+\n• América do Norte: ***
+\n• América do Sul: **
+\n• Ásia: **
+\n• Japão e Coreia: ***
+\n• Oriente Médio: **
+\n• África: **
+\n• Antártida: *
+\nA maioria dos países ao redor do globo disponível para baixar!
+\nDo Afeganistão ao Zimbábue, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha, …
+\n</string>
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar/Ocultar notas OSM no mapa.</string>
