@@ -133,6 +133,67 @@ public class LocationConvert {
 		}
 
 		DecimalFormat df = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
+		coordinate = convertMinutesAndSeconds(coordinate, outputType, sb);
+
+		sb.append(df.format(coordinate));
+		return sb.toString();
+	}
+
+	public static String convertLatitude(double latitude, int outputType, boolean addCardinalDirection) {
+		if (latitude < -90.0 || latitude > 90.0 || Double.isNaN(latitude)) {
+			throw new IllegalArgumentException("latitude=" + latitude);
+		}
+		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType != FORMAT_SECONDS)) {
+			throw new IllegalArgumentException("outputType=" + outputType);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		// Handle negative values and append cardinal directions if necessary
+		if (addCardinalDirection) {
+			sb.append(latitude < 0 ? 'S' : 'N');
+		} else if (latitude < 0) {
+			sb.append('-');
+		}
+		if (latitude < 0) {
+			latitude = -latitude;
+		}
+
+		DecimalFormat df = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US));
+		latitude = convertMinutesAndSeconds(latitude, outputType, sb);
+
+		sb.append(df.format(latitude));
+		return sb.toString();
+	}
+
+	public static String convertLongitude(double longitude, int outputType, boolean addCardinalDirection) {
+		if (longitude < -180.0 || longitude > 180.0 || Double.isNaN(longitude)) {
+			throw new IllegalArgumentException("longitude=" + longitude);
+		}
+		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType != FORMAT_SECONDS)) {
+			throw new IllegalArgumentException("outputType=" + outputType);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		// Handle negative values and append cardinal directions if necessary
+		if (addCardinalDirection) {
+			sb.append(longitude < 0 ? 'W' : 'E');
+		} else if (longitude < 0) {
+			sb.append('-');
+		}
+		if (longitude < 0) {
+			longitude = -longitude;
+		}
+
+		DecimalFormat df = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US));
+		longitude = convertMinutesAndSeconds(longitude, outputType, sb);
+
+		sb.append(df.format(longitude));
+		return sb.toString();
+	}
+
+	private static double convertMinutesAndSeconds(double coordinate, int outputType, StringBuilder sb) {
 		if (outputType == FORMAT_MINUTES || outputType == FORMAT_SECONDS) {
 			int degrees = (int) Math.floor(coordinate);
 			sb.append(degrees);
@@ -147,7 +208,6 @@ public class LocationConvert {
 				coordinate *= 60.0;
 			}
 		}
-		sb.append(df.format(coordinate));
-		return sb.toString();
+		return coordinate;
 	}
 }

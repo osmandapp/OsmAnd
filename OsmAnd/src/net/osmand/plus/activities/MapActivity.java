@@ -918,8 +918,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (color == TopToolbarController.NO_COLOR) {
 				boolean mapTopBar = findViewById(R.id.map_top_bar).getVisibility() == View.VISIBLE;
 				boolean markerTopBar = findViewById(R.id.map_markers_top_bar).getVisibility() == View.VISIBLE;
+				boolean coordinatesTopBar = findViewById(R.id.coordinates_top_bar).getVisibility() == View.VISIBLE;
 				if (mapTopBar && mapControlsVisible) {
 					colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
+				} else if (coordinatesTopBar && mapControlsVisible) {
+					colorId = night ? R.color.status_bar_main_dark : R.color.status_bar_main_dark;
 				} else if (markerTopBar && mapControlsVisible) {
 					colorId = R.color.status_bar_dark;
 				} else {

@@ -856,10 +856,10 @@ public class RouteInfoWidgetsFactory {
 					lanesText.invalidate();
 				}
 			}
-			updateVisibility(lanesShadowText, visible && shadowRadius > 0);
-			updateVisibility(lanesText, visible);
-			updateVisibility(lanesView, visible);
-			updateVisibility(centerInfo, visible);
+			AndroidUiHelper.updateVisibility(lanesShadowText, visible && shadowRadius > 0);
+			AndroidUiHelper.updateVisibility(lanesText, visible);
+			AndroidUiHelper.updateVisibility(lanesView, visible);
+			AndroidUiHelper.updateVisibility(centerInfo, visible);
 			return true;
 		}
 	}
@@ -1202,7 +1202,7 @@ public class RouteInfoWidgetsFactory {
 				layout.setLayoutParams(lp);
 				layout.requestLayout();
 			}
-			updateVisibility(layout, visible);
+			AndroidUiHelper.updateVisibility(layout, visible);
 			return true;
 		}
 		
@@ -1347,7 +1347,7 @@ public class RouteInfoWidgetsFactory {
 					}
 				}
 			}
-			updateVisibility(layout, visible);
+			AndroidUiHelper.updateVisibility(layout, visible);
 			return true;
 		}
 
@@ -1356,8 +1356,6 @@ public class RouteInfoWidgetsFactory {
 		}
 	}
 
-	
-	
 	public static boolean distChanged(int oldDist, int dist){
 		if (oldDist != 0 && Math.abs(oldDist - dist) < 10) {
 			return false;
@@ -1375,18 +1373,5 @@ public class RouteInfoWidgetsFactory {
 	
 	public RulerWidget createRulerControl(OsmandApplication app, MapActivity map) {
 		return new RulerWidget(app, map);
-	}
-	
-	protected static boolean updateVisibility(View view, boolean visible) {
-		if (visible != (view.getVisibility() == View.VISIBLE)) {
-			if (visible) {
-				view.setVisibility(View.VISIBLE);
-			} else {
-				view.setVisibility(View.GONE);
-			}
-			view.invalidate();
-			return true;
-		}
-		return false;
 	}
 }
