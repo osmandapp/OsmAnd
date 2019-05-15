@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -120,7 +121,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 		@Nullable Bundle savedInstanceState) {
 
-
 		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
 
 		profileIcon = view.findViewById(R.id.select_icon_btn_img);
@@ -152,15 +152,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			.getBackground();
 
 		if (isNightMode) {
-			profileNameTextBox
-				.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
-			navTypeTextBox
-				.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
-			selectIconBtnBackground
-				.setColor(app.getResources().getColor(R.color.text_field_box_dark));
+			profileNameTextBox.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+			navTypeTextBox.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_dark));
 		} else {
-			selectIconBtnBackground
-				.setColor(app.getResources().getColor(R.color.text_field_box_light));
+			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_light));
 		}
 
 		String title = "New Profile";
@@ -171,11 +167,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			profileNameEt.setText(title);
 			startIconId = profile.iconId;
 			isDataChanged = false;
-
 		} else if (isNew) {
 			isDataChanged = true;
-			title = String
-				.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
+			title = String.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
 			startIconId = profile.getParent().getSmallIconDark();
 			profile.setIconId(startIconId);
 		} else if (profile.getKey() != -1) {
@@ -200,8 +194,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
 					dialog.setProfileTypeListener(baseTypeListener);
 					Bundle bundle = new Bundle();
-					bundle.putParcelableArrayList(TYPE_APP_PROFILE,
-						SettingsProfileFragment.getBaseProfiles(getMyApplication()));
+					ArrayList<BaseProfile> lst = SettingsProfileFragment.getBaseProfiles(getMyApplication());
+					for (BaseProfile bp : lst) {
+						LOG.debug("Base");
+						if (bp.getStringKey().equals(profile.getParent().getStringKey())) {
+							bp.setSelected(true);
+						}
+					}
+					bundle.putParcelableArrayList(TYPE_APP_PROFILE, lst);
 					dialog.setArguments(bundle);
 
 					if (getActivity() != null) {
@@ -280,7 +280,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					if (actionBar != null) {
 						actionBar.setTitle(s.toString());
 						profile.setUserProfileTitle(s.toString());
-						LOG.debug("Typed name: " + s);
 					}
 				}
 			}
