@@ -71,8 +71,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private boolean isUserProfile = false;
 	private boolean isDataChanged = false;
 
-	private ProfileTypeDialogListener profileTypeDialogListener = null;
+	private ProfileTypeDialogListener navTypeListener = null;
 	private IconIdListener iconIdListener = null;
+	private ProfileTypeDialogListener baseTypeListener = null;
 
 	private ImageView profileIcon;
 	private LinearLayout profileIconBtn;
@@ -96,6 +97,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private Button cancelBtnSV;
 	private Button saveButtonSV;
 
+	boolean isNightMode;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,6 +111,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			profile = new TempApplicationProfile(mode, isNew, isUserProfile);
 
 		}
+		isNightMode =  !app.getSettings().isLightContent();
 		routingProfiles = getRoutingProfiles();
 	}
 
@@ -115,7 +119,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 		@Nullable Bundle savedInstanceState) {
-		final boolean isNightMode = !app.getSettings().isLightContent();
+
 
 		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
 
@@ -194,16 +198,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				if (isUserProfile || isNew) {
 					final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
-					dialog.setProfileTypeListener(new ProfileTypeDialogListener() {
-						@Override
-						public void onSelectedType(int pos) {
-							String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
-								.get(pos).getStringKey();
-							setupBaseProfileView(key);
-							profile.parent = ApplicationMode
-								.valueOfStringKey(key, ApplicationMode.DEFAULT);
-						}
-					});
+					dialog.setProfileTypeListener(baseTypeListener);
 					Bundle bundle = new Bundle();
 					bundle.putParcelableArrayList(TYPE_APP_PROFILE,
 						SettingsProfileFragment.getBaseProfiles(getMyApplication()));
@@ -268,36 +263,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId, iconColor));
 
-		profileTypeDialogListener = new ProfileTypeDialogListener() {
-			@Override
-			public void onSelectedType(int pos) {
-				isDataChanged = true;
-				for (int i = 0; i < routingProfiles.size(); i++) {
-					if (i == pos) {
-						routingProfiles.get(i).setSelected(true);
-					} else {
-						routingProfiles.get(i).setSelected(false);
-					}
-				}
-				selectedRoutingProfile = routingProfiles.get(pos);
-				navTypeEt.setText(selectedRoutingProfile.getName());
-				LOG.debug(routingProfiles);
-				profile.setRoutingProfile(selectedRoutingProfile);
-			}
-		};
-
-		iconIdListener = new IconIdListener() {
-			@Override
-			public void selectedIconId(int iconRes) {
-				isDataChanged = true;
-				profile.setIconId(iconRes);
-				profileIcon.setImageDrawable(app.getUIUtilities().getIcon(iconRes,
-					isNightMode ? R.color.active_buttons_and_links_dark
-						: R.color.active_buttons_and_links_light));
-				profile.setIconId(iconRes);
-			}
-		};
-
 		profileNameEt.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -325,8 +290,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (isNew || isUserProfile) {
-					final ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
-					fragment.setProfileTypeListener(profileTypeDialogListener);
+					ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
+					fragment.setProfileTypeListener(navTypeListener);
 					Bundle bundle = new Bundle();
 					bundle.putParcelableArrayList("routing_profiles", routingProfiles);
 					fragment.setArguments(bundle);
@@ -468,10 +433,89 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
-
 		return view;
 	}
 
+	@Override
+	public void onResume() {
+		LOG.debug("onResume - EditProfileFragment");
+
+		baseTypeListener = new ProfileTypeDialogListener() {
+			@Override
+			public void onSelectedType(int pos) {
+				String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
+					.get(pos).getStringKey();
+				setupBaseProfileView(key);
+				profile.parent = ApplicationMode
+					.valueOfStringKey(key, ApplicationMode.DEFAULT);
+			}
+		};
+
+		navTypeListener = new ProfileTypeDialogListener() {
+			@Override
+			public void onSelectedType(int pos) {
+				updateRoutingProfile(pos);
+			}
+		};
+
+		iconIdListener = new IconIdListener() {
+			@Override
+			public void selectedIconId(int iconRes) {
+				isDataChanged = true;
+				profile.setIconId(iconRes);
+				profileIcon.setImageDrawable(app.getUIUtilities().getIcon(iconRes,
+					isNightMode ? R.color.active_buttons_and_links_dark
+						: R.color.active_buttons_and_links_light));
+				profile.setIconId(iconRes);
+			}
+		};
+		super.onResume();
+	}
+
+	IconIdListener getIconListener() {
+		if (iconIdListener == null) {
+			iconIdListener = new IconIdListener() {
+				@Override
+				public void selectedIconId(int iconRes) {
+					isDataChanged = true;
+					profile.setIconId(iconRes);
+					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(iconRes,
+						isNightMode ? R.color.active_buttons_and_links_dark
+							: R.color.active_buttons_and_links_light));
+					profile.setIconId(iconRes);
+				}
+			};
+		}
+
+		return iconIdListener;
+	}
+
+	ProfileTypeDialogListener getBaseProfileListener() {
+		if (baseTypeListener == null) {
+			baseTypeListener = new ProfileTypeDialogListener() {
+				@Override
+				public void onSelectedType(int pos) {
+					String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
+						.get(pos).getStringKey();
+					setupBaseProfileView(key);
+					profile.parent = ApplicationMode
+						.valueOfStringKey(key, ApplicationMode.DEFAULT);
+				}
+			};
+		}
+		return baseTypeListener;
+	}
+
+	ProfileTypeDialogListener getNavProfileListener() {
+		if (navTypeListener == null) {
+			navTypeListener = new ProfileTypeDialogListener() {
+				@Override
+				public void onSelectedType(int pos) {
+					updateRoutingProfile(pos);}
+			};
+		}
+		return navTypeListener;
+	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -487,6 +531,20 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			scrollContainer.requestFocus();
 		}
 
+	}
+
+	void updateRoutingProfile(int pos) {
+		isDataChanged = true;
+		for (int i = 0; i < routingProfiles.size(); i++) {
+			if (i == pos) {
+				routingProfiles.get(i).setSelected(true);
+			} else {
+				routingProfiles.get(i).setSelected(false);
+			}
+		}
+		selectedRoutingProfile = routingProfiles.get(pos);
+		navTypeEt.setText(selectedRoutingProfile.getName());
+		profile.setRoutingProfile(selectedRoutingProfile);
 	}
 
 	void activateMode(ApplicationMode mode) {
@@ -540,8 +598,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			);
 			return false;
 		}
-
-		//check for duplicates
 
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
 			if (m.getUserProfileName() != null && getActivity() != null) {
@@ -706,7 +762,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 		return profilesObjects;
 	}
-
 
 	private class TempApplicationProfile {
 

@@ -7,6 +7,8 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 
 public class SettingsProfileActivity extends OsmandActionBarActivity {
 
+	public static final String SETTINGS_PROFILE_FRAGMENT_TAG = "settingsProfileFragment";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
@@ -16,7 +18,7 @@ public class SettingsProfileActivity extends OsmandActionBarActivity {
 		if (savedInstanceState == null) {
 			SettingsProfileFragment profileFragment = new SettingsProfileFragment();
 			profileFragment.setArguments(getIntent().getExtras());
-			getSupportFragmentManager().beginTransaction().add(android.R.id.content, profileFragment).commit();
+			getSupportFragmentManager().beginTransaction().add(android.R.id.content, profileFragment, SETTINGS_PROFILE_FRAGMENT_TAG).commit();
 		}
 	}
 

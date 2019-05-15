@@ -140,10 +140,40 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		typeListener = new ProfileTypeDialogListener() {
+			@Override
+			public void onSelectedType(int pos) {
+				LOG.debug("Base profile: " + baseProfiles.get(pos).getName());
+				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+				intent.putExtra("isNew", true);
+				intent.putExtra("isUserProfile", true);
+				intent.putExtra("stringKey", baseProfiles.get(pos).getStringKey());
+				startActivity(intent);
+			}
+		};
+
 		allAppModes = ApplicationMode.allPossibleValues();
 		allAppModes.remove(ApplicationMode.DEFAULT);
 
 		adapter.updateItemsList(allAppModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
+	}
+
+	ProfileTypeDialogListener getBaseProfileListener() {
+		if (typeListener == null) {
+			typeListener = new ProfileTypeDialogListener() {
+				@Override
+				public void onSelectedType(int pos) {
+					LOG.debug("Base profile: " + baseProfiles.get(pos).getName());
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra("isNew", true);
+					intent.putExtra("isUserProfile", true);
+					intent.putExtra("stringKey", baseProfiles.get(pos).getStringKey());
+					startActivity(intent);
+				}
+			};
+		}
+		return typeListener;
 	}
 
 	static ArrayList<BaseProfile> getBaseProfiles(Context ctx) {

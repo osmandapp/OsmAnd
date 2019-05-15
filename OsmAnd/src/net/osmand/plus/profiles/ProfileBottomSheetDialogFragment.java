@@ -56,7 +56,6 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				profiles = args.getParcelableArrayList(TYPE_APP_PROFILE);
 				type = TYPE_APP_PROFILE;
 			} else {
-				//todo notify on empty list;
 				dismiss();
 			}
 
@@ -88,7 +87,11 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		listListener = new ProfileTypeDialogListener() {
 			@Override
 			public void onSelectedType(int pos) {
+				if (listener == null) {
+					resetListener();
+				}
 				listener.onSelectedType(pos);
+
 				dismiss();
 			}
 		};
@@ -109,8 +112,9 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
+	public void onResume() {
+		super.onResume();
+		LOG.debug("onResume - ProfileBottomSheetDialogFragment");
 	}
 
 	private static boolean isNightMode(OsmandApplication ctx) {
@@ -154,7 +158,8 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					listener.onSelectedType(position);
+						listener.onSelectedType(position);
+
 					holder.radioButton.setChecked(true);
 
 					if (item instanceof RoutingProfile) {
@@ -190,6 +195,22 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		@Override
 		public int getItemCount() {
 			return items.size();
+		}
+	}
+
+	void resetListener() {
+		if (getActivity() != null && getActivity() instanceof EditProfileActivity) {
+			EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
+				.findFragmentByTag(EditProfileActivity.EDIT_PROFILE_FRAGMENT_TAG);
+			if (type.equals(TYPE_APP_PROFILE)) {
+				listener = f.getBaseProfileListener();
+			} else if (type.equals(TYPE_NAV_PROFILE)) {
+				listener = f.getNavProfileListener();
+			}
+		} else if (getActivity() != null && getActivity() instanceof SettingsProfileActivity) {
+			SettingsProfileFragment f = (SettingsProfileFragment) getActivity().getSupportFragmentManager()
+				.findFragmentByTag(SettingsProfileActivity.SETTINGS_PROFILE_FRAGMENT_TAG);
+			listener = f.getBaseProfileListener();
 		}
 	}
 

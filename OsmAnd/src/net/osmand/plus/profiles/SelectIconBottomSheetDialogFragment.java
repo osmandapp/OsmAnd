@@ -72,6 +72,13 @@ public class SelectIconBottomSheetDialogFragment extends BottomSheetDialogFragme
 		listListener = new IconIdListener() {
 			@Override
 			public void selectedIconId(int iconRes) {
+				if (listener == null) {
+					if (getActivity() != null && getActivity() instanceof EditProfileActivity) {
+						EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
+							.findFragmentByTag(EditProfileActivity.EDIT_PROFILE_FRAGMENT_TAG);
+						listener = f.getIconListener();
+					}
+				}
 				listener.selectedIconId(iconRes);
 				dismiss();
 			}
