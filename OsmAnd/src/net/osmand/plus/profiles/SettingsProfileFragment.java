@@ -143,7 +143,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		allAppModes = ApplicationMode.allPossibleValues();
 		allAppModes.remove(ApplicationMode.DEFAULT);
 
-		adapter.updateItemsList(allAppModes);
+		adapter.updateItemsList(allAppModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
 	}
 
 	static ArrayList<BaseProfile> getBaseProfiles(Context ctx) {

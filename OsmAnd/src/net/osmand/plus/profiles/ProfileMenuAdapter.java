@@ -42,9 +42,11 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		notifyDataSetChanged();
 	}
 
-	public void updateItemsList(List<ApplicationMode> newList) {
+	public void updateItemsList(List<ApplicationMode> newList, Set<ApplicationMode> selectedItems) {
 		items.clear();
+		this.selectedItems.clear();
 		items.addAll(newList);
+		this.selectedItems.addAll(selectedItems);
 		notifyDataSetChanged();
 	}
 

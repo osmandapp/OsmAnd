@@ -534,6 +534,4 @@ public class ApplicationMode {
 		ApplicationMode.saveCustomModeToSettings(app.getSettings());
 	}
 
-
-
 }
