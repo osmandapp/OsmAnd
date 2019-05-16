@@ -1066,7 +1066,10 @@ public class MapInfoWidgetsFactory {
 
 		@SuppressLint("SetTextI18n")
 		public boolean updateInfo() {
-			boolean visible = settings.SHOW_COORDINATES_WIDGET.get();
+			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && map.getContextMenu().shouldShowTopControls()
+					&& !map.getMapRouteInfoMenu().isVisible() && !map.isTopToolbarActive()
+					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible;
+
 			updateVisibility(visible);
 			if (visible) {
 				lastKnownLocation = locationProvider.getLastKnownLocation();
@@ -1120,7 +1123,6 @@ public class MapInfoWidgetsFactory {
 					GPSInfo gpsInfo = locationProvider.getGPSInfo();
 					latitudeText.setText(map.getString(R.string.searching_gps) + "…" + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites);
 				}
-
 			}
 			return false;
 		}
