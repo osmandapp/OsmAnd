@@ -1067,7 +1067,7 @@ public class MapInfoWidgetsFactory {
 		@SuppressLint("SetTextI18n")
 		public boolean updateInfo() {
 			boolean visible = settings.SHOW_COORDINATES_WIDGET.get() && map.getContextMenu().shouldShowTopControls()
-					&& !map.getMapRouteInfoMenu().isVisible() && !map.isTopToolbarActive()
+					&& map.getMapRouteInfoMenu().shouldShowTopControls() && !map.isTopToolbarActive()
 					&& !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible;
 
 			updateVisibility(visible);
