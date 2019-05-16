@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="searching_gps">Searching GPS</string>
+    <string name="coordinates_widget">Coordinates widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
     <string name="files_copied">Copied %1$d files (%2$s).</string>
     <string name="files_failed">Failed to copy %1$d files (%2$s).</string>

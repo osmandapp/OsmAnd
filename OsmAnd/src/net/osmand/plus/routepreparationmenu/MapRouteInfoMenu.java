@@ -1820,6 +1820,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return directionInfo;
 	}
 
+	public boolean shouldShowTopControls() {
+		return shouldShowTopControls(isVisible());
+	}
+
+	public boolean shouldShowTopControls(boolean menuVisible) {
+		return !menuVisible || !portraitMode || getCurrentMenuState() == MenuState.HEADER_ONLY;
+	}
+
 	public boolean isVisible() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {

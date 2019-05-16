@@ -153,25 +153,12 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public boolean updateVisibility(boolean visible) {
-		boolean res = updateVisibility(topBar, visible);
+		boolean res = AndroidUiHelper.updateVisibility(topBar, visible);
 		if (visible != cachedTopBarVisibility) {
 			cachedTopBarVisibility = visible;
 			map.updateStatusBarColor();
 		}
 		return res;
-	}
-
-	public boolean updateVisibility(View v, boolean visible) {
-		if (visible != (v.getVisibility() == View.VISIBLE)) {
-			if (visible) {
-				v.setVisibility(View.VISIBLE);
-			} else {
-				v.setVisibility(View.GONE);
-			}
-			v.invalidate();
-			return true;
-		}
-		return false;
 	}
 
 	public int getTopBarHeight() {
@@ -227,9 +214,9 @@ public class MapMarkersWidgetsFactory {
 				}
 			}
 			updateUI(loc, heading, marker, arrowImg2nd, distText2nd, okButton2nd, addressText2nd, false, customLocation != null);
-			updateVisibility(topBar2nd, true);
+			AndroidUiHelper.updateVisibility(topBar2nd, true);
 		} else {
-			updateVisibility(topBar2nd, false);
+			AndroidUiHelper.updateVisibility(topBar2nd, false);
 		}
 
 		updateVisibility(true);
@@ -274,7 +261,7 @@ public class MapMarkersWidgetsFactory {
 		if (txt != null) {
 			distText.setText(txt);
 		}
-		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
+		AndroidUiHelper.updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
 		PointDescription pd = marker.getPointDescription(map);
