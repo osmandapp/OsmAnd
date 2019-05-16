@@ -447,7 +447,7 @@ public class TransportRoutingHelper {
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
 			OsmandSettings settings = params.ctx.getSettings();
-			for(Map.Entry<String, GeneralRouter.RoutingParameter> e : config.getRouter(params.mode.getStringKey()).getParameters().entrySet()){
+			for(Map.Entry<String, GeneralRouter.RoutingParameter> e : config.getRouter(params.mode.getRoutingProfile()).getParameters().entrySet()){
 				String key = e.getKey();
 				GeneralRouter.RoutingParameter pr = e.getValue();
 				String vl;

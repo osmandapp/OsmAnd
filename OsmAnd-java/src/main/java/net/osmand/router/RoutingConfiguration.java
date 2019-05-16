@@ -22,8 +22,7 @@ import java.util.Stack;
 public class RoutingConfiguration {
 
 	private static final Log LOG = PlatformUtil.getLog(RoutingConfiguration.class);
-
-	
+	public static final String DEFAULT_ROUTING_PROFILES = "default_routing_profiles";
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
 	public final float DEVIATION_RADIUS = 3000;
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
@@ -50,14 +49,14 @@ public class RoutingConfiguration {
 	
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
-	
+
 
 	public static class Builder {
 		// Design time storage
-		private static String defaultRouter = "";
-		private static Map<String, GeneralRouter> routers = new LinkedHashMap<>();
-		private static Map<String, String> attributes = new LinkedHashMap<>();
-		private static HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
+		private String defaultRouter = "";
+		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
+		private Map<String, String> attributes = new LinkedHashMap<>();
+		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
 
 		// Example
 //		{
@@ -129,9 +128,9 @@ public class RoutingConfiguration {
 		public String getDefaultRouter() {
 			return defaultRouter;
 		}
-		
-		public GeneralRouter getRouter(String applicationMode) {
-			return routers.get(applicationMode);
+
+		public GeneralRouter getRouter(String routingProfileName) {
+			return routers.get(routingProfileName);
 			
 		}
 
@@ -173,14 +172,12 @@ public class RoutingConfiguration {
 		return DEFAULT;
 	}
 
-	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
-
-		return parseFromInputStream(is, null);
+	static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
+		return parseFromInputStream(is, null, new RoutingConfiguration.Builder());
 	}
 
-	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is, String filename) throws IOException, XmlPullParserException {
+	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is, String filename, RoutingConfiguration.Builder config) throws IOException, XmlPullParserException {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
-		RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();
 		GeneralRouter currentRouter = null;
 		RouteDataObjectAttribute currentAttribute = null;
 		String preType = null;
@@ -191,7 +188,7 @@ public class RoutingConfiguration {
 			if (tok == XmlPullParser.START_TAG) {
 				String name = parser.getName();
 				if ("osmand_routing_config".equals(name)) {
-					Builder.defaultRouter = parser.getAttributeValue("", "defaultProfile");
+					config.defaultRouter = parser.getAttributeValue("", "defaultProfile");
 				} else if ("routingProfile".equals(name)) {
 					currentRouter = parseRoutingProfile(parser, config, filename);
 				} else if ("attribute".equals(name)) {
@@ -308,10 +305,8 @@ public class RoutingConfiguration {
 		}
 	}
 
-	private static int count = 0;
-
 	private static GeneralRouter parseRoutingProfile(XmlPullParser parser, final RoutingConfiguration.Builder config, String filename) {
-		String currentSelectedRouter = parser.getAttributeValue("", "name");
+		String currentSelectedRouterName = parser.getAttributeValue("", "name");
 		Map<String, String> attrs = new LinkedHashMap<String, String>();
 		for(int i=0; i< parser.getAttributeCount(); i++) {
 			attrs.put(parser.getAttributeName(i), parser.getAttributeValue(i));
@@ -319,15 +314,13 @@ public class RoutingConfiguration {
 		GeneralRouterProfile c = Algorithms.parseEnumValue(GeneralRouterProfile.values(), 
 				parser.getAttributeValue("", "baseProfile"), GeneralRouterProfile.CAR);
 		GeneralRouter currentRouter = new GeneralRouter(c, attrs);
-		currentRouter.setProfileName(currentSelectedRouter);
+		currentRouter.setProfileName(currentSelectedRouterName);
 		if (filename != null) {
 			currentRouter.setFilename(filename);
+			currentSelectedRouterName = filename + "//" + currentSelectedRouterName;
 		}
-		if (Builder.routers.containsKey(currentSelectedRouter)) {
-			count++;
-			currentSelectedRouter = currentSelectedRouter + currentRouter.hashCode();
-		}
-		Builder.routers.put(currentSelectedRouter, currentRouter);
+
+		config.routers.put(currentSelectedRouterName, currentRouter);
 		return currentRouter;
 	}
 
@@ -336,7 +329,7 @@ public class RoutingConfiguration {
 			currentRouter.addAttribute(parser.getAttributeValue("", "name"), 
 					parser.getAttributeValue("", "value"));
 		} else {
-			Builder.attributes.put(parser.getAttributeValue("", "name"),
+			config.attributes.put(parser.getAttributeValue("", "name"),
 					parser.getAttributeValue("", "value"));
 		}
 	}

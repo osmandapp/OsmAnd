@@ -551,40 +551,34 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	@SuppressLint("StaticFieldLeak")
-	net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
+
+	net.osmand.router.RoutingConfiguration.Builder getLazyRoutingConfig() {
 		long tm = System.currentTimeMillis();
 		try {
-			new AsyncTask<Void, Void, Void>() {
-				@Override
-				protected Void doInBackground(Void... voids) {
-					RoutingConfiguration.getDefault();
-					final File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-					if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
-						File[] fl = routingFolder.listFiles();
-						for (File f : fl) {
-							if (f.isFile() && f.canRead()) {
-								try {
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName());
-								} catch (XmlPullParserException | IOException e) {
-									throw new IllegalStateException(e);
-								}
-							}
+			RoutingConfiguration.Builder config = RoutingConfiguration.getDefault();
+			File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+			if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
+				File[] fl = routingFolder.listFiles();
+				for (File f : fl) {
+					if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
+						try {
+							RoutingConfiguration
+								.parseFromInputStream(new FileInputStream(f), f.getName(), config);
+						} catch (XmlPullParserException | IOException e) {
+							throw new IllegalStateException(e);
 						}
 					}
-					return null;
 				}
-			}.executeOnExecutor(Executors.newSingleThreadExecutor(), (Void) null);
-
-			return new RoutingConfiguration.Builder();
-
+			}
+			return config;
 		} finally {
 			long te = System.currentTimeMillis();
-			if(te - tm > 30) {
+			if (te - tm > 30) {
 				System.err.println("Default routing config init took " + (te - tm) + " ms");
 			}
 		}
 	}
+
 
 	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
 															final ApplicationMode applicationMode,

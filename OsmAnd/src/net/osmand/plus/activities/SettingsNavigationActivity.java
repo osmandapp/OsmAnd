@@ -358,9 +358,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 
 	public static GeneralRouter getRouter(net.osmand.router.RoutingConfiguration.Builder builder, ApplicationMode am) {
-		GeneralRouter router = builder.getRouter(am.getStringKey());
+		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
 		if(router == null && am.getParent() != null) {
-			router = builder.getRouter(am.getParent().getStringKey());
+			router = builder.getRouter(am.getParent().getRoutingProfile());
 		}
 		return router;
 	}

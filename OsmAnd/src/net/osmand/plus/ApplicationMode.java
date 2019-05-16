@@ -38,39 +38,23 @@ public class ApplicationMode {
 			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
 
 	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
-			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark).reg();
+			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark).setRoutingProfile("car").reg();
 
 	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark).reg();
+			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark).setRoutingProfile("bicycle").reg();
 
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
-			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark).reg();
+			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark).setRoutingProfile("pedestrian").reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = create(R.string.app_mode_public_transport, "public_transport").
-			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark).reg();
+			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark).setRoutingProfile("public_transport").reg();
 
 	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).nauticalLocation().
-			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).reg();
+			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).setRoutingProfile("boat").reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
 
-
-//---------------------------------------------------------------------------------------------------------------
-//	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
-//			icon(R.drawable.map_action_trekking_dark, R.drawable.ic_action_trekking_dark).reg();
-//
-//	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
-//			carLocation().parent(CAR).
-//			icon(R.drawable.map_action_motorcycle_dark, R.drawable.ic_action_motorcycle_dark).reg();
-//
-//	public static final ApplicationMode TRUCK = create(R.string.app_mode_truck, "truck").speed(15.3f, 40).
-//			carLocation().parent(CAR).
-//			icon(R.drawable.map_action_truck_dark, R.drawable.ic_action_truck_dark).reg();
-//
-//	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
-//			carLocation().icon(R.drawable.map_action_train, R.drawable.ic_action_train).reg();
-	String profile = "profile: ";
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, PUBLIC_TRANSPORT};
 		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, PUBLIC_TRANSPORT};
@@ -115,8 +99,6 @@ public class ApplicationMode {
 		regWidgetVisibility("bgService", none);
 	}
 
-
-
 	public static class ApplicationModeBuilder {
 		private ApplicationMode applicationMode;
 
@@ -137,29 +119,21 @@ public class ApplicationMode {
 			return this;
 		}
 
-
 		public ApplicationModeBuilder parent(ApplicationMode parent) {
 			applicationMode.parent = parent;
+			String parentTypeName = parent.getStringKey();
+			if (parentTypeName.equals("car") || parentTypeName.equals("aircraft")) {
+				this.carLocation();
+			} else if (parentTypeName.equals("bicycle")) {
+				this.bicycleLocation();
+			} else if (parentTypeName.equals("boat")) {
+				this.nauticalLocation();
+			} else {
+				this.defLocation();
+			}
 			return this;
 		}
 
-		/**
-		 * @param type - id of set of icons for different navigation styles:
-		 *               1 - car, 2 - bicicle, 3 - nautical, any other - default
-		 */
-		public ApplicationModeBuilder setLocationAndBearingIcons(int type) {
-			applicationMode.mapIconsSetId = type;
-			switch (type) {
-				case 1:
-					return this.carLocation();
-				case 2:
-					return this.bicycleLocation();
-				case 3:
-					return this.nauticalLocation();
-				default:
-					return this.defLocation();
-			}
-		}
 
 		public ApplicationModeBuilder carLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
@@ -477,7 +451,6 @@ public class ApplicationMode {
 	@Expose private final int key;
 	@Expose private final String stringKey;
 	@Expose private String userProfileName;
-	@Expose private int mapIconsSetId = 0;
 	@Expose private ApplicationMode parent;
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;

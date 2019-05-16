@@ -635,19 +635,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			.parent(profile.parent)
 			.icon(profile.iconId, profile.iconId);
 
-		switch (profile.parent.getStringKey()) {
-			case "car":
-			case "aircraft":
-				builder.setLocationAndBearingIcons(1);
-				break;
-			case "bicycle":
-				builder.setLocationAndBearingIcons(2);
-				break;
-			case "boat":
-				builder.setLocationAndBearingIcons(3);
-				break;
-		}
-
 		if (profile.getRoutingProfile() != null) {
 			builder.setRoutingProfile(profile.getRoutingProfile().getStringKey());
 		}

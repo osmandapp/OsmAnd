@@ -809,7 +809,7 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
 		if(defaultRoutingConfig == null) {
-			defaultRoutingConfig = appInitializer.getLazyDefaultRoutingConfig();
+			defaultRoutingConfig = appInitializer.getLazyRoutingConfig();
 		}
 		return defaultRoutingConfig;
 	}
