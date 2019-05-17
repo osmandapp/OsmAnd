@@ -248,7 +248,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			cat.addPreference(fastRoute);
 		} else {
 			ApplicationMode am = settings.getApplicationMode();
-			GeneralRouter router = getRouter(getMyApplication().getDefaultRoutingConfig(), am);
+			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();

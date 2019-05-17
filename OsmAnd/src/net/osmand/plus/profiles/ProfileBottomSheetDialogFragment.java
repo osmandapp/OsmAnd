@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import java.util.ArrayList;
 import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment {
@@ -33,13 +33,18 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	private TextView titleTV;
 	private TextView fragmentDescriptionTV;
 
+	private String selectedKey = null;
 
+	public final static String DIALOG_TYPE = "dialog_type";
 	public final static String TYPE_APP_PROFILE = "base_profiles";
 	public final static String TYPE_NAV_PROFILE = "routing_profiles";
+	public final static String SELECTED_KEY = "selected_base";
 	private String type;
 
-	public void setProfileTypeListener(ProfileTypeDialogListener listener) {
-		this.listener = listener;
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		profiles = new ArrayList<>();
 	}
 
 	@Nullable
@@ -49,16 +54,19 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 		Bundle args = getArguments();
 		if (args != null) {
-			if (args.get(TYPE_NAV_PROFILE) != null) {
-				profiles = args.getParcelableArrayList(TYPE_NAV_PROFILE);
-				type = TYPE_NAV_PROFILE;
-			} else if (args.get(TYPE_APP_PROFILE) != null) {
-				profiles = args.getParcelableArrayList(TYPE_APP_PROFILE);
-				type = TYPE_APP_PROFILE;
+			if (args.get(DIALOG_TYPE) != null) {
+				type = args.getString(DIALOG_TYPE);
 			} else {
 				dismiss();
 			}
 
+			selectedKey = args.getString(SELECTED_KEY, "");
+
+			if (type.equals(TYPE_NAV_PROFILE) && getMyApplication() != null) {
+				profiles.addAll(EditProfileFragment.getRoutingProfiles(getMyApplication()));
+			} else if (type.equals(TYPE_APP_PROFILE)) {
+				profiles.addAll(SettingsProfileFragment.getBaseProfiles(getActivity()));
+			}
 		}
 
 		final int themeRes = getMyApplication().getSettings().isLightContent()
@@ -71,12 +79,11 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		fragmentDescriptionTV = view.findViewById(R.id.dialog_description_text);
 
 		if (type.equals(TYPE_APP_PROFILE)) {
-			titleTV.setText("Select base profile");
+			titleTV.setText(R.string.select_base_profile_dialog_title);
 			fragmentDescriptionTV.setVisibility(View.VISIBLE);
-			fragmentDescriptionTV.setText(
-				"The new Application Profile should be based on one of the default App Profiles. Selected Profile defines basic settings: setup of Widgets, units of speed and distance. In string below Profile's name, you could learn which Navigation Profiles are suitable for each Application Profile.");
+			fragmentDescriptionTV.setText(R.string.select_base_profile_dialog_message);
 		} else if (type.equals(TYPE_NAV_PROFILE)) {
-			titleTV.setText("Select navigation type");
+			titleTV.setText(R.string.select_nav_profile_dialog_title);
 		}
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -88,10 +95,9 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			@Override
 			public void onSelectedType(int pos) {
 				if (listener == null) {
-					resetListener();
+					getListener();
 				}
 				listener.onSelectedType(pos);
-
 				dismiss();
 			}
 		};
@@ -109,12 +115,6 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		});
 
 		return view;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		LOG.debug("onResume - ProfileBottomSheetDialogFragment");
 	}
 
 	private static boolean isNightMode(OsmandApplication ctx) {
@@ -147,13 +147,7 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position) {
 			final ProfileDataObject item = items.get(position);
 			holder.title.setText(item.getName());
-			if (item.isSelected()) {
-				holder.icon.setImageDrawable(getIcon(item.getIconRes(), isNightMode
-					? R.color.active_buttons_and_links_dark
-					: R.color.active_buttons_and_links_light));
-				} else {
-					holder.icon.setImageDrawable(getIcon(item.getIconRes(), R.color.icon_color));
-			}
+
 
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -162,7 +156,7 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 					holder.radioButton.setChecked(true);
 
-					if (item instanceof RoutingProfile) {
+					if (item instanceof RoutingProfileDataObject) {
 						items.get(position).setSelected(true);
 						items.get(previousSelection).setSelected(false);
 					}
@@ -171,25 +165,28 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				}
 			});
 
-			if(item instanceof RoutingProfile) {
-				if (((RoutingProfile) item).getFileName() != null) {
+			if(item instanceof RoutingProfileDataObject) {
+				if (((RoutingProfileDataObject) item).getFileName() != null) {
 					holder.descr
-						.setText(String.format("From %s", ((RoutingProfile) item).getFileName()));
+						.setText(String.format("From %s", ((RoutingProfileDataObject) item).getFileName()));
 				} else {
 					holder.descr
-						.setText(getResources().getString(R.string.osmand_default_routing));
+						.setText(item.getDescription());
 				}
 			} else {
 				holder.descr.setText(item.getDescription());
 			}
 
-			if (item.isSelected()) {
+			if (selectedKey != null && selectedKey.equals(item.getStringKey())) {
 				holder.radioButton.setChecked(true);
 				previousSelection = position;
+				holder.icon.setImageDrawable(getIcon(item.getIconRes(), isNightMode
+					? R.color.active_buttons_and_links_dark
+					: R.color.active_buttons_and_links_light));
 			} else {
 				holder.radioButton.setChecked(false);
+				holder.icon.setImageDrawable(getIcon(item.getIconRes(), R.color.icon_color));
 			}
-
 		}
 
 		@Override
@@ -198,7 +195,7 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		}
 	}
 
-	void resetListener() {
+	void getListener() {
 		if (getActivity() != null && getActivity() instanceof EditProfileActivity) {
 			EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
 				.findFragmentByTag(EditProfileActivity.EDIT_PROFILE_FRAGMENT_TAG);
@@ -231,6 +228,4 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	interface ProfileTypeDialogListener {
 		void onSelectedType(int pos);
 	}
-
-
 }

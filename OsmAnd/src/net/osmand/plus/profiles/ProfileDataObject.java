@@ -8,13 +8,15 @@ public class ProfileDataObject implements Parcelable {
 	private String name;
 	private String description;
 	private int iconRes;
+	private String stringKey;
 	private boolean isSelected;
 
-	public ProfileDataObject(String name, String description, int iconRes, boolean isSelected) {
+	public ProfileDataObject(String name, String description, String stringKey, int iconRes,  boolean isSelected) {
 		this.name = name;
 		this.iconRes = iconRes;
 		this.description = description;
 		this.isSelected = isSelected;
+		this.stringKey = stringKey;
 	}
 
 	protected ProfileDataObject(Parcel in) {
@@ -54,6 +56,10 @@ public class ProfileDataObject implements Parcelable {
 
 	public void setSelected(boolean selected) {
 		isSelected = selected;
+	}
+
+	public String getStringKey() {
+		return stringKey;
 	}
 
 	@Override

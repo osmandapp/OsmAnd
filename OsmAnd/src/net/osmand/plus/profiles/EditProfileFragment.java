@@ -1,7 +1,13 @@
 package net.osmand.plus.profiles;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
+import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
+import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -61,12 +67,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	public static final String NAV_CONFIG = "openNavConfigMenu";
 	public static final String SCREEN_CONFIG = "openScreenConfigMenu";
 	public static final String SELECTED_PROFILE = "editedProfile";
+	public static final String SELECTED_ICON = "selectedIcon";
 
-	TempApplicationProfile profile = null;
-	ApplicationMode mode = null;
-	ArrayList<RoutingProfile> routingProfiles;
 	OsmandApplication app;
-	RoutingProfile selectedRoutingProfile = null;
+
+	ApplicationMode mode = null;
+	TempApplicationProfile profile = null;
+	List<RoutingProfileDataObject> routingProfileDataObjects;
+	RoutingProfileDataObject selectedRoutingProfileDataObject = null;
 
 	private boolean isNew = false;
 	private boolean isUserProfile = false;
@@ -105,15 +113,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		if (getArguments() != null) {
-			String modeName = getArguments().getString("stringKey", "car");
-			isNew = getArguments().getBoolean("isNew", false);
-			isUserProfile = getArguments().getBoolean("isUserProfile", false);
+			String modeName = getArguments().getString(PROFILE_STRING_KEY, "car");
+			isNew = getArguments().getBoolean(IS_NEW_PROFILE, false);
+			isUserProfile = getArguments().getBoolean(IS_USER_PROFILE, false);
 			mode = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT);
 			profile = new TempApplicationProfile(mode, isNew, isUserProfile);
-
 		}
 		isNightMode =  !app.getSettings().isLightContent();
-		routingProfiles = getRoutingProfiles();
+		routingProfileDataObjects = getRoutingProfiles(app);
 	}
 
 	@Nullable
@@ -161,49 +168,42 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		String title = "New Profile";
 		int startIconId = R.drawable.map_world_globe_dark;
-
-		if (isUserProfile && !isNew) {
-			title = profile.getUserProfileTitle();
+		if (isNew) {
+			isDataChanged = true;
+			title = String.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
+			startIconId = profile.parent.getSmallIconDark();
+			profile.iconId = startIconId;
+		} else if (isUserProfile) {
+			title = profile.userProfileTitle;
 			profileNameEt.setText(title);
 			startIconId = profile.iconId;
 			isDataChanged = false;
-		} else if (isNew) {
-			isDataChanged = true;
-			title = String.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
-			startIconId = profile.getParent().getSmallIconDark();
-			profile.setIconId(startIconId);
-		} else if (profile.getKey() != -1) {
-			title = getResources().getString(profile.getKey());
-			profileNameEt.setText(profile.getKey());
-			startIconId = profile.getIconId();
+		} else if (profile.key != -1) {
+			title = getResources().getString(profile.key);
+			profileNameEt.setText(profile.key);
+			startIconId = profile.iconId;
 			clickBlockLayout.setClickable(true);
 		}
 
-		profile.setUserProfileTitle(title);
+		profile.userProfileTitle = title;
 		if (profile.parent != null) {
 			setupBaseProfileView(profile.parent.getStringKey());
-		} else if (profile.getKey() != -1) {
-			baseModeTitle.setText(profile.getKey());
+		} else if (profile.key != -1) {
+			baseModeTitle.setText(profile.key);
 			baseModeIcon.setImageDrawable(
-				app.getUIUtilities().getIcon(profile.getIconId(), R.color.icon_color));
+				app.getUIUtilities().getIcon(profile.iconId, R.color.icon_color));
 		}
 		typeSelectionBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (isUserProfile || isNew) {
 					final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
-					dialog.setProfileTypeListener(baseTypeListener);
 					Bundle bundle = new Bundle();
-					ArrayList<BaseProfile> lst = SettingsProfileFragment.getBaseProfiles(getMyApplication());
-					for (BaseProfile bp : lst) {
-						LOG.debug("Base");
-						if (bp.getStringKey().equals(profile.getParent().getStringKey())) {
-							bp.setSelected(true);
-						}
+					if (profile.parent != null) {
+						bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
 					}
-					bundle.putParcelableArrayList(TYPE_APP_PROFILE, lst);
+					bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILE);
 					dialog.setArguments(bundle);
-
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
 							.add(dialog, "select_base_type").commitAllowingStateLoss();
@@ -211,18 +211,19 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
+
 		if (!Algorithms.isEmpty(mode.getRoutingProfile())) {
-			for (RoutingProfile r : routingProfiles) {
+			for (RoutingProfileDataObject r : routingProfileDataObjects) {
 				if (mode.getRoutingProfile().equals(r.getStringKey())) {
-					profile.setRoutingProfile(r);
+					profile.routingProfileDataObject = r;
 					r.setSelected(true);
 					navTypeEt.setText(r.getName());
 					navTypeEt.clearFocus();
 				}
 			}
 		} else {
-			for (RoutingProfile rp : routingProfiles) {
-				if (profile.getStringKey().equals(rp.getStringKey())) {
+			for (RoutingProfileDataObject rp : routingProfileDataObjects) {
+				if (profile.stringKey.equals(rp.getStringKey())) {
 					switch (rp.getStringKey()) {
 						case "car":
 							navTypeEt.setText(R.string.rendering_value_car_name);
@@ -246,8 +247,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 		profileNameEt.clearFocus();
 
-		if (getActivity() != null
-			&& ((EditProfileActivity) getActivity()).getSupportActionBar() != null) {
+		if (getActivity() != null && ((EditProfileActivity) getActivity()).getSupportActionBar() != null) {
 			((EditProfileActivity) getActivity()).getSupportActionBar().setTitle(title);
 			((EditProfileActivity) getActivity()).getSupportActionBar().setElevation(5.0f);
 		}
@@ -265,13 +265,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		profileNameEt.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (getActivity() instanceof OsmandActionBarActivity) {
@@ -279,7 +275,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 						.getSupportActionBar();
 					if (actionBar != null) {
 						actionBar.setTitle(s.toString());
-						profile.setUserProfileTitle(s.toString());
+						profile.userProfileTitle = s.toString();
 					}
 				}
 			}
@@ -290,15 +286,16 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				if (isNew || isUserProfile) {
 					ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
-					fragment.setProfileTypeListener(navTypeListener);
 					Bundle bundle = new Bundle();
-					bundle.putParcelableArrayList("routing_profiles", routingProfiles);
+					if (profile.routingProfileDataObject != null) {
+						bundle.putString(SELECTED_KEY, profile.routingProfileDataObject.getStringKey());
+					}
+					bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
 					fragment.setArguments(bundle);
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
 							.add(fragment, "select_nav_type").commitAllowingStateLoss();
 					}
-
 					navTypeEt.setCursorVisible(false);
 					navTypeEt.setTextIsSelectable(false);
 					navTypeEt.clearFocus();
@@ -313,7 +310,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				final SelectIconBottomSheetDialogFragment iconSelectDialog = new SelectIconBottomSheetDialogFragment();
 				iconSelectDialog.setIconIdListener(iconIdListener);
 				Bundle bundle = new Bundle();
-				bundle.putInt("selectedIcon", profile.getIconId());
+				bundle.putInt(SELECTED_ICON, profile.iconId);
 				iconSelectDialog.setArguments(bundle);
 				if (getActivity() != null) {
 					getActivity().getSupportFragmentManager().beginTransaction()
@@ -333,7 +330,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
-					i.putExtra(SELECTED_PROFILE, profile.getStringKey());
+					i.putExtra(SELECTED_PROFILE, profile.stringKey);
 					startActivity(i);
 				}
 			}
@@ -349,7 +346,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					getSettings().APPLICATION_MODE.set(mode);
 					Intent i = new Intent(getActivity(), MapActivity.class);
 					i.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
-					i.putExtra(SELECTED_PROFILE, profile.getStringKey());
+					i.putExtra(SELECTED_PROFILE, profile.stringKey);
 					startActivity(i);
 				}
 			}
@@ -366,7 +363,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					Intent i = new Intent(getActivity(), SettingsNavigationActivity.class);
 					i.putExtra(INTENT_SKIP_DIALOG, true);
 					i.putExtra(OPEN_CONFIG_ON_MAP, NAV_CONFIG);
-					i.putExtra(SELECTED_PROFILE, profile.getStringKey());
+					i.putExtra(SELECTED_PROFILE, profile.stringKey);
 					startActivity(i);
 				}
 			}
@@ -414,7 +411,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onGlobalLayout() {
 				int marginShow = 66;
-				int marginHide = 2;
+				int marginHide = 0;
 
 				float d = getResources().getDisplayMetrics().density;
 				Rect r = new Rect();
@@ -437,16 +434,12 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	@Override
 	public void onResume() {
-		LOG.debug("onResume - EditProfileFragment");
-
 		baseTypeListener = new ProfileTypeDialogListener() {
 			@Override
 			public void onSelectedType(int pos) {
-				String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
-					.get(pos).getStringKey();
+				String key = SettingsProfileFragment.getBaseProfiles(getMyApplication()).get(pos).getStringKey();
 				setupBaseProfileView(key);
-				profile.parent = ApplicationMode
-					.valueOfStringKey(key, ApplicationMode.DEFAULT);
+				profile.parent = ApplicationMode.valueOfStringKey(key, ApplicationMode.DEFAULT);
 			}
 		};
 
@@ -461,11 +454,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void selectedIconId(int iconRes) {
 				isDataChanged = true;
-				profile.setIconId(iconRes);
+				profile.iconId = iconRes;
 				profileIcon.setImageDrawable(app.getUIUtilities().getIcon(iconRes,
 					isNightMode ? R.color.active_buttons_and_links_dark
 						: R.color.active_buttons_and_links_light));
-				profile.setIconId(iconRes);
 			}
 		};
 		super.onResume();
@@ -477,15 +469,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				@Override
 				public void selectedIconId(int iconRes) {
 					isDataChanged = true;
-					profile.setIconId(iconRes);
+					profile.iconId = iconRes;
 					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(iconRes,
 						isNightMode ? R.color.active_buttons_and_links_dark
 							: R.color.active_buttons_and_links_light));
-					profile.setIconId(iconRes);
+					profile.iconId = iconRes;
 				}
 			};
 		}
-
 		return iconIdListener;
 	}
 
@@ -497,8 +488,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
 						.get(pos).getStringKey();
 					setupBaseProfileView(key);
-					profile.parent = ApplicationMode
-						.valueOfStringKey(key, ApplicationMode.DEFAULT);
+					profile.parent = ApplicationMode.valueOfStringKey(key, ApplicationMode.DEFAULT);
 				}
 			};
 		}
@@ -534,16 +524,16 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	void updateRoutingProfile(int pos) {
 		isDataChanged = true;
-		for (int i = 0; i < routingProfiles.size(); i++) {
+		for (int i = 0; i < routingProfileDataObjects.size(); i++) {
 			if (i == pos) {
-				routingProfiles.get(i).setSelected(true);
+				routingProfileDataObjects.get(i).setSelected(true);
 			} else {
-				routingProfiles.get(i).setSelected(false);
+				routingProfileDataObjects.get(i).setSelected(false);
 			}
 		}
-		selectedRoutingProfile = routingProfiles.get(pos);
-		navTypeEt.setText(selectedRoutingProfile.getName());
-		profile.setRoutingProfile(selectedRoutingProfile);
+		selectedRoutingProfileDataObject = routingProfileDataObjects.get(pos);
+		navTypeEt.setText(selectedRoutingProfileDataObject.getName());
+		profile.routingProfileDataObject = selectedRoutingProfileDataObject;
 	}
 
 	void activateMode(ApplicationMode mode) {
@@ -580,7 +570,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	private boolean saveNewProfile() {
-		if (profile.getRoutingProfile() == null) {
+		if (profile.routingProfileDataObject == null) {
 			showSaveWarningDialog(
 				"Select Routing Type",
 				"You need to select Routing Type to create New Application Profile",
@@ -588,8 +578,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			return false;
 		}
 
-		if (profile.getUserProfileTitle().isEmpty()
-			|| profile.getUserProfileTitle().replace(" ", "").length() < 1) {
+		if (profile.userProfileTitle.isEmpty()
+			|| profile.userProfileTitle.replace(" ", "").length() < 1) {
 			showSaveWarningDialog(
 				"Enter Profile Name",
 				"Profile name shouldn't be empty!",
@@ -600,8 +590,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
 			if (m.getUserProfileName() != null && getActivity() != null) {
-				if (m.getUserProfileName().equals(profile.getUserProfileTitle())) {
-					if (isNew || !Algorithms.isEmpty(mode.getUserProfileName()) && !mode.getUserProfileName().equals(profile.getUserProfileTitle())) {
+				if (m.getUserProfileName().equals(profile.userProfileTitle)) {
+					if (isNew || !Algorithms.isEmpty(mode.getUserProfileName())
+						&& !mode.getUserProfileName().equals(profile.userProfileTitle)) {
 						AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
 						bld.setTitle("Duplicate Name");
 						bld.setMessage("There is already profile with such name");
@@ -611,7 +602,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 							@Override
 							public void onDismiss(DialogInterface dialog) {
 								profileNameEt.requestFocus();
-
 							}
 						});
 						return false;
@@ -625,9 +615,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 
 		String customStringKey = profile.stringKey;
-		if (isNew && profile.getParent() != null) {
+		if (isNew && profile.parent != null) {
 			customStringKey =
-				profile.getParent().getStringKey() + "_" + profile.userProfileTitle.hashCode();
+				profile.parent.getStringKey() + "_" + profile.userProfileTitle.hashCode();
 		}
 
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
@@ -635,8 +625,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			.parent(profile.parent)
 			.icon(profile.iconId, profile.iconId);
 
-		if (profile.getRoutingProfile() != null) {
-			builder.setRoutingProfile(profile.getRoutingProfile().getStringKey());
+		if (profile.routingProfileDataObject != null) {
+			builder.setRoutingProfile(profile.routingProfileDataObject.getStringKey());
 		}
 
 		ApplicationMode mode = builder.customReg();
@@ -660,8 +650,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private void needSaveDialog() {
 		if (getActivity() != null) {
 			AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-			bld.setTitle("Save Changes");
-			bld.setMessage("You need to save changes to Profile before proceed");
+			bld.setTitle(R.string.profile_alert_need_save_title);
+			bld.setMessage(R.string.profile_alert_need_save_msg);
 			bld.setNegativeButton(R.string.shared_string_ok, null);
 			bld.show();
 		}
@@ -679,17 +669,15 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (getActivity() != null) {
 			if (isUserProfile) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setTitle("Delete Profile");
+				bld.setTitle(R.string.profile_alert_delete_title);
 				bld.setMessage(String
-					.format("Are you sure you want to delete %s profile",
-						profile.userProfileTitle));
+					.format(getString(R.string.profile_alert_delete_msg), profile.userProfileTitle));
 				bld.setPositiveButton(R.string.shared_string_delete,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							ApplicationMode
-								.deleteCustomMode(profile.getUserProfileTitle(),
-									getMyApplication());
+								.deleteCustomMode(profile.userProfileTitle, getMyApplication());
 							if (getActivity() != null) {
 								getActivity().onBackPressed();
 							}
@@ -705,62 +693,78 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private ArrayList<RoutingProfile> getRoutingProfiles() {
-		ArrayList<RoutingProfile> profilesObjects = new ArrayList<>();
-		Map<String, GeneralRouter> inputProfiles = getMyApplication().getDefaultRoutingConfig()
-			.getAllRoutes();
+	static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
+		List<RoutingProfileDataObject> profilesObjects = new ArrayList<>();
+		profilesObjects.add(new RoutingProfileDataObject(
+			RoutingProfilesResources.STRAIGHT_LINE.toString(),
+			context.getString(RoutingProfilesResources.STRAIGHT_LINE.getStringRes()),
+			context.getString(R.string.special_routing_type),
+			RoutingProfilesResources.STRAIGHT_LINE.getIconRes(),
+			false, null));
+
+		profilesObjects.add(new RoutingProfileDataObject(
+			RoutingProfilesResources.BROUTER.toString(),
+			context.getString(RoutingProfilesResources.BROUTER.getStringRes()),
+			context.getString(R.string.online_routing_type),
+			RoutingProfilesResources.BROUTER.getIconRes(),
+			false, null));
+
+		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRoutes();
 		for (Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
 			int iconRes = R.drawable.ic_action_world_globe;
 			String name = e.getValue().getProfileName();
-			String description = "Custom profile";
-
+			String description;
 			if (e.getValue().getFilename() == null) {
-				switch (e.getValue().getProfileName()) {
-					case "car":
-						iconRes = R.drawable.ic_action_car_dark;
-						name = getString(R.string.rendering_value_car_name);
-						break;
-					case "pedestrian":
-						iconRes = R.drawable.map_action_pedestrian_dark;
-						name = getString(R.string.rendering_value_pedestrian_name);
-						break;
-					case "bicycle":
-						iconRes = R.drawable.map_action_bicycle_dark;
-						name = getString(R.string.rendering_value_bicycle_name);
-						break;
-					case "public_transport":
-						iconRes = R.drawable.map_action_bus_dark;
-						name = getString(R.string.app_mode_public_transport);
-						break;
-					case "boat":
-						iconRes = R.drawable.map_action_sail_boat_dark;
-						name = getString(R.string.app_mode_boat);
-						break;
-					case "geocoding":
-						iconRes = R.drawable.ic_action_world_globe;
-						name = "Geocoding";
-						break;
-				}
+				iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
+				name = context.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+				description = context.getString(R.string.osmand_default_routing);
+			} else {
+				description = context.getString(R.string.custom_routing);
 			}
-
-			profilesObjects.add(new RoutingProfile(e.getKey(), name, description, iconRes, false,
+			profilesObjects.add(new RoutingProfileDataObject(e.getKey(), name, description, iconRes, false,
 				e.getValue().getFilename()));
 		}
 		return profilesObjects;
 	}
 
-	private class TempApplicationProfile {
+	public enum RoutingProfilesResources {
+		STRAIGHT_LINE(R.string.routing_profile_straightline, R.drawable.ic_action_split_interval),
+		BROUTER(R.string.routing_profile_broutrer, R.drawable.ic_action_split_interval),
+		CAR (R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),
+		PEDESTRIAN (R.string.rendering_value_pedestrian_name, R.drawable.map_action_pedestrian_dark),
+		BICYCLE (R.string.rendering_value_bicycle_name, R.drawable.map_action_bicycle_dark),
+		PUBLIC_TRANSPORT (R.string.app_mode_public_transport, R.drawable.map_action_bus_dark),
+		BOAT (R.string.app_mode_boat, R.drawable.map_action_sail_boat_dark),
+		GEOCODING (R.string.routing_profile_geocoding, R.drawable.ic_action_world_globe);
 
+		int stringRes;
+		int iconRes;
+
+		RoutingProfilesResources(int stringRes, int iconRes) {
+			this.stringRes = stringRes;
+			this.iconRes = iconRes;
+		}
+
+		public int getStringRes() {
+			return stringRes;
+		}
+
+		public int getIconRes() {
+			return iconRes;
+		}
+	}
+
+	private class TempApplicationProfile {
 		int key = -1;
 		String stringKey;
 		String userProfileTitle = "";
 		ApplicationMode parent = null;
 		int iconId = R.drawable.map_world_globe_dark;
-		RoutingProfile routingProfile = null;
+		RoutingProfileDataObject routingProfileDataObject = null;
 
 		TempApplicationProfile(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
 			if (isNew) {
-				stringKey = "new_" + mode.getStringKey();
+				stringKey = mode.getStringKey() + System.currentTimeMillis();
 				parent = mode;
 			} else if (isUserProfile) {
 				stringKey = mode.getStringKey();
@@ -773,46 +777,5 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				iconId = mode.getSmallIconDark();
 			}
 		}
-
-		public RoutingProfile getRoutingProfile() {
-			return routingProfile;
-		}
-
-		public ApplicationMode getParent() {
-			return parent;
-		}
-
-		public int getKey() {
-			return key;
-		}
-
-		public int getIconId() {
-			return iconId;
-		}
-
-		public String getStringKey() {
-			return stringKey;
-		}
-
-		public String getUserProfileTitle() {
-			return userProfileTitle;
-		}
-
-		public void setStringKey(String stringKey) {
-			this.stringKey = stringKey;
-		}
-
-		public void setUserProfileTitle(String userProfileTitle) {
-			this.userProfileTitle = userProfileTitle;
-		}
-
-		public void setIconId(int iconId) {
-			this.iconId = iconId;
-		}
-
-		public void setRoutingProfile(RoutingProfile routingProfile) {
-			this.routingProfile = routingProfile;
-		}
 	}
-
 }

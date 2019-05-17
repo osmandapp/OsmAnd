@@ -443,7 +443,7 @@ public class TransportRoutingHelper {
 		}
 
 		private List<TransportRouteResult> calculateRouteImpl(TransportRouteCalculationParams params) throws IOException, InterruptedException {
-			RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
+			RoutingConfiguration.Builder config = params.ctx.getRoutingConfig();
 			BinaryMapIndexReader[] files = params.ctx.getResourceManager().getTransportRoutingMapFiles();
 			params.params.clear();
 			OsmandSettings settings = params.ctx.getSettings();

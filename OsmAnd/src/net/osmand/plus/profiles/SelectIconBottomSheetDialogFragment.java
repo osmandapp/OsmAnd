@@ -45,7 +45,7 @@ public class SelectIconBottomSheetDialogFragment extends BottomSheetDialogFragme
 
 		Bundle args = getArguments();
 		if (args != null) {
-			int selectedIcon = args.getInt("selectedIcon", -1);
+			int selectedIcon = args.getInt(EditProfileFragment.SELECTED_ICON, -1);
 			if(selectedIcon != -1) {
 				for (IconResWithDescr icon : icons) {
 					if (icon.resId == selectedIcon) {

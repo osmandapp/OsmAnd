@@ -1,5 +1,6 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.DIALOG_TYPE;
 import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
 import android.content.Context;
@@ -24,11 +25,17 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
+import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 	private static final Log LOG = PlatformUtil.getLog(SettingsProfileFragment.class);
+
+	public static final String PROFILE_STRING_KEY = "string_key";
+	public static final String IS_NEW_PROFILE = "new_profile";
+	public static final String IS_USER_PROFILE = "user_profile";
+
 
 	private ProfileMenuAdapter adapter;
 	private RecyclerView recyclerView;
@@ -39,8 +46,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
-	private ArrayList<BaseProfile> baseProfiles;
-
+	private List<ProfileDataObject> baseProfiles;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +86,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 				for (ApplicationMode sam : availableAppModes) {
 					vls.append(sam.getStringKey()).append(",");
 				}
+
 				if (getSettings() != null) {
 					getSettings().AVAILABLE_APP_MODES.set(vls.toString());
 				}
@@ -88,10 +95,9 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void editProfile(ApplicationMode item) {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-				intent.putExtra("stringKey", item.getStringKey());
-				intent.putExtra("isNew", false);
-				if (item.getUserProfileName() != null && !item.getUserProfileName().isEmpty()) {
-					intent.putExtra("isUserProfile", true);
+				intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+				if (!Algorithms.isEmpty(item.getUserProfileName())) {
+					intent.putExtra(IS_USER_PROFILE, true);
 				}
 				startActivity(intent);
 			}
@@ -100,11 +106,10 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		typeListener = new ProfileTypeDialogListener() {
 			@Override
 			public void onSelectedType(int pos) {
-				LOG.debug("Base profile: " + baseProfiles.get(pos).getName());
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-				intent.putExtra("isNew", true);
-				intent.putExtra("isUserProfile", true);
-				intent.putExtra("stringKey", baseProfiles.get(pos).getStringKey());
+				intent.putExtra(IS_NEW_PROFILE, true);
+				intent.putExtra(IS_USER_PROFILE, true);
+				intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
 				startActivity(intent);
 			}
 		};
@@ -119,9 +124,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
-				dialog.setProfileTypeListener(typeListener);
 				Bundle bundle = new Bundle();
-				bundle.putParcelableArrayList(TYPE_APP_PROFILE, baseProfiles);
+				bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILE);
 				dialog.setArguments(bundle);
 				if (getActivity() != null) {
 					getActivity().getSupportFragmentManager().beginTransaction()
@@ -133,7 +137,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), listener);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
-
 		return view;
 	}
 
@@ -144,18 +147,16 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		typeListener = new ProfileTypeDialogListener() {
 			@Override
 			public void onSelectedType(int pos) {
-				LOG.debug("Base profile: " + baseProfiles.get(pos).getName());
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-				intent.putExtra("isNew", true);
-				intent.putExtra("isUserProfile", true);
-				intent.putExtra("stringKey", baseProfiles.get(pos).getStringKey());
+				intent.putExtra(IS_NEW_PROFILE, true);
+				intent.putExtra(IS_USER_PROFILE, true);
+				intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
 				startActivity(intent);
 			}
 		};
 
 		allAppModes = ApplicationMode.allPossibleValues();
 		allAppModes.remove(ApplicationMode.DEFAULT);
-
 		adapter.updateItemsList(allAppModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
 	}
 
@@ -164,11 +165,10 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			typeListener = new ProfileTypeDialogListener() {
 				@Override
 				public void onSelectedType(int pos) {
-					LOG.debug("Base profile: " + baseProfiles.get(pos).getName());
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-					intent.putExtra("isNew", true);
-					intent.putExtra("isUserProfile", true);
-					intent.putExtra("stringKey", baseProfiles.get(pos).getStringKey());
+					intent.putExtra(IS_NEW_PROFILE, true);
+					intent.putExtra(IS_USER_PROFILE, true);
+					intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
 					startActivity(intent);
 				}
 			};
@@ -176,36 +176,37 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		return typeListener;
 	}
 
-	static ArrayList<BaseProfile> getBaseProfiles(Context ctx) {
-		ArrayList<BaseProfile> profiles = new ArrayList<>();
+	static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+		List<ProfileDataObject> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
-				String descr = "";
-				switch (mode.getStringKey()) {
-					case "car":
-						descr = "Car, Truck, Motorcycle";
-						break;
-					case "bicycle":
-						descr = "MBT, Moped, Skiing, Horse";
-						break;
-					case "pedestrian":
-						descr = "Walking, Hiking, Running";
-						break;
-					case "public_transport":
-						descr = "All PT types";
-						break;
-					case "boat":
-						descr = "Ship, Rowing, Sailing";
-						break;
-					case "aircraft":
-						descr = "Airplane, Gliding";
-						break;
-				}
-				profiles.add(new BaseProfile(mode.getStringKey(), mode.toHumanString(ctx), descr,
-					mode.getSmallIconDark(), false));
+				profiles.add(new ProfileDataObject( mode.toHumanString(ctx),
+					ctx.getString(BaseProfilesDescr.valueOf(mode.getStringKey().toUpperCase()).getDescrRes()),
+					mode.getStringKey(), mode.getSmallIconDark(), false));
 			}
 		}
 		return profiles;
 	}
+
+	public enum BaseProfilesDescr {
+		CAR(R.string.base_profile_descr_car),
+		BICYCLE(R.string.base_profile_descr_bicycle),
+		PEDESTRIAN(R.string.base_profile_descr_pedestrian),
+		PUBLIC_TRANSPORT(R.string.base_profile_descr_public_transport),
+		BOAT(R.string.base_profile_descr_boat),
+		AIRCRAFT(R.string.base_profile_descr_aircraft);
+
+		private int descrRes;
+
+		BaseProfilesDescr(int descrRes) {
+			this.descrRes = descrRes;
+		}
+
+		public int getDescrRes() {
+			return descrRes;
+		}
+	}
+
+
 
 }

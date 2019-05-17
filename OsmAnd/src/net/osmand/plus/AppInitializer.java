@@ -460,6 +460,7 @@ public class AppInitializer implements IProgress {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		app.getRoutingConfig();
 		app.applyTheme(app);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelper(app), InAppPurchaseHelper.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
@@ -562,8 +563,7 @@ public class AppInitializer implements IProgress {
 				for (File f : fl) {
 					if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
 						try {
-							RoutingConfiguration
-								.parseFromInputStream(new FileInputStream(f), f.getName(), config);
+							RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), config);
 						} catch (XmlPullParserException | IOException e) {
 							throw new IllegalStateException(e);
 						}

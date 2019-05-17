@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.plus.ApplicationMode;
@@ -30,7 +29,6 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.profiles.BaseProfile;
 import net.osmand.plus.views.SeekBarPreference;
 
 import java.lang.reflect.Field;
@@ -52,8 +50,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	protected OsmandSettings settings;
 	protected final boolean profileSettings;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
-	protected final ArrayList<BaseProfile> appModes = new ArrayList<>();
-	private ApplicationMode previousAppMode; 
+	private ApplicationMode previousAppMode;
 
 	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
 	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();

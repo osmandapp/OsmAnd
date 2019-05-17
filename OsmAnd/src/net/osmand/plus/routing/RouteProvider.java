@@ -595,7 +595,7 @@ public class RouteProvider {
 		OsmandSettings settings = params.ctx.getSettings();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		
-		RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
+		RoutingConfiguration.Builder config = params.ctx.getRoutingConfig();
 		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
 		if(generalRouter == null) {
 			return applicationModeNotSupported(params);
