@@ -3021,4 +3021,13 @@
     <string name="public_transport_try_change_settings">Попробуйте изменить настройки.</string>
     <string name="public_transport_calc_pedestrian">Рассчитать пешеходный маршрут</string>
     <string name="public_transport_type">Тип транспорта</string>
+    <string name="searching_gps">Поиск GPS</string>
+    <string name="coordinates_widget">Виджет координат</string>
+    <string name="files_moved">Перемещено %1$d файлов (%2$s).</string>
+    <string name="files_copied">Скопировано %1$d файлов (%2$s).</string>
+    <string name="files_failed">Не удалось скопировать %1$d файлов (%2$s).</string>
+    <string name="files_present">%1$d файлов (%2$s) присутствуют в предыдущем местоположении \'%3$s\'.</string>
+    <string name="move_maps">Переместить карты</string>
+    <string name="dont_move_maps">Не перемещать</string>
+    <string name="public_transport_ped_route_title">Маршрут пешком составляет примерно %1$s и он может быть быстрее, чем на общественном транспорте</string>
 </resources>
