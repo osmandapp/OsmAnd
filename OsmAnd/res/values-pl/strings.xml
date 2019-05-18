@@ -3021,7 +3021,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Wyświetl azymut w Pomiar Odległości
 \n
 \n</string>
-    <string name="angular_measeurement">Jednostki pomiaru kątowego</string>
+    <string name="angular_measeurement">Jednostka kąta</string>
     <string name="angular_measeurement_descr">Zmiany jakie azymut jest mierzony w.</string>
     <string name="avoid_pt_types_descr">Wybierz typy transportu publicznego, których chcesz unikać dla nawigacji:</string>
     <string name="avoid_pt_types">Unikanie rodzaju transportu…</string>

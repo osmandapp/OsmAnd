@@ -1779,7 +1779,7 @@
     <string name="quick_action_start_stop_navigation_descr">Atingeți acest buton pentru pornire sau incheiere navigație.</string>
     <string name="store_tracks_in_monthly_directories">Stochează lunar track-urile înregistrate in foldere</string>
     <string name="store_tracks_in_monthly_directories_descrp">Stocați traseele înregistrate lunar în sub-foldere (ca 2018-01).</string>
-    <string name="mapillary_menu_title_tile_cache"></string>
+    <string name="mapillary_menu_title_tile_cache"/>
     <string name="wrong_user_name">Nume utilizator greșit</string>
     <string name="mapillary_menu_descr_dates">Vedeți doar imaginile adăugate</string>
     <string name="mapillary_menu_title_dates">Dată</string>

@@ -2072,7 +2072,7 @@ Sono disponibili solo {2} MB.</string>
     <string name="route_calculation">Calcolo del percorso</string>
     <string name="gpx_no_tracks_title">Non hai ancora nessun file GPX</string>
     <string name="gpx_no_tracks_title_folder">È inoltre possibile aggiungere file GPX alla cartella</string>
-    <string name="gpx_add_track">Aggiungi altri…</string>
+    <string name="gpx_add_track">Aggiungi altro…</string>
     <string name="gpx_appearance">Aspetto</string>
     <string name="rendering_value_fine_name">Sottile</string>
     <string name="upload_poi">Upload PDI</string>
@@ -2292,20 +2292,32 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="edit_name">Modifica il nome</string>
     <string name="route_is_too_long_v2">Per lunghe distanze: aggiungere delle mete intermedie se non si ottiene un risultato entro 10 minuti.</string>
     <string name="save_poi_too_many_uppercase">Il nome contiene troppe maiuscole. Continuare\?</string>
-    <string name="osmand_plus_extended_description_part8">"Copertura e qualità approssimativa delle mappe: 
+    <string name="osmand_plus_extended_description_part8">Copertura e qualità approssimativa delle mappe: 
+\n
 \n • Ovest Europa: **** 
+\n
 \n • Est Europa: *** 
+\n
 \n • Russia: *** 
+\n
 \n • Nord America: *** 
+\n
 \n • Sud America: ** 
+\n
 \n • Asia: ** 
+\n
 \n • Giappone e Corea: *** 
+\n
 \n • Medio Oriente: ** 
+\n
 \n • Africa: ** 
+\n
 \n • Antartide: * 
+\n
 \n Molte nazioni del mondo disponibili come download! 
-\n Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Gran Bretagna, Spagna, … 
-\n "</string>
+\n
+\n Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Gran Bretagna, Spagna, …
+\n</string>
     <string name="osmand_plus_extended_description_part7">"Contribuisci direttamente a OSM 
 \n • Segnala errori nei dati 
 \n • Contribuisci tracce GPX a OSM direttamente dall\'app 
@@ -2568,7 +2580,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n • Wikipedia può dirti molto nelle visite alle città nel tuo linguaggio preferito 
 \n • Le fermate dei trasporti pubblici (bus, tram, treni), inclusi i nomi delle linee, aiutano a navigare in una nuova città 
 \n • La navigazione GPS nella modalità pedone costruisce il tuo percorso usando i percorsi pedonali 
-\n • Carica e segui un percorso GPX o registrarne uno e condividilo</string>
+\n • Carica e segui un percorso GPX o registrarne uno e condividilo
+\n</string>
     <string name="what_is_here">Cosa c\'è qui:</string>
     <string name="parked_at">parcheggiato alle</string>
     <string name="pick_up_till">Pagato sono alle</string>
@@ -2965,7 +2978,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_bridleway_name">Percorso equestre</string>
     <string name="shared_string_degrees">Gradi</string>
     <string name="shared_string_milliradians">milli-radiante</string>
-    <string name="angular_measeurement">Unità di misura degli angoli</string>
+    <string name="angular_measeurement">Unità angolare</string>
     <string name="angular_measeurement_descr">Modifica l’unità di misura dell’azimut.</string>
     <string name="avoid_pt_types_descr">Seleziona i tipi di trasporto pubblico da evitare per la navigazione:</string>
     <string name="release_3_3">• Nuova schermata ‘Indicazioni’: mostra i pulsanti di destinazione Casa e Lavoro, la scorciatoia ‘itinerario precedente’, la lista delle tracce GPX attive e dei marcatori, la ricerca nella cronologia

@@ -2708,7 +2708,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="send_search_query_description">We gebruiken uw zoekterm: <b>\"%1$s\"</b>, en uw locatie.<br/>
         <br/> om ons zoekalgoritme te verbeteren. We verzamelen geen persoonlijke informatie <br/>
     </string>
-    <string name="send_search_query">"Zoekterm versturen? "</string>
+    <string name="send_search_query">Zoekterm versturen\?</string>
     <string name="shared_string_world">Wereld</string>
     <string name="shared_string_gpx_files">GPX bestanden</string>
     <string name="commiting_way">"Weg vastleggen.. ik "</string>

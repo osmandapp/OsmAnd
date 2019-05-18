@@ -2904,7 +2904,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_width">Bredde</string>
     <string name="shared_string_height">Højde</string>
     <string name="route_way">Vej</string>
-    <string name="choose_track_file_to_follow">Vælg sporfil til at følge</string>
+    <string name="choose_track_file_to_follow">Vælg den sporfil, der skal følges</string>
     <string name="swap_start_and_destination">Skift start og destination</string>
     <string name="voice_announcements">Stemmemeddelelser</string>
     <string name="arrive_at_time">Ankommer %1$s</string>
@@ -2932,22 +2932,24 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_gpx_tracks_hide">Skjul GPX spor</string>
     <string name="quick_action_gpx_tracks_show">Vis GPX spor</string>
     <string name="add_destination_query">Tilføj en destination først</string>
-    <string name="release_3_3">• Ny \'Rutevejledning\': viser hjem- og arbejdsstedsknapper, \'Forrige rute\' genvej, liste over aktive GPX-spor og markører, søgehistorik
+    <string name="release_3_3">• Ny \'Rutevejledning\': viser hjem- og arbejdsstedsknapper, \'Forrige rute\' genvej, liste over aktive GPX-spor og markører, søgehistorik 
+\n 
+\n  • Yderligere information under \'Ruteoplysninger\': vejtyper, overflade, stejlhed, jævnhed 
+\n 
+\n  • Offentlig transportnavigation, understøtter alle former for transport: metro, bus, sporvogn osv. 
+\n 
+\n  • Ny hurtig handling til vis/skjul spor og dag-/nattilstand 
+\n 
+\n  • Rettet at områder vises som oversvømmet i Tyskland, Sydafrika, Quebec 
+\n 
+\n  • Yderligere support for KML og KMZ import 
+\n 
+\n  • Rettet fejl ved åbning af visse offentlige transportstoppesteder 
+\n 
+\n  • Fjernet Facebook og Firebase analytics fra den gratis version (OsmAnd + indeholder dem ikke)
 \n
-\n  • Yderligere information under \'Ruteoplysninger\': vejtyper, overflade, stejlhed, jævnhed
-\n
-\n  • Offentlig transportnavigation, understøtter alle former for transport: metro, bus, sporvogn osv.
-\n
-\n  • Ny hurtig handling til vis/skjul spor og dag-/nattilstand
-\n
-\n  • Rettet at områder vises som oversvømmet i Tyskland, Sydafrika, Quebec
-\n
-\n  • Yderligere support for KML og KMZ import
-\n
-\n  • Rettet fejl ved åbning af nogle offentlige transportstoppesteder
-\n
-\n  • Fjernet Facebook og Firebase analytics fra den gratis version (OsmAnd + indeholder dem ikke)</string>
-    <string name="use_osm_live_public_transport_description">Aktiver offentlig transport for OsmAnd Live ændringer.</string>
+\n</string>
+    <string name="use_osm_live_public_transport_description">Aktivér offentlig transport for OsmAnd Live ændringer.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live offentlig transport</string>
     <string name="add_start_and_end_points">Tilføj start- og slutpunkter</string>
     <string name="route_add_start_point">Tilføj startpunkt</string>
@@ -3021,7 +3023,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_avoid_train_name">Undgå tog</string>
     <string name="routing_attr_avoid_train_description">Undgå tog</string>
     <string name="routing_attr_avoid_subway_name">Undgå metro</string>
-    <string name="routing_attr_avoid_subway_description">Undgå metro og lettog</string>
+    <string name="routing_attr_avoid_subway_description">Undgå metro og letbane</string>
     <string name="routing_attr_avoid_ferry_name">Undgå færger</string>
     <string name="routing_attr_avoid_ferry_description">Undgå færger</string>
     <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport 

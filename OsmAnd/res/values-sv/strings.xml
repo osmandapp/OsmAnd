@@ -2636,18 +2636,18 @@ Vänligen tillhandahåll fullständig kod</string>
 \n• Valfri reseinspelning i bakgrundsläge (när enheten är i strömsparläge)
 \nOsmAnd utvecklas aktivt med öppen källkod. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller koda nya funktioner. Dock är projektet beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.
 \n</string>
-    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet:
-\n• Västeuropa: ****
-\n• Östreuropa: ***
-\n• Ryssland: ***
-\n• Nordamerika: ***
-\n• Sydamerika: **
-\n• Asien: **
-\n• Japan &amp; Korea: ***
-\n• Mellanöstern: **
-\n• Afrika: **
-\n• Antarktis: *
-\nDe flesta länder runt om i världen finns som nedladdningar
+    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet: 
+\n• Västeuropa: **** 
+\n• Östreuropa: *** 
+\n• Ryssland: *** 
+\n• Nordamerika: *** 
+\n• Sydamerika: ** 
+\n• Asien: ** 
+\n• Japan &amp; Korea: *** 
+\n• Mellanöstern: ** 
+\n• Afrika: ** 
+\n• Antarktis: * 
+\nDe flesta länder runt om i världen finns som nedladdningar 
 \nFrån Afghanistan till Zimbabwe, från Australien till USA. Argentina, Brasilien, Kanada, Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, ...
 \n</string>
     <string name="quick_action_bug_descr">Detta meddelande ingår i kommentarsfältet.</string>
