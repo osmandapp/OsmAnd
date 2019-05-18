@@ -3049,4 +3049,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="dont_move_maps">Nicht bewegen</string>
     <string name="public_transport_ped_route_title">Die Route beträgt ca. %1$s und könnte zu Fuß schneller sein als mit öffentlichen Verkehrsmitteln</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
+    <string name="searching_gps">Suche GPS</string>
+    <string name="coordinates_widget">Koordinaten-Widget</string>
 </resources>
