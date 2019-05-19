@@ -3042,4 +3042,6 @@
     <string name="public_transport_try_change_settings">Tente alterar a configuração.</string>
     <string name="public_transport_calc_pedestrian">Calcular a rota pedestre</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="searching_gps">Procurando GPS</string>
+    <string name="coordinates_widget">Widget de coordenadas</string>
 </resources>
