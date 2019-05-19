@@ -1368,7 +1368,7 @@ POIの更新は利用できません</string>
     <string name="wake_on_voice">画面の電源オン設定</string>
     <string name="wake_on_voice_descr">方向転換地点に近づいたらデバイスの画面を(オフの場合指定時間)オンにします</string>
     <string name="shared_string_never">しない</string>
-    <string name="impassable_road">通行止め指定する道路…</string>
+    <string name="impassable_road">除外する道の指定…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">電車でのルート</string>
     <string name="rendering_attr_tramRoutes_name">路面電車でのルート</string>
     <string name="rendering_attr_shareTaxiRoutes_name">タクシーのルート共有</string>
@@ -1432,7 +1432,7 @@ POIの更新は利用できません</string>
     <string name="download_tab_updates">更新可能</string>
     <string name="download_tab_local">保存済み</string>
     <string name="no_internet_connection">ダウンロード出来ません、インターネット接続を確認してください。</string>
-    <string name="shared_string_dismiss">変更しない</string>
+    <string name="shared_string_dismiss">中止</string>
     <string name="everything_up_to_date">ストレージ内ファイルはすべて最新です</string>
     <string name="use_opengl_render">OpenGLレンダリングを使用</string>
     <string name="use_opengl_render_descr">ハードウェアのOpenGLレンダリングを使用します(デバイスによっては動作しません)</string>
