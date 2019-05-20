@@ -94,7 +94,6 @@ public class GeneralRouter implements VehicleRouter {
 		BICYCLE,
 		BOAT,
 		PUBLIC_TRANSPORT,
-		CUSTOM
 	}
 
 	

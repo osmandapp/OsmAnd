@@ -11,6 +11,13 @@
 	Thx - Hardy
 
 -->
+    <string name="profile_alert_need_routing_type_title">Select Routing Type</string>
+    <string name="profile_alert_need_routing_type_msg">You need to select Routing Type to create New Application Profile</string>
+    <string name="profile_alert_need_profile_name_title">Enter Profile Name</string>
+    <string name="profile_alert_need_profile_name_msg">Profile name shouldn\'t be empty!</string>
+    <string name="profile_alert_duplicate_name_title">Duplicate Name</string>
+    <string name="profile_alert_duplicate_name_msg">There is already profile with such name</string>
+    <string name="profile_alert_cant_delete_base">You cannot delete OsmAnd base profiles</string>
     <string name="profile_alert_need_save_title">Save Changes</string>
     <string name="profile_alert_need_save_msg">You need to save changes to Profile before proceed</string>
     <string name="profile_alert_delete_title">Delete Profile</string>
@@ -30,7 +37,7 @@
     <string name="osmand_default_routing">OsmAnd routing</string>
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>
-    <string name="online_routing_type">Online routing</string>
+    <string name="third_party_routing_type">3rd-party routing</string>
 
     <string name="files_moved">Moved %1$d files (%2$s).</string>
     <string name="files_copied">Copied %1$d files (%2$s).</string>

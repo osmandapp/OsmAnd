@@ -682,9 +682,7 @@ public class RouteProvider {
 			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		GeneralRouterProfile p ;
 
-		if (params.mode.getRoutingProfile() != null ) {
-			p = GeneralRouterProfile.CUSTOM;
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			p = GeneralRouterProfile.BICYCLE;
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			p = GeneralRouterProfile.PEDESTRIAN;
@@ -695,7 +693,6 @@ public class RouteProvider {
 		} else {
 			return null;
 		}
-		log.debug("General Router Profile:" + p.name());
 
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
@@ -724,10 +721,10 @@ public class RouteProvider {
 		// make visible
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
-		String name = p == GeneralRouterProfile.CUSTOM ? params.mode.getRoutingProfile() : p.name().toLowerCase();
-		RoutingConfiguration cf = config.build(name, params.start.hasBearing() ?
-				params.start.getBearing() / 180d * Math.PI : null, 
-				memoryLimit, paramsR);
+
+		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ?
+				params.start.getBearing() / 180d * Math.PI : null,
+			memoryLimit, paramsR);
 		return cf;
 	}
 

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
@@ -33,7 +34,7 @@ public class ApplicationMode {
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 	/*
-	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport")
+	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
 			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
@@ -54,7 +55,7 @@ public class ApplicationMode {
 			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).setRoutingProfile("boat").reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).reg();
+			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).setRouteService(RouteService.STRAIGHT).reg();
 
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, PUBLIC_TRANSPORT};
@@ -207,9 +208,12 @@ public class ApplicationMode {
 			applicationMode.routingProfile = routingProfileName;
 			return this;
 		}
+
+		public ApplicationModeBuilder setRouteService(RouteService service) {
+			applicationMode.routeService = service;
+			return this;
+		}
 	}
-
-
 
 	private static ApplicationModeBuilder create(int key, String stringKey) {
 		ApplicationModeBuilder builder = new ApplicationModeBuilder();
@@ -412,6 +416,10 @@ public class ApplicationMode {
 		}
 	}
 
+	public RouteService getRouteService() {
+		return routeService;
+	}
+
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
 		for (ApplicationMode p : values) {
 			if (p.getStringKey().equals(key)) {
@@ -468,6 +476,7 @@ public class ApplicationMode {
 	@Expose private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 	@Expose private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 	@Expose private String routingProfile = null;
+	@Expose private RouteService routeService = RouteService.OSMAND;
 	private static StateChangedListener<String> listener;
 	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
 
