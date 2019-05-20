@@ -223,30 +223,4 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//pref.setEnabled(false);
 		info.addPreference(pref);
 	}
-
-	protected void availableProfileDialog() {
-		AlertDialog.Builder b = new AlertDialog.Builder(this);
-		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
-		modes.remove(ApplicationMode.DEFAULT);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(getMyApplication()));
-		selected.remove(ApplicationMode.DEFAULT);
-		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, true, false,
-				new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
-						for(ApplicationMode mode :  modes) {
-							if(selected.contains(mode)) {
-								vls.append(mode.getStringKey()).append(",");
-							}
-						}
-						settings.AVAILABLE_APP_MODES.set(vls.toString());
-					}
-				});
-		b.setTitle(R.string.profile_settings);
-		b.setPositiveButton(R.string.shared_string_ok, null);
-		b.setView(v);
-		b.show();
-	}
 }

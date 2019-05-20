@@ -8,6 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 
@@ -507,4 +508,24 @@ public class ApplicationMode {
 		ApplicationMode.saveCustomModeToSettings(app.getSettings());
 	}
 
+	public static boolean changeProfileStatus(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
+		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(ApplicationMode.values(app));
+		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
+		if (allPossibleValues().contains(mode)) {
+			if (isSelected) {
+				selectedModes.add(mode);
+			} else {
+				selectedModes.remove(mode);
+				if (app.getSettings().APPLICATION_MODE.get() == mode) {
+					app.getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+				}
+			}
+			for (ApplicationMode m : selectedModes) {
+				vls.append(m.getStringKey()).append(",");
+			}
+			app.getSettings().AVAILABLE_APP_MODES.set(vls.toString());
+			return true;
+		}
+		return false;
+	}
 }

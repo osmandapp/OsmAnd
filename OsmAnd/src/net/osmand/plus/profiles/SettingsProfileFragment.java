@@ -65,31 +65,13 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 		listener = new ProfileListener() {
 			@Override
-			public void changeProfileStatus(ApplicationMode item, boolean isSelected) {
-				StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
-				ApplicationMode mode = null;
-				for (ApplicationMode sam : allAppModes) {
-					if (sam.getStringKey().equals(item.getStringKey())) {
-						mode = sam;
-					}
+			public void changeProfileStatus(ApplicationMode am, boolean isSelected) {
+				if(isSelected) {
+					availableAppModes.add(am);
+				} else {
+					availableAppModes.remove(am);
 				}
-
-				if(isSelected && mode != null) {
-					availableAppModes.add(mode);
-				} else if (mode != null) {
-					availableAppModes.remove(mode);
-					if (getSettings() != null && getSettings().APPLICATION_MODE.get() == mode) {
-						getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
-					}
-				}
-
-				for (ApplicationMode sam : availableAppModes) {
-					vls.append(sam.getStringKey()).append(",");
-				}
-
-				if (getSettings() != null) {
-					getSettings().AVAILABLE_APP_MODES.set(vls.toString());
-				}
+				ApplicationMode.changeProfileStatus(am, isSelected, getMyApplication());
 			}
 
 			@Override

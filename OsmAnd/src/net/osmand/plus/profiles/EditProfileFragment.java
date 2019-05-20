@@ -72,7 +72,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	OsmandApplication app;
 
 	ApplicationMode mode = null;
-	TempApplicationProfile profile = null;
+	ApplicationProfileObject profile = null;
 	List<RoutingProfileDataObject> routingProfileDataObjects;
 	RoutingProfileDataObject selectedRoutingProfileDataObject = null;
 
@@ -117,7 +117,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			isNew = getArguments().getBoolean(IS_NEW_PROFILE, false);
 			isUserProfile = getArguments().getBoolean(IS_USER_PROFILE, false);
 			mode = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT);
-			profile = new TempApplicationProfile(mode, isNew, isUserProfile);
+			profile = new ApplicationProfileObject(mode, isNew, isUserProfile);
 		}
 		isNightMode =  !app.getSettings().isLightContent();
 		routingProfileDataObjects = getRoutingProfiles(app);
@@ -538,16 +538,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	void activateMode(ApplicationMode mode) {
 		if (!ApplicationMode.values(app).contains(mode)) {
-			StringBuilder s = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
-			for (ApplicationMode am : ApplicationMode.values(app)) {
-				s.append(am.getStringKey()).append(",");
-			}
-			s.append(mode.getStringKey()).append(",");
-			if (getSettings() != null) {
-				getSettings().AVAILABLE_APP_MODES.set(s.toString());
-			}
+			ApplicationMode.changeProfileStatus(mode, true, getMyApplication());
 		}
-
 	}
 
 	private void setupBaseProfileView(String stringKey) {
@@ -631,17 +623,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		ApplicationMode mode = builder.customReg();
 		ApplicationMode.saveCustomModeToSettings(getSettings());
-		this.mode = mode;
 
-		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
-		Set<ApplicationMode> availableAppModes = new LinkedHashSet<>(
-			ApplicationMode.values(getMyApplication()));
-		availableAppModes.add(mode);
-		for (ApplicationMode sam : availableAppModes) {
-			vls.append(sam.getStringKey()).append(",");
-		}
-		if (getSettings() != null) {
-			getSettings().AVAILABLE_APP_MODES.set(vls.toString());
+		if (!ApplicationMode.values(app).contains(mode)) {
+			ApplicationMode.changeProfileStatus(mode, true, getMyApplication());
 		}
 		isDataChanged = false;
 		return true;
@@ -754,7 +738,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private class TempApplicationProfile {
+	private class ApplicationProfileObject {
 		int key = -1;
 		String stringKey;
 		String userProfileTitle = "";
@@ -762,7 +746,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		int iconId = R.drawable.map_world_globe_dark;
 		RoutingProfileDataObject routingProfileDataObject = null;
 
-		TempApplicationProfile(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
+		ApplicationProfileObject(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
 			if (isNew) {
 				stringKey = mode.getStringKey() + System.currentTimeMillis();
 				parent = mode;

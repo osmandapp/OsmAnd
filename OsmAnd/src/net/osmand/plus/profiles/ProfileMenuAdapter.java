@@ -23,7 +23,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 	private List<ApplicationMode> items;
 	private Set<ApplicationMode> selectedItems;
-	private ProfileListener listener = null;
+	private ProfileListener listener;
 	private final OsmandApplication app;
 
 	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems, OsmandApplication app, ProfileListener listener) {

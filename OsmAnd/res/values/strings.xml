@@ -26,7 +26,7 @@
     <string name="base_profile_descr_aircraft">Airplane, Gliding</string>
     <string name="routing_profile_geocoding">Geocoding</string>
     <string name="routing_profile_straightline">Straight Line</string>
-    <string name="routing_profile_broutrer">BRouter (online)</string>
+    <string name="routing_profile_broutrer">BRouter (Offline)</string>
     <string name="osmand_default_routing">OsmAnd routing</string>
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>
