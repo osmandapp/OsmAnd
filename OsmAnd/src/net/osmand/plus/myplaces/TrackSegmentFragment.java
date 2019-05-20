@@ -758,37 +758,37 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 										generalPopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
-												switch (item.getItemId()) {
-													case R.id.action_edit:
-														TrkSegment segment = getTrkSegment();
-														if (segment != null && fragmentAdapter != null) {
-															fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
-														}
-														return true;
-													case R.id.action_delete:
-														TrackActivity activity = getTrackActivity();
-														if (activity != null) {
-															AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-															builder.setMessage(R.string.recording_delete_confirm);
-															builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-																@Override
-																public void onClick(DialogInterface dialog, int which) {
-																	TrackActivity trackActivity = getTrackActivity();
-																	if (trackActivity != null && deleteSegment()) {
-																		GPXFile gpx = getGpx();
-																		if (gpx != null && fragmentAdapter != null) {
-																			boolean showOnMap = fragmentAdapter.isShowOnMap();
-																			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-																			new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-																		}
+												int i = item.getItemId();
+												if (i == R.id.action_edit) {
+													TrkSegment segment = getTrkSegment();
+													if (segment != null && fragmentAdapter != null) {
+														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+													}
+													return true;
+												} else if (i == R.id.action_delete) {
+													TrackActivity activity = getTrackActivity();
+													if (activity != null) {
+														AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+														builder.setMessage(R.string.recording_delete_confirm);
+														builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+															@Override
+															public void onClick(DialogInterface dialog, int which) {
+																TrackActivity trackActivity = getTrackActivity();
+																if (trackActivity != null && deleteSegment()) {
+																	GPXFile gpx = getGpx();
+																	if (gpx != null && fragmentAdapter != null) {
+																		boolean showOnMap = fragmentAdapter.isShowOnMap();
+																		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+																		new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
+																				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 																	}
 																}
-															});
-															builder.setNegativeButton(R.string.shared_string_cancel, null);
-															builder.show();
-														}
-														return true;
+															}
+														});
+														builder.setNegativeButton(R.string.shared_string_cancel, null);
+														builder.show();
+													}
+													return true;
 												}
 												return false;
 											}
@@ -870,25 +870,25 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 										altitudePopupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
-												switch (item.getItemId()) {
-													case R.id.action_edit:
-														TrkSegment segment = getTrkSegment();
-														if (segment != null && fragmentAdapter != null) {
-															fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+												int i = item.getItemId();
+												if (i == R.id.action_edit) {
+													TrkSegment segment = getTrkSegment();
+													if (segment != null && fragmentAdapter != null) {
+														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+													}
+													return true;
+												} else if (i == R.id.action_delete) {
+													TrackActivity trackActivity = getTrackActivity();
+													if (trackActivity != null && deleteSegment()) {
+														GPXFile gpx = getGpx();
+														if (gpx != null && fragmentAdapter != null) {
+															boolean showOnMap = fragmentAdapter.isShowOnMap();
+															SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+															new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
+																	.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 														}
-														return true;
-													case R.id.action_delete:
-														TrackActivity trackActivity = getTrackActivity();
-														if (trackActivity != null && deleteSegment()) {
-															GPXFile gpx = getGpx();
-															if (gpx != null && fragmentAdapter != null) {
-																boolean showOnMap = fragmentAdapter.isShowOnMap();
-																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-																new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																		.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-															}
-														}
-														return true;
+													}
+													return true;
 												}
 												return false;
 											}
@@ -969,25 +969,25 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 										popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 											@Override
 											public boolean onMenuItemClick(MenuItem item) {
-												switch (item.getItemId()) {
-													case R.id.action_edit:
-														TrkSegment segment = getTrkSegment();
-														if (segment != null && fragmentAdapter != null) {
-															fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+												int i = item.getItemId();
+												if (i == R.id.action_edit) {
+													TrkSegment segment = getTrkSegment();
+													if (segment != null && fragmentAdapter != null) {
+														fragmentAdapter.addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
+													}
+													return true;
+												} else if (i == R.id.action_delete) {
+													TrackActivity trackActivity = getTrackActivity();
+													if (trackActivity != null && deleteSegment()) {
+														GPXFile gpx = getGpx();
+														if (gpx != null && fragmentAdapter != null) {
+															boolean showOnMap = fragmentAdapter.isShowOnMap();
+															SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+															new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
+																	.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 														}
-														return true;
-													case R.id.action_delete:
-														TrackActivity trackActivity = getTrackActivity();
-														if (trackActivity != null && deleteSegment()) {
-															GPXFile gpx = getGpx();
-															if (gpx != null && fragmentAdapter != null) {
-																boolean showOnMap = fragmentAdapter.isShowOnMap();
-																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
-																new SaveGpxAsyncTask(trackActivity, TrackSegmentFragment.this, gpx, showOnMap ? sf : null)
-																		.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-															}
-														}
-														return true;
+													}
+													return true;
 												}
 												return false;
 											}

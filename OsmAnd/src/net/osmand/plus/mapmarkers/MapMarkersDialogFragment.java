@@ -180,22 +180,22 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-				switch (menuItem.getItemId()) {
-					case R.id.action_active:
-						setupLocationUpdate(true, false);
-						setupActiveFragment(ACTIVE_MARKERS_POSITION);
-						return true;
-					case R.id.action_groups:
-						setupLocationUpdate(false, true);
-						setupActiveFragment(GROUPS_POSITION);
-						return true;
-					case R.id.action_history:
-						setupLocationUpdate(false, false);
-						setupActiveFragment(HISTORY_MARKERS_POSITION);
-						return true;
-					case R.id.action_more:
-						showOptionsMenuFragment();
-						return true;
+				int i = menuItem.getItemId();
+				if (i == R.id.action_active) {
+					setupLocationUpdate(true, false);
+					setupActiveFragment(ACTIVE_MARKERS_POSITION);
+					return true;
+				} else if (i == R.id.action_groups) {
+					setupLocationUpdate(false, true);
+					setupActiveFragment(GROUPS_POSITION);
+					return true;
+				} else if (i == R.id.action_history) {
+					setupLocationUpdate(false, false);
+					setupActiveFragment(HISTORY_MARKERS_POSITION);
+					return true;
+				} else if (i == R.id.action_more) {
+					showOptionsMenuFragment();
+					return true;
 				}
 				return false;
 			}
