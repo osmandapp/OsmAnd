@@ -175,7 +175,7 @@
     <string name="shared_string_selected_lowercase">abrana</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nDoŭha ŭtrymlivajcie dla naładaŭ"</string>
+\nDoŭha ŭtrymlivajcie dlia pakazu paramietraŭ"</string>
     <string name="gpx_info_subtracks">Častak śledu: %1$s</string>
     <string name="gpx_info_waypoints">Adznačanych punktaŭ: %1$s</string>
     <string name="gpx_info_distance">Daŭžynia: %1$s (%2$s kropak)</string>
@@ -1720,9 +1720,9 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_value_walkingRoutesOSMC_name">Afarboŭka pa piešachodnamu simvalu OSMC</string>
     <string name="shared_string_logoff">Vyjścі</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numary damoŭ</string>
-    <string name="application_dir_change_warning3">Skapijavać fajly danych OsmAnd u novaje miesca?</string>
+    <string name="application_dir_change_warning3">Pieramiascić fajly danych OsmAnd u novaje miesca\?</string>
     <string name="specified_directiory_not_writeable">Mapy nie mohuć być stvorany ŭ paznačanaj dyrektoryі</string>
-    <string name="copying_osmand_file_failed">Kapіjavańnie fajłaŭ nie atrymałasia</string>
+    <string name="copying_osmand_file_failed">Pieramiascić fajly nie atrymalasia</string>
     <string name="storage_directory_external">Vonkavy nośbіt іnfarmacyі</string>
     <string name="storage_directory_multiuser">Ahulnaje schovіšča</string>
     <string name="storage_directory_internal_app">Unutranaja pamiać prakladannia</string>
@@ -2958,7 +2958,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \n</string>
     <string name="shared_string_degrees">Hradusy</string>
     <string name="shared_string_milliradians">Miliradyjany</string>
-    <string name="angular_measeurement">Adzinki vymiarennia vuhloŭ</string>
+    <string name="angular_measeurement">Adzinki vuhloŭ</string>
     <string name="angular_measeurement_descr">Zmianić adzinki vymiarennia azimutu.</string>
     <string name="avoid_pt_types_descr">Abiarycie typy hramadskaha transpartu, što patrebna pazbiahać padčas navihacyi:</string>
     <string name="quick_action_day_night_mode">%s režym</string>
@@ -3021,4 +3021,19 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_attr_undefined_name">Niavyznačana</string>
     <string name="routing_attr_avoid_sett_name">Pazbiahać brukavanych daroh</string>
     <string name="routing_attr_avoid_sett_description">Pazbiahać brukavanych daroh</string>
+    <string name="searching_gps">Pošuk GPS</string>
+    <string name="coordinates_widget">Vidžet kaardynat</string>
+    <string name="files_moved">Pieramieščana %1$d fajlaŭ (%2$s).</string>
+    <string name="files_copied">Skapijavana %1$d fajlaŭ (%2$s).</string>
+    <string name="files_failed">Nie atrymalasia skapijavać %1$d fajlaŭ (%2$s).</string>
+    <string name="files_present">%1$d fajlaŭ (%2$s) znachodzicca ŭ papiarednim miescy %3$s.</string>
+    <string name="move_maps">Pieramiascić mapy</string>
+    <string name="dont_move_maps">Nie pieramiaščać</string>
+    <string name="public_transport_ped_route_title">Maršrut pieššu skladaje %1$s, dajsci možna chutčej, čym ruchacca na hramadskim transparcie</string>
+    <string name="public_transport_no_route_title">Na žaĺ, OsmAnd nie zmoh znajsci maršrut pa vašych naladach.</string>
+    <string name="public_transport_try_ped">Pasprabujcie piešachodnuju navihacyju.</string>
+    <string name="public_transport_try_change_settings">Pasprabujcie zmianić nalady.</string>
+    <string name="public_transport_calc_pedestrian">Padličyć piešachodny maršrut</string>
+    <string name="public_transport_type">Typ transpartu</string>
+    <string name="send_log">Adpravić žurnal</string>
 </resources>
