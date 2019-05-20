@@ -52,6 +52,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
+					showLocationHelper.addDirectionContextMenuButton()
 					if (settings.hasAnyChatToShowOnMap()) {
 						showLocationHelper.startShowingLocation()
 					}
@@ -138,7 +139,10 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	}
 
 	override fun onOsmandConnectionStateChanged(connected: Boolean) {
-		showLocationHelper.setupMapLayer()
+		if (connected) {
+			showLocationHelper.setupMapLayer()
+			showLocationHelper.addDirectionContextMenuButton()
+		}
 	}
 
 	private fun startTelegramService(intent: Int, serviceOffInterval: Long = 0) {

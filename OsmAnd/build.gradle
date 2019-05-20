@@ -31,6 +31,7 @@ task printc {
 android {
 	compileSdkVersion 27
 	buildToolsVersion "27.0.3"
+	// compileNdkVersion "android-ndk-r17b"
 
 	signingConfigs {
 		development {
@@ -412,9 +413,9 @@ dependencies {
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'com.squareup.picasso:picasso:2.71828'
+	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
 	// JS core
 	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
-
 // size restrictions
 // implementation 'com.ibm.icu:icu4j:50.1' 
 // implementation 'net.sf.trove4j:trove4j:3.0.3'

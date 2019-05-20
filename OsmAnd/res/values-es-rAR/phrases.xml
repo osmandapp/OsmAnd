@@ -663,7 +663,7 @@
     <string name="poi_money_lender">Prestamista</string>
     <string name="poi_pawnbroker">Casa de empeños;Prestamista</string>
     <string name="poi_bureau_de_change">Casa de cambio</string>
-    <string name="poi_accountant">Contador</string>
+    <string name="poi_accountant">Estudio contable;Contador</string>
     <string name="poi_bitcoin_yes">Pago de Bitcoin</string>
     <string name="poi_cave_entrance">Entrada a cueva</string>
     <string name="poi_peak">Pico de montaña</string>
@@ -1494,9 +1494,9 @@
     <string name="poi_takeaway_yes">Comida para llevar: sí</string>
     <string name="poi_takeaway_no">Comida para llevar: no</string>
     <string name="poi_takeaway_only">Comida para llevar: únicamente</string>
-    <string name="poi_delivery_no">Servicio a domicilio: no</string>
-    <string name="poi_delivery_yes">Servicio a domicilio: sí</string>
-    <string name="poi_delivery_only">Servicio a domicilio: únicamente</string>
+    <string name="poi_delivery_no">Envío a domicilio: no</string>
+    <string name="poi_delivery_yes">Envío a domicilio: sí</string>
+    <string name="poi_delivery_only">Envío a domicilio: únicamente</string>
     <string name="poi_outdoor_seating_yes">Asientos exteriores: sí</string>
     <string name="poi_outdoor_seating_no">Asientos exteriores: no</string>
     <string name="poi_outdoor_seating_terrace">Asientos exteriores: terraza</string>
@@ -1520,7 +1520,7 @@
     <string name="poi_automated_no">No automatizado</string>
     <string name="poi_full_service_yes">Servicio completo</string>
     <string name="poi_aeroway_fuel">Estación de combustible para aviones;Gasolinera para aviones</string>
-    <string name="poi_public_bath">Baño público</string>
+    <string name="poi_public_bath">Baños públicos (termas)</string>
     <string name="poi_male_yes">Masculino</string>
     <string name="poi_male_no">Hombres: prohibido</string>
     <string name="poi_female_yes">Femenino</string>
@@ -2827,7 +2827,7 @@
     <string name="poi_theatre_genre">Género</string>
     <string name="poi_outdoor_seating">Asientos exteriores</string>
     <string name="poi_smoking">Permitido fumar</string>
-    <string name="poi_delivery">Servicio a domicilio;Delivery</string>
+    <string name="poi_delivery">Envío a domicilio;Delivery</string>
     <string name="poi_drive_in">Conducir por dentro</string>
     <string name="poi_drive_through">Servicio en el automóvil</string>
     <string name="poi_takeaway">Comida para llevar</string>
@@ -3584,4 +3584,9 @@
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Llamarada de gas;Quemado en antorcha</string>
     <string name="poi_change_delete">Objeto borrado</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
+    <string name="poi_climbing_crag_filter">Peñón de escalada</string>
+    <string name="poi_rescue_box">Caja de rescate</string>
+    <string name="poi_climbing_crag">Sí</string>
+    <string name="reddit">Reddit</string>
 </resources>

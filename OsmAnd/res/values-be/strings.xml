@@ -464,7 +464,7 @@
     <string name="oclock">гадзін</string>
     <string name="towards">у кірунку</string>
     <string name="accuracy">Дакладнасць</string>
-    <string name="altitude">Вышыня</string>
+    <string name="altitude">Вышыня над узроўнем мора</string>
     <string name="no_info">Інфармацыя адсутнічае</string>
     <string name="direction_style_sidewise">Па накірункам свету (8 сектараў)</string>
     <string name="direction_style_clockwise">Па стрэлцы гадзінніка (12 сектараў)</string>
@@ -1538,7 +1538,7 @@
     <string name="rendering_value__name">Прадвызначана</string>
     <string name="rendering_value_highContrastRoads_name">Высокая кантрастнасць дарог</string>
     <string name="specified_directiory_not_writeable">Немагчыма стварыць мапы ў вызначаным каталозе</string>
-    <string name="copying_osmand_file_failed">Скапіяваць файлы не атрымалася</string>
+    <string name="copying_osmand_file_failed">Перамясціць файлы не атрымалася</string>
     <string name="storage_directory_internal_app">Унутраная памяць дадатка</string>
     <string name="storage_directory_manual">Вызначана ўласнаручна</string>
     <string name="storage_directory_default">Унутраная памяць</string>
@@ -1546,7 +1546,7 @@
     <string name="storage_directory_external">Вонкавы носьбіт інфармацыі</string>
     <string name="storage_directory">Захоўванне мапы</string>
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
-    <string name="application_dir_change_warning3">Скапіяваць файлы даных OsmAnd у новае месца\?</string>
+    <string name="application_dir_change_warning3">Перамясціць файлы даных OsmAnd у новае месца\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Нумары дамоў</string>
     <string name="routing_attr_avoid_borders_description">Пазбягаць перасячэння нацыянальных межаў</string>
     <string name="routing_attr_height_name">Абмежаванне па вышыні</string>
@@ -2998,7 +2998,7 @@
     <string name="public_transport_warning_title">Навігацыя ў грамадскім транспарце на дадзены момант тэставая, таму могуць узнікаць памылкі.</string>
     <string name="add_intermediate">Дадаць прамежкавы пункт</string>
     <string name="rendering_attr_surface_grass_paver_name">Газонныя краты</string>
-    <string name="rendering_attr_highway_class_state_road_name">Федэральная шаша</string>
+    <string name="rendering_attr_highway_class_state_road_name">Дзяржаўная дарога</string>
     <string name="rendering_attr_highway_class_service_name">Сэрвіс</string>
     <string name="rendering_attr_highway_class_track_name">Грунтовая дарога</string>
     <string name="rendering_attr_highway_class_bridleway_name">Для коней</string>
@@ -3032,4 +3032,17 @@
 \n • Пры вымярэнні адлегласці будзе адлюстроўвацца азімут
 \n
 \n</string>
+    <string name="send_log">Адправіць журнал</string>
+    <string name="files_moved">Перамешчана %1$d файлаў (%2$s).</string>
+    <string name="files_copied">Скапіявана %1$d файлаў (%2$s).</string>
+    <string name="files_failed">Не атрымалася скапіяваць %1$d файлаў (%2$s).</string>
+    <string name="files_present">%1$d файлаў (%2$s) знаходзіцца ў папярэднім месцы \'%3$s\'.</string>
+    <string name="move_maps">Перамясціць мапы</string>
+    <string name="dont_move_maps">Не перамяшчаць</string>
+    <string name="public_transport_ped_route_title">Маршрут пешшу складае %1$s, дайсці можна хутчэй, чым рухацца на грамадскім транспарце</string>
+    <string name="public_transport_no_route_title">На жаль, OsmAnd не змог знайсці маршрут па вашых наладах.</string>
+    <string name="public_transport_try_ped">Паспрабуйце пешаходную навігацыю.</string>
+    <string name="public_transport_try_change_settings">Паспрабуйце змяніць налады.</string>
+    <string name="public_transport_calc_pedestrian">Падлічыць пешаходны маршрут</string>
+    <string name="public_transport_type">Тып транспарту</string>
 </resources>

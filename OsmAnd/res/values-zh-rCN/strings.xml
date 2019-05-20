@@ -876,14 +876,14 @@
     <string name="shared_string_remove">移除</string>
     <string name="shared_string_read_more">阅读更多</string>
     <string name="add_time_span">增加时间跨度</string>
-    <string name="road_blocked">道路堵塞</string>
+    <string name="road_blocked">道路被阻塞</string>
     <string name="shared_string_select">选择</string>
     <string name="rendering_attr_hideIcons_name">隐藏 POI 图标</string>
     <string name="item_removed">项目已移除</string>
     <string name="n_items_removed">项目已移除</string>
     <string name="shared_string_undo_all">全部撤销</string>
     <string name="shared_string_type">类型</string>
-    <string name="starting_point">起始标点</string>
+    <string name="starting_point">起始点</string>
     <string name="shared_string_not_selected">未选取</string>
     <string name="rec_split_storage_size">存储大小</string>
     <string name="available_maps">可用地图</string>
@@ -1160,7 +1160,7 @@
     <string name="settings_privacy">隐私</string>
     <string name="proxy_pref_title">代理</string>
     <string name="voice_pref_title">语音</string>
-    <string name="quick_action_navigation_voice_on">语音已开启</string>
+    <string name="quick_action_navigation_voice_on">语音静音</string>
     <string name="interrupt_music">暂停音乐</string>
     <string name="interrupt_music_descr">在语音提示时完全暂停音乐播放（不仅仅是降低其音量）</string>
     <string name="select_voice_provider_descr">为您的语言选择或下载语音指引</string>
@@ -1300,8 +1300,8 @@
     <string name="profile_settings">选择设置对应场景</string>
     <string name="routing_attr_allow_private_name">允许私有访问</string>
     <string name="routing_attr_weight_name">重量限制</string>
-    <string name="routing_attr_avoid_stairs_name">避开阶梯</string>
-    <string name="routing_attr_avoid_stairs_description">避开阶梯</string>
+    <string name="routing_attr_avoid_stairs_name">避免阶梯</string>
+    <string name="routing_attr_avoid_stairs_description">避免阶梯</string>
     <string name="routing_attr_avoid_borders_name">避开边界穿越</string>
     <string name="routing_attr_avoid_borders_description">避免穿越边境线进入其它国家</string>
     <string name="routing_attr_weight_description">指定路线上允许的车辆重量</string>
@@ -2242,7 +2242,7 @@
     <string name="quick_action_take_photo_note">设置图片注释</string>
     <string name="quick_action_add_osm_bug">添加 OSM 注解</string>
     <string name="quick_action_navigation_voice">打开关闭声音</string>
-    <string name="quick_action_navigation_voice_off">语音已关闭</string>
+    <string name="quick_action_navigation_voice_off">语音开启</string>
     <string name="quick_action_add_gpx">添加 GPX 地标</string>
     <string name="quick_action_add_parking">添加停车场</string>
     <string name="quick_action_new_action">添加动作</string>
@@ -2263,7 +2263,7 @@
     <string name="quick_action_add_parking_descr">轻触动作按钮将会在屏幕中心的位置增加一个停车场。</string>
     <string name="quick_action_interim_dialog">显示一个临时的对话框</string>
     <string name="favorite_autofill_toast_text">" 保存到 "</string>
-    <string name="favorite_empty_place_name">地點</string>
+    <string name="favorite_empty_place_name">地点</string>
     <string name="quick_action_duplicates">指定的快速动作已经在使用中，已更名为 %1$s，以避免重复。</string>
     <string name="quick_action_duplicate">快速动作名称重复</string>
     <string name="quick_action_showhide_favorites_descr">轻触动作按钮将会在地图上显示或隐收藏夹标点。</string>
@@ -2282,7 +2282,7 @@
     <string name="quick_action_bug_descr">此消息将会自动填写注释字段。</string>
     <string name="quick_action_bug_message">消息</string>
     <string name="quick_action_category_descr">选择要保存收藏夹中的类别</string>
-    <string name="quick_action_gpx_category_descr">选择可选的类别</string>
+    <string name="quick_action_gpx_category_descr">选择一个可选类别。</string>
     <string name="quick_action_poi_list">POI 列表</string>
     <string name="quick_action_sh_poi_descr">您可以添加一个或多个要显示在地图上的 POI 类别。</string>
     <string name="quick_action_page_list_descr">轻触动作按钮会直达下面的清单。</string>
@@ -2548,4 +2548,27 @@
     <string name="total_donations">捐赠总计</string>
     <string name="winter_and_ski_renderer">冬季与滑雪</string>
     <string name="toast_empty_name_error">未命名位置</string>
+    <string name="routing_attr_avoid_share_taxi_name">避免共享出租车</string>
+    <string name="routing_attr_avoid_share_taxi_description">避免共享出租车</string>
+    <string name="routing_attr_avoid_train_name">避免火车</string>
+    <string name="routing_attr_avoid_train_description">避免火车</string>
+    <string name="routing_attr_avoid_subway_description">避免地铁和轻轨交通</string>
+    <string name="routing_attr_avoid_ferry_name">避免轮渡</string>
+    <string name="routing_attr_avoid_ferry_description">避免轮渡</string>
+    <string name="shared_string_degrees">度</string>
+    <string name="shared_string_milliradians">毫弧度</string>
+    <string name="avoid_pt_types_descr">选择导航时要避免的公共交通类型：</string>
+    <string name="shared_string_walk">步行</string>
+    <string name="save_poi_value_exceed_length">标签“%s”的最大长度是255个字符。
+\n请先进行缩短再继续。</string>
+    <string name="save_poi_value_exceed_length_title">“%”值的长度</string>
+    <string name="public_transport_warning_descr_blog">在我们的博客上了解更多与 OsmAnd 路线计算相关的信息。</string>
+    <string name="public_transport_warning_title">公共交通导航目前处于测试阶段，可能出现错误和信息不准确。</string>
+    <string name="add_intermediate">添加中继点</string>
+    <string name="route_add_start_point">添加起始点</string>
+    <string name="route_descr_select_start_point">选择起始点</string>
+    <string name="quick_action_switch_day_mode">日间模式</string>
+    <string name="quick_action_switch_night_mode">夜间模式</string>
+    <string name="quick_action_day_night_switch_mode">切换日间/夜间模式</string>
+    <string name="download_wiki_region_placeholder">此地区</string>
 </resources>

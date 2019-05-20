@@ -477,7 +477,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private TrkSegment getTrackSegment(LineChart chart) {
 			if (segment == null) {
-				List<ILineDataSet> ds = chart.getLineData().getDataSets();
+				LineData lineData = chart.getLineData();
+				List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 				if (ds != null && ds.size() > 0) {
 					for (GPXUtilities.Track t : gpxItem.group.getGpx().tracks) {
 						for (TrkSegment s : t.segments) {
@@ -497,7 +498,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private WptPt getPoint(LineChart chart, float pos) {
 			WptPt wpt = null;
-			List<ILineDataSet> ds = chart.getLineData().getDataSets();
+			LineData lineData = chart.getLineData();
+			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 			if (ds != null && ds.size() > 0) {
 				TrkSegment segment = getTrackSegment(chart);
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);

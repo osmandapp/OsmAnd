@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.view.ContextThemeWrapper;
@@ -16,8 +17,11 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,7 +29,6 @@ import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatistics.Boundaries;
 import net.osmand.router.RouteStatistics.RouteSegmentAttribute;
-import net.osmand.router.RouteStatistics.StatisticType;
 import net.osmand.router.RouteStatistics.Statistics;
 import net.osmand.util.Algorithms;
 
@@ -42,11 +45,12 @@ public class RouteInfoCard extends BaseCard {
 	private static final int MINIMUM_CONTRAST_RATIO = 3;
 
 	private Statistics routeStatistics;
-	private GPXUtilities.GPXTrackAnalysis analysis;
+	private GPXTrackAnalysis analysis;
+	private String selectedPropertyName;
 
 	private boolean showLegend;
 
-	public RouteInfoCard(MapActivity mapActivity, Statistics routeStatistics, GPXUtilities.GPXTrackAnalysis analysis) {
+	public RouteInfoCard(MapActivity mapActivity, Statistics routeStatistics, GPXTrackAnalysis analysis) {
 		super(mapActivity);
 		this.routeStatistics = routeStatistics;
 		this.analysis = analysis;
@@ -59,12 +63,44 @@ public class RouteInfoCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
+		updateContent(routeStatistics);
+	}
+
+	@Nullable
+	public HorizontalBarChart getChart() {
+		return (HorizontalBarChart) view.findViewById(R.id.chart);
+	}
+
+	private <E> void updateContent(final Statistics<E> routeStatistics) {
 		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 9, 24, true, nightMode);
+		chart.setExtraRightOffset(16);
+		chart.setExtraLeftOffset(16);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, routeStatistics, analysis, true, nightMode);
 		chart.setData(barData);
-		final LinearLayout container = (LinearLayout) view.findViewById(R.id.route_items);
+		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+			@Override
+			public void onValueSelected(Entry e, Highlight h) {
+				List<RouteSegmentAttribute<E>> elems = routeStatistics.getElements();
+				int i = h.getStackIndex();
+				if (i >= 0 && elems.size() > i) {
+					selectedPropertyName = elems.get(i).getPropertyName();
+					if (showLegend) {
+						updateLegend(routeStatistics);
+					}
+				}
+			}
+
+			@Override
+			public void onNothingSelected() {
+				selectedPropertyName = null;
+				if (showLegend) {
+					updateLegend(routeStatistics);
+				}
+			}
+		});
+		LinearLayout container = (LinearLayout) view.findViewById(R.id.route_items);
 		container.removeAllViews();
 		if (showLegend) {
 			attachLegend(container, routeStatistics);
@@ -81,6 +117,13 @@ public class RouteInfoCard extends BaseCard {
 		});
 	}
 
+	protected <E> void updateLegend(Statistics<E> routeStatistics) {
+		LinearLayout container = (LinearLayout) view.findViewById(R.id.route_items);
+		container.removeAllViews();
+		attachLegend(container, routeStatistics);
+		setLayoutNeeded();
+	}
+
 	private Drawable getCollapseIcon(boolean collapsed) {
 		return collapsed ? getContentIcon(R.drawable.ic_action_arrow_down) : getActiveIcon(R.drawable.ic_action_arrow_up);
 	}
@@ -92,16 +135,17 @@ public class RouteInfoCard extends BaseCard {
 	}
 
 	private String getInfoType() {
-		if (routeStatistics.getStatisticType() == StatisticType.CLASS) {
-			return app.getString(R.string.road_types);
-		} else if (routeStatistics.getStatisticType() == StatisticType.STEEPNESS) {
-			return app.getString(R.string.route_steepness_stat_container);
-		} else if (routeStatistics.getStatisticType() == StatisticType.SMOOTHNESS) {
-			return app.getString(R.string.route_smoothness_stat_container);
-		} else if (routeStatistics.getStatisticType() == StatisticType.SURFACE) {
-			return app.getString(R.string.route_surface_stat_container);
-		} else {
-			return "";
+		switch (routeStatistics.getStatisticType()) {
+			case CLASS:
+				return app.getString(R.string.road_types);
+			case STEEPNESS:
+				return app.getString(R.string.route_steepness_stat_container);
+			case SMOOTHNESS:
+				return app.getString(R.string.route_smoothness_stat_container);
+			case SURFACE:
+				return app.getString(R.string.route_surface_stat_container);
+			default:
+				return "";
 		}
 	}
 
@@ -124,7 +168,7 @@ public class RouteInfoCard extends BaseCard {
 			}
 			String propertyName = segment.getPropertyName();
 			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
-			Spannable text = getSpanLegend(name, segment);
+			Spannable text = getSpanLegend(name, segment, segment.getPropertyName().equals(selectedPropertyName));
 			TextView legend = (TextView) view.findViewById(R.id.legend_text);
 			legend.setText(text);
 
@@ -156,12 +200,12 @@ public class RouteInfoCard extends BaseCard {
 		});
 	}
 
-	private Spannable getSpanLegend(String title, RouteSegmentAttribute segment) {
+	private Spannable getSpanLegend(String title, RouteSegmentAttribute segment, boolean selected) {
 		String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistance(), getMyApplication());
 		title = Algorithms.capitalizeFirstLetter(title);
 		SpannableStringBuilder spannable = new SpannableStringBuilder(title);
 		spannable.append(": ");
-		int startIndex = spannable.length();
+		int startIndex = selected ? -0 : spannable.length();
 		spannable.append(formattedDistance);
 		spannable.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 

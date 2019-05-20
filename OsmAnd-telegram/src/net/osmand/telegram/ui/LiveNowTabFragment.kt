@@ -510,6 +510,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.topDivider?.visibility = if (!sortByGroup && position != 0) View.GONE else View.VISIBLE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
 				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
+				holder.topShadowDivider?.visibility = View.GONE
 			}
 		}
 
@@ -601,6 +602,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val description: TextView? = view.findViewById(R.id.description)
 			val receivedGpxPointsContainer: View? = view.findViewById(R.id.received_gps_points_container)
 			val receivedGpxPointsDescr: TextView? = view.findViewById(R.id.received_gps_points_description)
+			val topShadowDivider: View? = view.findViewById(R.id.top_divider)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 			val lastTelegramUpdateTime: TextView? = view.findViewById(R.id.last_telegram_update_time)
 

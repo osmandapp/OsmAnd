@@ -835,7 +835,7 @@ public class WaypointHelper {
 		}
 	}
 
-	private class AmenityLocationPoint implements LocationPoint {
+	public class AmenityLocationPoint implements LocationPoint {
 
 		Amenity a;
 

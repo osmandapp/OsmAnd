@@ -352,7 +352,7 @@
     <string name="poi_crematorium">Crematorio</string>
     <string name="poi_bank">Banco</string>
     <string name="poi_amenity_atm">Cajero automático</string>
-    <string name="poi_accountant">Contable</string>
+    <string name="poi_accountant">Estudio contable;Contador</string>
     <string name="poi_cave_entrance">Entrada a cueva</string>
     <string name="poi_volcano">Volcán</string>
     <string name="poi_crater">Cráter</string>
@@ -1519,7 +1519,7 @@
     <string name="poi_automated_no">No automatizado</string>
     <string name="poi_full_service_yes">Servicio completo</string>
     <string name="poi_aeroway_fuel">Gasolinera para aviones</string>
-    <string name="poi_public_bath">Baño público</string>
+    <string name="poi_public_bath">Baños públicos (termas)</string>
     <string name="poi_male_yes">Masculino</string>
     <string name="poi_male_no">Hombres: prohibido</string>
     <string name="poi_female_yes">Femenino</string>
@@ -3578,4 +3578,8 @@
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_flare">Llamarada de gas;Quemado en antorcha</string>
     <string name="poi_change_delete">Objeto borrado</string>
+    <string name="poi_climbing_crag_filter">Peñón de escalada</string>
+    <string name="poi_health_specialty_radiotherapy_yes">Radioterapia</string>
+    <string name="poi_rescue_box">Caja de rescate</string>
+    <string name="poi_climbing_crag">Sí</string>
 </resources>

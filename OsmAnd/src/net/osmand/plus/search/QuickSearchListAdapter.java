@@ -413,7 +413,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				if (rs != null) {
 					Calendar inst = Calendar.getInstance();
 					inst.setTimeInMillis(System.currentTimeMillis());
-					boolean worksNow = rs.isOpenedForTime(inst);
+					boolean worksNow = !amenity.isClosed() && rs.isOpenedForTime(inst);
 					inst.setTimeInMillis(System.currentTimeMillis() + 30 * 60 * 1000); // 30 minutes later
 					boolean worksLater = rs.isOpenedForTime(inst);
 					int colorId = worksNow ? worksLater ? R.color.color_ok : R.color.color_intermediate : R.color.color_warning;
@@ -421,7 +421,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					timeLayout.setVisibility(View.VISIBLE);
 					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_small_time, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
-					String rt = rs.getCurrentRuleTime(inst);
+					String rt = amenity.isClosed() ? app.getResources().getString(R.string.poi_operational_status_closed) : rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);
 				} else {
 					timeLayout.setVisibility(View.GONE);

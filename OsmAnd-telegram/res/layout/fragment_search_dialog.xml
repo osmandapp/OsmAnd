@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fitsSystemWindows="true"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_bg_color">
+
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/action_bar_height">
+
+			<LinearLayout
+				android:id="@+id/title_row"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="center_vertical">
+
+				<EditText
+					android:id="@+id/searchEditText"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/content_padding_standard"
+					android:layout_marginRight="@dimen/content_padding_standard"
+					android:layout_weight="1"
+					android:background="@null"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:hint="@string/type_contact_or_group_name"
+					android:maxLines="1"
+					android:textColor="@color/app_bar_title_light"
+					android:textSize="@dimen/title_text_size" />
+
+				<ImageView
+					android:id="@+id/search_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:contentDescription="@string/shared_string_search"
+					android:padding="@dimen/content_padding_standard"
+					android:src="@drawable/ic_action_search_dark"
+					android:tint="@color/icon_light" />
+
+			</LinearLayout>
+
+		</android.support.v7.widget.Toolbar>
+
+	</android.support.design.widget.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<net.osmand.telegram.ui.views.EmptyStateRecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingBottom="@dimen/buttons_bottom_bar_height" />
+
+		<include
+			android:id="@+id/empty_view"
+			layout="@layout/empty_state_search" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical">
+
+			<android.support.v7.widget.AppCompatImageView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:scaleType="fitXY"
+				android:src="?attr/bottom_nav_shadow" />
+
+			<include
+				layout="@layout/bottom_buttons_bar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/buttons_bottom_bar_height"
+				android:layout_gravity="bottom" />
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+</LinearLayout>

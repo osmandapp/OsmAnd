@@ -468,7 +468,7 @@
     <string name="oclock">puntuan</string>
     <string name="towards">honuntz</string>
     <string name="accuracy">Zehastasuna</string>
-    <string name="altitude">Altuera</string>
+    <string name="altitude">Altitudea</string>
     <string name="no_info">Informaziorik ez</string>
     <string name="direction_style_sidewise">Ezkerreruntz (8 sektore)</string>
     <string name="direction_style_clockwise">Eskubiruntz (12 sektore)</string>
@@ -533,7 +533,7 @@
     <string name="user_name">Zure OSM erabiltzailea</string>
     <string name="open_street_map_login_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat.</string>
     <string name="user_password">Zure OSMeko pasahitza</string>
-    <string name="osmand_service">Bigarren planoko modua</string>
+    <string name="osmand_service">Atzeko plano modua</string>
     <string name="osmand_service_descr">OsmAnd bigarren planoan dabil pantaila itzalia dagoen bitartean.</string>
     <string name="download_files_not_enough_space">Ez dago leku nahikorik %1$s MB deskargatzeko (%2$s libre).</string>
     <string name="download_files_question_space">{0} fitxategi deskargatu? 
@@ -672,12 +672,12 @@ Biltegiratzean {1} MB erabiliko dira.
     <string name="shared_string_previous">Aurrekoa</string>
     <string name="unit_of_length_descr">Aldatu distantzia neurtzeko unitateak.</string>
     <string name="unit_of_length">Luzera unitatea</string>
-    <string name="si_mi_feet">Miliak/oinak</string>
+    <string name="si_mi_feet">Miliak/Oin</string>
     <string name="si_mi_yard">Miliak/yardak</string>
     <string name="si_km_m">Kilometroak/metroak</string>
     <string name="yard">yd</string>
     <string name="foot">oin</string>
-    <string name="mile_per_hour">m/h</string>
+    <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Kokapena partekatu erabiliz</string>
     <string name="send_location_sms_pattern">Kokapena: %1$s⏎\n%2$s</string>
@@ -871,7 +871,7 @@ Biltegiratzean {1} MB erabiliko dira.
     <string name="transport_stops_to_pass">pasatu beharreko geltokiak</string>
     <string name="transport_route_distance">Ibilbidearen distantzia</string>
     <string name="transport">Garraioa</string>
-    <string name="shared_string_ok">Ados</string>
+    <string name="shared_string_ok">ADOS</string>
     <string name="show_transport_over_map_description">Erakutsi garraio publikoaren geltokiak mapan.</string>
     <string name="show_transport_over_map">Erakutsi garraioaren geltokiak</string>
     <string name="hello">OsmAnd nabigazio aplikazioa</string>
@@ -984,7 +984,7 @@ Biltegiratzean {1} MB erabiliko dira.
     <string name="show_gps_coordinates_text">Erakutsi GPS koordenatuak mapan</string>
     <string name="use_internet_to_download_tile">Deskargatu falta diren tesela mapak</string>
     <string name="app_description">Nabigazio aplikazioa</string>
-    <string name="shared_string_exit">Atera</string>
+    <string name="shared_string_exit">Irten</string>
     <string name="search_button">Bilatu</string>
     <string name="search_activity">Bilatu</string>
     <string name="searchpoi_activity">Aukeratu POI-a</string>
@@ -1123,7 +1123,7 @@ Biltegiratzean {1} MB erabiliko dira.
     <string name="av_camera_pic_size">Kameraren irudiaren tamaina</string>
     <string name="av_camera_pic_size_descr">Aukeratu barne-kameraren irudiaren tamaina.</string>
     <string name="navigation_intent_invalid">Baliogabeko formatuak: %s</string>
-    <string name="shared_string_share">Banatu</string>
+    <string name="shared_string_share">Partekatu</string>
     <string name="share_fav_subject">OsmAnd bidez partekatutako gogokoak</string>
     <string name="import_file_favourites">Gorde datuak GPX fitxategi bezala edo inportatu bide-puntuak \'Gogoko\' gisa?</string>
     <string name="keep_informing_never">Inoiz</string>
@@ -1259,7 +1259,7 @@ Lorratza %2$s</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_do_not_use">Ez erabili</string>
     <string name="shared_string_enable">Gaitu</string>
-    <string name="shared_string_disable">Ezgaitu</string>
+    <string name="shared_string_disable">Desgaitu</string>
     <string name="shared_string_enabled">Gaituta</string>
     <string name="shared_string_disabled">Ezgaituta</string>
     <string name="shared_string_selected">Hautatuta</string>
@@ -1415,9 +1415,9 @@ Lorratza %2$s</string>
     <string name="favorite_category_select">Hautatu kategoria</string>
     <string name="default_speed_system_descr">Zehaztu abiadura unitatea.</string>
     <string name="default_speed_system">Abiadura unitatea</string>
-    <string name="si_kmh">Kilometroak orduko</string>
-    <string name="si_m_s">Metroak segundoko</string>
-    <string name="si_min_km">Minutuak kilometroko</string>
+    <string name="si_kmh">Kilometro orduko</string>
+    <string name="si_m_s">Metro segunduko</string>
+    <string name="si_min_km">Minutu kilometroko</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -1461,7 +1461,7 @@ Lorratza %2$s</string>
     <string name="shared_string_logoff">Itxi saioa</string>
     <string name="rendering_attr_hideHouseNumbers_name">Etxeen zenbakiak</string>
     <string name="specified_directiory_not_writeable">Ezin izan dira mapak zehaztutako direktorioan sortu</string>
-    <string name="copying_osmand_file_failed">Fitxategiak kopiatzeak huts egin du</string>
+    <string name="copying_osmand_file_failed">Fitxategiak lekuz aldatzean huts egin du</string>
     <string name="storage_directory_external">Kanpo biltegiratzea</string>
     <string name="storage_directory_internal_app">Barne aplikazio memoria</string>
     <string name="storage_directory_manual">Eskuz zehaztuta</string>
@@ -1679,9 +1679,9 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="storage_directory_card">Memoria txartela</string>
     <string name="hillshade_layer_disabled">Erliebe-itzalak geruza desgaituta</string>
     <string name="nm">nmi</string>
-    <string name="si_nm">Itsas miliak</string>
-    <string name="si_mph">Miliak orduko</string>
-    <string name="si_min_m">Minutuak miliako</string>
+    <string name="si_nm">Milia nautikoak</string>
+    <string name="si_mph">Milia orduko</string>
+    <string name="si_min_m">Minutu miliaro</string>
     <string name="si_nm_h">Itsas miliak orduko (korapiloak)</string>
     <string name="nm_h">kn</string>
     <string name="av_locations_descr">GPX fitxategia ohar-kokapenekin.</string>
@@ -1717,7 +1717,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="disable_recording_once_app_killed">Eragotzi bigarren planoko egunkaria</string>
     <string name="disable_recording_once_app_killed_descrp">GPX erregistroa geldiaraziko du aplikazioa hiltzean (azken aplikazioak pantailaren bidez). (OsmAnd bigarren planoan dabilela adierazten duen ikonoa Android jakinarazpen barratik desagertuko da)</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC bidezidor kirol sinboloen araberako koloreztatzea</string>
-    <string name="application_dir_change_warning3">Kopiatu OsmAnd-en datu fitxategiak xede berrira ?</string>
+    <string name="application_dir_change_warning3">Eraman OsmAnd-en datu fitxategiak xede berrira \?</string>
     <string name="storage_directory_multiuser">Erabiltzaile anitzeko biltegiratzea</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kartografia laguntzailea</string>
     <string name="welcome_select_region">Trafiko seinaleak eta arauak ongi adierazteko, mesedez hautatu zure gidatze eremua:</string>
@@ -1807,7 +1807,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="duration">Iraupena</string>
     <string name="distance">Distantzia</string>
     <string name="index_tours">Ibilaldiak</string>
-    <string name="shared_string_all">Guztiak</string>
+    <string name="shared_string_all">Guztia</string>
     <string name="rendering_value_browse_map_name">Arakatu mapa</string>
     <string name="rendering_value_car_name">Kotxea</string>
     <string name="rendering_value_bicycle_name">Bizikleta</string>
@@ -2981,4 +2981,50 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_bridleway_name">Zaldi-bidea</string>
     <string name="rendering_attr_highway_class_cycleway_name">Bizikletentzako bidea</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Ekintza botoi hau sakatzeak mapan GPX lorratzak erakutsi edo ezkutatzen ditu</string>
+    <string name="routing_attr_avoid_tram_name">Ekidin tranbiak</string>
+    <string name="routing_attr_avoid_tram_description">Ekidin tranbiak</string>
+    <string name="routing_attr_avoid_bus_name">Ekidin autobusak</string>
+    <string name="routing_attr_avoid_bus_description">Ekidin autobusak eta trolebusak</string>
+    <string name="routing_attr_avoid_share_taxi_name">Ekidin taxi partekatuak</string>
+    <string name="routing_attr_avoid_share_taxi_description">Ekidin taxi partekatuak</string>
+    <string name="routing_attr_avoid_train_name">Ekidin trenak</string>
+    <string name="routing_attr_avoid_train_description">Ekidin trenak</string>
+    <string name="routing_attr_avoid_subway_name">Ekidin metroak</string>
+    <string name="routing_attr_avoid_subway_description">Ekidin metroak eta tren arinak</string>
+    <string name="routing_attr_avoid_ferry_name">Ekidin ferriak</string>
+    <string name="routing_attr_avoid_ferry_description">Ekidin ferriak</string>
+    <string name="release_3_3_7">"• Garraio publikoetan  transferentzien arteko denbora erakusten da
+\n
+\n • Interfaze zuzendua ibilbidearen xehetasunetan
+\n
+\n • Itxura iluna zuzendua, norabide menuan eta ibilbidearen xehetasunetan
+\n
+\n • Distantziaren neurketan azimuth erakusten da
+\n
+\n"</string>
+    <string name="rendering_attr_surface_unpaved_name">Zolatu gabea</string>
+    <string name="rendering_attr_surface_grass_paver_name">Belar zolatua</string>
+    <string name="rendering_attr_surface_paved_name">Zolatua</string>
+    <string name="rendering_attr_surface_sett_name">Galtzada-harria</string>
+    <string name="rendering_attr_surface_cobblestone_name">Galtzadarria</string>
+    <string name="rendering_attr_surface_fine_gravel_name">Legarra</string>
+    <string name="routing_attr_avoid_sett_name">Saihestu harri eta baldosa galtzadak</string>
+    <string name="send_log">Bidali egunkaria</string>
+    <string name="files_moved">%1$d fitxategi mugituta (%2$s).</string>
+    <string name="files_copied">%1$d fitxategi kopiatuta (%2$s).</string>
+    <string name="files_failed">%1$d fitxategi kopiatzeak huts egin du (%2$s).</string>
+    <string name="move_maps">Mugitu mapak</string>
+    <string name="dont_move_maps">Ez mugitu</string>
+    <string name="public_transport_ped_route_title">Oinezko bidea</string>
+    <string name="public_transport_no_route_title">Tamalez, OsmAnd-ek ezin izan du zure ezarpenetarako bide egokirik aurkitu.</string>
+    <string name="public_transport_try_ped">Saiatu oinezko nabigazioa.</string>
+    <string name="public_transport_try_change_settings">Saiatu ezarpenak aldatzen.</string>
+    <string name="public_transport_calc_pedestrian">Kalkulatu</string>
+    <string name="public_transport_type">Garraio mota</string>
+    <string name="shared_string_milliradians">Miliradianak</string>
+    <string name="angular_measeurement">Neurri-unitate angularra</string>
+    <string name="angular_measeurement_descr">Aldatu zertan azimuta neurtzen den.</string>
+    <string name="rendering_attr_surface_pebblestone_name">Hartxindar bidea</string>
+    <string name="rendering_attr_surface_gravel_name">Hartxindarra</string>
+    <string name="routing_attr_avoid_sett_description">Saihestu harri eta baldosa galtzadak</string>
 </resources>

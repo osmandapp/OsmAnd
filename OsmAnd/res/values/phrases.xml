@@ -113,6 +113,7 @@
 	<string name="poi_denotation">Denotation</string>
 	<string name="poi_park_ride">Park and ride</string>
 	<string name="poi_rtsa_scale_filter">Difficulty category</string>
+	<string name="poi_climbing_crag_filter">Climbing crag</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -1282,6 +1283,7 @@
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
+        <string name="reddit">Reddit</string>
 	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
@@ -3677,7 +3679,7 @@
 	<string name="poi_climbing_trad_yes">Traditional: yes</string>
 	<string name="poi_climbing_trad_no">Traditional: no</string>
 	<string name="poi_climbing_multipitch_yes">Multi-pitch routes: yes</string>
-	<string name="poi_climbing_multipitch_no">Multi-pitch routes: yes</string>
+	<string name="poi_climbing_multipitch_no">Multi-pitch routes: no</string>
 	<string name="poi_climbing_ice_yes">Ice: yes</string>
 	<string name="poi_climbing_ice_no">Ice: no</string>
 	<string name="poi_climbing_mixed_yes">Mixed: yes</string>
@@ -3934,5 +3936,8 @@
 
 	<string name="poi_flare">Gas flare;Flare stack</string>
 	<string name="poi_change_delete">Deleted object</string>
+
+	<string name="poi_rescue_box">Rescue box</string>
+	<string name="poi_climbing_crag">Yes</string>
 
 </resources>

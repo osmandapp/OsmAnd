@@ -244,7 +244,9 @@ public class GpxSelectionHelper {
 		if (g.tracks.size() > 0) {
 			for (int i = 0; i < g.tracks.size(); i++) {
 				GpxDisplayGroup group = buildGpxDisplayGroup(g, i, name);
-				dg.add(group);
+				if (group.getModifiableList().size() > 0) {
+					dg.add(group);
+				}
 			}
 		}
 		if (g.routes.size() > 0) {

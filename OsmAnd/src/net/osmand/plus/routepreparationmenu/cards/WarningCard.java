@@ -1,7 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.graphics.Typeface;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -15,16 +15,38 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.util.Algorithms;
 
-public class WarningCard extends BaseCard {
+public abstract class WarningCard extends BaseCard {
 
-	public static final String OSMAND_BLOG_LINK = "https://osmand.net/blog/guideline-pt";
+	protected int imageId;
+	protected Drawable imageDrawable;
+	protected String title;
+	protected String linkText;
+	protected int startLinkIndex = -1;
+	protected int endLinkIndex;
 
-	public WarningCard(MapActivity mapActivity) {
+	protected WarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
+	}
+
+	public int getImageId() {
+		return imageId;
+	}
+
+	public Drawable getImageDrawable() {
+		return imageDrawable;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getLinkText() {
+		return linkText;
+	}
+
+	protected void onLinkClicked() {
 	}
 
 	@Override
@@ -36,13 +58,18 @@ public class WarningCard extends BaseCard {
 	protected void updateContent() {
 		ImageView icon = (ImageView) view.findViewById(R.id.warning_img);
 		TextView warningTitle = (TextView) view.findViewById(R.id.warning_title);
-		TextView warningDescr = (TextView) view.findViewById(R.id.warning_descr);
+		TextView warningLink = (TextView) view.findViewById(R.id.warning_link);
 
-		if (app.getRoutingHelper().isPublicTransportMode()) {
-			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_bus_dark));
-			warningTitle.setText(R.string.public_transport_warning_title);
+		if (imageDrawable != null) {
+			icon.setImageDrawable(imageDrawable);
+		} else if (imageId != 0) {
+			icon.setImageDrawable(getContentIcon(imageId));
+		}
+		warningTitle.setText(title);
+		warningLink.setVisibility(!Algorithms.isEmpty(title) ? View.VISIBLE : View.GONE);
 
-			String text = app.getString(R.string.public_transport_warning_descr_blog);
+		if (!Algorithms.isEmpty(linkText)) {
+			String text = linkText;
 			SpannableString spannable = new SpannableString(text);
 			ClickableSpan clickableSpan = new ClickableSpan() {
 				@Override
@@ -53,37 +80,28 @@ public class WarningCard extends BaseCard {
 
 				@Override
 				public void onClick(@NonNull View widget) {
-					WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(OSMAND_BLOG_LINK), nightMode);
+					CardListener listener = getListener();
+					if (listener != null) {
+						listener.onCardButtonPressed(WarningCard.this, 0);
+					} else {
+						onLinkClicked();
+					}
 				}
 			};
-			int startIndex = text.lastIndexOf(" ");
-			if (startIndex != -1) {
-				spannable.setSpan(clickableSpan, startIndex, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				spannable.setSpan(new StyleSpan(Typeface.BOLD), startIndex, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				warningDescr.setMovementMethod(LinkMovementMethod.getInstance());
+			int startLinkIndex = this.startLinkIndex;
+			int endLinkIndex = this.endLinkIndex;
+			if (startLinkIndex < 0 || endLinkIndex == 0) {
+				startLinkIndex = 0;
+				endLinkIndex = text.length();
+				warningLink.setTextSize(15);
 			}
-			warningDescr.setText(spannable);
+			spannable.setSpan(clickableSpan, startLinkIndex, endLinkIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spannable.setSpan(new StyleSpan(Typeface.BOLD), startLinkIndex, endLinkIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			warningLink.setMovementMethod(LinkMovementMethod.getInstance());
+			warningLink.setText(spannable);
+			warningLink.setVisibility(View.VISIBLE);
 		} else {
-			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_waypoint));
-			warningTitle.setText(R.string.route_is_too_long_v2);
-			SpannableString text = new SpannableString(app.getString(R.string.add_intermediate));
-			ClickableSpan clickableSpan = new ClickableSpan() {
-				@Override
-				public void updateDrawState(@NonNull TextPaint ds) {
-					ds.setColor(getActiveColor());
-					ds.setUnderlineText(false);
-				}
-
-				@Override
-				public void onClick(@NonNull View widget) {
-					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.INTERMEDIATE);
-				}
-			};
-			text.setSpan(clickableSpan, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			text.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			warningDescr.setMovementMethod(LinkMovementMethod.getInstance());
-			warningDescr.setTextSize(15);
-			warningDescr.setText(text);
+			warningLink.setVisibility(View.GONE);
 		}
 	}
 }

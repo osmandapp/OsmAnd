@@ -101,49 +101,6 @@
 
 		</LinearLayout>
 
-		<FrameLayout
-			android:id="@+id/search_box"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/content_padding_half"
-			android:layout_marginRight="@dimen/content_padding_half"
-			android:visibility="gone"
-			tools:background="@drawable/btn_round">
-
-			<LinearLayout
-				android:id="@+id/search_button"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/search_box_height"
-				android:background="?attr/selectableItemBackgroundBorderless"
-				android:gravity="center_vertical">
-
-				<TextView
-					android:id="@+id/search_hint"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/content_padding_standard"
-					android:layout_marginRight="@dimen/content_padding_standard"
-					android:layout_weight="1"
-					android:ellipsize="end"
-					android:gravity="center_vertical"
-					android:maxLines="1"
-					android:text="@string/my_location_search_hint"
-					android:textColor="?android:attr/textColorSecondary"
-					android:textSize="@dimen/descr_text_size"/>
-
-				<ImageView
-					android:id="@+id/search_icon"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginEnd="@dimen/content_padding_half"
-					android:layout_marginRight="@dimen/content_padding_half"
-					tools:src="@drawable/ic_action_search_dark"
-					tools:tint="@color/icon_light"/>
-
-			</LinearLayout>
-
-		</FrameLayout>
-
 		<LinearLayout
 			android:id="@+id/title_container"
 			android:layout_width="match_parent"
@@ -295,6 +252,48 @@
 			</LinearLayout>
 
 		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/search_box"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginRight="@dimen/content_padding_half"
+			tools:background="@drawable/btn_round">
+
+			<LinearLayout
+				android:id="@+id/search_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/search_box_height"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:gravity="center_vertical">
+
+				<TextView
+					android:id="@+id/search_hint"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/content_padding_standard"
+					android:layout_marginRight="@dimen/content_padding_standard"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:text="@string/my_location_search_hint"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/descr_text_size"/>
+
+				<ImageView
+					android:id="@+id/search_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/content_padding_half"
+					android:layout_marginRight="@dimen/content_padding_half"
+					tools:src="@drawable/ic_action_search_dark"
+					tools:tint="@color/icon_light"/>
+
+			</LinearLayout>
+
+		</FrameLayout>
 
 	</android.support.design.widget.AppBarLayout>
 

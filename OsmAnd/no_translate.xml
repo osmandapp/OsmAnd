@@ -31,6 +31,7 @@
     <string name="osm_live_annual_price">€7,99</string>
     <string name="osm_live_annual_monthly_price">€2,66</string>
     <string name="twitter_address">https://twitter.com/osmandapp</string>
+    <string name="reddit_address">https://www.reddit.com/r/OsmAnd</string>
     <string name="facebook_address">https://www.facebook.com/osmandapp</string>
     <string name="vk_address">https://vk.com/osmandapp</string>
     <string name="default_changeset_add">Add</string>

@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu.cards;
 import android.graphics.Matrix;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
@@ -14,11 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.MPPointD;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -39,6 +43,9 @@ import java.util.List;
 
 public class RouteStatisticCard extends BaseCard {
 
+	public static final int DETAILS_BUTTON_INDEX = 0;
+	public static final int START_BUTTON_INDEX = 1;
+
 	private GPXFile gpx;
 	private GpxDisplayItem gpxItem;
 	@Nullable
@@ -55,6 +62,16 @@ public class RouteStatisticCard extends BaseCard {
 		this.onTouchListener = onTouchListener;
 		this.onAnalyseClickListener = onAnalyseClickListener;
 		makeGpxDisplayItem();
+	}
+
+	@Nullable
+	public GPXFile getGpx() {
+		return gpx;
+	}
+
+	@Nullable
+	public GpxDisplayItem getGpxItem() {
+		return gpxItem;
 	}
 
 	@Override
@@ -101,10 +118,57 @@ public class RouteStatisticCard extends BaseCard {
 		arriveTimeTv.setText(arriveStr);
 
 		buildSlopeInfo();
+		updateButtons();
 
 		if (isTransparentBackground()) {
 			view.setBackgroundDrawable(null);
 		}
+	}
+
+	@Override
+	public int getTopViewHeight() {
+		View altitudeContainer = view.findViewById(R.id.altitude_container);
+		return (int) altitudeContainer.getY();
+	}
+
+	private void updateButtons() {
+		FrameLayout detailsButton = (FrameLayout) view.findViewById(R.id.details_button);
+		TextView detailsButtonDescr = (TextView) view.findViewById(R.id.details_button_descr);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+			AndroidUtils.setBackground(app, detailsButtonDescr, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+		} else {
+			AndroidUtils.setBackground(app, detailsButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+		}
+		detailsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardButtonPressed(RouteStatisticCard.this, DETAILS_BUTTON_INDEX);
+				}
+			}
+		});
+		FrameLayout startButton = (FrameLayout) view.findViewById(R.id.start_button);
+		TextView startButtonDescr = (TextView) view.findViewById(R.id.start_button_descr);
+		AndroidUtils.setBackground(app, startButton, nightMode, R.drawable.btn_active_light, R.drawable.btn_active_dark);
+		int color = ContextCompat.getColor(app, R.color.card_and_list_background_light);
+		startButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardButtonPressed(RouteStatisticCard.this, START_BUTTON_INDEX);
+				}
+			}
+		});
+		RoutingHelper helper = app.getRoutingHelper();
+		if (helper.isFollowingMode() || helper.isPauseNavigation()) {
+			startButtonDescr.setText(R.string.shared_string_continue);
+		} else {
+			startButtonDescr.setText(R.string.shared_string_control_start);
+		}
+		startButtonDescr.setTextColor(color);
 	}
 
 	private void buildSlopeInfo() {
@@ -166,6 +230,11 @@ public class RouteStatisticCard extends BaseCard {
 		}
 	}
 
+	@Nullable
+	public LineChart getChart() {
+		return (LineChart) view.findViewById(R.id.chart);
+	}
+
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		final LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
@@ -190,16 +259,39 @@ public class RouteStatisticCard extends BaseCard {
 			LineData data = new LineData(dataSets);
 			mChart.setData(data);
 
-			mChart.setOnChartGestureListener(new OnChartGestureListener() {
+			mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+				@Override
+				public void onValueSelected(Entry e, Highlight h) {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onValueSelected(RouteStatisticCard.this, e, h);
+					}
+				}
 
+				@Override
+				public void onNothingSelected() {
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onNothingSelected(RouteStatisticCard.this);
+					}
+				}
+			});
+
+			mChart.setOnChartGestureListener(new OnChartGestureListener() {
+				boolean hasTranslated = false;
 				float highlightDrawX = -1;
 
 				@Override
 				public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+					hasTranslated = false;
 					if (mChart.getHighlighted() != null && mChart.getHighlighted().length > 0) {
 						highlightDrawX = mChart.getHighlighted()[0].getDrawX();
 					} else {
 						highlightDrawX = -1;
+					}
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartGestureStart(RouteStatisticCard.this, me, lastPerformedGesture);
 					}
 				}
 
@@ -211,6 +303,10 @@ public class RouteStatisticCard extends BaseCard {
 						gpxItem.chartHighlightPos = highlights[0].getX();
 					} else {
 						gpxItem.chartHighlightPos = -1;
+					}
+					CardChartListener chartListener = getChartListener();
+					if (chartListener != null) {
+						chartListener.onChartGestureEnd(RouteStatisticCard.this, me, lastPerformedGesture, hasTranslated);
 					}
 				}
 
@@ -236,10 +332,19 @@ public class RouteStatisticCard extends BaseCard {
 
 				@Override
 				public void onChartTranslate(MotionEvent me, float dX, float dY) {
+					hasTranslated = true;
 					if (highlightDrawX != -1) {
 						Highlight h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
 						if (h != null) {
-							mChart.highlightValue(h);
+							/*
+							ILineDataSet set = mChart.getLineData().getDataSetByIndex(h.getDataSetIndex());
+							if (set != null && set.isHighlightEnabled()) {
+								Entry e = set.getEntryForXValue(h.getX(), h.getY());
+								MPPointD pix = mChart.getTransformer(set.getAxisDependency()).getPixelForValues(e.getX(), e.getY());
+								h.setDraw((float) pix.x, (float) pix.y);
+							}
+							*/
+							mChart.highlightValue(h, true);
 						}
 					}
 				}

@@ -4,8 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,7 +34,7 @@ import net.osmand.util.MapUtils;
 import java.util.List;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment {
-	public static final String TAG = "MapRouteInfoMenuFragment";
+	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
 	@Nullable
 	private MapRouteInfoMenu menu;
@@ -71,11 +69,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	@Override
 	public int getToolbarHeight() {
 		return 0;
-	}
-
-	@Override
-	public boolean isSingleFragment() {
-		return true;
 	}
 
 	@Override
@@ -152,7 +145,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				dismiss();
 				return;
 			}
-			updateControlButtons();
 			updateInfo();
 			View mainView = getMainView();
 			if (mainView != null) {
@@ -177,7 +169,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		if (menu != null) {
-			menu.onDismiss();
+			menu.onDismiss(getCurrentMenuState());
 		}
 	}
 
@@ -254,11 +246,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	}
 
 	@Override
-	protected void calculateLayout(View view) {
+	protected void calculateLayout(View view, boolean initLayout) {
 		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
 				+ view.findViewById(R.id.control_buttons).getHeight()
 				- view.findViewById(R.id.buttons_shadow).getHeight();
-		super.calculateLayout(view);
+		super.calculateLayout(view, initLayout);
 	}
 
 	private void adjustMapPosition(int y) {
@@ -355,6 +347,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		}
 	}
 
+	private boolean isPublicTransportMode() {
+		OsmandApplication app = getMyApplication();
+		return app != null && app.getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
+	}
+	
 	public void updateRouteCalculationProgress(int progress) {
 		MapActivity mapActivity = getMapActivity();
 		View mainView = getMainView();
@@ -362,9 +359,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (mapActivity == null || mainView == null || view == null) {
 			return;
 		}
-
+		boolean publicTransportMode = isPublicTransportMode();
 		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
 		if (progressBar != null) {
+			if (progress == 0) {
+				progressBar.setIndeterminate(publicTransportMode);
+			}
 			if (progressBar.getVisibility() != View.VISIBLE) {
 				progressBar.setVisibility(View.VISIBLE);
 			}
@@ -372,8 +372,9 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		}
 		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
-			if (progressBarButton.getVisibility() != View.VISIBLE) {
-				progressBarButton.setVisibility(View.VISIBLE);
+			int visibility = publicTransportMode ? View.GONE : View.VISIBLE;
+			if (progressBarButton.getVisibility() != visibility) {
+				progressBarButton.setVisibility(visibility);
 			}
 			progressBarButton.setProgress(progress);
 		}
@@ -398,31 +399,8 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (progressBarButton != null) {
 			progressBarButton.setVisibility(View.GONE);
 		}
-		int color = isNightMode() ? R.color.main_font_dark : R.color.card_and_list_background_light;
-		((TextView) view.findViewById(R.id.start_button_descr)).setTextColor(ContextCompat.getColor(mapActivity, color));
-	}
-
-	public void updateControlButtons() {
-		OsmandApplication app = getMyApplication();
-		MapActivity mapActivity = getMapActivity();
-		View view = getView();
-		if (app != null && mapActivity != null && view != null) {
-			TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-			textViewExProgress.color1 = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.main_font_dark : R.color.card_and_list_background_light);
-			textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
-
-			boolean publicTransportMode = app.getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
-			if (menu != null && menu.isRouteCalculated()) {
-				if (publicTransportMode) {
-					AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-					textViewExProgress.color1 = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-				} else {
-					AndroidUtils.setBackground(app, view.findViewById(R.id.start_button), isNightMode(), R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
-					textViewExProgress.color1 = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.main_font_dark : R.color.card_and_list_background_light);
-				}
-				textViewExProgress.percent = 1;
-			}
-		}
+		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
+		textViewExProgress.percent = 1;
 	}
 
 	public void show(MapActivity mapActivity) {
@@ -438,18 +416,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				.add(R.id.routeMenuContainer, this, TAG)
 				.addToBackStack(TAG)
 				.commitAllowingStateLoss();
-	}
-
-	public void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			try {
-				activity.getSupportFragmentManager().popBackStack(TAG,
-						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} catch (Exception e) {
-				//
-			}
-		}
 	}
 
 	public void applyDayNightMode() {
@@ -495,8 +461,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 		ctx.setupRouteCalculationProgressBar((ProgressBar) mainView.findViewById(R.id.progress_bar));
 		setupRouteCalculationButtonProgressBar((ProgressBar) view.findViewById(R.id.progress_bar_button));
-
-		updateControlButtons();
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity, int initialMenuState) {
@@ -540,6 +504,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			int bgColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.activity_background_dark : R.color.activity_background_light);
 			int progressColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
+			pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 		}
 	}
 }

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -79,7 +80,6 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -111,6 +111,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected TitleButtonController leftDownloadButtonController;
 	protected TitleButtonController rightDownloadButtonController;
+	protected List<Pair<TitleButtonController, TitleButtonController>> additionalButtonsControllers;
 	protected TitleProgressController titleProgressController;
 
 	protected TopToolbarController toolbarController;
@@ -354,6 +355,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public TitleButtonController getRightDownloadButtonController() {
 		return rightDownloadButtonController;
+	}
+
+	public List<Pair<TitleButtonController, TitleButtonController>> getAdditionalButtonsControllers() {
+		return additionalButtonsControllers;
 	}
 
 	public TitleProgressController getTitleProgressController() {

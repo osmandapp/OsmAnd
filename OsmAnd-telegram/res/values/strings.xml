@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="proxy_key">Key</string>
+    <string name="proxy_password">Password</string>
+    <string name="proxy_username">Username</string>
+    <string name="proxy_credentials">Credentials</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Server</string>
+    <string name="shared_string_connection">Connection</string>
+    <string name="shared_string_enable">Enable</string>
+    <string name="proxy_type">Proxy type</string>
+    <string name="proxy_connected">Connected</string>
+    <string name="proxy_disconnected">Disconnected</string>
+    <string name="proxy_settings">Proxy Settings</string>
+    <string name="proxy">Proxy</string>
+    <string name="privacy">Privacy</string>
+    <string name="direction">Direction</string>
+    <string name="precision">Precision</string>
+    <string name="altitude">Altitude</string>
+    <string name="bearing">Bearing</string>
+    <string name="search_contacts">Search contacts</string>
+    <string name="search_contacts_descr">Search across all of your groups and contacts.</string>
+    <string name="type_contact_or_group_name">Type contact or group name</string>
+    <string name="shared_string_search">Search</string>
     <string name="shared_string_ok">OK</string>
     <string name="timeline_available_for_free_now">Timeline is a feature available now for free.</string>
     <string name="disable_monitoring">Disable monitoring</string>

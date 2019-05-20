@@ -30,6 +30,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -70,6 +71,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private long duration = 0;
 	private SelectedGpxFile currentTrack;
 	private int points;
+	private int trkPoints = 0;
 	
 	public SavingTrackHelper(OsmandApplication ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -249,6 +251,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		distance = 0;
 		points = 0;
 		duration = 0;
+		trkPoints = 0;
 		ctx.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.getModifiablePointsToDisplay().clear();
@@ -362,6 +365,31 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			} while (query.moveToNext());
 		}
 		query.close();
+
+		// drop empty tracks
+		List<String> datesToRemove = new ArrayList<>();
+		for (Map.Entry<String, GPXFile> entry : dataTracks.entrySet()) {
+			GPXFile file = entry.getValue();
+			Iterator<Track> it = file.tracks.iterator();
+			while (it.hasNext()) {
+				Track t = it.next();
+				Iterator<TrkSegment> its = t.segments.iterator();
+				while (its.hasNext()) {
+					if (its.next().points.size() == 0) {
+						its.remove();
+					}
+				}
+				if (t.segments.size() == 0) {
+					it.remove();
+				}
+			}
+			if (file.isEmpty()) {
+				datesToRemove.add(entry.getKey());
+			}
+		}
+		for (String date : datesToRemove) {
+			dataTracks.remove(date);
+		}
 	}
 	
 	public void startNewSegment() {
@@ -431,6 +459,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		lastTimeUpdated = time;
 		WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop);
 		addTrackPoint(pt, newSegment, time);
+		trkPoints++;
 	}
 	
 	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
@@ -606,6 +635,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		distance = analysis.totalDistance;
 		points = analysis.wptPoints;
 		duration = analysis.timeSpan;
+		trkPoints = analysis.points;
 	}
 
 	private void prepareCurrentTrackForRecording() {
@@ -640,6 +670,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return points;
 	}
 	
+	public int getTrkPoints() {
+		return trkPoints;
+	}
+
 	public long getLastTimeUpdated() {
 		return lastTimeUpdated;
 	}

@@ -35,6 +35,8 @@ class TelegramHelper private constructor() {
 		private const val IGNORED_ERROR_CODE = 406
 		private const val MESSAGE_CANNOT_BE_EDITED_ERROR_CODE = 5
 
+		private const val MAX_SEARCH_ITEMS = Int.MAX_VALUE
+
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
 		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
@@ -98,6 +100,7 @@ class TelegramHelper private constructor() {
 	private val incomingMessagesListeners = HashSet<TelegramIncomingMessagesListener>()
 	private val outgoingMessagesListeners = HashSet<TelegramOutgoingMessagesListener>()
 	private val fullInfoUpdatesListeners = HashSet<FullInfoUpdatesListener>()
+	private val searchListeners = HashSet<TelegramSearchListener>()
 
 	fun addIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.add(listener)
@@ -121,6 +124,14 @@ class TelegramHelper private constructor() {
 
 	fun removeFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
 		fullInfoUpdatesListeners.remove(listener)
+	}
+
+	fun addSearchListener(listener: TelegramSearchListener) {
+		searchListeners.add(listener)
+	}
+
+	fun removeSearchListener(listener: TelegramSearchListener) {
+		searchListeners.remove(listener)
 	}
 
 	fun getChatList(): TreeSet<OrderedChat> {
@@ -193,7 +204,7 @@ class TelegramHelper private constructor() {
 
 	fun isSecretChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypeSecret
 
-	private fun isChannel(chat: TdApi.Chat): Boolean {
+	fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
 
@@ -247,6 +258,12 @@ class TelegramHelper private constructor() {
 	interface TelegramAuthorizationRequestListener {
 		fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthenticationParameterType)
 		fun onTelegramAuthorizationRequestError(code: Int, message: String)
+	}
+
+	interface TelegramSearchListener {
+		fun onSearchChatsFinished(obj: TdApi.Chats)
+		fun onSearchPublicChatsFinished(obj: TdApi.Chats)
+		fun onSearchContactsFinished(obj: TdApi.Users)
 	}
 
 	inner class TelegramAuthorizationRequestHandler(val telegramAuthorizationRequestListener: TelegramAuthorizationRequestListener) {
@@ -628,7 +645,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun requestUser(id: Int) {
+	fun requestUser(id: Int) {
 		client?.send(TdApi.GetUser(id)) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
@@ -643,6 +660,98 @@ class TelegramHelper private constructor() {
 					if (!hasLocalUserPhoto(user) && hasRemoteUserPhoto(user)) {
 						requestUserPhoto(user)
 					}
+				}
+			}
+		}
+	}
+
+	fun requestChat(id: Long) {
+		client?.send(TdApi.GetChat(id)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Chat.CONSTRUCTOR -> {
+					val chat = obj as TdApi.Chat
+					chats[chat.id] = chat
+					listener?.onTelegramChatChanged(chat)
+				}
+			}
+		}
+	}
+
+	fun disableProxy() {
+		client?.send(TdApi.DisableProxy()) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Ok.CONSTRUCTOR -> {
+				}
+			}
+		}
+	}
+
+	fun enableProxy(proxyId: Int) {
+		client?.send(TdApi.EnableProxy(proxyId)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Ok.CONSTRUCTOR -> {
+				}
+			}
+		}
+	}
+
+	fun addProxyPref(proxyPref: TelegramSettings.ProxyPref, enable: Boolean) {
+		val proxyType: TdApi.ProxyType? = when (proxyPref) {
+			is TelegramSettings.ProxyMTProtoPref -> TdApi.ProxyTypeMtproto(proxyPref.key)
+			is TelegramSettings.ProxySOCKS5Pref -> TdApi.ProxyTypeSocks5(proxyPref.login, proxyPref.password)
+			else -> null
+		}
+		client?.send(TdApi.AddProxy(proxyPref.server, proxyPref.port, enable, proxyType)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Proxy.CONSTRUCTOR -> {
+					val proxy = (obj as TdApi.Proxy)
+					proxyPref.id = proxy.id
+				}
+			}
+		}
+	}
+
+	fun editProxyPref(proxyPref: TelegramSettings.ProxyPref, enable: Boolean) {
+		val proxyType: TdApi.ProxyType? = when (proxyPref) {
+			is TelegramSettings.ProxyMTProtoPref -> TdApi.ProxyTypeMtproto(proxyPref.key)
+			is TelegramSettings.ProxySOCKS5Pref -> TdApi.ProxyTypeSocks5(proxyPref.login, proxyPref.password)
+			else -> null
+		}
+		client?.send(TdApi.EditProxy(proxyPref.id, proxyPref.server, proxyPref.port, enable, proxyType)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Proxy.CONSTRUCTOR -> {
+					val proxy = (obj as TdApi.Proxy)
+					proxyPref.id = proxy.id
 				}
 			}
 		}
@@ -961,6 +1070,53 @@ class TelegramHelper private constructor() {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	fun searchChats(searchTerm: String) {
+		client?.send(TdApi.SearchChats(searchTerm, MAX_SEARCH_ITEMS)) { obj ->
+			checkChatsAndUsersSearch(obj)
+		}
+	}
+
+	fun searchChatsOnServer(searchTerm: String) {
+		client?.send(TdApi.SearchChatsOnServer(searchTerm, MAX_SEARCH_ITEMS)) { obj ->
+			checkChatsAndUsersSearch(obj)
+		}
+	}
+
+	fun searchPublicChats(searchTerm: String) {
+		client?.send(TdApi.SearchPublicChats(searchTerm)) { obj ->
+			checkChatsAndUsersSearch(obj, true)
+		}
+	}
+
+	fun searchContacts(searchTerm: String) {
+		client?.send(TdApi.SearchContacts(searchTerm, MAX_SEARCH_ITEMS)) { obj ->
+			checkChatsAndUsersSearch(obj)
+		}
+	}
+
+	private fun checkChatsAndUsersSearch(obj: TdApi.Object, publicChats: Boolean = false) {
+		when (obj.constructor) {
+			TdApi.Error.CONSTRUCTOR -> {
+				val error = obj as TdApi.Error
+				if (error.code != IGNORED_ERROR_CODE) {
+					listener?.onTelegramError(error.code, error.message)
+				}
+			}
+			TdApi.Chats.CONSTRUCTOR -> {
+				val chats = obj as TdApi.Chats
+				if (publicChats) {
+					searchListeners.forEach { it.onSearchPublicChatsFinished(chats) }
+				} else {
+					searchListeners.forEach { it.onSearchChatsFinished(chats) }
+				}
+			}
+			TdApi.Users.CONSTRUCTOR -> {
+				val users = obj as TdApi.Users
+				searchListeners.forEach { it.onSearchContactsFinished(users) }
 			}
 		}
 	}

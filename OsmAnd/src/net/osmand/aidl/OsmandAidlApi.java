@@ -26,8 +26,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.copyfile.CopyFileParams;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
@@ -42,6 +46,7 @@ import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -56,9 +61,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
@@ -72,9 +74,13 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.routing.IRoutingDataUpdateListener;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -83,6 +89,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -117,9 +124,14 @@ import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERRO
 import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.aidl.OsmandAidlService.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 public class OsmandAidlApi {
+
+	AidlCallbackListener aidlCallbackListener = null;
+
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
 	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
@@ -146,6 +158,9 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_ADD_MAP_WIDGET = "aidl_add_map_widget";
 	private static final String AIDL_REMOVE_MAP_WIDGET = "aidl_remove_map_widget";
+
+	private static final String AIDL_ADD_CONTEXT_MENU_BUTTONS = "aidl_add_context_menu_buttons";
+	private static final String AIDL_REMOVE_CONTEXT_MENU_BUTTONS = "aidl_remove_context_menu_buttons";
 
 	private static final String AIDL_ADD_MAP_LAYER = "aidl_add_map_layer";
 	private static final String AIDL_REMOVE_MAP_LAYER = "aidl_remove_map_layer";
@@ -188,6 +203,9 @@ public class OsmandAidlApi {
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
+	private Map<String, ContextMenuButtonsParams> contextMenuButtonsParams = new ConcurrentHashMap<>();
+
+	private AMapPointUpdateListener aMapPointUpdateListener;
 
 	private boolean mapActivityActive = false;
 
@@ -201,6 +219,7 @@ public class OsmandAidlApi {
 		registerRefreshMapReceiver(mapActivity);
 		registerSetMapLocationReceiver(mapActivity);
 		registerAddMapWidgetReceiver(mapActivity);
+		registerAddContextMenuButtonsReceiver(mapActivity);
 		registerRemoveMapWidgetReceiver(mapActivity);
 		registerAddMapLayerReceiver(mapActivity);
 		registerRemoveMapLayerReceiver(mapActivity);
@@ -220,6 +239,7 @@ public class OsmandAidlApi {
 		registerHideSqliteDbFileReceiver(mapActivity);
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
+		aMapPointUpdateListener = mapActivity;
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
@@ -334,6 +354,27 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(addMapWidgetReceiver, mapActivity, AIDL_ADD_MAP_WIDGET);
+	}
+
+	private void registerAddContextMenuButtonsReceiver(MapActivity mapActivity) {
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		BroadcastReceiver addContextMenuButtonsParamsReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				MapActivity mapActivity = mapActivityRef.get();
+				String ContextMenuButtonsParamsId = intent.getStringExtra(AIDL_OBJECT_ID);
+				if (mapActivity != null && ContextMenuButtonsParamsId != null) {
+					ContextMenuButtonsParams buttonsParams = contextMenuButtonsParams.get(ContextMenuButtonsParamsId);
+					if (buttonsParams != null) {
+						MapContextMenu mapContextMenu = mapActivity.getContextMenu();
+						if (mapContextMenu.isVisible()) {
+							mapContextMenu.updateData();
+						}
+					}
+				}
+			}
+		};
+		registerReceiver(addContextMenuButtonsParamsReceiver, mapActivity, AIDL_ADD_CONTEXT_MENU_BUTTONS);
 	}
 
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma,
@@ -1165,6 +1206,21 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	boolean updateMapPoint(String layerId, AMapPoint point, boolean updateOpenedMenuAndMap) {
+		if (point != null) {
+			AMapLayer layer = layers.get(layerId);
+			if (layer != null) {
+				layer.putPoint(point);
+				refreshMap();
+				if (updateOpenedMenuAndMap && aMapPointUpdateListener != null) {
+					aMapPointUpdateListener.onAMapPointUpdated(point, layerId);
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
 	boolean removeMapPoint(String layerId, String pointId) {
 		if (pointId != null) {
 			AMapLayer layer = layers.get(layerId);
@@ -1918,7 +1974,127 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
 
-	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels, final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	private Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
+
+	void registerForNavigationUpdates(long id) {
+		final ADirectionInfo directionInfo = new ADirectionInfo(-1, -1, false);
+		final NextDirectionInfo baseNdi = new NextDirectionInfo();
+		IRoutingDataUpdateListener listener = new IRoutingDataUpdateListener() {
+			@Override
+			public void onRoutingDataUpdate() {
+				RoutingHelper rh = app.getRoutingHelper();
+				if (rh.isDeviatedFromRoute()) {
+					directionInfo.setTurnType(TurnType.OFFR);
+					directionInfo.setDistanceTo((int) rh.getRouteDeviation());
+				} else {
+					NextDirectionInfo ndi = rh.getNextRouteDirectionInfo(baseNdi, true);
+					if (ndi != null && ndi.distanceTo > 0 && ndi.directionInfo != null) {
+						directionInfo.setDistanceTo(ndi.distanceTo);
+						directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
+					}
+				}
+				if (aidlCallbackListener != null) {
+					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
+						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
+							try {
+								cb.getCallback().updateNavigationInfo(directionInfo);
+							} catch (Exception e) {
+								LOG.debug(e.getMessage(), e);
+							}
+						}
+					}
+				}
+			}
+		};
+		navUpdateCallbacks.put(id, listener);
+		app.getRoutingHelper().addRouteDataListener(listener);
+	}
+
+	public void unregisterFromUpdates(long id) {
+		app.getRoutingHelper().removeRouteDataListener(navUpdateCallbacks.get(id));
+		navUpdateCallbacks.remove(id);
+	}
+
+
+	public Map<String, ContextMenuButtonsParams> getContextMenuButtonsParams() {
+		return contextMenuButtonsParams;
+	}
+
+	boolean addContextMenuButtons(ContextMenuButtonsParams buttonsParams, long callbackId) {
+		if (buttonsParams != null) {
+			if (contextMenuButtonsParams.containsKey(buttonsParams.getId())) {
+				updateContextMenuButtons(buttonsParams, callbackId);
+			} else {
+				addContextMenuButtonListener(buttonsParams, callbackId);
+				contextMenuButtonsParams.put(buttonsParams.getId(), buttonsParams);
+				Intent intent = new Intent();
+				intent.setAction(AIDL_ADD_CONTEXT_MENU_BUTTONS);
+				intent.putExtra(AIDL_OBJECT_ID, buttonsParams.getId());
+				app.sendBroadcast(intent);
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeContextMenuButtons(String buttonsParamsId, long callbackId) {
+		if (!Algorithms.isEmpty(buttonsParamsId) && contextMenuButtonsParams.containsKey(buttonsParamsId)) {
+			contextMenuButtonsParams.remove(buttonsParamsId);
+			contextMenuButtonsCallbacks.remove(callbackId);
+			Intent intent = new Intent();
+			intent.setAction(AIDL_REMOVE_CONTEXT_MENU_BUTTONS);
+			intent.putExtra(AIDL_OBJECT_ID, buttonsParamsId);
+			app.sendBroadcast(intent);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean updateContextMenuButtons(ContextMenuButtonsParams buttonsParams, long callbackId) {
+		if (buttonsParams != null && contextMenuButtonsParams.containsKey(buttonsParams.getId())) {
+			contextMenuButtonsParams.put(buttonsParams.getId(), buttonsParams);
+			addContextMenuButtonListener(buttonsParams, callbackId);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private void addContextMenuButtonListener(ContextMenuButtonsParams buttonsParams, long callbackId) {
+		IContextMenuButtonListener listener = new IContextMenuButtonListener() {
+
+			@Override
+			public void onContextMenuButtonClicked(int buttonId, String pointId, String layerId) {
+				if (aidlCallbackListener != null) {
+					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
+						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0) {
+							try {
+								cb.getCallback().onContextMenuButtonClicked(buttonId, pointId, layerId);
+							} catch (Exception e) {
+								LOG.debug(e.getMessage(), e);
+							}
+						}
+					}
+				}
+			}
+		};
+		buttonsParams.setCallbackId(callbackId);
+		contextMenuButtonsCallbacks.put(callbackId, listener);
+	}
+
+	private Map<Long, IContextMenuButtonListener> contextMenuButtonsCallbacks = new ConcurrentHashMap<>();
+
+	public void contextMenuCallbackButtonClicked(long callbackId, int buttonId, String pointId, String layerId) {
+		IContextMenuButtonListener contextMenuButtonListener = contextMenuButtonsCallbacks.get(callbackId);
+		if (contextMenuButtonListener != null) {
+			contextMenuButtonListener.onContextMenuButtonClicked(buttonId, pointId, layerId);
+		}
+	}
+
+	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
+		final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
@@ -1975,6 +2151,7 @@ public class OsmandAidlApi {
 	}
 
 	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
+
 
 	private class FileCopyInfo {
 		long startTime;
@@ -2103,6 +2280,8 @@ public class OsmandAidlApi {
 		}
 	}
 
+
+
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
 		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
@@ -2179,6 +2358,10 @@ public class OsmandAidlApi {
 	}
 
 	public interface OsmandAppInitCallback {
-    void onAppInitialized();
-  }
+		void onAppInitialized();
+	}
+
+	public interface AMapPointUpdateListener {
+		void onAMapPointUpdated(AMapPoint point, String layerId);
+	}
 }

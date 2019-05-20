@@ -213,4 +213,26 @@
     <string name="timeline_description">Ative o monitoramento para salvar todos os locais no histórico.</string>
     <string name="app_name_short_online">Rastreador online</string>
     <string name="app_name_short">Rastreador OsmAnd</string>
+    <string name="search_contacts">Pesquisar contatos</string>
+    <string name="search_contacts_descr">Pesquise em todos os seus grupos e contatos.</string>
+    <string name="type_contact_or_group_name">Digite o nome do contato ou do grupo</string>
+    <string name="shared_string_search">Pesquisar</string>
+    <string name="direction">Direção</string>
+    <string name="precision">Precisão</string>
+    <string name="altitude">Altitude</string>
+    <string name="bearing">Rolamento</string>
+    <string name="proxy_key">Chave</string>
+    <string name="proxy_password">Senha</string>
+    <string name="proxy_username">Nome de usuário</string>
+    <string name="proxy_credentials">Credenciais</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Servidor</string>
+    <string name="shared_string_connection">Conexão</string>
+    <string name="shared_string_enable">Ativar</string>
+    <string name="proxy_type">Tipo de proxy</string>
+    <string name="proxy_connected">Conectado</string>
+    <string name="proxy_disconnected">Desconectado</string>
+    <string name="proxy_settings">Configurações de proxy</string>
+    <string name="proxy">Proxy</string>
+    <string name="privacy">Privacidade</string>
 </resources>

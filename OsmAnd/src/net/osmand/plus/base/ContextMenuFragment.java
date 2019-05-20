@@ -75,6 +75,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	private boolean initLayout = true;
 	private boolean wasDrawerDisabled;
 	private boolean paused;
+	private boolean dismissing;
 
 	private int minHalfY;
 	private int topScreenPosY;
@@ -174,6 +175,14 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 
 	public boolean isPaused() {
 		return paused;
+	}
+
+	public int getMenuFullHeightMax() {
+		return menuFullHeightMax;
+	}
+
+	public int getMenuFullHeight() {
+		return menuFullHeight;
 	}
 
 	@Nullable
@@ -531,6 +540,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		paused = false;
+		dismissing = false;
 		ViewParent parent = view.getParent();
 		if (parent != null && containerLayoutListener != null) {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
@@ -868,7 +878,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 						if (getActivity() == null) {
 							return;
 						}
-						calculateLayout(view);
+						calculateLayout(view, initLayout);
 
 						if (!moving) {
 							doLayoutMenu();
@@ -885,7 +895,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	protected void calculateLayout(View view) {
+	protected void calculateLayout(View view, boolean initLayout) {
 		menuFullHeight = mainView.getHeight();
 		menuBottomViewHeight = menuFullHeight;
 		menuFullHeightMax = view.findViewById(R.id.route_menu_cards_container).getHeight() +
@@ -898,7 +908,12 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		updateMainViewLayout(posY);
 	}
 
+	public boolean isDismissing() {
+		return dismissing;
+	}
+
 	public void dismiss() {
+		dismissing = true;
 		if (isSingleFragment()) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

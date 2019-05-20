@@ -213,4 +213,26 @@
     <string name="shared_string_appearance">Выгляд</string>
     <string name="show_gps_points">Паказаць кропкі GPS</string>
     <string name="show_gps_points_descr">Паказваць колькасць сабраных і адпраўленых кропак GPS.</string>
+    <string name="search_contacts">Пошук кантактаў</string>
+    <string name="search_contacts_descr">Шукаць ва ўсіх вашых групах і кантактах.</string>
+    <string name="type_contact_or_group_name">Увядзіце назву групы альбо кантакта</string>
+    <string name="shared_string_search">Пошук</string>
+    <string name="direction">Накірунак</string>
+    <string name="precision">Дакладнасць</string>
+    <string name="altitude">Вышыня над узроўнем мора</string>
+    <string name="proxy_key">Ключ</string>
+    <string name="proxy_password">Пароль</string>
+    <string name="proxy_username">Імя карыстальніка</string>
+    <string name="proxy_credentials">Пасведчанні</string>
+    <string name="proxy_port">Порт</string>
+    <string name="proxy_server">Сервер</string>
+    <string name="shared_string_connection">Злучэнне</string>
+    <string name="shared_string_enable">Уключыць</string>
+    <string name="proxy_type">Тып проксі</string>
+    <string name="proxy_connected">Злучана</string>
+    <string name="proxy_disconnected">Адлучана</string>
+    <string name="proxy_settings">Налады проксі</string>
+    <string name="proxy">Проксі</string>
+    <string name="privacy">Прыватнасць</string>
+    <string name="bearing">Накірунак</string>
 </resources>

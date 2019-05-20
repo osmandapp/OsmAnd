@@ -1513,9 +1513,9 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="shared_string_selected_lowercase">ausgewählt</string>
     <string name="shared_string_is_open">Jetzt offen</string>
     <string name="rendering_attr_hideHouseNumbers_name">Hausnummern</string>
-    <string name="application_dir_change_warning3">OsmAnd-Daten an den neuen Ort kopieren?</string>
+    <string name="application_dir_change_warning3">OsmAnd-Dateien an den neuen Ort verschieben\?</string>
     <string name="specified_directiory_not_writeable">Karten konnten im angegebenen Verzeichnis nicht erstellt werden</string>
-    <string name="copying_osmand_file_failed">Das Kopieren der Dateien ist fehlgeschlagen!</string>
+    <string name="copying_osmand_file_failed">Das Verschieben von Dateien ist fehlgeschlagen</string>
     <string name="storage_directory_external">Externer Speicher</string>
     <string name="storage_directory_multiuser">Mehrbenutzer-Speicher</string>
     <string name="storage_directory_internal_app">Interner App-speicher</string>
@@ -1527,7 +1527,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="agps_info">A-GPS Info</string>
     <string name="shared_string_manage">Verwalten</string>
     <string name="shared_string_edit">Bearbeiten</string>
-    <string name="shared_string_search">Suche</string>
+    <string name="shared_string_search">Suchen</string>
     <string name="shared_string_show_description">Beschreibung anzeigen.</string>
     <string name="shared_string_message">Nachricht</string>
     <string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
@@ -2938,7 +2938,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="public_transport_warning_descr_blog">Erfahren Sie mehr darüber, wie OsmAnd Routen berechnet, in unserem Blog.</string>
     <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, erwarten Sie Fehler und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
-    <string name="transfers_size">%1$d überträgt</string>
+    <string name="transfers_size">%1$d Umstieg(e)</string>
     <string name="add_start_and_end_points">Start- und Endpunkte hinzufügen</string>
     <string name="route_add_start_point">Startpunkt hinzufügen</string>
     <string name="route_descr_select_start_point">Startpunkt auswählen</string>
@@ -3013,12 +3013,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
     <string name="shared_string_degrees">Grad</string>
     <string name="shared_string_milliradians">Milliradiant</string>
-    <string name="angular_measeurement">Winkel-Maßeinheiten</string>
+    <string name="angular_measeurement">Winkeleinheit</string>
     <string name="angular_measeurement_descr">Ändern, in welchem Azimut gemessen wird.</string>
     <string name="routing_attr_avoid_tram_name">Straßenbahnen meiden</string>
     <string name="routing_attr_avoid_tram_description">Straßenbahnen meiden</string>
     <string name="routing_attr_avoid_bus_name">Busse meiden</string>
-    <string name="routing_attr_avoid_bus_description">Busse und Trolleybusse meiden</string>
+    <string name="routing_attr_avoid_bus_description">Busse und Oberleitungsbusse meiden</string>
     <string name="routing_attr_avoid_share_taxi_name">Sammeltaxi meiden</string>
     <string name="routing_attr_avoid_share_taxi_description">Sammeltaxi meiden</string>
     <string name="routing_attr_avoid_train_name">Züge meiden</string>
@@ -3027,13 +3027,26 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">U-Bahnen und leichten Schienenverkehr meiden</string>
     <string name="routing_attr_avoid_ferry_name">Fähren meiden</string>
     <string name="routing_attr_avoid_ferry_description">Fähren meiden</string>
-    <string name="release_3_3_7">• Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln
-\n
-\n• Korrigierte Benutzeroberfläche für die Routendetails korrigiert
-\n
-\n• Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert.
-\n
+    <string name="release_3_3_7">• Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln 
+\n 
+\n• Korrigierte Benutzeroberfläche für die Routendetails
+\n 
+\n• Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert. 
+\n 
 \n• Azimut in der Maßeinheit Distanz anzeigen
 \n
 \n</string>
+    <string name="send_log">Log senden</string>
+    <string name="files_copied">Kopierte %1$d Dateien (%2$s).</string>
+    <string name="files_failed">Es konnten keine %1$d Dateien (%2$s) kopiert werden.</string>
+    <string name="public_transport_try_ped">Probieren Sie die Fußgängernavigation aus.</string>
+    <string name="public_transport_try_change_settings">Versuchen Sie, die Einstellungen zu ändern.</string>
+    <string name="public_transport_calc_pedestrian">Fußgängerroute berechnen</string>
+    <string name="public_transport_type">Transportart</string>
+    <string name="files_moved">%1$d Dateien verschoben (%2$s).</string>
+    <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort \'%3$s\' vorhanden.</string>
+    <string name="move_maps">Karten verschieben</string>
+    <string name="dont_move_maps">Nicht bewegen</string>
+    <string name="public_transport_ped_route_title">Die Route beträgt ca. %1$s und könnte zu Fuß schneller sein als mit öffentlichen Verkehrsmitteln</string>
+    <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
 </resources>

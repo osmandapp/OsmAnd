@@ -1937,9 +1937,9 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">צבע לפי שיוך לרשת</string>
     <string name="shared_string_logoff">יציאה</string>
     <string name="rendering_attr_hideHouseNumbers_name">מספרי בתים</string>
-    <string name="application_dir_change_warning3">להעתיק את קובצי הנתונים של OsmAnd ליעד החדש?</string>
+    <string name="application_dir_change_warning3">להעביר את קובצי הנתונים של OsmAnd ליעד החדש\?</string>
     <string name="specified_directiory_not_writeable">לא ניתן ליצור מפות בתיקייה שצוינה</string>
-    <string name="copying_osmand_file_failed">העתקת הקבצים נכשלה</string>
+    <string name="copying_osmand_file_failed">העברת הקבצים נכשלה</string>
     <string name="storage_directory_external">אחסון חיצוני</string>
     <string name="storage_directory_multiuser">אחסון למגוון משתמשים</string>
     <string name="storage_directory_internal_app">זיכרון פנימי של היישומון</string>
@@ -2997,7 +2997,7 @@
     <string name="quick_action_day_night_mode">מצב %s</string>
     <string name="shared_string_degrees">מעלות</string>
     <string name="shared_string_milliradians">מילי־רדיאנים</string>
-    <string name="angular_measeurement">יחידות מידה זוויתיות</string>
+    <string name="angular_measeurement">יחידה זוויתית</string>
     <string name="angular_measeurement_descr">החלפת יחידת המידה לאזימוט.</string>
     <string name="routing_attr_avoid_sett_name">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
     <string name="routing_attr_avoid_sett_description">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
@@ -3021,4 +3021,17 @@
 \n
 \n • הצגת אזימוט במדידת מרחק
 \n</string>
+    <string name="send_log">שליחת יומן</string>
+    <string name="files_moved">הועברו %1$d קבצים (%2$s).</string>
+    <string name="files_copied">הועתקו %1$d קבצים (%2$s).</string>
+    <string name="files_failed">העתקתם של %1$d קבצים נכשלה (%2$s).</string>
+    <string name="files_present">%1$d קבצים (%2$s) נמצאים במיקום הקודם ‚%3$s’.</string>
+    <string name="move_maps">להעביר מפות</string>
+    <string name="dont_move_maps">לא להעביר</string>
+    <string name="public_transport_ped_route_title">זמן ההגעה בהליכה הוא בערך %1$s וייתכן שתחבורה ציבורית תקצר אותו</string>
+    <string name="public_transport_no_route_title">לרוע המזל, OsmAnd לא הצליח למצוא מסלול שמתאים להגדרות שלך.</string>
+    <string name="public_transport_try_ped">מוטב לנסות ניווט להולכי רגל.</string>
+    <string name="public_transport_try_change_settings">מוטב לנסות לשנות את ההגדרות.</string>
+    <string name="public_transport_calc_pedestrian">חישוב מסלול להולכי רגל</string>
+    <string name="public_transport_type">סוג תחבורה</string>
 </resources>

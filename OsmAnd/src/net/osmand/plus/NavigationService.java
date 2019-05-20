@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -41,6 +42,7 @@ public class NavigationService extends Service implements LocationListener {
 	private int serviceOffInterval;
 	private String serviceOffProvider;
 	private int serviceError;
+	private long nextManualWakeup;
 	private OsmandSettings settings;
 	private Handler handler;
 
@@ -69,6 +71,14 @@ public class NavigationService extends Service implements LocationListener {
 
 	public int getServiceError() {
 		return serviceError;
+	}
+
+	public long getNextManualWakeup() {
+		return nextManualWakeup;
+	}
+
+	public void setNextManualWakeup(long value) {
+		nextManualWakeup = value;
 	}
 
 	public int getServiceOffInterval() {
@@ -101,7 +111,7 @@ public class NavigationService extends Service implements LocationListener {
 		} else {
 			// Issue #3604
 			final OsmandApplication app = (OsmandApplication) getApplication();
-			if ((usedBy == 2) && !(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) && (serviceOffInterval == 0)) {
+			if ((usedBy == 2) && (app.navigationServiceGpsInterval(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get()) != 0) && (serviceOffInterval == 0)) {
 				serviceOffInterval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
 				// From onStartCommand:
 				serviceError = serviceOffInterval / 5;
@@ -111,7 +121,15 @@ public class NavigationService extends Service implements LocationListener {
 				app.setNavigationService(this);
 				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 				pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
-				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
+				nextManualWakeup = SystemClock.elapsedRealtime() + serviceOffInterval;
+				if (Build.VERSION.SDK_INT >= 23) {
+					alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
+				} else if (Build.VERSION.SDK_INT >= 19) {
+					// setRepeating() became inexact starting with SDK 19
+					alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
+				} else {
+					alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
+				}
 			}
 
 			app.getNotificationHelper().updateTopNotification();
@@ -159,7 +177,15 @@ public class NavigationService extends Service implements LocationListener {
 		} else {
 			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 			pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
-			alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
+			nextManualWakeup = SystemClock.elapsedRealtime() + serviceOffInterval;
+			if (Build.VERSION.SDK_INT >= 23) {
+				alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
+			} else if (Build.VERSION.SDK_INT >= 19) {
+				// setRepeating() became inexact starting with SDK 19
+				alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, pendingIntent);
+			} else {
+				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
+			}
 		}
 
 		// registering icon at top level

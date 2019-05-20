@@ -214,4 +214,26 @@
     <string name="timeline_description">啟用監視以儲存所有歷史中的位置。</string>
     <string name="app_name_short_online">線上追蹤器</string>
     <string name="app_name_short">OsmAnd 追蹤器</string>
+    <string name="search_contacts">搜尋聯絡人</string>
+    <string name="search_contacts_descr">搜尋您所有的群組與聯絡人。</string>
+    <string name="type_contact_or_group_name">輸入聯絡人或群組名稱</string>
+    <string name="shared_string_search">搜尋</string>
+    <string name="direction">方向</string>
+    <string name="precision">精確</string>
+    <string name="altitude">高度</string>
+    <string name="bearing">方位</string>
+    <string name="proxy_key">金鑰</string>
+    <string name="proxy_password">密碼</string>
+    <string name="proxy_username">使用者名稱</string>
+    <string name="proxy_credentials">憑證</string>
+    <string name="proxy_port">連接埠</string>
+    <string name="proxy_server">伺服器</string>
+    <string name="shared_string_connection">連線</string>
+    <string name="shared_string_enable">啟用</string>
+    <string name="proxy_type">代理伺服器類型</string>
+    <string name="proxy_connected">已連線</string>
+    <string name="proxy_disconnected">已斷線</string>
+    <string name="proxy_settings">代理伺服器設定</string>
+    <string name="proxy">代理伺服器</string>
+    <string name="privacy">隱私</string>
 </resources>

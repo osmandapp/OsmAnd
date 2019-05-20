@@ -1531,14 +1531,14 @@ Długość %2$s</string>
     <string name="shared_string_address">Adres</string>
     <string name="shared_string_show_description">Wyświetl opis.</string>
     <string name="shared_string_places">Miejsca</string>
-    <string name="shared_string_search">Wyszukaj</string>
+    <string name="shared_string_search">Szukaj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asystent mapowania OSM</string>
     <string name="shared_string_manage">Zarządzaj</string>
     <string name="shared_string_edit">Edytuj</string>
     <string name="filter_poi_hint">Filtruj po nazwie</string>
-    <string name="application_dir_change_warning3">Skopiować pliki danych OsmAnd do nowego miejsca docelowego?</string>
+    <string name="application_dir_change_warning3">Przenieść pliki danych OsmAnd do nowego miejsca docelowego\?</string>
     <string name="specified_directiory_not_writeable">Nie można zapisać map we wskazanym katalogu</string>
-    <string name="copying_osmand_file_failed">Nie udało się skopiować plików</string>
+    <string name="copying_osmand_file_failed">Przenoszenie plików nie powiodło się</string>
     <string name="storage_directory_external">Pamięć zewnętrzna</string>
     <string name="storage_directory_default">Pamięć wewnętrzna</string>
     <string name="shared_string_copy">Skopiuj</string>
@@ -2733,7 +2733,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="import_gpx_file_description">można zaimportować jako Ulubione lub plik GPX.</string>
     <string name="import_as_favorites">Importuj jako Ulubione</string>
     <string name="import_file">Zapisz plik</string>
-    <string name="access_intermediate_arrival_time">Czas przybycia do punktu pośredniego</string>
+    <string name="access_intermediate_arrival_time">Pośredni czas przyjazdu</string>
     <string name="map_widget_intermediate_time">Czas pośredni</string>
     <string name="unirs_render_descr">Modyfikacja domyślnego stylu zwiększająca kontrast dróg pieszych i rowerowych. Używa przestarzałych kolorów stylu „Mapnik”.</string>
     <string name="off_road_render_descr">Styl odpowiedni do przejazdów terenowych. Nadaje się do użycia z podkładami o barwie zielonej. Kluczowe cechy: zmniejszona szerokość głównych dróg, zwiększona szerokość dróg leśnych i polnych, ścieżek, dróg rowerowych i innych. Stworzona na podstawie stylu „Topo”.</string>
@@ -2924,7 +2924,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="sit_on_the_stop">Tablica na przystanku</string>
     <string name="shared_string_swap">Wymień</string>
     <string name="show_more">Pokaż więcej</string>
-    <string name="tracks_on_map">Ślady wyświetlane</string>
+    <string name="tracks_on_map">Wyświetlane ślady</string>
     <string name="quick_action_show_hide_gpx_tracks">Przełącz widoczność śladów GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Naciśnięcie przycisku pokaże lub ukryje wybrane ślady GPX na mapie</string>
     <string name="quick_action_gpx_tracks_hide">Ukryj ślady GPX</string>
@@ -2941,7 +2941,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_surface_compacted_name">Ubita</string>
     <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
-    <string name="public_transport_warning_title">"Nawigacja transportem publicznym jest obecnie w fazie  testów beta, mogą pojawić się błędy i nieścisłości."</string>
+    <string name="public_transport_warning_title">Nawigacja transportem publicznym jest obecnie w fazie testów beta. Mogą pojawić się błędy i nieścisłości.</string>
     <string name="add_intermediate">Dodawanie punktu pośredniego</string>
     <string name="transfers_size">%1$d transfery</string>
     <string name="add_start_and_end_points">Dodaj punkty początkowe i końcowe</string>
@@ -2975,9 +2975,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_state_road_name">Droga krajowa</string>
     <string name="rendering_attr_highway_class_road_name">Droga</string>
     <string name="rendering_attr_highway_class_street_name">Ulica</string>
-    <string name="rendering_attr_highway_class_service_name">Serwisowa</string>
+    <string name="rendering_attr_highway_class_service_name">Dojazdowa</string>
     <string name="rendering_attr_highway_class_footway_name">Chodnik</string>
-    <string name="rendering_attr_highway_class_track_name">Droga polna/leśna</string>
+    <string name="rendering_attr_highway_class_track_name">Polna/leśna</string>
     <string name="rendering_attr_highway_class_bridleway_name">Droga dla koni</string>
     <string name="rendering_attr_highway_class_steps_name">Schody</string>
     <string name="rendering_attr_highway_class_path_name">Ścieżka</string>
@@ -3000,18 +3000,18 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Usunięcie Facebooka i analiz Firebase z darmowej wersji (OsmAnd+ tego nie zawiera)
 \n</string>
     <string name="shared_string_degrees">Stopnie</string>
-    <string name="shared_string_milliradians">Miliradiany</string>
+    <string name="shared_string_milliradians">Miliradianach</string>
     <string name="quick_action_day_night_mode">Tryb %s</string>
-    <string name="routing_attr_avoid_tram_name">Unikaj tramwajów</string>
-    <string name="routing_attr_avoid_tram_description">Unikaj tramwajów</string>
-    <string name="routing_attr_avoid_bus_name">Unikaj autobusów</string>
-    <string name="routing_attr_avoid_bus_description">Unikaj autobusów i trolejbusów</string>
-    <string name="routing_attr_avoid_train_name">Unikaj pociągów</string>
-    <string name="routing_attr_avoid_train_description">Unikaj pociągów</string>
-    <string name="routing_attr_avoid_subway_name">Unikaj metra</string>
+    <string name="routing_attr_avoid_tram_name">Unikanie tramwajów</string>
+    <string name="routing_attr_avoid_tram_description">Unikanie tramwajów</string>
+    <string name="routing_attr_avoid_bus_name">Unikanie autobusów</string>
+    <string name="routing_attr_avoid_bus_description">Unikanie autobusów i trolejbusów</string>
+    <string name="routing_attr_avoid_train_name">Unikanie pociągów</string>
+    <string name="routing_attr_avoid_train_description">Unikanie pociągów</string>
+    <string name="routing_attr_avoid_subway_name">Unikanie metra</string>
     <string name="routing_attr_avoid_subway_description">Unikaj metra i lekkiego transportu kolejowego</string>
-    <string name="routing_attr_avoid_ferry_name">Unikaj promów</string>
-    <string name="routing_attr_avoid_ferry_description">Unikaj promów</string>
+    <string name="routing_attr_avoid_ferry_name">Unikanie promów</string>
+    <string name="routing_attr_avoid_ferry_description">Unikanie promów</string>
     <string name="release_3_3_7">• Wyświetl czas między transferami w transporcie publicznym
 \n
 \n • Poprawiony interfejs użytkownika dla szczegółów trasy
@@ -3024,11 +3024,26 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="angular_measeurement">Jednostki pomiaru kątowego</string>
     <string name="angular_measeurement_descr">Zmiany jakie azymut jest mierzony w.</string>
     <string name="avoid_pt_types_descr">Wybierz typy transportu publicznego, których chcesz unikać dla nawigacji:</string>
-    <string name="avoid_pt_types">Unikaj typu transportu…</string>
+    <string name="avoid_pt_types">Unikanie rodzaju transportu…</string>
     <string name="shared_string_walk">Pieszo</string>
-    <string name="save_poi_value_exceed_length">Maksymalna długość tagu \"%s\" wynosi 255 znaków.
-\nSkróć, aby kontynuować.</string>
-    <string name="save_poi_value_exceed_length_title">Długość wartości \"%s\"</string>
+    <string name="save_poi_value_exceed_length">Maksymalna długość znacznika „%s” wynosi 255 znaków.
+\nProszę go skrócić, aby kontynuować.</string>
+    <string name="save_poi_value_exceed_length_title">Długość wartości „%s”</string>
     <string name="routing_attr_avoid_sett_name">Unikaj bruku i kostki brukowej</string>
     <string name="routing_attr_avoid_sett_description">Unikaj bruku i kostki brukowej</string>
+    <string name="routing_attr_avoid_share_taxi_name">Unikanie taksówek zbiorowych</string>
+    <string name="routing_attr_avoid_share_taxi_description">Unikanie taksówek zbiorowych</string>
+    <string name="send_log">Wyślij dziennik</string>
+    <string name="files_moved">Przeniesiono %1$d plików (%2$s).</string>
+    <string name="files_copied">Skopiowano %1$d plików (%2$s).</string>
+    <string name="files_failed">Nie udało się skopiować %1$d plików (%2$s).</string>
+    <string name="files_present">%1$d pliki (%2$s) są obecne w poprzednim położeniu „%3$s”.</string>
+    <string name="move_maps">Przenieś mapy</string>
+    <string name="dont_move_maps">Nie przenoś</string>
+    <string name="public_transport_ped_route_title">Trasa pieszo wynosi około %1$s i może być szybsza niż transportem publicznym</string>
+    <string name="public_transport_no_route_title">Niestety OsmAnd nie mógł znaleźć trasy odpowiedniej dla wybranych ustawień.</string>
+    <string name="public_transport_try_ped">Wypróbuj nawigację pieszą.</string>
+    <string name="public_transport_try_change_settings">Spróbuj zmienić ustawienia.</string>
+    <string name="public_transport_calc_pedestrian">Oblicz trasę pieszą</string>
+    <string name="public_transport_type">Typ transportu</string>
 </resources>

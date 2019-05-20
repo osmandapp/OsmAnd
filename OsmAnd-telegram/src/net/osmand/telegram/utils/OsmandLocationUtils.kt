@@ -29,6 +29,7 @@ object OsmandLocationUtils {
 	const val SHARING_LINK = "https://play.google.com/store/apps/details?id=net.osmand.telegram"
 
 	const val ALTITUDE_PREFIX = "Altitude: "
+	const val BEARING_PREFIX = "Bearing: "
 	const val SPEED_PREFIX = "Speed: "
 	const val HDOP_PREFIX = "Horizontal precision: "
 
@@ -169,7 +170,10 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun parseTextLocation(text: TdApi.FormattedText, botLocation: Boolean): MessageLocation {
+	fun parseTextLocation(text: TdApi.FormattedText, botLocation: Boolean): MessageLocation? {
+		if (botLocation && !text.text.startsWith(DEVICE_PREFIX) || !botLocation && !text.text.startsWith(USER_TEXT_LOCATION_TITLE)) {
+			return null
+		}
 		val res = if (botLocation) MessageOsmAndBotLocation() else MessageUserLocation()
 		res.type = LocationMessages.TYPE_TEXT
 		var locationNA = false

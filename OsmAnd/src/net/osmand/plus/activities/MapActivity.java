@@ -47,6 +47,9 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.MapAccessibilityActions;
+import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
+import net.osmand.aidl.map.ALatLon;
+import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -149,7 +152,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
-		OnRequestPermissionsResultCallback, IRouteInformationListener,
+		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
@@ -540,6 +543,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
 
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
+		pb.setIndeterminate(getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT);
+		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 	}
 
 	public ImportHelper getImportHelper() {
@@ -737,6 +742,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		OsmandPlugin.onMapActivityResume(this);
 
+		boolean showOsmAndWelcomeScreen = true;
 		final Intent intent = getIntent();
 		if (intent != null) {
 			if (Intent.ACTION_VIEW.equals(intent.getAction())) {
@@ -765,6 +771,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						}
 					}
 				}
+			}
+			if (intent.hasExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN)) {
+				showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
 			}
 			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
 				Bundle openMapMarkersGroupsExtra = intent.getBundleExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
@@ -801,8 +810,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 
-		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
-				|| !app.getResourceManager().isAnyMapInstalled()) && FirstUsageWelcomeFragment.SHOW;
+		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
+				&& FirstUsageWelcomeFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get() && showOsmAndWelcomeScreen;
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
@@ -838,7 +847,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			OsmLiveCancelledDialog.showInstance(getSupportFragmentManager());
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
-
+		if (isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
+			FirstUsageWelcomeFragment welcomeFragment = getFirstUsageWelcomeFragment();
+			if (welcomeFragment != null) {
+				welcomeFragment.closeWelcomeFragment();
+			}
+			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+			if (wizardFragment != null) {
+				wizardFragment.closeWizard();
+			}
+		}
 		if (SecondSplashScreenFragment.SHOW) {
 			SecondSplashScreenFragment.SHOW = false;
 			SecondSplashScreenFragment.VISIBLE = true;
@@ -1663,6 +1681,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public FirstUsageWelcomeFragment getFirstUsageWelcomeFragment() {
+		FirstUsageWelcomeFragment welcomeFragment = (FirstUsageWelcomeFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWelcomeFragment.TAG);
+		if (welcomeFragment != null && !welcomeFragment.isDetached()) {
+			return welcomeFragment;
+		} else {
+			return null;
+		}
+	}
+
 	public FirstUsageWizardFragment getFirstUsageWizardFragment() {
 		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
 		if (wizardFragment != null && !wizardFragment.isDetached()) {
@@ -1781,6 +1808,31 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onMapMarkersChanged() {
 		refreshMap();
+	}
+
+	@Override
+	public void onAMapPointUpdated(final AMapPoint point, String layerId) {
+		if (canUpdateAMapPointMenu(point, layerId)) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					ALatLon loc = point.getLocation();
+					LatLon latLon = new LatLon(loc.getLatitude(), loc.getLongitude());
+					PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MARKER, point.getFullName());
+					mapContextMenu.update(latLon, pointDescription, point);
+					mapContextMenu.centerMarkerLocation();
+				}
+			});
+		}
+	}
+
+	private boolean canUpdateAMapPointMenu(AMapPoint point, String layerId) {
+		Object object = mapContextMenu.getObject();
+		if (!mapContextMenu.isVisible() || !(object instanceof AMapPoint)) {
+			return false;
+		}
+		AMapPoint oldPoint = (AMapPoint) object;
+		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

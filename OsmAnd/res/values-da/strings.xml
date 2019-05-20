@@ -1547,7 +1547,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_highContrastRoads_name">Veje med høj kontrast</string>
     <string name="specified_directiory_not_writeable">Kunne ikke oprettes kort i det angivne bibliotek</string>
-    <string name="copying_osmand_file_failed">Kopiering af filer mislykkedes</string>
+    <string name="copying_osmand_file_failed">Flytning af filer mislykkedes</string>
     <string name="storage_directory_external">Ekstern lager</string>
     <string name="storage_directory_multiuser">Flerbruger lager</string>
     <string name="storage_directory_internal_app">Intern programhukommelse</string>
@@ -1555,7 +1555,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="storage_directory_default">Internhukommelse</string>
     <string name="storage_directory">Kortlagring</string>
     <string name="shared_string_copy">Kopier</string>
-    <string name="application_dir_change_warning3">Kopier datafilerne til den nye placering?</string>
+    <string name="application_dir_change_warning3">Flyt datafilerne til den nye placering\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
@@ -2675,7 +2675,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
-    <string name="show_tunnels">"Tunneler "</string>
+    <string name="show_tunnels">Tunneler</string>
     <string name="shared_string_current">Nuværende</string>
     <string name="last_intermediate_dest_description">Tilføjer et mellemliggende stop</string>
     <string name="first_intermediate_dest_description">Tilføjer første stop</string>
@@ -3024,11 +3024,26 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">Undgå metro og lettog</string>
     <string name="routing_attr_avoid_ferry_name">Undgå færger</string>
     <string name="routing_attr_avoid_ferry_description">Undgå færger</string>
-    <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport
+    <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport 
+\n 
+\n • Korrigeret brugergrænseflade til ruteoplysningerne 
+\n 
+\n • Rettet mørkt tema i Retningsmenuen og Rutedetaljer 
+\n 
+\n • Vis azimut i Mål afstand
 \n
-\n • Korrigeret brugergrænseflade til ruteoplysningerne
-\n
-\n • Rettet mørkt tema i Retningsmenuen og Rutedetaljer
-\n
-\n • Vis azimut i mål afstand</string>
+\n</string>
+    <string name="send_log">Send log</string>
+    <string name="files_moved">Flyttede %1$d filer (%2$s).</string>
+    <string name="files_copied">Kopieret %1$d filer (%2$s).</string>
+    <string name="files_failed">Kunne ikke kopiere %1$d filer (%2$s).</string>
+    <string name="files_present">%1$d filer (%2$s) er til stede på tidligere placering \'%3$s\'.</string>
+    <string name="move_maps">Flyt kort</string>
+    <string name="dont_move_maps">Flyt ikke</string>
+    <string name="public_transport_ped_route_title">Ruten til fods er ca %1$s og den kunne være hurtigere end offentlig transport</string>
+    <string name="public_transport_no_route_title">Kunne desværre ikke finde en rute, der passer til indstillingerne.</string>
+    <string name="public_transport_try_ped">Prøv fodgængernavigationen.</string>
+    <string name="public_transport_try_change_settings">Prøv at ændre indstillinger.</string>
+    <string name="public_transport_calc_pedestrian">Beregn fodgængerruten</string>
+    <string name="public_transport_type">Transporttype</string>
 </resources>
