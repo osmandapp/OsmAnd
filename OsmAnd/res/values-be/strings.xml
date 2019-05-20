@@ -3045,4 +3045,6 @@
     <string name="public_transport_try_change_settings">Паспрабуйце змяніць налады.</string>
     <string name="public_transport_calc_pedestrian">Падлічыць пешаходны маршрут</string>
     <string name="public_transport_type">Тып транспарту</string>
+    <string name="searching_gps">Пошук GPS</string>
+    <string name="coordinates_widget">Віджэт каардынат</string>
 </resources>
