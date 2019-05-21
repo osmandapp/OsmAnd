@@ -616,9 +616,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			.icon(profile.iconId, profile.iconId);
 
 		if (profile.routingProfileDataObject != null) {
-//			if () {
-//
-//			}
 			builder.setRoutingProfile(profile.routingProfileDataObject.getStringKey());
 		}
 

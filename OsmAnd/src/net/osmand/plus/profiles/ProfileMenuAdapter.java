@@ -63,12 +63,11 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		final ApplicationMode item = items.get(position);
 		if (item.getParent() != null) {
 			holder.title.setText(item.getUserProfileName());
-			holder.descr.setText(String.format("Type: %s",
+			holder.descr.setText(String.format(app.getString(R.string.profile_type_descr_string),
 				Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getStringKey().replace("_", " "))));
 		} else {
 			holder.title.setText(app.getResources().getString(item.getStringResource()));
-			holder.descr.setText(String.format("Base Profile, type: %s",
-				Algorithms.capitalizeFirstLetterAndLowercase(item.getStringKey().replace("_", " "))));
+			holder.descr.setText(R.string.profile_type_base_string);
 		}
 
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
