@@ -76,7 +76,7 @@
               android:maxLines="1"
               android:textSize="18sp"
               android:textColor="?attr/main_font_color_basic"
-              tools:text="Item additional desription"/>
+              tools:text="Item additional description"/>
 
           </LinearLayout>
 
@@ -339,7 +339,6 @@
             android:orientation="vertical">
 
             <TextView
-              android:textStyle="bold"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="Configure map"
@@ -388,7 +387,6 @@
             android:orientation="vertical">
 
             <TextView
-              android:textStyle="bold"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="Configure screen"
@@ -439,7 +437,6 @@
             android:orientation="vertical">
 
             <TextView
-              android:textStyle="bold"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="Navigation settings"

@@ -199,15 +199,15 @@ public class ProfileBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		if (getActivity() != null && getActivity() instanceof EditProfileActivity) {
 			EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
 				.findFragmentByTag(EditProfileActivity.EDIT_PROFILE_FRAGMENT_TAG);
-			if (type.equals(TYPE_APP_PROFILE)) {
-				listener = f.getBaseProfileListener();
-			} else if (type.equals(TYPE_NAV_PROFILE)) {
-				listener = f.getNavProfileListener();
-			}
+//			if (type.equals(TYPE_APP_PROFILE)) {
+//				listener = f.getBaseProfileListener();
+//			} else if (type.equals(TYPE_NAV_PROFILE)) {
+//				listener = f.getNavProfileListener();
+//			}
 		} else if (getActivity() != null && getActivity() instanceof SettingsProfileActivity) {
 			SettingsProfileFragment f = (SettingsProfileFragment) getActivity().getSupportFragmentManager()
 				.findFragmentByTag(SettingsProfileActivity.SETTINGS_PROFILE_FRAGMENT_TAG);
-			listener = f.getBaseProfileListener();
+//			listener = f.getBaseProfileListener();
 		}
 	}
 

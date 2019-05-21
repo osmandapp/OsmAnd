@@ -50,6 +50,7 @@ import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
 import net.osmand.plus.profiles.SelectIconBottomSheetDialogFragment.IconIdListener;
+import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter;
@@ -79,9 +80,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private boolean isUserProfile = false;
 	private boolean isDataChanged = false;
 
-	private ProfileTypeDialogListener navTypeListener = null;
+	private SelectProfileListener navTypeListener = null;
 	private IconIdListener iconIdListener = null;
-	private ProfileTypeDialogListener baseTypeListener = null;
+	private SelectProfileListener baseTypeListener = null;
 
 	private ImageView profileIcon;
 	private LinearLayout profileIconBtn;
@@ -170,11 +171,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 
 		String title = "New Profile";
+
 		int startIconId = R.drawable.map_world_globe_dark;
+
 		if (isNew) {
 			isDataChanged = true;
-			title = String
-				.format("Custom %s", getResources().getString(profile.parent.getStringResource()));
 			startIconId = profile.parent.getSmallIconDark();
 			profile.iconId = startIconId;
 		} else if (isUserProfile) {
@@ -188,8 +189,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			startIconId = profile.iconId;
 			clickBlockLayout.setClickable(true);
 		}
-
 		profile.userProfileTitle = title;
+
 		if (profile.parent != null) {
 			setupBaseProfileView(profile.parent.getStringKey());
 		} else if (profile.key != -1) {
@@ -201,7 +202,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (isUserProfile || isNew) {
-					final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
+					//final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
+					final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
 					if (profile.parent != null) {
 						bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
@@ -280,7 +282,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (isNew || isUserProfile) {
-					ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
+					//ProfileBottomSheetDialogFragment fragment = new ProfileBottomSheetDialogFragment();
+					final SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
 					if (profile.routingProfileDataObject != null) {
 						bundle.putString(SELECTED_KEY,
@@ -430,7 +433,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	@Override
 	public void onResume() {
-		baseTypeListener = new ProfileTypeDialogListener() {
+		baseTypeListener = new SelectProfileListener() {
 			@Override
 			public void onSelectedType(int pos) {
 				String key = SettingsProfileFragment.getBaseProfiles(getMyApplication()).get(pos)
@@ -440,7 +443,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		};
 
-		navTypeListener = new ProfileTypeDialogListener() {
+		navTypeListener = new SelectProfileListener() {
 			@Override
 			public void onSelectedType(int pos) {
 				updateRoutingProfile(pos);
@@ -477,9 +480,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return iconIdListener;
 	}
 
-	ProfileTypeDialogListener getBaseProfileListener() {
+	SelectProfileListener getBaseProfileListener() {
 		if (baseTypeListener == null) {
-			baseTypeListener = new ProfileTypeDialogListener() {
+			baseTypeListener = new SelectProfileListener() {
 				@Override
 				public void onSelectedType(int pos) {
 					String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
@@ -492,9 +495,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return baseTypeListener;
 	}
 
-	ProfileTypeDialogListener getNavProfileListener() {
+	SelectProfileListener getNavProfileListener() {
 		if (navTypeListener == null) {
-			navTypeListener = new ProfileTypeDialogListener() {
+			navTypeListener = new SelectProfileListener() {
 				@Override
 				public void onSelectedType(int pos) {
 					updateRoutingProfile(pos);

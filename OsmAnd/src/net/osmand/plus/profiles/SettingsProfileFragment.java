@@ -25,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
+import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
@@ -42,7 +43,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	private LinearLayout addNewProfileBtn;
 
 	ProfileListener listener = null;
-	ProfileTypeDialogListener typeListener = null;
+	SelectProfileListener typeListener = null;
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
@@ -85,7 +86,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 		};
 
-		typeListener = new ProfileTypeDialogListener() {
+		typeListener = new SelectProfileListener() {
 			@Override
 			public void onSelectedType(int pos) {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
@@ -105,7 +106,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void onClick(View v) {
-				final ProfileBottomSheetDialogFragment dialog = new ProfileBottomSheetDialogFragment();
+				final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
 				Bundle bundle = new Bundle();
 				bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILE);
 				dialog.setArguments(bundle);
@@ -126,7 +127,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 
-		typeListener = new ProfileTypeDialogListener() {
+		typeListener = new SelectProfileListener() {
 			@Override
 			public void onSelectedType(int pos) {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
@@ -142,19 +143,19 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		adapter.updateItemsList(allAppModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
 	}
 
-	ProfileTypeDialogListener getBaseProfileListener() {
-		if (typeListener == null) {
-			typeListener = new ProfileTypeDialogListener() {
-				@Override
-				public void onSelectedType(int pos) {
-					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-					intent.putExtra(IS_NEW_PROFILE, true);
-					intent.putExtra(IS_USER_PROFILE, true);
-					intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
-					startActivity(intent);
-				}
-			};
-		}
+	SelectProfileListener getBaseProfileListener() {
+//		if (typeListener == null) {
+//			typeListener = new SelectProfileListener() {
+//				@Override
+//				public void onSelectedType(int pos) {
+//					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+//					intent.putExtra(IS_NEW_PROFILE, true);
+//					intent.putExtra(IS_USER_PROFILE, true);
+//					intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
+//					startActivity(intent);
+//				}
+//			};
+//		}
 		return typeListener;
 	}
 
