@@ -66,6 +66,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
@@ -808,9 +809,17 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
 		if(routingConfig == null) {
-			routingConfig = appInitializer.getLazyRoutingConfig();
+			routingConfig = new RoutingConfiguration.Builder();
 		}
 		return routingConfig;
+	}
+
+	public void updateRoutingConfig(Builder update) {
+		if (routingConfig != null) {
+			final RoutingConfiguration.Builder b = routingConfig;
+			b.updateRouters(update);
+			routingConfig = b;
+		}
 	}
 
 	public OsmandRegions getRegions() {

@@ -15,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 
-import java.util.concurrent.Executors;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -58,6 +57,7 @@ import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -460,7 +460,7 @@ public class AppInitializer implements IProgress {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		app.getRoutingConfig();
+		getLazyRoutingConfig();
 		app.applyTheme(app);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelper(app), InAppPurchaseHelper.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
@@ -496,7 +496,7 @@ public class AppInitializer implements IProgress {
 			app.travelDbHelper.initTravelBooks();
 		}
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
-		
+
 
 		initOpeningHoursParser();
 	}
@@ -551,32 +551,34 @@ public class AppInitializer implements IProgress {
 		return object;
 	}
 
-
-
-	net.osmand.router.RoutingConfiguration.Builder getLazyRoutingConfig() {
-		long tm = System.currentTimeMillis();
-		try {
-			RoutingConfiguration.Builder config = RoutingConfiguration.getDefault();
-			File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-			if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
-				File[] fl = routingFolder.listFiles();
-				for (File f : fl) {
-					if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
-						try {
-							RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), config);
-						} catch (XmlPullParserException | IOException e) {
-							throw new IllegalStateException(e);
+	@SuppressLint("StaticFieldLeak")
+	private void getLazyRoutingConfig() {
+		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
+			@Override
+			protected Builder doInBackground(Void... voids) {
+				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+				if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
+					File[] fl = routingFolder.listFiles();
+					for (File f : fl) {
+						if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
+							try {
+								RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
+							} catch (XmlPullParserException | IOException e) {
+								throw new IllegalStateException(e);
+							}
 						}
 					}
 				}
+				return builder;
 			}
-			return config;
-		} finally {
-			long te = System.currentTimeMillis();
-			if (te - tm > 30) {
-				System.err.println("Default routing config init took " + (te - tm) + " ms");
+
+			@Override
+			protected void onPostExecute(Builder builder) {
+				super.onPostExecute(builder);
+				app.updateRoutingConfig(builder);
 			}
-		}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 

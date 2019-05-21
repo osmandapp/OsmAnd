@@ -73,10 +73,6 @@ public class RoutingOptionsHelper {
 		addRouteMenuAppModes(ApplicationMode.PUBLIC_TRANSPORT, PermanentAppModeOptions.PUBLIC_TRANSPORT.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.BOAT, PermanentAppModeOptions.BOAT.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCRAFT.routingParameters);
-//		addRouteMenuAppModes(ApplicationMode.HIKING, PermanentAppModeOptions.HIKING.routingParameters);
-//		addRouteMenuAppModes(ApplicationMode.MOTORCYCLE, PermanentAppModeOptions.MOTORCYCLE.routingParameters);
-//		addRouteMenuAppModes(ApplicationMode.TRUCK, PermanentAppModeOptions.TRUCK.routingParameters);
-//		addRouteMenuAppModes(ApplicationMode.TRAIN, PermanentAppModeOptions.TRAIN.routingParameters);
 	}
 
 	private void addRouteMenuAppModes(ApplicationMode am, List<String> routingParameters) {

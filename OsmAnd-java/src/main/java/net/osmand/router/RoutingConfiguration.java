@@ -63,6 +63,13 @@ public class RoutingConfiguration {
 //			impassableRoadLocations.add(23000069L);
 //		}
 
+		public void updateRouters(Builder update) {
+			defaultRouter = update.defaultRouter;
+			routers.putAll(update.routers);
+			attributes.putAll(update.attributes);
+			impassableRoadLocations.putAll(update.impassableRoadLocations);
+		}
+
 		public RoutingConfiguration build(String router, int memoryLimitMB) {
 			return build(router, null, memoryLimitMB, null);
 		}
