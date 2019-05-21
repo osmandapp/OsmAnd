@@ -815,11 +815,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void updateRoutingConfig(Builder update) {
-		if (routingConfig != null) {
-			final RoutingConfiguration.Builder b = routingConfig;
-			b.updateRouters(update);
-			routingConfig = b;
-		}
+			routingConfig = update;
 	}
 
 	public OsmandRegions getRegions() {
