@@ -61,7 +61,7 @@
     <string name="vector_data_missing">Pobierz dane (\"offline\") by używać map offline.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPrzytrzymaj nacisk, aby wyświetlić opcje"</string>
+\nPrzytrzymaj dłużej, aby uzyskać opcje"</string>
     <string name="local_index_installed">Wersja lokalna</string>
     <string name="local_index_items_backuped">Zarchiwizowano %1$d z %2$d.</string>
     <string name="local_index_items_deleted">Usunięto %1$d z %2$d.</string>
@@ -3046,4 +3046,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Spróbuj zmienić ustawienia.</string>
     <string name="public_transport_calc_pedestrian">Oblicz trasę pieszą</string>
     <string name="public_transport_type">Typ transportu</string>
+    <string name="searching_gps">Wyszukiwanie GPS</string>
+    <string name="coordinates_widget">Widget współrzędne</string>
 </resources>
