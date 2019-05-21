@@ -47,7 +47,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.dashboard.DashErrorFragment;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -135,7 +134,7 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 
-	RoutingConfiguration.Builder defaultRoutingConfig;
+	RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
@@ -808,12 +807,12 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 	
 	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
-		if(defaultRoutingConfig == null) {
-			defaultRoutingConfig = appInitializer.getLazyRoutingConfig();
+		if(routingConfig == null) {
+			routingConfig = appInitializer.getLazyRoutingConfig();
 		}
-		return defaultRoutingConfig;
+		return routingConfig;
 	}
-	
+
 	public OsmandRegions getRegions() {
 		return regions;
 	}

@@ -317,7 +317,7 @@ public class RoutingConfiguration {
 		currentRouter.setProfileName(currentSelectedRouterName);
 		if (filename != null) {
 			currentRouter.setFilename(filename);
-			currentSelectedRouterName = filename + "//" + currentSelectedRouterName;
+			currentSelectedRouterName = filename + "/" + currentSelectedRouterName;
 		}
 
 		config.routers.put(currentSelectedRouterName, currentRouter);
