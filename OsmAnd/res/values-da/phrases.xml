@@ -3516,7 +3516,7 @@
     <string name="poi_hazard_slippery_road">Glat vejbane</string>
     <string name="poi_hazard_flood">Oversvømmelsesfare</string>
     <string name="poi_hazard_minefield">Minefelt</string>
-    <string name="poi_car_pooling">Samkørselssted</string>
+    <string name="poi_car_pooling">Samkørselsplads</string>
     <string name="poi_ruins">Ruiner</string>
     <string name="poi_license_classes">Licensklasser</string>
     <string name="poi_hill">Bakke</string>

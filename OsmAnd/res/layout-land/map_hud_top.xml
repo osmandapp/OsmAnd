@@ -7,6 +7,103 @@
               android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/coordinates_top_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:minHeight="@dimen/map_address_height"
+        android:visibility="visible"
+        tools:background="@color/activity_background_dark"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/coordinates_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/lat_coordinates_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/content_padding_half"
+                android:layout_marginRight="@dimen/content_padding_half"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/lat_icon"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/content_padding_half"
+                    android:layout_marginEnd="@dimen/content_padding_half"
+                    android:layout_marginRight="@dimen/content_padding_half"
+                    android:layout_marginBottom="@dimen/content_padding_half"
+                    android:src="@drawable/widget_coordinates_latitude_day" />
+
+                <TextView
+                    android:id="@+id/lat_coordinates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/activity_background_light"
+                    android:textSize="@dimen/map_top_widget_text_size"
+                    tools:textStyle="bold"
+                    tools:text="N 20°96′60″" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/coordinates_divider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/content_padding_small"
+                android:layout_marginBottom="@dimen/content_padding_small"
+                tools:background="@color/map_progress_bar_bg_light" />
+
+            <LinearLayout
+                android:id="@+id/lon_coordinates_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/content_padding_half"
+                android:layout_marginRight="@dimen/content_padding_half"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/lon_icon"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/content_padding_half"
+                    android:layout_marginEnd="@dimen/content_padding_half"
+                    android:layout_marginRight="@dimen/content_padding_half"
+                    android:layout_marginBottom="@dimen/content_padding_half"
+                    android:src="@drawable/widget_coordinates_longitude_day" />
+
+                <TextView
+                    android:id="@+id/lon_coordinates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/activity_background_light"
+                    android:textSize="@dimen/map_top_widget_text_size"
+                    tools:textStyle="bold"
+                    tools:text="W 120°31′12″" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
             android:id="@+id/map_markers_top_bar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

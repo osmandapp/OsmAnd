@@ -393,13 +393,11 @@ public class TrackActivity extends TabActivity {
 					@Override
 					public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 						int position = -1;
-						switch (item.getItemId()) {
-							case R.id.action_track:
-								position = 0;
-								break;
-							case R.id.action_points:
-								position = 1;
-								break;
+						int i = item.getItemId();
+						if (i == R.id.action_track) {
+							position = 0;
+						} else if (i == R.id.action_points) {
+							position = 1;
 						}
 						if (position != -1 && position != viewPager.getCurrentItem()) {
 							viewPager.setCurrentItem(position);

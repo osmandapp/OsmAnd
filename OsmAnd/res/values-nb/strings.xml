@@ -3041,4 +3041,6 @@
     <string name="public_transport_try_change_settings">Prøv å endre innstillingene.</string>
     <string name="public_transport_calc_pedestrian">Regn ut rute til fots</string>
     <string name="public_transport_type">Transporttype</string>
+    <string name="searching_gps">Søker etter GPS</string>
+    <string name="coordinates_widget">Koordinat-miniprogram</string>
 </resources>

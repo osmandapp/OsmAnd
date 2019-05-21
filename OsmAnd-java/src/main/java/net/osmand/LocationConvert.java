@@ -16,6 +16,10 @@ public class LocationConvert {
 	public static final int UTM_FORMAT = 3;
 	public static final int OLC_FORMAT = 4;
 	private static final char DELIM = ':';
+	private static final char DELIMITER_DEGREES = '°';
+	private static final char DELIMITER_MINUTES = '′';
+	private static final char DELIMITER_SECONDS = '″';
+	private static final char DELIMITER_SPACE = ' ';
 
 	
 
@@ -134,20 +138,86 @@ public class LocationConvert {
 
 		DecimalFormat df = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
 		if (outputType == FORMAT_MINUTES || outputType == FORMAT_SECONDS) {
-			int degrees = (int) Math.floor(coordinate);
-			sb.append(degrees);
-			sb.append(DELIM);
-			coordinate -= degrees;
-			coordinate *= 60.0;
+			coordinate = formatCoordinate(coordinate, sb, DELIM);
 			if (outputType == FORMAT_SECONDS) {
-				int minutes = (int) Math.floor(coordinate);
-				sb.append(minutes);
-				sb.append(DELIM);
-				coordinate -= minutes;
-				coordinate *= 60.0;
+				coordinate = formatCoordinate(coordinate, sb, DELIM);
 			}
 		}
 		sb.append(df.format(coordinate));
+		return sb.toString();
+	}
+
+	public static String convertLatitude(double latitude, int outputType, boolean addCardinalDirection) {
+		if (latitude < -90.0 || latitude > 90.0 || Double.isNaN(latitude)) {
+			throw new IllegalArgumentException("latitude=" + latitude);
+		}
+		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType != FORMAT_SECONDS)) {
+			throw new IllegalArgumentException("outputType=" + outputType);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		// Handle negative values and append cardinal directions if necessary
+		if (addCardinalDirection) {
+			sb.append(latitude < 0 ? 'S' : 'N');
+		} else if (latitude < 0) {
+			sb.append('-');
+		}
+		if (latitude < 0) {
+			latitude = -latitude;
+		}
+
+		return formatDegrees(latitude, outputType, sb);
+	}
+
+	public static String convertLongitude(double longitude, int outputType, boolean addCardinalDirection) {
+		if (longitude < -180.0 || longitude > 180.0 || Double.isNaN(longitude)) {
+			throw new IllegalArgumentException("longitude=" + longitude);
+		}
+		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType != FORMAT_SECONDS)) {
+			throw new IllegalArgumentException("outputType=" + outputType);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		// Handle negative values and append cardinal directions if necessary
+		if (addCardinalDirection) {
+			sb.append(longitude < 0 ? 'W' : 'E');
+		} else if (longitude < 0) {
+			sb.append('-');
+		}
+		if (longitude < 0) {
+			longitude = -longitude;
+		}
+
+		return formatDegrees(longitude, outputType, sb);
+	}
+
+	private static double formatCoordinate(double coordinate, StringBuilder sb, char delimiter) {
+		int deg = (int) Math.floor(coordinate);
+		sb.append(deg);
+		sb.append(delimiter);
+		coordinate -= deg;
+		coordinate *= 60.0;
+		return coordinate;
+	}
+
+	private static String formatDegrees(double coordinate, int outputType, StringBuilder sb) {
+		if (outputType == FORMAT_DEGREES) {
+			sb.append(new DecimalFormat("##0.0000", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(DELIMITER_DEGREES);
+		} else if (outputType == FORMAT_MINUTES) {
+			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
+			sb.append(DELIMITER_SPACE);
+			sb.append(new DecimalFormat("##0.00", new DecimalFormatSymbols(Locale.US)).format(coordinate));
+			sb.append(DELIMITER_MINUTES);
+		} else if (outputType == FORMAT_SECONDS) {
+			coordinate = formatCoordinate(coordinate, sb, DELIMITER_DEGREES);
+			sb.append(DELIMITER_SPACE);
+			coordinate = formatCoordinate(coordinate, sb, DELIMITER_MINUTES);
+			sb.append(DELIMITER_SPACE);
+			formatCoordinate(coordinate, sb, DELIMITER_SECONDS);
+		}
 		return sb.toString();
 	}
 }

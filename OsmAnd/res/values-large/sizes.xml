@@ -2,6 +2,7 @@
 <resources>
     <dimen name="map_trans_seek_size">120dp</dimen>
 	<dimen name="map_widget_text_size">35sp</dimen>
+	<dimen name="map_top_widget_text_size">33sp</dimen>
 	<dimen name="map_widget_text_size_small">23sp</dimen>
 	<dimen name="map_button_text_size">23sp</dimen>
 	<dimen name="map_route_buttons_width">90dp</dimen>
@@ -132,6 +133,7 @@
 	<dimen name="bottom_sheet_content_margin_small">12dp</dimen>
 	<dimen name="content_padding">24dp</dimen>
 	<dimen name="content_padding_small">18dp</dimen>
+	<dimen name="content_padding_half">12dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">12dp</dimen>
 	<dimen name="measurement_tool_divider_margin">12dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">18dp</dimen>

@@ -2984,7 +2984,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="add_intermediate">Pridať prechodný bod</string>
     <string name="shared_string_degrees">Stupne</string>
     <string name="shared_string_milliradians">Miliradiány</string>
-    <string name="angular_measeurement">Merné jednotky pre uhly</string>
+    <string name="angular_measeurement">Jednotky pre uhly</string>
     <string name="angular_measeurement_descr">Zmení jednotku na meranie azimutu.</string>
     <string name="avoid_pt_types_descr">Vyberte typy verejnej dopravy, ktorej sa má navigácia vyhnúť:</string>
     <string name="quick_action_day_night_mode">%s režim</string>

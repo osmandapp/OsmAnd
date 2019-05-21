@@ -1925,7 +1925,7 @@
     <string name="quick_action_btn_tutorial_descr">Ekrandaki konumunu değiştirmek için düğmeye uzun dokunun ve sürükleyin.</string>
     <string name="restart_search">Aramayı yeniden başlat</string>
     <string name="increase_search_radius">Arama yarıçapını artır</string>
-    <string name="nothing_found">Hiçbir şey bulunamadı :(</string>
+    <string name="nothing_found">Hiçbir şey bulunamadı</string>
     <string name="nothing_found_descr">Arama sorgusunu değiştir veya arama yarıçapını arttır.</string>
     <string name="search_favorites">Sık Kullanılanları ara</string>
     <string name="hillshade_menu_download_descr">Harita üzerinde kabartmalı gölgelendirme görmek için, bu bölgeye ait gölgelendirme bindirme haritasını indirmeniz gerekir.</string>
@@ -1948,12 +1948,12 @@
     <string name="select_street">Sokağı seçin</string>
     <string name="type_address">Adresi yazın</string>
     <string name="quick_action_btn_tutorial_title">Düğme konumunu değiştir</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Kayıtlı parçaları, kayıt ayına (2017-01 gibi) alt klasörler halinde depolayın.</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Kayıtlı parçaları, kayıt ayına (2018-01 gibi) alt klasörler halinde depolayın.</string>
     <string name="shared_string_reset">Reset</string>
     <string name="shared_string_reload">Tekrar yükle</string>
     <string name="mapillary_menu_descr_tile_cache">Güncel verileri görmek için döşemeleri yeniden yükleyin.</string>
     <string name="mapillary_menu_title_tile_cache">Karo önbellek</string>
-    <string name="wrong_user_name">Yanlış kullanıcı-adı!</string>
+    <string name="wrong_user_name">Yanlış kullanıcı adı!</string>
     <string name="shared_string_to">Buraya</string>
     <string name="mapillary_menu_descr_dates">Yalnızca eklenmiş görüntüleri görüntüleyin</string>
     <string name="mapillary_menu_title_dates">Tarih</string>
@@ -2311,8 +2311,8 @@
     <string name="public_transport_calc_pedestrian">Yaya rotası hesapla</string>
     <string name="public_transport_type">Transfer tipi</string>
     <string name="send_log">Rapor gönder</string>
-    <string name="routing_attr_avoid_tram_name">Tramwaylardan kaçın.</string>
-    <string name="routing_attr_avoid_tram_description">Tramwaylardan kaçın.</string>
+    <string name="routing_attr_avoid_tram_name">Tramwaylardan kaçın</string>
+    <string name="routing_attr_avoid_tram_description">Tramwaylardan kaçın</string>
     <string name="routing_attr_avoid_bus_name">Otobüsten kaçın</string>
     <string name="routing_attr_avoid_bus_description">Otobüs ve troleybüsten kaçın</string>
     <string name="routing_attr_avoid_share_taxi_name">Taksiden kaçın</string>
@@ -2359,7 +2359,7 @@
     <string name="rendering_attr_smoothness_bad_name">Kötü</string>
     <string name="rendering_attr_smoothness_very_bad_name">Çok kötü</string>
     <string name="rendering_attr_smoothness_horrible_name">Korkunç</string>
-    <string name="rendering_attr_smoothness_very_horrible_name">Çok korkunç</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Çok kötü</string>
     <string name="rendering_attr_highway_class_motorway_name">Otoyol</string>
     <string name="rendering_attr_highway_class_state_road_name">Devlet yolu</string>
     <string name="rendering_attr_highway_class_road_name">Yol</string>
@@ -2410,4 +2410,26 @@
     <string name="coord_input_add_point">Nokta ekle</string>
     <string name="hide_full_description">Açıklamayı gizle</string>
     <string name="show_full_description">Açıklamayı göster</string>
+    <string name="move_maps">Haritaları taşı</string>
+    <string name="public_transport_try_ped">Yaya navigasyonu dene</string>
+    <string name="public_transport_try_change_settings">Ayarları değiştirmeyi dene.</string>
+    <string name="shared_string_restore">Restore et</string>
+    <string name="poi_cannot_be_found">Nokta yada yol bulunamadı.</string>
+    <string name="search_no_results_feedback">Arama sonucu bulunamadı\?
+\nGeri bildirim gönder</string>
+    <string name="send_search_query">Arana sorgusu gönderilsin mi\?</string>
+    <string name="shared_string_bookmark">Yer imi</string>
+    <string name="coordinate_input">Koordinat gir</string>
+    <string name="line">Çizgi</string>
+    <string name="edit_line">Çizgiyi düzenle</string>
+    <string name="mapillary_menu_title_pano">Sadece 360° resimleri göster</string>
+    <string name="full_version_thanks">OsmAnd Premium satın aldığınız için teşekkür ederiz.</string>
+    <string name="quick_action_take_audio_note">Yeni sesli not</string>
+    <string name="quick_action_take_video_note">Yeni video notu</string>
+    <string name="quick_action_take_photo_note">Yeni resim notu</string>
+    <string name="quick_action_add_osm_bug">OSM notu oluştur</string>
+    <string name="quick_action_add_parking">Otopark ekle</string>
+    <string name="quick_action_add_favorite">Favorilere ekle</string>
+    <string name="quick_favorites_show_favorites_dialog">Favorileri göster</string>
+    <string name="routing_attr_avoid_sett_description">Parke taşından kaçın</string>
 </resources>

@@ -322,6 +322,10 @@ public class MapWidgetRegistry {
 		if (mode != ApplicationMode.DEFAULT) {
 			addControlId(map, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
 		}
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinates_widget, map)
+				.setIcon(R.drawable.ic_action_coordinates_widget)
+				.setSelected(settings.SHOW_COORDINATES_WIDGET.get())
+				.setListener(new ApearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map)).createItem());
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
 				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -515,37 +519,37 @@ public class MapWidgetRegistry {
 										@Override
 										public boolean onMenuItemClick(MenuItem menuItem) {
 
-											switch (menuItem.getItemId()) {
-												case R.id.action_show:
-													setVisibility(adapter, pos, true, false);
-													return true;
-												case R.id.action_hide:
-													setVisibility(adapter, pos, false, false);
-													return true;
-												case R.id.action_collapse:
-													setVisibility(adapter, pos, true, true);
-													return true;
-												default:
-													if (menuItemIds != null) {
-														for (int menuItemId : menuItemIds) {
-															if (menuItem.getItemId() == menuItemId) {
-																r.changeState(menuItemId);
-																MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-																if (mil != null) {
-																	mil.recreateControls();
-																}
-																ContextMenuItem item = adapter.getItem(pos);
-																item.setIcon(r.getDrawableMenu());
-																if (r.getMessage() != null) {
-																	item.setTitle(r.getMessage());
-																} else {
-																	item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
-																}
-																adapter.notifyDataSetChanged();
-																return true;
+											int i = menuItem.getItemId();
+											if (i == R.id.action_show) {
+												setVisibility(adapter, pos, true, false);
+												return true;
+											} else if (i == R.id.action_hide) {
+												setVisibility(adapter, pos, false, false);
+												return true;
+											} else if (i == R.id.action_collapse) {
+												setVisibility(adapter, pos, true, true);
+												return true;
+											} else {
+												if (menuItemIds != null) {
+													for (int menuItemId : menuItemIds) {
+														if (menuItem.getItemId() == menuItemId) {
+															r.changeState(menuItemId);
+															MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+															if (mil != null) {
+																mil.recreateControls();
 															}
+															ContextMenuItem item = adapter.getItem(pos);
+															item.setIcon(r.getDrawableMenu());
+															if (r.getMessage() != null) {
+																item.setTitle(r.getMessage());
+															} else {
+																item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+															}
+															adapter.notifyDataSetChanged();
+															return true;
 														}
 													}
+												}
 											}
 											return false;
 										}

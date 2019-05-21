@@ -853,34 +853,26 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			switch (view.getId()) {
-				case R.id.overlay_view:
+			int i = view.getId();
+			if (i == R.id.overlay_view) {
+				hideTransparentOverlay();
+				closeFabMenu(view.getContext());
+			} else if (i == R.id.menu_fab) {
+				if (fabMenuOpened) {
 					hideTransparentOverlay();
 					closeFabMenu(view.getContext());
-					break;
-				case R.id.menu_fab:
-					if (fabMenuOpened) {
-						hideTransparentOverlay();
-						closeFabMenu(view.getContext());
-					} else {
-						showTransparentOverlay();
-						openFabMenu(view.getContext());
-					}
-					break;
-				case R.id.waypoint_text_layout:
-				case R.id.waypoint_fab:
-					PointDescription pointWptDescription =
-							new PointDescription(PointDescription.POINT_TYPE_WPT, app.getString(R.string.add_waypoint));
-					addPoint(pointWptDescription);
-					break;
-				case R.id.route_text_layout:
-				case R.id.route_fab:
-					addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
-					break;
-				case R.id.line_text_layout:
-				case R.id.line_fab:
-					addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
-					break;
+				} else {
+					showTransparentOverlay();
+					openFabMenu(view.getContext());
+				}
+			} else if (i == R.id.waypoint_text_layout || i == R.id.waypoint_fab) {
+				PointDescription pointWptDescription =
+						new PointDescription(PointDescription.POINT_TYPE_WPT, app.getString(R.string.add_waypoint));
+				addPoint(pointWptDescription);
+			} else if (i == R.id.route_text_layout || i == R.id.route_fab) {
+				addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
+			} else if (i == R.id.line_text_layout || i == R.id.line_fab) {
+				addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
 			}
 		}
 	};

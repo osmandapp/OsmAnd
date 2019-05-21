@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopCoordinatesView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -56,6 +57,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private DrawSettings drawSettings;
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
+	private TopCoordinatesView topCoordinatesView;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -139,8 +141,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		OsmandApplication app = view.getApplication();
 		lanesControl = ric.createLanesControl(map, view);
 
+		TextState ts = calculateTextState();
 		streetNameView = new TopTextView(map.getMyApplication(), map);
-		updateStreetName(false, calculateTextState());
+		updateStreetName(false, ts);
+
+		topCoordinatesView = new TopCoordinatesView(map.getMyApplication(), map);
+		updateTopCoordinates(false, ts);
 
 		topToolbarView = new TopToolbarView(map);
 		updateTopToolbar(false);
@@ -256,6 +262,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				updateReg(ts, reg);
 			}
 			updateStreetName(nightMode, ts);
+			updateTopCoordinates(nightMode, ts);
 			updateTopToolbar(nightMode);
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
@@ -273,6 +280,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private void updateTopToolbar(boolean nightMode) {
 		topToolbarView.updateColors(nightMode);
+	}
+
+	private void updateTopCoordinates(boolean nightMode, TextState ts) {
+		topCoordinatesView.updateColors(nightMode, ts.textBold);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
@@ -329,6 +340,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded);
 		streetNameView.updateInfo(drawSettings);
 		topToolbarView.updateInfo();
+		topCoordinatesView.updateInfo();
 		alarmControl.updateInfo(drawSettings);
 		rulerControl.updateInfo(tileBox, drawSettings);
 		lanesControl.updateInfo(drawSettings);

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <string name="rendering_value_car_name">Takeṛṛust</string>
     <string name="rendering_value_bicycle_name">Azlalam</string>
     <string name="rendering_value_pedestrian_name">Amsebrid</string>
@@ -61,8 +62,6 @@
     <string name="rendering_attr_hideText_name">Aḍris</string>
     <string name="int_days">ussan</string>
     <string name="osmo_connect_menu">Qqen</string>
-
-
     <string name="voice_pref_title">Taγuct</string>
     <string name="lang_zh">Tacinwatt</string>
     <string name="lang_en">Tagnizit</string>
@@ -102,7 +101,6 @@
     <string name="route_to">Γer :</string>
     <string name="route_via">S :</string>
     <string name="route_from">Seg :</string>
-
     <string name="plugin_distance_point_time">akud</string>
     <string name="max_speed_none">ulac</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
@@ -211,10 +209,9 @@
     <string name="search_categories">Taggayin</string>
     <string name="city_type_neighbourhood">Azniq</string>
     <string name="map_widget_search">Anadi</string>
-	<string name="shared_string_is_open_24_7">Taneldit 24/7</string>
+    <string name="shared_string_is_open_24_7">Taneldit 24/7</string>
     <string name="follow_us">Ḍfer aγ</string>
     <string name="access_category_choice">Fren taggayt</string>
-    
     <string name="shared_string_move_up">Ali</string>
     <string name="shared_string_move_down">Ader</string>
     <string name="road_blocked">Yergel webrid</string>
@@ -259,7 +256,7 @@
     <string name="favourites">Imenyafen</string>
     <string name="empty_state_favourites">Rnu γer imenyafen</string>
     <string name="wrong_input">Yir anekcam</string>
-	<string name="shared_string_options">Iγewwaṛen</string>
+    <string name="shared_string_options">Iγewwaṛen</string>
     <string name="mapillary_menu_title_username">Isem n useqdac</string>
     <string name="nearest_cities">Timdinin ig qarben</string>
     <string name="shared_string_add_to_map_markers">Rnu ar ticṛaḍ</string>
@@ -290,10 +287,9 @@
     <string name="transport_Routes">Iberdan</string>
     <string name="transport">Amesni</string>
     <string name="enter_new_name">Jerred ism ajdid</string>
-	<string name="shared_string_back">Uγal</string>
-	<string name="shared_string_view">Sken</string>
-	<string name="shared_string_road">Abrid</string>
-    
+    <string name="shared_string_back">Uγal</string>
+    <string name="shared_string_view">Sken</string>
+    <string name="shared_string_road">Abrid</string>
     <string name="shared_string_finish">Fakk</string>
     <string name="shared_string_sort">Smizzwer</string>
     <string name="is_saved">yettwasekles</string>
@@ -333,8 +329,6 @@
     <string name="rendering_value_medium_w_name">D alemmas</string>
     <string name="rendering_value_low_name">Yuder</string>
     <string name="gpx_appearance">Udem</string>
-    
-    
     <string name="shared_string_notifications">Ilγa</string>
     <string name="shared_string_continue">Kemmel</string>
     <string name="shared_string_pause">Bedd</string>
@@ -351,8 +345,6 @@
     <string name="access_shared_string_not_installed">Ur yebdid ara</string>
     <string name="access_widget_expand">Snefli</string>
     <string name="report">Aṛabul</string>
-    
-    
     <string name="donations">Tiwsiwin</string>
     <string name="osm_live_subscribe_btn">Jerred</string>
     <string name="osm_live_active">Urmid</string>
@@ -485,12 +477,6 @@
 \n
 \nIγewwaṛen n usiti γezzifen"</string>
     <string name="gpx_selection_segment_title"/>
-    
-    
-    
-    
-    
-    
     <string name="misc_pref_title"/>
     <string name="localization_pref_title">Asideg</string>
     <string name="lang_pt_br">Tapurtugit (Birizil)</string>
@@ -672,4 +658,4 @@
     <string name="parked_at">Sers deg</string>
     <string name="without_time_limit">Ulac tilist deg wakud</string>
     <string name="group_deleted">Agraw ittwakes</string>
-    </resources>
+</resources>

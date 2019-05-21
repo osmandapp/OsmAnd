@@ -135,13 +135,11 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 				int position = -1;
-				switch (item.getItemId()) {
-					case R.id.action_explore:
-						position = EXPLORE_POSITION;
-						break;
-					case R.id.action_saved_articles:
-						position = SAVED_ARTICLES_POSITION;
-						break;
+				int i = item.getItemId();
+				if (i == R.id.action_explore) {
+					position = EXPLORE_POSITION;
+				} else if (i == R.id.action_saved_articles) {
+					position = SAVED_ARTICLES_POSITION;
 				}
 				if (position != -1 && position != viewPager.getCurrentItem()) {
 					viewPager.setCurrentItem(position);

@@ -3008,7 +3008,7 @@
     <string name="routing_attr_avoid_sett_description">Пазбягаць брукаваных дарог</string>
     <string name="shared_string_degrees">Градусы</string>
     <string name="shared_string_milliradians">Мілірадыяны</string>
-    <string name="angular_measeurement">Адзінкі вымярэння вуглоў</string>
+    <string name="angular_measeurement">Адзінкі вуглоў</string>
     <string name="angular_measeurement_descr">Змяніць адзінкі вымярэння азімуту.</string>
     <string name="routing_attr_avoid_tram_name">Пазбягаць трамваяў</string>
     <string name="routing_attr_avoid_tram_description">Пазбягаць трамваяў</string>

@@ -2979,7 +2979,7 @@
 \n</string>
     <string name="shared_string_degrees">Градуси</string>
     <string name="shared_string_milliradians">Мілірадіани</string>
-    <string name="angular_measeurement">Одиниці вимірювання кутів</string>
+    <string name="angular_measeurement">Одиниця вимірювання кутів</string>
     <string name="angular_measeurement_descr">Змінити одиниці вимірювання азимуту.</string>
     <string name="avoid_pt_types_descr">Оберіть види громадського транспорту, яких треба уникати при навігації:</string>
     <string name="quick_action_day_night_mode">%s режим</string>

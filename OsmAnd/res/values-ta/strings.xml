@@ -423,8 +423,7 @@
     <string name="clear_tile_data">அனைத்து ஓலைகளையும் அழி</string>
     <string name="routing_attr_short_way_name">எரிபொருள்-திறனுள்ள வழி</string>
     <string name="routing_attr_short_way_description">எரிபொருள்-திறனுள்ள வழி (வழக்கமாக குறுகியது) பயன்படுத்தவும்.</string>
-    <string name="replace_favorite_confirmation">%1$s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா \?
-\n</string>
+    <string name="replace_favorite_confirmation">%1$s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா \?</string>
     <string name="rendering_attr_hideOverground_name">நிலப்பரப்பு பொருட்கள்</string>
     <string name="shared_string_change">மாற்றம்</string>
     <string name="get_started">தொடங்குக</string>

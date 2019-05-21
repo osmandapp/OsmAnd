@@ -38,7 +38,10 @@
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>
     <string name="third_party_routing_type">3rd-party routing</string>
-
+  <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
+  <string name="application_profiles">Application profiles</string>
+    <string name="searching_gps">Searching GPS</string>
+    <string name="coordinates_widget">Coordinates widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
     <string name="files_copied">Copied %1$d files (%2$s).</string>
     <string name="files_failed">Failed to copy %1$d files (%2$s).</string>
@@ -52,8 +55,7 @@
     <string name="public_transport_calc_pedestrian">Calculate pedestrian route</string>
     <string name="public_transport_type">Transport type</string>
     <string name="send_log">Send log</string>
-    <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
-    <string name="application_profiles">Application profiles</string>
+
     <string name="routing_attr_avoid_tram_name">Avoid trams</string>
     <string name="routing_attr_avoid_tram_description">Avoid trams</string>
     <string name="routing_attr_avoid_bus_name">Avoid buses</string>
@@ -3146,7 +3148,5 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
-
-
 
 </resources>
