@@ -3048,4 +3048,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Prøv at ændre indstillinger.</string>
     <string name="public_transport_calc_pedestrian">Beregn fodgængerruten</string>
     <string name="public_transport_type">Transporttype</string>
+    <string name="searching_gps">Søger efter GPS</string>
+    <string name="coordinates_widget">Koordinat modul</string>
 </resources>
