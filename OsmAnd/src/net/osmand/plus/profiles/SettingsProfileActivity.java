@@ -18,7 +18,8 @@ public class SettingsProfileActivity extends OsmandActionBarActivity {
 		if (savedInstanceState == null) {
 			SettingsProfileFragment profileFragment = new SettingsProfileFragment();
 			profileFragment.setArguments(getIntent().getExtras());
-			getSupportFragmentManager().beginTransaction().add(android.R.id.content, profileFragment, SETTINGS_PROFILE_FRAGMENT_TAG).commit();
+			getSupportFragmentManager().beginTransaction()
+				.add(android.R.id.content, profileFragment, SETTINGS_PROFILE_FRAGMENT_TAG).commit();
 		}
 	}
 
@@ -29,7 +30,6 @@ public class SettingsProfileActivity extends OsmandActionBarActivity {
 			case android.R.id.home:
 				finish();
 				return true;
-
 		}
 		return false;
 	}

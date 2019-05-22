@@ -8,7 +8,6 @@ import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -21,8 +20,6 @@ import java.util.Stack;
 
 public class RoutingConfiguration {
 
-	private static final Log LOG = PlatformUtil.getLog(RoutingConfiguration.class);
-	public static final String DEFAULT_ROUTING_PROFILES = "default_routing_profiles";
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
 	public final float DEVIATION_RADIUS = 3000;
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
@@ -49,7 +46,6 @@ public class RoutingConfiguration {
 	
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
-
 
 	public static class Builder {
 		// Design time storage

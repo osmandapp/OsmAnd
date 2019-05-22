@@ -51,7 +51,6 @@ import org.apache.commons.logging.Log;
 
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
-	private static final Log LOG = PlatformUtil.getLog(SettingsNavigationActivity.class);
 	public static final String MORE_VALUE = "MORE_VALUE";
 
 	private Preference avoidRouting;
@@ -77,7 +76,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.routing_settings);
-
 		createUI();
     }
 
@@ -86,7 +84,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		PreferenceScreen screen = getPreferenceScreen();
 		settings = getMyApplication().getSettings();
 		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
-
 		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		String[] entries = new String[vls.length];
 		for(int i=0; i<entries.length; i++){
@@ -181,7 +178,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 
 		if(getIntent() != null && getIntent().hasExtra(INTENT_SKIP_DIALOG)) {
-			LOG.debug("AppMode in settings: " + settings.getApplicationMode().getStringKey());
 			setSelectedAppMode(settings.getApplicationMode());
 		} else {
 			profileDialog();

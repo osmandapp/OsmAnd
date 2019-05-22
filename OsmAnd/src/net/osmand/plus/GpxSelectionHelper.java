@@ -482,7 +482,6 @@ public class GpxSelectionHelper {
 
 	public void loadGPXTracks(IProgress p) {
 		String load = app.getSettings().SELECTED_GPX.get();
-		LOG.debug("Saved selection:" + load);
 		if (!Algorithms.isEmpty(load)) {
 			try {
 				JSONArray ar = new JSONArray(load);

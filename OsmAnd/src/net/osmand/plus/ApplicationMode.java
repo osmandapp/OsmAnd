@@ -55,11 +55,11 @@ public class ApplicationMode {
 			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).setRoutingProfile("boat").reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).setRouteService(RouteService.STRAIGHT).reg();
+			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").reg();
 
 	static {
-		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, PUBLIC_TRANSPORT};
-		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, PUBLIC_TRANSPORT};
+		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, };
+		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT};
 		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN};
 		ApplicationMode[] pedestrian = new ApplicationMode[]{PEDESTRIAN};
 		ApplicationMode[] pedestrianBicycle = new ApplicationMode[]{PEDESTRIAN, BICYCLE};

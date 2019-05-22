@@ -47,19 +47,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.USE_OPENGL_RENDER,
 				R.string.use_opengl_render,R.string.use_opengl_render_descr));
 
-//		pref = new Preference(this);
-//		pref.setTitle(R.string.app_modes_choose);
-//		pref.setSummary(R.string.app_modes_choose_descr);
-//		pref.setKey("available_application_modes");
-//		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-//			@Override
-//			public boolean onPreferenceClick(Preference preference) {
-//				availableProfileDialog();
-//				return true;
-//			}
-//		});
-//		cat.addPreference(pref);
-
 		PreferenceCategory navigation = new PreferenceCategory(this);
 		navigation.setTitle(R.string.routing_settings);
 		cat.addPreference(navigation);

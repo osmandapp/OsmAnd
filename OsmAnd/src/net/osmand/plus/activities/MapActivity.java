@@ -787,12 +787,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (intent.hasExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
 					case EditProfileFragment.MAP_CONFIG:
-						LOG.debug("open map config");
 						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
 						break;
 
 					case EditProfileFragment.SCREEN_CONFIG:
-						LOG.debug("open screen config");
 						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
 						break;
 				}

@@ -22,17 +22,18 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_fragment_layout);
 
-        if (savedInstanceState == null) {
-            EditProfileFragment editProfileFragment = new EditProfileFragment();
-	        editProfileFragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(android.R.id.content,
-	            editProfileFragment, EDIT_PROFILE_FRAGMENT_TAG).commit();
-        }
+		if (savedInstanceState == null) {
+			EditProfileFragment editProfileFragment = new EditProfileFragment();
+			editProfileFragment.setArguments(getIntent().getExtras());
+			getSupportFragmentManager().beginTransaction().add(android.R.id.content,
+				editProfileFragment, EDIT_PROFILE_FRAGMENT_TAG).commit();
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem m = menu.add(0, DELETE_ID,0, R.string.action_delete).setIcon(R.drawable.ic_action_delete_dark);
+		MenuItem m = menu.add(0, DELETE_ID, 0, R.string.action_delete)
+			.setIcon(R.drawable.ic_action_delete_dark);
 		MenuItemCompat.setShowAsAction(m, MenuItem.SHOW_AS_ACTION_ALWAYS);
 		super.onCreateOptionsMenu(menu);
 		return true;
@@ -47,7 +48,7 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 				finish();
 				return true;
 			case DELETE_ID:
-				((EditProfileFragment)getSupportFragmentManager().findFragmentByTag(
+				((EditProfileFragment) getSupportFragmentManager().findFragmentByTag(
 					EDIT_PROFILE_FRAGMENT_TAG)).onDeleteProfileClick();
 				return true;
 
