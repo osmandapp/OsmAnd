@@ -79,6 +79,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private boolean isNew = false;
 	private boolean isUserProfile = false;
 	private boolean isDataChanged = false;
+	private boolean isCancelAllowed = true;
+	private boolean isNightMode;
 
 	private SelectProfileListener navTypeListener = null;
 	private SelectProfileListener iconIdListener = null;
@@ -105,9 +107,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private LinearLayout buttonsLayoutSV;
 	private Button cancelBtnSV;
 	private Button saveButtonSV;
-
-	private boolean isCancelAllowed = true;
-	private boolean isNightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -621,6 +620,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		}
 		isDataChanged = false;
+		isCancelAllowed = true;
 		return true;
 	}
 

@@ -1,8 +1,5 @@
 package net.osmand.plus.profiles;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class ProfileDataObject {
 
 	private String name;
