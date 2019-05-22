@@ -130,7 +130,7 @@ public class RoutingConfiguration {
 			
 		}
 
-		public Map<String, GeneralRouter> getAllRoutes() {
+		public Map<String, GeneralRouter> getAllRouters() {
 			return routers;
 		}
 

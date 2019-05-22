@@ -704,7 +704,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				false, null));
 		}
 
-		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRoutes();
+		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRouters();
 		for (Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
 			int iconRes = R.drawable.ic_action_gdirections_dark;
 			String name = e.getValue().getProfileName();
