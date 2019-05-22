@@ -11,11 +11,11 @@
 
   <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="@dimen/content_padding"
-    android:paddingEnd="@dimen/content_padding_small"
-    android:paddingLeft="@dimen/content_padding"
-    android:paddingRight="@dimen/content_padding_small"
+    android:layout_height="63dp"
+    android:paddingStart="@dimen/list_content_padding"
+    android:paddingEnd="@dimen/list_content_padding"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -50,7 +50,7 @@
         tools:text="Item Title"/>
 
       <TextView
-        android:id="@+id/subtitle"
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -75,6 +75,6 @@
     android:layout_height="1dp"
     android:layout_marginStart="64dp"
     android:layout_marginLeft="64dp"
-    android:background="?android:attr/listDivider"/>
+    android:background="@color/divider_light"/>
 
 </LinearLayout>

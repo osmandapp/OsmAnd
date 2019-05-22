@@ -54,4 +54,16 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 		}
 		return false;
 	}
+
+	@Override
+	public void onBackPressed() {
+		final EditProfileFragment epf = (EditProfileFragment) getSupportFragmentManager()
+			.findFragmentByTag(EDIT_PROFILE_FRAGMENT_TAG);
+		if (epf.onBackPressedAllowed()) {
+			super.onBackPressed();
+		} else {
+			epf.confirmCancelDialog(this);
+		}
+
+	}
 }

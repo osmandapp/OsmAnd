@@ -1,7 +1,9 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.DIALOG_TYPE;
-import static net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
+
+
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +25,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.profiles.ProfileBottomSheetDialogFragment.ProfileTypeDialogListener;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.util.Algorithms;
@@ -86,17 +87,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 		};
 
-		typeListener = new SelectProfileListener() {
-			@Override
-			public void onSelectedType(int pos) {
-				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-				intent.putExtra(IS_NEW_PROFILE, true);
-				intent.putExtra(IS_USER_PROFILE, true);
-				intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
-				startActivity(intent);
-			}
-		};
-
 		View view = inflater.inflate(R.layout.profiles_list_fragment, container, false);
 		recyclerView = view.findViewById(R.id.profiles_list);
 		addNewProfileBtn = view.findViewById(R.id.add_profile_btn);
@@ -127,16 +117,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 
-		typeListener = new SelectProfileListener() {
-			@Override
-			public void onSelectedType(int pos) {
-				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-				intent.putExtra(IS_NEW_PROFILE, true);
-				intent.putExtra(IS_USER_PROFILE, true);
-				intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
-				startActivity(intent);
-			}
-		};
+		getBaseProfileListener();
 
 		allAppModes = ApplicationMode.allPossibleValues();
 		allAppModes.remove(ApplicationMode.DEFAULT);
@@ -144,18 +125,18 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	}
 
 	SelectProfileListener getBaseProfileListener() {
-//		if (typeListener == null) {
-//			typeListener = new SelectProfileListener() {
-//				@Override
-//				public void onSelectedType(int pos) {
-//					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-//					intent.putExtra(IS_NEW_PROFILE, true);
-//					intent.putExtra(IS_USER_PROFILE, true);
-//					intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
-//					startActivity(intent);
-//				}
-//			};
-//		}
+		if (typeListener == null) {
+			typeListener = new SelectProfileListener() {
+				@Override
+				public void onSelectedType(int pos) {
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra(IS_NEW_PROFILE, true);
+					intent.putExtra(IS_USER_PROFILE, true);
+					intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
+					startActivity(intent);
+				}
+			};
+		}
 		return typeListener;
 	}
 

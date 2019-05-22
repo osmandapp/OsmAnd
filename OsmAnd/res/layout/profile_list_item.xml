@@ -14,7 +14,7 @@
     android:layout_height="@dimen/standard_icon_size"
     android:layout_marginLeft="@dimen/setting_profile_image_margin"
     android:layout_marginRight="@dimen/setting_profile_image_margin"
-    android:src="@drawable/ic_action_bicycle_dark"/>
+    tools:src="@drawable/ic_action_bicycle_dark"/>
 
   <LinearLayout
     android:layout_width="match_parent"

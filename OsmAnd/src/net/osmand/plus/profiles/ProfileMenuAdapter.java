@@ -1,5 +1,6 @@
 package net.osmand.plus.profiles;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -25,12 +26,16 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	private Set<ApplicationMode> selectedItems;
 	private ProfileListener listener;
 	private final OsmandApplication app;
+	@ColorRes private int selectedIconColorRes;
 
 	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems, OsmandApplication app, ProfileListener listener) {
 		this.items = items;
 		this.listener = listener;
 		this.app = app;
 		this.selectedItems = selectedItems;
+		selectedIconColorRes = isNightMode(app)
+			? R.color.active_buttons_and_links_dark
+			: R.color.active_buttons_and_links_light;
 	}
 
 	public List<ApplicationMode> getItems() {
@@ -75,9 +80,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			: R.color.main_font_light));
 		if (selectedItems.contains(item)) {
 			holder.aSwitch.setChecked(true);
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app)
-				? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), selectedIconColorRes));
 		} else {
 			holder.aSwitch.setChecked(false);
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), R.color.icon_color));
@@ -88,9 +91,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			public void onClick(View v) {
 				listener.changeProfileStatus(item, holder.aSwitch.isChecked());
 				if (selectedItems.contains(item)) {
-					holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), isNightMode(app)
-						? R.color.active_buttons_and_links_dark
-						: R.color.active_buttons_and_links_light));
+					holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), selectedIconColorRes));
 				} else {
 					holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), R.color.icon_color));
 				}

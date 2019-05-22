@@ -135,7 +135,7 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 
-	RoutingConfiguration.Builder routingConfig;
+	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
@@ -808,10 +808,13 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 	
 	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
+		RoutingConfiguration.Builder rc;
 		if(routingConfig == null) {
-			routingConfig = new RoutingConfiguration.Builder();
+			rc = new RoutingConfiguration.Builder();
+		} else {
+			rc = routingConfig;
 		}
-		return routingConfig;
+		return rc;
 	}
 
 	public void updateRoutingConfig(Builder update) {
