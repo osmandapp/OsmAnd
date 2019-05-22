@@ -168,7 +168,7 @@ public class RoutingConfiguration {
 		return DEFAULT;
 	}
 
-	static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
+	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
 		return parseFromInputStream(is, null, new RoutingConfiguration.Builder());
 	}
 
