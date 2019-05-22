@@ -63,18 +63,7 @@ repositories {
 	}
 }
 
-def analytics = System.getenv("USE_FIREBASE_FOR_PLUGINS")
-
 dependencies {
-	if (analytics) {
-		implementation 'com.google.firebase:firebase-core:12.0.1'
-		implementation 'com.google.firebase:firebase-config:12.0.1'
-	}
 	implementation 'com.android.support:appcompat-v7:27.1.1'
 	implementation 'com.android.support:design:27.1.1'
-}
-
-if (analytics) {
-	println "Apply GMS plugin"
-	apply plugin: 'com.google.gms.google-services'
 }
