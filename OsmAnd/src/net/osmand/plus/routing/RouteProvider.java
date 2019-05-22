@@ -595,7 +595,7 @@ public class RouteProvider {
 		OsmandSettings settings = params.ctx.getSettings();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		
-		RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
+		RoutingConfiguration.Builder config = params.ctx.getRoutingConfig();
 		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
 		if(generalRouter == null) {
 			return applicationModeNotSupported(params);
@@ -680,19 +680,6 @@ public class RouteProvider {
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
 			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
-		GeneralRouterProfile p ;
-		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-			p = GeneralRouterProfile.BICYCLE;
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-			p = GeneralRouterProfile.PEDESTRIAN;
-		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
-			p = GeneralRouterProfile.CAR;
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
-			p = GeneralRouterProfile.BOAT;
-		} else {
-			return null;
-		}
-		
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
 			String key = e.getKey();
@@ -720,8 +707,7 @@ public class RouteProvider {
 		// make visible
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
-		
-		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ? 
+		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
 		return cf;

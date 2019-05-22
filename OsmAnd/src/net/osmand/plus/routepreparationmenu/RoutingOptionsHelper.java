@@ -72,11 +72,7 @@ public class RoutingOptionsHelper {
 		addRouteMenuAppModes(ApplicationMode.PEDESTRIAN, PermanentAppModeOptions.PEDESTRIAN.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.PUBLIC_TRANSPORT, PermanentAppModeOptions.PUBLIC_TRANSPORT.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.BOAT, PermanentAppModeOptions.BOAT.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCAFT.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.HIKING, PermanentAppModeOptions.HIKING.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.MOTORCYCLE, PermanentAppModeOptions.MOTORCYCLE.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.TRUCK, PermanentAppModeOptions.TRUCK.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.TRAIN, PermanentAppModeOptions.TRAIN.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCRAFT.routingParameters);
 	}
 
 	private void addRouteMenuAppModes(ApplicationMode am, List<String> routingParameters) {
@@ -382,7 +378,7 @@ public class RoutingOptionsHelper {
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
-		GeneralRouter rm = getRouter(app.getDefaultRoutingConfig(), am);
+		GeneralRouter rm = getRouter(app.getRoutingConfig(), am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return null;
 		}
@@ -407,7 +403,6 @@ public class RoutingOptionsHelper {
 			}
 			return rpg;
 		}
-
 		return rp;
 	}
 
@@ -457,7 +452,7 @@ public class RoutingOptionsHelper {
 	public List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxAndOsmandRouterParameters(am));
-		GeneralRouter rm = SettingsNavigationActivity.getRouter(app.getDefaultRoutingConfig(), am);
+		GeneralRouter rm = SettingsNavigationActivity.getRouter(app.getRoutingConfig(), am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
 		}
@@ -547,7 +542,7 @@ public class RoutingOptionsHelper {
 
 	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
 		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), applicationMode);
+		GeneralRouter router = getRouter(app.getRoutingConfig(), applicationMode);
 		if (router != null) {
 			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : router.getParameters().entrySet()) {
 				String param = e.getKey();
@@ -561,7 +556,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
-		GeneralRouter router = getRouter(app.getDefaultRoutingConfig(), applicationMode);
+		GeneralRouter router = getRouter(app.getRoutingConfig(), applicationMode);
 		GeneralRouter.RoutingParameter parameter = null;
 
 		if (router != null) {
@@ -971,11 +966,7 @@ public class RoutingOptionsHelper {
 		PEDESTRIAN(MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES),
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY, AvoidPTTypesRoutingParameter.KEY),
 		BOAT(MuteSoundRoutingParameter.KEY),
-		AIRCAFT(MuteSoundRoutingParameter.KEY),
-		HIKING(MuteSoundRoutingParameter.KEY),
-		MOTORCYCLE(MuteSoundRoutingParameter.KEY),
-		TRUCK(MuteSoundRoutingParameter.KEY),
-		TRAIN(MuteSoundRoutingParameter.KEY);
+		AIRCRAFT(MuteSoundRoutingParameter.KEY);
 
 		List<String> routingParameters;
 

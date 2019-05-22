@@ -64,6 +64,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
@@ -126,7 +127,7 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 
-	RoutingConfiguration.Builder defaultRoutingConfig;
+	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
@@ -796,13 +797,20 @@ public class OsmandApplication extends MultiDexApplication {
 		return lang;
 	}
 	
-	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
-		if(defaultRoutingConfig == null) {
-			defaultRoutingConfig = appInitializer.getLazyDefaultRoutingConfig();
+	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
+		RoutingConfiguration.Builder rc;
+		if(routingConfig == null) {
+			rc = new RoutingConfiguration.Builder();
+		} else {
+			rc = routingConfig;
 		}
-		return defaultRoutingConfig;
+		return rc;
 	}
-	
+
+	public void updateRoutingConfig(Builder update) {
+			routingConfig = update;
+	}
+
 	public OsmandRegions getRegions() {
 		return regions;
 	}

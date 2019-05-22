@@ -69,4 +69,5 @@ public class IndexConstants {
 	public static final String ROUTING_XML_FILE= "routing.xml";
 	public static final String SETTINGS_DIR = "settings/"; //$NON-NLS-1$
 	public static final String TEMP_DIR = "temp/";
+	public static final String ROUTING_PROFILES_DIR = "routing/";
 }

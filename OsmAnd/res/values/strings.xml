@@ -11,6 +11,37 @@
 	Thx - Hardy
 
 -->
+    <string name="profile_type_descr_string">Type: %s</string>
+    <string name="profile_type_base_string">Base Profile</string>
+    <string name="profile_alert_need_routing_type_title">Select navigation type</string>
+    <string name="profile_alert_need_routing_type_msg">You need to select Navigation type to create New Application Profile</string>
+    <string name="profile_alert_need_profile_name_title">Enter Profile Name</string>
+    <string name="profile_alert_need_profile_name_msg">Profile name shouldn\'t be empty!</string>
+    <string name="profile_alert_duplicate_name_title">Duplicate Name</string>
+    <string name="profile_alert_duplicate_name_msg">There is already profile with such name</string>
+    <string name="profile_alert_cant_delete_base">You cannot delete OsmAnd base profiles</string>
+    <string name="profile_alert_need_save_title">Save Changes</string>
+    <string name="profile_alert_need_save_msg">You need to save changes to Profile before proceed</string>
+    <string name="profile_alert_delete_title">Delete Profile</string>
+    <string name="profile_alert_delete_msg">Are you sure you want to delete %s profile</string>
+    <string name="select_base_profile_dialog_title">Select base profile</string>
+    <string name="select_base_profile_dialog_message">Custom Application Profile should be based on one of the default App Profiles. Selected Profile defines basic settings: setup of Widgets, units of speed and distance. In string below Profile\'s name, you could learn which Navigation Profiles are suitable for each Application Profile.</string>
+    <string name="select_nav_profile_dialog_title">Select navigation type</string>
+    <string name="base_profile_descr_car">Car, Truck, Motorcycle</string>
+    <string name="base_profile_descr_bicycle">MBT, Moped, Skiing, Horse</string>
+    <string name="base_profile_descr_pedestrian">Walking, Hiking, Running</string>
+    <string name="base_profile_descr_public_transport">All PT types</string>
+    <string name="base_profile_descr_boat">Ship, Rowing, Sailing</string>
+    <string name="base_profile_descr_aircraft">Airplane, Gliding</string>
+    <string name="routing_profile_geocoding">Geocoding</string>
+    <string name="routing_profile_straightline">Straight Line</string>
+    <string name="routing_profile_broutrer">BRouter (Offline)</string>
+    <string name="osmand_default_routing">OsmAnd routing</string>
+    <string name="custom_routing">Custom routing profile</string>
+    <string name="special_routing_type">Special routing</string>
+    <string name="third_party_routing_type">3rd-party routing</string>
+  <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
+  <string name="application_profiles">Application profiles</string>
     <string name="searching_gps">Searching GPS</string>
     <string name="coordinates_widget">Coordinates widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
@@ -26,6 +57,7 @@
     <string name="public_transport_calc_pedestrian">Calculate pedestrian route</string>
     <string name="public_transport_type">Transport type</string>
     <string name="send_log">Send log</string>
+
     <string name="routing_attr_avoid_tram_name">Avoid trams</string>
     <string name="routing_attr_avoid_tram_description">Avoid trams</string>
     <string name="routing_attr_avoid_bus_name">Avoid buses</string>
@@ -3118,5 +3150,6 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
+  <string name="select_icon_profile_dialog_title">Select icon</string>
 
 </resources>

@@ -66,7 +66,7 @@ Functionality
  * Add POIs and directly upload them to OSM (or later if offline)
  * Optional trip recording also in background mode (while device is in sleep mode)
 
-OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionality. By buying OsmAnd+ and subscribing to OsmAnd Live you help the application to be even more awesome! It is also possible to make a general donation, see http://osmand.net/help-online#buy_app.
+OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features. The project is in a lively selected of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionality. By buying OsmAnd+ and subscribing to OsmAnd Live you help the application to be even more awesome! It is also possible to make a general donation, see http://osmand.net/help-online#buy_app.
 
 
 ####  Approximate map coverage and quality:

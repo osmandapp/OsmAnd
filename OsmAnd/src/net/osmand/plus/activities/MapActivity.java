@@ -82,6 +82,7 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
@@ -107,6 +108,7 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.profiles.EditProfileFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -782,6 +784,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 				setIntent(null);
 			}
+			if (intent.hasExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
+				switch (intent.getStringExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
+					case EditProfileFragment.MAP_CONFIG:
+						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
+						break;
+
+					case EditProfileFragment.SCREEN_CONFIG:
+						this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+						break;
+				}
+				setIntent(null);
+			}
+
 		}
 		mapView.refreshMap(true);
 		if (atlasMapRendererView != null) {

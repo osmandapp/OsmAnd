@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -13,12 +14,12 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.plus.ApplicationMode;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import net.osmand.util.Algorithms;
 
 
 public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
@@ -48,7 +50,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	protected OsmandSettings settings;
 	protected final boolean profileSettings;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
-	private ApplicationMode previousAppMode; 
+	private ApplicationMode previousAppMode;
 
 	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
 	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();
@@ -328,7 +330,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		settings = app.getSettings();
 		getToolbar().setTitle(R.string.shared_string_settings);
 
-		
 		if (profileSettings) {
 			modes.clear();
 			for (ApplicationMode a : ApplicationMode.values(app)) {
@@ -336,52 +337,62 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 					modes.add(a);
 				}
 			}
-			List<String> s = new ArrayList<String>();
-			for (ApplicationMode a : modes) {
-				s.add(a.toHumanString(app));
-			}
-			SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this,
-					R.layout.spinner_item, s);
-//			android.R.layout.simple_spinner_dropdown_item
-			spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-			getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-				@Override
-				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-					settings.APPLICATION_MODE.set(modes.get(position));
-					updateAllSettings();
-				}
 
+			getTypeButton().setVisibility(View.VISIBLE);
+			getTypeButton().setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onNothingSelected(AdapterView<?> parent) {
-
+				public void onClick(View v) {
+					AlertDialog.Builder singleSelectDialogBuilder = new Builder(SettingsBaseActivity.this);
+					singleSelectDialogBuilder.setTitle("Select App Profile");
+					final ArrayAdapter<String> modeNames = new ArrayAdapter<>(
+						SettingsBaseActivity.this, android.R.layout.select_dialog_singlechoice);
+					for (ApplicationMode am : modes) {
+						modeNames.add(am.toHumanString(SettingsBaseActivity.this));
+					}
+					singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
+						new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+							}
+						});
+					singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							settings.APPLICATION_MODE.set(modes.get(which));
+							updateModeButton(modes.get(which));
+							updateAllSettings();
+						}
+					});
+					singleSelectDialogBuilder.show();
 				}
 			});
-			getSpinner().setAdapter(spinnerAdapter);
-			getSpinner().setVisibility(View.VISIBLE);
+
 		}
 		setPreferenceScreen(getPreferenceManager().createPreferenceScreen(this));
     }
 
-
-	class SpinnerAdapter extends ArrayAdapter<String>{
-
-
-		public SpinnerAdapter(Context context, int resource, List<String> objects) {
-			super(context, resource, objects);
-		}
-
-		@Override
-		public View getDropDownView(int position, View convertView, ViewGroup parent) {
-			View view = super.getDropDownView(position, convertView, parent);
-			if (!settings.isLightActionBar()){
-				TextView textView = (TextView) view.findViewById(android.R.id.text1);
-				textView.setBackgroundColor(getResources().getColor(R.color.actionbar_dark_color));
-			}
-			return view;
-		}
-	}
-	
-
+    void updateModeButton(ApplicationMode mode) {
+	    String title = Algorithms.isEmpty(mode.getUserProfileName())
+		    ? mode.toHumanString(SettingsBaseActivity.this)
+		    : mode.getUserProfileName();
+	    String subtitle = mode.getParent() == null
+		    ? "Mode: " + Algorithms.capitalizeFirstLetterAndLowercase(mode.getStringKey().replace("_", ""))
+		    : "User Mode, derived from: " + Algorithms
+			    .capitalizeFirstLetterAndLowercase(mode.getParent().getStringKey());
+	    getModeTitleTV().setText(title);
+	    getModeSubTitleTV().setText(subtitle);
+	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getSmallIconDark(),
+		    getMyApplication().getSettings().isLightContent()
+			    ? R.color.active_buttons_and_links_light
+			    : R.color.active_buttons_and_links_dark));
+	    getDropDownArrow().setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down,
+		    getMyApplication().getSettings().isLightContent()
+			    ? R.color.active_buttons_and_links_light
+			    : R.color.active_buttons_and_links_dark));
+	    settings.APPLICATION_MODE.set(mode);
+	    updateAllSettings();
+    }
 
 	@Override
 	protected void onResume() {
@@ -431,7 +442,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		boolean found = false;
 		for (ApplicationMode a : modes) {
 			if (am == a) {
-				getSpinner().setSelection(ind);
+				updateModeButton(a);
 				found = true;
 				break;
 			}
@@ -541,7 +552,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	}
 	
 
-	
+
 
 	public void showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
