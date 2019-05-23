@@ -377,9 +377,10 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		    ? mode.toHumanString(SettingsBaseActivity.this)
 		    : mode.getUserProfileName();
 	    String subtitle = mode.getParent() == null
-		    ? "Mode: " + Algorithms.capitalizeFirstLetterAndLowercase(mode.getStringKey().replace("_", ""))
-		    : "User Mode, derived from: " + Algorithms
-			    .capitalizeFirstLetterAndLowercase(mode.getParent().getStringKey());
+		    ? String.format(getString(R.string.settings_routing_mode_string), Algorithms
+		        .capitalizeFirstLetterAndLowercase(mode.getStringKey().replace("_", "")))
+		    : String.format(getString(R.string.settings_derived_routing_mode_string), Algorithms
+			    .capitalizeFirstLetterAndLowercase(mode.getParent().getStringKey()));
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(subtitle);
 	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getSmallIconDark(),
