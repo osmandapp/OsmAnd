@@ -709,12 +709,12 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			int iconRes = R.drawable.ic_action_gdirections_dark;
 			String name = e.getValue().getProfileName();
 			String description = context.getString(R.string.osmand_default_routing);
-			if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
+			if (!Algorithms.isEmpty(e.getValue().getFilename())) {
+				description = e.getValue().getFilename();
+			} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
 				iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
 				name = context
 					.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
-			} else if (!Algorithms.isEmpty(e.getValue().getFilename())) {
-				description = e.getValue().getFilename();
 			}
 			profilesObjects.add(new RoutingProfileDataObject(e.getKey(), name, description,
 				iconRes, false, e.getValue().getFilename()));

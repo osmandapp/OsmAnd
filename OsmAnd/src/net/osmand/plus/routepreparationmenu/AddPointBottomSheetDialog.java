@@ -1,11 +1,15 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.Manifest;
+import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +31,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -212,6 +217,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private void createMyLocItem() {
+
+
 		BaseBottomSheetItem myLocationItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(R.drawable.ic_action_location_color, 0))
 				.setTitle(getString(R.string.shared_string_my_location))
@@ -221,33 +228,39 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					public void onClick(View v) {
 						OsmandApplication app = getMyApplication();
 						if (app != null) {
-							TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-							Location myLocation = app.getLocationProvider().getLastKnownLocation();
-							if (myLocation != null) {
-								LatLon ll = new LatLon(myLocation.getLatitude(), myLocation.getLongitude());
-								switch (pointType) {
-									case START:
-										if (targetPointsHelper.getPointToStart() != null) {
-											targetPointsHelper.clearStartPoint(true);
-											app.getSettings().backupPointToStart();
-										}
-										break;
-									case TARGET:
-										app.showShortToastMessage(R.string.add_destination_point);
-										targetPointsHelper.navigateToPoint(ll, true, -1);
-										break;
-									case INTERMEDIATE:
-										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
-										break;
-									case HOME:
-										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.setHomePoint(ll, null);
-										break;
-									case WORK:
-										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.setWorkPoint(ll, null);
-										break;
+							if (getActivity() != null && !OsmAndLocationProvider.isLocationPermissionAvailable(getActivity())) {
+								ActivityCompat.requestPermissions(getActivity(),
+									new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+									OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+							} else {
+								TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+								Location myLocation = app.getLocationProvider().getLastKnownLocation();
+								if (myLocation != null) {
+									LatLon ll = new LatLon(myLocation.getLatitude(), myLocation.getLongitude());
+									switch (pointType) {
+										case START:
+											if (targetPointsHelper.getPointToStart() != null) {
+												targetPointsHelper.clearStartPoint(true);
+												app.getSettings().backupPointToStart();
+											}
+											break;
+										case TARGET:
+											app.showShortToastMessage(R.string.add_destination_point);
+											targetPointsHelper.navigateToPoint(ll, true, -1);
+											break;
+										case INTERMEDIATE:
+											app.showShortToastMessage(R.string.add_intermediate_point);
+											targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
+											break;
+										case HOME:
+											app.showShortToastMessage(R.string.add_intermediate_point);
+											targetPointsHelper.setHomePoint(ll, null);
+											break;
+										case WORK:
+											app.showShortToastMessage(R.string.add_intermediate_point);
+											targetPointsHelper.setWorkPoint(ll, null);
+											break;
+									}
 								}
 							}
 						}
@@ -256,6 +269,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				}).create();
 		items.add(myLocationItem);
 	}
+
+
 
 	private void createSelectOnTheMapItem() {
 		BaseBottomSheetItem selectOnTheMapItem = new SimpleBottomSheetItem.Builder()
