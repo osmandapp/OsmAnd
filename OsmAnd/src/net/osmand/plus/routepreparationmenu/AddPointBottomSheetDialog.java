@@ -1,11 +1,13 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -213,6 +215,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private void createMyLocItem() {
+
 		BaseBottomSheetItem myLocationItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(OsmAndLocationProvider.isLocationPermissionAvailable(getActivity())
 					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost, 0))
@@ -222,35 +225,42 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					@Override
 					public void onClick(View v) {
 						OsmandApplication app = getMyApplication();
+						Activity activity = getActivity();
 						if (app != null) {
-							TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-							Location myLocation = app.getLocationProvider().getLastKnownLocation();
-							if (myLocation != null) {
-								LatLon ll = new LatLon(myLocation.getLatitude(), myLocation.getLongitude());
-								switch (pointType) {
-									case START:
-										if (targetPointsHelper.getPointToStart() != null) {
-											targetPointsHelper.clearStartPoint(true);
-											app.getSettings().backupPointToStart();
-										}
-										break;
-									case TARGET:
-										app.showShortToastMessage(R.string.add_destination_point);
-										targetPointsHelper.navigateToPoint(ll, true, -1);
-										break;
-									case INTERMEDIATE:
-										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
-										break;
-									case HOME:
-										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.setHomePoint(ll, null);
-										break;
-									case WORK:
-										app.showShortToastMessage(R.string.add_intermediate_point);
-										targetPointsHelper.setWorkPoint(ll, null);
-										break;
+							if (OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
+								TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+								Location myLocation = app.getLocationProvider().getLastKnownLocation();
+								if (myLocation != null) {
+									LatLon ll = new LatLon(myLocation.getLatitude(), myLocation.getLongitude());
+									switch (pointType) {
+										case START:
+											if (targetPointsHelper.getPointToStart() != null) {
+												targetPointsHelper.clearStartPoint(true);
+												app.getSettings().backupPointToStart();
+											}
+											break;
+										case TARGET:
+											app.showShortToastMessage(R.string.add_destination_point);
+											targetPointsHelper.navigateToPoint(ll, true, -1);
+											break;
+										case INTERMEDIATE:
+											app.showShortToastMessage(R.string.add_intermediate_point);
+											targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
+											break;
+										case HOME:
+											app.showShortToastMessage(R.string.add_intermediate_point);
+											targetPointsHelper.setHomePoint(ll, null);
+											break;
+										case WORK:
+											app.showShortToastMessage(R.string.add_intermediate_point);
+											targetPointsHelper.setWorkPoint(ll, null);
+											break;
+									}
 								}
+							} else if (activity != null){
+								ActivityCompat.requestPermissions(activity,
+									new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+									OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 							}
 						}
 						dismiss();
