@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -215,7 +216,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	}
 
 	private void createMyLocItem() {
-
 		BaseBottomSheetItem myLocationItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getIcon(OsmAndLocationProvider.isLocationPermissionAvailable(getActivity())
 					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost, 0))
@@ -257,7 +257,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											break;
 									}
 								}
-							} else if (activity != null){
+							} else if (activity != null) {
 								ActivityCompat.requestPermissions(activity,
 									new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 									OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
