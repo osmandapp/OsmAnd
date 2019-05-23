@@ -2,7 +2,6 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +13,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.multidex.MultiDex;
@@ -76,11 +74,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
@@ -89,8 +84,6 @@ public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log"; 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	private static final String SHOW_PLUS_VERSION_INAPP_PARAM = "show_plus_version_inapp";
-
 	final AppInitializer appInitializer = new AppInitializer(this);
 	OsmandSettings osmandSettings = null;
 	OsmAndAppCustomization appCustomization;
@@ -98,7 +91,6 @@ public class OsmandApplication extends MultiDexApplication {
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	Handler uiHandler;
-	private boolean plusVersionInApp;
 
 	NavigationService navigationService;
 
@@ -182,8 +174,6 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
-		initExternalLibs();
-		plusVersionInApp = getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true);
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -194,7 +184,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean isPlusVersionInApp() {
-		return plusVersionInApp;
+		return true;
 	}
 
 	public boolean isExternalStorageDirectoryReadOnly() {
@@ -931,116 +921,11 @@ public class OsmandApplication extends MultiDexApplication {
 		try {
 			if (Version.isGooglePlayEnabled(this) && !Version.isPaidVersion(this)
 					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()) {
-				Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
-				Method mm = cl.getMethod("getInstance", Context.class);
-				Object inst = mm.invoke(null, ctx == null ? this : ctx);
-				Method log = cl.getMethod("logEvent", String.class, Bundle.class);
-				log.invoke(inst, event, new Bundle());
+				// not implemented yet
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			// ignore
 		}
-	}
-	
-	
-	public void initExternalLibs() {
-		initRemoteConfig();
-		printFirebasetoken();
-		initFBEvents();
-	}
-	
-	public void initFBEvents() {
-		try {
-			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
-				Class<?> cls = Class.forName("com.facebook.FacebookSdk");
-				Method ms = cls.getMethod("sdkInitialize", Context.class);
-				ms.invoke(null, getApplicationContext());
-				Class<?> cl = Class.forName("com.facebook.appevents.AppEventsLogger");
-				Method mm = cl.getMethod("activateApp", Application.class);
-				mm.invoke(null, this);
-				Method mu = cl.getMethod("getUserID");
-				String uid = (String) mu.invoke(null);
-				LOG.info("FB token: " + uid);
-			}
-		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
-		}
-	}
-
-	public void initRemoteConfig() {
-		try {
-			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
-				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
-				Method mm = cl.getMethod("getInstance");
-				Object inst = mm.invoke(null);
-				Method log = cl.getMethod("setDefaults", Map.class);
-				Map<String, Object> defaults = new HashMap<>();
-				defaults.put(SHOW_PLUS_VERSION_INAPP_PARAM, Boolean.TRUE);
-				log.invoke(inst, defaults);
-			}
-		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
-		}
-	}
-	
-	
-	public void printFirebasetoken() {
-		try {
-			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
-				Class<?> cl = Class.forName("com.google.firebase.iid.FirebaseInstanceId");
-				Method mm = cl.getMethod("getInstance");
-				Object inst = mm.invoke(null);
-				Method getToken = cl.getMethod("getToken");
-				String firebaseToken = (String) getToken.invoke(inst);
-				LOG.info("Fbase token: " + firebaseToken);
-			}
-		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
-		}
-	}
-
-	public void fetchRemoteParams() {
-		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
-				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
-				Method mm = cl.getMethod("getInstance");
-				Object inst = mm.invoke(null);
-				Method log = cl.getMethod("fetch");
-				log.invoke(inst);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void activateFetchedRemoteParams() {
-		try {
-			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
-				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
-				Method mm = cl.getMethod("getInstance");
-				Object inst = mm.invoke(null);
-				Method log = cl.getMethod("activateFetched");
-				log.invoke(inst);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public boolean getRemoteBoolean(String key, boolean defaultValue) {
-		try {
-			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
-				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
-				Method mm = cl.getMethod("getInstance");
-				Object inst = mm.invoke(null);
-				Method log = cl.getMethod("getBoolean", String.class);
-				Boolean res = (Boolean)log.invoke(inst, key);
-				return res == null ? defaultValue : res;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return defaultValue;
 	}
 
 	public void restartApp(Context ctx) {
