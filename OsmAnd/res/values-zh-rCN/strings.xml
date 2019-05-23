@@ -2381,12 +2381,12 @@
     <string name="looking_for_tracks_with_waypoints">用航路点寻找轨迹</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="appearance_on_the_map">在地图上的外观</string>
-    <string name="add_track_to_markers_descr">选择一个轨迹一遍添加它的航路点到标记。（只有有航路点的轨迹才会列举出来。）</string>
+    <string name="add_track_to_markers_descr">选择一个轨迹一遍添加它的航路点到标记。</string>
     <string name="add_favourites_group_to_markers_descr">选择一个收藏夹类别以便添加到标记。</string>
     <string name="shared_string_gpx_waypoints">轨迹航路点</string>
     <string name="favourites_group">收藏夹类别</string>
     <string name="add_group">添加组</string>
-    <string name="add_group_descr">您可以从收藏夹或轨道航点导入组。</string>
+    <string name="add_group_descr">从收藏夹或轨道航点导入组。</string>
     <string name="empty_state_markers_active">创建地图标记!</string>
     <string name="empty_state_markers_active_desc">长按或短按位置, 然后点击标记标志按钮。</string>
     <string name="empty_state_markers_groups">导入组群</string>
@@ -2571,4 +2571,9 @@
     <string name="quick_action_switch_night_mode">夜间模式</string>
     <string name="quick_action_day_night_switch_mode">切换日间/夜间模式</string>
     <string name="download_wiki_region_placeholder">此地区</string>
+    <string name="quick_action_edit_actions">编辑活动</string>
+    <string name="coord_input_save_as_track_descr">你增加了%1$s 个目标。输入文件名后点击\"保存\"。</string>
+    <string name="ask_for_location_permission">请在允许OsmAnd获取定位信息后继续。</string>
+    <string name="route_smoothness_stat_container">光滑度</string>
+    <string name="route_steepness_stat_container">坡度</string>
 </resources>
