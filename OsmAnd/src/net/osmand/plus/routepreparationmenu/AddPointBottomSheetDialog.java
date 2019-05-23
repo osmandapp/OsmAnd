@@ -27,6 +27,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -213,7 +214,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void createMyLocItem() {
 		BaseBottomSheetItem myLocationItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getIcon(R.drawable.ic_action_location_color, 0))
+				.setIcon(getIcon(OsmAndLocationProvider.isLocationPermissionAvailable(getActivity())
+					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost, 0))
 				.setTitle(getString(R.string.shared_string_my_location))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.setOnClickListener(new OnClickListener() {
