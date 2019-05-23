@@ -55,7 +55,6 @@ import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
-import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.logging.Log;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
@@ -710,7 +709,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			int iconRes = R.drawable.ic_action_gdirections_dark;
 			String name = e.getValue().getProfileName();
 			String description = context.getString(R.string.osmand_default_routing);
-			if (EnumUtils.isValidEnum(RoutingProfilesResources.class, name.toUpperCase())){
+			if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
 				iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
 				name = context
 					.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
@@ -748,6 +747,18 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		public int getIconRes() {
 			return iconRes;
+		}
+
+		private static final List<String> rpValues = new ArrayList<>();
+
+		static {
+			for (RoutingProfilesResources rpr : RoutingProfilesResources.values()) {
+				rpValues.add(rpr.name());
+			}
+		}
+
+		public static boolean isRpValue(String value) {
+			return rpValues.contains(value);
 		}
 	}
 
