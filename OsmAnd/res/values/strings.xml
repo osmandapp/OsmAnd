@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+
+    <string name="select_icon_profile_dialog_title">Select icon</string>
+    <string name="settings_routing_mode_string">Mode: %s</string>
+    <string name="settings_derived_routing_mode_string">User Mode, derived from: %s</string>
+    <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type: %s</string>
     <string name="profile_type_base_string">Base Profile</string>
     <string name="profile_alert_need_routing_type_title">Select navigation type</string>
@@ -3150,6 +3155,6 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
-  <string name="select_icon_profile_dialog_title">Select icon</string>
+
 
 </resources>

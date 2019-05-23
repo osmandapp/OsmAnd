@@ -704,22 +704,20 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				false, null));
 		}
 
-		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRoutes();
+		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRouters();
 		for (Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
 			int iconRes = R.drawable.ic_action_gdirections_dark;
 			String name = e.getValue().getProfileName();
-			String description;
-			if (e.getValue().getFilename() == null) {
+			String description = context.getString(R.string.osmand_default_routing);
+			if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
 				iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
 				name = context
 					.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
-				description = context.getString(R.string.osmand_default_routing);
-			} else {
+			} else if (!Algorithms.isEmpty(e.getValue().getFilename())) {
 				description = e.getValue().getFilename();
 			}
-			profilesObjects
-				.add(new RoutingProfileDataObject(e.getKey(), name, description, iconRes, false,
-					e.getValue().getFilename()));
+			profilesObjects.add(new RoutingProfileDataObject(e.getKey(), name, description,
+				iconRes, false, e.getValue().getFilename()));
 		}
 		return profilesObjects;
 	}
@@ -730,6 +728,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),
 		PEDESTRIAN(R.string.rendering_value_pedestrian_name, R.drawable.map_action_pedestrian_dark),
 		BICYCLE(R.string.rendering_value_bicycle_name, R.drawable.map_action_bicycle_dark),
+		SKI(R.string.routing_profile_ski, R.drawable.ic_plugin_skimaps),
 		PUBLIC_TRANSPORT(R.string.app_mode_public_transport, R.drawable.map_action_bus_dark),
 		BOAT(R.string.app_mode_boat, R.drawable.map_action_sail_boat_dark),
 		GEOCODING(R.string.routing_profile_geocoding, R.drawable.ic_action_world_globe);
@@ -748,6 +747,18 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		public int getIconRes() {
 			return iconRes;
+		}
+
+		private static final List<String> rpValues = new ArrayList<>();
+
+		static {
+			for (RoutingProfilesResources rpr : RoutingProfilesResources.values()) {
+				rpValues.add(rpr.name());
+			}
+		}
+
+		public static boolean isRpValue(String value) {
+			return rpValues.contains(value);
 		}
 	}
 
