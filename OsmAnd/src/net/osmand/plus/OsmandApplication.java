@@ -127,7 +127,7 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 
-	RoutingConfiguration.Builder routingConfig;
+	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
 	private Locale defaultLocale;
 	private File externalStorageDirectory;
