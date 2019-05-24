@@ -5,8 +5,16 @@ import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ICON;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import java.util.ArrayList;
 import java.util.List;
 import net.osmand.PlatformUtil;
@@ -60,6 +68,21 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				dismiss();
 			}
 		}
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		view.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
+		Button cancelBtn = view.findViewById(R.id.dismiss_button_v2);
+		cancelBtn.setVisibility(View.VISIBLE);
+		view.findViewById(R.id.dismiss_button_v2).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onDismissButtonClickAction();
+				dismiss();
+			}
+		});
 	}
 
 	@Override

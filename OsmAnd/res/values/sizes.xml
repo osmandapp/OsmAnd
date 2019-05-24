@@ -217,6 +217,7 @@
 	<dimen name="empty_state_text_button_padding_top">64dp</dimen>
 
     <dimen name="bottom_sheet_cancel_button_height">48dp</dimen>
+	<dimen name="bottom_sheet_cancel_button_height_small">36dp</dimen>
 	<dimen name="landscape_bottom_sheet_dialog_fragment_width">360dp</dimen>
 
 	<dimen name="measurement_tool_select_radius">20dp</dimen>
