@@ -3043,4 +3043,5 @@ Lon %2$s</string>
     <string name="public_transport_calc_pedestrian">Calcular la ruta a pie</string>
     <string name="public_transport_type">Tipo de transporte</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
+    <string name="searching_gps">Buscando GPS</string>
 </resources>
