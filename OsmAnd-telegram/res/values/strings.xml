@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="shared_string_select">Select</string>
+    <string name="min_logging_distance">Minimum logging distance</string>
+    <string name="min_logging_distance_descr">Filter: minimum distance to log a new point</string>
+    <string name="min_logging_accuracy">Minimum logging accuracy</string>
+    <string name="min_logging_accuracy_descr">Filter: no logging unless the accuracy is reached</string>
+    <string name="min_logging_speed">Minimum logging speed</string>
+    <string name="min_logging_speed_descr">Filter: no logging below selected speed</string>
+    <string name="gpx_settings">GPX settings</string>
     <string name="proxy_key">Key</string>
     <string name="proxy_password">Password</string>
     <string name="proxy_username">Username</string>
