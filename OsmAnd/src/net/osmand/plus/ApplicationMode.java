@@ -58,7 +58,7 @@ public class ApplicationMode {
 			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").reg();
 
 	public static final ApplicationMode SKI = create(R.string.app_mode_skiing, "ski").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-		icon(R.drawable.ic_plugin_skimaps, R.drawable.ic_plugin_skimaps).setRoutingProfile("ski").parent(BICYCLE).reg();
+		icon(R.drawable.ic_plugin_skimaps, R.drawable.ic_plugin_skimaps).setRoutingProfile("ski").reg();
 
 	static {
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, SKI};

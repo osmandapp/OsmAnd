@@ -54,6 +54,7 @@
 			android:background="@drawable/btn_round_profile_gray"
 			android:text="@string/shared_string_cancel"
 			android:textAllCaps="false"
+			android:visibility="gone"
 			android:textColor="@color/map_widget_blue"/>
 
 		<FrameLayout
