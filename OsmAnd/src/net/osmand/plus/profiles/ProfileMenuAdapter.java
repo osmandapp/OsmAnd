@@ -122,10 +122,10 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 		ProfileViewHolder(View itemView) {
 			super(itemView);
-			title = itemView.findViewById(R.id.profile_title);
-			descr = itemView.findViewById(R.id.profile_descr);
-			aSwitch = itemView.findViewById(R.id.profile_switch);
-			icon = itemView.findViewById(R.id.profile_icon);
+			title = itemView.findViewById(R.id.title);
+			descr = itemView.findViewById(R.id.description);
+			aSwitch = itemView.findViewById(R.id.compound_button);
+			icon = itemView.findViewById(R.id.icon);
 			profileOptions = itemView.findViewById(R.id.profile_settings);
 		}
 	}

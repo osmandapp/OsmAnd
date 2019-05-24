@@ -3,7 +3,7 @@ package net.osmand.plus.profiles;
 import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_ICON;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
@@ -207,7 +207,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					if (profile.parent != null) {
 						bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
 					}
-					bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILE);
+					bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 					dialog.setArguments(bundle);
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()

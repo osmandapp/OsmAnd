@@ -7,17 +7,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -33,16 +32,21 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	public static final String TAG = "SelectProfileBottomSheetDialogFragment";
 
 	public final static String DIALOG_TYPE = "dialog_type";
-	public final static String TYPE_APP_PROFILE = "base_profiles";
+	public final static String TYPE_BASE_APP_PROFILE = "base_profiles";
 	public final static String TYPE_NAV_PROFILE = "routing_profiles";
 	public final static String TYPE_ICON = "icon_type";
+	public final static String TYPE_APP_PROFILES = "app_profiles";
 	public final static String SELECTED_KEY = "selected_base";
 
 	String type;
+	int bottomButtonText = R.string.shared_string_cancel;
 
 	private SelectProfileListener listener;
 
-	private List<ProfileDataObject> profiles = new ArrayList<>();
+	private final List<ProfileDataObject> profiles = new ArrayList<>();
+	private final List<ApplicationMode> appModes = new ArrayList<>();
+	private final Set<ApplicationMode> activeAppModes = new HashSet<>();
+
 	private List<IconResWithDescr> icons;
 	private String selectedItemKey;
 	private int selectedIconRes;
@@ -55,14 +59,19 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (args != null && args.get(DIALOG_TYPE) != null) {
 			type = args.getString(DIALOG_TYPE);
 			selectedItemKey = args.getString(SELECTED_KEY, null);
-
 			if (type.equals(TYPE_NAV_PROFILE)) {
 				profiles.addAll(EditProfileFragment.getRoutingProfiles(app));
-			} else if (type.equals(TYPE_APP_PROFILE)) {
+			} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
 				profiles.addAll(SettingsProfileFragment.getBaseProfiles(app));
 			} else if (type.equals(TYPE_ICON)) {
 				selectedIconRes = args.getInt(SELECTED_ICON, -1);
 				icons = getProfileIcons();
+			} else if (type.equals(TYPE_APP_PROFILES)){
+				appModes.addAll(ApplicationMode.allPossibleValues());
+				appModes.remove(0);
+				activeAppModes.addAll(ApplicationMode.values(app));
+				activeAppModes.remove(0);
+				bottomButtonText = R.string.shared_string_close;
 			} else {
 				LOG.error("Check intent data!");
 				dismiss();
@@ -88,7 +97,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 
-		if (type.equals(TYPE_APP_PROFILE)) {
+		if (type.equals(TYPE_BASE_APP_PROFILE)) {
 			items.add(new TitleItem(getString(R.string.select_base_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
@@ -170,6 +179,53 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 					})
 					.create());
 			}
+		} else if (type.equals(TYPE_APP_PROFILES)) {
+			items.add(new TitleItem(getString(R.string.application_profiles)));
+			for (int i = 0; i < appModes.size(); i++) {
+				final int pos = i;
+				final ApplicationMode mode = appModes.get(i);
+				final boolean[] isSelected = {activeAppModes.contains(mode)};
+				final Drawable icon;
+				if (isSelected[0]) {
+					icon = getMyApplication().getUIUtilities().getIcon(mode.getSmallIconDark(), nightMode
+						? R.color.active_buttons_and_links_dark
+						: R.color.active_buttons_and_links_light);
+				} else {
+					icon = getMyApplication().getUIUtilities().getIcon(
+						mode.getSmallIconDark(), R.color.icon_color);
+				}
+				items.add(new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(isSelected[0])
+					.setDescription(mode.getParent() == null
+						? getString(R.string.profile_type_base_string)
+						: String.format(getString(R.string.profile_type_descr_string),
+							getString(mode.getParent().getStringResource())))
+					.setTitle(mode.getParent() == null
+						? getString(mode.getStringResource())
+						: mode.getUserProfileName())
+					.setIcon(icon)
+					.setLayoutId(R.layout.profile_list_item)
+					.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (getView() != null) {
+								((SwitchCompat) getView().findViewById(R.id.compound_button)).toggle();
+							}
+							if (!isSelected[0]) {
+								activeAppModes.add(mode);
+							} else {
+								activeAppModes.remove(mode);
+							}
+							ApplicationMode
+								.changeProfileStatus(mode, isSelected[0], getMyApplication());
+							boolean status = !isSelected[0];
+							isSelected[0] = status;
+						}
+					})
+					.create()
+
+				);
+			}
 		} else if (type.equals(TYPE_ICON)) {
 			items.add(new TitleItem(getString(R.string.select_icon_profile_dialog_title)));
 			for (final IconResWithDescr icon : icons) {
@@ -211,11 +267,13 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 	}
 
+
+
 	private void getListener() {
 		if (getActivity() != null && getActivity() instanceof  EditProfileActivity) {
 			EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
 				.findFragmentByTag(EditProfileActivity.EDIT_PROFILE_FRAGMENT_TAG);
-			if (type.equals(TYPE_APP_PROFILE)) {
+			if (type.equals(TYPE_BASE_APP_PROFILE)) {
 				listener = f.getBaseProfileListener();
 			} else if (type.equals(TYPE_NAV_PROFILE)) {
 				listener = f.getNavProfileListener();

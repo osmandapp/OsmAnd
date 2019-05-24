@@ -9,7 +9,7 @@
   android:orientation="horizontal">
 
   <ImageView
-    android:id="@+id/profile_icon"
+    android:id="@+id/icon"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/standard_icon_size"
     android:layout_marginLeft="@dimen/setting_profile_image_margin"
@@ -39,7 +39,7 @@
         android:layout_weight="5">
 
         <TextView
-          android:id="@+id/profile_title"
+          android:id="@+id/title"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textColor="@color/main_font_dark"
@@ -47,7 +47,7 @@
           tools:text="Bicycle"/>
 
         <TextView
-          android:id="@+id/profile_descr"
+          android:id="@+id/description"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textSize="@dimen/default_desc_text_size"
@@ -75,7 +75,7 @@
           android:paddingEnd="10dp"/>
 
         <android.support.v7.widget.SwitchCompat
-          android:id="@+id/profile_switch"
+          android:id="@+id/compound_button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical|end"

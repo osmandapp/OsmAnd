@@ -3,7 +3,7 @@ package net.osmand.plus.profiles;
 
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -98,7 +98,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
 				Bundle bundle = new Bundle();
-				bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILE);
+				bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 				dialog.setArguments(bundle);
 				if (getActivity() != null) {
 					getActivity().getSupportFragmentManager().beginTransaction()
