@@ -73,6 +73,7 @@ public class RoutingOptionsHelper {
 		addRouteMenuAppModes(ApplicationMode.PUBLIC_TRANSPORT, PermanentAppModeOptions.PUBLIC_TRANSPORT.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.BOAT, PermanentAppModeOptions.BOAT.routingParameters);
 		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCRAFT.routingParameters);
+		addRouteMenuAppModes(ApplicationMode.SKI, PermanentAppModeOptions.SKI.routingParameters);
 	}
 
 	private void addRouteMenuAppModes(ApplicationMode am, List<String> routingParameters) {
@@ -966,7 +967,8 @@ public class RoutingOptionsHelper {
 		PEDESTRIAN(MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES),
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY, AvoidPTTypesRoutingParameter.KEY),
 		BOAT(MuteSoundRoutingParameter.KEY),
-		AIRCRAFT(MuteSoundRoutingParameter.KEY);
+		AIRCRAFT(MuteSoundRoutingParameter.KEY),
+		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES);
 
 		List<String> routingParameters;
 

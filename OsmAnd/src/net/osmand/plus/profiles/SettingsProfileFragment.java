@@ -158,7 +158,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		PEDESTRIAN(R.string.base_profile_descr_pedestrian),
 		PUBLIC_TRANSPORT(R.string.base_profile_descr_public_transport),
 		BOAT(R.string.base_profile_descr_boat),
-		AIRCRAFT(R.string.base_profile_descr_aircraft);
+		AIRCRAFT(R.string.base_profile_descr_aircraft),
+		SKI(R.string.base_profile_descr_ski);
 
 		private int descrRes;
 
