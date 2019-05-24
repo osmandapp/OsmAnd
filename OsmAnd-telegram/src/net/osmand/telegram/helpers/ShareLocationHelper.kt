@@ -7,13 +7,12 @@ import net.osmand.telegram.helpers.LocationMessages.BufferMessage
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.BASE_URL
+import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import org.json.JSONException
 import org.json.JSONObject
 
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
-
-private const val UPDATE_LOCATION_ACCURACY = 150 // 150 meters
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
@@ -48,14 +47,33 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	private var lastTimeInMillis: Long = 0L
 
 	fun updateLocation(location: Location?) {
-		lastLocation = location
+		val lastPoint = lastLocation
+		var record = true
+		if (location != null) {
+			val minDistance = app.settings.minLocationDistance
+			if (minDistance > 0 && lastPoint != null) {
+				val calculatedDistance = MapUtils.getDistance(lastPoint.latitude, lastPoint.longitude, location.latitude, location.longitude)
+				if (calculatedDistance < minDistance) {
+					record = false
+				}
+			}
+			val accuracy = app.settings.minLocationAccuracy
+			if (accuracy > 0 && (!location.hasAccuracy() || location.accuracy > accuracy)) {
+				record = false
+			}
+			val minSpeed = app.settings.minLocationSpeed
+			if (minSpeed > 0 && (!location.hasSpeed() || location.speed < minSpeed)) {
+				record = false
+			}
 
-		if (location != null && location.accuracy < UPDATE_LOCATION_ACCURACY) {
-			lastLocationUpdateTime = System.currentTimeMillis()
-			if (app.settings.getChatsShareInfo().isNotEmpty()) {
-				shareLocationMessages(location, app.telegramHelper.getCurrentUserId())
+			if (record) {
+				lastLocationUpdateTime = System.currentTimeMillis()
+				if (app.settings.getChatsShareInfo().isNotEmpty()) {
+					shareLocationMessages(location, app.telegramHelper.getCurrentUserId())
+				}
 			}
 		}
+		lastLocation = location
 		app.settings.updateSharingStatusHistory()
 		refreshNotification()
 	}
