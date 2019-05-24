@@ -460,13 +460,18 @@ class TelegramSettings(private val app: TelegramApplication) {
 				if (shareInfo.lastTextSuccessfulSendTime == -1L && shareInfo.lastMapSuccessfulSendTime == -1L
 					&& ((statusChangeTime / 1000 - shareInfo.start) < SHARING_INITIALIZATION_TIME)) {
 					initializing = true
-				} else if (shareInfo.hasSharingError
-					|| (shareInfo.lastSendTextMessageTime - shareInfo.lastTextSuccessfulSendTime > WAITING_TDLIB_TIME)
-					|| (shareInfo.lastSendMapMessageTime - shareInfo.lastMapSuccessfulSendTime > WAITING_TDLIB_TIME)
-				) {
-					sendChatsErrors = true
-					locationTime = Math.max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
-					chatsIds.add(shareInfo.chatId)
+				} else {
+					val textSharingError = shareInfo.lastSendTextMessageTime - shareInfo.lastTextSuccessfulSendTime > WAITING_TDLIB_TIME
+					val mapSharingError = shareInfo.lastSendMapMessageTime - shareInfo.lastMapSuccessfulSendTime > WAITING_TDLIB_TIME
+					if (shareInfo.hasSharingError
+						|| (shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
+						|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
+						|| mapSharingError && (shareTypeValue == SHARE_TYPE_MAP)
+					) {
+						sendChatsErrors = true
+						locationTime = Math.max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
+						chatsIds.add(shareInfo.chatId)
+					}
 				}
 			}
 
@@ -477,7 +482,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			} else if (!initializing) {
 				when {
 					!gpsEnabled -> {
-						locationTime = app.shareLocationHelper.lastLocationUpdateTime
+						locationTime = app.shareLocationHelper.lastLocationUpdateTime / 1000
 						if (locationTime <= 0) {
 							locationTime = getLastSuccessfulSendTime()
 						}

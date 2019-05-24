@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class AMapPointMenuController extends MenuController {
 
-	private static final float NO_SPEED = -1;
+	private static final float NO_VALUE = -1;
 	private static final int NO_ICON = 0;
 
 	private AMapPoint point;
@@ -136,19 +136,40 @@ public class AMapPointMenuController extends MenuController {
 	public CharSequence getAdditionalInfoStr() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			float speed = getPointSpeed();
-			if (speed != NO_SPEED) {
-				String formatted = OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
-				return activity.getString(R.string.map_widget_speed) + ": " + formatted;
+			float bearing = getPointBearing();
+			if (bearing != NO_VALUE) {
+				return OsmAndFormatter.getFormattedAzimuth(bearing, activity.getMyApplication());
 			}
 		}
 		return super.getAdditionalInfoStr();
 	}
 
+	@NonNull
+	@Override
+	public String getSubtypeStr() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			float speed = getPointSpeed();
+			if (speed != NO_VALUE) {
+				return OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
+			}
+		}
+		return super.getSubtypeStr();
+	}
+
+	@Nullable
+	@Override
+	public Drawable getSubtypeIcon() {
+		if (getPointSpeed() != NO_VALUE) {
+			return getIcon(R.drawable.ic_action_speed_16);
+		}
+		return super.getSubtypeIcon();
+	}
+
 	@Override
 	public int getAdditionalInfoIconRes() {
-		if (getPointSpeed() != NO_SPEED) {
-			return R.drawable.ic_action_speed_16;
+		if (getPointBearing() != NO_VALUE) {
+			return R.drawable.ic_action_bearing;
 		}
 		return super.getAdditionalInfoIconRes();
 	}
@@ -214,10 +235,22 @@ public class AMapPointMenuController extends MenuController {
 			try {
 				return Float.parseFloat(speed);
 			} catch (NumberFormatException e) {
-				return NO_SPEED;
+				return NO_VALUE;
 			}
 		}
-		return NO_SPEED;
+		return NO_VALUE;
+	}
+
+	private float getPointBearing() {
+		String bearing = point.getParams().get(AMapPoint.POINT_BEARING_PARAM);
+		if (!TextUtils.isEmpty(bearing)) {
+			try {
+				return Float.parseFloat(bearing);
+			} catch (NumberFormatException e) {
+				return NO_VALUE;
+			}
+		}
+		return NO_VALUE;
 	}
 
 	@Nullable
