@@ -90,6 +90,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		if (item.latLon == null) {
 			return
 		}
+		setupMapLayer()
 		osmandAidlHelper.execOsmandApi {
 			osmandAidlHelper.showMapPoint(
 				MAP_LAYER_ID,
@@ -100,7 +101,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				Color.WHITE,
 				ALatLon(item.latLon!!.latitude, item.latLon!!.longitude),
 				generatePointDetails(item.bearing?.toFloat(), item.altitude?.toFloat(), item.precision?.toFloat()),
-				generatePointParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale, item.speed?.toFloat())
+				generatePointParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale, item.speed?.toFloat(), item.bearing?.toFloat())
 			)
 		}
 	}
@@ -147,8 +148,13 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 						}
 					}
 					setupMapLayer()
-					val params = generatePointParams(photoPath, stale, if (content is MessageUserLocation) content.speed.toFloat() else null)
-
+					var speed = 0f
+					var bearing = 0f
+					if (content is MessageUserLocation) {
+						speed = content.speed.toFloat()
+						bearing = content.bearing.toFloat()
+					}
+					val params = generatePointParams(photoPath, stale, speed, bearing)
 					val typeName = if (isGroup) chatTitle else OsmandFormatter.getListItemLiveTimeDescr(app, date, app.getString(R.string.last_response) + ": ")
 					if (update) {
 						osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, pointId, name, name, typeName, Color.WHITE, aLatLon, details, params)
@@ -158,7 +164,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					points[pointId] = message
 				} else if (content is MessageOsmAndBotLocation && content.isValid()) {
 					setupMapLayer()
-					val params = generatePointParams(null, stale, content.speed.toFloat())
+					val params = generatePointParams(null, stale, content.speed.toFloat(), content.bearing.toFloat())
 					if (update) {
 						osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, pointId, name, name, chatTitle, Color.WHITE, aLatLon, details, params)
 					} else {
@@ -340,7 +346,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	private fun generatePointDetails(bearing: Float?, altitude: Float?, precision: Float?): List<String> {
 		val details = mutableListOf<String>()
 		if (bearing != null && bearing != 0.0f) {
-			details.add(String.format(Locale.US, "${OsmandLocationUtils.BEARING_PREFIX}%.1f \n", bearing))
+			details.add(String.format(Locale.US, "${OsmandLocationUtils.BEARING_PREFIX}%.1f${OsmandLocationUtils.BEARING_SUFFIX} \n", bearing))
 		}
 		if (altitude != null && altitude != 0.0f) {
 			details.add(String.format(Locale.US, "${OsmandLocationUtils.ALTITUDE_PREFIX}%.1f m\n", altitude))
@@ -352,7 +358,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		return details
 	}
 
-	private fun generatePointParams(photoPath: String?, stale: Boolean, speed: Float?): Map<String, String> {
+	private fun generatePointParams(photoPath: String?, stale: Boolean, speed: Float?, bearing: Float?): Map<String, String> {
 		val photoUri = generatePhotoUri(photoPath, stale)
 		app.grantUriPermission(
 			app.settings.appToConnectPackage,
@@ -365,6 +371,9 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		)
 		if (speed != 0.0f) {
 			params[AMapPoint.POINT_SPEED_PARAM] = speed.toString()
+		}
+		if (bearing != 0.0f) {
+			params[AMapPoint.POINT_BEARING_PARAM] = bearing.toString()
 		}
 
 		return params
