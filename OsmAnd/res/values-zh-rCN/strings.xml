@@ -1971,8 +1971,14 @@
     <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ 是开放源码导航应用程序，可以使用各式各样的全球性 OpenStreetMap （称 OSM 开放街道地图）数据。所有数据（矢量图或地图图砖）可存放于设备的记忆卡上，可作离线与在线地图导航，包含转弯提醒 (turn by turn) 语音导航。 一些主要的功能： - 完整离线功能（存放下载的矢量图或地图图砖于设备存储器） - 全球离线矢量地图数据 - 直接由手机下载各国或区域地图数据 - 可叠加不同的多种地图层于自订的透明度，如 GPX 或导航轨迹、兴趣点、我的收藏、等高线、大众运输停靠站 - 离线查寻地址、场所(POI) - 中程距离的脱机路线 - 汽车、自行车、步行模式有下列选项： - 自动日/夜模式切换选项 - 取决于速度的地图缩放选项 - 地图正北朝上或行进方向朝上选项 - 车道引导、速限显示、使用真人语音或 TTS 语音选项 "</string>
     <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) 是一个地图和导航应用程序，可以免费访问全球性且高品质的 OpenStreetMap (OSM) 地图数据。有语音和视觉的导航、查看 POI（兴趣点）、创建和管理 GPX 轨迹、使用可视化的等高线和海拔信息，能在汽车驾驶、骑自行车和步行模式之间选择、OSM 编辑和更多。 OsmAnd + 是付费应用程序版本。透过购买，您支持了该项目，资助新功能的开发并收到最新的更新。一些主要特点： "</string>
     <string name="osmand_plus_extended_description_part2">" 导航 • 在线工作（快速）或是离线（当您在国外无需国际漫游费用） • 转弯提醒 (turn by turn) 语音导航（真人和合成语音） • 可任选的车道导引、街道名称显示和预计抵达时间 • 支持您行程安排上的中转点 • 当您行驶路线改道，自动重新规划 • 查寻地点按照地址、类别（例如：餐厅、旅店、加油站、博物馆）或以地理位置坐标 "</string>
-    <string name="osmand_plus_extended_description_part3">" 地图查看 • 显示您的位置和方向 • 可以选择依照罗盘或您的运动方向对齐画面 • 将您最重要的地点，保存为我的收藏 
-\n • 显示您周遭的 POI（兴趣点） • 显示专用的在线地图图砖、卫星视图（来自 Bing）、不同的叠加层如旅游/导航 GPX 轨迹以及可自定透明度的附加层 • 可任选显示地名于英文、设备端或语言的拼写 "</string>
+    <string name="osmand_plus_extended_description_part3">地图查看
+\n显示您的位置和方向 
+\n可以选择依照罗盘或您的运动方向对齐画面
+\n将您最重要的地点存为我的收藏 
+\n显示您周遭的 POI（兴趣点）
+\n显示专用的在线地图图砖、卫星视图（来自必应）、不同的叠加层如旅游/导航 GPX 轨迹以及可自定透明度的附加层
+\n可任选显示地名于英文、设备端或语言的拼写
+\n</string>
     <string name="osmand_plus_extended_description_part4">" 使用 OSM 和维基百科的数据 • 来自世界最好的协作项目所得的高品质信息 • OSM 数据可用在每个国家或地区 • 维基百科 POI 卓越的观光景点 • 直接从应用程序，无限制的免费下载 • 密集的脱机矢量地图更新，至少每月一次 • 可在完整的区域数据还是只有公路网之间选择（例如：光全日本就有700 MB或200 MB的公路网） "</string>
     <string name="osmand_plus_extended_description_part5">" 安全功能 • 任选的自动日/夜查看切换 • 任选的速限显示功能，如果您超速了它会提醒 • 取决于速度的地图缩放选项 
 \n • 分享您所在的位置的功能，这样您的朋友能找到您 "</string>
