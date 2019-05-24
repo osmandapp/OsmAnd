@@ -2491,8 +2491,8 @@
     <string name="search_no_results_description">没有结果？
 \n请告诉我们这个问题。</string>
     <string name="download_wikipedia_label">下载维基百科数据</string>
-    <string name="open_in_browser_wiki">在线打开文章</string>
-    <string name="wiki_article_not_found">文章未找到</string>
+    <string name="open_in_browser_wiki">在线打开条目</string>
+    <string name="wiki_article_not_found">未找到条目</string>
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>
     <string name="send_search_query_description">我们将会发送您的搜索请求：<b>\"%1$s\"</b>，以及您的位置。<br/>
         <br/>我们不会搜集您的个人信息，我们只需要搜索数据以改进搜索算法。<br/>
@@ -2510,7 +2510,7 @@
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
     <string name="osm_live_payment_discount_descr">节省 %1$s。</string>
     <string name="osm_live_payment_current_subscription">当前订阅</string>
-    <string name="open_in_browser_wiki_description">在网页浏览器中查看文章。</string>
+    <string name="open_in_browser_wiki_description">在网页浏览器中查看条目。</string>
     <string name="osm_live_subscriptions">订阅</string>
     <string name="osm_live_payment_renews_monthly">每月续期</string>
     <string name="osm_live_payment_renews_quarterly">每季度续期</string>
@@ -2532,11 +2532,11 @@
     <string name="exit_without_saving">不保存退出？</string>
     <string name="tunnel_warning">前方隧道</string>
     <string name="show_tunnels">隧道</string>
-    <string name="download_wikipedia_description">下载 %1$s 的维基百科文章以离线阅读。</string>
+    <string name="download_wikipedia_description">下载 %1$s 的维基百科条目以离线阅读。</string>
     <string name="swap_start_and_destination">交换出发地和目的地</string>
     <string name="add_destination_point">添加目的地</string>
     <string name="mapillary_menu_title_pano">仅显示 360° 图像</string>
-    <string name="wiki_article_search_text">搜索对应的维基文章</string>
+    <string name="wiki_article_search_text">搜索对应的维基条目</string>
     <string name="run_full_osmand_header">启动 OsmAnd？</string>
     <string name="routing_attr_avoid_subway_name">避免地铁</string>
     <string name="quick_action_day_night_mode">%s模式</string>
@@ -2576,4 +2576,27 @@
     <string name="ask_for_location_permission">请在允许OsmAnd获取定位信息后继续。</string>
     <string name="route_smoothness_stat_container">光滑度</string>
     <string name="route_steepness_stat_container">坡度</string>
+    <string name="unirs_render_descr">更改默认风格以突出显示人行道和非机动车道，使用旧版Mapnik配色。</string>
+    <string name="run_full_osmand_msg">你正在使用基于 OsmAnd 的 {0}。是否启动完整版 OsmAnd？</string>
+    <string name="transfers_size">%1$d 次中转</string>
+    <string name="rendering_attr_surface_mud_name">泥路</string>
+    <string name="rendering_attr_surface_asphalt_name">柏油路</string>
+    <string name="routing_attr_avoid_tram_name">避免电车</string>
+    <string name="routing_attr_avoid_tram_description">避免电车</string>
+    <string name="routing_attr_avoid_bus_name">避免公交</string>
+    <string name="routing_attr_avoid_bus_description">避免公交和无轨电车</string>
+    <string name="send_log">发送日志</string>
+    <string name="files_moved">已移动 %1$d 个文件 (%2$s)。</string>
+    <string name="files_copied">已复制 %1$d 个文件 (%2$s)。</string>
+    <string name="files_present">%1$d 个文件 (%2$s) 仍在原路径 \'%3$s\'。</string>
+    <string name="move_maps">移动地图</string>
+    <string name="dont_move_maps">不要移动</string>
+    <string name="public_transport_ped_route_title">徒步完成此路径需要约 %1$s，可能比公交更快</string>
+    <string name="public_transport_no_route_title">OsmAnd 无法遵循你的设置来规划合适路径</string>
+    <string name="public_transport_try_ped">尝试步行导航。</string>
+    <string name="public_transport_try_change_settings">尝试更改设置。</string>
+    <string name="public_transport_calc_pedestrian">规划步行路径</string>
+    <string name="public_transport_type">交通类型</string>
+    <string name="searching_gps">获取GPS</string>
+    <string name="coordinates_widget">坐标小工具</string>
 </resources>
