@@ -2592,12 +2592,12 @@
     <string name="move_maps">移动地图</string>
     <string name="dont_move_maps">不要移动</string>
     <string name="public_transport_ped_route_title">徒步完成此路径需要约 %1$s，可能比公交更快</string>
-    <string name="public_transport_no_route_title">OsmAnd 无法遵循你的设置来规划合适路径</string>
+    <string name="public_transport_no_route_title">非常抱歉，OsmAnd 无法找到符合您的设置的路线。</string>
     <string name="public_transport_try_ped">尝试步行导航。</string>
     <string name="public_transport_try_change_settings">尝试更改设置。</string>
     <string name="public_transport_calc_pedestrian">规划步行路径</string>
     <string name="public_transport_type">交通类型</string>
-    <string name="searching_gps">获取GPS</string>
+    <string name="searching_gps">正在搜索 GPS</string>
     <string name="coordinates_widget">坐标小工具</string>
     <string name="markers_remove_dialog_msg">删除地图标记 \'%s\' 吗？</string>
     <string name="edit_map_marker">编辑地图标记</string>
@@ -2692,4 +2692,5 @@
 \n
 \n</string>
     <string name="files_failed">未能复制 %1$d 个文件 (%2$s).</string>
+    <string name="poi_cannot_be_found">无法找到节点或道路。</string>
 </resources>
