@@ -258,6 +258,8 @@
 
 	<color name="shadow_color">#33888888</color>
 
+	<color name="compass_control_active">#EE5622</color>
+
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
 
@@ -455,6 +457,9 @@
 	<color name="wiki_webview_background_light">#ffffff</color>
 	<color name="wiki_webview_background_dark">#17191a</color>
 
+	<color name="text_field_box_dark">#3F474B</color>
+	<color name="text_field_box_light">#eeeeee</color>
+
 	<!-- Basic colors -->
 	<color name="app_bar_main_dark">#101112</color>
 	<color name="app_bar_main_light">#ff8800</color>
@@ -477,5 +482,8 @@
 	<color name="inactive_buttons_and_links_dark">#505050</color>
 	<color name="active_buttons_and_links_trans_light">#66237bff</color>
 	<color name="active_buttons_and_links_trans_dark">#66d28521</color>
+	<color name="settings_divider">#dcdcdc</color>
+	<color name="profile_button_gray">#EFEFEF</color>
+	<color name="profile_button_gray_pressed">#ababab</color>
 
 </resources>

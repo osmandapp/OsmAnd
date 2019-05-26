@@ -35,6 +35,80 @@
 
 	</android.support.design.widget.AppBarLayout>
 
+	<LinearLayout
+		android:id="@+id/type_selection_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/selectableItemBackground"
+		android:clickable="true">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="64dp"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding_small"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:id="@+id/mode_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+				android:layout_gravity="center_vertical"
+				android:tint="?attr/primary_icon_color"
+				tools:src="@drawable/ic_action_coordinates_latitude"/>
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				android:layout_gravity="center_vertical"
+				android:gravity="center_vertical"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/mode_title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textAppearance="@style/TextAppearance.ListItemTitle"
+					android:textColor="?attr/main_font_color_basic"
+					tools:text="Item Title"/>
+
+				<TextView
+					android:id="@+id/mode_subtitle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					tools:text="Item additional desription"/>
+
+			</LinearLayout>
+			<ImageView
+				android:id="@+id/type_down_arrow"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="0"
+				android:layout_gravity="center_vertical"
+				android:src="@drawable/ic_action_arrow_drop_down"/>
+
+		</LinearLayout>
+
+		<ImageView
+			android:id="@+id/bottom_shadow2"
+			android:layout_width="match_parent"
+			android:layout_height="5dp"
+			android:scaleType="fitXY"
+			android:src="@drawable/bg_shadow_list_bottom"/>
+	</LinearLayout>
+
 	<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" >

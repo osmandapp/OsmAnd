@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:background="?attr/ctx_menu_info_view_bg"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  >
+  <ScrollView
+    android:id="@+id/scroll_view_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_marginBottom="@dimen/setting_profile_item_height">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+      <LinearLayout
+        android:id="@+id/type_selection_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/bg_color"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="64dp"
+          android:paddingStart="@dimen/content_padding"
+          android:paddingEnd="@dimen/content_padding_small"
+          android:paddingLeft="@dimen/content_padding"
+          android:paddingRight="@dimen/content_padding_small"
+          android:orientation="horizontal">
+
+          <ImageView
+            android:id="@+id/mode_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+            android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+            android:layout_gravity="center_vertical"
+            android:tint="?attr/primary_icon_color"
+            tools:src="@drawable/ic_action_coordinates_latitude"/>
+
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:ellipsize="end"
+              android:maxLines="1"
+              android:text="Base Profile"/>
+
+            <TextView
+              android:id="@+id/mode_title"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:ellipsize="end"
+              android:maxLines="1"
+              android:textSize="18sp"
+              android:textColor="?attr/main_font_color_basic"
+              tools:text="Item additional description"/>
+
+          </LinearLayout>
+
+          <ImageView
+            android:id="@+id/type_down_arrow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"
+            android:tint="@color/settings_divider"
+            android:src="@drawable/ic_action_arrow_drop_down"/>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/ctx_menu_info_view_bg"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scaleType="fitXY"
+          android:src="@drawable/bg_shadow_list_bottom"/>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scaleType="fitXY"
+          android:src="@drawable/bg_shadow_list_top"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <net.osmand.plus.widgets.OsmandTextFieldBoxes
+              android:id="@+id/profile_name_otfb"
+              android:layout_width="0dp"
+              android:layout_height="60dp"
+              android:layout_weight="1"
+              android:layout_marginTop="@dimen/list_content_padding"
+              android:layout_marginBottom="@dimen/list_content_padding"
+              android:layout_marginStart="@dimen/list_content_padding"
+              android:layout_marginEnd="@dimen/list_content_padding"
+              android:layout_marginLeft="@dimen/list_content_padding"
+              android:layout_marginRight="@dimen/list_content_padding"
+              app:labelText="Profile Name">
+
+              <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/profile_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+
+                tools:text="@string/lorem_ipsum"/>
+
+            </net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+
+            <LinearLayout
+              android:id="@+id/profile_icon_layout"
+              android:layout_width="60dp"
+              android:layout_height="60dp"
+              android:layout_marginEnd="@dimen/list_content_padding"
+              android:layout_marginRight="@dimen/list_content_padding"
+              android:clickable="true"
+              android:focusable="true"
+              android:gravity="center"
+              android:orientation="vertical"
+              >
+
+              <TextView
+                android:id="@+id/select_icon_btn_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:paddingBottom="2dp"
+                android:text="Icon"/>
+
+              <ImageView
+                android:id="@+id/select_icon_btn_img"
+                android:layout_width="@dimen/standard_icon_size"
+                android:layout_height="@dimen/standard_icon_size"
+                tools:src="@drawable/ic_action_car_dark"/>
+
+            </LinearLayout>
+
+          </LinearLayout>
+
+          <FrameLayout
+            android:id="@+id/click_block_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:layout_marginStart="@dimen/list_content_padding"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginRight="@dimen/list_content_padding">
+
+          <ImageView
+            android:id="@+id/type_down_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:paddingRight="@dimen/content_padding"
+            android:tint="@color/settings_divider"
+            android:src="@drawable/ic_action_arrow_drop_down"/>
+
+          <net.osmand.plus.widgets.OsmandTextFieldBoxes
+            android:id="@+id/navigation_type_otfb"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            app:labelText="Navigation Type">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+              android:id="@+id/navigation_type_et"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:drawableEnd="@drawable/ic_action_arrow_drop_down"
+              android:drawableRight="@drawable/ic_action_arrow_drop_down"
+              android:focusable="false"
+              android:maxLines="1"
+
+              tools:text="Car"/>
+
+          </net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+          <FrameLayout
+            android:id="@+id/select_nav_type_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        </FrameLayout>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="12dp"
+          android:layout_marginStart="@dimen/list_content_padding"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginRight="@dimen/list_content_padding"
+          android:text="You can add own modified version of routing.xml to ..osmand/files/routing/"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/ctx_menu_info_view_bg"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scaleType="fitXY"
+          android:src="@drawable/bg_shadow_list_bottom"/>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="10dp"/>
+
+        <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scaleType="fitXY"
+          android:src="@drawable/bg_shadow_list_top"/>
+
+      </LinearLayout>
+
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:orientation="vertical">
+
+        <TextView
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/list_content_padding"
+          android:layout_marginStart="@dimen/list_content_padding"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginRight="@dimen/list_content_padding"
+          android:text="Setup Profile"
+          android:textColor="?attr/main_font_color_basic"
+          android:textSize="@dimen/default_list_text_size"/>
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginStart="@dimen/list_content_padding"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginRight="@dimen/list_content_padding"
+          android:text="Profile keeps its own settings"
+          android:textColor="@color/description_font_and_bottom_sheet_icons"/>
+
+        <LinearLayout
+          android:id="@+id/map_config_btn"
+          android:layout_width="match_parent"
+          android:layout_height="65dp"
+          android:background="?android:attr/selectableItemBackground"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+          <ImageView
+            android:id="@+id/map_config_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/list_content_padding"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:src="@drawable/ic_action_layers_dark"
+            android:tint="?attr/primary_icon_color"/>
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="@dimen/list_content_padding"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="@dimen/list_content_padding"
+            android:orientation="vertical">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Configure map"
+              android:textColor="?attr/main_font_color_basic"
+              android:textSize="@dimen/default_list_text_size"/>
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Select default map options for profile"
+              android:textColor="@color/description_font_and_bottom_sheet_icons"/>
+          </LinearLayout>
+        </LinearLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginStart="64dp"
+          android:layout_marginLeft="64dp"
+          android:background="@color/divider_light"/>
+
+        <LinearLayout
+          android:id="@+id/screen_config_btn"
+          android:layout_width="match_parent"
+          android:layout_height="64dp"
+          android:background="?android:attr/selectableItemBackground"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+          <ImageView
+            android:id="@+id/screen_config_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/list_content_padding"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:src="@drawable/ic_configure_screen_dark"
+            android:tint="?attr/primary_icon_color"/>
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="@dimen/list_content_padding"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="@dimen/list_content_padding"
+            android:orientation="vertical">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Configure screen"
+              android:textColor="?attr/main_font_color_basic"
+              android:textSize="@dimen/default_list_text_size"/>
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Select default screen options for profile"
+              android:textColor="@color/description_font_and_bottom_sheet_icons"/>
+
+          </LinearLayout>
+        </LinearLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginStart="64dp"
+          android:layout_marginLeft="64dp"
+          android:background="@color/divider_light"
+          />
+
+        <LinearLayout
+          android:id="@+id/nav_settings_btn"
+          android:layout_width="match_parent"
+          android:layout_height="64dp"
+          android:gravity="center_vertical"
+          android:background="?android:attr/selectableItemBackground"
+          android:orientation="horizontal">
+
+          <ImageView
+            android:id="@+id/nav_settings_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/list_content_padding"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:src="@drawable/ic_action_gdirections_dark"
+            android:tint="?attr/primary_icon_color"/>
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="@dimen/list_content_padding"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="@dimen/list_content_padding"
+            android:orientation="vertical">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Navigation settings"
+              android:textColor="?attr/main_font_color_basic"
+              android:textSize="@dimen/default_list_text_size"/>
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Select default navigation settings for profile"
+              android:textColor="@color/description_font_and_bottom_sheet_icons"/>
+
+          </LinearLayout>
+        </LinearLayout>
+      </LinearLayout>
+
+
+
+      <include layout="@layout/list_shadow_footer"/>
+
+
+      <LinearLayout
+        android:id="@+id/buttons_layout_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?attr/bg_color"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+          android:id="@+id/cancel_button_sv"
+          android:layout_width="0dp"
+          android:layout_height="42dp"
+          android:layout_weight="1"
+          android:layout_marginTop="@dimen/list_content_padding"
+          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginStart="@dimen/list_content_padding"
+          android:layout_marginEnd="8dp"
+          android:layout_marginLeft="@dimen/list_content_padding"
+          android:layout_marginRight="8dp"
+          android:background="@drawable/btn_round_profile_gray"
+          android:text="@string/shared_string_cancel"
+          android:textAllCaps="false"
+          android:textColor="@color/map_widget_blue"/>
+
+        <Button
+          android:id="@+id/save_profile_btn_sv"
+          android:layout_width="0dp"
+          android:layout_height="42dp"
+          android:layout_weight="1"
+          android:layout_marginTop="@dimen/list_content_padding"
+          android:layout_marginBottom="@dimen/list_content_padding"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="@dimen/list_content_padding"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="@dimen/list_content_padding"
+          android:background="@drawable/btn_round_profile_blue"
+          android:text="@string/shared_string_save"
+          android:textAllCaps="false"
+          android:textColor="@color/color_white"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </ScrollView>
+
+  <LinearLayout
+    android:id="@+id/buttons_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="?attr/bg_color"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/cancel_button"
+      android:layout_width="0dp"
+      android:layout_height="42dp"
+      android:layout_weight="1"
+      android:layout_marginTop="@dimen/list_content_padding"
+      android:layout_marginBottom="@dimen/list_content_padding"
+      android:layout_marginStart="@dimen/list_content_padding"
+      android:layout_marginEnd="8dp"
+      android:layout_marginLeft="@dimen/list_content_padding"
+      android:layout_marginRight="8dp"
+      android:background="@drawable/btn_round_profile_gray"
+      android:text="@string/shared_string_cancel"
+      android:textAllCaps="false"
+      android:textColor="@color/map_widget_blue"/>
+
+    <Button
+      android:id="@+id/save_profile_btn"
+      android:layout_width="0dp"
+      android:layout_height="42dp"
+      android:layout_weight="1"
+      android:layout_marginTop="@dimen/list_content_padding"
+      android:layout_marginBottom="@dimen/list_content_padding"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="@dimen/list_content_padding"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="@dimen/list_content_padding"
+      android:background="@drawable/btn_round_profile_blue"
+      android:text="@string/shared_string_save"
+      android:textAllCaps="false"
+      android:textColor="@color/color_white"/>
+
+  </LinearLayout>
+
+</FrameLayout>

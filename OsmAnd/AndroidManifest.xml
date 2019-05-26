@@ -891,5 +891,15 @@
 		</activity>
 
         <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
+
+		<activity
+			android:configChanges="keyboardHidden|orientation"
+			android:label="Application profiles"
+			android:name=".profiles.SettingsProfileActivity"/>
+
+		<activity
+			android:name=".profiles.EditProfileActivity"
+			android:label="Application profiles"/>
+
 </application>
 </manifest> 

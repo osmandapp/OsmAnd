@@ -149,7 +149,7 @@ public class AvoidSpecificRoads {
 		app.getSettings().removeImpassableRoad(latLon);
 		RouteDataObject obj = impassableRoads.remove(latLon);
 		if (obj != null) {
-			app.getDefaultRoutingConfig().removeImpassableRoad(obj);
+			app.getRoutingConfig().removeImpassableRoad(obj);
 		}
 	}
 
@@ -254,7 +254,7 @@ public class AvoidSpecificRoads {
 					final LatLon oldLoc = getLocation(currentObject);
 					app.getSettings().moveImpassableRoad(oldLoc, newLoc);
 					impassableRoads.remove(oldLoc);
-					app.getDefaultRoutingConfig().removeImpassableRoad(currentObject);
+					app.getRoutingConfig().removeImpassableRoad(currentObject);
 					addImpassableRoadInternal(object, ll, showDialog, activity, newLoc);
 
 					if (callback != null) {
@@ -276,7 +276,7 @@ public class AvoidSpecificRoads {
 										   boolean showDialog,
 										   @Nullable MapActivity activity,
 										   @NonNull LatLon loc) {
-		if (app.getDefaultRoutingConfig().addImpassableRoad(object, ll)) {
+		if (app.getRoutingConfig().addImpassableRoad(object, ll)) {
 			impassableRoads.put(loc, object);
 		} else {
 			LatLon location = getLocation(object);
@@ -305,7 +305,7 @@ public class AvoidSpecificRoads {
 	}
 
 	public LatLon getLocation(RouteDataObject object) {
-		Location location = app.getDefaultRoutingConfig().getImpassableRoadLocations().get(object.getId());
+		Location location = app.getRoutingConfig().getImpassableRoadLocations().get(object.getId());
 		return location == null ? null : new LatLon(location.getLatitude(), location.getLongitude());
 	}
 

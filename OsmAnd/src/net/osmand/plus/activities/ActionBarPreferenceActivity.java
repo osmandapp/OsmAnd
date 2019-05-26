@@ -9,8 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -56,6 +59,7 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 		});
 
 		getSpinner().setVisibility(View.GONE);
+		getTypeButton().setVisibility(View.GONE);
 		setProgressVisibility(false);
 	}
 
@@ -79,6 +83,25 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 
 	protected Spinner getSpinner() {
 		return (Spinner) findViewById(R.id.spinner_nav);
+	}
+
+	protected LinearLayout getTypeButton() {
+		return (LinearLayout) findViewById(R.id.type_selection_button);
+	}
+
+	protected TextView getModeTitleTV() {
+		return (TextView) findViewById(R.id.mode_title);
+	}
+
+	protected TextView getModeSubTitleTV() {
+		return (TextView) findViewById(R.id.mode_subtitle);
+	}
+
+	protected ImageView getModeIconIV() {
+		return (ImageView) findViewById(R.id.mode_icon);
+	}
+	protected ImageView getDropDownArrow() {
+		return (ImageView) findViewById(R.id.type_down_arrow);
 	}
 
 	protected void setProgressVisibility(boolean visibility) {

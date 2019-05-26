@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package net.osmand.plus.activities;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

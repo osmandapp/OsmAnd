@@ -17,7 +17,7 @@ import android.view.ViewGroup
 import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
-import net.osmand.telegram.TelegramSettings.DurationPref
+import net.osmand.telegram.TelegramSettings.NumericPref
 import net.osmand.telegram.helpers.TelegramHelper.Companion.OSMAND_BOT_USERNAME
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
@@ -49,18 +49,8 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			window.statusBarColor = ContextCompat.getColor(app, R.color.card_bg_light)
 		}
 		var container = mainView.findViewById<ViewGroup>(R.id.gps_and_loc_container)
-		for (pref in settings.gpsAndLocPrefs) {
-			inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
-				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(pref.iconId))
-				findViewById<TextView>(R.id.title).setText(pref.titleId)
-				findViewById<TextView>(R.id.description).setText(pref.descriptionId)
-				val valueView = findViewById<TextView>(R.id.value)
-				valueView.text = pref.getCurrentValue()
-				setOnClickListener {
-					showPopupMenu(pref, valueView)
-				}
-				container.addView(this)
-			}
+		settings.gpsAndLocPrefs.forEach {
+			createNumericPref(inflater, container, it)
 		}
 
 		if (Build.VERSION.SDK_INT >= 26) {
@@ -146,6 +136,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 					AddNewDeviceBottomSheet.showInstance(fm, this@SettingsDialogFragment)
 				}
 			}
+		}
+
+		container = mainView.findViewById<ViewGroup>(R.id.gpx_settings_container)
+		settings.gpxLoggingPrefs.forEach {
+			createNumericPref(inflater, container, it)
 		}
 
 		container = mainView.findViewById(R.id.osmand_connect_container)
@@ -249,6 +244,20 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 	}
 
+	private fun createNumericPref(inflater: LayoutInflater, container: ViewGroup, pref: NumericPref) {
+		inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
+			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(pref.iconId))
+			findViewById<TextView>(R.id.title).setText(pref.titleId)
+			findViewById<TextView>(R.id.description).setText(pref.descriptionId)
+			val valueView = findViewById<TextView>(R.id.value)
+			valueView.text = pref.getCurrentValue()
+			setOnClickListener {
+				showPopupMenu(pref, valueView)
+			}
+			container.addView(this)
+		}
+	}
+
 	private fun addItemToContainer(inflater: LayoutInflater, container: ViewGroup, tag: String, title: String) {
 		inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
 			val checked = tag == settings.currentSharingMode
@@ -270,7 +279,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 	}
 	
-	private fun showPopupMenu(pref: DurationPref, valueView: TextView) {
+	private fun showPopupMenu(pref: NumericPref, valueView: TextView) {
 		val menuList = pref.getMenuItems()
 		val ctx = valueView.context
 		ListPopupWindow(ctx).apply {

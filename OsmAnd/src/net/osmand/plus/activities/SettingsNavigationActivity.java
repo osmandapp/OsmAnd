@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -46,10 +47,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.logging.Log;
 
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
-
 	public static final String MORE_VALUE = "MORE_VALUE";
 
 	private Preference avoidRouting;
@@ -75,7 +76,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.routing_settings);
-	
 		createUI();
     }
 
@@ -84,7 +84,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		PreferenceScreen screen = getPreferenceScreen();
 		settings = getMyApplication().getSettings();
 		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
-		
 		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		String[] entries = new String[vls.length];
 		for(int i=0; i<entries.length; i++){
@@ -245,7 +244,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			cat.addPreference(fastRoute);
 		} else {
 			ApplicationMode am = settings.getApplicationMode();
-			GeneralRouter router = getRouter(getMyApplication().getDefaultRoutingConfig(), am);
+			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();
@@ -355,7 +354,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 
 	public static GeneralRouter getRouter(net.osmand.router.RoutingConfiguration.Builder builder, ApplicationMode am) {
-		GeneralRouter router = builder.getRouter(am.getStringKey());
+		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
 		if(router == null && am.getParent() != null) {
 			router = builder.getRouter(am.getParent().getStringKey());
 		}
