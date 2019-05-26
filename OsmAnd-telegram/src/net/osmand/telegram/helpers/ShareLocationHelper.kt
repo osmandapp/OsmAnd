@@ -205,7 +205,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		if (currentTime - lastLocationSentTime <= chatsCounts * SENT_LOCATIONS_INTERVAL_TIME_MS) {
 			return
 		}
-		lastLocationSentTime = System.currentTimeMillis()
 
 		chatsShareInfo.values.forEach { shareInfo ->
 			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
@@ -229,7 +228,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			}
 			checkAndSendBufferMessagesToChat(shareInfo.chatId)
 		}
-		app.locationMessages.addMyLocationMessage(location)
 		if (bufferedMessagesFull) {
 			checkNetworkType()
 		}
@@ -244,6 +242,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				if (isBot) {
 					sendLocationToBot(message, shareInfo, SHARE_TYPE_TEXT)
 				} else {
+					lastLocationSentTime = System.currentTimeMillis()
 					app.telegramHelper.sendNewTextLocation(shareInfo, message)
 				}
 			}
@@ -256,6 +255,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				}
 			} else {
 				if (shareInfo.pendingTdLibText < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
+					lastLocationSentTime = System.currentTimeMillis()
 					app.telegramHelper.editTextLocation(shareInfo, message)
 				} else {
 					app.locationMessages.addBufferedMessage(message)
@@ -277,6 +277,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 						app.locationMessages.addBufferedMessage(message)
 					}
 				} else {
+					lastLocationSentTime = System.currentTimeMillis()
 					app.telegramHelper.sendNewMapLocation(shareInfo, message)
 				}
 			}
@@ -289,6 +290,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				}
 			} else {
 				if (shareInfo.pendingTdLibMap < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
+					lastLocationSentTime = System.currentTimeMillis()
 					app.telegramHelper.editMapLocation(shareInfo, message)
 				} else {
 					app.locationMessages.addBufferedMessage(message)
