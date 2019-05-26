@@ -68,12 +68,12 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 			if (record) {
 				lastLocationUpdateTime = System.currentTimeMillis()
+				lastLocation = location
 				if (app.settings.getChatsShareInfo().isNotEmpty()) {
 					shareLocationMessages(location, app.telegramHelper.getCurrentUserId())
 				}
 			}
 		}
-		lastLocation = location
 		app.settings.updateSharingStatusHistory()
 		refreshNotification()
 	}
