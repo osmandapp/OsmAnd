@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -433,6 +434,14 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 						profileDialog = null;
 					}
 				});
+		b.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				if (selected.size() == 0) {
+					setSelectedAppMode(ApplicationMode.CAR);
+				}
+			}
+		});
 		b.setTitle(R.string.profile_settings);
 		b.setView(v);
 		profileDialog = b.show();
