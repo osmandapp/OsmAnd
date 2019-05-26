@@ -803,6 +803,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<RulerMode> RULER_MODE = new EnumIntPreference<>("ruler_mode", RulerMode.FIRST, RulerMode.values()).makeGlobal();
 
+	public final OsmandPreference<Boolean> SHOW_COMPASS_CONTROL_RULER = new BooleanPreference("show_compass_ruler", true).makeGlobal();
+
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference("show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference("show_arrows_to_first_markers", false).makeProfile();
 
