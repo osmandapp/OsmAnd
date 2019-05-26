@@ -109,6 +109,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpxSelectionHelper selectedGpxHelper;
 	GPXDatabase gpxDatabase;
 	SavingTrackHelper savingTrackHelper;
+	AnalyticsHelper analyticsHelper;
 	NotificationHelper notificationHelper;
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
@@ -913,10 +914,10 @@ public class OsmandApplication extends MultiDexApplication {
 		try {
 			if (Version.isGooglePlayEnabled(this) && !Version.isPaidVersion(this)
 					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()) {
-				// not implemented yet
+				analyticsHelper.addEvent(event);
 			}
 		} catch (Exception e) {
-			// ignore
+			LOG.error(e);
 		}
 	}
 
