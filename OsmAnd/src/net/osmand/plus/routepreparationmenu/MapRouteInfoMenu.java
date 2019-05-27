@@ -63,6 +63,7 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
+import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment.UpdateMapRouteMenuListener;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -732,6 +733,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				@Override
 				public void onClick(View v) {
 					showProfileBottomSheetDialog(mapActivity);
+					//todo clear (+ method's body) before final commit
 					//availableProfileDialog();
 				}
 			});
@@ -749,6 +751,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private void showProfileBottomSheetDialog(Activity activity) {
 		final AppModesBottomSheetDialogFragment fragment = new AppModesBottomSheetDialogFragment();
+		fragment.setUpdateMapRouteMenuListener(new UpdateMapRouteMenuListener() {
+			@Override
+			public void updateAppModeMenu() {
+				updateApplicationModes();
+			}
+		});
 		getMapActivity().getSupportFragmentManager().beginTransaction()
 			.add(fragment, "app_profile_settings").commitAllowingStateLoss();
 

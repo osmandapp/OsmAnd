@@ -3,6 +3,7 @@ package net.osmand.plus.profiles;
 import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	private RecyclerView recyclerView;
 
 	private ProfileListener listener;
+	private UpdateMapRouteMenuListener updateMapRouteMenuListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,14 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		allModes.remove(ApplicationMode.DEFAULT);
 		selectedModes.addAll(ApplicationMode.values(getMyApplication()));
 		selectedModes.remove(ApplicationMode.DEFAULT);
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		super.onDismiss(dialog);
+		if (updateMapRouteMenuListener != null) {
+			updateMapRouteMenuListener.updateAppModeMenu();
+		}
 	}
 
 	@Override
@@ -106,5 +116,14 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				}
 			})
 			.create());
+	}
+
+	public void setUpdateMapRouteMenuListener(
+		UpdateMapRouteMenuListener updateMapRouteMenuListener) {
+		this.updateMapRouteMenuListener = updateMapRouteMenuListener;
+	}
+
+	public interface UpdateMapRouteMenuListener{
+		void updateAppModeMenu();
 	}
 }
