@@ -35,7 +35,6 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	public final static String TYPE_BASE_APP_PROFILE = "base_profiles";
 	public final static String TYPE_NAV_PROFILE = "routing_profiles";
 	public final static String TYPE_ICON = "icon_type";
-	public final static String TYPE_APP_PROFILES = "app_profiles";
 	public final static String SELECTED_KEY = "selected_base";
 
 	String type;
@@ -66,12 +65,6 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			} else if (type.equals(TYPE_ICON)) {
 				selectedIconRes = args.getInt(SELECTED_ICON, -1);
 				icons = getProfileIcons();
-			} else if (type.equals(TYPE_APP_PROFILES)){
-				appModes.addAll(ApplicationMode.allPossibleValues());
-				appModes.remove(0);
-				activeAppModes.addAll(ApplicationMode.values(app));
-				activeAppModes.remove(0);
-				bottomButtonText = R.string.shared_string_close;
 			} else {
 				LOG.error("Check intent data!");
 				dismiss();
@@ -178,53 +171,6 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 						}
 					})
 					.create());
-			}
-		} else if (type.equals(TYPE_APP_PROFILES)) {
-			items.add(new TitleItem(getString(R.string.application_profiles)));
-			for (int i = 0; i < appModes.size(); i++) {
-				final int pos = i;
-				final ApplicationMode mode = appModes.get(i);
-				final boolean[] isSelected = {activeAppModes.contains(mode)};
-				final Drawable icon;
-				if (isSelected[0]) {
-					icon = getMyApplication().getUIUtilities().getIcon(mode.getSmallIconDark(), nightMode
-						? R.color.active_buttons_and_links_dark
-						: R.color.active_buttons_and_links_light);
-				} else {
-					icon = getMyApplication().getUIUtilities().getIcon(
-						mode.getSmallIconDark(), R.color.icon_color);
-				}
-				items.add(new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(isSelected[0])
-					.setDescription(mode.getParent() == null
-						? getString(R.string.profile_type_base_string)
-						: String.format(getString(R.string.profile_type_descr_string),
-							getString(mode.getParent().getStringResource())))
-					.setTitle(mode.getParent() == null
-						? getString(mode.getStringResource())
-						: mode.getUserProfileName())
-					.setIcon(icon)
-					.setLayoutId(R.layout.profile_list_item)
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (getView() != null) {
-								((SwitchCompat) getView().findViewById(R.id.compound_button)).toggle();
-							}
-							if (!isSelected[0]) {
-								activeAppModes.add(mode);
-							} else {
-								activeAppModes.remove(mode);
-							}
-							ApplicationMode
-								.changeProfileStatus(mode, isSelected[0], getMyApplication());
-							boolean status = !isSelected[0];
-							isSelected[0] = status;
-						}
-					})
-					.create()
-
-				);
 			}
 		} else if (type.equals(TYPE_ICON)) {
 			items.add(new TitleItem(getString(R.string.select_icon_profile_dialog_title)));

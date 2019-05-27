@@ -1,7 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_APP_PROFILES;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +8,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -65,7 +62,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
+import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -751,10 +748,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void showProfileBottomSheetDialog(Activity activity) {
-		final SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
-		Bundle bundle = new Bundle();
-		bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILES);
-		fragment.setArguments(bundle);
+		final AppModesBottomSheetDialogFragment fragment = new AppModesBottomSheetDialogFragment();
 		getMapActivity().getSupportFragmentManager().beginTransaction()
 			.add(fragment, "app_profile_settings").commitAllowingStateLoss();
 
