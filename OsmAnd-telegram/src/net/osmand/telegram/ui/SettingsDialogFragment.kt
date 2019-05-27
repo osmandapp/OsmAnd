@@ -88,22 +88,21 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			findViewById<ImageView>(R.id.icon_right).apply {
 				visibility = View.VISIBLE
 				setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_additional_option))
-				setOnClickListener {
-					activity?.supportFragmentManager?.also { ProxySettingsDialogFragment.showInstance(it, this@SettingsDialogFragment) }
-				}
 			}
 			findViewById<TextView>(R.id.title).text = getText(R.string.proxy)
 			val description = findViewById<TextView>(R.id.description).apply {
 				text = if (settings.proxyEnabled) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
 			}
-			val switcher = findViewById<Switch>(R.id.switcher).apply {
+			findViewById<Switch>(R.id.switcher).apply {
+				isClickable = true
 				isChecked = app.settings.proxyEnabled
+				setOnCheckedChangeListener { _, isChecked ->
+					settings.updateProxySetting(isChecked)
+					description.text = if (isChecked) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
+				}
 			}
 			setOnClickListener {
-				val checked = !app.settings.proxyEnabled
-				switcher.isChecked = checked
-				settings.updateProxySetting(checked)
-				description.text = if (checked) getText(R.string.proxy_connected) else getText(R.string.proxy_disconnected)
+				activity?.supportFragmentManager?.also { ProxySettingsDialogFragment.showInstance(it, this@SettingsDialogFragment) }
 			}
 			container.addView(this)
 		}
@@ -246,7 +245,13 @@ class SettingsDialogFragment : BaseDialogFragment() {
 
 	private fun createNumericPref(inflater: LayoutInflater, container: ViewGroup, pref: NumericPref) {
 		inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
-			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(pref.iconId))
+			findViewById<ImageView>(R.id.icon).apply {
+				if (pref.iconId != 0) {
+					setImageDrawable(uiUtils.getThemedIcon(pref.iconId))
+				} else {
+					visibility = View.GONE
+				}
+			}
 			findViewById<TextView>(R.id.title).setText(pref.titleId)
 			findViewById<TextView>(R.id.description).setText(pref.descriptionId)
 			val valueView = findViewById<TextView>(R.id.value)
