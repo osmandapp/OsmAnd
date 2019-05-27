@@ -621,6 +621,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 				canvas.restore();
 			}
 		}
+		attrs.paint2.setTextAlign(Paint.Align.LEFT);
+		attrs.paint3.setTextAlign(Paint.Align.LEFT);
 	}
 
 	private void updateArcShader(float radiusLength, QuadPoint center) {
