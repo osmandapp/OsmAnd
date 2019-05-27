@@ -48,7 +48,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private List<IconResWithDescr> icons;
 	private String selectedItemKey;
-	private int selectedIconRes;
+	private String selectedIconRes;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
 				profiles.addAll(SettingsProfileFragment.getBaseProfiles(app));
 			} else if (type.equals(TYPE_ICON)) {
-				selectedIconRes = args.getInt(SELECTED_ICON, -1);
+				selectedIconRes = args.getString(SELECTED_ICON, "");
 				icons = getProfileIcons();
 			} else {
 				LOG.error("Check intent data!");
@@ -75,10 +75,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		view.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
-		Button cancelBtn = view.findViewById(R.id.dismiss_button_v2);
-		cancelBtn.setVisibility(View.VISIBLE);
-		view.findViewById(R.id.dismiss_button_v2).setOnClickListener(new OnClickListener() {
+		view.findViewById(R.id.dismiss_button).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onDismissButtonClickAction();
@@ -124,7 +121,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 								getListener();
 							}
 							if (listener != null) {
-								listener.onSelectedType(pos);
+								listener.onSelectedType(pos, "");
 							}
 							dismiss();
 						}
@@ -165,7 +162,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 								getListener();
 							}
 							if (listener != null) {
-								listener.onSelectedType(pos);
+								listener.onSelectedType(pos, "");
 							}
 							dismiss();
 						}
@@ -176,19 +173,22 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			items.add(new TitleItem(getString(R.string.select_icon_profile_dialog_title)));
 			for (final IconResWithDescr icon : icons) {
 				Drawable drawableIcon;
-				boolean isSelected = icon.resId == selectedIconRes;
+				boolean isSelected = icon.resStringId.equals(selectedIconRes);
+				int iconRes = ApplicationMode
+					.getIconResFromName(getMyApplication(), icon.resStringId,
+						getMyApplication().getPackageName());
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(icon.resId, nightMode
+						.getIcon(iconRes, nightMode
 							? R.color.active_buttons_and_links_dark
 							: R.color.active_buttons_and_links_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(icon.resId, R.color.icon_color);
+						.getIcon(iconRes, R.color.icon_color);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(icon.resId == selectedIconRes)
+					.setChecked(icon.resStringId.equals(selectedIconRes))
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
 						: null)
@@ -202,7 +202,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 								getListener();
 							}
 							if (listener != null) {
-								listener.onSelectedType(icon.resId);
+								listener.onSelectedType(icon.resId, icon.resStringId);
 							}
 							dismiss();
 						}
@@ -235,32 +235,34 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private List<IconResWithDescr> getProfileIcons() {
 		List<IconResWithDescr> icons = new ArrayList<>();
-		icons.add(new IconResWithDescr(R.drawable.ic_action_car_dark, R.string.rendering_value_car_name,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_bicycle_dark, R.string.rendering_value_bicycle_name,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_pedestrian_dark, R.string.rendering_value_pedestrian_name,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_bus_dark, R.string.app_mode_bus,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_truck_dark, R.string.app_mode_truck,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_plugin_skimaps, R.string.routing_profile_ski, false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_car_dark, R.string.rendering_value_car_name, "ic_action_car_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_bicycle_dark, R.string.rendering_value_bicycle_name, "ic_action_bicycle_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_pedestrian_dark, R.string.rendering_value_pedestrian_name,"ic_action_pedestrian_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark",false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_plugin_skimaps, R.string.routing_profile_ski, "ic_plugin_skimaps", false));
 		return icons;
 	}
 
 	interface SelectProfileListener {
-		void onSelectedType(int pos);
+		void onSelectedType(int pos, String stringRes);
 	}
 
 	private class IconResWithDescr {
 		private int resId;
 		private int titleId;
+		private String resStringId;
 		private boolean isSelected;
 
-		public IconResWithDescr(int resId, int titleId, boolean isSelected) {
+		public IconResWithDescr(int resId, int titleId, String resStringId, boolean isSelected) {
 			this.resId = resId;
 			this.titleId = titleId;
 			this.isSelected = isSelected;
+			this.resStringId = resStringId;
 		}
 	}
 

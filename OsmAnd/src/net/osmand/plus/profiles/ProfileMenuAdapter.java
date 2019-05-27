@@ -82,12 +82,17 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
 			? R.color.main_font_dark
 			: R.color.main_font_light));
+
+		int iconRes = item.getParent() == null
+			? item.getSmallIconDark()
+			: ApplicationMode.getIconResFromName(app, item.getIconName(), app.getPackageName());
+
 		if (selectedItems.contains(item)) {
 			holder.aSwitch.setChecked(true);
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), selectedIconColorRes));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
 		} else {
 			holder.aSwitch.setChecked(false);
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), R.color.icon_color));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
 		}
 
 		holder.aSwitch.setOnClickListener(new OnClickListener() {

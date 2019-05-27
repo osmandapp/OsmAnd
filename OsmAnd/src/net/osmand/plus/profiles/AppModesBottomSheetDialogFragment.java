@@ -72,8 +72,6 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		adapter.setListener(listener);
 	}
 
-
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 
@@ -89,6 +87,9 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		final View textButtonView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 			R.layout.bottom_sheet_item_simple, null);
 		TextView textView = (TextView) textButtonView.findViewById(R.id.title);
+
+		int dpPadding = (int) (8 * getResources().getDisplayMetrics().density + 0.5f);
+		textView.setPadding(dpPadding, 0,0,0);
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.0f);
 		textView.setTextColor(nightMode
 			? getResources().getColor(R.color.active_buttons_and_links_dark)

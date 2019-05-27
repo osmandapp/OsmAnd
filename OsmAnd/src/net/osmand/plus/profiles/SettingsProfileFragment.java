@@ -128,7 +128,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		if (typeListener == null) {
 			typeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos) {
+				public void onSelectedType(int pos, String stringRes) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 					intent.putExtra(IS_NEW_PROFILE, true);
 					intent.putExtra(IS_USER_PROFILE, true);
