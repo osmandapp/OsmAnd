@@ -551,7 +551,6 @@ public class ApplicationMode {
 		try {
 			return app.getResources().getIdentifier(variableName, "drawable", packageName);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return -1;
 		}
 	}

@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -118,7 +119,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 			R.layout.bottom_sheet_item_simple, null);
 		TextView textView = (TextView) textButtonView.findViewById(R.id.title);
 
-		int dpPadding = (int) (8 * getResources().getDisplayMetrics().density + 0.5f);
+		int dpPadding = AndroidUtils.dpToPx(getMyApplication(), 8);
 		textView.setPadding(dpPadding, 0, 0, 0);
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.0f);
 		textView.setTextColor(nightMode
