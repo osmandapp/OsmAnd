@@ -87,6 +87,14 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			? item.getSmallIconDark()
 			: ApplicationMode.getIconResFromName(app, item.getIconName(), app.getPackageName());
 
+		if (iconRes == 0 || iconRes == -1) {
+			if (item.getParent() != null) {
+				iconRes = item.getParent().getSmallIconDark();
+			} else {
+				iconRes = R.drawable.ic_action_world_globe;
+			}
+		}
+
 		if (selectedItems.contains(item)) {
 			holder.aSwitch.setChecked(true);
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));

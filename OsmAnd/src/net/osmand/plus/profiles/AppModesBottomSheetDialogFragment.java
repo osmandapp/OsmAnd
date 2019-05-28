@@ -6,11 +6,15 @@ import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KE
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,7 +34,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	private Set<ApplicationMode> selectedModes = new HashSet<>();
 
 	protected boolean nightMode;
-
+	private int themeRes;
 	private ProfileMenuAdapter adapter;
 	private RecyclerView recyclerView;
 
@@ -44,6 +48,20 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		allModes.remove(ApplicationMode.DEFAULT);
 		selectedModes.addAll(ApplicationMode.values(getMyApplication()));
 		selectedModes.remove(ApplicationMode.DEFAULT);
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent,
+		Bundle savedInstanceState) {
+		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), listener);
+		recyclerView = new RecyclerView(getContext());
+		recyclerView = (RecyclerView) View
+			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		recyclerView.setAdapter(adapter);
+		return super.onCreateView(inflater, parent, savedInstanceState);
 	}
 
 	@Override
@@ -85,14 +103,8 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 
-		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), listener);
 
-		recyclerView = new RecyclerView(getContext());
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		recyclerView = (RecyclerView) View
-			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		recyclerView.setAdapter(adapter);
+
 
 		final View textButtonView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 			R.layout.bottom_sheet_item_simple, null);
@@ -116,6 +128,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				}
 			})
 			.create());
+
 	}
 
 	public void setUpdateMapRouteMenuListener(

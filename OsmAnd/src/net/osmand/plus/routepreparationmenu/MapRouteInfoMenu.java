@@ -732,6 +732,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			mainView.findViewById(R.id.app_modes_options).setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+
 					showProfileBottomSheetDialog(mapActivity);
 					//todo clear (+ method's body) before final commit
 					//availableProfileDialog();
@@ -759,6 +760,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 		getMapActivity().getSupportFragmentManager().beginTransaction()
 			.add(fragment, "app_profile_settings").commitAllowingStateLoss();
+
 
 
 	}
