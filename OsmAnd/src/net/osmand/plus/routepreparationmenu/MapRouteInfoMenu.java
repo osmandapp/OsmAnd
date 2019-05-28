@@ -733,7 +733,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				@Override
 				public void onClick(View v) {
 
-					showProfileBottomSheetDialog(mapActivity);
+					showProfileBottomSheetDialog();
 					//todo clear (+ method's body) before final commit
 					//availableProfileDialog();
 				}
@@ -750,7 +750,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateApplicationModesOptions();
 	}
 
-	private void showProfileBottomSheetDialog(Activity activity) {
+	private void showProfileBottomSheetDialog() {
 		final AppModesBottomSheetDialogFragment fragment = new AppModesBottomSheetDialogFragment();
 		fragment.setUpdateMapRouteMenuListener(new UpdateMapRouteMenuListener() {
 			@Override
@@ -760,45 +760,42 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		});
 		getMapActivity().getSupportFragmentManager().beginTransaction()
 			.add(fragment, "app_profile_settings").commitAllowingStateLoss();
-
-
-
 	}
 
-	private void availableProfileDialog() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			AlertDialog.Builder b = new AlertDialog.Builder(mapActivity);
-			final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-			final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
-			modes.remove(ApplicationMode.DEFAULT);
-			final Set<ApplicationMode> selected = new LinkedHashSet<>(ApplicationMode.values(mapActivity.getMyApplication()));
-			selected.remove(ApplicationMode.DEFAULT);
-			View v = AppModeDialog.prepareAppModeView(mapActivity, modes, selected, null, false, true, false,
-					new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
-							for (ApplicationMode mode : modes) {
-								if (selected.contains(mode)) {
-									vls.append(mode.getStringKey()).append(",");
-								}
-							}
-							settings.AVAILABLE_APP_MODES.set(vls.toString());
-						}
-					});
-			b.setTitle(R.string.profile_settings);
-			b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					updateApplicationModes();
-				}
-			});
-			b.setView(v);
-			b.show();
-		}
-	}
+//	private void availableProfileDialog() {
+//		MapActivity mapActivity = getMapActivity();
+//		if (mapActivity != null) {
+//			AlertDialog.Builder b = new AlertDialog.Builder(mapActivity);
+//			final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+//			final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
+//			modes.remove(ApplicationMode.DEFAULT);
+//			final Set<ApplicationMode> selected = new LinkedHashSet<>(ApplicationMode.values(mapActivity.getMyApplication()));
+//			selected.remove(ApplicationMode.DEFAULT);
+//			View v = AppModeDialog.prepareAppModeView(mapActivity, modes, selected, null, false, true, false,
+//					new OnClickListener() {
+//
+//						@Override
+//						public void onClick(View v) {
+//							StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
+//							for (ApplicationMode mode : modes) {
+//								if (selected.contains(mode)) {
+//									vls.append(mode.getStringKey()).append(",");
+//								}
+//							}
+//							settings.AVAILABLE_APP_MODES.set(vls.toString());
+//						}
+//					});
+//			b.setTitle(R.string.profile_settings);
+//			b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					updateApplicationModes();
+//				}
+//			});
+//			b.setView(v);
+//			b.show();
+//		}
+//	}
 
 	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {
 		MapActivity mapActivity = getMapActivity();

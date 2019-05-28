@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import net.osmand.plus.ApplicationMode;
@@ -44,10 +45,8 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		allModes.addAll(ApplicationMode.allPossibleValues());
-		allModes.remove(ApplicationMode.DEFAULT);
-		selectedModes.addAll(ApplicationMode.values(getMyApplication()));
-		selectedModes.remove(ApplicationMode.DEFAULT);
+		setDismissButtonTextId(R.string.shared_string_close);
+		getData();
 	}
 
 	@Nullable
@@ -56,6 +55,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		Bundle savedInstanceState) {
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), listener);
+		adapter.setBottomSheetMode(true);
 		recyclerView = new RecyclerView(getContext());
 		recyclerView = (RecyclerView) View
 			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
@@ -96,8 +96,19 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				startActivity(intent);
 			}
 		};
-
 		adapter.setListener(listener);
+		allModes = ApplicationMode.allPossibleValues();
+		allModes.remove(ApplicationMode.DEFAULT);
+		adapter.updateItemsList(allModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
+		setupHeightAndBackground(getView());
+
+	}
+
+	private void getData() {
+		allModes.addAll(ApplicationMode.allPossibleValues());
+		allModes.remove(ApplicationMode.DEFAULT);
+		selectedModes.addAll(ApplicationMode.values(getMyApplication()));
+		selectedModes.remove(ApplicationMode.DEFAULT);
 	}
 
 	@Override

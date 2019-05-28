@@ -26,9 +26,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	private Set<ApplicationMode> selectedItems;
 	private ProfileListener listener;
 	private final OsmandApplication app;
-	@ColorRes private int selectedIconColorRes;
+	@ColorRes
+	private int selectedIconColorRes;
+	private boolean isBottomSheet = false;
 
-	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems, OsmandApplication app, ProfileListener listener) {
+	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
+		OsmandApplication app, ProfileListener listener) {
 		this.items = items;
 		this.listener = listener;
 		this.app = app;
@@ -45,6 +48,10 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	public void addItem(ApplicationMode profileItem) {
 		items.add(profileItem);
 		notifyDataSetChanged();
+	}
+
+	public void setBottomSheetMode(boolean isBottomSheet) {
+		this.isBottomSheet = isBottomSheet;
 	}
 
 	public void setListener(ProfileListener listener) {
@@ -70,10 +77,18 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	@Override
 	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
 		final ApplicationMode item = items.get(position);
+
+		if (isBottomSheet) {
+			holder.divider.setBackgroundColor(isNightMode(app)
+				? app.getResources().getColor(R.color.divider_dark)
+				: app.getResources().getColor(R.color.divider_light));
+		}
+
 		if (item.getParent() != null) {
 			holder.title.setText(item.getUserProfileName());
 			holder.descr.setText(String.format(app.getString(R.string.profile_type_descr_string),
-				Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getStringKey().replace("_", " "))));
+				Algorithms.capitalizeFirstLetterAndLowercase(
+					item.getParent().getStringKey().replace("_", " "))));
 		} else {
 			holder.title.setText(app.getResources().getString(item.getStringResource()));
 			holder.descr.setText(R.string.profile_type_base_string);
@@ -97,7 +112,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 		if (selectedItems.contains(item)) {
 			holder.aSwitch.setChecked(true);
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
+			holder.icon
+				.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
 		} else {
 			holder.aSwitch.setChecked(false);
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
@@ -108,18 +124,20 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			public void onClick(View v) {
 				listener.changeProfileStatus(item, holder.aSwitch.isChecked());
 				if (selectedItems.contains(item)) {
-					holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), selectedIconColorRes));
+					holder.icon.setImageDrawable(app.getUIUtilities()
+						.getIcon(item.getSmallIconDark(), selectedIconColorRes));
 				} else {
-					holder.icon.setImageDrawable(app.getUIUtilities().getIcon(item.getSmallIconDark(), R.color.icon_color));
+					holder.icon.setImageDrawable(
+						app.getUIUtilities().getIcon(item.getSmallIconDark(), R.color.icon_color));
 				}
 			}
 		});
 		holder.profileOptions.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					listener.editProfile(item);
-				}
-			});
+			@Override
+			public void onClick(View v) {
+				listener.editProfile(item);
+			}
+		});
 	}
 
 	@Override
@@ -132,10 +150,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	class ProfileViewHolder extends RecyclerView.ViewHolder {
+
 		TextView title, descr;
 		SwitchCompat aSwitch;
 		ImageView icon;
 		LinearLayout profileOptions;
+		View divider;
 
 		ProfileViewHolder(View itemView) {
 			super(itemView);
@@ -144,11 +164,14 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			aSwitch = itemView.findViewById(R.id.compound_button);
 			icon = itemView.findViewById(R.id.icon);
 			profileOptions = itemView.findViewById(R.id.profile_settings);
+			divider = itemView.findViewById(R.id.divider_bottom);
 		}
 	}
 
 	public interface ProfileListener {
+
 		void changeProfileStatus(ApplicationMode item, boolean isSelected);
+
 		void editProfile(ApplicationMode item);
 	}
 }
