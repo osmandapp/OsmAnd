@@ -32,6 +32,7 @@ object OsmandLocationUtils {
 	const val BEARING_PREFIX = "Bearing: "
 	const val SPEED_PREFIX = "Speed: "
 	const val HDOP_PREFIX = "Horizontal precision: "
+	const val BEARING_SUFFIX = "°"
 
 	const val NOW = "now"
 	const val FEW_SECONDS_AGO = "few seconds ago"
@@ -241,19 +242,28 @@ object OsmandLocationUtils {
 					}
 				}
 				s.startsWith(SPEED_PREFIX) -> {
-					val altStr = s.removePrefix(SPEED_PREFIX)
+					val speedStr = s.removePrefix(SPEED_PREFIX)
 					try {
-						val alt = altStr.split(" ").first()
-						res.speed = alt.toDouble()
+						val speed = speedStr.split(" ").first()
+						res.speed = speed.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
+				s.startsWith(BEARING_PREFIX) -> {
+					val bearingStr = s.removePrefix(BEARING_PREFIX)
+					try {
+						val bearing = bearingStr.removeSuffix(BEARING_SUFFIX)
+						res.bearing = bearing.toDouble()
 					} catch (e: Exception) {
 						e.printStackTrace()
 					}
 				}
 				s.startsWith(HDOP_PREFIX) -> {
-					val altStr = s.removePrefix(HDOP_PREFIX)
+					val hdopStr = s.removePrefix(HDOP_PREFIX)
 					try {
-						val alt = altStr.split(" ").first()
-						res.hdop = alt.toDouble()
+						val hdop = hdopStr.split(" ").first()
+						res.hdop = hdop.toDouble()
 					} catch (e: Exception) {
 						e.printStackTrace()
 					}
@@ -336,6 +346,10 @@ object OsmandLocationUtils {
 			entities.add(TdApi.TextEntity(builder.lastIndex, SPEED_PREFIX.length, TdApi.TextEntityTypeBold()))
 			builder.append(String.format(Locale.US, "$SPEED_PREFIX%.1f m/s\n", location.speed))
 		}
+		if (location.bearing > 0) {
+			entities.add(TdApi.TextEntity(builder.lastIndex, BEARING_PREFIX.length, TdApi.TextEntityTypeBold()))
+			builder.append(String.format(Locale.US, "$BEARING_PREFIX%.1f$BEARING_SUFFIX\n", location.bearing))
+		}
 		if (location.hdop != 0.0 && location.speed == 0.0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, HDOP_PREFIX.length, TdApi.TextEntityTypeBold()))
 			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.hdop.toInt()))
@@ -374,6 +388,10 @@ object OsmandLocationUtils {
 		if (location.speed > 0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, SPEED_PREFIX.length, TdApi.TextEntityTypeBold()))
 			builder.append(String.format(Locale.US, "$SPEED_PREFIX%.1f m/s\n", location.speed))
+		}
+		if (location.bearing > 0) {
+			entities.add(TdApi.TextEntity(builder.lastIndex, BEARING_PREFIX.length, TdApi.TextEntityTypeBold()))
+			builder.append(String.format(Locale.US, "$BEARING_PREFIX%.1f$BEARING_SUFFIX\n", location.bearing))
 		}
 		if (location.hdop != 0.0 && location.speed == 0.0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, HDOP_PREFIX.length, TdApi.TextEntityTypeBold()))

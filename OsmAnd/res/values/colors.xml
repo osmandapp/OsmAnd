@@ -258,6 +258,8 @@
 
 	<color name="shadow_color">#33888888</color>
 
+	<color name="compass_control_active">#EE5622</color>
+
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
 

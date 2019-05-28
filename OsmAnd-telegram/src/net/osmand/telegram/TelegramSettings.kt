@@ -43,6 +43,9 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 	12 * 60 * 60L,
 	24 * 60 * 60L
 )
+private val MIN_LOCATION_DISTANCE = listOf(0f, 2.0f, 5.0f, 10.0f, 20.0f, 30.0f, 50.0f)
+private val MIN_LOCATION_ACCURACY = listOf(0f, 1.0f, 2.0f, 5.0f, 10.0f, 15.0f, 20.0f, 50.0f, 100.0f)
+private val MIN_LOCATION_SPEED = listOf(0f, 0.000001f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f)
 
 const val SHARE_TYPE_MAP = "Map"
 const val SHARE_TYPE_TEXT =  "Text"
@@ -53,6 +56,9 @@ private const val SEND_MY_LOC_DEFAULT_INDEX = 6
 private const val STALE_LOC_DEFAULT_INDEX = 0
 private const val LOC_HISTORY_DEFAULT_INDEX = 7
 private const val SHARE_TYPE_DEFAULT_INDEX = 2
+private const val MIN_LOCATION_DISTANCE_INDEX = 0
+private const val MIN_LOCATION_ACCURACY_INDEX = 0
+private const val MIN_LOCATION_SPEED_INDEX = 0
 
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
@@ -68,6 +74,10 @@ private const val SEND_MY_LOC_INTERVAL_KEY = "send_my_loc_interval"
 private const val STALE_LOC_TIME_KEY = "stale_loc_time"
 private const val LOC_HISTORY_TIME_KEY = "loc_history_time"
 private const val SHARE_TYPE_KEY = "share_type"
+
+private const val MIN_LOCATION_DISTANCE_KEY = "min_location_distance"
+private const val MIN_LOCATION_ACCURACY_KEY = "min_location_accuracy"
+private const val MIN_LOCATION_SPEED_KEY = "min_location_speed"
 
 private const val APP_TO_CONNECT_PACKAGE_KEY = "app_to_connect_package"
 
@@ -117,12 +127,17 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var locHistoryTime = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 	var shareTypeValue = SHARE_TYPE_VALUES[SHARE_TYPE_DEFAULT_INDEX]
 
+	var minLocationDistance = MIN_LOCATION_DISTANCE[MIN_LOCATION_DISTANCE_INDEX]
+	var minLocationAccuracy = MIN_LOCATION_ACCURACY[MIN_LOCATION_ACCURACY_INDEX]
+	var minLocationSpeed = MIN_LOCATION_SPEED[MIN_LOCATION_SPEED_INDEX]
+
 	var appToConnectPackage = ""
 		private set
 
 	var liveNowSortType = LiveNowSortType.SORT_BY_DISTANCE
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
+	val gpxLoggingPrefs = listOf(MinLocationDistance(), MinLocationAccuracy(), MinLocationSpeed())
 
 	var batteryOptimisationAsked = false
 
@@ -460,13 +475,18 @@ class TelegramSettings(private val app: TelegramApplication) {
 				if (shareInfo.lastTextSuccessfulSendTime == -1L && shareInfo.lastMapSuccessfulSendTime == -1L
 					&& ((statusChangeTime / 1000 - shareInfo.start) < SHARING_INITIALIZATION_TIME)) {
 					initializing = true
-				} else if (shareInfo.hasSharingError
-					|| (shareInfo.lastSendTextMessageTime - shareInfo.lastTextSuccessfulSendTime > WAITING_TDLIB_TIME)
-					|| (shareInfo.lastSendMapMessageTime - shareInfo.lastMapSuccessfulSendTime > WAITING_TDLIB_TIME)
-				) {
-					sendChatsErrors = true
-					locationTime = Math.max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
-					chatsIds.add(shareInfo.chatId)
+				} else {
+					val textSharingError = shareInfo.lastSendTextMessageTime - shareInfo.lastTextSuccessfulSendTime > WAITING_TDLIB_TIME
+					val mapSharingError = shareInfo.lastSendMapMessageTime - shareInfo.lastMapSuccessfulSendTime > WAITING_TDLIB_TIME
+					if (shareInfo.hasSharingError
+						|| (shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
+						|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
+						|| mapSharingError && (shareTypeValue == SHARE_TYPE_MAP)
+					) {
+						sendChatsErrors = true
+						locationTime = Math.max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
+						chatsIds.add(shareInfo.chatId)
+					}
 				}
 			}
 
@@ -477,7 +497,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			} else if (!initializing) {
 				when {
 					!gpsEnabled -> {
-						locationTime = app.shareLocationHelper.lastLocationUpdateTime
+						locationTime = app.shareLocationHelper.lastLocationUpdateTime / 1000
 						if (locationTime <= 0) {
 							locationTime = getLastSuccessfulSendTime()
 						}
@@ -557,6 +577,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		edit.putLong(STALE_LOC_TIME_KEY, staleLocTime)
 		edit.putLong(LOC_HISTORY_TIME_KEY, locHistoryTime)
 
+		edit.putFloat(MIN_LOCATION_DISTANCE_KEY, minLocationDistance)
+		edit.putFloat(MIN_LOCATION_ACCURACY_KEY, minLocationAccuracy)
+		edit.putFloat(MIN_LOCATION_SPEED_KEY, minLocationSpeed)
+
 		edit.putString(SHARE_TYPE_KEY, shareTypeValue)
 
 		edit.putString(APP_TO_CONNECT_PACKAGE_KEY, appToConnectPackage)
@@ -622,6 +646,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		locHistoryTime = prefs.getLong(LOC_HISTORY_TIME_KEY, locHistoryDef)
 		val shareTypeDef = SHARE_TYPE_VALUES[SHARE_TYPE_DEFAULT_INDEX]
 		shareTypeValue = prefs.getString(SHARE_TYPE_KEY, shareTypeDef)
+
+		val minLocationDistanceDef = MIN_LOCATION_DISTANCE[MIN_LOCATION_DISTANCE_INDEX]
+		minLocationDistance = prefs.getFloat(MIN_LOCATION_DISTANCE_KEY, minLocationDistanceDef)
+		val minLocationPrecisionDef = MIN_LOCATION_ACCURACY[MIN_LOCATION_ACCURACY_INDEX]
+		minLocationAccuracy = prefs.getFloat(MIN_LOCATION_ACCURACY_KEY, minLocationPrecisionDef)
+		val minLocationSpeedDef = MIN_LOCATION_SPEED[MIN_LOCATION_SPEED_INDEX]
+		minLocationSpeed = prefs.getFloat(MIN_LOCATION_SPEED_KEY, minLocationSpeedDef)
 
 		val currentUserId = app.telegramHelper.getCurrentUserId()
 		currentSharingMode = prefs.getString(SHARING_MODE_KEY, if (currentUserId != -1) currentUserId.toString() else "")
@@ -787,7 +818,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	inner class SendMyLocPref : DurationPref(
+	inner class SendMyLocPref : NumericPref(
 		R.drawable.ic_action_share_location,
 		R.string.send_my_location,
 		R.string.send_my_location_desc,
@@ -798,12 +829,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 			OsmandFormatter.getFormattedDuration(app, sendMyLocInterval)
 
 		override fun setCurrentValue(index: Int) {
-			sendMyLocInterval = values[index]
+			sendMyLocInterval = values[index].toLong()
 			app.updateSendLocationInterval()
 		}
+
+		override fun getMenuItems() =
+			values.map { OsmandFormatter.getFormattedDuration(app, it.toLong()) }
 	}
 
-	inner class StaleLocPref : DurationPref(
+	inner class StaleLocPref : NumericPref(
 		R.drawable.ic_action_time_span,
 		R.string.stale_location,
 		R.string.stale_location_desc,
@@ -814,11 +848,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 			OsmandFormatter.getFormattedDuration(app, staleLocTime)
 
 		override fun setCurrentValue(index: Int) {
-			staleLocTime = values[index]
+			staleLocTime = values[index].toLong()
 		}
+
+		override fun getMenuItems() =
+			values.map { OsmandFormatter.getFormattedDuration(app, it.toLong()) }
 	}
 
-	inner class LocHistoryPref : DurationPref(
+	inner class LocHistoryPref : NumericPref(
 		R.drawable.ic_action_location_history,
 		R.string.location_history,
 		R.string.location_history_desc,
@@ -830,12 +867,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		override fun setCurrentValue(index: Int) {
 			val value = values[index]
-			locHistoryTime = value
-			app.telegramHelper.messageActiveTimeSec = value
+			locHistoryTime = value.toLong()
+			app.telegramHelper.messageActiveTimeSec = value.toLong()
 		}
+
+		override fun getMenuItems() =
+			values.map { OsmandFormatter.getFormattedDuration(app, it.toLong()) }
 	}
 
-	inner class ShareTypePref : DurationPref(
+	inner class ShareTypePref : NumericPref(
 		R.drawable.ic_action_location_history,
 		R.string.send_location_as,
 		R.string.send_location_as_descr,
@@ -871,18 +911,84 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	abstract inner class DurationPref(
+	inner class MinLocationDistance : NumericPref(
+		0, R.string.min_logging_distance,
+		R.string.min_logging_distance_descr,
+		MIN_LOCATION_DISTANCE
+	) {
+
+		override fun getCurrentValue() = getFormattedValue(minLocationDistance)
+
+		override fun setCurrentValue(index: Int) {
+			val value = values[index]
+			minLocationDistance = value.toFloat()
+		}
+
+		override fun getMenuItems() = values.map { getFormattedValue(it.toFloat()) }
+
+		private fun getFormattedValue(value: Float): String {
+			return if (value == 0f) app.getString(R.string.shared_string_select)
+			else OsmandFormatter.getFormattedDistance(value, app)
+		}
+	}
+
+	inner class MinLocationAccuracy : NumericPref(
+		0, R.string.min_logging_accuracy,
+		R.string.min_logging_accuracy_descr,
+		MIN_LOCATION_ACCURACY
+	) {
+
+		override fun getCurrentValue() = getFormattedValue(minLocationAccuracy)
+
+		override fun setCurrentValue(index: Int) {
+			val value = values[index]
+			minLocationAccuracy = value.toFloat()
+		}
+
+		override fun getMenuItems() = values.map { getFormattedValue(it.toFloat()) }
+
+		private fun getFormattedValue(value: Float): String {
+			return if (value == 0f) app.getString(R.string.shared_string_select)
+			else OsmandFormatter.getFormattedDistance(value, app)
+		}
+	}
+
+	inner class MinLocationSpeed : NumericPref(
+		0, R.string.min_logging_speed,
+		R.string.min_logging_speed_descr,
+		MIN_LOCATION_SPEED
+	) {
+
+		override fun getCurrentValue() = getFormattedValue(minLocationSpeed)
+
+		override fun setCurrentValue(index: Int) {
+			val value = values[index]
+			minLocationSpeed = value.toFloat()
+		}
+
+		override fun getMenuItems() = values.map { getFormattedValue(it.toFloat()) }
+
+		private fun getFormattedValue(value: Float): String {
+			return when (value) {
+				MIN_LOCATION_SPEED[0] -> app.getString(R.string.shared_string_select)
+				MIN_LOCATION_SPEED[1] -> "> 0"
+				else -> OsmandFormatter.getFormattedSpeed(value, app)
+			}
+		}
+	}
+
+	abstract inner class NumericPref(
 		@DrawableRes val iconId: Int,
 		@StringRes val titleId: Int,
 		@StringRes val descriptionId: Int,
-		val values: List<Long>
+		val values: List<Number>
 	) {
 
 		abstract fun getCurrentValue(): String
 
 		abstract fun setCurrentValue(index: Int)
 
-		open fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it) }
+		abstract fun getMenuItems(): List<String>
 	}
 
 	enum class AppConnect(
