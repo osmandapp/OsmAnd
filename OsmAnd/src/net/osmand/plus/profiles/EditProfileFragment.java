@@ -178,6 +178,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			isDataChanged = true;
 			startIconId = profile.parent.getSmallIconDark();
 			profile.iconId = startIconId;
+			profile.iconStringName = profile.parent.getIconName();
 		} else if (isUserProfile) {
 			title = profile.userProfileTitle;
 			profileNameEt.setText(title);
