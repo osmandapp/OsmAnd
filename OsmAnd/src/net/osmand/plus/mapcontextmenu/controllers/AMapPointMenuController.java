@@ -136,9 +136,9 @@ public class AMapPointMenuController extends MenuController {
 	public CharSequence getAdditionalInfoStr() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			float bearing = getPointBearing();
-			if (bearing != NO_VALUE) {
-				return OsmAndFormatter.getFormattedAzimuth(bearing, activity.getMyApplication());
+			float speed = getPointSpeed();
+			if (speed != NO_VALUE) {
+				return OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
 			}
 		}
 		return super.getAdditionalInfoStr();
@@ -149,9 +149,9 @@ public class AMapPointMenuController extends MenuController {
 	public String getSubtypeStr() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			float speed = getPointSpeed();
-			if (speed != NO_VALUE) {
-				return OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
+			float bearing = getPointBearing();
+			if (bearing != NO_VALUE) {
+				return OsmAndFormatter.getFormattedAzimuth(bearing, activity.getMyApplication());
 			}
 		}
 		return super.getSubtypeStr();
@@ -160,16 +160,16 @@ public class AMapPointMenuController extends MenuController {
 	@Nullable
 	@Override
 	public Drawable getSubtypeIcon() {
-		if (getPointSpeed() != NO_VALUE) {
-			return getIcon(R.drawable.ic_action_speed_16);
+		if (getPointBearing() != NO_VALUE) {
+			return getIcon(R.drawable.ic_action_bearing_16);
 		}
 		return super.getSubtypeIcon();
 	}
 
 	@Override
 	public int getAdditionalInfoIconRes() {
-		if (getPointBearing() != NO_VALUE) {
-			return R.drawable.ic_action_bearing;
+		if (getPointSpeed() != NO_VALUE) {
+			return R.drawable.ic_action_speed_16;
 		}
 		return super.getAdditionalInfoIconRes();
 	}

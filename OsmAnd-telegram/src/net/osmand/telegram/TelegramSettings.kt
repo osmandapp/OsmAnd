@@ -912,8 +912,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	inner class MinLocationDistance : NumericPref(
-		R.drawable.ic_action_location_history,
-		R.string.min_logging_distance,
+		0, R.string.min_logging_distance,
 		R.string.min_logging_distance_descr,
 		MIN_LOCATION_DISTANCE
 	) {
@@ -934,8 +933,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	inner class MinLocationAccuracy : NumericPref(
-		R.drawable.ic_action_location_history,
-		R.string.min_logging_accuracy,
+		0, R.string.min_logging_accuracy,
 		R.string.min_logging_accuracy_descr,
 		MIN_LOCATION_ACCURACY
 	) {
@@ -956,8 +954,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	inner class MinLocationSpeed : NumericPref(
-		R.drawable.ic_action_location_history,
-		R.string.min_logging_speed,
+		0, R.string.min_logging_speed,
 		R.string.min_logging_speed_descr,
 		MIN_LOCATION_SPEED
 	) {
