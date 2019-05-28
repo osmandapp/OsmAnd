@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+
+    <string name="app_mode_skiing">Skiing</string>
     <string name="base_profile_descr_ski">Skiing</string>
     <string name="show_compass_ruler">Show compass ruler</string>
     <string name="hide_compass_ruler">Hide compass ruler</string>
@@ -3157,7 +3159,7 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
-  <string name="app_mode_skiing">Skiing</string>
+
 
 
 </resources>
