@@ -385,25 +385,30 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		saveButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (saveNewProfile()) {
-					activateMode(mode);
-					getActivity().onBackPressed();
+		if (!isNew && !isUserProfile) {
+			saveButtonSV.setEnabled(false);
+			saveButton.setEnabled(false);
+		} else {
+			saveButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (saveNewProfile()) {
+						activateMode(mode);
+						getActivity().onBackPressed();
+					}
 				}
-			}
-		});
+			});
 
-		saveButtonSV.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (saveNewProfile()) {
-					activateMode(mode);
-					getActivity().onBackPressed();
+			saveButtonSV.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (saveNewProfile()) {
+						activateMode(mode);
+						getActivity().onBackPressed();
+					}
 				}
-			}
-		});
+			});
+		}
 
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			@Override
