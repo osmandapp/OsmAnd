@@ -40,23 +40,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/bottom_sheet_cancel_button_height">
 
-
-		<Button
-			android:id="@+id/dismiss_button_v2"
-			android:layout_width="0dp"
-			android:layout_height="@dimen/bottom_sheet_cancel_button_height_small"
-			android:layout_weight="1"
-			android:layout_gravity="center"
-			android:layout_marginStart="@dimen/content_padding_small"
-			android:layout_marginEnd="@dimen/list_content_padding"
-			android:layout_marginLeft="@dimen/content_padding_small"
-			android:layout_marginRight="@dimen/content_padding_small"
-			android:background="@drawable/btn_round_profile_gray"
-			android:text="@string/shared_string_cancel"
-			android:textAllCaps="false"
-			android:visibility="gone"
-			android:textColor="@color/map_widget_blue"/>
-
 		<FrameLayout
 			android:id="@+id/dismiss_button"
 			android:layout_width="0dp"

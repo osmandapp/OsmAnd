@@ -142,17 +142,17 @@
 
 	<!-- ContextMenu -->
 	<dimen name="context_menu_top_shadow_h">20dp</dimen>
-    <dimen name="context_menu_icon_top_padding">17dp</dimen>
-    <dimen name="context_menu_first_line_top_margin">14dp</dimen>
-    <dimen name="context_menu_first_line_bottom_margin">16dp</dimen>
-    <dimen name="context_menu_second_line_top_margin">4dp</dimen>
-    <dimen name="context_menu_top_right_button_min_width">76dp</dimen>
-    <dimen name="context_menu_button_padding_x">10dp</dimen>
-    <dimen name="context_menu_buttons_top_margin">-16dp</dimen>
-    <dimen name="context_menu_buttons_padding_bottom">4dp</dimen>
-    <dimen name="context_menu_progress_min_height">54dp</dimen>
-    <dimen name="context_menu_progress_cancel_button_size">44dp</dimen>
-    <dimen name="context_menu_action_buttons_h">54dp</dimen>
+	<dimen name="context_menu_icon_top_padding">17dp</dimen>
+	<dimen name="context_menu_first_line_top_margin">14dp</dimen>
+	<dimen name="context_menu_first_line_bottom_margin">16dp</dimen>
+	<dimen name="context_menu_second_line_top_margin">4dp</dimen>
+	<dimen name="context_menu_top_right_button_min_width">76dp</dimen>
+	<dimen name="context_menu_button_padding_x">10dp</dimen>
+	<dimen name="context_menu_buttons_top_margin">-16dp</dimen>
+	<dimen name="context_menu_buttons_padding_bottom">4dp</dimen>
+	<dimen name="context_menu_progress_min_height">54dp</dimen>
+	<dimen name="context_menu_progress_cancel_button_size">44dp</dimen>
+	<dimen name="context_menu_action_buttons_h">54dp</dimen>
 	<dimen name="context_menu_sub_info_height">24dp</dimen>
 	<dimen name="context_menu_buttons_bottom_height">48dp</dimen>
 	<dimen name="context_menu_padding_margin_large">20dp</dimen>
@@ -179,14 +179,14 @@
 	<dimen name="context_menu_big_icon_size">40dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
-    <dimen name="fab_margin_right">12dp</dimen>
-    <dimen name="fab_margin_bottom_big">72dp</dimen>
+	<dimen name="fab_margin_right">12dp</dimen>
+	<dimen name="fab_margin_bottom_big">72dp</dimen>
 
-    <!-- TextSizes -->
-    <dimen name="default_list_text_size_large">19sp</dimen>
-    <dimen name="default_list_text_size">16sp</dimen>
-    <dimen name="default_desc_text_size">14sp</dimen>
-    <dimen name="default_sub_text_size">12sp</dimen>
+	<!-- TextSizes -->
+	<dimen name="default_list_text_size_large">19sp</dimen>
+	<dimen name="default_list_text_size">16sp</dimen>
+	<dimen name="default_desc_text_size">14sp</dimen>
+	<dimen name="default_sub_text_size">12sp</dimen>
 	<dimen name="default_sub_text_size_small">10sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 	<dimen name="text_button_text_size">15sp</dimen>
@@ -216,7 +216,7 @@
 	<dimen name="empty_state_text_button_padding_right">60dp</dimen>
 	<dimen name="empty_state_text_button_padding_top">64dp</dimen>
 
-    <dimen name="bottom_sheet_cancel_button_height">48dp</dimen>
+	<dimen name="bottom_sheet_cancel_button_height">48dp</dimen>
 	<dimen name="bottom_sheet_cancel_button_height_small">36dp</dimen>
 	<dimen name="landscape_bottom_sheet_dialog_fragment_width">360dp</dimen>
 
@@ -302,9 +302,9 @@
 	<dimen name="multi_selection_menu_padding_top">13dp</dimen>
 	<dimen name="multi_selection_menu_padding_bottom">15dp</dimen>
 
-    <dimen name="grid_menu_item_width">120dp</dimen>
-    <dimen name="grid_menu_item_bottom_top_margin">16dp</dimen>
-    <dimen name="grid_menu_item_sides_margin">40dp</dimen>
+	<dimen name="grid_menu_item_width">120dp</dimen>
+	<dimen name="grid_menu_item_bottom_top_margin">16dp</dimen>
+	<dimen name="grid_menu_item_sides_margin">40dp</dimen>
 
 	<dimen name="bottom_sheet_menu_peek_height">300dp</dimen>
 	

@@ -78,7 +78,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		listener = new ProfileListener() {
 			@Override
 			public void changeProfileStatus(ApplicationMode item, boolean isSelected) {
-				if(isSelected) {
+				if (isSelected) {
 					selectedModes.add(item);
 				} else {
 					selectedModes.remove(item);
@@ -99,7 +99,8 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		adapter.setListener(listener);
 		allModes = ApplicationMode.allPossibleValues();
 		allModes.remove(ApplicationMode.DEFAULT);
-		adapter.updateItemsList(allModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
+		adapter.updateItemsList(allModes,
+			new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
 		setupHeightAndBackground(getView());
 
 	}
@@ -113,16 +114,12 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
-
-
-
 		final View textButtonView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 			R.layout.bottom_sheet_item_simple, null);
 		TextView textView = (TextView) textButtonView.findViewById(R.id.title);
 
 		int dpPadding = (int) (8 * getResources().getDisplayMetrics().density + 0.5f);
-		textView.setPadding(dpPadding, 0,0,0);
+		textView.setPadding(dpPadding, 0, 0, 0);
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.0f);
 		textView.setTextColor(nightMode
 			? getResources().getColor(R.color.active_buttons_and_links_dark)
@@ -137,9 +134,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				public void onClick(View v) {
 					startActivity(new Intent(getContext(), SettingsProfileActivity.class));
 				}
-			})
-			.create());
-
+			}).create());
 	}
 
 	public void setUpdateMapRouteMenuListener(
@@ -147,7 +142,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		this.updateMapRouteMenuListener = updateMapRouteMenuListener;
 	}
 
-	public interface UpdateMapRouteMenuListener{
+	public interface UpdateMapRouteMenuListener {
 		void updateAppModeMenu();
 	}
 }
