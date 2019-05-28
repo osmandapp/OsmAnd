@@ -43,6 +43,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected int themeRes;
 
 	private LinearLayout itemsContainer;
+	protected int dismissButtonStringRes = R.string.shared_string_cancel;
 
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
@@ -245,7 +246,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@StringRes
 	protected int getDismissButtonTextId() {
-		return R.string.shared_string_cancel;
+		return dismissButtonStringRes;
+	}
+
+	protected void setDismissButtonTextId(int stringRes) {
+		dismissButtonStringRes = stringRes;
 	}
 
 	protected void onDismissButtonClickAction() {
