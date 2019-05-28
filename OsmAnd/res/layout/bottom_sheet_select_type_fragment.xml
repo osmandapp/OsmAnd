@@ -7,33 +7,8 @@
     android:background="?attr/bg_color"
     android:orientation="vertical">
 
-  <TextView
-    android:id="@+id/dialog_title"
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/list_content_padding"
-    android:layout_marginBottom="@dimen/list_content_padding"
-    android:layout_marginStart="@dimen/list_content_padding"
-    android:layout_marginLeft="@dimen/list_content_padding"
-    tools:text="Select navigation type"
-    android:textColor="?attr/main_font_color_basic"
-    android:textSize="@dimen/default_list_text_size"/>
-
-  <TextView
-    android:id="@+id/dialog_description_text"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/list_content_padding"
-    android:paddingStart="@dimen/list_content_padding"
-    android:paddingEnd="@dimen/list_content_padding"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding"
-    android:textSize="@dimen/default_list_text_size"
-    android:visibility="gone"/>
-
   <android.support.v7.widget.RecyclerView
-    android:id="@+id/menu_list_view"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

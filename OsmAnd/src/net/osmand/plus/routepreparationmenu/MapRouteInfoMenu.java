@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -60,6 +62,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
+import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment.UpdateMapRouteMenuListener;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -728,7 +732,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			mainView.findViewById(R.id.app_modes_options).setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					availableProfileDialog();
+					showProfileBottomSheetDialog();
 				}
 			});
 		}
@@ -743,39 +747,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateApplicationModesOptions();
 	}
 
-	private void availableProfileDialog() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			AlertDialog.Builder b = new AlertDialog.Builder(mapActivity);
-			final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-			final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
-			modes.remove(ApplicationMode.DEFAULT);
-			final Set<ApplicationMode> selected = new LinkedHashSet<>(ApplicationMode.values(mapActivity.getMyApplication()));
-			selected.remove(ApplicationMode.DEFAULT);
-			View v = AppModeDialog.prepareAppModeView(mapActivity, modes, selected, null, false, true, false,
-					new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
-							for (ApplicationMode mode : modes) {
-								if (selected.contains(mode)) {
-									vls.append(mode.getStringKey()).append(",");
-								}
-							}
-							settings.AVAILABLE_APP_MODES.set(vls.toString());
-						}
-					});
-			b.setTitle(R.string.profile_settings);
-			b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					updateApplicationModes();
-				}
-			});
-			b.setView(v);
-			b.show();
-		}
+	private void showProfileBottomSheetDialog() {
+		final AppModesBottomSheetDialogFragment fragment = new AppModesBottomSheetDialogFragment();
+		fragment.setUpdateMapRouteMenuListener(new UpdateMapRouteMenuListener() {
+			@Override
+			public void updateAppModeMenu() {
+				updateApplicationModes();
+			}
+		});
+		getMapActivity().getSupportFragmentManager().beginTransaction()
+			.add(fragment, "app_profile_settings").commitAllowingStateLoss();
 	}
 
 	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {

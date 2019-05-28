@@ -5,11 +5,18 @@ import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ICON;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -25,19 +32,23 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	public static final String TAG = "SelectProfileBottomSheetDialogFragment";
 
 	public final static String DIALOG_TYPE = "dialog_type";
-	public final static String TYPE_APP_PROFILE = "base_profiles";
+	public final static String TYPE_BASE_APP_PROFILE = "base_profiles";
 	public final static String TYPE_NAV_PROFILE = "routing_profiles";
 	public final static String TYPE_ICON = "icon_type";
 	public final static String SELECTED_KEY = "selected_base";
 
 	String type;
+	int bottomButtonText = R.string.shared_string_cancel;
 
 	private SelectProfileListener listener;
 
-	private List<ProfileDataObject> profiles = new ArrayList<>();
+	private final List<ProfileDataObject> profiles = new ArrayList<>();
+	private final List<ApplicationMode> appModes = new ArrayList<>();
+	private final Set<ApplicationMode> activeAppModes = new HashSet<>();
+
 	private List<IconResWithDescr> icons;
 	private String selectedItemKey;
-	private int selectedIconRes;
+	private String selectedIconRes;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,13 +58,12 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (args != null && args.get(DIALOG_TYPE) != null) {
 			type = args.getString(DIALOG_TYPE);
 			selectedItemKey = args.getString(SELECTED_KEY, null);
-
 			if (type.equals(TYPE_NAV_PROFILE)) {
 				profiles.addAll(EditProfileFragment.getRoutingProfiles(app));
-			} else if (type.equals(TYPE_APP_PROFILE)) {
+			} else if (type.equals(TYPE_BASE_APP_PROFILE)) {
 				profiles.addAll(SettingsProfileFragment.getBaseProfiles(app));
 			} else if (type.equals(TYPE_ICON)) {
-				selectedIconRes = args.getInt(SELECTED_ICON, -1);
+				selectedIconRes = args.getString(SELECTED_ICON, "");
 				icons = getProfileIcons();
 			} else {
 				LOG.error("Check intent data!");
@@ -63,9 +73,21 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		view.findViewById(R.id.dismiss_button).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onDismissButtonClickAction();
+				dismiss();
+			}
+		});
+	}
+
+	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 
-		if (type.equals(TYPE_APP_PROFILE)) {
+		if (type.equals(TYPE_BASE_APP_PROFILE)) {
 			items.add(new TitleItem(getString(R.string.select_base_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
@@ -99,7 +121,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 								getListener();
 							}
 							if (listener != null) {
-								listener.onSelectedType(pos);
+								listener.onSelectedType(pos, "");
 							}
 							dismiss();
 						}
@@ -140,7 +162,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 								getListener();
 							}
 							if (listener != null) {
-								listener.onSelectedType(pos);
+								listener.onSelectedType(pos, "");
 							}
 							dismiss();
 						}
@@ -151,19 +173,22 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			items.add(new TitleItem(getString(R.string.select_icon_profile_dialog_title)));
 			for (final IconResWithDescr icon : icons) {
 				Drawable drawableIcon;
-				boolean isSelected = icon.resId == selectedIconRes;
+				boolean isSelected = icon.resStringId.equals(selectedIconRes);
+				int iconRes = ApplicationMode
+					.getIconResFromName(getMyApplication(), icon.resStringId,
+						getMyApplication().getPackageName());
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(icon.resId, nightMode
+						.getIcon(iconRes, nightMode
 							? R.color.active_buttons_and_links_dark
 							: R.color.active_buttons_and_links_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(icon.resId, R.color.icon_color);
+						.getIcon(iconRes, R.color.icon_color);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(icon.resId == selectedIconRes)
+					.setChecked(icon.resStringId.equals(selectedIconRes))
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
 						: null)
@@ -177,7 +202,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 								getListener();
 							}
 							if (listener != null) {
-								listener.onSelectedType(icon.resId);
+								listener.onSelectedType(icon.resId, icon.resStringId);
 							}
 							dismiss();
 						}
@@ -188,11 +213,12 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 	}
 
+
 	private void getListener() {
 		if (getActivity() != null && getActivity() instanceof  EditProfileActivity) {
 			EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
 				.findFragmentByTag(EditProfileActivity.EDIT_PROFILE_FRAGMENT_TAG);
-			if (type.equals(TYPE_APP_PROFILE)) {
+			if (type.equals(TYPE_BASE_APP_PROFILE)) {
 				listener = f.getBaseProfileListener();
 			} else if (type.equals(TYPE_NAV_PROFILE)) {
 				listener = f.getNavProfileListener();
@@ -208,32 +234,34 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private List<IconResWithDescr> getProfileIcons() {
 		List<IconResWithDescr> icons = new ArrayList<>();
-		icons.add(new IconResWithDescr(R.drawable.ic_action_car_dark, R.string.rendering_value_car_name,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_bicycle_dark, R.string.rendering_value_bicycle_name,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_pedestrian_dark, R.string.rendering_value_pedestrian_name,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_bus_dark, R.string.app_mode_bus,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_truck_dark, R.string.app_mode_truck,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking,false));
-		icons.add(new IconResWithDescr(R.drawable.ic_plugin_skimaps, R.string.routing_profile_ski, false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_car_dark, R.string.rendering_value_car_name, "ic_action_car_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_bicycle_dark, R.string.rendering_value_bicycle_name, "ic_action_bicycle_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_pedestrian_dark, R.string.rendering_value_pedestrian_name,"ic_action_pedestrian_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark",false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_plugin_skimaps, R.string.routing_profile_ski, "ic_plugin_skimaps", false));
 		return icons;
 	}
 
 	interface SelectProfileListener {
-		void onSelectedType(int pos);
+		void onSelectedType(int pos, String stringRes);
 	}
 
 	private class IconResWithDescr {
 		private int resId;
 		private int titleId;
+		private String resStringId;
 		private boolean isSelected;
 
-		public IconResWithDescr(int resId, int titleId, boolean isSelected) {
+		public IconResWithDescr(int resId, int titleId, String resStringId, boolean isSelected) {
 			this.resId = resId;
 			this.titleId = titleId;
 			this.isSelected = isSelected;
+			this.resStringId = resStringId;
 		}
 	}
 

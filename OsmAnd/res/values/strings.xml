@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="app_mode_skiing">Skiing</string>
+    <string name="base_profile_descr_ski">Skiing</string>
     <string name="show_compass_ruler">Show compass ruler</string>
     <string name="hide_compass_ruler">Hide compass ruler</string>
     <string name="select_icon_profile_dialog_title">Select icon</string>
@@ -35,7 +37,7 @@
     <string name="select_base_profile_dialog_message">Custom Application Profile should be based on one of the default App Profiles. Selected Profile defines basic settings: setup of Widgets, units of speed and distance. In string below Profile\'s name, you could learn which Navigation Profiles are suitable for each Application Profile.</string>
     <string name="select_nav_profile_dialog_title">Select navigation type</string>
     <string name="base_profile_descr_car">Car, Truck, Motorcycle</string>
-    <string name="base_profile_descr_bicycle">MBT, Moped, Skiing, Horse</string>
+    <string name="base_profile_descr_bicycle">MTB, Moped, Horse</string>
     <string name="base_profile_descr_pedestrian">Walking, Hiking, Running</string>
     <string name="base_profile_descr_public_transport">All PT types</string>
     <string name="base_profile_descr_boat">Ship, Rowing, Sailing</string>
@@ -3157,6 +3159,7 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
+
 
 
 </resources>
