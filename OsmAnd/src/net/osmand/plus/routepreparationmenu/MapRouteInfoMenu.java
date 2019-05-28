@@ -1659,9 +1659,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	public void updateFromIcon(View parentView) {
 		MapActivity mapActivity = getMapActivity();
+
+		int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)
+			? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
+
 		if (mapActivity != null) {
 			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
-					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint));
+					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
+						? locationIconResByStatus : R.drawable.list_startpoint));
 		}
 	}
 

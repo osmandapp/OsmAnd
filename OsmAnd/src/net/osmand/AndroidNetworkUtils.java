@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
+import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -15,18 +16,23 @@ import org.apache.commons.logging.Log;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 public class AndroidNetworkUtils {
 
@@ -213,6 +219,88 @@ public class AndroidNetworkUtils {
 			LOG.error("Cannot download image : " + url, e);
 		}
 		return res;
+	}
+
+	private static final String BOUNDARY = "CowMooCowMooCowCowCow";
+
+	public static String uploadFile(String urlText, File file, boolean gzip, Map<String, String> additionalParams) throws IOException {
+		return uploadFile(urlText, new FileInputStream(file), file.getName(), gzip, additionalParams);
+	}
+
+	public static String uploadFile(String urlText, InputStream inputStream, String fileName, boolean gzip, Map<String, String> additionalParams) {
+		URL url;
+		try {
+			boolean firstPrm = !urlText.contains("?");
+			StringBuilder sb = new StringBuilder(urlText);
+			for (String key : additionalParams.keySet()) {
+				sb.append(firstPrm ? "?" : "&").append(key).append("=").append(URLEncoder.encode(additionalParams.get(key), "UTF-8"));
+				firstPrm = false;
+			}
+			urlText = sb.toString();
+
+			LOG.info("Start uploading file to " + urlText + " " + fileName);
+			url = new URL(urlText);
+
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+			conn.setRequestProperty("User-Agent", "OsmAnd");
+
+			OutputStream ous = conn.getOutputStream();
+			ous.write(("--" + BOUNDARY + "\r\n").getBytes());
+			if (gzip) {
+				fileName += ".gz";
+			}
+			ous.write(("content-disposition: form-data; name=\"file\"; filename=\"" + fileName + "\"\r\n").getBytes());
+			ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes());
+
+			BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
+			ous.flush();
+			if (gzip) {
+				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
+				Algorithms.streamCopy(bis, gous);
+				gous.flush();
+				gous.finish();
+			} else {
+				Algorithms.streamCopy(bis, ous);
+			}
+
+			ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes());
+			ous.flush();
+			Algorithms.closeStream(bis);
+			Algorithms.closeStream(ous);
+
+			LOG.info("Finish uploading file " + fileName);
+			LOG.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
+			if (conn.getResponseCode() != 200) {
+				return conn.getResponseMessage();
+			}
+			InputStream is = conn.getInputStream();
+			StringBuilder responseBody = new StringBuilder();
+			if (is != null) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+				String s;
+				boolean first = true;
+				while ((s = in.readLine()) != null) {
+					if (first) {
+						first = false;
+					} else {
+						responseBody.append("\n");
+					}
+					responseBody.append(s);
+
+				}
+				is.close();
+			}
+			String response = responseBody.toString();
+			LOG.info("Response : " + response);
+			return null;
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+			return e.getMessage();
+		}
 	}
 
 	private static void showToast(OsmandApplication ctx, String message) {

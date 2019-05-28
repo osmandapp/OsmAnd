@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+
+    <string name="show_compass_ruler">Show compass ruler</string>
+    <string name="hide_compass_ruler">Hide compass ruler</string>
     <string name="base_profile_descr_ski">Skiing</string>
     <string name="select_icon_profile_dialog_title">Select icon</string>
     <string name="settings_routing_mode_string">Mode: %s</string>

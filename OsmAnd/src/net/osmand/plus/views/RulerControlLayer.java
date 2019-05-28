@@ -3,17 +3,23 @@ package net.osmand.plus.views;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -36,6 +42,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int TEXT_SIZE = 14;
 	private static final int DISTANCE_TEXT_SIZE = 16;
+	private static final int COMPASS_CIRCLE_ID = 2;
 
 	private final MapActivity mapActivity;
 	private OsmandApplication app;
@@ -74,10 +81,25 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Paint bitmapPaint;
+	private Paint triangleHeadingPaint;
+	private Paint triangleNorthPaint;
+	private Paint redLinesPaint;
+	private Paint blueLinesPaint;
+
 	private RenderingLineAttributes lineAttrs;
 	private RenderingLineAttributes lineFontAttrs;
 	private RenderingLineAttributes circleAttrs;
 	private RenderingLineAttributes circleAttrsAlt;
+
+	private Path compass = new Path();
+	private Path arrow = new Path();
+	private Path arrowArc = new Path();
+	private Path redCompassLines = new Path();
+
+	private double[] degrees = new double[72];
+	private int[] arcColors = {Color.parseColor("#00237BFF"), Color.parseColor("#237BFF"), Color.parseColor("#00237BFF")};
+
+	private float cachedHeading = 0;
 
 	private Handler handler;
 
@@ -118,6 +140,14 @@ public class RulerControlLayer extends OsmandMapLayer {
 		bitmapPaint.setDither(true);
 		bitmapPaint.setFilterBitmap(true);
 
+		int colorNorthArrow = ContextCompat.getColor(app, R.color.compass_control_active);
+		int colorHeadingArrow = ContextCompat.getColor(app, R.color.active_buttons_and_links_light);
+
+		triangleNorthPaint = initPaintWithStyle(Style.FILL, colorNorthArrow);
+		triangleHeadingPaint = initPaintWithStyle(Style.FILL, colorHeadingArrow);
+		redLinesPaint = initPaintWithStyle(Style.STROKE, colorNorthArrow);
+		blueLinesPaint = initPaintWithStyle(Style.STROKE, colorHeadingArrow);
+
 		lineAttrs = new RenderingLineAttributes("rulerLine");
 
 		float circleTextSize = TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
@@ -141,6 +171,18 @@ public class RulerControlLayer extends OsmandMapLayer {
 				view.refreshMap();
 			}
 		};
+
+		for (int i = 0; i < 72; i++) {
+			degrees[i] = Math.toRadians(i * 5);
+		}
+	}
+
+	private Paint initPaintWithStyle(Paint.Style style, int color) {
+		Paint paint = new Paint();
+		paint.setStyle(style);
+		paint.setColor(color);
+		paint.setAntiAlias(true);
+		return paint;
 	}
 
 	@Override
@@ -190,6 +232,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 			final QuadPoint center = tb.getCenterPixelPoint();
 			final RulerMode mode = app.getSettings().RULER_MODE.get();
+			boolean showCompass = app.getSettings().SHOW_COMPASS_CONTROL_RULER.get();
 			final long currentTime = System.currentTimeMillis();
 
 			if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
@@ -226,9 +269,17 @@ public class RulerControlLayer extends OsmandMapLayer {
 			}
 			if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 				updateData(tb, center);
+				if (showCompass) {
+					updateHeading();
+					resetDrawingPaths();
+				}
 				RenderingLineAttributes attrs = mode == RulerMode.FIRST ? circleAttrs : circleAttrsAlt;
 				for (int i = 1; i <= cacheDistances.size(); i++) {
-					drawCircle(canvas, tb, i, center, attrs);
+					if (showCompass && i == COMPASS_CIRCLE_ID) {
+						drawCompassCircle(canvas, tb, center, attrs);
+					} else {
+						drawCircle(canvas, tb, i, center, attrs);
+					}
 				}
 			}
 		}
@@ -237,6 +288,20 @@ public class RulerControlLayer extends OsmandMapLayer {
 	public boolean rulerModeOn() {
 		return mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
 				rightWidgetsPanel.getVisibility() == View.VISIBLE;
+	}
+
+	private void updateHeading() {
+		Float heading = mapActivity.getMapViewTrackingUtilities().getHeading();
+		if (heading != null && heading != cachedHeading) {
+			cachedHeading = heading;
+		}
+	}
+
+	private void resetDrawingPaths() {
+		redCompassLines.reset();
+		arrowArc.reset();
+		compass.reset();
+		arrow.reset();
 	}
 
 	private void refreshMapDelayed() {
@@ -293,7 +358,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode,
-								RulerMode mode) {
+	                            RulerMode mode) {
 		canvas.rotate(-tb.getRotate(), center.x, center.y);
 		if (nightMode || mode == RulerMode.SECOND) {
 			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2,
@@ -391,40 +456,198 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
-							RenderingLineAttributes attrs) {
+	                        RenderingLineAttributes attrs) {
 		if (!tb.isZoomAnimated()) {
-			Rect bounds = new Rect();
+			float circleRadius = radius * circleNumber;
 			String text = cacheDistances.get(circleNumber - 1);
-			attrs.paint2.getTextBounds(text, 0, text.length(), bounds);
-
-			// coords of left or top text
-			float x1 = 0;
-			float y1 = 0;
-			// coords of right or bottom text
-			float x2 = 0;
-			float y2 = 0;
-
-			if (textSide == TextSide.VERTICAL) {
-				x1 = center.x - bounds.width() / 2;
-				y1 = center.y - radius * circleNumber + bounds.height() / 2;
-				x2 = center.x - bounds.width() / 2;
-				y2 = center.y + radius * circleNumber + bounds.height() / 2;
-			} else if (textSide == TextSide.HORIZONTAL) {
-				x1 = center.x - radius * circleNumber - bounds.width() / 2;
-				y1 = center.y + bounds.height() / 2;
-				x2 = center.x + radius * circleNumber - bounds.width() / 2;
-				y2 = center.y + bounds.height() / 2;
-			}
+			float[] textCoords = calculateDistanceTextCoords(text, circleRadius, center, attrs);
 
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 			canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.shadowPaint);
 			canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.paint);
-			canvas.drawText(text, x1, y1, attrs.paint3);
-			canvas.drawText(text, x1, y1, attrs.paint2);
-			canvas.drawText(text, x2, y2, attrs.paint3);
-			canvas.drawText(text, x2, y2, attrs.paint2);
+			drawTextCoords(canvas, text, textCoords, attrs);
 			canvas.rotate(tb.getRotate(), center.x, center.y);
 		}
+	}
+
+	private void drawTextCoords(Canvas canvas, String text, float[] textCoords, RenderingLineAttributes attrs) {
+		canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint3);
+		canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint2);
+		canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint3);
+		canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint2);
+	}
+
+	private float[] calculateDistanceTextCoords(String text, float drawingTextRadius, QuadPoint center, RenderingLineAttributes attrs) {
+		Rect bounds = new Rect();
+		attrs.paint2.getTextBounds(text, 0, text.length(), bounds);
+
+		// coords of left or top text
+		float x1 = 0;
+		float y1 = 0;
+		// coords of right or bottom text
+		float x2 = 0;
+		float y2 = 0;
+
+		if (textSide == TextSide.VERTICAL) {
+			x1 = center.x - bounds.width() / 2;
+			y1 = center.y - drawingTextRadius + bounds.height() / 2;
+			x2 = center.x - bounds.width() / 2;
+			y2 = center.y + drawingTextRadius + bounds.height() / 2;
+		} else if (textSide == TextSide.HORIZONTAL) {
+			x1 = center.x - drawingTextRadius - bounds.width() / 2;
+			y1 = center.y + bounds.height() / 2;
+			x2 = center.x + drawingTextRadius - bounds.width() / 2;
+			y2 = center.y + bounds.height() / 2;
+		}
+		return new float[]{x1, y1, x2, y2};
+	}
+
+	private void drawCompassCircle(Canvas canvas, RotatedTileBox tileBox, QuadPoint center,
+	                               RenderingLineAttributes attrs) {
+		if (!tileBox.isZoomAnimated()) {
+			float radiusLength = radius * COMPASS_CIRCLE_ID;
+			float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
+
+			updateArcShader(radiusLength, center);
+			updateCompassPaths(center, innerRadiusLength, radiusLength);
+			drawCardinalDirections(canvas, center, radiusLength, tileBox, attrs);
+
+			redLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth());
+			blueLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth());
+
+			canvas.drawPath(compass, attrs.shadowPaint);
+			canvas.drawPath(compass, attrs.paint);
+			canvas.drawPath(redCompassLines, redLinesPaint);
+
+			canvas.rotate(cachedHeading, center.x, center.y);
+			canvas.drawPath(arrowArc, blueLinesPaint);
+			canvas.rotate(-cachedHeading, center.x, center.y);
+
+			canvas.drawPath(arrow, attrs.shadowPaint);
+			canvas.drawPath(arrow, triangleNorthPaint);
+
+			canvas.rotate(cachedHeading, center.x, center.y);
+			canvas.drawPath(arrow, attrs.shadowPaint);
+			canvas.drawPath(arrow, triangleHeadingPaint);
+			canvas.rotate(-cachedHeading, center.x, center.y);
+
+			String text = cacheDistances.get(COMPASS_CIRCLE_ID - 1);
+			float[] textCoords = calculateDistanceTextCoords(text, radiusLength + AndroidUtils.dpToPx(app, 16), center, attrs);
+			canvas.rotate(-tileBox.getRotate(), center.x, center.y);
+			drawTextCoords(canvas, text, textCoords, attrs);
+			canvas.rotate(tileBox.getRotate(), center.x, center.y);
+		}
+	}
+
+	private void updateCompassPaths(QuadPoint center, float innerRadiusLength, float radiusLength) {
+		compass.addCircle(center.x, center.y, radiusLength, Path.Direction.CCW);
+
+		arrowArc.addArc(new RectF(center.x - radiusLength, center.y - radiusLength, center.x + radiusLength, center.y + radiusLength), -45, -90);
+
+		for (int i = 0; i < degrees.length; i++) {
+			double degree = degrees[i];
+			float x = (float) Math.cos(degree);
+			float y = -(float) Math.sin(degree);
+
+			float lineStartX = center.x + x * innerRadiusLength;
+			float lineStartY = center.y + y * innerRadiusLength;
+
+			float lineLength = getCompassLineHeight(i);
+
+			float lineStopX = center.x + x * (innerRadiusLength - lineLength);
+			float lineStopY = center.y + y * (innerRadiusLength - lineLength);
+
+			if (i == 18) {
+				float shortLineMargin = AndroidUtils.dpToPx(app, 5.66f);
+				float shortLineHeight = AndroidUtils.dpToPx(app, 2.94f);
+				float startY = center.y + y * (radiusLength - shortLineMargin);
+				float stopY = center.y + y * (radiusLength - shortLineMargin - shortLineHeight);
+
+				compass.moveTo(center.x, startY);
+				compass.lineTo(center.x, stopY);
+
+				float firstPointY = center.y + y * (radiusLength + AndroidUtils.dpToPx(app, 5));
+
+				float secondPointX = center.x - AndroidUtils.dpToPx(app, 4);
+				float secondPointY = center.y + y * (radiusLength - AndroidUtils.dpToPx(app, 2));
+
+				float thirdPointX = center.x + AndroidUtils.dpToPx(app, 4);
+				float thirdPointY = center.y + y * (radiusLength - AndroidUtils.dpToPx(app, 2));
+
+				arrow.moveTo(center.x, firstPointY);
+				arrow.lineTo(secondPointX, secondPointY);
+				arrow.lineTo(thirdPointX, thirdPointY);
+				arrow.lineTo(center.x, firstPointY);
+				arrow.close();
+			} else {
+				compass.moveTo(lineStartX, lineStartY);
+				compass.lineTo(lineStopX, lineStopY);
+			}
+			if (i % 9 == 0 && i % 6 != 0) {
+				redCompassLines.moveTo(lineStartX, lineStartY);
+				redCompassLines.lineTo(lineStopX, lineStopY);
+			}
+		}
+	}
+
+	private float getCompassLineHeight(int index) {
+		if (index % 6 == 0) {
+			return AndroidUtils.dpToPx(app, 8);
+		} else if (index % 9 == 0 || index % 2 != 0) {
+			return AndroidUtils.dpToPx(app, 3);
+		} else {
+			return AndroidUtils.dpToPx(app, 6);
+		}
+	}
+
+	private void drawCardinalDirections(Canvas canvas, QuadPoint center, float radiusLength, RotatedTileBox tileBox, RenderingLineAttributes attrs) {
+		float textMargin = AndroidUtils.dpToPx(app, 14);
+		attrs.paint2.setTextAlign(Paint.Align.CENTER);
+		attrs.paint3.setTextAlign(Paint.Align.CENTER);
+
+		for (int i = 0; i < degrees.length; i += 9) {
+			String cardinalDirection = getCardinalDirection(i);
+			if (cardinalDirection != null) {
+				float textWidth = AndroidUtils.getTextWidth(attrs.paint2.getTextSize(), cardinalDirection);
+
+				canvas.save();
+				canvas.translate(center.x, center.y);
+				canvas.rotate(i * 5 + 90);
+				canvas.translate(0, radiusLength - textMargin - textWidth / 2);
+				canvas.rotate(-i * 5 - tileBox.getRotate() - 90);
+
+				canvas.drawText(cardinalDirection, 0, 0, attrs.paint3);
+				canvas.drawText(cardinalDirection, 0, 0, attrs.paint2);
+				canvas.restore();
+			}
+		}
+	}
+
+	private void updateArcShader(float radiusLength, QuadPoint center) {
+		float arcLength = (float) (2 * Math.PI * radiusLength * (90f / 360));
+		LinearGradient shader = new LinearGradient((float) (center.x - arcLength * 0.25), center.y, (float) (center.x + arcLength * 0.25), center.y, arcColors, null, Shader.TileMode.CLAMP);
+		blueLinesPaint.setShader(shader);
+	}
+
+	private String getCardinalDirection(int i) {
+		if (i == 0) {
+			return "E";
+		} else if (i == 9) {
+			return "NE";
+		} else if (i == 18) {
+			return "N";
+		} else if (i == 27) {
+			return "NW";
+		} else if (i == 36) {
+			return "W";
+		} else if (i == 45) {
+			return "SW";
+		} else if (i == 54) {
+			return "S";
+		} else if (i == 63) {
+			return "SE";
+		}
+		return null;
 	}
 
 	private enum TextSide {
