@@ -402,7 +402,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 						&& isDownlodingPermitted(ctx.getMyApplication().getSettings())) {
 					collapseBanner();
 				} else {
-					ctx.getMyApplication().logEvent(ctx, "click_free_dialog");
+					ctx.getMyApplication().logEvent("click_free_dialog");
 					ChoosePlanDialogFragment.showFreeVersionInstance(ctx.getSupportFragmentManager());
 				}
 			}

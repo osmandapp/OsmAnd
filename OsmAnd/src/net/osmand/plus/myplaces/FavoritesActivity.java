@@ -58,7 +58,7 @@ public class FavoritesActivity extends TabActivity {
 		app.applyTheme(this);
 		super.onCreate(icicle);
 
-		app.logEvent(this, "myplaces_open");
+		app.logEvent("myplaces_open");
 
 		importHelper = new ImportHelper(this, getMyApplication(), null);
 

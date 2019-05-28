@@ -1966,7 +1966,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return false;
 			}
 
-			mapActivity.getMyApplication().logEvent(mapActivity, "search_open");
+			mapActivity.getMyApplication().logEvent("search_open");
 
 			Bundle bundle = new Bundle();
 			if (object != null) {

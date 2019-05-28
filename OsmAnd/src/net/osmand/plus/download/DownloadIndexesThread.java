@@ -3,7 +3,6 @@ package net.osmand.plus.download;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -35,7 +34,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.helpers.DatabaseHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 
@@ -264,7 +262,7 @@ public class DownloadIndexesThread {
 			}	
 		}
 		if (uiActivity instanceof Activity) {
-			app.logEvent((Activity) uiActivity, "download_files");
+			app.logEvent("download_files");
 		}
 		for(IndexItem item : items) {
 			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
@@ -279,7 +277,8 @@ public class DownloadIndexesThread {
 	}
 
 	public void cancelDownload(IndexItem item) {
-		if(currentDownloadingItem == item) {
+		app.logMapDownloadEvent("cancel", item);
+		if (currentDownloadingItem == item) {
 			downloadFileHelper.setInterruptDownloading(true);
 		} else {
 			indexItemDownloading.remove(item);
@@ -291,6 +290,7 @@ public class DownloadIndexesThread {
 		if (items != null) {
 			boolean updateProgress = false;
 			for (IndexItem item : items) {
+				app.logMapDownloadEvent("cancel", item);
 				if (currentDownloadingItem == item) {
 					downloadFileHelper.setInterruptDownloading(true);
 				} else {
@@ -532,9 +532,9 @@ public class DownloadIndexesThread {
 						}
 						setTag(item);
 						boolean result = downloadFile(item, filesToReindex, forceWifi);
-						checkDownload(item);
 						success = result || success;
 						if (result) {
+							checkDownload(item);
 							if (DownloadActivityType.isCountedInDownloads(item)) {
 								downloads.set(downloads.get() + 1);
 							}
@@ -664,6 +664,7 @@ public class DownloadIndexesThread {
 					LOG.error("Copy exception", e);
 				}
 			} else {
+				app.logMapDownloadEvent("start", item);
 				res = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
 			}
 			return res;
@@ -677,6 +678,7 @@ public class DownloadIndexesThread {
 	}
 
 	private void checkDownload(IndexItem item) {
+		app.logMapDownloadEvent("done", item);
 		Map<String, String> params = new HashMap<>();
 		params.put("file_name", item.fileName);
 		params.put("file_size", item.size);

@@ -1036,7 +1036,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> DO_NOT_SHOW_STARTUP_MESSAGES = new BooleanPreference("do_not_show_startup_messages", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> DO_NOT_USE_ANIMATIONS = new BooleanPreference("do_not_use_animations", false).makeGlobal().cache();
-	public final OsmandPreference<Boolean> DO_NOT_SEND_ANONYMOUS_APP_USAGE = new BooleanPreference("do_not_send_anonymous_app_usage", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> SEND_ANONYMOUS_MAP_DOWNLOADS_DATA = new BooleanPreference("send_anonymous_map_downloads_data", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> SEND_ANONYMOUS_APP_USAGE_DATA = new BooleanPreference("send_anonymous_app_usage_data", false).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference("map_empty_state_allowed", true).makeGlobal().cache();
 
