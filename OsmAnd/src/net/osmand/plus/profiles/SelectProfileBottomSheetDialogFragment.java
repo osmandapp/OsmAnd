@@ -213,6 +213,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 	}
 
+
 	private void getListener() {
 		if (getActivity() != null && getActivity() instanceof  EditProfileActivity) {
 			EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
