@@ -311,6 +311,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return layers;
 	}
 
+	public AidlMapLayer getAidlMapLayer(String layerId) {
+		for (OsmandMapLayer layer : layers) {
+			if (layer instanceof AidlMapLayer) {
+				AidlMapLayer aidlMapLayer = (AidlMapLayer) layer;
+				if (aidlMapLayer.getLayerId().equals(layerId)) {
+					return aidlMapLayer;
+				}
+			}
+		}
+		return null;
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T extends OsmandMapLayer> T getLayerByClass(Class<T> cl) {
 		for (OsmandMapLayer lr : layers) {
