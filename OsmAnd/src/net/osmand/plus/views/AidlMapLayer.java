@@ -136,6 +136,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
+		String selectedPointId = getSelectedContextMenuPointId();
 		for (AMapPoint point : aidlLayer.getPoints()) {
 			ALatLon l = point.getLocation();
 			if (l != null) {
@@ -153,7 +154,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 						}
 					}
 					displayedPoints.add(point);
-					drawPoint(canvas, x, y, tileBox, point, image);
+					boolean selected = selectedPointId != null && selectedPointId.equals(point.getId());
+					drawPoint(canvas, x, y, tileBox, point, image, selected);
 				}
 			}
 		}
@@ -168,12 +170,11 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return aidlLayer.getId();
 	}
 
-	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image) {
+	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image, boolean selected) {
 		if (image == null) {
 			image = placeholder;
 		}
-		boolean contextMenuOpenForPoint = contextMenuOpenForPoint(point);
-		if (contextMenuOpenForPoint) {
+		if (selected) {
 			drawBigIcon(canvas, x, y, image, bigIconBgSelected);
 		} else if (pointsType == PointsType.STANDARD) {
 			int radius = getRadiusPoi(tb);
@@ -201,14 +202,14 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		canvas.drawBitmap(image, null, getDstRect(x, imageCenterY, bigIconSize / 2), bitmapPaint);
 	}
 
-	private boolean contextMenuOpenForPoint(AMapPoint point) {
+	private String getSelectedContextMenuPointId() {
 		MapContextMenu mapContextMenu = map.getContextMenu();
 		Object object = mapContextMenu.getObject();
-		if (!mapContextMenu.isVisible() || !(object instanceof AMapPoint)) {
-			return false;
+		if (mapContextMenu.isVisible() && object instanceof AMapPoint) {
+			AMapPoint aMapPoint = (AMapPoint) object;
+			return aMapPoint.getId();
 		}
-		AMapPoint oldPoint = (AMapPoint) object;
-		return oldPoint.getLayerId().equals(getLayerId()) && oldPoint.getId().equals(point.getId());
+		return null;
 	}
 
 	private void drawColoredBitmap(Canvas canvas, int x, int y, Bitmap bitmap, int color) {

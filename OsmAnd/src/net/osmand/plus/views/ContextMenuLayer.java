@@ -210,12 +210,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				y = r.getY();
 			} else if (selectedObject instanceof AMapPoint) {
 				AMapPoint mapPoint = (AMapPoint) selectedObject;
-				String imageUri = mapPoint.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
-				if (!TextUtils.isEmpty(imageUri)) {
-					AidlMapLayer aidlLayer = view.getAidlMapLayer(mapPoint.getLayerId());
-					if (aidlLayer != null) {
-						markerCustomized = true;
-					}
+				AidlMapLayer aidlLayer = view.getAidlMapLayer(mapPoint.getLayerId());
+				if (aidlLayer != null) {
+					markerCustomized = true;
 				}
 			}
 			if (x != null && y != null && x.size() > 2) {
