@@ -89,11 +89,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 			if (app.isPlusVersionInApp()) {
 				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 				if (purchaseHelper != null) {
-					app.logEvent(activity, "in_app_purchase_redirect");
+					app.logEvent("in_app_purchase_redirect");
 					purchaseHelper.purchaseFullVersion(activity);
 				}
 			} else {
-				app.logEvent(activity, "paid_version_redirect");
+				app.logEvent("paid_version_redirect");
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
 				try {
@@ -110,7 +110,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		if (app != null) {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
-				app.logEvent(activity, "depth_contours_purchase_redirect");
+				app.logEvent("depth_contours_purchase_redirect");
 				purchaseHelper.purchaseDepthContours(activity);
 			}
 		}
@@ -177,7 +177,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		if (purchaseHelper != null && purchaseHelper.getLiveUpdates().containsSku(sku)) {
-			getMyApplication().logEvent(this, "live_osm_subscription_purchased");
+			getMyApplication().logEvent("live_osm_subscription_purchased");
 
 			if (!active) {
 				OsmLiveRestartBottomSheetDialogFragment fragment = new OsmLiveRestartBottomSheetDialogFragment();

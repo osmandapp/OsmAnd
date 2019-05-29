@@ -504,10 +504,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		misc.addPreference(createCheckBoxPreference(settings.MAP_EMPTY_STATE_ALLOWED, R.string.tap_on_map_to_hide_interface, R.string.tap_on_map_to_hide_interface_descr));
 		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
 		misc.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,R.string.animate_my_location, R.string.animate_my_location_desc));
-		OsmandApplication app = getMyApplication();
-		if (Version.isGooglePlayEnabled(getMyApplication()) && !Version.isPaidVersion(app)) {
-			misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SEND_ANONYMOUS_APP_USAGE, R.string.do_not_send_anonymous_app_usage, R.string.do_not_send_anonymous_app_usage_desc));
-		}
 	}
 
 
