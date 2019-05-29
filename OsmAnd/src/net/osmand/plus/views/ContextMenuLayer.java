@@ -25,6 +25,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
+import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -195,6 +196,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
+		boolean markerCustomized = false;
 		if (selectedObject != null) {
 			TIntArrayList x = null;
 			TIntArrayList y = null;
@@ -206,11 +208,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				RenderedObject r = (RenderedObject) selectedObject;
 				x = r.getX();
 				y = r.getY();
+			} else if (selectedObject instanceof AMapPoint) {
+				markerCustomized = true;
 			}
 			if (x != null && y != null && x.size() > 2) {
 				double lat = MapUtils.get31LatitudeY(y.get(0));
 				double lon = MapUtils.get31LongitudeX(x.get(0));
-				int px,py, prevX, prevY;
+				int px, py, prevX, prevY;
 				prevX = (int) box.getPixXFromLatLon(lat, lon);
 				prevY = (int) box.getPixYFromLatLon(lat, lon);
 				for (int i = 1; i < x.size(); i++) {
@@ -235,7 +239,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
 		}
 
-		if (mapQuickActionLayer!= null && mapQuickActionLayer.isInMovingMarkerMode())
+		if (mapQuickActionLayer != null && mapQuickActionLayer.isInMovingMarkerMode())
 			return;
 
 		if (mInChangeMarkerPositionMode) {
@@ -248,7 +252,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 			mAddGpxPointBottomSheetHelper.onDraw(box);
-		} else if (menu.isActive()) {
+		} else if (menu.isActive() && !markerCustomized) {
 			LatLon latLon = menu.getLatLon();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());

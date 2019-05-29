@@ -59,7 +59,9 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		}
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
-				showLocationHelper.startUpdateMessagesTask()
+				if (settings.hasAnyChatToShowOnMap()) {
+					showLocationHelper.startUpdateMessagesTask()
+				}
 			}
 		})
 		shareLocationHelper = ShareLocationHelper(this)
