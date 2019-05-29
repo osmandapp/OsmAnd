@@ -141,8 +141,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		Context context = view.getContext();
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		contextMarker.setClickable(true);
 		contextMarker.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.map_pin_context_menu));
+		contextMarker.setClickable(true);
 		int minw = contextMarker.getDrawable().getMinimumWidth();
 		int minh = contextMarker.getDrawable().getMinimumHeight();
 		contextMarker.layout(0, 0, minw, minh);
