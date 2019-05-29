@@ -38,6 +38,8 @@
           android:id="@+id/title"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:maxLines="2"
+          android:ellipsize="end"
           android:textColor="@color/main_font_dark"
           android:textSize="@dimen/default_list_text_size"
           tools:text="Bicycle"/>

@@ -43,7 +43,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		createLoggingSection(grp);
 		createLiveSection(grp);
 		createNotificationSection(grp);
-		profileDialog();
+		selectAppModeDialog().show();
     }
 
 

@@ -43,7 +43,7 @@ public class ApplicationMode {
 			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark, "ic_action_car_dark").setRoutingProfile("car").reg();
 
 	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark, "").setRoutingProfile("bicycle").reg();
+			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark, "ic_action_bicycle_dark").setRoutingProfile("bicycle").reg();
 
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
 			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark, "ic_action_pedestrian_dark").setRoutingProfile("pedestrian").reg();
