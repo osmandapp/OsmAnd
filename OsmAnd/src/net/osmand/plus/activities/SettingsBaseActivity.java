@@ -18,9 +18,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import net.osmand.plus.ApplicationMode;
@@ -29,17 +26,16 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.profiles.AppProfileArrayAdapter;
+import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.views.SeekBarPreference;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import net.osmand.util.Algorithms;
 
 
@@ -60,12 +56,13 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	private Map<String, OsmandPreference<Integer>> seekBarPreferences = new LinkedHashMap<String, OsmandPreference<Integer>>();
 
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
-	private AlertDialog profileDialog;
-	
+
 	public SettingsBaseActivity() {
 		this(false);
 	}
-	
+
+	private boolean isModeSelected = false;
+
 	public SettingsBaseActivity(boolean profile) {
 		profileSettings = profile;
 	}
@@ -343,34 +340,66 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			getTypeButton().setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					AlertDialog.Builder singleSelectDialogBuilder = new Builder(SettingsBaseActivity.this);
-					singleSelectDialogBuilder.setTitle("Select App Profile");
-					final ArrayAdapter<String> modeNames = new ArrayAdapter<>(
-						SettingsBaseActivity.this, android.R.layout.select_dialog_singlechoice);
-					for (ApplicationMode am : modes) {
-						modeNames.add(am.toHumanString(SettingsBaseActivity.this));
-					}
-					singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
-						new OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						});
-					singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							settings.APPLICATION_MODE.set(modes.get(which));
-							updateModeButton(modes.get(which));
-							updateAllSettings();
-						}
-					});
-					singleSelectDialogBuilder.show();
+					selectAppModeDialog().show();
 				}
 			});
 
 		}
 		setPreferenceScreen(getPreferenceManager().createPreferenceScreen(this));
+    }
+
+    protected AlertDialog.Builder selectAppModeDialog() {
+	    AlertDialog.Builder singleSelectDialogBuilder = new Builder(SettingsBaseActivity.this);
+	    singleSelectDialogBuilder.setTitle(R.string.profile_settings);
+
+	    final List<ProfileDataObject> activeModes = new ArrayList<>();
+	    for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
+		    boolean isSelected = false;
+	    	if (previousAppMode != null && previousAppMode == am) {
+			    isSelected = true;
+		    }
+	    	if (am != ApplicationMode.DEFAULT) {
+			    activeModes.add(new ProfileDataObject(
+				    am.toHumanString(getMyApplication()),
+				    am.getParent() == null
+					    ? getString(R.string.profile_type_base_string)
+					    : String.format(getString(R.string.profile_type_descr_string),
+						    am.getParent().toHumanString(getMyApplication())),
+				    am.getStringKey(),
+				    ApplicationMode.getIconResFromName(getMyApplication(), am.getIconName(), getApplication().getPackageName()),
+				    isSelected
+			    ));
+		    }
+	    }
+
+	    final AppProfileArrayAdapter modeNames = new AppProfileArrayAdapter(
+		    SettingsBaseActivity.this, R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes);
+
+	    singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
+		    new OnClickListener() {
+			    @Override
+			    public void onClick(DialogInterface dialog, int which) {
+				    dialog.dismiss();
+			    }
+		    });
+	    singleSelectDialogBuilder.setOnDismissListener(new OnDismissListener() {
+		    @Override
+		    public void onDismiss(DialogInterface dialog) {
+			    if (!isModeSelected) {
+				    List<ApplicationMode> m = ApplicationMode.values(getMyApplication());
+				    setSelectedAppMode(m.get(m.size() > 1 ? 1 : 0));
+			    }
+		    }
+	    });
+	    singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
+		    @Override
+		    public void onClick(DialogInterface dialog, int which) {
+			    settings.APPLICATION_MODE.set(modes.get(which));
+			    updateModeButton(modes.get(which));
+			    updateAllSettings();
+		    }
+	    });
+	    return singleSelectDialogBuilder;
     }
 
     void updateModeButton(ApplicationMode mode) {
@@ -393,6 +422,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			    ? R.color.active_buttons_and_links_light
 			    : R.color.active_buttons_and_links_dark));
 	    settings.APPLICATION_MODE.set(mode);
+	    isModeSelected = true;
 	    updateAllSettings();
     }
 
@@ -416,39 +446,8 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			updateAllSettings();
 		}
 	}
-	
-	protected void profileDialog() {
-		AlertDialog.Builder b = new AlertDialog.Builder(this);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		View v = AppModeDialog.prepareAppModeView(this, selected, false, null, true, true, false,
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if(selected.size() > 0) {
-							// test
-							setSelectedAppMode(selected.iterator().next());
-						}
-						if(profileDialog != null && profileDialog.isShowing()) {
-							profileDialog.dismiss();
-						}
-						profileDialog = null;
-					}
-				});
-		b.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				if (selected.size() == 0) {
-					setSelectedAppMode(ApplicationMode.CAR);
-				}
-			}
-		});
-		b.setTitle(R.string.profile_settings);
-		b.setView(v);
-		profileDialog = b.show();
-	}
 
 	protected boolean setSelectedAppMode(ApplicationMode am) {
-		int ind = 0;
 		boolean found = false;
 		for (ApplicationMode a : modes) {
 			if (am == a) {
@@ -456,7 +455,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 				found = true;
 				break;
 			}
-			ind++;
 		}
 		return found;
 	}

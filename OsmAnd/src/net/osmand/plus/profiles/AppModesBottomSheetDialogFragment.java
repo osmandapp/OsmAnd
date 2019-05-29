@@ -103,7 +103,6 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		adapter.updateItemsList(allModes,
 			new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
 		setupHeightAndBackground(getView());
-
 	}
 
 	private void getData() {
