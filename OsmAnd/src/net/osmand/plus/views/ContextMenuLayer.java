@@ -214,10 +214,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				if (!TextUtils.isEmpty(imageUri)) {
 					AidlMapLayer aidlLayer = view.getAidlMapLayer(mapPoint.getLayerId());
 					if (aidlLayer != null) {
-						Bitmap selectedImage = aidlLayer.getSelectedPointImage(imageUri);
-						if (selectedImage != null) {
-							markerCustomized = true;
-						}
+						markerCustomized = true;
 					}
 				}
 			}
