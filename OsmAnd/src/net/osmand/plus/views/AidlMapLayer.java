@@ -41,6 +41,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AMapPoint> {
 
+	public static final float SELECTED_POINT_VERTICAL_OFFSET = 0.09f;
+
 	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
 	private static final float POINT_SELECTED_IMAGE_VERTICAL_OFFSET = 0.99f;
 
@@ -181,10 +183,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	public Bitmap getSelectedPointImage(String imageUri) {
 		return selectedPointImages.get(imageUri);
-	}
-
-	public float getSelectedPointImageVerticalOffset() {
-		return 1 - POINT_IMAGE_VERTICAL_OFFSET;
 	}
 
 	public String getLayerId() {

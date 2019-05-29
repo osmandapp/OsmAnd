@@ -218,7 +218,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					if (aidlLayer != null) {
 						Bitmap selectedImage = aidlLayer.getSelectedPointImage(imageUri);
 						if (selectedImage != null) {
-							vOffset = selectedImage.getHeight() * aidlLayer.getSelectedPointImageVerticalOffset();
+							vOffset = selectedImage.getHeight() * AidlMapLayer.SELECTED_POINT_VERTICAL_OFFSET;
 							updateContextMarkerIcon(new BitmapDrawable(activity.getResources(), selectedImage));
 							markerCustomized = true;
 						}
