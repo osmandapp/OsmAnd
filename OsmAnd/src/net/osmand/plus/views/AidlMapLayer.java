@@ -166,10 +166,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		mapTextLayer.putData(this, displayedPoints);
 	}
 
-	public String getLayerId() {
-		return aidlLayer.getId();
-	}
-
 	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image, boolean selected) {
 		if (image == null) {
 			image = placeholder;

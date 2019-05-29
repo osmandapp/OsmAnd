@@ -209,11 +209,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				x = r.getX();
 				y = r.getY();
 			} else if (selectedObject instanceof AMapPoint) {
-				AMapPoint mapPoint = (AMapPoint) selectedObject;
-				AidlMapLayer aidlLayer = view.getAidlMapLayer(mapPoint.getLayerId());
-				if (aidlLayer != null) {
-					markerCustomized = true;
-				}
+				markerCustomized = true;
 			}
 			if (x != null && y != null && x.size() > 2) {
 				double lat = MapUtils.get31LatitudeY(y.get(0));
