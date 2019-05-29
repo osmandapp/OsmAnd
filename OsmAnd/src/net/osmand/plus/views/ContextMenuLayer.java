@@ -8,8 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -97,7 +95,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private MapQuickActionLayer mapQuickActionLayer;
 
 	private ImageView contextMarker;
-	private Drawable contextMenuPin;
 	private Paint paint;
 	private Paint outlinePaint;
 	private Bitmap pressedBitmap;
@@ -142,11 +139,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		this.view = view;
 
 		Context context = view.getContext();
-		contextMenuPin = ContextCompat.getDrawable(context, R.drawable.map_pin_context_menu);
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		contextMarker.setClickable(true);
-		updateContextMarkerIcon(contextMenuPin);
+		contextMarker.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.map_pin_context_menu));
+		int minw = contextMarker.getDrawable().getMinimumWidth();
+		int minh = contextMarker.getDrawable().getMinimumHeight();
+		contextMarker.layout(0, 0, minw, minh);
 
 		paint = new Paint();
 		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap);
@@ -198,7 +197,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		boolean markerCustomized = false;
-		float vOffset = 0f;
 		if (selectedObject != null) {
 			TIntArrayList x = null;
 			TIntArrayList y = null;
@@ -218,8 +216,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					if (aidlLayer != null) {
 						Bitmap selectedImage = aidlLayer.getSelectedPointImage(imageUri);
 						if (selectedImage != null) {
-							vOffset = selectedImage.getHeight() * AidlMapLayer.SELECTED_POINT_VERTICAL_OFFSET;
-							updateContextMarkerIcon(new BitmapDrawable(activity.getResources(), selectedImage));
 							markerCustomized = true;
 						}
 					}
@@ -266,15 +262,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 			mAddGpxPointBottomSheetHelper.onDraw(box);
-		} else if (menu.isActive()) {
+		} else if (menu.isActive() && !markerCustomized) {
 			LatLon latLon = menu.getLatLon();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight() + vOffset);
+			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
 			contextMarker.draw(canvas);
-			if (markerCustomized) {
-				updateContextMarkerIcon(contextMenuPin);
-			}
 		}
 	}
 
@@ -528,13 +521,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		view.refreshMap();
-	}
-
-	private void updateContextMarkerIcon(Drawable icon){
-		contextMarker.setImageDrawable(icon);
-		int minw = contextMarker.getDrawable().getMinimumWidth();
-		int minh = contextMarker.getDrawable().getMinimumHeight();
-		contextMarker.layout(0, 0, minw, minh);
 	}
 
 	private void enterMovingMode(RotatedTileBox tileBox) {

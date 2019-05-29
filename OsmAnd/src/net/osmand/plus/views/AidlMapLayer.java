@@ -41,8 +41,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AMapPoint> {
 
-	public static final float SELECTED_POINT_VERTICAL_OFFSET = 0.09f;
-
 	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
 	private static final float POINT_SELECTED_IMAGE_VERTICAL_OFFSET = 0.99f;
 
@@ -79,8 +77,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private Set<String> imageRequests = new HashSet<>();
 	private List<AMapPoint> displayedPoints = new ArrayList<>();
-
-	private AMapPoint selectedPoint;
 
 	public AidlMapLayer(MapActivity map, AMapLayer aidlLayer) {
 		this.map = map;
@@ -128,18 +124,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		AMapPoint aMapPoint = selectedPoint;
-		if (aMapPoint != null && !contextMenuOpenForPoint(aMapPoint)) {
-			ALatLon l = aMapPoint.getLocation();
-			if (l != null) {
-				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
-				if (tileBox.containsPoint(x, y, bigIconSize)) {
-					Bitmap image = getPointImage(aMapPoint);
-					drawPoint(canvas, x, y, tileBox, aMapPoint, image);
-				}
-			}
-		}
 	}
 
 	@Override
@@ -160,17 +144,18 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
 				if (tileBox.containsPoint(x, y, bigIconSize)) {
-					Bitmap image = getPointImage(point);
-					displayedPoints.add(point);
-					boolean contextMenuOpenForPoint = contextMenuOpenForPoint(point);
-					if (contextMenuOpenForPoint) {
-						selectedPoint = point;
-					} else {
-						if (selectedPoint != null && point.getId().equals(selectedPoint.getId())) {
-							selectedPoint = null;
+					Bitmap image = null;
+					if (pointsType != PointsType.STANDARD) {
+						String imageUri = point.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
+						if (!TextUtils.isEmpty(imageUri)) {
+							image = pointImages.get(imageUri);
+							if (image == null) {
+								imageRequests.add(imageUri);
+							}
 						}
-						drawPoint(canvas, x, y, tileBox, point, image);
 					}
+					displayedPoints.add(point);
+					drawPoint(canvas, x, y, tileBox, point, image);
 				}
 			}
 		}
@@ -189,25 +174,18 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return aidlLayer.getId();
 	}
 
-	private Bitmap getPointImage(AMapPoint point) {
-		Bitmap image = null;
-		if (pointsType != PointsType.STANDARD) {
-			String imageUri = point.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
-			if (!TextUtils.isEmpty(imageUri)) {
-				image = pointImages.get(imageUri);
-				if (image == null) {
-					imageRequests.add(imageUri);
-				}
-			}
-		}
-		return image;
-	}
-
 	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image) {
 		if (image == null) {
 			image = placeholder;
 		}
-		if (pointsType == PointsType.STANDARD) {
+		boolean contextMenuOpenForPoint = contextMenuOpenForPoint(point);
+		if (contextMenuOpenForPoint) {
+			bitmapPaint.setColorFilter(null);
+			float vOffset = bigIconBgSelected.getHeight() * POINT_IMAGE_VERTICAL_OFFSET;
+			int imageCenterY = (int) (y - vOffset + bigIconBgSelected.getHeight() / 2);
+			canvas.drawBitmap(bigIconBgSelected, x - bigIconBgSelected.getWidth() / 2, y - vOffset, bitmapPaint);
+			canvas.drawBitmap(image, null, getDstRect(x, imageCenterY, bigIconSize / 2), bitmapPaint);
+		} else if (pointsType == PointsType.STANDARD) {
 			int radius = getRadiusPoi(tb);
 			float density = tb.getDensity();
 			pointInnerCircle.setColor(point.getColor());
