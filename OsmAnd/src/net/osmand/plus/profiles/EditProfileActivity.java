@@ -45,7 +45,7 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 		int itemId = item.getItemId();
 		switch (itemId) {
 			case android.R.id.home:
-				finish();
+				onBackPressed();
 				return true;
 			case DELETE_ID:
 				((EditProfileFragment) getSupportFragmentManager().findFragmentByTag(

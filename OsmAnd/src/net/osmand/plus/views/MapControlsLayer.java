@@ -703,7 +703,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapRouteInfoMenu.show();
 			} else {
 				touchEvent = 0;
-				app.logEvent(mapActivity, "start_navigation");
+				app.logEvent("start_navigation");
 				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl(17, true);
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);

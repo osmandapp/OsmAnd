@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:textAppearance="@style/TextAppearance.ListItemTitle"
         android:textColor="?attr/main_font_color_basic"
         tools:text="Item Title"/>

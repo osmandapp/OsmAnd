@@ -37,30 +37,33 @@ public class ApplicationMode {
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
-			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark).reg();
+			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark, "map_world_globe_dark").reg();
 
 	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
-			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark).setRoutingProfile("car").reg();
+			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark, "ic_action_car_dark").setRoutingProfile("car").reg();
 
 	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark).setRoutingProfile("bicycle").reg();
+			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark, "ic_action_bicycle_dark").setRoutingProfile("bicycle").reg();
 
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
-			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark).setRoutingProfile("pedestrian").reg();
+			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark, "ic_action_pedestrian_dark").setRoutingProfile("pedestrian").reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = create(R.string.app_mode_public_transport, "public_transport").
-			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark).setRoutingProfile("public_transport").reg();
+			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark, "ic_action_bus_dark").setRoutingProfile("public_transport").reg();
 
 	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).nauticalLocation().
-			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark).setRoutingProfile("boat").reg();
+			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark, "ic_action_sail_boat_dark").setRoutingProfile("boat").reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft).setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").reg();
+			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").reg();
+
+	public static final ApplicationMode SKI = create(R.string.app_mode_skiing, "ski").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
+		icon(R.drawable.ic_plugin_skimaps, R.drawable.ic_plugin_skimaps, "ic_plugin_skimaps").setRoutingProfile("ski").reg();
 
 	static {
-		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT};
-		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT};
-		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN};
+		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, SKI};
+		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, SKI};
+		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, SKI};
 		ApplicationMode[] pedestrian = new ApplicationMode[]{PEDESTRIAN};
 		ApplicationMode[] pedestrianBicycle = new ApplicationMode[]{PEDESTRIAN, BICYCLE};
 
@@ -115,9 +118,10 @@ public class ApplicationMode {
 			return applicationMode;
 		}
 
-		public ApplicationModeBuilder icon(int mapIcon, int smallIconDark) {
+		public ApplicationModeBuilder icon(int mapIcon, int smallIconDark, String iconName) {
 			applicationMode.mapIconId = mapIcon;
 			applicationMode.smallIconDark = smallIconDark;
+			applicationMode.iconName = iconName;
 			return this;
 		}
 
@@ -429,6 +433,10 @@ public class ApplicationMode {
 		return def;
 	}
 
+	public String getIconName() {
+		return iconName;
+	}
+
 	public float getDefaultSpeed() {
 		return defaultSpeed;
 	}
@@ -461,6 +469,7 @@ public class ApplicationMode {
 	@Expose private final String stringKey;
 	@Expose private String userProfileName;
 	@Expose private ApplicationMode parent;
+	@Expose private String iconName = "R.drawable.map_world_globe_dark";
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;
@@ -536,5 +545,13 @@ public class ApplicationMode {
 			return true;
 		}
 		return false;
+	}
+
+	public static int getIconResFromName(Context app, String variableName, String packageName) {
+		try {
+			return app.getResources().getIdentifier(variableName, "drawable", packageName);
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 }

@@ -858,13 +858,13 @@ public class GPXUtilities {
 		public GPXFile(String title, String lang, String description) {
 			this.metadata = new Metadata();
 			if(description != null) {
-				metadata.extensions.put("desc", description);
+				metadata.getExtensionsToWrite().put("desc", description);
 			}
 			if(lang != null) {
-				metadata.extensions.put("article_lang", lang);
+				metadata.getExtensionsToWrite().put("article_lang", lang);
 			}
 			if(title != null) {
-				metadata.extensions.put("article_title", title);
+				metadata.getExtensionsToWrite().put("article_title", title);
 			}
 		}
 

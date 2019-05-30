@@ -9,10 +9,10 @@
   android:orientation="horizontal">
 
   <ImageView
-    android:id="@+id/profile_icon"
-    android:layout_width="wrap_content"
+    android:id="@+id/icon"
+    android:layout_width="@dimen/standard_icon_size"
     android:layout_height="@dimen/standard_icon_size"
-    android:layout_marginLeft="@dimen/setting_profile_image_margin"
+    android:layout_marginLeft="16dp"
     android:layout_marginRight="@dimen/setting_profile_image_margin"
     tools:src="@drawable/ic_action_bicycle_dark"/>
 
@@ -21,33 +21,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/settings_divider"/>
 
     <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="63dp"
       android:orientation="horizontal">
 
       <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="3"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_weight="5">
+        android:orientation="vertical">
 
         <TextView
-          android:id="@+id/profile_title"
+          android:id="@+id/title"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:maxLines="2"
+          android:ellipsize="end"
           android:textColor="@color/main_font_dark"
           android:textSize="@dimen/default_list_text_size"
           tools:text="Bicycle"/>
 
         <TextView
-          android:id="@+id/profile_descr"
+          android:id="@+id/description"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textSize="@dimen/default_desc_text_size"
@@ -64,34 +62,42 @@
 
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:src="@drawable/ic_action_additional_option"
-          android:tint="?attr/primary_icon_color"
           android:layout_gravity="center_vertical"
+          android:paddingTop="@dimen/setting_profile_item_switch_margin"
+          android:paddingBottom="@dimen/setting_profile_item_switch_margin"
+          android:paddingStart="@dimen/setting_profile_item_switch_margin"
+          android:paddingEnd="10dp"
           android:paddingLeft="@dimen/setting_profile_item_switch_margin"
           android:paddingRight="10dp"
-          android:paddingBottom="@dimen/setting_profile_item_switch_margin"
-          android:paddingTop="@dimen/setting_profile_item_switch_margin"
-          android:paddingStart="@dimen/setting_profile_item_switch_margin"
-          android:paddingEnd="10dp"/>
+          android:src="@drawable/ic_action_additional_option"
+          android:tint="?attr/primary_icon_color"/>
 
         <android.support.v7.widget.SwitchCompat
-          android:id="@+id/profile_switch"
+          android:id="@+id/compound_button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical|end"
-          android:paddingRight="16dp"
-          android:paddingEnd="16dp"
           android:paddingTop="@dimen/setting_profile_item_switch_margin"
           android:paddingBottom="@dimen/setting_profile_item_switch_margin"
-          android:paddingLeft="16dp"
           android:paddingStart="16dp"
+          android:paddingEnd="16dp"
+          android:paddingLeft="16dp"
+          android:paddingRight="16dp"
           android:background="@null"
           android:clickable="false"
           android:focusable="false"
           android:focusableInTouchMode="false"/>
       </LinearLayout>
 
+
     </LinearLayout>
+
+    <View
+      android:id="@+id/divider_bottom"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/settings_divider"/>
+
 
   </LinearLayout>
 

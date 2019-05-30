@@ -3,7 +3,7 @@ package net.osmand.plus.profiles;
 
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -98,7 +98,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
 				Bundle bundle = new Bundle();
-				bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILE);
+				bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 				dialog.setArguments(bundle);
 				if (getActivity() != null) {
 					getActivity().getSupportFragmentManager().beginTransaction()
@@ -128,7 +128,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		if (typeListener == null) {
 			typeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos) {
+				public void onSelectedType(int pos, String stringRes) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 					intent.putExtra(IS_NEW_PROFILE, true);
 					intent.putExtra(IS_USER_PROFILE, true);
@@ -158,7 +158,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		PEDESTRIAN(R.string.base_profile_descr_pedestrian),
 		PUBLIC_TRANSPORT(R.string.base_profile_descr_public_transport),
 		BOAT(R.string.base_profile_descr_boat),
-		AIRCRAFT(R.string.base_profile_descr_aircraft);
+		AIRCRAFT(R.string.base_profile_descr_aircraft),
+		SKI(R.string.base_profile_descr_ski);
 
 		private int descrRes;
 

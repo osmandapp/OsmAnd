@@ -3,7 +3,7 @@ package net.osmand.plus.profiles;
 import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_APP_PROFILE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_ICON;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
@@ -178,6 +178,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			isDataChanged = true;
 			startIconId = profile.parent.getSmallIconDark();
 			profile.iconId = startIconId;
+			profile.iconStringName = profile.parent.getIconName();
 		} else if (isUserProfile) {
 			title = profile.userProfileTitle;
 			profileNameEt.setText(title);
@@ -207,7 +208,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					if (profile.parent != null) {
 						bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
 					}
-					bundle.putString(DIALOG_TYPE, TYPE_APP_PROFILE);
+					bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 					dialog.setArguments(bundle);
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
@@ -308,7 +309,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				final SelectProfileBottomSheetDialogFragment iconSelectDialog = new SelectProfileBottomSheetDialogFragment();
 				Bundle bundle = new Bundle();
 				bundle.putString(DIALOG_TYPE, TYPE_ICON);
-				bundle.putInt(SELECTED_ICON, profile.iconId);
+				bundle.putString(SELECTED_ICON, profile.iconStringName);
 				iconSelectDialog.setArguments(bundle);
 				if (getActivity() != null) {
 					getActivity().getSupportFragmentManager().beginTransaction()
@@ -385,25 +386,30 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		saveButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (saveNewProfile()) {
-					activateMode(mode);
-					getActivity().onBackPressed();
+		if (!isNew && !isUserProfile) {
+			saveButtonSV.setEnabled(false);
+			saveButton.setEnabled(false);
+		} else {
+			saveButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (saveNewProfile()) {
+						activateMode(mode);
+						getActivity().onBackPressed();
+					}
 				}
-			}
-		});
+			});
 
-		saveButtonSV.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (saveNewProfile()) {
-					activateMode(mode);
-					getActivity().onBackPressed();
+			saveButtonSV.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (saveNewProfile()) {
+						activateMode(mode);
+						getActivity().onBackPressed();
+					}
 				}
-			}
-		});
+			});
+		}
 
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			@Override
@@ -446,9 +452,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (iconIdListener == null) {
 			iconIdListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos) {
+				public void onSelectedType(int pos, String stringRes) {
 					isDataChanged = true;
 					profile.iconId = pos;
+					profile.iconStringName = stringRes;
 					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(pos,
 						isNightMode ? R.color.active_buttons_and_links_dark
 							: R.color.active_buttons_and_links_light));
@@ -462,7 +469,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (baseTypeListener == null) {
 			baseTypeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos) {
+				public void onSelectedType(int pos, String stringRes) {
 					String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
 						.get(pos).getStringKey();
 					setupBaseProfileView(key);
@@ -477,7 +484,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (navTypeListener == null) {
 			navTypeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos) {
+				public void onSelectedType(int pos, String stringRes) {
 					updateRoutingProfile(pos);
 				}
 			};
@@ -594,7 +601,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 			.createCustomMode(profile.userProfileTitle.trim(), customStringKey)
 			.parent(profile.parent)
-			.icon(profile.iconId, profile.iconId);
+			.icon(profile.iconId, profile.iconId, profile.iconStringName);
 
 		if (profile.routingProfileDataObject != null) {
 			builder.setRoutingProfile(profile.routingProfileDataObject.getStringKey());
@@ -769,21 +776,25 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		String userProfileTitle = "";
 		ApplicationMode parent = null;
 		int iconId = R.drawable.map_world_globe_dark;
+		String iconStringName = "map_world_globe_dark";
 		RoutingProfileDataObject routingProfileDataObject = null;
 
 		ApplicationProfileObject(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
 			if (isNew) {
 				stringKey = mode.getStringKey() + System.currentTimeMillis();
 				parent = mode;
+				iconStringName = parent.getIconName();
 			} else if (isUserProfile) {
 				stringKey = mode.getStringKey();
 				parent = mode.getParent();
 				iconId = mode.getSmallIconDark();
+				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
 				userProfileTitle = mode.getUserProfileName();
 			} else {
 				key = mode.getStringResource();
 				stringKey = mode.getStringKey();
 				iconId = mode.getSmallIconDark();
+				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
 			}
 		}
 	}

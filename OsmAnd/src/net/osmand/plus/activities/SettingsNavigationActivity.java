@@ -180,7 +180,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		if(getIntent() != null && getIntent().hasExtra(INTENT_SKIP_DIALOG)) {
 			setSelectedAppMode(settings.getApplicationMode());
 		} else {
-			profileDialog();
+			selectAppModeDialog().show();
 		}
 
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));

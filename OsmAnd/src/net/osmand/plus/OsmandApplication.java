@@ -48,6 +48,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -918,11 +919,20 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void logEvent(Activity ctx, String event) {
+	public void logEvent(String event) {
 		try {
-			if (Version.isGooglePlayEnabled(this) && !Version.isPaidVersion(this)
-					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()) {
+			if (osmandSettings.SEND_ANONYMOUS_APP_USAGE_DATA.get()) {
 				analyticsHelper.addEvent(event);
+			}
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
+
+	public void logMapDownloadEvent(String event, IndexItem item) {
+		try {
+			if (osmandSettings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get()) {
+				analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName());
 			}
 		} catch (Exception e) {
 			LOG.error(e);

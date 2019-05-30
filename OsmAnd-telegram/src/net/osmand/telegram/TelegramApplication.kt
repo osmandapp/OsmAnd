@@ -53,15 +53,15 @@ class TelegramApplication : Application(), OsmandHelperListener {
 						listOf(-1)
 					)
 					showLocationHelper.addDirectionContextMenuButton()
-					if (settings.hasAnyChatToShowOnMap()) {
-						showLocationHelper.startShowingLocation()
-					}
+					showLocationHelper.startShowingLocation()
 				}
 			}
 		}
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
-				showLocationHelper.startUpdateMessagesTask()
+				if (settings.hasAnyChatToShowOnMap()) {
+					showLocationHelper.startUpdateMessagesTask()
+				}
 			}
 		})
 		shareLocationHelper = ShareLocationHelper(this)
