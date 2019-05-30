@@ -2368,6 +2368,8 @@
     <string name="i_am_here">I am here</string>
     <string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball movement.</string>
     <string name="zoom_by_trackball">Use trackball for zoom control</string>
+    <string name="zoom_by_wunderlinq_descr">Change map zooming by scrolling the wheel up and down. Escape returns you to the WunderLINQ App.</string>
+    <string name="zoom_by_wunderlinq">Use WunderLINQ for control</string>
     <string name="accessibility_preferences_descr">Accessibility related preferences.</string>
     <string name="arrival_distance_factor_early">Early</string>
     <string name="arrival_distance_factor_normally">Normal</string>

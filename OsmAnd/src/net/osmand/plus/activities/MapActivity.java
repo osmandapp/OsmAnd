@@ -1480,6 +1480,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				changeZoom(1);
 				return true;
 			}
+		} else if (settings.ZOOM_BY_WUNDERLINQ.get()) {
+			// WunderLINQ device, motorcycle smart phone control
+			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+				changeZoom(-1);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+				changeZoom(1);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_ESCAPE) {
+				String callingApp = "wunderlinq://datagrid";
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(callingApp));
+				startActivity(intent);
+				return true;
+			}
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT
 				|| keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_DPAD_UP) {
 			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -15 : 0);
@@ -2163,4 +2178,5 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return this != NEW && this != NEW_IF_EXPIRED && this != CURRENT;
 		}
 	}
+
 }
