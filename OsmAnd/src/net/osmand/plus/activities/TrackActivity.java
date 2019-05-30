@@ -17,14 +17,14 @@ import android.view.View;
 import android.view.WindowManager;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -447,7 +447,7 @@ public class TrackActivity extends TabActivity {
 				result = app.getSavingTrackHelper().getCurrentGpx();
 			} else {
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
-				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null && selectedGpxFile.getGpxFile().modifiedTime == file.lastModified()) {
 					result = selectedGpxFile.getGpxFile();
 				} else {
 					result = GPXUtilities.loadGPXFile(file);
@@ -472,8 +472,16 @@ public class TrackActivity extends TabActivity {
 			TrackActivity activity = getTrackActivity();
 			if (activity != null) {
 				activity.setSupportProgressBarIndeterminateVisibility(false);
-				if (showTemporarily && result != null) {
-					app.getSelectedGpxHelper().selectGpxFile(result, false, false);
+				if (result != null) {
+					final GpxSelectionHelper helper = app.getSelectedGpxHelper();
+					if (showTemporarily) {
+						helper.selectGpxFile(result, false, false);
+					} else {
+						final SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(result.path);
+						if (selectedGpx != null && result.error == null) {
+							selectedGpx.setGpxFile(result);
+						}
+					}
 				}
 				if (!activity.stopped) {
 					activity.onGPXFileReady(result);

@@ -64,25 +64,30 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		if (usedBy and usageIntent > 0) {
 			usedBy -= usageIntent
 		}
-		if (usedBy == 0) {
-			shouldCleanupResources = false
-			val serviceIntent = Intent(ctx, TelegramService::class.java)
-			ctx.stopService(serviceIntent)
-		} else if (isUsedByMyLocation(usedBy)) {
-			val app = app()
-			if (app.settings.sendMyLocInterval >= OFF_INTERVAL_THRESHOLD && serviceOffInterval == 0L) {
-				serviceOffInterval = app.settings.sendMyLocInterval
-				setupServiceErrorInterval()
-				setupAlarm()
+		when {
+			usedBy == 0 -> {
+				shouldCleanupResources = false
+				val serviceIntent = Intent(ctx, TelegramService::class.java)
+				ctx.stopService(serviceIntent)
 			}
-			app.notificationHelper.refreshNotification(NotificationType.LOCATION)
+			isUsedByMyLocation(usedBy) -> {
+				val app = app()
+				if (app.settings.sendMyLocInterval >= OFF_INTERVAL_THRESHOLD && serviceOffInterval == 0L) {
+					serviceOffInterval = app.settings.sendMyLocInterval
+					setupServiceErrorInterval()
+					setupAlarm()
+				}
+				app.notificationHelper.refreshNotification(NotificationType.LOCATION)
+			}
+			isUsedByUsersLocations(usedBy) -> removeLocationUpdates()
 		}
 	}
 
 	override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 		val app = app()
 		handler = Handler()
-		usedBy = intent.getIntExtra(USAGE_INTENT, 0)
+		val usageIntent = intent.getIntExtra(USAGE_INTENT, 0)
+		usedBy = usageIntent or usedBy
 
 		serviceOffInterval = intent.getLongExtra(USAGE_OFF_INTERVAL, 0)
 		sendLocationInterval = intent.getLongExtra(SEND_LOCATION_INTERVAL, 0)
@@ -259,9 +264,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		Toast.makeText(this, getString(R.string.location_service_no_gps_available), Toast.LENGTH_LONG).show()
 	}
 
-
 	override fun onProviderEnabled(provider: String) {}
-
 
 	override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
 
