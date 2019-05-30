@@ -469,7 +469,7 @@ public class ApplicationMode {
 	@Expose private final String stringKey;
 	@Expose private String userProfileName;
 	@Expose private ApplicationMode parent;
-	@Expose private String iconName = "R.drawable.map_world_globe_dark";
+	@Expose private String iconName = "map_world_globe_dark";
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;

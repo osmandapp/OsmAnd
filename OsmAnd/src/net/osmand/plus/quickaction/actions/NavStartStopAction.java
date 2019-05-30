@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -84,7 +85,8 @@ public class NavStartStopAction extends QuickAction {
 			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
 				return ((MapActivity) context).getMapActions().getRouteMode(null).getSmallIconDark();
 			}
-			return helper.getAppMode().getSmallIconDark();
+			return ApplicationMode.getIconResFromName(context, helper.getAppMode().getIconName(),
+				context.getPackageName());
 		}
 		return super.getIconRes(context);
 	}

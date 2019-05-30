@@ -713,18 +713,20 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRouters();
 		for (Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
-			int iconRes = R.drawable.ic_action_gdirections_dark;
-			String name = e.getValue().getProfileName();
-			String description = context.getString(R.string.osmand_default_routing);
-			if (!Algorithms.isEmpty(e.getValue().getFilename())) {
-				description = e.getValue().getFilename();
-			} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
-				iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
-				name = context
-					.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+			if (!e.getKey().equals("geocoding")) {
+				int iconRes = R.drawable.ic_action_gdirections_dark;
+				String name = e.getValue().getProfileName();
+				String description = context.getString(R.string.osmand_default_routing);
+				if (!Algorithms.isEmpty(e.getValue().getFilename())) {
+					description = e.getValue().getFilename();
+				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
+					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
+					name = context
+						.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+				}
+				profilesObjects.add(new RoutingProfileDataObject(e.getKey(), name, description,
+					iconRes, false, e.getValue().getFilename()));
 			}
-			profilesObjects.add(new RoutingProfileDataObject(e.getKey(), name, description,
-				iconRes, false, e.getValue().getFilename()));
 		}
 		return profilesObjects;
 	}

@@ -11,7 +11,7 @@
 	Thx - Hardy
 
 -->
-
+    <string name="osmand_routing_promo">You can add own modified version of routing.xml to ..osmand/routing</string>
     <string name="app_mode_skiing">Skiing</string>
     <string name="base_profile_descr_ski">Skiing</string>
     <string name="show_compass_ruler">Show compass ruler</string>

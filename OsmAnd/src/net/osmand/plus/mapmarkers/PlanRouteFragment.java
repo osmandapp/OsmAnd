@@ -661,7 +661,8 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		if (mapActivity != null) {
 			final ImageButton appModesBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			appModesBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-			appModesBtn.setImageDrawable(getActiveIcon(planRouteContext.getSnappedMode().getMapIconId()));
+			appModesBtn.setImageDrawable(getActiveIcon(ApplicationMode.getIconResFromName(
+				getContext(), planRouteContext.getSnappedMode().getIconName(), getContext().getPackageName())));
 			appModesBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

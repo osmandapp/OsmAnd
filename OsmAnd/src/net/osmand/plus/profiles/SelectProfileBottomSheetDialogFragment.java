@@ -43,8 +43,6 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 	private SelectProfileListener listener;
 
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
-	private final List<ApplicationMode> appModes = new ArrayList<>();
-	private final Set<ApplicationMode> activeAppModes = new HashSet<>();
 
 	private List<IconResWithDescr> icons;
 	private String selectedItemKey;
@@ -82,6 +80,12 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				dismiss();
 			}
 		});
+
+		if (type.equals(TYPE_NAV_PROFILE) || type.equals(TYPE_BASE_APP_PROFILE)) {
+			if (items.get(items.size()-1).getView() != null) {
+				items.get(items.size()-1).getView().findViewById(R.id.divider_bottom).setVisibility(View.INVISIBLE);
+			}
+		}
 	}
 
 	@Override
