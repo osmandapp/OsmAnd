@@ -138,4 +138,20 @@
     <string name="my_location">Nire kokapena</string>
     <string name="live_now">Zuzenean orain</string>
     <string name="timeline">Denbora-eskala</string>
+    <string name="search_contacts_descr">Bilatu zure talde eta kontaktu guztien artean.</string>
+    <string name="timeline_available_for_free_now">Denbora-lerroa orain doan eskuragarri dagoen ezaugarri bat da.</string>
+    <string name="proxy_key">Gakoa</string>
+    <string name="proxy_password">Pasahitza</string>
+    <string name="proxy_username">Erabiltzaile-izena</string>
+    <string name="proxy_credentials">Kredentzialak</string>
+    <string name="proxy_port">Ataka</string>
+    <string name="proxy_server">Zerbitzaria</string>
+    <string name="shared_string_connection">Konexioa</string>
+    <string name="shared_string_enable">Gaitu</string>
+    <string name="proxy_type">Proxy mota</string>
+    <string name="proxy_connected">Konektatuta</string>
+    <string name="proxy_disconnected">Deskonektatuta</string>
+    <string name="proxy_settings">Proxyaren ezarpenak</string>
+    <string name="proxy">Proxya</string>
+    <string name="privacy">Pribatutasuna</string>
 </resources>
