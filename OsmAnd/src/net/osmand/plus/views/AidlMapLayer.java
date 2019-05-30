@@ -62,6 +62,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Bitmap bigIconBg;
 	private Bitmap bigIconBgStale;
 	private Bitmap bigIconBgSelected;
+	private Bitmap bigIconBgSelectedStale;
 	private Bitmap placeholder;
 
 	private int smallIconSize;
@@ -112,6 +113,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				? R.drawable.map_pin_user_stale_location_night : R.drawable.map_pin_user_stale_location_day);
 		bigIconBgSelected = BitmapFactory.decodeResource(res, night
 				? R.drawable.map_pin_user_location_selected_night : R.drawable.map_pin_user_location_selected_day);
+		bigIconBgSelectedStale = BitmapFactory.decodeResource(res, night
+				? R.drawable.map_pin_user_stale_location_selected_night : R.drawable.map_pin_user_stale_location_selected_day);
 		placeholder = BitmapFactory.decodeResource(res, R.drawable.img_user_picture);
 
 		smallIconSize = AndroidUtils.dpToPx(map, SMALL_ICON_SIZE_DP);
@@ -171,7 +174,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			image = placeholder;
 		}
 		if (selected) {
-			drawBigIcon(canvas, x, y, image, bigIconBgSelected);
+			Bitmap bg = isStale(point) ? bigIconBgSelectedStale : bigIconBgSelected;
+			drawBigIcon(canvas, x, y, image, bg);
 		} else if (pointsType == PointsType.STANDARD) {
 			int radius = getRadiusPoi(tb);
 			float density = tb.getDensity();
