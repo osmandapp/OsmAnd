@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Shuttle bus</string>
+    <string name="app_mode_subway">Subway</string>
+    <string name="app_mode_horse">Horse</string>
+    <string name="app_mode_helicopter">Helicopter</string>
     <string name="osmand_routing_promo">You can add own modified version of routing.xml to ..osmand/routing</string>
     <string name="app_mode_skiing">Skiing</string>
     <string name="base_profile_descr_ski">Skiing</string>
@@ -3159,7 +3164,5 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
-
-
 
 </resources>
