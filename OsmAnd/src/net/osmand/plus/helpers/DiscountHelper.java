@@ -261,7 +261,7 @@ public class DiscountHelper {
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
+					mapActivity.getMyApplication().logEvent("motd_click");
 					mBannerVisible = false;
 					mapActivity.hideTopToolbar(toolbarController);
 					openUrl(mapActivity, data.url);
@@ -274,7 +274,7 @@ public class DiscountHelper {
 		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.getMyApplication().logEvent(mapActivity, "motd_close");
+				mapActivity.getMyApplication().logEvent("motd_close");
 				mBannerVisible = false;
 				mapActivity.hideTopToolbar(toolbarController);
 			}
@@ -303,7 +303,7 @@ public class DiscountHelper {
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
 				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
-					app.logEvent(mapActivity, "in_app_purchase_redirect");
+					app.logEvent("in_app_purchase_redirect");
 					purchaseHelper.purchaseFullVersion(mapActivity);
 				} else {
 					for (InAppPurchase p : purchaseHelper.getLiveUpdates().getAllSubscriptions()) {
