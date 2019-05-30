@@ -981,6 +981,8 @@ public class OsmandApplication extends MultiDexApplication {
 			PlatformUtil.getLog(ErrorBottomSheetDialog.class).error("", e);
 		}
 		intent.putExtra(Intent.EXTRA_TEXT, text.toString());
-		startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
+		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));
+		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(chooserIntent);
 	}
 }
