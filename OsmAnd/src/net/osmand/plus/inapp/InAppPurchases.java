@@ -672,10 +672,12 @@ public class InAppPurchases {
 
 		InAppPurchaseLiveUpdates3Months(String skuNoVersion, int version) {
 			super(skuNoVersion, version);
+			donationSupported = true;
 		}
 
 		InAppPurchaseLiveUpdates3Months(@NonNull String sku) {
 			super(sku, false);
+			donationSupported = true;
 		}
 
 		@Override
@@ -747,10 +749,12 @@ public class InAppPurchases {
 
 		InAppPurchaseLiveUpdatesAnnual(String skuNoVersion, int version) {
 			super(skuNoVersion, version);
+			donationSupported = true;
 		}
 
 		InAppPurchaseLiveUpdatesAnnual(@NonNull String sku) {
 			super(sku, false);
+			donationSupported = true;
 		}
 
 		@Override

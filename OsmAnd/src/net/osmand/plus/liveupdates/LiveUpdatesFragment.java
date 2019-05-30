@@ -170,6 +170,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 				if (purchaseHelper != null) {
 					InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
+
 					if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
 						if (Algorithms.isEmpty(countryName)) {
 							if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
