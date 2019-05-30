@@ -99,6 +99,11 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		Object obj = items.get(position);
 
 		if (obj instanceof ApplicationMode) {
+			holder.divider.setVisibility(View.VISIBLE);
+			holder.icon.setVisibility(View.VISIBLE);
+			holder.descr.setVisibility(View.VISIBLE);
+			holder.aSwitch.setVisibility(View.VISIBLE);
+			holder.menuIcon.setVisibility(View.VISIBLE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			if (isBottomSheet) {
 				holder.divider.setBackgroundColor(isNightMode(app)
