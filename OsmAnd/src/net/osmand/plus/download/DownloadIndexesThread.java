@@ -534,7 +534,6 @@ public class DownloadIndexesThread {
 						boolean result = downloadFile(item, filesToReindex, forceWifi);
 						success = result || success;
 						if (result) {
-							checkDownload(item);
 							if (DownloadActivityType.isCountedInDownloads(item)) {
 								downloads.set(downloads.get() + 1);
 							}
@@ -664,8 +663,16 @@ public class DownloadIndexesThread {
 					LOG.error("Copy exception", e);
 				}
 			} else {
+				long start = System.currentTimeMillis();
 				app.logMapDownloadEvent("start", item);
 				res = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
+				long time = System.currentTimeMillis() - start;
+				if (res) {
+					app.logMapDownloadEvent("done", item, time);
+					checkDownload(item);
+				} else {
+					app.logMapDownloadEvent("failed", item, time);
+				}
 			}
 			return res;
 		}
@@ -678,7 +685,6 @@ public class DownloadIndexesThread {
 	}
 
 	private void checkDownload(IndexItem item) {
-		app.logMapDownloadEvent("done", item);
 		Map<String, String> params = new HashMap<>();
 		params.put("file_name", item.fileName);
 		params.put("file_size", item.size);

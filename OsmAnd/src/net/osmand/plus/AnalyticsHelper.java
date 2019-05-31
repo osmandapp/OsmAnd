@@ -34,6 +34,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 	private final static int DATA_PARCEL_SIZE = 500; // 500 events
 	private final static int SUBMIT_DATA_INTERVAL = 60 * 60 * 1000; // 1 hour
 
+	private final static String PARAM_OS = "os";
 	private final static String PARAM_START_DATE = "startDate";
 	private final static String PARAM_FINISH_DATE = "finishDate";
 	private final static String PARAM_FIRST_INSTALL_DAYS = "nd";
@@ -153,6 +154,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 					}
 
 					Map<String, String> additionalData = new LinkedHashMap<String, String>();
+					additionalData.put(PARAM_OS, "android");
 					additionalData.put(PARAM_START_DATE, String.valueOf(d.startDate));
 					additionalData.put(PARAM_FINISH_DATE, String.valueOf(d.finishDate));
 					additionalData.put(PARAM_VERSION, Version.getFullVersion(ctx));

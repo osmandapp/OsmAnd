@@ -939,6 +939,16 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
+	public void logMapDownloadEvent(String event, IndexItem item, long time) {
+		try {
+			if (osmandSettings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get()) {
+				analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec");
+			}
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
+
 	public void restartApp(Context ctx) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setMessage(R.string.restart_is_required);
