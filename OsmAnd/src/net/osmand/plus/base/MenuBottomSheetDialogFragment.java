@@ -1,6 +1,7 @@
 package net.osmand.plus.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -19,13 +21,13 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.TextViewEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private LinearLayout itemsContainer;
 
+	public enum DialogButtonType {
+		PRIMARY,
+		SECONDARY,
+		STROKED
+	}
+
 	@StringRes
 	protected int dismissButtonStringRes = R.string.shared_string_cancel;
 
@@ -57,7 +65,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (savedInstanceState != null) {
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
-		nightMode = isNightMode();
+		nightMode = isNightMode(requiredMyApplication());
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
@@ -65,10 +73,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		createMenuItems(savedInstanceState);
-
-		OsmandApplication app = getMyApplication();
-
-		View mainView = View.inflate(new ContextThemeWrapper(app, themeRes), R.layout.bottom_sheet_menu_base, null);
+		Context ctx = requireContext();
+		View mainView = View.inflate(new ContextThemeWrapper(ctx, themeRes), R.layout.bottom_sheet_menu_base, null);
 		if (useScrollableItemsContainer()) {
 			itemsContainer = (LinearLayout) mainView.findViewById(R.id.scrollable_items_container);
 		} else {
@@ -79,12 +85,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		inflateMenuItems();
 
-		int bottomDividerColorId = getBottomDividerColorId();
-		if (bottomDividerColorId != DEFAULT_VALUE) {
-			mainView.findViewById(R.id.bottom_row_divider).setBackgroundColor(getResolvedColor(bottomDividerColorId));
-		}
-
-		mainView.findViewById(R.id.dismiss_button).setOnClickListener(new View.OnClickListener() {
+		View dismissButton = mainView.findViewById(R.id.dismiss_button);
+		setupDialogButton(dismissButton, DialogButtonType.STROKED, getDismissButtonTextId());
+		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onDismissButtonClickAction();
@@ -92,19 +95,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 		});
 		if (hideButtonsContainer()) {
-			mainView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
 			mainView.findViewById(R.id.buttons_container).setVisibility(View.GONE);
 		} else {
-			((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
-
 			int rightBottomButtonTextId = getRightBottomButtonTextId();
 			if (rightBottomButtonTextId != DEFAULT_VALUE) {
-				View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
-				buttonsDivider.setVisibility(View.VISIBLE);
-				if (bottomDividerColorId != DEFAULT_VALUE) {
-					buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
-				}
+				mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 				View rightButton = mainView.findViewById(R.id.right_bottom_button);
+				setupDialogButton(rightButton, DialogButtonType.PRIMARY, rightBottomButtonTextId);
 				rightButton.setVisibility(View.VISIBLE);
 				rightButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -112,23 +109,23 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 						onRightBottomButtonClick();
 					}
 				});
-				((TextView) rightButton.findViewById(R.id.right_bottom_button_text)).setText(rightBottomButtonTextId);
 			}
 		}
-
 		setupHeightAndBackground(mainView);
-
 		return mainView;
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		FragmentActivity activity = requireActivity();
+		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
 			final Window window = getDialog().getWindow();
-			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-			window.setAttributes(params);
+			if (window != null) {
+				WindowManager.LayoutParams params = window.getAttributes();
+				params.width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+				window.setAttributes(params);
+			}
 		}
 	}
 
@@ -147,9 +144,41 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
+	private void setupDialogButton(View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
+		Context ctx = buttonView.getContext();
+		TextViewEx buttonTextView = (TextViewEx) buttonView.findViewById(R.id.button_text);
+		boolean v21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+		View buttonContainer = buttonView.findViewById(R.id.button_container);
+		switch (buttonType) {
+			case PRIMARY:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
+				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
+				break;
+			case SECONDARY:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
+				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				break;
+			case STROKED:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
+				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				break;
+		}
+		buttonTextView.setText(buttonTextId);
+		buttonTextView.setEnabled(buttonView.isEnabled());
+	}
+
 	public abstract void createMenuItems(Bundle savedInstanceState);
 
-	protected void inflateMenuItems(){
+	protected void inflateMenuItems() {
 		OsmandApplication app = getMyApplication();
 		for (BaseBottomSheetItem item : items) {
 			item.inflate(app, itemsContainer, nightMode);
@@ -172,7 +201,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(getContext(), colorId);
+		Context ctx = getContext();
+		return ctx != null ? ContextCompat.getColor(ctx, colorId) : 0;
 	}
 
 	protected void setupHeightAndBackground(final View mainView) {
@@ -187,6 +217,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+
 				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
 					if (useScrollableItemsContainer()) {
@@ -207,22 +244,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				} else {
 					mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
 				}
-
-				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
 			}
 		});
 	}
 
 	private int getContentHeight(int availableScreenHeight) {
 		int customHeight = getCustomHeight();
-		int maxHeight = availableScreenHeight
-				- AndroidUtils.dpToPx(getContext(), 1) // divider height
-				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+		int maxHeight = availableScreenHeight - getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
 		if (customHeight != DEFAULT_VALUE && customHeight <= maxHeight) {
 			return customHeight;
 		}
@@ -242,7 +270,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	@ColorRes
-	protected int getBottomDividerColorId() {
+	protected int getDividerColorId() {
 		return DEFAULT_VALUE;
 	}
 
@@ -288,10 +316,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
 	}
 
-	private boolean isNightMode() {
+	private boolean isNightMode(@NonNull OsmandApplication app) {
 		if (usedOnMap) {
-			return getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			return app.getDaynightHelper().isNightModeForMapControls();
 		}
-		return !getMyApplication().getSettings().isLightContent();
+		return !app.getSettings().isLightContent();
 	}
 }
