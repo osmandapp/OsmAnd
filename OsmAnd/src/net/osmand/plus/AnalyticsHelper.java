@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.Settings;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
@@ -161,11 +160,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 					additionalData.put(PARAM_LANG, ctx.getLanguage() + "");
 					additionalData.put(PARAM_FIRST_INSTALL_DAYS, String.valueOf(ctx.getAppInitializer().getFirstInstalledDays()));
 					additionalData.put(PARAM_NUMBER_OF_STARTS, String.valueOf(ctx.getAppInitializer().getNumberOfStarts()));
-					try {
-						additionalData.put(PARAM_USER_ID, Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID));
-					} catch (Exception e) {
-						// ignore
-					}
+					additionalData.put(PARAM_USER_ID, ctx.getUserAndroidId());
 
 					JSONObject json = new JSONObject();
 					for (Map.Entry<String, String> entry : additionalData.entrySet()) {

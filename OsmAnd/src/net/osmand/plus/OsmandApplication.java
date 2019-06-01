@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -15,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
@@ -77,6 +79,7 @@ import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.UUID;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
@@ -917,6 +920,24 @@ public class OsmandApplication extends MultiDexApplication {
 		if (drg != null) {
 			osmandSettings.DRIVING_REGION.set(drg);
 		}
+	}
+
+	@SuppressLint("HardwareIds")
+	public String getUserAndroidId() {
+		String userAndroidId = osmandSettings.USER_ANDROID_ID.get();
+		if (!Algorithms.isEmpty(userAndroidId)) {
+			return userAndroidId;
+		}
+		try {
+			userAndroidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+		} catch (Exception e) {
+			// ignore
+		}
+		if (userAndroidId == null || userAndroidId.length() < 16 || userAndroidId.equals("0000000000000000")) {
+			userAndroidId = UUID.randomUUID().toString();
+		}
+		osmandSettings.USER_ANDROID_ID.set(userAndroidId);
+		return userAndroidId;
 	}
 
 	public void logEvent(String event) {
