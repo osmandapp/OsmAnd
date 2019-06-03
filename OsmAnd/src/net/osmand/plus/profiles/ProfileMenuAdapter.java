@@ -117,7 +117,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 					Algorithms.capitalizeFirstLetterAndLowercase(
 						item.getParent().getStringKey().replace("_", " "))));
 			} else {
-				holder.title.setText(app.getResources().getString(item.getStringResource()));
+				holder.title.setText(item.getStringResource());
 				holder.descr.setText(R.string.profile_type_base_string);
 			}
 
