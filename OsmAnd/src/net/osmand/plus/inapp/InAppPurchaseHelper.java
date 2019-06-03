@@ -166,6 +166,14 @@ public class InAppPurchaseHelper {
 		return purchases.getPurchasedMonthlyLiveUpdates();
 	}
 
+	public InAppSubscription getPurchasedQuarterlyLiveUpdates() {
+		return purchases.getPurchasedQuarterlyLiveUpdated();
+	}
+
+	public InAppSubscription getPurchasedAnnualLiveUpdates() {
+		return purchases.getPurchasedAnnualLiveUpdates();
+	}
+
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);

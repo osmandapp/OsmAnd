@@ -170,10 +170,15 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 				if (purchaseHelper != null) {
 					InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
+					InAppSubscription quarterlyPurchased = purchaseHelper.getPurchasedQuarterlyLiveUpdates();
+					InAppSubscription annualPurchased = purchaseHelper.getPurchasedAnnualLiveUpdates();
 
-					if (monthlyPurchased != null && monthlyPurchased.isDonationSupported()) {
+					if ((monthlyPurchased != null && monthlyPurchased.isDonationSupported())
+					|| (quarterlyPurchased != null && quarterlyPurchased.isDonationSupported())
+					|| (annualPurchased != null && annualPurchased.isDonationSupported())) {
 						if (Algorithms.isEmpty(countryName)) {
-							if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+							if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get()
+								.equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
 								regionNameHeaderTextView.setText(R.string.default_buttons_support);
 								countryName = getString(R.string.osmand_team);
 							} else {
@@ -274,7 +279,12 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 		if (purchaseHelper != null) {
 			InAppSubscription monthlyPurchased = purchaseHelper.getPurchasedMonthlyLiveUpdates();
-			return monthlyPurchased != null && monthlyPurchased.isDonationSupported();
+			InAppSubscription quarterlyPurchased = purchaseHelper.getPurchasedQuarterlyLiveUpdates();
+			InAppSubscription annualPurchased = purchaseHelper.getPurchasedAnnualLiveUpdates();
+
+			return (monthlyPurchased != null && monthlyPurchased.isDonationSupported())
+				|| (quarterlyPurchased != null && quarterlyPurchased.isDonationSupported())
+				|| (annualPurchased != null && annualPurchased.isDonationSupported());
 		}
 		return false;
 	}
