@@ -549,14 +549,6 @@ public class ApplicationMode {
 		return false;
 	}
 
-	public static int getIconResFromName(Context app, String variableName, String packageName) {
-		try {
-			return app.getResources().getIdentifier(variableName, "drawable", packageName);
-		} catch (Exception e) {
-			return -1;
-		}
-	}
-
 	@DrawableRes public int getIconRes(Context app) {
 		try {
 			return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
