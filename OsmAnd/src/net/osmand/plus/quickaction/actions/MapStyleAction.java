@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import net.osmand.util.Algorithms;
 
 public class MapStyleAction extends SwitchableAction<String> {
 
@@ -42,21 +43,26 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public void execute(MapActivity activity) {
-
 		List<String> mapStyles = getFilteredStyles();
-		boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
-		if (showBottomSheetStyles) {
-			showChooseDialog(activity.getSupportFragmentManager());
-			return;
-		}
-		String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
-		int index = mapStyles.indexOf(curStyle);
-		String nextStyle = mapStyles.get(0);
+		if (!Algorithms.isEmpty(mapStyles)) {
+			boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
+			if (showBottomSheetStyles) {
+				showChooseDialog(activity.getSupportFragmentManager());
+				return;
+			}
+			String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
+			int index = mapStyles.indexOf(curStyle);
+			String nextStyle = mapStyles.get(0);
 
-		if (index >= 0 && index + 1 < mapStyles.size()) {
-			nextStyle = mapStyles.get(index + 1);
+			if (index >= 0 && index + 1 < mapStyles.size()) {
+				nextStyle = mapStyles.get(index + 1);
+			}
+			executeWithParams(activity, nextStyle);
+		} else {
+			Toast.makeText(activity, R.string.quick_action_need_to_add_item_to_list,
+				Toast.LENGTH_LONG).show();
 		}
-		executeWithParams(activity, nextStyle);
+
 	}
 
 	@Override
@@ -181,9 +187,8 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	@Override
 	public boolean fillParams(View root, MapActivity activity) {
-		super.fillParams(root, activity);
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return true;
+		return super.fillParams(root, activity);
 	}
 
 	@Override
