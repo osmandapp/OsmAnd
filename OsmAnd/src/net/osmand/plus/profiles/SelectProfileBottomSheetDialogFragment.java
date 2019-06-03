@@ -178,9 +178,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			for (final IconResWithDescr icon : icons) {
 				Drawable drawableIcon;
 				boolean isSelected = icon.resStringId.equals(selectedIconRes);
-				int iconRes = ApplicationMode
-					.getIconResFromName(getMyApplication(), icon.resStringId,
-						getMyApplication().getPackageName());
+				int iconRes = icon.resId;
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(iconRes, nightMode

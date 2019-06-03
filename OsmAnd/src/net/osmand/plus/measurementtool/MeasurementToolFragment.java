@@ -805,8 +805,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 			ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 			snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-			snapToRoadBtn.setImageDrawable(getActiveIcon(ApplicationMode.getIconResFromName(
-				getMyApplication(), appMode.getIconName(), getMyApplication().getPackageName())));
+			snapToRoadBtn.setImageDrawable(getActiveIcon(appMode.getIconRes(getMyApplication())));
 			snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

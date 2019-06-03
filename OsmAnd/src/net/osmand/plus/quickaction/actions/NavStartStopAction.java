@@ -85,8 +85,7 @@ public class NavStartStopAction extends QuickAction {
 			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
 				return ((MapActivity) context).getMapActions().getRouteMode(null).getSmallIconDark();
 			}
-			return ApplicationMode.getIconResFromName(context, helper.getAppMode().getIconName(),
-				context.getPackageName());
+			return helper.getAppMode().getIconRes(context);
 		}
 		return super.getIconRes(context);
 	}
