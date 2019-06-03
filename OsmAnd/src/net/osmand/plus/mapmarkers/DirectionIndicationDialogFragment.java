@@ -75,8 +75,9 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 		TextView appModeTv = (TextView) mainView.findViewById(R.id.app_mode_text_view);
 		ApplicationMode appMode = settings.APPLICATION_MODE.get();
-		appModeTv.setText(appMode.getStringResource());
-		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(appMode.getSmallIconDark()), null);
+		appModeTv.setText(appMode.toHumanString(getContext()));
+		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(
+			appMode.getIconRes(getMyApplication())), null);
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {

@@ -55,8 +55,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent,
 		Bundle savedInstanceState) {
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), listener);
-		adapter.setBottomSheetMode(true);
+		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), listener, true);
 		recyclerView = new RecyclerView(getContext());
 		recyclerView = (RecyclerView) View
 			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
@@ -128,13 +127,6 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 		items.add(new TitleItem(getString(R.string.application_profiles)));
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(recyclerView).create());
-		items.add(new BaseBottomSheetItem.Builder().setCustomView(textButtonView)
-			.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					startActivity(new Intent(getContext(), SettingsProfileActivity.class));
-				}
-			}).create());
 	}
 
 	public void setUpdateMapRouteMenuListener(
