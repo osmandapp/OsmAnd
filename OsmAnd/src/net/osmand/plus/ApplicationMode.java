@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 import android.content.Context;
 
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -469,7 +471,7 @@ public class ApplicationMode {
 	@Expose private final String stringKey;
 	@Expose private String userProfileName;
 	@Expose private ApplicationMode parent;
-	@Expose private String iconName = "R.drawable.map_world_globe_dark";
+	@Expose private String iconName = "map_world_globe_dark";
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;
@@ -547,11 +549,11 @@ public class ApplicationMode {
 		return false;
 	}
 
-	public static int getIconResFromName(Context app, String variableName, String packageName) {
+	@DrawableRes public int getIconRes(Context app) {
 		try {
-			return app.getResources().getIdentifier(variableName, "drawable", packageName);
+			return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 		} catch (Exception e) {
-			return -1;
+			return R.drawable.map_world_globe_dark;
 		}
 	}
 }

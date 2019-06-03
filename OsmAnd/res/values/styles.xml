@@ -246,6 +246,11 @@
         <item name="card_and_list_background_basic">@color/card_and_list_background_light</item>
         <item name="activity_background_basic">@color/activity_background_light</item>
         <item name="pages_bg">@drawable/pages_bg_light</item>
+        <item name="dlg_btn_primary">@drawable/dlg_btn_primary_light</item>
+        <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_light</item>
+        <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_light</item>
+        <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_light</item>
+        <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -478,6 +483,11 @@
         <item name="card_and_list_background_basic">@color/card_and_list_background_dark</item>
         <item name="activity_background_basic">@color/activity_background_dark</item>
         <item name="pages_bg">@drawable/pages_bg_dark</item>
+        <item name="dlg_btn_primary">@drawable/dlg_btn_primary_dark</item>
+        <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_dark</item>
+        <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_dark</item>
+        <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_dark</item>
+        <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

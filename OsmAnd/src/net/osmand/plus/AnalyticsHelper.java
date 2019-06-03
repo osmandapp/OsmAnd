@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.Settings;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
@@ -34,6 +33,7 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 	private final static int DATA_PARCEL_SIZE = 500; // 500 events
 	private final static int SUBMIT_DATA_INTERVAL = 60 * 60 * 1000; // 1 hour
 
+	private final static String PARAM_OS = "os";
 	private final static String PARAM_START_DATE = "startDate";
 	private final static String PARAM_FINISH_DATE = "finishDate";
 	private final static String PARAM_FIRST_INSTALL_DAYS = "nd";
@@ -153,17 +153,14 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 					}
 
 					Map<String, String> additionalData = new LinkedHashMap<String, String>();
+					additionalData.put(PARAM_OS, "android");
 					additionalData.put(PARAM_START_DATE, String.valueOf(d.startDate));
 					additionalData.put(PARAM_FINISH_DATE, String.valueOf(d.finishDate));
 					additionalData.put(PARAM_VERSION, Version.getFullVersion(ctx));
 					additionalData.put(PARAM_LANG, ctx.getLanguage() + "");
 					additionalData.put(PARAM_FIRST_INSTALL_DAYS, String.valueOf(ctx.getAppInitializer().getFirstInstalledDays()));
 					additionalData.put(PARAM_NUMBER_OF_STARTS, String.valueOf(ctx.getAppInitializer().getNumberOfStarts()));
-					try {
-						additionalData.put(PARAM_USER_ID, Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID));
-					} catch (Exception e) {
-						// ignore
-					}
+					additionalData.put(PARAM_USER_ID, ctx.getUserAndroidId());
 
 					JSONObject json = new JSONObject();
 					for (Map.Entry<String, String> entry : additionalData.entrySet()) {

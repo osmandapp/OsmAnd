@@ -35,13 +35,21 @@
 				android:layout_marginStart="@dimen/list_item_icon_margin_left"
 				tools:src="@drawable/img_user_picture"/>
 
-			<LinearLayout
+			<FrameLayout
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_standard"
 				android:layout_marginRight="@dimen/content_padding_standard"
 				android:layout_weight="1"
-				android:orientation="vertical">
+				android:minHeight="@dimen/list_item_height"
+				android:paddingTop="@dimen/content_padding_half"
+				android:paddingBottom="@dimen/content_padding_half">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:orientation="vertical">
 
 				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/title"
@@ -51,7 +59,6 @@
 					android:maxLines="1"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/list_item_title_text_size"
-					android:paddingTop="@dimen/content_padding_half"
 					app:typeface="@string/font_roboto_regular"
 					tools:text="Share location"/>
 
@@ -117,7 +124,6 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:visibility="gone"
-					android:paddingBottom="@dimen/content_padding_half"
 					tools:visibility="visible">
 
 					<net.osmand.telegram.ui.views.TextViewEx
@@ -136,6 +142,8 @@
 				</LinearLayout>
 
 			</LinearLayout>
+
+			</FrameLayout>
 
 			<CheckBox
 				android:id="@+id/check_box"

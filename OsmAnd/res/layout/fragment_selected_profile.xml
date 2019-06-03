@@ -252,7 +252,7 @@
           android:layout_marginEnd="@dimen/list_content_padding"
           android:layout_marginLeft="@dimen/list_content_padding"
           android:layout_marginRight="@dimen/list_content_padding"
-          android:text="You can add own modified version of routing.xml to ..osmand/files/routing/"/>
+          android:text="@string/osmand_routing_promo"/>
 
       </LinearLayout>
 

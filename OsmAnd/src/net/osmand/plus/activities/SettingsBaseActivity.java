@@ -366,7 +366,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 					    : String.format(getString(R.string.profile_type_descr_string),
 						    am.getParent().toHumanString(getMyApplication())),
 				    am.getStringKey(),
-				    ApplicationMode.getIconResFromName(getMyApplication(), am.getIconName(), getApplication().getPackageName()),
+				    am.getIconRes(getMyApplication()),
 				    isSelected
 			    ));
 		    }

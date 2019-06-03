@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-        android:key="router_service"
-        android:summary="@string/router_service_descr"
-        android:title="@string/router_service"/>
 
     <PreferenceCategory
         android:key="routing_preferences"

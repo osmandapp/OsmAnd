@@ -59,7 +59,7 @@
         android:orientation="horizontal">
 
         <ImageView
-
+          android:id="@+id/menu_image"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -677,11 +676,7 @@ public class InAppPurchaseHelper {
 		parameters.put("lang", ctx.getLanguage() + "");
 		parameters.put("nd", ctx.getAppInitializer().getFirstInstalledDays() + "");
 		parameters.put("ns", ctx.getAppInitializer().getNumberOfStarts() + "");
-		try {
-			parameters.put("aid", Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID));
-		} catch (Exception e) {
-			// ignore
-		}
+		parameters.put("aid", ctx.getUserAndroidId());
 	}
 
 	// Callback for when a purchase is finished

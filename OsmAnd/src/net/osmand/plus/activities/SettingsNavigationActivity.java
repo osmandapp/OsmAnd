@@ -83,14 +83,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		addPreferencesFromResource(R.xml.navigation_settings);
 		PreferenceScreen screen = getPreferenceScreen();
 		settings = getMyApplication().getSettings();
-		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
 		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		String[] entries = new String[vls.length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = vls[i].getName();
 		}
-		registerListPreference(settings.ROUTER_SERVICE, screen, entries, vls);
-		
+
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
 
 		Integer[] intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
@@ -365,7 +363,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		prepareRoutingPrefs(getPreferenceScreen());
 		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
-		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
 	}
 
 	@Override
@@ -386,12 +383,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		}
 		super.onPreferenceChange(preference, newValue);
-		if (id.equals(settings.ROUTER_SERVICE.getId())) {
-			routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  ["
-					+ settings.ROUTER_SERVICE.get() + "]");
-			prepareRoutingPrefs(getPreferenceScreen());
-			super.updateAllSettings();
-		}
 		return true;
 	}
 

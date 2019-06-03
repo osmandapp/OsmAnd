@@ -18,6 +18,7 @@
 	<dimen name="card_button_progress_size">32dp</dimen>
 	<dimen name="card_button_progress_size_small">24dp</dimen>
 	<dimen name="card_padding">12dp</dimen>
+	<dimen name="dlg_button_rect_rad">3dp</dimen>
 
 	<dimen name="widget_turn_lane_size">36dp</dimen>
 	<dimen name="widget_turn_lane_border">6dp</dimen>
