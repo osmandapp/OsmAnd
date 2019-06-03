@@ -163,7 +163,7 @@ public class AppModeDialog {
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_dark);
 					}
 				} else {
-					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(ApplicationMode.getIconResFromName(ctx, mode.getIconName(), ctx.getPackageName())));
+					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getIconRes(ctx)));
 				}
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_unchecked)));
 			}
