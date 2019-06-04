@@ -51,7 +51,7 @@ public class InAppPurchases {
 	private InAppSubscription quarterlyLiveUpdates;
 	private InAppSubscription annualLiveUpdates;
 	private InAppSubscription discountedMonthlyLiveUpdates;
-	private InAppSubscription discountedQuartrlyLiveUpdates;
+	private InAppSubscription discountedQuarterlyLiveUpdates;
 	private InAppSubscription discountedAnnualLiveUpdates;
 	private InAppSubscriptionList liveUpdates;
 	private InAppPurchase[] inAppPurchases;
@@ -72,7 +72,7 @@ public class InAppPurchases {
 				}
 			} else if (s instanceof InAppPurchaseLiveUpdates3Months) {
 				if (s.isDiscounted()) {
-					discountedQuartrlyLiveUpdates = s;
+					discountedQuarterlyLiveUpdates = s;
 				} else {
 					quarterlyLiveUpdates = s;
 				}
@@ -135,18 +135,18 @@ public class InAppPurchases {
 	}
 
 	public InAppSubscription getPurchasedQuarterlyLiveUpdated() {
-		if (quarterlyLiveUpdates.isAnyPurchased()) {
+		if (quarterlyLiveUpdates != null && quarterlyLiveUpdates.isAnyPurchased()) {
 			return quarterlyLiveUpdates;
-		} else if (discountedAnnualLiveUpdates.isAnyPurchased()) {
-			return discountedQuartrlyLiveUpdates;
+		} else if (discountedQuarterlyLiveUpdates != null && discountedQuarterlyLiveUpdates.isAnyPurchased()) {
+			return discountedQuarterlyLiveUpdates;
 		}
 		return null;
 	}
 
 	public InAppSubscription getPurchasedAnnualLiveUpdates() {
-		if (annualLiveUpdates.isAnyPurchased()) {
+		if (annualLiveUpdates != null && annualLiveUpdates.isAnyPurchased()) {
 			return annualLiveUpdates;
-		} else if (discountedAnnualLiveUpdates.isAnyPurchased()) {
+		} else if (discountedAnnualLiveUpdates != null && discountedAnnualLiveUpdates.isAnyPurchased()) {
 			return discountedAnnualLiveUpdates;
 		}
 		return null;
