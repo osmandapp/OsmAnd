@@ -131,6 +131,9 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 				holder.divider.setBackgroundColor(isNightMode(app)
 					? app.getResources().getColor(R.color.divider_dark)
 					: app.getResources().getColor(R.color.divider_light));
+				if (isNightMode(app)) {
+
+				}
 			}
 
 			if (item.getParent() != null) {

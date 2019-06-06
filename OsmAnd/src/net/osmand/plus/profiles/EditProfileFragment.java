@@ -165,6 +165,15 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
 			selectIconBtnBackground
 				.setColor(app.getResources().getColor(R.color.text_field_box_dark));
+			saveButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_night));
+			saveButtonSV.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_night));
+			cancelBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_gray_n));
+			cancelBtnSV.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_gray_n));
+			saveButton.setTextColor(getResources().getColor(R.color.main_font_dark));
+			saveButtonSV.setTextColor(getResources().getColor(R.color.main_font_dark));
+			cancelBtn.setTextColor(getResources().getColor(R.color.active_buttons_and_links_dark));
+			cancelBtnSV.setTextColor(getResources().getColor(R.color.active_buttons_and_links_dark));
+
 		} else {
 			selectIconBtnBackground
 				.setColor(app.getResources().getColor(R.color.text_field_box_light));
@@ -789,7 +798,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			} else if (isUserProfile) {
 				stringKey = mode.getStringKey();
 				parent = mode.getParent();
-				iconId = mode.getSmallIconDark();
+				iconId = mode.getIconRes(getMyApplication());
 				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
 				userProfileTitle = mode.getUserProfileName();
 			} else {
