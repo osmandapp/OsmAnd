@@ -95,7 +95,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         quickActionButton = (ImageButton) mapActivity.findViewById(R.id.map_quick_actions_button);
         setQuickActionButtonMargin();
         isLayerOn = quickActionRegistry.isQuickActionOn();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightMode();
 		updateQuickActionButton(false);
         quickActionButton.setContentDescription(mapActivity.getString(R.string.configure_screen_quick_action));
         quickActionButton.setOnClickListener(new View.OnClickListener() {
@@ -375,7 +375,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode();
 		if (isInMovingMarkerMode()) {
 			canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
 			contextMarker.draw(canvas);
