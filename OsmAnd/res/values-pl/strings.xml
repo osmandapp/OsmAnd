@@ -2352,7 +2352,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_permissions">Uprawnienia</string>
     <string name="import_gpx_failed_descr">Nie można zaimportować pliku. Proszę sprawdzić czy program posiada uprawnienia do odczytywania pliku z jego położenia.</string>
     <string name="map_widget_ruler_control">Linijka promieniowa</string>
-    <string name="shared_string_reload">Wczytaj ponownie</string>
+    <string name="shared_string_reload">Załaduj ponownie</string>
     <string name="mapillary_menu_title_username">Nazwa użytkownika</string>
     <string name="mapillary_menu_title_dates">Data</string>
     <string name="shared_string_to">Do</string>
