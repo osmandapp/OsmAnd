@@ -65,28 +65,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 		@Nullable Bundle savedInstanceState) {
 
-		listener = new ProfileListener() {
-			@Override
-			public void changeProfileStatus(ApplicationMode am, boolean isSelected) {
-				if(isSelected) {
-					availableAppModes.add(am);
-				} else {
-					availableAppModes.remove(am);
-				}
-				ApplicationMode.changeProfileStatus(am, isSelected, getMyApplication());
-			}
-
-			@Override
-			public void editProfile(ApplicationMode item) {
-				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-				intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-				if (!Algorithms.isEmpty(item.getUserProfileName())) {
-					intent.putExtra(IS_USER_PROFILE, true);
-				}
-				startActivity(intent);
-			}
-		};
-
 		View view = inflater.inflate(R.layout.profiles_list_fragment, container, false);
 		recyclerView = view.findViewById(R.id.profiles_list);
 		addNewProfileBtn = view.findViewById(R.id.add_profile_btn);
@@ -107,7 +85,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), listener);
+		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
 		return view;
@@ -116,6 +94,30 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (listener == null) {
+			listener = new ProfileListener() {
+				@Override
+				public void changeProfileStatus(ApplicationMode am, boolean isSelected) {
+					if(isSelected) {
+						availableAppModes.add(am);
+					} else {
+						availableAppModes.remove(am);
+					}
+					ApplicationMode.changeProfileStatus(am, isSelected, getMyApplication());
+				}
+
+				@Override
+				public void editProfile(ApplicationMode item) {
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+					if (!Algorithms.isEmpty(item.getUserProfileName())) {
+						intent.putExtra(IS_USER_PROFILE, true);
+					}
+					startActivity(intent);
+				}
+			};
+		}
+		adapter.setListener(listener);
 
 		getBaseProfileListener();
 
