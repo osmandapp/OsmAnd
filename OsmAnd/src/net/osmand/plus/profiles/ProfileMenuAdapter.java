@@ -1,14 +1,17 @@
 package net.osmand.plus.profiles;
 
-import android.content.Intent;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,22 +29,25 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 	private List<Object> items = new ArrayList<>();
 	private Set<ApplicationMode> selectedItems;
-	private ProfileListener listener;
+	@Nullable
+	private ProfileMenuAdapterListener listener;
 	private final OsmandApplication app;
 	@ColorRes
 	private int selectedIconColorRes;
-	private boolean isBottomSheet = false;
-	private static final String MANAGE_BTN = "manage_button";
+	private boolean bottomButton;
+	private String bottomButtonText;
+	private static final String BUTTON_ITEM = "button_item";
 
 	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
-		OsmandApplication app, boolean isBottomSheet) {
+		OsmandApplication app, String bottomButtonText) {
 		this.items.addAll(items);
-		if (isBottomSheet) {
-			this.items.add(MANAGE_BTN);
+		if (bottomButton) {
+			this.items.add(BUTTON_ITEM);
 		}
 		this.app = app;
 		this.selectedItems = selectedItems;
-		this.isBottomSheet = isBottomSheet;
+		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
+		this.bottomButtonText = bottomButtonText;
 		selectedIconColorRes = isNightMode(app)
 			? R.color.active_buttons_and_links_dark
 			: R.color.active_buttons_and_links_light;
@@ -51,12 +57,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		return items;
 	}
 
-	public void addItem(ApplicationMode profileItem) {
-		items.add(profileItem);
-		notifyDataSetChanged();
-	}
-
-	public void setListener(ProfileListener listener) {
+	public void setListener(@Nullable ProfileMenuAdapterListener listener) {
 		this.listener = listener;
 	}
 
@@ -64,8 +65,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		this.items.clear();
 		this.selectedItems.clear();
 		this.items.addAll(newList);
-		if (isBottomSheet) {
-			items.add(MANAGE_BTN);
+		if (bottomButton) {
+			items.add(BUTTON_ITEM);
 		}
 		this.selectedItems.addAll(selectedItems);
 		notifyDataSetChanged();
@@ -79,55 +80,22 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	@NonNull
 	@Override
 	public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View itemView = LayoutInflater.from(parent.getContext())
-			.inflate(R.layout.profile_list_item, parent, false);
-		final ProfileViewHolder holder = new ProfileViewHolder(itemView);
-		holder.itemView.findViewById(R.id.compound_button).setOnClickListener(
-			new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					int pos = holder.getAdapterPosition();
-					if ( pos != RecyclerView.NO_POSITION) {
-						Object o = items.get(pos);
-						if (o instanceof ApplicationMode) {
-							final ApplicationMode item = (ApplicationMode) o;
-							int iconRes = item.getParent() == null
-								? item.getSmallIconDark()
-								: item.getIconRes(app);
-
-							if (iconRes == 0 || iconRes == -1) {
-								iconRes = R.drawable.ic_action_world_globe;
-							}
-
-							if (!selectedItems.contains(item)) {
-								selectedItems.add(item);
-								holder.icon.setImageDrawable(
-									app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
-							} else {
-								selectedItems.remove(item);
-								holder.icon.setImageDrawable(
-									app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
-							}
-							listener.changeProfileStatus(item, holder.aSwitch.isChecked());
-						}
-					}
-				}
-			});
-		return holder;
+		View itemView =
+				LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_list_item, parent, false);
+		return new ProfileViewHolder(itemView);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
 		Object obj = items.get(position);
-
 		if (obj instanceof ApplicationMode) {
 			holder.divider.setVisibility(View.VISIBLE);
 			holder.icon.setVisibility(View.VISIBLE);
 			holder.descr.setVisibility(View.VISIBLE);
-			holder.aSwitch.setVisibility(View.VISIBLE);
+			holder.switcher.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.VISIBLE);
 			final ApplicationMode item = (ApplicationMode) obj;
-			if (isBottomSheet) {
+			if (bottomButton) {
 				holder.divider.setBackgroundColor(isNightMode(app)
 					? app.getResources().getColor(R.color.divider_dark)
 					: app.getResources().getColor(R.color.divider_light));
@@ -147,51 +115,39 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 				? R.color.main_font_dark
 				: R.color.main_font_light));
 
-			int iconRes = item.getParent() == null
-				? item.getSmallIconDark()
-				: item.getIconRes(app);
-
-			if (iconRes == 0 || iconRes == -1) {
-				iconRes = R.drawable.ic_action_world_globe;
-			}
-
-			if (selectedItems.contains(item)) {
-				holder.aSwitch.setChecked(true);
-				holder.icon
-					.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
-			} else {
-				holder.aSwitch.setChecked(false);
-				holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
-			}
-
-			holder.profileOptions.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					listener.editProfile(item);
-				}
-			});
+			holder.initSwitcher = true;
+			holder.switcher.setChecked(selectedItems.contains(item));
+			holder.initSwitcher = false;
+			updateViewHolder(holder, item);
 		} else {
 			final String title = (String) obj;
-			if (title.equals("manage_button"))
-			holder.divider.setVisibility(View.INVISIBLE);
+			if (title.equals(BUTTON_ITEM)) {
+				holder.divider.setVisibility(View.INVISIBLE);
+			}
 			holder.icon.setVisibility(View.INVISIBLE);
 			holder.descr.setVisibility(View.GONE);
-			holder.aSwitch.setVisibility(View.GONE);
+			holder.switcher.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
 			holder.title.setTextColor(app.getResources().getColor(selectedIconColorRes));
-			holder.title.setText(R.string.shared_string_manage);
-			holder.profileOptions.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					app.startActivity(new Intent(app, SettingsProfileActivity.class));
-				}
-			});
+			holder.title.setText(bottomButtonText);
 		}
 	}
 
 	@Override
 	public int getItemCount() {
 		return items.size();
+	}
+
+	private void updateViewHolder(ProfileViewHolder holder, ApplicationMode mode) {
+		int iconRes = mode.getParent() == null ? mode.getSmallIconDark() : mode.getIconRes(app);
+		if (iconRes == 0 || iconRes == -1) {
+			iconRes = R.drawable.ic_action_world_globe;
+		}
+		if (selectedItems.contains(mode)) {
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
+		} else {
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
+		}
 	}
 
 	private static boolean isNightMode(OsmandApplication ctx) {
@@ -201,28 +157,65 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	class ProfileViewHolder extends RecyclerView.ViewHolder {
 
 		TextView title, descr;
-		SwitchCompat aSwitch;
+		SwitchCompat switcher;
 		ImageView icon, menuIcon;
 		LinearLayout profileOptions;
 		View divider;
+
+		boolean initSwitcher;
 
 		ProfileViewHolder(View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			descr = itemView.findViewById(R.id.description);
-			aSwitch = itemView.findViewById(R.id.compound_button);
+			switcher = itemView.findViewById(R.id.compound_button);
 			icon = itemView.findViewById(R.id.icon);
 			profileOptions = itemView.findViewById(R.id.profile_settings);
 			divider = itemView.findViewById(R.id.divider_bottom);
 			menuIcon = itemView.findViewById(R.id.menu_image);
+
+			profileOptions.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int pos = getAdapterPosition();
+					if (pos != RecyclerView.NO_POSITION && listener != null) {
+						Object o = items.get(pos);
+						if (o instanceof ApplicationMode) {
+							listener.onProfilePressed((ApplicationMode) o);
+						} else {
+							listener.onButtonPressed();
+						}
+					}
+				}
+			});
+			switcher.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					int pos = getAdapterPosition();
+					if (pos != RecyclerView.NO_POSITION && listener != null && !initSwitcher) {
+						Object o = items.get(pos);
+						if (o instanceof ApplicationMode) {
+							final ApplicationMode item = (ApplicationMode) o;
+							if (isChecked) {
+								selectedItems.add(item);
+							} else {
+								selectedItems.remove(item);
+							}
+							updateViewHolder(ProfileViewHolder.this, item);
+							listener.onProfileSelected(item, isChecked);
+						}
+					}
+				}
+			});
 		}
 	}
 
-	public interface ProfileListener {
+	public interface ProfileMenuAdapterListener {
 
-		void changeProfileStatus(ApplicationMode item, boolean isSelected);
+		void onProfileSelected(ApplicationMode item, boolean selected);
 
-		void editProfile(ApplicationMode item);
+		void onProfilePressed(ApplicationMode item);
+
+		void onButtonPressed();
 	}
 }
-

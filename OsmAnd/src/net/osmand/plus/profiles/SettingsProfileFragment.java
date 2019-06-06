@@ -25,7 +25,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
+import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
@@ -43,7 +43,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	private RecyclerView recyclerView;
 	private LinearLayout addNewProfileBtn;
 
-	ProfileListener listener = null;
+	ProfileMenuAdapterListener listener = null;
 	SelectProfileListener typeListener = null;
 
 	private List<ApplicationMode> allAppModes;
@@ -85,7 +85,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), false);
+		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), null);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
 		return view;
@@ -95,25 +95,29 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		if (listener == null) {
-			listener = new ProfileListener() {
+			listener = new ProfileMenuAdapterListener() {
 				@Override
-				public void changeProfileStatus(ApplicationMode am, boolean isSelected) {
-					if(isSelected) {
+				public void onProfileSelected(ApplicationMode am, boolean selected) {
+					if(selected) {
 						availableAppModes.add(am);
 					} else {
 						availableAppModes.remove(am);
 					}
-					ApplicationMode.changeProfileStatus(am, isSelected, getMyApplication());
+					ApplicationMode.changeProfileStatus(am, selected, getMyApplication());
 				}
 
 				@Override
-				public void editProfile(ApplicationMode item) {
+				public void onProfilePressed(ApplicationMode item) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
 					if (!Algorithms.isEmpty(item.getUserProfileName())) {
 						intent.putExtra(IS_USER_PROFILE, true);
 					}
 					startActivity(intent);
+				}
+
+				@Override
+				public void onButtonPressed() {
 				}
 			};
 		}

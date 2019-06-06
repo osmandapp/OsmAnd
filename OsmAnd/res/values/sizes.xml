@@ -343,9 +343,7 @@
 	<dimen name="pages_item_padding">3dp</dimen>
 	<dimen name="pages_item_margin">4dp</dimen>
 
-
 	<dimen name="setting_profile_item_height">64dp</dimen>
-	<dimen name="setting_profile_image_margin">24dp</dimen>
 	<dimen name="setting_profile_item_switch_margin">18dp</dimen>
 
 </resources>
