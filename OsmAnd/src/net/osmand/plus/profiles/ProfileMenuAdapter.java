@@ -86,8 +86,9 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
-						Object o = items.get(holder.getAdapterPosition());
+					int pos = holder.getAdapterPosition();
+					if ( pos != RecyclerView.NO_POSITION) {
+						Object o = items.get(pos);
 						if (o instanceof ApplicationMode) {
 							final ApplicationMode item = (ApplicationMode) o;
 							int iconRes = item.getParent() == null
