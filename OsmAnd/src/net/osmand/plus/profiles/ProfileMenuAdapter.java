@@ -82,33 +82,36 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		View itemView = LayoutInflater.from(parent.getContext())
 			.inflate(R.layout.profile_list_item, parent, false);
 		final ProfileViewHolder holder = new ProfileViewHolder(itemView);
-
 		holder.itemView.findViewById(R.id.compound_button).setOnClickListener(
 			new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Object o = items.get(holder.getAdapterPosition());
-					if (o instanceof ApplicationMode) {
-						final ApplicationMode item = (ApplicationMode) o;
-						int iconRes = item.getParent() == null
-							? item.getSmallIconDark()
-							: item.getIconRes(app);
+					if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+						Object o = items.get(holder.getAdapterPosition());
+						if (o instanceof ApplicationMode) {
+							final ApplicationMode item = (ApplicationMode) o;
+							int iconRes = item.getParent() == null
+								? item.getSmallIconDark()
+								: item.getIconRes(app);
 
-						if (iconRes == 0 || iconRes == -1) {
-							iconRes = R.drawable.ic_action_world_globe;
+							if (iconRes == 0 || iconRes == -1) {
+								iconRes = R.drawable.ic_action_world_globe;
+							}
+
+							if (!selectedItems.contains(item)) {
+								selectedItems.add(item);
+								holder.icon.setImageDrawable(
+									app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
+							} else {
+								selectedItems.remove(item);
+								holder.icon.setImageDrawable(
+									app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
+							}
+							listener.changeProfileStatus(item, holder.aSwitch.isChecked());
 						}
-
-					if (!selectedItems.contains(item)) {
-						selectedItems.add(item);
-						holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
-					} else {
-						selectedItems.remove(item);
-						holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
 					}
-					listener.changeProfileStatus(item, holder.aSwitch.isChecked());
 				}
-			}});
-
+			});
 		return holder;
 	}
 
