@@ -251,6 +251,8 @@
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_light</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_light</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
+        <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
+        <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -488,6 +490,8 @@
         <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_dark</item>
         <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_dark</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
+        <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
+        <item name="profile_cancel_btn">@drawable/btn_round_profile_gray_n</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
