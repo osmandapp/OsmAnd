@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="app_profile_custom_nav_subtitle"></string>
     <string name="profile_name_hint">Profile Name</string>
     <string name="nav_type_hint">Navigation Type</string>
     <string name="app_mode_taxi">Taxi</string>

@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -37,11 +38,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import net.osmand.util.Algorithms;
+import org.apache.commons.logging.Log;
 
 
 public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
+	private static final Log LOG = PlatformUtil.getLog(SettingsBaseActivity.class);
 	public static final String INTENT_APP_MODE = "INTENT_APP_MODE";
 
 	protected OsmandSettings settings;
@@ -359,12 +362,20 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			    isSelected = true;
 		    }
 	    	if (am != ApplicationMode.DEFAULT) {
+	    		String descr;
+	    		if (am.getParent() == null) {
+	    			descr = getString(R.string.profile_type_base_string);
+			    } else {
+				    descr = String.format(getString(R.string.profile_type_descr_string),
+					    am.getParent().toHumanString(getMyApplication()));
+	    			if (am.getRoutingProfile().contains("/")) {
+					    descr = descr.concat(", " + am.getRoutingProfile()
+						    .substring(0, am.getRoutingProfile().indexOf("/")));
+				    }
+			    }
 			    activeModes.add(new ProfileDataObject(
 				    am.toHumanString(getMyApplication()),
-				    am.getParent() == null
-					    ? getString(R.string.profile_type_base_string)
-					    : String.format(getString(R.string.profile_type_descr_string),
-						    am.getParent().toHumanString(getMyApplication())),
+					descr,
 				    am.getStringKey(),
 				    am.getIconRes(getMyApplication()),
 				    isSelected
@@ -413,7 +424,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			    .capitalizeFirstLetterAndLowercase(mode.getParent().getStringKey()));
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(subtitle);
-	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getSmallIconDark(),
+	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(this),
 		    getMyApplication().getSettings().isLightContent()
 			    ? R.color.active_buttons_and_links_light
 			    : R.color.active_buttons_and_links_dark));
@@ -422,6 +433,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			    ? R.color.active_buttons_and_links_light
 			    : R.color.active_buttons_and_links_dark));
 	    settings.APPLICATION_MODE.set(mode);
+	    previousAppMode = mode;
 	    isModeSelected = true;
 	    updateAllSettings();
     }
