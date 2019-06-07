@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -17,8 +15,7 @@
 			android:id="@+id/scrollable_items_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:paddingBottom="@dimen/bottom_sheet_content_padding_small"/>
+			android:orientation="vertical" />
 
 	</ScrollView>
 
@@ -27,68 +24,33 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		android:visibility="gone"/>
-
-	<View
-		android:id="@+id/bottom_row_divider"
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider"/>
+		android:visibility="gone" />
 
 	<LinearLayout
 		android:id="@+id/buttons_container"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/bottom_sheet_cancel_button_height">
+		android:layout_height="@dimen/dialog_button_ex_height"
+		android:gravity="center"
+		android:orientation="horizontal"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding">
 
-		<FrameLayout
+		<include
 			android:id="@+id/dismiss_button"
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="?attr/selectableItemBackground">
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/dismiss_button_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:textAllCaps="true"
-				android:textColor="?attr/color_dialog_buttons"
-				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
-				tools:text="Cancel"/>
-
-		</FrameLayout>
+			layout="@layout/bottom_sheet_dialog_button" />
 
 		<View
-			android:id="@+id/bottom_buttons_divider"
-			android:layout_width="1dp"
+			android:id="@+id/buttons_divider"
+			android:layout_width="@dimen/content_padding"
 			android:layout_height="match_parent"
-			android:background="?attr/dashboard_divider"
 			android:visibility="gone"
-			tools:visibility="visible"/>
+			tools:visibility="visible" />
 
-		<FrameLayout
+		<include
 			android:id="@+id/right_bottom_button"
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="?attr/selectableItemBackground"
+			layout="@layout/bottom_sheet_dialog_button"
 			android:visibility="gone"
-			tools:visibility="visible">
-
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/right_bottom_button_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:textAllCaps="true"
-				android:textColor="?attr/color_dialog_buttons"
-				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
-				tools:text="Some Action"/>
-
-		</FrameLayout>
+			tools:visibility="visible" />
 
 	</LinearLayout>
 

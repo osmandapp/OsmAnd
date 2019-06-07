@@ -478,12 +478,25 @@
 	<color name="additional_description_light">#b3b3b3</color>
 	<color name="active_buttons_and_links_light">#237bff</color>
 	<color name="active_buttons_and_links_dark">#d28521</color>
-	<color name="inactive_buttons_and_links_light">#cccccc</color>
-	<color name="inactive_buttons_and_links_dark">#505050</color>
+	<color name="active_buttons_and_links_pressed_light">#0F67EB</color>
+	<color name="active_buttons_and_links_pressed_dark">#B87114</color>
+	<color name="inactive_buttons_and_links_light">#F0F0F0</color>
+	<color name="inactive_buttons_and_links_dark">#222526</color>
+	<color name="stroked_buttons_and_links_light">#ffffff</color>
+	<color name="stroked_buttons_and_links_dark">#17181A</color>
+	<color name="inactive_pages_light">#cccccc</color>
+	<color name="inactive_pages_dark">#505050</color>
 	<color name="active_buttons_and_links_trans_light">#66237bff</color>
 	<color name="active_buttons_and_links_trans_dark">#66d28521</color>
 	<color name="settings_divider">#dcdcdc</color>
 	<color name="profile_button_gray">#EFEFEF</color>
 	<color name="profile_button_gray_pressed">#ababab</color>
+	<color name="solid_ripple_color">#505050</color>
+
+	<color name="active_buttons_and_links_text_disabled_light">#727272</color>
+	<color name="active_buttons_and_links_text_disabled_dark">#727272</color>
+	<color name="active_buttons_and_links_text_light">#ffffff</color>
+	<color name="active_buttons_and_links_text_dark">#cccccc</color>
+
 
 </resources>

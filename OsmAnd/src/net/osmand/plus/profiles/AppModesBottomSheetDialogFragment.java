@@ -23,11 +23,12 @@ import java.util.List;
 import java.util.Set;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileListener;
+import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
 import net.osmand.util.Algorithms;
 
 public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -40,7 +41,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	private ProfileMenuAdapter adapter;
 	private RecyclerView recyclerView;
 
-	private ProfileListener listener;
+	private ProfileMenuAdapterListener listener;
 	private UpdateMapRouteMenuListener updateMapRouteMenuListener;
 
 	@Override
@@ -55,7 +56,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent,
 		Bundle savedInstanceState) {
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), true);
+		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage));
 		recyclerView = new RecyclerView(getContext());
 		recyclerView = (RecyclerView) View
 			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
@@ -75,27 +76,37 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	@Override
 	public void onResume() {
 		super.onResume();
-		listener = new ProfileListener() {
-			@Override
-			public void changeProfileStatus(ApplicationMode item, boolean isSelected) {
-				if (isSelected) {
-					selectedModes.add(item);
-				} else {
-					selectedModes.remove(item);
+		if (listener == null) {
+			listener = new ProfileMenuAdapterListener() {
+				@Override
+				public void onProfileSelected(ApplicationMode item, boolean selected) {
+					if (selected) {
+						selectedModes.add(item);
+					} else {
+						selectedModes.remove(item);
+					}
+					ApplicationMode.changeProfileStatus(item, selected, getMyApplication());
 				}
-				ApplicationMode.changeProfileStatus(item, isSelected, getMyApplication());
-			}
 
-			@Override
-			public void editProfile(ApplicationMode item) {
-				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-				intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-				if (!Algorithms.isEmpty(item.getUserProfileName())) {
-					intent.putExtra(IS_USER_PROFILE, true);
+				@Override
+				public void onProfilePressed(ApplicationMode item) {
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+					if (!Algorithms.isEmpty(item.getUserProfileName())) {
+						intent.putExtra(IS_USER_PROFILE, true);
+					}
+					startActivity(intent);
 				}
-				startActivity(intent);
-			}
-		};
+
+				@Override
+				public void onButtonPressed() {
+					OsmandApplication app = requiredMyApplication();
+					Intent intent = new Intent(app, SettingsProfileActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					app.startActivity(intent);
+				}
+			};
+		}
 		adapter.setListener(listener);
 		allModes = ApplicationMode.allPossibleValues();
 		allModes.remove(ApplicationMode.DEFAULT);

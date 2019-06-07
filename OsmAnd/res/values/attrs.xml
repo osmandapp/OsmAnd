@@ -114,6 +114,11 @@
 		<attr name="card_and_list_background_basic" format="reference" />
 		<attr name="activity_background_basic" format="reference" />
 		<attr name="pages_bg" format="reference"/>
+		<attr name="dlg_btn_primary" format="reference" />
+		<attr name="dlg_btn_primary_text" format="reference" />
+		<attr name="dlg_btn_secondary" format="reference" />
+		<attr name="dlg_btn_secondary_text" format="reference" />
+		<attr name="dlg_btn_stroked" format="reference" />
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

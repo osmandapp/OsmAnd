@@ -45,7 +45,7 @@ private const val TIMELINE_TAB_POS = 2
 
 class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener, TelegramIncomingMessagesListener {
 
-	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
+	private val log = PlatformUtil.getLog(MainActivity::class.java)
 
 	private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 	private var paused: Boolean = false

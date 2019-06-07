@@ -51,7 +51,6 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.views.TurnPathHelper.TurnResource;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
@@ -59,9 +58,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class RouteInfoWidgetsFactory {
 
@@ -869,7 +866,6 @@ public class RouteInfoWidgetsFactory {
 		int[] lanes = null;
 		boolean imminent = false;
 		private Context ctx;
-		private Map<TurnResource, Path> pathsCache = new HashMap<>();
 		private Paint paintBlack;
 		private Paint paintRouteDirection;
 		private Paint paintSecondTurn;
@@ -896,7 +892,7 @@ public class RouteInfoWidgetsFactory {
 			paintBlack = new Paint(Paint.ANTI_ALIAS_FLAG);
 			paintBlack.setStyle(Style.STROKE);
 			paintBlack.setColor(Color.BLACK);
-			paintBlack.setStrokeWidth(3.5f);
+			paintBlack.setStrokeWidth(scaleCoefficent);
 
 			paintRouteDirection = new Paint(Paint.ANTI_ALIAS_FLAG);
 			paintRouteDirection.setStyle(Style.FILL);
@@ -921,7 +917,7 @@ public class RouteInfoWidgetsFactory {
 
 					RectF imgBounds = new RectF();
 					if (thirdTurnType > 0) {
-						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
 								secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide, true);
 						if (p != null) {
 							RectF b = new RectF();
@@ -936,7 +932,7 @@ public class RouteInfoWidgetsFactory {
 						}
 					}
 					if (secondTurnType > 0) {
-						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
 								secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide, true);
 						if (p != null) {
 							RectF b = new RectF();
@@ -950,7 +946,7 @@ public class RouteInfoWidgetsFactory {
 							}
 						}
 					}
-					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
 							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide, true);
 					if (p != null) {
 						RectF b = new RectF();
@@ -1037,7 +1033,7 @@ public class RouteInfoWidgetsFactory {
 					Path firstTurnPath = null;
 
 					if (thirdTurnType > 0) {
-						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
 								secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide, true);
 						if (p != null) {
 							RectF b = new RectF();
@@ -1053,7 +1049,7 @@ public class RouteInfoWidgetsFactory {
 						}
 					}
 					if (secondTurnType > 0) {
-						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+						Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
 								secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide, true);
 						if (p != null) {
 							RectF b = new RectF();
@@ -1068,7 +1064,7 @@ public class RouteInfoWidgetsFactory {
 							}
 						}
 					}
-					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), pathsCache, turnType,
+					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
 							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide, true);
 					if (p != null) {
 						RectF b = new RectF();
