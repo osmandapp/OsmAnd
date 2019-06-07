@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.Location;
+import net.osmand.aidl.OsmandAidlService;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
@@ -27,6 +28,7 @@ import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.util.Log;
 
 
 public class VoiceRouter {
@@ -937,7 +939,7 @@ public class VoiceRouter {
 	}
 
 	public void addVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		voiceMessageListeners.put(voiceMessageListener, 0);
+        voiceMessageListeners.put(voiceMessageListener, 0);
 	}
 	
 	public void removeVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
@@ -945,5 +947,8 @@ public class VoiceRouter {
 	}
 
 	public void notifyOnVoiceMessage() {
+        for (VoiceMessageListener lnt : voiceMessageListeners.keySet()) {
+            lnt.onVoiceMessage();
+        }
 	}
 }

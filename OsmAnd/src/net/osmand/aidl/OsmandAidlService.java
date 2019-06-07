@@ -73,6 +73,7 @@ import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidl.copyfile.CopyFileParams;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1112,6 +1113,22 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				handleException(e);
 				return false;
 			}
+		}
+
+		@Override
+		public long registerForVoiceRouterMessages(final IOsmAndAidlCallback callback) throws RemoteException {
+			VoiceRouter voiceRouter = getApp().getRoutingHelper().getVoiceRouter();
+			voiceRouter.addVoiceMessageListener(new VoiceRouter.VoiceMessageListener() {
+				@Override
+				public void onVoiceMessage() {
+					try {
+						callback.onVoiceRouterNotify();
+					} catch (RemoteException e) {
+						handleException(e);
+					}
+				}
+			});
+			return 0;
 		}
 	};
 

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Turn Screen On</string>
+    <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
+    <string name="openOsmand">Open OsmAnd</string>
+    <string name="disabled">Disabled</string>
+    <string name="enabled">Enabled</string>
+    <string name="timeWorkingDescription">Время включения экрана</string>
+    <string name="secondsShort">sec</string>
+</resources>
