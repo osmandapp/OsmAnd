@@ -71,6 +71,8 @@ import net.osmand.aidl.navigation.NavigateSearchParams;
 
 import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
+import net.osmand.aidl.customization.OsmandSettingsInfoParams;
+import net.osmand.aidl.customization.CustomizationInfoParams;
 
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
@@ -699,4 +701,8 @@ interface IOsmAndAidlInterface {
     long addContextMenuButtons(in ContextMenuButtonsParams params, IOsmAndAidlCallback callback);
     boolean removeContextMenuButtons(in RemoveContextMenuButtonsParams params);
     boolean updateContextMenuButtons(in UpdateContextMenuButtonsParams params);
+
+    boolean areOsmandSettingsCustomized(in OsmandSettingsInfoParams params);
+
+    boolean setCustomization(in CustomizationInfoParams params);
 }
