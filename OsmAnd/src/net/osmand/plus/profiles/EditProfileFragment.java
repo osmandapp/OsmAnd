@@ -208,24 +208,28 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			baseModeIcon.setImageDrawable(
 				app.getUIUtilities().getIcon(profile.iconId, R.color.icon_color));
 		}
-		typeSelectionBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (isUserProfile || isNew) {
-					final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
-					Bundle bundle = new Bundle();
-					if (profile.parent != null) {
-						bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
-					}
-					bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
-					dialog.setArguments(bundle);
-					if (getActivity() != null) {
-						getActivity().getSupportFragmentManager().beginTransaction()
-							.add(dialog, "select_base_type").commitAllowingStateLoss();
+		if (isUserProfile || isNightMode) {
+			typeSelectionBtn.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (isUserProfile || isNew) {
+						final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
+						Bundle bundle = new Bundle();
+						if (profile.parent != null) {
+							bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
+						}
+						bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
+						dialog.setArguments(bundle);
+						if (getActivity() != null) {
+							getActivity().getSupportFragmentManager().beginTransaction()
+								.add(dialog, "select_base_type").commitAllowingStateLoss();
+						}
 					}
 				}
-			}
-		});
+			});
+		} else {
+			typeSelectionBtn.setClickable(false);
+		}
 
 		if (!Algorithms.isEmpty(mode.getRoutingProfile())) {
 			for (RoutingProfileDataObject r : routingProfileDataObjects) {
