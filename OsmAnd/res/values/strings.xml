@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="profile_name_hint">Profile Name</string>
+    <string name="nav_type_hint">Navigation Type</string>
     <string name="app_mode_taxi">Taxi</string>
     <string name="app_mode_shuttle_bus">Shuttle bus</string>
     <string name="app_mode_subway">Subway</string>
