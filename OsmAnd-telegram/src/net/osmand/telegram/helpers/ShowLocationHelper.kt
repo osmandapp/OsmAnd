@@ -19,6 +19,7 @@ import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserLocation
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
 
 class ShowLocationHelper(private val app: TelegramApplication) {
@@ -37,8 +38,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	private val osmandAidlHelper = app.osmandAidlHelper
 	private val executor = Executors.newSingleThreadExecutor()
 
-	private val points = mutableMapOf<String, TdApi.Message>()
-	private val markers = mutableMapOf<String, AMapMarker>()
+	private val points = ConcurrentHashMap<String, TdApi.Message>()
+	private val markers = ConcurrentHashMap<String, AMapMarker>()
 
 	var showingLocation: Boolean = false
 		private set
@@ -49,7 +50,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		app.osmandAidlHelper.setContextMenuButtonsListener(object : ContextMenuButtonsListener {
 
 			override fun onContextMenuButtonClicked(buttonId: Int, pointId: String, layerId: String) {
-				updateDirectionMarker(pointId)
+				updateDirectionMarker(pointId, true)
 			}
 
 		})
@@ -61,7 +62,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	private fun updateDirectionMarker(pointId: String) {
+	private fun updateDirectionMarker(pointId: String, forceAdd: Boolean = false) {
 		val message = points[pointId]
 		if (message != null) {
 			val aLatLon = getALatLonFromMessage(message.content)
@@ -73,8 +74,12 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				if (markerPrev != null) {
 					markerUpdated = app.osmandAidlHelper.updateMapMarker(markerPrev, marker)
 					if (!markerUpdated) {
-						app.osmandAidlHelper.removeMapMarker(markerPrev.latLon.latitude, markerPrev.latLon.longitude, name)
-						markerUpdated = app.osmandAidlHelper.addMapMarker(marker)
+						if (forceAdd) {
+							app.osmandAidlHelper.removeMapMarker(markerPrev.latLon.latitude, markerPrev.latLon.longitude, name)
+							markerUpdated = app.osmandAidlHelper.addMapMarker(marker)
+						} else {
+							markers.remove(pointId)
+						}
 					}
 				} else {
 					markerUpdated = app.osmandAidlHelper.addMapMarker(marker)
