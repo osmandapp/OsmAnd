@@ -48,14 +48,6 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		getData();
 	}
 
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent,
-		Bundle savedInstanceState) {
-
-		return super.onCreateView(inflater, parent, savedInstanceState);
-	}
-
 	@Override
 	public void onDismiss(DialogInterface dialog) {
 		super.onDismiss(dialog);
