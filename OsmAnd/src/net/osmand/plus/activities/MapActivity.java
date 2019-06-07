@@ -1573,6 +1573,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			((MapActivity) activity).readLocationToShow();
 		} else {
+			int additionalFlags = 0;
 			if (activity instanceof Activity) {
 				Intent intent = ((Activity) activity).getIntent();
 				if (intent != null) {
@@ -1583,11 +1584,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			} else {
 				prevActivityIntent = null;
+				additionalFlags = Intent.FLAG_ACTIVITY_NEW_TASK;
 			}
 
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
-			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | additionalFlags);
 			if (intentExtraActionName != null) {
 				newIntent.putExtra(intentExtraActionName, intentExtraActionValue);
 			}
