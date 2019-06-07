@@ -119,6 +119,8 @@
 		<attr name="dlg_btn_secondary" format="reference" />
 		<attr name="dlg_btn_secondary_text" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
+		<attr name="profile_save_btn" format="reference"/>
+		<attr name="profile_cancel_btn" format="reference"/>
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

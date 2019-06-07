@@ -19,7 +19,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
@@ -80,7 +79,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private boolean isUserProfile = false;
 	private boolean isDataChanged = false;
 	private boolean isCancelAllowed = true;
-	private boolean isNightMode;
+	private boolean nightMode;
 
 	private SelectProfileListener navTypeListener = null;
 	private SelectProfileListener iconIdListener = null;
@@ -119,7 +118,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			mode = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT);
 			profile = new ApplicationProfileObject(mode, isNew, isUserProfile);
 		}
-		isNightMode = !app.getSettings().isLightContent();
+		nightMode = !app.getSettings().isLightContent();
 		routingProfileDataObjects = getRoutingProfiles(app);
 	}
 
@@ -155,28 +154,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
 		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
-		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn
-			.getBackground();
-
-		if (isNightMode) {
-			profileNameTextBox
-				.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
-			navTypeTextBox
-				.setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
-			selectIconBtnBackground
-				.setColor(app.getResources().getColor(R.color.text_field_box_dark));
-			saveButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_night));
-			saveButtonSV.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_night));
-			cancelBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_gray_n));
-			cancelBtnSV.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_profile_gray_n));
-			saveButton.setTextColor(getResources().getColor(R.color.main_font_dark));
-			saveButtonSV.setTextColor(getResources().getColor(R.color.main_font_dark));
-			cancelBtn.setTextColor(getResources().getColor(R.color.active_buttons_and_links_dark));
-			cancelBtnSV.setTextColor(getResources().getColor(R.color.active_buttons_and_links_dark));
-
+		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn.getBackground();
+		if (nightMode) {
+			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_dark));
 		} else {
-			selectIconBtnBackground
-				.setColor(app.getResources().getColor(R.color.text_field_box_light));
+			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_light));
 		}
 
 		String title = "New Profile";
@@ -208,22 +190,20 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			baseModeIcon.setImageDrawable(
 				app.getUIUtilities().getIcon(profile.iconId, R.color.icon_color));
 		}
-		if (isUserProfile || isNightMode) {
+		if (isUserProfile || isNew) {
 			typeSelectionBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (isUserProfile || isNew) {
-						final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
-						Bundle bundle = new Bundle();
-						if (profile.parent != null) {
-							bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
-						}
-						bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
-						dialog.setArguments(bundle);
-						if (getActivity() != null) {
-							getActivity().getSupportFragmentManager().beginTransaction()
-								.add(dialog, "select_base_type").commitAllowingStateLoss();
-						}
+					final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
+					Bundle bundle = new Bundle();
+					if (profile.parent != null) {
+						bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
+					}
+					bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
+					dialog.setArguments(bundle);
+					if (getActivity() != null) {
+						getActivity().getSupportFragmentManager().beginTransaction()
+							.add(dialog, "select_base_type").commitAllowingStateLoss();
 					}
 				}
 			});
@@ -262,7 +242,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (!isUserProfile) {
 			iconColor = R.color.icon_color;
 		} else {
-			iconColor = isNightMode
+			iconColor = nightMode
 				? R.color.active_buttons_and_links_dark
 				: R.color.active_buttons_and_links_light;
 		}
@@ -470,7 +450,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					profile.iconId = pos;
 					profile.iconStringName = stringRes;
 					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(pos,
-						isNightMode ? R.color.active_buttons_and_links_dark
+						nightMode ? R.color.active_buttons_and_links_dark
 							: R.color.active_buttons_and_links_light));
 				}
 			};
