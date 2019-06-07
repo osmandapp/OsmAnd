@@ -19,6 +19,7 @@ import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidl.copyfile.CopyFileParams;
+import net.osmand.aidl.customization.CustomizationInfoParams;
 import net.osmand.aidl.customization.OsmandSettingsInfoParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
 import net.osmand.aidl.customization.SetWidgetsParams;
@@ -1120,6 +1121,17 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				OsmandAidlApi api = getApi("areOsmandSettingsCustomized");
 				return api != null && api.areOsmandSettingsCustomized(params.getSharedPreferencesName());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean setCustomization(CustomizationInfoParams params) {
+			try {
+				OsmandAidlApi api = getApi("setCustomization");
+				return api != null && params != null && api.setCustomization(params);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
