@@ -4,6 +4,7 @@ package net.osmand.plus;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -28,6 +29,7 @@ import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
+import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -120,6 +122,7 @@ public class OsmandSettings {
 	}
 
 	// These settings are stored in SharedPreferences
+	private static final String CUSTOM_SHARED_PREFERENCES_PREFIX = "net.osmand.customsettings.";
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings";
 	private static String CUSTOM_SHARED_PREFERENCES_NAME;
 
@@ -148,8 +151,9 @@ public class OsmandSettings {
 	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI, String sharedPreferencesName) {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
-		CUSTOM_SHARED_PREFERENCES_NAME = "net.osmand.customsettings." + sharedPreferencesName;
+		CUSTOM_SHARED_PREFERENCES_NAME = CUSTOM_SHARED_PREFERENCES_PREFIX + sharedPreferencesName;
 		initPrefs();
+		setCustomized();
 	}
 
 	private void initPrefs() {
@@ -158,6 +162,12 @@ public class OsmandSettings {
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
+	}
+
+	private static final String SETTING_CUSTOMIZED_ID = "settings_customized";
+
+	private void setCustomized() {
+		settingsAPI.edit(globalPreferences).putBoolean(SETTING_CUSTOMIZED_ID, true).commit();
 	}
 
 	public OsmandApplication getContext() {
@@ -180,6 +190,14 @@ public class OsmandSettings {
 		} else {
 			return sharedPreferencesName + "." + mode.getStringKey().toLowerCase();
 		}
+	}
+
+	public static boolean areSettingsCustomizedForPreference(String sharedPreferencesName, OsmandApplication app) {
+		String customPrefName = CUSTOM_SHARED_PREFERENCES_PREFIX + sharedPreferencesName;
+		SettingsAPIImpl settingsAPI = new net.osmand.plus.api.SettingsAPIImpl(app);
+		SharedPreferences globalPreferences = (SharedPreferences) settingsAPI.getPreferenceObject(customPrefName);
+
+		return globalPreferences != null && globalPreferences.getBoolean(SETTING_CUSTOMIZED_ID, false);
 	}
 
 	public Object getProfilePreferences(ApplicationMode mode) {

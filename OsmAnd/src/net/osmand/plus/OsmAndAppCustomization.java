@@ -1,7 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.plus.osmedit.OpenstreetmapLocalUtil.LOG;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +13,6 @@ import android.text.TextUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
-import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -365,8 +362,27 @@ public class OsmAndAppCustomization {
 		return !isMatchesPattern(id, featuresDisabledPatterns);
 	}
 
+	public boolean isOsmandCustomized() {
+		return areWidgetsCustomized() || areFeaturesCustomized() || areSettingsCustomized();
+	}
+
 	public boolean areWidgetsCustomized() {
 		return widgetsCustomized;
+	}
+
+	public boolean areFeaturesCustomized() {
+		return featuresCustomized;
+	}
+
+	public boolean areSettingsCustomized() {
+		return customOsmandSettings != null;
+	}
+
+	public boolean areSettingsCustomizedForPreference(String sharedPreferencesName) {
+		if (customOsmandSettings != null && customOsmandSettings.sharedPreferencesName.equals(sharedPreferencesName)) {
+			return true;
+		}
+		return OsmandSettings.areSettingsCustomizedForPreference(sharedPreferencesName, app);
 	}
 
 	private void setFeaturesCustomized() {

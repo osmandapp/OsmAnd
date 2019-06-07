@@ -1970,6 +1970,10 @@ public class OsmandAidlApi {
 		return app.getAppCustomization().restoreOsmand();
 	}
 
+	boolean areOsmandSettingsCustomized(String sharedPreferencesName) {
+		return app.getAppCustomization().areSettingsCustomizedForPreference(sharedPreferencesName);
+	}
+
 	boolean changePluginState(PluginParams params) {
 		return app.getAppCustomization().changePluginStatus(params);
 	}
