@@ -97,17 +97,14 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 		setupMapLayer()
 		osmandAidlHelper.execOsmandApi {
-			osmandAidlHelper.showMapPoint(
-				MAP_LAYER_ID,
-				item.getMapPointId(),
-				item.getVisibleName(),
-				item.getVisibleName(),
-				item.chatTitle,
-				Color.WHITE,
-				ALatLon(item.latLon!!.latitude, item.latLon!!.longitude),
-				generatePointDetails(item.bearing?.toFloat(), item.altitude?.toFloat(), item.precision?.toFloat()),
-				generatePointParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale, item.speed?.toFloat(), item.bearing?.toFloat())
-			)
+			val pointId = item.getMapPointId()
+			val name = item.getVisibleName()
+			val aLatLon = ALatLon(item.latLon!!.latitude, item.latLon!!.longitude)
+			val details = generatePointDetails(item.bearing?.toFloat(), item.altitude?.toFloat(), item.precision?.toFloat())
+			val params = generatePointParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale, item.speed?.toFloat(), item.bearing?.toFloat())
+
+			osmandAidlHelper.addMapPoint(MAP_LAYER_ID, pointId, name, name, item.chatTitle, Color.WHITE, aLatLon, details, params)
+			osmandAidlHelper.showMapPoint(MAP_LAYER_ID, pointId, name, name, item.chatTitle, Color.WHITE, aLatLon, details, params)
 		}
 	}
 	
