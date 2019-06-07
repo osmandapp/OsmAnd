@@ -749,6 +749,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private void showProfileBottomSheetDialog() {
 		final AppModesBottomSheetDialogFragment fragment = new AppModesBottomSheetDialogFragment();
+		fragment.setUsedOnMap(true);
 		fragment.setUpdateMapRouteMenuListener(new UpdateMapRouteMenuListener() {
 			@Override
 			public void updateAppModeMenu() {

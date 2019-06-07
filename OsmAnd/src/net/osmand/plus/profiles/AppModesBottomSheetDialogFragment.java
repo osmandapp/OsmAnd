@@ -15,13 +15,11 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,7 +34,6 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	private List<ApplicationMode> allModes = new ArrayList<>();
 	private Set<ApplicationMode> selectedModes = new HashSet<>();
 
-	protected boolean nightMode;
 	private int themeRes;
 	private ProfileMenuAdapter adapter;
 	private RecyclerView recyclerView;
@@ -55,13 +52,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent,
 		Bundle savedInstanceState) {
-		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage));
-		recyclerView = new RecyclerView(getContext());
-		recyclerView = (RecyclerView) View
-			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		recyclerView.setAdapter(adapter);
+
 		return super.onCreateView(inflater, parent, savedInstanceState);
 	}
 
@@ -124,17 +115,15 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final View textButtonView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-			R.layout.bottom_sheet_item_simple, null);
-		TextView textView = (TextView) textButtonView.findViewById(R.id.title);
 
-		int dpPadding = AndroidUtils.dpToPx(getMyApplication(), 8);
-		textView.setPadding(dpPadding, 0, 0, 0);
-		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.0f);
-		textView.setTextColor(nightMode
-			? getResources().getColor(R.color.active_buttons_and_links_dark)
-			: getResources().getColor(R.color.active_buttons_and_links_light));
-		textView.setText(R.string.shared_string_manage);
+		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage));
+		recyclerView = new RecyclerView(getContext());
+		recyclerView = (RecyclerView) View
+			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		recyclerView.setAdapter(adapter);
+
 
 		items.add(new TitleItem(getString(R.string.application_profiles)));
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(recyclerView).create());
