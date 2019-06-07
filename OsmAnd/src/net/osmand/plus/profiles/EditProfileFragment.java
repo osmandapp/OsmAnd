@@ -19,6 +19,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
@@ -156,9 +157,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
 		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn.getBackground();
 		if (nightMode) {
-			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_dark));
+			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_dark));
 		} else {
-			selectIconBtnBackground.setColor(app.getResources().getColor(R.color.text_field_box_light));
+			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_light));
 		}
 
 		String title = "New Profile";
