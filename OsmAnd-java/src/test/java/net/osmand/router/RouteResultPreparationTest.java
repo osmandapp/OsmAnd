@@ -69,6 +69,7 @@ public class RouteResultPreparationTest {
                 RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
         ctx.leftSideNavigation = false;
         RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+        RoutePlannerFrontEnd.GPS_POSSIBLE_ERROR = 0;
 
     }
 
