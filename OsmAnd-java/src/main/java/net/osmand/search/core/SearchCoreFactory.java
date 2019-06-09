@@ -516,16 +516,14 @@ public class SearchCoreFactory {
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
-			if (phrase.isNoSelectedType() && phrase.isUnknownSearchWordPresent()
-					&& phrase.isUnknownSearchWordComplete() && phrase.hasUnknownSearchWordPoiTypes()) {
-				return false;
-			}
+			boolean hasUnselectedType = phrase.isNoSelectedType() && phrase.isUnknownSearchWordPresent()
+					&& phrase.isUnknownSearchWordComplete() && phrase.hasUnknownSearchWordPoiTypes();
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
 					SearchPhraseDataType.POI);
-			String searchWord = phrase.getUnknownWordToSearch();
-			final NameStringMatcher nm = phrase.getNameStringMatcher(searchWord, phrase.isUnknownSearchWordComplete());
 			String unknownSearchPhrase = phrase.getUnknownSearchPhrase().trim();
+			String searchWord = hasUnselectedType ? unknownSearchPhrase : phrase.getUnknownWordToSearch();
+			final NameStringMatcher nm = phrase.getNameStringMatcher(searchWord, phrase.isUnknownSearchWordComplete());
 			final NameStringMatcher phraseMatcher;
 			if (!Algorithms.isEmpty(unknownSearchPhrase)) {
 				phraseMatcher = new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_EQUALS);
