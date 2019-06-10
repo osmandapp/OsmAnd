@@ -417,13 +417,20 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    String title = Algorithms.isEmpty(mode.getUserProfileName())
 		    ? mode.toHumanString(SettingsBaseActivity.this)
 		    : mode.getUserProfileName();
-	    String subtitle = mode.getParent() == null
-		    ? String.format(getString(R.string.settings_routing_mode_string), Algorithms
-		        .capitalizeFirstLetterAndLowercase(mode.getStringKey().replace("_", "")))
-		    : String.format(getString(R.string.settings_derived_routing_mode_string), Algorithms
-			    .capitalizeFirstLetterAndLowercase(mode.getParent().getStringKey()));
+
+	    String descr;
+	    if (mode.getParent() == null) {
+		    descr = getString(R.string.profile_type_base_string);
+	    } else {
+		    descr = String.format(getString(R.string.profile_type_descr_string),
+			    mode.getParent().toHumanString(getMyApplication()));
+		    if (mode.getRoutingProfile().contains("/")) {
+			    descr = descr.concat(", " + mode.getRoutingProfile()
+				    .substring(0, mode.getRoutingProfile().indexOf("/")));
+		    }
+	    }
 	    getModeTitleTV().setText(title);
-	    getModeSubTitleTV().setText(subtitle);
+	    getModeSubTitleTV().setText(descr);
 	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(this),
 		    getMyApplication().getSettings().isLightContent()
 			    ? R.color.active_buttons_and_links_light
