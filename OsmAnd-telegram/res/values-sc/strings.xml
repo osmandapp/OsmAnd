@@ -88,7 +88,7 @@
     <string name="last_response">Ùrtima risposta</string>
     <string name="shared_string_group">Grupu</string>
     <string name="logout_no_internet_msg">Collega·ti a ìnternet pro essire in manera curreta dae Telegram.</string>
-    <string name="disconnect_from_telegram_desc">Pro bogare s\'atzessu a sa cumpartzidura de sa positzione. Aberi Telegram, bae a Cunfiguratziones → Riservadesa e Seguresa → Sessiones ativas, e acaba sa sessione de OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Pro bogare s\'atzessu a sa cumpartzidura de sa positzione. Aberi Telegram, bae a Cunfiguratziones → Riservadesa e Seguresa → Sessiones ativas, e acaba sa sessione de OsmAnd Tracker.</string>
     <string name="disconnect_from_telegram">Comente istudare s\'arrastadore de OsmAnd dae Telegram</string>
     <string name="logout_help_desc">Comente istudare s\'arrastadore de OsmAnd dae Telegram</string>
     <string name="connected_account">Contu connessu</string>
@@ -210,7 +210,6 @@
     <string name="disable_monitoring">Disabìlita su monitoràgiu</string>
     <string name="location_recording_enabled">Registratzione de sa positzione abilitada</string>
     <string name="timeline_description">Abìlita su monitoràgiu pro sarvare totu sas positziones in sa cronologia.</string>
-    <string name="app_name_short_online">Arrastadore in lìnia</string>
     <string name="app_name_short">Arrastadore de OsmAnd</string>
     <string name="search_contacts">Chirca cuntatos</string>
     <string name="search_contacts_descr">Chirca intre totu sos grupos e sos cuntatos tuos.</string>

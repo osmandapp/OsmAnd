@@ -212,7 +212,6 @@
     <string name="disable_monitoring">停用監視</string>
     <string name="location_recording_enabled">位置記錄已啟用</string>
     <string name="timeline_description">啟用監視以儲存所有歷史中的位置。</string>
-    <string name="app_name_short_online">線上追蹤器</string>
     <string name="app_name_short">OsmAnd 追蹤器</string>
     <string name="search_contacts">搜尋聯絡人</string>
     <string name="search_contacts_descr">搜尋您所有的群組與聯絡人。</string>

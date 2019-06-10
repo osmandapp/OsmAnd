@@ -19,8 +19,8 @@
     <string name="add_device">Engadir dispositivo</string>
     <string name="share_location_as">Compartillar ubicación coma</string>
     <string name="live_now_description">Contactos e grupos que están a compartilla-la túa ubicación para ti.</string>
-    <string name="logout_from_osmand_telegram_descr">Estás na certeza de que desexas desconectarte do OsmAnd Telegram para non poder compartilla-la ubicación ou olla-la ubicación doutros\?</string>
-    <string name="logout_from_osmand_telegram">Pecha-la sesión do OsmAnd Telegram\?</string>
+    <string name="logout_from_osmand_telegram_descr">Estás na certeza de que desexas desconectarte do OsmAnd Tracker para non poder compartilla-la ubicación ou olla-la ubicación doutros\?</string>
+    <string name="logout_from_osmand_telegram">Pecha-la sesión do OsmAnd Tracker\?</string>
     <string name="shared_string_name">Nome</string>
     <string name="by_distance">Pola distancia</string>
     <string name="by_name">Polo nome</string>
@@ -91,7 +91,7 @@
     <string name="connecting_to_the_internet">Estase a conectar á Internet</string>
     <string name="battery_optimization_description">Desactiva-la optimización da batería para o OsmAnd Tracker de xeito que non se desconecte de xeito súbito cando esté no segundo plano.</string>
     <string name="logout_no_internet_msg">Conéctate á Internet para pecha-la sesión no Telegram de xeito correcto.</string>
-    <string name="disconnect_from_telegram_desc">Para revoga-lo acceso á ubicación compartillada. Abre o Telegram, vai cara ós «Axustes → Privacidade e Seguranza → Sesións» e pecha a sesión do OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Para revoga-lo acceso á ubicación compartillada. Abre o Telegram, vai cara ós «Axustes → Privacidade e Seguranza → Sesións» e pecha a sesión do OsmAnd Tracker.</string>
     <string name="disconnect_from_telegram">De que xeito desactivar o rastrexador do OsmAnd (OsmAnd Tracker) dende o Telegram</string>
     <string name="logout_help_desc">De que xeito desactivar o rastrexador do OsmAnd (OsmAnd Tracker) dende o Telegram</string>
     <string name="osmand_connect_desc">Escolle a versión do OsmAnd na cal o rastrexador do OsmAnd (OsmAnd Tracker) empregará para amosa-las ubicacións.</string>
@@ -117,7 +117,7 @@
     <string name="my_location_search_hint">Procurar: Grupo ou contacto</string>
     <string name="start_location_sharing">Compartillar ubicación</string>
     <string name="show_on_map">Amosar no mapa</string>
-    <string name="app_name">OsmAnd Telegram</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">Número do teléfono móbil</string>
     <string name="phone_number_descr">Número do teléfono móbil no formato internacional</string>
     <string name="shared_string_password">Contrasinal</string>
@@ -139,11 +139,11 @@
     <string name="gps_not_available">Activar «Ubicación» nos axustes do sistema</string>
     <string name="location_service_no_gps_available">Escolle un dos fornecedores da ubicación para compartilla-la túa ubicación.</string>
     <string name="osmand_service">Modo no segundo plano</string>
-    <string name="osmand_service_descr">O OsmAnd Telegram execútase no modo en segundo plano ca pantalla apagada.</string>
+    <string name="osmand_service_descr">O OsmAnd Tracker execútase no modo en segundo plano ca pantalla apagada.</string>
     <string name="shared_string_distance">Distancia</string>
     <string name="share_location">Compartillar ubicación</string>
     <string name="sharing_location">Estase a compartilla-la ubicación</string>
-    <string name="process_service">Servizo do OsmAnd Telegram</string>
+    <string name="process_service">Servizo do OsmAnd Tracker</string>
     <string name="osmand_logo">Logotipo do OsmAnd</string>
     <string name="install_osmand_dialog_message">Precísase instalar primeiro a versión de balde ou de pagamento do OsmAnd</string>
     <string name="install_osmand">Instala-lo OsmAnd</string>
@@ -190,7 +190,6 @@
     <string name="disable_monitoring">Desactivar o monitoramento</string>
     <string name="location_recording_enabled">Gravación da ubicación activada</string>
     <string name="timeline_description">Activa o monitoramento para gardar tódalas ubicacións no historial.</string>
-    <string name="app_name_short_online">Rastrexador en liña</string>
     <string name="app_name_short">Rastrexador do OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">O Telegram (a aplicación de mensaxaría) emprégase para conectar e comunicar ás persoas.</string>

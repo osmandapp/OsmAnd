@@ -5,7 +5,6 @@
     <string name="disable_monitoring">Schakel monitoring uit</string>
     <string name="location_recording_enabled">Locatie opname ingeschakeld</string>
     <string name="timeline_description">Schakel monitoring in om alle locaties in de geschiedenis op te slaan.</string>
-    <string name="app_name_short_online">Online Tracker</string>
     <string name="app_name_short">OsmAnd Tracker</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (de berichten-app) wordt gebruikt om mensen te verbinden en te communiceren met mensen.</string>
@@ -59,7 +58,7 @@
     <string name="searching_for_gps">Positie bepalen…</string>
     <string name="connecting_to_the_internet">Verbinden met Internet</string>
     <string name="background_work_description">Wijzig batterij optimalisatie om het delen van uw locatie te verbeteren.</string>
-    <string name="battery_optimization_description">Schakel batterij optimalisatie uit voor OsmAnd Telegram zodat het niet uitgeschakeld wordt in de achtergrond.</string>
+    <string name="battery_optimization_description">Schakel batterij optimalisatie uit voor OsmAnd Tracker zodat het niet uitgeschakeld wordt in de achtergrond.</string>
     <string name="sharing_in_background">Delen in de achtergrond</string>
     <string name="go_to_settings">Open Instellingen</string>
     <string name="shared_string_later">Later</string>
@@ -77,8 +76,8 @@
     <string name="add_device">Voeg apparaat toe</string>
     <string name="share_location_as">Deel locatie als</string>
     <string name="live_now_description">Contacten en groepen die hun locatie delen met jou.</string>
-    <string name="logout_from_osmand_telegram_descr">Weet u zeker dat u uit wilt loggen uit Osmand Telegram en daarmee uw locatie niet meer deelt en de locatie van anderen niet meer kunt zien\?</string>
-    <string name="logout_from_osmand_telegram">Uitloggen uit OsmAnd Telegram\?</string>
+    <string name="logout_from_osmand_telegram_descr">Weet u zeker dat u uit wilt loggen uit OsmAnd Tracker en daarmee uw locatie niet meer deelt en de locatie van anderen niet meer kunt zien\?</string>
+    <string name="logout_from_osmand_telegram">Uitloggen uit OsmAnd Tracker\?</string>
     <string name="shared_string_name">Naam</string>
     <string name="by_distance">Op afstand</string>
     <string name="by_name">Op naam</string>
@@ -95,13 +94,13 @@
     <string name="shared_string_group">Groep</string>
     <string name="logout_no_internet_msg">Verbind met Internet om correct uit te loggen uit Telegram.</string>
     <string name="shared_string_close">Sluit</string>
-    <string name="disconnect_from_telegram_desc">Om locatie delen toegang uit te schakelen: Open Telegram, gaan naar Instellingen -&gt; Privacy en veiligheid -&gt; Active sessies, en beeindig the OsmAnd Telegram sessie.</string>
+    <string name="disconnect_from_telegram_desc">Om locatie delen toegang uit te schakelen: Open Telegram, gaan naar Instellingen -&gt; Privacy en veiligheid -&gt; Active sessies, en beeindig the OsmAnd Tracker sessie.</string>
     <string name="disconnect_from_telegram">Hoe zet je de OsmAnd Tracker uit in Telegram</string>
     <string name="logout_help_desc">Hoe zet je de OsmAnd Tracker uit in Telegram</string>
     <string name="connected_account">Verbonden account</string>
     <string name="shared_string_account">Account</string>
     <string name="in_time">in %1$s</string>
-    <string name="osmand_connect_desc">Kies de OsmAnd versie die door OsmAnd Telegram gebruikt wordt om posities te tonen.</string>
+    <string name="osmand_connect_desc">Kies de OsmAnd versie die door OsmAnd Tracker gebruikt wordt om posities te tonen.</string>
     <string name="location_history_desc">Verberg contacten die zich een bepaalde tijd niet verplaatsten.</string>
     <string name="location_history">Locatie geschiedenis</string>
     <string name="stale_location_desc">De laatste keer dat een contact zich verplaatste.</string>
@@ -132,7 +131,7 @@
     <string name="my_location_search_hint">Zoek: Groep of contact</string>
     <string name="start_location_sharing">Deel locatie</string>
     <string name="show_on_map">Toon op de kaart</string>
-    <string name="app_name">OsmAnd Telegram</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">Telefoonnummer</string>
     <string name="phone_number_descr">Telefoonnummer in internationaal formaat</string>
     <string name="shared_string_password">Wachtwoord</string>
@@ -173,7 +172,7 @@
     <string name="shared_string_distance">Afstand</string>
     <string name="share_location">Deel locatie</string>
     <string name="sharing_location">Locatie wordt gedeeld</string>
-    <string name="process_service">OsmAnd Telegram service</string>
+    <string name="process_service">OsmAnd Tracker service</string>
     <string name="osmand_logo">OsmAnd logo</string>
     <string name="install_osmand_dialog_message">U dient eerst de gratis of betaalde versie van OsmAnd te installeren</string>
     <string name="install_osmand">Installeer OsmAnd</string>
