@@ -1139,7 +1139,6 @@ public class RouteProvider {
 		double[] lons = new double[numpoints];
 		int index = 0;
 		String mode;
-		float defSpeed;
 		boolean addMissingTurns = true;
 		lats[index] = params.start.getLatitude();
 		lons[index] = params.start.getLongitude();
@@ -1155,13 +1154,10 @@ public class RouteProvider {
 		lons[index] = params.end.getLongitude();
 		if (ApplicationMode.PEDESTRIAN == params.mode) {
 			mode = "foot"; //$NON-NLS-1$
-			defSpeed = (float) (5/3.6);
 		} else if (ApplicationMode.BICYCLE == params.mode) {
 			mode = "bicycle"; //$NON-NLS-1$
-			defSpeed = (float) (20/3.6);
 		} else {
 			mode = "motorcar"; //$NON-NLS-1$
-			defSpeed = (float) (60/3.6);
 		}
 		Bundle bpars = new Bundle();
 		bpars.putDoubleArray("lats", lats);
@@ -1189,7 +1185,7 @@ public class RouteProvider {
 
 			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
 
-			dir = parseOsmAndGPXRoute(res, gpxFile, true, params.leftSide, defSpeed);
+			dir = parseOsmAndGPXRoute(res, gpxFile, true, params.leftSide, params.mode.getDefaultSpeed());
 
 			if (dir != null) {
 				addMissingTurns = false;
