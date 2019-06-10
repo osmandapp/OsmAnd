@@ -60,10 +60,12 @@ public class GpxSelectionHelper {
 		savingTrackHelper = trackHelper;
 	}
 
-	public void clearAllGpxFileToShow() {
+	public void clearAllGpxFileToShow(boolean switchSelection) {
 		selectedGpxFilesBackUp.clear();
-		for(SelectedGpxFile s : selectedGPXFiles) {
-			selectedGpxFilesBackUp.put(s.gpxFile, s.modifiedTime);
+		if (switchSelection) {
+			for(SelectedGpxFile s : selectedGPXFiles) {
+				selectedGpxFilesBackUp.put(s.gpxFile, s.modifiedTime);
+			}
 		}
 		selectedGPXFiles = new ArrayList<>();
 		saveCurrentSelections();
