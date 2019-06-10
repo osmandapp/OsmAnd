@@ -154,6 +154,11 @@ public class MapRenderRepositories {
 		return prevBmpLocation;
 	}
 
+	public void updateSettings() {
+		prefs = context.getSettings();
+		clearCache();
+	}
+
 	public synchronized void closeConnection(String file) {
 		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
 		BinaryMapIndexReader bmir = cpfiles.remove(file);
