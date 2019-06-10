@@ -210,7 +210,6 @@
     <string name="timeline_available_for_free_now">ציר הזמן היא תכונה שמעתה זמינה בחינם.</string>
     <string name="disable_monitoring">השבתת מעקב</string>
     <string name="location_recording_enabled">הופעלה הקלטת מיקום</string>
-    <string name="app_name_short_online">עוקב בזמן אמת</string>
     <string name="app_name_short">עוקב OsmAnd</string>
     <string name="search_contacts">חיפוש באנשי קשר</string>
     <string name="search_contacts_descr">חיפוש בין כל הקבוצות ואנשי הקשר שלך.</string>

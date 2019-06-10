@@ -58,7 +58,7 @@
     <string name="shared_string_group">Група</string>
     <string name="logout_no_internet_msg">Зʼєднайтеся із інтернетом, аби коректно вийти з Telegram.</string>
     <string name="shared_string_close">Закрити</string>
-    <string name="disconnect_from_telegram_desc">Скасування дозволу до трансляції позиції. Відкрийте Telegram, перейдіть до пункту Налаштування → Конфіденційність та безпека → Активні сесії, та завершіть сеанс OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Скасування дозволу до трансляції позиції. Відкрийте Telegram, перейдіть до пункту Налаштування → Конфіденційність та безпека → Активні сесії, та завершіть сеанс OsmAnd Tracker.</string>
     <string name="disconnect_from_telegram">Як вимкнути відслідковування OsmAnd з Telegram</string>
     <string name="logout_help_desc">Як відключити OsmAnd трекер від Telegram</string>
     <string name="connected_account">Повʼязаний обліковий запис</string>
@@ -185,7 +185,7 @@
     <string name="shared_string_map">Карта</string>
     <string name="shared_string_text">Текст</string>
     <string name="map_and_text">Карта та текст</string>
-    <string name="process_service">Сервіс OsmAnd Telegram</string>
+    <string name="process_service">Сервіс OsmAnd Tracker</string>
     <string name="osmand_logo">OsmAnd логотип</string>
     <string name="live_now">Активно зараз</string>
     <string name="location_recording_enabled">Запис позиціювання увімкнуто</string>
