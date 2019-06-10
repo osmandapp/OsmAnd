@@ -281,6 +281,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public void setOsmandSettings(OsmandSettings osmandSettings) {
 		//android.os.Process.killProcess(android.os.Process.myPid());
 		this.osmandSettings = osmandSettings;
+		resourceManager.getRenderer().updateSettings();
 		OsmandPlugin.initPlugins(this);
 	}
 
