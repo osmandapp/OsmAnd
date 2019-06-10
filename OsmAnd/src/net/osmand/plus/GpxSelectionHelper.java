@@ -60,7 +60,7 @@ public class GpxSelectionHelper {
 		savingTrackHelper = trackHelper;
 	}
 
-	public void clearAllGpxFileToShow(boolean backupSelection) {
+	public void clearAllGpxFilesToShow(boolean backupSelection) {
 		selectedGpxFilesBackUp.clear();
 		if (backupSelection) {
 			for(SelectedGpxFile s : selectedGPXFiles) {

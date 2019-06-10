@@ -219,7 +219,7 @@ public class ConfigureMapMenu {
 			} else if (itemId == R.string.layer_gpx_layer) {
 				final GpxSelectionHelper selectedGpxHelper = ma.getMyApplication().getSelectedGpxHelper();
 				if (selectedGpxHelper.isShowingAnyGpxFiles()) {
-					selectedGpxHelper.clearAllGpxFileToShow(true);
+					selectedGpxHelper.clearAllGpxFilesToShow(true);
 					adapter.getItem(pos).setDescription(selectedGpxHelper.getGpxDescription());
 				} else {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
