@@ -30,6 +30,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference routing;
 	private Preference subscription;
 	private Preference profiles;
+	private Preference privacy;
 
 
 	@Override
@@ -46,6 +47,8 @@ public class SettingsActivity extends SettingsBaseActivity {
 		profiles.setOnPreferenceClickListener(this);
 		subscription = (Preference) screen.findPreference("subscription_settings");
 		subscription.setOnPreferenceClickListener(this);
+		privacy = (Preference) screen.findPreference("privacy_and_security");
+		privacy.setOnPreferenceClickListener(this);
 
 		getToolbar().setTitle(Version.getFullVersion(getMyApplication()));
 		
@@ -101,6 +104,10 @@ public class SettingsActivity extends SettingsBaseActivity {
 		} else if (preference == subscription) {
 			Intent intent = new Intent(this, OsmLiveActivity.class);
 			intent.putExtra(OsmLiveActivity.SHOW_SETTINGS_ONLY_INTENT_PARAM, true);
+			startActivity(intent);
+			return true;
+		} else if (preference == privacy) {
+			Intent intent = new Intent(this, PrivacyAndSecurityActivity.class);
 			startActivity(intent);
 			return true;
 		} else {

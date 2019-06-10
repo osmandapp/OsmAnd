@@ -901,5 +901,8 @@
 			android:name=".profiles.EditProfileActivity"
 			android:label="Application profiles"/>
 
-</application>
+		<activity android:name=".activities.PrivacyAndSecurityActivity"
+			android:configChanges="keyboardHidden|orientation" />
+
+	</application>
 </manifest> 

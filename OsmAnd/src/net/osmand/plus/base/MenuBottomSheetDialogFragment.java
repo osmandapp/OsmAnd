@@ -43,6 +43,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected boolean nightMode;
 
 	protected int themeRes;
+	protected View dismissButton;
+	protected View rightButton;
 
 	private LinearLayout itemsContainer;
 
@@ -85,8 +87,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		inflateMenuItems();
 
-		View dismissButton = mainView.findViewById(R.id.dismiss_button);
-		setupDialogButton(dismissButton, DialogButtonType.STROKED, getDismissButtonTextId());
+		dismissButton = mainView.findViewById(R.id.dismiss_button);
+		setupDialogButton(dismissButton, getDismissByttonType(), getDismissButtonTextId());
 		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -100,8 +102,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			int rightBottomButtonTextId = getRightBottomButtonTextId();
 			if (rightBottomButtonTextId != DEFAULT_VALUE) {
 				mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
-				View rightButton = mainView.findViewById(R.id.right_bottom_button);
-				setupDialogButton(rightButton, DialogButtonType.PRIMARY, rightBottomButtonTextId);
+				rightButton = mainView.findViewById(R.id.right_bottom_button);
+				setupDialogButton(rightButton, getRightBottomByttonType(), rightBottomButtonTextId);
 				rightButton.setVisibility(View.VISIBLE);
 				rightButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -111,6 +113,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				});
 			}
 		}
+		updateBottomButtons();
 		setupHeightAndBackground(mainView);
 		return mainView;
 	}
@@ -283,6 +286,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		dismissButtonStringRes = stringRes;
 	}
 
+	protected DialogButtonType getDismissByttonType() {
+		return DialogButtonType.SECONDARY;
+	}
+
 	protected void onDismissButtonClickAction() {
 
 	}
@@ -292,8 +299,33 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return DEFAULT_VALUE;
 	}
 
+	protected DialogButtonType getRightBottomByttonType() {
+		return DialogButtonType.PRIMARY;
+	}
+
 	protected void onRightBottomButtonClick() {
 
+	}
+
+	protected boolean isDismissButtonEnabled() {
+		return true;
+	}
+
+	protected boolean isRightBottomButtonEnabled() {
+		return true;
+	}
+
+	protected void updateBottomButtons() {
+		if (dismissButton != null) {
+			boolean enabled = isDismissButtonEnabled();
+			dismissButton.setEnabled(enabled);
+			dismissButton.findViewById(R.id.button_text).setEnabled(enabled);
+		}
+		if (rightButton != null) {
+			boolean enabled = isRightBottomButtonEnabled();
+			rightButton.setEnabled(enabled);
+			rightButton.findViewById(R.id.button_text).setEnabled(enabled);
+		}
 	}
 
 	@ColorRes

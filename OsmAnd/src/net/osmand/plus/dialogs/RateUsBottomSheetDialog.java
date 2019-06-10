@@ -83,7 +83,7 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 			}
 		}
 		// Initial state now
-		modifiedTime.add(Calendar.HOUR, -72);
+		modifiedTime.add(Calendar.MONTH, -1);
 		bannerFreeRuns = 3;
 		return modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns;
 	}

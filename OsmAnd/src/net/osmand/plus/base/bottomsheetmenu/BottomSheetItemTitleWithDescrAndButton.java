@@ -35,6 +35,7 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 												  CharSequence description,
 												  @ColorRes int descriptionColorId,
 												  int descriptionMaxLines,
+												  boolean descriptionLinksClickable,
 												  String buttonTitle,
 												  View.OnClickListener onButtonClickListener,
 												  Drawable leftCompoundDrawable,
@@ -51,7 +52,8 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 				titleColorId,
 				description,
 				descriptionColorId,
-				descriptionMaxLines);
+				descriptionMaxLines,
+				descriptionLinksClickable);
 		this.buttonTitle = buttonTitle;
 		this.onButtonClickListener = onButtonClickListener;
 		this.leftCompoundDrawable = leftCompoundDrawable;
@@ -125,6 +127,7 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 					description,
 					descriptionColorId,
 					descriptionMaxLines,
+					descriptionLinksClickable,
 					buttonTitle,
 					onButtonClickListener,
 					leftCompoundDrawable,
