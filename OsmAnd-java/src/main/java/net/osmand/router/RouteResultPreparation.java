@@ -31,6 +31,7 @@ import org.apache.commons.logging.Log;
 
 public class RouteResultPreparation {
 
+	private static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;
@@ -229,14 +230,20 @@ public class RouteResultPreparation {
 	
 	private void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
 		//for Naismith
-		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
-
+		GeneralRouterProfile profile = ((GeneralRouter) ctx.getRouter()).getProfile();
+		boolean usePedestrianHeight = ((profile == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
+		boolean useBicycleHeight = ((profile == GeneralRouterProfile.BICYCLE)&& ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
 			double distOnRoadToPass = 0;
-			double speed = ctx.getRouter().defineVehicleSpeed(road);
-			if (speed == 0) {
+			double speed = 0;
+
+			if (profile == GeneralRouterProfile.CAR || profile == GeneralRouterProfile.PUBLIC_TRANSPORT) {
+				speed = ctx.getRouter().defineVehicleSpeed(road);
+			}
+
+			if (speed == 0){
 				speed = ctx.getRouter().getMinDefaultSpeed();
 			} else {
 				if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
@@ -250,7 +257,7 @@ public class RouteResultPreparation {
 			//for Naismith
 			float prevHeight = -99999.0f;
 			float[] heightDistanceArray = null;
-			if (usePedestrianHeight) {
+			if (usePedestrianHeight || useBicycleHeight) {
 				road.calculateHeightArray();
 				heightDistanceArray = road.heightDistanceArray;
 			}
@@ -287,6 +294,7 @@ public class RouteResultPreparation {
 			rr.setSegmentTime((float) distOnRoadToPass);
 			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
+			LOG.debug("Segment speed: " + speed + ", distOnRoadToPass: " + distOnRoadToPass + ", distance: " + distance);
 		}
 	}
 

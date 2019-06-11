@@ -1036,6 +1036,7 @@ public class RoutingHelper {
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 			params.mode = mode;
+
 			params.ctx = app;
 			boolean updateProgress = false;
 			if (params.type == RouteService.OSMAND) {

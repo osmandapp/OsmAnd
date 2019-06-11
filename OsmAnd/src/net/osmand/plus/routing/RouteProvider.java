@@ -29,7 +29,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.PrecalculatedRouteDirection;
@@ -69,7 +68,7 @@ import btools.routingapp.IBRouterService;
 
 
 public class RouteProvider {
-	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 
@@ -295,8 +294,8 @@ public class RouteProvider {
 	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params){
 		long time = System.currentTimeMillis();
 		if (params.start != null && params.end != null) {
-			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
+			if(LOG.isInfoEnabled()){
+				LOG.info("Start finding route from " + params.start + " to " + params.end +" using " +
 						params.type.getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
@@ -318,16 +317,16 @@ public class RouteProvider {
 				else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
-				if(log.isInfoEnabled() ){
-					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if(LOG.isInfoEnabled() ){
+					LOG.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res; 
 			} catch (IOException e) {
-				log.error("Failed to find route ", e); //$NON-NLS-1$
+				LOG.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (ParserConfigurationException e) {
-				log.error("Failed to find route ", e); //$NON-NLS-1$
+				LOG.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (SAXException e) {
-				log.error("Failed to find route ", e); //$NON-NLS-1$
+				LOG.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
 		return new RouteCalculationResult(null);
@@ -600,10 +599,20 @@ public class RouteProvider {
 		if(generalRouter == null) {
 			return applicationModeNotSupported(params);
 		}
+
+		//todo: bookmark, clear comment in pR.
+		if (params.mode.getMinDefaultSpeed() > 0) {
+			generalRouter.attributes.put("minDefaultSpeed", (params.mode.getMinDefaultSpeed() * 3.6) + "") ;
+			generalRouter.setMinDefaultSpeed(params.mode.getMinDefaultSpeed());
+		}
+
 		RoutingConfiguration cf = initOsmAndRoutingConfig(config, params, settings, generalRouter);
 		if(cf == null){
 			return applicationModeNotSupported(params);
 		}
+
+		LOG.debug("Min Default speed:" + cf.router.getMinDefaultSpeed());
+
 		PrecalculatedRouteDirection precalculated = null;
 		if(calcGPXRoute) {
 			ArrayList<Location> sublist = findStartAndEndLocationsFromRoute(params.gpxRoute.points,
@@ -699,6 +708,7 @@ public class RouteProvider {
 				paramsR.put(key, vl);
 			}
 		}
+
 		if (params.inSnapToRoadMode) {
 			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
 		}
@@ -706,7 +716,7 @@ public class RouteProvider {
 		Runtime rt = Runtime.getRuntime();
 		// make visible
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
-		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		LOG.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
 		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
@@ -735,7 +745,7 @@ public class RouteProvider {
 			} else {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
-			
+			LOG.debug("Calculated routing time: " + ctx.routingTime);
 			if(result == null || result.isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));
@@ -904,9 +914,9 @@ public class RouteProvider {
 
 					previous = dirInfo;
 				} catch (NumberFormatException e) {
-					log.info("Exception", e); //$NON-NLS-1$
+					LOG.info("Exception", e); //$NON-NLS-1$
 				} catch (IllegalArgumentException e) {
-					log.info("Exception", e); //$NON-NLS-1$
+					LOG.info("Exception", e); //$NON-NLS-1$
 				}
 			}
 		}
@@ -1084,7 +1094,7 @@ public class RouteProvider {
 // to get more waypoints, add overview=full option
 //		uri.append("?overview=full")
 
-		log.info("URL route " + uri);
+		LOG.info("URL route " + uri);
 
 		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));

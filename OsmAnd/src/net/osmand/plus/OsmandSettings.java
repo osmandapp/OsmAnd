@@ -1001,6 +1001,8 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<AccessibilityMode> ACCESSIBILITY_MODE = new EnumIntPreference<AccessibilityMode>(
 			"accessibility_mode", AccessibilityMode.DEFAULT, AccessibilityMode.values()).makeGlobal().cache();
+	public final OsmandPreference<Float> DEFAULT_SPEED = new FloatPreference(
+		"default_speed_override", 10f).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Float> SPEECH_RATE =

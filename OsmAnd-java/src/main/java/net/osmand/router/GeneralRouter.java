@@ -383,7 +383,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed());
+		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, getMinDefaultSpeed());
 	}
 
 	@Override
@@ -394,6 +394,10 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public float getMinDefaultSpeed() {
 		return minDefaultSpeed;
+	}
+
+	public void setMinDefaultSpeed(float minDefaultSpeed) {
+		this.minDefaultSpeed = minDefaultSpeed;
 	}
 
 	@Override

@@ -30,6 +30,8 @@ public class BinaryRoutePlanner {
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean TRACE_ROUTING = false;
 
+	private static final Log LOG = PlatformUtil.getLog(BinaryRoutePlanner.class);
+
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
 		return MapUtils.squareRootDist31(x1, y1, x2, y2);
@@ -581,6 +583,7 @@ public class BinaryRoutePlanner {
 
 
 	private float calculateTimeWithObstacles(RoutingContext ctx, RouteDataObject road, float distOnRoadToPass, float obstaclesTime) {
+		LOG.debug("calculateTimeWithObstacles");
 		float priority = ctx.getRouter().defineSpeedPriority(road);
 		float speed = (ctx.getRouter().defineRoutingSpeed(road) * priority);
 		if (speed == 0) {

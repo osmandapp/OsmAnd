@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -22,6 +23,7 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.apache.commons.logging.Log;
 
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
@@ -49,6 +51,8 @@ public class RouteCalculationResult {
 	protected int currentWaypointGPX = 0;
 	protected int lastWaypointGPX = 0;
 	protected ApplicationMode appMode;
+
+	private static final Log LOG = PlatformUtil.getLog(RouteCalculationResult.class);
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
