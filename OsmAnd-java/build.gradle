@@ -70,7 +70,9 @@ task androidJar(type: Jar) {
 }
 
 compileJava {
-    dependsOn collectExternalResources
+	if (!project.hasProperty('osmandCoreSimple')) {
+		dependsOn collectExternalResources
+	}
 }
 
 artifacts {
