@@ -88,6 +88,10 @@ android {
 		disable 'InvalidPackage'
 		disable 'MissingTranslation'
 	}
+
+	packagingOptions {
+		exclude 'META-INF/proguard/androidx-annotations.pro'
+	}
 }
 
 task downloadTdLibzip {
@@ -149,4 +153,5 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 	implementation 'org.jetbrains:annotations-java5:15.0'
+	implementation 'androidx.annotation:annotation:1.1.0'
 }
