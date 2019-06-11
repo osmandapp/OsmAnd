@@ -22,17 +22,15 @@ import net.osmand.turn_screen_on.app.TurnScreenOnApplication;
 import java.util.List;
 
 public class OsmAndAidlHelper {
-    public final static String OSMAND_FREE_PACKAGE_NAME = "net.osmand";
-    public final static String OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus";
-    public final static String OSMAND_NIGHTLY_PACKAGE_NAME = "net.osmand.dev";
-
     //todo change singleton type
     private final static OsmAndAidlHelper INSTANCE = new OsmAndAidlHelper();
 
+    private final static String AIDL_SERVICE_PATH = "net.osmand.aidl.OsmandAidlService";
+
     private LockHelper lockHelper;
+    private PluginSettings settings;
 
     private IOsmAndAidlInterface mIOsmAndAidlInterface;
-
     private IOsmAndAidlCallback mIOsmAndAidlCallbackInterface = new IOsmAndAidlCallback.Stub() {
 
         @Override
@@ -68,7 +66,9 @@ public class OsmAndAidlHelper {
         @Override
         public void onVoiceRouterNotify() throws RemoteException {
             Log.d("ttpl", "take message from vr");
-            lockHelper.timedUnlock(PluginSettings.getInstance().getTimeLikeSeconds()*1000L);
+            if (settings.isPluginEnabled()) {
+                lockHelper.timedUnlock(PluginSettings.getInstance().getTimeLikeSeconds() * 1000L);
+            }
         }
     };
 
@@ -99,7 +99,9 @@ public class OsmAndAidlHelper {
     };
 
     private OsmAndAidlHelper() {
-        bindService(OSMAND_PLUS_PACKAGE_NAME, TurnScreenOnApplication.getAppContext());
+        //todo change
+        settings = PluginSettings.getInstance();
+        lockHelper = new LockHelper(TurnScreenOnApplication.getAppContext());
     }
 
     public static OsmAndAidlHelper getInstance(){
@@ -143,10 +145,15 @@ public class OsmAndAidlHelper {
     }
 
     private boolean bindService(String appToConnectPackage, Context context) {
-        Intent intent = new Intent("net.osmand.aidl.OsmandAidlService");
+        Intent intent = new Intent(AIDL_SERVICE_PATH);
         intent.setPackage(appToConnectPackage);
         context.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        lockHelper = new LockHelper(TurnScreenOnApplication.getAppContext());
-        return false;
+        return true;
+    }
+
+    public boolean connect(String appToConnectPackage){
+        bindService(appToConnectPackage, TurnScreenOnApplication.getAppContext());
+        Log.d("ttpl", "connecting...");
+        return true;
     }
 }

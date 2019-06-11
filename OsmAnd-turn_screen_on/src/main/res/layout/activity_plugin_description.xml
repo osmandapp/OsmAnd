@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PermissionsSetUpActivity">
+    tools:context=".PluginDescriptionActivity">
 
     <FrameLayout
         android:id="@+id/btnContinue"
@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="58dp"
-        android:background="@color/lighterViolet">
+        android:background="@color/violet">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,4 +21,5 @@
             android:text="@string/continueDesc"
             android:textColor="@color/white"/>
     </FrameLayout>
+
 </FrameLayout>

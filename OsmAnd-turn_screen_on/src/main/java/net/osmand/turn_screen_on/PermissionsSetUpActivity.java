@@ -3,15 +3,16 @@ package net.osmand.turn_screen_on;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import net.osmand.turn_screen_on.receiver.DeviceAdminRecv;
 
-public class AdminDevicePermissionSetUpActivity extends AppCompatActivity
-        implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+public class PermissionsSetUpActivity extends AppCompatActivity {
+    private FrameLayout btnContinue;
     private ComponentName mDeviceAdmin;
     private PluginSettings settings;
     private static final int DEVICE_ADMIN_REQUEST = 5;
@@ -23,17 +24,16 @@ public class AdminDevicePermissionSetUpActivity extends AppCompatActivity
 
         settings = PluginSettings.getInstance();
 
-        DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-        mDeviceAdmin = new ComponentName(getApplicationContext(),
-                DeviceAdminRecv.class);
+        mDeviceAdmin = new ComponentName(getApplicationContext(), DeviceAdminRecv.class);
 
-        if (mDevicePolicyManager.isAdminActive(mDeviceAdmin)) {
-            settings.enablePlugin();
-        } else {
-            requestLockScreenAdmin();
-        }
-
-        super.onBackPressed();
+        btnContinue = findViewById(R.id.btnContinue);
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestLockScreenAdmin();
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -64,29 +64,5 @@ public class AdminDevicePermissionSetUpActivity extends AppCompatActivity
                 getString(R.string.lock_screen_request_explanation,
                         ""));
         startActivityForResult(intent, DEVICE_ADMIN_REQUEST);
-    }
-
-    //TODO CHANGE_PREFERENCE
-    //TODO WAKE_ON_VOICE
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String id = preference.getKey();
-//        if (id.equals(settings.WAKE_ON_VOICE_INT.getId())) {
-//            Integer value;
-//            try {
-//                value = Integer.parseInt(newValue.toString());
-//            } catch (NumberFormatException e) {
-//                value = 0;
-//            }
-//            if (value > 0) {
-//                requestLockScreenAdmin();
-//            }
-//        }
-        return true;
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        return false;
     }
 }
