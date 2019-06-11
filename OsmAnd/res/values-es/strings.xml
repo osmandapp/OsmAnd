@@ -1449,7 +1449,7 @@
     <string name="parking_place">Lugar de aparcamiento</string>
     <string name="remove_the_tag">QUITAR ETIQUETA</string>
     <string name="shared_string_disabled">Desactivado</string>
-    <string name="shared_string_enabled">Activado</string>
+    <string name="shared_string_enabled">Habilitado</string>
     <string name="edit_group">Editar grupo</string>
     <string name="plugin_install_needs_network">Debe conectarse a Internet para instalar este complemento.</string>
     <string name="plugin_ski_name">Vista invernal</string>
@@ -2453,13 +2453,13 @@
     <string name="improve_coverage_mapillary">Mejorar cobertura de fotos con Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para añadir una o más fotos a esta ubicación del mapa.</string>
     <string name="online_photos">Fotos en línea</string>
-    <string name="mapillary_image">Imagen de Mapillary</string>
+    <string name="mapillary_image">Imagen Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer archivos desde esta ubicación.</string>
     <string name="distance_moving">Distancia recorrida</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
     <string name="store_tracks_in_monthly_directories_descrp">Guardar las trazas grabadas en subcarpetas, por mes de grabación (como 2018-01).</string>
-    <string name="shared_string_reset">Restablecer</string>
+    <string name="shared_string_reset">Reiniciar</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recarga las teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
@@ -3058,4 +3058,6 @@
     <string name="public_transport_try_change_settings">Intenta cambiar los ajustes.</string>
     <string name="public_transport_calc_pedestrian">Calcular la ruta a pie</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="searching_gps">Buscando GPS</string>
+    <string name="coordinates_widget">Widget de coordenadas</string>
 </resources>
