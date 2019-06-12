@@ -408,7 +408,7 @@ public class GeneralRouter implements VehicleRouter {
 						if (rule != null && rule.selectType != null && rule.selectType.equals("speed") && rule.selectValue instanceof Float) {
 							rule.selectValue = (Float) rule.selectValue * factor;
 							Float defVal= Float.valueOf(rule.selectValueDef.trim());
-							//rule.selectValueDef = (defVal * factor) + "";
+							rule.selectValueDef = (defVal * factor) + "";
 						}
 					}
 				}

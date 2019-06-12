@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.content.Context;
 
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -467,8 +466,8 @@ public class ApplicationMode {
 		return userProfileName;
 	}
 
-	public float getMinDefaultSpeed() {
-		return minDefaultSpeed;
+	public float getUserDefaultSpeed() {
+		return userDefaultSpeed;
 	}
 
 	@Expose private final int key;
@@ -479,7 +478,7 @@ public class ApplicationMode {
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;
-	@Expose private float minDefaultSpeed = 4.5f;
+	@Expose private float userDefaultSpeed = 2.777777778f;
 	@Expose private int minDistanceForTurn = 50;
 	@Expose private int arrivalDistance = 90;
 	@Expose private int offRouteDistance = 350;

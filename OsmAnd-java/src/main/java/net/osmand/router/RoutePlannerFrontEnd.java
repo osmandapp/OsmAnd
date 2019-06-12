@@ -193,7 +193,6 @@ public class RoutePlannerFrontEnd {
 		if (ctx.calculationMode == RouteCalculationMode.COMPLEX && routeDirection == null
 				&& maxDistance > ctx.config.DEVIATION_RADIUS * 6) {
 			ctx.calculationProgress.totalIterations++;
-			log.debug("Routing context: speed: " + ctx.getRouter().getMinDefaultSpeed());
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
@@ -438,7 +437,7 @@ public class RoutePlannerFrontEnd {
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
 		ctx.checkOldRoutingFiles(ctx.startX, ctx.startY);
 		ctx.checkOldRoutingFiles(ctx.targetX, ctx.targetY);
-		log.info("Native Route calculation params: speed: " + ctx.config.router.getMinDefaultSpeed());
+
 		long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
 				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE,
@@ -454,7 +453,6 @@ public class RoutePlannerFrontEnd {
 				current = pr;
 			}
 		}
-		log.debug("runNativeRouting routingTime: " + ctx.routingTime);
 		ctx.routingTime = ctx.calculationProgress.routingCalculatedTime;
 		ctx.visitedSegments = ctx.calculationProgress.visitedSegments;
 		ctx.loadedTiles = ctx.calculationProgress.loadedTiles;

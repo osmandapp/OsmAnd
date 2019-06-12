@@ -715,7 +715,7 @@ public class RoutingHelper {
 			}
 		}
 		app.getWaypointHelper().setNewRoute(res);
-		log.debug("String 718: " + res.getRoutingTime());
+
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

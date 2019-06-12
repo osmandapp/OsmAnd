@@ -599,21 +599,10 @@ public class RouteProvider {
 		if(generalRouter == null) {
 			return applicationModeNotSupported(params);
 		}
-
-		//todo: bookmark, clear comment in pR.
-		if (params.mode.getMinDefaultSpeed() > 0) {
-			float factor = params.mode.getMinDefaultSpeed() / generalRouter.getMinDefaultSpeed();
-			//generalRouter.updateObjectAttributes(factor);
-			generalRouter.attributes.put("minDefaultSpeed", (params.mode.getMinDefaultSpeed() * 3.6) + "") ;
-			generalRouter.setMinDefaultSpeed(params.mode.getMinDefaultSpeed());
-		}
-
 		RoutingConfiguration cf = initOsmAndRoutingConfig(config, params, settings, generalRouter);
 		if(cf == null){
 			return applicationModeNotSupported(params);
 		}
-
-		LOG.debug("Min Default speed:" + cf.router.getMinDefaultSpeed());
 
 		PrecalculatedRouteDirection precalculated = null;
 		if(calcGPXRoute) {
@@ -711,6 +700,17 @@ public class RouteProvider {
 			}
 		}
 
+		//todo: test, clear comment in pR.
+		if (params.mode.getUserDefaultSpeed() > 0) {
+//			float factor = (params.mode.getUserDefaultSpeed() * 3.6f) / generalRouter.getMinDefaultSpeed();
+//			if (factor < 0.99 && factor > 1.01){
+//				generalRouter.updateObjectAttributes(factor);
+//			}
+			generalRouter.attributes.put("minDefaultSpeed", (params.mode.getUserDefaultSpeed() * 3.6) + "") ;
+			generalRouter.setMinDefaultSpeed(params.mode.getUserDefaultSpeed());
+		}
+
+
 		if (params.inSnapToRoadMode) {
 			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
 		}
@@ -728,7 +728,6 @@ public class RouteProvider {
 	private RouteCalculationResult calcOfflineRouteImpl(final RouteCalculationParams params,
 			RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
 			List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
-
 		try {
 			List<RouteSegmentResult> result ;
 			if(complexCtx != null) {
@@ -743,7 +742,7 @@ public class RouteProvider {
 							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
 						}
 					});
-							result = router.searchRoute(ctx, st, en, inters);
+					result = router.searchRoute(ctx, st, en, inters);
 				}
 			} else {
 				result = router.searchRoute(ctx, st, en, inters);

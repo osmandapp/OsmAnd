@@ -98,7 +98,6 @@ public class RouteCalculationResult {
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
 			OsmandApplication ctx, boolean leftSide, float routingTime, List<LocationPoint> waypoints, ApplicationMode mode) {
 		this.routingTime = routingTime;
-		LOG.debug("Routing time: " + routingTime);
 		if(waypoints != null) {
 			this.locationPoints.addAll(waypoints);
 		}
