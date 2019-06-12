@@ -85,7 +85,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		settings = getMyApplication().getSettings();
 		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		String[] entries = new String[vls.length];
-		for(int i=0; i<entries.length; i++){
+		for (int i = 0; i < entries.length; i++) {
 			entries[i] = vls[i].getName();
 		}
 

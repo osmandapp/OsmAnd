@@ -101,12 +101,6 @@
 
 		</LinearLayout>
 
-		<ImageView
-			android:id="@+id/bottom_shadow2"
-			android:layout_width="match_parent"
-			android:layout_height="5dp"
-			android:scaleType="fitXY"
-			android:src="@drawable/bg_shadow_list_bottom"/>
 	</LinearLayout>
 
 	<FrameLayout

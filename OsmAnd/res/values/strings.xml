@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="app_profile_custom_nav_subtitle"></string>
     <string name="rate_dialog_descr">Please give us 30 seconds, share feedback and rate our work on Google Play.</string>
     <string name="button_rate">Rate</string>
     <string name="shared_string_privacy_policy">Privacy Policy</string>
