@@ -438,7 +438,7 @@ public class RoutePlannerFrontEnd {
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
 		ctx.checkOldRoutingFiles(ctx.startX, ctx.startY);
 		ctx.checkOldRoutingFiles(ctx.targetX, ctx.targetY);
-
+		log.info("Native Route calculation params: speed: " + ctx.config.router.getMinDefaultSpeed());
 		long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
 				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE,
@@ -454,6 +454,7 @@ public class RoutePlannerFrontEnd {
 				current = pr;
 			}
 		}
+		log.debug("runNativeRouting routingTime: " + ctx.routingTime);
 		ctx.routingTime = ctx.calculationProgress.routingCalculatedTime;
 		ctx.visitedSegments = ctx.calculationProgress.visitedSegments;
 		ctx.loadedTiles = ctx.calculationProgress.loadedTiles;

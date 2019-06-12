@@ -194,7 +194,11 @@ public class PrecalculatedRouteDirection {
 			return tms[ind] + deviationPenalty + finishTime;
 		}
 	}
-	
+	//todo remove
+	public float getMinSpeed() {
+		return minSpeed;
+	}
+
 	public float getDeviationDistance(int x31, int y31) {
 		int ind = getIndex(x31, y31);
 		if(ind == -1) {

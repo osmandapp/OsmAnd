@@ -396,9 +396,27 @@ public class GeneralRouter implements VehicleRouter {
 		return minDefaultSpeed;
 	}
 
-	public void setMinDefaultSpeed(float minDefaultSpeed) {
-		this.minDefaultSpeed = minDefaultSpeed;
+	public void setMinDefaultSpeed(float newMinDefaultSpeed) {
+		this.minDefaultSpeed = newMinDefaultSpeed;
 	}
+
+	public void updateObjectAttributes(float factor) {
+		if (objectAttributes != null) {
+			for (RouteAttributeContext rac : objectAttributes) {
+				if (rac != null) {
+					for (RouteAttributeEvalRule rule : rac.rules) {
+						if (rule != null && rule.selectType != null && rule.selectType.equals("speed") && rule.selectValue instanceof Float) {
+							rule.selectValue = (Float) rule.selectValue * factor;
+							Float defVal= Float.valueOf(rule.selectValueDef.trim());
+							//rule.selectValueDef = (defVal * factor) + "";
+						}
+					}
+				}
+			}
+		}
+	}
+
+
 
 	@Override
 	public float getMaxDefaultSpeed() {
