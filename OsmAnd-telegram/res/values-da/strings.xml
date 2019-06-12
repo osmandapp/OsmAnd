@@ -20,7 +20,7 @@
     <string name="share_location_as">Del placering som</string>
     <string name="live_now_description">Kontakter og grupper som der deles placering med.</string>
     <string name="logout_from_osmand_telegram_descr">"Bekræft log af OsmAnd Tracker,  der kan ikke deles  placering eller se placering af andre\?"</string>
-    <string name="logout_from_osmand_telegram">Log ud af OsmAnd Telegram\?</string>
+    <string name="logout_from_osmand_telegram">Log ud af OsmAnd Tracker\?</string>
     <string name="shared_string_name">Navn</string>
     <string name="by_distance">Efter afstand</string>
     <string name="by_name">Efter navn</string>
@@ -38,7 +38,7 @@
     <string name="shared_string_group">Gruppe</string>
     <string name="logout_no_internet_msg">Opret forbindelse til Internettet for at logge ud af Telegram.</string>
     <string name="shared_string_close">Luk</string>
-    <string name="disconnect_from_telegram_desc">Sådan tilbagekaldes adgang til placeringsdeling. Åbn Telegram, gå til Settings - Privacy and Security - Sessions og afslut OsmAnd Telegram session.</string>
+    <string name="disconnect_from_telegram_desc">Sådan tilbagekaldes adgang til placeringsdeling. Åbn Telegram, gå til Settings - Privacy and Security - Sessions og afslut OsmAnd Tracker session.</string>
     <string name="disconnect_from_telegram">Sådan afbrydes OsmAnd Tracker fra Telegram</string>
     <string name="logout_help_desc">Sådan afbrydes OsmAnd Tracker fra Telegram</string>
     <string name="connected_account">Tilsluttet konto</string>
@@ -83,7 +83,7 @@
     <string name="my_location_search_hint">Søg: gruppe eller kontakt</string>
     <string name="start_location_sharing">Del placering</string>
     <string name="show_on_map">Vis på kort</string>
-    <string name="app_name">OsmAnd Telegram</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">Telefonnummer</string>
     <string name="phone_number_descr">Telefonnummer i internationalt format</string>
     <string name="shared_string_password">Adgangskode</string>
@@ -199,7 +199,6 @@
     <string name="disable_monitoring">Deaktiver overvågning</string>
     <string name="location_recording_enabled">Placeringsregistrering aktiveret</string>
     <string name="timeline_description">Aktiver overvågning for at gemme alle placeringer i historikken.</string>
-    <string name="app_name_short_online">Online sporing</string>
     <string name="app_name_short">OsmAnd Tracker</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (besked app) bruges til at forbinde og kommunikere med mennesker.</string>

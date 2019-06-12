@@ -218,7 +218,8 @@ public class SearchUICore {
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
-			if (r1.location != null && r2.location != null) {
+			if (r1.location != null && r2.location != null &&
+					!ObjectType.isTopVisible(r1.objectType) && !ObjectType.isTopVisible(r2.objectType)) {
 				if (r1.objectType == r2.objectType) {
 					if (r1.objectType == ObjectType.STREET) {
 						Street st1 = (Street) r1.object;

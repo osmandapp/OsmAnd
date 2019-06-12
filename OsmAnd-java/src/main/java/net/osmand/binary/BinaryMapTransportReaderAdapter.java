@@ -407,7 +407,7 @@ public class BinaryMapTransportReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return;
+				break;
 			case OsmandOdb.StringTable.S_FIELD_NUMBER:
 				if (current == values[i]) {
 					String value = codedIS.readString();

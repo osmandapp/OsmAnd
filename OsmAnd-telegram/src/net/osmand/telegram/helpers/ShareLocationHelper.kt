@@ -230,6 +230,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			if (shareInfo.pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || shareInfo.pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 				bufferedMessagesFull = true
 			}
+			checkAndSendBufferMessagesToChat(shareInfo.chatId)
 			when (app.settings.shareTypeValue) {
 				SHARE_TYPE_MAP -> {
 					val message = BufferMessage(shareInfo.chatId, latitude, longitude, altitude, speed, accuracy, bearing, time, LocationMessages.TYPE_MAP, deviceName)
@@ -246,7 +247,6 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					prepareTextMessage(shareInfo, messageText, isBot)
 				}
 			}
-			checkAndSendBufferMessagesToChat(shareInfo.chatId)
 		}
 		if (bufferedMessagesFull) {
 			checkNetworkType()

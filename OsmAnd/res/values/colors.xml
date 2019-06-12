@@ -491,7 +491,6 @@
 	<color name="settings_divider">#dcdcdc</color>
 	<color name="profile_button_gray">#EFEFEF</color>
 	<color name="profile_button_gray_pressed">#ababab</color>
-	<color name="solid_ripple_color">#505050</color>
 
 	<color name="active_buttons_and_links_text_disabled_light">#727272</color>
 	<color name="active_buttons_and_links_text_disabled_dark">#727272</color>

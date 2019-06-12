@@ -83,7 +83,9 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
+import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
@@ -680,12 +682,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 				} else {
-					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
+					if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 						SecondSplashScreenFragment.SHOW = false;
-						new ErrorBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
-					} else if (RateUsBottomSheetDialog.shouldShow(app)) {
+						CrashBottomSheetDialogFragment.showInstance(getSupportFragmentManager());
+					} else if (RateUsBottomSheetDialogFragment.shouldShow(app)) {
 						SecondSplashScreenFragment.SHOW = false;
-						new RateUsBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
+						RateUsBottomSheetDialogFragment.showInstance(getSupportFragmentManager());
 					}
 				}
 			} else {
@@ -860,6 +862,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		} else if (!isFirstScreenShowing() && OsmLiveCancelledDialog.shouldShowDialog(app)) {
 			OsmLiveCancelledDialog.showInstance(getSupportFragmentManager());
+		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
+			SendAnalyticsBottomSheetDialogFragment.showInstance(app, getSupportFragmentManager());
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 		if (isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
@@ -1588,6 +1592,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			((MapActivity) activity).readLocationToShow();
 		} else {
+			int additionalFlags = 0;
 			if (activity instanceof Activity) {
 				Intent intent = ((Activity) activity).getIntent();
 				if (intent != null) {
@@ -1598,11 +1603,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			} else {
 				prevActivityIntent = null;
+				additionalFlags = Intent.FLAG_ACTIVITY_NEW_TASK;
 			}
 
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
-			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | additionalFlags);
 			if (intentExtraActionName != null) {
 				newIntent.putExtra(intentExtraActionName, intentExtraActionValue);
 			}

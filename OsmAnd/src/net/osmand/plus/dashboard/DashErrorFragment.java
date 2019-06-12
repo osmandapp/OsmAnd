@@ -1,10 +1,6 @@
 package net.osmand.plus.dashboard;
 
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
@@ -15,19 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
+import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.helpers.FontCache;
 
-import java.io.File;
 import java.text.MessageFormat;
 
 public class DashErrorFragment extends DashBaseFragment {
@@ -38,7 +30,7 @@ public class DashErrorFragment extends DashBaseFragment {
 				// If settings null. No changes in setting will be made.
 				@Override
 				public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-					return ErrorBottomSheetDialog.shouldShow(settings, activity);
+					return CrashBottomSheetDialogFragment.shouldShow(settings, activity);
 				}
 			};
 	private DismissListener dismissCallback;

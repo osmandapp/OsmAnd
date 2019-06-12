@@ -12,6 +12,23 @@
 
 -->
     <string name="app_profile_custom_nav_subtitle"></string>
+    <string name="rate_dialog_descr">Please give us 30 seconds, share feedback and rate our work on Google Play.</string>
+    <string name="button_rate">Rate</string>
+    <string name="shared_string_privacy_policy">Privacy Policy</string>
+    <string name="help_us_make_osmand_better">Help us make OsmAnd better!</string>
+    <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous application usage data. We do not collect or store data about your location, or about the locations that you view on the map.\n\nYou can always change your selection in Settings > Privacy and Security.</string>
+    <string name="choose_data_to_share">Choose what type of data you want to share:</string>
+    <string name="downloaded_maps">Downloaded Maps</string>
+    <string name="visited_screens">Visited screens</string>
+    <string name="colleted_data">Colleted Data</string>
+    <string name="collected_data_descr">List of data you want to share with OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">We collect this data to understand the maps of which regions and countries are the most popular.</string>
+    <string name="visited_screens_collect_descr">We collect this data to understand the most popular features of OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">By clicking \"Allow\" you agree with our %1$s</string>
+    <string name="settings_privacy_and_security">Privacy and Security</string>
+    <string name="settings_privacy_and_security_desc">Choose your data for sharing with us</string>
+    <string name="shared_string_no_thank_you">No, thank you</string>
+    <string name="shared_string_allow">Allow</string>
     <string name="profile_name_hint">Profile Name</string>
     <string name="nav_type_hint">Navigation Type</string>
     <string name="app_mode_taxi">Taxi</string>

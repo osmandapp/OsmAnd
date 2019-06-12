@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 public class RoutePlannerFrontEnd {
 
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
+	protected static final double GPS_POSSIBLE_ERROR = 10;
 	public boolean useSmartRouteRecalculation = true;
 
 	
@@ -78,13 +79,24 @@ public class RoutePlannerFrontEnd {
 					double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, px, py);
 					if (road == null || currentsDistSquare < road.distSquare) {
 						RouteDataObject ro = new RouteDataObject(r);
+						
 						road = new RouteSegmentPoint(ro, j, currentsDistSquare);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
 					}
 				}
 				if (road != null) {
-					list.add(road);
+					if(!transportStop) {
+						float prio = ctx.getRouter().defineSpeedPriority(road.road);
+						if (prio > 0) {
+							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
+									/ (prio * prio);
+							list.add(road);
+						}
+					} else {
+						list.add(road);
+					}
+					
 				}
 			}
 		}
@@ -99,7 +111,7 @@ public class RoutePlannerFrontEnd {
 			RouteSegmentPoint ps = null;
 			if (ctx.publicTransport) {
 				for (RouteSegmentPoint p : list) {
-					if (transportStop && p.distSquare > 100) {
+					if (transportStop && p.distSquare > GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR) {
 						break;
 					}
 					boolean platform = p.road.platform();

@@ -61,7 +61,11 @@ task collectExternalResources {
 }
 
 task androidJar(type: Jar) {
-	dependsOn collectExternalResources, build
+	if (!project.hasProperty('osmandCoreSimple')) {
+		dependsOn collectExternalResources, build
+	} else {
+		dependsOn build
+	}
 	appendix = "android"
 	from (sourceSets.main.java.outputDir) {
 		exclude("**/PlatformUtil.*")
@@ -70,7 +74,9 @@ task androidJar(type: Jar) {
 }
 
 compileJava {
-    dependsOn collectExternalResources
+	if (!project.hasProperty('osmandCoreSimple')) {
+		dependsOn collectExternalResources
+	}
 }
 
 artifacts {
