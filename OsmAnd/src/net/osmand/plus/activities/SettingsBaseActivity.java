@@ -362,20 +362,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			    isSelected = true;
 		    }
 	    	if (am != ApplicationMode.DEFAULT) {
-	    		String descr;
-	    		if (am.getParent() == null) {
-	    			descr = getString(R.string.profile_type_base_string);
-			    } else {
-				    descr = String.format(getString(R.string.profile_type_descr_string),
-					    am.getParent().toHumanString(getMyApplication()));
-	    			if (am.getRoutingProfile().contains("/")) {
-					    descr = descr.concat(", " + am.getRoutingProfile()
-						    .substring(0, am.getRoutingProfile().indexOf("/")));
-				    }
-			    }
 			    activeModes.add(new ProfileDataObject(
 				    am.toHumanString(getMyApplication()),
-					descr,
+					getAppModeDescription(am),
 				    am.getStringKey(),
 				    am.getIconRes(getMyApplication()),
 				    isSelected
@@ -418,19 +407,8 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		    ? mode.toHumanString(SettingsBaseActivity.this)
 		    : mode.getUserProfileName();
 
-	    String descr;
-	    if (mode.getParent() == null) {
-		    descr = getString(R.string.profile_type_base_string);
-	    } else {
-		    descr = String.format(getString(R.string.profile_type_descr_string),
-			    mode.getParent().toHumanString(getMyApplication()));
-		    if (mode.getRoutingProfile().contains("/")) {
-			    descr = descr.concat(", " + mode.getRoutingProfile()
-				    .substring(0, mode.getRoutingProfile().indexOf("/")));
-		    }
-	    }
 	    getModeTitleTV().setText(title);
-	    getModeSubTitleTV().setText(descr);
+	    getModeSubTitleTV().setText(getAppModeDescription(mode));
 	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(this),
 		    getMyApplication().getSettings().isLightContent()
 			    ? R.color.active_buttons_and_links_light
@@ -443,6 +421,21 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    previousAppMode = mode;
 	    isModeSelected = true;
 	    updateAllSettings();
+    }
+
+    private String getAppModeDescription(ApplicationMode mode) {
+	    String descr;
+	    if (mode.getParent() == null) {
+		    descr = getString(R.string.profile_type_base_string);
+	    } else {
+		    descr = String.format(getString(R.string.profile_type_descr_string),
+			    mode.getParent().toHumanString(getMyApplication()));
+		    if (mode.getRoutingProfile().contains("/")) {
+			    descr = descr.concat(", " + mode.getRoutingProfile()
+				    .substring(0, mode.getRoutingProfile().indexOf("/")));
+		    }
+	    }
+	    return descr;
     }
 
 	@Override
