@@ -2931,7 +2931,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_gpx_tracks_show">Wyświetl ślady GPX</string>
     <string name="add_destination_query">Proszę najpierw dodać cel</string>
     <string name="previous_route">Poprzednia trasa</string>
-    <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wylicza trasy.</string>
+    <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wyznacza trasy.</string>
     <string name="route_add_start_point">Dodawanie punktu początkowego</string>
     <string name="route_descr_select_start_point">Wybierz punkt początkowy</string>
     <string name="rendering_attr_surface_unpaved_name">Nieutwardzona</string>
@@ -3000,7 +3000,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Usunięcie Facebooka i analiz Firebase z darmowej wersji (OsmAnd+ tego nie zawiera)
 \n</string>
     <string name="shared_string_degrees">Stopnie</string>
-    <string name="shared_string_milliradians">Miliradianach</string>
+    <string name="shared_string_milliradians">Miliradiany</string>
     <string name="quick_action_day_night_mode">Tryb %s</string>
     <string name="routing_attr_avoid_tram_name">Unikanie tramwajów</string>
     <string name="routing_attr_avoid_tram_description">Unikanie tramwajów</string>
@@ -3022,8 +3022,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="angular_measeurement">Jednostka kąta</string>
-    <string name="angular_measeurement_descr">Zmiany jakie azymut jest mierzony w.</string>
-    <string name="avoid_pt_types_descr">Wybierz typy transportu publicznego, których chcesz unikać dla nawigacji:</string>
+    <string name="angular_measeurement_descr">Określa jednostki miary azymutu.</string>
+    <string name="avoid_pt_types_descr">Proszę wybrać rodzaje transportu publicznego, unikanych dla nawigacji:</string>
     <string name="avoid_pt_types">Unikanie rodzaju transportu…</string>
     <string name="shared_string_walk">Pieszo</string>
     <string name="save_poi_value_exceed_length">Maksymalna długość znacznika „%s” wynosi 255 znaków.
@@ -3045,7 +3045,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="public_transport_try_ped">Wypróbuj nawigację pieszą.</string>
     <string name="public_transport_try_change_settings">Spróbuj zmienić ustawienia.</string>
     <string name="public_transport_calc_pedestrian">Oblicz trasę pieszą</string>
-    <string name="public_transport_type">Typ transportu</string>
+    <string name="public_transport_type">Rodzaj transportu</string>
     <string name="searching_gps">Wyszukiwanie GPS</string>
     <string name="coordinates_widget">Widget współrzędne</string>
 </resources>
