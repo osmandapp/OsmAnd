@@ -3186,5 +3186,27 @@
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
     <string name="quick_action_need_to_add_item_to_list">You need to add at least one Item to list in Quick Action\' Settings</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpine/downhill ski</string>
+    <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross country/nordic ski</string>
+    <string name="routing_attr_piste_type_nordic_description">Trails for nordic or cross-country skiing.</string>
+    <string name="routing_attr_piste_type_skitour_name">Ski touring</string>
+    <string name="routing_attr_piste_type_skitour_description">Routes for ski touring.</string>
+    <string name="routing_attr_piste_type_sled_name">Sled</string>
+    <string name="routing_attr_piste_type_sled_description">Slopes for sled usage.</string>
+    <string name="routing_attr_allow_intermediate_name">Allow intermediate routes</string>
+    <string name="routing_attr_allow_intermediate_description">More difficult routes with steeper sections. Generally some obstacles that should be avoided.</string>
+    <string name="routing_attr_allow_advanced_name">Allow advanced routes</string>
+    <string name="routing_attr_allow_advanced_description">Difficult routes, with dangerous obstacles and steep sections.</string>
+    <string name="routing_attr_allow_expert_name">Allow expert routes</string>
+    <string name="routing_attr_allow_expert_description">Extremely difficult routes, with dangerous obstacles and surroundings.</string>
+    <string name="routing_attr_allow_skating_only_name">Allow skating only routes</string>
+    <string name="routing_attr_allow_skating_only_description">Routes groomed for free style or skating only without classic trails.</string>
+    <string name="routing_attr_allow_classic_only_name">Allow classic only routes</string>
+    <string name="routing_attr_allow_classic_only_description">Routes groomed for classic style only without skating trails. This includes routes groomed by a smaller snowmobile with looser piste and tracks made manually by skiers.</string>
+    <string name="routing_attr_difficulty_preference_name">Prefered difficulty</string>
+    <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
+    <string name="routing_attr_freeride_policy_name">Off-piste</string>
+    <string name="routing_attr_freeride_policy_description">Freerides and offpiste are unofficial routes and passages. Typically ungroomed, unmainted by the officials and not checked in the evening. Enter at own risk.</string>
 
 </resources>
