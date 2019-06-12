@@ -602,6 +602,8 @@ public class RouteProvider {
 
 		//todo: bookmark, clear comment in pR.
 		if (params.mode.getMinDefaultSpeed() > 0) {
+			float factor = params.mode.getMinDefaultSpeed() / generalRouter.getMinDefaultSpeed();
+			//generalRouter.updateObjectAttributes(factor);
 			generalRouter.attributes.put("minDefaultSpeed", (params.mode.getMinDefaultSpeed() * 3.6) + "") ;
 			generalRouter.setMinDefaultSpeed(params.mode.getMinDefaultSpeed());
 		}
@@ -726,6 +728,7 @@ public class RouteProvider {
 	private RouteCalculationResult calcOfflineRouteImpl(final RouteCalculationParams params,
 			RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
 			List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
+
 		try {
 			List<RouteSegmentResult> result ;
 			if(complexCtx != null) {
@@ -740,7 +743,7 @@ public class RouteProvider {
 							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
 						}
 					});
-					result = router.searchRoute(ctx, st, en, inters);
+							result = router.searchRoute(ctx, st, en, inters);
 				}
 			} else {
 				result = router.searchRoute(ctx, st, en, inters);
