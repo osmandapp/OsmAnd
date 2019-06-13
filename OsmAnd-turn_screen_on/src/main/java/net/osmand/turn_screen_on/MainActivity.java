@@ -1,9 +1,14 @@
 package net.osmand.turn_screen_on;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +30,7 @@ import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.turn_screen_on.helpers.AndroidUtils;
 import net.osmand.turn_screen_on.helpers.OsmAndAidlHelper;
@@ -33,9 +39,10 @@ import java.util.List;
 
 import static android.view.View.LAYER_TYPE_HARDWARE;
 
-public class MainActivity extends AppCompatActivity {
+                                    //todo delete
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private FrameLayout flRootLayout;
-    private LinearLayout llMainScreen;
+    private LinearLayout llElementsList;
     private Toolbar tbPluginToolbar;
     private FrameLayout btnOpenOsmand;
     private SwitchCompat swPluginEnableSwitcher;
@@ -64,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
     private PluginState NO_INSTALLED_OSMAND_STATE = new PluginState() {
         @Override
         public void createUI() {
-            llMainScreen.addView(inflater.inflate(R.layout.main_el_plugin_switcher, null, false));
-            llMainScreen.addView(inflater.inflate(R.layout.main_install_desc, null, false));
+            llElementsList.addView(inflater.inflate(R.layout.main_el_plugin_switcher, null, false));
+            llElementsList.addView(inflater.inflate(R.layout.main_install_desc, null, false));
 
-            flRootLayout.addView(llMainScreen);
+            flRootLayout.addView(llElementsList);
 
             llPluginPreferencesLayout = findViewById(R.id.llPluginPreferencesLayout);
             swPluginEnableSwitcher = findViewById(R.id.swPluginEnableSwitcher);
@@ -86,17 +93,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void createUI() {
             //add interface elements
-            llMainScreen.addView(inflater.inflate(R.layout.main_el_plugin_switcher, null, false));
-            llMainScreen.addView(inflater.inflate(R.layout.main_el_time_set_up, null, false));
-            llMainScreen.addView(inflater.inflate(R.layout.main_el_sensor, null, false));
+            llElementsList.addView(inflater.inflate(R.layout.main_el_plugin_switcher, null, false));
+            llElementsList.addView(inflater.inflate(R.layout.main_el_time_set_up, null, false));
+            llElementsList.addView(inflater.inflate(R.layout.main_el_sensor, null, false));
 
             View btnOpenOsmandLayout = inflater.inflate(R.layout.main_el_btn_open_osmand, null, false);
             flRootLayout.addView(btnOpenOsmandLayout);
 
-            llMainScreen.setPadding(0, 0, 0, AndroidUtils.dpToPx(getApplicationContext(), 82));
+            llElementsList.setPadding(0, 0, 0, AndroidUtils.dpToPx(getApplicationContext(), 82));
 
             ScrollView sv = new ScrollView(MainActivity.this);
-            sv.addView(llMainScreen);
+            sv.addView(llElementsList);
             //getting control elements
             flRootLayout.addView(sv);
 
@@ -108,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             swSensorEnableSwitcher = findViewById(R.id.swSensorEnableSwitcher);
 
             if (availableOsmandVersions.size() > 1) {
-                llMainScreen.addView(inflater.inflate(R.layout.main_el_osmand_versions, null, false));
+                llElementsList.addView(inflater.inflate(R.layout.main_el_osmand_versions, null, false));
                 llOsmandVersions = findViewById(R.id.llOsmandVersions);
                 createVersionUI();
             }
@@ -251,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
             btnOpenOsmand.setEnabled(enable);
 
             //todo delete
-            osmAndAidlHelper.connect(settings.getOsmandVersion().getPath());
+            osmAndAidlHelper.reconnectOsmand();
         }
     };
 
@@ -272,6 +279,17 @@ public class MainActivity extends AppCompatActivity {
             pluginState = PLUGIN_PREFERENCE_STATE;
         }
 
+        if (!settings.programWasOpenedEarlier()){
+            settings.setOpened();
+            Intent intent = new Intent(this, PluginDescriptionActivity.class);
+            startActivity(intent);
+        }
+
+
+        //todo delete
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
         createUI();
     }
 
@@ -283,9 +301,9 @@ public class MainActivity extends AppCompatActivity {
         pGreyScale.setColorFilter(new ColorMatrixColorFilter(cm));
 
         flRootLayout = findViewById(R.id.flRootLayout);
-        llMainScreen = new LinearLayout(this);
-        llMainScreen.setOrientation(LinearLayout.VERTICAL);
-        llMainScreen.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup
+        llElementsList = new LinearLayout(this);
+        llElementsList.setOrientation(LinearLayout.VERTICAL);
+        llElementsList.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup
                 .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         tbPluginToolbar = findViewById(R.id.tbPluginToolbar);
@@ -316,6 +334,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
         refreshUI();
     }
 
@@ -327,5 +346,45 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, colorResId));
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //todo delete
+    private SensorManager mSensorManager;
+    private Sensor mProximity;
+    private static final int SENSOR_SENSITIVITY = 4;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
+                //near
+                Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
+            } else {
+                //far
+                Toast.makeText(getApplicationContext(), "far", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }

@@ -20,6 +20,7 @@ public class PluginSettings {
     private static final String PREFERENCE_ENABLE = "enable";
     private static final String PREFERENCE_TIME_INDEX = "timeId";
     private static final String PREFERENCE_OSMAND_VERSION = "OsmandVersionInt";
+    private static final String PREFERENCE_FIRST_OPEN = "firstOpen";
 
     private final static Context context = TurnScreenOnApplication.getAppContext();
 
@@ -28,10 +29,10 @@ public class PluginSettings {
         OSMAND(132357, R.string.Osmand, R.drawable.ic_action_osmand, "net.osmand");
 
         int id;
+
         int nameId;
         int imgId;
         String path;
-
         OsmandVersion(int id, int nameId, int imgId, String path) {
             this.id = id;
             this.nameId = nameId;
@@ -85,13 +86,13 @@ public class PluginSettings {
             }
             return installedVersions;
         }
-    }
 
+    }
     private static int[] unlockTime = {5, 10, 15, 20, 30, 45, 60};
 
     //todo change singleton type
-    private static PluginSettings INSTANCE = new PluginSettings();
 
+    private static PluginSettings INSTANCE = new PluginSettings();
     private PluginSettings() {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         OsmAndAidlHelper helper = OsmAndAidlHelper.getInstance();
@@ -126,6 +127,14 @@ public class PluginSettings {
             return unlockTime[position];
         }
         return 0;
+    }
+
+    public void setOpened(){
+        setBoolean(PREFERENCE_FIRST_OPEN, true);
+    }
+
+    public boolean programWasOpenedEarlier(){
+        return preferences.contains(PREFERENCE_FIRST_OPEN);
     }
 
     public int getTimeModePosition() {
@@ -170,5 +179,12 @@ public class PluginSettings {
                     .append(context.getString(R.string.secondsShort)).toString());
         }
         return result;
+    }
+
+    public boolean isAdminPermissionAvailable() {
+        ComponentName mDeviceAdmin = new ComponentName(context, DeviceAdminRecv.class);
+        DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+        return mDevicePolicyManager.isAdminActive(mDeviceAdmin);
     }
 }

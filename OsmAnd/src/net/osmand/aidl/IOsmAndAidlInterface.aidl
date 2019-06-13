@@ -82,6 +82,7 @@ import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.copyfile.CopyFileParams;
 
 import net.osmand.aidl.navigation.ANavigationUpdateParams;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 
 import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
@@ -700,5 +701,5 @@ interface IOsmAndAidlInterface {
     boolean removeContextMenuButtons(in RemoveContextMenuButtonsParams params);
     boolean updateContextMenuButtons(in UpdateContextMenuButtonsParams params);
 
-    long registerForVoiceRouterMessages(in IOsmAndAidlCallback callback);
+    long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
 }

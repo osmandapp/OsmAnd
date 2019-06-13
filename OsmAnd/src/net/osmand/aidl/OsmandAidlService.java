@@ -55,6 +55,7 @@ import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 import net.osmand.aidl.navigation.ANavigationUpdateParams;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
@@ -1116,7 +1117,27 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
-		public long registerForVoiceRouterMessages(final IOsmAndAidlCallback callback) throws RemoteException {
+		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) throws RemoteException {
+			/*try {
+				OsmandAidlApi api = getApi("registerForNavUpdates");
+				if (api != null ) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromUpdates(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
+						api.registerForNavigationUpdates(id);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}*/
+
 			VoiceRouter voiceRouter = getApp().getRoutingHelper().getVoiceRouter();
 			voiceRouter.addVoiceMessageListener(new VoiceRouter.VoiceMessageListener() {
 				@Override

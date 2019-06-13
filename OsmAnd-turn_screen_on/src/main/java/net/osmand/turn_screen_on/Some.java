@@ -1,20 +1,10 @@
 package net.osmand.turn_screen_on;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import net.osmand.turn_screen_on.app.TurnScreenOnApplication;
 import net.osmand.turn_screen_on.helpers.LockHelper;
 import net.osmand.turn_screen_on.helpers.OsmAndAidlHelper;
-import net.osmand.turn_screen_on.helpers.WakeLockHelper;
-import net.osmand.turn_screen_on.receiver.DeviceAdminRecv;
 
 public class Some {
     private Button button;
@@ -22,7 +12,6 @@ public class Some {
     private Button btnConnect;
     private Button btnRegister;
     private ComponentName mDeviceAdmin;
-    private WakeLockHelper wakeLockHelper;
     private LockHelper lockHelper;
     private OsmAndAidlHelper helper;
 
