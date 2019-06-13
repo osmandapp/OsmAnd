@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -15,10 +16,14 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
@@ -51,22 +56,26 @@ import org.apache.commons.logging.Log;
 
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
+
+	private static final Log LOG = PlatformUtil.getLog(SettingsNavigationActivity.class);
+
 	public static final String MORE_VALUE = "MORE_VALUE";
 
 	private Preference avoidRouting;
 	private Preference preferRouting;
+	private Preference defaultSpeed;
 	private Preference reliefFactorRouting;
 	private Preference autoZoom;
 	private Preference showAlarms;
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
 	private ListPreference speedLimitExceed;
-	
+
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> reliefFactorParameters = new ArrayList<RoutingParameter>();
 	public static final String INTENT_SKIP_DIALOG = "INTENT_SKIP_DIALOG";
-	
+
 	public SettingsNavigationActivity() {
 		super(true);
 	}
@@ -118,15 +127,15 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			speedNamesVls[i] = speedValues[i].toHumanString(this);
 		};
 		registerListPreference(settings.SPEED_SYSTEM, screen, speedNamesVls, speedValues);
-        
+
 //         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
-		
+
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
-		
+
 		speakAlarms = (Preference) screen.findPreference("speak_routing_alarms");
 		speakAlarms.setOnPreferenceClickListener(this);
-		
+
 		Float[] arrivalValues = new Float[] {1.5f, 1f, 0.5f, 0.25f} ;
 		String[] arrivalNames = new String[] {
 				getString(R.string.arrival_distance_factor_early),
@@ -245,6 +254,17 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
+				if (router.attributes.containsKey("baseProfile")) {
+					String baseProfile = router.attributes.get("baseProfile");
+					if (baseProfile.equals("pedestrian") || baseProfile.equals("bicycle") || baseProfile.equals("boat")) {
+						defaultSpeed = new Preference(this);
+						defaultSpeed.setTitle("Default speed");
+						defaultSpeed.setSummary("Change default speed settings");
+						defaultSpeed.setOnPreferenceClickListener(this);
+						cat.addPreference(defaultSpeed);
+					}
+				}
+
 				Map<String, RoutingParameter> parameters = router.getParameters();
 				if(parameters.containsKey(GeneralRouter.USE_SHORTEST_WAY)) {
 					cat.addPreference(fastRoute);
@@ -296,10 +316,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 						for(Object o : vls) {
 							svlss[i++] = o.toString();
 						}
-						basePref = createListPreference(settings.getCustomRoutingProperty(p.getId(), 
-								p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-"), 
-								p.getPossibleValueDescriptions(), svlss, 
-								SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName()), 
+						basePref = createListPreference(settings.getCustomRoutingProperty(p.getId(),
+								p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-"),
+								p.getPossibleValueDescriptions(), svlss,
+								SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName()),
 								SettingsBaseActivity.getRoutingStringPropertyDescription(this, p.getId(), p.getDescription()));
 					}
 					basePref.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName()));
@@ -308,6 +328,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				}
 			}
 			ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
+//			if (mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE) || mode.isDerivedRoutingFrom(ApplicationMode.BOAT) || mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN))
+
 			if (mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 				PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
 				category.addPreference(speedLimitExceed);
@@ -355,11 +377,15 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
 		if(router == null && am.getParent() != null) {
 			router = builder.getRouter(am.getParent().getStringKey());
+
+		}
+		if (router != null && am.getUserDefaultSpeed() > 0) {
+			router.setDefaultSpeed(am.getUserDefaultSpeed());
 		}
 		return router;
 	}
 
-	public void updateAllSettings() {	
+	public void updateAllSettings() {
 		prepareRoutingPrefs(getPreferenceScreen());
 		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
@@ -583,18 +609,20 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 			});
 			return true;
+		} else if (preference == defaultSpeed){
+			showSeekbarSettingsDialog();
 		}
 		return false;
 	}
-	
+
 	private void confirmSpeedCamerasDlg() {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setMessage(R.string.confirm_usage_speed_cameras);
 		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				settings.SPEAK_SPEED_CAMERA.set(true);				
+				settings.SPEAK_SPEED_CAMERA.set(true);
 			}
 		});
 		bld.setNegativeButton(R.string.shared_string_cancel, null);
@@ -607,12 +635,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		for (int i = 0; i < prefs.length; i++) {
 			checkedItems[i] = prefs[i].get();
 		}
-		
+
 		final boolean[] tempPrefs = new boolean[prefs.length];
 		for (int i = 0; i < prefs.length; i++) {
 			tempPrefs[i] = prefs[i].get();
 		}
-		
+
 		bld.setMultiChoiceItems(vals, checkedItems, new OnMultiChoiceClickListener() {
 
 			@Override
@@ -620,11 +648,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				tempPrefs[which] = isChecked;
 			}
 		});
-		
+
 		bld.setTitle(title);
-		
+
 		bld.setNegativeButton(R.string.shared_string_cancel, null);
-		
+
 		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int whichButton) {
 				for (int i = 0; i < prefs.length; i++) {
@@ -632,9 +660,78 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				}
 		    }
 		});
-		
+
 		return bld.show();
 	}
 
-	
+	private void showSeekbarSettingsDialog() {
+		GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), settings.getApplicationMode());
+		String speedUnits;
+		final int min = (int) (router.getMinSpeed() * 3.6f);
+		int max = (int) (router.getMaxSpeed() * 3.6f);
+		final int[] def = {(int) (router.getDefaultSpeed() * 3.6f)};
+
+		AlertDialog.Builder builder = new Builder(this);
+
+		builder.setTitle(R.string.default_speed_dialog_title);
+		builder.setMessage(R.string.default_speed_dialog_msg);
+
+		LayoutInflater inflater = this.getLayoutInflater();
+		View seekbarView = inflater.inflate(R.layout.average_speed_dialog, null);
+
+		builder.setView(seekbarView);
+
+		builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				settings.getApplicationMode().setUserDefaultSpeed(def[0]);
+			}
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setNeutralButton("Revert", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+
+		final SeekBar seekBar = seekbarView.findViewById(R.id.speed_seekbar);
+		final TextView speedMinTv = seekbarView.findViewById(R.id.seekbar_min_text);
+		final TextView speedMaxTv = seekbarView.findViewById(R.id.seekbar_max_text);
+		final TextView speedUnitsTv = seekbarView.findViewById(R.id.speed_units);
+		final TextView speedTv = seekbarView.findViewById(R.id.speed_text);
+
+		speedMinTv.setText(min + "");
+		speedMaxTv.setText(max + "");
+		speedTv.setText(def[0] + "");
+
+		seekBar.setMax(max - min);
+		seekBar.setProgress(def[0]);
+		seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				def[0] = progress;
+				speedTv.setText((progress + min) + "");
+
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+
+			}
+		});
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+
+	private void setDefSpeedSetting(float defSpeed) {
+
+	}
+
 }

@@ -707,7 +707,7 @@ public class RouteProvider {
 //				generalRouter.updateObjectAttributes(factor);
 //			}
 			generalRouter.attributes.put("minDefaultSpeed", (params.mode.getUserDefaultSpeed() * 3.6) + "") ;
-			generalRouter.setMinDefaultSpeed(params.mode.getUserDefaultSpeed());
+			generalRouter.setDefaultSpeed(params.mode.getUserDefaultSpeed());
 		}
 
 

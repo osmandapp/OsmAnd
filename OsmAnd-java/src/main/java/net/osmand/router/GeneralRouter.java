@@ -44,6 +44,7 @@ public class GeneralRouter implements VehicleRouter {
 	private boolean shortestRoute;
 	private boolean heightObstacles;
 	private boolean allowPrivate;
+	private String baseProfile = "";
 	private String filename = null;
 	private String profileName = "";
 
@@ -58,6 +59,9 @@ public class GeneralRouter implements VehicleRouter {
 	private float minDefaultSpeed = 10;
 	// speed in m/s
 	private float maxDefaultSpeed = 10;
+	private float minSpeed = 1;
+	private float maxSpeed = 100;
+	private float defaultSpeed = 40;
 	
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
@@ -192,13 +196,21 @@ public class GeneralRouter implements VehicleRouter {
 			minDefaultSpeed = parseSilentFloat(v, minDefaultSpeed * 3.6f) / 3.6f;
 		} else if(k.equals("maxDefaultSpeed")) {
 			maxDefaultSpeed = parseSilentFloat(v, maxDefaultSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("minSpeed")) {
+			minSpeed = parseSilentFloat(v, minSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("maxSpeed")) {
+			maxSpeed = parseSilentFloat(v, maxSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("defaultSpeed")) {
+			defaultSpeed = parseSilentFloat(v, defaultSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("baseProfile")) {
+			baseProfile = v;
 		}
 	}
 	
 	public RouteAttributeContext getObjContext(RouteDataObjectAttribute a) {
 		return objectAttributes[a.ordinal()];
 	}
-	
+
 
 	public void registerBooleanParameter(String id, String group, String name, String description, boolean defaultValue) {
 		RoutingParameter rp = new RoutingParameter();
@@ -396,8 +408,25 @@ public class GeneralRouter implements VehicleRouter {
 		return minDefaultSpeed;
 	}
 
-	public void setMinDefaultSpeed(float newMinDefaultSpeed) {
-		this.minDefaultSpeed = newMinDefaultSpeed;
+	public void setDefaultSpeed(float newDefaultSpeed) {
+		this.minDefaultSpeed = newDefaultSpeed;
+		this.defaultSpeed = newDefaultSpeed;
+	}
+
+	public float getMinSpeed() {
+		return minSpeed;
+	}
+
+	public String getBaseProfile() {
+		return baseProfile;
+	}
+
+	public float getMaxSpeed() {
+		return maxSpeed;
+	}
+
+	public float getDefaultSpeed() {
+		return defaultSpeed;
 	}
 
 	public void updateObjectAttributes(float factor) {
