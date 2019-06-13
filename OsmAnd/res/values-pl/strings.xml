@@ -2365,7 +2365,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_username">Wyświetl obrazy dodane tylko przez</string>
     <string name="store_tracks_in_monthly_directories">Ślady w miesięcznych katalogach</string>
     <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2018-01).</string>
-    <string name="shared_string_reset">Wyczyść</string>
+    <string name="shared_string_reset">Resetuj</string>
     <string name="mapillary_menu_descr_tile_cache">"Ponowne wczytanie kafelków uaktualni  je."</string>
     <string name="average">Średnia</string>
     <string name="of">%1$d z %2$d</string>
