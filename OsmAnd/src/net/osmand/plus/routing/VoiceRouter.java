@@ -947,8 +947,8 @@ public class VoiceRouter {
 	}
 
 	public void notifyOnVoiceMessage() {
-        for (VoiceMessageListener lnt : voiceMessageListeners.keySet()) {
-            lnt.onVoiceMessage();
-        }
+		for (VoiceMessageListener lnt : voiceMessageListeners.keySet()) {
+			lnt.onVoiceMessage();
+		}
 	}
 }

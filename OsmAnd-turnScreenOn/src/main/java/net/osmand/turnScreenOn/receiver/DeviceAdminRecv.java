@@ -1,4 +1,4 @@
-package net.osmand.turn_screen_on.receiver;
+package net.osmand.turnScreenOn.receiver;
 
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;

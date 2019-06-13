@@ -1,14 +1,9 @@
-package net.osmand.turn_screen_on;
+package net.osmand.turnScreenOn;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -30,17 +25,17 @@ import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import net.osmand.turn_screen_on.helpers.AndroidUtils;
-import net.osmand.turn_screen_on.helpers.OsmAndAidlHelper;
+import net.osmand.turnScreenOn.app.TurnScreenApp;
+import net.osmand.turnScreenOn.helpers.AndroidUtils;
+import net.osmand.turnScreenOn.helpers.OsmAndAidlHelper;
+import net.osmand.turnScreenOn.helpers.SensorHelper;
 
 import java.util.List;
 
 import static android.view.View.LAYER_TYPE_HARDWARE;
 
-                                    //todo delete
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends AppCompatActivity {
     private FrameLayout flRootLayout;
     private LinearLayout llElementsList;
     private Toolbar tbPluginToolbar;
@@ -56,9 +51,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private Paint pGreyScale;
 
+    private TurnScreenApp app;
     private OsmAndAidlHelper osmAndAidlHelper;
     private PluginSettings settings;
     private PluginState pluginState;
+    private SensorHelper sensorHelper;
 
     private LayoutInflater inflater;
 
@@ -168,6 +165,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             });
 
+            swSensorEnableSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        settings.enableSensor();
+                    } else {
+                        settings.disableSensor();
+                    }
+                    refreshUI();
+                }
+            });
+
             btnOpenOsmandLayout.bringToFront();
         }
 
@@ -200,6 +209,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
 
             swPluginEnableSwitcher.setChecked(isPluginEnabled);
+
+            boolean isSensorEnabled = settings.isSensorEnabled();
+            swSensorEnableSwitcher.setChecked(isSensorEnabled);
+
+            if (isSensorEnabled) {
+                sensorHelper.switchOnSensor();
+            } else {
+                sensorHelper.switchOffSensor();
+            }
 
             int timePosition = settings.getTimeModePosition();
             spTime.setSelection(timePosition);
@@ -266,8 +284,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        osmAndAidlHelper = OsmAndAidlHelper.getInstance();
-        settings = PluginSettings.getInstance();
+        app = new TurnScreenApp(this);
+
+        osmAndAidlHelper = app.getOsmAndAidlHelper();
+        settings = app.getSettings();
 
         inflater = getLayoutInflater();
 
@@ -285,10 +305,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             startActivity(intent);
         }
 
-
-        //todo delete
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        //todo refactor
+        sensorHelper = app.getSensorHelper();
 
         createUI();
     }
@@ -334,7 +352,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
         refreshUI();
     }
 
@@ -348,43 +365,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    //todo delete
-    private SensorManager mSensorManager;
-    private Sensor mProximity;
-    private static final int SENSOR_SENSITIVITY = 4;
-
     @Override
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener(this);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-            if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
-                //near
-                Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
-            } else {
-                //far
-                Toast.makeText(getApplicationContext(), "far", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 }

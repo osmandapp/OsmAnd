@@ -701,5 +701,8 @@ interface IOsmAndAidlInterface {
     boolean removeContextMenuButtons(in RemoveContextMenuButtonsParams params);
     boolean updateContextMenuButtons(in UpdateContextMenuButtonsParams params);
 
+    boolean areOsmandSettingsCustomized(in OsmandSettingsInfoParams params);
+
+    boolean setCustomization(in CustomizationInfoParams params);
     long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
 }

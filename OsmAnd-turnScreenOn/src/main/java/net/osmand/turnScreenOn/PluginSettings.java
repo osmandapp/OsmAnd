@@ -1,4 +1,4 @@
-package net.osmand.turn_screen_on;
+package net.osmand.turnScreenOn;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -7,9 +7,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
-import net.osmand.turn_screen_on.app.TurnScreenOnApplication;
-import net.osmand.turn_screen_on.helpers.OsmAndAidlHelper;
-import net.osmand.turn_screen_on.receiver.DeviceAdminRecv;
+import net.osmand.turnScreenOn.app.TurnScreenApp;
+import net.osmand.turnScreenOn.receiver.DeviceAdminRecv;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +16,13 @@ import java.util.List;
 public class PluginSettings {
     private SharedPreferences preferences;
     private static final String APP_PREFERENCE = "TurnScreenOnPreferences";
-    private static final String PREFERENCE_ENABLE = "enable";
+    private static final String PREFERENCE_PLUGIN_ENABLE = "pluginEnable";
     private static final String PREFERENCE_TIME_INDEX = "timeId";
     private static final String PREFERENCE_OSMAND_VERSION = "OsmandVersionInt";
     private static final String PREFERENCE_FIRST_OPEN = "firstOpen";
+    private static final String PREFERENCE_SENSOR_ENABLE = "sensorEnable";
 
-    private final static Context context = TurnScreenOnApplication.getAppContext();
+    private static TurnScreenApp app;
 
     public enum OsmandVersion {
         OSMAND_PLUS(132356, R.string.OsmandPlus, R.drawable.ic_action_osmand_plus, "net.osmand.plus"),
@@ -67,7 +67,8 @@ public class PluginSettings {
 
         public static boolean isVersionInstalled(OsmandVersion version) {
             String path = version.getPath();
-            PackageManager pm = context.getPackageManager();
+            //todo refactor
+            PackageManager pm = app.getContext().getPackageManager();
             try {
                 pm.getPackageInfo(path, PackageManager.GET_ACTIVITIES);
                 return true;
@@ -88,35 +89,41 @@ public class PluginSettings {
         }
 
     }
+
     private static int[] unlockTime = {5, 10, 15, 20, 30, 45, 60};
 
-    //todo change singleton type
-
-    private static PluginSettings INSTANCE = new PluginSettings();
-    private PluginSettings() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        OsmAndAidlHelper helper = OsmAndAidlHelper.getInstance();
-    }
-
-    public static PluginSettings getInstance() {
-        return INSTANCE;
+    public PluginSettings(TurnScreenApp app) {
+        this.app = app;
+        preferences = PreferenceManager.getDefaultSharedPreferences(app.getContext());
     }
 
     public void enablePlugin() {
-        setBoolean(PREFERENCE_ENABLE, true);
+        setBoolean(PREFERENCE_PLUGIN_ENABLE, true);
     }
 
     public void disablePlugin() {
-        setBoolean(PREFERENCE_ENABLE, false);
+        setBoolean(PREFERENCE_PLUGIN_ENABLE, false);
     }
 
     public boolean isPluginEnabled() {
-        return preferences.getBoolean(PREFERENCE_ENABLE, false);
+        return preferences.getBoolean(PREFERENCE_PLUGIN_ENABLE, false);
+    }
+
+    public void enableSensor() {
+        setBoolean(PREFERENCE_SENSOR_ENABLE, true);
+    }
+
+    public void disableSensor() {
+        setBoolean(PREFERENCE_SENSOR_ENABLE, false);
+    }
+
+    public boolean isSensorEnabled() {
+        return preferences.getBoolean(PREFERENCE_SENSOR_ENABLE, false);
     }
 
     public boolean isPermissionAvailable() {
-        ComponentName mDeviceAdmin = new ComponentName(context, DeviceAdminRecv.class);
-        DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName mDeviceAdmin = new ComponentName(app.getContext(), DeviceAdminRecv.class);
+        DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) app.getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         return mDevicePolicyManager.isAdminActive(mDeviceAdmin);
     }
@@ -176,14 +183,14 @@ public class PluginSettings {
         List<String> result = new ArrayList<>();
         for (int t : unlockTime) {
             result.add(new StringBuilder().append(t).append(" ")
-                    .append(context.getString(R.string.secondsShort)).toString());
+                    .append(app.getContext().getString(R.string.secondsShort)).toString());
         }
         return result;
     }
 
     public boolean isAdminPermissionAvailable() {
-        ComponentName mDeviceAdmin = new ComponentName(context, DeviceAdminRecv.class);
-        DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName mDeviceAdmin = new ComponentName(app.getContext(), DeviceAdminRecv.class);
+        DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) app.getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         return mDevicePolicyManager.isAdminActive(mDeviceAdmin);
     }

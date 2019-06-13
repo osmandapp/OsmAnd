@@ -1,4 +1,4 @@
-package net.osmand.turn_screen_on.helpers;
+package net.osmand.turnScreenOn.helpers;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,27 +11,21 @@ import android.util.Log;
 import net.osmand.aidl.IOsmAndAidlCallback;
 import net.osmand.aidl.IOsmAndAidlInterface;
 import net.osmand.aidl.gpx.AGpxBitmap;
-import net.osmand.aidl.map.ALatLon;
-import net.osmand.aidl.maplayer.point.AMapPoint;
-import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 import net.osmand.aidl.navigation.ADirectionInfo;
 import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidl.search.SearchResult;
-import net.osmand.turn_screen_on.PluginSettings;
-import net.osmand.turn_screen_on.app.TurnScreenOnApplication;
+import net.osmand.turnScreenOn.PluginSettings;
+import net.osmand.turnScreenOn.app.TurnScreenApp;
 
 import java.util.List;
 
 public class OsmAndAidlHelper {
-    //todo change singleton type
-    private final static OsmAndAidlHelper INSTANCE = new OsmAndAidlHelper();
-
     private final static String AIDL_SERVICE_PATH = "net.osmand.aidl.OsmandAidlService";
 
     private LockHelper lockHelper;
     private PluginSettings settings;
 
-    private Context context;
+    private TurnScreenApp app;
 
     private int osmandUpdatesCallbackId;
     private boolean bound;
@@ -74,7 +68,7 @@ public class OsmAndAidlHelper {
         public void onVoiceRouterNotify() throws RemoteException {
             Log.d("ttpl", "take message from vr");
             if (settings.isPluginEnabled()) {
-                lockHelper.timedUnlock(PluginSettings.getInstance().getTimeLikeSeconds() * 1000L);
+                lockHelper.timedUnlock(app.getSettings().getTimeLikeSeconds() * 1000L);
             }
         }
     };
@@ -105,15 +99,10 @@ public class OsmAndAidlHelper {
         }
     };
 
-    private OsmAndAidlHelper() {
-        //todo change
-        settings = PluginSettings.getInstance();
-        lockHelper = new LockHelper(TurnScreenOnApplication.getAppContext());
-        context = TurnScreenOnApplication.getAppContext();
-    }
-
-    public static OsmAndAidlHelper getInstance() {
-        return INSTANCE;
+    public OsmAndAidlHelper(TurnScreenApp app) {
+        this.app = app;
+        settings = app.getSettings();
+        lockHelper = app.getLockHelper();
     }
 
     public boolean isConnected() {
@@ -167,7 +156,7 @@ public class OsmAndAidlHelper {
         if (mIOsmAndAidlInterface == null) {
             Intent intent = new Intent("net.osmand.aidl.OsmandAidlService");
             intent.setPackage(packageName);
-            context.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+            app.getContext().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         } else {
 
         }
@@ -180,7 +169,7 @@ public class OsmAndAidlHelper {
 //                unregisterFromUpdates();
                 mIOsmAndAidlInterface = null;
                 Log.d("ttpl", "disconnecting from Osmand");
-                context.unbindService(mConnection);
+                app.getContext().unbindService(mConnection);
             }
         } catch (Throwable e) {
             e.printStackTrace();

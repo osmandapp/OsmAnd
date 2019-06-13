@@ -1,10 +1,10 @@
-package net.osmand.turn_screen_on;
+package net.osmand.turnScreenOn;
 
 import android.content.ComponentName;
 import android.widget.Button;
 
-import net.osmand.turn_screen_on.helpers.LockHelper;
-import net.osmand.turn_screen_on.helpers.OsmAndAidlHelper;
+import net.osmand.turnScreenOn.helpers.LockHelper;
+import net.osmand.turnScreenOn.helpers.OsmAndAidlHelper;
 
 public class Some {
     private Button button;

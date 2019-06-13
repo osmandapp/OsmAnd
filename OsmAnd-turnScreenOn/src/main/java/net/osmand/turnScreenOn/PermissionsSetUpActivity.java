@@ -1,4 +1,4 @@
-package net.osmand.turn_screen_on;
+package net.osmand.turnScreenOn;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -9,7 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import net.osmand.turn_screen_on.receiver.DeviceAdminRecv;
+import net.osmand.turnScreenOn.app.TurnScreenApp;
+import net.osmand.turnScreenOn.receiver.DeviceAdminRecv;
 
 public class PermissionsSetUpActivity extends AppCompatActivity {
     private FrameLayout btnContinue;
@@ -17,12 +18,16 @@ public class PermissionsSetUpActivity extends AppCompatActivity {
     private PluginSettings settings;
     private static final int DEVICE_ADMIN_REQUEST = 5;
 
+    private TurnScreenApp app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_device_permission_set_up);
 
-        settings = PluginSettings.getInstance();
+        app = new TurnScreenApp(this);
+
+        settings = app.getSettings();
 
         mDeviceAdmin = new ComponentName(getApplicationContext(), DeviceAdminRecv.class);
 

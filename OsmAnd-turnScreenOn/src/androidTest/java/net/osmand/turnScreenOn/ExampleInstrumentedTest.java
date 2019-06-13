@@ -1,4 +1,4 @@
-package net.osmand.turn_screen_on;
+package net.osmand.turnScreenOn;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

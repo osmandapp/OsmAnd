@@ -1,4 +1,4 @@
-package net.osmand.turn_screen_on.helpers;
+package net.osmand.turnScreenOn.helpers;
 
 import android.Manifest;
 import android.app.KeyguardManager;
@@ -11,7 +11,8 @@ import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import net.osmand.turn_screen_on.receiver.DeviceAdminRecv;
+import net.osmand.turnScreenOn.app.TurnScreenApp;
+import net.osmand.turnScreenOn.receiver.DeviceAdminRecv;
 
 public class LockHelper {
     private PowerManager.WakeLock wakeLock = null;
@@ -19,13 +20,15 @@ public class LockHelper {
     private ComponentName mDeviceAdmin;
     private Handler uiHandler;
     private Context context;
+    private TurnScreenApp app;
     private KeyguardManager.KeyguardLock keyguardLock;
     private LockRunnable lockRunnable;
 
     private final static String TAG = "LockHelperTag";
 
-    public LockHelper(Context context) {
-        this.context = context;
+    public LockHelper(TurnScreenApp app) {
+        this.app = app;
+        this.context = app.getContext();
         uiHandler = new Handler();
         mDeviceAdmin = new ComponentName(context, DeviceAdminRecv.class);
         mDevicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
