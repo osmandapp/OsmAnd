@@ -1275,7 +1275,7 @@
     <string name="anonymous_user">익명의 사용자</string>
     <string name="logged_as">%1$s 사용자로 로그인 됨</string>
     <string name="rendering_category_details">세부 정보</string>
-    <string name="rendering_category_transport">운송</string>
+    <string name="rendering_category_transport">교통</string>
     <string name="rendering_category_others">다른 지도 속성</string>
     <string name="map_widget_appearance_rem">나머지 요소</string>
     <string name="map_widget_top">상태 표시줄</string>
@@ -1295,7 +1295,7 @@
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
     <string name="lock_screen_request_explanation">%1$s 의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
-    <string name="home_button">홈 화면</string>
+    <string name="home_button">집</string>
     <string name="map_update">업데이트할 %1$s 지도가 있습니다</string>
     <string name="search_for">검색</string>
     <string name="coordinates">좌표</string>
