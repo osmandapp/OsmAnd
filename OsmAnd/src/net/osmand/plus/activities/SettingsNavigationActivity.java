@@ -258,8 +258,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					String baseProfile = router.attributes.get("baseProfile");
 					if (baseProfile.equals("pedestrian") || baseProfile.equals("bicycle") || baseProfile.equals("boat")) {
 						defaultSpeed = new Preference(this);
-						defaultSpeed.setTitle("Default speed");
-						defaultSpeed.setSummary("Change default speed settings");
+						defaultSpeed.setTitle(R.string.default_speed_setting_title);
+						defaultSpeed.setSummary(R.string.default_speed_setting_descr);
 						defaultSpeed.setOnPreferenceClickListener(this);
 						cat.addPreference(defaultSpeed);
 					}
@@ -379,7 +379,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			router = builder.getRouter(am.getParent().getStringKey());
 
 		}
-		if (router != null && am.getUserDefaultSpeed() > 0) {
+		if (router != null && am.getDefaultSpeed() > 0) {
 			router.setDefaultSpeed(am.getUserDefaultSpeed());
 		}
 		return router;
@@ -684,7 +684,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				settings.getApplicationMode().setUserDefaultSpeed(def[0]);
+//				settings.getApplicationMode().setUserDefaultSpeed(def[0]);
+				settings.DEFAULT_SPEED.set(def[0] / 3.6f);
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
