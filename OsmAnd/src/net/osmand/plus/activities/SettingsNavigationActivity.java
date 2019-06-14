@@ -665,23 +665,42 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 	private void showSeekbarSettingsDialog() {
 		GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), settings.getApplicationMode());
-		String speedUnits;
+		SpeedConstants units = settings.SPEED_SYSTEM.get();
+		String speedUnits = units.toShortString(this);
+		final float[] ratio = new float[1];
+		switch (units){
+			case MILES_PER_HOUR:
+				ratio[0] = 2.23694f;
+				break;
+			case KILOMETERS_PER_HOUR:
+				ratio[0] = 3.6f;
+				break;
+			case MINUTES_PER_KILOMETER:
+				ratio[0] = 3.6f;
+				speedUnits = getString(R.string.km_h);
+				break;
+			case NAUTICALMILES_PER_HOUR:
+				ratio[0] = 1.94384f;
+				break;
 
-		final int min = (int) (router.getMinSpeed() * 3.6f);
+
+		}
+
+		final int min = (int) (router.getMinSpeed() * ratio[0]);
 		int max;
 		final int[] def = new int[1];
 		if (router.getMaxSpeed() > 0) {
-			max = (int) Math.round(router.getMaxSpeed() * 3.6f);
+			max = (int) Math.round(router.getMaxSpeed() * ratio[0]);
 		} else {
-			max = (int) Math.round(router.getMaxDefaultSpeed() * 3.6f);
+			max = (int) Math.round(router.getMaxDefaultSpeed() * ratio[0]);
 		}
 
 		if (settings.DEFAULT_SPEED.get() > 0) {
-			def[0] = (int) Math.round(settings.DEFAULT_SPEED.get() * 3.6);
+			def[0] = (int) Math.round(settings.DEFAULT_SPEED.get() * ratio[0]);
 		} else if (router.getDefaultSpeed() > 0) {
-			def[0] = (int) Math.round(router.getDefaultSpeed() * 3.6f);
+			def[0] = (int) Math.round(router.getDefaultSpeed() * ratio[0]);
 		} else {
-			def[0] = (int) Math.round(router.getMinDefaultSpeed() * 3.6f);
+			def[0] = (int) Math.round(router.getMinDefaultSpeed() * ratio[0]);
 		}
 
 
@@ -698,14 +717,14 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				settings.DEFAULT_SPEED.set(def[0] / 3.6f);
+				settings.DEFAULT_SPEED.set(def[0] / ratio[0]);
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setNeutralButton("Revert", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-
+				settings.DEFAULT_SPEED.set(-1f);
 			}
 		});
 
@@ -718,7 +737,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		speedMinTv.setText(min + "");
 		speedMaxTv.setText(max + "");
 		speedTv.setText(def[0] + "");
-
+		speedUnitsTv.setText(speedUnits);
 		seekBar.setMax(max - min);
 		seekBar.setProgress(def[0]);
 		seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
