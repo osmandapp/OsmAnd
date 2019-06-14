@@ -1520,9 +1520,9 @@ Délka %2$s</string>
     <string name="index_name_netherlands">Evropa - Holandsko</string>
     <string name="rendering_value__name">Výchozí</string>
     <string name="rendering_value_highContrastRoads_name">Vysoce kontrastní cesty</string>
-    <string name="application_dir_change_warning3">Zkopírovat datové soubory do nového cíle\?</string>
+    <string name="application_dir_change_warning3">Přesunout datové soubory do nového cíle\?</string>
     <string name="specified_directiory_not_writeable">V zadaném adresáři nemohly být mapy vytvořené</string>
-    <string name="copying_osmand_file_failed">Kopírování souborů selhalo</string>
+    <string name="copying_osmand_file_failed">Přesouvání souborů selhalo</string>
     <string name="storage_directory_external">Externí úložiště</string>
     <string name="storage_directory_multiuser">Víceuživatelské úložiště</string>
     <string name="storage_directory_internal_app">Interní paměť aplikace</string>
@@ -2981,7 +2981,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Vyhnout se kočičím hlavám a dlažebním kostkám</string>
     <string name="shared_string_degrees">Stupně</string>
     <string name="shared_string_milliradians">Miliradiány</string>
-    <string name="angular_measeurement">Úhlové měrné jednotky</string>
+    <string name="angular_measeurement">Úhlová jednotka</string>
     <string name="angular_measeurement_descr">Změní jednotku měření azimutu.</string>
     <string name="routing_attr_avoid_tram_name">Vyhnout se tramvajím</string>
     <string name="routing_attr_avoid_tram_description">Vyhnout se tramvajím</string>
@@ -2995,11 +2995,28 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">Vyhnout se metru a lehké železniční dopravě</string>
     <string name="routing_attr_avoid_ferry_name">Vyhnout se trajektům</string>
     <string name="routing_attr_avoid_ferry_description">Vyhnout se trajektům</string>
-    <string name="release_3_3_7">• Zobrazování času na přestup mezi hromadnou dopravou
+    <string name="release_3_3_7">• Zobrazování času na přestup mezi hromadnou dopravou 
+\n 
+\n • Upravené rozhraní detailů trasy 
+\n 
+\n • Opravené tmavé téma v menu pokynů a detailů trasy 
+\n 
+\n • Zobrazení azimutu v měření vzdálenosti
 \n
-\n • Upravené rozhraní detailů trasy
-\n
-\n • Opravené tmavé téma v menu pokynů a detailů trasy
-\n
-\n • Zobrazení azimutu v měření vzdálenosti</string>
+\n</string>
+    <string name="send_log">Odeslat protokol</string>
+    <string name="files_moved">%1$d souborů přesunuto (%2$s).</string>
+    <string name="files_copied">%1$d souborů zkopírováno (%2$s).</string>
+    <string name="files_failed">Nepodařilo se zkopírovat %1$d souborů (%2$s).</string>
+    <string name="files_present">%1$d souborů (%2$s) se nachází na původním místě \'%3$s\'.</string>
+    <string name="move_maps">Přesunout mapy</string>
+    <string name="dont_move_maps">Nepřesouvat</string>
+    <string name="public_transport_ped_route_title">Trasa pěšky je přibližně %1$s a mohla by být rychlejší než veřejnou dopravou</string>
+    <string name="public_transport_no_route_title">Bohužel OsmAnd nemohl najít vhodnou trasu dle vašich nastavení.</string>
+    <string name="public_transport_try_ped">Vyzkoušejte pěší navigaci.</string>
+    <string name="public_transport_try_change_settings">Zkuste změnit nastavení.</string>
+    <string name="public_transport_calc_pedestrian">Vypočítat pěší trasu</string>
+    <string name="public_transport_type">Druh dopravy</string>
+    <string name="searching_gps">Vyhledávání GPS</string>
+    <string name="coordinates_widget">Nástroj souřadnic</string>
 </resources>
