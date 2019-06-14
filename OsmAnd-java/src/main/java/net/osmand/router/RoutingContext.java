@@ -152,7 +152,6 @@ public class RoutingContext {
 			}
 			this.map.put(mr, subregions);
 		}
-
 		this.config = config;
 		this.nativeLib = nativeLibrary;
 	}

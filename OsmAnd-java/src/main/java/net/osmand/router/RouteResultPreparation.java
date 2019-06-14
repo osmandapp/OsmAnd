@@ -71,7 +71,6 @@ public class RouteResultPreparation {
 				pnt.x31 = obj.getPoint31XTile(j);
 				pnt.y31 = obj.getPoint31YTile(j);
 				pnt.originalIndex = j;
-				
 				originalWay.add(pnt);
 				if(j >= rsr.getStartPointIndex() && j <= rsr.getEndPointIndex()) {
 					routeWay.add(pnt);
@@ -244,7 +243,11 @@ public class RouteResultPreparation {
 			}
 
 			if (speed == 0){
-				speed = ctx.getRouter().getMinDefaultSpeed();
+				if (((GeneralRouter) ctx.getRouter()).getDefaultSpeed() > 0) {
+					speed = ((GeneralRouter) ctx.getRouter()).getDefaultSpeed();
+				} else {
+					speed = ctx.getRouter().getMinDefaultSpeed();
+				}
 			} else {
 				if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
 					speed = speed - (speed / SLOW_DOWN_SPEED_THRESHOLD - 1) * SLOW_DOWN_SPEED;

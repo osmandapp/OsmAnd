@@ -603,7 +603,6 @@ public class RouteProvider {
 		if(cf == null){
 			return applicationModeNotSupported(params);
 		}
-
 		PrecalculatedRouteDirection precalculated = null;
 		if(calcGPXRoute) {
 			ArrayList<Location> sublist = findStartAndEndLocationsFromRoute(params.gpxRoute.points,
@@ -704,8 +703,9 @@ public class RouteProvider {
 		if (userDefinedDefSpeed > 0) {
 			LOG.debug("Def speed in RouteProvider: " + userDefinedDefSpeed);
 			generalRouter.attributes.put("minDefaultSpeed", (userDefinedDefSpeed * 3.6) + "");
-			generalRouter.attributes.put("defaultSpeed", userDefinedDefSpeed + "");
+			generalRouter.attributes.put("defaultSpeed", (userDefinedDefSpeed * 3.6) + "");
 			generalRouter.setDefaultSpeed(userDefinedDefSpeed);
+
 
 		}
 

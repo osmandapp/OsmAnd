@@ -94,7 +94,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		settings = getMyApplication().getSettings();
 		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		String[] entries = new String[vls.length];
-		for(int i=0; i<entries.length; i++){
+		for (int i = 0; i < entries.length; i++) {
 			entries[i] = vls[i].getName();
 		}
 
@@ -254,8 +254,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
-				if (router.attributes.containsKey("baseProfile")) {
-					String baseProfile = router.attributes.get("baseProfile");
+				String baseProfile = router.getBaseProfile();
+				if (!Algorithms.isEmpty(baseProfile)) {
 					if (baseProfile.equals("pedestrian") || baseProfile.equals("bicycle") || baseProfile.equals("boat")) {
 						defaultSpeed = new Preference(this);
 						defaultSpeed.setTitle(R.string.default_speed_setting_title);
@@ -328,7 +328,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				}
 			}
 			ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
-
 			if (mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 				PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
 				category.addPreference(speedLimitExceed);
@@ -376,10 +375,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
 		if(router == null && am.getParent() != null) {
 			router = builder.getRouter(am.getParent().getStringKey());
-
-		}
-		if (router != null && am.getDefaultSpeed() > 0) {
-			router.setDefaultSpeed(am.getUserDefaultSpeed());
 		}
 		return router;
 	}
@@ -664,6 +659,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 	private void showSeekbarSettingsDialog() {
+
+
 		GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), settings.getApplicationMode());
 		SpeedConstants units = settings.SPEED_SYSTEM.get();
 		String speedUnits = units.toShortString(this);
@@ -761,10 +758,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 		AlertDialog dialog = builder.create();
 		dialog.show();
-	}
-
-	private void setDefSpeedSetting(float defSpeed) {
-
 	}
 
 }

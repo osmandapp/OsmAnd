@@ -211,7 +211,6 @@ public class GeneralRouter implements VehicleRouter {
 		return objectAttributes[a.ordinal()];
 	}
 
-
 	public void registerBooleanParameter(String id, String group, String name, String description, boolean defaultValue) {
 		RoutingParameter rp = new RoutingParameter();
 		rp.group = group;
@@ -395,7 +394,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, getMinDefaultSpeed());
+		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed());
 	}
 
 	@Override
@@ -429,21 +428,22 @@ public class GeneralRouter implements VehicleRouter {
 		return defaultSpeed;
 	}
 
-	public void updateObjectAttributes(float factor) {
-		if (objectAttributes != null) {
-			for (RouteAttributeContext rac : objectAttributes) {
-				if (rac != null) {
-					for (RouteAttributeEvalRule rule : rac.rules) {
-						if (rule != null && rule.selectType != null && rule.selectType.equals("speed") && rule.selectValue instanceof Float) {
-							rule.selectValue = (Float) rule.selectValue * factor;
-							Float defVal= Float.valueOf(rule.selectValueDef.trim());
-							rule.selectValueDef = (defVal * factor) + "";
-						}
-					}
-				}
-			}
-		}
-	}
+	//in case we decide to change speed settings for different types of terrain and obstacles:
+//	public void updateObjectAttributes(float factor) {
+//		if (objectAttributes != null) {
+//			for (RouteAttributeContext rac : objectAttributes) {
+//				if (rac != null) {
+//					for (RouteAttributeEvalRule rule : rac.rules) {
+//						if (rule != null && rule.selectType != null && rule.selectType.equals("speed") && rule.selectValue instanceof Float) {
+//							rule.selectValue = (Float) rule.selectValue * factor;
+//							Float defVal= Float.valueOf(rule.selectValueDef.trim());
+//							rule.selectValueDef = (defVal * factor) + "";
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
 
 
 

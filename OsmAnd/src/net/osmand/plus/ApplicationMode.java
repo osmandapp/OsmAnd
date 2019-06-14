@@ -466,17 +466,6 @@ public class ApplicationMode {
 		return userProfileName;
 	}
 
-	public void setUserDefaultSpeed(float userDefaultSpeed) {
-		this.userDefaultSpeed = userDefaultSpeed;
-		if (parent != null) {
-
-		}
-	}
-
-	public float getUserDefaultSpeed() {
-		return userDefaultSpeed;
-	}
-
 	@Expose private final int key;
 	@Expose private final String stringKey;
 	@Expose private String userProfileName;
@@ -485,7 +474,6 @@ public class ApplicationMode {
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;
-	@Expose private float userDefaultSpeed = 5f;
 	@Expose private int minDistanceForTurn = 50;
 	@Expose private int arrivalDistance = 90;
 	@Expose private int offRouteDistance = 350;
@@ -526,8 +514,6 @@ public class ApplicationMode {
 				}
 			}
 		}
-
-
 	}
 
 	public static void deleteCustomMode(String userModeTitle, OsmandApplication app) {
