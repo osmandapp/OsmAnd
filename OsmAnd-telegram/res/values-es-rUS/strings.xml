@@ -39,7 +39,7 @@
     <string name="shared_string_group">Grupo</string>
     <string name="logout_no_internet_msg">Conéctese a Internet para cerrar sesión en Telegram correctamente.</string>
     <string name="shared_string_close">Cerrar</string>
-    <string name="disconnect_from_telegram_desc">Para revocar el acceso a la ubicación compartida. Abra Telegram, vaya a «Ajustes → Privacidad y Seguridad → Sesiones» y cierre sesión de OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Para revocar el acceso a la ubicación compartida. Abra Telegram, vaya a «Ajustes → Privacidad y Seguridad → Sesiones» y cierre sesión de OsmAnd Tracker.</string>
     <string name="disconnect_from_telegram">Cómo desactivar el rastreador de OsmAnd desde Telegram</string>
     <string name="logout_help_desc">Cómo desactivar el rastreador de OsmAnd (en inglés como «OsmAnd Tracker») desde Telegram</string>
     <string name="connected_account">Cuenta conectada</string>
@@ -210,7 +210,6 @@
     <string name="disable_monitoring">Desactivar la monitorización</string>
     <string name="location_recording_enabled">Grabación de ubicación activada</string>
     <string name="timeline_description">Activa la monitorización para guardar todas las ubicaciones en el historial.</string>
-    <string name="app_name_short_online">Rastreador en línea</string>
     <string name="app_name_short">Rastreador de OsmAnd</string>
     <string name="search_contacts">Buscar contactos</string>
     <string name="search_contacts_descr">Busca en todos tus grupos y contactos.</string>

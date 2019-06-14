@@ -103,6 +103,8 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
 		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
+		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_WUNDERLINQ, R.string.zoom_by_wunderlinq,
+				R.string.zoom_by_wunderlinq_descr));
 	}
 
 

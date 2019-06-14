@@ -1,8 +1,8 @@
 package net.osmand.plus;
 
-import static net.osmand.plus.osmedit.OpenstreetmapLocalUtil.LOG;
-
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -11,11 +11,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.widget.ArrayAdapter;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.aidl.customization.CustomizationInfoParams;
+import net.osmand.aidl.customization.OsmandSettingsParams;
+import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
+import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -28,6 +33,10 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,12 +45,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+
 public class OsmAndAppCustomization {
+
+	private static final int MAX_NAV_DRAWER_ITEMS_PER_APP = 3;
 
 	protected OsmandApplication app;
 	protected OsmandSettings osmandSettings;
@@ -209,7 +223,9 @@ public class OsmAndAppCustomization {
 	}
 
 	@Nullable
-	public ArrayList<String> getNavDrawerLogoParams() {return navDrawerParams; }
+	public ArrayList<String> getNavDrawerLogoParams() {
+		return navDrawerParams;
+	}
 
 	public boolean setNavDrawerLogo(String uri, @Nullable String packageName, @Nullable String intent) {
 		if (TextUtils.isEmpty(uri)) {
@@ -283,6 +299,89 @@ public class OsmAndAppCustomization {
 		return set;
 	}
 
+	public void regWidgetsVisibility(@NonNull ArrayList<SetWidgetsParams> visibilityWidgetsParams) {
+		for (SetWidgetsParams setWidgetsParams : visibilityWidgetsParams) {
+			regWidgetVisibility(setWidgetsParams.getWidgetKey(), setWidgetsParams.getAppModesKeys());
+		}
+	}
+
+	public void regWidgetsAvailability(@NonNull ArrayList<SetWidgetsParams> availabilityWidgetsParams) {
+		for (SetWidgetsParams setWidgetsParams : availabilityWidgetsParams) {
+			regWidgetAvailability(setWidgetsParams.getWidgetKey(), setWidgetsParams.getAppModesKeys());
+		}
+	}
+
+	public void setCustomization(CustomizationInfoParams params) {
+		OsmandSettingsParams settingsParams = params.getSettingsParams();
+		if (settingsParams != null) {
+			customizeOsmandSettings(settingsParams.getSharedPreferencesName(), settingsParams.getBundle());
+		}
+		NavDrawerHeaderParams navDrawerHeaderParams = params.getNavDrawerHeaderParams();
+		NavDrawerFooterParams navDrawerFooterParams = params.getNavDrawerFooterParams();
+		SetNavDrawerItemsParams navDrawerItemsParams = params.getNavDrawerItemsParams();
+
+		setNavDrawerParams(navDrawerHeaderParams, navDrawerFooterParams, navDrawerItemsParams);
+
+		ArrayList<SetWidgetsParams> visibilityWidgetsParams = params.getVisibilityWidgetsParams();
+		ArrayList<SetWidgetsParams> availabilityWidgetsParams = params.getAvailabilityWidgetsParams();
+
+		setWidgetsParams(visibilityWidgetsParams, availabilityWidgetsParams);
+
+		ArrayList<PluginParams> pluginsParams = params.getPluginsParams();
+		if (pluginsParams != null) {
+			changePluginsStatus(pluginsParams);
+		}
+
+		List<String> enabledIds = params.getFeaturesEnabledIds();
+		List<String> disabledIds = params.getFeaturesDisabledIds();
+
+		setFeaturesIds(enabledIds, disabledIds);
+
+		List<String> enabledPatterns = params.getFeaturesEnabledPatterns();
+		List<String> disabledPatterns = params.getFeaturesDisabledPatterns();
+
+		setFeaturesPatterns(enabledPatterns, disabledPatterns);
+	}
+
+	public void setNavDrawerParams(NavDrawerHeaderParams navDrawerHeaderParams, NavDrawerFooterParams navDrawerFooterParams, SetNavDrawerItemsParams navDrawerItemsParams) {
+		if (navDrawerHeaderParams != null) {
+			setNavDrawerLogoWithParams(navDrawerHeaderParams.getImageUri(), navDrawerHeaderParams.getPackageName(), navDrawerHeaderParams.getIntent());
+		}
+		if (navDrawerFooterParams != null) {
+			setNavDrawerFooterParams(navDrawerFooterParams);
+		}
+		if (navDrawerItemsParams != null) {
+			setNavDrawerItems(navDrawerItemsParams.getAppPackage(), navDrawerItemsParams.getItems());
+		}
+	}
+
+	public void setWidgetsParams(ArrayList<SetWidgetsParams> visibilityWidgetsParams, ArrayList<SetWidgetsParams> availabilityWidgetsParams) {
+		if (visibilityWidgetsParams != null) {
+			regWidgetsVisibility(visibilityWidgetsParams);
+		}
+		if (availabilityWidgetsParams != null) {
+			regWidgetsAvailability(availabilityWidgetsParams);
+		}
+	}
+
+	public void setFeaturesIds(List<String> enabledIds, List<String> disabledIds) {
+		if (enabledIds != null) {
+			setFeaturesEnabledIds(enabledIds);
+		}
+		if (disabledIds != null) {
+			setFeaturesDisabledIds(disabledIds);
+		}
+	}
+
+	public void setFeaturesPatterns(List<String> enabledPatterns, List<String> disabledPatterns) {
+		if (enabledPatterns != null) {
+			setFeaturesEnabledPatterns(enabledPatterns);
+		}
+		if (disabledPatterns != null) {
+			setFeaturesDisabledPatterns(disabledPatterns);
+		}
+	}
+
 	public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {
 		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
 		if (set == null) {
@@ -300,8 +399,14 @@ public class OsmAndAppCustomization {
 	}
 
 	public boolean setNavDrawerLogoWithParams(String imageUri, @Nullable String packageName,
-			@Nullable String intent) {
+	                                          @Nullable String intent) {
 		return setNavDrawerLogo(imageUri, packageName, intent);
+	}
+
+	public void changePluginsStatus(List<PluginParams> pluginsParams) {
+		for (PluginParams pluginParams : pluginsParams) {
+			changePluginStatus(pluginParams);
+		}
 	}
 
 	public boolean changePluginStatus(PluginParams params) {
@@ -324,6 +429,126 @@ public class OsmAndAppCustomization {
 		}
 
 		return false;
+	}
+
+	public boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
+		if (!TextUtils.isEmpty(appPackage) && items != null) {
+			clearNavDrawerItems(appPackage);
+			if (items.isEmpty()) {
+				return true;
+			}
+			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
+			boolean success = true;
+			for (int i = 0; i < items.size() && i <= MAX_NAV_DRAWER_ITEMS_PER_APP; i++) {
+				net.osmand.aidl.navdrawer.NavDrawerItem item = items.get(i);
+				String name = item.getName();
+				String uri = item.getUri();
+				if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(uri)) {
+					newItems.add(new NavDrawerItem(name, uri, item.getIconName(), item.getFlags()));
+				} else {
+					success = false;
+					break;
+				}
+			}
+			if (success) {
+				saveNavDrawerItems(appPackage, newItems);
+			}
+			return success;
+		}
+		return false;
+	}
+
+	private void clearNavDrawerItems(String appPackage) {
+		try {
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			allItems.put(appPackage, new JSONArray());
+			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void saveNavDrawerItems(String appPackage, List<NavDrawerItem> items) {
+		try {
+			JSONArray jArray = new JSONArray();
+			for (NavDrawerItem item : items) {
+				JSONObject obj = new JSONObject();
+				obj.put(NavDrawerItem.NAME_KEY, item.name);
+				obj.put(NavDrawerItem.URI_KEY, item.uri);
+				obj.put(NavDrawerItem.ICON_NAME_KEY, item.iconName);
+				obj.put(NavDrawerItem.FLAGS_KEY, item.flags);
+				jArray.put(obj);
+			}
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			allItems.put(appPackage, jArray);
+			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void registerNavDrawerItems(final Activity activity, ContextMenuAdapter adapter) {
+		PackageManager pm = activity.getPackageManager();
+		for (Map.Entry<String, List<NavDrawerItem>> entry : getNavDrawerItems().entrySet()) {
+			String appPackage = entry.getKey();
+			for (NavDrawerItem item : entry.getValue()) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.uri));
+				if (intent.resolveActivity(pm) == null) {
+					intent = pm.getLaunchIntentForPackage(appPackage);
+				}
+				if (intent != null) {
+					if (item.flags != -1) {
+						intent.addFlags(item.flags);
+					}
+					final Intent finalIntent = intent;
+					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setId(item.getId())
+							.setTitle(item.name)
+							.setIcon(getIconId(item.iconName))
+							.setListener(new ContextMenuAdapter.ItemClickListener() {
+								@Override
+								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+									activity.startActivity(finalIntent);
+									return true;
+								}
+							})
+							.createItem());
+				}
+			}
+		}
+	}
+
+	private Map<String, List<NavDrawerItem>> getNavDrawerItems() {
+		Map<String, List<NavDrawerItem>> res = new LinkedHashMap<>();
+		try {
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			for (Iterator<?> it = allItems.keys(); it.hasNext(); ) {
+				String appPackage = (String) it.next();
+				JSONArray jArray = allItems.getJSONArray(appPackage);
+				List<NavDrawerItem> list = new ArrayList<>();
+				for (int i = 0; i < jArray.length(); i++) {
+					JSONObject obj = jArray.getJSONObject(i);
+					list.add(new NavDrawerItem(
+							obj.optString(NavDrawerItem.NAME_KEY),
+							obj.optString(NavDrawerItem.URI_KEY),
+							obj.optString(NavDrawerItem.ICON_NAME_KEY),
+							obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
+					));
+				}
+				res.put(appPackage, list);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	private int getIconId(@Nullable String iconName) {
+		if (!TextUtils.isEmpty(iconName)) {
+			int id = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
+			return id == 0 ? -1 : id;
+		}
+		return -1;
 	}
 
 	@NonNull
@@ -365,8 +590,27 @@ public class OsmAndAppCustomization {
 		return !isMatchesPattern(id, featuresDisabledPatterns);
 	}
 
+	public boolean isOsmandCustomized() {
+		return areWidgetsCustomized() || areFeaturesCustomized() || areSettingsCustomized();
+	}
+
 	public boolean areWidgetsCustomized() {
 		return widgetsCustomized;
+	}
+
+	public boolean areFeaturesCustomized() {
+		return featuresCustomized;
+	}
+
+	public boolean areSettingsCustomized() {
+		return customOsmandSettings != null;
+	}
+
+	public boolean areSettingsCustomizedForPreference(String sharedPreferencesName) {
+		if (customOsmandSettings != null && customOsmandSettings.sharedPreferencesName.equals(sharedPreferencesName)) {
+			return true;
+		}
+		return OsmandSettings.areSettingsCustomizedForPreference(sharedPreferencesName, app);
 	}
 
 	private void setFeaturesCustomized() {
@@ -404,5 +648,29 @@ public class OsmAndAppCustomization {
 
 	public void removeListener(OsmAndAppCustomizationListener listener) {
 		this.listeners.remove(listener);
+	}
+
+	private static class NavDrawerItem {
+
+		static final String NAME_KEY = "name";
+		static final String URI_KEY = "uri";
+		static final String ICON_NAME_KEY = "icon_name";
+		static final String FLAGS_KEY = "flags";
+
+		private String name;
+		private String uri;
+		private String iconName;
+		private int flags;
+
+		NavDrawerItem(String name, String uri, String iconName, int flags) {
+			this.name = name;
+			this.uri = uri;
+			this.iconName = iconName;
+			this.flags = flags;
+		}
+
+		public String getId() {
+			return DRAWER_ITEM_ID_SCHEME + name;
+		}
 	}
 }

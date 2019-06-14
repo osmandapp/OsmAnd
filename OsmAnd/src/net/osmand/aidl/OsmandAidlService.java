@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
-import java.util.concurrent.ConcurrentHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
@@ -19,6 +18,9 @@ import net.osmand.aidl.calculateroute.CalculateRouteParams;
 import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
+import net.osmand.aidl.copyfile.CopyFileParams;
+import net.osmand.aidl.customization.CustomizationInfoParams;
+import net.osmand.aidl.customization.OsmandSettingsInfoParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
 import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.favorite.AddFavoriteParams;
@@ -72,7 +74,6 @@ import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
-import net.osmand.aidl.copyfile.CopyFileParams;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
@@ -82,6 +83,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static net.osmand.aidl.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
@@ -133,7 +135,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	public void onCreate() {
 		super.onCreate();
 		OsmandAidlApi api = getApi("setting_listener");
-		if(api != null) {
+		if (api != null) {
 			api.aidlCallbackListener = this;
 		}
 	}
@@ -144,7 +146,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 		callbacks.clear();
 		OsmandAidlApi api = getApi("clear_listener");
-		if(api != null) {
+		if (api != null) {
 			api.aidlCallbackListener = null;
 		}
 		mHandlerThread.quit();
@@ -1046,7 +1048,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public long registerForNavigationUpdates(ANavigationUpdateParams params, final IOsmAndAidlCallback callback) {
 			try {
 				OsmandAidlApi api = getApi("registerForNavUpdates");
-				if (api != null ) {
+				if (api != null) {
 					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
 						api.unregisterFromUpdates(params.getCallbackId());
 						removeAidlCallback(params.getCallbackId());
@@ -1117,41 +1119,28 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
-		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) throws RemoteException {
-			/*try {
-				OsmandAidlApi api = getApi("registerForNavUpdates");
-				if (api != null ) {
-					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
-						api.unregisterFromUpdates(params.getCallbackId());
-						removeAidlCallback(params.getCallbackId());
-						return -1;
-					} else {
-						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
-						api.registerForNavigationUpdates(id);
-						return id;
-					}
-				} else {
-					return -1;
-				}
+		public boolean areOsmandSettingsCustomized(OsmandSettingsInfoParams params) {
+			try {
+				OsmandAidlApi api = getApi("areOsmandSettingsCustomized");
+				return api != null && api.areOsmandSettingsCustomized(params.getSharedPreferencesName());
 			} catch (Exception e) {
 				handleException(e);
-				return UNKNOWN_API_ERROR;
-			}*/
-
-			VoiceRouter voiceRouter = getApp().getRoutingHelper().getVoiceRouter();
-			voiceRouter.addVoiceMessageListener(new VoiceRouter.VoiceMessageListener() {
-				@Override
-				public void onVoiceMessage() {
-					try {
-						callback.onVoiceRouterNotify();
-					} catch (RemoteException e) {
-						handleException(e);
-					}
-				}
-			});
-			return 0;
+				return false;
+			}
 		}
 
+		@Override
+		public boolean setCustomization(CustomizationInfoParams params) {
+			try {
+				OsmandAidlApi api = getApi("setCustomization");
+				return api != null && params != null && api.setCustomization(params);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
 		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) throws RemoteException {
 			/*try {
 				OsmandAidlApi api = getApi("registerForNavUpdates");
@@ -1214,6 +1203,4 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			this.key = key;
 		}
 	}
-
-
 }

@@ -13,6 +13,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
@@ -97,6 +98,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private Path redCompassLines = new Path();
 
 	private double[] degrees = new double[72];
+	private String[] cardinalDirections = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
+
 	private int[] arcColors = {Color.parseColor("#00237BFF"), Color.parseColor("#237BFF"), Color.parseColor("#00237BFF")};
 
 	private float cachedHeading = 0;
@@ -450,8 +453,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 		double maxCircleRadius = maxRadius;
 		int i = 1;
 		while ((maxCircleRadius -= radius) > 0) {
-			cacheDistances.add(OsmAndFormatter
-					.getFormattedDistance((float) roundedDist * i++, app, false).replaceAll(" ", ""));
+			cacheDistances.add(OsmAndFormatter.getFormattedDistance((float) roundedDist * i++, app, false));
 		}
 	}
 
@@ -460,7 +462,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 		if (!tb.isZoomAnimated()) {
 			float circleRadius = radius * circleNumber;
 			String text = cacheDistances.get(circleNumber - 1);
-			float[] textCoords = calculateDistanceTextCoords(text, circleRadius, center, attrs);
+			float[] textCoords = calculateTextCoords(text, text, circleRadius, center, attrs);
 
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 			canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.shadowPaint);
@@ -477,9 +479,17 @@ public class RulerControlLayer extends OsmandMapLayer {
 		canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint2);
 	}
 
-	private float[] calculateDistanceTextCoords(String text, float drawingTextRadius, QuadPoint center, RenderingLineAttributes attrs) {
-		Rect bounds = new Rect();
-		attrs.paint2.getTextBounds(text, 0, text.length(), bounds);
+	private float[] calculateTextCoords(String topOrLeftText, String rightOrBottomText, float drawingTextRadius, QuadPoint center, RenderingLineAttributes attrs) {
+		Rect boundsDistance = new Rect();
+		Rect boundsHeading;
+
+		if (topOrLeftText.equals(rightOrBottomText)) {
+			boundsHeading = boundsDistance;
+		} else {
+			boundsHeading = new Rect();
+			attrs.paint2.getTextBounds(rightOrBottomText, 0, rightOrBottomText.length(), boundsHeading);
+		}
+		attrs.paint2.getTextBounds(topOrLeftText, 0, topOrLeftText.length(), boundsDistance);
 
 		// coords of left or top text
 		float x1 = 0;
@@ -489,15 +499,15 @@ public class RulerControlLayer extends OsmandMapLayer {
 		float y2 = 0;
 
 		if (textSide == TextSide.VERTICAL) {
-			x1 = center.x - bounds.width() / 2;
-			y1 = center.y - drawingTextRadius + bounds.height() / 2;
-			x2 = center.x - bounds.width() / 2;
-			y2 = center.y + drawingTextRadius + bounds.height() / 2;
+			x1 = center.x - boundsHeading.width() / 2f;
+			y1 = center.y - drawingTextRadius + boundsHeading.height() / 2f;
+			x2 = center.x - boundsDistance.width() / 2f;
+			y2 = center.y + drawingTextRadius + boundsDistance.height() / 2f;
 		} else if (textSide == TextSide.HORIZONTAL) {
-			x1 = center.x - drawingTextRadius - bounds.width() / 2;
-			y1 = center.y + bounds.height() / 2;
-			x2 = center.x + drawingTextRadius - bounds.width() / 2;
-			y2 = center.y + bounds.height() / 2;
+			x1 = center.x - drawingTextRadius - boundsHeading.width() / 2f;
+			y1 = center.y + boundsHeading.height() / 2f;
+			x2 = center.x + drawingTextRadius - boundsDistance.width() / 2f;
+			y2 = center.y + boundsDistance.height() / 2f;
 		}
 		return new float[]{x1, y1, x2, y2};
 	}
@@ -531,10 +541,18 @@ public class RulerControlLayer extends OsmandMapLayer {
 			canvas.drawPath(arrow, triangleHeadingPaint);
 			canvas.rotate(-cachedHeading, center.x, center.y);
 
-			String text = cacheDistances.get(COMPASS_CIRCLE_ID - 1);
-			float[] textCoords = calculateDistanceTextCoords(text, radiusLength + AndroidUtils.dpToPx(app, 16), center, attrs);
+			String distance = cacheDistances.get(COMPASS_CIRCLE_ID - 1);
+			String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, app) + " " + getCardinalDirectionForDegrees(cachedHeading);
+			float[] textCoords = calculateTextCoords(distance, heading, radiusLength + AndroidUtils.dpToPx(app, 16), center, attrs);
 			canvas.rotate(-tileBox.getRotate(), center.x, center.y);
-			drawTextCoords(canvas, text, textCoords, attrs);
+
+			setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
+			canvas.drawText(heading, textCoords[0], textCoords[1], attrs.paint3);
+			canvas.drawText(heading, textCoords[0], textCoords[1], attrs.paint2);
+			setAttrsPaintsTypeface(attrs, null);
+
+			canvas.drawText(distance, textCoords[2], textCoords[3], attrs.paint3);
+			canvas.drawText(distance, textCoords[2], textCoords[3], attrs.paint2);
 			canvas.rotate(tileBox.getRotate(), center.x, center.y);
 		}
 	}
@@ -583,7 +601,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 				compass.moveTo(lineStartX, lineStartY);
 				compass.lineTo(lineStopX, lineStopY);
 			}
-			if (i % 9 == 0 && i % 6 != 0) {
+			if (i % 9 == 0 && i != 18) {
 				redCompassLines.moveTo(lineStartX, lineStartY);
 				redCompassLines.lineTo(lineStopX, lineStopY);
 			}
@@ -604,6 +622,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 		float textMargin = AndroidUtils.dpToPx(app, 14);
 		attrs.paint2.setTextAlign(Paint.Align.CENTER);
 		attrs.paint3.setTextAlign(Paint.Align.CENTER);
+		setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
 
 		for (int i = 0; i < degrees.length; i += 9) {
 			String cardinalDirection = getCardinalDirection(i);
@@ -612,15 +631,23 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 				canvas.save();
 				canvas.translate(center.x, center.y);
-				canvas.rotate(i * 5 + 90);
+				canvas.rotate(-i * 5 - 90);
 				canvas.translate(0, radiusLength - textMargin - textWidth / 2);
-				canvas.rotate(-i * 5 - tileBox.getRotate() - 90);
+				canvas.rotate(i * 5 - tileBox.getRotate() + 90);
 
 				canvas.drawText(cardinalDirection, 0, 0, attrs.paint3);
 				canvas.drawText(cardinalDirection, 0, 0, attrs.paint2);
 				canvas.restore();
 			}
 		}
+		attrs.paint2.setTextAlign(Paint.Align.LEFT);
+		attrs.paint3.setTextAlign(Paint.Align.LEFT);
+		setAttrsPaintsTypeface(attrs, null);
+	}
+
+	private void setAttrsPaintsTypeface(RenderingLineAttributes attrs, Typeface typeface) {
+		attrs.paint2.setTypeface(typeface);
+		attrs.paint3.setTypeface(typeface);
 	}
 
 	private void updateArcShader(float radiusLength, QuadPoint center) {
@@ -631,23 +658,35 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 	private String getCardinalDirection(int i) {
 		if (i == 0) {
-			return "E";
+			return cardinalDirections[2];
 		} else if (i == 9) {
-			return "NE";
+			return cardinalDirections[1];
 		} else if (i == 18) {
-			return "N";
+			return cardinalDirections[0];
 		} else if (i == 27) {
-			return "NW";
+			return cardinalDirections[7];
 		} else if (i == 36) {
-			return "W";
+			return cardinalDirections[6];
 		} else if (i == 45) {
-			return "SW";
+			return cardinalDirections[5];
 		} else if (i == 54) {
-			return "S";
+			return cardinalDirections[4];
 		} else if (i == 63) {
-			return "SE";
+			return cardinalDirections[3];
 		}
 		return null;
+	}
+
+	private String getCardinalDirectionForDegrees(double degrees) {
+		while (degrees < 0) {
+			degrees += 360;
+		}
+		int index = (int) Math.floor(((degrees + 22.5) % 360) / 45);
+		if (index >= 0 && cardinalDirections.length > index) {
+			return cardinalDirections[index];
+		} else {
+			return "";
+		}
 	}
 
 	private enum TextSide {

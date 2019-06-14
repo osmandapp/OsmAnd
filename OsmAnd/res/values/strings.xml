@@ -11,7 +11,32 @@
 	Thx - Hardy
 
 -->
-
+    <string name="app_profile_custom_nav_subtitle"></string>
+    <string name="rate_dialog_descr">Please give us 30 seconds, share feedback and rate our work on Google Play.</string>
+    <string name="button_rate">Rate</string>
+    <string name="shared_string_privacy_policy">Privacy Policy</string>
+    <string name="help_us_make_osmand_better">Help us make OsmAnd better!</string>
+    <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous application usage data. We do not collect or store data about your location, or about the locations that you view on the map.\n\nYou can always change your selection in Settings > Privacy and Security.</string>
+    <string name="choose_data_to_share">Choose what type of data you want to share:</string>
+    <string name="downloaded_maps">Downloaded Maps</string>
+    <string name="visited_screens">Visited screens</string>
+    <string name="colleted_data">Colleted Data</string>
+    <string name="collected_data_descr">List of data you want to share with OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">We collect this data to understand the maps of which regions and countries are the most popular.</string>
+    <string name="visited_screens_collect_descr">We collect this data to understand the most popular features of OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">By clicking \"Allow\" you agree with our %1$s</string>
+    <string name="settings_privacy_and_security">Privacy and Security</string>
+    <string name="settings_privacy_and_security_desc">Choose your data for sharing with us</string>
+    <string name="shared_string_no_thank_you">No, thank you</string>
+    <string name="shared_string_allow">Allow</string>
+    <string name="profile_name_hint">Profile Name</string>
+    <string name="nav_type_hint">Navigation Type</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Shuttle bus</string>
+    <string name="app_mode_subway">Subway</string>
+    <string name="app_mode_horse">Horse</string>
+    <string name="app_mode_helicopter">Helicopter</string>
+    <string name="osmand_routing_promo">You can add own modified version of routing.xml to ..osmand/routing</string>
     <string name="app_mode_skiing">Skiing</string>
     <string name="base_profile_descr_ski">Skiing</string>
     <string name="show_compass_ruler">Show compass ruler</string>
@@ -2368,6 +2393,8 @@
     <string name="i_am_here">I am here</string>
     <string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball movement.</string>
     <string name="zoom_by_trackball">Use trackball for zoom control</string>
+    <string name="zoom_by_wunderlinq_descr">Change map zooming by scrolling the wheel up and down. Escape returns you to the WunderLINQ App.</string>
+    <string name="zoom_by_wunderlinq">Use WunderLINQ for control</string>
     <string name="accessibility_preferences_descr">Accessibility related preferences.</string>
     <string name="arrival_distance_factor_early">Early</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -3159,7 +3186,28 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
-
-
+    <string name="quick_action_need_to_add_item_to_list">You need to add at least one Item to list in Quick Action\' Settings</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpine/downhill ski</string>
+    <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross country/nordic ski</string>
+    <string name="routing_attr_piste_type_nordic_description">Trails for nordic or cross-country skiing.</string>
+    <string name="routing_attr_piste_type_skitour_name">Ski touring</string>
+    <string name="routing_attr_piste_type_skitour_description">Routes for ski touring.</string>
+    <string name="routing_attr_piste_type_sled_name">Sled</string>
+    <string name="routing_attr_piste_type_sled_description">Slopes for sled usage.</string>
+    <string name="routing_attr_allow_intermediate_name">Allow intermediate routes</string>
+    <string name="routing_attr_allow_intermediate_description">More difficult routes with steeper sections. Generally some obstacles that should be avoided.</string>
+    <string name="routing_attr_allow_advanced_name">Allow advanced routes</string>
+    <string name="routing_attr_allow_advanced_description">Difficult routes, with dangerous obstacles and steep sections.</string>
+    <string name="routing_attr_allow_expert_name">Allow expert routes</string>
+    <string name="routing_attr_allow_expert_description">Extremely difficult routes, with dangerous obstacles and surroundings.</string>
+    <string name="routing_attr_allow_skating_only_name">Allow skating only routes</string>
+    <string name="routing_attr_allow_skating_only_description">Routes groomed for free style or skating only without classic trails.</string>
+    <string name="routing_attr_allow_classic_only_name">Allow classic only routes</string>
+    <string name="routing_attr_allow_classic_only_description">Routes groomed for classic style only without skating trails. This includes routes groomed by a smaller snowmobile with looser piste and tracks made manually by skiers.</string>
+    <string name="routing_attr_difficulty_preference_name">Prefered difficulty</string>
+    <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
+    <string name="routing_attr_freeride_policy_name">Off-piste</string>
+    <string name="routing_attr_freeride_policy_description">Freerides and offpiste are unofficial routes and passages. Typically ungroomed, unmainted by the officials and not checked in the evening. Enter at own risk.</string>
 
 </resources>

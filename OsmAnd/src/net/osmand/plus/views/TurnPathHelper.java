@@ -17,8 +17,6 @@ import android.support.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.router.TurnType;
 
-import java.util.Map;
-
 public class TurnPathHelper {
 
 	//Index of processed turn
@@ -568,7 +566,7 @@ public class TurnPathHelper {
 		}
 	}
 
-	public static Path getPathFromTurnType(Resources res, Map<TurnResource, Path> cache, int firstTurn,
+	public static Path getPathFromTurnType(Resources res, int firstTurn,
 			int secondTurn, int thirdTurn, int turnIndex, float coef, boolean leftSide, boolean smallArrow) {
 
 		int firstTurnType = TurnType.valueOf(firstTurn, leftSide).getValue();
@@ -621,20 +619,8 @@ public class TurnPathHelper {
 			return null;
 		}
 
-		Path p = cache.get(turnResource);
-		if (p == null) {
-			int size = res.getDimensionPixelSize(R.dimen.widget_turn_lane_size);
-			p = getPathFromTurnResource(turnResource, size, smallArrow);
-			cache.put(turnResource, p);
-		}
-
-		// Maybe redundant scaling
-		/*
-		 * float bRatio = (float)b.getWidth() / (float)b.getHeight(); float s = 72f * coef; int wq = Math.round(s /
-		 * bRatio); int hq = Math.round(s); b = Bitmap.createScaledBitmap(b, wq, hq, false);
-		 */
-
-		return p;
+		int size = res.getDimensionPixelSize(R.dimen.widget_turn_lane_size);
+		return getPathFromTurnResource(turnResource, size, smallArrow);
 	}
 
 	private static Path getPathFromTurnResource(TurnResource turnResource, int size, boolean smallArrow) {

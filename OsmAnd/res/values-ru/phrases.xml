@@ -3468,4 +3468,6 @@
 	<string name="poi_hazard_additional_minefield">Опасность: минное поле</string>
 	<string name="poi_hazard_additional_contamination">Опасность: заражение</string>
 
+	<string name="poi_defibrillator_location">Местонахождение</string>
+
 </resources>

@@ -58,7 +58,7 @@
     <string name="shared_string_group">Gruppo</string>
     <string name="logout_no_internet_msg">Connettiti a Internet per uscire correttamente dall\'account di Telegram.</string>
     <string name="shared_string_close">Chiudi</string>
-    <string name="disconnect_from_telegram_desc">Per revocare l\'accesso alla condivisione della posizione, apri Telegram, vai a Impostazioni → Privacy e Sicurezza → Sessioni, e termina la sessione di OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Per revocare l\'accesso alla condivisione della posizione, apri Telegram, vai a Impostazioni → Privacy e Sicurezza → Sessioni, e termina la sessione di OsmAnd Tracker.</string>
     <string name="disconnect_from_telegram">Come disattivare il OsmAnd Tracker da Telegram</string>
     <string name="logout_help_desc">Come disattivare OsmAnd Tracker da Telegram</string>
     <string name="connected_account">Account connesso</string>
@@ -191,7 +191,6 @@
     <string name="disable_monitoring">Disattivare il monitoraggio</string>
     <string name="location_recording_enabled">Registrazione della posizione abilitata</string>
     <string name="timeline_description">Attivare il monitoraggio per salvare lo storico delle locazioni.</string>
-    <string name="app_name_short_online">Tracker online</string>
     <string name="app_name_short">Tracker OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'applicazione di messaggistica) viene usato per connettersi e comunicare con le persone.</string>
