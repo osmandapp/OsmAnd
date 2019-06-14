@@ -59,9 +59,9 @@ public class GeneralRouter implements VehicleRouter {
 	private float minDefaultSpeed = 10;
 	// speed in m/s
 	private float maxDefaultSpeed = 10;
-	private float minSpeed = 1;
-	private float maxSpeed = 100;
-	private float defaultSpeed = 40;
+	private float minSpeed = 0.28f;
+	private float maxSpeed = 0;
+	private float defaultSpeed = 1;
 	
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;

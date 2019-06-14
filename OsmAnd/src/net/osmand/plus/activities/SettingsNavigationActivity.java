@@ -328,7 +328,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				}
 			}
 			ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
-//			if (mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE) || mode.isDerivedRoutingFrom(ApplicationMode.BOAT) || mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN))
 
 			if (mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 				PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
@@ -667,9 +666,24 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private void showSeekbarSettingsDialog() {
 		GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), settings.getApplicationMode());
 		String speedUnits;
+
 		final int min = (int) (router.getMinSpeed() * 3.6f);
-		int max = (int) (router.getMaxSpeed() * 3.6f);
-		final int[] def = {(int) (router.getDefaultSpeed() * 3.6f)};
+		int max;
+		final int[] def = new int[1];
+		if (router.getMaxSpeed() > 0) {
+			max = (int) Math.round(router.getMaxSpeed() * 3.6f);
+		} else {
+			max = (int) Math.round(router.getMaxDefaultSpeed() * 3.6f);
+		}
+
+		if (settings.DEFAULT_SPEED.get() > 0) {
+			def[0] = (int) Math.round(settings.DEFAULT_SPEED.get() * 3.6);
+		} else if (router.getDefaultSpeed() > 0) {
+			def[0] = (int) Math.round(router.getDefaultSpeed() * 3.6f);
+		} else {
+			def[0] = (int) Math.round(router.getMinDefaultSpeed() * 3.6f);
+		}
+
 
 		AlertDialog.Builder builder = new Builder(this);
 
@@ -684,7 +698,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-//				settings.getApplicationMode().setUserDefaultSpeed(def[0]);
 				settings.DEFAULT_SPEED.set(def[0] / 3.6f);
 			}
 		});

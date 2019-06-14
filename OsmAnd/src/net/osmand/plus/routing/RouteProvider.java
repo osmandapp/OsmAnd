@@ -700,14 +700,13 @@ public class RouteProvider {
 			}
 		}
 
-		//todo: test, clear comment in pR.
-		if (params.mode.getUserDefaultSpeed() > 0) {
-//			float factor = (params.mode.getUserDefaultSpeed() * 3.6f) / generalRouter.getMinDefaultSpeed();
-//			if (factor < 0.99 && factor > 1.01){
-//				generalRouter.updateObjectAttributes(factor);
-//			}
-			generalRouter.attributes.put("minDefaultSpeed", (params.mode.getUserDefaultSpeed() * 3.6) + "") ;
-			generalRouter.setDefaultSpeed(params.mode.getUserDefaultSpeed());
+		float userDefinedDefSpeed = settings.DEFAULT_SPEED.getModeValue(params.mode);
+		if (userDefinedDefSpeed > 0) {
+			LOG.debug("Def speed in RouteProvider: " + userDefinedDefSpeed);
+			generalRouter.attributes.put("minDefaultSpeed", (userDefinedDefSpeed * 3.6) + "");
+			generalRouter.attributes.put("defaultSpeed", userDefinedDefSpeed + "");
+			generalRouter.setDefaultSpeed(userDefinedDefSpeed);
+
 		}
 
 
