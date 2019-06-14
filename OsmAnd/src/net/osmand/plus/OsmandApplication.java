@@ -47,7 +47,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
+import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
@@ -85,7 +85,8 @@ import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
 public class OsmandApplication extends MultiDexApplication {
-	public static final String EXCEPTION_PATH = "exception.log"; 
+	public static final String EXCEPTION_PATH = "exception.log";
+	public static final String OSMAND_PRIVACY_POLICY_URL = "https://osmand.net/help-online/privacy-policy";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	final AppInitializer appInitializer = new AppInitializer(this);
@@ -943,9 +944,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void logEvent(String event) {
 		try {
-			if (osmandSettings.SEND_ANONYMOUS_APP_USAGE_DATA.get()) {
-				analyticsHelper.addEvent(event);
-			}
+			analyticsHelper.addEvent(event, AnalyticsHelper.EVENT_TYPE_APP_USAGE);
 		} catch (Exception e) {
 			LOG.error(e);
 		}
@@ -953,9 +952,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void logMapDownloadEvent(String event, IndexItem item) {
 		try {
-			if (osmandSettings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get()) {
-				analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName());
-			}
+			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName(), AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
 			LOG.error(e);
 		}
@@ -963,9 +960,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void logMapDownloadEvent(String event, IndexItem item, long time) {
 		try {
-			if (osmandSettings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get()) {
-				analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec");
-			}
+			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec", AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
 			LOG.error(e);
 		}
@@ -1010,7 +1005,7 @@ public class OsmandApplication extends MultiDexApplication {
 				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);  
 			}
 		} catch (PackageManager.NameNotFoundException e) {
-			PlatformUtil.getLog(ErrorBottomSheetDialog.class).error("", e);
+			PlatformUtil.getLog(CrashBottomSheetDialogFragment.class).error("", e);
 		}
 		intent.putExtra(Intent.EXTRA_TEXT, text.toString());
 		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));

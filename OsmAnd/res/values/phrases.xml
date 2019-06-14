@@ -3947,4 +3947,18 @@
 	<string name="poi_hazard_additional_avalanche">Hazard: avalanche</string>
 	<string name="poi_hazard_additional_minefield">Hazard: minefield</string>
 	<string name="poi_hazard_additional_contamination">Hazard: contamination</string>
+
+	<string name="poi_defibrillator_location">Location</string>
+
+	<string name="poi_changing_table_yes">Changing table: yes</string>
+	<string name="poi_changing_table_no">Changing table: no</string>
+	<string name="poi_changing_table_limited">Changing table: limited</string>
+	<string name="poi_changing_table_location_room">Changing table location: room</string>
+	<string name="poi_changing_table_location_male_toilet">Changing table location: male toilet</string>
+	<string name="poi_changing_table_location_female_toilet">Changing table location: female toilet</string>
+	<string name="poi_changing_table_location_unisex_toilet">Changing table location: unisex toilet</string>
+	<string name="poi_changing_table_count">Changing table count</string>
+	<string name="poi_changing_table_fee_yes">Changing table fee: yes</string>
+	<string name="poi_changing_table_fee_no">Changing table fee: no</string>
+
 </resources>
