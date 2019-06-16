@@ -2935,8 +2935,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
     <string name="use_osm_live_public_transport_description">Öffentliche Verkehrsmittel für Änderungen an OsmAnd Live aktivieren.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
-    <string name="public_transport_warning_descr_blog">Erfahren Sie mehr darüber, wie OsmAnd Routen berechnet, in unserem Blog.</string>
-    <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, erwarten Sie Fehler und Ungenauigkeiten.</string>
+    <string name="public_transport_warning_descr_blog">Erfahren Sie in unserem Blog mehr darüber, wie OsmAnd Routen berechnet.</string>
+    <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, rechnen Sie mit Fehlern und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
     <string name="transfers_size">%1$d Umstieg(e)</string>
     <string name="add_start_and_end_points">Start- und Endpunkte hinzufügen</string>
@@ -3037,8 +3037,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="send_log">Log senden</string>
-    <string name="files_copied">Kopierte %1$d Dateien (%2$s).</string>
-    <string name="files_failed">Es konnten keine %1$d Dateien (%2$s) kopiert werden.</string>
+    <string name="files_copied">%1$d Dateien kopiert (%2$s).</string>
+    <string name="files_failed">%1$d Dateien (%2$s) konnten nicht kopiert werden.</string>
     <string name="public_transport_try_ped">Probieren Sie die Fußgängernavigation aus.</string>
     <string name="public_transport_try_change_settings">Versuchen Sie, die Einstellungen zu ändern.</string>
     <string name="public_transport_calc_pedestrian">Fußgängerroute berechnen</string>
