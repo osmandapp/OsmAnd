@@ -89,7 +89,7 @@
 			android:id="@+id/divider_bottom"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:background="@color/settings_divider" />
+			android:background="?attr/list_divider" />
 
 	</LinearLayout>
 

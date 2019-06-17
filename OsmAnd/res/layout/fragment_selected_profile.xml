@@ -155,33 +155,6 @@
 						</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
 
-						<LinearLayout
-							android:id="@+id/profile_icon_layout"
-							android:layout_width="60dp"
-							android:layout_height="60dp"
-							android:layout_marginEnd="@dimen/list_content_padding"
-							android:layout_marginRight="@dimen/list_content_padding"
-							android:clickable="true"
-							android:focusable="true"
-							android:gravity="center"
-							android:orientation="vertical"
-							>
-
-							<TextView
-								android:id="@+id/select_icon_btn_txt"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:paddingBottom="2dp"
-								android:text="Icon"
-								android:textSize="12sp"/>
-
-							<ImageView
-								android:id="@+id/select_icon_btn_img"
-								android:layout_width="@dimen/standard_icon_size"
-								android:layout_height="@dimen/standard_icon_size"
-								tools:src="@drawable/ic_action_car_dark"/>
-
-						</LinearLayout>
 
 					</LinearLayout>
 
@@ -237,6 +210,102 @@
 						android:focusable="true"/>
 
 				</FrameLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/context_menu_action_buttons_h"
+					android:layout_marginTop="8dp"
+					android:layout_marginBottom="@dimen/list_content_padding"
+					android:layout_marginLeft="@dimen/list_content_padding"
+					android:layout_marginRight="@dimen/list_content_padding"
+					android:orientation="vertical">
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="@color/divider_light"/>
+
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="0dp"
+						android:layout_weight="1"
+						android:orientation="horizontal"
+						android:layout_gravity="center_vertical">
+
+						<LinearLayout
+							android:id="@+id/select_icon_button"
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:background="?attr/selectableItemBackground"
+							android:layout_weight="1"
+							android:clickable="true"
+							android:focusable="true"
+							android:orientation="horizontal">
+
+							<TextView
+								android:layout_width="0dp"
+								android:layout_height="match_parent"
+								android:gravity="center_vertical"
+								android:layout_weight="1"
+								android:textSize="@dimen/default_list_text_size"
+								android:text="@string/shared_string_icon"
+								android:textColor="?attr/main_font_color_basic"/>
+
+							<ImageView
+								android:id="@+id/profile_icon_img"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="@dimen/list_content_padding"
+								tools:src="@drawable/ic_action_horse"
+								tools:tint="@color/A400red"/>
+
+						</LinearLayout>
+
+						<View
+							android:layout_width="1dp"
+							android:layout_height="match_parent"
+							android:paddingBottom="8dp"
+							android:paddingTop="8dp"
+							android:background="@color/divider_light"/>
+
+						<LinearLayout
+							android:id="@+id/select_icon_color_button"
+							android:layout_width="0dp"
+							android:layout_height="match_parent"
+							android:layout_weight="1"
+							android:background="?attr/selectableItemBackground"
+							android:clickable="true"
+							android:focusable="true"
+							android:orientation="horizontal">
+
+							<TextView
+								android:layout_width="0dp"
+								android:paddingLeft="@dimen/list_content_padding"
+								android:layout_height="match_parent"
+								android:layout_weight="1"
+								android:gravity="center_vertical"
+								android:textSize="@dimen/default_list_text_size"
+								android:text="@string/shared_string_color"
+								android:textColor="?attr/main_font_color_basic"/>
+
+							<ImageView
+								android:id="@+id/color_sample_img"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="@dimen/list_content_padding"
+								tools:src = "@drawable/h_blue_ellipse_1_road_shield"
+								tools:tint="@color/A400red"/>
+
+						</LinearLayout>
+
+					</LinearLayout>
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="@color/divider_light"/>
+
+				</LinearLayout>
 
 				<TextView
 					android:layout_width="match_parent"

@@ -88,6 +88,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	private ImageView profileIcon;
 	private LinearLayout profileIconBtn;
+	private ImageView colorSample;
+	private LinearLayout selectColorBtn;
 	private ExtendedEditText profileNameEt;
 	private OsmandTextFieldBoxes profileNameTextBox;
 	private ExtendedEditText navTypeEt;
@@ -130,8 +132,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
 
-		profileIcon = view.findViewById(R.id.select_icon_btn_img);
-		profileIconBtn = view.findViewById(R.id.profile_icon_layout);
+		profileIcon = view.findViewById(R.id.profile_icon_img);
+		profileIconBtn = view.findViewById(R.id.select_icon_button);
+		colorSample = view.findViewById(R.id.color_sample_img);
+		selectColorBtn = view.findViewById(R.id.select_icon_color_button);
 		profileNameEt = view.findViewById(R.id.profile_name_et);
 		profileNameTextBox = view.findViewById(R.id.profile_name_otfb);
 		navTypeEt = view.findViewById(R.id.navigation_type_et);
@@ -154,13 +158,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
-		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
-		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn.getBackground();
-		if (nightMode) {
-			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_dark));
-		} else {
-			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_light));
-		}
+//		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
+//		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn.getBackground();
+//		if (nightMode) {
+//			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_dark));
+//		} else {
+//			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_light));
+//		}
 
 		String title = "New Profile";
 
