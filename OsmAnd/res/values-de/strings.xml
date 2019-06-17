@@ -3047,7 +3047,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort \'%3$s\' vorhanden.</string>
     <string name="move_maps">Karten verschieben</string>
     <string name="dont_move_maps">Nicht verschieben</string>
-    <string name="public_transport_ped_route_title">Die Route beträgt ca. %1$s und könnte zu Fuß schneller sein als mit öffentlichen Verkehrsmitteln</string>
+    <string name="public_transport_ped_route_title">Zu Fuß sind es ca. %1$s. Es könnte zu Fuß schneller sein als mit öffentlichen Verkehrsmitteln</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
