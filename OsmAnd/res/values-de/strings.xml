@@ -2985,19 +2985,19 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Pfad</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
     <string name="rendering_attr_undefined_name">Nicht definiert</string>
-    <string name="release_3_3">• Neuer Bildschirm \"Navigation\": Zeigt die Knöpfe der Ziele Zuhause und Arbeit, die Verknüpfung \"Vorherige Route\", die Liste der aktiven GPX-Strecken und -Marker, den Suchverlauf. 
+    <string name="release_3_3">• Neuer Bildschirm \'Navigation\': Zeigt Tasten mit den Zielen \'Zuhause\' und \'Arbeit\', eine \'Vorherige Route\'-Verknüpfung, eine Liste aktiver GPX-Tracks und Markierungen, den Suchverlauf. 
 \n 
-\n• Weitere Informationen unter \'Routendetails\': Straßentypen, Oberfläche, Steilheit, Glätte, Bequemlichkeit, etc. 
+\n• Weitere Informationen unter \'Routendetails\': Straßentypen, -oberfläche, Steilheit, Oberflächenbeschaffenheit 
 \n 
-\n• Navigation im öffentlichen Verkehr mit Unterstützung aller Arten von Verkehrsmitteln: U-Bahn, Bus, Straßenbahn, etc. 
+\n• Navigation im öffentlichen Verkehr mit Unterstützung aller Verkehrsmittelarten: U-Bahn, Bus, Straßenbahn, etc. 
 \n 
-\n• Neue Schnellaktion für Titel anzeigen/verbergen und Tag/Nacht-Modi 
+\n• Neue Schnellaktion, um Tracks ein-/auszublenden, und für die Tag/Nacht-Modi 
 \n 
 \n• Fix: Gebiete, die in Deutschland, Südafrika, Quebec und anderen Ländern als überflutet angezeigt wurden 
 \n 
 \n• Zusätzliche Unterstützung für den KML- und KMZ-Import 
 \n 
-\n• Fehler beim Öffnen einiger Haltestellen des öffentlichen Verkehrs behoben 
+\n• Abstürze nach Öffnen bestimmter Haltestellen des öffentlichen Verkehrs beseitigt 
 \n 
 \n• Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr)
 \n
