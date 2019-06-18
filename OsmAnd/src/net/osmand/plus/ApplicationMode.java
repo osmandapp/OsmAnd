@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 import android.content.Context;
 
+import android.graphics.Color;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import com.google.gson.Gson;
@@ -472,6 +474,7 @@ public class ApplicationMode {
 	@Expose private String userProfileName;
 	@Expose private ApplicationMode parent;
 	@Expose private String iconName = "map_world_globe_dark";
+	@Expose private String iconColor = "#237BFF";
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;
@@ -554,6 +557,14 @@ public class ApplicationMode {
 			return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 		} catch (Exception e) {
 			return R.drawable.map_world_globe_dark;
+		}
+	}
+
+	public int getIconColorRes(Context app) {
+		try {
+			return Color.parseColor(iconColor);
+		} catch (Exception e) {
+			return app.getResources().getColor(R.color.active_buttons_and_links_light);
 		}
 	}
 }

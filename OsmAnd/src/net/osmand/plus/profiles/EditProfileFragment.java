@@ -11,6 +11,7 @@ import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -42,17 +44,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
+import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
+import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
@@ -68,6 +78,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	public static final String SCREEN_CONFIG = "openScreenConfigMenu";
 	public static final String SELECTED_ITEM = "editedProfile";
 	public static final String SELECTED_ICON = "selectedIcon";
+
+	public static final String CURRENT_PROFILE_COLOR_ATTR = "currentProfileIconColor";
 
 	OsmandApplication app;
 
@@ -777,6 +789,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		ApplicationMode parent = null;
 		int iconId = R.drawable.map_world_globe_dark;
 		String iconStringName = "map_world_globe_dark";
+		int iconColor = R.color.;
 		RoutingProfileDataObject routingProfileDataObject = null;
 
 		ApplicationProfileObject(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
@@ -790,12 +803,108 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				iconId = mode.getIconRes(getMyApplication());
 				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
 				userProfileTitle = mode.getUserProfileName();
+				userProfileTitle = mode.getIconColorRes(getMyApplication());
 			} else {
 				key = mode.getStringResource();
 				stringKey = mode.getStringKey();
 				iconId = mode.getSmallIconDark();
 				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
 			}
+		}
+	}
+
+	public static class ProfileColorAdapter extends ArrayAdapter<ColorListItem> {
+
+		private OsmandApplication app;
+		private int currentColor;
+
+		public ProfileColorAdapter(Context context, int currentColor) {
+			super(context, R.layout.rendering_prop_menu_item);
+			this.app = (OsmandApplication) getContext().getApplicationContext();
+			this.currentColor = currentColor;
+			init();
+		}
+
+		public void init() {
+			AppearanceListItem item = new AppearanceListItem(CURRENT_PROFILE_COLOR_ATTR, "",
+				SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
+				parseTrackColor(renderer, ""));
+			add(item);
+			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
+				item = new AppearanceListItem(CURRENT_PROFILE_COLOR_ATTR,
+					trackColorProp.getPossibleValues()[j],
+					SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getPossibleValues()[j]),
+					parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
+				add(item);
+			}
+			item.setLastItem(true);
+		}
+
+		@NonNull
+		@Override
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+			AppearanceListItem item = getItem(position);
+			View v = convertView;
+			if (v == null) {
+				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, null);
+			}
+			if (item != null) {
+				TextView textView = (TextView) v.findViewById(R.id.text1);
+				textView.setText(item.localizedValue);
+				if (item.color == -1) {
+					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+						app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
+				} else {
+					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+						app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, item.color), null);
+				}
+
+				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
+				v.findViewById(R.id.divider).setVisibility(item.lastItem
+					&& position < getCount() - 1 ? View.VISIBLE : View.GONE);
+			}
+			return v;
+		}
+	}
+
+	private class ColorListItem {
+		private String attrName;
+		private String value;
+		private String localizedValue;
+		private int color;
+		private boolean lastItem;
+
+
+
+		public ColorListItem(String attrName, String value, String localizedValue, int color) {
+			this.attrName = attrName;
+			this.value = value;
+			this.localizedValue = localizedValue;
+			this.color = color;
+		}
+
+		public String getAttrName() {
+			return attrName;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public String getLocalizedValue() {
+			return localizedValue;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public boolean isLastItem() {
+			return lastItem;
+		}
+
+		public void setLastItem(boolean lastItem) {
+			this.lastItem = lastItem;
 		}
 	}
 }
