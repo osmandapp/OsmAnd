@@ -18,11 +18,13 @@ public abstract class OsmandNotification {
 	public final static int NAVIGATION_NOTIFICATION_SERVICE_ID = 5;
 	public final static int GPX_NOTIFICATION_SERVICE_ID = 6;
 	public final static int ERROR_NOTIFICATION_SERVICE_ID = 7;
+	public final static int DOWNLOAD_NOTIFICATION_SERVICE_ID = 8;
 	public final static int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	public final static int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
 	public final static int WEAR_GPX_NOTIFICATION_SERVICE_ID = 1006;
 	public final static int WEAR_ERROR_NOTIFICATION_SERVICE_ID = 1007;
+	public final static int WEAR_DOWNLOAD_NOTIFICATION_SERVICE_ID = 1008;
 
 
 	protected OsmandApplication app;
@@ -38,6 +40,7 @@ public abstract class OsmandNotification {
 		GPX,
 		GPS,
 		ERROR,
+		DOWNLOAD,
 	}
 
 	public OsmandNotification(OsmandApplication app, String groupName) {
@@ -65,7 +68,7 @@ public abstract class OsmandNotification {
 
 	@SuppressLint("InlinedApi")
 	protected Builder createBuilder(boolean wearable) {
-		Intent contentIntent = new Intent(app, MapActivity.class);
+		Intent contentIntent = getContentIntent();
 		PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -100,6 +103,8 @@ public abstract class OsmandNotification {
 	public abstract boolean isActive();
 
 	public abstract boolean isEnabled();
+
+	public abstract Intent getContentIntent();
 
 	public void setupNotification(Notification notification) {
 	}

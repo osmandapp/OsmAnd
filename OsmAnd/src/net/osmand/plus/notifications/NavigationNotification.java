@@ -21,6 +21,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -110,6 +111,11 @@ public class NavigationNotification extends OsmandNotification {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		return routingHelper.isFollowingMode()
 				|| (routingHelper.isRoutePlanningMode() && routingHelper.isPauseNavigation());
+	}
+
+	@Override
+	public Intent getContentIntent() {
+		return new Intent(app, MapActivity.class);
 	}
 
 	@Override

@@ -2,11 +2,7 @@ package net.osmand.plus.download;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,8 +10,6 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.StatFs;
 import android.support.annotation.UiThread;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
@@ -25,7 +19,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
-import net.osmand.plus.NotificationHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -34,6 +27,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.helpers.DatabaseHelper;
+import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 
@@ -53,7 +47,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
 	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
-	private static final int NOTIFICATION_ID = 45;
+
 	private OsmandApplication app;
 
 	private DownloadEvents uiActivity = null;
@@ -65,8 +59,7 @@ public class DownloadIndexesThread {
 	private int currentDownloadingItemProgress = 0;
 
 	private DownloadResources indexes;
-	private Notification notification;
-	
+
 	public interface DownloadEvents {
 		
 		void newDownloadIndexes();
@@ -109,52 +102,8 @@ public class DownloadIndexesThread {
 	}
 	
 	private void updateNotification() {
-		if(getCurrentDownloadingItem() != null) {
-			BasicProgressAsyncTask<?, ?, ?, ?> task = getCurrentRunningTask();
-			final boolean isFinished = task == null
-					|| task.getStatus() == AsyncTask.Status.FINISHED;
-			Intent contentIntent = new Intent(app, DownloadActivity.class);
-			PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
-					PendingIntent.FLAG_UPDATE_CURRENT);
-			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-				app.getNotificationHelper().createNotificationChannel();
-		    }
-			Builder bld = new NotificationCompat.Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID);
-			String msg = Version.getAppName(app);
-			if(!isFinished) {
-				msg = task.getDescription();
-			}
-			StringBuilder contentText = new StringBuilder();
-			List<IndexItem> ii = getCurrentDownloadingItems();
-			for (IndexItem i : ii) {
-				if (!isFinished && task.getTag() == i) {
-					continue;
-				}
-				if (contentText.length() > 0) {
-					contentText.append(", ");
-				}
-				contentText.append(i.getVisibleName(app, app.getRegions()));
-				contentText.append(" ").append(i.getType().getString(app));
-			}
-			bld.setContentTitle(msg).setSmallIcon(android.R.drawable.stat_sys_download)
-					.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-					.setContentText(contentText.toString())
-					.setContentIntent(contentPendingIntent).setOngoing(true);
-			int progress = getCurrentDownloadingItemProgress();
-			bld.setProgress(100, Math.max(progress, 0), progress < 0);
-			notification = bld.build();
-			NotificationManager mNotificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
-			mNotificationManager.notify(NOTIFICATION_ID, notification);
-		} else {
-			if(notification != null) {
-				NotificationManager mNotificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
-				mNotificationManager.cancel(NOTIFICATION_ID);
-				notification = null;
-			}
-		}
-		
+		app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
 	}
-	
 
 	@UiThread
 	protected void downloadHasFinished() {
@@ -162,6 +111,9 @@ public class DownloadIndexesThread {
 			uiActivity.downloadHasFinished();
 		}
 		updateNotification();
+		if (app.getDownloadService() != null) {
+			app.getDownloadService().stopService(app);
+		}
 	}
 
 	public void initSettingsFirstMap(WorldRegion reg) {
@@ -216,6 +168,10 @@ public class DownloadIndexesThread {
 		return res;
 	}
 
+	public boolean isDownloading() {
+		return !getCurrentDownloadingItems().isEmpty() || getCurrentDownloadingItem() != null;
+	}
+
 	public boolean isDownloading(IndexItem item) {
 		if(item == currentDownloadingItem) {
 			return true;
@@ -268,6 +224,9 @@ public class DownloadIndexesThread {
 			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
 				indexItemDownloading.add(item);
 			}
+		}
+		if (app.getDownloadService() == null) {
+			app.startDownloadService();
 		}
 		if (currentDownloadingItem == null) {
 			execute(new DownloadIndexesAsyncTask());

@@ -14,6 +14,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.util.Algorithms;
 
@@ -95,6 +96,11 @@ public class GpxNotification extends OsmandNotification {
 	@Override
 	public boolean isEnabled() {
 		return OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null;
+	}
+
+	@Override
+	public Intent getContentIntent() {
+		return new Intent(app, MapActivity.class);
 	}
 
 	@Override
