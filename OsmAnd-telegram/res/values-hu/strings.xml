@@ -220,4 +220,18 @@
     <string name="precision">Pontosság</string>
     <string name="altitude">Magasság</string>
     <string name="bearing">Tájolás</string>
+    <string name="proxy_key">Kulcs</string>
+    <string name="proxy_password">Jelszó</string>
+    <string name="proxy_username">Felhasználónév</string>
+    <string name="proxy_credentials">Hitelesítő adatok</string>
+    <string name="proxy_port">Port</string>
+    <string name="proxy_server">Kiszolgáló</string>
+    <string name="shared_string_connection">Kapcsolat</string>
+    <string name="shared_string_enable">Engedélyezés</string>
+    <string name="proxy_type">Proxy típusa</string>
+    <string name="proxy_connected">Kapcsolódva</string>
+    <string name="proxy_disconnected">Kapcsolat bontva</string>
+    <string name="proxy_settings">Proxy beállításai</string>
+    <string name="proxy">Proxy</string>
+    <string name="privacy">Adatvédelem</string>
 </resources>
