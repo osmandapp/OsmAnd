@@ -236,13 +236,9 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
 			double distOnRoadToPass = 0;
-			double speed = 0;
-
-			speed = ctx.getRouter().defineVehicleSpeed(road);
-
+			double speed = ctx.getRouter().defineVehicleSpeed(road);
 			if (speed == 0){
 				speed =  ctx.getRouter().getDefaultSpeed();
-
 			} else {
 				if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
 					speed = speed - (speed / SLOW_DOWN_SPEED_THRESHOLD - 1) * SLOW_DOWN_SPEED;
@@ -292,7 +288,6 @@ public class RouteResultPreparation {
 			rr.setSegmentTime((float) distOnRoadToPass);
 			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
-			LOG.debug("Segment speed: " + speed + ", distOnRoadToPass: " + distOnRoadToPass + ", distance: " + distance);
 		}
 	}
 

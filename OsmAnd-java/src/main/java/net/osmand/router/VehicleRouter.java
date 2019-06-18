@@ -124,14 +124,10 @@ public interface VehicleRouter {
 	 */
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd);
 
-
-	
 		
 	public VehicleRouter build(Map<String, String> params);
 
 
-
-	
 
 	
 	

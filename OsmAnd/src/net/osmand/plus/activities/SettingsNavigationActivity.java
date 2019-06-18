@@ -736,17 +736,14 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				def[0] = progress + 1;
 				speedTv.setText((progress + min) + "");
-
 			}
 
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
-
 			}
 
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-
 			}
 		});
 
