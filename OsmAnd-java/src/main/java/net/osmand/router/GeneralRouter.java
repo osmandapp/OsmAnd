@@ -36,7 +36,6 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 
 	final private RouteAttributeContext[] objectAttributes;
-	private RouteAttributeContext[] backupObjectAttributes = null;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters; 
 	private final Map<String, Integer> universalRules;
@@ -64,8 +63,7 @@ public class GeneralRouter implements VehicleRouter {
 	private float minSpeed = 0.28f;
 	private float maxSpeed = 0;
 	private float defaultSpeed = 1;
-	private float backupDefaultSpeed = -1;
-	
+
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
 	
@@ -412,9 +410,6 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public void setDefaultSpeed(float newDefaultSpeed) {
-		if (backupDefaultSpeed > 0) {
-			backupDefaultSpeed = this.defaultSpeed;
-		}
 		this.attributes.put("minDefaultSpeed", (newDefaultSpeed* 3.6) + "");
 		this.attributes.put("defaultSpeed", (newDefaultSpeed * 3.6) + "");
 		this.minDefaultSpeed = newDefaultSpeed;
@@ -446,11 +441,8 @@ public class GeneralRouter implements VehicleRouter {
 		return baseProfile;
 	}
 
-	public void updateObjectAttributes(float ratio) {
+	public void updateSpeedAttributes(float ratio) {
 		if (objectAttributes != null) {
-			if (backupObjectAttributes == null) {
-				backupObjectAttributes = objectAttributes.clone();
-			}
 			for (RouteAttributeContext rac : objectAttributes) {
 				if (rac != null) {
 					for (RouteAttributeEvalRule rule : rac.rules) {
@@ -463,26 +455,6 @@ public class GeneralRouter implements VehicleRouter {
 				}
 			}
 		}
-	}
-
-	public void restoreObjectAttributesToDefaultValue() {
-		if(backupObjectAttributes != null) {
-			for (int i = 0; i < backupObjectAttributes.length; i++) {
-				objectAttributes[i] = backupObjectAttributes[i];
-			}
-			backupObjectAttributes = null;
-		}
-	}
-
-	public void restoreDefaultSpeed() {
-		if(backupDefaultSpeed > 0) {
-			this.attributes.put("minDefaultSpeed", (backupDefaultSpeed * 3.6) + "");
-			this.attributes.put("defaultSpeed", (backupDefaultSpeed * 3.6) + "");
-			this.minDefaultSpeed = backupDefaultSpeed;
-			this.defaultSpeed = backupDefaultSpeed;
-			backupDefaultSpeed = -1f;
-		}
-
 	}
 
 	public double getLeftTurn() {
