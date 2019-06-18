@@ -139,7 +139,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	private void updateViewHolder(ProfileViewHolder holder, ApplicationMode mode) {
-		int iconRes = mode.getParent() == null ? mode.getSmallIconDark() : mode.getIconRes(app);
+		int iconRes = mode.getIconRes(app);
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}

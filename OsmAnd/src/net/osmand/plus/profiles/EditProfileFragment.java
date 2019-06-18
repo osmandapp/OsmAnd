@@ -865,7 +865,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 						app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
 				} else {
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-						app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, item.color), null);
+						app.getUIUtilities().getIcon(R.drawable.ic_action_circle, item.color), null);
 				}
 
 				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
