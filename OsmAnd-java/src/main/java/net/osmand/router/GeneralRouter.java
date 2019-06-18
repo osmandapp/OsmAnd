@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -35,6 +36,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 
 	private final RouteAttributeContext[] objectAttributes;
+	private RouteAttributeContext[] backupObjectAttributes = null;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters; 
 	private final Map<String, Integer> universalRules;
@@ -62,6 +64,7 @@ public class GeneralRouter implements VehicleRouter {
 	private float minSpeed = 0.28f;
 	private float maxSpeed = 0;
 	private float defaultSpeed = 1;
+	private float backupDefaultSpeed = -1;
 	
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
@@ -394,6 +397,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
+		PlatformUtil.getLog(GeneralRouter.class).debug("Vehicle Speed: " + getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed()));
 		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed());
 	}
 
@@ -407,52 +411,80 @@ public class GeneralRouter implements VehicleRouter {
 		return minDefaultSpeed;
 	}
 
+	@Override
 	public void setDefaultSpeed(float newDefaultSpeed) {
+		if (backupDefaultSpeed > 0) {
+			backupDefaultSpeed = this.defaultSpeed;
+		}
+		this.attributes.put("minDefaultSpeed", (newDefaultSpeed* 3.6) + "");
+		this.attributes.put("defaultSpeed", (newDefaultSpeed * 3.6) + "");
 		this.minDefaultSpeed = newDefaultSpeed;
 		this.defaultSpeed = newDefaultSpeed;
 	}
 
+	@Override
 	public float getMinSpeed() {
 		return minSpeed;
 	}
 
-	public String getBaseProfile() {
-		return baseProfile;
-	}
-
+	@Override
 	public float getMaxSpeed() {
-		return maxSpeed;
+		return maxSpeed > 0 ? maxSpeed : maxDefaultSpeed;
 	}
 
+	@Override
 	public float getDefaultSpeed() {
-		return defaultSpeed;
+		return defaultSpeed > 0 ? defaultSpeed : minDefaultSpeed;
 	}
-
-	//in case we decide to change speed settings for different types of terrain and obstacles:
-//	public void updateObjectAttributes(float factor) {
-//		if (objectAttributes != null) {
-//			for (RouteAttributeContext rac : objectAttributes) {
-//				if (rac != null) {
-//					for (RouteAttributeEvalRule rule : rac.rules) {
-//						if (rule != null && rule.selectType != null && rule.selectType.equals("speed") && rule.selectValue instanceof Float) {
-//							rule.selectValue = (Float) rule.selectValue * factor;
-//							Float defVal= Float.valueOf(rule.selectValueDef.trim());
-//							rule.selectValueDef = (defVal * factor) + "";
-//						}
-//					}
-//				}
-//			}
-//		}
-//	}
-
-
 
 	@Override
 	public float getMaxDefaultSpeed() {
 		return maxDefaultSpeed;
 	}
 
-	
+	public String getBaseProfile() {
+		return baseProfile;
+	}
+
+	public void updateObjectAttributes(float ratio) {
+		if (objectAttributes != null) {
+			if (backupObjectAttributes == null) {
+				backupObjectAttributes = objectAttributes.clone();
+			}
+			for (RouteAttributeContext rac : objectAttributes) {
+				if (rac != null) {
+					for (RouteAttributeEvalRule rule : rac.rules) {
+						if (rule != null && rule.selectType != null && rule.selectType.equals("speed") && rule.selectValue instanceof Float) {
+							rule.selectValue = (Float) rule.selectValue * ratio;
+							Float defVal= Float.valueOf(rule.selectValueDef.trim());
+							rule.selectValueDef = (defVal * ratio) + "";
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void restoreObjectAttributesToDefaultValue() {
+		if(backupObjectAttributes != null) {
+			for (int i = 0; i < backupObjectAttributes.length; i++) {
+				objectAttributes[i] = backupObjectAttributes[i];
+			}
+			backupObjectAttributes = null;
+		}
+	}
+
+	public void restoreDefaultSpeed() {
+		if(backupDefaultSpeed > 0) {
+			this.attributes.put("minDefaultSpeed", (backupDefaultSpeed * 3.6) + "");
+			this.attributes.put("defaultSpeed", (backupDefaultSpeed * 3.6) + "");
+			this.minDefaultSpeed = backupDefaultSpeed;
+			this.defaultSpeed = backupDefaultSpeed;
+			backupDefaultSpeed = -1f;
+		}
+
+	}
+
 	public double getLeftTurn() {
 		return leftTurn;
 	}

@@ -70,7 +70,30 @@ public interface VehicleRouter {
 	 * @return maximum speed to calculate shortest distance
 	 */
 	public float getMaxDefaultSpeed();
-	
+
+	/**
+	 * Used to set minimum value in Set Average Speed setting, in m/s
+	 *
+	 * @return
+	 */
+	public float getMinSpeed();
+
+	/**
+	 * Same as getMaxDefaultSpeed();
+	 *
+	 * @return maximum speed to calculate shortest distance
+	 */
+	public float getMaxSpeed();
+
+	/**
+	 * Same as getMinDefaultSpeed();
+	 *
+	 * @return minimal speed at road in m/s
+	 */
+	public float getDefaultSpeed();
+
+	public void setDefaultSpeed(float newDefaultSpeed);
+
 	/**
 	 * aware of road restrictions
 	 */

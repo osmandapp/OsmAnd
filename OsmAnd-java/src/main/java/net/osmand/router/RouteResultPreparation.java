@@ -238,16 +238,11 @@ public class RouteResultPreparation {
 			double distOnRoadToPass = 0;
 			double speed = 0;
 
-			if (profile == GeneralRouterProfile.CAR || profile == GeneralRouterProfile.PUBLIC_TRANSPORT) {
-				speed = ctx.getRouter().defineVehicleSpeed(road);
-			}
+			speed = ctx.getRouter().defineVehicleSpeed(road);
 
 			if (speed == 0){
-				if (((GeneralRouter) ctx.getRouter()).getDefaultSpeed() > 0) {
-					speed = ((GeneralRouter) ctx.getRouter()).getDefaultSpeed();
-				} else {
-					speed = ctx.getRouter().getMinDefaultSpeed();
-				}
+				speed =  ctx.getRouter().getDefaultSpeed();
+
 			} else {
 				if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
 					speed = speed - (speed / SLOW_DOWN_SPEED_THRESHOLD - 1) * SLOW_DOWN_SPEED;

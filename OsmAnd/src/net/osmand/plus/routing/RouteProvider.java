@@ -8,6 +8,7 @@ import android.os.Bundle;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.VectorTile.Tile.Value;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
@@ -29,6 +30,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.PrecalculatedRouteDirection;
@@ -701,12 +703,12 @@ public class RouteProvider {
 
 		float userDefinedDefSpeed = settings.DEFAULT_SPEED.getModeValue(params.mode);
 		if (userDefinedDefSpeed > 0) {
-			LOG.debug("Def speed in RouteProvider: " + userDefinedDefSpeed);
-			generalRouter.attributes.put("minDefaultSpeed", (userDefinedDefSpeed * 3.6) + "");
-			generalRouter.attributes.put("defaultSpeed", (userDefinedDefSpeed * 3.6) + "");
+			float ratio = userDefinedDefSpeed / generalRouter.getDefaultSpeed() ;
+			generalRouter.updateObjectAttributes(ratio);
 			generalRouter.setDefaultSpeed(userDefinedDefSpeed);
-
-
+		} else {
+			generalRouter.restoreObjectAttributesToDefaultValue();
+			generalRouter.restoreDefaultSpeed();
 		}
 
 

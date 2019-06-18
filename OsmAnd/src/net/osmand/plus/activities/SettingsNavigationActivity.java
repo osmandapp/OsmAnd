@@ -30,6 +30,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
@@ -667,37 +668,32 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final float[] ratio = new float[1];
 		switch (units){
 			case MILES_PER_HOUR:
-				ratio[0] = 2.23694f;
+				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
 				break;
 			case KILOMETERS_PER_HOUR:
-				ratio[0] = 3.6f;
+				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_KILOMETER;
 				break;
 			case MINUTES_PER_KILOMETER:
-				ratio[0] = 3.6f;
+				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_KILOMETER;
 				speedUnits = getString(R.string.km_h);
 				break;
 			case NAUTICALMILES_PER_HOUR:
-				ratio[0] = 1.94384f;
+				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 				break;
 
 
 		}
 
 		final int min = (int) (router.getMinSpeed() * ratio[0]);
-		int max;
 		final int[] def = new int[1];
-		if (router.getMaxSpeed() > 0) {
-			max = (int) Math.round(router.getMaxSpeed() * ratio[0]);
-		} else {
-			max = (int) Math.round(router.getMaxDefaultSpeed() * ratio[0]);
-		}
+
+		final int max = (int) Math.round(router.getMaxSpeed() * ratio[0]);
+
 
 		if (settings.DEFAULT_SPEED.get() > 0) {
 			def[0] = (int) Math.round(settings.DEFAULT_SPEED.get() * ratio[0]);
-		} else if (router.getDefaultSpeed() > 0) {
-			def[0] = (int) Math.round(router.getDefaultSpeed() * ratio[0]);
 		} else {
-			def[0] = (int) Math.round(router.getMinDefaultSpeed() * ratio[0]);
+			def[0] = (int) Math.round(router.getDefaultSpeed() * ratio[0]);
 		}
 
 
