@@ -16,27 +16,29 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListPopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,22 +49,16 @@ import java.util.Map.Entry;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ApplicationMode.ProfileIconColors;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
-import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
-import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
-import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
@@ -141,7 +137,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 		@Nullable Bundle savedInstanceState) {
-
+		final EditProfileActivity activity = (EditProfileActivity) getActivity();
 		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
 
 		profileIcon = view.findViewById(R.id.profile_icon_img);
@@ -170,13 +166,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
-//		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
-//		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn.getBackground();
-//		if (nightMode) {
-//			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_dark));
-//		} else {
-//			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_light));
-//		}
 
 		String title = "New Profile";
 
@@ -259,12 +248,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (!isUserProfile) {
 			iconColor = R.color.icon_color;
 		} else {
-			iconColor = nightMode
-				? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light;
+			iconColor = profile.iconColor;
 		}
 
 		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId, iconColor));
+		colorSample.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_circle, iconColor));
 
 		profileNameEt.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -326,6 +314,28 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 						.add(iconSelectDialog, "select_icon")
 						.commitAllowingStateLoss();
 				}
+			}
+		});
+
+		selectColorBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final ListPopupWindow popupWindow = new ListPopupWindow(activity);
+				popupWindow.setAnchorView(selectColorBtn);
+				popupWindow.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
+				popupWindow.setModal(true);
+				popupWindow.setDropDownGravity(Gravity.TOP | Gravity.RIGHT);
+				popupWindow.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
+				popupWindow.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
+				final ProfileColorAdapter profileColorAdapter = new ProfileColorAdapter(activity, mode.getIconColorInfo());
+				popupWindow.setAdapter(profileColorAdapter);
+				popupWindow.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+					}
+				});
+				popupWindow.show();
 			}
 		});
 
@@ -789,7 +799,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		ApplicationMode parent = null;
 		int iconId = R.drawable.map_world_globe_dark;
 		String iconStringName = "map_world_globe_dark";
-		int iconColor = R.color.;
+		int iconColor = R.color.active_buttons_and_links_light;
 		RoutingProfileDataObject routingProfileDataObject = null;
 
 		ApplicationProfileObject(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
@@ -802,8 +812,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				parent = mode.getParent();
 				iconId = mode.getIconRes(getMyApplication());
 				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
+				iconColor = mode.getIconColorInfo() == null ? R.color.profile_icon_color_blue_light_default : mode.getIconColorInfo().getColor();
 				userProfileTitle = mode.getUserProfileName();
-				userProfileTitle = mode.getIconColorRes(getMyApplication());
 			} else {
 				key = mode.getStringResource();
 				stringKey = mode.getStringKey();
@@ -816,26 +826,25 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	public static class ProfileColorAdapter extends ArrayAdapter<ColorListItem> {
 
 		private OsmandApplication app;
-		private int currentColor;
+		private ProfileIconColors currentColorData;
 
-		public ProfileColorAdapter(Context context, int currentColor) {
+
+		public ProfileColorAdapter(Context context, ProfileIconColors iconColorData) {
 			super(context, R.layout.rendering_prop_menu_item);
 			this.app = (OsmandApplication) getContext().getApplicationContext();
-			this.currentColor = currentColor;
+			this.currentColorData = iconColorData;
 			init();
 		}
 
 		public void init() {
-			AppearanceListItem item = new AppearanceListItem(CURRENT_PROFILE_COLOR_ATTR, "",
-				SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
-				parseTrackColor(renderer, ""));
+			String currentColorName = app.getString(ProfileIconColors.DEFAULT.getName());
+			ColorListItem item = new ColorListItem(currentColorName, currentColorName, ProfileIconColors.DEFAULT.getColor());
 			add(item);
-			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
-				item = new AppearanceListItem(CURRENT_PROFILE_COLOR_ATTR,
-					trackColorProp.getPossibleValues()[j],
-					SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getPossibleValues()[j]),
-					parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
-				add(item);
+			for (ProfileIconColors pic : ProfileIconColors.values()) {
+				if (pic != ProfileIconColors.DEFAULT) {
+					item = new ColorListItem(currentColorName, app.getString(pic.getName()), pic.getColor());
+					add(item);
+				}
 			}
 			item.setLastItem(true);
 		}
@@ -843,14 +852,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		@NonNull
 		@Override
 		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-			AppearanceListItem item = getItem(position);
+			ColorListItem item = getItem(position);
 			View v = convertView;
 			if (v == null) {
 				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, null);
 			}
 			if (item != null) {
 				TextView textView = (TextView) v.findViewById(R.id.text1);
-				textView.setText(item.localizedValue);
+				textView.setText(item.valueName);
 				if (item.color == -1) {
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
 						app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
@@ -867,32 +876,24 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private class ColorListItem {
-		private String attrName;
-		private String value;
-		private String localizedValue;
+	public static class ColorListItem {
+		private String currentValueName;
+		private String valueName;
 		private int color;
 		private boolean lastItem;
 
-
-
-		public ColorListItem(String attrName, String value, String localizedValue, int color) {
-			this.attrName = attrName;
-			this.value = value;
-			this.localizedValue = localizedValue;
+		public ColorListItem(String currentValueName, String valueName, int color) {
+			this.currentValueName = currentValueName;
+			this.valueName = valueName;
 			this.color = color;
 		}
 
-		public String getAttrName() {
-			return attrName;
+		public String getCurrentValueName() {
+			return currentValueName;
 		}
 
-		public String getValue() {
-			return value;
-		}
-
-		public String getLocalizedValue() {
-			return localizedValue;
+		public String getValueName() {
+			return valueName;
 		}
 
 		public int getColor() {

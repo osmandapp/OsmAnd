@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -474,7 +475,7 @@ public class ApplicationMode {
 	@Expose private String userProfileName;
 	@Expose private ApplicationMode parent;
 	@Expose private String iconName = "map_world_globe_dark";
-	@Expose private String iconColor = "#237BFF";
+	@Expose private ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;
@@ -560,11 +561,35 @@ public class ApplicationMode {
 		}
 	}
 
-	public int getIconColorRes(Context app) {
-		try {
-			return Color.parseColor(iconColor);
-		} catch (Exception e) {
-			return app.getResources().getColor(R.color.active_buttons_and_links_light);
-		}
+	public ProfileIconColors getIconColorInfo() {
+		return iconColor;
 	}
+
+	public enum ProfileIconColors{
+		DEFAULT(R.string.rendering_value_default_name, R.color.profile_icon_color_blue_light_default),
+		PURPLE(R.string.rendering_value_purple_name, R.color.profile_icon_color_purple_light),
+		GREEN(R.string.rendering_value_green_name, R.color.profile_icon_color_green_light),
+		BLUE(R.string.rendering_value_blue_name, R.color.profile_icon_color_blue_light),
+		RED(R.string.rendering_value_red_name, R.color.profile_icon_color_red_light),
+		DARK_YELLOW(R.string.rendering_value_darkyellow_name, R.color.profile_icon_color_yellow_light),
+		MAGENTA(R.string.shared_string_color_magenta, R.color.profile_icon_color_magenta_light);
+
+		@StringRes private int name;
+		@ColorRes private int color;
+
+		ProfileIconColors(@StringRes int name, @ColorRes int color) {
+			this.name = name;
+			this.color = color;
+		}
+
+		public int getName() {
+			return name;
+		}
+
+		public int getColor() {
+			return color;
+		}
+ 	}
+
+
 }

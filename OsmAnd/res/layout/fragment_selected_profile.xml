@@ -293,7 +293,7 @@
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:padding="@dimen/list_content_padding"
-								tools:src = "@drawable/h_blue_ellipse_1_road_shield"
+								tools:src = "@drawable/ic_action_circle"
 								tools:tint="@color/A400red"/>
 
 						</LinearLayout>

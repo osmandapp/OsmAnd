@@ -497,5 +497,12 @@
 	<color name="active_buttons_and_links_text_light">#ffffff</color>
 	<color name="active_buttons_and_links_text_dark">#cccccc</color>
 
+	<color name="profile_icon_color_blue_light_default">#237BFF</color>
+	<color name="profile_icon_color_purple_light">#732EEB</color>
+	<color name="profile_icon_color_green_light">#0EBE92</color>
+	<color name="profile_icon_color_blue_light">#007EB3</color>
+	<color name="profile_icon_color_red_light">#FF2200</color>
+	<color name="profile_icon_color_yellow_light">#F0B400</color>
+	<color name="profile_icon_color_magenta_light">#CC0063</color>
 
 </resources>
