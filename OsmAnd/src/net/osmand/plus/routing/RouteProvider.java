@@ -703,7 +703,7 @@ public class RouteProvider {
 
 		float userDefinedDefSpeed = settings.DEFAULT_SPEED.getModeValue(params.mode);
 		if (userDefinedDefSpeed > 0) {
-			float ratio = userDefinedDefSpeed / generalRouter.getDefaultSpeed() ;
+			float ratio = userDefinedDefSpeed / generalRouter.getDefaultSpeed();
 			generalRouter.updateObjectAttributes(ratio);
 			generalRouter.setDefaultSpeed(userDefinedDefSpeed);
 		} else {

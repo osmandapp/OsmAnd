@@ -92,7 +92,21 @@ public interface VehicleRouter {
 	 */
 	public float getDefaultSpeed();
 
+	/**
+	 * Used to set user defined default speed
+	 *
+	 * @param newDefaultSpeed
+	 */
+
 	public void setDefaultSpeed(float newDefaultSpeed);
+
+
+	/**
+	 *
+	 * @return name of base routing profile
+	 */
+	public String getBaseProfile();
+
 
 	/**
 	 * aware of road restrictions
@@ -109,9 +123,13 @@ public interface VehicleRouter {
 	 * Calculate turn time 
 	 */
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd);
+
+
 	
 		
 	public VehicleRouter build(Map<String, String> params);
+
+
 
 	
 

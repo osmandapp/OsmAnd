@@ -660,8 +660,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 	private void showSeekbarSettingsDialog() {
-
-
 		GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), settings.getApplicationMode());
 		SpeedConstants units = settings.SPEED_SYSTEM.get();
 		String speedUnits = units.toShortString(this);
@@ -736,7 +734,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				def[0] = progress;
+				def[0] = progress + 1;
 				speedTv.setText((progress + min) + "");
 
 			}

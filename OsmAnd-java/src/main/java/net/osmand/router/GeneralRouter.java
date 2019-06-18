@@ -35,7 +35,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String ALLOW_PRIVATE = "allow_private";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
 
-	private final RouteAttributeContext[] objectAttributes;
+	final private RouteAttributeContext[] objectAttributes;
 	private RouteAttributeContext[] backupObjectAttributes = null;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters; 
@@ -442,6 +442,7 @@ public class GeneralRouter implements VehicleRouter {
 		return maxDefaultSpeed;
 	}
 
+	@Override
 	public String getBaseProfile() {
 		return baseProfile;
 	}
