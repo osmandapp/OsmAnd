@@ -75,7 +75,6 @@ public class DownloadNotification extends OsmandNotification {
 			msg = task.getDescription();
 		}
 		StringBuilder contentText = new StringBuilder();
-		contentText.append("S ");
 		List<IndexItem> ii = downloadThread.getCurrentDownloadingItems();
 		for (IndexItem i : ii) {
 			if (!isFinished && task.getTag() == i) {
