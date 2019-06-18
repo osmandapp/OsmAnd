@@ -397,8 +397,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		PlatformUtil.getLog(GeneralRouter.class).debug("Vehicle Speed: " + getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed()));
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed());
+		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getDefaultSpeed());
 	}
 
 	@Override
