@@ -2,7 +2,7 @@
 <resources>
     <string name="background_work_description">Skift indstillinger for batterioptimering, for stabil deling af placering.</string>
     <string name="background_work">Baggrundstilstand</string>
-    <string name="battery_optimization_description">Sluk for batterioptimering af OsmAnd Tracker, så det ikke pludseligt bliver slukket, når det er i baggrunden.</string>
+    <string name="battery_optimization_description">Sluk for batterioptimering af OsmAnd Tracker, så den ikke pludseligt bliver slukket, når den er i baggrunden.</string>
     <string name="sharing_in_background">Deling i baggrunden</string>
     <string name="go_to_settings">Gå til indstillinger</string>
     <string name="shared_string_later">Senere</string>
@@ -234,4 +234,12 @@
     <string name="proxy">Proxy</string>
     <string name="privacy">Privatliv</string>
     <string name="precision">Præcision</string>
+    <string name="shared_string_select">Vælg</string>
+    <string name="min_logging_distance">Mindste logningsafstand</string>
+    <string name="min_logging_distance_descr">Filter: mindste afstand for at logge et nyt punkt</string>
+    <string name="min_logging_accuracy">Minimum logningsnøjagtighed</string>
+    <string name="min_logging_accuracy_descr">Filter: ingen logføring, medmindre nøjagtigheden er nået</string>
+    <string name="min_logging_speed">Minimum logningshastighed</string>
+    <string name="min_logging_speed_descr">Filter: ingen logning under den valgte hastighed</string>
+    <string name="gpx_settings">GPX-indstillinger</string>
 </resources>
