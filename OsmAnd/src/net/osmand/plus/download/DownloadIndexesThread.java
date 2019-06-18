@@ -169,7 +169,7 @@ public class DownloadIndexesThread {
 	}
 
 	public boolean isDownloading() {
-		return !getCurrentDownloadingItems().isEmpty() || getCurrentDownloadingItem() != null;
+		return !indexItemDownloading.isEmpty() || currentDownloadingItem != null;
 	}
 
 	public boolean isDownloading(IndexItem item) {
