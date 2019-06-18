@@ -3026,4 +3026,6 @@ Pôr do Sol: %2$s</string>
     <string name="public_transport_try_change_settings">Tente alterar as configurações.</string>
     <string name="public_transport_calc_pedestrian">Calcular rota a pé</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="searching_gps">Pesquisando GPS</string>
+    <string name="coordinates_widget">Widget de coordenadas</string>
 </resources>

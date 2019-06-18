@@ -2938,7 +2938,7 @@
 \n</string>
     <string name="shared_string_degrees">度</string>
     <string name="shared_string_milliradians">毫弧度</string>
-    <string name="angular_measeurement">角度測量單位</string>
+    <string name="angular_measeurement">角度單位</string>
     <string name="angular_measeurement_descr">變更測量的方位角。</string>
     <string name="avoid_pt_types_descr">選取要避免在導航中使用的大眾運輸類型：</string>
     <string name="quick_action_day_night_mode">%s 模式</string>
@@ -3030,4 +3030,6 @@
     <string name="public_transport_try_change_settings">嘗試變更設定。</string>
     <string name="public_transport_calc_pedestrian">計算行人路線</string>
     <string name="public_transport_type">運輸類型</string>
+    <string name="searching_gps">正在搜尋 GPS</string>
+    <string name="coordinates_widget">座標小工具</string>
 </resources>

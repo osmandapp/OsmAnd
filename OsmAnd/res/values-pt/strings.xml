@@ -1909,7 +1909,7 @@
     <string name="shared_string_permissions">Permissões</string>
     <string name="import_gpx_failed_descr">OsmAnd não pode importar o ficheiro. Por favor confirme se OsmAnd tem permissão para ler o ficheiro da sua localização.</string>
     <string name="distance_moving">Distância corrigida</string>
-    <string name="mapillary_image">Imagem Mapillary</string>
+    <string name="mapillary_image">Imagem do Mapillary</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Melhorar cobertura fotográfica com Mapillary</string>
@@ -3042,4 +3042,6 @@
     <string name="public_transport_try_change_settings">Tente alterar a configuração.</string>
     <string name="public_transport_calc_pedestrian">Calcular a rota pedestre</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="searching_gps">Procurando GPS</string>
+    <string name="coordinates_widget">Widget de coordenadas</string>
 </resources>

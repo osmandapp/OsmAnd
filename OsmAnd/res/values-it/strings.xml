@@ -3041,4 +3041,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="public_transport_calc_pedestrian">Calcola un percorso per pedoni</string>
     <string name="public_transport_type">Modalità di trasporto</string>
     <string name="send_log">Invia il registro</string>
+    <string name="searching_gps">Ricerca GPS</string>
+    <string name="coordinates_widget">Widget coordinate</string>
 </resources>

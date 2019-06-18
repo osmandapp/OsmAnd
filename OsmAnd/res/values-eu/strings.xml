@@ -3022,9 +3022,12 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="public_transport_calc_pedestrian">Kalkulatu</string>
     <string name="public_transport_type">Garraio mota</string>
     <string name="shared_string_milliradians">Miliradianak</string>
-    <string name="angular_measeurement">Neurri-unitate angularra</string>
+    <string name="angular_measeurement">Angelu unitatea</string>
     <string name="angular_measeurement_descr">Aldatu zertan azimuta neurtzen den.</string>
     <string name="rendering_attr_surface_pebblestone_name">Hartxindar bidea</string>
     <string name="rendering_attr_surface_gravel_name">Hartxindarra</string>
     <string name="routing_attr_avoid_sett_description">Saihestu harri eta baldosa galtzadak</string>
+    <string name="files_present">%1$d fitxategi (%2$s) aurreko kokapen batean daude jada \'%3$s\'.</string>
+    <string name="searching_gps">GPSa bilatzen</string>
+    <string name="coordinates_widget">Koordenatuen trepeta</string>
 </resources>

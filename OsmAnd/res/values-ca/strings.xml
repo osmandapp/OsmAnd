@@ -3058,4 +3058,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Proveu a canviar els paràmetres.</string>
     <string name="public_transport_calc_pedestrian">Calcula la ruta per vianants</string>
     <string name="public_transport_type">Tipus de transport</string>
+    <string name="searching_gps">Cerca GPS</string>
+    <string name="coordinates_widget">Giny de coordenades</string>
 </resources>

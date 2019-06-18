@@ -1534,7 +1534,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (bonvolu restarti OsmAnd post ŝanĝo).</string>
     <string name="unit_of_length">Unuoj de longo</string>
-    <string name="unit_of_length_descr">Ŝanĝi unuon por reprezenti distancoj.</string>
+    <string name="unit_of_length_descr">Ŝanĝi unuojn por reprezenti distancoj.</string>
     <string name="si_mi_feet">Mejloj/futoj</string>
     <string name="si_mi_yard">Mejloj/jardoj</string>
     <string name="si_km_m">Kilometroj/metroj</string>
@@ -3025,4 +3025,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="public_transport_try_change_settings">Provu ŝanĝi agordojn.</string>
     <string name="public_transport_calc_pedestrian">Kalkuli piedirantan kurson</string>
     <string name="public_transport_type">Speco de transporto</string>
+    <string name="searching_gps">Determinado de pozicio…</string>
+    <string name="coordinates_widget">Fenestraĵo de koordinatoj</string>
 </resources>

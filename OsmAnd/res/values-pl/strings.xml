@@ -61,7 +61,7 @@
     <string name="vector_data_missing">Pobierz dane (\"offline\") by używać map offline.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPrzytrzymaj nacisk, aby wyświetlić opcje"</string>
+\nPrzytrzymaj dłużej, aby uzyskać opcje"</string>
     <string name="local_index_installed">Wersja lokalna</string>
     <string name="local_index_items_backuped">Zarchiwizowano %1$d z %2$d.</string>
     <string name="local_index_items_deleted">Usunięto %1$d z %2$d.</string>
@@ -2352,7 +2352,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_permissions">Uprawnienia</string>
     <string name="import_gpx_failed_descr">Nie można zaimportować pliku. Proszę sprawdzić czy program posiada uprawnienia do odczytywania pliku z jego położenia.</string>
     <string name="map_widget_ruler_control">Linijka promieniowa</string>
-    <string name="shared_string_reload">Wczytaj ponownie</string>
+    <string name="shared_string_reload">Załaduj ponownie</string>
     <string name="mapillary_menu_title_username">Nazwa użytkownika</string>
     <string name="mapillary_menu_title_dates">Data</string>
     <string name="shared_string_to">Do</string>
@@ -2365,7 +2365,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_username">Wyświetl obrazy dodane tylko przez</string>
     <string name="store_tracks_in_monthly_directories">Ślady w miesięcznych katalogach</string>
     <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2018-01).</string>
-    <string name="shared_string_reset">Wyczyść</string>
+    <string name="shared_string_reset">Resetuj</string>
     <string name="mapillary_menu_descr_tile_cache">"Ponowne wczytanie kafelków uaktualni  je."</string>
     <string name="average">Średnia</string>
     <string name="of">%1$d z %2$d</string>
@@ -2931,7 +2931,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_gpx_tracks_show">Wyświetl ślady GPX</string>
     <string name="add_destination_query">Proszę najpierw dodać cel</string>
     <string name="previous_route">Poprzednia trasa</string>
-    <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wylicza trasy.</string>
+    <string name="public_transport_warning_descr_blog">Dowiedz się więcej z wpisu na naszym blogu jak OsmAnd wyznacza trasy.</string>
     <string name="route_add_start_point">Dodawanie punktu początkowego</string>
     <string name="route_descr_select_start_point">Wybierz punkt początkowy</string>
     <string name="rendering_attr_surface_unpaved_name">Nieutwardzona</string>
@@ -3000,7 +3000,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Usunięcie Facebooka i analiz Firebase z darmowej wersji (OsmAnd+ tego nie zawiera)
 \n</string>
     <string name="shared_string_degrees">Stopnie</string>
-    <string name="shared_string_milliradians">Miliradianach</string>
+    <string name="shared_string_milliradians">Miliradiany</string>
     <string name="quick_action_day_night_mode">Tryb %s</string>
     <string name="routing_attr_avoid_tram_name">Unikanie tramwajów</string>
     <string name="routing_attr_avoid_tram_description">Unikanie tramwajów</string>
@@ -3022,8 +3022,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="angular_measeurement">Jednostka kąta</string>
-    <string name="angular_measeurement_descr">Zmiany jakie azymut jest mierzony w.</string>
-    <string name="avoid_pt_types_descr">Wybierz typy transportu publicznego, których chcesz unikać dla nawigacji:</string>
+    <string name="angular_measeurement_descr">Określa jednostki miary azymutu.</string>
+    <string name="avoid_pt_types_descr">Proszę wybrać rodzaje transportu publicznego, unikanych dla nawigacji:</string>
     <string name="avoid_pt_types">Unikanie rodzaju transportu…</string>
     <string name="shared_string_walk">Pieszo</string>
     <string name="save_poi_value_exceed_length">Maksymalna długość znacznika „%s” wynosi 255 znaków.
@@ -3045,5 +3045,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="public_transport_try_ped">Wypróbuj nawigację pieszą.</string>
     <string name="public_transport_try_change_settings">Spróbuj zmienić ustawienia.</string>
     <string name="public_transport_calc_pedestrian">Oblicz trasę pieszą</string>
-    <string name="public_transport_type">Typ transportu</string>
+    <string name="public_transport_type">Rodzaj transportu</string>
+    <string name="searching_gps">Wyszukiwanie GPS</string>
+    <string name="coordinates_widget">Widget współrzędne</string>
 </resources>

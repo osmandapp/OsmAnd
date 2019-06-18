@@ -77,7 +77,7 @@
     <string name="poi_ticket">فروشگاه بلیط</string>
     <string name="poi_tobacco">دخانیات</string>
     <string name="poi_toys">اسباب بازی فروشی</string>
-    <string name="poi_trade"></string>
+    <string name="poi_trade"/>
     <string name="poi_vacuum_cleaner">فروشگاه جاروبرقی</string>
     <string name="poi_variety_store">فروشگاه متنوع و ارزان</string>
     <string name="poi_video">کلوب فیلم</string>
@@ -121,7 +121,7 @@
     <string name="poi_service_tyres">پنچرگیری</string>
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
-    <string name="poi_fuel">پمپ بنزین؛ جایگاه سوخت؛ جایگاه سوخت‌گیری؛ جایگاه</string>
+    <string name="poi_fuel">پمپ بنزین; جایگاه سوخت; جایگاه سوخت‌گیری; جایگاه</string>
     <string name="poi_electricity_combined_charging">ایستگاه شارژ</string>
     <string name="poi_vehicle_ramp">سطح شیب دار خودرو</string>
     <string name="poi_compressed_air">هوای فشرده</string>
@@ -692,7 +692,7 @@
     <string name="poi_sport">ورزش</string>
     <string name="poi_board_type_public_transport">حمل و نقل عمومی</string>
     <string name="poi_vending_public_transport_tickets">بلیت‌های حمل و نقل عمومی</string>
-    <string name="poi_vending_parking_tickets_public_transport_tickets">بلیت‌های پارکینگ؛ بلیت‌های حمل‌ونقل عمومی</string>
+    <string name="poi_vending_parking_tickets_public_transport_tickets">بلیت‌های پارکینگ; بلیت‌های حمل‌ونقل عمومی</string>
     <string name="poi_shelter_type_public_transport">حمل و نقل عمومی</string>
     <string name="poi_clothes_sports">ورزشی</string>
     <string name="poi_shoes_sport">ورزشی</string>

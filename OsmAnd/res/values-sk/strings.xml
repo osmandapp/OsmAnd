@@ -3028,4 +3028,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Skúste zmeniť nastavenia.</string>
     <string name="public_transport_calc_pedestrian">Vypočítať pešiu trasu</string>
     <string name="public_transport_type">Spôsob dopravy</string>
+    <string name="searching_gps">Hľadá sa GPS</string>
+    <string name="coordinates_widget">Nástroj súradníc</string>
 </resources>

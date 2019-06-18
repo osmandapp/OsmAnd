@@ -386,7 +386,7 @@ Lon %2$s</string>
 \nCualquiera de estos mapas puede ser usado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Para hacer más visible cualquier mapa subyacente, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú «Configurar mapa» cuando lo desees. 
 \n 
 \nLos mapas de teselas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para tu uso sin conexión (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros.</string>
-    <string name="record_plugin_description">Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX. 
+    <string name="record_plugin_description">Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el widget de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX. 
 \n 
 \nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden usar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros.</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
@@ -417,8 +417,8 @@ Lon %2$s</string>
 \nActivando esta vista, cambia el estilo del mapa a «Invierno y esquí», mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí o cambiando el «Estilo del mapa» en «Configurar mapa» cuando lo desees.</string>
     <string name="audionotes_plugin_description">Este complemento, proporciona la funcionalidad para tomar notas de audio, fotografía y/o video durante un viaje, usando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
     <string name="osmand_parking_plugin_description">Este complemento, registra dónde se estacionó el automóvil y cuánto tiempo queda (si hay un límite de tiempo). 
-\nTanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en el control del mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
-    <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
+\nTanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en un widget sobre el mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
+    <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un widget en la pantalla del mapa, permitiendo crear caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control del zoom, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX. OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org. Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o las indicaciones por voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
@@ -444,12 +444,12 @@ Lon %2$s</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="background_service_is_enabled_question">El servicio de OsmAnd, aún está funcionando en modo reposo. ¿Quieres pararlo también?</string>
     <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
-    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el control de grabación GPX en el mapa).</string>
+    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación GPX sobre el mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
     <string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
-    <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el control de grabación GPX en la pantalla del mapa.</string>
+    <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el widget de grabación GPX en la pantalla del mapa.</string>
     <string name="save_track_to_gpx">Guardar la traza automáticamente durante la navegación</string>
     <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación.</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
@@ -593,7 +593,7 @@ Lon %2$s</string>
     <string name="use_distance_measurement_help">* Pulsa para marcar un punto. 
 \n * Mantén pulsado el mapa para quitar el punto anterior. 
 \n * Mantén pulsado en un punto para ver e incluir la descripción. 
-\n * Pulsa el control de medición para ver más acciones.</string>
+\n * Pulsa el widget de medición para ver más acciones.</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
@@ -652,8 +652,8 @@ Lon %2$s</string>
     <string name="av_def_action_choose">Elegir a petición</string>
     <string name="av_def_action_video">Grabar video</string>
     <string name="av_def_action_audio">Grabar audio</string>
-    <string name="av_widget_action_descr">Elige la acción predefinida.</string>
-    <string name="av_widget_action">Acción predefinida</string>
+    <string name="av_widget_action_descr">Elige la acción predefinida del widget.</string>
+    <string name="av_widget_action">Acción predefinida del widget</string>
     <string name="av_video_format_descr">Formato de salida del video.</string>
     <string name="av_video_format">Formato de salida del video</string>
     <string name="av_use_external_recorder_descr">Usa la grabadora del sistema para video.</string>
@@ -664,7 +664,7 @@ Lon %2$s</string>
     <string name="av_settings">Ajustes de notas multimedia</string>
     <string name="recording_error">Error de grabación</string>
     <string name="recording_camera_not_available">Cámara no disponible</string>
-    <string name="recording_is_recorded">Grabando audio/video. Para pararlo, pulsar el control AV.</string>
+    <string name="recording_is_recorded">Grabando audio/video. Para pararlo, pulsar el widget A/V.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Borrar este elemento?</string>
@@ -813,7 +813,7 @@ Lon %2$s</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
     <string name="map_widget_view_direction">Dirección de visualización</string>
-    <string name="map_widget_transparent">Controles transparentes</string>
+    <string name="map_widget_transparent">Widgets transparentes</string>
     <string name="bg_service_sleep_mode_off">Ejecutar 
 \n aplicación en modo reposo</string>
     <string name="bg_service_sleep_mode_on">Parar
@@ -1007,7 +1007,7 @@ Lon %2$s</string>
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
-    <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
+    <string name="gpx_monitoring_disabled_warn">Registra trazas usando el widget GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
     <string name="free_version_message">Puedes descargar o actualizar %1$s mapas.</string>
     <string name="free_version_title">Versión gratuita</string>
@@ -1890,7 +1890,7 @@ Lon %2$s</string>
     <string name="map_marker_1st">Primer marcador del mapa</string>
     <string name="map_marker_2nd">Segundo marcador del mapa</string>
     <string name="shared_string_toolbar">Barra de herramientas</string>
-    <string name="shared_string_widgets">Controles</string>
+    <string name="shared_string_widgets">Widgets</string>
     <string name="download_files_error_not_enough_space">¡Sin espacio suficiente!
  Almacenamiento necesario de {3} MB temporalmente, {1} MB constantemente.
  Espacio disponible de sólo {2} MB.</string>
@@ -2424,11 +2424,11 @@ Lon %2$s</string>
     <string name="nothing_found_descr">Modificar la consulta de búsqueda o aumentar el radio de búsqueda.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje?</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_widget">Control de Mapillary</string>
+    <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
-    <string name="mapillary_action_descr">Contribuye con tu propia vista a nivel de calle de esta ubicación a través de Mapillary.</string>
+    <string name="mapillary_action_descr">Contribuye con tus propias imágenes a nivel de calle de esta ubicación a través de Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">No se encontraron fotos en esta ubicación.</string>
@@ -2573,7 +2573,7 @@ Lon %2$s</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
-    <string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones de la interfaz y los controles.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones de la interfaz y los widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="mark_passed">Descartar</string>
     <string name="rename_marker">Renombrar marcador</string>
@@ -2614,7 +2614,7 @@ Lon %2$s</string>
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
     <string name="one_tap_active">Activar «Una pulsación»</string>
     <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
-    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>
+    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el widget o el menú contextual.</string>
     <string name="notes_by_date">Notas por fecha</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
@@ -3041,4 +3041,6 @@ Lon %2$s</string>
     <string name="public_transport_try_change_settings">Intenta cambiar los ajustes.</string>
     <string name="public_transport_calc_pedestrian">Calcular la ruta a pie</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="searching_gps">Buscando GPS</string>
+    <string name="coordinates_widget">Widget de coordenadas</string>
 </resources>
