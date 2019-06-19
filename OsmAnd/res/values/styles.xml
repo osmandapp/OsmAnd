@@ -114,7 +114,7 @@
         <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_light</item>
         <item name="searchbar_text">@color/searchbar_text_light</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_light</item>
-        <item name="list_divider">@color/list_divider_dark</item>
+        <item name="list_divider">@color/divider_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_light</item>
         <item name="downloadButtonBackground">@drawable/download_light</item>
@@ -368,7 +368,7 @@
         <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_dark</item>
         <item name="searchbar_text">@color/searchbar_text_dark</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_dark</item>
-        <item name="list_divider">@color/list_divider_light</item>
+        <item name="list_divider">@color/divider_dark</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>
         <item name="downloadButtonBackground">@drawable/download_dark</item>

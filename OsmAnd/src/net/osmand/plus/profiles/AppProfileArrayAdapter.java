@@ -21,13 +21,14 @@ public class AppProfileArrayAdapter extends ArrayAdapter<ProfileDataObject> {
 	private Activity context;
 	private List<ProfileDataObject> modes;
 	private int layout;
-	private int colorRes;
+	private OsmandApplication app;
 
 	public AppProfileArrayAdapter(@NonNull Activity context, int resource, @NonNull List<ProfileDataObject> objects) {
 		super(context, resource, objects);
 		this.context = context;
 		this.modes = objects;
 		this.layout = resource;
+		app = (OsmandApplication) context.getApplication();
 	}
 
 	public long getItemId(int position) {
@@ -61,19 +62,10 @@ public class AppProfileArrayAdapter extends ArrayAdapter<ProfileDataObject> {
 		ProfileDataObject mode = modes.get(position);
 
 		Drawable iconDrawable;
-		if  (getMyApp(context) != null) {
-			if (mode.isSelected()) {
-			iconDrawable = getMyApp(context).getUIUtilities().getIcon(mode.getIconRes(),
-				getMyApp(context).getSettings().isLightContent()
-					? R.color.ctx_menu_direction_color_light
-					: R.color.active_buttons_and_links_dark
-				);
-			} else {
-				iconDrawable = getMyApp(context).getUIUtilities()
-					.getIcon(mode.getIconRes(), R.color.icon_color);
-			}
+		if (mode.isSelected()) {
+			iconDrawable = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColor(!app.getSettings().isLightContent()));
 		} else {
-			iconDrawable = context.getDrawable(mode.getIconRes());
+			iconDrawable = app.getUIUtilities().getIcon(mode.getIconRes(), R.color.profile_icon_color_inactive);
 		}
 
 		viewHolder.title.setText(mode.getName());
@@ -82,14 +74,5 @@ public class AppProfileArrayAdapter extends ArrayAdapter<ProfileDataObject> {
 		viewHolder.compoundButton.setChecked(mode.isSelected());
 
 		return rowView;
-	}
-
-	private OsmandApplication getMyApp(Activity context) {
-		Application app = context.getApplication();
-		if (app instanceof OsmandApplication) {
-			return (OsmandApplication) app;
-		} else {
-			return null;
-		}
 	}
 }

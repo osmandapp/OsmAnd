@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -18,14 +17,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
 import net.osmand.util.Algorithms;
+import org.apache.commons.logging.Log;
 
 
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
+
+	private static final Log LOG = PlatformUtil.getLog(ProfileMenuAdapter.class);
 
 	private List<Object> items = new ArrayList<>();
 	private Set<ApplicationMode> selectedItems;
@@ -139,14 +142,15 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	private void updateViewHolder(ProfileViewHolder holder, ApplicationMode mode) {
-		int iconRes = mode.getParent() == null ? mode.getSmallIconDark() : mode.getIconRes(app);
+		int iconRes = mode.getIconRes(app);
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}
+		selectedIconColorRes = mode.getIconColorInfo().getColor(isNightMode(app));
 		if (selectedItems.contains(mode)) {
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, mode.getIconColorInfo().getColor(isNightMode(app))));
 		} else {
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.profile_icon_color_inactive));
 		}
 	}
 

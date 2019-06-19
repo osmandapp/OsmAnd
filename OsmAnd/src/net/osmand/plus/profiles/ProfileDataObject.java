@@ -1,5 +1,8 @@
 package net.osmand.plus.profiles;
 
+import android.support.annotation.ColorRes;
+import net.osmand.plus.ApplicationMode.ProfileIconColors;
+
 public class ProfileDataObject {
 
 	private String name;
@@ -7,13 +10,15 @@ public class ProfileDataObject {
 	private int iconRes;
 	private String stringKey;
 	private boolean isSelected;
+	private ProfileIconColors iconColor;
 
-	public ProfileDataObject(String name, String description, String stringKey, int iconRes,  boolean isSelected) {
+	public ProfileDataObject(String name, String description, String stringKey, int iconRes,  boolean isSelected, ProfileIconColors iconColor) {
 		this.name = name;
 		this.iconRes = iconRes;
 		this.description = description;
 		this.isSelected = isSelected;
 		this.stringKey = stringKey;
+		this.iconColor = iconColor;
 	}
 
 	public String getName() {
@@ -38,5 +43,9 @@ public class ProfileDataObject {
 
 	public String getStringKey() {
 		return stringKey;
+	}
+
+	@ColorRes  public int getIconColor(boolean isNightMode) {
+		return iconColor.getColor(isNightMode);
 	}
 }

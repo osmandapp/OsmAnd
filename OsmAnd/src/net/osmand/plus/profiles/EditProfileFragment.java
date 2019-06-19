@@ -11,30 +11,37 @@ import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListPopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,8 +49,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ApplicationMode.ProfileIconColors;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -88,6 +97,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	private ImageView profileIcon;
 	private LinearLayout profileIconBtn;
+	private ImageView colorSample;
+	private LinearLayout selectColorBtn;
 	private ExtendedEditText profileNameEt;
 	private OsmandTextFieldBoxes profileNameTextBox;
 	private ExtendedEditText navTypeEt;
@@ -127,11 +138,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 		@Nullable Bundle savedInstanceState) {
-
+		final EditProfileActivity activity = (EditProfileActivity) getActivity();
 		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
 
-		profileIcon = view.findViewById(R.id.select_icon_btn_img);
-		profileIconBtn = view.findViewById(R.id.profile_icon_layout);
+		profileIcon = view.findViewById(R.id.profile_icon_img);
+		profileIconBtn = view.findViewById(R.id.select_icon_button);
+		colorSample = view.findViewById(R.id.color_sample_img);
+		selectColorBtn = view.findViewById(R.id.select_icon_color_button);
 		profileNameEt = view.findViewById(R.id.profile_name_et);
 		profileNameTextBox = view.findViewById(R.id.profile_name_otfb);
 		navTypeEt = view.findViewById(R.id.navigation_type_et);
@@ -154,13 +167,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		profileNameEt.setFocusable(true);
 		profileNameEt.setSelectAllOnFocus(true);
-		profileIconBtn.setBackgroundResource(R.drawable.rounded_background_3dp);
-		GradientDrawable selectIconBtnBackground = (GradientDrawable) profileIconBtn.getBackground();
-		if (nightMode) {
-			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_dark));
-		} else {
-			selectIconBtnBackground.setColor(ContextCompat.getColor(app, R.color.text_field_box_light));
-		}
 
 		String title = "New Profile";
 
@@ -239,16 +245,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			((EditProfileActivity) getActivity()).getSupportActionBar().setElevation(5.0f);
 		}
 
-		int iconColor;
-		if (!isUserProfile) {
-			iconColor = R.color.icon_color;
-		} else {
-			iconColor = nightMode
-				? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light;
-		}
+		int iconColor = profile.iconColor.getColor(nightMode);
 
 		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId, iconColor));
+		colorSample.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_circle, iconColor));
 
 		profileNameEt.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -297,21 +297,59 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		profileIconBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final SelectProfileBottomSheetDialogFragment iconSelectDialog = new SelectProfileBottomSheetDialogFragment();
-				Bundle bundle = new Bundle();
-				bundle.putString(DIALOG_TYPE, TYPE_ICON);
-				bundle.putString(SELECTED_ICON, profile.iconStringName);
-				iconSelectDialog.setArguments(bundle);
-				if (getActivity() != null) {
-					getActivity().getSupportFragmentManager().beginTransaction()
-						.add(iconSelectDialog, "select_icon")
-						.commitAllowingStateLoss();
+		if (isUserProfile || isNew) {
+			profileIconBtn.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final SelectProfileBottomSheetDialogFragment iconSelectDialog = new SelectProfileBottomSheetDialogFragment();
+					Bundle bundle = new Bundle();
+					bundle.putString(DIALOG_TYPE, TYPE_ICON);
+					bundle.putString(SELECTED_ICON, profile.iconStringName);
+					iconSelectDialog.setArguments(bundle);
+					if (getActivity() != null) {
+						getActivity().getSupportFragmentManager().beginTransaction()
+							.add(iconSelectDialog, "select_icon")
+							.commitAllowingStateLoss();
+					}
 				}
+			});
+
+			selectColorBtn.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final ListPopupWindow popupWindow = new ListPopupWindow(activity);
+					popupWindow.setAnchorView(selectColorBtn);
+					popupWindow.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
+					popupWindow.setModal(true);
+					popupWindow.setDropDownGravity(Gravity.TOP | Gravity.RIGHT);
+					popupWindow.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
+					popupWindow.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
+					final ProfileColorAdapter profileColorAdapter = new ProfileColorAdapter(activity, mode.getIconColorInfo());
+					popupWindow.setAdapter(profileColorAdapter);
+					popupWindow.setOnItemClickListener(new OnItemClickListener() {
+						@Override
+						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+							isDataChanged = true;
+							profile.iconColor = ProfileIconColors.values()[position];
+							profileIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.iconId, profile.iconColor.getColor(nightMode)));
+							colorSample.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_circle, profile.iconColor.getColor(nightMode)));
+							popupWindow.dismiss();
+						}
+					});
+					popupWindow.show();
+				}
+			});
+		} else {
+			if (VERSION.SDK_INT > VERSION_CODES.LOLLIPOP) {
+				selectColorBtn.setBackground(null);
+				profileIconBtn.setBackground(null);
+			} else {
+				selectColorBtn.setBackgroundDrawable(null);
+				profileIconBtn.setBackgroundDrawable(null);
 			}
-		});
+
+		}
+
 
 		mapConfigBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -451,8 +489,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					profile.iconId = pos;
 					profile.iconStringName = stringRes;
 					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(pos,
-						nightMode ? R.color.active_buttons_and_links_dark
-							: R.color.active_buttons_and_links_light));
+						profile.iconColor.getColor(nightMode)));
+
 				}
 			};
 		}
@@ -601,6 +639,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			builder.setRoutingProfile(profile.routingProfileDataObject.getStringKey());
 		}
 
+		builder.setColor(profile.iconColor);
+
 		ApplicationMode mode = builder.customReg();
 		ApplicationMode.saveCustomModeToSettings(getSettings());
 
@@ -618,7 +658,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					getSettings().ROUTER_SERVICE.setModeValue(mode, RouteService.OSMAND);
 				}
 			}
-
 		}
 		isDataChanged = false;
 		isCancelAllowed = true;
@@ -773,6 +812,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		ApplicationMode parent = null;
 		int iconId = R.drawable.map_world_globe_dark;
 		String iconStringName = "map_world_globe_dark";
+		ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		RoutingProfileDataObject routingProfileDataObject = null;
 
 		ApplicationProfileObject(ApplicationMode mode, boolean isNew, boolean isUserProfile) {
@@ -785,6 +825,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				parent = mode.getParent();
 				iconId = mode.getIconRes(getMyApplication());
 				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
+				iconColor = mode.getIconColorInfo() == null ? ProfileIconColors.DEFAULT : mode.getIconColorInfo();
 				userProfileTitle = mode.getUserProfileName();
 			} else {
 				key = mode.getStringResource();
@@ -792,6 +833,87 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				iconId = mode.getSmallIconDark();
 				iconStringName = Algorithms.isEmpty(mode.getIconName())? "map_world_globe_dark" : mode.getIconName();
 			}
+		}
+	}
+
+	public static class ProfileColorAdapter extends ArrayAdapter<ColorListItem> {
+
+		private OsmandApplication app;
+		private ProfileIconColors currentColorData;
+
+
+		public ProfileColorAdapter(Context context, ProfileIconColors iconColorData) {
+			super(context, R.layout.rendering_prop_menu_item);
+			this.app = (OsmandApplication) getContext().getApplicationContext();
+			this.currentColorData = iconColorData;
+			init();
+		}
+
+		public void init() {
+			boolean nightMode = !app.getSettings().isLightContent();
+			String currentColorName = app.getString(ProfileIconColors.DEFAULT.getName());
+			ColorListItem item = new ColorListItem(currentColorName, currentColorName, ProfileIconColors.DEFAULT.getColor(nightMode));
+			add(item);
+			for (ProfileIconColors pic : ProfileIconColors.values()) {
+				if (pic != ProfileIconColors.DEFAULT) {
+					item = new ColorListItem(currentColorName, app.getString(pic.getName()), pic.getColor(nightMode));
+					add(item);
+				}
+			}
+			item.setLastItem(true);
+		}
+
+		@NonNull
+		@Override
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+			ColorListItem item = getItem(position);
+			View v = convertView;
+			if (v == null) {
+				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, null);
+			}
+			if (item != null) {
+				TextView textView = (TextView) v.findViewById(R.id.text1);
+				textView.setText(item.valueName);
+				if (item.color == -1) {
+					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+						app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
+				} else {
+					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+						app.getUIUtilities().getIcon(R.drawable.ic_action_circle, item.color), null);
+				}
+
+				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
+				v.findViewById(R.id.divider).setVisibility(item.lastItem
+					&& position < getCount() - 1 ? View.VISIBLE : View.GONE);
+			}
+			return v;
+		}
+	}
+
+	public static class ColorListItem {
+		private String currentValueName;
+		private String valueName;
+		private int color;
+		private boolean lastItem;
+
+		public ColorListItem(String currentValueName, String valueName, int color) {
+			this.currentValueName = currentValueName;
+			this.valueName = valueName;
+			this.color = color;
+		}
+
+
+
+		public int getColor() {
+			return color;
+		}
+
+		public boolean isLastItem() {
+			return lastItem;
+		}
+
+		public void setLastItem(boolean lastItem) {
+			this.lastItem = lastItem;
 		}
 	}
 }
