@@ -3030,4 +3030,36 @@
     <string name="move_maps">Переместить карты</string>
     <string name="dont_move_maps">Не перемещать</string>
     <string name="public_transport_ped_route_title">Маршрут пешком составляет примерно %1$s и он может быть быстрее, чем на общественном транспорте</string>
+    <string name="shared_string_privacy_policy">Политика конфиденциальности</string>
+    <string name="help_us_make_osmand_better">Помогите нам сделать OsmAnd лучше!</string>
+    <string name="make_osmand_better_descr">Разрешить OsmAnd собирать и обрабатывать анонимные данные об использовании приложения. Мы не собираем и не храним данные о вашем местоположении или о местоположениях, которые вы просматриваете на карте. 
+\n
+\nВы всегда можете изменить свой выбор в Настройки &gt; Конфиденциальность и безопасность.</string>
+    <string name="choose_data_to_share">Выберите тип данных, которыми вы хотите поделиться:</string>
+    <string name="downloaded_maps">Загруженные карты</string>
+    <string name="visited_screens">Посещаемые экраны</string>
+    <string name="colleted_data">Собранные данные</string>
+    <string name="collected_data_descr">Список данных, которыми вы хотите поделиться с OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Мы собираем эти данные, чтобы понять, какие регионы и страны наиболее популярны.</string>
+    <string name="visited_screens_collect_descr">Мы собираем эти данные, чтобы понять какие функции OsmAnd наиболее популярны.</string>
+    <string name="privacy_and_security_change_descr">Нажимая кнопку \"Разрешить\", вы соглашаетесь с нашими %1$s</string>
+    <string name="settings_privacy_and_security">Конфиденциальность и безопасность</string>
+    <string name="shared_string_no_thank_you">Нет, спасибо</string>
+    <string name="shared_string_allow">Разрешить</string>
+    <string name="profile_name_hint">Имя профиля</string>
+    <string name="nav_type_hint">Тип навигации</string>
+    <string name="app_mode_taxi">Такси</string>
+    <string name="app_mode_subway">Метро</string>
+    <string name="app_mode_horse">Лошадь</string>
+    <string name="app_mode_helicopter">Вертолет</string>
+    <string name="osmand_routing_promo">Вы можете добавить собственную модифицированную версию routing.xml в ..osmand/routing</string>
+    <string name="select_icon_profile_dialog_title">Выберите значок</string>
+    <string name="routing_profile_ski">Лыжи</string>
+    <string name="profile_type_descr_string">Тип: %s</string>
+    <string name="profile_type_base_string">Базовый профиль</string>
+    <string name="profile_alert_need_routing_type_title">Выберите тип навигации</string>
+    <string name="profile_alert_need_routing_type_msg">Для создания нового профиля приложения необходимо выбрать тип навигации</string>
+    <string name="profile_alert_need_profile_name_title">Введите имя профиля</string>
+    <string name="profile_alert_need_profile_name_msg">Имя профиля не должно быть пустым!</string>
+    <string name="profile_alert_duplicate_name_msg">Уже есть профиль с таким именем</string>
 </resources>
