@@ -50,6 +50,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -98,6 +99,7 @@ public class OsmandApplication extends MultiDexApplication {
 	Handler uiHandler;
 
 	NavigationService navigationService;
+	DownloadService downloadService;
 
 	OsmandAidlApi aidlApi;
 
@@ -506,6 +508,14 @@ public class OsmandApplication extends MultiDexApplication {
 		this.navigationService = navigationService;
 	}
 
+	public DownloadService getDownloadService() {
+		return downloadService;
+	}
+
+	public void setDownloadService(DownloadService downloadService) {
+		this.downloadService = downloadService;
+	}
+
 	public OsmandAidlApi getAidlApi() {
 		return aidlApi;
 	}
@@ -889,6 +899,15 @@ public class OsmandApplication extends MultiDexApplication {
 		//getNotificationHelper().showNotifications();
 	}
 
+	public void startDownloadService() {
+		final Intent serviceIntent = new Intent(this, DownloadService.class);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			startForegroundService(serviceIntent);
+		} else {
+			startService(serviceIntent);
+		}
+	}
 
 	public String getLangTranslation(String l) {
 		try {

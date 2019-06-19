@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="process_downloading_service">OsmAnd downloading service</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icon</string>
     <string name="app_profile_custom_nav_subtitle"></string>
