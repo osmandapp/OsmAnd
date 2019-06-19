@@ -553,7 +553,7 @@ public class ApplicationMode {
 				mode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
 				mode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
 				break;
-			case NAUTICAL:
+			case DEFAULT:
 				mode.bearingIconDay = R.drawable.map_pedestrian_bearing;
 				mode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
 				mode.headingIconDay = R.drawable.map_default_location_view_angle;
@@ -563,7 +563,7 @@ public class ApplicationMode {
 				mode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 				mode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 				break;
-			case DEFAULT:
+			case NAUTICAL:
 				mode.bearingIconDay = R.drawable.map_nautical_bearing;
 				mode.bearingIconNight = R.drawable.map_nautical_bearing_night;
 				mode.headingIconDay = R.drawable.map_nautical_location_view_angle;
