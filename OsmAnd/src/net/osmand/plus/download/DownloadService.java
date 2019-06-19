@@ -39,7 +39,7 @@ public class DownloadService extends Service {
 			startForeground(OsmandNotification.DOWNLOAD_NOTIFICATION_SERVICE_ID, notification);
 			app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
 		}
-		return START_REDELIVER_INTENT;
+		return START_NOT_STICKY;
 	}
 
 	@Override
