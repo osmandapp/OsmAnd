@@ -246,13 +246,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 
 		int iconColor = profile.iconColor.getColor(nightMode);
-//		if (isNew) {
-//			iconColor = profile.iconColor.getColor(nightMode);
-//		} else if (isUserProfile) {
-//			iconColor = profile.iconColor.getColor(nightMode);
-//		} else {
-//			iconColor = R.color.icon_color;
-//		}
 
 		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId, iconColor));
 		colorSample.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_circle, iconColor));
