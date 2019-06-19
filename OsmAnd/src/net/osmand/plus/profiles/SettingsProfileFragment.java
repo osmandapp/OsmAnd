@@ -152,7 +152,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			if (mode != ApplicationMode.DEFAULT) {
 				profiles.add(new ProfileDataObject( mode.toHumanString(ctx),
 					ctx.getString(BaseProfilesDescr.valueOf(mode.getStringKey().toUpperCase()).getDescrRes()),
-					mode.getStringKey(), mode.getSmallIconDark(), false));
+					mode.getStringKey(), mode.getSmallIconDark(), false, mode.getIconColorInfo()));
 			}
 		}
 		return profiles;
@@ -177,7 +177,4 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			return descrRes;
 		}
 	}
-
-
-
 }

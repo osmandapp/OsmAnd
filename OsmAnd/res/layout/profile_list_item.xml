@@ -40,7 +40,7 @@
 					android:layout_height="wrap_content"
 					android:ellipsize="end"
 					android:maxLines="2"
-					android:textColor="@color/main_font_dark"
+					android:textColor="?attr/main_font_color_basic"
 					android:textSize="@dimen/default_list_text_size"
 					tools:text="Bicycle" />
 
@@ -51,6 +51,7 @@
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:textSize="@dimen/default_desc_text_size"
+					android:textColor="@color/description_font_and_bottom_sheet_icons"
 					tools:text="Type: Bicycle" />
 
 			</LinearLayout>
@@ -70,7 +71,7 @@
 					android:paddingEnd="10dp"
 					android:paddingRight="10dp"
 					android:src="@drawable/ic_action_additional_option"
-					android:tint="?attr/primary_icon_color" />
+					android:tint="@color/description_font_and_bottom_sheet_icons" />
 
 				<android.support.v7.widget.SwitchCompat
 					android:id="@+id/compound_button"

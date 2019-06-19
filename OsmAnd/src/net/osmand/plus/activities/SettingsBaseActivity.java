@@ -367,7 +367,8 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 					getAppModeDescription(am),
 				    am.getStringKey(),
 				    am.getIconRes(getMyApplication()),
-				    isSelected
+				    isSelected,
+				    am.getIconColorInfo()
 			    ));
 		    }
 	    }
@@ -403,22 +404,19 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
     }
 
     void updateModeButton(ApplicationMode mode) {
+		boolean nightMode = !getMyApplication().getSettings().isLightContent();
 	    String title = Algorithms.isEmpty(mode.getUserProfileName())
 		    ? mode.toHumanString(SettingsBaseActivity.this)
 		    : mode.getUserProfileName();
 
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(getAppModeDescription(mode));
-	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(this),
-		    getMyApplication().getSettings().isLightContent()
-			    ? R.color.active_buttons_and_links_light
-			    : R.color.active_buttons_and_links_dark));
-	    getDropDownArrow().setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down,
-		    getMyApplication().getSettings().isLightContent()
-			    ? R.color.active_buttons_and_links_light
-			    : R.color.active_buttons_and_links_dark));
 	    settings.APPLICATION_MODE.set(mode);
 	    previousAppMode = mode;
+	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(this),
+		    mode.getIconColorInfo().getColor(nightMode)));
+	    getDropDownArrow().setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down,
+		    R.color.icon_color));
 	    isModeSelected = true;
 	    updateAllSettings();
     }

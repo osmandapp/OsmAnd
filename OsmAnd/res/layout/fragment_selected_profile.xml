@@ -158,11 +158,7 @@
 
 					</LinearLayout>
 
-					<FrameLayout
-						android:id="@+id/click_block_layout"
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:clickable="false"/>
+
 
 				</FrameLayout>
 
@@ -263,9 +259,8 @@
 
 						<View
 							android:layout_width="1dp"
-							android:layout_height="match_parent"
-							android:paddingBottom="8dp"
-							android:paddingTop="8dp"
+							android:layout_height="36dp"
+							android:layout_gravity="center_vertical"
 							android:background="@color/divider_light"/>
 
 						<LinearLayout
@@ -316,6 +311,12 @@
 					android:layout_marginLeft="@dimen/list_content_padding"
 					android:layout_marginRight="@dimen/list_content_padding"
 					android:text="@string/osmand_routing_promo"/>
+
+				<FrameLayout
+					android:id="@+id/click_block_layout"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:clickable="false"/>
 
 			</LinearLayout>
 
