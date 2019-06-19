@@ -36,7 +36,7 @@ public class DownloadService extends Service {
 
 		Notification notification = app.getNotificationHelper().buildDownloadNotification();
 		if (notification != null) {
-			startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			startForeground(OsmandNotification.DOWNLOAD_NOTIFICATION_SERVICE_ID, notification);
 			app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
 		}
 		return START_REDELIVER_INTENT;
