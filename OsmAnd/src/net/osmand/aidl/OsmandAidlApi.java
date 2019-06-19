@@ -81,6 +81,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -123,6 +124,7 @@ import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.aidl.OsmandAidlService.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
 import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlService.KEY_ON_VOICE_MESSAGE;
 
 public class OsmandAidlApi {
 
@@ -1897,6 +1899,33 @@ public class OsmandAidlApi {
 		navUpdateCallbacks.remove(id);
 	}
 
+	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks= new ConcurrentHashMap<>();
+
+	public void registerForVoiceRouterMessages(long id){
+		VoiceRouter.VoiceMessageListener listener = new VoiceRouter.VoiceMessageListener() {
+			@Override
+			public void onVoiceMessage() {
+				if (aidlCallbackListener != null) {
+					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
+						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
+							try {
+								cb.getCallback().onVoiceRouterNotify();
+							} catch (Exception e) {
+								LOG.debug(e.getMessage(), e);
+							}
+						}
+					}
+				}
+			}
+		};
+		voiceRouterMessageCallbacks.put(id, listener);
+		app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(listener);
+	}
+
+	public void unregisterFromVoiceRouterMessages(long id){
+		app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceRouterMessageCallbacks.get(id));
+		voiceRouterMessageCallbacks.remove(id);
+	}
 
 	public Map<String, ContextMenuButtonsParams> getContextMenuButtonsParams() {
 		return contextMenuButtonsParams;
@@ -2214,21 +2243,23 @@ public class OsmandAidlApi {
 			}
 			return 0;
 		}
+
 	}
 
 	public interface SearchCompleteCallback {
 		void onSearchComplete(List<SearchResult> resultSet);
-	}
 
+	}
 	public interface GpxBitmapCreatedCallback {
 		void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap);
-	}
 
+	}
 	public interface OsmandAppInitCallback {
 		void onAppInitialized();
-	}
 
+	}
 	public interface AMapPointUpdateListener {
 		void onAMapPointUpdated(AMapPoint point, String layerId);
+
 	}
 }

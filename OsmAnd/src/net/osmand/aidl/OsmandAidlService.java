@@ -100,6 +100,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	public static final int KEY_ON_UPDATE = 1;
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
+	public static final int KEY_ON_VOICE_MESSAGE = 5;
 
 	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
@@ -1142,16 +1143,16 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 		@Override
 		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) throws RemoteException {
-			/*try {
-				OsmandAidlApi api = getApi("registerForNavUpdates");
+			try {
+				OsmandAidlApi api = getApi("registerForVoiceRouterMessages");
 				if (api != null ) {
 					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
-						api.unregisterFromUpdates(params.getCallbackId());
+						api.unregisterFromVoiceRouterMessages(params.getCallbackId());
 						removeAidlCallback(params.getCallbackId());
 						return -1;
 					} else {
-						long id = addAidlCallback(callback, KEY_ON_NAV_DATA_UPDATE);
-						api.registerForNavigationUpdates(id);
+						long id = addAidlCallback(callback, KEY_ON_VOICE_MESSAGE);
+						api.registerForVoiceRouterMessages(id);
 						return id;
 					}
 				} else {
@@ -1160,20 +1161,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			} catch (Exception e) {
 				handleException(e);
 				return UNKNOWN_API_ERROR;
-			}*/
-
-			VoiceRouter voiceRouter = getApp().getRoutingHelper().getVoiceRouter();
-			voiceRouter.addVoiceMessageListener(new VoiceRouter.VoiceMessageListener() {
-				@Override
-				public void onVoiceMessage() {
-					try {
-						callback.onVoiceRouterNotify();
-					} catch (RemoteException e) {
-						handleException(e);
-					}
-				}
-			});
-			return 0;
+			}
 		}
 	};
 

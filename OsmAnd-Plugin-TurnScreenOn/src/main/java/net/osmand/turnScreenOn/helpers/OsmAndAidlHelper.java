@@ -1,0 +1,186 @@
+package net.osmand.turnScreenOn.helpers;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.util.Log;
+
+import net.osmand.aidl.IOsmAndAidlCallback;
+import net.osmand.aidl.IOsmAndAidlInterface;
+import net.osmand.aidl.gpx.AGpxBitmap;
+import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
+import net.osmand.aidl.search.SearchResult;
+import net.osmand.turnScreenOn.PluginSettings;
+import net.osmand.turnScreenOn.app.TurnScreenApp;
+import net.osmand.turnScreenOn.listener.MessageSender;
+import net.osmand.turnScreenOn.listener.OnMessageListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class OsmAndAidlHelper implements MessageSender {
+    private final static String AIDL_SERVICE_PATH = "net.osmand.aidl.OsmandAidlService";
+
+    private List<OnMessageListener> messageListeners;
+
+    private TurnScreenApp app;
+    private PluginSettings settings;
+    private String connectedOsmandVersionPath;
+
+    private long osmandUpdatesCallbackId = -1;
+
+    //todo change
+    private boolean attemptedRegister = false;
+
+    private IOsmAndAidlInterface mIOsmAndAidlInterface;
+    private IOsmAndAidlCallback mIOsmAndAidlCallbackInterface = new IOsmAndAidlCallback.Stub() {
+
+        @Override
+        public void onSearchComplete(List<SearchResult> resultSet) throws RemoteException {
+
+        }
+
+        @Override
+        public void onUpdate() throws RemoteException {
+
+        }
+
+        @Override
+        public void onAppInitialized() throws RemoteException {
+
+        }
+
+        @Override
+        public void onGpxBitmapCreated(AGpxBitmap bitmap) throws RemoteException {
+
+        }
+
+        @Override
+        public void updateNavigationInfo(ADirectionInfo directionInfo) throws RemoteException {
+
+        }
+
+        @Override
+        public void onContextMenuButtonClicked(int buttonId, String pointId, String layerId) throws RemoteException {
+
+        }
+
+        @Override
+        public void onVoiceRouterNotify() throws RemoteException {
+            Log.d("ttpl3", "take message from vr");
+            notifyListeners();
+        }
+    };
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mIOsmAndAidlInterface = IOsmAndAidlInterface.Stub.asInterface(service);
+            if (mIOsmAndAidlInterface != null && attemptedRegister) {
+                attemptedRegister = false;
+                registerForVoiceRouterMessages();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mIOsmAndAidlInterface = null;
+        }
+    };
+
+    public OsmAndAidlHelper(TurnScreenApp app) {
+        this.app = app;
+        settings = app.getSettings();
+        messageListeners = new ArrayList<>();
+    }
+
+    public void registerForVoiceRouterMessages() {
+        try {
+            if (mIOsmAndAidlInterface != null) {
+                ANavigationVoiceRouterMessageParams params = new ANavigationVoiceRouterMessageParams();
+                params.setSubscribeToUpdates(true);
+                params.setCallbackId(osmandUpdatesCallbackId);
+                osmandUpdatesCallbackId = mIOsmAndAidlInterface.registerForVoiceRouterMessages(params, mIOsmAndAidlCallbackInterface);
+            } else {
+                attemptedRegister = true;
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unregisterFromVoiceRouterMessages() {
+        try {
+            if (mIOsmAndAidlInterface != null) {
+                ANavigationVoiceRouterMessageParams params = new ANavigationVoiceRouterMessageParams();
+                params.setSubscribeToUpdates(false);
+                params.setCallbackId(osmandUpdatesCallbackId);
+                mIOsmAndAidlInterface.registerForVoiceRouterMessages(params, mIOsmAndAidlCallbackInterface);
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reconnectOsmand() {
+        String newOsmandVersionPath = settings.getOsmandVersion().getPath();
+        if (connectedOsmandVersionPath == null
+                || !connectedOsmandVersionPath.equals(newOsmandVersionPath)
+                || mIOsmAndAidlInterface == null) {
+            cleanupResources();
+            connectOsmand();
+        }
+        connectedOsmandVersionPath = newOsmandVersionPath;
+    }
+
+    public void connectOsmand() {
+        bindService(settings.getOsmandVersion().getPath());
+    }
+
+    private void bindService(String packageName) {
+        if (mIOsmAndAidlInterface == null) {
+            Intent intent = new Intent("net.osmand.aidl.OsmandAidlService");
+            intent.setPackage(packageName);
+            app.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        }
+    }
+
+    private void cleanupResources() {
+        try {
+            if (mIOsmAndAidlInterface != null) {
+                mIOsmAndAidlInterface = null;
+//                Log.d("ttpl", "disconnecting from Osmand");
+                app.unbindService(mConnection);
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addListener(OnMessageListener listener) {
+        if (listener != null && !messageListeners.contains(listener)) {
+            messageListeners.add(listener);
+        }
+    }
+
+    @Override
+    public void removeListener(OnMessageListener listener) {
+        if (listener != null) {
+            messageListeners.remove(listener);
+        }
+    }
+
+    @Override
+    public void notifyListeners() {
+        if (messageListeners != null) {
+            for (OnMessageListener listener : messageListeners) {
+                listener.onMessageReceive();
+            }
+        }
+    }
+}

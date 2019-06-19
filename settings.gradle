@@ -1,4 +1,4 @@
-include ':OsmAnd-java', ':OsmAndCore-sample', ':OsmAnd-telegram', ':OsmAnd-turnScreenOn'
+include ':OsmAnd-java', ':OsmAndCore-sample', ':OsmAnd-telegram', ':OsmAnd-Plugin-TurnScreenOn'
 include ':OsmAnd'
 include ':plugins:Osmand-Nautical'
 include ':plugins:Osmand-ParkingPlugin'
