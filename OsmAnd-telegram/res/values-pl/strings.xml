@@ -46,7 +46,7 @@
     <string name="connected_account">Połączone konta</string>
     <string name="shared_string_account">Konto</string>
     <string name="in_time">w %1$s</string>
-    <string name="osmand_connect_desc">Wybierz wersję OsmAnd, którą Tracker OsmAnd będzie używał do wyświetlaniu pozycji.</string>
+    <string name="osmand_connect_desc">Wybierz wersję OsmAnd, której używa OsmAnd Tracker do wyświetlania pozycji.</string>
     <string name="osmand_connect">Połącz OsmAnd</string>
     <string name="location_history_desc">Ukryj kontakty, które nie zostały przeniesione w określonym czasie.</string>
     <string name="location_history">Historia lokalizacji</string>
@@ -236,4 +236,12 @@
     <string name="proxy">Serwer proxy</string>
     <string name="privacy">Prywatność</string>
     <string name="bearing">Kierunek</string>
+    <string name="shared_string_select">Wybierz</string>
+    <string name="min_logging_distance">Minimalna odległość rejestrowania</string>
+    <string name="min_logging_distance_descr">Filtr: minimalna odległość do zarejestrowania nowego punktu</string>
+    <string name="min_logging_accuracy">Minimalna dokładność rejestrowania</string>
+    <string name="min_logging_accuracy_descr">Filtr: brak rejestrowania, chyba że zostanie osiągnięta dokładność</string>
+    <string name="min_logging_speed">Minimalna szybkość rejestrowania</string>
+    <string name="min_logging_speed_descr">Filtr: brak rejestrowania poniżej wybranej prędkości</string>
+    <string name="gpx_settings">Ustawienia GPX</string>
 </resources>
