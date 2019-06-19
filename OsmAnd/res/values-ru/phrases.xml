@@ -3470,4 +3470,6 @@
 
 	<string name="poi_defibrillator_location">Местонахождение</string>
 
+	<string name="poi_charcoal_pile">Куча для выжига угля</string>
+
 </resources>
