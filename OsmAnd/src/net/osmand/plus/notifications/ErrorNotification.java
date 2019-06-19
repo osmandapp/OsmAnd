@@ -1,11 +1,13 @@
 package net.osmand.plus.notifications;
 
+import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 
@@ -39,6 +41,11 @@ public class ErrorNotification extends OsmandNotification {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public Intent getContentIntent() {
+		return new Intent(app, MapActivity.class);
 	}
 
 	@Override
