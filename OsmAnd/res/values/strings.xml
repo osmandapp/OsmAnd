@@ -23,7 +23,7 @@
     <string name="choose_data_to_share">Choose what type of data you want to share:</string>
     <string name="downloaded_maps">Downloaded Maps</string>
     <string name="visited_screens">Visited screens</string>
-    <string name="colleted_data">Colleted Data</string>
+    <string name="collected_data">Collected Data</string>
     <string name="collected_data_descr">List of data you want to share with OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">We collect this data to understand the maps of which regions and countries are the most popular.</string>
     <string name="visited_screens_collect_descr">We collect this data to understand the most popular features of OsmAnd.</string>
