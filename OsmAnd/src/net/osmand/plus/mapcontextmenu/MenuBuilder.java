@@ -677,6 +677,23 @@ public class MenuBuilder {
 				Toast.LENGTH_SHORT).show();
 	}
 
+	protected CollapsableView getLocationCollapsableView(Map<String, String> locationData) {
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		for (final Map.Entry<String, String> line : locationData.entrySet()) {
+			final TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
+			button.setText(line.getValue());
+			button.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					copyToClipboard(line.getValue(), mapActivity);
+				}
+			});
+			llv.addView(button);
+		}
+		return new CollapsableView(llv, this, true);
+
+	}
+
 	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
