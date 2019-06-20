@@ -3608,4 +3608,6 @@
     <string name="poi_changing_table_count">Puslebord antal</string>
     <string name="poi_changing_table_fee_yes">Puslebordsgebyr: ja</string>
     <string name="poi_changing_table_fee_no">Puslebordsgebyr: nej</string>
+    <string name="poi_charcoal_pile">Trækulsbunke</string>
+    <string name="poi_historic_tank">Historisk kampvogn</string>
 </resources>
