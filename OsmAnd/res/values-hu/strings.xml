@@ -3007,4 +3007,7 @@ Kérlek adj meg egy teljes kódot</string>
 \n • A távolságmérésnél a tájolás megjelenítése
 \n
 \n</string>
+    <string name="searching_gps">Műholdak keresése</string>
+    <string name="coordinates_widget">Koordináta-widget</string>
+    <string name="keep_passed_markers_descr">Az Kedvencek csoportjaként vagy GPX útpontként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
 </resources>

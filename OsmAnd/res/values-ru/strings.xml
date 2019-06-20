@@ -607,7 +607,7 @@
     <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">OsmAnd работает в фоновом режиме с выключенным экраном.</string>
-    <string name="fast_route_mode">Скоростной маршрут</string>
+    <string name="fast_route_mode">Самый быстрый маршрут</string>
     <string name="fast_route_mode_descr">Расчет скоростного маршрута вместо кратчайшего.</string>
     <string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
     <string name="shared_string_download_map">Загрузить карту</string>
@@ -1041,7 +1041,7 @@
     <string name="use_compass_navigation">Использовать компас</string>
     <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
     <string name="continue_follow_previous_route_auto">Предыдущий маршрут не был закончен. Продолжить следование по нему? (%1$s секунд)</string>
-    <string name="show_cameras">Показать камеры контроля скорости</string>
+    <string name="show_cameras">Камеры контроля скорости</string>
     <string name="show_traffic_warnings">Показать ограничения скорости</string>
     <string name="avoid_toll_roads">Платные дороги</string>
     <string name="screen_is_locked">Для разблокировки экрана коснитесь значка блокировки</string>
@@ -1057,7 +1057,7 @@
     <string name="map_widget_distance">Пункт назначения</string>
     <string name="map_widget_altitude">Высота</string>
     <string name="map_widget_time">Время в пути</string>
-    <string name="map_widget_next_turn">След. поворот</string>
+    <string name="map_widget_next_turn">Следующий поворот</string>
     <string name="map_widget_next_turn_small">След. поворот (мал.)</string>
     <string name="map_widget_next_next_turn">Второй след. поворот</string>
     <string name="map_widget_mini_route">Малая карта маршрута</string>
@@ -2056,7 +2056,7 @@
     <string name="clear_updates_proposition_message">Загруженные обновления можно удалить и вернуться к первоначальной редакции карты</string>
     <string name="add_time_span">Добавить временной интервал</string>
     <string name="road_blocked">Дорога перекрыта</string>
-    <string name="nm">nmi</string>
+    <string name="nm">мор. мл</string>
     <string name="nm_h">уз</string>
     <string name="downloads_left_template">Осталось %1$s загрузок</string>
     <string name="donations">Пожертвования</string>
@@ -2664,12 +2664,12 @@
     <string name="all_data">Все данные</string>
     <string name="osm_notes">Заметки OSM</string>
     <string name="tunnel_warning">"Впереди тоннель "</string>
-    <string name="show_tunnels">Тоннели</string>
+    <string name="show_tunnels">Туннели</string>
     <string name="make_as_start_point">Сделать пунктом отправления</string>
     <string name="enter_the_file_name">Введите имя файла.</string>
     <string name="map_import_error">Ошибка импорта карты</string>
     <string name="map_imported_successfully">Карта импортирована</string>
-    <string name="transport_nearby_routes_within">Маршруты рядом с</string>
+    <string name="transport_nearby_routes_within">Ближайшие маршруты в пределах</string>
     <string name="transport_nearby_routes">В пределах</string>
     <string name="enter_lon">Введите долготу</string>
     <string name="enter_lat">Введите широту</string>

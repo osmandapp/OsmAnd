@@ -3004,7 +3004,7 @@
     <string name="poi_payment_ep_avant_yes">AvantCard</string>
     <string name="poi_payment_ep_avant_no">AvantCardot nem fogad el</string>
     <string name="poi_payment_ep_mep_yes">MEP</string>
-    <string name="poi_payment_ep_mep_no">MEP-et nem fogad el</string>
+    <string name="poi_payment_ep_mep_no">Met nem fogad el</string>
     <string name="poi_payment_ep_minipay_yes">Minipay</string>
     <string name="poi_payment_ep_minipay_no">Minipayt nem fogad el</string>
     <string name="poi_payment_ep_minicash_yes">MiniCash</string>

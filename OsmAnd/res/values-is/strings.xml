@@ -2135,7 +2135,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="open_mapillary">Opna Mapillary</string>
     <string name="mapillary_widget">Mapillary græja</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_image">Mapillary mynd</string>
+    <string name="mapillary_image">Mapillary-mynd</string>
     <string name="map_widget_ruler_control">Mælistika út frá miðju hrings</string>
     <string name="shared_string_permissions">Heimildir</string>
     <string name="distance_moving">Leiðrétt fjarlægð</string>
@@ -3053,4 +3053,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Prófaðu að breyta stillingunum.</string>
     <string name="public_transport_calc_pedestrian">Reikna leið fyrir fótgangandi</string>
     <string name="public_transport_type">Tegund samgangna</string>
+    <string name="searching_gps">Leita að GPS</string>
+    <string name="coordinates_widget">Viðmótshluti fyrir hnit</string>
 </resources>

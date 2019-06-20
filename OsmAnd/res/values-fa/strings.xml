@@ -3045,7 +3045,7 @@
     <string name="routing_attr_avoid_sett_description">از کفپوش‌های cobblestone (کفپوش سنگی) و sett (سنگفرش کوبیک) پرهیز شود</string>
     <string name="shared_string_degrees">درجه</string>
     <string name="shared_string_milliradians">میلی‌رادیان</string>
-    <string name="angular_measeurement">واحد‌های اندازه‌گیری زاویه</string>
+    <string name="angular_measeurement">واحد‌ زاویه</string>
     <string name="angular_measeurement_descr">واحد اندازه‌گیری سمت (azimuth) را مشخص کنید.</string>
     <string name="routing_attr_avoid_tram_name">پرهیز از تراموا</string>
     <string name="routing_attr_avoid_tram_description">از تراموا پرهیز شود</string>
@@ -3080,4 +3080,6 @@
     <string name="public_transport_calc_pedestrian">محاسبهٔ مسیر پیاده</string>
     <string name="public_transport_type">نوع حمل‌ونقل</string>
     <string name="send_log">ارسال گزارش</string>
+    <string name="searching_gps">جست‌وجوی GPS</string>
+    <string name="coordinates_widget">ابزارک مختصات</string>
 </resources>

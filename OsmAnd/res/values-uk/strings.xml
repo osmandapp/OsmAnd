@@ -556,10 +556,10 @@
     <string name="mark_final_location_first">Вкажіть пункт призначення</string>
     <string name="get_directions">Маршрут</string>
     <string name="opening_hours">Робочі години</string>
-    <string name="opening_changeset">Відкриття пакету правок…</string>
-    <string name="closing_changeset">Закриття пакету правок…</string>
-    <string name="commiting_node">Збереження об’єкта…</string>
-    <string name="loading_poi_obj">Звантаження POI…</string>
+    <string name="opening_changeset">Відкривається набір змін…</string>
+    <string name="closing_changeset">Закривається набір змін…</string>
+    <string name="commiting_node">Надсилання вузла…</string>
+    <string name="loading_poi_obj">Завантаження POI…</string>
     <string name="auth_failed">Помилка авторизації</string>
     <string name="failed_op">помилка</string>
     <string name="converting_names">Конвертація місцевих/англійських назв…</string>
@@ -3032,4 +3032,6 @@
     <string name="public_transport_try_change_settings">Спробуйте змінити налаштування.</string>
     <string name="public_transport_calc_pedestrian">Розрахувати пішохідний маршрут</string>
     <string name="public_transport_type">Тип транспорту</string>
+    <string name="searching_gps">Пошук GPS</string>
+    <string name="coordinates_widget">Віджет координат</string>
 </resources>

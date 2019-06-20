@@ -763,7 +763,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
     <string name="layer_route">Pot</string>
     <string name="shared_string_favorites">Pokaži priljubljene točke</string>
-    <string name="layer_osm_bugs">Hrošči OSM (zahteva povezavo)</string>
+    <string name="layer_osm_bugs">Opombe OSM (zahteva povezavo)</string>
     <string name="layer_poi">Izbor točk POI …</string>
     <string name="layer_map">Vir zemljevida …</string>
     <string name="context_menu_item_search_poi">Iskanje točk POI</string>
@@ -3026,4 +3026,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Poskusite spreminjati nastavitve.</string>
     <string name="public_transport_calc_pedestrian">Izračunaj pot za pešačenje</string>
     <string name="public_transport_type">Vrsta transporta</string>
+    <string name="files_present">%1$d datotek (%2$s) je na predhodnem mestu »%3$s«.</string>
+    <string name="public_transport_ped_route_title">Pešačenje do cilja traja %1$s in je lahko hitrejše od javnega prevoza.</string>
+    <string name="public_transport_no_route_title">Po omejitvah nastavitev ni mogoče najti ustrezne poti.</string>
+    <string name="searching_gps">Poteka iskanje signalov GPS</string>
+    <string name="coordinates_widget">Gradnik za določevanje koordinat</string>
 </resources>

@@ -475,9 +475,9 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Бојење према ОСМЦ планинарском симболу</string>
     <string name="shared_string_logoff">Одјави се</string>
     <string name="rendering_attr_hideHouseNumbers_name">Кућне бројеве</string>
-    <string name="application_dir_change_warning3">Копирати OsmAnd фајлове података на ново одредиште?</string>
+    <string name="application_dir_change_warning3">Преместити OsmAnd фајлове података на ново одредиште\?</string>
     <string name="specified_directiory_not_writeable">Немогуће је образовати карте у одређеној фасцикли</string>
-    <string name="copying_osmand_file_failed">Копирање фајлова није успело</string>
+    <string name="copying_osmand_file_failed">Премештање фајлова није успело</string>
     <string name="storage_directory_external">Спољне складиште</string>
     <string name="storage_directory_multiuser">Складиште за више корисника</string>
     <string name="storage_directory_internal_app">Унутрашња меморија апликације</string>
@@ -2910,7 +2910,7 @@
     <string name="points_of_interests">Тачке од интереса (POI)</string>
     <string name="waiting_for_route_calculation">Израчунавање пута…</string>
     <string name="app_mode_public_transport">Јавни саобраћај</string>
-    <string name="avoid_roads_descr">Одаберите пут на мапи или са листе испод који бисте избегли у навођењу:</string>
+    <string name="avoid_roads_descr">Одаберите пут који бисте избегли у навођењу, или на мапи или са листе испод:</string>
     <string name="show_along_the_route">Прикажи уз пут</string>
     <string name="simulate_navigation">Симулирај навођење</string>
     <string name="choose_track_file_to_follow">Одаберите фајл путање за праћење</string>
@@ -2935,7 +2935,7 @@
     <string name="routing_attr_avoid_ferry_description">Избегавање трајеката</string>
     <string name="shared_string_degrees">Степени</string>
     <string name="shared_string_milliradians">Милирадијани</string>
-    <string name="angular_measeurement">Јединице за мерење углова</string>
+    <string name="angular_measeurement">Јединице за углове</string>
     <string name="angular_measeurement_descr">Измени у чему се мери азимут.</string>
     <string name="avoid_pt_types_descr">Одаберите типове јавног превоза које треба избегавати:</string>
     <string name="quick_action_day_night_mode">%s режим</string>
@@ -2988,4 +2988,51 @@
     <string name="exit_at">Излаз на</string>
     <string name="shared_string_swap">Замени</string>
     <string name="show_more">Прикажи још</string>
+    <string name="tracks_on_map">Приказане путање</string>
+    <string name="sit_on_the_stop">Укрцавање на стајању</string>
+    <string name="quick_action_show_hide_gpx_tracks">Прикажи/сакриј GPX путање</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Кликтање на ово дугме приказује или сакрива одабране GPX путање са карте</string>
+    <string name="quick_action_gpx_tracks_hide">Сакриј GPX путање</string>
+    <string name="quick_action_gpx_tracks_show">Прикажи GPX путање</string>
+    <string name="use_osm_live_public_transport_description">Омогући јавни превоз на OsmAnd Live изменама.</string>
+    <string name="use_osm_live_public_transport">OsmAnd Live јавни превоз</string>
+    <string name="rendering_attr_surface_sett_name">Калдрма</string>
+    <string name="rendering_attr_surface_paving_stones_name">Поплочано камење</string>
+    <string name="rendering_attr_highway_class_motorway_name">Ауто-пут</string>
+    <string name="rendering_attr_highway_class_state_road_name">Државни пут</string>
+    <string name="rendering_attr_highway_class_road_name">Пут</string>
+    <string name="rendering_attr_highway_class_street_name">Улица</string>
+    <string name="rendering_attr_highway_class_service_name">Приступни пут</string>
+    <string name="rendering_attr_highway_class_footway_name">Пешачка стаза</string>
+    <string name="rendering_attr_highway_class_track_name">Стаза</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Коњичка стаза</string>
+    <string name="rendering_attr_highway_class_steps_name">Степенице</string>
+    <string name="rendering_attr_highway_class_path_name">Стаза</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Бициклистичка стаза</string>
+    <string name="routing_attr_avoid_sett_name">Избегавај калдрме</string>
+    <string name="routing_attr_avoid_sett_description">Избегавај калдрме</string>
+    <string name="release_3_3_7">• Приказује се време између преседања код јавних превоза
+\n
+\n • Поправљен кориснички интерфејс за детаље пута
+\n
+\n • Исправљена тамна тема код менија правца и код детаља пута
+\n
+\n • Приказује се азимут код мерења удаљености
+\n
+\n</string>
+    <string name="send_log">Пошаљи дневник</string>
+    <string name="files_moved">Померено %1$d фајлова (%2$s).</string>
+    <string name="files_copied">Копирано %1$d фајлова (%2$s).</string>
+    <string name="files_failed">Грешка при копирању %1$d фајлова (%2$s).</string>
+    <string name="files_present">%1$d фајлова (%2$s) постоје на претходној локацији \'%3$s\'.</string>
+    <string name="move_maps">Премести карте</string>
+    <string name="dont_move_maps">Немој премештати</string>
+    <string name="public_transport_ped_route_title">Пут пешице је приближно %1$s и можда може бити бржи него са јавним превозом</string>
+    <string name="public_transport_no_route_title">Нажалост, OsmAnd не може да нађе пут који одговара Вашим поставкама.</string>
+    <string name="public_transport_try_ped">Покушајте навођење за пешаке.</string>
+    <string name="public_transport_try_change_settings">Покушајте са променом поставки.</string>
+    <string name="public_transport_calc_pedestrian">Израчунај пут пешака</string>
+    <string name="public_transport_type">Тип превоза</string>
+    <string name="searching_gps">Тражим GPS</string>
+    <string name="coordinates_widget">Справица за координате</string>
 </resources>

@@ -3029,4 +3029,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="public_transport_try_change_settings">Proa a cambiare sas impostatziones.</string>
     <string name="public_transport_calc_pedestrian">Càlcula un\'àndala a pede</string>
     <string name="public_transport_type">Casta de trasportu</string>
+    <string name="searching_gps">Chirchende su GPS</string>
+    <string name="coordinates_widget">Widget de sas coordinatas</string>
 </resources>

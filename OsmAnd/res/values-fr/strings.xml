@@ -3009,4 +3009,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
     <string name="public_transport_type">Type de transport</string>
+    <string name="searching_gps">Recherche des satellites</string>
+    <string name="coordinates_widget">Gadget de coordonnées</string>
 </resources>

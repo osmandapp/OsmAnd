@@ -3034,4 +3034,6 @@
     <string name="public_transport_try_change_settings">מוטב לנסות לשנות את ההגדרות.</string>
     <string name="public_transport_calc_pedestrian">חישוב מסלול להולכי רגל</string>
     <string name="public_transport_type">סוג תחבורה</string>
+    <string name="searching_gps">בחיפוש אחר GPS</string>
+    <string name="coordinates_widget">וידג׳ט נקודות ציון</string>
 </resources>

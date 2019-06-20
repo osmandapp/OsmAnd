@@ -835,7 +835,7 @@
     <string name="choose_auto_follow_route_descr">Tempo até que a vista do mapa volva a sincronizarse ca ubicación actual.</string>
     <string name="keep_informing_never">Só de xeito manual (prema a frecha)</string>
     <string name="keep_informing_descr">Anunciar de novo as instrucións de navigación a intervalos regulares.</string>
-    <string name="keep_informing">Repeti-las instrucións da navigación</string>
+    <string name="keep_informing">Recuncar as instrucións da navigación</string>
     <string name="auto_follow_route_navigation">Centrar automaticamente só ao navegar</string>
     <string name="auto_follow_route_navigation_descr">Centrar automaticamente a vista do mapa só ao navegar.</string>
     <string name="auto_follow_location_enabled">Centrar de xeito automático a vista do mapa en emprego.</string>
@@ -2078,10 +2078,10 @@ Lon %2$s</string>
     <string name="select_voice_provider_descr">Escolle ou baixa a orientación por voz para a túa lingua.</string>
     <string name="lang_als">Albanés (Tosco)</string>
     <string name="favourites_edit_dialog_title">Información do favorito</string>
-    <string name="lang_es_us">Español de América</string>
+    <string name="lang_es_us">Español de Estados Unidos</string>
     <string name="lang_ast">Asturiano</string>
     <string name="lang_hsb">Alto sorabo</string>
-    <string name="lang_en_gb">Inglés (Reino Unido)</string>
+    <string name="lang_en_gb">Inglés do Reino Unido</string>
     <string name="lang_be_by">Bielorruso (latino)</string>
     <string name="lang_hu_formal">Húngaro (formal)</string>
     <string name="lang_sr_latn">Serbio latino</string>
@@ -2175,7 +2175,7 @@ Lon %2$s</string>
     <string name="quick_action_add_destination">Engadir destino</string>
     <string name="quick_action_replace_destination">Substituír destino</string>
     <string name="quick_action_add_destination_desc">Ó premer no botón da acción engádese un destino da rota na posición central da pantalla. Calquera destino estabelecido anteriormente convértese no derradeiro punto intermedio.</string>
-    <string name="quick_action_replace_destination_desc">Ó premer no botón da acción engade un novo destino do mapa na posición central da pantalla, reemplazando o anterior destino (se existe).</string>
+    <string name="quick_action_replace_destination_desc">Ó premer no botón da acción engade un novo destino do mapa na posición central da pantalla, substituíndo o anterior destino (se existe).</string>
     <string name="quick_action_add_first_intermediate_desc">Ó prener no botón da acción engádese un destino intermedio na posición central da pantalla.</string>
     <string name="no_overlay">Sen capas sobrepostas</string>
     <string name="subscribe_email_error">Erro</string>
@@ -3056,7 +3056,7 @@ Lon %2$s</string>
 \n</string>
     <string name="shared_string_degrees">Graos</string>
     <string name="shared_string_milliradians">Milirradiáns</string>
-    <string name="angular_measeurement">Unidades de medición angular</string>
+    <string name="angular_measeurement">Unidade angular</string>
     <string name="angular_measeurement_descr">Mudar o \"azimuth\" no que se mide.</string>
     <string name="avoid_pt_types_descr">Escolle os tipos de transporte público a evitar para a navigación:</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
@@ -3076,4 +3076,6 @@ Lon %2$s</string>
     <string name="public_transport_try_change_settings">Proba a cambiar os axustes.</string>
     <string name="public_transport_calc_pedestrian">Calcular a ruta a pé</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="searching_gps">Estase a procurar o GPS</string>
+    <string name="coordinates_widget">Trebello de coordenadas</string>
 </resources>

@@ -2470,7 +2470,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="min_max">min/max</string>
     <string name="quick_action_resume_pause_navigation_descr">Drücken Sie diese Taste, um die Navigation zu pausieren oder fortzusetzen.</string>
     <string name="quick_action_show_navigation_finish_dialog">Dialog bei Navigationsende anzeigen</string>
-    <string name="quick_action_start_stop_navigation_descr">Taste drücken, um Navigation zu starten oder zu beenden.</string>
+    <string name="quick_action_start_stop_navigation_descr">Drücken Sie diese Taste, um die Navigation zu starten oder zu beenden.</string>
     <string name="quick_action_start_stop_navigation">Navigation starten/beenden</string>
     <string name="quick_action_resume_pause_navigation">Navigation pausieren/fortsetzen</string>
     <string name="rendering_value_translucent_pink_name">Transparentes Rosa</string>
@@ -2614,7 +2614,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
-    <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="release_3_0">• Neu: Unterstützung weltweiter Offline-Reiseführer. Verknüpfung beschriebener Sehenswürdigkeiten zur Landkarte. Die Inhalte basieren derzeit auf Wikivoyage.
 \n
 \n • Wikipedia: Neues Layout, anklickbare Links, Bilder
@@ -2645,7 +2645,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_track_to_markers_descr">Wählen Sie einen Track aus, um dessen Wegpunkte zu den Markierungen hinzuzufügen.</string>
     <string name="add_favourites_group_to_markers_descr">Wählen Sie eine Favoritenkategorie aus, die Sie den Markierungen hinzufügen möchten.</string>
     <string name="add_group_descr">Importieren Sie Gruppen aus Favoriten oder GPX-Wegpunkten.</string>
-    <string name="empty_state_markers_active_desc">Tippen Sie \'Orte\' lang oder kurz an, tippen Sie anschließend auf das Markierungszeichen.</string>
+    <string name="empty_state_markers_active_desc">Tippen Sie lang oder kurz auf \'Orte\' und anschließend auf das Markierungszeichen.</string>
     <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder Wegpunkte als Markierungen.</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
@@ -2789,8 +2789,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
     <string name="nautical_render_descr">Nautischer Navigationsstil. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Seewege und Markierungen, Häfen, Seezeichendienste, Tiefenlinien.</string>
-    <string name="ski_map_render_descr">Stil zum Skifahren. Hauptmerkmale: Rendern von Pisten, Skilften und anderen Skimerkmalen auf komfortable Weise. Weniger störende sekundäre Kartenobjekte.</string>
-    <string name="light_rs_render_descr">Einfacher und kontrastreicher Stil für die Navigation im Auto. Schonend für die Augen im Nachtmodus. Hauptmerkmale: Konturlinien, Kontrast orange gestylter Straßen, weniger störende sekundäre Kartenobjekte.</string>
+    <string name="ski_map_render_descr">Stil für Skifahrer. Hauptmerkmale: Zweckdienliches Rendern von Pisten, Liften und anderen Einrichtungen beim Skifahren. Weniger ablenkende sekundäre Kartenobjekte.</string>
+    <string name="light_rs_render_descr">Einfacher und kontrastreicher Stil für die Navigation im Auto. Schonend für die Augen im Nachtmodus. Hauptmerkmale: Konturlinien, Straßendarstellung in kontrastreichem Orange, weniger störende sekundäre Kartenobjekte.</string>
     <string name="topo_render_descr">Kontraststil für Wandern, Trekking und Radfahren in der Natur. Gute Lesbarkeit bei komplexer Außenbeleuchtung. Hauptmerkmale: Kontrastreiche Straßen und natürliche Objekte, verschiedene Arten von Routen, Höhenlinien mit erweiterten Einstellungen, mehr Details bei entsprechenden Zoomstufen als der Standardstil. Die Option Oberflächenintegrität ermöglicht die Unterscheidung der Straßenoberflächenqualität. Kein Nachtmodus.</string>
     <string name="mapnik_render_descr">Alter \'Mapnik\'-Stil, Standard-Rendering-Stil. Hauptmerkmale: Die Farben ähneln dem Mapnik-Stil.</string>
     <string name="default_render_descr">Universeller Stil. Vereinfachte, sauberere Darstellung in dicht besiedelten Städten. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
@@ -2872,8 +2872,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osm_live_payment_discount_descr">Sparen Sie %1$s.</string>
     <string name="osm_live_payment_current_subscription">Aktuelles Abonnement</string>
     <string name="osm_live_payment_renews_monthly">Verlängert sich monatlich</string>
-    <string name="osm_live_payment_renews_quarterly">Verlängert vierteljährlich</string>
-    <string name="osm_live_payment_renews_annually">Verlängert jährlich</string>
+    <string name="osm_live_payment_renews_quarterly">Verlängert sich vierteljährlich</string>
+    <string name="osm_live_payment_renews_annually">Verlängert sich jährlich</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Wählen Sie den für Sie passenden Zahlungszeitraum aus:</string>
     <string name="osm_live_payment_contribute_descr">Ein Teil der Einnahmen geht an OpenStreetMap-Mitwirkende.</string>
@@ -2883,7 +2883,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_launch">Starten</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="run_full_osmand_header">OsmAnd starten\?</string>
-    <string name="quick_action_switch_day_night_descr">Durch Antippen dieser Aktionstaste können Sie zwischen Tag- und Nacht-Modus für OsmAnd wechseln</string>
+    <string name="quick_action_switch_day_night_descr">Drücken dieser Aktionstaste schaltet zwischen Tag- und Nacht-Modus um</string>
     <string name="quick_action_switch_day_mode">Tag-Modus</string>
     <string name="quick_action_switch_night_mode">Nacht-Modus</string>
     <string name="quick_action_day_night_switch_mode">Schalter Tag/Nacht Modus</string>
@@ -2902,7 +2902,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="avoid_roads_descr">Wählen Sie eine Straße aus die während der Navigation vermieden werden soll, von der Karte oder von der Liste unten:</string>
     <string name="show_along_the_route">Entlang der Route anzeigen</string>
     <string name="simulate_navigation">Navigation simulieren</string>
-    <string name="choose_track_file_to_follow">Wähle Track-Datei zum Verfolgen aus</string>
+    <string name="choose_track_file_to_follow">Track-Datei zum Verfolgen auswählen</string>
     <string name="voice_announcements">Sprachanweisungen</string>
     <string name="intermediate_destinations">Zwischenziele</string>
     <string name="arrive_at_time">Ankunft um %1$s</string>
@@ -2928,15 +2928,15 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="step_by_step">Schritt für Schritt</string>
     <string name="road_types">Straßentypen</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX-Tracks ein-/ausblenden</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Durch Antippen dieser Aktionsschaltfläche werden ausgewählte GPX-Tracks auf der Karte ein- oder ausgeblendet</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Dücken dieser Aktionstaste blendet ausgewählte GPX-Tracks auf der Karte ein oder aus</string>
     <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
     <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
     <string name="use_osm_live_public_transport_description">Öffentliche Verkehrsmittel für Änderungen an OsmAnd Live aktivieren.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
-    <string name="public_transport_warning_descr_blog">Erfahren Sie mehr darüber, wie OsmAnd Routen berechnet, in unserem Blog.</string>
-    <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, erwarten Sie Fehler und Ungenauigkeiten.</string>
+    <string name="public_transport_warning_descr_blog">Erfahren Sie in unserem Blog mehr darüber, wie OsmAnd Routen berechnet.</string>
+    <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, rechnen Sie mit Fehlern und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
     <string name="transfers_size">%1$d Umstieg(e)</string>
     <string name="add_start_and_end_points">Start- und Endpunkte hinzufügen</string>
@@ -2985,25 +2985,25 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_path_name">Pfad</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
     <string name="rendering_attr_undefined_name">Nicht definiert</string>
-    <string name="release_3_3">• Neuer Bildschirm \"Richtungen\": Zeigt die Knöpfe der Ziele Zuhause und Arbeit, die Verknüpfung \"Vorherige Route\", die Liste der aktiven GPX-Strecken und -Marker, den Suchverlauf. 
+    <string name="release_3_3">• Neuer Bildschirm \'Navigation\': Zeigt Tasten mit den Zielen \'Zuhause\' und \'Arbeit\', eine \'Vorherige Route\'-Verknüpfung, eine Liste aktiver GPX-Tracks und Markierungen, den Suchverlauf. 
 \n 
-\n• Weitere Informationen unter \'Routendetails\': Straßentypen, Oberfläche, Steilheit, Glätte, Bequemlichkeit, etc. 
+\n• Weitere Informationen unter \'Routendetails\': Straßentypen, -oberfläche, Steilheit, Oberflächenbeschaffenheit 
 \n 
-\n• Navigation im öffentlichen Verkehr mit Unterstützung aller Arten von Verkehrsmitteln: U-Bahn, Bus, Straßenbahn, etc. 
+\n• Navigation im öffentlichen Verkehr mit Unterstützung aller Verkehrsmittelarten: U-Bahn, Bus, Straßenbahn, etc. 
 \n 
-\n• Neue Schnellaktion für Titel anzeigen/verbergen und Tag/Nacht-Modi 
+\n• Neue Schnellaktion, um Tracks ein-/auszublenden, und für die Tag/Nacht-Modi 
 \n 
 \n• Fix: Gebiete, die in Deutschland, Südafrika, Quebec und anderen Ländern als überflutet angezeigt wurden 
 \n 
 \n• Zusätzliche Unterstützung für den KML- und KMZ-Import 
 \n 
-\n• Fehler beim Öffnen einiger Haltestellen des öffentlichen Verkehrs behoben 
+\n• Abstürze nach Öffnen bestimmter Haltestellen des öffentlichen Verkehrs beseitigt 
 \n 
-\n• Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr) 
-\n 
+\n• Facebook- und Firebase-Analysen aus der kostenlosen Version entfernt (OsmAnd+ enthält sie nicht mehr)
+\n
 \n</string>
     <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
-    <string name="avoid_pt_types">Vermeiden Sie Verkehrsmittel…</string>
+    <string name="avoid_pt_types">Verkehrsmittel ausschließen …</string>
     <string name="shared_string_walk">Gehen</string>
     <string name="save_poi_value_exceed_length">Die maximale Länge des Tags \"%s\" beträgt 255 Zeichen. 
 \nBitte kürzen Sie diesen, um fortzufahren.</string>
@@ -3027,18 +3027,18 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">U-Bahnen und leichten Schienenverkehr meiden</string>
     <string name="routing_attr_avoid_ferry_name">Fähren meiden</string>
     <string name="routing_attr_avoid_ferry_description">Fähren meiden</string>
-    <string name="release_3_3_7">• Anzeige der Zeit zwischen den Umsteigen in öffentlichen Verkehrsmitteln 
+    <string name="release_3_3_7">• Anzeige der Umsteigezeiten in öffentlichen Verkehrsmitteln 
 \n 
-\n• Korrigierte Benutzeroberfläche für die Routendetails
+\n• Korrigierte Benutzeroberfläche für die Routendetails 
 \n 
-\n• Das dunkle Thema im Richtungsmenü und in den Routendetails wurde korrigiert. 
+\n• Korrektur des dunklen Designs im Navigationsmenü und in den Routendetails 
 \n 
-\n• Azimut in der Maßeinheit Distanz anzeigen
+\n• Azimut-Anzeige bei der Entfernungsmessung
 \n
 \n</string>
     <string name="send_log">Log senden</string>
-    <string name="files_copied">Kopierte %1$d Dateien (%2$s).</string>
-    <string name="files_failed">Es konnten keine %1$d Dateien (%2$s) kopiert werden.</string>
+    <string name="files_copied">%1$d Dateien kopiert (%2$s).</string>
+    <string name="files_failed">%1$d Dateien (%2$s) konnten nicht kopiert werden.</string>
     <string name="public_transport_try_ped">Probieren Sie die Fußgängernavigation aus.</string>
     <string name="public_transport_try_change_settings">Versuchen Sie, die Einstellungen zu ändern.</string>
     <string name="public_transport_calc_pedestrian">Fußgängerroute berechnen</string>
@@ -3046,7 +3046,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="files_moved">%1$d Dateien verschoben (%2$s).</string>
     <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort \'%3$s\' vorhanden.</string>
     <string name="move_maps">Karten verschieben</string>
-    <string name="dont_move_maps">Nicht bewegen</string>
-    <string name="public_transport_ped_route_title">Die Route beträgt ca. %1$s und könnte zu Fuß schneller sein als mit öffentlichen Verkehrsmitteln</string>
+    <string name="dont_move_maps">Nicht verschieben</string>
+    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein als mit öffentlichen Verkehrsmitteln</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
+    <string name="searching_gps">Suche GPS</string>
+    <string name="coordinates_widget">Koordinaten-Widget</string>
 </resources>
