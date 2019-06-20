@@ -268,8 +268,16 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	protected void addMyLocationToPlainItems(LatLon latLon) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+
 			addPlainMenuItem(R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(mapActivity,
 					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
+		}
+	}
+
+	protected void addMyLocationCollapsableView(LatLon latlon) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int iconId = R.drawable.ic_action_get_my_location;
 		}
 	}
 
