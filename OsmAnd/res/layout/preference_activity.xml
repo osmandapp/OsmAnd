@@ -59,7 +59,6 @@
 				android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 				android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
 				android:layout_gravity="center_vertical"
-				android:tint="?attr/primary_icon_color"
 				tools:src="@drawable/ic_action_coordinates_latitude"/>
 
 			<LinearLayout
@@ -102,6 +101,12 @@
 		</LinearLayout>
 
 	</LinearLayout>
+
+	<ImageView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		android:src="@drawable/bg_shadow_list_bottom"/>
 
 	<FrameLayout
 			android:layout_width="match_parent"

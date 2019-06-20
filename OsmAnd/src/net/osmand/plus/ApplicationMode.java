@@ -2,8 +2,9 @@ package net.osmand.plus;
 
 import android.content.Context;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -152,6 +153,7 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_car_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
+			applicationMode.locationIconsSet = LocationIconsSet.CAR;
 			return this;
 		}
 
@@ -164,6 +166,7 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
+			applicationMode.locationIconsSet = LocationIconsSet.BICYCLE;
 			return this;
 		}
 
@@ -176,6 +179,7 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+			applicationMode.locationIconsSet = LocationIconsSet.DEFAULT;
 			return this;
 		}
 
@@ -186,6 +190,7 @@ public class ApplicationMode {
 			applicationMode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_nautical_location;
 			applicationMode.locationIconNight = R.drawable.map_nautical_location_night;
+			applicationMode.locationIconsSet = LocationIconsSet.NAUTICAL;
 			return this;
 		}
 
@@ -217,6 +222,11 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder setRouteService(RouteService service) {
 			applicationMode.routeService = service;
+			return this;
+		}
+
+		public ApplicationModeBuilder setColor(ProfileIconColors colorData) {
+			applicationMode.iconColor = colorData;
 			return this;
 		}
 	}
@@ -364,7 +374,6 @@ public class ApplicationMode {
 	}
 
 	public int getResourceBearingNight() {
-		//return bearingIconDay;
 		return bearingIconNight;
 	}
 
@@ -381,7 +390,6 @@ public class ApplicationMode {
 	}
 
 	public int getResourceLocationNight() {
-		//return locationIconDay;
 		return locationIconNight;
 	}
 
@@ -472,6 +480,7 @@ public class ApplicationMode {
 	@Expose private String userProfileName;
 	@Expose private ApplicationMode parent;
 	@Expose private String iconName = "map_world_globe_dark";
+	@Expose private ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 	@Expose private int mapIconId = R.drawable.map_world_globe_dark;
 	@Expose private int smallIconDark = R.drawable.ic_world_globe_dark;
 	@Expose private float defaultSpeed = 10f;
@@ -486,6 +495,7 @@ public class ApplicationMode {
 	@Expose private int locationIconNight = R.drawable.map_pedestrian_location_night;
 	@Expose private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 	@Expose private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+	@Expose private LocationIconsSet locationIconsSet = LocationIconsSet.DEFAULT;
 	@Expose private String routingProfile = null;
 	@Expose private RouteService routeService = RouteService.OSMAND;
 	private static StateChangedListener<String> listener;
@@ -511,10 +521,58 @@ public class ApplicationMode {
 		if (!Algorithms.isEmpty(customProfiles)) {
 			for (ApplicationMode m : customProfiles) {
 				if (!values.contains(m)) {
-					values.add(m);
+					if (m.locationIconsSet != null) {
+						values.add(ApplicationMode.setBearingIconsSet(m));
+					} else {
+						values.add(m);
+					}
 				}
 			}
 		}
+	}
+
+	private static ApplicationMode setBearingIconsSet(ApplicationMode mode) {
+		switch (mode.locationIconsSet) {
+			case CAR:
+				mode.bearingIconDay = R.drawable.map_car_bearing;
+				mode.bearingIconNight = R.drawable.map_car_bearing_night;
+				mode.headingIconDay = R.drawable.map_car_location_view_angle;
+				mode.headingIconNight = R.drawable.map_car_location_view_angle_night;
+				mode.locationIconDay = R.drawable.map_car_location;
+				mode.locationIconNight = R.drawable.map_car_location_night;
+				mode.locationIconDayLost = R.drawable.map_car_location_lost;
+				mode.locationIconNightLost = R.drawable.map_car_location_lost_night;
+				break;
+			case BICYCLE:
+				mode.bearingIconDay = R.drawable.map_bicycle_bearing;
+				mode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
+				mode.headingIconDay = R.drawable.map_bicycle_location_view_angle;
+				mode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
+				mode.locationIconDay = R.drawable.map_bicycle_location;
+				mode.locationIconNight = R.drawable.map_bicycle_location_night;
+				mode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
+				mode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
+				break;
+			case DEFAULT:
+				mode.bearingIconDay = R.drawable.map_pedestrian_bearing;
+				mode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+				mode.headingIconDay = R.drawable.map_default_location_view_angle;
+				mode.headingIconNight = R.drawable.map_default_location_view_angle_night;
+				mode.locationIconDay = R.drawable.map_pedestrian_location;
+				mode.locationIconNight = R.drawable.map_pedestrian_location_night;
+				mode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+				mode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+				break;
+			case NAUTICAL:
+				mode.bearingIconDay = R.drawable.map_nautical_bearing;
+				mode.bearingIconNight = R.drawable.map_nautical_bearing_night;
+				mode.headingIconDay = R.drawable.map_nautical_location_view_angle;
+				mode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
+				mode.locationIconDay = R.drawable.map_nautical_location;
+				mode.locationIconNight = R.drawable.map_nautical_location_night;
+				break;
+		}
+		return mode;
 	}
 
 	public static void deleteCustomMode(String userModeTitle, OsmandApplication app) {
@@ -556,4 +614,51 @@ public class ApplicationMode {
 			return R.drawable.map_world_globe_dark;
 		}
 	}
+
+	public ProfileIconColors getIconColorInfo() {
+		if (iconColor != null) {
+			return iconColor;
+		} else {
+			return ProfileIconColors.DEFAULT;
+		}
+	}
+
+	public enum ProfileIconColors{
+		DEFAULT(R.string.rendering_value_default_name, R.color.profile_icon_color_blue_light_default,  R.color.profile_icon_color_blue_dark_default),
+		PURPLE(R.string.rendering_value_purple_name, R.color.profile_icon_color_purple_light, R.color.profile_icon_color_purple_dark),
+		GREEN(R.string.rendering_value_green_name, R.color.profile_icon_color_green_light,  R.color.profile_icon_color_green_dark),
+		BLUE(R.string.rendering_value_blue_name, R.color.profile_icon_color_blue_light,  R.color.profile_icon_color_blue_dark),
+		RED(R.string.rendering_value_red_name, R.color.profile_icon_color_red_light, R.color.profile_icon_color_red_dark),
+		DARK_YELLOW(R.string.rendering_value_darkyellow_name, R.color.profile_icon_color_yellow_light, R.color.profile_icon_color_yellow_dark),
+		MAGENTA(R.string.shared_string_color_magenta, R.color.profile_icon_color_magenta_light, R.color.profile_icon_color_magenta_dark);
+
+		@StringRes private int name;
+		@ColorRes private int dayColor;
+		@ColorRes private int nightColor;
+
+		ProfileIconColors(@StringRes int name, @ColorRes int dayColor, @ColorRes int nightColor) {
+			this.name = name;
+			this.dayColor = dayColor;
+			this.nightColor = nightColor;
+		}
+
+		public int getName() {
+			return name;
+		}
+
+		public int getColor(boolean nightMode) {
+			if (nightMode) {
+				return nightColor;
+			} else {
+				return dayColor;
+			}
+		}
+ 	}
+
+ 	public enum LocationIconsSet {
+	    DEFAULT,
+	    CAR,
+	    NAUTICAL,
+	    BICYCLE
+    }
 }
