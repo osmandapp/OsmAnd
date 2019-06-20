@@ -64,7 +64,7 @@
     <string name="set_time">Zeit einstellen</string>
     <string name="my_location_search_hint">Suche: Gruppe oder Kontakt</string>
     <string name="show_on_map">Auf Karte anzeigen</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd Online GPS-Tracker</string>
     <string name="phone_number_title">Telefonnummer</string>
     <string name="phone_number_descr">Telefonnummer in internationalem Format</string>
     <string name="shared_string_password">Passwort</string>
@@ -234,4 +234,12 @@
     <string name="proxy_settings">Proxy-Einstellungen</string>
     <string name="proxy">Proxy</string>
     <string name="privacy">Datenschutz</string>
+    <string name="shared_string_select">Auswählen</string>
+    <string name="min_logging_distance">Minimaler Protokollierungsabstand</string>
+    <string name="min_logging_distance_descr">Filter: Mindestabstand zum Protokollieren eines neuen Punktes</string>
+    <string name="min_logging_accuracy">Minimale Protokollierungsgenauigkeit</string>
+    <string name="min_logging_accuracy_descr">Filter: keine Protokollierung, es sei denn, die Genauigkeit wird erreicht</string>
+    <string name="min_logging_speed">Minimale Protokollierungsgeschwindigkeit</string>
+    <string name="min_logging_speed_descr">Filter: keine Protokollierung unter der gewählten Geschwindigkeit</string>
+    <string name="gpx_settings">GPX-Einstellungen</string>
 </resources>

@@ -83,7 +83,7 @@
     <string name="my_location_search_hint">Buscar: Grupo o contacto</string>
     <string name="start_location_sharing">Compartir ubicación</string>
     <string name="show_on_map">Mostrar en el mapa</string>
-    <string name="app_name">Rastreador GPS en línea de OsmAnd</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">Número de teléfono</string>
     <string name="phone_number_descr">Número de teléfono en formato internacional</string>
     <string name="shared_string_password">Contraseña</string>
@@ -233,4 +233,12 @@
     <string name="proxy_settings">Ajustes del proxy</string>
     <string name="proxy">Proxy</string>
     <string name="privacy">Privacidad</string>
+    <string name="shared_string_select">Elegir</string>
+    <string name="min_logging_distance">Distancia mínima de registro</string>
+    <string name="min_logging_distance_descr">Filtro: distancia mínima para registrar un nuevo punto</string>
+    <string name="min_logging_accuracy">Precisión mínima de registro</string>
+    <string name="min_logging_accuracy_descr">Filtro: no registrar, a menos que se alcance esta precisión</string>
+    <string name="min_logging_speed">Velocidad mínima de registro</string>
+    <string name="min_logging_speed_descr">Filtro: sin registro por debajo de la velocidad elegida</string>
+    <string name="gpx_settings">Ajustes de GPX</string>
 </resources>

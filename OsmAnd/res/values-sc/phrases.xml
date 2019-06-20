@@ -3580,4 +3580,22 @@
     <string name="poi_rescue_box">Iscàtula de sarvatàgiu</string>
     <string name="poi_climbing_crag">Eja</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Perìgulu: erosione</string>
+    <string name="poi_hazard_additional_rockfall">Perìgulu: achirrada de perdas</string>
+    <string name="poi_hazard_additional_nuclear">Perìgulu: nucleare</string>
+    <string name="poi_hazard_additional_flood">Perìgulu: alluvione</string>
+    <string name="poi_hazard_additional_avalanche">Perìgulu: valanga</string>
+    <string name="poi_hazard_additional_minefield">Perìgulu: campu minadu</string>
+    <string name="poi_hazard_additional_contamination">Perìgulu: cuntaminatzione</string>
+    <string name="poi_defibrillator_location">Positzione</string>
+    <string name="poi_changing_table_yes">Fasciatòiu: eja</string>
+    <string name="poi_changing_table_no">Fasciatòiu: nono</string>
+    <string name="poi_changing_table_limited">Fasciatòiu: limitadu</string>
+    <string name="poi_changing_table_location_room">Logu de su fasciatòiu: aposentu</string>
+    <string name="poi_changing_table_location_male_toilet">Logu de su fasciatòiu: bagnu de sos òmines</string>
+    <string name="poi_changing_table_location_female_toilet">Logu de su fasciatòiu: bagnu de sas fèminas</string>
+    <string name="poi_changing_table_location_unisex_toilet">Logu de su fasciatòiu: bagnu unisex</string>
+    <string name="poi_changing_table_count">Nùmeru de fasciatòios</string>
+    <string name="poi_changing_table_fee_yes">Tarifa pro s\'impreu de su fasciatòiu: eja</string>
+    <string name="poi_changing_table_fee_no">Tarifa pro s\'impreu de su fasciatòiu: nono</string>
 </resources>

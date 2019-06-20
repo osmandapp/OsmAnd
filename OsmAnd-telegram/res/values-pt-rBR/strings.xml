@@ -27,7 +27,7 @@
     <string name="connecting_to_the_internet">Conectando-se à Internet</string>
     <string name="background_work_description">Altere as configurações de otimização da bateria para estabilizar o compartilhamento de local.</string>
     <string name="background_work">"Funcionamento em segundo plano "</string>
-    <string name="battery_optimization_description">Desative a otimização da bateria do OsmAnd Tracker para que não seja desligado repentinamente quando estiver em segundo plano.</string>
+    <string name="battery_optimization_description">Desative a otimização da bateria do OsmAnd Tracker para que ele não seja desligado repentinamente quando estiver em segundo plano.</string>
     <string name="sharing_in_background">Compartilhando em segundo plano</string>
     <string name="go_to_settings">Vá para as configurações</string>
     <string name="shared_string_later">Mais tarde</string>
@@ -45,7 +45,7 @@
     <string name="add_device">Adicionar dispositivo</string>
     <string name="share_location_as">Compartilhar localização como</string>
     <string name="live_now_description">Contatos e grupos compartilhando o local para você.</string>
-    <string name="logout_from_osmand_telegram_descr">Tem certeza de que deseja sair do OsmAnd Tracker para que você não possa compartilhar a localização ou ver a localização de outras pessoas\?</string>
+    <string name="logout_from_osmand_telegram_descr">Tem certeza de que deseja sair do OsmAnd Tracker para que você não possa compartilhar o local ou ver a localização de outras pessoas\?</string>
     <string name="logout_from_osmand_telegram">Sair do OsmAnd Tracker\?</string>
     <string name="shared_string_name">Nome</string>
     <string name="by_distance">Pela distância</string>
@@ -234,4 +234,12 @@
     <string name="proxy_settings">Configurações de proxy</string>
     <string name="proxy">Proxy</string>
     <string name="privacy">Privacidade</string>
+    <string name="shared_string_select">Selecionar</string>
+    <string name="min_logging_distance">Distância mínima de registro</string>
+    <string name="min_logging_distance_descr">Filtro: distância mínima para registrar um novo ponto</string>
+    <string name="min_logging_accuracy">Precisão mínima de registro</string>
+    <string name="min_logging_accuracy_descr">Filtro: sem registro, a menos que a precisão seja atingida</string>
+    <string name="min_logging_speed">Velocidade mínima de registro</string>
+    <string name="min_logging_speed_descr">Filtro: sem registro abaixo da velocidade selecionada</string>
+    <string name="gpx_settings">Configurações de GPX</string>
 </resources>

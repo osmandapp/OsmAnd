@@ -1877,7 +1877,7 @@
     <string name="clear_updates_proposition_message">Quitar las actualizaciones descargadas y volver a la edición original del mapa</string>
     <string name="add_time_span">Añadir intervalo de tiempo</string>
     <string name="road_blocked">Camino bloqueado</string>
-    <string name="shared_string_select">Seleccionar</string>
+    <string name="shared_string_select">Elegir</string>
     <string name="switch_start_finish">Invertir puntos de partida y destino</string>
     <string name="rendering_attr_hideIcons_name">Iconos de PDI</string>
     <string name="number_of_contributors">Número de editores</string>

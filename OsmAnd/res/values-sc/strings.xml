@@ -917,8 +917,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_previous">Antepostu</string>
     <string name="unit_of_length_descr">Muda sas unidades de mèdida de sa distàntzia.</string>
     <string name="unit_of_length">Unidades de longària</string>
-    <string name="si_mi_feet">Mìglios/pedes</string>
-    <string name="si_mi_yard">Mìglios/iardas</string>
+    <string name="si_mi_feet">Mìllias/pedes</string>
+    <string name="si_mi_yard">Mìllias/iardas</string>
     <string name="si_km_m">Chilòmetros/metros</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
@@ -1676,13 +1676,13 @@ Lon %2$s</string>
     <string name="default_speed_system_descr">Issèbera s’unidade de sa lestresa.</string>
     <string name="default_speed_system">Unidade de sa lestresa</string>
     <string name="nm">nmi</string>
-    <string name="si_nm">Mìglios nàuticos</string>
+    <string name="si_nm">Mìllias nàuticas</string>
     <string name="si_kmh">Chilòmetros a s\'ora</string>
-    <string name="si_mph">Mìglios a s\'ora</string>
+    <string name="si_mph">Mìllias a s\'ora</string>
     <string name="si_m_s">Metros a su segundu</string>
     <string name="si_min_km">Minutos a su chilòmetru</string>
-    <string name="si_min_m">Minutos a su mìgliu</string>
-    <string name="si_nm_h">Mìglios nàuticos a s\'ora (knots)</string>
+    <string name="si_min_m">Minutos a su mìlliu</string>
+    <string name="si_nm_h">Mìllias nàuticas a s\'ora (knots)</string>
     <string name="nm_h">nodos</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -2003,7 +2003,7 @@ Lon %2$s</string>
     <string name="shared_string_change">Càmbia</string>
     <string name="get_started">Incumintza</string>
     <string name="osmand_plus_banner_desc">Iscarrigamentos de mapas e agiornamentos illimitados, e s\'estensione Wikipedia.</string>
-    <string name="si_mi_meters">Mìglios/metros</string>
+    <string name="si_mi_meters">Mìllias/metros</string>
     <string name="skip_map_downloading">Brinca s\'iscarrigamentu de sas mapas</string>
     <string name="skip_map_downloading_desc">Non tenes mapas non in lìnia installadas. Podes isseberare una mapa dae sa lista o iscarrigare mapas prus a tardu pro mèdiu de \'Menù - %1$s\'.</string>
     <string name="search_another_country">Issèbera un\'àtera regione</string>

@@ -454,7 +454,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
 \n
 \nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving-talevejledning. 
-\n 
+\n
 \nNogle af hovedfunktionerne: 
 \n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortbrikker i enhedens lager) 
 \n - Kompakte offlinevektorkort for hele verden er tilgængelige 
@@ -469,32 +469,33 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n   - valgfri vognbaneassistent 
 \n   - visning af hastighedsgrænser 
 \n   - optagede stemmer og talesyntesestemmer (tekst-til-tale) 
-\n
+\n 
 \n Begrænsninger i den gratis version af OsmAnd: 
 \n - Antallet af kort der kan hentes er begrænset 
-\n - Ingen adgang til Wikipedia-interessepunkter offline 
-\n 
+\n - Ingen adgang til Wikipedia-interessepunkter offline  
+\n
 \nOsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på https://osmand.net."</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) 
-\n 
+\n
 \n OsmAnd+ er et open source-navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning. 
-\n 
-\n OsmAnd+ er den betalte programversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. 
-\n 
+\n
+\n OsmAnd+ er den betalte programversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer.  
+\n
 \n Nogle af hovedfunktionerne: 
 \n - Komplet offline-funktionalitet (gem hentede vektor- eller brikkort på enhedens hukommelsseskort) 
 \n - Kompakte offline vektorkort for hele verden 
 \n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd 
 \n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing 
 \n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, højdekurver, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed 
-\n 
+\n
 \n - Offline-søgning efter adresser og steder (IP) 
 \n - Offline-ruteplanlægning til mediumafstande 
 \n - Bil-, cykel- og fodgængertilstande med: 
 \n - valgfri automatisk dag/nat-visning 
 \n - valgfri hastighedsafhængig kortzoom 
 \n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning 
-\n - valgfri vognbanevejledning, visning af hastighedsgrænser,  optagede stemmer eller TTS-stemmer"</string>
+\n - valgfri vognbanevejledning, visning af hastighedsgrænser,  optagede stemmer eller TTS-stemmer
+\n"</string>
     <string name="city_type_hamlet">lille landsby</string>
     <string name="city_type_town">By</string>
     <string name="city_type_city">Stor by</string>
@@ -1355,8 +1356,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk vejkort</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vejkort</string>
-    <string name="routing_attr_no_new_routing_name">Ingen v1.9 routing regler</string>
-    <string name="routing_attr_no_new_routing_description">Brug ikke routing regler indført i v1.9.</string>
+    <string name="routing_attr_no_new_routing_name">Ingen v1.9 ruteplanlægningsregler</string>
+    <string name="routing_attr_no_new_routing_description">Brug ikke ruteplanlægningsregler indført i v1.9.</string>
     <string name="traffic_warning_railways">Jernbaneoverskæring</string>
     <string name="traffic_warning_pedestrian">Fodgængerovergang</string>
     <string name="show_railway_warnings">Jernbaneoverskæringer</string>
@@ -2314,14 +2315,13 @@ Repræsenterer område: %1$s x %2$s</string>
 \n OsmAnd+ er den betalte programversion. Ved køb støttes projektet og udvikling af nye funktioner, og modtager de seneste opdateringer. 
 \n 
 \n Nogle af de vigtigste funktioner:</string>
-    <string name="osmand_plus_extended_description_part2">"Navigation
-\n  • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet)
-\n  • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer)
-\n  • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt
-\n  • Understøtter mellemliggende punkter på ruten
-\n  • Automatisk genberegning, ved afvigelse fra ruten
-\n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
-\n "</string>
+    <string name="osmand_plus_extended_description_part2">"Navigation 
+\n  • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet) 
+\n  • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer) 
+\n  • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt 
+\n  • Understøtter mellemliggende punkter på ruten 
+\n  • Automatisk genberegning, ved afvigelse fra ruten 
+\n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater "</string>
     <string name="osmand_plus_extended_description_part3">Kortvisning  
 \n • Vis position og orientering  
 \n • Juster eventuelt kortet efter kompas eller bevægelsesretning  
@@ -2342,14 +2342,13 @@ Repræsenterer område: %1$s x %2$s</string>
 \n • Valgfri visning af hastighedsgrænse med påmindelse ved overskridelse 
 \n • Valgfri hastighedsafhængig zoom  
 \n • Del placering, så dine venner kan finde dig</string>
-    <string name="osmand_plus_extended_description_part6">"Cykel og fodgænger-funktioner
-\n  • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter
-\n  • Særlige navigations- og visningstilstande for cyklister og fodgængere
-\n  • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne
-\n  • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste
-\n  • Valgfri hastigheds og højdevisning
-\n  • Visning af højdekurver og relieflag (med ekstra udvidelse)
-\n "</string>
+    <string name="osmand_plus_extended_description_part6">Cykel og fodgænger-funktioner 
+\n  • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter 
+\n  • Særlige navigations- og visningstilstande for cyklister og fodgængere 
+\n  • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne 
+\n  • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste 
+\n  • Valgfri hastigheds og højdevisning 
+\n  • Visning af højdekurver og relieflag (med ekstra udvidelse)</string>
     <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet:
 \n • Vesteuropa: ****
 \n • Østeuropa: ***
@@ -3050,4 +3049,94 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="public_transport_type">Transporttype</string>
     <string name="searching_gps">Søger efter GPS</string>
     <string name="coordinates_widget">Koordinat modul</string>
+    <string name="app_profile_custom_nav_subtitle">" "</string>
+    <string name="rate_dialog_descr">Brug 30 sekunder, udveksle erfaringer og bedøm vores arbejde på Google Play.</string>
+    <string name="button_rate">Bedøm</string>
+    <string name="shared_string_privacy_policy">Privatlivspolitik</string>
+    <string name="help_us_make_osmand_better">Hjælp med at gøre OsmAnd bedre!</string>
+    <string name="make_osmand_better_descr">Tillad OsmAnd at indsamle og behandle anonyme programdata. Vi indsamler ikke eller lagrer data om placering eller om steder på kortet.</string>
+    <string name="choose_data_to_share">Vælg hvilken type data der deles:</string>
+    <string name="downloaded_maps">Hentede kort</string>
+    <string name="visited_screens">Besøgte skærme</string>
+    <string name="colleted_data">Indsamlede data</string>
+    <string name="collected_data_descr">Liste over data der deles med OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Data indsamles for at forstå, hvilke kort over regioner og lande der er mest populære.</string>
+    <string name="visited_screens_collect_descr">Data indsamles for at forstå de mest populære funktioner i OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Ved at klikke på \"Tillad\" accepterer du vores %1$s</string>
+    <string name="settings_privacy_and_security">Privatliv og sikkerhed</string>
+    <string name="settings_privacy_and_security_desc">Vælg data til deling</string>
+    <string name="shared_string_no_thank_you">Nej tak</string>
+    <string name="shared_string_allow">Tillade</string>
+    <string name="profile_name_hint">Profilnavn</string>
+    <string name="nav_type_hint">Navigationstype</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Shuttle bus</string>
+    <string name="app_mode_subway">Metro</string>
+    <string name="app_mode_horse">Hest</string>
+    <string name="app_mode_helicopter">Helikopter</string>
+    <string name="osmand_routing_promo">Tilføj en modificeret version af routing.xml til ..osmand/routing</string>
+    <string name="app_mode_skiing">Skiløb</string>
+    <string name="base_profile_descr_ski">Skiløb</string>
+    <string name="show_compass_ruler">Vis kompas lineal</string>
+    <string name="hide_compass_ruler">Skjul kompas lineal</string>
+    <string name="select_icon_profile_dialog_title">Vælg ikon</string>
+    <string name="settings_routing_mode_string">Tilstand: %s</string>
+    <string name="settings_derived_routing_mode_string">Brugertilstand, afledt fra: %s</string>
+    <string name="routing_profile_ski">Ski</string>
+    <string name="profile_type_descr_string">Type: %s</string>
+    <string name="profile_type_base_string">Basisprofil</string>
+    <string name="profile_alert_need_routing_type_title">Vælg navigationstype</string>
+    <string name="profile_alert_need_routing_type_msg">Vælg en navigationstype for at oprette en ny programprofil</string>
+    <string name="profile_alert_need_profile_name_title">Indtast profilnavn</string>
+    <string name="profile_alert_need_profile_name_msg">Profilnavnet må ikke være tomt!</string>
+    <string name="profile_alert_duplicate_name_title">Duplikeret navn</string>
+    <string name="profile_alert_duplicate_name_msg">Der er allerede en profil med navnet</string>
+    <string name="profile_alert_cant_delete_base">Basisprofiler kan ikke slettes</string>
+    <string name="profile_alert_need_save_title">Gem ændringer</string>
+    <string name="profile_alert_need_save_msg">Ændringer i Profilen skal gemmes først</string>
+    <string name="profile_alert_delete_title">Slet profil</string>
+    <string name="profile_alert_delete_msg">Slet profil %s\?</string>
+    <string name="select_base_profile_dialog_title">Vælg basisprofil</string>
+    <string name="select_base_profile_dialog_message">Brugerdefineret Programprofil skal være baseret på en af standardprofilerne. Valgte Profil definerer grundlæggende indstillinger: opsætning af moduler, enheder for hastighed og afstand. I strengen nedenunder Profilnavn, kan ses, hvilke Navigationprofiler der er velegnet for hver Profil.</string>
+    <string name="select_nav_profile_dialog_title">Vælg navigationstype</string>
+    <string name="base_profile_descr_car">Bil, lastbil, motorcykel</string>
+    <string name="base_profile_descr_bicycle">MTB, knallert, hest</string>
+    <string name="base_profile_descr_pedestrian">Gå, vandring, løb</string>
+    <string name="base_profile_descr_public_transport">Offentlig transport (alle)</string>
+    <string name="base_profile_descr_boat">Skib, roning, sejlads</string>
+    <string name="base_profile_descr_aircraft">Fly, svævefly</string>
+    <string name="routing_profile_geocoding">Geokodning</string>
+    <string name="routing_profile_straightline">Lige linje</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
+    <string name="osmand_default_routing">OsmAnd ruteplanlægning</string>
+    <string name="custom_routing">Brugerdefineret ruteplanlægningsprofil</string>
+    <string name="special_routing_type">Speciel ruteplanlægning</string>
+    <string name="third_party_routing_type">3. parts ruteplanlægning</string>
+    <string name="application_profiles_descr">Vælg de profiler, der skal være synlige.</string>
+    <string name="application_profiles">Programprofiler</string>
+    <string name="zoom_by_wunderlinq_descr">Skift kort zoom ved at rulle hjulet op og ned. Escape vender tilbage til WunderLINQ.</string>
+    <string name="zoom_by_wunderlinq">Brug WunderLINQ til styring</string>
+    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét punkt til listen i Hurtig Handling under \"Indstillinger\"</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpint/downhill skiløb</string>
+    <string name="routing_attr_piste_type_downhill_description">Skiløjper til alpint skiløb eller downhill og adgang til skilifte.</string>
+    <string name="routing_attr_piste_type_nordic_name">Langrend / nordisk ski</string>
+    <string name="routing_attr_piste_type_nordic_description">Spor til nordisk eller langrend.</string>
+    <string name="routing_attr_piste_type_skitour_name">Langrend ski</string>
+    <string name="routing_attr_piste_type_skitour_description">Spor til langrend ski</string>
+    <string name="routing_attr_piste_type_sled_name">Slæde</string>
+    <string name="routing_attr_piste_type_sled_description">Pister til kælling.</string>
+    <string name="routing_attr_allow_intermediate_name">Tillad mellemliggende ruter</string>
+    <string name="routing_attr_allow_intermediate_description">Mere vanskelige ruter med stejlere sektioner. Generelt bør nogle hindringer undgås.</string>
+    <string name="routing_attr_allow_advanced_name">Tillad avancerede ruter</string>
+    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige forhindringer og stejle sektioner.</string>
+    <string name="routing_attr_allow_expert_name">Tillad ekspert ruter</string>
+    <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige forhindringer og omgivelser.</string>
+    <string name="routing_attr_allow_skating_only_name">Tillad kun skøjteløb ruter</string>
+    <string name="routing_attr_allow_skating_only_description">Ruter forberedt til freestyle eller bare skøjteløb uden klassiske stier.</string>
+    <string name="routing_attr_allow_classic_only_name">Tillad kun klassiske ruter</string>
+    <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Omfatter ruter udarbejdet af en mindre snescooter med løsere pister og stier lavet manuelt af skiløbere.</string>
+    <string name="routing_attr_difficulty_preference_name">Foretrukket sværhedsgrad</string>
+    <string name="routing_attr_difficulty_preference_description">Foretræk ruter med denne vanskelighed, selv om ruteplanlægning over sværere eller lettere pister stadig er muligt, hvis de er kortere.</string>
+    <string name="routing_attr_freeride_policy_name">Off-piste</string>
+    <string name="routing_attr_freeride_policy_description">Fri og off-piste stier er uofficielle ruter og passager. Typisk upræparerede, ikke vedligeholdt og ikke kontrolleret om natten. Adgang på egen risiko.</string>
 </resources>
