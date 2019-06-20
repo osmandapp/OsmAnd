@@ -442,23 +442,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_left_light, R.drawable.route_info_trans_gradient_left_dark);
+		AndroidUtils.setBackground(ctx, getBottomScrollView(), isNightMode(),
+				R.color.activity_background_light, R.color.activity_background_dark);
+		AndroidUtils.setBackground(ctx, getCardsContainer(), isNightMode(),
+				R.color.activity_background_light, R.color.activity_background_dark);
 
 		if (getTopViewId() != 0) {
 			View topView = view.findViewById(getTopViewId());
 			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		}
-		if (!isPortrait() && isSingleFragment()) {
-			final TypedValue typedValueAttr = new TypedValue();
-			ctx.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
-			mainView.setBackgroundResource(typedValueAttr.resourceId);
-		}
-		View bottomScrollView = getBottomScrollView();
-		if (bottomScrollView != null) {
-			AndroidUtils.setBackground(ctx, bottomScrollView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		}
-		View cardsContainer = getCardsContainer();
-		if (cardsContainer != null) {
-			AndroidUtils.setBackground(ctx, cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		}
 
 		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
