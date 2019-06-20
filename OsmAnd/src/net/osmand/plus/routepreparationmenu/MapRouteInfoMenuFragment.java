@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -425,31 +426,49 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (ctx == null || mainView == null || view == null) {
 			return;
 		}
+		updateNightMode();
 
-		boolean nightMode = isNightMode();
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), isNightMode(),
 				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
 				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), isNightMode(),
 				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
 				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), isNightMode(),
 				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_left_light, R.drawable.route_info_trans_gradient_left_dark);
 
-		int activeColor = ContextCompat.getColor(ctx, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		if (getTopViewId() != 0) {
+			View topView = view.findViewById(getTopViewId());
+			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+		}
+		if (!isPortrait() && isSingleFragment()) {
+			final TypedValue typedValueAttr = new TypedValue();
+			ctx.getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+			mainView.setBackgroundResource(typedValueAttr.resourceId);
+		}
+		View bottomScrollView = getBottomScrollView();
+		if (bottomScrollView != null) {
+			AndroidUtils.setBackground(ctx, bottomScrollView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+		}
+		View cardsContainer = getCardsContainer();
+		if (cardsContainer != null) {
+			AndroidUtils.setBackground(ctx, cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+		}
+
+		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.map_options_route_button_title)).setTextColor(activeColor);
 
-		int mainFontColor = ContextCompat.getColor(ctx, nightMode ? R.color.main_font_dark : R.color.main_font_light);
+		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.main_font_dark : R.color.main_font_light);
 		((TextView) mainView.findViewById(R.id.fromText)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
