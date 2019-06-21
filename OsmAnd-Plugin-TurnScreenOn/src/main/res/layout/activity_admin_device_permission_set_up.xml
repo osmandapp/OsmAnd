@@ -31,22 +31,6 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/btnContinue"
-        android:layout_width="92dp"
-        android:layout_height="36dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="24dp"
-        android:background="@color/violet">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/continueDesc"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-    </FrameLayout>
+    <include layout="@layout/btn_continue"/>
 
 </FrameLayout>

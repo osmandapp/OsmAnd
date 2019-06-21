@@ -19,8 +19,9 @@ public class UnlockMessageListener implements OnMessageListener {
     @Override
     public void onMessageReceive() {
         if (settings != null && lockHelper != null) {
-            if (settings.isAdminPermissionAvailable()) {
-                lockHelper.timedUnlock(settings.getTimeLikeSeconds() * 1000L);
+            if (settings.isAdminDevicePermissionAvailable()) {
+                PluginSettings.UnlockTime time = settings.getTime();
+                lockHelper.timedUnlock(time.getSeconds() * 1000L);
             }
         }
     }

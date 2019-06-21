@@ -38,4 +38,11 @@
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
+    <style name="turnScreenOnListDividerStyle">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">#F0F0F0</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
 </resources>

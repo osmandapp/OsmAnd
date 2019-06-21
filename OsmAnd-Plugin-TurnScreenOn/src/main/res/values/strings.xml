@@ -12,7 +12,7 @@
     <string name="continueDesc">continue</string>
     <string name="sensorHeader">Использовать датчик  приближения</string>
     <string name="help">Help</string>
-    <string name="install_instruction">You need to install OsmAnd or OsmAnd+, to use this plugin.</string>
+    <string name="install_instruction">You need to install <b>OsmAnd</b> or <b>OsmAnd+</b>, to use this plugin.</string>
     <string name="timeWorkingDescription">Set the time for which the screen will turn on, to display the map and navigation instructions.</string>
     <string name="sensorDescription">Проведите рукой над верхней частью экрана, чтобы включить экран во время навигации.</string>
     <string name="carTitle">Car</string>
@@ -27,6 +27,6 @@
     <string name="osmandInstallActivityHeader">OsmAnd is needed</string>
     <string name="skip">Skip</string>
     <string name="osmand_logo"><![CDATA[OsmAnd — Offline Travel Maps & Navigation]]></string>
-    <string name="permissionDescription">Для работы приложения, необходимо разрешние: Device Admin.\n\nDevice admin, даст возможность плагину, включать и выключать экран.\n\nНажмите продолжить, чтобы предоставить доступ к разрешению.</string>
+    <string name="permissionDescription">Для работы приложения, необходимо разрешние: <b>Device Admin</b>.\n\nDevice admin, даст возможность плагину, <b>включать</b> и <b>выключать</b> экран.\n\nНажмите продолжить, чтобы предоставить доступ к разрешению.</string>
     <string name="permission">Permission</string>
 </resources>

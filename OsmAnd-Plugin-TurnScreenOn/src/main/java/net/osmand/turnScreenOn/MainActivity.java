@@ -1,8 +1,6 @@
 package net.osmand.turnScreenOn;
 
 import android.content.Intent;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +20,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
@@ -30,6 +27,7 @@ import net.osmand.turnScreenOn.dialog.PluginStandardDialog;
 import net.osmand.turnScreenOn.helpers.AndroidUtils;
 import net.osmand.turnScreenOn.helpers.LockHelper;
 import net.osmand.turnScreenOn.helpers.OsmAndAidlHelper;
+import net.osmand.turnScreenOn.helpers.RadioGroupWrapper;
 import net.osmand.turnScreenOn.helpers.SensorHelper;
 import net.osmand.turnScreenOn.listener.UnlockMessageListener;
 import net.osmand.turnScreenOn.listener.OnMessageListener;
@@ -39,10 +37,17 @@ import java.util.List;
 import static android.view.View.LAYER_TYPE_HARDWARE;
 
 public class MainActivity extends AppCompatActivity {
-    private FrameLayout flRootLayout;
-    private LinearLayout llElementsList;
+    private TurnScreenApp app;
+    private OsmAndAidlHelper osmAndAidlHelper;
+    private PluginSettings settings;
+    private SensorHelper sensorHelper;
+    private LockHelper lockHelper;
+    private OnMessageListener unlockMessageListener;
+
+    private List<PluginSettings.OsmandVersion> availableOsmandVersions;
+
     private Toolbar tbPluginToolbar;
-    private FrameLayout btnOpenOsmand;
+    private LinearLayout llElementsScreen;
     private FrameLayout flPanelPluginEnable;
     private SwitchCompat swPluginEnableSwitcher;
     private FrameLayout flPanelSensor;
@@ -51,346 +56,14 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout flPanelTime;
     private TextView tvTime;
     private LinearLayout llPluginPreferencesLayout;
-    private LinearLayout llOsmandVersions;
-
-    private List<PluginSettings.OsmandVersion> availableOsmandVersions;
-
-    private Paint pGreyScale;
-
-    private TurnScreenApp app;
-    private OsmAndAidlHelper osmAndAidlHelper;
-    private PluginSettings settings;
-    private PluginState pluginState;
-    private SensorHelper sensorHelper;
-    private LockHelper lockHelper;
-    private OnMessageListener unlockMessageListener;
+    private RadioGroupWrapper osmandVersionRadioGroup;
+    private FrameLayout btnOpenOsmand;
 
     private LayoutInflater inflater;
 
-    interface PluginState {
-        void createUI();
+    private Paint pGreyScale;
 
-        void refreshUI();
-    }
-
-    /*private PluginState NO_INSTALLED_OSMAND_STATE = new PluginState() {
-        @Override
-        public void createUI() {
-            llElementsList.addView(inflater.inflate(R.layout.main_el_plugin_switcher, null, false));
-            llElementsList.addView(inflater.inflate(R.layout.main_install_desc, null, false));
-
-            flRootLayout.addView(llElementsList);
-
-            llPluginPreferencesLayout = findViewById(R.id.llPluginPreferencesLayout);
-            swPluginEnableSwitcher = findViewById(R.id.swPluginEnableSwitcher);
-            tvPluginStateDescription = findViewById(R.id.tvPluginStateDescription);
-        }
-
-        @Override
-        public void refreshUI() {
-            swPluginEnableSwitcher.setChecked(false);
-            tvPluginStateDescription.setText(R.string.disabled);
-            swPluginEnableSwitcher.setEnabled(false);
-        }
-    };*/
-
-    private PluginState PLUGIN_PREFERENCE_STATE = new PluginState() {
-        @Override
-        public void createUI() {
-            //add interface elements
-            llElementsList.addView(inflater.inflate(R.layout.main_el_plugin_switcher, null, false));
-            llElementsList.addView(inflater.inflate(R.layout.main_el_time_set_up, null, false));
-            llElementsList.addView(inflater.inflate(R.layout.main_el_sensor, null, false));
-
-            View btnOpenOsmandLayout = inflater.inflate(R.layout.main_el_btn_open_osmand, null, false);
-            flRootLayout.addView(btnOpenOsmandLayout);
-
-            llElementsList.setPadding(0, 0, 0, AndroidUtils.dpToPx(getApplicationContext(), 82));
-
-            ScrollView sv = new ScrollView(MainActivity.this);
-            sv.addView(llElementsList);
-            //getting control elements
-            flRootLayout.addView(sv);
-
-            llPluginPreferencesLayout = findViewById(R.id.llPluginPreferencesLayout);
-            swPluginEnableSwitcher = findViewById(R.id.swPluginEnableSwitcher);
-            flPanelPluginEnable = findViewById(R.id.flPluginEnabled);
-            tvPluginStateDescription = findViewById(R.id.tvPluginStateDescription);
-            btnOpenOsmand = findViewById(R.id.btnOpenOsmand);
-            flPanelTime = findViewById(R.id.flPanelTime);
-            tvTime = findViewById(R.id.tvTime);
-            flPanelSensor = findViewById(R.id.flPanelSensor);
-            swSensorEnableSwitcher = findViewById(R.id.swSensorEnableSwitcher);
-
-            if (availableOsmandVersions.size() > 1) {
-                llElementsList.addView(inflater.inflate(R.layout.main_el_osmand_versions, null, false));
-                llOsmandVersions = findViewById(R.id.llOsmandVersions);
-                prepareOsmandVersionsPanel();
-            }
-
-            btnOpenOsmand.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage(settings.getOsmandVersion().getPath());
-                    if (launchIntent != null) {
-                        startActivity(launchIntent);
-                    }
-                }
-            });
-
-            swPluginEnableSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        if (!settings.isPermissionAvailable()) {
-                            Intent intent = new Intent(MainActivity.this, PluginDescriptionActivity.class);
-                            startActivity(intent);
-                        } else {
-                            settings.enablePlugin();
-                        }
-                    } else {
-                        settings.disablePlugin();
-                    }
-                    refreshUI();
-                }
-            });
-
-            flPanelPluginEnable.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    swPluginEnableSwitcher.setChecked(!swPluginEnableSwitcher.isChecked());
-                }
-            });
-
-            flPanelTime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final PluginStandardDialog dialog = new PluginStandardDialog(MainActivity.this) {
-
-                        @Override
-                        public ViewGroup prepareElements() {
-                            LinearLayout llTimeList = new LinearLayout(MainActivity.this);
-                            llTimeList.setLayoutParams(new LinearLayout.LayoutParams(
-                                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                            llTimeList.setOrientation(LinearLayout.VERTICAL);
-
-                            PluginSettings.UnlockTime[] unlockTimes = PluginSettings.UnlockTime.values();
-
-                            for (final PluginSettings.UnlockTime unlockTime : unlockTimes) {
-                                final View timeViewListItem = inflater.inflate(R.layout.item_time, null, false);
-                                timeViewListItem.setId(unlockTime.getId());
-
-                                TextView tvTime = timeViewListItem.findViewById(R.id.tvTime);
-                                final RadioButton rbTime = timeViewListItem.findViewById(R.id.rbTime);
-
-                                View.OnClickListener listener = new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        int id = v.getId();
-
-                                        rbTime.setChecked(true);
-
-                                        PluginSettings.UnlockTime checkedTime = PluginSettings.UnlockTime.getTimeById(unlockTime.getId());
-                                        int timeLikeSeconds = checkedTime != null ? checkedTime.getSeconds() : 0;
-
-                                        settings.setTimeLikeSeconds(timeLikeSeconds);
-
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                closeDialog();
-                                                refreshUI();
-                                            }
-                                        }, 5);
-                                    }
-                                };
-
-                                rbTime.setOnClickListener(listener);
-
-                                tvTime.setText(String.valueOf(unlockTime.getSeconds()));
-
-                                timeViewListItem.setOnClickListener(listener);
-
-                                llTimeList.addView(timeViewListItem);
-                            }
-                            return llTimeList;
-                        }
-                    };
-
-                    dialog.setHeader(getString(R.string.select_time));
-                    dialog.showDialog();
-                }
-            });
-
-            swSensorEnableSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        settings.enableSensor();
-                    } else {
-                        settings.disableSensor();
-                    }
-                    refreshUI();
-                }
-            });
-
-            flPanelSensor.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    swSensorEnableSwitcher.setChecked(!swSensorEnableSwitcher.isChecked());
-                }
-            });
-
-            connectOsmand();
-            btnOpenOsmandLayout.bringToFront();
-        }
-
-        @Override
-        public void refreshUI() {
-            boolean isPluginEnabled = settings.isPluginEnabled();
-
-            if (isPluginEnabled) {
-                setStatusBarColor(R.color.orange);
-
-                osmAndAidlHelper.registerForVoiceRouterMessages();
-                osmAndAidlHelper.addListener(unlockMessageListener);
-                sensorHelper.addListener(unlockMessageListener);
-
-                tvPluginStateDescription.setText(getString(R.string.enabled));
-                tvPluginStateDescription.setTextColor(getResources().getColor(R.color.black));
-                tbPluginToolbar.setBackgroundColor(getResources().getColor(R.color.orange));
-
-                llPluginPreferencesLayout.setLayerType(LAYER_TYPE_HARDWARE, null);
-
-                setEnableForElements(true);
-            } else {
-                setStatusBarColor(R.color.darkGrey);
-
-                osmAndAidlHelper.unregisterFromVoiceRouterMessages();
-                osmAndAidlHelper.removeListener(unlockMessageListener);
-                sensorHelper.removeListener(unlockMessageListener);
-                lockHelper.cancelLock();
-
-                tvPluginStateDescription.setText(getString(R.string.disabled));
-                tvPluginStateDescription.setTextColor(getResources().getColor(R.color.darkGrey));
-                tbPluginToolbar.setBackgroundColor(getResources().getColor(R.color.darkGrey));
-
-                llPluginPreferencesLayout.setLayerType(LAYER_TYPE_HARDWARE, pGreyScale);
-
-                setEnableForElements(false);
-            }
-
-            swPluginEnableSwitcher.setChecked(isPluginEnabled);
-
-            boolean isSensorEnabled = settings.isSensorEnabled();
-            swSensorEnableSwitcher.setChecked(isSensorEnabled);
-
-            if (isSensorEnabled) {
-                sensorHelper.switchOnSensor();
-            } else {
-                sensorHelper.switchOffSensor();
-            }
-
-            String time = String.valueOf(settings.getTimeLikeSeconds()) + " "
-                    + getString(R.string.secondsShort);
-            tvTime.setText(time);
-
-            PluginSettings.OsmandVersion version = settings.getOsmandVersion();
-            int checkedId = version.getId();
-            FrameLayout checkedVersion = findViewById(checkedId);
-            RadioButton rbVersion = checkedVersion.findViewById(R.id.rbVersion);
-            if (rbVersion != null) {
-                rbVersion.setChecked(true);
-            }
-        }
-
-        public void prepareOsmandVersionsPanel() {
-            for (PluginSettings.OsmandVersion version : availableOsmandVersions) {
-                final ViewGroup container = (ViewGroup) inflater
-                        .inflate(R.layout.item_osmand_version, null, false);
-
-                container.setMinimumHeight((int) getResources().getDimension(R.dimen.basic_element_height));
-
-                final FrameLayout flOsmandVersion = container.findViewById(R.id.flOsmandVersion);
-                flOsmandVersion.setId(version.getId());
-                flOsmandVersion.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final int id = v.getId();
-                        settings.setOsmandVersion(id);
-
-                        RadioButton rb = flOsmandVersion.findViewById(R.id.rbVersion);
-                        if (rb != null) {
-                            rb.setChecked(true);
-                        }
-
-                        rb.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                settings.setOsmandVersion(id);
-
-                                for (PluginSettings.OsmandVersion version : availableOsmandVersions) {
-                                    if (id != version.getId()) {
-                                        FrameLayout flVersion = findViewById(version.getId());
-                                        RadioButton rbCurrent = flVersion.findViewById(R.id.rbVersion);
-                                        rbCurrent.setChecked(false);
-                                    }
-                                }
-
-                                connectOsmand();
-                            }
-                        });
-
-                        for (PluginSettings.OsmandVersion version : availableOsmandVersions) {
-                            if (id != version.getId()) {
-                                FrameLayout flVersion = findViewById(version.getId());
-                                RadioButton rbCurrent = flVersion.findViewById(R.id.rbVersion);
-                                rbCurrent.setChecked(false);
-                            }
-                        }
-
-                        connectOsmand();
-                    }
-                });
-
-                ImageView ivVersionImg = container.findViewById(R.id.ivVersionImg);
-                ivVersionImg.setImageResource(version.getImgResId());
-
-                TextView tvVersionName = container.findViewById(R.id.tvVersionName);
-                tvVersionName.setText(getString(version.getNameId()));
-
-                llOsmandVersions.addView(container);
-            }
-        }
-
-        private void throwRadioButtons(int checkedId, int[] other, ViewGroup container, int rbId) {
-            for (int i = 0; i < other.length; i++) {
-                if (checkedId != other[i]) {
-                    ViewGroup item = container.findViewById(other[i]);
-                    if (item != null) {
-                        RadioButton rb = item.findViewById(rbId);
-                        rb.setChecked(false);
-                    }
-                }
-            }
-        }
-
-        private void setEnableForElements(boolean enable) {
-            swSensorEnableSwitcher.setEnabled(enable);
-            flPanelSensor.setEnabled(enable);
-            for (PluginSettings.OsmandVersion version : availableOsmandVersions) {
-                FrameLayout flVersion = findViewById(version.getId());
-                flVersion.setEnabled(enable);
-                RadioButton rb = flVersion.findViewById(R.id.rbVersion);
-                if (rb != null) {
-                    rb.setEnabled(enable);
-                }
-            }
-            flPanelTime.setEnabled(enable);
-            tvTime.setEnabled(enable);
-            btnOpenOsmand.setEnabled(enable);
-        }
-    };
+    private boolean isReturnedFromAnotherActivity = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -406,45 +79,161 @@ public class MainActivity extends AppCompatActivity {
 
         inflater = getLayoutInflater();
 
-        availableOsmandVersions = PluginSettings.OsmandVersion.getOnlyInstalledVersions();
-
-        if (availableOsmandVersions == null || availableOsmandVersions.size() == 0) {
-//            pluginState = NO_INSTALLED_OSMAND_STATE;
-            startActivity(new Intent(this, OsmandInstallActivity.class));
-        } else {
-            pluginState = PLUGIN_PREFERENCE_STATE;
-            //todo refactor
-            settings.setOsmandVersion(availableOsmandVersions.get(0).getId());
-        }
-
-        if (!settings.programWasOpenedEarlier()) {
+        if (!settings.isProgramOpenedEarlier()) {
             settings.setOpened();
-            Intent intent = new Intent(this, PluginDescriptionActivity.class);
-            startActivity(intent);
+            isReturnedFromAnotherActivity = true;
+            startPluginDescriptionActivity(PluginDescriptionActivity.MODE_FIRST_OPEN);
         }
 
-        createUI();
+        else if (!settings.hasAvailableOsmandVersions()) {
+            isReturnedFromAnotherActivity = true;
+            startInstallOsmandInstructionActivity();
+        }
+
+        else {
+            availableOsmandVersions = PluginSettings.OsmandVersion.getOnlyInstalledVersions();
+            createUI();
+        }
     }
 
     public void createUI() {
-        //grey filter preparation
-        ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(0);
-        pGreyScale = new Paint();
-        pGreyScale.setColorFilter(new ColorMatrixColorFilter(cm));
-
-        flRootLayout = findViewById(R.id.flRootLayout);
-        llElementsList = new LinearLayout(this);
-        llElementsList.setOrientation(LinearLayout.VERTICAL);
-        llElementsList.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup
-                .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        pGreyScale = AndroidUtils.createPaintWithGreyScale();
+        llElementsScreen = findViewById(R.id.llElementsScreen);
 
         tbPluginToolbar = findViewById(R.id.tbPluginToolbar);
         setSupportActionBar(tbPluginToolbar);
 
-        if (pluginState != null) {
-            pluginState.createUI();
+        if (availableOsmandVersions.size() > 1) {
+            llElementsScreen.addView(inflater.inflate(R.layout.card_devider, null, false));
+            View osmandVersionsPanel = createOsmandVersionsPanel();
+            llElementsScreen.addView(osmandVersionsPanel);
+            llElementsScreen.addView(inflater.inflate(R.layout.card_top_divider, null, false));
         }
+
+        llPluginPreferencesLayout = findViewById(R.id.llPluginPreferencesLayout);
+        swPluginEnableSwitcher = findViewById(R.id.swPluginEnableSwitcher);
+        flPanelPluginEnable = findViewById(R.id.flPluginEnabled);
+        tvPluginStateDescription = findViewById(R.id.tvPluginStateDescription);
+        btnOpenOsmand = findViewById(R.id.btnOpenOsmand);
+        flPanelTime = findViewById(R.id.flPanelTime);
+        tvTime = findViewById(R.id.tvTime);
+        flPanelSensor = findViewById(R.id.flPanelSensor);
+        swSensorEnableSwitcher = findViewById(R.id.swSensorEnableSwitcher);
+
+        btnOpenOsmand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent launchIntent = getPackageManager()
+                        .getLaunchIntentForPackage(settings.getOsmandVersion().getPath());
+                if (launchIntent != null) {
+                    startActivity(launchIntent);
+                }
+            }
+        });
+
+        swPluginEnableSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (!settings.isAdminDevicePermissionAvailable()) {
+                        Intent intent = new Intent(MainActivity.this, PermissionsSetUpActivity.class);
+                        startActivity(intent);
+                    } else {
+                        settings.enablePlugin();
+                    }
+                } else {
+                    settings.disablePlugin();
+                }
+                refreshUI();
+            }
+        });
+
+        flPanelPluginEnable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swPluginEnableSwitcher.setChecked(!swPluginEnableSwitcher.isChecked());
+            }
+        });
+
+        flPanelTime.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                final RadioGroupWrapper unlockTimeRadioButtonsGroup = new RadioGroupWrapper();
+
+                final PluginStandardDialog dialog = new PluginStandardDialog(MainActivity.this) {
+
+                    @Override
+                    public ViewGroup prepareElements() {
+                        LinearLayout llTimeList = new LinearLayout(MainActivity.this);
+                        llTimeList.setLayoutParams(new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        llTimeList.setOrientation(LinearLayout.VERTICAL);
+
+                        PluginSettings.UnlockTime[] unlockTimes = PluginSettings.UnlockTime.values();
+
+                        for (final PluginSettings.UnlockTime unlockTime : unlockTimes) {
+                            final int currentTimeItemId = unlockTime.getId();
+                            final View timeItemView = inflater.inflate(R.layout.item_time, null, false);
+                            timeItemView.setId(currentTimeItemId);
+
+                            TextView tvTime = timeItemView.findViewById(R.id.tvTime);
+                            tvTime.setText(String.valueOf(unlockTime.getSeconds()));
+
+                            RadioButton rb = timeItemView.findViewById(R.id.rbTime);
+                            unlockTimeRadioButtonsGroup.addRadioButton(currentTimeItemId, rb);
+
+                            View.OnClickListener listener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    settings.setTime(currentTimeItemId);
+                                    unlockTimeRadioButtonsGroup.setChecked(currentTimeItemId);
+
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            closeDialog();
+                                            refreshUI();
+                                        }
+                                    }, 5);
+                                }
+                            };
+
+                            timeItemView.setOnClickListener(listener);
+                            rb.setOnClickListener(listener);
+
+                            llTimeList.addView(timeItemView);
+                        }
+                        return llTimeList;
+                    }
+                };
+
+                dialog.setHeader(getString(R.string.select_time));
+                dialog.showDialog();
+            }
+        });
+
+        swSensorEnableSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    settings.enableSensor();
+                } else {
+                    settings.disableSensor();
+                }
+                refreshUI();
+            }
+        });
+
+        flPanelSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swSensorEnableSwitcher.setChecked(!swSensorEnableSwitcher.isChecked());
+            }
+        });
+
+        connectOsmand();
     }
 
     @Override
@@ -458,10 +247,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_help) {
-
-            Intent intent = new Intent(MainActivity.this, PluginDescriptionActivity.class);
-            startActivity(intent);
-
+            startPluginDescriptionActivity(PluginDescriptionActivity.MODE_HELP);
             return true;
         }
 
@@ -469,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connectOsmand() {
-        Log.d("ttpl", "MainActivity: connecting to Osmand...");
         if (osmAndAidlHelper != null) {
             osmAndAidlHelper.reconnectOsmand();
         }
@@ -478,22 +263,86 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //todo refactor this problem
+        if (settings.hasAvailableOsmandVersions()) {
+            try {
+                if (!isReturnedFromAnotherActivity) {
+                    Log.d("ttpl2", "no returned");
 
-        if (availableOsmandVersions == null || availableOsmandVersions.size() == 0) {
-//            pluginState = NO_INSTALLED_OSMAND_STATE;
-            startActivity(new Intent(this, OsmandInstallActivity.class));
+                    refreshUI();
+                } else {
+                    Log.d("ttpl2", "returned");
+                    availableOsmandVersions = PluginSettings.OsmandVersion.getOnlyInstalledVersions();
+                    createUI();
+                    refreshUI();
+                }
+            } catch (Exception e) {
+                Log.d("ttpl2", "take an exception");
+            }
         } else {
-            pluginState = PLUGIN_PREFERENCE_STATE;
-            //todo refactor
-            settings.setOsmandVersion(availableOsmandVersions.get(0).getId());
+            startInstallOsmandInstructionActivity();
         }
-
-        refreshUI();
     }
 
     public void refreshUI() {
-        if (pluginState != null) {
-            pluginState.refreshUI();
+        boolean isPluginEnabled = settings.isPluginEnabled();
+
+        if (isPluginEnabled) {
+            setStatusBarColor(R.color.orange);
+
+            osmAndAidlHelper.registerForVoiceRouterMessages();
+            osmAndAidlHelper.addListener(unlockMessageListener);
+            sensorHelper.addListener(unlockMessageListener);
+
+            tvPluginStateDescription.setText(getString(R.string.enabled));
+            tvPluginStateDescription.setTextColor(getResources().getColor(R.color.black));
+            tbPluginToolbar.setBackgroundColor(getResources().getColor(R.color.orange));
+
+            llPluginPreferencesLayout.setLayerType(LAYER_TYPE_HARDWARE, null);
+
+            setEnableForElements(true);
+
+        } else {
+            setStatusBarColor(R.color.darkGrey);
+
+            osmAndAidlHelper.unregisterFromVoiceRouterMessages();
+            osmAndAidlHelper.removeListener(unlockMessageListener);
+            sensorHelper.removeListener(unlockMessageListener);
+            lockHelper.disableFunction();
+
+            tvPluginStateDescription.setText(getString(R.string.disabled));
+            tvPluginStateDescription.setTextColor(getResources().getColor(R.color.darkGrey));
+            tbPluginToolbar.setBackgroundColor(getResources().getColor(R.color.darkGrey));
+
+            llPluginPreferencesLayout.setLayerType(LAYER_TYPE_HARDWARE, pGreyScale);
+
+            setEnableForElements(false);
+        }
+
+        swPluginEnableSwitcher.setChecked(isPluginEnabled);
+
+        boolean isSensorEnabled = settings.isSensorEnabled();
+        swSensorEnableSwitcher.setChecked(isSensorEnabled);
+
+        if (isSensorEnabled) {
+            sensorHelper.switchOnSensor();
+        } else {
+            sensorHelper.switchOffSensor();
+        }
+
+        PluginSettings.UnlockTime currentTime = settings.getTime();
+        String time = String.valueOf(currentTime.getSeconds()) + " "
+                + getString(R.string.secondsShort);
+        tvTime.setText(time);
+
+        PluginSettings.OsmandVersion version = settings.getOsmandVersion();
+        int checkedId = version.getId();
+        FrameLayout checkedVersion = findViewById(checkedId);
+        if (checkedVersion != null) {
+            RadioButton rbVersion = checkedVersion.findViewById(R.id.rbVersion);
+            if (rbVersion != null) {
+                rbVersion.setChecked(true);
+            }
         }
     }
 
@@ -503,8 +352,78 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    private View createOsmandVersionsPanel() {
+        View panelOsmandVersions = inflater.inflate(R.layout.main_el_osmand_versions, null, false);
+        LinearLayout llOsmandVersions = panelOsmandVersions.findViewById(R.id.llOsmandVersions);
+
+        osmandVersionRadioGroup = new RadioGroupWrapper();
+
+        for (PluginSettings.OsmandVersion version : availableOsmandVersions) {
+            final int currentVersionId = version.getId();
+
+            final ViewGroup osmandVersionItemView = (ViewGroup) inflater
+                    .inflate(R.layout.item_osmand_version, null, false);
+
+            osmandVersionItemView.setId(currentVersionId);
+
+            ImageView ivVersionImg = osmandVersionItemView.findViewById(R.id.ivVersionImg);
+            ivVersionImg.setImageResource(version.getImgResId());
+
+            TextView tvVersionName = osmandVersionItemView.findViewById(R.id.tvVersionName);
+            tvVersionName.setText(getString(version.getNameId()));
+
+            RadioButton rb = osmandVersionItemView.findViewById(R.id.rbVersion);
+            osmandVersionRadioGroup.addRadioButton(currentVersionId, rb);
+
+            View.OnClickListener onRadioCheckedListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    settings.setOsmandVersion(currentVersionId);
+                    osmandVersionRadioGroup.setChecked(currentVersionId);
+                    connectOsmand();
+                }
+            };
+
+            osmandVersionItemView.setOnClickListener(onRadioCheckedListener);
+            rb.setOnClickListener(onRadioCheckedListener);
+
+            llOsmandVersions.addView(osmandVersionItemView);
+        }
+
+        return panelOsmandVersions;
+    }
+
+    private void setEnableForElements(boolean enable) {
+        swSensorEnableSwitcher.setEnabled(enable);
+        flPanelSensor.setEnabled(enable);
+        for (PluginSettings.OsmandVersion version : availableOsmandVersions) {
+            int versionId = version.getId();
+            View vOsmandVersionItem = findViewById(versionId);
+            if (vOsmandVersionItem != null) {
+                vOsmandVersionItem.setEnabled(enable);
+                RadioButton rb = vOsmandVersionItem.findViewById(R.id.rbVersion);
+                if (rb != null) {
+                    rb.setEnabled(enable);
+                }
+            }
+        }
+        flPanelTime.setEnabled(enable);
+        tvTime.setEnabled(enable);
+        btnOpenOsmand.setEnabled(enable);
+    }
+
+    private void startInstallOsmandInstructionActivity() {
+        startSimpleActivity(OsmandInstallActivity.class);
+    }
+
+    private void startPluginDescriptionActivity(int mode) {
+        Intent intent = new Intent(this, PluginDescriptionActivity.class);
+        intent.putExtra(PluginDescriptionActivity.MODE_KEY, mode);
+        startActivity(intent);
+    }
+
+    private void startSimpleActivity(Class destinationActivityClass) {
+        Intent intent = new Intent(this, destinationActivityClass);
+        startActivity(intent);
     }
 }

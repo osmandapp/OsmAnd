@@ -14,9 +14,8 @@ import java.util.ArrayList;
 
 public class PluginSettings {
     private SharedPreferences preferences;
-    private static final String APP_PREFERENCE = "TurnScreenOnPreferences";
     private static final String PREFERENCE_PLUGIN_ENABLE = "pluginEnable";
-    private static final String PREFERENCE_TIME = "time";
+    private static final String PREFERENCE_TIME_ID = "timeId";
     private static final String PREFERENCE_OSMAND_VERSION = "OsmandVersionInt";
     private static final String PREFERENCE_FIRST_OPEN = "firstOpen";
     private static final String PREFERENCE_SENSOR_ENABLE = "sensorEnable";
@@ -24,14 +23,14 @@ public class PluginSettings {
     private static TurnScreenApp app;
 
     public enum OsmandVersion {
-        OSMAND_PLUS(132356, R.string.OsmandPlus, R.drawable.ic_action_osmand_plus, "net.osmand.plus"),
+        OSMAND_PLUS(132356, R.string.OsmandPlus, R.drawable.ic_action_osmand_plus, "net.osmand.plus "),
         OSMAND(132357, R.string.Osmand, R.drawable.ic_action_osmand, "net.osmand");
 
         int id;
-
         int nameId;
         int imgId;
         String path;
+
         OsmandVersion(int id, int nameId, int imgId, String path) {
             this.id = id;
             this.nameId = nameId;
@@ -66,12 +65,12 @@ public class PluginSettings {
 
         public static boolean isVersionInstalled(OsmandVersion version) {
             String path = version.getPath();
-            //todo refactor
             PackageManager pm = app.getPackageManager();
             try {
                 pm.getPackageInfo(path, PackageManager.GET_ACTIVITIES);
                 return true;
-            } catch (PackageManager.NameNotFoundException e) {}
+            } catch (PackageManager.NameNotFoundException e) {
+            }
             return false;
         }
 
@@ -84,6 +83,15 @@ public class PluginSettings {
                 }
             }
             return installedVersions;
+        }
+
+        public static boolean hasInstalledVersions(){
+            for (OsmandVersion v : OsmandVersion.values()) {
+                if (isVersionInstalled(v)){
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -147,7 +155,7 @@ public class PluginSettings {
                     return time;
                 }
             }
-            return null;
+            return SECONDS_05;
         }
     }
 
@@ -165,6 +173,9 @@ public class PluginSettings {
     }
 
     public boolean isPluginEnabled() {
+        if(!isAdminDevicePermissionAvailable()){
+            disablePlugin();
+        }
         return preferences.getBoolean(PREFERENCE_PLUGIN_ENABLE, false);
     }
 
@@ -180,27 +191,25 @@ public class PluginSettings {
         return preferences.getBoolean(PREFERENCE_SENSOR_ENABLE, false);
     }
 
-    public boolean isPermissionAvailable() {
-        ComponentName mDeviceAdmin = new ComponentName(app, DeviceAdminRecv.class);
-        DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) app.getSystemService(Context.DEVICE_POLICY_SERVICE);
-
-        return mDevicePolicyManager.isAdminActive(mDeviceAdmin);
+    public boolean hasAvailableOsmandVersions() {
+        return OsmandVersion.hasInstalledVersions();
     }
 
-    public void setOpened(){
+    public void setOpened() {
         setBoolean(PREFERENCE_FIRST_OPEN, true);
     }
 
-    public boolean programWasOpenedEarlier(){
+    public boolean isProgramOpenedEarlier() {
         return preferences.contains(PREFERENCE_FIRST_OPEN);
     }
 
-    public int getTimeLikeSeconds() {
-        return preferences.getInt(PREFERENCE_TIME, 0);
+    public UnlockTime getTime() {
+        int timeId = preferences.getInt(PREFERENCE_TIME_ID, 0);
+        return UnlockTime.getTimeById(timeId);
     }
 
-    public void setTimeLikeSeconds(int seconds) {
-        setInteger(PREFERENCE_TIME, seconds);
+    public void setTime(int timeId) {
+        setInteger(PREFERENCE_TIME_ID, timeId);
     }
 
     public void setOsmandVersion(int versionId) {
@@ -209,7 +218,15 @@ public class PluginSettings {
 
     public OsmandVersion getOsmandVersion() {
         int versionId = preferences.getInt(PREFERENCE_OSMAND_VERSION, OsmandVersion.OSMAND_PLUS.id);
-        return OsmandVersion.getVersionById(versionId);
+        OsmandVersion savedVersion = OsmandVersion.getVersionById(versionId);
+        if (OsmandVersion.isVersionInstalled(savedVersion)) {
+            return savedVersion;
+        }
+        ArrayList<OsmandVersion> availableVersions = OsmandVersion.getOnlyInstalledVersions();
+        if (availableVersions != null && availableVersions.size() > 0) {
+            return availableVersions.get(0);
+        }
+        return null;
     }
 
     private void setInteger(String tag, int val) {
@@ -230,7 +247,7 @@ public class PluginSettings {
         editor.apply();
     }
 
-    public boolean isAdminPermissionAvailable() {
+    public boolean isAdminDevicePermissionAvailable() {
         ComponentName mDeviceAdmin = new ComponentName(app, DeviceAdminRecv.class);
         DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) app.getSystemService(Context.DEVICE_POLICY_SERVICE);
 

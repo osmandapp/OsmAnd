@@ -939,15 +939,20 @@ public class VoiceRouter {
 	}
 
 	public void addVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-        voiceMessageListeners.put(voiceMessageListener, 0);
+		Log.d("ttpl", "add a new listener");
+		voiceMessageListeners.put(voiceMessageListener, 0);
 	}
 	
 	public void removeVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
+		Log.d("ttpl", "remove listener");
 		voiceMessageListeners.remove(voiceMessageListener);
 	}
 
 	public void notifyOnVoiceMessage() {
+		Log.d("ttpl", "notify listeners: ");
+		int i = 0;
 		for (VoiceMessageListener lnt : voiceMessageListeners.keySet()) {
+			Log.d("ttpl", "listner " + ++i);
 			lnt.onVoiceMessage();
 		}
 	}

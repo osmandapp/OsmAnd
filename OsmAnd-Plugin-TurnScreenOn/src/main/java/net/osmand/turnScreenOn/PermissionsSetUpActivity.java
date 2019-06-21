@@ -43,7 +43,6 @@ public class PermissionsSetUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestLockScreenAdmin();
-                onBackPressed();
             }
         });
     }
@@ -54,6 +53,7 @@ public class PermissionsSetUpActivity extends AppCompatActivity {
         if (requestCode == DEVICE_ADMIN_REQUEST) {
             if (resultCode == RESULT_OK) {
                 settings.enablePlugin();
+                onBackPressed();
             } else {
                 settings.disablePlugin();
             }

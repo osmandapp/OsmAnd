@@ -9,7 +9,8 @@
     <color name="darkGrey">#727272</color>
     <color name="activityBackground">#F0F0F0</color>
     <color name="orange">#FF8800</color>
-    <color name="violet">#4F29C1</color>
+    <color name="violet">#5714CC</color>
+    <color name="darkerViolet">#5210C0</color>
     <color name="lighterViolet">#6617D3</color>
     <color name="black">#000000</color>
     <color name="pluginDescHeader">#6617D3</color>

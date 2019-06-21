@@ -14,22 +14,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_action_osmand" />
+            android:src="@drawable/ic_action_osmand"
+            android:paddingLeft="@dimen/horizontal_padding" />
 
-        <TextView xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/tvVersionName"
-            style="@style/turnScreenOnHeaderTextStyle"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/basic_element_height"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            tools:text="OsmAnd" />
-
-        <RadioButton
-            android:id="@+id/rbVersion"
-            style="@style/RadioButtonStyle"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/horizontal_padding">
+
+                <TextView xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/tvVersionName"
+                    style="@style/turnScreenOnHeaderTextStyle"
+                    android:paddingLeft="24dp"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/basic_element_height"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    tools:text="OsmAnd" />
+
+                <RadioButton
+                    android:id="@+id/rbVersion"
+                    style="@style/RadioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+
+            <View style="@style/turnScreenOnListDividerStyle"
+                android:layout_marginLeft="24dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>

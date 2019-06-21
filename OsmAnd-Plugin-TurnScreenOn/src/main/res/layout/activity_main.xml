@@ -18,8 +18,38 @@
         app:title="@string/app_name"
         app:titleTextColor="@color/white" />
 
-        <FrameLayout
-            android:id="@+id/flRootLayout"
+    <FrameLayout
+        android:id="@+id/flRootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/llElementsScreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="82dp"
+                android:orientation="vertical">
+
+                <include layout="@layout/main_el_plugin_switcher" />
+
+                <include layout="@layout/card_devider" />
+
+                <include layout="@layout/main_el_time_set_up" />
+
+                <include layout="@layout/card_devider" />
+
+                <include layout="@layout/main_el_sensor" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <include layout="@layout/btn_open_osmand" />
+    </FrameLayout>
+
 </LinearLayout>

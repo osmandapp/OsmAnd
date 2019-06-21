@@ -12,14 +12,19 @@ import android.widget.FrameLayout;
 import net.osmand.turnScreenOn.app.TurnScreenApp;
 
 public class PluginDescriptionActivity extends AppCompatActivity {
+    public static final int MODE_FIRST_OPEN = 1;
+    public static final int MODE_HELP = 2;
+    public static final String MODE_KEY = "mode";
+
     private FrameLayout btnContinue;
     private PluginSettings settings;
+    private int currentMode;
 
     private final static String PERMISSION_WINDOW_OPENED = "permissionWindowOpened";
 
     private TurnScreenApp app;
 
-    private boolean isPermissionWindowOpened;
+    private boolean isContinueButtonPushed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +32,10 @@ public class PluginDescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plugin_description);
 
         if (savedInstanceState != null) {
-            isPermissionWindowOpened = savedInstanceState.getBoolean(PERMISSION_WINDOW_OPENED, false);
+            isContinueButtonPushed = savedInstanceState.getBoolean(PERMISSION_WINDOW_OPENED, false);
         }
+
+        currentMode = getIntent().getIntExtra(MODE_KEY, MODE_HELP);
 
         app = (TurnScreenApp) getApplicationContext();
 
@@ -40,10 +47,17 @@ public class PluginDescriptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!settings.isAdminPermissionAvailable()) {
+                if (!settings.hasAvailableOsmandVersions() && currentMode == MODE_FIRST_OPEN) {
+                    Intent intent = new Intent(PluginDescriptionActivity.this, OsmandInstallActivity.class);
+                    intent.putExtra(OsmandInstallActivity.MODE_KEY, OsmandInstallActivity.MODE_FIRST_OPEN);
+                    startActivity(intent);
+                    isContinueButtonPushed = true;
+                }
+
+                else if (!settings.isAdminDevicePermissionAvailable() && currentMode == MODE_FIRST_OPEN) {
                     Intent intent = new Intent(PluginDescriptionActivity.this, PermissionsSetUpActivity.class);
                     startActivity(intent);
-                    isPermissionWindowOpened = true;
+                    isContinueButtonPushed = true;
                 } else {
                     onBackPressed();
                 }
@@ -59,7 +73,8 @@ public class PluginDescriptionActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.white));
         }
 
-        if (isPermissionWindowOpened) {
+        if (isContinueButtonPushed && settings.isAdminDevicePermissionAvailable()
+                && settings.hasAvailableOsmandVersions() && currentMode == MODE_FIRST_OPEN) {
             onBackPressed();
         }
     }
@@ -67,6 +82,6 @@ public class PluginDescriptionActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        outState.putBoolean(PERMISSION_WINDOW_OPENED, isPermissionWindowOpened);
+        outState.putBoolean(PERMISSION_WINDOW_OPENED, isContinueButtonPushed);
     }
 }

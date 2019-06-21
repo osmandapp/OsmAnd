@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
 import net.osmand.turnScreenOn.receiver.DeviceAdminRecv;
@@ -24,7 +23,7 @@ public class LockHelper {
     private KeyguardManager.KeyguardLock keyguardLock;
     private LockRunnable lockRunnable;
 
-    private boolean lockCanceled = false;
+    private boolean functionEnable = false;
 
     private final static String TAG = "LockHelperTag";
 
@@ -55,14 +54,10 @@ public class LockHelper {
 
     public void lock() {
         if (readyToLock()) {
-//            Log.d("ttpl2", "LockHelper: release wakelocks");
             releaseWakeLocks();
             keyguardLock.reenableKeyguard();
-            if (!lockCanceled) {
+            if (functionEnable) {
                 mDevicePolicyManager.lockNow();
-//                Log.d("ttpl2", "LockHelper: device lock");
-            } else {
-                lockCanceled = false;
             }
         }
     }
@@ -74,8 +69,6 @@ public class LockHelper {
                     | PowerManager.ACQUIRE_CAUSES_WAKEUP, "tso:wakelocktag");
             wakeLock.acquire();
             keyguardLock.disableKeyguard();
-
-//            Log.d("ttpl2", "LockHelper: device unlock");
         }
     }
 
@@ -99,8 +92,11 @@ public class LockHelper {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void cancelLock() {
-//        Log.d("ttpl2", "LockHelper: lock canceled");
-        lockCanceled = true;
+    public void disableFunction() {
+        functionEnable = false;
+    }
+
+    public void enableFunction() {
+        functionEnable = true;
     }
 }

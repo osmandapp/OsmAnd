@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OsmAndAidlHelper implements MessageSender {
-    private final static String AIDL_SERVICE_PATH = "net.osmand.aidl.OsmandAidlService";
+    private final static String OSMAND_AIDL_SERVICE_PATH = "net.osmand.aidl.OsmandAidlService";
 
     private List<OnMessageListener> messageListeners;
 
@@ -33,8 +33,8 @@ public class OsmAndAidlHelper implements MessageSender {
 
     private long osmandUpdatesCallbackId = -1;
 
-    //todo change
     private boolean attemptedRegister = false;
+    private boolean isRegistered = false;
 
     private IOsmAndAidlInterface mIOsmAndAidlInterface;
     private IOsmAndAidlCallback mIOsmAndAidlCallbackInterface = new IOsmAndAidlCallback.Stub() {
@@ -89,6 +89,7 @@ public class OsmAndAidlHelper implements MessageSender {
         @Override
         public void onServiceDisconnected(ComponentName name) {
             mIOsmAndAidlInterface = null;
+            isRegistered = false;
         }
     };
 
@@ -100,11 +101,14 @@ public class OsmAndAidlHelper implements MessageSender {
 
     public void registerForVoiceRouterMessages() {
         try {
-            if (mIOsmAndAidlInterface != null) {
+            Log.d("ttpl", "try add a listener");
+
+            if (mIOsmAndAidlInterface != null && !isRegistered) {
                 ANavigationVoiceRouterMessageParams params = new ANavigationVoiceRouterMessageParams();
                 params.setSubscribeToUpdates(true);
                 params.setCallbackId(osmandUpdatesCallbackId);
                 osmandUpdatesCallbackId = mIOsmAndAidlInterface.registerForVoiceRouterMessages(params, mIOsmAndAidlCallbackInterface);
+                isRegistered = true;
             } else {
                 attemptedRegister = true;
             }
@@ -115,11 +119,14 @@ public class OsmAndAidlHelper implements MessageSender {
 
     public void unregisterFromVoiceRouterMessages() {
         try {
-            if (mIOsmAndAidlInterface != null) {
+            Log.d("ttpl", "try remove a listener");
+
+            if (mIOsmAndAidlInterface != null && isRegistered) {
                 ANavigationVoiceRouterMessageParams params = new ANavigationVoiceRouterMessageParams();
                 params.setSubscribeToUpdates(false);
                 params.setCallbackId(osmandUpdatesCallbackId);
                 mIOsmAndAidlInterface.registerForVoiceRouterMessages(params, mIOsmAndAidlCallbackInterface);
+                isRegistered = false;
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -143,7 +150,7 @@ public class OsmAndAidlHelper implements MessageSender {
 
     private void bindService(String packageName) {
         if (mIOsmAndAidlInterface == null) {
-            Intent intent = new Intent("net.osmand.aidl.OsmandAidlService");
+            Intent intent = new Intent(OSMAND_AIDL_SERVICE_PATH);
             intent.setPackage(packageName);
             app.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         }
@@ -153,7 +160,8 @@ public class OsmAndAidlHelper implements MessageSender {
         try {
             if (mIOsmAndAidlInterface != null) {
                 mIOsmAndAidlInterface = null;
-//                Log.d("ttpl", "disconnecting from Osmand");
+                unregisterFromVoiceRouterMessages();
+                isRegistered = false;
                 app.unbindService(mConnection);
             }
         } catch (Throwable e) {
