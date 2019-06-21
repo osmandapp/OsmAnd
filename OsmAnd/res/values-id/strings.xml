@@ -518,5 +518,8 @@
     <string name="profile_alert_delete_title">Hapus Profil</string>
     <string name="profile_alert_delete_msg">Apakah anda yakin ingin menghapus profil %s</string>
     <string name="select_base_profile_dialog_title">Pilih profil dasar</string>
-    <string name="select_base_profile_dialog_message">Profil Aplikasi Khusus harus berdasarkan pada salah satu Profil Aplikasi bawaan.</string>
+    <string name="select_base_profile_dialog_message">Profil Aplikasi Khusus harus berdasar pada salah satu Profil Aplikasi bawaan. Profil Terpilih menjelaskan pengaturan dasar: pemasangan Widget, ukuran kecepatan dan jarak. Pada teks di bawah nama Profil, anda bisa mempelajari Profil Navigasi mana yang cocok untuk masing-masing Profil Aplikasi.</string>
+    <string name="select_nav_profile_dialog_title">Pilih tipe navigasi</string>
+    <string name="base_profile_descr_car">Mobil, Truk, Motor</string>
+    <string name="base_profile_descr_bicycle">Sepeda Gunung, Sepeda Kumbang, Kuda</string>
 </resources>
