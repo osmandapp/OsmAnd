@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.support.v7.app.AlertDialog;
 
+import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -215,7 +216,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 									mTts.setLanguage(newLocale);
 								} catch(Exception e) {
 									e.printStackTrace();
-									mTts.setLanguage(Locale.getDefault());
+									if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
+										mTts.setLanguage(Locale.getDefault());
+									} else {
+										mTts.setLanguage(Locale.ENGLISH); // or what? is english locale always available? cant find info
+										Toast.makeText(act, "TTS language not available, set to ENGLISH", Toast.LENGTH_LONG).show();
+									}
 								}
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
