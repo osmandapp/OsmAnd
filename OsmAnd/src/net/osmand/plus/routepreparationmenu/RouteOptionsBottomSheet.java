@@ -173,7 +173,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						}
 						Bundle args = new Bundle();
 						ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
-						fragment.setUsedOnMap(false);
+						fragment.setUsedOnMap(true);
 						fragment.setArguments(args);
 						fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
 						fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);

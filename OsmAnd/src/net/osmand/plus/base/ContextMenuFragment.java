@@ -165,6 +165,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		return nightMode;
 	}
 
+	public void updateNightMode() {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		}
+	}
+
 	public String getPreferredMapLang() {
 		return preferredMapLang;
 	}
@@ -238,7 +245,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		updateNightMode();
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
