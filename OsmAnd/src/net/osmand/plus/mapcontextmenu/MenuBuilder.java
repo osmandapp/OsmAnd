@@ -389,10 +389,6 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildCoordinatesRow(View view) {
-		CollapsableView cv = getCollapsableTextView(app, true, "LatLon \n olc \n link \n utc");
-	}
-
 	protected void buildNearestPhotosRow(View view) {
 		if (!app.getSettings().isInternetConnectionAvailable()) {
 			return;
