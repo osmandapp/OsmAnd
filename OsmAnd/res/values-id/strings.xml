@@ -509,4 +509,14 @@
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ikon</string>
     <string name="collected_data">Data yang Dikumpulkan</string>
+    <string name="profile_alert_need_profile_name_msg">Nama profil tidak boleh kosong!</string>
+    <string name="profile_alert_duplicate_name_title">Duplikat Nama</string>
+    <string name="profile_alert_duplicate_name_msg">Sudah ada profil dengan nama yang sama</string>
+    <string name="profile_alert_cant_delete_base">Anda tidak menghapus profil dasar OsmAnd</string>
+    <string name="profile_alert_need_save_title">Simpan Ubahan</string>
+    <string name="profile_alert_need_save_msg">Anda perlu menyimpan perubahan ke Profil sebelum melanjutkan</string>
+    <string name="profile_alert_delete_title">Hapus Profil</string>
+    <string name="profile_alert_delete_msg">Apakah anda yakin ingin menghapus profil %s</string>
+    <string name="select_base_profile_dialog_title">Pilih profil dasar</string>
+    <string name="select_base_profile_dialog_message">Profil Aplikasi Khusus harus berdasarkan pada salah satu Profil Aplikasi bawaan.</string>
 </resources>
