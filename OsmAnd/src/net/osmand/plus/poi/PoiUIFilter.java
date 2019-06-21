@@ -139,6 +139,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		updateFilterResults();
 	}
 
+	public void removeUnsavedFilterByName() {
+		filterByName = savedFilterByName;
+		updateFilterResults();
+	}
+
 	public void updateFilterResults() {
 		List<Amenity> prev = currentSearchResult;
 		if (prev != null) {
