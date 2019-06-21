@@ -276,12 +276,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				boolean followingMode = app.getRoutingHelper().isFollowingMode();
 
-				if (compassPressed + COMPASS_PRESSED_TIME_INTERVAL_MS > System.currentTimeMillis() || !followingMode) {
+				if (followingMode) {
+					if (compassPressed + COMPASS_PRESSED_TIME_INTERVAL_MS > System.currentTimeMillis()) {
+						compassPressed = 0;
+						mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
+					} else {
+						compassPressed = System.currentTimeMillis();
+						app.showShortToastMessage(app.getString(R.string.press_again_to_change_the_map_orientation));
+					}
+				} else {
 					compassPressed = 0;
 					mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
-				} else {
-					compassPressed = System.currentTimeMillis();
-					app.showShortToastMessage(app.getString(R.string.press_again_to_change_the_map_orientation));
 				}
 			}
 		});
