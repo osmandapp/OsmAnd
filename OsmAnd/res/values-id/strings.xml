@@ -93,7 +93,7 @@
     <string name="shared_string_gpx_waypoints">Melacak titik arah</string>
     <string name="favourites_group">Kategori Favorit</string>
     <string name="add_group">Tambahkan sebuah grup</string>
-    <string name="add_group_descr">Impor grup dari Favorit atau titik arah GPX</string>
+    <string name="add_group_descr">Impor grup dari Favorit atau titik arah GPX.</string>
     <string name="empty_state_markers_active">Buat penanda peta!</string>
     <string name="empty_state_markers_active_desc">Tekan lama atau sebentar pada \'Tempat\', lalu ketuk tombol bendera penanda.</string>
     <string name="empty_state_markers_groups">Impor beberap grup</string>
@@ -467,4 +467,46 @@
     <string name="increase_search_radius_to">Tingkatkan rentang pencarian hingga %1$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Hindari jalan beku dan arungan sungai.</string>
     <string name="exit_at">Keluar pada</string>
+    <string name="rate_dialog_descr">Luangkan waktu 30 detik, beri masukan dan nilai aplikasi kami di Google Play.</string>
+    <string name="button_rate">Nilai</string>
+    <string name="shared_string_privacy_policy">Kebijakan Privasi</string>
+    <string name="help_us_make_osmand_better">Bantu kami membuat OsmAnd lebih baik!</string>
+    <string name="make_osmand_better_descr">Izinkan OsmAnd untuk mengumpulkan dan memproses data penggunaan aplikasi secara anonim. Kami tidak mengumpulkan atau menyimpan data lokasi anda, atau data lokasi yang anda lihat di peta.
+\n
+\nAnda selalu bisa mengubah pilihan anda di Pengaturan &gt; Privasi dan Keamanan.</string>
+    <string name="choose_data_to_share">Pilih tipe data yang ingin anda bagikan:</string>
+    <string name="downloaded_maps">Peta yang Diunduh</string>
+    <string name="visited_screens">Layar yang dikunjungi</string>
+    <string name="collected_data_descr">Daftar data yang ingin anda bagikan dengan OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Kami mengumpulkan data ini untuk memahami peta wilayah dan negara yang paling populer.</string>
+    <string name="visited_screens_collect_descr">Kami mengumpulkan data ini untuk memahami fitur dari OsmAnd yang paling populer.</string>
+    <string name="privacy_and_security_change_descr">Dengan mengklik \"Izinkan\" anda setuju dengan %1$s kami</string>
+    <string name="settings_privacy_and_security">Privasi dan Keamanan</string>
+    <string name="settings_privacy_and_security_desc">Pilih data yang ingin anda bagikan dengan kami</string>
+    <string name="shared_string_no_thank_you">Tidak, terima kasih</string>
+    <string name="shared_string_allow">Izinkan</string>
+    <string name="profile_name_hint">Nama Profil</string>
+    <string name="nav_type_hint">Tipe Navigasi</string>
+    <string name="app_mode_taxi">Taksi</string>
+    <string name="app_mode_subway">Kereta bawah tanah</string>
+    <string name="app_mode_horse">Kuda</string>
+    <string name="app_mode_helicopter">Helikopter</string>
+    <string name="osmand_routing_promo">Anda bisa menambahkan versi routing.xml anda sendiri ke ..osmand/routing</string>
+    <string name="app_mode_skiing">Main ski</string>
+    <string name="base_profile_descr_ski">Bermain ski</string>
+    <string name="show_compass_ruler">Tampilkan penggaris kompas</string>
+    <string name="hide_compass_ruler">Sembunyikan penggaris kompas</string>
+    <string name="select_icon_profile_dialog_title">Pilih ikon</string>
+    <string name="settings_routing_mode_string">Mode: %s</string>
+    <string name="settings_derived_routing_mode_string">Mode Pengguna, turunan dari: %s</string>
+    <string name="routing_profile_ski">Ski</string>
+    <string name="profile_type_descr_string">Tipe: %s</string>
+    <string name="profile_type_base_string">Profil Dasar</string>
+    <string name="profile_alert_need_routing_type_title">Pilih tipe navigasi</string>
+    <string name="profile_alert_need_routing_type_msg">Anda perlu memilih tipe Navigasi untuk membuat Profil Aplikasi Baru.</string>
+    <string name="profile_alert_need_profile_name_title">Masukkan Nama Profil</string>
+    <string name="process_downloading_service">Layanan pengunduhan OsmAnd</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Ikon</string>
+    <string name="collected_data">Data yang Dikumpulkan</string>
 </resources>
