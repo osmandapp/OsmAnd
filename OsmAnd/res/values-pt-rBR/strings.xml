@@ -3119,4 +3119,8 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_difficulty_preference_description">Prefira rotas dessa dificuldade, embora o roteamento em pistas mais difíceis ou mais fáceis ainda seja possível se for mais curto.</string>
     <string name="routing_attr_freeride_policy_name">Fora de pista</string>
     <string name="routing_attr_freeride_policy_description">Freerides e offpiste são rotas e passagens não oficiais. Normalmente sem estilo, sem manutenção dos funcionários e não checado à noite. Digite a risco próprio.</string>
+    <string name="process_downloading_service">Serviço de download do OsmAnd</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Ícone</string>
+    <string name="collected_data">Dados coletados</string>
 </resources>
