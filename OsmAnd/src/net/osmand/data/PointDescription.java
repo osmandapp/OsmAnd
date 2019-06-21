@@ -8,10 +8,13 @@ import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import net.osmand.LocationConvert;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
 public class PointDescription {
@@ -170,6 +173,40 @@ public class PointDescription {
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0); 
 			}
 		}
+	}
+
+	public static Map<String, String> getLocationData(MapActivity ctx, double lat, double lon, boolean sh) {
+		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+		Map<String, String> results = new LinkedHashMap<>();
+
+		int f = settings.COORDINATES_FORMAT.get();
+
+		UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
+		results.put(PointDescription.formatToHumanString(ctx, UTM_FORMAT), pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "+ ((long) pnt.northing));
+
+		try {
+			results.put(PointDescription.formatToHumanString(ctx, OLC_FORMAT), getLocationOlcName(lat, lon));
+		} catch (RuntimeException e) {
+			results.put(PointDescription.formatToHumanString(ctx, OLC_FORMAT), "0, 0");
+		}
+
+		if (f == PointDescription.UTM_FORMAT || f == PointDescription.OLC_FORMAT) {
+			f = PointDescription.FORMAT_DEGREES;
+		}
+
+		try {
+			results.put(PointDescription.formatToHumanString(ctx, f),
+				ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, LocationConvert.convert(lat, f),
+				LocationConvert.convert(lon, f)));
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			results.put(PointDescription.formatToHumanString(ctx, f),
+				ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0));
+		}
+		final String httpUrl = "https://osmand.net/go?lat=" + (lat)
+			+ "&lon=" + (lon) + "&z=" +  ctx.getMapView().getZoom();
+		results.put("URL", httpUrl);
+		return results;
 	}
 
 	public static String getLocationNamePlain(Context ctx, double lat, double lon) {

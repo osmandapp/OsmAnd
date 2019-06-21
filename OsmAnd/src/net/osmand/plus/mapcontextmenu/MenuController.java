@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
+import java.util.Map;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -45,6 +46,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.AMapPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -257,6 +259,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		builder.addPlainMenuItem(iconId, buttonText, text, needLinks, isUrl, onClickListener);
 	}
 
+	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
+		boolean collapsable, CollapsableView collapsableView, OnClickListener onClickListener) {
+
+		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, collapsable, collapsableView, onClickListener);
+	}
+
 	public void clearPlainMenuItems() {
 		builder.clearPlainMenuItems();
 	}
@@ -265,11 +273,13 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		addMyLocationToPlainItems(latLon);
 	}
 
-	protected void addMyLocationToPlainItems(LatLon latLon) {
-		MapActivity mapActivity = getMapActivity();
+	protected void addMyLocationToPlainItems(LatLon latlon) {
+		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			addPlainMenuItem(R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(mapActivity,
-					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
+			String f = PointDescription.formatToHumanString(mapActivity,  mapActivity.getMyApplication().getSettings().COORDINATES_FORMAT.get());
+			Map<String, String> locationData = PointDescription.getLocationData(mapActivity, latlon.getLatitude(), latlon.getLongitude(), true);
+			CollapsableView cv = builder.getLocationCollapsableView(locationData);
+			addPlainMenuItem(R.drawable.ic_action_get_my_location, locationData.get(f).replace("\n", " "), true, false, true, cv, null);
 		}
 	}
 
