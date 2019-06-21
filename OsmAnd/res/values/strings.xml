@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="press_again_to_change_the_map_orientation">Press again to change the map orientation</string>
     <string name="process_downloading_service">OsmAnd downloading service</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icon</string>
