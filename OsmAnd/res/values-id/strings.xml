@@ -522,4 +522,27 @@
     <string name="select_nav_profile_dialog_title">Pilih tipe navigasi</string>
     <string name="base_profile_descr_car">Mobil, Truk, Motor</string>
     <string name="base_profile_descr_bicycle">Sepeda Gunung, Sepeda Kumbang, Kuda</string>
+    <string name="files_moved">Memindahkan %1$d berkas (%2$s).</string>
+    <string name="files_copied">Menyalin %1$d berkas (%2$s).</string>
+    <string name="files_failed">Gagal menyalin %1$d berkas (%2$s).</string>
+    <string name="files_present">%1$d berkas (%2$s) sudah ada di lokasi sebelumnya \'%3$s\'.</string>
+    <string name="move_maps">Pindahkan peta</string>
+    <string name="dont_move_maps">Jangan pindahkan</string>
+    <string name="public_transport_ped_route_title">Rute berjalan kaki kira-kira %1$s dan mungkin bisa lebih cepat dari transportasi publik</string>
+    <string name="public_transport_no_route_title">OsmAnd tidak bisa menemukan rute yang cocok dengan pengaturan anda.</string>
+    <string name="public_transport_try_ped">Coba navigasi pejalan kaki.</string>
+    <string name="searching_gps">Mencari GPS</string>
+    <string name="coordinates_widget">Widget koordinat</string>
+    <string name="base_profile_descr_pedestrian">Berjalan, Naik Gunung, Berlari</string>
+    <string name="base_profile_descr_public_transport">Semua tipe Transportasi Publik</string>
+    <string name="base_profile_descr_boat">Kapal, Mendayung, Berlayar</string>
+    <string name="base_profile_descr_aircraft">Pesawat, Paralayang</string>
+    <string name="routing_profile_straightline">Garis Lurus</string>
+    <string name="routing_profile_broutrer">BRouter (Luring)</string>
+    <string name="osmand_default_routing">Rute OsmAnd</string>
+    <string name="custom_routing">Profil rute khusus</string>
+    <string name="special_routing_type">Rute spesial</string>
+    <string name="third_party_routing_type">Rute pihak ke-3</string>
+    <string name="application_profiles_descr">Pilih profil yang akan ditampilkan di aplikasi.</string>
+    <string name="application_profiles">Profil aplikasi</string>
 </resources>
