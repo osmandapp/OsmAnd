@@ -648,7 +648,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
 		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
-		MapActivity.launchMapActivityMoveToTop(getActivity());
+		Bundle b = new Bundle();
+		b.putString("favorites_activity", "osm_edits_tab");
+		MapActivity.launchMapActivityMoveToTop(getActivity(), null, b);
 	}
 
 	private void deletePoint(OsmPoint osmPoint) {

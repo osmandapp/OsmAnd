@@ -44,6 +44,7 @@ public class FavoritesActivity extends TabActivity {
 
 	public static final String OPEN_FAVOURITES_TAB = "open_favourites_tab";
 	public static final String OPEN_MY_PLACES_TAB = "open_my_places_tab";
+	public static final String OPEN_OSM_EDITS_TAB = "open_osm_edits_tab";
 
 	public static final int  GPX_TAB = R.string.shared_string_tracks;
 	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
@@ -71,6 +72,11 @@ public class FavoritesActivity extends TabActivity {
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 		// setupHomeButton();
+
+//		Bundle b = getIntent().getExtras();
+//		if (b != null) {
+//			if ()
+//		}
 
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 		if (icicle == null) {

@@ -640,6 +640,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
 				prevActivityIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 			}
+			if (prevActivityIntent.getComponent() != null
+				&& prevActivityIntent.getComponent().getClassName().equals("net.osmand.plus.myplaces.FavoritesActivity")) {
+//				LOG.debug("PrevVisibleDash: " + dashboardOnMap.getPreviousVisibleType().name());
+			}
 			this.startActivity(prevActivityIntent);
 			prevActivityIntent = null;
 			return;
@@ -1611,6 +1615,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | additionalFlags);
 			if (intentExtraActionName != null) {
 				newIntent.putExtra(intentExtraActionName, intentExtraActionValue);
+			}
+			if (intentExtraActionName == null && intentExtraActionValue != null) {
+				newIntent.putExtras(intentExtraActionValue);
 			}
 			activity.startActivity(newIntent);
 		}
