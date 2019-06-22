@@ -2522,12 +2522,13 @@
 \n• Просмотр вашей скорости и высоты над уровнем моря 
 \n• Опция записи GPX позволяет вам записывать ваше путешествие и делиться им 
 \n• Через приложение вы можете включить отображение контурных линий и затемнение рельефа</string>
-    <string name="osmand_extended_description_part6">Прогулки, походы, экскурсии 
+    <string name="osmand_extended_description_part6">"Прогулки,  пеший туризм, экскурсии 
 \n• Карта показывает пешеходные и треккинговые тропы 
 \n• Википедия на предпочитаемом вами языке может многое рассказать вам во время экскурсии по городу 
 \n• Остановки общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов, помогут ориентироваться в новом городе 
 \n• GPS навигация в пешеходном режиме высчитывает маршрут, используя пешеходные тропы 
-\n• Загрузите и следуйте по маршруту GPX или запишите и поделитесь своим собственным</string>
+\n• Загрузите и следуйте по маршруту GPX или запишите и поделитесь своим собственным
+\n"</string>
     <string name="osmand_extended_description_part7">Внесение вклада в OSM 
 \n• Сообщения об ошибках 
 \n• Загрузка треков GPX в OSM напрямую из программы 
@@ -3062,4 +3063,30 @@
     <string name="profile_alert_need_profile_name_title">Введите имя профиля</string>
     <string name="profile_alert_need_profile_name_msg">Имя профиля не должно быть пустым!</string>
     <string name="profile_alert_duplicate_name_msg">Уже есть профиль с таким именем</string>
+    <string name="rate_dialog_descr">Пожалуйста, уделите нам 30 секунд, оставьте отзыв и оцените нашу работу в Google Play.</string>
+    <string name="settings_privacy_and_security_desc">Выберите ваши данные, чтобы поделиться с нами</string>
+    <string name="app_mode_skiing">Лыжи</string>
+    <string name="base_profile_descr_ski">Лыжи</string>
+    <string name="profile_alert_cant_delete_base">Вы не можете удалить базовые профили OsmAnd</string>
+    <string name="profile_alert_need_save_title">Сохранить изменения</string>
+    <string name="profile_alert_need_save_msg">Прежде чем продолжить, необходимо сохранить изменения в профиле</string>
+    <string name="profile_alert_delete_title">Удалить профиль</string>
+    <string name="profile_alert_delete_msg">Вы уверены, что хотите удалить профиль %s</string>
+    <string name="select_base_profile_dialog_title">Выберите базовый профиль</string>
+    <string name="select_base_profile_dialog_message">Пользовательский профиль приложения должен основываться на одном из профилей приложения по умолчанию. Выбранный профиль определяет основные настройки: настройку виджетов, единиц измерения скорости и расстояния. В строке ниже имени профиля вы можете узнать, какие профили навигации подходят для каждого профиля приложения.</string>
+    <string name="select_nav_profile_dialog_title">Выберите тип навигации</string>
+    <string name="base_profile_descr_car">Автомобиль, грузовик, мотоцикл</string>
+    <string name="base_profile_descr_bicycle">MTB, мопед, лошадь</string>
+    <string name="base_profile_descr_pedestrian">Прогулки, пеший туризм, бег</string>
+    <string name="base_profile_descr_public_transport">Все типы ОТ</string>
+    <string name="base_profile_descr_boat">Корабль, гребля, парусный спорт</string>
+    <string name="base_profile_descr_aircraft">Самолет, планеризм</string>
+    <string name="routing_profile_geocoding">Геокодирование</string>
+    <string name="routing_profile_straightline">Прямая линия</string>
+    <string name="application_profiles_descr">Выберите профили, которые будут отображаться в приложении.</string>
+    <string name="application_profiles">Профили приложения</string>
+    <string name="zoom_by_wunderlinq">Использовать WunderLINQ для контроля</string>
+    <string name="shared_string_icon">Значок</string>
+    <string name="collected_data">Собранные данные</string>
+    <string name="press_again_to_change_the_map_orientation">Нажмите еще раз, чтобы изменить ориентацию карты</string>
 </resources>
