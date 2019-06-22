@@ -3138,4 +3138,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Symbol</string>
     <string name="collected_data">Gesammelte Daten</string>
+    <string name="routing_attr_piste_type_nordic_name">Skilanglauf/Nordischer Skisport</string>
+    <string name="routing_attr_piste_type_nordic_description">Loipen für Skilangläufer und Nordische Skiläufer.</string>
+    <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl die Routenführung über schwierigere oder einfachere Pisten immer noch möglich ist, wenn kürzer.</string>
+    <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
+    <string name="routing_attr_freeride_policy_description">Freerides und außerhalb der Piste sind inoffizielle Routen und Passagen. Typischerweise nicht angelegt, nicht von Beamten gepflegt und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
+    <string name="press_again_to_change_the_map_orientation">Drücken Sie erneut, um die Kartenausrichtung zu ändern</string>
 </resources>
