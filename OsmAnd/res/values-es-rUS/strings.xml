@@ -3135,4 +3135,9 @@ Lon %2$s</string>
     <string name="routing_attr_difficulty_preference_description">Preferir rutas de esta dificultad, aunque el trazado sobre pistas más duras o más fáciles sigue siendo posible si son más cortas.</string>
     <string name="routing_attr_freeride_policy_name">Fuera de pista</string>
     <string name="routing_attr_freeride_policy_description">Los senderos libres y fuera de pista son rutas y pasajes no oficiales. Típicamente descuidados, no mantenidos por los oficiales y no controlados por la noche. Entrar bajo su propio riesgo.</string>
+    <string name="process_downloading_service">Servicio de descarga de OsmAnd</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Icono</string>
+    <string name="collected_data">Datos recopilados</string>
+    <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
 </resources>
