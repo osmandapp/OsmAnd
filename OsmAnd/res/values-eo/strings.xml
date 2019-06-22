@@ -3027,4 +3027,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="public_transport_type">Speco de transporto</string>
     <string name="searching_gps">Determinado de pozicio…</string>
     <string name="coordinates_widget">Fenestraĵo de koordinatoj</string>
+    <string name="press_again_to_change_the_map_orientation">Premu ree por ŝanĝi map‑orientiĝon</string>
 </resources>
