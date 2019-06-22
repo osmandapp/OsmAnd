@@ -3139,4 +3139,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_difficulty_preference_description">Foretræk ruter med denne vanskelighed, selv om ruteplanlægning over sværere eller lettere pister stadig er muligt, hvis de er kortere.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">Fri og off-piste stier er uofficielle ruter og passager. Typisk upræparerede, ikke vedligeholdt og ikke kontrolleret om natten. Adgang på egen risiko.</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Ikon</string>
+    <string name="collected_data">Indsamlede data</string>
 </resources>

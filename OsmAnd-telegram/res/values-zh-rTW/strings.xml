@@ -64,13 +64,13 @@
     <string name="shared_string_group">群組</string>
     <string name="logout_no_internet_msg">連接到網路以正確登出 Telegram。</string>
     <string name="shared_string_close">關閉</string>
-    <string name="disconnect_from_telegram_desc">撤銷位置共用訪問。打開 Telegram，進入設定→隱私和安全→會話，並終 OsmAnd Tracker 會話。</string>
+    <string name="disconnect_from_telegram_desc">要撤銷位置分享的存取權。開啟 Telegram，然後到設定→安全與隱私→工作階段，然後將 OsmAnd Tracker 工作階段結束掉。</string>
     <string name="disconnect_from_telegram">如何關閉 Telegram 中的 OsmAnd 追蹤器</string>
     <string name="logout_help_desc">如何關閉 Telegram 中的 OsmAnd 追蹤器</string>
     <string name="connected_account">已連接帳戶</string>
     <string name="shared_string_account">帳戶</string>
     <string name="in_time">在 %1$s</string>
-    <string name="osmand_connect_desc">選擇 OsmAnd 和版本的 OsmAnd Tracker 用於顯示位置。</string>
+    <string name="osmand_connect_desc">選擇 OsmAnd 版本 OsmAnd Tracker 用於顯示位置。</string>
     <string name="osmand_connect">OsMand 連接</string>
     <string name="location_history_desc">隱藏在給定時間內未移動的連絡人。</string>
     <string name="location_history">位置歷史記錄</string>
@@ -111,7 +111,7 @@
     <string name="my_location_search_hint">搜尋：群組或連絡人</string>
     <string name="start_location_sharing">共用位置</string>
     <string name="show_on_map">在地圖上顯示</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd 線上 GPS 追蹤程式</string>
     <string name="phone_number_title">電話號碼</string>
     <string name="phone_number_descr">國際格式的電話號碼</string>
     <string name="shared_string_password">密碼</string>
@@ -134,11 +134,11 @@
     <string name="gps_not_available">請在系統設置中打開“位置”</string>
     <string name="location_service_no_gps_available">選擇一個位置提供商來共享您的位置。</string>
     <string name="osmand_service">背景模式</string>
-    <string name="osmand_service_descr">當螢幕關閉後，讓 OsmAnd 在背景運行。</string>
+    <string name="osmand_service_descr">當螢幕關閉後，讓 OsmAnd Tracker 在背景執行。</string>
     <string name="shared_string_distance">距離</string>
     <string name="share_location">共用位置</string>
     <string name="sharing_location">共用位置</string>
-    <string name="process_service">OsmAnd Tracker 伺服器</string>
+    <string name="process_service">OsmAnd Tracker 服務</string>
     <string name="osmand_logo">OsmAnd 圖示</string>
     <string name="install_osmand_dialog_message">您需要先安裝免費或付費版本的 OsmAnd</string>
     <string name="install_osmand">安裝 OsMand</string>
@@ -235,4 +235,12 @@
     <string name="proxy_settings">代理伺服器設定</string>
     <string name="proxy">代理伺服器</string>
     <string name="privacy">隱私</string>
+    <string name="shared_string_select">選取</string>
+    <string name="min_logging_distance">最小記錄距離</string>
+    <string name="min_logging_distance_descr">過濾：記錄新點的最小距離</string>
+    <string name="min_logging_accuracy">最低記錄精度</string>
+    <string name="min_logging_accuracy_descr">過濾：除非達到一定的精度否則不記錄</string>
+    <string name="min_logging_speed">最小記錄速度</string>
+    <string name="min_logging_speed_descr">過濾：在選定的速度以下不記錄</string>
+    <string name="gpx_settings">GPX 設定</string>
 </resources>
