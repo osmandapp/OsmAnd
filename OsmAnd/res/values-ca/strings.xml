@@ -3058,7 +3058,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Proveu a canviar els paràmetres.</string>
     <string name="public_transport_calc_pedestrian">Calcula la ruta per vianants</string>
     <string name="public_transport_type">Tipus de transport</string>
-    <string name="searching_gps">Cerca GPS</string>
+    <string name="searching_gps">Buscant GPS</string>
     <string name="coordinates_widget">Giny de coordenades</string>
     <string name="rate_dialog_descr">Dediqueu-nos 30 segons, si us plau. Publiqueu comentaris i valoreu la nostra feina a Google Play.</string>
     <string name="button_rate">Puntua</string>
@@ -3105,4 +3105,22 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="profile_alert_delete_title">Suprimeix el perfil</string>
     <string name="profile_alert_delete_msg">Esteu segur que voleu suprimir el perfil %s</string>
     <string name="select_base_profile_dialog_title">Selecció del perfil base</string>
+    <string name="settings_derived_routing_mode_string">Mode usuari, derivat de: %s</string>
+    <string name="select_nav_profile_dialog_title">Seleccioneu el tipus de navegació</string>
+    <string name="base_profile_descr_car">Cotxe, camió, motocicleta</string>
+    <string name="base_profile_descr_pedestrian">Passejada, Senderisme, Cursa</string>
+    <string name="base_profile_descr_public_transport">Qualsevol transport públic</string>
+    <string name="routing_profile_straightline">Línia recta</string>
+    <string name="osmand_default_routing">Navegació OsmAnd</string>
+    <string name="custom_routing">Perfil de navegació personalitzat</string>
+    <string name="special_routing_type">Navegació especial</string>
+    <string name="third_party_routing_type">Navegació de tercers</string>
+    <string name="application_profiles_descr">Seleccioneu els perfils que voleu que es mostrin a l\'aplicació.</string>
+    <string name="application_profiles">Perfils d\'aplicació</string>
+    <string name="routing_attr_piste_type_downhill_name">Esquí alpí/descens</string>
+    <string name="process_downloading_service">Servei de baixades d\'OsmAnd</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Icona</string>
+    <string name="collected_data">Dades recollides</string>
+    <string name="press_again_to_change_the_map_orientation">Torneu a prémer per canviar l\'orientació del mapa</string>
 </resources>
