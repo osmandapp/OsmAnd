@@ -2,9 +2,7 @@
 <resources>
     <string name="background_work_description">Zmień ustawienia optymalizacji baterii, aby zapewnić stabilną lokalizację.</string>
     <string name="background_work">Praca w tle</string>
-    <string name="battery_optimization_description">Aby stabilnie udostępniać swoją pozycję w tle, zaleca się wyłączenie optymalizacji baterii dla Tracker OsmAnd.
-\n
-\nJeśli włączona jest optymalizacja, system może automatycznie wyłączyć aplikację działającą w tle (gdy ekran jest zablokowany i/lub aplikacja jest zminimalizowana). Dzieje się tak bez powiadomienia i powoduje zatrzymanie położenia geograficznego.</string>
+    <string name="battery_optimization_description">Wyłącz optymalizację baterii dla OsmAnd Tracker, aby nie została nagle wyłączona, gdy znajduje się w tle.</string>
     <string name="sharing_in_background">Udostępnianie w tle</string>
     <string name="go_to_settings">Przejdź do ustawień</string>
     <string name="shared_string_later">Później</string>
