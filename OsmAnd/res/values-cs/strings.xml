@@ -3054,4 +3054,18 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_color_magenta">Purpurová</string>
     <string name="shared_string_icon">Ikona</string>
     <string name="collected_data">Shromážděné údaje</string>
+    <string name="profile_alert_need_profile_name_title">Zadejte název profilu</string>
+    <string name="profile_alert_need_profile_name_msg">Název profilu by neměl být prázdný!</string>
+    <string name="profile_alert_duplicate_name_title">Duplicitní název</string>
+    <string name="profile_alert_duplicate_name_msg">Profil s tímto názvem již existuje</string>
+    <string name="profile_alert_cant_delete_base">Nelze smazat základní profily OsmAnd</string>
+    <string name="profile_alert_need_save_title">Uložit změny</string>
+    <string name="profile_alert_need_save_msg">Před pokračováním je třeba uložit změny profilu</string>
+    <string name="profile_alert_delete_title">Odstranit profil</string>
+    <string name="profile_alert_delete_msg">Opravdu chcete odstranit profil %s</string>
+    <string name="select_base_profile_dialog_title">Zvolte základní profil</string>
+    <string name="select_nav_profile_dialog_title">Vyberte typ navigace</string>
+    <string name="base_profile_descr_car">Auto, nákladní auto, motocykl</string>
+    <string name="base_profile_descr_bicycle">Horské kolo, moped, kůň</string>
+    <string name="base_profile_descr_pedestrian">Chůze, turistika, běh</string>
 </resources>
