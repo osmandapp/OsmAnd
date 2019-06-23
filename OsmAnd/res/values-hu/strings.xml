@@ -514,7 +514,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="recalculate_route_to_your_location">Közlekedési mód:</string>
     <string name="mark_final_location_first">Először jelölj ki egy célpontot</string>
     <string name="get_directions">Navigáció</string>
-    <string name="opening_hours">Nyitvatartás</string>
+    <string name="opening_hours">Nyitva tartás</string>
     <string name="opening_changeset">Módosításcsomag megnyitása…</string>
     <string name="closing_changeset">Módosításcsomag lezárása…</string>
     <string name="commiting_node">Pont felvitele…</string>
