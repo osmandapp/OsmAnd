@@ -3123,4 +3123,6 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ícone</string>
     <string name="collected_data">Dados coletados</string>
+    <string name="app_profile_custom_nav_subtitle">.</string>
+    <string name="press_again_to_change_the_map_orientation">Pressione novamente para alterar a orientação do mapa</string>
 </resources>
