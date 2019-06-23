@@ -799,7 +799,7 @@
     <string name="poi_piste">Skivojo</string>
     <string name="poi_piste_downhill">Skivojo alpa (malsuprenira)</string>
     <string name="poi_piste_nordic">Skivojo nordia (skikurada)</string>
-    <string name="poi_piste_skitour">Skivojo ski-ekskursuma</string>
+    <string name="poi_piste_skitour">Skivojo ski-ekskursa</string>
     <string name="poi_piste_hike">Skivojo marŝada</string>
     <string name="poi_piste_sleigh">Skivojo glitveturila (tirata de hundoj)</string>
     <string name="poi_piste_sled">Skivojo glitveturila</string>
@@ -1535,9 +1535,9 @@
     <string name="poi_toilets_access_permissive">Necesejo: verŝajne alirebla</string>
     <string name="poi_toilets_access_community">Necesejo: nur por anoj</string>
     <string name="poi_toilets_access_public">Necesejo: publika aliro</string>
-    <string name="poi_diaper_yes">Tablo por tra-vindotuk-ado</string>
-    <string name="poi_diaper_no">Sen tablo por tra-vindotuk-ado</string>
-    <string name="poi_diaper_room">Ĉambro por tra-vindotuk-ado</string>
+    <string name="poi_diaper_yes">Tablo por ŝanĝi vindotukojn</string>
+    <string name="poi_diaper_no">Sen tablo ŝanĝi vindotukojn</string>
+    <string name="poi_diaper_room">Ĉambro por ŝanĝi vindotukojn</string>
     <string name="poi_maxstay">Tempolimo de parkumado</string>
     <string name="poi_vending_parking_tickets">parkum-biletoj</string>
     <string name="poi_vending_cigarettes">cigaredoj</string>
@@ -2580,7 +2580,7 @@
     <string name="poi_diplomatic_delegation">oficejo de delegitaro (EU)</string>
     <string name="poi_diplomatic_ambassadors_residence">ambasadestrejo</string>
     <string name="poi_diplomatic_high_commission">oficejo de alta komisaro</string>
-    <string name="poi_diaper_table_count">Tabloj por tra-vindotuk-ado</string>
+    <string name="poi_diaper_table_count">Tabloj por ŝanĝi vindotukojn</string>
     <string name="poi_fire_operator">Administranto kontraŭfajrega</string>
     <string name="poi_toilets_disposal_flush">Necesej-speco: akvoŝpruca</string>
     <string name="poi_toilets_disposal_pitlatrine">Necesej-speco: ter-truo (latrino)</string>
@@ -3575,4 +3575,25 @@
     <string name="poi_rescue_box">Tujhelpilo (ensovaĝe)</string>
     <string name="poi_climbing_crag">jes</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Danĝero: erozio</string>
+    <string name="poi_hazard_additional_rockfall">Danĝero: falantaj rokoj</string>
+    <string name="poi_hazard_additional_nuclear">Danĝero: atomkerna</string>
+    <string name="poi_hazard_additional_flood">Danĝero: superakvego</string>
+    <string name="poi_hazard_additional_avalanche">Danĝero: lavango</string>
+    <string name="poi_hazard_additional_minefield">Danĝero: minkampo</string>
+    <string name="poi_hazard_additional_contamination">Danĝero: poluo</string>
+    <string name="poi_defibrillator_location">Loko</string>
+    <string name="poi_changing_table_yes">Tablo por ŝanĝi vindotukojn: jes</string>
+    <string name="poi_changing_table_no">Tablo por ŝanĝi vindotukojn: ne</string>
+    <string name="poi_changing_table_limited">Tablo por ŝanĝi vindotukojn: neoficiala</string>
+    <string name="poi_changing_table_location_room">Tablo por ŝanĝi vindotukojn: aparta ĉambro</string>
+    <string name="poi_changing_table_location_male_toilet">Loko de tablo: vira necesejo</string>
+    <string name="poi_changing_table_location_female_toilet">Loko de tablo: ina necesejo</string>
+    <string name="poi_changing_table_location_unisex_toilet">Loko de tablo: gea necesejo</string>
+    <string name="poi_changing_table_count">Nombro da tabloj</string>
+    <string name="poi_changing_table_fee_yes">Pagenda tablo: jes</string>
+    <string name="poi_changing_table_fee_no">Pagenda tablo: ne</string>
+    <string name="poi_charcoal_pile">Karbigejo</string>
+    <string name="poi_historic_tank">Tanko historia</string>
+    <string name="poi_hookah_lounge">Salono por fumi akvopipon</string>
 </resources>
