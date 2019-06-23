@@ -3132,4 +3132,14 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routing_attr_allow_classic_only_name">Leyfa leiðir sem eingöngu eru fyrir klassísk skíðaspor</string>
     <string name="routing_attr_freeride_policy_name">Utanbrauta</string>
     <string name="process_downloading_service">OsmAnd niðurhalsþjónusta</string>
+    <string name="rate_dialog_descr">Tileinkaðu okkur 30 sekúndur, deildu reynslu þinni og gefðu okkur einkunn á Google Play.</string>
+    <string name="routing_profile_geocoding">Landkóðun</string>
+    <string name="zoom_by_wunderlinq_descr">Breyttu aðdrætti á kort með skruni músarhjóls upp og niður. Escape fer aftur með þig inn í WunderLINQ forritið.</string>
+    <string name="quick_action_need_to_add_item_to_list">Þú verður að skilgreina a.m.k. eitt atriði í listanum í stillingum flýtiaðgerða</string>
+    <string name="routing_attr_piste_type_downhill_description">Brekkur fyrir svigskíði eða brun og aðgangur að skíðalyftum.</string>
+    <string name="routing_attr_piste_type_nordic_name">Gönguskíði/norræn fjallaskíði</string>
+    <string name="routing_attr_piste_type_nordic_description">Leiðir fyrir gönguskíði eða norræn fjallaskíði.</string>
+    <string name="routing_attr_allow_classic_only_description">Leiðir sem troðnar eru einungis fyrir klassískan stíl en án hluta fyrir skautun. Þetta telur einnig með leiðir sem troðnar eru með minni farartækjum og lausari sporum sem jafnvel eru gerð af skíðagöngufólkinu sjálfu.</string>
+    <string name="routing_attr_difficulty_preference_description">Kjósa leiðir á þessu erfiðleikastigi, þótt leiðarval um erfiðari eða auðveldari leiðir séu mögulegar ef um stutta búta sé að ræða.</string>
+    <string name="routing_attr_freeride_policy_description">Frjálsar brekkur og utanbrautaleiðir eru óopinberar leiðir. Venjulega ótroðnar, ekki viðhaldið af starfsmönnum skíðasvæðis og oft ekki skoðaðar í lok dags. Umferð er leyfð á eigin ábyrgð.</string>
 </resources>
