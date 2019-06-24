@@ -640,10 +640,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
 				prevActivityIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 			}
-			if (prevActivityIntent.getComponent() != null
-				&& prevActivityIntent.getComponent().getClassName().equals("net.osmand.plus.myplaces.FavoritesActivity")) {
-//				LOG.debug("PrevVisibleDash: " + dashboardOnMap.getPreviousVisibleType().name());
-			}
 			this.startActivity(prevActivityIntent);
 			prevActivityIntent = null;
 			return;
