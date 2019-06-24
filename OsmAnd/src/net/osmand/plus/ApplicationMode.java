@@ -522,6 +522,7 @@ public class ApplicationMode {
 	private static void initCustomModes(OsmandSettings settings){
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		Type t = new TypeToken<ArrayList<ApplicationMode>>() {}.getType();
+		// TODO ?? clear settings
 		List<ApplicationMode> customProfiles = gson.fromJson(settings.CUSTOM_APP_PROFILES.get(), t);
 
 		if (!Algorithms.isEmpty(customProfiles)) {
@@ -576,6 +577,7 @@ public class ApplicationMode {
 	}
 
 	public static boolean changeProfileStatus(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
+		// TODO ?????
 		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(ApplicationMode.values(app));
 		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
 		if (allPossibleValues().contains(mode)) {
