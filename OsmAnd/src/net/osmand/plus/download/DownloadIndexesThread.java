@@ -94,15 +94,19 @@ public class DownloadIndexesThread {
 	}
 
 	@UiThread
+	protected void downloadHasStarted() {
+		if (app.getDownloadService() == null) {
+			app.startDownloadService();
+		}
+		updateNotification();
+	}
+
+	@UiThread
 	protected void downloadInProgress() {
 		if (uiActivity != null) {
 			uiActivity.downloadInProgress();
 		}
 		updateNotification();
-	}
-	
-	private void updateNotification() {
-		app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
 	}
 
 	@UiThread
@@ -225,9 +229,6 @@ public class DownloadIndexesThread {
 				indexItemDownloading.add(item);
 			}
 		}
-		if (app.getDownloadService() == null) {
-			app.startDownloadService();
-		}
 		if (currentDownloadingItem == null) {
 			execute(new DownloadIndexesAsyncTask());
 		} else {
@@ -313,7 +314,9 @@ public class DownloadIndexesThread {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
 	}
 
-
+	private void updateNotification() {
+		app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
+	}
 
 	private class ReloadIndexesTask extends BasicProgressAsyncTask<Void, Void, Void, DownloadResources> {
 
@@ -445,6 +448,7 @@ public class DownloadIndexesThread {
 				}
 			}
 			startTask(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis), -1);
+			downloadHasStarted();
 		}
 
 		@Override
@@ -462,9 +466,6 @@ public class DownloadIndexesThread {
 			indexes.updateFilesToUpdate();
 			downloadHasFinished();
 		}
-
-		
-
 
 		@Override
 		protected String doInBackground(IndexItem... filesToDownload) {
@@ -556,7 +557,6 @@ public class DownloadIndexesThread {
 			}
 			return !exceed;
 		}
-
 
 		private String reindexFiles(List<File> filesToReindex) {
 			boolean vectorMapsToReindex = false;

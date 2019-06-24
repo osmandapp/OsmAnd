@@ -3089,4 +3089,5 @@
     <string name="shared_string_icon">Значок</string>
     <string name="collected_data">Собранные данные</string>
     <string name="press_again_to_change_the_map_orientation">Нажмите еще раз, чтобы изменить ориентацию карты</string>
+    <string name="last_launch_crashed">Последний запуск OsmAnd завершился с ошибкой. Помогите нам улучшить OsmAnd. Пожалуйста, отправьте нам сообщение об ошибке.</string>
 </resources>
