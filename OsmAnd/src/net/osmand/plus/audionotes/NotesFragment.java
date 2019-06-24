@@ -52,7 +52,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 
-import net.osmand.plus.myplaces.FavoritesActivity.ObjectListPosition;
+import net.osmand.plus.myplaces.FavoritesActivity.FragmentStateHolder;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -65,7 +65,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class NotesFragment extends OsmAndListFragment implements ObjectListPosition {
+public class NotesFragment extends OsmAndListFragment implements FragmentStateHolder {
 
 	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
 
@@ -147,7 +147,7 @@ public class NotesFragment extends OsmAndListFragment implements ObjectListPosit
 		listAdapter.setPortrait(portrait);
 		listView.setAdapter(listAdapter);
 		if (getActivity() != null && getActivity() instanceof FavoritesActivity) {
-			setListPosition(((FavoritesActivity) getActivity()).getScrollPosition());
+			restoreState(((FavoritesActivity) getActivity()).getItemPosition());
 		}
 	}
 
@@ -274,8 +274,8 @@ public class NotesFragment extends OsmAndListFragment implements ObjectListPosit
 			}
 
 			@Override
-			public void onItemClick(Recording rec) {
-				showOnMap(rec);
+			public void onItemClick(Recording rec, int position) {
+				showOnMap(rec, position);
 			}
 
 			@Override
@@ -570,14 +570,15 @@ public class NotesFragment extends OsmAndListFragment implements ObjectListPosit
 	}
 
 	private void showOnMap(Recording recording) {
-		int position = getObjectListPosition(recording);
+		showOnMap(recording, -1);
+	}
+
+	private void showOnMap(Recording recording, int itemPosition) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
-		Bundle b = new Bundle();
-		b.putInt(TAB_TO_OPEN, NOTE_TAB);
-		b.putInt(SCROLL_POSITION, position);
-		MapActivity.launchMapActivityMoveToTop(getActivity(), null, b);
+		Bundle b = itemPosition >= 0 ? storeState(NOTE_TAB, itemPosition) : null;
+		MapActivity.launchMapActivityMoveToTop(getActivity(), b);
 	}
 
 	private void editNote(final Recording recording) {
@@ -618,18 +619,15 @@ public class NotesFragment extends OsmAndListFragment implements ObjectListPosit
 	}
 
 	@Override
-	public int getObjectListPosition(Object object) {
-		List<Object> list = createItemsList();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) == object) {
-				return i;
-			}
-		}
-		return 0;
+	public Bundle storeState(int tabId, int itemPosition) {
+		Bundle b = new Bundle();
+		b.putInt(SCROLL_POSITION, itemPosition);
+		b.putInt(TAB_TO_OPEN, tabId);
+		return b;
 	}
 
 	@Override
-	public void setListPosition(int position) {
+	public void restoreState(int position) {
 		int itemsCount = getListView().getAdapter().getCount();
 		if (itemsCount > 0 && itemsCount > position) {
 			if (position == 1) {

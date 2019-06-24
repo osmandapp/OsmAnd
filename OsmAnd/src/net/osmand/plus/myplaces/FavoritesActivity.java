@@ -58,7 +58,7 @@ public class FavoritesActivity extends TabActivity {
 	private ImportHelper importHelper;
 	private String groupNameToShow;
 
-	private int scrollPosition = 0;
+	private int itemPosition = 0;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -86,7 +86,7 @@ public class FavoritesActivity extends TabActivity {
 			Intent intent = getIntent();
 			if (intent != null) {
 				if (intent.hasExtra(SCROLL_POSITION)) {
-					scrollPosition = intent.getIntExtra(SCROLL_POSITION, 0);
+					itemPosition = intent.getIntExtra(SCROLL_POSITION, 0);
 				}
 				if (intent.hasExtra(OPEN_FAVOURITES_TAB) && intent.getBooleanExtra(OPEN_FAVOURITES_TAB, false)) {
 					if (intent.hasExtra(GROUP_NAME_TO_SHOW)) {
@@ -267,16 +267,16 @@ public class FavoritesActivity extends TabActivity {
 		}
 	}
 
-	public interface ObjectListPosition {
+	public interface FragmentStateHolder {
 
-		int getObjectListPosition(Object object);
+		Bundle storeState(int tabId, int itemPosition);
 
-		void setListPosition(int position);
+		void restoreState(int position);
 	}
 
-	public int getScrollPosition() {
-		int p = scrollPosition;
-		scrollPosition = 0;
+	public int getItemPosition() {
+		int p = itemPosition;
+		itemPosition = 0;
 		return p;
 	}
 }

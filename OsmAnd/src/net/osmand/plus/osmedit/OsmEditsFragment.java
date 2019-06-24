@@ -52,7 +52,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesActivity.ObjectListPosition;
+import net.osmand.plus.myplaces.FavoritesActivity.FragmentStateHolder;
 import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
@@ -74,7 +74,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener,
-	ObjectListPosition {
+	FragmentStateHolder {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
@@ -410,7 +410,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		super.onResume();
 		fetchData();
 		if (getActivity() != null && getActivity() instanceof FavoritesActivity) {
-			setListPosition(((FavoritesActivity) getActivity()).getScrollPosition());
+			restoreState(((FavoritesActivity) getActivity()).getItemPosition());
 		}
 	}
 
@@ -462,8 +462,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			}
 
 			@Override
-			public void onItemShowMap(OsmPoint point) {
-				showOnMap(point);
+			public void onItemShowMap(OsmPoint point,  int position) {
+				showOnMap(point, position);
 			}
 
 			@Override
@@ -650,17 +650,13 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
 	}
 
-	private void showOnMap(OsmPoint osmPoint) {
-		int position = getObjectListPosition(osmPoint);
+	private void showOnMap(OsmPoint osmPoint, int itemPosition) {
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
 		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
 		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
-		Bundle b = new Bundle();
-		b.putInt(TAB_TO_OPEN, OSM_TAB);
-		b.putInt(SCROLL_POSITION, position);
-		MapActivity.launchMapActivityMoveToTop(getActivity(), null, b);
+		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(OSM_TAB, itemPosition));
 	}
 
 	private void deletePoint(OsmPoint osmPoint) {
@@ -908,18 +904,15 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 
 	@Override
-	public int getObjectListPosition(Object object) {
-		List<Object> list = createItemsList();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) == object) {
-				return i;
-			}
-		}
-		return 0;
+	public Bundle storeState(int tabId, int itemPosition) {
+		Bundle b = new Bundle();
+		b.putInt(SCROLL_POSITION, itemPosition);
+		b.putInt(TAB_TO_OPEN, tabId);
+		return b;
 	}
 
 	@Override
-	public void setListPosition(int position) {
+	public void restoreState(int position) {
 		int itemsCount = getListView().getAdapter().getCount();
 		if (itemsCount > 0 && itemsCount > position) {
 			if (position == 1) {
