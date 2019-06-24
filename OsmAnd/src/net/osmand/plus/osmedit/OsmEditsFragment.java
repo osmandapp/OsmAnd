@@ -1,5 +1,9 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.OSM_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.SCROLL_POSITION;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_TO_OPEN;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -33,7 +37,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -49,6 +52,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesActivity.ObjectListPosition;
 import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
@@ -69,7 +73,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener {
+public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener,
+	ObjectListPosition {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
@@ -404,6 +409,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	public void onResume() {
 		super.onResume();
 		fetchData();
+		if (getActivity() != null && getActivity() instanceof FavoritesActivity) {
+			setListPosition(((FavoritesActivity) getActivity()).getScrollPosition());
+		}
 	}
 
 	@Override
@@ -643,13 +651,15 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	}
 
 	private void showOnMap(OsmPoint osmPoint) {
+		int position = getObjectListPosition(osmPoint);
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
 		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
 		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
 		Bundle b = new Bundle();
-		b.putString("favorites_activity", "osm_edits_tab");
+		b.putInt(TAB_TO_OPEN, OSM_TAB);
+		b.putInt(SCROLL_POSITION, position);
 		MapActivity.launchMapActivityMoveToTop(getActivity(), null, b);
 	}
 
@@ -896,4 +906,27 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		}
 	}
 
+
+	@Override
+	public int getObjectListPosition(Object object) {
+		List<Object> list = createItemsList();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) == object) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public void setListPosition(int position) {
+		int itemsCount = getListView().getAdapter().getCount();
+		if (itemsCount > 0 && itemsCount > position) {
+			if (position == 1) {
+				getListView().setSelection(0);
+			} else {
+				getListView().setSelection(position);
+			}
+		}
+	}
 }

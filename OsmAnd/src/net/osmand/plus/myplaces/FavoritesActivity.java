@@ -44,14 +44,21 @@ public class FavoritesActivity extends TabActivity {
 
 	public static final String OPEN_FAVOURITES_TAB = "open_favourites_tab";
 	public static final String OPEN_MY_PLACES_TAB = "open_my_places_tab";
-	public static final String OPEN_OSM_EDITS_TAB = "open_osm_edits_tab";
+	public static final String TAB_TO_OPEN = "tab_to_open";
 
-	public static final int  GPX_TAB = R.string.shared_string_tracks;
-	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
+	public static final String SCROLL_POSITION = "scroll_position";
+
+	public static final int GPX_TAB = R.string.shared_string_tracks;
+	public static final int FAV_TAB = R.string.shared_string_my_favorites;
+	public static final int NOTE_TAB = R.string.notes;
+	public static final int OSM_TAB = R.string.osm_edits;
+
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private int tabSize;
 	private ImportHelper importHelper;
 	private String groupNameToShow;
+
+	private int scrollPosition = 0;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -60,6 +67,7 @@ public class FavoritesActivity extends TabActivity {
 		super.onCreate(icicle);
 
 		app.logEvent("myplaces_open");
+
 
 		importHelper = new ImportHelper(this, getMyApplication(), null);
 
@@ -73,15 +81,13 @@ public class FavoritesActivity extends TabActivity {
 		setTabs(mTabs);
 		// setupHomeButton();
 
-//		Bundle b = getIntent().getExtras();
-//		if (b != null) {
-//			if ()
-//		}
-
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 		if (icicle == null) {
 			Intent intent = getIntent();
 			if (intent != null) {
+				if (intent.hasExtra(SCROLL_POSITION)) {
+					scrollPosition = intent.getIntExtra(SCROLL_POSITION, 0);
+				}
 				if (intent.hasExtra(OPEN_FAVOURITES_TAB) && intent.getBooleanExtra(OPEN_FAVOURITES_TAB, false)) {
 					if (intent.hasExtra(GROUP_NAME_TO_SHOW)) {
 						groupNameToShow = intent.getStringExtra(GROUP_NAME_TO_SHOW);
@@ -89,6 +95,16 @@ public class FavoritesActivity extends TabActivity {
 					mViewPager.setCurrentItem(0, false);
 				} else if (intent.hasExtra(OPEN_MY_PLACES_TAB) && intent.getBooleanExtra(OPEN_MY_PLACES_TAB, false)) {
 					mViewPager.setCurrentItem(1, false);
+				}
+
+				if (intent.hasExtra(TAB_TO_OPEN)) {
+					for (int n = 0; n < mTabs.size(); n++) {
+						int tab = intent.getIntExtra(TAB_TO_OPEN, FAV_TAB);
+						if (mTabs.get(n).mTitle.equals(getString(tab))) {
+							mViewPager.setCurrentItem(n, false);
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -249,6 +265,19 @@ public class FavoritesActivity extends TabActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public interface ObjectListPosition {
+
+		int getObjectListPosition(Object object);
+
+		void setListPosition(int position);
+	}
+
+	public int getScrollPosition() {
+		int p = scrollPosition;
+		scrollPosition = 0;
+		return p;
 	}
 }
 

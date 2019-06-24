@@ -1,5 +1,9 @@
 package net.osmand.plus.audionotes;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.NOTE_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.SCROLL_POSITION;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_TO_OPEN;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,6 +52,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 
+import net.osmand.plus.myplaces.FavoritesActivity.ObjectListPosition;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -60,7 +65,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class NotesFragment extends OsmAndListFragment {
+public class NotesFragment extends OsmAndListFragment implements ObjectListPosition {
 
 	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
 
@@ -141,6 +146,9 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.setListener(createAdapterListener());
 		listAdapter.setPortrait(portrait);
 		listView.setAdapter(listAdapter);
+		if (getActivity() != null && getActivity() instanceof FavoritesActivity) {
+			setListPosition(((FavoritesActivity) getActivity()).getScrollPosition());
+		}
 	}
 
 	@Override
@@ -562,10 +570,14 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	private void showOnMap(Recording recording) {
+		int position = getObjectListPosition(recording);
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
-		MapActivity.launchMapActivityMoveToTop(getActivity());
+		Bundle b = new Bundle();
+		b.putInt(TAB_TO_OPEN, NOTE_TAB);
+		b.putInt(SCROLL_POSITION, position);
+		MapActivity.launchMapActivityMoveToTop(getActivity(), null, b);
 	}
 
 	private void editNote(final Recording recording) {
@@ -603,5 +615,28 @@ public class NotesFragment extends OsmAndListFragment {
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
+	}
+
+	@Override
+	public int getObjectListPosition(Object object) {
+		List<Object> list = createItemsList();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) == object) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public void setListPosition(int position) {
+		int itemsCount = getListView().getAdapter().getCount();
+		if (itemsCount > 0 && itemsCount > position) {
+			if (position == 1) {
+				getListView().setSelection(0);
+			} else {
+				getListView().setSelection(position);
+			}
+		}
 	}
 }

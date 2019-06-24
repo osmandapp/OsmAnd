@@ -1601,6 +1601,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				Intent intent = ((Activity) activity).getIntent();
 				if (intent != null) {
 					prevActivityIntent = new Intent(intent);
+					if (intentExtraActionName == null && intentExtraActionValue != null) {
+						prevActivityIntent.putExtras(intentExtraActionValue);
+					}
 					prevActivityIntent.putExtra(INTENT_KEY_PARENT_MAP_ACTIVITY, true);
 				} else {
 					prevActivityIntent = null;
@@ -1615,9 +1618,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | additionalFlags);
 			if (intentExtraActionName != null) {
 				newIntent.putExtra(intentExtraActionName, intentExtraActionValue);
-			}
-			if (intentExtraActionName == null && intentExtraActionValue != null) {
-				newIntent.putExtras(intentExtraActionValue);
 			}
 			activity.startActivity(newIntent);
 		}
