@@ -196,7 +196,7 @@ public class RoutePlannerFrontEnd {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
-			routeDirection = PrecalculatedRouteDirection.build(ls, ctx.config.DEVIATION_RADIUS, ctx.getRouter().getMaxDefaultSpeed());
+			routeDirection = PrecalculatedRouteDirection.build(ls, ctx.config.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 		}
 		if (intermediatesEmpty && ctx.nativeLib != null) {
 			ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
@@ -426,7 +426,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.reverseSegmentQueueSize = 0;
 			ctx.calculationProgress.directSegmentQueueSize = 0;
 			float rd = (float) MapUtils.squareRootDist31(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
-			float speed = 0.9f * ctx.config.router.getMaxDefaultSpeed();
+			float speed = 0.9f * ctx.config.router.getMaxSpeed();
 			ctx.calculationProgress.totalEstimatedDistance = (float) (rd / speed);
 		}
 

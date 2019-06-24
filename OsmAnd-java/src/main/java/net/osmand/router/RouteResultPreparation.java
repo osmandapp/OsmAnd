@@ -237,7 +237,7 @@ public class RouteResultPreparation {
 			double distOnRoadToPass = 0;
 			double speed = ctx.getRouter().defineVehicleSpeed(road);
 			if (speed == 0) {
-				speed = ctx.getRouter().getMinDefaultSpeed();
+				speed = ctx.getRouter().getDefaultSpeed();
 			} else {
 				if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
 					speed = speed - (speed / SLOW_DOWN_SPEED_THRESHOLD - 1) * SLOW_DOWN_SPEED;

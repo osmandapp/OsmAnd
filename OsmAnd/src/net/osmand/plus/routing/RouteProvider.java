@@ -29,7 +29,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.PrecalculatedRouteDirection;
@@ -612,7 +611,7 @@ public class RouteProvider {
 			for(int k = 0; k < latLon.length; k ++) {
 				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
 			}
-			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxDefaultSpeed());
+			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxSpeed());
 			precalculated.setFollowNext(true);
 			//cf.planRoadDirection = 1;
 		}

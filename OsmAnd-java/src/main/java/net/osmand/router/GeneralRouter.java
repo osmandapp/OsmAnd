@@ -55,10 +55,12 @@ public class GeneralRouter implements VehicleRouter {
 	private float roundaboutTurn;
 	private float rightTurn;
 	// speed in m/s
-	private float minDefaultSpeed = 10;
+	private float defaultSpeed = 0.28f;
 	// speed in m/s
-	private float maxDefaultSpeed = 10;
-	
+	private float minSpeed = 1f;
+	// speed in m/s
+	private float maxSpeed = 10f;
+
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
 	
@@ -161,7 +163,7 @@ public class GeneralRouter implements VehicleRouter {
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
 		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false); 
 		if(shortestRoute) {
-			maxDefaultSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxDefaultSpeed);
+			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
 		}
 
 	}
@@ -188,10 +190,15 @@ public class GeneralRouter implements VehicleRouter {
 			rightTurn = parseSilentFloat(v, rightTurn);
 		} else if(k.equals("roundaboutTurn")) {
 			roundaboutTurn = parseSilentFloat(v, roundaboutTurn);
-		} else if(k.equals("minDefaultSpeed")) {
-			minDefaultSpeed = parseSilentFloat(v, minDefaultSpeed * 3.6f) / 3.6f;
-		} else if(k.equals("maxDefaultSpeed")) {
-			maxDefaultSpeed = parseSilentFloat(v, maxDefaultSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("defaultSpeed")) {
+			defaultSpeed = parseSilentFloat(v, defaultSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("minDefaultSpeed") || k.equals("minSpeed")) {
+			minSpeed = parseSilentFloat(v, minSpeed * 3.6f) / 3.6f;
+			if (k.equals("minDefaultSpeed")) {
+				defaultSpeed = minSpeed;
+			}
+		} else if(k.equals("maxDefaultSpeed") || k.equals("maxSpeed")) {
+			maxSpeed = parseSilentFloat(v, maxSpeed * 3.6f) / 3.6f;
 		}
 	}
 	
@@ -377,13 +384,13 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
-		return Math.min(defineVehicleSpeed(road), maxDefaultSpeed);
+		return Math.min(defineVehicleSpeed(road), maxSpeed);
 	}
 	
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed());
+		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getDefaultSpeed());
 	}
 
 	@Override
@@ -392,16 +399,20 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	@Override
-	public float getMinDefaultSpeed() {
-		return minDefaultSpeed;
+	public float getDefaultSpeed() {
+		return defaultSpeed;
 	}
 
 	@Override
-	public float getMaxDefaultSpeed() {
-		return maxDefaultSpeed;
+	public float getMinSpeed() {
+		return minSpeed;
 	}
 
-	
+	@Override
+	public float getMaxSpeed() {
+		return maxSpeed;
+	}
+
 	public double getLeftTurn() {
 		return leftTurn;
 	}

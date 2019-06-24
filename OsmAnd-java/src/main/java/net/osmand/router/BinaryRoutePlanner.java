@@ -343,12 +343,12 @@ public class BinaryRoutePlanner {
 	private float estimatedDistance(final RoutingContext ctx, int targetEndX, int targetEndY,
 			int startX, int startY) {
 		double distance = squareRootDist(startX, startY, targetEndX, targetEndY);
-		return (float) (distance / ctx.getRouter().getMaxDefaultSpeed());
+		return (float) (distance / ctx.getRouter().getMaxSpeed());
 	}
 
 	protected static float h(RoutingContext ctx, int begX, int begY, int endX, int endY) {
 		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
-		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
+		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		if (ctx.precalculatedRouteDirection != null) {
 			float te = ctx.precalculatedRouteDirection.timeEstimate(begX, begY, endX, endY);
 			if (te > 0) {
@@ -480,7 +480,7 @@ public class BinaryRoutePlanner {
 				// reset to f
 //				distStartObstacles = 0;
 				// more precise but slower
-				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxDefaultSpeed();
+				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
 			}
 
 			// We don't check if there are outgoing connections
@@ -584,11 +584,11 @@ public class BinaryRoutePlanner {
 		float priority = ctx.getRouter().defineSpeedPriority(road);
 		float speed = (ctx.getRouter().defineRoutingSpeed(road) * priority);
 		if (speed == 0) {
-			speed = (ctx.getRouter().getMinDefaultSpeed() * priority);
+			speed = (ctx.getRouter().getDefaultSpeed() * priority);
 		}
 		// speed can not exceed max default speed according to A*
-		if (speed > ctx.getRouter().getMaxDefaultSpeed()) {
-			speed = ctx.getRouter().getMaxDefaultSpeed();
+		if (speed > ctx.getRouter().getMaxSpeed()) {
+			speed = ctx.getRouter().getMaxSpeed();
 		}
 		return obstaclesTime + distOnRoadToPass / speed;
 	}
