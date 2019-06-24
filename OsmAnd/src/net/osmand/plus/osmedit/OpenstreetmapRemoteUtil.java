@@ -48,6 +48,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import gnu.trove.list.array.TLongArrayList;
+
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private static final long NO_CHANGESET_ID = -1;
@@ -242,6 +244,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 		ser.attribute(null, "changeset", changeSetId + ""); //$NON-NLS-1$ //$NON-NLS-2$
 
+		writeNodesIds(way, ser);
 		writeTags(way, ser);
 		ser.endTag(null, "way"); //$NON-NLS-1$
 	}
@@ -257,6 +260,18 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			ser.attribute(null, "k", k); //$NON-NLS-1$
 			ser.attribute(null, "v", val); //$NON-NLS-1$
 			ser.endTag(null, "tag"); //$NON-NLS-1$
+		}
+	}
+
+	private void writeNodesIds(Way way, XmlSerializer ser)
+			throws IllegalArgumentException, IllegalStateException, IOException {
+		for (int i = 0; i < way.getNodeIds().size(); i++) {
+			long nodeId = way.getNodeIds().get(i);
+			if (nodeId != 0) {
+				ser.startTag(null, "nd"); //$NON-NLS-1$
+				ser.attribute(null, "ref", String.valueOf(nodeId)); //$NON-NLS-1$
+				ser.endTag(null, "nd"); //$NON-NLS-1$
+			}
 		}
 	}
 
@@ -383,7 +398,19 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					}
 				}
 				n.replaceTags(updatedTags);
-				if (!isWay && MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
+				if (isWay) {
+					Way foundWay = (Way) entity;
+					Way currentWay = (Way) n;
+					TLongArrayList nodeIds = foundWay.getNodeIds();
+					if (nodeIds != null) {
+						for (int i = 0; i < nodeIds.size(); i++) {
+							long nodeId = nodeIds.get(i);
+							if (nodeId != 0) {
+								currentWay.addNode(nodeId);
+							}
+						}
+					}
+				} else if (MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
 					// avoid shifting due to round error
 					n.setLatitude(entity.getLatitude());
 					n.setLongitude(entity.getLongitude());
