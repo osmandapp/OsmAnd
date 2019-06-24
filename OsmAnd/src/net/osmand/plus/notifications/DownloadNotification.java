@@ -55,16 +55,9 @@ public class DownloadNotification extends OsmandNotification {
 
 	@Override
 	public NotificationCompat.Builder buildNotification(boolean wearable) {
-		if (!isEnabled()) {
-			return null;
-		}
 		icon = android.R.drawable.stat_sys_download;
 		ongoing = true;
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-
-		if (downloadThread.getCurrentDownloadingItem() == null) {
-			return null;
-		}
 
 		BasicProgressAsyncTask<?, ?, ?, ?> task = downloadThread.getCurrentRunningTask();
 		final boolean isFinished = task == null || task.getStatus() == AsyncTask.Status.FINISHED;

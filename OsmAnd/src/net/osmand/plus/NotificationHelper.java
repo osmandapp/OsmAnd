@@ -63,11 +63,9 @@ public class NotificationHelper {
 		}
 	}
 
-	@Nullable
+	@NonNull
 	public Notification buildDownloadNotification() {
-		Builder notificationBuilder = downloadNotification.buildNotification(false);
-
-		return notificationBuilder != null ? notificationBuilder.build() : null;
+		return downloadNotification.buildNotification(false).build();
 	}
 
 	private Notification buildErrorNotification() {

@@ -19,7 +19,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:paddingBottom="@dimen/content_padding_small"
-			android:text="Crash"
+			android:text="@string/shared_string_crash"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			osmand:typeface="@string/font_roboto_medium" />
@@ -27,7 +27,7 @@
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="Последний запуск OsmAnd завершился с ошибкой. Помогите нам улучшить OsmAnd. Пожалуйста, отправьте нам сообщение об ошибке."
+			android:text="@string/last_launch_crashed"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_desc_text_size" />
 
