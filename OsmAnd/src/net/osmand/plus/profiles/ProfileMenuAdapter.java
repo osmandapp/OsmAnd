@@ -103,14 +103,11 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 					? app.getResources().getColor(R.color.divider_dark)
 					: app.getResources().getColor(R.color.divider_light));
 			}
-
+			holder.title.setText(item.getUserProfileName(app));
 			if (item.getParent() != null) {
-				holder.title.setText(item.getUserProfileName());
 				holder.descr.setText(String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(
-						item.getParent().getStringKey().replace("_", " "))));
+					Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getUserProfileName(app))));
 			} else {
-				holder.title.setText(item.getStringResource());
 				holder.descr.setText(R.string.profile_type_base_string);
 			}
 

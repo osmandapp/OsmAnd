@@ -25,24 +25,34 @@ import java.util.Set;
 
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.Algorithms;
-import net.sf.junidecode.App;
 
 import org.apache.commons.logging.Log;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.*;
 
 public class ApplicationMode {
 
+	private static final Log LOG = PlatformUtil.getLog(ApplicationMode.class);
+	private static Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
+	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+	private static List<ApplicationMode> defaultValues = new ArrayList<>();
+	private static List<ApplicationMode> values = new ArrayList<>();
+	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
+	private static StateChangedListener<String> listener;
+	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
+
 	@Expose private final String stringKey;
 	@Expose private String userProfileName;
 	@Expose private String parent;
 	@Expose private String iconName = "map_world_globe_dark";
-	@Expose private ProfileIconColors iconColor = ProfileIconColors.DEFAULT;''
+	@Expose private ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 	@Expose private String routingProfile = null;
 	@Expose private RouteService routeService = RouteService.OSMAND;
 
 	private final int keyName;
+	// TODO custom profile
 	private ApplicationMode parentAppMode;
 	private int mapIconId = R.drawable.map_world_globe_dark;
+	// TODO custom profile
 	private int smallIconDark = R.drawable.ic_world_globe_dark;
 	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
@@ -56,8 +66,6 @@ public class ApplicationMode {
 	private int locationIconNight = R.drawable.map_pedestrian_location_night;
 	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
-	private LocationIconsSet locationIconsSet = LocationIconsSet.DEFAULT;
-
 
 	private ApplicationMode(int key, String stringKey) {
 		this.keyName = key;
@@ -65,12 +73,6 @@ public class ApplicationMode {
 	}
 
 
-	private static final Log LOG = PlatformUtil.getLog(ApplicationMode.class);
-	private static Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
-	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
-	private static List<ApplicationMode> defaultValues = new ArrayList<>();
-	private static List<ApplicationMode> values = new ArrayList<>();
-	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
@@ -149,16 +151,17 @@ public class ApplicationMode {
 //		regWidgetAvailability(WIDGET_STREET_NAME, all);
 	}
 
+
 	public static class ApplicationModeBuilder {
 		private ApplicationMode applicationMode;
 
-		public ApplicationMode reg() {
+		private ApplicationMode reg() {
 			values.add(applicationMode);
 			defaultValues.add(applicationMode);
 			return applicationMode;
 		}
 
-		public ApplicationMode customReg() {
+		private ApplicationMode customReg() {
 			values.add(applicationMode);
 			return applicationMode;
 		}
@@ -196,7 +199,6 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_car_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
-			applicationMode.locationIconsSet = LocationIconsSet.CAR;
 			return this;
 		}
 
@@ -209,7 +211,6 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
-			applicationMode.locationIconsSet = LocationIconsSet.BICYCLE;
 			return this;
 		}
 
@@ -222,7 +223,6 @@ public class ApplicationMode {
 			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
 			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
 			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
-			applicationMode.locationIconsSet = LocationIconsSet.DEFAULT;
 			return this;
 		}
 
@@ -233,7 +233,6 @@ public class ApplicationMode {
 			applicationMode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_nautical_location;
 			applicationMode.locationIconNight = R.drawable.map_nautical_location_night;
-			applicationMode.locationIconsSet = LocationIconsSet.NAUTICAL;
 			return this;
 		}
 
@@ -508,14 +507,46 @@ public class ApplicationMode {
 		return routingProfile;
 	}
 
-	public String getUserProfileName() {
+	public String getUserProfileName(OsmandApplication app) {
+		if(keyName > 0) {
+			return app.getString(keyName);
+		}
 		return userProfileName;
 	}
 
-	private static StateChangedListener<String> listener;
-	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
+	public static void onApplicationStart(OsmandSettings settings) {
+		initCustomModes(settings);
+		initRegVisibility();
+	}
 
-	public static void saveCustomModeToSettings(OsmandSettings settings){
+	private static void initCustomModes(OsmandSettings settings){
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		Type t = new TypeToken<ArrayList<ApplicationMode>>() {}.getType();
+		List<ApplicationMode> customProfiles = gson.fromJson(settings.CUSTOM_APP_PROFILES.get(), t);
+
+		if (!Algorithms.isEmpty(customProfiles)) {
+			for (ApplicationMode m : customProfiles) {
+				m.parentAppMode = valueOfStringKey(m.parent, ApplicationMode.PEDESTRIAN);
+				m.defaultSpeed = m.parentAppMode.defaultSpeed;
+				m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
+				m.arrivalDistance = m.parentAppMode.arrivalDistance;
+				m.offRouteDistance = m.parentAppMode.offRouteDistance;
+				m.bearingIconDay = m.parentAppMode.bearingIconDay;
+				m.bearingIconNight = m.parentAppMode.bearingIconNight;
+				m.headingIconDay = m.parentAppMode.headingIconDay;
+				m.headingIconNight = m.parentAppMode.headingIconNight;
+				m.locationIconDay = m.parentAppMode.locationIconDay;
+				m.locationIconNight = m.parentAppMode.locationIconNight;
+				m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
+				m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
+			}
+		}
+
+	}
+
+
+	private static void saveCustomModeToSettings(OsmandSettings settings){
+		// TODO
 		List<ApplicationMode> customModes = new ArrayList<>();
 		for (ApplicationMode mode : values) {
 			if (mode.parent != null) {
@@ -527,79 +558,17 @@ public class ApplicationMode {
 		settings.CUSTOM_APP_PROFILES.set(profiles);
 	}
 
-	public static void onApplicationStart(OsmandSettings settings) {
-		initCustomModes(settings);
-		initRegVisibility();
-	}
-
-	public static void initCustomModes(OsmandSettings settings){
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<ArrayList<ApplicationMode>>() {}.getType();
-		List<ApplicationMode> customProfiles = gson.fromJson(settings.CUSTOM_APP_PROFILES.get(), t);
-
-		if (!Algorithms.isEmpty(customProfiles)) {
-			for (ApplicationMode m : customProfiles) {
-				if (!values.contains(m)) {
-					if (m.locationIconsSet != null) {
-						values.add(ApplicationMode.setBearingIconsSet(m));
-					} else {
-						values.add(m);
-					}
-				}
-			}
-		}
-
-	}
-
-	private static ApplicationMode setBearingIconsSet(ApplicationMode mode) {
-		switch (mode.locationIconsSet) {
-			case CAR:
-				mode.bearingIconDay = R.drawable.map_car_bearing;
-				mode.bearingIconNight = R.drawable.map_car_bearing_night;
-				mode.headingIconDay = R.drawable.map_car_location_view_angle;
-				mode.headingIconNight = R.drawable.map_car_location_view_angle_night;
-				mode.locationIconDay = R.drawable.map_car_location;
-				mode.locationIconNight = R.drawable.map_car_location_night;
-				mode.locationIconDayLost = R.drawable.map_car_location_lost;
-				mode.locationIconNightLost = R.drawable.map_car_location_lost_night;
-				break;
-			case BICYCLE:
-				mode.bearingIconDay = R.drawable.map_bicycle_bearing;
-				mode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
-				mode.headingIconDay = R.drawable.map_bicycle_location_view_angle;
-				mode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
-				mode.locationIconDay = R.drawable.map_bicycle_location;
-				mode.locationIconNight = R.drawable.map_bicycle_location_night;
-				mode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
-				mode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
-				break;
-			case DEFAULT:
-				mode.bearingIconDay = R.drawable.map_pedestrian_bearing;
-				mode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
-				mode.headingIconDay = R.drawable.map_default_location_view_angle;
-				mode.headingIconNight = R.drawable.map_default_location_view_angle_night;
-				mode.locationIconDay = R.drawable.map_pedestrian_location;
-				mode.locationIconNight = R.drawable.map_pedestrian_location_night;
-				mode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
-				mode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
-				break;
-			case NAUTICAL:
-				mode.bearingIconDay = R.drawable.map_nautical_bearing;
-				mode.bearingIconNight = R.drawable.map_nautical_bearing_night;
-				mode.headingIconDay = R.drawable.map_nautical_location_view_angle;
-				mode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
-				mode.locationIconDay = R.drawable.map_nautical_location;
-				mode.locationIconNight = R.drawable.map_nautical_location_night;
-				break;
-		}
+	public static ApplicationMode saveNewCustomProfile(ApplicationModeBuilder builder, OsmandApplication app) {
+		ApplicationMode mode = builder.customReg();
+		ApplicationMode.saveCustomModeToSettings(app.getSettings());
 		return mode;
 	}
 
-	public static void deleteCustomMode(String userModeTitle, OsmandApplication app) {
+	public static void deleteCustomMode(ApplicationMode md, OsmandApplication app) {
 		Iterator<ApplicationMode> it = values.iterator();
 		while (it.hasNext()) {
 			ApplicationMode m = it.next();
-			if (m.userProfileName != null && m.userProfileName.equals(userModeTitle)) {
+			if (m == md) {
 				it.remove();
 			}
 		}
@@ -643,7 +612,7 @@ public class ApplicationMode {
 		}
 	}
 
-	public enum ProfileIconColors{
+	public enum ProfileIconColors {
 		DEFAULT(R.string.rendering_value_default_name, R.color.profile_icon_color_blue_light_default,  R.color.profile_icon_color_blue_dark_default),
 		PURPLE(R.string.rendering_value_purple_name, R.color.profile_icon_color_purple_light, R.color.profile_icon_color_purple_dark),
 		GREEN(R.string.rendering_value_green_name, R.color.profile_icon_color_green_light,  R.color.profile_icon_color_green_dark),
@@ -675,10 +644,4 @@ public class ApplicationMode {
 		}
  	}
 
- 	public enum LocationIconsSet {
-	    DEFAULT,
-	    CAR,
-	    NAUTICAL,
-	    BICYCLE
-    }
 }

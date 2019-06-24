@@ -620,8 +620,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		}
 
+		// TODO !!!!
 		if (isUserProfile && !isNew) {
-			ApplicationMode.deleteCustomMode(mode.getUserProfileName(), getMyApplication());
+			ApplicationMode.deleteCustomMode(mode, getMyApplication());
 		}
 
 		String customStringKey = profile.stringKey;
@@ -640,9 +641,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		builder.setColor(profile.iconColor);
 
-		ApplicationMode mode = builder.customReg();
-		ApplicationMode.saveCustomModeToSettings(getSettings());
+		ApplicationMode newMode = ApplicationMode.saveNewCustomProfile(builder, getMyApplication());
 
+
+		// TODO ?????
 		if (!ApplicationMode.values(app).contains(mode)) {
 			boolean save = ApplicationMode.changeProfileStatus(mode, true, getMyApplication());
 
