@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,57 +57,38 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout llPluginPreferencesLayout;
     private RadioGroupWrapper osmandVersionRadioGroup;
     private FrameLayout btnOpenOsmand;
-
-    private LayoutInflater inflater;
+    private View osmandVersionsPanel;
 
     private Paint pGreyScale;
-
-    private boolean isReturnedFromAnotherActivity = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         app = (TurnScreenApp) getApplicationContext();
-
         osmAndAidlHelper = app.getOsmAndAidlHelper();
         settings = app.getSettings();
         sensorHelper = app.getSensorHelper();
         lockHelper = app.getLockHelper();
         unlockMessageListener = new UnlockMessageListener(app);
+    }
 
-        inflater = getLayoutInflater();
-
-        if (!settings.isProgramOpenedEarlier()) {
-            settings.setOpened();
-            isReturnedFromAnotherActivity = true;
+    public void startProcess() {
+        if (settings.isOpenedFirstTime()) {
             startPluginDescriptionActivity(PluginDescriptionActivity.MODE_FIRST_OPEN);
-        }
-
-        else if (!settings.hasAvailableOsmandVersions()) {
-            isReturnedFromAnotherActivity = true;
+        } else if (!settings.hasAvailableOsmandVersions()) {
             startInstallOsmandInstructionActivity();
         }
-
-        else {
-            availableOsmandVersions = PluginSettings.OsmandVersion.getOnlyInstalledVersions();
-            createUI();
-        }
+        createUI();
     }
 
     public void createUI() {
+        final LayoutInflater inflater = getLayoutInflater();
+
         pGreyScale = AndroidUtils.createPaintWithGreyScale();
         llElementsScreen = findViewById(R.id.llElementsScreen);
 
         tbPluginToolbar = findViewById(R.id.tbPluginToolbar);
         setSupportActionBar(tbPluginToolbar);
-
-        if (availableOsmandVersions.size() > 1) {
-            llElementsScreen.addView(inflater.inflate(R.layout.card_devider, null, false));
-            View osmandVersionsPanel = createOsmandVersionsPanel();
-            llElementsScreen.addView(osmandVersionsPanel);
-            llElementsScreen.addView(inflater.inflate(R.layout.card_top_divider, null, false));
-        }
 
         llPluginPreferencesLayout = findViewById(R.id.llPluginPreferencesLayout);
         swPluginEnableSwitcher = findViewById(R.id.swPluginEnableSwitcher);
@@ -171,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
                                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                         llTimeList.setOrientation(LinearLayout.VERTICAL);
 
+                        PluginSettings.UnlockTime chosenTime = settings.getTime();
+
                         PluginSettings.UnlockTime[] unlockTimes = PluginSettings.UnlockTime.values();
 
                         for (final PluginSettings.UnlockTime unlockTime : unlockTimes) {
@@ -202,6 +184,10 @@ public class MainActivity extends AppCompatActivity {
 
                             timeItemView.setOnClickListener(listener);
                             rb.setOnClickListener(listener);
+
+                            if (chosenTime != null && currentTimeItemId == chosenTime.getId()) {
+                                unlockTimeRadioButtonsGroup.setChecked(currentTimeItemId);
+                            }
 
                             llTimeList.addView(timeItemView);
                         }
@@ -263,32 +249,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //todo refactor this problem
-        if (settings.hasAvailableOsmandVersions()) {
-            try {
-                if (!isReturnedFromAnotherActivity) {
-                    Log.d("ttpl2", "no returned");
 
-                    refreshUI();
-                } else {
-                    Log.d("ttpl2", "returned");
-                    availableOsmandVersions = PluginSettings.OsmandVersion.getOnlyInstalledVersions();
-                    createUI();
-                    refreshUI();
-                }
-            } catch (Exception e) {
-                Log.d("ttpl2", "take an exception");
-            }
-        } else {
-            startInstallOsmandInstructionActivity();
-        }
+        startProcess();
+        refreshUI();
     }
 
     public void refreshUI() {
+        refreshOsmandVersionsPanel();
+
         boolean isPluginEnabled = settings.isPluginEnabled();
 
         if (isPluginEnabled) {
             setStatusBarColor(R.color.orange);
+
+            lockHelper.enableFunction();
 
             osmAndAidlHelper.registerForVoiceRouterMessages();
             osmAndAidlHelper.addListener(unlockMessageListener);
@@ -304,6 +278,8 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             setStatusBarColor(R.color.darkGrey);
+
+            lockHelper.disableFunction();
 
             osmAndAidlHelper.unregisterFromVoiceRouterMessages();
             osmAndAidlHelper.removeListener(unlockMessageListener);
@@ -334,25 +310,35 @@ public class MainActivity extends AppCompatActivity {
         String time = String.valueOf(currentTime.getSeconds()) + " "
                 + getString(R.string.secondsShort);
         tvTime.setText(time);
+    }
 
-        PluginSettings.OsmandVersion version = settings.getOsmandVersion();
-        int checkedId = version.getId();
-        FrameLayout checkedVersion = findViewById(checkedId);
-        if (checkedVersion != null) {
-            RadioButton rbVersion = checkedVersion.findViewById(R.id.rbVersion);
-            if (rbVersion != null) {
-                rbVersion.setChecked(true);
+    public void refreshOsmandVersionsPanel() {
+        availableOsmandVersions = PluginSettings.OsmandVersion.getOnlyInstalledVersions();
+        llElementsScreen.removeView(osmandVersionsPanel);
+
+        if (availableOsmandVersions.size() > 1) {
+            osmandVersionsPanel = createOsmandVersionsPanel();
+            llElementsScreen.addView(osmandVersionsPanel);
+
+            PluginSettings.OsmandVersion version = settings.getOsmandVersion();
+            int checkedId = version.getId();
+            FrameLayout checkedVersion = findViewById(checkedId);
+            if (checkedVersion != null) {
+                RadioButton rbVersion = checkedVersion.findViewById(R.id.rbVersion);
+                if (rbVersion != null) {
+                    rbVersion.setChecked(true);
+                }
             }
         }
     }
 
-    private void setStatusBarColor(int colorResId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, colorResId));
-        }
-    }
-
     private View createOsmandVersionsPanel() {
+        LayoutInflater inflater = getLayoutInflater();
+
+        LinearLayout llWraper = new LinearLayout(MainActivity.this);
+        llWraper.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        llWraper.setOrientation(LinearLayout.VERTICAL);
+
         View panelOsmandVersions = inflater.inflate(R.layout.main_el_osmand_versions, null, false);
         LinearLayout llOsmandVersions = panelOsmandVersions.findViewById(R.id.llOsmandVersions);
 
@@ -390,7 +376,14 @@ public class MainActivity extends AppCompatActivity {
             llOsmandVersions.addView(osmandVersionItemView);
         }
 
-        return panelOsmandVersions;
+        View cardDevider = inflater.inflate(R.layout.card_devider, null, false);
+        View cardTop = inflater.inflate(R.layout.card_top_divider, null, false);
+
+        llWraper.addView(cardDevider);
+        llWraper.addView(panelOsmandVersions);
+        llWraper.addView(cardTop);
+
+        return llWraper;
     }
 
     private void setEnableForElements(boolean enable) {
@@ -410,6 +403,12 @@ public class MainActivity extends AppCompatActivity {
         flPanelTime.setEnabled(enable);
         tvTime.setEnabled(enable);
         btnOpenOsmand.setEnabled(enable);
+    }
+
+    private void setStatusBarColor(int colorResId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, colorResId));
+        }
     }
 
     private void startInstallOsmandInstructionActivity() {

@@ -200,6 +200,7 @@ public class OsmandAidlApi {
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 	private Map<String, ContextMenuButtonsParams> contextMenuButtonsParams = new ConcurrentHashMap<>();
+	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks= new ConcurrentHashMap<>();
 
 	private AMapPointUpdateListener aMapPointUpdateListener;
 
@@ -1898,8 +1899,6 @@ public class OsmandAidlApi {
 		app.getRoutingHelper().removeRouteDataListener(navUpdateCallbacks.get(id));
 		navUpdateCallbacks.remove(id);
 	}
-
-	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks= new ConcurrentHashMap<>();
 
 	public void registerForVoiceRouterMessages(long id){
 		VoiceRouter.VoiceMessageListener listener = new VoiceRouter.VoiceMessageListener() {

@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
 import net.osmand.turnScreenOn.receiver.DeviceAdminRecv;

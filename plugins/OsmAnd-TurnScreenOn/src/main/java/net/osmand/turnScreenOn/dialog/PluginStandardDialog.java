@@ -14,7 +14,6 @@ import net.osmand.turnScreenOn.R;
 public abstract class PluginStandardDialog {
     private Dialog dialog;
     private Activity activity;
-    private LayoutInflater inflater;
     private View dialogView;
     private TextView tvDialogTitle;
     private TextView btnDialogCancel;
@@ -23,7 +22,7 @@ public abstract class PluginStandardDialog {
     public PluginStandardDialog(Activity activity) {
         this.activity = activity;
 
-        inflater = activity.getLayoutInflater();
+        LayoutInflater inflater = activity.getLayoutInflater();
         dialogView = inflater.inflate(R.layout.dialog_layout, null, false);
 
         tvDialogTitle = dialogView.findViewById(R.id.tvDialogTitle);

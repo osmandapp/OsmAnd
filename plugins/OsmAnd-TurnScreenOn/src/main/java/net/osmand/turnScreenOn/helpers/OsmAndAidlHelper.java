@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 
 import net.osmand.aidl.IOsmAndAidlCallback;
 import net.osmand.aidl.IOsmAndAidlInterface;
@@ -16,13 +15,18 @@ import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.turnScreenOn.PluginSettings;
 import net.osmand.turnScreenOn.app.TurnScreenApp;
-import net.osmand.turnScreenOn.listener.MessageSender;
+import net.osmand.turnScreenOn.listener.Observable;
 import net.osmand.turnScreenOn.listener.OnMessageListener;
+import net.osmand.turnScreenOn.log.PlatformUtil;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OsmAndAidlHelper implements MessageSender {
+public class OsmAndAidlHelper implements Observable {
+    private static final Log LOG = PlatformUtil.getLog(OsmAndAidlHelper.class);
+
     private final static String OSMAND_AIDL_SERVICE_PATH = "net.osmand.aidl.OsmandAidlService";
 
     private List<OnMessageListener> messageListeners;
@@ -71,7 +75,6 @@ public class OsmAndAidlHelper implements MessageSender {
 
         @Override
         public void onVoiceRouterNotify() throws RemoteException {
-            Log.d("ttpl3", "take message from vr");
             notifyListeners();
         }
     };
@@ -101,8 +104,6 @@ public class OsmAndAidlHelper implements MessageSender {
 
     public void registerForVoiceRouterMessages() {
         try {
-            Log.d("ttpl", "try add a listener");
-
             if (mIOsmAndAidlInterface != null && !isRegistered) {
                 ANavigationVoiceRouterMessageParams params = new ANavigationVoiceRouterMessageParams();
                 params.setSubscribeToUpdates(true);
@@ -113,14 +114,11 @@ public class OsmAndAidlHelper implements MessageSender {
                 attemptedRegister = true;
             }
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
     public void unregisterFromVoiceRouterMessages() {
         try {
-            Log.d("ttpl", "try remove a listener");
-
             if (mIOsmAndAidlInterface != null && isRegistered) {
                 ANavigationVoiceRouterMessageParams params = new ANavigationVoiceRouterMessageParams();
                 params.setSubscribeToUpdates(false);
@@ -129,19 +127,21 @@ public class OsmAndAidlHelper implements MessageSender {
                 isRegistered = false;
             }
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
     public void reconnectOsmand() {
-        String newOsmandVersionPath = settings.getOsmandVersion().getPath();
-        if (connectedOsmandVersionPath == null
-                || !connectedOsmandVersionPath.equals(newOsmandVersionPath)
-                || mIOsmAndAidlInterface == null) {
-            cleanupResources();
-            connectOsmand();
+        PluginSettings.OsmandVersion versionToConnect = settings.getOsmandVersion();
+        if (versionToConnect != null) {
+            String newOsmandVersionPath = versionToConnect.getPath();
+            if (connectedOsmandVersionPath == null
+                    || !connectedOsmandVersionPath.equals(newOsmandVersionPath)
+                    || mIOsmAndAidlInterface == null) {
+                cleanupResources();
+                connectOsmand();
+            }
+            connectedOsmandVersionPath = newOsmandVersionPath;
         }
-        connectedOsmandVersionPath = newOsmandVersionPath;
     }
 
     public void connectOsmand() {
@@ -165,7 +165,6 @@ public class OsmAndAidlHelper implements MessageSender {
                 app.unbindService(mConnection);
             }
         } catch (Throwable e) {
-            e.printStackTrace();
         }
     }
 

@@ -5,15 +5,18 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
-import net.osmand.turnScreenOn.listener.MessageSender;
+import net.osmand.turnScreenOn.listener.Observable;
 import net.osmand.turnScreenOn.listener.OnMessageListener;
+import net.osmand.turnScreenOn.log.PlatformUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SensorHelper implements SensorEventListener, MessageSender {
+public class SensorHelper implements SensorEventListener, Observable {
+    private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(SensorHelper.class);
 
     private static final int SENSOR_SENSITIVITY = 4;
 
@@ -41,7 +44,6 @@ public class SensorHelper implements SensorEventListener, MessageSender {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
-//                Log.d("ttpl", "onSensorChanged: sensor signal");
                 notifyListeners();
             }
         }

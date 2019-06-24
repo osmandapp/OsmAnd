@@ -1,5 +1,7 @@
 package net.osmand.turnScreenOn.listener;
 
+import android.util.Log;
+
 import net.osmand.turnScreenOn.PluginSettings;
 import net.osmand.turnScreenOn.app.TurnScreenApp;
 import net.osmand.turnScreenOn.helpers.LockHelper;

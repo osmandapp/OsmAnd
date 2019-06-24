@@ -33,9 +33,7 @@ public class PermissionsSetUpActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         app = (TurnScreenApp) getApplicationContext();
-
         settings = app.getSettings();
-
         mDeviceAdmin = new ComponentName(getApplicationContext(), DeviceAdminRecv.class);
 
         btnContinue = findViewById(R.id.btnContinue);

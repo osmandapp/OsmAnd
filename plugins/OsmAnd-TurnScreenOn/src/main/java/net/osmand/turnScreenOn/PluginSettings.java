@@ -22,9 +22,11 @@ public class PluginSettings {
 
     private static TurnScreenApp app;
 
+    private boolean isOpenedFirstTime;
+
     public enum OsmandVersion {
-        OSMAND_PLUS(132356, R.string.OsmandPlus, R.drawable.ic_action_osmand_plus, "net.osmand.plus "),
-        OSMAND(132357, R.string.Osmand, R.drawable.ic_action_osmand, "net.osmand");
+        OSMAND_PLUS(1001, R.string.OsmandPlus, R.drawable.ic_action_osmand_plus, "net.osmand.plus"),
+        OSMAND(1002, R.string.Osmand, R.drawable.ic_action_osmand, "net.osmand");
 
         int id;
         int nameId;
@@ -85,9 +87,9 @@ public class PluginSettings {
             return installedVersions;
         }
 
-        public static boolean hasInstalledVersions(){
+        public static boolean hasInstalledVersions() {
             for (OsmandVersion v : OsmandVersion.values()) {
-                if (isVersionInstalled(v)){
+                if (isVersionInstalled(v)) {
                     return true;
                 }
             }
@@ -96,10 +98,10 @@ public class PluginSettings {
     }
 
     public enum Profiles {
-        CAR(5435, R.string.carTitle, R.drawable.ic_action_time_span),
-        PEDESTRIAN(5436, R.string.pedestrianTitle, R.drawable.ic_action_time_span),
-        BICYCLE(5437, R.string.bicycleTitle, R.drawable.ic_action_time_span),
-        BOAT(5438, R.string.boatTitle, R.drawable.ic_action_time_span);
+        CAR(3001, R.string.carTitle, R.drawable.ic_action_time_span),
+        PEDESTRIAN(3002, R.string.pedestrianTitle, R.drawable.ic_action_time_span),
+        BICYCLE(3003, R.string.bicycleTitle, R.drawable.ic_action_time_span),
+        BOAT(3004, R.string.boatTitle, R.drawable.ic_action_time_span);
 
         Profiles(int id, int nameId, int imgId) {
             this.id = id;
@@ -125,13 +127,13 @@ public class PluginSettings {
     }
 
     public enum UnlockTime {
-        SECONDS_05(74025643, 5),
-        SECONDS_10(74025644, 10),
-        SECONDS_15(74025645, 15),
-        SECONDS_20(74025646, 20),
-        SECONDS_30(74025647, 30),
-        SECONDS_45(74025648, 45),
-        SECONDS_60(74025649, 60);
+        SECONDS_05(2001, 5),
+        SECONDS_10(2002, 10),
+        SECONDS_15(2003, 15),
+        SECONDS_20(2004, 20),
+        SECONDS_30(2005, 30),
+        SECONDS_45(2006, 45),
+        SECONDS_60(2007, 60);
 
         UnlockTime(int id, int seconds) {
             this.id = id;
@@ -173,7 +175,7 @@ public class PluginSettings {
     }
 
     public boolean isPluginEnabled() {
-        if(!isAdminDevicePermissionAvailable()){
+        if (!isAdminDevicePermissionAvailable()) {
             disablePlugin();
         }
         return preferences.getBoolean(PREFERENCE_PLUGIN_ENABLE, false);
@@ -195,12 +197,10 @@ public class PluginSettings {
         return OsmandVersion.hasInstalledVersions();
     }
 
-    public void setOpened() {
+    public boolean isOpenedFirstTime() {
+        isOpenedFirstTime = !preferences.contains(PREFERENCE_FIRST_OPEN);
         setBoolean(PREFERENCE_FIRST_OPEN, true);
-    }
-
-    public boolean isProgramOpenedEarlier() {
-        return preferences.contains(PREFERENCE_FIRST_OPEN);
+        return isOpenedFirstTime;
     }
 
     public UnlockTime getTime() {

@@ -11,8 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
+import net.osmand.turnScreenOn.log.PlatformUtil;
+
+import org.apache.commons.logging.Log;
 
 public class OsmandInstallActivity extends AppCompatActivity {
+    private static final Log LOG = PlatformUtil.getLog(OsmandInstallActivity.class);
+
     public static final int MODE_FIRST_OPEN = 1;
     public static final int MODE_LOST_OSMAND = 2;
     public static final String MODE_KEY = "mode";
