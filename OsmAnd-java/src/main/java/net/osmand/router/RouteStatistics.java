@@ -181,7 +181,11 @@ public class RouteStatistics {
 
 		@Override
 		public String getPropertyName(String attribute) {
-			return attribute;
+			if (attribute.equals(UNDEFINED_ATTR)) {
+				return UNDEFINED_ATTR;
+			} else {
+				return SURFACE_ATTR + "_" + attribute;
+			}
 		}
 
 		@Override
@@ -222,7 +226,11 @@ public class RouteStatistics {
 
 		@Override
 		public String getPropertyName(String attribute) {
-			return attribute;
+			if (attribute.equals(UNDEFINED_ATTR)) {
+				return UNDEFINED_ATTR;
+			} else {
+				return SMOOTHNESS_ATTR + "_" + attribute;
+			}
 		}
 
 		@Override
