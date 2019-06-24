@@ -63,7 +63,8 @@ public class ApplicationMode {
 	public static final ApplicationMode SKI = create(R.string.app_mode_skiing, "ski").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
 		icon(R.drawable.ic_plugin_skimaps, R.drawable.ic_plugin_skimaps, "ic_plugin_skimaps").setRoutingProfile("ski").reg();
 
-	static {
+	public static void initRegVisibility() {
+
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, SKI};
 		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, PUBLIC_TRANSPORT, SKI};
 		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, SKI};
@@ -257,6 +258,7 @@ public class ApplicationMode {
 			app.getAppCustomization().addListener(customizationListener);
 		}
 		if (cachedFilteredValues.isEmpty()) {
+
 			OsmandSettings settings = app.getSettings();
 			if (listener == null) {
 				listener = new StateChangedListener<String>() {
@@ -513,6 +515,11 @@ public class ApplicationMode {
 		settings.CUSTOM_APP_PROFILES.set(profiles);
 	}
 
+	public static void onApplicationStart(OsmandSettings settings) {
+		initCustomModes(settings);
+		initRegVisibility();
+	}
+
 	public static void initCustomModes(OsmandSettings settings){
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		Type t = new TypeToken<ArrayList<ApplicationMode>>() {}.getType();
@@ -529,6 +536,7 @@ public class ApplicationMode {
 				}
 			}
 		}
+
 	}
 
 	private static ApplicationMode setBearingIconsSet(ApplicationMode mode) {
@@ -583,7 +591,7 @@ public class ApplicationMode {
 				it.remove();
 			}
 		}
-		ApplicationMode.saveCustomModeToSettings(app.getSettings());
+		saveCustomModeToSettings(app.getSettings());
 	}
 
 	public static boolean changeProfileStatus(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
