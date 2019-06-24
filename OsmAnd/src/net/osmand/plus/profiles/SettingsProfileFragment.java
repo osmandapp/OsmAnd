@@ -53,7 +53,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		allAppModes = ApplicationMode.allPossibleValues();
+		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		allAppModes.remove(ApplicationMode.DEFAULT);
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		availableAppModes.remove(ApplicationMode.DEFAULT);
@@ -125,7 +125,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 		getBaseProfileListener();
 
-		allAppModes = ApplicationMode.allPossibleValues();
+		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		allAppModes.remove(ApplicationMode.DEFAULT);
 		adapter.updateItemsList(allAppModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
 	}

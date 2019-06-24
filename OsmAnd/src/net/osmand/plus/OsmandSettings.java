@@ -2752,8 +2752,6 @@ public class OsmandSettings {
 			new BooleanPreference("fluorescent_overlays", false).makeGlobal().cache();
 
 
-	public final CommonPreference<Boolean> SHOW_RULER =
-			new BooleanPreference("show_ruler", true).makeProfile().cache();
 
 //	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS_V2 = new IntPreference("free_downloads_v2", 0).makeGlobal();
 

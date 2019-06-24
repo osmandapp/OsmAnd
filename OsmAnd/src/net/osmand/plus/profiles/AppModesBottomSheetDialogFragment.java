@@ -91,7 +91,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 			};
 		}
 		adapter.setListener(listener);
-		allModes = ApplicationMode.allPossibleValues();
+		allModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		allModes.remove(ApplicationMode.DEFAULT);
 		adapter.updateItemsList(allModes,
 			new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));

@@ -631,8 +631,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
-			.createCustomMode(profile.userProfileTitle.trim(), customStringKey)
-			.parent(profile.parent)
+			.createCustomMode(profile.parent, profile.userProfileTitle.trim(), customStringKey)
 			.icon(profile.iconId, profile.iconId, profile.iconStringName);
 
 		if (profile.routingProfileDataObject != null) {
