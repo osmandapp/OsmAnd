@@ -92,7 +92,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private View footerView;
 
 	private FavoritesListener favoritesListener;
-
+	
+	String groupNameToShow = null;
+	
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
@@ -207,7 +209,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 		});
 		
-		String groupNameToShow = null;
 		if (getArguments() != null) {
 			groupNameToShow = getArguments().getString(FavoritesActivity.GROUP_NAME_TO_SHOW);
 		}
@@ -242,7 +243,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		super.onResume();
 		favouritesAdapter.synchronizeGroups();
 		initListExpandedState();
-		restoreState(getArguments());
+		if (groupNameToShow == null) {
+			restoreState(getArguments());
+		}
 	}
 
 	@Override

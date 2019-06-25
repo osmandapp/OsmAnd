@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.builders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -258,9 +259,10 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 				public void onClick(View view) {
 					OsmAndAppCustomization appCustomization = app.getAppCustomization();
 					final Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
-					intent.putExtra(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
-					intent.putExtra(FavoritesActivity.GROUP_NAME_TO_SHOW, group.name);
-					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					Bundle b = new Bundle();
+					b.putInt(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
+					b.putString(FavoritesActivity.GROUP_NAME_TO_SHOW, group.name);
+					intent.putExtra(MapActivity.INTENT_PARAMS, b);
 					context.startActivity(intent);
 				}
 			});
