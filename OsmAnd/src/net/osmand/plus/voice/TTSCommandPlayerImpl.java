@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.support.v7.app.AlertDialog;
 
+import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -215,7 +216,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 									mTts.setLanguage(newLocale);
 								} catch(Exception e) {
 									e.printStackTrace();
-									mTts.setLanguage(Locale.getDefault());
+									if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
+										mTts.setLanguage(Locale.getDefault());
+									} else {
+										Toast.makeText(act, "TTS language not available", Toast.LENGTH_LONG).show();
+									}
 								}
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
