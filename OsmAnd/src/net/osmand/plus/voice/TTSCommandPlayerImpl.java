@@ -219,7 +219,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 									if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
 										mTts.setLanguage(Locale.getDefault());
 									} else {
-										//are there any tts language that available everywhere? ENGLISH maybe? 
 										Toast.makeText(act, "TTS language not available", Toast.LENGTH_LONG).show();
 									}
 								}
