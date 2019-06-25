@@ -102,6 +102,7 @@ public class FavoritesActivity extends TabActivity {
 						int tab = intent.getIntExtra(TAB_TO_OPEN, FAV_TAB);
 						if (mTabs.get(n).mTitle.equals(getString(tab))) {
 							mViewPager.setCurrentItem(n, false);
+							
 							break;
 						}
 					}
@@ -209,6 +210,11 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onAttachFragment(Fragment fragment) {
+		if (fragment instanceof FragmentStateHolder && getIntent() != null) {
+			Bundle b = new Bundle();
+			b.putInt(SCROLL_POSITION, getIntent().getIntExtra(SCROLL_POSITION, 0));
+			fragment.setArguments(b);
+		}
 		fragList.add(new WeakReference<>(fragment));
 	}
 
@@ -268,16 +274,10 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	public interface FragmentStateHolder {
-
-		Bundle storeState(int tabId, int itemPosition);
-
-		void restoreState(int position);
-	}
-
-	public int getItemPosition() {
-		int p = itemPosition;
-		itemPosition = 0;
-		return p;
+		
+		Bundle storeState(Bundle bundle);
+		
+		void restoreState(Bundle bundle);
 	}
 }
 

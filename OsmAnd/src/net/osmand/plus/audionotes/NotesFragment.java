@@ -146,9 +146,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		listAdapter.setListener(createAdapterListener());
 		listAdapter.setPortrait(portrait);
 		listView.setAdapter(listAdapter);
-		if (getActivity() != null && getActivity() instanceof FavoritesActivity) {
-			restoreState(((FavoritesActivity) getActivity()).getItemPosition());
-		}
+		restoreState(getArguments());
 	}
 
 	@Override
@@ -577,8 +575,10 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
-		Bundle b = itemPosition >= 0 ? storeState(NOTE_TAB, itemPosition) : null;
-		MapActivity.launchMapActivityMoveToTop(getActivity(), b);
+		Bundle b = new Bundle();
+		b.putInt(SCROLL_POSITION, itemPosition);
+		b.putInt(TAB_TO_OPEN, NOTE_TAB);
+		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
 	private void editNote(final Recording recording) {
@@ -619,22 +619,22 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	}
 
 	@Override
-	public Bundle storeState(int tabId, int itemPosition) {
-		Bundle b = new Bundle();
-		b.putInt(SCROLL_POSITION, itemPosition);
-		b.putInt(TAB_TO_OPEN, tabId);
-		return b;
+	public Bundle storeState(Bundle bundle) {
+		return bundle;
 	}
-
+	
 	@Override
-	public void restoreState(int position) {
-		int itemsCount = getListView().getAdapter().getCount();
-		if (itemsCount > 0 && itemsCount > position) {
-			if (position == 1) {
-				getListView().setSelection(0);
-			} else {
-				getListView().setSelection(position);
-			}
+	public void restoreState(Bundle bundle) {
+		if (bundle != null && bundle.containsKey(SCROLL_POSITION)) {
+			int position= bundle.getInt(SCROLL_POSITION, 0);
+			int itemsCount = getListView().getAdapter().getCount();
+			if (itemsCount > 0 && itemsCount > position) {
+				if (position == 1) {
+					getListView().setSelection(0);
+				} else {
+					getListView().setSelection(position);
+				}
+			}	
 		}
 	}
 }

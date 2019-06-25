@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.NOTE_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.OSM_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.SCROLL_POSITION;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_TO_OPEN;
@@ -409,9 +410,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	public void onResume() {
 		super.onResume();
 		fetchData();
-		if (getActivity() != null && getActivity() instanceof FavoritesActivity) {
-			restoreState(((FavoritesActivity) getActivity()).getItemPosition());
-		}
+		restoreState(getArguments());
 	}
 
 	@Override
@@ -656,7 +655,10 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
 		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
-		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(OSM_TAB, itemPosition));
+		Bundle b = new Bundle();
+		b.putInt(SCROLL_POSITION, itemPosition);
+		b.putInt(TAB_TO_OPEN, OSM_TAB);
+		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
 	private void deletePoint(OsmPoint osmPoint) {
@@ -902,23 +904,21 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		}
 	}
 
-
 	@Override
-	public Bundle storeState(int tabId, int itemPosition) {
-		Bundle b = new Bundle();
-		b.putInt(SCROLL_POSITION, itemPosition);
-		b.putInt(TAB_TO_OPEN, tabId);
-		return b;
+	public Bundle storeState(Bundle bundle) {
+		return bundle;
 	}
-
-	@Override
-	public void restoreState(int position) {
-		int itemsCount = getListView().getAdapter().getCount();
-		if (itemsCount > 0 && itemsCount > position) {
-			if (position == 1) {
-				getListView().setSelection(0);
-			} else {
-				getListView().setSelection(position);
+	
+	public void restoreState(Bundle bundle) {
+		if (bundle != null && bundle.containsKey(SCROLL_POSITION)) {
+			int position= bundle.getInt(SCROLL_POSITION, 0);
+			int itemsCount = getListView().getAdapter().getCount();
+			if (itemsCount > 0 && itemsCount > position) {
+				if (position == 1) {
+					getListView().setSelection(0);
+				} else {
+					getListView().setSelection(position);
+				}
 			}
 		}
 	}
