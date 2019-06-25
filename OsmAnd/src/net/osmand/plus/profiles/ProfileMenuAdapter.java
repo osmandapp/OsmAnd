@@ -103,10 +103,10 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 					? app.getResources().getColor(R.color.divider_dark)
 					: app.getResources().getColor(R.color.divider_light));
 			}
-			holder.title.setText(item.getUserProfileName(app));
-			if (item.getParent() != null) {
+			holder.title.setText(item.toHumanString(app));
+			if (item.isCustomProfile()) {
 				holder.descr.setText(String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().getUserProfileName(app))));
+					Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().toHumanString(app))));
 			} else {
 				holder.descr.setText(R.string.profile_type_base_string);
 			}
@@ -139,7 +139,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	private void updateViewHolder(ProfileViewHolder holder, ApplicationMode mode) {
-		int iconRes = mode.getIconRes(app);
+		int iconRes = mode.getIconRes();
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}

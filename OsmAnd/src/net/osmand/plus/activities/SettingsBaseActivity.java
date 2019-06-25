@@ -366,7 +366,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 				    am.toHumanString(getMyApplication()),
 					getAppModeDescription(am),
 				    am.getStringKey(),
-				    am.getIconRes(getMyApplication()),
+				    am.getIconRes(),
 				    isSelected,
 				    am.getIconColorInfo()
 			    ));
@@ -411,7 +411,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    getModeSubTitleTV().setText(getAppModeDescription(mode));
 	    settings.APPLICATION_MODE.set(mode);
 	    previousAppMode = mode;
-	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(this),
+	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(),
 		    mode.getIconColorInfo().getColor(nightMode)));
 	    getDropDownArrow().setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down,
 		    R.color.icon_color));
@@ -421,7 +421,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
     private String getAppModeDescription(ApplicationMode mode) {
 	    String descr;
-	    if (mode.getParent() == null) {
+	    if (!mode.isCustomProfile()) {
 		    descr = getString(R.string.profile_type_base_string);
 	    } else {
 		    descr = String.format(getString(R.string.profile_type_descr_string),

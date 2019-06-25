@@ -27,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
-import net.osmand.util.Algorithms;
+
 import org.apache.commons.logging.Log;
 
 public class SettingsProfileFragment extends BaseOsmAndFragment {
@@ -103,14 +103,14 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 					} else {
 						availableAppModes.remove(am);
 					}
-					ApplicationMode.changeProfileStatus(am, selected, getMyApplication());
+					ApplicationMode.changeProfileAvailability(am, selected, getMyApplication());
 				}
 
 				@Override
 				public void onProfilePressed(ApplicationMode item) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-					if (item.getParent() != null) {
+					if (item.isCustomProfile()) {
 						intent.putExtra(IS_USER_PROFILE, true);
 					}
 					startActivity(intent);

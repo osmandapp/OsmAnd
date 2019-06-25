@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="new_profile">New Profile</string>
     <string name="shared_string_crash">Crash</string>
     <string name="last_launch_crashed">The last launch of OsmAnd failed. Help us improve OsmAnd. Please send us an error message.</string>
     <string name="press_again_to_change_the_map_orientation">Press again to change the map orientation</string>

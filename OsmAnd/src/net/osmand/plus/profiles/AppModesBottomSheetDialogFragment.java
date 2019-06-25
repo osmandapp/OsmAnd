@@ -6,15 +6,11 @@ import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KE
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -27,7 +23,6 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
-import net.osmand.util.Algorithms;
 
 public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -68,14 +63,14 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					} else {
 						selectedModes.remove(item);
 					}
-					ApplicationMode.changeProfileStatus(item, selected, getMyApplication());
+					ApplicationMode.changeProfileAvailability(item, selected, getMyApplication());
 				}
 
 				@Override
 				public void onProfilePressed(ApplicationMode item) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-					if (item.getParent() != null) {
+					if (item.isCustomProfile()) {
 						intent.putExtra(IS_USER_PROFILE, true);
 					}
 					startActivity(intent);
