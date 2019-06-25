@@ -696,7 +696,7 @@ public class RouteProvider {
 				paramsR.put(key, vl);
 			}
 		}
-		Float defaultSpeed = settings.DEFAULT_SPEED.getModeValue(params.mode);
+		Float defaultSpeed = params.mode.getDefaultSpeed();
 		if (defaultSpeed > 0) {
 			paramsR.put(GeneralRouter.DEFAULT_SPEED, String.valueOf(defaultSpeed));
 		}
