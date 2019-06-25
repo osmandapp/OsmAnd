@@ -656,7 +656,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
 		Bundle b = new Bundle();
 		b.putInt(ITEM_POSITION, itemPosition);
-		b.putInt(TAB_ID, OSM_TAB);
 		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
@@ -905,6 +904,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	@Override
 	public Bundle storeState(Bundle bundle) {
+		bundle.putInt(TAB_ID, OSM_TAB);
 		return bundle;
 	}
 	

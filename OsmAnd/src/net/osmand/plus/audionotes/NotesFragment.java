@@ -577,7 +577,6 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 				true, recording);
 		Bundle b = new Bundle();
 		b.putInt(ITEM_POSITION, itemPosition);
-		b.putInt(TAB_ID, NOTES_TAB);
 		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
@@ -620,6 +619,7 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 
 	@Override
 	public Bundle storeState(Bundle bundle) {
+		bundle.putInt(TAB_ID, NOTES_TAB);
 		return bundle;
 	}
 	
