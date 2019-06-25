@@ -22,7 +22,6 @@ public class RouteCalculationParams {
 	public OsmandApplication ctx;
 	public RoutingContext cachedRoutingContext;
 	public ApplicationMode mode;
-	public RouteService type;
 	public GPXRouteParams gpxRoute;
 	public RouteCalculationResult previousToRecalculate;
 	public boolean onlyStartPointChanged;

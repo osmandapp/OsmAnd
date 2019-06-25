@@ -86,15 +86,15 @@ public class AppModeDialog {
 			final boolean checked = selected.contains(mode);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
 			if (checked) {
-				iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(ctx), mode.getIconColorInfo().getColor(nightMode)));
+				iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
 				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
 			} else {
 				if (useMapTheme) {
-					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(ctx), mode.getIconColorInfo().getColor(nightMode)));
+					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
 					iv.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
 				} else {
-					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getIconRes(ctx)));
+					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getIconRes()));
 				}
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_unchecked)));
 				tb.findViewById(R.id.selection).setVisibility(View.INVISIBLE);
@@ -136,7 +136,7 @@ public class AppModeDialog {
 			final boolean checked = selected.contains(mode);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
 			View selection = tb.findViewById(R.id.selection);
-			Drawable drawable = ctx.getUIUtilities().getIcon(mode.getIconRes(ctx), mode.getIconColorInfo().getColor(nightMode));
+			Drawable drawable = ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
 			if (checked) {
 				iv.setImageDrawable(drawable);
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
@@ -149,7 +149,7 @@ public class AppModeDialog {
 			} else {
 				if (useMapTheme) {
 					if (Build.VERSION.SDK_INT >= 21) {
-						Drawable active = ctx.getUIUtilities().getIcon(mode.getIconRes(ctx), mode.getIconColorInfo().getColor(nightMode));
+						Drawable active = ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode));
 						drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
 					}
 					iv.setImageDrawable(drawable);
@@ -160,7 +160,7 @@ public class AppModeDialog {
 						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_dark);
 					}
 				} else {
-					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(ctx), mode.getIconColorInfo().getColor(nightMode)));
+					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
 				}
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_unchecked)));
 			}
@@ -197,7 +197,7 @@ public class AppModeDialog {
 		int metricsY = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		View tb = layoutInflater.inflate(layoutId, null);
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-		iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(ctx), mode.getIconColorInfo().getColor(isNightMode(ctx, useMapTheme))));
+		iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(isNightMode(ctx, useMapTheme))));
 		iv.setContentDescription(mode.toHumanString(ctx));
 //		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.app_mode_icon_color), null, null);
 		LayoutParams lp = new LinearLayout.LayoutParams(metricsX, metricsY);

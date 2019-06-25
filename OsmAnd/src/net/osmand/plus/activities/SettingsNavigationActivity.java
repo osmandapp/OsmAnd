@@ -242,7 +242,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");
 		cat.removeAll();
 		CheckBoxPreference fastRoute = createCheckBoxPreference(settings.FAST_ROUTE_MODE, R.string.fast_route_mode, R.string.fast_route_mode_descr);
-		if(settings.ROUTER_SERVICE.get() != RouteService.OSMAND) {
+		if(settings.getApplicationMode().getRouteService() != RouteService.OSMAND) {
 			cat.addPreference(fastRoute);
 		} else {
 			ApplicationMode am = settings.getApplicationMode();

@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -38,6 +39,7 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.TimeControlWidge
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
 import java.lang.reflect.Field;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.*;
 
 public class MapInfoLayer extends OsmandMapLayer {
 	private final MapActivity map;
@@ -159,49 +161,49 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rulerControl.setVisibility(false);
 		
 		// register left stack
-		registerSideWidget(null, R.drawable.ic_action_compass, R.string.map_widget_compass, "compass", true, 4);
+		registerSideWidget(null, R.drawable.ic_action_compass, R.string.map_widget_compass, WIDGET_COMPASS, true, 4);
 
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
-		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, "next_turn", true, 5);
+		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, WIDGET_NEXT_TURN, true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
-		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true, 6);
+		registerSideWidget(smallInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn_small, WIDGET_NEXT_TURN_SMALL, true, 6);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(map, app, true);
-		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 7);
+		registerSideWidget(nextNextInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_next_turn, WIDGET_NEXT_NEXT_TURN,true, 7);
 
 		// register right stack
 		// priorityOrder: 10s navigation-related, 20s position-related, 30s recording- and other plugin-related, 40s general device information, 50s debugging-purpose
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
-		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 13);
+		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, WIDGET_INTERMEDIATE_DISTANCE, false, 13);
 		TextInfoWidget intermediateTime = ric.createTimeControl(map, true);
-		registerSideWidget(intermediateTime, new TimeControlWidgetState(app, true), "intermediate_time", false, 14);
+		registerSideWidget(intermediateTime, new TimeControlWidgetState(app, true), WIDGET_INTERMEDIATE_TIME, false, 14);
 		TextInfoWidget dist = ric.createDistanceControl(map);
-		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 15);
+		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, WIDGET_DISTANCE, false, 15);
 		TextInfoWidget time = ric.createTimeControl(map, false);
-		registerSideWidget(time, new TimeControlWidgetState(app, false), "time", false, 16);
+		registerSideWidget(time, new TimeControlWidgetState(app, false), WIDGET_TIME, false, 16);
 
 
 		TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
-		registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 17);
+		registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, WIDGET_MARKER_1, false, 17);
 		TextInfoWidget bearing = ric.createBearingControl(map);
-		registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 18);
+		registerSideWidget(bearing, new BearingWidgetState(app), WIDGET_BEARING, false, 18);
 		TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
-		registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 19);
+		registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, WIDGET_MARKER_2, false, 19);
 
 		TextInfoWidget speed = ric.createSpeedControl(map);
-		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, "speed", false, 20);
+		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, WIDGET_SPEED, false, 20);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map);
-		registerSideWidget(maxspeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, "max_speed", false,  21);
+		registerSideWidget(maxspeed, R.drawable.ic_action_speed_limit, R.string.map_widget_max_speed, WIDGET_MAX_SPEED, false,  21);
 		TextInfoWidget alt = mic.createAltitudeControl(map);
-		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, "altitude", false, 23);
+		registerSideWidget(alt, R.drawable.ic_action_altitude, R.string.map_widget_altitude, WIDGET_ALTITUDE, false, 23);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map);
 
-		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, "gps_info", false, 28);
+		registerSideWidget(gpsInfo, R.drawable.ic_action_gps_info, R.string.map_widget_gps_info, WIDGET_GPS_INFO, false, 28);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map);
-		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, "plain_time", false, 41);
+		registerSideWidget(plainTime, R.drawable.ic_action_time, R.string.map_widget_plain_time, WIDGET_PLAIN_TIME, false, 41);
 		TextInfoWidget battery = ric.createBatteryControl(map);
-		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, "battery", false, 42);
+		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, WIDGET_BATTERY, false, 42);
 		TextInfoWidget ruler = mic.createRulerControl(map);
-		registerSideWidget(ruler, new CompassRulerControlWidgetState(app), "ruler", false, 43);
+		registerSideWidget(ruler, new CompassRulerControlWidgetState(app), WIDGET_RULER, false, 43);
 	}
 
 	public void recreateControls() {

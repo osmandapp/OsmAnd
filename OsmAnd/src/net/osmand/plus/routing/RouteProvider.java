@@ -296,22 +296,22 @@ public class RouteProvider {
 		if (params.start != null && params.end != null) {
 			if(log.isInfoEnabled()){
 				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
-						params.type.getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
 				RouteCalculationResult res;
 				boolean calcGPXRoute = params.gpxRoute != null && !params.gpxRoute.points.isEmpty();
 				if(calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute){
 					res = calculateGpxRoute(params);
-				} else if (params.type == RouteService.OSMAND) {
+				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
-				} else if (params.type == RouteService.BROUTER) {
+				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 //				} else if (params.type == RouteService.ORS) {
 //					res = findORSRoute(params);
 //				} else if (params.type == RouteService.OSRM) {
 //					res = findOSRMRoute(params);
-				} else if (params.type == RouteService.STRAIGHT){
+				} else if (params.mode.getRouteService() == RouteService.STRAIGHT){
 					res = findStraightRoute(params);
 				}
 				else {
@@ -410,7 +410,6 @@ public class RouteProvider {
 		rp.start = routeParams.start;
 		rp.end = routeParams.end;
 		rp.leftSide = routeParams.leftSide;
-		rp.type = routeParams.type;
 		rp.fast = routeParams.fast;
 		rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
 		rp.previousToRecalculate =  routeParams.previousToRecalculate;
@@ -533,7 +532,6 @@ public class RouteProvider {
 		newParams.ctx = rParams.ctx;
 		newParams.calculationProgress = rParams.calculationProgress;
 		newParams.mode = rParams.mode;
-		newParams.type = RouteService.OSMAND;
 		newParams.leftSide = rParams.leftSide;
 		RouteCalculationResult newRes = null;
 		try {
@@ -780,7 +778,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
-		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "' is not supported.");
+		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanString(params.ctx)+ "' is not supported.");
 	}
 
 	private RouteCalculationResult interrupted() {
