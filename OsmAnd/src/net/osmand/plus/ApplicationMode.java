@@ -25,6 +25,7 @@ import java.util.Set;
 
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.Algorithms;
+import net.sf.junidecode.App;
 
 import org.apache.commons.logging.Log;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.*;
@@ -557,7 +558,18 @@ public class ApplicationMode {
 
 	public static void onApplicationStart(OsmandApplication app) {
 		initCustomModes(app);
+		initDefaultSpeed(app);
 		initRegVisibility();
+		initDefaultSpeed(app);
+	}
+
+	private static void initDefaultSpeed(OsmandApplication app) {
+		for(ApplicationMode m : values) {
+			float spd = app.getSettings().DEFAULT_SPEED.getModeValue(m);
+			if(spd > 0) {
+				m.defaultSpeed = spd;
+			}
+		}
 	}
 
 	private static void initCustomModes(OsmandApplication app){
