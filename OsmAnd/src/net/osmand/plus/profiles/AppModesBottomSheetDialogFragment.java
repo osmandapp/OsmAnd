@@ -75,7 +75,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				public void onProfilePressed(ApplicationMode item) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-					if (!Algorithms.isEmpty(item.getUserProfileName())) {
+					if (item.getParent() != null) {
 						intent.putExtra(IS_USER_PROFILE, true);
 					}
 					startActivity(intent);

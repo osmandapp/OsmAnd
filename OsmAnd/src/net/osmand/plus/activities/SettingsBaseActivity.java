@@ -405,9 +405,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
     void updateModeButton(ApplicationMode mode) {
 		boolean nightMode = !getMyApplication().getSettings().isLightContent();
-	    String title = Algorithms.isEmpty(mode.getUserProfileName())
-		    ? mode.toHumanString(SettingsBaseActivity.this)
-		    : mode.getUserProfileName();
+	    String title = mode.toHumanString(SettingsBaseActivity.this);
 
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(getAppModeDescription(mode));

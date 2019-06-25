@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.plus.profiles.EditProfileFragment;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.Algorithms;
 
@@ -51,7 +52,6 @@ public class ApplicationMode {
 	private final int keyName;
 	// TODO custom profile
 	private ApplicationMode parentAppMode;
-	private int mapIconId = R.drawable.map_world_globe_dark;
 	// TODO custom profile
 	private int smallIconDark = R.drawable.ic_world_globe_dark;
 	private float defaultSpeed = 10f;
@@ -77,31 +77,41 @@ public class ApplicationMode {
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
 	public static final ApplicationMode DEFAULT = create(null, R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
-			icon(R.drawable.map_world_globe_dark, R.drawable.ic_world_globe_dark, "map_world_globe_dark").reg();
+			icon(R.drawable.ic_world_globe_dark, "map_world_globe_dark").reg();
 
 	public static final ApplicationMode CAR = create(null, R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
-			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark, "ic_action_car_dark").setRoutingProfile("car").reg();
+			icon(R.drawable.ic_action_car_dark, "ic_action_car_dark").setRoutingProfile("car").reg();
 
 	public static final ApplicationMode BICYCLE = create(null, R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark, "ic_action_bicycle_dark").setRoutingProfile("bicycle").reg();
+			icon(R.drawable.ic_action_bicycle_dark, "ic_action_bicycle_dark").setRoutingProfile("bicycle").reg();
 
 	public static final ApplicationMode PEDESTRIAN = create(null, R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
-			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark, "ic_action_pedestrian_dark").setRoutingProfile("pedestrian").reg();
+			icon(R.drawable.ic_action_pedestrian_dark, "ic_action_pedestrian_dark").setRoutingProfile("pedestrian").reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = create(null, R.string.app_mode_public_transport, "public_transport").
-			icon(R.drawable.map_action_bus_dark, R.drawable.ic_action_bus_dark, "ic_action_bus_dark").setRoutingProfile("public_transport").reg();
+			icon(R.drawable.ic_action_bus_dark, "ic_action_bus_dark").setRoutingProfile("public_transport").reg();
 
 	public static final ApplicationMode BOAT = create(null, R.string.app_mode_boat, "boat").speed(5.5f, 20).nauticalLocation().
-			icon(R.drawable.map_action_sail_boat_dark, R.drawable.ic_action_sail_boat_dark, "ic_action_sail_boat_dark").setRoutingProfile("boat").reg();
+			icon(R.drawable.ic_action_sail_boat_dark, "ic_action_sail_boat_dark").setRoutingProfile("boat").reg();
 
 	public static final ApplicationMode AIRCRAFT = create(null, R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.map_action_aircraft, R.drawable.ic_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").reg();
+			icon(R.drawable.ic_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").reg();
 
 	public static final ApplicationMode SKI = create(null, R.string.app_mode_skiing, "ski").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-		icon(R.drawable.ic_plugin_skimaps, R.drawable.ic_plugin_skimaps, "ic_plugin_skimaps").setRoutingProfile("ski").reg();
+		icon(R.drawable.ic_plugin_skimaps, "ic_plugin_skimaps").setRoutingProfile("ski").reg();
 
 
-	public static void initRegVisibility() {
+	private static class ApplicationModeBean {
+		@Expose String stringKey;
+		@Expose String userProfileName;
+		@Expose String parent;
+		@Expose String iconName = "map_world_globe_dark";
+		@Expose ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
+		@Expose String routingProfile = null;
+		@Expose RouteService routeService = RouteService.OSMAND;
+	}
+
+	private static void initRegVisibility() {
 		// DEFAULT, CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI
 		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI};
 		ApplicationMode[] all = null;
@@ -166,8 +176,7 @@ public class ApplicationMode {
 			return applicationMode;
 		}
 
-		public ApplicationModeBuilder icon(int mapIcon, int smallIconDark, String iconName) {
-			applicationMode.mapIconId = mapIcon;
+		public ApplicationModeBuilder icon(int smallIconDark, String iconName) {
 			applicationMode.smallIconDark = smallIconDark;
 			applicationMode.iconName = iconName;
 			return this;
@@ -445,8 +454,13 @@ public class ApplicationMode {
 		return stringKey;
 	}
 
-	public int getMapIconId() {
-		return mapIconId;
+
+	public String getUserProfileName(OsmandApplication app) {
+		// TODO toHumanStringCTX
+		if(keyName > 0) {
+			return app.getString(keyName);
+		}
+		return userProfileName;
 	}
 
 	public String toHumanString(Context ctx) {
@@ -456,14 +470,6 @@ public class ApplicationMode {
 			return userProfileName;
 		}
 
-	}
-
-	public String toHumanStringCtx(Context ctx) {
-		if (Algorithms.isEmpty(userProfileName)) {
-			return ctx.getString(keyName);
-		} else {
-			return userProfileName;
-		}
 	}
 
 	public RouteService getRouteService() {
@@ -505,13 +511,6 @@ public class ApplicationMode {
 
 	public String getRoutingProfile() {
 		return routingProfile;
-	}
-
-	public String getUserProfileName(OsmandApplication app) {
-		if(keyName > 0) {
-			return app.getString(keyName);
-		}
-		return userProfileName;
 	}
 
 	public static void onApplicationStart(OsmandSettings settings) {
@@ -562,6 +561,7 @@ public class ApplicationMode {
 	public static ApplicationMode saveNewCustomProfile(ApplicationModeBuilder builder, OsmandApplication app) {
 		ApplicationMode mode = builder.customReg();
 		ApplicationMode.saveCustomModeToSettings(app.getSettings());
+
 		return mode;
 	}
 

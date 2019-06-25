@@ -942,7 +942,8 @@ public class RoutingHelper {
 				}
 				return;
 			}
-			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
+			final boolean onlineSourceWithoutInternet = !res.isCalculated() &&
+					params.mode.getRouteService().isOnline() && !settings.isInternetConnectionAvailable();
 			if (onlineSourceWithoutInternet && settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 				if (params.previousToRecalculate != null && params.previousToRecalculate.isCalculated()) {
 					res = provider.recalculatePartOfflineRoute(res, params);
@@ -1034,11 +1035,10 @@ public class RoutingHelper {
 			}
 			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
-			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 			params.mode = mode;
 			params.ctx = app;
 			boolean updateProgress = false;
-			if (params.type == RouteService.OSMAND) {
+			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress = true;
 			}
@@ -1112,7 +1112,6 @@ public class RoutingHelper {
 	public static void applyApplicationSettings(RouteCalculationParams params, OsmandSettings settings, ApplicationMode mode) {
 		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 		params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
-		params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 	}
 
 	public void setProgressBar(RouteCalculationProgressCallback progressRoute) {

@@ -633,32 +633,26 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 			.createCustomMode(profile.parent, profile.userProfileTitle.trim(), customStringKey)
-			.icon(profile.iconId, profile.iconId, profile.iconStringName);
+			.icon(profile.iconId, profile.iconStringName);
 
-		if (profile.routingProfileDataObject != null) {
+		if(profile.routingProfileDataObject.getStringKey().equals(
+				RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
+			builder.setRouteService(RouteService.STRAIGHT);
+		} else if(profile.routingProfileDataObject.getStringKey().equals(
+				RoutingProfilesResources.BROUTER_MODE.name())) {
+			builder.setRouteService(RouteService.BROUTER);
+		} else if (profile.routingProfileDataObject != null) {
 			builder.setRoutingProfile(profile.routingProfileDataObject.getStringKey());
 		}
 
+		if(EditProfileFragment.RoutingProfilesResources.STRAIGHT_LINE_MODE.toString()
 		builder.setColor(profile.iconColor);
 
 		ApplicationMode newMode = ApplicationMode.saveNewCustomProfile(builder, getMyApplication());
-
-
 		// TODO ?????
 		if (!ApplicationMode.values(app).contains(mode)) {
 			boolean save = ApplicationMode.changeProfileStatus(mode, true, getMyApplication());
 
-			if (save && getSettings() != null) {
-				if (profile.routingProfileDataObject.getStringKey()
-					.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.toString())) {
-					getSettings().ROUTER_SERVICE.setModeValue(mode, RouteService.STRAIGHT);
-				} else if (profile.routingProfileDataObject.getStringKey()
-					.equals(RoutingProfilesResources.BROUTER_MODE.toString())) {
-					getSettings().ROUTER_SERVICE.setModeValue(mode, RouteService.BROUTER);
-				} else {
-					getSettings().ROUTER_SERVICE.setModeValue(mode, RouteService.OSMAND);
-				}
-			}
 		}
 		isDataChanged = false;
 		isCancelAllowed = true;
@@ -731,14 +725,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
 		List<RoutingProfileDataObject> profilesObjects = new ArrayList<>();
 		profilesObjects.add(new RoutingProfileDataObject(
-			RoutingProfilesResources.STRAIGHT_LINE_MODE.toString(),
+			RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
 			context.getString(RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
 			context.getString(R.string.special_routing_type),
 			RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
 			false, null));
 		if (context.getBRouterService() != null) {
 			profilesObjects.add(new RoutingProfileDataObject(
-				RoutingProfilesResources.BROUTER_MODE.toString(),
+				RoutingProfilesResources.BROUTER_MODE.name(),
 				context.getString(RoutingProfilesResources.BROUTER_MODE.getStringRes()),
 				context.getString(R.string.third_party_routing_type),
 				RoutingProfilesResources.BROUTER_MODE.getIconRes(),
@@ -766,7 +760,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	public enum RoutingProfilesResources {
-		STRAIGHT_LINE_MODE(R.string.routing_profile_straightline,R.drawable.ic_action_split_interval),
+		STRAIGHT_LINE_MODE(R.string.routing_profile_straightline, R.drawable.ic_action_split_interval),
 		BROUTER_MODE(R.string.routing_profile_broutrer, R.drawable.ic_action_split_interval),
 		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),
 		PEDESTRIAN(R.string.rendering_value_pedestrian_name, R.drawable.map_action_pedestrian_dark),
