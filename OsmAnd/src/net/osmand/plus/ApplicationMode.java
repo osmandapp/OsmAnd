@@ -69,7 +69,7 @@ public class ApplicationMode {
 	private String iconResName = "ic_world_globe_dark";
 	private int iconRes = R.drawable.ic_world_globe_dark;
 	private ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
-	private String routingProfile = null;
+	private String routingProfile = "";
 	private RouteService routeService = RouteService.OSMAND;
 
 

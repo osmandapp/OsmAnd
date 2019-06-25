@@ -426,7 +426,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    } else {
 		    descr = String.format(getString(R.string.profile_type_descr_string),
 			    mode.getParent().toHumanString(getMyApplication()));
-		    if (mode.getRoutingProfile().contains("/")) {
+		    if (mode.getRoutingProfile() != null && mode.getRoutingProfile().contains("/")) {
 			    descr = descr.concat(", " + mode.getRoutingProfile()
 				    .substring(0, mode.getRoutingProfile().indexOf("/")));
 		    }
