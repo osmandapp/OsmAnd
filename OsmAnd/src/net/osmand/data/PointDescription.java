@@ -203,8 +203,12 @@ public class PointDescription {
 			results.put(PointDescription.formatToHumanString(ctx, f),
 				ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0));
 		}
+		int zoom = 17;
+		if (ctx.getMapView() != null) {
+			zoom = ctx.getMapView().getZoom();
+		}
 		final String httpUrl = "https://osmand.net/go?lat=" + (lat)
-			+ "&lon=" + (lon) + "&z=" +  ctx.getMapView().getZoom();
+			+ "&lon=" + (lon) + "&z=" + zoom;
 		results.put("URL", httpUrl);
 		return results;
 	}

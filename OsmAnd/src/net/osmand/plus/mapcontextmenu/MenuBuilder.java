@@ -637,6 +637,10 @@ public class MenuBuilder {
 				collapsableView.getContenView().setVisibility(View.GONE);
 				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 			}
+			if (collapsableView.getContenView().getParent() != null) {
+				((ViewGroup) collapsableView.getContenView().getParent())
+					.removeView(collapsableView.getContenView());
+			}
 			baseView.addView(collapsableView.getContenView());
 		}
 
