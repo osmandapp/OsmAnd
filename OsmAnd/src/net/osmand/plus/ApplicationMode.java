@@ -557,10 +557,11 @@ public class ApplicationMode {
 
 
 	public static void onApplicationStart(OsmandApplication app) {
+		// load for default profiles to initialize later custom modes
+		initDefaultSpeed(app);
 		initCustomModes(app);
 		initDefaultSpeed(app);
 		initRegVisibility();
-		initDefaultSpeed(app);
 	}
 
 	private static void initDefaultSpeed(OsmandApplication app) {
