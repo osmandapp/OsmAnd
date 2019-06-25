@@ -215,9 +215,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			typeSelectionBtn.setClickable(false);
 		}
 
-		if (!Algorithms.isEmpty(mode.getRoutingProfile())) {
+		if (!Algorithms.isEmpty(mode.getRoutingProfile()) || mode.getRouteService() != RouteService.OSMAND) {
 			for (RoutingProfileDataObject r : routingProfileDataObjects) {
-				if (mode.getRoutingProfile().equals(r.getStringKey())) {
+				if (mode.getRoutingProfile() != null && mode.getRoutingProfile().equals(r.getStringKey()) 
+					|| (mode.getRouteService() == RouteService.BROUTER
+					&& r.getStringKey().equals(RoutingProfilesResources.BROUTER_MODE.name())) 
+					|| (mode.getRouteService() == RouteService.STRAIGHT
+					&& r.getStringKey().equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name()))) {
 					profile.routingProfileDataObject = r;
 					r.setSelected(true);
 					navTypeEt.setText(r.getName());
