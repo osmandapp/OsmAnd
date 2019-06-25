@@ -3090,4 +3090,19 @@
     <string name="collected_data">Собранные данные</string>
     <string name="press_again_to_change_the_map_orientation">Нажмите еще раз, чтобы изменить ориентацию карты</string>
     <string name="last_launch_crashed">Последний запуск OsmAnd завершился с ошибкой. Помогите нам улучшить OsmAnd. Пожалуйста, отправьте нам сообщение об ошибке.</string>
+    <string name="settings_routing_mode_string">Режим: %s</string>
+    <string name="settings_derived_routing_mode_string">Режим пользователя, полученный из: %s</string>
+    <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
+    <string name="routing_profile_broutrer">BRouter (Оффлайн)</string>
+    <string name="routing_attr_piste_type_downhill_name">Альпийские/горные лыжи</string>
+    <string name="routing_attr_piste_type_downhill_description">Склоны для катания на альпийских или горных лыжах и доступ к подъемникам.</string>
+    <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
+    <string name="routing_attr_piste_type_sled_name">Сани</string>
+    <string name="routing_attr_piste_type_sled_description">Склоны для катания на санях.</string>
+    <string name="routing_attr_allow_intermediate_description">Более сложные трассы с крутыми участками. Как правило, встречаются препятствия, которые потребуется обходить.</string>
+    <string name="routing_attr_allow_advanced_description">Сложные маршруты, с опасными препятствиями и крутыми участками.</string>
+    <string name="routing_attr_difficulty_preference_name">Предпочитаемая сложность</string>
+    <string name="process_downloading_service">Служба загрузки OsmAnd</string>
+    <string name="shared_string_color_magenta">Пурпурный</string>
+    <string name="button_rate">Оценить</string>
 </resources>

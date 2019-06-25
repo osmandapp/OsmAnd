@@ -3124,4 +3124,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_color_magenta">Purpurová</string>
     <string name="shared_string_icon">Ikona</string>
     <string name="collected_data">Zbierané údaje</string>
+    <string name="press_again_to_change_the_map_orientation">Stlačte znovu pre zmenu orientácie mapy</string>
 </resources>
