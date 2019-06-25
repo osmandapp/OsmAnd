@@ -79,7 +79,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.FavoritesActivity.FragmentStateHolder;
+import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
 
@@ -103,10 +103,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
-	FragmentStateHolder {
+	FavoritesFragmentStateHolder {
 
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
-
 	public static final int SEARCH_ID = -1;
 	// public static final int ACTION_ID = 0;
 	// protected static final int DELETE_ACTION_ID = 1;

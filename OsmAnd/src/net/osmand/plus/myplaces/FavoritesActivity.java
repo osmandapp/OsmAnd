@@ -43,18 +43,17 @@ public class FavoritesActivity extends TabActivity {
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
 
-	public static final String GROUP_NAME_TO_SHOW = "group_name_to_show";
+	
 	
 	public static final String TAB_ID = "selected_tab_id";
-	public static final String ITEM_POSITION = "item_position";
-	public static final String GROUP_POSITION = "group_position";
+
 	
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 	public static final int NOTES_TAB = R.string.notes;
 	public static final int OSM_TAB = R.string.osm_edits;
 
-	protected List<WeakReference<FragmentStateHolder>> fragList = new ArrayList<>();
+	protected List<WeakReference<FavoritesFragmentStateHolder>> fragList = new ArrayList<>();
 	private int tabSize;
 	private ImportHelper importHelper;
 
@@ -158,8 +157,8 @@ public class FavoritesActivity extends TabActivity {
 
 	private AvailableGPXFragment getGpxFragment() {
 		AvailableGPXFragment gpxFragment = null;
-		for (WeakReference<FragmentStateHolder> f : fragList) {
-			FragmentStateHolder frag = f.get();
+		for (WeakReference<FavoritesFragmentStateHolder> f : fragList) {
+			FavoritesFragmentStateHolder frag = f.get();
 			if (frag instanceof AvailableGPXFragment) {
 				gpxFragment = (AvailableGPXFragment) frag;
 			}
@@ -194,25 +193,32 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onAttachFragment(Fragment fragment) {
-		if (fragment instanceof FragmentStateHolder) {
+		if (fragment instanceof FavoritesFragmentStateHolder) {
 			if (intentParams != null && intentParams.getInt(TAB_ID, -1) != -1) {
 				Bundle b = new Bundle();
 				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
 				if (tabId == FAV_TAB && fragment instanceof FavoritesTreeFragment) {
-					b.putString(GROUP_NAME_TO_SHOW, intentParams.getString(GROUP_NAME_TO_SHOW));
-					b.putInt(GROUP_POSITION, intentParams.getInt(GROUP_POSITION, 0));
-					b.putInt(ITEM_POSITION, intentParams.getInt(ITEM_POSITION, 0)); 
+					b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW,
+						intentParams.getString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW));
+					b.putInt(FavoritesFragmentStateHolder.GROUP_POSITION, intentParams.getInt(
+						FavoritesFragmentStateHolder.GROUP_POSITION, 0));
+					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
+						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
 				} else if (tabId == GPX_TAB && fragment instanceof AvailableGPXFragment) {
-					b.putInt(GROUP_POSITION, intentParams.getInt(GROUP_POSITION, 0));
-					b.putInt(ITEM_POSITION, intentParams.getInt(ITEM_POSITION, 0));
+					b.putInt(FavoritesFragmentStateHolder.GROUP_POSITION,
+						intentParams.getInt(FavoritesFragmentStateHolder.GROUP_POSITION, 0));
+					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
+						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
 				} else if (tabId == NOTES_TAB && fragment instanceof NotesFragment) {
-					b.putInt(ITEM_POSITION, intentParams.getInt(ITEM_POSITION, 0));
+					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
+						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
 				} else if (tabId == OSM_TAB && fragment instanceof OsmEditsFragment) {
-					b.putInt(ITEM_POSITION, intentParams.getInt(ITEM_POSITION, 0));
+					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
+						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
 				}
 				fragment.setArguments(b);
 			}
-			fragList.add(new WeakReference<>((FragmentStateHolder) fragment));
+			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));
 		}
 	}
 
@@ -271,7 +277,13 @@ public class FavoritesActivity extends TabActivity {
 		}
 	}
 
-	public interface FragmentStateHolder {
+	public interface FavoritesFragmentStateHolder {
+
+		String ITEM_POSITION = "item_position";
+		
+		String GROUP_POSITION = "group_position";
+
+		String GROUP_NAME_TO_SHOW = "group_name_to_show";
 		
 		Bundle storeState(Bundle bundle);
 		

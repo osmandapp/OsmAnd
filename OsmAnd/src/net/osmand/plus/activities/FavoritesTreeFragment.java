@@ -48,7 +48,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesActivity.FragmentStateHolder;
+import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -66,7 +66,7 @@ import java.util.Set;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements
-	FragmentStateHolder {
+	FavoritesFragmentStateHolder {
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
 	// public static final int IMPORT_ID = 1;
@@ -210,7 +210,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		});
 		
 		if (getArguments() != null) {
-			groupNameToShow = getArguments().getString(FavoritesActivity.GROUP_NAME_TO_SHOW);
+			groupNameToShow = getArguments().getString(GROUP_NAME_TO_SHOW);
 		}
 		
 		if (groupNameToShow != null) {
@@ -707,8 +707,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				true,
 				point); //$NON-NLS-1$
 		Bundle b = new Bundle();
-		b.putInt(FavoritesActivity.GROUP_POSITION, groupPos);
-		b.putInt(FavoritesActivity.ITEM_POSITION, childPos);
+		b.putInt(GROUP_POSITION, groupPos);
+		b.putInt(ITEM_POSITION, childPos);
 		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
@@ -721,8 +721,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public void restoreState(Bundle bundle) {
 		if (bundle != null) {
-			int group = bundle.getInt(FavoritesActivity.GROUP_POSITION, 0);
-			int child = bundle.getInt(FavoritesActivity.ITEM_POSITION, 0);
+			int group = bundle.getInt(GROUP_POSITION, 0);
+			int child = bundle.getInt(ITEM_POSITION, 0);
 			listView.setSelectedChild(group, child, true);
 		}
 	}

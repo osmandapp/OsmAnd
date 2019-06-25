@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
 import static net.osmand.plus.myplaces.FavoritesActivity.OSM_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.ITEM_POSITION;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 import android.app.Dialog;
@@ -52,7 +51,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesActivity.FragmentStateHolder;
+import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
 import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
@@ -74,7 +73,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener,
-	FragmentStateHolder {
+	FavoritesFragmentStateHolder {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
