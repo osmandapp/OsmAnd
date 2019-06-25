@@ -532,7 +532,6 @@ public class RouteProvider {
 		newParams.ctx = rParams.ctx;
 		newParams.calculationProgress = rParams.calculationProgress;
 		newParams.mode = rParams.mode;
-		newParams.type = RouteService.OSMAND;
 		newParams.leftSide = rParams.leftSide;
 		RouteCalculationResult newRes = null;
 		try {
