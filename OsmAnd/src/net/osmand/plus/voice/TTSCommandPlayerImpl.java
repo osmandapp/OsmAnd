@@ -219,8 +219,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 									if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
 										mTts.setLanguage(Locale.getDefault());
 									} else {
-										mTts.setLanguage(Locale.ENGLISH); // or what? is english locale always available? cant find info
-										Toast.makeText(act, "TTS language not available, set to ENGLISH", Toast.LENGTH_LONG).show();
+										//are there any tts language that available everywhere? ENGLISH maybe? 
+										Toast.makeText(act, "TTS language not available", Toast.LENGTH_LONG).show();
 									}
 								}
 								if(speechRate != 1) {
