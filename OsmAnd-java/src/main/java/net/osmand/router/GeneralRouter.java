@@ -387,13 +387,15 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
-		return Math.max(Math.min(defineVehicleSpeed(road), maxSpeed), minSpeed);
+		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+		return spd;
 	}
 	
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed) * defaultSpeedRatio;
+		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+		return Math.max(Math.min(spd, maxSpeed), minSpeed);
 	}
 
 	@Override
