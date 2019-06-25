@@ -1,9 +1,8 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.NOTE_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.OSM_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.SCROLL_POSITION;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_TO_OPEN;
+import static net.osmand.plus.myplaces.FavoritesActivity.ITEM_POSITION;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -656,8 +655,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
 		Bundle b = new Bundle();
-		b.putInt(SCROLL_POSITION, itemPosition);
-		b.putInt(TAB_TO_OPEN, OSM_TAB);
+		b.putInt(ITEM_POSITION, itemPosition);
+		b.putInt(TAB_ID, OSM_TAB);
 		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
@@ -910,8 +909,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	}
 	
 	public void restoreState(Bundle bundle) {
-		if (bundle != null && bundle.containsKey(SCROLL_POSITION)) {
-			int position= bundle.getInt(SCROLL_POSITION, 0);
+		if (bundle != null && bundle.containsKey(ITEM_POSITION)) {
+			int position= bundle.getInt(ITEM_POSITION, 0);
 			int itemsCount = getListView().getAdapter().getCount();
 			if (itemsCount > 0 && itemsCount > position) {
 				if (position == 1) {

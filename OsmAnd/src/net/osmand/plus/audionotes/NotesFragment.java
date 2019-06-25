@@ -1,8 +1,8 @@
 package net.osmand.plus.audionotes;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.NOTE_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.SCROLL_POSITION;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_TO_OPEN;
+import static net.osmand.plus.myplaces.FavoritesActivity.NOTES_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.ITEM_POSITION;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -576,8 +576,8 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
 		Bundle b = new Bundle();
-		b.putInt(SCROLL_POSITION, itemPosition);
-		b.putInt(TAB_TO_OPEN, NOTE_TAB);
+		b.putInt(ITEM_POSITION, itemPosition);
+		b.putInt(TAB_ID, NOTES_TAB);
 		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
@@ -625,8 +625,8 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 	
 	@Override
 	public void restoreState(Bundle bundle) {
-		if (bundle != null && bundle.containsKey(SCROLL_POSITION)) {
-			int position= bundle.getInt(SCROLL_POSITION, 0);
+		if (bundle != null && bundle.containsKey(ITEM_POSITION)) {
+			int position= bundle.getInt(ITEM_POSITION, 0);
 			int itemsCount = getListView().getAdapter().getCount();
 			if (itemsCount > 0 && itemsCount > position) {
 				if (position == 1) {

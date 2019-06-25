@@ -258,7 +258,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 				public void onClick(View view) {
 					OsmAndAppCustomization appCustomization = app.getAppCustomization();
 					final Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
-					intent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
+					intent.putExtra(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
 					intent.putExtra(FavoritesActivity.GROUP_NAME_TO_SHOW, group.name);
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					context.startActivity(intent);
