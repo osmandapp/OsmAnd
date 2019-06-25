@@ -90,7 +90,7 @@ public class ApplicationMode {
 			icon(R.drawable.ic_action_pedestrian_dark, "ic_action_pedestrian_dark").setRoutingProfile("pedestrian").reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase( R.string.app_mode_public_transport, "public_transport").
-			icon(R.drawable.ic_action_bus_dark).setRoutingProfile("public_transport").reg();
+			icon(R.drawable.ic_action_bus_dark, "ic_action_bus_dark").setRoutingProfile("public_transport").reg();
 
 	public static final ApplicationMode BOAT = createBase( R.string.app_mode_boat, "boat").speed(5.5f, 20).nauticalLocation().
 			icon(R.drawable.ic_action_sail_boat_dark, "ic_action_sail_boat_dark").setRoutingProfile("boat").reg();
@@ -110,6 +110,7 @@ public class ApplicationMode {
 		@Expose ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		@Expose String routingProfile = null;
 		@Expose RouteService routeService = RouteService.OSMAND;
+
 	}
 
 	private static void initRegVisibility() {
@@ -173,6 +174,19 @@ public class ApplicationMode {
 		}
 
 		private ApplicationMode customReg() {
+			ApplicationMode m = applicationMode;
+			m.defaultSpeed = m.parentAppMode.defaultSpeed;
+			m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
+			m.arrivalDistance = m.parentAppMode.arrivalDistance;
+			m.offRouteDistance = m.parentAppMode.offRouteDistance;
+			m.bearingIconDay = m.parentAppMode.bearingIconDay;
+			m.bearingIconNight = m.parentAppMode.bearingIconNight;
+			m.headingIconDay = m.parentAppMode.headingIconDay;
+			m.headingIconNight = m.parentAppMode.headingIconNight;
+			m.locationIconDay = m.parentAppMode.locationIconDay;
+			m.locationIconNight = m.parentAppMode.locationIconNight;
+			m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
+			m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
 			values.add(applicationMode);
 			return applicationMode;
 		}
@@ -541,32 +555,24 @@ public class ApplicationMode {
 	}
 
 
-	public static void onApplicationStart(OsmandSettings settings) {
-		initCustomModes(settings);
+	public static void onApplicationStart(OsmandApplication app) {
+		initCustomModes(app);
 		initRegVisibility();
 	}
 
-	private static void initCustomModes(OsmandSettings settings){
+	private static void initCustomModes(OsmandApplication app){
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<ArrayList<ApplicationMode>>() {}.getType();
-		// TODO ?? clear settings
-		List<ApplicationMode> customProfiles = gson.fromJson(settings.CUSTOM_APP_PROFILES.get(), t);
+		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {}.getType();
+		List<ApplicationModeBean> customProfiles = gson.fromJson(app.getSettings().CUSTOM_APP_PROFILES.get(), t);
 
 		if (!Algorithms.isEmpty(customProfiles)) {
-			for (ApplicationMode m : customProfiles) {
-				m.parentAppMode = valueOfStringKey(m.parent, ApplicationMode.PEDESTRIAN);
-				m.defaultSpeed = m.parentAppMode.defaultSpeed;
-				m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
-				m.arrivalDistance = m.parentAppMode.arrivalDistance;
-				m.offRouteDistance = m.parentAppMode.offRouteDistance;
-				m.bearingIconDay = m.parentAppMode.bearingIconDay;
-				m.bearingIconNight = m.parentAppMode.bearingIconNight;
-				m.headingIconDay = m.parentAppMode.headingIconDay;
-				m.headingIconNight = m.parentAppMode.headingIconNight;
-				m.locationIconDay = m.parentAppMode.locationIconDay;
-				m.locationIconNight = m.parentAppMode.locationIconNight;
-				m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
-				m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
+			for (ApplicationModeBean m : customProfiles) {
+				ApplicationModeBuilder b = createCustomMode(valueOfStringKey(m.parent, CAR),
+						m.userProfileName, m.stringKey);
+				b.setRouteService(m.routeService).setRoutingProfile(m.routingProfile);
+				b.icon(app, m.iconName);
+				b.setColor(m.iconColor);
+				b.customReg();
 			}
 		}
 
@@ -574,11 +580,18 @@ public class ApplicationMode {
 
 
 	private static void saveCustomModeToSettings(OsmandSettings settings){
-		// TODO save !
-		List<ApplicationMode> customModes = new ArrayList<>();
+		List<ApplicationModeBean> customModes = new ArrayList<>();
 		for (ApplicationMode mode : values) {
-			if (mode.parent != null) {
-				customModes.add(mode);
+			if (mode.parentAppMode != null) {
+				ApplicationModeBean mb = new ApplicationModeBean();
+				mb.userProfileName = mode.userProfileName;
+				mb.iconColor = mode.iconColor;
+				mb.iconName = mode.iconResName;
+				mb.parent = mode.parentAppMode.getStringKey();
+				mb.stringKey = mode.stringKey;
+				mb.routeService = mode.routeService;
+				mb.routingProfile = mode.routingProfile;
+				customModes.add(mb);
 			}
 		}
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();

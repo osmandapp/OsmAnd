@@ -2768,7 +2768,7 @@ public class OsmandSettings {
 					.makeGlobal();
 
 	public final CommonPreference<String> CUSTOM_APP_PROFILES =
-		new StringPreference("custom_profiles", "").makeGlobal().cache();
+		new StringPreference("custom_app_profiles", "").makeGlobal().cache();
 
 
 	public enum DayNightMode {

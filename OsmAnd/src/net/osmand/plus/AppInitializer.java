@@ -192,7 +192,7 @@ public class AppInitializer implements IProgress {
 		}
 		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
 		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
-		ApplicationMode.onApplicationStart(app.getSettings());
+		ApplicationMode.onApplicationStart(app);
 		initSettings = true;
 
 	}
