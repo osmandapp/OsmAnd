@@ -21,6 +21,7 @@
                     android:layout_height="@dimen/basic_element_height">
 
                     <ImageView
+                        android:id="@+id/ivSensorIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

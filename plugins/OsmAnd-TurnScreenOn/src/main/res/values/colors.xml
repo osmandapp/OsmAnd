@@ -15,4 +15,5 @@
     <color name="black">#000000</color>
     <color name="pluginDescHeader">#6617D3</color>
     <color name="pluginDescSubHeader">#A99CBA</color>
+	<color name="lightGrey">#eeeeee</color>
 </resources>

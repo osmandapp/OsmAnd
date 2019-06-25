@@ -9,7 +9,7 @@
     <string name="OsmandVersion">OsmAnd Version</string>
     <string name="OsmandPlus">OsmAnd Plus</string>
     <string name="Osmand">OsmAnd</string>
-    <string name="continueDesc">continue</string>
+    <string name="continueDesc">Continue</string>
     <string name="sensorHeader">Использовать датчик  приближения</string>
     <string name="help">Help</string>
     <string name="install_instruction">You need to install <b>OsmAnd</b> or <b>OsmAnd+</b>, to use this plugin.</string>

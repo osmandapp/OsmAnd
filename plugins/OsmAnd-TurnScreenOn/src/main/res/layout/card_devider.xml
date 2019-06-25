@@ -6,8 +6,7 @@
 
     <include layout="@layout/card_bottom_divider"/>
 
-    <View
-        android:layout_width="match_parent"
+    <View android:layout_width="match_parent"
         android:layout_height="4dp"/>
 
     <include layout="@layout/card_top_divider"/>

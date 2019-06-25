@@ -5,8 +5,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/basic_element_height"
-        android:layout_marginRight="@dimen/horizontal_padding">
+        android:background="@drawable/btn_preference"
+        android:layout_height="@dimen/basic_element_height">
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="0dp"
@@ -15,6 +15,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="start"
+            android:layout_marginLeft="@dimen/horizontal_padding"
             android:layout_gravity="center_vertical"/>
 
         <RadioButton
@@ -22,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/horizontal_padding"
             style="@style/RadioButtonStyle"/>
     </LinearLayout>
 

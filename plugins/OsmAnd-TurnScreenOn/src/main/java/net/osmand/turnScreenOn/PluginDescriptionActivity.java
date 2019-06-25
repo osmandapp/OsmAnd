@@ -7,6 +7,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
@@ -27,6 +29,8 @@ public class PluginDescriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plugin_description);
+
+        setStatusBarColor(R.color.white);
 
         currentMode = getIntent().getIntExtra(MODE_KEY, MODE_HELP);
 
@@ -71,5 +75,11 @@ public class PluginDescriptionActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    private void setStatusBarColor(int colorResId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, colorResId));
+        }
     }
 }

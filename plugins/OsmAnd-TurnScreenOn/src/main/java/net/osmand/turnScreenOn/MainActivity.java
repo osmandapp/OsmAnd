@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout llPluginPreferencesLayout;
     private RadioGroupWrapper osmandVersionRadioGroup;
     private FrameLayout btnOpenOsmand;
+    private ImageView ivTimeSetUpIcon;
+    private ImageView ivSensorIcon;
+    private View bottomSensorCardShadow;
     private View osmandVersionsPanel;
 
     private Paint pGreyScale;
@@ -99,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
         tvTime = findViewById(R.id.tvTime);
         flPanelSensor = findViewById(R.id.flPanelSensor);
         swSensorEnableSwitcher = findViewById(R.id.swSensorEnableSwitcher);
+        ivTimeSetUpIcon = findViewById(R.id.ivTimeSetUpIcon);
+        ivSensorIcon = findViewById(R.id.ivSensorIcon);
 
         btnOpenOsmand.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +276,8 @@ public class MainActivity extends AppCompatActivity {
             tvPluginStateDescription.setText(getString(R.string.enabled));
             tvPluginStateDescription.setTextColor(getResources().getColor(R.color.black));
             tbPluginToolbar.setBackgroundColor(getResources().getColor(R.color.orange));
+            ivTimeSetUpIcon.setColorFilter(ContextCompat.getColor(this, R.color.blue),
+                    android.graphics.PorterDuff.Mode.MULTIPLY);
 
             llPluginPreferencesLayout.setLayerType(LAYER_TYPE_HARDWARE, null);
 
@@ -289,6 +296,8 @@ public class MainActivity extends AppCompatActivity {
             tvPluginStateDescription.setText(getString(R.string.disabled));
             tvPluginStateDescription.setTextColor(getResources().getColor(R.color.darkGrey));
             tbPluginToolbar.setBackgroundColor(getResources().getColor(R.color.darkGrey));
+            ivTimeSetUpIcon.setColorFilter(ContextCompat.getColor(this, R.color.darkGrey),
+                    android.graphics.PorterDuff.Mode.MULTIPLY);
 
             llPluginPreferencesLayout.setLayerType(LAYER_TYPE_HARDWARE, pGreyScale);
 
@@ -302,8 +311,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (isSensorEnabled) {
             sensorHelper.switchOnSensor();
+            ivSensorIcon.setColorFilter(ContextCompat.getColor(this, R.color.blue),
+                    android.graphics.PorterDuff.Mode.MULTIPLY);
         } else {
             sensorHelper.switchOffSensor();
+            ivSensorIcon.setColorFilter(ContextCompat.getColor(this, R.color.darkGrey),
+                    android.graphics.PorterDuff.Mode.MULTIPLY);
         }
 
         PluginSettings.UnlockTime currentTime = settings.getTime();
@@ -316,7 +329,14 @@ public class MainActivity extends AppCompatActivity {
         availableOsmandVersions = PluginSettings.OsmandVersion.getOnlyInstalledVersions();
         llElementsScreen.removeView(osmandVersionsPanel);
 
+        if (bottomSensorCardShadow==null) {
+            bottomSensorCardShadow = getLayoutInflater().inflate(R.layout.card_top_divider, null, false);
+            llElementsScreen.addView(bottomSensorCardShadow);
+        }
+
         if (availableOsmandVersions.size() > 1) {
+            llElementsScreen.removeView(bottomSensorCardShadow);
+            bottomSensorCardShadow = null;
             osmandVersionsPanel = createOsmandVersionsPanel();
             llElementsScreen.addView(osmandVersionsPanel);
 
@@ -335,9 +355,9 @@ public class MainActivity extends AppCompatActivity {
     private View createOsmandVersionsPanel() {
         LayoutInflater inflater = getLayoutInflater();
 
-        LinearLayout llWraper = new LinearLayout(MainActivity.this);
-        llWraper.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        llWraper.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout llWrapper = new LinearLayout(MainActivity.this);
+        llWrapper.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        llWrapper.setOrientation(LinearLayout.VERTICAL);
 
         View panelOsmandVersions = inflater.inflate(R.layout.main_el_osmand_versions, null, false);
         LinearLayout llOsmandVersions = panelOsmandVersions.findViewById(R.id.llOsmandVersions);
@@ -379,11 +399,11 @@ public class MainActivity extends AppCompatActivity {
         View cardDevider = inflater.inflate(R.layout.card_devider, null, false);
         View cardTop = inflater.inflate(R.layout.card_top_divider, null, false);
 
-        llWraper.addView(cardDevider);
-        llWraper.addView(panelOsmandVersions);
-        llWraper.addView(cardTop);
+        llWrapper.addView(cardDevider);
+        llWrapper.addView(panelOsmandVersions);
+        llWrapper.addView(cardTop);
 
-        return llWraper;
+        return llWrapper;
     }
 
     private void setEnableForElements(boolean enable) {
