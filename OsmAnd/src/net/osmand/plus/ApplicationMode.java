@@ -631,6 +631,7 @@ public class ApplicationMode {
 				it.remove();
 			}
 		}
+		cachedFilteredValues.remove(md);
 		saveCustomModeToSettings(app.getSettings());
 	}
 
