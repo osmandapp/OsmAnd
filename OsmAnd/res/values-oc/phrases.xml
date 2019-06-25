@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="poi_fuel_type">Tipe de carburant</string>
+    <string name="poi_fuel_avia_type">Tipe de carburant (avia)</string>
+    <string name="poi_payment_type">Tipe de pagament</string>
+    <string name="poi_payment_fuel_type">Carta per carburants</string>
+    <string name="poi_internet_access_type">Tipe d\'accès a l\'internet</string>
+    <string name="poi_vending_type">Tipe de venda</string>
+    <string name="poi_bicycle_service">Servici de bicicletas</string>
+    <string name="poi_clothes_type">Tipe d\'abilhament</string>
+    <string name="poi_shoes_type">Tipe de cauçaduras</string>
+    <string name="poi_fire_hydrant_type">Tipe de bòrna per lo fuòc</string>
+    <string name="poi_fire_hydrant_position">Localizacion de la bòrna</string>
+    <string name="poi_traffic_signals_sound">Senhau de circulacion sonòr</string>
+    <string name="poi_tactile_paving">Marca d\'assisténcia au sòu</string>
+</resources>
