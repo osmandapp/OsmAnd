@@ -11,10 +11,11 @@
 	Thx - Hardy
 
 -->
-    <string name="shared_string_speed">Speed</string>
+    <string name="shared_string_min_speed">Min. speed</string>
+    <string name="shared_string_max_speed">Max. speed</string>
     <string name="default_speed_setting_title">Default speed</string>
     <string name="default_speed_setting_descr">Change default speed settings</string>
-    <string name="default_speed_dialog_title">Set default speed</string>
+    <string name="minmax_speed_dialog_title">Set min/max speed</string>
     <string name="default_speed_dialog_msg">Used for calculations of expected arrival time during routing</string>
     <string name="new_profile">New Profile</string>
     <string name="shared_string_crash">Crash</string>

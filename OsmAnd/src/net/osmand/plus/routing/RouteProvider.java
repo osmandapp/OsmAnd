@@ -700,9 +700,15 @@ public class RouteProvider {
 		if (defaultSpeed > 0) {
 			paramsR.put(GeneralRouter.DEFAULT_SPEED, String.valueOf(defaultSpeed));
 		}
-		if (params.inSnapToRoadMode) {
-			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
+		Float minSpeed = settings.MIN_SPEED.getModeValue(params.mode);
+		if (minSpeed > 0) {
+			paramsR.put(GeneralRouter.MIN_SPEED, String.valueOf(minSpeed));
 		}
+		Float maxSpeed = settings.MAX_SPEED.getModeValue(params.mode);
+		if (maxSpeed > 0) {
+			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
+		}
+
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
 		// make visible

@@ -22,13 +22,15 @@ public class AppProfileArrayAdapter extends ArrayAdapter<ProfileDataObject> {
 	private List<ProfileDataObject> modes;
 	private int layout;
 	private OsmandApplication app;
+	private boolean isModeSelected;
 
-	public AppProfileArrayAdapter(@NonNull Activity context, int resource, @NonNull List<ProfileDataObject> objects) {
+	public AppProfileArrayAdapter(@NonNull Activity context, int resource, @NonNull List<ProfileDataObject> objects, boolean isModeSelected) {
 		super(context, resource, objects);
 		this.context = context;
 		this.modes = objects;
 		this.layout = resource;
-		app = (OsmandApplication) context.getApplication();
+		this.app = (OsmandApplication) context.getApplication();
+		this.isModeSelected = isModeSelected;
 	}
 
 	public long getItemId(int position) {
@@ -71,7 +73,11 @@ public class AppProfileArrayAdapter extends ArrayAdapter<ProfileDataObject> {
 		viewHolder.title.setText(mode.getName());
 		viewHolder.description.setText(mode.getDescription());
 		viewHolder.icon.setImageDrawable(iconDrawable);
-		viewHolder.compoundButton.setChecked(mode.isSelected());
+		if (isModeSelected) {
+			viewHolder.compoundButton.setChecked(mode.isSelected());
+		} else {
+			viewHolder.compoundButton.setVisibility(View.GONE);
+		}
 
 		return rowView;
 	}

@@ -1,34 +1,51 @@
 package net.osmand.plus;
 
 import android.content.Context;
-
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
+
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.util.Algorithms;
-import net.sf.junidecode.App;
-
-import org.apache.commons.logging.Log;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.*;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RULER;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 public class ApplicationMode {
 
@@ -57,6 +74,7 @@ public class ApplicationMode {
 
 
 	private float defaultSpeed = 10f;
+	private float initialDefaultSpeed = defaultSpeed;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
 	private int offRouteDistance = 350;
@@ -81,25 +99,25 @@ public class ApplicationMode {
 	public static final ApplicationMode DEFAULT = createBase( R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
 			icon(R.drawable.ic_world_globe_dark, "map_world_globe_dark").reg();
 
-	public static final ApplicationMode CAR = createBase( R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
+	public static final ApplicationMode CAR = createBase( R.string.app_mode_car, "car").speed(12.5f, 35).carLocation().
 			icon(R.drawable.ic_action_car_dark, "ic_action_car_dark").setRoutingProfile("car").reg();
 
-	public static final ApplicationMode BICYCLE = createBase( R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
+	public static final ApplicationMode BICYCLE = createBase( R.string.app_mode_bicycle, "bicycle").speed(2.77f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
 			icon(R.drawable.ic_action_bicycle_dark, "ic_action_bicycle_dark").setRoutingProfile("bicycle").reg();
 
-	public static final ApplicationMode PEDESTRIAN = createBase( R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
+	public static final ApplicationMode PEDESTRIAN = createBase( R.string.app_mode_pedestrian, "pedestrian").speed(1.11f, 5).arrivalDistance(45).offRouteDistance(20).
 			icon(R.drawable.ic_action_pedestrian_dark, "ic_action_pedestrian_dark").setRoutingProfile("pedestrian").reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase( R.string.app_mode_public_transport, "public_transport").
 			icon(R.drawable.ic_action_bus_dark, "ic_action_bus_dark").setRoutingProfile("public_transport").reg();
 
-	public static final ApplicationMode BOAT = createBase( R.string.app_mode_boat, "boat").speed(5.5f, 20).nauticalLocation().
+	public static final ApplicationMode BOAT = createBase( R.string.app_mode_boat, "boat").speed(1.38f, 20).nauticalLocation().
 			icon(R.drawable.ic_action_sail_boat_dark, "ic_action_sail_boat_dark").setRoutingProfile("boat").reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase( R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.ic_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").reg();
 
-	public static final ApplicationMode SKI = createBase( R.string.app_mode_skiing, "ski").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
+	public static final ApplicationMode SKI = createBase( R.string.app_mode_skiing, "ski").speed(1.38f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
 		icon(R.drawable.ic_plugin_skimaps, "ic_plugin_skimaps").setRoutingProfile("ski").reg();
 
 
@@ -136,9 +154,9 @@ public class ApplicationMode {
 		regWidgetVisibility(WIDGET_DISTANCE, all);
 		regWidgetVisibility(WIDGET_TIME, all);
 		regWidgetVisibility(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetVisibility(WIDGET_SPEED, new ApplicationMode[]{CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT} );
+		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT);
 		regWidgetVisibility(WIDGET_MAX_SPEED, CAR);
-		regWidgetVisibility(WIDGET_ALTITUDE, new ApplicationMode[] {PEDESTRIAN, BICYCLE});
+		regWidgetVisibility(WIDGET_ALTITUDE, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_DISTANCE, all);
 		regWidgetAvailability(WIDGET_DISTANCE, all);
 		regWidgetAvailability(WIDGET_TIME, all);
@@ -177,6 +195,7 @@ public class ApplicationMode {
 		private ApplicationMode customReg() {
 			ApplicationMode m = applicationMode;
 			m.defaultSpeed = m.parentAppMode.defaultSpeed;
+			m.initialDefaultSpeed = m.parentAppMode.initialDefaultSpeed;
 			m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
 			m.arrivalDistance = m.parentAppMode.arrivalDistance;
 			m.offRouteDistance = m.parentAppMode.offRouteDistance;
@@ -221,7 +240,6 @@ public class ApplicationMode {
 			}
 			return this;
 		}
-
 
 		public ApplicationModeBuilder carLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
@@ -271,6 +289,7 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder speed(float defSpeed, int distForTurn) {
 			applicationMode.defaultSpeed = defSpeed;
+			applicationMode.initialDefaultSpeed = defSpeed;
 			applicationMode.minDistanceForTurn = distForTurn;
 			return this;
 		}
@@ -520,6 +539,17 @@ public class ApplicationMode {
 
 	public float getDefaultSpeed() {
 		return defaultSpeed;
+	}
+
+	public void setDefaultSpeed(OsmandApplication app, float defaultSpeed) {
+		this.defaultSpeed = defaultSpeed;
+		app.getSettings().DEFAULT_SPEED.set(defaultSpeed);
+
+	}
+
+	public void resetDefaultSpeed(OsmandApplication app) {
+		this.defaultSpeed = initialDefaultSpeed;
+		app.getSettings().DEFAULT_SPEED.setModeValue(this, 0f);
 	}
 
 	public int getMinDistanceForTurn() {

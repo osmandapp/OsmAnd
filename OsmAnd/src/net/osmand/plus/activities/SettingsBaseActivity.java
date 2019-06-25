@@ -31,14 +31,14 @@ import net.osmand.plus.profiles.AppProfileArrayAdapter;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.views.SeekBarPreference;
 
+import org.apache.commons.logging.Log;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import net.osmand.util.Algorithms;
-import org.apache.commons.logging.Log;
 
 
 public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
@@ -374,7 +374,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    }
 
 	    final AppProfileArrayAdapter modeNames = new AppProfileArrayAdapter(
-		    SettingsBaseActivity.this, R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes);
+		    SettingsBaseActivity.this, R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes, isModeSelected);
 
 	    singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
 		    new OnClickListener() {

@@ -1015,6 +1015,12 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> DEFAULT_SPEED = new FloatPreference(
 			"default_speed", 0f).makeProfile().cache();
 
+	public final OsmandPreference<Float> MIN_SPEED = new FloatPreference(
+			"min_speed", 0f).makeProfile().cache();
+
+	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(
+			"max_speed", 0f).makeProfile().cache();
+
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 

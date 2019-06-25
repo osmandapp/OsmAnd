@@ -1,89 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/seekbar_view"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:padding="@dimen/list_content_padding">
+	android:layout_height="match_parent">
 
 	<LinearLayout
-		android:id="@+id/text_input_lane"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+		android:orientation="vertical">
 
-		<TextView
-			android:layout_width="0dp"
+		<LinearLayout
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_weight="2"
-			android:paddingStart="@dimen/content_padding_small"
-			android:paddingLeft="@dimen/content_padding_small"
-			android:text="@string/shared_string_speed"
-			android:textColor="?attr/main_font_color_basic"
-			android:textSize="@dimen/default_list_text_size" />
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding">
 
-		<TextView
-			android:id="@+id/speed_text"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:gravity="end"
-			android:maxLength="3"
-			android:maxLines="1"
-			android:paddingRight="4dp"
-			android:textColor="?attr/main_font_color_basic"
-			android:textSize="@dimen/default_list_text_size"
-			tools:text="60" />
+			<net.osmand.plus.widgets.TextViewEx
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingLeft="@dimen/content_padding_small"
+				android:text="@string/minmax_speed_dialog_title"
+				android:textColor="?android:textColorPrimary"
+				app:typeface="@string/font_roboto_medium"
+				android:textSize="@dimen/default_list_text_size_large" />
 
-		<TextView
-			android:id="@+id/speed_units"
-			android:layout_width="wrap_content"
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingTop="@dimen/content_padding_half"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingLeft="@dimen/content_padding_small"
+				android:paddingBottom="@dimen/content_padding_half"
+				android:text="@string/default_speed_dialog_msg"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_list_text_size" />
+
+			<LinearLayout
+				android:id="@+id/min_speed_header"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingTop="@dimen/content_padding">
+
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="2"
+					android:paddingStart="@dimen/content_padding_small"
+					android:paddingLeft="@dimen/content_padding_small"
+					android:text="@string/shared_string_min_speed"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<TextView
+					android:id="@+id/min_speed_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="end"
+					android:maxLength="3"
+					android:maxLines="1"
+					android:paddingRight="4dp"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="60" />
+
+				<TextView
+					android:id="@+id/min_speed_units"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingEnd="@dimen/content_padding_small"
+					android:paddingRight="@dimen/content_padding_small"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="km/h" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/min_speed_seekbar_lane"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingTop="@dimen/content_padding">
+
+				<TextView
+					android:id="@+id/min_speed_seekbar_min_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="start"
+					android:paddingStart="@dimen/content_padding_small"
+					android:paddingLeft="@dimen/content_padding_small"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="0" />
+
+				<TextView
+					android:id="@+id/min_speed_seekbar_max_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="end"
+					android:paddingEnd="@dimen/content_padding_small"
+					android:paddingRight="@dimen/content_padding_small"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="100" />
+
+			</LinearLayout>
+
+			<SeekBar
+				android:id="@+id/min_speed_seekbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:max="100"
+				android:paddingBottom="@dimen/content_padding" />
+
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/dashboard_divider" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:paddingEnd="@dimen/content_padding_small"
-			android:paddingRight="@dimen/content_padding_small"
-			android:textColor="?attr/dialog_text_description_color"
-			android:textSize="@dimen/default_list_text_size"
-			tools:text="km/h" />
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding">
+
+			<LinearLayout
+				android:id="@+id/max_speed_header"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="2"
+					android:paddingStart="@dimen/content_padding_small"
+					android:paddingLeft="@dimen/content_padding_small"
+					android:text="@string/shared_string_max_speed"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<TextView
+					android:id="@+id/max_speed_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="end"
+					android:maxLength="3"
+					android:maxLines="1"
+					android:paddingRight="4dp"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="60" />
+
+				<TextView
+					android:id="@+id/max_speed_units"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingEnd="@dimen/content_padding_small"
+					android:paddingRight="@dimen/content_padding_small"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="km/h" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/max_speed_seekbar_lane"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingTop="@dimen/content_padding">
+
+				<TextView
+					android:id="@+id/max_speed_seekbar_min_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="start"
+					android:paddingStart="@dimen/content_padding_small"
+					android:paddingLeft="@dimen/content_padding_small"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="0" />
+
+				<TextView
+					android:id="@+id/max_speed_seekbar_max_text"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="end"
+					android:paddingEnd="@dimen/content_padding_small"
+					android:paddingRight="@dimen/content_padding_small"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="100" />
+
+			</LinearLayout>
+
+			<SeekBar
+				android:id="@+id/max_speed_seekbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:max="100"
+				android:paddingBottom="@dimen/content_padding" />
+
+		</LinearLayout>
+
 	</LinearLayout>
 
-	<LinearLayout
-		android:id="@+id/seekbar_lane"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:paddingTop="24dp">
-
-		<TextView
-			android:id="@+id/seekbar_min_text"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:gravity="start"
-			android:paddingStart="@dimen/content_padding_small"
-			android:paddingLeft="@dimen/content_padding_small"
-			android:textSize="@dimen/default_list_text_size"
-			tools:text="0" />
-
-		<TextView
-			android:id="@+id/seekbar_max_text"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:gravity="end"
-			android:paddingEnd="@dimen/content_padding_small"
-			android:paddingRight="@dimen/content_padding_small"
-			android:textSize="@dimen/default_list_text_size"
-			tools:text="100" />
-
-	</LinearLayout>
-
-	<SeekBar
-
-		android:id="@+id/speed_seekbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:max="100"
-		android:paddingBottom="@dimen/content_padding" />
-
-</LinearLayout>
+</ScrollView>
