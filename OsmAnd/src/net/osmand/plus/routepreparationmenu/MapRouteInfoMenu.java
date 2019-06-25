@@ -1,9 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
@@ -19,7 +17,6 @@ import android.support.transition.TransitionListenerAdapter;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -102,7 +99,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -1907,7 +1903,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public String getRoutePointDescription(double lat, double lon) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
+			return PointDescription.getLocationNamePlain(mapActivity, lat, lon);
 		}
 		return "";
 	}
@@ -1918,7 +1914,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (l != null && mapActivity != null) {
-			return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
+			return getRoutePointDescription(l.getLatitude(), l.getLongitude());
 		}
 		return "";
 	}
