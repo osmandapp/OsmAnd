@@ -616,6 +616,7 @@ public class ApplicationMode {
 		}
 		if(mode == null) {
 			mode = builder.customReg();
+			initRegVisibility();
 		}
 		saveCustomModeToSettings(app.getSettings());
 
