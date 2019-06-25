@@ -33,6 +33,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
+	public static final String DEFAULT_SPEED = "default_speed";
 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
@@ -60,6 +61,8 @@ public class GeneralRouter implements VehicleRouter {
 	private float minSpeed = 1f;
 	// speed in m/s
 	private float maxSpeed = 10f;
+
+	private float defaultSpeedRatio = 1f;
 
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
@@ -165,7 +168,10 @@ public class GeneralRouter implements VehicleRouter {
 		if(shortestRoute) {
 			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
 		}
-
+		float userDefinedDefSpeed = params.containsKey(DEFAULT_SPEED) ? parseSilentFloat(params.get(DEFAULT_SPEED), defaultSpeed) : defaultSpeed;
+		if (userDefinedDefSpeed != defaultSpeed) {
+			defaultSpeedRatio = userDefinedDefSpeed / defaultSpeed;
+		}
 	}
 	
 	public GeneralRouterProfile getProfile() {
@@ -390,7 +396,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getDefaultSpeed());
+		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed) * defaultSpeedRatio;
 	}
 
 	@Override
@@ -400,7 +406,7 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public float getDefaultSpeed() {
-		return defaultSpeed;
+		return defaultSpeed * defaultSpeedRatio;
 	}
 
 	@Override

@@ -11,13 +11,17 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_speed">Speed</string>
+    <string name="default_speed_setting_title">Default speed</string>
+    <string name="default_speed_setting_descr">Change default speed settings</string>
+    <string name="default_speed_dialog_title">Set default speed</string>
+    <string name="default_speed_dialog_msg">Used for calculations of expected arrival time during routing</string>
     <string name="shared_string_crash">Crash</string>
     <string name="last_launch_crashed">The last launch of OsmAnd failed. Help us improve OsmAnd. Please send us an error message.</string>
     <string name="press_again_to_change_the_map_orientation">Press again to change the map orientation</string>
     <string name="process_downloading_service">OsmAnd downloading service</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icon</string>
-    <string name="app_profile_custom_nav_subtitle"></string>
     <string name="rate_dialog_descr">Please give us 30 seconds, share feedback and rate our work on Google Play.</string>
     <string name="button_rate">Rate</string>
     <string name="shared_string_privacy_policy">Privacy Policy</string>

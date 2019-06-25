@@ -698,6 +698,10 @@ public class RouteProvider {
 				paramsR.put(key, vl);
 			}
 		}
+		Float defaultSpeed = settings.DEFAULT_SPEED.getModeValue(params.mode);
+		if (defaultSpeed > 0) {
+			paramsR.put(GeneralRouter.DEFAULT_SPEED, String.valueOf(defaultSpeed));
+		}
 		if (params.inSnapToRoadMode) {
 			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
 		}
