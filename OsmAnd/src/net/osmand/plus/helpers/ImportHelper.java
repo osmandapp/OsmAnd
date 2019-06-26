@@ -295,7 +295,7 @@ public class ImportHelper {
 					final Intent newIntent = new Intent(activity,
 						app.getAppCustomization().getFavoritesActivity());
 					newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
+					newIntent.putExtra(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
 					activity.startActivity(newIntent);
 				}
 			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -596,7 +596,7 @@ public class ImportHelper {
 		if (forceImportFavourites) {
 			final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			newIntent.putExtra(FavoritesActivity.OPEN_MY_PLACES_TAB, true);
+			newIntent.putExtra(FavoritesActivity.TAB_ID, FavoritesActivity.GPX_TAB);
 			activity.startActivity(newIntent);
 		}
 	}

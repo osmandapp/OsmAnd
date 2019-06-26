@@ -1,5 +1,8 @@
 package net.osmand.plus.audionotes;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.NOTES_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,6 +51,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 
+import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -60,7 +64,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class NotesFragment extends OsmAndListFragment {
+public class NotesFragment extends OsmAndListFragment implements FavoritesFragmentStateHolder {
 
 	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
 
@@ -141,6 +145,7 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.setListener(createAdapterListener());
 		listAdapter.setPortrait(portrait);
 		listView.setAdapter(listAdapter);
+		restoreState(getArguments());
 	}
 
 	@Override
@@ -266,8 +271,8 @@ public class NotesFragment extends OsmAndListFragment {
 			}
 
 			@Override
-			public void onItemClick(Recording rec) {
-				showOnMap(rec);
+			public void onItemClick(Recording rec, int position) {
+				showOnMap(rec, position);
 			}
 
 			@Override
@@ -562,10 +567,16 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 
 	private void showOnMap(Recording recording) {
+		showOnMap(recording, -1);
+	}
+
+	private void showOnMap(Recording recording, int itemPosition) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
-		MapActivity.launchMapActivityMoveToTop(getActivity());
+		Bundle b = new Bundle();
+		b.putInt(ITEM_POSITION, itemPosition);
+		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
 	}
 
 	private void editNote(final Recording recording) {
@@ -603,5 +614,28 @@ public class NotesFragment extends OsmAndListFragment {
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
+	}
+
+	@Override
+	public Bundle storeState(Bundle bundle) {
+		bundle.putInt(TAB_ID, NOTES_TAB);
+		return bundle;
+	}
+	
+	@Override
+	public void restoreState(Bundle bundle) {
+		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION)) {
+			if (bundle.getInt(TAB_ID, 0) == NOTES_TAB) {
+				int position= bundle.getInt(ITEM_POSITION, 0);
+				int itemsCount = getListView().getAdapter().getCount();
+				if (itemsCount > 0 && itemsCount > position) {
+					if (position == 1) {
+						getListView().setSelection(0);
+					} else {
+						getListView().setSelection(position);
+					}
+				}				
+			}
+		}
 	}
 }
