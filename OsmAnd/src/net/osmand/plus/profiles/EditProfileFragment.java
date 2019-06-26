@@ -33,6 +33,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -278,6 +279,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void onClick(View v) {
 				if (isNew || isUserProfile) {
+					hideKeyboard();
 					final SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
 					if (profile.routingProfileDataObject != null) {
@@ -307,6 +309,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					bundle.putString(DIALOG_TYPE, TYPE_ICON);
 					bundle.putString(SELECTED_ICON, profile.iconStringName);
 					iconSelectDialog.setArguments(bundle);
+					hideKeyboard();
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
 							.add(iconSelectDialog, "select_icon")
@@ -705,6 +708,16 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			} else {
 				Toast.makeText(getActivity(), R.string.profile_alert_cant_delete_base,
 					Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	private void hideKeyboard() {
+		View cf = getActivity().getCurrentFocus();
+		if (cf != null) {
+			InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+			if (imm != null) {
+				imm.hideSoftInputFromWindow(cf.getWindowToken(), 0);
 			}
 		}
 	}
