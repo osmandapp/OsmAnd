@@ -872,7 +872,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	@Override
 	public void restoreState(Bundle bundle) {
-
 	}
 
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {

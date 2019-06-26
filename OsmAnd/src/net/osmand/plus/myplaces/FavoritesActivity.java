@@ -26,9 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.audionotes.NotesFragment;
 import net.osmand.plus.helpers.ImportHelper;
-import net.osmand.plus.osmedit.OsmEditsFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import java.lang.ref.WeakReference;
@@ -197,25 +195,15 @@ public class FavoritesActivity extends TabActivity {
 			if (intentParams != null && intentParams.getInt(TAB_ID, -1) != -1) {
 				Bundle b = new Bundle();
 				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
-				if (tabId == FAV_TAB && fragment instanceof FavoritesTreeFragment) {
+				b.putInt(TAB_ID, intentParams.getInt(TAB_ID, FAV_TAB));
+				if (tabId == FAV_TAB) {
 					b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW,
 						intentParams.getString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW));
 					b.putInt(FavoritesFragmentStateHolder.GROUP_POSITION, intentParams.getInt(
 						FavoritesFragmentStateHolder.GROUP_POSITION, 0));
-					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
-						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
-				} else if (tabId == GPX_TAB && fragment instanceof AvailableGPXFragment) {
-					b.putInt(FavoritesFragmentStateHolder.GROUP_POSITION,
-						intentParams.getInt(FavoritesFragmentStateHolder.GROUP_POSITION, 0));
-					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
-						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
-				} else if (tabId == NOTES_TAB && fragment instanceof NotesFragment) {
-					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
-						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
-				} else if (tabId == OSM_TAB && fragment instanceof OsmEditsFragment) {
-					b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
-						intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
 				}
+				b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
+					intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
 				fragment.setArguments(b);
 			}
 			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));

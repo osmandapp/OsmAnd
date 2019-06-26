@@ -908,15 +908,17 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	}
 	
 	public void restoreState(Bundle bundle) {
-		if (bundle != null && bundle.containsKey(ITEM_POSITION)) {
-			int position= bundle.getInt(ITEM_POSITION, 0);
-			int itemsCount = getListView().getAdapter().getCount();
-			if (itemsCount > 0 && itemsCount > position) {
-				if (position == 1) {
-					getListView().setSelection(0);
-				} else {
-					getListView().setSelection(position);
-				}
+		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION)) {
+			if (bundle.getInt(TAB_ID, 0) == OSM_TAB) {
+				int position= bundle.getInt(ITEM_POSITION, 0);
+				int itemsCount = getListView().getAdapter().getCount();
+				if (itemsCount > 0 && itemsCount > position) {
+					if (position == 1) {
+						getListView().setSelection(0);
+					} else {
+						getListView().setSelection(position);
+					}
+				}		
 			}
 		}
 	}

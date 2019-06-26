@@ -28,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -261,7 +262,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 					final Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
 					Bundle b = new Bundle();
 					b.putInt(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
-					b.putString(FavoritesActivity.GROUP_NAME_TO_SHOW, group.name);
+					b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW, group.name);
 					intent.putExtra(MapActivity.INTENT_PARAMS, b);
 					context.startActivity(intent);
 				}

@@ -1,5 +1,8 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -720,10 +723,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	@Override
 	public void restoreState(Bundle bundle) {
-		if (bundle != null) {
-			int group = bundle.getInt(GROUP_POSITION, 0);
-			int child = bundle.getInt(ITEM_POSITION, 0);
-			listView.setSelectedChild(group, child, true);
+		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION)) {
+			if (bundle.getInt(TAB_ID, 0) == FAV_TAB) {
+				int group = bundle.getInt(GROUP_POSITION, 0);
+				int child = bundle.getInt(ITEM_POSITION, 0);
+				listView.setSelectedChild(group, child, true);
+			}
 		}
 	}
 
