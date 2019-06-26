@@ -215,7 +215,7 @@ public class ApplicationMode {
 		public ApplicationModeBuilder icon(int iconRes, int iconMapRes, String iconResName) {
 			try {
 				applicationMode.iconResName = iconResName;
-				applicationMode.iconMapRes = iconRes;
+				applicationMode.iconMapRes = iconMapRes;
 				applicationMode.iconRes = iconRes;
 			} catch (Exception e) {
 

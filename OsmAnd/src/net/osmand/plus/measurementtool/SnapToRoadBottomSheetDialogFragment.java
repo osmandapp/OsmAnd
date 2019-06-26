@@ -96,7 +96,7 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 			ApplicationMode mode = modes.get(i);
 			View row = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.list_item_icon_and_title, null);
 			((ImageView) row.findViewById(R.id.icon)).setImageDrawable(
-				getContentIcon(mode.getIconRes()));
+				app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
 			((TextView) row.findViewById(R.id.title)).setText(mode.toHumanString(getContext()));
 			row.setOnClickListener(onClickListener);
 			row.setTag(i);
