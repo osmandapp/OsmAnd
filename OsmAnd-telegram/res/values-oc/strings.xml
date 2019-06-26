@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="shared_string_sort">Ordenar</string>
+    <string name="shared_string_back">Tornar</string>
+</resources>
