@@ -1,14 +1,14 @@
-/**
- *
- */
 package net.osmand.plus.myplaces;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -18,6 +18,8 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -41,31 +43,24 @@ public class FavoritesActivity extends TabActivity {
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
 
-	
-	
 	public static final String TAB_ID = "selected_tab_id";
 
-	
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
-	public static final int NOTES_TAB = R.string.notes;
-	public static final int OSM_TAB = R.string.osm_edits;
 
 	protected List<WeakReference<FavoritesFragmentStateHolder>> fragList = new ArrayList<>();
 	private int tabSize;
 	private ImportHelper importHelper;
 
-	private List<TabItem> mTabs;
 	private Bundle intentParams = null;
 	
 	@Override
-	public void onCreate(Bundle icicle) {
+	public void onCreate(Bundle savedInstanceState) {
 		OsmandApplication app = (OsmandApplication) getApplication();
 		app.applyTheme(this);
-		super.onCreate(icicle);
+		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");
-
 
 		importHelper = new ImportHelper(this, getMyApplication(), null);
 
@@ -73,20 +68,19 @@ public class FavoritesActivity extends TabActivity {
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
-		
 		setContentView(R.layout.tab_content);
-		mTabs = getTabItems();
+		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-		if (icicle == null) {
+		if (savedInstanceState == null) {
 			Intent intent = getIntent();
 			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
 				intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
 				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
 				int pagerItem = 0;
 				for (int n = 0; n < mTabs.size(); n++) {
-					if (mTabs.get(n).mTitle.equals(getString(tabId))) {
+					if (mTabs.get(n).resId == tabId) {
 						pagerItem = n;
 						break;
 					}
@@ -192,20 +186,7 @@ public class FavoritesActivity extends TabActivity {
 	@Override
 	public void onAttachFragment(Fragment fragment) {
 		if (fragment instanceof FavoritesFragmentStateHolder) {
-			if (intentParams != null && intentParams.getInt(TAB_ID, -1) != -1) {
-				Bundle b = new Bundle();
-				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
-				b.putInt(TAB_ID, intentParams.getInt(TAB_ID, FAV_TAB));
-				if (tabId == FAV_TAB) {
-					b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW,
-						intentParams.getString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW));
-					b.putInt(FavoritesFragmentStateHolder.GROUP_POSITION, intentParams.getInt(
-						FavoritesFragmentStateHolder.GROUP_POSITION, 0));
-				}
-				b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
-					intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
-				fragment.setArguments(b);
-			}
+			fragment.setArguments(intentParams);
 			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));
 		}
 	}
@@ -213,8 +194,8 @@ public class FavoritesActivity extends TabActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mTabs = getTabItems();
-		if(mTabs.size() != tabSize ) {
+		List<TabItem> mTabs = getTabItems();
+		if (mTabs.size() != tabSize) {
 			setTabs(mTabs);
 		}
 	}
@@ -230,11 +211,9 @@ public class FavoritesActivity extends TabActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
-		switch (itemId) {
-		case android.R.id.home:
+		if (itemId == android.R.id.home) {
 			finish();
 			return true;
-
 		}
 		return false;
 	}
@@ -261,21 +240,29 @@ public class FavoritesActivity extends TabActivity {
 			stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			searchEdit.setHint(stopHint);
 		} catch (Exception e) {
-			e.printStackTrace();
+			// ignore
 		}
 	}
 
-	public interface FavoritesFragmentStateHolder {
+	public static void showOnMap(@NonNull Activity activity, @Nullable FavoritesFragmentStateHolder fragment, double latitude, double longitude, int zoom, PointDescription pointDescription,
+								 boolean addToHistory, Object toShow) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
+		if (fragment != null) {
+			MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState());
+		} else {
+			MapActivity.launchMapActivityMoveToTop(activity);
+		}
+	}
 
-		String ITEM_POSITION = "item_position";
-		
-		String GROUP_POSITION = "group_position";
-
-		String GROUP_NAME_TO_SHOW = "group_name_to_show";
-		
-		Bundle storeState(Bundle bundle);
-		
-		void restoreState(Bundle bundle);
+	public static void openFavoritesGroup(Context context, String groupName) {
+		OsmAndAppCustomization appCustomization = ((OsmandApplication) context.getApplicationContext()).getAppCustomization();
+		Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
+		Bundle b = new Bundle();
+		b.putInt(TAB_ID, FAV_TAB);
+		b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW, groupName);
+		intent.putExtra(MapActivity.INTENT_PARAMS, b);
+		context.startActivity(intent);
 	}
 }
 

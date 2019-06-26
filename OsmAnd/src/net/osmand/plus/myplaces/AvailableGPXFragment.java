@@ -79,7 +79,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
 
@@ -101,6 +100,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 	FavoritesFragmentStateHolder {
@@ -710,12 +712,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		boolean e = true;
 		if (info.gpx != null) {
 			WptPt loc = info.gpx.findPointToShow();
-			OsmandSettings settings = getMyApplication().getSettings();
+			OsmandApplication app = requireMyApplication();
+			OsmandSettings settings = app.getSettings();
 			if (loc != null) {
 				settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 				e = false;
-				getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
-				MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(new Bundle()));
+				app.getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
+				MapActivity.launchMapActivityMoveToTop(getActivity(), storeState());
 			}
 		}
 		if (e) {
@@ -865,8 +868,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public Bundle storeState(Bundle bundle) {
-		bundle.putInt(FavoritesActivity.TAB_ID, FavoritesActivity.GPX_TAB);
+	public Bundle storeState() {
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, GPX_TAB);
 		return bundle;
 	}
 

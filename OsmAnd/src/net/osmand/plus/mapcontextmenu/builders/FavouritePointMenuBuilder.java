@@ -1,9 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -23,12 +21,10 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -258,13 +254,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					OsmAndAppCustomization appCustomization = app.getAppCustomization();
-					final Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
-					Bundle b = new Bundle();
-					b.putInt(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
-					b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW, group.name);
-					intent.putExtra(MapActivity.INTENT_PARAMS, b);
-					context.startActivity(intent);
+					FavoritesActivity.openFavoritesGroup(context, group.name);
 				}
 			});
 			view.addView(button);

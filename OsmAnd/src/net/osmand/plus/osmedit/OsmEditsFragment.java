@@ -1,8 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.OSM_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -33,12 +30,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.data.PointDescription;
-import net.osmand.osm.edit.Entity;
-import net.osmand.osm.edit.Node;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.PointDescription;
+import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -51,7 +48,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
 import net.osmand.plus.osmedit.ExportOptionsBottomSheetDialogFragment.ExportOptionsFragmentListener;
 import net.osmand.plus.osmedit.FileTypeBottomSheetDialogFragment.FileTypeFragmentListener;
 import net.osmand.plus.osmedit.OsmEditOptionsBottomSheetDialogFragment.OsmEditOptionsFragmentListener;
@@ -71,6 +68,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener,
 	FavoritesFragmentStateHolder {
@@ -108,6 +108,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 
 	private ActionMode actionMode;
 	private long refreshId;
+	private int selectedItemPosition = -1;
 
 	private int exportType;
 
@@ -648,14 +649,12 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	}
 
 	private void showOnMap(OsmPoint osmPoint, int itemPosition) {
+		selectedItemPosition = itemPosition;
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
 		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
-		getMyApplication().getSettings().setMapLocationToShow(osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
-				new PointDescription(type, name), true, osmPoint); //$NON-NLS-1$
-		Bundle b = new Bundle();
-		b.putInt(ITEM_POSITION, itemPosition);
-		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
+		FavoritesActivity.showOnMap(requireActivity(), this, osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
+				new PointDescription(type, name), true, osmPoint);
 	}
 
 	private void deletePoint(OsmPoint osmPoint) {
@@ -902,23 +901,27 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	}
 
 	@Override
-	public Bundle storeState(Bundle bundle) {
-		bundle.putInt(TAB_ID, OSM_TAB);
+	public Bundle storeState() {
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, OSM_EDIT_TAB);
+		bundle.putInt(ITEM_POSITION, selectedItemPosition);
 		return bundle;
 	}
 	
 	public void restoreState(Bundle bundle) {
 		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION)) {
-			if (bundle.getInt(TAB_ID, 0) == OSM_TAB) {
-				int position= bundle.getInt(ITEM_POSITION, 0);
-				int itemsCount = getListView().getAdapter().getCount();
-				if (itemsCount > 0 && itemsCount > position) {
-					if (position == 1) {
-						getListView().setSelection(0);
-					} else {
-						getListView().setSelection(position);
+			if (bundle.getInt(TAB_ID) == OSM_EDIT_TAB) {
+				selectedItemPosition = bundle.getInt(ITEM_POSITION, -1);
+				if (selectedItemPosition != -1) {
+					int itemsCount = getListView().getAdapter().getCount();
+					if (itemsCount > 0 && itemsCount > selectedItemPosition) {
+						if (selectedItemPosition == 1) {
+							getListView().setSelection(0);
+						} else {
+							getListView().setSelection(selectedItemPosition);
+						}
 					}
-				}		
+				}
 			}
 		}
 	}

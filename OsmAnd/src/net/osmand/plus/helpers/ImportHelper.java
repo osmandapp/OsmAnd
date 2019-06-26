@@ -69,6 +69,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
 /**
  * @author Koen Rabaey
  */
@@ -295,7 +299,7 @@ public class ImportHelper {
 					final Intent newIntent = new Intent(activity,
 						app.getAppCustomization().getFavoritesActivity());
 					newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					newIntent.putExtra(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
+					newIntent.putExtra(TAB_ID, FAV_TAB);
 					activity.startActivity(newIntent);
 				}
 			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -596,7 +600,7 @@ public class ImportHelper {
 		if (forceImportFavourites) {
 			final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			newIntent.putExtra(FavoritesActivity.TAB_ID, FavoritesActivity.GPX_TAB);
+			newIntent.putExtra(TAB_ID, GPX_TAB);
 			activity.startActivity(newIntent);
 		}
 	}

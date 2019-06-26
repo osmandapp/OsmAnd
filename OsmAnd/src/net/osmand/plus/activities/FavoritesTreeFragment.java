@@ -51,7 +51,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.FavoritesActivity.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -93,6 +93,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	Drawable arrowImageDisabled;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
+
+	private int selectedGroupPos = -1;
+	private int selectedChildPos = -1;
 
 	private FavoritesListener favoritesListener;
 	
@@ -700,34 +703,37 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	public void showOnMap(final FavouritePoint point, int groupPos, int childPos) {
-		getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.FAV_TAB);
-
-		final OsmandSettings settings = getMyApplication().getSettings();
+		OsmandSettings settings = requireMyApplication().getSettings();
+		settings.FAVORITES_TAB.set(FAV_TAB);
+		selectedGroupPos = groupPos;
+		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-				settings.getLastKnownMapZoom(),
-				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()),
-				true,
-				point); //$NON-NLS-1$
-		Bundle b = new Bundle();
-		b.putInt(GROUP_POSITION, groupPos);
-		b.putInt(ITEM_POSITION, childPos);
-		MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(b));
+		FavoritesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
+				settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()), true, point);
 	}
 
 	@Override
-	public Bundle storeState(Bundle bundle) {
-		bundle.putInt(FavoritesActivity.TAB_ID, FavoritesActivity.FAV_TAB);
+	public Bundle storeState() {
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, FAV_TAB);
+		if (selectedGroupPos != -1) {
+			bundle.putInt(GROUP_POSITION, selectedGroupPos);
+		}
+		if (selectedChildPos != -1) {
+			bundle.putInt(ITEM_POSITION, selectedChildPos);
+		}
 		return bundle;
 	}
 
 	@Override
 	public void restoreState(Bundle bundle) {
 		if (bundle != null && bundle.containsKey(TAB_ID) && bundle.containsKey(ITEM_POSITION)) {
-			if (bundle.getInt(TAB_ID, 0) == FAV_TAB) {
-				int group = bundle.getInt(GROUP_POSITION, 0);
-				int child = bundle.getInt(ITEM_POSITION, 0);
-				listView.setSelectedChild(group, child, true);
+			if (bundle.getInt(TAB_ID) == FAV_TAB) {
+				selectedGroupPos = bundle.getInt(GROUP_POSITION, -1);
+				selectedChildPos = bundle.getInt(ITEM_POSITION, -1);
+				if (selectedGroupPos != -1 && selectedChildPos != -1) {
+					listView.setSelectedChild(selectedGroupPos, selectedChildPos, true);
+				}
 			}
 		}
 	}
