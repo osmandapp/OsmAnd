@@ -128,7 +128,10 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.descr.setVisibility(View.GONE);
 			holder.switcher.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
-			holder.title.setTextColor(app.getResources().getColor(selectedIconColorRes));
+			holder.title.setTextColor(app.getResources().getColor(
+				isNightMode(app)
+				? R.color.active_buttons_and_links_dark
+				: R.color.active_buttons_and_links_light));
 			holder.title.setText(bottomButtonText);
 		}
 	}
