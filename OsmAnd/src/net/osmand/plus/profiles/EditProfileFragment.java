@@ -593,7 +593,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 
 		if (profile.userProfileTitle.isEmpty()
-			|| profile.userProfileTitle.replace(" ", "").length() < 1) {
+			|| profile.userProfileTitle.replace(" ", "").length() < 1 
+			|| profileNameEt.getText().toString().replace(" ", "").length() < 1) {
 			showSaveWarningDialog(
 				getString(R.string.profile_alert_need_profile_name_title),
 				getString(R.string.profile_alert_need_profile_name_msg),
