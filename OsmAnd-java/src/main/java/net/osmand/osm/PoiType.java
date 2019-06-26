@@ -48,6 +48,9 @@ public class PoiType extends AbstractPoiType {
 		if(isReference()) {
 			return referenceType.getOsmTag();
 		}
+		if(editTag != null) {
+			return editTag;
+		}
 		if(osmTag != null && osmTag.startsWith("osmand_amenity")) {
 			return "amenity";
 		}
