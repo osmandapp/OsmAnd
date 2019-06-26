@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_personal_transporter">Personal transporter</string>
+    <string name="app_mode_monowheel">Monowheel</string>
+    <string name="app_mode_scooter">Scooter</string>
     <string name="shared_string_min_speed">Min. speed</string>
     <string name="shared_string_max_speed">Max. speed</string>
     <string name="default_speed_setting_title">Default speed</string>
