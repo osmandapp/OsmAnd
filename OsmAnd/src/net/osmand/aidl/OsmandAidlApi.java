@@ -203,6 +203,7 @@ public class OsmandAidlApi {
 	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks= new ConcurrentHashMap<>();
 
 	private AMapPointUpdateListener aMapPointUpdateListener;
+	private AMapKeyguardFlagsUpdateListener aMapKeyguardFlagsUpdateListener;
 
 	private boolean mapActivityActive = false;
 
@@ -237,6 +238,7 @@ public class OsmandAidlApi {
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
+		aMapKeyguardFlagsUpdateListener = mapActivity;
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
@@ -1900,7 +1902,7 @@ public class OsmandAidlApi {
 		navUpdateCallbacks.remove(id);
 	}
 
-	public void registerForVoiceRouterMessages(long id){
+	public void registerForVoiceRouterMessages(long id) {
 		VoiceRouter.VoiceMessageListener listener = new VoiceRouter.VoiceMessageListener() {
 			@Override
 			public void onVoiceMessage() {
@@ -1921,9 +1923,17 @@ public class OsmandAidlApi {
 		app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(listener);
 	}
 
-	public void unregisterFromVoiceRouterMessages(long id){
+	public void unregisterFromVoiceRouterMessages(long id) {
 		app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceRouterMessageCallbacks.get(id));
 		voiceRouterMessageCallbacks.remove(id);
+	}
+	
+	public boolean changeMapActivityKeyguardFlags(boolean enable) {
+		if (aMapKeyguardFlagsUpdateListener != null) {
+			aMapKeyguardFlagsUpdateListener.changeKeyguardFlags(enable);
+			return true;
+		}
+		return false;
 	}
 
 	public Map<String, ContextMenuButtonsParams> getContextMenuButtonsParams() {
@@ -2260,5 +2270,8 @@ public class OsmandAidlApi {
 	public interface AMapPointUpdateListener {
 		void onAMapPointUpdated(AMapPoint point, String layerId);
 
+	}
+	public interface AMapKeyguardFlagsUpdateListener {
+		void changeKeyguardFlags(boolean enable);
 	}
 }

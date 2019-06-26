@@ -28,6 +28,8 @@ import net.osmand.turnScreenOn.helpers.LockHelper;
 import net.osmand.turnScreenOn.helpers.OsmAndAidlHelper;
 import net.osmand.turnScreenOn.helpers.RadioGroupWrapper;
 import net.osmand.turnScreenOn.helpers.SensorHelper;
+import net.osmand.turnScreenOn.listener.LockHelperEventListener;
+import net.osmand.turnScreenOn.listener.OnLockListener;
 import net.osmand.turnScreenOn.listener.UnlockMessageListener;
 import net.osmand.turnScreenOn.listener.OnMessageListener;
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private SensorHelper sensorHelper;
     private LockHelper lockHelper;
     private OnMessageListener unlockMessageListener;
+    private OnLockListener lockHelperEventListener;
 
     private List<PluginSettings.OsmandVersion> availableOsmandVersions;
 
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivSensorIcon;
     private View bottomSensorCardShadow;
     private View osmandVersionsPanel;
-
+    
     private Paint pGreyScale;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         sensorHelper = app.getSensorHelper();
         lockHelper = app.getLockHelper();
         unlockMessageListener = new UnlockMessageListener(app);
+        lockHelperEventListener = new LockHelperEventListener(app);
     }
 
     public void startProcess() {
@@ -183,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                                             closeDialog();
                                             refreshUI();
                                         }
-                                    }, 5);
+                                    }, 100);
                                 }
                             };
 
@@ -272,7 +276,8 @@ public class MainActivity extends AppCompatActivity {
             osmAndAidlHelper.registerForVoiceRouterMessages();
             osmAndAidlHelper.addListener(unlockMessageListener);
             sensorHelper.addListener(unlockMessageListener);
-
+            lockHelper.addLockListener(lockHelperEventListener);
+            
             tvPluginStateDescription.setText(getString(R.string.enabled));
             tvPluginStateDescription.setTextColor(getResources().getColor(R.color.black));
             tbPluginToolbar.setBackgroundColor(getResources().getColor(R.color.orange));
@@ -291,6 +296,8 @@ public class MainActivity extends AppCompatActivity {
             osmAndAidlHelper.unregisterFromVoiceRouterMessages();
             osmAndAidlHelper.removeListener(unlockMessageListener);
             sensorHelper.removeListener(unlockMessageListener);
+            lockHelper.removeLockListener(lockHelperEventListener);
+
             lockHelper.disableFunction();
 
             tvPluginStateDescription.setText(getString(R.string.disabled));

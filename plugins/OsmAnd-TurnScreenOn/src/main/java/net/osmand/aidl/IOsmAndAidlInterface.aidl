@@ -708,4 +708,7 @@ interface IOsmAndAidlInterface {
 
     boolean setCustomization(in CustomizationInfoParams params);
     long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
+    
+    boolean isMapActivityActive();
+    boolean changeMapActivityKeyguardFlags(in boolean enable);
 }

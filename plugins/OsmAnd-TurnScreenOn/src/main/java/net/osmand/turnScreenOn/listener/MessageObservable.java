@@ -1,6 +1,6 @@
 package net.osmand.turnScreenOn.listener;
 
-public interface Observable {
+public interface MessageObservable {
     void addListener(OnMessageListener listener);
     void removeListener(OnMessageListener listener);
 

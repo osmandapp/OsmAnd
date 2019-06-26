@@ -5,17 +5,16 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
-import net.osmand.turnScreenOn.listener.Observable;
+import net.osmand.turnScreenOn.listener.MessageObservable;
 import net.osmand.turnScreenOn.listener.OnMessageListener;
 import net.osmand.turnScreenOn.log.PlatformUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SensorHelper implements SensorEventListener, Observable {
+public class SensorHelper implements SensorEventListener, MessageObservable {
     private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(SensorHelper.class);
 
     private static final int SENSOR_SENSITIVITY = 4;

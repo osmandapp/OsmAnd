@@ -36,6 +36,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.MapAccessibilityActions;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
 import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -157,7 +159,7 @@ import java.util.regex.Pattern;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
-		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener {
+		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener, OsmandAidlApi.AMapKeyguardFlagsUpdateListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
@@ -1872,6 +1874,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		AMapPoint oldPoint = (AMapPoint) object;
 		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
+	}
+
+	@Override
+	public void changeKeyguardFlags(final boolean enable) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				if (enable) {
+					getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+							WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+				} else {
+					getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+				}
+			}
+		});
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

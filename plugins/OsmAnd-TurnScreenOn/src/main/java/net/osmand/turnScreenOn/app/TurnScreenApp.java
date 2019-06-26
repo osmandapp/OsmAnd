@@ -3,7 +3,6 @@ package net.osmand.turnScreenOn.app;
 import android.app.Application;
 
 import net.osmand.turnScreenOn.PluginSettings;
-import net.osmand.turnScreenOn.helpers.AndroidUtils;
 import net.osmand.turnScreenOn.helpers.LockHelper;
 import net.osmand.turnScreenOn.helpers.OsmAndAidlHelper;
 import net.osmand.turnScreenOn.helpers.SensorHelper;
