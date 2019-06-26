@@ -1289,7 +1289,7 @@
     <string name="routing_attr_height_name">Բարձրության սահմանափակում</string>
     <string name="routing_attr_height_description">Նշեք մեքենայի բարձրությունը երթուղու հաշվարկի համար։</string>
     <string name="hillshade_layer_disabled">Տեղանքի ռելիեֆի(Hillshade) շերտը անջատված է</string>
-    <string name="android_19_location_disabled">Android 4.4 (KitKat) տարբերակից սկսած քարտը չեք կարող բեռնել և թարմացնել հին պահեստային ֆոլդերում (% s): Պատճենել բոլոր OsmAnd ֆայլերը նոր պահպանման վայրում? 
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) տարբերակից սկսած քարտը չեք կարող բեռնել և թարմացնել հին պահեստային ֆոլդերում (%s): Պատճենել բոլոր OsmAnd ֆայլերը նոր պահպանման վայրում? 
 \n…Ծանոթագրություն 1. Ձեր հին ֆայլերը կմնան անփոփոխ (բայց կարող են ջնջվել ձեռքով): 
 \n…Ծանոթագրություն 2. Երբ ֆայլերը փոխանցեք նոր պահպանման վայր, «OsmAnd»-ի և «OsmAnd+» ֆայլերի համատեղ օգտագործումը հնարավոր չի լինի:</string>
     <string name="copying_osmand_one_file_descr">"Ֆայլի պատճենում  (%s) նոր վայր…"</string>

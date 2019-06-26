@@ -236,8 +236,8 @@ task validateTranslate {
 				if (line.contains("\$ s") || line.contains("\$ d") || line.contains("\$ f") ||
 						line.contains(" \$s") || line.contains(" \$d") || line.contains(" \$f") ||
 						line.contains("1\$ ") || line.contains("2\$ ") || line.contains("3\$ ") ||
-						(line.contains("% \$") || line.contains("% 1") ||
-								line.contains("% 2") || line.contains("% 3"))) {
+						(line.contains("% \$") || line.contains("% 1") || line.contains("% 2") || 
+                                line.contains("% 3") || line.contains("% s"))) {
 					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line);
 				}
 			}

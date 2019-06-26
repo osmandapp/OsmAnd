@@ -2354,7 +2354,7 @@
     <string name="profile_alert_need_save_title">Salvați modificările</string>
     <string name="profile_alert_need_save_msg">Trebuie să salvați modificările la profil înainte de a continua</string>
     <string name="profile_alert_delete_title">Ștergeți profilul</string>
-    <string name="profile_alert_delete_msg">Sigur doriți să ștergeți profilul% s</string>
+    <string name="profile_alert_delete_msg">Sigur doriți să ștergeți profilul %s</string>
     <string name="select_base_profile_dialog_title">Selectați profilul de bază</string>
     <string name="select_nav_profile_dialog_title">Selectați tipul de navigare</string>
     <string name="base_profile_descr_car">Mașină, Camion, Motocicletă</string>
