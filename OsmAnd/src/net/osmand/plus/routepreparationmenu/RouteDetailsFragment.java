@@ -797,13 +797,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (walkTime < 60) {
 			walkTime = 60;
 		}
-		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
+		SpannableStringBuilder spannable = new SpannableStringBuilder(getString(R.string.shared_string_walk)).append(" ");
 		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = spannable.length();
-		spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
+		spannable.append("~").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = spannable.length();
-		spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
+		spannable.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
 		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, spannable, imagesContainer, new OnClickListener() {
