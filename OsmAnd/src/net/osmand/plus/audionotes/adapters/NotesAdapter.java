@@ -201,7 +201,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return R.string.shared_string_video;
 	}
 
-	private void setupItem(int position, final Recording recording, final ItemViewHolder holder) {
+	private void setupItem(final int position, final Recording recording, final ItemViewHolder holder) {
 		setupBackground(holder.view);
 		if (recording == NotesFragment.SHARE_LOCATION_FILE) {
 			holder.title.setText(R.string.av_locations);
@@ -248,7 +248,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 					holder.checkBox.performClick();
 				} else {
 					if (listener != null) {
-						listener.onItemClick(recording);
+						listener.onItemClick(recording, position);
 					}
 				}
 			}
@@ -368,7 +368,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 		void onCheckBoxClick(Recording rec, boolean checked);
 
-		void onItemClick(Recording rec);
+		void onItemClick(Recording rec, int position);
 
 		void onOptionsClick(Recording rec);
 	}

@@ -24,6 +24,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -40,18 +41,23 @@ public class FavoritesActivity extends TabActivity {
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
 
-	public static final String GROUP_NAME_TO_SHOW = "group_name_to_show";
+	
+	
+	public static final String TAB_ID = "selected_tab_id";
 
-	public static final String OPEN_FAVOURITES_TAB = "open_favourites_tab";
-	public static final String OPEN_MY_PLACES_TAB = "open_my_places_tab";
+	
+	public static final int GPX_TAB = R.string.shared_string_tracks;
+	public static final int FAV_TAB = R.string.shared_string_my_favorites;
+	public static final int NOTES_TAB = R.string.notes;
+	public static final int OSM_TAB = R.string.osm_edits;
 
-	public static final int  GPX_TAB = R.string.shared_string_tracks;
-	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
-	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
+	protected List<WeakReference<FavoritesFragmentStateHolder>> fragList = new ArrayList<>();
 	private int tabSize;
 	private ImportHelper importHelper;
-	private String groupNameToShow;
 
+	private List<TabItem> mTabs;
+	private Bundle intentParams = null;
+	
 	@Override
 	public void onCreate(Bundle icicle) {
 		OsmandApplication app = (OsmandApplication) getApplication();
@@ -59,6 +65,7 @@ public class FavoritesActivity extends TabActivity {
 		super.onCreate(icicle);
 
 		app.logEvent("myplaces_open");
+
 
 		importHelper = new ImportHelper(this, getMyApplication(), null);
 
@@ -68,28 +75,25 @@ public class FavoritesActivity extends TabActivity {
 
 		
 		setContentView(R.layout.tab_content);
-		List<TabItem> mTabs = getTabItems();
+		mTabs = getTabItems();
 		setTabs(mTabs);
-		// setupHomeButton();
 
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 		if (icicle == null) {
 			Intent intent = getIntent();
-			if (intent != null) {
-				if (intent.hasExtra(OPEN_FAVOURITES_TAB) && intent.getBooleanExtra(OPEN_FAVOURITES_TAB, false)) {
-					if (intent.hasExtra(GROUP_NAME_TO_SHOW)) {
-						groupNameToShow = intent.getStringExtra(GROUP_NAME_TO_SHOW);
+			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
+				intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
+				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
+				int pagerItem = 0;
+				for (int n = 0; n < mTabs.size(); n++) {
+					if (mTabs.get(n).mTitle.equals(getString(tabId))) {
+						pagerItem = n;
+						break;
 					}
-					mViewPager.setCurrentItem(0, false);
-				} else if (intent.hasExtra(OPEN_MY_PLACES_TAB) && intent.getBooleanExtra(OPEN_MY_PLACES_TAB, false)) {
-					mViewPager.setCurrentItem(1, false);
 				}
+				mViewPager.setCurrentItem(pagerItem, false);
 			}
 		}
-	}
-
-	public String getGroupNameToShow() {
-		return groupNameToShow;
 	}
 
 	public void addTrack() {
@@ -151,8 +155,8 @@ public class FavoritesActivity extends TabActivity {
 
 	private AvailableGPXFragment getGpxFragment() {
 		AvailableGPXFragment gpxFragment = null;
-		for (WeakReference<Fragment> f : fragList) {
-			Fragment frag = f.get();
+		for (WeakReference<FavoritesFragmentStateHolder> f : fragList) {
+			FavoritesFragmentStateHolder frag = f.get();
 			if (frag instanceof AvailableGPXFragment) {
 				gpxFragment = (AvailableGPXFragment) frag;
 			}
@@ -187,13 +191,29 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onAttachFragment(Fragment fragment) {
-		fragList.add(new WeakReference<>(fragment));
+		if (fragment instanceof FavoritesFragmentStateHolder) {
+			if (intentParams != null && intentParams.getInt(TAB_ID, -1) != -1) {
+				Bundle b = new Bundle();
+				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
+				b.putInt(TAB_ID, intentParams.getInt(TAB_ID, FAV_TAB));
+				if (tabId == FAV_TAB) {
+					b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW,
+						intentParams.getString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW));
+					b.putInt(FavoritesFragmentStateHolder.GROUP_POSITION, intentParams.getInt(
+						FavoritesFragmentStateHolder.GROUP_POSITION, 0));
+				}
+				b.putInt(FavoritesFragmentStateHolder.ITEM_POSITION,
+					intentParams.getInt(FavoritesFragmentStateHolder.ITEM_POSITION, 0));
+				fragment.setArguments(b);
+			}
+			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		List<TabItem> mTabs = getTabItems();
+		mTabs = getTabItems();
 		if(mTabs.size() != tabSize ) {
 			setTabs(mTabs);
 		}
@@ -243,6 +263,19 @@ public class FavoritesActivity extends TabActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public interface FavoritesFragmentStateHolder {
+
+		String ITEM_POSITION = "item_position";
+		
+		String GROUP_POSITION = "group_position";
+
+		String GROUP_NAME_TO_SHOW = "group_name_to_show";
+		
+		Bundle storeState(Bundle bundle);
+		
+		void restoreState(Bundle bundle);
 	}
 }
 
