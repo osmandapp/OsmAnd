@@ -251,6 +251,9 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		icons.add(new IconResWithDescr(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_helicopter, R.string.app_mode_helicopter, "ic_action_helicopter", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter", false));
 		return icons;
 	}
 
