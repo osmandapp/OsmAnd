@@ -1371,7 +1371,7 @@
     <string name="add_favorite_dialog_favourite_added_template">En sevdiğim nokta \'\' {0} \'başarıyla eklendi.</string>
     <string name="favourites_context_menu_add">Sık kullanılanlara ekle</string>
     <string name="favourites_context_menu_edit">Düzenleme favori</string>
-    <string name="favourites_remove_dialog_msg">Favori nokta \'% s\' Sil ?</string>
+    <string name="favourites_remove_dialog_msg">Favori nokta \'%s\' Sil ?</string>
     <string name="favourites_remove_dialog_success">En sevdiğim nokta {0} başarıyla silindi.</string>
     <string name="poi_error_poi_not_found">Düğüm bulunamadı ya da başlıca tek bir düğüm değil, olabilir</string>
     <string name="poi_remove_confirm_template">Sil {0} (Yorumunuzu Girin)?</string>
@@ -1592,7 +1592,7 @@
     <string name="show_zoom_buttons_navigation_descr">Navigasyon sırasında görüntü yakınlaştırma düğmelerini göster.</string>
     <string name="show_zoom_buttons_navigation">Yakınlaştırma düğmeleri göster</string>
     <string name="save_as_favorites_points">Sık grup olarak kaydet</string>
-    <string name="android_19_location_disabled">Android sürümü 4.4 (KitKat) beri indirebilir ve önceki depolama klasörüne (% s) haritalar güncelleme olamaz. Eğer izin verilen depolama konumuna değiştirmek ve orada tüm Osmand dosyaları kopyalamak istiyor musunuz?\n  Not 1: Eski dosyaları bakir kalır (ancak elle silinebilir).\n  Not 2: yeni depolama konumu o Osmand ve Osmand + arasında dosya paylaşmak mümkün olmayacaktır.</string>
+    <string name="android_19_location_disabled">Android sürümü 4.4 (KitKat) beri indirebilir ve önceki depolama klasörüne (%s) haritalar güncelleme olamaz. Eğer izin verilen depolama konumuna değiştirmek ve orada tüm Osmand dosyaları kopyalamak istiyor musunuz?\n  Not 1: Eski dosyaları bakir kalır (ancak elle silinebilir).\n  Not 2: yeni depolama konumu o Osmand ve Osmand + arasında dosya paylaşmak mümkün olmayacaktır.</string>
     <string name="share_geo">Yer:</string>
     <string name="region_maps">Bölge çapında haritalar</string>
     <string name="world_maps">Dünya Haritaları</string>
@@ -1755,7 +1755,7 @@
     <string name="available_maps">Mevcut haritalar</string>
     <string name="no_camera_permission">App\'in kameraya erişmek için izni yok.</string>
     <string name="no_microphone_permission">App\'in mikrofona erişmek için izni yok.</string>
-    <string name="last_update">Son güncelleme:% s</string>
+    <string name="last_update">Son güncelleme: %s</string>
     <string name="update_time">Güncelleme zamanı</string>
     <string name="shared_string_not_selected">Seçilmedi</string>
     <string name="rec_split"/>
