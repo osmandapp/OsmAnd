@@ -624,7 +624,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 			.createCustomMode(profile.parent, profile.userProfileTitle.trim(), customStringKey)
-			.icon(profile.iconId, profile.iconStringName);
+			.icon(app, profile.iconStringName);
 
 		if(profile.routingProfileDataObject.getStringKey().equals(
 				RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
@@ -750,11 +750,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		STRAIGHT_LINE_MODE(R.string.routing_profile_straightline, R.drawable.ic_action_split_interval),
 		BROUTER_MODE(R.string.routing_profile_broutrer, R.drawable.ic_action_split_interval),
 		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),
-		PEDESTRIAN(R.string.rendering_value_pedestrian_name, R.drawable.map_action_pedestrian_dark),
-		BICYCLE(R.string.rendering_value_bicycle_name, R.drawable.map_action_bicycle_dark),
-		SKI(R.string.routing_profile_ski, R.drawable.ic_plugin_skimaps),
-		PUBLIC_TRANSPORT(R.string.app_mode_public_transport, R.drawable.map_action_bus_dark),
-		BOAT(R.string.app_mode_boat, R.drawable.map_action_sail_boat_dark),
+		PEDESTRIAN(R.string.rendering_value_pedestrian_name, R.drawable.ic_action_pedestrian_dark),
+		BICYCLE(R.string.rendering_value_bicycle_name, R.drawable.ic_action_bicycle_dark),
+		SKI(R.string.routing_profile_ski, R.drawable.ic_action_skiing),
+		PUBLIC_TRANSPORT(R.string.app_mode_public_transport, R.drawable.ic_action_bus_dark),
+		BOAT(R.string.app_mode_boat, R.drawable.ic_action_sail_boat_dark),
 		GEOCODING(R.string.routing_profile_geocoding, R.drawable.ic_action_world_globe);
 
 		int stringRes;
@@ -792,8 +792,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		String stringKey;
 		String userProfileTitle = "";
 		ApplicationMode parent = null;
-		int iconId = R.drawable.map_world_globe_dark;
-		String iconStringName = "map_world_globe_dark";
+		int iconId = R.drawable.ic_world_globe_dark;
+		String iconStringName = "ic_world_globe_dark";
 		ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		RoutingProfileDataObject routingProfileDataObject = null;
 

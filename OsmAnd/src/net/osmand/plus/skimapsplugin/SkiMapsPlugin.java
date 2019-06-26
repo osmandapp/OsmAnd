@@ -31,7 +31,7 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_plugin_skimaps;
+		return R.drawable.ic_action_skiing;
 	}
 	
 	@Override
