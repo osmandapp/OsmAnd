@@ -166,7 +166,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		saveButtonSV = view.findViewById(R.id.save_profile_btn_sv);
 
 		profileNameEt.setFocusable(true);
-		profileNameEt.setSelectAllOnFocus(true);
+		profileNameTextBox.getEditText().setSelection(profileNameEt.getText().length());
 
 		String title = getResources().getString(R.string.new_profile);
 
