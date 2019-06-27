@@ -1225,7 +1225,9 @@ public class SearchCoreFactory {
 
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 
+		private static final int OLC_RECALC_DISTANCE_THRESHOLD = 100000; // 100 km
 		private int olcPhraseHash;
+		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
 		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
 
@@ -1328,6 +1330,9 @@ public class SearchCoreFactory {
 						}
 					}
 				}
+				if (latLon == null && !parsedCode.isFull()) {
+					latLon = parsedCode.recover(phrase.getSettings().getOriginalLocation());
+				}
 				if (latLon != null) {
 					publishLocation(phrase, resultMatcher, lw, latLon);
 				}
@@ -1386,8 +1391,15 @@ public class SearchCoreFactory {
 				return -1;
 			}
 			int olcPhraseHash = p.getUnknownSearchPhrase().hashCode();
+			if (this.olcPhraseHash == olcPhraseHash && this.olcPhraseLocation != null) {
+				double distance = MapUtils.getDistance(p.getSettings().getOriginalLocation(), this.olcPhraseLocation);
+				if (distance > OLC_RECALC_DISTANCE_THRESHOLD) {
+					olcPhraseHash++;
+				}
+			}
 			if (this.olcPhraseHash != olcPhraseHash) {
 				this.olcPhraseHash = olcPhraseHash;
+				this.olcPhraseLocation = p.getSettings().getOriginalLocation();
 				cachedParsedCode = LocationParser.parseOpenLocationCode(p.getUnknownSearchPhrase());
 			}
 			return cachedParsedCode == null ? SEARCH_LOCATION_PRIORITY : SEARCH_MAX_PRIORITY;
