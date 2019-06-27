@@ -309,9 +309,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected void addAltitudeToPlainItems() {
 		final MapActivity mapActivity = getMapActivity();
-		final OsmandApplication app = mapActivity.getMyApplication();
-		if (getMapActivity() != null && app != null) {
-			Location l = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+		if (getMapActivity() != null) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAltitude() && l.getAltitude() > 0f) {
 				String alt = OsmAndFormatter.getFormattedAlt(l.getAltitude(), app);
 				addPlainMenuItem(R.drawable.ic_action_altitude_average, null, alt, false, false, null);
@@ -321,9 +321,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected void addPrecisionToPlainItems() {
 		final MapActivity mapActivity = getMapActivity();
-		final OsmandApplication app = mapActivity.getMyApplication();
-		if (getMapActivity() != null && app != null) {
-			Location l = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+		if (getMapActivity() != null ) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAccuracy()) {
 				String acc;
 				if (l.hasVerticalAccuracy()) {
