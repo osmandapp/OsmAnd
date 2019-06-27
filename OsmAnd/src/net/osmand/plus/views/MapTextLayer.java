@@ -151,15 +151,15 @@ public class MapTextLayer extends OsmandMapLayer {
 		paintTextIcon.setStyle(Style.STROKE);
 		paintTextIcon.setColor(nightMode
 			? r.getColor(R.color.widgettext_shadow_night)
-			: r.getColor(R.color.map_widget_dark_stroke));
+			: Color.WHITE);
 		paintTextIcon.setStrokeWidth(2);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 		// reset
 		paintTextIcon.setStrokeWidth(2);
 		paintTextIcon.setStyle(Style.FILL);
 		paintTextIcon.setColor(nightMode
-			? r.getColor(R.color.widgettext_night )
-			: r.getColor(R.color.map_widget_dark));
+			? r.getColor(R.color.widgettext_night)
+			: Color.BLACK);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
