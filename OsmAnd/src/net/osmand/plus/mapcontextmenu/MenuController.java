@@ -312,7 +312,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		if (getMapActivity() != null) {
 			final OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
-			if (l != null && l.hasAltitude() && l.getAltitude() > 0f) {
+			if (l != null && l.hasAltitude()) {
 				String alt = OsmAndFormatter.getFormattedAlt(l.getAltitude(), app);
 				addPlainMenuItem(R.drawable.ic_action_altitude_average, null, alt, false, false, null);
 			}
