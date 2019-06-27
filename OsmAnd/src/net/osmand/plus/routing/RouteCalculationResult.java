@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -18,6 +19,8 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -129,6 +132,8 @@ public class RouteCalculationResult {
 		return alarmInfo;
 	}
 
+	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
+
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
 			List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if(intermediates != null && localDirections != null) {
@@ -137,17 +142,25 @@ public class RouteCalculationResult {
 			int currentLocation = 0;
 			double distanceThreshold = 25;
 			double prevDistance = distanceThreshold * 4;
-			while((currentIntermediate < intermediates.size() || prevDistance > distanceThreshold)
-				&& currentLocation < locations.size()){
-				if(currentIntermediate < intermediates.size() &&
-						getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation) < distanceClosestToIntermediate) {
-					prevDistance = getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation);
+			while ((currentIntermediate < intermediates.size() || prevDistance > distanceThreshold) && currentLocation < locations.size()) {
+				double distanceToCurrent = 0;
+				double distanceToPrevious = 0;
+
+				if (currentIntermediate < intermediates.size()) {
+					distanceToCurrent = getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation);
+				}
+				if (currentIntermediate > 0) {
+					distanceToPrevious = getDistanceToLocation(locations, intermediates.get(currentIntermediate - 1), currentLocation);
+				}
+				log.debug("distToCurrent " + distanceToCurrent + " prevDist " + prevDistance + " " + " curIntermediate " + currentIntermediate + " currentLoc " + currentLocation + " closest " + (distanceToCurrent < distanceClosestToIntermediate));
+				log.debug("distToPrevious " + distanceToPrevious + " prevDist " + prevDistance + " " + " curIntermediate " + currentIntermediate + " currentLoc " + currentLocation + " closest " + (distanceToPrevious < distanceClosestToIntermediate));
+
+				if (currentIntermediate < intermediates.size() && distanceToCurrent < distanceClosestToIntermediate) {
+					prevDistance = distanceToCurrent;
 					interLocations[currentIntermediate] = currentLocation;
 					currentIntermediate++;
-				} else if(currentIntermediate > 0 && prevDistance > distanceThreshold && 
-						getDistanceToLocation(locations, intermediates.get(currentIntermediate - 1), 
-						currentLocation) < prevDistance) {
-					prevDistance = getDistanceToLocation(locations, intermediates.get(currentIntermediate - 1), currentLocation);
+				} else if (currentIntermediate > 0 && prevDistance > distanceThreshold && distanceToPrevious < prevDistance) {
+					prevDistance = distanceToPrevious;
 					interLocations[currentIntermediate - 1] = currentLocation;
 				}
 				currentLocation ++;
