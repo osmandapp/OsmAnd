@@ -130,16 +130,6 @@ public class OsmAndAidlHelper implements MessageObservable {
 		}
 	}
 
-	public boolean isMapActivityActive() {
-		try {
-			if (mIOsmAndAidlInterface != null) {
-				return mIOsmAndAidlInterface.isMapActivityActive();
-			}
-		} catch (RemoteException e) {
-		}
-		return false;
-	}
-	
 	public void changeMapActivityKeyguardFlags(boolean newState) {
 		try {
 			if (mIOsmAndAidlInterface != null) {

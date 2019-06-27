@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.util.Log;
 
 import net.osmand.turnScreenOn.app.TurnScreenApp;
 import net.osmand.turnScreenOn.listener.LockObservable;
@@ -35,7 +36,9 @@ public class LockHelper implements LockObservable {
 
 	private void releaseWakeLocks() {
 		if (wakeLock != null) {
-			wakeLock.release();
+			if (wakeLock.isHeld()) {
+				wakeLock.release();
+			}
 			wakeLock = null;
 		}
 	}
@@ -44,26 +47,26 @@ public class LockHelper implements LockObservable {
 		if (readyToLock()) {
 			notifyOnLock();
 			releaseWakeLocks();
-			if (functionEnable && !AndroidUtils.isScreenLocked(app)) {
+			/*if (functionEnable) {
 				mDevicePolicyManager.lockNow();
-			}
+			}*/
 		}
 	}
 
-	public void unlock() {
+	public void unlock(long timeInMills) {
 		if (readyToUnlock()) {
 			notifyOnUnlock();
 			PowerManager pm = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
 			wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
-					| PowerManager.ACQUIRE_CAUSES_WAKEUP
-					| PowerManager.ON_AFTER_RELEASE, "tso:wakelocktag");
-			wakeLock.acquire();
+					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "tso:wakelocktag");
+			wakeLock.acquire(timeInMills);
 		}
 	}
 
 	public void timedUnlock(long millis) {
+		Log.d("ttpl", "timedUnlock: try to unlock");
 		uiHandler.removeCallbacks(lockRunnable);
-		unlock();
+		unlock(millis);
 		uiHandler.postDelayed(lockRunnable, millis);
 	}
 
@@ -74,6 +77,7 @@ public class LockHelper implements LockObservable {
 	}
 
 	private boolean readyToUnlock() {
+		releaseWakeLocks();
 		return wakeLock == null;
 	}
 

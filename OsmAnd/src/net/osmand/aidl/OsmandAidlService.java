@@ -1163,17 +1163,6 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				return UNKNOWN_API_ERROR;
 			}
 		}
-		
-		@Override
-		public boolean isMapActivityActive() {
-			try {
-				OsmandAidlApi api = getApi("isMapActivityActive");
-				return api != null && api.isUpdateAllowed();
-			} catch (Exception e) {
-				handleException(e);
-				return false;
-			}
-		}
 
 		@Override
 		public boolean changeMapActivityKeyguardFlags(boolean enable) {
