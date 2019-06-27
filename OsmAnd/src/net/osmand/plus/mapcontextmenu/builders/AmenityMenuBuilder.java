@@ -459,6 +459,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.PHONE.equals(key)) {
 				iconId = R.drawable.ic_action_call_dark;
 				isPhoneNumber = true;
+			} else if (Amenity.MOBILE.equals(key)) {
+				iconId = R.drawable.ic_action_phone;
+				isPhoneNumber = true;
 			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
 				isUrl = true;
