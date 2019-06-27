@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">
         • Application profiles: create your own profile for your needs, with a custom icon and color\n\n
         • Add settings for default and min/max speed for profiles\n\n
