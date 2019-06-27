@@ -459,6 +459,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.PHONE.equals(key)) {
 				iconId = R.drawable.ic_action_call_dark;
 				isPhoneNumber = true;
+			} else if (Amenity.MOBILE.equals(key)) {
+				iconId = R.drawable.ic_action_phone;
+				isPhoneNumber = true;
 			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
 				isUrl = true;
@@ -489,6 +492,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					iconId = R.drawable.ic_action_poi_brand;
 				} else if (key.equals("internet_access_fee_yes")) {
 					iconId = R.drawable.ic_action_internet_access_fee;
+				} else if (key.equals("instagram")) {
+					iconId = R.drawable.ic_action_social_instagram;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
