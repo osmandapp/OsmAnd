@@ -91,7 +91,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private List<MapHudButton> controls = new ArrayList<>();
 	private final MapActivity mapActivity;
-	private int shadowColor = -1;
 	// private RulerControl rulerControl;
 	// private List<MapControls> allControls = new ArrayList<MapControls>();
 
@@ -750,13 +749,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void updateControls(@NonNull RotatedTileBox tileBox, DrawSettings drawSettings) {
 		boolean isNight = drawSettings != null && drawSettings.isNightMode();
 		boolean portrait = isPotrait();
-		int shadw = isNight ? Color.TRANSPARENT : Color.WHITE;
-		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
-		if (shadowColor != shadw) {
-			shadowColor = shadw;
-			// TODOnightMode
-			// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
-		}
+//		int shadw = isNight ? mapActivity.getResources().getColor(R.color.widgettext_shadow_night) :
+//				mapActivity.getResources().getColor(R.color.widgettext_shadow_day);
+		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) :
+				mapActivity.getResources().getColor(R.color.widgettext_day);
+		// TODOnightMode
+		// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
 		// default buttons
 		boolean routePlanningMode = false;
 		RoutingHelper rh = mapActivity.getRoutingHelper();

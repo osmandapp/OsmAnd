@@ -126,21 +126,49 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 
-		if (!(o instanceof FavouritePoint)) return false;
+		if (o == null) return false;
 
-		FavouritePoint fp = (FavouritePoint)o;
+		if (getClass() != o.getClass()) return false;
 
-		return (this.latitude == fp.latitude)
-				   && (this.longitude == fp.longitude)
-				   && (this.name.equals(fp.name));
+		FavouritePoint fp = (FavouritePoint) o;
+
+		if (name == null) {
+			if (fp.name != null)
+				return false;
+		} else if (!name.equals(fp.name))
+			return false;
+
+		if (category == null) {
+			if (fp.category != null)
+				return false;
+		} else if (!category.equals(fp.category))
+			return false;
+
+		if (description == null) {
+			if (fp.description != null)
+				return false;
+		} else if (!description.equals(fp.description))
+			return false;
+
+		if (originObjectName == null) {
+			if (fp.originObjectName != null)
+				return false;
+		} else if (!originObjectName.equals(fp.originObjectName))
+			return false;
+
+		return (this.latitude == fp.latitude) && (this.longitude == fp.longitude);
 	}
 
 	@Override
 	public int hashCode() {
-		int hash = (int)latitude*1000 + (int)longitude*1000;
-		hash += (name != null) ? name.hashCode() : 0;
-		return hash;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) Math.floor(latitude * 10000);
+		result = prime * result + (int) Math.floor(longitude * 10000);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((originObjectName == null) ? 0 : originObjectName.hashCode());
+		return result;
 	}
-
 }
-
