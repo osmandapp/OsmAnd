@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import gnu.trove.set.hash.TIntHashSet;
+import net.osmand.plus.R;
 
 public class MapTextLayer extends OsmandMapLayer {
 
@@ -106,6 +108,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void drawWrappedText(Canvas cv, String text, float textSize, float x, float y, int lines) {
+		boolean nightMode = view.getApplication().getDaynightHelper().isNightMode();
 		if (text.length() > TEXT_WRAP) {
 			int start = 0;
 			int end = text.length();
@@ -123,14 +126,14 @@ public class MapTextLayer extends OsmandMapLayer {
 					pos++;
 				}
 				if (lastSpace == -1 || (pos == end)) {
-					drawShadowText(cv, text.substring(start, pos), x, y + line * (textSize + 2));
+					drawShadowText(cv, text.substring(start, pos), x, y + line * (textSize + 2), nightMode);
 					start = pos;
 				} else {
 					String subtext = text.substring(start, lastSpace);
 					if (line + 1 == lines) {
 						subtext += "..";
 					}
-					drawShadowText(cv, subtext, x, y + line * (textSize + 2));
+					drawShadowText(cv, subtext, x, y + line * (textSize + 2), nightMode);
 
 					start = lastSpace + 1;
 					limit += (start - pos) - 1;
@@ -139,20 +142,24 @@ public class MapTextLayer extends OsmandMapLayer {
 				line++;
 			}
 		} else {
-			drawShadowText(cv, text, x, y);
+			drawShadowText(cv, text, x, y, nightMode);
 		}
 	}
 
-	private void drawShadowText(Canvas cv, String text, float centerX, float centerY) {
-		int c = paintTextIcon.getColor();
+	private void drawShadowText(Canvas cv, String text, float centerX, float centerY, boolean nightMode) {
+		Resources r = view.getApplication().getResources();
 		paintTextIcon.setStyle(Style.STROKE);
-		paintTextIcon.setColor(Color.WHITE);
+		paintTextIcon.setColor(nightMode
+			? r.getColor(R.color.widgettext_shadow_night)
+			: r.getColor(R.color.widgettext_shadow_day));
 		paintTextIcon.setStrokeWidth(2);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 		// reset
 		paintTextIcon.setStrokeWidth(2);
 		paintTextIcon.setStyle(Style.FILL);
-		paintTextIcon.setColor(c);
+		paintTextIcon.setColor(nightMode
+			? r.getColor(R.color.widgettext_night)
+			: r.getColor(R.color.widgettext_day));
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
