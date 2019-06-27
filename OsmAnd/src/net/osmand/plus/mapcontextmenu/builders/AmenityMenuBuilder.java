@@ -492,6 +492,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					iconId = R.drawable.ic_action_poi_brand;
 				} else if (key.equals("internet_access_fee_yes")) {
 					iconId = R.drawable.ic_action_internet_access_fee;
+				} else if (key.equals("instagram")) {
+					iconId = R.drawable.ic_action_social_instagram;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
