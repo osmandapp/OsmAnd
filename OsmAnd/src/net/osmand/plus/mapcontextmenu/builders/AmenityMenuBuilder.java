@@ -440,7 +440,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.OPENING_HOURS.equals(key) || 
 					Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
 				iconId = R.drawable.ic_action_time;
-				collapsableView = getCollapsableTextView(view.getContext(), true, amenity.getAdditionalInfo(key));
+				collapsableView = getCollapsableTextView(view.getContext(), true,
+					amenity.getAdditionalInfo(key).replace("; ", "\n").replace(",", ", "));
 				collapsable = true;
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getAdditionalInfo(key));
 				if (rs != null) {
@@ -454,6 +455,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						textColor = R.color.color_invalid;
 					}
 				}
+				vl = vl.replace("; ", "\n");
 				needLinks = false;
 
 			} else if (Amenity.PHONE.equals(key)) {
