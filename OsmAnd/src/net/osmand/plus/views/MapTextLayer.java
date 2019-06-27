@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import gnu.trove.set.hash.TIntHashSet;
+import net.osmand.plus.R;
 
 public class MapTextLayer extends OsmandMapLayer {
 
@@ -145,15 +147,19 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void drawShadowText(Canvas cv, String text, float centerX, float centerY, boolean nightMode) {
-		int c = paintTextIcon.getColor();
+		Resources r = view.getApplication().getResources();
 		paintTextIcon.setStyle(Style.STROKE);
-		paintTextIcon.setColor(nightMode ? Color.WHITE : Color.DKGRAY);
+		paintTextIcon.setColor(nightMode
+			? r.getColor(R.color.widgettext_shadow_night)
+			: r.getColor(R.color.map_widget_dark_stroke));
 		paintTextIcon.setStrokeWidth(2);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 		// reset
 		paintTextIcon.setStrokeWidth(2);
 		paintTextIcon.setStyle(Style.FILL);
-		paintTextIcon.setColor(nightMode ? c : Color.WHITE);
+		paintTextIcon.setColor(nightMode
+			? r.getColor(R.color.widgettext_night )
+			: r.getColor(R.color.color_black));
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
