@@ -824,6 +824,7 @@ public class RouteProvider {
 		if (route != null && route.points.size() > 0) {
 			directions = new ArrayList<RouteDirectionInfo>();
 			Iterator<WptPt> iterator = route.points.iterator();
+			float lasttime = 0;
 			while(iterator.hasNext()){
 				WptPt item = iterator.next();
 				try {
@@ -839,12 +840,15 @@ public class RouteProvider {
 						if (distanceToEnd.length > last.routePointOffset && distanceToEnd.length > offset) {
 							float lastDistanceToEnd = distanceToEnd[last.routePointOffset];
 							float currentDistanceToEnd = distanceToEnd[offset];
-							last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / last.getAverageSpeed());
+							if (lasttime != 0) {
+								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
+							} 
 							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
 					} 
 					// save time as a speed because we don't know distance of the route segment
-					float avgSpeed = time;
+					lasttime = time;
+					float avgSpeed = defSpeed;
 					if (!iterator.hasNext() && time > 0) {
 						if (distanceToEnd.length > offset) {
 							avgSpeed = distanceToEnd[offset] / time;
@@ -1128,6 +1132,7 @@ public class RouteProvider {
 		double[] lons = new double[numpoints];
 		int index = 0;
 		String mode;
+		boolean addMissingTurns = true;
 		lats[index] = params.start.getLatitude();
 		lons[index] = params.start.getLongitude();
 		index++;
@@ -1153,9 +1158,11 @@ public class RouteProvider {
 		bpars.putString("fast", params.fast ? "1" : "0");
 		bpars.putString("v", mode);
 		bpars.putString("trackFormat", "gpx");
+		bpars.putString("turnInstructionFormat", "osmand");
 
 		OsmandApplication ctx = (OsmandApplication) params.ctx;
 		List<Location> res = new ArrayList<Location>();
+		List<RouteDirectionInfo > dir = new ArrayList<>();
 
 		IBRouterService brouterService = ctx.getBRouterService();
 		if (brouterService == null) {
@@ -1171,23 +1178,16 @@ public class RouteProvider {
 
 			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
 
-			for (Track track : gpxFile.tracks) {
-				for (TrkSegment ts : track.segments) {
-					for (WptPt p : ts.points) {
-						Location l = new Location("router"); //$NON-NLS-1$
-						l.setLatitude(p.lat);
-						l.setLongitude(p.lon);
-						if (p.ele != Double.NaN) {
-							l.setAltitude(p.ele);
-						}
-						res.add(l);
-					}
-				}
+			dir = parseOsmAndGPXRoute(res, gpxFile, true, params.leftSide, params.mode.getDefaultSpeed());
+
+			if (dir != null) {
+				addMissingTurns = false;
 			}
+
 		} catch (Exception e) {
 			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
 		}
-		return new RouteCalculationResult(res, null, params, null, true);
+		return new RouteCalculationResult(res, dir, params, null, addMissingTurns);
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
