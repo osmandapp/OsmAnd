@@ -3125,4 +3125,13 @@ Pôr do Sol: %2$s</string>
     <string name="collected_data">Dados coletados</string>
     <string name="app_profile_custom_nav_subtitle">.</string>
     <string name="press_again_to_change_the_map_orientation">Pressione novamente para alterar a orientação do mapa</string>
+    <string name="shared_string_min_speed">Velocidade mínima</string>
+    <string name="shared_string_max_speed">Velocidade máxima</string>
+    <string name="default_speed_setting_title">Velocidade padrão</string>
+    <string name="default_speed_setting_descr">Alterar as configurações de velocidade padrão</string>
+    <string name="minmax_speed_dialog_title">Definir velocidade mínima/máxima</string>
+    <string name="default_speed_dialog_msg">Usado para cálculos do tempo de chegada previsto durante o roteamento</string>
+    <string name="new_profile">Novo perfil</string>
+    <string name="shared_string_crash">Erro</string>
+    <string name="last_launch_crashed">"O último lançamento do OsmAnd falhou.  Ajude-nos a melhorar o OsmAnd.  Por favor envie-nos uma mensagem de erro."</string>
 </resources>

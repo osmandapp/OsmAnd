@@ -1036,7 +1036,7 @@
     <string name="shared_string_do_not_use">Kullanma</string>
     <string name="shared_string_enable">Etkinleştir</string>
     <string name="shared_string_disable">Devre dışı bırak</string>
-    <string name="shared_string_enabled">Etkin</string>
+    <string name="shared_string_enabled">Aktif</string>
     <string name="shared_string_disabled">Devre dışı</string>
     <string name="shared_string_selected">Seçili</string>
     <string name="shared_string_never">Hiçbir zaman</string>
@@ -1949,7 +1949,7 @@
     <string name="type_address">Adresi yazın</string>
     <string name="quick_action_btn_tutorial_title">Düğme konumunu değiştir</string>
     <string name="store_tracks_in_monthly_directories_descrp">Kayıtlı parçaları, kayıt ayına (2018-01 gibi) alt klasörler halinde depolayın.</string>
-    <string name="shared_string_reset">Reset</string>
+    <string name="shared_string_reset">Yeniden başlat</string>
     <string name="shared_string_reload">Tekrar yükle</string>
     <string name="mapillary_menu_descr_tile_cache">Güncel verileri görmek için döşemeleri yeniden yükleyin.</string>
     <string name="mapillary_menu_title_tile_cache">Karo önbellek</string>
