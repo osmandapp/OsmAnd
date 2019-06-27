@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -666,6 +668,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		r.setTime(l.getTime());
 		if (l.hasAccuracy()) {
 			r.setAccuracy(l.getAccuracy());
+		}
+		if (VERSION.SDK_INT >= VERSION_CODES.O) {
+			if (l.hasVerticalAccuracy()) {
+				r.setVerticalAccuracy(l.getVerticalAccuracyMeters());
+			}
 		}
 		if (l.hasSpeed()) {
 			r.setSpeed(l.getSpeed());
