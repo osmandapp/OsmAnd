@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/speed_header"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:id="@+id/speed_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="@string/map_widget_speed" />
+
+		<TextView
+			android:id="@+id/speed_text"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="end"
+			android:maxLength="3"
+			android:maxLines="1"
+			android:paddingRight="4dp"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="60" />
+
+		<TextView
+			android:id="@+id/speed_units"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="km/h" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/speed_seekbar_lane"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="@dimen/content_padding">
+
+		<TextView
+			android:id="@+id/speed_seekbar_min_text"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="start"
+			android:paddingStart="@dimen/content_padding_small"
+			android:paddingLeft="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="0" />
+
+		<TextView
+			android:id="@+id/speed_seekbar_max_text"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="end"
+			android:paddingEnd="@dimen/content_padding_small"
+			android:paddingRight="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="100" />
+
+	</LinearLayout>
+
+	<SeekBar
+		android:id="@+id/speed_seekbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:max="100"
+		android:paddingBottom="@dimen/content_padding" />
+
+</LinearLayout>

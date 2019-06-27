@@ -678,9 +678,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		float settingsMinSpeed = settings.MIN_SPEED.get();
 		float settingsMaxSpeed = settings.MAX_SPEED.get();
 
-		final int min = (int) ((settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed()) * ratio[0]);
 		final int[] defaultValue = { Math.round(mode.getDefaultSpeed() * ratio[0]) };
+		final int[] minValue = { Math.round((settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed()) * ratio[0]) };
 		final int[] maxValue = { Math.round((settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed()) * ratio[0]) };
+		final int min = Math.round(router.getMinSpeed() * ratio[0] / 2f);
 		final int max = Math.round(router.getMaxSpeed() * ratio[0] * 1.5f);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -693,6 +694,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setDefaultSpeed(getMyApplication(), defaultValue[0] / ratio[0]);
+				settings.MIN_SPEED.set(minValue[0] / ratio[0]);
 				settings.MAX_SPEED.set(maxValue[0] / ratio[0]);
 			}
 		});
@@ -706,73 +708,99 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			}
 		});
 
-		final SeekBar minSpeedSeekBar = seekbarView.findViewById(R.id.min_speed_seekbar);
-		final TextView minSpeedMinTv = seekbarView.findViewById(R.id.min_speed_seekbar_min_text);
-		final TextView minSpeedMaxTv = seekbarView.findViewById(R.id.min_speed_seekbar_max_text);
-		final TextView minSpeedUnitsTv = seekbarView.findViewById(R.id.min_speed_units);
-		final TextView minSpeedTv = seekbarView.findViewById(R.id.min_speed_text);
-
-		minSpeedMinTv.setText(String.valueOf(min));
-		minSpeedMaxTv.setText(String.valueOf(max));
-		minSpeedTv.setText(String.valueOf(defaultValue[0]));
-		minSpeedUnitsTv.setText(speedUnits);
-		minSpeedSeekBar.setMax(max - min);
-		minSpeedSeekBar.setProgress(Math.max(defaultValue[0] - min, 0));
-		minSpeedSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				int value = progress + min;
-				if (value > maxValue[0]) {
-					value = maxValue[0];
-					minSpeedSeekBar.setProgress(Math.max(value - min, 0));
-				}
-				defaultValue[0] = value;
-				minSpeedTv.setText(String.valueOf(value));
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-			}
-		});
-
-		final SeekBar maxSpeedSeekBar = seekbarView.findViewById(R.id.max_speed_seekbar);
-		final TextView maxSpeedMinTv = seekbarView.findViewById(R.id.max_speed_seekbar_min_text);
-		final TextView maxSpeedMaxTv = seekbarView.findViewById(R.id.max_speed_seekbar_max_text);
-		final TextView maxSpeedUnitsTv = seekbarView.findViewById(R.id.max_speed_units);
-		final TextView maxSpeedTv = seekbarView.findViewById(R.id.max_speed_text);
-
-		maxSpeedMinTv.setText(String.valueOf(min));
-		maxSpeedMaxTv.setText(String.valueOf(max));
-		maxSpeedTv.setText(String.valueOf(maxValue[0]));
-		maxSpeedUnitsTv.setText(speedUnits);
-		maxSpeedSeekBar.setMax(max - min);
-		maxSpeedSeekBar.setProgress(Math.max(maxValue[0] - min, 0));
-		maxSpeedSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				int value = progress + min;
-				if (value < defaultValue[0]) {
-					value = defaultValue[0];
-					maxSpeedSeekBar.setProgress(Math.max(value - min, 0));
-				}
-				maxValue[0] = value;
-				maxSpeedTv.setText(String.valueOf(value));
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-			}
-		});
-
+		setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+		setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+		setupSpeedSlider(SpeedSliderType.MAX_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
 
 		builder.show();
+	}
+
+	private enum SpeedSliderType {
+		DEFAULT_SPEED,
+		MIN_SPEED,
+		MAX_SPEED,
+	}
+
+	private void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] minValue, final int[] defaultValue, final int[] maxValue, final int min, final int max, View seekbarView) {
+		View seekbarLayout;
+		int titleId;
+		final int[] speedValue;
+		switch (type) {
+			case DEFAULT_SPEED:
+				speedValue = defaultValue;
+				seekbarLayout = seekbarView.findViewById(R.id.default_speed_layout);
+				titleId = R.string.default_speed_setting_title;
+				break;
+			case MIN_SPEED:
+				speedValue = minValue;
+				seekbarLayout = seekbarView.findViewById(R.id.min_speed_layout);
+				titleId = R.string.shared_string_min_speed;
+				break;
+			case MAX_SPEED:
+				speedValue = maxValue;
+				seekbarLayout = seekbarView.findViewById(R.id.max_speed_layout);
+				titleId = R.string.shared_string_max_speed;
+				break;
+			default:
+				speedValue = defaultValue;
+				seekbarLayout = seekbarView.findViewById(R.id.default_speed_layout);
+				titleId = R.string.default_speed_setting_title;
+				break;
+		}
+		final SeekBar speedSeekBar = seekbarLayout.findViewById(R.id.speed_seekbar);
+		final TextView speedTitleTv = seekbarLayout.findViewById(R.id.speed_title);
+		final TextView speedMinTv = seekbarLayout.findViewById(R.id.speed_seekbar_min_text);
+		final TextView speedMaxTv = seekbarLayout.findViewById(R.id.speed_seekbar_max_text);
+		final TextView speedUnitsTv = seekbarLayout.findViewById(R.id.speed_units);
+		final TextView speedTv = seekbarLayout.findViewById(R.id.speed_text);
+
+		speedTitleTv.setText(titleId);
+		speedMinTv.setText(String.valueOf(min));
+		speedMaxTv.setText(String.valueOf(max));
+		speedTv.setText(String.valueOf(speedValue[0]));
+		speedUnitsTv.setText(speedUnits);
+		speedSeekBar.setMax(max - min);
+		speedSeekBar.setProgress(Math.max(speedValue[0] - min, 0));
+		speedSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				int value = progress + min;
+				switch (type) {
+					case DEFAULT_SPEED:
+						if (value > maxValue[0]) {
+							value = maxValue[0];
+							speedSeekBar.setProgress(Math.max(value - min, 0));
+						} else if (value < minValue[0]) {
+							value = minValue[0];
+							speedSeekBar.setProgress(Math.max(value - min, 0));
+						}
+						break;
+					case MIN_SPEED:
+						if (value > defaultValue[0]) {
+							value = defaultValue[0];
+							speedSeekBar.setProgress(Math.max(value - min, 0));
+						}
+						break;
+					case MAX_SPEED:
+						if (value < defaultValue[0]) {
+							value = defaultValue[0];
+							speedSeekBar.setProgress(Math.max(value - min, 0));
+						}
+						break;
+					default:
+						break;
+				}
+				speedValue[0] = value;
+				speedTv.setText(String.valueOf(value));
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+		});
 	}
 }
