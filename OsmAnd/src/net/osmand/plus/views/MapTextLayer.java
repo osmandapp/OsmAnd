@@ -106,6 +106,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void drawWrappedText(Canvas cv, String text, float textSize, float x, float y, int lines) {
+		boolean nightMode = view.getApplication().getDaynightHelper().isNightMode();
 		if (text.length() > TEXT_WRAP) {
 			int start = 0;
 			int end = text.length();
@@ -123,14 +124,14 @@ public class MapTextLayer extends OsmandMapLayer {
 					pos++;
 				}
 				if (lastSpace == -1 || (pos == end)) {
-					drawShadowText(cv, text.substring(start, pos), x, y + line * (textSize + 2));
+					drawShadowText(cv, text.substring(start, pos), x, y + line * (textSize + 2), nightMode);
 					start = pos;
 				} else {
 					String subtext = text.substring(start, lastSpace);
 					if (line + 1 == lines) {
 						subtext += "..";
 					}
-					drawShadowText(cv, subtext, x, y + line * (textSize + 2));
+					drawShadowText(cv, subtext, x, y + line * (textSize + 2), nightMode);
 
 					start = lastSpace + 1;
 					limit += (start - pos) - 1;
@@ -139,20 +140,20 @@ public class MapTextLayer extends OsmandMapLayer {
 				line++;
 			}
 		} else {
-			drawShadowText(cv, text, x, y);
+			drawShadowText(cv, text, x, y, nightMode);
 		}
 	}
 
-	private void drawShadowText(Canvas cv, String text, float centerX, float centerY) {
+	private void drawShadowText(Canvas cv, String text, float centerX, float centerY, boolean nightMode) {
 		int c = paintTextIcon.getColor();
 		paintTextIcon.setStyle(Style.STROKE);
-		paintTextIcon.setColor(Color.WHITE);
+		paintTextIcon.setColor(nightMode ? Color.WHITE : Color.DKGRAY);
 		paintTextIcon.setStrokeWidth(2);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 		// reset
 		paintTextIcon.setStrokeWidth(2);
 		paintTextIcon.setStyle(Style.FILL);
-		paintTextIcon.setColor(c);
+		paintTextIcon.setColor(nightMode ? c : Color.WHITE);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
