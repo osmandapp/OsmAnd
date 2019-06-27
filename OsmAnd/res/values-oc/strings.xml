@@ -422,4 +422,25 @@
     <string name="new_profile">Perfiu novèu</string>
     <string name="shared_string_crash">Auvari</string>
     <string name="last_launch_crashed">Falhida dau darrier lançament d\'OsmAnd. Ajudatz-nos per melhorar OsmAnd. Saretz brave de nos avisar per un messatge d\'error.</string>
+    <string name="shared_string_install">Installar</string>
+    <string name="average_speed">Velocitat mejana</string>
+    <string name="average_altitude">Altitud mejana</string>
+    <string name="shared_string_status">Estat</string>
+    <string name="shared_string_select">Seleccionar</string>
+    <string name="shared_string_hide">Amagar</string>
+    <string name="shared_string_update">Actualizar</string>
+    <string name="shared_string_search">Cercar</string>
+    <string name="shared_string_ok">D\'acòrd</string>
+    <string name="shared_string_off">Inactivar</string>
+    <string name="shared_string_enable">Activar</string>
+    <string name="shared_string_disable">Desactivar</string>
+    <string name="shared_string_save">Sauvagardar</string>
+    <string name="shared_string_share">Partejar</string>
+    <string name="shared_string_close">Plegar</string>
+    <string name="shared_string_exit">Sortir</string>
+    <string name="shared_string_map">Mapa</string>
+    <string name="shared_string_add">Ajustar</string>
+    <string name="shared_string_all">Tot</string>
+    <string name="altitude">Altitud</string>
+    <string name="shared_string_name">Nom</string>
 </resources>
