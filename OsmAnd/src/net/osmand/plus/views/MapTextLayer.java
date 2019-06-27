@@ -159,7 +159,7 @@ public class MapTextLayer extends OsmandMapLayer {
 		paintTextIcon.setStyle(Style.FILL);
 		paintTextIcon.setColor(nightMode
 			? r.getColor(R.color.widgettext_night )
-			: r.getColor(R.color.color_black));
+			: r.getColor(R.color.map_widget_dark));
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
