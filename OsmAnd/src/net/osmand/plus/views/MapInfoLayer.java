@@ -305,9 +305,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextState ts = new TextState();
 		ts.textBold = following;
 		ts.night = nightMode;
-		ts.textColor = nightMode ? ContextCompat.getColor(view.getContext(), R.color.widgettext_night) : Color.BLACK;
+		ts.textColor = nightMode ? ContextCompat.getColor(view.getContext(), R.color.widgettext_night) :
+				ContextCompat.getColor(view.getContext(), R.color.widgettext_day);
 		// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent
-		ts.textShadowColor = nightMode ? ContextCompat.getColor(view.getContext(), R.color.widgettext_shadow_night) : Color.WHITE;
+		ts.textShadowColor = nightMode ? ContextCompat.getColor(view.getContext(), R.color.widgettext_shadow_night) :
+				ContextCompat.getColor(view.getContext(), R.color.widgettext_shadow_day);
 		if (!transparent && !nightMode) {
 			ts.textShadowRadius = 0;
 		} else {
