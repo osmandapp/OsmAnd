@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="precision_hdop_and_vdop">Precision horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precision horizontal: %s</string>
     <string name="app_mode_personal_transporter">Personal transporter</string>
     <string name="app_mode_monowheel">Monowheel</string>
     <string name="app_mode_scooter">Scooter</string>
