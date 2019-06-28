@@ -3105,4 +3105,12 @@
     <string name="process_downloading_service">Служба загрузки OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпурный</string>
     <string name="button_rate">Оценить</string>
+    <string name="show_compass_ruler">Показать компас линейку</string>
+    <string name="hide_compass_ruler">Скрыть компас линейку</string>
+    <string name="shared_string_min_speed">Мин. скорость</string>
+    <string name="shared_string_max_speed">Макс. скорость</string>
+    <string name="default_speed_setting_title">Скорость по умолчанию</string>
+    <string name="default_speed_setting_descr">Изменение настроек скорости по умолчанию</string>
+    <string name="default_speed_dialog_msg">Используется для расчета ожидаемого времени прибытия во время навигации</string>
+    <string name="new_profile">Новый профиль</string>
 </resources>

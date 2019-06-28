@@ -234,4 +234,12 @@
     <string name="proxy_settings">Mellomtjener-innstillinger</string>
     <string name="proxy">Mellomtjener</string>
     <string name="privacy">Personvern</string>
+    <string name="shared_string_select">Velg</string>
+    <string name="min_logging_distance">Minste loggingsavstand</string>
+    <string name="min_logging_distance_descr">Filter: Minimumsdistanse til neste loggingspunkt</string>
+    <string name="min_logging_accuracy">Minimumsnøyaktighet for logging</string>
+    <string name="min_logging_accuracy_descr">Filter: Ingen logging med mindre nøyaktigheten nås</string>
+    <string name="min_logging_speed">Minimumshastighet ved logging</string>
+    <string name="min_logging_speed_descr">Filter: Ingen logging under valgt hastighet</string>
+    <string name="gpx_settings">GPX-innstillinger</string>
 </resources>

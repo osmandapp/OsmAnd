@@ -3125,4 +3125,34 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_icon">Ikona</string>
     <string name="collected_data">Zbierané údaje</string>
     <string name="press_again_to_change_the_map_orientation">Stlačte znovu pre zmenu orientácie mapy</string>
+    <string name="shared_string_min_speed">Min. rýchlosť</string>
+    <string name="shared_string_max_speed">Max. rýchlosť</string>
+    <string name="default_speed_setting_title">Predvolená rýchlosť</string>
+    <string name="default_speed_setting_descr">Zmeniť predvoľby rýchlosti</string>
+    <string name="minmax_speed_dialog_title">Nastaviť min./max. rýchlosť</string>
+    <string name="default_speed_dialog_msg">Používa sa na výpočet očakávaného času príjazdu počas navigovania</string>
+    <string name="new_profile">Nový profil</string>
+    <string name="shared_string_crash">Pád aplikácie</string>
+    <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Pomôžte nám vylepšiť OsmAnd. Prosím zašlite nám správu o chybe.</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">• Aplikačné profily: vytvorte vlastné profily pre vaše potreby, s vlastnou ikonou a farbou
+\n
+\n • Predanie nastavenia pre predvolenú a minimálnu a maximálnu rýchlosť v profiloch
+\n
+\n • Pridaný nástroj s aktuálnymi súradnicami
+\n
+\n • Pridané možnosti zobrazenia kompasu na mape s pravítkom polomeru
+\n
+\n • Vylepšené sťahovanie máp na pozadí
+\n
+\n • Opravný výber jazyka Wikipedie
+\n
+\n • Opravené správanie tlačidla kompasu počas navigácie
+\n
+\n • Opravy chýb
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Osobný transportér</string>
+    <string name="app_mode_monowheel">Koleso (monowheel)</string>
+    <string name="app_mode_scooter">Skúter</string>
 </resources>

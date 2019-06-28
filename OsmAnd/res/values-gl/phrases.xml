@@ -3575,4 +3575,25 @@
     <string name="poi_climbing_crag">Si</string>
     <string name="reddit">Reddit</string>
     <string name="poi_rescue_box">Caixa de rescate</string>
+    <string name="poi_hazard_additional_erosion">Perigo: erosión</string>
+    <string name="poi_hazard_additional_rockfall">Perigo: desprendemento de rochas</string>
+    <string name="poi_hazard_additional_nuclear">Perigo: nuclear</string>
+    <string name="poi_hazard_additional_flood">Perigo: inundación</string>
+    <string name="poi_hazard_additional_avalanche">Perigo: alude</string>
+    <string name="poi_hazard_additional_minefield">Perigo: campo minado</string>
+    <string name="poi_hazard_additional_contamination">Perigo: contaminación</string>
+    <string name="poi_defibrillator_location">Localización</string>
+    <string name="poi_changing_table_yes">Cambiador de cueiros: si</string>
+    <string name="poi_changing_table_no">Cambiador de cueiros: non</string>
+    <string name="poi_changing_table_limited">Cambiador de cueiros: limitado</string>
+    <string name="poi_changing_table_location_room">Localización do cambiador de cueiros: sala aparte</string>
+    <string name="poi_changing_table_location_male_toilet">Localización do cambiador de cueiros: no servizo masculino</string>
+    <string name="poi_changing_table_location_female_toilet">Localización do cambiador de cueiros: no servizo feminino</string>
+    <string name="poi_changing_table_location_unisex_toilet">Localización do cambiador de cueiros: no servizo unisex</string>
+    <string name="poi_changing_table_count">Cantidade de cambiadores de cueiros</string>
+    <string name="poi_changing_table_fee_yes">Taxa do cambiador de cueiros: si</string>
+    <string name="poi_changing_table_fee_no">Taxa do cambiador de cueiros: non</string>
+    <string name="poi_charcoal_pile">Morea de carbón</string>
+    <string name="poi_historic_tank">Tanque histórico</string>
+    <string name="poi_hookah_lounge">Bar de cachimbas</string>
 </resources>
