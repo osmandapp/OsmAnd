@@ -716,7 +716,6 @@ interface IOsmAndAidlInterface {
 		* @param id (String) - button id;
 		* @param appPackage (String) - clinet's app package name
 		* @param layerId (String) - id of Osmand's map layer
-		* @param followOpenedPoint (boolean) - if enabled, view will follow opened point;
 		* @param callbackId (long) - {@link IOsmAndAidlCallback} id
 		* @param pointsIds (List<String>) - list of point Ids to which this rules applies to.
 		*
@@ -755,7 +754,6 @@ interface IOsmAndAidlInterface {
 		* @param id (String) - button id;
 		* @param appPackage (String) - clinet's app package name
 		* @param layerId (String) - id of Osmand's map layer
-		* @param followOpenedPoint (boolean) - if enabled, view will follow opened point;
 		* @param callbackId (long) - {@link IOsmAndAidlCallback} id
 		* @param pointsIds (List<String>) - list of point Ids to which this rules applies to.
 		*

@@ -19,7 +19,7 @@ public class ContextMenuButtonsParams implements Parcelable {
 
 	private List<String> pointsIds = new ArrayList<>();
 
-	public ContextMenuButtonsParams(AContextMenuButton leftButton, AContextMenuButton rightButton, String id, String appPackage, String layerId, boolean followOpenedPoint, long callbackId, List<String> pointsIds) {
+	public ContextMenuButtonsParams(AContextMenuButton leftButton, AContextMenuButton rightButton, String id, String appPackage, String layerId, long callbackId, List<String> pointsIds) {
 		this.leftButton = leftButton;
 		this.rightButton = rightButton;
 		this.id = id;
