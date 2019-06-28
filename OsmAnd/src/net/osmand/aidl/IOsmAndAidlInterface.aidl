@@ -704,15 +704,15 @@ interface IOsmAndAidlInterface {
 		* {@link ContextMenuButtonsParams } is a wrapper class for params:
 		*
 		* @param leftButton (AContextMenuButton) - parameters for left context button:
-		* 	@param buttonId (String at AContextMenuButton) - id of button in View
-    *  	@param leftTextCaption (String at AContextMenuButton) - left-side button text
-    *  	@param rightTextCaption (String at AContextMenuButton) - right-side button text
-    *  	@param String leftIconName (String at AContextMenuButton) - name of left-side icon
-    *  	@param String rightIconName (String at AContextMenuButton) - name of right-side icon
-    *  	@param boolean needColorizeIcon (booleanat AContextMenuButton) - flag to apply color to icon
-    *  	@param boolean enabled (boolean at AContextMenuButton) - enable button flag
-		* @param rightButton (AContextMenuButton) - parameters for right context button, see
-		* 				<i>leftButton</i> param for details.
+		* @param buttonId (String at AContextMenuButton) - id of button in View
+		* @param leftTextCaption (String at AContextMenuButton) - left-side button text
+		* @param rightTextCaption (String at AContextMenuButton) - right-side button text
+		* @param String leftIconName (String at AContextMenuButton) - name of left-side icon
+		* @param String rightIconName (String at AContextMenuButton) - name of right-side icon
+		* @param boolean needColorizeIcon (booleanat AContextMenuButton) - flag to apply color to icon
+		* @param boolean enabled (boolean at AContextMenuButton) - enable button flag
+		*
+		* @param rightButton (AContextMenuButton) - parameters for right context button, see <i>leftButton</i> param for details.
 		* @param id (String) - button id;
 		* @param appPackage (String) - clinet's app package name
 		* @param layerId (String) - id of Osmand's map layer
@@ -727,11 +727,11 @@ interface IOsmAndAidlInterface {
     long addContextMenuButtons(in ContextMenuButtonsParams params, IOsmAndAidlCallback callback);
 
 	 /**
-		*	Method to remove Context Menu buttons from OsmAnd Context menu.
+		* Method to remove Context Menu buttons from OsmAnd Context menu.
 		*
-		*	{@link RemoveContextMenuButtonsParams} is a wrapper class for params:
+		* {@link RemoveContextMenuButtonsParams} is a wrapper class for params:
 		*
-		*	@param paramsId (String) - id of {@link ContextMenuButtonsParams} of button you want to remove;
+		* @param paramsId (String) - id of {@link ContextMenuButtonsParams} of button you want to remove;
 		* @param callbackId (long) - id of {@ling IOsmAndAidlCallback} of button you want to remove;
 		*
 		*/
@@ -743,15 +743,15 @@ interface IOsmAndAidlInterface {
 		* {@link UpdateContextMenuButtonsParams } is a wrapper class for params:
 		*
 		* @param leftButton (AContextMenuButton) - parameters for left context button:
-		* 	@param buttonId (String at AContextMenuButton) - id of button in View
-    *  	@param leftTextCaption (String at AContextMenuButton) - left-side button text
-    *  	@param rightTextCaption (String at AContextMenuButton) - right-side button text
-    *  	@param String leftIconName (String at AContextMenuButton) - name of left-side icon
-    *  	@param String rightIconName (String at AContextMenuButton) - name of right-side icon
-    *  	@param boolean needColorizeIcon (booleanat AContextMenuButton) - flag to apply color to icon
-    *  	@param boolean enabled (boolean at AContextMenuButton) - enable button flag
-		* @param rightButton (AContextMenuButton) - parameters for right context button, see
-		* 				<i>leftButton</i> param for details.
+		* @param buttonId (String at AContextMenuButton) - id of button in View
+		* @param leftTextCaption (String at AContextMenuButton) - left-side button text
+		* @param rightTextCaption (String at AContextMenuButton) - right-side button text
+		* @param String leftIconName (String at AContextMenuButton) - name of left-side icon
+		* @param String rightIconName (String at AContextMenuButton) - name of right-side icon
+		* @param boolean needColorizeIcon (booleanat AContextMenuButton) - flag to apply color to icon
+		* @param boolean enabled (boolean at AContextMenuButton) - enable button flag
+		*
+		* @param rightButton (AContextMenuButton) - parameters for right context button, see <i>leftButton</i> param for details.
 		* @param id (String) - button id;
 		* @param appPackage (String) - clinet's app package name
 		* @param layerId (String) - id of Osmand's map layer
@@ -775,31 +775,36 @@ interface IOsmAndAidlInterface {
     boolean areOsmandSettingsCustomized(in OsmandSettingsInfoParams params);
 
 	 /**
-		*	Method to customize parameters of OsmAnd.
+		* Method to customize parameters of OsmAnd.
 		*
-		*	@param params (CustomizationInfoParams) - wrapper class for custom settings.
-		*		@param settingsParams (OsmandSettingsParams) - wrapper class for OsmAnd shared preferences
-		*					 params. See {@link #customizeOsmandSettings(in OsmandSettingsParams params) customizeOsmandSettings}
-		*					 method description for details.
-		* 	@param navDrawerHeaderParams (NavDrawerHeaderParams) - wrapper class for OsmAnd navdrawer header params.
+		* @param params (CustomizationInfoParams) - wrapper class for custom settings and ui.
+		*
+		* @param settingsParams (OsmandSettingsParams) - wrapper class for OsmAnd shared preferences params.
+		* 			   See {@link #customizeOsmandSettings(in OsmandSettingsParams params) customizeOsmandSettings}
+		* 			   method description for details.
+		* @param navDrawerHeaderParams (NavDrawerHeaderParams) - wrapper class for OsmAnd navdrawer header params.
 		* 			   See {@link #setNavDrawerLogoWithParams(in NavDrawerHeaderParams params) setNavDrawerLogoWithParams}
 		* 			   method description for details.
-		*   @param navDrawerFooterParams (NavDrawerFooterParams) - wrapper class for OsmAnd navdrawer footer params.
+		* @param navDrawerFooterParams (NavDrawerFooterParams) - wrapper class for OsmAnd navdrawer footer params.
 		* 			   See {@link #setNavDrawerFooterWithParams(in NavDrawerFooterParams params) setNavDrawerFooterWithParams}
 		* 			   method description for details.
-		*   @param visibilityWidgetsParams (ArrayList<SetWidgetsParams>) - wrapper class for OsmAnd widgets visibility.
+		* @param visibilityWidgetsParams (ArrayList<SetWidgetsParams>) - wrapper class for OsmAnd widgets visibility.
 		* 			   See {@link #regWidgetVisibility(in SetWidgetsParams params) regWidgetVisibility}
 		* 			   method description for details.
-		*   @param availabilityWidgetsParams (ArrayList<SetWidgetsParams>) - wrapper class for OsmAnd widgets availability.
+		* @param availabilityWidgetsParams (ArrayList<SetWidgetsParams>) - wrapper class for OsmAnd widgets availability.
 		* 			   See {@link #regWidgetAvailability(in SetWidgetsParams params) regWidgetAvailability}
 		* 			   method description for details.
-		*   @param pluginsParams (ArrayList<PluginParams>) - wrapper class for OsmAnd plugins states params.
+		* @param pluginsParams (ArrayList<PluginParams>) - wrapper class for OsmAnd plugins states params.
 		* 			   See {@link #changePluginState(in PluginParams params) changePluginState}
 		* 			   method description for details.
-		*   @param featuresEnabledIds (List<String>) - list of UI elements (like QuickSearch button) to show.
-		*   @param featuresDisabledIds (List<String>) - list of UI elements (like QuickSearch button) to hide.
-		*   @param featuresEnabledPatterns (List<String>) - list of NavDrawer menu items to show.
-		*   @param featuresDisabledPatterns (List<String>) - list of NavDrawer menu items to hide.
+		* @param featuresEnabledIds (List<String>) - list of UI elements (like QuickSearch button) to show.
+		* 			   See {@link #setEnabledIds(in List<String> ids) setEnabledIds}
+		* @param featuresDisabledIds (List<String>) - list of UI elements (like QuickSearch button) to hide.
+		* 			   See {@link #setDisabledIds(in List<String> ids) setDisabledIds}
+		* @param featuresEnabledPatterns (List<String>) - list of NavDrawer menu items to show.
+		* 			   See {@link #setEnabledPatterns(in List<String> patterns) setEnabledPatterns}
+		* @param featuresDisabledPatterns (List<String>) - list of NavDrawer menu items to hide.
+		* 			   See {@link #setDisabledPatterns(in List<String> patterns) setDisabledPatterns}
 		*
 		*/
     boolean setCustomization(in CustomizationInfoParams params);
