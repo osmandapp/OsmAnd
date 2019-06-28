@@ -192,7 +192,7 @@ interface IOsmAndAidlInterface {
      *
      * @param layerId (String) - layer id.
      * @param pointId (String) - point id.
-     * @param updateOpenedMenuAndMap (boolean) - flag that enable folowing mode and menu updates for the point
+     * @param updateOpenedMenuAndMap (boolean) - flag to enable folowing mode and menu updates for point
      * @param shortName (String) - short name (single char). Displayed on the map.
      * @param fullName (String) - full name. Displayed in the context menu on first row.
      * @param typeName (String) - type name. Displayed in context menu on second row.
@@ -692,7 +692,7 @@ interface IOsmAndAidlInterface {
     /**
      * Method to register for updates during navgation. Notifies user about distance to the next turn and its type.
      *
-     * @param subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from updates
+     * @param subscribeToUpdates (boolean) - subscribe or unsubscribe from updates
      * @param callbackId (long) - id of callback, needed to unsubscribe from updates
      * @param callback (IOsmAndAidlCallback) - callback to notify user on navigation data change
      */
