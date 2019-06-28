@@ -3060,4 +3060,27 @@
     <string name="public_transport_type">Tipo de transporte</string>
     <string name="searching_gps">Buscando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
+    <string name="app_mode_ufo">Ovni</string>
+    <string name="release_3_4">• Perfiles de aplicación: crea tu propio perfil según tus necesidades, con un icono y color personalizado
+\n
+\n • Se añadió en los perfiles, la velocidad predefinida y la velocidad mín./máx.
+\n
+\n • Se añadió un widget con las coordenadas actuales
+\n
+\n • Se añadieron opciones para mostrar la brújula en el mapa con una regla radial
+\n
+\n • Se mejoraron las descargas de mapas en segundo plano
+\n
+\n • Se corrigió la selección de idioma de Wikipedia
+\n
+\n • Se corrigió el comportamiento de los botones de la brújula durante la navegación
+\n
+\n • Corrección de errores
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Transportador personal</string>
+    <string name="app_mode_monowheel">Monociclo</string>
+    <string name="app_mode_scooter">Motoneta</string>
+    <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisión horizontal: %s</string>
 </resources>
