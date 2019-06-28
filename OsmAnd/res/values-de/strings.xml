@@ -3144,4 +3144,35 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides und außerhalb der Piste sind inoffizielle Routen und Passagen. Typischerweise nicht angelegt, nicht von Beamten gepflegt und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Drücken Sie erneut, um die Kartenausrichtung zu ändern</string>
+    <string name="quick_action_need_to_add_item_to_list">"Sie müssen mindestens einen Eintrag in die Liste der Quick Action Settings hinzufügen. "</string>
+    <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
+    <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
+    <string name="default_speed_setting_title">Standardgeschwindigkeit</string>
+    <string name="default_speed_setting_descr">Ändern der Standardgeschwindigkeitseinstellungen</string>
+    <string name="minmax_speed_dialog_title">Min/Max Geschwindigkeit einstellen</string>
+    <string name="default_speed_dialog_msg">Wird für die Berechnung der erwarteten Ankunftszeit während des Routings verwendet</string>
+    <string name="new_profile">Neues Profil</string>
+    <string name="shared_string_crash">Absturz</string>
+    <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Helfen Sie uns, OsmAnd zu verbessern. Bitte senden Sie uns eine Fehlermeldung.</string>
+    <string name="release_3_4">- Anwendungsprofile: Erstelle dein eigenes Profil für deine Bedürfnisse, mit einem benutzerdefinierten Symbol und einer eigenen Farbe
+\n
+\n - Hinzufügen von Einstellungen für Standard- und Min/Max-Geschwindigkeit für Profile
+\n
+\n - Hinzufügen eines Widgets mit aktuellen Koordinaten
+\n
+\n - Hinzufügen von Optionen, um den Kompass auf der Karte mit einem Radiuslineal anzuzeigen.
+\n
+\n - Verbesserte Kartendownloads im Hintergrund
+\n
+\n - Die Sprachauswahl in Wikipedia wurde korrigiert
+\n
+\n - Das Verhalten der Kompasstaste während der Navigation wurde korrigiert
+\n
+\n - Fehlerbehebungen
+\n
+\n</string>
+    <string name="app_mode_monowheel">Einrad</string>
+    <string name="app_mode_scooter">Motorroller</string>
+    <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1s, vertikal: %2s</string>
+    <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
 </resources>
