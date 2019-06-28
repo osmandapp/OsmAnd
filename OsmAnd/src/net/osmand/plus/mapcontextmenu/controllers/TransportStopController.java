@@ -29,6 +29,7 @@ import gnu.trove.list.array.TLongArrayList;
 public class TransportStopController extends MenuController {
 
 	public static final int SHOW_STOPS_RADIUS_METERS = 150;
+	public static final int SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS = 400;
 
 	private TransportStop transportStop;
 	private List<TransportStopRoute> routes = new ArrayList<>();

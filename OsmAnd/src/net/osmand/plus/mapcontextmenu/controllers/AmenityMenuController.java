@@ -37,7 +37,9 @@ import java.util.List;
 import java.util.Map;
 
 import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TLongObjectHashMap;
+
+import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_STOPS_RADIUS_METERS;
+import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS;
 
 public class AmenityMenuController extends MenuController {
 
@@ -281,7 +283,7 @@ public class AmenityMenuController extends MenuController {
 			for (TransportIndexRepository t : reps) {
 				ArrayList<TransportStop> ls = new ArrayList<>();
 				QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
-						isSubwayEntrance ? 400 : 150);
+						isSubwayEntrance ? SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS : SHOW_STOPS_RADIUS_METERS);
 				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 				for (TransportStop tstop : ls) {
 					if (!addedTransportStops.contains(tstop.getId())) {
@@ -321,7 +323,7 @@ public class AmenityMenuController extends MenuController {
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
 				TransportStopType type = TransportStopType.findType(rs.getType());
-				if (isSubwayEntrance && type != TransportStopType.SUBWAY && dist > 150) {
+				if (isSubwayEntrance && type != TransportStopType.SUBWAY && dist > SHOW_STOPS_RADIUS_METERS) {
 					continue;
 				}
 				TransportStopRoute r = new TransportStopRoute();

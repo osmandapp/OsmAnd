@@ -46,6 +46,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
+import net.osmand.data.TransportStopExit;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -80,6 +81,7 @@ import gnu.trove.list.array.TLongArrayList;
 
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
 import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_STOPS_RADIUS_METERS;
+import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -864,31 +866,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 			if (transportStopAmenities.size() > 0) {
-				List<TransportStop> transportStops = findTransportStopsAt(latLon.getLatitude(), latLon.getLongitude());
-				List<TransportStop> transportStopsReplacement = new ArrayList<>();
 				for (Amenity amenity : transportStopAmenities) {
-					List<TransportStop> amenityTransportStops = new ArrayList<>();
-					for (TransportStop transportStop : transportStops) {
-						if (transportStop.getName().startsWith(amenity.getName())) {
-							amenityTransportStops.add(transportStop);
-							transportStop.setAmenity(amenity);
-						}
-					}
-					if (amenityTransportStops.size() > 0) {
-						selectedObjects.remove(amenity);
-						if (amenityTransportStops.size() > 1) {
-							sortTransportStops(amenity.getLocation(), amenityTransportStops);
-						}
-						TransportStop amenityTransportStop = amenityTransportStops.get(0);
-						if (!transportStopsReplacement.contains(amenityTransportStop)) {
-							transportStopsReplacement.add(amenityTransportStop);
-						}
-					}
-				}
-				if (transportStopsReplacement.size() > 0) {
-					TransportStopsLayer transportStopsLayer = activity.getMapLayers().getTransportStopsLayer();
-					if (transportStopsLayer != null) {
-						for (TransportStop transportStop : transportStopsReplacement) {
+					TransportStop transportStop = findBestTransportStopForAmenity(amenity);
+					if (transportStop != null) {
+						TransportStopsLayer transportStopsLayer = activity.getMapLayers().getTransportStopsLayer();
+						if (transportStopsLayer != null) {
+							selectedObjects.remove(amenity);
 							selectedObjects.put(transportStop, transportStopsLayer);
 						}
 					}
@@ -911,7 +894,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@NonNull
-	private List<TransportStop> findTransportStopsAt(double latitude, double longitude) {
+	private List<TransportStop> findTransportStopsAt(double latitude, double longitude, int radiusMeters) {
 		ArrayList<TransportStop> transportStops = new ArrayList<>();
 		List<TransportIndexRepository> reps =
 				activity.getMyApplication().getResourceManager().searchTransportRepositories(latitude, longitude);
@@ -919,7 +902,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		TLongArrayList addedTransportStops = new TLongArrayList();
 		for (TransportIndexRepository t : reps) {
 			ArrayList<TransportStop> ls = new ArrayList<>();
-			QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, SHOW_STOPS_RADIUS_METERS);
+			QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, radiusMeters);
 			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 			for (TransportStop tstop : ls) {
 				if (!addedTransportStops.contains(tstop.getId())) {
@@ -931,6 +914,42 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 		return transportStops;
+	}
+
+	@Nullable
+	private TransportStop findBestTransportStopForAmenity(Amenity amenity) {
+		TransportStop transportStop = null;
+		boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
+
+		LatLon loc = amenity.getLocation();
+		int radiusMeters = isSubwayEntrance ? SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS : SHOW_STOPS_RADIUS_METERS;
+		List<TransportStop> transportStops = findTransportStopsAt(loc.getLatitude(), loc.getLongitude(), radiusMeters);
+		sortTransportStops(loc, transportStops);
+
+		if (isSubwayEntrance) {
+			transportStop = getBestTransportStopForAmenity(transportStops, amenity);
+		} else {
+			for (TransportStop stop : transportStops) {
+				if (stop.getName().startsWith(amenity.getName())) {
+					stop.setAmenity(amenity);
+					transportStop = stop;
+					break;
+				}
+			}
+		}
+		return transportStop;
+	}
+
+	private TransportStop getBestTransportStopForAmenity(List<TransportStop> transportStops, Amenity amenity) {
+		for (TransportStop stop : transportStops) {
+			List<TransportStopExit> stopExits = stop.getExits();
+			for (TransportStopExit exit : stopExits) {
+				if (exit.getLocation().equals(amenity.getLocation())) {
+					return stop;
+				}
+			}
+		}
+		return null;
 	}
 
 	@NonNull
