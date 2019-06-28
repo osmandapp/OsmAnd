@@ -981,7 +981,7 @@
     <string name="poi_boat_sharing">Compartilhamento de barcos</string>
     <string name="poi_dock">Doca</string>
     <string name="poi_cutline">Linha de corte florestal</string>
-    <string name="poi_toilets">Banheiro</string>
+    <string name="poi_toilets">Casa de banho;Banheiros</string>
     <string name="poi_shower">Chuveiro</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Bordel</string>
@@ -3587,4 +3587,5 @@
     <string name="poi_changing_table_fee_no">Taxa da mesa muda-fraldas: não</string>
     <string name="poi_charcoal_pile">Pilha de carvão</string>
     <string name="poi_historic_tank">Tanque histórico</string>
+    <string name="poi_hookah_lounge">Salão Hookah</string>
 </resources>
