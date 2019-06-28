@@ -3134,4 +3134,27 @@ Pôr do Sol: %2$s</string>
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Erro</string>
     <string name="last_launch_crashed">"O último lançamento do OsmAnd falhou.  Ajude-nos a melhorar o OsmAnd.  Por favor envie-nos uma mensagem de erro."</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">• Perfis de aplicativos: crie seu próprio perfil para suas necessidades, com um ícone e cor personalizados
+\n
+\n  • Adicionar configurações para padrão e velocidade mínima/máxima para perfis
+\n
+\n  • Adicionar um widget com coordenadas atuais
+\n
+\n  • Adicione opções para mostrar a bússola no mapa com uma régua de raio
+\n
+\n  • Melhorias no download de mapas em segundo plano
+\n
+\n  • Corrigida a seleção de idioma da Wikipedia
+\n
+\n  • Comportamento do botão bússola fixo durante a navegação
+\n
+\n  • Correções de erros
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Transportador pessoal</string>
+    <string name="app_mode_monowheel">Monociclo</string>
+    <string name="app_mode_scooter">Lambreta</string>
+    <string name="precision_hdop_and_vdop">Precisão horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisão horizontal: %s</string>
 </resources>
