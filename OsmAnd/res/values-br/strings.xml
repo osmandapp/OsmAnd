@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="edit_filter">Embann ar sil</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit_filter">Embann ar sil</string>
     <string name="subcategories">Isrummadoù</string>
     <string name="selected_categories">Rummadoù diuzet</string>
     <string name="create_custom_poi">Krouiñ lec\'hioù dedenn personelaet</string>
@@ -7,16 +9,16 @@
     <string name="enter_lon">Enankit an hedred</string>
     <string name="enter_lat">Enankit al ledred</string>
     <string name="enter_lat_and_lon">Enankit al ledred hag an hedred</string>
-	<string name="dd_mm_ss_format">DD°MM′SS″</string>
-	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="dd_ddddd_format">DD.DDDDD°</string>
-	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
-	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
-	<string name="east_abbreviation">R</string>
-	<string name="west_abbreviation">K</string>
-	<string name="south_abbreviation">S</string>
-	<string name="north_abbreviation">N</string>
-	<string name="optional_point_name">Anv diret ar pik</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_dddddd_format">DD.DDDDDD°</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
+    <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
+    <string name="east_abbreviation">R</string>
+    <string name="west_abbreviation">K</string>
+    <string name="south_abbreviation">S</string>
+    <string name="north_abbreviation">N</string>
+    <string name="optional_point_name">Anv diret ar pik</string>
     <string name="transport_nearby_routes_within">Trehentadoù e-kichen</string>
     <string name="transport_nearby_routes">NEPELL</string>
     <string name="enter_the_file_name">Enankit anv ar restr.</string>
@@ -34,4 +36,28 @@
     <string name="shared_string_gpx_file">Restr GPX</string>
     <string name="osc_file">Restr OSC</string>
     <string name="choose_file_type">Dibabit rizh ar restr</string>
-    </resources>
+    <string name="use_osm_live_routing_description">Gweredekaat ar merdeiñ gant roadennoù OsmAnd Live.</string>
+    <string name="use_osm_live_routing">Merdeiñ gant OsmAnd Live</string>
+    <string name="finish_navigation">Echuiñ ar merdeiñ</string>
+    <string name="impassable_road_desc">Choazit an hentoù n\'hoc\'h eus ket c\'hoant implijout e-pad ar merdeiñ.</string>
+    <string name="shared_string_navigation">Merdeiñ</string>
+    <string name="welcome_text">Gant OsmAnd eo posubl sellout ouzh kartennoù hep internet, ha merdeiñ hep rouedad er bed a-bezh.</string>
+    <string name="routing_settings_2">Arventennoù ar merdeiñ</string>
+    <string name="save_track_to_gpx_descrp">Ur roud GPX a vez enrollet e-pad ar veaj d\'un doare emgefreek e-barzh teuliad ar roudoù.</string>
+    <string name="animate_my_location_desc">Gweredekaat heuliañ \'Ma Lec\'hiadur\' war ar gartenn e-pad ar merdeiñ.</string>
+    <string name="quick_action_resume_pause_navigation">Ehanañ / Kenderc\'hel gant ar merdeiñ</string>
+    <string name="quick_action_resume_pause_navigation_descr">Klikit amañ evit ehanañ pe kenderc\'hel gant ar merdeiñ.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Diskouez ar prenestr \'Echu eo ar veaj\'</string>
+    <string name="quick_action_start_stop_navigation">Kregiñ/Echuiñ ar merdeiñ</string>
+    <string name="quick_action_start_stop_navigation_descr">Klikit amañ evit kregiñ pe echuiñ ar merdeiñ.</string>
+    <string name="choose_navigation_type">Choazit profil merdeiñ</string>
+    <string name="nautical_render_descr">"Stil evit bageal.  Arc\'hwelioù pouezusañ : Tourioù-tan,  balizennoù, kanolioù evit bageal, porzhioù,  donder an dour."</string>
+    <string name="light_rs_render_descr">"Stil simpl gant livioù kemm mat etreze, evit mont gant ar c\'harr-tan. Sklerijenn dous diouzh an noz.  Arc\'hwelioù pouezusañ : straedoù orañjez lakaet war-wel, traoù n\'int ket pouezus kuzhet."</string>
+    <string name="avoid_roads_descr">Choazit ar straed da laoskel a-gostez war ar gartenn pe e-barzh al listenn :</string>
+    <string name="simulate_navigation">Darvanañ ar merdeiñ</string>
+    <string name="public_transport_try_ped">Klaskit ar merdeiñ war-droad.</string>
+    <string name="nav_type_hint">Doare Merdeiñ</string>
+    <string name="profile_alert_need_routing_type_title">Choazit doare merdeiñ</string>
+    <string name="profile_alert_need_routing_type_msg">Ret eo deoc\'h choaz doare Merdeiñ evit krouiñ Profil Arloañ Nevez</string>
+    <string name="select_nav_profile_dialog_title">Choaz doare Merdeiñ</string>
+</resources>
