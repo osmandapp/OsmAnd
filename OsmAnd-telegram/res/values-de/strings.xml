@@ -72,7 +72,7 @@
     <string name="authentication_code">Authentifizierungscode</string>
     <string name="authentication_code_descr">Telegram hat Ihnen einen Code für OsmAnd zur Anmeldung an Ihrem Konto gesendet.</string>
     <string name="enter_password">Passwort eingeben</string>
-    <string name="shared_string_login">Anmelden</string>
+    <string name="shared_string_login">Anmeldung</string>
     <string name="shared_string_logout">Abmelden</string>
     <string name="not_logged_in">Sie sind nicht angemeldet</string>
     <string name="shared_string_continue">Fortfahren</string>
@@ -127,7 +127,7 @@
     <string name="connecting_to_the_internet">Verbindung zum Internet</string>
     <string name="background_work_description">Akkuoptimierungseinstellungen, um die Standortfreigabe zu stabilisieren.</string>
     <string name="password_descr">Telegram-Passwort</string>
-    <string name="nm">kn</string>
+    <string name="nm">sm</string>
     <string name="nm_h">kn/h</string>
     <string name="last_updated_location">Zuletzt aktualisierter Ort:</string>
     <string name="not_possible_to_send_to_telegram_chats">Es ist nicht möglich, an Telegram-Chats zu senden:</string>
