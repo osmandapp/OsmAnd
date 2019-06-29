@@ -3155,4 +3155,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Osobný transportér</string>
     <string name="app_mode_monowheel">Koleso (monowheel)</string>
     <string name="app_mode_scooter">Skúter</string>
+    <string name="precision_hdop_and_vdop">Presnosť horizontálna: %1$s, vertikálna: %2$s</string>
+    <string name="precision_hdop">Presnosť horizontálna: %s</string>
 </resources>
