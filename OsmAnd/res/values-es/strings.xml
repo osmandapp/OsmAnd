@@ -3096,7 +3096,7 @@
     <string name="collected_data_descr">Lista de datos que deseas compartir con OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Recopilamos estos datos para comprender los mapas de qué regiones y países son los más populares.</string>
     <string name="visited_screens_collect_descr">Recopilamos estos datos para conocer las características más populares de OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Al pulsar en \"Permitir\" manifiestas tu acuerdo con nuestro %1$s</string>
+    <string name="privacy_and_security_change_descr">Al pulsar en \"Permitir\" está de acuerdo con nuestra %1$s</string>
     <string name="settings_privacy_and_security">Privacidad y seguridad</string>
     <string name="settings_privacy_and_security_desc">Elige tus datos a compartir con nosotros</string>
     <string name="shared_string_no_thank_you">No, gracias</string>
@@ -3118,11 +3118,11 @@
     <string name="shared_string_icon">Icono</string>
     <string name="collected_data">Datos recogidos</string>
     <string name="press_again_to_change_the_map_orientation">Pulsa otra vez para cambiar la orientación de mapa</string>
-    <string name="shared_string_min_speed">Velocidad mín.</string>
-    <string name="shared_string_max_speed">Velocidad máx.</string>
+    <string name="shared_string_min_speed">Velocidad mínima</string>
+    <string name="shared_string_max_speed">Velocidad máxima</string>
     <string name="default_speed_setting_title">Velocidad por defecto</string>
     <string name="default_speed_setting_descr">Cambiar la configuración de velocidad por defecto</string>
-    <string name="minmax_speed_dialog_title">Ajustar la velocidad mín/máx</string>
+    <string name="minmax_speed_dialog_title">Ajustar la velocidad mínima/máxima</string>
     <string name="default_speed_dialog_msg">"Se utiliza para los cálculos de la hora prevista de llegada  durante el enrutamiento"</string>
     <string name="new_profile">Nuevo perfil</string>
     <string name="last_launch_crashed">Las última ejecución de OsmAnd falló. Ayúdanos a mejorar OsmAnd. Por favor, envíanos un mensaje de error.</string>
