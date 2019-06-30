@@ -2789,7 +2789,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
     <string name="nautical_render_descr">Nautischer Navigationsstil. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Seewege und Markierungen, Häfen, Seezeichendienste, Tiefenlinien.</string>
-    <string name="ski_map_render_descr">Stil für Skifahrer. Hauptmerkmale: Zweckdienliches Rendern von Pisten, Liften und anderen Einrichtungen beim Skifahren. Weniger ablenkende sekundäre Kartenobjekte.</string>
+    <string name="ski_map_render_descr">Stil für Skifahrer. Hauptmerkmale: Zweckdienliches Rendern von Pisten, Liften und anderen Einrichtungen beim Skifahren. Weniger störende sekundäre Kartenobjekte.</string>
     <string name="light_rs_render_descr">Einfacher und kontrastreicher Stil für die Navigation im Auto. Schonend für die Augen im Nachtmodus. Hauptmerkmale: Konturlinien, Straßendarstellung in kontrastreichem Orange, weniger störende sekundäre Kartenobjekte.</string>
     <string name="topo_render_descr">Kontraststil für Wandern, Trekking und Radfahren in der Natur. Gute Lesbarkeit bei komplexer Außenbeleuchtung. Hauptmerkmale: Kontrastreiche Straßen und natürliche Objekte, verschiedene Arten von Routen, Höhenlinien mit erweiterten Einstellungen, mehr Details bei entsprechenden Zoomstufen als der Standardstil. Die Option Oberflächenintegrität ermöglicht die Unterscheidung der Straßenoberflächenqualität. Kein Nachtmodus.</string>
     <string name="mapnik_render_descr">Alter \'Mapnik\'-Stil, Standard-Rendering-Stil. Hauptmerkmale: Die Farben ähneln dem Mapnik-Stil.</string>
@@ -3003,7 +3003,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
-    <string name="avoid_pt_types">Verkehrsmittel ausschließen …</string>
+    <string name="avoid_pt_types">Verkehrsmittel ausschließen…</string>
     <string name="shared_string_walk">Gehen</string>
     <string name="save_poi_value_exceed_length">Die maximale Länge des Tags \"%s\" beträgt 255 Zeichen. 
 \nBitte kürzen Sie diesen, um fortzufahren.</string>
