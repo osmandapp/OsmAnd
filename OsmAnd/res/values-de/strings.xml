@@ -3082,7 +3082,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_alert_need_profile_name_title">Profilnamen eingeben</string>
     <string name="profile_alert_need_profile_name_msg">Der Profilname sollte nicht leer sein!</string>
-    <string name="profile_alert_duplicate_name_title">Namensdoppel</string>
+    <string name="profile_alert_duplicate_name_title">Doppelter Name</string>
     <string name="profile_alert_duplicate_name_msg">Es gibt bereits ein Profil mit diesem Namen</string>
     <string name="profile_alert_cant_delete_base">Das OsmAnd-Basisprofil kann nicht gelöscht werden</string>
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
