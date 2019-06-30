@@ -3148,7 +3148,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
     <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
     <string name="default_speed_setting_title">Standardgeschwindigkeit</string>
-    <string name="default_speed_setting_descr">Standardgeschwindigkeitseinstellungen ändern</string>
+    <string name="default_speed_setting_descr">Standard-Geschwindigkeitseinstellungen ändern</string>
     <string name="minmax_speed_dialog_title">Min/Max Geschwindigkeit einstellen</string>
     <string name="default_speed_dialog_msg">Wird für die Berechnung der erwarteten Ankunftszeit während des Routings verwendet</string>
     <string name="new_profile">Neues Profil</string>
