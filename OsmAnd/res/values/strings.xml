@@ -17,10 +17,11 @@
         • Add settings for default and min/max speed for profiles\n\n
         • Add a widget with current coordinates\n\n
         • Add options to show the compass on the map with a radius ruler\n\n
-        • Improved map downloads in the background\n\n
+        • Fix background track logging\n\n
+        • Improved background map downloads\n\n
         • Fixed Wikipedia language selection\n\n
         • Fixed compass button behavior during navigation\n\n
-        • Bug fixes\n\n
+        • Other bug fixes\n\n
     </string>
     <string name="precision_hdop_and_vdop">Precision horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precision horizontal: %s</string>
