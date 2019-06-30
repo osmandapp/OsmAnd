@@ -3083,4 +3083,47 @@
     <string name="app_mode_scooter">Motoneta</string>
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
+    <string name="rate_dialog_descr">Por favor, dedícanos 30 segundos, comparte comentarios y califica nuestro trabajo en Google Play.</string>
+    <string name="button_rate">Puntúa</string>
+    <string name="shared_string_privacy_policy">Política de privacidad</string>
+    <string name="help_us_make_osmand_better">¡Ayúdanos a mejorar OsmAnd!</string>
+    <string name="make_osmand_better_descr">Permite que OsmAnd recopile y procese datos anónimos de uso de la aplicación. No recopilamos ni almacenamos datos sobre su ubicación, ni sobre los lugares que ve en el mapa.
+\n
+\nSiempre puedes cambiar su selección en Configuración &gt; Privacidad y seguridad.</string>
+    <string name="choose_data_to_share">Elige el tipo de datos que deseas compartir:</string>
+    <string name="downloaded_maps">Mapas descargados</string>
+    <string name="visited_screens">Pantallas visitadas</string>
+    <string name="collected_data_descr">Lista de datos que deseas compartir con OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Recopilamos estos datos para comprender los mapas de qué regiones y países son los más populares.</string>
+    <string name="visited_screens_collect_descr">Recopilamos estos datos para conocer las características más populares de OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Al pulsar en \"Permitir\" manifiestas tu acuerdo con nuestro %1$s</string>
+    <string name="settings_privacy_and_security">Privacidad y seguridad</string>
+    <string name="settings_privacy_and_security_desc">Elige tus datos a compartir con nosotros</string>
+    <string name="shared_string_no_thank_you">No, gracias</string>
+    <string name="shared_string_allow">Permitir</string>
+    <string name="profile_name_hint">Nombre de perfil</string>
+    <string name="nav_type_hint">Tipo de navegación</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Autobús de enlace</string>
+    <string name="app_mode_subway">Metro</string>
+    <string name="app_mode_horse">Caballo</string>
+    <string name="app_mode_helicopter">Helicóptero</string>
+    <string name="osmand_routing_promo">Puedes añadir tu propia versión modificada de routing.xml a ..osmand/routing</string>
+    <string name="app_mode_skiing">Esquí</string>
+    <string name="base_profile_descr_ski">Esquí</string>
+    <string name="show_compass_ruler">Mostrar regla de brújula</string>
+    <string name="hide_compass_ruler">Ocultar regla de brújula</string>
+    <string name="process_downloading_service">Servicio de descarga de OsmAnd</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Icono</string>
+    <string name="collected_data">Datos recogidos</string>
+    <string name="press_again_to_change_the_map_orientation">Pulsa otra vez para cambiar la orientación de mapa</string>
+    <string name="shared_string_min_speed">Velocidad mín.</string>
+    <string name="shared_string_max_speed">Velocidad máx.</string>
+    <string name="default_speed_setting_title">Velocidad por defecto</string>
+    <string name="default_speed_setting_descr">Cambiar la configuración de velocidad por defecto</string>
+    <string name="minmax_speed_dialog_title">Ajustar la velocidad mín/máx</string>
+    <string name="default_speed_dialog_msg">"Se utiliza para los cálculos de la hora prevista de llegada  durante el enrutamiento"</string>
+    <string name="new_profile">Nuevo perfil</string>
+    <string name="last_launch_crashed">Las última ejecución de OsmAnd falló. Ayúdanos a mejorar OsmAnd. Por favor, envíanos un mensaje de error.</string>
 </resources>
