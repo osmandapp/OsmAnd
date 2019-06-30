@@ -1829,7 +1829,7 @@ Lon %2$s</string>
     <string name="av_audio_format_descr">Audioausgabeformat wählen.</string>
     <string name="av_audio_bitrate">Audio-Bitrate</string>
     <string name="av_audio_bitrate_descr">Audio-Bitrate wählen.</string>
-    <string name="rendering_attr_horseRoutes_name">Pferdewege</string>
+    <string name="rendering_attr_horseRoutes_name">Reitwege</string>
     <string name="update">Aktualisierungsintervall</string>
     <string name="only_download_over_wifi">Nur über WLAN herunterladen</string>
     <string name="live_update">Live-Aktualisierung</string>
@@ -2449,7 +2449,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Benutzernamen eingeben</string>
     <string name="mapillary_menu_descr_username">Nur Bilder betrachten von</string>
     <string name="mapillary_menu_title_username">Benutzername</string>
-    <string name="shared_string_reload">Erneut laden</string>
+    <string name="shared_string_reload">Neu laden</string>
     <string name="mapillary_menu_descr_tile_cache">Kacheln neu laden, um nach Datumswerten zu suchen.</string>
     <string name="mapillary_menu_title_tile_cache">Kachelzwischenspeicher</string>
     <string name="wrong_user_name">Falscher Benutzername</string>
@@ -2466,7 +2466,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="map_widget_ruler_control">Zirkel</string>
     <string name="of">%1$d von %2$d</string>
     <string name="moving_time">Zeit in Bewegung</string>
-    <string name="mapillary_menu_filter_description">Bilder nach Absender, Datum oder Typ filtern. Nur im Nahbereich aktiv.</string>
+    <string name="mapillary_menu_filter_description">Bilder nach Benutzer, Datum oder Typ filtern. Nur im Nahbereich aktiv.</string>
     <string name="min_max">min/max</string>
     <string name="quick_action_resume_pause_navigation_descr">Drücken Sie diese Taste, um die Navigation zu pausieren oder fortzusetzen.</string>
     <string name="quick_action_show_navigation_finish_dialog">Dialog bei Navigationsende anzeigen</string>
@@ -2789,7 +2789,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
     <string name="nautical_render_descr">Nautischer Navigationsstil. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Seewege und Markierungen, Häfen, Seezeichendienste, Tiefenlinien.</string>
-    <string name="ski_map_render_descr">Stil für Skifahrer. Hauptmerkmale: Zweckdienliches Rendern von Pisten, Liften und anderen Einrichtungen beim Skifahren. Weniger ablenkende sekundäre Kartenobjekte.</string>
+    <string name="ski_map_render_descr">Stil für Skifahrer. Hauptmerkmale: Zweckdienliches Rendern von Pisten, Liften und anderen Einrichtungen beim Skifahren. Weniger störende sekundäre Kartenobjekte.</string>
     <string name="light_rs_render_descr">Einfacher und kontrastreicher Stil für die Navigation im Auto. Schonend für die Augen im Nachtmodus. Hauptmerkmale: Konturlinien, Straßendarstellung in kontrastreichem Orange, weniger störende sekundäre Kartenobjekte.</string>
     <string name="topo_render_descr">Kontraststil für Wandern, Trekking und Radfahren in der Natur. Gute Lesbarkeit bei komplexer Außenbeleuchtung. Hauptmerkmale: Kontrastreiche Straßen und natürliche Objekte, verschiedene Arten von Routen, Höhenlinien mit erweiterten Einstellungen, mehr Details bei entsprechenden Zoomstufen als der Standardstil. Die Option Oberflächenintegrität ermöglicht die Unterscheidung der Straßenoberflächenqualität. Kein Nachtmodus.</string>
     <string name="mapnik_render_descr">Alter \'Mapnik\'-Stil, Standard-Rendering-Stil. Hauptmerkmale: Die Farben ähneln dem Mapnik-Stil.</string>
@@ -3003,7 +3003,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
-    <string name="avoid_pt_types">Verkehrsmittel ausschließen …</string>
+    <string name="avoid_pt_types">Verkehrsmittel ausschließen…</string>
     <string name="shared_string_walk">Gehen</string>
     <string name="save_poi_value_exceed_length">Die maximale Länge des Tags \"%s\" beträgt 255 Zeichen. 
 \nBitte kürzen Sie diesen, um fortzufahren.</string>
@@ -3051,12 +3051,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
-    <string name="rate_dialog_descr">Bitte schenken Sie uns 30 Sekunden, teilen Sie mit uns Lob und Kritik und bewerten Sie unsere Arbeit auf Google Play.</string>
+    <string name="rate_dialog_descr">Bitte geben Sie uns 30 Sekunden Zeit, teilen Sie Ihr Feedback und bewerten Sie unsere Arbeit auf Google Play.</string>
     <string name="button_rate">Bewerten</string>
     <string name="shared_string_privacy_policy">Datenschutzrichtlinie</string>
     <string name="help_us_make_osmand_better">Helfen Sie uns, OsmAnd besser zu machen!</string>
-    <string name="make_osmand_better_descr">Erlauben Sie OsmAnd, anonyme App-Nutzungsdaten zu sammeln und zu verarbeiten. Wir sammeln und speichern keine Daten zu Ihrem Standort oder zu Orten, die Sie sich auf der Karte ansehen.
-\n
+    <string name="make_osmand_better_descr">Gestatten Sie OsmAnd, anonyme App-Nutzungsdaten zu sammeln und zu verarbeiten. Wir sammeln und speichern keine Daten zu Ihrem Standort oder zu Orten, die Sie sich auf der Karte ansehen. 
+\n 
 \nSie können Ihre Auswahl jederzeit in den Einstellungen &gt; Datenschutz und Sicherheit ändern.</string>
     <string name="choose_data_to_share">Wählen Sie, welche Art Daten Sie freigeben möchten:</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
@@ -3064,11 +3064,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="collected_data_descr">Liste der Daten, die Sie mit OsmAnd teilen möchten.</string>
     <string name="downloaded_maps_collect_descr">Wir sammeln diese Daten, um herauszufinden, welche Karten welcher Regionen und Länder die beliebtesten sind.</string>
     <string name="visited_screens_collect_descr">Wir sammeln diese Daten, um die beliebtesten Funktionen von OsmAnd herauszufinden.</string>
-    <string name="privacy_and_security_change_descr">Durch Klicken auf \"Erlauben\" stimmen Sie unserer %1$s zu</string>
+    <string name="privacy_and_security_change_descr">Durch Klicken auf \"Genehmigen\" willigen Sie in unsere %1$s ein</string>
     <string name="settings_privacy_and_security">Datenschutz und Sicherheit</string>
     <string name="settings_privacy_and_security_desc">Wählen Sie Ihre für uns freigegebenen Daten</string>
     <string name="shared_string_no_thank_you">Nein, danke</string>
-    <string name="shared_string_allow">Erlauben</string>
+    <string name="shared_string_allow">Genehmigen</string>
     <string name="profile_name_hint">Profilname</string>
     <string name="nav_type_hint">Navigationsart</string>
     <string name="app_mode_taxi">Taxi</string>
@@ -3082,7 +3082,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_alert_need_profile_name_title">Profilnamen eingeben</string>
     <string name="profile_alert_need_profile_name_msg">Der Profilname sollte nicht leer sein!</string>
-    <string name="profile_alert_duplicate_name_title">Namensdoppel</string>
+    <string name="profile_alert_duplicate_name_title">Doppelter Name</string>
     <string name="profile_alert_duplicate_name_msg">Es gibt bereits ein Profil mit diesem Namen</string>
     <string name="profile_alert_cant_delete_base">Das OsmAnd-Basisprofil kann nicht gelöscht werden</string>
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
@@ -3123,14 +3123,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_piste_type_skitour_description">Routen für Skitouren.</string>
     <string name="routing_attr_piste_type_sled_name">Schlitten</string>
     <string name="routing_attr_piste_type_sled_description">Pisten für den Schlitteneinsatz.</string>
-    <string name="routing_attr_allow_intermediate_name">Zwischenrouten zulassen</string>
+    <string name="routing_attr_allow_intermediate_name">Mittelschwere Abfahrten zulassen</string>
     <string name="routing_attr_allow_intermediate_description">Schwierigere Routen mit steileren Abschnitten. Enthält im Allgemeinen einige Hindernisse, die vermieden werden sollten.</string>
-    <string name="routing_attr_allow_advanced_name">Erweiterte Routen zulassen</string>
+    <string name="routing_attr_allow_advanced_name">Schwere Abfahrten zulassen</string>
     <string name="routing_attr_allow_advanced_description">Schwierige Routen, mit gefährlichen Hindernissen und steilen Abschnitten.</string>
-    <string name="routing_attr_allow_expert_name">Expertenrouten zulassen</string>
-    <string name="routing_attr_allow_expert_description">Extrem schwierige Routen, mit gefährlichen Hindernissen und Umgebung.</string>
+    <string name="routing_attr_allow_expert_name">Extreme Abfahrten zulassen</string>
+    <string name="routing_attr_allow_expert_description">Extrem schwere Routen, mit gefährlichen Hindernissen und schwieriger Umgebung.</string>
     <string name="routing_attr_allow_classic_only_name">Nur klassische Routen zulassen</string>
-    <string name="routing_attr_difficulty_preference_name">Gewünschter Schwierigkeitsgrad</string>
+    <string name="routing_attr_difficulty_preference_name">Bevorzugte Schwierigkeit</string>
     <string name="app_profile_custom_nav_subtitle">" "</string>
     <string name="routing_attr_piste_type_downhill_name">Ski Alpin/Abfahrt</string>
     <string name="routing_attr_piste_type_downhill_description">Pisten für Ski Alpin oder Abfahrt und Zugang zu den Skiliften.</string>
@@ -3140,27 +3140,27 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="collected_data">Gesammelte Daten</string>
     <string name="routing_attr_piste_type_nordic_name">Skilanglauf/Nordischer Skisport</string>
     <string name="routing_attr_piste_type_nordic_description">Loipen für Skilangläufer und Nordische Skiläufer.</string>
-    <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl die Routenführung über schwierigere oder einfachere Pisten immer noch möglich ist, wenn kürzer.</string>
+    <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl, bei kürzerer Routenführung, schwierigere oder einfachere Pisten immer noch möglich sind.</string>
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht offiziell betreut und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
-    <string name="press_again_to_change_the_map_orientation">Drücken Sie erneut, um die Kartenausrichtung zu ändern</string>
-    <string name="quick_action_need_to_add_item_to_list">"Sie müssen mindestens einen Eintrag in die Liste der Quick Action Settings hinzufügen. "</string>
+    <string name="press_again_to_change_the_map_orientation">Erneut drücken, um die Kartenausrichtung zu ändern</string>
+    <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
     <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
     <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
     <string name="default_speed_setting_title">Standardgeschwindigkeit</string>
-    <string name="default_speed_setting_descr">Ändern der Standardgeschwindigkeitseinstellungen</string>
+    <string name="default_speed_setting_descr">Standard-Geschwindigkeitseinstellungen ändern</string>
     <string name="minmax_speed_dialog_title">Min/Max Geschwindigkeit einstellen</string>
     <string name="default_speed_dialog_msg">Wird für die Berechnung der erwarteten Ankunftszeit während des Routings verwendet</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Helfen Sie uns, OsmAnd zu verbessern. Bitte senden Sie uns eine Fehlermeldung.</string>
-    <string name="release_3_4">- Anwendungsprofile: Erstelle dein eigenes Profil für deine Bedürfnisse, mit einem benutzerdefinierten Symbol und einer eigenen Farbe
+    <string name="release_3_4">"- Anwendungsprofile: Eigenes Profil nach seinen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen.
 \n
-\n - Hinzufügen von Einstellungen für Standard- und Min/Max-Geschwindigkeit für Profile
+\n - Einstellungen für Standard- und Min/Max-Geschwindigkeiten in Profile einfügen
 \n
-\n - Hinzufügen eines Widgets mit aktuellen Koordinaten
+\n -  Widgets mit aktuellen Koordinaten hinzufügen
 \n
-\n - Hinzufügen von Optionen, um den Kompass auf der Karte mit einem Radiuslineal anzuzeigen.
+\n - Optionen für die Anzeige des Kompass auf der Karte mit einem Radiuslineal ergänzt.
 \n
 \n - Verbesserte Kartendownloads im Hintergrund
 \n
@@ -3170,9 +3170,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n
 \n - Fehlerbehebungen
 \n
-\n</string>
+\n"</string>
     <string name="app_mode_monowheel">Einrad</string>
     <string name="app_mode_scooter">Motorroller</string>
     <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1s, vertikal: %2s</string>
     <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
+    <string name="routing_attr_allow_skating_only_name">Nur Skating-Routen zulassen</string>
+    <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Routen, keine klassischen Loipen.</string>
+    <string name="routing_attr_allow_classic_only_description">Für den klassischen Stil präparierte Loipen, keine Skating-Pisten. Schließt durch kleinere Schneemobile präparierte Loipen mit lockerer Piste und durch Skifahrer selbstgespurte Bahnen ein.</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="app_mode_personal_transporter">Personenbeförderung</string>
 </resources>

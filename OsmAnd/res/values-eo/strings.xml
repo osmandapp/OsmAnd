@@ -834,7 +834,7 @@ Lon: %2$s</string>
     <string name="app_modes_choose">Profiloj de aplikaĵo</string>
     <string name="app_modes_choose_descr">Elekti profilojn por vidigi en la aplikaĵo.</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
-    <string name="app_mode_hiking">Piedirado</string>
+    <string name="app_mode_hiking">Marŝado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
     <string name="app_mode_boat">Boato</string>
     <string name="app_mode_aircraft">Aviadilo</string>
@@ -1495,9 +1495,9 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="use_english_names">Uzi anglajn nomojn sur mapoj</string>
     <string name="use_english_names_descr">Aktivigu por uzi anglajn nomojn anstataŭ lokajn.</string>
     <string name="search_address">Serĉi adreson</string>
-    <string name="app_mode_car">Aŭte</string>
-    <string name="app_mode_bicycle">Bicikle</string>
-    <string name="app_mode_pedestrian">Perpiede</string>
+    <string name="app_mode_car">Aŭto</string>
+    <string name="app_mode_bicycle">Biciklo</string>
+    <string name="app_mode_pedestrian">Piediranto</string>
     <string name="get_plugin">Elŝuti</string>
     <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al ci?</string>
     <string name="app_name_osmand">OsmAnd</string>
@@ -3004,13 +3004,14 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_avoid_subway_description">Eviti subterajn vagonarojn kaj fervojon malpezan</string>
     <string name="routing_attr_avoid_ferry_name">Eviti pramojn</string>
     <string name="routing_attr_avoid_ferry_description">Eviti pramojn</string>
-    <string name="release_3_3_7">• montri tempon inter transveturiliĝojn de publika transporto
-\n
-\n• korektita uzant‑fasado por detaloj pri kurso
-\n
-\n• malhela etoso: riparita menuo “navigi” kaj detaloj pri kurso
-\n
+    <string name="release_3_3_7">• montri tempon inter transveturiliĝoj de publika transporto 
+\n 
+\n• korektita uzant‑fasado por detaloj pri kurso 
+\n 
+\n• malhela etoso: riparita menuo “navigi” kaj detaloj pri kurso 
+\n 
 \n• montri azimuton ĉe distanc‑mezurilo
+\n
 \n</string>
     <string name="send_log">Sendi erar‑protokolon</string>
     <string name="files_moved">Movis %1$d dosierojn (%2$s).</string>
@@ -3050,9 +3051,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="nav_type_hint">Speco de navigo</string>
     <string name="app_mode_taxi">Taksio</string>
     <string name="app_mode_shuttle_bus">Aŭtobuso ir-reira</string>
-    <string name="app_mode_subway">Metroe</string>
-    <string name="app_mode_horse">Ĉevale</string>
-    <string name="app_mode_helicopter">Helikoptere</string>
+    <string name="app_mode_subway">Metroo</string>
+    <string name="app_mode_horse">Ĉevalo</string>
+    <string name="app_mode_helicopter">Helikoptero</string>
     <string name="osmand_routing_promo">Vi povas aldoni propran modifitan version de routing.xml al “..osmand/routing”</string>
     <string name="app_mode_skiing">Skiado</string>
     <string name="base_profile_descr_ski">Skiado</string>
@@ -3122,4 +3123,36 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_color_magenta">Fuksina</string>
     <string name="shared_string_icon">Emblemo</string>
     <string name="collected_data">Kolektataj datumoj</string>
+    <string name="shared_string_min_speed">Minimuma rapido</string>
+    <string name="shared_string_max_speed">Maksimuma rapido</string>
+    <string name="default_speed_setting_title">Kutima rapido</string>
+    <string name="default_speed_setting_descr">Difini kutiman rapidon</string>
+    <string name="minmax_speed_dialog_title">Agordi min./maks. rapidon</string>
+    <string name="default_speed_dialog_msg">Uzata por kalkuli esperatan tempon de alveno dum navigadi</string>
+    <string name="new_profile">Nova profilo</string>
+    <string name="shared_string_crash">Paneo</string>
+    <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon, sendu mesaĝon pri eraro.</string>
+    <string name="app_mode_ufo">NIFO</string>
+    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro
+\n
+\n• agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan alvenan tempon)
+\n
+\n• fenestraĵo montranta koordinatojn
+\n
+\n• eblo montri kompason kun angul-mezurilo sur la mapo
+\n
+\n• plibonigita elŝuto de mapoj fone
+\n
+\n• riparita elekto de lingvo por Vikipedio
+\n
+\n• riparita sinteno de kompaso butono dum navigado
+\n
+\n• riparoj de aliaj eraroj
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Persona transportilo</string>
+    <string name="app_mode_monowheel">Unurada veturilo</string>
+    <string name="app_mode_scooter">Skotero</string>
+    <string name="precision_hdop_and_vdop">Precizo horizontala: %1$s, vertikala: %2$s</string>
+    <string name="precision_hdop">Precizo horizontala: %s</string>
 </resources>
