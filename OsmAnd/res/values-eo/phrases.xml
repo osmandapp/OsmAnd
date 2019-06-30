@@ -903,7 +903,7 @@
     <string name="poi_accountant">Kontista oficejo</string>
     <string name="poi_bitcoin_yes">Bitmono akceptata</string>
     <string name="poi_cave_entrance">Enirejo al kaverno</string>
-    <string name="poi_peak">Montpinto</string>
+    <string name="poi_peak">Monto (pinto)</string>
     <string name="poi_saddle">Sela punkto (intermonto)</string>
     <string name="poi_crater">Kratero</string>
     <string name="poi_ridge">Montokresto</string>
@@ -3504,7 +3504,7 @@
     <string name="poi_car_pooling">Haltejo aŭtomobila</string>
     <string name="poi_ruins">Ruino</string>
     <string name="poi_license_classes">Tipoj de ŝofor-permesiloj</string>
-    <string name="poi_hill">Monteto</string>
+    <string name="poi_hill">Monteto (pinto)</string>
     <string name="poi_atm">Bankaŭtomato</string>
     <string name="poi_shoe_repair">Ŝu-riparejo</string>
     <string name="poi_bulk_purchase">Vendado sen pakumo</string>
