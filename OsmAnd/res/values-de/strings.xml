@@ -3051,7 +3051,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
-    <string name="rate_dialog_descr">Bitte schenken Sie uns 30 Sekunden, teilen Sie mit uns Lob und Kritik und bewerten Sie unsere Arbeit auf Google Play.</string>
+    <string name="rate_dialog_descr">Bitte geben Sie uns 30 Sekunden Zeit, teilen Sie Ihr Feedback und bewerten Sie unsere Arbeit auf Google Play.</string>
     <string name="button_rate">Bewerten</string>
     <string name="shared_string_privacy_policy">Datenschutzrichtlinie</string>
     <string name="help_us_make_osmand_better">Helfen Sie uns, OsmAnd besser zu machen!</string>
