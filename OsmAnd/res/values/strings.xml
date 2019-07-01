@@ -13,18 +13,18 @@
 -->
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">
-        • Application profiles: create your own profile for your needs, with a custom icon and color\n\n
-        • Add settings for default and min/max speed for profiles\n\n
-        • Add a widget with current coordinates\n\n
-        • Add options to show the compass on the map with a radius ruler\n\n
+        • Application profiles: create a custom profile for your own needs, with a custom icon and color\n\n
+        • Now customize any profile\'s default and min/max speeds\n\n
+        • Added a widget for the current coordinates\n\n
+        • Added options to show the compass and a radius ruler on the map\n\n
         • Fix background track logging\n\n
         • Improved background map downloads\n\n
         • Fixed Wikipedia language selection\n\n
         • Fixed compass button behavior during navigation\n\n
         • Other bug fixes\n\n
     </string>
-    <string name="precision_hdop_and_vdop">Precision horizontal: %1$s, vertical: %2$s</string>
-    <string name="precision_hdop">Precision horizontal: %s</string>
+    <string name="precision_hdop_and_vdop">Precision horizontally: %1$s, vertically: %2$s</string>
+    <string name="precision_hdop">Precision horizontally: %s</string>
     <string name="app_mode_personal_transporter">Personal transporter</string>
     <string name="app_mode_monowheel">Monowheel</string>
     <string name="app_mode_scooter">Scooter</string>
@@ -33,76 +33,76 @@
     <string name="default_speed_setting_title">Default speed</string>
     <string name="default_speed_setting_descr">Change default speed settings</string>
     <string name="minmax_speed_dialog_title">Set min/max speed</string>
-    <string name="default_speed_dialog_msg">Used for calculations of expected arrival time during routing</string>
-    <string name="new_profile">New Profile</string>
+    <string name="default_speed_dialog_msg">Used to calculate the expected arrival time during routing</string>
+    <string name="new_profile">New profile</string>
     <string name="shared_string_crash">Crash</string>
-    <string name="last_launch_crashed">The last launch of OsmAnd failed. Help us improve OsmAnd. Please send us an error message.</string>
-    <string name="press_again_to_change_the_map_orientation">Press again to change the map orientation</string>
+    <string name="last_launch_crashed">The last launch of OsmAnd failed. Please help us to improve OsmAnd by sharing the error message.</string>
+    <string name="press_again_to_change_the_map_orientation">Tap again to change the map orientation</string>
     <string name="process_downloading_service">OsmAnd downloading service</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icon</string>
-    <string name="rate_dialog_descr">Please give us 30 seconds, share feedback and rate our work on Google Play.</string>
+    <string name="rate_dialog_descr">Please give us 30 seconds by sharing your feedback and rating our work on Google Play.</string>
     <string name="button_rate">Rate</string>
     <string name="shared_string_privacy_policy">Privacy Policy</string>
     <string name="help_us_make_osmand_better">Help us make OsmAnd better!</string>
-    <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous application usage data. We do not collect or store data about your location, or about the locations that you view on the map.\n\nYou can always change your selection in Settings > Privacy and Security.</string>
+    <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous application usage data. We do not collect or store data about your position, or about any locations you view on the map.\n\nYou can change your selection at any time in Settings > Privacy and Security.</string>
     <string name="choose_data_to_share">Choose what type of data you want to share:</string>
-    <string name="downloaded_maps">Downloaded Maps</string>
-    <string name="visited_screens">Visited screens</string>
-    <string name="collected_data">Collected Data</string>
+    <string name="downloaded_maps">Maps downloaded</string>
+    <string name="visited_screens">Screens visited</string>
+    <string name="collected_data">Data collected</string>
     <string name="collected_data_descr">List of data you want to share with OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">We collect this data to understand the maps of which regions and countries are the most popular.</string>
-    <string name="visited_screens_collect_descr">We collect this data to understand the most popular features of OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">By clicking \"Allow\" you agree with our %1$s</string>
+    <string name="downloaded_maps_collect_descr">We collect this data to understand which maps of which regions and countries are the most popular.</string>
+    <string name="visited_screens_collect_descr">We collect this data to understand which OsmAnd features are the most popular.</string>
+    <string name="privacy_and_security_change_descr">By tapping \"Allow\" you agree with our %1$s</string>
     <string name="settings_privacy_and_security">Privacy and Security</string>
-    <string name="settings_privacy_and_security_desc">Choose your data for sharing with us</string>
+    <string name="settings_privacy_and_security_desc">Select which data you are sharing with us</string>
     <string name="shared_string_no_thank_you">No, thank you</string>
     <string name="shared_string_allow">Allow</string>
-    <string name="profile_name_hint">Profile Name</string>
-    <string name="nav_type_hint">Navigation Type</string>
+    <string name="profile_name_hint">Profile name</string>
+    <string name="nav_type_hint">Navigation type</string>
     <string name="app_mode_taxi">Taxi</string>
     <string name="app_mode_shuttle_bus">Shuttle bus</string>
     <string name="app_mode_subway">Subway</string>
     <string name="app_mode_horse">Horse</string>
     <string name="app_mode_helicopter">Helicopter</string>
-    <string name="osmand_routing_promo">You can add own modified version of routing.xml to ..osmand/routing</string>
+    <string name="osmand_routing_promo">You can add your own modified version of the file routing.xml in ..osmand/routing</string>
     <string name="app_mode_skiing">Skiing</string>
     <string name="base_profile_descr_ski">Skiing</string>
     <string name="show_compass_ruler">Show compass ruler</string>
     <string name="hide_compass_ruler">Hide compass ruler</string>
     <string name="select_icon_profile_dialog_title">Select icon</string>
     <string name="settings_routing_mode_string">Mode: %s</string>
-    <string name="settings_derived_routing_mode_string">User Mode, derived from: %s</string>
+    <string name="settings_derived_routing_mode_string">User mode, derived from: %s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type: %s</string>
     <string name="profile_type_base_string">Base Profile</string>
     <string name="profile_alert_need_routing_type_title">Select navigation type</string>
-    <string name="profile_alert_need_routing_type_msg">You need to select Navigation type to create New Application Profile</string>
-    <string name="profile_alert_need_profile_name_title">Enter Profile Name</string>
+    <string name="profile_alert_need_routing_type_msg">Please select a navigation type for the new application profile</string>
+    <string name="profile_alert_need_profile_name_title">Enter profile name</string>
     <string name="profile_alert_need_profile_name_msg">Profile name shouldn\'t be empty!</string>
-    <string name="profile_alert_duplicate_name_title">Duplicate Name</string>
-    <string name="profile_alert_duplicate_name_msg">There is already profile with such name</string>
-    <string name="profile_alert_cant_delete_base">You cannot delete OsmAnd base profiles</string>
-    <string name="profile_alert_need_save_title">Save Changes</string>
-    <string name="profile_alert_need_save_msg">You need to save changes to Profile before proceed</string>
-    <string name="profile_alert_delete_title">Delete Profile</string>
-    <string name="profile_alert_delete_msg">Are you sure you want to delete %s profile</string>
-    <string name="select_base_profile_dialog_title">Select base profile</string>
-    <string name="select_base_profile_dialog_message">Custom Application Profile should be based on one of the default App Profiles. Selected Profile defines basic settings: setup of Widgets, units of speed and distance. In string below Profile\'s name, you could learn which Navigation Profiles are suitable for each Application Profile.</string>
+    <string name="profile_alert_duplicate_name_title">Duplicate name</string>
+    <string name="profile_alert_duplicate_name_msg">There is already profile with that name</string>
+    <string name="profile_alert_cant_delete_base">You cannot delete OsmAnd\'s base profiles</string>
+    <string name="profile_alert_need_save_title">Save changes</string>
+    <string name="profile_alert_need_save_msg">You need to save changes to the profile before proceeding</string>
+    <string name="profile_alert_delete_title">Delete profile</string>
+    <string name="profile_alert_delete_msg">Are you sure you want to delete the %s profile</string>
+    <string name="select_base_profile_dialog_title">Select a base profile</string>
+    <string name="select_base_profile_dialog_message">Base your custom profile on one of the default app profiles, this defines the basic setup like default visibility of widgets and units of speed and distance. These are the default app profiles, together with examples of custom profiles they may be extended to:</string>
     <string name="select_nav_profile_dialog_title">Select navigation type</string>
-    <string name="base_profile_descr_car">Car, Truck, Motorcycle</string>
-    <string name="base_profile_descr_bicycle">MTB, Moped, Horse</string>
-    <string name="base_profile_descr_pedestrian">Walking, Hiking, Running</string>
+    <string name="base_profile_descr_car">Car, truck, motorcycle</string>
+    <string name="base_profile_descr_bicycle">MTB, moped, horse</string>
+    <string name="base_profile_descr_pedestrian">Walking, hiking, running</string>
     <string name="base_profile_descr_public_transport">All PT types</string>
-    <string name="base_profile_descr_boat">Ship, Rowing, Sailing</string>
-    <string name="base_profile_descr_aircraft">Airplane, Gliding</string>
+    <string name="base_profile_descr_boat">Ship, rowing, sailing</string>
+    <string name="base_profile_descr_aircraft">Airplane, gliding</string>
     <string name="routing_profile_geocoding">Geocoding</string>
-    <string name="routing_profile_straightline">Straight Line</string>
-    <string name="routing_profile_broutrer">BRouter (Offline)</string>
+    <string name="routing_profile_straightline">Straight line</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
     <string name="osmand_default_routing">OsmAnd routing</string>
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>
-    <string name="third_party_routing_type">3rd-party routing</string>
+    <string name="third_party_routing_type">Third-party routing</string>
   <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
   <string name="application_profiles">Application profiles</string>
     <string name="searching_gps">Searching GPS</string>
@@ -113,7 +113,7 @@
     <string name="files_present">%1$d files (%2$s) are present at previous location \'%3$s\'.</string>
     <string name="move_maps">Move maps</string>
     <string name="dont_move_maps">Don\'t move</string>
-    <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and it could be faster than by public transport</string>
+    <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and may be faster than via public transport</string>
     <string name="public_transport_no_route_title">Unfortunately, OsmAnd could not find a route suitable for your settings.</string>
     <string name="public_transport_try_ped">Try the pedestrian navigation.</string>
     <string name="public_transport_try_change_settings">Try changing the settings.</string>
