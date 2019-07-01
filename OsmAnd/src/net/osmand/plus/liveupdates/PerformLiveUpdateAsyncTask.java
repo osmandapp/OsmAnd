@@ -103,6 +103,7 @@ public class PerformLiveUpdateAsyncTask
 
 				LOG.debug("Internet connection available: " + getMyApplication().getSettings().isInternetConnectionAvailable());
 				LOG.debug("Download via Wifi: " + downloadViaWiFi);
+				LOG.debug("Is wifi available: " + getMyApplication().getSettings().isWifiConnected());
 				if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
 					if (userRequested || settings.isWifiConnected() || !downloadViaWiFi) {
 						long szLong = 0;
@@ -130,7 +131,8 @@ public class PerformLiveUpdateAsyncTask
 						} else {
 							LOG.debug("onPostExecute: Not enough space for updates");
 						}
-					} LOG.debug("onPostExecute: No internet connection");
+					} 
+					LOG.debug("onPostExecute: No internet connection");
 				}
 			} else {
 				if (context instanceof DownloadIndexesThread.DownloadEvents) {
