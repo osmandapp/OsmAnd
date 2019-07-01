@@ -143,7 +143,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		llTextParams2.setMargins(dpToPx(16f), dpToPx(2f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams2);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		textView.setText(description);
 
 		textView.setEllipsize(TextUtils.TruncateAt.END);

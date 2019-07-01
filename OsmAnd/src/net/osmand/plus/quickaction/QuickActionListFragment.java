@@ -173,8 +173,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             }
         });
         AlertDialog dialog = builder.show();
-        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.dashboard_blue));
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.dashboard_blue));
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.active_color_primary_light));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.active_color_primary_light));
     }
 
     @Override

@@ -112,8 +112,8 @@
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
         <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_light</item>
-        <item name="searchbar_text">@color/searchbar_text_light</item>
-        <item name="searchbar_text_hint">@color/searchbar_text_hint_light</item>
+        <item name="searchbar_text">@color/text_color_primary_light</item>
+        <item name="searchbar_text_hint">@color/text_color_secondary_light</item>
         <item name="list_divider">@color/divider_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_light</item>
@@ -172,7 +172,7 @@
 
         <item name="colorPrimary">@color/osmand_orange</item>
         <item name="colorPrimaryDark">@color/osmand_orange_dark</item>
-        <item name="colorAccent">@color/dashboard_blue</item>
+        <item name="colorAccent">@color/active_color_primary_light</item>
 
         <item name="android:actionModeBackground">@color/actionbar_light_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
@@ -203,11 +203,11 @@
         <item name="subscription_active_bg_color">@color/subscription_active_bg_color_light</item>
         <item name="subscription_active_div_color">@color/subscription_active_div_color_light</item>
 
-        <item name="dialog_bg_color">@color/dialog_bg_color_light</item>
-        <item name="dialog_transparent_bg_color">@color/dialog_transparent_bg_color_light</item>
-        <item name="dialog_title_color">@color/dialog_title_color_light</item>
-        <item name="dialog_description_color">@color/dialog_description_color_light</item>
-        <item name="dialog_text_description_color">@color/dialog_text_description_color</item>
+        <item name="dialog_bg_color">@color/activity_background_color_light</item>
+        <item name="dialog_transparent_bg_color">@color/activity_background_transparent_color_light</item>
+        <item name="dialog_title_color">@color/text_color_primary_light</item>
+        <item name="dialog_description_color">@color/text_color_primary_light</item>
+        <item name="dialog_text_description_color">@color/text_color_secondary_light</item>
         <item name="card_description_text_color">@color/card_description_text_color_light</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_light</item>
@@ -219,9 +219,9 @@
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_light</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_light</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_light</item>
-        <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_light</item>
+        <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_light</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_light</item>
-        <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_light</item>
+        <item name="wikivoyage_primary_text_color">@color/text_color_primary_light</item>
 
         <item name="wikivoyage_travel_card_bg">@drawable/travel_card_bg_light</item>
         <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_light</item>
@@ -241,8 +241,8 @@
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_light</item>
         <item name="divider_color_basic">@color/divider_light</item>
-        <item name="main_font_color_basic">@color/main_font_light</item>
-        <item name="active_color_basic">@color/active_buttons_and_links_light</item>
+        <item name="main_font_color_basic">@color/text_color_primary_light</item>
+        <item name="active_color_basic">@color/active_color_primary_light</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_light</item>
         <item name="activity_background_basic">@color/activity_background_light</item>
         <item name="pages_bg">@drawable/pages_bg_light</item>
@@ -289,8 +289,8 @@
     <style name="OsmandLightTheme.SearchTabbar">
         <item name="android:textColorPrimary">@color/osmand_orange</item>
         <item name="colorAccent">@color/osmand_orange</item>
-        <item name="android:textColorSecondary">@color/searchbar_tab_inactive_light</item>
-        <item name="android:textColorHint">@color/searchbar_tab_inactive_light</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
+        <item name="android:textColorHint">@color/text_color_secondary_light</item>
     </style>
 
     <style name="OsmandLightTheme.Toolbar">
@@ -317,8 +317,8 @@
     <style name="OsmandDarkTheme.SearchTabbar">
         <item name="android:textColorPrimary">@color/osmand_orange</item>
         <item name="colorAccent">@color/osmand_orange</item>
-        <item name="android:textColorSecondary">@color/searchbar_tab_inactive_dark</item>
-        <item name="android:textColorHint">@color/searchbar_tab_inactive_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
+        <item name="android:textColorHint">@color/text_color_secondary_dark</item>
     </style>
 
     <style name="OsmandLightTheme.BottomSheet">
@@ -366,8 +366,8 @@
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>
         <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_dark</item>
-        <item name="searchbar_text">@color/searchbar_text_dark</item>
-        <item name="searchbar_text_hint">@color/searchbar_text_hint_dark</item>
+        <item name="searchbar_text">@color/text_color_primary_dark</item>
+        <item name="searchbar_text_hint">@color/text_color_secondary_dark</item>
         <item name="list_divider">@color/divider_dark</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>
@@ -442,11 +442,11 @@
         <item name="subscription_active_div_color">@color/subscription_active_div_color_dark</item>
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_night</item>
-        <item name="dialog_bg_color">@color/dialog_bg_color_night</item>
-        <item name="dialog_transparent_bg_color">@color/dialog_transparent_bg_color_night</item>
-        <item name="dialog_title_color">@color/dialog_title_color_dark</item>
-        <item name="dialog_description_color">@color/dialog_description_color_dark</item>
-        <item name="dialog_text_description_color">@color/dialog_text_description_color_night</item>
+        <item name="dialog_bg_color">@color/activity_background_color_dark</item>
+        <item name="dialog_transparent_bg_color">@color/activity_background_transparent_color_dark</item>
+        <item name="dialog_title_color">@color/text_color_primary_dark</item>
+        <item name="dialog_description_color">@color/text_color_secondary_dark</item>
+        <item name="dialog_text_description_color">@color/text_color_secondary_dark</item>
         <item name="card_description_text_color">@color/card_description_text_color_dark</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_dark</item>
@@ -458,9 +458,9 @@
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_dark</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_dark</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_dark</item>
-        <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_dark</item>
+        <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_dark</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_dark</item>
-        <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_dark</item>
+        <item name="wikivoyage_primary_text_color">@color/text_color_primary_dark</item>
 
         <item name="wikivoyage_travel_card_bg">@drawable/travel_card_bg_dark</item>
         <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_dark</item>
@@ -480,8 +480,8 @@
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_dark</item>
         <item name="divider_color_basic">@color/divider_dark</item>
-        <item name="main_font_color_basic">@color/main_font_dark</item>
-        <item name="active_color_basic">@color/active_buttons_and_links_dark</item>
+        <item name="main_font_color_basic">@color/text_color_primary_dark</item>
+        <item name="active_color_basic">@color/active_color_primary_dark</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_dark</item>
         <item name="activity_background_basic">@color/activity_background_dark</item>
         <item name="pages_bg">@drawable/pages_bg_dark</item>

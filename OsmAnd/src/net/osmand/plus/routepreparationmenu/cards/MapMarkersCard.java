@@ -97,7 +97,7 @@ public class MapMarkersCard extends BaseCard {
 			ImageView arrow = (ImageView) v.findViewById(R.id.direction);
 			Drawable arrowIcon = arrow.getDrawable();
 			if (arrowIcon instanceof DirectionDrawable) {
-				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			}
 
 			v.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));

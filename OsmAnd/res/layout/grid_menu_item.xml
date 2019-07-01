@@ -29,7 +29,7 @@
 		android:gravity="center_horizontal"
 		android:lines="2"
 		android:maxLines="2"
-		android:textColor="@color/searchbar_text_hint_light"
+		android:textColor="?android:textColorSecondary"
 		tools:text="Remove POI"/>
 
 </LinearLayout>

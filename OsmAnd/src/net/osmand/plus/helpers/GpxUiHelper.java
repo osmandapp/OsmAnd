@@ -1256,7 +1256,7 @@ public class GpxUiHelper {
 		yr.setAxisMinimum(0f);
 		chart.setMinOffset(0);
 
-		int mainFontColor = ContextCompat.getColor(app, nightMode ? R.color.main_font_dark : R.color.main_font_light);
+		int mainFontColor = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		yl.setTextColor(mainFontColor);
 		yr.setTextColor(mainFontColor);
 

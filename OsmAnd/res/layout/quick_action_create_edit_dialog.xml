@@ -126,7 +126,7 @@
             android:gravity="center"
             android:layout_gravity="bottom"
             android:foreground="?attr/selectableItemBackground"
-            android:background="@color/dashboard_blue"/>
+            android:background="@color/active_color_primary_light"/>
 
     </FrameLayout>
 

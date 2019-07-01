@@ -309,7 +309,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			}
 			TextView lblListHeader = (TextView) convertView.findViewById(R.id.title);
 			lblListHeader.setText(getHeader(group.type, mapActivity));
-			lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+			lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 
 			adjustIndicator(app, groupPosition, isExpanded, convertView, !nightMode);
 

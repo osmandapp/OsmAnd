@@ -229,7 +229,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private SpannableString getActiveString(int id) {
 		SpannableString res = new SpannableString(getString(id));
 		res.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(), getSettings().isLightContent()
-				? R.color.dashboard_blue : R.color.osmand_orange)), 0, res.length(), 0);
+				? R.color.active_color_primary_light : R.color.active_color_primary_dark)), 0, res.length(), 0);
 		return res;
 	}
 
@@ -317,12 +317,12 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private Drawable getIconBackground(boolean active) {
-		return active ? getIcon(R.drawable.ic_action_device_top, R.color.dashboard_blue)
+		return active ? getIcon(R.drawable.ic_action_device_top, R.color.active_color_primary_light)
 				: getContentIcon(R.drawable.ic_action_device_top);
 	}
 
 	private Drawable getIconTop(int id, boolean active) {
-		return active ? getIcon(id, R.color.osmand_orange) : getContentIcon(id);
+		return active ? getIcon(id, R.color.active_color_primary_dark) : getContentIcon(id);
 	}
 
 	private void updateDisplayedMarkersCount(int count) {
@@ -378,7 +378,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private void updateMarkerModeRow(int rowId, int radioButtonId, boolean checked, boolean active) {
 		boolean night = !getSettings().isLightContent();
 		RadioButton rb = (RadioButton) mainView.findViewById(radioButtonId);
-		int colorId = active ? night ? R.color.osmand_orange : R.color.dashboard_blue
+		int colorId = active ? night ? R.color.active_color_primary_dark : R.color.active_color_primary_light
 				: night ? R.color.ctx_menu_info_text_dark : R.color.icon_color;
 		rb.setChecked(checked);
 		CompoundButtonCompat.setButtonTintList(rb, ColorStateList.valueOf(ContextCompat.getColor(getContext(), colorId)));

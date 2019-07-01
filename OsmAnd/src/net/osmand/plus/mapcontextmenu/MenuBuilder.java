@@ -554,7 +554,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
@@ -841,7 +841,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
-		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		titleView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
 		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
 		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
@@ -931,7 +931,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextDescParams);
 		textView.setTypeface(FontCache.getRobotoRegular(context));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		textView.setText(text);
 		return new CollapsableView(textView, this, collapsed);
 	}
@@ -999,7 +999,7 @@ public class MenuBuilder {
 					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
 		} else {
-			button.setTextColor(ContextCompat.getColor(context, light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+			button.setTextColor(ContextCompat.getColor(context, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		}
 		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(singleLine);

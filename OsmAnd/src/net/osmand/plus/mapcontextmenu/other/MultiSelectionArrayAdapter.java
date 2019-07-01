@@ -69,7 +69,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			// Text line 1
 			TextView line1 = (TextView) convertView.findViewById(R.id.context_menu_line1);
 			line1.setTextColor(ContextCompat.getColor(getContext(),
-					!menu.isLight() ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
+					!menu.isLight() ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 			line1.setText(item.getTitleStr());
 
 			// Text line 2

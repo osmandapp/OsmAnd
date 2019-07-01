@@ -856,7 +856,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		ImageView optionsIcon = (ImageView) mainView.findViewById(R.id.map_options_route_button_icon);
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			Drawable active = app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
 		}
 		optionsIcon.setImageDrawable(drawable);
@@ -903,7 +903,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		int color2;
 		if (publicTransportMode) {
 			if (routeCalculated && hasTransportRoutes()) {
-				color1 = nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light;
+				color1 = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 				color2 = color1;
 			} else {
@@ -912,10 +912,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				color2 = color1;
 			}
 		} else {
-			color1 = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+			color1 = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_light;
 			if (routeCalculated) {
-				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
-				color2 = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.active_color_primary_light, R.color.active_color_primary_dark);
+				color2 = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_light;
 			} else {
 				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
 				color2 = R.color.description_font_and_bottom_sheet_icons;
@@ -975,7 +975,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createMuteSoundRoutingParameterButton(MapActivity mapActivity, final MuteSoundRoutingParameter parameter, final RouteMenuAppModes mode, LinearLayout optionsContainer) {
-		final int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		final int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		final int colorDisabled = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
 		String text = null;
 		final boolean active = !mapActivity.getRoutingHelper().getVoiceRouter().isMute();
@@ -992,7 +992,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					String text = app.getString(active ? R.string.shared_string_on : R.string.shared_string_off);
 
 					Drawable itemDrawable = app.getUIUtilities().getIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-					Drawable activeItemDrawable = app.getUIUtilities().getIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+					Drawable activeItemDrawable = app.getUIUtilities().getIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 
 					if (Build.VERSION.SDK_INT >= 21) {
 						itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
@@ -1207,7 +1207,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void createSimpleRoutingParameterButton(MapActivity mapActivity, final LocalRoutingParameter parameter, LinearLayout optionsContainer) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		final int colorActive = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		final int colorActive = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		final int colorDisabled = ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
 		int margin = AndroidUtils.dpToPx(app, 3);
 		final OsmandSettings settings = app.getSettings();
@@ -1230,7 +1230,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						app.getRoutingOptionsHelper().applyRoutingParameter(parameter, selected);
 
 						Drawable itemDrawable = app.getUIUtilities().getIcon(selected ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-						Drawable activeItemDrawable = app.getUIUtilities().getIcon(selected ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+						Drawable activeItemDrawable = app.getUIUtilities().getIcon(selected ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 
 						if (Build.VERSION.SDK_INT >= 21) {
 							itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
@@ -1270,7 +1270,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final LinearLayout item = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.route_option_btn, null);
 		final TextView textView = (TextView) item.findViewById(R.id.route_option_title);
 		final ImageView imageView = (ImageView) item.findViewById(R.id.route_option_image_view);
-		final int colorActive = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		final int colorActive = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		final int colorDisabled = ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
 
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -1284,7 +1284,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		Drawable activeItemDrawable = null;
 		if (activeIconId != -1 && disabledIconId != -1) {
 			itemDrawable = app.getUIUtilities().getIcon(active ? activeIconId : disabledIconId, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-			activeItemDrawable = app.getUIUtilities().getIcon(active ? activeIconId : disabledIconId, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			activeItemDrawable = app.getUIUtilities().getIcon(active ? activeIconId : disabledIconId, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			if (Build.VERSION.SDK_INT >= 21) {
 				itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
 			}
@@ -1341,7 +1341,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 		routeOptionTV.setText(title);
 		routeOptionTV.setTextColor(ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons));
-		routeOptionImageView.setImageDrawable(app.getUIUtilities().getIcon(iconId, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		routeOptionImageView.setImageDrawable(app.getUIUtilities().getIcon(iconId, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		container.setOnClickListener(listener);
 
 		return container;
@@ -1431,7 +1431,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 
 			normal = AndroidUtils.createPressedStateListDrawable(normal, active);
 		}
@@ -1491,7 +1491,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 			Drawable normal = app.getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 			if (Build.VERSION.SDK_INT >= 21) {
-				Drawable active = app.getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+				Drawable active = app.getUIUtilities().getIcon(R.drawable.ic_action_plus, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 
 				normal = AndroidUtils.createPressedStateListDrawable(normal, active);
 			}
@@ -1564,7 +1564,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		Drawable normal = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_change_navigation_points, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
 		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_change_navigation_points, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			Drawable active = mapActivity.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_change_navigation_points, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			normal = AndroidUtils.createPressedStateListDrawable(normal, active);
 		}
 

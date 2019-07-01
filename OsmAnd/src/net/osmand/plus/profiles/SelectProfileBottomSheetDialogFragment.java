@@ -102,8 +102,8 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_buttons_and_links_dark
-							: R.color.active_buttons_and_links_light);
+							? R.color.active_color_primary_dark
+							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), R.color.icon_color);
@@ -143,8 +143,8 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_buttons_and_links_dark
-							: R.color.active_buttons_and_links_light);
+							? R.color.active_color_primary_dark
+							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), R.color.icon_color);
@@ -182,8 +182,8 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(iconRes, nightMode
-							? R.color.active_buttons_and_links_dark
-							: R.color.active_buttons_and_links_light);
+							? R.color.active_color_primary_dark
+							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(iconRes, R.color.icon_color);

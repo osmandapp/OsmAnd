@@ -144,7 +144,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 		bitmapPaint.setFilterBitmap(true);
 
 		int colorNorthArrow = ContextCompat.getColor(app, R.color.compass_control_active);
-		int colorHeadingArrow = ContextCompat.getColor(app, R.color.active_buttons_and_links_light);
+		int colorHeadingArrow = ContextCompat.getColor(app, R.color.active_color_primary_light);
 
 		triangleNorthPaint = initPaintWithStyle(Style.FILL, colorNorthArrow);
 		triangleHeadingPaint = initPaintWithStyle(Style.FILL, colorHeadingArrow);

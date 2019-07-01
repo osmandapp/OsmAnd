@@ -451,14 +451,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		}
 
-		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.map_options_route_button_title)).setTextColor(activeColor);
 
-		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.main_font_dark : R.color.main_font_light);
+		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		((TextView) mainView.findViewById(R.id.fromText)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
@@ -511,7 +511,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int bgColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.activity_background_dark : R.color.activity_background_light);
-			int progressColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			int progressColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 			pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 		}

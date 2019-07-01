@@ -76,7 +76,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		}
 		showDirectionIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
 		if (imageResId != 0) {
-			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.dashboard_blue));
+			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.active_color_primary_light));
 		}
 		((ImageView) mainView.findViewById(R.id.coordinate_input_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_longitude));
 		((ImageView) mainView.findViewById(R.id.build_route_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));

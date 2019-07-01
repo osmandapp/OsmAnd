@@ -85,7 +85,7 @@ public class AmenityMenuController extends MenuController {
 				}
 			};
 			leftTitleButtonController.caption = mapActivity.getString(R.string.context_menu_read_article);
-			leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_read_text, true);
+			leftTitleButtonController.leftIconId = R.drawable.ic_action_read_text;
 		}
 
 		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
