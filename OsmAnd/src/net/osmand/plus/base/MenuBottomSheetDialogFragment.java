@@ -153,7 +153,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+		return getIcon(id, nightMode ? R.color.icon_color_light : R.color.icon_color);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {

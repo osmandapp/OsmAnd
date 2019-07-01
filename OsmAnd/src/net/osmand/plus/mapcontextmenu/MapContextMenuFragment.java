@@ -496,13 +496,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		zoomInButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_in_button);
 		zoomOutButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_out_button);
 		if (menu.zoomButtonsVisible()) {
-			Context ctx = getContext();
-			if (ctx != null) {
-				AndroidUtils.updateImageButton(ctx, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
-						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-				AndroidUtils.updateImageButton(ctx, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
-						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-			}
+			AndroidUtils.updateImageButton(mapActivity, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+			AndroidUtils.updateImageButton(mapActivity, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 			zoomInButtonView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -528,25 +525,25 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		routesBadgesContainer = (LinearLayout) view.findViewById(R.id.transport_badges_container);
 
 		if (nightMode) {
-			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_bottom_view_secondary_text_color_dark));
-			localRoutesMoreTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_bottom_view_secondary_text_color_dark));
+			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_dark));
+			localRoutesMoreTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_dark));
 		} else {
-			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_nearby_routes_text_color_dark));
-			localRoutesMoreTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_nearby_routes_text_color_dark));
+			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_light));
+			localRoutesMoreTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_light));
 		}
 
 		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);
 		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
-		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
-		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
+		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
+		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
 		View buttons = view.findViewById(R.id.context_menu_buttons);
-		buttons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
 		if (!menu.buttonsVisible()) {
 			buttonsTopBorder.setVisibility(View.GONE);
 			buttons.setVisibility(View.GONE);
 		}
 		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
-		bottomButtons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		bottomButtons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
 		if (!menu.navigateButtonVisible()) {
 			bottomButtons.findViewById(R.id.context_menu_directions_button).setVisibility(View.GONE);
 		}
@@ -605,7 +602,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
-		detailsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
+		detailsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -618,7 +615,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			iconResId = R.drawable.map_action_pedestrian_dark;
 		}
 		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
-		directionsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
+		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
 		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
 		directionsButton.setCompoundDrawablePadding(dpToPx(8));
 		directionsButton.setOnClickListener(new View.OnClickListener() {

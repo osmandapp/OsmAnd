@@ -101,14 +101,14 @@ public class UiUtilities {
 	}
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
-		return getDrawable(id, light ? R.color.icon_color : 0);
+		return getDrawable(id, light ? R.color.icon_color : R.color.icon_color_light);
 	}
 
 	@ColorRes
 	public static int getDefaultColorRes(Context context) {
 		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		boolean light = app.getSettings().isLightContent();
-		return light ? R.color.icon_color : R.color.color_white;
+		return light ? R.color.icon_color : R.color.icon_color_light;
 	}
 
 	@ColorInt

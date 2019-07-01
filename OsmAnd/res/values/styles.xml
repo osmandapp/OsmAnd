@@ -137,7 +137,7 @@
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_light</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_light</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_light</item>
-        <item name="dashboard_divider">@color/dashboard_divider_light</item>
+        <item name="dashboard_divider">@color/divider_color_light</item>
         <item name="divider_color">@color/divider_color</item>
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_light</item>
@@ -165,7 +165,11 @@
             @color/dashboard_general_button_text_light
         </item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
-        <item name="android:textColorPrimary">@color/color_black</item>
+
+        <item name="android:textColorPrimary">@color/text_color_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
+        <item name="android:textColorTertiary">@color/text_color_tertiary_light</item>
+
         <item name="spinnerItemTextColor">@color/color_black</item>
         <item name="spinnerListBackground">@color/spinner_list_background_light</item>
         <item name="colorButtonNormal">@color/color_white</item>
@@ -189,7 +193,6 @@
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
-        <item name="android:textColorSecondary">@color/icon_color</item>
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>
 
         <item name="color_dialog_buttons">@color/color_dialog_buttons_light</item>
@@ -208,7 +211,7 @@
         <item name="dialog_title_color">@color/text_color_primary_light</item>
         <item name="dialog_description_color">@color/text_color_primary_light</item>
         <item name="dialog_text_description_color">@color/text_color_secondary_light</item>
-        <item name="card_description_text_color">@color/card_description_text_color_light</item>
+        <item name="card_description_text_color">@color/text_color_tertiary_light</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_light</item>
         <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_light</item>
@@ -275,7 +278,7 @@
     </style>
 
     <style name="OsmandLightTheme.NoActionbar.Preferences">
-        <item name="android:textColorSecondary">@color/color_black</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
     </style>
 
     <style name="OsmandLightTheme.DarkActionbar">
@@ -343,7 +346,7 @@
     </style>
 
     <style name="OsmandDarkTheme.NoActionbar.Preferences">
-        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
     </style>
 
     <style name="OsmandDarkTheme.NoAnimation">
@@ -390,7 +393,7 @@
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_dark</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_dark</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_dark</item>
-        <item name="dashboard_divider">@color/dashboard_divider_dark</item>
+        <item name="dashboard_divider">@color/divider_color_dark</item>
         <item name="divider_color">@color/dashboard_divider_dark</item>
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
         <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_dark</item>
@@ -411,7 +414,11 @@
         <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_dark</item>
         <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_dark</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
-        <item name="android:textColorPrimary">@color/color_white</item>
+
+        <item name="android:textColorPrimary">@color/text_color_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
+        <item name="android:textColorTertiary">@color/text_color_tertiary_dark</item>
+
         <item name="spinnerItemTextColor">@color/color_white</item>
         <item name="spinnerListBackground">@color/spinner_list_background_dark</item>
         <item name="colorButtonNormal">@color/actionbar_dark_color</item>
@@ -427,7 +434,6 @@
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
-        <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
         <item name="color_dialog_buttons">@color/color_dialog_buttons_dark</item>
@@ -447,7 +453,7 @@
         <item name="dialog_title_color">@color/text_color_primary_dark</item>
         <item name="dialog_description_color">@color/text_color_secondary_dark</item>
         <item name="dialog_text_description_color">@color/text_color_secondary_dark</item>
-        <item name="card_description_text_color">@color/card_description_text_color_dark</item>
+        <item name="card_description_text_color">@color/text_color_tertiary_dark</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_dark</item>
         <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_dark</item>

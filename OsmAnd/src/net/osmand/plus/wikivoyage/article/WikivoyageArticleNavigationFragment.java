@@ -248,7 +248,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			} else {
 				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.secondary_text_dark : R.color.secondary_text_light));
+						? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 			}
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
 
@@ -274,7 +274,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			} else {
 				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.secondary_text_dark : R.color.secondary_text_light));
+						? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 			}
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 

@@ -584,7 +584,7 @@ public class MenuBuilder {
 			textViewSecondary.setLayoutParams(llTextSecondaryParams);
 			textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textViewSecondary.setTextSize(14);
-			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_secondary_text_color_light: R.color.ctx_menu_bottom_view_secondary_text_color_dark));
+			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light: R.color.text_color_secondary_dark));
 			textViewSecondary.setText(secondaryText);
 			llText.addView(textViewSecondary);
 		}

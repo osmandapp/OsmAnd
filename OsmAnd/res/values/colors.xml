@@ -22,9 +22,9 @@
 	<color name="status_bar_color_light">#e68200</color>
 	<color name="status_bar_color_dark">#101112</color>
 
-	<color name="active_buttons_and_links_pressed_light">#0F67EB</color>
-	<color name="active_buttons_and_links_pressed_dark">#B87114</color>
-	<color name="inactive_buttons_and_links_light">#F0F0F0</color>
+	<color name="active_buttons_and_links_pressed_light">#0f67eb</color>
+	<color name="active_buttons_and_links_pressed_dark">#b87114</color>
+	<color name="inactive_buttons_and_links_light">#f0f0f0</color>
 	<color name="inactive_buttons_and_links_dark">#222526</color>
 	<color name="stroked_buttons_and_links_light">#ffffff</color>
 	<color name="stroked_buttons_and_links_dark">#17181a</color>
@@ -39,30 +39,20 @@
 	<color name="subscription_active_div_color_dark">#32332c</color>
 	<color name="feature_purchased_bg">#78cc5c</color>
 
-	<color name="dialog_divider_light">#e6e6e6</color>
-	<color name="dialog_divider_dark">#2d3133</color>
-	<color name="card_description_text_color_light">#b3b3b3</color>
-	<color name="card_description_text_color_dark">#4d4d4d</color>
-
-	<color name="ctx_menu_nearby_routes_text_color_dark">#bfbfbf</color>
 	<color name="map_toolbar_switch_track_color">#c5d2e6</color>
+
 	<color name="mapillary_color">#3db878</color>
 	<color name="mapillary_color_pressed">#3a9f73</color>
 	<color name="mapillary_action_bar">#14c45d</color>
 	<color name="buy_button_color">#50ae55</color>
     <color name="buy_button_pressed_color">#b5e5b9</color>
 
-	<color name="gpx_track_width_prop">#853fc5</color>
     <color name="xmas_blue">#3f51b5</color>
 
-	<color name="disabled_btn_text_color">#a0a0a0</color>
 	<color name="discount_bar_bg">#357ef2</color>
 
-    <color name="searchbar_text_dark">#fff</color>
-    <color name="searchbar_text_light">#212121</color>
     <color name="searchbar_text_hint_dark">#7a8c99</color>
     <color name="searchbar_text_hint_light">#727272</color>
-
 	<color name="searchbar_tab_inactive_dark">#5b6872</color>
 	<color name="searchbar_tab_inactive_light">#727272</color>
 
@@ -82,8 +72,6 @@
 	<color name="popup_separator_color">#BBBBBB</color>
 	<color name="popup_text_color">#FFFFFF</color>
 
-	<color name="primary_text_light">#de000000</color>
-	<color name="secondary_text_light">#8a000000</color>
 	<color name="primary_text_dark">#ffffffff</color>
 	<color name="secondary_text_dark">#b3ffffff</color>
 
@@ -153,7 +141,6 @@
 
 	<color name="icon_color">#727272</color>
 	<color name="icon_color_light">#ccc</color>
-	<color name="icon_color_dark">#ff4f4f4f</color>
 
 	<color name="on_map_icon_color">#505050</color>
 

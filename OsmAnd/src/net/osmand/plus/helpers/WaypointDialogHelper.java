@@ -117,7 +117,7 @@ public class WaypointDialogHelper {
 				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 				textDeviation.setText(devStr);
 				if (!topBar) {
-					int colorId = nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light;
+					int colorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 					AndroidUtils.setTextSecondaryColor(activity, textDeviation, nightMode);
 					if (ps.deviationDirectionRight) {
 						textDeviation.setCompoundDrawablesWithIntrinsicBounds(

@@ -58,7 +58,7 @@ public class MapMarkerDialogHelper {
 		if (!marker.history) {
 			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
 		} else {
-			dd.setImage(arrowResId, nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light);
+			dd.setImage(arrowResId, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 		}
 		if (loc == null || heading == null || marker.point == null) {
 			dd.setAngle(0);
