@@ -1338,7 +1338,7 @@
     <string name="navigate_point_easting">東行線</string>
     <string name="navigate_point_zone">地區</string>
     <string name="map_locale">地圖上的語言</string>
-    <string name="rendering_attr_transportStops_name">公車站牌</string>
+    <string name="rendering_attr_transportStops_name">轉運站</string>
     <string name="voices">提示語音</string>
     <string name="dash_download_msg_none">要下載離線地圖嗎？</string>
     <string name="dash_download_msg">您已下載了 %1$s 的地圖</string>
@@ -1928,7 +1928,7 @@
     <string name="no_waypoints_found">未發現任何航點</string>
     <string name="rendering_value_medium_name">中等</string>
     <string name="rendering_value_bold_name">粗的</string>
-    <string name="rendering_value_thin_name">細的</string>
+    <string name="rendering_value_thin_name">細</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX 檔案已選擇</string>
     <string name="map_mode">地圖模式</string>
     <string name="access_default_color">預設顏色</string>
@@ -2440,7 +2440,7 @@
     <string name="shared_string_reload">重新載入</string>
     <string name="mapillary_menu_descr_tile_cache">請重新載入圖磚，以查看最新的資料。</string>
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
-    <string name="shared_string_reset">重置</string>
+    <string name="shared_string_reset">重設</string>
     <string name="store_tracks_in_monthly_directories">在每月的資料夾中存儲已記錄的軌跡</string>
     <string name="store_tracks_in_monthly_directories_descrp">存儲已記錄的軌跡以月份記錄在子資料夾中 (例如 2018-01）。</string>
     <string name="average">平均</string>
@@ -3127,4 +3127,13 @@
     <string name="shared_string_icon">圖示</string>
     <string name="collected_data">已蒐集的資料</string>
     <string name="press_again_to_change_the_map_orientation">再按一次以變更地圖方向</string>
+    <string name="shared_string_min_speed">最低速度</string>
+    <string name="shared_string_max_speed">最高速度</string>
+    <string name="default_speed_setting_title">預設速度</string>
+    <string name="default_speed_setting_descr">變更預設速度設定</string>
+    <string name="minmax_speed_dialog_title">設定最小／最大速度</string>
+    <string name="default_speed_dialog_msg">用於在導航期間計算預計到達時間</string>
+    <string name="new_profile">新設定檔</string>
+    <string name="shared_string_crash">當機</string>
+    <string name="last_launch_crashed">OsmAnd 上次啟動失敗。協助我們改善 OsmAnd。請將錯誤訊息傳送給我們。</string>
 </resources>

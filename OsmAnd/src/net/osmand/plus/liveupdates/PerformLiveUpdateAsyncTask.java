@@ -85,6 +85,7 @@ public class PerformLiveUpdateAsyncTask
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
 			List<IncrementalChangesManager.IncrementalUpdate> ll = result.getItemsForUpdate();
 			if (ll != null && !ll.isEmpty()) {
+				LOG.debug("Updates quantity: " + ll.size());
 				ArrayList<IndexItem> itemsToDownload = new ArrayList<>(ll.size());
 				for (IncrementalChangesManager.IncrementalUpdate iu : ll) {
 					IndexItem indexItem = new IndexItem(iu.fileName, "Incremental update",
@@ -92,12 +93,17 @@ public class PerformLiveUpdateAsyncTask
 							iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
 					itemsToDownload.add(indexItem);
 				}
+				LOG.debug("Items to download size: " + itemsToDownload.size());
 				DownloadIndexesThread downloadThread = application.getDownloadThread();
 				if (context instanceof DownloadIndexesThread.DownloadEvents) {
 					downloadThread.setUiActivity((DownloadIndexesThread.DownloadEvents) context);
 				}
 				boolean downloadViaWiFi =
 						LiveUpdatesHelper.preferenceDownloadViaWiFi(localIndexFileName, settings).get();
+
+				LOG.debug("Internet connection available: " + getMyApplication().getSettings().isInternetConnectionAvailable());
+				LOG.debug("Download via Wifi: " + downloadViaWiFi);
+				LOG.debug("Is wifi available: " + getMyApplication().getSettings().isWifiConnected());
 				if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
 					if (userRequested || settings.isWifiConnected() || !downloadViaWiFi) {
 						long szLong = 0;
@@ -113,6 +119,8 @@ public class PerformLiveUpdateAsyncTask
 						double sz = ((double) szLong) / (1 << 20);
 						// get availabile space
 						double asz = downloadThread.getAvailableSpace();
+
+						LOG.debug("Download size: " + sz + ", available space: " + asz);
 						if (asz == -1 || asz <= 0 || sz / asz <= 0.4) {
 							IndexItem[] itemsArray = new IndexItem[itemsToDownload.size()];
 							itemsArray = itemsToDownload.toArray(itemsArray);
@@ -120,8 +128,11 @@ public class PerformLiveUpdateAsyncTask
 							if (context instanceof DownloadIndexesThread.DownloadEvents) {
 								((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
 							}
+						} else {
+							LOG.debug("onPostExecute: Not enough space for updates");
 						}
-					}
+					} 
+					LOG.debug("onPostExecute: No internet connection");
 				}
 			} else {
 				if (context instanceof DownloadIndexesThread.DownloadEvents) {

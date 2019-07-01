@@ -26,7 +26,8 @@ import java.util.List;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
-	private static double distanceClosestToIntermediate = 400;
+	private static double distanceClosestToIntermediate = 3000;
+	private static double distanceThresholdToIntermediate = 25;
 	// could not be null and immodifiable!
 	private final List<Location> locations;
 	private final List<RouteDirectionInfo> directions;
@@ -133,27 +134,31 @@ public class RouteCalculationResult {
 			List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if(intermediates != null && localDirections != null) {
 			int[] interLocations = new int[intermediates.size()];
-			int currentIntermediate = 0;
-			int currentLocation = 0;
-			double distanceThreshold = 25;
-			double prevDistance = distanceThreshold * 4;
-			while((currentIntermediate < intermediates.size() || prevDistance > distanceThreshold)
-				&& currentLocation < locations.size()){
-				if(currentIntermediate < intermediates.size() &&
-						getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation) < distanceClosestToIntermediate) {
-					prevDistance = getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation);
-					interLocations[currentIntermediate] = currentLocation;
-					currentIntermediate++;
-				} else if(currentIntermediate > 0 && prevDistance > distanceThreshold && 
-						getDistanceToLocation(locations, intermediates.get(currentIntermediate - 1), 
-						currentLocation) < prevDistance) {
-					prevDistance = getDistanceToLocation(locations, intermediates.get(currentIntermediate - 1), currentLocation);
-					interLocations[currentIntermediate - 1] = currentLocation;
+			for(int currentIntermediate = 0; currentIntermediate < intermediates.size(); currentIntermediate++ ) {
+				double setDistance = distanceClosestToIntermediate ;
+				LatLon currentIntermediatePoint = intermediates.get(currentIntermediate);
+				int prevLocation = currentIntermediate == 0 ? 0 : interLocations[currentIntermediate - 1];
+				for(int currentLocation = prevLocation; currentLocation < locations.size();
+						currentLocation++) {
+					double currentDistance = getDistanceToLocation(locations, currentIntermediatePoint, currentLocation);
+					if(currentDistance < setDistance) {
+						interLocations[currentIntermediate] = currentLocation;
+						setDistance = currentDistance;
+					} else if(currentDistance > distanceThresholdToIntermediate &&
+							setDistance < distanceThresholdToIntermediate) {
+						// finish search
+						break;
+					}
+
 				}
-				currentLocation ++;
+				if(setDistance == distanceClosestToIntermediate) {
+					return;
+				}
 			}
+
+
 			int currentDirection = 0;
-			currentIntermediate = 0;
+			int currentIntermediate = 0;
 			while(currentIntermediate < intermediates.size() && currentDirection < localDirections.size()){
 				int locationIndex = localDirections.get(currentDirection).routePointOffset ;
 				if (locationIndex >= interLocations[currentIntermediate]) {

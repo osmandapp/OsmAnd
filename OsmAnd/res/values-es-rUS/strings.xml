@@ -2429,7 +2429,7 @@ Lon %2$s</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
-    <string name="mapillary_action_descr">Contribuye con tu propia vista a nivel de calle de esta ubicación a través de Mapillary.</string>
+    <string name="mapillary_action_descr">Contribuye con tus propias imágenes a nivel de calle de esta ubicación a través de Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">No se encontraron fotos en esta ubicación.</string>
@@ -3140,4 +3140,36 @@ Lon %2$s</string>
     <string name="shared_string_icon">Icono</string>
     <string name="collected_data">Datos recopilados</string>
     <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
+    <string name="shared_string_min_speed">Velocidad mínima</string>
+    <string name="shared_string_max_speed">Velocidad máxima</string>
+    <string name="default_speed_setting_title">Velocidad predefinida</string>
+    <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
+    <string name="minmax_speed_dialog_title">Fijar velocidad mín/máx</string>
+    <string name="default_speed_dialog_msg">Se utiliza para calcular la hora de llegada prevista durante la ruta</string>
+    <string name="new_profile">Nuevo perfil</string>
+    <string name="shared_string_crash">Cuelgue</string>
+    <string name="last_launch_crashed">El último lanzamiento de OsmAnd falló. Ayúdenos a mejorar OsmAnd. Por favor, envíenos un mensaje de error.</string>
+    <string name="app_mode_ufo">Ovni</string>
+    <string name="release_3_4">• Perfiles de aplicación: crea tu propio perfil según tus necesidades, con un icono y color personalizado
+\n
+\n • Se añadió en los perfiles, la velocidad predefinida y la velocidad mín./máx.
+\n
+\n • Se añadió un widget con las coordenadas actuales
+\n
+\n • Se añadieron opciones para mostrar la brújula en el mapa con una regla radial
+\n
+\n • Se mejoraron las descargas de mapas en segundo plano
+\n
+\n • Se corrigió la selección de idioma de Wikipedia
+\n
+\n • Se corrigió el comportamiento de los botones de la brújula durante la navegación
+\n
+\n • Corrección de errores
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Transportador personal</string>
+    <string name="app_mode_monowheel">Monociclo</string>
+    <string name="app_mode_scooter">Motoneta</string>
+    <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisión horizontal: %s</string>
 </resources>

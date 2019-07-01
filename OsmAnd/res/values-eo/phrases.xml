@@ -116,7 +116,7 @@
     <string name="poi_resource_mercury">Hidrargo</string>
     <string name="poi_wiki_lang_eo">Vikipedio Esperanta</string>
     <string name="poi_sauna">Ŝvitbanejo</string>
-    <string name="poi_toilets">Necesejo</string>
+    <string name="poi_toilets">Necesejo;klozeto;urinejo;banĉambro;banejo;fekejo;pisejo</string>
     <string name="poi_note">Noto</string>
     <string name="poi_curtain">Kurten-vendejo</string>
     <string name="poi_fabric">Teksaĵ-vendejo</string>
@@ -140,7 +140,7 @@
     <string name="poi_glaziery">Vitristejo</string>
     <string name="poi_newsagent">Gazet-vendejo</string>
     <string name="poi_fire_hydrant">Hidranto</string>
-    <string name="poi_fuel">Benzinejo;benzinvendejo;benzinejo;benzinstacio;fuelejo;brulaĵvendejo;dizelpetrolvendejo</string>
+    <string name="poi_fuel">Benzinejo;benzinvendejo;benzinstacio;fuelejo;brulaĵvendejo;dizelpetrolvendejo;stacio benzina</string>
     <string name="poi_car_wash">Aŭtomobil-purigejo</string>
     <string name="poi_bus_stop">Haltejo aŭtobusa</string>
     <string name="poi_bridge">Ponto</string>

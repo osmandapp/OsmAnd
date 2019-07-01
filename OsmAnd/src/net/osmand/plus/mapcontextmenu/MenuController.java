@@ -20,7 +20,9 @@ import android.widget.LinearLayout;
 import java.util.Map;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.PlatformUtil;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -35,6 +37,8 @@ import net.osmand.map.WorldRegion;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -85,6 +89,7 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.logging.Log;
 
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
@@ -125,6 +130,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	private DownloadIndexesThread downloadThread;
 
 	protected List<OpeningHours.Info> openingHoursInfo;
+
+	private static final Log LOG = PlatformUtil.getLog(MenuController.class);
 
 	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
 		super(mapActivity);
@@ -270,6 +277,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		if (pointDescription.isMyLocation()) {
+			addSpeedToPlainItems();
+			addAltitudeToPlainItems();
+			addPrecisionToPlainItems();
+		}
 		addMyLocationToPlainItems(latLon);
 	}
 
@@ -280,6 +292,51 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			Map<String, String> locationData = PointDescription.getLocationData(mapActivity, latlon.getLatitude(), latlon.getLongitude(), true);
 			CollapsableView cv = builder.getLocationCollapsableView(locationData);
 			addPlainMenuItem(R.drawable.ic_action_get_my_location, locationData.get(f).replace("\n", " "), true, false, true, cv, null);
+		}
+	}
+
+	protected void addSpeedToPlainItems() {
+		final MapActivity mapActivity = getMapActivity();
+		if (getMapActivity() != null) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
+			if (l != null && l.hasSpeed() && l.getSpeed() > 0f) {
+				String speed = OsmAndFormatter.getFormattedSpeed(l.getSpeed(), app);
+				addPlainMenuItem(R.drawable.ic_action_speed, null, speed, false, false, null);
+			}
+		}
+	}
+
+	protected void addAltitudeToPlainItems() {
+		final MapActivity mapActivity = getMapActivity();
+		if (getMapActivity() != null) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
+			if (l != null && l.hasAltitude()) {
+				String alt = OsmAndFormatter.getFormattedAlt(l.getAltitude(), app);
+				addPlainMenuItem(R.drawable.ic_action_altitude_average, null, alt, false, false, null);
+			}
+		}
+	}
+
+	protected void addPrecisionToPlainItems() {
+		final MapActivity mapActivity = getMapActivity();
+		if (getMapActivity() != null ) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
+			if (l != null && l.hasAccuracy()) {
+				String acc;
+				if (l.hasVerticalAccuracy()) {
+					acc = String.format(app.getString(R.string.precision_hdop_and_vdop),
+						OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app),
+						OsmAndFormatter.getFormattedDistance(l.getVerticalAccuracy(), app));
+				} else {
+					acc = String.format(app.getString(R.string.precision_hdop),
+						OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app));
+				}
+
+				addPlainMenuItem(R.drawable.ic_action_ruler_circle, null, acc, false, false, null);
+			}
 		}
 	}
 

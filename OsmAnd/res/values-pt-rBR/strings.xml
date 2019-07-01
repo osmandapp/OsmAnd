@@ -1318,8 +1318,8 @@ Pôr do Sol: %2$s</string>
     <string name="poi_context_menu_modify">Modificar POI</string>
     <string name="poi_context_menu_delete">Apagar POI</string>
     <string name="rotate_map_compass_opt">Na direção da bússola</string>
-    <string name="rotate_map_bearing_opt">Direção do movimento</string>
-    <string name="rotate_map_none_opt">Não gire (o norte está para cima)</string>
+    <string name="rotate_map_bearing_opt">Na direção do movimento</string>
+    <string name="rotate_map_none_opt">Não gire (o norte sempre para cima)</string>
     <string name="rotate_map_to_bearing_descr">Selecionar o alinhamento do mapa.</string>
     <string name="rotate_map_to_bearing">Orientação do mapa</string>
     <string name="show_route">Detalhes da rota</string>
@@ -1999,7 +1999,7 @@ Pôr do Sol: %2$s</string>
     <string name="date_added">Data adicionada</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar distância e orientação para marcadores de mapa na tela do mapa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione sob qual velocidade a orientação do mapa muda de \'Na direção do movimento\' para \'Na direção da bússola\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a velocidade em que a orientação muda de \'Na direção do movimento\' para \'Na direção da bússola\'.</string>
     <string name="all_markers_moved_to_history">Todos os marcadores de mapa foram movidas para o histórico</string>
     <string name="marker_moved_to_history">O marcador de mapa foi movido para o histórico</string>
     <string name="marker_moved_to_active">O marcador de mapa foi movido para ativo</string>
@@ -3125,4 +3125,36 @@ Pôr do Sol: %2$s</string>
     <string name="collected_data">Dados coletados</string>
     <string name="app_profile_custom_nav_subtitle">.</string>
     <string name="press_again_to_change_the_map_orientation">Pressione novamente para alterar a orientação do mapa</string>
+    <string name="shared_string_min_speed">Velocidade mínima</string>
+    <string name="shared_string_max_speed">Velocidade máxima</string>
+    <string name="default_speed_setting_title">Velocidade padrão</string>
+    <string name="default_speed_setting_descr">Alterar as configurações de velocidade padrão</string>
+    <string name="minmax_speed_dialog_title">Definir velocidade mínima/máxima</string>
+    <string name="default_speed_dialog_msg">Usado para cálculos do tempo de chegada previsto durante o roteamento</string>
+    <string name="new_profile">Novo perfil</string>
+    <string name="shared_string_crash">Erro</string>
+    <string name="last_launch_crashed">"O último lançamento do OsmAnd falhou.  Ajude-nos a melhorar o OsmAnd.  Por favor envie-nos uma mensagem de erro."</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">• Perfis de aplicativos: crie seu próprio perfil para suas necessidades, com um ícone e cor personalizados
+\n
+\n  • Adicionar configurações para padrão e velocidade mínima/máxima para perfis
+\n
+\n  • Adicionar um widget com coordenadas atuais
+\n
+\n  • Adicione opções para mostrar a bússola no mapa com uma régua de raio
+\n
+\n  • Melhorias no download de mapas em segundo plano
+\n
+\n  • Corrigida a seleção de idioma da Wikipedia
+\n
+\n  • Comportamento do botão bússola fixo durante a navegação
+\n
+\n  • Correções de erros
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Transportador pessoal</string>
+    <string name="app_mode_monowheel">Monociclo</string>
+    <string name="app_mode_scooter">Lambreta</string>
+    <string name="precision_hdop_and_vdop">Precisão horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisão horizontal: %s</string>
 </resources>

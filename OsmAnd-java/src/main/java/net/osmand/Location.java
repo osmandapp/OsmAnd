@@ -41,6 +41,8 @@ public class Location {
     private float mBearing = 0.0f;
     private boolean mHasAccuracy = false;
     private float mAccuracy = 0.0f;
+    private boolean mHasVerticalAccuracy = false;
+    private float mVerticalAccuracy = 0.0f;
 
     // Cache the inputs and outputs of computeDistanceAndBearing
     // so calls to distanceTo() and bearingTo() can share work
@@ -89,6 +91,8 @@ public class Location {
         mBearing = l.mBearing;
         mHasAccuracy = l.mHasAccuracy;
         mAccuracy = l.mAccuracy;
+        mHasVerticalAccuracy = l.mHasVerticalAccuracy;
+        mVerticalAccuracy = l.mVerticalAccuracy;
     }
 
     /**
@@ -494,6 +498,41 @@ public class Location {
         mHasAccuracy = false;
     }
 
+
+    /**
+     * Returns true if the provider is able to report vertical accuracy information,
+     * false otherwise.  The default implementation returns false.
+     */
+    public boolean hasVerticalAccuracy() {
+        return mHasVerticalAccuracy;
+    }
+
+    /**
+     * Returns the accuracy of the fix in meters. If hasVerticalAccuracy() is false,
+     * 0.0 is returned.
+     */
+    public float getVerticalAccuracy() {
+        return mVerticalAccuracy;
+    }
+
+    /**
+     * Sets the accuracy of this fix.  Following this call, hasVerticalAccuracy()
+     * will return true.
+     */
+    public void setVerticalAccuracy(float verticalAccuracy) {
+        this.mVerticalAccuracy = verticalAccuracy;
+        mHasVerticalAccuracy = true;
+    }
+
+    /**
+     * Clears the vertical accuracy of this fix.  Following this call, hasVerticalAccuracy()
+     * will return false.
+     */
+    public void removeVerticalAccuracy() {
+        mVerticalAccuracy = 0.0f;
+        mHasVerticalAccuracy = false;
+    }
+
     @Override public String toString() {
         return "Location[mProvider=" + mProvider +
             ",mTime=" + mTime +
@@ -506,7 +545,9 @@ public class Location {
             ",mHasBearing=" + mHasBearing +
             ",mBearing=" + mBearing +
             ",mHasAccuracy=" + mHasAccuracy +
-            ",mAccuracy=" + mAccuracy;
+            ",mAccuracy=" + mAccuracy +
+            ",mHasVerticalAccuracy=" + mHasVerticalAccuracy +
+            ",mVerticalAccuracy=" + mVerticalAccuracy;
     }
 
     

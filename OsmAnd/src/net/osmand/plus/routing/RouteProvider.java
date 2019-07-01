@@ -1145,9 +1145,9 @@ public class RouteProvider {
 		}
 		lats[index] = params.end.getLatitude();
 		lons[index] = params.end.getLongitude();
-		if (ApplicationMode.PEDESTRIAN == params.mode) {
+		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			mode = "foot"; //$NON-NLS-1$
-		} else if (ApplicationMode.BICYCLE == params.mode) {
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			mode = "bicycle"; //$NON-NLS-1$
 		} else {
 			mode = "motorcar"; //$NON-NLS-1$

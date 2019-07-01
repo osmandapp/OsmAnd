@@ -37,5 +37,12 @@ interface IOsmAndAidlCallback {
      */
     void updateNavigationInfo(in ADirectionInfo directionInfo);
 
+    /**
+     *  Callback for {@link IOsmAndAidlInterface} buttons set with addContextMenuButtons() method.
+     *
+     *  @param buttonId - id of custom button
+     *  @param pointId - id of point button associated with
+     *  @param layerId - id of layer point and button associated with
+     */
     void onContextMenuButtonClicked(in int buttonId, String pointId, String layerId);
 }

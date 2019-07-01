@@ -1588,15 +1588,15 @@
     <string name="shared_string_do_not_use">Nu folosiți</string>
     <string name="shared_string_enable">Permite</string>
     <string name="shared_string_disable">Dezactiv</string>
-    <string name="shared_string_enabled">Permis</string>
-    <string name="shared_string_disabled">Nepermis</string>
+    <string name="shared_string_enabled">Activat</string>
+    <string name="shared_string_disabled">Dezactivat</string>
     <string name="shared_string_deselect">Deselectați</string>
     <string name="shared_string_deselect_all">Deselect tot</string>
     <string name="shared_string_share">Distribuiți</string>
     <string name="shared_string_export">Export</string>
     <string name="shared_string_unexpected_error">Eroare neașteptată</string>
     <string name="shared_string_action_template">Acțiunea {0}</string>
-    <string name="shared_string_collapse">Căzut</string>
+    <string name="shared_string_collapse">Colapsați</string>
     <string name="shared_string_address">Adresa</string>
     <string name="shared_string_currently_recording_track">Acum se înregistrează un traseu</string>
     <string name="shared_string_audio">Audio</string>
@@ -2377,4 +2377,13 @@
     <string name="shared_string_color_magenta">Purpuriu</string>
     <string name="shared_string_icon">Icoană</string>
     <string name="collected_data">Date colectate</string>
+    <string name="map_widget_map_rendering">Randare hartă</string>
+    <string name="arrival_distance_descr">Cât de repede vrei să se anunțe sosirea\?</string>
+    <string name="press_again_to_change_the_map_orientation">Apăsați din nou pentru a schimba orientarea hărții</string>
+    <string name="shared_string_min_speed">Viteza min.</string>
+    <string name="shared_string_max_speed">Viteza max.</string>
+    <string name="default_speed_setting_title">Viteză implicită</string>
+    <string name="default_speed_setting_descr">Modificați setările de viteză implicită</string>
+    <string name="minmax_speed_dialog_title">Setați viteza min/max</string>
+    <string name="new_profile">Profil nou</string>
 </resources>
