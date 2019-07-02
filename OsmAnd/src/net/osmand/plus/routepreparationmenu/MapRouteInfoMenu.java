@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.res.Configuration;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -804,10 +806,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			updateApplicationMode(am, next);
 		}
 
-		View ll = mapActivity.getLayoutInflater().inflate(R.layout.mode_toggles, vg);
+		final View ll = mapActivity.getLayoutInflater().inflate(R.layout.mode_toggles, vg);
 		ll.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
 
-		HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
+		final HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
 		scrollView.setVerticalScrollBarEnabled(false);
 		scrollView.setHorizontalScrollBarEnabled(false);
 
@@ -837,6 +839,35 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		for (int i = 0; i < buttons.length; i++) {
 			AppModeDialog.updateButtonStateForRoute((OsmandApplication) mapActivity.getApplication(), values, selected, listener, buttons, i, true, true, nightMode);
 		}
+
+		final int[] scrollLength = {0};
+		int buttonWidth = AndroidUtils.dpToPx(mapActivity,
+			(int) mapActivity.getResources().getDimension(R.dimen.route_info_modes_height));
+		if (app.getResources().getConfiguration().orientation
+			== Configuration.ORIENTATION_PORTRAIT) {
+			for (int i = 0; i < values.size(); i++) {
+				if (values.get(i).equals(app.getSettings().getApplicationMode())
+					&& (i - 1) * buttonWidth > AndroidUtils.getScreenWidth(mapActivity)) {
+					scrollLength[0] = i * buttonWidth - AndroidUtils.getScreenWidth(mapActivity);
+				}
+			}
+		} else {
+			for (int i = 0; i < values.size(); i++) {
+				if (values.get(i).equals(app.getSettings().getApplicationMode())) {
+					scrollLength[0] = i * buttonWidth - (int) app.getResources()
+						.getDimension(R.dimen.dashboard_land_width);
+				}
+			}
+		}
+		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				scrollView.scrollTo(scrollLength[0], 0);
+				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+			}
+		};
+		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		
 	}
 
 	private void updateOptionsButtons() {

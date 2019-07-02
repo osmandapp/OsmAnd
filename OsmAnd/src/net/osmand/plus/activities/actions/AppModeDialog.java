@@ -1,6 +1,7 @@
 package net.osmand.plus.activities.actions;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.LayoutRes;
@@ -8,11 +9,14 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -21,9 +25,12 @@ import net.osmand.plus.R;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.apache.commons.logging.Log;
 
 public class AppModeDialog {
 
+	private static final Log LOG = PlatformUtil.getLog(AppModeDialog.class);
+	
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
 	                                      ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
 		OsmandApplication app = (OsmandApplication) a.getApplication();
@@ -58,7 +65,7 @@ public class AppModeDialog {
 
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values, final Set<ApplicationMode> selected,
 	                                      ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener, boolean nightMode) {
-		View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
+		final View ll = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		if (useListBg) {
 			AndroidUtils.setListItemBackground(a, ll, nightMode);
 		} else {
@@ -73,6 +80,37 @@ public class AppModeDialog {
 			updateButtonState((OsmandApplication) a.getApplication(), values, selected, onClickListener, buttons, i,
 					singleSelection, useMapTheme, nightMode);
 		}
+
+		final int[] scrollLength = {0};
+		OsmandApplication app = (OsmandApplication) a.getApplication();
+		int buttonWidth = AndroidUtils.dpToPx(a, (int) a.getResources().getDimension(R.dimen.route_info_modes_height));
+		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
+		final HorizontalScrollView sv = ll.findViewById(R.id.app_modes_scroll_container);
+
+		if (app.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+			for (int i = 0; i < modes.size(); i++) {
+				if (modes.get(i).equals(app.getSettings().getApplicationMode())
+					&& (i - 1) * buttonWidth > AndroidUtils.getScreenWidth(a)) {
+					scrollLength[0] = i * buttonWidth - AndroidUtils.getScreenWidth(a);
+				}
+			}
+		} else {
+			for (int i = 0; i < modes.size(); i++) {
+				if (modes.get(i).equals(app.getSettings().getApplicationMode())) {
+					scrollLength[0] = i * buttonWidth - (int) app.getResources()
+						.getDimension(R.dimen.dashboard_land_width);
+				}
+			}
+		}
+
+		OnGlobalLayoutListener listener = new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				sv.scrollTo(scrollLength[0], 0);
+				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+			}
+		};
+		ll.getViewTreeObserver().addOnGlobalLayoutListener(listener);
 		return ll;
 	}
 
