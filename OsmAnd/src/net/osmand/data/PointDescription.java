@@ -186,17 +186,9 @@ public class PointDescription {
 		String latLonDeg;
 		String latLonMin;
 		String latLonSec;
-		String utm;
-		String olc;
 		
-		UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-		utm = pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " " + ((long) pnt.northing);
-
-		try {
-			olc = getLocationOlcName(lat, lon);
-		} catch (RuntimeException e) {
-			olc = "0, 0";
-		}
+		String utm = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_UTM);
+		String olc = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_OLC);
 		
 		try {
 			latLonString = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
@@ -237,7 +229,6 @@ public class PointDescription {
 		} else if (f == PointDescription.FORMAT_SECONDS) {
 			results.put(LOCATION_LIST_HEADER, latLonSec);
 		}
-		
 		return results;
 	}
 

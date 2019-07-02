@@ -17,9 +17,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.text.util.Linkify;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -681,7 +683,15 @@ public class MenuBuilder {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (final Map.Entry<Integer, String> line : locationData.entrySet()) {
 			final TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
-			button.setText(line.getValue());
+			if (line.getKey() == OsmAndFormatter.FORMAT_UTM || line.getKey() == OsmAndFormatter.FORMAT_OLC) {
+				SpannableStringBuilder ssb = new SpannableStringBuilder();
+				ssb.append(line.getKey() == OsmAndFormatter.FORMAT_UTM ? "UTM: " : "OLC: ");
+				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ssb.append(line.getValue());
+				button.setText(ssb);
+			} else {
+				button.setText(line.getValue());
+			}
 			button.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
