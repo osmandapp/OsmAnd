@@ -3035,7 +3035,7 @@
     <string name="routing_attr_avoid_train_name">Evitar los trenes</string>
     <string name="routing_attr_avoid_train_description">Evita usar los trenes</string>
     <string name="routing_attr_avoid_subway_name">Evitar los subterráneos o metros</string>
-    <string name="routing_attr_avoid_subway_description">Evita los metros y trenes ligeros</string>
+    <string name="routing_attr_avoid_subway_description">Evita transporte en metro y en tren ligero</string>
     <string name="routing_attr_avoid_ferry_name">Evitar los ferris/transbordadores</string>
     <string name="routing_attr_avoid_ferry_description">Evita usar los ferris o transbordadores</string>
     <string name="release_3_3_7">• Mostrar el tiempo entre transbordos en transporte público
