@@ -395,7 +395,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		}
 		super.onPreferenceChange(preference, newValue);
-		//todo
 		if (id.equals(settings.WAKE_ON_VOICE_TIME_INT.getId())) {
 			Integer value;
 			try {
