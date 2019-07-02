@@ -1955,7 +1955,7 @@
     <string name="map_mode">Modo del mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivos GPX elegidos</string>
     <string name="rendering_value_thin_name">Fino</string>
-    <string name="rendering_value_medium_name">Mediano</string>
+    <string name="rendering_value_medium_name">Medio</string>
     <string name="rendering_value_bold_name">Grueso</string>
     <string name="access_disable_offroute_recalc">No recalcular la ruta, al salirme de la misma</string>
     <string name="access_disable_offroute_recalc_descr">No recalcula la ruta, al alejarse de la misma.</string>
@@ -2115,7 +2115,7 @@
     <string name="rendering_attr_contourDensity_description">Densidad de la curva de nivel</string>
     <string name="rendering_attr_contourDensity_name">Densidad de la curva de nivel</string>
     <string name="rendering_value_high_name">Alto</string>
-    <string name="rendering_value_medium_w_name">Mediano</string>
+    <string name="rendering_value_medium_w_name">Medio</string>
     <string name="rendering_value_low_name">Bajo</string>
     <string name="rendering_attr_contourWidth_description">Anchura de la curva de nivel</string>
     <string name="rendering_attr_contourWidth_name">Anchura de la curva de nivel</string>
@@ -3186,4 +3186,6 @@
     <string name="routing_attr_difficulty_preference_description">Preferir las rutas de esta dificultad, aunque si la ruta es más corta, es posible usar pistas más difíciles o más fáciles.</string>
     <string name="routing_attr_freeride_policy_name">Fuera de pista</string>
     <string name="routing_attr_freeride_policy_description">Las rutas fuera de pista son rutas no oficiales. Por lo general, no arregladas, sin el mantenimiento de los operarios y no revisadas por la noche. Entre bajo su propio riesgo.</string>
+    <string name="routing_profile_geocoding">Geocodificación</string>
+    <string name="shared_string_crash">Choque</string>
 </resources>
