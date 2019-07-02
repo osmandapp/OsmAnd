@@ -675,7 +675,7 @@ Lon %2$s</string>
     <string name="recording_can_not_be_played">La grabación no puede reproducirse</string>
     <string name="recording_context_menu_delete">Borrar grabación</string>
     <string name="recording_context_menu_play">Escuchar</string>
-    <string name="recording_description">Grabado %1$s %3$s %2$s</string>
+    <string name="recording_description">Grabando %1$s %3$s %2$s</string>
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
@@ -3043,8 +3043,8 @@ Lon %2$s</string>
     <string name="public_transport_type">Tipo de transporte</string>
     <string name="searching_gps">Buscando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
-    <string name="rate_dialog_descr">Danos 30 segundos, comparte un comentario y califica nuestro trabajo en Google Play.</string>
-    <string name="button_rate">Calificar</string>
+    <string name="rate_dialog_descr">Por favor, dedícanos 30 segundos, comparte un comentario y valora nuestro trabajo en Google Play.</string>
+    <string name="button_rate">Valorar</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">¡Ayúdanos a mejorar OsmAnd!</string>
     <string name="make_osmand_better_descr">Permitir a OsmAnd recopilar y procesar datos de uso anónimos de la aplicación. No recopilamos ni almacenamos datos sobre la ubicación, ni sobre las ubicaciones que ve en el mapa.
@@ -3076,7 +3076,7 @@ Lon %2$s</string>
     <string name="hide_compass_ruler">Ocultar regla de brújula</string>
     <string name="select_icon_profile_dialog_title">Elegir icono</string>
     <string name="settings_routing_mode_string">Modo: %s</string>
-    <string name="settings_derived_routing_mode_string">Modo Usuario, derivado de: %s</string>
+    <string name="settings_derived_routing_mode_string">Modo de usuario, derivado de: %s</string>
     <string name="routing_profile_ski">Esquí</string>
     <string name="profile_type_descr_string">Tipo: %s</string>
     <string name="profile_type_base_string">Perfil base</string>
@@ -3144,10 +3144,10 @@ Lon %2$s</string>
     <string name="default_speed_setting_title">Velocidad predefinida</string>
     <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
     <string name="minmax_speed_dialog_title">Fijar velocidad mín/máx</string>
-    <string name="default_speed_dialog_msg">Se utiliza para calcular la hora de llegada prevista durante la ruta</string>
+    <string name="default_speed_dialog_msg">Se usa para calcular la hora de llegada prevista durante la ruta</string>
     <string name="new_profile">Nuevo perfil</string>
     <string name="shared_string_crash">Cuelgue</string>
-    <string name="last_launch_crashed">El último lanzamiento de OsmAnd falló. Ayúdenos a mejorar OsmAnd. Por favor, envíenos un mensaje de error.</string>
+    <string name="last_launch_crashed">OsmAnd falló la ultima vez. Por favor, ayúdanos a mejorar OsmAnd y envíanos un mensaje de error.</string>
     <string name="app_mode_ufo">Ovni</string>
     <string name="release_3_4">• Perfiles de aplicación: crea tu propio perfil según tus necesidades, con un icono y color personalizado
 \n
