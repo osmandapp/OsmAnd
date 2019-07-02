@@ -360,7 +360,7 @@
 					android:layout_marginEnd="@dimen/list_content_padding"
 					android:layout_marginLeft="@dimen/list_content_padding"
 					android:layout_marginRight="@dimen/list_content_padding"
-					android:text="Setup Profile"
+					android:text="@string/edit_profile_setup_title"
 					android:textColor="?attr/main_font_color_basic"
 					android:textSize="@dimen/default_list_text_size"/>
 
@@ -372,7 +372,7 @@
 					android:layout_marginEnd="@dimen/list_content_padding"
 					android:layout_marginLeft="@dimen/list_content_padding"
 					android:layout_marginRight="@dimen/list_content_padding"
-					android:text="Profile keeps its own settings"
+					android:text="@string/edit_profile_setup_subtitle"
 					android:textColor="@color/description_font_and_bottom_sheet_icons"/>
 
 				<LinearLayout
@@ -404,14 +404,14 @@
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="Configure map"
+							android:text="@string/edit_profile_configure_map"
 							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="Select default map options for profile"
+							android:text="@string/edit_profile_setup_map_subtitle"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"/>
 					</LinearLayout>
 				</LinearLayout>
@@ -452,14 +452,14 @@
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="Configure screen"
+							android:text="@string/edit_profile_configure_screen_title"
 							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="Select default screen options for profile"
+							android:text="@string/edit_profile_screen_options_subtitle"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"/>
 
 					</LinearLayout>
@@ -502,14 +502,14 @@
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="Navigation settings"
+							android:text="@string/edit_profile_nav_settings_title"
 							android:textColor="?attr/main_font_color_basic"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="Select default navigation settings for profile"
+							android:text="@string/edit_profile_nav_settings_subtitle"
 							android:textColor="@color/description_font_and_bottom_sheet_icons"/>
 
 					</LinearLayout>
