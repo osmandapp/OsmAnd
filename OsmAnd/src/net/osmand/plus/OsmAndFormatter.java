@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.text.format.DateUtils;
 
+import java.text.DecimalFormatSymbols;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
@@ -406,5 +407,96 @@ public class OsmAndFormatter {
 		return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
 				cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
 				cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
+	}
+
+	public static final int FORMAT_DEGREES_SHORT = 100;
+	public static final int FORMAT_DEGREES = 101;
+	public static final int FORMAT_MINUTES = 102;
+	public static final int FORMAT_SECONDS = 103;
+	public static final int FORMAT_UTM = 104;
+	public static final int FORMAT_OLC = 105;
+	private static final char DELIMITER_DEGREES = '°';
+	private static final char DELIMITER_MINUTES = '′';
+	private static final char DELIMITER_SECONDS = '″';
+	
+	private static final char NORTH = 'N';
+	private static final char SOUTH = 'S';
+	private static final char WEST = 'W';
+	private static final char EAST = 'E';
+
+	public static void main(String[] args) {
+		System.out.println(formatLocationCoordinates(30.122345, -42.101245, FORMAT_DEGREES_SHORT));
+		System.out.println(formatLocationCoordinates(30.122345, -42.101245, FORMAT_DEGREES));
+		System.out.println(formatLocationCoordinates(-30.122345, 42.101245, FORMAT_MINUTES));
+		System.out.println(formatLocationCoordinates(30.122345, -42.101245, FORMAT_SECONDS));
+	}
+	
+	public static String formatLocationCoordinates(double lat, double lon, int outputFormat) {
+		StringBuilder sb = new StringBuilder();
+		if (outputFormat == FORMAT_DEGREES_SHORT) {
+			sb.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
+		} else if (outputFormat == FORMAT_DEGREES || outputFormat == FORMAT_MINUTES || outputFormat == FORMAT_SECONDS) {
+			sb
+				.append(formatCoordinate(lat, outputFormat))
+				.append(" ")
+				.append(lat > 0 ? NORTH : SOUTH)
+				.append(", ").append(formatCoordinate(lon, outputFormat))
+				.append(" ")
+				.append(lon > 0 ? EAST : WEST);
+		} else if (outputFormat == FORMAT_OLC) {
+			
+		} else if (outputFormat == FORMAT_UTM) {
+			
+		}
+		return sb.toString();
+	}
+	
+	private static String formatCoordinate(double coordinate, int outputType) {
+		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
+			throw new IllegalArgumentException("coordinate=" + coordinate); //$NON-NLS-1$
+		}
+		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType
+			!= FORMAT_SECONDS) && (outputType != FORMAT_DEGREES_SHORT)) {
+			throw new IllegalArgumentException("outputType=" + outputType); //$NON-NLS-1$
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		// Handle negative values
+		if (coordinate < 0) {
+			if (outputType == FORMAT_DEGREES_SHORT) {
+				sb.append('-');
+			}
+			coordinate = -coordinate;
+		}
+
+		DecimalFormat degDf = new DecimalFormat("##0.00000",new DecimalFormatSymbols(Locale.US));
+		DecimalFormat minDf = new DecimalFormat("00.0000",new DecimalFormatSymbols(Locale.US));
+		DecimalFormat secDf = new DecimalFormat("00.000",new DecimalFormatSymbols(Locale.US));
+		if (outputType == FORMAT_DEGREES_SHORT) {
+			sb.append(degDf.format(coordinate));
+		} else if (outputType == FORMAT_DEGREES) {
+			sb.append(degDf.format(coordinate)).append(DELIMITER_DEGREES);
+		} else if (outputType == FORMAT_MINUTES) {
+			sb.append(minDf.format(formatCoordinate(coordinate, sb, DELIMITER_DEGREES)))
+				.append(DELIMITER_MINUTES);
+		} else {
+			sb.append(secDf.format(formatCoordinate(
+				formatCoordinate(coordinate, sb, DELIMITER_DEGREES), sb, DELIMITER_MINUTES)))
+				.append(DELIMITER_SECONDS);
+		}
+		return sb.toString();
+	}
+
+	private static double formatCoordinate(double coordinate, StringBuilder sb, char delimiter) {
+		int deg = (int) Math.floor(coordinate);
+		if (deg < 10) {
+			sb.append('0');
+		}
+		sb.append(deg);
+		sb.append(delimiter);
+		coordinate -= deg;
+		coordinate *= 60.0;
+		return coordinate;
 	}
 }

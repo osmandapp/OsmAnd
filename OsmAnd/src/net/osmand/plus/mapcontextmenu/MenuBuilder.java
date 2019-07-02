@@ -677,9 +677,9 @@ public class MenuBuilder {
 				Toast.LENGTH_SHORT).show();
 	}
 
-	protected CollapsableView getLocationCollapsableView(Map<String, String> locationData) {
+	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-		for (final Map.Entry<String, String> line : locationData.entrySet()) {
+		for (final Map.Entry<Integer, String> line : locationData.entrySet()) {
 			final TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
 			button.setText(line.getValue());
 			button.setOnClickListener(new OnClickListener() {

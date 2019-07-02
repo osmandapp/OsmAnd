@@ -289,7 +289,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			String f = PointDescription.formatToHumanString(mapActivity,  mapActivity.getMyApplication().getSettings().COORDINATES_FORMAT.get());
-			Map<String, String> locationData = PointDescription.getLocationData(mapActivity, latlon.getLatitude(), latlon.getLongitude(), true);
+			Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latlon.getLatitude(), latlon.getLongitude(), true);
 			CollapsableView cv = builder.getLocationCollapsableView(locationData);
 			addPlainMenuItem(R.drawable.ic_action_get_my_location, locationData.get(f).replace("\n", " "), true, false, true, cv, null);
 		}
