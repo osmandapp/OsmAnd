@@ -1387,6 +1387,24 @@ public class OsmandSettings {
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
 	}
+	
+	public final CommonPreference<Integer> WAKE_ON_VOICE_TIME_INT = new IntPreference("wake_on_voice_time_int", 0).makeProfile();
+
+	{
+		// 0 means never
+		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.CAR, 0);
+		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
+		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
+	}
+
+	public final CommonPreference<Boolean> WAKE_ON_VOICE_SENSOR = new BooleanPreference("wake_on_voice_sensor", false).makeProfile();
+
+	{
+		// 0 means never
+		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.CAR, false);
+		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
@@ -1513,7 +1531,6 @@ public class OsmandSettings {
 		}
 		return null;
 	}
-
 
 	public ITileSource getTileSourceByName(String tileName, boolean warnWhenSelected) {
 		if (tileName == null || tileName.length() == 0) {

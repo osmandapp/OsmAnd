@@ -32,6 +32,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
@@ -497,7 +498,7 @@ public class AppInitializer implements IProgress {
 			app.travelDbHelper.initTravelBooks();
 		}
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
-
+		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 
 		initOpeningHoursParser();
 	}

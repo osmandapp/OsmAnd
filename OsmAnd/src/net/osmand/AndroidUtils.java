@@ -3,6 +3,7 @@ package net.osmand;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -20,6 +21,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -56,6 +58,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static android.content.Context.POWER_SERVICE;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
@@ -536,5 +539,16 @@ public class AndroidUtils {
 			result.put(entry.getKey(), entry.getValue());
 		}
 		return result;
+	}
+
+	public static boolean isScreenOn(Context context) {
+		PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH && powerManager.isInteractive()
+				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH && powerManager.isScreenOn();
+	}
+
+	public static boolean isScreenLocked(Context context) {
+		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+		return keyguardManager.inKeyguardRestrictedInputMode();
 	}
 }

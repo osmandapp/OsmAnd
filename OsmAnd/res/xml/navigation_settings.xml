@@ -73,6 +73,23 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="turn_screen_on"
+        android:title="@string/wake_on_voice"
+        android:summary="@string/wake_on_voice_descr">
+
+        <!--<Preference android:summary="@string/wake_on_voice_descr" />-->
+        
+        <ListPreference
+            android:key="wake_on_voice_time_int"
+            android:summary="@string/wake_on_voice_time_descr"
+            android:title="@string/wake_on_voice_time"/>
+        <CheckBoxPreference
+            android:key="wake_on_voice_sensor"
+            android:summary="@string/wake_on_voice_sensor_descr"
+            android:title="@string/wake_on_voice_sensor"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="voice"
         android:title="@string/voice_pref_title">
         <ListPreference

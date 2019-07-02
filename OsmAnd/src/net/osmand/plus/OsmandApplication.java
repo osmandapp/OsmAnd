@@ -52,6 +52,7 @@ import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
@@ -132,6 +133,7 @@ public class OsmandApplication extends MultiDexApplication {
 	TravelDbHelper travelDbHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
+	LockHelper lockHelper;
 
 	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
@@ -326,7 +328,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public DayNightHelper getDaynightHelper() {
 		return daynightHelper;
 	}
-	
+
+	public LockHelper getLockHelper() {
+		return lockHelper;
+	}
+
 	public synchronized DownloadIndexesThread getDownloadThread() {
 		if(downloadIndexesThread == null) {
 			downloadIndexesThread = new DownloadIndexesThread(this);

@@ -88,7 +88,6 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -101,6 +100,7 @@ import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -159,7 +159,7 @@ import java.util.regex.Pattern;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
-		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener, OsmandAidlApi.AMapKeyguardFlagsUpdateListener {
+		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener, LockHelper.LockUIAdapter {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
@@ -222,6 +222,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	
+	private LockHelper lockHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -229,6 +231,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
 		settings = app.getSettings();
+		lockHelper = app.getLockHelper();
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -339,6 +342,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		registerReceiver(screenOffReceiver, filter);
 
 		app.getAidlApi().onCreateMapActivity(this);
+		
+		lockHelper.setLockUIAdapter(this);
 
 		mIsDestroyed = false;
 	}
@@ -1326,6 +1331,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		lockHelper.setLockUIAdapter(null);
+		
 		mIsDestroyed = true;
 	}
 
@@ -1876,7 +1883,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
 	}
 
-	@Override
 	public void changeKeyguardFlags(final boolean enable) {
 		uiHandler.post(new Runnable() {
 			@Override
@@ -1889,6 +1895,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			}
 		});
+	}
+
+	@Override
+	public void lock() {
+		changeKeyguardFlags(false);
+	}
+
+	@Override
+	public void unlock() {
+		changeKeyguardFlags(true);
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

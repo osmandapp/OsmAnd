@@ -73,6 +73,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -203,7 +204,7 @@ public class OsmandAidlApi {
 	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks= new ConcurrentHashMap<>();
 
 	private AMapPointUpdateListener aMapPointUpdateListener;
-	private AMapKeyguardFlagsUpdateListener aMapKeyguardFlagsUpdateListener;
+	private LockHelper.LockUIAdapter aMapActivityKeyguardFlagsUIAdapter;
 
 	private boolean mapActivityActive = false;
 
@@ -238,7 +239,7 @@ public class OsmandAidlApi {
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
-		aMapKeyguardFlagsUpdateListener = mapActivity;
+		aMapActivityKeyguardFlagsUIAdapter = mapActivity;
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
@@ -1929,8 +1930,12 @@ public class OsmandAidlApi {
 	}
 	
 	public boolean changeMapActivityKeyguardFlags(boolean enable) {
-		if (aMapKeyguardFlagsUpdateListener != null) {
-			aMapKeyguardFlagsUpdateListener.changeKeyguardFlags(enable);
+		if (aMapActivityKeyguardFlagsUIAdapter != null) {
+			if (enable) {
+				aMapActivityKeyguardFlagsUIAdapter.unlock();
+			} else {
+				aMapActivityKeyguardFlagsUIAdapter.lock();
+			}
 			return true;
 		}
 		return false;
@@ -2271,7 +2276,7 @@ public class OsmandAidlApi {
 		void onAMapPointUpdated(AMapPoint point, String layerId);
 
 	}
-	public interface AMapKeyguardFlagsUpdateListener {
+	public interface AKeyguardFlagsUpdateListener {
 		void changeKeyguardFlags(boolean enable);
 	}
 }

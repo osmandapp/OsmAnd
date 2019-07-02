@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -47,7 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.logging.Log;
 
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
@@ -120,7 +118,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.SPEED_SYSTEM, screen, speedNamesVls, speedValues);
         
 //         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
-		
+
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
 		
@@ -181,7 +179,21 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			selectAppModeDialog().show();
 		}
 
+		addWakeOnVoice((PreferenceGroup) screen.findPreference("turn_screen_on"));
+
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
+	}
+
+	private void addWakeOnVoice(PreferenceGroup screen) {
+		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
+		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
+		screenPowerSaveNames[0] = getString(R.string.shared_string_never);
+		for (int i = 1; i < screenPowerSaveValues.length; i++) {
+			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
+					+ getString(R.string.int_seconds);
+		}
+		registerListPreference(settings.WAKE_ON_VOICE_TIME_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
+		registerBooleanPreference(settings.WAKE_ON_VOICE_SENSOR, screen);
 	}
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
@@ -383,6 +395,22 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		}
 		super.onPreferenceChange(preference, newValue);
+		//todo
+		if (id.equals(settings.WAKE_ON_VOICE_TIME_INT.getId())) {
+			Integer value;
+			try {
+				value = Integer.parseInt(newValue.toString());
+			} catch (NumberFormatException e) {
+				value = 0;
+			}
+			if (value > 0) {
+//				requestLockScreenAdmin();
+			}
+		}
+		if (id.equals(settings.WAKE_ON_VOICE_SENSOR.getId())) {
+			Boolean sensorEnabled = Boolean.parseBoolean(newValue.toString());
+			getMyApplication().getLockHelper().switchSensor(sensorEnabled);
+		}
 		return true;
 	}
 
