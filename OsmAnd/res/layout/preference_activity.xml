@@ -103,11 +103,10 @@
 	</LinearLayout>
 
 
-
 	<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" >
-		
+
 		<ImageView
 			android:id="@+id/selector_shadow"
 			android:layout_width="match_parent"
@@ -115,19 +114,17 @@
 			android:src="@drawable/preference_activity_action_bar_shadow"
 			android:visibility="invisible"/>
 
-		<ImageView
-			android:id="@+id/shadowView"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:src="@drawable/preference_activity_action_bar_shadow"
-			tools:ignore="ContentDescription" />
-
 		<ListView
 				android:id="@android:id/list"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent" />
 
-
+		<ImageView
+				android:id="@+id/shadowView"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/abp__shadow_height"
+				android:src="@drawable/preference_activity_action_bar_shadow"
+				tools:ignore="ContentDescription" />
 	</FrameLayout>
 
 </LinearLayout>
