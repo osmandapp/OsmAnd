@@ -122,11 +122,13 @@ public class AppModeDialog {
 			View tb = buttons[i];
 			final ApplicationMode mode = visible.get(i);
 			final boolean checked = selected.contains(mode);
+			final View selection = tb.findViewById(R.id.selection);
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
 			if (checked) {
 				iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
-				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
+				selection.setBackgroundResource(mode.getIconColorInfo().getColor(nightMode));
+				selection.setVisibility(View.VISIBLE);
 			} else {
 				if (useMapTheme) {
 					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
@@ -135,7 +137,7 @@ public class AppModeDialog {
 					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getIconRes()));
 				}
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_unchecked)));
-				tb.findViewById(R.id.selection).setVisibility(View.INVISIBLE);
+				selection.setVisibility(View.INVISIBLE);
 			}
 			iv.setOnClickListener(new View.OnClickListener() {
 
