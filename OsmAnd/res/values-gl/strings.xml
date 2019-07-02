@@ -3183,24 +3183,26 @@ Lon %2$s</string>
     <string name="routing_attr_freeride_policy_name">Fóra de pista</string>
     <string name="routing_attr_freeride_policy_description">As pistas libres e fóra de pista son rotas e pasaxes non oficiais. Adoitan ser descoidadas, non mantidas polos oficiais e non controladas pola noite. Entrar baixo o teu propio risco.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• Perfís de aplicación: crea o teu propio perfil para as túas necesidades, cunha icona e unha cor personalizadas
-\n
-\n • Engade a opción para estabelecer a velocidade predeterminada e mínima/máxima para os diferentes perfís
-\n
-\n • Engade un trebello para amosar as coordenadas actuais
-\n
-\n • Engade a opción de amosar o compás no mapa cunha regra de raio
-\n
-\n • Melloradas as baixadas de mapas en segundo plano
-\n
-\n • Corrixida a opción de escolla de lingua da Wikipedia
-\n
-\n • Corrixiuse o comportamento do botón do compás durante a navigación
-\n
-\n • Corrección de erros menores
+    <string name="release_3_4">• Perfís de aplicación: crea o teu propio perfil para as túas necesidades, cunha icona e unha cor personalizadas 
+\n 
+\n • Engade a opción para estabelecer a velocidade predeterminada e mínima/máxima para os diferentes perfís 
+\n 
+\n • Engade un trebello para amosar as coordenadas actuais 
+\n 
+\n • Engade a opción de amosar o compás no mapa cunha regra de raio 
+\n 
+\n • Melloradas as baixadas de mapas en segundo plano 
+\n 
+\n • Corrixida a opción de escolla de lingua da Wikipedia 
+\n 
+\n • Corrixiuse o comportamento do botón do compás durante a navigación 
+\n 
+\n • Arranxo doutros erros menores
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Transporte persoal</string>
     <string name="app_mode_monowheel">Monowheel (monociclo)</string>
     <string name="app_mode_scooter">Escúter (motocicleta)</string>
+    <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisión horizontal: %s</string>
 </resources>
