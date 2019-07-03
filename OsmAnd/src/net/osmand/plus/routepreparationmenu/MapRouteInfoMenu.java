@@ -32,6 +32,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
@@ -105,9 +106,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import org.apache.commons.logging.Log;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
 
+	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
+	
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
@@ -814,7 +818,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		scrollView.setHorizontalScrollBarEnabled(false);
 
 		int leftTogglePadding = AndroidUtils.dpToPx(mapActivity, 8f);
-		int rightTogglePadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		final int rightTogglePadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		Iterator<ApplicationMode> iterator = values.iterator();
@@ -840,26 +844,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			AppModeDialog.updateButtonStateForRoute((OsmandApplication) mapActivity.getApplication(), values, selected, listener, buttons, i, true, true, nightMode);
 		}
 
-		final int[] scrollLength = {0};
-		int buttonWidth = AndroidUtils.dpToPx(mapActivity, (int) mapActivity.getResources().getDimension(R.dimen.route_info_modes_height));
-		final boolean orientationPortrait = app.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+		final int buttonWidth = (int) mapActivity.getResources().getDimension(R.dimen.route_info_modes_height);
 		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
-
-		for (int i = 0; i < values.size(); i++) {
-			if (values.get(i).equals(activeMode)) {
-				if (orientationPortrait && i * buttonWidth > AndroidUtils.getScreenWidth(mapActivity)) {
-					scrollLength[0] = i * buttonWidth - AndroidUtils.getScreenWidth(mapActivity);
-				} else if (!orientationPortrait &&
-					i * buttonWidth > app.getResources().getDimension(R.dimen.dashboard_land_width)){
-					scrollLength[0] = i * buttonWidth - (int) app.getResources()
-						.getDimension(R.dimen.dashboard_land_width);
-				}
-			}
+		int modeIndex;
+		try {
+			modeIndex = values.indexOf(activeMode);
+		} catch (Exception e) {
+			modeIndex = 0;
 		}
+		final int scrollSize = (modeIndex + 1) * buttonWidth + rightTogglePadding;
+
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				scrollView.scrollTo(scrollLength[0], 0);
+				scrollView.scrollTo(scrollSize - scrollView.getWidth() > 0 ? scrollSize - scrollView.getWidth() : 0, 0);
 				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		};

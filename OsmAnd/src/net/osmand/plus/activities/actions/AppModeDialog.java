@@ -81,34 +81,26 @@ public class AppModeDialog {
 					singleSelection, useMapTheme, nightMode);
 		}
 
-		final int[] scrollLength = {0};
-		OsmandApplication app = (OsmandApplication) a.getApplication();
-		int buttonWidth = AndroidUtils.dpToPx(a, (int) a.getResources().getDimension(R.dimen.route_info_modes_height));
-		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
-		final HorizontalScrollView sv = ll.findViewById(R.id.app_modes_scroll_container);
-		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
-		final boolean orientationPortrait = app.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-		
-		for (int i = 0; i < modes.size(); i++) {
-			if (modes.get(i).equals(activeMode)) {
-				if (orientationPortrait && i * buttonWidth > AndroidUtils.getScreenWidth(a)) {
-					scrollLength[0] = i * buttonWidth - AndroidUtils.getScreenWidth(a);
-				} else if (!orientationPortrait && 
-					i * buttonWidth > app.getResources().getDimension(R.dimen.dashboard_land_width)){
-					scrollLength[0] = i * buttonWidth - (int) app.getResources()
-						.getDimension(R.dimen.dashboard_land_width);	
-				}
-			}
+		final int buttonWidth = (int) a.getResources().getDimension(R.dimen.route_info_modes_height);
+		ApplicationMode activeMode = ((OsmandApplication) a.getApplication()).getSettings().getApplicationMode();
+		int modeIndex;
+		try {
+			modeIndex = values.indexOf(activeMode);
+		} catch (Exception e) {
+			modeIndex = 0;
 		}
-
-		OnGlobalLayoutListener listener = new OnGlobalLayoutListener() {
+		final int scrollSize = (modeIndex +  1) * buttonWidth;
+		
+		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				sv.scrollTo(scrollLength[0], 0);
+				HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
+				scrollView.scrollTo(scrollSize - scrollView.getWidth() > 0 ? scrollSize - scrollView.getWidth() : 0, 0);
 				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		};
-		ll.getViewTreeObserver().addOnGlobalLayoutListener(listener);
+		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		
 		return ll;
 	}
 
