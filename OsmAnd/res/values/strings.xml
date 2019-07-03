@@ -19,6 +19,8 @@
     <string name="edit_profile_screen_options_subtitle">Select default screen options for profile</string>
     <string name="edit_profile_nav_settings_title">Navigation settings</string>
     <string name="edit_profile_nav_settings_subtitle">Select default navigation settings for profile</string>
+    <string name="routing_attr_max_num_changes_description">Specify max number of changes</string>
+    <string name="routing_attr_max_num_changes_name">Number of changes</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">
         • Application profiles: create a custom profile for your own needs, with a custom icon and color\n\n

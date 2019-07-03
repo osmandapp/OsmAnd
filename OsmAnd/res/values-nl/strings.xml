@@ -2782,7 +2782,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Milliradialen</string>
     <string name="angular_measeurement_descr">Wijzig azimuth meet formaat.</string>
     <string name="avoid_pt_types_descr">Selecteer de te vermijden openbaar vervoer opties:</string>
-    <string name="quick_action_day_night_mode">% modus</string>
+    <string name="quick_action_day_night_mode">%s modus</string>
     <string name="avoid_pt_types">Vermijd transport types…</string>
     <string name="shared_string_walk">Loop</string>
     <string name="save_poi_value_exceed_length">The maximale tag lengte van \"%s\" is 255 karakters.

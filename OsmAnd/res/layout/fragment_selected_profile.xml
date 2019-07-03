@@ -66,7 +66,7 @@
 							android:layout_height="wrap_content"
 							android:ellipsize="end"
 							android:maxLines="1"
-							android:text="Base Profile"/>
+							android:text="@string/profile_type_base_string"/>
 
 						<TextView
 							android:id="@+id/mode_title"
