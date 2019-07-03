@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="basic_element_height">52dp</dimen>
-    <dimen name="horizontal_padding">16dp</dimen>
-    <dimen name="bottom_button_margin">32dp</dimen>
-    <dimen name="pluginDescriptionPadding">48dp</dimen>
-</resources>

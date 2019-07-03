@@ -1,7 +1,6 @@
 include ':OsmAnd-java', ':OsmAndCore-sample', ':OsmAnd-telegram'
 include ':OsmAnd'
 include ':plugins:Osmand-Nautical'
-include ':plugins:OsmAnd-TurnScreenOn'
 include ':plugins:Osmand-ParkingPlugin'
 include ':plugins:Osmand-SRTMPlugin'
 include ':plugins:Osmand-Skimaps'
