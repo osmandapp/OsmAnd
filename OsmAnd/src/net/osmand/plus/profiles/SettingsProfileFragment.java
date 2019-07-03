@@ -38,6 +38,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	public static final String IS_NEW_PROFILE = "new_profile";
 	public static final String IS_USER_PROFILE = "user_profile";
 
+
 	private ProfileMenuAdapter adapter;
 	private RecyclerView recyclerView;
 	private LinearLayout addNewProfileBtn;

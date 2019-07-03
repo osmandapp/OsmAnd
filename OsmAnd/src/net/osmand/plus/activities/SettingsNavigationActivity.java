@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -16,14 +17,19 @@ import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
@@ -38,6 +44,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
@@ -118,7 +125,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.SPEED_SYSTEM, screen, speedNamesVls, speedValues);
         
 //         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
-
+		
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
 		

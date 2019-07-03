@@ -7,8 +7,8 @@
 		style="?android:attr/listSeparatorTextViewStyle"/>
 	
 	<TextView android:id="@android:id/summary"
-		android:paddingLeft="8dip" android:paddingRight="10dip"
-		android:textColor="#000000"
+		android:paddingLeft="@dimen/content_padding_half" android:paddingRight="@dimen/content_padding_half"
+		android:textColor="?android:textColorPrimary"
 		android:layout_width="match_parent" android:layout_height="wrap_content"/>
 	
 </LinearLayout>

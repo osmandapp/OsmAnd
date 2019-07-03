@@ -88,6 +88,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;

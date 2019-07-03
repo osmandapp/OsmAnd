@@ -2262,16 +2262,16 @@ public class OsmandAidlApi {
 
 	public interface SearchCompleteCallback {
 		void onSearchComplete(List<SearchResult> resultSet);
-
 	}
+	
 	public interface GpxBitmapCreatedCallback {
 		void onGpxBitmapCreatedComplete(AGpxBitmap aGpxBitmap);
-
 	}
+	
 	public interface OsmandAppInitCallback {
 		void onAppInitialized();
-
 	}
+	
 	public interface AMapPointUpdateListener {
 		void onAMapPointUpdated(AMapPoint point, String layerId);
 
