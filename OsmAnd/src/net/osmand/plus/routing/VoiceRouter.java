@@ -273,7 +273,7 @@ public class VoiceRouter {
 		}
 		play(p);
 	}
-
+	
 	public void approachPoi(Location location, List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -293,7 +293,7 @@ public class VoiceRouter {
 		}
 		play(p);
 	}
-
+	
 	public void announceFavorite(List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -303,7 +303,7 @@ public class VoiceRouter {
 		}
 		play(p);
 	}
-
+	
 	public void announcePoi(List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -319,7 +319,7 @@ public class VoiceRouter {
 			// Need to calculate distance to nearest point
 			if (text.length() == 0) {
 				if (location != null && dist != null) {
-					dist[0] = point.getDeviationDistance() +
+					dist[0] = point.getDeviationDistance() + 
 							MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
 									point.getPoint().getLatitude(), point.getPoint().getLongitude());
 				}
@@ -380,7 +380,7 @@ public class VoiceRouter {
 			//  Wait 10 seconds before announcement
 			if (ms - lastAnnouncedSpeedLimit > 120 * 1000) {
 				waitAnnouncedSpeedLimit = ms;
-			}
+			}	
 		} else {
 			// If we wait before more than 20 sec (reset counter)
 			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
@@ -396,7 +396,7 @@ public class VoiceRouter {
 			}
 		}
 	}
-
+	
 	private boolean isTargetPoint(NextDirectionInfo info) {
 		boolean in = info != null && info.intermediatePoint;
 		boolean target = info == null || info.directionInfo == null
@@ -414,9 +414,9 @@ public class VoiceRouter {
 	}
 
 	/**
-	 * Updates status of voice guidance
-	 * @param currentLocation
-	 */
+	* Updates status of voice guidance
+	* @param currentLocation
+	*/
 	protected void updateStatus(Location currentLocation, boolean repeat) {
 		// Directly after turn: goAhead (dist), unless:
 		// < PREPARE_LONG_DISTANCE (e.g. 3500m):         playPrepareTurn (-not played any more-)
@@ -496,7 +496,7 @@ public class VoiceRouter {
 			}
 			nextStatusAfter(STATUS_TURN);
 
-			// STATUS_TURN_IN = "Turn in ..."
+		// STATUS_TURN_IN = "Turn in ..."
 		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE, 0f)) {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
 				if ((isDistanceLess(speed, nextNextInfo.distanceTo, TURN_DISTANCE, 0f) || nextNextInfo.distanceTo < TURN_IN_DISTANCE_END) &&
@@ -509,7 +509,7 @@ public class VoiceRouter {
 			}
 			nextStatusAfter(STATUS_TURN_IN);
 
-			// STATUS_PREPARE = "Turn after ..."
+		// STATUS_PREPARE = "Turn after ..."
 		} else if ((repeat || statusNotPassed(STATUS_PREPARE)) && (dist <= PREPARE_DISTANCE)) {
 			if (repeat || dist >= PREPARE_DISTANCE_END) {
 				if (!repeat && (next.getTurnType().keepLeft() || next.getTurnType().keepRight())) {
@@ -521,7 +521,7 @@ public class VoiceRouter {
 			}
 			nextStatusAfter(STATUS_PREPARE);
 
-			// STATUS_LONG_PREPARE =  also "Turn after ...", we skip this now, users said this is obsolete
+		// STATUS_LONG_PREPARE =  also "Turn after ...", we skip this now, users said this is obsolete
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
 				playPrepareTurn(currentSegment, next, dist);
@@ -529,7 +529,7 @@ public class VoiceRouter {
 			}
 			nextStatusAfter(STATUS_LONG_PREPARE);
 
-			// STATUS_UNKNOWN = "Continue for ..." if (1) after route calculation no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
+		// STATUS_UNKNOWN = "Continue for ..." if (1) after route calculation no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 		} else if (statusNotPassed(STATUS_UNKNOWN)) {
 			// Strange how we get here but
 			nextStatusAfter(STATUS_UNKNOWN);
@@ -720,7 +720,7 @@ public class VoiceRouter {
 			}
 		}
 	}
-
+	
 	private void playAndArriveAtDestination(NextDirectionInfo info) {
 		if (isTargetPoint(info)) {
 			String pointName = (info == null || info.pointName == null) ? "" : info.pointName;
@@ -785,7 +785,7 @@ public class VoiceRouter {
 			}
 		}
 	}
-
+	
 	private String getTurnType(TurnType t) {
 		if (TurnType.TL == t.getValue()) {
 			return AbstractPrologCommandPlayer.A_LEFT;
@@ -806,7 +806,7 @@ public class VoiceRouter {
 		}
 		return null;
 	}
-
+	
 	public void gpsLocationLost() {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -850,7 +850,7 @@ public class VoiceRouter {
 		}
 		play(p);
 	}
-
+	
 	public void arrivedIntermediatePoint(String name) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -888,7 +888,7 @@ public class VoiceRouter {
 		public static final int ROUTE_RECALCULATED = 2;
 		protected final int type;
 		private final VoiceRouter voiceRouter;
-
+		
 		public VoiceCommandPending(int type, VoiceRouter voiceRouter) {
 			this.type = type;
 			this.voiceRouter = voiceRouter;
@@ -937,7 +937,7 @@ public class VoiceRouter {
 	public void addVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
 		voiceMessageListeners.put(new WeakReference<>(voiceMessageListener), 0);
 	}
-
+	
 	public void removeVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
 		voiceMessageListeners.remove(new WeakReference<>(voiceMessageListener));
 	}
@@ -950,4 +950,4 @@ public class VoiceRouter {
 			}
 		}
 	}
-}
+} 
