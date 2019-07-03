@@ -3584,8 +3584,8 @@
     <string name="poi_hazard_additional_minefield">Veszély: aknamező</string>
     <string name="poi_hazard_additional_contamination">Veszély: szennyeződés</string>
     <string name="poi_defibrillator_location">Hely</string>
-    <string name="poi_changing_table_yes">Pelenkázóasztal</string>
-    <string name="poi_changing_table_no">Pelenkázóasztal</string>
+    <string name="poi_changing_table_yes">Pelenkázóasztal: igen</string>
+    <string name="poi_changing_table_no">Pelenkázóasztal: nem</string>
     <string name="poi_changing_table_limited">Pelenkázóasztal: korlátozottan alkalmas</string>
     <string name="poi_changing_table_location_room">Pelenkázóasztal helye: egy helyiség</string>
     <string name="poi_changing_table_location_male_toilet">Pelenkázóasztal helye: férfi WC</string>

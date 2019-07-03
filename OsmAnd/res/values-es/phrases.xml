@@ -843,7 +843,7 @@
     <string name="poi_tree">Árbol</string>
     <string name="poi_icn_ref">Nodo de red internacional de ciclismo</string>
     <string name="poi_opening_hours">Horario de apertura</string>
-    <string name="poi_collection_times">Horario de recolección</string>
+    <string name="poi_collection_times">Horario de recogida</string>
     <string name="poi_description">Descripción</string>
     <string name="poi_phone">Teléfono</string>
     <string name="poi_website">Sitio web</string>
@@ -3151,7 +3151,7 @@
     <string name="poi_direction_forward">Dirección: en el sentido de la vía</string>
     <string name="poi_direction_backward">Dirección: en el sentido contrario de la vía</string>
     <string name="poi_direction_clockwise">Dirección: hacia la derecha (según las agujas del reloj)</string>
-    <string name="poi_direction_anticlockwise">Dirección: hacia la izquierda (contrario a las agujas del reloj)</string>
+    <string name="poi_direction_anticlockwise">En sentido contrario a las agujas del reloj</string>
     <string name="poi_direction_up">Dirección: hacia arriba</string>
     <string name="poi_direction_down">Dirección: hacia abajo</string>
     <string name="poi_direction_entrance">Dirección: entrada</string>
@@ -3583,4 +3583,25 @@
     <string name="poi_rescue_box">Caja de rescate</string>
     <string name="poi_climbing_crag">Sí</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Peligro: erosión</string>
+    <string name="poi_hazard_additional_rockfall">Peligro: desprendimiento de rocas</string>
+    <string name="poi_hazard_additional_nuclear">Peligro: nuclear</string>
+    <string name="poi_hazard_additional_flood">Peligro: inundación</string>
+    <string name="poi_hazard_additional_avalanche">Peligro: avalancha</string>
+    <string name="poi_hazard_additional_minefield">Peligro: campo de minas</string>
+    <string name="poi_hazard_additional_contamination">Peligro: contaminación</string>
+    <string name="poi_defibrillator_location">Desfibrilador</string>
+    <string name="poi_changing_table_yes">Cambiador: si</string>
+    <string name="poi_changing_table_no">Cambiador: no</string>
+    <string name="poi_changing_table_limited">Cambiador: limitado</string>
+    <string name="poi_changing_table_location_room">Cambiador: habitación</string>
+    <string name="poi_changing_table_location_male_toilet">Cambiador: aseo masculino</string>
+    <string name="poi_changing_table_location_female_toilet">Cambiador: Aseo femenino</string>
+    <string name="poi_changing_table_location_unisex_toilet">Cambiador: Aseo Unisex</string>
+    <string name="poi_changing_table_count">Número de cambiadores</string>
+    <string name="poi_changing_table_fee_yes">Cambiador de pago: si</string>
+    <string name="poi_changing_table_fee_no">Cambiador de pago: no</string>
+    <string name="poi_charcoal_pile">Montón de carbón</string>
+    <string name="poi_historic_tank">Tanque histórico</string>
+    <string name="poi_hookah_lounge">Lugar para fumar en pipa</string>
 </resources>

@@ -3136,20 +3136,22 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Pomôžte nám vylepšiť OsmAnd. Prosím zašlite nám správu o chybe.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">• Aplikačné profily: vytvorte vlastné profily pre vaše potreby, s vlastnou ikonou a farbou
-\n
+\n 
 \n • Predanie nastavenia pre predvolenú a minimálnu a maximálnu rýchlosť v profiloch
-\n
+\n 
 \n • Pridaný nástroj s aktuálnymi súradnicami
-\n
+\n 
 \n • Pridané možnosti zobrazenia kompasu na mape s pravítkom polomeru
+\n 
+\n • Opravené zaznamenávanie stopy na pozadí
 \n
 \n • Vylepšené sťahovanie máp na pozadí
-\n
+\n 
 \n • Opravný výber jazyka Wikipedie
-\n
+\n 
 \n • Opravené správanie tlačidla kompasu počas navigácie
-\n
-\n • Opravy chýb
+\n 
+\n • Ďalšie opravy chýb
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Osobný transportér</string>
