@@ -329,7 +329,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		textView.setLayoutParams(llTextParams);
 		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
 		textView.setTextSize(16);
-		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
 		textView.setText(text);

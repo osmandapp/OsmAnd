@@ -286,7 +286,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			setBackgroundColor(mainView, lightTheme ? R.color.ctx_menu_info_view_bg_light : R.color.coordinate_input_markers_list_bg_dark);
 		} else {
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
-			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.ctx_menu_title_color_dark));
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.actionbar_light_color : R.color.route_info_bottom_view_bg_dark);
 		}
@@ -726,7 +726,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			});
 
-			@ColorRes int colorId = lightTheme ? R.color.dashboard_blue : R.color.ctx_menu_direction_color_dark;
+			@ColorRes int colorId = lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 			boolean lat = id == R.id.lat_side_of_the_world_btn;
 			Drawable icon = getColoredIcon(
 					lat ? R.drawable.ic_action_coordinates_longitude : R.drawable.ic_action_coordinates_latitude, colorId

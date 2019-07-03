@@ -833,8 +833,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			boolean light = app.getSettings().isLightContent();
 			final FavoriteGroup model = getGroup(groupPosition);
 			boolean visible = model.visible;
-			int enabledColor = light ? R.color.primary_text_light : R.color.primary_text_dark;
-			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
+			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
+			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
 			int color = model.color == 0 || model.color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.color;
 			setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
@@ -915,8 +915,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			OsmandApplication app = getMyApplication();
 			boolean light = app.getSettings().isLightContent();
-			int enabledColor = light ? R.color.primary_text_light : R.color.primary_text_dark;
-			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
+			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
+			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			int disabledIconColor = light ? R.color.icon_color : R.color.icon_color_light;
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);

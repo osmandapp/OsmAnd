@@ -288,10 +288,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	protected void addMyLocationToPlainItems(LatLon latlon) {
 		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			String f = PointDescription.formatToHumanString(mapActivity,  mapActivity.getMyApplication().getSettings().COORDINATES_FORMAT.get());
-			Map<String, String> locationData = PointDescription.getLocationData(mapActivity, latlon.getLatitude(), latlon.getLongitude(), true);
+			Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latlon.getLatitude(), latlon.getLongitude(), true);
+			String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
+			locationData.remove(PointDescription.LOCATION_LIST_HEADER);
 			CollapsableView cv = builder.getLocationCollapsableView(locationData);
-			addPlainMenuItem(R.drawable.ic_action_get_my_location, locationData.get(f).replace("\n", " "), true, false, true, cv, null);
+			addPlainMenuItem(R.drawable.ic_action_get_my_location, title, false, false, true, cv, null);
 		}
 	}
 
@@ -722,7 +723,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public boolean needRightText = false;
 		public String rightTextCaption = "";
 		public boolean visible = true;
-		public boolean needColorizeIcon = true;
+		public boolean tintIcon = true;
 		public Drawable leftIcon;
 		public Drawable rightIcon;
 		public boolean enabled = true;
@@ -745,7 +746,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 			int resId = left ? leftIconId : rightIconId;
 			if (resId != 0) {
-				if (needColorizeIcon) {
+				if (tintIcon) {
 					return enabled ? getNormalIcon(resId) : getDisabledIcon(resId);
 				}
 				MapActivity mapActivity = getMapActivity();
@@ -764,33 +765,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 		}
 
-		public void updateStateListDrawableIcon(@DrawableRes int resId, boolean left) {
-			boolean useStateList = enabled && Build.VERSION.SDK_INT >= 21;
-			if (left) {
-				leftIcon = useStateList ? getStateListDrawable(resId) : null;
-				leftIconId = useStateList ? 0 : resId;
-			} else {
-				rightIcon = useStateList ? getStateListDrawable(resId) : null;
-				rightIconId = useStateList ? 0 : resId;
-			}
-		}
-
 		private Drawable getDisabledIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_disabled_text_color_light
-					: R.color.ctx_menu_controller_disabled_text_color_dark);
+			return getIcon(iconResId, isLight() ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark);
 		}
 
 		private Drawable getNormalIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
-		}
-
-		private Drawable getPressedIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
-					: R.color.ctx_menu_controller_button_text_color_dark_p);
-		}
-
-		private StateListDrawable getStateListDrawable(@DrawableRes int iconResId) {
-			return AndroidUtils.createPressedStateListDrawable(getNormalIcon(iconResId), getPressedIcon(iconResId));
+			return getIcon(iconResId, isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 		}
 
 		public abstract void buttonPressed();

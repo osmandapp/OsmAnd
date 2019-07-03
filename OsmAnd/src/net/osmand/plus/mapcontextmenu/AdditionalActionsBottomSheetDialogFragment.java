@@ -48,8 +48,8 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		Activity activity = getActivity();
-		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		Activity activity = requireActivity();
+		nightMode = requiredMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		availableScreenH = AndroidUtils.getScreenHeight(activity) - AndroidUtils.getStatusBarHeight(activity);
@@ -57,7 +57,8 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 			availableScreenH -= AndroidUtils.getNavBarHeight(activity);
 		}
 
-		View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
+		ContextThemeWrapper context = new ContextThemeWrapper(getContext(), themeRes);
+		View mainView = View.inflate(context, R.layout.fragment_context_menu_actions_bottom_sheet_dialog, null);
 		scrollView = mainView.findViewById(R.id.bottom_sheet_scroll_view);
 		cancelRowBgView = mainView.findViewById(R.id.cancel_row_background);
 
@@ -87,12 +88,12 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		};
 
 		LinearLayout itemsLinearLayout = (LinearLayout) mainView.findViewById(R.id.context_menu_items_container);
-		LinearLayout row = (LinearLayout) View.inflate(getContext(), R.layout.grid_menu_row, null);
+		LinearLayout row = (LinearLayout) View.inflate(context, R.layout.grid_menu_row, null);
 		int itemsAdded = 0;
 		for (int i = 0; i < adapter.length(); i++) {
 			ContextMenuItem item = adapter.getItem(i);
 
-			View menuItem = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.grid_menu_item, null);
+			View menuItem = View.inflate(context, R.layout.grid_menu_item, null);
 			if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 				((ImageView) menuItem.findViewById(R.id.icon)).setImageDrawable(getContentIcon(item.getIcon()));
 			}
@@ -109,7 +110,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 			if (itemsAdded == 3 || (i == adapter.length() - 1 && itemsAdded > 0)) {
 				itemsLinearLayout.addView(row);
-				row = (LinearLayout) View.inflate(getContext(), R.layout.grid_menu_row, null);
+				row = (LinearLayout) View.inflate(context, R.layout.grid_menu_row, null);
 				itemsAdded = 0;
 			}
 		}

@@ -4,7 +4,9 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -85,7 +87,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
 
@@ -94,8 +96,11 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			showWiki = savedInstanceState.getBoolean(SHOW_WIKI_KEY);
 		}
 		if (searchText == null) {
-			searchText = getArguments().getString(SEARCH_TEXT_DLG_KEY);
-			showWiki = getArguments().getBoolean(SHOW_WIKI_KEY);
+			Bundle arguments = getArguments();
+			if (arguments != null) {
+				searchText = arguments.getString(SEARCH_TEXT_DLG_KEY);
+				showWiki = arguments.getBoolean(SHOW_WIKI_KEY);
+			}
 		}
 		if (searchText == null) {
 			searchText = "";
@@ -112,13 +117,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			}
 		});
 
-		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
+		FragmentActivity activity = requireActivity();
+		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) activity, false);
 
 		LinearLayout ll = (LinearLayout) view;
 		ExpandableListView expandablelistView = (ExpandableListView) view.findViewById(android.R.id.list);
 		ll.removeView(expandablelistView);
 
-		listView = new ListView(getActivity());
+		listView = new ListView(activity);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
 		layoutParams.weight = 1;
 		layoutParams.setMargins(0, 0, 0, 0);
@@ -131,7 +137,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		listView.setAdapter(listAdapter);
 
 		TypedValue typedValue = new TypedValue();
-		getActivity().getTheme().resolveAttribute(R.attr.toolbar_theme, typedValue, true);
+		activity.getTheme().resolveAttribute(R.attr.toolbar_theme, typedValue, true);
 
 		searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
 		toolbar.addView(searchView);
@@ -140,8 +146,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		searchEditText.setHint(R.string.search_map_hint);
 		searchEditText.setTextColor(Color.WHITE);
 		boolean isLight = getMyApplication().getSettings().isLightContent();
-		searchEditText.setHintTextColor(isLight ?
-				getMyApplication().getResources().getColor(R.color.inactive_item_orange) : getMyApplication().getResources().getColor(R.color.searchbar_tab_inactive_dark));
+		searchEditText.setHintTextColor(ContextCompat.getColor(activity, isLight ? R.color.inactive_item_orange : R.color.searchbar_tab_inactive_dark));
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);

@@ -249,10 +249,10 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		final List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (groups.size() > 0) {
 			colorId = app.getSettings().isLightContent() ?
-					R.color.primary_text_light : R.color.primary_text_dark;
+					R.color.text_color_primary_light : R.color.text_color_primary_dark;
 		} else {
 			colorId = app.getSettings().isLightContent() ?
-					R.color.secondary_text_light : R.color.secondary_text_dark;
+					R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 		}
 		int color = app.getResources().getColor(colorId);
 		title.setTextColor(color);

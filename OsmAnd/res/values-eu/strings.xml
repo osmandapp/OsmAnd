@@ -2969,7 +2969,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="previous_route">Aurreko ibilbidea</string>
     <string name="shared_string_degrees">Graduak</string>
     <string name="avoid_pt_types_descr">Hautatu nabigazioan ekidin beharreko garraio publikoak:</string>
-    <string name="quick_action_day_night_mode">% modua</string>
+    <string name="quick_action_day_night_mode">%s modua</string>
     <string name="avoid_pt_types">Ekidin garraio motak…</string>
     <string name="shared_string_walk">Ibili</string>
     <string name="save_poi_value_exceed_length">\"%s\" etiketaren gehieneko luzera 255 karaktere da.

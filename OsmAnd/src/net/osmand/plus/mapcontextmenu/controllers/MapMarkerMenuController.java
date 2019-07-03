@@ -49,8 +49,7 @@ public class MapMarkerMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(mapMarker.history ? R.string.shared_string_restore : R.string.mark_passed);
-		leftTitleButtonController.leftIcon = useStateList ? createStateListPassedIcon()
-				: createPassedIcon(getPassedIconBgNormalColorId(), 0);
+		leftTitleButtonController.leftIcon = createPassedIcon(getPassedIconBgNormalColorId());
 
 		if (!mapMarker.history) {
 			rightTitleButtonController = new TitleButtonController() {
@@ -71,32 +70,21 @@ public class MapMarkerMenuController extends MenuController {
 				}
 			};
 			rightTitleButtonController.caption = mapActivity.getString(R.string.make_active);
-			rightTitleButtonController.leftIcon = useStateList ? createStateListShowOnTopbarIcon()
-					: createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue);
+			rightTitleButtonController.leftIcon = createShowOnTopbarIcon(getDeviceTopNormalColorId());
 		}
 	}
 
 	private int getPassedIconBgNormalColorId() {
-		return isLight() ? R.color.map_widget_blue : R.color.osmand_orange;
+		return isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 	}
 
 	@Nullable
-	private StateListDrawable createStateListPassedIcon() {
-		int bgPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
-				: R.color.ctx_menu_controller_button_text_color_dark_p;
-		int icPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_n
-				: R.color.ctx_menu_controller_button_bg_color_dark_p;
-		return AndroidUtils.createPressedStateListDrawable(createPassedIcon(getPassedIconBgNormalColorId(), 0),
-				createPassedIcon(bgPressed, icPressed));
-	}
-
-	@Nullable
-	private LayerDrawable createPassedIcon(int bgColorRes, int icColorRes) {
+	private LayerDrawable createPassedIcon(int bgColorRes) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			ShapeDrawable bg = new ShapeDrawable(new OvalShape());
 			bg.getPaint().setColor(ContextCompat.getColor(mapActivity, bgColorRes));
-			Drawable ic = getIcon(R.drawable.ic_action_marker_passed, icColorRes);
+			Drawable ic = getIcon(R.drawable.ic_action_marker_passed, 0);
 			return new LayerDrawable(new Drawable[]{bg, ic});
 		} else {
 			return null;
@@ -107,17 +95,9 @@ public class MapMarkerMenuController extends MenuController {
 		return isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark;
 	}
 
-	private StateListDrawable createStateListShowOnTopbarIcon() {
-		int bgPressed = isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
-				: R.color.ctx_menu_controller_button_text_color_dark_p;
-		int icPressed = isLight() ? R.color.osmand_orange : R.color.active_buttons_and_links_dark;
-		return AndroidUtils.createPressedStateListDrawable(createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue),
-				createShowOnTopbarIcon(bgPressed, icPressed));
-	}
-
-	private LayerDrawable createShowOnTopbarIcon(int bgColorRes, int icColorRes) {
+	private LayerDrawable createShowOnTopbarIcon(int bgColorRes) {
 		Drawable background = getIcon(R.drawable.ic_action_device_top, bgColorRes);
-		Drawable topbar = getIcon(R.drawable.ic_action_device_topbar, icColorRes);
+		Drawable topbar = getIcon(R.drawable.ic_action_device_topbar, R.color.active_color_primary_light);
 		return new LayerDrawable(new Drawable[]{background, topbar});
 	}
 

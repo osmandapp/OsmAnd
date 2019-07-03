@@ -4,8 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,7 +15,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -50,10 +53,13 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
@@ -65,6 +71,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -473,16 +480,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		buildHeader();
 
 		((TextView) view.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.ctx_menu_title_color_dark : R.color.ctx_menu_title_color_light));
+				nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 		View menuLine2 = view.findViewById(R.id.context_menu_line2);
 		if (menuLine2 != null) {
 			((TextView) menuLine2).setTextColor(ContextCompat.getColor(mapActivity, R.color.ctx_menu_subtitle_color));
 		}
 		((TextView) view.findViewById(R.id.distance)).setTextColor(ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.ctx_menu_direction_color_dark : R.color.ctx_menu_direction_color_light));
-
-		AndroidUtils.setTextSecondaryColor(mapActivity,
-				(TextView) view.findViewById(R.id.title_button_right_text), nightMode);
 
 		AndroidUtils.setTextSecondaryColor(mapActivity,
 				(TextView) view.findViewById(R.id.progressTitle), nightMode);
@@ -492,13 +496,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		zoomInButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_in_button);
 		zoomOutButtonView = (ImageButton) view.findViewById(R.id.context_menu_zoom_out_button);
 		if (menu.zoomButtonsVisible()) {
-			Context ctx = getContext();
-			if (ctx != null) {
-				AndroidUtils.updateImageButton(ctx, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
-						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-				AndroidUtils.updateImageButton(ctx, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
-						R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
-			}
+			AndroidUtils.updateImageButton(mapActivity, zoomInButtonView, R.drawable.map_zoom_in, R.drawable.map_zoom_in_night,
+					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
+			AndroidUtils.updateImageButton(mapActivity, zoomOutButtonView, R.drawable.map_zoom_out, R.drawable.map_zoom_out_night,
+					R.drawable.btn_circle_trans, R.drawable.btn_circle_night, nightMode);
 			zoomInButtonView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -524,25 +525,25 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		routesBadgesContainer = (LinearLayout) view.findViewById(R.id.transport_badges_container);
 
 		if (nightMode) {
-			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_bottom_view_secondary_text_color_dark));
-			localRoutesMoreTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_bottom_view_secondary_text_color_dark));
+			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_dark));
+			localRoutesMoreTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_dark));
 		} else {
-			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_nearby_routes_text_color_dark));
-			localRoutesMoreTv.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_nearby_routes_text_color_dark));
+			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_light));
+			localRoutesMoreTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_light));
 		}
 
 		View buttonsBottomBorder = view.findViewById(R.id.buttons_bottom_border);
 		View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
-		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
-		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
+		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
+		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
 		View buttons = view.findViewById(R.id.context_menu_buttons);
-		buttons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
 		if (!menu.buttonsVisible()) {
 			buttonsTopBorder.setVisibility(View.GONE);
 			buttons.setVisibility(View.GONE);
 		}
 		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
-		bottomButtons.setBackgroundColor(ContextCompat.getColor(getContext(), nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		bottomButtons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
 		if (!menu.navigateButtonVisible()) {
 			bottomButtons.findViewById(R.id.context_menu_directions_button).setVisibility(View.GONE);
 		}
@@ -601,7 +602,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		//Bottom buttons
 		int bottomButtonsColor = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		TextView detailsButton = (TextView) view.findViewById(R.id.context_menu_details_button);
-		detailsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
+		detailsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
 		detailsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -614,7 +615,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			iconResId = R.drawable.map_action_pedestrian_dark;
 		}
 		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
-		directionsButton.setTextColor(ContextCompat.getColor(getContext(), bottomButtonsColor));
+		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
 		directionsButton.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
 		directionsButton.setCompoundDrawablePadding(dpToPx(8));
 		directionsButton.setOnClickListener(new View.OnClickListener() {
@@ -1063,19 +1064,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
-	private void enableDisableButtons(View buttonView, TextView button, boolean enabled) {
-		if (enabled) {
-			ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(buttonView.getContext(), nightMode,
-					R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
-					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
-
-			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_bg_dark : R.drawable.context_menu_controller_bg_light);
-			button.setTextColor(buttonColorStateList);
-		} else {
-			buttonView.setBackgroundResource(nightMode ? R.drawable.context_menu_controller_disabled_bg_dark : R.drawable.context_menu_controller_disabled_bg_light);
-			button.setTextColor(ContextCompat.getColor(buttonView.getContext(), nightMode ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light));
-		}
-		button.setEnabled(enabled);
+	private void setupButton(View buttonView, boolean enabled, CharSequence text) {
+		buttonView.setEnabled(enabled);
+		UiUtilities.setupDialogButton(nightMode, buttonView, DialogButtonType.STROKED, text);
 	}
 
 	public void updateButtonsAndProgress() {
@@ -1095,11 +1086,20 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			// Left title button
 			final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
-			final TextView leftTitleButton = (TextView) view.findViewById(R.id.title_button);
-			final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
+			final TextView leftTitleButton = (TextView) leftTitleButtonView.findViewById(R.id.button_text);
 			if (leftTitleButtonController != null) {
-				enableDisableButtons(leftTitleButtonView, leftTitleButton, leftTitleButtonController.enabled);
-				leftTitleButton.setText(leftTitleButtonController.caption);
+				SpannableStringBuilder title = new SpannableStringBuilder(leftTitleButtonController.caption);
+				if (leftTitleButtonController.needRightText) {
+					int startIndex = title.length();
+					title.append(" ").append(leftTitleButtonController.rightTextCaption);
+					Context context = view.getContext();
+					Typeface typeface = FontCache.getRobotoRegular(context);
+					title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+					title.setSpan(new ForegroundColorSpan(
+							ContextCompat.getColor(context, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)),
+							startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				}
+				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, title);
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
 					Drawable leftIcon = leftTitleButtonController.getLeftIcon();
@@ -1107,27 +1107,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, rightIcon, null);
 					leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 					((LinearLayout) leftTitleButtonView).setGravity(rightIcon != null ? Gravity.END : Gravity.START);
-
-					if (leftTitleButtonController.needRightText) {
-						titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
-						titleButtonRightText.setVisibility(View.VISIBLE);
-					} else {
-						titleButtonRightText.setVisibility(View.GONE);
-					}
 				} else {
 					leftTitleButtonView.setVisibility(View.INVISIBLE);
 				}
 			} else {
 				leftTitleButtonView.setVisibility(View.INVISIBLE);
-				titleButtonRightText.setVisibility(View.GONE);
 			}
 
 			// Right title button
 			final View rightTitleButtonView = view.findViewById(R.id.title_button_right_view);
-			final TextView rightTitleButton = (TextView) view.findViewById(R.id.title_button_right);
+			final TextView rightTitleButton = (TextView) rightTitleButtonView.findViewById(R.id.button_text);
 			if (rightTitleButtonController != null) {
-				enableDisableButtons(rightTitleButtonView, rightTitleButton, rightTitleButtonController.enabled);
-				rightTitleButton.setText(rightTitleButtonController.caption);
+				setupButton(rightTitleButtonView, rightTitleButtonController.enabled, rightTitleButtonController.caption);
 				rightTitleButtonView.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
@@ -1141,10 +1132,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			// Bottom title button
 			final View bottomTitleButtonView = view.findViewById(R.id.title_button_bottom_view);
-			final TextView bottomTitleButton = (TextView) view.findViewById(R.id.title_button_bottom);
+			final TextView bottomTitleButton = (TextView) bottomTitleButtonView.findViewById(R.id.button_text);
 			if (bottomTitleButtonController != null) {
-				enableDisableButtons(bottomTitleButtonView, bottomTitleButton, bottomTitleButtonController.enabled);
-				bottomTitleButton.setText(bottomTitleButtonController.caption);
+				setupButton(bottomTitleButtonView, bottomTitleButtonController.enabled, bottomTitleButtonController.caption);
 				bottomTitleButtonView.setVisibility(bottomTitleButtonController.visible ? View.VISIBLE : View.GONE);
 
 				Drawable leftIcon = bottomTitleButtonController.getLeftIcon();
@@ -1166,10 +1156,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			// Left download button
 			final View leftDownloadButtonView = view.findViewById(R.id.download_button_left_view);
-			final TextView leftDownloadButton = (TextView) view.findViewById(R.id.download_button_left);
+			final TextView leftDownloadButton = (TextView) leftDownloadButtonView.findViewById(R.id.button_text);
 			if (leftDownloadButtonController != null) {
-				enableDisableButtons(leftDownloadButtonView, leftDownloadButton, leftDownloadButtonController.enabled);
-				leftDownloadButton.setText(leftDownloadButtonController.caption);
+				setupButton(leftDownloadButtonView, leftDownloadButtonController.enabled, leftDownloadButtonController.caption);
 				leftDownloadButtonView.setVisibility(leftDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
@@ -1183,10 +1172,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			// Right download button
 			final View rightDownloadButtonView = view.findViewById(R.id.download_button_right_view);
-			final TextView rightDownloadButton = (TextView) view.findViewById(R.id.download_button_right);
+			final TextView rightDownloadButton = (TextView) rightDownloadButtonView.findViewById(R.id.button_text);
 			if (rightDownloadButtonController != null) {
-				enableDisableButtons(rightDownloadButtonView, rightDownloadButton, rightDownloadButtonController.enabled);
-				rightDownloadButton.setText(rightDownloadButtonController.caption);
+				setupButton(rightDownloadButtonView, rightDownloadButtonController.enabled, rightDownloadButtonController.caption);
 				rightDownloadButtonView.setVisibility(rightDownloadButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
@@ -1256,8 +1244,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void fillButtonInfo(final TitleButtonController buttonController, View buttonView, TextView buttonText) {
 		if (buttonController != null) {
-			enableDisableButtons(buttonView, buttonText, buttonController.enabled);
-			buttonText.setText(buttonController.caption);
+			setupButton(buttonView, buttonController.enabled, buttonController.caption);
 			buttonView.setVisibility(buttonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable leftIcon = buttonController.getLeftIcon();

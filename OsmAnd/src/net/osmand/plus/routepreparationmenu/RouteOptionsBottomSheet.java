@@ -75,7 +75,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 
 		List<LocalRoutingParameter> list = getRoutingParameters(applicationMode);
 
@@ -250,7 +250,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			AndroidUtils.setTextSecondaryColor(mapActivity, gpxDescription, nightMode);
 			gpxName = mapActivity.getString(R.string.choose_track_file_to_follow);
 		} else {
-			gpxDescription.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+			gpxDescription.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 			gpxName = new File(rp.getFile().path).getName();
 		}
 		gpxDescription.setText(gpxName);

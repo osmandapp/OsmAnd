@@ -838,13 +838,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	@ColorInt
 	private int getActiveColor() {
 		OsmandApplication app = requireMyApplication();
-		return ContextCompat.getColor(app, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		return ContextCompat.getColor(app, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
 		OsmandApplication app = requireMyApplication();
-		return ContextCompat.getColor(app, isNightMode() ? R.color.main_font_dark : R.color.main_font_light);
+		return ContextCompat.getColor(app, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 	}
 
 	@ColorInt

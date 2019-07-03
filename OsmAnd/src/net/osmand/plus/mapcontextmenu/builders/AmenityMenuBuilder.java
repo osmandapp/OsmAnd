@@ -164,7 +164,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
@@ -673,10 +673,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					0, false, null, true, 0, true, null, false);
 		}
 
-		String f = PointDescription.formatToHumanString(mapActivity, app.getSettings().COORDINATES_FORMAT.get());
-		Map<String, String> locationData = PointDescription.getLocationData(mapActivity, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true);
+		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true);
+		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
+		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
 		CollapsableView cv = getLocationCollapsableView(locationData);
-		buildRow(view, R.drawable.ic_action_get_my_location, null, locationData.get(f).replace("\n", " "), 0, true, cv,
+		
+		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv,
 			true, 1, false, null, false);
 
 	}

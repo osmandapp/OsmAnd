@@ -342,13 +342,13 @@ public class MapInfoWidgetsFactory {
 		protected boolean topBarSwitchChecked = false;
 
 		@ColorRes
-		int titleTextClrLightId = R.color.primary_text_light;
+		int titleTextClrLightId = R.color.text_color_primary_light;
 		@ColorRes
-		int titleTextClrDarkId = R.color.primary_text_dark;
+		int titleTextClrDarkId = R.color.text_color_primary_dark;
 		@ColorRes
-		int descrTextClrLightId = R.color.primary_text_light;
+		int descrTextClrLightId = R.color.text_color_primary_light;
 		@ColorRes
-		int descrTextClrDarkId = R.color.primary_text_dark;
+		int descrTextClrDarkId = R.color.text_color_primary_dark;
 		@ColorInt
 		int titleTextClrLight = -1;
 		@ColorInt

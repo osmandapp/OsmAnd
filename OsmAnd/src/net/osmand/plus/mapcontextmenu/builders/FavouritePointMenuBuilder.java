@@ -87,7 +87,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		List<FavouritePoint> groupFavourites = favoriteGroup.points;
 		if (groupFavourites.size() > 0) {
 			int color = favoriteGroup.color == 0 || favoriteGroup.color == Color.BLACK ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.color;
-			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
+			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			color = favoriteGroup.visible ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
@@ -143,7 +143,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		llTextParams2.setMargins(dpToPx(16f), dpToPx(2f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams2);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		textView.setText(description);
 
 		textView.setEllipsize(TextUtils.TruncateAt.END);

@@ -39,7 +39,7 @@
 				android:layout_marginTop="-12dp"
 				android:visibility="gone"
 				tools:src="@drawable/ic_action_coordinates_longitude"
-				tools:tint="@color/dashboard_blue"/>
+				tools:tint="@color/active_color_primary_light"/>
 
 			<TextView
 				android:id="@+id/lat_side_of_the_world_tv"
@@ -50,7 +50,7 @@
 				android:textSize="@dimen/default_list_text_size"
 				android:textStyle="bold"
 				tools:text="N"
-				tools:textColor="@color/dashboard_blue"/>
+				tools:textColor="@color/active_color_primary_light"/>
 
 			<ImageView
 				android:id="@+id/north_side_iv"
@@ -59,7 +59,7 @@
 				android:layout_gravity="center_horizontal"
 				android:layout_marginBottom="-12dp"
 				tools:src="@drawable/ic_action_coordinates_longitude"
-				tools:tint="@color/dashboard_blue"/>
+				tools:tint="@color/active_color_primary_light"/>
 		</LinearLayout>
 
 		<LinearLayout
@@ -187,7 +187,7 @@
 				android:layout_marginStart="-12dp"
 				android:visibility="gone"
 				tools:src="@drawable/ic_action_coordinates_latitude"
-				tools:tint="@color/dashboard_blue"/>
+				tools:tint="@color/active_color_primary_light"/>
 
 			<TextView
 				android:id="@+id/lon_side_of_the_world_tv"
@@ -198,7 +198,7 @@
 				android:textSize="@dimen/default_list_text_size"
 				android:textStyle="bold"
 				tools:text="W"
-				tools:textColor="@color/dashboard_blue"/>
+				tools:textColor="@color/active_color_primary_light"/>
 
 			<ImageView
 				android:id="@+id/west_side_iv"
@@ -208,7 +208,7 @@
 				android:layout_marginEnd="-12dp"
 				android:layout_marginRight="-12dp"
 				tools:src="@drawable/ic_action_coordinates_latitude"
-				tools:tint="@color/dashboard_blue"/>
+				tools:tint="@color/active_color_primary_light"/>
 		</LinearLayout>
 
 		<LinearLayout
@@ -324,7 +324,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:layout_marginTop="@dimen/content_padding"
-		android:background="@color/dialog_divider_dark"/>
+		android:background="@color/divider_color_dark"/>
 
 	<LinearLayout
 		android:id="@+id/point_name_et_container"

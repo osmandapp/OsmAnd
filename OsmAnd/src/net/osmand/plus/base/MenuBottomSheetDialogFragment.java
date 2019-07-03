@@ -25,9 +25,10 @@ import android.widget.LinearLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.widgets.TextViewEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +48,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected View rightButton;
 
 	private LinearLayout itemsContainer;
-
-	public enum DialogButtonType {
-		PRIMARY,
-		SECONDARY,
-		STROKED
-	}
 
 	@StringRes
 	protected int dismissButtonStringRes = R.string.shared_string_cancel;
@@ -88,7 +83,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		inflateMenuItems();
 
 		dismissButton = mainView.findViewById(R.id.dismiss_button);
-		setupDialogButton(dismissButton, getDismissByttonType(), getDismissButtonTextId());
+		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissByttonType(), getDismissButtonTextId());
 		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -103,7 +98,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			if (rightBottomButtonTextId != DEFAULT_VALUE) {
 				mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 				rightButton = mainView.findViewById(R.id.right_bottom_button);
-				setupDialogButton(rightButton, getRightBottomByttonType(), rightBottomButtonTextId);
+				UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomByttonType(), rightBottomButtonTextId);
 				rightButton.setVisibility(View.VISIBLE);
 				rightButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -147,38 +142,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
-	private void setupDialogButton(View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
-		Context ctx = buttonView.getContext();
-		TextViewEx buttonTextView = (TextViewEx) buttonView.findViewById(R.id.button_text);
-		boolean v21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
-		View buttonContainer = buttonView.findViewById(R.id.button_container);
-		switch (buttonType) {
-			case PRIMARY:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
-				}
-				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
-				break;
-			case SECONDARY:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
-				}
-				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
-				break;
-			case STROKED:
-				if (v21) {
-					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-				}
-				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
-				break;
-		}
-		buttonTextView.setText(buttonTextId);
-		buttonTextView.setEnabled(buttonView.isEnabled());
-	}
-
 	public abstract void createMenuItems(Bundle savedInstanceState);
 
 	protected void inflateMenuItems() {
@@ -190,7 +153,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+		return getIcon(id, nightMode ? R.color.icon_color_light : R.color.icon_color);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {

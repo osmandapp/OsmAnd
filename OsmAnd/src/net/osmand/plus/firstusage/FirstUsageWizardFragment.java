@@ -698,7 +698,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			AppCompatButton changeStorageButton = (AppCompatButton) storageView.findViewById(R.id.storage_change_button);
 			if (wizardType == WizardType.MAP_DOWNLOAD) {
 				changeStorageButton.setEnabled(false);
-				changeStorageButton.setTextColor(getMyApplication().getResources().getColor(R.color.disabled_btn_text_color));
+				changeStorageButton.setTextColor(getMyApplication().getResources().getColor(R.color.text_color_secondary_light));
 			} else {
 				changeStorageButton.setOnClickListener(new View.OnClickListener() {
 					@Override

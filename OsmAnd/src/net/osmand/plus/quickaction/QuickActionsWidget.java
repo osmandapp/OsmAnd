@@ -150,7 +150,7 @@ public class QuickActionsWidget extends LinearLayout {
                         .inflate(R.layout.quick_action_widget_dot, dots, false);
 
                 dot.setImageDrawable(i == 0
-                        ? getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.dashboard_blue)
+                        ? getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.active_color_primary_light)
                         : getIconsCache().getIcon(R.drawable.ic_dot_position, color));
 
                 dots.addView(dot);
@@ -194,7 +194,7 @@ public class QuickActionsWidget extends LinearLayout {
         for (int i = 0; i < dots.getChildCount(); i++){
 
             ((ImageView) dots.getChildAt(i)).setImageDrawable(i == position
-                    ? getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.dashboard_blue)
+                    ? getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.active_color_primary_light)
                     : getIconsCache().getIcon(R.drawable.ic_dot_position, colorDisabled));
         }
     }

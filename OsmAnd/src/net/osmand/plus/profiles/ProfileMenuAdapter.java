@@ -52,8 +52,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
 		selectedIconColorRes = isNightMode(app)
-			? R.color.active_buttons_and_links_dark
-			: R.color.active_buttons_and_links_light;
+			? R.color.active_color_primary_dark
+			: R.color.active_color_primary_light;
 	}
 
 	public List<Object> getItems() {
@@ -112,8 +112,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			}
 
 			holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
-				? R.color.main_font_dark
-				: R.color.main_font_light));
+				? R.color.text_color_primary_dark
+				: R.color.text_color_primary_light));
 
 			holder.initSwitcher = true;
 			holder.switcher.setChecked(selectedItems.contains(item));
@@ -130,8 +130,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.menuIcon.setVisibility(View.GONE);
 			holder.title.setTextColor(app.getResources().getColor(
 				isNightMode(app)
-				? R.color.active_buttons_and_links_dark
-				: R.color.active_buttons_and_links_light));
+				? R.color.active_color_primary_dark
+				: R.color.active_color_primary_light));
 			holder.title.setText(bottomButtonText);
 		}
 	}

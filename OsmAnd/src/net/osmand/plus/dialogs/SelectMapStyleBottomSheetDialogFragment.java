@@ -225,7 +225,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	private int getStyleTitleColor(boolean selected) {
 		int colorId = selected
 				? getActiveColorId()
-				: nightMode ? R.color.primary_text_dark : R.color.primary_text_light;
+				: nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		return getResolvedColor(colorId);
 	}
 

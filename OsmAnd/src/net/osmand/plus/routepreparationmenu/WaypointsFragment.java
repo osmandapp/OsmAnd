@@ -385,7 +385,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 		boolean landscapeLayout = !portrait;
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		if (!landscapeLayout) {
 			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);
 		} else {
@@ -395,7 +395,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		((TextView) view.findViewById(R.id.sort_button)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.add_button_descr)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.clear_all_button_descr)).setTextColor(colorActive);
-		((TextView) view.findViewById(R.id.title)).setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.main_font_dark : R.color.main_font_light));
+		((TextView) view.findViewById(R.id.title)).setTextColor(
+				ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 
 		FrameLayout addButton = view.findViewById(R.id.add_button);
 		TextView addButtonDescr = (TextView) view.findViewById(R.id.add_button_descr);
@@ -550,9 +551,9 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
 		textViewExProgress.percent = progress / 100f;
-		int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
+		int color = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_light;
 		textViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
-		textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
+		textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_disabled_dark);
 		textViewExProgress.invalidate();
 	}
 
@@ -560,7 +561,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			int bgColor = ContextCompat.getColor(app, nightMode ? R.color.activity_background_dark : R.color.activity_background_light);
-			int progressColor = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+			int progressColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 
 			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 		}
@@ -781,7 +782,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		if (!topBar) {
-			text.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.main_font_dark : R.color.main_font_light));
+			text.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 		}
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		if (!edit) {
@@ -793,7 +794,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			});
 		}
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		textDist.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		textDist.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(mapActivity, app, nightMode));
 		int dist = -1;
 		boolean startPoint = ps.type == WaypointHelper.TARGETS && ((TargetPoint) ps.point).start;
