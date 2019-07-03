@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Setup Profile</string>
     <string name="edit_profile_setup_subtitle">Profile keeps its own settings</string>
     <string name="edit_profile_configure_map">Configure map</string>
