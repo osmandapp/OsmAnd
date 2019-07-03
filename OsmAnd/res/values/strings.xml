@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+	<string name="wake_on_voice_time">Time</string>
+	<string name="wake_on_voice_time_descr">Set the time for which the screen will turn on.</string>
+	<string name="wake_on_voice_sensor">Use proximity sensor</string>
+	<string name="wake_on_voice_sensor_descr">Wave your hand over the top of the screen to turn on the screen while navigating.</string>
     <string name="app_profile_custom_nav_subtitle"></string>
     <string name="rate_dialog_descr">Please give us 30 seconds, share feedback and rate our work on Google Play.</string>
     <string name="button_rate">Rate</string>
@@ -3209,9 +3213,5 @@
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides and offpiste are unofficial routes and passages. Typically ungroomed, unmainted by the officials and not checked in the evening. Enter at own risk.</string>
-	<string name="wake_on_voice_time">Time</string>
-  <string name="wake_on_voice_time_descr">Set the time for which the screen will turn on.</string>
-  <string name="wake_on_voice_sensor">Use proximity sensor</string>
-	<string name="wake_on_voice_sensor_descr">Wave your hand over the top of the screen to turn on the screen while navigating.</string>
 
 </resources>
