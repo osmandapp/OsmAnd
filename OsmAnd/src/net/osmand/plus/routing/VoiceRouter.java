@@ -67,7 +67,7 @@ public class VoiceRouter {
 	// Default speed to have comfortable announcements (Speed in m/s)
 	private float DEFAULT_SPEED = 12;
 	private float TURN_DEFAULT_SPEED = 5;
-
+		
 	private int PREPARE_LONG_DISTANCE = 0;
 	private int PREPARE_LONG_DISTANCE_END = 0;
 	protected int PREPARE_DISTANCE = 0;
@@ -75,7 +75,7 @@ public class VoiceRouter {
 	private int TURN_IN_DISTANCE = 0;
 	private int TURN_IN_DISTANCE_END = 0;
 	private int TURN_DISTANCE = 0;
-
+	
 	private static VoiceCommandPending pendingCommand = null;
 	private static RouteDirectionInfo nextRouteDirection;
 
@@ -84,14 +84,14 @@ public class VoiceRouter {
 	}
 
 	private ConcurrentHashMap<WeakReference<VoiceMessageListener>, Integer> voiceMessageListeners;
-
+    
 	VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
 		this.settings = settings;
 		mute = settings.VOICE_MUTE.get();
 		voiceMessageListeners = new ConcurrentHashMap<>();
 	}
-
+	
 	public void setPlayer(CommandPlayer player) {
 		VoiceRouter.player = player;
 		if (pendingCommand != null && player != null) {
@@ -106,11 +106,11 @@ public class VoiceRouter {
 	public CommandPlayer getPlayer() {
 		return player;
 	}
-
+	
 	public void setMute(boolean mute) {
 		this.mute = mute;
 	}
-
+	
 	public boolean isMute() {
 		return mute;
 	}
@@ -218,11 +218,11 @@ public class VoiceRouter {
 			this.currentStatus = previousStatus;
 		}
 	}
-
+	
 	private boolean statusNotPassed(int statusToCheck) {
 		return currentStatus <= statusToCheck;
 	}
-
+	
 	public void announceOffRoute(double dist) {
 		long ms = System.currentTimeMillis();
 		if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
@@ -233,7 +233,7 @@ public class VoiceRouter {
 			}
 			play(p);
 			if (waitAnnouncedOffRoute == 0) {
-				waitAnnouncedOffRoute = 60000;
+				waitAnnouncedOffRoute = 60000;	
 			} else {
 				waitAnnouncedOffRoute *= 2.5;
 			}
@@ -814,7 +814,7 @@ public class VoiceRouter {
 		}
 		play(p);
 	}
-
+	
 	public void gpsLocationRecover() {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -950,4 +950,4 @@ public class VoiceRouter {
 			}
 		}
 	}
-} 
+}
