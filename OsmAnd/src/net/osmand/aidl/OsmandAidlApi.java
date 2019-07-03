@@ -2257,7 +2257,6 @@ public class OsmandAidlApi {
 			}
 			return 0;
 		}
-
 	}
 
 	public interface SearchCompleteCallback {
