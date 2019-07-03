@@ -333,6 +333,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 		if (profileSettings) {
 			modes.clear();
+			findViewById(R.id.selector_shadow).setVisibility(View.VISIBLE);
 			for (ApplicationMode a : ApplicationMode.values(app)) {
 				if (a != ApplicationMode.DEFAULT) {
 					modes.add(a);

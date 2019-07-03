@@ -1465,8 +1465,7 @@
     <string name="waypoint_visit_before">Відвідати, перш ніж</string>
     <string name="simulate_your_location">Моделювання вашого місця розташування</string>
     <string name="drawer">Суцільним списком</string>
-    <string name="short_location_on_map">Шир %1$s↵
-Дов %2$s</string>
+    <string name="short_location_on_map">Шир %1$s\nДов %2$s</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше.</string>
     <string name="routing_settings_2">Налаштування навігації</string>
     <string name="general_settings_2">Загальні параметри</string>
