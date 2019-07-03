@@ -166,7 +166,7 @@ public class TransportStopController extends MenuController {
 
 	private void addTransportStopRoutes(List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t) {
 		for (TransportStop tstop : stops) {
-			if (!tstop.isDeleted() && (tstop.getId().longValue() != transportStop.getId().longValue())) {
+			if (!tstop.isDeleted()) {
 				addRoutes(routes, useEnglishNames, t, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
@@ -245,7 +245,11 @@ public class TransportStopController extends MenuController {
 			TransportStop nearestStop = null;
 			for (TransportStop stop : transportStops) {
 				stop.setTransportStopAggregated(stopAggregated);
-				if (stop.getName().startsWith(amenity.getName())) {
+				if ((stop.getName().startsWith(amenity.getName())
+						&& (nearestStop == null
+						|| nearestStop.getLocation().equals(stop.getLocation())
+						|| nearestStop.compareStopExits(stop)))
+						|| stop.getLocation().equals(loc)) {
 					stopAggregated.addLocalTransportStop(stop);
 					if (nearestStop == null) {
 						nearestStop = stop;

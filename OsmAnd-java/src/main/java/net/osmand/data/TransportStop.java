@@ -128,6 +128,18 @@ public class TransportStop extends MapObject {
 		return exitsString;
 	}
 
+	public boolean compareStopExits(TransportStop thatObj) {
+		if (this.exits != null && thatObj.exits != null) {
+			for (int i = 0; i < this.exits.size(); i++) {
+				if (!this.exits.get(i).compareExit(thatObj.exits.get(i))) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public boolean compareStop(TransportStop thatObj) {
 		if (this.compareObject(thatObj) &&
 				((this.referencesToRoutes == null && thatObj.referencesToRoutes == null) ||
