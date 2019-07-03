@@ -7,44 +7,31 @@ import android.text.TextUtils;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.transport.TransportStopType;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
-	private List<TransportStopRoute> routes = new ArrayList<>();
-
 	private MapMarker marker;
+
+	private TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
 								 @NonNull PointDescription pointDescription,
@@ -63,7 +50,11 @@ public class AmenityMenuController extends MenuController {
 				}
 			}
 			if (showTransportStops) {
-				processTransportStop();
+				TransportStop transportStop = TransportStopController.findBestTransportStopForAmenity(mapActivity.getMyApplication(), amenity);
+				if (transportStop != null) {
+					transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
+					transportStopController.processRoutes();
+				}
 			}
 		}
 
@@ -213,23 +204,16 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public List<TransportStopRoute> getTransportStopRoutes() {
-		return routes;
+		if (transportStopController != null) {
+			return transportStopController.getTransportStopRoutes();
+		}
+		return null;
 	}
 
 	@Override
 	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
-		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
-		if (allRoutes != null) {
-			List<TransportStopRoute> res = new ArrayList<>();
-			for (TransportStopRoute route : allRoutes) {
-				boolean isCurrentRouteLocal = route.refStop != null && route.refStop.getName().equals(route.stop.getName());
-				if (!nearby && isCurrentRouteLocal) {
-					res.add(route);
-				} else if (nearby && route.refStop == null) {
-					res.add(route);
-				}
-			}
-			return res;
+		if (transportStopController != null) {
+			return transportStopController.getSubTransportStopRoutes(nearby);
 		}
 		return null;
 	}
@@ -263,78 +247,5 @@ public class AmenityMenuController extends MenuController {
 			}
 		}
 		return null;
-	}
-
-	private void processTransportStop() {
-		routes = new ArrayList<>();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
-			List<TransportIndexRepository> reps = app
-					.getResourceManager().searchTransportRepositories(amenity.getLocation().getLatitude(),
-							amenity.getLocation().getLongitude());
-
-			boolean useEnglishNames = app.getSettings().usingEnglishNames();
-			boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
-
-			TLongArrayList addedTransportStops = new TLongArrayList();
-			for (TransportIndexRepository t : reps) {
-				ArrayList<TransportStop> ls = new ArrayList<>();
-				QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
-						isSubwayEntrance ? 400 : 150);
-				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
-				for (TransportStop tstop : ls) {
-					if (!addedTransportStops.contains(tstop.getId())) {
-						addedTransportStops.add(tstop.getId());
-						if (!tstop.isDeleted()) {
-							addRoutes(useEnglishNames, t, tstop,
-									(int) MapUtils.getDistance(tstop.getLocation(), amenity.getLocation()), isSubwayEntrance);
-						}
-					}
-				}
-			}
-			Collections.sort(routes, new Comparator<TransportStopRoute>() {
-
-				@Override
-				public int compare(TransportStopRoute o1, TransportStopRoute o2) {
-//					int radEqual = 50;
-//					int dist1 = o1.distance / radEqual;
-//					int dist2 = o2.distance / radEqual;
-//					if (dist1 != dist2) {
-//						return Algorithms.compare(dist1, dist2);
-//					}
-					int i1 = Algorithms.extractFirstIntegerNumber(o1.route.getRef());
-					int i2 = Algorithms.extractFirstIntegerNumber(o2.route.getRef());
-					if (i1 != i2) {
-						return Algorithms.compare(i1, i2);
-					}
-					return o1.desc.compareTo(o2.desc);
-				}
-			});
-
-			builder.setRoutes(routes);
-		}
-	}
-
-	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, int dist, boolean isSubwayEntrance) {
-		Collection<TransportRoute> rts = t.getRouteForStop(s);
-		if (rts != null) {
-			for (TransportRoute rs : rts) {
-				TransportStopType type = TransportStopType.findType(rs.getType());
-				if (isSubwayEntrance && type != TransportStopType.SUBWAY && dist > 150) {
-					continue;
-				}
-				TransportStopRoute r = new TransportStopRoute();
-				r.type = type;
-				r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
-				r.route = rs;
-				r.stop = s;
-				if (amenity.getLocation().equals(s.getLocation()) || (isSubwayEntrance && type == TransportStopType.SUBWAY)) {
-					r.refStop = s;
-				}
-				r.distance = dist;
-				this.routes.add(r);
-			}
-		}
 	}
 }

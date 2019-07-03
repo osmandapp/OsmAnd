@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -8,6 +9,9 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.data.TransportStopAggregated;
+import net.osmand.data.TransportStopExit;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -29,9 +33,11 @@ import gnu.trove.list.array.TLongArrayList;
 public class TransportStopController extends MenuController {
 
 	public static final int SHOW_STOPS_RADIUS_METERS = 150;
+	public static final int SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS = 400;
 
 	private TransportStop transportStop;
-	private List<TransportStopRoute> routes = new ArrayList<>();
+	private List<TransportStopRoute> routesNearby = new ArrayList<>();
+	private List<TransportStopRoute> routesOnTheSameExit = new ArrayList<>();
 	private TransportStopType topType;
 
 	public TransportStopController(@NonNull MapActivity mapActivity,
@@ -50,9 +56,10 @@ public class TransportStopController extends MenuController {
 		}
 	}
 
-	private void processRoutes() {
-		routes = processTransportStop();
-		builder.setRoutes(routes);
+	public void processRoutes() {
+		routesOnTheSameExit.clear();
+		routesNearby.clear();
+		processTransportStop(routesOnTheSameExit, routesNearby);
 	}
 
 	@Override
@@ -71,23 +78,14 @@ public class TransportStopController extends MenuController {
 
 	@Override
 	public List<TransportStopRoute> getTransportStopRoutes() {
+		List<TransportStopRoute> routes = new ArrayList<>(routesOnTheSameExit);
+		routes.addAll(routesNearby);
 		return routes;
 	}
 
 	@Override
 	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
-		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
-		if (allRoutes != null) {
-			List<TransportStopRoute> res = new ArrayList<>();
-			for (TransportStopRoute route : allRoutes) {
-				boolean isCurrentRouteNearby = route.stop != null && !route.stop.equals(transportStop);
-				if ((nearby && isCurrentRouteNearby) || (!nearby && !isCurrentRouteNearby)) {
-					res.add(route);
-				}
-			}
-			return res;
-		}
-		return null;
+		return nearby ? routesNearby : routesOnTheSameExit;
 	}
 	
 	@Override
@@ -112,8 +110,17 @@ public class TransportStopController extends MenuController {
 		return getPointDescription().getTypeName();
 	}
 
-	public List<TransportStopRoute> processTransportStop() {
-		ArrayList<TransportStopRoute> routes = new ArrayList<>();
+	@Override
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		Amenity amenity = transportStop.getAmenity();
+		if (amenity != null) {
+			AmenityMenuController.addTypeMenuItem(amenity, builder);
+		} else {
+			super.addPlainMenuItems(typeStr, pointDescription, latLon);
+		}
+	}
+
+	private void processTransportStop(List<TransportStopRoute> routesOnTheSameExit, List<TransportStopRoute> routesNearby) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			List<TransportIndexRepository> reps = mapActivity.getMyApplication()
@@ -122,47 +129,51 @@ public class TransportStopController extends MenuController {
 
 			boolean useEnglishNames = mapActivity.getMyApplication().getSettings().usingEnglishNames();
 
-			TLongArrayList addedTransportStops = new TLongArrayList();
 			for (TransportIndexRepository t : reps) {
 				if (t.acceptTransportStop(transportStop)) {
 					boolean empty = transportStop.getReferencesToRoutes() == null || transportStop.getReferencesToRoutes().length == 0;
 					if (!empty) {
-						addRoutes(routes, useEnglishNames, t, transportStop, transportStop, 0);
+						addRoutes(routesOnTheSameExit, useEnglishNames, t, transportStop, transportStop, 0);
 					}
-					ArrayList<TransportStop> ls = new ArrayList<>();
-					QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), SHOW_STOPS_RADIUS_METERS);
-					t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
-					for (TransportStop tstop : ls) {
-						if (!addedTransportStops.contains(tstop.getId())) {
-							addedTransportStops.add(tstop.getId());
-							if (!tstop.isDeleted() && (tstop.getId().longValue() != transportStop.getId().longValue() || empty)) {
-								addRoutes(routes, useEnglishNames, t, tstop, transportStop,
-										(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
-							}
-						}
-					}
+					ArrayList<TransportStop> transportStopsSameExit = new ArrayList<TransportStop>(transportStop.getLocalTransportStops());
+					ArrayList<TransportStop> nearbyTransportStops = new ArrayList<TransportStop>(transportStop.getNearbyTransportStops());
+
+					addTransportStopRoutes(transportStopsSameExit, routesOnTheSameExit, useEnglishNames, t);
+					addTransportStopRoutes(nearbyTransportStops, routesNearby, useEnglishNames, t);
 				}
 			}
-			Collections.sort(routes, new Comparator<TransportStopRoute>() {
+			sortTransportStopRoutes(routesOnTheSameExit);
+			sortTransportStopRoutes(routesNearby);
+		}
+	}
 
-				@Override
-				public int compare(TransportStopRoute o1, TransportStopRoute o2) {
+	private void sortTransportStopRoutes(List<TransportStopRoute> routes) {
+		Collections.sort(routes, new Comparator<TransportStopRoute>() {
+
+			@Override
+			public int compare(TransportStopRoute o1, TransportStopRoute o2) {
 //					int radEqual = 50;
 //					int dist1 = o1.distance / radEqual;
 //					int dist2 = o2.distance / radEqual;
 //					if (dist1 != dist2) {
 //						return Algorithms.compare(dist1, dist2);
 //					}
-					int i1 = Algorithms.extractFirstIntegerNumber(o1.route.getRef());
-					int i2 = Algorithms.extractFirstIntegerNumber(o2.route.getRef());
-					if (i1 != i2) {
-						return Algorithms.compare(i1, i2);
-					}
-					return o1.desc.compareTo(o2.desc);
+				int i1 = Algorithms.extractFirstIntegerNumber(o1.route.getRef());
+				int i2 = Algorithms.extractFirstIntegerNumber(o2.route.getRef());
+				if (i1 != i2) {
+					return Algorithms.compare(i1, i2);
 				}
-			});
+				return o1.desc.compareTo(o2.desc);
+			}
+		});
+	}
+
+	private void addTransportStopRoutes(List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t) {
+		for (TransportStop tstop : stops) {
+			if (!tstop.isDeleted() && (tstop.getId().longValue() != transportStop.getId().longValue())) {
+				addRoutes(routes, useEnglishNames, t, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+			}
 		}
-		return routes;
 	}
 
 	private void addRoutes(List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t, TransportStop s, TransportStop refStop, int dist) {
@@ -185,13 +196,91 @@ public class TransportStopController extends MenuController {
 		}
 	}
 
-	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		Amenity amenity = transportStop.getAmenity();
-		if (amenity != null) {
-			AmenityMenuController.addTypeMenuItem(amenity, builder);
-		} else {
-			super.addPlainMenuItems(typeStr, pointDescription, latLon);
+	public static void sortTransportStops(@NonNull LatLon latLon, List<TransportStop> transportStops) {
+		for (TransportStop transportStop : transportStops) {
+			transportStop.distance = (int) MapUtils.getDistance(latLon, transportStop.getLocation());
 		}
+		Collections.sort(transportStops, new Comparator<TransportStop>() {
+
+			@Override
+			public int compare(TransportStop s1, TransportStop s2) {
+				return Algorithms.compare(s1.distance, s2.distance);
+			}
+		});
+	}
+
+	@NonNull
+	public static List<TransportStop> findTransportStopsAt(OsmandApplication app, double latitude, double longitude, int radiusMeters) {
+		ArrayList<TransportStop> transportStops = new ArrayList<>();
+		List<TransportIndexRepository> reps = app.getResourceManager().searchTransportRepositories(latitude, longitude);
+
+		TLongArrayList addedTransportStops = new TLongArrayList();
+		for (TransportIndexRepository t : reps) {
+			ArrayList<TransportStop> stops = new ArrayList<>();
+			QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, radiusMeters);
+			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, stops, null);
+			for (TransportStop transportStop : stops) {
+				if (!addedTransportStops.contains(transportStop.getId())) {
+					addedTransportStops.add(transportStop.getId());
+					if (!transportStop.isDeleted()) {
+						transportStops.add(transportStop);
+					}
+				}
+			}
+		}
+		return transportStops;
+	}
+
+	@Nullable
+	public static TransportStop findBestTransportStopForAmenity(OsmandApplication app, Amenity amenity) {
+		TransportStop transportStop = null;
+		boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
+
+		LatLon loc = amenity.getLocation();
+		int radiusMeters = isSubwayEntrance ? SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS : SHOW_STOPS_RADIUS_METERS;
+		List<TransportStop> transportStops = findTransportStopsAt(app, loc.getLatitude(), loc.getLongitude(), radiusMeters);
+		sortTransportStops(loc, transportStops);
+
+		if (isSubwayEntrance) {
+			transportStop = processTransportStopsForAmenity(transportStops, amenity);
+		} else {
+			for (TransportStop stop : transportStops) {
+				if (stop.getName().startsWith(amenity.getName())) {
+					transportStop = stop;
+					transportStop.setAmenity(amenity);
+					transportStop.addLocalTransportStop(stop);
+					break;
+				}
+			}
+		}
+
+		return transportStop;
+	}
+
+	public static TransportStop processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
+		TransportStopAggregated stopAggregated = new TransportStopAggregated();
+		stopAggregated.setAmenity(amenity);
+
+		for (TransportStop stop : transportStops) {
+			List<TransportStopExit> stopExits = stop.getExits();
+			boolean stopOnSameExitAdded = false;
+			for (TransportStopExit exit : stopExits) {
+				if (exit.getLocation().equals(amenity.getLocation())) {
+					stopOnSameExitAdded = true;
+					stopAggregated.addLocalTransportStop(stop);
+					stop.setTransportStopAggregated(stopAggregated);
+					break;
+				}
+			}
+
+			if (!stopOnSameExitAdded && stop.distance <= SHOW_STOPS_RADIUS_METERS) {
+				stopAggregated.addNearbyTransportStop(stop);
+			}
+		}
+		List<TransportStop> stops = stopAggregated.getLocalTransportStops();
+		if (!stops.isEmpty()) {
+			return stops.get(0);
+		}
+		return null;
 	}
 }
