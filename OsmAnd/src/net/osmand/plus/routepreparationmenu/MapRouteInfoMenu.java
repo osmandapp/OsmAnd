@@ -846,13 +846,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		final int buttonWidth = (int) mapActivity.getResources().getDimension(R.dimen.route_info_modes_height);
 		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
-		int modeIndex;
-		try {
-			modeIndex = values.indexOf(activeMode);
-		} catch (Exception e) {
-			modeIndex = 0;
-		}
-		final int scrollSize = (modeIndex + 1) * buttonWidth + rightTogglePadding;
+		
+		final int scrollSize = (values.indexOf(activeMode) + 1) * buttonWidth + rightTogglePadding;
 
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override

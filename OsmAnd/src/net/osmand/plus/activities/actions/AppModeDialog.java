@@ -83,13 +83,8 @@ public class AppModeDialog {
 
 		final int buttonWidth = (int) a.getResources().getDimension(R.dimen.route_info_modes_height);
 		ApplicationMode activeMode = ((OsmandApplication) a.getApplication()).getSettings().getApplicationMode();
-		int modeIndex;
-		try {
-			modeIndex = values.indexOf(activeMode);
-		} catch (Exception e) {
-			modeIndex = 0;
-		}
-		final int scrollSize = (modeIndex +  1) * buttonWidth;
+		
+		final int scrollSize = (values.indexOf(activeMode) + 1) * buttonWidth;
 		
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
