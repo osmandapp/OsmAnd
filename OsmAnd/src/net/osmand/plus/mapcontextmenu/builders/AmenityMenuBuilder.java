@@ -673,10 +673,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					0, false, null, true, 0, true, null, false);
 		}
 
-		String f = PointDescription.formatToHumanString(mapActivity, app.getSettings().COORDINATES_FORMAT.get());
-		Map<String, String> locationData = PointDescription.getLocationData(mapActivity, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true);
+		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true);
+		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
+		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
 		CollapsableView cv = getLocationCollapsableView(locationData);
-		buildRow(view, R.drawable.ic_action_get_my_location, null, locationData.get(f).replace("\n", " "), 0, true, cv,
+		
+		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv,
 			true, 1, false, null, false);
 
 	}
