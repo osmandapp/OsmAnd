@@ -715,11 +715,4 @@ interface IOsmAndAidlInterface {
      * @params callback (IOsmAndAidlCallback) - callback to notify user on voice message
      */
     long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
-    
-    /**
-     * Method to change MapActivity keyguard flags for screen unlock/lock functionality
-     *    
-     * @params enable (boolean) - boolean flag to describe set or reset MapActivity keyguard flags
-     */
-    boolean changeMapActivityKeyguardFlags(in boolean enable);
 }

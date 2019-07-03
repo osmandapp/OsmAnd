@@ -1382,7 +1382,6 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> KEEP_INFORMING = new IntPreference("keep_informing", 0).makeProfile();
 
 	{
-		// 0 means never
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.CAR, 0);
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
@@ -1391,7 +1390,6 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> WAKE_ON_VOICE_TIME_INT = new IntPreference("wake_on_voice_time_int", 0).makeProfile();
 
 	{
-		// 0 means never
 		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.CAR, 0);
 		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
 		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
@@ -1400,7 +1398,6 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> WAKE_ON_VOICE_SENSOR = new BooleanPreference("wake_on_voice_sensor", false).makeProfile();
 
 	{
-		// 0 means never
 		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.CAR, false);
 		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);

@@ -204,7 +204,6 @@ public class OsmandAidlApi {
 	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks= new ConcurrentHashMap<>();
 
 	private AMapPointUpdateListener aMapPointUpdateListener;
-	private LockHelper.LockUIAdapter aMapActivityKeyguardFlagsUIAdapter;
 
 	private boolean mapActivityActive = false;
 
@@ -239,7 +238,6 @@ public class OsmandAidlApi {
 		initOsmandTelegram();
 		app.getAppCustomization().addListener(mapActivity);
 		aMapPointUpdateListener = mapActivity;
-		aMapActivityKeyguardFlagsUIAdapter = mapActivity;
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
@@ -1887,7 +1885,7 @@ public class OsmandAidlApi {
 							try {
 								cb.getCallback().updateNavigationInfo(directionInfo);
 							} catch (Exception e) {
-								LOG.debug(e.getMessage(), e);
+								LOG.error(e.getMessage(), e);
 							}
 						}
 					}
@@ -1913,7 +1911,7 @@ public class OsmandAidlApi {
 							try {
 								cb.getCallback().onVoiceRouterNotify();
 							} catch (Exception e) {
-								LOG.debug(e.getMessage(), e);
+								LOG.error(e.getMessage(), e);
 							}
 						}
 					}
@@ -1927,18 +1925,6 @@ public class OsmandAidlApi {
 	public void unregisterFromVoiceRouterMessages(long id) {
 		app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceRouterMessageCallbacks.get(id));
 		voiceRouterMessageCallbacks.remove(id);
-	}
-	
-	public boolean changeMapActivityKeyguardFlags(boolean enable) {
-		if (aMapActivityKeyguardFlagsUIAdapter != null) {
-			if (enable) {
-				aMapActivityKeyguardFlagsUIAdapter.unlock();
-			} else {
-				aMapActivityKeyguardFlagsUIAdapter.lock();
-			}
-			return true;
-		}
-		return false;
 	}
 
 	public Map<String, ContextMenuButtonsParams> getContextMenuButtonsParams() {
@@ -2007,7 +1993,7 @@ public class OsmandAidlApi {
 							try {
 								cb.getCallback().onContextMenuButtonClicked(buttonId, pointId, layerId);
 							} catch (Exception e) {
-								LOG.debug(e.getMessage(), e);
+								LOG.error(e.getMessage(), e);
 							}
 						}
 					}

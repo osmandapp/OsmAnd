@@ -861,11 +861,11 @@ public class VoiceRouter {
 
 	// This is not needed, used are only arrivedIntermediatePoint (for points on the route) or announceWaypoint (for points near the route=)
 	//public void arrivedWayPoint(String name) {
-	//	CommandBuilder play = getNewCommandPlayerToPlay();
-	//	if (play != null) {
-	//		notifyOnVoiceMessage();
-	//		play.arrivedAtWayPoint(getSpeakablePointName(name)).play();
+	//	CommandBuilder p = getNewCommandPlayerToPlay();
+	//	if (p != null) {
+	//		p.arrivedAtWayPoint(getSpeakablePointName(name));
 	//	}
+	//  play(p);
 	//}
 
 	public void onApplicationTerminate() {
