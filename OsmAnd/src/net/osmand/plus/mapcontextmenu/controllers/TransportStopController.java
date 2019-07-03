@@ -251,8 +251,7 @@ public class TransportStopController extends MenuController {
 				stop.setTransportStopAggregated(stopAggregated);
 				if ((stop.getName().startsWith(amenity.getName())
 						&& (nearestStop == null
-						|| nearestStop.getLocation().equals(stop.getLocation())
-						|| nearestStop.compareStopExits(stop)))
+						|| nearestStop.getLocation().equals(stop.getLocation())))
 						|| stop.getLocation().equals(loc)) {
 					stopAggregated.addLocalTransportStop(stop);
 					if (nearestStop == null) {
