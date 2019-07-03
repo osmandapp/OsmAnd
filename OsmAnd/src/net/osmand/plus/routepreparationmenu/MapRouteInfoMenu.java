@@ -844,15 +844,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			AppModeDialog.updateButtonStateForRoute((OsmandApplication) mapActivity.getApplication(), values, selected, listener, buttons, i, true, true, nightMode);
 		}
 
-		final int buttonWidth = (int) mapActivity.getResources().getDimension(R.dimen.route_info_modes_height);
 		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
-		
-		final int scrollSize = (values.indexOf(activeMode) + 1) * buttonWidth + rightTogglePadding;
+		final int idx = values.indexOf(activeMode);
 
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				scrollView.scrollTo(scrollSize - scrollView.getWidth() > 0 ? scrollSize - scrollView.getWidth() : 0, 0);
+				LinearLayout container = ll.findViewById(R.id.app_modes_content);
+				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + rightTogglePadding : 0;
+				scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
 				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		};

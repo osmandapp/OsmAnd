@@ -81,16 +81,17 @@ public class AppModeDialog {
 					singleSelection, useMapTheme, nightMode);
 		}
 
-		final int buttonWidth = (int) a.getResources().getDimension(R.dimen.route_info_modes_height);
-		ApplicationMode activeMode = ((OsmandApplication) a.getApplication()).getSettings().getApplicationMode();
 		
-		final int scrollSize = (values.indexOf(activeMode) + 1) * buttonWidth;
+		ApplicationMode activeMode = ((OsmandApplication) a.getApplication()).getSettings().getApplicationMode();
+		final int idx = values.indexOf(activeMode);
 		
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
 				HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
-				scrollView.scrollTo(scrollSize - scrollView.getWidth() > 0 ? scrollSize - scrollView.getWidth() : 0, 0);
+				LinearLayout container = ll.findViewById(R.id.app_modes_content);
+				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() : 0;
+				scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
 				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 			}
 		};
