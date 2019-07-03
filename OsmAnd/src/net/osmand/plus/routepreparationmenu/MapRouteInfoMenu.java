@@ -841,19 +841,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 
 		final int[] scrollLength = {0};
-		int buttonWidth = AndroidUtils.dpToPx(mapActivity,
-			(int) mapActivity.getResources().getDimension(R.dimen.route_info_modes_height));
-		if (app.getResources().getConfiguration().orientation
-			== Configuration.ORIENTATION_PORTRAIT) {
-			for (int i = 0; i < values.size(); i++) {
-				if (values.get(i).equals(app.getSettings().getApplicationMode())
-					&& (i - 1) * buttonWidth > AndroidUtils.getScreenWidth(mapActivity)) {
+		int buttonWidth = AndroidUtils.dpToPx(mapActivity, (int) mapActivity.getResources().getDimension(R.dimen.route_info_modes_height));
+		final boolean orientationPortrait = app.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
+
+		for (int i = 0; i < values.size(); i++) {
+			if (values.get(i).equals(activeMode)) {
+				if (orientationPortrait && i * buttonWidth > AndroidUtils.getScreenWidth(mapActivity)) {
 					scrollLength[0] = i * buttonWidth - AndroidUtils.getScreenWidth(mapActivity);
-				}
-			}
-		} else {
-			for (int i = 0; i < values.size(); i++) {
-				if (values.get(i).equals(app.getSettings().getApplicationMode())) {
+				} else if (!orientationPortrait &&
+					i * buttonWidth > app.getResources().getDimension(R.dimen.dashboard_land_width)){
 					scrollLength[0] = i * buttonWidth - (int) app.getResources()
 						.getDimension(R.dimen.dashboard_land_width);
 				}
