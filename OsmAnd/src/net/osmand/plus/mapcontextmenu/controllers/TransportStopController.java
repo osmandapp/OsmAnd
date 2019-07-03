@@ -131,10 +131,6 @@ public class TransportStopController extends MenuController {
 
 			for (TransportIndexRepository t : reps) {
 				if (t.acceptTransportStop(transportStop)) {
-					boolean empty = transportStop.getReferencesToRoutes() == null || transportStop.getReferencesToRoutes().length == 0;
-					if (!empty) {
-						addRoutes(routesOnTheSameExit, useEnglishNames, t, transportStop, transportStop, 0);
-					}
 					ArrayList<TransportStop> transportStopsSameExit = new ArrayList<TransportStop>(transportStop.getLocalTransportStops());
 					ArrayList<TransportStop> nearbyTransportStops = new ArrayList<TransportStop>(transportStop.getNearbyTransportStops());
 
@@ -233,7 +229,7 @@ public class TransportStopController extends MenuController {
 
 	@Nullable
 	public static TransportStop findBestTransportStopForAmenity(OsmandApplication app, Amenity amenity) {
-		TransportStop transportStop = null;
+		TransportStopAggregated stopAggregated;
 		boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
 
 		LatLon loc = amenity.getLocation();
@@ -242,45 +238,54 @@ public class TransportStopController extends MenuController {
 		sortTransportStops(loc, transportStops);
 
 		if (isSubwayEntrance) {
-			transportStop = processTransportStopsForAmenity(transportStops, amenity);
+			stopAggregated = processTransportStopsForAmenity(transportStops, amenity);
 		} else {
+			stopAggregated = new TransportStopAggregated();
+			stopAggregated.setAmenity(amenity);
+			TransportStop nearestStop = null;
 			for (TransportStop stop : transportStops) {
+				stop.setTransportStopAggregated(stopAggregated);
 				if (stop.getName().startsWith(amenity.getName())) {
-					transportStop = stop;
-					transportStop.setAmenity(amenity);
-					transportStop.addLocalTransportStop(stop);
-					break;
+					stopAggregated.addLocalTransportStop(stop);
+					if (nearestStop == null) {
+						nearestStop = stop;
+					}
+				} else {
+					stopAggregated.addNearbyTransportStop(stop);
 				}
 			}
 		}
 
-		return transportStop;
+		List<TransportStop> localStops = stopAggregated.getLocalTransportStops();
+		List<TransportStop> nearbyStops = stopAggregated.getNearbyTransportStops();
+		if (!localStops.isEmpty()) {
+			return localStops.get(0);
+		} else if (!nearbyStops.isEmpty()) {
+			return nearbyStops.get(0);
+		}
+		return null;
 	}
 
-	public static TransportStop processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
+	public static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		stopAggregated.setAmenity(amenity);
 
 		for (TransportStop stop : transportStops) {
+			stop.setTransportStopAggregated(stopAggregated);
 			List<TransportStopExit> stopExits = stop.getExits();
 			boolean stopOnSameExitAdded = false;
 			for (TransportStopExit exit : stopExits) {
 				if (exit.getLocation().equals(amenity.getLocation())) {
 					stopOnSameExitAdded = true;
 					stopAggregated.addLocalTransportStop(stop);
-					stop.setTransportStopAggregated(stopAggregated);
 					break;
 				}
 			}
-
-			if (!stopOnSameExitAdded && stop.distance <= SHOW_STOPS_RADIUS_METERS) {
+			if (!stopOnSameExitAdded && MapUtils.getDistance(stop.getLocation(), amenity.getLocation()) <= SHOW_STOPS_RADIUS_METERS) {
 				stopAggregated.addNearbyTransportStop(stop);
 			}
 		}
-		List<TransportStop> stops = stopAggregated.getLocalTransportStops();
-		if (!stops.isEmpty()) {
-			return stops.get(0);
-		}
-		return null;
+
+		return stopAggregated;
 	}
 }
