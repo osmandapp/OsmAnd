@@ -176,6 +176,10 @@ public class TransportStopController extends MenuController {
 		Collection<TransportRoute> rts = t.getRouteForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
+				boolean routeAlreadyAdded = checkSameRoute(routes, rs);
+				if (routeAlreadyAdded) {
+					continue;
+				}
 				TransportStopType type = TransportStopType.findType(rs.getType());
 				if (topType == null && type != null && type.isTopType()) {
 					topType = type;
@@ -291,5 +295,14 @@ public class TransportStopController extends MenuController {
 		}
 
 		return stopAggregated;
+	}
+
+	public static boolean checkSameRoute(List<TransportStopRoute> stopRoutes, TransportRoute route) {
+		for (TransportStopRoute stopRoute : stopRoutes) {
+			if (stopRoute.route.compareRoute(route)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
