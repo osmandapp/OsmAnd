@@ -38,6 +38,9 @@ interface IOsmAndAidlCallback {
     void updateNavigationInfo(in ADirectionInfo directionInfo);
 
     void onContextMenuButtonClicked(in int buttonId, String pointId, String layerId);
-
+    
+    /**
+     *  Callback for {@link IOsmAndAidlInterface} registerForVoiceRouterMessages() method.
+     */
     void onVoiceRouterNotify();
 }

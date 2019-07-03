@@ -74,11 +74,10 @@
 
     <PreferenceCategory
         android:key="turn_screen_on"
+        android:layout="@layout/preference_category_summary"
         android:title="@string/wake_on_voice"
         android:summary="@string/wake_on_voice_descr">
 
-        <!--<Preference android:summary="@string/wake_on_voice_descr" />-->
-        
         <ListPreference
             android:key="wake_on_voice_time_int"
             android:summary="@string/wake_on_voice_time_descr"

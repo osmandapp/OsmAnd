@@ -702,9 +702,8 @@ public class VoiceRouter {
 				}
 			}
 			if (isPlay) {
-				p.play();
+				play(p);
 			}
-			play(null);
 		}
 	}
 
@@ -782,9 +781,8 @@ public class VoiceRouter {
 				}
 			}
 			if (isplay) {
-				p.play();
+				play(p);
 			}
-			play(null);
 		}
 	}
 

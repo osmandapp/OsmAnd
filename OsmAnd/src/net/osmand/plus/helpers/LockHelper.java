@@ -50,15 +50,15 @@ public class LockHelper implements SensorEventListener {
 		mSensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 		mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
-		switchOnSensor();
-
 		voiceMessageListener = new VoiceRouter.VoiceMessageListener() {
 			@Override
 			public void onVoiceMessage() {
-				LOG.debug("onVoiceMessage");
 				unlockEvent();
 			}
 		};
+
+		setVoiceRouterListener(true);
+		setSensor(true);
 	}
 
 	private void releaseWakeLocks() {
@@ -71,11 +71,8 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	private void unlock(long timeInMills) {
-		LOG.debug("unlock");
 		releaseWakeLocks();
 		if (lockUIAdapter != null) {
-			LOG.debug("can produce unlock");
-
 			lockUIAdapter.unlock();
 		}
 
@@ -86,10 +83,8 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	private void lock() {
-		LOG.debug("lock");
 		releaseWakeLocks();
 		if (lockUIAdapter != null) {
-			LOG.debug("can produce lock");
 			lockUIAdapter.lock();
 		}
 	}
@@ -111,67 +106,45 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	public void switchSensor(boolean enable) {
-		if (enable) {
-			LOG.debug("switch on sensor");
-			mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
-		} else {
-			LOG.debug("switch off sensor");
-			mSensorManager.unregisterListener(this);
-		}
-	}
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-	public void switchOffSensor() {
-		LOG.debug("switch off sensor");
-		mSensorManager.unregisterListener(this);
-	}
-
-	public void switchOnSensor() {
-		LOG.debug("switch on sensor");
-		mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
 	}
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
 			if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
-				LOG.debug("sensor...");
-				unlockEvent();
+				if (isSensorEnabled()) {
+					unlockEvent();
+				}
 			}
 		}
 	}
 
-	private void refreshSensor() {
-		Boolean state = app.getSettings().WAKE_ON_VOICE_SENSOR.get();
-		int time = app.getSettings().WAKE_ON_VOICE_TIME_INT.get();
-		switchSensor(state);
-	}
-
-	private void refreshConnection() {
-		Integer screenPowerSave = app.getSettings().WAKE_ON_VOICE_TIME_INT.get();
-		setUpVoiceRouterListener(screenPowerSave > 0);
-	}
-
-	public void setUpVoiceRouterListener(boolean enable) {
+	public void setSensor(boolean enable) {
 		if (enable) {
-			app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(voiceMessageListener);
+			mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
 		} else {
-			app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceMessageListener);
+			mSensorManager.unregisterListener(this);
 		}
 	}
 
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	public void setVoiceRouterListener(boolean enable) {
+		VoiceRouter vr = app.getRoutingHelper().getVoiceRouter();
+		if (enable) {
+			vr.addVoiceMessageListener(voiceMessageListener);
+		} else {
+			vr.removeVoiceMessageListener(voiceMessageListener);
+		}
+	}
 
+	private boolean isSensorEnabled() {
+		return app.getSettings().WAKE_ON_VOICE_SENSOR.get();
 	}
 
 	public void setLockUIAdapter(LockUIAdapter adapter) {
-		LOG.debug("set activity");
-
 		lockUIAdapter = adapter;
-
-		refreshSensor();
-		refreshConnection();
 	}
 
 }

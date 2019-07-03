@@ -706,7 +706,20 @@ interface IOsmAndAidlInterface {
     boolean areOsmandSettingsCustomized(in OsmandSettingsInfoParams params);
 
     boolean setCustomization(in CustomizationInfoParams params);
+    
+    /**
+     * Method to register for Voice Router voice messages during navigation. Notifies user about voice messages.
+     *    
+     * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from messages
+     * @params callbackId (long) - id of callback, needed to unsubscribe from messages
+     * @params callback (IOsmAndAidlCallback) - callback to notify user on voice message
+     */
     long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
     
+    /**
+     * Method to change MapActivity keyguard flags for screen unlock/lock functionality
+     *    
+     * @params enable (boolean) - boolean flag to describe set or reset MapActivity keyguard flags
+     */
     boolean changeMapActivityKeyguardFlags(in boolean enable);
 }

@@ -395,21 +395,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		}
 		super.onPreferenceChange(preference, newValue);
-		if (id.equals(settings.WAKE_ON_VOICE_TIME_INT.getId())) {
-			Integer value;
-			try {
-				value = Integer.parseInt(newValue.toString());
-			} catch (NumberFormatException e) {
-				value = 0;
-			}
-			if (value > 0) {
-//				requestLockScreenAdmin();
-			}
-		}
-		if (id.equals(settings.WAKE_ON_VOICE_SENSOR.getId())) {
-			Boolean sensorEnabled = Boolean.parseBoolean(newValue.toString());
-			getMyApplication().getLockHelper().switchSensor(sensorEnabled);
-		}
 		return true;
 	}
 
