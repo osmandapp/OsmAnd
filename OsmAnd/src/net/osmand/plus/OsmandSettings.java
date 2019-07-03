@@ -1532,6 +1532,7 @@ public class OsmandSettings {
 		return null;
 	}
 
+
 	public ITileSource getTileSourceByName(String tileName, boolean warnWhenSelected) {
 		if (tileName == null || tileName.length() == 0) {
 			return null;
