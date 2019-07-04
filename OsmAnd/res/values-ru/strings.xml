@@ -3136,4 +3136,6 @@
     <string name="precision_hdop">Точность по горизонтали: %s</string>
     <string name="app_mode_shuttle_bus">Маршрутка</string>
     <string name="app_mode_ufo">НЛО</string>
+    <string name="edit_profile_setup_title">Настройка профиля</string>
+    <string name="edit_profile_setup_subtitle">У каждого профиля свои настройки</string>
 </resources>
