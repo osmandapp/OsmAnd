@@ -3143,7 +3143,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl, bei kürzerer Routenführung, schwierigere oder einfachere Pisten immer noch möglich sind.</string>
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht offiziell betreut und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
-    <string name="press_again_to_change_the_map_orientation">Erneut drücken, um die Kartenausrichtung zu ändern</string>
+    <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
     <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
     <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
     <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
