@@ -143,6 +143,14 @@ public class LockHelper implements SensorEventListener {
 				&& app.getRoutingHelper().isFollowingMode();
 		setSensor(isSensorEnabled);
 	}
+	
+	public void onStart() {
+		setSensor(false);
+	}
+	
+	public void onStop() {
+		refreshSensorSettings();
+	}
 
 	public void setLockUIAdapter(LockUIAdapter adapter) {
 		lockUIAdapter = adapter;

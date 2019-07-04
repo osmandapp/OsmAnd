@@ -1293,7 +1293,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onStart() {
 		super.onStart();
 		stopped = false;
-		lockHelper.setSensor(false); //switch off sensor when activity active
+		lockHelper.onStart();
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
@@ -1312,7 +1312,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			onPauseActivity();
 		}
 		stopped = true;
-		lockHelper.refreshSensorSettings();
+		lockHelper.onStop();
 		super.onStop();
 	}
 
