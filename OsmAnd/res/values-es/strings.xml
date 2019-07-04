@@ -3062,21 +3062,21 @@
     <string name="searching_gps">Buscando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
     <string name="app_mode_ufo">Ovni</string>
-    <string name="release_3_4">• Perfiles de aplicación: crea tu propio perfil según tus necesidades, con un icono y color personalizado
-\n
-\n • Se añadió en los perfiles, la velocidad predefinida y la velocidad mín./máx.
-\n
-\n • Se añadió un widget con las coordenadas actuales
-\n
-\n • Se añadieron opciones para mostrar la brújula en el mapa con una regla radial
-\n
-\n • Se mejoraron las descargas de mapas en segundo plano
-\n
-\n • Se corrigió la selección de idioma de Wikipedia
-\n
-\n • Se corrigió el comportamiento de los botones de la brújula durante la navegación
-\n
-\n • Corrección de errores
+    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado 
+\n 
+\n • Ahora personaliza cualquier perfil por defecto y la velocidad mínima y máxima
+\n 
+\n • Se añadió un widget con las coordenadas actuales 
+\n 
+\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa
+\n 
+\n • Se mejoraron las descargas de mapas en segundo plano 
+\n 
+\n • Se corrigió la selección de idioma de Wikipedia 
+\n 
+\n • Se corrigió el comportamiento de los botones de la brújula durante la navegación 
+\n 
+\n • Corrección de otros errores
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Transportador personal</string>
@@ -3084,7 +3084,7 @@
     <string name="app_mode_scooter">Motoneta</string>
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
-    <string name="rate_dialog_descr">Por favor, dedícanos 30 segundos, comparte un comentario y valora nuestro trabajo en Google Play.</string>
+    <string name="rate_dialog_descr">Por favor, dedícanos 30 segundos compartiendo tus comentarios y valorando en Google Play nuestro trabajo.</string>
     <string name="button_rate">Puntúa</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">¡Ayúdanos a mejorar OsmAnd!</string>
@@ -3096,10 +3096,10 @@
     <string name="visited_screens">Pantallas visitadas</string>
     <string name="collected_data_descr">Lista de datos que quieres compartir con OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Recopilamos estos datos para comprender los mapas de qué regiones y países son los más populares.</string>
-    <string name="visited_screens_collect_descr">Recopilamos estos datos para conocer las características más populares de OsmAnd.</string>
+    <string name="visited_screens_collect_descr">Recopilamos estos datos para conocer qué características de OsmAnd son más populares.</string>
     <string name="privacy_and_security_change_descr">Al pulsar en \"Permitir\" está de acuerdo con nuestra %1$s</string>
     <string name="settings_privacy_and_security">Privacidad y seguridad</string>
-    <string name="settings_privacy_and_security_desc">Elige tus datos a compartir con nosotros</string>
+    <string name="settings_privacy_and_security_desc">Selecciona qué datos vas a compartir con nosotros</string>
     <string name="shared_string_no_thank_you">No, gracias</string>
     <string name="shared_string_allow">Permitir</string>
     <string name="profile_name_hint">Nombre del perfil</string>
@@ -3109,7 +3109,7 @@
     <string name="app_mode_subway">Metro</string>
     <string name="app_mode_horse">Caballo</string>
     <string name="app_mode_helicopter">Helicóptero</string>
-    <string name="osmand_routing_promo">Puedes añadir tu propia versión modificada de routing.xml a ..osmand/routing</string>
+    <string name="osmand_routing_promo">Puedes añadir tu propia versión modificada del archivo routing.xml en ..osmand/routing</string>
     <string name="app_mode_skiing">Esquí</string>
     <string name="base_profile_descr_ski">Esquí</string>
     <string name="show_compass_ruler">Mostrar regla radial</string>
@@ -3118,15 +3118,15 @@
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icono</string>
     <string name="collected_data">Datos recogidos</string>
-    <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
+    <string name="press_again_to_change_the_map_orientation">Toca de nuevo para cambiar la orientación del mapa</string>
     <string name="shared_string_min_speed">Velocidad mínima</string>
     <string name="shared_string_max_speed">Velocidad máxima</string>
     <string name="default_speed_setting_title">Velocidad estándar</string>
     <string name="default_speed_setting_descr">Cambiar la configuración de velocidad por defecto</string>
     <string name="minmax_speed_dialog_title">Establecer velocidad mínima/máxima</string>
-    <string name="default_speed_dialog_msg">Se usa para el cálculo de la hora estimada de llegada</string>
+    <string name="default_speed_dialog_msg">Se usa para calcular la hora estimada de llegada</string>
     <string name="new_profile">Nuevo perfil</string>
-    <string name="last_launch_crashed">OsmAnd falló la última vez. Ayúdanos a mejorar OsmAnd. Por favor, envíanos un mensaje de error.</string>
+    <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor ayúdanos a mejorar OsmAnd enviando un mensaje de error.</string>
     <string name="select_icon_profile_dialog_title">Seleccionar icono</string>
     <string name="settings_routing_mode_string">Modo: %s</string>
     <string name="settings_derived_routing_mode_string">Modo de usuario, derivado de: %s</string>
@@ -3134,27 +3134,27 @@
     <string name="profile_type_descr_string">Tipo: %s</string>
     <string name="profile_type_base_string">Perfil base</string>
     <string name="profile_alert_need_routing_type_title">Selecciona el tipo de navegación</string>
-    <string name="profile_alert_need_routing_type_msg">Debes seleccionar el tipo de navegación para crear un nuevo perfil de aplicación</string>
+    <string name="profile_alert_need_routing_type_msg">Por favor selecciona un tipo de navegación para el nuevo perfil de aplicación</string>
     <string name="profile_alert_need_profile_name_title">Introduce el nombre del perfil</string>
     <string name="profile_alert_need_profile_name_msg">¡El nombre del perfil no debe estar vacío!</string>
     <string name="profile_alert_duplicate_name_title">Nombre duplicado</string>
-    <string name="profile_alert_duplicate_name_msg">Ya existe un perfil con dicho nombre</string>
+    <string name="profile_alert_duplicate_name_msg">Ya existe un perfil con ese nombre</string>
     <string name="profile_alert_cant_delete_base">No puedes eliminar Perfiles base de OsmAnd</string>
     <string name="profile_alert_need_save_title">Guardar cambios</string>
     <string name="profile_alert_need_save_msg">Debes guardar los cambios en el perfil antes de continuar</string>
     <string name="profile_alert_delete_title">Eliminar perfil</string>
     <string name="profile_alert_delete_msg">Estás seguro de que deseas eliminar el perfil %s</string>
-    <string name="select_base_profile_dialog_title">Selecciona el perfil base</string>
-    <string name="select_base_profile_dialog_message">El perfil de aplicación personalizado debe basarse en uno de los perfiles de aplicación predeterminados. El perfil seleccionado define la configuración básica: configuración de widgets, unidades de velocidad y distancia. En la cadena debajo del nombre del perfil, puede aprender qué perfiles de navegación son adecuados para cada perfil de aplicación.</string>
+    <string name="select_base_profile_dialog_title">Selecciona un perfil base</string>
+    <string name="select_base_profile_dialog_message">Basa tu perfil personalizado en uno de los perfiles de aplicación predeterminados, esto define la configuración básica como la visibilidad de los widgets y las unidades de velocidad y distancia. Estos son los perfiles de aplicación predeterminados, junto con ejemplos de perfiles personalizados que pueden ser ampliados:</string>
     <string name="select_nav_profile_dialog_title">Selecciona el tipo de navegación</string>
     <string name="base_profile_descr_car">Coche, camión, motocicleta</string>
     <string name="base_profile_descr_bicycle">Bicicleta de montaña, ciclomotor, caballo</string>
-    <string name="base_profile_descr_pedestrian">Caminar, Senderismo, Correr</string>
+    <string name="base_profile_descr_pedestrian">Caminar, senderismo, correr</string>
     <string name="base_profile_descr_public_transport">Todos los tipos de transporte público</string>
-    <string name="base_profile_descr_boat">Barco, Remo, Vela</string>
-    <string name="base_profile_descr_aircraft">Avión, Ala delta</string>
+    <string name="base_profile_descr_boat">Barco, remo, vela</string>
+    <string name="base_profile_descr_aircraft">Avión, ala delta</string>
     <string name="routing_profile_straightline">Línea recta</string>
-    <string name="routing_profile_broutrer">BRouter (Sin conexión)</string>
+    <string name="routing_profile_broutrer">BRouter (sin conexión)</string>
     <string name="osmand_default_routing">Enrutamiento OsmAnd</string>
     <string name="custom_routing">Perfil de enrutamiento personalizado</string>
     <string name="special_routing_type">Enrutamiento especial</string>
@@ -3188,4 +3188,12 @@
     <string name="routing_attr_freeride_policy_description">Las rutas fuera de pista son rutas no oficiales. Por lo general, no arregladas, sin el mantenimiento de los operarios y no revisadas por la noche. Entre bajo su propio riesgo.</string>
     <string name="routing_profile_geocoding">Geocodificación</string>
     <string name="shared_string_crash">Choque</string>
+    <string name="app_mode_offroad">Todoterreno</string>
+    <string name="edit_profile_setup_title">Configurar perfil</string>
+    <string name="edit_profile_setup_subtitle">El perfil mantiene su propia configuración</string>
+    <string name="edit_profile_setup_map_subtitle">Selecciona la configuración del mapa por defecto para este perfil</string>
+    <string name="edit_profile_screen_options_subtitle">Selecciona la configuración por defecto de la pantalla para este perfil</string>
+    <string name="edit_profile_nav_settings_subtitle">Selecciona los ajustes de navegación por defecto para este perfil</string>
+    <string name="routing_attr_max_num_changes_description">Especifica el número máximo de transbordos</string>
+    <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
 </resources>
