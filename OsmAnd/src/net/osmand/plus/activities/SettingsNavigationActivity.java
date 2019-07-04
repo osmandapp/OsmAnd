@@ -193,7 +193,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					+ getString(R.string.int_seconds);
 		}
 		registerListPreference(settings.TURN_SCREEN_ON_TIME_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
-		registerBooleanPreference(settings.TURN_SCREEN_ON_ROUTER, screen);
 		registerBooleanPreference(settings.TURN_SCREEN_ON_SENSOR, screen);
 	}
 
@@ -396,12 +395,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		}
 		super.onPreferenceChange(preference, newValue);
-		if (id.equals(settings.TURN_SCREEN_ON_ROUTER.getId())) {
-			boolean isRoutingListnerEnabled = Boolean.valueOf(newValue.toString());
-			getMyApplication().getLockHelper().setVoiceRouterListener(isRoutingListnerEnabled);
-		} else if (id.equals(settings.TURN_SCREEN_ON_SENSOR.getId())) {
-			boolean isSensorEnabled = Boolean.valueOf(newValue.toString());
-			getMyApplication().getLockHelper().setSensor(isSensorEnabled);
+		if (id.equals(settings.TURN_SCREEN_ON_TIME_INT.getId())) {
+			boolean isRoutingListenerEnabled = Integer.valueOf(newValue.toString()) > 0;
+			getMyApplication().getLockHelper().setVoiceRouterListener(isRoutingListenerEnabled);
 		}
 		return true;
 	}

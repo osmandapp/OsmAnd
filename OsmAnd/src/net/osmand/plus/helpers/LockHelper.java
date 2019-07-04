@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -59,8 +58,6 @@ public class LockHelper implements SensorEventListener {
 				unlockEvent();
 			}
 		};
-		
-		refreshGlobalSettings();
 	}
 
 	private void releaseWakeLocks() {
@@ -98,10 +95,10 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	public void unlockEvent() {
-		int screenPowerSave = app.getSettings().TURN_SCREEN_ON_TIME_INT.get();
+		int unlockTime = app.getSettings().TURN_SCREEN_ON_TIME_INT.get();
 
-		if (screenPowerSave > 0) {
-			timedUnlock(screenPowerSave * 1000L);
+		if (unlockTime > 0) {
+			timedUnlock(unlockTime * 1000L);
 		}
 	}
 
@@ -136,13 +133,14 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	public void refreshProfilesSettings() {
-		boolean isVRListenerEnabled = settings.TURN_SCREEN_ON_ROUTER.get();
+	public void refreshRouterSettings() {
+		boolean isVRListenerEnabled = settings.TURN_SCREEN_ON_TIME_INT.get() > 0;
 		setVoiceRouterListener(isVRListenerEnabled);
 	}
 	
-	public void refreshGlobalSettings() {
-		boolean isSensorEnabled = settings.TURN_SCREEN_ON_SENSOR.get();
+	public void refreshSensorSettings() {
+		boolean isSensorEnabled = settings.TURN_SCREEN_ON_SENSOR.get() 
+				&& app.getRoutingHelper().isFollowingMode();
 		setSensor(isSensorEnabled);
 	}
 

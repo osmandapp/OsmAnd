@@ -48,7 +48,6 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.MapAccessibilityActions;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
 import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -88,7 +87,6 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -1295,6 +1293,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onStart() {
 		super.onStart();
 		stopped = false;
+		lockHelper.setSensor(false); //switch off sensor when activity active
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
@@ -1313,6 +1312,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			onPauseActivity();
 		}
 		stopped = true;
+		lockHelper.refreshSensorSettings();
 		super.onStop();
 	}
 
@@ -1415,7 +1415,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getMapView().refreshMap(true);
 			}
 		});
-		lockHelper.refreshProfilesSettings();
+		lockHelper.refreshRouterSettings();
 		getMapView().refreshMap(true);
 	}
 
