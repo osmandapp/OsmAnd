@@ -108,10 +108,11 @@
 			android:layout_height="match_parent" >
 
 		<ImageView
+			android:id="@+id/selector_shadow"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:scaleType="fitXY"
-			android:src="@drawable/bg_shadow_list_bottom"/>
+			android:layout_height="@dimen/abp__shadow_height"
+			android:src="@drawable/preference_activity_action_bar_shadow"
+			android:visibility="invisible"/>
 
 		<ListView
 				android:id="@android:id/list"

@@ -85,6 +85,16 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		createUI();
     }
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(getIntent() != null && getIntent().hasExtra(INTENT_SKIP_DIALOG)) {
+			setSelectedAppMode(settings.getApplicationMode());
+		} else if (selectedAppMode == null) {
+			selectAppModeDialog().show();
+		}
+	}
+
 	private void createUI() {
 		addPreferencesFromResource(R.xml.navigation_settings);
 		PreferenceScreen screen = getPreferenceScreen();
@@ -181,11 +191,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		// registerListPreference(settings.DELAY_TO_START_NAVIGATION, screen, delayIntervalNames, delayIntervals);
 
 
-		if(getIntent() != null && getIntent().hasExtra(INTENT_SKIP_DIALOG)) {
-			setSelectedAppMode(settings.getApplicationMode());
-		} else {
-			selectAppModeDialog().show();
-		}
+
 
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 	}
