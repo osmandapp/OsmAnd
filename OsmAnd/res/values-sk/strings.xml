@@ -3159,4 +3159,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="app_mode_scooter">Skúter</string>
     <string name="precision_hdop_and_vdop">Presnosť horizontálne: %1$s, vertikálne: %2$s</string>
     <string name="precision_hdop">Presnosť horizontálne: %s</string>
+    <string name="app_mode_offroad">Mimo cesty (Offroad)</string>
+    <string name="edit_profile_setup_title">Nastaviť profil</string>
 </resources>
