@@ -3088,11 +3088,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="base_profile_descr_aircraft">Lietadlo, plachtenie</string>
     <string name="routing_profile_geocoding">Georeferencovanie</string>
     <string name="routing_profile_straightline">Rovná čiara</string>
-    <string name="routing_profile_broutrer">BRouter (Offline)</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
     <string name="osmand_default_routing">Navigácia OsmAnd</string>
     <string name="custom_routing">Vlastný profil navigácie</string>
     <string name="special_routing_type">Špeciálna navigácia</string>
-    <string name="third_party_routing_type">Navigácia 3.strany</string>
+    <string name="third_party_routing_type">Navigácia tretej strany</string>
     <string name="application_profiles_descr">Zvoľte profily, ktoré majú byť viditeľné v aplikácii.</string>
     <string name="application_profiles">Profily aplikácie</string>
     <string name="zoom_by_wunderlinq_descr">Zmeňte priblíženie mapy pomocou posúvania kolieskom nahor a nadol. Esc vás vráti do aplikácie WunderLINQ.</string>
