@@ -3153,7 +3153,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="default_speed_dialog_msg">Wird für die Berechnung der erwarteten Ankunftszeit während des Routings verwendet</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
-    <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Helfen Sie uns bitte, OsmAnd durch Freigabe der Fehlermeldung zu verbessern.</string>
+    <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns die Fehlermeldung mitteilen.</string>
     <string name="release_3_4">"- Anwendungsprofile: Eigenes Profil nach seinen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen. 
 \n 
 \n - Jetzt profilabhängig Standard- und Min/Max-Geschwindigkeiten anpassen 
