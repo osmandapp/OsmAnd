@@ -3030,13 +3030,13 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="public_transport_type">Spôsob dopravy</string>
     <string name="searching_gps">Hľadá sa GPS</string>
     <string name="coordinates_widget">Nástroj súradníc</string>
-    <string name="rate_dialog_descr">Prosím dajte nám 30 sekúnd, zdieľajte spätnú väzbu a ohodnoťte našu prácu na Google Play.</string>
+    <string name="rate_dialog_descr">Prosím dajte nám 30 sekúnd zdieľaním spätnej väzby a ohodnotením našej práce na Google Play.</string>
     <string name="button_rate">Ohodnotiť</string>
     <string name="shared_string_privacy_policy">Ochrana súkromia</string>
     <string name="help_us_make_osmand_better">Pomôžte nám vylepšiť OsmAnd!</string>
     <string name="make_osmand_better_descr">Umožnite OsmAndu zbierať a spracovať anonymné údaje o používaní aplikácie. Nezbierame ani neukladáme údaje o vašej polohe, ani o miestach, ktoré si prezeráte na mape.
 \n
-\nVašu voľbu môžete vždy zmeniť v Nastavenia &gt; Súkromie a bezpečnosť.</string>
+\nVašu voľbu môžete zmeniť kedykoľvek v Nastavenia &gt; Súkromie a bezpečnosť.</string>
     <string name="choose_data_to_share">Zvoľte ktoré typy údajov dovolíte zdieľať:</string>
     <string name="downloaded_maps">Stiahnuté mapy</string>
     <string name="visited_screens">Navštívené obrazovky</string>
@@ -3133,7 +3133,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="default_speed_dialog_msg">Používa sa na výpočet očakávaného času príjazdu počas navigovania</string>
     <string name="new_profile">Nový profil</string>
     <string name="shared_string_crash">Pád aplikácie</string>
-    <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Pomôžte nám vylepšiť OsmAnd. Prosím zašlite nám správu o chybe.</string>
+    <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Prosíme pomôžte nám vylepšiť OsmAnd zdieľaním správy o chybe.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">• Aplikačné profily: vytvorte vlastné profily pre vaše potreby, s vlastnou ikonou a farbou
 \n 
@@ -3157,6 +3157,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Osobný transportér</string>
     <string name="app_mode_monowheel">Koleso (monowheel)</string>
     <string name="app_mode_scooter">Skúter</string>
-    <string name="precision_hdop_and_vdop">Presnosť horizontálna: %1$s, vertikálna: %2$s</string>
-    <string name="precision_hdop">Presnosť horizontálna: %s</string>
+    <string name="precision_hdop_and_vdop">Presnosť horizontálne: %1$s, vertikálne: %2$s</string>
+    <string name="precision_hdop">Presnosť horizontálne: %s</string>
 </resources>
