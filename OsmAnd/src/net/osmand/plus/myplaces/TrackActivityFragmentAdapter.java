@@ -489,7 +489,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				description = extensions.get("desc");
 			}
 		}
-		return description;
+		return description != null ? Html.fromHtml(description).toString().trim() : null;
 	}
 
 	@Nullable
