@@ -3042,10 +3042,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="visited_screens">Navštívené obrazovky</string>
     <string name="collected_data_descr">Zoznam údajov, ktoré chcete zdieľať s OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré mapy regiónov a krajín sú najpopulárnejšie.</string>
-    <string name="visited_screens_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré sú najpopulárnejšie funkcie OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Kliknutím \"Povoliť\" súhlasíte s: %1$s</string>
+    <string name="visited_screens_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré funkcie OsmAnd sú najpopulárnejšie.</string>
+    <string name="privacy_and_security_change_descr">Stlačením \"Povoliť\" súhlasíte s: %1$s</string>
     <string name="settings_privacy_and_security">Súkromie a bezpečnosť</string>
-    <string name="settings_privacy_and_security_desc">Zvoľte údaje na zdieľanie s nami</string>
+    <string name="settings_privacy_and_security_desc">Zvoľte ktoré údaje budete zdieľať s nami</string>
     <string name="shared_string_no_thank_you">Nie, ďakujem</string>
     <string name="shared_string_allow">Povoliť</string>
     <string name="profile_name_hint">Názov profilu</string>
@@ -3067,7 +3067,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="profile_type_descr_string">Typ: %s</string>
     <string name="profile_type_base_string">Základný profil</string>
     <string name="profile_alert_need_routing_type_title">Vyberte typ navigácie</string>
-    <string name="profile_alert_need_routing_type_msg">Musíte vybrať typ navigácie pre vytvorenie nového profilu aplikácie</string>
+    <string name="profile_alert_need_routing_type_msg">Prosím zvoľte typ navigácie pre nový profil aplikácie</string>
     <string name="profile_alert_need_profile_name_title">Zadajte názov profilu</string>
     <string name="profile_alert_need_profile_name_msg">Názov profilu nesmie byť prázdny!</string>
     <string name="profile_alert_duplicate_name_title">Duplicitný názov</string>
@@ -3161,4 +3161,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="precision_hdop">Presnosť horizontálne: %s</string>
     <string name="app_mode_offroad">Mimo cesty (Offroad)</string>
     <string name="edit_profile_setup_title">Nastaviť profil</string>
+    <string name="edit_profile_setup_subtitle">Profil udržuje vlastné nastavenia</string>
+    <string name="edit_profile_setup_map_subtitle">Zvoľte predvolené nastavenia mapy pre profil</string>
+    <string name="edit_profile_screen_options_subtitle">Zvoľte predvolené nastavenia obrazovky pre profil</string>
+    <string name="edit_profile_nav_settings_subtitle">Zvoľte predvolené nastavenia navigácie pre profil</string>
+    <string name="routing_attr_max_num_changes_description">Zadajte maximálny počet zmien</string>
+    <string name="routing_attr_max_num_changes_name">Počet zmien</string>
 </resources>
