@@ -81,7 +81,7 @@
         <ListPreference
             android:key="wake_on_voice_time_int"
             android:summary="@string/wake_on_voice_time_descr"
-            android:title="@string/wake_on_voice_time"/>
+            android:title="@string/shared_string_time"/>
         <CheckBoxPreference
             android:key="wake_on_voice_sensor"
             android:summary="@string/wake_on_voice_sensor_descr"

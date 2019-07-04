@@ -113,9 +113,9 @@ public class LockHelper implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-			if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
-				if (isSensorEnabled()) {
+		if (isSensorEnabled()) {
+			if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+				if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
 					unlockEvent();
 				}
 			}
