@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -58,6 +59,8 @@ public class LockHelper implements SensorEventListener {
 				unlockEvent();
 			}
 		};
+		
+		refreshRouterSettings();
 	}
 
 	private void releaseWakeLocks() {
@@ -144,12 +147,18 @@ public class LockHelper implements SensorEventListener {
 		setSensor(isSensorEnabled);
 	}
 	
-	public void onStart() {
-		setSensor(false);
+	public void onStart(Activity a) {
+		if (wakeLock == null) {
+			setSensor(false);
+			setVoiceRouterListener(false);
+		}
 	}
 	
-	public void onStop() {
-		refreshSensorSettings(); 
+	public void onStop(Activity a) {
+		if(!a.isFinishing()) {
+			refreshRouterSettings();
+			refreshSensorSettings();
+		}
 	}
 
 	public void setLockUIAdapter(LockUIAdapter adapter) {

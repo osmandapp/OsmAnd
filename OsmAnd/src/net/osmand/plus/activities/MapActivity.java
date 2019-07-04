@@ -1293,7 +1293,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onStart() {
 		super.onStart();
 		stopped = false;
-		lockHelper.onStart();
+		lockHelper.onStart(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
@@ -1312,7 +1312,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			onPauseActivity();
 		}
 		stopped = true;
-		lockHelper.onStop();
+		lockHelper.onStop(this);
 		super.onStop();
 	}
 
@@ -1415,7 +1415,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getMapView().refreshMap(true);
 			}
 		});
-		lockHelper.refreshRouterSettings();
 		getMapView().refreshMap(true);
 	}
 
