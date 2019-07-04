@@ -502,7 +502,12 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private String getMetadataImageLink(@NonNull GPXUtilities.Metadata metadata) {
 		String link = metadata.link;
 		if (!TextUtils.isEmpty(link)) {
-			if (link.contains(".jpg") || link.contains(".gif") || link.contains(".jpeg") || link.contains(".png") || link.contains(".bmp") || link.contains(".webp")) {
+			String lowerCaseLink = link.toLowerCase();
+			if (lowerCaseLink.contains(".jpg")
+					|| lowerCaseLink.contains(".jpeg")
+					|| lowerCaseLink.contains(".png")
+					|| lowerCaseLink.contains(".bmp")
+					|| lowerCaseLink.contains(".webp")) {
 				return link;
 			}
 		}
