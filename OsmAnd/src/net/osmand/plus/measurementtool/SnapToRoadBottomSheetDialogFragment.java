@@ -70,11 +70,6 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 			}
 		});
 
-		if (nightMode) {
-			((TextView) mainView.findViewById(R.id.choose_navigation_title))
-					.setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
-		}
-
 		LinearLayout container = (LinearLayout) mainView.findViewById(R.id.navigation_types_container);
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
 		if (removeDefaultMode) {
@@ -140,12 +135,7 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 	private OsmandApplication getMyApplication() {
 		return ((MapActivity) getActivity()).getMyApplication();
 	}
-
-	private Drawable getContentIcon(@DrawableRes int id) {
-		return getMyApplication().getUIUtilities()
-				.getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
-	}
-
+	
 	public interface SnapToRoadFragmentListener {
 
 		void onDestroyView(boolean snapToRoadEnabled);

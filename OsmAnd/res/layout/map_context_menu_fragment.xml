@@ -201,7 +201,7 @@
                             android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
                             android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                             android:text="•"
-                            android:textColor="@color/icon_color"
+                            android:textColor="@color/icon_color_default_light"
                             android:visibility="gone"
                             tools:visibility="visible"/>
 
@@ -583,14 +583,14 @@
                 android:id="@+id/context_menu_bottom_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:background="?attr/ctx_menu_info_view_bg">
+                tools:background="?attr/activity_background_color">
 
                 <LinearLayout
                     android:id="@+id/context_menu_bottom_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    tools:background="?attr/ctx_menu_info_view_bg">
+                    tools:background="?attr/activity_background_color">
 
                 </LinearLayout>
 
@@ -646,7 +646,7 @@
             android:id="@+id/context_menu_toolbar"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dashboard_map_toolbar"
-            android:background="@color/actionbar_light_color"
+            android:background="@color/app_bar_color_light"
             app:contentInsetLeft="4dp"
             app:contentInsetStart="4dp">
 

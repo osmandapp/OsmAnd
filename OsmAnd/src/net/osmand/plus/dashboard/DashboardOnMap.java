@@ -655,10 +655,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private void applyDayNightMode() {
 		final int backgroundColor;
 		backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.ctx_menu_info_view_bg_dark
-						: R.color.ctx_menu_info_view_bg_light);
+				nightMode ? R.color.activity_background_color_dark
+						: R.color.activity_background_color_light);
 		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
+				nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);

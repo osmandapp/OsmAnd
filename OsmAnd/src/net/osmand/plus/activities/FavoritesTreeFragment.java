@@ -130,7 +130,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		arrowImageDisabled = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
 		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
-				context, light ? R.color.icon_color : R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+				context, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark), PorterDuff.Mode.MULTIPLY);
 	}
 
 	private void deleteFavorites() {
@@ -167,7 +167,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		if (!favouritesAdapter.isEmpty()) {
 			boolean light = getMyApplication().getSettings().isLightContent();
 			View searchView = inflater.inflate(R.layout.search_fav_list_item, null);
-			searchView.setBackgroundResource(light ? R.color.bg_color_light : R.color.bg_color_dark);
+			searchView.setBackgroundResource(light ? R.color.list_background_color_light : R.color.list_background_color_dark);
 			TextView title = (TextView) searchView.findViewById(R.id.title);
 			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
 			title.setHint(R.string.shared_string_search);
@@ -240,8 +240,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				getMyApplication().getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 	}
 
 	@Override
@@ -917,7 +917,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			boolean light = app.getSettings().isLightContent();
 			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
-			int disabledIconColor = light ? R.color.icon_color : R.color.icon_color_light;
+			int disabledIconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);

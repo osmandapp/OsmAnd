@@ -105,7 +105,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
 		emptyView = emptyStub.inflate();
 		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 
 		if (Build.VERSION.SDK_INT >= 18) {
@@ -122,7 +122,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
 	}
 
 	@Override

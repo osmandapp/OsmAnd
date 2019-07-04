@@ -160,7 +160,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final int backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		fullScreen = portrait && planRouteContext.isMarkersListOpened();
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
@@ -178,7 +178,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 		if (portrait) {
 			mainView.findViewById(R.id.toolbar_divider).setBackgroundColor(ContextCompat.getColor(mapActivity,
-					nightMode ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+					nightMode ? R.color.app_bar_color_dark : R.color.divider_color_light));
 
 			Drawable arrow = getContentIcon(fullScreen ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(arrow);
@@ -383,7 +383,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	@Override
 	public int getStatusBarColorId() {
 		if (fullScreen || !portrait) {
-			return nightMode ? R.color.actionbar_dark_color : R.color.status_bar_route_light;
+			return nightMode ? R.color.app_bar_color_dark : R.color.status_bar_route_light;
 		}
 		return R.color.status_bar_transparent_gradient;
 	}
@@ -436,7 +436,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
+		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
@@ -950,8 +950,8 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		PlanRouteToolbarController() {
 			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
 			setBackBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
-			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
+			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
 			setCloseBtnVisible(false);

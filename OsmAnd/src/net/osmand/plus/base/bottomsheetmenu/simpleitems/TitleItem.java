@@ -23,7 +23,7 @@ public class TitleItem extends SimpleBottomSheetItem {
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		if (titleColorId == INVALID_ID) {
-			titleColorId = nightMode ? R.color.ctx_menu_info_text_dark : INVALID_ID;
+			titleColorId = nightMode ? R.color.text_color_primary_dark : INVALID_ID;
 		}
 		super.inflate(app, container, nightMode);
 	}

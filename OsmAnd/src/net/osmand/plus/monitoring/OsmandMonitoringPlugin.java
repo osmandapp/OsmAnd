@@ -519,7 +519,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			lp.setMargins(0, dp8 * 2, 0, 0);
 			divider.setLayoutParams(lp);
 			divider.setBackgroundColor(uiCtx.getResources().getColor(
-					light ? R.color.dashboard_divider_light : R.color.dashboard_divider_dark));
+					light ? R.color.divider_color_light : R.color.divider_color_dark));
 			ll.addView(divider);
 
 			final CheckBox cb = new CheckBox(uiCtx);

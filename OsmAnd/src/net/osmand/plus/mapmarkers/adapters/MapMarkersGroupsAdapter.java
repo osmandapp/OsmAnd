@@ -266,7 +266,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 			int color;
 			if (marker.history) {
-				color = R.color.icon_color_light;
+				color = R.color.icon_color_default_dark;
 			} else {
 				color = MapMarker.getColorId(marker.colorIndex);
 			}
@@ -290,12 +290,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.iconDirection.setVisibility(View.VISIBLE);
 
 				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
-				itemViewHolder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
+				itemViewHolder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
 				itemViewHolder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
-				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
 				itemViewHolder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed));
-				itemViewHolder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.dash_search_icon_dark : R.color.icon_color));
+				itemViewHolder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
 
 				drawableResToUpdate = R.drawable.ic_direction_arrow;
 				markerImageViewToUpdate = itemViewHolder.iconDirection;
@@ -353,7 +353,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 										updateDisplayedData();
 									}
 								});
-						AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+						AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 						snackbar.show();
 					}
 				}
@@ -488,7 +488,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 											mapMarkersHelper.enableGroup(group);
 										}
 									});
-							AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+							AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 							snackbar.show();
 						}
 					}

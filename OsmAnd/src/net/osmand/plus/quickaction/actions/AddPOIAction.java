@@ -176,8 +176,8 @@ public class AddPOIAction extends QuickAction {
 				.inflate(R.layout.quick_action_add_poi_layout, parent, false);
 
 		final OsmandApplication application = activity.getMyApplication();
-		Drawable deleteDrawable = application.getUIUtilities().getPaintedIcon(R.drawable.ic_action_remove_dark,
-				activity.getResources().getColor(R.color.dash_search_icon_dark));
+		boolean isLightTheme = application.getSettings().isLightContent();
+		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
 
 		final LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
@@ -303,8 +303,7 @@ public class AddPOIAction extends QuickAction {
 			}
 		});
 
-		boolean isLightTheme = activity.getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-		final int colorId = isLightTheme ? R.color.inactive_item_orange : R.color.dash_search_icon_dark;
+		final int colorId = isLightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		final int color = activity.getResources().getColor(colorId);
 		onlineDocumentationButton.setImageDrawable(activity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, color));
 //            poiTypeEditText.setCompoundDrawables(null, null, activity.getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_arrow_drop_down, color), null);

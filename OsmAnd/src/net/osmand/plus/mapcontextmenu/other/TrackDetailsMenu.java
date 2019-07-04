@@ -751,8 +751,8 @@ public class TrackDetailsMenu {
 			setBackBtnIconClrIds(0, 0);
 			setRefreshBtnIconClrIds(0, 0);
 			setCloseBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
-			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
+			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
 		}

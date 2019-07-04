@@ -944,7 +944,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				} else if (mapTopBar && mapControlsVisible) {
 					colorId = night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
 				} else if (markerTopBar && mapControlsVisible) {
-					colorId = R.color.status_bar_dark;
+					colorId = R.color.status_bar_color_dark;
 				} else {
 					colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
 				}

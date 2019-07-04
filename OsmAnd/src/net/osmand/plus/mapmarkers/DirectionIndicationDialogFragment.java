@@ -208,7 +208,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	@Override
 	protected Drawable getContentIcon(int id) {
-		return getIcon(id, getSettings().isLightContent() ? R.color.icon_color : R.color.ctx_menu_info_text_dark);
+		return getIcon(id, getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	private MapActivity getMapActivity() {
@@ -379,7 +379,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		boolean night = !getSettings().isLightContent();
 		RadioButton rb = (RadioButton) mainView.findViewById(radioButtonId);
 		int colorId = active ? night ? R.color.active_color_primary_dark : R.color.active_color_primary_light
-				: night ? R.color.ctx_menu_info_text_dark : R.color.icon_color;
+				: night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		rb.setChecked(checked);
 		CompoundButtonCompat.setButtonTintList(rb, ColorStateList.valueOf(ContextCompat.getColor(getContext(), colorId)));
 		mainView.findViewById(rowId).setEnabled(active);

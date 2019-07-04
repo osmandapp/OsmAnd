@@ -172,9 +172,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		secondIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_street_name));
 
 		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.first_divider),
-				nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.second_divider),
-				nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 
 		searchView.findViewById(R.id.first_item).setOnClickListener(new OnClickListener() {
 			@Override

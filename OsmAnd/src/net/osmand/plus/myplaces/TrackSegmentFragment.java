@@ -332,8 +332,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				boolean light = app.getSettings().isLightContent();
 				tabLayout = (PagerSlidingTabStrip) row.findViewById(R.id.sliding_tabs);
 				tabLayout.setTabBackground(R.color.color_transparent);
-				tabLayout.setIndicatorColorResource(light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark);
-				tabLayout.setIndicatorBgColorResource(light ? R.color.dashboard_divider_light : R.color.dashboard_divider_dark);
+				tabLayout.setIndicatorColorResource(light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
+				tabLayout.setIndicatorBgColorResource(light ? R.color.divider_color_light : R.color.divider_color_dark);
 				tabLayout.setIndicatorHeight(AndroidUtils.dpToPx(app, 1f));
 				tabLayout.setTextColor(tabLayout.getIndicatorColor());
 				tabLayout.setTextSize(AndroidUtils.spToPx(app, 12f));

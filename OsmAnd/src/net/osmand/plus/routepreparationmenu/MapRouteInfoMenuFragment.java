@@ -430,13 +430,13 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), isNightMode(),
 				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
-				R.color.divider_light, R.color.divider_dark);
+				R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), isNightMode(),
-				R.color.divider_light, R.color.divider_dark);
+				R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
-				R.color.divider_light, R.color.divider_dark);
+				R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), isNightMode(),
-				R.color.divider_light, R.color.divider_dark);
+				R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),

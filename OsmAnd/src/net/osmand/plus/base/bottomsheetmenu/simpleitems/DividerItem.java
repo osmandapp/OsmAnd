@@ -66,6 +66,6 @@ public class DividerItem extends BaseBottomSheetItem {
 		if (colorId != INVALID_ID) {
 			return colorId;
 		}
-		return nightMode ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light;
+		return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
 	}
 }

@@ -188,7 +188,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		super.onActivityCreated(savedInstanceState);
 		setShowsDialog(true);
 		final boolean isLightContent = getMyApplication().getSettings().isLightContent();
-		final int colorId = isLightContent ? R.color.bg_color_light : R.color.bg_color_dark;
+		final int colorId = isLightContent ? R.color.list_background_color_light : R.color.list_background_color_dark;
 		listView.setBackgroundColor(ContextCompat.getColor(getActivity(), colorId));
 	}
 

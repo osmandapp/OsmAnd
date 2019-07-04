@@ -171,7 +171,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		UiUtilities iconsCache = app.getUIUtilities();
 		boolean light = app.getSettings().isLightContent();
 		return iconsCache.getIcon(iconId,
-				light ? R.color.icon_color : R.color.icon_color_light);
+				light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {

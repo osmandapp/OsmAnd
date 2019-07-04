@@ -100,8 +100,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			final ApplicationMode item = (ApplicationMode) obj;
 			if (bottomButton) {
 				holder.divider.setBackgroundColor(isNightMode(app)
-					? app.getResources().getColor(R.color.divider_dark)
-					: app.getResources().getColor(R.color.divider_light));
+					? app.getResources().getColor(R.color.divider_color_dark)
+					: app.getResources().getColor(R.color.divider_color_light));
 			}
 			holder.title.setText(item.toHumanString(app));
 			if (item.isCustomProfile()) {

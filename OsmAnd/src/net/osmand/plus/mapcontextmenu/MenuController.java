@@ -554,7 +554,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 			return open ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
 		} else if (shouldShowMapSize()) {
-			return R.color.icon_color;
+			return R.color.icon_color_default_light;
 		}
 		return 0;
 	}
@@ -850,8 +850,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
-			setBgIds(R.color.actionbar_light_color, R.color.actionbar_dark_color,
-					R.color.actionbar_light_color, R.color.actionbar_dark_color);
+			setBgIds(R.color.app_bar_color_light, R.color.app_bar_color_dark,
+					R.color.app_bar_color_light, R.color.app_bar_color_dark);
 			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setTitleTextClrIds(R.color.color_white, R.color.color_white);

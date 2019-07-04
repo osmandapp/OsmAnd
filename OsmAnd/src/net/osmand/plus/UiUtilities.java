@@ -1,14 +1,5 @@
 package net.osmand.plus;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
-
-import net.osmand.AndroidUtils;
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.views.DirectionDrawable;
-import net.osmand.plus.widgets.TextViewEx;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -22,10 +13,20 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.plus.views.DirectionDrawable;
+import net.osmand.plus.widgets.TextViewEx;
+
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class UiUtilities {
 
@@ -93,7 +94,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getThemedIcon(@DrawableRes int id) {
-		return getDrawable(id, R.color.description_font_and_bottom_sheet_icons);
+		return getDrawable(id, R.color.icon_color_default_light);
 	}
 
 	public Drawable getIcon(@DrawableRes int id) {
@@ -101,14 +102,14 @@ public class UiUtilities {
 	}
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
-		return getDrawable(id, light ? R.color.icon_color : R.color.icon_color_light);
+		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	@ColorRes
 	public static int getDefaultColorRes(Context context) {
 		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		boolean light = app.getSettings().isLightContent();
-		return light ? R.color.icon_color : R.color.icon_color_light;
+		return light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 	}
 
 	@ColorInt
@@ -123,7 +124,7 @@ public class UiUtilities {
 		uvc.screenOrientation = getScreenOrientation();
 		return uvc;
 	}
-	
+
 	public static class UpdateLocationViewCache {
 		int screenOrientation;
 		public boolean paintTxt = true;
@@ -133,11 +134,11 @@ public class UiUtilities {
 		public LatLon specialFrom;
 	}
 
-	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt, 
+	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
 			double toLat, double toLon) {
 		updateLocationView(cache, arrow, txt, new LatLon(toLat, toLon));
 	}
-	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt, 
+	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
 			LatLon toLoc) {
 		float[] mes = new float[2];
 		boolean stale = false;
@@ -185,7 +186,7 @@ public class UiUtilities {
 			if (imgColorSet == 0) {
 				imgColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
 				if (stale) {
-					imgColorSet = R.color.icon_color;
+					imgColorSet = R.color.icon_color_default_light;
 				}
 			}
 			dd.setImage(arrowResId, imgColorSet);
@@ -207,7 +208,7 @@ public class UiUtilities {
 					if (textColorSet == 0) {
 						textColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
 						if (stale) {
-							textColorSet = R.color.icon_color;
+							textColorSet = R.color.icon_color_default_light;
 						}
 					}
 					txt.setTextColor(app.getResources().getColor(textColorSet));
@@ -218,7 +219,7 @@ public class UiUtilities {
 			}
 		}
 	}
-	
+
 	public int getScreenOrientation() {
 		int screenOrientation = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation) {
@@ -277,5 +278,13 @@ public class UiUtilities {
 		}
 		buttonTextView.setText(buttonText);
 		buttonTextView.setEnabled(buttonView.isEnabled());
+	}
+
+	public static Context getThemedContext(Context context, boolean nightMode) {
+		return new ContextThemeWrapper(context, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+	}
+
+	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {
+		return LayoutInflater.from(getThemedContext(ctx, nightMode));
 	}
 }

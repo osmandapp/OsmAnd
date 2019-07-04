@@ -240,14 +240,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int)(sth.getDuration() / 1000)));
 			segmentTime.setVisibility(View.VISIBLE);
 			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-					.getIcon(R.drawable.ic_action_rec_stop, light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark), null, null, null);
+					.getIcon(R.drawable.ic_action_rec_stop, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
 			stop.setText(app.getString(R.string.shared_string_control_stop));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_stop));
 		} else {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.GONE);
 			currentGpxView.findViewById(R.id.segment_time).setVisibility(View.GONE);
 			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-					.getIcon(R.drawable.ic_action_rec_start, light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark), null, null, null);
+					.getIcon(R.drawable.ic_action_rec_start, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
 			stop.setText(app.getString(R.string.shared_string_record));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));
 		}
@@ -265,7 +265,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		});
 		Button save = (Button) currentGpxView.findViewById(R.id.save_button);
 		save.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-				.getIcon(R.drawable.ic_action_gsave_dark, light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark), null, null, null);
+				.getIcon(R.drawable.ic_action_gsave_dark, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -385,8 +385,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				app.getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 	}
 
 	public void createCurrentTrackView() {

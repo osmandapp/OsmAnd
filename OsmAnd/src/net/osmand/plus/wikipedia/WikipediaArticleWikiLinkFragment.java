@@ -93,7 +93,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 
 	@Override
 	protected int getBgColorId() {
-		return nightMode ? R.color.wikivoyage_bottom_bar_bg_dark : R.color.bg_color_light;
+		return nightMode ? R.color.wikivoyage_bottom_bar_bg_dark : R.color.list_background_color_light;
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,

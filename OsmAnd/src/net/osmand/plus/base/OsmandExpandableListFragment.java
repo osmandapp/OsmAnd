@@ -40,8 +40,8 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 		super.onActivityCreated(savedInstanceState);
 		getExpandableListView().setBackgroundColor(
 				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
-								: R.color.bg_color_dark));
+						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
+								: R.color.list_background_color_dark));
 	}
 
 	public View createView(android.view.LayoutInflater inflater, android.view.ViewGroup container) {

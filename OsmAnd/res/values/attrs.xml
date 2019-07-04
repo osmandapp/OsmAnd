@@ -25,7 +25,8 @@
         <attr name="ctx_menu_card_btn" format="reference" />
         <attr name="bg_map_context_menu" format="reference" />
         <attr name="bg_point_editor_view" format="reference" />
-        <attr name="ctx_menu_info_view_bg" format="reference" />
+        <attr name="activity_background_color" format="reference" />
+        <attr name="list_background_color" format="reference" />
         <attr name="ctx_menu_controller_bg" format="reference" />
         <attr name="ctx_menu_controller_text_color" format="reference" />
         <attr name="ctx_menu_divider" format="reference" />
@@ -50,10 +51,8 @@
 		
 		<attr name="size_progress_bar" format="reference"/>
 		<attr name="dash_parking_bg" format="reference"/>
-		<attr name="dashboard_subheader_text_color" format="color"/>
 		<attr name="dashboard_general_button_text_color" format="color"/>
 
-        <attr name="dialog_inactive_text_color" format="reference"/>
         <attr name="appbar_layout_theme" format="reference"/>
         <attr name="search_tabbar_layout_theme" format="reference"/>
         <attr name="toolbar_theme" format="reference"/>
@@ -64,8 +63,12 @@
 
         <attr name="color_dialog_buttons" format="color"/>
         <attr name="secondary_icon_color" format="color"/>
+        <attr name="default_icon_color" format="color"/>
         <attr name="primary_icon_color" format="color"/>
         <attr name="light_icon_color" format="color"/>
+
+		<attr name="text_color_tab_active" format="color"/>
+		<attr name="text_color_tab_active_white" format="color"/>
 
         <attr name="circle_dialog_bg" format="reference"/>
         <attr name="dialog_bg_color" format="reference"/>

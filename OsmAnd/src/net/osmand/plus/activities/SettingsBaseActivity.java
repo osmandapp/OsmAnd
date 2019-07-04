@@ -404,17 +404,17 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
     }
 
     void updateModeButton(ApplicationMode mode) {
-		boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 	    String title = mode.toHumanString(SettingsBaseActivity.this);
 
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(getAppModeDescription(mode));
 	    settings.APPLICATION_MODE.set(mode);
 	    previousAppMode = mode;
-	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(),
+	    getModeIconIV().setImageDrawable(app.getUIUtilities().getIcon(mode.getIconRes(),
 		    mode.getIconColorInfo().getColor(nightMode)));
-	    getDropDownArrow().setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down,
-		    R.color.icon_color));
+	    getDropDownArrow().setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
 	    isModeSelected = true;
 	    updateAllSettings();
     }

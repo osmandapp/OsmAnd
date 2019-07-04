@@ -9,7 +9,7 @@
     android:minHeight="40dp"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/list_header_padding"
-    android:background="?attr/ctx_menu_info_view_bg"
+    android:background="?attr/activity_background_color"
     android:paddingRight="@dimen/list_header_padding">
 
     <net.osmand.plus.widgets.TextViewEx

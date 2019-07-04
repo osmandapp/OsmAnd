@@ -142,7 +142,7 @@ public class QuickActionsWidget extends LinearLayout {
 
         if (pageCount > 1) {
 
-            int color = light ?  R.color.icon_color_light : R.color.white_50_transparent;
+            int color = light ?  R.color.icon_color_default_dark : R.color.white_50_transparent;
 
             for (int i = 0; i < pageCount; i++) {
 
@@ -161,7 +161,7 @@ public class QuickActionsWidget extends LinearLayout {
         controls.setVisibility(pageCount > 1 ? VISIBLE : GONE);
 
         Drawable background = controls.getBackground();
-        int backgroundColor = ContextCompat.getColor(context, light ? R.color.dashboard_divider_light : R.color.dashboard_divider_dark);
+        int backgroundColor = ContextCompat.getColor(context, light ? R.color.divider_color_light : R.color.divider_color_dark);
         if (background instanceof ShapeDrawable) {
             ((ShapeDrawable)background).getPaint().setColor(backgroundColor);
         } else if (background instanceof GradientDrawable) {
@@ -178,8 +178,8 @@ public class QuickActionsWidget extends LinearLayout {
         OsmandApplication application = ((OsmandApplication) getContext().getApplicationContext());
         boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
-        int colorEnabled = light ?  R.color.icon_color : R.color.color_white;
-        int colorDisabled = light ?  R.color.icon_color_light : R.color.white_50_transparent;
+        int colorEnabled = light ?  R.color.icon_color_default_light : R.color.color_white;
+        int colorDisabled = light ?  R.color.icon_color_default_dark : R.color.white_50_transparent;
 
         next.setEnabled(viewPager.getAdapter().getCount() > position + 1);
         next.setImageDrawable(next.isEnabled()

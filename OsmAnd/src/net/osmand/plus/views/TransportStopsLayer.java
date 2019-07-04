@@ -72,7 +72,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		wmgr.getDefaultDisplay().getMetrics(dm);
 		paintIcon = new Paint();
 		paintWhiteIcon = new Paint();
-		paintWhiteIcon.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mapActivity,R.color.primary_text_dark), PorterDuff.Mode.SRC_IN));
+		paintWhiteIcon.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mapActivity,R.color.text_color_tab_active_dark), PorterDuff.Mode.SRC_IN));
 		path = new Path();
 		stopBus = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bus);
 		stopSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_small);

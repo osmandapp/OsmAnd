@@ -193,7 +193,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		} else if (profile.stringKeyName != -1) {
 			baseModeTitle.setText(profile.stringKeyName);
 			baseModeIcon.setImageDrawable(
-				app.getUIUtilities().getIcon(profile.iconId, R.color.icon_color));
+				app.getUIUtilities().getIcon(profile.iconId, R.color.icon_color_default_light));
 		}
 		if (isUserProfile || isNew) {
 			typeSelectionBtn.setOnClickListener(new OnClickListener() {
@@ -568,7 +568,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		for (ApplicationMode am : ApplicationMode.getDefaultValues()) {
 			if (am.getStringKey().equals(stringKey)) {
 				baseModeIcon.setImageDrawable(
-					app.getUIUtilities().getIcon(am.getIconRes(), R.color.icon_color));
+					app.getUIUtilities().getIcon(am.getIconRes(), R.color.icon_color_default_light));
 				baseModeTitle.setText(Algorithms.capitalizeFirstLetter(am.toHumanString(app)));
 				isDataChanged = false;
 			}

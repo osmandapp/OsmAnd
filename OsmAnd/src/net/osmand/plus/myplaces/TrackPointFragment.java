@@ -555,7 +555,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					super.onDismissed(transientBottomBar, event);
 				}
 			});
-			AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+			AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 			snackbar.show();
 		}
 	}

@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
-	tools:background="@color/ctx_menu_bg_dark">
+	tools:background="@color/list_background_color_dark">
 
 	<View
 		android:id="@+id/input_area_top_padding"

@@ -106,7 +106,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color);
+						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -147,7 +147,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color);
+						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -186,7 +186,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(iconRes, R.color.icon_color);
+						.getIcon(iconRes, R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()

@@ -92,7 +92,7 @@ public class MapMarkerMenuController extends MenuController {
 	}
 
 	private int getDeviceTopNormalColorId() {
-		return isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark;
+		return isLight() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 	}
 
 	private LayerDrawable createShowOnTopbarIcon(int bgColorRes) {

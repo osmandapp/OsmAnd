@@ -869,7 +869,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		if (!enabled) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
-			backToLocationControl.setIconColorId(R.color.icon_color, 0);
+			backToLocationControl.setIconColorId(R.color.icon_color_default_light, 0);
 			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.unknown_location));
 		} else if (tracked) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
@@ -969,7 +969,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int resId;
 		int resLightId;
 		int resDarkId;
-		int resClrLight = R.color.icon_color;
+		int resClrLight = R.color.icon_color_default_light;
 		int resClrDark = 0;
 		String id;
 
@@ -1079,10 +1079,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public boolean resetIconColors() {
-			if (resClrLight == R.color.icon_color && resClrDark == 0) {
+			if (resClrLight == R.color.icon_color_default_light && resClrDark == 0) {
 				return false;
 			}
-			resClrLight = R.color.icon_color;
+			resClrLight = R.color.icon_color_default_light;
 			resClrDark = 0;
 			f = true;
 			return true;

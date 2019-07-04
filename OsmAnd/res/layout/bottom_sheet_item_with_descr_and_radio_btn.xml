@@ -26,7 +26,7 @@
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
       android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-      tools:tint="?attr/primary_icon_color"
+      tools:tint="?attr/default_icon_color"
       tools:src="@drawable/ic_action_coordinates_latitude"/>
 
     <LinearLayout
@@ -76,6 +76,6 @@
     android:layout_height="1dp"
     android:layout_marginStart="64dp"
     android:layout_marginLeft="64dp"
-    android:background="@color/divider_light"/>
+    android:background="@color/divider_color_light"/>
 
 </LinearLayout>

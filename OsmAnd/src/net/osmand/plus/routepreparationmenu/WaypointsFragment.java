@@ -422,7 +422,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			AndroidUtils.setBackground(mapActivity, clearButtonDescr, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.cancel_button), nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.controls_divider), nightMode, R.color.divider_light, R.color.divider_dark);
+		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.controls_divider), nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.start_button_descr)).setText(getText(R.string.shared_string_apply));
@@ -755,7 +755,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				}
 			}
 
-			AndroidUtils.setBackground(mapActivity, topDivider, nightMode, R.color.divider_light, R.color.divider_dark);
+			AndroidUtils.setBackground(mapActivity, topDivider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 			topDivider.setVisibility(position != 0 ? View.VISIBLE : View.GONE);
 
 			move.setVisibility(notFlatTargets ? View.VISIBLE : View.GONE);

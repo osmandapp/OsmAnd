@@ -95,7 +95,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 				selectedItem = settings.MAP_OVERLAY.get();
 			}
 		}
-		rbColorList = AndroidUtils.createCheckedColorStateList(app, R.color.icon_color, getActiveColorId());
+		rbColorList = AndroidUtils.createCheckedColorStateList(app, R.color.icon_color_default_light, getActiveColorId());
 
 		items.add(new TitleItem(action.getName(app)));
 

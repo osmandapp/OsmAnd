@@ -145,7 +145,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public int getStatusBarColorId() {
-		return getSettings().isLightContent() ? R.color.status_bar_light : R.color.status_bar_dark;
+		return getSettings().isLightContent() ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
 	}
 
 	private MapActivity getMapActivity() {
