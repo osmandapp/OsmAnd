@@ -3047,7 +3047,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort \'%3$s\' vorhanden.</string>
     <string name="move_maps">Karten verschieben</string>
     <string name="dont_move_maps">Nicht verschieben</string>
-    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein als mit öffentlichen Verkehrsmitteln</string>
+    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und kann schneller sein als mit öffentlichen Verkehrsmitteln</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
@@ -3110,7 +3110,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="profile_alert_need_routing_type_msg">Bitte eine Navigationsart für das neue Anwendungsprofil wählen</string>
     <string name="routing_profile_geocoding">Geokodierung</string>
     <string name="routing_profile_straightline">Gerade Strecke</string>
-    <string name="routing_profile_broutrer">BRouter (Offline)</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
     <string name="osmand_default_routing">OsmAnd-Routing</string>
     <string name="custom_routing">Benutzerdefiniertes Routingprofil</string>
     <string name="special_routing_type">Spezielles Routing</string>
