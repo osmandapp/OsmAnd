@@ -495,7 +495,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 				for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
 					if (am.getStringKey() == state.get(SELECTED_MODE_KEY)) {
 						setSelectedAppMode(am);
-						isModeSelected = true;
 					}
 					if (am.getStringKey() == state.get(PREV_MODE_KEY)) {
 						previousAppMode = am;
