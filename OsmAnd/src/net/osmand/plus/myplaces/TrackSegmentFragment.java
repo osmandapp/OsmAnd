@@ -1113,9 +1113,11 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private TrkSegment getTrkSegment() {
 			for (Track t : gpxItem.group.getGpx().tracks) {
-				for (TrkSegment s : t.segments) {
-					if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
-						return s;
+				if (!t.generalTrack) {
+					for (TrkSegment s : t.segments) {
+						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
+							return s;
+						}
 					}
 				}
 			}
