@@ -482,21 +482,31 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
 	@Nullable
 	private String getMetadataDescription(@NonNull GPXUtilities.Metadata metadata) {
-		String description = metadata.desc;
-		if (TextUtils.isEmpty(description)) {
+		String descHtml = metadata.desc;
+		if (TextUtils.isEmpty(descHtml)) {
 			Map<String, String> extensions = metadata.getExtensionsToRead();
 			if (!extensions.isEmpty() && extensions.containsKey("desc")) {
-				description = extensions.get("desc");
+				descHtml = extensions.get("desc");
 			}
 		}
-		return description != null ? Html.fromHtml(description).toString().trim() : null;
+		if (descHtml != null) {
+			String content = WikiArticleHelper.getPartialContent(descHtml);
+			if (!TextUtils.isEmpty(content)) {
+				return content;
+			}
+		}
+		return descHtml;
 	}
 
 	@Nullable
 	private String getMetadataImageLink(@NonNull GPXUtilities.Metadata metadata) {
 		String link = metadata.link;
-
-		return link;
+		if (!TextUtils.isEmpty(link)) {
+			if (link.contains(".jpg") || link.contains(".gif") || link.contains(".jpeg") || link.contains(".png") || link.contains(".bmp") || link.contains(".webp")) {
+				return link;
+			}
+		}
+		return null;
 	}
 
 	@Nullable
