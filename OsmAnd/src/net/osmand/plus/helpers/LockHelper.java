@@ -11,6 +11,7 @@ import android.os.PowerManager;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.VoiceRouter;
 
 public class LockHelper implements SensorEventListener {
@@ -25,6 +26,7 @@ public class LockHelper implements SensorEventListener {
 	private OsmandApplication app;
 	private LockRunnable lockRunnable;
 	private LockUIAdapter lockUIAdapter;
+	private OsmandSettings settings;
 
 	private VoiceRouter.VoiceMessageListener voiceMessageListener;
 
@@ -46,6 +48,7 @@ public class LockHelper implements SensorEventListener {
 		this.app = app;
 		uiHandler = new Handler();
 		lockRunnable = new LockRunnable();
+		settings = app.getSettings();
 
 		mSensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 		mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -56,9 +59,8 @@ public class LockHelper implements SensorEventListener {
 				unlockEvent();
 			}
 		};
-
-		setVoiceRouterListener(true);
-		setSensor(true);
+		
+		refreshGlobalSettings();
 	}
 
 	private void releaseWakeLocks() {
@@ -99,7 +101,7 @@ public class LockHelper implements SensorEventListener {
 		boolean isScreenOn = AndroidUtils.isScreenOn(app);
 		boolean isScreenLocked = AndroidUtils.isScreenLocked(app);
 
-		Integer screenPowerSave = app.getSettings().WAKE_ON_VOICE_TIME_INT.get();
+		Integer screenPowerSave = app.getSettings().TURN_SCREEN_ON_TIME_INT.get();
 
 		if ((isScreenOn || isScreenLocked) && screenPowerSave > 0) {
 			timedUnlock(screenPowerSave * 1000L);
@@ -113,11 +115,9 @@ public class LockHelper implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		if (isSensorEnabled()) {
-			if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-				if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
-					unlockEvent();
-				}
+		if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+			if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
+				unlockEvent();
 			}
 		}
 	}
@@ -139,8 +139,14 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private boolean isSensorEnabled() {
-		return app.getSettings().WAKE_ON_VOICE_SENSOR.get();
+	public void refreshProfilesSettings() {
+		boolean isVRListenerEnabled = settings.TURN_SCREEN_ON_ROUTER.get();
+		setVoiceRouterListener(isVRListenerEnabled);
+	}
+	
+	public void refreshGlobalSettings() {
+		boolean isSensorEnabled = settings.TURN_SCREEN_ON_SENSOR.get();
+		setSensor(isSensorEnabled);
 	}
 
 	public void setLockUIAdapter(LockUIAdapter adapter) {

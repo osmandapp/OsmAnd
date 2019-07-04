@@ -1387,21 +1387,17 @@ public class OsmandSettings {
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
 	}
 	
-	public final CommonPreference<Integer> WAKE_ON_VOICE_TIME_INT = new IntPreference("wake_on_voice_time_int", 0).makeProfile();
+	public final CommonPreference<Integer> TURN_SCREEN_ON_TIME_INT = new IntPreference("turn_screen_on_time_int", 0).makeGlobal();
+
+	public final CommonPreference<Boolean> TURN_SCREEN_ON_ROUTER = new BooleanPreference("turn_screen_on_router", false).makeProfile();
 
 	{
-		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.CAR, 0);
-		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
-		WAKE_ON_VOICE_TIME_INT.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
+		TURN_SCREEN_ON_ROUTER.setModeDefaultValue(ApplicationMode.CAR, false);
+		TURN_SCREEN_ON_ROUTER.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		TURN_SCREEN_ON_ROUTER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
-	public final CommonPreference<Boolean> WAKE_ON_VOICE_SENSOR = new BooleanPreference("wake_on_voice_sensor", false).makeProfile();
-
-	{
-		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.CAR, false);
-		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.BICYCLE, false);
-		WAKE_ON_VOICE_SENSOR.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
-	}
+	public final CommonPreference<Boolean> TURN_SCREEN_ON_SENSOR = new BooleanPreference("turn_screen_on_sensor", false).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')

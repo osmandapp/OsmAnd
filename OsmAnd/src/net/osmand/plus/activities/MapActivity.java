@@ -1415,6 +1415,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				getMapView().refreshMap(true);
 			}
 		});
+		lockHelper.refreshProfilesSettings();
 		getMapView().refreshMap(true);
 	}
 

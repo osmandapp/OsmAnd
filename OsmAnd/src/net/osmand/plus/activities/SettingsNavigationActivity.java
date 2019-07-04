@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -17,19 +16,14 @@ import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
@@ -44,7 +38,6 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
@@ -186,12 +179,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			selectAppModeDialog().show();
 		}
 
-		addWakeOnVoice((PreferenceGroup) screen.findPreference("turn_screen_on"));
+		addTurnScreenOn((PreferenceGroup) screen.findPreference("turn_screen_on"));
 
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 	}
 
-	private void addWakeOnVoice(PreferenceGroup screen) {
+	private void addTurnScreenOn(PreferenceGroup screen) {
 		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
 		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
 		screenPowerSaveNames[0] = getString(R.string.shared_string_never);
@@ -199,8 +192,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
 					+ getString(R.string.int_seconds);
 		}
-		registerListPreference(settings.WAKE_ON_VOICE_TIME_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
-		registerBooleanPreference(settings.WAKE_ON_VOICE_SENSOR, screen);
+		registerListPreference(settings.TURN_SCREEN_ON_TIME_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
+		registerBooleanPreference(settings.TURN_SCREEN_ON_ROUTER, screen);
+		registerBooleanPreference(settings.TURN_SCREEN_ON_SENSOR, screen);
 	}
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
@@ -402,6 +396,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		}
 		super.onPreferenceChange(preference, newValue);
+		if (id.equals(settings.TURN_SCREEN_ON_ROUTER.getId())) {
+			boolean isRoutingListnerEnabled = Boolean.valueOf(newValue.toString());
+			getMyApplication().getLockHelper().setVoiceRouterListener(isRoutingListnerEnabled);
+		} else if (id.equals(settings.TURN_SCREEN_ON_SENSOR.getId())) {
+			boolean isSensorEnabled = Boolean.valueOf(newValue.toString());
+			getMyApplication().getLockHelper().setSensor(isSensorEnabled);
+		}
 		return true;
 	}
 
