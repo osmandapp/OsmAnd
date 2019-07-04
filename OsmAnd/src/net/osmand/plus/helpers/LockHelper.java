@@ -98,12 +98,9 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	public void unlockEvent() {
-		boolean isScreenOn = AndroidUtils.isScreenOn(app);
-		boolean isScreenLocked = AndroidUtils.isScreenLocked(app);
+		int screenPowerSave = app.getSettings().TURN_SCREEN_ON_TIME_INT.get();
 
-		Integer screenPowerSave = app.getSettings().TURN_SCREEN_ON_TIME_INT.get();
-
-		if ((isScreenOn || isScreenLocked) && screenPowerSave > 0) {
+		if (screenPowerSave > 0) {
 			timedUnlock(screenPowerSave * 1000L);
 		}
 	}
