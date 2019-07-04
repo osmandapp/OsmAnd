@@ -40,7 +40,7 @@
 					android:layout_height="wrap_content"
 					android:ellipsize="end"
 					android:maxLines="2"
-					android:textColor="?attr/main_font_color_basic"
+					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
 					tools:text="Bicycle" />
 

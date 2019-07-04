@@ -74,7 +74,7 @@
 							android:layout_height="wrap_content"
 							android:ellipsize="end"
 							android:maxLines="1"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="18sp"
 							tools:text="Item additional description"/>
 
@@ -245,7 +245,7 @@
 								android:layout_weight="1"
 								android:textSize="@dimen/default_list_text_size"
 								android:text="@string/shared_string_icon"
-								android:textColor="?attr/main_font_color_basic"/>
+								android:textColor="?android:textColorPrimary"/>
 
 							<ImageView
 								android:id="@+id/profile_icon_img"
@@ -281,7 +281,7 @@
 								android:gravity="center_vertical"
 								android:textSize="@dimen/default_list_text_size"
 								android:text="@string/shared_string_color"
-								android:textColor="?attr/main_font_color_basic"/>
+								android:textColor="?android:textColorPrimary"/>
 
 							<ImageView
 								android:id="@+id/color_sample_img"
@@ -361,7 +361,7 @@
 					android:layout_marginLeft="@dimen/list_content_padding"
 					android:layout_marginRight="@dimen/list_content_padding"
 					android:text="@string/edit_profile_setup_title"
-					android:textColor="?attr/main_font_color_basic"
+					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"/>
 
 				<TextView
@@ -405,7 +405,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="@string/configure_map"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
@@ -453,7 +453,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="@string/map_widget_config"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
@@ -503,7 +503,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:text="@string/routing_settings_2"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
