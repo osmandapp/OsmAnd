@@ -114,7 +114,8 @@
 	<string name="poi_park_ride">Park and ride</string>
 	<string name="poi_rtsa_scale_filter">Difficulty category</string>
 	<string name="poi_climbing_crag_filter">Climbing crag</string>
-
+	<string name="poi_climbing_crag">Yes</string>
+	
 <!--  categories -->
 	<string name="poi_shop">Store</string>
 	<string name="poi_shop_food">Convenience store and supermarket</string>
@@ -346,10 +347,19 @@
 	<string name="poi_fuel_e85">E85</string>
 	<string name="poi_fuel_biogas">Biogas</string>
 	<string name="poi_fuel_lh2">Liquid hydrogen</string>
+	<string name="poi_fuel_91ul">91UL fuel</string>
+	<string name="poi_fuel_100ll">100LL fuel</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Jet A-1 fuel</string>
+	<string name="poi_fuel_adblue">AdBlue fuel</string>
 	<string name="poi_fuel_electricity">Electricity</string>
 	<string name="poi_aeroway_fuel">Aircraft fuel station</string>
 	<string name="poi_waterway_fuel">Gas station for boats</string>
 	<string name="poi_electricity_combined_charging">Charging station</string>
+	<string name="poi_fuel_wood">Fuel: wood</string>
+	<string name="poi_fuel_charcoal">Fuel: charcoal</string>
+	<string name="poi_fuel_coal">Fuel: coal</string>
+	
 	<string name="poi_vehicle_ramp">Vehicle ramp</string>
 	<string name="poi_compressed_air">Compressed air</string>
 	<string name="poi_parking">Parking</string>
@@ -409,7 +419,8 @@
 	<string name="poi_motorway_junction">Motorway junction</string>
 	<string name="poi_junction">Junction</string>
 	<string name="poi_rest_area">Rest area</string>
-
+	<string name="poi_escape_lane">Escape lane</string>
+	
 	<string name="poi_water_well">Water well</string>
 	<string name="poi_standpipe">Standpipe</string>
 	<string name="poi_water_works">Water works</string>
@@ -717,7 +728,9 @@
 	<string name="poi_archaeological_site">Archaeological site</string>
 	<string name="poi_battlefield">Battlefield</string>
 	<string name="poi_boundary_stone">Boundary stone</string>
+	<string name="poi_historic_aircraft">Historic aircraft</string>
 	<string name="poi_historic_cannon">Historic cannon</string>
+	<string name="poi_historic_tank">Historic tank</string>
 	<string name="poi_castle">Castle</string>
 	<string name="poi_city_gate">City gate</string>
 	<string name="poi_fort">Fort</string>
@@ -1295,6 +1308,7 @@
 	<string name="poi_maxheight">Maximum height</string>
 	<string name="poi_maxweight">Maximum weight</string>
 	<string name="poi_height">Height</string>
+	<string name="poi_width">Width</string>
 	<string name="poi_ele">Elevation above sea level</string>
 	<string name="poi_abandoned">Abandoned</string>
 	<string name="poi_abandoned_poi">Abandoned object</string>
@@ -1447,6 +1461,7 @@
 	<string name="poi_generator_source_geothermal">Energy source: geothermal</string>
 	<string name="poi_generator_source_oil">Energy source: oil</string>
 	<string name="poi_generator_source_diesel">Energy source: diesel</string>
+	<string name="poi_source_biomass">Energy source: biomass</string>
 
 	<string name="poi_int_name">International name</string>
 	<string name="poi_nat_name">National name</string>
@@ -2029,8 +2044,6 @@
 	<string name="poi_artwork_type_stele">Artwork type: stele</string>
 	<string name="poi_artwork_type_fountain">Artwork type: fountain</string>
 
-	<string name="poi_width">Width</string>
-
 	<string name="poi_architect_name">Architect</string>
 
 	<string name="poi_architecture_modern">Architecture: modern</string>
@@ -2190,8 +2203,6 @@
 	<string name="poi_animal_boarding_dog_cat">Boarding type: dog, cat</string>
 	<string name="poi_animal_boarding_horse">Boarding type: horse</string>
 
-	<string name="poi_historic_aircraft">Historic aircraft</string>
-
 	<string name="poi_elevator_yes">With elevator</string>
 	<string name="poi_elevator_no">Without elevator</string>
 
@@ -2208,19 +2219,7 @@
 	<string name="poi_parish">Parish office</string>
 	<string name="poi_publisher">Publishing office</string>
 
-	<string name="poi_fuel_91ul">91UL fuel</string>
-	<string name="poi_fuel_100ll">100LL fuel</string>
-	<string name="poi_fuel_autogas">Autogas</string>
-	<string name="poi_fuel_jeta1">Jet A-1 fuel</string>
-	<string name="poi_fuel_adblue">AdBlue fuel</string>
-
-	<string name="poi_fuel_wood">Fuel: wood</string>
-	<string name="poi_fuel_charcoal">Fuel: charcoal</string>
-	<string name="poi_fuel_coal">Fuel: coal</string>
-
 	<string name="poi_street_lamp">Street lamp</string>
-
-	<string name="poi_escape_lane">Escape lane</string>
 
 	<string name="poi_crop_rice">Crop: rice</string>
 	<string name="poi_crop_grass">Crop: grass</string>
@@ -3083,6 +3082,7 @@
 	<string name="poi_voltage">Voltage</string>
 	<string name="poi_generator_output_electricity">Output power</string>
 	<string name="poi_generator_output_electricity_yes">Output: electricity</string>
+	<string name="poi_generator_output_electricity_no">Output (electricity): no</string>
 	<string name="poi_generator_output_hot_water">Output power of hot water</string>
 	<string name="poi_generator_output_hot_water_yes">Output: hot water</string>
 	<string name="poi_generator_output_steam_yes">Output: steam</string>
@@ -3434,8 +3434,6 @@
 	<string name="poi_motorcycle_type_offroad">Offroad</string>
 	<string name="poi_motorcycle_type_dualsport">Dualsport</string>
 	<string name="poi_motorcycle_type_standard">Standard</string>
-
-	<string name="poi_generator_output_electricity_no">Output (electricity): no</string>
 
 	<string name="poi_owner">Owner</string>
 
@@ -3917,8 +3915,6 @@
 	<string name="poi_park_ride_tram">Tram</string>
 	<string name="poi_park_ride_ferry">Ferry</string>
 
-	<string name="poi_generator_source_biomass">Energy source: biomass</string>
-
 	<string name="poi_rtsa_scale_nc">н/к</string>
 	<string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
 	<string name="poi_rtsa_scale_1a">1А</string>
@@ -3938,7 +3934,6 @@
 	<string name="poi_change_delete">Deleted object</string>
 
 	<string name="poi_rescue_box">Rescue box</string>
-	<string name="poi_climbing_crag">Yes</string>
 
 	<string name="poi_hazard_additional_erosion">Hazard: erosion</string>
 	<string name="poi_hazard_additional_rockfall">Hazard: rockfall</string>
@@ -3962,8 +3957,6 @@
 	<string name="poi_changing_table_fee_no">Changing table fee: no</string>
 
 	<string name="poi_charcoal_pile">Charcoal pile</string>
-
-	<string name="poi_historic_tank">Historic tank</string>
 
 	<string name="poi_hookah_lounge">Hookah lounge</string>
 
