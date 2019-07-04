@@ -32,15 +32,15 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -64,6 +64,7 @@ import net.osmand.render.RenderingRulesStorage;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -459,8 +460,15 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			return createTravelArticleCard(context, article);
 		}
 
-		if (!TextUtils.isEmpty(gpx.metadata.desc)) {
-			return createDescriptionCard(context, gpx.metadata.desc);
+		String description = gpx.metadata.desc;
+		if (TextUtils.isEmpty(description)) {
+			Map<String, String> extensions = gpx.metadata.getExtensionsToRead();
+			if (!extensions.isEmpty() && extensions.containsKey("desc")) {
+				description = extensions.get("desc");
+			}
+		}
+		if (!TextUtils.isEmpty(description)) {
+			return createDescriptionCard(context, description);
 		}
 
 		return null;
