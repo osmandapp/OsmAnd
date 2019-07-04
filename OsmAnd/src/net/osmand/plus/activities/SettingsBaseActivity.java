@@ -46,11 +46,14 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 	private static final Log LOG = PlatformUtil.getLog(SettingsBaseActivity.class);
 	public static final String INTENT_APP_MODE = "INTENT_APP_MODE";
-
+	private static final String PREV_MODE_KEY = "previous_mode";
+	private static final String SELECTED_MODE_KEY = "selected_mode";
+	
 	protected OsmandSettings settings;
 	protected final boolean profileSettings;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
 	private ApplicationMode previousAppMode;
+	protected ApplicationMode selectedAppMode;
 
 	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
 	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();
@@ -359,7 +362,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    final List<ProfileDataObject> activeModes = new ArrayList<>();
 	    for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
 		    boolean isSelected = false;
-	    	if (previousAppMode != null && previousAppMode == am) {
+	    	if (am == selectedAppMode) {
 			    isSelected = true;
 		    }
 	    	if (am != ApplicationMode.DEFAULT) {
@@ -411,7 +414,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(getAppModeDescription(mode));
 	    settings.APPLICATION_MODE.set(mode);
-	    previousAppMode = mode;
+	    selectedAppMode = mode;
 	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(),
 		    mode.getIconColorInfo().getColor(nightMode)));
 	    getDropDownArrow().setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down,
@@ -439,33 +442,28 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	protected void onResume() {
 		super.onResume();
 		if (profileSettings) {
-			previousAppMode = settings.getApplicationMode();
-			boolean found;
+			if (previousAppMode == null) {
+				previousAppMode = settings.getApplicationMode();
+			}
 			if (getIntent() != null && getIntent().hasExtra(INTENT_APP_MODE)) {
 				String modeStr = getIntent().getStringExtra(INTENT_APP_MODE);
 				ApplicationMode mode = ApplicationMode.valueOfStringKey(modeStr, previousAppMode);
-				found = setSelectedAppMode(mode);
+				setSelectedAppMode(mode);
 			} else {
-				found = setSelectedAppMode(previousAppMode);
-			}
-			if (!found) {
-				getSpinner().setSelection(0);
+				setSelectedAppMode(selectedAppMode);
 			}
 		} else {
 			updateAllSettings();
 		}
 	}
 
-	protected boolean setSelectedAppMode(ApplicationMode am) {
-		boolean found = false;
+	protected void setSelectedAppMode(ApplicationMode am) {
 		for (ApplicationMode a : modes) {
-			if (am == a) {
+			if (am != null && am == a) {
 				updateModeButton(a);
-				found = true;
 				break;
 			}
 		}
-		return found;
 	}
 	
 	@Override
@@ -475,7 +473,37 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			settings.APPLICATION_MODE.set(previousAppMode);
 		}
 	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (profileSettings) {
+			if (previousAppMode != null) {
+				outState.putString(PREV_MODE_KEY, previousAppMode.getStringKey());
+			}
+			if (selectedAppMode != null) {
+				outState.putString(SELECTED_MODE_KEY, selectedAppMode.getStringKey());
+			} 
+		}
+	}
 
+	@Override
+	protected void onRestoreInstanceState(Bundle state) {
+		super.onRestoreInstanceState(state);
+		if (state != null) {
+			if (profileSettings && state.containsKey(SELECTED_MODE_KEY) && state.containsKey(PREV_MODE_KEY)) {
+				for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
+					if (am.getStringKey() == state.get(SELECTED_MODE_KEY)) {
+						setSelectedAppMode(am);
+						isModeSelected = true;
+					}
+					if (am.getStringKey() == state.get(PREV_MODE_KEY)) {
+						previousAppMode = am;
+					}
+				}
+			}	
+		}
+	}
 
 	public void updateAllSettings() {
 		for (OsmandPreference<Boolean> b : booleanPreferences.values()) {
