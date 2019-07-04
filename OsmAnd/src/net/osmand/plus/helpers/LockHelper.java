@@ -149,7 +149,7 @@ public class LockHelper implements SensorEventListener {
 	}
 	
 	public void onStop() {
-		refreshSensorSettings();
+		refreshSensorSettings(); 
 	}
 
 	public void setLockUIAdapter(LockUIAdapter adapter) {
