@@ -152,23 +152,34 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		};
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
 
-		//array size should be equal!
-		Float[] speedLimitsKm = new Float[]{-10f, -7f,-5f, 0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] speedLimitsMiles = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+			Float[] speedLimitsKm = new Float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+			Float[] speedLimitsKmPos = new Float[]{0f, 5f, 7f, 10f, 15f, 20f};
 			String[] speedNames = new String[speedLimitsKm.length];
-			for (int i =0; i<speedLimitsKm.length;i++){
-				speedNames[i] = speedLimitsKm[i] + " " + getString(R.string.km_h);
+			String[] speedNamesPos = new String[speedLimitsKmPos.length];
+			for (int i = 0; i < speedLimitsKm.length; i++) {
+				speedNames[i] = speedLimitsKm[i].intValue() + " " + getString(R.string.km_h);
+			}
+			for (int i = 0; i < speedLimitsKmPos.length; i++) {
+				speedNamesPos[i] = speedLimitsKmPos[i].intValue() + " " + getString(R.string.km_h);
 			}
 			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
-			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNames, speedLimitsKm);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNamesPos, speedLimitsKmPos);
 		} else {
-			String[] speedNames = new String[speedLimitsKm.length];
-			for (int i =0; i<speedNames.length;i++){
-				speedNames[i] = speedLimitsMiles[i] + " " + getString(R.string.mile_per_hour);
+			Float[] speedLimitsMiles = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+			Float[] speedLimitsMilesPos = new Float[]{0f, 3f, 5f, 7f, 10f, 15f};
+
+			String[] speedNames = new String[speedLimitsMiles.length];
+			for (int i = 0; i < speedNames.length; i++) {
+				speedNames[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
-			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
-			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNames, speedLimitsKm);
+			String[] speedNamesPos = new String[speedLimitsMilesPos.length];
+			for (int i = 0; i < speedNamesPos.length; i++) {
+				speedNamesPos[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
+			}
+			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsMiles);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNamesPos, speedLimitsMilesPos);
 		}
 
 		PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
