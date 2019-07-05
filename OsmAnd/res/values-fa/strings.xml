@@ -756,8 +756,8 @@
     <string name="indexing_poi">نمایه‌کردن POI‏…</string>
     <string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
     <string name="shared_string_io_error">خطای ورودی/خروجی</string>
-    <string name="km">ک‌م</string>
-    <string name="m">متر</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
     <string name="map_tile_source">منبع کاشی‌های نقشه</string>
     <string name="mark_point">هدف</string>
     <string name="speak_speed_limit">سرعت مجاز</string>
@@ -1649,7 +1649,7 @@
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
     <string name="osm_live_payment_desc">هزینهٔ اشتراک ماهانه است. هر زمان که خواستید، اشتراک خود را در گوگل‌پلی لغو کنید.</string>
-    <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
+    <string name="donation_to_osm">کمک مالی به جامعهٔ OpenStreetMap</string>
     <string name="donation_to_osm_desc">بخشی از کمک‌های مالی را به مشترکینی می‌دهیم که به تغییرات OpenStreetMap کمک می‌کنند. هزینهٔ اشتراک تغییری نمی‌کند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و نیز امکان دانلود نامحدود همهٔ نقشه‌ها را فعال می‌کند.</string>
     <string name="get_it">دریافت</string>
@@ -2769,7 +2769,7 @@
     <string name="wikivoyage_offline">ویکی‌سفر آفلاین</string>
     <string name="unlimited_downloads">دانلود نامحدود</string>
     <string name="wikipedia_offline">ویکی‌پدیای آفلاین</string>
-    <string name="unlock_all_features">بازکردن همهٔ قابلیت‌های OsmAnd</string>
+    <string name="unlock_all_features">قفل‌گشایی از همهٔ قابلیت‌های OsmAnd</string>
     <string name="monthly_map_updates">به‌روزرسانی نقشه: <b>ماهانه</b>
     </string>
     <string name="daily_map_updates">به‌روزرسانی نقشه: <b>ساعتی</b>
@@ -3073,7 +3073,7 @@
     <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد: \'%3$s\'</string>
     <string name="move_maps">نقشه‌ها را منتقل کن</string>
     <string name="dont_move_maps">منتقل نکن</string>
-    <string name="public_transport_ped_route_title">مسیر پیاده حدود %1$s است و به‌نظر می‌رسد سریع‌تر از حمل‌ونقل عمومی باشد</string>
+    <string name="public_transport_ped_route_title">مسیر پیاده حدود %1$s است و احتمالاً از حمل‌ونقل عمومی سریع‌تر باشد</string>
     <string name="public_transport_no_route_title">متأسفانه OsmAnd نتوانست مسیری متناسب با تنظیمات شما بیابد.</string>
     <string name="public_transport_try_ped">ناوبری پیاده را امتحان کنید.</string>
     <string name="public_transport_try_change_settings">با تنظیمات دیگر امتحان کنید.</string>
@@ -3082,4 +3082,90 @@
     <string name="send_log">ارسال گزارش</string>
     <string name="searching_gps">جست‌وجوی GPS</string>
     <string name="coordinates_widget">ابزارک مختصات</string>
+    <string name="rate_dialog_descr">لطفاً ۳۰ ثانیه از وقت خود را به ما بدهید و در گوگل‌پلی به کارمان نظر و امتیاز بدهید.</string>
+    <string name="button_rate">امتیاز</string>
+    <string name="shared_string_privacy_policy">سیاست حریم خصوصی</string>
+    <string name="help_us_make_osmand_better">یاری‌مان کنید تا OsmAnd را بهتر کنیم!</string>
+    <string name="make_osmand_better_descr">به OsmAnd اجازه بدهید دربارهٔ نحوهٔ استفاده از برنامه داده‌های ناشناس جمع‌آوری و پردازش کند. ما دربارهٔ موقعیت شما، یا دربارهٔ جاهایی که روی نقشه می‌بینید داده‌ای جمع‌آوری یا ذخیره نمی‌کنیم.
+\n
+\nهر زمان که بخواهید می‌توانید انتخاب خود را از بخش «تنظیمات &gt; حریم خصوصی و امنیت» تغییر دهید.</string>
+    <string name="choose_data_to_share">انتخاب کنید چه داده‌هایی را مایل هستید به اشتراک بگذارید:</string>
+    <string name="downloaded_maps">نقشه‌هایی که دانلود کرده‌اید</string>
+    <string name="visited_screens">صفحه‌هایی که دیده‌اید</string>
+    <string name="collected_data_descr">فهرست داده‌هایی که می‌خواهید با OsmAnd به اشتراک بگذارید.</string>
+    <string name="downloaded_maps_collect_descr">برای اینکه بدانیم محبوب‌ترین نقشه‌ها از چه مناطق و کشورهایی است این داده را جمع‌آوری می‌کنیم.</string>
+    <string name="visited_screens_collect_descr">برای اینکه بدانیم محبوب‌ترین قابلیت‌های OsmAnd کدام است، این داده را جمع‌آوری می‌کنیم.</string>
+    <string name="settings_privacy_and_security">حریم خصوصی و امنیت</string>
+    <string name="shared_string_no_thank_you">نه، متشکرم</string>
+    <string name="profile_name_hint">نام پروفایل</string>
+    <string name="nav_type_hint">نوع ناوبری</string>
+    <string name="app_mode_taxi">تاکسی</string>
+    <string name="app_mode_shuttle_bus">اتوبوس خطی</string>
+    <string name="app_mode_subway">مترو</string>
+    <string name="app_mode_horse">اسب</string>
+    <string name="app_mode_helicopter">بالگرد</string>
+    <string name="app_mode_skiing">اسکی</string>
+    <string name="base_profile_descr_ski">اسکی</string>
+    <string name="select_icon_profile_dialog_title">انتخاب نماد</string>
+    <string name="routing_profile_ski">اسکی</string>
+    <string name="profile_type_base_string">پروفایل پایه</string>
+    <string name="profile_alert_need_routing_type_title">انتخاب نوع ناوبری</string>
+    <string name="profile_alert_need_routing_type_msg">"لطفاً یکی از  انواع ناوبری را برای پروفایل جدید برنامه انتخاب کنید"</string>
+    <string name="profile_alert_need_profile_name_title">نام پروفایل را بنویسید</string>
+    <string name="profile_alert_need_profile_name_msg">نام پروفایل نباید خالی بماند!</string>
+    <string name="profile_alert_duplicate_name_title">نام تکراری</string>
+    <string name="profile_alert_duplicate_name_msg">پروفایلی با همین نام وجود دارد</string>
+    <string name="profile_alert_cant_delete_base">نمی‌توانید پروفایل‌های پایه‌ای OsmAnd را حذف کنید</string>
+    <string name="profile_alert_need_save_title">ذخیرهٔ تغییرات</string>
+    <string name="profile_alert_need_save_msg">پیش از ادامه لازم است تغییرات پروفایل را ذخیره کنید</string>
+    <string name="profile_alert_delete_title">حذف پروفایل</string>
+    <string name="profile_alert_delete_msg">آیا از حذف پروفایل %s اطمینان دارید</string>
+    <string name="select_base_profile_dialog_title">یک پروفایل پایه انتخاب کنید</string>
+    <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و واحد سرعت و مسافت تنظیم می‌شود. این‌ها پروفایل‌های پیشفرض برنامه هستند، به‌علاوهٔ نمونه‌هایی از پروفایل‌های سفارشی که بر پایهٔ آن‌ها ساخته شده‌اند:</string>
+    <string name="select_nav_profile_dialog_title">انتخاب نوع ناوبری</string>
+    <string name="base_profile_descr_car">خودرو، کامیون، موتورسیکلت</string>
+    <string name="base_profile_descr_pedestrian">پیاده‌روی، پیاده‌گردی، دو</string>
+    <string name="routing_profile_straightline">خط مستقیم</string>
+    <string name="routing_profile_broutrer">BRouter (آفلاین)</string>
+    <string name="osmand_default_routing">مسیریابی OsmAnd</string>
+    <string name="custom_routing">پروفایل مسیریابی سفارشی</string>
+    <string name="special_routing_type">مسیریابی ویژه</string>
+    <string name="third_party_routing_type">مسیریابی شخص‌ثالث</string>
+    <string name="process_downloading_service">سرویس دانلود OsmAnd</string>
+    <string name="shared_string_color_magenta">ارغوانی</string>
+    <string name="shared_string_icon">نماد</string>
+    <string name="collected_data">داده‌هایی که جمع‌آوری شده</string>
+    <string name="shared_string_min_speed">حداقل سرعت</string>
+    <string name="shared_string_max_speed">حداکثر سرعت</string>
+    <string name="default_speed_setting_title">سرعت پیشفرض</string>
+    <string name="default_speed_setting_descr">تنظیمات سرعت پیشفرض را تغییر دهید</string>
+    <string name="minmax_speed_dialog_title">سرعت حداقل/حداکثر را تنظیم کنید</string>
+    <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن در هنگام مسیریابی استفاده می‌شود</string>
+    <string name="new_profile">پروفایل جدید</string>
+    <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با اشتراک‌گذاری پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
+    <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیازهای خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه
+\n
+\n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید
+\n
+\n • یک ابزارک برای نمایش مختصات کنونی اضافه شده
+\n
+\n • Added options to show the compass and a radius ruler on the map
+\n
+\n • Fix background track logging
+\n
+\n • Improved background map downloads
+\n
+\n • Fixed Wikipedia language selection
+\n
+\n • Fixed compass button behavior during navigation
+\n
+\n • Other bug fixes
+\n
+\n"</string>
+    <string name="app_mode_offroad">آفرود</string>
+    <string name="edit_profile_setup_title">تنظیم پروفایل</string>
+    <string name="edit_profile_setup_subtitle">پروفایل تنظیمات خودش را نگه می‌دارد</string>
+    <string name="edit_profile_setup_map_subtitle">انتخاب گزینه‌های پیشفرض نقشه برای پروفایل</string>
+    <string name="edit_profile_screen_options_subtitle">انتخاب گزینه‌های پیشفرض صفحه برای پروفایل</string>
+    <string name="edit_profile_nav_settings_subtitle">انتخاب تنظیمات پیشفرض ناوبری برای پروفایل</string>
 </resources>
