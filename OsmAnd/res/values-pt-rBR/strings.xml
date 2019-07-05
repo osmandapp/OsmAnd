@@ -3028,7 +3028,7 @@ Pôr do Sol: %2$s</string>
     <string name="public_transport_type">Tipo de transporte</string>
     <string name="searching_gps">Pesquisando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
-    <string name="rate_dialog_descr">Por favor, dê-nos 30 segundos, compartilhe comentários e avalie nosso trabalho no Google Play.</string>
+    <string name="rate_dialog_descr">Por favor, dê-nos 30 segundos para comentar e avaliar o nosso trabalho no Google Play.</string>
     <string name="button_rate">Taxa</string>
     <string name="shared_string_privacy_policy">Política de privacidade</string>
     <string name="help_us_make_osmand_better">Ajude-nos a fazer o OsmAnd melhor!</string>
@@ -3042,9 +3042,9 @@ Pôr do Sol: %2$s</string>
     <string name="collected_data_descr">Lista de dados que você deseja compartilhar com OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Coletamos esses dados para entender os mapas de quais regiões e países são os mais populares.</string>
     <string name="visited_screens_collect_descr">Coletamos esses dados para entender os recursos mais populares do OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Ao clicar em \"Permitir\", você concorda com nossas %1$s</string>
+    <string name="privacy_and_security_change_descr">Ao tocar em \"Permitir\", você concorda com nossas %1$s</string>
     <string name="settings_privacy_and_security">Privacidade e segurança</string>
-    <string name="settings_privacy_and_security_desc">Escolha seus dados para compartilhar conosco</string>
+    <string name="settings_privacy_and_security_desc">Selecione quais dados você está compartilhando conosco</string>
     <string name="shared_string_no_thank_you">Não obrigado</string>
     <string name="shared_string_allow">Permitir</string>
     <string name="profile_name_hint">Nome do perfil</string>
@@ -3061,7 +3061,7 @@ Pôr do Sol: %2$s</string>
     <string name="hide_compass_ruler">Ocultar a régua de bússola</string>
     <string name="select_icon_profile_dialog_title">Selecionar o ícone</string>
     <string name="settings_routing_mode_string">Modo: %s</string>
-    <string name="settings_derived_routing_mode_string">Modo do usuário, derivado de: %s</string>
+    <string name="settings_derived_routing_mode_string">Modo usuário, derivado de: %s</string>
     <string name="routing_profile_ski">Esqui</string>
     <string name="profile_type_descr_string">Tipo: %s</string>
     <string name="profile_type_base_string">Perfil base</string>
@@ -3071,22 +3071,22 @@ Pôr do Sol: %2$s</string>
     <string name="profile_alert_need_profile_name_msg">O nome do perfil não deve estar vazio!</string>
     <string name="profile_alert_duplicate_name_title">Nome duplicado</string>
     <string name="profile_alert_duplicate_name_msg">Já existe perfil com esse nome</string>
-    <string name="profile_alert_cant_delete_base">Você não pode excluir perfis de base OsmAnd</string>
+    <string name="profile_alert_cant_delete_base">Você não pode excluir perfis base do OsmAnd</string>
     <string name="profile_alert_need_save_title">Salvar alterações</string>
     <string name="profile_alert_need_save_msg">Você precisa salvar as alterações no perfil antes de prosseguir</string>
     <string name="profile_alert_delete_title">Excluir perfil</string>
     <string name="profile_alert_delete_msg">Tem certeza de que deseja excluir o perfil de %s</string>
     <string name="select_base_profile_dialog_title">Selecionar o perfil base</string>
-    <string name="select_base_profile_dialog_message">Perfil de aplicativo personalizado deve ser baseado em um dos perfis de aplicativo padrão. ao selecionar o perfil define configurações básicas: configuração de Widgets, unidades de velocidade e distância. Na sequência abaixo do nome do perfil, você pode saber quais perfis de navegação são adequados para cada perfil de aplicativo.</string>
+    <string name="select_base_profile_dialog_message">Baseie seu perfil personalizado em um dos perfis padrões do aplicativo, os quais definem a configuração básica, como a visibilidade padrão de widgets e unidades de velocidade e distância. Abaixo estão os perfis padrões do aplicativo juntamente com exemplos de perfis personalizados para os quais eles podem ser estendidos:</string>
     <string name="select_nav_profile_dialog_title">Escolher o tipo de navegação</string>
     <string name="base_profile_descr_car">Carro, caminhão, motocicleta</string>
-    <string name="base_profile_descr_bicycle">MTB, Ciclomotor, Cavalo</string>
-    <string name="base_profile_descr_pedestrian">Andando a pé, Caminhada, Corrida</string>
+    <string name="base_profile_descr_bicycle">MTB, ciclomotor, cavalo</string>
+    <string name="base_profile_descr_pedestrian">Andando a pé, caminhada, corrida</string>
     <string name="base_profile_descr_public_transport">Transporte público (todos)</string>
-    <string name="base_profile_descr_boat">Navio, Remo, Vela</string>
-    <string name="base_profile_descr_aircraft">Avião, Planador</string>
+    <string name="base_profile_descr_boat">Navio, remo, vela</string>
+    <string name="base_profile_descr_aircraft">Avião, planador</string>
     <string name="routing_profile_geocoding">Geocodificação</string>
-    <string name="routing_profile_straightline">Linha reta</string>
+    <string name="routing_profile_straightline">Em linha reta</string>
     <string name="routing_profile_broutrer">BRouter (sem conexão)</string>
     <string name="osmand_default_routing">Roteiro do OsmAnd</string>
     <string name="custom_routing">Perfil de roteamento personalizado</string>
@@ -3124,32 +3124,34 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_icon">Ícone</string>
     <string name="collected_data">Dados coletados</string>
     <string name="app_profile_custom_nav_subtitle">.</string>
-    <string name="press_again_to_change_the_map_orientation">Pressione novamente para alterar a orientação do mapa</string>
+    <string name="press_again_to_change_the_map_orientation">Toque novamente para alterar a orientação do mapa</string>
     <string name="shared_string_min_speed">Velocidade mínima</string>
     <string name="shared_string_max_speed">Velocidade máxima</string>
     <string name="default_speed_setting_title">Velocidade padrão</string>
     <string name="default_speed_setting_descr">Alterar as configurações de velocidade padrão</string>
     <string name="minmax_speed_dialog_title">Definir velocidade mínima/máxima</string>
-    <string name="default_speed_dialog_msg">Usado para cálculos do tempo de chegada previsto durante o roteamento</string>
+    <string name="default_speed_dialog_msg">Usado para calcular a hora de chegada prevista durante o roteamento</string>
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Erro</string>
-    <string name="last_launch_crashed">"O último lançamento do OsmAnd falhou.  Ajude-nos a melhorar o OsmAnd.  Por favor envie-nos uma mensagem de erro."</string>
-    <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• Perfis de aplicativos: crie seu próprio perfil para suas necessidades, com um ícone e cor personalizados
+    <string name="last_launch_crashed">A último inicialização do OsmAnd falhou. Por favor, ajude-nos a melhorar OsmAnd compartilhando a mensagem de erro.</string>
+    <string name="app_mode_ufo">OVNI</string>
+    <string name="release_3_4">• Perfis de aplicação: crie um perfil personalizado para suas necessidades, com um ícone e cor personalizados
 \n
-\n  • Adicionar configurações para padrão e velocidade mínima/máxima para perfis
+\n • Personalize as velocidades padrão, mínimas e máximas de qualquer perfil
 \n
-\n  • Adicionar um widget com coordenadas atuais
+\n • Adição de widget para as coordenadas correntes
 \n
-\n  • Adicione opções para mostrar a bússola no mapa com uma régua de raio
+\n • Adição de opções para mostrar a bússola e uma régua de raio no mapa
 \n
-\n  • Melhorias no download de mapas em segundo plano
+\n • Correção do registo de trilhas em segundo plano
 \n
-\n  • Corrigida a seleção de idioma da Wikipedia
+\n • Downloads de mapas de fundo melhorados
 \n
-\n  • Comportamento do botão bússola fixo durante a navegação
+\n • Correção da seleção de língua para Wikipédia
 \n
-\n  • Correções de erros
+\n • Correção do comportamento do botão da bússola durante a navegação
+\n
+\n • Outras correções de bugs
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Transportador pessoal</string>
@@ -3157,4 +3159,11 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_scooter">Lambreta</string>
     <string name="precision_hdop_and_vdop">Precisão horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisão horizontal: %s</string>
+    <string name="app_mode_offroad">Off-road</string>
+    <string name="edit_profile_setup_title">Configurar perfil</string>
+    <string name="edit_profile_setup_map_subtitle">Selecione as opções padrões de mapa para o perfil</string>
+    <string name="edit_profile_screen_options_subtitle">Selecione as opções padrões de tela para o perfil</string>
+    <string name="edit_profile_nav_settings_subtitle">Selecione as configurações padrões de navegação para o perfil</string>
+    <string name="routing_attr_max_num_changes_description">Especificar o número máximo de transferências</string>
+    <string name="routing_attr_max_num_changes_name">Número de transferências</string>
 </resources>
