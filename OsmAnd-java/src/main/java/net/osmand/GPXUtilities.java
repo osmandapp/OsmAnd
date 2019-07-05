@@ -323,6 +323,7 @@ public class GPXUtilities {
 		public long time = 0;
 		public Author author = null;
 		public Copyright copyright = null;
+		public Bounds bounds = null;
 
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
@@ -343,6 +344,13 @@ public class GPXUtilities {
 		public String author;
 		public String year;
 		public String license;
+	}
+
+	public static class Bounds extends GPXExtensions {
+		public double minlat;
+		public double minlon;
+		public double maxlat;
+		public double maxlon;
 	}
 
 	public static class GPXTrackAnalysis {
@@ -1438,6 +1446,11 @@ public class GPXUtilities {
 					writeNotNullText(serializer, "time", format.format(new Date(file.metadata.time)));
 				}
 				writeNotNullText(serializer, "keywords", file.metadata.keywords);
+				if (file.metadata.bounds != null) {
+					serializer.startTag(null, "bounds");
+					writeBounds(serializer, file.metadata.bounds);
+					serializer.endTag(null, "bounds");
+				}
 				writeExtensions(serializer, file.metadata);
 			}
 			serializer.endTag(null, "metadata");
@@ -1575,6 +1588,13 @@ public class GPXUtilities {
 		serializer.attribute(null, "author", copyright.author);
 		writeNotNullText(serializer, "year", copyright.year);
 		writeNotNullText(serializer, "license", copyright.license);
+	}
+
+	private static void writeBounds(XmlSerializer serializer, Bounds bounds) throws IOException {
+		serializer.attribute(null, "minlat", latLonFormat.format(bounds.minlat));
+		serializer.attribute(null, "minlon", latLonFormat.format(bounds.minlon));
+		serializer.attribute(null, "maxlat", latLonFormat.format(bounds.maxlat));
+		serializer.attribute(null, "maxlon", latLonFormat.format(bounds.maxlon));
 	}
 
 	public static class GPXFileResult {
@@ -1794,6 +1814,11 @@ public class GPXUtilities {
 							if (tag.equals("keywords")) {
 								((Metadata) parse).keywords = readText(parser, "keywords");
 							}
+							if (tag.equals("bounds")) {
+								Bounds bounds = parseBoundsAttributes(parser);
+								((Metadata) parse).bounds = bounds;
+								parserState.push(bounds);
+							}
 						} else if (parse instanceof Author) {
 							if (tag.equals("name")) {
 								((Author) parse).name = readText(parser, "name");
@@ -1945,6 +1970,9 @@ public class GPXUtilities {
 					} else if (tag.equals("copyright")) {
 						Object pop = parserState.pop();
 						assert pop instanceof Copyright;
+					} else if (tag.equals("bounds")) {
+						Object pop = parserState.pop();
+						assert pop instanceof Bounds;
 					} else if (tag.equals("trkpt")) {
 						Object pop = parserState.pop();
 						assert pop instanceof WptPt;
@@ -2012,6 +2040,18 @@ public class GPXUtilities {
 		} catch (NumberFormatException e) {
 		}
 		return wpt;
+	}
+
+	private static Bounds parseBoundsAttributes(XmlPullParser parser) {
+		Bounds bounds = new Bounds();
+		try {
+			bounds.minlat = Double.parseDouble(parser.getAttributeValue("", "minlat"));
+			bounds.minlon = Double.parseDouble(parser.getAttributeValue("", "minlon"));
+			bounds.maxlat = Double.parseDouble(parser.getAttributeValue("", "maxlat"));
+			bounds.maxlon = Double.parseDouble(parser.getAttributeValue("", "maxlon"));
+		} catch (NumberFormatException e) {
+		}
+		return bounds;
 	}
 
 	public static void mergeGPXFileInto(GPXFile to, GPXFile from) {
