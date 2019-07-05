@@ -31,7 +31,7 @@ public abstract class BaseTravelCard {
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.icon_color);
+		return getColoredIcon(icon, R.color.icon_color_default_light);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {

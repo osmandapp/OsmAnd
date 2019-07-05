@@ -38,12 +38,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
@@ -52,8 +52,8 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -66,7 +66,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.*;
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 
@@ -89,7 +89,6 @@ public class MenuBuilder {
 	private boolean showOnlinePhotos = true;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
-	private List<TransportStopRoute> routes = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
@@ -233,10 +232,6 @@ public class MenuBuilder {
 		this.collapseExpandListener = collapseExpandListener;
 	}
 
-	public void setRoutes(List<TransportStopRoute> routes) {
-		this.routes = routes;
-	}
-
 	public String getPreferredMapLang() {
 		return preferredMapLang;
 	}
@@ -322,7 +317,7 @@ public class MenuBuilder {
 	}
 
 	private boolean showTransportRoutes() {
-		return routes.size() > 0;
+		return showLocalTransportRoutes() || showNearbyTransportRoutes();
 	}
 
 	private boolean showLocalTransportRoutes() {
@@ -458,17 +453,15 @@ public class MenuBuilder {
 	}
 
 	protected void buildTopInternal(View view) {
-		if (showTransportRoutes()) {
-			if (showLocalTransportRoutes()) {
-				buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
-						false, 0, false, null, true);
-			}
-			if (showNearbyTransportRoutes()) {
-				CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
-				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app);
-				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
-						false, 0, false, null, true);
-			}
+		if (showLocalTransportRoutes()) {
+			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
+					false, 0, false, null, true);
+		}
+		if (showNearbyTransportRoutes()) {
+			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
+			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app);
+			buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
+					false, 0, false, null, true);
 		}
 	}
 

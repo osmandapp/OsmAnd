@@ -1261,7 +1261,7 @@ public class GpxUiHelper {
 		yr.setTextColor(mainFontColor);
 
 		chart.setFitBars(true);
-		chart.setBorderColor(ContextCompat.getColor(app, nightMode ? R.color.divider_dark : R.color.divider_light));
+		chart.setBorderColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 
 		Legend l = chart.getLegend();
 		l.setEnabled(false);
@@ -1548,7 +1548,7 @@ public class GpxUiHelper {
 		dataSet.setHighlightEnabled(true);
 		dataSet.setDrawVerticalHighlightIndicator(true);
 		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.text_color_secondary_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+		dataSet.setHighLightColor(mChart.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 

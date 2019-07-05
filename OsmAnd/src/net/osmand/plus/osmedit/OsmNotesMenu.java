@@ -86,9 +86,9 @@ public class OsmNotesMenu {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		int toggleIconColorId;
 		if (showOsmBugs) {
-			toggleIconColorId = nightMode ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light;
+			toggleIconColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		} else {
-			toggleIconColorId = nightMode ? 0 : R.color.icon_color;
+			toggleIconColorId = nightMode ? 0 : R.color.icon_color_default_light;
 		}
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()

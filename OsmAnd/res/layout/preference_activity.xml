@@ -4,6 +4,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:orientation="vertical"
+			  android:background="?attr/list_background_color"
 			  tools:context="com.antonioleiva.materialeverywhere.SettingsActivity" >
 
 	<android.support.design.widget.AppBarLayout
@@ -78,7 +79,7 @@
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:textAppearance="@style/TextAppearance.ListItemTitle"
-					android:textColor="?attr/main_font_color_basic"
+					android:textColor="?android:textColorPrimary"
 					tools:text="Item Title"/>
 
 				<TextView
@@ -87,9 +88,11 @@
 					android:layout_height="wrap_content"
 					android:ellipsize="end"
 					android:maxLines="1"
+					android:textColor="?android:textColorSecondary"
 					tools:text="Item additional desription"/>
 
 			</LinearLayout>
+
 			<ImageView
 				android:id="@+id/type_down_arrow"
 				android:layout_width="wrap_content"
@@ -102,15 +105,9 @@
 
 	</LinearLayout>
 
-	<ImageView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:scaleType="fitXY"
-		android:src="@drawable/bg_shadow_list_bottom"/>
-
 	<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent" >
+			android:layout_height="match_parent">
 
 		<ListView
 				android:id="@android:id/list"
@@ -118,11 +115,20 @@
 				android:layout_height="match_parent" />
 
 		<ImageView
+			android:id="@+id/selector_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:src="@drawable/preference_activity_action_bar_shadow"
+			android:visibility="gone"
+			tools:ignore="ContentDescription"/>
+
+		<ImageView
 				android:id="@+id/shadowView"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/abp__shadow_height"
 				android:src="@drawable/preference_activity_action_bar_shadow"
 				tools:ignore="ContentDescription" />
+
 	</FrameLayout>
 
 </LinearLayout>

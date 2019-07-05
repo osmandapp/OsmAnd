@@ -119,8 +119,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		setListAdapter(listAdapter);
 		ListView listView = getListView();
 		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				getMyApplication().getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 		listView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {

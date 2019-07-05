@@ -25,7 +25,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_horizontal"
-                android:tint="?attr/primary_icon_color"
+                android:tint="?attr/default_icon_color"
                 android:scaleType="centerInside"/>
 
             <ImageView

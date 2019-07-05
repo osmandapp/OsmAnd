@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import alice.tuprolog.Int;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -240,7 +239,7 @@ public class ContextMenuAdapter {
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
 				@ColorRes
-				int color = lightTheme ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
+				int color = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 				Drawable drawable = item.getIcon() != ContextMenuItem.INVALID_ID
 						? mIconsCache.getIcon(item.getIcon(), color) : null;
 				if (drawable != null && tv != null) {
@@ -256,7 +255,7 @@ public class ContextMenuAdapter {
 					int colorRes = item.getColorRes();
 					if (colorRes == ContextMenuItem.INVALID_ID) {
 						if (!item.shouldSkipPainting()) {
-							colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
+							colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 						} else {
 							colorRes = 0;
 						}
@@ -274,9 +273,9 @@ public class ContextMenuAdapter {
 				@ColorRes
 				int colorRes;
 				if (secondaryDrawable == R.drawable.ic_action_additional_option) {
-					colorRes = lightTheme ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+					colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 				} else {
-					colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
+					colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 				}
 				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);

@@ -67,7 +67,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/home_button"
-					android:textColor="?attr/main_font_color_basic"
+					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
 					tools:ignore="UnusedAttribute" />
 
@@ -133,7 +133,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
 					android:text="@string/work_button"
-					android:textColor="?attr/main_font_color_basic"
+					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
 					tools:ignore="UnusedAttribute" />
 

@@ -23,7 +23,7 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 		this.iconId = iconId;
 		this.title = title.toUpperCase();
 		this.onClickListener = onClickListener;
-		this.colorId = app.getSettings().isLightContent() ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark;
+		this.colorId = app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 	}
 
 	public QuickSearchButtonListItem(OsmandApplication app, int iconId, @NonNull Spannable title, View.OnClickListener onClickListener) {
@@ -31,7 +31,7 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 		this.iconId = iconId;
 		this.spannableTitle = spannedToUpperCase(title);
 		this.onClickListener = onClickListener;
-		this.colorId = app.getSettings().isLightContent() ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark;
+		this.colorId = app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 	}
 
 	public QuickSearchListItemType getType() {

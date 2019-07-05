@@ -64,10 +64,11 @@ public class AppProfileArrayAdapter extends ArrayAdapter<ProfileDataObject> {
 		ProfileDataObject mode = modes.get(position);
 
 		Drawable iconDrawable;
+		boolean lightContent = app.getSettings().isLightContent();
 		if (mode.isSelected()) {
-			iconDrawable = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColor(!app.getSettings().isLightContent()));
+			iconDrawable = app.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColor(!lightContent));
 		} else {
-			iconDrawable = app.getUIUtilities().getIcon(mode.getIconRes(), R.color.profile_icon_color_inactive);
+			iconDrawable = app.getUIUtilities().getIcon(mode.getIconRes(), lightContent);
 		}
 
 		viewHolder.title.setText(mode.getName());

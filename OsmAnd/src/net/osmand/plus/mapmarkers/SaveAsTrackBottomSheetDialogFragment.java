@@ -83,7 +83,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			if (textBox instanceof TextInputLayout) {
 				((TextInputLayout) textBox).setHintTextAppearance(R.style.TextAppearance_App_DarkTextInputLayout);
 			} else if (textBox instanceof OsmandTextFieldBoxes) {
-				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(app, R.color.active_color_primary_dark));
 			}
 		}
 

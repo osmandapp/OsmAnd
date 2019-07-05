@@ -408,7 +408,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		super.onActivityCreated(savedInstanceState);
 		setShowsDialog(openAsDialog());
 		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
+				getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
 	}
 
 	@Override
@@ -668,7 +668,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			v.setOnClickListener(null);
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = ctx.getTheme();
-			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			theme.resolveAttribute(R.attr.activity_background_color, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
 
 			return v;

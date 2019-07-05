@@ -85,7 +85,7 @@ public class TracksCard extends BaseCard {
 
 		int mainFontColor = getMainFontColor();
 		int descriptionColor = getSecondaryColor();
-		int dividerColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.divider_dark : R.color.divider_light);
+		int dividerColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.divider_color_dark : R.color.divider_color_light);
 
 		int i = 0;
 		boolean showLimitExceeds = list.size() > 4;

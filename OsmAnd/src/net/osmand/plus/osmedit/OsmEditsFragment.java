@@ -150,7 +150,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
 		emptyView = emptyStub.inflate();
 		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
 			int icRes = getMyApplication().getSettings().isLightContent()
@@ -401,8 +401,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings().isLightContent()
-				? R.color.ctx_menu_info_view_bg_light
-				: R.color.ctx_menu_info_view_bg_dark));
+				? R.color.activity_background_color_light
+				: R.color.activity_background_color_dark));
 	}
 
 	@Override

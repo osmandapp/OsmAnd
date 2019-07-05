@@ -855,7 +855,7 @@ public class ImportHelper {
 			items.add(new TitleItem(getString(R.string.import_file)));
 
 			int nameColor = getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-			int descrColor = getResolvedColor(nightMode ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
+			int descrColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 			String descr = getString(R.string.import_gpx_file_description);
 			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
 			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

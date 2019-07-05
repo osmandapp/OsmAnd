@@ -192,7 +192,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
-				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
 		upIcon = getContentIcon(R.drawable.ic_action_arrow_up);
@@ -534,7 +534,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
+		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
@@ -1606,8 +1606,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		MeasurementToolBarController(NewGpxData newGpxData) {
 			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
 			setBackBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
-			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
+			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
 			setCloseBtnVisible(false);

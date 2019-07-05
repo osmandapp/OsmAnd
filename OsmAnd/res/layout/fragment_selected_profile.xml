@@ -6,7 +6,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/ctx_menu_info_view_bg">
+	android:background="?attr/activity_background_color">
 
 	<ScrollView
 		android:id="@+id/scroll_view_container"
@@ -48,7 +48,7 @@
 						android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
 						android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
 						android:layout_gravity="center_vertical"
-						android:tint="?attr/primary_icon_color"
+						android:tint="?attr/default_icon_color"
 						tools:src="@drawable/ic_action_coordinates_latitude"/>
 
 					<LinearLayout
@@ -66,7 +66,7 @@
 							android:layout_height="wrap_content"
 							android:ellipsize="end"
 							android:maxLines="1"
-							android:text="Base Profile"/>
+							android:text="@string/profile_type_base_string"/>
 
 						<TextView
 							android:id="@+id/mode_title"
@@ -74,7 +74,7 @@
 							android:layout_height="wrap_content"
 							android:ellipsize="end"
 							android:maxLines="1"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="18sp"
 							tools:text="Item additional description"/>
 
@@ -97,7 +97,7 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/ctx_menu_info_view_bg"
+				android:background="?attr/activity_background_color"
 				android:orientation="vertical">
 
 				<ImageView
@@ -141,7 +141,7 @@
 							android:layout_height="60dp"
 							android:layout_weight="1"
 							android:layout_margin="@dimen/list_content_padding"
-							app:primaryColor="@color/color_dialog_buttons_dark"
+							app:primaryColor="@color/active_color_primary_dark"
 							app:labelText="@string/profile_name_hint">
 
 							<studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -184,7 +184,7 @@
 						android:id="@+id/navigation_type_otfb"
 						android:layout_width="match_parent"
 						android:layout_height="60dp"
-						app:primaryColor="@color/color_dialog_buttons_dark"
+						app:primaryColor="@color/active_color_primary_dark"
 						app:labelText="Navigation Type">
 
 						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -218,7 +218,7 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="@color/divider_light"/>
+						android:background="@color/divider_color_light"/>
 
 
 					<LinearLayout
@@ -245,7 +245,7 @@
 								android:layout_weight="1"
 								android:textSize="@dimen/default_list_text_size"
 								android:text="@string/shared_string_icon"
-								android:textColor="?attr/main_font_color_basic"/>
+								android:textColor="?android:textColorPrimary"/>
 
 							<ImageView
 								android:id="@+id/profile_icon_img"
@@ -261,7 +261,7 @@
 							android:layout_width="1dp"
 							android:layout_height="36dp"
 							android:layout_gravity="center_vertical"
-							android:background="@color/divider_light"/>
+							android:background="@color/divider_color_light"/>
 
 						<LinearLayout
 							android:id="@+id/select_icon_color_button"
@@ -281,7 +281,7 @@
 								android:gravity="center_vertical"
 								android:textSize="@dimen/default_list_text_size"
 								android:text="@string/shared_string_color"
-								android:textColor="?attr/main_font_color_basic"/>
+								android:textColor="?android:textColorPrimary"/>
 
 							<ImageView
 								android:id="@+id/color_sample_img"
@@ -298,7 +298,7 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="@color/divider_light"/>
+						android:background="@color/divider_color_light"/>
 
 				</LinearLayout>
 
@@ -323,7 +323,7 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="?attr/ctx_menu_info_view_bg"
+				android:background="?attr/activity_background_color"
 				android:orientation="vertical">
 
 				<ImageView
@@ -361,7 +361,7 @@
 					android:layout_marginLeft="@dimen/list_content_padding"
 					android:layout_marginRight="@dimen/list_content_padding"
 					android:text="@string/edit_profile_setup_title"
-					android:textColor="?attr/main_font_color_basic"
+					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"/>
 
 				<TextView
@@ -390,7 +390,7 @@
 						android:layout_marginStart="@dimen/list_content_padding"
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:src="@drawable/ic_action_layers_dark"
-						android:tint="?attr/primary_icon_color"/>
+						android:tint="?attr/default_icon_color"/>
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -404,8 +404,8 @@
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="@string/edit_profile_configure_map"
-							android:textColor="?attr/main_font_color_basic"
+							android:text="@string/configure_map"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
@@ -421,7 +421,7 @@
 					android:layout_height="1dp"
 					android:layout_marginStart="64dp"
 					android:layout_marginLeft="64dp"
-					android:background="@color/divider_light"/>
+					android:background="@color/divider_color_light"/>
 
 				<LinearLayout
 					android:id="@+id/screen_config_btn"
@@ -438,7 +438,7 @@
 						android:layout_marginStart="@dimen/list_content_padding"
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:src="@drawable/ic_configure_screen_dark"
-						android:tint="?attr/primary_icon_color"/>
+						android:tint="?attr/default_icon_color"/>
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -452,8 +452,8 @@
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="@string/edit_profile_configure_screen_title"
-							android:textColor="?attr/main_font_color_basic"
+							android:text="@string/map_widget_config"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
@@ -470,7 +470,7 @@
 					android:layout_height="1dp"
 					android:layout_marginStart="64dp"
 					android:layout_marginLeft="64dp"
-					android:background="@color/divider_light"
+					android:background="@color/divider_color_light"
 					/>
 
 				<LinearLayout
@@ -488,7 +488,7 @@
 						android:layout_marginStart="@dimen/list_content_padding"
 						android:layout_marginLeft="@dimen/list_content_padding"
 						android:src="@drawable/ic_action_gdirections_dark"
-						android:tint="?attr/primary_icon_color"/>
+						android:tint="?attr/default_icon_color"/>
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -502,8 +502,8 @@
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="@string/edit_profile_nav_settings_title"
-							android:textColor="?attr/main_font_color_basic"
+							android:text="@string/routing_settings_2"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView

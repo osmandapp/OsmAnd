@@ -53,7 +53,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 					R.drawable.multi_selection_menu_bg_light_land, R.drawable.multi_selection_menu_bg_dark_land);
 		} else {
 			AndroidUtils.setBackground(view.getContext(), view.findViewById(R.id.cancel_row), !menu.isLight(),
-					R.color.ctx_menu_bg_light, R.color.ctx_menu_bg_dark);
+					R.color.list_background_color_light, R.color.list_background_color_dark);
 		}
 
 		final ListView listView = (ListView) view.findViewById(R.id.list);
@@ -143,7 +143,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		}
 		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
 		if (!menu.isLandscapeLayout()) {
-			AndroidUtils.setBackground(getContext(), headerView, !menu.isLight(), R.color.ctx_menu_bg_light, R.color.ctx_menu_bg_dark);
+			AndroidUtils.setBackground(getContext(), headerView, !menu.isLight(), R.color.list_background_color_light, R.color.list_background_color_dark);
 		}
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);

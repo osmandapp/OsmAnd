@@ -266,7 +266,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			View bottomDivider = convertView.findViewById(R.id.bottom_divider);
 			if (bottomDivider != null) {
 				bottomDivider.setVisibility(isLastChild ? View.VISIBLE : View.GONE);
-				AndroidUtils.setBackground(app, bottomDivider, nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				AndroidUtils.setBackground(app, bottomDivider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 			}
 
 			if (child instanceof RadiusItem && group.type == WaypointHelper.POI) {
@@ -349,7 +349,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			View bottomDivider = convertView.findViewById(R.id.bottom_divider);
 
 			bottomDivider.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
-			AndroidUtils.setBackground(app, bottomDivider, nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+			AndroidUtils.setBackground(app, bottomDivider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 
 			return convertView;
 		}
@@ -439,9 +439,9 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					}
 				});
 				AndroidUtils.setBackground(app, v.findViewById(R.id.top_divider), nightMode,
-						R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+						R.color.divider_color_light, R.color.divider_color_dark);
 				AndroidUtils.setBackground(app, v.findViewById(R.id.divider), nightMode,
-						R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+						R.color.divider_color_light, R.color.divider_color_dark);
 			} else {
 				v = mapActivity.getLayoutInflater().inflate(R.layout.along_the_route_radius_simple, null);
 				((TextView) v.findViewById(R.id.title)).setText(getString(R.string.search_radius_proximity));

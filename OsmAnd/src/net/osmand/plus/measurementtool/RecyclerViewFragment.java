@@ -54,7 +54,7 @@ public class RecyclerViewFragment extends Fragment {
 		}
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
-				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 		final TypedValue typedValueAttr = new TypedValue();
 		getActivity().getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 

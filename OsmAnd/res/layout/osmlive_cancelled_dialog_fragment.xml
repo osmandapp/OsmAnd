@@ -31,7 +31,7 @@
                     android:layout_height="@dimen/standard_icon_size"
                     android:background="?attr/circle_dialog_bg"
                     android:src="@drawable/ic_action_remove_small"
-                    android:tint="@color/icon_color"/>
+                    android:tint="@color/icon_color_default_light"/>
 
             </FrameLayout>
 

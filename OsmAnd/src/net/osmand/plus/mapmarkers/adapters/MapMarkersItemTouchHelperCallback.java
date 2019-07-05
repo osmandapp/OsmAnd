@@ -50,7 +50,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 		historyBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_history);
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 
-		backgroundPaint.setColor(ContextCompat.getColor(mapActivity, night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
+		backgroundPaint.setColor(ContextCompat.getColor(mapActivity, night ? R.color.divider_color_dark : R.color.divider_color_light));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
 		iconPaint.setAntiAlias(true);
@@ -111,8 +111,8 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 				colorIcon = R.color.map_widget_blue;
 				colorText = R.color.map_widget_blue;
 			} else {
-				colorIcon = night ? 0 : R.color.icon_color;
-				colorText = R.color.dashboard_subheader_text_light;
+				colorIcon = night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+				colorText = night ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 			}
 			if (colorIcon != 0) {
 				iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mapActivity, colorIcon), PorterDuff.Mode.SRC_IN));

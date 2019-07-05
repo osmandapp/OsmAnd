@@ -445,7 +445,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 									}
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 					snackbar.show();
 				}
 			}
@@ -490,7 +490,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 								startActivity(intent);
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 				snackbar.show();
 			}
 		};

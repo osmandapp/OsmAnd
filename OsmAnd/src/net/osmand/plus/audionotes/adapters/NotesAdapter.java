@@ -211,7 +211,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			holder.description.setText(recording.getExtendedDescription(app));
 			int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
 					: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
-			int colorRes = app.getSettings().isLightContent() ? R.color.icon_color : R.color.ctx_menu_info_text_dark;
+			int colorRes = app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, colorRes));
 		}
 

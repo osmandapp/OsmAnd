@@ -433,7 +433,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateCompassVisibility(view, listItem);
 		}
 		view.setBackgroundColor(app.getResources().getColor(
-						app.getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
+						app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
 			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER

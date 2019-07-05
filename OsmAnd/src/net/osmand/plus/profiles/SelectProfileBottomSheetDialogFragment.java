@@ -106,7 +106,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color);
+						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -147,7 +147,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color);
+						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -186,7 +186,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(iconRes, R.color.icon_color);
+						.getIcon(iconRes, R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -255,6 +255,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		icons.add(new IconResWithDescr(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad", false));
 		return icons;
 	}
 

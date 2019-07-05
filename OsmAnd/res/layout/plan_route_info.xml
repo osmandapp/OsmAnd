@@ -138,7 +138,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="My position" />
 
@@ -255,7 +255,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Intermediate point" />
 
@@ -368,7 +368,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Destination" />
 

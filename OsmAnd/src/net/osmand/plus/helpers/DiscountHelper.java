@@ -441,7 +441,7 @@ public class DiscountHelper {
 			res.iconId = obj.getString("icon");
 			res.url = parseUrl(app, obj.getString("url"));
 			res.textBtnTitle = obj.optString("button_title");
-			res.iconColor = parseColor("icon_color", obj);
+			res.iconColor = parseColor("icon_color_default_light", obj);
 			res.bgColor = parseColor("bg_color", obj);
 			res.titleColor = parseColor("title_color", obj);
 			res.descrColor = parseColor("description_color", obj);
@@ -470,8 +470,8 @@ public class DiscountHelper {
 			setSingleLineTitle(false);
 			setBackBtnIconClrIds(0, 0);
 			setCloseBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
-			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
+			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
 			setBgIds(R.color.discount_bar_bg, R.color.discount_bar_bg,
 					R.drawable.discount_bar_bg_land, R.drawable.discount_bar_bg_land);
 		}

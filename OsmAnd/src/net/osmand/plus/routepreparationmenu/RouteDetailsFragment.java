@@ -1513,7 +1513,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			llHorLineParams.setMargins(dpToPx(64), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_dark : R.color.divider_light));
+		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_color_dark : R.color.divider_color_light));
 		((LinearLayout) view).addView(horizontalLine);
 	}
 

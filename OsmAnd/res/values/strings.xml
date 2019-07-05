@@ -11,14 +11,14 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Setup Profile</string>
     <string name="edit_profile_setup_subtitle">Profile keeps its own settings</string>
-    <string name="edit_profile_configure_map">Configure map</string>
     <string name="edit_profile_setup_map_subtitle">Select default map options for profile</string>
-    <string name="edit_profile_configure_screen_title">Configure screen</string>
     <string name="edit_profile_screen_options_subtitle">Select default screen options for profile</string>
-    <string name="edit_profile_nav_settings_title">Navigation settings</string>
     <string name="edit_profile_nav_settings_subtitle">Select default navigation settings for profile</string>
+    <string name="routing_attr_max_num_changes_description">Specify max number of changes</string>
+    <string name="routing_attr_max_num_changes_name">Number of changes</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">
         • Application profiles: create a custom profile for your own needs, with a custom icon and color\n\n

@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.res.Configuration;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -30,6 +32,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
@@ -103,9 +106,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import org.apache.commons.logging.Log;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
 
+	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
+	
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
@@ -804,15 +810,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			updateApplicationMode(am, next);
 		}
 
-		View ll = mapActivity.getLayoutInflater().inflate(R.layout.mode_toggles, vg);
+		final View ll = mapActivity.getLayoutInflater().inflate(R.layout.mode_toggles, vg);
 		ll.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
 
-		HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
+		final HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
 		scrollView.setVerticalScrollBarEnabled(false);
 		scrollView.setHorizontalScrollBarEnabled(false);
 
 		int leftTogglePadding = AndroidUtils.dpToPx(mapActivity, 8f);
-		int rightTogglePadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		final int rightTogglePadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		final View[] buttons = new View[values.size()];
 		int k = 0;
 		Iterator<ApplicationMode> iterator = values.iterator();
@@ -837,6 +843,21 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		for (int i = 0; i < buttons.length; i++) {
 			AppModeDialog.updateButtonStateForRoute((OsmandApplication) mapActivity.getApplication(), values, selected, listener, buttons, i, true, true, nightMode);
 		}
+
+		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
+		final int idx = values.indexOf(activeMode);
+
+		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				LinearLayout container = ll.findViewById(R.id.app_modes_content);
+				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + rightTogglePadding : 0;
+				scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
+				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+			}
+		};
+		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		
 	}
 
 	private void updateOptionsButtons() {
@@ -1328,7 +1349,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		} else {
 			AndroidUtils.setForeground(app, container, nightMode, R.drawable.btn_pressed_trans_light, R.drawable.btn_pressed_trans_dark);
 		}
-		AndroidUtils.setBackground(app, container.findViewById(R.id.options_divider_end), nightMode, R.color.divider_light, R.color.divider_dark);
+		AndroidUtils.setBackground(app, container.findViewById(R.id.options_divider_end), nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(app, routeOptionImageView, nightMode, R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 
 		if (lastItem) {

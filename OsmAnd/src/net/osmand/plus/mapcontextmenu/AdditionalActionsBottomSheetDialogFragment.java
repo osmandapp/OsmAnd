@@ -164,7 +164,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 	private int getCancelRowBgResId() {
 		if (portrait) {
-			return nightMode ? R.color.ctx_menu_bg_dark : R.color.route_info_bottom_view_bg_light;
+			return nightMode ? R.color.list_background_color_dark : R.color.route_info_bottom_view_bg_light;
 		}
 		return nightMode ? R.drawable.bg_additional_menu_sides_dark : R.drawable.bg_additional_menu_sides_light;
 	}
@@ -177,7 +177,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 		int bgResId;
 		if (portrait) {
 			bgResId = expanded && expandedToFullScreen()
-					? (nightMode ? R.color.ctx_menu_bg_dark : R.color.route_info_bottom_view_bg_light)
+					? (nightMode ? R.color.list_background_color_dark : R.color.route_info_bottom_view_bg_light)
 					: (nightMode ? R.drawable.bg_additional_menu_dark : R.drawable.bg_additional_menu_light);
 		} else {
 			bgResId = expanded && expandedToFullScreen()

@@ -1033,7 +1033,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = ctx.getTheme();
-			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			theme.resolveAttribute(R.attr.activity_background_color, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
 			return v;
 		}

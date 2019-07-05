@@ -446,7 +446,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		if (!app.getSettings().isLightContent()) {
-			toolbar.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.actionbar_dark_color));
+			toolbar.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.app_bar_color_dark));
 		}
 		toolbar.setNavigationIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -891,7 +891,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (filterButtonVisible) {
 			if (word.getResult().object instanceof PoiUIFilter) {
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
-						app.getSettings().isLightContent() ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
+						app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 			} else{
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
 			}
@@ -1317,7 +1317,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			String inCityName = app.getString(R.string.shared_string_in_name, lastCityName);
 			Spannable spannable = new SpannableString(selectStreets + " " + inCityName);
 			boolean light = settings.isLightContent();
-			spannable.setSpan(new ForegroundColorSpan(getResources().getColor(light ? R.color.icon_color : R.color.color_white)),
+			spannable.setSpan(new ForegroundColorSpan(getResources().getColor(light ? R.color.icon_color_default_light : R.color.color_white)),
 					selectStreets.length() + 1, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 			final SearchResult lastCityFinal = lastCity;

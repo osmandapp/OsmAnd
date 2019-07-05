@@ -515,7 +515,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		TransportStopsWayStyle(GeometryWayContext context, TransportRouteResultSegment segment) {
 			super(context, segment);
 			OsmandApplication app = (OsmandApplication) getCtx().getApplicationContext();
-			this.color = ContextCompat.getColor(app, R.color.icon_color);
+			this.color = ContextCompat.getColor(app, R.color.icon_color_default_light);
 			this.pointColor = UiUtilities.getContrastColor(app, color, true);
 		}
 	}

@@ -209,8 +209,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				app.getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 
 		View editTextView = inflater.inflate(R.layout.poi_filter_list_item, listView, false);
 		editText = (EditText) editTextView.findViewById(R.id.editText);
@@ -811,7 +811,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 				if (item.iconId != 0) {
 					icon.setImageDrawable(app.getUIUtilities().getIcon(item.iconId,
-							app.getSettings().isLightContent() ? R.color.icon_color : R.color.color_white));
+							app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.color_white));
 					icon.setVisibility(View.VISIBLE);
 				} else {
 					icon.setVisibility(View.GONE);

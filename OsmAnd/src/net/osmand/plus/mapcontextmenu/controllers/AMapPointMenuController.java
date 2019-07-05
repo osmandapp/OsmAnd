@@ -129,7 +129,7 @@ public class AMapPointMenuController extends MenuController {
 
 	@Override
 	public int getAdditionalInfoColorId() {
-		return R.color.icon_color;
+		return R.color.icon_color_default_light;
 	}
 
 	@Override

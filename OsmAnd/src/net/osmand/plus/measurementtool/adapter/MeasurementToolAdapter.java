@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
@@ -14,12 +15,11 @@ import android.widget.TextView;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
-import net.osmand.util.MapUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,20 +45,21 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	}
 
 	@Override
-	public MeasureToolItemVH onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.measure_points_list_item, viewGroup, false);
+	public MeasureToolItemVH onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		View view = inflater.inflate(R.layout.measure_points_list_item, viewGroup, false);
 		if (!nightMode) {
 			view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
 		}
 		final int backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 		view.setBackgroundColor(backgroundColor);
 		return new MeasureToolItemVH(view);
 	}
 
 	@Override
-	public void onBindViewHolder(final MeasureToolItemVH holder, int pos) {
+	public void onBindViewHolder(@NonNull final MeasureToolItemVH holder, int pos) {
 		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
@@ -71,10 +72,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			}
 		});
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point,
-				nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color));
-		if (nightMode) {
-			holder.title.setTextColor(ContextCompat.getColor(mapActivity, R.color.primary_text_dark));
-		}
+				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
 		WptPt pt = points.get(pos);
 		String pointTitle = pt.name;
 		if (!TextUtils.isEmpty(pointTitle)) {
@@ -132,7 +130,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			}
 		}
 		holder.deleteBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
-				nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color));
+				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

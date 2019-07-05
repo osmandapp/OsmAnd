@@ -317,6 +317,8 @@ public class GPXUtilities {
 	public static class Metadata extends GPXExtensions {
 		public String desc;
 
+		public String link;
+
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
 		}
@@ -1404,6 +1406,7 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "name", trackName);
 			if (file.metadata != null) {
 				writeNotNullText(serializer, "desc", file.metadata.desc);
+				writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
 				writeExtensions(serializer, file.metadata);
 			}
 			serializer.endTag(null, "metadata");
@@ -1472,6 +1475,14 @@ public class GPXUtilities {
 		return path;
 	}
 
+	private static void writeNotNullTextWithAttribute(XmlSerializer serializer, String tag, String attribute, String value) throws IOException {
+		if (value != null) {
+			serializer.startTag(null, tag);
+			serializer.attribute(null, attribute, value);
+			serializer.endTag(null, tag);
+		}
+	}
+
 	private static void writeNotNullText(XmlSerializer serializer, String tag, String value) throws IOException {
 		if (value != null) {
 			serializer.startTag(null, tag);
@@ -1502,11 +1513,7 @@ public class GPXUtilities {
 		}
 		writeNotNullText(serializer, "name", p.name);
 		writeNotNullText(serializer, "desc", p.desc);
-		if (p.link != null) {
-			serializer.startTag(null, "link");
-			serializer.attribute(null, "href", p.link);
-			serializer.endTag(null, "link");
-		}
+		writeNotNullTextWithAttribute(serializer, "link", "href", p.link);
 		writeNotNullText(serializer, "type", p.category);
 		if (p.comment != null) {
 			writeNotNullText(serializer, "cmt", p.comment);
@@ -1696,6 +1703,9 @@ public class GPXUtilities {
 						} else if (parse instanceof Metadata) {
 							if (tag.equals("desc")) {
 								((Metadata) parse).desc = readText(parser, "desc");
+							}
+							if (tag.equals("link")) {
+								((Metadata) parse).link = parser.getAttributeValue("", "href");
 							}
 						} else if (parse instanceof Route) {
 							if (tag.equals("name")) {
