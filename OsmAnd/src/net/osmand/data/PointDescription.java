@@ -156,26 +156,7 @@ public class PointDescription {
 	public static String getLocationName(Context ctx, double lat, double lon, boolean sh) {
 		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		int f = st.COORDINATES_FORMAT.get();
-		if (f == PointDescription.UTM_FORMAT) {
-			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
-					+ ((long) pnt.northing);
-		} else if (f == PointDescription.OLC_FORMAT) {
-			try {
-				return getLocationOlcName(lat, lon);
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-				return "0, 0";
-			}
-		} else {
-			try {
-				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, LocationConvert.convert(lat, f),
-						LocationConvert.convert(lon, f));
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0); 
-			}
-		}
+		return OsmAndFormatter.getFormattedCoordinates(lat, lon, f);
 	}
 
 	public static Map<Integer, String> getLocationData(MapActivity ctx, double lat, double lon, boolean sh) {
@@ -187,14 +168,14 @@ public class PointDescription {
 		String latLonMin;
 		String latLonSec;
 		
-		String utm = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_UTM);
-		String olc = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_OLC);
+		String utm = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.UTM_FORMAT);
+		String olc = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.OLC_FORMAT);
 		
 		try {
-			latLonString = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
-			latLonDeg = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES);
-			latLonMin = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_MINUTES);
-			latLonSec = OsmAndFormatter.formatLocationCoordinates(lat, lon, OsmAndFormatter.FORMAT_SECONDS);
+			latLonString = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
+			latLonDeg = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES);
+			latLonMin = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_MINUTES);
+			latLonSec = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_SECONDS);
 		} catch (RuntimeException e) {
 			latLonString = "0, 0";
 			latLonDeg = "0°, 0°";
@@ -206,8 +187,8 @@ public class PointDescription {
 		results.put(OsmAndFormatter.FORMAT_DEGREES, latLonDeg);
 		results.put(OsmAndFormatter.FORMAT_MINUTES, latLonMin);
 		results.put(OsmAndFormatter.FORMAT_SECONDS, latLonSec);
-		results.put(OsmAndFormatter.FORMAT_UTM, utm);
-		results.put(OsmAndFormatter.FORMAT_OLC, olc);
+		results.put(OsmAndFormatter.UTM_FORMAT, utm);
+		results.put(OsmAndFormatter.OLC_FORMAT, olc);
 		
 		int zoom = 17;
 		if (ctx.getMapView() != null) {
@@ -235,25 +216,8 @@ public class PointDescription {
 	public static String getLocationNamePlain(Context ctx, double lat, double lon) {
 		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		int f = st.COORDINATES_FORMAT.get();
-		if (f == PointDescription.UTM_FORMAT) {
-			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
-			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
-					+ ((long) pnt.northing);
-		} else if (f == PointDescription.OLC_FORMAT) {
-			try {
-				return getLocationOlcName(lat, lon);
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-				return "0, 0";
-			}
-		} else {
-			try {
-				return LocationConvert.convert(lat, f) + ", " + LocationConvert.convert(lon, f);
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-				return "0, 0";
-			}
-		}
+		return OsmAndFormatter.getFormattedCoordinates(lat, lon, f);
+
 	}
 
 	public static String getLocationOlcName(double lat, double lon) {
