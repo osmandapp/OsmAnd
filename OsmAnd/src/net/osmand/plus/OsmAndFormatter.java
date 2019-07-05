@@ -8,6 +8,7 @@ import android.text.format.DateUtils;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 import java.text.DecimalFormatSymbols;
+import net.osmand.LocationConvert;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
@@ -17,7 +18,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandSettings.AngularConstants;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.SpeedConstants;
-import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormatSymbols;
@@ -40,12 +40,12 @@ public class OsmAndFormatter {
 	private static final SimpleDateFormat SIMPLE_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
-	public static final int FORMAT_DEGREES_SHORT = 100;
-	public static final int FORMAT_DEGREES = 101;
-	public static final int FORMAT_MINUTES = 102;
-	public static final int FORMAT_SECONDS = 103;
-	public static final int FORMAT_UTM = 104;
-	public static final int FORMAT_OLC = 105;
+	public static final int FORMAT_DEGREES_SHORT = 6;
+	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
+	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
+	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
+	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
+	public static final int OLC_FORMAT = LocationConvert.OLC_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '′';
 	private static final char DELIMITER_SECONDS = '″';
@@ -429,7 +429,7 @@ public class OsmAndFormatter {
 				cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
 	}
 	
-	public static String formatLocationCoordinates(double lat, double lon, int outputFormat) {
+	public static String getFormattedCoordinates(double lat, double lon, int outputFormat) {
 		StringBuilder result = new StringBuilder();
 		if (outputFormat == FORMAT_DEGREES_SHORT) {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
@@ -439,14 +439,14 @@ public class OsmAndFormatter {
 				.append(lat > 0 ? NORTH : SOUTH).append(", ")
 				.append(formatCoordinate(lon, outputFormat)).append(" ")
 				.append(lon > 0 ? EAST : WEST);
-		}  else if (outputFormat == FORMAT_UTM) {
+		}  else if (outputFormat == UTM_FORMAT) {
 			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
 			result
 				.append(pnt.zone_number)
 				.append(pnt.zone_letter).append(" ")
 				.append((long) pnt.easting).append(" ")
 				.append((long) pnt.northing);
-		} else if (outputFormat == FORMAT_OLC) {
+		} else if (outputFormat == OLC_FORMAT) {
 			String r;
 			try {
 				r = getLocationOlcName(lat, lon);

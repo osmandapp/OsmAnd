@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -67,7 +66,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.*;
 
 public class MenuBuilder {
@@ -683,9 +681,9 @@ public class MenuBuilder {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (final Map.Entry<Integer, String> line : locationData.entrySet()) {
 			final TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
-			if (line.getKey() == OsmAndFormatter.FORMAT_UTM || line.getKey() == OsmAndFormatter.FORMAT_OLC) {
+			if (line.getKey() == OsmAndFormatter.UTM_FORMAT || line.getKey() == OsmAndFormatter.OLC_FORMAT) {
 				SpannableStringBuilder ssb = new SpannableStringBuilder();
-				ssb.append(line.getKey() == OsmAndFormatter.FORMAT_UTM ? "UTM: " : "OLC: ");
+				ssb.append(line.getKey() == OsmAndFormatter.UTM_FORMAT ? "UTM: " : "OLC: ");
 				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				ssb.append(line.getValue());
 				button.setText(ssb);
