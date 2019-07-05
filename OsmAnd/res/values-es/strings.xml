@@ -713,7 +713,7 @@
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nivel</string>
     <string name="rendering_attr_hmRendered_description">Aumentar detalle que se muestra en el mapa.</string>
     <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
-    <string name="route_roundabout">Rotonda: Tome la %1$dª salida hacia</string>
+    <string name="route_roundabout">Rotonda: Tome la %1$dª salida en dirección a</string>
     <string name="route_kl">Mantente a la izquierda y continúa por</string>
     <string name="route_kr">Mantente a la derecha y continúa por</string>
     <string name="asap">Lo antes posible</string>
