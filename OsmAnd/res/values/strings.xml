@@ -661,8 +661,8 @@
     <string name="srtm_purchase_header">To see contour lines on the map, you need to buy and install the \'Contour Lines\' plugin</string>
     <string name="srtm_color_scheme">Color scheme</string>
     <string name="show_from_zoom_level">Display from zoom level</string>
-    <string name="routing_attr_allow_private_name">Allow trespassing</string>
-    <string name="routing_attr_allow_private_description">Allow access to private areas.</string>
+    <string name="routing_attr_allow_private_name">Allow private access</string>
+    <string name="routing_attr_allow_private_description">Allow trespassing private areas.</string>
     <string name="display_zoom_level">Zoom level: %1$s</string>
     <string name="favorite_group_name">Group name</string>
     <string name="change_color">Change color</string>
@@ -800,7 +800,7 @@
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
     <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="routing_attr_allow_motorway_name">Allow motorways</string>
-    <string name="routing_attr_allow_motorway_description">Allow motorways.</string>
+    <string name="routing_attr_allow_motorway_description">Uses motorways.</string>
     <string name="upload_osm_note_description">Upload your OSM Note anonymously or by using your OpenStreetMap.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">Search city or region</string>
@@ -811,8 +811,8 @@
     <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
     <string name="gpx_add_track">Add more…</string>
     <string name="gpx_appearance">Appearance</string>
-    <string name="trip_rec_notification_settings">Enable recording quick start</string>
-    <string name="trip_rec_notification_settings_desc">Display a system notification allowing to start trip recording.</string>
+    <string name="trip_rec_notification_settings">Quick start recording</string>
+    <string name="trip_rec_notification_settings_desc">Display a system notification option to start recording trip.</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="shared_string_continue">Continue</string>
     <string name="shared_string_pause">Pause</string>
@@ -3239,13 +3239,13 @@
     <string name="routing_attr_allow_expert_name">Allow expert routes</string>
     <string name="routing_attr_allow_expert_description">Extremely difficult routes, with dangerous obstacles and surroundings.</string>
     <string name="routing_attr_allow_skating_only_name">Allow skating only routes</string>
-    <string name="routing_attr_allow_skating_only_description">Routes groomed for free style or skating only without classic trails.</string>
+    <string name="routing_attr_allow_skating_only_description">Routes groomed for freestyle or skating only without classic trails.</string>
     <string name="routing_attr_allow_classic_only_name">Allow classic only routes</string>
     <string name="routing_attr_allow_classic_only_description">Routes groomed for classic style only without skating trails. This includes routes groomed by a smaller snowmobile with looser piste and tracks made manually by skiers.</string>
     <string name="routing_attr_difficulty_preference_name">Prefered difficulty</string>
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
-    <string name="routing_attr_freeride_policy_description">Freerides and offpiste are unofficial routes and passages. Typically ungroomed, unmainted by the officials and not checked in the evening. Enter at own risk.</string>
+    <string name="routing_attr_freeride_policy_description">Freeride and offpiste are unofficial routes and passages. Typically ungroomed, unmainted by officials and not checked in the evening. Enter at your own risk.</string>
 
 
 </resources>
