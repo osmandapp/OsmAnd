@@ -3133,26 +3133,34 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_crash">Paneo</string>
     <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon, sendu mesaĝon pri eraro.</string>
     <string name="app_mode_ufo">NIFO</string>
-    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro
-\n
-\n• agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan alvenan tempon)
-\n
-\n• fenestraĵo montranta koordinatojn
-\n
-\n• eblo montri kompason kun angul-mezurilo sur la mapo
-\n
-\n• plibonigita elŝuto de mapoj fone
-\n
-\n• riparita elekto de lingvo por Vikipedio
-\n
-\n• riparita sinteno de kompaso butono dum navigado
-\n
+    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
+\n 
+\n• agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan alvenan tempon) 
+\n 
+\n• fenestraĵo montranta koordinatojn 
+\n 
+\n• eblo montri kompason kun angul-mezurilo sur la mapo 
+\n 
+\n• plibonigita elŝuto de mapoj fone 
+\n 
+\n• riparita elekto de lingvo por Vikipedio 
+\n 
+\n• riparita sinteno de kompaso butono dum navigado 
+\n 
 \n• riparoj de aliaj eraroj
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Persona transportilo</string>
     <string name="app_mode_monowheel">Unurada veturilo</string>
     <string name="app_mode_scooter">Skotero</string>
-    <string name="precision_hdop_and_vdop">Precizo horizontala: %1$s, vertikala: %2$s</string>
-    <string name="precision_hdop">Precizo horizontala: %s</string>
+    <string name="precision_hdop_and_vdop">Precizo horizontale: %1$s, vertikale: %2$s</string>
+    <string name="precision_hdop">Precizo horizontale: %s</string>
+    <string name="app_mode_offroad">Ekstervoja aŭtomobilo</string>
+    <string name="edit_profile_setup_title">Agordi profilon</string>
+    <string name="edit_profile_setup_subtitle">Ĉiu profilo havas siajn proprajn agordojn</string>
+    <string name="edit_profile_setup_map_subtitle">Elekti implicitajn agordojn pri mapo por profilo</string>
+    <string name="edit_profile_screen_options_subtitle">Elekti implicitajn agordojn pri ekrano por profilo</string>
+    <string name="edit_profile_nav_settings_subtitle">Elekti implicitajn agordojn pri navigado por profilo</string>
+    <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron da ŝanĝoj de transportiloj</string>
+    <string name="routing_attr_max_num_changes_name">Nombro da transveturiliĝoj</string>
 </resources>
