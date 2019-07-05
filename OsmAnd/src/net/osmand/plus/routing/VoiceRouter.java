@@ -13,7 +13,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -23,10 +22,8 @@ import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import alice.tuprolog.Struct;
-import alice.tuprolog.Term;
+
 import android.media.AudioManager;
 import android.media.SoundPool;
 
@@ -935,11 +932,13 @@ public class VoiceRouter {
 	}
 
 	public void addVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		voiceMessageListeners.put(new WeakReference<>(voiceMessageListener), 0);
+		voiceMessageListeners = updateVoiceMessageListeners(new ConcurrentHashMap<>(voiceMessageListeners),
+				voiceMessageListener, true);
 	}
 	
 	public void removeVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		voiceMessageListeners.remove(new WeakReference<>(voiceMessageListener));
+		voiceMessageListeners = updateVoiceMessageListeners(new ConcurrentHashMap<>(voiceMessageListeners),
+				voiceMessageListener, false);
 	}
 
 	public void notifyOnVoiceMessage() {
@@ -949,5 +948,21 @@ public class VoiceRouter {
 				lnt.onVoiceMessage();
 			}
 		}
+	}
+
+	private ConcurrentHashMap<WeakReference<VoiceMessageListener>, Integer> updateVoiceMessageListeners(
+			ConcurrentHashMap<WeakReference<VoiceMessageListener>, Integer> copy,
+			VoiceMessageListener listener, boolean isNewListener) {
+		for (WeakReference<VoiceMessageListener> wr : copy.keySet()) {
+			VoiceMessageListener l = wr.get();
+			if (l == null || l.equals(listener)) {
+				copy.remove(wr);
+			}
+		}
+
+		if (isNewListener) {
+			copy.put(new WeakReference<>(listener), 0);
+		}
+		return copy;
 	}
 }

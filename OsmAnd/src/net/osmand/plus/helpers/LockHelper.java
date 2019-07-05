@@ -59,8 +59,6 @@ public class LockHelper implements SensorEventListener {
 				unlockEvent();
 			}
 		};
-		
-		refreshRouterSettings();
 	}
 
 	private void releaseWakeLocks() {
@@ -136,13 +134,11 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	public void refreshRouterSettings() {
+	public void refreshSettings() {
 		boolean isVRListenerEnabled = settings.TURN_SCREEN_ON_TIME_INT.get() > 0;
 		setVoiceRouterListener(isVRListenerEnabled);
-	}
 	
-	public void refreshSensorSettings() {
-		boolean isSensorEnabled = settings.TURN_SCREEN_ON_SENSOR.get() 
+		boolean isSensorEnabled = settings.TURN_SCREEN_ON_SENSOR.get()
 				&& app.getRoutingHelper().isFollowingMode();
 		setSensor(isSensorEnabled);
 	}
@@ -156,8 +152,7 @@ public class LockHelper implements SensorEventListener {
 	
 	public void onStop(Activity a) {
 		if(!a.isFinishing()) {
-			refreshRouterSettings();
-			refreshSensorSettings();
+			refreshSettings();
 		}
 	}
 
