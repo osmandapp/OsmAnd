@@ -1,6 +1,14 @@
 
 package net.osmand;
 
+import net.osmand.data.QuadRect;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,14 +39,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
-
-import net.osmand.data.QuadRect;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -315,9 +315,11 @@ public class GPXUtilities {
 	}
 
 	public static class Metadata extends GPXExtensions {
-		public String desc;
 
+		public String desc;
 		public String link;
+		public String keywords;
+		public long time = 0;
 
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
@@ -1407,7 +1409,13 @@ public class GPXUtilities {
 			if (file.metadata != null) {
 				writeNotNullText(serializer, "desc", file.metadata.desc);
 				writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
+				if (file.metadata.time != 0) {
+					writeNotNullText(serializer, "time", format.format(new Date(file.metadata.time)));
+				}
+				writeNotNullText(serializer, "keywords", file.metadata.keywords);
 				writeExtensions(serializer, file.metadata);
+			}else {
+				writeNotNullText(serializer, "name", trackName);
 			}
 			serializer.endTag(null, "metadata");
 
@@ -1593,6 +1601,22 @@ public class GPXUtilities {
 		return result;
 	}
 
+	private static long parseTime(String text,SimpleDateFormat format,SimpleDateFormat formatMillis) {
+		long time = 0;
+		if (text != null) {
+			try {
+				time = format.parse(text).getTime();
+			} catch (ParseException e1) {
+				try {
+					time = formatMillis.parse(text).getTime();
+				} catch (ParseException e2) {
+
+				}
+			}
+		}
+		return time;
+	}
+
 	public static GPXFile loadGPXFile(File f) {
 		FileInputStream fis = null;
 		try {
@@ -1707,6 +1731,13 @@ public class GPXUtilities {
 							if (tag.equals("link")) {
 								((Metadata) parse).link = parser.getAttributeValue("", "href");
 							}
+							if (tag.equals("time")) {
+								String text = readText(parser, "time");
+								((Metadata) parse).time = parseTime(text, format, formatMillis);
+							}
+							if (tag.equals("keywords")) {
+								((Metadata) parse).keywords = readText(parser, "keywords");
+							}
 						} else if (parse instanceof Route) {
 							if (tag.equals("name")) {
 								((Route) parse).name = readText(parser, "name");
@@ -1808,17 +1839,7 @@ public class GPXUtilities {
 								}
 							} else if (tag.equals("time")) {
 								String text = readText(parser, "time");
-								if (text != null) {
-									try {
-										((WptPt) parse).time = format.parse(text).getTime();
-									} catch (ParseException e1) {
-										try {
-											((WptPt) parse).time = formatMillis.parse(text).getTime();
-										} catch (ParseException e2) {
-
-										}
-									}
-								}
+								((WptPt) parse).time = parseTime(text, format, formatMillis);
 							} else if (tag.toLowerCase().equals("subclass")) {
 								endOfTrkSegment = true;
 							}
