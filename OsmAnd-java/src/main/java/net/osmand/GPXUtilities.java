@@ -316,10 +316,13 @@ public class GPXUtilities {
 
 	public static class Metadata extends GPXExtensions {
 
+		public String name;
 		public String desc;
 		public String link;
 		public String keywords;
 		public long time = 0;
+		public Author author = null;
+		public Copyright copyright = null;
 
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
@@ -328,6 +331,18 @@ public class GPXUtilities {
 		public String getArticleLang() {
 			return getExtensionsToRead().get("article_lang");
 		}
+	}
+
+	public static class Author extends GPXExtensions {
+		public String name;
+		public String email;
+		public String link;
+	}
+
+	public static class Copyright extends GPXExtensions {
+		public String author;
+		public String year;
+		public String license;
 	}
 
 	public static class GPXTrackAnalysis {
@@ -1403,19 +1418,27 @@ public class GPXUtilities {
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
-			String trackName = getFilename(file.path);
+			String trackName = file.metadata != null ? file.metadata.name : getFilename(file.path);
 			serializer.startTag(null, "metadata");
 			writeNotNullText(serializer, "name", trackName);
 			if (file.metadata != null) {
 				writeNotNullText(serializer, "desc", file.metadata.desc);
+				if (file.metadata.author != null) {
+					serializer.startTag(null, "author");
+					writeAuthor(serializer, file.metadata.author);
+					serializer.endTag(null, "author");
+				}
+				if (file.metadata.copyright != null) {
+					serializer.startTag(null, "copyright");
+					writeCopyright(serializer, file.metadata.copyright);
+					serializer.endTag(null, "copyright");
+				}
 				writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
 				if (file.metadata.time != 0) {
 					writeNotNullText(serializer, "time", format.format(new Date(file.metadata.time)));
 				}
 				writeNotNullText(serializer, "keywords", file.metadata.keywords);
 				writeExtensions(serializer, file.metadata);
-			}else {
-				writeNotNullText(serializer, "name", trackName);
 			}
 			serializer.endTag(null, "metadata");
 
@@ -1533,6 +1556,25 @@ public class GPXUtilities {
 			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
 		}
 		writeExtensions(serializer, p);
+	}
+
+	private static void writeAuthor(XmlSerializer serializer, Author author) throws IOException {
+		writeNotNullText(serializer, "name", author.name);
+		if (author.email != null && author.email.contains("@")) {
+			String[] idAndDomain = author.email.split("@");
+			if (idAndDomain.length == 2 && !idAndDomain[0].isEmpty() && !idAndDomain[1].isEmpty()) {
+				serializer.startTag(null, "email");
+				serializer.attribute(null, "id", idAndDomain[0]);
+				serializer.attribute(null, "domain", idAndDomain[1]);
+			}
+		}
+		writeNotNullTextWithAttribute(serializer, "link", "href", author.link);
+	}
+
+	private static void writeCopyright(XmlSerializer serializer, Copyright copyright) throws IOException {
+		serializer.attribute(null, "author", copyright.author);
+		writeNotNullText(serializer, "year", copyright.year);
+		writeNotNullText(serializer, "license", copyright.license);
 	}
 
 	public static class GPXFileResult {
@@ -1725,8 +1767,22 @@ public class GPXUtilities {
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof Metadata) {
+							if (tag.equals("name")) {
+								((Metadata) parse).name = readText(parser, "name");
+							}
 							if (tag.equals("desc")) {
 								((Metadata) parse).desc = readText(parser, "desc");
+							}
+							if (tag.equals("author")) {
+								Author author = new Author();
+								((Metadata) parse).author = author;
+								parserState.push(author);
+							}
+							if (tag.equals("copyright")) {
+								Copyright copyright = new Copyright();
+								copyright.author = parser.getAttributeValue("", "author");
+								((Metadata) parse).copyright = copyright;
+								parserState.push(copyright);
 							}
 							if (tag.equals("link")) {
 								((Metadata) parse).link = parser.getAttributeValue("", "href");
@@ -1737,6 +1793,27 @@ public class GPXUtilities {
 							}
 							if (tag.equals("keywords")) {
 								((Metadata) parse).keywords = readText(parser, "keywords");
+							}
+						} else if (parse instanceof Author) {
+							if (tag.equals("name")) {
+								((Author) parse).name = readText(parser, "name");
+							}
+							if (tag.equals("email")) {
+								String id = parser.getAttributeValue("", "id");
+								String domain = parser.getAttributeValue("", "domain");
+								if (!Algorithms.isEmpty(id) && !Algorithms.isEmpty(domain)) {
+									((Author) parse).email = id + "@" + domain;
+								}
+							}
+							if (tag.equals("link")) {
+								((Author) parse).link = parser.getAttributeValue("", "href");
+							}
+						} else if (parse instanceof Copyright) {
+							if (tag.equals("year")) {
+								((Copyright) parse).year = readText(parser, "year");
+							}
+							if (tag.equals("license")) {
+								((Copyright) parse).license = readText(parser, "license");
 							}
 						} else if (parse instanceof Route) {
 							if (tag.equals("name")) {
@@ -1862,6 +1939,12 @@ public class GPXUtilities {
 					if (tag.equals("metadata")) {
 						Object pop = parserState.pop();
 						assert pop instanceof Metadata;
+					} else if (tag.equals("author")) {
+						Object pop = parserState.pop();
+						assert pop instanceof Author;
+					} else if (tag.equals("copyright")) {
+						Object pop = parserState.pop();
+						assert pop instanceof Copyright;
 					} else if (tag.equals("trkpt")) {
 						Object pop = parserState.pop();
 						assert pop instanceof WptPt;
