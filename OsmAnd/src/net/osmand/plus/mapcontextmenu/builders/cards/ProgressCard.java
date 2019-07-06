@@ -18,6 +18,6 @@ public class ProgressCard extends AbstractCard {
 	@Override
 	public void update() {
 		boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		AndroidUtils.setBackgroundColor(getMapActivity(), view, night, R.color.bg_color_light, R.color.bg_color_dark);
+		AndroidUtils.setBackgroundColor(getMapActivity(), view, night, R.color.list_background_color_light, R.color.list_background_color_dark);
 	}
 }

@@ -1971,8 +1971,14 @@
     <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ 是开放源码导航应用程序，可以使用各式各样的全球性 OpenStreetMap （称 OSM 开放街道地图）数据。所有数据（矢量图或地图图砖）可存放于设备的记忆卡上，可作离线与在线地图导航，包含转弯提醒 (turn by turn) 语音导航。 一些主要的功能： - 完整离线功能（存放下载的矢量图或地图图砖于设备存储器） - 全球离线矢量地图数据 - 直接由手机下载各国或区域地图数据 - 可叠加不同的多种地图层于自订的透明度，如 GPX 或导航轨迹、兴趣点、我的收藏、等高线、大众运输停靠站 - 离线查寻地址、场所(POI) - 中程距离的脱机路线 - 汽车、自行车、步行模式有下列选项： - 自动日/夜模式切换选项 - 取决于速度的地图缩放选项 - 地图正北朝上或行进方向朝上选项 - 车道引导、速限显示、使用真人语音或 TTS 语音选项 "</string>
     <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) 是一个地图和导航应用程序，可以免费访问全球性且高品质的 OpenStreetMap (OSM) 地图数据。有语音和视觉的导航、查看 POI（兴趣点）、创建和管理 GPX 轨迹、使用可视化的等高线和海拔信息，能在汽车驾驶、骑自行车和步行模式之间选择、OSM 编辑和更多。 OsmAnd + 是付费应用程序版本。透过购买，您支持了该项目，资助新功能的开发并收到最新的更新。一些主要特点： "</string>
     <string name="osmand_plus_extended_description_part2">" 导航 • 在线工作（快速）或是离线（当您在国外无需国际漫游费用） • 转弯提醒 (turn by turn) 语音导航（真人和合成语音） • 可任选的车道导引、街道名称显示和预计抵达时间 • 支持您行程安排上的中转点 • 当您行驶路线改道，自动重新规划 • 查寻地点按照地址、类别（例如：餐厅、旅店、加油站、博物馆）或以地理位置坐标 "</string>
-    <string name="osmand_plus_extended_description_part3">" 地图查看 • 显示您的位置和方向 • 可以选择依照罗盘或您的运动方向对齐画面 • 将您最重要的地点，保存为我的收藏 
-\n • 显示您周遭的 POI（兴趣点） • 显示专用的在线地图图砖、卫星视图（来自 Bing）、不同的叠加层如旅游/导航 GPX 轨迹以及可自定透明度的附加层 • 可任选显示地名于英文、设备端或语言的拼写 "</string>
+    <string name="osmand_plus_extended_description_part3">地图查看
+\n显示您的位置和方向 
+\n可以选择依照罗盘或您的运动方向对齐画面
+\n将您最重要的地点存为我的收藏 
+\n显示您周遭的 POI（兴趣点）
+\n显示专用的在线地图图砖、卫星视图（来自必应）、不同的叠加层如旅游/导航 GPX 轨迹以及可自定透明度的附加层
+\n可任选显示地名于英文、设备端或语言的拼写
+\n</string>
     <string name="osmand_plus_extended_description_part4">" 使用 OSM 和维基百科的数据 • 来自世界最好的协作项目所得的高品质信息 • OSM 数据可用在每个国家或地区 • 维基百科 POI 卓越的观光景点 • 直接从应用程序，无限制的免费下载 • 密集的脱机矢量地图更新，至少每月一次 • 可在完整的区域数据还是只有公路网之间选择（例如：光全日本就有700 MB或200 MB的公路网） "</string>
     <string name="osmand_plus_extended_description_part5">" 安全功能 • 任选的自动日/夜查看切换 • 任选的速限显示功能，如果您超速了它会提醒 • 取决于速度的地图缩放选项 
 \n • 分享您所在的位置的功能，这样您的朋友能找到您 "</string>
@@ -2381,12 +2387,12 @@
     <string name="looking_for_tracks_with_waypoints">用航路点寻找轨迹</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="appearance_on_the_map">在地图上的外观</string>
-    <string name="add_track_to_markers_descr">选择一个轨迹一遍添加它的航路点到标记。（只有有航路点的轨迹才会列举出来。）</string>
+    <string name="add_track_to_markers_descr">选择一个轨迹一遍添加它的航路点到标记。</string>
     <string name="add_favourites_group_to_markers_descr">选择一个收藏夹类别以便添加到标记。</string>
     <string name="shared_string_gpx_waypoints">轨迹航路点</string>
     <string name="favourites_group">收藏夹类别</string>
     <string name="add_group">添加组</string>
-    <string name="add_group_descr">您可以从收藏夹或轨道航点导入组。</string>
+    <string name="add_group_descr">从收藏夹或轨道航点导入组。</string>
     <string name="empty_state_markers_active">创建地图标记!</string>
     <string name="empty_state_markers_active_desc">长按或短按位置, 然后点击标记标志按钮。</string>
     <string name="empty_state_markers_groups">导入组群</string>
@@ -2491,32 +2497,32 @@
     <string name="search_no_results_description">没有结果？
 \n请告诉我们这个问题。</string>
     <string name="download_wikipedia_label">下载维基百科数据</string>
-    <string name="open_in_browser_wiki">在线打开文章</string>
-    <string name="wiki_article_not_found">文章未找到</string>
+    <string name="open_in_browser_wiki">在线打开条目</string>
+    <string name="wiki_article_not_found">未找到条目</string>
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>
     <string name="send_search_query_description">我们将会发送您的搜索请求：<b>\"%1$s\"</b>，以及您的位置。<br/>
         <br/>我们不会搜集您的个人信息，我们只需要搜索数据以改进搜索算法。<br/>
     </string>
     <string name="send_search_query">发送搜索请求？</string>
     <string name="search_street">搜索街道</string>
-    <string name="start_search_from_city">首先选择城市</string>
+    <string name="start_search_from_city">请先选择城市</string>
     <string name="thank_you_for_feedback">感谢您的反馈</string>
-    <string name="powered_by_osmand">由 OsmAnd 出品</string>
+    <string name="powered_by_osmand">OsmAnd 出品</string>
     <string name="osm_live_plan_pricing">方案和价格</string>
-    <string name="osm_live_payment_monthly_title">每月</string>
-    <string name="osm_live_payment_3_months_title">每季度</string>
-    <string name="osm_live_payment_annual_title">每年</string>
-    <string name="osm_live_payment_month_cost_descr">%1$s / 月</string>
-    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 月</string>
-    <string name="osm_live_payment_discount_descr">节省 %1$s。</string>
+    <string name="osm_live_payment_monthly_title">月度</string>
+    <string name="osm_live_payment_3_months_title">每季</string>
+    <string name="osm_live_payment_annual_title">年度</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / 每月</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / 每月</string>
+    <string name="osm_live_payment_discount_descr">省下 %1$s。</string>
     <string name="osm_live_payment_current_subscription">当前订阅</string>
-    <string name="open_in_browser_wiki_description">在网页浏览器中查看文章。</string>
+    <string name="open_in_browser_wiki_description">在网页浏览器中查看条目。</string>
     <string name="osm_live_subscriptions">订阅</string>
-    <string name="osm_live_payment_renews_monthly">每月续期</string>
-    <string name="osm_live_payment_renews_quarterly">每季度续期</string>
-    <string name="osm_live_payment_renews_annually">每年续期</string>
+    <string name="osm_live_payment_renews_monthly">每月续费</string>
+    <string name="osm_live_payment_renews_quarterly">每季续费</string>
+    <string name="osm_live_payment_renews_annually">每年续费</string>
     <string name="third_party_application">第三方应用程序</string>
-    <string name="osm_live_payment_header">选择对您方便的支付周期：</string>
+    <string name="osm_live_payment_header">选择适合您的付款周期：</string>
     <string name="osm_live_payment_contribute_descr">部分收入将由 OpenStreetMap 贡献者获得。</string>
     <string name="shared_string_restore">恢复</string>
     <string name="search_no_results_feedback">没有搜索结果？
@@ -2532,11 +2538,11 @@
     <string name="exit_without_saving">不保存退出？</string>
     <string name="tunnel_warning">前方隧道</string>
     <string name="show_tunnels">隧道</string>
-    <string name="download_wikipedia_description">下载 %1$s 的维基百科文章以离线阅读。</string>
+    <string name="download_wikipedia_description">下载 %1$s 的维基百科条目以离线阅读。</string>
     <string name="swap_start_and_destination">交换出发地和目的地</string>
     <string name="add_destination_point">添加目的地</string>
     <string name="mapillary_menu_title_pano">仅显示 360° 图像</string>
-    <string name="wiki_article_search_text">搜索对应的维基文章</string>
+    <string name="wiki_article_search_text">搜索对应的维基条目</string>
     <string name="run_full_osmand_header">启动 OsmAnd？</string>
     <string name="routing_attr_avoid_subway_name">避免地铁</string>
     <string name="quick_action_day_night_mode">%s模式</string>
@@ -2571,4 +2577,126 @@
     <string name="quick_action_switch_night_mode">夜间模式</string>
     <string name="quick_action_day_night_switch_mode">切换日间/夜间模式</string>
     <string name="download_wiki_region_placeholder">此地区</string>
+    <string name="quick_action_edit_actions">编辑活动</string>
+    <string name="coord_input_save_as_track_descr">你增加了%1$s 个目标。输入文件名后点击\"保存\"。</string>
+    <string name="ask_for_location_permission">请在允许OsmAnd获取定位信息后继续。</string>
+    <string name="route_smoothness_stat_container">光滑度</string>
+    <string name="route_steepness_stat_container">坡度</string>
+    <string name="unirs_render_descr">更改默认风格以突出显示人行道和非机动车道，使用旧版Mapnik配色。</string>
+    <string name="run_full_osmand_msg">你正在使用基于 OsmAnd 的 {0}。是否启动完整版 OsmAnd？</string>
+    <string name="transfers_size">%1$d 次中转</string>
+    <string name="rendering_attr_surface_mud_name">泥路</string>
+    <string name="rendering_attr_surface_asphalt_name">柏油路</string>
+    <string name="routing_attr_avoid_tram_name">避免电车</string>
+    <string name="routing_attr_avoid_tram_description">避免电车</string>
+    <string name="routing_attr_avoid_bus_name">避免公交</string>
+    <string name="routing_attr_avoid_bus_description">避免公交和无轨电车</string>
+    <string name="send_log">发送日志</string>
+    <string name="files_moved">已移动 %1$d 个文件 (%2$s)。</string>
+    <string name="files_copied">已复制 %1$d 个文件 (%2$s)。</string>
+    <string name="files_present">%1$d 个文件 (%2$s) 仍在原路径 \'%3$s\'。</string>
+    <string name="move_maps">移动地图</string>
+    <string name="dont_move_maps">不要移动</string>
+    <string name="public_transport_ped_route_title">徒步完成此路径需要约 %1$s，可能比公交更快</string>
+    <string name="public_transport_no_route_title">非常抱歉，OsmAnd 无法找到符合您的设置的路线。</string>
+    <string name="public_transport_try_ped">尝试步行导航。</string>
+    <string name="public_transport_try_change_settings">尝试更改设置。</string>
+    <string name="public_transport_calc_pedestrian">规划步行路径</string>
+    <string name="public_transport_type">交通类型</string>
+    <string name="searching_gps">正在搜索 GPS</string>
+    <string name="coordinates_widget">坐标小工具</string>
+    <string name="markers_remove_dialog_msg">删除地图标记 \'%s\' 吗？</string>
+    <string name="edit_map_marker">编辑地图标记</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
+    <string name="add_intermediate_point">添加中点</string>
+    <string name="add_start_point">添加起始点</string>
+    <string name="intermediate_waypoint">中点</string>
+    <string name="on_foot">步行</string>
+    <string name="waiting_for_route_calculation">正在计算路径……</string>
+    <string name="app_mode_public_transport">公共交通</string>
+    <string name="avoid_roads_descr">在地图或下方的列表中选择一条您在导航中想避开的道路：</string>
+    <string name="simulate_navigation">模拟导航</string>
+    <string name="voice_announcements">语音播报</string>
+    <string name="intermediate_destinations">中途目的地</string>
+    <string name="arrive_at_time">在 %1$s 到达</string>
+    <string name="cubic_m">立方米</string>
+    <string name="metric_ton">吨</string>
+    <string name="shared_string_width">宽度</string>
+    <string name="shared_string_height">高度</string>
+    <string name="add_home">添加家</string>
+    <string name="add_work">添加工作地点</string>
+    <string name="work_button">工作地点</string>
+    <string name="previous_route">上一条路径</string>
+    <string name="show_more">显示更多</string>
+    <string name="tracks_on_map">已显示的路径</string>
+    <string name="time_of_day">当前时间</string>
+    <string name="by_transport_type">乘坐 %1$s</string>
+    <string name="step_by_step">逐步</string>
+    <string name="road_types">道路类型</string>
+    <string name="exit_at">退出于</string>
+    <string name="quick_action_show_hide_gpx_tracks">显示/隐藏GPX路径</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">点按此按钮以在地图中显示或隐藏已选中的GPX路径</string>
+    <string name="quick_action_gpx_tracks_hide">隐藏GPX路径</string>
+    <string name="quick_action_gpx_tracks_show">显示GPX路径</string>
+    <string name="add_destination_query">请先添加目的地</string>
+    <string name="release_3_3">• 新的“导向”屏幕：显示家与工作地点按钮、“上一条路径”按钮、活跃的GPX路径与标记，以及搜索记录
+\n
+\n • 额外的“路径详情”信息：道路类型及路面的种类、表面材质、陡峭度及平滑度
+\n
+\n • 支持各种交通工具的公交导航：地铁、巴士、轻轨……
+\n • 新的快捷操作：显示/隐藏路径及日间/夜间模式
+\n
+\n • 修复了德国、南非及魁北克部分区域显示为泛洪的问题
+\n
+\n • 对K ML及KMZ数据输入的额外支持
+\n
+\n • 修复了打开部分公交站点时程序崩溃的问题
+\n
+\n • 移除了免费版本中的Facebook及Firebase分析数据（不包含于OsmAnd+中）
+\n
+\n</string>
+    <string name="use_osm_live_public_transport_description">为OsmAnd Live启用公共交通的变更情况。</string>
+    <string name="add_start_and_end_points">添加起点与终点</string>
+    <string name="rendering_attr_surface_unpaved_name">未规划路径</string>
+    <string name="rendering_attr_surface_sand_name">沙地</string>
+    <string name="rendering_attr_surface_grass_name">草地</string>
+    <string name="rendering_attr_surface_ground_name">地面</string>
+    <string name="rendering_attr_surface_dirt_name">泥地</string>
+    <string name="rendering_attr_surface_ice_name">冰面</string>
+    <string name="rendering_attr_surface_salt_name">盐地</string>
+    <string name="rendering_attr_surface_snow_name">雪地</string>
+    <string name="rendering_attr_surface_paved_name">已规划路径</string>
+    <string name="rendering_attr_surface_concrete_name">混凝土地</string>
+    <string name="rendering_attr_surface_cobblestone_name">鹅卵石地</string>
+    <string name="rendering_attr_surface_paving_stones_name">铺路石</string>
+    <string name="rendering_attr_surface_stone_name">石地</string>
+    <string name="rendering_attr_smoothness_excellent_name">极佳</string>
+    <string name="rendering_attr_smoothness_good_name">优良</string>
+    <string name="rendering_attr_smoothness_intermediate_name">适中</string>
+    <string name="rendering_attr_smoothness_bad_name">劣质</string>
+    <string name="rendering_attr_smoothness_very_bad_name">极劣</string>
+    <string name="rendering_attr_smoothness_horrible_name">极端</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">超极端</string>
+    <string name="rendering_attr_smoothness_impassable_name">无法通行</string>
+    <string name="rendering_attr_highway_class_motorway_name">机动车道</string>
+    <string name="rendering_attr_highway_class_road_name">道路</string>
+    <string name="rendering_attr_highway_class_street_name">街道</string>
+    <string name="rendering_attr_highway_class_service_name">服务站</string>
+    <string name="rendering_attr_highway_class_footway_name">人行道</string>
+    <string name="rendering_attr_highway_class_track_name">轨道</string>
+    <string name="rendering_attr_highway_class_steps_name">台阶</string>
+    <string name="rendering_attr_highway_class_cycleway_name">自行车道</string>
+    <string name="angular_measeurement">角度单位</string>
+    <string name="angular_measeurement_descr">更改方位角测量方式。</string>
+    <string name="release_3_3_7">• 在公共交通的中转站间显示时间
+\n
+\n • 修正了路径详情的用户界面
+\n
+\n • 修复了导航菜单和路径详情中的暗色主题
+\n
+\n • 在测距中显示方位角
+\n
+\n</string>
+    <string name="files_failed">未能复制 %1$d 个文件 (%2$s).</string>
+    <string name="poi_cannot_be_found">无法找到节点或道路。</string>
 </resources>

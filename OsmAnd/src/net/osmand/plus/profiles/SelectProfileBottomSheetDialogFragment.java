@@ -102,11 +102,11 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_buttons_and_links_dark
-							: R.color.active_buttons_and_links_light);
+							? R.color.active_color_primary_dark
+							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color);
+						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -143,11 +143,11 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_buttons_and_links_dark
-							: R.color.active_buttons_and_links_light);
+							? R.color.active_color_primary_dark
+							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), R.color.icon_color);
+						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -182,11 +182,11 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(iconRes, nightMode
-							? R.color.active_buttons_and_links_dark
-							: R.color.active_buttons_and_links_light);
+							? R.color.active_color_primary_dark
+							: R.color.active_color_primary_light);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(iconRes, R.color.icon_color);
+						.getIcon(iconRes, R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
@@ -236,21 +236,26 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private List<IconResWithDescr> getProfileIcons() {
 		List<IconResWithDescr> icons = new ArrayList<>();
-		icons.add(new IconResWithDescr(R.drawable.ic_action_car_dark, R.string.rendering_value_car_name, "ic_action_car_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_car_dark, R.string.app_mode_car, "ic_action_car_dark", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_taxi, R.string.app_mode_taxi, "ic_action_taxi", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_shuttle_bus, R.string.app_mode_shuttle_bus, "ic_action_shuttle_bus", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark",false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_subway, R.string.app_mode_subway, "ic_action_subway", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_bicycle_dark, R.string.rendering_value_bicycle_name, "ic_action_bicycle_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_bicycle_dark, R.string.app_mode_bicycle, "ic_action_bicycle_dark", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_pedestrian_dark, R.string.rendering_value_pedestrian_name,"ic_action_pedestrian_dark", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian,"ic_action_pedestrian_dark", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_plugin_skimaps, R.string.routing_profile_ski, "ic_plugin_skimaps", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_skiing, R.string.app_mode_skiing, "ic_action_skiing", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_helicopter, R.string.app_mode_helicopter, "ic_action_helicopter", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad", false));
 		return icons;
 	}
 

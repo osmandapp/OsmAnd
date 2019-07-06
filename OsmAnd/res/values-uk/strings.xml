@@ -556,10 +556,10 @@
     <string name="mark_final_location_first">Вкажіть пункт призначення</string>
     <string name="get_directions">Маршрут</string>
     <string name="opening_hours">Робочі години</string>
-    <string name="opening_changeset">Відкриття пакету правок…</string>
-    <string name="closing_changeset">Закриття пакету правок…</string>
-    <string name="commiting_node">Збереження об’єкта…</string>
-    <string name="loading_poi_obj">Звантаження POI…</string>
+    <string name="opening_changeset">Відкривається набір змін…</string>
+    <string name="closing_changeset">Закривається набір змін…</string>
+    <string name="commiting_node">Надсилання вузла…</string>
+    <string name="loading_poi_obj">Завантаження POI…</string>
     <string name="auth_failed">Помилка авторизації</string>
     <string name="failed_op">помилка</string>
     <string name="converting_names">Конвертація місцевих/англійських назв…</string>
@@ -1465,8 +1465,7 @@
     <string name="waypoint_visit_before">Відвідати, перш ніж</string>
     <string name="simulate_your_location">Моделювання вашого місця розташування</string>
     <string name="drawer">Суцільним списком</string>
-    <string name="short_location_on_map">Шир %1$s↵
-Дов %2$s</string>
+    <string name="short_location_on_map">Шир %1$s\nДов %2$s</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше.</string>
     <string name="routing_settings_2">Налаштування навігації</string>
     <string name="general_settings_2">Загальні параметри</string>
@@ -3032,4 +3031,91 @@
     <string name="public_transport_try_change_settings">Спробуйте змінити налаштування.</string>
     <string name="public_transport_calc_pedestrian">Розрахувати пішохідний маршрут</string>
     <string name="public_transport_type">Тип транспорту</string>
+    <string name="searching_gps">Пошук GPS</string>
+    <string name="coordinates_widget">Віджет координат</string>
+    <string name="rate_dialog_descr">Будь ласка, приділіть нам 30 секунд, залиште свій відгук та оцініть нашу роботу на Google Play.</string>
+    <string name="button_rate">Оцінити</string>
+    <string name="shared_string_privacy_policy">Політика конфіденційності</string>
+    <string name="help_us_make_osmand_better">Допоможіть нам зробити OsmAnd кращим!</string>
+    <string name="make_osmand_better_descr">Дозволити OsmAnd збирати та обробляти анонімні дані про використання додатку. Ми не збираємо і не зберігаємо дані про ваше розташування або розташування, які ви переглядаєте на мампі.
+\n
+\nВи завжди можете змінити свій вибір через Налаштування &gt; Конфіденційність та безпека.</string>
+    <string name="choose_data_to_share">Оберіть, даними якого типу ви хотіли б поділитися:</string>
+    <string name="downloaded_maps">Завантажені мапи</string>
+    <string name="visited_screens">Відвідані екрани</string>
+    <string name="collected_data_descr">Список даних, якими ви хочете поділитися з OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Ми збираємо ці дані, щоб зрозуміти, мапи яких областей і країн є найбільш популярними.</string>
+    <string name="visited_screens_collect_descr">Ми збираємо ці дані, щоб зрозуміти, які можливості OsmAnd є найбільш популярними.</string>
+    <string name="privacy_and_security_change_descr">Натискаючи \"Дозволити\", ви погоджуєтесь з нашими %1$s</string>
+    <string name="settings_privacy_and_security">Конфіденційність та безпека</string>
+    <string name="settings_privacy_and_security_desc">Оберіть ваші дані для надсилання нам</string>
+    <string name="shared_string_no_thank_you">Ні, дякую</string>
+    <string name="shared_string_allow">Дозволити</string>
+    <string name="profile_name_hint">Назва профілю</string>
+    <string name="nav_type_hint">Тип навігації</string>
+    <string name="app_mode_taxi">Таксі</string>
+    <string name="app_mode_shuttle_bus">Приміський автобус</string>
+    <string name="app_mode_subway">Метро</string>
+    <string name="app_mode_horse">Кінь</string>
+    <string name="app_mode_helicopter">Гелікоптер</string>
+    <string name="osmand_routing_promo">Ви можете додати власну модифіковану версію файлу routing.xml до теки ..osmand/routing</string>
+    <string name="app_mode_skiing">Лижі</string>
+    <string name="base_profile_descr_ski">Лижі</string>
+    <string name="show_compass_ruler">Показати компас-лінійку</string>
+    <string name="hide_compass_ruler">Приховати компас-лінійку</string>
+    <string name="select_icon_profile_dialog_title">Оберіть піктограму</string>
+    <string name="settings_routing_mode_string">Режим: %s</string>
+    <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
+    <string name="routing_profile_ski">Лижі</string>
+    <string name="profile_type_descr_string">Тип: %s</string>
+    <string name="profile_type_base_string">Базовий профіль</string>
+    <string name="profile_alert_need_routing_type_title">Оберіть тип навігації</string>
+    <string name="profile_alert_need_routing_type_msg">Щоб створити новий профіль додатку, потрібно обрати тип навігації</string>
+    <string name="profile_alert_need_profile_name_title">Введіть назву профілю</string>
+    <string name="profile_alert_need_profile_name_msg">Назва профілю не може бути порожньою!</string>
+    <string name="profile_alert_duplicate_name_title">Дублікат назви</string>
+    <string name="profile_alert_duplicate_name_msg">Профіль з такою назвою вже існує</string>
+    <string name="profile_alert_cant_delete_base">Ви не можете видалити базові профілі OsmAnd</string>
+    <string name="profile_alert_need_save_title">Зберегти зміни</string>
+    <string name="profile_alert_need_save_msg">Перед продовженням потрібно зберегти зміни профілю</string>
+    <string name="profile_alert_delete_title">Видалити профіль</string>
+    <string name="profile_alert_delete_msg">Ви дійсно хочете видалити профіль %s\?</string>
+    <string name="select_base_profile_dialog_title">Оберіть базовий профіль</string>
+    <string name="process_downloading_service">Служба завантаження OsmAnd</string>
+    <string name="shared_string_color_magenta">Пурпуровий</string>
+    <string name="shared_string_icon">Піктограма</string>
+    <string name="collected_data">Зібрані дані</string>
+    <string name="press_again_to_change_the_map_orientation">Натисніть ще раз для зміни орієнтації мапи</string>
+    <string name="shared_string_min_speed">Мінімальна швидкість</string>
+    <string name="shared_string_max_speed">Максимальна швидкість</string>
+    <string name="default_speed_setting_title">Типова швидкість</string>
+    <string name="default_speed_setting_descr">Змінити налаштування типової швидкості</string>
+    <string name="minmax_speed_dialog_title">Встановити мінімальну/максимальну швидкість</string>
+    <string name="default_speed_dialog_msg">Використовується для розрахунків очікуваного часу прибуття під час слідування по маршруту</string>
+    <string name="new_profile">Новий профіль</string>
+    <string name="shared_string_crash">Збій</string>
+    <string name="last_launch_crashed">Під час останнього запуску OsmAnd сталася помилка. Допоможіть нам покращити OsmAnd - надішліть повідомлення про помилку.</string>
+    <string name="app_mode_ufo">НЛО</string>
+    <string name="release_3_4">• Профілі додатку: створюйте ваш власний профіль з довільною піктограмою та кольором для ваших потреб
+\n
+\n• Додано налаштування для типової та мінімальної/максимальної швидкостей для профілів
+\n
+\n• Додано віджет з поточними координатами
+\n
+\n• Додано можливість відображати на мапі компас з радіус-лінійкою
+\n
+\n• Покращено завантаження мап у тлі
+\n
+\n• Виправлено вибір мови Wikipedia
+\n
+\n• Виправлено поведінку кнопки компасу під час навігації
+\n
+\n• Виправлено помилки
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Персональний транспортер</string>
+    <string name="app_mode_monowheel">Моноколесо</string>
+    <string name="app_mode_scooter">Самокат</string>
+    <string name="precision_hdop_and_vdop">Точність по горизонталі: %1$s, по вертикалі: %2$s</string>
+    <string name="precision_hdop">Точність по горизонталі: %s</string>
 </resources>

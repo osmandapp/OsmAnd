@@ -797,13 +797,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (walkTime < 60) {
 			walkTime = 60;
 		}
-		SpannableStringBuilder spannable = new SpannableStringBuilder("~");
+		SpannableStringBuilder spannable = new SpannableStringBuilder(getString(R.string.shared_string_walk)).append(" ");
 		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = spannable.length();
-		spannable.append(OsmAndFormatter.getFormattedDuration(walkTime, app)).append(" ");
+		spannable.append("~").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = spannable.length();
-		spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
+		spannable.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
 		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, spannable, imagesContainer, new OnClickListener() {
@@ -838,13 +838,13 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 	@ColorInt
 	private int getActiveColor() {
 		OsmandApplication app = requireMyApplication();
-		return ContextCompat.getColor(app, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		return ContextCompat.getColor(app, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
 		OsmandApplication app = requireMyApplication();
-		return ContextCompat.getColor(app, isNightMode() ? R.color.main_font_dark : R.color.main_font_light);
+		return ContextCompat.getColor(app, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 	}
 
 	@ColorInt
@@ -1513,7 +1513,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			llHorLineParams.setMargins(dpToPx(64), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_dark : R.color.divider_light));
+		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_color_dark : R.color.divider_color_light));
 		((LinearLayout) view).addView(horizontalLine);
 	}
 

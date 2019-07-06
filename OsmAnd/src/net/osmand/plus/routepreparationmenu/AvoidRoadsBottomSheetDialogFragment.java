@@ -138,7 +138,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			final View buttonView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_btn, null);
 			TextView buttonDescription = (TextView) buttonView.findViewById(R.id.button_descr);
 			buttonDescription.setText(R.string.shared_string_select_on_map);
-			buttonDescription.setTextColor(getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+			buttonDescription.setTextColor(getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 
 			FrameLayout buttonContainer = buttonView.findViewById(R.id.button_container);
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -203,7 +203,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 			TextView titleTv = (TextView) view.findViewById(R.id.title);
 			titleTv.setText(name);
-			titleTv.setTextColor(getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+			titleTv.setTextColor(getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));

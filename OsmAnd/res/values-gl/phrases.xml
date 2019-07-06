@@ -83,7 +83,7 @@
     <string name="poi_aerodrome">Aeroporto</string>
     <string name="poi_helipad">Heliporto</string>
     <string name="poi_lighthouse">Faro</string>
-    <string name="poi_bicycle_rental">Aluguer de bicicletas</string>
+    <string name="poi_bicycle_rental">Alugamento de bicicletas</string>
     <string name="poi_bicycle_parking">Aparcadoiro de bicicletas</string>
     <string name="poi_aerialway_cable_car">Tranvía</string>
     <string name="poi_aerialway_gondola">Góndola</string>
@@ -320,7 +320,7 @@
     <string name="poi_tattoo">Salón de tatuaxes</string>
     <string name="poi_dry_cleaning">Limpeza en seco</string>
     <string name="poi_laundry">Lavandaría</string>
-    <string name="poi_car_rental">Aluguer de automóbiles</string>
+    <string name="poi_car_rental">Alugamento de automóbiles</string>
     <string name="poi_toilets">Servizos</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Prostíbulo</string>
@@ -601,7 +601,7 @@
     <string name="poi_piste">Pista</string>
     <string name="poi_piste_downhill">Pista de esquí</string>
     <string name="poi_piste_nordic">Pista de esquí nórdico</string>
-    <string name="poi_ski_rental">Alugueiro de esquís</string>
+    <string name="poi_ski_rental">Alugamento de esquís</string>
     <string name="poi_gallery">Galería de arte</string>
     <string name="poi_stripclub">Club de striptease</string>
     <string name="poi_ski_resort">Estación de esquí</string>
@@ -1718,7 +1718,7 @@
     <string name="poi_bridge_bicycle">Ponte ciclista</string>
     <string name="poi_service_bicycle_retail_no">Venda de bicicletas: non</string>
     <string name="poi_service_bicycle_repair_no">Arranxo de bicicletas: non</string>
-    <string name="poi_service_bicycle_rental_no">Aluguer de bicicletas: non</string>
+    <string name="poi_service_bicycle_rental_no">Alugamento de bicicletas: non</string>
     <string name="poi_service_bicycle_pump_no">Inchado de bicicletas: non</string>
     <string name="poi_service_bicycle_diy_no">Ferramentas para autoarranxado: non</string>
     <string name="poi_service_bicycle_cleaning_no">Limpeza de bicicletas: non</string>
@@ -1745,7 +1745,7 @@
     <string name="poi_seasonal">Estacional</string>
     <string name="poi_motorcycle_services">Servizos</string>
     <string name="poi_animal_shelter_purpose">Obxectivo</string>
-    <string name="poi_boat_rental_type">Aluguer de embarcacións</string>
+    <string name="poi_boat_rental_type">Alugamento de embarcacións</string>
     <string name="poi_operational_status">Estado operativo</string>
     <string name="poi_water_purification">Depuración das aguas</string>
     <string name="poi_water_place_access">Acceso á fonte da auga</string>
@@ -2345,7 +2345,7 @@
     <string name="poi_shop_additional_yes">Con tenda</string>
     <string name="poi_service_bicycle_retail_yes">Venda</string>
     <string name="poi_service_bicycle_repair_yes">Arranxo</string>
-    <string name="poi_service_bicycle_rental_yes">Aluguer</string>
+    <string name="poi_service_bicycle_rental_yes">Alugamento</string>
     <string name="poi_service_bicycle_pump_yes">Inchadoiro</string>
     <string name="poi_service_bicycle_diy_yes">Ferramentas para o autoarranxo</string>
     <string name="poi_service_bicycle_cleaning_yes">Limpeza</string>
@@ -3139,8 +3139,8 @@
     <string name="poi_motorcycle_sales_yes">Venda</string>
     <string name="poi_motorcycle_sales_no">Venda: non</string>
     <string name="poi_motorcycle_sales_used">Venda: usado</string>
-    <string name="poi_motorcycle_rental_yes">Aluguer</string>
-    <string name="poi_motorcycle_rental_no">Aluguer: non</string>
+    <string name="poi_motorcycle_rental_yes">Alugamento</string>
+    <string name="poi_motorcycle_rental_no">Alugamento: non</string>
     <string name="poi_motorcycle_repair_yes">Arranxo</string>
     <string name="poi_motorcycle_repair_no">Arranxo: non</string>
     <string name="poi_motorcycle_parts_yes">Pezas ou repostos</string>
@@ -3191,7 +3191,7 @@
     <string name="poi_reservation_no">Reserva: non</string>
     <string name="poi_reservation_members_only">Reserva: só membros</string>
     <string name="poi_beds">Leitos</string>
-    <string name="poi_boat_rental">Aluguer de embarcacións</string>
+    <string name="poi_boat_rental">Alugamento de embarcacións</string>
     <string name="poi_boat_motorboat_rental_no">Embarcacións a motor: non</string>
     <string name="poi_boat_houseboat_rental_no">Casas flotantes: non</string>
     <string name="poi_boat_pedalboat_rental_no">Embarcacións a pedais: non</string>
@@ -3575,4 +3575,25 @@
     <string name="poi_climbing_crag">Si</string>
     <string name="reddit">Reddit</string>
     <string name="poi_rescue_box">Caixa de rescate</string>
+    <string name="poi_hazard_additional_erosion">Perigo: erosión</string>
+    <string name="poi_hazard_additional_rockfall">Perigo: desprendemento de rochas</string>
+    <string name="poi_hazard_additional_nuclear">Perigo: nuclear</string>
+    <string name="poi_hazard_additional_flood">Perigo: inundación</string>
+    <string name="poi_hazard_additional_avalanche">Perigo: alude</string>
+    <string name="poi_hazard_additional_minefield">Perigo: campo minado</string>
+    <string name="poi_hazard_additional_contamination">Perigo: contaminación</string>
+    <string name="poi_defibrillator_location">Localización</string>
+    <string name="poi_changing_table_yes">Cambiador de cueiros: si</string>
+    <string name="poi_changing_table_no">Cambiador de cueiros: non</string>
+    <string name="poi_changing_table_limited">Cambiador de cueiros: limitado</string>
+    <string name="poi_changing_table_location_room">Localización do cambiador de cueiros: sala aparte</string>
+    <string name="poi_changing_table_location_male_toilet">Localización do cambiador de cueiros: no servizo masculino</string>
+    <string name="poi_changing_table_location_female_toilet">Localización do cambiador de cueiros: no servizo feminino</string>
+    <string name="poi_changing_table_location_unisex_toilet">Localización do cambiador de cueiros: no servizo unisex</string>
+    <string name="poi_changing_table_count">Cantidade de cambiadores de cueiros</string>
+    <string name="poi_changing_table_fee_yes">Taxa do cambiador de cueiros: si</string>
+    <string name="poi_changing_table_fee_no">Taxa do cambiador de cueiros: non</string>
+    <string name="poi_charcoal_pile">Morea de carbón</string>
+    <string name="poi_historic_tank">Tanque histórico</string>
+    <string name="poi_hookah_lounge">Bar de cachimbas</string>
 </resources>

@@ -72,7 +72,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd Mapoj kaj Navigado</string>
     <string name="shared_string_reverse_order">Inversa ordigo</string>
     <string name="switch_start_finish">Anstataŭigi komencpunkton per finpunkto</string>
-    <string name="rendering_attr_hideIcons_name">Piktogramoj de interesejoj</string>
+    <string name="rendering_attr_hideIcons_name">Emblemoj de interesejoj</string>
     <string name="item_removed">Elemento forigita</string>
     <string name="n_items_removed">elementoj forigitaj</string>
     <string name="shared_string_undo_all">Malfari ĉiujn</string>
@@ -383,7 +383,7 @@
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
     <string name="settings_privacy">Privateco</string>
-    <string name="map_locale">Mapa lingvo</string>
+    <string name="map_locale">Lingvo de mapo</string>
     <string name="download_tab_updates">Ĝisdatigoj</string>
     <string name="everything_up_to_date">Ĉiuj dosieroj ĝisdataj</string>
     <string name="int_hour">h</string>
@@ -575,7 +575,7 @@ Lon: %2$s</string>
     <string name="fav_point_dublicate">Duplikata nomo de ŝatata punkto</string>
     <string name="fav_point_dublicate_message">Difinita nomo de ŝatata punkto estas jam uzata, ĝi estas ŝanĝita al %1$s por eviti duplikatadon.</string>
     <string name="text_size_descr">Agordi grandon de teksto sur la mapo.</string>
-    <string name="text_size">Teksta grando</string>
+    <string name="text_size">Grando de teksto</string>
     <string name="traffic_warning_border_control">Landlima kontrolado</string>
     <string name="traffic_warning_payment">Vojpagejo</string>
     <string name="traffic_warning_stop">Stop\' signo</string>
@@ -834,7 +834,7 @@ Lon: %2$s</string>
     <string name="app_modes_choose">Profiloj de aplikaĵo</string>
     <string name="app_modes_choose_descr">Elekti profilojn por vidigi en la aplikaĵo.</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
-    <string name="app_mode_hiking">Piedirado</string>
+    <string name="app_mode_hiking">Marŝado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
     <string name="app_mode_boat">Boato</string>
     <string name="app_mode_aircraft">Aviadilo</string>
@@ -1111,7 +1111,7 @@ Lon: %2$s</string>
     <string name="bg_service_sleep_mode_on">Ĉesigi\n fon-laboradon de aplikaĵo</string>
     <string name="gps_wakeup_interval">GPS-a vekintervalo: %s</string>
     <string name="int_continuosly">Konstanta</string>
-    <string name="screen_is_locked">Frapetu la piktogramon de pendseruro por malŝlosi ekranon</string>
+    <string name="screen_is_locked">Frapetu la emblemon de pendseruro por malŝlosi ekranon</string>
     <string name="map_widget_top_text">Stratnomo</string>
     <string name="map_widget_config">Agordi ekranon</string>
     <string name="map_widget_back_to_loc">Kie mi estas</string>
@@ -1412,7 +1412,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_indexes_cat_poi">Interesej-datumoj</string>
     <string name="ttsvoice">Parolsintezita voĉo</string>
     <string name="search_offline_clear_search">Nova serĉo</string>
-    <string name="map_text_size">Teksta grando</string>
+    <string name="map_text_size">Grando de teksto</string>
     <string name="map_text_size_descr">Elekti grandon de teksto por nomoj sur la mapo.</string>
     <string name="trace_rendering">Senerarigaj informoj pri bildigado</string>
     <string name="trace_rendering_descr">Montri informojn pri efikeco de bildigado.</string>
@@ -1495,9 +1495,9 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="use_english_names">Uzi anglajn nomojn sur mapoj</string>
     <string name="use_english_names_descr">Aktivigu por uzi anglajn nomojn anstataŭ lokajn.</string>
     <string name="search_address">Serĉi adreson</string>
-    <string name="app_mode_car">Aŭte</string>
-    <string name="app_mode_bicycle">Bicikle</string>
-    <string name="app_mode_pedestrian">Perpiede</string>
+    <string name="app_mode_car">Aŭto</string>
+    <string name="app_mode_bicycle">Biciklo</string>
+    <string name="app_mode_pedestrian">Piediranto</string>
     <string name="get_plugin">Elŝuti</string>
     <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al ci?</string>
     <string name="app_name_osmand">OsmAnd</string>
@@ -1534,7 +1534,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (bonvolu restarti OsmAnd post ŝanĝo).</string>
     <string name="unit_of_length">Unuoj de longo</string>
-    <string name="unit_of_length_descr">Ŝanĝi unuon por reprezenti distancoj.</string>
+    <string name="unit_of_length_descr">Ŝanĝi unuojn por reprezenti distancoj.</string>
     <string name="si_mi_feet">Mejloj/futoj</string>
     <string name="si_mi_yard">Mejloj/jardoj</string>
     <string name="si_km_m">Kilometroj/metroj</string>
@@ -3004,13 +3004,14 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_avoid_subway_description">Eviti subterajn vagonarojn kaj fervojon malpezan</string>
     <string name="routing_attr_avoid_ferry_name">Eviti pramojn</string>
     <string name="routing_attr_avoid_ferry_description">Eviti pramojn</string>
-    <string name="release_3_3_7">• montri tempon inter transveturiliĝojn de publika transporto
-\n
-\n• korektita uzant‑fasado por detaloj pri kurso
-\n
-\n• malhela etoso: riparita menuo “navigi” kaj detaloj pri kurso
-\n
+    <string name="release_3_3_7">• montri tempon inter transveturiliĝoj de publika transporto 
+\n 
+\n• korektita uzant‑fasado por detaloj pri kurso 
+\n 
+\n• malhela etoso: riparita menuo “navigi” kaj detaloj pri kurso 
+\n 
 \n• montri azimuton ĉe distanc‑mezurilo
+\n
 \n</string>
     <string name="send_log">Sendi erar‑protokolon</string>
     <string name="files_moved">Movis %1$d dosierojn (%2$s).</string>
@@ -3025,4 +3026,141 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="public_transport_try_change_settings">Provu ŝanĝi agordojn.</string>
     <string name="public_transport_calc_pedestrian">Kalkuli piedirantan kurson</string>
     <string name="public_transport_type">Speco de transporto</string>
+    <string name="searching_gps">Determinado de pozicio…</string>
+    <string name="coordinates_widget">Fenestraĵo de koordinatoj</string>
+    <string name="press_again_to_change_the_map_orientation">Premu ree por ŝanĝi map‑orientiĝon</string>
+    <string name="rate_dialog_descr">Bonvolu dediĉi 30 sekundojn por kunhavigi vian opinion kaj taksi nian laboron ĉe Google Play.</string>
+    <string name="button_rate">Taksi</string>
+    <string name="shared_string_privacy_policy">Privateca politiko</string>
+    <string name="help_us_make_osmand_better">Helpu al ni igi OsmAnd pli bona!</string>
+    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado de la aplikaĵo. Ni ne kolektos kaj konservos datumojn pri via pozicio aŭ pri serĉataj lokoj.
+\n
+\nVi ĉiam povos ŝanĝi tion en agordoj → privateco kaj sekureco.</string>
+    <string name="choose_data_to_share">Elektu datumojn por kunhavigi:</string>
+    <string name="downloaded_maps">Elŝutitaj mapoj</string>
+    <string name="visited_screens">Vidigitaj ekranoj</string>
+    <string name="collected_data_descr">Datumoj por kunhavigi kun programistoj de OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Ni kolektas tiujn datumojn por ekkoni mapojn de kiuj regionoj kaj landoj estas la plej popularaj.</string>
+    <string name="visited_screens_collect_descr">Ni kolektas tiujn datumojn por ekkoni la plej popularajn eblaĵojn de OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Frapetu “permesi” por akcepti nian %1$s</string>
+    <string name="settings_privacy_and_security">Privateco kaj sekureco</string>
+    <string name="settings_privacy_and_security_desc">Elekti datumojn por kunhavigi kun ni</string>
+    <string name="shared_string_no_thank_you">Ne, mi ne volas</string>
+    <string name="shared_string_allow">Permesi</string>
+    <string name="profile_name_hint">Nomo de profilo</string>
+    <string name="nav_type_hint">Speco de navigo</string>
+    <string name="app_mode_taxi">Taksio</string>
+    <string name="app_mode_shuttle_bus">Aŭtobuso ir-reira</string>
+    <string name="app_mode_subway">Metroo</string>
+    <string name="app_mode_horse">Ĉevalo</string>
+    <string name="app_mode_helicopter">Helikoptero</string>
+    <string name="osmand_routing_promo">Vi povas aldoni propran modifitan version de routing.xml al “..osmand/routing”</string>
+    <string name="app_mode_skiing">Skiado</string>
+    <string name="base_profile_descr_ski">Skiado</string>
+    <string name="show_compass_ruler">Montri mezurilon de kompaso</string>
+    <string name="hide_compass_ruler">Kaŝi mezurilon de kompaso</string>
+    <string name="select_icon_profile_dialog_title">Elekti emblemon</string>
+    <string name="settings_routing_mode_string">Reĝimo: %s</string>
+    <string name="settings_derived_routing_mode_string">Reĝimo de uzanto bazita sur %s</string>
+    <string name="routing_profile_ski">Skiado</string>
+    <string name="profile_type_descr_string">Speco: %s</string>
+    <string name="profile_type_base_string">Ĉefa profilo</string>
+    <string name="profile_alert_need_routing_type_title">Elektu specon de navigado</string>
+    <string name="profile_alert_need_routing_type_msg">Vi devas elekti specon de navigado por krei novan profilon</string>
+    <string name="profile_alert_need_profile_name_title">Entajpu nomon por profilo</string>
+    <string name="profile_alert_need_profile_name_msg">Nomo de profilo ne estu malplena!</string>
+    <string name="profile_alert_duplicate_name_title">Nomo neebla</string>
+    <string name="profile_alert_duplicate_name_msg">Jam ekzistas profilo kun la sama nomo</string>
+    <string name="profile_alert_cant_delete_base">Ne eblas forigi implicitajn profilojn de OsmAnd</string>
+    <string name="profile_alert_need_save_title">Konservi ŝanĝojn</string>
+    <string name="profile_alert_need_save_msg">Vi devas konservi ŝanĝojn al la profilo antaŭ pluigi</string>
+    <string name="profile_alert_delete_title">Forigi profilon</string>
+    <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
+    <string name="select_base_profile_dialog_title">Elektu bazan profilon</string>
+    <string name="select_base_profile_dialog_message">Propra aplikaĵa profilo estu bazita sur iu implicita profilo. Elektita profilo difinas bazajn agordojn: fenestraĵojn, unuoj de longo kaj distanco. Sube nomo de profilo troviĝas taŭgaj navigadaj profiloj por ĉiu aplikaĵa profilo.</string>
+    <string name="select_nav_profile_dialog_title">Elektu navigadan profilon</string>
+    <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
+    <string name="base_profile_descr_bicycle">Biciklo, malgranda motorbiciklo, ĉevalo</string>
+    <string name="base_profile_descr_pedestrian">Promenado, marŝado, kurado</string>
+    <string name="base_profile_descr_public_transport">Ĉiuj specoj de publika transporto</string>
+    <string name="base_profile_descr_boat">Ŝipo, remado, velado</string>
+    <string name="base_profile_descr_aircraft">Aviadilo, glisilo</string>
+    <string name="routing_profile_geocoding">Koordinat-trovado</string>
+    <string name="routing_profile_straightline">Rekta linio</string>
+    <string name="routing_profile_broutrer">BRouter (malkonekte)</string>
+    <string name="osmand_default_routing">Voj‑difinilo OsmAnd</string>
+    <string name="custom_routing">Propra profilo de voj‑difinado</string>
+    <string name="special_routing_type">Speciala voj‑difinado</string>
+    <string name="third_party_routing_type">Ekstera voj‑difinilo</string>
+    <string name="application_profiles_descr">Elekti profilojn videblajn en la aplikaĵo.</string>
+    <string name="application_profiles">Profiloj de aplikaĵo</string>
+    <string name="zoom_by_wunderlinq_descr">Rulumu supren/malsupren por ŝanĝi pligrandigon de mapo. Eskap-klavo revenas al al aplikaĵo WunderLINQ App.</string>
+    <string name="zoom_by_wunderlinq">Stiri per WunderLINQ</string>
+    <string name="quick_action_need_to_add_item_to_list">Vi devas aldoni almenaŭ unu elementon al listo en agordoj de rapida ago</string>
+    <string name="routing_attr_piste_type_downhill_name">Skiado alpa/malsuprenira</string>
+    <string name="routing_attr_piste_type_downhill_description">Skivojoj por skiado alpa (malsuprenira) kaj vojetoj al skitelferoj.</string>
+    <string name="routing_attr_piste_type_nordic_name">Skiado nordia/skikurada</string>
+    <string name="routing_attr_piste_type_nordic_description">Skivojoj por skiado nordia (skikurada).</string>
+    <string name="routing_attr_piste_type_skitour_name">Skiado ekskursa</string>
+    <string name="routing_attr_piste_type_skitour_description">Skivojoj ekskursaj.</string>
+    <string name="routing_attr_piste_type_sled_name">Glitveturiloj</string>
+    <string name="routing_attr_piste_type_sled_description">Deklivoj por glitveturado (sledado).</string>
+    <string name="routing_attr_allow_intermediate_name">Permesi mez-facilajn skivojojn</string>
+    <string name="routing_attr_allow_intermediate_description">Malfaciletaj skivojoj kaj krutaj segmentoj. Enhavas malhelpaĵojn, kiuj estu evititaj.</string>
+    <string name="routing_attr_allow_advanced_name">Permesi malfacilajn skivojojn</string>
+    <string name="routing_attr_allow_advanced_description">Malfacilaj skivojoj kun danĝeraj malhelpaĵoj kaj krutaj segmentoj.</string>
+    <string name="routing_attr_allow_expert_name">Permesi malfacilegajn skivojojn</string>
+    <string name="routing_attr_allow_expert_description">Tre malfacilajn vojojn kun danĝerajn malhelpaĵojn kaj ĉirkaŭaĵon.</string>
+    <string name="routing_attr_allow_skating_only_name">Permesi skivojojn nur por glitkurado</string>
+    <string name="routing_attr_allow_skating_only_description">Nur skivojoj preparitaj por glitkurado (sketado), sen klasikaj skivojoj.</string>
+    <string name="routing_attr_allow_classic_only_name">Permesi nur klasikajn skivojojn</string>
+    <string name="routing_attr_allow_classic_only_description">Skivojoj preparitaj nur por klasika skiado sen glitkurado. Ampleksas skivojojn preparitaj per malgranda motorsledo kaj skivojoj permane preparitaj de skiistoj.</string>
+    <string name="routing_attr_difficulty_preference_name">Preferata malfacilo</string>
+    <string name="routing_attr_difficulty_preference_description">Preferi skivojojn de tiu malfacilo, sed eblas difini kurson per pli (mal)facilaj skivojoj, se la rezulta kurso estos pli mallonga.</string>
+    <string name="routing_attr_freeride_policy_name">Ekster skivojoj</string>
+    <string name="routing_attr_freeride_policy_description">Skivojoj neoficialaj, nepreparataj kaj nekontrolataj je vespero. Vi eniras nur sub via risko.</string>
+    <string name="process_downloading_service">Servo de elŝutoj OsmAnd</string>
+    <string name="shared_string_color_magenta">Fuksina</string>
+    <string name="shared_string_icon">Emblemo</string>
+    <string name="collected_data">Kolektataj datumoj</string>
+    <string name="shared_string_min_speed">Minimuma rapido</string>
+    <string name="shared_string_max_speed">Maksimuma rapido</string>
+    <string name="default_speed_setting_title">Kutima rapido</string>
+    <string name="default_speed_setting_descr">Difini kutiman rapidon</string>
+    <string name="minmax_speed_dialog_title">Agordi min./maks. rapidon</string>
+    <string name="default_speed_dialog_msg">Uzata por kalkuli esperatan tempon de alveno dum navigadi</string>
+    <string name="new_profile">Nova profilo</string>
+    <string name="shared_string_crash">Paneo</string>
+    <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon, sendu mesaĝon pri eraro.</string>
+    <string name="app_mode_ufo">NIFO</string>
+    <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
+\n 
+\n• agordo por aldoni kutiman, minimuman kaj maksimuman rapidon por profilo (por kalkuli esperatan alvenan tempon) 
+\n 
+\n• fenestraĵo montranta koordinatojn 
+\n 
+\n• eblo montri kompason kun angul-mezurilo sur la mapo 
+\n 
+\n• plibonigita elŝuto de mapoj fone 
+\n 
+\n• riparita elekto de lingvo por Vikipedio 
+\n 
+\n• riparita sinteno de kompaso butono dum navigado 
+\n 
+\n• riparoj de aliaj eraroj
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Persona transportilo</string>
+    <string name="app_mode_monowheel">Unurada veturilo</string>
+    <string name="app_mode_scooter">Skotero</string>
+    <string name="precision_hdop_and_vdop">Precizo horizontale: %1$s, vertikale: %2$s</string>
+    <string name="precision_hdop">Precizo horizontale: %s</string>
+    <string name="app_mode_offroad">Ekstervoja aŭtomobilo</string>
+    <string name="edit_profile_setup_title">Agordi profilon</string>
+    <string name="edit_profile_setup_subtitle">Ĉiu profilo havas siajn proprajn agordojn</string>
+    <string name="edit_profile_setup_map_subtitle">Elekti implicitajn agordojn pri mapo por profilo</string>
+    <string name="edit_profile_screen_options_subtitle">Elekti implicitajn agordojn pri ekrano por profilo</string>
+    <string name="edit_profile_nav_settings_subtitle">Elekti implicitajn agordojn pri navigado por profilo</string>
+    <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron da ŝanĝoj de transportiloj</string>
+    <string name="routing_attr_max_num_changes_name">Nombro da transveturiliĝoj</string>
 </resources>

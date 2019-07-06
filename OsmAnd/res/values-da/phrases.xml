@@ -3589,4 +3589,26 @@
     <string name="poi_rescue_box">Redningsboks</string>
     <string name="poi_climbing_crag">Ja</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_climbing_crag_filter">Klatring</string>
+    <string name="poi_hazard_additional_erosion">Fare: erosion</string>
+    <string name="poi_hazard_additional_rockfall">Fare: stenskred</string>
+    <string name="poi_hazard_additional_nuclear">Fare: nuklear</string>
+    <string name="poi_hazard_additional_flood">Fare: oversvømmelse</string>
+    <string name="poi_hazard_additional_avalanche">Fare: lavine</string>
+    <string name="poi_hazard_additional_minefield">Fare: minefelt</string>
+    <string name="poi_hazard_additional_contamination">Fare: kontaminering</string>
+    <string name="poi_defibrillator_location">Placering</string>
+    <string name="poi_changing_table_yes">Puslebord: ja</string>
+    <string name="poi_changing_table_no">Puslebord: nej</string>
+    <string name="poi_changing_table_limited">Puslebord: begrænset</string>
+    <string name="poi_changing_table_location_room">Puslebordsplacering: værelse</string>
+    <string name="poi_changing_table_location_male_toilet">Puslebordsplacering: herretoilet</string>
+    <string name="poi_changing_table_location_female_toilet">Puslebordsplacering: dametoilet</string>
+    <string name="poi_changing_table_location_unisex_toilet">Puslebordsplacering: unisextoilet</string>
+    <string name="poi_changing_table_count">Puslebord antal</string>
+    <string name="poi_changing_table_fee_yes">Puslebordsgebyr: ja</string>
+    <string name="poi_changing_table_fee_no">Puslebordsgebyr: nej</string>
+    <string name="poi_charcoal_pile">Trækulsbunke</string>
+    <string name="poi_historic_tank">Historisk kampvogn</string>
+    <string name="poi_hookah_lounge">Hookah lounge</string>
 </resources>

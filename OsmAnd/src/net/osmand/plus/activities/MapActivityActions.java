@@ -974,9 +974,9 @@ public class MapActivityActions implements DialogProvider {
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
 		if (nightMode) {
-			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_dark));
+			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.list_background_color_dark));
 		} else {
-			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.bg_color_light));
+			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.list_background_color_light));
 		}
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
 		menuItemsListView.removeFooterView(drawerOsmAndFooter);

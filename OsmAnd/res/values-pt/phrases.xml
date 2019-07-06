@@ -981,7 +981,7 @@
     <string name="poi_boat_sharing">Compartilhamento de barcos</string>
     <string name="poi_dock">Doca</string>
     <string name="poi_cutline">Linha de corte florestal</string>
-    <string name="poi_toilets">Banheiro</string>
+    <string name="poi_toilets">Casa de banho;Banheiros</string>
     <string name="poi_shower">Chuveiro</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Bordel</string>
@@ -3567,4 +3567,25 @@
     <string name="poi_rescue_box">Caixa de resgate</string>
     <string name="poi_climbing_crag">Sim</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Perigo: erosão</string>
+    <string name="poi_hazard_additional_rockfall">Perigo: queda de rochas</string>
+    <string name="poi_hazard_additional_nuclear">Perigo: nuclear</string>
+    <string name="poi_hazard_additional_flood">Perigo: inundação</string>
+    <string name="poi_hazard_additional_avalanche">Perigo: avalanche</string>
+    <string name="poi_hazard_additional_minefield">Perigo: campo minado</string>
+    <string name="poi_hazard_additional_contamination">Perigo: contaminação</string>
+    <string name="poi_defibrillator_location">Localização</string>
+    <string name="poi_changing_table_yes">Mesa muda-fraldas: sim</string>
+    <string name="poi_changing_table_no">Mesa muda-fraldas: não</string>
+    <string name="poi_changing_table_limited">Mesa muda-fraldas: limitada</string>
+    <string name="poi_changing_table_location_room">Mesa muda-fraldas; sala</string>
+    <string name="poi_changing_table_location_male_toilet">Local da mesa muda-fraldas: WC masculino</string>
+    <string name="poi_changing_table_location_female_toilet">Local da mesa muda-fraldas: WC feminino</string>
+    <string name="poi_changing_table_location_unisex_toilet">Local da mesa muda-fraldas: WC unissexo</string>
+    <string name="poi_changing_table_count">Quantidade de mesas muda-fraldas</string>
+    <string name="poi_changing_table_fee_yes">Taxa da mesa muda-fraldas: sim</string>
+    <string name="poi_changing_table_fee_no">Taxa da mesa muda-fraldas: não</string>
+    <string name="poi_charcoal_pile">Pilha de carvão</string>
+    <string name="poi_historic_tank">Tanque histórico</string>
+    <string name="poi_hookah_lounge">Salão Hookah</string>
 </resources>

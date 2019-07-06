@@ -514,7 +514,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="recalculate_route_to_your_location">Közlekedési mód:</string>
     <string name="mark_final_location_first">Először jelölj ki egy célpontot</string>
     <string name="get_directions">Navigáció</string>
-    <string name="opening_hours">Nyitvatartás</string>
+    <string name="opening_hours">Nyitva tartás</string>
     <string name="opening_changeset">Módosításcsomag megnyitása…</string>
     <string name="closing_changeset">Módosításcsomag lezárása…</string>
     <string name="commiting_node">Pont felvitele…</string>
@@ -3007,4 +3007,7 @@ Kérlek adj meg egy teljes kódot</string>
 \n • A távolságmérésnél a tájolás megjelenítése
 \n
 \n</string>
+    <string name="searching_gps">Műholdak keresése</string>
+    <string name="coordinates_widget">Koordináta-widget</string>
+    <string name="keep_passed_markers_descr">Az Kedvencek csoportjaként vagy GPX útpontként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
 </resources>

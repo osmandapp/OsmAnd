@@ -1909,7 +1909,7 @@
     <string name="shared_string_permissions">Permissões</string>
     <string name="import_gpx_failed_descr">OsmAnd não pode importar o ficheiro. Por favor confirme se OsmAnd tem permissão para ler o ficheiro da sua localização.</string>
     <string name="distance_moving">Distância corrigida</string>
-    <string name="mapillary_image">Imagem Mapillary</string>
+    <string name="mapillary_image">Imagem do Mapillary</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Melhorar cobertura fotográfica com Mapillary</string>
@@ -3042,4 +3042,134 @@
     <string name="public_transport_try_change_settings">Tente alterar a configuração.</string>
     <string name="public_transport_calc_pedestrian">Calcular a rota pedestre</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="searching_gps">Procurando GPS</string>
+    <string name="coordinates_widget">Widget de coordenadas</string>
+    <string name="app_profile_custom_nav_subtitle">" "</string>
+    <string name="rate_dialog_descr">Por favor, dê-nos 30 segundos, compartilhe comentários e classifique o nosso trabalho no Google Play.</string>
+    <string name="button_rate">Avaliar</string>
+    <string name="shared_string_privacy_policy">Política de privacidade</string>
+    <string name="help_us_make_osmand_better">Ajude-nos a melhorar o OsmAnd!</string>
+    <string name="make_osmand_better_descr">Permitir que OsmAnd colete e processe dados anônimos de uso de aplicativos. Não recolhemos nem armazenamos dados sobre a sua localização, nem sobre as localizações que visualiza no mapa.
+\n
+\nVocê sempre pode alterar sua seleção em Configurações &gt; Privacidade e Segurança.</string>
+    <string name="choose_data_to_share">Escolha o tipo de dados que pretende partilhar:</string>
+    <string name="downloaded_maps">Mapas descarregados</string>
+    <string name="visited_screens">Ecrãs visitadas</string>
+    <string name="collected_data_descr">Lista de dados que você deseja compartilhar com OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Coletamos esses dados para entender quais mapas de quais regiões e países são os mais populares.</string>
+    <string name="visited_screens_collect_descr">Coletamos esses dados para entender os recursos mais populares de OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Ao clicar em \"Permitir\" você concorda com nossos %1$s</string>
+    <string name="settings_privacy_and_security">Privacidade e Segurança</string>
+    <string name="settings_privacy_and_security_desc">Escolha os seus dados para partilhar connosco</string>
+    <string name="shared_string_no_thank_you">Não, obrigado</string>
+    <string name="shared_string_allow">Permitir</string>
+    <string name="profile_name_hint">Nome do perfil</string>
+    <string name="nav_type_hint">Tipo de Navegação</string>
+    <string name="app_mode_taxi">Táxi</string>
+    <string name="app_mode_shuttle_bus">Autocarro de vaivem</string>
+    <string name="app_mode_subway">Metrô</string>
+    <string name="app_mode_horse">Cavalo</string>
+    <string name="app_mode_helicopter">Helicóptero</string>
+    <string name="osmand_routing_promo">Você pode adicionar sua própria versão modificada do routing.xml ao ..osmand/routing</string>
+    <string name="app_mode_skiing">Esqui</string>
+    <string name="base_profile_descr_ski">Esqui</string>
+    <string name="show_compass_ruler">Mostrar régua de bússola</string>
+    <string name="hide_compass_ruler">Ocultar régua da bússola</string>
+    <string name="select_icon_profile_dialog_title">Selecionar ícone</string>
+    <string name="settings_routing_mode_string">Modo: %s</string>
+    <string name="settings_derived_routing_mode_string">Modo de usuário, derivado de: %s</string>
+    <string name="routing_profile_ski">Esqui</string>
+    <string name="profile_type_descr_string">Tipo: %s</string>
+    <string name="profile_type_base_string">Perfil de base</string>
+    <string name="profile_alert_need_routing_type_title">Selecione o tipo de navegação</string>
+    <string name="profile_alert_need_routing_type_msg">É necessário selecionar o tipo de navegação para criar um novo perfil de aplicação</string>
+    <string name="profile_alert_need_profile_name_title">Entrar o nome do perfil</string>
+    <string name="profile_alert_need_profile_name_msg">O nome do perfil não deve ficar vazio!</string>
+    <string name="profile_alert_duplicate_name_title">Nome Duplicado</string>
+    <string name="profile_alert_duplicate_name_msg">Já existe um perfil com esse nome</string>
+    <string name="profile_alert_cant_delete_base">Você não pode apagar perfis base OsmAnd</string>
+    <string name="profile_alert_need_save_title">Gravar modificações</string>
+    <string name="profile_alert_need_save_msg">É necessário gravar as modificações no Perfil antes de prosseguir</string>
+    <string name="profile_alert_delete_title">Apagar Perfil</string>
+    <string name="profile_alert_delete_msg">Tem certeza de que deseja apagar o perfil %s</string>
+    <string name="select_base_profile_dialog_title">Selecione o perfil base</string>
+    <string name="select_base_profile_dialog_message">O Perfil de Aplicativo Personalizado deve ser baseado num dos Perfis de Aplicativo predefinido. O Perfil Seleccionado define definições básicas: configuração de Widgets, unidades de velocidade e distância. Na cadeia abaixo do nome do Perfil, você pode aprender quais Perfis de Navegação são adequados para cada Perfil de Aplicação.</string>
+    <string name="select_nav_profile_dialog_title">Selecione o tipo de navegação</string>
+    <string name="base_profile_descr_car">Carro, Caminhão, Motocicleta</string>
+    <string name="base_profile_descr_bicycle">MTB, Ciclomotor, Cavalo</string>
+    <string name="base_profile_descr_pedestrian">Andar, Caminhar, Correr</string>
+    <string name="base_profile_descr_public_transport">Todos os tipos de TP</string>
+    <string name="base_profile_descr_boat">Navio, Remar, Navegar</string>
+    <string name="base_profile_descr_aircraft">Avião, Asa-Delta</string>
+    <string name="routing_profile_geocoding">Geocodificação</string>
+    <string name="routing_profile_straightline">Linha Reta</string>
+    <string name="routing_profile_broutrer">BRouter (Offline)</string>
+    <string name="osmand_default_routing">Roteamento de OsmAnd</string>
+    <string name="custom_routing">Perfil de roteamento personalizado</string>
+    <string name="special_routing_type">Roteamento especial</string>
+    <string name="third_party_routing_type">Roteamento de terceiros</string>
+    <string name="application_profiles_descr">Escolha os perfis visíveis na aplicação.</string>
+    <string name="application_profiles">Perfis de aplicação</string>
+    <string name="zoom_by_wunderlinq_descr">Alterar o zoom do mapa deslocando a roda para cima e para baixo. Escapar devolve-o à aplicação WunderLINQ.</string>
+    <string name="zoom_by_wunderlinq">Usar WunderLINQ para controle</string>
+    <string name="quick_action_need_to_add_item_to_list">Você deve adicionar pelo menos um Item para listar nas Configurações de Ação Rápida</string>
+    <string name="routing_attr_piste_type_downhill_name">Esqui alpino/downhill</string>
+    <string name="routing_attr_piste_type_downhill_description">Pistas para esqui alpino ou downhill e acesso a teleféricos de esqui.</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross Country/esqui nórdico</string>
+    <string name="routing_attr_piste_type_nordic_description">Trilhas para esqui nórdico ou cross-country.</string>
+    <string name="routing_attr_piste_type_skitour_name">Passeios de esqui</string>
+    <string name="routing_attr_piste_type_skitour_description">Rotas para excursões de esqui.</string>
+    <string name="routing_attr_piste_type_sled_name">Trenó</string>
+    <string name="routing_attr_piste_type_sled_description">Pistas para trenó.</string>
+    <string name="routing_attr_allow_intermediate_name">Permitir rotas intermediárias</string>
+    <string name="routing_attr_allow_intermediate_description">Rotas mais difíceis com seções mais íngremas. Geralmente, contém alguns obstáculos que deviam ser evitados.</string>
+    <string name="routing_attr_allow_advanced_name">Permitir rotas avançadas</string>
+    <string name="routing_attr_allow_advanced_description">Rotas difíceis, com obstáculos perigosos e seções íngremes.</string>
+    <string name="routing_attr_allow_expert_name">Permitir rotas para especialistas</string>
+    <string name="routing_attr_allow_expert_description">Rotas extremamente difíceis, com obstáculos e ambientes perigosos.</string>
+    <string name="routing_attr_allow_skating_only_name">Permitir apenas rotas de patinação</string>
+    <string name="routing_attr_allow_skating_only_description">Rotas preparadas para o estilo livre ou patinação apenas sem trilhas clássicas.</string>
+    <string name="routing_attr_allow_classic_only_name">Permitir apenas rotas clássicas</string>
+    <string name="routing_attr_allow_classic_only_description">Rotas preparadas apenas para o estilo clássico sem pistas de patinação. Isso inclui rotas preparadas por uma moto de neve menor com pista mais solta e pistas feitas manualmente por esquiadores.</string>
+    <string name="routing_attr_difficulty_preference_name">Dificuldade preferida</string>
+    <string name="routing_attr_difficulty_preference_description">Preferir rotas desta dificuldade, embora o roteamento sobre pistas mais difíceis ou mais fáceis ainda seja possível se for mais curto.</string>
+    <string name="routing_attr_freeride_policy_name">Fora de pista</string>
+    <string name="routing_attr_freeride_policy_description">Freerides e fora da pista são rotas e passagens não oficiais. Tipicamente sem serem preparados, sem maquiagem pelos funcionários e não verificados à noite. Entrar por conta e risco próprios.</string>
+    <string name="process_downloading_service">Serviço de descarregamento OsmAnd</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Ícone</string>
+    <string name="collected_data">Dados recolhidos</string>
+    <string name="press_again_to_change_the_map_orientation">Pressione novamente para alterar a orientação do mapa</string>
+    <string name="shared_string_min_speed">Min. velocidade</string>
+    <string name="shared_string_max_speed">Max. velocidade</string>
+    <string name="default_speed_setting_title">Velocidade predefinida</string>
+    <string name="default_speed_setting_descr">Alterar as predefinições de velocidade</string>
+    <string name="minmax_speed_dialog_title">Definir a velocidade mínima/máxima</string>
+    <string name="default_speed_dialog_msg">Usado para cálculos do tempo de chegada previsto durante o roteiro</string>
+    <string name="new_profile">Novo Perfil</string>
+    <string name="shared_string_crash">Travou</string>
+    <string name="last_launch_crashed">O último lançamento de OsmAnd falhou. Ajude-nos a melhorar o OsmAnd. Por favor, envie-nos uma mensagem de erro.</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">"- Perfis de aplicação: crie o seu próprio perfil para as suas necessidades, com um ícone e cor personalizados
+\n
+\n - Adicionar configurações como predefinição e velocidade mínima/máxima para perfis
+\n
+\n - Adicionar um widget com coordenadas atuais
+\n
+\n - Adicionar opções para mostrar a bússola no mapa com uma régua de raio
+\n
+\n - Descarregamento de mapas  em segundo plano melhorado
+\n
+\n - A seleção da língua Wikipedia corrigida
+\n
+\n - Comportamento fixo do botão da bússola durante a navegação
+\n
+\n - Correções de bugs
+\n
+\n"</string>
+    <string name="app_mode_personal_transporter">Transportador pessoal</string>
+    <string name="app_mode_monowheel">Monoroda</string>
+    <string name="app_mode_scooter">Scooter</string>
+    <string name="precision_hdop_and_vdop">Precisão horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisão horizontal: %s</string>
 </resources>

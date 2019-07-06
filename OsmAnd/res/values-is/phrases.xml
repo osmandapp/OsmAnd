@@ -557,7 +557,7 @@
     <string name="poi_laundry">Þvottahús</string>
     <string name="poi_car_rental">Bílaleiga</string>
     <string name="poi_dock">Hafnarbakki</string>
-    <string name="poi_toilets">Snyrting</string>
+    <string name="poi_toilets">Snyrting;Klósett</string>
     <string name="poi_shower">Steypibað</string>
     <string name="poi_sauna">Gufubað</string>
     <string name="poi_smoking_area">Reykingasvæði</string>
@@ -3567,4 +3567,25 @@
     <string name="poi_rescue_box">Björgunarkassi</string>
     <string name="poi_climbing_crag">Já</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Slysahætta: landrof</string>
+    <string name="poi_hazard_additional_rockfall">Slysahætta: grjóthrun</string>
+    <string name="poi_hazard_additional_nuclear">Hætta: kjarnorka</string>
+    <string name="poi_hazard_additional_flood">Slysahætta: flóð</string>
+    <string name="poi_hazard_additional_avalanche">Slysahætta: snjóflóð</string>
+    <string name="poi_hazard_additional_minefield">Slysahætta: jarðsprengjusvæði</string>
+    <string name="poi_hazard_additional_contamination">Hætta: smithætta</string>
+    <string name="poi_defibrillator_location">Staðsetning</string>
+    <string name="poi_changing_table_yes">Skiptiborð: já</string>
+    <string name="poi_changing_table_no">Skiptiborð: nei</string>
+    <string name="poi_changing_table_limited">Skiptiborð: takmarkað</string>
+    <string name="poi_changing_table_location_room">Staðsetning skiptiborðs: herbergi</string>
+    <string name="poi_changing_table_location_male_toilet">Staðsetning skiptiborðs: karlasnyrtingar</string>
+    <string name="poi_changing_table_location_female_toilet">Staðsetning skiptiborðs: kvennasnyrtingar</string>
+    <string name="poi_changing_table_location_unisex_toilet">Staðsetning skiptiborðs: sameiginlegar snyrtingar</string>
+    <string name="poi_changing_table_count">Fjöldi skiptiborða</string>
+    <string name="poi_changing_table_fee_yes">Greiðsla fyrir notkun skiptiborða: já</string>
+    <string name="poi_changing_table_fee_no">Greiðsla fyrir notkun skiptiborða: nei</string>
+    <string name="poi_charcoal_pile">Kolahaugur</string>
+    <string name="poi_historic_tank">Sögulegur tankur</string>
+    <string name="poi_hookah_lounge">Hookah-skáli</string>
 </resources>

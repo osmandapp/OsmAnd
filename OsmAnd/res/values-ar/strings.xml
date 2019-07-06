@@ -2849,9 +2849,9 @@
     <string name="exit_at">خروج عند</string>
     <string name="sit_on_the_stop">ابقى عند لوحة التوقف</string>
     <string name="shared_string_swap">تبديل</string>
-    <string name="show_more">عرض المزيد</string>
+    <string name="show_more">اعرض المزيد</string>
     <string name="tracks_on_map">المسارات على الخريطة</string>
-    <string name="quick_action_show_hide_gpx_tracks">عرض/إخفاء المسارات</string>
+    <string name="quick_action_show_hide_gpx_tracks">إظهار/إخفاء مسارات GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">يؤدي النقر فوق زر الإجراء هذا إلى إظهار مسارات GPX المحددة أو إخفائها على الخريطة</string>
     <string name="quick_action_gpx_tracks_hide">إخفاء المسارات</string>
     <string name="quick_action_gpx_tracks_show">عرض المسارات</string>

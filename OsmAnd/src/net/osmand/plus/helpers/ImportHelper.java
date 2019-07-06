@@ -69,6 +69,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
 /**
  * @author Koen Rabaey
  */
@@ -295,7 +299,7 @@ public class ImportHelper {
 					final Intent newIntent = new Intent(activity,
 						app.getAppCustomization().getFavoritesActivity());
 					newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
+					newIntent.putExtra(TAB_ID, FAV_TAB);
 					activity.startActivity(newIntent);
 				}
 			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -596,7 +600,7 @@ public class ImportHelper {
 		if (forceImportFavourites) {
 			final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			newIntent.putExtra(FavoritesActivity.OPEN_MY_PLACES_TAB, true);
+			newIntent.putExtra(TAB_ID, GPX_TAB);
 			activity.startActivity(newIntent);
 		}
 	}
@@ -850,8 +854,8 @@ public class ImportHelper {
 		public void createMenuItems(Bundle savedInstanceState) {
 			items.add(new TitleItem(getString(R.string.import_file)));
 
-			int nameColor = getResolvedColor(nightMode ? R.color.osmand_orange : R.color.dashboard_blue);
-			int descrColor = getResolvedColor(nightMode ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
+			int nameColor = getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+			int descrColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 			String descr = getString(R.string.import_gpx_file_description);
 			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
 			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -119,8 +119,8 @@ public class AndroidUtils {
 
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
 		return AndroidUtils.createCheckedColorStateList(ctx, nightMode,
-				R.color.icon_color, R.color.wikivoyage_active_light,
-				R.color.icon_color, R.color.wikivoyage_active_dark);
+				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
+				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
 
 	public static String trimExtension(String src) {
@@ -345,29 +345,29 @@ public class AndroidUtils {
 	}
 
 	public static void setListItemBackground(Context ctx, View view, boolean night) {
-		setBackgroundColor(ctx, view, night, R.color.bg_color_light, R.color.bg_color_dark);
+		setBackgroundColor(ctx, view, night, R.color.list_background_color_light, R.color.list_background_color_dark);
 	}
 
 	public static void setListBackground(Context ctx, View view, boolean night) {
-		setBackgroundColor(ctx, view, night, R.color.ctx_menu_info_view_bg_light, R.color.ctx_menu_info_view_bg_dark);
+		setBackgroundColor(ctx, view, night, R.color.activity_background_color_light, R.color.activity_background_color_dark);
 	}
 
 	public static void setTextPrimaryColor(Context ctx, TextView textView, boolean night) {
 		textView.setTextColor(night ?
-				ctx.getResources().getColor(R.color.primary_text_dark)
-				: ctx.getResources().getColor(R.color.primary_text_light));
+				ctx.getResources().getColor(R.color.text_color_primary_dark)
+				: ctx.getResources().getColor(R.color.text_color_primary_light));
 	}
 
 	public static void setTextSecondaryColor(Context ctx, TextView textView, boolean night) {
 		textView.setTextColor(night ?
-				ctx.getResources().getColor(R.color.secondary_text_dark)
-				: ctx.getResources().getColor(R.color.secondary_text_light));
+				ctx.getResources().getColor(R.color.text_color_secondary_dark)
+				: ctx.getResources().getColor(R.color.text_color_secondary_light));
 	}
 
 	public static void setHintTextSecondaryColor(Context ctx, TextView textView, boolean night) {
 		textView.setHintTextColor(night ?
-				ctx.getResources().getColor(R.color.secondary_text_dark)
-				: ctx.getResources().getColor(R.color.secondary_text_light));
+				ctx.getResources().getColor(R.color.text_color_secondary_dark)
+				: ctx.getResources().getColor(R.color.text_color_secondary_light));
 	}
 
 

@@ -35,7 +35,6 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -1012,6 +1011,15 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
 
+	public final OsmandPreference<Float> DEFAULT_SPEED = new FloatPreference(
+			"default_speed", 0f).makeProfile().cache();
+
+	public final OsmandPreference<Float> MIN_SPEED = new FloatPreference(
+			"min_speed", 0f).makeProfile().cache();
+
+	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(
+			"max_speed", 0f).makeProfile().cache();
+
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 
@@ -1152,11 +1160,6 @@ public class OsmandSettings {
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<RouteService> ROUTER_SERVICE =
-			new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND,
-					RouteService.values()).makeProfile();
-
-	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> AUTO_ZOOM_MAP = new BooleanPreference("auto_zoom_map_on_off", false).makeProfile().cache();
 	{
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, true);
@@ -1254,9 +1257,15 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference("show_nearby_poi", false).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference("speak_street_names", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SPEAK_PEDESTRIAN = new BooleanPreference("speak_pedestrian", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference("speak_speed_limit", true).makeProfile().cache();
+	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
+	{
+		SPEAK_TRAFFIC_WARNINGS.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+	public final CommonPreference<Boolean> SPEAK_PEDESTRIAN = new BooleanPreference("speak_pedestrian", false).makeProfile().cache();
+	{
+		SPEAK_PEDESTRIAN.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference("speak_speed_limit", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_SPEED_CAMERA = new BooleanPreference("speak_cameras", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_TUNNELS = new BooleanPreference("speak_tunnels", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference("announce_wpt", true).makeGlobal().cache();
@@ -2754,7 +2763,7 @@ public class OsmandSettings {
 			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeGlobal().cache();
 
 	public boolean isLightActionBar() {
-		return true;
+		return isLightContent();
 	}
 
 
@@ -2767,8 +2776,6 @@ public class OsmandSettings {
 			new BooleanPreference("fluorescent_overlays", false).makeGlobal().cache();
 
 
-	public final CommonPreference<Boolean> SHOW_RULER =
-			new BooleanPreference("show_ruler", true).makeProfile().cache();
 
 //	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS_V2 = new IntPreference("free_downloads_v2", 0).makeGlobal();
 
@@ -2790,7 +2797,7 @@ public class OsmandSettings {
 					.makeGlobal();
 
 	public final CommonPreference<String> CUSTOM_APP_PROFILES =
-		new StringPreference("custom_profiles", "").makeGlobal().cache();
+		new StringPreference("custom_app_profiles", "").makeGlobal().cache();
 
 
 	public enum DayNightMode {

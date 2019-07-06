@@ -1,14 +1,14 @@
-/**
- *
- */
 package net.osmand.plus.myplaces;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -18,12 +18,15 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -40,23 +43,22 @@ public class FavoritesActivity extends TabActivity {
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
 
-	public static final String GROUP_NAME_TO_SHOW = "group_name_to_show";
+	public static final String TAB_ID = "selected_tab_id";
 
-	public static final String OPEN_FAVOURITES_TAB = "open_favourites_tab";
-	public static final String OPEN_MY_PLACES_TAB = "open_my_places_tab";
+	public static final int GPX_TAB = R.string.shared_string_tracks;
+	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 
-	public static final int  GPX_TAB = R.string.shared_string_tracks;
-	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
-	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
+	protected List<WeakReference<FavoritesFragmentStateHolder>> fragList = new ArrayList<>();
 	private int tabSize;
 	private ImportHelper importHelper;
-	private String groupNameToShow;
 
+	private Bundle intentParams = null;
+	
 	@Override
-	public void onCreate(Bundle icicle) {
+	public void onCreate(Bundle savedInstanceState) {
 		OsmandApplication app = (OsmandApplication) getApplication();
 		app.applyTheme(this);
-		super.onCreate(icicle);
+		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");
 
@@ -66,30 +68,26 @@ public class FavoritesActivity extends TabActivity {
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
-		
 		setContentView(R.layout.tab_content);
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
-		// setupHomeButton();
 
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-		if (icicle == null) {
+		if (savedInstanceState == null) {
 			Intent intent = getIntent();
-			if (intent != null) {
-				if (intent.hasExtra(OPEN_FAVOURITES_TAB) && intent.getBooleanExtra(OPEN_FAVOURITES_TAB, false)) {
-					if (intent.hasExtra(GROUP_NAME_TO_SHOW)) {
-						groupNameToShow = intent.getStringExtra(GROUP_NAME_TO_SHOW);
+			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
+				intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
+				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
+				int pagerItem = 0;
+				for (int n = 0; n < mTabs.size(); n++) {
+					if (mTabs.get(n).resId == tabId) {
+						pagerItem = n;
+						break;
 					}
-					mViewPager.setCurrentItem(0, false);
-				} else if (intent.hasExtra(OPEN_MY_PLACES_TAB) && intent.getBooleanExtra(OPEN_MY_PLACES_TAB, false)) {
-					mViewPager.setCurrentItem(1, false);
 				}
+				mViewPager.setCurrentItem(pagerItem, false);
 			}
 		}
-	}
-
-	public String getGroupNameToShow() {
-		return groupNameToShow;
 	}
 
 	public void addTrack() {
@@ -151,8 +149,8 @@ public class FavoritesActivity extends TabActivity {
 
 	private AvailableGPXFragment getGpxFragment() {
 		AvailableGPXFragment gpxFragment = null;
-		for (WeakReference<Fragment> f : fragList) {
-			Fragment frag = f.get();
+		for (WeakReference<FavoritesFragmentStateHolder> f : fragList) {
+			FavoritesFragmentStateHolder frag = f.get();
 			if (frag instanceof AvailableGPXFragment) {
 				gpxFragment = (AvailableGPXFragment) frag;
 			}
@@ -187,14 +185,17 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onAttachFragment(Fragment fragment) {
-		fragList.add(new WeakReference<>(fragment));
+		if (fragment instanceof FavoritesFragmentStateHolder) {
+			fragment.setArguments(intentParams);
+			fragList.add(new WeakReference<>((FavoritesFragmentStateHolder) fragment));
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		List<TabItem> mTabs = getTabItems();
-		if(mTabs.size() != tabSize ) {
+		if (mTabs.size() != tabSize) {
 			setTabs(mTabs);
 		}
 	}
@@ -210,11 +211,9 @@ public class FavoritesActivity extends TabActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
-		switch (itemId) {
-		case android.R.id.home:
+		if (itemId == android.R.id.home) {
 			finish();
 			return true;
-
 		}
 		return false;
 	}
@@ -241,8 +240,29 @@ public class FavoritesActivity extends TabActivity {
 			stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			searchEdit.setHint(stopHint);
 		} catch (Exception e) {
-			e.printStackTrace();
+			// ignore
 		}
+	}
+
+	public static void showOnMap(@NonNull Activity activity, @Nullable FavoritesFragmentStateHolder fragment, double latitude, double longitude, int zoom, PointDescription pointDescription,
+								 boolean addToHistory, Object toShow) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
+		if (fragment != null) {
+			MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState());
+		} else {
+			MapActivity.launchMapActivityMoveToTop(activity);
+		}
+	}
+
+	public static void openFavoritesGroup(Context context, String groupName) {
+		OsmAndAppCustomization appCustomization = ((OsmandApplication) context.getApplicationContext()).getAppCustomization();
+		Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
+		Bundle b = new Bundle();
+		b.putInt(TAB_ID, FAV_TAB);
+		b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW, groupName);
+		intent.putExtra(MapActivity.INTENT_PARAMS, b);
+		context.startActivity(intent);
 	}
 }
 

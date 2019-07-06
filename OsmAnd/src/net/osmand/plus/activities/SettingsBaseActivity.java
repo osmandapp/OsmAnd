@@ -31,14 +31,14 @@ import net.osmand.plus.profiles.AppProfileArrayAdapter;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.views.SeekBarPreference;
 
+import org.apache.commons.logging.Log;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import net.osmand.util.Algorithms;
-import org.apache.commons.logging.Log;
 
 
 public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
@@ -46,11 +46,14 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 	private static final Log LOG = PlatformUtil.getLog(SettingsBaseActivity.class);
 	public static final String INTENT_APP_MODE = "INTENT_APP_MODE";
-
+	private static final String PREV_MODE_KEY = "previous_mode";
+	private static final String SELECTED_MODE_KEY = "selected_mode";
+	
 	protected OsmandSettings settings;
 	protected final boolean profileSettings;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
 	private ApplicationMode previousAppMode;
+	protected ApplicationMode selectedAppMode;
 
 	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
 	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();
@@ -333,6 +336,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 		if (profileSettings) {
 			modes.clear();
+			findViewById(R.id.selector_shadow).setVisibility(View.VISIBLE);
 			for (ApplicationMode a : ApplicationMode.values(app)) {
 				if (a != ApplicationMode.DEFAULT) {
 					modes.add(a);
@@ -358,7 +362,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	    final List<ProfileDataObject> activeModes = new ArrayList<>();
 	    for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
 		    boolean isSelected = false;
-	    	if (previousAppMode != null && previousAppMode == am) {
+	    	if (am == selectedAppMode) {
 			    isSelected = true;
 		    }
 	    	if (am != ApplicationMode.DEFAULT) {
@@ -366,14 +370,15 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 				    am.toHumanString(getMyApplication()),
 					getAppModeDescription(am),
 				    am.getStringKey(),
-				    am.getIconRes(getMyApplication()),
-				    isSelected
+				    am.getIconRes(),
+				    isSelected,
+				    am.getIconColorInfo()
 			    ));
 		    }
 	    }
 
 	    final AppProfileArrayAdapter modeNames = new AppProfileArrayAdapter(
-		    SettingsBaseActivity.this, R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes);
+		    SettingsBaseActivity.this, R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes, isModeSelected);
 
 	    singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
 		    new OnClickListener() {
@@ -403,34 +408,29 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
     }
 
     void updateModeButton(ApplicationMode mode) {
-	    String title = Algorithms.isEmpty(mode.getUserProfileName())
-		    ? mode.toHumanString(SettingsBaseActivity.this)
-		    : mode.getUserProfileName();
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+	    String title = mode.toHumanString(SettingsBaseActivity.this);
 
 	    getModeTitleTV().setText(title);
 	    getModeSubTitleTV().setText(getAppModeDescription(mode));
-	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(this),
-		    getMyApplication().getSettings().isLightContent()
-			    ? R.color.active_buttons_and_links_light
-			    : R.color.active_buttons_and_links_dark));
-	    getDropDownArrow().setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down,
-		    getMyApplication().getSettings().isLightContent()
-			    ? R.color.active_buttons_and_links_light
-			    : R.color.active_buttons_and_links_dark));
 	    settings.APPLICATION_MODE.set(mode);
-	    previousAppMode = mode;
+	    selectedAppMode = mode;
+	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(),
+		    mode.getIconColorInfo().getColor(nightMode)));
+	    getDropDownArrow().setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
 	    isModeSelected = true;
 	    updateAllSettings();
     }
 
     private String getAppModeDescription(ApplicationMode mode) {
 	    String descr;
-	    if (mode.getParent() == null) {
+	    if (!mode.isCustomProfile()) {
 		    descr = getString(R.string.profile_type_base_string);
 	    } else {
 		    descr = String.format(getString(R.string.profile_type_descr_string),
 			    mode.getParent().toHumanString(getMyApplication()));
-		    if (mode.getRoutingProfile().contains("/")) {
+		    if (mode.getRoutingProfile() != null && mode.getRoutingProfile().contains("/")) {
 			    descr = descr.concat(", " + mode.getRoutingProfile()
 				    .substring(0, mode.getRoutingProfile().indexOf("/")));
 		    }
@@ -442,33 +442,28 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	protected void onResume() {
 		super.onResume();
 		if (profileSettings) {
-			previousAppMode = settings.getApplicationMode();
-			boolean found;
+			if (previousAppMode == null) {
+				previousAppMode = settings.getApplicationMode();
+			}
 			if (getIntent() != null && getIntent().hasExtra(INTENT_APP_MODE)) {
 				String modeStr = getIntent().getStringExtra(INTENT_APP_MODE);
 				ApplicationMode mode = ApplicationMode.valueOfStringKey(modeStr, previousAppMode);
-				found = setSelectedAppMode(mode);
+				setSelectedAppMode(mode);
 			} else {
-				found = setSelectedAppMode(previousAppMode);
-			}
-			if (!found) {
-				getSpinner().setSelection(0);
+				setSelectedAppMode(selectedAppMode);
 			}
 		} else {
 			updateAllSettings();
 		}
 	}
 
-	protected boolean setSelectedAppMode(ApplicationMode am) {
-		boolean found = false;
+	protected void setSelectedAppMode(ApplicationMode am) {
 		for (ApplicationMode a : modes) {
-			if (am == a) {
+			if (am != null && am == a) {
 				updateModeButton(a);
-				found = true;
 				break;
 			}
 		}
-		return found;
 	}
 	
 	@Override
@@ -478,7 +473,36 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			settings.APPLICATION_MODE.set(previousAppMode);
 		}
 	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (profileSettings) {
+			if (previousAppMode != null) {
+				outState.putString(PREV_MODE_KEY, previousAppMode.getStringKey());
+			}
+			if (selectedAppMode != null) {
+				outState.putString(SELECTED_MODE_KEY, selectedAppMode.getStringKey());
+			} 
+		}
+	}
 
+	@Override
+	protected void onRestoreInstanceState(Bundle state) {
+		super.onRestoreInstanceState(state);
+		if (state != null) {
+			if (profileSettings && state.containsKey(SELECTED_MODE_KEY) && state.containsKey(PREV_MODE_KEY)) {
+				for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
+					if (am.getStringKey() == state.get(SELECTED_MODE_KEY)) {
+						setSelectedAppMode(am);
+					}
+					if (am.getStringKey() == state.get(PREV_MODE_KEY)) {
+						previousAppMode = am;
+					}
+				}
+			}	
+		}
+	}
 
 	public void updateAllSettings() {
 		for (OsmandPreference<Boolean> b : booleanPreferences.values()) {

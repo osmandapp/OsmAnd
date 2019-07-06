@@ -52,8 +52,7 @@ public class MyLocationMenuController  extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
-			return mapActivity.getResources().getDrawable(appMode.getResourceLocationDay());
+			return mapActivity.getResources().getDrawable(R.drawable.ic_action_location_color);
 		} else {
 			return null;
 		}

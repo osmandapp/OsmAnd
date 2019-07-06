@@ -33,7 +33,7 @@ public class ParkingPositionMenuController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
-		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
+		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 	}
 
 	private void buildParkingDescription(MapActivity mapActivity) {
@@ -77,7 +77,7 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public int getAdditionalInfoColorId() {
-		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : R.color.icon_color;
+		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : R.color.icon_color_default_light;
 	}
 
 	@NonNull

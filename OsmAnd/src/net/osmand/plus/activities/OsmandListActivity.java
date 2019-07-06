@@ -29,8 +29,8 @@ public abstract class OsmandListActivity extends
 		super.onStart();
 		getListView().setBackgroundColor(
 				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
-								: R.color.bg_color_dark));
+						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
+								: R.color.list_background_color_dark));
 	}
 
 

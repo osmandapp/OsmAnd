@@ -23,10 +23,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
@@ -53,6 +53,9 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 	@MainThread
 	@Override
 	public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+		if (activity.getSupportFragmentManager().isStateSaved()) {
+			return;
+		}
 		int uploaded = 0;
 		int pointsNum = loadErrorsMap.keySet().size();
 		for (OsmPoint point : loadErrorsMap.keySet()) {

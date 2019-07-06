@@ -1,14 +1,5 @@
 package net.osmand.plus;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.plus.notifications.ErrorNotification;
-import net.osmand.plus.notifications.GpxNotification;
-import net.osmand.plus.notifications.NavigationNotification;
-import net.osmand.plus.notifications.OsmandNotification;
-import net.osmand.plus.notifications.OsmandNotification.NotificationType;
-
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -19,6 +10,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.app.NotificationManagerCompat;
 
+import net.osmand.plus.notifications.DownloadNotification;
+import net.osmand.plus.notifications.ErrorNotification;
+import net.osmand.plus.notifications.GpxNotification;
+import net.osmand.plus.notifications.NavigationNotification;
+import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class NotificationHelper {
 
 	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
@@ -26,6 +27,7 @@ public class NotificationHelper {
 
 	private NavigationNotification navigationNotification;
 	private GpxNotification gpxNotification;
+	private DownloadNotification downloadNotification;
 	private ErrorNotification errorNotification;
 	private List<OsmandNotification> all = new ArrayList<>();
 
@@ -37,9 +39,11 @@ public class NotificationHelper {
 	private void init() {
 		navigationNotification = new NavigationNotification(app);
 		gpxNotification = new GpxNotification(app);
+		downloadNotification = new DownloadNotification(app);
 		errorNotification = new ErrorNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
+		all.add(downloadNotification);
 	}
 
 	@NonNull
@@ -57,6 +61,11 @@ public class NotificationHelper {
 		} else {
 			return buildErrorNotification();
 		}
+	}
+
+	@NonNull
+	public Notification buildDownloadNotification() {
+		return downloadNotification.buildNotification(false).build();
 	}
 
 	private Notification buildErrorNotification() {

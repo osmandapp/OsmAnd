@@ -129,7 +129,7 @@ public class AMapPointMenuController extends MenuController {
 
 	@Override
 	public int getAdditionalInfoColorId() {
-		return R.color.icon_color;
+		return R.color.icon_color_default_light;
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public class AMapPointMenuController extends MenuController {
 		titleButtonController.leftIconId = getIconIdByName(contextMenuButton.getLeftIconName());
 		titleButtonController.rightIconId = getIconIdByName(contextMenuButton.getRightIconName());
 		titleButtonController.enabled = contextMenuButton.isEnabled();
-		titleButtonController.needColorizeIcon = contextMenuButton.isNeedColorizeIcon();
+		titleButtonController.tintIcon = contextMenuButton.isTintIcon();
 
 		return titleButtonController;
 	}

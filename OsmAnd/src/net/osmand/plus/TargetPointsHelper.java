@@ -647,7 +647,7 @@ public class TargetPointsHelper {
 
 
 	public boolean hasTooLongDistanceToNavigate() {
-		if (settings.ROUTER_SERVICE.getModeValue(routingHelper.getAppMode()) != RouteService.OSMAND) {
+		if (routingHelper.getAppMode().getRouteService() != RouteService.OSMAND) {
 			return false;
 		}
 		Location current = routingHelper.getLastProjection();

@@ -201,7 +201,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return R.string.shared_string_video;
 	}
 
-	private void setupItem(int position, final Recording recording, final ItemViewHolder holder) {
+	private void setupItem(final int position, final Recording recording, final ItemViewHolder holder) {
 		setupBackground(holder.view);
 		if (recording == NotesFragment.SHARE_LOCATION_FILE) {
 			holder.title.setText(R.string.av_locations);
@@ -211,7 +211,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			holder.description.setText(recording.getExtendedDescription(app));
 			int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
 					: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
-			int colorRes = app.getSettings().isLightContent() ? R.color.icon_color : R.color.ctx_menu_info_text_dark;
+			int colorRes = app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, colorRes));
 		}
 
@@ -248,7 +248,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 					holder.checkBox.performClick();
 				} else {
 					if (listener != null) {
-						listener.onItemClick(recording);
+						listener.onItemClick(recording, position);
 					}
 				}
 			}
@@ -368,7 +368,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 		void onCheckBoxClick(Recording rec, boolean checked);
 
-		void onItemClick(Recording rec);
+		void onItemClick(Recording rec, int position);
 
 		void onOptionsClick(Recording rec);
 	}

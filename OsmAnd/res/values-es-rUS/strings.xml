@@ -185,7 +185,7 @@ Lon %2$s</string>
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="impassable_road">Evitar caminos…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi colectivos</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
@@ -386,7 +386,7 @@ Lon %2$s</string>
 \nCualquiera de estos mapas puede ser usado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Para hacer más visible cualquier mapa subyacente, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú «Configurar mapa» cuando lo desees. 
 \n 
 \nLos mapas de teselas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para tu uso sin conexión (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros.</string>
-    <string name="record_plugin_description">Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX. 
+    <string name="record_plugin_description">Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente pulsando el widget de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX. 
 \n 
 \nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden usar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros.</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
@@ -417,8 +417,8 @@ Lon %2$s</string>
 \nActivando esta vista, cambia el estilo del mapa a «Invierno y esquí», mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí o cambiando el «Estilo del mapa» en «Configurar mapa» cuando lo desees.</string>
     <string name="audionotes_plugin_description">Este complemento, proporciona la funcionalidad para tomar notas de audio, fotografía y/o video durante un viaje, usando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
     <string name="osmand_parking_plugin_description">Este complemento, registra dónde se estacionó el automóvil y cuánto tiempo queda (si hay un límite de tiempo). 
-\nTanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en el control del mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
-    <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
+\nTanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en un widget sobre el mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
+    <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un widget en la pantalla del mapa, permitiendo crear caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control del zoom, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar notas de OSM y contribuir con archivos de trazas GPX. OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org. Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o las indicaciones por voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
@@ -444,12 +444,12 @@ Lon %2$s</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="background_service_is_enabled_question">El servicio de OsmAnd, aún está funcionando en modo reposo. ¿Quieres pararlo también?</string>
     <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
-    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el control de grabación GPX en el mapa).</string>
+    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el widget de grabación GPX sobre el mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
     <string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
-    <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el control de grabación GPX en la pantalla del mapa.</string>
+    <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el widget de grabación GPX en la pantalla del mapa.</string>
     <string name="save_track_to_gpx">Guardar la traza automáticamente durante la navegación</string>
     <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación.</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
@@ -593,7 +593,7 @@ Lon %2$s</string>
     <string name="use_distance_measurement_help">* Pulsa para marcar un punto. 
 \n * Mantén pulsado el mapa para quitar el punto anterior. 
 \n * Mantén pulsado en un punto para ver e incluir la descripción. 
-\n * Pulsa el control de medición para ver más acciones.</string>
+\n * Pulsa el widget de medición para ver más acciones.</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
@@ -652,8 +652,8 @@ Lon %2$s</string>
     <string name="av_def_action_choose">Elegir a petición</string>
     <string name="av_def_action_video">Grabar video</string>
     <string name="av_def_action_audio">Grabar audio</string>
-    <string name="av_widget_action_descr">Elige la acción predefinida.</string>
-    <string name="av_widget_action">Acción predefinida</string>
+    <string name="av_widget_action_descr">Elige la acción predefinida del widget.</string>
+    <string name="av_widget_action">Acción predefinida del widget</string>
     <string name="av_video_format_descr">Formato de salida del video.</string>
     <string name="av_video_format">Formato de salida del video</string>
     <string name="av_use_external_recorder_descr">Usa la grabadora del sistema para video.</string>
@@ -664,7 +664,7 @@ Lon %2$s</string>
     <string name="av_settings">Ajustes de notas multimedia</string>
     <string name="recording_error">Error de grabación</string>
     <string name="recording_camera_not_available">Cámara no disponible</string>
-    <string name="recording_is_recorded">Grabando audio/video. Para pararlo, pulsar el control AV.</string>
+    <string name="recording_is_recorded">Grabando audio/video. Para pararlo, pulsar el widget A/V.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Borrar este elemento?</string>
@@ -675,7 +675,7 @@ Lon %2$s</string>
     <string name="recording_can_not_be_played">La grabación no puede reproducirse</string>
     <string name="recording_context_menu_delete">Borrar grabación</string>
     <string name="recording_context_menu_play">Escuchar</string>
-    <string name="recording_description">Grabado %1$s %3$s %2$s</string>
+    <string name="recording_description">Grabando %1$s %3$s %2$s</string>
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
@@ -813,7 +813,7 @@ Lon %2$s</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
     <string name="map_widget_view_direction">Dirección de visualización</string>
-    <string name="map_widget_transparent">Controles transparentes</string>
+    <string name="map_widget_transparent">Widgets transparentes</string>
     <string name="bg_service_sleep_mode_off">Ejecutar 
 \n aplicación en modo reposo</string>
     <string name="bg_service_sleep_mode_on">Parar
@@ -1007,7 +1007,7 @@ Lon %2$s</string>
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
-    <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
+    <string name="gpx_monitoring_disabled_warn">Registra trazas usando el widget GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
     <string name="free_version_message">Puedes descargar o actualizar %1$s mapas.</string>
     <string name="free_version_title">Versión gratuita</string>
@@ -1887,7 +1887,7 @@ Lon %2$s</string>
     <string name="map_marker_1st">Primer marcador del mapa</string>
     <string name="map_marker_2nd">Segundo marcador del mapa</string>
     <string name="shared_string_toolbar">Barra de herramientas</string>
-    <string name="shared_string_widgets">Controles</string>
+    <string name="shared_string_widgets">Widgets</string>
     <string name="add_points_to_map_markers_q">¿Añadir todos los puntos como «Marcadores del mapa»?</string>
     <string name="shared_string_add_to_map_markers">Añadir a «Marcadores del mapa»</string>
     <string name="consider_turning_polygons_off">Se recomienda ocultar la visualización de polígonos.</string>
@@ -2425,11 +2425,11 @@ Lon %2$s</string>
     <string name="nothing_found_descr">Modificar la consulta de búsqueda o aumentar el radio de búsqueda.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje?</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_widget">Control de Mapillary</string>
+    <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
-    <string name="mapillary_action_descr">Contribuye con tu propia vista a nivel de calle de esta ubicación a través de Mapillary.</string>
+    <string name="mapillary_action_descr">Contribuye con tus propias imágenes a nivel de calle de esta ubicación a través de Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">No se encontraron fotos en esta ubicación.</string>
@@ -2574,7 +2574,7 @@ Lon %2$s</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar archivo</string>
-    <string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones de la interfaz y los controles.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones de la interfaz y los widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     <string name="mark_passed">Descartar</string>
     <string name="digits_quantity">Número de dígitos decimales</string>
@@ -2615,7 +2615,7 @@ Lon %2$s</string>
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
     <string name="one_tap_active">Activar «Una pulsación»</string>
     <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
-    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>
+    <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el widget o el menú contextual.</string>
     <string name="notes_by_date">Notas por fecha</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
@@ -3037,9 +3037,149 @@ Lon %2$s</string>
     <string name="move_maps">Mover mapas</string>
     <string name="dont_move_maps">No mover</string>
     <string name="public_transport_ped_route_title">La ruta a pie es de aproximadamente %1$s y podría ser más rápida que en transporte público</string>
-    <string name="public_transport_no_route_title">Por desgracia, OsmAnd no pudo encontrar una ruta adecuada para sus ajustes.</string>
+    <string name="public_transport_no_route_title">Por desgracia, OsmAnd no pudo encontrar una ruta adecuada a sus ajustes.</string>
     <string name="public_transport_try_ped">Prueba la navegación a pie.</string>
     <string name="public_transport_try_change_settings">Intenta cambiar los ajustes.</string>
     <string name="public_transport_calc_pedestrian">Calcular la ruta a pie</string>
     <string name="public_transport_type">Tipo de transporte</string>
+    <string name="coordinates_widget">Widget de coordenadas</string>
+    <string name="searching_gps">Buscando GPS</string>
+    <string name="rate_dialog_descr">Por favor, danos 30 segundos compartiendo tus comentarios y valorando nuestro trabajo en Google Play.</string>
+    <string name="button_rate">Valorar</string>
+    <string name="shared_string_privacy_policy">Política de privacidad</string>
+    <string name="help_us_make_osmand_better">¡Ayúdanos a mejorar OsmAnd!</string>
+    <string name="make_osmand_better_descr">Permitir a OsmAnd recopilar y procesar datos de uso anónimos de la aplicación. No recopilamos ni almacenamos datos sobre la ubicación, ni sobre las ubicaciones que ve en el mapa. 
+\n 
+\nPuedes cambiar la selección en cualquier momento en «Ajustes &gt; Privacidad y seguridad».</string>
+    <string name="choose_data_to_share">Elegir los tipos de datos a compartir:</string>
+    <string name="downloaded_maps">Mapas descargados</string>
+    <string name="visited_screens">Pantallas visitadas</string>
+    <string name="colleted_data">Datos recopilados</string>
+    <string name="collected_data_descr">Lista de datos a compartir con OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Recopilamos estos datos para entender qué mapas de regiones y países son los más populares.</string>
+    <string name="visited_screens_collect_descr">Recopilamos estos datos para entender qué características de OsmAnd son las más populares.</string>
+    <string name="privacy_and_security_change_descr">Al pulsar en «Permitir», se entiende que está de acuerdo con nuestra %1$s</string>
+    <string name="settings_privacy_and_security">Privacidad y seguridad</string>
+    <string name="settings_privacy_and_security_desc">Elegir los datos a compartir con nosotros</string>
+    <string name="shared_string_no_thank_you">No, gracias</string>
+    <string name="shared_string_allow">Permitir</string>
+    <string name="profile_name_hint">Nombre del perfil</string>
+    <string name="nav_type_hint">Tipo de navegación</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Autobús de enlace</string>
+    <string name="app_mode_subway">Metro</string>
+    <string name="app_mode_horse">Caballo</string>
+    <string name="app_mode_helicopter">Helicóptero</string>
+    <string name="osmand_routing_promo">Puedes añadir tu propia versión modificada del archivo «routing.xml» en «..osmand/routing»</string>
+    <string name="app_mode_skiing">Esquí</string>
+    <string name="base_profile_descr_ski">Esquí</string>
+    <string name="show_compass_ruler">Mostrar regla de brújula</string>
+    <string name="hide_compass_ruler">Ocultar regla de brújula</string>
+    <string name="select_icon_profile_dialog_title">Elegir icono</string>
+    <string name="settings_routing_mode_string">Modo: %s</string>
+    <string name="settings_derived_routing_mode_string">Modo de usuario, derivado de: %s</string>
+    <string name="routing_profile_ski">Esquí</string>
+    <string name="profile_type_descr_string">Tipo: %s</string>
+    <string name="profile_type_base_string">Perfil base</string>
+    <string name="profile_alert_need_routing_type_title">Elegir el tipo de navegación</string>
+    <string name="profile_alert_need_routing_type_msg">Elige un tipo de navegación para el nuevo perfil de aplicación</string>
+    <string name="profile_alert_need_profile_name_title">Ingresa el nombre del perfil</string>
+    <string name="profile_alert_need_profile_name_msg">¡El nombre del perfil no debe estar vacío!</string>
+    <string name="profile_alert_duplicate_name_title">Nombre duplicado</string>
+    <string name="profile_alert_duplicate_name_msg">Ya existe un perfil con ese nombre</string>
+    <string name="profile_alert_cant_delete_base">No se pueden borrar los perfiles base de OsmAnd</string>
+    <string name="profile_alert_need_save_title">Guardar cambios</string>
+    <string name="profile_alert_need_save_msg">Debes guardar los cambios en el perfil antes de continuar</string>
+    <string name="profile_alert_delete_title">Borrar perfil</string>
+    <string name="profile_alert_delete_msg">¿Borrar el perfil %s\?</string>
+    <string name="select_base_profile_dialog_title">Elegir un perfil base</string>
+    <string name="select_base_profile_dialog_message">El perfil personalizado se basa en uno de los perfiles de aplicación predefinidos, lo que define los ajustes básicos como la visibilidad predefinida de los widgets, las unidades de velocidad y distancia. Estos son los perfiles de aplicación predefinidos, junto con ejemplos de perfiles personalizados a los que se pueden ampliar:</string>
+    <string name="select_nav_profile_dialog_title">Elegir el tipo de navegación</string>
+    <string name="base_profile_descr_car">Automóvil, camión, motocicleta</string>
+    <string name="base_profile_descr_bicycle">Bicicleta de montaña, ciclomotor, caballo</string>
+    <string name="base_profile_descr_pedestrian">Caminata, senderismo, correr</string>
+    <string name="base_profile_descr_public_transport">Transporte público (todos)</string>
+    <string name="base_profile_descr_boat">Barco, remo, vela</string>
+    <string name="base_profile_descr_aircraft">Avión, planeador</string>
+    <string name="routing_profile_geocoding">Geocodificación</string>
+    <string name="routing_profile_straightline">Línea recta</string>
+    <string name="routing_profile_broutrer">BRouter (sin conexión)</string>
+    <string name="osmand_default_routing">Enrutamiento de OsmAnd</string>
+    <string name="custom_routing">Perfil de enrutamiento personalizado</string>
+    <string name="special_routing_type">Enrutamiento especial</string>
+    <string name="third_party_routing_type">Enrutamiento de terceros</string>
+    <string name="application_profiles_descr">Perfiles que serán visibles en la aplicación.</string>
+    <string name="application_profiles">Perfiles de aplicación</string>
+    <string name="zoom_by_wunderlinq_descr">Cambia el zoom del mapa desplazando la rueda hacia arriba y abajo. La tecla «Escape» retrocede a la aplicación WunderLINQ.</string>
+    <string name="zoom_by_wunderlinq">Controlar con WunderLINQ</string>
+    <string name="quick_action_need_to_add_item_to_list">Debes añadir al menos un elemento a la lista en los ajustes de «Acción rápida»</string>
+    <string name="routing_attr_piste_type_downhill_name">Esquí alpino/de descenso</string>
+    <string name="routing_attr_piste_type_downhill_description">Pistas de esquí alpino o de descenso y acceso a remontes mecánicos.</string>
+    <string name="routing_attr_piste_type_nordic_name">Esquí de travesía/nórdico</string>
+    <string name="routing_attr_piste_type_nordic_description">Senderos para esquí nórdico o de travesía.</string>
+    <string name="routing_attr_piste_type_skitour_name">Esquí de travesía</string>
+    <string name="routing_attr_piste_type_skitour_description">Rutas para esquí de travesía.</string>
+    <string name="routing_attr_piste_type_sled_name">Trineo</string>
+    <string name="routing_attr_piste_type_sled_description">Pendientes para uso de trineos.</string>
+    <string name="routing_attr_allow_intermediate_name">Permitir rutas intermedias</string>
+    <string name="routing_attr_allow_intermediate_description">Rutas más difíciles con tramos más empinados. Generalmente algunos obstáculos que deben evitarse.</string>
+    <string name="routing_attr_allow_advanced_name">Permitir rutas avanzadas</string>
+    <string name="routing_attr_allow_advanced_description">Rutas difíciles, con obstáculos peligrosos y tramos empinados.</string>
+    <string name="routing_attr_allow_expert_name">Permitir rutas expertas</string>
+    <string name="routing_attr_allow_expert_description">Rutas extremadamente difíciles, con obstáculos peligrosos y alrededores.</string>
+    <string name="routing_attr_allow_skating_only_name">Permitir sólo rutas de patinaje</string>
+    <string name="routing_attr_allow_skating_only_description">Rutas preparadas para estilo libre o sólo patinaje sin senderos clásicos.</string>
+    <string name="routing_attr_allow_classic_only_name">Permitir sólo rutas clásicas</string>
+    <string name="routing_attr_allow_classic_only_description">Rutas preparadas para el estilo clásico sin pistas de patinaje. Esto incluye rutas preparadas por una moto de nieve más pequeña con pistas más sueltas y senderos hechos manualmente por los esquiadores.</string>
+    <string name="routing_attr_difficulty_preference_name">Dificultad preferida</string>
+    <string name="routing_attr_difficulty_preference_description">Preferir rutas de esta dificultad, aunque el trazado sobre pistas más duras o más fáciles sigue siendo posible si son más cortas.</string>
+    <string name="routing_attr_freeride_policy_name">Fuera de pista</string>
+    <string name="routing_attr_freeride_policy_description">Los senderos libres y fuera de pista son rutas y pasajes no oficiales. Típicamente descuidados, no mantenidos por los oficiales y no controlados por la noche. Entrar bajo su propio riesgo.</string>
+    <string name="process_downloading_service">Servicio de descarga de OsmAnd</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Icono</string>
+    <string name="collected_data">Datos recopilados</string>
+    <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
+    <string name="shared_string_min_speed">Velocidad mínima</string>
+    <string name="shared_string_max_speed">Velocidad máxima</string>
+    <string name="default_speed_setting_title">Velocidad predefinida</string>
+    <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
+    <string name="minmax_speed_dialog_title">Fijar velocidad mín/máx</string>
+    <string name="default_speed_dialog_msg">Se usa para calcular la hora de llegada prevista durante la ruta</string>
+    <string name="new_profile">Nuevo perfil</string>
+    <string name="shared_string_crash">Cuelgue</string>
+    <string name="last_launch_crashed">OsmAnd falló la ultima vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
+    <string name="app_mode_ufo">Ovni</string>
+    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado.
+\n
+\n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil
+\n
+\n • Se ha añadido un widget para las coordenadas actuales
+\n
+\n • Se añadieron opciones para mostrar la brújula y una regla radial en el mapa
+\n
+\n • Se ha corregido la grabación de trazas en segundo plano
+\n
+\n • Se mejoraron las descargas de mapas en segundo plano 
+\n
+\n • Se ha corregido la selección de idioma de Wikipedia 
+\n
+\n • Se ha corregido el comportamiento de los botones de la brújula durante la navegación
+\n
+\n • Otras correcciones de errores
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Transportador personal</string>
+    <string name="app_mode_monowheel">Monociclo</string>
+    <string name="app_mode_scooter">Motoneta</string>
+    <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisión horizontal: %s</string>
+    <string name="app_mode_offroad">Todo terreno</string>
+    <string name="edit_profile_setup_title">Ajustes del perfil</string>
+    <string name="edit_profile_setup_subtitle">El perfil mantiene su propios ajustes</string>
+    <string name="edit_profile_setup_map_subtitle">Elige las opciones de mapa predefinidas para el perfil</string>
+    <string name="edit_profile_screen_options_subtitle">Marca las opciones de pantalla predefinidas para el perfil</string>
+    <string name="edit_profile_nav_settings_subtitle">Elige la configuración de navegación predefinida para el perfil</string>
+    <string name="routing_attr_max_num_changes_description">Especifica el número máximo de trasbordos</string>
+    <string name="routing_attr_max_num_changes_name">Número de trasbordos</string>
 </resources>

@@ -2,9 +2,7 @@
 <resources>
     <string name="background_work_description">Zmień ustawienia optymalizacji baterii, aby zapewnić stabilną lokalizację.</string>
     <string name="background_work">Praca w tle</string>
-    <string name="battery_optimization_description">Aby stabilnie udostępniać swoją pozycję w tle, zaleca się wyłączenie optymalizacji baterii dla Tracker OsmAnd.
-\n
-\nJeśli włączona jest optymalizacja, system może automatycznie wyłączyć aplikację działającą w tle (gdy ekran jest zablokowany i/lub aplikacja jest zminimalizowana). Dzieje się tak bez powiadomienia i powoduje zatrzymanie położenia geograficznego.</string>
+    <string name="battery_optimization_description">Wyłącz optymalizację baterii dla OsmAnd Tracker, aby nie została nagle wyłączona, gdy znajduje się w tle.</string>
     <string name="sharing_in_background">Udostępnianie w tle</string>
     <string name="go_to_settings">Przejdź do ustawień</string>
     <string name="shared_string_later">Później</string>
@@ -46,7 +44,7 @@
     <string name="connected_account">Połączone konta</string>
     <string name="shared_string_account">Konto</string>
     <string name="in_time">w %1$s</string>
-    <string name="osmand_connect_desc">Wybierz wersję OsmAnd, którą Tracker OsmAnd będzie używał do wyświetlaniu pozycji.</string>
+    <string name="osmand_connect_desc">Wybierz wersję OsmAnd, której używa OsmAnd Tracker do wyświetlania pozycji.</string>
     <string name="osmand_connect">Połącz OsmAnd</string>
     <string name="location_history_desc">Ukryj kontakty, które nie zostały przeniesione w określonym czasie.</string>
     <string name="location_history">Historia lokalizacji</string>
@@ -236,4 +234,12 @@
     <string name="proxy">Serwer proxy</string>
     <string name="privacy">Prywatność</string>
     <string name="bearing">Kierunek</string>
+    <string name="shared_string_select">Wybierz</string>
+    <string name="min_logging_distance">Minimalna odległość rejestrowania</string>
+    <string name="min_logging_distance_descr">Filtr: minimalna odległość do zarejestrowania nowego punktu</string>
+    <string name="min_logging_accuracy">Minimalna dokładność rejestrowania</string>
+    <string name="min_logging_accuracy_descr">Filtr: brak rejestrowania, chyba że zostanie osiągnięta dokładność</string>
+    <string name="min_logging_speed">Minimalna szybkość rejestrowania</string>
+    <string name="min_logging_speed_descr">Filtr: brak rejestrowania poniżej wybranej prędkości</string>
+    <string name="gpx_settings">Ustawienia GPX</string>
 </resources>

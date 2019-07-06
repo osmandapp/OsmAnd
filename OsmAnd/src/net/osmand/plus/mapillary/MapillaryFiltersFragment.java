@@ -57,7 +57,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
         final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
         final int backgroundColor = ContextCompat.getColor(getActivity(),
-                nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+                nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
         final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_mapillary_filters, null);
@@ -71,10 +71,10 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         int toggleIconId;
         if (selected) {
             toggleIconId = R.drawable.ic_action_view;
-            toggleIconColorId = nightMode ? R.color.color_dialog_buttons_dark : R.color.color_dialog_buttons_light;
+            toggleIconColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
         } else {
             toggleIconId = R.drawable.ic_action_hide;
-            toggleIconColorId = nightMode ? 0 : R.color.icon_color;
+            toggleIconColorId = nightMode ? 0 : R.color.icon_color_default_light;
         }
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
         final Drawable drawable = getIcon(toggleIconId, toggleIconColorId);
@@ -110,7 +110,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final int colorRes = nightMode ? R.color.color_white : R.color.icon_color;
+        final int colorRes = nightMode ? R.color.color_white : R.color.icon_color_default_light;
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon)).setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top_dark, colorRes));

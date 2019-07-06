@@ -185,7 +185,7 @@
     <string name="poi_hostel">Auberge de jeunesse</string>
     <string name="poi_hotel">Hôtel</string>
     <string name="poi_hunting_stand">Affût surélevé</string>
-    <string name="poi_ice_cream">Glacier</string>
+    <string name="poi_ice_cream">Magasin de glaces</string>
     <string name="poi_ice_rink">Patinoire</string>
     <string name="poi_ice_stock">Eisstock</string>
     <string name="poi_information">Informations</string>
@@ -3532,4 +3532,24 @@
     <string name="poi_cable_number">Numéro de câble</string>
     <string name="poi_outcrop">Affleurement</string>
     <string name="poi_atoll">Atoll</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_free_flying_site_toplanding">Atterrissage à un sommet</string>
+    <string name="poi_bicycle_parking_streetpod">Borne à vélos</string>
+    <string name="poi_crossing_saltire_yes">Croix de Saint-André</string>
+    <string name="poi_crossing_saltire_no">Croix de Saint-André : non</string>
+    <string name="poi_pump_type_beam_pump">Type de pompe : à balancier</string>
+    <string name="poi_payment_troika_yes">Troika</string>
+    <string name="poi_fire_operator">Opérateur incendie</string>
+    <string name="poi_animal_keeping_type_paddock">Type : enclos</string>
+    <string name="poi_spaceport">Spatioport</string>
+    <string name="poi_water_purification_aquatabs">Aquatabs</string>
+    <string name="poi_climbing_quality_solid">Qualité pour l\'escalade : solide</string>
+    <string name="poi_climbing_quality_fragile">Qualité pour l\'escalade : fragile</string>
+    <string name="poi_climbing_summit_log_yes">Registre d\'escalade au sommet : oui</string>
+    <string name="poi_climbing_summit_log_no">Registre d\'escalade au sommet : non</string>
+    <string name="poi_diameter_crown">Diamètre de la couronne</string>
+    <string name="poi_socket_type2_combo_yes">Type 2 combo</string>
+    <string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+    <string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+    <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
 </resources>

@@ -34,6 +34,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -171,9 +172,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		secondIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_street_name));
 
 		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.first_divider),
-				nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.second_divider),
-				nightMode, R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+				nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 
 		searchView.findViewById(R.id.first_item).setOnClickListener(new OnClickListener() {
 			@Override
@@ -256,6 +257,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											targetPointsHelper.setWorkPoint(ll, null);
 											break;
 									}
+								} else if (pointType == PointType.START) {
+									if (targetPointsHelper.getPointToStart() != null) {
+										targetPointsHelper.clearStartPoint(true);
+										app.getSettings().backupPointToStart();
+									}
 								}
 							} else if (activity != null) {
 								ActivityCompat.requestPermissions(activity,
@@ -333,6 +339,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						MapActivity mapActivity = (MapActivity) getActivity();
 						if (mapActivity != null) {
 							TargetPointsHelper targetsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+							TargetPoint startPoint = targetsHelper.getPointToStart();
+							if (startPoint == null) {
+								mapActivity.getMyApplication().showShortToastMessage(R.string.route_add_start_point);
+								return;
+							}
 							WaypointDialogHelper.switchStartAndFinish(targetsHelper, targetsHelper.getPointToNavigate(),
 									mapActivity, targetsHelper.getPointToStart(), mapActivity.getMyApplication(),
 									mapActivity.getDashboard().getWaypointDialogHelper());
@@ -447,7 +458,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			ll = new LatLon(point.getLatitude(), point.getLongitude());
 			name = point.getPointDescription();
 		} else if (item instanceof PointType) {
-			TargetPointsHelper.TargetPoint point = null;
+			TargetPoint point = null;
 			if (item == PointType.HOME) {
 				point = helper.getHomePoint();
 			} else if (item == PointType.WORK) {
@@ -587,7 +598,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				} else {
 					if (item instanceof PointType) {
 						final TargetPointsHelper helper = app.getTargetPointsHelper();
-						TargetPointsHelper.TargetPoint point = null;
+						TargetPoint point = null;
 						if (item == PointType.HOME) {
 							point = helper.getHomePoint();
 							favoriteViewHolder.title.setText(getString(R.string.home_button));

@@ -16,7 +16,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="16dp"
-            android:background="?attr/ctx_menu_info_view_bg"/>
+            android:background="?attr/activity_background_color"/>
 
         <View
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="16dp"
-            android:background="?attr/ctx_menu_info_view_bg"/>
+            android:background="?attr/activity_background_color"/>
 
     </LinearLayout>
 

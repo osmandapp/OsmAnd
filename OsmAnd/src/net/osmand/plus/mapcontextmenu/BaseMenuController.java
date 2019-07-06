@@ -90,7 +90,7 @@ public abstract class BaseMenuController {
 	}
 
 	protected Drawable getIcon(int iconId) {
-		return getIcon(iconId, isLight() ? R.color.icon_color : R.color.icon_color_light);
+		return getIcon(iconId, isLight() ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	protected Drawable getIcon(int iconId, int colorId) {

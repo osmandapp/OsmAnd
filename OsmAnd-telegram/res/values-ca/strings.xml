@@ -234,4 +234,12 @@
     <string name="proxy_settings">Configuració del servidor intermediari</string>
     <string name="proxy">Servidor intermediari</string>
     <string name="privacy">Privacitat</string>
+    <string name="shared_string_select">Selecciona</string>
+    <string name="min_logging_distance">Distància mínima d\'enregistrament</string>
+    <string name="min_logging_distance_descr">Filtre: distància mínima per enregistrar un punt nou</string>
+    <string name="min_logging_accuracy">Precisió mínima de registre</string>
+    <string name="min_logging_accuracy_descr">Filtre: no s\'enregistra sense assolir la precisió mínima</string>
+    <string name="min_logging_speed">Velocitat mínima de registre</string>
+    <string name="min_logging_speed_descr">Filtre: no s\'enregistra per sota de la velocitat seleccionada</string>
+    <string name="gpx_settings">Configuració GPX</string>
 </resources>

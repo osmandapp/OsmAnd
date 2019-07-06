@@ -2000,7 +2000,7 @@
     <string name="poi_ramp_wheelchair_yes">Rampa per carrozzina: Sì</string>
     <string name="poi_ramp_wheelchair_no">Rampa per carrozzina: No</string>
     <string name="poi_feeding_place">Mangiatoia</string>
-    <string name="poi_social_facility_for">Gruppo bersaglio</string>
+    <string name="poi_social_facility_for">Gruppo di destinazione</string>
     <string name="poi_emergency_infrastructure">Infrastruttura emergenza</string>
     <string name="poi_beds">Letti</string>
     <string name="poi_recreation_center">Centro ricreativo</string>
@@ -2374,4 +2374,21 @@
     <string name="poi_license_classes">Classi di licenza</string>
     <string name="poi_atm">Bancomat</string>
     <string name="poi_recycling_hardcore">Macerie inerti</string>
+    <string name="poi_buoy_isolated_danger">Boa, pericolo isolato</string>
+    <string name="poi_landmark">Punto di interesse</string>
+    <string name="poi_mooring">Ormeggio</string>
+    <string name="poi_attraction_amusement_ride">Giostra</string>
+    <string name="poi_attraction_slide">Scivolo</string>
+    <string name="poi_attraction_water_slide">Scivolo acquatico</string>
+    <string name="poi_piste_hike">Sentiero escursionistico</string>
+    <string name="poi_lean_to">Capannone</string>
+    <string name="poi_denomination_quaker">Quaker</string>
+    <string name="poi_greenfield">Terreno edificabile</string>
+    <string name="poi_bulk_purchase">Acquisto all\'ingrosso</string>
+    <string name="poi_substation_type">Tipo</string>
+    <string name="poi_books_type">Libri</string>
+    <string name="poi_denotation">Denotazione</string>
+    <string name="poi_park_ride">Parcheggia e prendi la bici</string>
+    <string name="poi_rtsa_scale_filter">Categoria di difficoltà</string>
+    <string name="poi_climbing_crag_filter">Falesia</string>
 </resources>

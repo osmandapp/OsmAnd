@@ -36,6 +36,6 @@
         android:text="@string/shared_string_dismiss"
         android:layout_gravity="right"
         android:background="?attr/selectableItemBackground"
-        android:textColor="@color/dashboard_blue"
+        android:textColor="@color/active_color_primary_light"
         android:textAllCaps="true"/>
 </LinearLayout>

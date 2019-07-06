@@ -135,16 +135,16 @@
     <string name="km_h">km/h</string>
     <string name="mile_per_hour">mph</string>
     <string name="si_kmh">Chilòmetros a s\'ora</string>
-    <string name="si_mph">Mìglios a s\'ora</string>
+    <string name="si_mph">Mìllias a s\'ora</string>
     <string name="si_m_s">Metros a su segundu</string>
     <string name="si_min_km">Minutos a su chilòmetru</string>
-    <string name="si_min_m">Minutos a su mìgliu</string>
+    <string name="si_min_m">Minutos a su mìlliu</string>
     <string name="si_nm_h">Mìglios nàuticos a s\'ora (knot)</string>
-    <string name="si_mi_feet">Mìglios/pedes</string>
-    <string name="si_mi_yard">Mìglios/iardas</string>
+    <string name="si_mi_feet">Mìllias/pedes</string>
+    <string name="si_mi_yard">Mìllias/iardas</string>
     <string name="si_km_m">Chilòmetros/metros</string>
-    <string name="si_nm">Mìglios nàuticos</string>
-    <string name="si_mi_meters">Mìglios/metros</string>
+    <string name="si_nm">Mìllias nàuticas</string>
+    <string name="si_mi_meters">Mìllias/metros</string>
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">seg</string>
@@ -233,4 +233,12 @@
     <string name="proxy">Servidore intermediàriu (proxy)</string>
     <string name="privacy">Privadesa</string>
     <string name="bearing">Andamentu</string>
+    <string name="shared_string_select">Seletziona</string>
+    <string name="min_logging_distance">Distàntzia mìnima de registratzione</string>
+    <string name="min_logging_distance_descr">FIltru: distàntzia mìnima pro registrare unu puntu nou</string>
+    <string name="min_logging_accuracy">Pretzisione mìnima de registratzione</string>
+    <string name="min_logging_accuracy_descr">Filtru: peruna registratzione si sa pretzisione no est istada retzida</string>
+    <string name="min_logging_speed">Lestresa mìnima de registratzione</string>
+    <string name="min_logging_speed_descr">Filtru: peruna registratzione in suta de sa lestresa isseberada</string>
+    <string name="gpx_settings">Impostatziones GPX</string>
 </resources>

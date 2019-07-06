@@ -1,50 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="text_color_primary_light">#212121</color>
+	<color name="text_color_primary_dark">#cccccc</color>
+	<color name="text_color_secondary_light">#727272</color>
+	<color name="text_color_secondary_dark">#727272</color>
+	<color name="text_color_tertiary_light">#bfbfbf</color>
+	<color name="text_color_tertiary_dark">#404040</color>
+	<color name="active_color_primary_light">#237bff</color>
+	<color name="active_color_primary_dark">#d28521</color>
+	<color name="divider_color_light">#e6e6e6</color>
+	<color name="divider_color_dark">#2c3033</color>
+	<color name="activity_background_color_light">#f0f0f0</color>
+	<color name="activity_background_color_dark">#17181a</color>
+	<color name="activity_background_transparent_color_light">#eaf0f0f0</color>
+	<color name="activity_background_transparent_color_dark">#ea17181a</color>
+	<color name="list_background_color_light">#ffffff</color>
+	<color name="list_background_color_dark">#222526</color>
+	<color name="app_bar_color_light">#ff8800</color>
+	<color name="app_bar_color_dark">#101112</color>
+	<color name="status_bar_color_light">#e68200</color>
+	<color name="status_bar_color_dark">#101112</color>
+
+	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>
+	<color name="active_buttons_and_links_bg_pressed_dark">#b87114</color>
+	<color name="inactive_buttons_and_links_bg_light">#f0f0f0</color>
+	<color name="inactive_buttons_and_links_bg_dark">#303436</color>
+	<color name="active_buttons_and_links_text_light">#ffffff</color>
+	<color name="active_buttons_and_links_text_dark">#cccccc</color>
+	<color name="active_buttons_and_links_text_disabled_light">#727272</color>
+	<color name="active_buttons_and_links_text_disabled_dark">#727272</color>
+	<color name="stroked_buttons_and_links_bg_light">#00ffffff</color>
+	<color name="stroked_buttons_and_links_bg_dark">#0017181a</color>
+	<color name="stroked_buttons_and_links_outline_light">#cccccc</color>
+	<color name="stroked_buttons_and_links_outline_dark">#303336</color>
+
 	<color name="subscription_active_bg_color_light">#fff9b2</color>
 	<color name="subscription_active_bg_color_dark">#43453b</color>
 	<color name="subscription_active_div_color_light">#f3edae</color>
 	<color name="subscription_active_div_color_dark">#32332c</color>
-
 	<color name="feature_purchased_bg">#78cc5c</color>
 
-	<color name="dialog_bg_color_light">#f0f0f0</color>
-	<color name="dialog_bg_color_night">#17191a</color>
-	<color name="dialog_transparent_bg_color_light">#eaf0f0f0</color>
-	<color name="dialog_transparent_bg_color_night">#ea17191a</color>
-
-	<color name="dialog_title_color_light">#212121</color>
-	<color name="dialog_title_color_dark">#cccccc</color>
-	<color name="dialog_description_color_light">#212121</color>
-	<color name="dialog_description_color_dark">#727272</color>
-	<color name="dialog_divider_light">#e6e6e6</color>
-	<color name="dialog_divider_dark">#2d3133</color>
-	<color name="dialog_text_description_color">#727272</color>
-	<color name="dialog_text_description_color_night">#808080</color>
-	<color name="card_description_text_color_light">#b3b3b3</color>
-	<color name="card_description_text_color_dark">#4d4d4d</color>
-
-	<color name="ctx_menu_nearby_routes_text_color_dark">#bfbfbf</color>
 	<color name="map_toolbar_switch_track_color">#c5d2e6</color>
+
 	<color name="mapillary_color">#3db878</color>
 	<color name="mapillary_color_pressed">#3a9f73</color>
 	<color name="mapillary_action_bar">#14c45d</color>
 	<color name="buy_button_color">#50ae55</color>
     <color name="buy_button_pressed_color">#b5e5b9</color>
 
-	<color name="gpx_track_width_prop">#853fc5</color>
     <color name="xmas_blue">#3f51b5</color>
 
-	<color name="disabled_btn_text_color">#a0a0a0</color>
 	<color name="discount_bar_bg">#357ef2</color>
 
-    <color name="searchbar_text_dark">#fff</color>
-    <color name="searchbar_text_light">#212121</color>
-    <color name="searchbar_text_hint_dark">#7a8c99</color>
-    <color name="searchbar_text_hint_light">#727272</color>
+	<color name="text_color_tab_active_dark">#cccccc</color>
+	<color name="text_color_tab_active_light">#ffffff</color>
 
-	<color name="searchbar_tab_inactive_dark">#5b6872</color>
-	<color name="searchbar_tab_inactive_light">#727272</color>
+    <color name="searchbar_text_hint_dark">#727272</color>
+    <color name="searchbar_text_hint_light">#727272</color>
+	<color name="searchbar_tab_inactive_dark">#66FFFFFF</color>
+	<color name="searchbar_tab_inactive_light">#B3FFFFFF</color>
+
+	<color name="icon_color_default_light">#727272</color>
+	<color name="icon_color_default_dark">#727272</color>
+	<color name="icon_color_secondary_light">#b3b3b3</color>
+	<color name="icon_color_secondary_dark">#4d4d4d</color>
+	<color name="icon_color_primary_light">#4d4d4d</color>
+	<color name="icon_color_primary_dark">#b3b3b3</color>
+
+	<color name="icon_color_osmand_light">#ff8800</color>
+	<color name="icon_color_osmand_dark">#d28521</color>
+	<color name="icon_color_active_light">#237bff</color>
+	<color name="icon_color_active_dark">#d28521</color>
+
+	<color name="on_map_icon_color">#505050</color>
 
     <color name="markers_top_bar_background">#0f5257</color>
     <color name="markers_top_bar_2nd_background">#0c4347</color>
@@ -62,11 +91,6 @@
 	<color name="popup_separator_color">#BBBBBB</color>
 	<color name="popup_text_color">#FFFFFF</color>
 
-	<color name="primary_text_light">#de000000</color>
-	<color name="secondary_text_light">#8a000000</color>
-	<color name="primary_text_dark">#ffffffff</color>
-	<color name="secondary_text_dark">#b3ffffff</color>
-
 	<color name="audio_video_icon_color">#128a89</color>
     <color name="created_poi_icon_color">#4caf50</color>
     <color name="osm_bug_unresolved_icon_color">#d44a4a</color>
@@ -75,9 +99,6 @@
 	<color name="osmand_orange">#ff8f00</color>
 	<color name="app_mode_icon_color">#33B4E4</color>
 	<color name="recording_color">#F44336</color>
-
-	<color name="dash_search_icon_light">#536DFE</color>
-	<color name="dash_search_icon_dark">#7a8c99</color>
 
 	<color name="parking_outdated_color">#f41a34</color>
 	<color name="osmo_header_dark">#2d383d</color>
@@ -91,16 +112,8 @@
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
 
 	<color name="list_divider_dark">#1f2326</color>
-	<color name="list_divider_light">@color/color_white</color>
-	<color name="list_sub_menu_background_dark">#475259</color>
-	<!-- <color name="list_item_light">@color/color_white</color>
-	<color name="list_item_background_dark">#333b40</color> -->
-	<color name="list_item_light">#fff</color>
-	<color name="list_item_dark">#333b40</color>
-	<color name="list_item_light_pressed">#8cd0d0d0</color>
-	<color name="list_item_dark_pressed">#be39464d</color>
-	<color name="bg_color_light">#fff</color>
-	<color name="bg_color_dark">#333b40</color>
+	<color name="list_item_light_pressed">#8cffffff</color>
+	<color name="list_item_dark_pressed">#be222526</color>
 
 	<color name="fab_color">#ff8f00</color>
 	<color name="fab_color_pressed">#e58200</color>
@@ -119,46 +132,13 @@
 	<color name="map_progress_bar_bg_light">#f0f0f0</color>
 	<color name="map_progress_bar_bg_dark">#1b1d1f</color>
 
-
-	<color name="actionbar_dark_color">#39464d</color>
 	<color name="tool_bar_color_dark">#CC080B0D</color>
-	<color name="actionbar_light_color">#ff8f00</color>
 	<color name="tool_bar_color_light">#CC080B0D</color>
 	<color name="tool_bar_orange_color_light">#b4ff8f00</color>
 
 	<color name="download_pressed_light">#8cff8f00</color>
 	<color name="download_pressed_dark">#be39464d</color>
 
-    <color name="search_background_dark">#292f33</color>
-
-	<color name="icon_color">#727272</color>
-	<color name="icon_color_light">#ccc</color>
-	<color name="icon_color_dark">#ff4f4f4f</color>
-
-	<color name="on_map_icon_color">#505050</color>
-
-	<color name="ctx_menu_info_view_bg_light">#eaeaea</color>
-	<color name="ctx_menu_info_view_bg_dark">#292f33</color>
-	<color name="ctx_menu_info_text_light">#212121</color>
-	<color name="ctx_menu_info_text_dark">#b4c3cc</color>
-	<color name="ctx_menu_info_divider_light">#d9d9d9</color>
-	<color name="ctx_menu_info_divider_dark">#333b40</color>
-	<color name="ctx_menu_card_btn_light">#F5F5F5</color>
-	<color name="ctx_menu_card_btn_dark">#3d474c</color>
-
-	<color name="dashboard_gpx_on_map">#448AFF</color>
-	<color name="dashboard_background">#eaeaea</color>
-	<color name="dashboard_divider_light">#F0F0F0</color>
-	<color name="dashboard_divider_dark">#3d474c</color>
-	<color name="dashboard_black">#212121</color>
-	<color name="dashboard_blue">#536DFE</color>
-	<color name="dashboard_subheader_text_dark">#b4c3cc</color>
-	<color name="dashboard_subheader_text_light">#727272</color>
-	<color name="dashboard_general_button_text_dark">#ff8f00</color>
-	<color name="dashboard_general_button_text_light">#536DFE</color>
-
-	<color name="status_bar_light">#e58200</color>
-	<color name="status_bar_dark">#2f3a40</color>
 	<color name="status_bar_transparent_light">#66000000</color>
 	<color name="status_bar_transparent_dark">#99000000</color>
 	<color name="status_bar_transparent_gradient">#CC000000</color>
@@ -173,12 +153,13 @@
 	<color name="status_bar_wikivoyage_article_light">#f2f2f2</color>
 	<color name="status_bar_wikivoyage_article_dark">#222526</color>
 
-
 	<color name="color_transparent">#0000</color>
 	<color name="color_black_transparent">#90000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
+	<color name="widgettext_day">#000</color>
 	<!-- widgettext_shadow_night is the same as widget background color for non-transparent night skin (from box_night_free_simple.9.png) -->
 	<color name="widgettext_shadow_night">#dc262626</color>
+	<color name="widgettext_shadow_day">#fff</color>
 
 	<!-- style colors  -->
 	<color name="group_background">#A5A5A5</color>
@@ -270,14 +251,6 @@
 	<color name="osmand_orange_dark">#e68200</color>
 	<color name="divider_color">#ccc</color>
 
-	<color name="color_dialog_buttons_light">#2f7af5</color>
-    <color name="color_dialog_buttons_dark">#ff8800</color>
-
-	<color name="gpx_split_overview_light">#2f7af5</color>
-	<color name="gpx_split_overview_dark">#ff8800</color>
-
-	<color name="dialog_inactive_text_color_dark">#78909c</color>
-
 	<!-- DownloadedRegionsLayer -->
 	<color name="region_uptodate">#5532C832</color>
 	<color name="region_backuped">#55FF8F00</color>
@@ -349,10 +322,6 @@
 	<color name="color_osm_edit_modify">#fac403</color>
 	<color name="color_osm_edit_delete">#ee5622</color>
 
-	<color name="ctx_menu_bg_light">#ffffff</color>
-	<color name="ctx_menu_bg_dark">#17191a</color>
-	<color name="ctx_menu_title_color_light">#212121</color>
-	<color name="ctx_menu_title_color_dark">#cccccc</color>
 	<color name="ctx_menu_subtitle_color">#727272</color>
 	<color name="ctx_menu_direction_color_light">#536dfe</color>
 	<color name="ctx_menu_direction_color_dark">#e69122</color>
@@ -380,8 +349,6 @@
 	<color name="ctx_menu_bottom_view_bg_dark">#17191a</color>
 	<color name="ctx_menu_bottom_view_icon_light">#b3b3b3</color>
 	<color name="ctx_menu_bottom_view_icon_dark">#454a4d</color>
-	<color name="ctx_menu_bottom_view_text_color_light">#212121</color>
-	<color name="ctx_menu_bottom_view_text_color_dark">#cccccc</color>
 	<color name="ctx_menu_bottom_view_secondary_text_color_light">#a6a6a6</color>
 	<color name="ctx_menu_bottom_view_secondary_text_color_dark">#595959</color>
 	<color name="ctx_menu_amenity_opened_text_color">#5baf3f</color>
@@ -444,12 +411,8 @@
 	<color name="wikivoyage_bottom_bar_divider_dark">#2d3133</color>
 	<color name="wikivoyage_secondary_btn_bg_light">#f0f0f0</color>
 	<color name="wikivoyage_secondary_btn_bg_dark">#2d3133</color>
-	<color name="wikivoyage_primary_btn_text_light">#ffffff</color>
-	<color name="wikivoyage_primary_btn_text_dark">#cccccc</color>
 	<color name="wikivoyage_welcome_bg_light">#ffffff</color>
 	<color name="wikivoyage_welcome_bg_dark">#000000</color>
-	<color name="wikivoyage_primary_text_light">#212121</color>
-	<color name="wikivoyage_primary_text_dark">#cccccc</color>
 	<color name="wikivoyage_secondary_text">#727272</color>
 	<color name="wikivoyage_start_editing_card_image_background">#339966</color>
 	<color name="wikivoyage_open_beta_card_image_background">#008bf8</color>
@@ -469,21 +432,9 @@
 	<color name="activity_background_light">#f0f0f0</color>
 	<color name="card_and_list_background_dark">#222526</color>
 	<color name="card_and_list_background_light">#ffffff</color>
-	<color name="divider_dark">#1b1d1f</color>
-	<color name="divider_light">#f0f0f0</color>
-	<color name="main_font_dark">#cccccc</color>
-	<color name="main_font_light">#212121</color>
 	<color name="description_font_and_bottom_sheet_icons">#727272</color>
 	<color name="additional_description_dark">#4d4d4d</color>
 	<color name="additional_description_light">#b3b3b3</color>
-	<color name="active_buttons_and_links_light">#237bff</color>
-	<color name="active_buttons_and_links_dark">#d28521</color>
-	<color name="active_buttons_and_links_pressed_light">#0F67EB</color>
-	<color name="active_buttons_and_links_pressed_dark">#B87114</color>
-	<color name="inactive_buttons_and_links_light">#F0F0F0</color>
-	<color name="inactive_buttons_and_links_dark">#222526</color>
-	<color name="stroked_buttons_and_links_light">#ffffff</color>
-	<color name="stroked_buttons_and_links_dark">#17181A</color>
 	<color name="inactive_pages_light">#cccccc</color>
 	<color name="inactive_pages_dark">#505050</color>
 	<color name="active_buttons_and_links_trans_light">#66237bff</color>
@@ -492,10 +443,22 @@
 	<color name="profile_button_gray">#EFEFEF</color>
 	<color name="profile_button_gray_pressed">#ababab</color>
 
-	<color name="active_buttons_and_links_text_disabled_light">#727272</color>
-	<color name="active_buttons_and_links_text_disabled_dark">#727272</color>
-	<color name="active_buttons_and_links_text_light">#ffffff</color>
-	<color name="active_buttons_and_links_text_dark">#cccccc</color>
+	<color name="profile_icon_color_blue_light_default">#237BFF</color>
+	<color name="profile_icon_color_purple_light">#732EEB</color>
+	<color name="profile_icon_color_green_light">#0EBE92</color>
+	<color name="profile_icon_color_blue_light">#007EB3</color>
+	<color name="profile_icon_color_red_light">#FF2200</color>
+	<color name="profile_icon_color_yellow_light">#F0B400</color>
+	<color name="profile_icon_color_magenta_light">#CC0063</color>
 
+	<color name="profile_icon_color_blue_dark_default">#B3237BFF</color>
+	<color name="profile_icon_color_purple_dark">#B3732EEB</color>
+	<color name="profile_icon_color_green_dark">#B30EBE92</color>
+	<color name="profile_icon_color_blue_dark">#B3007EB3</color>
+	<color name="profile_icon_color_red_dark">#B3FF2200</color>
+	<color name="profile_icon_color_yellow_dark">#B3F0B400</color>
+	<color name="profile_icon_color_magenta_dark">#B3CC0063</color>
+
+	<color name="profile_icon_color_inactive">#727272</color>
 
 </resources>

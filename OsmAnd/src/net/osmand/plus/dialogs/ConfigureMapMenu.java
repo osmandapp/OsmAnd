@@ -1325,7 +1325,7 @@ public class ConfigureMapMenu {
 			String text = getItem(position);
 			label.setText(text);
 			label.setTextColor(!lightTheme ?
-					ContextCompat.getColorStateList(getContext(), android.R.color.primary_text_dark) : ContextCompat.getColorStateList(getContext(), android.R.color.primary_text_light));
+					ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_dark) : ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_light));
 			return label;
 		}
 
@@ -1336,7 +1336,7 @@ public class ConfigureMapMenu {
 			String text = getItem(position);
 			label.setText(text);
 			label.setTextColor(!lightTheme ?
-						ContextCompat.getColorStateList(getContext(), android.R.color.primary_text_dark) : ContextCompat.getColorStateList(getContext(), android.R.color.primary_text_light));
+						ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_dark) : ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_light));
 
 			return label;
 		}

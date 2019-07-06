@@ -3581,4 +3581,23 @@
     <string name="poi_climbing_crag_filter">Месца для скалалажання</string>
     <string name="poi_rescue_box">Выратавальная скрыня</string>
     <string name="poi_climbing_crag">Так</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Небяспека: эрозія</string>
+    <string name="poi_hazard_additional_rockfall">Небяспека: камняпад</string>
+    <string name="poi_hazard_additional_nuclear">Небяспека: радыяцыя</string>
+    <string name="poi_hazard_additional_flood">Небяспека: затапленне</string>
+    <string name="poi_hazard_additional_avalanche">Небяспека: лавіна</string>
+    <string name="poi_hazard_additional_minefield">Небяспека: міннае поле</string>
+    <string name="poi_hazard_additional_contamination">Небяспека: заражэнне</string>
+    <string name="poi_defibrillator_location">Месцазнаходжанне</string>
+    <string name="poi_changing_table_yes">Стол для спавівання: так</string>
+    <string name="poi_changing_table_no">Стол для спавівання: не</string>
+    <string name="poi_changing_table_limited">Стол для спавівання: абмежавана</string>
+    <string name="poi_changing_table_location_room">Размяшчэнне спавівальнага стала: пакой</string>
+    <string name="poi_changing_table_location_male_toilet">Размяшчэнне спавівальнага стала: мужчынская прыбіральня</string>
+    <string name="poi_changing_table_location_female_toilet">Размяшчэнне спавівальнага стала: жаночая прыбіральня</string>
+    <string name="poi_changing_table_location_unisex_toilet">Размяшчэнне спавівальнага стала: агульная прыбіральня</string>
+    <string name="poi_changing_table_count">Колькасць спавівальных сталоў</string>
+    <string name="poi_changing_table_fee_yes">Свабодны спавівальны стол: так</string>
+    <string name="poi_changing_table_fee_no">Свабодны спавівальны стол: не</string>
 </resources>

@@ -118,7 +118,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			final MapMarker marker = (MapMarker) getItem(position);
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
 
-			int color = R.color.icon_color_light;
+			int color = R.color.icon_color_default_dark;
 			itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
 			itemViewHolder.title.setText(marker.getName(app));
@@ -151,7 +151,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 									app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 					snackbar.show();
 				}
 			});
@@ -163,7 +163,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			if ((getItemCount() > position + 1 && getItemViewType(position + 1) == HEADER_TYPE) || lastItem) {
 				itemViewHolder.divider.setVisibility(View.GONE);
 			} else {
-				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(app, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(app, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
 			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);

@@ -27,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
-import net.osmand.util.Algorithms;
+
 import org.apache.commons.logging.Log;
 
 public class SettingsProfileFragment extends BaseOsmAndFragment {
@@ -53,7 +53,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		allAppModes = ApplicationMode.allPossibleValues();
+		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		allAppModes.remove(ApplicationMode.DEFAULT);
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
 		availableAppModes.remove(ApplicationMode.DEFAULT);
@@ -103,14 +103,14 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 					} else {
 						availableAppModes.remove(am);
 					}
-					ApplicationMode.changeProfileStatus(am, selected, getMyApplication());
+					ApplicationMode.changeProfileAvailability(am, selected, getMyApplication());
 				}
 
 				@Override
 				public void onProfilePressed(ApplicationMode item) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-					if (!Algorithms.isEmpty(item.getUserProfileName())) {
+					if (item.isCustomProfile()) {
 						intent.putExtra(IS_USER_PROFILE, true);
 					}
 					startActivity(intent);
@@ -125,7 +125,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 		getBaseProfileListener();
 
-		allAppModes = ApplicationMode.allPossibleValues();
+		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		allAppModes.remove(ApplicationMode.DEFAULT);
 		adapter.updateItemsList(allAppModes, new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
 	}
@@ -152,7 +152,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			if (mode != ApplicationMode.DEFAULT) {
 				profiles.add(new ProfileDataObject( mode.toHumanString(ctx),
 					ctx.getString(BaseProfilesDescr.valueOf(mode.getStringKey().toUpperCase()).getDescrRes()),
-					mode.getStringKey(), mode.getSmallIconDark(), false));
+					mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
 			}
 		}
 		return profiles;
@@ -177,7 +177,4 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			return descrRes;
 		}
 	}
-
-
-
 }

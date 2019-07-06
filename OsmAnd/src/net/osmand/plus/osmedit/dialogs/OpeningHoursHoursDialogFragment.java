@@ -23,6 +23,9 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 	private static final String RULE_POSITION = "rule_position";
 	private static final String TIME_POSITION = "time_position";
 
+	private static final int DEFAULT_START_TIME = 9 * 60;
+	private static final int DEFAULT_END_TIME = 18 * 60;
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -33,14 +36,16 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		final int rulePosition = args.getInt(RULE_POSITION);
 		final int timePosition = args.getInt(TIME_POSITION);
 
-		boolean newTimeSpan = timePosition == item.timesSize();
-		if (newTimeSpan) {
-			item.addTimeRange(9 * 60, 18 * 60);
-		}
+		final boolean newTimeSpan = timePosition == item.timesSize();
 		final boolean createNew = rulePosition == -1 || newTimeSpan;
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		int time = isStart ? item.getStartTime(timePosition) : item.getEndTime(timePosition);
+		int time;
+		if (isStart) {
+			time = newTimeSpan ? DEFAULT_START_TIME : item.getStartTime(timePosition);
+		} else {
+			time = newTimeSpan ? DEFAULT_END_TIME : item.getEndTime(timePosition);
+		}
 		int hour = time / 60;
 		int minute = time - hour * 60;
 
@@ -59,6 +64,9 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 								int minute = timePicker.getCurrentMinute();
 								int hourOfDay = timePicker.getCurrentHour();
 								int time = minute + hourOfDay * 60;
+								if (newTimeSpan) {
+									item.addTimeRange(DEFAULT_START_TIME, DEFAULT_END_TIME);
+								}
 								if (isStart && createNew) {
 									item.setStartTime(time, timePosition);
 									OpeningHoursHoursDialogFragment

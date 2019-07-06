@@ -57,6 +57,7 @@ import static net.osmand.plus.OsmAndCustomizationConstants.OSM_NOTES;
 
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
+	public static final int OSM_EDIT_TAB = R.string.osm_edits;
 	private static final String ID = "osm.editing";
 
 	// Constants for determining the order of items in the additional actions context menu

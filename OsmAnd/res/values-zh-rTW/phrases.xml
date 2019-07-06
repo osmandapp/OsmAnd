@@ -3580,4 +3580,26 @@
     <string name="poi_climbing_crag_filter">攀岩</string>
     <string name="poi_rescue_box">急救箱</string>
     <string name="poi_climbing_crag">是</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">危害：侵蝕</string>
+    <string name="poi_hazard_additional_rockfall">危害：落石</string>
+    <string name="poi_hazard_additional_nuclear">危害：核能</string>
+    <string name="poi_hazard_additional_flood">危害：洪水</string>
+    <string name="poi_hazard_additional_avalanche">危害：雪崩</string>
+    <string name="poi_hazard_additional_minefield">危害：雷區</string>
+    <string name="poi_hazard_additional_contamination">危害：污染</string>
+    <string name="poi_defibrillator_location">位置</string>
+    <string name="poi_changing_table_yes">尿布桌：是</string>
+    <string name="poi_changing_table_no">尿布桌：否</string>
+    <string name="poi_changing_table_limited">尿布桌：有限制</string>
+    <string name="poi_changing_table_location_room">尿布桌位置：房間</string>
+    <string name="poi_changing_table_location_male_toilet">尿布桌位置：男廁</string>
+    <string name="poi_changing_table_location_female_toilet">尿布桌位置：女廁</string>
+    <string name="poi_changing_table_location_unisex_toilet">尿布桌位置：性別友善廁所</string>
+    <string name="poi_changing_table_count">尿布桌數量</string>
+    <string name="poi_changing_table_fee_yes">尿布桌費用：是</string>
+    <string name="poi_changing_table_fee_no">尿布桌費用：否</string>
+    <string name="poi_charcoal_pile">木炭堆</string>
+    <string name="poi_historic_tank">歷史坦克</string>
+    <string name="poi_hookah_lounge">水煙休息室</string>
 </resources>

@@ -1520,9 +1520,9 @@ Délka %2$s</string>
     <string name="index_name_netherlands">Evropa - Holandsko</string>
     <string name="rendering_value__name">Výchozí</string>
     <string name="rendering_value_highContrastRoads_name">Vysoce kontrastní cesty</string>
-    <string name="application_dir_change_warning3">Zkopírovat datové soubory do nového cíle\?</string>
+    <string name="application_dir_change_warning3">Přesunout datové soubory do nového cíle\?</string>
     <string name="specified_directiory_not_writeable">V zadaném adresáři nemohly být mapy vytvořené</string>
-    <string name="copying_osmand_file_failed">Kopírování souborů selhalo</string>
+    <string name="copying_osmand_file_failed">Přesouvání souborů selhalo</string>
     <string name="storage_directory_external">Externí úložiště</string>
     <string name="storage_directory_multiuser">Víceuživatelské úložiště</string>
     <string name="storage_directory_internal_app">Interní paměť aplikace</string>
@@ -2981,7 +2981,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Vyhnout se kočičím hlavám a dlažebním kostkám</string>
     <string name="shared_string_degrees">Stupně</string>
     <string name="shared_string_milliradians">Miliradiány</string>
-    <string name="angular_measeurement">Úhlové měrné jednotky</string>
+    <string name="angular_measeurement">Úhlová jednotka</string>
     <string name="angular_measeurement_descr">Změní jednotku měření azimutu.</string>
     <string name="routing_attr_avoid_tram_name">Vyhnout se tramvajím</string>
     <string name="routing_attr_avoid_tram_description">Vyhnout se tramvajím</string>
@@ -2995,11 +2995,108 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">Vyhnout se metru a lehké železniční dopravě</string>
     <string name="routing_attr_avoid_ferry_name">Vyhnout se trajektům</string>
     <string name="routing_attr_avoid_ferry_description">Vyhnout se trajektům</string>
-    <string name="release_3_3_7">• Zobrazování času na přestup mezi hromadnou dopravou
+    <string name="release_3_3_7">• Zobrazování času na přestup mezi hromadnou dopravou 
+\n 
+\n • Upravené rozhraní detailů trasy 
+\n 
+\n • Opravené tmavé téma v menu pokynů a detailů trasy 
+\n 
+\n • Zobrazení azimutu v měření vzdálenosti
 \n
-\n • Upravené rozhraní detailů trasy
-\n
-\n • Opravené tmavé téma v menu pokynů a detailů trasy
-\n
-\n • Zobrazení azimutu v měření vzdálenosti</string>
+\n</string>
+    <string name="send_log">Odeslat protokol</string>
+    <string name="files_moved">%1$d souborů přesunuto (%2$s).</string>
+    <string name="files_copied">%1$d souborů zkopírováno (%2$s).</string>
+    <string name="files_failed">Nepodařilo se zkopírovat %1$d souborů (%2$s).</string>
+    <string name="files_present">%1$d souborů (%2$s) se nachází na původním místě \'%3$s\'.</string>
+    <string name="move_maps">Přesunout mapy</string>
+    <string name="dont_move_maps">Nepřesouvat</string>
+    <string name="public_transport_ped_route_title">Trasa pěšky je přibližně %1$s a mohla by být rychlejší než veřejnou dopravou</string>
+    <string name="public_transport_no_route_title">Bohužel OsmAnd nemohl najít vhodnou trasu dle vašich nastavení.</string>
+    <string name="public_transport_try_ped">Vyzkoušejte pěší navigaci.</string>
+    <string name="public_transport_try_change_settings">Zkuste změnit nastavení.</string>
+    <string name="public_transport_calc_pedestrian">Vypočítat pěší trasu</string>
+    <string name="public_transport_type">Druh dopravy</string>
+    <string name="searching_gps">Vyhledávání GPS</string>
+    <string name="coordinates_widget">Nástroj souřadnic</string>
+    <string name="button_rate">Ohodnotit</string>
+    <string name="shared_string_privacy_policy">Zásady soukromí</string>
+    <string name="help_us_make_osmand_better">Pomozte nám vylepšit OsmAnd!</string>
+    <string name="choose_data_to_share">Zvolte typ dat, který chcete sdílet:</string>
+    <string name="downloaded_maps">Stažené mapy</string>
+    <string name="visited_screens">Navštívené obrazovky</string>
+    <string name="collected_data_descr">Seznam údajů, která chcete sdílet s OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Kliknutím na \"Povolit\", souhlasíte s našimi %1$s</string>
+    <string name="settings_privacy_and_security">Soukromí a bezpečnost</string>
+    <string name="settings_privacy_and_security_desc">Zvolte vaše údaje pro sdílení s námi</string>
+    <string name="shared_string_no_thank_you">Ne, děkuji</string>
+    <string name="shared_string_allow">Povolit</string>
+    <string name="profile_name_hint">Název profilu</string>
+    <string name="nav_type_hint">Typ navigace</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Kyvadlový autobus</string>
+    <string name="app_mode_subway">Metro</string>
+    <string name="app_mode_horse">Kůň</string>
+    <string name="app_mode_helicopter">Vrtulník</string>
+    <string name="app_mode_skiing">Lyžování</string>
+    <string name="base_profile_descr_ski">Lyžování</string>
+    <string name="show_compass_ruler">Zobrazit stupnici kompasu</string>
+    <string name="hide_compass_ruler">Skrýt stupnici kompasu</string>
+    <string name="select_icon_profile_dialog_title">Zvolit ikonu</string>
+    <string name="settings_routing_mode_string">Režim: %s</string>
+    <string name="settings_derived_routing_mode_string">Uživatelský režim, odvozený z: %s</string>
+    <string name="routing_profile_ski">Lyžování</string>
+    <string name="profile_type_descr_string">Typ: %s</string>
+    <string name="profile_type_base_string">Základní profil</string>
+    <string name="profile_alert_need_routing_type_title">Vyberte typ navigace</string>
+    <string name="profile_alert_need_routing_type_msg">Musíte vybrat typ navigace pro vytvoření nového profilu aplikace</string>
+    <string name="process_downloading_service">OsmAnd služba pro stahování</string>
+    <string name="shared_string_color_magenta">Purpurová</string>
+    <string name="shared_string_icon">Ikona</string>
+    <string name="collected_data">Shromážděné údaje</string>
+    <string name="profile_alert_need_profile_name_title">Zadejte název profilu</string>
+    <string name="profile_alert_need_profile_name_msg">Název profilu by neměl být prázdný!</string>
+    <string name="profile_alert_duplicate_name_title">Duplicitní název</string>
+    <string name="profile_alert_duplicate_name_msg">Profil s tímto názvem již existuje</string>
+    <string name="profile_alert_cant_delete_base">Nelze smazat základní profily OsmAnd</string>
+    <string name="profile_alert_need_save_title">Uložit změny</string>
+    <string name="profile_alert_need_save_msg">Před pokračováním je třeba uložit změny profilu</string>
+    <string name="profile_alert_delete_title">Odstranit profil</string>
+    <string name="profile_alert_delete_msg">Opravdu chcete odstranit profil %s</string>
+    <string name="select_base_profile_dialog_title">Zvolte základní profil</string>
+    <string name="select_nav_profile_dialog_title">Vyberte typ navigace</string>
+    <string name="base_profile_descr_car">Auto, nákladní auto, motocykl</string>
+    <string name="base_profile_descr_bicycle">Horské kolo, moped, kůň</string>
+    <string name="base_profile_descr_pedestrian">Chůze, turistika, běh</string>
+    <string name="base_profile_descr_public_transport">Všechny typy hromadné dopravy</string>
+    <string name="base_profile_descr_boat">Loď, veslování, plachtění</string>
+    <string name="base_profile_descr_aircraft">Letadlo, plachtění</string>
+    <string name="routing_profile_geocoding">Geokódování</string>
+    <string name="routing_profile_straightline">Rovná čára</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
+    <string name="osmand_default_routing">Navigace OsmAnd</string>
+    <string name="custom_routing">Vlastní profil navigace</string>
+    <string name="special_routing_type">Speciální navigace</string>
+    <string name="third_party_routing_type">Navigace třetí strany</string>
+    <string name="application_profiles_descr">Zvolte profily, které mají být viditelné v aplikaci.</string>
+    <string name="application_profiles">Profily aplikace</string>
+    <string name="zoom_by_wunderlinq">Použít WunderLINQ pro ovládání</string>
+    <string name="quick_action_need_to_add_item_to_list">Musíte přidat alespoň jednu položku v nastavení Rychlé akce</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpské/sjezdové lyžování</string>
+    <string name="routing_attr_piste_type_downhill_description">Svahy pro alpské nebo sjezdové lyžování a přístup k lyžařským vlekům.</string>
+    <string name="routing_attr_piste_type_nordic_name">Běžecké a severské lyžování</string>
+    <string name="routing_attr_piste_type_nordic_description">Trasy pro severské nebo běžecké lyžování.</string>
+    <string name="routing_attr_piste_type_skitour_name">Lyžařské okruhy</string>
+    <string name="routing_attr_piste_type_skitour_description">Trasy pro lyžařské okruhy.</string>
+    <string name="routing_attr_piste_type_sled_name">Sáně</string>
+    <string name="routing_attr_piste_type_sled_description">Svahy pro sáňkování.</string>
+    <string name="routing_attr_allow_intermediate_name">Povolit trasy střední náročnosti</string>
+    <string name="routing_attr_allow_intermediate_description">Obtížnější trasy se strmější úseky. S možnými překážkami, kterým je třeba se vyhybat.</string>
+    <string name="routing_attr_allow_advanced_name">Povolit pokročilé trasy</string>
+    <string name="routing_attr_allow_advanced_description">Obtížné trasy s nebezpečnými překážkami a strmými úseky.</string>
+    <string name="routing_attr_allow_expert_name">Povolit trasy pro experty</string>
+    <string name="routing_attr_allow_expert_description">Extrémně náročné trasy, s nebezpečnými překážkami a okolím.</string>
+    <string name="routing_attr_allow_classic_only_name">Povolit trasy pro klasické lyžování</string>
+    <string name="routing_attr_difficulty_preference_name">Preferovaná obtížnost</string>
+    <string name="routing_attr_freeride_policy_name">Mimo sjezdovky</string>
 </resources>

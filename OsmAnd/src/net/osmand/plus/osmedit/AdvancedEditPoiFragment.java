@@ -26,7 +26,9 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.util.Algorithms;
 
@@ -60,15 +62,15 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
 
-		deleteDrawable = getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-				getActivity().getResources().getColor(R.color.dash_search_icon_dark));
+		OsmandApplication app = requireMyApplication();
+		deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, app.getSettings().isLightContent());
 		nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 		amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
 		amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
 		LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
-		final MapPoiTypes mapPoiTypes = getMyApplication().getPoiTypes();
+		final MapPoiTypes mapPoiTypes = app.getPoiTypes();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		Map<String, PoiType> translatedTypes = getData().getAllTranslatedSubTypes();

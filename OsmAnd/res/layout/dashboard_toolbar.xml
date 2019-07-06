@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/dashboard_map_toolbar"
-    android:background="@color/actionbar_light_color"
+    android:background="@color/app_bar_color_light"
     app:contentInsetLeft="4dp"
     app:contentInsetStart="4dp">
 

@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -18,14 +17,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
 import net.osmand.util.Algorithms;
+import org.apache.commons.logging.Log;
 
 
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
+
+	private static final Log LOG = PlatformUtil.getLog(ProfileMenuAdapter.class);
 
 	private List<Object> items = new ArrayList<>();
 	private Set<ApplicationMode> selectedItems;
@@ -49,8 +52,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
 		selectedIconColorRes = isNightMode(app)
-			? R.color.active_buttons_and_links_dark
-			: R.color.active_buttons_and_links_light;
+			? R.color.active_color_primary_dark
+			: R.color.active_color_primary_light;
 	}
 
 	public List<Object> getItems() {
@@ -97,23 +100,20 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			final ApplicationMode item = (ApplicationMode) obj;
 			if (bottomButton) {
 				holder.divider.setBackgroundColor(isNightMode(app)
-					? app.getResources().getColor(R.color.divider_dark)
-					: app.getResources().getColor(R.color.divider_light));
+					? app.getResources().getColor(R.color.divider_color_dark)
+					: app.getResources().getColor(R.color.divider_color_light));
 			}
-
-			if (item.getParent() != null) {
-				holder.title.setText(item.getUserProfileName());
+			holder.title.setText(item.toHumanString(app));
+			if (item.isCustomProfile()) {
 				holder.descr.setText(String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(
-						item.getParent().getStringKey().replace("_", " "))));
+					Algorithms.capitalizeFirstLetterAndLowercase(item.getParent().toHumanString(app))));
 			} else {
-				holder.title.setText(item.getStringResource());
 				holder.descr.setText(R.string.profile_type_base_string);
 			}
 
 			holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
-				? R.color.main_font_dark
-				: R.color.main_font_light));
+				? R.color.text_color_primary_dark
+				: R.color.text_color_primary_light));
 
 			holder.initSwitcher = true;
 			holder.switcher.setChecked(selectedItems.contains(item));
@@ -128,7 +128,10 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.descr.setVisibility(View.GONE);
 			holder.switcher.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
-			holder.title.setTextColor(app.getResources().getColor(selectedIconColorRes));
+			holder.title.setTextColor(app.getResources().getColor(
+				isNightMode(app)
+				? R.color.active_color_primary_dark
+				: R.color.active_color_primary_light));
 			holder.title.setText(bottomButtonText);
 		}
 	}
@@ -139,14 +142,15 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	}
 
 	private void updateViewHolder(ProfileViewHolder holder, ApplicationMode mode) {
-		int iconRes = mode.getParent() == null ? mode.getSmallIconDark() : mode.getIconRes(app);
+		int iconRes = mode.getIconRes();
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}
+		selectedIconColorRes = mode.getIconColorInfo().getColor(isNightMode(app));
 		if (selectedItems.contains(mode)) {
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, mode.getIconColorInfo().getColor(isNightMode(app))));
 		} else {
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.profile_icon_color_inactive));
 		}
 	}
 
