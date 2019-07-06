@@ -3131,7 +3131,11 @@
 \n
 \n</string>
     <string name="app_mode_monowheel">Моноколесо</string>
-    <string name="app_mode_scooter">Скутер</string>
+    <string name="app_mode_scooter">Самокат</string>
     <string name="precision_hdop_and_vdop">Точность по горизонтали: %1$s, по вертикали: %2$s</string>
     <string name="precision_hdop">Точность по горизонтали: %s</string>
+    <string name="app_mode_shuttle_bus">Маршрутка</string>
+    <string name="app_mode_ufo">НЛО</string>
+    <string name="edit_profile_setup_title">Настройка профиля</string>
+    <string name="edit_profile_setup_subtitle">У каждого профиля свои настройки</string>
 </resources>
