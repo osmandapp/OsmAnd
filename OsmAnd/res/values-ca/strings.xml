@@ -3126,4 +3126,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="app_mode_offroad">Camps a través</string>
     <string name="edit_profile_setup_title">Configuració del perfil</string>
     <string name="edit_profile_setup_subtitle">El perfil conserva la seva pròpia configuració</string>
+    <string name="precision_hdop_and_vdop">Precisió horitzontal: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precisió horitzontal: %s</string>
+    <string name="edit_profile_setup_map_subtitle">Seleccioneu les opcions de mapa predeterminades per al perfil</string>
+    <string name="edit_profile_screen_options_subtitle">Seleccioneu les opcions de pantalla predeterminades per al perfil</string>
+    <string name="edit_profile_nav_settings_subtitle">Seleccioneu la configuració de navegació predeterminada per al perfil</string>
+    <string name="routing_attr_max_num_changes_description">Especifiqueu el nombre màxim de canvis</string>
+    <string name="routing_attr_max_num_changes_name">Nombre de canvis</string>
 </resources>
