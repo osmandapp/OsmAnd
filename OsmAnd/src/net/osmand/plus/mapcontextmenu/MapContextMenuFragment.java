@@ -1231,12 +1231,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		// Left button
 		final View leftButtonView = view.findViewById(R.id.additional_button_left_view);
-		final TextView leftButton = (TextView) view.findViewById(R.id.additional_button_left);
+		final TextView leftButton = (TextView) leftButtonView.findViewById(R.id.button_text);
 		fillButtonInfo(leftButtonController, leftButtonView, leftButton);
 
 		// Right button
 		final View rightButtonView = view.findViewById(R.id.additional_button_right_view);
-		final TextView rightButton = (TextView) view.findViewById(R.id.additional_button_right);
+		final TextView rightButton = (TextView) rightButtonView.findViewById(R.id.button_text);
 		fillButtonInfo(rightButtonController, rightButtonView, rightButton);
 
 		container.addView(view);
