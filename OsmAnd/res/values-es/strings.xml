@@ -2,7 +2,7 @@
 <resources>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
-    <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
+    <string name="avoid_unpaved">Evitar caminos sin asfaltar</string>
     <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores o ferris y otros.</string>
@@ -201,7 +201,7 @@
     <string name="search_offline_geo_error">No se pudo analizar el filtro «%s».</string>
     <string name="search_osm_offline">Buscar ubicación geográfica</string>
     <string name="system_locale">Sistema</string>
-    <string name="preferred_locale_descr">Idioma de visualización (surte efecto al reiniciar OsmAnd).</string>
+    <string name="preferred_locale_descr">Selecciona el idioma (surte efecto al reiniciar OsmAnd).</string>
     <string name="preferred_locale">Idioma de visualización</string>
     <string name="shared_string_next">Siguiente</string>
     <string name="shared_string_previous">Anterior</string>
@@ -1133,9 +1133,9 @@
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
     <string name="routing_attr_avoid_toll_name">Evitar peajes</string>
     <string name="routing_attr_avoid_toll_description">Evita los caminos con peajes</string>
-    <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin pavimentar</string>
+    <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin asfaltar</string>
     <string name="routing_attr_avoid_unpaved_description">Evita los caminos sin pavimentar.</string>
-    <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
+    <string name="routing_attr_avoid_ferries_name">Evitar ferris</string>
     <string name="routing_attr_avoid_ferries_description">Evita usar ferris</string>
     <string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evita usar las autopistas</string>
@@ -1358,7 +1358,7 @@
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="fav_point_dublicate">Nombre del punto favorito duplicado</string>
-    <string name="fav_point_dublicate_message">Nombre del Favorito en uso, cambiado a «%1$s» para evitar duplicación.</string>
+    <string name="fav_point_dublicate_message">Nombre del Favorito en uso, cambiado a «%1$s» para evitar duplicidad.</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="fav_point_emoticons_message">Nombre del Favorito cambiado a «%1$s», para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
@@ -1664,7 +1664,7 @@
     <string name="offline_maps_and_navigation">Mapas y navegación 
 \nsin conexión</string>
     <string name="commit_poi">Enviar PDI</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes de enlace</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes lanzadera</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
@@ -2157,7 +2157,7 @@
     <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
     <string name="favorite_autofill_toast_text">" guardado como "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe, cambiado a «%1$s» para evitar duplicados.</string>
+    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe, cambiado a «%1$s» para evitar duplicidades.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Este botón de acción, muestra u oculta los Favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Este botón de acción, muestra u oculta los PDI en el mapa.</string>
@@ -3028,15 +3028,15 @@
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Evitar tranvías</string>
     <string name="routing_attr_avoid_tram_description">Evita usar los tranvías</string>
-    <string name="routing_attr_avoid_bus_name">Evitar los autobuses</string>
+    <string name="routing_attr_avoid_bus_name">Evitar autobuses</string>
     <string name="routing_attr_avoid_bus_description">Evita usar los autobuses y trolebuses</string>
     <string name="routing_attr_avoid_share_taxi_name">Evitar los taxis colectivos</string>
     <string name="routing_attr_avoid_share_taxi_description">Evita usar los taxis colectivos</string>
-    <string name="routing_attr_avoid_train_name">Evitar los trenes</string>
+    <string name="routing_attr_avoid_train_name">Evitar trenes</string>
     <string name="routing_attr_avoid_train_description">Evita usar los trenes</string>
-    <string name="routing_attr_avoid_subway_name">Evitar los subterráneos o metros</string>
+    <string name="routing_attr_avoid_subway_name">Evitar metros</string>
     <string name="routing_attr_avoid_subway_description">Evita transporte en metro y en tren ligero</string>
-    <string name="routing_attr_avoid_ferry_name">Evitar los ferris/transbordadores</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar los ferris</string>
     <string name="routing_attr_avoid_ferry_description">Evita usar los ferris o transbordadores</string>
     <string name="release_3_3_7">• Mostrar el tiempo entre transbordos en transporte público
 \n
