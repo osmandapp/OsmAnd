@@ -57,6 +57,7 @@ import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 import net.osmand.aidl.navigation.ANavigationUpdateParams;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
@@ -74,6 +75,7 @@ import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -98,6 +100,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	public static final int KEY_ON_UPDATE = 1;
 	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
 	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
+	public static final int KEY_ON_VOICE_MESSAGE = 5;
 
 	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
@@ -1135,6 +1138,29 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			} catch (Exception e) {
 				handleException(e);
 				return false;
+			}
+		}
+
+		@Override
+		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) throws RemoteException {
+			try {
+				OsmandAidlApi api = getApi("registerForVoiceRouterMessages");
+				if (api != null ) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromVoiceRouterMessages(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_VOICE_MESSAGE);
+						api.registerForVoiceRouterMessages(id);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
 			}
 		}
 	};
