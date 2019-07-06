@@ -2208,7 +2208,7 @@
     <string name="live_monitoring_interval">Nettbasert sporingsintervall</string>
     <string name="live_monitoring_url">Nettadresse for nettbasert sporing</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer for nettbasert sporing</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Angi tidsbuffer for å beholde posisjoner som skal sendes når det ikke er internettforbindelse</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">"Angi tidsbuffer for å beholde posisjoner som skal sendes når  internettforbindelse mangler"</string>
     <string name="shared_string_others">Andre</string>
     <string name="trace_rendering">Opptegningfeilsøkingsinfo</string>
     <string name="trace_rendering_descr">Vis opptegningsytelsen.</string>
@@ -2538,7 +2538,7 @@
     <string name="foot">ft</string>
     <string name="nothing_found_in_radius">Ingenting funnet innen radiusen:</string>
     <string name="select_waypoints_category_description">Legg til alle sporets rutepunkter, eller velg separate kategorier.</string>
-    <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
+    <string name="rendering_attr_whiteWaterSports_name">Elvesport</string>
     <string name="poi_error_info_not_loaded">Info om knutepunktet ble ikke lastet inn</string>
     <string name="poi_dialog_other_tags_message">Alle andre etiketter beholdes</string>
     <string name="we_really_care_about_your_opinion">Vi bryr oss om din mening og din tilbakemelding er viktig.</string>
@@ -3123,4 +3123,60 @@
     <string name="app_mode_offroad">Terreng</string>
     <string name="edit_profile_setup_title">Sett opp profil</string>
     <string name="routing_attr_max_num_changes_name">Antall endringer</string>
+    <string name="app_mode_shuttle_bus">Pendlebuss</string>
+    <string name="app_mode_subway">Tunnelbane</string>
+    <string name="select_base_profile_dialog_message">Baser din egendefinerte profil på en av de forvalgte programprofilene, dette definerer grunnleggende oppsett, som forvalg synliget for miniprogrammer, enheter for hastighet og distanse. Dette er de forvalgte programprofilene, sammen med eksempler på egentilpassede profiler de kan utvides til:</string>
+    <string name="base_profile_descr_public_transport">Alle typer offentlig transport</string>
+    <string name="zoom_by_wunderlinq_descr">Endre kartforstørrelse ved å rulle hjulet opp og ned. Escape tar deg tilbake til WunderLINQ-programmet.</string>
+    <string name="quick_action_need_to_add_item_to_list">Du må ha minst ett element for å liste noe i hurtighandlingsinnstillingene</string>
+    <string name="routing_attr_piste_type_downhill_description">Bakker for alpint eller utfor og tilgang til skiheiser.</string>
+    <string name="routing_attr_piste_type_nordic_name">Langrenn</string>
+    <string name="routing_attr_piste_type_nordic_description">Løyper for langrenn.</string>
+    <string name="routing_attr_piste_type_skitour_name">Skigåing</string>
+    <string name="routing_attr_piste_type_skitour_description">Ruter for skigåing.</string>
+    <string name="routing_attr_allow_intermediate_name">Tillat mellomliggende ruter</string>
+    <string name="routing_attr_allow_intermediate_description">Flere vanskelige ruter med brattere deler. Generelt noen hindringer å unngå.</string>
+    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige hindre og bratte deler.</string>
+    <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige hindringer og omgivelser.</string>
+    <string name="routing_attr_allow_skating_only_description">Ruter forberedt for fristil eller kun skøyting, uten klassiske spor.</string>
+    <string name="routing_attr_allow_classic_only_description">Ruter forberedt for kun klassisk, uten skøytemuligheter. Dette inkluderer ruter forberedt av en mindre snøskuter med løsere løype og spor laget manuelt av skigåere.</string>
+    <string name="routing_attr_difficulty_preference_description">Foretrekk ruter med denne vanskelighetsgraden, selv om ruting over hardere eller enklere løyper fremdeles er mulig hvis kortere.</string>
+    <string name="routing_attr_freeride_policy_description">Frikjøring og terrengkjøring er uoffisielle ruter og passasjer. Typisk upreparert, ikke vedlikeholdt av bakkepersonell, og ikke sjekket på kveldene. Bruk på egen risiko.</string>
+    <string name="shared_string_min_speed">Minimumshastighet</string>
+    <string name="shared_string_max_speed">Maksimumshastighet</string>
+    <string name="default_speed_setting_title">Standardhastighet</string>
+    <string name="default_speed_setting_descr">Endre forvalgte hastighetsinnstillinger</string>
+    <string name="minmax_speed_dialog_title">Sett min/maks -hastighet</string>
+    <string name="default_speed_dialog_msg">Brukt for utregning av forventet ankomsttid under ruting</string>
+    <string name="new_profile">Ny profil</string>
+    <string name="shared_string_crash">Kræsj</string>
+    <string name="last_launch_crashed">OsmAnd kæsjet tidligere. Hjelp til å forbedre OsmAnd ved å dele feilmeldingen.</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">• Programprofler: Opprett en egendefinert profil for dine egne behov, med egendefinert ikon og farge
+\n
+\n• Tilpass enhver profils forvalgte og min/maks hastigheter
+\n
+\n• Tillagt valg for visning av kompass og radiuslinjal på kartet
+\n
+\n• Fikset bakgrunnssporlogging
+\n
+\n• Forbedret bakgrunnskartnedlastinger
+\n
+\n• Fikset Wikipedia-språkvalg
+\n
+\n• Fikset kompassoppførsel under navigasjon
+\n
+\n• Andre feilrettinger
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Persontransportør</string>
+    <string name="app_mode_monowheel">Monohjul</string>
+    <string name="app_mode_scooter">Sparkesykkel</string>
+    <string name="precision_hdop_and_vdop">Horisontal nøyaktighet: %1$s, vertikalt: %2$s</string>
+    <string name="precision_hdop">Horisontal nøyaktighet: %s</string>
+    <string name="edit_profile_setup_subtitle">Profil beholder sine egne innstillinger</string>
+    <string name="edit_profile_setup_map_subtitle">Velg forvalgte kartinnstillinger for profil</string>
+    <string name="edit_profile_screen_options_subtitle">Velg forvalgte skjerminnstillinger for profil</string>
+    <string name="edit_profile_nav_settings_subtitle">Velg forvalgte navigasjonsinnstillinger for profil</string>
+    <string name="routing_attr_max_num_changes_description">Angi maksimalt antall endringer</string>
 </resources>
