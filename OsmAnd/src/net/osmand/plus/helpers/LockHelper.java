@@ -8,27 +8,32 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 
 public class LockHelper implements SensorEventListener {
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(LockHelper.class);
 
 	private static final int SENSOR_SENSITIVITY = 4;
 
-	private final SensorManager mSensorManager;
-	private final Sensor mProximity;
-	private PowerManager.WakeLock wakeLock = null;
+	@Nullable
+	private WakeLock wakeLock = null;
+
 	private Handler uiHandler;
 	private OsmandApplication app;
-	private LockRunnable lockRunnable;
-	private LockUIAdapter lockUIAdapter;
-	private OsmandSettings settings;
+	private CommonPreference<Integer> turnScreenOnTime;
+	private CommonPreference<Boolean> turnScreenOnSensor;
 
-	private VoiceRouter.VoiceMessageListener voiceMessageListener;
+
+	@Nullable
+	private LockUIAdapter lockUIAdapter;
+	private Runnable lockRunnable;
+	private VoiceMessageListener voiceMessageListener;
 
 	public interface LockUIAdapter {
 
@@ -37,28 +42,26 @@ public class LockHelper implements SensorEventListener {
 		void unlock();
 	}
 
-	private class LockRunnable implements Runnable {
-		@Override
-		public void run() {
-			lock();
-		}
-	}
-
 	public LockHelper(final OsmandApplication app) {
 		this.app = app;
 		uiHandler = new Handler();
-		lockRunnable = new LockRunnable();
-		settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
+		turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
+		turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
 
-		mSensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-		mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-
-		voiceMessageListener = new VoiceRouter.VoiceMessageListener() {
+		lockRunnable = new Runnable() {
+			@Override
+			public void run() {
+				lock();
+			}
+		};
+		voiceMessageListener = new VoiceMessageListener() {
 			@Override
 			public void onVoiceMessage() {
 				unlockEvent();
 			}
 		};
+		app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(voiceMessageListener);
 	}
 
 	private void releaseWakeLocks() {
@@ -77,9 +80,11 @@ public class LockHelper implements SensorEventListener {
 		}
 
 		PowerManager pm = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
-		wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
-				| PowerManager.ACQUIRE_CAUSES_WAKEUP, "tso:wakelocktag");
-		wakeLock.acquire(timeInMills);
+		if (pm != null) {
+			wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
+					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "tso:wakelocktag");
+			wakeLock.acquire(timeInMills);
+		}
 	}
 
 	private void lock() {
@@ -89,15 +94,19 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void timedUnlock(long millis) {
+	private void timedUnlock(final long millis) {
 		uiHandler.removeCallbacks(lockRunnable);
-		unlock(millis);
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				unlock(millis);
+			}
+		});
 		uiHandler.postDelayed(lockRunnable, millis);
 	}
 
-	public void unlockEvent() {
-		int unlockTime = app.getSettings().TURN_SCREEN_ON_TIME_INT.get();
-
+	private void unlockEvent() {
+		int unlockTime = turnScreenOnTime.get();
 		if (unlockTime > 0) {
 			timedUnlock(unlockTime * 1000L);
 		}
@@ -117,46 +126,43 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	public void setSensor(boolean enable) {
-		if (enable) {
-			mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
-		} else {
-			mSensorManager.unregisterListener(this);
+	private void switchSensorOn() {
+		switchSensor(true);
+	}
+
+	private void switchSensorOff() {
+		switchSensor(false);
+	}
+
+	private void switchSensor(boolean on) {
+		SensorManager sensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
+		if (sensorManager != null) {
+			Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+			if (on) {
+				sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+			} else {
+				sensorManager.unregisterListener(this);
+			}
 		}
 	}
 
-	public void setVoiceRouterListener(boolean enable) {
-		VoiceRouter vr = app.getRoutingHelper().getVoiceRouter();
-		if (enable) {
-			vr.addVoiceMessageListener(voiceMessageListener);
-		} else {
-			vr.removeVoiceMessageListener(voiceMessageListener);
-		}
+	private boolean isSensorEnabled() {
+		return turnScreenOnSensor.get() && app.getRoutingHelper().isFollowingMode();
 	}
 
-	public void refreshSettings() {
-		boolean isVRListenerEnabled = settings.TURN_SCREEN_ON_TIME_INT.get() > 0;
-		setVoiceRouterListener(isVRListenerEnabled);
-	
-		boolean isSensorEnabled = settings.TURN_SCREEN_ON_SENSOR.get()
-				&& app.getRoutingHelper().isFollowingMode();
-		setSensor(isSensorEnabled);
-	}
-	
-	public void onStart(Activity a) {
+	public void onStart(@NonNull Activity activity) {
 		if (wakeLock == null) {
-			setSensor(false);
-			setVoiceRouterListener(false);
-		}
-	}
-	
-	public void onStop(Activity a) {
-		if(!a.isFinishing()) {
-			refreshSettings();
+			switchSensorOff();
 		}
 	}
 
-	public void setLockUIAdapter(LockUIAdapter adapter) {
+	public void onStop(@NonNull Activity activity) {
+		if (!activity.isFinishing() && isSensorEnabled()) {
+			switchSensorOn();
+		}
+	}
+
+	public void setLockUIAdapter(@Nullable LockUIAdapter adapter) {
 		lockUIAdapter = adapter;
 	}
 

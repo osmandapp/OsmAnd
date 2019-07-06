@@ -429,10 +429,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		}
 		super.onPreferenceChange(preference, newValue);
-		if (id.equals(settings.TURN_SCREEN_ON_TIME_INT.getId())) {
-			boolean isRoutingListenerEnabled = Integer.valueOf(newValue.toString()) > 0;
-			getMyApplication().getLockHelper().setVoiceRouterListener(isRoutingListenerEnabled);
-		}
 		return true;
 	}
 

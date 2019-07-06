@@ -3,7 +3,10 @@ package net.osmand.plus.routing;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -80,13 +83,12 @@ public class VoiceRouter {
 		void onVoiceMessage();
 	}
 
-	private ConcurrentHashMap<WeakReference<VoiceMessageListener>, Integer> voiceMessageListeners;
+	private List<WeakReference<VoiceMessageListener>> voiceMessageListeners = new ArrayList<>();
     
 	VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
 		this.settings = settings;
 		mute = settings.VOICE_MUTE.get();
-		voiceMessageListeners = new ConcurrentHashMap<>();
 	}
 	
 	public void setPlayer(CommandPlayer player) {
@@ -932,37 +934,36 @@ public class VoiceRouter {
 	}
 
 	public void addVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		voiceMessageListeners = updateVoiceMessageListeners(new ConcurrentHashMap<>(voiceMessageListeners),
-				voiceMessageListener, true);
+		voiceMessageListeners = updateVoiceMessageListeners(new ArrayList<>(voiceMessageListeners), voiceMessageListener, true);
 	}
 	
 	public void removeVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		voiceMessageListeners = updateVoiceMessageListeners(new ConcurrentHashMap<>(voiceMessageListeners),
-				voiceMessageListener, false);
+		voiceMessageListeners = updateVoiceMessageListeners(new ArrayList<>(voiceMessageListeners), voiceMessageListener, false);
 	}
 
-	public void notifyOnVoiceMessage() {
-		for (WeakReference<VoiceMessageListener> weakReferenceWrapper : voiceMessageListeners.keySet()) {
-			VoiceMessageListener lnt = weakReferenceWrapper.get();
+	private void notifyOnVoiceMessage() {
+		List<WeakReference<VoiceMessageListener>> voiceMessageListeners = new ArrayList<>(this.voiceMessageListeners);
+		for (WeakReference<VoiceMessageListener> weakReference : voiceMessageListeners) {
+			VoiceMessageListener lnt = weakReference.get();
 			if (lnt != null) {
 				lnt.onVoiceMessage();
 			}
 		}
 	}
 
-	private ConcurrentHashMap<WeakReference<VoiceMessageListener>, Integer> updateVoiceMessageListeners(
-			ConcurrentHashMap<WeakReference<VoiceMessageListener>, Integer> copy,
-			VoiceMessageListener listener, boolean isNewListener) {
-		for (WeakReference<VoiceMessageListener> wr : copy.keySet()) {
-			VoiceMessageListener l = wr.get();
-			if (l == null || l.equals(listener)) {
-				copy.remove(wr);
+	private List<WeakReference<VoiceMessageListener>> updateVoiceMessageListeners(List<WeakReference<VoiceMessageListener>> voiceMessageListeners,
+																				  VoiceMessageListener listener, boolean isNewListener) {
+		Iterator<WeakReference<VoiceMessageListener>> it = voiceMessageListeners.iterator();
+		while (it.hasNext()) {
+			WeakReference<VoiceMessageListener> ref = it.next();
+			VoiceMessageListener l = ref.get();
+			if (l == null || l == listener) {
+				it.remove();
 			}
 		}
-
 		if (isNewListener) {
-			copy.put(new WeakReference<>(listener), 0);
+			voiceMessageListeners.add(new WeakReference<>(listener));
 		}
-		return copy;
+		return voiceMessageListeners;
 	}
 }
