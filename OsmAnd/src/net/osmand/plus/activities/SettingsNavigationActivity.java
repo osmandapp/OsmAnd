@@ -204,7 +204,21 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 
 
+		addTurnScreenOn((PreferenceGroup) screen.findPreference("turn_screen_on"));
+
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
+	}
+
+	private void addTurnScreenOn(PreferenceGroup screen) {
+		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
+		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
+		screenPowerSaveNames[0] = getString(R.string.shared_string_never);
+		for (int i = 1; i < screenPowerSaveValues.length; i++) {
+			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
+					+ getString(R.string.int_seconds);
+		}
+		registerListPreference(settings.TURN_SCREEN_ON_TIME_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
+		registerBooleanPreference(settings.TURN_SCREEN_ON_SENSOR, screen);
 	}
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {

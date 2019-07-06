@@ -18,8 +18,10 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 	protected boolean haveHomeButton = true;
 
     //should be called after set content view
-    protected void setupHomeButton(){
-        Drawable back = ((OsmandApplication)getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back, R.color.color_white);
+    protected void setupHomeButton() {
+    	boolean lightTheme = getMyApplication().getSettings().isLightContent();
+        Drawable back = ((OsmandApplication)getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back,
+				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
         final ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setHomeButtonEnabled(true);

@@ -35,7 +35,6 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -1258,13 +1257,13 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference("show_nearby_poi", false).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference("speak_street_names", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
+	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
 	{
-		SPEAK_TRAFFIC_WARNINGS.setModeValue(ApplicationMode.CAR, true);
+		SPEAK_TRAFFIC_WARNINGS.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
-	public final OsmandPreference<Boolean> SPEAK_PEDESTRIAN = new BooleanPreference("speak_pedestrian", false).makeProfile().cache();
+	public final CommonPreference<Boolean> SPEAK_PEDESTRIAN = new BooleanPreference("speak_pedestrian", false).makeProfile().cache();
 	{
-		SPEAK_PEDESTRIAN.setModeValue(ApplicationMode.CAR, true);
+		SPEAK_PEDESTRIAN.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
 	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference("speak_speed_limit", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_SPEED_CAMERA = new BooleanPreference("speak_cameras", false).makeProfile().cache();
@@ -1392,10 +1391,25 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> KEEP_INFORMING = new IntPreference("keep_informing", 0).makeProfile();
 
 	{
-		// 0 means never
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.CAR, 0);
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
+	}
+	
+	public final CommonPreference<Integer> TURN_SCREEN_ON_TIME_INT = new IntPreference("turn_screen_on_time_int", 0).makeProfile();
+
+	{
+		TURN_SCREEN_ON_TIME_INT.setModeDefaultValue(ApplicationMode.CAR, 0);
+		TURN_SCREEN_ON_TIME_INT.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
+		TURN_SCREEN_ON_TIME_INT.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
+	}
+
+	public final CommonPreference<Boolean> TURN_SCREEN_ON_SENSOR = new BooleanPreference("turn_screen_on_sensor", false).makeProfile();
+	
+	{
+		TURN_SCREEN_ON_SENSOR.setModeDefaultValue(ApplicationMode.CAR, false);
+		TURN_SCREEN_ON_SENSOR.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		TURN_SCREEN_ON_SENSOR.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -2749,7 +2763,7 @@ public class OsmandSettings {
 			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeGlobal().cache();
 
 	public boolean isLightActionBar() {
-		return true;
+		return isLightContent();
 	}
 
 

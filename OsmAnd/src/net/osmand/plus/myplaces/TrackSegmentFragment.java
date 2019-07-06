@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
@@ -67,6 +68,7 @@ import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip.TabSelectionType;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.plus.widgets.IconPopupMenu;
@@ -335,10 +337,12 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				tabLayout.setIndicatorColorResource(light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 				tabLayout.setIndicatorBgColorResource(light ? R.color.divider_color_light : R.color.divider_color_dark);
 				tabLayout.setIndicatorHeight(AndroidUtils.dpToPx(app, 1f));
-				tabLayout.setTextColor(tabLayout.getIndicatorColor());
+				if (light) {
+					tabLayout.setTextColor(tabLayout.getIndicatorColor());
+					tabLayout.setTabInactiveTextColor(ContextCompat.getColor(row.getContext(), R.color.text_color_secondary_light));
+				}
 				tabLayout.setTextSize(AndroidUtils.spToPx(app, 12f));
 				tabLayout.setShouldExpand(true);
-				tabLayout.setTabSelectionType(PagerSlidingTabStrip.TabSelectionType.SOLID_COLOR);
 				pager = (WrapContentHeightViewPager) row.findViewById(R.id.pager);
 				pager.setSwipeable(false);
 				pager.setOffscreenPageLimit(2);

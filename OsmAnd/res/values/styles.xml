@@ -120,8 +120,8 @@
         <item name="downloadButtonBackground">@drawable/download_light</item>
         <item name="pstsTabBackground">@color/app_bar_color_light</item>
         <item name="pstsUnderlineColor">@color/app_bar_color_light</item>
-        <item name="pstsIndicatorColor">@color/color_white</item>
-        <item name="pstsTextColor">@color/color_white</item>
+        <item name="pstsIndicatorColor">@color/active_color_primary_light</item>
+        <item name="pstsTextColor">@color/text_color_tab_active_light</item>
         <item name="pstsInactiveTextColor">@color/searchbar_tab_inactive_light</item>
         <item name="btn_flat_bg">@drawable/btn_flat</item>
         <item name="btn_border_bg">@drawable/btn_border_bg_light</item>
@@ -379,8 +379,8 @@
         <item name="downloadButtonBackground">@drawable/download_dark</item>
         <item name="pstsTabBackground">@color/app_bar_color_dark</item>
         <item name="pstsUnderlineColor">@color/app_bar_color_dark</item>
-        <item name="pstsIndicatorColor">@color/app_bar_color_light</item>
-        <item name="pstsTextColor">@color/color_white</item>
+        <item name="pstsIndicatorColor">@color/active_color_primary_light</item>
+        <item name="pstsTextColor">@color/text_color_tab_active_dark</item>
         <item name="pstsInactiveTextColor">@color/searchbar_tab_inactive_dark</item>
         <item name="btn_flat_bg">@drawable/btn_flat_night</item>
         <item name="btn_border_bg">@drawable/btn_border_bg_dark</item>

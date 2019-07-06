@@ -36,6 +36,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +87,6 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -99,6 +99,7 @@ import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -157,7 +158,7 @@ import java.util.regex.Pattern;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
-		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener {
+		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener, LockHelper.LockUIAdapter {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
 
@@ -221,6 +222,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	
+	private LockHelper lockHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -228,6 +231,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
 		settings = app.getSettings();
+		lockHelper = app.getLockHelper();
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -338,6 +342,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		registerReceiver(screenOffReceiver, filter);
 
 		app.getAidlApi().onCreateMapActivity(this);
+		
+		lockHelper.setLockUIAdapter(this);
 
 		mIsDestroyed = false;
 	}
@@ -1288,6 +1294,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onStart() {
 		super.onStart();
 		stopped = false;
+		lockHelper.onStart(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
@@ -1306,6 +1313,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			onPauseActivity();
 		}
 		stopped = true;
+		lockHelper.onStop(this);
 		super.onStop();
 	}
 
@@ -1325,6 +1333,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		lockHelper.setLockUIAdapter(null);
+		
 		mIsDestroyed = true;
 	}
 
@@ -1874,6 +1884,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		AMapPoint oldPoint = (AMapPoint) object;
 		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
+	}
+
+	public void changeKeyguardFlags(final boolean enable) {
+		if (enable) {
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		} else {
+			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		}
+	}
+
+	@Override
+	public void lock() {
+		changeKeyguardFlags(false);
+	}
+
+	@Override
+	public void unlock() {
+		changeKeyguardFlags(true);
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

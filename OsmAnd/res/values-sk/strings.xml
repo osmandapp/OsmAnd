@@ -3030,22 +3030,22 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="public_transport_type">Spôsob dopravy</string>
     <string name="searching_gps">Hľadá sa GPS</string>
     <string name="coordinates_widget">Nástroj súradníc</string>
-    <string name="rate_dialog_descr">Prosím dajte nám 30 sekúnd, zdieľajte spätnú väzbu a ohodnoťte našu prácu na Google Play.</string>
+    <string name="rate_dialog_descr">Prosím dajte nám 30 sekúnd zdieľaním spätnej väzby a ohodnotením našej práce na Google Play.</string>
     <string name="button_rate">Ohodnotiť</string>
     <string name="shared_string_privacy_policy">Ochrana súkromia</string>
     <string name="help_us_make_osmand_better">Pomôžte nám vylepšiť OsmAnd!</string>
     <string name="make_osmand_better_descr">Umožnite OsmAndu zbierať a spracovať anonymné údaje o používaní aplikácie. Nezbierame ani neukladáme údaje o vašej polohe, ani o miestach, ktoré si prezeráte na mape.
 \n
-\nVašu voľbu môžete vždy zmeniť v Nastavenia &gt; Súkromie a bezpečnosť.</string>
+\nVašu voľbu môžete zmeniť kedykoľvek v Nastavenia &gt; Súkromie a bezpečnosť.</string>
     <string name="choose_data_to_share">Zvoľte ktoré typy údajov dovolíte zdieľať:</string>
     <string name="downloaded_maps">Stiahnuté mapy</string>
     <string name="visited_screens">Navštívené obrazovky</string>
     <string name="collected_data_descr">Zoznam údajov, ktoré chcete zdieľať s OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré mapy regiónov a krajín sú najpopulárnejšie.</string>
-    <string name="visited_screens_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré sú najpopulárnejšie funkcie OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Kliknutím \"Povoliť\" súhlasíte s: %1$s</string>
+    <string name="visited_screens_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré funkcie OsmAnd sú najpopulárnejšie.</string>
+    <string name="privacy_and_security_change_descr">Stlačením \"Povoliť\" súhlasíte s: %1$s</string>
     <string name="settings_privacy_and_security">Súkromie a bezpečnosť</string>
-    <string name="settings_privacy_and_security_desc">Zvoľte údaje na zdieľanie s nami</string>
+    <string name="settings_privacy_and_security_desc">Zvoľte ktoré údaje budete zdieľať s nami</string>
     <string name="shared_string_no_thank_you">Nie, ďakujem</string>
     <string name="shared_string_allow">Povoliť</string>
     <string name="profile_name_hint">Názov profilu</string>
@@ -3067,7 +3067,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="profile_type_descr_string">Typ: %s</string>
     <string name="profile_type_base_string">Základný profil</string>
     <string name="profile_alert_need_routing_type_title">Vyberte typ navigácie</string>
-    <string name="profile_alert_need_routing_type_msg">Musíte vybrať typ navigácie pre vytvorenie nového profilu aplikácie</string>
+    <string name="profile_alert_need_routing_type_msg">Prosím zvoľte typ navigácie pre nový profil aplikácie</string>
     <string name="profile_alert_need_profile_name_title">Zadajte názov profilu</string>
     <string name="profile_alert_need_profile_name_msg">Názov profilu nesmie byť prázdny!</string>
     <string name="profile_alert_duplicate_name_title">Duplicitný názov</string>
@@ -3078,21 +3078,21 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="profile_alert_delete_title">Odstrániť profil</string>
     <string name="profile_alert_delete_msg">Naozaj chcete odstrániť profil %s</string>
     <string name="select_base_profile_dialog_title">Zvoľte základný profil</string>
-    <string name="select_base_profile_dialog_message">Vlastný profil aplikácie by mal byť založený na niektorom základnom profile. Zvolený profil definuje základné nastavenia: stav nástrojov, jednotky rýchlosti a vzdialenosti. V reťazci pod názvom profilu môžete vidieť, ktoré navigačné profily sú vhodné pre každý aplikačný profil.</string>
+    <string name="select_base_profile_dialog_message">Vlastný profil aplikácie založíte na niektorom základnom profile, čo určí predvolené nastavenia ako stav nástrojov, jednotky rýchlosti a vzdialenosti. Toto sú základné profily aplikácie, spolu s príkladmi vlastných profilov na ktoré môžu byť rozšírené:</string>
     <string name="select_nav_profile_dialog_title">Vyberte typ navigácie</string>
-    <string name="base_profile_descr_car">Auto, Nákladné auto, Motocykel</string>
-    <string name="base_profile_descr_bicycle">Horský bicykel, Moped, Kôň</string>
-    <string name="base_profile_descr_pedestrian">Chôdza, Turistika, Beh</string>
+    <string name="base_profile_descr_car">Auto, nákladné auto, motocykel</string>
+    <string name="base_profile_descr_bicycle">Horský bicykel, moped, kôň</string>
+    <string name="base_profile_descr_pedestrian">Chôdza, turistika, beh</string>
     <string name="base_profile_descr_public_transport">Všetky typy hromadnej dopravy</string>
-    <string name="base_profile_descr_boat">Loď, Veslovanie, Plachetnica</string>
-    <string name="base_profile_descr_aircraft">Lietadlo, Plachtenie</string>
+    <string name="base_profile_descr_boat">Loď, veslovanie, plachetnica</string>
+    <string name="base_profile_descr_aircraft">Lietadlo, plachtenie</string>
     <string name="routing_profile_geocoding">Georeferencovanie</string>
     <string name="routing_profile_straightline">Rovná čiara</string>
-    <string name="routing_profile_broutrer">BRouter (Offline)</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
     <string name="osmand_default_routing">Navigácia OsmAnd</string>
     <string name="custom_routing">Vlastný profil navigácie</string>
     <string name="special_routing_type">Špeciálna navigácia</string>
-    <string name="third_party_routing_type">Navigácia 3.strany</string>
+    <string name="third_party_routing_type">Navigácia tretej strany</string>
     <string name="application_profiles_descr">Zvoľte profily, ktoré majú byť viditeľné v aplikácii.</string>
     <string name="application_profiles">Profily aplikácie</string>
     <string name="zoom_by_wunderlinq_descr">Zmeňte priblíženie mapy pomocou posúvania kolieskom nahor a nadol. Esc vás vráti do aplikácie WunderLINQ.</string>
@@ -3133,28 +3133,38 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="default_speed_dialog_msg">Používa sa na výpočet očakávaného času príjazdu počas navigovania</string>
     <string name="new_profile">Nový profil</string>
     <string name="shared_string_crash">Pád aplikácie</string>
-    <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Pomôžte nám vylepšiť OsmAnd. Prosím zašlite nám správu o chybe.</string>
+    <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Prosíme pomôžte nám vylepšiť OsmAnd zdieľaním správy o chybe.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">• Aplikačné profily: vytvorte vlastné profily pre vaše potreby, s vlastnou ikonou a farbou
-\n
+\n 
 \n • Predanie nastavenia pre predvolenú a minimálnu a maximálnu rýchlosť v profiloch
-\n
+\n 
 \n • Pridaný nástroj s aktuálnymi súradnicami
-\n
+\n 
 \n • Pridané možnosti zobrazenia kompasu na mape s pravítkom polomeru
+\n 
+\n • Opravené zaznamenávanie stopy na pozadí
 \n
 \n • Vylepšené sťahovanie máp na pozadí
-\n
+\n 
 \n • Opravný výber jazyka Wikipedie
-\n
+\n 
 \n • Opravené správanie tlačidla kompasu počas navigácie
-\n
-\n • Opravy chýb
+\n 
+\n • Ďalšie opravy chýb
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Osobný transportér</string>
     <string name="app_mode_monowheel">Koleso (monowheel)</string>
     <string name="app_mode_scooter">Skúter</string>
-    <string name="precision_hdop_and_vdop">Presnosť horizontálna: %1$s, vertikálna: %2$s</string>
-    <string name="precision_hdop">Presnosť horizontálna: %s</string>
+    <string name="precision_hdop_and_vdop">Presnosť horizontálne: %1$s, vertikálne: %2$s</string>
+    <string name="precision_hdop">Presnosť horizontálne: %s</string>
+    <string name="app_mode_offroad">Mimo cesty (Offroad)</string>
+    <string name="edit_profile_setup_title">Nastaviť profil</string>
+    <string name="edit_profile_setup_subtitle">Profil udržuje vlastné nastavenia</string>
+    <string name="edit_profile_setup_map_subtitle">Zvoľte predvolené nastavenia mapy pre profil</string>
+    <string name="edit_profile_screen_options_subtitle">Zvoľte predvolené nastavenia obrazovky pre profil</string>
+    <string name="edit_profile_nav_settings_subtitle">Zvoľte predvolené nastavenia navigácie pre profil</string>
+    <string name="routing_attr_max_num_changes_description">Zadajte maximálny počet zmien</string>
+    <string name="routing_attr_max_num_changes_name">Počet zmien</string>
 </resources>

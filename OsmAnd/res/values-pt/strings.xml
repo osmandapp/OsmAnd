@@ -3044,7 +3044,6 @@
     <string name="public_transport_type">Tipo de transporte</string>
     <string name="searching_gps">Procurando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
-    <string name="app_profile_custom_nav_subtitle">" "</string>
     <string name="rate_dialog_descr">Por favor, dê-nos 30 segundos, compartilhe comentários e classifique o nosso trabalho no Google Play.</string>
     <string name="button_rate">Avaliar</string>
     <string name="shared_string_privacy_policy">Política de privacidade</string>

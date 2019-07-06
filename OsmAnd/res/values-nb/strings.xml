@@ -2636,7 +2636,7 @@
     <string name="select_travel_book">Velg en reisebok</string>
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
-    <string name="wikipedia_offline">Wikipedia offline</string>
+    <string name="wikipedia_offline">Frakoblet Wikipedia</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Kjøp - %1$s</string>
     <string name="unlimited_downloads">Ubegrensede nedlastinger</string>
@@ -2919,7 +2919,7 @@
     <string name="by_transport_type">Med %1$s</string>
     <string name="step_by_step">Steg for steg</string>
     <string name="road_types">Veityper</string>
-    <string name="exit_at">Ta av på</string>
+    <string name="exit_at">Gå av på</string>
     <string name="sit_on_the_stop">Sitt på stoppet</string>
     <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX-spor</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Å trykke på denne knappen viser eller skjuler valgte GPX-spor på kartet</string>
@@ -3043,7 +3043,6 @@
     <string name="public_transport_type">Transporttype</string>
     <string name="searching_gps">Søker etter GPS</string>
     <string name="coordinates_widget">Koordinat-miniprogram</string>
-    <string name="app_profile_custom_nav_subtitle">" "</string>
     <string name="rate_dialog_descr">Ta 30 sekunder til å vurdere programmet og dele din tilbakemelding på Google Play.</string>
     <string name="button_rate">Vurder</string>
     <string name="shared_string_privacy_policy">Personvernspraksis</string>
@@ -3120,4 +3119,7 @@
     <string name="shared_string_icon">Ikon</string>
     <string name="collected_data">Innsamlet data</string>
     <string name="press_again_to_change_the_map_orientation">Trykk igjen for å endre kartorientering</string>
+    <string name="app_mode_offroad">Terreng</string>
+    <string name="edit_profile_setup_title">Sett opp profil</string>
+    <string name="routing_attr_max_num_changes_name">Antall endringer</string>
 </resources>

@@ -3049,7 +3049,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="public_transport_type">Transporttype</string>
     <string name="searching_gps">Søger efter GPS</string>
     <string name="coordinates_widget">Koordinat modul</string>
-    <string name="app_profile_custom_nav_subtitle">" "</string>
     <string name="rate_dialog_descr">Brug 30 sekunder, udveksle erfaringer og bedøm vores arbejde på Google Play.</string>
     <string name="button_rate">Bedøm</string>
     <string name="shared_string_privacy_policy">Privatlivspolitik</string>

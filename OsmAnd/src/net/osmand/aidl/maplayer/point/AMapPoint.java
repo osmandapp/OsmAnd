@@ -105,7 +105,6 @@ public class AMapPoint implements Parcelable {
 		out.writeStringList(details);
 		out.writeMap(params);
 		out.writeString(layerId);
-
 	}
 
 	private void readFromParcel(Parcel in) {

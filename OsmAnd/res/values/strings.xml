@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="turn_screen_on_router">Wake on turn</string>
+    <string name="turn_screen_on_time_descr">Set the time for which the screen will turn on.</string>
+    <string name="turn_screen_on_sensor">Use proximity sensor</string>
+    <string name="turn_screen_on_sensor_descr">Wave your hand over the top of the screen to turn on the screen while navigating.</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Setup Profile</string>
     <string name="edit_profile_setup_subtitle">Profile keeps its own settings</string>

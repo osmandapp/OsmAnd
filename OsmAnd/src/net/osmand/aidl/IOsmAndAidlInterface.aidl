@@ -84,6 +84,7 @@ import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.copyfile.CopyFileParams;
 
 import net.osmand.aidl.navigation.ANavigationUpdateParams;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 
 import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
@@ -806,4 +807,13 @@ interface IOsmAndAidlInterface {
      *
      */
     boolean setCustomization(in CustomizationInfoParams params);
+    
+    /**
+     * Method to register for Voice Router voice messages during navigation. Notifies user about voice messages.
+     *    
+     * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from messages
+     * @params callbackId (long) - id of callback, needed to unsubscribe from messages
+     * @params callback (IOsmAndAidlCallback) - callback to notify user on voice message
+     */
+    long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
 }
