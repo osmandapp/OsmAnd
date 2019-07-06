@@ -8,7 +8,7 @@
 	</item>
 	<item android:state_enabled="false">
 		<shape android:shape="rectangle">
-			<solid android:color="@color/activity_background_light" />
+			<solid android:color="@color/inactive_buttons_and_links_bg_light" />
 			<corners android:radius="4dp" />
 		</shape>
 	</item>
@@ -16,7 +16,7 @@
 		<shape android:shape="rectangle">
 			<solid android:color="@null" />
 			<corners android:radius="4dp" />
-			<stroke android:width="1dp" android:color="@color/profile_button_gray" />
+			<stroke android:width="1dp" android:color="@color/stroked_buttons_and_links_outline_light" />
 		</shape>
 	</item>
 </selector>

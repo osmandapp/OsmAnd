@@ -167,10 +167,10 @@ public class AppModeDialog {
 				iv.setImageDrawable(drawable);
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+					AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_checked_border_light, R.drawable.btn_checked_border_light);
+					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 				} else {
-					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_light);
 				}
 			} else {
 				if (useMapTheme) {
@@ -180,10 +180,10 @@ public class AppModeDialog {
 					}
 					iv.setImageDrawable(drawable);
 					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-						AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_dark);
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+						AndroidUtils.setBackground(ctx, iv, nightMode, R.drawable.btn_border_pressed_light, R.drawable.btn_border_pressed_light);
+						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 					} else {
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_dark);
+						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_light);
 					}
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getIconRes(), mode.getIconColorInfo().getColor(nightMode)));
