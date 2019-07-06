@@ -3066,7 +3066,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_type_descr_string">Speco: %s</string>
     <string name="profile_type_base_string">Ĉefa profilo</string>
     <string name="profile_alert_need_routing_type_title">Elektu specon de navigado</string>
-    <string name="profile_alert_need_routing_type_msg">Vi devas elekti specon de navigado por krei novan profilon</string>
+    <string name="profile_alert_need_routing_type_msg">Bonvolu elekti specon de navigo por la nova aplikaĵa profilo</string>
     <string name="profile_alert_need_profile_name_title">Entajpu nomon por profilo</string>
     <string name="profile_alert_need_profile_name_msg">Nomo de profilo ne estu malplena!</string>
     <string name="profile_alert_duplicate_name_title">Nomo neebla</string>
