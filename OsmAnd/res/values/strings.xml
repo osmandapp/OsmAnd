@@ -73,7 +73,7 @@
     <string name="app_mode_subway">Subway</string>
     <string name="app_mode_horse">Horse</string>
     <string name="app_mode_helicopter">Helicopter</string>
-    <string name="osmand_routing_promo">Optionally modify routing.xml in ..osmand/routing</string>
+    <string name="osmand_routing_promo">Optionally modify the file \'routing.xml\' in \'..osmand/routing\'.</string>
     <string name="app_mode_skiing">Skiing</string>
     <string name="base_profile_descr_ski">Skiing</string>
     <string name="show_compass_ruler">Show compass ruler</string>
