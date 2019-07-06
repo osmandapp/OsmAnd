@@ -3032,16 +3032,16 @@ Pôr do Sol: %2$s</string>
     <string name="button_rate">Taxa</string>
     <string name="shared_string_privacy_policy">Política de privacidade</string>
     <string name="help_us_make_osmand_better">Ajude-nos a fazer o OsmAnd melhor!</string>
-    <string name="make_osmand_better_descr">Permita que OsmAnd colete e processe dados anônimos de uso de aplicativos. Não coletamos nem armazenamos dados sobre sua localização ou sobre os locais que você visualiza no mapa.
+    <string name="make_osmand_better_descr">Permita OsmAnd coletar e processar dados de uso de aplicativos anônimos. Não coletamos ou guardamos dados sobre sua posição, ou sobre quaisquer locais que você visualize no mapa.
 \n
-\nVocê sempre pode alterar sua seleção em Configurações&gt; Privacidade e segurança.</string>
+\nVocê pode alterar sua seleção a qualquer momento em Configurações &gt; Privacidade e Segurança.</string>
     <string name="choose_data_to_share">Escolha o tipo de dados que você deseja compartilhar:</string>
     <string name="downloaded_maps">Mapas baixados</string>
     <string name="visited_screens">Telas visitadas</string>
     <string name="colleted_data">Dados coletados</string>
     <string name="collected_data_descr">Lista de dados que você deseja compartilhar com OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Coletamos esses dados para entender os mapas de quais regiões e países são os mais populares.</string>
-    <string name="visited_screens_collect_descr">Coletamos esses dados para entender os recursos mais populares do OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Coletamos esses dados para entender quais mapas de quais regiões e países são os mais populares.</string>
+    <string name="visited_screens_collect_descr">Coletamos esses dados para entender quais recursos do OsmAnd são os mais populares.</string>
     <string name="privacy_and_security_change_descr">Ao tocar em \"Permitir\", você concorda com nossas %1$s</string>
     <string name="settings_privacy_and_security">Privacidade e segurança</string>
     <string name="settings_privacy_and_security_desc">Selecione quais dados você está compartilhando conosco</string>
@@ -3066,7 +3066,7 @@ Pôr do Sol: %2$s</string>
     <string name="profile_type_descr_string">Tipo: %s</string>
     <string name="profile_type_base_string">Perfil base</string>
     <string name="profile_alert_need_routing_type_title">Selecionar o tipo de navegação</string>
-    <string name="profile_alert_need_routing_type_msg">Você precisa selecionar o tipo de navegação para criar um novo perfil de aplicativo</string>
+    <string name="profile_alert_need_routing_type_msg">Por favor selecione um tipo de navegação para o novo perfil de aplicação</string>
     <string name="profile_alert_need_profile_name_title">Insira o nome do perfil</string>
     <string name="profile_alert_need_profile_name_msg">O nome do perfil não deve estar vazio!</string>
     <string name="profile_alert_duplicate_name_title">Nome duplicado</string>
@@ -3166,4 +3166,5 @@ Pôr do Sol: %2$s</string>
     <string name="edit_profile_nav_settings_subtitle">Selecione as configurações padrões de navegação para o perfil</string>
     <string name="routing_attr_max_num_changes_description">Especificar o número máximo de transferências</string>
     <string name="routing_attr_max_num_changes_name">Número de transferências</string>
+    <string name="edit_profile_setup_subtitle">O perfil mantém suas próprias configurações</string>
 </resources>
