@@ -2748,7 +2748,7 @@ public class OsmandSettings {
 			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeGlobal().cache();
 
 	public boolean isLightActionBar() {
-		return true;
+		return isLightContent();
 	}
 
 

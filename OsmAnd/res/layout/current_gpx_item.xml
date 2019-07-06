@@ -189,6 +189,4 @@
 
     </LinearLayout>
 
-    <include layout="@layout/list_item_divider"/>
-
 </LinearLayout>
