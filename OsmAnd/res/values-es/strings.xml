@@ -3188,7 +3188,7 @@
     <string name="routing_attr_freeride_policy_description">Las rutas fuera de pista son rutas no oficiales. Por lo general, no arregladas, sin el mantenimiento de los operarios y no revisadas por la noche. Entre bajo su propio riesgo.</string>
     <string name="routing_profile_geocoding">Geocodificación</string>
     <string name="shared_string_crash">Error</string>
-    <string name="app_mode_offroad">Todoterreno</string>
+    <string name="app_mode_offroad">Todo terreno</string>
     <string name="edit_profile_setup_title">Configurar perfil</string>
     <string name="edit_profile_setup_subtitle">El perfil mantiene su propia configuración</string>
     <string name="edit_profile_setup_map_subtitle">Selecciona la configuración del mapa por defecto para este perfil</string>
