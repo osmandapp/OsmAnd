@@ -3077,7 +3077,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_alert_delete_title">Forigi profilon</string>
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu bazan profilon</string>
-    <string name="select_base_profile_dialog_message">Propra aplikaĵa profilo estu bazita sur iu implicita profilo. Elektita profilo difinas bazajn agordojn: fenestraĵojn, unuoj de longo kaj distanco. Sube nomo de profilo troviĝas taŭgaj navigadaj profiloj por ĉiu aplikaĵa profilo.</string>
+    <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
     <string name="select_nav_profile_dialog_title">Elektu navigadan profilon</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
     <string name="base_profile_descr_bicycle">Biciklo, malgranda motorbiciklo, ĉevalo</string>
