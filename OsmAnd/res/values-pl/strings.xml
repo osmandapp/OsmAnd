@@ -3143,4 +3143,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_icon">Ikona</string>
     <string name="collected_data">Zebrane dane</string>
     <string name="press_again_to_change_the_map_orientation">Naciśnij ponownie, aby zmienić orientację mapy</string>
+    <string name="shared_string_min_speed">Min. prędkość</string>
+    <string name="shared_string_max_speed">Max. prędkość</string>
+    <string name="default_speed_setting_title">Domyślna prędkość</string>
+    <string name="new_profile">Nowy profil</string>
+    <string name="last_launch_crashed">Ostatnie uruchomienie OsmAnd nie powiodło się. Pomóż nam ulepszyć OsmAnd. Prześlij nam komunikat o błędzie.</string>
+    <string name="app_mode_scooter">Skuter</string>
 </resources>
